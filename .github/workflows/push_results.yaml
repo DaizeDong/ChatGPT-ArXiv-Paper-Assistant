@@ -15,9 +15,22 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout repository
+        uses: actions/checkout@v3
         with:
-          ref: auto_update
+          fetch-depth: 0
+
+      - name: Checkout to `auto_update` Branch
+        run: |
+          git fetch origin
+          if ! git show-ref --verify --quiet refs/remotes/origin/auto_update; then
+            echo "auto_update branch does not exist. Creating it from main."
+            git checkout -b auto_update origin/main
+            git push origin auto_update
+          else
+            echo "auto_update branch exists. Checking out to it."
+            git checkout -b auto_update origin/auto_update
+          fi
 
       - name: Download artifact
         id: download-artifact
@@ -28,45 +41,56 @@ jobs:
           name: arxiv-scanner-outputs
           path: out/
 
+      - name: Verify /out directory and contents
+        run: |
+          if [ -d "out" ] && [ "$(ls -A out)" ]; then
+              echo "Contents in /out:"
+              ls -la out/
+          else
+              echo "/out directory is empty or does not exist. Aborting."
+              exit 1
+          fi
+
+#      - name: Debug via Browser
+#        uses: fawazahmed0/action-debug-vscode@main
+#        with:
+#          token: "root"
+
       - name: Check if main and auto_update are identical
         id: check_branches
         run: |
           git fetch origin main
+          echo "Comparing HEAD with origin/main..."
           if git diff --quiet HEAD origin/main; then
               echo "Branches are identical. Skipping merge/rebase."
               echo "skip_merge=true" >> $GITHUB_ENV
           else
               echo "Branches differ. Proceeding with merge/rebase."
               echo "skip_merge=false" >> $GITHUB_ENV
+              echo "Changes detected:"
+              git diff HEAD origin/main --stat
           fi
-          cat $GITHUB_ENV
 
       - name: Merge main into auto_update
         if: env.skip_merge == 'false'
         run: |
-          git merge origin/main --no-edit
-
-      - name: Verify /out directory and contents
-        run: |
-          if [ -d "out" ]; then
-            echo "Contents in /out:"
-            ls -la out/
-          else
-            echo "/out directory does not exist. Aborting."
-            exit 1
-          fi
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git merge origin/main --no-edit || (echo "Conflict detected. Aborting merge." && exit 1)
 
       - name: Check for changes in /out folder
         id: check_changes
         run: |
           git add out/
+          echo "Checking for changes in /out directory..."
           git status
           if git diff --cached --quiet; then
+            echo "No changes detected in /out."
             echo "has_changes=false" >> $GITHUB_ENV
           else
+            echo "Changes detected in /out."
             echo "has_changes=true" >> $GITHUB_ENV
           fi
-          echo $GITHUB_ENV
 
       - name: Commit and push /out folder
         if: env.has_changes == 'true'

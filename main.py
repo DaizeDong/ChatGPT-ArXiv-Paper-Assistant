@@ -104,7 +104,7 @@ def get_author_batch(
         return response.json()
 
 
-@retry(tries=3, delay=2.0)
+@retry(tries=3, delay=3.0)
 def get_one_author(session, author: str, S2_API_KEY: str) -> str:
     # query the right endpoint https://api.semanticscholar.org/graph/v1/author/search?query=adam+smith
     params = {"query": author, "fields": "authorId,name,hIndex", "limit": "10"}
@@ -117,16 +117,11 @@ def get_one_author(session, author: str, S2_API_KEY: str) -> str:
         params=params,
         headers=headers,
     ) as response:
-        # try catch for errors
-        try:
-            response.raise_for_status()
-            response_json = response.json()
-            if len(response_json["data"]) >= 1:
-                return response_json["data"]
-            else:
-                return None
-        except Exception as ex:
-            print("exception happened" + str(ex))
+        response.raise_for_status()
+        response_json = response.json()
+        if len(response_json["data"]) >= 1:
+            return response_json["data"]
+        else:
             return None
 
 
@@ -148,15 +143,19 @@ def get_authors(
     author_metadata_dict = {}
     with Session() as session:
         for author in tqdm(all_authors):
-            auth_map = get_one_author(session, author, S2_API_KEY)
+            try:
+                auth_map = get_one_author(session, author, S2_API_KEY)
+            except Exception as ex:
+                print("exception happened" + str(ex))
+                auth_map = None
             if auth_map is not None:
                 author_metadata_dict[author] = auth_map
             # add a 20ms wait time to avoid rate limiting
-            # otherwise, semantic scholar aggressively rate limits, so do 0.5s
+            # otherwise, semantic scholar aggressively rate limits, so do 1.0s
             if S2_API_KEY is not None:
                 time.sleep(0.02)
             else:
-                time.sleep(0.5)
+                time.sleep(1.0)
     return author_metadata_dict
 
 
@@ -259,16 +258,9 @@ if __name__ == "__main__":
             else:
                 push_to_slack(selected_papers)
 
-    # make link to the latest result
-    # latest_output_folder = os.path.join(config["OUTPUT"]["output_path"], "latest")
-    # if os.path.exists(latest_output_folder) or os.path.islink(latest_output_folder):
-    #     os.unlink(latest_output_folder)
-    # os.symlink(output_folder, latest_output_folder)
-    # print(f"Latest output: \"{output_folder}\" --> \"{latest_output_folder}\"")
-
-    # copy files
-    copy_file_or_dir(OUTPUT_MD_FILE_FORMAT.format("output.md"), CONFIG["OUTPUT"]["output_path"])
-    os.rename(
-        os.path.join(CONFIG["OUTPUT"]["output_path"], os.path.basename(OUTPUT_MD_FILE_FORMAT.format("output.md"))),
-        os.path.join(CONFIG["OUTPUT"]["output_path"], "output.md"),
-    )
+        # copy files
+        copy_file_or_dir(OUTPUT_MD_FILE_FORMAT.format("output.md"), CONFIG["OUTPUT"]["output_path"])
+        os.rename(
+            os.path.join(CONFIG["OUTPUT"]["output_path"], os.path.basename(OUTPUT_MD_FILE_FORMAT.format("output.md"))),
+            os.path.join(CONFIG["OUTPUT"]["output_path"], "output.md"),
+        )

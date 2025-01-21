@@ -88,13 +88,16 @@ def get_papers_from_arxiv_rss(area: str, config: Optional[dict]) -> List[Paper]:
     if len(feed.entries) == 0:
         print("No entries found for " + area)
         return [], None, None
+    else:
+        print(f"{len(entries)} entries found for " + area)
     last_id = feed.entries[0].link.split("/")[-1]
     # parse last modified date
     timestamp = datetime.strptime(feed.feed["updated"], "%a, %d %b %Y %H:%M:%S +0000")
+    announce_type = set(config["FILTERING"].get("announce_type", "new").split(","))
     paper_list = []
     for paper in entries:
         # ignore updated papers
-        if paper["arxiv_announce_type"] != "new":
+        if not paper["arxiv_announce_type"] in announce_type:
             continue
         # extract area
         paper_area = paper.tags[0]["term"]
@@ -112,10 +115,12 @@ def get_papers_from_arxiv_rss(area: str, config: Optional[dict]) -> List[Paper]:
         summary = unescape(re.sub("\n", " ", summary))
         # strip the last pair of parentehses containing (arXiv:xxxx.xxxxx [area.XX])
         title = re.sub("\(arXiv:[0-9]+\.[0-9]+v[0-9]+ \[.*\]\)$", "", paper.title)
+        # strip the abstract
+        abstract = summary.split("Abstract: ")[-1]
         # remove the link part of the id
         id = paper.link.split("/")[-1]
         # make a new paper
-        new_paper = Paper(authors=authors, title=title, abstract=summary, arxiv_id=id)
+        new_paper = Paper(authors=authors, title=title, abstract=abstract, arxiv_id=id)
         paper_list.append(new_paper)
 
     return paper_list, timestamp, last_id

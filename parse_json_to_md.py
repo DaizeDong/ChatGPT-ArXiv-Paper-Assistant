@@ -1,8 +1,16 @@
 import json
 from datetime import datetime
 
-from environment import BASE_PROMPT, POSTFIX_PROMPT, TOPIC_PROMPT
+from environment import BASE_PROMPT, POSTFIX_PROMPT, SCORE_PROMPT, TOPIC_PROMPT
 from filter_papers import get_full_prompt
+
+
+def render_title_and_author(paper_entry: dict, idx: int) -> str:
+    title = paper_entry["title"]
+    authors = paper_entry["authors"]
+    paper_string = f"{idx}. [{title}](#user-content-link{idx})\n"
+    paper_string += f'**Authors:** {", ".join(authors)}\n'
+    return paper_string
 
 
 def render_paper(paper_entry: dict, idx: int) -> str:
@@ -21,13 +29,13 @@ def render_paper(paper_entry: dict, idx: int) -> str:
     abstract = paper_entry["abstract"]
     # get the authors
     authors = paper_entry["authors"]
-    paper_string = f'## {idx}. [{title}]({arxiv_url}) <a id="link{idx}"></a>\n'
-    paper_string += f"**ArXiv ID:** {arxiv_id}\n"
+    paper_string = f'## {idx}. [{title}]({arxiv_url}) <a id="link{idx}"></a>\n\n'
+    paper_string += f"**ArXiv ID:** {arxiv_id}\n\n"
     paper_string += f'**Authors:** {", ".join(authors)}\n\n'
     paper_string += f"**Abstract:** {abstract}\n\n"
     if "COMMENT" in paper_entry:
         comment = paper_entry["COMMENT"]
-        paper_string += f"**Comment:** {comment}\n"
+        paper_string += f"**Comment:** {comment}\n\n"
     if "RELEVANCE" in paper_entry and "NOVELTY" in paper_entry:
         # get the relevance and novelty scores
         relevance = paper_entry["RELEVANCE"]
@@ -35,14 +43,6 @@ def render_paper(paper_entry: dict, idx: int) -> str:
         paper_string += f"**Relevance:** {relevance}\n"
         paper_string += f"**Novelty:** {novelty}\n"
     return paper_string + "\n---\n"
-
-
-def render_title_and_author(paper_entry: dict, idx: int) -> str:
-    title = paper_entry["title"]
-    authors = paper_entry["authors"]
-    paper_string = f"{idx}. [{title}](#user-content-link{idx})\n"
-    paper_string += f'**Authors:** {", ".join(authors)}\n'
-    return paper_string
 
 
 def render_md_string(papers_dict, all_cost=None):
@@ -70,7 +70,7 @@ def render_md_string(papers_dict, all_cost=None):
     # join all papers into one string
     output_string = output_string + "\n".join(paper_strings)
     output_string += "\n\n---\n\n"
-    output_string += f"# Paper selection prompt\n{get_full_prompt(BASE_PROMPT, TOPIC_PROMPT, POSTFIX_PROMPT, ['[PAPER LIST HERE]',])}"
+    output_string += f"# Paper selection prompt\n{get_full_prompt(BASE_PROMPT, TOPIC_PROMPT, SCORE_PROMPT, POSTFIX_PROMPT, ['[PAPER LIST HERE]', ])}"
     return output_string
 
 

@@ -8,7 +8,7 @@ from openai import OpenAI
 from tqdm import tqdm
 
 from arxiv_scraper import EnhancedJSONEncoder, Paper
-from environment import BASE_PROMPT, CONFIG, OPENAI_BASE_URL, OPENAI_API_KEY, OUTPUT_DEBUG_FILE_FORMAT, POSTFIX_PROMPT, TOPIC_PROMPT
+from environment import BASE_PROMPT, CONFIG, OPENAI_API_KEY, OPENAI_BASE_URL, OUTPUT_DEBUG_FILE_FORMAT, POSTFIX_PROMPT, SCORE_PROMPT, TOPIC_PROMPT
 
 
 def select_by_author(all_authors, papers, selected_papers, sort_dict, author_targets, config):
@@ -166,13 +166,14 @@ def paper_to_titles(paper_entry: Paper) -> str:
     return "ArXiv ID: " + paper_entry.arxiv_id + " Title: " + paper_entry.title + "\n"
 
 
-def get_full_prompt(base_prompt, topic_prompt, postfix_prompt, batch_str):
+def get_full_prompt(base_prompt, topic_prompt, score_prompt, postfix_prompt, batch_str):
     full_prompt = "\n\n".join(
         [
             base_prompt,
             topic_prompt,
             "## Papers",
             "\n\n".join(batch_str),
+            score_prompt,
             postfix_prompt,
         ]
     )
@@ -180,15 +181,15 @@ def get_full_prompt(base_prompt, topic_prompt, postfix_prompt, batch_str):
 
 
 def run_on_batch(
-    paper_batch, openai_client, base_prompt, topic_prompt, postfix_prompt, config
+    paper_batch, openai_client, base_prompt, topic_prompt, score_prompt, postfix_prompt, config
 ):
     batch_str = [paper_to_string(paper) for paper in paper_batch]
-    full_prompt = get_full_prompt(base_prompt, topic_prompt, postfix_prompt, batch_str)
+    full_prompt = get_full_prompt(base_prompt, topic_prompt, score_prompt, postfix_prompt, batch_str)
     json_dicts, cost = run_and_parse_chatgpt(full_prompt, openai_client, config)
     return json_dicts, cost
 
 
-def filter_by_gpt(papers, selected_papers, sort_dict, base_prompt, topic_prompt, postfix_prompt, config):
+def filter_by_gpt(papers, selected_papers, sort_dict, base_prompt, topic_prompt, score_prompt, postfix_prompt, config):
     all_papers = {paper.arxiv_id: paper for paper in papers}
     all_cost = 0
 
@@ -204,7 +205,7 @@ def filter_by_gpt(papers, selected_papers, sort_dict, base_prompt, topic_prompt,
     for batch in tqdm(batched(papers, int(config["SELECTION"]["batch_size"]))):
         scored_in_batch = []
         json_dicts, cost = run_on_batch(
-            batch, openai_client, base_prompt, topic_prompt, postfix_prompt, config
+            batch, openai_client, base_prompt, topic_prompt, score_prompt, postfix_prompt, config
         )
         for jdict in json_dicts:
             if (
@@ -263,7 +264,7 @@ if __name__ == "__main__":
     total_cost = 0
     for batch in tqdm(papers):
         json_dicts, cost = run_on_batch(
-            batch, openai_client, BASE_PROMPT, TOPIC_PROMPT, POSTFIX_PROMPT, CONFIG
+            batch, openai_client, BASE_PROMPT, TOPIC_PROMPT, SCORE_PROMPT, POSTFIX_PROMPT, CONFIG
         )
         total_cost += cost
         for paper in batch:

@@ -51,11 +51,13 @@ with open("configs/authors.txt", "r", encoding="utf-8") as fopen:
 AUTHOR_ID_SET = set(author_ids)
 
 # load prompts
-with open("configs/base_prompt.txt", "r") as f:
+with open("prompts/base_prompt.txt", "r", encoding="utf-8") as f:
     BASE_PROMPT = f.read()
-with open("configs/paper_topics.txt", "r") as f:
+with open("prompts/paper_topics.txt", "r", encoding="utf-8") as f:
     TOPIC_PROMPT = f.read()
-with open("configs/postfix_prompt.txt", "r") as f:
+with open("prompts/score_criteria.txt", "r", encoding="utf-8") as f:
+    SCORE_PROMPT = f.read()
+with open("prompts/postfix_prompt.txt", "r", encoding="utf-8") as f:
     POSTFIX_PROMPT = f.read()
 
 # output path

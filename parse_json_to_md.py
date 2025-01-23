@@ -1,15 +1,17 @@
 import json
 from datetime import datetime
 
+from tabulate import tabulate
+
 from environment import BASE_PROMPT, POSTFIX_PROMPT, SCORE_PROMPT, TOPIC_PROMPT
-from filter_papers import get_full_prompt
+from filter_papers import get_full_prompt_for_abstract_filtering
 
 
 def render_title_and_author(paper_entry: dict, idx: int) -> str:
     title = paper_entry["title"]
     authors = paper_entry["authors"]
     paper_string = f"{idx}. [{title}](#user-content-link{idx})\n"
-    paper_string += f'**Authors:** {", ".join(authors)}\n'
+    paper_string += f'**Authors:** {", ".join(authors)}'
     return paper_string
 
 
@@ -41,43 +43,63 @@ def render_paper(paper_entry: dict, idx: int) -> str:
         relevance = paper_entry["RELEVANCE"]
         novelty = paper_entry["NOVELTY"]
         paper_string += f"**Relevance:** {relevance}\n"
-        paper_string += f"**Novelty:** {novelty}\n"
-    return paper_string + "\n---\n"
+        paper_string += f"**Novelty:** {novelty}"
+    return paper_string
 
 
-def render_md_string(papers_dict, all_cost=None):
-    # header
-    output_string = (
-        "# Personalized Daily Arxiv Papers "
-        + datetime.today().strftime("%m/%d/%Y")
-        + "\nTotal cost: $"
-        + str(all_cost)
-        + "\n\nTotal relevant papers: "
-        + str(len(papers_dict))
-        + "\n\n"
-        + "Paper selection prompt and criteria at the bottom\n\n"
-        + "Table of contents with paper titles:\n\n"
-    )
+def render_md_string(papers_dict, head_table=None):
+    # render head table
+    headers = head_table["headers"]
+    data = head_table["data"]
+    head_table_strings = tabulate(data, headers=headers, tablefmt="github")
+
+    # render each paper
     title_strings = [
-        render_title_and_author(paper, i)
+        render_title_and_author(paper, i + 1)
         for i, paper in enumerate(papers_dict.values())
     ]
-    output_string = output_string + "\n".join(title_strings) + "\n---\n"
-    # render each paper
     paper_strings = [
-        render_paper(paper, i) for i, paper in enumerate(papers_dict.values())
+        render_paper(paper, i + 1)
+        for i, paper in enumerate(papers_dict.values())
     ]
-    # join all papers into one string
-    output_string = output_string + "\n".join(paper_strings)
-    output_string += "\n\n---\n\n"
-    output_string += f"# Paper selection prompt\n{get_full_prompt(BASE_PROMPT, TOPIC_PROMPT, SCORE_PROMPT, POSTFIX_PROMPT, ['[PAPER LIST HERE]', ])}"
+
+    # render prompt
+    prompt_strings = get_full_prompt_for_abstract_filtering(
+        BASE_PROMPT,
+        TOPIC_PROMPT,
+        SCORE_PROMPT,
+        POSTFIX_PROMPT,
+        ['[PAPER LIST HERE]']
+    )
+
+    # cat output string
+    output_string = "\n\n".join([
+        f"# Personalized Daily Arxiv Papers {datetime.today().strftime('%m/%d/%Y')}",
+        "" if head_table is None else head_table_strings,
+        f"Total relevant papers: {len(papers_dict)}",
+        "**Table of contents with paper titles:**",
+        "\n\n".join(title_strings),
+        "---",
+        "\n\n---\n\n".join(paper_strings),
+        "---",
+        "# Paper Selection Prompt",
+        prompt_strings
+    ])
     return output_string
 
 
 if __name__ == "__main__":
     # parse output.json into a dict
-    with open("out/output.json", "r") as f:
+    with open("out_local/json/2025-01/2025-01-17-output.json", "r") as f:
         output = json.load(f)
+    # simulate head table
+    head_table = {
+        "headers": ["", "Prompt", "Completion", "Total"],
+        "data": [
+            ["**Token**", 100, 100, 200],
+            ["**Cost**", f"${0.5}", f"${0.5}", f"${1.0}"],
+        ]
+    }
     # write to output.md
     with open("out/output.md", "w") as f:
-        f.write(render_md_string(output))
+        f.write(render_md_string(output, head_table=head_table))

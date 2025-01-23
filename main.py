@@ -209,7 +209,7 @@ if __name__ == "__main__":
 
     # filter papers by GPT
     if CONFIG["SELECTION"].getboolean("run_openai"):
-        all_cost = filter_by_gpt(
+        total_prompt_cost, total_completion_cost, total_prompt_tokens, total_completion_tokens = filter_by_gpt(
             papers,
             selected_papers,
             sort_dict,
@@ -221,7 +221,7 @@ if __name__ == "__main__":
         )
     else:
         print("Skipping GPT filtering")
-        all_cost = 0
+        total_prompt_cost, total_completion_cost, total_prompt_tokens, total_completion_tokens = 0.0, 0.0, 0, 0
 
     # sort the papers by relevance and novelty
     keys = list(sort_dict.keys())
@@ -238,8 +238,15 @@ if __name__ == "__main__":
             with open(OUTPUT_JSON_FILE_FORMAT.format("output.json"), "w") as outfile:
                 json.dump(selected_papers, outfile, indent=4)
         if CONFIG["OUTPUT"].getboolean("dump_md"):
+            head_table = {
+                "headers": ["", "Prompt", "Completion", "Total"],
+                "data": [
+                    ["**Token**", total_prompt_tokens, total_completion_tokens, total_prompt_tokens + total_completion_tokens],
+                    ["**Cost**", f"${round(total_prompt_cost, 5)}", f"${round(total_completion_cost, 5)}", f"${round(total_prompt_cost + total_completion_cost, 5)}"],
+                ]
+            }
             with open(OUTPUT_MD_FILE_FORMAT.format("output.md"), "w") as f:
-                f.write(render_md_string(selected_papers, all_cost=all_cost))
+                f.write(render_md_string(selected_papers, head_table=head_table))
 
         # only push to slack for non-empty dicts
         if CONFIG["OUTPUT"].getboolean("push_to_slack"):

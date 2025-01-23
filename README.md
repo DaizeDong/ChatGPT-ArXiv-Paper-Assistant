@@ -34,7 +34,7 @@ At this point your bot should run daily and publish a static website. The result
 11. Make a channel for the bot (and invite it to the channel), get its [Slack channel id](https://stackoverflow.com/questions/40940327/what-is-the-simplest-way-to-find-a-slack-team-id-and-a-channel-id), set it as `SLACK_CHANNEL_ID` in a github secret.
 12. Set the github repo private to avoid github actions being [set to inactive after 60 days](https://docs.github.com/en/actions/using-workflows/disabling-and-enabling-a-workflow).
 
-Each day at 1pm UTC, the bot will run and post to slack and publish a github pages website (see the `publish_md` and `cron_runs` actions for details).
+Each day at 5am UTC, the bot will run and post to slack and publish a github pages website (see the `publish_md` and `cron_runs` actions for details).
 
 ### Running locally
 
@@ -45,9 +45,10 @@ Instead of passing credentials via github secrets, you have to set environment v
 To run everything, just call `main.py`
 
 **Other notes:**
+
 - You may also want to not push to slack, in which case set your desired output endpoint (json, markdown, slack) in the `dump_json`, `dump_md`, and `push_to_slack` fields of `config/config.ini`.
 - If the semantic scholar API times out or is slow, you should get a [S2 api key](https://www.semanticscholar.org/product/api#api-key-form) and set it as `S2_KEY` in your environment variables.
-(due to the limitations of github actions, this will only help if the code is run locally)
+  (due to the limitations of github actions, this will only help if the code is run locally)
 
 **Making it run on its own:**
 
@@ -113,10 +114,10 @@ Finally, all papers are sorted by the max of their `author_match_score` and the 
 > Your job is to carefully read the paper titles and abstracts below and find the ones that match the criteria below.
 > ## Relevant Topics
 > [TOPIC LIST HERE]
-> ## Papers
-> [PAPER LIST HERE]
 > ## Scoring Criteria
 > [SCORING PROMPT HERE]
+> ## Papers
+> [PAPER LIST HERE]
 > ## Instructions
 > Write the response in JSONL format with {ARXIVID, COMMENT, RELEVANCE, NOVELTY} on each line, one for each paper.
 > - ARXIVID: should be the ArXiv ID.
@@ -126,6 +127,10 @@ Finally, all papers are sorted by the max of their `author_match_score` and the 
 
 ## Changelog
 
+- **1/22/2025**
+    - Added a function that adaptively scales the `batch_size` by the number of papers.
+    - Supported detailed logging the cost of prompt and completion tokens.
+    - Adjusted the format of prompts to better utilize ChatGPT cache.
 - **1/21/2025**
     - Fixed the auto-push workflow.
     - Supported setting prompts for scoring.

@@ -10,13 +10,9 @@ from slack_sdk.errors import SlackApiError
 
 from arxiv_scraper import Paper
 from environment import SLACK_CHANNEL_ID, SLACK_KEY
+from filter_papers import batched
 
 T = TypeVar("T")
-
-
-def batched(items: list[T], batch_size: int) -> list[T]:
-    # takes a list and returns a list of list with batch_size
-    return [items[i: i + batch_size] for i in range(0, len(items), batch_size)]
 
 
 def send_main_message(block_list: List, channel_id, client):

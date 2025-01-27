@@ -1,6 +1,9 @@
 # GPT4 paper assistant: A daily ArXiv scanner
 
-> Forked from https://github.com/tatsu-lab/gpt_paper_assistant. I fixed some bugs and added new features to make it easier to use. See the [change log](#changelog) for details.
+> [*Last update: 1/25/2024*]
+> This is an enhanced version of the [GPT paper assistant](https://github.com/tatsu-lab/gpt_paper_assistant).
+> I fixed some bugs and added various new features to make it easier to use.
+> See the [change log](#changelog) for details.
 
 This repo implements a very simple daily scanner for Arxiv that uses CharGPT and author matches to find papers you might find interesting.
 It will run daily via github actions and can post this information to slack via a bot or just render it in a static github-pages website.
@@ -127,6 +130,8 @@ Finally, all papers are sorted by the max of their `author_match_score` and the 
 
 ## Changelog
 
+- **1/25/2025**
+    - Fixed the exception when no paper is available.
 - **1/22/2025**
     - Added a function that adaptively scales the `batch_size` by the number of papers.
     - Supported detailed logging the cost of prompt and completion tokens.
@@ -144,7 +149,7 @@ Finally, all papers are sorted by the max of their `author_match_score` and the 
 - **1/10/2025**
     - Set the version of `httpx` package to `0.27.2` for compatibility.
     - Supported setting the `base_url` for OpenAI API.
-    - Supported counting costs fot the latest GPT-4o series models.
+    - Supported counting costs for the latest GPT-4o series models.
 - **2/15/2024**
     - Fixed a bug with author parsing in the RSS format.
     - Cost estimates for title filtering being off.

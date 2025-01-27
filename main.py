@@ -9,23 +9,12 @@ from tqdm import tqdm
 
 from arxiv_scraper import EnhancedJSONEncoder, get_papers_from_arxiv_rss_api
 from environment import AUTHOR_ID_SET, BASE_PROMPT, CONFIG, OUTPUT_DEBUG_FILE_FORMAT, OUTPUT_JSON_FILE_FORMAT, OUTPUT_MD_FILE_FORMAT, POSTFIX_PROMPT, S2_API_KEY, SCORE_PROMPT, SLACK_KEY, TOPIC_PROMPT
-from filter_papers import filter_by_gpt, filter_papers_by_hindex, select_by_author
+from filter_papers import batched, filter_by_gpt, filter_papers_by_hindex, select_by_author
 from parse_json_to_md import render_md_string
 from push_to_slack import push_to_slack
-from utils import copy_file_or_dir
+from utils import argsort, copy_file_or_dir
 
 T = TypeVar("T")
-
-
-def batched(items: list[T], batch_size: int) -> list[T]:
-    # takes a list and returns a list of list with batch_size
-    return [items[i: i + batch_size] for i in range(0, len(items), batch_size)]
-
-
-def argsort(seq):
-    # native python version of an 'argsort'
-    # http://stackoverflow.com/questions/3071415/efficient-method-to-calculate-the-rank-vector-of-a-list-in-python
-    return sorted(range(len(seq)), key=seq.__getitem__)
 
 
 def get_paper_batch(
@@ -161,6 +150,9 @@ def get_papers_from_arxiv(config):
 if __name__ == "__main__":
     # get the paper list from arxiv
     papers = list(get_papers_from_arxiv(CONFIG))
+    if len(papers) == 0:
+        print("No papers found")
+        exit(0)
 
     # get the author list from papers
     if CONFIG["SELECTION"].getboolean("run_author_match"):
@@ -233,31 +225,30 @@ if __name__ == "__main__":
         print(selected_papers)
 
     # pick endpoints and push the summaries
-    if len(papers) > 0:
-        if CONFIG["OUTPUT"].getboolean("dump_json"):
-            with open(OUTPUT_JSON_FILE_FORMAT.format("output.json"), "w") as outfile:
-                json.dump(selected_papers, outfile, indent=4)
-        if CONFIG["OUTPUT"].getboolean("dump_md"):
-            head_table = {
-                "headers": ["", "Prompt", "Completion", "Total"],
-                "data": [
-                    ["**Token**", total_prompt_tokens, total_completion_tokens, total_prompt_tokens + total_completion_tokens],
-                    ["**Cost**", f"${round(total_prompt_cost, 5)}", f"${round(total_completion_cost, 5)}", f"${round(total_prompt_cost + total_completion_cost, 5)}"],
-                ]
-            }
-            with open(OUTPUT_MD_FILE_FORMAT.format("output.md"), "w") as f:
-                f.write(render_md_string(selected_papers, head_table=head_table))
+    if CONFIG["OUTPUT"].getboolean("dump_json"):
+        with open(OUTPUT_JSON_FILE_FORMAT.format("output.json"), "w") as outfile:
+            json.dump(selected_papers, outfile, indent=4)
+    if CONFIG["OUTPUT"].getboolean("dump_md"):
+        head_table = {
+            "headers": ["", "Prompt", "Completion", "Total"],
+            "data": [
+                ["**Token**", total_prompt_tokens, total_completion_tokens, total_prompt_tokens + total_completion_tokens],
+                ["**Cost**", f"${round(total_prompt_cost, 2)}", f"${round(total_completion_cost, 2)}", f"${round(total_prompt_cost + total_completion_cost, 2)}"],
+            ]
+        }
+        with open(OUTPUT_MD_FILE_FORMAT.format("output.md"), "w") as f:
+            f.write(render_md_string(selected_papers, head_table=head_table))
 
-        # only push to slack for non-empty dicts
-        if CONFIG["OUTPUT"].getboolean("push_to_slack"):
-            if SLACK_KEY is None:
-                print("Warning: push_to_slack is true, but SLACK_KEY is not set - not pushing to slack")
-            else:
-                push_to_slack(selected_papers)
+    # only push to slack for non-empty dicts
+    if CONFIG["OUTPUT"].getboolean("push_to_slack"):
+        if SLACK_KEY is None:
+            print("Warning: push_to_slack is true, but SLACK_KEY is not set - not pushing to slack")
+        else:
+            push_to_slack(selected_papers)
 
-        # copy files
-        copy_file_or_dir(OUTPUT_MD_FILE_FORMAT.format("output.md"), CONFIG["OUTPUT"]["output_path"])
-        os.rename(
-            os.path.join(CONFIG["OUTPUT"]["output_path"], os.path.basename(OUTPUT_MD_FILE_FORMAT.format("output.md"))),
-            os.path.join(CONFIG["OUTPUT"]["output_path"], "output.md"),
-        )
+    # copy files
+    copy_file_or_dir(OUTPUT_MD_FILE_FORMAT.format("output.md"), CONFIG["OUTPUT"]["output_path"])
+    os.rename(
+        os.path.join(CONFIG["OUTPUT"]["output_path"], os.path.basename(OUTPUT_MD_FILE_FORMAT.format("output.md"))),
+        os.path.join(CONFIG["OUTPUT"]["output_path"], "output.md"),
+    )

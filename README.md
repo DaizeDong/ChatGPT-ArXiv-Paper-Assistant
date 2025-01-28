@@ -1,6 +1,6 @@
-# GPT4 paper assistant: A daily ArXiv scanner
+# ChatGPT ArXiv Paper Assistant: A Daily ArXiv Scanner
 
-> [*Last update: 1/25/2024*]
+> [*Last update: 1/28/2024*]
 > This is an enhanced version of the [GPT paper assistant](https://github.com/tatsu-lab/gpt_paper_assistant).
 > I fixed some bugs and added various new features to make it easier to use.
 > See the [change log](#changelog) for details.
@@ -130,6 +130,13 @@ Finally, all papers are sorted by the max of their `author_match_score` and the 
 
 ## Changelog
 
+- **1/29/2025**
+    - Supported price calculation for cache tokens.
+    - Updated the price for `deepseek-chat` and `deepseek-reasoner`.
+- **1/28/2025**
+    - Fixed adaptive batch size when `paper_num <= adaptive_threshold`.
+    - Fixed the rename when `output.md` already exists.
+    - Added details in the return information for selected/filtered papers.
 - **1/25/2025**
     - Fixed the exception when no paper is available.
 - **1/22/2025**

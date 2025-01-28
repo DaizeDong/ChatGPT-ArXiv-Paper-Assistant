@@ -12,7 +12,7 @@ from environment import AUTHOR_ID_SET, BASE_PROMPT, CONFIG, OUTPUT_DEBUG_FILE_FO
 from filter_papers import batched, filter_by_gpt, filter_papers_by_hindex, select_by_author
 from parse_json_to_md import render_md_string
 from push_to_slack import push_to_slack
-from utils import argsort, copy_file_or_dir
+from utils import copy_file_or_dir, delete_file_or_dir
 
 T = TypeVar("T")
 
@@ -139,25 +139,26 @@ def get_authors(
 
 def get_papers_from_arxiv(config):
     area_list = config["FILTERING"]["arxiv_category"].split(",")
-    paper_set = set()
+    arxiv_paper_dict = {}
     for area in area_list:
         papers = get_papers_from_arxiv_rss_api(area.strip(), config)
-        paper_set.update(set(papers))
-    print("Number of papers:" + str(len(paper_set)))
-    return paper_set
+        arxiv_paper_dict[area] = papers
+    return arxiv_paper_dict
 
 
 if __name__ == "__main__":
     # get the paper list from arxiv
-    papers = list(get_papers_from_arxiv(CONFIG))
-    if len(papers) == 0:
+    arxiv_paper_dict = get_papers_from_arxiv(CONFIG)
+    paper_list = list(set(v for area_papers in arxiv_paper_dict.values() for v in area_papers))
+    print("Total number of papers:" + str(len(paper_list)))
+    if len(paper_list) == 0:
         print("No papers found")
         exit(0)
 
     # get the author list from papers
     if CONFIG["SELECTION"].getboolean("run_author_match"):
         all_authors = set()
-        for paper in papers:
+        for paper in paper_list:
             all_authors.update(set(paper.authors))
         print("Getting author info for " + str(len(all_authors)) + " authors")
         all_authors = get_authors(list(all_authors), S2_API_KEY)
@@ -172,62 +173,68 @@ if __name__ == "__main__":
         with open(OUTPUT_DEBUG_FILE_FORMAT.format("AUTHOR_ID_SET.json"), "w") as outfile:
             json.dump(list(AUTHOR_ID_SET), outfile, cls=EnhancedJSONEncoder, indent=4)
         with open(OUTPUT_DEBUG_FILE_FORMAT.format("papers.json"), "w") as outfile:
-            json.dump(papers, outfile, cls=EnhancedJSONEncoder, indent=4)
+            json.dump(paper_list, outfile, cls=EnhancedJSONEncoder, indent=4)
         with open(OUTPUT_DEBUG_FILE_FORMAT.format("all_authors.json"), "w") as outfile:
             json.dump(all_authors, outfile, cls=EnhancedJSONEncoder, indent=4)
 
     # initialize vars for filtering
-    selected_papers = {}
+    selected_paper_dict = {}
+    filtered_paper_dict = {}  # NOTE: NOT USED HERE
     sort_dict = {}  # dict storing key and score
 
     # select papers by author
     if CONFIG["SELECTION"].getboolean("run_author_match"):
-        selected_papers = select_by_author(
+        paper_list, selected_results = select_by_author(
             all_authors,
-            papers,
-            selected_papers,
-            sort_dict,
+            paper_list,
             AUTHOR_ID_SET,
             CONFIG
         )
+        selected_paper_dict.update(selected_results)
     else:
         print("Skipping selection by author")
 
     # filter papers by h-index
     if CONFIG["SELECTION"].getboolean("run_author_match"):
-        papers = filter_papers_by_hindex(all_authors, papers, CONFIG)
+        paper_list, filtered_results = filter_papers_by_hindex(
+            all_authors,
+            paper_list,
+            CONFIG
+        )
+        filtered_paper_dict.update(filtered_results)
     else:
         print("Skipping h-index filtering")
 
     # filter papers by GPT
     if CONFIG["SELECTION"].getboolean("run_openai"):
-        total_prompt_cost, total_completion_cost, total_prompt_tokens, total_completion_tokens = filter_by_gpt(
-            papers,
-            selected_papers,
-            sort_dict,
+        selected_results, filtered_results, total_prompt_cost, total_completion_cost, total_prompt_tokens, total_completion_tokens = filter_by_gpt(
+            paper_list,
             BASE_PROMPT,
             TOPIC_PROMPT,
             SCORE_PROMPT,
             POSTFIX_PROMPT,
             CONFIG,
         )
+        selected_paper_dict.update(selected_results)
+        filtered_paper_dict.update(filtered_results)
     else:
-        print("Skipping GPT filtering")
         total_prompt_cost, total_completion_cost, total_prompt_tokens, total_completion_tokens = 0.0, 0.0, 0, 0
+        print("Skipping GPT filtering")
 
     # sort the papers by relevance and novelty
-    keys = list(sort_dict.keys())
-    values = list(sort_dict.values())
-    sorted_keys = [keys[idx] for idx in argsort(values)[::-1]]
-    selected_papers = {key: selected_papers[key] for key in sorted_keys}
+    selected_paper_dict = {
+        k: v
+        for k, v in sorted(selected_paper_dict.items(), key=lambda x: x[1]["SCORE"], reverse=True)
+    }
     if CONFIG["OUTPUT"].getboolean("debug_messages"):
-        print(sort_dict)
-        print(selected_papers)
+        print("Sorted selection paper dict")
+        print(selected_paper_dict)
 
     # pick endpoints and push the summaries
     if CONFIG["OUTPUT"].getboolean("dump_json"):
         with open(OUTPUT_JSON_FILE_FORMAT.format("output.json"), "w") as outfile:
-            json.dump(selected_papers, outfile, indent=4)
+            json.dump(selected_paper_dict, outfile, indent=4)
+
     if CONFIG["OUTPUT"].getboolean("dump_md"):
         head_table = {
             "headers": ["", "Prompt", "Completion", "Total"],
@@ -237,17 +244,18 @@ if __name__ == "__main__":
             ]
         }
         with open(OUTPUT_MD_FILE_FORMAT.format("output.md"), "w") as f:
-            f.write(render_md_string(selected_papers, head_table=head_table))
+            f.write(render_md_string(arxiv_paper_dict, selected_paper_dict, head_table=head_table))
 
     # only push to slack for non-empty dicts
     if CONFIG["OUTPUT"].getboolean("push_to_slack"):
         if SLACK_KEY is None:
             print("Warning: push_to_slack is true, but SLACK_KEY is not set - not pushing to slack")
         else:
-            push_to_slack(selected_papers)
+            push_to_slack(selected_paper_dict)
 
     # copy files
     copy_file_or_dir(OUTPUT_MD_FILE_FORMAT.format("output.md"), CONFIG["OUTPUT"]["output_path"])
+    delete_file_or_dir(os.path.join(CONFIG["OUTPUT"]["output_path"], "output.md"))
     os.rename(
         os.path.join(CONFIG["OUTPUT"]["output_path"], os.path.basename(OUTPUT_MD_FILE_FORMAT.format("output.md"))),
         os.path.join(CONFIG["OUTPUT"]["output_path"], "output.md"),

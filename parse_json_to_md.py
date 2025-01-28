@@ -47,7 +47,7 @@ def render_paper(paper_entry: dict, idx: int) -> str:
     return paper_string
 
 
-def render_md_string(papers_dict, head_table=None):
+def render_md_string(arxiv_paper_dict, selected_paper_dict, head_table=None):
     # render head table
     headers = head_table["headers"]
     data = head_table["data"]
@@ -56,11 +56,11 @@ def render_md_string(papers_dict, head_table=None):
     # render each paper
     title_strings = [
         render_title_and_author(paper, i + 1)
-        for i, paper in enumerate(papers_dict.values())
+        for i, paper in enumerate(selected_paper_dict.values())
     ]
     paper_strings = [
         render_paper(paper, i + 1)
-        for i, paper in enumerate(papers_dict.values())
+        for i, paper in enumerate(selected_paper_dict.values())
     ]
 
     # render prompt
@@ -76,7 +76,8 @@ def render_md_string(papers_dict, head_table=None):
     output_string = "\n\n".join([
         f"# Personalized Daily Arxiv Papers {datetime.today().strftime('%m/%d/%Y')}",
         "" if head_table is None else head_table_strings,
-        f"Total relevant papers: {len(papers_dict)}",
+        f"Total scanned papers: {sum([len(paper_list) for paper_list in arxiv_paper_dict.values()])}",
+        f"Total relevant papers: {len(selected_paper_dict)}",
         "**Table of contents with paper titles:**",
         "\n\n".join(title_strings),
         "---",

@@ -5,7 +5,7 @@ import re
 from dataclasses import dataclass
 from datetime import datetime, timedelta
 from html import unescape
-from typing import List, Optional
+from typing import Any, List, Optional
 
 import arxiv
 import feedparser
@@ -70,7 +70,7 @@ def get_papers_from_arxiv_api(area: str, timestamp, last_id) -> List[Paper]:
     return api_papers
 
 
-def get_papers_from_arxiv_rss(area: str, config: Optional[dict]) -> List[Paper]:
+def get_papers_from_arxiv_rss(area: str, config: Optional[dict]) -> tuple[List, None, None] | tuple[List[Paper], datetime, Any]:
     # get the feed from http://export.arxiv.org/rss/ and use the updated timestamp to avoid duplicates
     updated = datetime.utcnow() - timedelta(days=1)
     # format this into the string format 'Fri, 03 Nov 2023 00:30:00 GMT'

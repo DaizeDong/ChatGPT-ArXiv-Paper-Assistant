@@ -37,22 +37,22 @@ jobs:
 
       - name: Check for output.md
         id: check_files
-        uses: andstor/file-existence-action@v2
+        uses: andstor/file-existence-action@v3
         with:
           files: output.md
 
       - name: Convert output.md to pages
-        uses: wranders/markdown-to-pages-action@v0.1
+        uses: wranders/markdown-to-pages-action@v1
         if: steps.check_files.outputs.files_exists == 'true'
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          file: output.md
+          files: output.md
 
-      - uses: actions/upload-pages-artifact@v2
+      - uses: actions/upload-pages-artifact@v3
         if: steps.check_files.outputs.files_exists == 'true'
         with:
           path: dist
 
-      - uses: actions/deploy-pages@v1
+      - uses: actions/deploy-pages@v4
         if: steps.check_files.outputs.files_exists == 'true'
         id: deployment

@@ -51,7 +51,7 @@ def filter_papers_by_hindex(all_authors, paper_list, config):
                 for alias in all_authors[author]
             ] + [0]
         )
-        filtered = (max_hindex >= float(config["FILTERING"]["h_cutoff"]))
+        filtered = (max_hindex < float(config["FILTERING"]["h_cutoff"]))
         if filtered:
             filtered_results[paper.arxiv_id] = {
                 "COMMENT": f"H-index filtered (max is {max_hindex}<{config['FILTERING']['h_cutoff']})",

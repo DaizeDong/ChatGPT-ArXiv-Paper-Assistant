@@ -1,7 +1,9 @@
 import dataclasses
+import datetime
 import json
 import math
 import re
+import time
 from typing import Dict, List, Tuple
 
 import retry
@@ -10,6 +12,7 @@ from tqdm import tqdm
 
 from arxiv_scraper import EnhancedJSONEncoder, Paper
 from environment import BASE_PROMPT, CONFIG, OPENAI_API_KEY, OPENAI_BASE_URL, OUTPUT_DEBUG_FILE_FORMAT, POSTFIX_PROMPT, SCORE_PROMPT, TOPIC_PROMPT
+from pricing import MODEL_PRICING
 
 """author filtering"""
 
@@ -68,59 +71,6 @@ def filter_papers_by_hindex(all_authors, paper_list, config):
 """gpt filtering"""
 
 ABSTRACT_CUTOFF = 4000
-
-MODEL_PRICING = {
-    # name: prompt, cache, completion
-
-    # https://openai.com/api/pricing
-    # "gpt-3.5-turbo": {"prompt": 7.5, "completion": 22.5},
-    # "gpt-3.5-turbo-0125": {"prompt": 0.5, "completion": 1.5},
-    # "gpt-3.5-turbo-instruct": {"prompt": 1.5, "completion": 2},
-    # "gpt-3.5-turbo-1106": {"prompt": 1, "completion": 2},
-    # "gpt-3.5-turbo-0613": {"prompt": 1.5, "completion": 2},
-    # "gpt-3.5-turbo-16k-0613": {"prompt": 3, "completion": 4},
-    # "gpt-3.5-turbo-0301": {"prompt": 1.5, "completion": 2},
-    # "gpt-4": {"prompt": 30, "completion": 60},
-    # "gpt-4-32k": {"prompt": 60, "completion": 120},
-    # "gpt-4-turbo": {"prompt": 10, "completion": 30},
-    # "gpt-4-turbo-2024-04-09": {"prompt": 10, "completion": 30},
-    # "gpt-4-0125-preview": {"prompt": 10, "completion": 30},
-    # "gpt-4-1106-preview": {"prompt": 10, "completion": 30},
-    # "gpt-4-vision-preview": {"prompt": 10, "completion": 30},
-    # "gpt-4o-latest": {"prompt": 5, "completion": 15},
-    # "gpt-4o": {"prompt": 2.5, "completion": 10, "cache": 1.25},
-    # "gpt-4o-2024-08-06": {"prompt": 2.5, "completion": 10, "cache": 1.25},
-    # "gpt-4o-2024-11-20": {"prompt": 2.5, "completion": 10, "cache": 1.25},
-    # "gpt-4o-mini": {"prompt": 0.15, "completion": 0.6, "cache": 0.075},
-    # "gpt-4o-mini-2024-07-18": {"prompt": 0.15, "completion": 0.6, "cache": 0.075},
-    # "o1": {"prompt": 15, "completion": 60, "cache": 7.5},
-    # "o1-2024-12-17": {"prompt": 15, "completion": 60, "cache": 7.5},
-    # "o1-preview": {"prompt": 15, "completion": 60, "cache": 7.5},
-    # "o1-preview-2024-09-12": {"prompt": 15, "completion": 60, "cache": 7.5},
-    # "o1-mini": {"prompt": 3, "completion": 12, "cache": 1.5},
-    # "o1-mini-2024-09-12": {"prompt": 3, "completion": 12, "cache": 1.5},
-
-    # https://api.datapipe.app/pricing
-    "gpt-3.5-turbo": {"prompt": 7.5, "completion": 22.5},
-    "gpt-3.5-turbo-0125": {"prompt": 2.5, "completion": 7.5},
-    "gpt-4": {"prompt": 150, "completion": 300},
-    "gpt-4-32k": {"prompt": 300, "completion": 600},
-    "gpt-4-dalle": {"prompt": 300, "completion": 600},
-    "gpt-4-v": {"prompt": 300, "completion": 600},
-    "gpt-4-all": {"prompt": 300, "completion": 300},
-    "gpt-4-turbo": {"prompt": 300, "completion": 900},
-    "gpt-4-turbo-preview": {"prompt": 50, "completion": 150},
-    "gpt-4o": {"prompt": 25, "completion": 100},
-    "gpt-4o-2024-08-06": {"prompt": 25, "completion": 100},
-    "gpt-4o-2024-11-20": {"prompt": 25, "completion": 100},
-    "gpt-4o-all": {"prompt": 300, "completion": 1200},
-    "gpt-4o-mini": {"prompt": 7.5, "completion": 30},
-    "gpt-ask-internet": {"prompt": 50, "completion": 50},
-
-    # https://api-docs.deepseek.com/quick_start/pricing
-    "deepseek-chat": {"prompt": 0.14, "completion": 0.28},
-    "deepseek-reasoner": {"prompt": 0.55, "completion": 2.19},
-}
 
 
 def calc_price(model, usage):
@@ -224,14 +174,38 @@ def batched(items, batch_size):
     return [items[i: i + batch_size] for i in range(0, len(items), batch_size)]
 
 
+start_query_time = None
+query_cnt = 0
+
+
 @retry.retry(tries=3, delay=2)
 def call_chatgpt(full_prompt, openai_client, model):
-    return openai_client.chat.completions.create(
-        model=model,
-        messages=[{"role": "user", "content": full_prompt}],
-        temperature=0.0,
-        seed=0,
-    )
+    def call():
+        return openai_client.chat.completions.create(
+            model=model,
+            messages=[{"role": "user", "content": full_prompt}],
+            temperature=0.0,
+            seed=0,
+        )
+
+    if int(CONFIG["SELECTION"]["limit_per_minute"]) <= 0:  # no limit
+        return call()
+
+    else:  # limit the query num within a minute
+        global start_query_time, query_cnt
+
+        while True:
+            now_time = datetime.datetime.now()
+            if start_query_time is None or now_time - start_query_time > datetime.timedelta(minutes=1):
+                start_query_time = now_time
+                query_cnt = 0
+
+            if query_cnt < int(CONFIG["SELECTION"]["limit_per_minute"]):
+                query_cnt += 1
+                return call()
+            else:  # wait for a second and recheck
+                time.sleep(1)
+                continue
 
 
 def filter_papers_by_title(
@@ -260,6 +234,7 @@ def filter_papers_by_title(
         prompt_tokens += completion.usage.prompt_tokens
         completion_tokens += completion.usage.completion_tokens
         out_text = completion.choices[0].message.content
+        print({"prompt": {"tokens": completion.usage.prompt_tokens, "cost": prompt_cost}, "completion": {"tokens": completion.usage.completion_tokens, "cost": completion_cost}})
 
         try:
             filtered_set = set(json.loads(out_text))
@@ -342,6 +317,7 @@ def filter_papers_by_abstract(
         prompt_tokens += completion.usage.prompt_tokens
         completion_tokens += completion.usage.completion_tokens
         out_text = completion.choices[0].message.content
+        print({"prompt": {"tokens": completion.usage.prompt_tokens, "cost": prompt_cost}, "completion": {"tokens": completion.usage.completion_tokens, "cost": completion_cost}})
 
         json_dicts, this_invalid_cnt = parse_chatgpt(out_text, config)
         invalid_cnt += this_invalid_cnt

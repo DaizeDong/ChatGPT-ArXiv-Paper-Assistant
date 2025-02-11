@@ -1,17 +1,23 @@
 # ChatGPT ArXiv Paper Assistant: A Daily ArXiv Scanner
 
-> *[Last update: 2/3/2025]*
+> *[Last update: 2/11/2025]*
 > This is an enhanced version of the [GPT paper assistant](https://github.com/tatsu-lab/gpt_paper_assistant).
 > I fixed some bugs and added various new features to make it easier to use.
 > See the [change log](#changelog) for details.
 
-This repo implements a very simple daily scanner for Arxiv that uses CharGPT and author matches to find papers you might find interesting.
+This repo implements a very simple daily scanner for Arxiv that uses OpenAI API to find papers you might find interesting.
 It will run daily via github actions and can post this information to slack via a bot or just render it in a static github-pages website.
 The results will be pushed to the `auto_update` branch automatically.
 
-A simple demo of the daily papers can be seen [here](https://daizedong.github.io/gpt_paper_assistant).
+A simple demo of the daily papers can be seen [here](https://daizedong.github.io/ChatGPT-ArXiv-Paper-Assistant).
 
-As a cost estimate, running this on all of `cs.LG` and `cs.AI` (about 50 papers for abstract filtering) with `batch_size=5` cost $1.04 on 1/17/2025.
+You can get a **free** API Key with a [rate limit](https://docs.github.com/en/github-models/prototyping-with-ai-models#rate-limits) from [GitHub](https://github.com/marketplace/models/azure-openai/gpt-4o). Its daily limit is enough for filtering ArXiv papers.
+
+As a cost estimate, filtering 270 papers by titles with `batch_size=32` takes 8 queries with an average of 6,431 prompt tokens and 88 completion tokens per query.
+Filtering 155 papers by abstracts with `batch_size=16` takes 10 queries with an average of 5,727 prompt tokens and 1,001 completion tokens per query.
+This costs $0 under the [rate limit](https://docs.github.com/en/github-models/prototyping-with-ai-models#rate-limits) of the Copilot Free plan.
+
+[//]: # (As a cost estimate, running this on all of `cs.LG` and `cs.AI` &#40;about 50 papers for abstract filtering&#41; with `batch_size=5` cost $1.04 on 1/17/2025.)
 
 ## Quickstart
 
@@ -23,7 +29,7 @@ This is the minimal necessary steps to get the scanner to run. It is highly reco
 2. Copy `prompts/paper_topics.template.txt` to `prompts/paper_topics.txt` and fill it out with the types of papers you want to follow.
 3. Copy `config/authors.template.txt` to `config/authors.txt` and list the authors you actually want to follow. The numbers behind the author are important. They are semantic scholar author IDs which you can find by looking up the authors on semantic scholar and taking the numbers at the end of the URL.
 4. Set your desired ArXiv categories in `config/config.ini`.
-5. Set your openai key `OPENAI_API_KEY` and base url `OPENAI_BASE_URL` (if you need one) as [github secrets](https://docs.github.com/en/actions/security-guides/using-secrets-in-github-actions#creating-secrets-for-a-repository).
+5. Set your openai key `OPENAI_API_KEY` and base url `OPENAI_BASE_URL` (if you need one) as [github secrets](https://docs.github.com/en/actions/security-guides/using-secrets-in-github-actions#creating-secrets-for-a-repository). You can get a free one with a [rate limit](https://docs.github.com/en/github-models/prototyping-with-ai-models#rate-limits) from [here](https://github.com/marketplace/models/azure-openai/gpt-4o). Its daily limit is enough for filtering ArXiv papers.
 6. In your repo settings, set github page build sources to be [github actions](https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site#publishing-with-a-custom-github-actions-workflow).
 
 At this point your bot should run daily and publish a static website. The results will be pushed to the `auto_update` branch automatically. You can test this by running the github action workflow manually.
@@ -130,6 +136,8 @@ Finally, all papers are sorted by the max of their `author_match_score` and the 
 
 ## Changelog
 
+- **2/11/2025**
+    - Added a rate limit to API calls.
 - **2/3/2025**
     - Fixed a bug that mistakenly filters all papers with high h-index.
 - **1/31/2025**

@@ -224,7 +224,11 @@ if __name__ == "__main__":
     # sort the papers by relevance and novelty
     selected_paper_dict = {
         k: v
-        for k, v in sorted(selected_paper_dict.items(), key=lambda x: x[1]["SCORE"], reverse=True)
+        for k, v in sorted(
+            selected_paper_dict.items(),
+            key=lambda x: (x[1]["SCORE"], x[1].get("RELEVANCE", 0)),  # sort first by total scores then by relevance
+            reverse=True
+        )
     }
     if CONFIG["OUTPUT"].getboolean("debug_messages"):
         print("Sorted selection paper dict")

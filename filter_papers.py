@@ -332,6 +332,8 @@ def filter_papers_by_abstract(
 
             result = {
                 "SCORE": jdict["RELEVANCE"] + jdict["NOVELTY"],
+                "RELEVANCE": jdict["RELEVANCE"],
+                "NOVELTY": jdict["NOVELTY"],
                 **jdict,
                 **dataclasses.asdict(id_paper_mapping[jdict["ARXIVID"]]),
             }

@@ -1,6 +1,6 @@
 # ChatGPT ArXiv Paper Assistant: A Daily ArXiv Scanner
 
-> *[Last update: 2/11/2025]*
+> *[Last update: 2/19/2025]*
 > This is an enhanced version of the [GPT paper assistant](https://github.com/tatsu-lab/gpt_paper_assistant).
 > I fixed some bugs and added various new features to make it easier to use.
 > See the [change log](#changelog) for details.
@@ -136,6 +136,14 @@ Finally, all papers are sorted by the max of their `author_match_score` and the 
 
 ## Changelog
 
+- **2/19/2025**
+    - Added retrying for failed completion calls.
+    - Fixed the output file name, which will first follow ArXiv update time instead of local time.
+- **2/18/2025**
+    - Fixed a paper formatting bug which destroyed the performance of title filtering.
+    - Added retrying logic for GPT filtering so that there will be no paper missed.
+    - Added toggles that control the title/abstract filtering.
+    - Enhanced the debugging information by recording more logs and dumping more debug files.
 - **2/11/2025**
     - Added a rate limit to API calls.
 - **2/3/2025**

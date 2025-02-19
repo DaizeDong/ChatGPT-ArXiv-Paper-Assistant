@@ -1,6 +1,8 @@
 import configparser
+import feedparser
 import os
 import time
+from datetime import datetime
 
 from utils import create_dir
 
@@ -20,10 +22,27 @@ def parse_authors(lines):
     return authors, author_ids
 
 
-# now time
-NOW_YEAR = time.strftime("%Y")
-NOW_MONTH = time.strftime("%m")
-NOW_DAY = time.strftime("%d")
+# load config.ini
+CONFIG = configparser.ConfigParser()
+CONFIG.read("configs/config.ini")
+
+print({section: dict(CONFIG[section]) for section in CONFIG.sections()})
+print(f"###################################################################")
+
+# load authors.txt
+with open("configs/authors.txt", "r", encoding="utf-8") as fopen:
+    author_names, author_ids = parse_authors(fopen.readlines())
+AUTHOR_ID_SET = set(author_ids)
+
+# load prompts
+with open("prompts/base_prompt.txt", "r", encoding="utf-8") as f:
+    BASE_PROMPT = f.read()
+with open("prompts/paper_topics.txt", "r", encoding="utf-8") as f:
+    TOPIC_PROMPT = f.read()
+with open("prompts/score_criteria.txt", "r", encoding="utf-8") as f:
+    SCORE_PROMPT = f.read()
+with open("prompts/postfix_prompt.txt", "r", encoding="utf-8") as f:
+    POSTFIX_PROMPT = f.read()
 
 # keys
 S2_API_KEY = os.environ.get("S2_KEY")
@@ -41,28 +60,31 @@ print(f"SLACK_CHANNEL_ID: {SLACK_CHANNEL_ID}")
 if OPENAI_API_KEY is None:
     raise ValueError("OpenAI key is not set - please set OPENAI_API_KEY to your OpenAI key")
 
-# load config.ini
-CONFIG = configparser.ConfigParser()
-CONFIG.read("configs/config.ini")
+# now time
+try:
+    # get from ArXiv
+    feed = feedparser.parse("https://export.arxiv.org/rss/cs.LG")  # use the cs.LG area
+    if len(feed.entries) > 0:
+        # Example `feed.published`: "Tue, 18 Feb 2025 00:00:00 -0500"
+        parsed_time = datetime.strptime(feed.entries[0].published, "%a, %d %b %Y %H:%M:%S %z")
+        NOW_YEAR = parsed_time.strftime("%Y")
+        NOW_MONTH = parsed_time.strftime("%m")
+        NOW_DAY = parsed_time.strftime("%d")
+    else:
+        raise ValueError("Feed does not contain any entries")
+except Exception as e:
+    # use local time
+    NOW_YEAR = time.strftime("%Y")
+    NOW_MONTH = time.strftime("%m")
+    NOW_DAY = time.strftime("%d")
 
-# load authors.txt
-with open("configs/authors.txt", "r", encoding="utf-8") as fopen:
-    author_names, author_ids = parse_authors(fopen.readlines())
-AUTHOR_ID_SET = set(author_ids)
-
-# load prompts
-with open("prompts/base_prompt.txt", "r", encoding="utf-8") as f:
-    BASE_PROMPT = f.read()
-with open("prompts/paper_topics.txt", "r", encoding="utf-8") as f:
-    TOPIC_PROMPT = f.read()
-with open("prompts/score_criteria.txt", "r", encoding="utf-8") as f:
-    SCORE_PROMPT = f.read()
-with open("prompts/postfix_prompt.txt", "r", encoding="utf-8") as f:
-    POSTFIX_PROMPT = f.read()
+print(f"NOW_YEAR: {NOW_YEAR}")
+print(f"NOW_MONTH: {NOW_MONTH}")
+print(f"NOW_DAY: {NOW_DAY}")
 
 # output path
-OUTPUT_DEBUG_DIR = os.path.join(CONFIG["OUTPUT"]["output_path"], "debug", f"{NOW_YEAR}-{NOW_MONTH}")
-OUTPUT_DEBUG_FILE_FORMAT = os.path.join(OUTPUT_DEBUG_DIR, f"{NOW_YEAR}-{NOW_MONTH}-{NOW_DAY}-" + "{}")
+OUTPUT_DEBUG_DIR = os.path.join(CONFIG["OUTPUT"]["output_path"], "debug", f"{NOW_YEAR}-{NOW_MONTH}", f"{NOW_YEAR}-{NOW_MONTH}-{NOW_DAY}")
+OUTPUT_DEBUG_FILE_FORMAT = os.path.join(OUTPUT_DEBUG_DIR, "{}")
 create_dir(OUTPUT_DEBUG_DIR)
 
 OUTPUT_MD_DIR = os.path.join(CONFIG["OUTPUT"]["output_path"], "md", f"{NOW_YEAR}-{NOW_MONTH}")

@@ -124,7 +124,8 @@ def get_authors(
             try:
                 auth_map = get_one_author(session, author, S2_API_KEY)
             except Exception as ex:
-                print("exception happened" + str(ex))
+                if CONFIG["OUTPUT"].getboolean("debug_messages"):
+                    print("exception happened" + str(ex))
                 auth_map = None
             if auth_map is not None:
                 author_metadata_dict[author] = auth_map
@@ -139,16 +140,18 @@ def get_authors(
 
 def get_papers_from_arxiv(config):
     area_list = config["FILTERING"]["arxiv_category"].split(",")
+    all_entries = []
     arxiv_paper_dict = {}
     for area in area_list:
-        papers = get_papers_from_arxiv_rss_api(area.strip(), config)
+        entries, papers = get_papers_from_arxiv_rss_api(area.strip(), config)
+        all_entries.extend(entries)
         arxiv_paper_dict[area] = papers
-    return arxiv_paper_dict
+    return all_entries, arxiv_paper_dict
 
 
 if __name__ == "__main__":
     # get the paper list from arxiv
-    arxiv_paper_dict = get_papers_from_arxiv(CONFIG)
+    all_entries, arxiv_paper_dict = get_papers_from_arxiv(CONFIG)
     paper_list = list(set(v for area_papers in arxiv_paper_dict.values() for v in area_papers))
     print("Total number of papers:" + str(len(paper_list)))
     if len(paper_list) == 0:
@@ -170,9 +173,9 @@ if __name__ == "__main__":
     if CONFIG["OUTPUT"].getboolean("dump_debug_file"):
         with open(OUTPUT_DEBUG_FILE_FORMAT.format("config.json"), "w") as outfile:
             json.dump({section: dict(CONFIG[section]) for section in CONFIG.sections()}, outfile, cls=EnhancedJSONEncoder, indent=4)
-        with open(OUTPUT_DEBUG_FILE_FORMAT.format("AUTHOR_ID_SET.json"), "w") as outfile:
+        with open(OUTPUT_DEBUG_FILE_FORMAT.format("author_id_set.json"), "w") as outfile:
             json.dump(list(AUTHOR_ID_SET), outfile, cls=EnhancedJSONEncoder, indent=4)
-        with open(OUTPUT_DEBUG_FILE_FORMAT.format("papers.json"), "w") as outfile:
+        with open(OUTPUT_DEBUG_FILE_FORMAT.format("all_papers.json"), "w") as outfile:
             json.dump(paper_list, outfile, cls=EnhancedJSONEncoder, indent=4)
         with open(OUTPUT_DEBUG_FILE_FORMAT.format("all_authors.json"), "w") as outfile:
             json.dump(all_authors, outfile, cls=EnhancedJSONEncoder, indent=4)
@@ -180,7 +183,6 @@ if __name__ == "__main__":
     # initialize vars for filtering
     selected_paper_dict = {}
     filtered_paper_dict = {}  # NOTE: NOT USED HERE
-    sort_dict = {}  # dict storing key and score
 
     # select papers by author
     if CONFIG["SELECTION"].getboolean("run_author_match"):
@@ -226,13 +228,17 @@ if __name__ == "__main__":
         k: v
         for k, v in sorted(
             selected_paper_dict.items(),
-            key=lambda x: (x[1]["SCORE"], x[1].get("RELEVANCE", 0)),  # sort first by total scores then by relevance
+            key=lambda x: (x[1].get("SCORE", 0), x[1].get("RELEVANCE", 0)),  # sort first by total scores then by relevance
             reverse=True
         )
     }
-    if CONFIG["OUTPUT"].getboolean("debug_messages"):
-        print("Sorted selection paper dict")
-        print(selected_paper_dict)
+
+    # dump filtered & selected papers for debugging
+    if CONFIG["OUTPUT"].getboolean("dump_debug_file"):
+        with open(OUTPUT_DEBUG_FILE_FORMAT.format("selected_paper_dict.json"), "w") as outfile:
+            json.dump(selected_paper_dict, outfile, cls=EnhancedJSONEncoder, indent=4)
+        with open(OUTPUT_DEBUG_FILE_FORMAT.format("filtered_paper_dict.json"), "w") as outfile:
+            json.dump(filtered_paper_dict, outfile, cls=EnhancedJSONEncoder, indent=4)
 
     # pick endpoints and push the summaries
     if CONFIG["OUTPUT"].getboolean("dump_json"):
@@ -241,14 +247,14 @@ if __name__ == "__main__":
 
     if CONFIG["OUTPUT"].getboolean("dump_md"):
         head_table = {
-            "headers": ["", "Prompt", "Completion", "Total"],
+            "headers": [f"*{CONFIG['SELECTION']['model']}*", "Prompt", "Completion", "Total"],
             "data": [
                 ["**Token**", total_prompt_tokens, total_completion_tokens, total_prompt_tokens + total_completion_tokens],
                 ["**Cost**", f"${round(total_prompt_cost, 2)}", f"${round(total_completion_cost, 2)}", f"${round(total_prompt_cost + total_completion_cost, 2)}"],
             ]
         }
         with open(OUTPUT_MD_FILE_FORMAT.format("output.md"), "w") as f:
-            f.write(render_md_string(arxiv_paper_dict, selected_paper_dict, head_table=head_table))
+            f.write(render_md_string(all_entries, arxiv_paper_dict, selected_paper_dict, head_table=head_table))
 
     # only push to slack for non-empty dicts
     if CONFIG["OUTPUT"].getboolean("push_to_slack"):

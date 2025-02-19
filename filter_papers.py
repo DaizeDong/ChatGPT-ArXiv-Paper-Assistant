@@ -3,12 +3,11 @@ import datetime
 import json
 import math
 import re
-import time
-from typing import Dict, List, Tuple
-
 import retry
+import time
 from openai import OpenAI
 from tqdm import tqdm
+from typing import Dict, List, Tuple
 
 from arxiv_scraper import EnhancedJSONEncoder, Paper
 from environment import BASE_PROMPT, CONFIG, OPENAI_API_KEY, OPENAI_BASE_URL, OUTPUT_DEBUG_FILE_FORMAT, POSTFIX_PROMPT, SCORE_PROMPT, TOPIC_PROMPT
@@ -209,12 +208,13 @@ def call_chatgpt(full_prompt, openai_client, model):
 
 
 def filter_papers_by_title(
-    paper_list, openai_client, base_prompt, topic_prompt, config
+    paper_list, openai_client, base_prompt, topic_prompt, config, retry=3,
 ) -> Tuple[List[Paper], Dict, float, float, int, int]:
     batch_size = get_batch_size(int(config["SELECTION"]["title_batch_size"]), len(paper_list), config)
     print(f"Using batch size of {batch_size} for title filtering")
     batches_of_papers = batched(paper_list, batch_size)
 
+    invalid_paper_list = []  # papers failed to be filtered by GPT, recorded for retrying
     new_paper_list = []
     filtered_results = {}
     total_prompt_cost = 0.0
@@ -223,11 +223,19 @@ def filter_papers_by_title(
     completion_tokens = 0
 
     for batch in tqdm(batches_of_papers, desc="Filtering title"):
-        papers_string = "".join([paper_to_titles(paper) for paper in batch])
+        # prepare input
+        papers_string = [paper_to_titles(paper) for paper in batch]
         full_prompt = get_full_prompt_for_title_filtering(base_prompt, topic_prompt, papers_string)
         model = config["SELECTION"]["model"]
-        completion = call_chatgpt(full_prompt, openai_client, model)
+        try:
+            completion = call_chatgpt(full_prompt, openai_client, model)
+        except Exception as ex:
+            if config["OUTPUT"].getboolean("debug_messages"):
+                print(f"Exception happened: Failed to call GPT with batch size {len(batch)} ({ex})")
+            invalid_paper_list.extend(batch)
+            continue
 
+        # get GPT output
         prompt_cost, completion_cost = calc_price(model, completion.usage)
         total_prompt_cost += prompt_cost
         total_completion_cost += completion_cost
@@ -236,6 +244,7 @@ def filter_papers_by_title(
         out_text = completion.choices[0].message.content
         print({"prompt": {"tokens": completion.usage.prompt_tokens, "cost": prompt_cost}, "completion": {"tokens": completion.usage.completion_tokens, "cost": completion_cost}})
 
+        # parse output
         try:
             filtered_set = set(json.loads(out_text))
             for paper in batch:
@@ -249,14 +258,39 @@ def filter_papers_by_title(
                 else:
                     new_paper_list.append(paper)
         except Exception as ex:
-            print("Exception happened " + str(ex))
-            print("Failed to parse LM output as list " + out_text)
-            print(completion)
+            invalid_paper_list.extend(batch)
+            if config["OUTPUT"].getboolean("debug_messages"):
+                print(f"Exception happened: Failed to parse LM output as list ({ex})")
+                print(f"`out_text`: {out_text}")
             continue
 
     print(f"Filtered {len(filtered_results)} papers based on title with cost of ${total_prompt_cost + total_completion_cost}, remaining {len(new_paper_list)} papers:\n"
           f"({prompt_tokens} prompt tokens cost ${total_prompt_cost})\n"
           f"({completion_tokens} completion tokens cost ${total_completion_cost})")
+
+    if len(invalid_paper_list) > 0:
+        if retry > 0:
+            print(f"Retrying {len(invalid_paper_list)} papers failed to be filtered by GPT through title filtering (left {retry - 1} retries)")
+            retried_new_paper_list, retried_filtered_results, retried_total_prompt_cost, retried_total_completion_cost, retried_prompt_tokens, retried_completion_tokens = filter_papers_by_title(
+                invalid_paper_list,
+                openai_client,
+                base_prompt,
+                topic_prompt,
+                config,
+                retry - 1,
+            )
+            new_paper_list.extend(retried_new_paper_list)
+            filtered_results.update(retried_filtered_results)
+            total_prompt_cost += retried_total_prompt_cost
+            total_completion_cost += retried_total_completion_cost
+            prompt_tokens += retried_prompt_tokens
+            completion_tokens += retried_completion_tokens
+        else:
+            print(f"Maximum retries reached, skip retrying")
+            print(f"Left {len(invalid_paper_list)} papers failed to be filtered by GPT through title filtering")
+            print(f"Invalid paper titles:")
+            for paper in invalid_paper_list:
+                print(f"{paper.title}")
 
     return new_paper_list, filtered_results, total_prompt_cost, total_completion_cost, prompt_tokens, completion_tokens
 
@@ -279,23 +313,21 @@ def parse_chatgpt(raw_out_text, config):
         except Exception as ex:
             invalid_cnt += 1
             if config["OUTPUT"].getboolean("debug_messages"):
-                print("Exception happened " + str(ex))
-                print("Failed to parse LM output as json")
-                print(out_text)
-                print("RAW output")
-                print(raw_out_text)
+                print(f"Exception happened: Failed to parse LM output as json ({ex})")
+                print(f"RAW output: {raw_out_text}")
+                print(f"`out_text`: {out_text}")
             continue
     return json_dicts, invalid_cnt
 
 
 def filter_papers_by_abstract(
-    paper_list, id_paper_mapping, openai_client, base_prompt, topic_prompt, score_prompt, postfix_prompt, config
+    paper_list, id_paper_mapping, openai_client, base_prompt, topic_prompt, score_prompt, postfix_prompt, config, retry=3,
 ) -> Tuple[List[List[Dict]], Dict, Dict, float, float, int, int]:
     batch_size = get_batch_size(int(config["SELECTION"]["abstract_batch_size"]), len(paper_list), config)
     print(f"Using batch size of {batch_size} for abstract filtering")
     batches_of_papers = batched(paper_list, batch_size)
 
-    invalid_cnt = 0  # the number of papers that cannot be identified according to the model output
+    invalid_arxiv_ids = set()  # arxiv ids of papers failed to be scored by GPT, recorded for retrying
     scored_batches = []
     selected_results = {}
     filtered_results = {}
@@ -305,12 +337,24 @@ def filter_papers_by_abstract(
     completion_tokens = 0
 
     for batch in tqdm(batches_of_papers, desc="Filtering abstract"):
-        scored_in_batch = []
+        # temp values
+        this_scored_batch = []
+        all_arxiv_ids = {paper.arxiv_id for paper in batch}
+        finished_arxiv_ids = set()
+
+        # prepare input
         batch_str = [paper_to_string(paper) for paper in batch]
         full_prompt = get_full_prompt_for_abstract_filtering(base_prompt, topic_prompt, score_prompt, postfix_prompt, batch_str)
         model = config["SELECTION"]["model"]
-        completion = call_chatgpt(full_prompt, openai_client, model)
+        try:
+            completion = call_chatgpt(full_prompt, openai_client, model)
+        except Exception as ex:
+            if config["OUTPUT"].getboolean("debug_messages"):
+                print(f"Exception happened: Failed to call GPT with batch size {len(batch)} ({ex})")
+            invalid_arxiv_ids.update(all_arxiv_ids)
+            continue
 
+        # get GPT output
         prompt_cost, completion_cost = calc_price(model, completion.usage)
         total_prompt_cost += prompt_cost
         total_completion_cost += completion_cost
@@ -319,25 +363,21 @@ def filter_papers_by_abstract(
         out_text = completion.choices[0].message.content
         print({"prompt": {"tokens": completion.usage.prompt_tokens, "cost": prompt_cost}, "completion": {"tokens": completion.usage.completion_tokens, "cost": completion_cost}})
 
-        json_dicts, this_invalid_cnt = parse_chatgpt(out_text, config)
-        invalid_cnt += this_invalid_cnt
+        # parse output
+        json_dicts, _ = parse_chatgpt(out_text, config)
 
         for jdict in json_dicts:
             if jdict["ARXIVID"] not in id_paper_mapping:
-                invalid_cnt += 1
                 if config["OUTPUT"].getboolean("debug_messages"):
-                    print("Exception happened:")
-                    print(f"ARXIVID {jdict['ARXIVID']} not found in `id_paper_mapping`")
+                    print(f"Exception happened: ARXIVID \"{jdict['ARXIVID']}\" not found in `id_paper_mapping`")
                 continue
 
             result = {
                 "SCORE": jdict["RELEVANCE"] + jdict["NOVELTY"],
-                "RELEVANCE": jdict["RELEVANCE"],
-                "NOVELTY": jdict["NOVELTY"],
                 **jdict,
                 **dataclasses.asdict(id_paper_mapping[jdict["ARXIVID"]]),
             }
-            scored_in_batch.append(result)
+            this_scored_batch.append(result)
 
             filtered = (
                 int(jdict["RELEVANCE"]) < int(config["FILTERING"]["relevance_cutoff"]) or
@@ -349,11 +389,46 @@ def filter_papers_by_abstract(
             else:
                 selected_results[jdict["ARXIVID"]] = result
 
-        scored_batches.append(scored_in_batch)
+            finished_arxiv_ids.add(jdict["ARXIVID"])
+        scored_batches.append(this_scored_batch)
+
+        # check if all papers are finished
+        this_invalid_arxiv_ids = all_arxiv_ids - finished_arxiv_ids
+        if len(this_invalid_arxiv_ids) > 0:
+            invalid_arxiv_ids.update(this_invalid_arxiv_ids)
 
     print(f"Filtered {len(filtered_results)} papers based on abstract with cost of ${total_prompt_cost + total_completion_cost}, remaining {len(selected_results)} papers:\n"
           f"({prompt_tokens} prompt tokens cost ${total_prompt_cost})\n"
           f"({completion_tokens} completion tokens cost ${total_completion_cost})")
+
+    # retry invalid arxiv ids
+    if len(invalid_arxiv_ids) > 0:
+        if retry > 0:
+            print(f"Retrying {len(invalid_arxiv_ids)} papers failed to be scored by GPT through abstract filtering (left {retry - 1} retries)")
+            retried_scored_batches, retried_selected_results, retried_filtered_results, retried_total_prompt_cost, retried_total_completion_cost, retried_prompt_tokens, retried_completion_tokens = filter_papers_by_abstract(
+                [id_paper_mapping[arxiv_id] for arxiv_id in invalid_arxiv_ids],
+                id_paper_mapping,
+                openai_client,
+                base_prompt,
+                topic_prompt,
+                score_prompt,
+                postfix_prompt,
+                config,
+                retry - 1,
+            )
+            scored_batches.extend(retried_scored_batches)
+            selected_results.update(retried_selected_results)
+            filtered_results.update(retried_filtered_results)
+            total_prompt_cost += retried_total_prompt_cost
+            total_completion_cost += retried_total_completion_cost
+            prompt_tokens += retried_prompt_tokens
+            completion_tokens += retried_completion_tokens
+        else:
+            print(f"Maximum retries reached, skip retrying")
+            print(f"Left {len(invalid_arxiv_ids)} papers failed to be scored by GPT through abstract filtering")
+            print(f"Invalid paper titles:")
+            for arxiv_id in invalid_arxiv_ids:
+                print(f"{id_paper_mapping[arxiv_id].title}")
 
     return scored_batches, selected_results, filtered_results, total_prompt_cost, total_completion_cost, prompt_tokens, completion_tokens
 
@@ -366,16 +441,23 @@ def filter_by_gpt(paper_list, base_prompt, topic_prompt, score_prompt, postfix_p
     total_completion_tokens = 0
 
     openai_client = OpenAI(api_key=OPENAI_API_KEY, base_url=OPENAI_BASE_URL)
-    id_paper_mapping = {paper.arxiv_id: paper for paper in paper_list}
+    id_paper_mapping: Dict[str, Paper] = {paper.arxiv_id: paper for paper in paper_list}
 
     # filter papers by titles
-    paper_list, filtered_results, prompt_cost, completion_cost, prompt_tokens, completion_tokens = filter_papers_by_title(
-        paper_list,
-        openai_client,
-        base_prompt,
-        topic_prompt,
-        config
-    )
+    if config["SELECTION"].getboolean("run_title_filter"):
+        paper_list, filtered_results, prompt_cost, completion_cost, prompt_tokens, completion_tokens = filter_papers_by_title(
+            paper_list,
+            openai_client,
+            base_prompt,
+            topic_prompt,
+            config,
+            retry=int(config["SELECTION"]["title_retry"]),
+        )
+    else:
+        filtered_results = {}
+        prompt_cost, completion_cost, prompt_tokens, completion_tokens = 0.0, 0.0, 0, 0
+        print("Skipping GPT title filtering")
+
     total_filtered_results.update(filtered_results)
     total_prompt_cost += prompt_cost
     total_completion_cost += completion_cost
@@ -383,16 +465,25 @@ def filter_by_gpt(paper_list, base_prompt, topic_prompt, score_prompt, postfix_p
     total_completion_tokens += completion_tokens
 
     # filter remaining papers by abstracts
-    scored_batches, selected_results, filtered_results, prompt_cost, completion_cost, prompt_tokens, completion_tokens = filter_papers_by_abstract(
-        paper_list,
-        id_paper_mapping,
-        openai_client,
-        base_prompt,
-        topic_prompt,
-        score_prompt,
-        postfix_prompt,
-        config
-    )
+    if config["SELECTION"].getboolean("run_abstract_filter"):
+        scored_batches, selected_results, filtered_results, prompt_cost, completion_cost, prompt_tokens, completion_tokens = filter_papers_by_abstract(
+            paper_list,
+            id_paper_mapping,
+            openai_client,
+            base_prompt,
+            topic_prompt,
+            score_prompt,
+            postfix_prompt,
+            config,
+            retry=int(config["SELECTION"]["abstract_retry"]),
+        )
+    else:
+        scored_batches = []
+        selected_results = {paper.arxiv_id: {**dataclasses.asdict(paper)} for paper in paper_list}
+        filtered_results = {}
+        prompt_cost, completion_cost, prompt_tokens, completion_tokens = 0.0, 0.0, 0, 0
+        print("Skipping GPT abstract filtering")
+
     total_filtered_results.update(filtered_results)
     total_prompt_cost += prompt_cost
     total_completion_cost += completion_cost

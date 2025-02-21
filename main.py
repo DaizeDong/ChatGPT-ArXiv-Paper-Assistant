@@ -247,7 +247,7 @@ if __name__ == "__main__":
 
     if CONFIG["OUTPUT"].getboolean("dump_md"):
         head_table = {
-            "headers": [f"*{CONFIG['SELECTION']['model']}*", "Prompt", "Completion", "Total"],
+            "headers": [f"*[{CONFIG['SELECTION']['model']}]*", "Prompt", "Completion", "Total"],
             "data": [
                 ["**Token**", total_prompt_tokens, total_completion_tokens, total_prompt_tokens + total_completion_tokens],
                 ["**Cost**", f"${round(total_prompt_cost, 2)}", f"${round(total_completion_cost, 2)}", f"${round(total_prompt_cost + total_completion_cost, 2)}"],

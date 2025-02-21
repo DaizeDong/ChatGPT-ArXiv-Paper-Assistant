@@ -13,11 +13,9 @@ A simple demo of the daily papers can be seen [here](https://daizedong.github.io
 
 You can get a **free** API Key with a [rate limit](https://docs.github.com/en/github-models/prototyping-with-ai-models#rate-limits) from [GitHub](https://github.com/marketplace/models/azure-openai/gpt-4o). Its daily limit is enough for filtering ArXiv papers.
 
-As a cost estimate, filtering 270 papers by titles with `batch_size=32` takes 8 queries with an average of 6,431 prompt tokens and 88 completion tokens per query.
-Filtering 155 papers by abstracts with `batch_size=16` takes 10 queries with an average of 5,727 prompt tokens and 1,001 completion tokens per query.
+As a cost estimate, filtering 267 papers by titles with `batch_size=40` takes 7 queries with an average of 1,798 prompt tokens and 144 completion tokens each.
+Filtering 123 papers by abstracts with `batch_size=12` takes 11 queries with an average of 4,477 prompt tokens and 739 completion tokens each.
 This costs $0 under the [rate limit](https://docs.github.com/en/github-models/prototyping-with-ai-models#rate-limits) of the Copilot Free plan.
-
-[//]: # (As a cost estimate, running this on all of `cs.LG` and `cs.AI` &#40;about 50 papers for abstract filtering&#41; with `batch_size=5` cost $1.04 on 1/17/2025.)
 
 ## Quickstart
 

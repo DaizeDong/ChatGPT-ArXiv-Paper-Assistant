@@ -59,9 +59,3 @@ def copy_all_files_in_dir(source_dir, target_dir, print_info=False, suppress_err
             print(f"{e}\n(This exception have been suppressed and would not influence the program execution)")
         else:
             raise e
-
-
-def argsort(seq):
-    # native python version of an 'argsort'
-    # http://stackoverflow.com/questions/3071415/efficient-method-to-calculate-the-rank-vector-of-a-list-in-python
-    return sorted(range(len(seq)), key=seq.__getitem__)

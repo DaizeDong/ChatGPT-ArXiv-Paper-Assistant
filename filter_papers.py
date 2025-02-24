@@ -77,7 +77,7 @@ def calc_price(model, usage):
         print(f"Model \"{model}\" not found in pricing table, skip pricing calculation")
         return 0, 0
 
-    cached_tokens = usage.model_extra["prompt_tokens_details"].get("cached_tokens", 0)
+    cached_tokens = usage.model_extra.get("prompt_tokens_details", {}).get("cached_tokens", 0)
     prompt_tokens = usage.prompt_tokens - cached_tokens
     completion_tokens = usage.completion_tokens
 

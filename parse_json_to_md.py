@@ -1,8 +1,7 @@
 import json
-from datetime import datetime
 from tabulate import tabulate
 
-from environment import BASE_PROMPT, POSTFIX_PROMPT, SCORE_PROMPT, TOPIC_PROMPT
+from environment import BASE_PROMPT, NOW_DAY, NOW_MONTH, NOW_YEAR, POSTFIX_PROMPT, SCORE_PROMPT, TOPIC_PROMPT
 from filter_papers import get_full_prompt_for_abstract_filtering
 
 
@@ -73,7 +72,7 @@ def render_md_string(all_entries, arxiv_paper_dict, selected_paper_dict, head_ta
 
     # cat output string
     output_string = "\n\n".join([
-        f"# Personalized Daily Arxiv Papers {datetime.today().strftime('%m/%d/%Y')}",
+        f"# Personalized Daily Arxiv Papers {NOW_MONTH}/{NOW_DAY}/{NOW_YEAR}",
         "" if head_table is None else head_table_strings,
         f"Total ArXiv papers: {len(all_entries)}",
         f"Total scanned papers: {sum([len(paper_list) for paper_list in arxiv_paper_dict.values()])}",

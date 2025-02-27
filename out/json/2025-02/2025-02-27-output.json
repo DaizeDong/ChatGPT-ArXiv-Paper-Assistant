@@ -1,0 +1,519 @@
+{
+    "2502.19261": {
+        "SCORE": 19,
+        "ARXIVID": "2502.19261",
+        "COMMENT": "Proposes Drop-Upcycling for training sparse Mixture of Experts (MoE) models, directly aligning with the 'Model Architecture' and 'Model Compression' criteria.",
+        "RELEVANCE": 10,
+        "NOVELTY": 9,
+        "authors": [
+            "Taishi Nakamura",
+            "Takuya Akiba",
+            "Kazuki Fujii",
+            "Yusuke Oda",
+            "Rio Yokota",
+            "Jun Suzuki"
+        ],
+        "title": "Drop-Upcycling: Training Sparse Mixture of Experts with Partial Re-initialization",
+        "abstract": "The Mixture of Experts (MoE) architecture reduces the training and inference cost significantly compared to a dense model of equivalent capacity. Upcycling is an approach that initializes and trains an MoE model using a pre-trained dense model. While upcycling leads to initial performance gains, the training progresses slower than when trained from scratch, leading to suboptimal performance in the long term. We propose Drop-Upcycling - a method that effectively addresses this problem. Drop-Upcycling combines two seemingly contradictory approaches: utilizing the knowledge of pre-trained dense models while statistically re-initializing some parts of the weights. This approach strategically promotes expert specialization, significantly enhancing the MoE model's efficiency in knowledge acquisition. Extensive large-scale experiments demonstrate that Drop-Upcycling significantly outperforms previous MoE construction methods in the long term, specifically when training on hundreds of billions of tokens or more. As a result, our MoE model with 5.9B active parameters achieves comparable performance to a 13B dense model in the same model family, while requiring approximately 1/4 of the training FLOPs. All experimental resources, including source code, training data, model checkpoints and logs, are publicly available to promote reproducibility and future research on MoE.",
+        "arxiv_id": "2502.19261"
+    },
+    "2502.18821": {
+        "SCORE": 18,
+        "ARXIVID": "2502.18821",
+        "COMMENT": "The paper introduces CAMEx, a novel curvature-aware merging protocol for Mixture-of-Experts (MoE) models, which aligns closely with the 'Model Architecture' and 'Representation Learning' criteria. It provides theoretical and empirical insights into expert merging, improving optimization and generalization.",
+        "RELEVANCE": 10,
+        "NOVELTY": 8,
+        "authors": [
+            "Dung V. Nguyen",
+            "Minh H. Nguyen",
+            "Luc Q. Nguyen",
+            "Rachel S. Y. Teo",
+            "Tan M. Nguyen",
+            "Linh Duy Tran"
+        ],
+        "title": "CAMEx: Curvature-aware Merging of Experts",
+        "abstract": "Existing methods for merging experts during model training and fine-tuning predominantly rely on Euclidean geometry, which assumes a flat parameter space. This assumption can limit the model's generalization ability, especially during the pre-training phase, where the parameter manifold might exhibit more complex curvature. Curvature-aware merging methods typically require additional information and computational resources to approximate the Fisher Information Matrix, adding memory overhead. In this paper, we introduce CAMEx (\\textbf{C}urvature-\\textbf{A}ware \\textbf{M}erging of \\textbf{Ex}perts), a novel expert merging protocol that incorporates natural gradients to account for the non-Euclidean curvature of the parameter manifold. By leveraging natural gradients, CAMEx adapts more effectively to the structure of the parameter space, improving alignment between model updates and the manifold's geometry. This approach enhances both pre-training and fine-tuning, resulting in better optimization trajectories and improved generalization without the substantial memory overhead typically associated with curvature-aware methods. Our contributions are threefold: (1) CAMEx significantly outperforms traditional Euclidean-based expert merging techniques across various natural language processing tasks, leading to enhanced performance during pre-training and fine-tuning; (2) we introduce a dynamic merging architecture that optimizes resource utilization, achieving high performance while reducing computational costs, facilitating efficient scaling of large language models; and (3) we provide both theoretical and empirical evidence to demonstrate the efficiency of our proposed method.",
+        "arxiv_id": "2502.18821"
+    },
+    "2502.19402": {
+        "SCORE": 18,
+        "ARXIVID": "2502.19402",
+        "COMMENT": "The paper discusses disentangling reasoning and knowledge in LLMs, aligning with 'Large Language Models' as it proposes foundational changes to pretraining and reasoning paradigms. The focus on reasoning priors and curriculum learning adds significant novelty.",
+        "RELEVANCE": 9,
+        "NOVELTY": 9,
+        "authors": [
+            "Seungwook Han",
+            "Jyothish Pari",
+            "Samuel J. Gershman",
+            "Pulkit Agrawal"
+        ],
+        "title": "General Reasoning Requires Learning to Reason from the Get-go",
+        "abstract": "Large Language Models (LLMs) have demonstrated impressive real-world utility, exemplifying artificial useful intelligence (AUI). However, their ability to reason adaptively and robustly -- the hallmarks of artificial general intelligence (AGI) -- remains fragile. While LLMs seemingly succeed in commonsense reasoning, programming, and mathematics, they struggle to generalize algorithmic understanding across novel contexts. Our experiments with algorithmic tasks in esoteric programming languages reveal that LLM's reasoning overfits to the training data and is limited in its transferability. We hypothesize that the core issue underlying such limited transferability is the coupling of reasoning and knowledge in LLMs.   To transition from AUI to AGI, we propose disentangling knowledge and reasoning through three key directions: (1) pretaining to reason using RL from scratch as an alternative to the widely used next-token prediction pretraining, (2) using a curriculum of synthetic tasks to ease the learning of a \\textit{reasoning prior} for RL that can then be transferred to natural language tasks, and (3) learning more generalizable reasoning functions using a small context window to reduce exploiting spurious correlations between tokens. Such a reasoning system coupled with a trained retrieval system and a large external memory bank as a knowledge store can overcome several limitations of existing architectures at learning to reason in novel scenarios.",
+        "arxiv_id": "2502.19402"
+    },
+    "2502.19207": {
+        "SCORE": 17,
+        "ARXIVID": "2502.19207",
+        "COMMENT": "The paper introduces a novel unlearning method (KLUE) for faithful forgetting in LLMs, which aligns with foundational research on LLM behavior and interpretability.",
+        "RELEVANCE": 9,
+        "NOVELTY": 8,
+        "authors": [
+            "Nakyeong Yang",
+            "Minsung Kim",
+            "Seunghyun Yoon",
+            "Joongbo Shin",
+            "Kyomin Jung"
+        ],
+        "title": "FaithUn: Toward Faithful Forgetting in Language Models by Investigating the Interconnectedness of Knowledge",
+        "abstract": "Various studies have attempted to remove sensitive or private knowledge from a language model to prevent its unauthorized exposure. However, prior studies have overlooked the complex and interconnected nature of knowledge, where related knowledge must be carefully examined. Specifically, they have failed to evaluate whether an unlearning method faithfully erases interconnected knowledge that should be removed, retaining knowledge that appears relevant but exists in a completely different context. To resolve this problem, we first define a new concept called superficial unlearning, which refers to the phenomenon where an unlearning method either fails to erase the interconnected knowledge it should remove or unintentionally erases irrelevant knowledge. Based on the definition, we introduce a new benchmark, FaithUn, to analyze and evaluate the faithfulness of unlearning in real-world knowledge QA settings. Furthermore, we propose a novel unlearning method, KLUE, which updates only knowledge-related neurons to achieve faithful unlearning. KLUE identifies knowledge neurons using an explainability method and updates only those neurons using selected unforgotten samples. Experimental results demonstrate that widely-used unlearning methods fail to ensure faithful unlearning, while our method shows significant effectiveness in real-world QA unlearning.",
+        "arxiv_id": "2502.19207"
+    },
+    "2502.19416": {
+        "SCORE": 17,
+        "ARXIVID": "2502.19416",
+        "COMMENT": "The paper investigates challenges in localized sequential knowledge editing for LLMs, focusing on stability and norm growth. This aligns with foundational research in LLM behavior and interpretability.",
+        "RELEVANCE": 9,
+        "NOVELTY": 8,
+        "authors": [
+            "Akshat Gupta",
+            "Christine Fang",
+            "Atahan Ozdemir",
+            "Maochuan Lu",
+            "Ahmed Alaa",
+            "Thomas Hartvigsen",
+            "Gopala Anumanchipalli"
+        ],
+        "title": "Norm Growth and Stability Challenges in Localized Sequential Knowledge Editing",
+        "abstract": "This study investigates the impact of localized updates to large language models (LLMs), specifically in the context of knowledge editing - a task aimed at incorporating or modifying specific facts without altering broader model capabilities. We first show that across different post-training interventions like continuous pre-training, full fine-tuning and LORA-based fine-tuning, the Frobenius norm of the updated matrices always increases. This increasing norm is especially detrimental for localized knowledge editing, where only a subset of matrices are updated in a model . We reveal a consistent phenomenon across various editing techniques, including fine-tuning, hypernetwork-based approaches, and locate-and-edit methods: the norm of the updated matrix invariably increases with successive updates. Such growth disrupts model balance, particularly when isolated matrices are updated while the rest of the model remains static, leading to potential instability and degradation of downstream performance. Upon deeper investigations of the intermediate activation vectors, we find that the norm of internal activations decreases and is accompanied by shifts in the subspaces occupied by these activations, which shows that these activation vectors now occupy completely different regions in the representation space compared to the unedited model. With our paper, we highlight the technical challenges with continuous and localized sequential knowledge editing and their implications for maintaining model stability and utility.",
+        "arxiv_id": "2502.19416"
+    },
+    "2502.19385": {
+        "SCORE": 17,
+        "ARXIVID": "2502.19385",
+        "COMMENT": "The paper proposes HDEE, a heterogeneous domain expert ensemble, which aligns with the 'Model Architecture' criterion by exploring ensemble methods with domain-specific heterogeneity. It provides insights into efficient training and evaluation.",
+        "RELEVANCE": 9,
+        "NOVELTY": 8,
+        "authors": [
+            "O\\u{g}uzhan Ersoy",
+            "Jari Kolehmainen",
+            "Gabriel Passamani Andrade"
+        ],
+        "title": "HDEE: Heterogeneous Domain Expert Ensemble",
+        "abstract": "Training dense LLMs requires enormous amounts of data and centralized compute, which introduces fundamental bottlenecks and ever-growing costs for large models. Several studies aim to reduce this dependency on centralization by reducing the communication overhead of training dense models. Taking this idea of reducing communication overhead to a natural extreme, by training embarrassingly parallelizable ensembles of small independent experts, has been shown to outperform large dense models trained in traditional centralized settings. However, existing studies do not take into account underlying differences amongst data domains and treat them as monolithic, regardless of their underlying complexity, size, or distribution. In this paper, we explore the effects of introducing heterogeneity to these ensembles of domain expert models. Specifically, by allowing models within the ensemble to vary in size--as well as the number of training steps taken depending on the training data's domain--we study the effect heterogeneity has on these ensembles when evaluated against domains included in, and excluded from, the training set. We use the same compute budget to train heterogeneous ensembles and homogeneous baselines for comparison. We show that the heterogeneous ensembles achieve the lowest perplexity scores in $20$ out of the $21$ data domains used in the evaluation. Our code is available at https://github.com/gensyn-ai/hdee.",
+        "arxiv_id": "2502.19385"
+    },
+    "2502.19337": {
+        "SCORE": 17,
+        "ARXIVID": "2502.19337",
+        "COMMENT": "The paper proposes a novel framework for amortized clustering using Generative Flow Networks, which contributes to representation learning and foundational clustering methods.",
+        "RELEVANCE": 9,
+        "NOVELTY": 8,
+        "authors": [
+            "Irit Chelly",
+            "Roy Uziel",
+            "Oren Freifeld",
+            "Ari Pakman"
+        ],
+        "title": "Consistent Amortized Clustering via Generative Flow Networks",
+        "abstract": "Neural models for amortized probabilistic clustering yield samples of cluster labels given a set-structured input, while avoiding lengthy Markov chain runs and the need for explicit data likelihoods. Existing methods which label each data point sequentially, like the Neural Clustering Process, often lead to cluster assignments highly dependent on the data order. Alternatively, methods that sequentially create full clusters, do not provide assignment probabilities. In this paper, we introduce GFNCP, a novel framework for amortized clustering. GFNCP is formulated as a Generative Flow Network with a shared energy-based parametrization of policy and reward. We show that the flow matching conditions are equivalent to consistency of the clustering posterior under marginalization, which in turn implies order invariance. GFNCP also outperforms existing methods in clustering performance on both synthetic and real-world data.",
+        "arxiv_id": "2502.19337"
+    },
+    "2502.19249": {
+        "SCORE": 17,
+        "ARXIVID": "2502.19249",
+        "COMMENT": "The paper investigates pre-pretraining on formal languages to improve linguistic biases in LLMs, which provides insights into foundational aspects of LLM behavior and interpretability.",
+        "RELEVANCE": 9,
+        "NOVELTY": 8,
+        "authors": [
+            "Michael Y. Hu",
+            "Jackson Petty",
+            "Chuan Shi",
+            "William Merrill",
+            "Tal Linzen"
+        ],
+        "title": "Between Circuits and Chomsky: Pre-pretraining on Formal Languages Imparts Linguistic Biases",
+        "abstract": "Pretraining language models on formal languages can improve their acquisition of natural language, but it is unclear which features of the formal language impart an inductive bias that leads to effective transfer. Drawing on insights from linguistics and complexity theory, we hypothesize that effective transfer occurs when the formal language both captures dependency structures in natural language and remains within the computational limitations of the model architecture. Focusing on transformers, we find that formal languages with both these properties enable language models to achieve lower loss on natural language and better linguistic generalization compared to other languages. In fact, pre-pretraining, or training on formal-then-natural language, reduces loss more efficiently than the same amount of natural language. For a 1B-parameter language model trained on roughly 1.6B tokens of natural language, pre-pretraining achieves the same loss and better linguistic generalization with a 33% smaller token budget. We also give mechanistic evidence of cross-task transfer from formal to natural language: attention heads acquired during formal language pretraining remain crucial for the model's performance on syntactic evaluations.",
+        "arxiv_id": "2502.19249"
+    },
+    "2502.19301": {
+        "SCORE": 17,
+        "ARXIVID": "2502.19301",
+        "COMMENT": "The paper introduces a gradient-based framework for LLM unlearning, which provides foundational insights into model behavior and optimization.",
+        "RELEVANCE": 9,
+        "NOVELTY": 8,
+        "authors": [
+            "Qizhou Wang",
+            "Jin Peng Zhou",
+            "Zhanke Zhou",
+            "Saebyeol Shin",
+            "Bo Han",
+            "Kilian Q. Weinberger"
+        ],
+        "title": "Rethinking LLM Unlearning Objectives: A Gradient Perspective and Go Beyond",
+        "abstract": "Large language models (LLMs) should undergo rigorous audits to identify potential risks, such as copyright and privacy infringements. Once these risks emerge, timely updates are crucial to remove undesirable responses, ensuring legal and safe model usage. It has spurred recent research into LLM unlearning, focusing on erasing targeted undesirable knowledge without compromising the integrity of other, non-targeted responses. Existing studies have introduced various unlearning objectives to pursue LLM unlearning without necessitating complete retraining. However, each of these objectives has unique properties, and no unified framework is currently available to comprehend them thoroughly. To fill the gap, we propose a toolkit of the gradient effect (G-effect), quantifying the impacts of unlearning objectives on model performance from a gradient perspective. A notable advantage is its broad ability to detail the unlearning impacts from various aspects across instances, updating steps, and LLM layers. Accordingly, the G-effect offers new insights into identifying drawbacks of existing unlearning objectives, further motivating us to explore a series of new solutions for their mitigation and improvements. Finally, we outline promising directions that merit further studies, aiming at contributing to the community to advance this important field.",
+        "arxiv_id": "2502.19301"
+    },
+    "2502.18959": {
+        "SCORE": 17,
+        "ARXIVID": "2502.18959",
+        "COMMENT": "Introduces a novel neural network architecture (FMMNN) with theoretical insights into its expressive power and optimization landscape, aligning with the 'Model Architecture' criterion.",
+        "RELEVANCE": 9,
+        "NOVELTY": 8,
+        "authors": [
+            "Shijun Zhang",
+            "Hongkai Zhao",
+            "Yimin Zhong",
+            "Haomin Zhou"
+        ],
+        "title": "Fourier Multi-Component and Multi-Layer Neural Networks: Unlocking High-Frequency Potential",
+        "abstract": "The two most critical ingredients of a neural network are its structure and the activation function employed, and more importantly, the proper alignment of these two that is conducive to the effective representation and learning in practice. In this work, we introduce a surprisingly effective synergy, termed the Fourier Multi-Component and Multi-Layer Neural Network (FMMNN), and demonstrate its surprising adaptability and efficiency in capturing high-frequency components. First, we theoretically establish that FMMNNs have exponential expressive power in terms of approximation capacity. Next, we analyze the optimization landscape of FMMNNs and show that it is significantly more favorable compared to fully connected neural networks. Finally, systematic and extensive numerical experiments validate our findings, demonstrating that FMMNNs consistently achieve superior accuracy and efficiency across various tasks, particularly impressive when high-frequency components are present.",
+        "arxiv_id": "2502.18959"
+    },
+    "2502.19002": {
+        "SCORE": 17,
+        "ARXIVID": "2502.19002",
+        "COMMENT": "Proposes a novel blockwise learning rate strategy for Transformers, aligning with 'Large Language Models' and providing theoretical insights into training dynamics.",
+        "RELEVANCE": 9,
+        "NOVELTY": 8,
+        "authors": [
+            "Jinbo Wang",
+            "Mingze Wang",
+            "Zhanpeng Zhou",
+            "Junchi Yan",
+            "Weinan E",
+            "Lei Wu"
+        ],
+        "title": "The Sharpness Disparity Principle in Transformers for Accelerating Language Model Pre-Training",
+        "abstract": "Transformers consist of diverse building blocks, such as embedding layers, normalization layers, self-attention mechanisms, and point-wise feedforward networks. Thus, understanding the differences and interactions among these blocks is important. In this paper, we uncover a clear Sharpness Disparity across these blocks, which emerges early in training and intriguingly persists throughout the training process. Motivated by this finding, we propose Blockwise Learning Rate (LR), a strategy that tailors the LR to each block's sharpness, accelerating large language model (LLM) pre-training. By integrating Blockwise LR into AdamW, we consistently achieve lower terminal loss and nearly $2\\times$ speedup compared to vanilla AdamW. We demonstrate this acceleration across GPT-2 and LLaMA, with model sizes ranging from 0.12B to 1.1B and datasets of OpenWebText and MiniPile. Finally, we incorporate Blockwise LR into Adam-mini (Zhang et al., 2024), a recently proposed memory-efficient variant of Adam, achieving a combined $2\\times$ speedup and $2\\times$ memory saving. These results underscore the potential of exploiting the sharpness disparity to improve LLM training.",
+        "arxiv_id": "2502.19002"
+    },
+    "2502.18969": {
+        "SCORE": 17,
+        "ARXIVID": "2502.18969",
+        "COMMENT": "The paper surveys scaling laws in foundation models, which is highly relevant to understanding LLM behavior and training dynamics.",
+        "RELEVANCE": 9,
+        "NOVELTY": 8,
+        "authors": [
+            "Margaret Li",
+            "Sneha Kudugunta",
+            "Luke Zettlemoyer"
+        ],
+        "title": "(Mis)Fitting: A Survey of Scaling Laws",
+        "abstract": "Modern foundation models rely heavily on using scaling laws to guide crucial training decisions. Researchers often extrapolate the optimal architecture and hyper parameters settings from smaller training runs by describing the relationship between, loss, or task performance, and scale. All components of this process vary, from the specific equation being fit, to the training setup, to the optimization method. Each of these factors may affect the fitted law, and therefore, the conclusions of a given study. We discuss discrepancies in the conclusions that several prior works reach, on questions such as the optimal token to parameter ratio. We augment this discussion with our own analysis of the critical impact that changes in specific details may effect in a scaling study, and the resulting altered conclusions. Additionally, we survey over 50 papers that study scaling trends: while 45 of these papers quantify these trends using a power law, most under-report crucial details needed to reproduce their findings. To mitigate this, we we propose a checklist for authors to consider while contributing to scaling law research.",
+        "arxiv_id": "2502.18969"
+    },
+    "2502.18865": {
+        "SCORE": 17,
+        "ARXIVID": "2502.18865",
+        "COMMENT": "This paper provides a theoretical analysis of Self-consuming Training Loops (STLs), addressing model collapse and recursive stability. It offers insights into the interplay between model architecture and data composition, which aligns with foundational research in model training dynamics and architecture behavior. The extension to transformers and in-context learning adds further relevance.",
+        "RELEVANCE": 9,
+        "NOVELTY": 8,
+        "authors": [
+            "Shi Fu",
+            "Yingjie Wang",
+            "Yuzhu Chen",
+            "Xinmei Tian",
+            "Dacheng Tao"
+        ],
+        "title": "A Theoretical Perspective: How to Prevent Model Collapse in Self-consuming Training Loops",
+        "abstract": "High-quality data is essential for training large generative models, yet the vast reservoir of real data available online has become nearly depleted. Consequently, models increasingly generate their own data for further training, forming Self-consuming Training Loops (STLs). However, the empirical results have been strikingly inconsistent: some models degrade or even collapse, while others successfully avoid these failures, leaving a significant gap in theoretical understanding to explain this discrepancy. This paper introduces the intriguing notion of recursive stability and presents the first theoretical generalization analysis, revealing how both model architecture and the proportion between real and synthetic data influence the success of STLs. We further extend this analysis to transformers in in-context learning, showing that even a constant-sized proportion of real data ensures convergence, while also providing insights into optimal synthetic data sizing.",
+        "arxiv_id": "2502.18865"
+    },
+    "2502.18886": {
+        "SCORE": 16,
+        "ARXIVID": "2502.18886",
+        "COMMENT": "The paper explores pruning methods for state-space models (SSMs) as an alternative to transformer-based LLMs, aligning with the 'Model Compression' criterion. It provides insights into pruning techniques and their effects on SSMs, which is relevant to foundational research in efficiency.",
+        "RELEVANCE": 9,
+        "NOVELTY": 7,
+        "authors": [
+            "Tamer Ghattas",
+            "Michael Hassid",
+            "Roy Schwartz"
+        ],
+        "title": "On Pruning State-Space LLMs",
+        "abstract": "Recent work proposed state-space models (SSMs) as an efficient alternative to transformer-based LLMs. Can these models be pruned to further reduce their computation costs? We adapt several pruning methods to the SSM structure, and apply them to four SSM-based LLMs across multiple tasks. We find that such models are quite robust to some pruning methods (e.g. WANDA), while using other methods lead to fast performance degradation.",
+        "arxiv_id": "2502.18886"
+    },
+    "2502.18553": {
+        "SCORE": 16,
+        "ARXIVID": "2502.18553",
+        "COMMENT": "This paper provides a review of statistical field theory applied to deep learning, which could offer theoretical insights into representation learning and training dynamics.",
+        "RELEVANCE": 9,
+        "NOVELTY": 7,
+        "authors": [
+            "Zohar Ringel",
+            "Noa Rubin",
+            "Edo Mor",
+            "Moritz Helias",
+            "Inbar Seroussi"
+        ],
+        "title": "Applications of Statistical Field Theory in Deep Learning",
+        "abstract": "Deep learning algorithms have made incredible strides in the past decade yet due to the complexity of these algorithms, the science of deep learning remains in its early stages. Being an experimentally driven field, it is natural to seek a theory of deep learning within the physics paradigm. As deep learning is largely about learning functions and distributions over functions, statistical field theory, a rich and versatile toolbox for tackling complex distributions over functions (fields) is an obvious choice of formalism. Research efforts carried out in the past few years have demonstrated the ability of field theory to provide useful insights on generalization, implicit bias, and feature learning effects. Here we provide a pedagogical review of this emerging line of research.",
+        "arxiv_id": "2502.18553"
+    },
+    "2502.18830": {
+        "SCORE": 16,
+        "ARXIVID": "2502.18830",
+        "COMMENT": "Presents a novel algorithm for approximate matrix multiplication in sliding windows with theoretical guarantees, aligning with 'Model Compression' and efficiency breakthroughs.",
+        "RELEVANCE": 8,
+        "NOVELTY": 8,
+        "authors": [
+            "Ziqi Yao",
+            "Mingsong Chen",
+            "Cheng Chen"
+        ],
+        "title": "Optimal Approximate Matrix Multiplication over Sliding Windows",
+        "abstract": "We explore the problem of approximate matrix multiplication (AMM) within the sliding window model, where algorithms utilize limited space to perform large-scale matrix multiplication in a streaming manner. This model has garnered increasing attention in the fields of machine learning and data mining due to its ability to handle time sensitivity and reduce the impact of outdated data. However, despite recent advancements, determining the optimal space bound for this problem remains an open question. In this paper, we introduce the DS-COD algorithm for AMM over sliding windows. This novel and deterministic algorithm achieves optimal performance regarding the space-error tradeoff. We provide theoretical error bounds and the complexity analysis for the proposed algorithm, and establish the corresponding space lower bound for the AMM sliding window problem. Additionally, we present an adaptive version of DS-COD, termed aDS-COD, which improves computational efficiency and demonstrates superior empirical performance. Extensive experiments conducted on both synthetic and real-world datasets validate our theoretical findings and highlight the practical effectiveness of our methods.",
+        "arxiv_id": "2502.18830"
+    },
+    "2502.19183": {
+        "SCORE": 16,
+        "ARXIVID": "2502.19183",
+        "COMMENT": "The paper introduces a novel method for estimating information-theoretic quantities using Continuous-Time Markov Chains, which could have implications for representation learning and foundational methods in information theory.",
+        "RELEVANCE": 8,
+        "NOVELTY": 8,
+        "authors": [
+            "Alberto Foresti",
+            "Giulio Franzese",
+            "Pietro Michiardi"
+        ],
+        "title": "INFO-SEDD: Continuous Time Markov Chains as Scalable Information Metrics Estimators",
+        "abstract": "Information-theoretic quantities play a crucial role in understanding non-linear relationships between random variables and are widely used across scientific disciplines. However, estimating these quantities remains an open problem, particularly in the case of high-dimensional discrete distributions. Current approaches typically rely on embedding discrete data into a continuous space and applying neural estimators originally designed for continuous distributions, a process that may not fully capture the discrete nature of the underlying data. We consider Continuous-Time Markov Chains (CTMCs), stochastic processes on discrete state-spaces which have gained popularity due to their generative modeling applications. In this work, we introduce INFO-SEDD, a novel method for estimating information-theoretic quantities of discrete data, including mutual information and entropy. Our approach requires the training of a single parametric model, offering significant computational and memory advantages. Additionally, it seamlessly integrates with pretrained networks, allowing for efficient reuse of pretrained generative models. To evaluate our approach, we construct a challenging synthetic benchmark. Our experiments demonstrate that INFO-SEDD is robust and outperforms neural competitors that rely on embedding techniques. Moreover, we validate our method on a real-world task: estimating the entropy of an Ising model. Overall, INFO-SEDD outperforms competing methods and shows scalability to high-dimensional scenarios, paving the way for new applications where estimating MI between discrete distribution is the focus. The promising results in this complex, high-dimensional scenario highlight INFO-SEDD as a powerful new estimator in the toolkit for information-theoretical analysis.",
+        "arxiv_id": "2502.19183"
+    },
+    "2502.18808": {
+        "SCORE": 16,
+        "ARXIVID": "2502.18808",
+        "COMMENT": "The paper proposes an improved stochastic trace estimator for generative modeling, which aligns with foundational research in efficiency and optimization methods.",
+        "RELEVANCE": 8,
+        "NOVELTY": 8,
+        "authors": [
+            "Xinyang Liu",
+            "Hengrong Du",
+            "Wei Deng",
+            "Ruqi Zhang"
+        ],
+        "title": "Optimal Stochastic Trace Estimation in Generative Modeling",
+        "abstract": "Hutchinson estimators are widely employed in training divergence-based likelihoods for diffusion models to ensure optimal transport (OT) properties. However, this estimator often suffers from high variance and scalability concerns. To address these challenges, we investigate Hutch++, an optimal stochastic trace estimator for generative models, designed to minimize training variance while maintaining transport optimality. Hutch++ is particularly effective for handling ill-conditioned matrices with large condition numbers, which commonly arise when high-dimensional data exhibits a low-dimensional structure. To mitigate the need for frequent and costly QR decompositions, we propose practical schemes that balance frequency and accuracy, backed by theoretical guarantees. Our analysis demonstrates that Hutch++ leads to generations of higher quality. Furthermore, this method exhibits effective variance reduction in various applications, including simulations, conditional time series forecasts, and image generation.",
+        "arxiv_id": "2502.18808"
+    },
+    "2502.18915": {
+        "SCORE": 15,
+        "ARXIVID": "2502.18915",
+        "COMMENT": "The paper introduces Early Noise Dropping (END), which provides insights into how LLMs process noisy contexts and improves efficiency. This aligns with foundational research on LLM behavior and interpretability.",
+        "RELEVANCE": 8,
+        "NOVELTY": 7,
+        "authors": [
+            "Hongye Jin",
+            "Pei Chen",
+            "Jingfeng Yang",
+            "Zhengyang Wang",
+            "Meng Jiang",
+            "Yifan Gao",
+            "Binxuan Huang",
+            "Xinyang Zhang",
+            "Zheng Li",
+            "Tianyi Liu",
+            "Huasheng Li",
+            "Bing Yin"
+        ],
+        "title": "END: Early Noise Dropping for Efficient and Effective Context Denoising",
+        "abstract": "Large Language Models (LLMs) have demonstrated remarkable performance across a wide range of natural language processing tasks. However, they are often distracted by irrelevant or noisy context in input sequences that degrades output quality. This problem affects both long- and short-context scenarios, such as retrieval-augmented generation, table question-answering, and in-context learning. We reveal that LLMs can implicitly identify whether input sequences contain useful information at early layers, prior to token generation. Leveraging this insight, we introduce Early Noise Dropping (\\textsc{END}), a novel approach to mitigate this issue without requiring fine-tuning the LLMs. \\textsc{END} segments input sequences into chunks and employs a linear prober on the early layers of LLMs to differentiate between informative and noisy chunks. By discarding noisy chunks early in the process, \\textsc{END} preserves critical information, reduces distraction, and lowers computational overhead. Extensive experiments demonstrate that \\textsc{END} significantly improves both performance and efficiency across different LLMs on multiple evaluation datasets. Furthermore, by investigating LLMs' implicit understanding to the input with the prober, this work also deepens understanding of how LLMs do reasoning with contexts internally.",
+        "arxiv_id": "2502.18915"
+    },
+    "2502.18845": {
+        "SCORE": 15,
+        "ARXIVID": "2502.18845",
+        "COMMENT": "The paper proposes a sliding window attention mechanism to improve efficiency in LLMs, which aligns with foundational research in model architecture and efficiency improvements.",
+        "RELEVANCE": 8,
+        "NOVELTY": 7,
+        "authors": [
+            "Zichuan Fu",
+            "Wentao Song",
+            "Yejing Wang",
+            "Xian Wu",
+            "Yefeng Zheng",
+            "Yingying Zhang",
+            "Derong Xu",
+            "Xuetao Wei",
+            "Tong Xu",
+            "Xiangyu Zhao"
+        ],
+        "title": "Sliding Window Attention Training for Efficient Large Language Models",
+        "abstract": "Recent advances in transformer-based Large Language Models (LLMs) have demonstrated remarkable capabilities across various tasks. However, their quadratic computational complexity concerning sequence length remains a significant bottleneck for processing long documents. As a result, many efforts like sparse attention and state space models have been proposed to improve the efficiency of LLMs over long sequences. Though effective, these approaches compromise the performance or introduce structural complexity. This calls for a simple yet efficient model that preserves the fundamental Transformer architecture. To this end, we introduce SWAT, which enables efficient long-context handling via Sliding Window Attention Training. This paper first attributes the inefficiency of Transformers to the attention sink phenomenon resulting from the high variance of softmax operation. Then, we replace softmax with the sigmoid function and utilize a balanced ALiBi and Rotary Position Embedding for efficient information compression and retention. Experiments demonstrate that SWAT achieves SOTA performance compared with state-of-the-art linear recurrent architectures on eight benchmarks. Code is available at https://anonymous.4open.science/r/SWAT-attention.",
+        "arxiv_id": "2502.18845"
+    },
+    "2502.18538": {
+        "SCORE": 15,
+        "ARXIVID": "2502.18538",
+        "COMMENT": "The paper revisits CNNs for DNA foundation models, proposing ConvNova with architectural innovations like dilated and gated convolutions. It aligns with the 'Model Architecture' criterion by challenging the dominance of Transformers and SSMs.",
+        "RELEVANCE": 8,
+        "NOVELTY": 7,
+        "authors": [
+            "Yu Bo",
+            "Weian Mao",
+            "Yanjun Shao",
+            "Weiqiang Bai",
+            "Peng Ye",
+            "Xinzhu Ma",
+            "Junbo Zhao",
+            "Hao Chen",
+            "Chunhua Shen"
+        ],
+        "title": "Revisiting Convolution Architecture in the Realm of DNA Foundation Models",
+        "abstract": "In recent years, a variety of methods based on Transformer and state space model (SSM) architectures have been proposed, advancing foundational DNA language models. However, there is a lack of comparison between these recent approaches and the classical architecture convolutional networks (CNNs) on foundation model benchmarks. This raises the question: are CNNs truly being surpassed by these recent approaches based on transformer and SSM architectures? In this paper, we develop a simple but well-designed CNN-based method termed ConvNova. ConvNova identifies and proposes three effective designs: 1) dilated convolutions, 2) gated convolutions, and 3) a dual-branch framework for gating mechanisms. Through extensive empirical experiments, we demonstrate that ConvNova significantly outperforms recent methods on more than half of the tasks across several foundation model benchmarks. For example, in histone-related tasks, ConvNova exceeds the second-best method by an average of 5.8%, while generally utilizing fewer parameters and enabling faster computation. In addition, the experiments observed findings that may be related to biological characteristics. This indicates that CNNs are still a strong competitor compared to Transformers and SSMs. We anticipate that this work will spark renewed interest in CNN-based methods for DNA foundation models.",
+        "arxiv_id": "2502.18538"
+    },
+    "2502.18975": {
+        "SCORE": 15,
+        "ARXIVID": "2502.18975",
+        "COMMENT": "The paper introduces a novel training approach to enhance robustness in neural networks, which aligns with representation learning and training dynamics.",
+        "RELEVANCE": 8,
+        "NOVELTY": 7,
+        "authors": [
+            "Martin Surner",
+            "Abdelmajid Khelil",
+            "Ludwig Bothmann"
+        ],
+        "title": "Invariance Pair-Guided Learning: Enhancing Robustness in Neural Networks",
+        "abstract": "Out-of-distribution generalization of machine learning models remains challenging since the models are inherently bound to the training data distribution. This especially manifests, when the learned models rely on spurious correlations. Most of the existing approaches apply data manipulation, representation learning, or learning strategies to achieve generalizable models. Unfortunately, these approaches usually require multiple training domains, group labels, specialized augmentation, or pre-processing to reach generalizable models. We propose a novel approach that addresses these limitations by providing a technique to guide the neural network through the training phase. We first establish input pairs, representing the spurious attribute and describing the invariance, a characteristic that should not affect the outcome of the model. Based on these pairs, we form a corrective gradient complementing the traditional gradient descent approach. We further make this correction mechanism adaptive based on a predefined invariance condition. Experiments on ColoredMNIST, Waterbird-100, and CelebA datasets demonstrate the effectiveness of our approach and the robustness to group shifts.",
+        "arxiv_id": "2502.18975"
+    },
+    "2502.18512": {
+        "SCORE": 15,
+        "ARXIVID": "2502.18512",
+        "COMMENT": "The paper proposes a token compression framework for vision-language models, which aligns with model compression and efficiency improvements.",
+        "RELEVANCE": 8,
+        "NOVELTY": 7,
+        "authors": [
+            "Jianjian Li",
+            "Junquan Fan",
+            "Feng Tang",
+            "Gang Huang",
+            "Shitao Zhu",
+            "Songlin Liu",
+            "Nian Xie",
+            "Wulong Liu",
+            "Yong Liao"
+        ],
+        "title": "FCoT-VL:Advancing Text-oriented Large Vision-Language Models with Efficient Visual Token Compression",
+        "abstract": "The rapid success of Vision Large Language Models (VLLMs) often depends on the high-resolution images with abundant visual tokens, which hinders training and deployment efficiency. Current training-free visual token compression methods exhibit serious performance degradation in tasks involving high-resolution, text-oriented image understanding and reasoning. In this paper, we propose an efficient visual token compression framework for text-oriented VLLMs in high-resolution scenarios. In particular, we employ a light-weight self-distillation pre-training stage to compress the visual tokens, requiring a limited numbers of image-text pairs and minimal learnable parameters. Afterwards, to mitigate potential performance degradation of token-compressed models, we construct a high-quality post-train stage. To validate the effectiveness of our method, we apply it to an advanced VLLMs, InternVL2. Experimental results show that our approach significantly reduces computational overhead while outperforming the baselines across a range of text-oriented benchmarks. We will release the models and code soon.",
+        "arxiv_id": "2502.18512"
+    },
+    "2502.19414": {
+        "SCORE": 15,
+        "ARXIVID": "2502.19414",
+        "COMMENT": "The paper evaluates LLMs' ability to falsify solutions, which is a novel perspective on reasoning and interpretability in LLMs.",
+        "RELEVANCE": 8,
+        "NOVELTY": 7,
+        "authors": [
+            "Shiven Sinha",
+            "Shashwat Goel",
+            "Ponnurangam Kumaraguru",
+            "Jonas Geiping",
+            "Matthias Bethge",
+            "Ameya Prabhu"
+        ],
+        "title": "Can Language Models Falsify? Evaluating Algorithmic Reasoning with Counterexample Creation",
+        "abstract": "There is growing excitement about the potential of Language Models (LMs) to accelerate scientific discovery. Falsifying hypotheses is key to scientific progress, as it allows claims to be iteratively refined over time. This process requires significant researcher effort, reasoning, and ingenuity. Yet current benchmarks for LMs predominantly assess their ability to generate solutions rather than challenge them. We advocate for developing benchmarks that evaluate this inverse capability - creating counterexamples for subtly incorrect solutions. To demonstrate this approach, we start with the domain of algorithmic problem solving, where counterexamples can be evaluated automatically using code execution. Specifically, we introduce REFUTE, a dynamically updating benchmark that includes recent problems and incorrect submissions from programming competitions, where human experts successfully identified counterexamples. Our analysis finds that the best reasoning agents, even OpenAI o3-mini (high) with code execution feedback, can create counterexamples for only <9% of incorrect solutions in REFUTE, even though ratings indicate its ability to solve up to 48% of these problems from scratch. We hope our work spurs progress in evaluating and enhancing LMs' ability to falsify incorrect solutions - a capability that is crucial for both accelerating research and making models self-improve through reliable reflective reasoning.",
+        "arxiv_id": "2502.19414"
+    },
+    "2502.18862": {
+        "SCORE": 15,
+        "ARXIVID": "2502.18862",
+        "COMMENT": "The paper investigates steering vectors for LLMs, which aligns with 'Representation Learning' as it explores how LLMs encode and control behaviors. The focus on one-shot optimization and generalization adds novelty.",
+        "RELEVANCE": 8,
+        "NOVELTY": 7,
+        "authors": [
+            "Jacob Dunefsky",
+            "Arman Cohan"
+        ],
+        "title": "Investigating Generalization of One-shot LLM Steering Vectors",
+        "abstract": "Steering vectors have emerged as a promising approach for interpreting and controlling LLMs, but current methods typically require large contrastive datasets that are often impractical to construct and may capture spurious correlations. We propose directly optimizing steering vectors through gradient descent on a single training example, and systematically investigate how these vectors generalize. We consider several steering optimization techniques, including multiple novel ones, and find that the resulting vectors effectively mediate safety-relevant behaviors in multiple models. Indeed, in experiments on an alignment-faking model, we are able to optimize one-shot steering vectors that induce harmful behavior on benign examples and whose negations suppress harmful behavior on malign examples. And in experiments on refusal suppression, we demonstrate that one-shot optimized steering vectors can transfer across inputs, yielding a Harmbench attack success rate of 96.9%. Furthermore, to quantitatively assess steering effectiveness in instruction-tuned models, we develop a novel evaluation framework using sequence probabilities from the corresponding base model. With this framework, we analyze how steering vectors modulate an instruction-tuned LLM's ability to recover from outputting false information, and find that this ability derives from the base model. Overall, our findings suggest that optimizing steering vectors on a single example can mediate misaligned behavior in LLMs, and provide a path toward better understanding the relationship between LLM behavior and activation space structure.",
+        "arxiv_id": "2502.18862"
+    },
+    "2502.18482": {
+        "SCORE": 15,
+        "ARXIVID": "2502.18482",
+        "COMMENT": "Proposes a dynamic routing system for mixed LLMs, which aligns with 'Model Architecture' through its focus on dynamic systems and efficiency improvements.",
+        "RELEVANCE": 8,
+        "NOVELTY": 7,
+        "authors": [
+            "Xinyuan Wang",
+            "Yanchi Liu",
+            "Wei Cheng",
+            "Xujiang Zhao",
+            "Zhengzhang Chen",
+            "Wenchao Yu",
+            "Yanjie Fu",
+            "Haifeng Chen"
+        ],
+        "title": "MixLLM: Dynamic Routing in Mixed Large Language Models",
+        "abstract": "Large Language Models (LLMs) exhibit potential artificial generic intelligence recently, however, their usage is costly with high response latency. Given mixed LLMs with their own strengths and weaknesses, LLM routing aims to identify the most suitable model for each query in the stream to maximize response quality and minimize cost and latency. However, the challenges involve: (1) dynamic trade-offs among quality, cost, and latency; (2) enabling continual learning in deployed systems; and (3) navigating a varying (e.g., new LLM addition or old LLM removal) set of LLM candidates over time. To bridge these gaps, we develop MixLLM, a dynamic contextual-bandit-based routing system for query-LLM assignment. Specifically, we first leverage query tags to enhance query embeddings for the routing task. Next, we design lightweight prediction models to estimate the response qualities and costs of queries over LLMs. We then devise a meta-decision maker to choose the query-LLM assignments to best tradeoff response quality, cost, and latency. Finally, the system benefits from continual training, allowing it to adapt to evolving queries and user feedback over time. Our extensive experiments show that MixLLM achieves the best trade-offs in response quality, cost, and latency (97.25% of GPT-4's quality at 24.18% of the cost under the time constraint).",
+        "arxiv_id": "2502.18482"
+    },
+    "2502.18499": {
+        "SCORE": 15,
+        "ARXIVID": "2502.18499",
+        "COMMENT": "The paper investigates the mechanistic understanding of language models in syntactic code completion, which aligns with interpretability and training dynamics in LLMs.",
+        "RELEVANCE": 8,
+        "NOVELTY": 7,
+        "authors": [
+            "Samuel Miller",
+            "Daking Rai",
+            "Ziyu Yao"
+        ],
+        "title": "Mechanistic Understanding of Language Models in Syntactic Code Completion",
+        "abstract": "Recently, language models (LMs) have shown impressive proficiency in code generation tasks, especially when fine-tuned on code-specific datasets, commonly known as Code LMs. However, our understanding of the internal decision-making processes of Code LMs, such as how they use their (syntactic or semantic) knowledge, remains limited, which could lead to unintended harm as they are increasingly used in real life. This motivates us to conduct one of the first Mechanistic Interpretability works to understand how Code LMs perform a syntactic completion task, specifically the closing parenthesis task, on the CodeLlama-7b model (Roziere et al. 2023). Our findings reveal that the model requires middle-later layers until it can confidently predict the correct label for the closing parenthesis task. Additionally, we identify that while both multi-head attention (MHA) and feed-forward (FF) sub-layers play essential roles, MHA is particularly crucial. Furthermore, we also discover attention heads that keep track of the number of already closed parentheses precisely but may or may not promote a correct number of closing parentheses that are still missing, leading to a positive or negative impact on the model's performance.",
+        "arxiv_id": "2502.18499"
+    },
+    "2502.19053": {
+        "SCORE": 15,
+        "ARXIVID": "2502.19053",
+        "COMMENT": "This paper explores training methods for physical neural networks (PNNs) by blending optimal control and biologically plausible learning. It aligns with 'Emerging Trends' by proposing a novel training paradigm for neuromorphic systems.",
+        "RELEVANCE": 7,
+        "NOVELTY": 8,
+        "authors": [
+            "Satoshi Sunada",
+            "Tomoaki Niiyama",
+            "Kazutaka Kanno",
+            "Rin Nogami",
+            "Andr\\'e R\\\"ohm",
+            "Takato Awano",
+            "Atsushi Uchida"
+        ],
+        "title": "Blending Optimal Control and Biologically Plausible Learning for Noise-Robust Physical Neural Networks",
+        "abstract": "The rapidly increasing computational demands for artificial intelligence (AI) have spurred the exploration of computing principles beyond conventional digital computers. Physical neural networks (PNNs) offer efficient neuromorphic information processing by harnessing the innate computational power of physical processes; however, training their weight parameters is computationally expensive. We propose a training approach for substantially reducing this training cost. Our training approach merges an optimal control method for continuous-time dynamical systems with a biologically plausible training method--direct feedback alignment. In addition to the reduction of training time, this approach achieves robust processing even under measurement errors and noise without requiring detailed system information. The effectiveness was numerically and experimentally verified in an optoelectronic delay system. Our approach significantly extends the range of physical systems practically usable as PNNs.",
+        "arxiv_id": "2502.19053"
+    },
+    "2502.19008": {
+        "SCORE": 14,
+        "ARXIVID": "2502.19008",
+        "COMMENT": "The paper surveys binary quantization techniques for LLMs, aligning with the 'Model Compression' criterion. It provides a comprehensive review of binary quantization methods, which is relevant to efficiency improvements.",
+        "RELEVANCE": 8,
+        "NOVELTY": 6,
+        "authors": [
+            "Liangdong Liu",
+            "Zhitong Zheng",
+            "Cong Wang",
+            "Tianhuang Su",
+            "Zhenyu Yang"
+        ],
+        "title": "Binary Neural Networks for Large Language Model: A Survey",
+        "abstract": "Large language models (LLMs) have wide applications in the field of natural language processing(NLP), such as GPT-4 and Llama. However, with the exponential growth of model parameter sizes, LLMs bring significant resource overheads. Low-bit quantization, as a key technique, reduces memory usage and computational demands by decreasing the bit-width of model parameters, activations, and gradients. Previous quantization methods for LLMs have largely employed Post-Training Quantization (PTQ) and Quantization-Aware Training (QAT). PTQ does not require any retraining of the original model, while QAT involves optimizing precision during training to achieve the best quantization parameters. The BitNet team proposed a radically different approach, where quantization is performed from the start of model training, utilizing low-precision binary weights during the training process. This approach has led to the emergence of many binary quantization techniques for large language models. This paper provides a comprehensive review of these binary quantization techniques. Specifically, we will introduce binary quantization techniques in deep neural networks and further explore their application to LLMs, reviewing their various contributions, implementations, and applications.",
+        "arxiv_id": "2502.19008"
+    },
+    "2502.19254": {
+        "SCORE": 14,
+        "ARXIVID": "2502.19254",
+        "COMMENT": "The paper explores conformal prediction and its efficiency, which could have implications for foundational research in prediction and uncertainty quantification.",
+        "RELEVANCE": 7,
+        "NOVELTY": 7,
+        "authors": [
+            "Vladimir Vovk"
+        ],
+        "title": "Set and functional prediction: randomness, exchangeability, and conformal",
+        "abstract": "This paper continues the study of the efficiency of conformal prediction as compared with more general randomness prediction and exchangeability prediction. It does not restrict itself to the case of classification, and our results will also be applicable to the case of regression. The price to pay is that efficiency will be attained only on average, albeit with respect to a wide range of probability measures on the label space.",
+        "arxiv_id": "2502.19254"
+    }
+}

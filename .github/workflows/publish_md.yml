@@ -35,18 +35,18 @@ jobs:
       - name: Display structure of downloaded files
         run: ls -R
 
-      - name: Check for output.md
+      - name: Check for latest.md
         id: check_files
         uses: andstor/file-existence-action@v3
         with:
-          files: output.md
+          files: latest.md
 
-      - name: Convert output.md to pages
+      - name: Convert latest.md to pages
         uses: wranders/markdown-to-pages-action@v1
         if: steps.check_files.outputs.files_exists == 'true'
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          files: output.md
+          files: latest.md
 
       - uses: actions/upload-pages-artifact@v3
         if: steps.check_files.outputs.files_exists == 'true'

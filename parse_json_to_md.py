@@ -100,6 +100,6 @@ if __name__ == "__main__":
             ["**Cost**", f"${0.5}", f"${0.5}", f"${1.0}"],
         ]
     }
-    # write to output.md
-    with open("out/output.md", "w") as f:
+    # write to latest.md
+    with open("out/latest.md", "w") as f:
         f.write(render_md_string(output, head_table=head_table))

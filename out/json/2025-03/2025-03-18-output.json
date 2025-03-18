@@ -1,0 +1,782 @@
+{
+    "2503.12211": {
+        "SCORE": 18,
+        "ARXIVID": "2503.12211",
+        "COMMENT": "The paper introduces a GPU-efficient alternative to matrix multiplication in DNNs, which aligns with model compression and efficiency breakthroughs. The Strassen-Tile operator is a novel contribution.",
+        "RELEVANCE": 9,
+        "NOVELTY": 9,
+        "authors": [
+            "Nir Ailon",
+            "Akhiad Bercovich",
+            "Omri Weinstein"
+        ],
+        "title": "Changing Base Without Losing Pace: A GPU-Efficient Alternative to MatMul in DNNs",
+        "abstract": "We propose a cheaper alternative bilinear operator to matrix-multiplication in deep neural networks (DNNs). Unlike many stubborn attempts to accelerate MatMuls in DNN inference, this operator is supported by capabilities of existing GPU hardware, most notably NVIDIA TensorCores. To our knowledge, this is the first GPU-native acceleration technique which \\emph{does not decrease} (in fact, increases) the number of trainable parameters of the network, mitigating the accuracy-loss of compression-based techniques. Hence, this operator is at the same time more expressive than MatMul, yet requires substantially \\emph{fewer} FLOPs to evaluate. We term this new operator \\emph{Strassen-Tile} (STL).   The main idea behind STL$(X,W)$ is a \\emph{local} change-of-basis (learnable encoder) on weights and activation \\emph{tiles}, after which we perform batched \\emph{elementwise} products between tiles, and a final decoding transformation (inspired by algebraic pipelines from fast matrix and polynomial multiplication).   We compare STL against two benchmarks. The first one is SoTA T2T-ViT on Imagenet-1K. Here we show that replacing \\emph{all} linear layers with STL and training from scratch, results in factor x2.7 reduction in FLOPs with a 0.5 \\emph{accuracy improvement}. Our second speed-accuracy comparison benchmark for pretrained LLMs is the most practical GPU-acceleration technique, \\twofour structured Sparsity. Finetuning TinyLlama \\cite{tinyllama24} with STL layers on the Slim Pajama dataset, achieves similar accuracy to 2:4, with x2.2 FLOP speedup compared to x1.7 of the latter.   Finally, we discuss a group-theoretic approach for discovering \\emph{universal} encoders for STL, which could lead to fast \\emph{black-box} acceleration via approximate matrix-multiplication (AMM).",
+        "arxiv_id": "2503.12211"
+    },
+    "2503.11870": {
+        "SCORE": 18,
+        "ARXIVID": "2503.11870",
+        "COMMENT": "The paper explores counterfactual realizability, which is a cutting-edge theoretical contribution with potential implications for foundational research.",
+        "RELEVANCE": 9,
+        "NOVELTY": 9,
+        "authors": [
+            "Arvind Raghavan",
+            "Elias Bareinboim"
+        ],
+        "title": "Counterfactual Realizability",
+        "abstract": "It is commonly believed that, in a real-world environment, samples can only be drawn from observational and interventional distributions, corresponding to Layers 1 and 2 of the Pearl Causal Hierarchy. Layer 3, representing counterfactual distributions, is believed to be inaccessible by definition. However, Bareinboim, Forney, and Pearl (2015) introduced a procedure that allows an agent to sample directly from a counterfactual distribution, leaving open the question of what other counterfactual quantities can be estimated directly via physical experimentation. We resolve this by introducing a formal definition of realizability, the ability to draw samples from a distribution, and then developing a complete algorithm to determine whether an arbitrary counterfactual distribution is realizable given fundamental physical constraints, such as the inability to go back in time and subject the same unit to a different experimental condition. We illustrate the implications of this new framework for counterfactual data collection using motivating examples from causal fairness and causal reinforcement learning. While the baseline approach in these motivating settings typically follows an interventional or observational strategy, we show that a counterfactual strategy provably dominates both.",
+        "arxiv_id": "2503.11870"
+    },
+    "2503.12744": {
+        "SCORE": 17,
+        "ARXIVID": "2503.12744",
+        "COMMENT": "The paper investigates the identifiability of shallow neural networks with finite samples, providing theoretical insights into network irreducibility and activation functions. This aligns with foundational research in representation learning and training dynamics.",
+        "RELEVANCE": 9,
+        "NOVELTY": 8,
+        "authors": [
+            "Yu Xia",
+            "Zhiqiang Xu"
+        ],
+        "title": "Finite Samples for Shallow Neural Networks",
+        "abstract": "This paper investigates the ability of finite samples to identify two-layer irreducible shallow networks with various nonlinear activation functions, including rectified linear units (ReLU) and analytic functions such as the logistic sigmoid and hyperbolic tangent. An ``irreducible\" network is one whose function cannot be represented by another network with fewer neurons. For ReLU activation functions, we first establish necessary and sufficient conditions for determining the irreducibility of a network. Subsequently, we prove a negative result: finite samples are insufficient for definitive identification of any irreducible ReLU shallow network. Nevertheless, we demonstrate that for a given irreducible network, one can construct a finite set of sampling points that can distinguish it from other network with the same neuron count. Conversely, for logistic sigmoid and hyperbolic tangent activation functions, we provide a positive result. We construct finite samples that enable the recovery of two-layer irreducible shallow analytic networks. To the best of our knowledge, this is the first study to investigate the exact identification of two-layer irreducible networks using finite sample function values. Our findings provide insights into the comparative performance of networks with different activation functions under limited sampling conditions.",
+        "arxiv_id": "2503.12744"
+    },
+    "2503.13236": {
+        "SCORE": 17,
+        "ARXIVID": "2503.13236",
+        "COMMENT": "The paper proposes a novel gradient extrapolation method for debiased representation learning, which aligns with foundational research in representation learning and optimization.",
+        "RELEVANCE": 9,
+        "NOVELTY": 8,
+        "authors": [
+            "Ihab Asaad",
+            "Maha Shadaydeh",
+            "Joachim Denzler"
+        ],
+        "title": "Gradient Extrapolation for Debiased Representation Learning",
+        "abstract": "Machine learning classification models trained with empirical risk minimization (ERM) often inadvertently rely on spurious correlations. When absent in the test data, these unintended associations between non-target attributes and target labels lead to poor generalization. This paper addresses this problem from a model optimization perspective and proposes a novel method, Gradient Extrapolation for Debiased Representation Learning (GERNE), designed to learn debiased representations in both known and unknown attribute training cases. GERNE uses two distinct batches with different amounts of spurious correlations to define the target gradient as the linear extrapolation of two gradients computed from each batch's loss. It is demonstrated that the extrapolated gradient, if directed toward the gradient of the batch with fewer amount of spurious correlation, can guide the training process toward learning a debiased model. GERNE can serve as a general framework for debiasing with methods, such as ERM, reweighting, and resampling, being shown as special cases. The theoretical upper and lower bounds of the extrapolation factor are derived to ensure convergence. By adjusting this factor, GERNE can be adapted to maximize the Group-Balanced Accuracy (GBA) or the Worst-Group Accuracy. The proposed approach is validated on five vision and one NLP benchmarks, demonstrating competitive and often superior performance compared to state-of-the-art baseline methods.",
+        "arxiv_id": "2503.13236"
+    },
+    "2503.11842": {
+        "SCORE": 17,
+        "ARXIVID": "2503.11842",
+        "COMMENT": "The paper provides theoretical insights into test-time training for transformers as in-context learners, which aligns with foundational research in training dynamics and large language models.",
+        "RELEVANCE": 9,
+        "NOVELTY": 8,
+        "authors": [
+            "Halil Alperen Gozeten",
+            "M. Emrullah Ildiz",
+            "Xuechen Zhang",
+            "Mahdi Soltanolkotabi",
+            "Marco Mondelli",
+            "Samet Oymak"
+        ],
+        "title": "Test-Time Training Provably Improves Transformers as In-context Learners",
+        "abstract": "Test-time training (TTT) methods explicitly update the weights of a model to adapt to the specific test instance, and they have found success in a variety of settings, including most recently language modeling and reasoning. To demystify this success, we investigate a gradient-based TTT algorithm for in-context learning, where we train a transformer model on the in-context demonstrations provided in the test prompt. Specifically, we provide a comprehensive theoretical characterization of linear transformers when the update rule is a single gradient step. Our theory (i) delineates the role of alignment between pretraining distribution and target task, (ii) demystifies how TTT can alleviate distribution shift, and (iii) quantifies the sample complexity of TTT including how it can significantly reduce the eventual sample size required for in-context learning. As our empirical contribution, we study the benefits of TTT for TabPFN, a tabular foundation model. In line with our theory, we demonstrate that TTT significantly reduces the required sample size for tabular classification (3 to 5 times fewer) unlocking substantial inference efficiency with a negligible training cost.",
+        "arxiv_id": "2503.11842"
+    },
+    "2503.12295": {
+        "SCORE": 17,
+        "ARXIVID": "2503.12295",
+        "COMMENT": "The paper explores the limitations of Transformers in high-precision numerical tasks and introduces polynomial architectures for learning numerical algorithms, which aligns with foundational research in model architecture and training dynamics.",
+        "RELEVANCE": 9,
+        "NOVELTY": 8,
+        "authors": [
+            "Jerry Liu",
+            "Jessica Grogan",
+            "Owen Dugan",
+            "Ashish Rao",
+            "Simran Arora",
+            "Atri Rudra",
+            "Christopher R\\'e"
+        ],
+        "title": "Towards Learning High-Precision Least Squares Algorithms with Sequence Models",
+        "abstract": "This paper investigates whether sequence models can learn to perform numerical algorithms, e.g. gradient descent, on the fundamental problem of least squares. Our goal is to inherit two properties of standard algorithms from numerical analysis: (1) machine precision, i.e. we want to obtain solutions that are accurate to near floating point error, and (2) numerical generality, i.e. we want them to apply broadly across problem instances. We find that prior approaches using Transformers fail to meet these criteria, and identify limitations present in existing architectures and training procedures. First, we show that softmax Transformers struggle to perform high-precision multiplications, which prevents them from precisely learning numerical algorithms. Second, we identify an alternate class of architectures, comprised entirely of polynomials, that can efficiently represent high-precision gradient descent iterates. Finally, we investigate precision bottlenecks during training and address them via a high-precision training recipe that reduces stochastic gradient noise. Our recipe enables us to train two polynomial architectures, gated convolutions and linear attention, to perform gradient descent iterates on least squares problems. For the first time, we demonstrate the ability to train to near machine precision. Applied iteratively, our models obtain 100,000x lower MSE than standard Transformers trained end-to-end and they incur a 10,000x smaller generalization gap on out-of-distribution problems. We make progress towards end-to-end learning of numerical algorithms for least squares.",
+        "arxiv_id": "2503.12295"
+    },
+    "2503.13401": {
+        "SCORE": 17,
+        "ARXIVID": "2503.13401",
+        "COMMENT": "The paper proposes using cognitive science methods to understand LLMs, which aligns with theoretical insights into LLM behavior and interpretability.",
+        "RELEVANCE": 9,
+        "NOVELTY": 8,
+        "authors": [
+            "Alexander Ku",
+            "Declan Campbell",
+            "Xuechunzi Bai",
+            "Jiayi Geng",
+            "Ryan Liu",
+            "Raja Marjieh",
+            "R. Thomas McCoy",
+            "Andrew Nam",
+            "Ilia Sucholutsky",
+            "Veniamin Veselovsky",
+            "Liyi Zhang",
+            "Jian-Qiao Zhu",
+            "Thomas L. Griffiths"
+        ],
+        "title": "Using the Tools of Cognitive Science to Understand Large Language Models at Different Levels of Analysis",
+        "abstract": "Modern artificial intelligence systems, such as large language models, are increasingly powerful but also increasingly hard to understand. Recognizing this problem as analogous to the historical difficulties in understanding the human mind, we argue that methods developed in cognitive science can be useful for understanding large language models. We propose a framework for applying these methods based on Marr's three levels of analysis. By revisiting established cognitive science techniques relevant to each level and illustrating their potential to yield insights into the behavior and internal organization of large language models, we aim to provide a toolkit for making sense of these new kinds of minds.",
+        "arxiv_id": "2503.13401"
+    },
+    "2503.11891": {
+        "SCORE": 17,
+        "ARXIVID": "2503.11891",
+        "COMMENT": "The paper provides theoretical insights into training dynamics and sharpness-aware minimization, which aligns with representation learning and training dynamics in neural networks.",
+        "RELEVANCE": 9,
+        "NOVELTY": 8,
+        "authors": [
+            "Gabriel Clara",
+            "Sophie Langer",
+            "Johannes Schmidt-Hieber"
+        ],
+        "title": "Training Diagonal Linear Networks with Stochastic Sharpness-Aware Minimization",
+        "abstract": "We analyze the landscape and training dynamics of diagonal linear networks in a linear regression task, with the network parameters being perturbed by small isotropic normal noise. The addition of such noise may be interpreted as a stochastic form of sharpness-aware minimization (SAM) and we prove several results that relate its action on the underlying landscape and training dynamics to the sharpness of the loss. In particular, the noise changes the expected gradient to force balancing of the weight matrices at a fast rate along the descent trajectory. In the diagonal linear model, we show that this equates to minimizing the average sharpness, as well as the trace of the Hessian matrix, among all possible factorizations of the same matrix. Further, the noise forces the gradient descent iterates towards a shrinkage-thresholding of the underlying true parameter, with the noise level explicitly regulating both the shrinkage factor and the threshold.",
+        "arxiv_id": "2503.11891"
+    },
+    "2503.13305": {
+        "SCORE": 17,
+        "ARXIVID": "2503.13305",
+        "COMMENT": "The paper provides computational insights into LLM position generalization, which aligns with foundational research in LLM behavior and interpretability.",
+        "RELEVANCE": 9,
+        "NOVELTY": 8,
+        "authors": [
+            "Chi Han",
+            "Heng Ji"
+        ],
+        "title": "Computation Mechanism Behind LLM Position Generalization",
+        "abstract": "Most written natural languages are composed of sequences of words and sentences. Similar to humans, large language models (LLMs) exhibit flexibility in handling textual positions - a phenomenon we term position generalization. They can understand texts with position perturbations and generalize to longer texts than those encountered during training with the latest techniques. These phenomena suggest that LLMs handle positions tolerantly, but how LLMs computationally process positional relevance remains largely unexplored. This work connects the linguistic phenomenon with LLMs' computational mechanisms. We show how LLMs enforce certain computational mechanisms for the aforementioned tolerance in position perturbations. Despite the complex design of the self-attention mechanism, this work reveals that LLMs learn a counterintuitive disentanglement of attention logits. Their values show a 0.959 linear correlation with an approximation of the arithmetic sum of positional relevance and semantic importance. Furthermore, we identify a prevalent pattern in intermediate features, which we prove theoretically enables this effect. The pattern, which is different from how randomly initialized parameters would behave, suggests that it is a learned behavior rather than a natural result of the model architecture. Based on these findings, we provide computational explanations and criteria for LLMs' position flexibilities. This work takes a pioneering step in linking position generalization with modern LLMs' internal mechanisms.",
+        "arxiv_id": "2503.13305"
+    },
+    "2503.13089": {
+        "SCORE": 17,
+        "ARXIVID": "2503.13089",
+        "COMMENT": "The paper proposes a novel compression paradigm, ClusComp, which aligns with model compression criteria by addressing quantization and efficient finetuning with theoretical contributions.",
+        "RELEVANCE": 9,
+        "NOVELTY": 8,
+        "authors": [
+            "Baohao Liao",
+            "Christian Herold",
+            "Seyyed Hadi Hashemi",
+            "Stefan Vasilev",
+            "Shahram Khadivi",
+            "Christof Monz"
+        ],
+        "title": "ClusComp: A Simple Paradigm for Model Compression and Efficient Finetuning",
+        "abstract": "As large language models (LLMs) scale, model compression is crucial for edge deployment and accessibility. Weight-only quantization reduces model size but suffers from performance degradation at lower bit widths. Moreover, standard finetuning is incompatible with quantized models, and alternative methods often fall short of full finetuning. In this paper, we propose ClusComp, a simple yet effective compression paradigm that clusters weight matrices into codebooks and finetunes them block-by-block. ClusComp (1) achieves superior performance in 2-4 bit quantization, (2) pushes compression to 1-bit while outperforming ultra-low-bit methods with minimal finetuning, and (3) enables efficient finetuning, even surpassing existing quantization-based approaches and rivaling full FP16 finetuning. Notably, ClusComp supports compression and finetuning of 70B LLMs on a single A6000-48GB GPU.",
+        "arxiv_id": "2503.13089"
+    },
+    "2503.13423": {
+        "SCORE": 17,
+        "ARXIVID": "2503.13423",
+        "COMMENT": "The paper introduces SuperBPE, a novel tokenization method for LLMs, which aligns with foundational research in LLM architecture and pretraining improvements.",
+        "RELEVANCE": 9,
+        "NOVELTY": 8,
+        "authors": [
+            "Alisa Liu",
+            "Jonathan Hayase",
+            "Valentin Hofmann",
+            "Sewoong Oh",
+            "Noah A. Smith",
+            "Yejin Choi"
+        ],
+        "title": "SuperBPE: Space Travel for Language Models",
+        "abstract": "The assumption across nearly all language model (LM) tokenization schemes is that tokens should be subwords, i.e., contained within word boundaries. While providing a seemingly reasonable inductive bias, is this common practice limiting the potential of modern LMs? Whitespace is not a reliable delimiter of meaning, as evidenced by multi-word expressions (e.g., \"by the way\"), crosslingual variation in the number of words needed to express a concept (e.g., \"spacesuit helmet\" in German is \"raumanzughelm\"), and languages that do not use whitespace at all (e.g., Chinese). To explore the potential of tokenization beyond subwords, we introduce a \"superword\" tokenizer, SuperBPE, which incorporates a simple pretokenization curriculum into the byte-pair encoding (BPE) algorithm to first learn subwords, then superwords that bridge whitespace. This brings dramatic improvements in encoding efficiency: when fixing the vocabulary size to 200k, SuperBPE encodes a fixed piece of text with up to 33% fewer tokens than BPE on average. In experiments, we pretrain 8B transformer LMs from scratch while fixing the model size, vocabulary size, and train compute, varying *only* the algorithm for learning the vocabulary. Our model trained with SuperBPE achieves an average +4.0% absolute improvement over the BPE baseline across 30 downstream tasks (including +8.2% on MMLU), while simultaneously requiring 27% less compute at inference time. In analysis, we find that SuperBPE results in segmentations of text that are more uniform in per-token difficulty. Qualitatively, this may be because SuperBPE tokens often capture common multi-word expressions that function semantically as a single unit. SuperBPE is a straightforward, local modification to tokenization that improves both encoding efficiency and downstream performance, yielding better language models overall.",
+        "arxiv_id": "2503.13423"
+    },
+    "2503.12668": {
+        "SCORE": 17,
+        "ARXIVID": "2503.12668",
+        "COMMENT": "The paper introduces ZO2, a zeroth-order fine-tuning framework for LLMs, which aligns with model compression and efficiency breakthroughs by enabling fine-tuning of extremely large models with limited GPU memory.",
+        "RELEVANCE": 9,
+        "NOVELTY": 8,
+        "authors": [
+            "Liangyu Wang",
+            "Jie Ren",
+            "Hang Xu",
+            "Junxiao Wang",
+            "Huanyi Xie",
+            "David E. Keyes",
+            "Di Wang"
+        ],
+        "title": "ZO2: Scalable Zeroth-Order Fine-Tuning for Extremely Large Language Models with Limited GPU Memory",
+        "abstract": "Fine-tuning large pre-trained LLMs generally demands extensive GPU memory. Traditional first-order optimizers like SGD encounter substantial difficulties due to increased memory requirements from storing activations and gradients during both the forward and backward phases as the model size expands. Alternatively, zeroth-order (ZO) techniques can compute gradients using just forward operations, eliminating the need to store activations. Furthermore, by leveraging CPU capabilities, it's feasible to enhance both the memory and processing power available to a single GPU. We propose a novel framework, ZO2 (Zeroth-Order Offloading), for efficient zeroth-order fine-tuning of LLMs with only limited GPU memory. Our framework dynamically shifts model parameters between the CPU and GPU as required, optimizing computation flow and maximizing GPU usage by minimizing downtime. This integration of parameter adjustments with ZO's double forward operations reduces unnecessary data movement, enhancing the fine-tuning efficacy. Additionally, our framework supports an innovative low-bit precision approach in AMP mode to streamline data exchanges between the CPU and GPU. Employing this approach allows us to fine-tune extraordinarily large models, such as the OPT-175B with more than 175 billion parameters, on a mere 18GB GPU--achievements beyond the reach of traditional methods. Moreover, our framework achieves these results with almost no additional time overhead and absolutely no accuracy loss compared to standard zeroth-order methods. ZO2's code has been open-sourced in https://github.com/liangyuwang/zo2.",
+        "arxiv_id": "2503.12668"
+    },
+    "2503.13115": {
+        "SCORE": 17,
+        "ARXIVID": "2503.13115",
+        "COMMENT": "The paper explores a stochastic algorithm for mean field optimization, which aligns with foundational research in representation learning and training dynamics. It provides theoretical insights into optimization in Wasserstein space.",
+        "RELEVANCE": 9,
+        "NOVELTY": 8,
+        "authors": [
+            "Chandan Tankala",
+            "Dheeraj M. Nagaraj",
+            "Anant Raj"
+        ],
+        "title": "Beyond Propagation of Chaos: A Stochastic Algorithm for Mean Field Optimization",
+        "abstract": "Gradient flow in the 2-Wasserstein space is widely used to optimize functionals over probability distributions and is typically implemented using an interacting particle system with $n$ particles. Analyzing these algorithms requires showing (a) that the finite-particle system converges and/or (b) that the resultant empirical distribution of the particles closely approximates the optimal distribution (i.e., propagation of chaos). However, establishing efficient sufficient conditions can be challenging, as the finite particle system may produce heavily dependent random variables.   In this work, we study the virtual particle stochastic approximation, originally introduced for Stein Variational Gradient Descent. This method can be viewed as a form of stochastic gradient descent in the Wasserstein space and can be implemented efficiently. In popular settings, we demonstrate that our algorithm's output converges to the optimal distribution under conditions similar to those for the infinite particle limit, and it produces i.i.d. samples without the need to explicitly establish propagation of chaos bounds.",
+        "arxiv_id": "2503.13115"
+    },
+    "2503.13427": {
+        "SCORE": 17,
+        "ARXIVID": "2503.13427",
+        "COMMENT": "The paper introduces xLSTM 7B, a recurrent LLM architecture optimized for efficient inference. This aligns with the core topic of model architecture innovations.",
+        "RELEVANCE": 9,
+        "NOVELTY": 8,
+        "authors": [
+            "Maximilian Beck",
+            "Korbinian P\\\"oppel",
+            "Phillip Lippe",
+            "Richard Kurle",
+            "Patrick M. Blies",
+            "G\\\"unter Klambauer",
+            "Sebastian B\\\"ock",
+            "Sepp Hochreiter"
+        ],
+        "title": "xLSTM 7B: A Recurrent LLM for Fast and Efficient Inference",
+        "abstract": "Recent breakthroughs in solving reasoning, math and coding problems with Large Language Models (LLMs) have been enabled by investing substantial computation budgets at inference time. Therefore, inference speed is one of the most critical properties of LLM architectures, and there is a growing need for LLMs that are efficient and fast at inference. Recently, LLMs built on the xLSTM architecture have emerged as a powerful alternative to Transformers, offering linear compute scaling with sequence length and constant memory usage, both highly desirable properties for efficient inference. However, such xLSTM-based LLMs have yet to be scaled to larger models and assessed and compared with respect to inference speed and efficiency. In this work, we introduce xLSTM 7B, a 7-billion-parameter LLM that combines xLSTM's architectural benefits with targeted optimizations for fast and efficient inference. Our experiments demonstrate that xLSTM 7B achieves performance on downstream tasks comparable to other similar-sized LLMs, while providing significantly faster inference speeds and greater efficiency compared to Llama- and Mamba-based LLMs. These results establish xLSTM 7B as the fastest and most efficient 7B LLM, offering a solution for tasks that require large amounts of test-time computation. Our work highlights xLSTM's potential as a foundational architecture for methods building on heavy use of LLM inference. Our model weights, model code and training code are open-source.",
+        "arxiv_id": "2503.13427"
+    },
+    "2503.12893": {
+        "SCORE": 17,
+        "ARXIVID": "2503.12893",
+        "COMMENT": "This paper offers a higher-order asymptotic analysis of the semi-hard triplet loss, providing theoretical insights into its behavior. It aligns with foundational research in representation learning by analyzing the training dynamics and sensitivity of a loss function.",
+        "RELEVANCE": 9,
+        "NOVELTY": 8,
+        "authors": [
+            "Masanari Kimura"
+        ],
+        "title": "Edgeworth Expansion for Semi-hard Triplet Loss",
+        "abstract": "We develop a higher-order asymptotic analysis for the semi-hard triplet loss using the Edgeworth expansion. It is known that this loss function enforces that embeddings of similar samples are close while those of dissimilar samples are separated by a specified margin. By refining the classical central limit theorem, our approach quantifies the impact of the margin parameter and the skewness of the underlying data distribution on the loss behavior. In particular, we derive explicit Edgeworth expansions that reveal first-order corrections in terms of the third cumulant, thereby characterizing non-Gaussian effects present in the distribution of distance differences between anchor-positive and anchor-negative pairs. Our findings provide detailed insight into the sensitivity of the semi-hard triplet loss to its parameters and offer guidance for choosing the margin to ensure training stability.",
+        "arxiv_id": "2503.12893"
+    },
+    "2503.13299": {
+        "SCORE": 16,
+        "ARXIVID": "2503.13299",
+        "COMMENT": "The survey focuses on extending Transformer context for long sequences, which aligns with foundational research in Transformer architecture and efficiency.",
+        "RELEVANCE": 9,
+        "NOVELTY": 7,
+        "authors": [
+            "Yijun Liu",
+            "Jinzheng Yu",
+            "Yang Xu",
+            "Zhongyang Li",
+            "Qingfu Zhu"
+        ],
+        "title": "A Survey on Transformer Context Extension: Approaches and Evaluation",
+        "abstract": "Large language models (LLMs) based on Transformer have been widely applied in the filed of natural language processing (NLP), demonstrating strong performance, particularly in handling short text tasks. However, when it comes to long context scenarios, the performance of LLMs degrades due to some challenges. To alleviate this phenomenon, there is a number of work proposed recently. In this survey, we first list the challenges of applying pre-trained LLMs to process long contexts. Then systematically review the approaches related to long context and propose our taxonomy categorizing them into four main types: positional encoding, context compression, retrieval augmented, and attention pattern. In addition to the approaches, we focus on the evaluation of long context, organizing relevant data, tasks, and metrics based on existing long context benchmarks. Finally, we summarize unresolved issues in the long context domain and put forward our views on future developments.",
+        "arxiv_id": "2503.13299"
+    },
+    "2503.12919": {
+        "SCORE": 16,
+        "ARXIVID": "2503.12919",
+        "COMMENT": "The paper introduces a novel architecture for simplicial neural networks derived from PDEs, which aligns with architectural innovations and addresses over-smoothing in geometric deep learning.",
+        "RELEVANCE": 8,
+        "NOVELTY": 8,
+        "authors": [
+            "Aref Einizade",
+            "Dorina Thanou",
+            "Fragkiskos D. Malliaros",
+            "Jhony H. Giraldo"
+        ],
+        "title": "COSMOS: Continuous Simplicial Neural Networks",
+        "abstract": "Simplicial complexes provide a powerful framework for modeling high-order interactions in structured data, making them particularly suitable for applications such as trajectory prediction and mesh processing. However, existing simplicial neural networks (SNNs), whether convolutional or attention-based, rely primarily on discrete filtering techniques, which can be restrictive. In contrast, partial differential equations (PDEs) on simplicial complexes offer a principled approach to capture continuous dynamics in such structures. In this work, we introduce COntinuous SiMplicial neural netwOrkS (COSMOS), a novel SNN architecture derived from PDEs on simplicial complexes. We provide theoretical and experimental justifications of COSMOS's stability under simplicial perturbations. Furthermore, we investigate the over-smoothing phenomenon, a common issue in geometric deep learning, demonstrating that COSMOS offers better control over this effect than discrete SNNs. Our experiments on real-world datasets of ocean trajectory prediction and regression on partial deformable shapes demonstrate that COSMOS achieves competitive performance compared to state-of-the-art SNNs in complex and noisy environments.",
+        "arxiv_id": "2503.12919"
+    },
+    "2503.12083": {
+        "SCORE": 16,
+        "ARXIVID": "2503.12083",
+        "COMMENT": "The paper proposes a novel conflict-driven clause learning approach for DNN verification, which aligns with foundational research in model efficiency and scalability.",
+        "RELEVANCE": 8,
+        "NOVELTY": 8,
+        "authors": [
+            "Omri Isac",
+            "Idan Refaeli",
+            "Haoze Wu",
+            "Clark Barrett",
+            "Guy Katz"
+        ],
+        "title": "Proof-Driven Clause Learning in Neural Network Verification",
+        "abstract": "The widespread adoption of deep neural networks (DNNs) requires efficient techniques for safety verification. Existing methods struggle to scale to real-world DNNs, and tremendous efforts are being put into improving their scalability. In this work, we propose an approach for improving the scalability of DNN verifiers using Conflict-Driven Clause Learning (CDCL) -- an approach that has proven highly successful in SAT and SMT solving. We present a novel algorithm for deriving conflict clauses using UNSAT proofs, and propose several optimizations for expediting it. Our approach allows a modular integration of SAT solvers and DNN verifiers, and we implement it on top of an interface designed for this purpose. The evaluation of our implementation over several benchmarks suggests a 2X--3X improvement over a similar approach, with specific cases outperforming the state of the art.",
+        "arxiv_id": "2503.12083"
+    },
+    "2503.12790": {
+        "SCORE": 16,
+        "ARXIVID": "2503.12790",
+        "COMMENT": "The paper proposes a quantum-enhanced fine-tuning method, which aligns with model compression and efficiency breakthroughs, particularly in low-rank approaches.",
+        "RELEVANCE": 8,
+        "NOVELTY": 8,
+        "authors": [
+            "Xiaofei Kong",
+            "Lei Li",
+            "Menghan Dou",
+            "Zhaoyun Chen",
+            "Yuchun Wu",
+            "Guoping Guo"
+        ],
+        "title": "Quantum-Enhanced LLM Efficient Fine Tuning",
+        "abstract": "Low-Rank Adaptation (LoRA) enables efficient fine-tuning of pre-trained language models via low-rank matrix approximation, which is effective in many scenarios. However, its low-rank representation capacity is constrained in complex tasks or high-rank dependency settings, potentially limiting model adaptability. Addressing the expressive bottleneck of classical low-rank approximation in fine-tuning large language models, this paper proposes a parameter-efficient fine-tuning method based on a Quantum Weighted Tensor Hybrid Network (QWTHN), which leverages Quantum Neural Network (QNN). The study investigates quantum-classical hybrid parameter-efficient fine-tuning in low-rank spaces. QWTHN decomposes pre-trained weights into quantum neural network and tensor network representations, utilizing quantum state superposition and other methods to break through classical rank limitations. Experiments show that the proposed quantum fine-tuning technique for large models approaches or even surpasses the parameter efficiency of LoRA. On the CPsyCounD and R1-Distill-SFT datasets, QWTHN, compared to classical LoRA, reduces training loss by up to 15% while using 76% fewer parameters, and achieves an 8.4% performance improvement on the CPsyCounD test set. This research not only realizes lightweight and efficient adaptation of quantum resources to billion-parameter models but also validates the practical path of quantum hardware driven by large model tasks, laying the first engineering-ready technical foundation for future quantum-enhanced AGI systems.",
+        "arxiv_id": "2503.12790"
+    },
+    "2503.12917": {
+        "SCORE": 16,
+        "ARXIVID": "2503.12917",
+        "COMMENT": "The paper introduces a novel verification learning paradigm for neuro-symbolic systems, which aligns with emerging trends in foundational AI research.",
+        "RELEVANCE": 8,
+        "NOVELTY": 8,
+        "authors": [
+            "Lin-Han Jia",
+            "Wen-Chao Hu",
+            "Jie-Jing Shao",
+            "Lan-Zhe Guo",
+            "Yu-Feng Li"
+        ],
+        "title": "Verification Learning: Make Unsupervised Neuro-Symbolic System Feasible",
+        "abstract": "The current Neuro-Symbolic (NeSy) Learning paradigm suffers from an over-reliance on labeled data. If we completely disregard labels, it leads to less symbol information, a larger solution space, and more shortcuts-issues that current Nesy systems cannot resolve. This paper introduces a novel learning paradigm, Verification Learning (VL), which addresses this challenge by transforming the label-based reasoning process in Nesy into a label-free verification process. VL achieves excellent learning results solely by relying on unlabeled data and a function that verifies whether the current predictions conform to the rules. We formalize this problem as a Constraint Optimization Problem (COP) and propose a Dynamic combinatorial Sorting (DCS) algorithm that accelerates the solution by reducing verification attempts, effectively lowering computational costs to the level of a Constraint Satisfaction Problem (CSP). To further enhance performance, we introduce a prior alignment method to address potential shortcuts. Our theoretical analysis points out which tasks in Nesy systems can be completed without labels and explains why rules can replace infinite labels, such as in addition, for some tasks, while for others, like Sudoku, the rules have no effect. We validate the proposed framework through several fully unsupervised tasks including addition, sort, match, and chess, each showing significant performance and efficiency improvements.",
+        "arxiv_id": "2503.12917"
+    },
+    "2503.12739": {
+        "SCORE": 16,
+        "ARXIVID": "2503.12739",
+        "COMMENT": "The paper proposes a novel unsupervised contrastive learning framework for sentence embeddings, which aligns with representation learning and introduces tensor norm constraints.",
+        "RELEVANCE": 8,
+        "NOVELTY": 8,
+        "authors": [
+            "Tianyu Zong",
+            "Bingkang Shi",
+            "Hongzhu Yi",
+            "Jungang Xu"
+        ],
+        "title": "TNCSE: Tensor's Norm Constraints for Unsupervised Contrastive Learning of Sentence Embeddings",
+        "abstract": "Unsupervised sentence embedding representation has become a hot research topic in natural language processing. As a tensor, sentence embedding has two critical properties: direction and norm. Existing works have been limited to constraining only the orientation of the samples' representations while ignoring the features of their module lengths. To address this issue, we propose a new training objective that optimizes the training of unsupervised contrastive learning by constraining the module length features between positive samples. We combine the training objective of Tensor's Norm Constraints with ensemble learning to propose a new Sentence Embedding representation framework, TNCSE. We evaluate seven semantic text similarity tasks, and the results show that TNCSE and derived models are the current state-of-the-art approach; in addition, we conduct extensive zero-shot evaluations, and the results show that TNCSE outperforms other baselines.",
+        "arxiv_id": "2503.12739"
+    },
+    "2503.12649": {
+        "SCORE": 16,
+        "ARXIVID": "2503.12649",
+        "COMMENT": "The paper introduces FW-Merging, a novel optimization-based approach for model merging, which aligns with foundational research in model efficiency and scaling.",
+        "RELEVANCE": 8,
+        "NOVELTY": 8,
+        "authors": [
+            "Hao Mark Chen",
+            "Shell Xu Hu",
+            "Wayne Luk",
+            "Timothy Hospedales",
+            "Hongxiang Fan"
+        ],
+        "title": "FW-Merging: Scaling Model Merging with Frank-Wolfe Optimization",
+        "abstract": "Model merging has emerged as a promising approach for multi-task learning (MTL), offering a data-efficient alternative to conventional fine-tuning. However, with the rapid development of the open-source AI ecosystem and the increasing availability of fine-tuned foundation models, existing model merging methods face two key limitations: (i) They are primarily designed for in-house fine-tuned models, making them less adaptable to diverse model sources with partially unknown model and task information, (ii) They struggle to scale effectively when merging numerous model checkpoints. To address these challenges, we formulate model merging as a constrained optimization problem and introduce a novel approach: Frank-Wolfe Merging (FW-Merging). Inspired by Frank-Wolfe optimization, our approach iteratively selects the most relevant model in the pool to minimize a linear approximation of the objective function and then executes a local merging similar to the Frank-Wolfe update. The objective function is designed to capture the desired behavior of the target-merged model, while the fine-tuned candidate models define the constraint set. More importantly, FW-Merging serves as an orthogonal technique for existing merging methods, seamlessly integrating with them to further enhance accuracy performance. Our experiments show that FW-Merging scales across diverse model sources, remaining stable with 16 irrelevant models and improving by 15.3% with 16 relevant models on 20 CV tasks, while maintaining constant memory overhead, unlike the linear overhead of data-informed merging methods. Compared with the state-of-the-art approaches, FW-Merging surpasses the data-free merging method by 32.8% and outperforms the data-informed Adamerging by 8.39% when merging 20 ViT models.",
+        "arxiv_id": "2503.12649"
+    },
+    "2503.13317": {
+        "SCORE": 15,
+        "ARXIVID": "2503.13317",
+        "COMMENT": "The paper provides a theoretical framework for epistemic uncertainty estimation in regression, which aligns with foundational research in understanding model behavior and uncertainty quantification.",
+        "RELEVANCE": 8,
+        "NOVELTY": 7,
+        "authors": [
+            "Enrico Foglia",
+            "Benjamin Bobbia",
+            "Nikita Durasov",
+            "Michael Bauerheim",
+            "Pascal Fua",
+            "Stephane Moreau",
+            "Thierry Jardin"
+        ],
+        "title": "Do you understand epistemic uncertainty? Think again! Rigorous frequentist epistemic uncertainty estimation in regression",
+        "abstract": "Quantifying model uncertainty is critical for understanding prediction reliability, yet distinguishing between aleatoric and epistemic uncertainty remains challenging. We extend recent work from classification to regression to provide a novel frequentist approach to epistemic and aleatoric uncertainty estimation. We train models to generate conditional predictions by feeding their initial output back as an additional input. This method allows for a rigorous measurement of model uncertainty by observing how prediction responses change when conditioned on the model's previous answer. We provide a complete theoretical framework to analyze epistemic uncertainty in regression in a frequentist way, and explain how it can be exploited in practice to gauge a model's uncertainty, with minimal changes to the original architecture.",
+        "arxiv_id": "2503.13317"
+    },
+    "2503.13304": {
+        "SCORE": 15,
+        "ARXIVID": "2503.13304",
+        "COMMENT": "The paper presents a novel neural architecture for feature selection using Gumbel-Sigmoid relaxation, which aligns with foundational research in model architecture and efficiency.",
+        "RELEVANCE": 8,
+        "NOVELTY": 7,
+        "authors": [
+            "Witold Wydma\\'nski",
+            "Marek \\'Smieja"
+        ],
+        "title": "GFSNetwork: Differentiable Feature Selection via Gumbel-Sigmoid Relaxation",
+        "abstract": "Feature selection in deep learning remains a critical challenge, particularly for high-dimensional tabular data where interpretability and computational efficiency are paramount. We present GFSNetwork, a novel neural architecture that performs differentiable feature selection through temperature-controlled Gumbel-Sigmoid sampling. Unlike traditional methods, where the user has to define the requested number of features, GFSNetwork selects it automatically during an end-to-end process. Moreover, GFSNetwork maintains constant computational overhead regardless of the number of input features. We evaluate GFSNetwork on a series of classification and regression benchmarks, where it consistently outperforms recent methods including DeepLasso, attention maps, as well as traditional feature selectors, while using significantly fewer features. Furthermore, we validate our approach on real-world metagenomic datasets, demonstrating its effectiveness in high-dimensional biological data. Concluding, our method provides a scalable solution that bridges the gap between neural network flexibility and traditional feature selection interpretability. We share our python implementation of GFSNetwork at https://github.com/wwydmanski/GFSNetwork, as well as a PyPi package (gfs_network).",
+        "arxiv_id": "2503.13304"
+    },
+    "2503.12633": {
+        "SCORE": 15,
+        "ARXIVID": "2503.12633",
+        "COMMENT": "The paper introduces a mixture-of-experts-like approach using amortized optimal transport maps, which is relevant to model architecture innovations.",
+        "RELEVANCE": 8,
+        "NOVELTY": 7,
+        "authors": [
+            "Mohammad Al-Jarrah",
+            "Bamdad Hosseini",
+            "Amirhossein Taghvaei"
+        ],
+        "title": "Fast filtering of non-Gaussian models using Amortized Optimal Transport Maps",
+        "abstract": "In this paper, we present the amortized optimal transport filter (A-OTF) designed to mitigate the computational burden associated with the real-time training of optimal transport filters (OTFs). OTFs can perform accurate non-Gaussian Bayesian updates in the filtering procedure, but they require training at every time step, which makes them expensive. The proposed A-OTF framework exploits the similarity between OTF maps during an initial/offline training stage in order to reduce the cost of inference during online calculations. More precisely, we use clustering algorithms to select relevant subsets of pre-trained maps whose weighted average is used to compute the A-OTF model akin to a mixture of experts. A series of numerical experiments validate that A-OTF achieves substantial computational savings during online inference while preserving the inherent flexibility and accuracy of OTF.",
+        "arxiv_id": "2503.12633"
+    },
+    "2503.12365": {
+        "SCORE": 15,
+        "ARXIVID": "2503.12365",
+        "COMMENT": "The paper proposes a novel framework for hypergraph representation learning using Kolmogorov-Arnold Networks, which is relevant to representation learning and architectural innovations.",
+        "RELEVANCE": 8,
+        "NOVELTY": 7,
+        "authors": [
+            "Xiangfei Fang",
+            "Boying Wang",
+            "Chengying Huan",
+            "Shaonan Ma",
+            "Heng Zhang",
+            "Chen Zhao"
+        ],
+        "title": "HyperKAN: Hypergraph Representation Learning with Kolmogorov-Arnold Networks",
+        "abstract": "Hypergraph representation learning has garnered increasing attention across various domains due to its capability to model high-order relationships. Traditional methods often rely on hypergraph neural networks (HNNs) employing message passing mechanisms to aggregate vertex and hyperedge features. However, these methods are constrained by their dependence on hypergraph topology, leading to the challenge of imbalanced information aggregation, where high-degree vertices tend to aggregate redundant features, while low-degree vertices often struggle to capture sufficient structural features. To overcome the above challenges, we introduce HyperKAN, a novel framework for hypergraph representation learning that transcends the limitations of message-passing techniques. HyperKAN begins by encoding features for each vertex and then leverages Kolmogorov-Arnold Networks (KANs) to capture complex nonlinear relationships. By adjusting structural features based on similarity, our approach generates refined vertex representations that effectively addresses the challenge of imbalanced information aggregation. Experiments conducted on the real-world datasets demonstrate that HyperKAN significantly outperforms state of-the-art HNN methods, achieving nearly a 9% performance improvement on the Senate dataset.",
+        "arxiv_id": "2503.12365"
+    },
+    "2503.13208": {
+        "SCORE": 15,
+        "ARXIVID": "2503.13208",
+        "COMMENT": "The paper proposes a novel method for improving prompt-tuning in LLMs for complex reasoning tasks, which aligns with foundational research in LLM behavior and optimization.",
+        "RELEVANCE": 8,
+        "NOVELTY": 7,
+        "authors": [
+            "Sinan Fan",
+            "Liang Xie",
+            "Chen Shen",
+            "Ge Teng",
+            "Xiaosong Yuan",
+            "Xiaofeng Zhang",
+            "Chenxi Huang",
+            "Wenxiao Wang",
+            "Xiaofei He",
+            "Jieping Ye"
+        ],
+        "title": "Improving Complex Reasoning with Dynamic Prompt Corruption: A soft prompt Optimization Approach",
+        "abstract": "Prompt-tuning (PT) for large language models (LLMs) can facilitate the performance on various conventional NLP tasks with significantly fewer trainable parameters. However, our investigation reveals that PT provides limited improvement and may even degrade the primitive performance of LLMs on complex reasoning tasks. Such a phenomenon suggests that soft prompts can positively impact certain instances while negatively affecting others, particularly during the later phases of reasoning. To address these challenges, We first identify an information accumulation within the soft prompts. Through detailed analysis, we demonstrate that this phenomenon is often accompanied by erroneous information flow patterns in the deeper layers of the model, which ultimately lead to incorrect reasoning outcomes. we propose a novel method called \\textbf{D}ynamic \\textbf{P}rompt \\textbf{C}orruption (DPC) to take better advantage of soft prompts in complex reasoning tasks, which dynamically adjusts the influence of soft prompts based on their impact on the reasoning process. Specifically, DPC consists of two stages: Dynamic Trigger and Dynamic Corruption. First, Dynamic Trigger measures the impact of soft prompts, identifying whether beneficial or detrimental. Then, Dynamic Corruption mitigates the negative effects of soft prompts by selectively masking key tokens that interfere with the reasoning process. We validate the proposed approach through extensive experiments on various LLMs and reasoning tasks, including GSM8K, MATH, and AQuA. Experimental results demonstrate that DPC can consistently enhance the performance of PT, achieving 4\\%-8\\% accuracy gains compared to vanilla prompt tuning, highlighting the effectiveness of our approach and its potential to enhance complex reasoning in LLMs.",
+        "arxiv_id": "2503.13208"
+    },
+    "2503.13385": {
+        "SCORE": 15,
+        "ARXIVID": "2503.13385",
+        "COMMENT": "The paper proposes a dynamic sample pruning approach for efficient training on large datasets, which aligns with model compression and efficiency breakthroughs.",
+        "RELEVANCE": 8,
+        "NOVELTY": 7,
+        "authors": [
+            "Qing Zhou",
+            "Junyu Gao",
+            "Qi Wang"
+        ],
+        "title": "Scale Efficient Training for Large Datasets",
+        "abstract": "The rapid growth of dataset scales has been a key driver in advancing deep learning research. However, as dataset scale increases, the training process becomes increasingly inefficient due to the presence of low-value samples, including excessive redundant samples, overly challenging samples, and inefficient easy samples that contribute little to model improvement.To address this challenge, we propose Scale Efficient Training (SeTa) for large datasets, a dynamic sample pruning approach that losslessly reduces training time. To remove low-value samples, SeTa first performs random pruning to eliminate redundant samples, then clusters the remaining samples according to their learning difficulty measured by loss. Building upon this clustering, a sliding window strategy is employed to progressively remove both overly challenging and inefficient easy clusters following an easy-to-hard curriculum.We conduct extensive experiments on large-scale synthetic datasets, including ToCa, SS1M, and ST+MJ, each containing over 3 million samples.SeTa reduces training costs by up to 50\\% while maintaining or improving performance, with minimal degradation even at 70\\% cost reduction. Furthermore, experiments on various scale real datasets across various backbones (CNNs, Transformers, and Mambas) and diverse tasks (instruction tuning, multi-view stereo, geo-localization, composed image retrieval, referring image segmentation) demonstrate the powerful effectiveness and universality of our approach. Code is available at https://github.com/mrazhou/SeTa.",
+        "arxiv_id": "2503.13385"
+    },
+    "2503.12193": {
+        "SCORE": 15,
+        "ARXIVID": "2503.12193",
+        "COMMENT": "The paper proposes a method for incremental learning that mitigates catastrophic forgetting, which aligns with representation learning and training dynamics in neural networks.",
+        "RELEVANCE": 8,
+        "NOVELTY": 7,
+        "authors": [
+            "S Balasubramanian",
+            "Yedu Krishna P",
+            "Talasu Sai Sriram",
+            "M Sai Subramaniam",
+            "Manepalli Pranav Phanindra Sai",
+            "Darshan Gera"
+        ],
+        "title": "S2IL: Structurally Stable Incremental Learning",
+        "abstract": "Feature Distillation (FD) strategies are proven to be effective in mitigating Catastrophic Forgetting (CF) seen in Class Incremental Learning (CIL). However, current FD approaches enforce strict alignment of feature magnitudes and directions across incremental steps, limiting the model's ability to adapt to new knowledge. In this paper we propose Structurally Stable Incremental Learning(S22IL), a FD method for CIL that mitigates CF by focusing on preserving the overall spatial patterns of features which promote flexible (plasticity) yet stable representations that preserve old knowledge (stability). We also demonstrate that our proposed method S2IL achieves strong incremental accuracy and outperforms other FD methods on SOTA benchmark datasets CIFAR-100, ImageNet-100 and ImageNet-1K. Notably, S2IL outperforms other methods by a significant margin in scenarios that have a large number of incremental tasks.",
+        "arxiv_id": "2503.12193"
+    },
+    "2503.12988": {
+        "SCORE": 15,
+        "ARXIVID": "2503.12988",
+        "COMMENT": "The paper introduces a hardware accelerator for QLoRA-based on-device LLMs, which aligns with model compression and efficiency breakthroughs.",
+        "RELEVANCE": 8,
+        "NOVELTY": 7,
+        "authors": [
+            "Wenqiang Wang",
+            "Yijia Zhang",
+            "Zikai Zhang",
+            "Guanting Huo",
+            "Hao Liang",
+            "Shijie Cao",
+            "Ningyi Xu"
+        ],
+        "title": "ROMA: a Read-Only-Memory-based Accelerator for QLoRA-based On-Device LLM",
+        "abstract": "As large language models (LLMs) demonstrate powerful capabilities, deploying them on edge devices has become increasingly crucial, offering advantages in privacy and real-time interaction. QLoRA has emerged as the standard approach for on-device LLMs, leveraging quantized models to reduce memory and computational costs while utilizing LoRA for task-specific adaptability. In this work, we propose ROMA, a QLoRA accelerator with a hybrid storage architecture that uses ROM for quantized base models and SRAM for LoRA weights and KV cache. Our insight is that the quantized base model is stable and converged, making it well-suited for ROM storage. Meanwhile, LoRA modules offer the flexibility to adapt to new data without requiring updates to the base model. To further reduce the area cost of ROM, we introduce a novel B-ROM design and integrate it with the compute unit to form a fused cell for efficient use of chip resources. ROMA can effectively store both a 4-bit 3B and a 2-bit 8B LLaMA model entirely on-chip, achieving a notable generation speed exceeding 20,000 tokens/s without requiring external memory.",
+        "arxiv_id": "2503.12988"
+    },
+    "2503.12822": {
+        "SCORE": 15,
+        "ARXIVID": "2503.12822",
+        "COMMENT": "The paper focuses on sparse fine-tuning under differential privacy, which aligns with the model compression criterion, particularly in sparsity and efficiency breakthroughs.",
+        "RELEVANCE": 8,
+        "NOVELTY": 7,
+        "authors": [
+            "Mehdi Makni",
+            "Kayhan Behdin",
+            "Gabriel Afriat",
+            "Zheng Xu",
+            "Sergei Vassilvitskii",
+            "Natalia Ponomareva",
+            "Hussein Hazimeh",
+            "Rahul Mazumder"
+        ],
+        "title": "An Optimization Framework for Differentially Private Sparse Fine-Tuning",
+        "abstract": "Differentially private stochastic gradient descent (DP-SGD) is broadly considered to be the gold standard for training and fine-tuning neural networks under differential privacy (DP). With the increasing availability of high-quality pre-trained model checkpoints (e.g., vision and language models), fine-tuning has become a popular strategy. However, despite recent progress in understanding and applying DP-SGD for private transfer learning tasks, significant challenges remain -- most notably, the performance gap between models fine-tuned with DP-SGD and their non-private counterparts. Sparse fine-tuning on private data has emerged as an alternative to full-model fine-tuning; recent work has shown that privately fine-tuning only a small subset of model weights and keeping the rest of the weights fixed can lead to better performance. In this work, we propose a new approach for sparse fine-tuning of neural networks under DP. Existing work on private sparse finetuning often used fixed choice of trainable weights (e.g., updating only the last layer), or relied on public model's weights to choose the subset of weights to modify. Such choice of weights remains suboptimal. In contrast, we explore an optimization-based approach, where our selection method makes use of the private gradient information, while using off the shelf privacy accounting techniques. Our numerical experiments on several computer vision models and datasets show that our selection method leads to better prediction accuracy, compared to full-model private fine-tuning or existing private sparse fine-tuning approaches.",
+        "arxiv_id": "2503.12822"
+    },
+    "2503.13438": {
+        "SCORE": 15,
+        "ARXIVID": "2503.13438",
+        "COMMENT": "The paper introduces a novel architecture, Deep Belief Markov Models, which aligns with model architecture innovations, particularly in dynamic and conditional networks.",
+        "RELEVANCE": 8,
+        "NOVELTY": 7,
+        "authors": [
+            "Giacomo Arcieri",
+            "Konstantinos G. Papakonstantinou",
+            "Daniel Straub",
+            "Eleni Chatzi"
+        ],
+        "title": "Deep Belief Markov Models for POMDP Inference",
+        "abstract": "This work introduces a novel deep learning-based architecture, termed the Deep Belief Markov Model (DBMM), which provides efficient, model-formulation agnostic inference in Partially Observable Markov Decision Process (POMDP) problems. The POMDP framework allows for modeling and solving sequential decision-making problems under observation uncertainty. In complex, high-dimensional, partially observable environments, existing methods for inference based on exact computations (e.g., via Bayes' theorem) or sampling algorithms do not scale well. Furthermore, ground truth states may not be available for learning the exact transition dynamics. DBMMs extend deep Markov models into the partially observable decision-making framework and allow efficient belief inference entirely based on available observation data via variational inference methods. By leveraging the potency of neural networks, DBMMs can infer and simulate non-linear relationships in the system dynamics and naturally scale to problems with high dimensionality and discrete or continuous variables. In addition, neural network parameters can be dynamically updated efficiently based on data availability. DBMMs can thus be used to infer a belief variable, thus enabling the derivation of POMDP solutions over the belief space. We evaluate the efficacy of the proposed methodology by evaluating the capability of model-formulation agnostic inference of DBMMs in benchmark problems that include discrete and continuous variables.",
+        "arxiv_id": "2503.13438"
+    },
+    "2503.12645": {
+        "SCORE": 15,
+        "ARXIVID": "2503.12645",
+        "COMMENT": "The paper provides a theoretical analysis of gradient orthogonalization and introduces a novel perspective on trust-region optimization. This aligns with foundational research in optimization and training dynamics of neural networks.",
+        "RELEVANCE": 8,
+        "NOVELTY": 7,
+        "authors": [
+            "Dmitry Kovalev"
+        ],
+        "title": "Understanding Gradient Orthogonalization for Deep Learning via Non-Euclidean Trust-Region Optimization",
+        "abstract": "Optimization with matrix gradient orthogonalization has recently demonstrated impressive results in the training of deep neural networks (Jordan et al., 2024; Liu et al., 2025). In this paper, we provide a theoretical analysis of this approach. In particular, we show that the orthogonalized gradient method can be seen as a first-order trust-region optimization method, where the trust-region is defined in terms of the matrix spectral norm. Motivated by this observation, we provide the first theoretical analysis of the stochastic non-Euclidean trust-region gradient method with momentum, which recovers the Muon optimizer (Jordan et al., 2024) as a special case. In addition, we establish the convergence of the normalized SGD with momentum (Cutkosky and Mehta, 2020) in the constrained and composite setting, show that its iteration complexity of finding an $\\varepsilon$-accurate solution can be improved from $\\mathcal{O}(\\varepsilon^{-3.5})$ to $\\mathcal{O}(\\varepsilon^{-3})$ under the star-convexity assumption, and obtain similar results for the Muon algorithm. Finally, our theoretical findings provide an explanation for the practical superiority of Muon compared to the Orthogonal-SGDM algorithm of Tuddenham et al. (2022).",
+        "arxiv_id": "2503.12645"
+    },
+    "2503.12829": {
+        "SCORE": 15,
+        "ARXIVID": "2503.12829",
+        "COMMENT": "SparseLUT introduces a novel connectivity optimization technique for LUT-based DNNs, focusing on sparsity and pruning. This aligns with the model compression criterion.",
+        "RELEVANCE": 8,
+        "NOVELTY": 7,
+        "authors": [
+            "Binglei Lou",
+            "Ruilin Wu",
+            "Philip Leong"
+        ],
+        "title": "SparseLUT: Sparse Connectivity Optimization for Lookup Table-based Deep Neural Networks",
+        "abstract": "The deployment of deep neural networks (DNNs) on resource-constrained edge devices such as field-programmable gate arrays (FPGAs) requires a careful balance of latency, power, and resource usage while maintaining high accuracy. Existing Lookup Table (LUT)-based DNNs, including LogicNets, PolyLUT, PolyLUT-Add, and NeuraLUT, exploit native FPGA resources with random sparse connectivity. This paper introduces SparseLUT, a connectivity-centric training technique tailored for LUT-based DNNs. SparseLUT leverages a non-greedy training strategy that prioritizes the pruning of less significant connections and strategically regrows alternative ones, resulting in efficient convergence to the target sparsity. Experimental results show consistent accuracy improvements across benchmarks, including up to a 2.13\\% increase on MNIST and a 0.94\\% improvement for Jet Substructure Classification compared to random sparsity. This is done without any hardware overhead and achieves state-of-the-art results for LUT-based DNNs.",
+        "arxiv_id": "2503.12829"
+    },
+    "2503.11663": {
+        "SCORE": 15,
+        "ARXIVID": "2503.11663",
+        "COMMENT": "MEADOW introduces a memory-efficient dataflow and weight packing strategy for LLMs on edge devices. This aligns with model compression and efficiency breakthroughs.",
+        "RELEVANCE": 8,
+        "NOVELTY": 7,
+        "authors": [
+            "Abhishek Moitra",
+            "Arkapravo Ghosh",
+            "Shrey Agarwal",
+            "Aporva Amarnath",
+            "Karthik Swaminathan",
+            "Priyadarshini Panda"
+        ],
+        "title": "MEADOW: Memory-efficient Dataflow and Data Packing for Low Power Edge LLMs",
+        "abstract": "The computational and memory challenges of large language models (LLMs) have sparked several optimization approaches towards their efficient implementation. While prior LLM-targeted quantization, and prior works on sparse acceleration have significantly mitigated the memory and computation bottleneck, they do so assuming high power platforms such as GPUs and server-class FPGAs with large off-chip memory bandwidths and employ a generalized matrix multiplication (GEMM) execution of all the layers in the decoder. In such a GEMM-based execution, data is fetched from an off-chip memory, computed and stored back. However, at reduced off-chip memory capacities, as is the case with low-power edge devices, this implementation strategy significantly increases the attention computation latency owing to the repeated storage and fetch of large intermediate tokens to and from the off-chip memory. Moreover, fetching the weight matrices from a bandwidth constrained memory further aggravates the memory bottleneck problem. To this end, we introduce MEADOW, a framework that significantly reduces the off-chip memory access for LLMs with a novel token-parallel head-sequential (TPHS) dataflow. Additionally, MEADOW applies weight packing that performs loss-less decomposition of large weight matrices to their unique elements thereby, reducing the enormous weight fetch latency. MEADOW demonstrates 1.5x and 2.5x lower decode and prefill latency, respectively, compared to a GEMM-based LLM implementation on the low power Xilinx ZCU102 FPGA platform that consumes less than 10W. Additionally, MEADOW achieves an end-to-end latency improvement of over 40%, compared to prior LLM optimization works.",
+        "arxiv_id": "2503.11663"
+    },
+    "2503.11808": {
+        "SCORE": 15,
+        "ARXIVID": "2503.11808",
+        "COMMENT": "The paper explores Bayesian Neural Networks and their posterior approximations, focusing on architectural choices and uncertainty quantification. This aligns with foundational research in model architecture and uncertainty.",
+        "RELEVANCE": 8,
+        "NOVELTY": 7,
+        "authors": [
+            "Alisa Sheinkman",
+            "Sara Wade"
+        ],
+        "title": "The Architecture and Evaluation of Bayesian Neural Networks",
+        "abstract": "As modern neural networks get more complex, specifying a model with high predictive performance and sound uncertainty quantification becomes a more challenging task. Despite some promising theoretical results on the true posterior predictive distribution of Bayesian neural networks, the properties of even the most commonly used posterior approximations are often questioned. Computational burdens and intractable posteriors expose miscalibrated Bayesian neural networks to poor accuracy and unreliable uncertainty estimates. Approximate Bayesian inference aims to replace unknown and intractable posterior distributions with some simpler but feasible distributions. The dimensions of modern deep models coupled with the lack of identifiability make Markov chain Monte Carlo tremendously expensive and unable to fully explore the multimodal posterior. On the other hand, variational inference benefits from improved computational complexity but lacks the asymptotical guarantees of sampling-based inference and tends to concentrate around a single mode. The performance of both approaches heavily depends on architectural choices; this paper aims to shed some light on this, by considering the computational costs, accuracy and uncertainty quantification in different scenarios including large width and out-of-sample data. To improve posterior exploration, different model averaging and ensembling techniques are studied, along with their benefits on predictive performance. In our experiments, variational inference overall provided better uncertainty quantification than Markov chain Monte Carlo; further, stacking and ensembles of variational approximations provided comparable to Markov chain Monte Carlo accuracy at a much-reduced cost.",
+        "arxiv_id": "2503.11808"
+    },
+    "2503.11964": {
+        "SCORE": 15,
+        "ARXIVID": "2503.11964",
+        "COMMENT": "The paper proposes entropy-regularized gradient estimators for approximate Bayesian inference, focusing on uncertainty quantification and posterior sampling. This aligns with foundational research in representation learning and Bayesian methods.",
+        "RELEVANCE": 8,
+        "NOVELTY": 7,
+        "authors": [
+            "Jasmeet Kaur"
+        ],
+        "title": "Entropy-regularized Gradient Estimators for Approximate Bayesian Inference",
+        "abstract": "Effective uncertainty quantification is important for training modern predictive models with limited data, enhancing both accuracy and robustness. While Bayesian methods are effective for this purpose, they can be challenging to scale. When employing approximate Bayesian inference, ensuring the quality of samples from the posterior distribution in a computationally efficient manner is essential. This paper addresses the estimation of the Bayesian posterior to generate diverse samples by approximating the gradient flow of the Kullback-Leibler (KL) divergence and the cross entropy of the target approximation under the metric induced by the Stein Operator. It presents empirical evaluations on classification tasks to assess the method's performance and discuss its effectiveness for Model-Based Reinforcement Learning that uses uncertainty-aware network dynamics models.",
+        "arxiv_id": "2503.11964"
+    },
+    "2503.11965": {
+        "SCORE": 15,
+        "ARXIVID": "2503.11965",
+        "COMMENT": "The paper introduces a novel dual-weight gradient descent framework, which aligns with representation learning by providing insights into training dynamics and robustness.",
+        "RELEVANCE": 8,
+        "NOVELTY": 7,
+        "authors": [
+            "Xi Wang",
+            "Hideaki Shimazaki"
+        ],
+        "title": "Revisiting Gradient Descent: A Dual-Weight Method for Improved Learning",
+        "abstract": "We introduce a novel framework for learning in neural networks by decomposing each neuron's weight vector into two distinct parts, $W_1$ and $W_2$, thereby modeling contrastive information directly at the neuron level. Traditional gradient descent stores both positive (target) and negative (non-target) feature information in a single weight vector, often obscuring fine-grained distinctions. Our approach, by contrast, maintains separate updates for target and non-target features, ultimately forming a single effective weight $W = W_1 - W_2$ that is more robust to noise and class imbalance. Experimental results on both regression (California Housing, Wine Quality) and classification (MNIST, Fashion-MNIST, CIFAR-10) tasks suggest that this decomposition enhances generalization and resists overfitting, especially when training data are sparse or noisy. Crucially, the inference complexity remains the same as in the standard $WX + \\text{bias}$ setup, offering a practical solution for improved learning without additional inference-time overhead.",
+        "arxiv_id": "2503.11965"
+    },
+    "2503.13447": {
+        "SCORE": 15,
+        "ARXIVID": "2503.13447",
+        "COMMENT": "The paper proposes MetaScale, a novel test-time scaling framework for LLMs, which aligns with foundational research in LLM behavior and adaptability.",
+        "RELEVANCE": 8,
+        "NOVELTY": 7,
+        "authors": [
+            "Qin Liu",
+            "Wenxuan Zhou",
+            "Nan Xu",
+            "James Y. Huang",
+            "Fei Wang",
+            "Sheng Zhang",
+            "Hoifung Poon",
+            "Muhao Chen"
+        ],
+        "title": "MetaScale: Test-Time Scaling with Evolving Meta-Thoughts",
+        "abstract": "One critical challenge for large language models (LLMs) for making complex reasoning is their reliance on matching reasoning patterns from training data, instead of proactively selecting the most appropriate cognitive strategy to solve a given task. Existing approaches impose fixed cognitive structures that enhance performance in specific tasks but lack adaptability across diverse scenarios. To address this limitation, we introduce METASCALE, a test-time scaling framework based on meta-thoughts -- adaptive thinking strategies tailored to each task. METASCALE initializes a pool of candidate meta-thoughts, then iteratively selects and evaluates them using a multi-armed bandit algorithm with upper confidence bound selection, guided by a reward model. To further enhance adaptability, a genetic algorithm evolves high-reward meta-thoughts, refining and extending the strategy pool over time. By dynamically proposing and optimizing meta-thoughts at inference time, METASCALE improves both accuracy and generalization across a wide range of tasks. Experimental results demonstrate that MetaScale consistently outperforms standard inference approaches, achieving an 11% performance gain in win rate on Arena-Hard for GPT-4o, surpassing o1-mini by 0.9% under style control. Notably, METASCALE scales more effectively with increasing sampling budgets and produces more structured, expert-level responses.",
+        "arxiv_id": "2503.13447"
+    },
+    "2503.11897": {
+        "SCORE": 15,
+        "ARXIVID": "2503.11897",
+        "COMMENT": "The paper introduces PREAMBLE, a novel mechanism for efficient aggregation of block-sparse vectors, which aligns with model compression and efficiency breakthroughs.",
+        "RELEVANCE": 8,
+        "NOVELTY": 7,
+        "authors": [
+            "Hilal Asi",
+            "Vitaly Feldman",
+            "Hannah Keller",
+            "Guy N. Rothblum",
+            "Kunal Talwar"
+        ],
+        "title": "PREAMBLE: Private and Efficient Aggregation of Block Sparse Vectors and Applications",
+        "abstract": "We revisit the problem of secure aggregation of high-dimensional vectors in a two-server system such as Prio. These systems are typically used to aggregate vectors such as gradients in private federated learning, where the aggregate itself is protected via noise addition to ensure differential privacy. Existing approaches require communication scaling with the dimensionality, and thus limit the dimensionality of vectors one can efficiently process in this setup.   We propose PREAMBLE: Private Efficient Aggregation Mechanism for BLock-sparse Euclidean Vectors. PREAMBLE is a novel extension of distributed point functions that enables communication- and computation-efficient aggregation of block-sparse vectors, which are sparse vectors where the non-zero entries occur in a small number of clusters of consecutive coordinates. We then show that PREAMBLE can be combined with random sampling and privacy amplification by sampling results, to allow asymptotically optimal privacy-utility trade-offs for vector aggregation, at a fraction of the communication cost. When coupled with recent advances in numerical privacy accounting, our approach incurs a negligible overhead in noise variance, compared to the Gaussian mechanism used with Prio.",
+        "arxiv_id": "2503.11897"
+    },
+    "2503.13296": {
+        "SCORE": 15,
+        "ARXIVID": "2503.13296",
+        "COMMENT": "The paper investigates deep ensembles and Bayesian neural networks, which aligns with foundational research in model architecture and uncertainty quantification.",
+        "RELEVANCE": 8,
+        "NOVELTY": 7,
+        "authors": [
+            "Mikkel Jordahn",
+            "Jonas Vestergaard Jensen",
+            "Mikkel N. Schmidt",
+            "Michael Riis Andersen"
+        ],
+        "title": "On Local Posterior Structure in Deep Ensembles",
+        "abstract": "Bayesian Neural Networks (BNNs) often improve model calibration and predictive uncertainty quantification compared to point estimators such as maximum-a-posteriori (MAP). Similarly, deep ensembles (DEs) are also known to improve calibration, and therefore, it is natural to hypothesize that deep ensembles of BNNs (DE-BNNs) should provide even further improvements. In this work, we systematically investigate this across a number of datasets, neural network architectures, and BNN approximation methods and surprisingly find that when the ensembles grow large enough, DEs consistently outperform DE-BNNs on in-distribution data. To shine light on this observation, we conduct several sensitivity and ablation studies. Moreover, we show that even though DE-BNNs outperform DEs on out-of-distribution metrics, this comes at the cost of decreased in-distribution performance. As a final contribution, we open-source the large pool of trained models to facilitate further research on this topic.",
+        "arxiv_id": "2503.13296"
+    },
+    "2503.12686": {
+        "SCORE": 15,
+        "ARXIVID": "2503.12686",
+        "COMMENT": "The paper explores whether LLMs can perform formal reasoning using abstract interpretation, which aligns with foundational research into LLM behavior and interpretability.",
+        "RELEVANCE": 8,
+        "NOVELTY": 7,
+        "authors": [
+            "Jacqueline L. Mitchell",
+            "Brian Hyeongseok Kim",
+            "Chenyu Zhou",
+            "Chao Wang"
+        ],
+        "title": "Can LLMs Formally Reason as Abstract Interpreters for Program Analysis?",
+        "abstract": "LLMs have demonstrated impressive capabilities in code generation and comprehension, but their potential in being able to perform program analysis in a formal, automatic manner remains under-explored. To that end, we systematically investigate whether LLMs can reason about programs using a program analysis framework called abstract interpretation. We prompt LLMs to follow two different strategies, denoted as Compositional and Fixed Point Equation, to formally reason in the style of abstract interpretation, which has never been done before to the best of our knowledge. We validate our approach using state-of-the-art LLMs on 22 challenging benchmark programs from the Software Verification Competition (SV-COMP) 2019 dataset, widely used in program analysis. Our results show that our strategies are able to elicit abstract interpretation-based reasoning in the tested models, but LLMs are susceptible to logical errors, especially while interpreting complex program structures, as well as general hallucinations. This highlights key areas for improvement in the formal reasoning capabilities of LLMs.",
+        "arxiv_id": "2503.12686"
+    },
+    "2503.12811": {
+        "SCORE": 15,
+        "ARXIVID": "2503.12811",
+        "COMMENT": "The paper proposes a multi-power law for predicting loss curves across learning rate schedules, offering insights into training dynamics, which is relevant to foundational research.",
+        "RELEVANCE": 8,
+        "NOVELTY": 7,
+        "authors": [
+            "Kairong Luo",
+            "Haodong Wen",
+            "Shengding Hu",
+            "Zhenbo Sun",
+            "Zhiyuan Liu",
+            "Maosong Sun",
+            "Kaifeng Lyu",
+            "Wenguang Chen"
+        ],
+        "title": "A Multi-Power Law for Loss Curve Prediction Across Learning Rate Schedules",
+        "abstract": "Training large models is both resource-intensive and time-consuming, making it crucial to understand the quantitative relationship between model performance and hyperparameters. In this paper, we present an empirical law that describes how the pretraining loss of large language models evolves under different learning rate schedules, such as constant, cosine, and step decay schedules. Our proposed law takes a multi-power form, combining a power law based on the sum of learning rates and additional power laws to account for a loss reduction effect induced by learning rate decay. We extensively validate this law on various model sizes and architectures, and demonstrate that after fitting on a few learning rate schedules, the law accurately predicts the loss curves for unseen schedules of different shapes and horizons. Moreover, by minimizing the predicted final pretraining loss across learning rate schedules, we are able to find a schedule that outperforms the widely used cosine learning rate schedule. Interestingly, this automatically discovered schedule bears some resemblance to the recently proposed Warmup-Stable-Decay (WSD) schedule (Hu et al, 2024) but achieves a slightly lower final loss. We believe these results could offer valuable insights for understanding the dynamics of pretraining and designing learning rate schedules to improve efficiency.",
+        "arxiv_id": "2503.12811"
+    },
+    "2503.13108": {
+        "SCORE": 15,
+        "ARXIVID": "2503.13108",
+        "COMMENT": "The paper provides insights into how multimodal large language models process visual information and introduces a pruning method for efficient inference. The analysis of visual information flow aligns with foundational research in model efficiency and sparsity, making it relevant.",
+        "RELEVANCE": 8,
+        "NOVELTY": 7,
+        "authors": [
+            "Hao Yin",
+            "Guangzong Si",
+            "Zilei Wang"
+        ],
+        "title": "Lifting the Veil on Visual Information Flow in MLLMs: Unlocking Pathways to Faster Inference",
+        "abstract": "Multimodal large language models (MLLMs) improve performance on vision-language tasks by integrating visual features from pre-trained vision encoders into large language models (LLMs). However, how MLLMs process and utilize visual information remains unclear. In this paper, a shift in the dominant flow of visual information is uncovered: (1) in shallow layers, strong interactions are observed between image tokens and instruction tokens, where most visual information is injected into instruction tokens to form cross-modal semantic representations; (2) in deeper layers, image tokens primarily interact with each other, aggregating the remaining visual information to optimize semantic representations within visual modality. Based on these insights, we propose Hierarchical Modality-Aware Pruning (HiMAP), a plug-and-play inference acceleration method that dynamically prunes image tokens at specific layers, reducing computational costs by approximately 65% without sacrificing performance. Our findings offer a new understanding of visual information processing in MLLMs and provide a state-of-the-art solution for efficient inference.",
+        "arxiv_id": "2503.13108"
+    },
+    "2503.11820": {
+        "SCORE": 15,
+        "ARXIVID": "2503.11820",
+        "COMMENT": "The paper introduces a categorical framework for transformations in probabilistic graphical models, which is a foundational contribution to the theory of graphical models.",
+        "RELEVANCE": 7,
+        "NOVELTY": 8,
+        "authors": [
+            "Antonio Lorenzin",
+            "Fabio Zanasi"
+        ],
+        "title": "An Algebraic Approach to Moralisation and Triangulation of Probabilistic Graphical Models",
+        "abstract": "Moralisation and Triangulation are transformations allowing to switch between different ways of factoring a probability distribution into a graphical model. Moralisation allows to view a Bayesian network (a directed model) as a Markov network (an undirected model), whereas triangulation works in the opposite direction. We present a categorical framework where these transformations are modelled as functors between a category of Bayesian networks and one of Markov networks. The two kinds of network (the objects of these categories) are themselves represented as functors, from a `syntax' domain to a `semantics' codomain. Notably, moralisation and triangulation are definable inductively on such syntax, and operate as a form of functor pre-composition. This approach introduces a modular, algebraic perspective in the theory of probabilistic graphical models.",
+        "arxiv_id": "2503.11820"
+    },
+    "2503.12902": {
+        "SCORE": 14,
+        "ARXIVID": "2503.12902",
+        "COMMENT": "The paper explores globally optimal model trees, providing insights into interpretable machine learning and optimization, which is relevant to foundational research in model architecture.",
+        "RELEVANCE": 7,
+        "NOVELTY": 7,
+        "authors": [
+            "Sabino Francesco Roselli",
+            "Eibe Frank"
+        ],
+        "title": "Experiments with Optimal Model Trees",
+        "abstract": "Model trees provide an appealing way to perform interpretable machine learning for both classification and regression problems. In contrast to ``classic'' decision trees with constant values in their leaves, model trees can use linear combinations of predictor variables in their leaf nodes to form predictions, which can help achieve higher accuracy and smaller trees. Typical algorithms for learning model trees from training data work in a greedy fashion, growing the tree in a top-down manner by recursively splitting the data into smaller and smaller subsets. Crucially, the selected splits are only locally optimal, potentially rendering the tree overly complex and less accurate than a tree whose structure is globally optimal for the training data. In this paper, we empirically investigate the effect of constructing globally optimal model trees for classification and regression with linear support vector machines at the leaf nodes. To this end, we present mixed-integer linear programming formulations to learn optimal trees, compute such trees for a large collection of benchmark data sets, and compare their performance against greedily grown model trees in terms of interpretability and accuracy. We also compare to classic optimal and greedily grown decision trees, random forests, and support vector machines. Our results show that optimal model trees can achieve competitive accuracy with very small trees. We also investigate the effect on the accuracy of replacing axis-parallel splits with multivariate ones, foregoing interpretability while potentially obtaining greater accuracy.",
+        "arxiv_id": "2503.12902"
+    },
+    "2503.13051": {
+        "SCORE": 14,
+        "ARXIVID": "2503.13051",
+        "COMMENT": "The paper introduces a novel method for permutation learning with reduced memory requirements, which could have implications for efficiency in foundational models.",
+        "RELEVANCE": 7,
+        "NOVELTY": 7,
+        "authors": [
+            "Kai Uwe Barthel",
+            "Florian Barthel",
+            "Peter Eisert"
+        ],
+        "title": "Permutation Learning with Only N Parameters: From SoftSort to Self-Organizing Gaussians",
+        "abstract": "Sorting and permutation learning are key concepts in optimization and machine learning, especially when organizing high-dimensional data into meaningful spatial layouts. The Gumbel-Sinkhorn method, while effective, requires N*N parameters to determine a full permutation matrix, making it computationally expensive for large datasets. Low-rank matrix factorization approximations reduce memory requirements to 2MN (with M << N), but they still struggle with very large problems. SoftSort, by providing a continuous relaxation of the argsort operator, allows differentiable 1D sorting, but it faces challenges with multidimensional data and complex permutations. In this paper, we present a novel method for learning permutations using only N parameters, which dramatically reduces storage costs. Our approach builds on SoftSort, but extends it by iteratively shuffling the N indices of the elements to be sorted through a separable learning process. This modification significantly improves sorting quality, especially for multidimensional data and complex optimization criteria, and outperforms pure SoftSort. Our method offers improved memory efficiency and scalability compared to existing approaches, while maintaining high-quality permutation learning. Its dramatically reduced memory requirements make it particularly well-suited for large-scale optimization tasks, such as \"Self-Organizing Gaussians\", where efficient and scalable permutation learning is critical.",
+        "arxiv_id": "2503.13051"
+    }
+}

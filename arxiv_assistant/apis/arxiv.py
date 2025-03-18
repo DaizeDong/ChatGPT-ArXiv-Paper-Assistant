@@ -2,41 +2,15 @@ from html import unescape
 
 import arxiv
 import configparser
-import dataclasses
 import feedparser
-import json
 import re
 import requests
-from dataclasses import dataclass
 from datetime import datetime, timedelta
-from typing import Any, List, Optional, Tuple
+from requests import Session
+from typing import Any, Dict, Generator, List, Optional, Tuple
 
-from environment import CONFIG, OUTPUT_DEBUG_FILE_FORMAT
-
-
-class EnhancedJSONEncoder(json.JSONEncoder):
-    def default(self, o):
-        if dataclasses.is_dataclass(o):
-            return dataclasses.asdict(o)
-        return super().default(o)
-
-
-@dataclass
-class Paper:
-    # paper class should track the list of authors, paper title, abstract, arxiv id
-    authors: List[str]
-    title: str
-    abstract: str
-    arxiv_id: str
-
-    # add a hash function using arxiv_id
-    def __hash__(self):
-        return hash(self.arxiv_id)
-
-
-def is_earlier(ts1, ts2):
-    # compares two arxiv ids, returns true if ts1 is older than ts2
-    return int(ts1.replace(".", "")) < int(ts2.replace(".", ""))
+from arxiv_assistant.environment import OUTPUT_DEBUG_FILE_FORMAT
+from arxiv_assistant.utils.utils import Paper, batched, is_earlier
 
 
 def get_papers_from_arxiv_api(area: str, timestamp, last_id) -> List[Paper]:
@@ -73,7 +47,7 @@ def get_papers_from_arxiv_api(area: str, timestamp, last_id) -> List[Paper]:
     return api_papers
 
 
-def get_papers_from_arxiv_rss(area: str, config: Optional[dict]) -> tuple[List, None, None] | tuple[List[Paper], datetime, Any]:
+def get_papers_from_arxiv_rss(area: str, config: Optional[Dict]) -> Tuple[List, None, None] | Tuple[List[Paper], datetime, Any]:
     # get the feed from http://export.arxiv.org/rss/ and use the updated timestamp to avoid duplicates
     updated = datetime.utcnow() - timedelta(days=1)
 
@@ -94,7 +68,7 @@ def get_papers_from_arxiv_rss(area: str, config: Optional[dict]) -> tuple[List, 
         return [], None, None  # if there are no new paper return an empty list
     print(f"{len(entries)} entries found for {area}")
 
-    if CONFIG["OUTPUT"].getboolean("dump_debug_file"):
+    if config["OUTPUT"].getboolean("dump_debug_file"):
         try:
             response = requests.get(url, timeout=10)
             if response.status_code == 200:
@@ -148,6 +122,7 @@ def get_papers_from_arxiv_rss(area: str, config: Optional[dict]) -> tuple[List, 
 
 
 def merge_paper_list(paper_list, api_paper_list):
+    # TODO: seems not used in the codebase. remove if not needed
     api_set = set([paper.arxiv_id for paper in api_paper_list])
     merged_paper_list = api_paper_list
     for paper in paper_list:
@@ -156,7 +131,7 @@ def merge_paper_list(paper_list, api_paper_list):
     return merged_paper_list
 
 
-def get_papers_from_arxiv_rss_api(area: str, config: Optional[dict]) -> Tuple[List, List[Paper]]:
+def get_papers_from_arxiv_rss_api(area: str, config: Optional[Dict]) -> Tuple[List, List[Paper]]:
     entries, paper_list, timestamp, last_id = get_papers_from_arxiv_rss(area, config)
     # if timestamp is None:
     #    return []
@@ -164,6 +139,63 @@ def get_papers_from_arxiv_rss_api(area: str, config: Optional[dict]) -> Tuple[Li
     # merged_paper_list = merge_paper_list(paper_list, api_paper_list)
     # return merged_paper_list
     return entries, paper_list
+
+
+def get_papers_from_arxiv(config) -> Tuple[List, Dict[str, List[Paper]]]:
+    area_list = config["FILTERING"]["arxiv_category"].split(",")
+    all_entries = []
+    arxiv_paper_dict = {}
+    for area in area_list:
+        entries, papers = get_papers_from_arxiv_rss_api(area.strip(), config)
+        all_entries.extend(entries)
+        arxiv_paper_dict[area] = papers
+    return all_entries, arxiv_paper_dict
+
+
+def get_paper_batch(
+    session: Session,
+    ids: List[str],
+    S2_API_KEY: str,
+    fields: str = "paperId,title",
+    **kwargs,
+) -> List[Dict]:
+    # TODO: seems not used in the codebase. remove if not needed
+    # gets a batch of papers. taken from the sem scholar example.
+    params = {
+        "fields": fields,
+        **kwargs,
+    }
+    if S2_API_KEY is None:
+        headers = {}
+    else:
+        headers = {
+            "X-API-KEY": S2_API_KEY,
+        }
+    body = {
+        "ids": ids,
+    }
+
+    # https://api.semanticscholar.org/api-docs/graph#tag/Paper-Data/operation/post_graph_get_papers
+    with session.post(
+        "https://api.semanticscholar.org/graph/v1/paper/batch",
+        params=params,
+        headers=headers,
+        json=body,
+    ) as response:
+        response.raise_for_status()
+        return response.json()
+
+
+def get_papers(
+    ids: List[str], S2_API_KEY: str, batch_size: int = 100, **kwargs
+) -> Generator[Dict, None, None]:
+    # TODO: seems not used in the codebase. remove if not needed
+    # gets all papers, doing batching to avoid hitting the max paper limit.
+    # use a session to reuse the same TCP connection
+    with Session() as session:
+        # take advantage of S2 batch paper endpoint
+        for ids_batch in batched(ids, batch_size=batch_size):
+            yield from get_paper_batch(session, ids_batch, S2_API_KEY, **kwargs)
 
 
 if __name__ == "__main__":

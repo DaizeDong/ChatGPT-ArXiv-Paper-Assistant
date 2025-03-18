@@ -5,13 +5,10 @@ import json
 from datetime import datetime
 from slack_sdk import WebClient
 from slack_sdk.errors import SlackApiError
-from typing import List, TypeVar
+from typing import List
 
-from arxiv_scraper import Paper
-from environment import SLACK_CHANNEL_ID, SLACK_KEY
-from filter_papers import batched
-
-T = TypeVar("T")
+from arxiv_assistant.environment import SLACK_CHANNEL_ID, SLACK_KEY
+from arxiv_assistant.utils.utils import Paper, batched
 
 
 def send_main_message(block_list: List, channel_id, client):

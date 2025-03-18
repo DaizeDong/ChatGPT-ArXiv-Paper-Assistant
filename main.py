@@ -1,153 +1,15 @@
 import json
 import os
-import time
-from typing import Generator, TypeVar
 
-from requests import Session
-from retry import retry
-from tqdm import tqdm
-
-from arxiv_scraper import EnhancedJSONEncoder, get_papers_from_arxiv_rss_api
-from environment import AUTHOR_ID_SET, BASE_PROMPT, CONFIG, OUTPUT_DEBUG_FILE_FORMAT, OUTPUT_JSON_FILE_FORMAT, OUTPUT_MD_FILE_FORMAT, POSTFIX_PROMPT, S2_API_KEY, SCORE_PROMPT, SLACK_KEY, TOPIC_PROMPT
-from filter_papers import batched, filter_by_gpt, filter_papers_by_hindex, select_by_author
-from parse_json_to_md import render_md_string
-from push_to_slack import push_to_slack
-from utils import copy_file_or_dir, delete_file_or_dir
-
-T = TypeVar("T")
-
-
-def get_paper_batch(
-    session: Session,
-    ids: list[str],
-    S2_API_KEY: str,
-    fields: str = "paperId,title",
-    **kwargs,
-) -> list[dict]:
-    # gets a batch of papers. taken from the sem scholar example.
-    params = {
-        "fields": fields,
-        **kwargs,
-    }
-    if S2_API_KEY is None:
-        headers = {}
-    else:
-        headers = {
-            "X-API-KEY": S2_API_KEY,
-        }
-    body = {
-        "ids": ids,
-    }
-
-    # https://api.semanticscholar.org/api-docs/graph#tag/Paper-Data/operation/post_graph_get_papers
-    with session.post(
-        "https://api.semanticscholar.org/graph/v1/paper/batch",
-        params=params,
-        headers=headers,
-        json=body,
-    ) as response:
-        response.raise_for_status()
-        return response.json()
-
-
-def get_author_batch(
-    session: Session,
-    ids: list[str],
-    S2_API_KEY: str,
-    fields: str = "name,hIndex,citationCount",
-    **kwargs,
-) -> list[dict]:
-    # gets a batch of authors. analogous to author batch
-    params = {
-        "fields": fields,
-        **kwargs,
-    }
-    if S2_API_KEY is None:
-        headers = {}
-    else:
-        headers = {
-            "X-API-KEY": S2_API_KEY,
-        }
-    body = {
-        "ids": ids,
-    }
-
-    with session.post(
-        "https://api.semanticscholar.org/graph/v1/author/batch",
-        params=params,
-        headers=headers,
-        json=body,
-    ) as response:
-        response.raise_for_status()
-        return response.json()
-
-
-@retry(tries=3, delay=3.0)
-def get_one_author(session, author: str, S2_API_KEY: str) -> str:
-    # query the right endpoint https://api.semanticscholar.org/graph/v1/author/search?query=adam+smith
-    params = {"query": author, "fields": "authorId,name,hIndex", "limit": "10"}
-    if S2_API_KEY is None:
-        headers = {}
-    else:
-        headers = {"X-API-KEY": S2_API_KEY}
-    with session.get(
-        "https://api.semanticscholar.org/graph/v1/author/search",
-        params=params,
-        headers=headers,
-    ) as response:
-        response.raise_for_status()
-        response_json = response.json()
-        if len(response_json["data"]) >= 1:
-            return response_json["data"]
-        else:
-            return None
-
-
-def get_papers(
-    ids: list[str], S2_API_KEY: str, batch_size: int = 100, **kwargs
-) -> Generator[dict, None, None]:
-    # gets all papers, doing batching to avoid hitting the max paper limit.
-    # use a session to reuse the same TCP connection
-    with Session() as session:
-        # take advantage of S2 batch paper endpoint
-        for ids_batch in batched(ids, batch_size=batch_size):
-            yield from get_paper_batch(session, ids_batch, S2_API_KEY, **kwargs)
-
-
-def get_authors(
-    all_authors: list[str], S2_API_KEY: str, batch_size: int = 100, **kwargs
-):
-    # first get the list of all author ids by querying by author names
-    author_metadata_dict = {}
-    with Session() as session:
-        for author in tqdm(all_authors):
-            try:
-                auth_map = get_one_author(session, author, S2_API_KEY)
-            except Exception as ex:
-                if CONFIG["OUTPUT"].getboolean("debug_messages"):
-                    print("exception happened" + str(ex))
-                auth_map = None
-            if auth_map is not None:
-                author_metadata_dict[author] = auth_map
-            # add a 20ms wait time to avoid rate limiting
-            # otherwise, semantic scholar aggressively rate limits, so do 1.0s
-            if S2_API_KEY is not None:
-                time.sleep(0.02)
-            else:
-                time.sleep(1.0)
-    return author_metadata_dict
-
-
-def get_papers_from_arxiv(config):
-    area_list = config["FILTERING"]["arxiv_category"].split(",")
-    all_entries = []
-    arxiv_paper_dict = {}
-    for area in area_list:
-        entries, papers = get_papers_from_arxiv_rss_api(area.strip(), config)
-        all_entries.extend(entries)
-        arxiv_paper_dict[area] = papers
-    return all_entries, arxiv_paper_dict
-
+from arxiv_assistant.apis.arxiv import get_papers_from_arxiv
+from arxiv_assistant.apis.semantic_scholar import get_authors
+from arxiv_assistant.environment import AUTHOR_ID_SET, BASE_PROMPT, CONFIG, NOW_DAY, NOW_MONTH, NOW_YEAR, OUTPUT_DEBUG_FILE_FORMAT, OUTPUT_JSON_FILE_FORMAT, OUTPUT_MD_FILE_FORMAT, POSTFIX_PROMPT, S2_API_KEY, SCORE_PROMPT, SLACK_KEY, TOPIC_PROMPT
+from arxiv_assistant.filters.filter_author import filter_papers_by_hindex, select_by_author
+from arxiv_assistant.filters.filter_gpt import filter_by_gpt
+from arxiv_assistant.push_to_slack import push_to_slack
+from arxiv_assistant.renderers.render_daily import render_daily_md
+from arxiv_assistant.utils.io import copy_file_or_dir, delete_file_or_dir
+from arxiv_assistant.utils.utils import EnhancedJSONEncoder
 
 if __name__ == "__main__":
     # get the paper list from arxiv
@@ -164,7 +26,7 @@ if __name__ == "__main__":
         for paper in paper_list:
             all_authors.update(set(paper.authors))
         print("Getting author info for " + str(len(all_authors)) + " authors")
-        all_authors = get_authors(list(all_authors), S2_API_KEY)
+        all_authors = get_authors(list(all_authors), S2_API_KEY, config=CONFIG)
     else:
         print("Skipping author info")
         all_authors = {}
@@ -240,7 +102,6 @@ if __name__ == "__main__":
         with open(OUTPUT_DEBUG_FILE_FORMAT.format("filtered_paper_dict.json"), "w") as outfile:
             json.dump(filtered_paper_dict, outfile, cls=EnhancedJSONEncoder, indent=4)
 
-    # pick endpoints and push the summaries
     if CONFIG["OUTPUT"].getboolean("dump_json"):
         with open(OUTPUT_JSON_FILE_FORMAT.format("output.json"), "w") as outfile:
             json.dump(selected_paper_dict, outfile, indent=4)
@@ -254,7 +115,7 @@ if __name__ == "__main__":
             ]
         }
         with open(OUTPUT_MD_FILE_FORMAT.format("output.md"), "w") as f:
-            f.write(render_md_string(all_entries, arxiv_paper_dict, selected_paper_dict, head_table=head_table))
+            f.write(render_daily_md(all_entries, arxiv_paper_dict, selected_paper_dict, now_date=(NOW_YEAR, NOW_MONTH, NOW_DAY), prompts=(BASE_PROMPT, POSTFIX_PROMPT, SCORE_PROMPT, TOPIC_PROMPT), head_table=head_table))
 
     # only push to slack for non-empty dicts
     if CONFIG["OUTPUT"].getboolean("push_to_slack"):

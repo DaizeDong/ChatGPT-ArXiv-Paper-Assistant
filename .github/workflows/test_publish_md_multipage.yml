@@ -1,4 +1,4 @@
-name: Publish output MD to github pages (Multiple)
+name: Publish Github Pages (Multiple)
 
 on:
   workflow_dispatch:
@@ -16,13 +16,15 @@ jobs:
           ref: test_web
           fetch-depth: 0
 
-      - name: Verify /out directory and contents
+      - name: Verify output directory and contents
         run: |
           if [ -d "out" ] && [ "$(ls -A out)" ]; then
-              echo "Contents in /out:"
-              ls -la out/
+              cd out
+              echo "Contents in out:"
+              ls -R
+              mv * ../
           else
-              echo "/out directory is empty or does not exist. Aborting."
+              echo "out directory is empty or does not exist. Aborting."
               exit 1
           fi
 
@@ -30,7 +32,7 @@ jobs:
         id: check_files
         uses: andstor/file-existence-action@v3
         with:
-          files: out/latest.md
+          files: latest.md
 
       - name: Convert latest.md to pages
         uses: wranders/markdown-to-pages-action@v1
@@ -38,11 +40,11 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           files: |
-            out/latest.md
-            out/index.md
-            out/md/2025-01/index.md
-            out/md/2025-02/index.md
-            out/md/2025-03/index.md
+            latest.md
+            index.md
+            md/2025-01/index.md
+            md/2025-02/index.md
+            md/2025-03/index.md
 
       - uses: actions/upload-pages-artifact@v3
         if: steps.check_files.outputs.files_exists == 'true'

@@ -4,7 +4,7 @@ import os
 import time
 from datetime import datetime
 
-from utils import create_dir
+from arxiv_assistant.utils.io import create_dir
 
 
 def parse_authors(lines):

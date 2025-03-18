@@ -24,8 +24,17 @@ jobs:
           ref: auto_update
           fetch-depth: 0
 
-      - name: Display structure of output folder
-        run: ls -R
+      - name: Verify output directory and contents
+        run: |
+          if [ -d "out" ] && [ "$(ls -A out)" ]; then
+              cd out
+              echo "Contents in out:"
+              ls -R
+              mv output.md ../
+          else
+              echo "out directory is empty or does not exist. Aborting."
+              exit 1
+          fi
 
       - name: Check for output.md
         id: check_files

@@ -125,7 +125,7 @@ if __name__ == "__main__":
             push_to_slack(selected_paper_dict)
 
     # copy files
-    copy_file_or_dir(OUTPUT_MD_FILE_FORMAT.format("output.md"), CONFIG["OUTPUT"]["output_path"])
+    copy_file_or_dir(OUTPUT_MD_FILE_FORMAT.format("output.md"), CONFIG["OUTPUT"]["output_path"], print_info=True)
     delete_file_or_dir(os.path.join(CONFIG["OUTPUT"]["output_path"], "output.md"))
     os.rename(
         os.path.join(CONFIG["OUTPUT"]["output_path"], os.path.basename(OUTPUT_MD_FILE_FORMAT.format("output.md"))),

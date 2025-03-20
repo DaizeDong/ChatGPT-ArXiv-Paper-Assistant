@@ -1,61 +1,58 @@
+import inspect
+
 import os
 import shutil
 
 
-def create_dir(dir, suppress_errors=False):
+def create_dir(dir, suppress_errors=False) -> bool:
     try:
         if not os.path.exists(dir):
             os.makedirs(dir)
+            return True
+        else:
+            return False
     except Exception as e:
         if suppress_errors:
-            print(f"{e}\n(This exception have been suppressed and would not influence the program execution)")
+            print(f"Exception within `{inspect.currentframe().f_code.co_name}`: {e}")
+            return False
         else:
             raise e
 
 
-def delete_file_or_dir(dir, suppress_errors=False):
+def delete_file_or_dir(path, suppress_errors=False) -> bool:
     try:
-        if os.path.isfile(dir):
-            os.remove(dir)
-        elif os.path.exists(dir):
-            shutil.rmtree(dir)
+        if os.path.isfile(path):
+            os.remove(path)
+            return True
+        elif os.path.exists(path):
+            shutil.rmtree(path)
+            return True
         else:
-            pass
+            return False
     except Exception as e:
         if suppress_errors:
-            print(f"{e}\n(This exception have been suppressed and would not influence the program execution)")
+            print(f"Exception within `{inspect.currentframe().f_code.co_name}`: {e}")
+            return False
         else:
             raise e
 
 
-def copy_file_or_dir(source_dir, target_dir, print_info=False, suppress_errors=False):
+def copy_file_or_dir(source_path, target_dir, print_info=False, suppress_errors=False) -> bool:
     try:
-        create_dir(target_dir, suppress_errors=suppress_errors)
-        if os.path.isfile(source_dir):
-            shutil.copy2(source_dir, target_dir)
+        if os.path.exists(source_path):
+            create_dir(target_dir, suppress_errors=suppress_errors)
+            if os.path.isfile(source_path):
+                shutil.copy2(source_path, target_dir)
+            else:
+                shutil.copytree(source_path, os.path.join(target_dir, os.path.basename(source_path)), dirs_exist_ok=True)
+            if print_info:
+                print(f"Copied: {source_path} -> {os.path.join(target_dir, os.path.basename(source_path))}")
+            return True
         else:
-            shutil.copytree(source_dir, target_dir, dirs_exist_ok=True)
-        if print_info:
-            print(f"Copied: {source_dir} -> {target_dir}")
+            return False
     except Exception as e:
         if suppress_errors:
-            print(f"{e}\n(This exception have been suppressed and would not influence the program execution)")
-        else:
-            raise e
-
-
-def copy_all_files_in_dir(source_dir, target_dir, print_info=False, suppress_errors=False):
-    try:
-        create_dir(target_dir, suppress_errors=suppress_errors)
-        if os.path.isfile(source_dir):
-            raise ValueError(f"source_dir {source_dir} is a file, not a directory")
-        else:
-            for item in os.listdir(source_dir):
-                source_item = os.path.join(source_dir, item)
-                target_item = os.path.join(target_dir, item)
-                copy_file_or_dir(source_item, target_item, print_info=print_info, suppress_errors=suppress_errors)
-    except Exception as e:
-        if suppress_errors:
-            print(f"{e}\n(This exception have been suppressed and would not influence the program execution)")
+            print(f"Exception within `{inspect.currentframe().f_code.co_name}`: {e}")
+            return False
         else:
             raise e

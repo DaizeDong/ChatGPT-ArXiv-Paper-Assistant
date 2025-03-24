@@ -1,6 +1,6 @@
 # ChatGPT ArXiv Paper Assistant: A Daily ArXiv Scanner
 
-> *[Last update: 3/13/2025]*
+> *[Last update: 3/20/2025]*
 > This is an enhanced version of the [GPT paper assistant](https://github.com/tatsu-lab/gpt_paper_assistant).
 > I fixed some bugs and added various new features to make it easier to use.
 > See the [change log](#changelog) for details.
@@ -134,6 +134,10 @@ Finally, all papers are sorted by the max of their `author_match_score` and the 
 
 ## Changelog
 
+- **3/20/2025**
+    - Supported getting papers on any specified date through arXiv API.
+    - Enhanced the logic of getting papers from RSS feeds.
+    - Added a script for remedying papers for missed dates.
 - **3/13/2025**
     - Rearranged the file structure and cleaned some unused code snippets.
 - **2/19/2025**

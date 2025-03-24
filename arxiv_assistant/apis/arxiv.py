@@ -1,103 +1,133 @@
 from html import unescape
+from xml.etree import ElementTree
 
-import arxiv
-import configparser
 import feedparser
 import re
 import requests
-from datetime import datetime, timedelta
-from requests import Session
-from typing import Any, Dict, Generator, List, Optional, Tuple
+import warnings
+from typing import Dict, List, Set, Tuple
 
 from arxiv_assistant.environment import OUTPUT_DEBUG_FILE_FORMAT
-from arxiv_assistant.utils.utils import Paper, batched, is_earlier
+from arxiv_assistant.utils.utils import Paper, normalize_whitespace
 
 
-def get_papers_from_arxiv_api(area: str, timestamp, last_id) -> List[Paper]:
-    # look for papers that are newer than the newest papers in RSS.
-    # we do this by looking at last_id and grabbing everything newer.
-    end_date = timestamp
-    start_date = timestamp - timedelta(days=4)
-    search = arxiv.Search(
-        query="("
-              + area
-              + ") AND submittedDate:["
-              + start_date.strftime("%Y%m%d")
-              + "* TO "
-              + end_date.strftime("%Y%m%d")
-              + "*]",
-        max_results=None,
-        sort_by=arxiv.SortCriterion.SubmittedDate,
-    )
-    results = list(arxiv.Client().results(search))
-    api_papers = []
-    for result in results:
-        new_id = result.get_short_id()[:10]
-        if is_earlier(last_id, new_id):
-            authors = [author.name for author in result.authors]
-            summary = result.summary
-            summary = unescape(re.sub("\n", " ", summary))
-            paper = Paper(
-                authors=authors,
-                title=result.title,
-                abstract=summary,
-                arxiv_id=result.get_short_id()[:10],
-            )
-            api_papers.append(paper)
-    return api_papers
+def get_papers_from_arxiv_api(
+    area: str,
+    begin_date: Tuple[int, int, int],  # year, month, day
+    end_date: Tuple[int, int, int],  # year, month, day
+    force_primary: bool = False,
+    debug_messages: bool = False,
+    dump_debug_file: bool = False,
+) -> Tuple[List, List[Paper]]:
+    """
+    Get papers by calling the arXiv API.
+    - Pros:
+        Support filtering papers by their uploaded dates.
+    - Cons:
+        The uploaded dates don't always match the announced dates. Therefore, the filtering is not accurate and may miss some papers.
+        Not support filtering by `announce_type`.
+    """
+    begin_year, begin_month, begin_day = begin_date
+    end_year, end_month, end_day = end_date
 
+    base_url = "http://export.arxiv.org/api/query"
+    begin_date_string = f"{begin_year}{format(begin_month, '02d')}{format(begin_day, '02d')}"
+    end_date_string = f"{end_year}{format(end_month, '02d')}{format(end_day, '02d')}"
+    date_query = f"submittedDate:[{begin_date_string}0000+TO+{end_date_string}2359]"
+    area_query = f"cat:{area}"
 
-def get_papers_from_arxiv_rss(area: str, config: Optional[Dict]) -> Tuple[List, None, None] | Tuple[List[Paper], datetime, Any]:
-    # get the feed from http://export.arxiv.org/rss/ and use the updated timestamp to avoid duplicates
-    updated = datetime.utcnow() - timedelta(days=1)
-
-    # format this into the string format 'Fri, 03 Nov 2023 00:30:00 GMT'
-    url = f"https://export.arxiv.org/rss/{area}"
-    updated_string = updated.strftime("%a, %d %b %Y %H:%M:%S GMT")
+    url = f"{base_url}?search_query={area_query}+AND+{date_query}&start=0&max_results=10000"
     print(f"Getting papers from {url}")
-    feed = feedparser.parse(url, modified=updated_string)
-    if feed.status == 304:
-        if config is not None:
-            print(f"No {config['FILTERING'].get('announce_type', 'new').replace(',', '/')} papers since {updated_string} for {area}")
-        return [], None, None  # if there are no new paper return an empty list
+    response = requests.get(url, timeout=10)
+    response.raise_for_status()
+    if dump_debug_file:
+        with open(OUTPUT_DEBUG_FILE_FORMAT.format(f"raw_content_{area}.xml"), "w", encoding="utf-8") as outfile:
+            outfile.write(response.text)
+
+    # Parse the XML response
+    root = ElementTree.fromstring(response.text)
+
+    entries = root.findall("{http://www.w3.org/2005/Atom}entry")
+    if len(entries) == 0:
+        print(f"No entries found for {area}")
+        return [], []
+    print(f"{len(entries)} entries found for {area}")
+
+    # extract papers as a list
+    paper_list = []
+
+    for entry in entries:
+        title = normalize_whitespace(entry.find("{http://www.w3.org/2005/Atom}title").text)
+
+        # ignore papers not in primary area
+        paper_area = entry.find("{http://arxiv.org/schemas/atom}primary_category").get("term")
+        if (area != paper_area) and force_primary:
+            if debug_messages:
+                print(f"Ignoring \"{title}\" by `paper_area` ({paper_area})")
+            continue
+
+        # add a new paper
+        arxiv_id = normalize_whitespace(entry.find("{http://www.w3.org/2005/Atom}id").text).split("/")[-1].split("v")[0]
+        abstract = normalize_whitespace(entry.find("{http://www.w3.org/2005/Atom}summary").text)
+        authors = [normalize_whitespace(author.find("{http://www.w3.org/2005/Atom}name").text) for author in entry.findall("{http://www.w3.org/2005/Atom}author")]
+
+        new_paper = Paper(authors=authors, title=title, abstract=abstract, arxiv_id=arxiv_id)
+        paper_list.append(new_paper)
+
+    print(f"{len(paper_list)} papers left for {area}")
+
+    return entries, paper_list
+
+
+def get_papers_from_arxiv_rss(
+    area: str,
+    announce_type: Set[str] = None,
+    force_primary: bool = False,
+    debug_messages: bool = False,
+    dump_debug_file: bool = False,
+) -> Tuple[List[Dict], List[Paper]]:
+    """
+    Get papers from the arXiv RSS feed.
+    - Cons:
+        Cannot go back to a previous date to get corresponding announced papers.
+    """
+    if announce_type is None:
+        announce_type = {"new"}
+
+    # get the list of entries
+    url = f"https://export.arxiv.org/rss/{area}"
+    print(f"Getting papers from {url}")
+    response = requests.get(url, timeout=10)
+    response.raise_for_status()
+    feed = feedparser.parse(response.text)
+    if dump_debug_file:
+        with open(OUTPUT_DEBUG_FILE_FORMAT.format(f"raw_content_{area}.rss"), "w", encoding="utf-8") as outfile:
+            outfile.write(response.text)
 
     # get the list of entries
     entries = feed.entries
     if len(entries) == 0:
         print(f"No entries found for {area}")
-        return [], None, None  # if there are no new paper return an empty list
+        return [], []
     print(f"{len(entries)} entries found for {area}")
 
-    if config["OUTPUT"].getboolean("dump_debug_file"):
-        try:
-            response = requests.get(url, timeout=10)
-            if response.status_code == 200:
-                with open(OUTPUT_DEBUG_FILE_FORMAT.format(f"raw_content_{area}.rss"), "w", encoding="utf-8") as outfile:
-                    outfile.write(response.text)
-            else:
-                print(f"Warning: Failed to fetch RSS content, status code {response.status_code}")
-        except Exception as e:
-            print(f"Error fetching RSS content: {e}")
-
-    # parse last-modified date
+    # extract papers as a list
     paper_list = []
-    timestamp = datetime.strptime(feed.feed["updated"], "%a, %d %b %Y %H:%M:%S +0000")
-    last_id = entries[0].link.split("/")[-1]
-    announce_type = set(config["FILTERING"].get("announce_type", "new").split(","))
 
     for paper in entries:
-        # ignore updated papers
+        # filter by `announce_type`
         if not paper["arxiv_announce_type"] in announce_type:
-            if config["OUTPUT"].getboolean("debug_messages"):
+            if debug_messages:
                 print(f"Ignoring \"{paper.title}\" by `announce_type` ({paper['arxiv_announce_type']})")
             continue
-        # extract area
-        paper_area = paper.tags[0]["term"]
+
         # ignore papers not in primary area
-        if (area != paper_area) and (config["FILTERING"].getboolean("force_primary")):
-            if config["OUTPUT"].getboolean("debug_messages"):
+        paper_area = paper.tags[0]["term"]
+        if (area != paper_area) and force_primary:
+            if debug_messages:
                 print(f"Ignoring \"{paper.title}\" by `paper_area` ({paper_area})")
             continue
+
         # otherwise make a new paper, for the author field make sure to strip the HTML tags
         authors = [
             unescape(re.sub("<[^<]+?>", "", author)).strip()
@@ -111,101 +141,92 @@ def get_papers_from_arxiv_rss(area: str, config: Optional[Dict]) -> Tuple[List, 
         # strip the abstract
         abstract = summary.split("Abstract: ")[-1]
         # remove the link part of the id
-        id = paper.link.split("/")[-1]
+        arxiv_id = paper.link.split("/")[-1].split("v")[0]
+
         # make a new paper
-        new_paper = Paper(authors=authors, title=title, abstract=abstract, arxiv_id=id)
+        new_paper = Paper(authors=authors, title=title, abstract=abstract, arxiv_id=arxiv_id)
         paper_list.append(new_paper)
 
     print(f"{len(paper_list)} papers left for {area}")
 
-    return entries, paper_list, timestamp, last_id
-
-
-def merge_paper_list(paper_list, api_paper_list):
-    # TODO: seems not used in the codebase. remove if not needed
-    api_set = set([paper.arxiv_id for paper in api_paper_list])
-    merged_paper_list = api_paper_list
-    for paper in paper_list:
-        if paper.arxiv_id not in api_set:
-            merged_paper_list.append(paper)
-    return merged_paper_list
-
-
-def get_papers_from_arxiv_rss_api(area: str, config: Optional[Dict]) -> Tuple[List, List[Paper]]:
-    entries, paper_list, timestamp, last_id = get_papers_from_arxiv_rss(area, config)
-    # if timestamp is None:
-    #    return []
-    # api_paper_list = get_papers_from_arxiv_api(area, timestamp, last_id)
-    # merged_paper_list = merge_paper_list(paper_list, api_paper_list)
-    # return merged_paper_list
     return entries, paper_list
 
 
-def get_papers_from_arxiv(config) -> Tuple[List, Dict[str, List[Paper]]]:
-    area_list = config["FILTERING"]["arxiv_category"].split(",")
+def get_papers_from_arxiv(
+    config,
+    source="rss",
+    begin_date: Tuple[int, int, int] = None,
+    end_date: Tuple[int, int, int] = None,
+) -> Tuple[List[Dict], Dict[str, List[Paper]]]:
     all_entries = []
     arxiv_paper_dict = {}
-    for area in area_list:
-        entries, papers = get_papers_from_arxiv_rss_api(area.strip(), config)
-        all_entries.extend(entries)
-        arxiv_paper_dict[area] = papers
+
+    area_list = [s.strip() for s in config["FILTERING"]["arxiv_category"].split(",")]
+    announce_type_list = [s.strip() for s in config["FILTERING"].get("announce_type", "new").split(",")]
+    force_primary = config["FILTERING"].getboolean("force_primary")
+    debug_messages = config["OUTPUT"].getboolean("debug_messages")
+    dump_debug_file = config["OUTPUT"].getboolean("dump_debug_file")
+
+    if source == "rss":
+        print(f"Using RSS feed to get papers...")
+        if begin_date is not None or end_date is not None:
+            warnings.warn(f"Specifying `begin_date` and `end_date` is not supported for \"rss\" source, ignoring them")
+        for area in area_list:
+            entries, papers = get_papers_from_arxiv_rss(
+                area,
+                set(announce_type_list),
+                force_primary,
+                debug_messages,
+                dump_debug_file,
+            )
+            all_entries.extend(entries)
+            arxiv_paper_dict[area] = papers
+
+    elif source == "api":
+        print(f"Using arXiv API to get papers...")
+        warnings.warn(
+            "The arXiv API is not reliable for getting daily announced papers. "
+            "Consider using the arXiv RSS feed instead if you are filtering papers by their *announced* date. "
+            "You can neglect this warning if you are filtering papers *uploaded* on a specified date range."
+        )
+        if begin_date is None or end_date is None:
+            raise ValueError(f"Both `begin_date` and `end_date` arguments are required for \"api\" source")
+        if not (len(announce_type_list) == 1 and "new" in announce_type_list):
+            warnings.warn(f"Specifying `announce_type` is not supported for \"api\" source, ignoring {announce_type_list}")
+        for area in area_list:
+            entries, papers = get_papers_from_arxiv_api(
+                area,
+                begin_date,
+                end_date,
+                force_primary,
+                debug_messages,
+            )
+            all_entries.extend(entries)
+            arxiv_paper_dict[area] = papers
+
+    else:
+        raise ValueError(f"Unknown source \"{source}\"")
+
     return all_entries, arxiv_paper_dict
 
 
-def get_paper_batch(
-    session: Session,
-    ids: List[str],
-    S2_API_KEY: str,
-    fields: str = "paperId,title",
-    **kwargs,
-) -> List[Dict]:
-    # TODO: seems not used in the codebase. remove if not needed
-    # gets a batch of papers. taken from the sem scholar example.
-    params = {
-        "fields": fields,
-        **kwargs,
-    }
-    if S2_API_KEY is None:
-        headers = {}
-    else:
-        headers = {
-            "X-API-KEY": S2_API_KEY,
-        }
-    body = {
-        "ids": ids,
-    }
-
-    # https://api.semanticscholar.org/api-docs/graph#tag/Paper-Data/operation/post_graph_get_papers
-    with session.post(
-        "https://api.semanticscholar.org/graph/v1/paper/batch",
-        params=params,
-        headers=headers,
-        json=body,
-    ) as response:
-        response.raise_for_status()
-        return response.json()
-
-
-def get_papers(
-    ids: List[str], S2_API_KEY: str, batch_size: int = 100, **kwargs
-) -> Generator[Dict, None, None]:
-    # TODO: seems not used in the codebase. remove if not needed
-    # gets all papers, doing batching to avoid hitting the max paper limit.
-    # use a session to reuse the same TCP connection
-    with Session() as session:
-        # take advantage of S2 batch paper endpoint
-        for ids_batch in batched(ids, batch_size=batch_size):
-            yield from get_paper_batch(session, ids_batch, S2_API_KEY, **kwargs)
-
-
 if __name__ == "__main__":
-    config = configparser.ConfigParser()
-    config.read("configs/config.ini")
-    paper_list, timestamp, last_id = get_papers_from_arxiv_rss("cs.CL", config)
-    print(timestamp)
-    api_paper_list = get_papers_from_arxiv_api("cs.CL", timestamp, last_id)
-    merged_paper_list = merge_paper_list(paper_list, api_paper_list)
-    print([paper.arxiv_id for paper in merged_paper_list])
-    print([paper.arxiv_id for paper in paper_list])
-    print([paper.arxiv_id for paper in api_paper_list])
-    print("success")
+    from arxiv_assistant.environment import NOW_TIME
+    from datetime import timedelta
+
+    area = "cs.LG"
+    announce_type = {"new", "cross"}
+    force_primary = False
+    debug_messages = True
+    dump_debug_file = True
+
+    print("Getting papers from arXiv RSS...")
+    entries, papers = get_papers_from_arxiv_rss(area, announce_type, force_primary, debug_messages, dump_debug_file)
+
+    yesterday = NOW_TIME - timedelta(days=1)  # use yesterday's time as the API returns papers by their uploaded date instead of the announced date
+    yesterday_date = (int(yesterday.strftime("%Y")), int(yesterday.strftime("%m")), int(yesterday.strftime("%d")))
+
+    print("Getting papers from arXiv API...")
+    entries, papers = get_papers_from_arxiv_api(area, yesterday_date, yesterday_date, force_primary, debug_messages, dump_debug_file)  # this is inaccurate for getting today's announced paper
+
+    print("Done!")

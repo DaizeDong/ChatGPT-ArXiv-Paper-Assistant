@@ -1,8 +1,7 @@
 import configparser
 import feedparser
 import os
-import time
-from datetime import datetime
+from datetime import UTC, datetime
 
 from arxiv_assistant.utils.io import create_dir
 
@@ -67,32 +66,34 @@ try:
     if len(feed.entries) > 0:
         # Example `feed.published`: "Tue, 18 Feb 2025 00:00:00 -0500"
         parsed_time = datetime.strptime(feed.entries[0].published, "%a, %d %b %Y %H:%M:%S %z")
-        NOW_YEAR = parsed_time.strftime("%Y")
-        NOW_MONTH = parsed_time.strftime("%m")
-        NOW_DAY = parsed_time.strftime("%d")
+        NOW_TIME = parsed_time
+        NOW_YEAR = int(NOW_TIME.strftime("%Y"))
+        NOW_MONTH = int(NOW_TIME.strftime("%m"))
+        NOW_DAY = int(NOW_TIME.strftime("%d"))
     else:
         raise ValueError("Feed does not contain any entries")
 except Exception as e:
     # use local time
-    NOW_YEAR = time.strftime("%Y")
-    NOW_MONTH = time.strftime("%m")
-    NOW_DAY = time.strftime("%d")
+    NOW_TIME = datetime.now(UTC)
+    NOW_YEAR = int(NOW_TIME.strftime("%Y"))
+    NOW_MONTH = int(NOW_TIME.strftime("%m"))
+    NOW_DAY = int(NOW_TIME.strftime("%d"))
 
 print(f"NOW_YEAR: {NOW_YEAR}")
 print(f"NOW_MONTH: {NOW_MONTH}")
 print(f"NOW_DAY: {NOW_DAY}")
 
 # output path
-OUTPUT_DEBUG_DIR = os.path.join(CONFIG["OUTPUT"]["output_path"], "debug", f"{NOW_YEAR}-{NOW_MONTH}", f"{NOW_YEAR}-{NOW_MONTH}-{NOW_DAY}")
+OUTPUT_DEBUG_DIR = os.path.join(CONFIG["OUTPUT"]["output_path"], "debug", f"{NOW_YEAR}-{format(NOW_MONTH, '02d')}", f"{NOW_YEAR}-{format(NOW_MONTH, '02d')}-{format(NOW_DAY, '02d')}")
 OUTPUT_DEBUG_FILE_FORMAT = os.path.join(OUTPUT_DEBUG_DIR, "{}")
 create_dir(OUTPUT_DEBUG_DIR)
 
-OUTPUT_MD_DIR = os.path.join(CONFIG["OUTPUT"]["output_path"], "md", f"{NOW_YEAR}-{NOW_MONTH}")
-OUTPUT_MD_FILE_FORMAT = os.path.join(OUTPUT_MD_DIR, f"{NOW_YEAR}-{NOW_MONTH}-{NOW_DAY}-" + "{}")
+OUTPUT_MD_DIR = os.path.join(CONFIG["OUTPUT"]["output_path"], "md", f"{NOW_YEAR}-{format(NOW_MONTH, '02d')}")
+OUTPUT_MD_FILE_FORMAT = os.path.join(OUTPUT_MD_DIR, f"{NOW_YEAR}-{format(NOW_MONTH, '02d')}-{format(NOW_DAY, '02d')}-" + "{}")
 create_dir(OUTPUT_MD_DIR)
 
-OUTPUT_JSON_DIR = os.path.join(CONFIG["OUTPUT"]["output_path"], "json", f"{NOW_YEAR}-{NOW_MONTH}")
-OUTPUT_JSON_FILE_FORMAT = os.path.join(OUTPUT_JSON_DIR, f"{NOW_YEAR}-{NOW_MONTH}-{NOW_DAY}-" + "{}")
+OUTPUT_JSON_DIR = os.path.join(CONFIG["OUTPUT"]["output_path"], "json", f"{NOW_YEAR}-{format(NOW_MONTH, '02d')}")
+OUTPUT_JSON_FILE_FORMAT = os.path.join(OUTPUT_JSON_DIR, f"{NOW_YEAR}-{format(NOW_MONTH, '02d')}-{format(NOW_DAY, '02d')}-" + "{}")
 create_dir(OUTPUT_JSON_DIR)
 
 print(f"OUTPUT_DEBUG_DIR: {OUTPUT_DEBUG_DIR}")

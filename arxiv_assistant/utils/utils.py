@@ -1,5 +1,6 @@
 import dataclasses
 import json
+import re
 from dataclasses import dataclass
 from typing import List
 
@@ -32,3 +33,8 @@ def is_earlier(ts1, ts2):
 def batched(items, batch_size):
     # takes a list and returns a list of list with batch_size
     return [items[i: i + batch_size] for i in range(0, len(items), batch_size)]
+
+
+def normalize_whitespace(string):
+    """Replace multiple whitespaces with a single space."""
+    return re.sub(r'\s+', ' ', string).strip()

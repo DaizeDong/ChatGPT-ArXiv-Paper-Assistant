@@ -50,14 +50,14 @@ def render_daily_md(
     all_entries: List,
     arxiv_paper_dict: Dict[str, List[Paper]],
     selected_paper_dict: Dict[str, Dict],
-    now_date: Tuple[int, int, int] = None,
-    prompts: Tuple[str, str, str, str] = None,
+    now_date: Tuple[int, int, int] = None,  # year, month, day
+    prompts: Tuple[str, str, str, str] = None,  # base, topic, score, postfix
     head_table: Dict = None,
 ):
     # render date content
     if now_date is not None:
         now_year, now_month, now_day = now_date
-        date_string = f"{now_month}/{now_day}/{now_year}"
+        date_string = f"{now_month}/{format(now_day, '02d')}/{format(now_year, '02d')}"
     else:
         date_string = ""
 

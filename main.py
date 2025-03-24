@@ -13,7 +13,7 @@ from arxiv_assistant.utils.utils import EnhancedJSONEncoder
 
 if __name__ == "__main__":
     # get the paper list from arxiv
-    all_entries, arxiv_paper_dict = get_papers_from_arxiv(CONFIG)
+    all_entries, arxiv_paper_dict = get_papers_from_arxiv(CONFIG, source="rss")
     paper_list = list(set(v for area_papers in arxiv_paper_dict.values() for v in area_papers))
     print("Total number of papers:" + str(len(paper_list)))
     if len(paper_list) == 0:

@@ -1,0 +1,702 @@
+{
+    "2503.15798": {
+        "SCORE": 19,
+        "ARXIVID": "2503.15798",
+        "COMMENT": "The paper introduces Mixture of Lookup Experts (MoLE), which aligns closely with foundational research in Mixture-of-Experts architectures and efficiency.",
+        "RELEVANCE": 10,
+        "NOVELTY": 9,
+        "authors": [
+            "Shibo Jie",
+            "Yehui Tang",
+            "Kai Han",
+            "Yitong Li",
+            "Duyu Tang",
+            "Zhi-Hong Deng",
+            "Yunhe Wang"
+        ],
+        "title": "Mixture of Lookup Experts",
+        "abstract": "Mixture-of-Experts (MoE) activates only a subset of experts during inference, allowing the model to maintain low inference FLOPs and latency even as the parameter count scales up. However, since MoE dynamically selects the experts, all the experts need to be loaded into VRAM. Their large parameter size still limits deployment, and offloading, which load experts into VRAM only when needed, significantly increase inference latency. To address this, we propose Mixture of Lookup Experts (MoLE), a new MoE architecture that is efficient in both communication and VRAM usage. In MoLE, the experts are Feed-Forward Networks (FFNs) during training, taking the output of the embedding layer as input. Before inference, these experts can be re-parameterized as lookup tables (LUTs) that retrieves expert outputs based on input ids, and offloaded to storage devices. Therefore, we do not need to perform expert computations during inference. Instead, we directly retrieve the expert's computation results based on input ids and load them into VRAM, and thus the resulting communication overhead is negligible. Experiments show that, with the same FLOPs and VRAM usage, MoLE achieves inference speeds comparable to dense models and significantly faster than MoE with experts offloading, while maintaining performance on par with MoE.",
+        "arxiv_id": "2503.15798"
+    },
+    "2503.16398": {
+        "SCORE": 17,
+        "ARXIVID": "2503.16398",
+        "COMMENT": "The paper provides theoretical insights into the global convergence time of SGD in non-convex landscapes, which aligns with foundational research in training dynamics of neural networks.",
+        "RELEVANCE": 9,
+        "NOVELTY": 8,
+        "authors": [
+            "Wa\u00efss Azizian",
+            "Franck Iutzeler",
+            "J\u00e9r\u00f4me Malick",
+            "Panayotis Mertikopoulos"
+        ],
+        "title": "The global convergence time of stochastic gradient descent in non-convex landscapes: Sharp estimates via large deviations",
+        "abstract": "In this paper, we examine the time it takes for stochastic gradient descent (SGD) to reach the global minimum of a general, non-convex loss function. We approach this question through the lens of randomly perturbed dynamical systems and large deviations theory, and we provide a tight characterization of the global convergence time of SGD via matching upper and lower bounds. These bounds are dominated by the most \"costly\" set of obstacles that the algorithm may need to overcome to reach a global minimizer from a given initialization, coupling in this way the global geometry of the underlying loss landscape with the statistics of the noise entering the process. Finally, motivated by applications to the training of deep neural networks, we also provide a series of refinements and extensions of our analysis for loss functions with shallow local minima.",
+        "arxiv_id": "2503.16398"
+    },
+    "2503.16278": {
+        "SCORE": 17,
+        "ARXIVID": "2503.16278",
+        "COMMENT": "The paper introduces Uni-3DAR, a unified framework for 3D generation and understanding via autoregression. It aligns with foundational research in representation learning and architecture innovations.",
+        "RELEVANCE": 9,
+        "NOVELTY": 8,
+        "authors": [
+            "Shuqi Lu",
+            "Haowei Lin",
+            "Lin Yao",
+            "Zhifeng Gao",
+            "Xiaohong Ji",
+            "Weinan E",
+            "Linfeng Zhang",
+            "Guolin Ke"
+        ],
+        "title": "Uni-3DAR: Unified 3D Generation and Understanding via Autoregression on Compressed Spatial Tokens",
+        "abstract": "Recent advancements in large language models and their multi-modal extensions have demonstrated the effectiveness of unifying generation and understanding through autoregressive next-token prediction. However, despite the critical role of 3D structural generation and understanding (3D GU) in AI for science, these tasks have largely evolved independently, with autoregressive methods remaining underexplored. To bridge this gap, we introduce Uni-3DAR, a unified framework that seamlessly integrates 3D GU tasks via autoregressive prediction. At its core, Uni-3DAR employs a novel hierarchical tokenization that compresses 3D space using an octree, leveraging the inherent sparsity of 3D structures. It then applies an additional tokenization for fine-grained structural details, capturing key attributes such as atom types and precise spatial coordinates in microscopic 3D structures. We further propose two optimizations to enhance efficiency and effectiveness. The first is a two-level subtree compression strategy, which reduces the octree token sequence by up to 8x. The second is a masked next-token prediction mechanism tailored for dynamically varying token positions, significantly boosting model performance. By combining these strategies, Uni-3DAR successfully unifies diverse 3D GU tasks within a single autoregressive framework. Extensive experiments across multiple microscopic 3D GU tasks, including molecules, proteins, polymers, and crystals, validate its effectiveness and versatility. Notably, Uni-3DAR surpasses previous state-of-the-art diffusion models by a substantial margin, achieving up to 256\\% relative improvement while delivering inference speeds up to 21.8x faster. The code is publicly available at https://github.com/dptech-corp/Uni-3DAR.",
+        "arxiv_id": "2503.16278"
+    },
+    "2503.15888": {
+        "SCORE": 17,
+        "ARXIVID": "2503.15888",
+        "COMMENT": "The paper introduces CK-PLUG for controlling knowledge reliance in LLMs, which aligns with foundational research in LLM behavior and interpretability.",
+        "RELEVANCE": 9,
+        "NOVELTY": 8,
+        "authors": [
+            "Baolong Bi",
+            "Shenghua Liu",
+            "Yiwei Wang",
+            "Yilong Xu",
+            "Junfeng Fang",
+            "Lingrui Mei",
+            "Xueqi Cheng"
+        ],
+        "title": "Parameters vs. Context: Fine-Grained Control of Knowledge Reliance in Language Models",
+        "abstract": "Retrieval-Augmented Generation (RAG) mitigates hallucinations in Large Language Models (LLMs) by integrating external knowledge. However, conflicts between parametric knowledge and retrieved context pose challenges, particularly when retrieved information is unreliable or the model's internal knowledge is outdated. In such cases, LLMs struggle to determine whether to rely more on their own parameters or the conflicted context. To address this, we propose **CK-PLUG**, a plug-and-play method for controlling LLMs' reliance on parametric and contextual knowledge. We introduce a novel knowledge consistency metric, Confidence Gain, which detects knowledge conflicts by measuring entropy shifts in token probability distributions after context insertion. CK-PLUG then enables fine-grained control over knowledge preference by adjusting the probability distribution of tokens with negative confidence gain through a single tuning parameter. Experiments demonstrate CK-PLUG's ability to significantly regulate knowledge reliance in counterfactual RAG scenarios while maintaining generation fluency and knowledge accuracy. For instance, on Llama3-8B, memory recall (MR) of RAG response can be adjusted within a broad range (9.9%-71.9%), compared to the baseline of 42.1%. Moreover, CK-PLUG supports adaptive control based on the model's confidence in both internal and external knowledge, achieving consistent performance improvements across various general RAG tasks. Our code is available at: $\\href{https://github.com/byronBBL/CK-PLUG}{\\text{this https URL}}$.",
+        "arxiv_id": "2503.15888"
+    },
+    "2503.15758": {
+        "SCORE": 17,
+        "ARXIVID": "2503.15758",
+        "COMMENT": "The paper introduces ATTENTION2D for distributed self-attention, which aligns with foundational research in model architecture and efficiency.",
+        "RELEVANCE": 9,
+        "NOVELTY": 8,
+        "authors": [
+            "Venmugil Elango"
+        ],
+        "title": "ATTENTION2D: Communication Efficient Distributed Self-Attention Mechanism",
+        "abstract": "Transformer-based models have emerged as a leading architecture for natural language processing, natural language generation, and image generation tasks. A fundamental element of the transformer architecture is self-attention, which allows the model to capture intricate dependencies within the data. However, the self-attention mechanism also incurs significant computational and memory costs, particularly for long sequences. In this paper, we introduce ATTENTION2D, a novel approach that exploits parallelism along two dimensions - query and key/value - of the self-attention operation. This method enables efficient distribution and parallelization of computations across multiple devices. Our approach facilitates asymptotically faster training and inference phases compared to previous methods, without relying on approximations or incurring additional computational or memory overheads. Furthermore, unlike existing techniques that struggle to scale with an increasing number of processing units, our approach effectively scales with additional processing units. Our experimental results confirm the effectiveness of our method in improving communication efficiency and scalability. Compared to Ring Attention, our approach demonstrated up to a 5x performance boost on a GPT-3-like model using 64 NVIDIA A100 GPUs across 16 nodes, and up to a 9.4x performance boost on 64 NVIDIA H100 GPUs across 64 nodes.",
+        "arxiv_id": "2503.15758"
+    },
+    "2503.16071": {
+        "SCORE": 17,
+        "ARXIVID": "2503.16071",
+        "COMMENT": "The paper proposes a novel method combining RAG principles with LLM fine-tuning, which aligns with foundational research in LLM architecture and memory integration.",
+        "RELEVANCE": 9,
+        "NOVELTY": 8,
+        "authors": [
+            "Jiale Wei",
+            "Shuchi Wu",
+            "Ruochen Liu",
+            "Xiang Ying",
+            "Jingbo Shang",
+            "Fangbo Tao"
+        ],
+        "title": "Tuning LLMs by RAG Principles: Towards LLM-native Memory",
+        "abstract": "Memory, additional information beyond the training of large language models (LLMs), is crucial to various real-world applications, such as personal assistant. The two mainstream solutions to incorporate memory into the generation process are long-context LLMs and retrieval-augmented generation (RAG). In this paper, we first systematically compare these two types of solutions on three renovated/new datasets and show that (1) long-context solutions, although more expensive, shall be easier to capture the big picture and better answer queries which require considering the memory as a whole; and (2) when the queries concern specific information, RAG solutions shall be more competitive especially when the keywords can be explicitly matched. Therefore, we propose a novel method RAG-Tuned-LLM which fine-tunes a relative small (e.g., 7B) LLM using the data generated following the RAG principles, so it can combine the advantages of both solutions. Extensive experiments on three datasets demonstrate that RAG-Tuned-LLM can beat long-context LLMs and RAG methods across a wide range of query types.",
+        "arxiv_id": "2503.16071"
+    },
+    "2503.16351": {
+        "SCORE": 17,
+        "ARXIVID": "2503.16351",
+        "COMMENT": "The paper introduces Lyra, a subquadratic architecture for biological sequence modeling, which is relevant to foundational research in model architecture and efficiency.",
+        "RELEVANCE": 9,
+        "NOVELTY": 8,
+        "authors": [
+            "Krithik Ramesh",
+            "Sameed M. Siddiqui",
+            "Albert Gu",
+            "Michael D. Mitzenmacher",
+            "Pardis C. Sabeti"
+        ],
+        "title": "Lyra: An Efficient and Expressive Subquadratic Architecture for Modeling Biological Sequences",
+        "abstract": "Deep learning architectures such as convolutional neural networks and Transformers have revolutionized biological sequence modeling, with recent advances driven by scaling up foundation and task-specific models. The computational resources and large datasets required, however, limit their applicability in biological contexts. We introduce Lyra, a subquadratic architecture for sequence modeling, grounded in the biological framework of epistasis for understanding sequence-to-function relationships. Mathematically, we demonstrate that state space models efficiently capture global epistatic interactions and combine them with projected gated convolutions for modeling local relationships. We demonstrate that Lyra is performant across over 100 wide-ranging biological tasks, achieving state-of-the-art (SOTA) performance in many key areas, including protein fitness landscape prediction, biophysical property prediction (e.g. disordered protein region functions) peptide engineering applications (e.g. antibody binding, cell-penetrating peptide prediction), RNA structure analysis, RNA function prediction, and CRISPR guide design. It achieves this with orders-of-magnitude improvements in inference speed and reduction in parameters (up to 120,000-fold in our tests) compared to recent biology foundation models. Using Lyra, we were able to train and run every task in this study on two or fewer GPUs in under two hours, democratizing access to biological sequence modeling at SOTA performance, with potential applications to many fields.",
+        "arxiv_id": "2503.16351"
+    },
+    "2503.16356": {
+        "SCORE": 17,
+        "ARXIVID": "2503.16356",
+        "COMMENT": "The paper proposes CaKE, a circuit-aware knowledge editing method for LLMs, which aligns with foundational research in LLM behavior and reasoning circuits.",
+        "RELEVANCE": 9,
+        "NOVELTY": 8,
+        "authors": [
+            "Yunzhi Yao",
+            "Jizhan Fang",
+            "Jia-Chen Gu",
+            "Ningyu Zhang",
+            "Shumin Deng",
+            "Huajun Chen",
+            "Nanyun Peng"
+        ],
+        "title": "CaKE: Circuit-aware Editing Enables Generalizable Knowledge Learners",
+        "abstract": "Knowledge Editing (KE) enables the modification of outdated or incorrect information in large language models (LLMs). While existing KE methods can update isolated facts, they struggle to generalize these updates to multi-hop reasoning tasks that depend on the modified knowledge. Through an analysis of reasoning circuits -- the neural pathways LLMs use for knowledge-based inference, we observe that current layer-localized KE approaches, such as MEMIT and WISE, which edit only single or a few model layers, struggle to effectively incorporate updated information into these reasoning pathways. To address this limitation, we propose CaKE (Circuit-aware Knowledge Editing), a novel method that enables more effective integration of updated knowledge in LLMs. CaKE leverages strategically curated data, guided by our circuits-based analysis, that enforces the model to utilize the modified knowledge, stimulating the model to develop appropriate reasoning circuits for newly integrated knowledge. Experimental results show that CaKE enables more accurate and consistent use of updated knowledge across related reasoning tasks, leading to an average of 20% improvement in multi-hop reasoning accuracy on MQuAKE dataset compared to existing KE methods. We release the code and data in https://github.com/zjunlp/CaKE.",
+        "arxiv_id": "2503.16356"
+    },
+    "2503.16057": {
+        "SCORE": 17,
+        "ARXIVID": "2503.16057",
+        "COMMENT": "The paper introduces Race-DiT, a Mixture of Experts (MoE) model for diffusion transformers with a flexible routing strategy and regularization techniques. It aligns closely with the MoE criterion under model architecture.",
+        "RELEVANCE": 9,
+        "NOVELTY": 8,
+        "authors": [
+            "Yike Yuan",
+            "Ziyu Wang",
+            "Zihao Huang",
+            "Defa Zhu",
+            "Xun Zhou",
+            "Jingyi Yu",
+            "Qiyang Min"
+        ],
+        "title": "Expert Race: A Flexible Routing Strategy for Scaling Diffusion Transformer with Mixture of Experts",
+        "abstract": "Diffusion models have emerged as mainstream framework in visual generation. Building upon this success, the integration of Mixture of Experts (MoE) methods has shown promise in enhancing model scalability and performance. In this paper, we introduce Race-DiT, a novel MoE model for diffusion transformers with a flexible routing strategy, Expert Race. By allowing tokens and experts to compete together and select the top candidates, the model learns to dynamically assign experts to critical tokens. Additionally, we propose per-layer regularization to address challenges in shallow layer learning, and router similarity loss to prevent mode collapse, ensuring better expert utilization. Extensive experiments on ImageNet validate the effectiveness of our approach, showcasing significant performance gains while promising scaling properties.",
+        "arxiv_id": "2503.16057"
+    },
+    "2503.16672": {
+        "SCORE": 17,
+        "ARXIVID": "2503.16672",
+        "COMMENT": "The paper demonstrates how to leverage 2:4 activation sparsity for accelerating transformer inference and training, aligning with foundational research in model compression and efficiency.",
+        "RELEVANCE": 9,
+        "NOVELTY": 8,
+        "authors": [
+            "Daniel Haziza",
+            "Timothy Chou",
+            "Dhruv Choudhary",
+            "Luca Wehrstedt",
+            "Francisco Massa",
+            "Jiecao Yu",
+            "Geonhwa Jeong",
+            "Supriya Rao",
+            "Patrick Labatut",
+            "Jesse Cai"
+        ],
+        "title": "Accelerating Transformer Inference and Training with 2:4 Activation Sparsity",
+        "abstract": "In this paper, we demonstrate how to leverage 2:4 sparsity, a popular hardware-accelerated GPU sparsity pattern, to activations to accelerate large language model training and inference. Crucially we exploit the intrinsic sparsity found in Squared-ReLU activations to provide this acceleration with no accuracy loss. Our approach achieves up to 1.3x faster Feed Forward Network (FFNs) in both the forwards and backwards pass. This work highlights the potential for sparsity to play a key role in accelerating large language model training and inference.",
+        "arxiv_id": "2503.16672"
+    },
+    "2503.16036": {
+        "SCORE": 17,
+        "ARXIVID": "2503.16036",
+        "COMMENT": "The paper proposes a hybrid-level token compression strategy for MLLMs, which aligns with foundational research in model compression and efficiency.",
+        "RELEVANCE": 9,
+        "NOVELTY": 8,
+        "authors": [
+            "Zhihang Liu",
+            "Chen-Wei Xie",
+            "Pandeng Li",
+            "Liming Zhao",
+            "Longxiang Tang",
+            "Yun Zheng",
+            "Chuanbin Liu",
+            "Hongtao Xie"
+        ],
+        "title": "Hybrid-Level Instruction Injection for Video Token Compression in Multi-modal Large Language Models",
+        "abstract": "Recent Multi-modal Large Language Models (MLLMs) have been challenged by the computational overhead resulting from massive video frames, often alleviated through compression strategies. However, the visual content is not equally contributed to user instructions, existing strategies (\\eg, average pool) inevitably lead to the loss of potentially useful information. To tackle this, we propose the Hybrid-level Instruction Injection Strategy for Conditional Token Compression in MLLMs (HICom), utilizing the instruction as a condition to guide the compression from both local and global levels. This encourages the compression to retain the maximum amount of user-focused information while reducing visual tokens to minimize computational burden. Specifically, the instruction condition is injected into the grouped visual tokens at the local level and the learnable tokens at the global level, and we conduct the attention mechanism to complete the conditional compression. From the hybrid-level compression, the instruction-relevant visual parts are highlighted while the temporal-spatial structure is also preserved for easier understanding of LLMs. To further unleash the potential of HICom, we introduce a new conditional pre-training stage with our proposed dataset HICom-248K. Experiments show that our HICom can obtain distinguished video understanding ability with fewer tokens, increasing the performance by 2.43\\% average on three multiple-choice QA benchmarks and saving 78.8\\% tokens compared with the SOTA method. The code is available at https://github.com/lntzm/HICom.",
+        "arxiv_id": "2503.16036"
+    },
+    "2503.15815": {
+        "SCORE": 16,
+        "ARXIVID": "2503.15815",
+        "COMMENT": "The paper explores attention pruning for bias mitigation in LLMs, which aligns with foundational research in model compression and efficiency.",
+        "RELEVANCE": 9,
+        "NOVELTY": 7,
+        "authors": [
+            "Vishnu Asutosh Dasu",
+            "Md Rafi ur Rashid",
+            "Vipul Gupta",
+            "Saeid Tizpaz-Niari",
+            "Gang Tan"
+        ],
+        "title": "Attention Pruning: Automated Fairness Repair of Language Models via Surrogate Simulated Annealing",
+        "abstract": "This paper explores pruning attention heads as a post-processing bias mitigation method for large language models (LLMs). Modern AI systems such as LLMs are expanding into sensitive social contexts where fairness concerns become especially crucial. Since LLMs develop decision-making patterns by training on massive datasets of human-generated content, they naturally encode and perpetuate societal biases. While modifying training datasets and algorithms is expensive and requires significant resources; post-processing techniques-such as selectively deactivating neurons and attention heads in pre-trained LLMs-can provide feasible and effective approaches to improve fairness. However, identifying the optimal subset of parameters to prune presents a combinatorial challenge within LLMs' immense parameter space, requiring solutions that efficiently balance competing objectives across the frontiers of model fairness and utility. To address the computational challenges, we explore a search-based program repair approach via randomized simulated annealing. Given the prohibitive evaluation costs in billion-parameter LLMs, we develop surrogate deep neural networks that efficiently model the relationship between attention head states (active/inactive) and their corresponding fairness/utility metrics. This allows us to perform optimization over the surrogate models and efficiently identify optimal subsets of attention heads for selective pruning rather than directly searching through the LLM parameter space. This paper introduces Attention Pruning, a fairness-aware surrogate simulated annealing approach to prune attention heads in LLMs that disproportionately contribute to bias while minimally impacting overall model utility. Our experiments show that Attention Pruning achieves up to $40\\%$ reduction in gender bias and outperforms the state-of-the-art bias mitigation strategies.",
+        "arxiv_id": "2503.15815"
+    },
+    "2503.16565": {
+        "SCORE": 16,
+        "ARXIVID": "2503.16565",
+        "COMMENT": "The paper introduces Gene42, a genomic foundation model with dense attention for long-range context. It aligns with foundational research in architecture innovations for science applications.",
+        "RELEVANCE": 8,
+        "NOVELTY": 8,
+        "authors": [
+            "Kirill Vishniakov",
+            "Boulbaba Ben Amor",
+            "Engin Tekin",
+            "Nancy A. ElNaker",
+            "Karthik Viswanathan",
+            "Aleksandr Medvedev",
+            "Aahan Singh",
+            "Maryam Nadeem",
+            "Mohammad Amaan Sayeed",
+            "Praveenkumar Kanithi",
+            "Tiago Magalhaes",
+            "Natalia Vassilieva",
+            "Dwarikanath Mahapatra",
+            "Marco Pimentel",
+            "and Shadab Khan"
+        ],
+        "title": "Gene42: Long-Range Genomic Foundation Model With Dense Attention",
+        "abstract": "We introduce Gene42, a novel family of Genomic Foundation Models (GFMs) designed to manage context lengths of up to 192,000 base pairs (bp) at a single-nucleotide resolution. Gene42 models utilize a decoder-only (LLaMA-style) architecture with a dense self-attention mechanism. Initially trained on fixed-length sequences of 4,096 bp, our models underwent continuous pretraining to extend the context length to 192,000 bp. This iterative extension allowed for the comprehensive processing of large-scale genomic data and the capture of intricate patterns and dependencies within the human genome. Gene42 is the first dense attention model capable of handling such extensive long context lengths in genomics, challenging state-space models that often rely on convolutional operators among other mechanisms. Our pretrained models exhibit notably low perplexity values and high reconstruction accuracy, highlighting their strong ability to model genomic data. Extensive experiments on various genomic benchmarks have demonstrated state-of-the-art performance across multiple tasks, including biotype classification, regulatory region identification, chromatin profiling prediction, variant pathogenicity prediction, and species classification. The models are publicly available at huggingface.co/inceptionai.",
+        "arxiv_id": "2503.16565"
+    },
+    "2503.16678": {
+        "SCORE": 16,
+        "ARXIVID": "2503.16678",
+        "COMMENT": "The paper explores quantum-classical hybrid architectures for physics-informed neural networks, which introduces architectural innovations relevant to AI for Science.",
+        "RELEVANCE": 8,
+        "NOVELTY": 8,
+        "authors": [
+            "Afrah Farea",
+            "Saiful Khan",
+            "Mustafa Serdar Celebi"
+        ],
+        "title": "QCPINN: Quantum Classical Physics-Informed Neural Networks for Solving PDEs",
+        "abstract": "Hybrid quantum-classical neural network methods represent an emerging approach to solving computational challenges by leveraging advantages from both paradigms. As physics-informed neural networks (PINNs) have successfully applied to solve partial differential equations (PDEs) by incorporating physical constraints into neural architectures, this work investigates whether quantum-classical physics-informed neural networks (QCPINNs) can efficiently solve PDEs with reduced parameter counts compared to classical approaches. We evaluate two quantum circuit paradigms: continuous-variable (CV) and qubit-based discrete-variable (DV) across multiple circuit ansatze (Alternate, Cascade, Cross mesh, and Layered). Benchmarking across five challenging PDEs (Helmholtz, Cavity, Wave, Klein-Gordon, and Convection-Diffusion equations) demonstrates that our hybrid approaches achieve comparable accuracy to classical PINNs while requiring up to 89% fewer trainable parameters. DV-based implementations, particularly those with angle encoding and cascade circuit configurations, exhibit better stability and convergence properties across all problem types. For the Convection-Diffusion equation, our angle-cascade QCPINN achieves parameter efficiency and a 37% reduction in relative L2 error compared to classical counterparts. Our findings highlight the potential of quantum-enhanced architectures for physics-informed learning, establishing parameter efficiency as a quantifiable quantum advantage while providing a foundation for future quantum-classical hybrid systems solving complex physical models.",
+        "arxiv_id": "2503.16678"
+    },
+    "2503.16342": {
+        "SCORE": 16,
+        "ARXIVID": "2503.16342",
+        "COMMENT": "The paper proposes HiQ-Lip, a hybrid quantum-classical method for estimating the global Lipschitz constant of ReLU networks. It aligns with foundational research in neural network robustness and generalization.",
+        "RELEVANCE": 8,
+        "NOVELTY": 8,
+        "authors": [
+            "Haoqi He",
+            "Yan Xiao"
+        ],
+        "title": "HiQ-Lip: The First Quantum-Classical Hierarchical Method for Global Lipschitz Constant Estimation of ReLU Networks",
+        "abstract": "Estimating the global Lipschitz constant of neural networks is crucial for understanding and improving their robustness and generalization capabilities. However, precise calculations are NP-hard, and current semidefinite programming (SDP) methods face challenges such as high memory usage and slow processing speeds. In this paper, we propose \\textbf{HiQ-Lip}, a hybrid quantum-classical hierarchical method that leverages Coherent Ising Machines (CIMs) to estimate the global Lipschitz constant. We tackle the estimation by converting it into a Quadratic Unconstrained Binary Optimization (QUBO) problem and implement a multilevel graph coarsening and refinement strategy to adapt to the constraints of contemporary quantum hardware. Our experimental evaluations on fully connected neural networks demonstrate that HiQ-Lip not only provides estimates comparable to state-of-the-art methods but also significantly accelerates the computation process. In specific tests involving two-layer neural networks with 256 hidden neurons, HiQ-Lip doubles the solving speed and offers more accurate upper bounds than the existing best method, LiPopt. These findings highlight the promising utility of small-scale quantum devices in advancing the estimation of neural network robustness.",
+        "arxiv_id": "2503.16342"
+    },
+    "2503.16696": {
+        "SCORE": 16,
+        "ARXIVID": "2503.16696",
+        "COMMENT": "The paper identifies neural networks capable of approximating continuous functions under linear growth constraints, aligning with foundational research in neural network theory.",
+        "RELEVANCE": 8,
+        "NOVELTY": 8,
+        "authors": [
+            "Anna P. Kwossek",
+            "David J. Pr\u00f6mel",
+            "Josef Teichmann"
+        ],
+        "title": "Universal approximation property of neural stochastic differential equations",
+        "abstract": "We identify various classes of neural networks that are able to approximate continuous functions locally uniformly subject to fixed global linear growth constraints. For such neural networks the associated neural stochastic differential equations can approximate general stochastic differential equations, both of It\\^o diffusion type, arbitrarily well. Moreover, quantitative error estimates are derived for stochastic differential equations with sufficiently regular coefficients.",
+        "arxiv_id": "2503.16696"
+    },
+    "2503.16666": {
+        "SCORE": 15,
+        "ARXIVID": "2503.16666",
+        "COMMENT": "The paper introduces an adjoint backpropagation method for training neural fractional-order differential equations, which offers efficiency improvements and theoretical insights into training dynamics.",
+        "RELEVANCE": 8,
+        "NOVELTY": 7,
+        "authors": [
+            "Qiyu Kang",
+            "Xuhao Li",
+            "Kai Zhao",
+            "Wenjun Cui",
+            "Yanan Zhao",
+            "Weihua Deng",
+            "Wee Peng Tay"
+        ],
+        "title": "Efficient Training of Neural Fractional-Order Differential Equation via Adjoint Backpropagation",
+        "abstract": "Fractional-order differential equations (FDEs) enhance traditional differential equations by extending the order of differential operators from integers to real numbers, offering greater flexibility in modeling complex dynamical systems with nonlocal characteristics. Recent progress at the intersection of FDEs and deep learning has catalyzed a new wave of innovative models, demonstrating the potential to address challenges such as graph representation learning. However, training neural FDEs has primarily relied on direct differentiation through forward-pass operations in FDE numerical solvers, leading to increased memory usage and computational complexity, particularly in large-scale applications. To address these challenges, we propose a scalable adjoint backpropagation method for training neural FDEs by solving an augmented FDE backward in time, which substantially reduces memory requirements. This approach provides a practical neural FDE toolbox and holds considerable promise for diverse applications. We demonstrate the effectiveness of our method in several tasks, achieving performance comparable to baseline models while significantly reducing computational overhead.",
+        "arxiv_id": "2503.16666"
+    },
+    "2503.16673": {
+        "SCORE": 15,
+        "ARXIVID": "2503.16673",
+        "COMMENT": "The paper analyzes subgradient methods for system identification with non-smooth objectives, providing theoretical convergence guarantees. It aligns with foundational research in optimization and training dynamics.",
+        "RELEVANCE": 8,
+        "NOVELTY": 7,
+        "authors": [
+            "Baturalp Yalcin",
+            "Javad Lavaei"
+        ],
+        "title": "Subgradient Method for System Identification with Non-Smooth Objectives",
+        "abstract": "This paper investigates a subgradient-based algorithm to solve the system identification problem for linear time-invariant systems with non-smooth objectives. This is essential for robust system identification in safety-critical applications. While existing work provides theoretical exact recovery guarantees using optimization solvers, the design of fast learning algorithms with convergence guarantees for practical use remains unexplored. We analyze the subgradient method in this setting where the optimization problems to be solved change over time as new measurements are taken, and we establish linear convergence results for both the best and Polyak step sizes after a burn-in period. Additionally, we characterize the asymptotic convergence of the best average sub-optimality gap under diminishing and constant step sizes. Finally, we compare the time complexity of standard solvers with the subgradient algorithm and support our findings with experimental results. This is the first work to analyze subgradient algorithms for system identification with non-smooth objectives.",
+        "arxiv_id": "2503.16673"
+    },
+    "2503.16024": {
+        "SCORE": 15,
+        "ARXIVID": "2503.16024",
+        "COMMENT": "The paper introduces a critique-guided improvement framework for LLM agents, which aligns with foundational research in LLM behavior and iterative improvement.",
+        "RELEVANCE": 8,
+        "NOVELTY": 7,
+        "authors": [
+            "Ruihan Yang",
+            "Fanghua Ye",
+            "Jian Li",
+            "Siyu Yuan",
+            "Yikai Zhang",
+            "Zhaopeng Tu",
+            "Xiaolong Li",
+            "Deqing Yang"
+        ],
+        "title": "The Lighthouse of Language: Enhancing LLM Agents via Critique-Guided Improvement",
+        "abstract": "Large language models (LLMs) have recently transformed from text-based assistants to autonomous agents capable of planning, reasoning, and iteratively improving their actions. While numerical reward signals and verifiers can effectively rank candidate actions, they often provide limited contextual guidance. In contrast, natural language feedback better aligns with the generative capabilities of LLMs, providing richer and more actionable suggestions. However, parsing and implementing this feedback effectively can be challenging for LLM-based agents. In this work, we introduce Critique-Guided Improvement (CGI), a novel two-player framework, comprising an actor model that explores an environment and a critic model that generates detailed nature language feedback. By training the critic to produce fine-grained assessments and actionable revisions, and the actor to utilize these critiques, our approach promotes more robust exploration of alternative strategies while avoiding local optima. Experiments in three interactive environments show that CGI outperforms existing baselines by a substantial margin. Notably, even a small critic model surpasses GPT-4 in feedback quality. The resulting actor achieves state-of-the-art performance, demonstrating the power of explicit iterative guidance to enhance decision-making in LLM-based agents.",
+        "arxiv_id": "2503.16024"
+    },
+    "2503.16195": {
+        "SCORE": 15,
+        "ARXIVID": "2503.16195",
+        "COMMENT": "The paper explores visual prompting in differentially private data synthesis, which aligns with foundational research in model compression and efficiency.",
+        "RELEVANCE": 8,
+        "NOVELTY": 7,
+        "authors": [
+            "Chia-Yi Hsu",
+            "Jia-You Chen",
+            "Yu-Lin Tsai",
+            "Chih-Hsun Lin",
+            "Pin-Yu Chen",
+            "Chia-Mu Yu",
+            "Chun-Ying Huang"
+        ],
+        "title": "VP-NTK: Exploring the Benefits of Visual Prompting in Differentially Private Data Synthesis",
+        "abstract": "Differentially private (DP) synthetic data has become the de facto standard for releasing sensitive data. However, many DP generative models suffer from the low utility of synthetic data, especially for high-resolution images. On the other hand, one of the emerging techniques in parameter efficient fine-tuning (PEFT) is visual prompting (VP), which allows well-trained existing models to be reused for the purpose of adapting to subsequent downstream tasks. In this work, we explore such a phenomenon in constructing captivating generative models with DP constraints. We show that VP in conjunction with DP-NTK, a DP generator that exploits the power of the neural tangent kernel (NTK) in training DP generative models, achieves a significant performance boost, particularly for high-resolution image datasets, with accuracy improving from 0.644$\\pm$0.044 to 0.769. Lastly, we perform ablation studies on the effect of different parameters that influence the overall performance of VP-NTK. Our work demonstrates a promising step forward in improving the utility of DP synthetic data, particularly for high-resolution images.",
+        "arxiv_id": "2503.16195"
+    },
+    "2503.16562": {
+        "SCORE": 15,
+        "ARXIVID": "2503.16562",
+        "COMMENT": "The paper discusses Bezier distillation in flow models, which aligns with foundational research in model compression and efficiency.",
+        "RELEVANCE": 8,
+        "NOVELTY": 7,
+        "authors": [
+            "Ling Feng",
+            "SK Yang"
+        ],
+        "title": "Bezier Distillation",
+        "abstract": "In Rectified Flow, by obtaining the rectified flow several times, the mapping relationship between distributions can be distilled into a neural network, and the target distribution can be directly predicted by the straight lines of the flow. However, during the pairing process of the mapping relationship, a large amount of error accumulation will occur, resulting in a decrease in performance after multiple rectifications. In the field of flow models, knowledge distillation of multi - teacher diffusion models is also a problem worthy of discussion in accelerating sampling. I intend to combine multi - teacher knowledge distillation with Bezier curves to solve the problem of error accumulation. Currently, the related paper is being written by myself.",
+        "arxiv_id": "2503.16562"
+    },
+    "2503.16709": {
+        "SCORE": 15,
+        "ARXIVID": "2503.16709",
+        "COMMENT": "The paper proposes post-training quantization for depth estimation, which aligns with foundational research in model compression and efficiency.",
+        "RELEVANCE": 8,
+        "NOVELTY": 7,
+        "authors": [
+            "Xuan Shen",
+            "Weize Ma",
+            "Jing Liu",
+            "Changdi Yang",
+            "Rui Ding",
+            "Quanyi Wang",
+            "Henghui Ding",
+            "Wei Niu",
+            "Yanzhi Wang",
+            "Pu Zhao",
+            "Jun Lin",
+            "Jiuxiang Gu"
+        ],
+        "title": "QuartDepth: Post-Training Quantization for Real-Time Depth Estimation on the Edge",
+        "abstract": "Monocular Depth Estimation (MDE) has emerged as a pivotal task in computer vision, supporting numerous real-world applications. However, deploying accurate depth estimation models on resource-limited edge devices, especially Application-Specific Integrated Circuits (ASICs), is challenging due to the high computational and memory demands. Recent advancements in foundational depth estimation deliver impressive results but further amplify the difficulty of deployment on ASICs. To address this, we propose QuartDepth which adopts post-training quantization to quantize MDE models with hardware accelerations for ASICs. Our approach involves quantizing both weights and activations to 4-bit precision, reducing the model size and computation cost. To mitigate the performance degradation, we introduce activation polishing and compensation algorithm applied before and after activation quantization, as well as a weight reconstruction method for minimizing errors in weight quantization. Furthermore, we design a flexible and programmable hardware accelerator by supporting kernel fusion and customized instruction programmability, enhancing throughput and efficiency. Experimental results demonstrate that our framework achieves competitive accuracy while enabling fast inference and higher energy efficiency on ASICs, bridging the gap between high-performance depth estimation and practical edge-device applicability. Code: https://github.com/shawnricecake/quart-depth",
+        "arxiv_id": "2503.16709"
+    },
+    "2503.15983": {
+        "SCORE": 15,
+        "ARXIVID": "2503.15983",
+        "COMMENT": "The paper explores inhibitor attention and knowledge distillation, which aligns with foundational research in model compression and efficiency.",
+        "RELEVANCE": 8,
+        "NOVELTY": 7,
+        "authors": [
+            "Tony Zhang",
+            "Rickard Br\u00e4nnvall"
+        ],
+        "title": "InhibiDistilbert: Knowledge Distillation for a ReLU and Addition-based Transformer",
+        "abstract": "This work explores optimizing transformer-based language models by integrating model compression techniques with inhibitor attention, a novel alternative attention mechanism. Inhibitor attention employs Manhattan distances and ReLU activations instead of the matrix multiplications and softmax activation of the conventional scaled dot-product attention. This shift offers potential computational and energy savings while maintaining model effectiveness. We propose further adjustments to improve the inhibitor mechanism's training efficiency and evaluate its performance on the DistilBERT architecture. Our knowledge distillation experiments indicate that the modified inhibitor transformer model can achieve competitive performance on standard NLP benchmarks, including General Language Understanding Evaluation (GLUE) and sentiment analysis tasks.",
+        "arxiv_id": "2503.15983"
+    },
+    "2503.16659": {
+        "SCORE": 15,
+        "ARXIVID": "2503.16659",
+        "COMMENT": "The paper provides a comprehensive review of Protein Representation Learning (PRL), which aligns with foundational research in representation learning for molecular modeling.",
+        "RELEVANCE": 8,
+        "NOVELTY": 7,
+        "authors": [
+            "Viet Thanh Duy Nguyen",
+            "Truong-Son Hy"
+        ],
+        "title": "Advances in Protein Representation Learning: Methods, Applications, and Future Directions",
+        "abstract": "Proteins are complex biomolecules that play a central role in various biological processes, making them critical targets for breakthroughs in molecular biology, medical research, and drug discovery. Deciphering their intricate, hierarchical structures, and diverse functions is essential for advancing our understanding of life at the molecular level. Protein Representation Learning (PRL) has emerged as a transformative approach, enabling the extraction of meaningful computational representations from protein data to address these challenges. In this paper, we provide a comprehensive review of PRL research, categorizing methodologies into five key areas: feature-based, sequence-based, structure-based, multimodal, and complex-based approaches. To support researchers in this rapidly evolving field, we introduce widely used databases for protein sequences, structures, and functions, which serve as essential resources for model development and evaluation. We also explore the diverse applications of these approaches in multiple domains, demonstrating their broad impact. Finally, we discuss pressing technical challenges and outline future directions to advance PRL, offering insights to inspire continued innovation in this foundational field.",
+        "arxiv_id": "2503.16659"
+    },
+    "2503.16385": {
+        "SCORE": 15,
+        "ARXIVID": "2503.16385",
+        "COMMENT": "The paper proposes a framework for optimizing long chain-of-thought reasoning in LLMs, which aligns with foundational research in LLM behavior and reasoning capabilities.",
+        "RELEVANCE": 8,
+        "NOVELTY": 7,
+        "authors": [
+            "Yijia Luo",
+            "Yulin Song",
+            "Xingyao Zhang",
+            "Jiaheng Liu",
+            "Weixun Wang",
+            "GengRu Chen",
+            "Wenbo Su",
+            "Bo Zheng"
+        ],
+        "title": "Deconstructing Long Chain-of-Thought: A Structured Reasoning Optimization Framework for Long CoT Distillation",
+        "abstract": "Recent advancements in large language models (LLMs) have demonstrated remarkable reasoning capabilities through long chain-of-thought (CoT) reasoning. The R1 distillation scheme has emerged as a promising approach for training cost-effective models with enhanced reasoning abilities. However, the underlying mechanisms driving its effectiveness remain unclear. This study examines the universality of distillation data and identifies key components that enable the efficient transfer of long-chain reasoning capabilities in LLM distillation. Our findings reveal that the effectiveness of long CoT reasoning distillation from teacher models like Qwen-QwQ degrades significantly on nonhomologous models, challenging the assumed universality of current distillation methods. To gain deeper insights into the structure and patterns of long CoT reasoning, we propose DLCoT (Deconstructing Long Chain-of-Thought), a distillation data enhancement framework. DLCoT consists of three key steps: (1) data segmentation to decompose complex long CoT structures, (2) simplification by eliminating unsolvable and redundant solutions, and (3) optimization of intermediate error states. Our approach significantly improves model performance and token efficiency, facilitating the development of high-performance LLMs.",
+        "arxiv_id": "2503.16385"
+    },
+    "2503.16271": {
+        "SCORE": 15,
+        "ARXIVID": "2503.16271",
+        "COMMENT": "The paper proposes a novel robustness metric based on Posterior Agreement theory, which aligns with foundational research in model evaluation and robustness.",
+        "RELEVANCE": 8,
+        "NOVELTY": 7,
+        "authors": [
+            "Jo\u00e3o Borges S. Carvalho",
+            "Alessandro Torcinovich",
+            "Victor Jimenez Rodriguez",
+            "Antonio E. Cin\u00e0",
+            "Carlos Cotrini",
+            "Lea Sch\u00f6nherr",
+            "Joachim M. Buhmann"
+        ],
+        "title": "Rethinking Robustness in Machine Learning: A Posterior Agreement Approach",
+        "abstract": "The robustness of algorithms against covariate shifts is a fundamental problem with critical implications for the deployment of machine learning algorithms in the real world. Current evaluation methods predominantly match the robustness definition to that of standard generalization, relying on standard metrics like accuracy-based scores, which, while designed for performance assessment, lack a theoretical foundation encompassing their application in estimating robustness to distribution shifts. In this work, we set the desiderata for a robustness metric, and we propose a novel principled framework for the robustness assessment problem that directly follows the Posterior Agreement (PA) theory of model validation. Specifically, we extend the PA framework to the covariate shift setting by proposing a PA metric for robustness evaluation in supervised classification tasks. We assess the soundness of our metric in controlled environments and through an empirical robustness analysis in two different covariate shift scenarios: adversarial learning and domain generalization. We illustrate the suitability of PA by evaluating several models under different nature and magnitudes of shift, and proportion of affected observations. The results show that the PA metric provides a sensible and consistent analysis of the vulnerabilities in learning algorithms, even in the presence of few perturbed observations.",
+        "arxiv_id": "2503.16271"
+    },
+    "2503.15848": {
+        "SCORE": 15,
+        "ARXIVID": "2503.15848",
+        "COMMENT": "The paper introduces Entro-duction, a method for dynamically adjusting exploration depth in LLM reasoning, which aligns with foundational research in LLM behavior and reasoning capabilities.",
+        "RELEVANCE": 8,
+        "NOVELTY": 7,
+        "authors": [
+            "Jinghan Zhang",
+            "Xiting Wang",
+            "Fengran Mo",
+            "Yeyang Zhou",
+            "Wanfu Gao",
+            "Kunpeng Liu"
+        ],
+        "title": "Entropy-based Exploration Conduction for Multi-step Reasoning",
+        "abstract": "In large language model (LLM) reasoning, multi-step processes have proven effective for solving complex tasks. However, the depth of exploration can significantly affect the reasoning performance. Existing methods to automatically decide the depth often bring high costs and lack flexibility, and thus undermine the model's reasoning accuracy. To address these issues, we propose Entropy-based Exploration Depth Conduction (Entro-duction), a novel method that dynamically adjusts the exploration depth during multi-step reasoning by monitoring LLM's output entropy and variance entropy. We employ these two metrics to capture the model's current uncertainty and the fluctuation of uncertainty across consecutive reasoning steps. Based on the observed changes, the LLM selects whether to deepen, expand or stop exploration according to the probability. In this way, we balance the reasoning accuracy and exploration effectiveness. Experimental results across four benchmark datasets demonstrate the efficacy of Entro-duction. We further conduct experiments and analysis on the components of Entro-duction to discuss their contributions to reasoning performance.",
+        "arxiv_id": "2503.15848"
+    },
+    "2503.16667": {
+        "SCORE": 15,
+        "ARXIVID": "2503.16667",
+        "COMMENT": "The paper explores data fusion for process-property modeling in additive manufacturing, which aligns with foundational research in AI for Science and representation learning.",
+        "RELEVANCE": 8,
+        "NOVELTY": 7,
+        "authors": [
+            "Oriol Vendrell-Gallart",
+            "Nima Negarandeh",
+            "Zahra Zanjani Foumani",
+            "Mahsa Amiri",
+            "Lorenzo Valdevit",
+            "Ramin Bostanabad"
+        ],
+        "title": "A preliminary data fusion study to assess the feasibility of Foundation Process-Property Models in Laser Powder Bed Fusion",
+        "abstract": "Foundation models are at the forefront of an increasing number of critical applications. In regards to technologies such as additive manufacturing (AM), these models have the potential to dramatically accelerate process optimization and, in turn, design of next generation materials. A major challenge that impedes the construction of foundation process-property models is data scarcity. To understand the impact of this challenge, and since foundation models rely on data fusion, in this work we conduct controlled experiments where we focus on the transferability of information across different material systems and properties. More specifically, we generate experimental datasets from 17-4 PH and 316L stainless steels (SSs) in Laser Powder Bed Fusion (LPBF) where we measure the effect of five process parameters on porosity and hardness. We then leverage Gaussian processes (GPs) for process-property modeling in various configurations to test if knowledge about one material system or property can be leveraged to build more accurate machine learning models for other material systems or properties. Through extensive cross-validation studies and probing the GPs' interpretable hyperparameters, we study the intricate relation among data size and dimensionality, complexity of the process-property relations, noise, and characteristics of machine learning models. Our findings highlight the need for structured learning approaches that incorporate domain knowledge in building foundation process-property models rather than relying on uninformed data fusion in data-limited applications.",
+        "arxiv_id": "2503.16667"
+    },
+    "2503.15796": {
+        "SCORE": 15,
+        "ARXIVID": "2503.15796",
+        "COMMENT": "The paper proposes a Mixture of Synergistic Experts for drug-target interaction prediction, which aligns with foundational research in representation learning under data scarcity.",
+        "RELEVANCE": 8,
+        "NOVELTY": 7,
+        "authors": [
+            "Xinlong Zhai",
+            "Chunchen Wang",
+            "Ruijia Wang",
+            "Jiazheng Kang",
+            "Shujie Li",
+            "Boyu Chen",
+            "Tengfei Ma",
+            "Zikai Zhou",
+            "Cheng Yang",
+            "Chuan Shi"
+        ],
+        "title": "Blend the Separated: Mixture of Synergistic Experts for Data-Scarcity Drug-Target Interaction Prediction",
+        "abstract": "Drug-target interaction prediction (DTI) is essential in various applications including drug discovery and clinical application. There are two perspectives of input data widely used in DTI prediction: Intrinsic data represents how drugs or targets are constructed, and extrinsic data represents how drugs or targets are related to other biological entities. However, any of the two perspectives of input data can be scarce for some drugs or targets, especially for those unpopular or newly discovered. Furthermore, ground-truth labels for specific interaction types can also be scarce. Therefore, we propose the first method to tackle DTI prediction under input data and/or label scarcity. To make our model functional when only one perspective of input data is available, we design two separate experts to process intrinsic and extrinsic data respectively and fuse them adaptively according to different samples. Furthermore, to make the two perspectives complement each other and remedy label scarcity, two experts synergize with each other in a mutually supervised way to exploit the enormous unlabeled data. Extensive experiments on 3 real-world datasets under different extents of input data scarcity and/or label scarcity demonstrate our model outperforms states of the art significantly and steadily, with a maximum improvement of 53.53%. We also test our model without any data scarcity and it still outperforms current methods.",
+        "arxiv_id": "2503.15796"
+    },
+    "2503.16123": {
+        "SCORE": 15,
+        "ARXIVID": "2503.16123",
+        "COMMENT": "The paper introduces Spanning Tree Push-Pull (STPP) for distributed learning, which aligns with foundational research in distributed model efficiency and scalability.",
+        "RELEVANCE": 8,
+        "NOVELTY": 7,
+        "authors": [
+            "Runze You",
+            "Shi Pu"
+        ],
+        "title": "Distributed Learning over Arbitrary Topology: Linear Speed-Up with Polynomial Transient Time",
+        "abstract": "We study a distributed learning problem in which $n$ agents, each with potentially heterogeneous local data, collaboratively minimize the sum of their local cost functions via peer-to-peer communication. We propose a novel algorithm, Spanning Tree Push-Pull (STPP), which employs two spanning trees extracted from a general communication graph to distribute both model parameters and stochastic gradients. Unlike prior approaches that rely heavily on spectral gap properties, STPP leverages a more flexible topological characterization, enabling robust information flow and efficient updates. Theoretically, we prove that STPP achieves linear speedup and polynomial transient iteration complexity, up to $O(n^7)$ for smooth nonconvex objectives and $\\tilde{O}(n^3)$ for smooth strongly convex objectives, under arbitrary network topologies. Moreover, compared with the existing methods, STPP achieves faster convergence rates on sparse and non-regular topologies (e.g., directed ring) and reduces communication overhead on dense networks (e.g., static exponential graph). These results significantly advance the state of the art, especially when $n$ is large. Numerical experiments further demonstrate the strong performance of STPP and confirm the practical relevance of its theoretical convergence rates across various common graph architectures. Our code is available at https://anonymous.4open.science/r/SpanningTreePushPull-5D3E.",
+        "arxiv_id": "2503.16123"
+    },
+    "2503.16316": {
+        "SCORE": 15,
+        "ARXIVID": "2503.16316",
+        "COMMENT": "The paper investigates the learning dynamics of neural networks, specifically the evolution of the empirical Neural Tangent Kernel (eNTK) and introduces the cone effect. This aligns with representation learning and training dynamics.",
+        "RELEVANCE": 8,
+        "NOVELTY": 7,
+        "authors": [
+            "Zhanpeng Zhou",
+            "Yongyi Yang",
+            "Jie Ren",
+            "Mahito Sugiyama",
+            "Junchi Yan"
+        ],
+        "title": "On the Cone Effect in the Learning Dynamics",
+        "abstract": "Understanding the learning dynamics of neural networks is a central topic in the deep learning community. In this paper, we take an empirical perspective to study the learning dynamics of neural networks in real-world settings. Specifically, we investigate the evolution process of the empirical Neural Tangent Kernel (eNTK) during training. Our key findings reveal a two-phase learning process: i) in Phase I, the eNTK evolves significantly, signaling the rich regime, and ii) in Phase II, the eNTK keeps evolving but is constrained in a narrow space, a phenomenon we term the cone effect. This two-phase framework builds on the hypothesis proposed by Fort et al. (2020), but we uniquely identify the cone effect in Phase II, demonstrating its significant performance advantages over fully linearized training.",
+        "arxiv_id": "2503.16316"
+    },
+    "2503.16187": {
+        "SCORE": 15,
+        "ARXIVID": "2503.16187",
+        "COMMENT": "The paper generalizes manifold learning to metric spaces, providing theoretical insights into Laplacian-based methods. It aligns with foundational research in representation learning.",
+        "RELEVANCE": 8,
+        "NOVELTY": 7,
+        "authors": [
+            "Liane Xu",
+            "Amit Singer"
+        ],
+        "title": "Manifold learning in metric spaces",
+        "abstract": "Laplacian-based methods are popular for dimensionality reduction of data lying in $\\mathbb{R}^N$. Several theoretical results for these algorithms depend on the fact that the Euclidean distance approximates the geodesic distance on the underlying submanifold which the data are assumed to lie on. However, for some applications, other metrics, such as the Wasserstein distance, may provide a more appropriate notion of distance than the Euclidean distance. We provide a framework that generalizes the problem of manifold learning to metric spaces and study when a metric satisfies sufficient conditions for the pointwise convergence of the graph Laplacian.",
+        "arxiv_id": "2503.16187"
+    },
+    "2503.15801": {
+        "SCORE": 15,
+        "ARXIVID": "2503.15801",
+        "COMMENT": "The paper introduces CDRM, a framework for disentangling uncertainties in regressive system dynamics models. It aligns with foundational research in representation learning and uncertainty estimation.",
+        "RELEVANCE": 8,
+        "NOVELTY": 7,
+        "authors": [
+            "Zhiyu An",
+            "Zhibo Hou",
+            "Wan Du"
+        ],
+        "title": "Disentangling Uncertainties by Learning Compressed Data Representation",
+        "abstract": "We study aleatoric and epistemic uncertainty estimation in a learned regressive system dynamics model. Disentangling aleatoric uncertainty (the inherent randomness of the system) from epistemic uncertainty (the lack of data) is crucial for downstream tasks such as risk-aware control and reinforcement learning, efficient exploration, and robust policy transfer. While existing approaches like Gaussian Processes, Bayesian networks, and model ensembles are widely adopted, they suffer from either high computational complexity or inaccurate uncertainty estimation. To address these limitations, we propose the Compressed Data Representation Model (CDRM), a framework that learns a neural network encoding of the data distribution and enables direct sampling from the output distribution. Our approach incorporates a novel inference procedure based on Langevin dynamics sampling, allowing CDRM to predict arbitrary output distributions rather than being constrained to a Gaussian prior. Theoretical analysis provides the conditions where CDRM achieves better memory and computational complexity compared to bin-based compression methods. Empirical evaluations show that CDRM demonstrates a superior capability to identify aleatoric and epistemic uncertainties separately, achieving AUROCs of 0.8876 and 0.9981 on a single test set containing a mixture of both uncertainties. Qualitative results further show that CDRM's capability extends to datasets with multimodal output distributions, a challenging scenario where existing methods consistently fail. Code and supplementary materials are available at https://github.com/ryeii/CDRM.",
+        "arxiv_id": "2503.15801"
+    },
+    "2503.16580": {
+        "SCORE": 15,
+        "ARXIVID": "2503.16580",
+        "COMMENT": "The paper introduces a modified Benamou-Brenier approach for Wasserstein distance with applications to latent Gaussian distributions. It aligns with foundational research in representation learning and metric spaces.",
+        "RELEVANCE": 8,
+        "NOVELTY": 7,
+        "authors": [
+            "Kevine Meugang Toukam"
+        ],
+        "title": "Procrustes Wasserstein Metric: A Modified Benamou-Brenier Approach with Applications to Latent Gaussian Distributions",
+        "abstract": "We introduce a modified Benamou-Brenier type approach leading to a Wasserstein type distance that allows global invariance, specifically, isometries, and we show that the problem can be summarized to orthogonal transformations. This distance is defined by penalizing the action with a costless movement of the particle that does not change the direction and speed of its trajectory. We show that for Gaussian distribution resume to measuring the Euclidean distance between their ordered vector of eigenvalues and we show a direct application in recovering Latent Gaussian distributions.",
+        "arxiv_id": "2503.16580"
+    },
+    "2503.16240": {
+        "SCORE": 15,
+        "ARXIVID": "2503.16240",
+        "COMMENT": "The paper introduces a neural network-based method for identifying nullclines in oscillatory systems, which aligns with foundational research in representation learning and interpretability.",
+        "RELEVANCE": 8,
+        "NOVELTY": 7,
+        "authors": [
+            "Bartosz Prokop",
+            "Jimmy Billen",
+            "Nikita Frolov",
+            "Lendert Gelens"
+        ],
+        "title": "Machine learning identifies nullclines in oscillatory dynamical systems",
+        "abstract": "We introduce CLINE (Computational Learning and Identification of Nullclines), a neural network-based method that uncovers the hidden structure of nullclines from oscillatory time series data. Unlike traditional approaches aiming at direct prediction of system dynamics, CLINE identifies static geometric features of the phase space that encode the (non)linear relationships between state variables. It overcomes challenges such as multiple time scales and strong nonlinearities while producing interpretable results convertible into symbolic differential equations. We validate CLINE on various oscillatory systems, showcasing its effectiveness.",
+        "arxiv_id": "2503.16240"
+    },
+    "2503.16572": {
+        "SCORE": 15,
+        "ARXIVID": "2503.16572",
+        "COMMENT": "The paper introduces an ANN-SNN distillation framework, which aligns with foundational research in model compression and efficiency.",
+        "RELEVANCE": 8,
+        "NOVELTY": 7,
+        "authors": [
+            "Shu Yang",
+            "Chengting Yu",
+            "Lei Liu",
+            "Hanzhi Ma",
+            "Aili Wang",
+            "Erping Li"
+        ],
+        "title": "Efficient ANN-Guided Distillation: Aligning Rate-based Features of Spiking Neural Networks through Hybrid Block-wise Replacement",
+        "abstract": "Spiking Neural Networks (SNNs) have garnered considerable attention as a potential alternative to Artificial Neural Networks (ANNs). Recent studies have highlighted SNNs' potential on large-scale datasets. For SNN training, two main approaches exist: direct training and ANN-to-SNN (ANN2SNN) conversion. To fully leverage existing ANN models in guiding SNN learning, either direct ANN-to-SNN conversion or ANN-SNN distillation training can be employed. In this paper, we propose an ANN-SNN distillation framework from the ANN-to-SNN perspective, designed with a block-wise replacement strategy for ANN-guided learning. By generating intermediate hybrid models that progressively align SNN feature spaces to those of ANN through rate-based features, our framework naturally incorporates rate-based backpropagation as a training method. Our approach achieves results comparable to or better than state-of-the-art SNN distillation methods, showing both training and learning efficiency.",
+        "arxiv_id": "2503.16572"
+    },
+    "2503.16348": {
+        "SCORE": 15,
+        "ARXIVID": "2503.16348",
+        "COMMENT": "The paper explores philosophical questions about consciousness in AI, which could be considered an emerging trend challenging established assumptions.",
+        "RELEVANCE": 7,
+        "NOVELTY": 8,
+        "authors": [
+            "Murray Shanahan"
+        ],
+        "title": "Palatable Conceptions of Disembodied Being: Terra Incognita in the Space of Possible Minds",
+        "abstract": "Is it possible to articulate a conception of consciousness that is compatible with the exotic characteristics of contemporary, disembodied AI systems, and that can stand up to philosophical scrutiny? How would subjective time and selfhood show up for an entity that conformed to such a conception? Trying to answer these questions, even metaphorically, stretches the language of consciousness to breaking point. Ultimately, the attempt yields something like emptiness, in the Buddhist sense, and helps to undermine our dualistic inclinations towards subjectivity and selfhood.",
+        "arxiv_id": "2503.16348"
+    },
+    "2503.16416": {
+        "SCORE": 14,
+        "ARXIVID": "2503.16416",
+        "COMMENT": "The paper surveys evaluation methodologies for LLM-based agents, which aligns with foundational research in LLM behavior and interpretability.",
+        "RELEVANCE": 8,
+        "NOVELTY": 6,
+        "authors": [
+            "Asaf Yehudai",
+            "Lilach Eden",
+            "Alan Li",
+            "Guy Uziel",
+            "Yilun Zhao",
+            "Roy Bar-Haim",
+            "Arman Cohan",
+            "Michal Shmueli-Scheuer"
+        ],
+        "title": "Survey on Evaluation of LLM-based Agents",
+        "abstract": "The emergence of LLM-based agents represents a paradigm shift in AI, enabling autonomous systems to plan, reason, use tools, and maintain memory while interacting with dynamic environments. This paper provides the first comprehensive survey of evaluation methodologies for these increasingly capable agents. We systematically analyze evaluation benchmarks and frameworks across four critical dimensions: (1) fundamental agent capabilities, including planning, tool use, self-reflection, and memory; (2) application-specific benchmarks for web, software engineering, scientific, and conversational agents; (3) benchmarks for generalist agents; and (4) frameworks for evaluating agents. Our analysis reveals emerging trends, including a shift toward more realistic, challenging evaluations with continuously updated benchmarks. We also identify critical gaps that future research must address-particularly in assessing cost-efficiency, safety, and robustness, and in developing fine-grained, and scalable evaluation methods. This survey maps the rapidly evolving landscape of agent evaluation, reveals the emerging trends in the field, identifies current limitations, and proposes directions for future research.",
+        "arxiv_id": "2503.16416"
+    },
+    "2503.16585": {
+        "SCORE": 14,
+        "ARXIVID": "2503.16585",
+        "COMMENT": "The paper surveys distributed and multimodal LLMs, which is relevant to foundational research in LLM scalability and architecture.",
+        "RELEVANCE": 8,
+        "NOVELTY": 6,
+        "authors": [
+            "Hadi Amini",
+            "Md Jueal Mia",
+            "Yasaman Saadati",
+            "Ahmed Imteaj",
+            "Seyedsina Nabavirazavi",
+            "Urmish Thakker",
+            "Md Zarif Hossain",
+            "Awal Ahmed Fime",
+            "S. S. Iyengar"
+        ],
+        "title": "Distributed LLMs and Multimodal Large Language Models: A Survey on Advances, Challenges, and Future Directions",
+        "abstract": "Language models (LMs) are machine learning models designed to predict linguistic patterns by estimating the probability of word sequences based on large-scale datasets, such as text. LMs have a wide range of applications in natural language processing (NLP) tasks, including autocomplete and machine translation. Although larger datasets typically enhance LM performance, scalability remains a challenge due to constraints in computational power and resources. Distributed computing strategies offer essential solutions for improving scalability and managing the growing computational demand. Further, the use of sensitive datasets in training and deployment raises significant privacy concerns. Recent research has focused on developing decentralized techniques to enable distributed training and inference while utilizing diverse computational resources and enabling edge AI. This paper presents a survey on distributed solutions for various LMs, including large language models (LLMs), vision language models (VLMs), multimodal LLMs (MLLMs), and small language models (SLMs). While LLMs focus on processing and generating text, MLLMs are designed to handle multiple modalities of data (e.g., text, images, and audio) and to integrate them for broader applications. To this end, this paper reviews key advancements across the MLLM pipeline, including distributed training, inference, fine-tuning, and deployment, while also identifying the contributions, limitations, and future areas of improvement. Further, it categorizes the literature based on six primary focus areas of decentralization. Our analysis describes gaps in current methodologies for enabling distributed solutions for LMs and outline future research directions, emphasizing the need for novel solutions to enhance the robustness and applicability of distributed LMs.",
+        "arxiv_id": "2503.16585"
+    },
+    "2503.15777": {
+        "SCORE": 13,
+        "ARXIVID": "2503.15777",
+        "COMMENT": "The paper introduces a novel clustering method combining K-medians and Dynamic Time Warping, which is relevant to representation learning but lacks broader foundational insights.",
+        "RELEVANCE": 7,
+        "NOVELTY": 6,
+        "authors": [
+            "Joanikij Chulev",
+            "Angela Mladenovska"
+        ],
+        "title": "Line Space Clustering (LSC): Feature-Based Clustering using K-medians and Dynamic Time Warping for Versatility",
+        "abstract": "Clustering high-dimensional data is a critical challenge in machine learning due to the curse of dimensionality and the presence of noise. Traditional clustering algorithms often fail to capture the intrinsic structures in such data. This paper explores a combination of clustering methods, which we called Line Space Clustering (LSC), a representation that transforms data points into lines in a newly defined feature space, enabling clustering based on the similarity of feature value patterns, essentially treating features as sequences. LSC employs a combined distance metric that uses Euclidean and Dynamic Time Warping (DTW) distances, weighted by a parameter {\\alpha}, allowing flexibility in emphasizing shape or magnitude similarities. We delve deeply into the mechanics of DTW and the Savitzky Golay filter, explaining their roles in the algorithm. Extensive experiments demonstrate the efficacy of LSC on synthetic and real-world datasets, showing that randomly experimenting with time-series optimized methods sometimes might surprisingly work on a complex dataset, particularly in noisy environments. Source code and experiments are available at: https://github.com/JoanikijChulev/LSC.",
+        "arxiv_id": "2503.15777"
+    }
+}

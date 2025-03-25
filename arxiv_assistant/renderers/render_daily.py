@@ -1,9 +1,10 @@
 import json
-from tabulate import tabulate
 from typing import Dict, List, Tuple
 
+from tabulate import tabulate
+
 from arxiv_assistant.filters.filter_gpt import get_full_prompt_for_abstract_filtering
-from arxiv_assistant.utils.utils import Paper
+from arxiv_assistant.utils.utils import Paper, align_markdown_table
 
 
 def render_title_and_author(paper_entry: Dict, idx: int) -> str:
@@ -62,9 +63,11 @@ def render_daily_md(
         date_string = ""
 
     # render head table
-    headers = head_table["headers"]
-    data = head_table["data"]
-    head_table_strings = tabulate(data, headers=headers, tablefmt="github") if head_table is not None else ""
+    if head_table is not None:
+        head_table_strings = tabulate(head_table["data"], headers=head_table["headers"], tablefmt="github")
+        head_table_strings = align_markdown_table(head_table_strings, "center")
+    else:
+        head_table_strings = ""
 
     # render each paper
     title_strings = [

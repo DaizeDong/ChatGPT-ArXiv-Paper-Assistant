@@ -3,18 +3,19 @@ import os
 
 from arxiv_assistant.apis.arxiv import get_papers_from_arxiv
 from arxiv_assistant.apis.semantic_scholar import get_authors
-from arxiv_assistant.environment import AUTHOR_ID_SET, BASE_PROMPT, CONFIG, NOW_DAY, NOW_MONTH, NOW_YEAR, OUTPUT_DEBUG_FILE_FORMAT, OUTPUT_JSON_FILE_FORMAT, POSTFIX_PROMPT, S2_API_KEY, SCORE_PROMPT, SLACK_KEY, TOPIC_PROMPT
+from arxiv_assistant.environment import AUTHOR_ID_SET, BASE_PROMPT, CONFIG, NOW_DAY, NOW_MONTH, NOW_YEAR, POSTFIX_PROMPT, S2_API_KEY, SCORE_PROMPT, SLACK_KEY, TOPIC_PROMPT
 from arxiv_assistant.filters.filter_author import filter_papers_by_hindex, select_by_author
 from arxiv_assistant.filters.filter_gpt import filter_by_gpt
 from arxiv_assistant.push_to_slack import push_to_slack
 from arxiv_assistant.renderers.render_daily import render_daily_md
-from arxiv_assistant.utils.io import copy_file_or_dir, delete_file_or_dir
+from arxiv_assistant.utils.io import copy_file_or_dir, create_dir, delete_file_or_dir
 from arxiv_assistant.utils.utils import EnhancedJSONEncoder
 
 missed_dates = {
     # date_to_remedy: [start_date_to_search, end_date_to_search]
-    # (2025, 1, 14): [(2025, 1, 13), (2025, 1, 13)],
-    (2025, 1, 17): [(2025, 1, 14), (2025, 1, 16)],
+    (2025, 3, 14): [(2025, 3, 13), (2025, 3, 13)],
+    (2025, 3, 17): [(2025, 3, 14), (2025, 3, 16)],
+    (2025, 3, 21): [(2025, 3, 20), (2025, 3, 20)],
 }
 
 if __name__ == "__main__":
@@ -25,8 +26,18 @@ if __name__ == "__main__":
         print(f"Searching date range: {begin_date} - {end_date}")
 
         remedy_year, remedy_month, remedy_day = remedy_date
+
+        OUTPUT_DEBUG_DIR = os.path.join(CONFIG["OUTPUT"]["output_path"], "debug", f"{remedy_year}-{format(remedy_month, '02d')}", f"{remedy_year}-{format(remedy_month, '02d')}-{format(remedy_day, '02d')}")
+        OUTPUT_DEBUG_FILE_FORMAT = os.path.join(OUTPUT_DEBUG_DIR, "{}")
+        create_dir(OUTPUT_DEBUG_DIR)
+
         OUTPUT_MD_DIR = os.path.join(CONFIG["OUTPUT"]["output_path"], "md", f"{remedy_year}-{format(remedy_month, '02d')}")
         OUTPUT_MD_FILE_FORMAT = os.path.join(OUTPUT_MD_DIR, f"{remedy_year}-{format(remedy_month, '02d')}-{format(remedy_day, '02d')}-" + "{}")
+        create_dir(OUTPUT_MD_DIR)
+
+        OUTPUT_JSON_DIR = os.path.join(CONFIG["OUTPUT"]["output_path"], "json", f"{remedy_year}-{format(remedy_month, '02d')}")
+        OUTPUT_JSON_FILE_FORMAT = os.path.join(OUTPUT_JSON_DIR, f"{remedy_year}-{format(remedy_month, '02d')}-{format(remedy_day, '02d')}-" + "{}")
+        create_dir(OUTPUT_JSON_DIR)
 
         # 🔍 get the paper list from arxiv
         all_entries, arxiv_paper_dict = get_papers_from_arxiv(

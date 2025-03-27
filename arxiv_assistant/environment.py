@@ -40,8 +40,10 @@ with open("prompts/paper_topics.txt", "r", encoding="utf-8") as f:
     TOPIC_PROMPT = f.read()
 with open("prompts/score_criteria.txt", "r", encoding="utf-8") as f:
     SCORE_PROMPT = f.read()
-with open("prompts/postfix_prompt.txt", "r", encoding="utf-8") as f:
-    POSTFIX_PROMPT = f.read()
+with open("prompts/postfix_prompt_title.txt", "r", encoding="utf-8") as f:
+    POSTFIX_PROMPT_TITLE = f.read()
+with open("prompts/postfix_prompt_abstract.txt", "r", encoding="utf-8") as f:
+    POSTFIX_PROMPT_ABSTRACT = f.read()
 
 # keys
 S2_API_KEY = os.environ.get("S2_KEY")

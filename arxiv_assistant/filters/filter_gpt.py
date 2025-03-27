@@ -63,13 +63,7 @@ def paper_to_string(paper_entry: Paper) -> str:
     )
 
 
-def get_full_prompt_for_title_filtering(base_prompt, topic_prompt, batch_str):
-    postfix_prompt = (
-        '## Instruction\n\n'
-        'Identify any papers that are absolutely and completely irrelevant to the criteria, and you are absolutely sure your friend will not enjoy, formatted as a list of arxiv ids like ["ID1", "ID2", "ID3"..].\n'
-        'Be extremely cautious, and if you are unsure at all, do not add a paper in this list. You will check it in detail later.\n'
-        'Directly respond with the list, do not add ANY extra text before or after the list.'
-    )
+def get_full_prompt_for_title_filtering(base_prompt, topic_prompt, postfix_prompt, batch_str):
     full_prompt = "\n\n".join(
         [
             base_prompt,
@@ -146,7 +140,7 @@ def call_chatgpt(full_prompt, openai_client, model, limit_per_minute=-1):
 
 
 def filter_papers_by_title(
-    paper_list, openai_client, base_prompt, topic_prompt, config, retry=3,
+    paper_list, openai_client, base_prompt, topic_prompt, postfix_prompt, config, retry=3,
 ) -> Tuple[List[Paper], Dict, float, float, int, int]:
     batch_size = get_batch_size(int(config["SELECTION"]["title_batch_size"]), len(paper_list), config)
     print(f"Using batch size of {batch_size} for title filtering")
@@ -163,7 +157,7 @@ def filter_papers_by_title(
     for batch in tqdm(batches_of_papers, desc="Filtering title"):
         # prepare input
         papers_string = [paper_to_titles(paper) for paper in batch]
-        full_prompt = get_full_prompt_for_title_filtering(base_prompt, topic_prompt, papers_string)
+        full_prompt = get_full_prompt_for_title_filtering(base_prompt, topic_prompt, postfix_prompt, papers_string)
         model = config["SELECTION"]["model"]
         try:
             completion = call_chatgpt(full_prompt, openai_client, model)
@@ -214,6 +208,7 @@ def filter_papers_by_title(
                 openai_client,
                 base_prompt,
                 topic_prompt,
+                postfix_prompt,
                 config,
                 retry - 1,
             )
@@ -371,7 +366,7 @@ def filter_papers_by_abstract(
     return scored_batches, selected_results, filtered_results, total_prompt_cost, total_completion_cost, prompt_tokens, completion_tokens
 
 
-def filter_by_gpt(paper_list, base_prompt, topic_prompt, score_prompt, postfix_prompt, config):
+def filter_by_gpt(paper_list, base_prompt, topic_prompt, score_prompt, postfix_prompt_title, postfix_prompt_abstract, config):
     total_filtered_results = {}
     total_prompt_cost = 0.0
     total_completion_cost = 0.0
@@ -388,6 +383,7 @@ def filter_by_gpt(paper_list, base_prompt, topic_prompt, score_prompt, postfix_p
             openai_client,
             base_prompt,
             topic_prompt,
+            postfix_prompt_title,
             config,
             retry=int(config["SELECTION"]["title_retry"]),
         )
@@ -411,7 +407,7 @@ def filter_by_gpt(paper_list, base_prompt, topic_prompt, score_prompt, postfix_p
             base_prompt,
             topic_prompt,
             score_prompt,
-            postfix_prompt,
+            postfix_prompt_abstract,
             config,
             retry=int(config["SELECTION"]["abstract_retry"]),
             limit_per_minute=int(config["SELECTION"]["limit_per_minute"]),
@@ -439,7 +435,6 @@ def filter_by_gpt(paper_list, base_prompt, topic_prompt, score_prompt, postfix_p
 
     return selected_results, total_filtered_results, total_prompt_cost, total_completion_cost, total_prompt_tokens, total_completion_tokens
 
-
 # if __name__ == "__main__":
 #     openai_client = OpenAI(api_key=OPENAI_API_KEY, base_url=OPENAI_BASE_URL)
 #
@@ -465,7 +460,7 @@ def filter_by_gpt(paper_list, base_prompt, topic_prompt, score_prompt, postfix_p
 #     total_cost = 0
 #     for batch in tqdm(papers):
 #         batch_str = [paper_to_string(paper) for paper in batch]
-#         full_prompt = get_full_prompt_for_abstract_filtering(BASE_PROMPT, TOPIC_PROMPT, SCORE_PROMPT, POSTFIX_PROMPT, batch_str)
+#         full_prompt = get_full_prompt_for_abstract_filtering(BASE_PROMPT, TOPIC_PROMPT, SCORE_PROMPT, POSTFIX_PROMPT_ABSTRACT, batch_str)
 #         model = CONFIG["SELECTION"]["model"]
 #         completion = call_chatgpt(full_prompt, openai_client, model)
 #

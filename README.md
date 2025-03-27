@@ -1,9 +1,9 @@
 # ChatGPT ArXiv Paper Assistant: A Daily ArXiv Scanner
 
-> *[Last update: 3/20/2025]*
+> *[Last update: 3/25/2025]*
 > This is an enhanced version of the [GPT paper assistant](https://github.com/tatsu-lab/gpt_paper_assistant).
-> I fixed some bugs and added various new features to make it easier to use.
-> See the [change log](#changelog) for details.
+> I fixed all known bugs and added various new features to make it easier to use.
+> See the [changelog](CHANGELOG.md) for details.
 
 This repo implements a very simple daily scanner for Arxiv that uses OpenAI API to find papers you might find interesting.
 It will run daily via github actions and can post this information to slack via a bot or just render it in a static github-pages website.
@@ -108,101 +108,14 @@ The filtering logic is pretty simple. We first check for author match.
 We then check for GPT-evaluated relevance. We do this in two steps.
 
 1. Filter out any papers that have no authors with h-index above `h_cutoff` in `config.ini`. This is to reduce costs.
-2. All remaining examples get batched, and are evaluated by a GPT model specified by `model` in `config.ini`. This step uses the [following prompt](#default-prompt) setup defined in `configs/`.
+2. All remaining examples get batched, and are evaluated by a GPT model specified by `model` in `config.ini`. This step uses the [prompt](prompts/example.md) defined in `./prompts/`.
 3. GPT scores the papers for relevance (to the topics in `config/papers_topics.txt`) and novelty (scale 1-10)
 4. Papers are filtered if they have scores below either the relevance and novelty cutoffs in `config.ini`
 5. Papers are given an overall score based on equal weight to relevance and novelty.
 
 Finally, all papers are sorted by the max of their `author_match_score` and the sum of the GPT-rated relevance and novelty scores (the relevance and novelty scores will only show up in the final output if they are above the cutoff thresholds you set in the config file). Then the papers are rendered and pushed into their endpoints (text files or Slack).
 
-## Default Prompt
-
-> You are a helpful paper reading assistant whose job is to read daily posts from ArXiv and identify a few papers that your friend will enjoy reading.
-> Your job is to carefully read the paper titles and abstracts below and find the ones that match the criteria below.
-> ## Relevant Topics
-> [TOPIC LIST HERE]
-> ## Scoring Criteria
-> [SCORING PROMPT HERE]
-> ## Papers
-> [PAPER LIST HERE]
-> ## Instructions
-> Write the response in JSONL format with {ARXIVID, COMMENT, RELEVANCE, NOVELTY} on each line, one for each paper.
-> - ARXIVID: should be the ArXiv ID.
-> - COMMENT: should identify whether there is a criteria that match the paper very closely. These matches should not be based on general terms like "language modeling" or "advancements" and should specifically refer to a criterion. No need to mention the non-matching criteria.
-> - RELEVANCE: should be a score from 1-10.
-> - NOVELTY: should be a score from 1-10.
-
-## Changelog
-
-- **3/20/2025**
-    - Supported getting papers on any specified date through arXiv API.
-    - Enhanced the logic of getting papers from RSS feeds.
-    - Added a script for remedying papers for missed dates.
-- **3/13/2025**
-    - Rearranged the file structure and cleaned some unused code snippets.
-- **2/19/2025**
-    - Added retrying for failed completion calls.
-    - Fixed the output file name, which will first follow ArXiv update time instead of local time.
-- **2/18/2025**
-    - Fixed a paper formatting bug which destroyed the performance of title filtering.
-    - Added retrying logic for GPT filtering so that there will be no paper missed.
-    - Added toggles that control the title/abstract filtering.
-    - Enhanced the debugging information by recording more logs and dumping more debug files.
-- **2/11/2025**
-    - Added a rate limit to API calls.
-- **2/3/2025**
-    - Fixed a bug that mistakenly filters all papers with high h-index.
-- **1/31/2025**
-    - Updated all github actions to the latest version.
-- **1/29/2025**
-    - Supported price calculation for cache tokens.
-    - Updated the price for `deepseek-chat` and `deepseek-reasoner`.
-- **1/28/2025**
-    - Fixed adaptive batch size when `paper_num <= adaptive_threshold`.
-    - Fixed the rename when `output.md` already exists.
-    - Added details in the return information for selected/filtered papers.
-- **1/25/2025**
-    - Fixed the exception when no paper is available.
-- **1/22/2025**
-    - Added a function that adaptively scales the `batch_size` by the number of papers.
-    - Supported detailed logging the cost of prompt and completion tokens.
-    - Adjusted the format of prompts to better utilize ChatGPT cache.
-- **1/21/2025**
-    - Fixed the auto-push workflow.
-    - Supported setting prompts for scoring.
-- **1/18/2025**
-    - Fixed the invalid retry logic for author searching.
-- **1/17/2025**
-    - Added a workflow that automatically pushes outputs to the `auto_update` branch.
-    - Added a toggle that decides whether to search authors before paper filtering.
-    - Rearranged the output directory, separating the formal outputs and debug logs.
-    - Enhanced the logging logic. Now it prints out more information about preserved papers and costs.
-- **1/10/2025**
-    - Set the version of `httpx` package to `0.27.2` for compatibility.
-    - Supported setting the `base_url` for OpenAI API.
-    - Supported counting costs for the latest GPT-4o series models.
-- **2/15/2024**
-    - Fixed a bug with author parsing in the RSS format.
-    - Cost estimates for title filtering being off.
-    - Crash when 0 papers are on the feed.
-- **2/7/2024**
-    - Fixed a critical issue from ArXiv changing their RSS format.
-    - Added and enabled a title filtering to reduce costs.
-
-## Contributing
-
-This repo uses ruff - `ruff check .` and `ruff format .`
-Please install the pre-commit hook by running `pre-commit install`
-
-### Testing and improving the GPT filter
-
-The `filter_papers.py` code can also be run as a standalone script.
-This will take a batch of papers in `in/debug_papers.json`, run whatever config and prompts you have
-and return an output to `out/debug/filter_paper_test.json`. If you find the bot makes mistakes, you can find the associated batch in `out/debug/gpt_paper_batches.json` and copy that into the relevant `debug_papers` file.
-
-This lets you build a benchmark for the filter and to see what comes out on the other side.
-
-## Other stuff
+## Acknowledgement
 
 This repo and code was originally built by Tatsunori Hashimoto is licensed under the Apache 2.0 license.
 Thanks to Chenglei Si for testing and benchmarking the GPT filter.

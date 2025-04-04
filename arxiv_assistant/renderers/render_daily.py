@@ -1,7 +1,6 @@
 import json
-from typing import Dict, List, Tuple
-
 from tabulate import tabulate
+from typing import Dict, List, Tuple
 
 from arxiv_assistant.filters.filter_gpt import get_full_prompt_for_abstract_filtering
 from arxiv_assistant.utils.utils import Paper, align_markdown_table
@@ -58,7 +57,7 @@ def render_daily_md(
     # render date content
     if now_date is not None:
         now_year, now_month, now_day = now_date
-        date_string = f"{now_month}/{format(now_day, '02d')}/{format(now_year, '02d')}"
+        date_string = f"{now_year}-{format(now_month, '02d')}-{format(now_day, '02d')}"
     else:
         date_string = ""
 
@@ -94,7 +93,7 @@ def render_daily_md(
 
     # cat output string
     output_string = "\n\n".join([
-        f"# Personalized Daily Arxiv Papers {date_string}",
+        f"# Personalized Daily ArXiv Papers {date_string}",
         head_table_strings,
         f"Total arXiv papers: {len(all_entries)}",
         f"Total scanned papers: {sum([len(paper_list) for paper_list in arxiv_paper_dict.values()])}",

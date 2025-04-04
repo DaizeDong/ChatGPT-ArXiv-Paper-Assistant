@@ -61,11 +61,11 @@ def align_markdown_table(table_string: str, alignments: Union[Optional[str], Lis
         if alignments[i] is None:
             new_format_contents.append(format_contents[i])
         elif alignments[i] == "left":
-            new_format_contents.append(":" + "-" * len(format_contents[i]))
+            new_format_contents.append(":" + "-" * (len(format_contents[i]) - 1))
         elif alignments[i] in ("center", "centre"):
-            new_format_contents.append(":" + "-" * len(format_contents[i]) + ":")
+            new_format_contents.append(":" + "-" * (len(format_contents[i]) - 2) + ":")
         elif alignments[i] == "right":
-            new_format_contents.append("-" * len(format_contents[i]) + ":")
+            new_format_contents.append("-" * (len(format_contents[i]) - 1) + ":")
         else:
             raise ValueError(f"Invalid alignment: {alignments[i]}")
     new_format_line = "|".join([""] + new_format_contents + [""])

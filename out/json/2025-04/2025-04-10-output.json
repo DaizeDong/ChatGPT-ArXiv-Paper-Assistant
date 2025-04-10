@@ -1,0 +1,207 @@
+{
+    "2504.06426": {
+        "SCORE": 19,
+        "ARXIVID": "2504.06426",
+        "COMMENT": "The paper introduces S'MoRE, a novel framework combining Mixture-of-Experts (MoE) and low-rank adaptations (LoRA) for efficient LLM fine-tuning. This aligns closely with the 'Model Architecture' and 'Model Compression' criteria, as it innovates on MoE structures and efficiency.",
+        "RELEVANCE": 10,
+        "NOVELTY": 9,
+        "authors": [
+            "Hanqing Zeng",
+            "Yinglong Xia",
+            "Zhuokai Zhao",
+            "Gilbert Jiang",
+            "Qiang Zhang",
+            "Jiayi Liu",
+            "Lizhu Zhang",
+            "Xiangjun Fan",
+            "Benyu Zhang"
+        ],
+        "title": "S'MoRE: Structural Mixture of Residual Experts for LLM Fine-tuning",
+        "abstract": "Fine-tuning pre-trained large language models (LLMs) presents a dual challenge of balancing parameter efficiency and model capacity. Existing methods like low-rank adaptations (LoRA) are efficient but lack flexibility, while Mixture-of-Experts (MoE) architectures enhance model capacity at the cost of more & under-utilized parameters. To address these limitations, we propose Structural Mixture of Residual Experts (S'MoRE), a novel framework that seamlessly integrates the efficiency of LoRA with the flexibility of MoE. Specifically, S'MoRE employs hierarchical low-rank decomposition of expert weights, yielding residuals of varying orders interconnected in a multi-layer structure. By routing input tokens through sub-trees of residuals, S'MoRE emulates the capacity of many experts by instantiating and assembling just a few low-rank matrices. We craft the inter-layer propagation of S'MoRE's residuals as a special type of Graph Neural Network (GNN), and prove that under similar parameter budget, S'MoRE improves \"structural flexibility\" of traditional MoE (or Mixture-of-LoRA) by exponential order. Comprehensive theoretical analysis and empirical results demonstrate that S'MoRE achieves superior fine-tuning performance, offering a transformative approach for efficient LLM adaptation.",
+        "arxiv_id": "2504.06426"
+    },
+    "2504.06792": {
+        "SCORE": 18,
+        "ARXIVID": "2504.06792",
+        "COMMENT": "The paper addresses domain-specific pruning in large MoE models, which directly aligns with the model compression and MoE criteria.",
+        "RELEVANCE": 10,
+        "NOVELTY": 8,
+        "authors": [
+            "Zican Dong",
+            "Han Peng",
+            "Peiyu Liu",
+            "Wayne Xin Zhao",
+            "Dong Wu",
+            "Feng Xiao",
+            "Zhifeng Wang"
+        ],
+        "title": "Domain-Specific Pruning of Large Mixture-of-Experts Models with Few-shot Demonstrations",
+        "abstract": "Mixture-of-Experts (MoE) models achieve a favorable trade-off between performance and inference efficiency by activating only a subset of experts. However, the memory overhead of storing all experts remains a major limitation, especially in large-scale MoE models such as DeepSeek-R1 (671B). In this study, we investigate domain specialization and expert redundancy in large-scale MoE models and uncover a consistent behavior we term few-shot expert localization, with only a few demonstrations, the model consistently activates a sparse and stable subset of experts. Building on this observation, we propose a simple yet effective pruning framework, EASY-EP, that leverages a few domain-specific demonstrations to identify and retain only the most relevant experts. EASY-EP comprises two key components: output-aware expert importance assessment and expert-level token contribution estimation. The former evaluates the importance of each expert for the current token by considering the gating scores and magnitudes of the outputs of activated experts, while the latter assesses the contribution of tokens based on representation similarities after and before routed experts. Experiments show that our method can achieve comparable performances and $2.99\\times$ throughput under the same memory budget with full DeepSeek-R1 with only half the experts. Our code is available at https://github.com/RUCAIBox/EASYEP.",
+        "arxiv_id": "2504.06792"
+    },
+    "2504.06319": {
+        "SCORE": 17,
+        "ARXIVID": "2504.06319",
+        "COMMENT": "The paper focuses on KV cache optimization for LLM inference, which aligns with the model compression criterion, specifically addressing efficiency breakthroughs.",
+        "RELEVANCE": 9,
+        "NOVELTY": 8,
+        "authors": [
+            "Yanhao Dong",
+            "Yubo Miao",
+            "Weinan Li",
+            "Xiao Zheng",
+            "Chao Wang",
+            "Feng Lyu"
+        ],
+        "title": "Accelerating LLM Inference Throughput via Asynchronous KV Cache Prefetching",
+        "abstract": "Large Language Models (LLMs) exhibit pronounced memory-bound characteristics during inference due to High Bandwidth Memory (HBM) bandwidth constraints. In this paper, we propose an L2 Cache-oriented asynchronous KV Cache prefetching method to break through the memory bandwidth bottleneck in LLM inference through computation-load overlap. By strategically scheduling idle memory bandwidth during active computation windows, our method proactively prefetches required KV Cache into GPU L2 cache, enabling high-speed L2 cache hits for subsequent accesses and effectively hiding HBM access latency within computational cycles. Extensive experiments on NVIDIA H20 GPUs demonstrate that the proposed method achieves 2.15x improvement in attention kernel efficiency and up to 1.97x end-to-end throughput enhancement, surpassing state-of-the-art baseline FlashAttention-3. Notably, our solution maintains orthogonality to existing optimization techniques and can be integrated with current inference frameworks, providing a scalable latency-hiding solution for next-generation LLM inference engines.",
+        "arxiv_id": "2504.06319"
+    },
+    "2504.06664": {
+        "SCORE": 17,
+        "ARXIVID": "2504.06664",
+        "COMMENT": "The paper proposes a novel framework for continual fine-tuning using a Sequential Ensemble of Experts, which aligns with the Mixture-of-Experts (MoE) criterion.",
+        "RELEVANCE": 9,
+        "NOVELTY": 8,
+        "authors": [
+            "Zhilin Wang",
+            "Yafu Li",
+            "Xiaoye Qu",
+            "Yu Cheng"
+        ],
+        "title": "SEE: Continual Fine-tuning with Sequential Ensemble of Experts",
+        "abstract": "Continual fine-tuning of large language models (LLMs) suffers from catastrophic forgetting. Rehearsal-based methods mitigate this problem by retaining a small set of old data. Nevertheless, they still suffer inevitable performance loss. Although training separate experts for each task can help prevent forgetting, effectively assembling them remains a challenge. Some approaches use routers to assign tasks to experts, but in continual learning, they often require retraining for optimal performance. To address these challenges, we introduce the Sequential Ensemble of Experts (SEE) framework. SEE removes the need for an additional router, allowing each expert to independently decide whether a query should be handled. The framework employs distributed routing, and during continual fine-tuning, SEE only requires the training of new experts for incoming tasks rather than retraining the entire system. Experiments reveal that the SEE outperforms prior approaches, including multi-task learning, in continual fine-tuning. It also demonstrates remarkable generalization ability, as the expert can effectively identify out-of-distribution queries, which can then be directed to a more generalized model for resolution. This work highlights the promising potential of integrating routing and response mechanisms within each expert, paving the way for the future of distributed model ensembling.",
+        "arxiv_id": "2504.06664"
+    },
+    "2504.06323": {
+        "SCORE": 17,
+        "ARXIVID": "2504.06323",
+        "COMMENT": "The paper introduces a novel pruning method for LLMs, which aligns with the model compression criterion, particularly focusing on fine-grained pruning techniques.",
+        "RELEVANCE": 9,
+        "NOVELTY": 8,
+        "authors": [
+            "Bailey J. Eccles",
+            "Leon Wong",
+            "Blesson Varghese"
+        ],
+        "title": "Mosaic: Composite Projection Pruning for Resource-efficient LLMs",
+        "abstract": "Extensive compute and memory requirements limit the deployment of large language models (LLMs) on any hardware. Compression methods, such as pruning, can reduce model size, which in turn reduces resource requirements. State-of-the-art pruning is based on coarse-grained methods. They are time-consuming and inherently remove critical model parameters, adversely impacting the quality of the pruned model. This paper introduces projection pruning, a novel fine-grained method for pruning LLMs. In addition, LLM projection pruning is enhanced by a new approach we refer to as composite projection pruning - the synergistic combination of unstructured pruning that retains accuracy and structured pruning that reduces model size. We develop Mosaic, a novel system to create and deploy pruned LLMs using composite projection pruning. Mosaic is evaluated using a range of performance and quality metrics on multiple hardware platforms, LLMs, and datasets. Mosaic is 7.19x faster in producing models than existing approaches. Mosaic models achieve up to 84.2% lower perplexity and 31.4% higher accuracy than models obtained from coarse-grained pruning. Up to 67% faster inference and 68% lower GPU memory use is noted for Mosaic models.",
+        "arxiv_id": "2504.06323"
+    },
+    "2504.06949": {
+        "SCORE": 17,
+        "ARXIVID": "2504.06949",
+        "COMMENT": "The paper introduces Adaptive Computation Pruning (ACP) for the Forgetting Transformer, which directly addresses model compression and efficiency through pruning techniques. It provides significant computational savings without performance degradation, aligning well with the model compression criterion.",
+        "RELEVANCE": 9,
+        "NOVELTY": 8,
+        "authors": [
+            "Zhixuan Lin",
+            "Johan Obando-Ceron",
+            "Xu Owen He",
+            "Aaron Courville"
+        ],
+        "title": "Adaptive Computation Pruning for the Forgetting Transformer",
+        "abstract": "The recently proposed Forgetting Transformer (FoX) incorporates a forget gate into softmax attention and has shown consistently better or on-par performance compared to the standard RoPE-based Transformer. Notably, many attention heads in FoX tend to forget quickly, causing their output at each timestep to rely primarily on the local context. Based on this observation, we propose Adaptive Computation Pruning (ACP) for FoX, a method that dynamically prunes computations involving input-output dependencies that are strongly decayed by the forget gate. This is achieved using a dynamically set pruning threshold that ensures that the pruned attention weights remain negligible. We apply ACP to language model pretraining with FoX and show it consistently reduces the number of FLOPs in softmax attention by around 70% across different model sizes and context lengths, resulting in a roughly 10% to 35% improvement in training throughput. Furthermore, longer context lengths yield greater computational savings. All these speed improvements are achieved without any performance degradation. We also perform several analyses to provide deeper insights into our method, such as examining the pruning patterns and analyzing the distribution of FLOP savings across different attention heads. Our code is available at https://github.com/zhixuan-lin/arctic-fox.",
+        "arxiv_id": "2504.06949"
+    },
+    "2504.07081": {
+        "SCORE": 16,
+        "ARXIVID": "2504.07081",
+        "COMMENT": "The introduction of 'self-steering' LMs and recursive search procedures aligns with foundational research in model architecture, particularly in decoupling planning from execution for efficient reasoning.",
+        "RELEVANCE": 8,
+        "NOVELTY": 8,
+        "authors": [
+            "Gabriel Grand",
+            "Joshua B. Tenenbaum",
+            "Vikash K. Mansinghka",
+            "Alexander K. Lew",
+            "Jacob Andreas"
+        ],
+        "title": "Self-Steering Language Models",
+        "abstract": "While test-time reasoning enables language models to tackle complex tasks, searching or planning in natural language can be slow, costly, and error-prone. But even when LMs struggle to emulate the precise reasoning steps needed to solve a problem, they often excel at describing its abstract structure--both how to verify solutions and how to search for them. This paper introduces DisCIPL, a method for \"self-steering\" LMs where a Planner model generates a task-specific inference program that is executed by a population of Follower models. Our approach equips LMs with the ability to write recursive search procedures that guide LM inference, enabling new forms of verifiable and efficient reasoning. When instantiated with a small Follower (e.g., Llama-3.2-1B), DisCIPL matches (and sometimes outperforms) much larger models, including GPT-4o and o1, on challenging constrained generation tasks. In decoupling planning from execution, our work opens up a design space of highly-parallelized Monte Carlo inference strategies that outperform standard best-of-N sampling, require no finetuning, and can be implemented automatically by existing LMs.",
+        "arxiv_id": "2504.07081"
+    },
+    "2504.07097": {
+        "SCORE": 16,
+        "ARXIVID": "2504.07097",
+        "COMMENT": "The paper introduces a novel adaptive SVD-based approach for continual learning in LLMs, which aligns with foundational research in model compression and efficiency. The method addresses catastrophic forgetting and provides theoretical insights into balancing plasticity and retention.",
+        "RELEVANCE": 8,
+        "NOVELTY": 8,
+        "authors": [
+            "Nikhil Shivakumar Nayak",
+            "Krishnateja Killamsetty",
+            "Ligong Han",
+            "Abhishek Bhandwaldar",
+            "Prateek Chanda",
+            "Kai Xu",
+            "Hao Wang",
+            "Aldo Pareja",
+            "Oleg Silkin",
+            "Mustafa Eyceoz",
+            "Akash Srivastava"
+        ],
+        "title": "Sculpting Subspaces: Constrained Full Fine-Tuning in LLMs for Continual Learning",
+        "abstract": "Continual learning in large language models (LLMs) is prone to catastrophic forgetting, where adapting to new tasks significantly degrades performance on previously learned ones. Existing methods typically rely on low-rank, parameter-efficient updates that limit the model's expressivity and introduce additional parameters per task, leading to scalability issues. To address these limitations, we propose a novel continual full fine-tuning approach leveraging adaptive singular value decomposition (SVD). Our method dynamically identifies task-specific low-rank parameter subspaces and constrains updates to be orthogonal to critical directions associated with prior tasks, thus effectively minimizing interference without additional parameter overhead or storing previous task gradients. We evaluate our approach extensively on standard continual learning benchmarks using both encoder-decoder (T5-Large) and decoder-only (LLaMA-2 7B) models, spanning diverse tasks including classification, generation, and reasoning. Empirically, our method achieves state-of-the-art results, up to 7% higher average accuracy than recent baselines like O-LoRA, and notably maintains the model's general linguistic capabilities, instruction-following accuracy, and safety throughout the continual learning process by reducing forgetting to near-negligible levels. Our adaptive SVD framework effectively balances model plasticity and knowledge retention, providing a practical, theoretically grounded, and computationally scalable solution for continual learning scenarios in large language models.",
+        "arxiv_id": "2504.07097"
+    },
+    "2504.06398": {
+        "SCORE": 15,
+        "ARXIVID": "2504.06398",
+        "COMMENT": "The paper proposes a sharpness-aware parameter selection strategy for machine unlearning, which aligns with the 'Model Compression' criterion due to its focus on efficient parameter updates and theoretical justifications.",
+        "RELEVANCE": 8,
+        "NOVELTY": 7,
+        "authors": [
+            "Saber Malekmohammadi",
+            "Hong kyu Lee",
+            "Li Xiong"
+        ],
+        "title": "Sharpness-Aware Parameter Selection for Machine Unlearning",
+        "abstract": "It often happens that some sensitive personal information, such as credit card numbers or passwords, are mistakenly incorporated in the training of machine learning models and need to be removed afterwards. The removal of such information from a trained model is a complex task that needs to partially reverse the training process. There have been various machine unlearning techniques proposed in the literature to address this problem. Most of the proposed methods revolve around removing individual data samples from a trained model. Another less explored direction is when features/labels of a group of data samples need to be reverted. While the existing methods for these tasks do the unlearning task by updating the whole set of model parameters or only the last layer of the model, we show that there are a subset of model parameters that have the largest contribution in the unlearning target features. More precisely, the model parameters with the largest corresponding diagonal value in the Hessian matrix (computed at the learned model parameter) have the most contribution in the unlearning task. By selecting these parameters and updating them during the unlearning stage, we can have the most progress in unlearning. We provide theoretical justifications for the proposed strategy by connecting it to sharpness-aware minimization and robust unlearning. We empirically show the effectiveness of the proposed strategy in improving the efficacy of unlearning with a low computational cost.",
+        "arxiv_id": "2504.06398"
+    },
+    "2504.06410": {
+        "SCORE": 15,
+        "ARXIVID": "2504.06410",
+        "COMMENT": "The PEEL method for inference-time data leakage aligns with foundational research in understanding training dynamics and feature inversion in neural networks.",
+        "RELEVANCE": 8,
+        "NOVELTY": 7,
+        "authors": [
+            "Huzaifa Arif",
+            "Keerthiram Murugesan",
+            "Payel Das",
+            "Alex Gittens",
+            "Pin-Yu Chen"
+        ],
+        "title": "PEEL the Layers and Find Yourself: Revisiting Inference-time Data Leakage for Residual Neural Networks",
+        "abstract": "This paper explores inference-time data leakage risks of deep neural networks (NNs), where a curious and honest model service provider is interested in retrieving users' private data inputs solely based on the model inference results. Particularly, we revisit residual NNs due to their popularity in computer vision and our hypothesis that residual blocks are a primary cause of data leakage owing to the use of skip connections. By formulating inference-time data leakage as a constrained optimization problem, we propose a novel backward feature inversion method, \\textbf{PEEL}, which can effectively recover block-wise input features from the intermediate output of residual NNs. The surprising results in high-quality input data recovery can be explained by the intuition that the output from these residual blocks can be considered as a noisy version of the input and thus the output retains sufficient information for input recovery. We demonstrate the effectiveness of our layer-by-layer feature inversion method on facial image datasets and pre-trained classifiers. Our results show that PEEL outperforms the state-of-the-art recovery methods by an order of magnitude when evaluated by mean squared error (MSE). The code is available at \\href{https://github.com/Huzaifa-Arif/PEEL}{https://github.com/Huzaifa-Arif/PEEL}",
+        "arxiv_id": "2504.06410"
+    },
+    "2504.06738": {
+        "SCORE": 15,
+        "ARXIVID": "2504.06738",
+        "COMMENT": "The paper proposes a novel encoder-decoder architecture for Vision Transformers to address the attention sink phenomenon. This aligns with foundational research in model architecture, particularly in improving and analyzing transformer-based models.",
+        "RELEVANCE": 8,
+        "NOVELTY": 7,
+        "authors": [
+            "Wenfeng Feng",
+            "Guoying Sun"
+        ],
+        "title": "EDIT: Enhancing Vision Transformers by Mitigating Attention Sink through an Encoder-Decoder Architecture",
+        "abstract": "In this paper, we propose EDIT (Encoder-Decoder Image Transformer), a novel architecture designed to mitigate the attention sink phenomenon observed in Vision Transformer models. Attention sink occurs when an excessive amount of attention is allocated to the [CLS] token, distorting the model's ability to effectively process image patches. To address this, we introduce a layer-aligned encoder-decoder architecture, where the encoder utilizes self-attention to process image patches, while the decoder uses cross-attention to focus on the [CLS] token. Unlike traditional encoder-decoder framework, where the decoder depends solely on high-level encoder representations, EDIT allows the decoder to extract information starting from low-level features, progressively refining the representation layer by layer. EDIT is naturally interpretable demonstrated through sequential attention maps, illustrating the refined, layer-by-layer focus on key image features. Experiments on ImageNet-1k and ImageNet-21k, along with transfer learning tasks, show that EDIT achieves consistent performance improvements over DeiT3 models. These results highlight the effectiveness of EDIT's design in addressing attention sink and improving visual feature extraction.",
+        "arxiv_id": "2504.06738"
+    },
+    "2504.06407": {
+        "SCORE": 15,
+        "ARXIVID": "2504.06407",
+        "COMMENT": "The paper explores mode connectivity in the context of machine unlearning, which provides theoretical insights into optimization dynamics and loss landscapes, aligning with foundational research.",
+        "RELEVANCE": 8,
+        "NOVELTY": 7,
+        "authors": [
+            "Jiali Cheng",
+            "Hadi Amiri"
+        ],
+        "title": "Understanding Machine Unlearning Through the Lens of Mode Connectivity",
+        "abstract": "Machine Unlearning aims to remove undesired information from trained models without requiring full retraining from scratch. Despite recent advancements, their underlying loss landscapes and optimization dynamics received less attention. In this paper, we investigate and analyze machine unlearning through the lens of mode connectivity - the phenomenon where independently trained models can be connected by smooth low-loss paths in the parameter space. We define and study mode connectivity in unlearning across a range of overlooked conditions, including connections between different unlearning methods, models trained with and without curriculum learning, and models optimized with first-order and secondorder techniques. Our findings show distinct patterns of fluctuation of different evaluation metrics along the curve, as well as the mechanistic (dis)similarity between unlearning methods. To the best of our knowledge, this is the first study on mode connectivity in the context of machine unlearning.",
+        "arxiv_id": "2504.06407"
+    }
+}

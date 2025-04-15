@@ -12,7 +12,7 @@ from arxiv_assistant.environment import OUTPUT_DEBUG_FILE_FORMAT
 from arxiv_assistant.utils.utils import Paper, normalize_whitespace
 
 
-@retry.retry(tries=3, delay=3.0)
+@retry.retry(tries=3, delay=30.0)
 def get_papers_from_arxiv_api(
     area: str,
     begin_date: Tuple[int, int, int],  # year, month, day
@@ -81,7 +81,7 @@ def get_papers_from_arxiv_api(
     return entries, paper_list
 
 
-@retry.retry(tries=3, delay=3.0)
+@retry.retry(tries=3, delay=30.0)
 def get_papers_from_arxiv_rss(
     area: str,
     announce_type: Set[str] = None,

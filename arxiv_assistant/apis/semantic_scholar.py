@@ -38,7 +38,7 @@ def get_author_batch(
         return response.json()
 
 
-@retry(tries=3, delay=3.0)
+@retry(tries=3, delay=30.0)
 def get_one_author(session, author: str, S2_API_KEY: str) -> str:
     # query the right endpoint https://api.semanticscholar.org/graph/v1/author/search?query=adam+smith
     params = {"query": author, "fields": "authorId,name,hIndex", "limit": "10"}

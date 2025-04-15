@@ -110,7 +110,7 @@ start_query_time = None
 query_cnt = 0
 
 
-@retry.retry(tries=3, delay=3.0)
+@retry.retry(tries=3, delay=30.0)
 def call_chatgpt(full_prompt, openai_client, model, limit_per_minute=-1):
     def call():
         return openai_client.chat.completions.create(

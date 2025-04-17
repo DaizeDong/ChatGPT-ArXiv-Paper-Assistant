@@ -1,0 +1,154 @@
+{
+    "2504.11651": {
+        "SCORE": 19,
+        "ARXIVID": "2504.11651",
+        "COMMENT": "This paper presents a novel lossless compression method for LLMs using dynamic-length float encoding, which directly aligns with the model compression criterion. The approach is innovative, enabling significant efficiency improvements while preserving exact outputs.",
+        "RELEVANCE": 10,
+        "NOVELTY": 9,
+        "authors": [
+            "Tianyi Zhang",
+            "Yang Sui",
+            "Shaochen Zhong",
+            "Vipin Chaudhary",
+            "Xia Hu",
+            "Anshumali Shrivastava"
+        ],
+        "title": "70% Size, 100% Accuracy: Lossless LLM Compression for Efficient GPU Inference via Dynamic-Length Float",
+        "abstract": "Large Language Models (LLMs) have grown rapidly in size, creating significant challenges for efficient deployment on resource-constrained hardware. In this paper, we introduce Dynamic-Length Float (DFloat11), a lossless compression framework that reduces LLM size by 30% while preserving outputs that are bit-for-bit identical to the original model. DFloat11 is motivated by the low entropy in the BFloat16 weight representation of LLMs, which reveals significant inefficiency in existing storage format. By applying entropy coding, DFloat11 assigns dynamic-length encodings to weights based on frequency, achieving near information-optimal compression without any loss of precision. To facilitate efficient inference with dynamic-length encodings, we develop a custom GPU kernel for fast online decompression. Our design incorporates the following: (i) decomposition of memory-intensive lookup tables (LUTs) into compact LUTs that fit in GPU SRAM, (ii) a two-phase kernel for coordinating thread read/write positions using lightweight auxiliary variables, and (iii) transformer-block-level decompression to minimize latency. Experiments on recent models, including Llama-3.1, Qwen-2.5, and Gemma-3, validates our hypothesis that DFloat11 achieves around 30% model size reduction while preserving bit-for-bit exact outputs. Compared to a potential alternative of offloading parts of an uncompressed model to the CPU to meet memory constraints, DFloat11 achieves 1.9-38.8x higher throughput in token generation. With a fixed GPU memory budget, DFloat11 enables 5.3-13.17x longer context lengths than uncompressed models. Notably, our method enables lossless inference of Llama-3.1-405B, an 810GB model, on a single node equipped with 8x80GB GPUs. Our code and models are available at https://github.com/LeanModels/DFloat11.",
+        "arxiv_id": "2504.11651"
+    },
+    "2504.11516": {
+        "SCORE": 18,
+        "ARXIVID": "2504.11516",
+        "COMMENT": "This paper introduces a novel framework for free energy estimation using adaptive transport, which is foundational research in AI for science. It unifies equilibrium and non-equilibrium methods under a theoretical framework, making it highly relevant and novel.",
+        "RELEVANCE": 9,
+        "NOVELTY": 9,
+        "authors": [
+            "Jiajun He",
+            "Yuanqi Du",
+            "Francisco Vargas",
+            "Yuanqing Wang",
+            "Carla P. Gomes",
+            "Jos\\'e Miguel Hern\\'andez-Lobato",
+            "Eric Vanden-Eijnden"
+        ],
+        "title": "FEAT: Free energy Estimators with Adaptive Transport",
+        "abstract": "We present Free energy Estimators with Adaptive Transport (FEAT), a novel framework for free energy estimation -- a critical challenge across scientific domains. FEAT leverages learned transports implemented via stochastic interpolants and provides consistent, minimum-variance estimators based on escorted Jarzynski equality and controlled Crooks theorem, alongside variational upper and lower bounds on free energy differences. Unifying equilibrium and non-equilibrium methods under a single theoretical framework, FEAT establishes a principled foundation for neural free energy calculations. Experimental validation on toy examples, molecular simulations, and quantum field theory demonstrates improvements over existing learning-based methods.",
+        "arxiv_id": "2504.11516"
+    },
+    "2504.11558": {
+        "SCORE": 17,
+        "ARXIVID": "2504.11558",
+        "COMMENT": "The paper introduces the Error Broadcast and Decorrelation (EBD) algorithm, which provides a novel learning framework addressing the credit assignment problem in neural networks. This aligns closely with the 'Representation Learning' criterion, as it explores training dynamics and biologically plausible frameworks.",
+        "RELEVANCE": 9,
+        "NOVELTY": 8,
+        "authors": [
+            "Mete Erdogan",
+            "Cengiz Pehlevan",
+            "Alper T. Erdogan"
+        ],
+        "title": "Error Broadcast and Decorrelation as a Potential Artificial and Natural Learning Mechanism",
+        "abstract": "We introduce the Error Broadcast and Decorrelation (EBD) algorithm, a novel learning framework that addresses the credit assignment problem in neural networks by directly broadcasting output error to individual layers. Leveraging the stochastic orthogonality property of the optimal minimum mean square error (MMSE) estimator, EBD defines layerwise loss functions to penalize correlations between layer activations and output errors, offering a principled approach to error broadcasting without the need for weight transport. The optimization framework naturally leads to the experimentally observed three-factor learning rule and integrates with biologically plausible frameworks to enhance performance and plausibility. Numerical experiments demonstrate that EBD achieves performance comparable to or better than known error-broadcast methods on benchmark datasets. While the scalability of EBD to very large or complex datasets remains to be further explored, our findings suggest it provides a biologically plausible, efficient, and adaptable alternative for neural network training. This approach could inform future advancements in artificial and natural learning paradigms.",
+        "arxiv_id": "2504.11558"
+    },
+    "2504.12175": {
+        "SCORE": 17,
+        "ARXIVID": "2504.12175",
+        "COMMENT": "This paper provides theoretical insights into the approximation capabilities of Transformer networks, particularly in sequence-to-sequence mappings and regression problems. It aligns with the 'Model Architecture' criterion by analyzing Transformers' structure and interpretability, and also touches on foundational aspects of representation learning.",
+        "RELEVANCE": 9,
+        "NOVELTY": 8,
+        "authors": [
+            "Yuling Jiao",
+            "Yanming Lai",
+            "Defeng Sun",
+            "Yang Wang",
+            "Bokai Yan"
+        ],
+        "title": "Approximation Bounds for Transformer Networks with Application to Regression",
+        "abstract": "We explore the approximation capabilities of Transformer networks for H\\\"older and Sobolev functions, and apply these results to address nonparametric regression estimation with dependent observations. First, we establish novel upper bounds for standard Transformer networks approximating sequence-to-sequence mappings whose component functions are H\\\"older continuous with smoothness index $\\gamma \\in (0,1]$. To achieve an approximation error $\\varepsilon$ under the $L^p$-norm for $p \\in [1, \\infty]$, it suffices to use a fixed-depth Transformer network whose total number of parameters scales as $\\varepsilon^{-d_x n / \\gamma}$. This result not only extends existing findings to include the case $p = \\infty$, but also matches the best known upper bounds on number of parameters previously obtained for fixed-depth FNNs and RNNs. Similar bounds are also derived for Sobolev functions. Second, we derive explicit convergence rates for the nonparametric regression problem under various $\\beta$-mixing data assumptions, which allow the dependence between observations to weaken over time. Our bounds on the sample complexity impose no constraints on weight magnitudes. Lastly, we propose a novel proof strategy to establish approximation bounds, inspired by the Kolmogorov-Arnold representation theorem. We show that if the self-attention layer in a Transformer can perform column averaging, the network can approximate sequence-to-sequence H\\\"older functions, offering new insights into the interpretability of self-attention mechanisms.",
+        "arxiv_id": "2504.12175"
+    },
+    "2504.11609": {
+        "SCORE": 16,
+        "ARXIVID": "2504.11609",
+        "COMMENT": "The paper reviews causal representation learning (CRL), which is a foundational topic in representation learning. It connects CRL to classical statistical models and highlights open questions, making it highly relevant to the 'Representation Learning' criterion.",
+        "RELEVANCE": 9,
+        "NOVELTY": 7,
+        "authors": [
+            "Gemma E. Moran",
+            "Bryon Aragam"
+        ],
+        "title": "Towards Interpretable Deep Generative Models via Causal Representation Learning",
+        "abstract": "Recent developments in generative artificial intelligence (AI) rely on machine learning techniques such as deep learning and generative modeling to achieve state-of-the-art performance across wide-ranging domains. These methods' surprising performance is due in part to their ability to learn implicit \"representations'' of complex, multi-modal data. Unfortunately, deep neural networks are notoriously black boxes that obscure these representations, making them difficult to interpret or analyze. To resolve these difficulties, one approach is to build new interpretable neural network models from the ground up. This is the goal of the emerging field of causal representation learning (CRL) that uses causality as a vector for building flexible, interpretable, and transferable generative AI. CRL can be seen as a culmination of three intrinsically statistical problems: (i) latent variable models such as factor analysis; (ii) causal graphical models with latent variables; and (iii) nonparametric statistics and deep learning. This paper reviews recent progress in CRL from a statistical perspective, focusing on connections to classical models and statistical and causal identifiablity results. This review also highlights key application areas, implementation strategies, and open statistical questions in CRL.",
+        "arxiv_id": "2504.11609"
+    },
+    "2504.11840": {
+        "SCORE": 16,
+        "ARXIVID": "2504.11840",
+        "COMMENT": "This paper proposes a Graph Transformer using Spiking Vector Quantization, which is a novel architectural innovation addressing scalability and efficiency in graph representation learning. It aligns with the 'Model Architecture' criterion due to its focus on Transformer-based innovations and efficiency improvements.",
+        "RELEVANCE": 8,
+        "NOVELTY": 8,
+        "authors": [
+            "Huizhe Zhang",
+            "Jintang Li",
+            "Yuchang Zhu",
+            "Liang Chen",
+            "Zibin Zheng"
+        ],
+        "title": "GT-SVQ: A Linear-Time Graph Transformer for Node Classification Using Spiking Vector Quantization",
+        "abstract": "Graph Transformers (GTs), which simultaneously integrate message-passing and self-attention mechanisms, have achieved promising empirical results in some graph prediction tasks. Although these approaches show the potential of Transformers in capturing long-range graph topology information, issues concerning the quadratic complexity and high computing energy consumption severely limit the scalability of GTs on large-scale graphs. Recently, as brain-inspired neural networks, Spiking Neural Networks (SNNs), facilitate the development of graph representation learning methods with lower computational and storage overhead through the unique event-driven spiking neurons. Inspired by these characteristics, we propose a linear-time Graph Transformer using Spiking Vector Quantization (GT-SVQ) for node classification. GT-SVQ reconstructs codebooks based on rate coding outputs from spiking neurons, and injects the codebooks into self-attention blocks to aggregate global information in linear complexity. Besides, spiking vector quantization effectively alleviates codebook collapse and the reliance on complex machinery (distance measure, auxiliary loss, etc.) present in previous vector quantization-based graph learning methods. In experiments, we compare GT-SVQ with other state-of-the-art baselines on node classification datasets ranging from small to large. Experimental results show that GT-SVQ has achieved competitive performances on most datasets while maintaining up to 130x faster inference speed compared to other GTs.",
+        "arxiv_id": "2504.11840"
+    },
+    "2504.11555": {
+        "SCORE": 16,
+        "ARXIVID": "2504.11555",
+        "COMMENT": "The paper provides theoretical insights into the sub-optimality of the separation principle in quadratic control with bilinear observations. It challenges established assumptions and introduces new theoretical perspectives, aligning with emerging trends.",
+        "RELEVANCE": 8,
+        "NOVELTY": 8,
+        "authors": [
+            "Yahya Sattar",
+            "Sunmook Choi",
+            "Yassir Jedra",
+            "Maryam Fazel",
+            "Sarah Dean"
+        ],
+        "title": "Sub-optimality of the Separation Principle for Quadratic Control from Bilinear Observations",
+        "abstract": "We consider the problem of controlling a linear dynamical system from bilinear observations with minimal quadratic cost. Despite the similarity of this problem to standard linear quadratic Gaussian (LQG) control, we show that when the observation model is bilinear, neither does the Separation Principle hold, nor is the optimal controller affine in the estimated state. Moreover, the cost-to-go is non-convex in the control input. Hence, finding an analytical expression for the optimal feedback controller is difficult in general. Under certain settings, we show that the standard LQG controller locally maximizes the cost instead of minimizing it. Furthermore, the optimal controllers (derived analytically) are not unique and are nonlinear in the estimated state. We also introduce a notion of input-dependent observability and derive conditions under which the Kalman filter covariance remains bounded. We illustrate our theoretical results through numerical experiments in multiple synthetic settings.",
+        "arxiv_id": "2504.11555"
+    },
+    "2504.11830": {
+        "SCORE": 16,
+        "ARXIVID": "2504.11830",
+        "COMMENT": "This paper investigates the emergence of computational structures in neural networks, specifically in a transformer-like model. It provides insights into training dynamics and interpretability, aligning with the 'Representation Learning' and 'Model Architecture' criteria.",
+        "RELEVANCE": 8,
+        "NOVELTY": 8,
+        "authors": [
+            "Rohan Hitchcock",
+            "Gary W. Delaney",
+            "Jonathan H. Manton",
+            "Richard Scalzo",
+            "Jingge Zhu"
+        ],
+        "title": "Emergence of Computational Structure in a Neural Network Physics Simulator",
+        "abstract": "Neural networks often have identifiable computational structures - components of the network which perform an interpretable algorithm or task - but the mechanisms by which these emerge and the best methods for detecting these structures are not well understood. In this paper we investigate the emergence of computational structure in a transformer-like model trained to simulate the physics of a particle system, where the transformer's attention mechanism is used to transfer information between particles. We show that (a) structures emerge in the attention heads of the transformer which learn to detect particle collisions, (b) the emergence of these structures is associated to degenerate geometry in the loss landscape, and (c) the dynamics of this emergence follows a power law. This suggests that these components are governed by a degenerate \"effective potential\". These results have implications for the convergence time of computational structure within neural networks and suggest that the emergence of computational structure can be detected by studying the dynamics of network components.",
+        "arxiv_id": "2504.11830"
+    },
+    "2504.11750": {
+        "SCORE": 15,
+        "ARXIVID": "2504.11750",
+        "COMMENT": "This paper provides a detailed analysis of LLM inference workloads on CPU-GPU architectures, offering insights into performance dynamics and optimization strategies. While it is relevant to efficiency and architecture-level analysis, it does not introduce groundbreaking theoretical contributions.",
+        "RELEVANCE": 8,
+        "NOVELTY": 7,
+        "authors": [
+            "Prabhu Vellaisamy",
+            "Thomas Labonte",
+            "Sourav Chakraborty",
+            "Matt Turner",
+            "Samantika Sury",
+            "John Paul Shen"
+        ],
+        "title": "Characterizing and Optimizing LLM Inference Workloads on CPU-GPU Coupled Architectures",
+        "abstract": "Large language model (LLM)-based inference workloads increasingly dominate data center costs and resource utilization. Therefore, understanding the inference workload characteristics on evolving CPU-GPU coupled architectures is crucial for optimization. This paper presents an in-depth analysis of LLM inference behavior on loosely-coupled (PCIe A100/H100) and closely-coupled (GH200) systems. We analyze performance dynamics using fine-grained operator-to-kernel trace analysis, facilitated by our novel profiler SKIP and metrics like Total Kernel Launch and Queuing Time (TKLQT). Results show that closely-coupled (CC) GH200 significantly outperforms loosely-coupled (LC) systems at large batch sizes, achieving 1.9x-2.7x faster prefill latency for Llama 3.2-1B. However, our analysis also reveals that GH200 remains CPU-bound up to 4x larger batch sizes than LC systems. In this extended CPU-bound region, we identify the performance characteristics of the Grace CPU as a key factor contributing to higher inference latency at low batch sizes on GH200. We demonstrate that TKLQT accurately identifies this CPU/GPU-bound transition point. Based on this analysis, we further show that kernel fusion offers significant potential to mitigate GH200's low-batch latency bottleneck by reducing kernel launch overhead. This detailed kernel-level characterization provides critical insights for optimizing diverse CPU-GPU coupling strategies. This work is an initial effort, and we plan to explore other major AI/DL workloads that demand different degrees of CPU-GPU heterogeneous architectures.",
+        "arxiv_id": "2504.11750"
+    }
+}

@@ -1,6 +1,6 @@
 # ChatGPT ArXiv Paper Assistant: A Daily ArXiv Scanner
 
-> *[Last update: 2025-4-3]*
+> *[Last update: 2025-5-27]*
 > This is an enhanced version of the [GPT paper assistant](https://github.com/tatsu-lab/gpt_paper_assistant).
 > I fixed all known bugs and added various new features to make it easier to use.
 > See the [changelog](CHANGELOG.md) for details.

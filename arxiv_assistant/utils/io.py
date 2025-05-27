@@ -62,3 +62,7 @@ def copy_file_or_dir(source_path, target_dir, print_info=False, suppress_errors=
             return False
         else:
             raise e
+
+
+def add_prefix_to_lines(s, prefix):
+    return '\n'.join(prefix + line for line in s.splitlines())

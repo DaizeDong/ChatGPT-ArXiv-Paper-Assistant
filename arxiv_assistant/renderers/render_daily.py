@@ -2,7 +2,8 @@ import json
 from tabulate import tabulate
 from typing import Dict, List, Tuple
 
-from arxiv_assistant.filters.filter_gpt import get_full_prompt_for_abstract_filtering
+from arxiv_assistant.filters.filter_gpt import get_user_prompt_for_abstract_filtering
+from arxiv_assistant.utils.io import add_prefix_to_lines
 from arxiv_assistant.utils.utils import Paper, align_markdown_table
 
 
@@ -80,16 +81,16 @@ def render_daily_md(
 
     # render prompt
     if prompts is not None:
-        base_prompt, topic_prompt, score_prompt, postfix_prompt = prompts
-        prompt_strings = get_full_prompt_for_abstract_filtering(
-            base_prompt,
+        system_prompt, topic_prompt, score_prompt, postfix_prompt = prompts
+        user_prompt = get_user_prompt_for_abstract_filtering(
             topic_prompt,
             score_prompt,
             postfix_prompt,
             ['[PAPER LIST HERE]']
         )
     else:
-        prompt_strings = ""
+        system_prompt = ""
+        user_prompt = ""
 
     # cat output string
     output_string = "\n\n".join([
@@ -104,7 +105,10 @@ def render_daily_md(
         "\n\n---\n\n".join(paper_strings),
         "---",
         "# Paper Selection Prompt",
-        prompt_strings
+        "## System Prompt",
+        add_prefix_to_lines(system_prompt, "> "),
+        "## User Prompt",
+        add_prefix_to_lines(user_prompt, "> "),
     ])
     return output_string
 

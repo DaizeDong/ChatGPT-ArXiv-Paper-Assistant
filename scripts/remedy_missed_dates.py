@@ -3,7 +3,7 @@ import os
 
 from arxiv_assistant.apis.arxiv import get_papers_from_arxiv
 from arxiv_assistant.apis.semantic_scholar import get_authors
-from arxiv_assistant.environment import AUTHOR_ID_SET, BASE_PROMPT, CONFIG, NOW_DAY, NOW_MONTH, NOW_YEAR, POSTFIX_PROMPT_ABSTRACT, POSTFIX_PROMPT_TITLE, S2_API_KEY, SCORE_PROMPT, SLACK_KEY, TOPIC_PROMPT
+from arxiv_assistant.environment import AUTHOR_ID_SET, SYSTEM_PROMPT, CONFIG, NOW_DAY, NOW_MONTH, NOW_YEAR, POSTFIX_PROMPT_ABSTRACT, POSTFIX_PROMPT_TITLE, S2_API_KEY, SCORE_PROMPT, SLACK_KEY, TOPIC_PROMPT
 from arxiv_assistant.filters.filter_author import filter_papers_by_hindex, select_by_author
 from arxiv_assistant.filters.filter_gpt import filter_by_gpt
 from arxiv_assistant.push_to_slack import push_to_slack
@@ -13,9 +13,12 @@ from arxiv_assistant.utils.utils import EnhancedJSONEncoder
 
 missed_dates = {
     # date_to_remedy: [start_date_to_search, end_date_to_search]
-    (2025, 3, 14): [(2025, 3, 13), (2025, 3, 13)],
-    (2025, 3, 17): [(2025, 3, 14), (2025, 3, 16)],
-    (2025, 3, 21): [(2025, 3, 20), (2025, 3, 20)],
+    (2025, 5, 16): [(2025, 5, 15), (2025, 5, 15)],
+    (2025, 5, 19): [(2025, 5, 16), (2025, 5, 18)],
+    (2025, 5, 20): [(2025, 5, 19), (2025, 5, 19)],
+    (2025, 5, 21): [(2025, 5, 20), (2025, 5, 20)],
+    (2025, 5, 22): [(2025, 5, 21), (2025, 5, 21)],
+    (2025, 5, 23): [(2025, 5, 22), (2025, 5, 22)],
 }
 
 if __name__ == "__main__":
@@ -106,7 +109,7 @@ if __name__ == "__main__":
         if CONFIG["SELECTION"].getboolean("run_openai"):
             selected_results, filtered_results, total_prompt_cost, total_completion_cost, total_prompt_tokens, total_completion_tokens = filter_by_gpt(
                 paper_list,
-                BASE_PROMPT,
+                SYSTEM_PROMPT,
                 TOPIC_PROMPT,
                 SCORE_PROMPT,
                 POSTFIX_PROMPT_TITLE,
@@ -154,7 +157,7 @@ if __name__ == "__main__":
                         f"> This is a remedial run for missed papers from {format(begin_date[1], '02d')}/{format(begin_date[2], '02d')}/{begin_date[0]} to {format(end_date[1], '02d')}/{format(end_date[2], '02d')}/{end_date[0]}.\n"
                         f"> \n"
                         f"> Results generated on {format(NOW_MONTH, '02d')}/{format(NOW_DAY, '02d')}/{NOW_YEAR}.",
-                        render_daily_md(all_entries, arxiv_paper_dict, selected_paper_dict, now_date=remedy_date, prompts=(BASE_PROMPT, POSTFIX_PROMPT_ABSTRACT, SCORE_PROMPT, TOPIC_PROMPT), head_table=head_table),
+                        render_daily_md(all_entries, arxiv_paper_dict, selected_paper_dict, now_date=remedy_date, prompts=(SYSTEM_PROMPT, POSTFIX_PROMPT_ABSTRACT, SCORE_PROMPT, TOPIC_PROMPT), head_table=head_table),
                     ]
                 ))
 

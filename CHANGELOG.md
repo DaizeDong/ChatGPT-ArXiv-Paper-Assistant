@@ -1,5 +1,9 @@
 # Changelog
 
+### 2025-5-27
+
+- Added system prompts for GPT filtering.
+
 ### 2025-4-3
 
 - Added retries for ArXiv API calls.

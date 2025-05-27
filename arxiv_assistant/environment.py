@@ -34,8 +34,8 @@ with open("configs/authors.txt", "r", encoding="utf-8") as fopen:
 AUTHOR_ID_SET = set(author_ids)
 
 # load prompts
-with open("prompts/base_prompt.txt", "r", encoding="utf-8") as f:
-    BASE_PROMPT = f.read()
+with open("prompts/system_prompt.txt", "r", encoding="utf-8") as f:
+    SYSTEM_PROMPT = f.read()
 with open("prompts/paper_topics.txt", "r", encoding="utf-8") as f:
     TOPIC_PROMPT = f.read()
 with open("prompts/score_criteria.txt", "r", encoding="utf-8") as f:

@@ -3,7 +3,7 @@ import os
 
 from arxiv_assistant.apis.arxiv import get_papers_from_arxiv
 from arxiv_assistant.apis.semantic_scholar import get_authors
-from arxiv_assistant.environment import AUTHOR_ID_SET, BASE_PROMPT, CONFIG, NOW_DAY, NOW_MONTH, NOW_YEAR, OUTPUT_DEBUG_FILE_FORMAT, OUTPUT_JSON_FILE_FORMAT, OUTPUT_MD_FILE_FORMAT, POSTFIX_PROMPT_ABSTRACT, POSTFIX_PROMPT_TITLE, S2_API_KEY, SCORE_PROMPT, SLACK_KEY, TOPIC_PROMPT
+from arxiv_assistant.environment import AUTHOR_ID_SET, SYSTEM_PROMPT, CONFIG, NOW_DAY, NOW_MONTH, NOW_YEAR, OUTPUT_DEBUG_FILE_FORMAT, OUTPUT_JSON_FILE_FORMAT, OUTPUT_MD_FILE_FORMAT, POSTFIX_PROMPT_ABSTRACT, POSTFIX_PROMPT_TITLE, S2_API_KEY, SCORE_PROMPT, SLACK_KEY, TOPIC_PROMPT
 from arxiv_assistant.filters.filter_author import filter_papers_by_hindex, select_by_author
 from arxiv_assistant.filters.filter_gpt import filter_by_gpt
 from arxiv_assistant.push_to_slack import push_to_slack
@@ -73,7 +73,7 @@ if __name__ == "__main__":
     if CONFIG["SELECTION"].getboolean("run_openai"):
         selected_results, filtered_results, total_prompt_cost, total_completion_cost, total_prompt_tokens, total_completion_tokens = filter_by_gpt(
             paper_list,
-            BASE_PROMPT,
+            SYSTEM_PROMPT,
             TOPIC_PROMPT,
             SCORE_PROMPT,
             POSTFIX_PROMPT_TITLE,
@@ -116,7 +116,7 @@ if __name__ == "__main__":
             ]
         }
         with open(OUTPUT_MD_FILE_FORMAT.format("output.md"), "w") as f:
-            f.write(render_daily_md(all_entries, arxiv_paper_dict, selected_paper_dict, now_date=(NOW_YEAR, NOW_MONTH, NOW_DAY), prompts=(BASE_PROMPT, POSTFIX_PROMPT_ABSTRACT, SCORE_PROMPT, TOPIC_PROMPT), head_table=head_table))
+            f.write(render_daily_md(all_entries, arxiv_paper_dict, selected_paper_dict, now_date=(NOW_YEAR, NOW_MONTH, NOW_DAY), prompts=(SYSTEM_PROMPT, POSTFIX_PROMPT_ABSTRACT, SCORE_PROMPT, TOPIC_PROMPT), head_table=head_table))
 
     # only push to slack for non-empty dicts
     if CONFIG["OUTPUT"].getboolean("push_to_slack"):

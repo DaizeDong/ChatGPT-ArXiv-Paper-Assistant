@@ -1,12 +1,12 @@
+import re
+import warnings
 from html import unescape
+from typing import Dict, List, Set, Tuple
 from xml.etree import ElementTree
 
 import feedparser
-import re
 import requests
 import retry
-import warnings
-from typing import Dict, List, Set, Tuple
 
 from arxiv_assistant.environment import OUTPUT_DEBUG_FILE_FORMAT
 from arxiv_assistant.utils.utils import Paper, normalize_whitespace

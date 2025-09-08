@@ -1,7 +1,8 @@
 import configparser
-import feedparser
 import os
 from datetime import UTC, datetime
+
+import feedparser
 
 from arxiv_assistant.utils.io import create_dir
 
@@ -74,7 +75,7 @@ try:
         NOW_DAY = int(NOW_TIME.strftime("%d"))
     else:
         raise ValueError("Feed does not contain any entries")
-except Exception as e:
+except Exception as ex:
     # use local time
     NOW_TIME = datetime.now(UTC)
     NOW_YEAR = int(NOW_TIME.strftime("%Y"))

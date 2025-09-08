@@ -3,11 +3,12 @@ import datetime
 import json
 import math
 import re
-import retry
 import time
+from typing import Dict, List, Tuple
+
+import retry
 from openai import OpenAI
 from tqdm import tqdm
-from typing import Dict, List, Tuple
 
 from arxiv_assistant.environment import OPENAI_API_KEY, OPENAI_BASE_URL, OUTPUT_DEBUG_FILE_FORMAT
 from arxiv_assistant.utils.pricing import MODEL_PRICING
@@ -117,7 +118,6 @@ def call_chatgpt(system_prompt, user_prompt, openai_client, model, limit_per_min
                 {"role": "system", "content": system_prompt},
                 {"role": "user", "content": user_prompt},
             ],
-            temperature=0.0,
             seed=0,
         )
 
@@ -141,7 +141,13 @@ def call_chatgpt(system_prompt, user_prompt, openai_client, model, limit_per_min
 
 
 def filter_papers_by_title(
-    paper_list, openai_client, system_prompt, topic_prompt, postfix_prompt, config, retry=3,
+    paper_list,
+    openai_client,
+    system_prompt,
+    topic_prompt,
+    postfix_prompt,
+    config,
+    retry=3,
 ) -> Tuple[List[Paper], Dict, float, float, int, int]:
     batch_size = get_batch_size(int(config["SELECTION"]["title_batch_size"]), len(paper_list), config)
     print(f"Using batch size of {batch_size} for title filtering")
@@ -161,10 +167,10 @@ def filter_papers_by_title(
         user_prompt = get_user_prompt_for_title_filtering(topic_prompt, postfix_prompt, papers_string)
         model = config["SELECTION"]["model"]
         try:
-            completion = call_chatgpt(system_prompt,user_prompt, openai_client, model)
+            completion = call_chatgpt(system_prompt, user_prompt, openai_client, model)
         except Exception as ex:
-            if config["OUTPUT"].getboolean("debug_messages"):
-                print(f"Exception happened: Failed to call GPT with batch size {len(batch)} ({ex})")
+            # if config["OUTPUT"].getboolean("debug_messages"):
+            print(f"Exception happened: Failed to call GPT with batch size {len(batch)} ({ex.args})")
             invalid_paper_list.extend(batch)
             continue
 
@@ -193,7 +199,7 @@ def filter_papers_by_title(
         except Exception as ex:
             invalid_paper_list.extend(batch)
             if config["OUTPUT"].getboolean("debug_messages"):
-                print(f"Exception happened: Failed to parse LM output as list ({ex})")
+                print(f"Exception happened: Failed to parse LM output as list ({ex.args})")
                 print(f"`out_text`: {out_text}")
             continue
 
@@ -247,7 +253,7 @@ def parse_chatgpt(raw_out_text, config):
         except Exception as ex:
             invalid_cnt += 1
             if config["OUTPUT"].getboolean("debug_messages"):
-                print(f"Exception happened: Failed to parse LM output as json ({ex})")
+                print(f"Exception happened: Failed to parse LM output as json ({ex.args})")
                 print(f"RAW output: {raw_out_text}")
                 print(f"`out_text`: {out_text}")
             continue
@@ -255,7 +261,16 @@ def parse_chatgpt(raw_out_text, config):
 
 
 def filter_papers_by_abstract(
-    paper_list, id_paper_mapping, openai_client, system_prompt, topic_prompt, score_prompt, postfix_prompt, config, retry=3, limit_per_minute=-1,
+    paper_list,
+    id_paper_mapping,
+    openai_client,
+    system_prompt,
+    topic_prompt,
+    score_prompt,
+    postfix_prompt,
+    config,
+    retry=3,
+    limit_per_minute=-1,
 ) -> Tuple[List[List[Dict]], Dict, Dict, float, float, int, int]:
     batch_size = get_batch_size(int(config["SELECTION"]["abstract_batch_size"]), len(paper_list), config)
     print(f"Using batch size of {batch_size} for abstract filtering")
@@ -281,10 +296,10 @@ def filter_papers_by_abstract(
         user_prompt = get_user_prompt_for_abstract_filtering(topic_prompt, score_prompt, postfix_prompt, batch_str)
         model = config["SELECTION"]["model"]
         try:
-            completion = call_chatgpt(system_prompt,user_prompt, openai_client, model, limit_per_minute=limit_per_minute)
+            completion = call_chatgpt(system_prompt, user_prompt, openai_client, model, limit_per_minute=limit_per_minute)
         except Exception as ex:
-            if config["OUTPUT"].getboolean("debug_messages"):
-                print(f"Exception happened: Failed to call GPT with batch size {len(batch)} ({ex})")
+            # if config["OUTPUT"].getboolean("debug_messages"):
+            print(f"Exception happened: Failed to call GPT with batch size {len(batch)} ({ex.args})")
             invalid_arxiv_ids.update(all_arxiv_ids)
             continue
 
@@ -367,7 +382,15 @@ def filter_papers_by_abstract(
     return scored_batches, selected_results, filtered_results, total_prompt_cost, total_completion_cost, prompt_tokens, completion_tokens
 
 
-def filter_by_gpt(paper_list, system_prompt, topic_prompt, score_prompt, postfix_prompt_title, postfix_prompt_abstract, config):
+def filter_by_gpt(
+    paper_list,
+    system_prompt,
+    topic_prompt,
+    score_prompt,
+    postfix_prompt_title,
+    postfix_prompt_abstract,
+    config,
+):
     total_filtered_results = {}
     total_prompt_cost = 0.0
     total_completion_cost = 0.0

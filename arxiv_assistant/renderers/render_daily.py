@@ -1,6 +1,7 @@
 import json
-from tabulate import tabulate
 from typing import Dict, List, Tuple
+
+from tabulate import tabulate
 
 from arxiv_assistant.filters.filter_gpt import get_user_prompt_for_abstract_filtering
 from arxiv_assistant.utils.io import add_prefix_to_lines

@@ -1,8 +1,9 @@
 import time
+from typing import Dict, List, Optional
+
 from requests import Session
 from retry import retry
 from tqdm import tqdm
-from typing import Dict, List, Optional
 
 
 def get_author_batch(
@@ -69,8 +70,8 @@ def get_authors(
             try:
                 auth_map = get_one_author(session, author, S2_API_KEY)
             except Exception as ex:
-                if config["OUTPUT"].getboolean("debug_messages"):
-                    print("exception happened" + str(ex))
+                # if config["OUTPUT"].getboolean("debug_messages"):
+                print(f"Exception happened: Failed to get author info ({ex.args})")
                 auth_map = None
             if auth_map is not None:
                 author_metadata_dict[author] = auth_map

@@ -1,5 +1,10 @@
 # Changelog
 
+### 2025-9-8
+
+- Fixed a bug that caused gpt-5 failed to work.
+- GPT-related exceptions will be printed all the time.
+
 ### 2025-9-5
 
 - Added GPT-5 and updated prices.

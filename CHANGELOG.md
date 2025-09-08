@@ -1,5 +1,10 @@
 # Changelog
 
+### 2025-9-5
+
+- Added GPT-5 and updated prices.
+- Updated guide for Github Copilot Free plan
+
 ### 2025-5-27
 
 - Added system prompts for GPT filtering.

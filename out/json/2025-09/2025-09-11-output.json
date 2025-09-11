@@ -1,0 +1,278 @@
+{
+    "2509.08342": {
+        "SCORE": 18,
+        "ARXIVID": "2509.08342",
+        "COMMENT": "High Performance Computing and Efficiency \u2014 MoE-specific inference system with expert offloading, caching/prefetch, vertical expert split, and adaptive cache configuration to reduce VRAM and latency.",
+        "RELEVANCE": 10,
+        "NOVELTY": 8,
+        "authors": [
+            "Jiaming Yan",
+            "Jianchun Liu",
+            "Hongli Xu",
+            "Liusheng Huang"
+        ],
+        "title": "Accelerating Mixture-of-Expert Inference with Adaptive Expert Split Mechanism",
+        "abstract": "Mixture-of-Experts (MoE) has emerged as a promising architecture for modern large language models (LLMs). However, massive parameters impose heavy GPU memory (i.e., VRAM) demands, hindering the widespread adoption of MoE LLMs. Offloading the expert parameters to CPU RAM offers an effective way to alleviate the VRAM requirements for MoE inference. Existing approaches typically cache a small subset of experts in VRAM and dynamically prefetch experts from RAM during inference, leading to significant degradation in inference speed due to the poor cache hit rate and substantial expert loading latency. In this work, we propose MoEpic, an efficient MoE inference system with a novel expert split mechanism. Specifically, each expert is vertically divided into two segments: top and bottom. MoEpic caches the top segment of hot experts, so that more experts will be stored under the limited VRAM budget, thereby improving the cache hit rate. During each layer's inference, MoEpic predicts and prefetches the activated experts for the next layer. Since the top segments of cached experts are exempt from fetching, the loading time is reduced, which allows efficient transfer-computation overlap. Nevertheless, the performance of MoEpic critically depends on the cache configuration (i.e., each layer's VRAM budget and expert split ratio). To this end, we propose a divide-and-conquer algorithm based on fixed-point iteration for adaptive cache configuration. Extensive experiments on popular MoE LLMs demonstrate that MoEpic can save about half of the GPU cost, while lowering the inference latency by about 37.51%-65.73% compared to the baselines.",
+        "arxiv_id": "2509.08342"
+    },
+    "2509.08315": {
+        "SCORE": 18,
+        "ARXIVID": "2509.08315",
+        "COMMENT": "Efficiency/HPC criterion: task-driven KV cache compression for LLM inference via adaptive layer-wise budget allocation using evolutionary search.",
+        "RELEVANCE": 10,
+        "NOVELTY": 8,
+        "authors": [
+            "Bohan Yu",
+            "Yekun Chai"
+        ],
+        "title": "EvolKV: Evolutionary KV Cache Compression for LLM Inference",
+        "abstract": "Existing key-value (KV) cache compression methods typically rely on heuristics, such as uniform cache allocation across layers or static eviction policies, however, they ignore the critical interplays among layer-specific feature patterns and task performance, which can lead to degraded generalization. In this paper, we propose EvolKV, an adaptive framework for layer-wise, task-driven KV cache compression that jointly optimizes the memory efficiency and task performance. By reformulating cache allocation as a multi-objective optimization problem, EvolKV leverages evolutionary search to dynamically configure layer budgets while directly maximizing downstream performance. Extensive experiments on 11 tasks demonstrate that our approach outperforms all baseline methods across a wide range of KV cache budgets on long-context tasks and surpasses heuristic baselines by up to 7 percentage points on GSM8K. Notably, EvolKV achieves superior performance over the full KV cache setting on code completion while utilizing only 1.5% of the original budget, suggesting the untapped potential in learned compression strategies for KV cache budget allocation.",
+        "arxiv_id": "2509.08315"
+    },
+    "2509.08169": {
+        "SCORE": 17,
+        "ARXIVID": "2509.08169",
+        "COMMENT": "Model Architecture and Compression/Efficiency \u2014 optimal-control formulation of autoencoders with low-rank tensor manifold integration for memory-efficient training and automated architecture discovery.",
+        "RELEVANCE": 9,
+        "NOVELTY": 8,
+        "authors": [
+            "Ratna Khatri",
+            "Anthony Kolshorn",
+            "Colin Olson",
+            "Harbir Antil"
+        ],
+        "title": "OCTANE -- Optimal Control for Tensor-based Autoencoder Network Emergence: Explicit Case",
+        "abstract": "This paper presents a novel, mathematically rigorous framework for autoencoder-type deep neural networks that combines optimal control theory and low-rank tensor methods to yield memory-efficient training and automated architecture discovery. The learning task is formulated as an optimization problem constrained by differential equations representing the encoder and decoder components of the network and the corresponding optimality conditions are derived via a Lagrangian approach. Efficient memory compression is enabled by approximating differential equation solutions on low-rank tensor manifolds using an adaptive explicit integration scheme. These concepts are combined to form OCTANE (Optimal Control for Tensor-based Autoencoder Network Emergence) -- a unified training framework that yields compact autoencoder architectures, reduces memory usage, and enables effective learning, even with limited training data. The framework's utility is illustrated with application to image denoising and deblurring tasks and recommendations regarding governing hyperparameters are provided.",
+        "arxiv_id": "2509.08169"
+    },
+    "2509.08418": {
+        "SCORE": 17,
+        "ARXIVID": "2509.08418",
+        "COMMENT": "Model Architecture and Efficiency: presents a faster E(3)-equivariant layer via spherical-grid projection plus MLPs and spline distance encodings, cutting compute/memory and enabling >10x faster training of equivariant GNNs.",
+        "RELEVANCE": 9,
+        "NOVELTY": 8,
+        "authors": [
+            "Nicholas Miklaucic",
+            "Lai Wei",
+            "Rongzhi Dong",
+            "Nihang Fu",
+            "Sadman Sadeed Omee",
+            "Qingyang Li",
+            "Sourin Dey",
+            "Victor Fung",
+            "Jianjun Hu"
+        ],
+        "title": "Facet: highly efficient E(3)-equivariant networks for interatomic potentials",
+        "abstract": "Computational materials discovery is limited by the high cost of first-principles calculations. Machine learning (ML) potentials that predict energies from crystal structures are promising, but existing methods face computational bottlenecks. Steerable graph neural networks (GNNs) encode geometry with spherical harmonics, respecting atomic symmetries -- permutation, rotation, and translation -- for physically realistic predictions. Yet maintaining equivariance is difficult: activation functions must be modified, and each layer must handle multiple data types for different harmonic orders. We present Facet, a GNN architecture for efficient ML potentials, developed through systematic analysis of steerable GNNs. Our innovations include replacing expensive multi-layer perceptrons (MLPs) for interatomic distances with splines, which match performance while cutting computational and memory demands. We also introduce a general-purpose equivariant layer that mixes node information via spherical grid projection followed by standard MLPs -- faster than tensor products and more expressive than linear or gate layers. On the MPTrj dataset, Facet matches leading models with far fewer parameters and under 10% of their training compute. On a crystal relaxation task, it runs twice as fast as MACE models. We further show SevenNet-0's parameters can be reduced by over 25% with no accuracy loss. These techniques enable more than 10x faster training of large-scale foundation models for ML potentials, potentially reshaping computational materials discovery.",
+        "arxiv_id": "2509.08418"
+    },
+    "2509.08184": {
+        "SCORE": 17,
+        "ARXIVID": "2509.08184",
+        "COMMENT": "Representation Learning/Architecture Analysis: mechanistic study of transformers introducing selective induction heads, with a constructive 3-layer design and theory on convergence to MLE.",
+        "RELEVANCE": 9,
+        "NOVELTY": 8,
+        "authors": [
+            "Francesco D'Angelo",
+            "Francesco Croce",
+            "Nicolas Flammarion"
+        ],
+        "title": "Selective Induction Heads: How Transformers Select Causal Structures In Context",
+        "abstract": "Transformers have exhibited exceptional capabilities in sequence modeling tasks, leveraging self-attention and in-context learning. Critical to this success are induction heads, attention circuits that enable copying tokens based on their previous occurrences. In this work, we introduce a novel framework that showcases transformers' ability to dynamically handle causal structures. Existing works rely on Markov Chains to study the formation of induction heads, revealing how transformers capture causal dependencies and learn transition probabilities in-context. However, they rely on a fixed causal structure that fails to capture the complexity of natural languages, where the relationship between tokens dynamically changes with context. To this end, our framework varies the causal structure through interleaved Markov chains with different lags while keeping the transition probabilities fixed. This setting unveils the formation of Selective Induction Heads, a new circuit that endows transformers with the ability to select the correct causal structure in-context. We empirically demonstrate that transformers learn this mechanism to predict the next token by identifying the correct lag and copying the corresponding token from the past. We provide a detailed construction of a 3-layer transformer to implement the selective induction head, and a theoretical analysis proving that this mechanism asymptotically converges to the maximum likelihood solution. Our findings advance the understanding of how transformers select causal structures, providing new insights into their functioning and interpretability.",
+        "arxiv_id": "2509.08184"
+    },
+    "2509.08617": {
+        "SCORE": 16,
+        "ARXIVID": "2509.08617",
+        "COMMENT": "Matches Representation Learning and Model Architecture: employs a sparse autoencoder to learn a dictionary of monosemantic features with interpretable latent components for prediction.",
+        "RELEVANCE": 9,
+        "NOVELTY": 7,
+        "authors": [
+            "Khawla Elhadri",
+            "J\\\"org Schl\\\"otterer",
+            "Christin Seifert"
+        ],
+        "title": "Towards Interpretable Deep Neural Networks for Tabular Data",
+        "abstract": "Tabular data is the foundation of many applications in fields such as finance and healthcare. Although DNNs tailored for tabular data achieve competitive predictive performance, they are blackboxes with little interpretability. We introduce XNNTab, a neural architecture that uses a sparse autoencoder (SAE) to learn a dictionary of monosemantic features within the latent space used for prediction. Using an automated method, we assign human-interpretable semantics to these features. This allows us to represent predictions as linear combinations of semantically meaningful components. Empirical evaluations demonstrate that XNNTab attains performance on par with or exceeding that of state-of-the-art, black-box neural models and classical machine learning approaches while being fully interpretable.",
+        "arxiv_id": "2509.08617"
+    },
+    "2509.08759": {
+        "SCORE": 16,
+        "ARXIVID": "2509.08759",
+        "COMMENT": "Model Architecture and Representation Learning: introduces a Fourier-based MLP with cosine activations that learns frequencies/amplitudes/phases, yielding a separable Fourier basis with one-to-one mapping to coefficients.",
+        "RELEVANCE": 9,
+        "NOVELTY": 7,
+        "authors": [
+            "Mominul Rubel",
+            "Adam Meyers",
+            "Gabriel Nicolosi"
+        ],
+        "title": "Fourier Learning Machines: Nonharmonic Fourier-Based Neural Networks for Scientific Machine Learning",
+        "abstract": "We introduce the Fourier Learning Machine (FLM), a neural network (NN) architecture designed to represent a multidimensional nonharmonic Fourier series. The FLM uses a simple feedforward structure with cosine activation functions to learn the frequencies, amplitudes, and phase shifts of the series as trainable parameters. This design allows the model to create a problem-specific spectral basis adaptable to both periodic and nonperiodic functions. Unlike previous Fourier-inspired NN models, the FLM is the first architecture able to represent a complete, separable Fourier basis in multiple dimensions using a standard Multilayer Perceptron-like architecture. A one-to-one correspondence between the Fourier coefficients and amplitudes and phase-shifts is demonstrated, allowing for the translation between a full, separable basis form and the cosine phase--shifted one. Additionally, we evaluate the performance of FLMs on several scientific computing problems, including benchmark Partial Differential Equations (PDEs) and a family of Optimal Control Problems (OCPs). Computational experiments show that the performance of FLMs is comparable, and often superior, to that of established architectures like SIREN and vanilla feedforward NNs.",
+        "arxiv_id": "2509.08759"
+    },
+    "2509.08255": {
+        "SCORE": 16,
+        "ARXIVID": "2509.08255",
+        "COMMENT": "Model Compression and Efficiency \u2014 pruning-based method (FAPM) using a task-vector criterion to control catastrophic forgetting without changing training or architecture.",
+        "RELEVANCE": 9,
+        "NOVELTY": 7,
+        "authors": [
+            "Wei Huang",
+            "Anda Cheng",
+            "Yinggui Wang"
+        ],
+        "title": "Mitigating Catastrophic Forgetting in Large Language Models with Forgetting-aware Pruning",
+        "abstract": "Recent advancements in large language models (LLMs) have shown impressive capabilities in various downstream tasks but typically face Catastrophic Forgetting (CF) during fine-tuning. In this paper, we propose the Forgetting-Aware Pruning Metric (FAPM), a novel pruning-based approach to balance CF and downstream task performance. Our investigation reveals that the degree to which task vectors (i.e., the subtraction of pre-trained weights from the weights fine-tuned on downstream tasks) overlap with pre-trained model parameters is a critical factor for CF. Based on this finding, FAPM employs the ratio of the task vector to pre-trained model parameters as a metric to quantify CF, integrating this measure into the pruning criteria. Importantly, FAPM does not necessitate modifications to the training process or model architecture, nor does it require any auxiliary data. We conducted extensive experiments across eight datasets, covering natural language inference, General Q&A, Medical Q&A, Math Q&A, reading comprehension, and cloze tests. The results demonstrate that FAPM limits CF to just 0.25\\% while maintaining 99.67\\% accuracy on downstream tasks. We provide the code to reproduce our results.",
+        "arxiv_id": "2509.08255"
+    },
+    "2509.08401": {
+        "SCORE": 16,
+        "ARXIVID": "2509.08401",
+        "COMMENT": "Model Architecture and Representation Learning criteria: mixture-of-codebooks with domain-aware routing (MoE-like) plus regularization to prevent representation collapse in graph foundation models.",
+        "RELEVANCE": 9,
+        "NOVELTY": 7,
+        "authors": [
+            "Xunkai Li",
+            "Daohan Su",
+            "Sicheng Liu",
+            "Ru Zhang",
+            "Rong-Hua Li",
+            "Guoren Wang"
+        ],
+        "title": "Two Sides of the Same Optimization Coin: Model Degradation and Representation Collapse in Graph Foundation Models",
+        "abstract": "Graph foundation models, inspired by the success of LLMs, are designed to learn the optimal embedding from multi-domain TAGs for the downstream cross-task generalization capability. During our investigation, graph VQ-MAE stands out among the increasingly diverse landscape of GFM architectures. This is attributed to its ability to jointly encode topology and textual attributes from multiple domains into discrete embedding spaces with clear semantic boundaries. Despite its potential, domain generalization conflicts cause imperceptible pitfalls. In this paper, we instantiate two of them, and they are just like two sides of the same GFM optimization coin - Side 1 Model Degradation: The encoder and codebook fail to capture the diversity of inputs; Side 2 Representation Collapse: The hidden embedding and codebook vector fail to preserve semantic separability due to constraints from narrow representation subspaces. These two pitfalls (sides) collectively impair the decoder and generate the low-quality reconstructed supervision, causing the GFM optimization dilemma during pre-training (coin). Through empirical investigation, we attribute the above challenges to Information Bottleneck and Regularization Deficit. To address them, we propose MoT (Mixture-of-Tinkers) - (1) Information Tinker for Two Pitfalls, which utilizes an edge-wise semantic fusion strategy and a mixture-of-codebooks with domain-aware routing to improve information capacity. (2) Regularization Tinker for Optimization Coin, which utilizes two additional regularizations to further improve gradient supervision in our proposed Information Tinker. Notably, as a flexible architecture, MoT adheres to the scaling laws of GFM, offering a controllable model scale. Compared to SOTA baselines, experiments on 22 datasets across 6 domains demonstrate that MoT achieves significant improvements in supervised, few-shot, and zero-shot scenarios.",
+        "arxiv_id": "2509.08401"
+    },
+    "2509.08515": {
+        "SCORE": 15,
+        "ARXIVID": "2509.08515",
+        "COMMENT": "Matches Model Architecture (autoencoders) using low-rank latent factorization (truncated SVD) to structure representations and mitigate posterior collapse; also aligns with Compression/Efficiency via rank reduction.",
+        "RELEVANCE": 8,
+        "NOVELTY": 7,
+        "authors": [
+            "Alicia Tierz",
+            "Jad Mounayer",
+            "Beatriz Moya",
+            "Francisco Chinesta"
+        ],
+        "title": "Variational Rank Reduction Autoencoders for Generative",
+        "abstract": "Generative thermal design for complex geometries is fundamental in many areas of engineering, yet it faces two main challenges: the high computational cost of high-fidelity simulations and the limitations of conventional generative models. Approaches such as autoencoders (AEs) and variational autoencoders (VAEs) often produce unstructured latent spaces with discontinuities, which restricts their capacity to explore designs and generate physically consistent solutions.   To address these limitations, we propose a hybrid framework that combines Variational Rank-Reduction Autoencoders (VRRAEs) with Deep Operator Networks (DeepONets). The VRRAE introduces a truncated SVD within the latent space, leading to continuous, interpretable, and well-structured representations that mitigate posterior collapse and improve geometric reconstruction. The DeepONet then exploits this compact latent encoding in its branch network, together with spatial coordinates in the trunk network, to predict temperature gradients efficiently and accurately.   This hybrid approach not only enhances the quality of generated geometries and the accuracy of gradient prediction, but also provides a substantial advantage in inference efficiency compared to traditional numerical solvers. Overall, the study underscores the importance of structured latent representations for operator learning and highlights the potential of combining generative models and operator networks in thermal design and broader engineering applications.",
+        "arxiv_id": "2509.08515"
+    },
+    "2509.08814": {
+        "SCORE": 15,
+        "ARXIVID": "2509.08814",
+        "COMMENT": "Matches Model Compression and Efficiency: proposes a multi-teacher distillation framework with alternating teacher-specific SFT branches and weight-space model merging to compress long CoT reasoning into a smaller student while mitigating forgetting.",
+        "RELEVANCE": 8,
+        "NOVELTY": 7,
+        "authors": [
+            "Zhanming Shen",
+            "Zeyu Qin",
+            "Zenan Huang",
+            "Hao Chen",
+            "Jiaqi Hu",
+            "Yihong Zhuang",
+            "Guoshan Lu",
+            "Gang Chen",
+            "Junbo Zhao"
+        ],
+        "title": "Merge-of-Thought Distillation",
+        "abstract": "Efficient reasoning distillation for long chain-of-thought (CoT) models is increasingly constrained by the assumption of a single oracle teacher, despite practical availability of multiple candidate teachers and growing CoT corpora. We revisit teacher selection and observe that different students have different \"best teachers,\" and even for the same student the best teacher can vary across datasets. Therefore, to unify multiple teachers' reasoning abilities into student with overcoming conflicts among various teachers' supervision, we propose Merge-of-Thought Distillation (MoT), a lightweight framework that alternates between teacher-specific supervised fine-tuning branches and weight-space merging of the resulting student variants. On competition math benchmarks, using only about 200 high-quality CoT samples, applying MoT to a Qwen3-14B student surpasses strong models including DEEPSEEK-R1, QWEN3-30B-A3B, QWEN3-32B, and OPENAI-O1, demonstrating substantial gains. Besides, MoT consistently outperforms the best single-teacher distillation and the naive multi-teacher union, raises the performance ceiling while mitigating overfitting, and shows robustness to distribution-shifted and peer-level teachers. Moreover, MoT reduces catastrophic forgetting, improves general reasoning beyond mathematics and even cultivates a better teacher, indicating that consensus-filtered reasoning features transfer broadly. These results position MoT as a simple, scalable route to efficiently distilling long CoT capabilities from diverse teachers into compact students.",
+        "arxiv_id": "2509.08814"
+    },
+    "2509.08734": {
+        "SCORE": 15,
+        "ARXIVID": "2509.08734",
+        "COMMENT": "Matches Model Architecture and Efficiency: recasts an equivariant network as a deep equilibrium model (DEQ) to recycle features across timesteps, improving speed and memory efficiency for sequence-like inference.",
+        "RELEVANCE": 8,
+        "NOVELTY": 7,
+        "authors": [
+            "Andreas Burger",
+            "Luca Thiede",
+            "Al\\'an Aspuru-Guzik",
+            "Nandita Vijaykumar"
+        ],
+        "title": "DEQuify your force field: More efficient simulations using deep equilibrium models",
+        "abstract": "Machine learning force fields show great promise in enabling more accurate molecular dynamics simulations compared to manually derived ones. Much of the progress in recent years was driven by exploiting prior knowledge about physical systems, in particular symmetries under rotation, translation, and reflections. In this paper, we argue that there is another important piece of prior information that, thus fa,r hasn't been explored: Simulating a molecular system is necessarily continuous, and successive states are therefore extremely similar. Our contribution is to show that we can exploit this information by recasting a state-of-the-art equivariant base model as a deep equilibrium model. This allows us to recycle intermediate neural network features from previous time steps, enabling us to improve both accuracy and speed by $10\\%-20\\%$ on the MD17, MD22, and OC20 200k datasets, compared to the non-DEQ base model. The training is also much more memory efficient, allowing us to train more expressive models on larger systems.",
+        "arxiv_id": "2509.08734"
+    },
+    "2509.08726": {
+        "SCORE": 15,
+        "ARXIVID": "2509.08726",
+        "COMMENT": "High Performance Computing \u2014 decentralized first-order optimization under relaxed smoothness with explicit sample and communication complexity bounds for distributed training.",
+        "RELEVANCE": 8,
+        "NOVELTY": 7,
+        "authors": [
+            "Luo Luo",
+            "Xue Cui",
+            "Tingkai Jia",
+            "Cheng Chen"
+        ],
+        "title": "Decentralized Stochastic Nonconvex Optimization under the Relaxed Smoothness",
+        "abstract": "This paper studies decentralized optimization problem $f(\\mathbf{x})=\\frac{1}{m}\\sum_{i=1}^m f_i(\\mathbf{x})$, where each local function has the form of $f_i(\\mathbf{x}) = {\\mathbb E}\\left[F(\\mathbf{x};{\\xi}_i)\\right]$ which is $(L_0,L_1)$-smooth but possibly nonconvex and the random variable ${\\xi}_i$ follows distribution ${\\mathcal D}_i$. We propose a novel algorithm called decentralized normalized stochastic gradient descent (DNSGD), which can achieve the $\\epsilon$-stationary point on each local agent. We present a new framework for analyzing decentralized first-order methods in the relaxed smooth setting, based on the Lyapunov function related to the product of the gradient norm and the consensus error. The analysis shows upper bounds on sample complexity of ${\\mathcal O}(m^{-1}(L_f\\sigma^2\\Delta_f\\epsilon^{-4} + \\sigma^2\\epsilon^{-2} + L_f^{-2}L_1^3\\sigma^2\\Delta_f\\epsilon^{-1} + L_f^{-2}L_1^2\\sigma^2))$ per agent and communication complexity of $\\tilde{\\mathcal O}((L_f\\epsilon^{-2} + L_1\\epsilon^{-1})\\gamma^{-1/2}\\Delta_f)$, where $L_f=L_0 +L_1\\zeta$, $\\sigma^2$ is the variance of the stochastic gradient, $\\Delta_f$ is the initial optimal function value gap, $\\gamma$ is the spectral gap of the network, and $\\zeta$ is the degree of the gradient dissimilarity. In the special case of $L_1=0$, the above results (nearly) match the lower bounds on decentralized nonconvex optimization in the standard smooth setting. We also conduct numerical experiments to show the empirical superiority of our method.",
+        "arxiv_id": "2509.08726"
+    },
+    "2509.08470": {
+        "SCORE": 15,
+        "ARXIVID": "2509.08470",
+        "COMMENT": "Model Architecture: proposes Sparse MERIT, a sparse Mixture-of-Experts with frame-wise routing and task-specific gating for multi-task learning, enabling conditional/dynamic computation.",
+        "RELEVANCE": 8,
+        "NOVELTY": 7,
+        "authors": [
+            "Jing-Tong Tzeng",
+            "Carlos Busso",
+            "Chi-Chun Lee"
+        ],
+        "title": "Joint Learning using Mixture-of-Expert-Based Representation for Enhanced Speech Generation and Robust Emotion Recognition",
+        "abstract": "Speech emotion recognition (SER) plays a critical role in building emotion-aware speech systems, but its performance degrades significantly under noisy conditions. Although speech enhancement (SE) can improve robustness, it often introduces artifacts that obscure emotional cues and adds computational overhead to the pipeline. Multi-task learning (MTL) offers an alternative by jointly optimizing SE and SER tasks. However, conventional shared-backbone models frequently suffer from gradient interference and representational conflicts between tasks. To address these challenges, we propose the Sparse Mixture-of-Experts Representation Integration Technique (Sparse MERIT), a flexible MTL framework that applies frame-wise expert routing over self-supervised speech representations. Sparse MERIT incorporates task-specific gating networks that dynamically select from a shared pool of experts for each frame, enabling parameter-efficient and task-adaptive representation learning. Experiments on the MSP-Podcast corpus show that Sparse MERIT consistently outperforms baseline models on both SER and SE tasks. Under the most challenging condition of -5 dB signal-to-noise ratio (SNR), Sparse MERIT improves SER F1-macro by an average of 12.0% over a baseline relying on a SE pre-processing strategy, and by 3.4% over a naive MTL baseline, with statistical significance on unseen noise conditions. For SE, Sparse MERIT improves segmental SNR (SSNR) by 28.2% over the SE pre-processing baseline and by 20.0% over the naive MTL baseline. These results demonstrate that Sparse MERIT provides robust and generalizable performance for both emotion recognition and enhancement tasks in noisy environments.",
+        "arxiv_id": "2509.08470"
+    },
+    "2509.08383": {
+        "SCORE": 15,
+        "ARXIVID": "2509.08383",
+        "COMMENT": "Model Efficiency: introduces a polynomial-time HE-friendly argmax (cutmax) and the first HE-compatible top-p sampling, reducing ciphertext operations for encrypted LLM decoding with convergence guarantees.",
+        "RELEVANCE": 7,
+        "NOVELTY": 8,
+        "authors": [
+            "Matan Avitan",
+            "Moran Baruch",
+            "Nir Drucker",
+            "Itamar Zimerman",
+            "Yoav Goldberg"
+        ],
+        "title": "Efficient Decoding Methods for Language Models on Encrypted Data",
+        "abstract": "Large language models (LLMs) power modern AI applications, but processing sensitive data on untrusted servers raises privacy concerns. Homomorphic encryption (HE) enables computation on encrypted data for secure inference. However, neural text generation requires decoding methods like argmax and sampling, which are non-polynomial and thus computationally expensive under encryption, creating a significant performance bottleneck. We introduce cutmax, an HE-friendly argmax algorithm that reduces ciphertext operations compared to prior methods, enabling practical greedy decoding under encryption. We also propose the first HE-compatible nucleus (top-p) sampling method, leveraging cutmax for efficient stochastic decoding with provable privacy guarantees. Both techniques are polynomial, supporting efficient inference in privacy-preserving settings. Moreover, their differentiability facilitates gradient-based sequence-level optimization as a polynomial alternative to straight-through estimators. We further provide strong theoretical guarantees for cutmax, proving it converges globally to a unique two-level fixed point, independent of the input values beyond the identity of the maximizer, which explains its rapid convergence in just a few iterations. Evaluations on realistic LLM outputs show latency reductions of 24x-35x over baselines, advancing secure text generation.",
+        "arxiv_id": "2509.08383"
+    },
+    "2509.08483": {
+        "SCORE": 15,
+        "ARXIVID": "2509.08483",
+        "COMMENT": "Representation Learning criterion: fine-grained theoretical analysis of optimization dynamics (heavy-ball momentum) via modified equations and principal flow.",
+        "RELEVANCE": 7,
+        "NOVELTY": 8,
+        "authors": [
+            "Matias D. Cattaneo",
+            "Boris Shigida"
+        ],
+        "title": "Modified Loss of Momentum Gradient Descent: Fine-Grained Analysis",
+        "abstract": "We analyze gradient descent with Polyak heavy-ball momentum (HB) whose fixed momentum parameter $\\beta \\in (0, 1)$ provides exponential decay of memory. Building on Kovachki and Stuart (2021), we prove that on an exponentially attractive invariant manifold the algorithm is exactly plain gradient descent with a modified loss, provided that the step size $h$ is small enough. Although the modified loss does not admit a closed-form expression, we describe it with arbitrary precision and prove global (finite \"time\" horizon) approximation bounds $O(h^{R})$ for any finite order $R \\geq 2$. We then conduct a fine-grained analysis of the combinatorics underlying the memoryless approximations of HB, in particular, finding a rich family of polynomials in $\\beta$ hidden inside which contains Eulerian and Narayana polynomials. We derive continuous modified equations of arbitrary approximation order (with rigorous bounds) and the principal flow that approximates the HB dynamics, generalizing Rosca et al. (2023). Approximation theorems cover both full-batch and mini-batch HB. Our theoretical results shed new light on the main features of gradient descent with heavy-ball momentum, and outline a road-map for similar analysis of other optimization algorithms.",
+        "arxiv_id": "2509.08483"
+    },
+    "2509.08707": {
+        "SCORE": 14,
+        "ARXIVID": "2509.08707",
+        "COMMENT": "Matches Representation Learning\u2014contrastive multimodal tokenizer for structural sequence representations; also an architectural tokenization module integrable into protein foundation models.",
+        "RELEVANCE": 7,
+        "NOVELTY": 7,
+        "authors": [
+            "Ada Fang",
+            "Robert G. Alberstein",
+            "Simon Kelow",
+            "Fr\\'ed\\'eric A. Dreyer"
+        ],
+        "title": "Tokenizing Loops of Antibodies",
+        "abstract": "The complementarity-determining regions of antibodies are loop structures that are key to their interactions with antigens, and of high importance to the design of novel biologics. Since the 1980s, categorizing the diversity of CDR structures into canonical clusters has enabled the identification of key structural motifs of antibodies. However, existing approaches have limited coverage and cannot be readily incorporated into protein foundation models. Here we introduce ImmunoGlobulin LOOp Tokenizer, Igloo, a multimodal antibody loop tokenizer that encodes backbone dihedral angles and sequence. Igloo is trained using a contrastive learning objective to map loops with similar backbone dihedral angles closer together in latent space. Igloo can efficiently retrieve the closest matching loop structures from a structural antibody database, outperforming existing methods on identifying similar H3 loops by 5.9\\%. Igloo assigns tokens to all loops, addressing the limited coverage issue of canonical clusters, while retaining the ability to recover canonical loop conformations. To demonstrate the versatility of Igloo tokens, we show that they can be incorporated into protein language models with IglooLM and IglooALM. On predicting binding affinity of heavy chain variants, IglooLM outperforms the base protein language model on 8 out of 10 antibody-antigen targets. Additionally, it is on par with existing state-of-the-art sequence-based and multimodal protein language models, performing comparably to models with $7\\times$ more parameters. IglooALM samples antibody loops which are diverse in sequence and more consistent in structure than state-of-the-art antibody inverse folding models. Igloo demonstrates the benefit of introducing multimodal tokens for antibody loops for encoding the diverse landscape of antibody loops, improving protein foundation models, and for antibody CDR design.",
+        "arxiv_id": "2509.08707"
+    }
+}

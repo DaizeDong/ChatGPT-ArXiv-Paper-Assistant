@@ -49,7 +49,7 @@ with open("prompts/postfix_prompt_abstract.txt", "r", encoding="utf-8") as f:
 # keys
 S2_API_KEY = os.environ.get("S2_KEY")
 OPENAI_API_KEY = os.environ.get("OPENAI_API_KEY")
-OPENAI_BASE_URL = os.environ.get("OPENAI_BASE_URL")
+OPENAI_BASE_URL = os.environ.get("OPENAI_BASE_URL", "https://api.openai.com/v1")
 SLACK_KEY = os.environ.get("SLACK_KEY")
 SLACK_CHANNEL_ID = os.environ.get("SLACK_CHANNEL_ID")
 

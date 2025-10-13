@@ -1,27 +1,19 @@
-name: Publish Github Pages
+name: Publish Github Pages (Multiple)
 
 on:
   workflow_dispatch:
-  workflow_run:
-    workflows: [ "Push Generated Results" ]
-    types:
-      - completed
 
 permissions: write-all
 
 jobs:
   build:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout `auto_update` branch
-        uses: actions/checkout@v4
+      - name: Checkout `test_web` branch
+        uses: actions/checkout@v3
         with:
-          ref: auto_update
+          ref: test_web
           fetch-depth: 0
 
       - name: Verify output directory and contents
@@ -30,7 +22,7 @@ jobs:
               cd out
               echo "Contents in out:"
               ls -R
-              mv output.md ../
+              mv * ../
           else
               echo "out directory is empty or does not exist. Aborting."
               exit 1
@@ -47,7 +39,12 @@ jobs:
         if: steps.check_files.outputs.files_exists == 'true'
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          files: latest.md
+          files: |
+            latest.md
+            index.md
+            md/2025-01/index.md
+            md/2025-02/index.md
+            md/2025-03/index.md
 
       - uses: actions/upload-pages-artifact@v3
         if: steps.check_files.outputs.files_exists == 'true'

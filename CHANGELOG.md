@@ -1,5 +1,9 @@
 # Changelog
 
+### 2025-10-16
+
+- Added config template for minimal setup without author searching.
+
 ### 2025-9-23
 
 - Fixed the connection error when `OPENAI_BASE_URL` isn't set.

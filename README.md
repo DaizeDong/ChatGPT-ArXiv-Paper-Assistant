@@ -1,6 +1,6 @@
 # ChatGPT ArXiv Paper Assistant: A Daily ArXiv Scanner
 
-> *[Last update: 2025-9-23]*
+> *[Last update: 2025-10-16]*
 > This is an enhanced version of the [GPT paper assistant](https://github.com/tatsu-lab/gpt_paper_assistant).
 > I fixed all known bugs and added various new features to make it easier to use.
 > See the [changelog](CHANGELOG.md) for details.
@@ -17,16 +17,16 @@ This is the minimal necessary steps to get the scanner to run. It is highly reco
 
 1. Copy/fork this repo to a new github repo and [enable scheduled workflows](https://docs.github.com/en/actions/using-workflows/disabling-and-enabling-a-workflow) if you fork it.
 2. Copy `prompts/templates/paper_topics.template.txt` to `prompts/paper_topics.txt` and fill it out with the types of papers you want to follow.
-3. Copy `config/templates/authors.template.txt` to `config/authors.txt` and list the authors you actually want to follow. The numbers behind the author are important. They are semantic scholar author IDs which you can find by looking up the authors on semantic scholar and taking the numbers at the end of the URL.
-4. Set your desired ArXiv categories in `config/config.ini`.
-5. Set your openai key `OPENAI_API_KEY` and base url `OPENAI_BASE_URL` (if you need one) as [github secrets](https://docs.github.com/en/actions/security-guides/using-secrets-in-github-actions#creating-secrets-for-a-repository). To can get a free one from GitHub, please reference [GUIDE_GITHUB_API.md](GUIDE_GITHUB_API.md).
-6. In your repo settings, set github page build sources to be [github actions](https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site#publishing-with-a-custom-github-actions-workflow).
+3. Copy `configs/templates/config.template.ini` to `configs/config.ini` and set your desired ArXiv categories `arxiv_category`.
+4. Set your openai key `OPENAI_API_KEY` and base url `OPENAI_BASE_URL` (if you need one) as [github secrets](https://docs.github.com/en/actions/security-guides/using-secrets-in-github-actions#creating-secrets-for-a-repository). To can get a free one from GitHub, please reference [GUIDE_GITHUB_API.md](GUIDE_GITHUB_API.md).
+5. In your repo settings, set github page build sources to be [github actions](https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site#publishing-with-a-custom-github-actions-workflow).
 
-At this point your bot should run daily and publish a static website. The results will be pushed to the `auto_update` branch automatically. You can test this by running the github action workflow manually.
+At this point, your bot should run daily and publish a static website. The results will be pushed to the `auto_update` branch automatically. You can test this by running the github action workflow manually.
 
 **Optional**:
 
-7. (Recommended) Adjust the content in `prompts/score_criteria.txt` by your requirements. For example, you can add some examples for each class for reference.
+6. (Recommended) Copy `prompts/templates/score_criteria.template.txt` to `prompts/score_criteria.txt` and adjust the content by your requirements. For example, you can add some examples for each class for reference.
+7. (Recommended) Copy `configs/templates/authors.template.txt` to `configs/authors.txt` and list the authors you actually want to follow. The numbers behind the author are important. They are semantic scholar author IDs which you can find by looking up the authors on semantic scholar and taking the numbers at the end of the URL.
 8. (Recommended) Take a look at `configs/config.ini` to tweak how things are filtered.
 9. Get and set up a semantic scholar API key (`S2_KEY`) as a github secret. Otherwise the author search step will be very slow. (For now the keys are tight, so you may not be able to get one.)
 10. [Set up a slack bot](https://api.slack.com/start/quickstart), get the OAuth key, set it to `SLACK_KEY` as a github secret.

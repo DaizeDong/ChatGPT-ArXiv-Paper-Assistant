@@ -6,15 +6,29 @@ on:
     branches:
       - test_web
 
-permissions: write-all
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: github-pages-multipage
+  cancel-in-progress: true
+
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
 
 jobs:
   build:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout `test_web` branch
-        uses: actions/checkout@v3
+        uses: actions/checkout@v6
         with:
           ref: test_web
           fetch-depth: 0
@@ -45,7 +59,7 @@ jobs:
           } >> "$GITHUB_OUTPUT"
 
       - name: Convert site markdown to pages
-        uses: wranders/markdown-to-pages-action@v1
+        uses: wranders/markdown-to-pages-action@v1.1.2
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           custom_css: site.css
@@ -59,10 +73,10 @@ jobs:
             cp -R assets dist/
           fi
 
-      - uses: actions/upload-pages-artifact@v3
+      - uses: actions/upload-pages-artifact@v4
         with:
           path: dist
 
       - name: Deploy to GitHub Pages
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@v4.0.5
         id: deployment

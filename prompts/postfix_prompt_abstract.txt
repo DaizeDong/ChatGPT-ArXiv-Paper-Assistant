@@ -1,8 +1,12 @@
 ## Instructions
 
-Write the response in JSONL format with {ARXIVID, COMMENT, RELEVANCE, NOVELTY} on each line, one for each paper.
+Respond in JSONL. Output exactly one JSON object per paper, one per line:
 
-- ARXIVID: should be the ArXiv ID.
-- COMMENT: should identify whether there is a criteria that match the paper very closely. These matches should not be based on general terms like "language modeling" or "advancements" and should specifically refer to a criterion. No need to mention the non-matching criteria.
-- RELEVANCE: should be a score from 1-10.
-- NOVELTY: should be a score from 1-10.
+{"ARXIVID":"...","COMMENT":"...","RELEVANCE":0,"NOVELTY":0}
+
+Rules:
+- ARXIVID: the arXiv ID.
+- COMMENT: identify the single strongest matching criterion. Be brief and specific. Do not rely on generic phrases like "language modeling" or "advancement". Do not mention non-matching criteria.
+- RELEVANCE: integer from 1 to 10.
+- NOVELTY: integer from 1 to 10.
+- Do not output markdown, code fences, or any extra text.

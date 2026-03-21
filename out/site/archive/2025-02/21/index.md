@@ -1,0 +1,993 @@
+<table style="width: 100%; border-collapse: collapse; border: none;">
+    <tr>
+<td style="border: none; padding: 0px; width: 33%;">
+            <div style="display: flex; align-items: center; gap: 5px;">
+                <a href="../20" style="text-decoration: none; color: inherit;">
+                    <strong style="color: black; font-size: 18px;">&larr;</strong>
+                </a>
+                <div style="text-align: center;">
+                    <a href="../20" style="text-decoration: none;">
+                        <strong>Previous Day</strong>
+                    </a>
+                    <br>
+                    <a href="../20" style="text-decoration: none; font-size: 14px; color: gray;">
+                        2025-02-20
+                    </a>
+                </div>
+            </div>
+        </td>
+
+        <td style="border: none; padding: 0px; width: 34%; text-align: center;">
+            <div style="display: flex; flex-direction: column; align-items: center; width: 100%;">
+                <a href=".." style="text-decoration: none;">
+                    <strong>Monthly Overview</strong>
+                </a>
+                <a href=".." style="text-decoration: none; font-size: 14px; color: gray;">
+                    2025-02
+                </a>
+            </div>
+        </td>
+    
+<td style="border: none; padding: 0px; width: 33%;">
+            <div style="display: flex; align-items: center; gap: 5px; justify-content: flex-end; width: 100%;">
+                <div style="text-align: center;">
+                    <a href="../24" style="text-decoration: none;">
+                        <strong>Next Day</strong>
+                    </a>
+                    <br>
+                    <a href="../24" style="text-decoration: none; font-size: 14px; color: gray;">
+                        2025-02-24
+                    </a>
+                </div>
+                <a href="../24" style="text-decoration: none; color: inherit;">
+                    <strong style="color: black; font-size: 18px;">&rarr;</strong>
+                </a>
+            </div>
+        </td>
+    </tr>
+</table>
+
+# Personalized Daily Arxiv Papers 02/21/2025
+
+| *[gpt-4o]*   | Prompt   | Completion   | Total   |
+|--------------|----------|--------------|---------|
+| **Token**    | 60143    | 8255         | 68398   |
+| **Cost**     | $0.15    | $0.08        | $0.23   |
+
+Total ArXiv papers: 524
+
+Total scanned papers: 325
+
+Total relevant papers: 46
+
+**Table of contents with paper titles:**
+
+1. [OBELiX: A Curated Dataset of Crystal Structures and Experimentally Measured Ionic Conductivities for Lithium Solid-State Electrolytes](#user-content-link1)
+**Authors:** F\'elix Therrien, Jamal Abou Haibeh, Divya Sharma, Rhiannon Hendley, Alex Hern\'andez-Garc\'ia, Sun Sun, Alain Tchagang, Jiang Su, Samuel Huberman, Yoshua Bengio, Hongyu Guo, Homin Shin
+
+2. [Learning from Reward-Free Offline Data: A Case for Planning with Latent Dynamics Models](#user-content-link2)
+**Authors:** Vlad Sobal, Wancong Zhang, Kynghyun Cho, Randall Balestriero, Tim G. J. Rudner, Yann LeCun
+
+3. [Zero loss guarantees and explicit minimizers for generic overparametrized Deep Learning networks](#user-content-link3)
+**Authors:** Thomas Chen, Andrew G. Moore
+
+4. [Llamba: Scaling Distilled Recurrent Models for Efficient Language Processing](#user-content-link4)
+**Authors:** Aviv Bick, Tobias Katsch, Nimit Sohoni, Arjun Desai, Albert Gu
+
+5. [Weighted Low-rank Approximation via Stochastic Gradient Descent on Manifolds](#user-content-link5)
+**Authors:** Conglong Xu, Peiqi Yang, Hao Wu
+
+6. [Multiscale Byte Language Models -- A Hierarchical Architecture for Causal Million-Length Sequence Modeling](#user-content-link6)
+**Authors:** Eric Egli, Matteo Manica, Jannis Born
+
+7. [Determining Layer-wise Sparsity for Large Language Models Through a Theoretical Perspective](#user-content-link7)
+**Authors:** Weizhong Huang, Yuxin Zhang, Xiawu Zheng, Fei Chao, Rongrong Ji
+
+8. [Which Attention Heads Matter for In-Context Learning?](#user-content-link8)
+**Authors:** Kayo Yin, Jacob Steinhardt
+
+9. [Understanding SGD with Exponential Moving Average: A Case Study in Linear Regression](#user-content-link9)
+**Authors:** Xuheng Li, Quanquan Gu
+
+10. [Fundamental Limitations in Defending LLM Finetuning APIs](#user-content-link10)
+**Authors:** Xander Davies, Eric Winsor, Tomek Korbak, Alexandra Souly, Robert Kirk, Christian Schroeder de Witt, Yarin Gal
+
+11. [Towards a Learning Theory of Representation Alignment](#user-content-link11)
+**Authors:** Francesco Insulla, Shuo Huang, Lorenzo Rosasco
+
+12. [Towards Efficient Automatic Self-Pruning of Large Language Models](#user-content-link12)
+**Authors:** Weizhong Huang, Yuxin Zhang, Xiawu Zheng, Fei Chao, Rongrong Ji
+
+13. [PEARL: Towards Permutation-Resilient LLMs](#user-content-link13)
+**Authors:** Liang Chen, Li Shen, Yang Deng, Xiaoyan Zhao, Bin Liang, Kam-Fai Wong
+
+14. [MaskPrune: Mask-based LLM Pruning for Layer-wise Uniform Structures](#user-content-link14)
+**Authors:** Jiayu Qin, Jianchao Tan, Kefeng Zhang, Xunliang Cai, Wei Wang
+
+15. [Ray-Tracing for Conditionally Activated Neural Networks](#user-content-link15)
+**Authors:** Claudio Gallicchio, Giuseppe Nuti
+
+16. [RocketKV: Accelerating Long-Context LLM Inference via Two-Stage KV Cache Compression](#user-content-link16)
+**Authors:** Payman Behnam, Yaosheng Fu, Ritchie Zhao, Po-An Tsai, Zhiding Yu, Alexey Tumanov
+
+17. [Towards Economical Inference: Enabling DeepSeek's Multi-Head Latent Attention in Any Transformer-based LLMs](#user-content-link17)
+**Authors:** Tao Ji, Bin Guo, Yuanbin Wu, Qipeng Guo, Lixing Shen, Zhan Chen, Xipeng Qiu, Qi Zhang, Tao Gui
+
+18. [Dynamic Low-Rank Sparse Adaptation for Large Language Models](#user-content-link18)
+**Authors:** Weizhong Huang, Yuxin Zhang, Xiawu Zheng, Yang Liu, Jing Lin, Yiwu Yao, Rongrong Ji
+
+19. [LServe: Efficient Long-sequence LLM Serving with Unified Sparse Attention](#user-content-link19)
+**Authors:** Shang Yang, Junxian Guo, Haotian Tang, Qinghao Hu, Guangxuan Xiao, Jiaming Tang, Yujun Lin, Zhijian Liu, Yao Lu, Song Han
+
+20. [Confidence Estimation via Sequential Likelihood Mixing](#user-content-link20)
+**Authors:** Johannes Kirschner, Andreas Krause, Michele Meziu, Mojmir Mutny
+
+21. [Generalization Error of $f$-Divergence Stabilized Algorithms via Duality](#user-content-link21)
+**Authors:** Francisco Daunas, I\~naki Esnaola, Samir M. Perlaza, Gholamali Aminian
+
+22. [A Theory for Conditional Generative Modeling on Multiple Data Sources](#user-content-link22)
+**Authors:** Rongzhen Wang, Yan Zhang, Chenyu Zheng, Chongxuan Li, Guoqiang Wu
+
+23. [A Non-Asymptotic Theory of Seminorm Lyapunov Stability: From Deterministic to Stochastic Iterative Algorithms](#user-content-link23)
+**Authors:** Zaiwei Chen, Sheng Zhang, Zhe Zhang, Shaan Ul Haque, Siva Theja Maguluri
+
+24. [Generalization Certificates for Adversarially Robust Bayesian Linear Regression](#user-content-link24)
+**Authors:** Mahalakshmi Sabanayagam, Russell Tsuchida, Cheng Soon Ong, Debarghya Ghoshdastidar
+
+25. [FR-Spec: Accelerating Large-Vocabulary Language Models via Frequency-Ranked Speculative Sampling](#user-content-link25)
+**Authors:** Weilin Zhao, Tengyu Pan, Xu Han, Yudi Zhang, Ao Sun, Yuxiang Huang, Kaihuo Zhang, Weilun Zhao, Yuxuan Li, Jianyong Wang, Zhiyuan Liu, Maosong Sun
+
+26. [seqKAN: Sequence processing with Kolmogorov-Arnold Networks](#user-content-link26)
+**Authors:** Tatiana Boura, Stasinos Konstantopoulos
+
+27. [Data-Efficient Pretraining with Group-Level Data Influence Modeling](#user-content-link27)
+**Authors:** Zichun Yu, Fei Peng, Jie Lei, Arnold Overwijk, Wen-tau Yih, Chenyan Xiong
+
+28. [Multi-Faceted Studies on Data Poisoning can Advance LLM Development](#user-content-link28)
+**Authors:** Pengfei He, Yue Xing, Han Xu, Zhen Xiang, Jiliang Tang
+
+29. [Prompt-to-Leaderboard](#user-content-link29)
+**Authors:** Evan Frick, Connor Chen, Joseph Tennyson, Tianle Li, Wei-Lin Chiang, Anastasios N. Angelopoulos, Ion Stoica
+
+30. [CER: Confidence Enhanced Reasoning in LLMs](#user-content-link30)
+**Authors:** Ali Razghandi, Seyed Mohammad Hadi Hosseini, Mahdieh Soleymani Baghshah
+
+31. [Affinity and Diversity: A Unified Metric for Demonstration Selection via Internal Representations](#user-content-link31)
+**Authors:** Mariko Kato, Hakaze Cho, Yoshihiro Sakai, Naoya Inoue
+
+32. [Capturing Nuanced Preferences: Preference-Aligned Distillation for Small Language Models](#user-content-link32)
+**Authors:** Yanggan Gu, Junzhuo Li, Sirui Huang, Xin Zou, Zhenghua Li, Xuming Hu
+
+33. [PLPHP: Per-Layer Per-Head Vision Token Pruning for Efficient Large Vision-Language Models](#user-content-link33)
+**Authors:** Yu Meng, Kaiyuan Li, Chenran Huang, Chen Gao, Xinlei Chen, Yong Li, Xiaoping Zhang
+
+34. [From RAG to Memory: Non-Parametric Continual Learning for Large Language Models](#user-content-link34)
+**Authors:** Bernal Jim\'enez Guti\'errez, Yiheng Shu, Weijian Qi, Sizhe Zhou, Yu Su
+
+35. [Disentangled Latent Spaces for Reduced Order Models using Deterministic Autoencoders](#user-content-link35)
+**Authors:** Henning Schwarz, Pyei Phyo Lin, Jens-Peter M. Zemke, Thomas Rung
+
+36. [Does Time Have Its Place? Temporal Heads: Where Language Models Recall Time-specific Information](#user-content-link36)
+**Authors:** Yein Park, Chanwoong Yoon, Jungwoo Park, Minbyul Jeong, Jaewoo Kang
+
+37. [Reward Models Identify Consistency, Not Causality](#user-content-link37)
+**Authors:** Yuhui Xu, Hanze Dong, Lei Wang, Caiming Xiong, Junnan Li
+
+38. [HPS: Hard Preference Sampling for Human Preference Alignment](#user-content-link38)
+**Authors:** Xiandong Zou, Wanyu Lin, Yuchen Li, Pan Zhou
+
+39. [ReVISE: Learning to Refine at Test-Time via Intrinsic Self-Verification](#user-content-link39)
+**Authors:** Hyunseok Lee, Seunghyuk Oh, Jaehyung Kim, Jinwoo Shin, Jihoon Tack
+
+40. [Rectified Lagrangian for Out-of-Distribution Detection in Modern Hopfield Networks](#user-content-link40)
+**Authors:** Ryo Moriai, Nakamasa Inoue, Masayuki Tanaka, Rei Kawakami, Satoshi Ikehata, Ikuro Sato
+
+41. [EpMAN: Episodic Memory AttentioN for Generalizing to Longer Contexts](#user-content-link41)
+**Authors:** Subhajit Chaudhury, Payel Das, Sarathkrishna Swaminathan, Georgios Kollias, Elliot Nelson, Khushbu Pahwa, Tejaswini Pedapati, Igor Melnyk, Matthew Riemer
+
+42. [Temporal Misalignment and Probabilistic Neurons](#user-content-link42)
+**Authors:** Velibor Bojkovi\'c, Xiaofeng Wu, Bin Gu
+
+43. [Dynamic Activation with Knowledge Distillation for Energy-Efficient Spiking NN Ensembles](#user-content-link43)
+**Authors:** Orestis Konstantaropoulos, Theodoris Mallios, Maria Papadopouli
+
+44. [On Theoretical Limits of Learning with Label Differential Privacy](#user-content-link44)
+**Authors:** Puning Zhao, Chuan Ma, Li Shen, Shaowei Wang, Rongfei Fan
+
+45. [General Uncertainty Estimation with Delta Variances](#user-content-link45)
+**Authors:** Simon Schmitt, John Shawe-Taylor, Hado van Hasselt
+
+46. [Revealing and Mitigating Over-Attention in Knowledge Editing](#user-content-link46)
+**Authors:** Pinzheng Wang, Zecheng Tang, Keyan Zhou, Juntao Li, Qiaoming Zhu, Min Zhang
+
+---
+
+## 1. [OBELiX: A Curated Dataset of Crystal Structures and Experimentally Measured Ionic Conductivities for Lithium Solid-State Electrolytes](https://arxiv.org/abs/2502.14234) <a id="link1"></a>
+
+**ArXiv ID:** 2502.14234
+
+**Authors:** F\'elix Therrien, Jamal Abou Haibeh, Divya Sharma, Rhiannon Hendley, Alex Hern\'andez-Garc\'ia, Sun Sun, Alain Tchagang, Jiang Su, Samuel Huberman, Yoshua Bengio, Hongyu Guo, Homin Shin
+
+**Abstract:** Solid-state electrolyte batteries are expected to replace liquid electrolyte lithium-ion batteries in the near future thanks to their higher theoretical energy density and improved safety. However, their adoption is currently hindered by their lower effective ionic conductivity, a quantity that governs charge and discharge rates. Identifying highly ion-conductive materials using conventional theoretical calculations and experimental validation is both time-consuming and resource-intensive. While machine learning holds the promise to expedite this process, relevant ionic conductivity and structural data is scarce. Here, we present OBELiX, a domain-expert-curated database of $\sim$600 synthesized solid electrolyte materials and their experimentally measured room temperature ionic conductivities gathered from literature. Each material is described by their measured composition, space group and lattice parameters. A full-crystal description in the form of a crystallographic information file (CIF) is provided for ~320 structures for which atomic positions were available. We discuss various statistics and features of the dataset and provide training and testing splits that avoid data leakage. Finally, we benchmark seven existing ML models on the task of predicting ionic conductivity and discuss their performance. The goal of this work is to facilitate the use of machine learning for solid-state electrolyte materials discovery.
+
+**Comment:** Author match
+
+
+
+---
+
+## 2. [Learning from Reward-Free Offline Data: A Case for Planning with Latent Dynamics Models](https://arxiv.org/abs/2502.14819) <a id="link2"></a>
+
+**ArXiv ID:** 2502.14819
+
+**Authors:** Vlad Sobal, Wancong Zhang, Kynghyun Cho, Randall Balestriero, Tim G. J. Rudner, Yann LeCun
+
+**Abstract:** A long-standing goal in AI is to build agents that can solve a variety of tasks across different environments, including previously unseen ones. Two dominant approaches tackle this challenge: (i) reinforcement learning (RL), which learns policies through trial and error, and (ii) optimal control, which plans actions using a learned or known dynamics model. However, their relative strengths and weaknesses remain underexplored in the setting where agents must learn from offline trajectories without reward annotations. In this work, we systematically analyze the performance of different RL and control-based methods under datasets of varying quality. On the RL side, we consider goal-conditioned and zero-shot approaches. On the control side, we train a latent dynamics model using the Joint Embedding Predictive Architecture (JEPA) and use it for planning. We study how dataset properties-such as data diversity, trajectory quality, and environment variability-affect the performance of these approaches. Our results show that model-free RL excels when abundant, high-quality data is available, while model-based planning excels in generalization to novel environment layouts, trajectory stitching, and data-efficiency. Notably, planning with a latent dynamics model emerges as a promising approach for zero-shot generalization from suboptimal data.
+
+**Comment:** Author match
+
+
+
+---
+
+## 3. [Zero loss guarantees and explicit minimizers for generic overparametrized Deep Learning networks](https://arxiv.org/abs/2502.14114) <a id="link3"></a>
+
+**ArXiv ID:** 2502.14114
+
+**Authors:** Thomas Chen, Andrew G. Moore
+
+**Abstract:** We determine sufficient conditions for overparametrized deep learning (DL) networks to guarantee the attainability of zero loss in the context of supervised learning, for the $\mathcal{L}^2$ cost and {\em generic} training data. We present an explicit construction of the zero loss minimizers without invoking gradient descent. On the other hand, we point out that increase of depth can deteriorate the efficiency of cost minimization using a gradient descent algorithm by analyzing the conditions for rank loss of the training Jacobian. Our results clarify key aspects on the dichotomy between zero loss reachability in underparametrized versus overparametrized DL.
+
+**Comment:** The paper provides theoretical insights into overparameterized deep learning networks, focusing on zero loss guarantees and training dynamics, which aligns with the Representation Learning criterion.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 4. [Llamba: Scaling Distilled Recurrent Models for Efficient Language Processing](https://arxiv.org/abs/2502.14458) <a id="link4"></a>
+
+**ArXiv ID:** 2502.14458
+
+**Authors:** Aviv Bick, Tobias Katsch, Nimit Sohoni, Arjun Desai, Albert Gu
+
+**Abstract:** We introduce Llamba, a family of efficient recurrent language models distilled from Llama-3.x into the Mamba architecture. The series includes Llamba-1B, Llamba-3B, and Llamba-8B, which achieve higher inference throughput and handle significantly larger batch sizes than Transformer-based models while maintaining comparable benchmark performance. Furthermore, Llamba demonstrates the effectiveness of cross-architecture distillation using MOHAWK (Bick et al., 2024), achieving these results with less than 0.1% of the training data typically used for models of similar size. To take full advantage of their efficiency, we provide an optimized implementation of Llamba for resource-constrained devices such as smartphones and edge platforms, offering a practical and memory-efficient alternative to Transformers. Overall, Llamba improves the tradeoff between speed, memory efficiency, and performance, making high-quality language models more accessible.
+
+**Comment:** The paper presents a recurrent language model architecture optimized for efficiency, which aligns with the Model Architecture and Model Compression criteria.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 5. [Weighted Low-rank Approximation via Stochastic Gradient Descent on Manifolds](https://arxiv.org/abs/2502.14174) <a id="link5"></a>
+
+**ArXiv ID:** 2502.14174
+
+**Authors:** Conglong Xu, Peiqi Yang, Hao Wu
+
+**Abstract:** We solve a regularized weighted low-rank approximation problem by a stochastic gradient descent on a manifold. To guarantee the convergence of our stochastic gradient descent, we establish a convergence theorem on manifolds for retraction-based stochastic gradient descents admitting confinements. On sample data from the Netflix Prize training dataset, our algorithm outperforms the existing stochastic gradient descent on Euclidean spaces. We also compare the accelerated line search on this manifold to the existing accelerated line search on Euclidean spaces.
+
+**Comment:** The paper addresses weighted low-rank approximation using stochastic gradient descent on manifolds, which is relevant to model compression and efficiency.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 6. [Multiscale Byte Language Models -- A Hierarchical Architecture for Causal Million-Length Sequence Modeling](https://arxiv.org/abs/2502.14553) <a id="link6"></a>
+
+**ArXiv ID:** 2502.14553
+
+**Authors:** Eric Egli, Matteo Manica, Jannis Born
+
+**Abstract:** Bytes form the basis of the digital world and thus are a promising building block for multimodal foundation models. Recently, Byte Language Models (BLMs) have emerged to overcome tokenization, yet the excessive length of bytestreams requires new architectural paradigms. Therefore, we present the Multiscale Byte Language Model (MBLM), a model-agnostic hierarchical decoder stack that allows training with context windows of $5$M bytes on single GPU in full model precision. We thoroughly examine MBLM's performance with Transformer and Mamba blocks on both unimodal and multimodal tasks. Our experiments demonstrate that hybrid architectures are efficient in handling extremely long byte sequences during training while achieving near-linear generational efficiency. To the best of our knowledge, we present the first evaluation of BLMs on visual Q\&A tasks and find that, despite serializing images and the absence of an encoder, a MBLM with pure next token prediction can match custom CNN-LSTM architectures with designated classification heads. We show that MBLMs exhibit strong adaptability in integrating diverse data representations, including pixel and image filestream bytes, underlining their potential toward omnimodal foundation models. Source code is publicly available at: https://github.com/ai4sd/multiscale-byte-lm
+
+**Comment:** The paper introduces a hierarchical architecture for byte-level sequence modeling, which aligns with foundational research in model architecture and efficiency.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 7. [Determining Layer-wise Sparsity for Large Language Models Through a Theoretical Perspective](https://arxiv.org/abs/2502.14770) <a id="link7"></a>
+
+**ArXiv ID:** 2502.14770
+
+**Authors:** Weizhong Huang, Yuxin Zhang, Xiawu Zheng, Fei Chao, Rongrong Ji
+
+**Abstract:** In this paper, we address the challenge of determining the layer-wise sparsity rates of large language models (LLMs) through a theoretical perspective. Specifically, we identify a critical issue of ''$\textbf{reconstruction error explosion}$'' in existing LLMs sparsification methods. This refers to the cumulative effect of reconstruction errors throughout the sparsification process, where errors from earlier layers propagate and amplify in subsequent layers. As a result, the overall reconstruction error increases significantly, leading to a substantial degradation in model performance. Through theoretical analysis, we derive a simple yet effective approach to layer-wise sparsity allocation that mitigates this issue. Our method uses a monotonically increasing arithmetic progression, reducing the process of determining sparsity rates for multiple layers to the determination of a single common difference hyperparameter. Remarkably, this allows for the optimal layer-wise sparsity rates to be identified with just a few trials. Both our theoretical analysis and experimental results demonstrate that this sparsity allocation scheme is near optimal. Extensive experiments show that our method significantly improves the performance of sparse LLMs across various architectures, outperforming existing layer-wise sparsity methods. Furthermore, it enhances the performance of various compression techniques and is applicable to vision and multimodal models. Notably, our method achieves a reduction of 52.10 in perplexity for the 70$\%$ sparse LLaMA2-7B model obtained via Wanda, improves average zero-shot accuracy by 10.50$\%$, and delivers speedups of 2.63$\times$ and 2.23$\times$ on CPU and GPU, respectively.
+
+**Comment:** This paper addresses layer-wise sparsity in LLMs, providing a theoretical perspective and a novel sparsity allocation method. It directly aligns with model compression and efficiency breakthroughs.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 8. [Which Attention Heads Matter for In-Context Learning?](https://arxiv.org/abs/2502.14010) <a id="link8"></a>
+
+**ArXiv ID:** 2502.14010
+
+**Authors:** Kayo Yin, Jacob Steinhardt
+
+**Abstract:** Large language models (LLMs) exhibit impressive in-context learning (ICL) capability, enabling them to perform new tasks using only a few demonstrations in the prompt. Two different mechanisms have been proposed to explain ICL: induction heads that find and copy relevant tokens, and function vector (FV) heads whose activations compute a latent encoding of the ICL task. To better understand which of the two distinct mechanisms drives ICL, we study and compare induction heads and FV heads in 12 language models.   Through detailed ablations, we discover that few-shot ICL performance depends primarily on FV heads, especially in larger models. In addition, we uncover that FV and induction heads are connected: many FV heads start as induction heads during training before transitioning to the FV mechanism. This leads us to speculate that induction facilitates learning the more complex FV mechanism that ultimately drives ICL.
+
+**Comment:** This paper investigates the mechanisms behind in-context learning in LLMs, focusing on the role of specific attention heads. It provides theoretical insights into LLM behavior and training dynamics.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 9. [Understanding SGD with Exponential Moving Average: A Case Study in Linear Regression](https://arxiv.org/abs/2502.14123) <a id="link9"></a>
+
+**ArXiv ID:** 2502.14123
+
+**Authors:** Xuheng Li, Quanquan Gu
+
+**Abstract:** Exponential moving average (EMA) has recently gained significant popularity in training modern deep learning models, especially diffusion-based generative models. However, there have been few theoretical results explaining the effectiveness of EMA. In this paper, to better understand EMA, we establish the risk bound of online SGD with EMA for high-dimensional linear regression, one of the simplest overparameterized learning tasks that shares similarities with neural networks. Our results indicate that (i) the variance error of SGD with EMA is always smaller than that of SGD without averaging, and (ii) unlike SGD with iterate averaging from the beginning, the bias error of SGD with EMA decays exponentially in every eigen-subspace of the data covariance matrix. Additionally, we develop proof techniques applicable to the analysis of a broad class of averaging schemes.
+
+**Comment:** The paper provides theoretical insights into the effectiveness of Exponential Moving Average (EMA) in SGD, which aligns with the training dynamics in neural networks under representation learning.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 10. [Fundamental Limitations in Defending LLM Finetuning APIs](https://arxiv.org/abs/2502.14828) <a id="link10"></a>
+
+**ArXiv ID:** 2502.14828
+
+**Authors:** Xander Davies, Eric Winsor, Tomek Korbak, Alexandra Souly, Robert Kirk, Christian Schroeder de Witt, Yarin Gal
+
+**Abstract:** LLM developers have imposed technical interventions to prevent fine-tuning misuse attacks, attacks where adversaries evade safeguards by fine-tuning the model using a public API. Previous work has established several successful attacks against specific fine-tuning API defences. In this work, we show that defences of fine-tuning APIs that seek to detect individual harmful training or inference samples ('pointwise' detection) are fundamentally limited in their ability to prevent fine-tuning attacks. We construct 'pointwise-undetectable' attacks that repurpose entropy in benign model outputs (e.g. semantic or syntactic variations) to covertly transmit dangerous knowledge. Our attacks are composed solely of unsuspicious benign samples that can be collected from the model before fine-tuning, meaning training and inference samples are all individually benign and low-perplexity. We test our attacks against the OpenAI fine-tuning API, finding they succeed in eliciting answers to harmful multiple-choice questions, and that they evade an enhanced monitoring system we design that successfully detects other fine-tuning attacks. We encourage the community to develop defences that tackle the fundamental limitations we uncover in pointwise fine-tuning API defences.
+
+**Comment:** The paper discusses fundamental limitations in defending LLM fine-tuning APIs, providing theoretical insights into LLM security and robustness, which aligns with foundational research in LLM behavior.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 11. [Towards a Learning Theory of Representation Alignment](https://arxiv.org/abs/2502.14047) <a id="link11"></a>
+
+**ArXiv ID:** 2502.14047
+
+**Authors:** Francesco Insulla, Shuo Huang, Lorenzo Rosasco
+
+**Abstract:** It has recently been argued that AI models' representations are becoming aligned as their scale and performance increase. Empirical analyses have been designed to support this idea and conjecture the possible alignment of different representations toward a shared statistical model of reality. In this paper, we propose a learning-theoretic perspective to representation alignment. First, we review and connect different notions of alignment based on metric, probabilistic, and spectral ideas. Then, we focus on stitching, a particular approach to understanding the interplay between different representations in the context of a task. Our main contribution here is relating properties of stitching to the kernel alignment of the underlying representation. Our results can be seen as a first step toward casting representation alignment as a learning-theoretic problem.
+
+**Comment:** The paper provides a learning-theoretic perspective on representation alignment, which aligns closely with the 'Representation Learning' criterion, particularly in understanding how representations are encoded and aligned.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 12. [Towards Efficient Automatic Self-Pruning of Large Language Models](https://arxiv.org/abs/2502.14413) <a id="link12"></a>
+
+**ArXiv ID:** 2502.14413
+
+**Authors:** Weizhong Huang, Yuxin Zhang, Xiawu Zheng, Fei Chao, Rongrong Ji
+
+**Abstract:** Despite exceptional capabilities, Large Language Models (LLMs) still face deployment challenges due to their enormous size. Post-training structured pruning is a promising solution that prunes LLMs without the need for retraining, reducing computational overhead, and it is hardware-deployment friendly. However, the training-free nature of post-training structured pruning leads to significant performance degradation. We argue that the key to mitigating this issue lies in accurately determining the pruning rate for each layer. Meanwhile, we find that LLMs may have prior knowledge about their own redundancy. Based on this insight, we introduce $\textbf{Self-Pruner}$ an end-to-end automatic self-pruning framework for LLMs, which efficiently search layer-wise pruning rates. Specifically, $\textbf{Self-Pruner}$ leverages LLMs to autonomously execute the entire evolutionary search process to search for pruning rate configurations. In this process, LLMs are used to generate populations, select parent solutions from the current population, and perform crossover and mutation operations to produce offspring solutions. In this way, LLMs automatically generate and evaluate a large number of candidate solutions, effectively converging to find the pruning rate configurations with minimal human intervention. Extensive experiments demonstrate $\textbf{Self-Pruner}$'s better performance compared to existing state-of-the-art methods. Notably, $\textbf{Self-Pruner}$ prunes LLaMA-2-70B to 49B level with only 0.80$\%$ drop in accuracy across seven commonsense reasoning tasks, achieving a 1.39$\times$ speedup on NVIDIA A100 80GB GPU. Further pruning to 35B level resulted in only a 3.80$\%$ decrease in accuracy while obtaining a 1.70$\times$ speedup.
+
+**Comment:** The paper introduces an automatic self-pruning framework for LLMs, which aligns closely with the 'Model Compression' criterion, particularly in pruning and efficiency improvements.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 13. [PEARL: Towards Permutation-Resilient LLMs](https://arxiv.org/abs/2502.14628) <a id="link13"></a>
+
+**ArXiv ID:** 2502.14628
+
+**Authors:** Liang Chen, Li Shen, Yang Deng, Xiaoyan Zhao, Bin Liang, Kam-Fai Wong
+
+**Abstract:** The in-context learning (ICL) capability of large language models (LLMs) enables them to perform challenging tasks using provided demonstrations. However, ICL is highly sensitive to the ordering of demonstrations, leading to instability in predictions. This paper shows that this vulnerability can be exploited to design a natural attack - difficult for model providers to detect - that achieves nearly 80% success rate on LLaMA-3 by simply permuting the demonstrations. Existing mitigation methods primarily rely on post-processing and fail to enhance the model's inherent robustness to input permutations, raising concerns about safety and reliability of LLMs. To address this issue, we propose Permutation-resilient learning (PEARL), a novel framework based on distributionally robust optimization (DRO), which optimizes model performance against the worst-case input permutation. Specifically, PEARL consists of a permutation-proposal network (P-Net) and the LLM. The P-Net generates the most challenging permutations by treating it as an optimal transport problem, which is solved using an entropy-constrained Sinkhorn algorithm. Through minimax optimization, the P-Net and the LLM iteratively optimize against each other, progressively improving the LLM's robustness. Experiments on synthetic pre-training and real-world instruction tuning tasks demonstrate that PEARL effectively mitigates permutation attacks and enhances performance. Notably, despite being trained on fewer shots and shorter contexts, PEARL achieves performance gains of up to 40% when scaled to many-shot and long-context scenarios, highlighting its efficiency and generalization capabilities.
+
+**Comment:** The paper introduces PEARL, a novel framework for improving LLM robustness to input permutations using distributionally robust optimization. This aligns with foundational research in LLM behavior and training dynamics.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 14. [MaskPrune: Mask-based LLM Pruning for Layer-wise Uniform Structures](https://arxiv.org/abs/2502.14008) <a id="link14"></a>
+
+**ArXiv ID:** 2502.14008
+
+**Authors:** Jiayu Qin, Jianchao Tan, Kefeng Zhang, Xunliang Cai, Wei Wang
+
+**Abstract:** The remarkable performance of large language models (LLMs) in various language tasks has attracted considerable attention. However, the ever-increasing size of these models presents growing challenges for deployment and inference. Structured pruning, an effective model compression technique, is gaining increasing attention due to its ability to enhance inference efficiency. Nevertheless, most previous optimization-based structured pruning methods sacrifice the uniform structure across layers for greater flexibility to maintain performance. The heterogeneous structure hinders the effective utilization of off-the-shelf inference acceleration techniques and impedes efficient configuration for continued training. To address this issue, we propose a novel masking learning paradigm based on minimax optimization to obtain the uniform pruned structure by optimizing the masks under sparsity regularization. Extensive experimental results demonstrate that our method can maintain high performance while ensuring the uniformity of the pruned model structure, thereby outperforming existing SOTA methods.
+
+**Comment:** The MaskPrune method introduces a novel structured pruning approach for LLMs, focusing on uniformity across layers, which is highly relevant to model compression.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 15. [Ray-Tracing for Conditionally Activated Neural Networks](https://arxiv.org/abs/2502.14788) <a id="link15"></a>
+
+**ArXiv ID:** 2502.14788
+
+**Authors:** Claudio Gallicchio, Giuseppe Nuti
+
+**Abstract:** In this paper, we introduce a novel architecture for conditionally activated neural networks combining a hierarchical construction of multiple Mixture of Experts (MoEs) layers with a sampling mechanism that progressively converges to an optimized configuration of expert activation. This methodology enables the dynamic unfolding of the network's architecture, facilitating efficient path-specific training. Experimental results demonstrate that this approach achieves competitive accuracy compared to conventional baselines while significantly reducing the parameter count required for inference. Notably, this parameter reduction correlates with the complexity of the input patterns, a property naturally emerging from the network's operational dynamics without necessitating explicit auxiliary penalty functions.
+
+**Comment:** This paper introduces a novel hierarchical Mixture of Experts (MoE) architecture with dynamic activation, which is highly relevant to model architecture innovations and efficiency improvements.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 16. [RocketKV: Accelerating Long-Context LLM Inference via Two-Stage KV Cache Compression](https://arxiv.org/abs/2502.14051) <a id="link16"></a>
+
+**ArXiv ID:** 2502.14051
+
+**Authors:** Payman Behnam, Yaosheng Fu, Ritchie Zhao, Po-An Tsai, Zhiding Yu, Alexey Tumanov
+
+**Abstract:** Transformer-based Large Language Models rely critically on KV cache to efficiently handle extended contexts during the decode phase. Yet, the size of the KV cache grows proportionally with the input length, burdening both memory bandwidth and capacity as decoding progresses. To address this challenge, we present RocketKV, a training-free KV cache compression strategy designed specifically to reduce both memory bandwidth and capacity demand of KV cache during the decode phase. RocketKV contains two consecutive stages. In the first stage, it performs coarse-grain KV cache eviction on the input sequence tokens with SnapKV++, a method improved upon SnapKV by introducing adaptive pooling size and full compatibility with grouped-query attention. In the second stage, it adopts a hybrid attention method to conduct fine-grain top-k sparse attention, approximating the attention scores by leveraging both head and sequence dimensional reductions. Combining these two stages, RocketKV achieves significant KV cache fetching bandwidth and storage savings while maintaining comparable accuracy to full KV cache attention. We show that RocketKV provides end-to-end speedup by up to 3$\times$ as well as peak memory reduction by up to 31% in the decode phase on an NVIDIA H100 GPU compared to the full KV cache baseline, while achieving negligible accuracy loss on a variety of long-context tasks.
+
+**Comment:** The paper introduces a two-stage KV cache compression strategy for LLMs, which is highly relevant to model compression and efficiency improvements in large language models.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 17. [Towards Economical Inference: Enabling DeepSeek's Multi-Head Latent Attention in Any Transformer-based LLMs](https://arxiv.org/abs/2502.14837) <a id="link17"></a>
+
+**ArXiv ID:** 2502.14837
+
+**Authors:** Tao Ji, Bin Guo, Yuanbin Wu, Qipeng Guo, Lixing Shen, Zhan Chen, Xipeng Qiu, Qi Zhang, Tao Gui
+
+**Abstract:** Multi-head Latent Attention (MLA) is an innovative architecture proposed by DeepSeek, designed to ensure efficient and economical inference by significantly compressing the Key-Value (KV) cache into a latent vector. Compared to MLA, standard LLMs employing Multi-Head Attention (MHA) and its variants such as Grouped-Query Attention (GQA) exhibit significant cost disadvantages. Enabling well-trained LLMs (e.g., Llama) to rapidly adapt to MLA without pre-training from scratch is both meaningful and challenging. This paper proposes the first data-efficient fine-tuning method for transitioning from MHA to MLA (MHA2MLA), which includes two key components: for partial-RoPE, we remove RoPE from dimensions of queries and keys that contribute less to the attention scores, for low-rank approximation, we introduce joint SVD approximations based on the pre-trained parameters of keys and values. These carefully designed strategies enable MHA2MLA to recover performance using only a small fraction (0.3% to 0.6%) of the data, significantly reducing inference costs while seamlessly integrating with compression techniques such as KV cache quantization. For example, the KV cache size of Llama2-7B is reduced by 92.19%, with only a 0.5% drop in LongBench performance.
+
+**Comment:** The paper introduces Multi-head Latent Attention (MLA) and proposes a novel fine-tuning method for transitioning from MHA to MLA, which aligns with the Model Compression criterion due to its focus on KV cache compression and efficiency.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 18. [Dynamic Low-Rank Sparse Adaptation for Large Language Models](https://arxiv.org/abs/2502.14816) <a id="link18"></a>
+
+**ArXiv ID:** 2502.14816
+
+**Authors:** Weizhong Huang, Yuxin Zhang, Xiawu Zheng, Yang Liu, Jing Lin, Yiwu Yao, Rongrong Ji
+
+**Abstract:** Despite the efficacy of network sparsity in alleviating the deployment strain of Large Language Models (LLMs), it endures significant performance degradation. Applying Low-Rank Adaptation (LoRA) to fine-tune the sparse LLMs offers an intuitive approach to counter this predicament, while it holds shortcomings include: 1) The inability to integrate LoRA weights into sparse LLMs post-training, and 2) Insufficient performance recovery at high sparsity ratios. In this paper, we introduce dynamic Low-rank Sparse Adaptation (LoSA), a novel method that seamlessly integrates low-rank adaptation into LLM sparsity within a unified framework, thereby enhancing the performance of sparse LLMs without increasing the inference latency. In particular, LoSA dynamically sparsifies the LoRA outcomes based on the corresponding sparse weights during fine-tuning, thus guaranteeing that the LoRA module can be integrated into the sparse LLMs post-training. Besides, LoSA leverages Representation Mutual Information (RMI) as an indicator to determine the importance of layers, thereby efficiently determining the layer-wise sparsity rates during fine-tuning. Predicated on this, LoSA adjusts the rank of the LoRA module based on the variability in layer-wise reconstruction errors, allocating an appropriate fine-tuning for each layer to reduce the output discrepancies between dense and sparse LLMs. Extensive experiments tell that LoSA can efficiently boost the efficacy of sparse LLMs within a few hours, without introducing any additional inferential burden. For example, LoSA reduced the perplexity of sparse LLaMA-2-7B by 68.73 and increased zero-shot accuracy by 16.32$\%$, achieving a 2.60$\times$ speedup on CPU and 2.23$\times$ speedup on GPU, requiring only 45 minutes of fine-tuning on a single NVIDIA A100 80GB GPU. Code is available at https://github.com/wzhuang-xmu/LoSA.
+
+**Comment:** Presents a novel method for integrating low-rank adaptation with sparsity in LLMs, addressing efficiency and performance degradation. This aligns closely with model compression and sparsity criteria.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 19. [LServe: Efficient Long-sequence LLM Serving with Unified Sparse Attention](https://arxiv.org/abs/2502.14866) <a id="link19"></a>
+
+**ArXiv ID:** 2502.14866
+
+**Authors:** Shang Yang, Junxian Guo, Haotian Tang, Qinghao Hu, Guangxuan Xiao, Jiaming Tang, Yujun Lin, Zhijian Liu, Yao Lu, Song Han
+
+**Abstract:** Large language models (LLMs) have shown remarkable potential in processing long sequences, yet efficiently serving these long-context models remains challenging due to the quadratic computational complexity of attention in the prefilling stage and the large memory footprint of the KV cache in the decoding stage. To address these issues, we introduce LServe, an efficient system that accelerates long-sequence LLM serving via hybrid sparse attention. This method unifies different hardware-friendly, structured sparsity patterns for both prefilling and decoding attention into a single framework, where computations on less important tokens are skipped block-wise. LServe demonstrates the compatibility of static and dynamic sparsity in long-context LLM attention. This design enables multiplicative speedups by combining these optimizations. Specifically, we convert half of the attention heads to nearly free streaming heads in both the prefilling and decoding stages. Additionally, we find that only a constant number of KV pages is required to preserve long-context capabilities, irrespective of context length. We then design a hierarchical KV page selection policy that dynamically prunes KV pages based on query-centric similarity. On average, LServe accelerates LLM prefilling by up to 2.9x and decoding by 1.3-2.1x over vLLM, maintaining long-context accuracy. Code is released at https://github.com/mit-han-lab/omniserve.
+
+**Comment:** Proposes a unified sparse attention framework for efficient LLM serving, addressing both computational and memory efficiency. This aligns well with model compression and sparsity criteria.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 20. [Confidence Estimation via Sequential Likelihood Mixing](https://arxiv.org/abs/2502.14689) <a id="link20"></a>
+
+**ArXiv ID:** 2502.14689
+
+**Authors:** Johannes Kirschner, Andreas Krause, Michele Meziu, Mojmir Mutny
+
+**Abstract:** We present a universal framework for constructing confidence sets based on sequential likelihood mixing. Building upon classical results from sequential analysis, we provide a unifying perspective on several recent lines of work, and establish fundamental connections between sequential mixing, Bayesian inference and regret inequalities from online estimation. The framework applies to any realizable family of likelihood functions and allows for non-i.i.d. data and anytime validity. Moreover, the framework seamlessly integrates standard approximate inference techniques, such as variational inference and sampling-based methods, and extends to misspecified model classes, while preserving provable coverage guarantees. We illustrate the power of the framework by deriving tighter confidence sequences for classical settings, including sequential linear regression and sparse estimation, with simplified proofs.
+
+**Comment:** The paper provides a framework for constructing confidence sets with theoretical insights, which aligns with foundational research in emerging trends.
+
+**Relevance:** 8
+**Novelty:** 8
+
+---
+
+## 21. [Generalization Error of $f$-Divergence Stabilized Algorithms via Duality](https://arxiv.org/abs/2502.14544) <a id="link21"></a>
+
+**ArXiv ID:** 2502.14544
+
+**Authors:** Francisco Daunas, I\~naki Esnaola, Samir M. Perlaza, Gholamali Aminian
+
+**Abstract:** The solution to empirical risk minimization with $f$-divergence regularization (ERM-$f$DR) is extended to constrained optimization problems, establishing conditions for equivalence between the solution and constraints. A dual formulation of ERM-$f$DR is introduced, providing a computationally efficient method to derive the normalization function of the ERM-$f$DR solution. This dual approach leverages the Legendre-Fenchel transform and the implicit function theorem, enabling explicit characterizations of the generalization error for general algorithms under mild conditions, and another for ERM-$f$DR solutions.
+
+**Comment:** The paper explores generalization error with $f$-divergence regularization, providing theoretical insights into optimization, which aligns with foundational research in representation learning.
+
+**Relevance:** 8
+**Novelty:** 8
+
+---
+
+## 22. [A Theory for Conditional Generative Modeling on Multiple Data Sources](https://arxiv.org/abs/2502.14583) <a id="link22"></a>
+
+**ArXiv ID:** 2502.14583
+
+**Authors:** Rongzhen Wang, Yan Zhang, Chenyu Zheng, Chongxuan Li, Guoqiang Wu
+
+**Abstract:** The success of large generative models has driven a paradigm shift, leveraging massive multi-source data to enhance model capabilities. However, the interaction among these sources remains theoretically underexplored. This paper takes the first step toward a rigorous analysis of multi-source training in conditional generative modeling, where each condition represents a distinct data source. Specifically, we establish a general distribution estimation error bound in average total variation distance for conditional maximum likelihood estimation based on the bracketing number. Our result shows that when source distributions share certain similarities and the model is expressive enough, multi-source training guarantees a sharper bound than single-source training. We further instantiate the general theory on conditional Gaussian estimation and deep generative models including autoregressive and flexible energy-based models, by characterizing their bracketing numbers. The results highlight that the number of sources and similarity among source distributions improve the advantage of multi-source training. Simulations and real-world experiments validate our theory. Code is available at: \url{https://github.com/ML-GSAI/Multi-Source-GM}.
+
+**Comment:** The theoretical analysis of multi-source training in conditional generative modeling provides foundational insights into generative model training dynamics.
+
+**Relevance:** 8
+**Novelty:** 8
+
+---
+
+## 23. [A Non-Asymptotic Theory of Seminorm Lyapunov Stability: From Deterministic to Stochastic Iterative Algorithms](https://arxiv.org/abs/2502.14208) <a id="link23"></a>
+
+**ArXiv ID:** 2502.14208
+
+**Authors:** Zaiwei Chen, Sheng Zhang, Zhe Zhang, Shaan Ul Haque, Siva Theja Maguluri
+
+**Abstract:** We study the problem of solving fixed-point equations for seminorm-contractive operators and establish foundational results on the non-asymptotic behavior of iterative algorithms in both deterministic and stochastic settings. Specifically, in the deterministic setting, we prove a fixed-point theorem for seminorm-contractive operators, showing that iterates converge geometrically to the kernel of the seminorm. In the stochastic setting, we analyze the corresponding stochastic approximation (SA) algorithm under seminorm-contractive operators and Markovian noise, providing a finite-sample analysis for various stepsize choices.   A benchmark for equation solving is linear systems of equations, where the convergence behavior of fixed-point iteration is closely tied to the stability of linear dynamical systems. In this special case, our results provide a complete characterization of system stability with respect to a seminorm, linking it to the solution of a Lyapunov equation in terms of positive semi-definite matrices. In the stochastic setting, we establish a finite-sample analysis for linear Markovian SA without requiring the Hurwitzness assumption.   Our theoretical results offer a unified framework for deriving finite-sample bounds for various reinforcement learning algorithms in the average reward setting, including TD($\lambda$) for policy evaluation (which is a special case of solving a Poisson equation) and Q-learning for control.
+
+**Comment:** The paper provides a theoretical framework for seminorm-contractive operators and iterative algorithms, which aligns with the Emerging Trends criterion due to its foundational theoretical contributions.
+
+**Relevance:** 8
+**Novelty:** 8
+
+---
+
+## 24. [Generalization Certificates for Adversarially Robust Bayesian Linear Regression](https://arxiv.org/abs/2502.14298) <a id="link24"></a>
+
+**ArXiv ID:** 2502.14298
+
+**Authors:** Mahalakshmi Sabanayagam, Russell Tsuchida, Cheng Soon Ong, Debarghya Ghoshdastidar
+
+**Abstract:** Adversarial robustness of machine learning models is critical to ensuring reliable performance under data perturbations. Recent progress has been on point estimators, and this paper considers distributional predictors. First, using the link between exponential families and Bregman divergences, we formulate an adversarial Bregman divergence loss as an adversarial negative log-likelihood. Using the geometric properties of Bregman divergences, we compute the adversarial perturbation for such models in closed-form. Second, under such losses, we introduce \emph{adversarially robust posteriors}, by exploiting the optimization-centric view of generalized Bayesian inference. Third, we derive the \emph{first} rigorous generalization certificates in the context of an adversarial extension of Bayesian linear regression by leveraging the PAC-Bayesian framework. Finally, experiments on real and synthetic datasets demonstrate the superior robustness of the derived adversarially robust posterior over Bayes posterior, and also validate our theoretical guarantees.
+
+**Comment:** The paper introduces adversarially robust Bayesian linear regression and provides theoretical guarantees, aligning with the Emerging Trends criterion due to its foundational contributions to robustness in machine learning.
+
+**Relevance:** 8
+**Novelty:** 8
+
+---
+
+## 25. [FR-Spec: Accelerating Large-Vocabulary Language Models via Frequency-Ranked Speculative Sampling](https://arxiv.org/abs/2502.14856) <a id="link25"></a>
+
+**ArXiv ID:** 2502.14856
+
+**Authors:** Weilin Zhao, Tengyu Pan, Xu Han, Yudi Zhang, Ao Sun, Yuxiang Huang, Kaihuo Zhang, Weilun Zhao, Yuxuan Li, Jianyong Wang, Zhiyuan Liu, Maosong Sun
+
+**Abstract:** Speculative sampling has emerged as an important technique for accelerating the auto-regressive generation process of large language models (LLMs) by utilizing a draft-then-verify mechanism to produce multiple tokens per forward pass. While state-of-the-art speculative sampling methods use only a single layer and a language modeling (LM) head as the draft model to achieve impressive layer compression, their efficiency gains are substantially reduced for large-vocabulary LLMs, such as Llama-3-8B with a vocabulary of 128k tokens. To address this, we present FR-Spec, a frequency-ranked speculative sampling framework that optimizes draft candidate selection through vocabulary space compression. By constraining the draft search to a frequency-prioritized token subset, our method reduces LM Head computation overhead by 75% while ensuring the equivalence of the final output distribution. Experiments across multiple datasets demonstrate an average of 1.12$\times$ speedup over the state-of-the-art speculative sampling method EAGLE-2.
+
+**Comment:** The paper proposes a speculative sampling framework for LLMs, focusing on efficiency improvements, which aligns with the Model Compression criterion.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 26. [seqKAN: Sequence processing with Kolmogorov-Arnold Networks](https://arxiv.org/abs/2502.14681) <a id="link26"></a>
+
+**ArXiv ID:** 2502.14681
+
+**Authors:** Tatiana Boura, Stasinos Konstantopoulos
+
+**Abstract:** Kolmogorov-Arnold Networks (KANs) have been recently proposed as a machine learning framework that is more interpretable and controllable than the multi-layer perceptron. Various network architectures have been proposed within the KAN framework targeting different tasks and application domains, including sequence processing.   This paper proposes seqKAN, a new KAN architecture for sequence processing. Although multiple sequence processing KAN architectures have already been proposed, we argue that seqKAN is more faithful to the core concept of the KAN framework. Furthermore, we empirically demonstrate that it achieves better results.   The empirical evaluation is performed on generated data from a complex physics problem on an interpolation and an extrapolation task. Using this dataset we compared seqKAN against a prior KAN network for timeseries prediction, recurrent deep networks, and symbolic regression. seqKAN substantially outperforms all architectures, particularly on the extrapolation dataset, while also being the most transparent.
+
+**Comment:** The paper introduces a new architecture for sequence processing based on Kolmogorov-Arnold Networks, which aligns with the Model Architecture criterion.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 27. [Data-Efficient Pretraining with Group-Level Data Influence Modeling](https://arxiv.org/abs/2502.14709) <a id="link27"></a>
+
+**ArXiv ID:** 2502.14709
+
+**Authors:** Zichun Yu, Fei Peng, Jie Lei, Arnold Overwijk, Wen-tau Yih, Chenyan Xiong
+
+**Abstract:** Data-efficient pretraining has shown tremendous potential to elevate scaling laws. This paper argues that effective pretraining data should be curated at the group level, treating a set of data points as a whole rather than as independent contributors. To achieve that, we propose Group-Level Data Influence Modeling (Group-MATES), a novel data-efficient pretraining method that captures and optimizes group-level data utility. Specifically, Group-MATES collects oracle group-level influences by locally probing the pretraining model with data sets. It then fine-tunes a relational data influence model to approximate oracles as relationship-weighted aggregations of individual influences. The fine-tuned model selects the data subset by maximizing its group-level influence prediction, with influence-aware clustering to enable efficient inference. Experiments on the DCLM benchmark demonstrate that Group-MATES achieves a 10% relative core score improvement on 22 downstream tasks over DCLM-Baseline and 5% over individual-influence-based methods, establishing a new state-of-the-art. Further analyses highlight the effectiveness of relational data influence models in capturing intricate interactions between data points.
+
+**Comment:** The paper introduces a novel data-efficient pretraining method, which aligns with foundational research in representation learning and data utility modeling.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 28. [Multi-Faceted Studies on Data Poisoning can Advance LLM Development](https://arxiv.org/abs/2502.14182) <a id="link28"></a>
+
+**ArXiv ID:** 2502.14182
+
+**Authors:** Pengfei He, Yue Xing, Han Xu, Zhen Xiang, Jiliang Tang
+
+**Abstract:** The lifecycle of large language models (LLMs) is far more complex than that of traditional machine learning models, involving multiple training stages, diverse data sources, and varied inference methods. While prior research on data poisoning attacks has primarily focused on the safety vulnerabilities of LLMs, these attacks face significant challenges in practice. Secure data collection, rigorous data cleaning, and the multistage nature of LLM training make it difficult to inject poisoned data or reliably influence LLM behavior as intended. Given these challenges, this position paper proposes rethinking the role of data poisoning and argue that multi-faceted studies on data poisoning can advance LLM development. From a threat perspective, practical strategies for data poisoning attacks can help evaluate and address real safety risks to LLMs. From a trustworthiness perspective, data poisoning can be leveraged to build more robust LLMs by uncovering and mitigating hidden biases, harmful outputs, and hallucinations. Moreover, from a mechanism perspective, data poisoning can provide valuable insights into LLMs, particularly the interplay between data and model behavior, driving a deeper understanding of their underlying mechanisms.
+
+**Comment:** The paper discusses data poisoning in the context of LLMs, offering insights into data-model interactions, which aligns with foundational research in LLM behavior.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 29. [Prompt-to-Leaderboard](https://arxiv.org/abs/2502.14855) <a id="link29"></a>
+
+**ArXiv ID:** 2502.14855
+
+**Authors:** Evan Frick, Connor Chen, Joseph Tennyson, Tianle Li, Wei-Lin Chiang, Anastasios N. Angelopoulos, Ion Stoica
+
+**Abstract:** Large language model (LLM) evaluations typically rely on aggregated metrics like accuracy or human preference, averaging across users and prompts. This averaging obscures user- and prompt-specific variations in model performance. To address this, we propose Prompt-to-Leaderboard (P2L), a method that produces leaderboards specific to a prompt. The core idea is to train an LLM taking natural language prompts as input to output a vector of Bradley-Terry coefficients which are then used to predict the human preference vote. The resulting prompt-dependent leaderboards allow for unsupervised task-specific evaluation, optimal routing of queries to models, personalization, and automated evaluation of model strengths and weaknesses. Data from Chatbot Arena suggest that P2L better captures the nuanced landscape of language model performance than the averaged leaderboard. Furthermore, our findings suggest that P2L's ability to produce prompt-specific evaluations follows a power law scaling similar to that observed in LLMs themselves. In January 2025, the router we trained based on this methodology achieved the \#1 spot in the Chatbot Arena leaderboard. Our code is available at this GitHub link: https://github.com/lmarena/p2l.
+
+**Comment:** The paper introduces a method for prompt-specific evaluation of LLMs, which aligns with foundational research in LLM behavior and evaluation.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 30. [CER: Confidence Enhanced Reasoning in LLMs](https://arxiv.org/abs/2502.14634) <a id="link30"></a>
+
+**ArXiv ID:** 2502.14634
+
+**Authors:** Ali Razghandi, Seyed Mohammad Hadi Hosseini, Mahdieh Soleymani Baghshah
+
+**Abstract:** Ensuring the reliability of Large Language Models (LLMs) in complex reasoning tasks remains a formidable challenge, particularly in scenarios that demand precise mathematical calculations and knowledge-intensive open-domain generation. In this work, we introduce an uncertainty-aware framework designed to enhance the accuracy of LLM responses by systematically incorporating model confidence at critical decision points. We propose an approach that encourages multi-step reasoning in LLMs and quantify the confidence of intermediate answers such as numerical results in mathematical reasoning and proper nouns in open-domain generation. Then, the overall confidence of each reasoning chain is evaluated based on confidence of these critical intermediate steps. Finally, we aggregate the answer of generated response paths in a way that reflects the reliability of each generated content (as opposed to self-consistency in which each generated chain contributes equally to majority voting). We conducted extensive experiments in five datasets, three mathematical datasets and two open-domain datasets, using four LLMs. The results consistently validate the effectiveness of our novel confidence aggregation method, leading to an accuracy improvement of up to 7.4% and 5.8% over baseline approaches in math and open-domain generation tasks, respectively. Code is publicly available at https://github.com/ Aquasar11/CER.
+
+**Comment:** The paper proposes a confidence-aware reasoning framework for LLMs, which aligns with foundational research in LLM behavior and reasoning.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 31. [Affinity and Diversity: A Unified Metric for Demonstration Selection via Internal Representations](https://arxiv.org/abs/2502.14380) <a id="link31"></a>
+
+**ArXiv ID:** 2502.14380
+
+**Authors:** Mariko Kato, Hakaze Cho, Yoshihiro Sakai, Naoya Inoue
+
+**Abstract:** The performance of In-Context Learning (ICL) is highly sensitive to the selected demonstrations. Existing approaches to demonstration selection optimize different objectives, yielding inconsistent results. To address this, we propose a unified metric--affinity and diversity--that leverages ICL model's internal representations. Our experiments show that both affinity and diversity strongly correlate with test accuracies, indicating their effectiveness for demonstration selection. Moreover, we show that our proposed metrics align well with various previous works to unify the inconsistency.
+
+**Comment:** The paper proposes a unified metric for demonstration selection in in-context learning, leveraging internal representations. This aligns with representation learning and provides insights into ICL dynamics.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 32. [Capturing Nuanced Preferences: Preference-Aligned Distillation for Small Language Models](https://arxiv.org/abs/2502.14272) <a id="link32"></a>
+
+**ArXiv ID:** 2502.14272
+
+**Authors:** Yanggan Gu, Junzhuo Li, Sirui Huang, Xin Zou, Zhenghua Li, Xuming Hu
+
+**Abstract:** Aligning small language models (SLMs) with human values typically involves distilling preference knowledge from large language models (LLMs). However, existing distillation methods model preference knowledge in teacher LLMs by comparing pairwise responses, overlooking the extent of difference between responses. This limitation hinders student SLMs from capturing the nuanced preferences for multiple responses. In this paper, we propose a Preference-Aligned Distillation (PAD) framework, which models teacher's preference knowledge as a probability distribution over all potential preferences, thereby providing more nuanced supervisory signals. Our insight in developing PAD is rooted in the demonstration that language models can serve as reward functions, reflecting their intrinsic preferences. Based on this, PAD comprises three key steps: (1) sampling diverse responses using high-temperature; (2) computing rewards for both teacher and student to construct their intrinsic preference; and (3) training the student's intrinsic preference distribution to align with the teacher's. Experiments on four mainstream alignment benchmarks demonstrate that PAD consistently and significantly outperforms existing approaches, achieving over 20\% improvement on AlpacaEval 2 and Arena-Hard, indicating superior alignment with human preferences. Notably, on MT-Bench, using the \textsc{Gemma} model family, the student trained by PAD surpasses its teacher, further validating the effectiveness of our PAD.
+
+**Comment:** The paper introduces a nuanced distillation framework for aligning small language models with human preferences, which aligns with foundational improvements in LLM training.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 33. [PLPHP: Per-Layer Per-Head Vision Token Pruning for Efficient Large Vision-Language Models](https://arxiv.org/abs/2502.14504) <a id="link33"></a>
+
+**ArXiv ID:** 2502.14504
+
+**Authors:** Yu Meng, Kaiyuan Li, Chenran Huang, Chen Gao, Xinlei Chen, Yong Li, Xiaoping Zhang
+
+**Abstract:** Large Vision-Language Models (LVLMs) have demonstrated remarkable capabilities across a range of multimodal tasks. However, their inference efficiency is constrained by the large number of visual tokens processed during decoding. To address this challenge, we propose Per-Layer Per-Head Vision Token Pruning (PLPHP), a two-level fine-grained pruning method including Layer-Level Retention Rate Allocation and Head-Level Vision Token Pruning. Motivated by the Vision Token Re-attention phenomenon across decoder layers, we dynamically adjust token retention rates layer by layer. Layers that exhibit stronger attention to visual information preserve more vision tokens, while layers with lower vision attention are aggressively pruned. Furthermore, PLPHP applies pruning at the attention head level, enabling different heads within the same layer to independently retain critical context. Experiments on multiple benchmarks demonstrate that PLPHP delivers an 18% faster decoding speed and reduces the Key-Value Cache (KV Cache) size by over 50%, all at the cost of 0.46% average performance drop, while also achieving notable performance improvements in multi-image tasks. These results highlight the effectiveness of fine-grained token pruning and contribute to advancing the efficiency and scalability of LVLMs. Our source code will be made publicly available.
+
+**Comment:** The paper proposes a fine-grained token pruning method for large vision-language models, which aligns with model compression and efficiency improvements.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 34. [From RAG to Memory: Non-Parametric Continual Learning for Large Language Models](https://arxiv.org/abs/2502.14802) <a id="link34"></a>
+
+**ArXiv ID:** 2502.14802
+
+**Authors:** Bernal Jim\'enez Guti\'errez, Yiheng Shu, Weijian Qi, Sizhe Zhou, Yu Su
+
+**Abstract:** Our ability to continuously acquire, organize, and leverage knowledge is a key feature of human intelligence that AI systems must approximate to unlock their full potential. Given the challenges in continual learning with large language models (LLMs), retrieval-augmented generation (RAG) has become the dominant way to introduce new information. However, its reliance on vector retrieval hinders its ability to mimic the dynamic and interconnected nature of human long-term memory. Recent RAG approaches augment vector embeddings with various structures like knowledge graphs to address some of these gaps, namely sense-making and associativity. However, their performance on more basic factual memory tasks drops considerably below standard RAG. We address this unintended deterioration and propose HippoRAG 2, a framework that outperforms standard RAG comprehensively on factual, sense-making, and associative memory tasks. HippoRAG 2 builds upon the Personalized PageRank algorithm used in HippoRAG and enhances it with deeper passage integration and more effective online use of an LLM. This combination pushes this RAG system closer to the effectiveness of human long-term memory, achieving a 7% improvement in associative memory tasks over the state-of-the-art embedding model while also exhibiting superior factual knowledge and sense-making memory capabilities. This work paves the way for non-parametric continual learning for LLMs. Our code and data will be released at https://github.com/OSU-NLP-Group/HippoRAG.
+
+**Comment:** The paper introduces a novel framework for non-parametric continual learning in LLMs, which aligns with the 'Large Language Models' criterion, particularly in advancing memory and retrieval mechanisms.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 35. [Disentangled Latent Spaces for Reduced Order Models using Deterministic Autoencoders](https://arxiv.org/abs/2502.14679) <a id="link35"></a>
+
+**ArXiv ID:** 2502.14679
+
+**Authors:** Henning Schwarz, Pyei Phyo Lin, Jens-Peter M. Zemke, Thomas Rung
+
+**Abstract:** Data-driven reduced-order models based on autoencoders generally lack interpretability compared to classical methods such as the proper orthogonal decomposition. More interpretability can be gained by disentangling the latent variables and analyzing the resulting modes. For this purpose, probabilistic $\beta$-variational autoencoders ($\beta$-VAEs) are frequently used in computational fluid dynamics and other simulation sciences. Using a benchmark periodic flow dataset, we show that competitive results can be achieved using non-probabilistic autoencoder approaches that either promote orthogonality or penalize correlation between latent variables. Compared to probabilistic autoencoders, these approaches offer more robustness with respect to the choice of hyperparameters entering the loss function. We further demonstrate the ability of a non-probabilistic approach to identify a reduced number of active latent variables by introducing a correlation penalty, a function also known from the use of $\beta$-VAE. The investigated probabilistic and non-probabilistic autoencoder models are finally used for the dimensionality reduction of aircraft ditching loads, which serves as an industrial application in this work.
+
+**Comment:** The paper explores disentangled latent spaces using deterministic autoencoders, which aligns with the 'Representation Learning' criterion, particularly in feature learning and interpretability.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 36. [Does Time Have Its Place? Temporal Heads: Where Language Models Recall Time-specific Information](https://arxiv.org/abs/2502.14258) <a id="link36"></a>
+
+**ArXiv ID:** 2502.14258
+
+**Authors:** Yein Park, Chanwoong Yoon, Jungwoo Park, Minbyul Jeong, Jaewoo Kang
+
+**Abstract:** While the ability of language models to elicit facts has been widely investigated, how they handle temporally changing facts remains underexplored. We discover Temporal Heads, specific attention heads primarily responsible for processing temporal knowledge through circuit analysis. We confirm that these heads are present across multiple models, though their specific locations may vary, and their responses differ depending on the type of knowledge and its corresponding years. Disabling these heads degrades the model's ability to recall time-specific knowledge while maintaining its general capabilities without compromising time-invariant and question-answering performances. Moreover, the heads are activated not only numeric conditions ("In 2004") but also textual aliases ("In the year ..."), indicating that they encode a temporal dimension beyond simple numerical representation. Furthermore, we expand the potential of our findings by demonstrating how temporal knowledge can be edited by adjusting the values of these heads.
+
+**Comment:** The discovery of Temporal Heads in LLMs and their role in encoding temporal knowledge provides insights into model interpretability and internal representation learning.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 37. [Reward Models Identify Consistency, Not Causality](https://arxiv.org/abs/2502.14619) <a id="link37"></a>
+
+**ArXiv ID:** 2502.14619
+
+**Authors:** Yuhui Xu, Hanze Dong, Lei Wang, Caiming Xiong, Junnan Li
+
+**Abstract:** Reward models (RMs) play a crucial role in aligning large language models (LLMs) with human preferences and enhancing reasoning quality. Traditionally, RMs are trained to rank candidate outputs based on their correctness and coherence. However, in this work, we present several surprising findings that challenge common assumptions about RM behavior. Our analysis reveals that state-of-the-art reward models prioritize structural consistency over causal correctness. Specifically, removing the problem statement has minimal impact on reward scores, whereas altering numerical values or disrupting the reasoning flow significantly affects RM outputs. Furthermore, RMs exhibit a strong dependence on complete reasoning trajectories truncated or incomplete steps lead to significant variations in reward assignments, indicating that RMs primarily rely on learned reasoning patterns rather than explicit problem comprehension. These findings hold across multiple architectures, datasets, and tasks, leading to three key insights: (1) RMs primarily assess coherence rather than true reasoning quality; (2) The role of explicit problem comprehension in reward assignment is overstated; (3) Current RMs may be more effective at ranking responses than verifying logical validity. Our results suggest a fundamental limitation in existing reward modeling approaches, emphasizing the need for a shift toward causality-aware reward models that go beyond consistency-driven evaluation.
+
+**Comment:** The analysis of reward models prioritizing structural consistency over causal correctness provides theoretical insights into LLM alignment and reasoning quality.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 38. [HPS: Hard Preference Sampling for Human Preference Alignment](https://arxiv.org/abs/2502.14400) <a id="link38"></a>
+
+**ArXiv ID:** 2502.14400
+
+**Authors:** Xiandong Zou, Wanyu Lin, Yuchen Li, Pan Zhou
+
+**Abstract:** Aligning Large Language Model (LLM) responses with human preferences is vital for building safe and controllable AI systems. While preference optimization methods based on Plackett-Luce (PL) and Bradley-Terry (BT) models have shown promise, they face challenges such as poor handling of harmful content, inefficient use of dispreferred responses, and, specifically for PL, high computational costs. To address these issues, we propose Hard Preference Sampling (HPS), a novel framework for robust and efficient human preference alignment. HPS introduces a training loss that prioritizes the most preferred response while rejecting all dispreferred and harmful ones. It emphasizes "hard" dispreferred responses--those closely resembling preferred ones--to enhance the model's rejection capabilities. By leveraging a single-sample Monte Carlo sampling strategy, HPS reduces computational overhead while maintaining alignment quality. Theoretically, HPS improves sample efficiency over existing PL methods and maximizes the reward margin between preferred and dispreferred responses, ensuring clearer distinctions. Experiments on HH-RLHF and PKU-Safety datasets validate HPS's effectiveness, achieving comparable BLEU and reward scores while greatly improving reward margins and thus reducing harmful content generation.
+
+**Comment:** The HPS framework for human preference alignment in LLMs introduces a novel training loss and sampling strategy, relevant to LLM alignment and optimization.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 39. [ReVISE: Learning to Refine at Test-Time via Intrinsic Self-Verification](https://arxiv.org/abs/2502.14565) <a id="link39"></a>
+
+**ArXiv ID:** 2502.14565
+
+**Authors:** Hyunseok Lee, Seunghyuk Oh, Jaehyung Kim, Jinwoo Shin, Jihoon Tack
+
+**Abstract:** Self-awareness, i.e., the ability to assess and correct one's own generation, is a fundamental aspect of human intelligence, making its replication in large language models (LLMs) an important yet challenging task. Previous works tackle this by employing extensive reinforcement learning or rather relying on large external verifiers. In this work, we propose Refine via Intrinsic Self-Verification (ReVISE), an efficient and effective framework that enables LLMs to self-correct their outputs through self-verification. The core idea of ReVISE is to enable LLMs to verify their reasoning processes and continually rethink reasoning trajectories based on its verification. We introduce a structured curriculum based upon online preference learning to implement this efficiently. Specifically, as ReVISE involves two challenging tasks (i.e., self-verification and reasoning correction), we tackle each task sequentially using curriculum learning, collecting both failed and successful reasoning paths to construct preference pairs for efficient training. During inference, our approach enjoys natural test-time scaling by integrating self-verification and correction capabilities, further enhanced by our proposed confidence-aware decoding mechanism. Our experiments on various reasoning tasks demonstrate that ReVISE achieves efficient self-correction and significantly improves reasoning performance.
+
+**Comment:** The paper proposes a novel self-verification framework for LLMs, which aligns with foundational research on LLM behavior and interpretability. The structured curriculum and confidence-aware decoding mechanism are notable contributions.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 40. [Rectified Lagrangian for Out-of-Distribution Detection in Modern Hopfield Networks](https://arxiv.org/abs/2502.14003) <a id="link40"></a>
+
+**ArXiv ID:** 2502.14003
+
+**Authors:** Ryo Moriai, Nakamasa Inoue, Masayuki Tanaka, Rei Kawakami, Satoshi Ikehata, Ikuro Sato
+
+**Abstract:** Modern Hopfield networks (MHNs) have recently gained significant attention in the field of artificial intelligence because they can store and retrieve a large set of patterns with an exponentially large memory capacity. A MHN is generally a dynamical system defined with Lagrangians of memory and feature neurons, where memories associated with in-distribution (ID) samples are represented by attractors in the feature space. One major problem in existing MHNs lies in managing out-of-distribution (OOD) samples because it was originally assumed that all samples are ID samples. To address this, we propose the rectified Lagrangian (RegLag), a new Lagrangian for memory neurons that explicitly incorporates an attractor for OOD samples in the dynamical system of MHNs. RecLag creates a trivial point attractor for any interaction matrix, enabling OOD detection by identifying samples that fall into this attractor as OOD. The interaction matrix is optimized so that the probability densities can be estimated to identify ID/OOD. We demonstrate the effectiveness of RecLag-based MHNs compared to energy-based OOD detection methods, including those using state-of-the-art Hopfield energies, across nine image datasets.
+
+**Comment:** The paper proposes a rectified Lagrangian for out-of-distribution detection in modern Hopfield networks, which aligns with representation learning and foundational innovations in neural network dynamics.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 41. [EpMAN: Episodic Memory AttentioN for Generalizing to Longer Contexts](https://arxiv.org/abs/2502.14280) <a id="link41"></a>
+
+**ArXiv ID:** 2502.14280
+
+**Authors:** Subhajit Chaudhury, Payel Das, Sarathkrishna Swaminathan, Georgios Kollias, Elliot Nelson, Khushbu Pahwa, Tejaswini Pedapati, Igor Melnyk, Matthew Riemer
+
+**Abstract:** Recent advances in Large Language Models (LLMs) have yielded impressive successes on many language tasks. However, efficient processing of long contexts using LLMs remains a significant challenge. We introduce \textbf{EpMAN} -- a method for processing long contexts in an \textit{episodic memory} module while \textit{holistically attending to} semantically relevant context chunks. The output of \textit{episodic attention} is then used to reweigh the decoder's self-attention to the stored KV cache of the context during training and generation. When an LLM decoder is trained using \textbf{EpMAN}, its performance on multiple challenging single-hop long-context recall and question-answering benchmarks is found to be stronger and more robust across the range from 16k to 256k tokens than baseline decoders trained with self-attention, and popular retrieval-augmented generation frameworks.
+
+**Comment:** The paper proposes EpMAN, a method for improving long-context processing in LLMs, which aligns with the Large Language Models criterion due to its focus on architectural innovation for handling long contexts.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 42. [Temporal Misalignment and Probabilistic Neurons](https://arxiv.org/abs/2502.14487) <a id="link42"></a>
+
+**ArXiv ID:** 2502.14487
+
+**Authors:** Velibor Bojkovi\'c, Xiaofeng Wu, Bin Gu
+
+**Abstract:** Spiking Neural Networks (SNNs) offer a more energy-efficient alternative to Artificial Neural Networks (ANNs) by mimicking biological neural principles, establishing them as a promising approach to mitigate the increasing energy demands of large-scale neural models. However, fully harnessing the capabilities of SNNs remains challenging due to their discrete signal processing and temporal dynamics. ANN-SNN conversion has emerged as a practical approach, enabling SNNs to achieve competitive performance on complex machine learning tasks. In this work, we identify a phenomenon in the ANN-SNN conversion framework, termed temporal misalignment, in which random spike rearrangement across SNN layers leads to performance improvements. Based on this observation, we introduce biologically plausible two-phase probabilistic (TPP) spiking neurons, further enhancing the conversion process. We demonstrate the advantages of our proposed method both theoretically and empirically through comprehensive experiments on CIFAR-10/100, CIFAR10-DVS, and ImageNet across a variety of architectures, achieving state-of-the-art results.
+
+**Comment:** The paper discusses spiking neural networks and ANN-SNN conversion, focusing on energy efficiency and temporal dynamics, which aligns with Model Compression and emerging trends.
+
+**Relevance:** 7
+**Novelty:** 7
+
+---
+
+## 43. [Dynamic Activation with Knowledge Distillation for Energy-Efficient Spiking NN Ensembles](https://arxiv.org/abs/2502.14023) <a id="link43"></a>
+
+**ArXiv ID:** 2502.14023
+
+**Authors:** Orestis Konstantaropoulos, Theodoris Mallios, Maria Papadopouli
+
+**Abstract:** While foundation AI models excel at tasks like classification and decision-making, their high energy consumption makes them unsuitable for energy-constrained applications. Inspired by the brain's efficiency, spiking neural networks (SNNs) have emerged as a viable alternative due to their event-driven nature and compatibility with neuromorphic chips. This work introduces a novel system that combines knowledge distillation and ensemble learning to bridge the performance gap between artificial neural networks (ANNs) and SNNs. A foundation AI model acts as a teacher network, guiding smaller student SNNs organized into an ensemble, called Spiking Neural Ensemble (SNE). SNE enables the disentanglement of the teacher's knowledge, allowing each student to specialize in predicting a distinct aspect of it, while processing the same input. The core innovation of SNE is the adaptive activation of a subset of SNN models of an ensemble, leveraging knowledge-distillation, enhanced with an informed-partitioning (disentanglement) of the teacher's feature space. By dynamically activating only a subset of these student SNNs, the system balances accuracy and energy efficiency, achieving substantial energy savings with minimal accuracy loss. Moreover, SNE is significantly more efficient than the teacher network, reducing computational requirements by up to 20x with only a 2% drop in accuracy on the CIFAR-10 dataset. This disentanglement procedure achieves an accuracy improvement of up to 2.4% on the CIFAR-10 dataset compared to other partitioning schemes. Finally, we comparatively analyze SNE performance under noisy conditions, demonstrating enhanced robustness compared to its ANN teacher. In summary, SNE offers a promising new direction for energy-constrained applications.
+
+**Comment:** The paper introduces a novel energy-efficient spiking neural network ensemble, which partially aligns with 'Model Compression' through its focus on energy efficiency and dynamic activation.
+
+**Relevance:** 7
+**Novelty:** 7
+
+---
+
+## 44. [On Theoretical Limits of Learning with Label Differential Privacy](https://arxiv.org/abs/2502.14309) <a id="link44"></a>
+
+**ArXiv ID:** 2502.14309
+
+**Authors:** Puning Zhao, Chuan Ma, Li Shen, Shaowei Wang, Rongfei Fan
+
+**Abstract:** Label differential privacy (DP) is designed for learning problems involving private labels and public features. While various methods have been proposed for learning under label DP, the theoretical limits remain largely unexplored. In this paper, we investigate the fundamental limits of learning with label DP in both local and central models for both classification and regression tasks, characterized by minimax convergence rates. We establish lower bounds by converting each task into a multiple hypothesis testing problem and bounding the test error. Additionally, we develop algorithms that yield matching upper bounds. Our results demonstrate that under label local DP (LDP), the risk has a significantly faster convergence rate than that under full LDP, i.e. protecting both features and labels, indicating the advantages of relaxing the DP definition to focus solely on labels. In contrast, under the label central DP (CDP), the risk is only reduced by a constant factor compared to full DP, indicating that the relaxation of CDP only has limited benefits on the performance.
+
+**Comment:** The paper explores theoretical limits of learning with label differential privacy, providing foundational insights into privacy-preserving learning.
+
+**Relevance:** 7
+**Novelty:** 7
+
+---
+
+## 45. [General Uncertainty Estimation with Delta Variances](https://arxiv.org/abs/2502.14698) <a id="link45"></a>
+
+**ArXiv ID:** 2502.14698
+
+**Authors:** Simon Schmitt, John Shawe-Taylor, Hado van Hasselt
+
+**Abstract:** Decision makers may suffer from uncertainty induced by limited data. This may be mitigated by accounting for epistemic uncertainty, which is however challenging to estimate efficiently for large neural networks. To this extent we investigate Delta Variances, a family of algorithms for epistemic uncertainty quantification, that is computationally efficient and convenient to implement. It can be applied to neural networks and more general functions composed of neural networks. As an example we consider a weather simulator with a neural-network-based step function inside -- here Delta Variances empirically obtain competitive results at the cost of a single gradient computation. The approach is convenient as it requires no changes to the neural network architecture or training procedure. We discuss multiple ways to derive Delta Variances theoretically noting that special cases recover popular techniques and present a unified perspective on multiple related methods. Finally we observe that this general perspective gives rise to a natural extension and empirically show its benefit.
+
+**Comment:** The Delta Variances method for epistemic uncertainty quantification provides a unified perspective on related methods, relevant to model interpretability and efficiency.
+
+**Relevance:** 7
+**Novelty:** 7
+
+---
+
+## 46. [Revealing and Mitigating Over-Attention in Knowledge Editing](https://arxiv.org/abs/2502.14838) <a id="link46"></a>
+
+**ArXiv ID:** 2502.14838
+
+**Authors:** Pinzheng Wang, Zecheng Tang, Keyan Zhou, Juntao Li, Qiaoming Zhu, Min Zhang
+
+**Abstract:** Large Language Models have demonstrated superior performance across a wide range of tasks, but they still exhibit undesirable errors due to incorrect knowledge learned from the training data. To avoid this, knowledge editing methods emerged to precisely edit the specific model knowledge via efficiently modifying a very small percentage of parameters. % However, those methods can lead to the problem of Specificity Failure: when the content related to the edited knowledge occurs in the context, it can inadvertently corrupt other pre-existing knowledge. However, those methods can lead to the problem of Specificity Failure, where the existing knowledge and capabilities are severely degraded due to editing. Our preliminary indicates that Specificity Failure primarily stems from the model's attention heads assigning excessive attention scores to entities related to the edited knowledge, thereby unduly focusing on specific snippets within the context, which we denote as the Attention Drift phenomenon. To mitigate such Attention Drift issue, we introduce a simple yet effective method Selective Attention Drift Restriction}(SADR), which introduces an additional regularization term during the knowledge editing process to restrict changes in the attention weight distribution, thereby preventing undue focus on the edited entity. Experiments on five frequently used strong LLMs demonstrate the effectiveness of our method, where SADR can significantly mitigate Specificity Failure in the predominant knowledge editing tasks.
+
+**Comment:** The paper addresses over-attention in knowledge editing for LLMs, which aligns with the Large Language Models criterion due to its focus on improving model behavior and interpretability.
+
+**Relevance:** 7
+**Novelty:** 7
+
+---
+
+# Paper Selection Prompt
+
+You are a helpful paper reading assistant whose job is to read daily posts from ArXiv and identify a few papers that your friend will enjoy reading.
+Your job is to carefully read the paper titles and abstracts below and find the ones that match the criteria below.
+
+## Relevant Topics
+
+Use the following relevance criteria to focus on foundational research. Keep relevant papers and filter out irrelevant ones. Avoid purely application-driven work.
+
+1. Representation Learning
+   - Relevant: Insights into how deep networks encode information, feature/dictionary learning, sparse/contrastive methods, training dynamics in neural networks.
+   - Irrelevant: Standard applications of known techniques lacking new theoretical or methodological contributions.
+
+2. Model Architecture
+   - Relevant: Mixture-of-Experts (MoE), Transformers, Conditional/Dynamic Networks, Autoencoders, analysis on existing architectures (like encoder-decoder), or other architectural innovations.
+   - Irrelevant: Merely using existing architectures for a certain task without insights into the structure themselves.
+
+3. Model Compression
+   - Relevant: Sparsity, pruning, quantization, low-rank approaches, KV cache, or other algorithmic/theoretical efficiency breakthroughs.
+   - Irrelevant: Straightforward applications of existing compression methods to new tasks.
+
+4. Large Language Models (LLMs)
+   - Relevant: Major breakthroughs in training or architecture, theoretical insights into LLM behavior/interpretability.
+   - Irrelevant: Domain-specific usage (e.g., translation, jail-breaking), minor tweaks (e.g., instruction tuning, CoT, data mixing), or purely empirical dataset/benchmark studies and text-level analysis (e.g. hallucination, reasoning, safety).
+
+5. AI for Science
+   - Relevant: Foundational research in molecular/protein modeling, new generative paradigms, or significant architecture-level innovations.
+   - Irrelevant: Conventional, domain-specific applications without new theoretical perspectives.
+
+6. Emerging Trends
+   - Relevant: Cutting-edge theoretical work challenging established assumptions or introducing broad new paradigms.
+   - Irrelevant: Incremental improvements or trend-following without novel insights.
+
+**Keywords:**
+
+- Relevant: Mixture of Experts (MoE), Representation Learning, Compression/Efficiency, Sparse/Sparsity, Pruning, Quantization, Low-rank, Foundation Model, etc.
+- Irrelevant: Reinforcement Learning, Transfer Learning, Federated Learning, Online Learning, Diffusion Models, etc.
+- Application Work: Image Segmentation, Medical Imaging, 3D Vision, Video Understanding, Information Retrieval, Summarization, Recommendation Systems, Machine Translation, Speech Recognition, Signal Processing, Spatial/Temporal Modeling, Time Series, etc.
+
+## Scoring Criteria
+
+> The "Relevance" score measures how closely the paper aligns with the core topics of the prompt.
+> The "Novelty" score assesses the originality and impact of the paper.
+> They are two **ORTHONORMAL** axes and **SHOULD NOT** be confused with each other.
+
+### Relevance Scoring
+
+- Relevance 9-10 (Completely Relevant)
+  - Focus: Fully aligned with core topics with no deviation, score the highest if contains relevant keywords in it.
+  - Examples: Papers focused on foundational methods or theoretical research, whose titles contain topic keywords like "MoE".
+
+- Relevance 7-8 (Relevant)
+  - Focus: Retain a solid link to the main research area, though may touch on peripheral elements.
+  - Examples: Papers research on the fundamental part of MoE through a less critical aspect like its behavior in GNN.
+
+- Relevance 5-6 (Borderline)
+  - Focus: Maintains a link to the core topic but also extends into at least one other domain/area beyond the primary focus.
+  - Examples: Work referencing MoE centered on reinforcement learning.
+
+- Relevance 3-4 (Irrelevant)
+  - Focus: Largely outside our interests with no association to our topics.
+  - Examples: Application-focused papers like using MoE to solve a problem in the real world.
+
+- Relevance 1-2 (Ignore)
+  - Focus: Purely unrelated to our topics. Completely a different domain.
+  - **Exception**: If the paper hints at a cutting-edge, radically new direction that could eventually transform the primary domain, consider a score of 9–10 despite initial appearances. (Usually a very rare concept that belongs to the fundamental research)
+
+### Novelty Scoring
+
+- Novelty 9-10 (Breakthrough)
+  - Definition: Groundbreaking methods/theory introducing new directions or solving major challenges.
+  - Examples: Entirely new paradigm for foundational models; a novel theory transforming representation learning.
+
+- Novelty 7-8 (Improvements)
+  - Definition: Substantial insights/enhancements, though not a full paradigm shift.
+  - Examples: Modifications on existing methods yielding significantly better results.
+
+- Novelty 5-6 (Borderline)
+  - Definition: Incremental contributions with possible long-term benefits, not immediately transformative.
+  - Examples: Moderately novel extension to an existing architecture; refining current methods without fundamentally altering them.
+
+- Novelty 3-4 (Tangential)
+  - Definition: Minor or domain-specific improvements with limited broader impact.
+  - Examples: Slight modifications to known methods with strange motivation; purely engineering jobs like a new benchmark/dataset.
+
+- Novelty 1-2 (Low)
+  - Definition: Minimal originality, applying standard approaches without real innovation.
+  - Examples: Using an off-the-shelf model without adding new insights; purely application-driven studies like finetuning a pretrained model using existing methods.
+
+## Papers
+
+[PAPER LIST HERE]
+
+## Instructions
+
+Write the response in JSONL format with {ARXIVID, COMMENT, RELEVANCE, NOVELTY} on each line, one for each paper.
+
+- ARXIVID: should be the ArXiv ID.
+- COMMENT: should identify whether there is a criteria that match the paper very closely. These matches should not be based on general terms like "language modeling" or "advancements" and should specifically refer to a criterion. No need to mention the non-matching criteria.
+- RELEVANCE: should be a score from 1-10.
+- NOVELTY: should be a score from 1-10.

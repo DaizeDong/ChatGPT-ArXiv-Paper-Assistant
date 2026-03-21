@@ -1,0 +1,275 @@
+<table style="width: 100%; border-collapse: collapse; border: none;">
+    <tr>
+<td style="border: none; padding: 0px; width: 33%;">
+            <div style="display: flex; align-items: center; gap: 5px;">
+                <a href="../29" style="text-decoration: none; color: inherit;">
+                    <strong style="color: black; font-size: 18px;">&larr;</strong>
+                </a>
+                <div style="text-align: center;">
+                    <a href="../29" style="text-decoration: none;">
+                        <strong>Previous Day</strong>
+                    </a>
+                    <br>
+                    <a href="../29" style="text-decoration: none; font-size: 14px; color: gray;">
+                        2025-01-29
+                    </a>
+                </div>
+            </div>
+        </td>
+
+        <td style="border: none; padding: 0px; width: 34%; text-align: center;">
+            <div style="display: flex; flex-direction: column; align-items: center; width: 100%;">
+                <a href=".." style="text-decoration: none;">
+                    <strong>Monthly Overview</strong>
+                </a>
+                <a href=".." style="text-decoration: none; font-size: 14px; color: gray;">
+                    2025-01
+                </a>
+            </div>
+        </td>
+    
+<td style="border: none; padding: 0px; width: 33%;">
+            <div style="display: flex; align-items: center; gap: 5px; justify-content: flex-end; width: 100%;">
+                <div style="text-align: center;">
+                    <a href="../31" style="text-decoration: none;">
+                        <strong>Next Day</strong>
+                    </a>
+                    <br>
+                    <a href="../31" style="text-decoration: none; font-size: 14px; color: gray;">
+                        2025-01-31
+                    </a>
+                </div>
+                <a href="../31" style="text-decoration: none; color: inherit;">
+                    <strong style="color: black; font-size: 18px;">&rarr;</strong>
+                </a>
+            </div>
+        </td>
+    </tr>
+</table>
+
+# Personalized Daily Arxiv Papers 01/30/2025
+
+|           | Prompt   | Completion   | Total   |
+|-----------|----------|--------------|---------|
+| **Token** | 23981    | 1944         | 25925   |
+| **Cost**  | $0.6     | $0.19        | $0.79   |
+
+Total scanned papers: 196
+
+Total relevant papers: 6
+
+**Table of contents with paper titles:**
+
+1. [International AI Safety Report](#user-content-link1)
+**Authors:** Yoshua Bengio, S\"oren Mindermann, Daniel Privitera, Tamay Besiroglu, Rishi Bommasani, Stephen Casper, Yejin Choi, Philip Fox, Ben Garfinkel, Danielle Goldfarb, Hoda Heidari, Anson Ho, Sayash Kapoor, Leila Khalatbari, Shayne Longpre, Sam Manning, Vasilios Mavroudis, Mantas Mazeika, Julian Michael, Jessica Newman, Kwan Yee Ng, Chinasa T. Okolo, Deborah Raji, Girish Sastry, Elizabeth Seger, Theodora Skeadas, Tobin South, Emma Strubell, Florian Tram\`er, Lucia Velasco, Nicole Wheeler, Daron Acemoglu, Olubayo Adekanmbi, David Dalrymple, Thomas G. Dietterich, Edward W. Felten, Pascale Fung, Pierre-Olivier Gourinchas, Fredrik Heintz, Geoffrey Hinton, Nick Jennings, Andreas Krause, Susan Leavy, Percy Liang, Teresa Ludermir, Vidushi Marda, Helen Margetts, John McDermid, Jane Munga, Arvind Narayanan, Alondra Nelson, Clara Neppel, Alice Oh, Gopal Ramchurn, Stuart Russell, Marietje Schaake, Bernhard Sch\"olkopf, Dawn Song, Alvaro Soto, Lee Tiedrich, Ga\"el Varoquaux, Andrew Yao, Ya-Qin Zhang, Fahad Albalawi, Marwan Alserkal, Olubunmi Ajala, Guillaume Avrin, Christian Busch, Andr\'e Carlos Ponce de Leon Ferreira de Carvalho, Bronwyn Fox, Amandeep Singh Gill, Ahmet Halit Hatip, Juha Heikkil\"a, Gill Jolly, Ziv Katzir, Hiroaki Kitano, Antonio Kr\"uger, Chris Johnson, Saif M. Khan, Kyoung Mu Lee, Dominic Vincent Ligot, Oleksii Molchanovskyi, Andrea Monti, Nusu Mwamanzi, Mona Nemer, Nuria Oliver, Jos\'e Ram\'on L\'opez Portillo, Balaraman Ravindran, Raquel Pezoa Rivera, Hammam Riza, Crystal Rugege, Ciar\'an Seoighe, Jerry Sheehan, Haroon Sheikh, Denise Wong, Yi Zeng
+
+2. [Dynamics of Transient Structure in In-Context Linear Regression Transformers](#user-content-link2)
+**Authors:** Liam Carroll, Jesse Hoogland, Matthew Farrugia-Roberts, Daniel Murfet
+
+3. [Matrix Product Sketching via Coordinated Sampling](#user-content-link3)
+**Authors:** Majid Daliri, Juliana Freire, Danrong Li, Christopher Musco
+
+4. [CardiCat: a Variational Autoencoder for High-Cardinality Tabular Data](#user-content-link4)
+**Authors:** Lee Carlin, Yuval Benjamini
+
+5. [Generative Unordered Flow for Set-Structured Data Generation](#user-content-link5)
+**Authors:** Yangming Li, Carola-Bibiane Sch\"onlieb
+
+6. [A Geometric Perspective for High-Dimensional Multiplex Graphs](#user-content-link6)
+**Authors:** Kamel Abdous, Nairouz Mrabah, Mohamed Bouguessa
+
+---
+
+## 1. [International AI Safety Report](https://arxiv.org/abs/2501.17805) <a id="link1"></a>
+
+**ArXiv ID:** 2501.17805
+
+**Authors:** Yoshua Bengio, S\"oren Mindermann, Daniel Privitera, Tamay Besiroglu, Rishi Bommasani, Stephen Casper, Yejin Choi, Philip Fox, Ben Garfinkel, Danielle Goldfarb, Hoda Heidari, Anson Ho, Sayash Kapoor, Leila Khalatbari, Shayne Longpre, Sam Manning, Vasilios Mavroudis, Mantas Mazeika, Julian Michael, Jessica Newman, Kwan Yee Ng, Chinasa T. Okolo, Deborah Raji, Girish Sastry, Elizabeth Seger, Theodora Skeadas, Tobin South, Emma Strubell, Florian Tram\`er, Lucia Velasco, Nicole Wheeler, Daron Acemoglu, Olubayo Adekanmbi, David Dalrymple, Thomas G. Dietterich, Edward W. Felten, Pascale Fung, Pierre-Olivier Gourinchas, Fredrik Heintz, Geoffrey Hinton, Nick Jennings, Andreas Krause, Susan Leavy, Percy Liang, Teresa Ludermir, Vidushi Marda, Helen Margetts, John McDermid, Jane Munga, Arvind Narayanan, Alondra Nelson, Clara Neppel, Alice Oh, Gopal Ramchurn, Stuart Russell, Marietje Schaake, Bernhard Sch\"olkopf, Dawn Song, Alvaro Soto, Lee Tiedrich, Ga\"el Varoquaux, Andrew Yao, Ya-Qin Zhang, Fahad Albalawi, Marwan Alserkal, Olubunmi Ajala, Guillaume Avrin, Christian Busch, Andr\'e Carlos Ponce de Leon Ferreira de Carvalho, Bronwyn Fox, Amandeep Singh Gill, Ahmet Halit Hatip, Juha Heikkil\"a, Gill Jolly, Ziv Katzir, Hiroaki Kitano, Antonio Kr\"uger, Chris Johnson, Saif M. Khan, Kyoung Mu Lee, Dominic Vincent Ligot, Oleksii Molchanovskyi, Andrea Monti, Nusu Mwamanzi, Mona Nemer, Nuria Oliver, Jos\'e Ram\'on L\'opez Portillo, Balaraman Ravindran, Raquel Pezoa Rivera, Hammam Riza, Crystal Rugege, Ciar\'an Seoighe, Jerry Sheehan, Haroon Sheikh, Denise Wong, Yi Zeng
+
+**Abstract:** The first International AI Safety Report comprehensively synthesizes the current evidence on the capabilities, risks, and safety of advanced AI systems. The report was mandated by the nations attending the AI Safety Summit in Bletchley, UK. Thirty nations, the UN, the OECD, and the EU each nominated a representative to the report's Expert Advisory Panel. A total of 100 AI experts contributed, representing diverse perspectives and disciplines. Led by the report's Chair, these independent experts collectively had full discretion over the report's content.
+
+**Comment:** Author match
+
+
+
+---
+
+## 2. [Dynamics of Transient Structure in In-Context Linear Regression Transformers](https://arxiv.org/abs/2501.17745) <a id="link2"></a>
+
+**ArXiv ID:** 2501.17745
+
+**Authors:** Liam Carroll, Jesse Hoogland, Matthew Farrugia-Roberts, Daniel Murfet
+
+**Abstract:** Modern deep neural networks display striking examples of rich internal computational structure. Uncovering principles governing the development of such structure is a priority for the science of deep learning. In this paper, we explore the transient ridge phenomenon: when transformers are trained on in-context linear regression tasks with intermediate task diversity, they initially behave like ridge regression before specializing to the tasks in their training distribution. This transition from a general solution to a specialized solution is revealed by joint trajectory principal component analysis. Further, we draw on the theory of Bayesian internal model selection to suggest a general explanation for the phenomena of transient structure in transformers, based on an evolving tradeoff between loss and complexity. This explanation is grounded in empirical measurements of model complexity using the local learning coefficient.
+
+**Comment:** The paper delves into the transient ridge phenomenon in transformers trained on in-context linear regression and connects this to Bayesian internal model selection. This provides theoretical insights into training dynamics and internal representations within transformers, aligning with foundational research.
+
+**Relevance:** 10
+**Novelty:** 9
+
+---
+
+## 3. [Matrix Product Sketching via Coordinated Sampling](https://arxiv.org/abs/2501.17836) <a id="link3"></a>
+
+**ArXiv ID:** 2501.17836
+
+**Authors:** Majid Daliri, Juliana Freire, Danrong Li, Christopher Musco
+
+**Abstract:** We revisit the well-studied problem of approximating a matrix product, $\mathbf{A}^T\mathbf{B}$, based on small space sketches $\mathcal{S}(\mathbf{A})$ and $\mathcal{S}(\mathbf{B})$ of $\mathbf{A} \in \R^{n \times d}$ and $\mathbf{B}\in \R^{n \times m}$. We are interested in the setting where the sketches must be computed independently of each other, except for the use of a shared random seed. We prove that, when $\mathbf{A}$ and $\mathbf{B}$ are sparse, methods based on \emph{coordinated random sampling} can outperform classical linear sketching approaches, like Johnson-Lindenstrauss Projection or CountSketch. For example, to obtain Frobenius norm error $\epsilon\|\mathbf{A}\|_F\|\mathbf{B}\|_F$, coordinated sampling requires sketches of size $O(s/\epsilon^2)$ when $\mathbf{A}$ and $\mathbf{B}$ have at most $s \leq d,m$ non-zeros per row. In contrast, linear sketching leads to sketches of size $O(d/\epsilon^2)$ and $O(m/\epsilon^2)$ for $\mathbf{A}$ and $\mathbf{B}$. We empirically evaluate our approach on two applications: 1) distributed linear regression in databases, a problem motivated by tasks like dataset discovery and augmentation, and 2) approximating attention matrices in transformer-based language models. In both cases, our sampling algorithms yield an order of magnitude improvement over linear sketching.
+
+**Comment:** The paper explores a fundamental efficiency improvement in approximating matrix products using coordinated sampling over classical linear sketching. Highlights include sparse matrix efficiency and application to attention matrices in transformers, which falls under theoretical advancements in model compression.
+
+**Relevance:** 10
+**Novelty:** 8
+
+---
+
+## 4. [CardiCat: a Variational Autoencoder for High-Cardinality Tabular Data](https://arxiv.org/abs/2501.17324) <a id="link4"></a>
+
+**ArXiv ID:** 2501.17324
+
+**Authors:** Lee Carlin, Yuval Benjamini
+
+**Abstract:** High-cardinality categorical features are a common characteristic of mixed-type tabular datasets. Existing generative model architectures struggle to learn the complexities of such data at scale, primarily due to the difficulty of parameterizing the categorical features. In this paper, we present a general variational autoencoder model, CardiCat, that can accurately fit imbalanced high-cardinality and heterogeneous tabular data. Our method substitutes one-hot encoding with regularized dual encoder-decoder embedding layers, which are jointly learned. This approach enables us to use embeddings that depend also on the other covariates, leading to a compact and homogenized parameterization of categorical features. Our model employs a considerably smaller trainable parameter space than competing methods, enabling learning at a large scale. CardiCat generates high-quality synthetic data that better represent high-cardinality and imbalanced features compared to competing VAE models for multiple real and simulated datasets.
+
+**Comment:** CardiCat proposes a novel variational autoencoder designed for high-cardinality tabular data, introducing architectural innovations in embeddings and parameterization. This is directly relevant to autoencoders and foundational work, particularly in representation learning and model architecture.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 5. [Generative Unordered Flow for Set-Structured Data Generation](https://arxiv.org/abs/2501.17770) <a id="link5"></a>
+
+**ArXiv ID:** 2501.17770
+
+**Authors:** Yangming Li, Carola-Bibiane Sch\"onlieb
+
+**Abstract:** Flow-based generative models have demonstrated promising performance across a broad spectrum of data modalities (e.g., image and text). However, there are few works exploring their extension to unordered data (e.g., spatial point set), which is not trivial because previous models are mostly designed for vector data that are naturally ordered. In this paper, we present unordered flow, a type of flow-based generative model for set-structured data generation. Specifically, we convert unordered data into an appropriate function representation, and learn the probability measure of such representations through function-valued flow matching. For the inverse map from a function representation to unordered data, we propose a method similar to particle filtering, with Langevin dynamics to first warm-up the initial particles and gradient-based search to update them until convergence. We have conducted extensive experiments on multiple real-world datasets, showing that our unordered flow model is very effective in generating set-structured data and significantly outperforms previous baselines.
+
+**Comment:** The paper introduces a novel generative model for unordered data using flow-based techniques, contributing to model architecture by addressing set-structured data generation.
+
+**Relevance:** 8
+**Novelty:** 8
+
+---
+
+## 6. [A Geometric Perspective for High-Dimensional Multiplex Graphs](https://arxiv.org/abs/2501.17374) <a id="link6"></a>
+
+**ArXiv ID:** 2501.17374
+
+**Authors:** Kamel Abdous, Nairouz Mrabah, Mohamed Bouguessa
+
+**Abstract:** High-dimensional multiplex graphs are characterized by their high number of complementary and divergent dimensions. The existence of multiple hierarchical latent relations between the graph dimensions poses significant challenges to embedding methods. In particular, the geometric distortions that might occur in the representational space have been overlooked in the literature. This work studies the problem of high-dimensional multiplex graph embedding from a geometric perspective. We find that the node representations reside on highly curved manifolds, thus rendering their exploitation more challenging for downstream tasks. Moreover, our study reveals that increasing the number of graph dimensions can cause further distortions to the highly curved manifolds. To address this problem, we propose a novel multiplex graph embedding method that harnesses hierarchical dimension embedding and Hyperbolic Graph Neural Networks. The proposed approach hierarchically extracts hyperbolic node representations that reside on Riemannian manifolds while gradually learning fewer and more expressive latent dimensions of the multiplex graph. Experimental results on real-world high-dimensional multiplex graphs show that the synergy between hierarchical and hyperbolic embeddings incurs much fewer geometric distortions and brings notable improvements over state-of-the-art approaches on downstream tasks.
+
+**Comment:** The paper addresses the embedding of high-dimensional multiplex graphs using hierarchical and hyperbolic methods, which ties into representation learning by introducing new embedding techniques.
+
+**Relevance:** 7
+**Novelty:** 7
+
+---
+
+# Paper Selection Prompt
+
+You are a helpful paper reading assistant whose job is to read daily posts from ArXiv and identify a few papers that your friend will enjoy reading.
+Your job is to carefully read the paper titles and abstracts below and find the ones that match the criteria below.
+
+## Relevant Topics
+
+Use the following relevance criteria to focus on foundational research, avoiding purely application-driven work:
+
+1. Representation Learning
+   - Relevant: Insights into how deep networks encode information, feature/dictionary learning, sparse/contrastive methods, training dynamics in neural networks.
+   - Irrelevant: Standard applications of known techniques lacking new theoretical or methodological contributions.
+
+2. Model Architecture
+   - Relevant: Mixture-of-Experts (MoE), Transformers, Conditional/Dynamic Networks, Autoencoders, analysis on existing architectures (like encoder-decoder), or other architectural innovations.
+   - Irrelevant: Merely using existing architectures for a certain task without insights into the structure themselves.
+
+3. Model Compression
+   - Relevant: Sparsity, pruning, quantization, low-rank approaches, KV cache, or other algorithmic/theoretical efficiency breakthroughs.
+   - Irrelevant: Straightforward applications of existing compression methods to new tasks.
+
+4. Large Language Models (LLMs)
+   - Relevant: Major breakthroughs in training or architecture, theoretical insights into LLM behavior/interpretability.
+   - Irrelevant: Domain-specific usage (e.g., translation, jail-breaking), minor tweaks (e.g., instruction tuning, CoT, data mixing), or purely empirical dataset/benchmark studies and text-level analysis (e.g. hallucination, reasoning, safety).
+
+5. AI for Science
+   - Relevant: Foundational research in molecular/protein modeling, new generative paradigms, or significant architecture-level innovations.
+   - Irrelevant: Conventional, domain-specific applications without new theoretical perspectives.
+
+6. Emerging Trends
+   - Relevant: Cutting-edge theoretical work challenging established assumptions or introducing broad new paradigms.
+   - Irrelevant: Incremental improvements or trend-following without novel insights.
+
+**Keywords for Relevant Domains:**
+Mixture of Experts (MoE), Representation Learning, Compression/Efficiency, Sparse/Sparsity, Pruning, Quantization, Low-rank, Foundation Model, etc.
+
+**Hints on Irrelevant Domains:**
+Reinforcement Learning, Transfer Learning, Federated Learning, Online Learning, Diffusion Models, etc.
+
+**Hints on Application Tasks:**
+Image Segmentation, Medical Imaging, 3D Vision, Video Understanding, Information Retrieval, Summarization, Recommendation Systems, Machine Translation, Speech Recognition, Signal Processing, Spatial/Temporal Modeling, Time Series, etc.
+
+## Scoring Criteria
+
+> The "Relevance" score measures how closely the paper aligns with the core topics of the prompt.
+> The "Novelty" score assesses the originality and impact of the paper.
+> They are two **ORTHONORMAL** axes and **SHOULD NOT** be confused with each other.
+
+### Relevance Scoring
+
+- Relevance 9-10 (Completely Relevant)
+  - Focus: Fully aligned with core topics with no deviation, score the highest if contains keywords in it.
+  - Examples: Papers focused on foundational methods or theoretical research, whose titles contain topic keywords like "MoE".
+
+- Relevance 7-8 (Relevant)
+  - Focus: Retain a solid link to the main research area, though may touch on peripheral elements.
+  - Examples: Papers research on the fundamental part of MoE through a less critical aspect like its behavior in GNN.
+
+- Relevance 5-6 (Borderline)
+  - Focus: Maintains a link to the core topic but also extends into at least one other domain/area beyond the primary focus.
+  - Examples: Work referencing MoE centered on reinforcement learning.
+
+- Relevance 3-4 (Irrelevant)
+  - Focus: Largely outside our interests with no association to our topics.
+  - Examples: Application-focused papers like using MoE to solve a problem in the real world.
+
+- Relevance 1-2 (Ignore)
+  - Focus: Purely unrelated to our topics. Completely a different domain.
+  - **Exception**: If the paper hints at a cutting-edge, radically new direction that could eventually transform the primary domain, consider a score of 9–10 despite initial appearances. (Usually a very rare concept that belongs to the fundamental research)
+
+### Novelty Scoring
+
+- Novelty 9-10 (Breakthrough)
+  - Definition: Groundbreaking methods/theory introducing new directions or solving major challenges.
+  - Examples: Entirely new paradigm for foundational models; a novel theory transforming representation learning.
+
+- Novelty 7-8 (Improvements)
+  - Definition: Substantial insights/enhancements, though not a full paradigm shift.
+  - Examples: Modifications on existing methods yielding significantly better results.
+
+- Novelty 5-6 (Borderline)
+  - Definition: Incremental contributions with possible long-term benefits, not immediately transformative.
+  - Examples: Moderately novel extension to an existing architecture; refining current methods without fundamentally altering them.
+
+- Novelty 3-4 (Tangential)
+  - Definition: Minor or domain-specific improvements with limited broader impact.
+  - Examples: Slight modifications to known methods with strange motivation; purely engineering jobs like a new benchmark/dataset.
+
+- Novelty 1-2 (Low)
+  - Definition: Minimal originality, applying standard approaches without real innovation.
+  - Examples: Using an off-the-shelf model without adding new insights; purely application-driven studies like finetuning a pretrained model using existing methods.
+
+## Papers
+
+[PAPER LIST HERE]
+
+## Instructions
+
+Write the response in JSONL format with {ARXIVID, COMMENT, RELEVANCE, NOVELTY} on each line, one for each paper.
+
+- ARXIVID: should be the ArXiv ID.
+- COMMENT: should identify whether there is a criteria that match the paper very closely. These matches should not be based on general terms like "language modeling" or "advancements" and should specifically refer to a criterion. No need to mention the non-matching criteria.
+- RELEVANCE: should be a score from 1-10.
+- NOVELTY: should be a score from 1-10.

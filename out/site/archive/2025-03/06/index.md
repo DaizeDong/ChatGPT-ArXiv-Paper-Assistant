@@ -1,0 +1,473 @@
+<table style="width: 100%; border-collapse: collapse; border: none;">
+    <tr>
+<td style="border: none; padding: 0px; width: 33%;">
+            <div style="display: flex; align-items: center; gap: 5px;">
+                <a href="../05" style="text-decoration: none; color: inherit;">
+                    <strong style="color: black; font-size: 18px;">&larr;</strong>
+                </a>
+                <div style="text-align: center;">
+                    <a href="../05" style="text-decoration: none;">
+                        <strong>Previous Day</strong>
+                    </a>
+                    <br>
+                    <a href="../05" style="text-decoration: none; font-size: 14px; color: gray;">
+                        2025-03-05
+                    </a>
+                </div>
+            </div>
+        </td>
+
+        <td style="border: none; padding: 0px; width: 34%; text-align: center;">
+            <div style="display: flex; flex-direction: column; align-items: center; width: 100%;">
+                <a href=".." style="text-decoration: none;">
+                    <strong>Monthly Overview</strong>
+                </a>
+                <a href=".." style="text-decoration: none; font-size: 14px; color: gray;">
+                    2025-03
+                </a>
+            </div>
+        </td>
+    
+<td style="border: none; padding: 0px; width: 33%;">
+            <div style="display: flex; align-items: center; gap: 5px; justify-content: flex-end; width: 100%;">
+                <div style="text-align: center;">
+                    <a href="../07" style="text-decoration: none;">
+                        <strong>Next Day</strong>
+                    </a>
+                    <br>
+                    <a href="../07" style="text-decoration: none; font-size: 14px; color: gray;">
+                        2025-03-07
+                    </a>
+                </div>
+                <a href="../07" style="text-decoration: none; color: inherit;">
+                    <strong style="color: black; font-size: 18px;">&rarr;</strong>
+                </a>
+            </div>
+        </td>
+    </tr>
+</table>
+
+# Personalized Daily Arxiv Papers 03/06/2025
+
+| *[gpt-4o]*   | Prompt   | Completion   | Total   |
+|--------------|----------|--------------|---------|
+| **Token**    | 31316    | 4414         | 35730   |
+| **Cost**     | $0.08    | $0.04        | $0.12   |
+
+Total ArXiv papers: 442
+
+Total scanned papers: 236
+
+Total relevant papers: 17
+
+**Table of contents with paper titles:**
+
+1. [Convergence Rates for Softmax Gating Mixture of Experts](#user-content-link1)
+**Authors:** Huy Nguyen, Nhat Ho, Alessandro Rinaldo
+
+2. [Conformal Transformations for Symmetric Power Transformers](#user-content-link2)
+**Authors:** Saurabh Kumar, Jacob Buckman, Carles Gelada, Sean Zhang
+
+3. [Cognitive Behaviors that Enable Self-Improving Reasoners, or, Four Habits of Highly Effective STaRs](#user-content-link3)
+**Authors:** Kanishk Gandhi, Ayush Chakravarthy, Anikait Singh, Nathan Lile, Noah D. Goodman
+
+4. [Towards Understanding Multi-Round Large Language Model Reasoning: Approximability, Learnability and Generalizability](#user-content-link4)
+**Authors:** Chenhui Xu, Dancheng Liu, Jiajie Li, Amir Nassereldine, Zhaohui Li, Jinjun Xiong
+
+5. [Effective LLM Knowledge Learning via Model Generalization](#user-content-link5)
+**Authors:** Mingkang Zhu, Xi Chen, Zhongdao Wang, Bei Yu, Hengshuang Zhao, Jiaya Jia
+
+6. [PowerAttention: Exponentially Scaling of Receptive Fields for Effective Sparse Attention](#user-content-link6)
+**Authors:** Lida Chen, Dong Xu, Chenxin An, Xintao Wang, Yikai Zhang, Jiangjie Chen, Zujie Liang, Feng Wei, Jiaqing Liang, Yanghua Xiao, Wei Wang
+
+7. [Towards Understanding Distilled Reasoning Models: A Representational Approach](#user-content-link7)
+**Authors:** David D. Baek, Max Tegmark
+
+8. [Process-based Self-Rewarding Language Models](#user-content-link8)
+**Authors:** Shimao Zhang, Xiao Liu, Xin Zhang, Junxiao Liu, Zheheng Luo, Shujian Huang, Yeyun Gong
+
+9. [Early-Stopped Mirror Descent for Linear Regression over Convex Bodies](#user-content-link9)
+**Authors:** Tobias Wegel, Gil Kur, Patrick Rebeschini
+
+10. [AHCPTQ: Accurate and Hardware-Compatible Post-Training Quantization for Segment Anything Model](#user-content-link10)
+**Authors:** Wenlun Zhang, Shimpei Ando, Kentaro Yoshioka
+
+11. [Feature Matching Intervention: Leveraging Observational Data for Causal Representation Learning](#user-content-link11)
+**Authors:** Haoze Li, Jun Xie
+
+12. [State-offset Tuning: State-based Parameter-Efficient Fine-Tuning for State Space Models](#user-content-link12)
+**Authors:** Wonjun Kang, Kevin Galim, Yuchen Zeng, Minjae Lee, Hyung Il Koo, Nam Ik Cho
+
+13. [Analogical Reasoning Inside Large Language Models: Concept Vectors and the Limits of Abstraction](#user-content-link13)
+**Authors:** Gustaw Opie{\l}ka, Hannes Rosenbusch, Claire E. Stevenson
+
+14. [Conceptualizing Uncertainty](#user-content-link14)
+**Authors:** Isaac Roberts, Alexander Schulz, Sarah Schroeder, Fabian Hinder, Barbara Hammer
+
+15. [See What You Are Told: Visual Attention Sink in Large Multimodal Models](#user-content-link15)
+**Authors:** Seil Kang, Jinyeong Kim, Junhyeok Kim, Seong Jae Hwang
+
+16. [Integrating Predictive and Generative Capabilities by Latent Space Design via the DKL-VAE Model](#user-content-link16)
+**Authors:** Boris N. Slautin, Utkarsh Pratiush, Doru C. Lupascu, Maxim A. Ziatdinov, Sergei V. Kalinin
+
+17. [Partial Convolution Meets Visual Attention](#user-content-link17)
+**Authors:** Haiduo Huang, Fuwei Yang, Dong Li, Ji Liu, Lu Tian, Jinzhang Peng, Pengju Ren, Emad Barsoum
+
+---
+
+## 1. [Convergence Rates for Softmax Gating Mixture of Experts](https://arxiv.org/abs/2503.03213) <a id="link1"></a>
+
+**ArXiv ID:** 2503.03213
+
+**Authors:** Huy Nguyen, Nhat Ho, Alessandro Rinaldo
+
+**Abstract:** Mixture of experts (MoE) has recently emerged as an effective framework to advance the efficiency and scalability of machine learning models by softly dividing complex tasks among multiple specialized sub-models termed experts. Central to the success of MoE is an adaptive softmax gating mechanism which takes responsibility for determining the relevance of each expert to a given input and then dynamically assigning experts their respective weights. Despite its widespread use in practice, a comprehensive study on the effects of the softmax gating on the MoE has been lacking in the literature. To bridge this gap in this paper, we perform a convergence analysis of parameter estimation and expert estimation under the MoE equipped with the standard softmax gating or its variants, including a dense-to-sparse gating and a hierarchical softmax gating, respectively. Furthermore, our theories also provide useful insights into the design of sample-efficient expert structures. In particular, we demonstrate that it requires polynomially many data points to estimate experts satisfying our proposed \emph{strong identifiability} condition, namely a commonly used two-layer feed-forward network. In stark contrast, estimating linear experts, which violate the strong identifiability condition, necessitates exponentially many data points as a result of intrinsic parameter interactions expressed in the language of partial differential equations. All the theoretical results are substantiated with a rigorous guarantee.
+
+**Comment:** The paper provides a theoretical analysis of softmax gating in Mixture of Experts (MoE), directly addressing architectural insights and efficiency. The convergence analysis and sample efficiency insights are highly relevant.
+
+**Relevance:** 10
+**Novelty:** 9
+
+---
+
+## 2. [Conformal Transformations for Symmetric Power Transformers](https://arxiv.org/abs/2503.03269) <a id="link2"></a>
+
+**ArXiv ID:** 2503.03269
+
+**Authors:** Saurabh Kumar, Jacob Buckman, Carles Gelada, Sean Zhang
+
+**Abstract:** Transformers with linear attention offer significant computational advantages over softmax-based transformers but often suffer from degraded performance. The symmetric power (sympow) transformer, a particular type of linear transformer, addresses some of this performance gap by leveraging symmetric tensor embeddings, achieving comparable performance to softmax transformers. However, the finite capacity of the recurrent state in sympow transformers limits their ability to retain information, leading to performance degradation when scaling the training or evaluation context length. To address this issue, we propose the conformal-sympow transformer, which dynamically frees up capacity using data-dependent multiplicative gating and adaptively stores information using data-dependent rotary embeddings. Preliminary experiments on the LongCrawl64 dataset demonstrate that conformal-sympow overcomes the limitations of sympow transformers, achieving robust performance across scaled training and evaluation contexts.
+
+**Comment:** The paper introduces a novel architectural improvement to linear transformers by addressing capacity limitations in symmetric power transformers using conformal transformations. This aligns with the 'Model Architecture' criterion, focusing on architectural innovations.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 3. [Cognitive Behaviors that Enable Self-Improving Reasoners, or, Four Habits of Highly Effective STaRs](https://arxiv.org/abs/2503.01307) <a id="link3"></a>
+
+**ArXiv ID:** 2503.01307
+
+**Authors:** Kanishk Gandhi, Ayush Chakravarthy, Anikait Singh, Nathan Lile, Noah D. Goodman
+
+**Abstract:** Test-time inference has emerged as a powerful paradigm for enabling language models to ``think'' longer and more carefully about complex challenges, much like skilled human experts. While reinforcement learning (RL) can drive self-improvement in language models on verifiable tasks, some models exhibit substantial gains while others quickly plateau. For instance, we find that Qwen-2.5-3B far exceeds Llama-3.2-3B under identical RL training for the game of Countdown. This discrepancy raises a critical question: what intrinsic properties enable effective self-improvement? We introduce a framework to investigate this question by analyzing four key cognitive behaviors -- verification, backtracking, subgoal setting, and backward chaining -- that both expert human problem solvers and successful language models employ. Our study reveals that Qwen naturally exhibits these reasoning behaviors, whereas Llama initially lacks them. In systematic experimentation with controlled behavioral datasets, we find that priming Llama with examples containing these reasoning behaviors enables substantial improvements during RL, matching or exceeding Qwen's performance. Importantly, the presence of reasoning behaviors, rather than correctness of answers, proves to be the critical factor -- models primed with incorrect solutions containing proper reasoning patterns achieve comparable performance to those trained on correct solutions. Finally, leveraging continued pretraining with OpenWebMath data, filtered to amplify reasoning behaviors, enables the Llama model to match Qwen's self-improvement trajectory. Our findings establish a fundamental relationship between initial reasoning behaviors and the capacity for improvement, explaining why some language models effectively utilize additional computation while others plateau.
+
+**Comment:** The paper investigates cognitive behaviors in language models that enable self-improvement, providing theoretical insights into reasoning behaviors and their impact on model performance. This aligns with the 'Large Language Models' criterion, focusing on theoretical insights into LLM behavior.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 4. [Towards Understanding Multi-Round Large Language Model Reasoning: Approximability, Learnability and Generalizability](https://arxiv.org/abs/2503.03128) <a id="link4"></a>
+
+**ArXiv ID:** 2503.03128
+
+**Authors:** Chenhui Xu, Dancheng Liu, Jiajie Li, Amir Nassereldine, Zhaohui Li, Jinjun Xiong
+
+**Abstract:** Recent advancements in cognitive science and multi-round reasoning techniques for Large Language Models (LLMs) suggest that iterative thinking processes improve problem-solving performance in complex tasks. Inspired by this, approaches like Chain-of-Thought, debating, and self-refinement have been applied to auto-regressive LLMs, achieving significant successes in tasks such as mathematical reasoning, commonsense reasoning, and multi-hop question answering. Despite these successes, the theoretical basis for how multi-round reasoning enhances problem-solving abilities remains underexplored. In this work, we investigate the approximation, learnability, and generalization properties of multi-round auto-regressive models. We show that Transformers with finite context windows are universal approximators for steps of Turing-computable functions and can approximate any Turing-computable sequence-to-sequence function through multi-round reasoning. We extend PAC learning to sequence generation and demonstrate that multi-round generation is learnable even when the sequence length exceeds the model's context window. Finally, we examine how generalization error propagates across rounds, and show how the aforementioned approaches can help constrain this error, ensuring outputs stay within an expectation boundary. This work sheds light on the systemic theoretical foundations of multi-round sequence learning and reasoning, emphasizing its role in inference complexity.
+
+**Comment:** The paper provides theoretical insights into multi-round reasoning in LLMs, focusing on approximation, learnability, and generalization. This aligns with the 'Large Language Models' criterion, particularly in understanding foundational behavior and theoretical properties.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 5. [Effective LLM Knowledge Learning via Model Generalization](https://arxiv.org/abs/2503.03705) <a id="link5"></a>
+
+**ArXiv ID:** 2503.03705
+
+**Authors:** Mingkang Zhu, Xi Chen, Zhongdao Wang, Bei Yu, Hengshuang Zhao, Jiaya Jia
+
+**Abstract:** Large language models (LLMs) are trained on enormous documents that contain extensive world knowledge. However, it is still not well-understood how knowledge is acquired via autoregressive pre-training. This lack of understanding greatly hinders effective knowledge learning, especially for continued pretraining on up-to-date information, as this evolving information often lacks diverse repetitions like foundational knowledge. In this paper, we focus on understanding and improving LLM knowledge learning. We found and verified that knowledge learning for LLMs can be deemed as an implicit supervised task hidden in the autoregressive pre-training objective. Our findings suggest that knowledge learning for LLMs would benefit from methods designed to improve generalization ability for supervised tasks. Based on our analysis, we propose the formatting-based data augmentation to grow in-distribution samples, which does not present the risk of altering the facts embedded in documents as text paraphrasing. We also introduce sharpness-aware minimization as an effective optimization algorithm to better improve generalization. Moreover, our analysis and method can be readily extended to instruction tuning. Extensive experiment results validate our findings and demonstrate our methods' effectiveness in both continued pre-training and instruction tuning. This paper offers new perspectives and insights to interpret and design effective strategies for LLM knowledge learning.
+
+**Comment:** The paper explores knowledge learning in LLMs and proposes methods to improve generalization during pretraining. This aligns with the 'Large Language Models' criterion, particularly in understanding and enhancing foundational knowledge acquisition.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 6. [PowerAttention: Exponentially Scaling of Receptive Fields for Effective Sparse Attention](https://arxiv.org/abs/2503.03588) <a id="link6"></a>
+
+**ArXiv ID:** 2503.03588
+
+**Authors:** Lida Chen, Dong Xu, Chenxin An, Xintao Wang, Yikai Zhang, Jiangjie Chen, Zujie Liang, Feng Wei, Jiaqing Liang, Yanghua Xiao, Wei Wang
+
+**Abstract:** Large Language Models (LLMs) face efficiency bottlenecks due to the quadratic complexity of the attention mechanism when processing long contexts. Sparse attention methods offer a promising solution, but existing approaches often suffer from incomplete effective context and/or require complex implementation of pipeline. We present a comprehensive analysis of sparse attention for autoregressive LLMs from the respective of receptive field, recognize the suboptimal nature of existing methods for expanding the receptive field, and introduce PowerAttention, a novel sparse attention design that facilitates effective and complete context extension through the theoretical analysis. PowerAttention achieves exponential receptive field growth in $d$-layer LLMs, allowing each output token to attend to $2^d$ tokens, ensuring completeness and continuity of the receptive field. Experiments demonstrate that PowerAttention outperforms existing static sparse attention methods by $5\sim 40\%$, especially on tasks demanding long-range dependencies like Passkey Retrieval and RULER, while maintaining a comparable time complexity to sliding window attention. Efficiency evaluations further highlight PowerAttention's superior speedup in both prefilling and decoding phases compared with dynamic sparse attentions and full attention ($3.0\times$ faster on 128K context), making it a highly effective and user-friendly solution for processing long sequences in LLMs.
+
+**Comment:** The paper introduces PowerAttention, a sparse attention mechanism for LLMs that improves efficiency and scalability. This aligns with the 'Model Compression' criterion, focusing on efficiency breakthroughs in attention mechanisms.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 7. [Towards Understanding Distilled Reasoning Models: A Representational Approach](https://arxiv.org/abs/2503.03730) <a id="link7"></a>
+
+**ArXiv ID:** 2503.03730
+
+**Authors:** David D. Baek, Max Tegmark
+
+**Abstract:** In this paper, we investigate how model distillation impacts the development of reasoning features in large language models (LLMs). To explore this, we train a crosscoder on Qwen-series models and their fine-tuned variants. Our results suggest that the crosscoder learns features corresponding to various types of reasoning, including self-reflection and computation verification. Moreover, we observe that distilled models contain unique reasoning feature directions, which could be used to steer the model into over-thinking or incisive-thinking mode. In particular, we perform analysis on four specific reasoning categories: (a) self-reflection, (b) deductive reasoning, (c) alternative reasoning, and (d) contrastive reasoning. Finally, we examine the changes in feature geometry resulting from the distillation process and find indications that larger distilled models may develop more structured representations, which correlate with enhanced distillation performance. By providing insights into how distillation modifies the model, our study contributes to enhancing the transparency and reliability of AI systems.
+
+**Comment:** The paper explores how model distillation impacts reasoning features in LLMs, aligning with representation learning and theoretical insights into LLM behavior. The focus on feature geometry and structured representations is highly relevant.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 8. [Process-based Self-Rewarding Language Models](https://arxiv.org/abs/2503.03746) <a id="link8"></a>
+
+**ArXiv ID:** 2503.03746
+
+**Authors:** Shimao Zhang, Xiao Liu, Xin Zhang, Junxiao Liu, Zheheng Luo, Shujian Huang, Yeyun Gong
+
+**Abstract:** Large Language Models have demonstrated outstanding performance across various downstream tasks and have been widely applied in multiple scenarios. Human-annotated preference data is used for training to further improve LLMs' performance, which is constrained by the upper limit of human performance. Therefore, Self-Rewarding method has been proposed, where LLMs generate training data by rewarding their own outputs. However, the existing self-rewarding paradigm is not effective in mathematical reasoning scenarios and may even lead to a decline in performance. In this work, we propose the Process-based Self-Rewarding pipeline for language models, which introduces long-thought reasoning, step-wise LLM-as-a-Judge, and step-wise preference optimization within the self-rewarding paradigm. Our new paradigm successfully enhances the performance of LLMs on multiple mathematical reasoning benchmarks through iterative Process-based Self-Rewarding, demonstrating the immense potential of self-rewarding to achieve LLM reasoning that may surpass human capabilities.
+
+**Comment:** The paper explores a self-rewarding paradigm for LLMs with a focus on mathematical reasoning, which aligns with foundational research in LLM behavior and interpretability. The proposed process-based self-rewarding pipeline introduces novel theoretical insights.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 9. [Early-Stopped Mirror Descent for Linear Regression over Convex Bodies](https://arxiv.org/abs/2503.03426) <a id="link9"></a>
+
+**ArXiv ID:** 2503.03426
+
+**Authors:** Tobias Wegel, Gil Kur, Patrick Rebeschini
+
+**Abstract:** Early-stopped iterative optimization methods are widely used as alternatives to explicit regularization, and direct comparisons between early-stopping and explicit regularization have been established for many optimization geometries. However, most analyses depend heavily on the specific properties of the optimization geometry or strong convexity of the empirical objective, and it remains unclear whether early-stopping could ever be less statistically efficient than explicit regularization for some particular shape constraint, especially in the overparameterized regime. To address this question, we study the setting of high-dimensional linear regression under additive Gaussian noise when the ground truth is assumed to lie in a known convex body and the task is to minimize the in-sample mean squared error. Our main result shows that for any convex body and any design matrix, up to an absolute constant factor, the worst-case risk of unconstrained early-stopped mirror descent with an appropriate potential is at most that of the least squares estimator constrained to the convex body. We achieve this by constructing algorithmic regularizers based on the Minkowski functional of the convex body.
+
+**Comment:** The paper provides a theoretical analysis of early-stopped mirror descent for linear regression over convex bodies, offering insights into optimization and regularization. This aligns with 'Emerging Trends' as it challenges assumptions about regularization methods.
+
+**Relevance:** 8
+**Novelty:** 8
+
+---
+
+## 10. [AHCPTQ: Accurate and Hardware-Compatible Post-Training Quantization for Segment Anything Model](https://arxiv.org/abs/2503.03088) <a id="link10"></a>
+
+**ArXiv ID:** 2503.03088
+
+**Authors:** Wenlun Zhang, Shimpei Ando, Kentaro Yoshioka
+
+**Abstract:** The Segment Anything Model (SAM) has demonstrated strong versatility across various visual tasks. However, its large storage requirements and high computational cost pose challenges for practical deployment. Post-training quantization (PTQ) has emerged as an effective strategy for efficient deployment, but we identify two key challenges in SAM that hinder the effectiveness of existing PTQ methods: the heavy-tailed and skewed distribution of post-GELU activations, and significant inter-channel variation in linear projection activations. To address these challenges, we propose AHCPTQ, an accurate and hardware-efficient PTQ method for SAM. AHCPTQ introduces hardware-compatible Hybrid Log-Uniform Quantization (HLUQ) to manage post-GELU activations, employing log2 quantization for dense small values and uniform quantization for sparse large values to enhance quantization resolution. Additionally, AHCPTQ incorporates Channel-Aware Grouping (CAG) to mitigate inter-channel variation by progressively clustering activation channels with similar distributions, enabling them to share quantization parameters and improving hardware efficiency. The combination of HLUQ and CAG not only enhances quantization effectiveness but also ensures compatibility with efficient hardware execution. For instance, under the W4A4 configuration on the SAM-L model, AHCPTQ achieves 36.6% mAP on instance segmentation with the DINO detector, while achieving a 7.89x speedup and 8.64x energy efficiency over its floating-point counterpart in FPGA implementation.
+
+**Comment:** The paper addresses post-training quantization for the Segment Anything Model, which aligns with model compression techniques. The proposed hybrid quantization and channel-aware grouping are novel contributions.
+
+**Relevance:** 8
+**Novelty:** 8
+
+---
+
+## 11. [Feature Matching Intervention: Leveraging Observational Data for Causal Representation Learning](https://arxiv.org/abs/2503.03634) <a id="link11"></a>
+
+**ArXiv ID:** 2503.03634
+
+**Authors:** Haoze Li, Jun Xie
+
+**Abstract:** A major challenge in causal discovery from observational data is the absence of perfect interventions, making it difficult to distinguish causal features from spurious ones. We propose an innovative approach, Feature Matching Intervention (FMI), which uses a matching procedure to mimic perfect interventions. We define causal latent graphs, extending structural causal models to latent feature space, providing a framework that connects FMI with causal graph learning. Our feature matching procedure emulates perfect interventions within these causal latent graphs. Theoretical results demonstrate that FMI exhibits strong out-of-distribution (OOD) generalizability. Experiments further highlight FMI's superior performance in effectively identifying causal features solely from observational data.
+
+**Comment:** The paper introduces a novel approach for causal representation learning using feature matching interventions. This aligns with the 'Representation Learning' criterion, focusing on foundational methods for identifying causal features.
+
+**Relevance:** 8
+**Novelty:** 8
+
+---
+
+## 12. [State-offset Tuning: State-based Parameter-Efficient Fine-Tuning for State Space Models](https://arxiv.org/abs/2503.03499) <a id="link12"></a>
+
+**ArXiv ID:** 2503.03499
+
+**Authors:** Wonjun Kang, Kevin Galim, Yuchen Zeng, Minjae Lee, Hyung Il Koo, Nam Ik Cho
+
+**Abstract:** State Space Models (SSMs) have emerged as efficient alternatives to Transformers, mitigating their quadratic computational cost. However, the application of Parameter-Efficient Fine-Tuning (PEFT) methods to SSMs remains largely unexplored. In particular, prompt-based methods like Prompt Tuning and Prefix-Tuning, which are widely used in Transformers, do not perform well on SSMs. To address this, we propose state-based methods as a superior alternative to prompt-based methods. This new family of methods naturally stems from the architectural characteristics of SSMs. State-based methods adjust state-related features directly instead of depending on external prompts. Furthermore, we introduce a novel state-based PEFT method: State-offset Tuning. At every timestep, our method directly affects the state at the current step, leading to more effective adaptation. Through extensive experiments across diverse datasets, we demonstrate the effectiveness of our method. Code is available at https://github.com/furiosa-ai/ssm-state-tuning.
+
+**Comment:** The paper proposes a state-based parameter-efficient fine-tuning method for State Space Models, which aligns with foundational research in model compression and architectural innovations. The method is novel and leverages the unique characteristics of SSMs.
+
+**Relevance:** 8
+**Novelty:** 8
+
+---
+
+## 13. [Analogical Reasoning Inside Large Language Models: Concept Vectors and the Limits of Abstraction](https://arxiv.org/abs/2503.03666) <a id="link13"></a>
+
+**ArXiv ID:** 2503.03666
+
+**Authors:** Gustaw Opie{\l}ka, Hannes Rosenbusch, Claire E. Stevenson
+
+**Abstract:** Analogical reasoning relies on conceptual abstractions, but it is unclear whether Large Language Models (LLMs) harbor such internal representations. We explore distilled representations from LLM activations and find that function vectors (FVs; Todd et al., 2024) - compact representations for in-context learning (ICL) tasks - are not invariant to simple input changes (e.g., open-ended vs. multiple-choice), suggesting they capture more than pure concepts. Using representational similarity analysis (RSA), we localize a small set of attention heads that encode invariant concept vectors (CVs) for verbal concepts like "antonym". These CVs function as feature detectors that operate independently of the final output - meaning that a model may form a correct internal representation yet still produce an incorrect output. Furthermore, CVs can be used to causally guide model behaviour. However, for more abstract concepts like "previous" and "next", we do not observe invariant linear representations, a finding we link to generalizability issues LLMs display within these domains.
+
+**Comment:** The paper investigates analogical reasoning and concept vectors in LLMs, providing insights into representation learning and interpretability. The focus on invariant concept vectors and their causal role is relevant.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 14. [Conceptualizing Uncertainty](https://arxiv.org/abs/2503.03443) <a id="link14"></a>
+
+**ArXiv ID:** 2503.03443
+
+**Authors:** Isaac Roberts, Alexander Schulz, Sarah Schroeder, Fabian Hinder, Barbara Hammer
+
+**Abstract:** Uncertainty in machine learning refers to the degree of confidence or lack thereof in a model's predictions. While uncertainty quantification methods exist, explanations of uncertainty, especially in high-dimensional settings, remain an open challenge. Existing work focuses on feature attribution approaches which are restricted to local explanations. Understanding uncertainty, its origins, and characteristics on a global scale is crucial for enhancing interpretability and trust in a model's predictions. In this work, we propose to explain the uncertainty in high-dimensional data classification settings by means of concept activation vectors which give rise to local and global explanations of uncertainty. We demonstrate the utility of the generated explanations by leveraging them to refine and improve our model.
+
+**Comment:** The paper proposes concept activation vectors to explain uncertainty in high-dimensional data, aligning with representation learning and interpretability. The focus on global explanations of uncertainty is relevant.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 15. [See What You Are Told: Visual Attention Sink in Large Multimodal Models](https://arxiv.org/abs/2503.03321) <a id="link15"></a>
+
+**ArXiv ID:** 2503.03321
+
+**Authors:** Seil Kang, Jinyeong Kim, Junhyeok Kim, Seong Jae Hwang
+
+**Abstract:** Large multimodal models (LMMs) "see" images by leveraging the attention mechanism between text and visual tokens in the transformer decoder. Ideally, these models should focus on key visual information relevant to the text token. However, recent findings indicate that LMMs have an extraordinary tendency to consistently allocate high attention weights to specific visual tokens, even when these tokens are irrelevant to the corresponding text. In this study, we investigate the property behind the appearance of these irrelevant visual tokens and examine their characteristics. Our findings show that this behavior arises due to the massive activation of certain hidden state dimensions, which resembles the attention sink found in language models. Hence, we refer to this phenomenon as the visual attention sink. In particular, our analysis reveals that removing the irrelevant visual sink tokens does not impact model performance, despite receiving high attention weights. Consequently, we recycle the attention to these tokens as surplus resources, redistributing the attention budget to enhance focus on the image. To achieve this, we introduce Visual Attention Redistribution (VAR), a method that redistributes attention in image-centric heads, which we identify as innately focusing on visual information. VAR can be seamlessly applied across different LMMs to improve performance on a wide range of tasks, including general vision-language tasks, visual hallucination tasks, and vision-centric tasks, all without the need for additional training, models, or inference steps. Experimental results demonstrate that VAR enables LMMs to process visual information more effectively by adjusting their internal attention mechanisms, offering a new direction to enhancing the multimodal capabilities of LMMs.
+
+**Comment:** The paper investigates the visual attention sink phenomenon in large multimodal models and proposes a method to redistribute attention for better performance. This aligns with foundational research in model architecture and interpretability.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 16. [Integrating Predictive and Generative Capabilities by Latent Space Design via the DKL-VAE Model](https://arxiv.org/abs/2503.02978) <a id="link16"></a>
+
+**ArXiv ID:** 2503.02978
+
+**Authors:** Boris N. Slautin, Utkarsh Pratiush, Doru C. Lupascu, Maxim A. Ziatdinov, Sergei V. Kalinin
+
+**Abstract:** We introduce a Deep Kernel Learning Variational Autoencoder (VAE-DKL) framework that integrates the generative power of a Variational Autoencoder (VAE) with the predictive nature of Deep Kernel Learning (DKL). The VAE learns a latent representation of high-dimensional data, enabling the generation of novel structures, while DKL refines this latent space by structuring it in alignment with target properties through Gaussian Process (GP) regression. This approach preserves the generative capabilities of the VAE while enhancing its latent space for GP-based property prediction. We evaluate the framework on two datasets: a structured card dataset with predefined variational factors and the QM9 molecular dataset, where enthalpy serves as the target function for optimization. The model demonstrates high-precision property prediction and enables the generation of novel out-of-training subset structures with desired characteristics. The VAE-DKL framework offers a promising approach for high-throughput material discovery and molecular design, balancing structured latent space organization with generative flexibility.
+
+**Comment:** The paper introduces a novel framework combining VAE and DKL, which aligns with representation learning by enhancing latent space organization for generative and predictive tasks. However, the focus on application to material discovery makes it slightly less foundational.
+
+**Relevance:** 7
+**Novelty:** 8
+
+---
+
+## 17. [Partial Convolution Meets Visual Attention](https://arxiv.org/abs/2503.03148) <a id="link17"></a>
+
+**ArXiv ID:** 2503.03148
+
+**Authors:** Haiduo Huang, Fuwei Yang, Dong Li, Ji Liu, Lu Tian, Jinzhang Peng, Pengju Ren, Emad Barsoum
+
+**Abstract:** Designing an efficient and effective neural network has remained a prominent topic in computer vision research. Depthwise onvolution (DWConv) is widely used in efficient CNNs or ViTs, but it needs frequent memory access during inference, which leads to low throughput. FasterNet attempts to introduce partial convolution (PConv) as an alternative to DWConv but compromises the accuracy due to underutilized channels. To remedy this shortcoming and consider the redundancy between feature map channels, we introduce a novel Partial visual ATtention mechanism (PAT) that can efficiently combine PConv with visual attention. Our exploration indicates that the partial attention mechanism can completely replace the full attention mechanism and reduce model parameters and FLOPs. Our PAT can derive three types of blocks: Partial Channel-Attention block (PAT_ch), Partial Spatial-Attention block (PAT_sp) and Partial Self-Attention block (PAT_sf). First, PAT_ch integrates the enhanced Gaussian channel attention mechanism to infuse global distribution information into the untouched channels of PConv. Second, we introduce the spatial-wise attention to the MLP layer to further improve model accuracy. Finally, we replace PAT_ch in the last stage with the self-attention mechanism to extend the global receptive field. Building upon PAT, we propose a novel hybrid network family, named PATNet, which achieves superior top-1 accuracy and inference speed compared to FasterNet on ImageNet-1K classification and excel in both detection and segmentation on the COCO dataset. Particularly, our PATNet-T2 achieves 1.3% higher accuracy than FasterNet-T2, while exhibiting 25% higher GPU throughput and 24% lower CPU latency.
+
+**Comment:** The paper proposes PATNet, a hybrid network combining partial convolution and visual attention mechanisms, focusing on efficiency improvements in CNNs and ViTs. This aligns with 'Model Architecture' but leans towards application-driven improvements.
+
+**Relevance:** 7
+**Novelty:** 6
+
+---
+
+# Paper Selection Prompt
+
+You are a helpful paper reading assistant whose job is to read daily posts from ArXiv and identify a few papers that your friend will enjoy reading.
+Your job is to carefully read the paper titles and abstracts below and find the ones that match the criteria below.
+
+## Relevant Topics
+
+Use the following relevance criteria to focus on foundational research. Keep **relevant** papers and filter out **irrelevant** ones. Avoid purely **application-driven** work.
+
+1. Representation Learning
+   - Relevant: Insights into how deep networks encode information, feature/dictionary learning, sparse/contrastive methods, training dynamics in neural networks.
+   - Irrelevant: Standard applications of known techniques lacking new theoretical or methodological contributions.
+
+2. Model Architecture
+   - Relevant: Mixture-of-Experts (MoE), Transformers, Conditional/Dynamic Networks, Autoencoders, analysis on existing architectures (like encoder-decoder), or other architectural innovations.
+   - Irrelevant: Merely using existing architectures for a certain task without insights into the structure themselves.
+
+3. Model Compression
+   - Relevant: Sparsity, pruning, quantization, low-rank approaches, KV cache, or other algorithmic/theoretical efficiency breakthroughs.
+   - Irrelevant: Straightforward applications of existing compression methods to new tasks.
+
+4. Large Language Models (LLMs)
+   - Relevant: Major breakthroughs in pretraining or architecture, theoretical insights into LLM behavior/interpretability.
+   - Irrelevant: Domain-specific usage (e.g., translation, jail-breaking), finetuning or inference tricks (e.g., instruction tuning, chain-of-thoughts, data mixing), or empirical dataset/benchmark studies and text-level analysis (e.g. hallucination, reasoning, safety).
+
+5. AI for Science
+   - Relevant: Foundational research in molecular/protein modeling, new generative paradigms, or significant architecture-level innovations.
+   - Irrelevant: Conventional, domain-specific applications without new theoretical perspectives.
+
+6. Emerging Trends
+   - Relevant: Cutting-edge theoretical work challenging established assumptions or introducing broad new paradigms.
+   - Irrelevant: Incremental improvements or trend-following without novel insights.
+
+**Keywords:**
+
+- Relevant: Mixture of Experts (MoE), Representation Learning, Compression/Efficiency, Sparse/Sparsity, Pruning, Quantization, Low-rank, Foundation Model, etc.
+- Irrelevant: Reinforcement Learning, Transfer Learning, Federated Learning, Online Learning, Diffusion Models, etc.
+- Application: Image Segmentation, Medical Imaging, 3D Vision, Video Understanding, Information Retrieval, Summarization, Recommendation Systems, Machine Translation, Speech Recognition, Signal Processing, Spatial/Temporal Modeling, Time Series, Knowledge Graph, etc.
+
+## Scoring Criteria
+
+> The "Relevance" score measures how closely the paper aligns with the core topics of the prompt.
+> The "Novelty" score assesses the originality and impact of the paper.
+> They are two **ORTHONORMAL** axes and **SHOULD NOT** be confused with each other.
+
+### Relevance Scoring
+
+- Relevance 9-10 (Completely Relevant)
+  - Focus: Fully aligned with core topics with no deviation, score the highest if contains relevant keywords in it.
+  - Examples: Papers focused on foundational methods or theoretical research, whose titles contain topic keywords like "MoE".
+
+- Relevance 7-8 (Relevant)
+  - Focus: Retain a solid link to the main research area, though may touch on peripheral elements.
+  - Examples: Papers research on the fundamental part of MoE through a less critical aspect like its behavior in GNN.
+
+- Relevance 5-6 (Borderline)
+  - Focus: Maintains a link to the core topic but also extends into at least one other domain/area beyond the primary focus.
+  - Examples: Work referencing MoE centered on reinforcement learning.
+
+- Relevance 3-4 (Irrelevant)
+  - Focus: Largely outside our interests with no association to our topics.
+  - Examples: Application-focused papers like using MoE to solve a problem in the real world.
+
+- Relevance 1-2 (Ignore)
+  - Focus: Purely unrelated to our topics. Completely a different domain.
+  - **Exception**: If the paper hints at a cutting-edge, radically new direction that could eventually transform the primary domain, consider a score of 9–10 despite initial appearances. (Usually a very rare concept that belongs to the fundamental research)
+
+### Novelty Scoring
+
+- Novelty 9-10 (Breakthrough)
+  - Definition: Groundbreaking methods/theory introducing new directions or solving major challenges.
+  - Examples: Entirely new paradigm for foundational models; a novel theory transforming representation learning.
+
+- Novelty 7-8 (Improvements)
+  - Definition: Substantial insights/enhancements, though not a full paradigm shift.
+  - Examples: Modifications on existing methods yielding significantly better results.
+
+- Novelty 5-6 (Borderline)
+  - Definition: Incremental contributions with possible long-term benefits, not immediately transformative.
+  - Examples: Moderately novel extension to an existing architecture; refining current methods without fundamentally altering them.
+
+- Novelty 3-4 (Tangential)
+  - Definition: Minor or domain-specific improvements with limited broader impact.
+  - Examples: Slight modifications to known methods with strange motivation; purely engineering jobs like a new benchmark/dataset.
+
+- Novelty 1-2 (Low)
+  - Definition: Minimal originality, applying standard approaches without real innovation.
+  - Examples: Using an off-the-shelf model without adding new insights; purely application-driven studies like finetuning a pretrained model using existing methods.
+
+## Papers
+
+[PAPER LIST HERE]
+
+## Instructions
+
+Write the response in JSONL format with {ARXIVID, COMMENT, RELEVANCE, NOVELTY} on each line, one for each paper.
+
+- ARXIVID: should be the ArXiv ID.
+- COMMENT: should identify whether there is a criteria that match the paper very closely. These matches should not be based on general terms like "language modeling" or "advancements" and should specifically refer to a criterion. No need to mention the non-matching criteria.
+- RELEVANCE: should be a score from 1-10.
+- NOVELTY: should be a score from 1-10.

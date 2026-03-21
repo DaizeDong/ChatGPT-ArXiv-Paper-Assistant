@@ -1,0 +1,545 @@
+<table style="width: 100%; border-collapse: collapse; border: none;">
+    <tr>
+<td style="border: none; padding: 0px; width: 33%;">
+            <div style="display: flex; align-items: center; gap: 5px;">
+                <a href="../14" style="text-decoration: none; color: inherit;">
+                    <strong style="color: black; font-size: 18px;">&larr;</strong>
+                </a>
+                <div style="text-align: center;">
+                    <a href="../14" style="text-decoration: none;">
+                        <strong>Previous Day</strong>
+                    </a>
+                    <br>
+                    <a href="../14" style="text-decoration: none; font-size: 14px; color: gray;">
+                        2025-02-14
+                    </a>
+                </div>
+            </div>
+        </td>
+
+        <td style="border: none; padding: 0px; width: 34%; text-align: center;">
+            <div style="display: flex; flex-direction: column; align-items: center; width: 100%;">
+                <a href=".." style="text-decoration: none;">
+                    <strong>Monthly Overview</strong>
+                </a>
+                <a href=".." style="text-decoration: none; font-size: 14px; color: gray;">
+                    2025-02
+                </a>
+            </div>
+        </td>
+    
+<td style="border: none; padding: 0px; width: 33%;">
+            <div style="display: flex; align-items: center; gap: 5px; justify-content: flex-end; width: 100%;">
+                <div style="text-align: center;">
+                    <a href="../18" style="text-decoration: none;">
+                        <strong>Next Day</strong>
+                    </a>
+                    <br>
+                    <a href="../18" style="text-decoration: none; font-size: 14px; color: gray;">
+                        2025-02-18
+                    </a>
+                </div>
+                <a href="../18" style="text-decoration: none; color: inherit;">
+                    <strong style="color: black; font-size: 18px;">&rarr;</strong>
+                </a>
+            </div>
+        </td>
+    </tr>
+</table>
+
+# Personalized Daily Arxiv Papers 02/17/2025
+
+|           | Prompt   | Completion   | Total   |
+|-----------|----------|--------------|---------|
+| **Token** | 66350    | 5324         | 71674   |
+| **Cost**  | $0.17    | $0.05        | $0.22   |
+
+Total scanned papers: 267
+
+Total relevant papers: 21
+
+**Table of contents with paper titles:**
+
+1. [Shaping Inductive Bias in Diffusion Models through Frequency-Based Noise Control](#user-content-link1)
+**Authors:** Thomas Jiralerspong, Berton Earnshaw, Jason Hartford, Yoshua Bengio, Luca Scimeca
+
+2. [Solvable Dynamics of Self-Supervised Word Embeddings and the Emergence of Analogical Reasoning](#user-content-link2)
+**Authors:** Dhruva Karkada, James B. Simon, Yasaman Bahri, Michael R. DeWeese
+
+3. [Representation and Interpretation in Artificial and Natural Computing](#user-content-link3)
+**Authors:** Luis A. Pineda
+
+4. [A novel approach to data generation in generative model](#user-content-link4)
+**Authors:** JaeHong Kim (Healthcare, Legal and Policy Center, Graduate school of Law, Korea University, Seoul 02841, Korea, Human-Inspired AI Research, Korea University, Seoul 02841, Korea), Jaewon Shim (Center for 0D Nanofluidics, Institute of Applied Physics, Department of Physics and Astronomy, Seoul National University, Seoul 08826, Korea)
+
+5. [NestQuant: Nested Lattice Quantization for Matrix Products and LLMs](#user-content-link5)
+**Authors:** Semyon Savkin, Eitan Porat, Or Ordentlich, Yury Polyanskiy
+
+6. [On Space Folds of ReLU Neural Networks](#user-content-link6)
+**Authors:** Michal Lewandowski, Hamid Eghbalzadeh, Bernhard Heinzl, Raphael Pisoni, Bernhard A. Moser
+
+7. [Prediction hubs are context-informed frequent tokens in LLMs](#user-content-link7)
+**Authors:** Beatrix M. G. Nielsen, Iuri Macocco, Marco Baroni
+
+8. [Fenchel-Young Variational Learning](#user-content-link8)
+**Authors:** Sophia Sklaviadis, Sweta Agrawal, Antonio Farinhas, Andre Martins, Mario Figueiredo
+
+9. [Deep Tree Tensor Networks for Image Recognition](#user-content-link9)
+**Authors:** Chang Nie, Junfang Chen, Yajie Chen
+
+10. [Estimation of the Learning Coefficient Using Empirical Loss](#user-content-link10)
+**Authors:** Tatsuyoshi Takio, Joe Suzuki
+
+11. [STAR: Spectral Truncation and Rescale for Model Merging](#user-content-link11)
+**Authors:** Yu-Ang Lee, Ching-Yun Ko, Tejaswini Pedapati, I-Hsin Chung, Mi-Yen Yeh, Pin-Yu Chen
+
+12. [Data-Adaptive Low-Rank Sparse Subspace Clustering](#user-content-link12)
+**Authors:** Ivica Kopriva
+
+13. [Balancing the Scales: A Theoretical and Algorithmic Framework for Learning from Imbalanced Data](#user-content-link13)
+**Authors:** Corinna Cortes, Anqi Mao, Mehryar Mohri, Yutao Zhong
+
+14. [Revisiting Generalization Power of a DNN in Terms of Symbolic Interactions](#user-content-link14)
+**Authors:** Lei Cheng, Junpeng Zhang, Qihan Ren, Quanshi Zhang
+
+15. [Elastic Representation: Mitigating Spurious Correlations for Group Robustness](#user-content-link15)
+**Authors:** Tao Wen, Zihan Wang, Quan Zhang, Qi Lei
+
+16. [Heterogeneous Resource Allocation with Multi-task Learning for Wireless Networks](#user-content-link16)
+**Authors:** Nikos A. Mitsiou, Pavlos S. Bouzinis, Panagiotis G. Sarigiannidis, George K. Karagiannidis
+
+17. [Enhancing Multilingual LLM Pretraining with Model-Based Data Selection](#user-content-link17)
+**Authors:** Bettina Messmer, Vinko Sabol\v{c}ec, Martin Jaggi
+
+18. [Process Reward Models for LLM Agents: Practical Framework and Directions](#user-content-link18)
+**Authors:** Sanjiban Choudhury
+
+19. [Conditional Latent Coding with Learnable Synthesized Reference for Deep Image Compression](#user-content-link19)
+**Authors:** Siqi Wu, Yinda Chen, Dong Liu, Zhihai He
+
+20. [The Ann Arbor Architecture for Agent-Oriented Programming](#user-content-link20)
+**Authors:** Wei Dong
+
+21. [Nonasymptotic CLT and Error Bounds for Two-Time-Scale Stochastic Approximation](#user-content-link21)
+**Authors:** Seo Taek Kong, Sihan Zeng, Thinh T. Doan, R. Srikant
+
+---
+
+## 1. [Shaping Inductive Bias in Diffusion Models through Frequency-Based Noise Control](https://arxiv.org/abs/2502.10236) <a id="link1"></a>
+
+**ArXiv ID:** 2502.10236
+
+**Authors:** Thomas Jiralerspong, Berton Earnshaw, Jason Hartford, Yoshua Bengio, Luca Scimeca
+
+**Abstract:** Diffusion Probabilistic Models (DPMs) are powerful generative models that have achieved unparalleled success in a number of generative tasks. In this work, we aim to build inductive biases into the training and sampling of diffusion models to better accommodate the target distribution of the data to model. For topologically structured data, we devise a frequency-based noising operator to purposefully manipulate, and set, these inductive biases. We first show that appropriate manipulations of the noising forward process can lead DPMs to focus on particular aspects of the distribution to learn. We show that different datasets necessitate different inductive biases, and that appropriate frequency-based noise control induces increased generative performance compared to standard diffusion. Finally, we demonstrate the possibility of ignoring information at particular frequencies while learning. We show this in an image corruption and recovery task, where we train a DPM to recover the original target distribution after severe noise corruption.
+
+**Comment:** Author match
+
+
+
+---
+
+## 2. [Solvable Dynamics of Self-Supervised Word Embeddings and the Emergence of Analogical Reasoning](https://arxiv.org/abs/2502.09863) <a id="link2"></a>
+
+**ArXiv ID:** 2502.09863
+
+**Authors:** Dhruva Karkada, James B. Simon, Yasaman Bahri, Michael R. DeWeese
+
+**Abstract:** The remarkable success of large language models relies on their ability to implicitly learn structured latent representations from the pretraining corpus. As a simpler surrogate for representation learning in language modeling, we study a class of solvable contrastive self-supervised algorithms which we term quadratic word embedding models. These models resemble the word2vec algorithm and perform similarly on downstream tasks. Our main contributions are analytical solutions for both the training dynamics (under certain hyperparameter choices) and the final word embeddings, given in terms of only the corpus statistics. Our solutions reveal that these models learn orthogonal linear subspaces one at a time, each one incrementing the effective rank of the embeddings until model capacity is saturated. Training on WikiText, we find that the top subspaces represent interpretable concepts. Finally, we use our dynamical theory to predict how and when models acquire the ability to complete analogies.
+
+**Comment:** The paper provides analytical solutions for self-supervised word embedding dynamics, offering foundational insights into representation learning and training dynamics.
+
+**Relevance:** 9
+**Novelty:** 9
+
+---
+
+## 3. [Representation and Interpretation in Artificial and Natural Computing](https://arxiv.org/abs/2502.10383) <a id="link3"></a>
+
+**ArXiv ID:** 2502.10383
+
+**Authors:** Luis A. Pineda
+
+**Abstract:** Artificial computing machinery transforms representations through an objective process, to be interpreted subjectively by humans, so the machine and the interpreter are different entities, but in the putative natural computing both processes are performed by the same agent. The method or process that transforms a representation is called here \emph{the mode of computing}. The mode used by digital computers is the algorithmic one, but there are others, such as quantum computers and diverse forms of non-conventional computing, and there is an open-ended set of representational formats and modes that could be used in artificial and natural computing. A mode based on a notion of computing different from Turing's may perform feats beyond what the Turing Machine does but the modes would not be of the same kind and could not be compared. For a mode of computing to be more powerful than the algorithmic one, it ought to compute functions lacking an effective algorithm, and Church Thesis would not hold. Here, a thought experiment including a computational demon using a hypothetical mode for such an effect is presented. If there is natural computing, there is a mode of natural computing whose properties may be causal to the phenomenological experience. Discovering it would come with solving the hard problem of consciousness; but if it turns out that such a mode does not exist, there is no such thing as natural computing, and the mind is not a computational process.
+
+**Comment:** The paper discusses representation and modes of computing, touching on theoretical aspects of computing beyond Turing Machines. It aligns with emerging trends and foundational research.
+
+**Relevance:** 9
+**Novelty:** 9
+
+---
+
+## 4. [A novel approach to data generation in generative model](https://arxiv.org/abs/2502.10092) <a id="link4"></a>
+
+**ArXiv ID:** 2502.10092
+
+**Authors:** JaeHong Kim (Healthcare, Legal and Policy Center, Graduate school of Law, Korea University, Seoul 02841, Korea, Human-Inspired AI Research, Korea University, Seoul 02841, Korea), Jaewon Shim (Center for 0D Nanofluidics, Institute of Applied Physics, Department of Physics and Astronomy, Seoul National University, Seoul 08826, Korea)
+
+**Abstract:** Variational Autoencoders (VAEs) and other generative models are widely employed in artificial intelligence to synthesize new data. However, current approaches rely on Euclidean geometric assumptions and statistical approximations that fail to capture the structured and emergent nature of data generation. This paper introduces the Convergent Fusion Paradigm (CFP) theory, a novel geometric framework that redefines data generation by integrating dimensional expansion accompanied by qualitative transformation. By modifying the latent space geometry to interact with emergent high-dimensional structures, CFP theory addresses key challenges such as identifiability issues and unintended artifacts like hallucinations in Large Language Models (LLMs). CFP theory is based on two key conceptual hypotheses that redefine how generative models structure relationships between data and algorithms. Through the lens of CFP theory, we critically examine existing metric-learning approaches. CFP theory advances this perspective by introducing time-reversed metric embeddings and structural convergence mechanisms, leading to a novel geometric approach that better accounts for data generation as a structured epistemic process. Beyond its computational implications, CFP theory provides philosophical insights into the ontological underpinnings of data generation. By offering a systematic framework for high-dimensional learning dynamics, CFP theory contributes to establishing a theoretical foundation for understanding the data-relationship structures in AI. Finally, future research in CFP theory will be led to its implications for fully realizing qualitative transformations, introducing the potential of Hilbert space in generative modeling.
+
+**Comment:** The paper introduces the Convergent Fusion Paradigm (CFP) theory, which redefines data generation in generative models and offers a novel geometric framework, aligning with foundational research in representation learning and generative modeling.
+
+**Relevance:** 9
+**Novelty:** 9
+
+---
+
+## 5. [NestQuant: Nested Lattice Quantization for Matrix Products and LLMs](https://arxiv.org/abs/2502.09720) <a id="link5"></a>
+
+**ArXiv ID:** 2502.09720
+
+**Authors:** Semyon Savkin, Eitan Porat, Or Ordentlich, Yury Polyanskiy
+
+**Abstract:** Post-training quantization (PTQ) has emerged as a critical technique for efficient deployment of large language models (LLMs). This work proposes NestQuant, a novel PTQ scheme for weights and activations that is based on self-similar nested lattices. Recent work have mathematically shown such quantizers to be information-theoretically optimal for low-precision matrix multiplication. We implement a practical low-complexity version of NestQuant based on Gosset lattice, making it a drop-in quantizer for any matrix multiplication step (e.g., in self-attention, MLP etc). For example, NestQuant quantizes weights, KV-cache, and activations of Llama-3-8B to 4 bits, achieving perplexity of 6.6 on wikitext2. This represents more than 55% reduction in perplexity gap with respect to unquantized model (perplexity of 6.14) compared to state-of-the-art Meta's SpinQuant (perplexity 7.3). Comparisons on various LLM evaluation benchmarks also show a reduction in performance degradation induced by quantization.
+
+**Comment:** NestQuant introduces a novel quantization scheme for LLMs, aligning with the model compression criterion. The use of nested lattices and its theoretical grounding make it highly relevant.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 6. [On Space Folds of ReLU Neural Networks](https://arxiv.org/abs/2502.09954) <a id="link6"></a>
+
+**ArXiv ID:** 2502.09954
+
+**Authors:** Michal Lewandowski, Hamid Eghbalzadeh, Bernhard Heinzl, Raphael Pisoni, Bernhard A. Moser
+
+**Abstract:** Recent findings suggest that the consecutive layers of ReLU neural networks can be understood geometrically as space folding transformations of the input space, revealing patterns of self-similarity. In this paper, we present the first quantitative analysis of this space folding phenomenon in ReLU neural networks. Our approach focuses on examining how straight paths in the Euclidean input space are mapped to their counterparts in the Hamming activation space. In this process, the convexity of straight lines is generally lost, giving rise to non-convex folding behavior. To quantify this effect, we introduce a novel measure based on range metrics, similar to those used in the study of random walks, and provide the proof for the equivalence of convexity notions between the input and activation spaces. Furthermore, we provide empirical analysis on a geometrical analysis benchmark (CantorNet) as well as an image classification benchmark (MNIST). Our work advances the understanding of the activation space in ReLU neural networks by leveraging the phenomena of geometric folding, providing valuable insights on how these models process input information.
+
+**Comment:** The paper provides a quantitative analysis of space folding in ReLU networks, offering foundational insights into neural network behavior and representation learning.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 7. [Prediction hubs are context-informed frequent tokens in LLMs](https://arxiv.org/abs/2502.10201) <a id="link7"></a>
+
+**ArXiv ID:** 2502.10201
+
+**Authors:** Beatrix M. G. Nielsen, Iuri Macocco, Marco Baroni
+
+**Abstract:** Hubness, the tendency for few points to be among the nearest neighbours of a disproportionate number of other points, commonly arises when applying standard distance measures to high-dimensional data, often negatively impacting distance-based analysis. As autoregressive large language models (LLMs) operate on high-dimensional representations, we ask whether they are also affected by hubness. We first show, theoretically, that the only representation comparison operation performed by LLMs, namely that between context and unembedding vectors to determine continuation probabilities, is not characterized by the concentration of distances phenomenon that typically causes the appeareance of nuisance hubness. We then empirically show that this comparison still leads to a high degree of hubness, but the hubs in this case do not constitute a disturbance. They are rather the result of context-modulated frequent tokens often appearing in the pool of likely candidates for next token prediction. On the other hand, when other distance computations involving LLM representations are performed, we do not have the same theoretical guarantees, and, indeed, we see nuisance hubs appear. In summary, our work highlights, on the one hand, how hubness, while omnipresent in high-dimensional spaces, is not always a negative property that needs to be mitigated, and, on the other hand, it shows that various widely-used LLMs have developed a guessing strategy that consists in constantly assigning a high probability to frequent tokens.
+
+**Comment:** The paper explores hubness in LLMs and provides theoretical and empirical insights into token prediction behavior, aligning with foundational research on LLM behavior and interpretability.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 8. [Fenchel-Young Variational Learning](https://arxiv.org/abs/2502.10295) <a id="link8"></a>
+
+**ArXiv ID:** 2502.10295
+
+**Authors:** Sophia Sklaviadis, Sweta Agrawal, Antonio Farinhas, Andre Martins, Mario Figueiredo
+
+**Abstract:** From a variational perspective, many statistical learning criteria involve seeking a distribution that balances empirical risk and regularization. In this paper, we broaden this perspective by introducing a new general class of variational methods based on Fenchel-Young (FY) losses, treated as divergences that generalize (and encompass) the familiar Kullback-Leibler divergence at the core of classical variational learning. Our proposed formulation -- FY variational learning -- includes as key ingredients new notions of FY free energy, FY evidence, FY evidence lower bound, and FY posterior. We derive alternating minimization and gradient backpropagation algorithms to compute (or lower bound) the FY evidence, which enables learning a wider class of models than previous variational formulations. This leads to generalized FY variants of classical algorithms, such as an FY expectation-maximization (FYEM) algorithm, and latent-variable models, such as an FY variational autoencoder (FYVAE). Our new methods are shown to be empirically competitive, often outperforming their classical counterparts, and most importantly, to have qualitatively novel features. For example, FYEM has an adaptively sparse E-step, while the FYVAE can support models with sparse observations and sparse posteriors.
+
+**Comment:** The paper proposes Fenchel-Young Variational Learning, a generalization of variational methods with new theoretical insights and applications to latent-variable models, aligning with foundational research in representation learning and autoencoders.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 9. [Deep Tree Tensor Networks for Image Recognition](https://arxiv.org/abs/2502.09928) <a id="link9"></a>
+
+**ArXiv ID:** 2502.09928
+
+**Authors:** Chang Nie, Junfang Chen, Yajie Chen
+
+**Abstract:** Originating in quantum physics, tensor networks (TNs) have been widely adopted as exponential machines and parameter decomposers for recognition tasks. Typical TN models, such as Matrix Product States (MPS), have not yet achieved successful application in natural image processing. When employed, they primarily serve to compress parameters within off-the-shelf networks, thus losing their distinctive capability to enhance exponential-order feature interactions. This paper introduces a novel architecture named \textit{\textbf{D}eep \textbf{T}ree \textbf{T}ensor \textbf{N}etwork} (DTTN), which captures $2^L$-order multiplicative interactions across features through multilinear operations, while essentially unfolding into a \emph{tree}-like TN topology with the parameter-sharing property. DTTN is stacked with multiple antisymmetric interacting modules (AIMs), and this design facilitates efficient implementation. Moreover, we theoretically reveal the equivalency among quantum-inspired TN models and polynomial and multilinear networks under certain conditions, and we believe that DTTN can inspire more interpretable studies in this field. We evaluate the proposed model against a series of benchmarks and achieve excellent performance compared to its peers and cutting-edge architectures. Our code will soon be publicly available.
+
+**Comment:** The paper introduces a novel architecture, Deep Tree Tensor Networks (DTTN), which focuses on tensor networks and their application to feature interactions. This aligns with the 'Model Architecture' criterion, particularly in architectural innovations.
+
+**Relevance:** 8
+**Novelty:** 8
+
+---
+
+## 10. [Estimation of the Learning Coefficient Using Empirical Loss](https://arxiv.org/abs/2502.09998) <a id="link10"></a>
+
+**ArXiv ID:** 2502.09998
+
+**Authors:** Tatsuyoshi Takio, Joe Suzuki
+
+**Abstract:** The learning coefficient plays a crucial role in analyzing the performance of information criteria, such as the Widely Applicable Information Criterion (WAIC) and the Widely Applicable Bayesian Information Criterion (WBIC), which Sumio Watanabe developed to assess model generalization ability. In regular statistical models, the learning coefficient is given by d/2, where d is the dimension of the parameter space. More generally, it is defined as the absolute value of the pole order of a zeta function derived from the Kullback-Leibler divergence and the prior distribution. However, except for specific cases such as reduced-rank regression, the learning coefficient cannot be derived in a closed form. Watanabe proposed a numerical method to estimate the learning coefficient, which Imai further refined to enhance its convergence properties. These methods utilize the asymptotic behavior of WBIC and have been shown to be statistically consistent as the sample size grows. In this paper, we propose a novel numerical estimation method that fundamentally differs from previous approaches and leverages a new quantity, "Empirical Loss," which was introduced by Watanabe. Through numerical experiments, we demonstrate that our proposed method exhibits both lower bias and lower variance compared to those of Watanabe and Imai. Additionally, we provide a theoretical analysis that elucidates why our method outperforms existing techniques and present empirical evidence that supports our findings.
+
+**Comment:** The paper proposes a novel method for estimating the learning coefficient using empirical loss, which contributes to theoretical insights into model generalization. This aligns with foundational research in representation learning.
+
+**Relevance:** 8
+**Novelty:** 8
+
+---
+
+## 11. [STAR: Spectral Truncation and Rescale for Model Merging](https://arxiv.org/abs/2502.10339) <a id="link11"></a>
+
+**ArXiv ID:** 2502.10339
+
+**Authors:** Yu-Ang Lee, Ching-Yun Ko, Tejaswini Pedapati, I-Hsin Chung, Mi-Yen Yeh, Pin-Yu Chen
+
+**Abstract:** Model merging is an efficient way of obtaining a multi-task model from several pretrained models without further fine-tuning, and it has gained attention in various domains, including natural language processing (NLP). Despite the efficiency, a key challenge in model merging is the seemingly inevitable decrease in task performance as the number of models increases. In this paper, we propose $\mathbf{S}$pectral $\mathbf{T}$runcation $\mathbf{A}$nd $\mathbf{R}$escale (STAR) that aims at mitigating ``merging conflicts'' by truncating small components in the respective spectral spaces, which is followed by an automatic parameter rescaling scheme to retain the nuclear norm of the original matrix. STAR requires no additional inference on original training data and is robust to hyperparamater choice. We demonstrate the effectiveness of STAR through extensive model merging cases on diverse NLP tasks. Specifically, STAR works robustly across varying model sizes, and can outperform baselines by 4.2$\%$ when merging 12 models on Flan-T5. Our code is publicly available at https://github.com/IBM/STAR.
+
+**Comment:** The paper introduces STAR, a method for model merging that addresses merging conflicts through spectral truncation and rescaling. This aligns with model efficiency and compression criteria.
+
+**Relevance:** 8
+**Novelty:** 8
+
+---
+
+## 12. [Data-Adaptive Low-Rank Sparse Subspace Clustering](https://arxiv.org/abs/2502.10106) <a id="link12"></a>
+
+**ArXiv ID:** 2502.10106
+
+**Authors:** Ivica Kopriva
+
+**Abstract:** Low-rank sparse subspace clustering (LRSSC) algorithms built on self-expressive model effectively capture both the global and local structure of the data. However, existing solutions, primarily based on proximal operators associated with Sp/Lp , p e {0, 1/2, 2/3, 1}, norms are not data-adaptive. In this work, we propose an LRSSC algorithm incorporating a data-adaptive surrogate for the S0/L0 quasi-norm. We provide a numerical solution for the corresponding proximal operator in cases where an analytical expression is unavailable. The proposed LRSSC algorithm is formulated within the proximal mapping framework, and we present theoretical proof of its global convergence toward a stationary point. We evaluate the performance of the proposed method on three well known datasets, comparing it against LRSSC algorithms constrained by Sp/Lp, p e {0, 1/2, 2/3, 1}, norms.
+
+**Comment:** The paper proposes a data-adaptive low-rank sparse subspace clustering algorithm, which aligns with foundational research in representation learning and sparsity.
+
+**Relevance:** 8
+**Novelty:** 8
+
+---
+
+## 13. [Balancing the Scales: A Theoretical and Algorithmic Framework for Learning from Imbalanced Data](https://arxiv.org/abs/2502.10381) <a id="link13"></a>
+
+**ArXiv ID:** 2502.10381
+
+**Authors:** Corinna Cortes, Anqi Mao, Mehryar Mohri, Yutao Zhong
+
+**Abstract:** Class imbalance remains a major challenge in machine learning, especially in multi-class problems with long-tailed distributions. Existing methods, such as data resampling, cost-sensitive techniques, and logistic loss modifications, though popular and often effective, lack solid theoretical foundations. As an example, we demonstrate that cost-sensitive methods are not Bayes consistent. This paper introduces a novel theoretical framework for analyzing generalization in imbalanced classification. We propose a new class-imbalanced margin loss function for both binary and multi-class settings, prove its strong $H$-consistency, and derive corresponding learning guarantees based on empirical loss and a new notion of class-sensitive Rademacher complexity. Leveraging these theoretical results, we devise novel and general learning algorithms, IMMAX (Imbalanced Margin Maximization), which incorporate confidence margins and are applicable to various hypothesis sets. While our focus is theoretical, we also present extensive empirical results demonstrating the effectiveness of our algorithms compared to existing baselines.
+
+**Comment:** The paper introduces a novel theoretical framework for learning from imbalanced data, including a new margin loss function and learning guarantees, which aligns with foundational research in representation learning.
+
+**Relevance:** 8
+**Novelty:** 8
+
+---
+
+## 14. [Revisiting Generalization Power of a DNN in Terms of Symbolic Interactions](https://arxiv.org/abs/2502.10162) <a id="link14"></a>
+
+**ArXiv ID:** 2502.10162
+
+**Authors:** Lei Cheng, Junpeng Zhang, Qihan Ren, Quanshi Zhang
+
+**Abstract:** This paper aims to analyze the generalization power of deep neural networks (DNNs) from the perspective of interactions. Unlike previous analysis of a DNN's generalization power in a highdimensional feature space, we find that the generalization power of a DNN can be explained as the generalization power of the interactions. We found that the generalizable interactions follow a decay-shaped distribution, while non-generalizable interactions follow a spindle-shaped distribution. Furthermore, our theory can effectively disentangle these two types of interactions from a DNN. We have verified that our theory can well match real interactions in a DNN in experiments.
+
+**Comment:** The paper provides a novel perspective on DNN generalization by analyzing symbolic interactions, which aligns with representation learning and training dynamics.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 15. [Elastic Representation: Mitigating Spurious Correlations for Group Robustness](https://arxiv.org/abs/2502.09850) <a id="link15"></a>
+
+**ArXiv ID:** 2502.09850
+
+**Authors:** Tao Wen, Zihan Wang, Quan Zhang, Qi Lei
+
+**Abstract:** Deep learning models can suffer from severe performance degradation when relying on spurious correlations between input features and labels, making the models perform well on training data but have poor prediction accuracy for minority groups. This problem arises especially when training data are limited or imbalanced. While most prior work focuses on learning invariant features (with consistent correlations to y), it overlooks the potential harm of spurious correlations between features. We hereby propose Elastic Representation (ElRep) to learn features by imposing Nuclear- and Frobenius-norm penalties on the representation from the last layer of a neural network. Similar to the elastic net, ElRep enjoys the benefits of learning important features without losing feature diversity. The proposed method is simple yet effective. It can be integrated into many deep learning approaches to mitigate spurious correlations and improve group robustness. Moreover, we theoretically show that ElRep has minimum negative impacts on in-distribution predictions. This is a remarkable advantage over approaches that prioritize minority groups at the cost of overall performance.
+
+**Comment:** Elastic Representation introduces a novel method to mitigate spurious correlations, aligning with representation learning and sparsity-related methods.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 16. [Heterogeneous Resource Allocation with Multi-task Learning for Wireless Networks](https://arxiv.org/abs/2502.10027) <a id="link16"></a>
+
+**ArXiv ID:** 2502.10027
+
+**Authors:** Nikos A. Mitsiou, Pavlos S. Bouzinis, Panagiotis G. Sarigiannidis, George K. Karagiannidis
+
+**Abstract:** The optimal solution to an optimization problem depends on the problem's objective function, constraints, and size. While deep neural networks (DNNs) have proven effective in solving optimization problems, changes in the problem's size, objectives, or constraints often require adjustments to the DNN architecture to maintain effectiveness, or even retraining a new DNN from scratch. Given the dynamic nature of wireless networks, which involve multiple and diverse objectives that can have conflicting requirements and constraints, we propose a multi-task learning (MTL) framework to enable a single DNN to jointly solve a range of diverse optimization problems. In this framework, optimization problems with varying dimensionality values, objectives, and constraints are treated as distinct tasks. To jointly address these tasks, we propose a conditional computation-based MTL approach with routing. The multi-task DNN consists of two components, the base DNN (bDNN), which is the single DNN used to extract the solutions for all considered optimization problems, and the routing DNN (rDNN), which manages which nodes and layers of the bDNN to be used during the forward propagation of each task. The output of the rDNN is a binary vector which is multiplied with all bDNN's weights during the forward propagation, creating a unique computational path through the bDNN for each task. This setup allows the tasks to either share parameters or use independent ones, with the decision controlled by the rDNN. The proposed framework supports both supervised and unsupervised learning scenarios. Numerical results demonstrate the efficiency of the proposed MTL approach in solving diverse optimization problems. In contrast, benchmark DNNs lacking the rDNN mechanism were unable to achieve similar levels of performance, highlighting the effectiveness of the proposed architecture.
+
+**Comment:** The paper proposes a multi-task learning framework with conditional computation, aligning with architectural innovations like conditional/dynamic networks.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 17. [Enhancing Multilingual LLM Pretraining with Model-Based Data Selection](https://arxiv.org/abs/2502.10361) <a id="link17"></a>
+
+**ArXiv ID:** 2502.10361
+
+**Authors:** Bettina Messmer, Vinko Sabol\v{c}ec, Martin Jaggi
+
+**Abstract:** Dataset curation has become a basis for strong large language model (LLM) performance. While various rule-based filtering heuristics exist for English and multilingual datasets, model-based filtering techniques have primarily focused on English. To address the disparity stemming from limited research on non-English languages, we propose a model-based filtering framework for multilingual datasets that aims to identify a diverse set of structured and knowledge-rich samples. Our approach emphasizes transparency, simplicity, and efficiency, leveraging Transformer- and FastText-based classifiers to ensure the broad accessibility of our technique and data. We conduct comprehensive ablation studies on the FineWeb-2 web crawl dataset across diverse language families, scripts, and resource availability to demonstrate the effectiveness of our method. Training a 1B-parameter Llama model for 70B and 119B tokens, our approach can match the baseline MMLU score with as little as 15% of the training tokens, while also improving across other benchmarks. These findings provide strong evidence for the generalizability of our approach to other languages. As a result, we extend our framework to 20 languages for which we release the refined pretraining datasets.
+
+**Comment:** The paper discusses model-based data selection for multilingual LLM pretraining, which aligns with foundational research in LLM efficiency and dataset curation.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 18. [Process Reward Models for LLM Agents: Practical Framework and Directions](https://arxiv.org/abs/2502.10325) <a id="link18"></a>
+
+**ArXiv ID:** 2502.10325
+
+**Authors:** Sanjiban Choudhury
+
+**Abstract:** We introduce Agent Process Reward Models (AgentPRM), a simple and scalable framework for training LLM agents to continually improve through interactions. AgentPRM follows a lightweight actor-critic paradigm, using Monte Carlo rollouts to compute reward targets and optimize policies. It requires minimal modifications to existing RLHF pipelines, making it easy to integrate at scale. Beyond AgentPRM, we propose InversePRM, which learns process rewards directly from demonstrations without explicit outcome supervision. We also explore key challenges and opportunities, including exploration, process reward shaping, and model-predictive reasoning. We evaluate on ALFWorld benchmark, show that small 3B models trained with AgentPRM and InversePRM outperform strong GPT-4o baselines, and analyze test-time scaling, reward hacking, and more. Our code is available at: https://github.com/sanjibanc/agent_prm.
+
+**Comment:** The paper introduces a framework for training LLM agents with process reward models, which aligns with foundational research in LLM training and optimization.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 19. [Conditional Latent Coding with Learnable Synthesized Reference for Deep Image Compression](https://arxiv.org/abs/2502.09971) <a id="link19"></a>
+
+**ArXiv ID:** 2502.09971
+
+**Authors:** Siqi Wu, Yinda Chen, Dong Liu, Zhihai He
+
+**Abstract:** In this paper, we study how to synthesize a dynamic reference from an external dictionary to perform conditional coding of the input image in the latent domain and how to learn the conditional latent synthesis and coding modules in an end-to-end manner. Our approach begins by constructing a universal image feature dictionary using a multi-stage approach involving modified spatial pyramid pooling, dimension reduction, and multi-scale feature clustering. For each input image, we learn to synthesize a conditioning latent by selecting and synthesizing relevant features from the dictionary, which significantly enhances the model's capability in capturing and exploring image source correlation. This conditional latent synthesis involves a correlation-based feature matching and alignment strategy, comprising a Conditional Latent Matching (CLM) module and a Conditional Latent Synthesis (CLS) module. The synthesized latent is then used to guide the encoding process, allowing for more efficient compression by exploiting the correlation between the input image and the reference dictionary. According to our theoretical analysis, the proposed conditional latent coding (CLC) method is robust to perturbations in the external dictionary samples and the selected conditioning latent, with an error bound that scales logarithmically with the dictionary size, ensuring stability even with large and diverse dictionaries. Experimental results on benchmark datasets show that our new method improves the coding performance by a large margin (up to 1.2 dB) with a very small overhead of approximately 0.5\% bits per pixel. Our code is publicly available at https://github.com/ydchen0806/CLC.
+
+**Comment:** The paper introduces a conditional latent coding method for image compression, which aligns with model compression criteria through its focus on efficient coding and dictionary-based synthesis.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 20. [The Ann Arbor Architecture for Agent-Oriented Programming](https://arxiv.org/abs/2502.09903) <a id="link20"></a>
+
+**ArXiv ID:** 2502.09903
+
+**Authors:** Wei Dong
+
+**Abstract:** In this paper, we reexamine prompt engineering for large language models through the lens of automata theory. We argue that language models function as automata and, like all automata, should be programmed in the languages they accept, a unified collection of all natural and formal languages. Therefore, traditional software engineering practices--conditioned on the clear separation of programming languages and natural languages--must be rethought. We introduce the Ann Arbor Architecture, a conceptual framework for agent-oriented programming of language models, as a higher-level abstraction over raw token generation, and provide a new perspective on in-context learning. Based on this framework, we present the design of our agent platform Postline, and report on our initial experiments in agent training.
+
+**Comment:** The paper introduces a conceptual framework for agent-oriented programming of LLMs, which provides a novel perspective on in-context learning and aligns with foundational research on LLMs.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 21. [Nonasymptotic CLT and Error Bounds for Two-Time-Scale Stochastic Approximation](https://arxiv.org/abs/2502.09884) <a id="link21"></a>
+
+**ArXiv ID:** 2502.09884
+
+**Authors:** Seo Taek Kong, Sihan Zeng, Thinh T. Doan, R. Srikant
+
+**Abstract:** We consider linear two-time-scale stochastic approximation algorithms driven by martingale noise. Recent applications in machine learning motivate the need to understand finite-time error rates, but conventional stochastic approximation analysis focus on either asymptotic convergence in distribution or finite-time bounds that are far from optimal. Prior work on asymptotic central limit theorems (CLTs) suggest that two-time-scale algorithms may be able to achieve $1/\sqrt{n}$ error in expectation, with a constant given by the expected norm of the limiting Gaussian vector. However, the best known finite-time rates are much slower. We derive the first non-asymptotic central limit theorem with respect to the Wasserstein-1 distance for two-time-scale stochastic approximation with Polyak-Ruppert averaging. As a corollary, we show that expected error achieved by Polyak-Ruppert averaging decays at rate $1/\sqrt{n}$, which significantly improves on the rates of convergence in prior works.
+
+**Comment:** The paper provides theoretical insights into two-time-scale stochastic approximation with non-asymptotic CLT and error bounds, which could be relevant to foundational research in optimization and training dynamics.
+
+**Relevance:** 7
+**Novelty:** 8
+
+---
+
+# Paper Selection Prompt
+
+You are a helpful paper reading assistant whose job is to read daily posts from ArXiv and identify a few papers that your friend will enjoy reading.
+Your job is to carefully read the paper titles and abstracts below and find the ones that match the criteria below.
+
+## Relevant Topics
+
+Use the following relevance criteria to focus on foundational research, avoiding purely application-driven work:
+
+1. Representation Learning
+   - Relevant: Insights into how deep networks encode information, feature/dictionary learning, sparse/contrastive methods, training dynamics in neural networks.
+   - Irrelevant: Standard applications of known techniques lacking new theoretical or methodological contributions.
+
+2. Model Architecture
+   - Relevant: Mixture-of-Experts (MoE), Transformers, Conditional/Dynamic Networks, Autoencoders, analysis on existing architectures (like encoder-decoder), or other architectural innovations.
+   - Irrelevant: Merely using existing architectures for a certain task without insights into the structure themselves.
+
+3. Model Compression
+   - Relevant: Sparsity, pruning, quantization, low-rank approaches, KV cache, or other algorithmic/theoretical efficiency breakthroughs.
+   - Irrelevant: Straightforward applications of existing compression methods to new tasks.
+
+4. Large Language Models (LLMs)
+   - Relevant: Major breakthroughs in training or architecture, theoretical insights into LLM behavior/interpretability.
+   - Irrelevant: Domain-specific usage (e.g., translation, jail-breaking), minor tweaks (e.g., instruction tuning, CoT, data mixing), or purely empirical dataset/benchmark studies and text-level analysis (e.g. hallucination, reasoning, safety).
+
+5. AI for Science
+   - Relevant: Foundational research in molecular/protein modeling, new generative paradigms, or significant architecture-level innovations.
+   - Irrelevant: Conventional, domain-specific applications without new theoretical perspectives.
+
+6. Emerging Trends
+   - Relevant: Cutting-edge theoretical work challenging established assumptions or introducing broad new paradigms.
+   - Irrelevant: Incremental improvements or trend-following without novel insights.
+
+**Keywords for Relevant Domains:**
+Mixture of Experts (MoE), Representation Learning, Compression/Efficiency, Sparse/Sparsity, Pruning, Quantization, Low-rank, Foundation Model, etc.
+
+**Hints on Irrelevant Domains:**
+Reinforcement Learning, Transfer Learning, Federated Learning, Online Learning, Diffusion Models, etc.
+
+**Hints on Application Tasks:**
+Image Segmentation, Medical Imaging, 3D Vision, Video Understanding, Information Retrieval, Summarization, Recommendation Systems, Machine Translation, Speech Recognition, Signal Processing, Spatial/Temporal Modeling, Time Series, etc.
+
+## Scoring Criteria
+
+> The "Relevance" score measures how closely the paper aligns with the core topics of the prompt.
+> The "Novelty" score assesses the originality and impact of the paper.
+> They are two **ORTHONORMAL** axes and **SHOULD NOT** be confused with each other.
+
+### Relevance Scoring
+
+- Relevance 9-10 (Completely Relevant)
+  - Focus: Fully aligned with core topics with no deviation, score the highest if contains keywords in it.
+  - Examples: Papers focused on foundational methods or theoretical research, whose titles contain topic keywords like "MoE".
+
+- Relevance 7-8 (Relevant)
+  - Focus: Retain a solid link to the main research area, though may touch on peripheral elements.
+  - Examples: Papers research on the fundamental part of MoE through a less critical aspect like its behavior in GNN.
+
+- Relevance 5-6 (Borderline)
+  - Focus: Maintains a link to the core topic but also extends into at least one other domain/area beyond the primary focus.
+  - Examples: Work referencing MoE centered on reinforcement learning.
+
+- Relevance 3-4 (Irrelevant)
+  - Focus: Largely outside our interests with no association to our topics.
+  - Examples: Application-focused papers like using MoE to solve a problem in the real world.
+
+- Relevance 1-2 (Ignore)
+  - Focus: Purely unrelated to our topics. Completely a different domain.
+  - **Exception**: If the paper hints at a cutting-edge, radically new direction that could eventually transform the primary domain, consider a score of 9–10 despite initial appearances. (Usually a very rare concept that belongs to the fundamental research)
+
+### Novelty Scoring
+
+- Novelty 9-10 (Breakthrough)
+  - Definition: Groundbreaking methods/theory introducing new directions or solving major challenges.
+  - Examples: Entirely new paradigm for foundational models; a novel theory transforming representation learning.
+
+- Novelty 7-8 (Improvements)
+  - Definition: Substantial insights/enhancements, though not a full paradigm shift.
+  - Examples: Modifications on existing methods yielding significantly better results.
+
+- Novelty 5-6 (Borderline)
+  - Definition: Incremental contributions with possible long-term benefits, not immediately transformative.
+  - Examples: Moderately novel extension to an existing architecture; refining current methods without fundamentally altering them.
+
+- Novelty 3-4 (Tangential)
+  - Definition: Minor or domain-specific improvements with limited broader impact.
+  - Examples: Slight modifications to known methods with strange motivation; purely engineering jobs like a new benchmark/dataset.
+
+- Novelty 1-2 (Low)
+  - Definition: Minimal originality, applying standard approaches without real innovation.
+  - Examples: Using an off-the-shelf model without adding new insights; purely application-driven studies like finetuning a pretrained model using existing methods.
+
+## Papers
+
+[PAPER LIST HERE]
+
+## Instructions
+
+Write the response in JSONL format with {ARXIVID, COMMENT, RELEVANCE, NOVELTY} on each line, one for each paper.
+
+- ARXIVID: should be the ArXiv ID.
+- COMMENT: should identify whether there is a criteria that match the paper very closely. These matches should not be based on general terms like "language modeling" or "advancements" and should specifically refer to a criterion. No need to mention the non-matching criteria.
+- RELEVANCE: should be a score from 1-10.
+- NOVELTY: should be a score from 1-10.

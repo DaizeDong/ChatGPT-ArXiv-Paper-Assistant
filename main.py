@@ -7,6 +7,7 @@ from arxiv_assistant.environment import AUTHOR_ID_SET, SYSTEM_PROMPT, CONFIG, NO
 from arxiv_assistant.filters.filter_author import filter_papers_by_hindex, select_by_author
 from arxiv_assistant.filters.filter_gpt import filter_by_gpt
 from arxiv_assistant.push_to_slack import push_to_slack
+from arxiv_assistant.renderers.build_multipage_site import build_multipage_site
 from arxiv_assistant.renderers.render_daily import render_daily_md
 from arxiv_assistant.utils.io import copy_file_or_dir, delete_file_or_dir
 from arxiv_assistant.utils.utils import EnhancedJSONEncoder
@@ -132,3 +133,7 @@ if __name__ == "__main__":
         os.path.join(CONFIG["OUTPUT"]["output_path"], os.path.basename(OUTPUT_MD_FILE_FORMAT.format("latest.md"))),
         os.path.join(CONFIG["OUTPUT"]["output_path"], "latest.md"),
     )
+
+    site_root = build_multipage_site(CONFIG["OUTPUT"]["output_path"])
+    if site_root is not None:
+        print(f"Built multipage site at {site_root}")

@@ -1,0 +1,600 @@
+<table style="width: 100%; border-collapse: collapse; border: none;">
+    <tr>
+<td style="border: none; padding: 0px; width: 33%;">
+            <div style="display: flex; align-items: center; gap: 5px;">
+                <a href="../05" style="text-decoration: none; color: inherit;">
+                    <strong style="color: black; font-size: 18px;">&larr;</strong>
+                </a>
+                <div style="text-align: center;">
+                    <a href="../05" style="text-decoration: none;">
+                        <strong>Previous Day</strong>
+                    </a>
+                    <br>
+                    <a href="../05" style="text-decoration: none; font-size: 14px; color: gray;">
+                        2025-02-05
+                    </a>
+                </div>
+            </div>
+        </td>
+
+        <td style="border: none; padding: 0px; width: 34%; text-align: center;">
+            <div style="display: flex; flex-direction: column; align-items: center; width: 100%;">
+                <a href=".." style="text-decoration: none;">
+                    <strong>Monthly Overview</strong>
+                </a>
+                <a href=".." style="text-decoration: none; font-size: 14px; color: gray;">
+                    2025-02
+                </a>
+            </div>
+        </td>
+    
+<td style="border: none; padding: 0px; width: 33%;">
+            <div style="display: flex; align-items: center; gap: 5px; justify-content: flex-end; width: 100%;">
+                <div style="text-align: center;">
+                    <a href="../07" style="text-decoration: none;">
+                        <strong>Next Day</strong>
+                    </a>
+                    <br>
+                    <a href="../07" style="text-decoration: none; font-size: 14px; color: gray;">
+                        2025-02-07
+                    </a>
+                </div>
+                <a href="../07" style="text-decoration: none; color: inherit;">
+                    <strong style="color: black; font-size: 18px;">&rarr;</strong>
+                </a>
+            </div>
+        </td>
+    </tr>
+</table>
+
+# Personalized Daily Arxiv Papers 02/06/2025
+
+|           | Prompt   | Completion   | Total   |
+|-----------|----------|--------------|---------|
+| **Token** | 81308    | 6734         | 88042   |
+| **Cost**  | $2.03    | $0.67        | $2.71   |
+
+Total scanned papers: 301
+
+Total relevant papers: 24
+
+**Table of contents with paper titles:**
+
+1. [Scaling Laws for Upcycling Mixture-of-Experts Language Models](#user-content-link1)
+**Authors:** Seng Pei Liew, Takuya Kato, Sho Takase
+
+2. [ECM: A Unified Electronic Circuit Model for Explaining the Emergence of In-Context Learning and Chain-of-Thought in Large Language Model](#user-content-link2)
+**Authors:** Qiguang Chen, Libo Qin, Jinhao Liu, Dengyun Peng, Jiaqi Wang, Mengkang Hu, Zhi Chen, Wanxiang Che, Ting Liu
+
+3. [RiemannGFM: Learning a Graph Foundation Model from Riemannian Geometry](#user-content-link3)
+**Authors:** Li Sun, Zhenhao Huang, Suyang Zhou, Qiqi Wan, Hao Peng, Philip Yu
+
+4. [From Kernels to Features: A Multi-Scale Adaptive Theory of Feature Learning](#user-content-link4)
+**Authors:** Noa Rubin, Kirsten Fischer, Javed Lindner, David Dahmen, Inbar Seroussi, Zohar Ringel, Michael Kr\"amer, Moritz Helias
+
+5. [On Zero-Initialized Attention: Optimal Prompt and Gating Factor Estimation](#user-content-link5)
+**Authors:** Nghiem T. Diep, Huy Nguyen, Chau Nguyen, Minh Le, Duy M. H. Nguyen, Daniel Sonntag, Mathias Niepert, Nhat Ho
+
+6. [Token Assorted: Mixing Latent and Text Tokens for Improved Language Model Reasoning](#user-content-link6)
+**Authors:** DiJia Su, Hanlin Zhu, Yingchen Xu, Jiantao Jiao, Yuandong Tian, Qinqing Zheng
+
+7. [An Augmented Backward-Corrected Projector Splitting Integrator for Dynamical Low-Rank Training](#user-content-link7)
+**Authors:** Jonas Kusch, Steffen Schotth\"ofer, Alexandra Walter
+
+8. [ParetoQ: Scaling Laws in Extremely Low-bit LLM Quantization](#user-content-link8)
+**Authors:** Zechun Liu, Changsheng Zhao, Hanxian Huang, Sijia Chen, Jing Zhang, Jiawei Zhao, Scott Roy, Lisa Jin, Yunyang Xiong, Yangyang Shi, Lin Xiao, Yuandong Tian, Bilge Soran, Raghuraman Krishnamoorthi, Tijmen Blankevoort, Vikas Chandra
+
+9. [ReGNet: Reciprocal Space-Aware Long-Range Modeling and Multi-Property Prediction for Crystals](#user-content-link9)
+**Authors:** Jianan Nie, Peiyao Xiao, Kaiyi Ji, Peng Gao
+
+10. [Leveraging the true depth of LLMs](#user-content-link10)
+**Authors:** Ram\'on Calvo Gonz\'alez, Daniele Paliotta, Matteo Pagliardini, Martin Jaggi, Fran\c{c}ois Fleuret
+
+11. [Theoretical Guarantees for Low-Rank Compression of Deep Neural Networks](#user-content-link11)
+**Authors:** Shihao Zhang, Rayan Saab
+
+12. [Harmony in Divergence: Towards Fast, Accurate, and Memory-efficient Zeroth-order LLM Fine-tuning](#user-content-link12)
+**Authors:** Qitao Tan, Jun Liu, Zheng Zhan, Caiwei Ding, Yanzhi Wang, Jin Lu, Geng Yuan
+
+13. [PH-VAE: A Polynomial Hierarchical Variational Autoencoder Towards Disentangled Representation Learning](#user-content-link13)
+**Authors:** Xi Chen, Shaofan Li
+
+14. [Networks with Finite VC Dimension: Pro and Contra](#user-content-link14)
+**Authors:** Vera Kurkova, Marcello Sanguineti
+
+15. [Signature Reconstruction from Randomized Signatures](#user-content-link15)
+**Authors:** Mie Gl\"uckstad, Nicola Muca Cirone, Josef Teichmann
+
+16. [Upweighting Easy Samples in Fine-Tuning Mitigates Forgetting](#user-content-link16)
+**Authors:** Sunny Sanyal, Hayden Prairie, Rudrajit Das, Ali Kavis, Sujay Sanghavi
+
+17. [Rethinking Approximate Gaussian Inference in Classification](#user-content-link17)
+**Authors:** B\'alint Mucs\'anyi, Natha\"el Da Costa, Philipp Hennig
+
+18. [Maximizing the Position Embedding for Vision Transformers with Global Average Pooling](#user-content-link18)
+**Authors:** Wonjun Lee, Bumsub Ham, Suhyun Kim
+
+19. [Mol-LLM: Generalist Molecular LLM with Improved Graph Utilization](#user-content-link19)
+**Authors:** Chanhui Lee, Yuheon Song, YongJun Jeong, Hanbum Ko, Rodrigo Hormazabal, Sehui Han, Kyunghoon Bae, Sungbin Lim, Sungwoong Kim
+
+20. [Building Bridges between Regression, Clustering, and Classification](#user-content-link20)
+**Authors:** Lawrence Stewart (DI-ENS, LIENS, Inria), Francis Bach (LIENS, SIERRA), Quentin Berthet
+
+21. [Taking a Big Step: Large Learning Rates in Denoising Score Matching Prevent Memorization](#user-content-link21)
+**Authors:** Yu-Han Wu, Pierre Marion, G\'erard Biau, Claire Boyer
+
+22. [Transformers and Their Roles as Time Series Foundation Models](#user-content-link22)
+**Authors:** Dennis Wu, Yihan He, Yuan Cao, Jianqing Fan, Han Liu
+
+23. [Beyond Topological Self-Explainable GNNs: A Formal Explainability Perspective](#user-content-link23)
+**Authors:** Steve Azzolin, Sagar Malhotra, Andrea Passerini, Stefano Teso
+
+24. [Speculative Prefill: Turbocharging TTFT with Lightweight and Training-Free Token Importance Estimation](#user-content-link24)
+**Authors:** Jingyu Liu, Beidi Chen, Ce Zhang
+
+---
+
+## 1. [Scaling Laws for Upcycling Mixture-of-Experts Language Models](https://arxiv.org/abs/2502.03009) <a id="link1"></a>
+
+**ArXiv ID:** 2502.03009
+
+**Authors:** Seng Pei Liew, Takuya Kato, Sho Takase
+
+**Abstract:** Pretraining large language models (LLMs) is resource-intensive, often requiring months of training time even with high-end GPU clusters. There are two approaches of mitigating such computational demands: reusing smaller models to train larger ones (upcycling), and training computationally efficient models like mixture-of-experts (MoE). In this paper, we study the upcycling of LLMs to MoE models, of which the scaling behavior remains underexplored. Through extensive experiments, we identify empirical scaling laws that describe how performance depends on dataset size and model configuration. Particularly, we show that, while scaling these factors improves performance, there is a novel interaction term between the dense and upcycled training dataset that limits the efficiency of upcycling at large computational budgets. Based on these findings, we provide guidance to scale upcycling, and establish conditions under which upcycling outperforms from-scratch trainings within budget constraints.
+
+**Comment:** Explores scaling laws for upcycling LLMs into MoE models, offering empirical insights into scaling efficiency. This aligns well with MoE-related architectural research and compression topics, particularly training efficiency.
+
+**Relevance:** 10
+**Novelty:** 8
+
+---
+
+## 2. [ECM: A Unified Electronic Circuit Model for Explaining the Emergence of In-Context Learning and Chain-of-Thought in Large Language Model](https://arxiv.org/abs/2502.03325) <a id="link2"></a>
+
+**ArXiv ID:** 2502.03325
+
+**Authors:** Qiguang Chen, Libo Qin, Jinhao Liu, Dengyun Peng, Jiaqi Wang, Mengkang Hu, Zhi Chen, Wanxiang Che, Ting Liu
+
+**Abstract:** Recent advancements in large language models (LLMs) have led to significant successes across various applications, where the most noticeable is to a series of emerging capabilities, particularly in the areas of In-Context Learning (ICL) and Chain-of-Thought (CoT). To better understand and control model performance, many studies have begun investigating the underlying causes of these phenomena and their impact on task outcomes. However, existing explanatory frameworks predominantly focus on isolating and explaining ICL and CoT independently, leading to an incomplete understanding of their combined influence on model performance. To address this gap, we propose the Electronic Circuit Model (ECM), which provides a foundation for developing scalable, learnable policies and improving the management of AI-generated content. Specifically, ECM conceptualizes model behavior as an electronic circuit: ICL is represented as semantic magnetic field to providing an additional voltage following Faraday's Law, while CoT is modeled as series resistors to constrain the model output performance following Ohm's Law. Experimental results demonstrate that the ECM effectively predicts and explains LLM performance across a variety of prompting strategies. Furthermore, we apply ECM to advanced reasoning strategy optimization on a series of tasks, such as the International Olympiad in Informatics (IOI) and the International Mathematical Olympiad (IMO), achieving competitive performance that surpasses nearly 80% of top human competitors.
+
+**Comment:** Proposes a novel explanatory framework for LLM dynamics (ICL and CoT) and models them analogously to electronic circuits. This aligns closely with theoretical studies on LLMs and is quite innovative in its formulation.
+
+**Relevance:** 9
+**Novelty:** 9
+
+---
+
+## 3. [RiemannGFM: Learning a Graph Foundation Model from Riemannian Geometry](https://arxiv.org/abs/2502.03251) <a id="link3"></a>
+
+**ArXiv ID:** 2502.03251
+
+**Authors:** Li Sun, Zhenhao Huang, Suyang Zhou, Qiqi Wan, Hao Peng, Philip Yu
+
+**Abstract:** The foundation model has heralded a new era in artificial intelligence, pretraining a single model to offer cross-domain transferability on different datasets. Graph neural networks excel at learning graph data, the omnipresent non-Euclidean structure, but often lack the generalization capacity. Hence, graph foundation model is drawing increasing attention, and recent efforts have been made to leverage Large Language Models. On the one hand, existing studies primarily focus on text-attributed graphs, while a wider range of real graphs do not contain fruitful textual attributes. On the other hand, the sequential graph description tailored for the Large Language Model neglects the structural complexity, which is a predominant characteristic of the graph. Such limitations motivate an important question: Can we go beyond Large Language Models, and pretrain a universal model to learn the structural knowledge for any graph? The answer in the language or vision domain is a shared vocabulary. We observe the fact that there also exist shared substructures underlying graph domain, and thereby open a new opportunity of graph foundation model with structural vocabulary. The key innovation is the discovery of a simple yet effective structural vocabulary of trees and cycles, and we explore its inherent connection to Riemannian geometry. Herein, we present a universal pretraining model, RiemannGFM. Concretely, we first construct a novel product bundle to incorporate the diverse geometries of the vocabulary. Then, on this constructed space, we stack Riemannian layers where the structural vocabulary, regardless of specific graph, is learned in Riemannian manifold offering cross-domain transferability. Extensive experiments show the effectiveness of RiemannGFM on a diversity of real graphs.
+
+**Comment:** Proposes a foundational graph model drawing from Riemannian geometry and structural vocabulary, aligning well with model architecture and generalization across domains. Very novel in approach.
+
+**Relevance:** 9
+**Novelty:** 9
+
+---
+
+## 4. [From Kernels to Features: A Multi-Scale Adaptive Theory of Feature Learning](https://arxiv.org/abs/2502.03210) <a id="link4"></a>
+
+**ArXiv ID:** 2502.03210
+
+**Authors:** Noa Rubin, Kirsten Fischer, Javed Lindner, David Dahmen, Inbar Seroussi, Zohar Ringel, Michael Kr\"amer, Moritz Helias
+
+**Abstract:** Theoretically describing feature learning in neural networks is crucial for understanding their expressive power and inductive biases, motivating various approaches. Some approaches describe network behavior after training through a simple change in kernel scale from initialization, resulting in a generalization power comparable to a Gaussian process. Conversely, in other approaches training results in the adaptation of the kernel to the data, involving complex directional changes to the kernel. While these approaches capture different facets of network behavior, their relationship and respective strengths across scaling regimes remains an open question. This work presents a theoretical framework of multi-scale adaptive feature learning bridging these approaches. Using methods from statistical mechanics, we derive analytical expressions for network output statistics which are valid across scaling regimes and in the continuum between them. A systematic expansion of the network's probability distribution reveals that mean-field scaling requires only a saddle-point approximation, while standard scaling necessitates additional correction terms. Remarkably, we find across regimes that kernel adaptation can be reduced to an effective kernel rescaling when predicting the mean network output of a linear network. However, even in this case, the multi-scale adaptive approach captures directional feature learning effects, providing richer insights than what could be recovered from a rescaling of the kernel alone.
+
+**Comment:** Presents a theoretical framework that bridges kernel-based and feature-adaptive learning, contributing to representation learning through a multi-scale theoretical approach. Highly relevant to model understanding and feature learning.
+
+**Relevance:** 9
+**Novelty:** 9
+
+---
+
+## 5. [On Zero-Initialized Attention: Optimal Prompt and Gating Factor Estimation](https://arxiv.org/abs/2502.03029) <a id="link5"></a>
+
+**ArXiv ID:** 2502.03029
+
+**Authors:** Nghiem T. Diep, Huy Nguyen, Chau Nguyen, Minh Le, Duy M. H. Nguyen, Daniel Sonntag, Mathias Niepert, Nhat Ho
+
+**Abstract:** The LLaMA-Adapter has recently emerged as an efficient fine-tuning technique for LLaMA models, leveraging zero-initialized attention to stabilize training and enhance performance. However, despite its empirical success, the theoretical foundations of zero-initialized attention remain largely unexplored. In this paper, we provide a rigorous theoretical analysis, establishing a connection between zero-initialized attention and mixture-of-expert models. We prove that both linear and non-linear prompts, along with gating functions, can be optimally estimated, with non-linear prompts offering greater flexibility for future applications. Empirically, we validate our findings on the open LLM benchmarks, demonstrating that non-linear prompts outperform linear ones. Notably, even with limited training data, both prompt types consistently surpass vanilla attention, highlighting the robustness and adaptability of zero-initialized attention.
+
+**Comment:** Focuses on zero-initialized attention and its theoretical ties to mixture-of-experts (MoE) models, investigating optimal prompts and gating factors. Provides both theoretical insights and experiments, aligning with the architectural and representation-learning criteria.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 6. [Token Assorted: Mixing Latent and Text Tokens for Improved Language Model Reasoning](https://arxiv.org/abs/2502.03275) <a id="link6"></a>
+
+**ArXiv ID:** 2502.03275
+
+**Authors:** DiJia Su, Hanlin Zhu, Yingchen Xu, Jiantao Jiao, Yuandong Tian, Qinqing Zheng
+
+**Abstract:** Large Language Models (LLMs) excel at reasoning and planning when trained on chainof-thought (CoT) data, where the step-by-step thought process is explicitly outlined by text tokens. However, this results in lengthy inputs where many words support textual coherence rather than core reasoning information, and processing these inputs consumes substantial computation resources. In this work, we propose a hybrid representation of the reasoning process, where we partially abstract away the initial reasoning steps using latent discrete tokens generated by VQ-VAE, significantly reducing the length of reasoning traces. We explore the use of latent trace abstractions in two scenarios: 1) training the model from scratch for the Keys-Finding Maze problem, 2) fine-tuning LLMs on this hybrid data with an extended vocabulary including unseen latent tokens, for both logical and mathematical reasoning problems. To facilitate effective learning, we introduce a simple training procedure that randomly mixes latent and text tokens, which enables fast adaptation to new latent tokens. Our approach consistently outperforms the baselines methods in various benchmarks.
+
+**Comment:** The paper proposes a novel hybrid representation using latent and text tokens for improving reasoning in LLMs. This approach aligns with representation learning and architectural insights into language models.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 7. [An Augmented Backward-Corrected Projector Splitting Integrator for Dynamical Low-Rank Training](https://arxiv.org/abs/2502.03006) <a id="link7"></a>
+
+**ArXiv ID:** 2502.03006
+
+**Authors:** Jonas Kusch, Steffen Schotth\"ofer, Alexandra Walter
+
+**Abstract:** Layer factorization has emerged as a widely used technique for training memory-efficient neural networks. However, layer factorization methods face several challenges, particularly a lack of robustness during the training process. To overcome this limitation, dynamical low-rank training methods have been developed, utilizing robust time integration techniques for low-rank matrix differential equations. Although these approaches facilitate efficient training, they still depend on computationally intensive QR and singular value decompositions of matrices with small rank. In this work, we introduce a novel low-rank training method that reduces the number of required QR decompositions. Our approach integrates an augmentation step into a projector-splitting scheme, ensuring convergence to a locally optimal solution. We provide a rigorous theoretical analysis of the proposed method and demonstrate its effectiveness across multiple benchmarks.
+
+**Comment:** This paper proposes a novel low-rank training method, combining theoretical robustness with efficiency. It aligns well with the model compression and low-rank criteria.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 8. [ParetoQ: Scaling Laws in Extremely Low-bit LLM Quantization](https://arxiv.org/abs/2502.02631) <a id="link8"></a>
+
+**ArXiv ID:** 2502.02631
+
+**Authors:** Zechun Liu, Changsheng Zhao, Hanxian Huang, Sijia Chen, Jing Zhang, Jiawei Zhao, Scott Roy, Lisa Jin, Yunyang Xiong, Yangyang Shi, Lin Xiao, Yuandong Tian, Bilge Soran, Raghuraman Krishnamoorthi, Tijmen Blankevoort, Vikas Chandra
+
+**Abstract:** The optimal bit-width for achieving the best trade-off between quantized model size and accuracy has been a subject of ongoing debate. While some advocate for 4-bit quantization, others propose that 1.58-bit offers superior results. However, the lack of a cohesive framework for different bits has left such conclusions relatively tenuous. We present ParetoQ, the first unified framework that facilitates rigorous comparisons across 1-bit, 1.58-bit, 2-bit, 3-bit, and 4-bit quantization settings. Our findings reveal a notable learning transition between 2 and 3 bits: For 3-bits and above, the fine-tuned models stay close to their original pre-trained distributions, whereas for learning 2-bit networks or below, the representations change drastically. By optimizing training schemes and refining quantization functions, ParetoQ surpasses all previous methods tailored to specific bit widths. Remarkably, our ParetoQ ternary 600M-parameter model even outperforms the previous SoTA ternary 3B-parameter model in accuracy, using only one-fifth of the parameters. Extensive experimentation shows that ternary, 2-bit, and 3-bit quantization maintains comparable performance in the size-accuracy trade-off and generally exceeds 4-bit and binary quantization. Considering hardware constraints, 2-bit quantization offers promising potential for memory reduction and speedup.
+
+**Comment:** The ParetoQ framework addresses low-bit quantization, which is directly relevant to model compression. It provides new insights into scaling laws and transitions in quantized representations, showing clear foundational value.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 9. [ReGNet: Reciprocal Space-Aware Long-Range Modeling and Multi-Property Prediction for Crystals](https://arxiv.org/abs/2502.02748) <a id="link9"></a>
+
+**ArXiv ID:** 2502.02748
+
+**Authors:** Jianan Nie, Peiyao Xiao, Kaiyi Ji, Peng Gao
+
+**Abstract:** Predicting properties of crystals from their structures is a fundamental yet challenging task in materials science. Unlike molecules, crystal structures exhibit infinite periodic arrangements of atoms, requiring methods capable of capturing both local and global information effectively. However, most current works fall short of capturing long-range interactions within periodic structures. To address this limitation, we leverage reciprocal space to efficiently encode long-range interactions with learnable filters within Fourier transforms. We introduce Reciprocal Geometry Network (ReGNet), a novel architecture that integrates geometric GNNs and reciprocal blocks to model short-range and long-range interactions, respectively. Additionally, we introduce ReGNet-MT, a multi-task extension that employs mixture of experts (MoE) for multi-property prediction. Experimental results on the JARVIS and Materials Project benchmarks demonstrate that ReGNet achieves significant performance improvements. Moreover, ReGNet-MT attains state-of-the-art results on two bandgap properties due to positive transfer, while maintaining high computational efficiency. These findings highlight the potential of our model as a scalable and accurate solution for crystal property prediction. The code will be released upon paper acceptance.
+
+**Comment:** ReGNet introduces novel architectural concepts combining GNNs and Fourier-based reciprocal filters, along with an innovative MoE extension, aligning closely with model architecture advancements.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 10. [Leveraging the true depth of LLMs](https://arxiv.org/abs/2502.02790) <a id="link10"></a>
+
+**ArXiv ID:** 2502.02790
+
+**Authors:** Ram\'on Calvo Gonz\'alez, Daniele Paliotta, Matteo Pagliardini, Martin Jaggi, Fran\c{c}ois Fleuret
+
+**Abstract:** Large Language Models demonstrate remarkable capabilities at the cost of high compute requirements. While recent research has shown that intermediate layers can be removed or have their order shuffled without impacting performance significantly, these findings have not been employed to reduce the computational cost of inference. We investigate several potential ways to reduce the depth of pre-trained LLMs without significantly affecting performance. Leveraging our insights, we present a novel approach that exploits this decoupling between layers by grouping some of them into pairs that can be evaluated in parallel.   This modification of the computational graph -- through better parallelism -- results in an average improvement of around 1.20x on the number of tokens generated per second, without re-training nor fine-tuning, while retaining 95%-99% of the original accuracy. Empirical evaluation demonstrates that this approach significantly improves serving efficiency while maintaining model performance, offering a practical improvement for large-scale LLM deployment.
+
+**Comment:** Focuses on the architectural efficiency improvement of LLMs by decoupling layers for parallel evaluation, aligning closely with the 'Model Compression' topic and offering insights into computational optimization without retraining.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 11. [Theoretical Guarantees for Low-Rank Compression of Deep Neural Networks](https://arxiv.org/abs/2502.02766) <a id="link11"></a>
+
+**ArXiv ID:** 2502.02766
+
+**Authors:** Shihao Zhang, Rayan Saab
+
+**Abstract:** Deep neural networks have achieved state-of-the-art performance across numerous applications, but their high memory and computational demands present significant challenges, particularly in resource-constrained environments. Model compression techniques, such as low-rank approximation, offer a promising solution by reducing the size and complexity of these networks while only minimally sacrificing accuracy. In this paper, we develop an analytical framework for data-driven post-training low-rank compression. We prove three recovery theorems under progressively weaker assumptions about the approximate low-rank structure of activations, modeling deviations via noise. Our results represent a step toward explaining why data-driven low-rank compression methods outperform data-agnostic approaches and towards theoretically grounded compression algorithms that reduce inference costs while maintaining performance.
+
+**Comment:** The paper provides theoretical insights into low-rank compression, aligning well with the model compression criterion by focusing on foundational recovery guarantees.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 12. [Harmony in Divergence: Towards Fast, Accurate, and Memory-efficient Zeroth-order LLM Fine-tuning](https://arxiv.org/abs/2502.03304) <a id="link12"></a>
+
+**ArXiv ID:** 2502.03304
+
+**Authors:** Qitao Tan, Jun Liu, Zheng Zhan, Caiwei Ding, Yanzhi Wang, Jin Lu, Geng Yuan
+
+**Abstract:** Large language models (LLMs) excel across various tasks, but standard first-order (FO) fine-tuning demands considerable memory, significantly limiting real-world deployment. Recently, zeroth-order (ZO) optimization stood out as a promising memory-efficient training paradigm, avoiding backward passes and relying solely on forward passes for gradient estimation, making it attractive for resource-constrained scenarios. However, ZO method lags far behind FO method in both convergence speed and accuracy. To bridge the gap, we introduce a novel layer-wise divergence analysis that uncovers the distinct update pattern of FO and ZO optimization. Aiming to resemble the learning capacity of FO method from the findings, we propose \textbf{Di}vergence-driven \textbf{Z}eroth-\textbf{O}rder (\textbf{DiZO}) optimization. DiZO conducts divergence-driven layer adaptation by incorporating projections to ZO updates, generating diverse-magnitude updates precisely scaled to layer-wise individual optimization needs. Our results demonstrate that DiZO significantly reduces the needed iterations for convergence without sacrificing throughput, cutting training GPU hours by up to 48\% on various datasets. Moreover, DiZO consistently outperforms the representative ZO baselines in fine-tuning RoBERTa-large, OPT-series, and Llama-series on downstream tasks and, in some cases, even surpasses memory-intensive FO fine-tuning.
+
+**Comment:** Explores zeroth-order optimization to improve memory efficiency for LLM fine-tuning, contributing key insights to model compression and efficiency. The novel layer-wise divergence-driven adaptation adds a theoretical layer to existing fine-tuning approaches.
+
+**Relevance:** 8
+**Novelty:** 8
+
+---
+
+## 13. [PH-VAE: A Polynomial Hierarchical Variational Autoencoder Towards Disentangled Representation Learning](https://arxiv.org/abs/2502.02856) <a id="link13"></a>
+
+**ArXiv ID:** 2502.02856
+
+**Authors:** Xi Chen, Shaofan Li
+
+**Abstract:** The variational autoencoder (VAE) is a simple and efficient generative artificial intelligence method for modeling complex probability distributions of various types of data, such as images and texts. However, it suffers some main shortcomings, such as lack of interpretability in the latent variables, difficulties in tuning hyperparameters while training, producing blurry, unrealistic downstream outputs or loss of information due to how it calculates loss functions and recovers data distributions, overfitting, and origin gravity effect for small data sets, among other issues. These and other limitations have caused unsatisfactory generation effects for the data with complex distributions. In this work, we proposed and developed a polynomial hierarchical variational autoencoder (PH-VAE), in which we used a polynomial hierarchical date format to generate or to reconstruct the data distributions. In doing so, we also proposed a novel Polynomial Divergence in the loss function to replace or generalize the Kullback-Leibler (KL) divergence, which results in systematic and drastic improvements in both accuracy and reproducibility of the re-constructed distribution function as well as the quality of re-constructed data images while keeping the dataset size the same but capturing fine resolution of the data. Moreover, we showed that the proposed PH-VAE has some form of disentangled representation learning ability.
+
+**Comment:** The paper develops a hierarchical VAE with polynomial divergence, which directly relates to representation learning and disentangled representation, a relevant foundational topic.
+
+**Relevance:** 9
+**Novelty:** 7
+
+---
+
+## 14. [Networks with Finite VC Dimension: Pro and Contra](https://arxiv.org/abs/2502.02679) <a id="link14"></a>
+
+**ArXiv ID:** 2502.02679
+
+**Authors:** Vera Kurkova, Marcello Sanguineti
+
+**Abstract:** Approximation and learning of classifiers of large data sets by neural networks in terms of high-dimensional geometry and statistical learning theory are investigated. The influence of the VC dimension of sets of input-output functions of networks on approximation capabilities is compared with its influence on consistency in learning from samples of data. It is shown that, whereas finite VC dimension is desirable for uniform convergence of empirical errors, it may not be desirable for approximation of functions drawn from a probability distribution modeling the likelihood that they occur in a given type of application. Based on the concentration-of-measure properties of high dimensional geometry, it is proven that both errors in approximation and empirical errors behave almost deterministically for networks implementing sets of input-output functions with finite VC dimensions in processing large data sets. Practical limitations of the universal approximation property, the trade-offs between the accuracy of approximation and consistency in learning from data, and the influence of depth of networks with ReLU units on their accuracy and consistency are discussed.
+
+**Comment:** The paper discusses VC dimension and its implications on approximation and empirical errors in neural networks. Its focus on theoretical trade-offs and high-dimensional geometry aligns well with foundational representation learning insights.
+
+**Relevance:** 8
+**Novelty:** 8
+
+---
+
+## 15. [Signature Reconstruction from Randomized Signatures](https://arxiv.org/abs/2502.03163) <a id="link15"></a>
+
+**ArXiv ID:** 2502.03163
+
+**Authors:** Mie Gl\"uckstad, Nicola Muca Cirone, Josef Teichmann
+
+**Abstract:** Controlled ordinary differential equations driven by continuous bounded variation curves can be considered a continuous time analogue of recurrent neural networks for the construction of expressive features of the input curves. We ask up to which extent well known signature features of such curves can be reconstructed from controlled ordinary differential equations with (untrained) random vector fields. The answer turns out to be algebraically involved, but essentially the number of signature features, which can be reconstructed from the non-linear flow of the controlled ordinary differential equation, is exponential in its hidden dimension, when the vector fields are chosen to be neural with depth two. Moreover, we characterize a general linear independence condition on arbitrary vector fields, under which the signature features up to some fixed order can always be reconstructed. Algebraically speaking this complements in a quantitative manner several well known results from the theory of Lie algebras of vector fields and puts them in a context of machine learning.
+
+**Comment:** Abstract connects representation learning with algebraic reconstruction using ODE-driven systems, offering insights into foundational methods for feature extraction. This framework is relatively novel.
+
+**Relevance:** 8
+**Novelty:** 8
+
+---
+
+## 16. [Upweighting Easy Samples in Fine-Tuning Mitigates Forgetting](https://arxiv.org/abs/2502.02797) <a id="link16"></a>
+
+**ArXiv ID:** 2502.02797
+
+**Authors:** Sunny Sanyal, Hayden Prairie, Rudrajit Das, Ali Kavis, Sujay Sanghavi
+
+**Abstract:** Fine-tuning a pre-trained model on a downstream task often degrades its original capabilities, a phenomenon known as "catastrophic forgetting". This is especially an issue when one does not have access to the data and recipe used to develop the pre-trained model. Under this constraint, most existing methods for mitigating forgetting are inapplicable. To address this challenge, we propose a sample weighting scheme for the fine-tuning data solely based on the pre-trained model's losses. Specifically, we upweight the easy samples on which the pre-trained model's loss is low and vice versa to limit the drift from the pre-trained model. Our approach is orthogonal and yet complementary to existing methods; while such methods mostly operate on parameter or gradient space, we concentrate on the sample space. We theoretically analyze the impact of fine-tuning with our method in a linear setting, showing that it stalls learning in a certain subspace which inhibits overfitting to the target task. We empirically demonstrate the efficacy of our method on both language and vision tasks. As an example, when fine-tuning Gemma 2 2B on MetaMathQA, our method results in only a $0.8\%$ drop in accuracy on GSM8K (another math dataset) compared to standard fine-tuning, while preserving $5.4\%$ more accuracy on the pre-training datasets. Our code is publicly available at https://github.com/sanyalsunny111/FLOW_finetuning .
+
+**Comment:** The study proposes a novel weighting scheme for fine-tuning models to mitigate catastrophic forgetting, providing relevant contributions to representation learning, especially in training dynamics.
+
+**Relevance:** 8
+**Novelty:** 8
+
+---
+
+## 17. [Rethinking Approximate Gaussian Inference in Classification](https://arxiv.org/abs/2502.03366) <a id="link17"></a>
+
+**ArXiv ID:** 2502.03366
+
+**Authors:** B\'alint Mucs\'anyi, Natha\"el Da Costa, Philipp Hennig
+
+**Abstract:** In classification tasks, softmax functions are ubiquitously used as output activations to produce predictive probabilities. Such outputs only capture aleatoric uncertainty. To capture epistemic uncertainty, approximate Gaussian inference methods have been proposed, which output Gaussian distributions over the logit space. Predictives are then obtained as the expectations of the Gaussian distributions pushed forward through the softmax. However, such softmax Gaussian integrals cannot be solved analytically, and Monte Carlo (MC) approximations can be costly and noisy. We propose a simple change in the learning objective which allows the exact computation of predictives and enjoys improved training dynamics, with no runtime or memory overhead. This framework is compatible with a family of output activation functions that includes the softmax, as well as element-wise normCDF and sigmoid. Moreover, it allows for approximating the Gaussian pushforwards with Dirichlet distributions by analytic moment matching. We evaluate our approach combined with several approximate Gaussian inference methods (Laplace, HET, SNGP) on large- and small-scale datasets (ImageNet, CIFAR-10), demonstrating improved uncertainty quantification capabilities compared to softmax MC sampling. Code is available at https://github.com/bmucsanyi/probit.
+
+**Comment:** This research simplifies Gaussian inference in classification tasks with an alternative learning objective, making it aligned with advancements in representation learning and uncertainty quantification.
+
+**Relevance:** 8
+**Novelty:** 8
+
+---
+
+## 18. [Maximizing the Position Embedding for Vision Transformers with Global Average Pooling](https://arxiv.org/abs/2502.02919) <a id="link18"></a>
+
+**ArXiv ID:** 2502.02919
+
+**Authors:** Wonjun Lee, Bumsub Ham, Suhyun Kim
+
+**Abstract:** In vision transformers, position embedding (PE) plays a crucial role in capturing the order of tokens. However, in vision transformer structures, there is a limitation in the expressiveness of PE due to the structure where position embedding is simply added to the token embedding. A layer-wise method that delivers PE to each layer and applies independent Layer Normalizations for token embedding and PE has been adopted to overcome this limitation. In this paper, we identify the conflicting result that occurs in a layer-wise structure when using the global average pooling (GAP) method instead of the class token. To overcome this problem, we propose MPVG, which maximizes the effectiveness of PE in a layer-wise structure with GAP. Specifically, we identify that PE counterbalances token embedding values at each layer in a layer-wise structure. Furthermore, we recognize that the counterbalancing role of PE is insufficient in the layer-wise structure, and we address this by maximizing the effectiveness of PE through MPVG. Through experiments, we demonstrate that PE performs a counterbalancing role and that maintaining this counterbalancing directionality significantly impacts vision transformers. As a result, the experimental results show that MPVG outperforms existing methods across vision transformers on various tasks.
+
+**Comment:** The paper introduces a novel method to enhance position embeddings in vision transformers. This aligns with architectural insights and analysis on transformers.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 19. [Mol-LLM: Generalist Molecular LLM with Improved Graph Utilization](https://arxiv.org/abs/2502.02810) <a id="link19"></a>
+
+**ArXiv ID:** 2502.02810
+
+**Authors:** Chanhui Lee, Yuheon Song, YongJun Jeong, Hanbum Ko, Rodrigo Hormazabal, Sehui Han, Kyunghoon Bae, Sungbin Lim, Sungwoong Kim
+
+**Abstract:** Recent advances in Large Language Models (LLMs) have motivated the development of general LLMs for molecular tasks. While several studies have demonstrated that fine-tuned LLMs can achieve impressive benchmark performances, they are far from genuine generalist molecular LLMs due to a lack of fundamental understanding of molecular structure. Specifically, when given molecular task instructions, LLMs trained with naive next-token prediction training assign similar likelihood scores to both original and negatively corrupted molecules, revealing their lack of molecular structure understanding that is crucial for reliable and general molecular LLMs. To overcome this limitation and obtain a true generalist molecular LLM, we introduce a novel multi-modal training method based on a thorough multi-modal instruction tuning as well as a molecular structure preference optimization between chosen and rejected graphs. On various molecular benchmarks, the proposed generalist molecular LLM, called Mol-LLM, achieves state-of-the-art performances among generalist LLMs on most tasks, at the same time, surpassing or comparable to state-of-the-art specialist LLMs. Moreover, Mol-LLM also shows superior generalization performances in reaction prediction tasks, demonstrating the effect of the molecular structure understanding for generalization perspective.
+
+**Comment:** Develops a molecular LLM with a unique multimodal training approach that improves structure understanding. This offers theoretical insights into model architecture for molecular tasks.
+
+**Relevance:** 7
+**Novelty:** 8
+
+---
+
+## 20. [Building Bridges between Regression, Clustering, and Classification](https://arxiv.org/abs/2502.02996) <a id="link20"></a>
+
+**ArXiv ID:** 2502.02996
+
+**Authors:** Lawrence Stewart (DI-ENS, LIENS, Inria), Francis Bach (LIENS, SIERRA), Quentin Berthet
+
+**Abstract:** Regression, the task of predicting a continuous scalar target y based on some features x is one of the most fundamental tasks in machine learning and statistics. It has been observed and theoretically analyzed that the classical approach, meansquared error minimization, can lead to suboptimal results when training neural networks. In this work, we propose a new method to improve the training of these models on regression tasks, with continuous scalar targets. Our method is based on casting this task in a different fashion, using a target encoder, and a prediction decoder, inspired by approaches in classification and clustering. We showcase the performance of our method on a wide range of real-world datasets.
+
+**Comment:** This paper introduces a new strategy for regression tasks by linking them with clustering and classification through a target encoder and prediction decoder, which could be relevant to representation learning.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 21. [Taking a Big Step: Large Learning Rates in Denoising Score Matching Prevent Memorization](https://arxiv.org/abs/2502.03435) <a id="link21"></a>
+
+**ArXiv ID:** 2502.03435
+
+**Authors:** Yu-Han Wu, Pierre Marion, G\'erard Biau, Claire Boyer
+
+**Abstract:** Denoising score matching plays a pivotal role in the performance of diffusion-based generative models. However, the empirical optimal score--the exact solution to the denoising score matching--leads to memorization, where generated samples replicate the training data. Yet, in practice, only a moderate degree of memorization is observed, even without explicit regularization. In this paper, we investigate this phenomenon by uncovering an implicit regularization mechanism driven by large learning rates. Specifically, we show that in the small-noise regime, the empirical optimal score exhibits high irregularity. We then prove that, when trained by stochastic gradient descent with a large enough learning rate, neural networks cannot stably converge to a local minimum with arbitrarily small excess risk. Consequently, the learned score cannot be arbitrarily close to the empirical optimal score, thereby mitigating memorization. To make the analysis tractable, we consider one-dimensional data and two-layer neural networks. Experiments validate the crucial role of the learning rate in preventing memorization, even beyond the one-dimensional setting.
+
+**Comment:** Investigates implicit regularization in diffusion models via large learning rates, which is a relevant topic in representation learning as it addresses training dynamics, though slightly tangential due to its application to diffusion models.
+
+**Relevance:** 7
+**Novelty:** 8
+
+---
+
+## 22. [Transformers and Their Roles as Time Series Foundation Models](https://arxiv.org/abs/2502.03383) <a id="link22"></a>
+
+**ArXiv ID:** 2502.03383
+
+**Authors:** Dennis Wu, Yihan He, Yuan Cao, Jianqing Fan, Han Liu
+
+**Abstract:** We give a comprehensive analysis of transformers as time series foundation models, focusing on their approximation and generalization capabilities. First, we demonstrate that there exist transformers that fit an autoregressive model on input univariate time series via gradient descent. We then analyze MOIRAI, a multivariate time series foundation model capable of handling an arbitrary number of covariates. We prove that it is capable of automatically fitting autoregressive models with an arbitrary number of covariates, offering insights into its design and empirical success. For generalization, we establish bounds for pretraining when the data satisfies Dobrushin's condition. Experiments support our theoretical findings, highlighting the efficacy of transformers as time series foundation models.
+
+**Comment:** The analysis on Transformers as time series foundation models touches on theoretical aspects of autoregressive properties and generalization bounds. Though tied to time series, it offers insights into Transformer architecture and training dynamics.
+
+**Relevance:** 7
+**Novelty:** 7
+
+---
+
+## 23. [Beyond Topological Self-Explainable GNNs: A Formal Explainability Perspective](https://arxiv.org/abs/2502.02719) <a id="link23"></a>
+
+**ArXiv ID:** 2502.02719
+
+**Authors:** Steve Azzolin, Sagar Malhotra, Andrea Passerini, Stefano Teso
+
+**Abstract:** Self-Explainable Graph Neural Networks (SE-GNNs) are popular explainable-by-design GNNs, but the properties and the limitations of their explanations are not well understood. Our first contribution fills this gap by formalizing the explanations extracted by SE-GNNs, referred to as Trivial Explanations (TEs), and comparing them to established notions of explanations, namely Prime Implicant (PI) and faithful explanations. Our analysis reveals that TEs match PI explanations for a restricted but significant family of tasks. In general, however, they can be less informative than PI explanations and are surprisingly misaligned with widely accepted notions of faithfulness. Although faithful and PI explanations are informative, they are intractable to find and we show that they can be prohibitively large. Motivated by this, we propose Dual-Channel GNNs that integrate a white-box rule extractor and a standard SE-GNN, adaptively combining both channels when the task benefits. Our experiments show that even a simple instantiation of Dual-Channel GNNs can recover succinct rules and perform on par or better than widely used SE-GNNs. Our code can be found in the supplementary material.
+
+**Comment:** Analyzes explainable GNNs with formal perspectives and proposes Dual-Channel GNNs, introducing a thoughtful architectural modification. It weakly aligns with the broader interest in architectural innovations.
+
+**Relevance:** 7
+**Novelty:** 7
+
+---
+
+## 24. [Speculative Prefill: Turbocharging TTFT with Lightweight and Training-Free Token Importance Estimation](https://arxiv.org/abs/2502.02789) <a id="link24"></a>
+
+**ArXiv ID:** 2502.02789
+
+**Authors:** Jingyu Liu, Beidi Chen, Ce Zhang
+
+**Abstract:** Improving time-to-first-token (TTFT) is an essentially important objective in modern large language model (LLM) inference engines. Because optimizing TTFT directly results in higher maximal QPS and meets the requirements of many critical applications. However, boosting TTFT is notoriously challenging since it is purely compute-bounded and the performance bottleneck shifts from the self-attention to the MLP part. We present SpecPrefill, a training free framework that accelerates the inference TTFT for both long and medium context queries based on the following insight: LLMs are generalized enough to still preserve the quality given only a carefully chosen subset of prompt tokens. At its core, SpecPrefill leverages a lightweight model to speculate locally important tokens based on the context. These tokens, along with the necessary positional information, are then sent to the main model for processing. We evaluate SpecPrefill with a diverse set of tasks, followed by a comprehensive benchmarking of performance improvement both in a real end-to-end setting and ablation studies. SpecPrefill manages to serve Llama-3.1-405B-Instruct-FP8 with up to $7\times$ maximal end-to-end QPS on real downstream tasks and $7.66\times$ TTFT improvement during benchmarking.
+
+**Comment:** The proposed SpecPrefill framework for LLM inference accelerates token generation with lightweight models, which could be influential for model efficiency but is task-focused without foundational breakthroughs.
+
+**Relevance:** 7
+**Novelty:** 7
+
+---
+
+# Paper Selection Prompt
+
+You are a helpful paper reading assistant whose job is to read daily posts from ArXiv and identify a few papers that your friend will enjoy reading.
+Your job is to carefully read the paper titles and abstracts below and find the ones that match the criteria below.
+
+## Relevant Topics
+
+Use the following relevance criteria to focus on foundational research, avoiding purely application-driven work:
+
+1. Representation Learning
+   - Relevant: Insights into how deep networks encode information, feature/dictionary learning, sparse/contrastive methods, training dynamics in neural networks.
+   - Irrelevant: Standard applications of known techniques lacking new theoretical or methodological contributions.
+
+2. Model Architecture
+   - Relevant: Mixture-of-Experts (MoE), Transformers, Conditional/Dynamic Networks, Autoencoders, analysis on existing architectures (like encoder-decoder), or other architectural innovations.
+   - Irrelevant: Merely using existing architectures for a certain task without insights into the structure themselves.
+
+3. Model Compression
+   - Relevant: Sparsity, pruning, quantization, low-rank approaches, KV cache, or other algorithmic/theoretical efficiency breakthroughs.
+   - Irrelevant: Straightforward applications of existing compression methods to new tasks.
+
+4. Large Language Models (LLMs)
+   - Relevant: Major breakthroughs in training or architecture, theoretical insights into LLM behavior/interpretability.
+   - Irrelevant: Domain-specific usage (e.g., translation, jail-breaking), minor tweaks (e.g., instruction tuning, CoT, data mixing), or purely empirical dataset/benchmark studies and text-level analysis (e.g. hallucination, reasoning, safety).
+
+5. AI for Science
+   - Relevant: Foundational research in molecular/protein modeling, new generative paradigms, or significant architecture-level innovations.
+   - Irrelevant: Conventional, domain-specific applications without new theoretical perspectives.
+
+6. Emerging Trends
+   - Relevant: Cutting-edge theoretical work challenging established assumptions or introducing broad new paradigms.
+   - Irrelevant: Incremental improvements or trend-following without novel insights.
+
+**Keywords for Relevant Domains:**
+Mixture of Experts (MoE), Representation Learning, Compression/Efficiency, Sparse/Sparsity, Pruning, Quantization, Low-rank, Foundation Model, etc.
+
+**Hints on Irrelevant Domains:**
+Reinforcement Learning, Transfer Learning, Federated Learning, Online Learning, Diffusion Models, etc.
+
+**Hints on Application Tasks:**
+Image Segmentation, Medical Imaging, 3D Vision, Video Understanding, Information Retrieval, Summarization, Recommendation Systems, Machine Translation, Speech Recognition, Signal Processing, Spatial/Temporal Modeling, Time Series, etc.
+
+## Scoring Criteria
+
+> The "Relevance" score measures how closely the paper aligns with the core topics of the prompt.
+> The "Novelty" score assesses the originality and impact of the paper.
+> They are two **ORTHONORMAL** axes and **SHOULD NOT** be confused with each other.
+
+### Relevance Scoring
+
+- Relevance 9-10 (Completely Relevant)
+  - Focus: Fully aligned with core topics with no deviation, score the highest if contains keywords in it.
+  - Examples: Papers focused on foundational methods or theoretical research, whose titles contain topic keywords like "MoE".
+
+- Relevance 7-8 (Relevant)
+  - Focus: Retain a solid link to the main research area, though may touch on peripheral elements.
+  - Examples: Papers research on the fundamental part of MoE through a less critical aspect like its behavior in GNN.
+
+- Relevance 5-6 (Borderline)
+  - Focus: Maintains a link to the core topic but also extends into at least one other domain/area beyond the primary focus.
+  - Examples: Work referencing MoE centered on reinforcement learning.
+
+- Relevance 3-4 (Irrelevant)
+  - Focus: Largely outside our interests with no association to our topics.
+  - Examples: Application-focused papers like using MoE to solve a problem in the real world.
+
+- Relevance 1-2 (Ignore)
+  - Focus: Purely unrelated to our topics. Completely a different domain.
+  - **Exception**: If the paper hints at a cutting-edge, radically new direction that could eventually transform the primary domain, consider a score of 9–10 despite initial appearances. (Usually a very rare concept that belongs to the fundamental research)
+
+### Novelty Scoring
+
+- Novelty 9-10 (Breakthrough)
+  - Definition: Groundbreaking methods/theory introducing new directions or solving major challenges.
+  - Examples: Entirely new paradigm for foundational models; a novel theory transforming representation learning.
+
+- Novelty 7-8 (Improvements)
+  - Definition: Substantial insights/enhancements, though not a full paradigm shift.
+  - Examples: Modifications on existing methods yielding significantly better results.
+
+- Novelty 5-6 (Borderline)
+  - Definition: Incremental contributions with possible long-term benefits, not immediately transformative.
+  - Examples: Moderately novel extension to an existing architecture; refining current methods without fundamentally altering them.
+
+- Novelty 3-4 (Tangential)
+  - Definition: Minor or domain-specific improvements with limited broader impact.
+  - Examples: Slight modifications to known methods with strange motivation; purely engineering jobs like a new benchmark/dataset.
+
+- Novelty 1-2 (Low)
+  - Definition: Minimal originality, applying standard approaches without real innovation.
+  - Examples: Using an off-the-shelf model without adding new insights; purely application-driven studies like finetuning a pretrained model using existing methods.
+
+## Papers
+
+[PAPER LIST HERE]
+
+## Instructions
+
+Write the response in JSONL format with {ARXIVID, COMMENT, RELEVANCE, NOVELTY} on each line, one for each paper.
+
+- ARXIVID: should be the ArXiv ID.
+- COMMENT: should identify whether there is a criteria that match the paper very closely. These matches should not be based on general terms like "language modeling" or "advancements" and should specifically refer to a criterion. No need to mention the non-matching criteria.
+- RELEVANCE: should be a score from 1-10.
+- NOVELTY: should be a score from 1-10.

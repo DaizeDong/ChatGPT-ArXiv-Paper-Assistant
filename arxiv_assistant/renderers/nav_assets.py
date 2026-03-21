@@ -2,12 +2,17 @@ from html import escape
 from pathlib import Path
 
 LINK_COLOR = "#0969da"
+FONT_FAMILY = "'Segoe UI Symbol', 'Apple Symbols', Arial, sans-serif"
 TEXT_FONT_SIZE = 16
 ARROW_FONT_SIZE = 16
-EDGE_BUTTON_WIDTH = 250
-CENTER_BUTTON_WIDTH = 180
-BUTTON_HEIGHT = 54
-EDGE_GUTTER = 28
+EDGE_BUTTON_WIDTH = 194
+CENTER_BUTTON_WIDTH = 194
+BUTTON_HEIGHT = 50
+TITLE_Y = 18
+SUBTITLE_Y = 36
+ARROW_Y = 27
+ARROW_INSET = 48
+TEXT_CENTER_SHIFT = 16
 
 
 def build_nav_button_svg(title: str, subtitle: str, arrow: str | None = None, arrow_side: str | None = None) -> str:
@@ -23,25 +28,25 @@ def build_nav_button_svg(title: str, subtitle: str, arrow: str | None = None, ar
     ]
 
     if arrow and arrow_side == "left":
-        text_center_x = EDGE_GUTTER + (width - EDGE_GUTTER) / 2
+        text_center_x += TEXT_CENTER_SHIFT
         parts.append(
-            f'<text x="12" y="20" text-anchor="start" font-family="Arial, sans-serif" '
-            f'font-size="{ARROW_FONT_SIZE}" fill="{LINK_COLOR}">{escape(arrow)}</text>'
+            f'<text x="{ARROW_INSET}" y="{ARROW_Y}" text-anchor="middle" dominant-baseline="middle" '
+            f'font-family="{FONT_FAMILY}" font-size="{ARROW_FONT_SIZE}" fill="{LINK_COLOR}">{escape(arrow)}</text>'
         )
     elif arrow and arrow_side == "right":
-        text_center_x = (width - EDGE_GUTTER) / 2
+        text_center_x -= TEXT_CENTER_SHIFT
         parts.append(
-            f'<text x="{width - 12}" y="20" text-anchor="end" font-family="Arial, sans-serif" '
-            f'font-size="{ARROW_FONT_SIZE}" fill="{LINK_COLOR}">{escape(arrow)}</text>'
+            f'<text x="{width - ARROW_INSET}" y="{ARROW_Y}" text-anchor="middle" dominant-baseline="middle" '
+            f'font-family="{FONT_FAMILY}" font-size="{ARROW_FONT_SIZE}" fill="{LINK_COLOR}">{escape(arrow)}</text>'
         )
 
     parts.append(
-        f'<text x="{text_center_x}" y="20" text-anchor="middle" '
-        f'font-family="Arial, sans-serif" font-size="{TEXT_FONT_SIZE}" fill="{LINK_COLOR}">{title}</text>'
+        f'<text x="{text_center_x}" y="{TITLE_Y}" text-anchor="middle" '
+        f'font-family="{FONT_FAMILY}" font-size="{TEXT_FONT_SIZE}" fill="{LINK_COLOR}">{title}</text>'
     )
     parts.append(
-        f'<text x="{text_center_x}" y="41" text-anchor="middle" '
-        f'font-family="Arial, sans-serif" font-size="{TEXT_FONT_SIZE}" fill="{LINK_COLOR}">{subtitle}</text>'
+        f'<text x="{text_center_x}" y="{SUBTITLE_Y}" text-anchor="middle" '
+        f'font-family="{FONT_FAMILY}" font-size="{TEXT_FONT_SIZE}" fill="{LINK_COLOR}">{subtitle}</text>'
     )
     parts.append("</svg>")
     return "".join(parts)

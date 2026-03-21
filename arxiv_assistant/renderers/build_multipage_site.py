@@ -58,7 +58,7 @@ def _write_day_nav_asset(site_root: Path, current_date: Tuple[int, int, int], ta
     asset_path = site_day_nav_asset_path(current_date, direction)
     title = "Previous Day" if direction == "prev" else "Next Day"
     subtitle = f"{target_date[0]}-{target_date[1]:02d}-{target_date[2]:02d}"
-    arrow = "\u2b05" if direction == "prev" else "\u27a1"
+    arrow = "\u2190" if direction == "prev" else "\u2192"
     arrow_side = "left" if direction == "prev" else "right"
     write_nav_button_svg(site_root / Path(asset_path), title, subtitle, arrow=arrow, arrow_side=arrow_side)
     return asset_path
@@ -78,7 +78,7 @@ def _write_month_nav_asset(site_root: Path, current_month: Tuple[int, int], targ
     asset_path = site_month_nav_asset_path(current_month, direction)
     title = "Previous Month" if direction == "prev" else "Next Month"
     subtitle = f"{target_month[0]}-{target_month[1]:02d}"
-    arrow = "\u2b05" if direction == "prev" else "\u27a1"
+    arrow = "\u2190" if direction == "prev" else "\u2192"
     arrow_side = "left" if direction == "prev" else "right"
     write_nav_button_svg(site_root / Path(asset_path), title, subtitle, arrow=arrow, arrow_side=arrow_side)
     return asset_path

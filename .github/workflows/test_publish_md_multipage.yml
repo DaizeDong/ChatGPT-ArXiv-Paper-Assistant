@@ -61,6 +61,12 @@ jobs:
           custom_css: site.css
           files: ${{ steps.collect_files.outputs.files }}
 
+      - name: Bust custom CSS cache
+        shell: bash
+        run: |
+          find dist -name '*.html' -exec \
+            sed -i "s#custom\\.css\\([\"']\\)#custom.css?v=${GITHUB_SHA}\\1#g" {} +
+
       - name: Copy static assets
         shell: bash
         run: |

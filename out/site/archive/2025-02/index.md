@@ -1,37 +1,7 @@
 <table style="width: 100%; border-collapse: collapse; border: none;">
     <tr>
-<td style="border: none; padding: 0px; width: 50%;">
-            <div style="display: flex; align-items: center; gap: 5px;">
-                <a href="../2025-01" style="text-decoration: none; color: inherit;">
-                    <strong style="color: black; font-size: 18px;">&larr;</strong>
-                </a>
-                <div style="text-align: center;">
-                    <a href="../2025-01" style="text-decoration: none;">
-                        <strong>Previous Month</strong>
-                    </a>
-                    <br>
-                    <a href="../2025-01" style="text-decoration: none; font-size: 14px; color: gray;">
-                        2025-01
-                    </a>
-                </div>
-            </div>
-        </td>
-<td style="border: none; padding: 0px; width: 50%;">
-            <div style="display: flex; align-items: center; gap: 5px; justify-content: flex-end; width: 100%;">
-                <div style="text-align: center;">
-                    <a href="../2025-03" style="text-decoration: none;">
-                        <strong>Next Month</strong>
-                    </a>
-                    <br>
-                    <a href="../2025-03" style="text-decoration: none; font-size: 14px; color: gray;">
-                        2025-03
-                    </a>
-                </div>
-                <a href="../2025-03" style="text-decoration: none; color: inherit;">
-                    <strong style="color: black; font-size: 18px;">&rarr;</strong>
-                </a>
-            </div>
-        </td>
+<td style="border: none; padding: 0px; width: 50%;"><div style="display: flex; align-items: center; gap: 5px;"><a href="../2025-01" style="text-decoration: none; color: inherit;"><strong style="color: black; font-size: 18px;">&larr;</strong></a><div style="text-align: center;"><a href="../2025-01" style="text-decoration: none;"><strong>Previous Month</strong></a><br><a href="../2025-01" style="text-decoration: none; font-size: 14px; color: gray;">2025-01</a></div></div></td>
+<td style="border: none; padding: 0px; width: 50%;"><div style="display: flex; align-items: center; gap: 5px; justify-content: flex-end; width: 100%;"><div style="text-align: center;"><a href="../2025-03" style="text-decoration: none;"><strong>Next Month</strong></a><br><a href="../2025-03" style="text-decoration: none; font-size: 14px; color: gray;">2025-03</a></div><a href="../2025-03" style="text-decoration: none; color: inherit;"><strong style="color: black; font-size: 18px;">&rarr;</strong></a></div></td>
     </tr>
 </table>
 

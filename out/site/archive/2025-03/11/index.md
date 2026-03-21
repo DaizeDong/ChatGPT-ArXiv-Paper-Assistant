@@ -1,49 +1,8 @@
 <table style="width: 100%; border-collapse: collapse; border: none;">
     <tr>
-<td style="border: none; padding: 0px; width: 33%;">
-            <div style="display: flex; align-items: center; gap: 5px;">
-                <a href="../10" style="text-decoration: none; color: inherit;">
-                    <strong style="color: black; font-size: 18px;">&larr;</strong>
-                </a>
-                <div style="text-align: center;">
-                    <a href="../10" style="text-decoration: none;">
-                        <strong>Previous Day</strong>
-                    </a>
-                    <br>
-                    <a href="../10" style="text-decoration: none; font-size: 14px; color: gray;">
-                        2025-03-10
-                    </a>
-                </div>
-            </div>
-        </td>
-
-        <td style="border: none; padding: 0px; width: 34%; text-align: center;">
-            <div style="display: flex; flex-direction: column; align-items: center; width: 100%;">
-                <a href=".." style="text-decoration: none;">
-                    <strong>Monthly Overview</strong>
-                </a>
-                <a href=".." style="text-decoration: none; font-size: 14px; color: gray;">
-                    2025-03
-                </a>
-            </div>
-        </td>
-    
-<td style="border: none; padding: 0px; width: 33%;">
-            <div style="display: flex; align-items: center; gap: 5px; justify-content: flex-end; width: 100%;">
-                <div style="text-align: center;">
-                    <a href="../12" style="text-decoration: none;">
-                        <strong>Next Day</strong>
-                    </a>
-                    <br>
-                    <a href="../12" style="text-decoration: none; font-size: 14px; color: gray;">
-                        2025-03-12
-                    </a>
-                </div>
-                <a href="../12" style="text-decoration: none; color: inherit;">
-                    <strong style="color: black; font-size: 18px;">&rarr;</strong>
-                </a>
-            </div>
-        </td>
+<td style="border: none; padding: 0px; width: 33%;"><div style="display: flex; align-items: center; gap: 5px;"><a href="../10" style="text-decoration: none; color: inherit;"><strong style="color: black; font-size: 18px;">&larr;</strong></a><div style="text-align: center;"><a href="../10" style="text-decoration: none;"><strong>Previous Day</strong></a><br><a href="../10" style="text-decoration: none; font-size: 14px; color: gray;">2025-03-10</a></div></div></td>
+<td style="border: none; padding: 0px; width: 34%; text-align: center;"><div style="display: flex; flex-direction: column; align-items: center; width: 100%;"><a href=".." style="text-decoration: none;"><strong>Monthly Overview</strong></a><a href=".." style="text-decoration: none; font-size: 14px; color: gray;">2025-03</a></div></td>
+<td style="border: none; padding: 0px; width: 33%;"><div style="display: flex; align-items: center; gap: 5px; justify-content: flex-end; width: 100%;"><div style="text-align: center;"><a href="../12" style="text-decoration: none;"><strong>Next Day</strong></a><br><a href="../12" style="text-decoration: none; font-size: 14px; color: gray;">2025-03-12</a></div><a href="../12" style="text-decoration: none; color: inherit;"><strong style="color: black; font-size: 18px;">&rarr;</strong></a></div></td>
     </tr>
 </table>
 

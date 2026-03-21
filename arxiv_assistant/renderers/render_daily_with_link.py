@@ -20,56 +20,44 @@ def _render_day_nav_cell(
         return '<td style="border: none; padding: 0px; width: 33%;"></td>'
 
     if align == "left":
-        content = f"""
-            <div style="display: flex; align-items: center; gap: 5px;">
-                <a href="{href}" style="text-decoration: none; color: inherit;">
-                    <strong style="color: black; font-size: 18px;">{arrow_html}</strong>
-                </a>
-                <div style="text-align: center;">
-                    <a href="{href}" style="text-decoration: none;">
-                        <strong>{title}</strong>
-                    </a>
-                    <br>
-                    <a href="{href}" style="text-decoration: none; font-size: 14px; color: gray;">
-                        {subtitle}
-                    </a>
-                </div>
-            </div>
-        """
+        content = (
+            '<div style="display: flex; align-items: center; gap: 5px;">'
+            f'<a href="{href}" style="text-decoration: none; color: inherit;">'
+            f'<strong style="color: black; font-size: 18px;">{arrow_html}</strong>'
+            "</a>"
+            '<div style="text-align: center;">'
+            f'<a href="{href}" style="text-decoration: none;"><strong>{title}</strong></a>'
+            "<br>"
+            f'<a href="{href}" style="text-decoration: none; font-size: 14px; color: gray;">{subtitle}</a>'
+            "</div>"
+            "</div>"
+        )
     else:
-        content = f"""
-            <div style="display: flex; align-items: center; gap: 5px; justify-content: flex-end; width: 100%;">
-                <div style="text-align: center;">
-                    <a href="{href}" style="text-decoration: none;">
-                        <strong>{title}</strong>
-                    </a>
-                    <br>
-                    <a href="{href}" style="text-decoration: none; font-size: 14px; color: gray;">
-                        {subtitle}
-                    </a>
-                </div>
-                <a href="{href}" style="text-decoration: none; color: inherit;">
-                    <strong style="color: black; font-size: 18px;">{arrow_html}</strong>
-                </a>
-            </div>
-        """
+        content = (
+            '<div style="display: flex; align-items: center; gap: 5px; justify-content: flex-end; width: 100%;">'
+            '<div style="text-align: center;">'
+            f'<a href="{href}" style="text-decoration: none;"><strong>{title}</strong></a>'
+            "<br>"
+            f'<a href="{href}" style="text-decoration: none; font-size: 14px; color: gray;">{subtitle}</a>'
+            "</div>"
+            f'<a href="{href}" style="text-decoration: none; color: inherit;">'
+            f'<strong style="color: black; font-size: 18px;">{arrow_html}</strong>'
+            "</a>"
+            "</div>"
+        )
 
     return f'<td style="border: none; padding: 0px; width: 33%;">{content}</td>'
 
 
 def _render_month_nav_cell(href: str, title: str, subtitle: str) -> str:
-    return f"""
-        <td style="border: none; padding: 0px; width: 34%; text-align: center;">
-            <div style="display: flex; flex-direction: column; align-items: center; width: 100%;">
-                <a href="{href}" style="text-decoration: none;">
-                    <strong>{title}</strong>
-                </a>
-                <a href="{href}" style="text-decoration: none; font-size: 14px; color: gray;">
-                    {subtitle}
-                </a>
-            </div>
-        </td>
-    """
+    return (
+        '<td style="border: none; padding: 0px; width: 34%; text-align: center;">'
+        '<div style="display: flex; flex-direction: column; align-items: center; width: 100%;">'
+        f'<a href="{href}" style="text-decoration: none;"><strong>{title}</strong></a>'
+        f'<a href="{href}" style="text-decoration: none; font-size: 14px; color: gray;">{subtitle}</a>'
+        "</div>"
+        "</td>"
+    )
 
 
 def _render_day_header(

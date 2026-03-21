@@ -1,6 +1,7 @@
 import argparse
 import json
 import os
+import sys
 from datetime import date, datetime, timedelta
 from pathlib import Path
 from typing import Iterable
@@ -8,6 +9,10 @@ from typing import Iterable
 
 DateTuple = tuple[int, int, int]
 RemedyPlan = dict[DateTuple, tuple[DateTuple, DateTuple]]
+REPO_ROOT = Path(__file__).resolve().parents[1]
+
+if str(REPO_ROOT) not in sys.path:
+    sys.path.insert(0, str(REPO_ROOT))
 
 DEFAULT_MISSED_DATES: RemedyPlan = {
     # date_to_remedy: [start_date_to_search, end_date_to_search]

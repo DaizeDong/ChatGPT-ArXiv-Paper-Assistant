@@ -7,7 +7,7 @@ from arxiv_assistant.environment import AUTHOR_ID_SET, SYSTEM_PROMPT, CONFIG, NO
 from arxiv_assistant.filters.filter_author import filter_papers_by_hindex, select_by_author
 from arxiv_assistant.filters.filter_gpt import filter_by_gpt
 from arxiv_assistant.push_to_slack import push_to_slack
-from arxiv_assistant.renderers.render_daily import render_daily_md
+from arxiv_assistant.renderers.render_daily import render_daily_md, render_summary_table
 from arxiv_assistant.utils.io import copy_file_or_dir, delete_file_or_dir
 from arxiv_assistant.utils.utils import EnhancedJSONEncoder
 
@@ -109,11 +109,16 @@ if __name__ == "__main__":
 
     if CONFIG["OUTPUT"].getboolean("dump_md"):
         head_table = {
-            "headers": [f"*[{CONFIG['SELECTION']['model']}]*", "Prompt", "Completion", "Total"],
-            "data": [
-                ["**Token**", total_prompt_tokens, total_completion_tokens, total_prompt_tokens + total_completion_tokens],
-                ["**Cost**", f"${round(total_prompt_cost, 2)}", f"${round(total_completion_cost, 2)}", f"${round(total_prompt_cost + total_completion_cost, 2)}"],
-            ]
+            "html": render_summary_table(
+                model=CONFIG["SELECTION"]["model"],
+                prompt_tokens=total_prompt_tokens,
+                completion_tokens=total_completion_tokens,
+                prompt_cost=total_prompt_cost,
+                completion_cost=total_completion_cost,
+                total_arxiv_papers=len(all_entries),
+                total_scanned_papers=sum(len(area_papers) for area_papers in arxiv_paper_dict.values()),
+                total_relevant_papers=len(selected_paper_dict),
+            )
         }
         with open(OUTPUT_MD_FILE_FORMAT.format("latest.md"), "w") as f:
             f.write(render_daily_md(all_entries, arxiv_paper_dict, selected_paper_dict, now_date=(NOW_YEAR, NOW_MONTH, NOW_DAY), prompts=(SYSTEM_PROMPT, POSTFIX_PROMPT_ABSTRACT, SCORE_PROMPT, TOPIC_PROMPT), head_table=head_table))

@@ -6,6 +6,7 @@ from arxiv_assistant.renderers.site_paths import (
     relative_site_href,
     relative_site_path,
     site_month_page_path,
+    site_year_page_path,
 )
 
 HEADER_SEPARATOR = "&nbsp;|&nbsp;"
@@ -24,11 +25,14 @@ def _render_month_header(
     now_month: Tuple[int, int],
     all_months_list: list[Tuple[int, int]],
     previous_asset_path: str | None,
+    center_asset_path: str | None,
     next_asset_path: str | None,
 ) -> str:
     now_idx = all_months_list.index(now_month)
+    now_year, _ = now_month
     previous_month = all_months_list[now_idx - 1] if now_idx > 0 else None
     next_month = all_months_list[now_idx + 1] if now_idx + 1 < len(all_months_list) else None
+    year_href = relative_site_href(site_year_page_path(now_year), current_page_path)
 
     previous_href = (
         relative_site_href(site_month_page_path(previous_month), current_page_path)
@@ -41,7 +45,7 @@ def _render_month_header(
         else None
     )
 
-    if previous_href and previous_asset_path or next_href and next_asset_path:
+    if previous_href and previous_asset_path or center_asset_path or next_href and next_asset_path:
         parts = ["<div>"]
         if previous_href and previous_asset_path and previous_month is not None:
             previous_asset_href = relative_site_path(previous_asset_path, current_page_path)
@@ -55,6 +59,13 @@ def _render_month_header(
                 f'<a href="{next_href}"><img align="right" src="{next_asset_href}" '
                 f'alt="Next Month {next_month[0]}-{next_month[1]:02d}"></a>'
             )
+        parts.append('<div align="center">')
+        if center_asset_path is not None:
+            center_asset_href = relative_site_path(center_asset_path, current_page_path)
+            parts.append(f'<a href="{year_href}"><img src="{center_asset_href}" alt="Yearly Overview {now_year}"></a>')
+        else:
+            parts.append(_render_link(year_href, f"Yearly Overview<br>{now_year}"))
+        parts.append("</div>")
         parts.append('<br clear="all">')
         parts.append("</div>")
         return "".join(parts)
@@ -62,12 +73,14 @@ def _render_month_header(
     line_one = _join_nav_parts(
         [
             _render_link(previous_href, "&larr; Previous Month") if previous_href else "",
+            _render_link(year_href, "Yearly Overview"),
             _render_link(next_href, "Next Month &rarr;") if next_href else "",
         ]
     )
     line_two = _join_nav_parts(
         [
             _render_link(previous_href, f"{previous_month[0]}-{previous_month[1]:02d}") if previous_month else "",
+            _render_link(year_href, str(now_year)),
             _render_link(next_href, f"{next_month[0]}-{next_month[1]:02d}") if next_month else "",
         ]
     )
@@ -125,6 +138,7 @@ def render_monthly_md_with_hyperlink(
     current_page_path: str,
     all_date_file_mapping: Dict[Tuple[int, int, int], str] = None,
     previous_asset_path: str | None = None,
+    center_asset_path: str | None = None,
     next_asset_path: str | None = None,
 ) -> str:
     all_date_file_mapping = all_date_file_mapping or {}
@@ -140,6 +154,7 @@ def render_monthly_md_with_hyperlink(
         current_month,
         all_months_list,
         previous_asset_path,
+        center_asset_path,
         next_asset_path,
     )
     content_table = render_content_table(now_date, current_page_path, all_date_file_mapping)

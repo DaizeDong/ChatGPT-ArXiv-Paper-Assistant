@@ -6,13 +6,17 @@ from typing import Dict, Tuple
 from arxiv_assistant.renderers.nav_assets import write_nav_button_svg
 from arxiv_assistant.renderers.render_daily_with_link import render_daily_md_with_hyperlink
 from arxiv_assistant.renderers.render_monthly_with_link import render_monthly_md_with_hyperlink
+from arxiv_assistant.renderers.render_yearly_with_link import render_yearly_md_with_hyperlink
 from arxiv_assistant.renderers.site_paths import (
     ROOT_SITE_PAGE,
     month_from_date,
+    site_year_nav_asset_path,
+    site_year_page_path,
     site_day_nav_asset_path,
     site_day_page_path,
     site_month_nav_asset_path,
     site_month_page_path,
+    year_from_date,
 )
 
 DAY_FILE_PATTERN = re.compile(r"(?P<year>\d{4})-(?P<month>\d{2})-(?P<day>\d{2})-(?P<suffix>[^/\\\\]+)\.md$")
@@ -84,6 +88,26 @@ def _write_month_nav_asset(site_root: Path, current_month: Tuple[int, int], targ
     return asset_path
 
 
+def _write_month_center_asset(site_root: Path, current_month: Tuple[int, int]) -> str:
+    asset_path = site_month_nav_asset_path(current_month, "center")
+    write_nav_button_svg(
+        site_root / Path(asset_path),
+        "Yearly Overview",
+        str(current_month[0]),
+    )
+    return asset_path
+
+
+def _write_year_nav_asset(site_root: Path, current_year: int, target_year: int, direction: str) -> str:
+    asset_path = site_year_nav_asset_path(current_year, direction)
+    title = "Previous Year" if direction == "prev" else "Next Year"
+    subtitle = str(target_year)
+    arrow = "\u2190" if direction == "prev" else "\u2192"
+    arrow_side = "left" if direction == "prev" else "right"
+    write_nav_button_svg(site_root / Path(asset_path), title, subtitle, arrow=arrow, arrow_side=arrow_side)
+    return asset_path
+
+
 def build_multipage_site(output_root: str | Path) -> Path | None:
     output_root = Path(output_root)
     daily_md_root = output_root / "md"
@@ -100,6 +124,10 @@ def build_multipage_site(output_root: str | Path) -> Path | None:
     all_dates = set(day_sources.keys())
     all_dates_list = sorted(all_dates)
     day_page_mapping = {date: site_day_page_path(date) for date in all_dates}
+    month_page_mapping = {month_from_date(date): site_month_page_path(month_from_date(date)) for date in all_dates}
+    month_day_counts: Dict[Tuple[int, int], int] = {}
+    for date in all_dates:
+        month_day_counts[month_from_date(date)] = month_day_counts.get(month_from_date(date), 0) + 1
 
     for date_idx, date in enumerate(all_dates_list):
         source_path = day_sources[date]
@@ -154,11 +182,30 @@ def build_multipage_site(output_root: str | Path) -> Path | None:
             previous_asset_path=(
                 _write_month_nav_asset(site_root, month, previous_month, "prev") if previous_month is not None else None
             ),
+            center_asset_path=_write_month_center_asset(site_root, month),
             next_asset_path=(
                 _write_month_nav_asset(site_root, month, next_month, "next") if next_month is not None else None
             ),
         )
         _write_text(site_root / Path(site_month_page_path(month)), rendered)
+
+    all_years_list = sorted({year_from_date(date) for date in all_dates})
+    for year_idx, year in enumerate(all_years_list):
+        previous_year = all_years_list[year_idx - 1] if year_idx > 0 else None
+        next_year = all_years_list[year_idx + 1] if year_idx + 1 < len(all_years_list) else None
+        rendered = render_yearly_md_with_hyperlink(
+            now_year=year,
+            current_page_path=site_year_page_path(year),
+            all_month_file_mapping=month_page_mapping,
+            all_month_day_counts=month_day_counts,
+            previous_asset_path=(
+                _write_year_nav_asset(site_root, year, previous_year, "prev") if previous_year is not None else None
+            ),
+            next_asset_path=(
+                _write_year_nav_asset(site_root, year, next_year, "next") if next_year is not None else None
+            ),
+        )
+        _write_text(site_root / Path(site_year_page_path(year)), rendered)
 
     return site_root
 

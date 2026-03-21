@@ -3,12 +3,21 @@ from typing import Tuple
 
 DayTuple = Tuple[int, int, int]
 MonthTuple = Tuple[int, int]
+YearTuple = int
 
 ROOT_SITE_PAGE = "index.md"
 
 
 def month_from_date(date: DayTuple) -> MonthTuple:
     return date[0], date[1]
+
+
+def year_from_date(date: DayTuple) -> YearTuple:
+    return date[0]
+
+
+def site_year_page_path(year: YearTuple) -> str:
+    return f"archive/{year:04d}/index.md"
 
 
 def site_month_page_path(month: MonthTuple) -> str:
@@ -29,6 +38,10 @@ def site_day_nav_asset_path(date: DayTuple, direction: str) -> str:
 def site_month_nav_asset_path(month: MonthTuple, direction: str) -> str:
     year, month_num = month
     return f"assets/nav/month/{year:04d}-{month_num:02d}-{direction}.svg"
+
+
+def site_year_nav_asset_path(year: YearTuple, direction: str) -> str:
+    return f"assets/nav/year/{year:04d}-{direction}.svg"
 
 
 def relative_site_path(target_path: str, current_page_path: str) -> str:

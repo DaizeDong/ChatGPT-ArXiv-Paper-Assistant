@@ -6,6 +6,13 @@ on:
     workflows: [ "Push Generated Results" ]
     types:
       - completed
+  push:
+    branches:
+      - main
+    paths:
+      - ".github/workflows/publish_md.yml"
+      - "site.css"
+      - "arxiv_assistant/renderers/**"
 
 permissions:
   contents: read
@@ -13,7 +20,7 @@ permissions:
   id-token: write
 
 concurrency:
-  group: github-pages-single
+  group: github-pages
   cancel-in-progress: true
 
 env:
@@ -21,6 +28,7 @@ env:
 
 jobs:
   build:
+    if: ${{ github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success' }}
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
@@ -28,43 +36,95 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout `auto_update` branch
+      - name: Checkout `main` branch for site code
+        uses: actions/checkout@v6
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Checkout `auto_update` branch for generated outputs
         uses: actions/checkout@v6
         with:
           ref: auto_update
+          path: auto_update_data
           fetch-depth: 0
 
-      - name: Verify output directory and contents
+      - name: Restore published data snapshot
+        shell: bash
         run: |
-          if [ -d "out" ] && [ "$(ls -A out)" ]; then
-              cd out
-              echo "Contents in out:"
-              ls -R
-              mv output.md ../
+          rm -rf out
+          if [ -d "auto_update_data/out" ] && [ "$(ls -A auto_update_data/out)" ]; then
+            cp -R auto_update_data/out ./out
+            echo "Contents in restored out/:"
+            ls -R out
           else
-              echo "out directory is empty or does not exist. Aborting."
+            echo "auto_update_data/out is empty or does not exist. Aborting."
+            exit 1
+          fi
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+
+      - name: Build multipage site
+        run: |
+          python -m arxiv_assistant.renderers.build_multipage_site
+
+      - name: Stage generated site
+        shell: bash
+        run: |
+          if [ -d "out/site" ] && [ "$(ls -A out/site)" ]; then
+              echo "Contents in out/site:"
+              ls -R out/site
+              cp -R out/site/. .
+          else
+              echo "out/site directory is empty or does not exist. Aborting."
               exit 1
           fi
 
-      - name: Check for latest.md
-        id: check_files
+      - name: Collect site markdown files
+        id: collect_files
         shell: bash
         run: |
-          if [ -f latest.md ]; then
-            echo "files_exists=true" >> "$GITHUB_OUTPUT"
-          else
-            echo "files_exists=false" >> "$GITHUB_OUTPUT"
-          fi
+          {
+            echo 'files<<EOF'
+            find . -name 'index.md' \
+              -not -path './out/*' \
+              -not -path './auto_update_data/*' \
+              -not -path './.git/*' \
+              | sort \
+              | sed 's#^\./##'
+            echo EOF
+          } >> "$GITHUB_OUTPUT"
 
-      - name: Convert latest.md to pages
+      - name: Convert site markdown to pages
         uses: wranders/markdown-to-pages-action@v1.1.2
-        if: steps.check_files.outputs.files_exists == 'true'
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          files: latest.md
+          custom_css: site.css
+          files: ${{ steps.collect_files.outputs.files }}
+
+      - name: Bust custom CSS cache
+        shell: bash
+        run: |
+          find dist -name '*.html' -exec \
+            sed -i "s#custom\\.css\\([\"']\\)#custom.css?v=${GITHUB_SHA}\\1#g" {} +
+
+      - name: Copy static assets
+        shell: bash
+        run: |
+          if [ -d assets ]; then
+            mkdir -p dist
+            cp -R assets dist/
+          fi
 
       - name: Archive Pages artifact
-        if: steps.check_files.outputs.files_exists == 'true'
         shell: bash
         run: |
           tar \
@@ -77,7 +137,6 @@ jobs:
             .
 
       - uses: actions/upload-artifact@v7
-        if: steps.check_files.outputs.files_exists == 'true'
         with:
           name: github-pages
           path: ${{ runner.temp }}/artifact.tar
@@ -86,5 +145,4 @@ jobs:
 
       - name: Deploy to GitHub Pages
         uses: actions/deploy-pages@v4.0.5
-        if: steps.check_files.outputs.files_exists == 'true'
         id: deployment

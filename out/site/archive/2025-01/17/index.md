@@ -1,10 +1,4 @@
-<table style="width: 100%; border-collapse: collapse; border: none;">
-    <tr>
-<td style="border: none; padding: 0px; width: 33%;"></td>
-<td style="border: none; padding: 0px; width: 34%; text-align: center;"><div style="display: flex; flex-direction: column; align-items: center; width: 100%;"><a href=".." style="text-decoration: none;"><strong>Monthly Overview</strong></a><a href=".." style="text-decoration: none; font-size: 14px; color: gray;">2025-01</a></div></td>
-<td style="border: none; padding: 0px; width: 33%;"><div style="display: flex; align-items: center; gap: 5px; justify-content: flex-end; width: 100%;"><div style="text-align: center;"><a href="../21" style="text-decoration: none;"><strong>Next Day</strong></a><br><a href="../21" style="text-decoration: none; font-size: 14px; color: gray;">2025-01-21</a></div><a href="../21" style="text-decoration: none; color: inherit;"><strong style="color: black; font-size: 18px;">&rarr;</strong></a></div></td>
-    </tr>
-</table>
+<div style="display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr) minmax(0, 1fr); align-items: center; width: 100%; gap: 16px; margin: 8px 0 20px;"><div></div><div style="display: flex; justify-content: center;"><a href=".." style="display: inline-flex; flex-direction: column; align-items: center; text-align: center; text-decoration: none; line-height: 1.25;"><strong style="display: block;">Monthly Overview</strong><span style="display: block; font-size: 14px; color: gray;">2025-01</span></a></div><div style="display: flex; justify-content: flex-end;"><a href="../21" style="display: inline-flex; align-items: center; gap: 10px; text-decoration: none;"><span style="display: flex; flex-direction: column; align-items: flex-end; text-align: right; line-height: 1.25;"><strong style="display: block;">Next Day</strong><span style="display: block; font-size: 14px; color: gray;">2025-01-21</span></span><span style="font-size: 20px; line-height: 1; color: inherit;">&rarr;</span></a></div></div>
 
 # Personalized Daily Arxiv Papers 01/17/2025
 Total cost: $0.980125

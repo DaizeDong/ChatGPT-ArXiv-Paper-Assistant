@@ -7,6 +7,15 @@ from arxiv_assistant.renderers.site_paths import (
     site_month_page_path,
 )
 
+HEADER_GRID_STYLE = (
+    "display: grid; "
+    "grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); "
+    "align-items: center; "
+    "width: 100%; "
+    "gap: 16px; "
+    "margin: 8px 0 20px;"
+)
+
 
 def _render_month_nav_cell(
     href: str | None,
@@ -16,36 +25,32 @@ def _render_month_nav_cell(
     align: str,
 ) -> str:
     if href is None:
-        return '<td style="border: none; padding: 0px; width: 50%;"></td>'
+        return '<div></div>'
 
     if align == "left":
-        content = (
-            '<div style="display: flex; align-items: center; gap: 5px;">'
-            f'<a href="{href}" style="text-decoration: none; color: inherit;">'
-            f'<strong style="color: black; font-size: 18px;">{arrow_html}</strong>'
-            "</a>"
-            '<div style="text-align: center;">'
-            f'<a href="{href}" style="text-decoration: none;"><strong>{title}</strong></a>'
-            "<br>"
-            f'<a href="{href}" style="text-decoration: none; font-size: 14px; color: gray;">{subtitle}</a>'
-            "</div>"
-            "</div>"
-        )
-    else:
-        content = (
-            '<div style="display: flex; align-items: center; gap: 5px; justify-content: flex-end; width: 100%;">'
-            '<div style="text-align: center;">'
-            f'<a href="{href}" style="text-decoration: none;"><strong>{title}</strong></a>'
-            "<br>"
-            f'<a href="{href}" style="text-decoration: none; font-size: 14px; color: gray;">{subtitle}</a>'
-            "</div>"
-            f'<a href="{href}" style="text-decoration: none; color: inherit;">'
-            f'<strong style="color: black; font-size: 18px;">{arrow_html}</strong>'
+        return (
+            '<div style="display: flex; justify-content: flex-start;">'
+            f'<a href="{href}" style="display: inline-flex; align-items: center; gap: 10px; text-decoration: none;">'
+            f'<span style="font-size: 20px; line-height: 1; color: inherit;">{arrow_html}</span>'
+            '<span style="display: flex; flex-direction: column; align-items: flex-start; line-height: 1.25;">'
+            f'<strong style="display: block;">{title}</strong>'
+            f'<span style="display: block; font-size: 14px; color: gray;">{subtitle}</span>'
+            "</span>"
             "</a>"
             "</div>"
         )
 
-    return f'<td style="border: none; padding: 0px; width: 50%;">{content}</td>'
+    return (
+        '<div style="display: flex; justify-content: flex-end;">'
+        f'<a href="{href}" style="display: inline-flex; align-items: center; gap: 10px; text-decoration: none;">'
+        '<span style="display: flex; flex-direction: column; align-items: flex-end; text-align: right; line-height: 1.25;">'
+        f'<strong style="display: block;">{title}</strong>'
+        f'<span style="display: block; font-size: 14px; color: gray;">{subtitle}</span>'
+        "</span>"
+        f'<span style="font-size: 20px; line-height: 1; color: inherit;">{arrow_html}</span>'
+        "</a>"
+        "</div>"
+    )
 
 
 def _render_month_header(
@@ -68,10 +73,9 @@ def _render_month_header(
         else None
     )
 
-    return "\n".join(
+    return "".join(
         [
-            '<table style="width: 100%; border-collapse: collapse; border: none;">',
-            "    <tr>",
+            f'<div style="{HEADER_GRID_STYLE}">',
             _render_month_nav_cell(
                 previous_href,
                 "Previous Month",
@@ -86,8 +90,7 @@ def _render_month_header(
                 "&rarr;",
                 "right",
             ),
-            "    </tr>",
-            "</table>",
+            "</div>",
         ]
     )
 

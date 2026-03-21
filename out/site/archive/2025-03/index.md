@@ -1,9 +1,4 @@
-<table style="width: 100%; border-collapse: collapse; border: none;">
-    <tr>
-<td style="border: none; padding: 0px; width: 50%;"><div style="display: flex; align-items: center; gap: 5px;"><a href="../2025-02" style="text-decoration: none; color: inherit;"><strong style="color: black; font-size: 18px;">&larr;</strong></a><div style="text-align: center;"><a href="../2025-02" style="text-decoration: none;"><strong>Previous Month</strong></a><br><a href="../2025-02" style="text-decoration: none; font-size: 14px; color: gray;">2025-02</a></div></div></td>
-<td style="border: none; padding: 0px; width: 50%;"></td>
-    </tr>
-</table>
+<div style="display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: center; width: 100%; gap: 16px; margin: 8px 0 20px;"><div style="display: flex; justify-content: flex-start;"><a href="../2025-02" style="display: inline-flex; align-items: center; gap: 10px; text-decoration: none;"><span style="font-size: 20px; line-height: 1; color: inherit;">&larr;</span><span style="display: flex; flex-direction: column; align-items: flex-start; line-height: 1.25;"><strong style="display: block;">Previous Month</strong><span style="display: block; font-size: 14px; color: gray;">2025-02</span></span></a></div><div></div></div>
 
 # Personalized Monthly ArXiv Paper Summary 2025/03
 

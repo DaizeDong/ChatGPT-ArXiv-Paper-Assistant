@@ -12,8 +12,38 @@ permissions:
   contents: write
 
 jobs:
-  remedy:
+  prepare:
     runs-on: ubuntu-latest
+    outputs:
+      remedy_dates_json: ${{ steps.prepare.outputs.remedy_dates_json }}
+
+    steps:
+      - name: Prepare matrix inputs
+        id: prepare
+        env:
+          REMEDY_DATES: ${{ inputs.remedy_dates }}
+        shell: bash
+        run: |
+          python - <<'PY' >> "$GITHUB_OUTPUT"
+          import json
+          import os
+
+          raw = os.environ["REMEDY_DATES"]
+          dates = [part.strip() for part in raw.split(",") if part.strip()]
+          if not dates:
+              raise SystemExit("No remedy dates provided.")
+
+          print(f"remedy_dates_json={json.dumps(dates)}")
+          PY
+
+  remedy:
+    needs: prepare
+    runs-on: ubuntu-latest
+
+    strategy:
+      fail-fast: false
+      matrix:
+        remedy_date: ${{ fromJson(needs.prepare.outputs.remedy_dates_json) }}
 
     steps:
       - name: Checkout `main` branch for code
@@ -54,11 +84,11 @@ jobs:
       - name: Print inferred remedy plan
         run: |
           python scripts/remedy_missed_dates.py \
-            --dates "${{ inputs.remedy_dates }}" \
+            --dates "${{ matrix.remedy_date }}" \
             --output-root out \
             --print-plan
 
-      - name: Remedy missed dates
+      - name: Remedy missed date
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
           OPENAI_BASE_URL: ${{ secrets.OPENAI_BASE_URL }}
@@ -67,8 +97,90 @@ jobs:
           SLACK_CHANNEL_ID: ${{ secrets.SLACK_CHANNEL_ID }}
         run: |
           python scripts/remedy_missed_dates.py \
-            --dates "${{ inputs.remedy_dates }}" \
+            --dates "${{ matrix.remedy_date }}" \
             --output-root out
+
+      - name: Collect remedied files
+        id: collect
+        env:
+          REMEDY_DATE: ${{ matrix.remedy_date }}
+        shell: bash
+        run: |
+          month_dir="${REMEDY_DATE:0:7}"
+          mkdir -p remedy_overlay/json/"$month_dir" remedy_overlay/md/"$month_dir"
+          cp "out/json/$month_dir/${REMEDY_DATE}-output.json" "remedy_overlay/json/$month_dir/"
+          cp "out/md/$month_dir/${REMEDY_DATE}-output.md" "remedy_overlay/md/$month_dir/"
+
+      - name: Upload remedied files
+        uses: actions/upload-artifact@v7
+        with:
+          name: remedy-${{ matrix.remedy_date }}
+          path: remedy_overlay/
+          retention-days: 1
+          if-no-files-found: error
+
+  merge:
+    needs: remedy
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout `main` branch for code
+        uses: actions/checkout@v6
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Checkout `auto_update` branch for data
+        uses: actions/checkout@v6
+        with:
+          ref: auto_update
+          path: auto_update_data
+          fetch-depth: 0
+
+      - name: Restore generated outputs
+        shell: bash
+        run: |
+          rm -rf out
+          if [ -d "auto_update_data/out" ] && [ "$(ls -A auto_update_data/out)" ]; then
+            cp -R auto_update_data/out ./out
+            echo "Restored out/ from auto_update."
+          else
+            echo "auto_update_data/out is empty or missing."
+            exit 1
+          fi
+
+      - name: Download remedied artifacts
+        uses: actions/download-artifact@v5
+        with:
+          pattern: remedy-*
+          path: remedy_overlay
+          merge-multiple: true
+
+      - name: Merge remedied files into out/
+        shell: bash
+        run: |
+          if [ ! -d "remedy_overlay" ] || [ -z "$(ls -A remedy_overlay)" ]; then
+            echo "No remedied artifacts downloaded."
+            exit 1
+          fi
+
+          if [ -d "remedy_overlay/json" ] && [ "$(ls -A remedy_overlay/json)" ]; then
+            cp -R remedy_overlay/json/. out/json/
+          fi
+
+          if [ -d "remedy_overlay/md" ] && [ "$(ls -A remedy_overlay/md)" ]; then
+            cp -R remedy_overlay/md/. out/md/
+          fi
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
 
       - name: Regenerate monthly summaries
         env:

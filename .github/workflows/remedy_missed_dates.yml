@@ -7,6 +7,11 @@ on:
         description: Comma-separated generation dates to remedy (YYYY-MM-DD)
         required: true
         default: 2026-03-13,2026-03-14,2026-03-16,2026-03-17,2026-03-18,2026-03-19,2026-03-20
+      regenerate_monthly_summaries:
+        description: Regenerate monthly summary files after remedying daily outputs
+        required: true
+        default: false
+        type: boolean
 
 permissions:
   contents: write
@@ -264,6 +269,7 @@ jobs:
           if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
 
       - name: Regenerate monthly summaries
+        if: ${{ inputs.regenerate_monthly_summaries }}
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
           OPENAI_BASE_URL: ${{ secrets.OPENAI_BASE_URL }}

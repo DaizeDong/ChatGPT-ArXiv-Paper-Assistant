@@ -1,5 +1,9 @@
 # Changelog
 
+### 2026-03-21
+
+- Support multi-page rendering!
+
 ### 2025-10-16
 
 - Added config template for minimal setup without author searching.

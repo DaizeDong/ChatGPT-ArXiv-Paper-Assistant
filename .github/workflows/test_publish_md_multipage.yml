@@ -50,6 +50,14 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           files: ${{ steps.collect_files.outputs.files }}
 
+      - name: Copy static assets
+        shell: bash
+        run: |
+          if [ -d assets ]; then
+            mkdir -p dist
+            cp -R assets dist/
+          fi
+
       - uses: actions/upload-pages-artifact@v3
         with:
           path: dist

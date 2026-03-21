@@ -1,4 +1,4 @@
-<div align="center"><a href="../2025-01">&larr; Previous Month</a>&nbsp;|&nbsp;<a href="../2025-03">Next Month &rarr;</a><br><a href="../2025-01">2025-01</a>&nbsp;|&nbsp;<a href="../2025-03">2025-03</a></div>
+<div><a href="../2025-01"><img align="left" src="../../assets/nav/month/2025-02-prev.svg" alt="Previous Month 2025-01"></a><a href="../2025-03"><img align="right" src="../../assets/nav/month/2025-02-next.svg" alt="Next Month 2025-03"></a><br clear="all"></div>
 
 # Personalized Monthly ArXiv Paper Summary 2025/02
 

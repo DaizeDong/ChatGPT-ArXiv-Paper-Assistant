@@ -1,4 +1,4 @@
-<div align="center"><a href="../22">&larr; Previous Day</a>&nbsp;|&nbsp;<a href="..">Monthly Overview</a>&nbsp;|&nbsp;<a href="../24">Next Day &rarr;</a><br><a href="../22">2025-01-22</a>&nbsp;|&nbsp;<a href="..">2025-01</a>&nbsp;|&nbsp;<a href="../24">2025-01-24</a></div>
+<div><a href="../22"><img align="left" src="../../../assets/nav/day/2025-01-23-prev.svg" alt="Previous Day 2025-01-22"></a><a href="../24"><img align="right" src="../../../assets/nav/day/2025-01-23-next.svg" alt="Next Day 2025-01-24"></a><div align="center"><a href="..">Monthly Overview<br>2025-01</a></div><br clear="all"></div>
 
 # Personalized Daily Arxiv Papers 01/23/2025
 

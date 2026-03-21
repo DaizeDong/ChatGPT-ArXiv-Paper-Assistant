@@ -4,6 +4,7 @@ from typing import Dict, Tuple
 from arxiv_assistant.renderers.site_paths import (
     month_from_date,
     relative_site_href,
+    relative_site_path,
     site_month_page_path,
 )
 
@@ -22,6 +23,8 @@ def _render_month_header(
     current_page_path: str,
     now_month: Tuple[int, int],
     all_months_list: list[Tuple[int, int]],
+    previous_asset_path: str | None,
+    next_asset_path: str | None,
 ) -> str:
     now_idx = all_months_list.index(now_month)
     previous_month = all_months_list[now_idx - 1] if now_idx > 0 else None
@@ -37,6 +40,24 @@ def _render_month_header(
         if next_month is not None
         else None
     )
+
+    if previous_href and previous_asset_path or next_href and next_asset_path:
+        parts = ["<div>"]
+        if previous_href and previous_asset_path and previous_month is not None:
+            previous_asset_href = relative_site_path(previous_asset_path, current_page_path)
+            parts.append(
+                f'<a href="{previous_href}"><img align="left" src="{previous_asset_href}" '
+                f'alt="Previous Month {previous_month[0]}-{previous_month[1]:02d}"></a>'
+            )
+        if next_href and next_asset_path and next_month is not None:
+            next_asset_href = relative_site_path(next_asset_path, current_page_path)
+            parts.append(
+                f'<a href="{next_href}"><img align="right" src="{next_asset_href}" '
+                f'alt="Next Month {next_month[0]}-{next_month[1]:02d}"></a>'
+            )
+        parts.append('<br clear="all">')
+        parts.append("</div>")
+        return "".join(parts)
 
     line_one = _join_nav_parts(
         [
@@ -103,6 +124,8 @@ def render_monthly_md_with_hyperlink(
     now_date: Tuple[int, int, int],
     current_page_path: str,
     all_date_file_mapping: Dict[Tuple[int, int, int], str] = None,
+    previous_asset_path: str | None = None,
+    next_asset_path: str | None = None,
 ) -> str:
     all_date_file_mapping = all_date_file_mapping or {}
 
@@ -112,7 +135,13 @@ def render_monthly_md_with_hyperlink(
     all_months.add(current_month)
     all_months_list = sorted(all_months)
 
-    head_string = _render_month_header(current_page_path, current_month, all_months_list)
+    head_string = _render_month_header(
+        current_page_path,
+        current_month,
+        all_months_list,
+        previous_asset_path,
+        next_asset_path,
+    )
     content_table = render_content_table(now_date, current_page_path, all_date_file_mapping)
 
     return "\n\n".join(

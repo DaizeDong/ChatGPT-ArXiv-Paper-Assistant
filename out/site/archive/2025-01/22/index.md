@@ -1,4 +1,4 @@
-<div align="center"><a href="../21">&larr; Previous Day</a>&nbsp;|&nbsp;<a href="..">Monthly Overview</a>&nbsp;|&nbsp;<a href="../23">Next Day &rarr;</a><br><a href="../21">2025-01-21</a>&nbsp;|&nbsp;<a href="..">2025-01</a>&nbsp;|&nbsp;<a href="../23">2025-01-23</a></div>
+<div><a href="../21"><img align="left" src="../../../assets/nav/day/2025-01-22-prev.svg" alt="Previous Day 2025-01-21"></a><a href="../23"><img align="right" src="../../../assets/nav/day/2025-01-22-next.svg" alt="Next Day 2025-01-23"></a><div align="center"><a href="..">Monthly Overview<br>2025-01</a></div><br clear="all"></div>
 
 # Personalized Daily Arxiv Papers 01/22/2025
 Total cost: $6.360799999999999

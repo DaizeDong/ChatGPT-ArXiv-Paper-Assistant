@@ -100,6 +100,14 @@ def parse_args() -> argparse.Namespace:
         help="Output root containing md/json folders. Defaults to out.",
     )
     parser.add_argument(
+        "--begin-date",
+        help="Explicit begin date for the search window. Requires exactly one remedy date and --end-date.",
+    )
+    parser.add_argument(
+        "--end-date",
+        help="Explicit end date for the search window. Requires exactly one remedy date and --begin-date.",
+    )
+    parser.add_argument(
         "--build-site",
         action="store_true",
         help="Build the multipage site after all remedial runs. Disabled by default because site publishing happens separately.",
@@ -116,6 +124,17 @@ def load_remedy_plan(args: argparse.Namespace) -> RemedyPlan:
     cli_dates = list(args.date)
     if args.dates:
         cli_dates.extend(part for part in args.dates.split(",") if part.strip())
+
+    if args.begin_date or args.end_date:
+        if not (args.begin_date and args.end_date):
+            raise ValueError("Both --begin-date and --end-date are required when specifying an explicit search window.")
+        if len(cli_dates) != 1:
+            raise ValueError("Exactly one remedy date must be provided when using --begin-date/--end-date.")
+
+        remedy_date = parse_date_string(cli_dates[0])
+        begin_date = parse_date_string(args.begin_date)
+        end_date = parse_date_string(args.end_date)
+        return {date_to_tuple(remedy_date): (date_to_tuple(begin_date), date_to_tuple(end_date))}
 
     if not cli_dates:
         return DEFAULT_MISSED_DATES

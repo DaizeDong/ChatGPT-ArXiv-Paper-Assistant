@@ -15,9 +15,33 @@ jobs:
   prepare:
     runs-on: ubuntu-latest
     outputs:
-      remedy_dates_json: ${{ steps.prepare.outputs.remedy_dates_json }}
+      remedy_plan_json: ${{ steps.prepare.outputs.remedy_plan_json }}
 
     steps:
+      - name: Checkout `main` branch for code
+        uses: actions/checkout@v6
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Checkout `auto_update` branch for data
+        uses: actions/checkout@v6
+        with:
+          ref: auto_update
+          path: auto_update_data
+          fetch-depth: 0
+
+      - name: Restore generated outputs
+        shell: bash
+        run: |
+          rm -rf out
+          if [ -d "auto_update_data/out" ] && [ "$(ls -A auto_update_data/out)" ]; then
+            cp -R auto_update_data/out ./out
+          else
+            echo "auto_update_data/out is empty or missing."
+            exit 1
+          fi
+
       - name: Prepare matrix inputs
         id: prepare
         env:
@@ -27,13 +51,25 @@ jobs:
           python - <<'PY' >> "$GITHUB_OUTPUT"
           import json
           import os
+          from scripts.remedy_missed_dates import build_plan_from_dates, parse_date_string
 
           raw = os.environ["REMEDY_DATES"]
           dates = [part.strip() for part in raw.split(",") if part.strip()]
           if not dates:
               raise SystemExit("No remedy dates provided.")
 
-          print(f"remedy_dates_json={json.dumps(dates)}")
+          plan = build_plan_from_dates([parse_date_string(value) for value in dates], "out")
+          matrix = []
+          for remedy_date, (begin_date, end_date) in sorted(plan.items()):
+              matrix.append(
+                  {
+                      "remedy_date": f"{remedy_date[0]:04d}-{remedy_date[1]:02d}-{remedy_date[2]:02d}",
+                      "begin_date": f"{begin_date[0]:04d}-{begin_date[1]:02d}-{begin_date[2]:02d}",
+                      "end_date": f"{end_date[0]:04d}-{end_date[1]:02d}-{end_date[2]:02d}",
+                  }
+              )
+
+          print(f"remedy_plan_json={json.dumps(matrix)}")
           PY
 
   remedy:
@@ -43,7 +79,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        remedy_date: ${{ fromJson(needs.prepare.outputs.remedy_dates_json) }}
+        remedy: ${{ fromJson(needs.prepare.outputs.remedy_plan_json) }}
 
     steps:
       - name: Checkout `main` branch for code
@@ -98,7 +134,9 @@ jobs:
       - name: Print inferred remedy plan
         run: |
           python scripts/remedy_missed_dates.py \
-            --dates "${{ matrix.remedy_date }}" \
+            --dates "${{ matrix.remedy.remedy_date }}" \
+            --begin-date "${{ matrix.remedy.begin_date }}" \
+            --end-date "${{ matrix.remedy.end_date }}" \
             --output-root out \
             --print-plan
 
@@ -111,13 +149,15 @@ jobs:
           SLACK_CHANNEL_ID: ${{ secrets.SLACK_CHANNEL_ID }}
         run: |
           python scripts/remedy_missed_dates.py \
-            --dates "${{ matrix.remedy_date }}" \
+            --dates "${{ matrix.remedy.remedy_date }}" \
+            --begin-date "${{ matrix.remedy.begin_date }}" \
+            --end-date "${{ matrix.remedy.end_date }}" \
             --output-root out
 
       - name: Collect remedied files
         id: collect
         env:
-          REMEDY_DATE: ${{ matrix.remedy_date }}
+          REMEDY_DATE: ${{ matrix.remedy.remedy_date }}
         shell: bash
         run: |
           month_dir="${REMEDY_DATE:0:7}"
@@ -128,7 +168,7 @@ jobs:
       - name: Upload remedied files
         uses: actions/upload-artifact@v7
         with:
-          name: remedy-${{ matrix.remedy_date }}
+          name: remedy-${{ matrix.remedy.remedy_date }}
           path: remedy_overlay/
           retention-days: 1
           if-no-files-found: error

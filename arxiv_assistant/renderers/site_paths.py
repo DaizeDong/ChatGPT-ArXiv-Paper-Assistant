@@ -25,6 +25,11 @@ def site_month_page_path(month: MonthTuple) -> str:
     return f"archive/{year:04d}-{month_num:02d}/index.md"
 
 
+def site_month_summary_page_path(month: MonthTuple) -> str:
+    year, month_num = month
+    return f"archive/{year:04d}-{month_num:02d}/summary/index.md"
+
+
 def site_day_page_path(date: DayTuple) -> str:
     year, month_num, day = date
     return f"archive/{year:04d}-{month_num:02d}/{day:02d}/index.md"

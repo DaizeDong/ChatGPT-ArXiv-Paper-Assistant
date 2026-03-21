@@ -137,6 +137,7 @@ def render_monthly_md_with_hyperlink(
     now_date: Tuple[int, int, int],
     current_page_path: str,
     all_date_file_mapping: Dict[Tuple[int, int, int], str] = None,
+    summary_page_path: str | None = None,
     previous_asset_path: str | None = None,
     center_asset_path: str | None = None,
     next_asset_path: str | None = None,
@@ -158,14 +159,20 @@ def render_monthly_md_with_hyperlink(
         next_asset_path,
     )
     content_table = render_content_table(now_date, current_page_path, all_date_file_mapping)
+    summary_link = ""
+    if summary_page_path is not None:
+        summary_href = relative_site_href(summary_page_path, current_page_path)
+        summary_link = f'<div align="center"><a href="{summary_href}">Monthly Topic Summary</a></div>'
 
-    return "\n\n".join(
-        [
-            head_string,
-            f"# Personalized Monthly ArXiv Paper Summary {now_year}/{now_month:02d}",
-            content_table,
-        ]
-    )
+    parts = [
+        head_string,
+        f"# Personalized Monthly ArXiv Paper Summary {now_year}/{now_month:02d}",
+    ]
+    if summary_link:
+        parts.append(summary_link)
+    parts.append(content_table)
+
+    return "\n\n".join(parts)
 
 
 if __name__ == "__main__":

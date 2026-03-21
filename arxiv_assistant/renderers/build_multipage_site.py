@@ -4,8 +4,10 @@ from pathlib import Path
 from typing import Dict, Tuple
 
 from arxiv_assistant.renderers.nav_assets import write_nav_button_svg
+from arxiv_assistant.renderers.monthly_summary import build_monthly_summary_data
 from arxiv_assistant.renderers.render_daily_with_link import render_daily_md_with_hyperlink
 from arxiv_assistant.renderers.render_monthly_with_link import render_monthly_md_with_hyperlink
+from arxiv_assistant.renderers.render_monthly_summary_with_link import render_monthly_summary_md_with_hyperlink
 from arxiv_assistant.renderers.render_yearly_with_link import render_yearly_md_with_hyperlink
 from arxiv_assistant.renderers.site_paths import (
     ROOT_SITE_PAGE,
@@ -16,6 +18,7 @@ from arxiv_assistant.renderers.site_paths import (
     site_day_page_path,
     site_month_nav_asset_path,
     site_month_page_path,
+    site_month_summary_page_path,
     year_from_date,
 )
 
@@ -111,6 +114,8 @@ def _write_year_nav_asset(site_root: Path, current_year: int, target_year: int, 
 def build_multipage_site(output_root: str | Path) -> Path | None:
     output_root = Path(output_root)
     daily_md_root = output_root / "md"
+    daily_json_root = output_root / "json"
+    monthly_summary_root = output_root / "monthly"
     site_root = output_root / "site"
     day_sources = discover_daily_markdown(daily_md_root)
 
@@ -125,9 +130,11 @@ def build_multipage_site(output_root: str | Path) -> Path | None:
     all_dates_list = sorted(all_dates)
     day_page_mapping = {date: site_day_page_path(date) for date in all_dates}
     month_page_mapping = {month_from_date(date): site_month_page_path(month_from_date(date)) for date in all_dates}
+    month_summary_page_mapping = {month_from_date(date): site_month_summary_page_path(month_from_date(date)) for date in all_dates}
     month_day_counts: Dict[Tuple[int, int], int] = {}
     for date in all_dates:
         month_day_counts[month_from_date(date)] = month_day_counts.get(month_from_date(date), 0) + 1
+    monthly_summary_data = build_monthly_summary_data(daily_json_root, monthly_summary_root, day_page_mapping)
 
     for date_idx, date in enumerate(all_dates_list):
         source_path = day_sources[date]
@@ -179,6 +186,7 @@ def build_multipage_site(output_root: str | Path) -> Path | None:
             now_date=(year, month_num, 1),
             current_page_path=site_month_page_path(month),
             all_date_file_mapping=day_page_mapping,
+            summary_page_path=month_summary_page_mapping.get(month) if month in monthly_summary_data else None,
             previous_asset_path=(
                 _write_month_nav_asset(site_root, month, previous_month, "prev") if previous_month is not None else None
             ),
@@ -188,6 +196,16 @@ def build_multipage_site(output_root: str | Path) -> Path | None:
             ),
         )
         _write_text(site_root / Path(site_month_page_path(month)), rendered)
+
+    all_summary_months_list = sorted(monthly_summary_data.keys())
+    for month in all_summary_months_list:
+        rendered = render_monthly_summary_md_with_hyperlink(
+            now_month=month,
+            current_page_path=site_month_summary_page_path(month),
+            category_buckets=monthly_summary_data[month],
+            all_summary_months_list=all_summary_months_list,
+        )
+        _write_text(site_root / Path(site_month_summary_page_path(month)), rendered)
 
     all_years_list = sorted({year_from_date(date) for date in all_dates})
     for year_idx, year in enumerate(all_years_list):

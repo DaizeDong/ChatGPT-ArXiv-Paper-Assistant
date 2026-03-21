@@ -20,6 +20,11 @@ jobs:
         with:
           fetch-depth: 0
 
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+
       - name: Checkout to `auto_update` Branch
         run: |
           git fetch origin
@@ -55,32 +60,23 @@ jobs:
         run: |
           rm -rf out/site out/site_html out/site_preview
 
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+
+      - name: Generate monthly summaries
+        if: ${{ !cancelled() }}
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          OPENAI_BASE_URL: ${{ secrets.OPENAI_BASE_URL }}
+        run: |
+          python scripts/generate_monthly_summaries.py --output-root out
+
 #      - name: Debug via Browser
 #        uses: fawazahmed0/action-debug-vscode@main
 #        with:
 #          token: "root"
-
-      - name: Check if main and auto_update are identical
-        id: check_branches
-        run: |
-          git fetch origin main
-          echo "Comparing HEAD with origin/main..."
-          if git diff --quiet HEAD origin/main; then
-              echo "Branches are identical. Skipping merge/rebase."
-              echo "skip_merge=true" >> $GITHUB_ENV
-          else
-              echo "Branches differ. Proceeding with merge/rebase."
-              echo "skip_merge=false" >> $GITHUB_ENV
-              echo "Changes detected:"
-              git diff HEAD origin/main --stat
-          fi
-
-      - name: Merge main into auto_update
-        if: env.skip_merge == 'false'
-        run: |
-          git config --global user.name "github-actions[bot]"
-          git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git merge origin/main --no-edit || (echo "Conflict detected. Aborting merge." && exit 1)
 
       - name: Check for changes in /out folder
         id: check_changes

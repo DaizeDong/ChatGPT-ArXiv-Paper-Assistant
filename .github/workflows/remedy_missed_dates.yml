@@ -154,6 +154,33 @@ jobs:
             --end-date "${{ matrix.remedy.end_date }}" \
             --output-root out
 
+      - name: Validate GPT filtering actually ran
+        env:
+          REMEDY_DATE: ${{ matrix.remedy.remedy_date }}
+        shell: bash
+        run: |
+          python - <<'PY'
+          import re
+          from pathlib import Path
+          import os
+
+          remedy_date = os.environ["REMEDY_DATE"]
+          month_dir = remedy_date[:7]
+          md_path = Path("out") / "md" / month_dir / f"{remedy_date}-output.md"
+          text = md_path.read_text(encoding="utf-8")
+
+          match = re.search(r"\|\s+\*\*Token\*\*\s+\|\s+(\d+)\s+\|\s+(\d+)\s+\|", text)
+          if match is None:
+              raise SystemExit(f"Unable to parse token usage from {md_path}")
+
+          total_tokens = int(match.group(1)) + int(match.group(2))
+          if total_tokens <= 0:
+              raise SystemExit(
+                  f"Remedy for {remedy_date} produced zero GPT tokens. "
+                  "This usually means the model quota is exhausted."
+              )
+          PY
+
       - name: Collect remedied files
         id: collect
         env:

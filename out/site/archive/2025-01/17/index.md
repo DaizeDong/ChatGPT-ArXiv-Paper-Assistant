@@ -1,4 +1,4 @@
-<div><a href="../21"><img align="right" src="../../../assets/nav/day/2025-01-17-next.svg" alt="Next Day 2025-01-21"></a><div align="center"><a href="..">Monthly Overview<br>2025-01</a></div><br clear="all"></div>
+<div><a href="../21"><img align="right" src="../../../assets/nav/day/2025-01-17-next.svg" alt="Next Day 2025-01-21"></a><div align="center"><a href=".."><img src="../../../assets/nav/day/2025-01-17-center.svg" alt="Monthly Overview 2025-01"></a></div><br clear="all"></div>
 
 # Personalized Daily Arxiv Papers 01/17/2025
 Total cost: $0.980125

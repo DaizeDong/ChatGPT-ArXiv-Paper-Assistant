@@ -56,17 +56,31 @@ def _write_text(target_path: Path, content: str) -> None:
 
 def _write_day_nav_asset(site_root: Path, current_date: Tuple[int, int, int], target_date: Tuple[int, int, int], direction: str) -> str:
     asset_path = site_day_nav_asset_path(current_date, direction)
-    title = f"\u2190 Previous Day" if direction == "prev" else f"Next Day \u2192"
+    title = "Previous Day" if direction == "prev" else "Next Day"
     subtitle = f"{target_date[0]}-{target_date[1]:02d}-{target_date[2]:02d}"
-    write_nav_button_svg(site_root / Path(asset_path), title, subtitle)
+    arrow = "\u2b05" if direction == "prev" else "\u27a1"
+    arrow_side = "left" if direction == "prev" else "right"
+    write_nav_button_svg(site_root / Path(asset_path), title, subtitle, arrow=arrow, arrow_side=arrow_side)
+    return asset_path
+
+
+def _write_day_center_asset(site_root: Path, current_date: Tuple[int, int, int]) -> str:
+    asset_path = site_day_nav_asset_path(current_date, "center")
+    write_nav_button_svg(
+        site_root / Path(asset_path),
+        "Monthly Overview",
+        f"{current_date[0]}-{current_date[1]:02d}",
+    )
     return asset_path
 
 
 def _write_month_nav_asset(site_root: Path, current_month: Tuple[int, int], target_month: Tuple[int, int], direction: str) -> str:
     asset_path = site_month_nav_asset_path(current_month, direction)
-    title = f"\u2190 Previous Month" if direction == "prev" else f"Next Month \u2192"
+    title = "Previous Month" if direction == "prev" else "Next Month"
     subtitle = f"{target_month[0]}-{target_month[1]:02d}"
-    write_nav_button_svg(site_root / Path(asset_path), title, subtitle)
+    arrow = "\u2b05" if direction == "prev" else "\u27a1"
+    arrow_side = "left" if direction == "prev" else "right"
+    write_nav_button_svg(site_root / Path(asset_path), title, subtitle, arrow=arrow, arrow_side=arrow_side)
     return asset_path
 
 
@@ -102,6 +116,7 @@ def build_multipage_site(output_root: str | Path) -> Path | None:
             current_page_path=target_rel_path,
             all_dates=all_dates,
             previous_asset_path=previous_asset_path,
+            center_asset_path=_write_day_center_asset(site_root, date),
             next_asset_path=next_asset_path,
             content_string=content,
         )
@@ -119,6 +134,7 @@ def build_multipage_site(output_root: str | Path) -> Path | None:
         previous_asset_path=(
             _write_day_nav_asset(site_root, latest_date, latest_previous, "prev") if latest_previous is not None else None
         ),
+        center_asset_path=_write_day_center_asset(site_root, latest_date),
         next_asset_path=(
             _write_day_nav_asset(site_root, latest_date, latest_next, "next") if latest_next is not None else None
         ),

@@ -25,6 +25,7 @@ def _render_day_header(
     now_date: Tuple[int, int, int],
     all_dates_list: List[Tuple[int, int, int]],
     previous_asset_path: str | None,
+    center_asset_path: str | None,
     next_asset_path: str | None,
 ) -> str:
     now_year, now_month, _ = now_date
@@ -48,7 +49,7 @@ def _render_day_header(
         else None
     )
 
-    if previous_href and previous_asset_path or next_href and next_asset_path:
+    if previous_href and previous_asset_path or center_asset_path or next_href and next_asset_path:
         parts = ["<div>"]
         if previous_href and previous_asset_path and previous_date is not None:
             previous_asset_href = relative_site_path(previous_asset_path, current_page_path)
@@ -63,7 +64,13 @@ def _render_day_header(
                 f'alt="Next Day {next_date[0]}-{next_date[1]:02d}-{next_date[2]:02d}"></a>'
             )
         parts.append('<div align="center">')
-        parts.append(_render_text_link(month_href, f"Monthly Overview<br>{now_year}-{now_month:02d}"))
+        if center_asset_path is not None:
+            center_asset_href = relative_site_path(center_asset_path, current_page_path)
+            parts.append(
+                f'<a href="{month_href}"><img src="{center_asset_href}" alt="Monthly Overview {now_year}-{now_month:02d}"></a>'
+            )
+        else:
+            parts.append(_render_text_link(month_href, f"Monthly Overview<br>{now_year}-{now_month:02d}"))
         parts.append("</div>")
         parts.append('<br clear="all">')
         parts.append("</div>")
@@ -96,6 +103,7 @@ def render_daily_md_with_hyperlink(
     current_page_path: str,
     all_dates: Set[Tuple[int, int, int]] = None,
     previous_asset_path: str | None = None,
+    center_asset_path: str | None = None,
     next_asset_path: str | None = None,
     content_string: str = None,
     all_entries: List = None,
@@ -127,6 +135,7 @@ def render_daily_md_with_hyperlink(
         now_date,
         all_dates_list,
         previous_asset_path,
+        center_asset_path,
         next_asset_path,
     )
     return "\n\n".join([head_string, content_string])

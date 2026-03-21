@@ -2,8 +2,21 @@ name: Publish Github Pages (Multiple)
 
 on:
   workflow_dispatch:
+  push:
+    branches:
+      - test_web
 
-permissions: write-all
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: github-pages-multipage
+  cancel-in-progress: true
+
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
 
 jobs:
   build:
@@ -11,47 +24,76 @@ jobs:
 
     steps:
       - name: Checkout `test_web` branch
-        uses: actions/checkout@v3
+        uses: actions/checkout@v6
         with:
           ref: test_web
           fetch-depth: 0
 
       - name: Verify output directory and contents
         run: |
-          if [ -d "out" ] && [ "$(ls -A out)" ]; then
-              cd out
-              echo "Contents in out:"
-              ls -R
-              mv * ../
+          if [ -d "out/site" ] && [ "$(ls -A out/site)" ]; then
+              echo "Contents in out/site:"
+              ls -R out/site
+              cp -R out/site/. .
           else
-              echo "out directory is empty or does not exist. Aborting."
+              echo "out/site directory is empty or does not exist. Aborting."
               exit 1
           fi
 
-      - name: Check for latest.md
-        id: check_files
-        uses: andstor/file-existence-action@v3
-        with:
-          files: latest.md
+      - name: Collect site markdown files
+        id: collect_files
+        shell: bash
+        run: |
+          {
+            echo 'files<<EOF'
+            find . -name 'index.md' \
+              -not -path './out/*' \
+              -not -path './.git/*' \
+              | sort \
+              | sed 's#^\./##'
+            echo EOF
+          } >> "$GITHUB_OUTPUT"
 
-      - name: Convert latest.md to pages
-        uses: wranders/markdown-to-pages-action@v1
-        if: steps.check_files.outputs.files_exists == 'true'
+      - name: Convert site markdown to pages
+        uses: wranders/markdown-to-pages-action@v1.1.2
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          files: |
-            latest.md
-            index.md
-            md/2025-01/index.md
-            md/2025-02/index.md
-            md/2025-03/index.md
+          custom_css: site.css
+          files: ${{ steps.collect_files.outputs.files }}
 
-      - uses: actions/upload-pages-artifact@v3
-        if: steps.check_files.outputs.files_exists == 'true'
+      - name: Bust custom CSS cache
+        shell: bash
+        run: |
+          find dist -name '*.html' -exec \
+            sed -i "s#custom\\.css\\([\"']\\)#custom.css?v=${GITHUB_SHA}\\1#g" {} +
+
+      - name: Copy static assets
+        shell: bash
+        run: |
+          if [ -d assets ]; then
+            mkdir -p dist
+            cp -R assets dist/
+          fi
+
+      - name: Archive Pages artifact
+        shell: bash
+        run: |
+          tar \
+            --dereference --hard-dereference \
+            --directory "dist" \
+            -cvf "$RUNNER_TEMP/artifact.tar" \
+            --exclude=.git \
+            --exclude=.github \
+            --exclude=".[^/]*" \
+            .
+
+      - uses: actions/upload-artifact@v7
         with:
-          path: dist
+          name: github-pages
+          path: ${{ runner.temp }}/artifact.tar
+          retention-days: 1
+          if-no-files-found: error
 
       - name: Deploy to GitHub Pages
-        uses: actions/deploy-pages@v4
-        if: steps.check_files.outputs.files_exists == 'true'
+        uses: actions/deploy-pages@v4.0.5
         id: deployment

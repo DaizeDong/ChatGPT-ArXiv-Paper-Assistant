@@ -7,7 +7,17 @@ on:
     types:
       - completed
 
-permissions: write-all
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: github-pages-single
+  cancel-in-progress: true
+
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
 
 jobs:
   build:
@@ -19,7 +29,7 @@ jobs:
 
     steps:
       - name: Checkout `auto_update` branch
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
         with:
           ref: auto_update
           fetch-depth: 0
@@ -36,25 +46,45 @@ jobs:
               exit 1
           fi
 
-      - name: Check for output.md
+      - name: Check for latest.md
         id: check_files
-        uses: andstor/file-existence-action@v3
-        with:
-          files: output.md
+        shell: bash
+        run: |
+          if [ -f latest.md ]; then
+            echo "files_exists=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "files_exists=false" >> "$GITHUB_OUTPUT"
+          fi
 
-      - name: Convert output.md to pages
-        uses: wranders/markdown-to-pages-action@v1
+      - name: Convert latest.md to pages
+        uses: wranders/markdown-to-pages-action@v1.1.2
         if: steps.check_files.outputs.files_exists == 'true'
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          files: output.md
+          files: latest.md
 
-      - uses: actions/upload-pages-artifact@v3
+      - name: Archive Pages artifact
+        if: steps.check_files.outputs.files_exists == 'true'
+        shell: bash
+        run: |
+          tar \
+            --dereference --hard-dereference \
+            --directory "dist" \
+            -cvf "$RUNNER_TEMP/artifact.tar" \
+            --exclude=.git \
+            --exclude=.github \
+            --exclude=".[^/]*" \
+            .
+
+      - uses: actions/upload-artifact@v7
         if: steps.check_files.outputs.files_exists == 'true'
         with:
-          path: dist
+          name: github-pages
+          path: ${{ runner.temp }}/artifact.tar
+          retention-days: 1
+          if-no-files-found: error
 
       - name: Deploy to GitHub Pages
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@v4.0.5
         if: steps.check_files.outputs.files_exists == 'true'
         id: deployment

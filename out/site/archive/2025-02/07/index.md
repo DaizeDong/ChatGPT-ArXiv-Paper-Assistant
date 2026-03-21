@@ -1,0 +1,553 @@
+<div><a href="../06"><img align="left" src="../../../assets/nav/day/2025-02-07-prev.svg" alt="Previous Day 2025-02-06"></a><a href="../10"><img align="right" src="../../../assets/nav/day/2025-02-07-next.svg" alt="Next Day 2025-02-10"></a><div align="center"><a href=".."><img src="../../../assets/nav/day/2025-02-07-center.svg" alt="Monthly Overview 2025-02"></a></div><br clear="all"></div>
+
+# Personalized Daily Arxiv Papers 02/07/2025
+
+|           | Prompt   | Completion   | Total   |
+|-----------|----------|--------------|---------|
+| **Token** | 72353    | 6339         | 78692   |
+| **Cost**  | $1.81    | $0.63        | $2.44   |
+
+Total scanned papers: 277
+
+Total relevant papers: 24
+
+**Table of contents with paper titles:**
+
+1. [HACK: Homomorphic Acceleration via Compression of the Key-Value Cache for Disaggregated LLM Inference](#user-content-link1)
+**Authors:** Zeyu Zhang, Haiying Shen, Shay Vargaftik, Ran Ben Basat, Michael Mitzenmacher, Minlan Yu
+
+2. [Consistency of augmentation graph and network approximability in contrastive learning](#user-content-link2)
+**Authors:** Chenghui Li, A. Martina Neuman
+
+3. [Algorithmic causal structure emerging through compression](#user-content-link3)
+**Authors:** Liang Wendong, Simon Buchholz, Bernhard Sch\"olkopf
+
+4. [AttentionPredictor: Temporal Pattern Matters for Efficient LLM Inference](#user-content-link4)
+**Authors:** Qingyue Yang, Jie Wang, Xing Li, Zhihai Wang, Chen Chen, Lei Chen, Xianzhi Yu, Wulong Liu, Jianye Hao, Mingxuan Yuan, Bin Li
+
+5. [Probe-Free Low-Rank Activation Intervention](#user-content-link5)
+**Authors:** Chonghe Jiang, Bao Nguyen, Anthony Man-Cho So, Viet Anh Nguyen
+
+6. [Bilevel ZOFO: Bridging Parameter-Efficient and Zeroth-Order Techniques for Efficient LLM Fine-Tuning and Meta-Training](#user-content-link6)
+**Authors:** Reza Shirkavand, Qi He, Peiran Yu, Heng Huang
+
+7. [Advancing Weight and Channel Sparsification with Enhanced Saliency](#user-content-link7)
+**Authors:** Xinglong Sun, Maying Shen, Hongxu Yin, Lei Mao, Pavlo Molchanov, Jose M. Alvarez
+
+8. [(GG) MoE vs. MLP on Tabular Data](#user-content-link8)
+**Authors:** Andrei Chernov
+
+9. [LLM Alignment as Retriever Optimization: An Information Retrieval Perspective](#user-content-link9)
+**Authors:** Bowen Jin, Jinsung Yoon, Zhen Qin, Ziqi Wang, Wei Xiong, Yu Meng, Jiawei Han, Sercan O. Arik
+
+10. [Variational decision diagrams for quantum-inspired machine learning applications](#user-content-link10)
+**Authors:** Santiago Acevedo-Mancera, Vladimir Vargas-Calder\'on, Herbert Vinck-Posada
+
+11. [Rank Also Matters: Hierarchical Configuration for Mixture of Adapter Experts in LLM Fine-Tuning](#user-content-link11)
+**Authors:** Peizhuang Cong, Wenpu Liu, Wenhan Yu, Haochen Zhao, Tong Yang
+
+12. [Distribution learning via neural differential equations: minimal energy regularization and approximation theory](#user-content-link12)
+**Authors:** Youssef Marzouk, Zhi Ren, Jakob Zech
+
+13. [It's All in The [MASK]: Simple Instruction-Tuning Enables BERT-like Masked Language Models As Generative Classifiers](#user-content-link13)
+**Authors:** Benjamin Clavi\'e, Nathan Cooper, Benjamin Warner
+
+14. ["Short-length" Adversarial Training Helps LLMs Defend "Long-length" Jailbreak Attacks: Theoretical and Empirical Evidence](#user-content-link14)
+**Authors:** Shaopeng Fu, Liang Ding, Di Wang
+
+15. [Multiple Invertible and Partial-Equivariant Function for Latent Vector Transformation to Enhance Disentanglement in VAEs](#user-content-link15)
+**Authors:** Hee-Jun Jung, Jaehyoung Jeong, Kangil Kim
+
+16. [TQ-DiT: Efficient Time-Aware Quantization for Diffusion Transformers](#user-content-link16)
+**Authors:** Younghye Hwang, Hyojin Lee, Joonhyuk Kang
+
+17. [Efficient Few-Shot Continual Learning in Vision-Language Models](#user-content-link17)
+**Authors:** Aristeidis Panos, Rahaf Aljundi, Daniel Olmeda Reino, Richard E. Turner
+
+18. [On the Expressive Power of Subgraph Graph Neural Networks for Graphs with Bounded Cycles](#user-content-link18)
+**Authors:** Ziang Chen, Qiao Zhang, Runzhong Wang
+
+19. [Student-t processes as infinite-width limits of posterior Bayesian neural networks](#user-content-link19)
+**Authors:** Francesco Caporali, Stefano Favaro, Dario Trevisan
+
+20. [CLIP Behaves like a Bag-of-Words Model Cross-modally but not Uni-modally](#user-content-link20)
+**Authors:** Darina Koishigarina, Arnas Uselis, Seong Joon Oh
+
+21. [Efficient Image Restoration via Latent Consistency Flow Matching](#user-content-link21)
+**Authors:** Elad Cohen, Idan Achituve, Idit Diamant, Arnon Netzer, Hai Victor Habi
+
+22. [Adaptive Semantic Prompt Caching with VectorQ](#user-content-link22)
+**Authors:** Luis Gaspar Schroeder, Shu Liu, Alejandro Cuadron, Mark Zhao, Stephan Krusche, Alfons Kemper, Matei Zaharia, Joseph E. Gonzalez
+
+23. [First-ish Order Methods: Hessian-aware Scalings of Gradient Descent](#user-content-link23)
+**Authors:** Oscar Smee, Fred Roosta, Stephen J. Wright
+
+24. [Finding Pegasus: Enhancing Unsupervised Anomaly Detection in High-Dimensional Data using a Manifold-Based Approach](#user-content-link24)
+**Authors:** R. P. Nathan, Nikolaos Nikolaou, Ofer Lahav
+
+---
+
+## 1. [HACK: Homomorphic Acceleration via Compression of the Key-Value Cache for Disaggregated LLM Inference](https://arxiv.org/abs/2502.03589) <a id="link1"></a>
+
+**ArXiv ID:** 2502.03589
+
+**Authors:** Zeyu Zhang, Haiying Shen, Shay Vargaftik, Ran Ben Basat, Michael Mitzenmacher, Minlan Yu
+
+**Abstract:** Disaggregated Large Language Model (LLM) inference has gained popularity as it separates the computation-intensive prefill stage from the memory-intensive decode stage, avoiding the prefill-decode interference and improving resource utilization. However, transmitting Key-Value (KV) data between the two stages can be a bottleneck, especially for long prompts. Additionally, the computation time overhead for prefill and decode is key for optimizing Job Completion Time (JCT), and KV data size can become prohibitive for long prompts and sequences. Existing KV quantization methods can alleviate the transmission bottleneck and reduce memory requirements, but they introduce significant dequantization overhead, exacerbating the computation time.   We propose Homomorphic Acceleration via Compression of the KV cache (HACK) for disaggregated LLM inference. HACK eliminates the heavy KV dequantization step, and directly performs computations on quantized KV data to approximate and reduce the cost of the expensive matrix-multiplication step. Extensive trace-driven experiments show that HACK reduces JCT by up to 70.9% compared to disaggregated LLM inference baseline and by up to 52.3% compared to state-of-the-art KV quantization methods.
+
+**Comment:** HACK introduces a compression framework for KV cache in disaggregated LLM inference, directly tackling model compression and efficiency-related challenges in LLM architecture.
+
+**Relevance:** 10
+**Novelty:** 9
+
+---
+
+## 2. [Consistency of augmentation graph and network approximability in contrastive learning](https://arxiv.org/abs/2502.04312) <a id="link2"></a>
+
+**ArXiv ID:** 2502.04312
+
+**Authors:** Chenghui Li, A. Martina Neuman
+
+**Abstract:** Contrastive learning leverages data augmentation to develop feature representation without relying on large labeled datasets. However, despite its empirical success, the theoretical foundations of contrastive learning remain incomplete, with many essential guarantees left unaddressed, particularly the realizability assumption concerning neural approximability of an optimal spectral contrastive loss solution. In this work, we overcome these limitations by analyzing the pointwise and spectral consistency of the augmentation graph Laplacian. We establish that, under specific conditions for data generation and graph connectivity, as the augmented dataset size increases, the augmentation graph Laplacian converges to a weighted Laplace-Beltrami operator on the natural data manifold. These consistency results ensure that the graph Laplacian spectrum effectively captures the manifold geometry. Consequently, they give way to a robust framework for establishing neural approximability, directly resolving the realizability assumption in a current paradigm.
+
+**Comment:** The work addresses contrastive learning by providing new theoretical insights into augmentation graph consistency and neural approximability, making it a significant foundational contribution to representation learning.
+
+**Relevance:** 10
+**Novelty:** 9
+
+---
+
+## 3. [Algorithmic causal structure emerging through compression](https://arxiv.org/abs/2502.04210) <a id="link3"></a>
+
+**ArXiv ID:** 2502.04210
+
+**Authors:** Liang Wendong, Simon Buchholz, Bernhard Sch\"olkopf
+
+**Abstract:** We explore the relationship between causality, symmetry, and compression. We build on and generalize the known connection between learning and compression to a setting where causal models are not identifiable. We propose a framework where causality emerges as a consequence of compressing data across multiple environments. We define algorithmic causality as an alternative definition of causality when traditional assumptions for causal identifiability do not hold. We demonstrate how algorithmic causal and symmetric structures can emerge from minimizing upper bounds on Kolmogorov complexity, without knowledge of intervention targets. We hypothesize that these insights may also provide a novel perspective on the emergence of causality in machine learning models, such as large language models, where causal relationships may not be explicitly identifiable.
+
+**Comment:** The paper links causality and compression through algorithmic complexity, which relates to compression and theoretical insights into causality in AI. It introduces novel perspectives and foundational insights.
+
+**Relevance:** 9
+**Novelty:** 9
+
+---
+
+## 4. [AttentionPredictor: Temporal Pattern Matters for Efficient LLM Inference](https://arxiv.org/abs/2502.04077) <a id="link4"></a>
+
+**ArXiv ID:** 2502.04077
+
+**Authors:** Qingyue Yang, Jie Wang, Xing Li, Zhihai Wang, Chen Chen, Lei Chen, Xianzhi Yu, Wulong Liu, Jianye Hao, Mingxuan Yuan, Bin Li
+
+**Abstract:** With the development of large language models (LLMs), efficient inference through Key-Value (KV) cache compression has attracted considerable attention, especially for long-context generation. To compress the KV cache, recent methods identify critical KV tokens through heuristic ranking with attention scores. However, these methods often struggle to accurately determine critical tokens as they neglect the \textit{temporal patterns} in attention scores, resulting in a noticeable degradation in LLM performance. To address this challenge, we propose AttentionPredictor, which is the first learning-based critical token identification approach. Specifically, AttentionPredictor learns a lightweight convolution model to capture spatiotemporal patterns and predict the next-token attention score. An appealing feature of AttentionPredictor is that it accurately predicts the attention score while consuming negligible memory. Moreover, we propose a cross-token critical cache prefetching framework that hides the token estimation time overhead to accelerate the decoding stage. By retaining most of the attention information, AttentionPredictor achieves 16$\times$ KV cache compression with comparable LLM performance, significantly outperforming the state-of-the-art.
+
+**Comment:** AttentionPredictor offers a learning-based method for KV cache compression by predicting attention scores, advancing efficiency techniques for LLMs. This is relevant to model compression and efficiency breakthroughs.
+
+**Relevance:** 10
+**Novelty:** 8
+
+---
+
+## 5. [Probe-Free Low-Rank Activation Intervention](https://arxiv.org/abs/2502.04043) <a id="link5"></a>
+
+**ArXiv ID:** 2502.04043
+
+**Authors:** Chonghe Jiang, Bao Nguyen, Anthony Man-Cho So, Viet Anh Nguyen
+
+**Abstract:** Language models (LMs) can produce texts that appear accurate and coherent but contain untruthful or toxic content. Inference-time interventions that edit the hidden activations have shown promising results in steering the LMs towards desirable generations. Existing activation intervention methods often comprise an activation probe to detect undesirable generation, triggering the activation modification to steer subsequent generation. This paper proposes a probe-free intervention method FLORAIN for all attention heads in a specific activation layer. It eliminates the need to train classifiers for probing purposes. The intervention function is parametrized by a sample-wise nonlinear low-rank mapping, which is trained by minimizing the distance between the modified activations and their projection onto the manifold of desirable content. Under specific constructions of the manifold and projection distance, we show that the intervention strategy can be computed efficiently by solving a smooth optimization problem. The empirical results, benchmarked on multiple base models, demonstrate that FLORAIN consistently outperforms several baseline methods in enhancing model truthfulness and quality across generation and multiple-choice tasks.
+
+**Comment:** Proposes a probe-free low-rank activation intervention for inference-time steering of LLMs, which aligns with criterion 4 as it introduces innovations in LLM interpretability leveraging low-rank techniques.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 6. [Bilevel ZOFO: Bridging Parameter-Efficient and Zeroth-Order Techniques for Efficient LLM Fine-Tuning and Meta-Training](https://arxiv.org/abs/2502.03604) <a id="link6"></a>
+
+**ArXiv ID:** 2502.03604
+
+**Authors:** Reza Shirkavand, Qi He, Peiran Yu, Heng Huang
+
+**Abstract:** Fine-tuning pre-trained Large Language Models (LLMs) for downstream tasks using First-Order (FO) optimizers presents significant computational challenges. Parameter-Efficient Fine-Tuning(PEFT) methods have been proposed to address these challenges by freezing most model parameters and training only a small subset. While PEFT is efficient, it may not outperform full fine-tuning when high task-specific performance is required. Zeroth-Order (ZO) methods offer an alternative for fine-tuning the entire pre-trained model by approximating gradients using only the forward pass, thus eliminating the computational burden of back-propagation in first-order methods. However, when implementing ZO methods, a hard prompt is crucial, and relying on simple, fixed hard prompts may not be optimal. In this paper, we propose a bilevel optimization framework that complements ZO methods with PEFT to mitigate sensitivity to hard prompts while efficiently and effectively fine-tuning LLMs. Our Bilevel ZOFO (Zeroth-Order-First-Order) method employs a double-loop optimization strategy, where only the gradient of the PEFT model and the forward pass of the base model are required. We provide convergence guarantees for Bilevel ZOFO. Empirically, we demonstrate that Bilevel ZOFO outperforms both PEFT and ZO methods in single-task settings while maintaining similar memory efficiency. Additionally, we show its strong potential for multitask learning. Compared to current first-order meta-training algorithms for multitask learning, our method has significantly lower computational demands while maintaining or improving performance.
+
+**Comment:** Introduces a bilevel optimization framework combining parameter-efficient tuning with zeroth-order methods, aligning with model compression (criterion 3) and efficient methods for fine-tuning LLMs (criterion 4).
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 7. [Advancing Weight and Channel Sparsification with Enhanced Saliency](https://arxiv.org/abs/2502.03658) <a id="link7"></a>
+
+**ArXiv ID:** 2502.03658
+
+**Authors:** Xinglong Sun, Maying Shen, Hongxu Yin, Lei Mao, Pavlo Molchanov, Jose M. Alvarez
+
+**Abstract:** Pruning aims to accelerate and compress models by removing redundant parameters, identified by specifically designed importance scores which are usually imperfect. This removal is irreversible, often leading to subpar performance in pruned models. Dynamic sparse training, while attempting to adjust sparse structures during training for continual reassessment and refinement, has several limitations including criterion inconsistency between pruning and growth, unsuitability for structured sparsity, and short-sighted growth strategies. Our paper introduces an efficient, innovative paradigm to enhance a given importance criterion for either unstructured or structured sparsity. Our method separates the model into an active structure for exploitation and an exploration space for potential updates. During exploitation, we optimize the active structure, whereas in exploration, we reevaluate and reintegrate parameters from the exploration space through a pruning and growing step consistently guided by the same given importance criterion. To prepare for exploration, we briefly "reactivate" all parameters in the exploration space and train them for a few iterations while keeping the active part frozen, offering a preview of the potential performance gains from reintegrating these parameters. We show on various datasets and configurations that existing importance criterion even simple as magnitude can be enhanced with ours to achieve state-of-the-art performance and training cost reductions. Notably, on ImageNet with ResNet50, ours achieves an +1.3 increase in Top-1 accuracy over prior art at 90% ERK sparsity. Compared with the SOTA latency pruning method HALP, we reduced its training cost by over 70% while attaining a faster and more accurate pruned model.
+
+**Comment:** Proposes a novel dynamic sparse training paradigm enhancing saliency-based sparsification strategies. Highly relevant to model compression (criterion 3), specifically with advancements in pruning and sparsity.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 8. [(GG) MoE vs. MLP on Tabular Data](https://arxiv.org/abs/2502.03608) <a id="link8"></a>
+
+**ArXiv ID:** 2502.03608
+
+**Authors:** Andrei Chernov
+
+**Abstract:** In recent years, significant efforts have been directed toward adapting modern neural network architectures for tabular data. However, despite their larger number of parameters and longer training and inference times, these models often fail to consistently outperform vanilla multilayer perceptron (MLP) neural networks. Moreover, MLP-based ensembles have recently demonstrated superior performance and efficiency compared to advanced deep learning methods. Therefore, rather than focusing on building deeper and more complex deep learning models, we propose investigating whether MLP neural networks can be replaced with more efficient architectures without sacrificing performance. In this paper, we first introduce GG MoE, a mixture-of-experts (MoE) model with a Gumbel-Softmax gating function. We then demonstrate that GG MoE with an embedding layer achieves the highest performance across $38$ datasets compared to standard MoE and MLP models. Finally, we show that both MoE and GG MoE utilize significantly fewer parameters than MLPs, making them a promising alternative for scaling and ensemble methods.
+
+**Comment:** The paper introduces GG MoE with Gumbel-Softmax gating, exploring an innovative Mixture-of-Experts (MoE) model for efficiency in tabular data representation. It directly aligns with the MoE-specific architectural topic.
+
+**Relevance:** 10
+**Novelty:** 7
+
+---
+
+## 9. [LLM Alignment as Retriever Optimization: An Information Retrieval Perspective](https://arxiv.org/abs/2502.03699) <a id="link9"></a>
+
+**ArXiv ID:** 2502.03699
+
+**Authors:** Bowen Jin, Jinsung Yoon, Zhen Qin, Ziqi Wang, Wei Xiong, Yu Meng, Jiawei Han, Sercan O. Arik
+
+**Abstract:** Large Language Models (LLMs) have revolutionized artificial intelligence with capabilities in reasoning, coding, and communication, driving innovation across industries. Their true potential depends on effective alignment to ensure correct, trustworthy and ethical behavior, addressing challenges like misinformation, hallucinations, bias and misuse. While existing Reinforcement Learning (RL)-based alignment methods are notoriously complex, direct optimization approaches offer a simpler alternative. In this work, we introduce a novel direct optimization approach for LLM alignment by drawing on established Information Retrieval (IR) principles. We present a systematic framework that bridges LLM alignment and IR methodologies, mapping LLM generation and reward models to IR's retriever-reranker paradigm. Building on this foundation, we propose LLM Alignment as Retriever Preference Optimization (LarPO), a new alignment method that enhances overall alignment quality. Extensive experiments validate LarPO's effectiveness with 38.9 % and 13.7 % averaged improvement on AlpacaEval2 and MixEval-Hard respectively. Our work opens new avenues for advancing LLM alignment by integrating IR foundations, offering a promising direction for future research.
+
+**Comment:** This paper proposes an alignment strategy for LLMs based on Information Retrieval principles. The focus on LLM behavioral alignment via a novel optimization method fits within the 'Large Language Models (LLMs)' and 'Representation Learning' criteria.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 10. [Variational decision diagrams for quantum-inspired machine learning applications](https://arxiv.org/abs/2502.04271) <a id="link10"></a>
+
+**ArXiv ID:** 2502.04271
+
+**Authors:** Santiago Acevedo-Mancera, Vladimir Vargas-Calder\'on, Herbert Vinck-Posada
+
+**Abstract:** Decision diagrams (DDs) have emerged as an efficient tool for simulating quantum circuits due to their capacity to exploit data redundancies in quantum states and quantum operations, enabling the efficient computation of probability amplitudes. However, their application in quantum machine learning (QML) has remained unexplored. This paper introduces variational decision diagrams (VDDs), a novel graph structure that combines the structural benefits of DDs with the adaptability of variational methods for efficiently representing quantum states. We investigate the trainability of VDDs by applying them to the ground state estimation problem for transverse-field Ising and Heisenberg Hamiltonians. Analysis of gradient variance suggests that training VDDs is possible, as no signs of vanishing gradients--also known as barren plateaus--are observed. This work provides new insights into the use of decision diagrams in QML as an alternative to design and train variational ans\"atze.
+
+**Comment:** The introduction of Variational Decision Diagrams (VDDs) as a graph-based structure for quantum-inspired machine learning is highly relevant to emerging trends in foundational machine learning techniques. This paper offers novel insights into decision diagram-based ansatz alternatives.
+
+**Relevance:** 8
+**Novelty:** 9
+
+---
+
+## 11. [Rank Also Matters: Hierarchical Configuration for Mixture of Adapter Experts in LLM Fine-Tuning](https://arxiv.org/abs/2502.03884) <a id="link11"></a>
+
+**ArXiv ID:** 2502.03884
+
+**Authors:** Peizhuang Cong, Wenpu Liu, Wenhan Yu, Haochen Zhao, Tong Yang
+
+**Abstract:** Large language models (LLMs) have demonstrated remarkable success across various tasks, accompanied by a continuous increase in their parameter size. Parameter-efficient fine-tuning (PEFT) methods, such as Low-Rank Adaptation (LoRA), address the challenges of fine-tuning LLMs by significantly reducing the number of trainable parameters. Recent studies have integrated LoRA with Mixture of Experts (MoE) architectures, leveraging multiple adapter experts and gating mechanisms to further improve fine-tuning performance. However, existing approaches primarily focus on adjusting the allocations of adapter experts per layer to optimize the introduced trainable parameter size, while neglecting a critical factor of adapters' rank. To this end, we propose a hierarchical scheme for expert allocation and rank configuration, HILO, which dynamically adjusts the number and rank of adapter experts across layers, matching the varying representational complexity of model layers in adapter-granularity. Extensive experiments on multiple benchmark tasks demonstrate that HILO outperforms existing methods in accuracy while introducing fewer trainable parameters, providing an efficient and practical solution for fine-tuning LLMs.
+
+**Comment:** The paper proposes HILO, a hierarchical configuration for adapter experts and their rank in Mixture of Experts (MoE) fine-tuning in LLMs. This directly addresses architectural innovations and MoE-related efficiency improvements.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 12. [Distribution learning via neural differential equations: minimal energy regularization and approximation theory](https://arxiv.org/abs/2502.03795) <a id="link12"></a>
+
+**ArXiv ID:** 2502.03795
+
+**Authors:** Youssef Marzouk, Zhi Ren, Jakob Zech
+
+**Abstract:** Neural ordinary differential equations (ODEs) provide expressive representations of invertible transport maps that can be used to approximate complex probability distributions, e.g., for generative modeling, density estimation, and Bayesian inference. We show that for a large class of transport maps $T$, there exists a time-dependent ODE velocity field realizing a straight-line interpolation $(1-t)x + tT(x)$, $t \in [0,1]$, of the displacement induced by the map. Moreover, we show that such velocity fields are minimizers of a training objective containing a specific minimum-energy regularization. We then derive explicit upper bounds for the $C^k$ norm of the velocity field that are polynomial in the $C^k$ norm of the corresponding transport map $T$; in the case of triangular (Knothe--Rosenblatt) maps, we also show that these bounds are polynomial in the $C^k$ norms of the associated source and target densities. Combining these results with stability arguments for distribution approximation via ODEs, we show that Wasserstein or Kullback--Leibler approximation of the target distribution to any desired accuracy $\epsilon > 0$ can be achieved by a deep neural network representation of the velocity field whose size is bounded explicitly in terms of $\epsilon$, the dimension, and the smoothness of the source and target densities. The same neural network ansatz yields guarantees on the value of the regularized training objective.
+
+**Comment:** Proposes minimal energy regularization and theoretical analysis for neural ODEs in distribution learning, which ties to foundational developments in representation learning and efficient approximation methods.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 13. [It's All in The [MASK]: Simple Instruction-Tuning Enables BERT-like Masked Language Models As Generative Classifiers](https://arxiv.org/abs/2502.03793) <a id="link13"></a>
+
+**ArXiv ID:** 2502.03793
+
+**Authors:** Benjamin Clavi\'e, Nathan Cooper, Benjamin Warner
+
+**Abstract:** While encoder-only models such as BERT and ModernBERT are ubiquitous in real-world NLP applications, their conventional reliance on task-specific classification heads can limit their applicability compared to decoder-based large language models (LLMs). In this work, we introduce ModernBERT-Large-Instruct, a 0.4B-parameter encoder model that leverages its masked language modelling (MLM) head for generative classification. Our approach employs an intentionally simple training loop and inference mechanism that requires no heavy pre-processing, heavily engineered prompting, or architectural modifications. ModernBERT-Large-Instruct exhibits strong zero-shot performance on both classification and knowledge-based tasks, outperforming similarly sized LLMs on MMLU and achieving 93% of Llama3-1B's MMLU performance with 60% less parameters. We also demonstrate that, when fine-tuned, the generative approach using the MLM head matches or even surpasses traditional classification-head methods across diverse NLU tasks.This capability emerges specifically in models trained on contemporary, diverse data mixes, with models trained on lower volume, less-diverse data yielding considerably weaker performance. Although preliminary, these results demonstrate the potential of using the original generative masked language modelling head over traditional task-specific heads for downstream tasks. Our work suggests that further exploration into this area is warranted, highlighting many avenues for future improvements.
+
+**Comment:** Presents a unique approach to repurpose BERT-like MLM heads for generative classification. Aligns with representation learning and explores architectural utility without traditional task heads.
+
+**Relevance:** 8
+**Novelty:** 8
+
+---
+
+## 14. ["Short-length" Adversarial Training Helps LLMs Defend "Long-length" Jailbreak Attacks: Theoretical and Empirical Evidence](https://arxiv.org/abs/2502.04204) <a id="link14"></a>
+
+**ArXiv ID:** 2502.04204
+
+**Authors:** Shaopeng Fu, Liang Ding, Di Wang
+
+**Abstract:** Jailbreak attacks against large language models (LLMs) aim to induce harmful behaviors in LLMs through carefully crafted adversarial prompts. To mitigate attacks, one way is to perform adversarial training (AT)-based alignment, i.e., training LLMs on some of the most adversarial prompts to help them learn how to behave safely under attacks. During AT, the length of adversarial prompts plays a critical role in the robustness of aligned LLMs. This paper focuses on adversarial suffix jailbreak attacks and unveils that to defend against a jailbreak attack with an adversarial suffix of length $\Theta(M)$, it is enough to align LLMs on prompts with adversarial suffixes of length $\Theta(\sqrt{M})$. Theoretically, we analyze the adversarial in-context learning of linear transformers on linear regression tasks and prove a robust generalization bound for trained transformers. The bound depends on the term $\Theta(\sqrt{M_{\text{test}}}/M_{\text{train}})$, where $M_{\text{train}}$ and $M_{\text{test}}$ are the number of adversarially perturbed in-context samples during training and testing. Empirically, we conduct AT on popular open-source LLMs and evaluate their robustness against jailbreak attacks of different adversarial suffix lengths. Results confirm a positive correlation between the attack success rate and the ratio of the square root of the adversarial suffix during jailbreaking to the length during AT. Our findings show that it is practical to defend "long-length" jailbreak attacks via efficient "short-length" AT. The code is available at https://github.com/fshp971/adv-icl.
+
+**Comment:** The paper introduces adversarial training strategies for LLM robustness, with theoretical analysis and experimental validation. This contributes to foundational understanding in the behavior and robustness of LLMs.
+
+**Relevance:** 8
+**Novelty:** 8
+
+---
+
+## 15. [Multiple Invertible and Partial-Equivariant Function for Latent Vector Transformation to Enhance Disentanglement in VAEs](https://arxiv.org/abs/2502.03740) <a id="link15"></a>
+
+**ArXiv ID:** 2502.03740
+
+**Authors:** Hee-Jun Jung, Jaehyoung Jeong, Kangil Kim
+
+**Abstract:** Disentanglement learning is a core issue for understanding and re-using trained information in Variational AutoEncoder (VAE), and effective inductive bias has been reported as a key factor. However, the actual implementation of such bias is still vague. In this paper, we propose a novel method, called Multiple Invertible and partial-equivariant transformation (MIPE-transformation), to inject inductive bias by 1) guaranteeing the invertibility of latent-to-latent vector transformation while preserving a certain portion of equivariance of input-to-latent vector transformation, called Invertible and partial-equivariant transformation (IPE-transformation), 2) extending the form of prior and posterior in VAE frameworks to an unrestricted form through a learnable conversion to an approximated exponential family, called Exponential Family conversion (EF-conversion), and 3) integrating multiple units of IPE-transformation and EF-conversion, and their training. In experiments on 3D Cars, 3D Shapes, and dSprites datasets, MIPE-transformation improves the disentanglement performance of state-of-the-art VAEs.
+
+**Comment:** This paper introduces a novel method (Multiple Invertible and Partial-Equivariant Transformation) aimed at improving disentanglement in VAEs. Its focus aligns with foundational research in representation learning, specifically with insights into how deep networks encode information (criterion 1).
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 16. [TQ-DiT: Efficient Time-Aware Quantization for Diffusion Transformers](https://arxiv.org/abs/2502.04056) <a id="link16"></a>
+
+**ArXiv ID:** 2502.04056
+
+**Authors:** Younghye Hwang, Hyojin Lee, Joonhyuk Kang
+
+**Abstract:** Diffusion transformers (DiTs) combine transformer architectures with diffusion models. However, their computational complexity imposes significant limitations on real-time applications and sustainability of AI systems. In this study, we aim to enhance the computational efficiency through model quantization, which represents the weights and activation values with lower precision. Multi-region quantization (MRQ) is introduced to address the asymmetric distribution of network values in DiT blocks by allocating two scaling parameters to sub-regions. Additionally, time-grouping quantization (TGQ) is proposed to reduce quantization error caused by temporal variation in activations. The experimental results show that the proposed algorithm achieves performance comparable to the original full-precision model with only a 0.29 increase in FID at W8A8. Furthermore, it outperforms other baselines at W6A6, thereby confirming its suitability for low-bit quantization. These results highlight the potential of our method to enable efficient real-time generative models.
+
+**Comment:** Proposes quantization strategies (MRQ and TGQ) tailored for Diffusion Transformers, fitting well under model compression (criterion 3) with a focus on low-bit quantization innovations.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 17. [Efficient Few-Shot Continual Learning in Vision-Language Models](https://arxiv.org/abs/2502.04098) <a id="link17"></a>
+
+**ArXiv ID:** 2502.04098
+
+**Authors:** Aristeidis Panos, Rahaf Aljundi, Daniel Olmeda Reino, Richard E. Turner
+
+**Abstract:** Vision-language models (VLMs) excel in tasks such as visual question answering and image captioning. However, VLMs are often limited by their use of pretrained image encoders, like CLIP, leading to image understanding errors that hinder overall performance. On top of that, real-world applications often require the model to be continuously adapted as new and often limited data continuously arrive. To address this, we propose LoRSU (Low-Rank Adaptation with Structured Updates), a robust and computationally efficient method for selectively updating image encoders within VLMs. LoRSU introduces structured and localized parameter updates, effectively correcting performance on previously error-prone data while preserving the model's general robustness. Our approach leverages theoretical insights to identify and update only the most critical parameters, achieving significant resource efficiency. Specifically, we demonstrate that LoRSU reduces computational overhead by over 25x compared to full VLM updates, without sacrificing performance. Experimental results on VQA tasks in the few-shot continual learning setting, validate LoRSU's scalability, efficiency, and effectiveness, making it a compelling solution for image encoder adaptation in resource-constrained environments.
+
+**Comment:** Proposes a low-rank adaptation method for continual learning in vision-language models, offering resource-efficient structural updates. Relevant to model compression (criterion 3) and structured sparsity innovations.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 18. [On the Expressive Power of Subgraph Graph Neural Networks for Graphs with Bounded Cycles](https://arxiv.org/abs/2502.03703) <a id="link18"></a>
+
+**ArXiv ID:** 2502.03703
+
+**Authors:** Ziang Chen, Qiao Zhang, Runzhong Wang
+
+**Abstract:** Graph neural networks (GNNs) have been widely used in graph-related contexts. It is known that the separation power of GNNs is equivalent to that of the Weisfeiler-Lehman (WL) test; hence, GNNs are imperfect at identifying all non-isomorphic graphs, which severely limits their expressive power. This work investigates $k$-hop subgraph GNNs that aggregate information from neighbors with distances up to $k$ and incorporate the subgraph structure. We prove that under appropriate assumptions, the $k$-hop subgraph GNNs can approximate any permutation-invariant/equivariant continuous function over graphs without cycles of length greater than $2k+1$ within any error tolerance. We also provide an extension to $k$-hop GNNs without incorporating the subgraph structure. Our numerical experiments on established benchmarks and novel architectures validate our theory on the relationship between the information aggregation distance and the cycle size.
+
+**Comment:** The paper provides a theoretical analysis of subgraph-based GNN architectures, which aligns with studies on architecture-level innovations. It contributes to understanding GNN limitations and expressive power.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 19. [Student-t processes as infinite-width limits of posterior Bayesian neural networks](https://arxiv.org/abs/2502.04247) <a id="link19"></a>
+
+**ArXiv ID:** 2502.04247
+
+**Authors:** Francesco Caporali, Stefano Favaro, Dario Trevisan
+
+**Abstract:** The asymptotic properties of Bayesian Neural Networks (BNNs) have been extensively studied, particularly regarding their approximations by Gaussian processes in the infinite-width limit. We extend these results by showing that posterior BNNs can be approximated by Student-t processes, which offer greater flexibility in modeling uncertainty. Specifically, we show that, if the parameters of a BNN follow a Gaussian prior distribution, and the variance of both the last hidden layer and the Gaussian likelihood function follows an Inverse-Gamma prior distribution, then the resulting posterior BNN converges to a Student-t process in the infinite-width limit. Our proof leverages the Wasserstein metric to establish control over the convergence rate of the Student-t process approximation.
+
+**Comment:** The paper introduces Student-t processes in Bayesian neural networks as a generalization of Gaussian processes, offering significant theoretical insights into uncertainty estimation. It aligns moderately with representation learning for theoretical analysis.
+
+**Relevance:** 7
+**Novelty:** 8
+
+---
+
+## 20. [CLIP Behaves like a Bag-of-Words Model Cross-modally but not Uni-modally](https://arxiv.org/abs/2502.03566) <a id="link20"></a>
+
+**ArXiv ID:** 2502.03566
+
+**Authors:** Darina Koishigarina, Arnas Uselis, Seong Joon Oh
+
+**Abstract:** CLIP (Contrastive Language-Image Pretraining) has become a popular choice for various downstream tasks. However, recent studies have questioned its ability to represent compositional concepts effectively. These works suggest that CLIP often acts like a bag-of-words (BoW) model, interpreting images and text as sets of individual concepts without grasping the structural relationships. In particular, CLIP struggles to correctly bind attributes to their corresponding objects when multiple objects are present in an image or text. In this work, we investigate why CLIP exhibits this BoW-like behavior. We find that the correct attribute-object binding information is already present in individual text and image modalities. Instead, the issue lies in the cross-modal alignment, which relies on cosine similarity. To address this, we propose Linear Attribute Binding CLIP or LABCLIP. It applies a linear transformation to text embeddings before computing cosine similarity. This approach significantly improves CLIP's ability to bind attributes to correct objects, thereby enhancing its compositional understanding.
+
+**Comment:** Explores compositional limitations and cross-modal alignment of CLIP, proposing an architectural modification using linear transformation to address this issue.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 21. [Efficient Image Restoration via Latent Consistency Flow Matching](https://arxiv.org/abs/2502.03500) <a id="link21"></a>
+
+**ArXiv ID:** 2502.03500
+
+**Authors:** Elad Cohen, Idan Achituve, Idit Diamant, Arnon Netzer, Hai Victor Habi
+
+**Abstract:** Recent advances in generative image restoration (IR) have demonstrated impressive results. However, these methods are hindered by their substantial size and computational demands, rendering them unsuitable for deployment on edge devices. This work introduces ELIR, an Efficient Latent Image Restoration method. ELIR operates in latent space by first predicting the latent representation of the minimum mean square error (MMSE) estimator and then transporting this estimate to high-quality images using a latent consistency flow-based model. Consequently, ELIR is more than 4x faster compared to the state-of-the-art diffusion and flow-based approaches. Moreover, ELIR is also more than 4x smaller, making it well-suited for deployment on resource-constrained edge devices. Comprehensive evaluations of various image restoration tasks show that ELIR achieves competitive results, effectively balancing distortion and perceptual quality metrics while offering improved efficiency in terms of memory and computation.
+
+**Comment:** Presents an efficient latent-space image restoration model emphasizing computational reduction, relevant to model compression and efficiency research.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 22. [Adaptive Semantic Prompt Caching with VectorQ](https://arxiv.org/abs/2502.03771) <a id="link22"></a>
+
+**ArXiv ID:** 2502.03771
+
+**Authors:** Luis Gaspar Schroeder, Shu Liu, Alejandro Cuadron, Mark Zhao, Stephan Krusche, Alfons Kemper, Matei Zaharia, Joseph E. Gonzalez
+
+**Abstract:** Semantic prompt caches reduce the latency and cost of large language model (LLM) inference by reusing cached LLM-generated responses for semantically similar prompts. Vector similarity metrics assign a numerical score to quantify the similarity between an embedded prompt and its nearest neighbor in the cache. Existing systems rely on a static threshold to classify whether the similarity score is sufficiently high to result in a cache hit. We show that this one-size-fits-all threshold is insufficient across different prompts. We propose VectorQ, a framework to learn embedding-specific threshold regions that adapt to the complexity and uncertainty of an embedding. Through evaluations on a combination of four diverse datasets, we show that VectorQ consistently outperforms state-of-the-art systems across all static thresholds, achieving up to 12x increases in cache hit rate and error rate reductions up to 92%.
+
+**Comment:** The paper introduces VectorQ, a framework for adaptive semantic prompt caching which focuses on improving inference efficiency for LLMs. This relates to the model compression criterion, particularly in dealing with KV cache and efficiency concerns.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 23. [First-ish Order Methods: Hessian-aware Scalings of Gradient Descent](https://arxiv.org/abs/2502.03701) <a id="link23"></a>
+
+**ArXiv ID:** 2502.03701
+
+**Authors:** Oscar Smee, Fred Roosta, Stephen J. Wright
+
+**Abstract:** Gradient descent is the primary workhorse for optimizing large-scale problems in machine learning. However, its performance is highly sensitive to the choice of the learning rate. A key limitation of gradient descent is its lack of natural scaling, which often necessitates expensive line searches or heuristic tuning to determine an appropriate step size. In this paper, we address this limitation by incorporating Hessian information to scale the gradient direction. By accounting for the curvature of the function along the gradient, our adaptive, Hessian-aware scaling method ensures a local unit step size guarantee, even in nonconvex settings. Near a local minimum that satisfies the second-order sufficient conditions, our approach achieves linear convergence with a unit step size. We show that our method converges globally under a significantly weaker version of the standard Lipschitz gradient smoothness assumption. Even when Hessian information is inexact, the local unit step size guarantee and global convergence properties remain valid under mild conditions. Finally, we validate our theoretical results empirically on a range of convex and nonconvex machine learning tasks, showcasing the effectiveness of the approach.
+
+**Comment:** Proposes Hessian-aware scaling to improve gradient descent. Focuses on optimization dynamics, a topic of interest in foundational research on training dynamics for neural networks.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 24. [Finding Pegasus: Enhancing Unsupervised Anomaly Detection in High-Dimensional Data using a Manifold-Based Approach](https://arxiv.org/abs/2502.04310) <a id="link24"></a>
+
+**ArXiv ID:** 2502.04310
+
+**Authors:** R. P. Nathan, Nikolaos Nikolaou, Ofer Lahav
+
+**Abstract:** Unsupervised machine learning methods are well suited to searching for anomalies at scale but can struggle with the high-dimensional representation of many modern datasets, hence dimensionality reduction (DR) is often performed first. In this paper we analyse unsupervised anomaly detection (AD) from the perspective of the manifold created in DR. We present an idealised illustration, "Finding Pegasus", and a novel formal framework with which we categorise AD methods and their results into "on manifold" and "off manifold". We define these terms and show how they differ. We then use this insight to develop an approach of combining AD methods which significantly boosts AD recall without sacrificing precision in situations employing high DR. When tested on MNIST data, our approach of combining AD methods improves recall by as much as 16 percent compared with simply combining with the best standalone AD method (Isolation Forest), a result which shows great promise for its application to real-world data.
+
+**Comment:** Proposes combining anomaly detection algorithms to enhance recall by leveraging insights about high-dimensional manifolds, relevant to representation learning.
+
+**Relevance:** 7
+**Novelty:** 7
+
+---
+
+# Paper Selection Prompt
+
+You are a helpful paper reading assistant whose job is to read daily posts from ArXiv and identify a few papers that your friend will enjoy reading.
+Your job is to carefully read the paper titles and abstracts below and find the ones that match the criteria below.
+
+## Relevant Topics
+
+Use the following relevance criteria to focus on foundational research, avoiding purely application-driven work:
+
+1. Representation Learning
+   - Relevant: Insights into how deep networks encode information, feature/dictionary learning, sparse/contrastive methods, training dynamics in neural networks.
+   - Irrelevant: Standard applications of known techniques lacking new theoretical or methodological contributions.
+
+2. Model Architecture
+   - Relevant: Mixture-of-Experts (MoE), Transformers, Conditional/Dynamic Networks, Autoencoders, analysis on existing architectures (like encoder-decoder), or other architectural innovations.
+   - Irrelevant: Merely using existing architectures for a certain task without insights into the structure themselves.
+
+3. Model Compression
+   - Relevant: Sparsity, pruning, quantization, low-rank approaches, KV cache, or other algorithmic/theoretical efficiency breakthroughs.
+   - Irrelevant: Straightforward applications of existing compression methods to new tasks.
+
+4. Large Language Models (LLMs)
+   - Relevant: Major breakthroughs in training or architecture, theoretical insights into LLM behavior/interpretability.
+   - Irrelevant: Domain-specific usage (e.g., translation, jail-breaking), minor tweaks (e.g., instruction tuning, CoT, data mixing), or purely empirical dataset/benchmark studies and text-level analysis (e.g. hallucination, reasoning, safety).
+
+5. AI for Science
+   - Relevant: Foundational research in molecular/protein modeling, new generative paradigms, or significant architecture-level innovations.
+   - Irrelevant: Conventional, domain-specific applications without new theoretical perspectives.
+
+6. Emerging Trends
+   - Relevant: Cutting-edge theoretical work challenging established assumptions or introducing broad new paradigms.
+   - Irrelevant: Incremental improvements or trend-following without novel insights.
+
+**Keywords for Relevant Domains:**
+Mixture of Experts (MoE), Representation Learning, Compression/Efficiency, Sparse/Sparsity, Pruning, Quantization, Low-rank, Foundation Model, etc.
+
+**Hints on Irrelevant Domains:**
+Reinforcement Learning, Transfer Learning, Federated Learning, Online Learning, Diffusion Models, etc.
+
+**Hints on Application Tasks:**
+Image Segmentation, Medical Imaging, 3D Vision, Video Understanding, Information Retrieval, Summarization, Recommendation Systems, Machine Translation, Speech Recognition, Signal Processing, Spatial/Temporal Modeling, Time Series, etc.
+
+## Scoring Criteria
+
+> The "Relevance" score measures how closely the paper aligns with the core topics of the prompt.
+> The "Novelty" score assesses the originality and impact of the paper.
+> They are two **ORTHONORMAL** axes and **SHOULD NOT** be confused with each other.
+
+### Relevance Scoring
+
+- Relevance 9-10 (Completely Relevant)
+  - Focus: Fully aligned with core topics with no deviation, score the highest if contains keywords in it.
+  - Examples: Papers focused on foundational methods or theoretical research, whose titles contain topic keywords like "MoE".
+
+- Relevance 7-8 (Relevant)
+  - Focus: Retain a solid link to the main research area, though may touch on peripheral elements.
+  - Examples: Papers research on the fundamental part of MoE through a less critical aspect like its behavior in GNN.
+
+- Relevance 5-6 (Borderline)
+  - Focus: Maintains a link to the core topic but also extends into at least one other domain/area beyond the primary focus.
+  - Examples: Work referencing MoE centered on reinforcement learning.
+
+- Relevance 3-4 (Irrelevant)
+  - Focus: Largely outside our interests with no association to our topics.
+  - Examples: Application-focused papers like using MoE to solve a problem in the real world.
+
+- Relevance 1-2 (Ignore)
+  - Focus: Purely unrelated to our topics. Completely a different domain.
+  - **Exception**: If the paper hints at a cutting-edge, radically new direction that could eventually transform the primary domain, consider a score of 9–10 despite initial appearances. (Usually a very rare concept that belongs to the fundamental research)
+
+### Novelty Scoring
+
+- Novelty 9-10 (Breakthrough)
+  - Definition: Groundbreaking methods/theory introducing new directions or solving major challenges.
+  - Examples: Entirely new paradigm for foundational models; a novel theory transforming representation learning.
+
+- Novelty 7-8 (Improvements)
+  - Definition: Substantial insights/enhancements, though not a full paradigm shift.
+  - Examples: Modifications on existing methods yielding significantly better results.
+
+- Novelty 5-6 (Borderline)
+  - Definition: Incremental contributions with possible long-term benefits, not immediately transformative.
+  - Examples: Moderately novel extension to an existing architecture; refining current methods without fundamentally altering them.
+
+- Novelty 3-4 (Tangential)
+  - Definition: Minor or domain-specific improvements with limited broader impact.
+  - Examples: Slight modifications to known methods with strange motivation; purely engineering jobs like a new benchmark/dataset.
+
+- Novelty 1-2 (Low)
+  - Definition: Minimal originality, applying standard approaches without real innovation.
+  - Examples: Using an off-the-shelf model without adding new insights; purely application-driven studies like finetuning a pretrained model using existing methods.
+
+## Papers
+
+[PAPER LIST HERE]
+
+## Instructions
+
+Write the response in JSONL format with {ARXIVID, COMMENT, RELEVANCE, NOVELTY} on each line, one for each paper.
+
+- ARXIVID: should be the ArXiv ID.
+- COMMENT: should identify whether there is a criteria that match the paper very closely. These matches should not be based on general terms like "language modeling" or "advancements" and should specifically refer to a criterion. No need to mention the non-matching criteria.
+- RELEVANCE: should be a score from 1-10.
+- NOVELTY: should be a score from 1-10.

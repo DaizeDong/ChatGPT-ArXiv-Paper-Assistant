@@ -1,0 +1,641 @@
+<div><a href="../21"><img align="left" src="../../../assets/nav/day/2025-02-24-prev.svg" alt="Previous Day 2025-02-21"></a><a href="../25"><img align="right" src="../../../assets/nav/day/2025-02-24-next.svg" alt="Next Day 2025-02-25"></a><div align="center"><a href=".."><img src="../../../assets/nav/day/2025-02-24-center.svg" alt="Monthly Overview 2025-02"></a></div><br clear="all"></div>
+
+# Personalized Daily Arxiv Papers 02/24/2025
+
+| *[gpt-4o]*   | Prompt   | Completion   | Total   |
+|--------------|----------|--------------|---------|
+| **Token**    | 37854    | 5611         | 43465   |
+| **Cost**     | $0.09    | $0.06        | $0.15   |
+
+Total ArXiv papers: 467
+
+Total scanned papers: 284
+
+Total relevant papers: 29
+
+**Table of contents with paper titles:**
+
+1. [Superintelligent Agents Pose Catastrophic Risks: Can Scientist AI Offer a Safer Path?](#user-content-link1)
+**Authors:** Yoshua Bengio, Michael Cohen, Damiano Fornasiere, Joumana Ghosn, Pietro Greiner, Matt MacDermott, S\"oren Mindermann, Adam Oberman, Jesse Richardson, Oliver Richardson, Marc-Antoine Rondeau, Pierre-Luc St-Charles, David Williams-King
+
+2. [Tight Clusters Make Specialized Experts](#user-content-link2)
+**Authors:** Stefan K. Nielsen, Rachel S. Y. Teo, Laziz U. Abdullaev, Tan M. Nguyen
+
+3. [A fast convergence algorithm based on binary integer programming for expert load balancing in MoE LLMs](#user-content-link3)
+**Authors:** Yuan Sun
+
+4. [Do we really need the Rademacher complexities?](#user-content-link4)
+**Authors:** Daniel Bartl, Shahar Mendelson
+
+5. [Approximating Latent Manifolds in Neural Networks via Vanishing Ideals](#user-content-link5)
+**Authors:** Nico Pelleriti, Max Zimmer, Elias Wirth, Sebastian Pokutta
+
+6. [Towards Physics-Guided Foundation Models](#user-content-link6)
+**Authors:** Majid Farhadloo, Arun Sharma, Mingzhou Yang, Bharat Jayaprakash, William Northrop, Shashi Shekhar
+
+7. [Probe Pruning: Accelerating LLMs through Dynamic Pruning via Model-Probing](#user-content-link7)
+**Authors:** Qi Le, Enmao Diao, Ziyan Wang, Xinran Wang, Jie Ding, Li Yang, Ali Anwar
+
+8. [SVDq: 1.25-bit and 410x Key Cache Compression for LLM Attention](#user-content-link8)
+**Authors:** Hong Yankun, Li Xing, Zhen Hui-Ling, Yu Xianzhi, Liu Wulong, Yuan Mingxuan
+
+9. [Generalization Guarantees for Representation Learning via Data-Dependent Gaussian Mixture Priors](#user-content-link9)
+**Authors:** Milad Sefidgaran, Abdellatif Zaidi, Piotr Krasnowski
+
+10. [More for Keys, Less for Values: Adaptive KV Cache Quantization](#user-content-link10)
+**Authors:** Mohsen Hariri, Lam Nguyen, Sixu Chen, Shaochen Zhong, Qifan Wang, Xia Hu, Xiaotian Han, Vipin Chaudhary
+
+11. [Analyze the Neurons, not the Embeddings: Understanding When and Where LLM Representations Align with Humans](#user-content-link11)
+**Authors:** Masha Fedzechkina, Eleonora Gualdoni, Sinead Williamson, Katherine Metcalf, Skyler Seto, Barry-John Theobald
+
+12. [Machine-generated text detection prevents language model collapse](#user-content-link12)
+**Authors:** George Drayson, Vasileios Lampos
+
+13. [Round Attention: A Novel Round-Level Attention Mechanism to Accelerate LLM Inference](#user-content-link13)
+**Authors:** Yaohua Tang, Zhicheng Hu, Kun Cheng, Fan Mo, Qiheng Lv, Hua Wang, Zhi Chen
+
+14. [LLM-Microscope: Uncovering the Hidden Role of Punctuation in Context Memory of Transformers](#user-content-link14)
+**Authors:** Anton Razzhigaev, Matvey Mikhalchuk, Temurbek Rahmatullaev, Elizaveta Goncharova, Polina Druzhinina, Ivan Oseledets, Andrey Kuznetsov
+
+15. [Fr\'echet Cumulative Covariance Net for Deep Nonlinear Sufficient Dimension Reduction with Random Objects](#user-content-link15)
+**Authors:** Hang Yuan, Christina Dan Wang, Zhou Yu
+
+16. [LightThinker: Thinking Step-by-Step Compression](#user-content-link16)
+**Authors:** Jintian Zhang, Yuqi Zhu, Mengshu Sun, Yujie Luo, Shuofei Qiao, Lun Du, Da Zheng, Huajun Chen, Ningyu Zhang
+
+17. [A Tale of Two Structures: Do LLMs Capture the Fractal Complexity of Language?](#user-content-link17)
+**Authors:** Ibrahim Alabdulmohsin, Andreas Steiner
+
+18. [Sparks of cognitive flexibility: self-guided context inference for flexible stimulus-response mapping by attentional routing](#user-content-link18)
+**Authors:** Rowan Sommers, Sushrut Thorat, Daniel Anthes, Tim C. Kietzmann
+
+19. [Solving Inverse Problems with Deep Linear Neural Networks: Global Convergence Guarantees for Gradient Descent with Weight Decay](#user-content-link19)
+**Authors:** Hannah Laus, Suzanna Parkinson, Vasileios Charisopoulos, Felix Krahmer, Rebecca Willett
+
+20. [On the Robustness of Transformers against Context Hijacking for Linear Classification](#user-content-link20)
+**Authors:** Tianle Li, Chenyang Zhang, Xingwu Chen, Yuan Cao, Difan Zou
+
+21. [The Relationship Between Reasoning and Performance in Large Language Models -- o3 (mini) Thinks Harder, Not Longer](#user-content-link21)
+**Authors:** Marthe Ballon, Andres Algaba, Vincent Ginis
+
+22. [Unveiling Reasoning Thresholds in Language Models: Scaling, Fine-Tuning, and Interpretability through Attention Maps](#user-content-link22)
+**Authors:** Yen-Che Hsiao, Abhishek Dutta
+
+23. [Scale-Free Graph-Language Models](#user-content-link23)
+**Authors:** Jianglin Lu, Yixuan Liu, Yitian Zhang, Yun Fu
+
+24. [Curvature Corrected Nonnegative Manifold Data Factorization](#user-content-link24)
+**Authors:** Joyce Chew, Willem Diepeveen, Deanna Needell
+
+25. [AttentionEngine: A Versatile Framework for Efficient Attention Mechanisms on Diverse Hardware Platforms](#user-content-link25)
+**Authors:** Feiyang Chen, Yu Cheng, Lei Wang, Yuqing Xia, Ziming Miao, Lingxiao Ma, Fan Yang, Jilong Xue, Zhi Yang, Mao Yang, Haibo Chen
+
+26. [PIP-KAG: Mitigating Knowledge Conflicts in Knowledge-Augmented Generation via Parametric Pruning](#user-content-link26)
+**Authors:** Pengcheng Huang, Zhenghao Liu, Yukun Yan, Xiaoyuan Yi, Hao Chen, Zhiyuan Liu, Maosong Sun, Tong Xiao, Ge Yu, Chenyan Xiong
+
+27. [The Multi-Faceted Monosemanticity in Multimodal Representations](#user-content-link27)
+**Authors:** Hanqi Yan, Xiangxiang Cui, Lu Yin, Paul Pu Liang, Yulan He, Yifei Wang
+
+28. [When Compression Meets Model Compression: Memory-Efficient Double Compression for Large Language Models](#user-content-link28)
+**Authors:** Weilan Wang, Yu Mao, Dongdong Tang, Hongchao Du, Nan Guan, Chun Jason Xue
+
+29. [EvoP: Robust LLM Inference via Evolutionary Pruning](#user-content-link29)
+**Authors:** Shangyu Wu, Hongchao Du, Ying Xiong, Shuai Chen, Tei-wei Kuo, Nan Guan, Chun Jason Xue
+
+---
+
+## 1. [Superintelligent Agents Pose Catastrophic Risks: Can Scientist AI Offer a Safer Path?](https://arxiv.org/abs/2502.15657) <a id="link1"></a>
+
+**ArXiv ID:** 2502.15657
+
+**Authors:** Yoshua Bengio, Michael Cohen, Damiano Fornasiere, Joumana Ghosn, Pietro Greiner, Matt MacDermott, S\"oren Mindermann, Adam Oberman, Jesse Richardson, Oliver Richardson, Marc-Antoine Rondeau, Pierre-Luc St-Charles, David Williams-King
+
+**Abstract:** The leading AI companies are increasingly focused on building generalist AI agents -- systems that can autonomously plan, act, and pursue goals across almost all tasks that humans can perform. Despite how useful these systems might be, unchecked AI agency poses significant risks to public safety and security, ranging from misuse by malicious actors to a potentially irreversible loss of human control. We discuss how these risks arise from current AI training methods. Indeed, various scenarios and experiments have demonstrated the possibility of AI agents engaging in deception or pursuing goals that were not specified by human operators and that conflict with human interests, such as self-preservation. Following the precautionary principle, we see a strong need for safer, yet still useful, alternatives to the current agency-driven trajectory. Accordingly, we propose as a core building block for further advances the development of a non-agentic AI system that is trustworthy and safe by design, which we call Scientist AI. This system is designed to explain the world from observations, as opposed to taking actions in it to imitate or please humans. It comprises a world model that generates theories to explain data and a question-answering inference machine. Both components operate with an explicit notion of uncertainty to mitigate the risks of overconfident predictions. In light of these considerations, a Scientist AI could be used to assist human researchers in accelerating scientific progress, including in AI safety. In particular, our system can be employed as a guardrail against AI agents that might be created despite the risks involved. Ultimately, focusing on non-agentic AI may enable the benefits of AI innovation while avoiding the risks associated with the current trajectory. We hope these arguments will motivate researchers, developers, and policymakers to favor this safer path.
+
+**Comment:** Author match
+
+
+
+---
+
+## 2. [Tight Clusters Make Specialized Experts](https://arxiv.org/abs/2502.15315) <a id="link2"></a>
+
+**ArXiv ID:** 2502.15315
+
+**Authors:** Stefan K. Nielsen, Rachel S. Y. Teo, Laziz U. Abdullaev, Tan M. Nguyen
+
+**Abstract:** Sparse Mixture-of-Experts (MoE) architectures have emerged as a promising approach to decoupling model capacity from computational cost. At the core of the MoE model is the router, which learns the underlying clustering structure of the input distribution in order to send input tokens to appropriate experts. However, latent clusters may be unidentifiable in high dimension, which causes slow convergence, susceptibility to data contamination, and overall degraded representations as the router is unable to perform appropriate token-expert matching. We examine the router through the lens of clustering optimization and derive optimal feature weights that maximally identify the latent clusters. We use these weights to compute the token-expert routing assignments in an adaptively transformed space that promotes well-separated clusters, which helps identify the best-matched expert for each token. In particular, for each expert cluster, we compute a set of weights that scales features according to whether that expert clusters tightly along that feature. We term this novel router the Adaptive Clustering (AC) router. Our AC router enables the MoE model to obtain three connected benefits: 1) faster convergence, 2) better robustness to data corruption, and 3) overall performance improvement, as experts are specialized in semantically distinct regions of the input space. We empirically demonstrate the advantages of our AC router over baseline routing methods when applied on a variety of MoE backbones for language modeling and image recognition tasks in both clean and corrupted settings.
+
+**Comment:** The paper proposes an Adaptive Clustering router for Sparse Mixture-of-Experts (MoE), directly addressing foundational aspects of MoE architectures and improving their robustness and performance.
+
+**Relevance:** 10
+**Novelty:** 9
+
+---
+
+## 3. [A fast convergence algorithm based on binary integer programming for expert load balancing in MoE LLMs](https://arxiv.org/abs/2502.15451) <a id="link3"></a>
+
+**ArXiv ID:** 2502.15451
+
+**Authors:** Yuan Sun
+
+**Abstract:** MoE (Mixture-of-Expert) architectures appear frequently in large language models, and the number of experts can be over one hundred recently. However, the expert load imbalance problem always happens in MoE model pre-training, which will cause routing collapse or increased computational overhead. In order to balance loads on experts, we propose BIP-Based Balancing, an expert load balancing algorithm based on binary integer programming (BIP). The algorithm maintains an additional vector q that can help change the top-K order of s by solving a binary integer programming with very small time costs. In simulation experiments, we observe that BIP-Based Balancing make imbalance disappoint very fast, while the final sum of routine scores decreases very little. Our algorithm achieves nearly perfect trade-off between expert load balance and pre-training efficiency under the simulation view.
+
+**Comment:** The paper proposes a binary integer programming-based algorithm for expert load balancing in MoE architectures, directly addressing a key challenge in MoE training and efficiency.
+
+**Relevance:** 10
+**Novelty:** 8
+
+---
+
+## 4. [Do we really need the Rademacher complexities?](https://arxiv.org/abs/2502.15118) <a id="link4"></a>
+
+**ArXiv ID:** 2502.15118
+
+**Authors:** Daniel Bartl, Shahar Mendelson
+
+**Abstract:** We study the fundamental problem of learning with respect to the squared loss in a convex class. The state-of-the-art sample complexity estimates in this setting rely on Rademacher complexities, which are generally difficult to control. We prove that, contrary to prevailing belief and under minimal assumptions, the sample complexity is not governed by the Rademacher complexities but rather by the behaviour of the limiting gaussian process. In particular, all such learning problems that have the same $L_2$-structure -- even those with heavy-tailed distributions -- share the same sample complexity. This constitutes the first universality result for general convex learning problems.   The proof is based on a novel learning procedure, and its performance is studied by combining optimal mean estimation techniques for real-valued random variables with Talagrand's generic chaining method.
+
+**Comment:** The paper challenges the reliance on Rademacher complexities for learning problems and introduces a novel universality result, which aligns with foundational research in representation learning.
+
+**Relevance:** 9
+**Novelty:** 9
+
+---
+
+## 5. [Approximating Latent Manifolds in Neural Networks via Vanishing Ideals](https://arxiv.org/abs/2502.15051) <a id="link5"></a>
+
+**ArXiv ID:** 2502.15051
+
+**Authors:** Nico Pelleriti, Max Zimmer, Elias Wirth, Sebastian Pokutta
+
+**Abstract:** Deep neural networks have reshaped modern machine learning by learning powerful latent representations that often align with the manifold hypothesis: high-dimensional data lie on lower-dimensional manifolds. In this paper, we establish a connection between manifold learning and computational algebra by demonstrating how vanishing ideals can characterize the latent manifolds of deep networks. To that end, we propose a new neural architecture that (i) truncates a pretrained network at an intermediate layer, (ii) approximates each class manifold via polynomial generators of the vanishing ideal, and (iii) transforms the resulting latent space into linearly separable features through a single polynomial layer. The resulting models have significantly fewer layers than their pretrained baselines, while maintaining comparable accuracy, achieving higher throughput, and utilizing fewer parameters. Furthermore, drawing on spectral complexity analysis, we derive sharper theoretical guarantees for generalization, showing that our approach can in principle offer tighter bounds than standard deep networks. Numerical experiments confirm the effectiveness and efficiency of the proposed approach.
+
+**Comment:** The paper connects manifold learning with computational algebra using vanishing ideals, proposing a novel architecture for latent manifold approximation. It aligns well with representation learning and architectural innovation.
+
+**Relevance:** 9
+**Novelty:** 9
+
+---
+
+## 6. [Towards Physics-Guided Foundation Models](https://arxiv.org/abs/2502.15013) <a id="link6"></a>
+
+**ArXiv ID:** 2502.15013
+
+**Authors:** Majid Farhadloo, Arun Sharma, Mingzhou Yang, Bharat Jayaprakash, William Northrop, Shashi Shekhar
+
+**Abstract:** Traditional foundation models are pre-trained on broad datasets to reduce the training resources (e.g., time, energy, labeled samples) needed for fine-tuning a wide range of downstream tasks. However, traditional foundation models struggle with out-of-distribution prediction and can produce outputs that are unrealistic and physically infeasible. We propose the notation of physics-guided foundation models (PGFM), that is, foundation models integrated with broad or general domain (e.g., scientific) physical knowledge applicable to a wide range of downstream tasks.
+
+**Comment:** The paper introduces the concept of physics-guided foundation models, which aligns with the 'AI for Science' criterion by proposing a new paradigm integrating physical knowledge into foundation models.
+
+**Relevance:** 9
+**Novelty:** 9
+
+---
+
+## 7. [Probe Pruning: Accelerating LLMs through Dynamic Pruning via Model-Probing](https://arxiv.org/abs/2502.15618) <a id="link7"></a>
+
+**ArXiv ID:** 2502.15618
+
+**Authors:** Qi Le, Enmao Diao, Ziyan Wang, Xinran Wang, Jie Ding, Li Yang, Ali Anwar
+
+**Abstract:** We introduce Probe Pruning (PP), a novel framework for online, dynamic, structured pruning of Large Language Models (LLMs) applied in a batch-wise manner. PP leverages the insight that not all samples and tokens contribute equally to the model's output, and probing a small portion of each batch effectively identifies crucial weights, enabling tailored dynamic pruning for different batches. It comprises three main stages: probing, history-informed pruning, and full inference. In the probing stage, PP selects a small yet crucial set of hidden states, based on residual importance, to run a few model layers ahead. During the history-informed pruning stage, PP strategically integrates the probing states with historical states. Subsequently, it structurally prunes weights based on the integrated states and the PP importance score, a metric developed specifically to assess the importance of each weight channel in maintaining performance. In the final stage, full inference is conducted on the remaining weights. A major advantage of PP is its compatibility with existing models, as it operates without requiring additional neural network modules or fine-tuning. Comprehensive evaluations of PP on LLaMA-2/3 and OPT models reveal that even minimal probing-using just 1.5% of FLOPs-can substantially enhance the efficiency of structured pruning of LLMs. For instance, when evaluated on LLaMA-2-7B with WikiText2, PP achieves a 2.56 times lower ratio of performance degradation per unit of runtime reduction compared to the state-of-the-art method at a 40% pruning ratio. Our code is available at https://github.com/Qi-Le1/Probe_Pruning.
+
+**Comment:** The paper introduces a novel dynamic pruning framework for LLMs, which aligns with model compression and efficiency breakthroughs.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 8. [SVDq: 1.25-bit and 410x Key Cache Compression for LLM Attention](https://arxiv.org/abs/2502.15304) <a id="link8"></a>
+
+**ArXiv ID:** 2502.15304
+
+**Authors:** Hong Yankun, Li Xing, Zhen Hui-Ling, Yu Xianzhi, Liu Wulong, Yuan Mingxuan
+
+**Abstract:** For the efficient inference of Large Language Models (LLMs), the effective compression of key-value (KV) cache is essential. Three main types of KV cache compression techniques, namely sparsity, channel compression, and quantization, have been identified. This study presents SVDq, a Singular Value Decomposition (SVD) - based mixed precision quantization method for K cache. Initially, K cache is transformed into latent channels using SVD basis representations. Since the values in latent channels decay rapidly and become negligible after only a few latent channels, our method then incorporates importance-aware quantization and compression for latent channels. This enables the effective allocation of higher precision to more significant channels. Theoretically, we prove that SVDq results in quantization errors (x0.1 or even lower) that are much lower than those of per-channel key quantization in the original space. Our findings based on RULER and LongBench benchmarks demonstrate that SVDq can achieve an equivalent key cache precision as low as 1.25-bit. When combined with key sparsity, it can reach a key compression ratio of up to 410x for attention computation, all while maintaining comparable model performance. Notably, our method is nearly lossless for LongBench datasets. This indicates that SVDq enables high-precision low-bit quantization, providing a more efficient solution for KV cache compression in LLMs.
+
+**Comment:** This paper presents SVDq, a novel mixed-precision quantization method for KV cache compression in LLMs, achieving significant compression ratios with theoretical and empirical validation. It aligns closely with the model compression criterion.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 9. [Generalization Guarantees for Representation Learning via Data-Dependent Gaussian Mixture Priors](https://arxiv.org/abs/2502.15540) <a id="link9"></a>
+
+**ArXiv ID:** 2502.15540
+
+**Authors:** Milad Sefidgaran, Abdellatif Zaidi, Piotr Krasnowski
+
+**Abstract:** We establish in-expectation and tail bounds on the generalization error of representation learning type algorithms. The bounds are in terms of the relative entropy between the distribution of the representations extracted from the training and "test'' datasets and a data-dependent symmetric prior, i.e., the Minimum Description Length (MDL) of the latent variables for the training and test datasets. Our bounds are shown to reflect the "structure" and "simplicity'' of the encoder and significantly improve upon the few existing ones for the studied model. We then use our in-expectation bound to devise a suitable data-dependent regularizer; and we investigate thoroughly the important question of the selection of the prior. We propose a systematic approach to simultaneously learning a data-dependent Gaussian mixture prior and using it as a regularizer. Interestingly, we show that a weighted attention mechanism emerges naturally in this procedure. Our experiments show that our approach outperforms the now popular Variational Information Bottleneck (VIB) method as well as the recent Category-Dependent VIB (CDVIB).
+
+**Comment:** The paper provides theoretical insights into generalization error bounds for representation learning using data-dependent Gaussian mixture priors. It aligns well with the representation learning criterion, offering foundational contributions.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 10. [More for Keys, Less for Values: Adaptive KV Cache Quantization](https://arxiv.org/abs/2502.15075) <a id="link10"></a>
+
+**ArXiv ID:** 2502.15075
+
+**Authors:** Mohsen Hariri, Lam Nguyen, Sixu Chen, Shaochen Zhong, Qifan Wang, Xia Hu, Xiaotian Han, Vipin Chaudhary
+
+**Abstract:** This paper introduces an information-aware quantization framework that adaptively compresses the key-value (KV) cache in large language models (LLMs). Although prior work has underscored the distinct roles of key and value cache during inference, our systematic analysis -- examining singular value distributions, spectral norms, and Frobenius norms -- reveals, for the first time, that key matrices consistently exhibit higher norm values and are more sensitive to quantization than value matrices. Furthermore, our theoretical analysis shows that matrices with higher spectral norms amplify quantization errors more significantly. Motivated by these insights, we propose a mixed-precision quantization strategy, KV-AdaQuant, which allocates more bit-width for keys and fewer for values since key matrices have higher norm values. With the same total KV bit budget, this approach effectively mitigates error propagation across transformer layers while achieving significant memory savings. Our extensive experiments on multiple LLMs (1B--70B) demonstrate that our mixed-precision quantization scheme maintains high model accuracy even under aggressive compression. For instance, using 4-bit for Key and 2-bit for Value achieves an accuracy of 75.2%, whereas reversing the assignment (2-bit for Key and 4-bit for Value) yields only 54.7% accuracy. The code is available at https://tinyurl.com/kv-adaquant
+
+**Comment:** The paper proposes KV-AdaQuant, a mixed-precision quantization framework for KV cache in LLMs, with theoretical insights into quantization error propagation. It aligns well with the model compression criterion.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 11. [Analyze the Neurons, not the Embeddings: Understanding When and Where LLM Representations Align with Humans](https://arxiv.org/abs/2502.15090) <a id="link11"></a>
+
+**ArXiv ID:** 2502.15090
+
+**Authors:** Masha Fedzechkina, Eleonora Gualdoni, Sinead Williamson, Katherine Metcalf, Skyler Seto, Barry-John Theobald
+
+**Abstract:** Modern large language models (LLMs) achieve impressive performance on some tasks, while exhibiting distinctly non-human-like behaviors on others. This raises the question of how well the LLM's learned representations align with human representations. In this work, we introduce a novel approach to the study of representation alignment: we adopt a method from research on activation steering to identify neurons responsible for specific concepts (e.g., 'cat') and then analyze the corresponding activation patterns. Our findings reveal that LLM representations closely align with human representations inferred from behavioral data. Notably, this alignment surpasses that of word embeddings, which have been center stage in prior work on human and model alignment. Additionally, our approach enables a more granular view of how LLMs represent concepts. Specifically, we show that LLMs organize concepts in a way that reflects hierarchical relationships interpretable to humans (e.g., 'animal'-'dog').
+
+**Comment:** The paper analyzes neuron-level representations in LLMs and their alignment with human concepts, contributing to interpretability and representation learning. This aligns with foundational research in representation learning.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 12. [Machine-generated text detection prevents language model collapse](https://arxiv.org/abs/2502.15654) <a id="link12"></a>
+
+**ArXiv ID:** 2502.15654
+
+**Authors:** George Drayson, Vasileios Lampos
+
+**Abstract:** As Large Language Models (LLMs) become increasingly prevalent, their generated outputs are proliferating across the web, risking a future where machine-generated content dilutes human-authored text. Since web data is the primary resource for LLM pretraining, future models will be trained on an unknown portion of synthetic data. This will lead to model collapse, a degenerative process which causes models to reinforce their own errors and experience a drop in model performance. In this study, we investigate the impact of decoding strategy on model collapse, where we analyse the characteristics of the generated data during recursive training, its similarity to human references and the resulting model performance. Using the decoding strategies that lead to the most significant model degradation, we tackle the question: how to avoid model collapse when the origin (human or synthetic) of the training data is unknown. We design a novel methodology based on resampling the data distribution using importance weights from our machine-generated text detector. Our method is validated on two LLM variants (GPT-2 and SmolLM2) on the open-ended text generation task, demonstrating that we can successfully prevent model collapse and when there is enough human-authored data in the training dataset, our method improves model performance.
+
+**Comment:** The paper discusses the issue of model collapse in LLMs and proposes a novel methodology to prevent it using machine-generated text detection. This aligns with the 'Large Language Models' criterion, focusing on foundational insights into training dynamics and behavior.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 13. [Round Attention: A Novel Round-Level Attention Mechanism to Accelerate LLM Inference](https://arxiv.org/abs/2502.15294) <a id="link13"></a>
+
+**ArXiv ID:** 2502.15294
+
+**Authors:** Yaohua Tang, Zhicheng Hu, Kun Cheng, Fan Mo, Qiheng Lv, Hua Wang, Zhi Chen
+
+**Abstract:** The increasing context window size in large language models (LLMs) has improved their ability to handle complex, long-text tasks. However, as the conversation rounds continue, it is required to store a large amount of KV cache in GPU memory, which significantly affects the efficiency and even availability of the model serving systems. This paper analyzes dialogue data from real users and discovers that the LLM inference manifests a watershed layer, after which the distribution of round-level attention shows notable similarity. We propose Round Attention, a novel round-level attention mechanism that only recalls and computes the KV cache of the most relevant rounds. The experiments show that our method saves 55\% memory usage without compromising model performance.
+
+**Comment:** The paper proposes a novel round-level attention mechanism to reduce KV cache memory usage in LLMs, aligning with the 'Model Compression' criterion by addressing efficiency in inference.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 14. [LLM-Microscope: Uncovering the Hidden Role of Punctuation in Context Memory of Transformers](https://arxiv.org/abs/2502.15007) <a id="link14"></a>
+
+**ArXiv ID:** 2502.15007
+
+**Authors:** Anton Razzhigaev, Matvey Mikhalchuk, Temurbek Rahmatullaev, Elizaveta Goncharova, Polina Druzhinina, Ivan Oseledets, Andrey Kuznetsov
+
+**Abstract:** We introduce methods to quantify how Large Language Models (LLMs) encode and store contextual information, revealing that tokens often seen as minor (e.g., determiners, punctuation) carry surprisingly high context. Notably, removing these tokens -- especially stopwords, articles, and commas -- consistently degrades performance on MMLU and BABILong-4k, even if removing only irrelevant tokens. Our analysis also shows a strong correlation between contextualization and linearity, where linearity measures how closely the transformation from one layer's embeddings to the next can be approximated by a single linear mapping. These findings underscore the hidden importance of filler tokens in maintaining context. For further exploration, we present LLM-Microscope, an open-source toolkit that assesses token-level nonlinearity, evaluates contextual memory, visualizes intermediate layer contributions (via an adapted Logit Lens), and measures the intrinsic dimensionality of representations. This toolkit illuminates how seemingly trivial tokens can be critical for long-range understanding.
+
+**Comment:** The paper provides insights into how LLMs encode contextual information, particularly focusing on the role of punctuation and token-level analysis, which aligns with interpretability in LLMs.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 15. [Fr\'echet Cumulative Covariance Net for Deep Nonlinear Sufficient Dimension Reduction with Random Objects](https://arxiv.org/abs/2502.15374) <a id="link15"></a>
+
+**ArXiv ID:** 2502.15374
+
+**Authors:** Hang Yuan, Christina Dan Wang, Zhou Yu
+
+**Abstract:** Nonlinear sufficient dimension reduction\citep{libing_generalSDR}, which constructs nonlinear low-dimensional representations to summarize essential features of high-dimensional data, is an important branch of representation learning. However, most existing methods are not applicable when the response variables are complex non-Euclidean random objects, which are frequently encountered in many recent statistical applications. In this paper, we introduce a new statistical dependence measure termed Fr\'echet Cumulative Covariance (FCCov) and develop a novel nonlinear SDR framework based on FCCov. Our approach is not only applicable to complex non-Euclidean data, but also exhibits robustness against outliers. We further incorporate Feedforward Neural Networks (FNNs) and Convolutional Neural Networks (CNNs) to estimate nonlinear sufficient directions in the sample level. Theoretically, we prove that our method with squared Frobenius norm regularization achieves unbiasedness at the $\sigma$-field level. Furthermore, we establish non-asymptotic convergence rates for our estimators based on FNNs and ResNet-type CNNs, which match the minimax rate of nonparametric regression up to logarithmic factors. Intensive simulation studies verify the performance of our methods in both Euclidean and non-Euclidean settings. We apply our method to facial expression recognition datasets and the results underscore more realistic and broader applicability of our proposal.
+
+**Comment:** The paper introduces a novel statistical dependence measure (FCCov) and a nonlinear sufficient dimension reduction framework, which aligns with representation learning by focusing on encoding essential features of high-dimensional data. The theoretical contributions and convergence guarantees add to its relevance.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 16. [LightThinker: Thinking Step-by-Step Compression](https://arxiv.org/abs/2502.15589) <a id="link16"></a>
+
+**ArXiv ID:** 2502.15589
+
+**Authors:** Jintian Zhang, Yuqi Zhu, Mengshu Sun, Yujie Luo, Shuofei Qiao, Lun Du, Da Zheng, Huajun Chen, Ningyu Zhang
+
+**Abstract:** Large language models (LLMs) have shown remarkable performance in complex reasoning tasks, but their efficiency is hindered by the substantial memory and computational costs associated with generating lengthy tokens. In this paper, we propose LightThinker, a novel method that enables LLMs to dynamically compress intermediate thoughts during reasoning. Inspired by human cognitive processes, LightThinker compresses verbose thought steps into compact representations and discards the original reasoning chains, thereby significantly reducing the number of tokens stored in the context window. This is achieved by training the model on when and how to perform compression through data construction, mapping hidden states to condensed gist tokens, and creating specialized attention masks. Additionally, we introduce the Dependency (Dep) metric to quantify the degree of compression by measuring the reliance on historical tokens during generation. Extensive experiments on four datasets and two models show that LightThinker reduces peak memory usage and inference time, while maintaining competitive accuracy. Our work provides a new direction for improving the efficiency of LLMs in complex reasoning tasks without sacrificing performance. Code will be released at https://github.com/zjunlp/LightThinker.
+
+**Comment:** The paper introduces LightThinker, a method for compressing intermediate reasoning steps in LLMs, aligning with model compression and efficiency breakthroughs. The approach is novel in its dynamic compression inspired by human cognition.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 17. [A Tale of Two Structures: Do LLMs Capture the Fractal Complexity of Language?](https://arxiv.org/abs/2502.14924) <a id="link17"></a>
+
+**ArXiv ID:** 2502.14924
+
+**Authors:** Ibrahim Alabdulmohsin, Andreas Steiner
+
+**Abstract:** Language exhibits a fractal structure in its information-theoretic complexity (i.e. bits per token), with self-similarity across scales and long-range dependence (LRD). In this work, we investigate whether large language models (LLMs) can replicate such fractal characteristics and identify conditions-such as temperature setting and prompting method-under which they may fail. Moreover, we find that the fractal parameters observed in natural language are contained within a narrow range, whereas those of LLMs' output vary widely, suggesting that fractal parameters might prove helpful in detecting a non-trivial portion of LLM-generated texts. Notably, these findings, and many others reported in this work, are robust to the choice of the architecture; e.g. Gemini 1.0 Pro, Mistral-7B and Gemma-2B. We also release a dataset comprising of over 240,000 articles generated by various LLMs (both pretrained and instruction-tuned) with different decoding temperatures and prompting methods, along with their corresponding human-generated texts. We hope that this work highlights the complex interplay between fractal properties, prompting, and statistical mimicry in LLMs, offering insights for generating, evaluating and detecting synthetic texts.
+
+**Comment:** The paper investigates whether LLMs capture the fractal complexity of language, which aligns with theoretical insights into LLM behavior and interpretability.
+
+**Relevance:** 8
+**Novelty:** 8
+
+---
+
+## 18. [Sparks of cognitive flexibility: self-guided context inference for flexible stimulus-response mapping by attentional routing](https://arxiv.org/abs/2502.15634) <a id="link18"></a>
+
+**ArXiv ID:** 2502.15634
+
+**Authors:** Rowan Sommers, Sushrut Thorat, Daniel Anthes, Tim C. Kietzmann
+
+**Abstract:** Flexible cognition demands discovering hidden rules to quickly adapt stimulus-response mappings. Standard neural networks struggle in tasks requiring rapid, context-driven remapping. Recently, Hummos (2023) introduced a fast-and-slow learning algorithm to mitigate this shortfall, but its scalability to complex, image-computable tasks was unclear. Here, we propose the Wisconsin Neural Network (WiNN), which expands on fast-and-slow learning for real-world tasks demanding flexible rule-based behavior. WiNN employs a pretrained convolutional neural network for vision, coupled with an adjustable "context state" that guides attention to relevant features. If WiNN produces an incorrect response, it first iteratively updates its context state to refocus attention on task-relevant cues, then performs minimal parameter updates to attention and readout layers. This strategy preserves generalizable representations in the sensory network, reducing catastrophic forgetting. We evaluate WiNN on an image-based extension of the Wisconsin Card Sorting Task, revealing several markers of cognitive flexibility: (i) WiNN autonomously infers underlying rules, (ii) requires fewer examples to do so than control models reliant on large-scale parameter updates, (iii) can perform context-based rule inference solely via context-state adjustments-further enhanced by slow updates of attention and readout parameters, and (iv) generalizes to unseen compositional rules through context-state inference alone. By blending fast context inference with targeted attentional guidance, WiNN achieves "sparks" of flexibility. This approach offers a path toward context-sensitive models that retain knowledge while rapidly adapting to complex, rule-based tasks.
+
+**Comment:** The paper proposes a novel neural network (WiNN) for flexible stimulus-response mapping using attentional routing, which aligns with the 'Representation Learning' criterion by addressing training dynamics and adaptability.
+
+**Relevance:** 8
+**Novelty:** 8
+
+---
+
+## 19. [Solving Inverse Problems with Deep Linear Neural Networks: Global Convergence Guarantees for Gradient Descent with Weight Decay](https://arxiv.org/abs/2502.15522) <a id="link19"></a>
+
+**ArXiv ID:** 2502.15522
+
+**Authors:** Hannah Laus, Suzanna Parkinson, Vasileios Charisopoulos, Felix Krahmer, Rebecca Willett
+
+**Abstract:** Machine learning methods are commonly used to solve inverse problems, wherein an unknown signal must be estimated from few measurements generated via a known acquisition procedure. In particular, neural networks perform well empirically but have limited theoretical guarantees. In this work, we study an underdetermined linear inverse problem that admits several possible solution mappings. A standard remedy (e.g., in compressed sensing) establishing uniqueness of the solution mapping is to assume knowledge of latent low-dimensional structure in the source signal. We ask the following question: do deep neural networks adapt to this low-dimensional structure when trained by gradient descent with weight decay regularization? We prove that mildly overparameterized deep linear networks trained in this manner converge to an approximate solution that accurately solves the inverse problem while implicitly encoding latent subspace structure. To our knowledge, this is the first result to rigorously show that deep linear networks trained with weight decay automatically adapt to latent subspace structure in the data under practical stepsize and weight initialization schemes. Our work highlights that regularization and overparameterization improve generalization, while overparameterization also accelerates convergence during training.
+
+**Comment:** The paper provides theoretical guarantees for deep linear networks solving inverse problems, contributing to foundational understanding of training dynamics and representation learning.
+
+**Relevance:** 8
+**Novelty:** 8
+
+---
+
+## 20. [On the Robustness of Transformers against Context Hijacking for Linear Classification](https://arxiv.org/abs/2502.15609) <a id="link20"></a>
+
+**ArXiv ID:** 2502.15609
+
+**Authors:** Tianle Li, Chenyang Zhang, Xingwu Chen, Yuan Cao, Difan Zou
+
+**Abstract:** Transformer-based Large Language Models (LLMs) have demonstrated powerful in-context learning capabilities. However, their predictions can be disrupted by factually correct context, a phenomenon known as context hijacking, revealing a significant robustness issue. To understand this phenomenon theoretically, we explore an in-context linear classification problem based on recent advances in linear transformers. In our setup, context tokens are designed as factually correct query-answer pairs, where the queries are similar to the final query but have opposite labels. Then, we develop a general theoretical analysis on the robustness of the linear transformers, which is formulated as a function of the model depth, training context lengths, and number of hijacking context tokens. A key finding is that a well-trained deeper transformer can achieve higher robustness, which aligns with empirical observations. We show that this improvement arises because deeper layers enable more fine-grained optimization steps, effectively mitigating interference from context hijacking. This is also well supported by our numerical experiments. Our findings provide theoretical insights into the benefits of deeper architectures and contribute to enhancing the understanding of transformer architectures.
+
+**Comment:** The paper provides theoretical insights into the robustness of transformers against context hijacking, which aligns with the analysis of transformer architectures.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 21. [The Relationship Between Reasoning and Performance in Large Language Models -- o3 (mini) Thinks Harder, Not Longer](https://arxiv.org/abs/2502.15631) <a id="link21"></a>
+
+**ArXiv ID:** 2502.15631
+
+**Authors:** Marthe Ballon, Andres Algaba, Vincent Ginis
+
+**Abstract:** Large language models have demonstrated remarkable progress in mathematical reasoning, leveraging chain-of-thought and test-time compute scaling. However, many open questions remain regarding the interplay between reasoning token usage and accuracy gains. In particular, when comparing models across generations, it is unclear whether improved performance results from longer reasoning chains or more efficient reasoning. We systematically analyze chain-of-thought length across o1-mini and o3-mini variants on the Omni-MATH benchmark, finding that o3-mini (m) achieves superior accuracy without requiring longer reasoning chains than o1-mini. Moreover, we show that accuracy generally declines as reasoning chains grow across all models and compute settings, even when controlling for difficulty of the questions. This accuracy drop is significantly smaller in more proficient models, suggesting that new generations of reasoning models use test-time compute more effectively. Finally, we highlight that while o3-mini (h) achieves a marginal accuracy gain over o3-mini (m), it does so by allocating substantially more reasoning tokens across all problems, even the ones that o3-mini (m) can already solve. These findings provide new insights into the relationship between model capability and reasoning length, with implications for efficiency, scaling, and evaluation methodologies.
+
+**Comment:** The paper analyzes reasoning efficiency in LLMs, providing insights into reasoning length and performance, which aligns with theoretical insights into LLM behavior.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 22. [Unveiling Reasoning Thresholds in Language Models: Scaling, Fine-Tuning, and Interpretability through Attention Maps](https://arxiv.org/abs/2502.15120) <a id="link22"></a>
+
+**ArXiv ID:** 2502.15120
+
+**Authors:** Yen-Che Hsiao, Abhishek Dutta
+
+**Abstract:** This study investigates the in-context learning capabilities of various decoder-only transformer-based language models with different model sizes and training data, including GPT2, SmolLM2, OpenELM, TinyLlama, Stable LM, and Gemma 2. We identify a critical parameter threshold (~1.6 billion), beyond which reasoning performance improves significantly in tasks such as commonsense reasoning in multiple-choice question answering and deductive reasoning. Specifically, models above this threshold achieve better success rates in chain-of-thought (CoT) prompting for deductive reasoning tasks, especially those requiring longer reasoning chains, such as proof by contradiction and disjunction elimination. To address limitations in sub-threshold models, we demonstrate that fine-tuning with task-specific exemplars substantially enhances reasoning performance, enabling accurate CoT generation even without additional exemplars in the prompt for tasks with shorter reasoning chains. Finally, our analysis of attention maps reveals that models capable of generating correct CoTs exhibit higher token-level attention scores on subsequent correct tokens and the correct parts of speech, providing interpretability insights into reasoning processes. These findings collectively advance understanding of reasoning capabilities in decoder-only transformer-based models. The code is available at: https://github.com/AnnonymousForPapers/CoT_Reasoning_Test.
+
+**Comment:** The paper investigates reasoning thresholds in LLMs and provides insights into scaling and interpretability through attention maps, contributing to foundational understanding of LLM behavior.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 23. [Scale-Free Graph-Language Models](https://arxiv.org/abs/2502.15189) <a id="link23"></a>
+
+**ArXiv ID:** 2502.15189
+
+**Authors:** Jianglin Lu, Yixuan Liu, Yitian Zhang, Yun Fu
+
+**Abstract:** Graph-language models (GLMs) have demonstrated great potential in graph-based semi-supervised learning. A typical GLM consists of two key stages: graph generation and text embedding, which are usually implemented by inferring a latent graph and finetuning a language model (LM), respectively. However, the former often relies on artificial assumptions about the underlying edge distribution, while the latter requires extensive data annotations. To tackle these challenges, this paper introduces a novel GLM that integrates graph generation and text embedding within a unified framework. Specifically, for graph generation, we leverage an inherent characteristic of real edge distribution--the scale-free property--as a structural prior. We unexpectedly find that this natural property can be effectively approximated by a simple k-nearest neighbor (KNN) graph. For text embedding, we develop a graph-based pseudo-labeler that utilizes scale-free graphs to provide complementary supervision for improved LM finetuning. Extensive experiments on representative datasets validate our findings on the scale-free structural approximation of KNN graphs and demonstrate the effectiveness of integrating graph generation and text embedding with a real structural prior. Our code is available at https://github.com/Jianglin954/SFGL.
+
+**Comment:** The paper proposes a graph-language model integrating graph generation and text embedding with a scale-free structural prior, which aligns with the 'Representation Learning' criterion by addressing foundational aspects of graph-based learning.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 24. [Curvature Corrected Nonnegative Manifold Data Factorization](https://arxiv.org/abs/2502.15124) <a id="link24"></a>
+
+**ArXiv ID:** 2502.15124
+
+**Authors:** Joyce Chew, Willem Diepeveen, Deanna Needell
+
+**Abstract:** Data with underlying nonlinear structure are collected across numerous application domains, necessitating new data processing and analysis methods adapted to nonlinear domain structure. Riemannanian manifolds present a rich environment in which to develop such tools, as manifold-valued data arise in a variety of scientific settings, and Riemannian geometry provides a solid theoretical grounding for geometric data analysis. Low-rank approximations, such as nonnegative matrix factorization (NMF), are the foundation of many Euclidean data analysis methods, so adaptations of these factorizations for manifold-valued data are important building blocks for further development of manifold data analysis. In this work, we propose curvature corrected nonnegative manifold data factorization (CC-NMDF) as a geometry-aware method for extracting interpretable factors from manifold-valued data, analogous to nonnegative matrix factorization. We develop an efficient iterative algorithm for computing CC-NMDF and demonstrate our method on real-world diffusion tensor magnetic resonance imaging data.
+
+**Comment:** The paper introduces a novel geometry-aware method for manifold-valued data factorization, which aligns with representation learning through its focus on low-rank approximations and interpretable factors.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 25. [AttentionEngine: A Versatile Framework for Efficient Attention Mechanisms on Diverse Hardware Platforms](https://arxiv.org/abs/2502.15349) <a id="link25"></a>
+
+**ArXiv ID:** 2502.15349
+
+**Authors:** Feiyang Chen, Yu Cheng, Lei Wang, Yuqing Xia, Ziming Miao, Lingxiao Ma, Fan Yang, Jilong Xue, Zhi Yang, Mao Yang, Haibo Chen
+
+**Abstract:** Transformers and large language models (LLMs) have revolutionized machine learning, with attention mechanisms at the core of their success. As the landscape of attention variants expands, so too do the challenges of optimizing their performance, particularly across different hardware platforms. Current optimization strategies are often narrowly focused, requiring extensive manual intervention to accommodate changes in model configurations or hardware environments. In this paper, we introduce AttentionEngine, a comprehensive framework designed to streamline the optimization of attention mechanisms across heterogeneous hardware backends. By decomposing attention computation into modular operations with customizable components, AttentionEngine enables flexible adaptation to diverse algorithmic requirements. The framework further automates kernel optimization through a combination of programmable templates and a robust cross-platform scheduling strategy. Empirical results reveal performance gains of up to 10x on configurations beyond the reach of existing methods. AttentionEngine offers a scalable, efficient foundation for developing and deploying attention mechanisms with minimal manual tuning. Our code has been open-sourced and is available at https://github.com/microsoft/AttentionEngine.
+
+**Comment:** The paper introduces a framework for optimizing attention mechanisms across hardware platforms, which aligns with model architecture innovations, particularly in the context of Transformers.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 26. [PIP-KAG: Mitigating Knowledge Conflicts in Knowledge-Augmented Generation via Parametric Pruning](https://arxiv.org/abs/2502.15543) <a id="link26"></a>
+
+**ArXiv ID:** 2502.15543
+
+**Authors:** Pengcheng Huang, Zhenghao Liu, Yukun Yan, Xiaoyuan Yi, Hao Chen, Zhiyuan Liu, Maosong Sun, Tong Xiao, Ge Yu, Chenyan Xiong
+
+**Abstract:** Knowledge-Augmented Generation (KAG) has shown great promise in updating the internal memory of Large Language Models (LLMs) by integrating external knowledge. However, KAG inevitably faces knowledge conflicts when the internal memory contradicts external information. Current approaches to mitigating these conflicts mainly focus on improving external knowledge utilization. However, these methods have shown only limited effectiveness in mitigating the knowledge conflict problem, as internal knowledge continues to influence the generation process of LLMs. In this paper, we propose a ParametrIc Pruning-based Knowledge-Augmented Generation (PIP-KAG) approach, which prunes internal knowledge of LLMs and incorporates a plug-and-play adaptation module to help LLMs better leverage external sources. Additionally, we construct the CoConflictQA benchmark based on the hallucination of LLMs to better evaluate contextual faithfulness during answering questions. Experimental results on CoConflictQA demonstrate that PIP-KAG significantly reduces knowledge conflicts and improves context fidelity. Notably, PIP-KAG reduces LLM's parameters by 13%, enhancing parameter efficiency in LLMs within the KAG framework. All codes are available at https://github.com/OpenBMB/PIP-KAG.
+
+**Comment:** The paper introduces a pruning-based approach to mitigate knowledge conflicts in knowledge-augmented generation, which aligns with model compression and efficiency improvements.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 27. [The Multi-Faceted Monosemanticity in Multimodal Representations](https://arxiv.org/abs/2502.14888) <a id="link27"></a>
+
+**ArXiv ID:** 2502.14888
+
+**Authors:** Hanqi Yan, Xiangxiang Cui, Lu Yin, Paul Pu Liang, Yulan He, Yifei Wang
+
+**Abstract:** In this paper, we leverage recent advancements in feature monosemanticity to extract interpretable features from deep multimodal models, offering a data-driven understanding of modality gaps. Specifically, we investigate CLIP (Contrastive Language-Image Pretraining), a prominent visual-language representation model trained on extensive image-text pairs. Building upon interpretability tools developed for single-modal models, we extend these methodologies to assess multi-modal interpretability of CLIP features. Additionally, we introduce the Modality Dominance Score (MDS) to attribute the interpretability of each feature to its respective modality. Next, we transform CLIP features into a more interpretable space, enabling us to categorize them into three distinct classes: vision features (single-modal), language features (single-modal), and visual-language features (cross-modal). Our findings reveal that this categorization aligns closely with human cognitive understandings of different modalities. We also demonstrate significant use cases of this modality-specific features including detecting gender bias, adversarial attack defense and text-to-image model editing. These results indicate that large-scale multimodal models, equipped with task-agnostic interpretability tools, offer valuable insights into key connections and distinctions between different modalities.
+
+**Comment:** The paper explores interpretability in multimodal models, particularly CLIP, and introduces a novel categorization of features, aligning with representation learning and interpretability.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 28. [When Compression Meets Model Compression: Memory-Efficient Double Compression for Large Language Models](https://arxiv.org/abs/2502.15443) <a id="link28"></a>
+
+**ArXiv ID:** 2502.15443
+
+**Authors:** Weilan Wang, Yu Mao, Dongdong Tang, Hongchao Du, Nan Guan, Chun Jason Xue
+
+**Abstract:** Large language models (LLMs) exhibit excellent performance in various tasks. However, the memory requirements of LLMs present a great challenge when deploying on memory-limited devices, even for quantized LLMs. This paper introduces a framework to compress LLM after quantization further, achieving about 2.2x compression ratio. A compression-aware quantization is first proposed to enhance model weight compressibility by re-scaling the model parameters before quantization, followed by a pruning method to improve further. Upon this, we notice that decompression can be a bottleneck during practical scenarios. We then give a detailed analysis of the trade-off between memory usage and latency brought by the proposed method. A speed-adaptive method is proposed to overcome it. The experimental results show inference with the compressed model can achieve a 40% reduction in memory size with negligible loss in accuracy and inference speed.
+
+**Comment:** The paper introduces a double compression framework for LLMs, combining quantization and pruning. While it addresses memory efficiency, the contributions appear incremental and lack significant theoretical breakthroughs.
+
+**Relevance:** 7
+**Novelty:** 6
+
+---
+
+## 29. [EvoP: Robust LLM Inference via Evolutionary Pruning](https://arxiv.org/abs/2502.14910) <a id="link29"></a>
+
+**ArXiv ID:** 2502.14910
+
+**Authors:** Shangyu Wu, Hongchao Du, Ying Xiong, Shuai Chen, Tei-wei Kuo, Nan Guan, Chun Jason Xue
+
+**Abstract:** Large Language Models (LLMs) have achieved remarkable success in natural language processing tasks, but their massive size and computational demands hinder their deployment in resource-constrained environments. Existing structured pruning methods address this issue by removing redundant structures (e.g., elements, channels, layers) from the model. However, these methods employ a heuristic pruning strategy, which leads to suboptimal performance. Besides, they also ignore the data characteristics when pruning the model.   To overcome these limitations, we propose EvoP, an evolutionary pruning framework for robust LLM inference. EvoP first presents a cluster-based calibration dataset sampling (CCDS) strategy for creating a more diverse calibration dataset. EvoP then introduces an evolutionary pruning pattern searching (EPPS) method to find the optimal pruning pattern. Compared to existing structured pruning techniques, EvoP achieves the best performance while maintaining the best efficiency. Experiments across different LLMs and different downstream tasks validate the effectiveness of the proposed EvoP, making it a practical and scalable solution for deploying LLMs in real-world applications.
+
+**Comment:** The paper introduces EvoP, an evolutionary pruning framework for LLMs. While it addresses pruning, the contributions are more focused on practical efficiency rather than foundational theoretical insights.
+
+**Relevance:** 7
+**Novelty:** 6
+
+---
+
+# Paper Selection Prompt
+
+You are a helpful paper reading assistant whose job is to read daily posts from ArXiv and identify a few papers that your friend will enjoy reading.
+Your job is to carefully read the paper titles and abstracts below and find the ones that match the criteria below.
+
+## Relevant Topics
+
+Use the following relevance criteria to focus on foundational research. Keep relevant papers and filter out irrelevant ones. Avoid purely application-driven work.
+
+1. Representation Learning
+   - Relevant: Insights into how deep networks encode information, feature/dictionary learning, sparse/contrastive methods, training dynamics in neural networks.
+   - Irrelevant: Standard applications of known techniques lacking new theoretical or methodological contributions.
+
+2. Model Architecture
+   - Relevant: Mixture-of-Experts (MoE), Transformers, Conditional/Dynamic Networks, Autoencoders, analysis on existing architectures (like encoder-decoder), or other architectural innovations.
+   - Irrelevant: Merely using existing architectures for a certain task without insights into the structure themselves.
+
+3. Model Compression
+   - Relevant: Sparsity, pruning, quantization, low-rank approaches, KV cache, or other algorithmic/theoretical efficiency breakthroughs.
+   - Irrelevant: Straightforward applications of existing compression methods to new tasks.
+
+4. Large Language Models (LLMs)
+   - Relevant: Major breakthroughs in training or architecture, theoretical insights into LLM behavior/interpretability.
+   - Irrelevant: Domain-specific usage (e.g., translation, jail-breaking), minor tweaks (e.g., instruction tuning, CoT, data mixing), or purely empirical dataset/benchmark studies and text-level analysis (e.g. hallucination, reasoning, safety).
+
+5. AI for Science
+   - Relevant: Foundational research in molecular/protein modeling, new generative paradigms, or significant architecture-level innovations.
+   - Irrelevant: Conventional, domain-specific applications without new theoretical perspectives.
+
+6. Emerging Trends
+   - Relevant: Cutting-edge theoretical work challenging established assumptions or introducing broad new paradigms.
+   - Irrelevant: Incremental improvements or trend-following without novel insights.
+
+**Keywords:**
+
+- Relevant: Mixture of Experts (MoE), Representation Learning, Compression/Efficiency, Sparse/Sparsity, Pruning, Quantization, Low-rank, Foundation Model, etc.
+- Irrelevant: Reinforcement Learning, Transfer Learning, Federated Learning, Online Learning, Diffusion Models, etc.
+- Application Work: Image Segmentation, Medical Imaging, 3D Vision, Video Understanding, Information Retrieval, Summarization, Recommendation Systems, Machine Translation, Speech Recognition, Signal Processing, Spatial/Temporal Modeling, Time Series, etc.
+
+## Scoring Criteria
+
+> The "Relevance" score measures how closely the paper aligns with the core topics of the prompt.
+> The "Novelty" score assesses the originality and impact of the paper.
+> They are two **ORTHONORMAL** axes and **SHOULD NOT** be confused with each other.
+
+### Relevance Scoring
+
+- Relevance 9-10 (Completely Relevant)
+  - Focus: Fully aligned with core topics with no deviation, score the highest if contains relevant keywords in it.
+  - Examples: Papers focused on foundational methods or theoretical research, whose titles contain topic keywords like "MoE".
+
+- Relevance 7-8 (Relevant)
+  - Focus: Retain a solid link to the main research area, though may touch on peripheral elements.
+  - Examples: Papers research on the fundamental part of MoE through a less critical aspect like its behavior in GNN.
+
+- Relevance 5-6 (Borderline)
+  - Focus: Maintains a link to the core topic but also extends into at least one other domain/area beyond the primary focus.
+  - Examples: Work referencing MoE centered on reinforcement learning.
+
+- Relevance 3-4 (Irrelevant)
+  - Focus: Largely outside our interests with no association to our topics.
+  - Examples: Application-focused papers like using MoE to solve a problem in the real world.
+
+- Relevance 1-2 (Ignore)
+  - Focus: Purely unrelated to our topics. Completely a different domain.
+  - **Exception**: If the paper hints at a cutting-edge, radically new direction that could eventually transform the primary domain, consider a score of 9–10 despite initial appearances. (Usually a very rare concept that belongs to the fundamental research)
+
+### Novelty Scoring
+
+- Novelty 9-10 (Breakthrough)
+  - Definition: Groundbreaking methods/theory introducing new directions or solving major challenges.
+  - Examples: Entirely new paradigm for foundational models; a novel theory transforming representation learning.
+
+- Novelty 7-8 (Improvements)
+  - Definition: Substantial insights/enhancements, though not a full paradigm shift.
+  - Examples: Modifications on existing methods yielding significantly better results.
+
+- Novelty 5-6 (Borderline)
+  - Definition: Incremental contributions with possible long-term benefits, not immediately transformative.
+  - Examples: Moderately novel extension to an existing architecture; refining current methods without fundamentally altering them.
+
+- Novelty 3-4 (Tangential)
+  - Definition: Minor or domain-specific improvements with limited broader impact.
+  - Examples: Slight modifications to known methods with strange motivation; purely engineering jobs like a new benchmark/dataset.
+
+- Novelty 1-2 (Low)
+  - Definition: Minimal originality, applying standard approaches without real innovation.
+  - Examples: Using an off-the-shelf model without adding new insights; purely application-driven studies like finetuning a pretrained model using existing methods.
+
+## Papers
+
+[PAPER LIST HERE]
+
+## Instructions
+
+Write the response in JSONL format with {ARXIVID, COMMENT, RELEVANCE, NOVELTY} on each line, one for each paper.
+
+- ARXIVID: should be the ArXiv ID.
+- COMMENT: should identify whether there is a criteria that match the paper very closely. These matches should not be based on general terms like "language modeling" or "advancements" and should specifically refer to a criterion. No need to mention the non-matching criteria.
+- RELEVANCE: should be a score from 1-10.
+- NOVELTY: should be a score from 1-10.

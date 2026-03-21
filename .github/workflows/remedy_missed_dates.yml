@@ -81,6 +81,20 @@ jobs:
           python -m pip install --upgrade pip
           if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
 
+      - name: Disable author matching for remedial backfill
+        shell: bash
+        run: |
+          python - <<'PY'
+          import configparser
+
+          config = configparser.ConfigParser()
+          config.read("configs/config.ini")
+          config["SELECTION"]["run_author_match"] = "false"
+
+          with open("configs/config.ini", "w", encoding="utf-8") as handle:
+              config.write(handle)
+          PY
+
       - name: Print inferred remedy plan
         run: |
           python scripts/remedy_missed_dates.py \

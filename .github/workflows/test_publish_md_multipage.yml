@@ -23,13 +23,26 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout `test_web` branch
+      - name: Checkout triggering ref
         uses: actions/checkout@v6
         with:
-          ref: test_web
           fetch-depth: 0
 
-      - name: Verify output directory and contents
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+
+      - name: Build multipage site
+        run: |
+          python -m arxiv_assistant.renderers.build_multipage_site
+
+      - name: Stage generated site
         run: |
           if [ -d "out/site" ] && [ "$(ls -A out/site)" ]; then
               echo "Contents in out/site:"

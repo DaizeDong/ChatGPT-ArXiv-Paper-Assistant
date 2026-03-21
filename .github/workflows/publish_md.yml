@@ -63,10 +63,26 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           files: latest.md
 
-      - uses: actions/upload-pages-artifact@v4
+      - name: Archive Pages artifact
+        if: steps.check_files.outputs.files_exists == 'true'
+        shell: bash
+        run: |
+          tar \
+            --dereference --hard-dereference \
+            --directory "dist" \
+            -cvf "$RUNNER_TEMP/artifact.tar" \
+            --exclude=.git \
+            --exclude=.github \
+            --exclude=".[^/]*" \
+            .
+
+      - uses: actions/upload-artifact@v7
         if: steps.check_files.outputs.files_exists == 'true'
         with:
-          path: dist
+          name: github-pages
+          path: ${{ runner.temp }}/artifact.tar
+          retention-days: 1
+          if-no-files-found: error
 
       - name: Deploy to GitHub Pages
         uses: actions/deploy-pages@v4.0.5

@@ -200,8 +200,12 @@ jobs:
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
           OPENAI_BASE_URL: ${{ secrets.OPENAI_BASE_URL }}
+        shell: bash
         run: |
-          python scripts/generate_monthly_summaries.py --output-root out
+          if ! python scripts/generate_monthly_summaries.py --output-root out --include-open-months --force; then
+            echo "OpenAI monthly summary regeneration failed; falling back to heuristic mode."
+            python scripts/generate_monthly_summaries.py --output-root out --mode heuristic --include-open-months --force
+          fi
 
       - name: Sync refreshed outputs into `auto_update`
         shell: bash

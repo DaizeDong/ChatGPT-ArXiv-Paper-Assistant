@@ -7,50 +7,15 @@ from arxiv_assistant.renderers.site_paths import (
     site_month_page_path,
 )
 
-HEADER_GRID_STYLE = (
-    "display: grid; "
-    "grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); "
-    "align-items: center; "
-    "width: 100%; "
-    "gap: 16px; "
-    "margin: 8px 0 20px;"
-)
+HEADER_SEPARATOR = "&nbsp;|&nbsp;"
 
 
-def _render_month_nav_cell(
-    href: str | None,
-    title: str,
-    subtitle: str,
-    arrow_html: str,
-    align: str,
-) -> str:
-    if href is None:
-        return '<div></div>'
+def _render_link(href: str, text: str) -> str:
+    return f'<a href="{href}">{text}</a>'
 
-    if align == "left":
-        return (
-            '<div style="display: flex; justify-content: flex-start;">'
-            f'<a href="{href}" style="display: inline-flex; align-items: center; gap: 10px; text-decoration: none;">'
-            f'<span style="font-size: 20px; line-height: 1; color: inherit;">{arrow_html}</span>'
-            '<span style="display: flex; flex-direction: column; align-items: flex-start; line-height: 1.25;">'
-            f'<strong style="display: block;">{title}</strong>'
-            f'<span style="display: block; font-size: 14px; color: gray;">{subtitle}</span>'
-            "</span>"
-            "</a>"
-            "</div>"
-        )
 
-    return (
-        '<div style="display: flex; justify-content: flex-end;">'
-        f'<a href="{href}" style="display: inline-flex; align-items: center; gap: 10px; text-decoration: none;">'
-        '<span style="display: flex; flex-direction: column; align-items: flex-end; text-align: right; line-height: 1.25;">'
-        f'<strong style="display: block;">{title}</strong>'
-        f'<span style="display: block; font-size: 14px; color: gray;">{subtitle}</span>'
-        "</span>"
-        f'<span style="font-size: 20px; line-height: 1; color: inherit;">{arrow_html}</span>'
-        "</a>"
-        "</div>"
-    )
+def _join_nav_parts(parts: list[str]) -> str:
+    return HEADER_SEPARATOR.join(part for part in parts if part)
 
 
 def _render_month_header(
@@ -73,26 +38,20 @@ def _render_month_header(
         else None
     )
 
-    return "".join(
+    line_one = _join_nav_parts(
         [
-            f'<div style="{HEADER_GRID_STYLE}">',
-            _render_month_nav_cell(
-                previous_href,
-                "Previous Month",
-                f"{previous_month[0]}-{previous_month[1]:02d}" if previous_month else "",
-                "&larr;",
-                "left",
-            ),
-            _render_month_nav_cell(
-                next_href,
-                "Next Month",
-                f"{next_month[0]}-{next_month[1]:02d}" if next_month else "",
-                "&rarr;",
-                "right",
-            ),
-            "</div>",
+            _render_link(previous_href, "&larr; Previous Month") if previous_href else "",
+            _render_link(next_href, "Next Month &rarr;") if next_href else "",
         ]
     )
+    line_two = _join_nav_parts(
+        [
+            _render_link(previous_href, f"{previous_month[0]}-{previous_month[1]:02d}") if previous_month else "",
+            _render_link(next_href, f"{next_month[0]}-{next_month[1]:02d}") if next_month else "",
+        ]
+    )
+
+    return f'<div align="center">{line_one}<br>{line_two}</div>'
 
 
 def render_content_table(

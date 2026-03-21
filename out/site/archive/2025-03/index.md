@@ -1,4 +1,4 @@
-<div style="display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: center; width: 100%; gap: 16px; margin: 8px 0 20px;"><div style="display: flex; justify-content: flex-start;"><a href="../2025-02" style="display: inline-flex; align-items: center; gap: 10px; text-decoration: none;"><span style="font-size: 20px; line-height: 1; color: inherit;">&larr;</span><span style="display: flex; flex-direction: column; align-items: flex-start; line-height: 1.25;"><strong style="display: block;">Previous Month</strong><span style="display: block; font-size: 14px; color: gray;">2025-02</span></span></a></div><div></div></div>
+<div align="center"><a href="../2025-02">&larr; Previous Month</a><br><a href="../2025-02">2025-02</a></div>
 
 # Personalized Monthly ArXiv Paper Summary 2025/03
 

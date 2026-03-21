@@ -27,6 +27,10 @@ jobs:
           python -m pip install --upgrade pip
           if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
 
+      - name: Refresh model pricing cache
+        run: |
+          python scripts/refresh_model_pricing.py --max-age-hours 24
+
       - name: Run main
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}

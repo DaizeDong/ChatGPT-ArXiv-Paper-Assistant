@@ -3,6 +3,7 @@
 ### 2026-03-21
 
 - Support multi-page rendering!
+- Support automatically integrating the latest models and prices from LiteLLM!
 
 ### 2025-10-16
 

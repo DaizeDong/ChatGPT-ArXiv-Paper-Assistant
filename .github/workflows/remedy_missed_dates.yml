@@ -1,0 +1,98 @@
+name: Remedy missed dates
+
+on:
+  workflow_dispatch:
+    inputs:
+      remedy_dates:
+        description: Comma-separated generation dates to remedy (YYYY-MM-DD)
+        required: true
+        default: 2026-03-13,2026-03-14,2026-03-16,2026-03-17,2026-03-18,2026-03-19,2026-03-20
+
+permissions:
+  contents: write
+
+jobs:
+  remedy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout `main` branch for code
+        uses: actions/checkout@v6
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Checkout `auto_update` branch for data
+        uses: actions/checkout@v6
+        with:
+          ref: auto_update
+          path: auto_update_data
+          fetch-depth: 0
+
+      - name: Restore generated outputs
+        shell: bash
+        run: |
+          rm -rf out
+          if [ -d "auto_update_data/out" ] && [ "$(ls -A auto_update_data/out)" ]; then
+            cp -R auto_update_data/out ./out
+            echo "Restored out/ from auto_update."
+          else
+            echo "auto_update_data/out is empty or missing."
+            exit 1
+          fi
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+
+      - name: Print inferred remedy plan
+        run: |
+          python scripts/remedy_missed_dates.py \
+            --dates "${{ inputs.remedy_dates }}" \
+            --output-root out \
+            --print-plan
+
+      - name: Remedy missed dates
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          OPENAI_BASE_URL: ${{ secrets.OPENAI_BASE_URL }}
+          S2_KEY: ${{ secrets.S2_KEY }}
+          SLACK_KEY: ${{ secrets.SLACK_KEY }}
+          SLACK_CHANNEL_ID: ${{ secrets.SLACK_CHANNEL_ID }}
+        run: |
+          python scripts/remedy_missed_dates.py \
+            --dates "${{ inputs.remedy_dates }}" \
+            --output-root out
+
+      - name: Regenerate monthly summaries
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          OPENAI_BASE_URL: ${{ secrets.OPENAI_BASE_URL }}
+        run: |
+          python scripts/generate_monthly_summaries.py --output-root out
+
+      - name: Sync refreshed outputs into `auto_update`
+        shell: bash
+        run: |
+          rm -rf auto_update_data/out
+          cp -R out auto_update_data/
+
+      - name: Commit and push refreshed outputs
+        shell: bash
+        run: |
+          cd auto_update_data
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add out/
+          if git diff --cached --quiet; then
+            echo "No changes detected in out/."
+            exit 0
+          fi
+          git commit -m "[skip ci] Remedy missed dates: ${{ inputs.remedy_dates }}"
+          git push origin HEAD:auto_update

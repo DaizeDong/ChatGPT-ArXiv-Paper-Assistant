@@ -21,6 +21,7 @@ export type RootIndexPayload = {
 export type TopicRef = {
   topic_id: string;
   slug: string;
+  headline: string;
   daily_route: string;
 };
 

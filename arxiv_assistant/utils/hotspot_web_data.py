@@ -100,6 +100,7 @@ def _topic_paths(date_str: str, topic: dict[str, Any]) -> dict[str, str]:
     return {
         "topic_id": str(topic.get("TOPIC_ID", "")).strip(),
         "slug": slug,
+        "headline": str(topic.get("HEADLINE") or topic.get("title") or slug).strip(),
         "daily_route": f"/hot/{date_str}/topic/{slug}/",
     }
 

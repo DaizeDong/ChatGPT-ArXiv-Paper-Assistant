@@ -100,7 +100,7 @@ def render_content_table(
     headers = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
 
     lines = [
-        '<table style="width: 100%; border-collapse: collapse; text-align: center;">',
+        '<table style="margin: 0 auto; border-collapse: collapse; text-align: center;">',
         "    <thead>",
         '        <tr><th colspan="7" style="padding: 8px 0;">'
         f"{now_year}/{now_month:02d}"

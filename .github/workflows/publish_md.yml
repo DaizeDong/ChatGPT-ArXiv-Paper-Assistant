@@ -76,45 +76,15 @@ jobs:
         run: |
           python -m arxiv_assistant.renderers.build_multipage_site
 
-      - name: Stage generated site
-        shell: bash
+      - name: Render static site
         run: |
-          if [ -d "out/site" ] && [ "$(ls -A out/site)" ]; then
-              echo "Contents in out/site:"
-              ls -R out/site
-              cp -R out/site/. .
-          else
-              echo "out/site directory is empty or does not exist. Aborting."
-              exit 1
-          fi
-
-      - name: Collect site markdown files
-        id: collect_files
-        shell: bash
-        run: |
-          {
-            echo 'files<<EOF'
-            find . -name 'index.md' \
-              -not -path './out/*' \
-              -not -path './auto_update_data/*' \
-              -not -path './.git/*' \
-              | sort \
-              | sed 's#^\./##'
-            echo EOF
-          } >> "$GITHUB_OUTPUT"
-
-      - name: Convert site markdown to pages
-        uses: wranders/markdown-to-pages-action@v1.1.2
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          custom_css: site.css
-          files: ${{ steps.collect_files.outputs.files }}
+          python -m arxiv_assistant.renderers.render_static_site --site-root out/site --dist-root dist --css-source site.css
 
       - name: Bust custom CSS cache
         shell: bash
         run: |
           find dist -name '*.html' -exec \
-            sed -i "s#custom\\.css\\([\"']\\)#custom.css?v=${GITHUB_SHA}\\1#g" {} +
+            sed -i "s#site\\.css\\([\"']\\)#site.css?v=${GITHUB_SHA}\\1#g" {} +
 
       - name: Copy static assets
         shell: bash

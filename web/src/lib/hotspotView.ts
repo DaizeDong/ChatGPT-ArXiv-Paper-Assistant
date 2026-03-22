@@ -1,0 +1,118 @@
+import type { SourceSection, SourceSectionItem } from "../types/hotspot";
+
+export type DensityMode = "compact" | "comfortable";
+export const SOURCE_FAMILY_LABELS: Record<string, string> = {
+  "x-buzz": "X / Buzz",
+  blogs: "Blogs / Newsletters",
+  official: "Official Updates",
+  papers: "Papers",
+  github: "GitHub / Tools",
+  discussions: "Discussions",
+};
+
+const SOURCE_ROLE_LABELS: Record<string, string> = {
+  builder_momentum: "Builder momentum",
+  editorial_depth: "Editorial depth",
+  headline_consensus: "Headline consensus",
+  product_launch: "Product launch",
+  paper_trending: "Paper trending",
+  github_trend: "GitHub trend",
+  hn_discussion: "HN discussion",
+  community_heat: "Community heat",
+  official_update: "Official update",
+};
+
+export function compactNumber(value: number) {
+  if (value >= 1000) {
+    return `${(value / 1000).toFixed(value >= 10000 ? 0 : 1)}k`;
+  }
+  return `${value}`;
+}
+
+export function formatSourceRole(sourceRole: string) {
+  return SOURCE_ROLE_LABELS[sourceRole] ?? sourceRole.replaceAll("_", " ");
+}
+
+export function primaryTopicRef(item: SourceSectionItem) {
+  return item.topic_refs[0] ?? null;
+}
+
+export function itemHeat(item: SourceSectionItem) {
+  if (item.signals.activity > 0) {
+    return { label: `activity ${compactNumber(item.signals.activity)}`, value: item.signals.activity };
+  }
+  if (item.signals.github_stars > 0) {
+    return { label: `stars ${compactNumber(item.signals.github_stars)}`, value: item.signals.github_stars };
+  }
+  if (item.signals.hn_score > 0) {
+    return { label: `HN ${compactNumber(item.signals.hn_score)}`, value: item.signals.hn_score };
+  }
+  if (item.signals.upvotes > 0) {
+    return { label: `upvotes ${compactNumber(item.signals.upvotes)}`, value: item.signals.upvotes };
+  }
+  if (item.signals.daily_score > 0) {
+    return { label: `daily ${compactNumber(item.signals.daily_score)}`, value: item.signals.daily_score };
+  }
+  return { label: "", value: 0 };
+}
+
+export function itemSignals(item: SourceSectionItem) {
+  const signals: string[] = [];
+  if (item.signals.activity > 0) {
+    signals.push(`activity ${compactNumber(item.signals.activity)}`);
+  }
+  if (item.signals.github_stars > 0) {
+    signals.push(`stars ${compactNumber(item.signals.github_stars)}`);
+  }
+  if (item.signals.hn_score > 0) {
+    signals.push(`HN ${compactNumber(item.signals.hn_score)}`);
+  }
+  if (item.signals.upvotes > 0) {
+    signals.push(`upvotes ${compactNumber(item.signals.upvotes)}`);
+  }
+  if (item.signals.daily_score > 0) {
+    signals.push(`daily ${compactNumber(item.signals.daily_score)}`);
+  }
+  return signals.slice(0, 3);
+}
+
+export function matchesSearch(item: SourceSectionItem, query: string) {
+  if (!query) {
+    return true;
+  }
+  const haystack = [
+    item.title,
+    item.summary_short,
+    item.source_name,
+    item.source_role,
+    item.source_type,
+    item.tags.join(" "),
+    item.topic_refs.map((topic) => topic.headline).join(" "),
+  ]
+    .join(" ")
+    .toLowerCase();
+  return haystack.includes(query);
+}
+
+export function filterSectionsBySearch(sections: SourceSection[], searchQuery: string) {
+  const query = searchQuery.trim().toLowerCase();
+  return sections
+    .map((section) => {
+      const filteredItems = section.items.filter((item) => matchesSearch(item, query));
+      return { ...section, filteredItems };
+    })
+    .filter((section) => section.filteredItems.length > 0);
+}
+
+export function defaultVisibleCount(section: SourceSection, density: DensityMode) {
+  const compactMap: Record<string, number> = {
+    "x-buzz": 16,
+    blogs: 18,
+    official: 10,
+    papers: 18,
+    github: 18,
+    discussions: 12,
+  };
+  const compactDefault = compactMap[section.slug] ?? 12;
+  return density === "compact" ? compactDefault : Math.max(8, compactDefault - 4);
+}

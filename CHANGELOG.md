@@ -1,5 +1,9 @@
 # Changelog
 
+### 2026-03-22
+
+- Added the Daily AI Hotspots pipeline, combining local selected papers, Hugging Face trending papers, roundup/news sites, official blogs, GitHub trends, and Hacker News discussions.
+
 ### 2026-03-21
 
 - Support multi-page rendering!

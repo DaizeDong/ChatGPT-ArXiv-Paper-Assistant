@@ -115,6 +115,8 @@ def render_daily_md_with_hyperlink(
     previous_asset_path: str | None = None,
     center_asset_path: str | None = None,
     next_asset_path: str | None = None,
+    related_page_path: str | None = None,
+    related_label: str = "Daily AI Hotspots",
     content_string: str = None,
     all_entries: List = None,
     arxiv_paper_dict: Dict[str, List[Paper]] = None,
@@ -148,7 +150,12 @@ def render_daily_md_with_hyperlink(
         center_asset_path,
         next_asset_path,
     )
-    return "\n\n".join([head_string, content_string])
+    parts = [head_string]
+    if related_page_path is not None:
+        related_href = relative_site_href(related_page_path, current_page_path)
+        parts.append(f'<div align="center" class="site-jump-links"><a href="{related_href}">{related_label}</a></div>')
+    parts.append(content_string)
+    return "\n\n".join(parts)
 
 
 if __name__ == "__main__":

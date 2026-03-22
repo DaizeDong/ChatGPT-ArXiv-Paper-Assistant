@@ -1,0 +1,13 @@
+Return JSONL only. Output exactly one JSON object per candidate cluster, one object per line:
+
+{"CLUSTER_ID":"...","KEEP":true,"WATCHLIST":false,"CATEGORY":"...","TITLE":"...","QUALITY":0,"HEAT":0,"IMPORTANCE":0,"SUMMARY":"...","WHY_IT_MATTERS":"..."}
+
+Rules:
+- CLUSTER_ID must exactly match the provided candidate cluster id.
+- TITLE should be a concise topic title, not a full article headline unless that is the clearest choice.
+- SUMMARY should be brief and concrete.
+- WHY_IT_MATTERS should state the main reason this topic matters today.
+- QUALITY, HEAT, and IMPORTANCE must be integers from 1 to 10.
+- Prefer KEEP only when the cluster has enough independent evidence or clearly stands out as a defining event.
+- If a cluster is only a single-source research or tooling signal, default to WATCHLIST unless it is unusually strong.
+- Do not output markdown, code fences, comments, or extra text.

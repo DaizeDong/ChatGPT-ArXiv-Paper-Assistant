@@ -2,6 +2,7 @@ import argparse
 import posixpath
 import re
 import shutil
+from urllib.parse import quote
 from pathlib import Path
 
 import markdown
@@ -20,6 +21,7 @@ HTML_TEMPLATE = """<!DOCTYPE html>
   <meta name="description" content="{description}">
   <meta name="color-scheme" content="light dark">
   <title>{title}</title>
+  <link rel="icon" type="image/svg+xml" href="{favicon_href}">
   <link rel="stylesheet" href="{css_href}">
 </head>
 <body>
@@ -62,6 +64,17 @@ TITLE_PATTERN = re.compile(r"^#\s+(.+)$", re.MULTILINE)
 USER_CONTENT_PREFIX_PATTERN = re.compile(r'((?:href|id)=")#user-content-')
 
 
+def _build_favicon_href() -> str:
+    svg = (
+        "<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'>"
+        "<rect width='64' height='64' rx='12' fill='%230969da'/>"
+        "<text x='32' y='42' text-anchor='middle' font-family='Arial, sans-serif' "
+        "font-size='34' fill='white'>A</text>"
+        "</svg>"
+    )
+    return f"data:image/svg+xml,{quote(svg)}"
+
+
 def _extract_title(markdown_text: str, fallback: str) -> str:
     match = TITLE_PATTERN.search(markdown_text)
     if match is None:
@@ -93,6 +106,7 @@ def _build_page_html(markdown_text: str, title: str, css_href: str) -> str:
     return HTML_TEMPLATE.format(
         title=title,
         description=SITE_DESCRIPTION,
+        favicon_href=_build_favicon_href(),
         css_href=css_href,
         content=_indent_html(_render_markdown(markdown_text)),
     )

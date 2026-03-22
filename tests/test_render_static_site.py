@@ -45,6 +45,8 @@ class RenderStaticSiteTests(unittest.TestCase):
 
             self.assertIn("<title>Home</title>", home_html)
             self.assertIn('href="../../../site.css"', daily_html)
+            self.assertIn('rel="icon"', daily_html)
+            self.assertIn('data:image/svg+xml,', daily_html)
             self.assertIn('href="#link1"', daily_html)
             self.assertIn('id="link1"', daily_html)
             self.assertIn("Toggle dark mode", daily_html)

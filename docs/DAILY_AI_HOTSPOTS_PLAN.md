@@ -12,7 +12,7 @@ Current branch: `test_news`
 | Phase 1 | `web_data` schema and JSON generation | completed |
 | Phase 2 | frontend scaffold and build chain | completed |
 | Phase 3 | source-first daily page | completed |
-| Phase 4 | source/topic detail pages | pending |
+| Phase 4 | source/topic detail pages | completed |
 | Phase 5 | month/year archive pages | pending |
 | Phase 6 | publish workflow migration | pending |
 

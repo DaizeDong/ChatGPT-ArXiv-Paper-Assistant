@@ -1,75 +1,15 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
+import { SignalRow } from "../components/SignalRow";
 import { loadDailyHotspot } from "../lib/data";
-import type { DailyHotspotPayload, SourceSection, SourceSectionItem } from "../types/hotspot";
+import { defaultVisibleCount, filterSectionsBySearch, type DensityMode } from "../lib/hotspotView";
+import type { DailyHotspotPayload, SourceSection } from "../types/hotspot";
 
 type AsyncState =
   | { status: "loading" }
   | { status: "error"; message: string }
   | { status: "ready"; payload: DailyHotspotPayload };
-
-type DensityMode = "compact" | "comfortable";
-
-function compactNumber(value: number) {
-  if (value >= 1000) {
-    return `${(value / 1000).toFixed(value >= 10000 ? 0 : 1)}k`;
-  }
-  return `${value}`;
-}
-
-function itemSignals(item: SourceSectionItem) {
-  const signals: string[] = [];
-  if (item.signals.activity > 0) {
-    signals.push(`activity ${compactNumber(item.signals.activity)}`);
-  }
-  if (item.signals.github_stars > 0) {
-    signals.push(`stars ${compactNumber(item.signals.github_stars)}`);
-  }
-  if (item.signals.hn_score > 0) {
-    signals.push(`HN ${compactNumber(item.signals.hn_score)}`);
-  }
-  if (item.signals.upvotes > 0) {
-    signals.push(`upvotes ${compactNumber(item.signals.upvotes)}`);
-  }
-  if (item.signals.daily_score > 0) {
-    signals.push(`daily ${compactNumber(item.signals.daily_score)}`);
-  }
-  return signals.slice(0, 3);
-}
-
-function matchesSearch(item: SourceSectionItem, query: string) {
-  if (!query) {
-    return true;
-  }
-  const haystack = [
-    item.title,
-    item.summary_short,
-    item.source_name,
-    item.source_role,
-    item.source_type,
-    item.tags.join(" "),
-    item.topic_refs.map((topic) => topic.slug).join(" "),
-  ]
-    .join(" ")
-    .toLowerCase();
-  return haystack.includes(query);
-}
-
-function filteredSections(sections: SourceSection[], searchQuery: string) {
-  const query = searchQuery.trim().toLowerCase();
-  return sections
-    .map((section) => {
-      const items = section.items.filter((item) => matchesSearch(item, query));
-      return { ...section, filteredItems: items };
-    })
-    .filter((section) => section.filteredItems.length > 0);
-}
-
-function defaultVisibleCount(section: SourceSection, density: DensityMode) {
-  const boosted = section.slug === "x-buzz" || section.slug === "blogs" ? 12 : 10;
-  return density === "compact" ? boosted : Math.max(8, boosted - 2);
-}
 
 function topicSummaryLimit(density: DensityMode) {
   return density === "compact" ? 18 : 12;
@@ -77,47 +17,6 @@ function topicSummaryLimit(density: DensityMode) {
 
 function sectionTitle(section: SourceSection) {
   return `${section.label} (${section.count})`;
-}
-
-function SignalRow({
-  date,
-  density,
-  item,
-}: {
-  date: string;
-  density: DensityMode;
-  item: SourceSectionItem;
-}) {
-  const signals = itemSignals(item);
-  const topicRefs = item.topic_refs.slice(0, density === "compact" ? 2 : 3);
-
-  return (
-    <article className={`signal-row ${density}`}>
-      <div className="signal-main">
-        <a className="signal-title" href={item.url} target="_blank" rel="noreferrer">
-          {item.title}
-        </a>
-        <div className="signal-meta">
-          <span>{item.source_name}</span>
-          <span>{item.source_role.replaceAll("_", " ")}</span>
-          <span>score {item.signal_score.toFixed(1)}</span>
-          {signals.map((signal) => (
-            <span key={signal}>{signal}</span>
-          ))}
-        </div>
-        {density === "comfortable" ? <p className="signal-summary">{item.summary_short}</p> : null}
-      </div>
-      {topicRefs.length > 0 ? (
-        <div className="signal-topics">
-          {topicRefs.map((topic) => (
-            <Link key={topic.topic_id} className="signal-topic-pill" to={`/hot/${date}/topic/${topic.slug}`}>
-              {topic.headline}
-            </Link>
-          ))}
-        </div>
-      ) : null}
-    </article>
-  );
 }
 
 export function DailyHotspotPage({ date }: { date: string }) {
@@ -153,7 +52,7 @@ export function DailyHotspotPage({ date }: { date: string }) {
   }
 
   const { payload } = state;
-  const visibleSections = filteredSections(payload.source_sections, searchQuery);
+  const visibleSections = filterSectionsBySearch(payload.source_sections, searchQuery);
   const visibleTopicSummary = payload.topic_summary.slice(0, topicSummaryLimit(density));
 
   return (

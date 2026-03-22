@@ -5,7 +5,7 @@ import { SignalRow } from "../components/SignalRow";
 import { loadDailyHotspot } from "../lib/data";
 import { bestPaperRoute } from "../lib/routes";
 import { findSourceSection } from "../lib/hotspotSelectors";
-import { defaultVisibleCount, type DensityMode } from "../lib/hotspotView";
+import { defaultVisibleCount } from "../lib/hotspotView";
 import type { DailyHotspotPayload } from "../types/hotspot";
 
 type AsyncState =
@@ -16,7 +16,6 @@ type AsyncState =
 export function SourceDetailPage() {
   const { date = "", sourceSlug = "" } = useParams();
   const [state, setState] = useState<AsyncState>({ status: "loading" });
-  const [density, setDensity] = useState<DensityMode>("compact");
   const [visibleCount, setVisibleCount] = useState(12);
 
   useEffect(() => {
@@ -38,8 +37,8 @@ export function SourceDetailPage() {
   }, [date]);
 
   useEffect(() => {
-    setVisibleCount(density === "compact" ? 12 : 10);
-  }, [density, sourceSlug]);
+    setVisibleCount(12);
+  }, [sourceSlug]);
 
   if (state.status === "loading") {
     return <section className="panel">Loading source detail...</section>;
@@ -94,34 +93,16 @@ export function SourceDetailPage() {
         </div>
         <div className="hero-grid dense-hero-grid">
           <div>
-            <p className="eyebrow">Source family detail</p>
+            <p className="eyebrow">Source view</p>
             <h1>{section.label}</h1>
-            <p className="lede tight-lede">{section.count} retained signals for {date}.</p>
+            <div className="summary-band compact-summary-band">
+              <span className="summary-chip">items {section.count}</span>
+              <span className="summary-chip">linked topics {linkedTopicCounts.size}</span>
+              <span className="summary-chip">day {date}</span>
+            </div>
           </div>
           <div className="hero-actions">
             <a className="inline-link" href={paperArchiveRoute}>Paper archive</a>
-            <div className="toggle-group" role="tablist" aria-label="Detail density">
-              <button className={density === "compact" ? "active" : ""} onClick={() => setDensity("compact")} type="button">
-                Compact
-              </button>
-              <button className={density === "comfortable" ? "active" : ""} onClick={() => setDensity("comfortable")} type="button">
-                Comfortable
-              </button>
-            </div>
-          </div>
-        </div>
-        <div className="summary-band">
-          <div>
-            <p className="stat-label">Items</p>
-            <p className="stat-value">{section.count}</p>
-          </div>
-          <div>
-            <p className="stat-label">Linked topics</p>
-            <p className="stat-value">{linkedTopicCounts.size}</p>
-          </div>
-          <div>
-            <p className="stat-label">Daily route</p>
-            <p className="stat-value">{date}</p>
           </div>
         </div>
       </section>
@@ -130,7 +111,7 @@ export function SourceDetailPage() {
         <section className="panel compact-panel">
           <div className="section-header">
             <div>
-              <h2>Most-linked topics in this source family</h2>
+              <h2>Linked topics</h2>
             </div>
           </div>
           <div className="topic-strip">
@@ -147,17 +128,17 @@ export function SourceDetailPage() {
       <section className="panel source-family-panel compact-panel">
         <div className="section-header">
           <div>
-            <h2>All {section.label} signals</h2>
+            <h2>{section.label} signals</h2>
           </div>
         </div>
-        <div className="signal-list">
-          {displayed.map((item) => (
-            <SignalRow date={date} density={density} item={item} key={item.id} />
-          ))}
-        </div>
+          <div className="signal-list">
+            {displayed.map((item) => (
+              <SignalRow date={date} density="compact" item={item} key={item.id} />
+            ))}
+          </div>
         {remaining > 0 ? (
-          <button className="show-more-button" onClick={() => setVisibleCount(visibleCount + defaultVisibleCount(section, density))} type="button">
-            Show {Math.min(defaultVisibleCount(section, density), remaining)} more from {section.label}
+          <button className="show-more-button" onClick={() => setVisibleCount(visibleCount + defaultVisibleCount(section, "compact"))} type="button">
+            Show {Math.min(defaultVisibleCount(section, "compact"), remaining)} more from {section.label}
           </button>
         ) : null}
       </section>

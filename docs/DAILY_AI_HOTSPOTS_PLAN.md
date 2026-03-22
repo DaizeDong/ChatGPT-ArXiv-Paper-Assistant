@@ -12,8 +12,8 @@ Current branch: `test_news`
 | Phase 1 | compress daily hotspot page into a thin source-first information feed inspired by AiNewsDaily | completed |
 | Phase 2 | rebalance section ordering and intra-section ranking for broad same-day coverage | completed |
 | Phase 3 | unify hotspot-paper navigation across day, month, year, source, and topic routes | completed |
-| Phase 4 | compress source/topic/month/year archive pages into compact scan-oriented views | in progress |
-| Phase 5 | final polish, local verification, and publish-ready build validation | pending |
+| Phase 4 | compress source/topic/month/year archive pages into compact scan-oriented views | completed |
+| Phase 5 | final polish, local verification, and publish-ready build validation | in progress |
 
 ## 1. Purpose
 
@@ -448,9 +448,9 @@ The redesign is not trying to:
 
 The next implementation slice should be:
 
-1. compress source, topic, month, and year views so they scan as quickly as the daily page
-2. remove leftover explanatory framing and oversized archive cards
-3. commit Phase 4
-4. then do the final preview/build validation pass
+1. remove the remaining extra controls and explanatory text from the daily hotspot shell
+2. rebuild the local preview from generated data and verify the main hotspot routes in-browser
+3. validate the publish-ready build chain one more time
+4. commit Phase 5
 
 That slice is the smallest step that locks the product direction before archive and ranking refinements.

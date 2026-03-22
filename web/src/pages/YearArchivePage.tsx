@@ -61,25 +61,12 @@ export function YearArchivePage({ year }: { year: string }) {
           <div>
             <p className="eyebrow">Yearly hotspot archive</p>
             <h1>{payload.year}</h1>
-            <p className="lede tight-lede">{payload.months.length} active months with retained hotspot coverage.</p>
-          </div>
-        </div>
-        <div className="summary-band">
-          <div>
-            <p className="stat-label">Days</p>
-            <p className="stat-value">{payload.totals.days}</p>
-          </div>
-          <div>
-            <p className="stat-label">Source items</p>
-            <p className="stat-value">{payload.totals.source_items}</p>
-          </div>
-          <div>
-            <p className="stat-label">Featured topics</p>
-            <p className="stat-value">{payload.totals.featured_topics}</p>
-          </div>
-          <div>
-            <p className="stat-label">Topic strip items</p>
-            <p className="stat-value">{payload.totals.topic_summary}</p>
+            <div className="summary-band compact-summary-band">
+              <span className="summary-chip">months {payload.months.length}</span>
+              <span className="summary-chip">days {payload.totals.days}</span>
+              <span className="summary-chip">items {payload.totals.source_items}</span>
+              <span className="summary-chip">featured {payload.totals.featured_topics}</span>
+            </div>
           </div>
         </div>
         <div className="section-chip-row">
@@ -98,28 +85,30 @@ export function YearArchivePage({ year }: { year: string }) {
             <h2>Monthly archive</h2>
           </div>
         </div>
-        <div className="archive-grid">
+        <div className="archive-row-list">
           {payload.months.map((monthRow) => (
-            <Link className="archive-card" key={monthRow.month} to={`/hot/${monthRow.month}`}>
-              <div className="archive-card-header">
-                <strong>{monthRow.month}</strong>
-                <span>{monthRow.days} days</span>
-              </div>
-              <div className="card-metrics">
-                <span>{monthRow.source_items} items</span>
-                <span>{monthRow.featured_topics} featured</span>
-                <span>{monthRow.topic_summary} topic-strip</span>
-              </div>
-              <div className="section-chip-row compact">
-                {Object.entries(monthRow.source_section_totals)
-                  .filter(([, count]) => count > 0)
-                  .slice(0, 4)
-                  .map(([slug, count]) => (
-                    <span className="section-chip" key={`${monthRow.month}-${slug}`}>
-                      <span>{SOURCE_FAMILY_LABELS[slug] ?? slug}</span>
-                      <strong>{count}</strong>
-                    </span>
-                  ))}
+            <Link className="archive-row-link" key={monthRow.month} to={`/hot/${monthRow.month}`}>
+              <div className="archive-row-main">
+                <div className="archive-row-header">
+                  <strong className="archive-row-title">{monthRow.month}</strong>
+                  <span>{monthRow.days} days</span>
+                </div>
+                <div className="archive-row-meta">
+                  <span>{monthRow.source_items} items</span>
+                  <span>{monthRow.featured_topics} featured</span>
+                  <span>{monthRow.topic_summary} topics</span>
+                </div>
+                <div className="section-chip-row compact">
+                  {Object.entries(monthRow.source_section_totals)
+                    .filter(([, count]) => count > 0)
+                    .slice(0, 4)
+                    .map(([slug, count]) => (
+                      <span className="section-chip" key={`${monthRow.month}-${slug}`}>
+                        <span>{SOURCE_FAMILY_LABELS[slug] ?? slug}</span>
+                        <strong>{count}</strong>
+                      </span>
+                    ))}
+                </div>
               </div>
             </Link>
           ))}

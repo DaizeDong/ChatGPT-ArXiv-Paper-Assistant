@@ -75,7 +75,14 @@ export function TopicDetailPage() {
           <div>
             <p className="eyebrow">{topic.category}</p>
             <h1>{topic.headline}</h1>
-            <p className="lede tight-lede">{topic.why_it_matters || topic.summary_short}</p>
+            <div className="summary-band compact-summary-band">
+              <span className="summary-chip">final {topic.scores.final.toFixed(1)}</span>
+              <span className="summary-chip">heat {topic.scores.heat.toFixed(1)}</span>
+              <span className="summary-chip">sources {topic.source_names.length}</span>
+              <span className="summary-chip">
+                evidence {supportingGroups.reduce((total, group) => total + group.items.length, 0)}
+              </span>
+            </div>
           </div>
           <div className="hero-actions">
             <a className="inline-link" href={paperArchiveRoute}>Paper archive</a>
@@ -87,26 +94,6 @@ export function TopicDetailPage() {
             </Link>
           </div>
         </div>
-
-        <div className="summary-band">
-          <div>
-            <p className="stat-label">Final score</p>
-            <p className="stat-value">{topic.scores.final.toFixed(1)}</p>
-          </div>
-          <div>
-            <p className="stat-label">Heat</p>
-            <p className="stat-value">{topic.scores.heat.toFixed(1)}</p>
-          </div>
-          <div>
-            <p className="stat-label">Sources</p>
-            <p className="stat-value">{topic.source_names.length}</p>
-          </div>
-          <div>
-            <p className="stat-label">Evidence items</p>
-            <p className="stat-value">{supportingGroups.reduce((total, group) => total + group.items.length, 0)}</p>
-          </div>
-        </div>
-
         <div className="section-chip-row">
           {topic.source_names.map((sourceName) => (
             <span className="section-chip" key={sourceName}>
@@ -120,14 +107,18 @@ export function TopicDetailPage() {
         <section className="panel compact-panel">
           <div className="section-header">
             <div>
-              <h2>Representative evidence</h2>
+              <h2>Evidence</h2>
             </div>
           </div>
-          <div className="featured-grid">
+          <div className="archive-row-list">
             {topic.evidence.map((evidence) => (
-              <a className="featured-card" href={evidence.url} key={evidence.url || evidence.title} target="_blank" rel="noreferrer">
-                <span className="card-kicker">{evidence.source_name}</span>
-                <strong>{evidence.title}</strong>
+              <a className="archive-row-link" href={evidence.url} key={evidence.url || evidence.title} target="_blank" rel="noreferrer">
+                <div className="archive-row-main">
+                  <strong className="archive-row-title">{evidence.title}</strong>
+                  <div className="archive-row-meta">
+                    <span>{evidence.source_name}</span>
+                  </div>
+                </div>
               </a>
             ))}
           </div>
@@ -148,7 +139,7 @@ export function TopicDetailPage() {
           </div>
           <div className="signal-list">
             {group.items.map((item) => (
-              <SignalRow date={date} density="comfortable" item={item} key={item.id} />
+              <SignalRow date={date} density="compact" item={item} key={item.id} />
             ))}
           </div>
         </section>
@@ -158,7 +149,7 @@ export function TopicDetailPage() {
         <section className="panel compact-panel">
           <div className="section-header">
             <div>
-              <h2>Related topics in the same category</h2>
+              <h2>Related topics</h2>
             </div>
           </div>
           <div className="topic-strip">

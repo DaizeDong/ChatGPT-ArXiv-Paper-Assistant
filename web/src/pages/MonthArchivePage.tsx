@@ -43,9 +43,6 @@ export function MonthArchivePage({ month }: { month: string }) {
   const sourceMix = Object.entries(payload.source_section_totals)
     .sort((left, right) => right[1] - left[1])
     .filter(([, count]) => count > 0);
-  const busiestDays = [...payload.days]
-    .sort((left, right) => right.source_items - left.source_items || right.featured_topics - left.featured_topics)
-    .slice(0, 6);
   const paperMonthRoute = bestPaperRoute(payload.paper_routes, ["month", "year", "home"]);
   const paperYearRoute = bestPaperRoute(payload.paper_routes, ["year", "home"]);
 
@@ -65,29 +62,16 @@ export function MonthArchivePage({ month }: { month: string }) {
           <div>
             <p className="eyebrow">Monthly hotspot archive</p>
             <h1>{payload.month}</h1>
-            <p className="lede tight-lede">Day-level hotspot coverage and source mix for this month.</p>
+            <div className="summary-band compact-summary-band">
+              <span className="summary-chip">days {payload.totals.days}</span>
+              <span className="summary-chip">items {payload.totals.source_items}</span>
+              <span className="summary-chip">featured {payload.totals.featured_topics}</span>
+              <span className="summary-chip">topics {payload.totals.topic_summary}</span>
+            </div>
           </div>
           <div className="hero-actions">
             <Link className="inline-link" to={`/hot/${payload.year}`}>Hot year</Link>
             <a className="inline-link" href={paperYearRoute}>Paper year</a>
-          </div>
-        </div>
-        <div className="summary-band">
-          <div>
-            <p className="stat-label">Days</p>
-            <p className="stat-value">{payload.totals.days}</p>
-          </div>
-          <div>
-            <p className="stat-label">Source items</p>
-            <p className="stat-value">{payload.totals.source_items}</p>
-          </div>
-          <div>
-            <p className="stat-label">Featured topics</p>
-            <p className="stat-value">{payload.totals.featured_topics}</p>
-          </div>
-          <div>
-            <p className="stat-label">Topic strip items</p>
-            <p className="stat-value">{payload.totals.topic_summary}</p>
           </div>
         </div>
         <div className="section-chip-row">
@@ -103,52 +87,33 @@ export function MonthArchivePage({ month }: { month: string }) {
       <section className="panel compact-panel">
         <div className="section-header">
           <div>
-            <h2>Busiest days</h2>
-          </div>
-        </div>
-        <div className="featured-grid">
-          {busiestDays.map((day) => (
-            <Link className="featured-card" key={day.date} to={`/hot/${day.date}`}>
-              <span className="card-kicker">{day.date}</span>
-              <strong>{day.summary}</strong>
-              <div className="card-metrics">
-                <span>{day.source_items} items</span>
-                <span>{day.featured_topics} featured</span>
-                <span>{day.topic_summary} topic-strip</span>
-              </div>
-            </Link>
-          ))}
-        </div>
-      </section>
-
-      <section className="panel compact-panel">
-        <div className="section-header">
-          <div>
             <h2>Daily archive</h2>
           </div>
         </div>
-        <div className="archive-grid">
+        <div className="archive-row-list">
           {payload.days.map((day) => (
-            <Link className="archive-card" key={day.date} to={`/hot/${day.date}`}>
-              <div className="archive-card-header">
-                <strong>{day.date}</strong>
-                <span>{day.source_items} items</span>
-              </div>
-              <p>{day.summary}</p>
-              <div className="card-metrics">
-                <span>{day.featured_topics} featured</span>
-                <span>{day.topic_summary} topic-strip</span>
-              </div>
-              <div className="section-chip-row compact">
-                {Object.entries(day.source_section_counts)
-                  .filter(([, count]) => count > 0)
-                  .slice(0, 4)
-                  .map(([slug, count]) => (
-                    <span className="section-chip" key={`${day.date}-${slug}`}>
-                      <span>{SOURCE_FAMILY_LABELS[slug] ?? slug}</span>
-                      <strong>{count}</strong>
-                    </span>
-                  ))}
+            <Link className="archive-row-link" key={day.date} to={`/hot/${day.date}`}>
+              <div className="archive-row-main">
+                <div className="archive-row-header">
+                  <strong className="archive-row-title">{day.date}</strong>
+                  <span>{day.source_items} items</span>
+                </div>
+                <p className="archive-row-summary">{day.summary}</p>
+                <div className="archive-row-meta">
+                  <span>{day.featured_topics} featured</span>
+                  <span>{day.topic_summary} topics</span>
+                </div>
+                <div className="section-chip-row compact">
+                  {Object.entries(day.source_section_counts)
+                    .filter(([, count]) => count > 0)
+                    .slice(0, 4)
+                    .map(([slug, count]) => (
+                      <span className="section-chip" key={`${day.date}-${slug}`}>
+                        <span>{SOURCE_FAMILY_LABELS[slug] ?? slug}</span>
+                        <strong>{count}</strong>
+                      </span>
+                    ))}
+                </div>
               </div>
             </Link>
           ))}

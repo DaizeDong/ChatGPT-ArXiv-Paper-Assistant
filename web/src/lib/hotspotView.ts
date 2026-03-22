@@ -1,6 +1,14 @@
 import type { SourceSection, SourceSectionItem } from "../types/hotspot";
 
 export type DensityMode = "compact" | "comfortable";
+export const SOURCE_FAMILY_LABELS: Record<string, string> = {
+  "x-buzz": "X / Buzz",
+  blogs: "Blogs / Newsletters",
+  official: "Official Updates",
+  papers: "Papers",
+  github: "GitHub / Tools",
+  discussions: "Discussions",
+};
 
 export function compactNumber(value: number) {
   if (value >= 1000) {

@@ -438,11 +438,16 @@ def _build_root_index(daily_payloads: list[dict[str, Any]]) -> dict[str, Any]:
 
 def _build_month_index(month: str, daily_payloads: list[dict[str, Any]]) -> dict[str, Any]:
     entries = []
+    source_section_totals: dict[str, int] = defaultdict(int)
+    total_featured_topics = 0
+    total_source_items = 0
+    total_topic_summary = 0
     for payload in daily_payloads:
         meta = payload.get("meta", {})
         if meta.get("month") != month:
             continue
         counts = meta.get("counts", {})
+        section_counts = payload.get("source_section_counts", {})
         entries.append(
             {
                 "date": meta.get("date"),
@@ -450,27 +455,44 @@ def _build_month_index(month: str, daily_payloads: list[dict[str, Any]]) -> dict
                 "featured_topics": int(counts.get("featured_topics", 0)),
                 "source_items": int(counts.get("source_items", 0)),
                 "topic_summary": int(counts.get("topic_summary", 0)),
-                "source_section_counts": payload.get("source_section_counts", {}),
+                "source_section_counts": section_counts,
                 "route": f"/hot/{meta.get('date')}/",
             }
         )
+        total_featured_topics += int(counts.get("featured_topics", 0))
+        total_source_items += int(counts.get("source_items", 0))
+        total_topic_summary += int(counts.get("topic_summary", 0))
+        for section_slug, section_count in section_counts.items():
+            source_section_totals[str(section_slug)] += int(section_count)
     entries.sort(key=lambda row: row["date"])
     return {
         "schema_version": 1,
         "month": month,
         "year": month[:4],
+        "totals": {
+            "days": len(entries),
+            "featured_topics": total_featured_topics,
+            "source_items": total_source_items,
+            "topic_summary": total_topic_summary,
+        },
+        "source_section_totals": dict(source_section_totals),
         "days": entries,
     }
 
 
 def _build_year_index(year: str, daily_payloads: list[dict[str, Any]]) -> dict[str, Any]:
     month_rollup: dict[str, dict[str, Any]] = {}
+    total_featured_topics = 0
+    total_source_items = 0
+    total_topic_summary = 0
+    source_section_totals: dict[str, int] = defaultdict(int)
     for payload in daily_payloads:
         meta = payload.get("meta", {})
         if meta.get("year") != year:
             continue
         month = str(meta.get("month", ""))
         counts = meta.get("counts", {})
+        section_counts = payload.get("source_section_counts", {})
         entry = month_rollup.setdefault(
             month,
             {
@@ -479,6 +501,7 @@ def _build_year_index(year: str, daily_payloads: list[dict[str, Any]]) -> dict[s
                 "featured_topics": 0,
                 "source_items": 0,
                 "topic_summary": 0,
+                "source_section_totals": defaultdict(int),
                 "route": f"/hot/{month}/",
             },
         )
@@ -486,10 +509,31 @@ def _build_year_index(year: str, daily_payloads: list[dict[str, Any]]) -> dict[s
         entry["featured_topics"] += int(counts.get("featured_topics", 0))
         entry["source_items"] += int(counts.get("source_items", 0))
         entry["topic_summary"] += int(counts.get("topic_summary", 0))
+        total_featured_topics += int(counts.get("featured_topics", 0))
+        total_source_items += int(counts.get("source_items", 0))
+        total_topic_summary += int(counts.get("topic_summary", 0))
+        for section_slug, section_count in section_counts.items():
+            entry["source_section_totals"][str(section_slug)] += int(section_count)
+            source_section_totals[str(section_slug)] += int(section_count)
+    month_rows = []
+    for row in month_rollup.values():
+        month_rows.append(
+            {
+                **row,
+                "source_section_totals": dict(row["source_section_totals"]),
+            }
+        )
     return {
         "schema_version": 1,
         "year": year,
-        "months": sorted(month_rollup.values(), key=lambda row: row["month"]),
+        "totals": {
+            "days": sum(row["days"] for row in month_rows),
+            "featured_topics": total_featured_topics,
+            "source_items": total_source_items,
+            "topic_summary": total_topic_summary,
+        },
+        "source_section_totals": dict(source_section_totals),
+        "months": sorted(month_rows, key=lambda row: row["month"]),
     }
 
 

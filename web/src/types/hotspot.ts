@@ -124,6 +124,13 @@ export type MonthIndexPayload = {
   schema_version: number;
   month: string;
   year: string;
+  totals: {
+    days: number;
+    featured_topics: number;
+    source_items: number;
+    topic_summary: number;
+  };
+  source_section_totals: Record<string, number>;
   days: Array<{
     date: string;
     summary: string;
@@ -138,12 +145,20 @@ export type MonthIndexPayload = {
 export type YearIndexPayload = {
   schema_version: number;
   year: string;
+  totals: {
+    days: number;
+    featured_topics: number;
+    source_items: number;
+    topic_summary: number;
+  };
+  source_section_totals: Record<string, number>;
   months: Array<{
     month: string;
     days: number;
     featured_topics: number;
     source_items: number;
     topic_summary: number;
+    source_section_totals: Record<string, number>;
     route: string;
   }>;
 };

@@ -192,8 +192,12 @@ class TestHotspotWebData(unittest.TestCase):
             self.assertEqual(len(root_index["dates"]), 2)
             self.assertEqual(month_index["month"], "2026-03")
             self.assertEqual(len(month_index["days"]), 2)
+            self.assertEqual(month_index["totals"]["days"], 2)
+            self.assertEqual(month_index["source_section_totals"]["x-buzz"], 2)
             self.assertEqual(year_index["year"], "2026")
             self.assertEqual(len(year_index["months"]), 1)
+            self.assertEqual(year_index["totals"]["days"], 2)
+            self.assertEqual(year_index["months"][0]["source_section_totals"]["x-buzz"], 2)
             self.assertEqual(latest_daily["meta"]["previous_date"], "2026-03-20")
 
 

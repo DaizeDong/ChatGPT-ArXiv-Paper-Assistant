@@ -13,7 +13,7 @@ Current branch: `test_news`
 | Phase 2 | frontend scaffold and build chain | completed |
 | Phase 3 | source-first daily page | completed |
 | Phase 4 | source/topic detail pages | completed |
-| Phase 5 | month/year archive pages | pending |
+| Phase 5 | month/year archive pages | completed |
 | Phase 6 | publish workflow migration | pending |
 
 ## 1. Purpose

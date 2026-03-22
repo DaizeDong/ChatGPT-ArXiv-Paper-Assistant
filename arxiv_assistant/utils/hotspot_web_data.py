@@ -17,24 +17,24 @@ SOURCE_FAMILIES = [
         "description": "Fast-moving social and community signal proxied through roundup and discussion sources.",
     },
     {
-        "slug": "blogs",
-        "label": "Blogs / Newsletters",
-        "description": "Curated roundup and newsletter coverage that helps track same-day narrative consensus.",
-    },
-    {
         "slug": "official",
         "label": "Official Updates",
         "description": "Product, research, and platform updates from official vendor or lab channels.",
     },
     {
-        "slug": "papers",
-        "label": "Papers",
-        "description": "Research papers and paper-trending signals tied to the current day.",
+        "slug": "blogs",
+        "label": "Blogs / Newsletters",
+        "description": "Curated roundup and newsletter coverage that helps track same-day narrative consensus.",
     },
     {
         "slug": "github",
         "label": "GitHub / Tools",
         "description": "Repositories, tooling launches, and builder momentum around practical AI systems.",
+    },
+    {
+        "slug": "papers",
+        "label": "Papers",
+        "description": "Research papers and paper-trending signals tied to the current day.",
     },
     {
         "slug": "discussions",
@@ -45,6 +45,30 @@ SOURCE_FAMILIES = [
 
 SOURCE_FAMILY_LOOKUP = {entry["slug"]: entry for entry in SOURCE_FAMILIES}
 SOURCE_FAMILY_ORDER = [entry["slug"] for entry in SOURCE_FAMILIES]
+SOURCE_FAMILY_ORDER_BOOST = {
+    "x-buzz": 2.5,
+    "official": 2.35,
+    "blogs": 2.0,
+    "github": 1.9,
+    "papers": 1.6,
+    "discussions": 1.4,
+}
+SOURCE_ROLE_ORDER_BOOST = {
+    "community_heat": 1.2,
+    "official_news": 1.15,
+    "headline_consensus": 0.9,
+    "editorial_depth": 0.95,
+    "builder_momentum": 0.8,
+    "github_trend": 0.95,
+    "research_backbone": 0.85,
+    "paper_trending": 0.8,
+    "hn_discussion": 0.7,
+}
+LLM_STATUS_ORDER_BOOST = {
+    "featured": 1.0,
+    "watchlist": 0.45,
+    "candidate": 0.0,
+}
 SOCIAL_HOST_SNIPPETS = ("x.com", "twitter.com", "reddit.com")
 BLOG_HOST_HINTS = ("rundown", "superhuman", "neuron", "smol.ai", "ben", "newsletter", "substack")
 GITHUB_HOSTS = ("github.com",)
@@ -201,15 +225,46 @@ def _item_signal_score(item: HotspotItem, topic_lookup: dict[str, dict[str, Any]
     score += min(1.8, float(metadata.get("daily_score", metadata.get("score", 0)) or 0) / 10.0)
 
     linked_scores = []
+    linked_occurrence = []
+    linked_sources = []
+    linked_statuses = []
     canonical = item.canonical_url or item.url
     if canonical and canonical in topic_lookup:
-        linked_scores.append(_topic_score(topic_lookup[canonical], "DISPLAY_PRIORITY"))
+        linked_topic = topic_lookup[canonical]
+        linked_scores.append(_topic_score(linked_topic, "DISPLAY_PRIORITY"))
+        linked_occurrence.append(_topic_score(linked_topic, "OCCURRENCE_SCORE"))
+        linked_sources.append(len(linked_topic.get("source_names", [])))
+        linked_statuses.append(str(linked_topic.get("LLM_STATUS", "candidate")))
     title_key = item.title.lower()
     if title_key and title_key in topic_lookup:
-        linked_scores.append(_topic_score(topic_lookup[title_key], "DISPLAY_PRIORITY"))
+        linked_topic = topic_lookup[title_key]
+        linked_scores.append(_topic_score(linked_topic, "DISPLAY_PRIORITY"))
+        linked_occurrence.append(_topic_score(linked_topic, "OCCURRENCE_SCORE"))
+        linked_sources.append(len(linked_topic.get("source_names", [])))
+        linked_statuses.append(str(linked_topic.get("LLM_STATUS", "candidate")))
     if linked_scores:
-        score += min(3.0, max(linked_scores))
+        score += min(3.0, max(linked_scores) * 0.45)
+        score += min(1.5, max(linked_occurrence, default=0.0) * 0.18)
+        score += min(1.2, max(linked_sources, default=0) * 0.4)
+        score += max(LLM_STATUS_ORDER_BOOST.get(status, 0.0) for status in linked_statuses)
+    score += SOURCE_ROLE_ORDER_BOOST.get(item.source_role, 0.0)
     return round(score, 3)
+
+
+def _section_signal_score(section_slug: str, items: list[dict[str, Any]]) -> float:
+    if not items:
+        return -1.0
+    top_items = items[: min(4, len(items))]
+    avg_signal = sum(float(item.get("signal_score", 0.0)) for item in top_items) / len(top_items)
+    unique_topics = {
+        topic_ref.get("topic_id")
+        for item in items[:12]
+        for topic_ref in item.get("topic_refs", [])
+        if topic_ref.get("topic_id")
+    }
+    topic_bonus = min(1.8, len(unique_topics) * 0.18)
+    count_bonus = min(2.0, len(items) / 8.0)
+    return round(avg_signal + topic_bonus + count_bonus + SOURCE_FAMILY_ORDER_BOOST.get(section_slug, 1.0), 3)
 
 
 def _build_topic_lookup(report: dict[str, Any]) -> tuple[dict[str, dict[str, Any]], list[dict[str, Any]]]:
@@ -242,16 +297,50 @@ def _build_topic_lookup(report: dict[str, Any]) -> tuple[dict[str, dict[str, Any
 
 
 def _build_topic_summary(topics: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    def topic_summary_rank(topic: dict[str, Any]) -> float:
+        source_count = len(topic.get("source_names", []))
+        source_type_count = len(topic.get("source_types", []))
+        roles = set(topic.get("source_roles", []))
+        llm_status = str(topic.get("LLM_STATUS") or ("featured" if topic.get("KEEP_IN_DAILY_HOTSPOTS") else "watchlist" if topic.get("WATCHLIST") else "candidate"))
+        isolated_paper_penalty = 0.0
+        if roles and roles.issubset({"research_backbone", "paper_trending"}) and source_count <= 1:
+            isolated_paper_penalty = 1.4
+        community_bonus = 0.0
+        if roles & {"community_heat", "headline_consensus", "official_news", "hn_discussion"}:
+            community_bonus = 0.8
+        return round(
+            0.34 * _topic_score(topic, "DISPLAY_PRIORITY")
+            + 0.22 * _topic_score(topic, "OCCURRENCE_SCORE")
+            + 0.14 * _topic_score(topic, "FINAL_SCORE")
+            + min(2.0, source_count * 0.7)
+            + min(0.8, max(source_type_count - 1, 0) * 0.4)
+            + LLM_STATUS_ORDER_BOOST.get(llm_status, 0.0)
+            + community_bonus
+            - isolated_paper_penalty,
+            3,
+        )
+
     ordered = sorted(
         topics,
         key=lambda topic: (
-            _topic_score(topic, "DISPLAY_PRIORITY"),
-            _topic_score(topic, "FINAL_SCORE"),
             _topic_score(topic, "OCCURRENCE_SCORE"),
-            _topic_score(topic, "HEAT"),
+            topic_summary_rank(topic),
+            _topic_score(topic, "DISPLAY_PRIORITY"),
         ),
         reverse=True,
     )
+    preferred = []
+    fallback = []
+    for topic in ordered:
+        roles = set(topic.get("source_roles", []))
+        source_count = len(topic.get("source_names", []))
+        has_non_paper_signal = bool(roles - {"research_backbone", "paper_trending"})
+        category = str(topic.get("PRIMARY_CATEGORY", "Research"))
+        if source_count >= 2 or has_non_paper_signal or category in {"Tooling", "Product Release", "Industry Update", "Community Signal"}:
+            preferred.append(topic)
+        else:
+            fallback.append(topic)
+    ordered = preferred + fallback
     summary = []
     for topic in ordered:
         summary.append(
@@ -354,6 +443,7 @@ def _build_source_sections(raw_items: list[HotspotItem], report: dict[str, Any],
             grouped.get(family, []),
             key=lambda row: (
                 row["signal_score"],
+                len(row["topic_refs"]),
                 row["published_at"] or "",
                 row["title"].lower(),
             ),
@@ -366,6 +456,7 @@ def _build_source_sections(raw_items: list[HotspotItem], report: dict[str, Any],
                 "label": entry["label"],
                 "description": entry["description"],
                 "count": len(items),
+                "section_score": _section_signal_score(family, items),
                 "items": items,
             }
         )

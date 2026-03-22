@@ -10,8 +10,8 @@ Current branch: `test_news`
 | --- | --- | --- |
 | Baseline | existing React-based hotspot frontend after markdown removal | completed |
 | Phase 1 | compress daily hotspot page into a thin source-first information feed inspired by AiNewsDaily | completed |
-| Phase 2 | rebalance section ordering and intra-section ranking for broad same-day coverage | in progress |
-| Phase 3 | unify hotspot-paper navigation across day, month, year, source, and topic routes | pending |
+| Phase 2 | rebalance section ordering and intra-section ranking for broad same-day coverage | completed |
+| Phase 3 | unify hotspot-paper navigation across day, month, year, source, and topic routes | in progress |
 | Phase 4 | compress source/topic/month/year archive pages into compact scan-oriented views | pending |
 | Phase 5 | final polish, local verification, and publish-ready build validation | pending |
 
@@ -448,9 +448,9 @@ The redesign is not trying to:
 
 The next implementation slice should be:
 
-1. rebalance section ordering and intra-section ranking
-2. validate that the default daily page covers more of the day without feeling noisy
-3. commit Phase 2
-4. then finish the historical navigation layer
+1. finish the hotspot-paper navigation layer across day, month, year, source, and topic routes
+2. validate route fallbacks against local archive availability
+3. commit Phase 3
+4. then compress the archive and detail views
 
 That slice is the smallest step that locks the product direction before archive and ranking refinements.

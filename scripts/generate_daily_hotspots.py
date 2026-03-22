@@ -39,6 +39,9 @@ ROLE_PRIORITY = {
 }
 APP_TIMEZONE = ZoneInfo("America/New_York")
 DAY_OUTPUT_PATTERN = re.compile(r"(?P<year>\d{4})-(?P<month>\d{2})-(?P<day>\d{2})-output\.json$")
+SOCIAL_PRIMARY_ROLES = {"community_heat"}
+SOCIAL_BACKFILL_ROLES = {"headline_consensus", "builder_momentum", "hn_discussion"}
+SOCIAL_HOST_SNIPPETS = ("x.com", "twitter.com", "reddit.com", "news.ycombinator.com")
 
 
 def parse_args() -> argparse.Namespace:
@@ -187,12 +190,113 @@ def render_hot_daily_md(report: dict[str, Any]) -> str:
                     lines.append(f"- {title} ({source})")
             lines.append("")
 
+    x_buzz = report.get("x_buzz") or []
+    if x_buzz:
+        lines.extend(["## X Buzz", "", "Proxy social signal collected from roundup and community sources.", ""])
+        for item in x_buzz:
+            title = item.get("title", "Untitled")
+            url = item.get("url", "")
+            source = item.get("source_name", item.get("source_id", "source"))
+            linked_topic = item.get("linked_topic", "")
+            summary = item.get("summary", "").strip()
+            if url:
+                lines.append(f"- [{title}]({url}) ({source})")
+            else:
+                lines.append(f"- {title} ({source})")
+            if linked_topic:
+                lines.append(f"  - Linked topic: {linked_topic}")
+            if summary:
+                lines.append(f"  - {summary}")
+        lines.append("")
+
     watchlist = report.get("watchlist") or []
     if watchlist:
         lines.extend(["## Watchlist", ""])
         for topic in watchlist:
             lines.append(f"- **{topic.get('title', 'Untitled Topic')}**: {topic.get('WHY_IT_MATTERS', '').strip() or topic.get('summary', '').strip()}")
     return "\n".join(lines).rstrip() + "\n"
+
+
+def _x_buzz_item_score(item: HotspotItem, linked_topic: str) -> float:
+    score = 0.0
+    if item.source_role in SOCIAL_PRIMARY_ROLES:
+        score += 6.0
+    elif item.source_role in SOCIAL_BACKFILL_ROLES:
+        score += 3.5
+    metadata = item.metadata or {}
+    score += min(4.0, float(metadata.get("activity", 0) or 0) / 250.0)
+    score += min(3.0, float(metadata.get("hn_score", 0) or 0) / 80.0)
+    host = str(metadata.get("host", "") or item.url or "").lower()
+    if any(snippet in host for snippet in SOCIAL_HOST_SNIPPETS):
+        score += 1.2
+    if linked_topic:
+        score += 2.5
+    return score
+
+
+def _build_x_buzz_items(
+    raw_items: list[HotspotItem],
+    top_topics: list[dict[str, Any]],
+    watchlist: list[dict[str, Any]],
+    *,
+    target_count: int = 5,
+    min_count: int = 3,
+) -> list[dict[str, Any]]:
+    topic_lookup: dict[str, str] = {}
+    for topic in top_topics + watchlist:
+        topic_title = topic.get("HEADLINE") or topic.get("title") or ""
+        for item in topic.get("items", []):
+            url = str(item.get("url", "")).strip()
+            title = str(item.get("title", "")).strip().lower()
+            if url:
+                topic_lookup[url] = topic_title
+            if title:
+                topic_lookup[title] = topic_title
+
+    primary_candidates: list[tuple[float, dict[str, Any]]] = []
+    backfill_candidates: list[tuple[float, dict[str, Any]]] = []
+    seen_keys: set[tuple[str, str]] = set()
+
+    for item in raw_items:
+        if item.source_role not in SOCIAL_PRIMARY_ROLES | SOCIAL_BACKFILL_ROLES:
+            continue
+        url_key = item.url.strip()
+        title_key = item.title.strip().lower()
+        dedupe_key = (url_key, title_key)
+        if dedupe_key in seen_keys:
+            continue
+        seen_keys.add(dedupe_key)
+        linked_topic = topic_lookup.get(url_key) or topic_lookup.get(title_key, "")
+        payload = {
+            "title": item.title,
+            "summary": item.summary,
+            "url": item.url,
+            "source_id": item.source_id,
+            "source_name": item.source_name,
+            "source_role": item.source_role,
+            "linked_topic": linked_topic,
+        }
+        ranked = (_x_buzz_item_score(item, linked_topic), payload)
+        if item.source_role in SOCIAL_PRIMARY_ROLES:
+            primary_candidates.append(ranked)
+        else:
+            backfill_candidates.append(ranked)
+
+    selected: list[dict[str, Any]] = []
+    for _, payload in sorted(primary_candidates, key=lambda row: row[0], reverse=True):
+        selected.append(payload)
+        if len(selected) >= target_count:
+            return selected
+
+    if len(selected) < min_count:
+        for _, payload in sorted(backfill_candidates, key=lambda row: row[0], reverse=True):
+            if any(existing["url"] == payload["url"] and existing["title"] == payload["title"] for existing in selected):
+                continue
+            selected.append(payload)
+            if len(selected) >= target_count:
+                break
+
+    return selected[:target_count]
 
 
 def fetch_source_payloads(target_date: datetime, output_root: Path, config: configparser.ConfigParser, force: bool) -> tuple[list[HotspotItem], dict[str, int]]:
@@ -392,6 +496,16 @@ def _is_paper_heavy(topic: dict[str, Any]) -> bool:
     return bool(roles) and roles.issubset({"research_backbone", "paper_trending"})
 
 
+def _is_isolated_research_topic(topic: dict[str, Any]) -> bool:
+    roles = set(topic.get("source_roles", []))
+    return (
+        bool(roles)
+        and roles.issubset({"research_backbone", "paper_trending"})
+        and len(topic.get("source_names", [])) <= 1
+        and len(topic.get("source_ids", [])) <= 1
+    )
+
+
 def _topic_sort_key(topic: dict[str, Any]) -> tuple[float, float, float, float, float]:
     return (
         float(topic.get("FINAL_SCORE", 0.0)),
@@ -408,6 +522,7 @@ def _diverse_select(candidates: list[dict[str, Any]], limit: int, max_per_catego
     source_counts: dict[str, int] = {}
     bucket_counts: dict[str, int] = {}
     paper_heavy_count = 0
+    isolated_research_count = 0
     bucket_caps = {"research": 3, "official": 2, "community": 2, "tooling": 2}
 
     for topic in sorted(candidates, key=_topic_sort_key, reverse=True):
@@ -422,12 +537,16 @@ def _diverse_select(candidates: list[dict[str, Any]], limit: int, max_per_catego
             continue
         if _is_paper_heavy(topic) and paper_heavy_count >= 2:
             continue
+        if _is_isolated_research_topic(topic) and isolated_research_count >= 1:
+            continue
         selected.append(topic)
         category_counts[category] = category_counts.get(category, 0) + 1
         source_counts[source] = source_counts.get(source, 0) + 1
         bucket_counts[bucket] = bucket_counts.get(bucket, 0) + 1
         if _is_paper_heavy(topic):
             paper_heavy_count += 1
+        if _is_isolated_research_topic(topic):
+            isolated_research_count += 1
         if len(selected) >= limit:
             return selected
     return selected
@@ -544,6 +663,7 @@ def generate_daily_hotspot_report(output_root: str | Path, target_date: datetime
     summary, digest_prompt_cost, digest_completion_cost = apply_digest_synthesis(kept, watchlist, system_prompt, digest_prompt, config, effective_mode)
     prompt_cost += digest_prompt_cost
     completion_cost += digest_completion_cost
+    x_buzz = _build_x_buzz_items(raw_items, kept, watchlist)
 
     report = {
         "date": date_string(target_date),
@@ -554,6 +674,7 @@ def generate_daily_hotspot_report(output_root: str | Path, target_date: datetime
         "totals": {"raw_items": len(raw_items), "clusters": len(clusters), "candidate_clusters": len(candidate_clusters)},
         "costs": {"prompt": round(prompt_cost, 6), "completion": round(completion_cost, 6), "total": round(prompt_cost + completion_cost, 6)},
         "top_topics": kept,
+        "x_buzz": x_buzz,
         "watchlist": watchlist,
     }
 

@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import configparser
 import tempfile
 import unittest
 from datetime import UTC, datetime
@@ -14,7 +15,7 @@ from arxiv_assistant.apis.hotspot_official_blogs import _extract_anthropic_rows
 from arxiv_assistant.filters.filter_hotspots import _cluster_signal_scores
 from arxiv_assistant.utils.hotspot_cluster import build_hotspot_clusters
 from arxiv_assistant.utils.hotspot_schema import HotspotCluster, HotspotItem
-from scripts.generate_daily_hotspots import detect_latest_local_output_date
+from scripts.generate_daily_hotspots import _build_x_buzz_items, _trim_topics, detect_latest_local_output_date
 
 
 class TestHotspotPipeline(unittest.TestCase):
@@ -118,6 +119,36 @@ class TestHotspotPipeline(unittest.TestCase):
             url="https://opencode.ai",
             canonical_url="https://opencode.ai",
             published_at="2026-03-20T12:30:00+00:00",
+        )
+
+        clusters = build_hotspot_clusters([left, right])
+
+        self.assertEqual(len(clusters), 2)
+
+    def test_cluster_does_not_merge_different_papers_with_similar_task_titles(self) -> None:
+        left = HotspotItem(
+            source_id="hf_papers",
+            source_name="HF",
+            source_role="paper_trending",
+            source_type="paper",
+            title="PaddleOCR-VL: Boosting Multilingual Document Parsing via a 0.9B Ultra-Compact Vision-Language Model",
+            summary="Document parsing paper.",
+            url="https://huggingface.co/papers/2510.14528",
+            canonical_url="https://arxiv.org/abs/2510.14528",
+            published_at="2026-03-20T12:00:00+00:00",
+            metadata={"arxiv_id": "2510.14528"},
+        )
+        right = HotspotItem(
+            source_id="hf_papers",
+            source_name="HF",
+            source_role="paper_trending",
+            source_type="paper",
+            title="MinerU2.5: A Decoupled Vision-Language Model for Efficient High-Resolution Document Parsing",
+            summary="Another document parsing paper.",
+            url="https://huggingface.co/papers/2509.22186",
+            canonical_url="https://arxiv.org/abs/2509.22186",
+            published_at="2026-03-20T12:30:00+00:00",
+            metadata={"arxiv_id": "2509.22186"},
         )
 
         clusters = build_hotspot_clusters([left, right])
@@ -239,6 +270,136 @@ class TestHotspotPipeline(unittest.TestCase):
 
             self.assertIsNotNone(detected)
             self.assertEqual(detected.strftime("%Y-%m-%d"), "2026-03-21")
+
+    def test_trim_topics_limits_isolated_research_slots(self) -> None:
+        config = configparser.ConfigParser()
+        config["HOTSPOTS"] = {
+            "target_topics": "4",
+            "min_topics": "3",
+            "target_watchlist_topics": "2",
+        }
+        top_topics = [
+            {
+                "TOPIC_ID": "research-a",
+                "PRIMARY_CATEGORY": "Research",
+                "source_roles": ["paper_trending"],
+                "source_names": ["Hugging Face Trending Papers"],
+                "source_ids": ["hf_papers"],
+                "FINAL_SCORE": 8.2,
+                "EVIDENCE_STRENGTH": 4.0,
+                "CROSS_SOURCE_RESONANCE": 3.0,
+                "QUALITY": 8,
+                "HEAT": 6,
+                "IMPORTANCE": 7,
+                "WATCHLIST": False,
+            },
+            {
+                "TOPIC_ID": "research-b",
+                "PRIMARY_CATEGORY": "Research",
+                "source_roles": ["paper_trending"],
+                "source_names": ["Hugging Face Trending Papers"],
+                "source_ids": ["hf_papers"],
+                "FINAL_SCORE": 7.9,
+                "EVIDENCE_STRENGTH": 3.8,
+                "CROSS_SOURCE_RESONANCE": 2.8,
+                "QUALITY": 8,
+                "HEAT": 5,
+                "IMPORTANCE": 6,
+                "WATCHLIST": False,
+            },
+            {
+                "TOPIC_ID": "community-a",
+                "PRIMARY_CATEGORY": "Community Signal",
+                "source_roles": ["community_heat", "headline_consensus"],
+                "source_names": ["AINews", "The Rundown AI"],
+                "source_ids": ["ainews", "the_rundown_ai"],
+                "FINAL_SCORE": 7.1,
+                "EVIDENCE_STRENGTH": 6.2,
+                "CROSS_SOURCE_RESONANCE": 6.5,
+                "QUALITY": 6,
+                "HEAT": 8,
+                "IMPORTANCE": 6,
+                "WATCHLIST": False,
+            },
+            {
+                "TOPIC_ID": "tooling-a",
+                "PRIMARY_CATEGORY": "Tooling",
+                "source_roles": ["github_trend"],
+                "source_names": ["GitHub Trending Repos"],
+                "source_ids": ["github_trend"],
+                "FINAL_SCORE": 6.9,
+                "EVIDENCE_STRENGTH": 5.5,
+                "CROSS_SOURCE_RESONANCE": 4.2,
+                "QUALITY": 6,
+                "HEAT": 6,
+                "IMPORTANCE": 6,
+                "WATCHLIST": False,
+            },
+        ]
+
+        selected, watchlist = _trim_topics(top_topics, [], config)
+
+        self.assertEqual(len(selected), 3)
+        self.assertIn("research-a", {topic["TOPIC_ID"] for topic in selected})
+        self.assertNotIn("research-b", {topic["TOPIC_ID"] for topic in selected})
+        self.assertIn("community-a", {topic["TOPIC_ID"] for topic in selected})
+        self.assertIn("tooling-a", {topic["TOPIC_ID"] for topic in selected})
+        self.assertEqual(watchlist, [])
+
+    def test_x_buzz_prefers_social_proxy_and_backfills_when_needed(self) -> None:
+        raw_items = [
+            HotspotItem(
+                source_id="ainews",
+                source_name="AINews",
+                source_role="community_heat",
+                source_type="roundup",
+                title="Cursor's new Composer 2 just beat Claude Opus at coding and it's 10x cheaper",
+                summary="AINews social buzz item.",
+                url="https://www.reddit.com/r/DeepSeek/comments/example1",
+                canonical_url="https://www.reddit.com/r/DeepSeek/comments/example1",
+                published_at="2026-03-21T00:00:00+00:00",
+                metadata={"activity": 900, "host": "reddit.com"},
+            ),
+            HotspotItem(
+                source_id="the_rundown_ai",
+                source_name="The Rundown AI",
+                source_role="headline_consensus",
+                source_type="roundup",
+                title="OpenAI quietly expands enterprise agent workflows",
+                summary="Rundown item.",
+                url="https://www.rundown.ai/openai-enterprise-agent-workflows",
+                canonical_url="https://www.rundown.ai/openai-enterprise-agent-workflows",
+                published_at="2026-03-21T00:00:00+00:00",
+                metadata={},
+            ),
+            HotspotItem(
+                source_id="hn_discussion",
+                source_name="Hacker News",
+                source_role="hn_discussion",
+                source_type="discussion",
+                title="ArXiv declares independence from Cornell",
+                summary="HN discussion.",
+                url="https://www.science.org/content/article/arxiv-pioneering-preprint-server-declares-independence-cornell",
+                canonical_url="https://www.science.org/content/article/arxiv-pioneering-preprint-server-declares-independence-cornell",
+                published_at="2026-03-21T00:00:00+00:00",
+                metadata={"hn_score": 120},
+            ),
+        ]
+        top_topics = [
+            {
+                "TOPIC_ID": "cursor",
+                "HEADLINE": "Cursor controversy",
+                "items": [{"title": raw_items[0].title, "url": raw_items[0].url}],
+            }
+        ]
+
+        x_buzz = _build_x_buzz_items(raw_items, top_topics, [], target_count=3, min_count=3)
+
+        self.assertEqual(len(x_buzz), 3)
+        self.assertEqual(x_buzz[0]["source_id"], "ainews")
+        self.assertEqual(x_buzz[0]["linked_topic"], "Cursor controversy")
+        self.assertIn("the_rundown_ai", {item["source_id"] for item in x_buzz})
+        self.assertIn("hn_discussion", {item["source_id"] for item in x_buzz})
 
 
 if __name__ == "__main__":

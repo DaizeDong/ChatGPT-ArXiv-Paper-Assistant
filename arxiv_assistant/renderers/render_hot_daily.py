@@ -46,6 +46,25 @@ def render_hot_daily_md(report: dict[str, Any]) -> str:
             lines.extend(f"- {takeaway}" for takeaway in takeaways if takeaway)
             lines.append("")
 
+    x_buzz = report.get("x_buzz") or []
+    if x_buzz:
+        lines.extend(["## X Buzz", "", "Proxy social signal collected from roundup and community sources.", ""])
+        for item in x_buzz:
+            title = item.get("title", "Untitled item")
+            source = item.get("source_name", item.get("source_id", "source"))
+            url = item.get("url", "")
+            linked_topic = item.get("linked_topic", "")
+            summary = item.get("summary", "").strip()
+            if url:
+                lines.append(f"- [{title}]({url}) ({source})")
+            else:
+                lines.append(f"- {title} ({source})")
+            if linked_topic:
+                lines.append(f"  - Linked topic: {linked_topic}")
+            if summary:
+                lines.append(f"  - {summary}")
+        lines.append("")
+
     if report.get("watchlist"):
         lines.extend(["## Watchlist", ""])
         for topic in report["watchlist"]:

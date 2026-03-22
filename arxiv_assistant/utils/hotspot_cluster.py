@@ -75,6 +75,8 @@ SOURCE_ROLE_WEIGHTS = {
     "hn_discussion": 3.0,
 }
 
+PAPER_LIKE_SOURCE_TYPES = {"paper"}
+
 
 def canonicalize_url(url: str) -> str:
     if "arxiv.org/abs/" in url:
@@ -123,6 +125,10 @@ def title_overlap_boost(left: str, right: str) -> float:
     return 0.0
 
 
+def _is_paper_like(item: HotspotItem) -> bool:
+    return item.source_type in PAPER_LIKE_SOURCE_TYPES or bool(str(item.metadata.get("arxiv_id", "")).strip())
+
+
 def _cluster_match_score(item: HotspotItem, cluster_seed: HotspotItem) -> float:
     if item.canonical_url and item.canonical_url == cluster_seed.canonical_url:
         return 1.0
@@ -134,6 +140,8 @@ def _cluster_match_score(item: HotspotItem, cluster_seed: HotspotItem) -> float:
     right_repo = canonicalize_url(str(cluster_seed.metadata.get("github_url", "") or cluster_seed.url or ""))
     if left_repo and right_repo and left_repo == right_repo and "github.com" in left_repo:
         return 1.0
+    if _is_paper_like(item) and _is_paper_like(cluster_seed):
+        return 0.0
     return max(title_similarity(item.title, cluster_seed.title), title_overlap_boost(item.title, cluster_seed.title))
 
 

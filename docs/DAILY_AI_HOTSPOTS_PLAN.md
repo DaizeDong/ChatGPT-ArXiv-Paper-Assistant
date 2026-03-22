@@ -1,1072 +1,567 @@
-# Daily AI Hotspots Plan
+# Daily AI Hotspots
 
-## Goal
+Technical Report for the current hotspot-ranking algorithm in this repository.  
+Last updated: 2026-03-22
 
-Add a new daily "frontier AI hotspots" pipeline on top of the current paper-focused system.
+## Abstract
 
-The current repo is strong at filtering specialized arXiv papers, but weak at finding what the AI community is broadly discussing on a given day. The new pipeline should aggregate signals from papers, official blogs, community/news roundups, GitHub, and selected discussion sources, then use LLMs to identify the most important daily topics.
+This document describes the algorithm behind the `Daily AI Hotspots` system implemented in this repository.
 
-The output should answer:
+The original repository is strong at selecting specialized arXiv papers, but that alone is not sufficient to answer a different product question: *what is the AI field broadly reacting to today?* A daily hotspot system needs to combine high-quality technical sources, social/editorial resonance, open-source movement, and official announcements, then compress them into a small number of distinct topics.
+
+The implemented system therefore operates as a separate pipeline. It aggregates heterogeneous signals, normalizes them into a shared schema, clusters overlapping evidence into candidate topics, scores those topics with a hybrid deterministic plus LLM procedure, and renders a compact daily report together with monthly and yearly archives.
+
+The design goal is not exhaustive news coverage. The goal is a selective, technically serious front page of daily frontier AI topics.
+
+## 1. Problem Definition
+
+The hotspot task differs from the paper-digest task in three important ways:
+
+1. The target unit is a **topic**, not a paper.
+2. The ranking objective includes **quality and heat together**, not just technical relevance.
+3. Evidence may come from different source classes: papers, blogs, roundup sites, repositories, and discussion threads.
+
+In practical terms, the system should answer:
 
 - What are the most important AI topics today?
-- Which papers, blog posts, repos, and discussions are driving those topics?
+- Which concrete items are driving each topic?
 - Why does each topic matter?
-- Which items are worth clicking first?
+- Which topics deserve the limited space of a daily front page?
 
-This feature is a complement to the existing paper digest, not a replacement.
+## 2. Design Principles
 
-## Implementation Progress
+The implemented algorithm follows these principles:
 
-- Phase 1: Completed
-  - Scope delivered: source registry, local papers + HF papers + AINews + official blogs + roundup registry, clustering, screening, daily hotspot page
-  - Quality refinements completed:
-    - stale local paper fallback is blocked by a hard freshness window
-    - AINews now drops low-signal chatter and only keeps higher-signal external links
-    - HF trending intake is capped so paper-only candidates do not overwhelm the pipeline
-    - clustering merges overlapping paper/news signals more aggressively via normalized title token overlap and shared repo/arXiv identity
-    - top-topic trimming now enforces source diversity, preserves at least one real heat slot, and avoids collapsing into a pure paper list
-  - Site integration: hotspot daily pages plus month/year archives are wired into the multipage site and publish flow
-- Phase 2: Completed
-  - Scope delivered: GitHub trend signal, Hacker News signal, ranking improvements
-  - Ranking refinements completed:
-    - GitHub adapter now uses recent-repo search instead of surfacing generic legacy high-star repos
-    - Hacker News filtering is restricted to AI-relevant hostnames and keyword-matched discussions
-    - candidate selection budgets now explicitly reserve room for `github_trend` and `hn_discussion`
-    - main-list trimming keeps at least one real heat/community slot while still capping paper-heavy dominance
-- Phase 3: Completed
-  - Scope delivered: remediation, monthly/yearly hotspot archives, site integration polish
-  - Integration refinements completed:
-    - the daily cron workflow now generates hotspot digests alongside the paper digest
-    - hotspot generation auto-detects the newest local paper-output day when no explicit date is provided
-    - the missed-date remedy workflow now regenerates hotspot digests for repaired dates before syncing back to `auto_update`
-    - hotspot month/year archive pages are included in the multipage site build and validated by tests
-    - clustering now avoids false merges caused by generic shared AI words in unrelated headlines
+- The main list should be selective. Publishing fewer topics is preferable to filling the page with weak material.
+- Heat matters, but heat alone is not enough. A topic should ideally have technical substance, concrete artifacts, or credible supporting evidence.
+- Different source families should contribute different kinds of evidence.
+- The system should degrade gracefully when some sources fail or when an OpenAI key is unavailable.
+- Generated outputs should remain reconstructible from `out/` on the results branch, while `main` stays code-only.
 
-## Core Principles
+## 3. System Overview
 
-This feature should optimize for both quality and heat.
+The hotspot pipeline runs after the daily paper pipeline and is implemented in [generate_daily_hotspots.py](C:/Users/dzdon/CodesSelf/ChatGPT-ArXiv-Paper-Assistant/scripts/generate_daily_hotspots.py).
 
-In practice this means:
+At a high level, the pipeline is:
 
-- the main list should stay selective, but it should still reflect what the field is actively reacting to
-- a good hotspot usually combines technical substance with broad attention
-- heat matters a lot, but pure hype without strong evidence should still be filtered down
-- official sources, strong papers, open-source movement, and community attention should all contribute
-- the daily page should feel curated, not exhaustive
+1. Fetch raw items from enabled source adapters.
+2. Normalize all items into a shared `HotspotItem` schema.
+3. Remove exact duplicates and stale items.
+4. Cluster overlapping items into candidate topics.
+5. Compute deterministic cluster scores.
+6. Trim to a manageable candidate set.
+7. Screen candidates either:
+   - with OpenAI, or
+   - with a heuristic fallback when OpenAI is unavailable.
+8. Apply diversity-aware final topic selection.
+9. Synthesize the final daily summary.
+10. Write structured outputs and render markdown pages.
 
-## Non-goals
+The pipeline supports three execution modes:
 
-- Do not try to fully mirror Twitter/X directly in phase 1.
-- Do not build a full real-time news crawler.
-- Do not move generated outputs into `main`; generated data stays under `out/` on the results branch and is rebuilt during publish.
-- Do not dilute the current paper-selection pipeline.
+- `openai`: force LLM screening and synthesis
+- `heuristic`: force deterministic fallback behavior
+- `auto`: use OpenAI when `OPENAI_API_KEY` is present, otherwise fall back to heuristic mode
 
-## Current Repo Constraints
+## 4. Source Families
 
-The existing repo already has the right high-level shape:
+The system deliberately combines multiple source classes. Each source contributes a different kind of signal.
 
-- Source adapters live in `arxiv_assistant/apis/`
-- LLM filtering lives in `arxiv_assistant/filters/`
-- Markdown/page rendering lives in `arxiv_assistant/renderers/`
-- Scheduled jobs live in `.github/workflows/`
-- Generated results live under `out/`
+| Source family | Primary role | Typical evidence |
+| --- | --- | --- |
+| Local selected arXiv papers | research backbone | papers already selected by the personalized paper pipeline |
+| Hugging Face trending papers | paper popularity | externally trending papers, paper upvotes, linked GitHub repos |
+| AINews | community heat | topics repeated across X, Reddit, Discord, and linked posts |
+| Roundup/news sites | headline consensus / builder momentum / editorial depth | repeated newsletter coverage of launches, tools, and discussions |
+| Official blogs | official release signal | OpenAI, Anthropic, Google, Meta announcements and research posts |
+| GitHub trend search | open-source adoption | fast-rising repos, demos, frameworks, and model releases |
+| Hacker News | technical discussion | AI-relevant discussions with visible score and comment depth |
 
-This plan should reuse that structure rather than adding a separate app.
+The currently enabled roundup-site registry is stored in [hotspot_roundup_sites.json](C:/Users/dzdon/CodesSelf/ChatGPT-ArXiv-Paper-Assistant/configs/hotspot_roundup_sites.json).
 
-## External Sources To Integrate
+## 5. Unified Data Model
 
-I checked the current ecosystem on 2026-03-21. There are useful source systems, but no single open project cleanly covers papers + blogs + community signals + repo activity in one place.
+All source adapters emit the same normalized object type, defined in [hotspot_schema.py](C:/Users/dzdon/CodesSelf/ChatGPT-ArXiv-Paper-Assistant/arxiv_assistant/utils/hotspot_schema.py).
 
-### Tier A: add in phase 1
+### 5.1 HotspotItem
 
-These are the best sources for a first usable version.
+Each raw item is converted into a `HotspotItem` with the following logical fields:
 
-1. arXiv selected results
+- `source_id`: stable adapter identifier
+- `source_name`: human-readable source name
+- `source_role`: semantic role such as `research_backbone`, `community_heat`, or `official_news`
+- `source_type`: broad source type such as `paper`, `roundup`, `official_blog`, `repo`, or `discussion`
+- `title`
+- `summary`
+- `url`
+- `canonical_url`
+- `published_at`
+- `tags`
+- `authors`
+- `metadata`
 
-- Source: current repo output
-- Interface: local JSON generated by the existing pipeline
-- Why: highest quality paper signal already exists in-repo
-- Role: "research backbone" for the hotspot system
+Normalization cleans whitespace, normalizes URLs, and strips tracking parameters from query strings.
 
-2. Hugging Face Trending Papers
+### 5.2 HotspotCluster
 
-- URL: `https://huggingface.co/papers/trending`
-- Observed interface: HTML page with Daily / Weekly / Monthly tabs, upvotes, GitHub links, arXiv links
-- Why: strong external paper trend signal beyond the repo's personalized scoring
-- Role: paper popularity and community attention signal
+After clustering, each candidate topic is represented as a `HotspotCluster` containing:
 
-3. AINews / smol.ai
+- `cluster_id`
+- `title`
+- `canonical_url`
+- `summary`
+- `items`
+- `source_ids`
+- `source_names`
+- `source_roles`
+- `source_types`
+- `tags`
+- `published_at`
+- `deterministic_score`
 
-- URL: `https://news.smol.ai/`
-- Observed interface: web page with daily issues; the site explicitly says it summarizes top AI Discords, AI subreddits, and AI X/Twitter and also mentions RSS subscription
-- Why: strongest available community heat proxy without directly integrating X/Twitter in phase 1
-- Role: social/community resonance signal
+The hotspot system therefore reasons about *clusters* rather than isolated raw items.
 
-4. Official vendor/research blogs
+## 6. Candidate Collection and Pre-filtering
 
-- OpenAI news: `https://openai.com/news/`
-- Anthropic news: `https://www.anthropic.com/news`
-- Google AI updates: `https://blog.google/innovation-and-ai/technology/ai/`
-- Google DeepMind blog: linked from Google AI updates
-- Google Research blog: linked from Google AI updates
-- Meta AI blog: `https://ai.meta.com/blog/`
-- Why: high-trust release and research announcements
-- Role: official launch/update signal
+Raw fetching is adapter-specific, but several constraints are applied consistently.
 
-5. GitHub repo trend signal
+### 6.1 Freshness control
 
-- Official docs: `https://docs.github.com/en/rest/search/search`
-- Why: frontier topics often show up as fast-growing repos, benchmarks, demos, agent frameworks, and model releases
-- Role: open-source adoption signal
+The pipeline only admits items within a configurable freshness window. The current default is controlled in [config.ini](C:/Users/dzdon/CodesSelf/ChatGPT-ArXiv-Paper-Assistant/configs/config.ini):
 
-6. Hacker News AI discussion signal
+- `freshness_hours = 36`
+- `local_papers_max_staleness_days = 2`
 
-- Official API docs: `https://github.com/HackerNews/API`
-- Why: catches technical discussion and product/research resonance
-- Role: technical discussion signal
+This prevents the daily report from drifting into stale commentary or backfilled paper results.
 
-### Tier B: add after phase 1 stabilizes
+### 6.2 Raw-item caps
 
-1. Reddit direct ingestion
+To control cost and keep downstream ranking stable, the pipeline caps the total number of raw items before clustering. The current default is:
 
-- Use only after rate limits, auth, and moderation concerns are handled cleanly
-- Phase 1 should rely on AINews as a proxy instead
+- `max_raw_items = 120`
 
-2. Papers with Code trend pages
+This cap matters because the hotspot system is quality-sensitive: more raw items do not necessarily produce better topics.
 
-- Useful, but less important than Hugging Face Trending Papers for initial delivery
+### 6.3 Exact deduplication
 
-3. Vendor RSS variants and long-tail blogs
+Before clustering, the pipeline performs strict deduplication on:
 
-- NVIDIA, Mistral, Cohere, Together, Cursor, LangChain, etc.
-- Add after the core pipeline is proven
+- `source_id`
+- canonical URL
+- normalized title
 
-### Explicit phase 1 exclusion
+When multiple copies of the same item exist, the longer summary is preferred.
 
-1. Direct X/Twitter API
+## 7. Topic Clustering
 
-- Reason: cost, access friction, rate limits, and fragility
-- Replacement in phase 1: use AINews as the social-signal proxy
+Clustering is implemented in [hotspot_cluster.py](C:/Users/dzdon/CodesSelf/ChatGPT-ArXiv-Paper-Assistant/arxiv_assistant/utils/hotspot_cluster.py).
 
-## Existing Roundup Website Catalog
+This stage is central to the algorithm. The system does not rank raw links directly; it ranks merged topics.
 
-In addition to raw sources, we should explicitly ingest high-quality aggregator websites. These sites are valuable because they already compress a large amount of tweet, blog, newsletter, launch, and community activity into a smaller set of candidate signals.
+### 7.1 Matching logic
 
-Important rule:
+Two items are merged when they are clearly the same underlying topic. The cluster match function uses the following priority:
 
-- these sites are evidence sources, not ground truth
-- they should help surface candidates, but they should not directly decide the final ranking
-- topics repeated across multiple roundup sites should get a stronger resonance signal
+1. Exact canonical URL match
+2. Exact arXiv ID match
+3. Exact GitHub repo URL match
+4. Title-based similarity
 
-### Structured format to store for each site
+Title similarity is computed from normalized tokens after removing stopwords. A separate overlap boost is used when the shared overlap is unusually specific.
 
-This registry should eventually live in a file such as:
+### 7.2 Generic-token suppression
 
-- `configs/hotspot_roundup_sites.json`
+A common failure mode in AI-news aggregation is false merging due to generic shared words like `open`, `agent`, `model`, or `benchmark`.
 
-Each site should be represented in config or metadata with fields like:
+To reduce that failure mode, the clusterer excludes a blacklist of generic overlap tokens before applying overlap boosts. This means two unrelated headlines will not be merged just because they both mention generic AI vocabulary.
 
-```json
-{
-  "site_id": "ainews",
-  "name": "AINews",
-  "url": "https://news.smol.ai/",
-  "cadence": "daily",
-  "content_mix": ["tweets", "reddit", "discord", "links"],
-  "access_mode": "html_or_rss",
-  "signal_role": "community_heat",
-  "phase_priority": "phase_1",
-  "notes": "Best phase 1 proxy for X/Twitter + Reddit + Discord heat"
-}
+### 7.3 Similarity threshold
+
+The current clusterer uses a merge threshold of `0.68`. Items are processed in descending recency and source-role order, then assigned to the first bucket whose seed item exceeds the threshold.
+
+This greedy strategy is intentionally simple and inspectable. It is sufficient because upstream item quality is already heavily filtered.
+
+## 8. Deterministic Cluster Scoring
+
+Each cluster receives a deterministic score before any LLM call. This score is used for candidate trimming.
+
+### 8.1 Source-role weights
+
+The current source-role prior is:
+
+| Source role | Weight |
+| --- | ---: |
+| `research_backbone` | 5.4 |
+| `official_news` | 5.0 |
+| `paper_trending` | 4.8 |
+| `community_heat` | 4.5 |
+| `github_trend` | 4.2 |
+| `headline_consensus` | 4.0 |
+| `builder_momentum` | 3.8 |
+| `editorial_depth` | 3.4 |
+| `hn_discussion` | 3.0 |
+
+These weights do not directly determine the final ranking. They are only priors used to decide which clusters are worth deeper inspection.
+
+### 8.2 Deterministic score structure
+
+The deterministic score is a weighted sum of:
+
+- source-role priors
+- number of distinct source IDs
+- number of distinct source types
+- signal metrics such as:
+  - paper `daily_score`
+  - Hugging Face upvotes
+  - community activity counts
+  - GitHub stars
+  - Hacker News score
+- bonuses for:
+  - official-source evidence
+  - GitHub evidence
+
+This score is stored as `cluster.deterministic_score` and is used only for candidate selection, not for the final front-page order.
+
+## 9. Candidate Trimming Before LLM
+
+The system intentionally does not send every cluster to the model.
+
+Candidate trimming is implemented in `deterministic_trim()` in [generate_daily_hotspots.py](C:/Users/dzdon/CodesSelf/ChatGPT-ArXiv-Paper-Assistant/scripts/generate_daily_hotspots.py).
+
+The procedure:
+
+1. Sort clusters by deterministic score.
+2. Reserve budget by source role.
+3. Fill the remaining capacity with the highest-scoring leftovers.
+
+The current role budgets are:
+
+- `research_backbone`: 3
+- `paper_trending`: 5
+- `official_news`: 3
+- `headline_consensus`: 3
+- `editorial_depth`: 2
+- `community_heat`: 2
+- `builder_momentum`: 1
+- `github_trend`: 2
+- `hn_discussion`: 2
+
+The current default LLM candidate cap is:
+
+- `max_clusters_for_llm = 18`
+
+This stage is important because it preserves source diversity before the expensive screening step.
+
+## 10. Screening and Scoring
+
+Screening logic lives in [filter_hotspots.py](C:/Users/dzdon/CodesSelf/ChatGPT-ArXiv-Paper-Assistant/arxiv_assistant/filters/filter_hotspots.py).
+
+The pipeline supports two screening modes:
+
+- `heuristic_screen_clusters()`
+- `screen_clusters_with_openai()`
+
+### 10.1 Heuristic signal model
+
+For each cluster, the heuristic model computes:
+
+- `FRONTIERNESS`
+- `TECHNICAL_DEPTH`
+- `CROSS_SOURCE_RESONANCE`
+- `IMPORTANCE`
+- `EVIDENCE_STRENGTH`
+- `ACTIONABILITY`
+- `HYPE_PENALTY`
+
+These signals are derived from the cluster text, source roles, source types, and metadata such as stars, upvotes, HN score, and community activity.
+
+The current heuristic categories are:
+
+- `Research`
+- `Product Release`
+- `Tooling`
+- `Industry Update`
+- `Community Signal`
+
+### 10.2 First-stage keep / watchlist decision
+
+The heuristic screener first computes a cluster-level score:
+
+```text
+stage1_score =
+  0.28 * quality
+  + 0.28 * heat
+  + 0.24 * importance
+  + 0.10 * actionability
+  + 0.10 * evidence_strength
+  - 0.05 * hype_penalty
 ```
 
-### Roundup website list
+This stage is used to decide:
 
-| Site | URL | Cadence | Main content mix | Best use in our system | Access mode | Phase |
-| --- | --- | --- | --- | --- | --- | --- |
-| AINews | `https://news.smol.ai/` | Daily | Tweets/X, Reddit, Discord, linked posts | Primary community heat source; best proxy for direct social ingestion in phase 1 | HTML, site mentions RSS | Phase 1 |
-| The Rundown AI | `https://www.rundown.ai/` | Daily | AI news, product launches, practical insights, linked stories | Broad daily AI headline source; useful for product and launch resonance | HTML / newsletter site | Phase 1 |
-| Superhuman AI | `https://www.superhuman.ai/` | Daily | AI news, tools, tech updates, linked posts | Broad daily AI news plus tool momentum signal | HTML / newsletter site | Phase 1 |
-| The Neuron | `https://www.theneurondaily.com/` | Weekday daily | AI news, viral items, tools, work-focused AI updates | Strong general daily AI buzz source; useful for mainstream attention | HTML / newsletter site | Phase 1 |
-| TLDR AI | `https://tldr.tech/ai` | Daily / regular | AI launches, innovations, research, data science links | Broad curated news source; useful as an extra editorial consensus signal | HTML / newsletter site | Phase 2 |
-| Ben's Bites | `https://www.bensbites.com/` | Twice weekly | Startups, launches, tools, commentary, builder-oriented AI updates | Good source for tool/startup/product momentum; lower cadence but useful | HTML / newsletter site | Phase 2 |
-| The Batch | `https://www.deeplearning.ai/the-batch/` | Weekly | AI news and research analysis | High-trust editorial depth; better for weekly context than same-day heat | HTML | Phase 2 |
-| Import AI | `https://jack-clark.net/` | Weekly | AI research and policy commentary | High-signal expert interpretation; use as a quality anchor, not a heat source | HTML | Phase 2 |
-| Last Week in AI | `https://lastweekin.ai/` | Weekly | AI news summaries and editorials | Strong weekly context and topic persistence check | HTML / newsletter site | Phase 2 |
-| AlphaSignal | `https://alphasignal.ai/` | Regular | AI engineering/newsletter curation | Reference candidate for future use; site access was blocked during crawl, so do not depend on it initially | Manual review first | Watchlist |
+- main-list keep
+- watchlist keep
+- reject
 
-### How these roundup sites should be used
+Current default thresholds:
 
-Group them by signal role rather than by brand name.
+- `screening_score_cutoff = 4.0`
+- `watchlist_score_cutoff = 3.3`
 
-1. Community and social heat
+### 10.3 Final topic score
 
-- AINews
+After category assignment and summary construction, each topic is assigned a second score used for downstream ranking:
 
-2. Broad daily AI headline consensus
+```text
+final_topic_score =
+  0.34 * quality
+  + 0.30 * heat
+  + 0.24 * importance
+  + 0.08 * actionability
+  + 0.04 * evidence_strength
+  - 0.08 * hype_penalty
+```
 
-- The Rundown AI
-- Superhuman AI
-- The Neuron
-- TLDR AI
+This second score is intentionally more selective against hype and slightly more aggressive about heat.
 
-3. Builder / startup / launch momentum
+## 11. OpenAI Screening
 
-- Ben's Bites
+When `OPENAI_API_KEY` is available and mode permits it, the same clusters are screened by an OpenAI-compatible model instead of pure heuristics.
 
-4. High-trust editorial and weekly context
+The current model defaults are:
 
-- The Batch
-- Import AI
-- Last Week in AI
+- `model_screen = gpt-5.4`
+- `model_summarize = gpt-5.4`
 
-5. Reference-only or later evaluation
+The LLM receives:
 
-- AlphaSignal
+- cluster title
+- deterministic score
+- source names
+- source roles
+- source types
+- tags
+- representative evidence items
 
-### Integration rules for roundup sites
+It returns structured JSONL containing:
 
-- never let a single roundup site create a top topic on its own unless it is backed by another source class
-- topics repeated by multiple roundup sites should get a strong `cross_source_resonance` boost
-- weekly roundups should be used as persistence and importance signals, not as same-day urgency signals
-- community-heavy sources should raise heat, but not overpower paper, repo, or official evidence
-- builder/startup newsletters should help identify launches and tools, but not dominate research-heavy topics
+- `KEEP`
+- `WATCHLIST`
+- `CATEGORY`
+- `QUALITY`
+- `HEAT`
+- `IMPORTANCE`
+- `SUMMARY`
+- `WHY_IT_MATTERS`
 
-## Product Shape
+If LLM screening fails for a batch, the pipeline automatically falls back to heuristic screening for that batch rather than aborting the whole day.
 
-The daily hotspot product should have its own page family in the static site:
+## 12. Diversity-aware Final Selection
+
+After screening, the system still does not simply take the top `N` topics. A separate trimming stage enforces diversity and reduces collapse into paper-only front pages.
+
+This logic is implemented in `_trim_topics()` in [generate_daily_hotspots.py](C:/Users/dzdon/CodesSelf/ChatGPT-ArXiv-Paper-Assistant/scripts/generate_daily_hotspots.py).
+
+### 12.1 Output targets
+
+The current default targets are:
+
+- `target_topics = 5`
+- `min_topics = 3`
+- `target_watchlist_topics = 3`
+
+### 12.2 Bucket-aware selection
+
+Topics are mapped into broad buckets:
+
+- `official`
+- `tooling`
+- `research`
+- `community`
+
+The selection logic:
+
+1. Reserves room for at least one `official`, one `community`, and one `research` slot when available.
+2. Applies per-category and per-source caps.
+3. Caps paper-heavy topics so the page does not degrade into a paper-only digest.
+4. Forces at least one real heat/community slot when available.
+5. Falls back to watchlist promotion if the main list is too thin.
+
+This is the main mechanism that keeps the product balanced between quality and heat.
+
+## 13. Final Digest Synthesis
+
+Once the final topics are selected, the system runs one final synthesis step.
+
+This stage:
+
+- assigns a polished `HEADLINE`
+- produces `WHY_IT_MATTERS`
+- emits `KEY_TAKEAWAYS`
+- writes the short page-level executive summary
+
+When OpenAI is unavailable, the system falls back to a deterministic sentence built from the top three topic headlines.
+
+## 14. Output Artifacts
+
+The hotspot system writes several layers of outputs under `out/hot/`:
+
+```text
+out/
+  hot/
+    raw/
+    normalized/
+    clusters/
+    reports/
+    md/
+```
+
+Concretely:
+
+- `out/hot/raw/YYYY-MM-DD/*.json`: per-source cached raw fetches
+- `out/hot/normalized/YYYY-MM-DD.json`: normalized items
+- `out/hot/clusters/YYYY-MM-DD.json`: clustered candidates
+- `out/hot/reports/YYYY-MM-DD.json`: final structured daily report
+- `out/hot/md/YYYY-MM/YYYY-MM-DD-hotspots.md`: markdown source for rendered pages
+
+This layered output is important for debugging and replaying historical days.
+
+## 15. Rendering and Publishing
+
+Hotspot rendering is integrated into the same multi-page site used by the paper digest.
+
+Published page families include:
 
 - `hot/`
 - `hot/YYYY-MM-DD/`
 - `hot/YYYY-MM/`
 - `hot/YYYY/`
 
-The daily page should contain:
+The build path is:
 
-1. Top 3 to 6 daily hotspot topics
-2. For each topic:
-   - one-line thesis
-   - why it matters
-   - representative sources
-   - representative papers
-   - representative repos/posts
-3. A short "today in AI" overview
-4. Optional sections:
-   - official releases
-   - community buzz
-   - paper breakthroughs
-   - open-source momentum
+1. raw outputs are generated under `out/`
+2. markdown pages are assembled into `out/site`
+3. static HTML is rendered from `out/site`
+4. CI publishes the generated HTML to GitHub Pages
 
-This should live next to the existing daily paper digest, not inside it.
+The publish stage rebuilds from generated outputs and does not require committing site HTML to `main`.
 
-## High-level Architecture
+## 16. Workflow Integration
 
-The hotspot system should be a second pipeline that runs after the current paper digest.
-
-### Step 1: Collect raw items
+The hotspot pipeline is integrated into two production workflows.
 
-Each source adapter fetches a list of raw items for the target day.
+### 16.1 Daily cron generation
 
-Examples:
+The daily workflow:
 
-- arXiv selected paper
-- Hugging Face trending paper entry
-- AINews daily item or tag-summary block
-- OpenAI/Anthropic/Google/Meta blog post
-- GitHub repo result
-- Hacker News story
+1. runs the paper pipeline
+2. runs the hotspot pipeline
+3. syncs generated outputs to `auto_update`
+4. rebuilds and republishes the multi-page site
 
-### Step 2: Normalize items
+### 16.2 Missed-date remediation
 
-All items should be converted into one shared schema:
+When a historical date is repaired, the remedy workflow now:
 
-```json
-{
-  "source": "hf_papers",
-  "source_type": "paper",
-  "source_rank": 12,
-  "title": "Attention Residuals",
-  "summary": "Residual connections with PreNorm are standard...",
-  "url": "https://huggingface.co/papers/...",
-  "canonical_url": "https://arxiv.org/abs/....",
-  "published_at": "2026-03-16T00:00:00Z",
-  "authors": ["..."],
-  "tags": ["llm", "architecture"],
-  "metadata": {
-    "upvotes": 132,
-    "github_url": "https://github.com/...",
-    "arxiv_url": "https://arxiv.org/abs/..."
-  }
-}
-```
-
-### Step 3: Deterministic pre-filter
+1. regenerates the repaired paper outputs
+2. regenerates the hotspot report for the same date
+3. syncs the repaired results back to `auto_update`
 
-Before any LLM call, remove obviously low-value items:
+This keeps the hotspot archive consistent with repaired paper archives.
 
-- stale items outside the target window
-- exact duplicate URLs
-- duplicate titles after normalization
-- vendor marketing posts unrelated to AI research/tools
-- non-technical or low-information items
+## 17. Failure Handling
 
-This keeps token cost under control.
+The system is designed for partial failure, not all-or-nothing failure.
 
-In addition, clusters that are likely low-quality should be rejected before the expensive steps:
+Current failure policy:
 
-- pure social-only items with no technical artifact behind them
-- duplicate launch coverage from many blogs with no underlying technical substance
-- lightweight wrappers, minor product updates, or obvious marketing noise
-- weak items with neither high-trust sources nor cross-source support
-
-### Step 4: Deduplicate and cluster into topics
-
-The hotspot system should operate on topic clusters, not on raw items.
-
-Cluster keys should be built in this order:
-
-1. Canonical URL match
-2. Shared arXiv ID / repo URL / blog URL
-3. Title similarity
-4. Embedding similarity
-5. LLM-assisted merge only for the remaining ambiguous cases
-
-Example:
-
-- Hugging Face trending paper
-- the same paper already selected by your arXiv pipeline
-- an AINews issue mentioning the same paper
-- a GitHub repo implementing it
-
-These should become one hotspot cluster.
-
-### Step 5: LLM scoring at cluster level
-
-Do not score every raw item with the LLM. Score each cluster once.
-
-Each cluster should be evaluated on:
-
-- `FRONTIERNESS`: how frontier/leading-edge it is
-- `IMPORTANCE`: how significant it is today
-- `TECHNICAL_DEPTH`: whether it reflects real technical progress rather than shallow hype
-- `CROSS_SOURCE_RESONANCE`: how strongly it appears across papers/blogs/community/open-source
-- `ACTIONABILITY`: whether readers can learn, read, or try something concrete from it
-- `EVIDENCE_STRENGTH`: whether the cluster has enough concrete backing to justify inclusion
-- `HYPE_PENALTY`: how likely it is to be low-signal hype
-
-The cluster should also get:
-
-- `PRIMARY_CATEGORY`
-- `SECONDARY_CATEGORIES`
-- `KEEP_IN_DAILY_HOTSPOTS`
-- `SHORT_COMMENT`
-- `WHY_IT_MATTERS`
-- `KEY_ENTITIES`
-
-Hard gate before final ranking:
-
-- keep only if the cluster has at least one high-trust technical source
-  - examples: official research/blog post, arXiv paper, Hugging Face trending paper, meaningful open-source repo
-- or at least two independent medium-trust sources pointing to the same topic
-- do not keep a topic just because it is socially loud
-
-### Step 6: Final hotspot ranking
-
-Use a quality-first hybrid rank instead of pure LLM score:
+- each source writes raw output independently
+- a failed source adapter yields an empty list rather than a global crash
+- LLM screening falls back to heuristic screening batch-by-batch
+- digest synthesis falls back to a deterministic summary if necessary
 
-```text
-final_score =
-  0.26 * frontierness +
-  0.20 * importance +
-  0.18 * technical_depth +
-  0.14 * cross_source_resonance +
-  0.10 * evidence_strength +
-  0.06 * actionability +
-  0.06 * freshness +
-  0.02 * source_trust -
-  0.08 * hype_penalty
-```
+This behavior is critical because some source sites are noisy or structurally unstable.
 
-Notes:
+## 18. Cost Control
 
-- `freshness` and `source_trust` should be deterministic features
-- `cross_source_resonance` should combine deterministic source counts with LLM judgement
-- `evidence_strength` is the key anti-noise control
-- heat should materially affect the leaderboard
-- hype should not dominate the leaderboard by itself
-- rank only the clusters that pass the hard gate above
+The hotspot pipeline is intentionally designed to keep model cost bounded.
 
-Operational rule:
+Key controls:
 
-- if fewer than 3 topics pass the gate, publish fewer than 3 topics
-- do not fill the page with weak material just to hit a quota
+- raw-item cap before clustering
+- cluster-level rather than item-level screening
+- candidate trimming before LLM
+- batch screening
+- heuristic fallback mode for local testing or quota exhaustion
 
-### Step 7: LLM synthesis
+This keeps the hotspot system much cheaper than a naive "score everything" design.
 
-Once the top clusters are selected, run one final synthesis step to produce the daily report.
+## 19. Current Limitations
 
-The final structured output should look like:
+The current implementation is strong enough for production use, but it still has clear limitations:
 
-```json
-{
-  "date": "2026-03-21",
-  "summary": "Today's AI frontier was dominated by ...",
-  "top_topics": [
-    {
-      "topic_id": "topic_001",
-      "headline": "Attention-based residual mixing emerges as a serious architecture direction",
-      "category": "Model Architecture",
-      "importance_score": 9.2,
-      "why_it_matters": "This points to ...",
-      "key_takeaways": [
-        "...",
-        "...",
-        "..."
-      ],
-      "representative_items": [
-        {
-          "title": "...",
-          "url": "...",
-          "source": "hf_papers"
-        }
-      ]
-    }
-  ]
-}
-```
+- clustering is greedy and title-driven rather than embedding-driven
+- direct X ingestion is not implemented; social heat is proxied through roundup sources
+- some roundup sites are editorially inconsistent and can still inject noise
+- the category taxonomy is intentionally compact and may be too coarse for some months
+- deterministic priors are hand-tuned rather than learned from labeled data
 
-This output becomes the source for rendering.
+These are acceptable tradeoffs for a daily report system that must remain stable, inspectable, and cheap to run.
 
-## Topic Taxonomy
+## 20. Why This Algorithm Works
 
-The hotspot taxonomy should be broader than the current paper taxonomy.
+The core reason this system works is that it separates three jobs that are often conflated:
 
-Initial top-level categories:
+1. **candidate generation**: broad but bounded multi-source collection
+2. **topic formation**: merge duplicate evidence into coherent clusters
+3. **front-page selection**: aggressively trim using quality, heat, and diversity constraints
 
-1. Model Releases
-2. Model Architecture
-3. Training / Scaling / Efficiency
-4. Agents / Tool Use / Coding Systems
-5. Infrastructure / Serving / Deployment
-6. Benchmarks / Evaluation / Safety
-7. Open-source Ecosystem
-8. Research Breakthroughs
-9. Industry Moves / Product Launches
-10. Other Frontier AI
+Without clustering, the output becomes a noisy link list.  
+Without heat signals, the output becomes a personalized paper digest in disguise.  
+Without quality controls, the output becomes a hype tracker.
 
-These categories are for hotspot presentation only. They should not replace the existing paper topic taxonomy.
+The implemented algorithm is effective because it explicitly models all three.
 
-## Why This Needs A Different Filter Than The Paper Pipeline
+## Appendix A. Current Roundup-Site Registry
 
-The current paper pipeline is tuned for specialized technical relevance. That is good for identifying papers the repo owner wants to read. It is not good for identifying what the broader AI field is currently reacting to.
+The current roundup registry is maintained in [hotspot_roundup_sites.json](C:/Users/dzdon/CodesSelf/ChatGPT-ArXiv-Paper-Assistant/configs/hotspot_roundup_sites.json).
 
-Hotspot detection needs three new dimensions that the current repo largely does not model:
-
-1. Cross-source resonance
-
-- the same topic showing up in multiple places should rank higher
-
-2. Source diversity
-
-- a topic supported by papers + blogs + repo activity + community discussion should rank higher than a single isolated post
-
-3. Newsworthiness
-
-- not every good paper is a daily hotspot
-
-This is why the hotspot system must be a separate pipeline rather than a small tweak to the existing `filter_gpt.py`.
-
-## Quality-over-Quantity Strategy
-
-The hotspot page should be intentionally conservative.
-
-Recommended output strategy:
-
-1. publish only the strongest 3 to 6 topics
-2. optionally add a small `Watchlist` section for 2 to 4 emerging but lower-confidence topics
-3. never merge the watchlist into the main ranked topics
-
-Main topic inclusion rule:
-
-- must be frontier-relevant
-- must have clear technical or ecosystem significance
-- must have enough evidence
-- must survive hype penalty
-
-Watchlist inclusion rule:
-
-- interesting signal
-- not enough evidence yet for the main list
-- included only if the page would benefit from showing emerging movement
-
-This creates the right product behavior:
-
-- the main list stays high precision
-- the watchlist preserves discovery
-- the page does not become a noisy link dump
-
-## Source Adapters To Build
-
-Each adapter should have the same interface:
-
-```python
-def fetch_hotspot_items(target_date: date, config: ConfigParser) -> list[dict]:
-    ...
-```
-
-### 1. Local arXiv selected items adapter
-
-New file:
-
-- `arxiv_assistant/apis/hotspot_local_papers.py`
-
-Reads:
-
-- `out/json/YYYY-MM/YYYY-MM-DD-output.json`
-
-Purpose:
-
-- bring the current repo's selected papers into the hotspot pool
-
-### 2. Hugging Face trending papers adapter
-
-New file:
-
-- `arxiv_assistant/apis/hotspot_hf_papers.py`
-
-Method:
-
-- fetch the trending page
-- parse daily cards
-- extract title, summary, upvotes, GitHub link, arXiv link, publisher, publish date
-
-Purpose:
-
-- paper popularity signal
-
-### 3. AINews adapter
-
-New file:
-
-- `arxiv_assistant/apis/hotspot_ainews.py`
-
-Method:
-
-- fetch RSS if available
-- otherwise parse the daily issue page
-- extract daily summary blocks, tags, and linked entities
-
-Purpose:
-
-- community resonance proxy for X/Reddit/Discord
-
-### 4. Official blogs adapter
-
-New files:
-
-- `arxiv_assistant/apis/hotspot_openai_news.py`
-- `arxiv_assistant/apis/hotspot_anthropic_news.py`
-- `arxiv_assistant/apis/hotspot_google_ai_news.py`
-- `arxiv_assistant/apis/hotspot_meta_ai_news.py`
-
-Method:
-
-- prefer RSS or structured HTML if available
-- only keep posts within the freshness window
-- extract title, excerpt, publish date, tags, URL
-
-Purpose:
-
-- trusted official release and research announcement signal
-
-### 5. GitHub trend adapter
-
-New file:
-
-- `arxiv_assistant/apis/hotspot_github.py`
-
-Method:
-
-- use GitHub REST search API
-- query for recently created or fast-rising AI repos
-- constrain with curated keywords and org allowlists
-
-Purpose:
-
-- open-source adoption signal
-
-### 6. Hacker News adapter
-
-New file:
-
-- `arxiv_assistant/apis/hotspot_hn.py`
-
-Method:
-
-- use official HN API
-- fetch `topstories`, `beststories`, and optionally `newstories`
-- keep only AI-relevant items via deterministic keyword filter
-
-Purpose:
-
-- technical discussion signal
-
-## Data Storage Layout
-
-Everything should remain reconstructible from generated outputs.
-
-New output layout:
-
-```text
-out/
-  hot/
-    raw/
-      2026-03-21/
-        arxiv_selected.json
-        hf_papers.json
-        ainews.json
-        openai_news.json
-        anthropic_news.json
-        google_ai_news.json
-        meta_ai_news.json
-        github.json
-        hn.json
-    normalized/
-      2026-03-21.json
-    clusters/
-      2026-03-21.json
-    reports/
-      2026-03-21.json
-    md/
-      2026-03/
-        2026-03-21-hotspots.md
-```
-
-Notes:
-
-- `main` should continue to ignore `out/`
-- generated hotspot outputs should live only in the results branch or CI artifacts
-- Pages build should reconstruct site pages from `out/`
-
-## Config Additions
-
-Add new sections to `configs/config.ini`.
-
-```ini
-[HOTSPOTS]
-enabled = true
-model_screen = gpt-5.4
-model_summarize = gpt-5.4
-target_topics = 5
-min_topics = 3
-target_watchlist_topics = 3
-target_items_per_topic = 4
-freshness_hours = 36
-max_raw_items = 250
-max_clusters_for_llm = 40
-retry = 3
-
-[HOTSPOT_SOURCES]
-use_local_papers = true
-use_hf_papers = true
-use_ainews = true
-use_openai_news = true
-use_anthropic_news = true
-use_google_ai_news = true
-use_meta_ai_news = true
-use_github = true
-use_hn = true
-
-[HOTSPOT_GITHUB]
-search_queries = llm,agent,reasoning,multimodal,moe,quantization,benchmark,open-source model
-stars_cutoff = 50
-created_within_days = 7
-
-[HOTSPOT_HN]
-keyword_filter = llm,openai,anthropic,deepmind,gemini,agent,reasoning,benchmark,arxiv
-story_limit = 100
-```
-
-Model guidance:
-
-- phase 1 should prioritize quality and use the stronger model end-to-end if needed
-- after quality is stable, screening can move to a cheaper model
-- if cost becomes a concern, reduce cluster volume before downgrading model quality
-
-## Prompt Design
-
-This feature needs separate prompts from the paper prompts.
-
-New prompt files:
-
-- `prompts/hotspot_system_prompt.txt`
-- `prompts/hotspot_screening_criteria.txt`
-- `prompts/postfix_prompt_hotspot_screening.txt`
-- `prompts/hotspot_digest_writer.txt`
-
-### Prompt 1: cluster screening
-
-Input:
-
-- one cluster with its merged evidence
-- title set
-- source list
-- short summaries
-- source metrics
-
-Output:
-
-```json
-{
-  "KEEP_IN_DAILY_HOTSPOTS": true,
-  "PRIMARY_CATEGORY": "Model Architecture",
-  "SECONDARY_CATEGORIES": ["Research Breakthroughs"],
-  "FRONTIERNESS": 9,
-  "IMPORTANCE": 8,
-  "TECHNICAL_DEPTH": 9,
-  "CROSS_SOURCE_RESONANCE": 8,
-  "ACTIONABILITY": 7,
-  "HYPE_PENALTY": 2,
-  "SHORT_COMMENT": "...",
-  "WHY_IT_MATTERS": "...",
-  "KEY_ENTITIES": ["..."]
-}
-```
-
-Key prompt rule:
-
-- A topic is not a hotspot just because it is popular.
-- It must represent meaningful frontier AI progress, adoption, or discourse.
-- When uncertain, exclude rather than include.
-- Prefer under-selecting to over-selecting.
-
-### Prompt 2: final digest synthesis
-
-Input:
-
-- top clusters selected by the screening step
-
-Output:
-
-- one structured daily hotspot report
-- one short daily executive summary
-- one markdown-ready topic list
-
-Key prompt rule:
-
-- do not produce generic newsletter filler
-- prefer concrete technical and ecosystem changes
-- keep the final digest short, selective, and evidence-backed
-
-## LLM Cost Control
-
-This system can become expensive if implemented naively. It should stay efficient by design.
-
-Rules:
-
-1. Deduplicate before LLM
-2. Cluster before LLM
-3. Deterministically pre-rank and only send the top clusters to the LLM
-4. Screen only clusters, not all raw items
-5. In phase 1, keep the stronger model if that materially improves precision
-6. Use the larger model only once for the final digest
-7. Cache raw fetches and normalized clusters by date
-8. Retry only failed clusters, not the whole day
-
-Recommended phase 1 budget behavior:
-
-- total raw items after deterministic filtering: <= 120
-- total clusters before screening: <= 30
-- final ranked topics: 3 to 6
-- watchlist: <= 3
-
-## Rendering Plan
-
-New renderers:
-
-- `arxiv_assistant/renderers/render_hot_daily.py`
-- `arxiv_assistant/renderers/render_hot_monthly.py`
-- `arxiv_assistant/renderers/render_hot_yearly.py`
-
-New page patterns:
-
-- `out/site/hot/index.md`
-- `out/site/hot/YYYY-MM-DD/index.md`
-- `out/site/hot/YYYY-MM/index.md`
-- `out/site/hot/YYYY/index.md`
-
-The daily hotspot page should render:
-
-1. Header summary
-2. Topic cards in rank order
-3. For each topic:
-   - thesis
-   - why it matters
-   - key evidence links
-   - representative papers/posts/repos
-
-The monthly and yearly hotspot pages can be simpler archives in phase 1.
-
-## Workflow Plan
-
-### Daily generation workflow
-
-Extend the current daily result flow rather than overloading `main.py`.
-
-Recommended sequence:
-
-1. existing paper pipeline runs
-2. push results to `auto_update`
-3. new hotspot job reads `auto_update/out`
-4. fetches external hotspot sources for the target day
-5. writes hotspot outputs into `out/hot/...`
-6. publish workflow rebuilds the static site from `out/`
-
-This keeps:
-
-- `main` = code only
-- `auto_update` = generated outputs
-- Pages = rebuilt from outputs
-
-### New scripts
-
-- `scripts/generate_daily_hotspots.py`
-- optional: `scripts/remedy_hotspot_dates.py`
-
-### Why not put this inside main.py
-
-Because the hotspot pipeline:
-
-- depends on many extra sources
-- has a different scoring objective
-- will need separate retries, rate limits, and remediation
-
-It should be adjacent to the current daily paper pipeline, not buried inside it.
-
-## Failure Handling
-
-This pipeline will see partial source failures often. It should degrade gracefully.
-
-Rules:
-
-1. Each source adapter writes raw output independently
-2. A failing source should not fail the whole daily hotspot report
-3. The final report should record which sources were unavailable
-4. If LLM screening fails, fall back to a deterministic rank using:
-   - source trust
-   - cross-source counts
-   - GitHub/HF popularity
-   - recency
-
-## Testing Plan
-
-Add three levels of tests.
-
-### 1. Adapter fixture tests
-
-For each source adapter:
-
-- store one fixture response
-- test parser stability
-- test date extraction
-- test dedup field extraction
-
-### 2. Cluster/ranking tests
-
-Given synthetic mixed-source inputs:
-
-- verify duplicates merge correctly
-- verify cross-source topics outrank single-source weak items
-- verify hype-heavy but low-depth items are penalized
-
-### 3. Renderer tests
-
-- verify hotspot markdown pages build
-- verify static site renderer outputs HTML
-- verify navigation works for hot pages too
-
-## Efficient Execution Strategy
-
-The fastest path is a vertical slice, not broad parallel adapter work.
-
-Recommended build order:
-
-1. freeze the shared hotspot schemas
-2. implement two strongest external adapters first
-   - Hugging Face trending papers
-   - AINews
-3. reuse current local selected papers as the third source
-4. add one official-blogs adapter wrapper that can host multiple blog sources
-5. build normalization and clustering once
-6. build one screening prompt and one digest prompt
-7. render one daily hotspot page
-8. only after the page quality is acceptable, add GitHub and HN
-
-Engineering rules:
-
-- do not couple source fetching to rendering
-- save every source response to `out/hot/raw/...` so bugs can be replayed locally
-- keep deterministic ranking features inspectable in JSON
-- ship one daily page first; archive pages can follow
-- use one or two fixed historical days as regression fixtures for prompt tuning
-
-This order minimizes wasted work because the hardest part is ranking quality, not adding adapters.
-
-## Implementation Phases
-
-### Phase 1: minimal but strong daily hotspots
-
-Build:
-
-- local papers adapter
-- Hugging Face trending papers adapter
-- AINews adapter
-- official blogs adapter
-- hotspot clusterer
-- LLM screening
-- daily hotspot page
-
-Why:
-
-- this already gives papers + community + official announcements
-- it is the smallest slice that can still produce high-quality hotspots
-- it avoids spending time on long-tail sources before the ranking logic is proven
-
-### Phase 2: ecosystem and discussion enrichment
-
-Build:
-
-- GitHub trend adapter
-- Hacker News adapter
-- better clustering
-- per-topic evidence cards
-
-### Phase 3: remediation and archive quality
-
-Build:
-
-- hotspot remediation script
-- monthly hotspot summaries
-- yearly hotspot overviews
-- optional Slack/Telegram notification
-
-## Recommended First Implementation Slice
-
-The first slice should be intentionally narrow:
-
-1. Read current selected papers from `out/json`
-2. Fetch Hugging Face trending papers
-3. Fetch AINews daily issue
-4. Fetch official vendor/research blog posts
-5. Normalize all items
-6. Cluster by URL/title similarity
-7. Screen top clusters with LLM
-8. Write `out/hot/reports/YYYY-MM-DD.json`
-9. Render one daily hotspot markdown page
-10. Publish it in the static site
-
-This is the smallest slice that already changes the product meaningfully.
-
-Efficiency rule:
-
-- do not start by building every adapter in the plan
-- first prove that four strong sources plus good ranking logic can generate a high-quality page
-- only add GitHub and Hacker News after the quality bar is met
-
-## File-level Implementation Map
-
-Planned new files:
-
-```text
-arxiv_assistant/
-  apis/
-    hotspot_ainews.py
-    hotspot_github.py
-    hotspot_hf_papers.py
-    hotspot_hn.py
-    hotspot_local_papers.py
-    hotspot_official_blogs.py
-  filters/
-    filter_hotspots.py
-  renderers/
-    render_hot_daily.py
-    render_hot_monthly.py
-    render_hot_yearly.py
-  utils/
-    hotspot_cluster.py
-    hotspot_schema.py
-    hotspot_sources.py
-
-scripts/
-  generate_daily_hotspots.py
-  remedy_hotspot_dates.py
-
-prompts/
-  hotspot_system_prompt.txt
-  hotspot_screening_criteria.txt
-  postfix_prompt_hotspot_screening.txt
-  hotspot_digest_writer.txt
-```
-
-Files likely to change:
-
-- `configs/hotspot_roundup_sites.json`
-- `configs/config.ini`
-- `.github/workflows/push_results.yaml`
-- `.github/workflows/publish_md.yml`
-- `arxiv_assistant/renderers/build_multipage_site.py`
-
-## Acceptance Criteria
-
-This feature is successful when all of the following are true:
-
-1. A daily hotspot page is generated automatically
-2. The page contains 3 to 6 clearly distinct high-quality topics
-3. Each topic includes multiple supporting sources when available
-4. The ranking is not dominated by generic hype
-5. The page feels broader than the paper digest but still technically serious
-6. The pipeline degrades gracefully when one or two sources fail
-7. `main` still remains code-only and does not track generated outputs
-8. Reducing source noise increases precision instead of increasing the topic count
-
-## Recommended Decision
-
-Implement this as a parallel daily pipeline named "Daily AI Hotspots", not as a small extension to the current paper filter.
-
-The first implementation should integrate:
-
-- current selected papers
-- Hugging Face trending papers
-- AINews
-- official vendor/research blogs
-
-Then add:
-
-- GitHub trend signal
-- Hacker News discussion signal
-
-This gives the best balance of:
-
-- quality
-- implementation complexity
-- stability
-- source diversity
-- token cost
-
-## Source Links Used For This Plan
-
-- AINews: `https://news.smol.ai/`
-- The Rundown AI: `https://www.rundown.ai/`
-- Superhuman AI: `https://www.superhuman.ai/`
-- The Neuron: `https://www.theneurondaily.com/`
-- TLDR AI: `https://tldr.tech/ai`
-- Ben's Bites: `https://www.bensbites.com/`
-- The Batch: `https://www.deeplearning.ai/the-batch/`
-- Import AI: `https://jack-clark.net/`
-- Last Week in AI: `https://lastweekin.ai/`
-- AlphaSignal: `https://alphasignal.ai/`
-- Hugging Face Trending Papers: `https://huggingface.co/papers/trending`
-- Google AI updates: `https://blog.google/innovation-and-ai/technology/ai/`
-- GitHub REST Search docs: `https://docs.github.com/en/rest/search/search`
-- Hacker News API docs: `https://github.com/HackerNews/API`
-- AI News Automation repo: `https://github.com/Deepender25/AI-news-Automation`
+| Site | Role | Cadence | Enabled |
+| --- | --- | --- | --- |
+| AINews | `community_heat` | daily | yes |
+| The Rundown AI | `headline_consensus` | daily | yes |
+| Superhuman AI | `headline_consensus` | daily | yes |
+| The Neuron | `headline_consensus` | daily | yes |
+| TLDR AI | `headline_consensus` | daily | yes |
+| Ben's Bites | `builder_momentum` | twice weekly | yes |
+| The Batch | `editorial_depth` | weekly | yes |
+| Import AI | `editorial_depth` | weekly | yes |
+| Last Week in AI | `editorial_depth` | weekly | yes |
+| AlphaSignal | `builder_momentum` | regular | no |
+
+These sources are treated as evidence sources, not ground truth.
+
+## Appendix B. Main Implementation Files
+
+Core implementation files:
+
+- [generate_daily_hotspots.py](C:/Users/dzdon/CodesSelf/ChatGPT-ArXiv-Paper-Assistant/scripts/generate_daily_hotspots.py)
+- [filter_hotspots.py](C:/Users/dzdon/CodesSelf/ChatGPT-ArXiv-Paper-Assistant/arxiv_assistant/filters/filter_hotspots.py)
+- [hotspot_cluster.py](C:/Users/dzdon/CodesSelf/ChatGPT-ArXiv-Paper-Assistant/arxiv_assistant/utils/hotspot_cluster.py)
+- [hotspot_schema.py](C:/Users/dzdon/CodesSelf/ChatGPT-ArXiv-Paper-Assistant/arxiv_assistant/utils/hotspot_schema.py)
+- [hotspot_local_papers.py](C:/Users/dzdon/CodesSelf/ChatGPT-ArXiv-Paper-Assistant/arxiv_assistant/apis/hotspot_local_papers.py)
+- [hotspot_hf_papers.py](C:/Users/dzdon/CodesSelf/ChatGPT-ArXiv-Paper-Assistant/arxiv_assistant/apis/hotspot_hf_papers.py)
+- [hotspot_ainews.py](C:/Users/dzdon/CodesSelf/ChatGPT-ArXiv-Paper-Assistant/arxiv_assistant/apis/hotspot_ainews.py)
+- [hotspot_roundups.py](C:/Users/dzdon/CodesSelf/ChatGPT-ArXiv-Paper-Assistant/arxiv_assistant/apis/hotspot_roundups.py)
+- [hotspot_official_blogs.py](C:/Users/dzdon/CodesSelf/ChatGPT-ArXiv-Paper-Assistant/arxiv_assistant/apis/hotspot_official_blogs.py)
+- [hotspot_github.py](C:/Users/dzdon/CodesSelf/ChatGPT-ArXiv-Paper-Assistant/arxiv_assistant/apis/hotspot_github.py)
+- [hotspot_hn.py](C:/Users/dzdon/CodesSelf/ChatGPT-ArXiv-Paper-Assistant/arxiv_assistant/apis/hotspot_hn.py)
+- [render_hot_daily.py](C:/Users/dzdon/CodesSelf/ChatGPT-ArXiv-Paper-Assistant/arxiv_assistant/renderers/render_hot_daily.py)
+- [build_multipage_site.py](C:/Users/dzdon/CodesSelf/ChatGPT-ArXiv-Paper-Assistant/arxiv_assistant/renderers/build_multipage_site.py)
+
+Prompt files:
+
+- [hotspot_system_prompt.txt](C:/Users/dzdon/CodesSelf/ChatGPT-ArXiv-Paper-Assistant/prompts/hotspot_system_prompt.txt)
+- [hotspot_screening_criteria.txt](C:/Users/dzdon/CodesSelf/ChatGPT-ArXiv-Paper-Assistant/prompts/hotspot_screening_criteria.txt)
+- [postfix_prompt_hotspot_screening.txt](C:/Users/dzdon/CodesSelf/ChatGPT-ArXiv-Paper-Assistant/prompts/postfix_prompt_hotspot_screening.txt)
+- [hotspot_digest_writer.txt](C:/Users/dzdon/CodesSelf/ChatGPT-ArXiv-Paper-Assistant/prompts/hotspot_digest_writer.txt)

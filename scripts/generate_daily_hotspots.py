@@ -26,6 +26,7 @@ from arxiv_assistant.filters.filter_hotspots import build_candidate_topics, heur
 from arxiv_assistant.renderers.render_hot_daily import render_hot_daily_md
 from arxiv_assistant.utils.hotspot_cluster import build_hotspot_clusters
 from arxiv_assistant.utils.hotspot_schema import HotspotCluster, HotspotItem
+from arxiv_assistant.utils.hotspot_web_data import write_hotspot_web_data
 
 ROLE_PRIORITY = {
     "research_backbone": 0,
@@ -882,6 +883,7 @@ def generate_daily_hotspot_report(output_root: str | Path, target_date: datetime
     write_json(hot_root / "normalized" / f"{date_string(target_date)}.json", _serialize_items(raw_items))
     write_json(hot_root / "clusters" / f"{date_string(target_date)}.json", [cluster.to_dict() for cluster in clusters])
     write_json(hot_root / "reports" / f"{date_string(target_date)}.json", report)
+    write_hotspot_web_data(output_root, report, raw_items)
     md_path = hot_root / "md" / month_string(target_date) / f"{date_string(target_date)}-hotspots.md"
     ensure_dir(md_path.parent)
     md_path.write_text(render_hot_daily_md(report), encoding="utf-8")

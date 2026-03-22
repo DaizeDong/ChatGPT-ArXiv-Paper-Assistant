@@ -8,8 +8,8 @@ Current branch: `test_news`
 
 | Phase | Scope | Status |
 | --- | --- | --- |
-| Baseline | current hotspot coverage expansion before frontend migration | in progress |
-| Phase 1 | `web_data` schema and JSON generation | pending |
+| Baseline | current hotspot coverage expansion before frontend migration | completed |
+| Phase 1 | `web_data` schema and JSON generation | completed |
 | Phase 2 | frontend scaffold and build chain | pending |
 | Phase 3 | source-first daily page | pending |
 | Phase 4 | source/topic detail pages | pending |

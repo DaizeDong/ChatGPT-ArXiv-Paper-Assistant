@@ -2,6 +2,7 @@ import tempfile
 import unittest
 from pathlib import Path
 
+from arxiv_assistant.renderers.render_daily_with_link import render_daily_md_with_hyperlink
 from arxiv_assistant.renderers.render_static_site import render_static_site
 
 
@@ -47,6 +48,22 @@ class RenderStaticSiteTests(unittest.TestCase):
             self.assertIn('href="#link1"', daily_html)
             self.assertIn('id="link1"', daily_html)
             self.assertIn("Toggle dark mode", daily_html)
+
+    def test_daily_header_keeps_three_column_layout_at_boundary_dates(self):
+        rendered = render_daily_md_with_hyperlink(
+            now_date=(2026, 3, 20),
+            current_page_path="archive/2026-03/20/index.md",
+            all_dates={(2026, 3, 19), (2026, 3, 20)},
+            previous_asset_path="assets/nav/day/2026-03-20-prev.svg",
+            center_asset_path="assets/nav/day/2026-03-20-center.svg",
+            next_asset_path=None,
+            content_string="# Personalized Daily ArXiv Papers 2026-03-20",
+        )
+
+        self.assertIn('width: 33.33%; text-align: left;', rendered)
+        self.assertIn('width: 33.33%; text-align: center;', rendered)
+        self.assertIn('width: 33.33%; text-align: right;', rendered)
+        self.assertIn('Monthly Overview 2026-03', rendered)
 
 
 if __name__ == "__main__":

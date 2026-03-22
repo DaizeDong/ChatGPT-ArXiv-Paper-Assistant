@@ -20,6 +20,18 @@ def _join_nav_parts(parts: list[str]) -> str:
     return HEADER_SEPARATOR.join(part for part in parts if part)
 
 
+def _render_fixed_nav_row(left_html: str = "", center_html: str = "", right_html: str = "") -> str:
+    return "".join(
+        [
+            '<div style="display: flex; align-items: flex-start; justify-content: space-between; width: 100%;">',
+            f'<div style="width: 33.33%; text-align: left;">{left_html}</div>',
+            f'<div style="width: 33.33%; text-align: center;">{center_html}</div>',
+            f'<div style="width: 33.33%; text-align: right;">{right_html}</div>',
+            "</div>",
+        ]
+    )
+
+
 def _render_month_header(
     current_page_path: str,
     now_month: Tuple[int, int],
@@ -46,29 +58,27 @@ def _render_month_header(
     )
 
     if previous_href and previous_asset_path or center_asset_path or next_href and next_asset_path:
-        parts = ["<div>"]
+        previous_html = ""
         if previous_href and previous_asset_path and previous_month is not None:
             previous_asset_href = relative_site_path(previous_asset_path, current_page_path)
-            parts.append(
-                f'<a href="{previous_href}"><img align="left" src="{previous_asset_href}" '
+            previous_html = (
+                f'<a href="{previous_href}"><img src="{previous_asset_href}" '
                 f'alt="Previous Month {previous_month[0]}-{previous_month[1]:02d}"></a>'
             )
+        next_html = ""
         if next_href and next_asset_path and next_month is not None:
             next_asset_href = relative_site_path(next_asset_path, current_page_path)
-            parts.append(
-                f'<a href="{next_href}"><img align="right" src="{next_asset_href}" '
+            next_html = (
+                f'<a href="{next_href}"><img src="{next_asset_href}" '
                 f'alt="Next Month {next_month[0]}-{next_month[1]:02d}"></a>'
             )
-        parts.append('<div align="center">')
+        center_html = ""
         if center_asset_path is not None:
             center_asset_href = relative_site_path(center_asset_path, current_page_path)
-            parts.append(f'<a href="{year_href}"><img src="{center_asset_href}" alt="Yearly Overview {now_year}"></a>')
+            center_html = f'<a href="{year_href}"><img src="{center_asset_href}" alt="Yearly Overview {now_year}"></a>'
         else:
-            parts.append(_render_link(year_href, f"Yearly Overview<br>{now_year}"))
-        parts.append("</div>")
-        parts.append('<br clear="all">')
-        parts.append("</div>")
-        return "".join(parts)
+            center_html = _render_link(year_href, f"Yearly Overview<br>{now_year}")
+        return _render_fixed_nav_row(previous_html, center_html, next_html)
 
     line_one = _join_nav_parts(
         [

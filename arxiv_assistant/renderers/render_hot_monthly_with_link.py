@@ -184,21 +184,29 @@ def render_hot_monthly_md_with_hyperlink(
     previous_asset_path: str | None = None,
     center_asset_path: str | None = None,
     next_asset_path: str | None = None,
+    related_page_path: str | None = None,
+    related_label: str = "Paper Archive",
 ) -> str:
     year, month_num = now_month
-    return "\n\n".join(
+    parts = [
+        _render_month_header(
+            current_page_path=current_page_path,
+            now_month=now_month,
+            all_months_list=all_months_list,
+            previous_asset_path=previous_asset_path,
+            center_asset_path=center_asset_path,
+            next_asset_path=next_asset_path,
+        )
+    ]
+    if related_page_path is not None:
+        related_href = relative_site_href(related_page_path, current_page_path)
+        parts.append(f'<div align="center" class="site-jump-links"><a href="{related_href}">{related_label}</a></div>')
+    parts.extend(
         [
-            _render_month_header(
-                current_page_path=current_page_path,
-                now_month=now_month,
-                all_months_list=all_months_list,
-                previous_asset_path=previous_asset_path,
-                center_asset_path=center_asset_path,
-                next_asset_path=next_asset_path,
-            ),
             f"# Daily AI Hotspots Archive {year}/{month_num:02d}",
             _render_stats_table(report_summaries),
             _render_calendar(now_month, current_page_path, report_summaries),
             _render_daily_briefs(current_page_path, report_summaries),
         ]
-    ).strip()
+    )
+    return "\n\n".join(parts).strip()

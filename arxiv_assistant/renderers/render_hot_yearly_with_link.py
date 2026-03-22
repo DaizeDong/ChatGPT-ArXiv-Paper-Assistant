@@ -133,6 +133,8 @@ def render_hot_yearly_md_with_hyperlink(
     month_stats: dict[tuple[int, int], dict[str, Any]],
     previous_asset_path: str | None = None,
     next_asset_path: str | None = None,
+    related_page_path: str | None = None,
+    related_label: str = "Paper Archive",
 ) -> str:
     parts = [
         f"# Daily AI Hotspots Archive {now_year}",
@@ -148,4 +150,7 @@ def render_hot_yearly_md_with_hyperlink(
     )
     if header:
         parts.insert(0, header)
+    if related_page_path is not None:
+        related_href = relative_site_href(related_page_path, current_page_path)
+        parts.insert(1 if header else 0, f'<div align="center" class="site-jump-links"><a href="{related_href}">{related_label}</a></div>')
     return "\n\n".join(parts)

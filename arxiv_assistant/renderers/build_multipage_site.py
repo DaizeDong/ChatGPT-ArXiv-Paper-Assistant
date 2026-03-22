@@ -417,6 +417,7 @@ def build_multipage_site(output_root: str | Path) -> Path | None:
                     if month_idx + 1 < len(hot_months)
                     else None
                 ),
+                related_page_path=site_month_page_path(month) if month in month_page_mapping else site_year_page_path(month[0]) if month[0] in all_years_list else ROOT_SITE_PAGE,
             )
             _write_text(site_root / Path(site_hot_month_page_path(month)), rendered)
 
@@ -446,6 +447,7 @@ def build_multipage_site(output_root: str | Path) -> Path | None:
                     if year_idx + 1 < len(hot_years)
                     else None
                 ),
+                related_page_path=site_year_page_path(year) if year in all_years_list else ROOT_SITE_PAGE,
             )
             _write_text(site_root / Path(site_hot_year_page_path(year)), rendered)
 

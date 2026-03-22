@@ -4,6 +4,7 @@ import argparse
 import configparser
 import json
 import os
+import re
 import sys
 from datetime import UTC, datetime
 from pathlib import Path
@@ -37,6 +38,7 @@ ROLE_PRIORITY = {
     "hn_discussion": 8,
 }
 APP_TIMEZONE = ZoneInfo("America/New_York")
+DAY_OUTPUT_PATTERN = re.compile(r"(?P<year>\d{4})-(?P<month>\d{2})-(?P<day>\d{2})-output\.json$")
 
 
 def parse_args() -> argparse.Namespace:
@@ -58,11 +60,35 @@ def read_prompt(prompt_path: Path) -> str:
     return prompt_path.read_text(encoding="utf-8")
 
 
-def parse_target_datetime(target_date_arg: str | None) -> datetime:
+def parse_target_datetime(target_date_arg: str | None, output_root: Path) -> datetime:
     if target_date_arg:
         return datetime.strptime(target_date_arg, "%Y-%m-%d").replace(tzinfo=APP_TIMEZONE)
+    latest_local = detect_latest_local_output_date(output_root)
+    if latest_local is not None:
+        return latest_local
     now = datetime.now(APP_TIMEZONE)
     return datetime(now.year, now.month, now.day, tzinfo=APP_TIMEZONE)
+
+
+def detect_latest_local_output_date(output_root: Path) -> datetime | None:
+    json_root = output_root / "json"
+    latest: tuple[int, int, int] | None = None
+    if not json_root.exists():
+        return None
+    for file_path in json_root.glob("*/*-output.json"):
+        match = DAY_OUTPUT_PATTERN.fullmatch(file_path.name)
+        if match is None:
+            continue
+        date_key = (
+            int(match.group("year")),
+            int(match.group("month")),
+            int(match.group("day")),
+        )
+        if latest is None or date_key > latest:
+            latest = date_key
+    if latest is None:
+        return None
+    return datetime(latest[0], latest[1], latest[2], tzinfo=APP_TIMEZONE)
 
 
 def date_string(target_date: datetime) -> str:
@@ -546,7 +572,7 @@ def main() -> None:
     config = load_config(REPO_ROOT / "configs" / "config.ini")
     report = generate_daily_hotspot_report(
         output_root=args.output_root,
-        target_date=parse_target_datetime(args.target_date),
+        target_date=parse_target_datetime(args.target_date, Path(args.output_root)),
         config=config,
         mode_override=args.mode,
         force=args.force,

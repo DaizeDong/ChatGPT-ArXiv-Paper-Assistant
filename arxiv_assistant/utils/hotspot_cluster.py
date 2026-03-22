@@ -45,6 +45,23 @@ STOPWORDS = {
     "2025",
     "2026",
 }
+GENERIC_OVERLAP_TOKENS = {
+    "open",
+    "source",
+    "research",
+    "agent",
+    "agents",
+    "model",
+    "models",
+    "paper",
+    "papers",
+    "coding",
+    "code",
+    "reasoning",
+    "benchmark",
+    "system",
+    "systems",
+}
 
 SOURCE_ROLE_WEIGHTS = {
     "research_backbone": 5.4,
@@ -94,7 +111,11 @@ def title_similarity(left: str, right: str) -> float:
 
 
 def title_overlap_boost(left: str, right: str) -> float:
-    overlap = significant_title_tokens(left) & significant_title_tokens(right)
+    overlap = {
+        token
+        for token in (significant_title_tokens(left) & significant_title_tokens(right))
+        if token not in GENERIC_OVERLAP_TOKENS
+    }
     if len(overlap) >= 2:
         return 0.84
     if overlap and any(any(char.isdigit() for char in token) for token in overlap):

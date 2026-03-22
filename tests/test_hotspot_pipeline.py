@@ -14,6 +14,7 @@ from arxiv_assistant.apis.hotspot_official_blogs import _extract_anthropic_rows
 from arxiv_assistant.filters.filter_hotspots import _cluster_signal_scores
 from arxiv_assistant.utils.hotspot_cluster import build_hotspot_clusters
 from arxiv_assistant.utils.hotspot_schema import HotspotCluster, HotspotItem
+from scripts.generate_daily_hotspots import detect_latest_local_output_date
 
 
 class TestHotspotPipeline(unittest.TestCase):
@@ -94,6 +95,34 @@ class TestHotspotPipeline(unittest.TestCase):
         clusters = build_hotspot_clusters([hf_item, community_item])
         self.assertEqual(len(clusters), 1)
         self.assertEqual(sorted(clusters[0].source_ids), ["ainews", "hf_papers"])
+
+    def test_cluster_does_not_merge_on_generic_ai_words_only(self) -> None:
+        left = HotspotItem(
+            source_id="hf_papers",
+            source_name="HF",
+            source_role="paper_trending",
+            source_type="paper",
+            title="MiroThinker: Pushing the Performance Boundaries of Open-Source Research Agents",
+            summary="Research agent paper.",
+            url="https://huggingface.co/papers/2511.11793",
+            canonical_url="https://arxiv.org/abs/2511.11793",
+            published_at="2026-03-20T12:00:00+00:00",
+        )
+        right = HotspotItem(
+            source_id="hn_discussion",
+            source_name="Hacker News",
+            source_role="hn_discussion",
+            source_type="discussion",
+            title="OpenCode — Open source AI coding agent",
+            summary="Open source coding agent discussion.",
+            url="https://opencode.ai",
+            canonical_url="https://opencode.ai",
+            published_at="2026-03-20T12:30:00+00:00",
+        )
+
+        clusters = build_hotspot_clusters([left, right])
+
+        self.assertEqual(len(clusters), 2)
 
     def test_official_release_scores_as_meaningful_watchlist_or_better(self) -> None:
         item = HotspotItem(
@@ -198,6 +227,18 @@ class TestHotspotPipeline(unittest.TestCase):
         self.assertEqual(items[0].source_role, "hn_discussion")
         self.assertEqual(items[0].metadata["hn_score"], 120)
         self.assertEqual(items[0].metadata["hn_comments"], 60)
+
+    def test_detect_latest_local_output_date_uses_newest_daily_json(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            out_root = Path(temp_dir) / "out"
+            (out_root / "json" / "2026-03").mkdir(parents=True)
+            (out_root / "json" / "2026-03" / "2026-03-20-output.json").write_text("{}", encoding="utf-8")
+            (out_root / "json" / "2026-03" / "2026-03-21-output.json").write_text("{}", encoding="utf-8")
+
+            detected = detect_latest_local_output_date(out_root)
+
+            self.assertIsNotNone(detected)
+            self.assertEqual(detected.strftime("%Y-%m-%d"), "2026-03-21")
 
 
 if __name__ == "__main__":

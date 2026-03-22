@@ -33,8 +33,14 @@ This feature is a complement to the existing paper digest, not a replacement.
     - Hacker News filtering is restricted to AI-relevant hostnames and keyword-matched discussions
     - candidate selection budgets now explicitly reserve room for `github_trend` and `hn_discussion`
     - main-list trimming keeps at least one real heat/community slot while still capping paper-heavy dominance
-- Phase 3: Pending
-  - Scope: remediation, monthly/yearly hotspot archives, site integration polish
+- Phase 3: Completed
+  - Scope delivered: remediation, monthly/yearly hotspot archives, site integration polish
+  - Integration refinements completed:
+    - the daily cron workflow now generates hotspot digests alongside the paper digest
+    - hotspot generation auto-detects the newest local paper-output day when no explicit date is provided
+    - the missed-date remedy workflow now regenerates hotspot digests for repaired dates before syncing back to `auto_update`
+    - hotspot month/year archive pages are included in the multipage site build and validated by tests
+    - clustering now avoids false merges caused by generic shared AI words in unrelated headlines
 
 ## Core Principles
 

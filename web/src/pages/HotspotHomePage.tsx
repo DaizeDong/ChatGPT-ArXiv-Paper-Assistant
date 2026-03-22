@@ -44,11 +44,11 @@ export function HotspotHomePage() {
     <div className="stack">
       <section className="hero panel">
         <div>
-          <p className="eyebrow">Phase 2 scaffold</p>
-          <h1>Static hotspot app shell is live.</h1>
+          <p className="eyebrow">Daily AI Hotspots</p>
+          <h1>Source-first AI news radar.</h1>
           <p className="lede">
-            The app now reads frontend-ready JSON from <code>out/web_data</code> and provides stable routes for
-            daily, monthly, yearly, source, and topic views.
+            The hotspot frontend now reads dense JSON feeds from <code>out/web_data</code> and exposes daily, monthly,
+            yearly, source, and topic routes without depending on markdown rendering.
           </p>
         </div>
         {latest ? (

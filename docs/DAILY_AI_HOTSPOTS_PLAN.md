@@ -14,7 +14,7 @@ Current branch: `test_news`
 | Phase 3 | source-first daily page | completed |
 | Phase 4 | source/topic detail pages | completed |
 | Phase 5 | month/year archive pages | completed |
-| Phase 6 | publish workflow migration | pending |
+| Phase 6 | publish workflow migration | completed |
 
 ## 1. Purpose
 
@@ -434,6 +434,8 @@ Deliverables:
 Success condition:
 
 - the new frontend is the primary user-facing hotspot interface
+- publish CI rebuilds hotspot `web_data` from saved reports and normalized items before the web build
+- final Pages output serves the React hotspot app under `/hot/...` routes without committing generated HTML
 
 ## 12. Acceptance Criteria
 

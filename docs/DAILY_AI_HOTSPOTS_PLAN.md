@@ -26,8 +26,13 @@ This feature is a complement to the existing paper digest, not a replacement.
     - clustering merges overlapping paper/news signals more aggressively via normalized title token overlap and shared repo/arXiv identity
     - top-topic trimming now enforces source diversity, preserves at least one real heat slot, and avoids collapsing into a pure paper list
   - Site integration: hotspot daily pages plus month/year archives are wired into the multipage site and publish flow
-- Phase 2: Pending
-  - Scope: GitHub trend signal, Hacker News signal, ranking improvements
+- Phase 2: Completed
+  - Scope delivered: GitHub trend signal, Hacker News signal, ranking improvements
+  - Ranking refinements completed:
+    - GitHub adapter now uses recent-repo search instead of surfacing generic legacy high-star repos
+    - Hacker News filtering is restricted to AI-relevant hostnames and keyword-matched discussions
+    - candidate selection budgets now explicitly reserve room for `github_trend` and `hn_discussion`
+    - main-list trimming keeps at least one real heat/community slot while still capping paper-heavy dominance
 - Phase 3: Pending
   - Scope: remediation, monthly/yearly hotspot archives, site integration polish
 

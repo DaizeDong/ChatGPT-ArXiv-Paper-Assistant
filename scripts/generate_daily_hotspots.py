@@ -15,7 +15,9 @@ if str(REPO_ROOT) not in sys.path:
     sys.path.insert(0, str(REPO_ROOT))
 
 from arxiv_assistant.apis.hotspot_ainews import fetch_hotspot_items as fetch_ainews_items
+from arxiv_assistant.apis.hotspot_github import fetch_hotspot_items as fetch_github_items
 from arxiv_assistant.apis.hotspot_hf_papers import fetch_hotspot_items as fetch_hf_items
+from arxiv_assistant.apis.hotspot_hn import fetch_hotspot_items as fetch_hn_items
 from arxiv_assistant.apis.hotspot_local_papers import fetch_hotspot_items as fetch_local_paper_items
 from arxiv_assistant.apis.hotspot_official_blogs import fetch_hotspot_items as fetch_official_blog_items
 from arxiv_assistant.apis.hotspot_roundups import fetch_hotspot_items as fetch_roundup_items
@@ -171,10 +173,14 @@ def fetch_source_payloads(target_date: datetime, output_root: Path, config: conf
     hotspot_sources = config["HOTSPOT_SOURCES"]
     hotspot_config = config["HOTSPOTS"]
     freshness_hours = hotspot_config.getint("freshness_hours", fallback=36)
+    github_config = config["HOTSPOT_GITHUB"]
+    hn_config = config["HOTSPOT_HN"]
     registry_path = REPO_ROOT / hotspot_config.get("source_registry_path", "configs/hotspot_roundup_sites.json")
     reuse_cached_raw = hotspot_sources.getboolean("reuse_cached_raw", fallback=True)
     local_papers_max_staleness_days = hotspot_sources.getint("local_papers_max_staleness_days", fallback=2)
     hf_result_limit = hotspot_sources.getint("hf_result_limit", fallback=24)
+    github_queries = [query.strip() for query in github_config.get("search_queries", "").split(",") if query.strip()]
+    hn_keywords = [keyword.strip().lower() for keyword in hn_config.get("keyword_filter", "").split(",") if keyword.strip()]
 
     specs = []
     if hotspot_sources.getboolean("use_local_papers", fallback=True):
@@ -187,6 +193,33 @@ def fetch_source_payloads(target_date: datetime, output_root: Path, config: conf
         specs.append(("official_blogs", lambda: fetch_official_blog_items(target_date, freshness_hours)))
     if hotspot_sources.getboolean("use_roundup_sites", fallback=True):
         specs.append(("roundup_sites", lambda: fetch_roundup_items(target_date, freshness_hours, registry_path)))
+    if hotspot_sources.getboolean("use_github", fallback=False):
+        specs.append(
+            (
+                "github_trend",
+                lambda: fetch_github_items(
+                    target_date=target_date,
+                    search_queries=github_queries,
+                    stars_cutoff=github_config.getint("stars_cutoff", fallback=20),
+                    created_within_days=github_config.getint("created_within_days", fallback=10),
+                    result_limit=github_config.getint("result_limit", fallback=30),
+                ),
+            )
+        )
+    if hotspot_sources.getboolean("use_hn", fallback=False):
+        specs.append(
+            (
+                "hn_discussion",
+                lambda: fetch_hn_items(
+                    target_date=target_date,
+                    freshness_hours=freshness_hours,
+                    keyword_filter=hn_keywords,
+                    story_limit=hn_config.getint("story_limit", fallback=80),
+                    score_cutoff=hn_config.getint("score_cutoff", fallback=30),
+                    comments_cutoff=hn_config.getint("comments_cutoff", fallback=8),
+                ),
+            )
+        )
 
     all_items: list[HotspotItem] = []
     source_stats: dict[str, int] = {}
@@ -220,6 +253,8 @@ def deterministic_trim(clusters: list[HotspotCluster], max_clusters: int) -> lis
         "editorial_depth": 2,
         "community_heat": 2,
         "builder_momentum": 1,
+        "github_trend": 2,
+        "hn_discussion": 2,
     }
     selected: list[HotspotCluster] = []
     selected_ids: set[str] = set()

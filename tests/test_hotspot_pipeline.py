@@ -4,8 +4,11 @@ import tempfile
 import unittest
 from datetime import UTC, datetime
 from pathlib import Path
+from unittest.mock import patch
 
 from arxiv_assistant.apis.hotspot_ainews import _choose_best_anchor, _derive_segment_title
+from arxiv_assistant.apis.hotspot_github import fetch_hotspot_items as fetch_github_hotspot_items
+from arxiv_assistant.apis.hotspot_hn import fetch_hotspot_items as fetch_hn_hotspot_items
 from arxiv_assistant.apis.hotspot_local_papers import _resolve_best_source_path
 from arxiv_assistant.apis.hotspot_official_blogs import _extract_anthropic_rows
 from arxiv_assistant.filters.filter_hotspots import _cluster_signal_scores
@@ -122,6 +125,79 @@ class TestHotspotPipeline(unittest.TestCase):
         signals = _cluster_signal_scores(cluster)
         self.assertGreaterEqual(signals["FINAL_SCORE"], 3.6)
         self.assertGreaterEqual(signals["IMPORTANCE"], 5)
+
+    @patch("arxiv_assistant.apis.hotspot_github.fetch_json")
+    def test_github_adapter_builds_repo_items(self, mock_fetch_json) -> None:
+        mock_fetch_json.return_value = {
+            "items": [
+                {
+                    "full_name": "acme/agent-kit",
+                    "html_url": "https://github.com/acme/agent-kit",
+                    "description": "Open-source agent toolkit.",
+                    "stargazers_count": 420,
+                    "forks_count": 42,
+                    "language": "Python",
+                    "topics": ["agents", "llm"],
+                    "created_at": "2026-03-20T00:00:00Z",
+                    "updated_at": "2026-03-21T00:00:00Z",
+                    "owner": {"login": "acme"},
+                }
+            ]
+        }
+
+        items = fetch_github_hotspot_items(
+            target_date=datetime(2026, 3, 21, tzinfo=UTC),
+            search_queries=["agent framework"],
+            stars_cutoff=20,
+            created_within_days=10,
+            result_limit=5,
+        )
+
+        self.assertEqual(len(items), 1)
+        self.assertEqual(items[0].source_role, "github_trend")
+        self.assertEqual(items[0].metadata["stars"], 420)
+        self.assertIn("agent framework", mock_fetch_json.call_args.kwargs["params"]["q"])
+        self.assertIn("stars:>=20", mock_fetch_json.call_args.kwargs["params"]["q"])
+
+    @patch("arxiv_assistant.apis.hotspot_hn.fetch_json")
+    def test_hn_adapter_filters_to_ai_relevant_story(self, mock_fetch_json) -> None:
+        mock_fetch_json.side_effect = [
+            [101, 102],
+            {
+                "id": 101,
+                "type": "story",
+                "title": "OpenAI launches a new agent benchmark",
+                "score": 120,
+                "descendants": 60,
+                "time": int(datetime(2026, 3, 21, 12, tzinfo=UTC).timestamp()),
+                "url": "https://openai.com/index/new-agent-benchmark",
+                "by": "alice",
+            },
+            {
+                "id": 102,
+                "type": "story",
+                "title": "Interesting startup discussion",
+                "score": 25,
+                "descendants": 3,
+                "time": int(datetime(2026, 3, 21, 12, tzinfo=UTC).timestamp()),
+                "url": "https://example.com/startup",
+                "by": "bob",
+            },
+        ]
+
+        items = fetch_hn_hotspot_items(
+            target_date=datetime(2026, 3, 21, tzinfo=UTC),
+            freshness_hours=36,
+            keyword_filter=["openai", "agent"],
+            story_limit=10,
+            score_cutoff=30,
+            comments_cutoff=8,
+        )
+
+        self.assertEqual(len(items), 1)
+        self.assertEqual(items[0].source_role, "hn_discussion")
+        self.assertEqual(items[0].metadata["hn_score"], 120)
+        self.assertEqual(items[0].metadata["hn_comments"], 60)
 
 
 if __name__ == "__main__":

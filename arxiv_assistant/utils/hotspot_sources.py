@@ -19,13 +19,17 @@ def fetch_text(url: str, timeout: int = 30) -> str:
     return response.text
 
 
-def fetch_json(url: str, timeout: int = 30) -> Any:
+def fetch_json(url: str, timeout: int = 30, headers: dict[str, str] | None = None, params: dict[str, Any] | None = None) -> Any:
+    request_headers = {
+        "User-Agent": USER_AGENT,
+        "Accept": "application/json",
+    }
+    if headers:
+        request_headers.update(headers)
     response = requests.get(
         url,
-        headers={
-            "User-Agent": USER_AGENT,
-            "Accept": "application/json",
-        },
+        headers=request_headers,
+        params=params,
         timeout=timeout,
     )
     response.raise_for_status()

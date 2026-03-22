@@ -13,9 +13,10 @@ from arxiv_assistant.apis.hotspot_hn import fetch_hotspot_items as fetch_hn_hots
 from arxiv_assistant.apis.hotspot_local_papers import _resolve_best_source_path
 from arxiv_assistant.apis.hotspot_official_blogs import _extract_anthropic_rows
 from arxiv_assistant.filters.filter_hotspots import _cluster_signal_scores
+from arxiv_assistant.renderers.render_hot_daily import render_hot_daily_md
 from arxiv_assistant.utils.hotspot_cluster import build_hotspot_clusters
 from arxiv_assistant.utils.hotspot_schema import HotspotCluster, HotspotItem
-from scripts.generate_daily_hotspots import _build_x_buzz_items, _trim_topics, detect_latest_local_output_date
+from scripts.generate_daily_hotspots import _build_category_sections, _build_x_buzz_items, _merge_display_candidates, _trim_topics, detect_latest_local_output_date
 
 
 class TestHotspotPipeline(unittest.TestCase):
@@ -400,6 +401,203 @@ class TestHotspotPipeline(unittest.TestCase):
         self.assertEqual(x_buzz[0]["linked_topic"], "Cursor controversy")
         self.assertIn("the_rundown_ai", {item["source_id"] for item in x_buzz})
         self.assertIn("hn_discussion", {item["source_id"] for item in x_buzz})
+
+    def test_category_sections_expand_coverage_without_repeating_featured_topics(self) -> None:
+        candidate_topics = [
+            {
+                "TOPIC_ID": "featured-official",
+                "title": "Official model release",
+                "PRIMARY_CATEGORY": "Product Release",
+                "source_roles": ["official_news", "headline_consensus"],
+                "source_names": ["OpenAI News", "The Rundown AI"],
+                "source_ids": ["openai_news", "the_rundown_ai"],
+                "source_types": ["official_blog", "roundup"],
+                "items": [{"title": "Official model release", "url": "https://example.com/release"}],
+                "FINAL_SCORE": 8.8,
+                "EVIDENCE_STRENGTH": 7.4,
+                "CROSS_SOURCE_RESONANCE": 7.1,
+                "QUALITY": 8,
+                "HEAT": 8,
+                "IMPORTANCE": 9,
+            },
+            {
+                "TOPIC_ID": "tooling-1",
+                "title": "Open-source agent runtime",
+                "PRIMARY_CATEGORY": "Tooling",
+                "source_roles": ["github_trend", "headline_consensus"],
+                "source_names": ["GitHub Trending Repos", "The Neuron"],
+                "source_ids": ["github_trend", "the_neuron"],
+                "source_types": ["repo", "roundup"],
+                "items": [{"title": "Open-source agent runtime", "url": "https://example.com/runtime"}],
+                "FINAL_SCORE": 7.6,
+                "EVIDENCE_STRENGTH": 6.3,
+                "CROSS_SOURCE_RESONANCE": 6.0,
+                "QUALITY": 7,
+                "HEAT": 7,
+                "IMPORTANCE": 7,
+            },
+            {
+                "TOPIC_ID": "research-1",
+                "title": "Reasoning benchmark paper",
+                "PRIMARY_CATEGORY": "Research",
+                "source_roles": ["paper_trending", "community_heat"],
+                "source_names": ["Hugging Face Trending Papers", "AINews"],
+                "source_ids": ["hf_papers", "ainews"],
+                "source_types": ["paper", "roundup"],
+                "items": [{"title": "Reasoning benchmark paper", "url": "https://example.com/paper"}],
+                "FINAL_SCORE": 7.2,
+                "EVIDENCE_STRENGTH": 5.8,
+                "CROSS_SOURCE_RESONANCE": 5.6,
+                "QUALITY": 8,
+                "HEAT": 6,
+                "IMPORTANCE": 7,
+            },
+            {
+                "TOPIC_ID": "community-1",
+                "title": "Debate over model provenance",
+                "PRIMARY_CATEGORY": "Community Signal",
+                "source_roles": ["community_heat", "hn_discussion"],
+                "source_names": ["AINews", "Hacker News"],
+                "source_ids": ["ainews", "hn_discussion"],
+                "source_types": ["roundup", "discussion"],
+                "items": [{"title": "Debate over model provenance", "url": "https://example.com/debate"}],
+                "FINAL_SCORE": 6.8,
+                "EVIDENCE_STRENGTH": 5.2,
+                "CROSS_SOURCE_RESONANCE": 6.4,
+                "QUALITY": 6,
+                "HEAT": 8,
+                "IMPORTANCE": 6,
+            },
+            {
+                "TOPIC_ID": "generic-notice",
+                "title": "Information Collection Notice",
+                "PRIMARY_CATEGORY": "Community Signal",
+                "source_roles": ["headline_consensus"],
+                "source_names": ["Ben's Bites"],
+                "source_ids": ["bens_bites"],
+                "source_types": ["roundup"],
+                "items": [{"title": "Information Collection Notice", "url": "https://example.com/notice"}],
+                "FINAL_SCORE": 3.8,
+                "EVIDENCE_STRENGTH": 5.0,
+                "CROSS_SOURCE_RESONANCE": 5.4,
+                "QUALITY": 4,
+                "HEAT": 6,
+                "IMPORTANCE": 4,
+            },
+            {
+                "TOPIC_ID": "off-topic-news",
+                "title": "Amazon's secret phone project",
+                "PRIMARY_CATEGORY": "Community Signal",
+                "source_roles": ["headline_consensus"],
+                "source_names": ["The Rundown AI"],
+                "source_ids": ["the_rundown_ai"],
+                "source_types": ["roundup"],
+                "items": [{"title": "Amazon's secret phone project", "url": "https://example.com/phone"}],
+                "FINAL_SCORE": 3.6,
+                "EVIDENCE_STRENGTH": 4.2,
+                "CROSS_SOURCE_RESONANCE": 4.0,
+                "QUALITY": 4,
+                "HEAT": 5,
+                "IMPORTANCE": 4,
+                "summary": "A hardware story with little direct AI relevance.",
+                "SHORT_COMMENT": "A hardware story with little direct AI relevance.",
+            },
+        ]
+        screened_top = [{"TOPIC_ID": "featured-official", "KEEP_IN_DAILY_HOTSPOTS": True, "WATCHLIST": False}]
+        screened_watchlist = [{"TOPIC_ID": "community-1", "KEEP_IN_DAILY_HOTSPOTS": False, "WATCHLIST": True}]
+
+        display_candidates = _merge_display_candidates(candidate_topics, screened_top, screened_watchlist)
+        display_lookup = {topic["TOPIC_ID"]: topic for topic in display_candidates}
+        sections = _build_category_sections(
+            display_candidates,
+            [display_lookup["featured-official"]],
+            target_total_topics=3,
+            max_per_category=2,
+            min_display_score=2.0,
+        )
+
+        self.assertEqual(display_lookup["featured-official"]["LLM_STATUS"], "featured")
+        self.assertEqual(display_lookup["community-1"]["LLM_STATUS"], "watchlist")
+        displayed_ids = {topic["TOPIC_ID"] for section in sections for topic in section["topics"]}
+        self.assertNotIn("featured-official", displayed_ids)
+        self.assertIn("tooling-1", displayed_ids)
+        self.assertIn("research-1", displayed_ids)
+        self.assertIn("community-1", displayed_ids)
+        self.assertNotIn("generic-notice", displayed_ids)
+        self.assertNotIn("off-topic-news", displayed_ids)
+
+    def test_render_hot_daily_includes_category_radar(self) -> None:
+        report = {
+            "date": "2026-03-21",
+            "summary": "Strong multi-source AI discussion across releases, tooling, and research.",
+            "source_stats": {"ainews": 3, "github_trend": 5},
+            "totals": {"raw_items": 20, "clusters": 15},
+            "featured_topics": [
+                {
+                    "TOPIC_ID": "featured-official",
+                    "HEADLINE": "Official model release",
+                    "PRIMARY_CATEGORY": "Product Release",
+                    "FINAL_SCORE": 8.8,
+                    "QUALITY": 8,
+                    "HEAT": 8,
+                    "IMPORTANCE": 9,
+                    "source_names": ["OpenAI News", "The Rundown AI"],
+                    "items": [{"title": "Official model release", "url": "https://example.com/release", "source_name": "OpenAI News"}],
+                    "WHY_IT_MATTERS": "The release showed up in multiple trusted sources.",
+                    "KEY_TAKEAWAYS": ["Broad ecosystem attention."],
+                }
+            ],
+            "category_sections": [
+                {
+                    "category": "Tooling",
+                    "total_candidates": 2,
+                    "topics": [
+                        {
+                            "TOPIC_ID": "tooling-1",
+                            "title": "Open-source agent runtime",
+                            "PRIMARY_CATEGORY": "Tooling",
+                            "FINAL_SCORE": 7.6,
+                            "HEAT": 7,
+                            "OCCURRENCE_SCORE": 6.4,
+                            "source_names": ["GitHub Trending Repos", "The Neuron"],
+                            "items": [{"title": "Open-source agent runtime", "url": "https://example.com/runtime"}],
+                            "WHY_IT_MATTERS": "Builder momentum remained strong.",
+                            "LLM_STATUS": "candidate",
+                        }
+                    ],
+                }
+            ],
+            "long_tail_sections": [
+                {
+                    "category": "Community Signal",
+                    "total_candidates": 1,
+                    "topics": [
+                        {
+                            "TOPIC_ID": "tail-1",
+                            "title": "Open-source AI coding agent",
+                            "PRIMARY_CATEGORY": "Community Signal",
+                            "FINAL_SCORE": 2.8,
+                            "HEAT": 4,
+                            "OCCURRENCE_SCORE": 3.9,
+                            "source_names": ["Hacker News"],
+                            "items": [{"title": "Open-source AI coding agent", "url": "https://example.com/opencode"}],
+                            "LLM_STATUS": "candidate",
+                        }
+                    ],
+                }
+            ],
+            "x_buzz": [],
+            "watchlist": [],
+        }
+
+        rendered = render_hot_daily_md(report)
+
+        self.assertIn("## Featured Topics", rendered)
+        self.assertIn("## Topic Radar By Category", rendered)
+        self.assertIn("## Long-tail Signals", rendered)
+        self.assertIn("### Tooling (1 shown / 2 candidates)", rendered)
+        self.assertIn("### Community Signal (1 shown / 1 candidates)", rendered)
+        self.assertIn("Open-source agent runtime", rendered)
 
 
 if __name__ == "__main__":

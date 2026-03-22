@@ -22,7 +22,8 @@ from arxiv_assistant.apis.hotspot_hn import fetch_hotspot_items as fetch_hn_item
 from arxiv_assistant.apis.hotspot_local_papers import fetch_hotspot_items as fetch_local_paper_items
 from arxiv_assistant.apis.hotspot_official_blogs import fetch_hotspot_items as fetch_official_blog_items
 from arxiv_assistant.apis.hotspot_roundups import fetch_hotspot_items as fetch_roundup_items
-from arxiv_assistant.filters.filter_hotspots import heuristic_screen_clusters, screen_clusters_with_openai, synthesize_digest_with_openai
+from arxiv_assistant.filters.filter_hotspots import build_candidate_topics, heuristic_screen_clusters, screen_clusters_with_openai, synthesize_digest_with_openai
+from arxiv_assistant.renderers.render_hot_daily import render_hot_daily_md
 from arxiv_assistant.utils.hotspot_cluster import build_hotspot_clusters
 from arxiv_assistant.utils.hotspot_schema import HotspotCluster, HotspotItem
 
@@ -42,6 +43,46 @@ DAY_OUTPUT_PATTERN = re.compile(r"(?P<year>\d{4})-(?P<month>\d{2})-(?P<day>\d{2}
 SOCIAL_PRIMARY_ROLES = {"community_heat"}
 SOCIAL_BACKFILL_ROLES = {"headline_consensus", "builder_momentum", "hn_discussion"}
 SOCIAL_HOST_SNIPPETS = ("x.com", "twitter.com", "reddit.com", "news.ycombinator.com")
+CATEGORY_DISPLAY_ORDER = [
+    "Product Release",
+    "Tooling",
+    "Industry Update",
+    "Research",
+    "Community Signal",
+]
+GENERIC_DISPLAY_TITLES = {
+    "information collection notice",
+    "privacy policy",
+    "terms of service",
+}
+AI_RELEVANCE_TERMS = {
+    "ai",
+    "llm",
+    "agent",
+    "agents",
+    "model",
+    "models",
+    "reasoning",
+    "prompt",
+    "retrieval",
+    "inference",
+    "training",
+    "multimodal",
+    "transformer",
+    "moe",
+    "quantization",
+    "benchmark",
+    "arxiv",
+    "openai",
+    "anthropic",
+    "claude",
+    "gpt",
+    "gemini",
+    "qwen",
+    "deepseek",
+    "cursor",
+    "copilot",
+}
 
 
 def parse_args() -> argparse.Namespace:
@@ -138,85 +179,6 @@ def _raw_source_cache_path(output_root: Path, target_date: datetime, source_id: 
     return output_root / "hot" / "raw" / date_string(target_date) / f"{source_id}.json"
 
 
-def render_hot_daily_md(report: dict[str, Any]) -> str:
-    lines = [
-        f"# Daily AI Hotspots {report['date']}",
-        "",
-        report.get("summary", "").strip() or "No strong hotspots were selected today.",
-        "",
-        "## Source Stats",
-        "",
-    ]
-    for source_name, count in sorted((report.get("source_stats") or {}).items()):
-        lines.append(f"- `{source_name}`: {count}")
-
-    lines.extend(
-        [
-            "",
-            "## Top Topics",
-            "",
-        ]
-    )
-
-    top_topics = report.get("top_topics") or []
-    if not top_topics:
-        lines.append("- No topic cleared the main-list threshold.")
-    else:
-        for index, topic in enumerate(top_topics, start=1):
-            lines.extend(
-                [
-                    f"### {index}. {topic.get('HEADLINE') or topic.get('title', 'Untitled Topic')}",
-                    "",
-                    f"- Category: `{topic.get('PRIMARY_CATEGORY', 'Uncategorized')}`",
-                    f"- Scores: `quality={topic.get('QUALITY', 0)}` `heat={topic.get('HEAT', 0)}` `importance={topic.get('IMPORTANCE', 0)}` `final={topic.get('FINAL_SCORE', 0)}`",
-                    f"- Why it matters: {topic.get('WHY_IT_MATTERS', '').strip() or topic.get('summary', '').strip()}",
-                    "",
-                ]
-            )
-            takeaway_lines = [clean for clean in topic.get("KEY_TAKEAWAYS", []) if isinstance(clean, str) and clean.strip()]
-            if takeaway_lines:
-                lines.append("Key takeaways:")
-                for takeaway in takeaway_lines:
-                    lines.append(f"- {takeaway}")
-                lines.append("")
-            lines.append("Evidence:")
-            for item in topic.get("items", [])[:4]:
-                title = item.get("title", "Untitled")
-                url = item.get("url", "")
-                source = item.get("source_name", item.get("source_id", "source"))
-                if url:
-                    lines.append(f"- [{title}]({url}) ({source})")
-                else:
-                    lines.append(f"- {title} ({source})")
-            lines.append("")
-
-    x_buzz = report.get("x_buzz") or []
-    if x_buzz:
-        lines.extend(["## X Buzz", "", "Proxy social signal collected from roundup and community sources.", ""])
-        for item in x_buzz:
-            title = item.get("title", "Untitled")
-            url = item.get("url", "")
-            source = item.get("source_name", item.get("source_id", "source"))
-            linked_topic = item.get("linked_topic", "")
-            summary = item.get("summary", "").strip()
-            if url:
-                lines.append(f"- [{title}]({url}) ({source})")
-            else:
-                lines.append(f"- {title} ({source})")
-            if linked_topic:
-                lines.append(f"  - Linked topic: {linked_topic}")
-            if summary:
-                lines.append(f"  - {summary}")
-        lines.append("")
-
-    watchlist = report.get("watchlist") or []
-    if watchlist:
-        lines.extend(["## Watchlist", ""])
-        for topic in watchlist:
-            lines.append(f"- **{topic.get('title', 'Untitled Topic')}**: {topic.get('WHY_IT_MATTERS', '').strip() or topic.get('summary', '').strip()}")
-    return "\n".join(lines).rstrip() + "\n"
-
-
 def _x_buzz_item_score(item: HotspotItem, linked_topic: str) -> float:
     score = 0.0
     if item.source_role in SOCIAL_PRIMARY_ROLES:
@@ -297,6 +259,211 @@ def _build_x_buzz_items(
                 break
 
     return selected[:target_count]
+
+
+def _topic_occurrence_score(topic: dict[str, Any]) -> float:
+    source_ids = len(topic.get("source_ids", []))
+    source_types = len(topic.get("source_types", []))
+    item_count = len(topic.get("items", []))
+    resonance = float(topic.get("CROSS_SOURCE_RESONANCE", 0.0))
+    return round(
+        min(
+            10.0,
+            1.2
+            + source_ids * 1.3
+            + max(source_types - 1, 0) * 0.9
+            + min(2.2, item_count * 0.45)
+            + 0.35 * resonance,
+        ),
+        3,
+    )
+
+
+def _llm_status(topic: dict[str, Any]) -> str:
+    if topic.get("KEEP_IN_DAILY_HOTSPOTS"):
+        return "featured"
+    if topic.get("WATCHLIST"):
+        return "watchlist"
+    return "candidate"
+
+
+def _display_priority(topic: dict[str, Any]) -> float:
+    llm_boost = 0.0
+    if topic.get("KEEP_IN_DAILY_HOTSPOTS"):
+        llm_boost = 1.0
+    elif topic.get("WATCHLIST"):
+        llm_boost = 0.45
+    paper_penalty = 0.0
+    if _is_isolated_research_topic(topic):
+        paper_penalty = 0.55
+    elif _is_paper_heavy(topic):
+        paper_penalty = 0.25
+    return round(
+        0.42 * float(topic.get("FINAL_SCORE", 0.0))
+        + 0.24 * float(topic.get("OCCURRENCE_SCORE", 0.0))
+        + 0.16 * float(topic.get("EVIDENCE_STRENGTH", 0.0))
+        + 0.12 * float(topic.get("HEAT", 0.0))
+        + 0.06 * float(topic.get("QUALITY", 0.0))
+        + llm_boost
+        - paper_penalty,
+        3,
+    )
+
+
+def _merge_display_candidates(
+    candidate_topics: list[dict[str, Any]],
+    screened_top: list[dict[str, Any]],
+    screened_watchlist: list[dict[str, Any]],
+) -> list[dict[str, Any]]:
+    screened_lookup = {
+        topic["TOPIC_ID"]: topic
+        for topic in screened_top + screened_watchlist
+    }
+    merged: list[dict[str, Any]] = []
+    for topic in candidate_topics:
+        combined = dict(topic)
+        screened = screened_lookup.get(topic["TOPIC_ID"])
+        if screened is not None:
+            combined.update(screened)
+        combined["OCCURRENCE_SCORE"] = _topic_occurrence_score(combined)
+        combined["LLM_STATUS"] = _llm_status(combined)
+        combined["DISPLAY_PRIORITY"] = _display_priority(combined)
+        merged.append(combined)
+    merged.sort(
+        key=lambda row: (
+            row["DISPLAY_PRIORITY"],
+            row["FINAL_SCORE"],
+            row["OCCURRENCE_SCORE"],
+            row["EVIDENCE_STRENGTH"],
+            row["HEAT"],
+        ),
+        reverse=True,
+    )
+    return merged
+
+
+def _build_category_sections(
+    display_candidates: list[dict[str, Any]],
+    featured_topics: list[dict[str, Any]],
+    *,
+    target_total_topics: int,
+    max_per_category: int,
+    min_display_score: float,
+) -> list[dict[str, Any]]:
+    featured_ids = {topic["TOPIC_ID"] for topic in featured_topics}
+    grouped: dict[str, list[dict[str, Any]]] = {category: [] for category in CATEGORY_DISPLAY_ORDER}
+
+    for topic in display_candidates:
+        title = (topic.get("HEADLINE") or topic.get("title") or "").strip().lower()
+        text = " ".join(
+            [
+                title,
+                str(topic.get("summary", "") or "").lower(),
+                str(topic.get("SHORT_COMMENT", "") or "").lower(),
+                " ".join(str(tag).lower() for tag in topic.get("tags", [])),
+            ]
+        )
+        if topic["TOPIC_ID"] in featured_ids:
+            continue
+        if float(topic.get("DISPLAY_PRIORITY", 0.0)) < min_display_score:
+            continue
+        if title in GENERIC_DISPLAY_TITLES:
+            continue
+        category = topic.get("PRIMARY_CATEGORY", "Community Signal")
+        if category in {"Community Signal", "Industry Update", "Product Release"} and not any(term in text for term in AI_RELEVANCE_TERMS):
+            continue
+        grouped.setdefault(category, []).append(topic)
+
+    selected_ids: set[str] = set()
+    section_topics: dict[str, list[dict[str, Any]]] = {}
+    total_selected = 0
+
+    for category in CATEGORY_DISPLAY_ORDER:
+        section_topics[category] = []
+        for topic in grouped.get(category, []):
+            if total_selected >= target_total_topics:
+                break
+            if len(section_topics[category]) >= max_per_category:
+                break
+            if topic["TOPIC_ID"] in selected_ids:
+                continue
+            section_topics[category].append(topic)
+            selected_ids.add(topic["TOPIC_ID"])
+            total_selected += 1
+
+    sections: list[dict[str, Any]] = []
+    for category in CATEGORY_DISPLAY_ORDER:
+        displayed = section_topics.get(category, [])
+        if not displayed:
+            continue
+        total_candidates = max(len(grouped.get(category, [])), len(displayed))
+        sections.append(
+            {
+                "category": category,
+                "total_candidates": total_candidates,
+                "topics": displayed,
+            }
+        )
+    return sections
+
+
+def _build_long_tail_sections(
+    display_candidates: list[dict[str, Any]],
+    featured_topics: list[dict[str, Any]],
+    category_sections: list[dict[str, Any]],
+    *,
+    target_total_topics: int,
+    max_per_category: int,
+    min_display_score: float,
+) -> list[dict[str, Any]]:
+    excluded_ids = {topic["TOPIC_ID"] for topic in featured_topics}
+    for section in category_sections:
+        excluded_ids.update(topic["TOPIC_ID"] for topic in section.get("topics", []))
+
+    grouped: dict[str, list[dict[str, Any]]] = {category: [] for category in CATEGORY_DISPLAY_ORDER}
+    for topic in display_candidates:
+        title = (topic.get("HEADLINE") or topic.get("title") or "").strip().lower()
+        text = " ".join(
+            [
+                title,
+                str(topic.get("summary", "") or "").lower(),
+                str(topic.get("SHORT_COMMENT", "") or "").lower(),
+                " ".join(str(tag).lower() for tag in topic.get("tags", [])),
+            ]
+        )
+        if topic["TOPIC_ID"] in excluded_ids:
+            continue
+        if float(topic.get("DISPLAY_PRIORITY", 0.0)) < min_display_score:
+            continue
+        if title in GENERIC_DISPLAY_TITLES:
+            continue
+        category = topic.get("PRIMARY_CATEGORY", "Community Signal")
+        if category in {"Community Signal", "Industry Update", "Product Release"} and not any(term in text for term in AI_RELEVANCE_TERMS):
+            continue
+        grouped.setdefault(category, []).append(topic)
+
+    sections: list[dict[str, Any]] = []
+    total_selected = 0
+    for category in CATEGORY_DISPLAY_ORDER:
+        if total_selected >= target_total_topics:
+            break
+        available = grouped.get(category, [])
+        if not available:
+            continue
+        selected = available[:max_per_category]
+        if total_selected + len(selected) > target_total_topics:
+            selected = selected[: target_total_topics - total_selected]
+        if not selected:
+            continue
+        sections.append(
+            {
+                "category": category,
+                "total_candidates": len(available),
+                "topics": selected,
+            }
+        )
+        total_selected += len(selected)
+    return sections
 
 
 def fetch_source_payloads(target_date: datetime, output_root: Path, config: configparser.ConfigParser, force: bool) -> tuple[list[HotspotItem], dict[str, int]]:
@@ -633,6 +800,10 @@ def generate_daily_hotspot_report(output_root: str | Path, target_date: datetime
 
     clusters = build_hotspot_clusters(raw_items)
     candidate_clusters = deterministic_trim(clusters, config["HOTSPOTS"].getint("max_clusters_for_llm", fallback=24))
+    radar_clusters = sorted(clusters, key=lambda cluster: cluster.deterministic_score, reverse=True)[
+        : config["HOTSPOTS"].getint("max_clusters_for_radar", fallback=48)
+    ]
+    candidate_topics = build_candidate_topics(radar_clusters)
 
     system_prompt = read_prompt(REPO_ROOT / "prompts" / "hotspot_system_prompt.txt")
     criteria_prompt = read_prompt(REPO_ROOT / "prompts" / "hotspot_screening_criteria.txt")
@@ -659,11 +830,32 @@ def generate_daily_hotspot_report(output_root: str | Path, target_date: datetime
     else:
         kept, watchlist = heuristic_screen_clusters(candidate_clusters, score_cutoff, watchlist_cutoff)
 
-    kept, watchlist = _trim_topics(kept, watchlist, config)
-    summary, digest_prompt_cost, digest_completion_cost = apply_digest_synthesis(kept, watchlist, system_prompt, digest_prompt, config, effective_mode)
+    screened_kept = list(kept)
+    screened_watchlist = list(watchlist)
+    featured_topics, watchlist = _trim_topics(kept, watchlist, config)
+    display_candidates = _merge_display_candidates(candidate_topics, screened_kept, screened_watchlist)
+    display_lookup = {topic["TOPIC_ID"]: topic for topic in display_candidates}
+    featured_topics = [{**display_lookup.get(topic["TOPIC_ID"], {}), **topic} for topic in featured_topics]
+    watchlist = [{**display_lookup.get(topic["TOPIC_ID"], {}), **topic} for topic in watchlist]
+    category_sections = _build_category_sections(
+        display_candidates,
+        featured_topics,
+        target_total_topics=config["HOTSPOTS"].getint("target_category_topics", fallback=12),
+        max_per_category=config["HOTSPOTS"].getint("max_topics_per_category", fallback=4),
+        min_display_score=config["HOTSPOTS"].getfloat("category_display_score_cutoff", fallback=max(2.8, watchlist_cutoff - 0.5)),
+    )
+    long_tail_sections = _build_long_tail_sections(
+        display_candidates,
+        featured_topics,
+        category_sections,
+        target_total_topics=config["HOTSPOTS"].getint("target_long_tail_topics", fallback=18),
+        max_per_category=config["HOTSPOTS"].getint("max_long_tail_per_category", fallback=8),
+        min_display_score=config["HOTSPOTS"].getfloat("long_tail_display_score_cutoff", fallback=1.6),
+    )
+    summary, digest_prompt_cost, digest_completion_cost = apply_digest_synthesis(featured_topics, watchlist, system_prompt, digest_prompt, config, effective_mode)
     prompt_cost += digest_prompt_cost
     completion_cost += digest_completion_cost
-    x_buzz = _build_x_buzz_items(raw_items, kept, watchlist)
+    x_buzz = _build_x_buzz_items(raw_items, featured_topics, watchlist)
 
     report = {
         "date": date_string(target_date),
@@ -671,9 +863,17 @@ def generate_daily_hotspot_report(output_root: str | Path, target_date: datetime
         "mode": effective_mode,
         "summary": summary,
         "source_stats": source_stats,
-        "totals": {"raw_items": len(raw_items), "clusters": len(clusters), "candidate_clusters": len(candidate_clusters)},
+        "totals": {
+            "raw_items": len(raw_items),
+            "clusters": len(clusters),
+            "candidate_clusters": len(candidate_clusters),
+            "radar_clusters": len(radar_clusters),
+        },
         "costs": {"prompt": round(prompt_cost, 6), "completion": round(completion_cost, 6), "total": round(prompt_cost + completion_cost, 6)},
-        "top_topics": kept,
+        "top_topics": featured_topics,
+        "featured_topics": featured_topics,
+        "category_sections": category_sections,
+        "long_tail_sections": long_tail_sections,
         "x_buzz": x_buzz,
         "watchlist": watchlist,
     }

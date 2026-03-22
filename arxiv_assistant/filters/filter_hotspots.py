@@ -230,6 +230,8 @@ def classify_category_heuristically(cluster: HotspotCluster) -> str:
     has_vendor_terms = any(term in text for term in VENDOR_TERMS)
     has_news_action_terms = any(term in text for term in NEWS_ACTION_TERMS)
     has_product_news = has_vendor_terms and has_news_action_terms
+    if "github_trend" in cluster.source_roles and "paper" not in cluster.source_types:
+        return "Tooling"
     if "official_news" in cluster.source_roles and (scores["Product Release"] > 0 or any(term in text for term in RELEASE_TERMS)):
         return "Product Release"
     if has_product_news and ("headline_consensus" in cluster.source_roles or "community_heat" in cluster.source_roles) and "paper_trending" not in cluster.source_roles and "research_backbone" not in cluster.source_roles:
@@ -365,51 +367,50 @@ def _build_topic(cluster: HotspotCluster, *, keep: bool, watchlist: bool, catego
     }
 
 
-def heuristic_screen_clusters(clusters: list[HotspotCluster], score_cutoff: float, watchlist_cutoff: float) -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:
-    kept: list[dict[str, Any]] = []
-    watchlist: list[dict[str, Any]] = []
+def build_candidate_topics(clusters: list[HotspotCluster]) -> list[dict[str, Any]]:
+    topics: list[dict[str, Any]] = []
     for cluster in clusters:
         signals = _cluster_signal_scores(cluster)
         category = classify_category_heuristically(cluster)
-        keep = signals["FINAL_SCORE"] >= score_cutoff and signals["QUALITY"] >= 5
-        watch = not keep and signals["FINAL_SCORE"] >= watchlist_cutoff
-        topic = _build_topic(
-            cluster,
-            keep=keep,
-            watchlist=watch,
-            category=category,
-            quality=signals["QUALITY"],
-            heat=signals["HEAT"],
-            importance=signals["IMPORTANCE"],
-            summary=_default_summary(cluster),
-            why_it_matters=_default_why(cluster, category),
+        topics.append(
+            _build_topic(
+                cluster,
+                keep=False,
+                watchlist=False,
+                category=category,
+                quality=signals["QUALITY"],
+                heat=signals["HEAT"],
+                importance=signals["IMPORTANCE"],
+                summary=_default_summary(cluster),
+                why_it_matters=_default_why(cluster, category),
+            )
         )
+    topics.sort(
+        key=lambda row: (
+            row["FINAL_SCORE"],
+            row["EVIDENCE_STRENGTH"],
+            row["CROSS_SOURCE_RESONANCE"],
+            row["QUALITY"],
+            row["HEAT"],
+            row["IMPORTANCE"],
+        ),
+        reverse=True,
+    )
+    return topics
+
+
+def heuristic_screen_clusters(clusters: list[HotspotCluster], score_cutoff: float, watchlist_cutoff: float) -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:
+    kept: list[dict[str, Any]] = []
+    watchlist: list[dict[str, Any]] = []
+    for topic in build_candidate_topics(clusters):
+        keep = topic["FINAL_SCORE"] >= score_cutoff and topic["QUALITY"] >= 5
+        watch = not keep and topic["FINAL_SCORE"] >= watchlist_cutoff
+        topic["KEEP_IN_DAILY_HOTSPOTS"] = keep
+        topic["WATCHLIST"] = watch
         if keep:
             kept.append(topic)
         elif watch:
             watchlist.append(topic)
-    kept.sort(
-        key=lambda row: (
-            row["FINAL_SCORE"],
-            row["EVIDENCE_STRENGTH"],
-            row["CROSS_SOURCE_RESONANCE"],
-            row["QUALITY"],
-            row["HEAT"],
-            row["IMPORTANCE"],
-        ),
-        reverse=True,
-    )
-    watchlist.sort(
-        key=lambda row: (
-            row["FINAL_SCORE"],
-            row["EVIDENCE_STRENGTH"],
-            row["CROSS_SOURCE_RESONANCE"],
-            row["QUALITY"],
-            row["HEAT"],
-            row["IMPORTANCE"],
-        ),
-        reverse=True,
-    )
     return kept, watchlist
 
 

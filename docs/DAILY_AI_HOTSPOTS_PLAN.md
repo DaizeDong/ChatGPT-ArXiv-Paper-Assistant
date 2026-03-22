@@ -13,7 +13,7 @@ Current branch: `test_news`
 | Phase 2 | rebalance section ordering and intra-section ranking for broad same-day coverage | completed |
 | Phase 3 | unify hotspot-paper navigation across day, month, year, source, and topic routes | completed |
 | Phase 4 | compress source/topic/month/year archive pages into compact scan-oriented views | completed |
-| Phase 5 | final polish, local verification, and publish-ready build validation | in progress |
+| Phase 5 | final polish, local verification, and publish-ready build validation | completed |
 
 ## 1. Purpose
 
@@ -444,13 +444,14 @@ The redesign is not trying to:
 - make every item deeply editorialized
 - depend on client-side APIs that require secrets at runtime
 
-## 14. Immediate Next Step
+## 14. Completion Notes
 
-The next implementation slice should be:
+The redesign slice tracked by this document is complete.
 
-1. remove the remaining extra controls and explanatory text from the daily hotspot shell
-2. rebuild the local preview from generated data and verify the main hotspot routes in-browser
-3. validate the publish-ready build chain one more time
-4. commit Phase 5
+Final completion checks:
 
-That slice is the smallest step that locks the product direction before archive and ranking refinements.
+1. removed the remaining extra controls and explanatory text from the daily hotspot shell
+2. rebuilt the local preview from generated data and verified the main hotspot routes in-browser
+3. re-ran the publish-ready frontend build and merge flow
+
+The hotspot UI is now ready for branch validation or merge.

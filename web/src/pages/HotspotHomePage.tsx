@@ -44,42 +44,27 @@ export function HotspotHomePage() {
 
   return (
     <div className="stack">
-      <section className="hero panel compact-panel">
-        <div className="hero-grid dense-hero-grid">
+      <section className="panel compact-panel">
+        <div className="section-header">
           <div>
-            <p className="eyebrow">Daily AI Hotspots</p>
-            <h1>Dense AI signal radar</h1>
-            <p className="lede tight-lede">Daily source-first aggregation across buzz, blogs, official updates, papers, GitHub, and discussions.</p>
+            <h1>Daily AI Hotspots</h1>
           </div>
-          <div className="hero-actions">
+          <div className="section-header-actions">
             {latest ? (
               <Link className="primary-link" to={`/hot/${latest.date}`}>
-                Latest hotspots
+                Latest day
               </Link>
             ) : null}
             <a className="inline-link" href={latestPaperRoute}>Paper digest</a>
           </div>
         </div>
-      </section>
-
-      <section className="panel compact-panel">
-        <h2>Latest day</h2>
         {latest ? (
-          <div className="stat-row">
-            <div>
-              <p className="stat-label">Date</p>
-              <Link className="stat-value" to={`/hot/${latest.date}`}>
-                {latest.date}
-              </Link>
-            </div>
-            <div>
-              <p className="stat-label">Featured topics</p>
-              <p className="stat-value">{latest.featured_topics}</p>
-            </div>
-            <div>
-              <p className="stat-label">Source items</p>
-              <p className="stat-value">{latest.source_items}</p>
-            </div>
+          <div className="summary-band compact-summary-band">
+            <Link className="summary-chip" to={`/hot/${latest.date}`}>
+              date {latest.date}
+            </Link>
+            <span className="summary-chip">featured {latest.featured_topics}</span>
+            <span className="summary-chip">items {latest.source_items}</span>
           </div>
         ) : (
           <p>No hotspot data has been generated yet.</p>

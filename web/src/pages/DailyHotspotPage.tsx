@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { SignalRow } from "../components/SignalRow";
 import { loadDailyHotspot } from "../lib/data";
 import { bestPaperRoute } from "../lib/routes";
-import { defaultVisibleCount, filterSectionsBySearch, type DensityMode } from "../lib/hotspotView";
+import { defaultVisibleCount, filterSectionsBySearch } from "../lib/hotspotView";
 import type { DailyHotspotPayload, SourceSection } from "../types/hotspot";
 
 type AsyncState =
@@ -12,8 +12,8 @@ type AsyncState =
   | { status: "error"; message: string }
   | { status: "ready"; payload: DailyHotspotPayload };
 
-function topicSummaryLimit(density: DensityMode) {
-  return density === "compact" ? 12 : 8;
+function topicSummaryLimit() {
+  return 8;
 }
 
 function sectionTitle(section: SourceSection) {
@@ -22,7 +22,6 @@ function sectionTitle(section: SourceSection) {
 
 export function DailyHotspotPage({ date }: { date: string }) {
   const [state, setState] = useState<AsyncState>({ status: "loading" });
-  const [density, setDensity] = useState<DensityMode>("compact");
   const [searchQuery, setSearchQuery] = useState("");
   const [expandedCounts, setExpandedCounts] = useState<Record<string, number>>({});
 
@@ -54,7 +53,8 @@ export function DailyHotspotPage({ date }: { date: string }) {
 
   const { payload } = state;
   const visibleSections = filterSectionsBySearch(payload.source_sections, searchQuery);
-  const visibleTopicSummary = payload.topic_summary.slice(0, topicSummaryLimit(density));
+  const crossSourceTopics = payload.topic_summary.filter((topic) => topic.source_count > 1);
+  const visibleTopicSummary = (crossSourceTopics.length ? crossSourceTopics : payload.topic_summary).slice(0, topicSummaryLimit());
   const paperDayRoute = bestPaperRoute(payload.meta.paper_routes, ["day", "month", "year", "home"]);
   const paperArchiveRoute = bestPaperRoute(payload.meta.paper_routes, ["month", "year", "home"]);
 
@@ -75,7 +75,7 @@ export function DailyHotspotPage({ date }: { date: string }) {
 
         <div className="hero-grid dense-hero-grid">
           <div className="hero-copy">
-            <p className="eyebrow">{payload.meta.mode} generation</p>
+            <p className="eyebrow">Daily feed</p>
             <h1>Daily AI Hotspots {payload.meta.date}</h1>
             <div className="jump-row">
               <a className="inline-link" href={paperDayRoute}>Paper digest</a>
@@ -86,8 +86,8 @@ export function DailyHotspotPage({ date }: { date: string }) {
             <div className="summary-band compact-summary-band">
               <span className="summary-chip">items {payload.meta.counts.source_items}</span>
               <span className="summary-chip">featured {payload.meta.counts.featured_topics}</span>
-              <span className="summary-chip">topics {payload.meta.counts.topic_summary}</span>
-              <span className="summary-chip">long tail {payload.meta.counts.long_tail}</span>
+              <span className="summary-chip">source groups {visibleSections.length}</span>
+              <span className="summary-chip">cross-source {crossSourceTopics.length}</span>
             </div>
           </div>
           <div className="hero-tools">
@@ -97,25 +97,9 @@ export function DailyHotspotPage({ date }: { date: string }) {
                 type="search"
                 value={searchQuery}
                 onChange={(event) => setSearchQuery(event.target.value)}
-                placeholder="agents, Claude, OCR, quantization..."
+                placeholder="Search titles, sources, tags..."
               />
             </label>
-            <div className="toggle-group" role="tablist" aria-label="Display density">
-              <button
-                className={density === "compact" ? "active" : ""}
-                onClick={() => setDensity("compact")}
-                type="button"
-              >
-                Compact
-              </button>
-              <button
-                className={density === "comfortable" ? "active" : ""}
-                onClick={() => setDensity("comfortable")}
-                type="button"
-              >
-                Comfortable
-              </button>
-            </div>
           </div>
         </div>
 
@@ -132,7 +116,7 @@ export function DailyHotspotPage({ date }: { date: string }) {
       <section className="panel compact-panel">
         <div className="section-header">
           <div>
-            <h2>Top topics</h2>
+            <h2>Cross-source topics</h2>
           </div>
         </div>
         <div className="topic-strip compact-topic-strip">
@@ -148,7 +132,7 @@ export function DailyHotspotPage({ date }: { date: string }) {
       </section>
 
       {visibleSections.map((section) => {
-        const initial = defaultVisibleCount(section, density);
+        const initial = defaultVisibleCount(section, "compact");
         const expanded = expandedCounts[section.slug] ?? initial;
         const visibleItems = section.filteredItems.slice(0, expanded);
         const remaining = Math.max(section.filteredItems.length - visibleItems.length, 0);
@@ -168,7 +152,7 @@ export function DailyHotspotPage({ date }: { date: string }) {
 
             <div className="signal-list">
               {visibleItems.map((item) => (
-                <SignalRow date={payload.meta.date} density={density} item={item} key={item.id} />
+                <SignalRow date={payload.meta.date} density="compact" item={item} key={item.id} />
               ))}
             </div>
 
@@ -178,12 +162,12 @@ export function DailyHotspotPage({ date }: { date: string }) {
                 onClick={() =>
                   setExpandedCounts((current) => ({
                     ...current,
-                    [section.slug]: expanded + defaultVisibleCount(section, density),
+                    [section.slug]: expanded + defaultVisibleCount(section, "compact"),
                   }))
                 }
                 type="button"
               >
-                Show {Math.min(defaultVisibleCount(section, density), remaining)} more from {section.label}
+                Show {Math.min(defaultVisibleCount(section, "compact"), remaining)} more from {section.label}
               </button>
             ) : null}
           </section>
@@ -193,7 +177,7 @@ export function DailyHotspotPage({ date }: { date: string }) {
       {!visibleSections.length ? (
         <section className="panel">
           <h2>No matching signals</h2>
-          <p>Try a broader search query or switch back to compact mode for denser scanning.</p>
+          <p>Try a broader search query.</p>
         </section>
       ) : null}
     </div>

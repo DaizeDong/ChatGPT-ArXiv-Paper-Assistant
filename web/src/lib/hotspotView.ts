@@ -66,6 +66,14 @@ export function filterSectionsBySearch(sections: SourceSection[], searchQuery: s
 }
 
 export function defaultVisibleCount(section: SourceSection, density: DensityMode) {
-  const boosted = section.slug === "x-buzz" || section.slug === "blogs" ? 12 : 10;
-  return density === "compact" ? boosted : Math.max(8, boosted - 2);
+  const compactMap: Record<string, number> = {
+    "x-buzz": 14,
+    blogs: 16,
+    official: 8,
+    papers: 14,
+    github: 16,
+    discussions: 10,
+  };
+  const compactDefault = compactMap[section.slug] ?? 12;
+  return density === "compact" ? compactDefault : Math.max(8, compactDefault - 4);
 }

@@ -134,6 +134,9 @@ class TestHotspotWebData(unittest.TestCase):
     def test_write_hotspot_web_data_builds_root_month_and_year_indexes(self) -> None:
         with tempfile.TemporaryDirectory() as tmp_dir:
             output_root = Path(tmp_dir) / "out"
+            (output_root / "md" / "2026-03").mkdir(parents=True, exist_ok=True)
+            (output_root / "md" / "2026-03" / "2026-03-20-output.md").write_text("# Paper day", encoding="utf-8")
+            (output_root / "md" / "2026-03" / "2026-03-21-output.md").write_text("# Paper day", encoding="utf-8")
             raw_items = [
                 HotspotItem(
                     source_id="ainews",
@@ -199,6 +202,10 @@ class TestHotspotWebData(unittest.TestCase):
             self.assertEqual(year_index["totals"]["days"], 2)
             self.assertEqual(year_index["months"][0]["source_section_totals"]["x-buzz"], 2)
             self.assertEqual(latest_daily["meta"]["previous_date"], "2026-03-20")
+            self.assertEqual(latest_daily["meta"]["paper_routes"]["day"], "/archive/2026-03/21/")
+            self.assertEqual(month_index["paper_routes"]["month"], "/archive/2026-03/")
+            self.assertEqual(year_index["paper_routes"]["year"], "/archive/2026/")
+            self.assertEqual(root_index["dates"][-1]["paper_routes"]["day"], "/archive/2026-03/21/")
 
 
 if __name__ == "__main__":

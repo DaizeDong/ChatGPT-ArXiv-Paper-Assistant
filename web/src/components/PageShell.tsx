@@ -20,7 +20,7 @@ export function PageShell({ children }: PropsWithChildren) {
         </div>
         <nav className="topnav">
           <Link to="/hot">Hotspots</Link>
-          <a href={repoPath("")}>Paper Digest</a>
+          <a href={repoPath("")}>Paper home</a>
         </nav>
       </header>
       <main className="page-content">{children}</main>

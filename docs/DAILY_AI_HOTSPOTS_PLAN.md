@@ -1,4 +1,4 @@
-# Daily AI Hotspots Web Redesign Plan
+# Daily AI Hotspots Source-First Redesign Plan
 
 Last updated: 2026-03-22
 
@@ -8,19 +8,18 @@ Current branch: `test_news`
 
 | Phase | Scope | Status |
 | --- | --- | --- |
-| Baseline | current hotspot coverage expansion before frontend migration | completed |
-| Phase 1 | `web_data` schema and JSON generation | completed |
-| Phase 2 | frontend scaffold and build chain | completed |
-| Phase 3 | source-first daily page | completed |
-| Phase 4 | source/topic detail pages | completed |
-| Phase 5 | month/year archive pages | completed |
-| Phase 6 | publish workflow migration | completed |
+| Baseline | existing React-based hotspot frontend after markdown removal | completed |
+| Phase 1 | compress daily hotspot page into a thin source-first information feed inspired by AiNewsDaily | completed |
+| Phase 2 | rebalance section ordering and intra-section ranking for broad same-day coverage | in progress |
+| Phase 3 | unify hotspot-paper navigation across day, month, year, source, and topic routes | pending |
+| Phase 4 | compress source/topic/month/year archive pages into compact scan-oriented views | pending |
+| Phase 5 | final polish, local verification, and publish-ready build validation | pending |
 
 ## 1. Purpose
 
-This document describes the next-stage redesign of the `Daily AI Hotspots` product in this repository.
+This document tracks the next-stage redesign of the `Daily AI Hotspots` product in this repository.
 
-The current hotspot pipeline already has a workable ranking algorithm and output archive, but the presentation layer is still constrained by a markdown-first workflow. That approach is now the bottleneck.
+The current hotspot pipeline already has a workable ranking algorithm, structured web data, and a deployable React frontend. The remaining problem is product shape: the interface still spends too much vertical space on summary framing and does not yet feel like a direct, high-density daily signal board.
 
 The product goal has changed:
 
@@ -28,8 +27,9 @@ The product goal has changed:
 - information should be organized primarily by **source family**
 - each item should stay **compact**
 - topic aggregation should remain important, but it should become a **secondary navigation layer**, not the only main view
+- the overall feel should be closer to a clean AI news terminal than to a report page
 
-The redesign therefore moves the hotspot experience from a markdown-rendered report into a static web application that reads structured JSON at runtime.
+The redesign therefore focuses on reshaping the existing static hotspot web application into a simpler, denser, more source-first interface.
 
 ## 2. Product Goals
 
@@ -322,20 +322,19 @@ web/
 
 ## 9. Visual Direction
 
-The hotspot UI should feel modern, dense, and intentional.
+The hotspot UI should feel modern, dense, and direct.
 
 Recommended design direction:
 
-- dashboard-like layout rather than article-like layout
-- strong section headers
-- compact cards or list rows
-- source chips
-- topic chips
-- density toggle
-- sticky filter bar
-- restrained but clear accent color system
+- narrow top bar with minimal navigation
+- single-column scan-oriented layout
+- compact list rows rather than large cards wherever possible
+- source chips and topic chips only when they help orientation
+- search aligned to the upper right of the page header
+- restrained accent color system
+- no decorative hero blocks, floating controls, or oversized summary panels
 
-The page should prioritize scan speed and structure over decorative hero blocks.
+The page should prioritize scan speed and structure over decoration.
 
 ## 10. Build and Deployment Flow
 
@@ -361,83 +360,69 @@ Important constraint:
 
 The redesign should be implemented in stages.
 
-### Phase 1: Define the new JSON contract
+### Phase 1: Compress the daily hotspot page
 
 Deliverables:
 
-- item-first daily payload
-- monthly/yearly index payloads
-- schema documentation
+- thinner page header
+- search placed in the upper right without sticky behavior
+- summary framing reduced to chips and topic strips
+- source-family sections moved closer to the top of the page
+- denser row presentation and higher default per-section visibility
 
 Success condition:
 
-- existing hotspot pipeline can generate frontend-ready JSON without depending on markdown
+- the daily page reads like a direct signal feed rather than a narrative report
 
-### Phase 2: Scaffold the frontend app
+### Phase 2: Rebalance ranking and section ordering
 
 Deliverables:
 
-- `web/` project
-- routing skeleton
-- global layout
-- theme support
+- stronger source-family ordering
+- broader default coverage in each section
+- better control over duplicate or low-signal items
+- clearer distinction between top topics and source-local scanning
 
 Success condition:
 
-- static shell builds locally and deploys to Pages
+- the first page view covers more of the day without overwhelming the user
 
-### Phase 3: Build the source-first daily page
+### Phase 3: Unify hotspot-paper navigation
 
 Deliverables:
 
-- day summary strip
-- topic summary strip
-- source-family sections
-- long-tail section
-- compact item UI
+- day/month/year-aware links from hotspot pages back to paper pages
+- reciprocal links from paper month/year archive pages back to hotspot archives
+- graceful existence-aware fallback when matching paper history is unavailable
 
 Success condition:
 
-- one daily page is fully usable without markdown
+- hotspot browsing and paper browsing feel like one archive system rather than two disconnected surfaces
 
-### Phase 4: Build source detail and topic detail pages
+### Phase 4: Compress archive and detail pages
 
 Deliverables:
 
-- per-source subpages
-- per-topic subpages
-- links from the daily page
+- lighter source detail pages
+- lighter topic detail pages
+- more compact month archive
+- more compact year archive
 
 Success condition:
 
-- main page can stay dense while deeper pages preserve the rest of the day
+- detail and archive views preserve density without turning into long-form reports
 
-### Phase 5: Build monthly and yearly archive pages
+### Phase 5: Final polish and validation
 
 Deliverables:
 
-- hotspot month page
-- hotspot year page
-- source and topic distribution summaries
+- final spacing and type cleanup
+- local browser validation against real generated data
+- build validation for the publish pipeline
 
 Success condition:
 
-- archive navigation works without the old markdown layout
-
-### Phase 6: Replace the old markdown hotspot frontend
-
-Deliverables:
-
-- Pages entry switched to the new app
-- markdown hotspot pages kept only as debug/fallback output
-
-Success condition:
-
-- the new frontend is the primary user-facing hotspot interface
-- publish CI rebuilds hotspot `web_data` from saved reports and normalized items before the web build
-- final Pages output serves the React hotspot app under `/hot/...` routes without committing generated HTML
-- manual `workflow_dispatch` can validate non-`main` site branches by overriding the site-code ref
-- branch validation can run in build-only mode without violating `github-pages` environment protection rules
+- the redesigned hotspot frontend is locally verified, internally consistent, and ready for branch validation or merge
 
 ## 12. Acceptance Criteria
 
@@ -463,9 +448,9 @@ The redesign is not trying to:
 
 The next implementation slice should be:
 
-1. define the new `web_data` schema
-2. generate one JSON payload for `/hot/YYYY-MM-DD/`
-3. scaffold the frontend shell
-4. render a single source-first daily hotspot page from JSON
+1. rebalance section ordering and intra-section ranking
+2. validate that the default daily page covers more of the day without feeling noisy
+3. commit Phase 2
+4. then finish the historical navigation layer
 
-That slice is the smallest step that proves the new architecture and unlocks the rest of the redesign.
+That slice is the smallest step that locks the product direction before archive and ranking refinements.

@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 import { loadRootIndex } from "../lib/data";
+import { bestPaperRoute } from "../lib/routes";
 import type { RootIndexPayload } from "../types/hotspot";
 
 type AsyncState =
@@ -39,26 +40,29 @@ export function HotspotHomePage() {
 
   const { payload } = state;
   const latest = payload.dates[payload.dates.length - 1];
+  const latestPaperRoute = bestPaperRoute(latest?.paper_routes, ["day", "month", "year", "home"]);
 
   return (
     <div className="stack">
-      <section className="hero panel">
-        <div>
-          <p className="eyebrow">Daily AI Hotspots</p>
-          <h1>Source-first AI news radar.</h1>
-          <p className="lede">
-            The hotspot frontend now reads dense JSON feeds from <code>out/web_data</code> and exposes daily, monthly,
-            yearly, source, and topic routes without depending on markdown rendering.
-          </p>
+      <section className="hero panel compact-panel">
+        <div className="hero-grid dense-hero-grid">
+          <div>
+            <p className="eyebrow">Daily AI Hotspots</p>
+            <h1>Dense AI signal radar</h1>
+            <p className="lede tight-lede">Daily source-first aggregation across buzz, blogs, official updates, papers, GitHub, and discussions.</p>
+          </div>
+          <div className="hero-actions">
+            {latest ? (
+              <Link className="primary-link" to={`/hot/${latest.date}`}>
+                Latest hotspots
+              </Link>
+            ) : null}
+            <a className="inline-link" href={latestPaperRoute}>Paper digest</a>
+          </div>
         </div>
-        {latest ? (
-          <Link className="primary-link" to={`/hot/${latest.date}`}>
-            Open latest hotspot day
-          </Link>
-        ) : null}
       </section>
 
-      <section className="panel">
+      <section className="panel compact-panel">
         <h2>Latest day</h2>
         {latest ? (
           <div className="stat-row">
@@ -82,7 +86,7 @@ export function HotspotHomePage() {
         )}
       </section>
 
-      <section className="panel">
+      <section className="panel compact-panel">
         <h2>Recent daily payloads</h2>
         <ul className="compact-list">
           {payload.dates.slice(-8).reverse().map((entry) => (
@@ -90,6 +94,7 @@ export function HotspotHomePage() {
               <Link to={`/hot/${entry.date}`}>{entry.date}</Link>
               <span>{entry.featured_topics} featured</span>
               <span>{entry.source_items} source items</span>
+              <a href={bestPaperRoute(entry.paper_routes, ["day", "month", "year", "home"])}>paper</a>
             </li>
           ))}
         </ul>

@@ -3,6 +3,7 @@ import { Link, useParams } from "react-router-dom";
 
 import { SignalRow } from "../components/SignalRow";
 import { loadDailyHotspot } from "../lib/data";
+import { bestPaperRoute } from "../lib/routes";
 import { findSupportingItemsForTopic, findTopicBySlug, relatedTopicsByCategory } from "../lib/hotspotSelectors";
 import type { DailyHotspotPayload } from "../types/hotspot";
 
@@ -52,10 +53,12 @@ export function TopicDetailPage() {
 
   const supportingGroups = findSupportingItemsForTopic(state.payload, topic.topic_id);
   const relatedTopics = relatedTopicsByCategory(state.payload, topic, 10);
+  const paperDayRoute = bestPaperRoute(state.payload.meta.paper_routes, ["day", "month", "year", "home"]);
+  const paperArchiveRoute = bestPaperRoute(state.payload.meta.paper_routes, ["month", "year", "home"]);
 
   return (
     <div className="stack">
-      <section className="panel day-hero">
+      <section className="panel day-hero compact-panel">
         <div className="day-nav">
           <div className="day-nav-edge">
             <Link to={`/hot/${date}`}>Back to day</Link>
@@ -64,17 +67,21 @@ export function TopicDetailPage() {
             Hotspot index
           </Link>
           <div className="day-nav-edge right">
-            <Link to={`/hot/${date}/source/${supportingGroups[0]?.section.slug ?? "blogs"}`}>Jump to source detail</Link>
+            <a href={paperDayRoute}>Paper digest</a>
           </div>
         </div>
 
-        <div className="hero-grid">
+        <div className="hero-grid dense-hero-grid">
           <div>
             <p className="eyebrow">{topic.category}</p>
             <h1>{topic.headline}</h1>
-            <p className="lede">{topic.why_it_matters || topic.summary_short}</p>
+            <p className="lede tight-lede">{topic.why_it_matters || topic.summary_short}</p>
           </div>
           <div className="hero-actions">
+            <a className="inline-link" href={paperArchiveRoute}>Paper archive</a>
+            <Link className="inline-link" to={`/hot/${date}/source/${supportingGroups[0]?.section.slug ?? "blogs"}`}>
+              Source detail
+            </Link>
             <Link className="primary-link" to={`/hot/${date}`}>
               Return to daily view
             </Link>
@@ -110,11 +117,10 @@ export function TopicDetailPage() {
       </section>
 
       {topic.evidence.length > 0 ? (
-        <section className="panel">
+        <section className="panel compact-panel">
           <div className="section-header">
             <div>
               <h2>Representative evidence</h2>
-              <p>Primary links already attached to the compact topic summary.</p>
             </div>
           </div>
           <div className="featured-grid">
@@ -129,11 +135,10 @@ export function TopicDetailPage() {
       ) : null}
 
       {supportingGroups.map((group) => (
-        <section className="panel source-family-panel" key={group.section.slug}>
+        <section className="panel source-family-panel compact-panel" key={group.section.slug}>
           <div className="section-header">
             <div>
               <h2>{group.section.label}</h2>
-              <p>Items in this source family that point back to the current topic.</p>
             </div>
             <div className="section-header-actions">
               <Link className="inline-link" to={`/hot/${date}/source/${group.section.slug}`}>
@@ -150,11 +155,10 @@ export function TopicDetailPage() {
       ))}
 
       {relatedTopics.length > 0 ? (
-        <section className="panel">
+        <section className="panel compact-panel">
           <div className="section-header">
             <div>
               <h2>Related topics in the same category</h2>
-              <p>Additional drill-down topics from {topic.category} that were active the same day.</p>
             </div>
           </div>
           <div className="topic-strip">

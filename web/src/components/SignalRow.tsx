@@ -13,7 +13,7 @@ export function SignalRow({
   item: SourceSectionItem;
 }) {
   const signals = itemSignals(item);
-  const topicRefs = item.topic_refs.slice(0, density === "compact" ? 2 : 3);
+  const topicRefs = item.topic_refs.slice(0, density === "compact" ? 1 : 2);
 
   return (
     <article className={`signal-row ${density}`}>

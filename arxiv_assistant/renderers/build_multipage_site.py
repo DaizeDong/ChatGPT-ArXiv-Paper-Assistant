@@ -246,6 +246,8 @@ def build_multipage_site(output_root: str | Path) -> Path | None:
     monthly_summary_data = build_monthly_summary_data(daily_json_root, monthly_summary_root, day_page_mapping)
     hot_dates = sorted(hot_day_sources.keys())
     hot_dates_set = set(hot_dates)
+    hot_months_set = {month_from_date(date) for date in hot_dates}
+    hot_years_set = {year_from_date(date) for date in hot_dates}
     latest_hot_date = max(hot_dates_set) if hot_dates_set else None
 
     for date_idx, date in enumerate(all_dates_list):
@@ -301,6 +303,7 @@ def build_multipage_site(output_root: str | Path) -> Path | None:
             current_page_path=site_month_page_path(month),
             all_date_file_mapping=day_page_mapping,
             summary_page_path=month_summary_page_mapping.get(month) if month in monthly_summary_data else None,
+            related_page_path=site_hot_month_page_path(month) if month in hot_months_set else None,
             previous_asset_path=(
                 _write_month_nav_asset(site_root, month, previous_month, "prev") if previous_month is not None else None
             ),
@@ -330,6 +333,7 @@ def build_multipage_site(output_root: str | Path) -> Path | None:
             current_page_path=site_year_page_path(year),
             all_month_file_mapping=month_page_mapping,
             all_month_day_counts=month_day_counts,
+            related_page_path=site_hot_year_page_path(year) if year in hot_years_set else None,
             previous_asset_path=(
                 _write_year_nav_asset(site_root, year, previous_year, "prev") if previous_year is not None else None
             ),

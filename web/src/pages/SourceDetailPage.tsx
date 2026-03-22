@@ -3,6 +3,7 @@ import { Link, useParams } from "react-router-dom";
 
 import { SignalRow } from "../components/SignalRow";
 import { loadDailyHotspot } from "../lib/data";
+import { bestPaperRoute } from "../lib/routes";
 import { findSourceSection } from "../lib/hotspotSelectors";
 import { defaultVisibleCount, type DensityMode } from "../lib/hotspotView";
 import type { DailyHotspotPayload } from "../types/hotspot";
@@ -74,10 +75,12 @@ export function SourceDetailPage() {
 
   const displayed = section.items.slice(0, visibleCount);
   const remaining = Math.max(section.items.length - displayed.length, 0);
+  const paperDayRoute = bestPaperRoute(state.payload.meta.paper_routes, ["day", "month", "year", "home"]);
+  const paperArchiveRoute = bestPaperRoute(state.payload.meta.paper_routes, ["month", "year", "home"]);
 
   return (
     <div className="stack">
-      <section className="panel day-hero">
+      <section className="panel day-hero compact-panel">
         <div className="day-nav">
           <div className="day-nav-edge">
             <Link to={`/hot/${date}`}>Back to day</Link>
@@ -86,16 +89,17 @@ export function SourceDetailPage() {
             Hotspot index
           </Link>
           <div className="day-nav-edge right">
-            <Link to={`/hot/${state.payload.meta.month}`}>Month archive</Link>
+            <a href={paperDayRoute}>Paper digest</a>
           </div>
         </div>
-        <div className="hero-grid">
+        <div className="hero-grid dense-hero-grid">
           <div>
             <p className="eyebrow">Source family detail</p>
             <h1>{section.label}</h1>
-            <p className="lede">{section.description}</p>
+            <p className="lede tight-lede">{section.count} retained signals for {date}.</p>
           </div>
           <div className="hero-actions">
+            <a className="inline-link" href={paperArchiveRoute}>Paper archive</a>
             <div className="toggle-group" role="tablist" aria-label="Detail density">
               <button className={density === "compact" ? "active" : ""} onClick={() => setDensity("compact")} type="button">
                 Compact
@@ -123,11 +127,10 @@ export function SourceDetailPage() {
       </section>
 
       {topTopics.length > 0 ? (
-        <section className="panel">
+        <section className="panel compact-panel">
           <div className="section-header">
             <div>
               <h2>Most-linked topics in this source family</h2>
-              <p>These are the repeated topic references that appear most often inside {section.label}.</p>
             </div>
           </div>
           <div className="topic-strip">
@@ -141,11 +144,10 @@ export function SourceDetailPage() {
         </section>
       ) : null}
 
-      <section className="panel source-family-panel">
+      <section className="panel source-family-panel compact-panel">
         <div className="section-header">
           <div>
             <h2>All {section.label} signals</h2>
-            <p>Dense view of every retained item for this source family on {date}.</p>
           </div>
         </div>
         <div className="signal-list">

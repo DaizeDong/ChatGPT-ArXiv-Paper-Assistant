@@ -52,6 +52,8 @@ DISCUSSION_HOSTS = ("news.ycombinator.com", "reddit.com")
 YEAR_PATTERN = re.compile(r"^\d{4}$")
 MONTH_PATTERN = re.compile(r"^\d{4}-\d{2}$")
 DATE_PATTERN = re.compile(r"^\d{4}-\d{2}-\d{2}\.json$")
+PAPER_DAY_PATTERN = re.compile(r"(?P<year>\d{4})-(?P<month>\d{2})-(?P<day>\d{2})-(?P<suffix>[^/\\]+)\.md$")
+PAPER_SUFFIX_PRIORITY = {"latest": 0, "output": 1}
 
 
 def _normalize_text(value: str | None) -> str:
@@ -102,6 +104,72 @@ def _topic_paths(date_str: str, topic: dict[str, Any]) -> dict[str, str]:
         "slug": slug,
         "headline": str(topic.get("HEADLINE") or topic.get("title") or slug).strip(),
         "daily_route": f"/hot/{date_str}/topic/{slug}/",
+    }
+
+
+def _paper_candidate_priority(path: Path) -> tuple[int, str]:
+    match = PAPER_DAY_PATTERN.match(path.name)
+    suffix = match.group("suffix") if match else path.stem
+    return PAPER_SUFFIX_PRIORITY.get(suffix, 99), path.name
+
+
+def _discover_paper_archive_routes(output_root: Path) -> dict[str, set[str]]:
+    dates: set[str] = set()
+    months: set[str] = set()
+    years: set[str] = set()
+    md_root = output_root / "md"
+    if not md_root.exists():
+        return {"dates": dates, "months": months, "years": years}
+
+    candidates: dict[str, list[Path]] = defaultdict(list)
+    for file_path in md_root.glob("*/*.md"):
+        if file_path.name == "index.md":
+            continue
+        match = PAPER_DAY_PATTERN.match(file_path.name)
+        if match is None:
+            continue
+        date_str = f"{match.group('year')}-{match.group('month')}-{match.group('day')}"
+        candidates[date_str].append(file_path)
+
+    for date_str, file_paths in candidates.items():
+        if not file_paths:
+            continue
+        sorted(file_paths, key=_paper_candidate_priority)[0]
+        year, month, _ = date_str.split("-")
+        dates.add(date_str)
+        months.add(f"{year}-{month}")
+        years.add(year)
+
+    return {"dates": dates, "months": months, "years": years}
+
+
+def _paper_routes_for_day(date_str: str, paper_archive_routes: dict[str, set[str]] | None) -> dict[str, str | None]:
+    paper_archive_routes = paper_archive_routes or {"dates": set(), "months": set(), "years": set()}
+    month = date_str[:7]
+    year = date_str[:4]
+    return {
+        "home": "/",
+        "day": f"/archive/{month}/{date_str[8:10]}/" if date_str in paper_archive_routes["dates"] else None,
+        "month": f"/archive/{month}/" if month in paper_archive_routes["months"] else None,
+        "year": f"/archive/{year}/" if year in paper_archive_routes["years"] else None,
+    }
+
+
+def _paper_routes_for_month(month: str, paper_archive_routes: dict[str, set[str]] | None) -> dict[str, str | None]:
+    paper_archive_routes = paper_archive_routes or {"dates": set(), "months": set(), "years": set()}
+    year = month[:4]
+    return {
+        "home": "/",
+        "month": f"/archive/{month}/" if month in paper_archive_routes["months"] else None,
+        "year": f"/archive/{year}/" if year in paper_archive_routes["years"] else None,
+    }
+
+
+def _paper_routes_for_year(year: str, paper_archive_routes: dict[str, set[str]] | None) -> dict[str, str | None]:
+    paper_archive_routes = paper_archive_routes or {"dates": set(), "months": set(), "years": set()}
+    return {
+        "home": "/",
+        "year": f"/archive/{year}/" if year in paper_archive_routes["years"] else None,
     }
 
 
@@ -304,7 +372,14 @@ def _build_source_sections(raw_items: list[HotspotItem], report: dict[str, Any],
     return sections
 
 
-def build_daily_hotspot_web_payload(report: dict[str, Any], raw_items: list[HotspotItem], *, previous_date: str | None = None, next_date: str | None = None) -> dict[str, Any]:
+def build_daily_hotspot_web_payload(
+    report: dict[str, Any],
+    raw_items: list[HotspotItem],
+    *,
+    previous_date: str | None = None,
+    next_date: str | None = None,
+    paper_archive_routes: dict[str, set[str]] | None = None,
+) -> dict[str, Any]:
     topic_lookup, all_topics = _build_topic_lookup(report)
     source_sections = _build_source_sections(raw_items, report, topic_lookup)
     featured_topics = [
@@ -341,6 +416,7 @@ def build_daily_hotspot_web_payload(report: dict[str, Any], raw_items: list[Hots
             "summary": report.get("summary", ""),
             "previous_date": previous_date,
             "next_date": next_date,
+            "paper_routes": _paper_routes_for_day(str(report.get("date", "")), paper_archive_routes),
             "counts": {
                 "featured_topics": len(featured_topics),
                 "topic_summary": len(topic_summary),
@@ -416,6 +492,7 @@ def _build_root_index(daily_payloads: list[dict[str, Any]]) -> dict[str, Any]:
                 "topic_summary": int(counts.get("topic_summary", 0)),
                 "source_section_counts": payload.get("source_section_counts", {}),
                 "route": f"/hot/{date}/",
+                "paper_routes": dict(meta.get("paper_routes") or {"home": "/"}),
             }
         )
         month_entry = months.setdefault(month, {"month": month, "days": 0, "featured_topics": 0, "source_items": 0})
@@ -436,7 +513,7 @@ def _build_root_index(daily_payloads: list[dict[str, Any]]) -> dict[str, Any]:
     }
 
 
-def _build_month_index(month: str, daily_payloads: list[dict[str, Any]]) -> dict[str, Any]:
+def _build_month_index(month: str, daily_payloads: list[dict[str, Any]], paper_archive_routes: dict[str, set[str]] | None) -> dict[str, Any]:
     entries = []
     source_section_totals: dict[str, int] = defaultdict(int)
     total_featured_topics = 0
@@ -469,6 +546,7 @@ def _build_month_index(month: str, daily_payloads: list[dict[str, Any]]) -> dict
         "schema_version": 1,
         "month": month,
         "year": month[:4],
+        "paper_routes": _paper_routes_for_month(month, paper_archive_routes),
         "totals": {
             "days": len(entries),
             "featured_topics": total_featured_topics,
@@ -480,7 +558,7 @@ def _build_month_index(month: str, daily_payloads: list[dict[str, Any]]) -> dict
     }
 
 
-def _build_year_index(year: str, daily_payloads: list[dict[str, Any]]) -> dict[str, Any]:
+def _build_year_index(year: str, daily_payloads: list[dict[str, Any]], paper_archive_routes: dict[str, set[str]] | None) -> dict[str, Any]:
     month_rollup: dict[str, dict[str, Any]] = {}
     total_featured_topics = 0
     total_source_items = 0
@@ -526,6 +604,7 @@ def _build_year_index(year: str, daily_payloads: list[dict[str, Any]]) -> dict[s
     return {
         "schema_version": 1,
         "year": year,
+        "paper_routes": _paper_routes_for_year(year, paper_archive_routes),
         "totals": {
             "days": sum(row["days"] for row in month_rows),
             "featured_topics": total_featured_topics,
@@ -540,6 +619,7 @@ def _build_year_index(year: str, daily_payloads: list[dict[str, Any]]) -> dict[s
 def write_hotspot_web_data(output_root: str | Path, report: dict[str, Any], raw_items: list[HotspotItem]) -> dict[str, Path]:
     output_root = Path(output_root)
     web_root = output_root / "web_data"
+    paper_archive_routes = _discover_paper_archive_routes(output_root)
     existing_payloads = _load_existing_daily_payloads(web_root)
     existing_dates = [str(payload.get("meta", {}).get("date", "")) for payload in existing_payloads]
     current_date = str(report.get("date", ""))
@@ -553,7 +633,13 @@ def write_hotspot_web_data(output_root: str | Path, report: dict[str, Any], raw_
         if current_index + 1 < len(ordered_dates):
             next_date = ordered_dates[current_index + 1]
 
-    daily_payload = build_daily_hotspot_web_payload(report, raw_items, previous_date=previous_date, next_date=next_date)
+    daily_payload = build_daily_hotspot_web_payload(
+        report,
+        raw_items,
+        previous_date=previous_date,
+        next_date=next_date,
+        paper_archive_routes=paper_archive_routes,
+    )
     daily_path = _daily_payload_path(web_root, current_date)
     _write_json(daily_path, daily_payload)
 
@@ -578,12 +664,12 @@ def write_hotspot_web_data(output_root: str | Path, report: dict[str, Any], raw_
 
     for month in months:
         month_path = web_root / "hot" / month / "index.json"
-        _write_json(month_path, _build_month_index(month, all_payloads))
+        _write_json(month_path, _build_month_index(month, all_payloads, paper_archive_routes))
         written_paths[f"month:{month}"] = month_path
 
     for year in years:
         year_path = web_root / "hot" / year / "index.json"
-        _write_json(year_path, _build_year_index(year, all_payloads))
+        _write_json(year_path, _build_year_index(year, all_payloads, paper_archive_routes))
         written_paths[f"year:{year}"] = year_path
 
     return written_paths

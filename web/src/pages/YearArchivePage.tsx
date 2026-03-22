@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 import { loadYearIndex } from "../lib/data";
+import { bestPaperRoute } from "../lib/routes";
 import { SOURCE_FAMILY_LABELS } from "../lib/hotspotView";
 import type { YearIndexPayload } from "../types/hotspot";
 
@@ -42,24 +43,25 @@ export function YearArchivePage({ year }: { year: string }) {
   const sourceMix = Object.entries(payload.source_section_totals)
     .sort((left, right) => right[1] - left[1])
     .filter(([, count]) => count > 0);
+  const paperYearRoute = bestPaperRoute(payload.paper_routes, ["year", "home"]);
 
   return (
     <div className="stack">
-      <section className="panel day-hero">
+      <section className="panel day-hero compact-panel">
         <div className="day-nav">
           <div className="day-nav-edge">
             <Link to="/hot">Hotspot index</Link>
           </div>
           <div className="day-nav-center">Yearly archive</div>
           <div className="day-nav-edge right">
-            <span>{payload.months.length} active months</span>
+            <a href={paperYearRoute}>Paper year</a>
           </div>
         </div>
-        <div className="hero-grid">
+        <div className="hero-grid dense-hero-grid">
           <div>
             <p className="eyebrow">Yearly hotspot archive</p>
             <h1>{payload.year}</h1>
-            <p className="lede">Month-level overview of how the hotspot system distributed attention across the year.</p>
+            <p className="lede tight-lede">{payload.months.length} active months with retained hotspot coverage.</p>
           </div>
         </div>
         <div className="summary-band">
@@ -90,11 +92,10 @@ export function YearArchivePage({ year }: { year: string }) {
         </div>
       </section>
 
-      <section className="panel">
+      <section className="panel compact-panel">
         <div className="section-header">
           <div>
             <h2>Monthly archive</h2>
-            <p>Each month retains its own aggregate mix so you can see how the hotspot surface shifted over time.</p>
           </div>
         </div>
         <div className="archive-grid">

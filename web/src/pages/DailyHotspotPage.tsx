@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 
 import { SignalRow } from "../components/SignalRow";
 import { loadDailyHotspot } from "../lib/data";
+import { bestPaperRoute } from "../lib/routes";
 import { defaultVisibleCount, filterSectionsBySearch, type DensityMode } from "../lib/hotspotView";
 import type { DailyHotspotPayload, SourceSection } from "../types/hotspot";
 
@@ -12,7 +13,7 @@ type AsyncState =
   | { status: "ready"; payload: DailyHotspotPayload };
 
 function topicSummaryLimit(density: DensityMode) {
-  return density === "compact" ? 18 : 12;
+  return density === "compact" ? 12 : 8;
 }
 
 function sectionTitle(section: SourceSection) {
@@ -54,10 +55,12 @@ export function DailyHotspotPage({ date }: { date: string }) {
   const { payload } = state;
   const visibleSections = filterSectionsBySearch(payload.source_sections, searchQuery);
   const visibleTopicSummary = payload.topic_summary.slice(0, topicSummaryLimit(density));
+  const paperDayRoute = bestPaperRoute(payload.meta.paper_routes, ["day", "month", "year", "home"]);
+  const paperArchiveRoute = bestPaperRoute(payload.meta.paper_routes, ["month", "year", "home"]);
 
   return (
     <div className="stack">
-      <section className="panel day-hero">
+      <section className="panel day-hero dense-day-hero">
         <div className="day-nav">
           <div className="day-nav-edge">
             {payload.meta.previous_date ? <Link to={`/hot/${payload.meta.previous_date}`}>Previous day</Link> : <span>Previous day</span>}
@@ -70,38 +73,49 @@ export function DailyHotspotPage({ date }: { date: string }) {
           </div>
         </div>
 
-        <div className="hero-grid">
-          <div>
+        <div className="hero-grid dense-hero-grid">
+          <div className="hero-copy">
             <p className="eyebrow">{payload.meta.mode} generation</p>
             <h1>Daily AI Hotspots {payload.meta.date}</h1>
-            <p className="lede">{payload.meta.summary}</p>
+            <div className="jump-row">
+              <a className="inline-link" href={paperDayRoute}>Paper digest</a>
+              <a className="inline-link" href={paperArchiveRoute}>Paper archive</a>
+              <Link className="inline-link" to={`/hot/${payload.meta.month}`}>Hot month</Link>
+              <Link className="inline-link" to={`/hot/${payload.meta.year}`}>Hot year</Link>
+            </div>
+            <div className="summary-band compact-summary-band">
+              <span className="summary-chip">items {payload.meta.counts.source_items}</span>
+              <span className="summary-chip">featured {payload.meta.counts.featured_topics}</span>
+              <span className="summary-chip">topics {payload.meta.counts.topic_summary}</span>
+              <span className="summary-chip">long tail {payload.meta.counts.long_tail}</span>
+            </div>
           </div>
-          <div className="hero-actions">
-            <Link className="primary-link" to={`/hot/${payload.meta.month}`}>
-              Month archive
-            </Link>
-            <Link className="inline-link" to={`/hot/${payload.meta.year}`}>
-              Year archive
-            </Link>
-          </div>
-        </div>
-
-        <div className="summary-band">
-          <div>
-            <p className="stat-label">Featured</p>
-            <p className="stat-value">{payload.meta.counts.featured_topics}</p>
-          </div>
-          <div>
-            <p className="stat-label">Source items</p>
-            <p className="stat-value">{payload.meta.counts.source_items}</p>
-          </div>
-          <div>
-            <p className="stat-label">Topic strip</p>
-            <p className="stat-value">{payload.meta.counts.topic_summary}</p>
-          </div>
-          <div>
-            <p className="stat-label">Long tail</p>
-            <p className="stat-value">{payload.meta.counts.long_tail}</p>
+          <div className="hero-tools">
+            <label className="search-field compact-search">
+              <span>Search</span>
+              <input
+                type="search"
+                value={searchQuery}
+                onChange={(event) => setSearchQuery(event.target.value)}
+                placeholder="agents, Claude, OCR, quantization..."
+              />
+            </label>
+            <div className="toggle-group" role="tablist" aria-label="Display density">
+              <button
+                className={density === "compact" ? "active" : ""}
+                onClick={() => setDensity("compact")}
+                type="button"
+              >
+                Compact
+              </button>
+              <button
+                className={density === "comfortable" ? "active" : ""}
+                onClick={() => setDensity("comfortable")}
+                type="button"
+              >
+                Comfortable
+              </button>
+            </div>
           </div>
         </div>
 
@@ -115,67 +129,13 @@ export function DailyHotspotPage({ date }: { date: string }) {
         </div>
       </section>
 
-      <section className="panel controls-panel">
-        <div className="controls-row">
-          <label className="search-field">
-            <span>Search today's signals</span>
-            <input
-              type="search"
-              value={searchQuery}
-              onChange={(event) => setSearchQuery(event.target.value)}
-              placeholder="model releases, agents, Claude, OCR..."
-            />
-          </label>
-          <div className="toggle-group" role="tablist" aria-label="Display density">
-            <button
-              className={density === "compact" ? "active" : ""}
-              onClick={() => setDensity("compact")}
-              type="button"
-            >
-              Compact
-            </button>
-            <button
-              className={density === "comfortable" ? "active" : ""}
-              onClick={() => setDensity("comfortable")}
-              type="button"
-            >
-              Comfortable
-            </button>
-          </div>
-        </div>
-      </section>
-
-      <section className="panel">
+      <section className="panel compact-panel">
         <div className="section-header">
           <div>
-            <h2>Today at a glance</h2>
-            <p>Short featured topics for the strongest same-day stories before the denser source scan below.</p>
+            <h2>Top topics</h2>
           </div>
         </div>
-        <div className="featured-grid">
-          {payload.featured_topics.map((topic) => (
-            <Link className="featured-card" key={topic.topic_id} to={`/hot/${payload.meta.date}/topic/${topic.slug}`}>
-              <span className="card-kicker">{topic.category}</span>
-              <strong>{topic.headline}</strong>
-              <p>{topic.summary_short || topic.why_it_matters}</p>
-              <div className="card-metrics">
-                <span>{topic.source_names.length} sources</span>
-                <span>final {topic.scores.final.toFixed(1)}</span>
-                <span>heat {topic.scores.heat.toFixed(1)}</span>
-              </div>
-            </Link>
-          ))}
-        </div>
-      </section>
-
-      <section className="panel">
-        <div className="section-header">
-          <div>
-            <h2>Topic summary strip</h2>
-            <p>Clustered navigation for repeated themes, kept secondary so the page still prioritizes broad source coverage.</p>
-          </div>
-        </div>
-        <div className="topic-strip">
+        <div className="topic-strip compact-topic-strip">
           {visibleTopicSummary.map((topic) => (
             <Link className="topic-pill" key={topic.topic_id} to={`/hot/${payload.meta.date}/topic/${topic.slug}`}>
               <span>{topic.headline}</span>
@@ -198,7 +158,6 @@ export function DailyHotspotPage({ date }: { date: string }) {
             <div className="section-header">
               <div>
                 <h2>{sectionTitle(section)}</h2>
-                <p>{section.description}</p>
               </div>
               <div className="section-header-actions">
                 <Link className="inline-link" to={`/hot/${payload.meta.date}/source/${section.slug}`}>

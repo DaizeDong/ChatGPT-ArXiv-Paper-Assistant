@@ -1,3 +1,10 @@
+export type PaperRoutes = {
+  home: string;
+  day?: string | null;
+  month?: string | null;
+  year?: string | null;
+};
+
 export type RootIndexEntry = {
   date: string;
   month: string;
@@ -8,6 +15,7 @@ export type RootIndexEntry = {
   topic_summary: number;
   source_section_counts: Record<string, number>;
   route: string;
+  paper_routes?: PaperRoutes;
 };
 
 export type RootIndexPayload = {
@@ -92,6 +100,7 @@ export type DailyHotspotPayload = {
     summary: string;
     previous_date: string | null;
     next_date: string | null;
+    paper_routes: PaperRoutes;
     counts: Record<string, number>;
   };
   totals: Record<string, number>;
@@ -124,6 +133,7 @@ export type MonthIndexPayload = {
   schema_version: number;
   month: string;
   year: string;
+  paper_routes: PaperRoutes;
   totals: {
     days: number;
     featured_topics: number;
@@ -145,6 +155,7 @@ export type MonthIndexPayload = {
 export type YearIndexPayload = {
   schema_version: number;
   year: string;
+  paper_routes: PaperRoutes;
   totals: {
     days: number;
     featured_topics: number;

@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 import { loadMonthIndex } from "../lib/data";
+import { bestPaperRoute } from "../lib/routes";
 import { SOURCE_FAMILY_LABELS } from "../lib/hotspotView";
 import type { MonthIndexPayload } from "../types/hotspot";
 
@@ -45,24 +46,30 @@ export function MonthArchivePage({ month }: { month: string }) {
   const busiestDays = [...payload.days]
     .sort((left, right) => right.source_items - left.source_items || right.featured_topics - left.featured_topics)
     .slice(0, 6);
+  const paperMonthRoute = bestPaperRoute(payload.paper_routes, ["month", "year", "home"]);
+  const paperYearRoute = bestPaperRoute(payload.paper_routes, ["year", "home"]);
 
   return (
     <div className="stack">
-      <section className="panel day-hero">
+      <section className="panel day-hero compact-panel">
         <div className="day-nav">
           <div className="day-nav-edge">
             <Link to="/hot">Hotspot index</Link>
           </div>
           <div className="day-nav-center">Monthly archive</div>
           <div className="day-nav-edge right">
-            <Link to={`/hot/${payload.year}`}>Year archive</Link>
+            <a href={paperMonthRoute}>Paper month</a>
           </div>
         </div>
-        <div className="hero-grid">
+        <div className="hero-grid dense-hero-grid">
           <div>
             <p className="eyebrow">Monthly hotspot archive</p>
             <h1>{payload.month}</h1>
-            <p className="lede">Daily hotspot coverage, source-family mix, and the busiest days retained for this month.</p>
+            <p className="lede tight-lede">Day-level hotspot coverage and source mix for this month.</p>
+          </div>
+          <div className="hero-actions">
+            <Link className="inline-link" to={`/hot/${payload.year}`}>Hot year</Link>
+            <a className="inline-link" href={paperYearRoute}>Paper year</a>
           </div>
         </div>
         <div className="summary-band">
@@ -93,11 +100,10 @@ export function MonthArchivePage({ month }: { month: string }) {
         </div>
       </section>
 
-      <section className="panel">
+      <section className="panel compact-panel">
         <div className="section-header">
           <div>
             <h2>Busiest days</h2>
-            <p>Highest-volume daily hotspot pages in this month.</p>
           </div>
         </div>
         <div className="featured-grid">
@@ -115,11 +121,10 @@ export function MonthArchivePage({ month }: { month: string }) {
         </div>
       </section>
 
-      <section className="panel">
+      <section className="panel compact-panel">
         <div className="section-header">
           <div>
             <h2>Daily archive</h2>
-            <p>Every hotspot day captured for {payload.month}, with compact source mix for fast backtracking.</p>
           </div>
         </div>
         <div className="archive-grid">

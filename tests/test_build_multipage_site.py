@@ -60,9 +60,13 @@ class BuildMultipageSiteTests(unittest.TestCase):
             hot_home = (site_root / "hot" / "index.md").read_text(encoding="utf-8")
             hot_month = (site_root / "hot" / "2026-03" / "index.md").read_text(encoding="utf-8")
             hot_year = (site_root / "hot" / "2026" / "index.md").read_text(encoding="utf-8")
+            paper_month = (site_root / "archive" / "2026-03" / "index.md").read_text(encoding="utf-8")
+            paper_year = (site_root / "archive" / "2026" / "index.md").read_text(encoding="utf-8")
 
             self.assertIn('href="hot"', paper_home)
             self.assertIn("Daily AI Hotspots", paper_home)
+            self.assertIn("Daily AI Hotspots", paper_month)
+            self.assertIn("Daily AI Hotspots", paper_year)
             self.assertIn("Daily Paper Digest", hot_home)
             self.assertIn("Daily Briefs", hot_month)
             self.assertIn("Report days", hot_month)

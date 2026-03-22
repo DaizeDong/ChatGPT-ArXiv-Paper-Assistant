@@ -436,6 +436,7 @@ Success condition:
 - the new frontend is the primary user-facing hotspot interface
 - publish CI rebuilds hotspot `web_data` from saved reports and normalized items before the web build
 - final Pages output serves the React hotspot app under `/hot/...` routes without committing generated HTML
+- manual `workflow_dispatch` can validate non-`main` site branches by overriding the site-code ref
 
 ## 12. Acceptance Criteria
 

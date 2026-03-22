@@ -2,6 +2,11 @@ name: Publish Github Pages
 
 on:
   workflow_dispatch:
+    inputs:
+      site_ref:
+        description: "Branch or tag to use for site code during manual validation"
+        required: false
+        default: "main"
   workflow_run:
     workflows: [ "Push Generated Results" ]
     types:
@@ -28,6 +33,7 @@ concurrency:
 
 env:
   FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+  SITE_CODE_REF: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.site_ref || 'main' }}
 
 jobs:
   build:
@@ -39,10 +45,10 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout `main` branch for site code
+      - name: Checkout site code branch
         uses: actions/checkout@v6
         with:
-          ref: main
+          ref: ${{ env.SITE_CODE_REF }}
           fetch-depth: 0
 
       - name: Checkout `auto_update` branch for generated outputs

@@ -213,10 +213,13 @@ def fetch_source_payloads(target_date: datetime, output_root: Path, config: conf
 def deterministic_trim(clusters: list[HotspotCluster], max_clusters: int) -> list[HotspotCluster]:
     ranked = sorted(clusters, key=lambda cluster: cluster.deterministic_score, reverse=True)
     role_budgets = {
-        "research_backbone": 4,
-        "official_news": 4,
-        "community_heat": 4,
-        "paper_trending": 6,
+        "research_backbone": 3,
+        "paper_trending": 5,
+        "official_news": 3,
+        "headline_consensus": 3,
+        "editorial_depth": 2,
+        "community_heat": 2,
+        "builder_momentum": 1,
     }
     selected: list[HotspotCluster] = []
     selected_ids: set[str] = set()
@@ -306,10 +309,12 @@ def _topic_bucket(topic: dict[str, Any]) -> str:
     category = topic.get("PRIMARY_CATEGORY", "")
     if "official_news" in roles or category in {"Product Release", "Industry Update"}:
         return "official"
-    if roles & {"community_heat", "headline_consensus", "hn_discussion"}:
-        return "community"
     if category == "Tooling" or roles & {"builder_momentum", "github_trend"}:
         return "tooling"
+    if roles & {"research_backbone", "paper_trending"}:
+        return "research"
+    if roles & {"community_heat", "headline_consensus", "hn_discussion", "editorial_depth"}:
+        return "community"
     return "research"
 
 
@@ -336,13 +341,13 @@ def _topic_sort_key(topic: dict[str, Any]) -> tuple[float, float, float, float, 
     )
 
 
-def _diverse_select(candidates: list[dict[str, Any]], limit: int, max_per_category: int = 2, max_per_source: int = 2) -> list[dict[str, Any]]:
+def _diverse_select(candidates: list[dict[str, Any]], limit: int, max_per_category: int = 3, max_per_source: int = 2) -> list[dict[str, Any]]:
     selected: list[dict[str, Any]] = []
     category_counts: dict[str, int] = {}
     source_counts: dict[str, int] = {}
     bucket_counts: dict[str, int] = {}
     paper_heavy_count = 0
-    bucket_caps = {"research": 2, "official": 2, "community": 2, "tooling": 2}
+    bucket_caps = {"research": 3, "official": 2, "community": 2, "tooling": 2}
 
     for topic in sorted(candidates, key=_topic_sort_key, reverse=True):
         category = topic.get("PRIMARY_CATEGORY", "Unknown")
@@ -409,6 +414,21 @@ def _trim_topics(top_topics: list[dict[str, Any]], watchlist: list[dict[str, Any
         candidate = _diverse_select(selected_top + [topic], len(selected_top) + 1)
         if any(row["TOPIC_ID"] == topic["TOPIC_ID"] for row in candidate):
             add_topic(topic, promoted=topic.get("WATCHLIST", False))
+
+    has_heat_slot = any(
+        ("community_heat" in topic.get("source_roles", []) or "headline_consensus" in topic.get("source_roles", []) or "hn_discussion" in topic.get("source_roles", []))
+        and "paper_trending" not in topic.get("source_roles", [])
+        and "research_backbone" not in topic.get("source_roles", [])
+        for topic in selected_top
+    )
+    if not has_heat_slot and len(selected_top) < target_topics:
+        for topic in ranked_watchlist:
+            if topic["TOPIC_ID"] in selected_ids:
+                continue
+            roles = set(topic.get("source_roles", []))
+            if roles & {"community_heat", "headline_consensus", "hn_discussion"}:
+                add_topic(topic, promoted=True)
+                break
 
     if len(selected_top) < min_topics:
         fallback_pool = [topic for topic in combined if topic["TOPIC_ID"] not in selected_ids]

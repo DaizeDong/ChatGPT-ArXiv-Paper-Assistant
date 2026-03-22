@@ -20,8 +20,8 @@ ALLOWED_HOTSPOT_CATEGORIES = {
 
 CATEGORY_KEYWORDS = {
     "Research": {"paper", "arxiv", "training", "reasoning", "representation", "quantization", "transformer", "moe", "benchmark", "theory"},
-    "Product Release": {"launch", "release", "released", "announced", "introducing", "api", "preview", "available", "acquire", "acquisition", "rollout", "model"},
-    "Tooling": {"tool", "sdk", "framework", "cli", "workflow", "inference", "serving", "editor", "platform"},
+    "Product Release": {"launch", "launches", "release", "released", "announced", "introducing", "api", "preview", "available", "acquire", "acquisition", "rollout", "model", "revamps", "debuts", "limits"},
+    "Tooling": {"tool", "sdk", "framework", "cli", "workflow", "inference", "serving", "editor", "platform", "memory", "retrieval", "ocr", "design", "app"},
     "Industry Update": {"policy", "funding", "partnership", "infrastructure", "chip", "datacenter", "deployment"},
     "Community Signal": {"viral", "discussion", "thread", "debate", "reaction", "trend", "community"},
 }
@@ -30,8 +30,10 @@ RESEARCH_TERMS = {
     "paper", "arxiv", "training", "reasoning", "representation", "quantization", "scaling",
     "transformer", "moe", "mixture of experts", "benchmark", "theory", "agent",
 }
-RELEASE_TERMS = {"launch", "launched", "release", "released", "announced", "announcement", "introducing", "preview", "api", "available", "acquire", "acquisition", "rollout", "model"}
-TOOLING_TERMS = {"tool", "sdk", "framework", "platform", "editor", "cli", "workflow", "inference", "serving", "deployment"}
+RELEASE_TERMS = {"launch", "launches", "launched", "release", "released", "announced", "announcement", "introducing", "preview", "api", "available", "acquire", "acquisition", "rollout", "model", "revamps", "debuts", "limits", "doubles"}
+TOOLING_TERMS = {"tool", "sdk", "framework", "platform", "editor", "cli", "workflow", "inference", "serving", "deployment", "memory", "retrieval", "ocr", "design", "app"}
+VENDOR_TERMS = {"openai", "anthropic", "google", "deepmind", "meta", "nvidia", "amazon", "apple", "cursor", "claude", "gpt", "gemini", "qwen", "deepseek", "mistral", "llama"}
+NEWS_ACTION_TERMS = {"launch", "launches", "released", "release", "introducing", "revamp", "revamps", "debuts", "doubles", "limits", "acquire", "acquisition", "built", "bets", "move", "moves"}
 
 
 def calc_price(model: str, usage) -> tuple[float, float]:
@@ -117,6 +119,9 @@ def _cluster_signal_scores(cluster: HotspotCluster) -> dict[str, float]:
     has_research_terms = any(term in text for term in RESEARCH_TERMS)
     has_release_terms = any(term in text for term in RELEASE_TERMS)
     has_tooling_terms = any(term in text for term in TOOLING_TERMS)
+    has_vendor_terms = any(term in text for term in VENDOR_TERMS)
+    has_news_action_terms = any(term in text for term in NEWS_ACTION_TERMS)
+    has_product_news = has_vendor_terms and has_news_action_terms
 
     daily_score = _max_metadata_int(cluster, "daily_score", "score")
     upvotes = _max_metadata_int(cluster, "upvotes")
@@ -127,6 +132,7 @@ def _cluster_signal_scores(cluster: HotspotCluster) -> dict[str, float]:
     frontierness = 1.6 + (2.1 if has_paper else 0.0) + (1.4 if has_research_terms else 0.0)
     frontierness += 2.0 if has_official and has_release_terms else (1.1 if has_official else 0.0)
     frontierness += 1.0 if has_repo and has_tooling_terms else 0.0
+    frontierness += 1.0 if has_product_news and has_roundup else 0.0
     frontierness += min(1.5, daily_score / 12.0)
     frontierness += min(0.9, math.log1p(github_stars) / 3.2)
     frontierness = _clamp(frontierness)
@@ -135,6 +141,7 @@ def _cluster_signal_scores(cluster: HotspotCluster) -> dict[str, float]:
     technical_depth += 1.2 if has_tooling_terms else 0.0
     technical_depth += 0.9 if has_repo and has_tooling_terms else 0.0
     technical_depth += 1.0 if has_official and has_release_terms else (0.5 if has_official else 0.0)
+    technical_depth += 0.7 if has_product_news and has_tooling_terms else 0.0
     technical_depth += min(1.2, daily_score / 10.0)
     technical_depth += min(1.0, math.log1p(github_stars) / 3.8)
     technical_depth = _clamp(technical_depth)
@@ -145,10 +152,12 @@ def _cluster_signal_scores(cluster: HotspotCluster) -> dict[str, float]:
     resonance += min(1.6, math.log1p(community_activity) / 2.0)
     resonance += 0.8 if has_roundup else 0.0
     resonance += 0.5 if has_official else 0.0
+    resonance += 0.6 if has_product_news and source_count > 1 else 0.0
     resonance = _clamp(resonance)
 
     importance = 2.0 + (2.3 if has_official else 0.0) + (1.3 if has_paper else 0.0) + (1.1 if has_repo else 0.0)
     importance += 2.2 if has_official and has_release_terms else (0.9 if has_release_terms else 0.0)
+    importance += 1.2 if has_product_news and has_roundup else 0.0
     importance += 0.8 if has_repo and community_activity >= 300 else 0.0
     importance += min(1.3, daily_score / 10.0)
     importance += min(1.0, math.log1p(github_stars) / 4.2)
@@ -160,12 +169,14 @@ def _cluster_signal_scores(cluster: HotspotCluster) -> dict[str, float]:
     evidence_strength += 1.0 if has_official and has_release_terms else 0.0
     evidence_strength += 1.2 if has_paper else 0.0
     evidence_strength += 1.0 if has_repo else 0.0
+    evidence_strength += 0.8 if has_product_news and source_count > 1 else 0.0
     evidence_strength += min(1.4, math.log1p(community_activity) / 2.6) if has_roundup and (has_repo or has_release_terms or has_tooling_terms) else 0.0
     evidence_strength = _clamp(evidence_strength)
 
     actionability = 1.5 + (2.2 if has_repo else 0.0) + (1.5 if has_tooling_terms else 0.0)
     actionability += 1.2 if has_official else 0.0
     actionability += 1.0 if has_official and has_release_terms else (0.8 if has_release_terms else 0.0)
+    actionability += 0.9 if has_product_news else 0.0
     actionability = _clamp(actionability)
 
     hype_penalty = 0.3
@@ -179,6 +190,8 @@ def _cluster_signal_scores(cluster: HotspotCluster) -> dict[str, float]:
         hype_penalty += 1.4
     if item_count >= 4 and source_type_count == 1 and has_roundup and not has_official:
         hype_penalty += 1.2
+    if has_product_news and source_count > 1:
+        hype_penalty -= 1.0
     if has_repo or has_official:
         hype_penalty -= 0.7
     if community_activity >= 500 and (has_research_terms or has_release_terms or has_tooling_terms):
@@ -214,9 +227,16 @@ def classify_category_heuristically(cluster: HotspotCluster) -> str:
         category: sum(1 for token in CATEGORY_KEYWORDS[category] if token in text)
         for category in ALLOWED_HOTSPOT_CATEGORIES
     }
+    has_vendor_terms = any(term in text for term in VENDOR_TERMS)
+    has_news_action_terms = any(term in text for term in NEWS_ACTION_TERMS)
+    has_product_news = has_vendor_terms and has_news_action_terms
     if "official_news" in cluster.source_roles and (scores["Product Release"] > 0 or any(term in text for term in RELEASE_TERMS)):
         return "Product Release"
+    if has_product_news and ("headline_consensus" in cluster.source_roles or "community_heat" in cluster.source_roles) and "paper_trending" not in cluster.source_roles and "research_backbone" not in cluster.source_roles:
+        return "Tooling" if scores["Tooling"] > 0 else "Product Release"
     if scores["Research"] and ("paper" in cluster.source_types or "paper_trending" in cluster.source_roles or "research_backbone" in cluster.source_roles):
+        return "Research"
+    if "paper" in cluster.source_types or "paper_trending" in cluster.source_roles or "research_backbone" in cluster.source_roles:
         return "Research"
     if scores["Tooling"]:
         return "Tooling"
@@ -224,8 +244,6 @@ def classify_category_heuristically(cluster: HotspotCluster) -> str:
         return "Industry Update"
     if scores["Community Signal"]:
         return "Community Signal"
-    if "paper" in cluster.source_types:
-        return "Research"
     if "official_news" in cluster.source_roles:
         return "Industry Update"
     return "Community Signal"

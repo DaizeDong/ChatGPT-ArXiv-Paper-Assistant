@@ -37,6 +37,12 @@ LOW_SIGNAL_DISCUSSION_PATTERNS = (
     "chatgtp is legit helping me cook",
     "for local agentic ai",
     "accurate prompts for any ai tool",
+    "life-threatened dog",
+    "cancerous tumor",
+    "personalized mrna vaccine",
+    "security system",
+    "home-security-benchmark",
+    "powerbook g4",
 )
 HIGH_SIGNAL_HOST_KEYWORDS = (
     "github.com",

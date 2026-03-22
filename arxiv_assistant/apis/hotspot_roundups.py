@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import re
 from datetime import datetime
 from pathlib import Path
 
@@ -10,6 +11,8 @@ from arxiv_assistant.utils.hotspot_sources import clip_text, fetch_text, is_fres
 
 LOW_SIGNAL_TITLE_PREFIXES = ("how to ", "watch:", "listen:", "tutorial:")
 LOW_SIGNAL_TITLE_SNIPPETS = ("how to ", "also:", "plus:", "special:", "use ", "generate ", "build ")
+DATE_PREFIX_PATTERN = re.compile(r"^(?:[A-Z][a-z]{2,8} \d{1,2}, \d{4}\s+)+")
+EMOJI_PREFIX_PATTERN = re.compile(r"^[^\w\"']+")
 
 
 def _normalize_roundup_title(title: str) -> str:
@@ -17,7 +20,8 @@ def _normalize_roundup_title(title: str) -> str:
     for marker in (" PLUS:", " ALSO:", " Two new eps", " | "):
         if marker in normalized:
             normalized = normalized.split(marker, 1)[0].strip()
-    normalized = normalized.lstrip("😸😺😼🤖🔥⚡•- ").strip()
+    normalized = DATE_PREFIX_PATTERN.sub("", normalized)
+    normalized = EMOJI_PREFIX_PATTERN.sub("", normalized).strip()
     if normalized.lower().startswith("ai "):
         normalized = normalized[3:].strip()
     if normalized.lower().startswith("tech "):
@@ -63,9 +67,8 @@ def _extract_generic_roundup_items(page_html: str, base_url: str) -> list[dict]:
         return rows
 
     for anchor in soup.find_all("a", href=True):
-        text = anchor.get_text(" ", strip=True)
+        text = _normalize_roundup_title(anchor.get_text(" ", strip=True))
         href = anchor["href"]
-        text = _normalize_roundup_title(text)
         if len(text) < 28 or href.startswith("#"):
             continue
         rows.append(

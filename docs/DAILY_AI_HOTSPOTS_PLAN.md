@@ -437,6 +437,7 @@ Success condition:
 - publish CI rebuilds hotspot `web_data` from saved reports and normalized items before the web build
 - final Pages output serves the React hotspot app under `/hot/...` routes without committing generated HTML
 - manual `workflow_dispatch` can validate non-`main` site branches by overriding the site-code ref
+- branch validation can run in build-only mode without violating `github-pages` environment protection rules
 
 ## 12. Acceptance Criteria
 

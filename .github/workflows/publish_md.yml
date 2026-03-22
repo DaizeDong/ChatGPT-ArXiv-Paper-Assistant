@@ -7,6 +7,11 @@ on:
         description: "Branch or tag to use for site code during manual validation"
         required: false
         default: "main"
+      deploy_pages:
+        description: "Whether to deploy to github-pages after building"
+        required: false
+        type: boolean
+        default: true
   workflow_run:
     workflows: [ "Push Generated Results" ]
     types:
@@ -38,10 +43,6 @@ env:
 jobs:
   build:
     if: ${{ github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success' }}
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-
     runs-on: ubuntu-latest
 
     steps:
@@ -149,6 +150,15 @@ jobs:
           retention-days: 1
           if-no-files-found: error
 
+  deploy:
+    needs: build
+    if: ${{ needs.build.result == 'success' && (github.event_name != 'workflow_dispatch' || github.event.inputs.deploy_pages == 'true') }}
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+
+    steps:
       - name: Deploy to GitHub Pages
         uses: actions/deploy-pages@v4.0.5
         id: deployment

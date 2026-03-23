@@ -5,8 +5,8 @@ from html import unescape
 import re
 from urllib.parse import urlsplit
 
-from arxiv_assistant.utils.hotspot_schema import HotspotItem, clean_text
-from arxiv_assistant.utils.hotspot_sources import clip_text, fetch_json, is_fresh
+from arxiv_assistant.utils.hotspot.hotspot_schema import HotspotItem, clean_text
+from arxiv_assistant.utils.hotspot.hotspot_sources import clip_text, fetch_json, is_fresh
 
 HN_TOPSTORIES_URL = "https://hacker-news.firebaseio.com/v0/topstories.json"
 HN_ITEM_URL = "https://hacker-news.firebaseio.com/v0/item/{item_id}.json"

@@ -6,7 +6,7 @@ from typing import List, Tuple
 import feedparser
 import requests
 
-from arxiv_assistant.utils.hotspot_schema import clean_text, normalize_url
+from arxiv_assistant.utils.hotspot.hotspot_schema import clean_text, normalize_url
 
 DEFAULT_TIMEOUT = 20
 DEFAULT_HEADERS = {

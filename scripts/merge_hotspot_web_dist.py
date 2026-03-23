@@ -9,7 +9,7 @@ from pathlib import Path
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Merge the hotspot web app build into the published dist tree.")
     parser.add_argument("--web-dist", default="web/dist", help="Built hotspot web application directory.")
-    parser.add_argument("--site-dist", default="dist", help="Final dist directory that also contains paper digest pages.")
+    parser.add_argument("--site-dist", default="dist", help="Final dist directory that also contains Personalized Daily Arxiv Paper pages.")
     return parser.parse_args()
 
 

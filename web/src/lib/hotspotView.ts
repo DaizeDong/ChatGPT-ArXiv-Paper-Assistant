@@ -37,6 +37,18 @@ export function primaryTopicRef(item: SourceSectionItem) {
   return item.topic_refs[0] ?? null;
 }
 
+function normalizeTopicValue(value: string) {
+  return value.toLowerCase().replace(/[^a-z0-9]+/g, " ").trim();
+}
+
+export function displayTopicRef(item: SourceSectionItem) {
+  const topic = primaryTopicRef(item);
+  if (!topic) {
+    return null;
+  }
+  return normalizeTopicValue(topic.headline) === normalizeTopicValue(item.title) ? null : topic;
+}
+
 export function itemHeat(item: SourceSectionItem) {
   if (item.signals.activity > 0) {
     return { label: `activity ${compactNumber(item.signals.activity)}`, value: item.signals.activity };
@@ -54,26 +66,6 @@ export function itemHeat(item: SourceSectionItem) {
     return { label: `daily ${compactNumber(item.signals.daily_score)}`, value: item.signals.daily_score };
   }
   return { label: "", value: 0 };
-}
-
-export function itemSignals(item: SourceSectionItem) {
-  const signals: string[] = [];
-  if (item.signals.activity > 0) {
-    signals.push(`activity ${compactNumber(item.signals.activity)}`);
-  }
-  if (item.signals.github_stars > 0) {
-    signals.push(`stars ${compactNumber(item.signals.github_stars)}`);
-  }
-  if (item.signals.hn_score > 0) {
-    signals.push(`HN ${compactNumber(item.signals.hn_score)}`);
-  }
-  if (item.signals.upvotes > 0) {
-    signals.push(`upvotes ${compactNumber(item.signals.upvotes)}`);
-  }
-  if (item.signals.daily_score > 0) {
-    signals.push(`daily ${compactNumber(item.signals.daily_score)}`);
-  }
-  return signals.slice(0, 3);
 }
 
 export function matchesSearch(item: SourceSectionItem, query: string) {

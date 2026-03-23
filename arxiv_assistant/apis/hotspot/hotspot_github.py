@@ -3,8 +3,8 @@ from __future__ import annotations
 import os
 from datetime import UTC, datetime, timedelta
 
-from arxiv_assistant.utils.hotspot_schema import HotspotItem
-from arxiv_assistant.utils.hotspot_sources import clip_text, fetch_json
+from arxiv_assistant.utils.hotspot.hotspot_schema import HotspotItem
+from arxiv_assistant.utils.hotspot.hotspot_sources import clip_text, fetch_json
 
 GITHUB_SEARCH_URL = "https://api.github.com/search/repositories"
 GITHUB_API_VERSION = "2026-03-10"

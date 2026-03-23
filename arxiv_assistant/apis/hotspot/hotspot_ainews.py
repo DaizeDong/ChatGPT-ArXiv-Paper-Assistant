@@ -7,9 +7,9 @@ from urllib.parse import urlsplit
 
 import feedparser
 
-from arxiv_assistant.apis.hotspot_common import extract_anchor_pairs, split_html_segments, strip_html
-from arxiv_assistant.utils.hotspot_schema import HotspotItem, clean_text
-from arxiv_assistant.utils.hotspot_sources import clip_text, fetch_text, is_fresh, normalize_url
+from arxiv_assistant.apis.hotspot.hotspot_common import extract_anchor_pairs, split_html_segments, strip_html
+from arxiv_assistant.utils.hotspot.hotspot_schema import HotspotItem, clean_text
+from arxiv_assistant.utils.hotspot.hotspot_sources import clip_text, fetch_text, is_fresh, normalize_url
 
 AINEWS_RSS_URL = "https://news.smol.ai/rss.xml"
 INTERNAL_AINEWS_DOMAINS = {

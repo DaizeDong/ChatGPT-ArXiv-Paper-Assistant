@@ -5,6 +5,10 @@ from datetime import UTC, datetime
 import feedparser
 
 from arxiv_assistant.utils.io import create_dir
+from arxiv_assistant.utils.local_env import load_local_env
+from arxiv_assistant.utils.prompt_loader import read_prompt
+
+load_local_env()
 
 
 def parse_authors(lines):
@@ -35,16 +39,11 @@ with open("configs/authors.txt", "r", encoding="utf-8") as fopen:
 AUTHOR_ID_SET = set(author_ids)
 
 # load prompts
-with open("prompts/system_prompt.txt", "r", encoding="utf-8") as f:
-    SYSTEM_PROMPT = f.read()
-with open("prompts/paper_topics.txt", "r", encoding="utf-8") as f:
-    TOPIC_PROMPT = f.read()
-with open("prompts/score_criteria.txt", "r", encoding="utf-8") as f:
-    SCORE_PROMPT = f.read()
-with open("prompts/postfix_prompt_title.txt", "r", encoding="utf-8") as f:
-    POSTFIX_PROMPT_TITLE = f.read()
-with open("prompts/postfix_prompt_abstract.txt", "r", encoding="utf-8") as f:
-    POSTFIX_PROMPT_ABSTRACT = f.read()
+SYSTEM_PROMPT = read_prompt("paper.system_prompt")
+TOPIC_PROMPT = read_prompt("paper.topics")
+SCORE_PROMPT = read_prompt("paper.score_criteria")
+POSTFIX_PROMPT_TITLE = read_prompt("paper.postfix_title")
+POSTFIX_PROMPT_ABSTRACT = read_prompt("paper.postfix_abstract")
 
 # keys
 S2_API_KEY = os.environ.get("S2_KEY")

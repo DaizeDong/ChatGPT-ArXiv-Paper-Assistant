@@ -6,8 +6,8 @@ from pathlib import Path
 
 from bs4 import BeautifulSoup
 
-from arxiv_assistant.utils.hotspot_schema import HotspotItem
-from arxiv_assistant.utils.hotspot_sources import clip_text, fetch_text, is_fresh, load_roundup_registry, normalize_url
+from arxiv_assistant.utils.hotspot.hotspot_schema import HotspotItem
+from arxiv_assistant.utils.hotspot.hotspot_sources import clip_text, fetch_text, is_fresh, load_roundup_registry, normalize_url
 
 LOW_SIGNAL_TITLE_PREFIXES = ("how to ", "watch:", "listen:", "tutorial:")
 LOW_SIGNAL_TITLE_SNIPPETS = ("how to ", "also:", "plus:", "special:", "use ", "generate ", "build ")

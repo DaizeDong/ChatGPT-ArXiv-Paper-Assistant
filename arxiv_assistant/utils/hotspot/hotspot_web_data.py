@@ -8,7 +8,7 @@ from pathlib import Path
 from typing import Any
 from urllib.parse import urlparse
 
-from arxiv_assistant.utils.hotspot_schema import HotspotItem
+from arxiv_assistant.utils.hotspot.hotspot_schema import HotspotItem
 
 SOURCE_FAMILIES = [
     {
@@ -331,18 +331,11 @@ def _build_topic_summary(topics: list[dict[str, Any]]) -> list[dict[str, Any]]:
         ),
         reverse=True,
     )
-    preferred = []
-    fallback = []
-    for topic in ordered:
-        roles = set(topic.get("source_roles", []))
-        source_count = len(topic.get("source_names", []))
-        has_non_paper_signal = bool(roles - {"research_backbone", "paper_trending"})
-        category = str(topic.get("PRIMARY_CATEGORY", "Research"))
-        if source_count >= 2 or has_non_paper_signal or category in {"Tooling", "Product Release", "Industry Update", "Community Signal"}:
-            preferred.append(topic)
-        else:
-            fallback.append(topic)
-    ordered = preferred + fallback
+    ordered = [
+        topic
+        for topic in ordered
+        if len(topic.get("source_names", [])) >= 2
+    ]
     summary = []
     for topic in ordered:
         summary.append(

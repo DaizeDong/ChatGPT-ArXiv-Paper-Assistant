@@ -5,8 +5,8 @@ import json
 import re
 from datetime import datetime
 
-from arxiv_assistant.utils.hotspot_schema import HotspotItem
-from arxiv_assistant.utils.hotspot_sources import clip_text, fetch_text
+from arxiv_assistant.utils.hotspot.hotspot_schema import HotspotItem
+from arxiv_assistant.utils.hotspot.hotspot_sources import clip_text, fetch_text
 
 HF_TRENDING_URL = "https://huggingface.co/papers/trending"
 DAILY_PAPERS_PATTERN = re.compile(

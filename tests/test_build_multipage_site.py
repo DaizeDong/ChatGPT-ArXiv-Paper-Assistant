@@ -69,7 +69,7 @@ class BuildMultipageSiteTests(unittest.TestCase):
             self.assertIn("Daily AI Hotspots", paper_home)
             self.assertIn("Daily AI Hotspots", paper_month)
             self.assertIn("Daily AI Hotspots", paper_year)
-            self.assertIn("Daily Paper Digest", hot_home)
+            self.assertIn("Personalized Daily Arxiv Paper", hot_home)
             self.assertIn("Paper Archive", hot_month)
             self.assertIn("Paper Archive", hot_year)
             self.assertIn("Daily Briefs", hot_month)

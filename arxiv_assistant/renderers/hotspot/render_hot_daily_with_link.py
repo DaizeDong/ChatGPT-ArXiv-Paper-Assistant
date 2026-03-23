@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from typing import Any
 
-from arxiv_assistant.renderers.render_hot_daily import render_hot_daily_md
+from arxiv_assistant.renderers.hotspot.render_hot_daily import render_hot_daily_md
 from arxiv_assistant.renderers.site_paths import (
     month_from_date,
     relative_site_href,
@@ -113,7 +113,7 @@ def render_hot_daily_md_with_hyperlink(
     center_asset_path: str | None = None,
     next_asset_path: str | None = None,
     related_page_path: str | None = None,
-    related_label: str = "Daily Paper Digest",
+    related_label: str = "Personalized Daily Arxiv Paper",
     content_string: str | None = None,
     report: dict[str, Any] | None = None,
 ) -> str:

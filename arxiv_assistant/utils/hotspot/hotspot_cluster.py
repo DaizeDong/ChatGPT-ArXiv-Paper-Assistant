@@ -7,8 +7,8 @@ from collections import Counter
 from typing import Iterable
 from urllib.parse import urlsplit, urlunsplit
 
-from arxiv_assistant.utils.hotspot_schema import HotspotCluster, HotspotItem
-from arxiv_assistant.utils.hotspot_sources import parse_datetime
+from arxiv_assistant.utils.hotspot.hotspot_schema import HotspotCluster, HotspotItem
+from arxiv_assistant.utils.hotspot.hotspot_sources import parse_datetime
 
 STOPWORDS = {
     "a",

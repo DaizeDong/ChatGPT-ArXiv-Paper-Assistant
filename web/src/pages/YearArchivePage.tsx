@@ -1,24 +1,25 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
-import { loadYearIndex } from "../lib/data";
+import { ArchiveNav } from "../components/ArchiveNav";
+import { loadRootIndex, loadYearIndex } from "../lib/data";
 import { SOURCE_FAMILY_LABELS } from "../lib/hotspotView";
-import type { YearIndexPayload } from "../types/hotspot";
+import type { RootIndexPayload, YearIndexPayload } from "../types/hotspot";
 
 type AsyncState =
   | { status: "loading" }
   | { status: "error"; message: string }
-  | { status: "ready"; payload: YearIndexPayload };
+  | { status: "ready"; payload: YearIndexPayload; rootIndex: RootIndexPayload };
 
 export function YearArchivePage({ year }: { year: string }) {
   const [state, setState] = useState<AsyncState>({ status: "loading" });
 
   useEffect(() => {
     let active = true;
-    loadYearIndex(year)
-      .then((payload) => {
+    Promise.all([loadYearIndex(year), loadRootIndex()])
+      .then(([payload, rootIndex]) => {
         if (active) {
-          setState({ status: "ready", payload });
+          setState({ status: "ready", payload, rootIndex });
         }
       })
       .catch((error: Error) => {
@@ -38,28 +39,49 @@ export function YearArchivePage({ year }: { year: string }) {
     return <section className="panel">Failed to load year archive: {state.message}</section>;
   }
 
-  const { payload } = state;
+  const { payload, rootIndex } = state;
   const sourceMix = Object.entries(payload.source_section_totals)
     .sort((left, right) => right[1] - left[1])
     .filter(([, count]) => count > 0);
+  const yearIndex = rootIndex.years.findIndex((entry) => entry.year === payload.year);
+  const previousYear = yearIndex > 0 ? rootIndex.years[yearIndex - 1] : null;
+  const nextYear = yearIndex >= 0 && yearIndex < rootIndex.years.length - 1 ? rootIndex.years[yearIndex + 1] : null;
 
   return (
-    <div className="stack">
-      <section className="panel compact-panel feed-panel">
-        <div className="day-nav">
-          <div className="day-nav-edge" />
-          <div className="day-nav-center">{payload.year}</div>
-          <div className="day-nav-edge right">Year</div>
-        </div>
-        <div className="feed-toolbar">
-          <div className="feed-links">
-            <strong>Archive</strong>
-          </div>
-          <div className="feed-stats">
-            <span>{payload.months.length} months</span>
-            <span>{payload.totals.days} days</span>
-            <span>{payload.totals.source_items} items</span>
-          </div>
+    <div className="stack hotspot-stack">
+      <section className="archive-head">
+        <ArchiveNav
+          previous={
+            previousYear
+              ? {
+                  href: `/hot/${previousYear.year}`,
+                  title: "Previous Year",
+                  subtitle: previousYear.year,
+                  arrow: "left",
+                }
+              : null
+          }
+          center={{
+            href: null,
+            title: "Yearly Overview",
+            subtitle: payload.year,
+          }}
+          next={
+            nextYear
+              ? {
+                  href: `/hot/${nextYear.year}`,
+                  title: "Next Year",
+                  subtitle: nextYear.year,
+                  arrow: "right",
+                }
+              : null
+          }
+        />
+        <div className="archive-head-meta">
+          <span>{payload.year}</span>
+          <span>{payload.months.length} months</span>
+          <span>{payload.totals.days} days</span>
+          <span>{payload.totals.source_items} items</span>
         </div>
         <div className="section-chip-row compact">
           {sourceMix.map(([slug, count]) => (

@@ -1,5 +1,10 @@
 # Changelog
 
+### 2026-02-23
+
+- Major updates in repository structure and pipeline features.
+- Simplified the Daily AI Hotspots UI for better readability.
+
 ### 2026-03-22
 
 - Added the Daily AI Hotspots pipeline, combining local selected papers, Hugging Face trending papers, roundup/news sites, official blogs, GitHub trends, and Hacker News discussions.

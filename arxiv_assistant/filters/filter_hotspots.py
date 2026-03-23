@@ -7,7 +7,7 @@ from typing import Any
 
 from openai import OpenAI
 
-from arxiv_assistant.utils.hotspot_schema import HotspotCluster
+from arxiv_assistant.utils.hotspot.hotspot_schema import HotspotCluster
 from arxiv_assistant.utils.pricing_loader import get_model_pricing
 
 ALLOWED_HOTSPOT_CATEGORIES = {
@@ -100,6 +100,24 @@ def _sum_metadata_int(cluster: HotspotCluster, *keys: str) -> int:
     return total
 
 
+def _avg_metadata_float(cluster: HotspotCluster, *keys: str) -> float:
+    values: list[float] = []
+    for item in _cluster_items(cluster):
+        metadata = item.get("metadata", {}) or {}
+        for key in keys:
+            raw_value = metadata.get(key)
+            if raw_value is None:
+                continue
+            try:
+                values.append(float(raw_value))
+                break
+            except (TypeError, ValueError):
+                continue
+    if not values:
+        return 0.0
+    return sum(values) / len(values)
+
+
 def _bool_signal(cluster: HotspotCluster, predicate) -> bool:
     return any(predicate(item) for item in _cluster_items(cluster))
 
@@ -128,6 +146,7 @@ def _cluster_signal_scores(cluster: HotspotCluster) -> dict[str, float]:
     github_stars = _max_metadata_int(cluster, "github_stars", "stars")
     hn_score = _max_metadata_int(cluster, "hn_score")
     community_activity = _sum_metadata_int(cluster, "activity")
+    source_quality = _avg_metadata_float(cluster, "source_quality")
 
     frontierness = 1.6 + (2.1 if has_paper else 0.0) + (1.4 if has_research_terms else 0.0)
     frontierness += 2.0 if has_official and has_release_terms else (1.1 if has_official else 0.0)
@@ -135,6 +154,7 @@ def _cluster_signal_scores(cluster: HotspotCluster) -> dict[str, float]:
     frontierness += 1.0 if has_product_news and has_roundup else 0.0
     frontierness += min(1.5, daily_score / 12.0)
     frontierness += min(0.9, math.log1p(github_stars) / 3.2)
+    frontierness += min(0.8, source_quality * 0.55)
     frontierness = _clamp(frontierness)
 
     technical_depth = 1.8 + (1.9 if has_paper else 0.0) + (1.2 if has_research_terms else 0.0)
@@ -144,6 +164,7 @@ def _cluster_signal_scores(cluster: HotspotCluster) -> dict[str, float]:
     technical_depth += 0.7 if has_product_news and has_tooling_terms else 0.0
     technical_depth += min(1.2, daily_score / 10.0)
     technical_depth += min(1.0, math.log1p(github_stars) / 3.8)
+    technical_depth += min(0.7, source_quality * 0.45)
     technical_depth = _clamp(technical_depth)
 
     resonance = 1.6 + min(3.0, max(source_count - 1, 0) * 1.15) + min(1.6, max(source_type_count - 1, 0) * 0.8)
@@ -153,6 +174,7 @@ def _cluster_signal_scores(cluster: HotspotCluster) -> dict[str, float]:
     resonance += 0.8 if has_roundup else 0.0
     resonance += 0.5 if has_official else 0.0
     resonance += 0.6 if has_product_news and source_count > 1 else 0.0
+    resonance += min(0.7, source_quality * 0.45)
     resonance = _clamp(resonance)
 
     importance = 2.0 + (2.3 if has_official else 0.0) + (1.3 if has_paper else 0.0) + (1.1 if has_repo else 0.0)
@@ -162,6 +184,7 @@ def _cluster_signal_scores(cluster: HotspotCluster) -> dict[str, float]:
     importance += min(1.3, daily_score / 10.0)
     importance += min(1.0, math.log1p(github_stars) / 4.2)
     importance += min(0.8, math.log1p(community_activity) / 3.5)
+    importance += min(0.6, source_quality * 0.35)
     importance = _clamp(importance)
 
     evidence_strength = 2.0 + (1.7 if source_count > 1 else 0.0) + (1.1 if source_type_count > 1 else 0.0)
@@ -171,6 +194,7 @@ def _cluster_signal_scores(cluster: HotspotCluster) -> dict[str, float]:
     evidence_strength += 1.0 if has_repo else 0.0
     evidence_strength += 0.8 if has_product_news and source_count > 1 else 0.0
     evidence_strength += min(1.4, math.log1p(community_activity) / 2.6) if has_roundup and (has_repo or has_release_terms or has_tooling_terms) else 0.0
+    evidence_strength += min(1.0, source_quality * 0.7)
     evidence_strength = _clamp(evidence_strength)
 
     actionability = 1.5 + (2.2 if has_repo else 0.0) + (1.5 if has_tooling_terms else 0.0)

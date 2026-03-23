@@ -8,6 +8,7 @@ export type TableColumn<T> = {
   label: string;
   render: (row: T) => ReactNode;
   sortValue: (row: T) => string | number | null | undefined;
+  compare?: (left: T, right: T, direction: SortDirection) => number;
   defaultDirection?: SortDirection;
   align?: "left" | "right" | "center";
   className?: string;
@@ -18,6 +19,13 @@ function compareValues(left: string | number | null | undefined, right: string |
     return Number(left ?? 0) - Number(right ?? 0);
   }
   return `${left ?? ""}`.localeCompare(`${right ?? ""}`, undefined, { sensitivity: "base" });
+}
+
+function sortIndicator(isActive: boolean, direction: SortDirection) {
+  if (!isActive) {
+    return "\u2195";
+  }
+  return direction === "desc" ? "\u2193" : "\u2191";
 }
 
 export function SortableTable<T>({
@@ -41,11 +49,15 @@ export function SortableTable<T>({
   const sortedRows = useMemo(() => {
     const copied = [...rows];
     copied.sort((left, right) => {
-      const base = compareValues(activeColumn.sortValue(left), activeColumn.sortValue(right));
+      const base = activeColumn.compare
+        ? activeColumn.compare(left, right, sortDirection)
+        : sortDirection === "asc"
+          ? compareValues(activeColumn.sortValue(left), activeColumn.sortValue(right))
+          : -compareValues(activeColumn.sortValue(left), activeColumn.sortValue(right));
       if (base === 0) {
         return compareValues(rowKey(left), rowKey(right));
       }
-      return sortDirection === "asc" ? base : -base;
+      return base;
     });
     return copied;
   }, [activeColumn, rowKey, rows, sortDirection]);
@@ -62,10 +74,11 @@ export function SortableTable<T>({
             {columns.map((column) => {
               const isActive = column.key === sortKey;
               const nextDirection: SortDirection = isActive && sortDirection === "desc" ? "asc" : "desc";
+              const alignClass = column.align ? `align-${column.align}` : "align-left";
               return (
-                <th className={column.className} key={column.key}>
+                <th className={`${column.className ?? ""} ${alignClass}`.trim()} key={column.key}>
                   <button
-                    className={`sort-button ${isActive ? "active" : ""}`}
+                    className={`sort-button ${alignClass} ${isActive ? "active" : ""}`.trim()}
                     onClick={() => {
                       if (isActive) {
                         setSortDirection(nextDirection);
@@ -77,9 +90,7 @@ export function SortableTable<T>({
                     type="button"
                   >
                     <span>{column.label}</span>
-                    <span className="sort-indicator">
-                      {isActive ? (sortDirection === "desc" ? "↓" : "↑") : "↕"}
-                    </span>
+                    <span className="sort-indicator">{sortIndicator(isActive, sortDirection)}</span>
                   </button>
                 </th>
               );

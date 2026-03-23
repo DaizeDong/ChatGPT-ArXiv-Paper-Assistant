@@ -4,13 +4,6 @@ import { useEffect, useState } from "react";
 
 const MODE_KEY = "arxiv_site_color_mode";
 
-function repoPath(relativePath: string) {
-  const basePath = import.meta.env.BASE_URL || "/";
-  const cleanedBase = basePath.endsWith("/") ? basePath : `${basePath}/`;
-  const cleanedRelative = relativePath.startsWith("/") ? relativePath.slice(1) : relativePath;
-  return `${cleanedBase}${cleanedRelative}`;
-}
-
 export function PageShell({ children }: PropsWithChildren) {
   const location = useLocation();
   const [searchParams, setSearchParams] = useSearchParams();
@@ -64,9 +57,6 @@ export function PageShell({ children }: PropsWithChildren) {
               />
             </label>
           ) : null}
-          <nav className="topnav">
-            <a href={repoPath("")}>Paper Digest</a>
-          </nav>
         </div>
       </header>
       <main className="page-content">{children}</main>

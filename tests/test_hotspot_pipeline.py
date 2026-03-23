@@ -8,15 +8,15 @@ from datetime import UTC, datetime
 from pathlib import Path
 from unittest.mock import patch
 
-from arxiv_assistant.apis.hotspot_ainews import _choose_best_anchor, _derive_segment_title
-from arxiv_assistant.apis.hotspot_github import fetch_hotspot_items as fetch_github_hotspot_items
-from arxiv_assistant.apis.hotspot_hn import fetch_hotspot_items as fetch_hn_hotspot_items
-from arxiv_assistant.apis.hotspot_local_papers import _resolve_best_source_path
-from arxiv_assistant.apis.hotspot_official_blogs import _extract_anthropic_rows
+from arxiv_assistant.apis.hotspot.hotspot_ainews import _choose_best_anchor, _derive_segment_title
+from arxiv_assistant.apis.hotspot.hotspot_github import fetch_hotspot_items as fetch_github_hotspot_items
+from arxiv_assistant.apis.hotspot.hotspot_hn import fetch_hotspot_items as fetch_hn_hotspot_items
+from arxiv_assistant.apis.hotspot.hotspot_local_papers import _resolve_best_source_path
+from arxiv_assistant.apis.hotspot.hotspot_official_blogs import _extract_anthropic_rows
 from arxiv_assistant.filters.filter_hotspots import _cluster_signal_scores, _digest_prompt_payload
-from arxiv_assistant.renderers.render_hot_daily import render_hot_daily_md
-from arxiv_assistant.utils.hotspot_cluster import build_hotspot_clusters
-from arxiv_assistant.utils.hotspot_schema import HotspotCluster, HotspotItem
+from arxiv_assistant.renderers.hotspot.render_hot_daily import render_hot_daily_md
+from arxiv_assistant.utils.hotspot.hotspot_cluster import build_hotspot_clusters
+from arxiv_assistant.utils.hotspot.hotspot_schema import HotspotCluster, HotspotItem
 from scripts.generate_daily_hotspots import _build_category_sections, _build_x_buzz_items, _merge_display_candidates, _screening_queue, _trim_topics, detect_latest_local_output_date
 
 

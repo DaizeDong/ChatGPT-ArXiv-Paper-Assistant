@@ -1,6 +1,4 @@
-import { Link } from "react-router-dom";
-
-import { formatSourceRole, itemHeat, primaryTopicRef } from "../lib/hotspotView";
+import { displayTopicRef, formatSourceRole, itemHeat } from "../lib/hotspotView";
 import type { SourceSectionItem } from "../types/hotspot";
 import { SortableTable, type TableColumn } from "./SortableTable";
 
@@ -8,67 +6,36 @@ function emptyCell() {
   return <span className="cell-empty" />;
 }
 
-function normalize(value: string) {
-  return value.toLowerCase().replace(/[^a-z0-9]+/g, " ").trim();
+function renderTitleCell(item: SourceSectionItem) {
+  const topic = displayTopicRef(item);
+  return (
+    <div className="title-cell">
+      <a className="table-link title-link" href={item.url} target="_blank" rel="noreferrer">
+        {item.title}
+      </a>
+      <div className="title-tag-row">
+        {topic ? <span className="title-tag topic-tag">{topic.headline}</span> : null}
+        <span className="title-tag">{item.source_name}</span>
+        <span className="title-tag">{formatSourceRole(item.source_role)}</span>
+      </div>
+    </div>
+  );
 }
 
 const columns: Array<TableColumn<SourceSectionItem>> = [
   {
     key: "title",
     label: "Title",
-    className: "col-title",
+    className: "col-title col-title-dense",
     defaultDirection: "asc",
     sortValue: (item) => item.title,
-    render: (item) => (
-      <a className="table-link title-link" href={item.url} target="_blank" rel="noreferrer">
-        {item.title}
-      </a>
-    ),
-  },
-  {
-    key: "topic",
-    label: "Topic",
-    className: "col-topic",
-    defaultDirection: "asc",
-    sortValue: (item) => {
-      const topic = primaryTopicRef(item);
-      if (!topic || normalize(topic.headline) === normalize(item.title)) {
-        return "";
-      }
-      return topic.headline;
-    },
-    render: (item) => {
-      const topic = primaryTopicRef(item);
-      return topic && normalize(topic.headline) !== normalize(item.title) ? (
-        <Link className="table-link topic-link" to={topic.daily_route}>
-          {topic.headline}
-        </Link>
-      ) : (
-        emptyCell()
-      );
-    },
-  },
-  {
-    key: "source",
-    label: "Source",
-    className: "col-source",
-    defaultDirection: "asc",
-    sortValue: (item) => item.source_name,
-    render: (item) => <span>{item.source_name}</span>,
-  },
-  {
-    key: "signal",
-    label: "Signal",
-    className: "col-signal",
-    defaultDirection: "asc",
-    sortValue: (item) => formatSourceRole(item.source_role),
-    render: (item) => <span>{formatSourceRole(item.source_role)}</span>,
+    render: renderTitleCell,
   },
   {
     key: "score",
     label: "Score",
     className: "col-score",
-    align: "right",
+    align: "center",
     defaultDirection: "desc",
     sortValue: (item) => item.signal_score,
     render: (item) => <span className="number-cell">{item.signal_score.toFixed(1)}</span>,
@@ -77,7 +44,7 @@ const columns: Array<TableColumn<SourceSectionItem>> = [
     key: "heat",
     label: "Heat",
     className: "col-heat",
-    align: "right",
+    align: "center",
     defaultDirection: "desc",
     sortValue: (item) => itemHeat(item).value,
     render: (item) => {

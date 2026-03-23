@@ -112,6 +112,17 @@ jobs:
             exit 1
           fi
 
+      - name: Restore X authority inventory
+        shell: bash
+        run: |
+          if [ -f "auto_update_data/configs/hotspot/x_authority_inventory.json" ]; then
+            mkdir -p configs/hotspot
+            cp "auto_update_data/configs/hotspot/x_authority_inventory.json" "configs/hotspot/x_authority_inventory.json"
+            echo "Restored X authority inventory from auto_update."
+          else
+            echo "No X authority inventory found in auto_update."
+          fi
+
       - name: Set up Python 3.12
         uses: actions/setup-python@v6
         with:
@@ -272,6 +283,7 @@ jobs:
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
           OPENAI_BASE_URL: ${{ secrets.OPENAI_BASE_URL }}
+          X_BEARER_TOKEN: ${{ secrets.X_BEARER_TOKEN }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           REMEDY_DATES: ${{ inputs.remedy_dates }}
         shell: bash

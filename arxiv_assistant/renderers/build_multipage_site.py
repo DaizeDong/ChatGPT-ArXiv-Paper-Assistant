@@ -5,14 +5,14 @@ from pathlib import Path
 from typing import Any, Dict, Tuple
 
 from arxiv_assistant.renderers.nav_assets import write_nav_button_svg
-from arxiv_assistant.renderers.monthly_summary import build_monthly_summary_data
-from arxiv_assistant.renderers.render_daily_with_link import render_daily_md_with_hyperlink
-from arxiv_assistant.renderers.render_hot_daily_with_link import render_hot_daily_md_with_hyperlink
-from arxiv_assistant.renderers.render_hot_monthly_with_link import render_hot_monthly_md_with_hyperlink
-from arxiv_assistant.renderers.render_hot_yearly_with_link import render_hot_yearly_md_with_hyperlink
-from arxiv_assistant.renderers.render_monthly_with_link import render_monthly_md_with_hyperlink
-from arxiv_assistant.renderers.render_monthly_summary_with_link import render_monthly_summary_md_with_hyperlink
-from arxiv_assistant.renderers.render_yearly_with_link import render_yearly_md_with_hyperlink
+from arxiv_assistant.renderers.hotspot.render_hot_daily_with_link import render_hot_daily_md_with_hyperlink
+from arxiv_assistant.renderers.hotspot.render_hot_monthly_with_link import render_hot_monthly_md_with_hyperlink
+from arxiv_assistant.renderers.hotspot.render_hot_yearly_with_link import render_hot_yearly_md_with_hyperlink
+from arxiv_assistant.renderers.paper.monthly_summary import build_monthly_summary_data
+from arxiv_assistant.renderers.paper.render_daily_with_link import render_daily_md_with_hyperlink
+from arxiv_assistant.renderers.paper.render_monthly_summary_with_link import render_monthly_summary_md_with_hyperlink
+from arxiv_assistant.renderers.paper.render_monthly_with_link import render_monthly_md_with_hyperlink
+from arxiv_assistant.renderers.paper.render_yearly_with_link import render_yearly_md_with_hyperlink
 from arxiv_assistant.renderers.site_paths import (
     HOT_ROOT_SITE_PAGE,
     ROOT_SITE_PAGE,
@@ -361,7 +361,7 @@ def build_multipage_site(output_root: str | Path) -> Path | None:
                     _write_hot_day_nav_asset(site_root, date, next_date, "next") if next_date is not None else None
                 ),
                 related_page_path=site_day_page_path(date) if date in day_page_mapping else ROOT_SITE_PAGE,
-                related_label="Daily Paper Digest",
+                related_label="Personalized Daily Arxiv Paper",
                 content_string=content,
             )
             _write_text(site_root / Path(target_rel_path), rendered)
@@ -386,7 +386,7 @@ def build_multipage_site(output_root: str | Path) -> Path | None:
                 else None
             ),
             related_page_path=site_day_page_path(latest_hot_date) if latest_hot_date in day_page_mapping else ROOT_SITE_PAGE,
-            related_label="Daily Paper Digest",
+            related_label="Personalized Daily Arxiv Paper",
             content_string=latest_hot_content,
         )
         _write_text(site_root / HOT_ROOT_SITE_PAGE, hot_root_page)

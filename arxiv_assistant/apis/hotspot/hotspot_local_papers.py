@@ -5,8 +5,8 @@ import re
 from datetime import UTC, date, datetime
 from pathlib import Path
 
-from arxiv_assistant.utils.hotspot_schema import HotspotItem
-from arxiv_assistant.utils.hotspot_sources import clip_text
+from arxiv_assistant.utils.hotspot.hotspot_schema import HotspotItem
+from arxiv_assistant.utils.hotspot.hotspot_sources import clip_text
 
 DAILY_JSON_PATTERN = re.compile(r"(?P<year>\d{4})-(?P<month>\d{2})-(?P<day>\d{2})-output\.json$")
 

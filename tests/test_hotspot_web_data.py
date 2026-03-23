@@ -5,8 +5,8 @@ import tempfile
 import unittest
 from pathlib import Path
 
-from arxiv_assistant.utils.hotspot_schema import HotspotItem
-from arxiv_assistant.utils.hotspot_web_data import build_daily_hotspot_web_payload, write_hotspot_web_data
+from arxiv_assistant.utils.hotspot.hotspot_schema import HotspotItem
+from arxiv_assistant.utils.hotspot.hotspot_web_data import build_daily_hotspot_web_payload, write_hotspot_web_data
 
 
 class TestHotspotWebData(unittest.TestCase):

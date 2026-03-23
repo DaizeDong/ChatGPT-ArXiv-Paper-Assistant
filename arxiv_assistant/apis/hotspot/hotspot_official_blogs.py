@@ -7,8 +7,8 @@ from typing import Any
 import feedparser
 from bs4 import BeautifulSoup
 
-from arxiv_assistant.utils.hotspot_schema import HotspotItem, clean_text
-from arxiv_assistant.utils.hotspot_sources import clip_text, fetch_text, is_fresh, normalize_url, parse_datetime
+from arxiv_assistant.utils.hotspot.hotspot_schema import HotspotItem, clean_text
+from arxiv_assistant.utils.hotspot.hotspot_sources import clip_text, fetch_text, is_fresh, normalize_url, parse_datetime
 
 OFFICIAL_SOURCES = [
     {

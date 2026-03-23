@@ -129,7 +129,7 @@ def render_daily_md_with_hyperlink(
     all_dates_list = sorted(all_dates_set)
 
     if content_string is None:
-        from arxiv_assistant.renderers.render_daily import render_daily_md
+        from arxiv_assistant.renderers.paper.render_daily import render_daily_md
 
         required_args = [all_entries, arxiv_paper_dict, selected_paper_dict, prompts, head_table]
         assert all(arg is not None for arg in required_args)

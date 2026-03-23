@@ -1,6 +1,6 @@
 from typing import Dict, List, Tuple
 
-from arxiv_assistant.renderers.monthly_summary import MONTH_CATEGORY_ORDER
+from arxiv_assistant.renderers.paper.monthly_summary import MONTH_CATEGORY_ORDER
 from arxiv_assistant.renderers.site_paths import (
     relative_site_href,
     site_day_page_path,

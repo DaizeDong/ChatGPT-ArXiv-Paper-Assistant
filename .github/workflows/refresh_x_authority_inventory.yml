@@ -1,0 +1,86 @@
+name: Refresh X authority inventory
+
+on:
+  schedule:
+    - cron: "0 6 * * 1"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  refresh-x-authority-inventory:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout `main` branch for code
+        uses: actions/checkout@v6
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+
+      - name: Refresh X authority inventory snapshot
+        id: refresh_inventory
+        env:
+          X_BEARER_TOKEN: ${{ secrets.X_BEARER_TOKEN }}
+        shell: bash
+        run: |
+          if [ -z "${X_BEARER_TOKEN}" ]; then
+            echo "X_BEARER_TOKEN is not configured. Skipping X authority inventory refresh."
+            echo "refreshed=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          python scripts/update_x_authority_registry.py --force
+          echo "refreshed=true" >> "$GITHUB_OUTPUT"
+
+      - name: Stage refreshed inventory
+        if: steps.refresh_inventory.outputs.refreshed == 'true'
+        shell: bash
+        run: |
+          mkdir -p "$RUNNER_TEMP/x-authority"
+          cp configs/hotspot/x_authority_inventory.json "$RUNNER_TEMP/x-authority/x_authority_inventory.json"
+
+      - name: Checkout to `auto_update` branch
+        if: steps.refresh_inventory.outputs.refreshed == 'true'
+        shell: bash
+        run: |
+          git fetch origin
+          if ! git show-ref --verify --quiet refs/remotes/origin/auto_update; then
+            echo "auto_update branch does not exist. Creating it from main."
+            git checkout -b auto_update origin/main
+            git push origin auto_update
+          else
+            echo "auto_update branch exists. Checking out to it."
+            git checkout -b auto_update origin/auto_update
+          fi
+
+      - name: Copy refreshed inventory into `auto_update`
+        if: steps.refresh_inventory.outputs.refreshed == 'true'
+        shell: bash
+        run: |
+          mkdir -p configs/hotspot
+          cp "$RUNNER_TEMP/x-authority/x_authority_inventory.json" configs/hotspot/x_authority_inventory.json
+
+      - name: Commit and push refreshed inventory
+        if: steps.refresh_inventory.outputs.refreshed == 'true'
+        shell: bash
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add configs/hotspot/x_authority_inventory.json
+          if git diff --cached --quiet; then
+            echo "No changes detected in X authority inventory."
+            exit 0
+          fi
+          git commit -m "[skip ci] Refresh X authority inventory: $(date +"%Y-%m-%d %H:%M:%S")"
+          git push origin HEAD:auto_update

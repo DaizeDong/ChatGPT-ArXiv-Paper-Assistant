@@ -13,3 +13,20 @@ export function bestPaperRoute(paperRoutes?: PaperRoutes | null, preferred: Arra
   return "/";
 }
 
+export function withBasePath(href: string) {
+  if (!href || /^[a-z]+:/i.test(href) || href.startsWith("//")) {
+    return href;
+  }
+  const base = import.meta.env.BASE_URL || "/";
+  if (!href.startsWith("/")) {
+    return href;
+  }
+  if (base === "/") {
+    return href;
+  }
+  const normalizedBase = base.endsWith("/") ? base.slice(0, -1) : base;
+  if (href === normalizedBase || href.startsWith(`${normalizedBase}/`)) {
+    return href;
+  }
+  return `${normalizedBase}${href}`;
+}

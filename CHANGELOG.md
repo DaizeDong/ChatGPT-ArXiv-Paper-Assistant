@@ -1,5 +1,19 @@
 # Changelog
 
+### 2026-03-23
+
+- Added daily hotspot usage reporting for OpenAI tokens/cost and external API request counts.
+- Tightened hotspot filtering and X authority inventory handling to improve signal quality and quota stability.
+
+### 2026-02-23
+
+- Major updates in repository structure and pipeline features.
+- Simplified the Daily AI Hotspots UI for better readability.
+
+### 2026-03-22
+
+- Added the Daily AI Hotspots pipeline, combining local selected papers, Hugging Face trending papers, roundup/news sites, official blogs, GitHub trends, and Hacker News discussions.
+
 ### 2026-03-21
 
 - Support multi-page rendering!

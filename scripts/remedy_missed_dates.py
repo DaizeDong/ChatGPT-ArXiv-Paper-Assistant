@@ -173,7 +173,7 @@ def run_remedy_plan(plan: RemedyPlan, output_root: str, build_site: bool) -> Non
     from arxiv_assistant.filters.filter_gpt import filter_by_gpt
     from arxiv_assistant.push_to_slack import push_to_slack
     from arxiv_assistant.renderers.build_multipage_site import build_multipage_site
-    from arxiv_assistant.renderers.render_daily import render_daily_md
+    from arxiv_assistant.renderers.paper.render_daily import render_daily_md
     from arxiv_assistant.utils.io import copy_file_or_dir, create_dir, delete_file_or_dir
     from arxiv_assistant.utils.utils import EnhancedJSONEncoder
 

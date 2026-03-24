@@ -7,7 +7,7 @@ from arxiv_assistant.environment import AUTHOR_ID_SET, SYSTEM_PROMPT, CONFIG, NO
 from arxiv_assistant.filters.filter_author import filter_papers_by_hindex, select_by_author
 from arxiv_assistant.filters.filter_gpt import filter_by_gpt
 from arxiv_assistant.push_to_slack import push_to_slack
-from arxiv_assistant.renderers.render_daily import render_daily_md, render_summary_table
+from arxiv_assistant.renderers.paper.render_daily import render_daily_md, render_summary_table
 from arxiv_assistant.utils.io import copy_file_or_dir, delete_file_or_dir
 from arxiv_assistant.utils.utils import EnhancedJSONEncoder
 

@@ -172,7 +172,7 @@ def render_daily_md(
 
 if __name__ == "__main__":
     # parse output.json into a dict
-    with open("../../out_local/json/2025-01/2025-01-17-output.json", "r") as f:
+    with open("../../../out_local/json/2025-01/2025-01-17-output.json", "r") as f:
         output = json.load(f)
     # simulate head table
     head_table = {

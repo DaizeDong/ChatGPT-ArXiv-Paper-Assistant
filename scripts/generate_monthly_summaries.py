@@ -15,9 +15,13 @@ REPO_ROOT = Path(__file__).resolve().parents[1]
 if str(REPO_ROOT) not in sys.path:
     sys.path.insert(0, str(REPO_ROOT))
 
-from arxiv_assistant.renderers.monthly_summary import MONTH_CATEGORY_ORDER, discover_daily_json
+from arxiv_assistant.renderers.paper.monthly_summary import MONTH_CATEGORY_ORDER, discover_daily_json
 from arxiv_assistant.renderers.site_paths import site_day_page_path
+from arxiv_assistant.utils.local_env import load_local_env
+from arxiv_assistant.utils.prompt_loader import read_prompt
 from arxiv_assistant.utils.pricing_loader import get_model_pricing
+
+load_local_env()
 
 ALLOWED_CATEGORIES = set(MONTH_CATEGORY_ORDER)
 MONTHLY_PRIORITY_POSITIVE_SIGNALS = {
@@ -88,10 +92,6 @@ def load_config(config_path: Path) -> configparser.ConfigParser:
     config = configparser.ConfigParser()
     config.read(config_path)
     return config
-
-
-def read_prompt(prompt_path: Path) -> str:
-    return prompt_path.read_text(encoding="utf-8")
 
 
 def _paper_sort_key(paper_entry: Dict) -> Tuple[int, int, int, Tuple[int, int, int], str]:
@@ -332,7 +332,7 @@ def classify_month_with_openai(
 
 
 def classify_month_with_heuristic(papers: List[Dict]) -> List[Dict]:
-    from arxiv_assistant.renderers.monthly_summary import classify_monthly_summary_category
+    from arxiv_assistant.renderers.paper.monthly_summary import classify_monthly_summary_category
     config = load_config(REPO_ROOT / "configs" / "config.ini")
     score_cutoff = int(config["MONTHLY_SUMMARY"]["fallback_score_cutoff"])
     relevance_cutoff = int(config["MONTHLY_SUMMARY"]["fallback_relevance_cutoff"])
@@ -485,9 +485,9 @@ def main() -> None:
     monthly_papers = collect_monthly_papers(json_root)
     now_time = datetime.now(UTC)
 
-    system_prompt = read_prompt(repo_root / "prompts" / "monthly_summary_system_prompt.txt")
-    criteria_prompt = read_prompt(repo_root / "prompts" / "monthly_summary_criteria.txt")
-    postfix_prompt = read_prompt(repo_root / "prompts" / "postfix_prompt_monthly_summary.txt")
+    system_prompt = read_prompt("monthly.system_prompt")
+    criteria_prompt = read_prompt("monthly.criteria")
+    postfix_prompt = read_prompt("monthly.postfix")
 
     for month_key, papers in sorted(monthly_papers.items()):
         if not is_month_closed(month_key, now_time, args.include_open_months):

@@ -2,6 +2,16 @@ name: Publish Github Pages
 
 on:
   workflow_dispatch:
+    inputs:
+      site_ref:
+        description: "Branch or tag to use for site code during manual validation"
+        required: false
+        default: "main"
+      deploy_pages:
+        description: "Whether to deploy to github-pages after building"
+        required: false
+        type: boolean
+        default: true
   workflow_run:
     workflows: [ "Push Generated Results" ]
     types:
@@ -11,8 +21,11 @@ on:
       - main
     paths:
       - ".github/workflows/publish_md.yml"
+      - "web/**"
+      - "scripts/**"
       - "site.css"
-      - "arxiv_assistant/renderers/**"
+      - "requirements.txt"
+      - "arxiv_assistant/**"
 
 permissions:
   contents: read
@@ -25,21 +38,18 @@ concurrency:
 
 env:
   FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+  SITE_CODE_REF: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.site_ref || 'main' }}
 
 jobs:
   build:
     if: ${{ github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success' }}
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout `main` branch for site code
+      - name: Checkout site code branch
         uses: actions/checkout@v6
         with:
-          ref: main
+          ref: ${{ env.SITE_CODE_REF }}
           fetch-depth: 0
 
       - name: Checkout `auto_update` branch for generated outputs
@@ -67,10 +77,21 @@ jobs:
         with:
           python-version: "3.12"
 
+      - name: Set up Node 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: "npm"
+          cache-dependency-path: web/package-lock.json
+
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
           if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+
+      - name: Rebuild hotspot web data
+        run: |
+          python scripts/rebuild_hotspot_web_data.py --output-root out
 
       - name: Build multipage site
         run: |
@@ -79,6 +100,22 @@ jobs:
       - name: Render static site
         run: |
           python -m arxiv_assistant.renderers.render_static_site --site-root out/site --dist-root dist --css-source site.css
+
+      - name: Install hotspot web dependencies
+        working-directory: web
+        run: |
+          npm ci
+
+      - name: Build hotspot web app
+        working-directory: web
+        env:
+          VITE_BASE_PATH: /${{ github.event.repository.name }}/
+        run: |
+          npm run build
+
+      - name: Merge hotspot web app into dist
+        run: |
+          python scripts/merge_hotspot_web_dist.py --web-dist web/dist --site-dist dist
 
       - name: Bust custom CSS cache
         shell: bash
@@ -113,6 +150,15 @@ jobs:
           retention-days: 1
           if-no-files-found: error
 
+  deploy:
+    needs: build
+    if: ${{ needs.build.result == 'success' && (github.event_name != 'workflow_dispatch' || github.event.inputs.deploy_pages == 'true') }}
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+
+    steps:
       - name: Deploy to GitHub Pages
         uses: actions/deploy-pages@v4.0.5
         id: deployment

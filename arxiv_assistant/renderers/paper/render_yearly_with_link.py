@@ -124,6 +124,8 @@ def render_yearly_md_with_hyperlink(
     current_page_path: str,
     all_month_file_mapping: Dict[tuple[int, int], str] = None,
     all_month_day_counts: Dict[tuple[int, int], int] = None,
+    related_page_path: str | None = None,
+    related_label: str = "Daily AI Hotspots",
     previous_asset_path: str | None = None,
     next_asset_path: str | None = None,
 ) -> str:
@@ -151,6 +153,9 @@ def render_yearly_md_with_hyperlink(
     parts = [f"# Personalized Yearly ArXiv Paper Summary {now_year}", content_table]
     if head_string:
         parts.insert(0, head_string)
+    if related_page_path is not None:
+        related_href = relative_site_href(related_page_path, current_page_path)
+        parts.insert(1 if head_string else 0, f'<div align="center" class="site-jump-links"><a href="{related_href}">{related_label}</a></div>')
     return "\n\n".join(parts)
 
 

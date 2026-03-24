@@ -53,6 +53,9 @@ export function MonthArchivePage({ month }: { month: string }) {
   return (
     <div className="stack hotspot-stack">
       <section className="archive-head">
+        <div className="archive-titlebar">
+          <h1>Daily AI Hotspots {payload.month}</h1>
+        </div>
         <ArchiveNav
           previous={
             previousMonth
@@ -81,9 +84,6 @@ export function MonthArchivePage({ month }: { month: string }) {
           }
         />
         <CrossSiteSwitch href={paperHref} label="Personalized Daily Arxiv Paper" />
-        <div className="archive-titlebar">
-          <h1>Daily AI Hotspots {payload.month}</h1>
-        </div>
         <div className="archive-head-meta">
           <span>{payload.month}</span>
           <span>{payload.totals.days} days</span>

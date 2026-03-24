@@ -37,21 +37,26 @@ jobs:
       - name: Verify artifact /out directory and contents
         run: |
           if [ -d "artifact_out/out" ] && [ "$(ls -A artifact_out/out)" ]; then
+              echo "ARTIFACT_OUT=artifact_out/out" >> "$GITHUB_ENV"
               echo "Contents in artifact_out/out:"
               ls -la artifact_out/out/
+          elif [ -d "artifact_out" ] && [ "$(ls -A artifact_out)" ]; then
+              echo "ARTIFACT_OUT=artifact_out" >> "$GITHUB_ENV"
+              echo "Contents in artifact_out:"
+              ls -la artifact_out/
           else
-              echo "artifact_out/out directory is empty or does not exist. Aborting."
+              echo "artifact_out directory is empty or does not exist. Aborting."
               exit 1
           fi
 
       - name: Remove CI-only site build outputs
         run: |
-          rm -rf artifact_out/out/site artifact_out/out/site_html artifact_out/out/site_preview
+          rm -rf "${ARTIFACT_OUT}/site" "${ARTIFACT_OUT}/site_html" "${ARTIFACT_OUT}/site_preview"
 
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+          if [ -f requirements.txt ]; then python -m pip install -r requirements.txt; fi
 
       - name: Generate monthly summaries
         if: ${{ !cancelled() }}
@@ -59,7 +64,7 @@ jobs:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
           OPENAI_BASE_URL: ${{ secrets.OPENAI_BASE_URL }}
         run: |
-          python scripts/generate_monthly_summaries.py --output-root artifact_out/out
+          python scripts/generate_monthly_summaries.py --output-root "${ARTIFACT_OUT}"
 
       - name: Checkout to `auto_update` Branch
         run: |
@@ -76,7 +81,7 @@ jobs:
       - name: Replace tracked /out with processed artifact contents
         run: |
           rm -rf out
-          mv artifact_out/out out
+          mv "${ARTIFACT_OUT}" out
 
 #      - name: Debug via Browser
 #        uses: fawazahmed0/action-debug-vscode@main

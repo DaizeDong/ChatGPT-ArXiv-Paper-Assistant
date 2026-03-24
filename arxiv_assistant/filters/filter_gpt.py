@@ -11,14 +11,16 @@ from openai import OpenAI
 from tqdm import tqdm
 
 from arxiv_assistant.environment import OPENAI_API_KEY, OPENAI_BASE_URL, OUTPUT_DEBUG_FILE_FORMAT
-from arxiv_assistant.utils.pricing import MODEL_PRICING
+from arxiv_assistant.utils.pricing_loader import get_model_pricing
 from arxiv_assistant.utils.utils import EnhancedJSONEncoder, Paper, batched
 
 ABSTRACT_CUTOFF = 4000
 
 
 def calc_price(model, usage):
-    if model not in MODEL_PRICING:
+    model_pricing = get_model_pricing()
+
+    if model not in model_pricing:
         print(f"Model \"{model}\" not found in pricing table, skip pricing calculation")
         return 0, 0
 
@@ -26,9 +28,9 @@ def calc_price(model, usage):
     prompt_tokens = usage.prompt_tokens - cached_tokens
     completion_tokens = usage.completion_tokens
 
-    cache_pricing = MODEL_PRICING[model]["cache"] if "cache" in MODEL_PRICING[model] else MODEL_PRICING[model]["prompt"]
-    prompt_pricing = MODEL_PRICING[model]["prompt"]
-    completion_pricing = MODEL_PRICING[model]["completion"]
+    cache_pricing = model_pricing[model]["cache"] if "cache" in model_pricing[model] else model_pricing[model]["prompt"]
+    prompt_pricing = model_pricing[model]["prompt"]
+    completion_pricing = model_pricing[model]["completion"]
 
     cache_cost = cache_pricing * cached_tokens / 1_000_000
     prompt_cost = prompt_pricing * prompt_tokens / 1_000_000

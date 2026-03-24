@@ -1,4 +1,5 @@
 import json
+from html import escape
 from typing import Dict, List, Tuple
 
 from tabulate import tabulate
@@ -6,6 +7,61 @@ from tabulate import tabulate
 from arxiv_assistant.filters.filter_gpt import get_user_prompt_for_abstract_filtering
 from arxiv_assistant.utils.io import add_prefix_to_lines
 from arxiv_assistant.utils.utils import Paper, align_markdown_table
+
+
+def render_summary_table(
+    model: str,
+    prompt_tokens: int,
+    completion_tokens: int,
+    prompt_cost: float,
+    completion_cost: float,
+    total_arxiv_papers: int,
+    total_scanned_papers: int,
+    total_relevant_papers: int,
+) -> str:
+    total_tokens = prompt_tokens + completion_tokens
+    total_cost = prompt_cost + completion_cost
+
+    return "\n".join(
+        [
+            "<table>",
+            "    <thead>",
+            "        <tr>",
+            "            <th rowspan=\"2\">Model</th>",
+            "            <th rowspan=\"2\">Metric</th>",
+            "            <th colspan=\"3\">Usage</th>",
+            "            <th colspan=\"3\">Papers</th>",
+            "        </tr>",
+            "        <tr>",
+            "            <th>Prompt</th>",
+            "            <th>Completion</th>",
+            "            <th>Total</th>",
+            "            <th>Total arXiv</th>",
+            "            <th>Scanned</th>",
+            "            <th>Relevant</th>",
+            "        </tr>",
+            "    </thead>",
+            "    <tbody>",
+            "        <tr>",
+            f"            <td rowspan=\"2\" align=\"center\"><code>{escape(model)}</code></td>",
+            "            <td align=\"center\"><strong>Tokens</strong></td>",
+            f"            <td align=\"center\">{prompt_tokens}</td>",
+            f"            <td align=\"center\">{completion_tokens}</td>",
+            f"            <td align=\"center\">{total_tokens}</td>",
+            f"            <td rowspan=\"2\" align=\"center\">{total_arxiv_papers}</td>",
+            f"            <td rowspan=\"2\" align=\"center\">{total_scanned_papers}</td>",
+            f"            <td rowspan=\"2\" align=\"center\">{total_relevant_papers}</td>",
+            "        </tr>",
+            "        <tr>",
+            "            <td align=\"center\"><strong>Cost</strong></td>",
+            f"            <td align=\"center\">${prompt_cost:.2f}</td>",
+            f"            <td align=\"center\">${completion_cost:.2f}</td>",
+            f"            <td align=\"center\">${total_cost:.2f}</td>",
+            "        </tr>",
+            "    </tbody>",
+            "</table>",
+        ]
+    )
 
 
 def render_title_and_author(paper_entry: Dict, idx: int) -> str:
@@ -65,8 +121,11 @@ def render_daily_md(
 
     # render head table
     if head_table is not None:
-        head_table_strings = tabulate(head_table["data"], headers=head_table["headers"], tablefmt="github")
-        head_table_strings = align_markdown_table(head_table_strings, "center")
+        if "html" in head_table:
+            head_table_strings = head_table["html"]
+        else:
+            head_table_strings = tabulate(head_table["data"], headers=head_table["headers"], tablefmt="github")
+            head_table_strings = align_markdown_table(head_table_strings, "center")
     else:
         head_table_strings = ""
 
@@ -97,9 +156,6 @@ def render_daily_md(
     output_string = "\n\n".join([
         f"# Personalized Daily ArXiv Papers {date_string}",
         head_table_strings,
-        f"Total arXiv papers: {len(all_entries)}",
-        f"Total scanned papers: {sum([len(paper_list) for paper_list in arxiv_paper_dict.values()])}",
-        f"Total relevant papers: {len(selected_paper_dict)}",
         "**Table of contents with paper titles:**",
         "\n\n".join(title_strings),
         "---",
@@ -116,7 +172,7 @@ def render_daily_md(
 
 if __name__ == "__main__":
     # parse output.json into a dict
-    with open("../../out_local/json/2025-01/2025-01-17-output.json", "r") as f:
+    with open("../../../out_local/json/2025-01/2025-01-17-output.json", "r") as f:
         output = json.load(f)
     # simulate head table
     head_table = {
@@ -126,6 +182,6 @@ if __name__ == "__main__":
             ["**Cost**", f"${0.5}", f"${0.5}", f"${1.0}"],
         ]
     }
-    # write to output.md
-    with open("out/output.md", "w") as f:
+    # write to latest.md
+    with open("out/latest.md", "w") as f:
         f.write(render_daily_md(output, head_table=head_table))

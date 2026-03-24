@@ -16,9 +16,55 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
         with:
           fetch-depth: 0
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+
+      - name: Download artifact
+        id: download-artifact
+        uses: dawidd6/action-download-artifact@v19
+        with:
+          workflow: cron_runs.yaml
+          workflow_conclusion: success
+          name: arxiv-scanner-outputs
+          path: artifact_out/
+
+      - name: Verify artifact /out directory and contents
+        run: |
+          if [ -d "artifact_out/out" ] && [ "$(ls -A artifact_out/out)" ]; then
+              echo "ARTIFACT_OUT=artifact_out/out" >> "$GITHUB_ENV"
+              echo "Contents in artifact_out/out:"
+              ls -la artifact_out/out/
+          elif [ -d "artifact_out" ] && [ "$(ls -A artifact_out)" ]; then
+              echo "ARTIFACT_OUT=artifact_out" >> "$GITHUB_ENV"
+              echo "Contents in artifact_out:"
+              ls -la artifact_out/
+          else
+              echo "artifact_out directory is empty or does not exist. Aborting."
+              exit 1
+          fi
+
+      - name: Remove CI-only site build outputs
+        run: |
+          rm -rf "${ARTIFACT_OUT}/site" "${ARTIFACT_OUT}/site_html" "${ARTIFACT_OUT}/site_preview"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          if [ -f requirements.txt ]; then python -m pip install -r requirements.txt; fi
+
+      - name: Generate monthly summaries
+        if: ${{ !cancelled() }}
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          OPENAI_BASE_URL: ${{ secrets.OPENAI_BASE_URL }}
+        run: |
+          python scripts/generate_monthly_summaries.py --output-root "${ARTIFACT_OUT}"
 
       - name: Checkout to `auto_update` Branch
         run: |
@@ -32,51 +78,15 @@ jobs:
             git checkout -b auto_update origin/auto_update
           fi
 
-      - name: Download artifact
-        id: download-artifact
-        uses: dawidd6/action-download-artifact@v8
-        with:
-          workflow: cron_runs.yaml
-          workflow_conclusion: success
-          name: arxiv-scanner-outputs
-          path: out/
-
-      - name: Verify /out directory and contents
+      - name: Merge processed artifact contents into tracked /out
         run: |
-          if [ -d "out" ] && [ "$(ls -A out)" ]; then
-              echo "Contents in /out:"
-              ls -la out/
-          else
-              echo "/out directory is empty or does not exist. Aborting."
-              exit 1
-          fi
+          mkdir -p out
+          cp -R "${ARTIFACT_OUT}/." out/
 
 #      - name: Debug via Browser
 #        uses: fawazahmed0/action-debug-vscode@main
 #        with:
 #          token: "root"
-
-      - name: Check if main and auto_update are identical
-        id: check_branches
-        run: |
-          git fetch origin main
-          echo "Comparing HEAD with origin/main..."
-          if git diff --quiet HEAD origin/main; then
-              echo "Branches are identical. Skipping merge/rebase."
-              echo "skip_merge=true" >> $GITHUB_ENV
-          else
-              echo "Branches differ. Proceeding with merge/rebase."
-              echo "skip_merge=false" >> $GITHUB_ENV
-              echo "Changes detected:"
-              git diff HEAD origin/main --stat
-          fi
-
-      - name: Merge main into auto_update
-        if: env.skip_merge == 'false'
-        run: |
-          git config --global user.name "github-actions[bot]"
-          git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git merge origin/main --no-edit || (echo "Conflict detected. Aborting merge." && exit 1)
 
       - name: Check for changes in /out folder
         id: check_changes

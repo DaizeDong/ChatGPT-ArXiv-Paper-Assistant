@@ -1,0 +1,334 @@
+name: Remedy missed dates
+
+on:
+  workflow_dispatch:
+    inputs:
+      remedy_dates:
+        description: Comma-separated generation dates to remedy (YYYY-MM-DD)
+        required: true
+        default: 2026-03-13,2026-03-14,2026-03-16,2026-03-17,2026-03-18,2026-03-19,2026-03-20
+      regenerate_monthly_summaries:
+        description: Regenerate monthly summary files after remedying daily outputs
+        required: true
+        default: false
+        type: boolean
+
+permissions:
+  contents: write
+
+jobs:
+  prepare:
+    runs-on: ubuntu-latest
+    outputs:
+      remedy_plan_json: ${{ steps.prepare.outputs.remedy_plan_json }}
+
+    steps:
+      - name: Checkout `main` branch for code
+        uses: actions/checkout@v6
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Checkout `auto_update` branch for data
+        uses: actions/checkout@v6
+        with:
+          ref: auto_update
+          path: auto_update_data
+          fetch-depth: 0
+
+      - name: Restore generated outputs
+        shell: bash
+        run: |
+          rm -rf out
+          if [ -d "auto_update_data/out" ] && [ "$(ls -A auto_update_data/out)" ]; then
+            cp -R auto_update_data/out ./out
+          else
+            echo "auto_update_data/out is empty or missing."
+            exit 1
+          fi
+
+      - name: Prepare matrix inputs
+        id: prepare
+        env:
+          REMEDY_DATES: ${{ inputs.remedy_dates }}
+        shell: bash
+        run: |
+          python - <<'PY' >> "$GITHUB_OUTPUT"
+          import json
+          import os
+          from scripts.remedy_missed_dates import build_plan_from_dates, parse_date_string
+
+          raw = os.environ["REMEDY_DATES"]
+          dates = [part.strip() for part in raw.split(",") if part.strip()]
+          if not dates:
+              raise SystemExit("No remedy dates provided.")
+
+          plan = build_plan_from_dates([parse_date_string(value) for value in dates], "out")
+          matrix = []
+          for remedy_date, (begin_date, end_date) in sorted(plan.items()):
+              matrix.append(
+                  {
+                      "remedy_date": f"{remedy_date[0]:04d}-{remedy_date[1]:02d}-{remedy_date[2]:02d}",
+                      "begin_date": f"{begin_date[0]:04d}-{begin_date[1]:02d}-{begin_date[2]:02d}",
+                      "end_date": f"{end_date[0]:04d}-{end_date[1]:02d}-{end_date[2]:02d}",
+                  }
+              )
+
+          print(f"remedy_plan_json={json.dumps(matrix)}")
+          PY
+
+  remedy:
+    needs: prepare
+    runs-on: ubuntu-latest
+
+    strategy:
+      fail-fast: false
+      matrix:
+        remedy: ${{ fromJson(needs.prepare.outputs.remedy_plan_json) }}
+
+    steps:
+      - name: Checkout `main` branch for code
+        uses: actions/checkout@v6
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Checkout `auto_update` branch for data
+        uses: actions/checkout@v6
+        with:
+          ref: auto_update
+          path: auto_update_data
+          fetch-depth: 0
+
+      - name: Restore generated outputs
+        shell: bash
+        run: |
+          rm -rf out
+          if [ -d "auto_update_data/out" ] && [ "$(ls -A auto_update_data/out)" ]; then
+            cp -R auto_update_data/out ./out
+            echo "Restored out/ from auto_update."
+          else
+            echo "auto_update_data/out is empty or missing."
+            exit 1
+          fi
+
+      - name: Restore X authority inventory
+        shell: bash
+        run: |
+          if [ -f "auto_update_data/configs/hotspot/x_authority_inventory.json" ]; then
+            mkdir -p configs/hotspot
+            cp "auto_update_data/configs/hotspot/x_authority_inventory.json" "configs/hotspot/x_authority_inventory.json"
+            echo "Restored X authority inventory from auto_update."
+          else
+            echo "No X authority inventory found in auto_update."
+          fi
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+
+      - name: Disable author matching for remedial backfill
+        shell: bash
+        run: |
+          python - <<'PY'
+          import configparser
+
+          config = configparser.ConfigParser()
+          config.read("configs/config.ini")
+          config["SELECTION"]["run_author_match"] = "false"
+
+          with open("configs/config.ini", "w", encoding="utf-8") as handle:
+              config.write(handle)
+          PY
+
+      - name: Print inferred remedy plan
+        run: |
+          python scripts/remedy_missed_dates.py \
+            --dates "${{ matrix.remedy.remedy_date }}" \
+            --begin-date "${{ matrix.remedy.begin_date }}" \
+            --end-date "${{ matrix.remedy.end_date }}" \
+            --output-root out \
+            --print-plan
+
+      - name: Remedy missed date
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          OPENAI_BASE_URL: ${{ secrets.OPENAI_BASE_URL }}
+          S2_KEY: ${{ secrets.S2_KEY }}
+          SLACK_KEY: ${{ secrets.SLACK_KEY }}
+          SLACK_CHANNEL_ID: ${{ secrets.SLACK_CHANNEL_ID }}
+        run: |
+          python scripts/remedy_missed_dates.py \
+            --dates "${{ matrix.remedy.remedy_date }}" \
+            --begin-date "${{ matrix.remedy.begin_date }}" \
+            --end-date "${{ matrix.remedy.end_date }}" \
+            --output-root out
+
+      - name: Validate GPT filtering actually ran
+        env:
+          REMEDY_DATE: ${{ matrix.remedy.remedy_date }}
+        shell: bash
+        run: |
+          python - <<'PY'
+          import re
+          from pathlib import Path
+          import os
+
+          remedy_date = os.environ["REMEDY_DATE"]
+          month_dir = remedy_date[:7]
+          md_path = Path("out") / "md" / month_dir / f"{remedy_date}-output.md"
+          text = md_path.read_text(encoding="utf-8")
+
+          match = re.search(r"\|\s+\*\*Token\*\*\s+\|\s+(\d+)\s+\|\s+(\d+)\s+\|", text)
+          if match is None:
+              raise SystemExit(f"Unable to parse token usage from {md_path}")
+
+          total_tokens = int(match.group(1)) + int(match.group(2))
+          if total_tokens <= 0:
+              raise SystemExit(
+                  f"Remedy for {remedy_date} produced zero GPT tokens. "
+                  "This usually means the model quota is exhausted."
+              )
+          PY
+
+      - name: Collect remedied files
+        id: collect
+        env:
+          REMEDY_DATE: ${{ matrix.remedy.remedy_date }}
+        shell: bash
+        run: |
+          month_dir="${REMEDY_DATE:0:7}"
+          mkdir -p remedy_overlay/json/"$month_dir" remedy_overlay/md/"$month_dir"
+          cp "out/json/$month_dir/${REMEDY_DATE}-output.json" "remedy_overlay/json/$month_dir/"
+          cp "out/md/$month_dir/${REMEDY_DATE}-output.md" "remedy_overlay/md/$month_dir/"
+
+      - name: Upload remedied files
+        uses: actions/upload-artifact@v7
+        with:
+          name: remedy-${{ matrix.remedy.remedy_date }}
+          path: remedy_overlay/
+          retention-days: 1
+          if-no-files-found: error
+
+  merge:
+    needs: remedy
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout `main` branch for code
+        uses: actions/checkout@v6
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Checkout `auto_update` branch for data
+        uses: actions/checkout@v6
+        with:
+          ref: auto_update
+          path: auto_update_data
+          fetch-depth: 0
+
+      - name: Restore generated outputs
+        shell: bash
+        run: |
+          rm -rf out
+          if [ -d "auto_update_data/out" ] && [ "$(ls -A auto_update_data/out)" ]; then
+            cp -R auto_update_data/out ./out
+            echo "Restored out/ from auto_update."
+          else
+            echo "auto_update_data/out is empty or missing."
+            exit 1
+          fi
+
+      - name: Download remedied artifacts
+        uses: actions/download-artifact@v5
+        with:
+          pattern: remedy-*
+          path: remedy_overlay
+          merge-multiple: true
+
+      - name: Merge remedied files into out/
+        shell: bash
+        run: |
+          if [ ! -d "remedy_overlay" ] || [ -z "$(ls -A remedy_overlay)" ]; then
+            echo "No remedied artifacts downloaded."
+            exit 1
+          fi
+
+          if [ -d "remedy_overlay/json" ] && [ "$(ls -A remedy_overlay/json)" ]; then
+            cp -R remedy_overlay/json/. out/json/
+          fi
+
+          if [ -d "remedy_overlay/md" ] && [ "$(ls -A remedy_overlay/md)" ]; then
+            cp -R remedy_overlay/md/. out/md/
+          fi
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+
+      - name: Regenerate hotspot digests for remedied dates
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          OPENAI_BASE_URL: ${{ secrets.OPENAI_BASE_URL }}
+          X_BEARER_TOKEN: ${{ secrets.X_BEARER_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REMEDY_DATES: ${{ inputs.remedy_dates }}
+        shell: bash
+        run: |
+          IFS=',' read -ra DATES <<< "$REMEDY_DATES"
+          for raw_date in "${DATES[@]}"; do
+            remedy_date="$(echo "$raw_date" | xargs)"
+            if [ -z "$remedy_date" ]; then
+              continue
+            fi
+            python scripts/generate_daily_hotspots.py \
+              --output-root out \
+              --target-date "$remedy_date" \
+              --mode auto \
+              --force
+          done
+
+      - name: Regenerate monthly summaries
+        if: ${{ inputs.regenerate_monthly_summaries }}
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          OPENAI_BASE_URL: ${{ secrets.OPENAI_BASE_URL }}
+        shell: bash
+        run: |
+          if ! python scripts/generate_monthly_summaries.py --output-root out --include-open-months --force; then
+            echo "OpenAI monthly summary regeneration failed; falling back to heuristic mode."
+            python scripts/generate_monthly_summaries.py --output-root out --mode heuristic --include-open-months --force
+          fi
+
+      - name: Sync refreshed outputs into `auto_update`
+        shell: bash
+        run: |
+          rm -rf auto_update_data/out
+          cp -R out auto_update_data/
+
+      - name: Commit and push refreshed outputs
+        shell: bash
+        run: |
+          cd auto_update_data
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add out/
+          if git diff --cached --quiet; then
+            echo "No changes detected in out/."
+            exit 0
+          fi
+          git commit -m "[skip ci] Remedy missed dates: ${{ inputs.remedy_dates }}"
+          git push origin HEAD:auto_update

@@ -2,59 +2,163 @@ name: Publish Github Pages
 
 on:
   workflow_dispatch:
+    inputs:
+      site_ref:
+        description: "Branch or tag to use for site code during manual validation"
+        required: false
+        default: "main"
+      deploy_pages:
+        description: "Whether to deploy to github-pages after building"
+        required: false
+        type: boolean
+        default: true
   workflow_run:
     workflows: [ "Push Generated Results" ]
     types:
       - completed
+  push:
+    branches:
+      - main
+    paths:
+      - ".github/workflows/publish_md.yml"
+      - "web/**"
+      - "scripts/**"
+      - "site.css"
+      - "requirements.txt"
+      - "arxiv_assistant/**"
 
-permissions: write-all
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: github-pages
+  cancel-in-progress: true
+
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+  SITE_CODE_REF: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.site_ref || 'main' }}
 
 jobs:
   build:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-
+    if: ${{ github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success' }}
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout `auto_update` branch
-        uses: actions/checkout@v4
+      - name: Checkout site code branch
+        uses: actions/checkout@v6
         with:
-          ref: auto_update
+          ref: ${{ env.SITE_CODE_REF }}
           fetch-depth: 0
 
-      - name: Verify output directory and contents
+      - name: Checkout `auto_update` branch for generated outputs
+        uses: actions/checkout@v6
+        with:
+          ref: auto_update
+          path: auto_update_data
+          fetch-depth: 0
+
+      - name: Restore published data snapshot
+        shell: bash
         run: |
-          if [ -d "out" ] && [ "$(ls -A out)" ]; then
-              cd out
-              echo "Contents in out:"
-              ls -R
-              mv output.md ../
+          rm -rf out
+          if [ -d "auto_update_data/out" ] && [ "$(ls -A auto_update_data/out)" ]; then
+            cp -R auto_update_data/out ./out
+            echo "Contents in restored out/:"
+            ls -R out
           else
-              echo "out directory is empty or does not exist. Aborting."
-              exit 1
+            echo "auto_update_data/out is empty or does not exist. Aborting."
+            exit 1
           fi
 
-      - name: Check for output.md
-        id: check_files
-        uses: andstor/file-existence-action@v3
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v6
         with:
-          files: output.md
+          python-version: "3.12"
 
-      - name: Convert output.md to pages
-        uses: wranders/markdown-to-pages-action@v1
-        if: steps.check_files.outputs.files_exists == 'true'
+      - name: Set up Node 22
+        uses: actions/setup-node@v4
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          files: output.md
+          node-version: "22"
+          cache: "npm"
+          cache-dependency-path: web/package-lock.json
 
-      - uses: actions/upload-pages-artifact@v3
-        if: steps.check_files.outputs.files_exists == 'true'
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+
+      - name: Rebuild hotspot web data
+        run: |
+          python scripts/rebuild_hotspot_web_data.py --output-root out
+
+      - name: Build multipage site
+        run: |
+          python -m arxiv_assistant.renderers.build_multipage_site
+
+      - name: Render static site
+        run: |
+          python -m arxiv_assistant.renderers.render_static_site --site-root out/site --dist-root dist --css-source site.css
+
+      - name: Install hotspot web dependencies
+        working-directory: web
+        run: |
+          npm ci
+
+      - name: Build hotspot web app
+        working-directory: web
+        env:
+          VITE_BASE_PATH: /${{ github.event.repository.name }}/
+        run: |
+          npm run build
+
+      - name: Merge hotspot web app into dist
+        run: |
+          python scripts/merge_hotspot_web_dist.py --web-dist web/dist --site-dist dist
+
+      - name: Bust custom CSS cache
+        shell: bash
+        run: |
+          find dist -name '*.html' -exec \
+            sed -i "s#site\\.css\\([\"']\\)#site.css?v=${GITHUB_SHA}\\1#g" {} +
+
+      - name: Copy static assets
+        shell: bash
+        run: |
+          if [ -d assets ]; then
+            mkdir -p dist
+            cp -R assets dist/
+          fi
+
+      - name: Archive Pages artifact
+        shell: bash
+        run: |
+          tar \
+            --dereference --hard-dereference \
+            --directory "dist" \
+            -cvf "$RUNNER_TEMP/artifact.tar" \
+            --exclude=.git \
+            --exclude=.github \
+            --exclude=".[^/]*" \
+            .
+
+      - uses: actions/upload-artifact@v7
         with:
-          path: dist
+          name: github-pages
+          path: ${{ runner.temp }}/artifact.tar
+          retention-days: 1
+          if-no-files-found: error
 
+  deploy:
+    needs: build
+    if: ${{ needs.build.result == 'success' && (github.event_name != 'workflow_dispatch' || github.event.inputs.deploy_pages == 'true') }}
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+
+    steps:
       - name: Deploy to GitHub Pages
-        uses: actions/deploy-pages@v4
-        if: steps.check_files.outputs.files_exists == 'true'
+        uses: actions/deploy-pages@v4.0.5
         id: deployment

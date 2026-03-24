@@ -78,10 +78,10 @@ jobs:
             git checkout -b auto_update origin/auto_update
           fi
 
-      - name: Replace tracked /out with processed artifact contents
+      - name: Merge processed artifact contents into tracked /out
         run: |
-          rm -rf out
-          mv "${ARTIFACT_OUT}" out
+          mkdir -p out
+          cp -R "${ARTIFACT_OUT}/." out/
 
 #      - name: Debug via Browser
 #        uses: fawazahmed0/action-debug-vscode@main

@@ -9,7 +9,7 @@ from pathlib import Path
 from unittest.mock import patch
 
 from arxiv_assistant.apis.hotspot.hotspot_x_ainews import _extract_twitter_section_items
-from arxiv_assistant.apis.hotspot.hotspot_x_official import fetch_hotspot_items as fetch_x_official_items
+from arxiv_assistant.apis.hotspot.hotspot_x_official import _query_accounts, fetch_hotspot_items as fetch_x_official_items
 from arxiv_assistant.apis.hotspot.hotspot_x_paperpulse import fetch_hotspot_items as fetch_x_paperpulse_items
 from arxiv_assistant.utils.hotspot.x_authority_registry import build_x_authority_registry, load_x_authority_registry, refresh_x_authority_registry
 
@@ -128,6 +128,21 @@ class TestHotspotXSources(unittest.TestCase):
         self.assertEqual(items[0].url, "https://x.com/demishassabis/status/2035012260008273000")
         self.assertEqual(items[0].metadata["proxy_source"], "paperpulse")
         self.assertGreater(items[0].metadata["activity"], 1000)
+
+    @patch("arxiv_assistant.apis.hotspot.hotspot_x_official._iter_recent_search")
+    def test_x_official_query_accounts_stops_cleanly_on_rate_limit(self, mock_iter_recent_search) -> None:
+        mock_iter_recent_search.side_effect = [
+            [{"id": "1", "text": "OpenAI update", "author": {"username": "OpenAI"}}],
+            Exception("429 Client Error: Too Many Requests"),
+        ]
+        rows = _query_accounts(
+            [{"handle": "openai"}, {"handle": "anthropicai"}, {"handle": "googledeepmind"}],
+            bearer_token="token",
+            result_limit=10,
+            batch_size=2,
+        )
+        self.assertEqual(len(rows), 1)
+        self.assertEqual(rows[0]["id"], "1")
 
     @patch("arxiv_assistant.utils.hotspot.x_authority_registry._get_bearer_token", return_value=None)
     @patch("arxiv_assistant.utils.hotspot.x_authority_registry.fetch_json")
@@ -307,6 +322,56 @@ class TestHotspotXSources(unittest.TestCase):
         self.assertEqual(payload["generated_at"], "2026-03-23T00:00:00+00:00")
         self.assertEqual(persisted["generated_at"], "2026-03-23T00:00:00+00:00")
         self.assertEqual(persisted["accounts"][0]["handle"], "openai")
+
+    @patch("arxiv_assistant.utils.hotspot.x_authority_registry.build_x_authority_registry")
+    def test_refresh_x_authority_registry_preserves_existing_snapshot_on_catastrophic_graph_failure(self, mock_build_registry) -> None:
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            seed_path = Path(tmp_dir) / "x_seeds.json"
+            seed_path.write_text(json.dumps({"accounts": []}), encoding="utf-8")
+            snapshot_path = Path(tmp_dir) / "x_authority_inventory.json"
+            existing_payload = {
+                "generated_at": "2026-03-23T00:00:00+00:00",
+                "seed_path": str(seed_path),
+                "seed_sources": {"follow_the_ai_leaders": 31, "paperpulse_authors": 10, "overlap": 9},
+                "graph_expansion": {
+                    "enabled": True,
+                    "seed_handles": ["jeffdean", "drjimfan", "hongyiwang10"],
+                    "resolved_seeds": 12,
+                    "selected_candidates": 510,
+                },
+                "errors": [],
+                "accounts": [{"handle": "openai", "active": True, "tier": 3, "kind": "official", "source_refs": ["manual_seed"]}] * 300,
+            }
+            snapshot_path.write_text(json.dumps(existing_payload, indent=2), encoding="utf-8")
+            mock_build_registry.return_value = {
+                "generated_at": "2026-03-24T00:00:00+00:00",
+                "seed_path": str(seed_path),
+                "seed_sources": {"follow_the_ai_leaders": 31, "paperpulse_authors": 10, "overlap": 9},
+                "graph_expansion": {
+                    "enabled": True,
+                    "seed_handles": ["jeffdean", "drjimfan", "hongyiwang10"],
+                    "resolved_seeds": 0,
+                    "selected_candidates": 0,
+                },
+                "errors": [
+                    {"source": "following:jeffdean", "error": "403"},
+                    {"source": "following:drjimfan", "error": "403"},
+                    {"source": "following:hongyiwang10", "error": "403"},
+                ],
+                "accounts": [{"handle": "openai", "active": True, "tier": 3, "kind": "official", "source_refs": ["manual_seed"]}] * 68,
+            }
+
+            payload = refresh_x_authority_registry(
+                seed_path=seed_path,
+                snapshot_path=snapshot_path,
+                force=True,
+            )
+
+            persisted = json.loads(snapshot_path.read_text(encoding="utf-8"))
+
+        self.assertEqual(payload["generated_at"], "2026-03-23T00:00:00+00:00")
+        self.assertEqual(persisted["generated_at"], "2026-03-23T00:00:00+00:00")
+        self.assertEqual(persisted["graph_expansion"]["selected_candidates"], 510)
 
 
 if __name__ == "__main__":

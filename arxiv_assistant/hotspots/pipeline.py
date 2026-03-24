@@ -314,6 +314,12 @@ def _screening_decision(topic: dict[str, Any], score_cutoff: float, watchlist_cu
     has_repo_signal = "repo" in source_types
     has_discussion_signal = "discussion" in source_types
     has_paper_signal = "paper" in source_types
+    weak_single_source_roles = (
+        {"research_backbone", "paper_trending"},
+        {"github_trend", "builder_momentum"},
+        {"headline_consensus"},
+        {"hn_discussion"},
+    )
 
     auto_keep_score = hotspot_config.getfloat("screening_auto_keep_score_cutoff", fallback=6.8)
     auto_keep_conf = hotspot_config.getfloat("screening_auto_keep_confidence_cutoff", fallback=6.4)
@@ -327,6 +333,15 @@ def _screening_decision(topic: dict[str, Any], score_cutoff: float, watchlist_cu
     heuristic_only_evidence = hotspot_config.getfloat("screening_heuristic_only_evidence_cutoff", fallback=3.4)
     heuristic_only_score = hotspot_config.getfloat("screening_heuristic_only_score_cutoff", fallback=5.8)
     strong_evidence_keep = confidence >= 8.0 and evidence >= 6.5 and resonance >= 5.5 and source_count >= 2
+
+    if (
+        source_count <= 1
+        and not has_official
+        and any(roles.issubset(role_group) for role_group in weak_single_source_roles)
+    ):
+        if confidence >= heuristic_only_conf and evidence >= heuristic_only_evidence and final_score >= heuristic_only_score:
+            return "heuristic_only"
+        return "auto_drop"
 
     strong_multi_source = source_count >= 2 or has_official or (has_non_paper_signal and resonance >= 4.8)
     if (strong_evidence_keep or final_score >= auto_keep_score) and confidence >= auto_keep_conf and evidence >= auto_keep_evidence and strong_multi_source and hype_penalty <= 5.2:
@@ -698,6 +713,14 @@ def deterministic_trim(clusters: list[HotspotCluster], max_clusters: int) -> lis
             boost -= 4.0
         if roles.issubset({"research_backbone", "paper_trending"}) and source_count == 1:
             boost -= 2.0
+        if roles.issubset({"headline_consensus"}) and source_count == 1:
+            boost -= 5.5
+        if roles.issubset({"hn_discussion"}) and source_count == 1:
+            boost -= 5.0
+        if roles.issubset({"builder_momentum"}) and source_count == 1:
+            boost -= 3.2
+        if roles.issubset({"community_heat"}) and source_count == 1:
+            boost -= 1.8
         return (cluster.deterministic_score + boost, source_count, source_type_count)
 
     ranked = sorted(clusters, key=cluster_priority, reverse=True)
@@ -893,10 +916,16 @@ def _trim_topics(top_topics: list[dict[str, Any]], watchlist: list[dict[str, Any
         final_score = float(topic.get("FINAL_SCORE", 0.0))
         evidence = float(topic.get("EVIDENCE_STRENGTH", 0.0))
         confidence = float(topic.get("CONFIDENCE", max(final_score - 1.0, evidence, 0.0)))
-        if source_count > 1 or "official_news" in roles:
+        if source_count > 1:
             return False
+        if "official_news" in roles:
+            return confidence < 5.0 or evidence < 4.4 or final_score < 4.8
         if roles.issubset({"research_backbone", "paper_trending"}):
-            return False
+            return True
+        if roles.issubset({"github_trend", "builder_momentum"}):
+            return True
+        if roles.issubset({"headline_consensus", "hn_discussion", "community_heat"}):
+            return True
         return confidence < 4.7 and evidence < 4.0 and bool(roles & {"github_trend", "builder_momentum", "community_heat", "hn_discussion"})
 
     def is_quality_fill_candidate(topic: dict[str, Any]) -> bool:
@@ -905,15 +934,11 @@ def _trim_topics(top_topics: list[dict[str, Any]], watchlist: list[dict[str, Any
         final_score = float(topic.get("FINAL_SCORE", 0.0))
         evidence = float(topic.get("EVIDENCE_STRENGTH", max(final_score - 1.2, 0.0)))
         confidence = float(topic.get("CONFIDENCE", max(final_score - 1.0, evidence, 0.0)))
-        if source_count >= 2 or "official_news" in roles:
+        if source_count >= 2:
             return True
-        if roles & {"community_heat", "headline_consensus", "hn_discussion"}:
-            return confidence >= 5.0 and evidence >= 4.4 and final_score >= 4.2
-        if roles.issubset({"research_backbone", "paper_trending"}):
-            return confidence >= 6.0 and evidence >= 5.0 and final_score >= 4.8
-        if roles & {"github_trend", "builder_momentum"}:
-            return confidence >= 5.2 and evidence >= 4.6 and final_score >= 4.5
-        return confidence >= 4.8 and evidence >= 4.4 and final_score >= 4.2
+        if "official_news" in roles:
+            return confidence >= 5.0 and evidence >= 4.4 and final_score >= 4.8
+        return False
 
     demoted_watchlist: list[dict[str, Any]] = []
     retained_top: list[dict[str, Any]] = []

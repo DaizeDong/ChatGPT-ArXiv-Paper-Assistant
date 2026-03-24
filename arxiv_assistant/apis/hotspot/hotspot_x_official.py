@@ -68,7 +68,7 @@ def _expanded_urls(tweet: dict[str, Any]) -> list[str]:
 
 
 def _build_query(handles: list[str]) -> str:
-    return "(" + " OR ".join(f"from:{handle}" for handle in handles) + ") -is:retweet -is:reply has:links lang:en"
+    return "(" + " OR ".join(f"from:{handle}" for handle in handles) + ") -is:retweet -is:reply lang:en"
 
 
 def _build_query_batches(handles: list[str], *, batch_size: int = 6, max_query_length: int = 260) -> list[list[str]]:
@@ -162,18 +162,22 @@ def _query_accounts(
 ) -> list[dict[str, Any]]:
     rows: list[dict[str, Any]] = []
     remaining = result_limit
+    rate_limited = False
     handles = [str(row.get("handle")) for row in accounts if row.get("handle")]
 
     def fetch_handle_group(group: list[str]) -> None:
-        nonlocal remaining, rows
-        if remaining <= 0 or not group:
+        nonlocal remaining, rows, rate_limited
+        if remaining <= 0 or not group or rate_limited:
             return
         query = _build_query(group)
         try:
             chunk = _iter_recent_search(query=query, bearer_token=bearer_token, max_results=min(remaining, 50))
             rows.extend(chunk)
             remaining = result_limit - len(rows)
-        except Exception:
+        except Exception as ex:
+            if "429" in str(ex):
+                rate_limited = True
+                return
             if len(group) == 1:
                 return
             midpoint = len(group) // 2
@@ -197,8 +201,8 @@ def fetch_hotspot_items(
     max_age_hours: int = 24,
     official_batch_size: int = 10,
     researcher_batch_size: int = 8,
-    official_account_limit: int = 60,
-    researcher_account_limit: int = 90,
+    official_account_limit: int = 24,
+    researcher_account_limit: int = 18,
 ) -> list[HotspotItem]:
     bearer_token = _get_bearer_token()
     if not bearer_token:

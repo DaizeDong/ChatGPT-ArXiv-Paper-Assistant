@@ -188,6 +188,40 @@ def _registry_payload_for_compare(payload: dict[str, Any]) -> dict[str, Any]:
     return {key: value for key, value in payload.items() if key != "generated_at"}
 
 
+def _is_catastrophic_graph_regression(
+    existing_payload: dict[str, Any] | None,
+    new_payload: dict[str, Any],
+) -> bool:
+    if not existing_payload:
+        return False
+
+    existing_graph = dict(existing_payload.get("graph_expansion") or {})
+    new_graph = dict(new_payload.get("graph_expansion") or {})
+    existing_selected = int(existing_graph.get("selected_candidates") or 0)
+    new_selected = int(new_graph.get("selected_candidates") or 0)
+    new_resolved = int(new_graph.get("resolved_seeds") or 0)
+    seed_handles = list(new_graph.get("seed_handles") or [])
+    errors = list(new_payload.get("errors") or [])
+    following_errors = [
+        row for row in errors
+        if str((row or {}).get("source") or "").startswith("following:")
+    ]
+    existing_accounts = len(existing_payload.get("accounts", []) or [])
+    new_accounts = len(new_payload.get("accounts", []) or [])
+
+    if existing_selected < 50:
+        return False
+    if not new_graph.get("enabled"):
+        return False
+    if new_selected > 0 or new_resolved > 0:
+        return False
+    if len(following_errors) < max(3, len(seed_handles)):
+        return False
+    if new_accounts >= max(100, int(existing_accounts * 0.5)):
+        return False
+    return True
+
+
 def _seed_account_map(seed_payload: dict[str, Any]) -> dict[str, dict[str, Any]]:
     account_map: dict[str, dict[str, Any]] = {}
     for row in seed_payload.get("accounts", []):
@@ -638,6 +672,8 @@ def refresh_x_authority_registry(
         return existing_payload or json.loads(resolved_snapshot.read_text(encoding="utf-8"))
 
     payload = build_x_authority_registry(seed_path)
+    if _is_catastrophic_graph_regression(existing_payload, payload):
+        return existing_payload
     if existing_payload and _registry_payload_for_compare(existing_payload) == _registry_payload_for_compare(payload):
         return existing_payload
     resolved_snapshot.parent.mkdir(parents=True, exist_ok=True)

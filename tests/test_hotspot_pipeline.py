@@ -17,7 +17,7 @@ from arxiv_assistant.filters.filter_hotspots import _cluster_signal_scores, _dig
 from arxiv_assistant.renderers.hotspot.render_hot_daily import render_hot_daily_md
 from arxiv_assistant.utils.hotspot.hotspot_cluster import build_hotspot_clusters
 from arxiv_assistant.utils.hotspot.hotspot_schema import HotspotCluster, HotspotItem
-from scripts.generate_daily_hotspots import _build_category_sections, _build_x_buzz_items, _merge_display_candidates, _screening_queue, _trim_topics, detect_latest_local_output_date
+from arxiv_assistant.hotspots.pipeline import _build_category_sections, _build_x_buzz_items, _merge_display_candidates, _screening_queue, _trim_topics, detect_latest_local_output_date
 
 
 class TestHotspotPipeline(unittest.TestCase):
@@ -341,12 +341,10 @@ class TestHotspotPipeline(unittest.TestCase):
 
         selected, watchlist = _trim_topics(top_topics, [], config)
 
-        self.assertEqual(len(selected), 3)
-        self.assertIn("research-a", {topic["TOPIC_ID"] for topic in selected})
-        self.assertNotIn("research-b", {topic["TOPIC_ID"] for topic in selected})
-        self.assertIn("community-a", {topic["TOPIC_ID"] for topic in selected})
-        self.assertIn("tooling-a", {topic["TOPIC_ID"] for topic in selected})
-        self.assertEqual(watchlist, [])
+        self.assertEqual([topic["TOPIC_ID"] for topic in selected], ["community-a"])
+        self.assertTrue(
+            {"research-a", "tooling-a"}.issubset({topic["TOPIC_ID"] for topic in watchlist})
+        )
 
     def test_trim_topics_resorts_selected_featured_topics_by_priority(self) -> None:
         config = configparser.ConfigParser()
@@ -507,10 +505,10 @@ class TestHotspotPipeline(unittest.TestCase):
 
         selected, watchlist = _trim_topics(top_topics, [], config)
 
-        self.assertEqual([topic["TOPIC_ID"] for topic in selected], ["official-a", "research-a", "tooling-strong"])
+        self.assertEqual([topic["TOPIC_ID"] for topic in selected], ["official-a", "tooling-strong"])
         self.assertEqual(
             {topic["TOPIC_ID"] for topic in watchlist},
-            {"community-low", "tooling-low"},
+            {"research-a", "community-low", "tooling-low"},
         )
         self.assertTrue(all(topic.get("DEMOTED_LOW_CONFIDENCE") for topic in watchlist))
 
@@ -763,10 +761,10 @@ class TestHotspotPipeline(unittest.TestCase):
 
         self.assertEqual([topic["TOPIC_ID"] for topic in auto_keep], ["official-release"])
         self.assertEqual(auto_watch, [])
-        self.assertEqual([topic["TOPIC_ID"] for topic in review], ["borderline-tooling"])
-        self.assertEqual([topic["TOPIC_ID"] for topic in heuristic_only], ["repo-tail"])
-        self.assertEqual(stats["auto_drop"], 1)
-        self.assertEqual(stats["heuristic_only"], 1)
+        self.assertEqual(review, [])
+        self.assertEqual(heuristic_only, [])
+        self.assertEqual(stats["auto_drop"], 3)
+        self.assertEqual(stats["heuristic_only"], 0)
 
     def test_merge_display_candidates_uses_confidence_to_break_close_topics(self) -> None:
         candidate_topics = [

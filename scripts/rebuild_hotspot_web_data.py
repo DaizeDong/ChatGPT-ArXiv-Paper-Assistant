@@ -10,6 +10,7 @@ REPO_ROOT = Path(__file__).resolve().parents[1]
 if str(REPO_ROOT) not in sys.path:
     sys.path.insert(0, str(REPO_ROOT))
 
+from arxiv_assistant.utils.hotspot.hotspot_dates import is_supported_hotspot_date
 from arxiv_assistant.utils.hotspot.hotspot_schema import HotspotItem
 from arxiv_assistant.utils.hotspot.hotspot_web_data import write_hotspot_web_data
 
@@ -42,6 +43,7 @@ def rebuild_hotspot_web_data(output_root: str | Path) -> list[str]:
         return []
 
     shutil.rmtree(web_root, ignore_errors=True)
+    web_root.mkdir(parents=True, exist_ok=True)
 
     rebuilt_dates: list[str] = []
     for report_path in sorted(reports_root.glob("*.json")):
@@ -49,7 +51,7 @@ def rebuild_hotspot_web_data(output_root: str | Path) -> list[str]:
         if not isinstance(report, dict):
             raise ValueError(f"Expected report object in {report_path}")
         date = str(report.get("date") or report_path.stem).strip()
-        if not date:
+        if not date or not is_supported_hotspot_date(date):
             continue
         normalized_path = normalized_root / f"{date}.json"
         if not normalized_path.exists():
@@ -57,6 +59,22 @@ def rebuild_hotspot_web_data(output_root: str | Path) -> list[str]:
         raw_items = _load_raw_items(normalized_path)
         write_hotspot_web_data(output_root, report, raw_items)
         rebuilt_dates.append(date)
+
+    if not rebuilt_dates:
+        (web_root / "index.json").write_text(
+            json.dumps(
+                {
+                    "schema_version": 1,
+                    "latest_date": None,
+                    "dates": [],
+                    "months": [],
+                    "years": [],
+                },
+                indent=2,
+                ensure_ascii=False,
+            ),
+            encoding="utf-8",
+        )
 
     return rebuilt_dates
 

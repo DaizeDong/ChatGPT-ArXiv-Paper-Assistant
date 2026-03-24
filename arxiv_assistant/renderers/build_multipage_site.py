@@ -32,6 +32,7 @@ from arxiv_assistant.renderers.site_paths import (
     site_month_summary_page_path,
     year_from_date,
 )
+from arxiv_assistant.utils.hotspot.hotspot_dates import is_supported_hotspot_date_key
 
 DAY_FILE_PATTERN = re.compile(r"(?P<year>\d{4})-(?P<month>\d{2})-(?P<day>\d{2})-(?P<suffix>[^/\\\\]+)\.md$")
 HOT_DAY_FILE_PATTERN = re.compile(r"(?P<year>\d{4})-(?P<month>\d{2})-(?P<day>\d{2})-hotspots\.md$")
@@ -83,6 +84,8 @@ def discover_hotspot_markdown(md_root: Path) -> Dict[Tuple[int, int, int], Path]
             int(match.group("month")),
             int(match.group("day")),
         )
+        if not is_supported_hotspot_date_key(date):
+            continue
         resolved[date] = file_path
     return resolved
 
@@ -101,6 +104,8 @@ def discover_hotspot_report_summaries(report_root: Path) -> Dict[Tuple[int, int,
             int(match.group("month")),
             int(match.group("day")),
         )
+        if not is_supported_hotspot_date_key(date):
+            continue
         payload = json.loads(file_path.read_text(encoding="utf-8"))
         summaries[date] = {
             "summary": payload.get("summary", ""),

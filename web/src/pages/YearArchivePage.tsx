@@ -3,13 +3,15 @@ import { Link } from "react-router-dom";
 
 import { ArchiveNav } from "../components/ArchiveNav";
 import { CrossSiteSwitch } from "../components/CrossSiteSwitch";
-import { loadRootIndex, loadYearIndex } from "../lib/data";
+import { isNotFoundError, loadRootIndex, loadYearIndex } from "../lib/data";
 import { SOURCE_FAMILY_LABELS } from "../lib/hotspotView";
 import { bestPaperRoute } from "../lib/routes";
 import type { RootIndexPayload, YearIndexPayload } from "../types/hotspot";
+import { NotFoundPage } from "./NotFoundPage";
 
 type AsyncState =
   | { status: "loading" }
+  | { status: "notFound" }
   | { status: "error"; message: string }
   | { status: "ready"; payload: YearIndexPayload; rootIndex: RootIndexPayload };
 
@@ -24,9 +26,13 @@ export function YearArchivePage({ year }: { year: string }) {
           setState({ status: "ready", payload, rootIndex });
         }
       })
-      .catch((error: Error) => {
+      .catch((error: unknown) => {
         if (active) {
-          setState({ status: "error", message: error.message });
+          if (isNotFoundError(error)) {
+            setState({ status: "notFound" });
+            return;
+          }
+          setState({ status: "error", message: error instanceof Error ? error.message : String(error) });
         }
       });
     return () => {
@@ -36,6 +42,9 @@ export function YearArchivePage({ year }: { year: string }) {
 
   if (state.status === "loading") {
     return <section className="panel">Loading year archive...</section>;
+  }
+  if (state.status === "notFound") {
+    return <NotFoundPage />;
   }
   if (state.status === "error") {
     return <section className="panel">Failed to load year archive: {state.message}</section>;

@@ -5,13 +5,15 @@ import { ArchiveNav } from "../components/ArchiveNav";
 import { CrossSiteSwitch } from "../components/CrossSiteSwitch";
 import { SignalTable } from "../components/SignalTable";
 import { TopicSummaryTable, type TopicSummaryRow } from "../components/TopicSummaryTable";
-import { loadDailyHotspot } from "../lib/data";
+import { isNotFoundError, loadDailyHotspot } from "../lib/data";
 import { filterSectionsBySearch } from "../lib/hotspotView";
 import { bestPaperRoute } from "../lib/routes";
 import type { DailyHotspotPayload, SourceSection } from "../types/hotspot";
+import { NotFoundPage } from "./NotFoundPage";
 
 type AsyncState =
   | { status: "loading" }
+  | { status: "notFound" }
   | { status: "error"; message: string }
   | { status: "ready"; payload: DailyHotspotPayload };
 
@@ -129,9 +131,13 @@ export function DailyHotspotPage({ date }: { date: string }) {
           setState({ status: "ready", payload });
         }
       })
-      .catch((error: Error) => {
+      .catch((error: unknown) => {
         if (active) {
-          setState({ status: "error", message: error.message });
+          if (isNotFoundError(error)) {
+            setState({ status: "notFound" });
+            return;
+          }
+          setState({ status: "error", message: error instanceof Error ? error.message : String(error) });
         }
       });
     return () => {
@@ -141,6 +147,9 @@ export function DailyHotspotPage({ date }: { date: string }) {
 
   if (state.status === "loading") {
     return <section className="panel">Loading daily hotspot payload...</section>;
+  }
+  if (state.status === "notFound") {
+    return <NotFoundPage />;
   }
   if (state.status === "error") {
     return <section className="panel">Failed to load {date}: {state.message}</section>;

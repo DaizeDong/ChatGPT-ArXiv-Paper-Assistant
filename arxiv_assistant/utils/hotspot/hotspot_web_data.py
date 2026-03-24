@@ -3,11 +3,17 @@ from __future__ import annotations
 import hashlib
 import json
 import re
+import shutil
 from collections import defaultdict
 from pathlib import Path
 from typing import Any
 from urllib.parse import urlparse
 
+from arxiv_assistant.utils.hotspot.hotspot_dates import (
+    is_supported_hotspot_date,
+    is_supported_hotspot_month,
+    is_supported_hotspot_year,
+)
 from arxiv_assistant.utils.hotspot.hotspot_schema import HotspotItem
 
 SOURCE_FAMILIES = [
@@ -555,9 +561,70 @@ def _load_existing_daily_payloads(web_root: Path) -> list[dict[str, Any]]:
             continue
         if not DATE_PATTERN.fullmatch(file_path.name):
             continue
+        if not is_supported_hotspot_date(file_path.stem):
+            continue
         payloads.append(json.loads(file_path.read_text(encoding="utf-8")))
     payloads.sort(key=lambda payload: str(payload.get("meta", {}).get("date", "")))
     return payloads
+
+
+def _prune_unsupported_hot_payloads(web_root: Path) -> None:
+    hot_root = web_root / "hot"
+    if not hot_root.exists():
+        return
+
+    for file_path in hot_root.glob("*.json"):
+        if file_path.name == "index.json":
+            continue
+        if DATE_PATTERN.fullmatch(file_path.name) and not is_supported_hotspot_date(file_path.stem):
+            file_path.unlink(missing_ok=True)
+
+    for child in hot_root.iterdir():
+        if not child.is_dir():
+            continue
+        if MONTH_PATTERN.fullmatch(child.name) and not is_supported_hotspot_month(child.name):
+            shutil.rmtree(child, ignore_errors=True)
+            continue
+        if YEAR_PATTERN.fullmatch(child.name) and not is_supported_hotspot_year(child.name):
+            shutil.rmtree(child, ignore_errors=True)
+
+
+def _sync_period_indexes(
+    web_root: Path,
+    daily_payloads: list[dict[str, Any]],
+    paper_archive_routes: dict[str, set[str]] | None,
+) -> dict[str, Path]:
+    hot_root = web_root / "hot"
+    hot_root.mkdir(parents=True, exist_ok=True)
+
+    root_index_path = hot_root / "index.json"
+    root_index = _build_root_index(daily_payloads)
+    _write_json(root_index_path, root_index)
+
+    written_paths: dict[str, Path] = {"root_index": root_index_path}
+    months = sorted({str(payload.get("meta", {}).get("month", "")) for payload in daily_payloads if payload.get("meta", {}).get("month")})
+    years = sorted({str(payload.get("meta", {}).get("year", "")) for payload in daily_payloads if payload.get("meta", {}).get("year")})
+
+    for child in hot_root.iterdir():
+        if not child.is_dir():
+            continue
+        if MONTH_PATTERN.fullmatch(child.name) and child.name not in months:
+            shutil.rmtree(child, ignore_errors=True)
+            continue
+        if YEAR_PATTERN.fullmatch(child.name) and child.name not in years:
+            shutil.rmtree(child, ignore_errors=True)
+
+    for month in months:
+        month_path = hot_root / month / "index.json"
+        _write_json(month_path, _build_month_index(month, daily_payloads, paper_archive_routes))
+        written_paths[f"month:{month}"] = month_path
+
+    for year in years:
+        year_path = hot_root / year / "index.json"
+        _write_json(year_path, _build_year_index(year, daily_payloads, paper_archive_routes))
+        written_paths[f"year:{year}"] = year_path
+
+    return written_paths
 
 
 def _build_root_index(daily_payloads: list[dict[str, Any]]) -> dict[str, Any]:
@@ -709,9 +776,14 @@ def write_hotspot_web_data(output_root: str | Path, report: dict[str, Any], raw_
     output_root = Path(output_root)
     web_root = output_root / "web_data"
     paper_archive_routes = _discover_paper_archive_routes(output_root)
+    _prune_unsupported_hot_payloads(web_root)
     existing_payloads = _load_existing_daily_payloads(web_root)
     existing_dates = [str(payload.get("meta", {}).get("date", "")) for payload in existing_payloads]
     current_date = str(report.get("date", ""))
+
+    if not is_supported_hotspot_date(current_date):
+        return _sync_period_indexes(web_root, existing_payloads, paper_archive_routes)
+
     ordered_dates = sorted(set([date for date in existing_dates if date] + [current_date]))
     previous_date = None
     next_date = None
@@ -744,21 +816,6 @@ def write_hotspot_web_data(output_root: str | Path, report: dict[str, Any], raw_
             meta["next_date"] = following_date
             _write_json(_daily_payload_path(web_root, str(meta.get("date", ""))), payload)
 
-    root_index = _build_root_index(all_payloads)
-    _write_json(web_root / "hot" / "index.json", root_index)
-
-    written_paths = {"daily": daily_path, "root_index": web_root / "hot" / "index.json"}
-    months = sorted({str(payload.get("meta", {}).get("month", "")) for payload in all_payloads if payload.get("meta", {}).get("month")})
-    years = sorted({str(payload.get("meta", {}).get("year", "")) for payload in all_payloads if payload.get("meta", {}).get("year")})
-
-    for month in months:
-        month_path = web_root / "hot" / month / "index.json"
-        _write_json(month_path, _build_month_index(month, all_payloads, paper_archive_routes))
-        written_paths[f"month:{month}"] = month_path
-
-    for year in years:
-        year_path = web_root / "hot" / year / "index.json"
-        _write_json(year_path, _build_year_index(year, all_payloads, paper_archive_routes))
-        written_paths[f"year:{year}"] = year_path
-
+    written_paths = {"daily": daily_path}
+    written_paths.update(_sync_period_indexes(web_root, all_payloads, paper_archive_routes))
     return written_paths

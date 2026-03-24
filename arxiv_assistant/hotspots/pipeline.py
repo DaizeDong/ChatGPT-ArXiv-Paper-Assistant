@@ -26,9 +26,9 @@ from arxiv_assistant.renderers.hotspot.render_hot_daily import render_hot_daily_
 from arxiv_assistant.utils.hotspot.hotspot_cluster import build_hotspot_clusters
 from arxiv_assistant.utils.hotspot.hotspot_config import build_hotspot_paths, ensure_parent_dirs
 from arxiv_assistant.utils.hotspot.hotspot_schema import HotspotCluster, HotspotItem
+from arxiv_assistant.utils.hotspot.hotspot_sources import api_usage_scope, reset_api_usage, snapshot_api_usage
 from arxiv_assistant.utils.prompt_loader import read_prompt
 from arxiv_assistant.utils.hotspot.hotspot_web_data import write_hotspot_web_data
-from arxiv_assistant.utils.hotspot.x_authority_registry import refresh_x_authority_registry
 
 ROLE_PRIORITY = {
     "research_backbone": 0,
@@ -85,6 +85,18 @@ AI_RELEVANCE_TERMS = {
     "deepseek",
     "cursor",
     "copilot",
+}
+SOURCE_USAGE_META = {
+    "local_papers": {"provider": "Local cache", "billing_model": "local"},
+    "hf_papers": {"provider": "Hugging Face", "billing_model": "free"},
+    "ainews": {"provider": "AINews RSS", "billing_model": "free"},
+    "official_blogs": {"provider": "Official blogs", "billing_model": "free"},
+    "roundup_sites": {"provider": "Roundup sites", "billing_model": "free"},
+    "x_ainews_twitter": {"provider": "AINews Twitter recap", "billing_model": "free"},
+    "x_paperpulse": {"provider": "PaperPulse", "billing_model": "free"},
+    "x_official": {"provider": "X API", "billing_model": "quota"},
+    "github_trend": {"provider": "GitHub API", "billing_model": "free"},
+    "hn_discussion": {"provider": "Hacker News API", "billing_model": "free"},
 }
 
 
@@ -588,7 +600,12 @@ def _build_long_tail_sections(
     return sections
 
 
-def fetch_source_payloads(target_date: datetime, output_root: Path, config: configparser.ConfigParser, force: bool) -> tuple[list[HotspotItem], dict[str, int]]:
+def fetch_source_payloads(
+    target_date: datetime,
+    output_root: Path,
+    config: configparser.ConfigParser,
+    force: bool,
+) -> tuple[list[HotspotItem], dict[str, int], dict[str, dict[str, Any]]]:
     hotspot_sources = config["HOTSPOT_SOURCES"]
     hotspot_config = config["HOTSPOTS"]
     freshness_hours = hotspot_config.getint("freshness_hours", fallback=36)
@@ -675,24 +692,44 @@ def fetch_source_payloads(target_date: datetime, output_root: Path, config: conf
 
     all_items: list[HotspotItem] = []
     source_stats: dict[str, int] = {}
+    api_usage: dict[str, dict[str, Any]] = {}
+    reset_api_usage()
 
     for source_id, fetch_fn in specs:
         cache_path = _raw_source_cache_path(output_root, target_date, source_id)
+        usage_meta = SOURCE_USAGE_META.get(source_id, {"provider": source_id, "billing_model": "unknown"})
         if reuse_cached_raw and cache_path.exists() and not force:
             items = load_cached_items(cache_path)
+            api_usage[source_id] = {
+                "provider": usage_meta["provider"],
+                "billing_model": usage_meta["billing_model"],
+                "requests": 0,
+                "estimated_cost": 0.0,
+                "cache_hit": True,
+            }
         else:
             try:
-                items = fetch_fn()
+                with api_usage_scope(source_id, usage_meta["provider"]):
+                    items = fetch_fn()
             except Exception as ex:
                 print(f"Warning: failed to fetch hotspot source {source_id}: {ex}")
                 items = []
             write_json(cache_path, _serialize_items(items))
+            usage_row = snapshot_api_usage().get(source_id, {"provider": usage_meta["provider"], "requests": 0, "estimated_cost": 0.0})
+            api_usage[source_id] = {
+                "provider": usage_meta["provider"],
+                "billing_model": usage_meta["billing_model"],
+                "requests": int(usage_row.get("requests", 0) or 0),
+                "estimated_cost": round(float(usage_row.get("estimated_cost", 0.0) or 0.0), 6),
+                "cache_hit": False,
+            }
 
         items = _dedupe_items(items)
         source_stats[source_id] = len(items)
+        api_usage[source_id]["items"] = len(items)
         all_items.extend(items)
 
-    return _dedupe_items(all_items), source_stats
+    return _dedupe_items(all_items), source_stats, api_usage
 
 
 def deterministic_trim(clusters: list[HotspotCluster], max_clusters: int) -> list[HotspotCluster]:
@@ -776,16 +813,23 @@ def _fallback_digest_summary(top_topics: list[dict[str, Any]]) -> str:
     return f"Today's AI discussion centered on {headlines[0]}, {headlines[1]}, and {headlines[2]}."
 
 
-def apply_digest_synthesis(top_topics: list[dict[str, Any]], watchlist: list[dict[str, Any]], system_prompt: str, digest_prompt: str, config: configparser.ConfigParser, mode: str) -> tuple[str, float, float]:
+def apply_digest_synthesis(
+    top_topics: list[dict[str, Any]],
+    watchlist: list[dict[str, Any]],
+    system_prompt: str,
+    digest_prompt: str,
+    config: configparser.ConfigParser,
+    mode: str,
+ ) -> tuple[str, float, float, int, int, int]:
     for topic in top_topics:
         topic["HEADLINE"] = topic.get("title", "")
         topic["KEY_TAKEAWAYS"] = [topic.get("WHY_IT_MATTERS", "")]
 
     if mode != "openai" or not top_topics:
-        return _fallback_digest_summary(top_topics), 0.0, 0.0
+        return _fallback_digest_summary(top_topics), 0.0, 0.0, 0, 0, 0
 
     try:
-        payload, prompt_cost, completion_cost = synthesize_digest_with_openai(
+        payload, prompt_cost, completion_cost, prompt_tokens, completion_tokens, request_count = synthesize_digest_with_openai(
             top_topics=top_topics,
             watchlist=watchlist,
             system_prompt=system_prompt,
@@ -795,7 +839,7 @@ def apply_digest_synthesis(top_topics: list[dict[str, Any]], watchlist: list[dic
         )
     except Exception as ex:
         print(f"Warning: hotspot digest synthesis failed, falling back to heuristic: {ex}")
-        return _fallback_digest_summary(top_topics), 0.0, 0.0
+        return _fallback_digest_summary(top_topics), 0.0, 0.0, 0, 0, 0
 
     by_id = {topic["TOPIC_ID"]: topic for topic in top_topics}
     for row in payload.get("top_topics", []):
@@ -806,7 +850,71 @@ def apply_digest_synthesis(top_topics: list[dict[str, Any]], watchlist: list[dic
         by_id[topic_id]["WHY_IT_MATTERS"] = row.get("WHY_IT_MATTERS") or by_id[topic_id]["WHY_IT_MATTERS"]
         by_id[topic_id]["KEY_TAKEAWAYS"] = [point for point in row.get("KEY_TAKEAWAYS", []) if point]
 
-    return payload.get("summary", "").strip() or _fallback_digest_summary(top_topics), prompt_cost, completion_cost
+    return (
+        payload.get("summary", "").strip() or _fallback_digest_summary(top_topics),
+        prompt_cost,
+        completion_cost,
+        prompt_tokens,
+        completion_tokens,
+        request_count,
+    )
+
+
+def _build_usage_payload(
+    config: configparser.ConfigParser,
+    effective_mode: str,
+    prompt_cost: float,
+    completion_cost: float,
+    llm_prompt_tokens: int,
+    llm_completion_tokens: int,
+    llm_requests: int,
+    api_usage: dict[str, dict[str, Any]],
+) -> dict[str, Any]:
+    llm_total_cost = round(prompt_cost + completion_cost, 6)
+    llm_row = {
+        "provider": "OpenAI",
+        "billing_model": "quota" if effective_mode == "openai" else "disabled",
+        "screen_model": config["HOTSPOTS"].get("model_screen"),
+        "summary_model": config["HOTSPOTS"].get("model_summarize", config["HOTSPOTS"].get("model_screen")),
+        "requests": int(llm_requests),
+        "prompt_tokens": int(llm_prompt_tokens),
+        "completion_tokens": int(llm_completion_tokens),
+        "total_tokens": int(llm_prompt_tokens + llm_completion_tokens),
+        "prompt_cost": round(prompt_cost, 6),
+        "completion_cost": round(completion_cost, 6),
+        "total_cost": llm_total_cost,
+    }
+
+    external_rows: dict[str, dict[str, Any]] = {}
+    external_request_total = 0
+    x_request_total = 0
+    estimated_external_cost = 0.0
+    for source_id, row in api_usage.items():
+        requests_count = int(row.get("requests", 0) or 0)
+        estimated_cost = round(float(row.get("estimated_cost", 0.0) or 0.0), 6)
+        normalized = {
+            "provider": str(row.get("provider", source_id)),
+            "billing_model": str(row.get("billing_model", "unknown")),
+            "requests": requests_count,
+            "items": int(row.get("items", 0) or 0),
+            "estimated_cost": estimated_cost,
+            "cache_hit": bool(row.get("cache_hit", False)),
+        }
+        external_rows[source_id] = normalized
+        external_request_total += requests_count
+        estimated_external_cost += estimated_cost
+        if source_id.startswith("x_"):
+            x_request_total += requests_count
+
+    return {
+        "llm": llm_row,
+        "external": external_rows,
+        "summary": {
+            "external_requests": external_request_total,
+            "x_requests": x_request_total,
+            "estimated_external_cost": round(estimated_external_cost, 6),
+        },
+    }
 
 
 def _decide_mode(requested_mode: str) -> str:
@@ -1046,7 +1154,7 @@ def generate_daily_hotspot_report(output_root: str | Path, target_date: datetime
     output_root = Path(output_root)
     effective_mode = _decide_mode(mode_override or config["HOTSPOTS"].get("mode", "auto"))
 
-    raw_items, source_stats = fetch_source_payloads(target_date, output_root, config, force)
+    raw_items, source_stats, api_usage = fetch_source_payloads(target_date, output_root, config, force)
     raw_items = raw_items[: config["HOTSPOTS"].getint("max_raw_items", fallback=120)]
 
     clusters = build_hotspot_clusters(raw_items)
@@ -1082,10 +1190,13 @@ def generate_daily_hotspot_report(output_root: str | Path, target_date: datetime
 
     prompt_cost = 0.0
     completion_cost = 0.0
+    llm_prompt_tokens = 0
+    llm_completion_tokens = 0
+    llm_requests = 0
     llm_kept: list[dict[str, Any]] = []
     llm_watchlist: list[dict[str, Any]] = []
     if effective_mode == "openai" and review_clusters:
-        kept, watchlist, prompt_cost, completion_cost = screen_clusters_with_openai(
+        kept, watchlist, prompt_cost, completion_cost, review_prompt_tokens, review_completion_tokens, review_requests = screen_clusters_with_openai(
             clusters=review_clusters,
             system_prompt=system_prompt,
             criteria_prompt=criteria_prompt,
@@ -1096,6 +1207,9 @@ def generate_daily_hotspot_report(output_root: str | Path, target_date: datetime
             score_cutoff=score_cutoff,
             watchlist_cutoff=watchlist_cutoff,
         )
+        llm_prompt_tokens += review_prompt_tokens
+        llm_completion_tokens += review_completion_tokens
+        llm_requests += review_requests
         llm_kept.extend(kept)
         llm_watchlist.extend(watchlist)
     else:
@@ -1136,10 +1250,30 @@ def generate_daily_hotspot_report(output_root: str | Path, target_date: datetime
         max_per_category=config["HOTSPOTS"].getint("max_long_tail_per_category", fallback=8),
         min_display_score=config["HOTSPOTS"].getfloat("long_tail_display_score_cutoff", fallback=1.6),
     )
-    summary, digest_prompt_cost, digest_completion_cost = apply_digest_synthesis(featured_topics, watchlist, system_prompt, digest_prompt, config, effective_mode)
+    summary, digest_prompt_cost, digest_completion_cost, digest_prompt_tokens, digest_completion_tokens, digest_requests = apply_digest_synthesis(
+        featured_topics,
+        watchlist,
+        system_prompt,
+        digest_prompt,
+        config,
+        effective_mode,
+    )
     prompt_cost += digest_prompt_cost
     completion_cost += digest_completion_cost
+    llm_prompt_tokens += digest_prompt_tokens
+    llm_completion_tokens += digest_completion_tokens
+    llm_requests += digest_requests
     x_buzz = _build_x_buzz_items(raw_items, featured_topics, watchlist)
+    usage = _build_usage_payload(
+        config,
+        effective_mode,
+        prompt_cost,
+        completion_cost,
+        llm_prompt_tokens,
+        llm_completion_tokens,
+        llm_requests,
+        api_usage,
+    )
 
     report = {
         "date": date_string(target_date),
@@ -1161,6 +1295,7 @@ def generate_daily_hotspot_report(output_root: str | Path, target_date: datetime
             "screening_heuristic_fallback": len(heuristic_fallback_topics),
         },
         "costs": {"prompt": round(prompt_cost, 6), "completion": round(completion_cost, 6), "total": round(prompt_cost + completion_cost, 6)},
+        "usage": usage,
         "top_topics": featured_topics,
         "featured_topics": featured_topics,
         "category_sections": category_sections,
@@ -1177,17 +1312,3 @@ def generate_daily_hotspot_report(output_root: str | Path, target_date: datetime
     write_hotspot_web_data(output_root, report, raw_items)
     paths.markdown_path.write_text(render_hot_daily_md(report), encoding="utf-8")
     return report
-    x_sources_enabled = any(
-        hotspot_sources.getboolean(flag, fallback=False)
-        for flag in ("use_x_ainews_twitter", "use_x_paperpulse", "use_x_official")
-    )
-    if x_sources_enabled:
-        try:
-            refresh_x_authority_registry(
-                seed_path=x_seed_path,
-                snapshot_path=x_registry_snapshot_path,
-                max_age_hours=x_registry_max_age_hours,
-                force=force,
-            )
-        except Exception as ex:
-            print(f"Warning: failed to refresh X authority registry: {ex}")

@@ -517,6 +517,7 @@ def build_daily_hotspot_web_payload(
         },
         "totals": dict(report.get("totals") or {}),
         "costs": dict(report.get("costs") or {}),
+        "usage": dict(report.get("usage") or {}),
         "source_stats": dict(report.get("source_stats") or {}),
         "source_section_counts": section_counts,
         "source_sections": source_sections,

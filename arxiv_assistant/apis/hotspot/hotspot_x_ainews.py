@@ -8,7 +8,7 @@ from bs4 import BeautifulSoup
 
 from arxiv_assistant.apis.hotspot.hotspot_x_common import get_authority_record, is_authoritative_x_identity, is_newsworthy_x_text
 from arxiv_assistant.utils.hotspot.hotspot_schema import HotspotItem, clean_text
-from arxiv_assistant.utils.hotspot.hotspot_sources import clip_text, is_fresh, normalize_url
+from arxiv_assistant.utils.hotspot.hotspot_sources import clip_text, fetch_text, is_fresh, normalize_url
 from arxiv_assistant.apis.hotspot.hotspot_common import extract_anchor_pairs, strip_html
 from arxiv_assistant.apis.hotspot.hotspot_ainews import AINEWS_RSS_URL
 
@@ -108,7 +108,7 @@ def _extract_twitter_section_items(content_html: str, issue_title: str, issue_ur
 
 
 def fetch_hotspot_items(target_date: datetime, freshness_hours: int) -> list[HotspotItem]:
-    feed = feedparser.parse(AINEWS_RSS_URL)
+    feed = feedparser.parse(fetch_text(AINEWS_RSS_URL))
     items: list[HotspotItem] = []
     for entry in feed.entries:
         published_at = entry.get("published") or entry.get("updated")

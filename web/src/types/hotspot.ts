@@ -106,6 +106,34 @@ export type DailyHotspotPayload = {
   };
   totals: Record<string, number>;
   costs: Record<string, number>;
+  usage?: {
+    llm?: {
+      provider?: string;
+      billing_model?: string;
+      screen_model?: string;
+      summary_model?: string;
+      requests: number;
+      prompt_tokens: number;
+      completion_tokens: number;
+      total_tokens: number;
+      prompt_cost: number;
+      completion_cost: number;
+      total_cost: number;
+    };
+    external?: Record<string, {
+      provider: string;
+      billing_model: string;
+      requests: number;
+      items: number;
+      estimated_cost: number;
+      cache_hit?: boolean;
+    }>;
+    summary?: {
+      external_requests: number;
+      x_requests: number;
+      estimated_external_cost: number;
+    };
+  };
   source_stats: Record<string, number>;
   source_section_counts: Record<string, number>;
   source_sections: SourceSection[];

@@ -494,12 +494,15 @@ def screen_clusters_with_openai(
     retry_count: int,
     score_cutoff: float,
     watchlist_cutoff: float,
-) -> tuple[list[dict[str, Any]], list[dict[str, Any]], float, float]:
+ ) -> tuple[list[dict[str, Any]], list[dict[str, Any]], float, float, int, int, int]:
     client = OpenAI()
     kept: list[dict[str, Any]] = []
     watchlist: list[dict[str, Any]] = []
     total_prompt_cost = 0.0
     total_completion_cost = 0.0
+    total_prompt_tokens = 0
+    total_completion_tokens = 0
+    total_requests = 0
 
     for batch_start in range(0, len(clusters), batch_size):
         batch = clusters[batch_start: batch_start + batch_size]
@@ -517,6 +520,9 @@ def screen_clusters_with_openai(
                 prompt_cost, completion_cost = calc_price(model, response.usage)
                 total_prompt_cost += prompt_cost
                 total_completion_cost += completion_cost
+                total_prompt_tokens += int(getattr(response.usage, "prompt_tokens", 0) or 0)
+                total_completion_tokens += int(getattr(response.usage, "completion_tokens", 0) or 0)
+                total_requests += 1
                 break
             except Exception as ex:
                 last_exception = ex
@@ -561,7 +567,7 @@ def screen_clusters_with_openai(
         ),
         reverse=True,
     )
-    return kept, watchlist, total_prompt_cost, total_completion_cost
+    return kept, watchlist, total_prompt_cost, total_completion_cost, total_prompt_tokens, total_completion_tokens, total_requests
 
 
 DIGEST_EVIDENCE_CAP = 3
@@ -601,7 +607,7 @@ def synthesize_digest_with_openai(
     digest_prompt: str,
     model: str,
     retry_count: int,
-) -> tuple[dict[str, Any], float, float]:
+) -> tuple[dict[str, Any], float, float, int, int, int]:
     client = OpenAI()
     last_exception: Exception | None = None
     user_prompt = "\n\n".join([digest_prompt.strip(), _digest_prompt_payload(top_topics, watchlist)])
@@ -614,7 +620,14 @@ def synthesize_digest_with_openai(
             )
             payload = parse_json_object_response(response.choices[0].message.content or "{}")
             prompt_cost, completion_cost = calc_price(model, response.usage)
-            return payload, prompt_cost, completion_cost
+            return (
+                payload,
+                prompt_cost,
+                completion_cost,
+                int(getattr(response.usage, "prompt_tokens", 0) or 0),
+                int(getattr(response.usage, "completion_tokens", 0) or 0),
+                1,
+            )
         except Exception as ex:
             last_exception = ex
     raise RuntimeError(f"Failed to synthesize hotspot digest with OpenAI: {last_exception}")

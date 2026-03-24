@@ -8,7 +8,11 @@ type NavEntry = {
 };
 
 function NavPlaceholder({ align }: { align: "left" | "center" | "right" }) {
-  return <div className={`archive-nav-slot ${align}`} aria-hidden="true"><span className="archive-nav-placeholder" /></div>;
+  return (
+    <div className={`archive-nav-slot ${align}`} aria-hidden="true">
+      <span className="archive-nav-placeholder" />
+    </div>
+  );
 }
 
 function NavEdge({ align, entry }: { align: "left" | "right"; entry?: NavEntry | null }) {

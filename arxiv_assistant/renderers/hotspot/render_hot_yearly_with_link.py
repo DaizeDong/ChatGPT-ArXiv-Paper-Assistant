@@ -134,7 +134,7 @@ def render_hot_yearly_md_with_hyperlink(
     previous_asset_path: str | None = None,
     next_asset_path: str | None = None,
     related_page_path: str | None = None,
-    related_label: str = "Paper Archive",
+    related_label: str = "Personalized Daily Arxiv Paper",
 ) -> str:
     parts = [
         f"# Daily AI Hotspots Archive {now_year}",

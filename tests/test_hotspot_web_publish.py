@@ -42,8 +42,8 @@ class TestHotspotWebPublish(unittest.TestCase):
             self.assertTrue((site_dist / "web_data" / "hot" / "index.json").exists())
             self.assertTrue((site_dist / "hot" / "index.html").exists())
             self.assertTrue((site_dist / "hot" / "2026-03-21" / "index.html").exists())
-            self.assertTrue((site_dist / "hot" / "2026-03-21" / "source" / "blogs" / "index.html").exists())
-            self.assertTrue((site_dist / "hot" / "2026-03-21" / "topic" / "google-bets-on-vibe-design-with-stitch" / "index.html").exists())
+            self.assertTrue((site_dist / "hot" / "2026-03" / "index.html").exists())
+            self.assertTrue((site_dist / "hot" / "2026" / "index.html").exists())
             self.assertTrue((site_dist / "hot" / "404.html").exists())
 
 

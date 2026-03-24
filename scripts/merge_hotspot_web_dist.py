@@ -40,15 +40,6 @@ def _route_targets(web_dist: Path) -> list[str]:
         if not date:
             continue
         routes.add(f"hot/{date}")
-        daily_payload = _load_json(web_data_root / f"{date}.json")
-        for section in daily_payload.get("source_sections", []):
-            slug = str(section.get("slug", "")).strip()
-            if slug:
-                routes.add(f"hot/{date}/source/{slug}")
-        for topic in daily_payload.get("topic_summary", []):
-            slug = str(topic.get("slug", "")).strip()
-            if slug:
-                routes.add(f"hot/{date}/topic/{slug}")
     return sorted(routes)
 
 

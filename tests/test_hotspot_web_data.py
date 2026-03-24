@@ -18,6 +18,32 @@ class TestHotspotWebData(unittest.TestCase):
             "summary": "A dense day across social, papers, and official updates.",
             "totals": {"raw_items": 3, "clusters": 3, "candidate_clusters": 3, "radar_clusters": 3},
             "costs": {"prompt": 0.0, "completion": 0.0, "total": 0.0},
+            "usage": {
+                "llm": {
+                    "provider": "OpenAI",
+                    "billing_model": "quota",
+                    "screen_model": "gpt-5.4",
+                    "summary_model": "gpt-5.4-mini",
+                    "requests": 2,
+                    "prompt_tokens": 1200,
+                    "completion_tokens": 300,
+                    "total_tokens": 1500,
+                    "prompt_cost": 0.01,
+                    "completion_cost": 0.02,
+                    "total_cost": 0.03,
+                },
+                "external": {
+                    "x_official": {
+                        "provider": "X API",
+                        "billing_model": "quota",
+                        "requests": 8,
+                        "items": 2,
+                        "estimated_cost": 0.0,
+                        "cache_hit": False,
+                    }
+                },
+                "summary": {"external_requests": 8, "x_requests": 8, "estimated_external_cost": 0.0},
+            },
             "source_stats": {"ainews": 1, "hf_papers": 1, "openai_news": 1},
             "featured_topics": [
                 {
@@ -120,6 +146,8 @@ class TestHotspotWebData(unittest.TestCase):
         self.assertEqual(payload["schema_version"], 1)
         self.assertEqual(payload["meta"]["counts"]["featured_topics"], 1)
         self.assertEqual(payload["meta"]["counts"]["source_items"], 3)
+        self.assertEqual(payload["usage"]["llm"]["prompt_tokens"], 1200)
+        self.assertEqual(payload["usage"]["external"]["x_official"]["requests"], 8)
         section_lookup = {section["slug"]: section for section in payload["source_sections"]}
         self.assertEqual(section_lookup["x-buzz"]["count"], 1)
         self.assertEqual(section_lookup["papers"]["count"], 1)

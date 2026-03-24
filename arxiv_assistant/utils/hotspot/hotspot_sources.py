@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+from contextlib import contextmanager
 from datetime import UTC, datetime, timedelta
 from pathlib import Path
 from typing import Any
@@ -10,12 +11,63 @@ import requests
 
 
 USER_AGENT = "ChatGPT-ArXiv-Paper-Assistant/1.0 (+https://github.com/DaizeDong/ChatGPT-ArXiv-Paper-Assistant)"
+_CURRENT_USAGE_SOURCE: str | None = None
+_CURRENT_USAGE_PROVIDER: str | None = None
+_API_USAGE: dict[str, dict[str, Any]] = {}
+
+
+@contextmanager
+def api_usage_scope(source_id: str, provider: str) -> Any:
+    global _CURRENT_USAGE_SOURCE, _CURRENT_USAGE_PROVIDER
+    previous_source = _CURRENT_USAGE_SOURCE
+    previous_provider = _CURRENT_USAGE_PROVIDER
+    _CURRENT_USAGE_SOURCE = source_id
+    _CURRENT_USAGE_PROVIDER = provider
+    try:
+        yield
+    finally:
+        _CURRENT_USAGE_SOURCE = previous_source
+        _CURRENT_USAGE_PROVIDER = previous_provider
+
+
+def reset_api_usage() -> None:
+    _API_USAGE.clear()
+
+
+def record_api_usage(*, requests: int = 1, estimated_cost: float = 0.0, source_id: str | None = None, provider: str | None = None) -> None:
+    source_key = source_id or _CURRENT_USAGE_SOURCE
+    provider_name = provider or _CURRENT_USAGE_PROVIDER or "external"
+    if not source_key:
+        return
+    row = _API_USAGE.setdefault(
+        source_key,
+        {
+            "provider": provider_name,
+            "requests": 0,
+            "estimated_cost": 0.0,
+        },
+    )
+    row["provider"] = provider_name
+    row["requests"] += int(requests)
+    row["estimated_cost"] = round(float(row.get("estimated_cost", 0.0)) + float(estimated_cost or 0.0), 6)
+
+
+def snapshot_api_usage() -> dict[str, dict[str, Any]]:
+    return {
+        source_id: {
+            "provider": str(row.get("provider", "")),
+            "requests": int(row.get("requests", 0) or 0),
+            "estimated_cost": round(float(row.get("estimated_cost", 0.0) or 0.0), 6),
+        }
+        for source_id, row in _API_USAGE.items()
+    }
 
 
 def fetch_text(url: str, timeout: int = 30) -> str:
     response = requests.get(url, headers={"User-Agent": USER_AGENT}, timeout=timeout)
     response.raise_for_status()
     response.encoding = response.encoding or "utf-8"
+    record_api_usage()
     return response.text
 
 
@@ -33,6 +85,7 @@ def fetch_json(url: str, timeout: int = 30, headers: dict[str, str] | None = Non
         timeout=timeout,
     )
     response.raise_for_status()
+    record_api_usage()
     return response.json()
 
 

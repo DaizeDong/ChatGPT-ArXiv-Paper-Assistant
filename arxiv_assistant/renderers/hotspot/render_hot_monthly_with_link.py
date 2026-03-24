@@ -185,7 +185,7 @@ def render_hot_monthly_md_with_hyperlink(
     center_asset_path: str | None = None,
     next_asset_path: str | None = None,
     related_page_path: str | None = None,
-    related_label: str = "Paper Archive",
+    related_label: str = "Personalized Daily Arxiv Paper",
 ) -> str:
     year, month_num = now_month
     parts = [

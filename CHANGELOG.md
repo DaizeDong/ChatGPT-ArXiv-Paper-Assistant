@@ -1,5 +1,10 @@
 # Changelog
 
+### 2026-03-23
+
+- Added daily hotspot usage reporting for OpenAI tokens/cost and external API request counts.
+- Tightened hotspot filtering and X authority inventory handling to improve signal quality and quota stability.
+
 ### 2026-02-23
 
 - Major updates in repository structure and pipeline features.

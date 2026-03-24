@@ -84,8 +84,13 @@ For **Personalized Daily Arxiv Paper**, the current pipeline is:
 
 The **Daily AI Hotspots** pipeline is separate:
 
-xxxxxxxx
-
+1. Fetch daily signals from local selected papers, official blogs, roundup/news sites, GitHub, Hacker News, and configured X-related sources.
+2. Normalize all fetched items into a shared hotspot schema and deduplicate obviously repeated links.
+3. Cluster related items into candidate topics and compute deterministic quality, heat, importance, evidence, and confidence signals.
+4. Apply confidence-aware routing so strong/weak topics are handled heuristically and only the ambiguous middle band is sent to the LLM.
+5. Use the LLM to review borderline candidate topics, then synthesize a compact daily summary from the final featured set.
+6. Keep only high-confidence featured topics for the top section, then expand the rest into source-first tables for broad coverage.
+7. Render daily, monthly, and yearly hotspot archives, then publish them together with Personalized Daily Arxiv Paper.
 
 ## Acknowledgement
 

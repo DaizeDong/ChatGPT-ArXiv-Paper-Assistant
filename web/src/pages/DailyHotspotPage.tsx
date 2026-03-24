@@ -2,10 +2,12 @@ import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 
 import { ArchiveNav } from "../components/ArchiveNav";
+import { CrossSiteSwitch } from "../components/CrossSiteSwitch";
 import { SignalTable } from "../components/SignalTable";
 import { TopicSummaryTable, type TopicSummaryRow } from "../components/TopicSummaryTable";
 import { loadDailyHotspot } from "../lib/data";
 import { filterSectionsBySearch } from "../lib/hotspotView";
+import { bestPaperRoute } from "../lib/routes";
 import type { DailyHotspotPayload, SourceSection } from "../types/hotspot";
 
 type AsyncState =
@@ -47,6 +49,74 @@ function buildVisibleTopicSummary(payload: DailyHotspotPayload, searchQuery: str
     });
 }
 
+type UsageRow = {
+  id: string;
+  api: string;
+  mode: string;
+  requests: number | null;
+  items: number | null;
+  prompt: number | null;
+  completion: number | null;
+  cost: number;
+};
+
+function formatCount(value: number | null) {
+  if (value === null) {
+    return "—";
+  }
+  return value.toLocaleString();
+}
+
+function formatCost(value: number) {
+  return `$${value.toFixed(6)}`;
+}
+
+function buildUsageRows(payload: DailyHotspotPayload): UsageRow[] {
+  const rows: UsageRow[] = [];
+  const llm = payload.usage?.llm;
+  if (llm) {
+    rows.push({
+      id: "openai-llm",
+      api: "OpenAI LLM",
+      mode: [llm.screen_model, llm.summary_model].filter(Boolean).join(" / ") || (llm.billing_model ?? "quota"),
+      requests: llm.requests ?? 0,
+      items: null,
+      prompt: llm.prompt_tokens ?? 0,
+      completion: llm.completion_tokens ?? 0,
+      cost: llm.total_cost ?? 0,
+    });
+  }
+
+  const externalEntries = Object.entries(payload.usage?.external ?? {})
+    .filter(([, row]) => (row.requests ?? 0) > 0 || row.billing_model === "quota" || (row.items ?? 0) > 0)
+    .sort((left, right) => {
+      const leftQuota = left[1].billing_model === "quota" ? 1 : 0;
+      const rightQuota = right[1].billing_model === "quota" ? 1 : 0;
+      if (rightQuota !== leftQuota) {
+        return rightQuota - leftQuota;
+      }
+      if ((right[1].requests ?? 0) !== (left[1].requests ?? 0)) {
+        return (right[1].requests ?? 0) - (left[1].requests ?? 0);
+      }
+      return left[0].localeCompare(right[0], undefined, { sensitivity: "base" });
+    });
+
+  for (const [sourceId, row] of externalEntries) {
+    rows.push({
+      id: sourceId,
+      api: row.provider || sourceId,
+      mode: row.billing_model || "unknown",
+      requests: row.requests ?? 0,
+      items: row.items ?? 0,
+      prompt: null,
+      completion: null,
+      cost: row.estimated_cost ?? 0,
+    });
+  }
+
+  return rows;
+}
+
 export function DailyHotspotPage({ date }: { date: string }) {
   const [state, setState] = useState<AsyncState>({ status: "loading" });
   const [searchParams] = useSearchParams();
@@ -80,6 +150,8 @@ export function DailyHotspotPage({ date }: { date: string }) {
   const searchQuery = (searchParams.get("q") ?? "").trim().toLowerCase();
   const visibleSections = filterSectionsBySearch(payload.source_sections, searchQuery);
   const visibleTopicSummary = buildVisibleTopicSummary(payload, searchQuery);
+  const paperHref = bestPaperRoute(payload.meta.paper_routes, ["day", "month", "year", "home"]);
+  const usageRows = buildUsageRows(payload);
 
   return (
     <div className="stack hotspot-stack">
@@ -111,6 +183,7 @@ export function DailyHotspotPage({ date }: { date: string }) {
               : null
           }
         />
+        <CrossSiteSwitch href={paperHref} label="Personalized Daily Arxiv Paper" />
         <div className="archive-head-meta">
           <span>{payload.meta.date}</span>
           <span>{payload.meta.counts.source_items} items</span>
@@ -118,6 +191,44 @@ export function DailyHotspotPage({ date }: { date: string }) {
           <span>{visibleSections.length} sections</span>
         </div>
       </section>
+
+      {usageRows.length ? (
+        <section className="panel compact-panel">
+          <div className="section-header table-header">
+            <h2>Daily Usage</h2>
+          </div>
+          <div className="table-wrap">
+            <table className="signal-table usage-table">
+              <thead>
+                <tr>
+                  <th className="col-title">API</th>
+                  <th className="col-signal align-left">Mode</th>
+                  <th className="col-score align-center">Requests</th>
+                  <th className="col-score align-center">Items</th>
+                  <th className="col-score align-center">Prompt</th>
+                  <th className="col-score align-center">Completion</th>
+                  <th className="col-heat align-center">Cost</th>
+                </tr>
+              </thead>
+              <tbody>
+                {usageRows.map((row) => (
+                  <tr key={row.id}>
+                    <td className="col-title">
+                      <span className="title-link">{row.api}</span>
+                    </td>
+                    <td className="col-signal">{row.mode}</td>
+                    <td className="col-score align-center">{formatCount(row.requests)}</td>
+                    <td className="col-score align-center">{formatCount(row.items)}</td>
+                    <td className="col-score align-center">{formatCount(row.prompt)}</td>
+                    <td className="col-score align-center">{formatCount(row.completion)}</td>
+                    <td className="col-heat align-center">{formatCost(row.cost)}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </section>
+      ) : null}
 
       <section className="panel compact-panel">
         <div className="section-header table-header">

@@ -6,6 +6,7 @@ from typing import List, Tuple
 import feedparser
 import requests
 
+from arxiv_assistant.utils.hotspot.hotspot_sources import record_api_usage
 from arxiv_assistant.utils.hotspot.hotspot_schema import clean_text, normalize_url
 
 DEFAULT_TIMEOUT = 20
@@ -18,6 +19,7 @@ def fetch_text(url: str, timeout: int = DEFAULT_TIMEOUT) -> str:
     response = requests.get(url, timeout=timeout, headers=DEFAULT_HEADERS)
     response.raise_for_status()
     response.encoding = response.encoding or "utf-8"
+    record_api_usage()
     return response.text
 
 

@@ -2,8 +2,10 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 import { ArchiveNav } from "../components/ArchiveNav";
+import { CrossSiteSwitch } from "../components/CrossSiteSwitch";
 import { loadMonthIndex, loadRootIndex } from "../lib/data";
 import { SOURCE_FAMILY_LABELS } from "../lib/hotspotView";
+import { bestPaperRoute } from "../lib/routes";
 import type { MonthIndexPayload, RootIndexPayload } from "../types/hotspot";
 
 type AsyncState =
@@ -46,6 +48,7 @@ export function MonthArchivePage({ month }: { month: string }) {
   const monthIndex = rootIndex.months.findIndex((entry) => entry.month === payload.month);
   const previousMonth = monthIndex > 0 ? rootIndex.months[monthIndex - 1] : null;
   const nextMonth = monthIndex >= 0 && monthIndex < rootIndex.months.length - 1 ? rootIndex.months[monthIndex + 1] : null;
+  const paperHref = bestPaperRoute(payload.paper_routes, ["month", "year", "home"]);
 
   return (
     <div className="stack hotspot-stack">
@@ -77,6 +80,7 @@ export function MonthArchivePage({ month }: { month: string }) {
               : null
           }
         />
+        <CrossSiteSwitch href={paperHref} label="Personalized Daily Arxiv Paper" />
         <div className="archive-head-meta">
           <span>{payload.month}</span>
           <span>{payload.totals.days} days</span>

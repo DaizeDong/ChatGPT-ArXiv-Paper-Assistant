@@ -81,6 +81,9 @@ export function YearArchivePage({ year }: { year: string }) {
           }
         />
         <CrossSiteSwitch href={paperHref} label="Personalized Daily Arxiv Paper" />
+        <div className="archive-titlebar">
+          <h1>Daily AI Hotspots {payload.year}</h1>
+        </div>
         <div className="archive-head-meta">
           <span>{payload.year}</span>
           <span>{payload.months.length} months</span>

@@ -64,7 +64,7 @@ class BuildMultipageSiteTests(unittest.TestCase):
             paper_month = (site_root / "archive" / "2026-03" / "index.md").read_text(encoding="utf-8")
             paper_year = (site_root / "archive" / "2026" / "index.md").read_text(encoding="utf-8")
 
-            self.assertIn('href="hot"', paper_home)
+            self.assertIn('href="hot/2026-03-20"', paper_home)
             self.assertIn("Daily AI Hotspots", paper_day)
             self.assertIn("Daily AI Hotspots", paper_home)
             self.assertIn("Daily AI Hotspots", paper_month)
@@ -85,6 +85,40 @@ class BuildMultipageSiteTests(unittest.TestCase):
             self.assertTrue((dist_root / "hot" / "index.html").exists())
             self.assertTrue((dist_root / "hot" / "2026-03-20" / "index.html").exists())
             self.assertTrue((dist_root / "hot" / "2026-03" / "index.html").exists())
+
+    def test_build_multipage_site_falls_back_to_hotspot_archive_routes_for_historical_paper_pages(self):
+        with tempfile.TemporaryDirectory() as temp_dir:
+            out_root = Path(temp_dir) / "out"
+            (out_root / "md" / "2025-03").mkdir(parents=True)
+            (out_root / "hot" / "md" / "2026-03").mkdir(parents=True)
+            (out_root / "hot" / "reports").mkdir(parents=True)
+
+            (out_root / "md" / "2025-03" / "2025-03-03-output.md").write_text(
+                "# Personalized Daily ArXiv Papers 2025-03-03\n\nHistorical paper digest.",
+                encoding="utf-8",
+            )
+            (out_root / "hot" / "md" / "2026-03" / "2026-03-23-hotspots.md").write_text(
+                "# Daily AI Hotspots 2026-03-23\n\nHotspot digest.",
+                encoding="utf-8",
+            )
+            (out_root / "hot" / "reports" / "2026-03-23.json").write_text(
+                json.dumps({"date": "2026-03-23", "summary": "One day", "top_topics": [{}], "watchlist": []}, indent=2),
+                encoding="utf-8",
+            )
+
+            site_root = build_multipage_site(out_root)
+            self.assertIsNotNone(site_root)
+
+            paper_day = (site_root / "archive" / "2025-03" / "03" / "index.md").read_text(encoding="utf-8")
+            paper_month = (site_root / "archive" / "2025-03" / "index.md").read_text(encoding="utf-8")
+            paper_year = (site_root / "archive" / "2025" / "index.md").read_text(encoding="utf-8")
+
+            self.assertIn('href="../../../hot/2026-03-23"', paper_day)
+            self.assertIn("Daily AI Hotspots", paper_day)
+            self.assertIn('href="../../hot/2026-03"', paper_month)
+            self.assertIn("Daily AI Hotspots", paper_month)
+            self.assertIn('href="../../hot/2026"', paper_year)
+            self.assertIn("Daily AI Hotspots", paper_year)
 
 
 if __name__ == "__main__":

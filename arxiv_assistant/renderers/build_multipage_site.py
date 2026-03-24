@@ -249,6 +249,38 @@ def build_multipage_site(output_root: str | Path) -> Path | None:
     hot_months_set = {month_from_date(date) for date in hot_dates}
     hot_years_set = {year_from_date(date) for date in hot_dates}
     latest_hot_date = max(hot_dates_set) if hot_dates_set else None
+    latest_hot_month = month_from_date(latest_hot_date) if latest_hot_date is not None else None
+    latest_hot_year = year_from_date(latest_hot_date) if latest_hot_date is not None else None
+
+    def best_hotspot_route_for_day(date: Tuple[int, int, int]) -> str | None:
+        if date in hot_dates_set:
+            return site_hot_day_page_path(date)
+        month = month_from_date(date)
+        if month in hot_months_set:
+            return site_hot_month_page_path(month)
+        year = year_from_date(date)
+        if year in hot_years_set:
+            return site_hot_year_page_path(year)
+        if latest_hot_date is not None:
+            return site_hot_day_page_path(latest_hot_date)
+        return None
+
+    def best_hotspot_route_for_month(month: Tuple[int, int]) -> str | None:
+        if month in hot_months_set:
+            return site_hot_month_page_path(month)
+        year = month[0]
+        if year in hot_years_set:
+            return site_hot_year_page_path(year)
+        if latest_hot_month is not None:
+            return site_hot_month_page_path(latest_hot_month)
+        return None
+
+    def best_hotspot_route_for_year(year: int) -> str | None:
+        if year in hot_years_set:
+            return site_hot_year_page_path(year)
+        if latest_hot_year is not None:
+            return site_hot_year_page_path(latest_hot_year)
+        return None
 
     for date_idx, date in enumerate(all_dates_list):
         source_path = day_sources[date]
@@ -267,7 +299,7 @@ def build_multipage_site(output_root: str | Path) -> Path | None:
             previous_asset_path=previous_asset_path,
             center_asset_path=_write_day_center_asset(site_root, date),
             next_asset_path=next_asset_path,
-            related_page_path=site_hot_day_page_path(date) if date in hot_dates_set else None,
+            related_page_path=best_hotspot_route_for_day(date),
             content_string=content,
         )
         _write_text(site_root / Path(target_rel_path), rendered)
@@ -288,7 +320,7 @@ def build_multipage_site(output_root: str | Path) -> Path | None:
         next_asset_path=(
             _write_day_nav_asset(site_root, latest_date, latest_next, "next") if latest_next is not None else None
         ),
-        related_page_path=HOT_ROOT_SITE_PAGE if latest_hot_date is not None else None,
+        related_page_path=best_hotspot_route_for_day(latest_date),
         content_string=latest_content,
     )
     _write_text(site_root / ROOT_SITE_PAGE, latest_root_page)
@@ -303,7 +335,7 @@ def build_multipage_site(output_root: str | Path) -> Path | None:
             current_page_path=site_month_page_path(month),
             all_date_file_mapping=day_page_mapping,
             summary_page_path=month_summary_page_mapping.get(month) if month in monthly_summary_data else None,
-            related_page_path=site_hot_month_page_path(month) if month in hot_months_set else None,
+            related_page_path=best_hotspot_route_for_month(month),
             previous_asset_path=(
                 _write_month_nav_asset(site_root, month, previous_month, "prev") if previous_month is not None else None
             ),
@@ -333,7 +365,7 @@ def build_multipage_site(output_root: str | Path) -> Path | None:
             current_page_path=site_year_page_path(year),
             all_month_file_mapping=month_page_mapping,
             all_month_day_counts=month_day_counts,
-            related_page_path=site_hot_year_page_path(year) if year in hot_years_set else None,
+            related_page_path=best_hotspot_route_for_year(year),
             previous_asset_path=(
                 _write_year_nav_asset(site_root, year, previous_year, "prev") if previous_year is not None else None
             ),

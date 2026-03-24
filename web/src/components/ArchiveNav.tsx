@@ -22,12 +22,12 @@ function NavEdge({ align, entry }: { align: "left" | "right"; entry?: NavEntry |
   return (
     <div className={`archive-nav-slot ${align}`}>
       <Link className={`archive-nav-link ${align}`} to={entry.href}>
-        {entry.arrow === "left" ? <span className="archive-nav-arrow">←</span> : null}
+        {entry.arrow === "left" ? <span className="archive-nav-arrow">{"\u2190"}</span> : null}
         <span className="archive-nav-copy">
           <span className="archive-nav-title">{entry.title}</span>
           <span className="archive-nav-subtitle">{entry.subtitle}</span>
         </span>
-        {entry.arrow === "right" ? <span className="archive-nav-arrow">→</span> : null}
+        {entry.arrow === "right" ? <span className="archive-nav-arrow">{"\u2192"}</span> : null}
       </Link>
     </div>
   );

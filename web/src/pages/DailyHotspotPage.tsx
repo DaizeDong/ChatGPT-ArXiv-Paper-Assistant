@@ -119,7 +119,7 @@ function buildUsageRows(payload: DailyHotspotPayload): UsageRow[] {
 
 export function DailyHotspotPage({ date }: { date: string }) {
   const [state, setState] = useState<AsyncState>({ status: "loading" });
-  const [searchParams] = useSearchParams();
+  const [searchParams, setSearchParams] = useSearchParams();
 
   useEffect(() => {
     let active = true;
@@ -184,6 +184,26 @@ export function DailyHotspotPage({ date }: { date: string }) {
           }
         />
         <CrossSiteSwitch href={paperHref} label="Personalized Daily Arxiv Paper" />
+        <div className="archive-titlebar">
+          <h1>Daily AI Hotspots {payload.meta.date}</h1>
+          <label className="nav-search archive-search">
+            <input
+              type="search"
+              value={searchParams.get("q") ?? ""}
+              onChange={(event) => {
+                const next = new URLSearchParams(searchParams);
+                const value = event.target.value.trimStart();
+                if (value) {
+                  next.set("q", value);
+                } else {
+                  next.delete("q");
+                }
+                setSearchParams(next, { replace: true });
+              }}
+              placeholder="Search"
+            />
+          </label>
+        </div>
         <div className="archive-head-meta">
           <span>{payload.meta.date}</span>
           <span>{payload.meta.counts.source_items} items</span>

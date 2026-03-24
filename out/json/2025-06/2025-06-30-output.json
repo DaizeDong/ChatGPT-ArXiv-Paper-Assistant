@@ -1,0 +1,334 @@
+{
+    "2506.21797": {
+        "SCORE": 19,
+        "ARXIVID": "2506.21797",
+        "COMMENT": "The paper develops a theoretical framework for understanding how neural networks can discover symbolic structures, which is highly relevant to representation learning and theoretical insights.",
+        "RELEVANCE": 10,
+        "NOVELTY": 9,
+        "authors": [
+            "Peihao Wang",
+            "Zhangyang Wang"
+        ],
+        "title": "Why Neural Network Can Discover Symbolic Structures with Gradient-based Training: An Algebraic and Geometric Foundation for Neurosymbolic Reasoning",
+        "abstract": "We develop a theoretical framework that explains how discrete symbolic structures can emerge naturally from continuous neural network training dynamics. By lifting neural parameters to a measure space and modeling training as Wasserstein gradient flow, we show that under geometric constraints, such as group invariance, the parameter measure $\\mu_t$ undergoes two concurrent phenomena: (1) a decoupling of the gradient flow into independent optimization trajectories over some potential functions, and (2) a progressive contraction on the degree of freedom. These potentials encode algebraic constraints relevant to the task and act as ring homomorphisms under a commutative semi-ring structure on the measure space. As training progresses, the network transitions from a high-dimensional exploration to compositional representations that comply with algebraic operations and exhibit a lower degree of freedom. We further establish data scaling laws for realizing symbolic tasks, linking representational capacity to the group invariance that facilitates symbolic solutions. This framework charts a principled foundation for understanding and designing neurosymbolic systems that integrate continuous learning with discrete algebraic reasoning.",
+        "arxiv_id": "2506.21797"
+    },
+    "2506.22304": {
+        "SCORE": 18,
+        "ARXIVID": "2506.22304",
+        "COMMENT": "The paper proposes a novel approach integrating Koopman operator theory with generative flows, offering insights into representation learning and model architecture.",
+        "RELEVANCE": 9,
+        "NOVELTY": 9,
+        "authors": [
+            "Erkan Turan",
+            "Aristotelis Siozopoulos",
+            "Maks Ovsjanikov"
+        ],
+        "title": "Unfolding Generative Flows with Koopman Operators: Fast and Interpretable Sampling",
+        "abstract": "Conditional Flow Matching (CFM) offers a simulation-free framework for training continuous-time generative models, bridging diffusion and flow-based approaches. However, sampling from CFM still relies on numerically solving non-linear ODEs which can be computationally expensive and difficult to interpret. Recent alternatives address sampling speed via trajectory straightening, mini-batch coupling or distillation. However, these methods typically do not shed light on the underlying \\textit{structure} of the generative process. In this work, we propose to accelerate CFM and introduce an interpretable representation of its dynamics by integrating Koopman operator theory, which models non-linear flows as linear evolution in a learned space of observables. We introduce a decoder-free Koopman-CFM architecture that learns an embedding where the generative dynamics become linear, enabling closed-form, one-step sampling via matrix exponentiation. This results in significant speedups over traditional CFM as demonstrated on controlled 2D datasets and real-world benchmarks, MNIST, Fashion-MNIST (F-MNIST), and the Toronto Face Dataset (TFD). Unlike previous methods, our approach leads to a well-structured Koopman generator, whose spectral properties, eigenvalues, and eigenfunctions offer principled tools for analyzing generative behavior such as temporal scaling, mode stability, and decomposition in Koopman latent space. By combining sampling efficiency with analytical structure, Koopman-enhanced flow matching offers a potential step toward fast and interpretable generative modeling.",
+        "arxiv_id": "2506.22304"
+    },
+    "2506.21545": {
+        "SCORE": 17,
+        "ARXIVID": "2506.21545",
+        "COMMENT": "The paper introduces a new paradigm, DELT, for data efficacy in language model training, which is foundational for improving training dynamics and efficiency in LLMs.",
+        "RELEVANCE": 9,
+        "NOVELTY": 8,
+        "authors": [
+            "Yalun Dai",
+            "Yangyu Huang",
+            "Xin Zhang",
+            "Wenshan Wu",
+            "Chong Li",
+            "Wenhui Lu",
+            "Shijie Cao",
+            "Li Dong",
+            "Scarlett Li"
+        ],
+        "title": "Data Efficacy for Language Model Training",
+        "abstract": "Data is fundamental to the training of language models (LM). Recent research has been dedicated to data efficiency, which aims to maximize performance by selecting a minimal or optimal subset of training data. Techniques such as data filtering, sampling, and selection play a crucial role in this area. To complement it, we define Data Efficacy, which focuses on maximizing performance by optimizing the organization of training data and remains relatively underexplored. This work introduces a general paradigm, DELT, for considering data efficacy in LM training, which highlights the significance of training data organization. DELT comprises three components: Data Scoring, Data Selection, and Data Ordering. Among these components, we design Learnability-Quality Scoring (LQS), as a new instance of Data Scoring, which considers both the learnability and quality of each data sample from the gradient consistency perspective. We also devise Folding Ordering (FO), as a novel instance of Data Ordering, which addresses issues such as model forgetting and data distribution bias. Comprehensive experiments validate the data efficacy in LM training, which demonstrates the following: Firstly, various instances of the proposed DELT enhance LM performance to varying degrees without increasing the data scale and model size. Secondly, among these instances, the combination of our proposed LQS for data scoring and Folding for data ordering achieves the most significant improvement. Lastly, data efficacy can be achieved together with data efficiency by applying data selection. Therefore, we believe that data efficacy is a promising foundational area in LM training.",
+        "arxiv_id": "2506.21545"
+    },
+    "2506.22376": {
+        "SCORE": 17,
+        "ARXIVID": "2506.22376",
+        "COMMENT": "The paper proposes a probabilistic framework for inference-time scaling in LLMs, providing a theoretical foundation for efficient scaling, which is relevant to model efficiency and LLM behavior.",
+        "RELEVANCE": 9,
+        "NOVELTY": 8,
+        "authors": [
+            "Youkang Wang",
+            "Jian Wang",
+            "Rubing Chen",
+            "Xiao-Yong Wei",
+            "Qing Li"
+        ],
+        "title": "Probabilistic Optimality for Inference-time Scaling",
+        "abstract": "Inference-time scaling has emerged as a powerful technique for enhancing the reasoning performance of Large Language Models (LLMs). However, existing approaches often rely on heuristic strategies for parallel sampling, lacking a principled foundation. To address this gap, we propose a probabilistic framework that formalizes the optimality of inference-time scaling under the assumption that parallel samples are independently and identically distributed (i.i.d.), and where the Best-of-N selection strategy follows a probability distribution that can be estimated. Within this framework, we derive a theoretical lower bound on the required number of samples to achieve a target performance level, providing the first principled guidance for compute-efficient scaling. Leveraging this insight, we develop \\textsc{OptScale}, a practical algorithm that dynamically determines the optimal number of sampled responses. \\textsc{OptScale} employs a language model-based predictor to estimate probabilistic prior parameters, enabling the decision of the minimal number of samples needed that satisfy predefined performance thresholds and confidence levels. Extensive experiments on mathematical reasoning benchmarks (including MATH-500, GSM8K, AIME, and AMC) demonstrate that \\textsc{OptScale} significantly reduces sampling overhead while remaining better or on par with state-of-the-art reasoning performance. Our work offers both a theoretical foundation and a practical solution for principled inference-time scaling, addressing a critical gap in the efficient deployment of LLMs for complex reasoning.",
+        "arxiv_id": "2506.22376"
+    },
+    "2506.22396": {
+        "SCORE": 17,
+        "ARXIVID": "2506.22396",
+        "COMMENT": "QuickSilver introduces a modular framework for LLM inference optimization, including KV Cache Skipping and Adaptive Matryoshka Quantization, which are relevant to model compression and efficiency.",
+        "RELEVANCE": 9,
+        "NOVELTY": 8,
+        "authors": [
+            "Danush Khanna",
+            "Aditya Kumar Guru",
+            "Srivarshinee Sridhar",
+            "Zidan Ahmed",
+            "Rubhav Bahirwani",
+            "Meetu Malhotra",
+            "Vinija Jain",
+            "Aman Chadha",
+            "Amitava Das",
+            "Kripabandhu Ghosh"
+        ],
+        "title": "QuickSilver -- Speeding up LLM Inference through Dynamic Token Halting, KV Skipping, Contextual Token Fusion, and Adaptive Matryoshka Quantization",
+        "abstract": "Inference accounts for the majority of latency and energy consumption in large language model (LLM) deployments, often exceeding 90% of total cost. While training-time efficiency has seen extensive progress, runtime optimization remains a key bottleneck, particularly under autoregressive decoding. Existing approaches -- such as pruning, quantization, early exits, and speculative decoding -- often require retraining, architectural changes, or disrupt decoding compatibility. We introduce QuickSilver, a modular, token-level framework that enables semantic adaptivity at inference time without altering model weights or structure. QuickSilver integrates four synergistic mechanisms:   (i) Dynamic Token Halting, which halts computation for tokens with converged representations; (ii) KV Cache Skipping, which selectively suppresses memory writes to reduce attention overhead; and (iii) Contextual Token Fusion, which collapses redundant tokens into shared paths to shrink sequence length.   Unlike speculative decoding or MoE routing, QuickSilver operates entirely on frozen, dense models and requires no auxiliary networks. Applied to GPT-2 and Llama-2 across WikiText-103 and C4, QuickSilver achieves up to 39.6% FLOP reduction with negligible perplexity degradation (<=0.2).",
+        "arxiv_id": "2506.22396"
+    },
+    "2506.21857": {
+        "SCORE": 17,
+        "ARXIVID": "2506.21857",
+        "COMMENT": "The paper introduces SPADE, a foundation model using a mixture-of-data experts technique for image representation learning, aligning with the Representation Learning and Model Architecture criteria.",
+        "RELEVANCE": 9,
+        "NOVELTY": 8,
+        "authors": [
+            "Ekaterina Redekop",
+            "Mara Pleasure",
+            "Zichen Wang",
+            "Kimberly Flores",
+            "Anthony Sisk",
+            "William Speier",
+            "Corey W. Arnold"
+        ],
+        "title": "SPADE: Spatial Transcriptomics and Pathology Alignment Using a Mixture of Data Experts for an Expressive Latent Space",
+        "abstract": "The rapid growth of digital pathology and advances in self-supervised deep learning have enabled the development of foundational models for various pathology tasks across diverse diseases. While multimodal approaches integrating diverse data sources have emerged, a critical gap remains in the comprehensive integration of whole-slide images (WSIs) with spatial transcriptomics (ST), which is crucial for capturing critical molecular heterogeneity beyond standard hematoxylin & eosin (H&E) staining. We introduce SPADE, a foundation model that integrates histopathology with ST data to guide image representation learning within a unified framework, in effect creating an ST-informed latent space. SPADE leverages a mixture-of-data experts technique, where experts, created via two-stage feature-space clustering, use contrastive learning to learn representations of co-registered WSI patches and gene expression profiles. Pre-trained on the comprehensive HEST-1k dataset, SPADE is evaluated on 14 downstream tasks, demonstrating significantly superior few-shot performance compared to baseline models, highlighting the benefits of integrating morphological and molecular information into one latent space.",
+        "arxiv_id": "2506.21857"
+    },
+    "2506.22295": {
+        "SCORE": 17,
+        "ARXIVID": "2506.22295",
+        "COMMENT": "The paper proposes a score-based model for low-rank tensor recovery, which is relevant to model compression and low-rank approaches.",
+        "RELEVANCE": 9,
+        "NOVELTY": 8,
+        "authors": [
+            "Zhengyun Cheng",
+            "Changhao Wang",
+            "Guanwen Zhang",
+            "Yi Xu",
+            "Wei Zhou",
+            "Xiangyang Ji"
+        ],
+        "title": "Score-Based Model for Low-Rank Tensor Recovery",
+        "abstract": "Low-rank tensor decompositions (TDs) provide an effective framework for multiway data analysis. Traditional TD methods rely on predefined structural assumptions, such as CP or Tucker decompositions. From a probabilistic perspective, these can be viewed as using Dirac delta distributions to model the relationships between shared factors and the low-rank tensor. However, such prior knowledge is rarely available in practical scenarios, particularly regarding the optimal rank structure and contraction rules. The optimization procedures based on fixed contraction rules are complex, and approximations made during these processes often lead to accuracy loss. To address this issue, we propose a score-based model that eliminates the need for predefined structural or distributional assumptions, enabling the learning of compatibility between tensors and shared factors. Specifically, a neural network is designed to learn the energy function, which is optimized via score matching to capture the gradient of the joint log-probability of tensor entries and shared factors. Our method allows for modeling structures and distributions beyond the Dirac delta assumption. Moreover, integrating the block coordinate descent (BCD) algorithm with the proposed smooth regularization enables the model to perform both tensor completion and denoising. Experimental results demonstrate significant performance improvements across various tensor types, including sparse and continuous-time tensors, as well as visual data.",
+        "arxiv_id": "2506.22295"
+    },
+    "2506.22255": {
+        "SCORE": 16,
+        "ARXIVID": "2506.22255",
+        "COMMENT": "The paper proposes Projected Compression, a novel model compression technique for Transformers, which aligns with the core topic of model compression.",
+        "RELEVANCE": 9,
+        "NOVELTY": 7,
+        "authors": [
+            "Maciej Stefaniak",
+            "Micha{\\l} Krutul",
+            "Jan Ma{\\l}a\\'snicki",
+            "Maciej Pi\\'oro",
+            "Jakub Krajewski",
+            "Sebastian Jaszczur",
+            "Marek Cygan",
+            "Kamil Adamczewski",
+            "Jan Ludziejewski"
+        ],
+        "title": "Projected Compression: Trainable Projection for Efficient Transformer Compression",
+        "abstract": "Large language models have steadily increased in size to achieve improved performance; however, this growth has also led to greater inference time and computational demands. Consequently, there is rising interest in model size reduction methods. To address this issue, we propose Projected Compression, a novel model compression technique, that reduces model weights by utilizing projection modules. Specifically, we first train additional trainable projections weights and preserve access to all the original model parameters. Subsequently, these projections are merged into a lower-dimensional product matrix, resulting in a reduced-size standard Transformer-based model. Unlike alternative approaches that require additional computational overhead, our method matches the base model's per-token computation step in FLOPs. Experimental results show that Projected Compression outperforms the comparable hard pruning and retraining approach on higher quality models. Moreover, the performance margin scales well with the number of tokens.",
+        "arxiv_id": "2506.22255"
+    },
+    "2506.22340": {
+        "SCORE": 16,
+        "ARXIVID": "2506.22340",
+        "COMMENT": "The paper explores Quantum Kolmogorov Arnold Networks, introducing a novel architecture in quantum machine learning, which is relevant to model architecture innovations.",
+        "RELEVANCE": 8,
+        "NOVELTY": 8,
+        "authors": [
+            "Yannick Werner",
+            "Akash Malemath",
+            "Mengxi Liu",
+            "Vitor Fortes Rey",
+            "Nikolaos Palaiodimopoulos",
+            "Paul Lukowicz",
+            "Maximilian Kiefer-Emmanouilidis"
+        ],
+        "title": "QuKAN: A Quantum Circuit Born Machine approach to Quantum Kolmogorov Arnold Networks",
+        "abstract": "Kolmogorov Arnold Networks (KANs), built upon the Kolmogorov Arnold representation theorem (KAR), have demonstrated promising capabilities in expressing complex functions with fewer neurons. This is achieved by implementing learnable parameters on the edges instead of on the nodes, unlike traditional networks such as Multi-Layer Perceptrons (MLPs). However, KANs potential in quantum machine learning has not yet been well explored. In this work, we present an implementation of these KAN architectures in both hybrid and fully quantum forms using a Quantum Circuit Born Machine (QCBM). We adapt the KAN transfer using pre-trained residual functions, thereby exploiting the representational power of parametrized quantum circuits. In the hybrid model we combine classical KAN components with quantum subroutines, while the fully quantum version the entire architecture of the residual function is translated to a quantum model. We demonstrate the feasibility, interpretability and performance of the proposed Quantum KAN (QuKAN) architecture.",
+        "arxiv_id": "2506.22340"
+    },
+    "2506.21731": {
+        "SCORE": 16,
+        "ARXIVID": "2506.21731",
+        "COMMENT": "The paper proposes new theoretical frameworks for probabilistic generative models, which could be relevant to representation learning and emerging trends in generative paradigms.",
+        "RELEVANCE": 8,
+        "NOVELTY": 8,
+        "authors": [
+            "Chenqiu Zhao",
+            "Anup Basu"
+        ],
+        "title": "Exploring Image Generation via Mutually Exclusive Probability Spaces and Local Correlation Hypothesis",
+        "abstract": "We propose two theoretical frameworks, the Mutually Exclusive Probability Space (MESP) and the Local Correlation Hypothesis (LCH), to explore a potential limitation in probabilistic generative models; namely that learning global distributions leads to memorization rather than generative behavior. MESP emerges from our rethinking of the Variational Autoencoder (VAE). We observe that latent variable distributions in VAE exhibit overlap, which leads to an optimization conflict between the reconstruction loss and KL-divergence loss. A lower bound based on the overlap coefficient is proposed. We refer to this phenomenon as Mutually Exclusive Probability Spaces. Based on MESP, a Binary Latent Autoencoder (BL-AE) is proposed to encode images into binary latent representations. These binary latents are used as the input to our Autoregressive Random Variable Model (ARVM), a modified autoregressive model outputting histograms. Our ARVM achieves competitive FID scores, outperforming state-of-the-art methods on standard datasets. However, such scores reflect memorization rather than generation. To address this issue, we propose the Local Correlation Hypothesis (LCH), which posits that generative capability arising from local correlations among latent variables. Comprehensive experiments and discussions are conducted to validate our frameworks.",
+        "arxiv_id": "2506.21731"
+    },
+    "2506.21763": {
+        "SCORE": 16,
+        "ARXIVID": "2506.21763",
+        "COMMENT": "The paper presents THE-Tree, a framework for scientific verification and reasoning, which is relevant to AI for Science with a focus on foundational research.",
+        "RELEVANCE": 8,
+        "NOVELTY": 8,
+        "authors": [
+            "Xin Wang",
+            "Jiyao Liu",
+            "Yulong Xiao",
+            "Junzhi Ning",
+            "Lihao Liu",
+            "Junjun He",
+            "Botian Shi",
+            "Kaicheng Yu"
+        ],
+        "title": "THE-Tree: Can Tracing Historical Evolution Enhance Scientific Verification and Reasoning?",
+        "abstract": "Large Language Models (LLMs) are accelerating scientific idea generation, but rigorously evaluating these numerous, often superficial, AI-generated propositions for novelty and factual accuracy is a critical bottleneck; manual verification is too slow.Existing validation methods are inadequate: LLMs as standalone verifiers may hallucinate and lack domain knowledge (our findings show ~60\\% unawareness of relevant papers in specific domains), while traditional citation networks lack explicit causality and narrative surveys are unstructured.This underscores a core challenge: the absence of structured, verifiable, and causally-linked historical data of scientific evolution.To address this,we introduce \\textbf{THE-Tree} (\\textbf{T}echnology \\textbf{H}istory \\textbf{E}volution Tree), a computational framework that constructs such domain-specific evolution trees from scientific literature.THE-Tree employs a search algorithm to explore evolutionary paths. During its node expansion, it utilizes a novel \"Think-Verbalize-Cite-Verify\" process: an LLM proposes potential advancements and cites supporting literature. Critically, each proposed evolutionary link is then validated for logical coherence and evidential support by a recovered natural language inference mechanism that interrogates the cited literature, ensuring that each step is grounded.We construct and validate 88 THE-Trees across diverse domains and release a benchmark dataset including up to 71k fact verifications covering 27k papers to foster further research.Experiments demonstrate that i) in graph completion, our THE-Tree improves hit@1 by 8\\% to 14\\% across multiple models compared to traditional citation networks; ii) for predicting future scientific developments, it improves hit@1 metric by nearly 10\\%; and iii) when combined with other methods, it boosts the performance of evaluating important scientific papers by almost 100\\%.",
+        "arxiv_id": "2506.21763"
+    },
+    "2506.21833": {
+        "SCORE": 15,
+        "ARXIVID": "2506.21833",
+        "COMMENT": "The paper provides a comprehensive analysis of forward-mode automatic differentiation and zero-order optimization, which is relevant to model training dynamics and efficiency.",
+        "RELEVANCE": 8,
+        "NOVELTY": 7,
+        "authors": [
+            "Kunjal Panchal",
+            "Sunav Choudhary",
+            "Yuriy Brun",
+            "Hui Guan"
+        ],
+        "title": "The Cost of Avoiding Backpropagation",
+        "abstract": "Forward-mode automatic differentiation (FmAD) and zero-order (ZO) optimization have been proposed as memory-efficient alternatives to backpropagation (BP) for gradient computation, especially in low-resource settings. However, their practical benefits remain unclear due to two key gaps: a lack of comparison against memory-efficient BP variants, such as activation checkpointing, and a lack of a unified theoretical analysis. This work presents a comprehensive theoretical and empirical comparison of BP, FmAD, and ZO methods. Our theoretical analysis shows that while FmAD, and ZO can reduce memory usage, they incur significant costs in accuracy, convergence speed, and computation compared to BP with checkpointing. These drawbacks worsen with larger models or constrained perturbation budgets. Empirical experiments on large language and vision-language models show that BP with checkpointing outperforms FmAD and ZO variants, including those enhanced with variance reduction, achieving up to 31.1% higher accuracy, 34.8% faster convergence, and 3.8x fewer computations at comparable memory usage. Our results highlight fundamental limitations of FmAD and ZO, and reaffirm BP with checkpointing as the most effective strategy for model training under memory-constrained settings. Our code is available at https://github.com/Astuary/The_Cost_of_Avoiding_Backpropagation.",
+        "arxiv_id": "2506.21833"
+    },
+    "2506.21573": {
+        "SCORE": 15,
+        "ARXIVID": "2506.21573",
+        "COMMENT": "The paper presents a novel framework merging white-box and black-box LLMs, which could offer insights into LLM behavior and architecture.",
+        "RELEVANCE": 8,
+        "NOVELTY": 7,
+        "authors": [
+            "Yanwei Ren",
+            "Liu Liu",
+            "Baosheng Yu",
+            "Jiayan Qiu",
+            "Quan Chen"
+        ],
+        "title": "Instruction Learning Paradigms: A Dual Perspective on White-box and Black-box LLMs",
+        "abstract": "Optimizing instructions for large language models (LLMs) is critical for harnessing their full potential in complex and diverse tasks. However, relying solely on white-box approaches demands extensive computational resources and offers limited representational capacity, while black-box models can incur prohibitive financial costs. To address these challenges, we introduce a novel framework that seamlessly merges the strengths of both paradigms. Black-box models provide high-quality, diverse instruction initializations, and white-box models supply fine-grained interpretability through hidden states and output features. By enforcing a semantic similarity constraint, these components fuse into a unified high-dimensional representation that captures deep semantic and structural nuances, enabling an iterative optimization process to refine instruction quality and adaptability. Extensive evaluations across a broad spectrum of tasks-ranging from complex reasoning to cross-lingual generalization-demonstrate that our approach consistently outperforms state-of-the-art baselines. This fusion of black-box initialization with advanced semantic refinement yields a scalable and efficient solution, paving the way for next-generation LLM-driven applications in diverse real-world scenarios. The source code will be released soon.",
+        "arxiv_id": "2506.21573"
+    },
+    "2506.21571": {
+        "SCORE": 15,
+        "ARXIVID": "2506.21571",
+        "COMMENT": "The paper evaluates cognitive habits in large reasoning models, providing insights into LLM behavior and interpretability.",
+        "RELEVANCE": 8,
+        "NOVELTY": 7,
+        "authors": [
+            "Jianshuo Dong",
+            "Yujia Fu",
+            "Chuanrui Hu",
+            "Chao Zhang",
+            "Han Qiu"
+        ],
+        "title": "Towards Understanding the Cognitive Habits of Large Reasoning Models",
+        "abstract": "Large Reasoning Models (LRMs), which autonomously produce a reasoning Chain of Thought (CoT) before producing final responses, offer a promising approach to interpreting and monitoring model behaviors. Inspired by the observation that certain CoT patterns -- e.g., ``Wait, did I miss anything?'' -- consistently emerge across tasks, we explore whether LRMs exhibit human-like cognitive habits. Building on Habits of Mind, a well-established framework of cognitive habits associated with successful human problem-solving, we introduce CogTest, a principled benchmark designed to evaluate LRMs' cognitive habits. CogTest includes 16 cognitive habits, each instantiated with 25 diverse tasks, and employs an evidence-first extraction method to ensure reliable habit identification. With CogTest, we conduct a comprehensive evaluation of 16 widely used LLMs (13 LRMs and 3 non-reasoning ones). Our findings reveal that LRMs, unlike conventional LLMs, not only exhibit human-like habits but also adaptively deploy them according to different tasks. Finer-grained analyses further uncover patterns of similarity and difference in LRMs' cognitive habit profiles, particularly certain inter-family similarity (e.g., Qwen-3 models and DeepSeek-R1). Extending the study to safety-related tasks, we observe that certain habits, such as Taking Responsible Risks, are strongly associated with the generation of harmful responses. These findings suggest that studying persistent behavioral patterns in LRMs' CoTs is a valuable step toward deeper understanding of LLM misbehavior. The code is available at: https://github.com/jianshuod/CogTest.",
+        "arxiv_id": "2506.21571"
+    },
+    "2506.21849": {
+        "SCORE": 15,
+        "ARXIVID": "2506.21849",
+        "COMMENT": "The paper examines the consistency hypothesis in uncertainty quantification for LLMs, which is relevant to theoretical insights into LLM behavior.",
+        "RELEVANCE": 8,
+        "NOVELTY": 7,
+        "authors": [
+            "Quan Xiao",
+            "Debarun Bhattacharjya",
+            "Balaji Ganesan",
+            "Radu Marinescu",
+            "Katsiaryna Mirylenka",
+            "Nhan H Pham",
+            "Michael Glass",
+            "Junkyu Lee"
+        ],
+        "title": "The Consistency Hypothesis in Uncertainty Quantification for Large Language Models",
+        "abstract": "Estimating the confidence of large language model (LLM) outputs is essential for real-world applications requiring high user trust. Black-box uncertainty quantification (UQ) methods, relying solely on model API access, have gained popularity due to their practical benefits. In this paper, we examine the implicit assumption behind several UQ methods, which use generation consistency as a proxy for confidence, an idea we formalize as the consistency hypothesis. We introduce three mathematical statements with corresponding statistical tests to capture variations of this hypothesis and metrics to evaluate LLM output conformity across tasks. Our empirical investigation, spanning 8 benchmark datasets and 3 tasks (question answering, text summarization, and text-to-SQL), highlights the prevalence of the hypothesis under different settings. Among the statements, we highlight the `Sim-Any' hypothesis as the most actionable, and demonstrate how it can be leveraged by proposing data-free black-box UQ methods that aggregate similarities between generations for confidence estimation. These approaches can outperform the closest baselines, showcasing the practical value of the empirically observed consistency hypothesis.",
+        "arxiv_id": "2506.21849"
+    },
+    "2506.22049": {
+        "SCORE": 15,
+        "ARXIVID": "2506.22049",
+        "COMMENT": "The paper proposes GPAS, a technique to improve training dynamics in LLMs, aligning with the Large Language Models criteria.",
+        "RELEVANCE": 8,
+        "NOVELTY": 7,
+        "authors": [
+            "Tianhao Chen",
+            "Xin Xu",
+            "Zijing Liu",
+            "Pengxiang Li",
+            "Xinyuan Song",
+            "Ajay Kumar Jaiswal",
+            "Fan Zhang",
+            "Jishan Hu",
+            "Yang Wang",
+            "Hao Chen",
+            "Shizhe Diao",
+            "Shiwei Liu",
+            "Yu Li",
+            "Yin Lu",
+            "Can Yang"
+        ],
+        "title": "GPAS: Accelerating Convergence of LLM Pretraining via Gradient-Preserving Activation Scaling",
+        "abstract": "Modern Large Language Models, such as the LLaMA, Qwen and DeepSeek series, predominantly adopt the Pre-LayerNorm (Pre-LN) Transformer architecture. While being stable during pretraining and scalable to large model sizes, Pre-LN suffers from an exponential growth in activation variance across layers, causing the residual path to dominate over sub-layer outputs and limiting the learning capacity of deeper layers. To mitigate this issue, we propose Gradient-Preserving Activation Scaling (GPAS), a simple technique that can be used in combination with existing approaches. GPAS works by scaling down the intermediate activations while keeping their gradients unchanged. This leaves information in the activations intact, and avoids the gradient vanishing problem associated with gradient downscaling. Extensive experiments across various model sizes from 71M to 1B show that GPAS achieves consistent performance gains. Beyond enhancing Pre-LN Transformers, GPAS also shows promise in improving alternative architectures such as Sandwich-LN and DeepNorm, demonstrating its versatility and potential for improving training dynamics in a wide range of settings.",
+        "arxiv_id": "2506.22049"
+    },
+    "2506.21862": {
+        "SCORE": 15,
+        "ARXIVID": "2506.21862",
+        "COMMENT": "The paper introduces LLaVA-Scissor, a token compression strategy for video LLMs, aligning with the Model Compression criteria.",
+        "RELEVANCE": 8,
+        "NOVELTY": 7,
+        "authors": [
+            "Boyuan Sun",
+            "Jiaxing Zhao",
+            "Xihan Wei",
+            "Qibin Hou"
+        ],
+        "title": "LLaVA-Scissor: Token Compression with Semantic Connected Components for Video LLMs",
+        "abstract": "In this paper, we present LLaVA-Scissor, a training-free token compression strategy designed for video multimodal large language models. Previous methods mostly attempt to compress tokens based on attention scores, but fail to effectively capture all semantic regions and often lead to token redundancy. Differently, we propose to leverage the Semantic Connected Components (SCC) approach that assigns tokens to distinct semantic regions within the token set, ensuring comprehensive semantic coverage. The outcome is a two-step spatio-temporal token compression strategy that utilizes SCC in both spatial and temporal domains. This strategy can effectively compress tokens by representing the entire video with a set of non-overlapping semantic tokens. We conduct extensive evaluations of the token compression capabilities of LLaVA-Scissor across diverse video understanding benchmarks, including video question answering, long video understanding, and comprehensive multi-choices benchmarks. Experimental results show that the proposed LLaVA-Scissor outperforms other token compression methods, achieving superior performance in various video understanding benchmarks, particularly at low token retention ratios. Project page: https://github.com/HumanMLLM/LLaVA-Scissor.",
+        "arxiv_id": "2506.21862"
+    },
+    "2506.21590": {
+        "SCORE": 15,
+        "ARXIVID": "2506.21590",
+        "COMMENT": "The paper introduces a method for test-time scaling in LLMs using representation consistency, relevant to LLM behavior and interpretability.",
+        "RELEVANCE": 8,
+        "NOVELTY": 7,
+        "authors": [
+            "Junqi Jiang",
+            "Tom Bewley",
+            "Salim I. Amoukou",
+            "Francesco Leofante",
+            "Antonio Rago",
+            "Saumitra Mishra",
+            "Francesca Toni"
+        ],
+        "title": "Representation Consistency for Accurate and Coherent LLM Answer Aggregation",
+        "abstract": "Test-time scaling improves large language models' (LLMs) performance by allocating more compute budget during inference. To achieve this, existing methods often require intricate modifications to prompting and sampling strategies. In this work, we introduce representation consistency (RC), a test-time scaling method for aggregating answers drawn from multiple candidate responses of an LLM regardless of how they were generated, including variations in prompt phrasing and sampling strategy. RC enhances answer aggregation by not only considering the number of occurrences of each answer in the candidate response set, but also the consistency of the model's internal activations while generating the set of responses leading to each answer. These activations can be either dense (raw model activations) or sparse (encoded via pretrained sparse autoencoders). Our rationale is that if the model's representations of multiple responses converging on the same answer are highly variable, this answer is more likely to be the result of incoherent reasoning and should be down-weighted during aggregation. Importantly, our method only uses cached activations and lightweight similarity computations and requires no additional model queries. Through experiments with four open-source LLMs and four reasoning datasets, we validate the effectiveness of RC for improving task performance during inference, with consistent accuracy improvements (up to 4%) over strong test-time scaling baselines. We also show that consistency in the sparse activation signals aligns well with the common notion of coherent reasoning.",
+        "arxiv_id": "2506.21590"
+    }
+}

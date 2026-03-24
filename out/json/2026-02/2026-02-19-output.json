@@ -1,0 +1,382 @@
+{
+    "2602.16284": {
+        "SCORE": 19,
+        "ARXIVID": "2602.16284",
+        "COMMENT": "Matches Compression/Efficiency: fast KV-cache compaction via attention matching with per-head preservation and closed-form subproblems enabling strong quality-time tradeoffs.",
+        "RELEVANCE": 10,
+        "NOVELTY": 9,
+        "authors": [
+            "Adam Zweiger",
+            "Xinghong Fu",
+            "Han Guo",
+            "Yoon Kim"
+        ],
+        "title": "Fast KV Compaction via Attention Matching",
+        "abstract": "Scaling language models to long contexts is often bottlenecked by the size of the key-value (KV) cache. In deployed settings, long contexts are typically managed through compaction in token space via summarization. However, summarization can be highly lossy, substantially harming downstream performance. Recent work on Cartridges has shown that it is possible to train highly compact KV caches in latent space that closely match full-context performance, but at the cost of slow and expensive end-to-end optimization. This work describes an approach for fast context compaction in latent space through Attention Matching, which constructs compact keys and values to reproduce attention outputs and preserve attention mass at a per-KV-head level. We show that this formulation naturally decomposes into simple subproblems, some of which admit efficient closed-form solutions. Within this framework, we develop a family of methods that significantly push the Pareto frontier of compaction time versus quality, achieving up to 50x compaction in seconds on some datasets with little quality loss.",
+        "arxiv_id": "2602.16284"
+    },
+    "2602.16456": {
+        "SCORE": 18,
+        "ARXIVID": "2602.16456",
+        "COMMENT": "Compression/Efficiency: advances LoRA optimization via proximal subspace iteration (LoRSum) and memory-efficient preconditioning (diagonal K-FAC/Shampoo) without full SVD.",
+        "RELEVANCE": 10,
+        "NOVELTY": 8,
+        "authors": [
+            "Abdulla Jasem Almansoori",
+            "Maria Ivanova",
+            "Andrey Veprikov",
+            "Aleksandr Beznosikov",
+            "Samuel Horv\\'ath",
+            "Martin Tak\\'a\\v{c}"
+        ],
+        "title": "Beyond SGD, Without SVD: Proximal Subspace Iteration LoRA with Diagonal Fractional K-FAC",
+        "abstract": "Low-Rank Adaptation (LoRA) fine-tunes large models by learning low-rank updates on top of frozen weights, dramatically reducing trainable parameters and memory. In this work, we address the gap between training with full steps with low-rank projections (SVDLoRA) and LoRA fine-tuning. We propose LoRSum, a memory-efficient subroutine that closes this gap for gradient descent by casting LoRA optimization as a proximal sub-problem and solving it efficiently with alternating least squares updates, which we prove to be an implicit block power method. We recover several recently proposed preconditioning methods for LoRA as special cases, and show that LoRSum can also be used for updating a low-rank momentum. In order to address full steps with preconditioned gradient descent, we propose a scaled variant of LoRSum that uses structured metrics such as K-FAC and Shampoo, and we show that storing the diagonal of these metrics still allows them to perform well while remaining memory-efficient. Experiments on a synthetic task, CIFAR-100, and language-model fine-tuning on GLUE, SQuAD v2, and WikiText-103, show that our method can match or improve LoRA baselines given modest compute overhead, while avoiding full-matrix SVD projections and retaining LoRA-style parameter efficiency.",
+        "arxiv_id": "2602.16456"
+    },
+    "2602.16052": {
+        "SCORE": 18,
+        "ARXIVID": "2602.16052",
+        "COMMENT": "Mixture-of-Experts + Efficiency: verification-time expert budgeting for MoE speculative decoding to cap expert capacity and improve throughput without retraining.",
+        "RELEVANCE": 10,
+        "NOVELTY": 8,
+        "authors": [
+            "Bradley McDanel",
+            "Steven Li",
+            "Sruthikesh Surineni",
+            "Harshit Khaitan"
+        ],
+        "title": "MoE-Spec: Expert Budgeting for Efficient Speculative Decoding",
+        "abstract": "Speculative decoding accelerates Large Language Model (LLM) inference by verifying multiple drafted tokens in parallel. However, for Mixture-of-Experts (MoE) models, this parallelism introduces a severe bottleneck: large draft trees activate many unique experts, significantly increasing memory pressure and diminishing speedups from speculative decoding relative to autoregressive decoding. Prior methods reduce speculation depth when MoE verification becomes expensive. We propose MoE-Spec, a training-free verification-time expert budgeting method that decouples speculation depth from memory cost by enforcing a fixed expert capacity limit at each layer, loading only the experts that contribute most to verification and dropping the long tail of rarely used experts that drive bandwidth overhead. Experiments across multiple model scales and datasets show that this method yields 10--30\\% higher throughput than state-of-the-art speculative decoding baselines (EAGLE-3) at comparable quality, with flexibility to trade accuracy for further latency reductions through tighter budgets.",
+        "arxiv_id": "2602.16052"
+    },
+    "2602.16490": {
+        "SCORE": 17,
+        "ARXIVID": "2602.16490",
+        "COMMENT": "Model Architecture: unifies and analyzes looping and depth growth to induce iterative computation in LLMs; shows composability and inference-time looping benefits.",
+        "RELEVANCE": 9,
+        "NOVELTY": 8,
+        "authors": [
+            "Ferdinand Kapl",
+            "Emmanouil Angelis",
+            "Kaitlin Maile",
+            "Johannes von Oswald",
+            "Stefan Bauer"
+        ],
+        "title": "From Growing to Looping: A Unified View of Iterative Computation in LLMs",
+        "abstract": "Looping, reusing a block of layers across depth, and depth growing, training shallow-to-deep models by duplicating middle layers, have both been linked to stronger reasoning, but their relationship remains unclear. We provide a mechanistic unification: looped and depth-grown models exhibit convergent depth-wise signatures, including increased reliance on late layers and recurring patterns aligned with the looped or grown block. These shared signatures support the view that their gains stem from a common form of iterative computation. Building on this connection, we show that the two techniques are adaptable and composable: applying inference-time looping to the middle blocks of a depth-grown model improves accuracy on some reasoning primitives by up to $2\\times$, despite the model never being trained to loop. Both approaches also adapt better than the baseline when given more in-context examples or additional supervised fine-tuning data. Additionally, depth-grown models achieve the largest reasoning gains when using higher-quality, math-heavy cooldown mixtures, which can be further boosted by adapting a middle block to loop. Overall, our results position depth growth and looping as complementary, practical methods for inducing and scaling iterative computation to improve reasoning.",
+        "arxiv_id": "2602.16490"
+    },
+    "2602.16080": {
+        "SCORE": 17,
+        "ARXIVID": "2602.16080",
+        "COMMENT": "Representation Learning/Architecture Control: uses generative causal mediation to localize and steer sparse attention heads for long-form behaviors via targeted activation interventions.",
+        "RELEVANCE": 9,
+        "NOVELTY": 8,
+        "authors": [
+            "Aruna Sankaranarayanan",
+            "Amir Zur",
+            "Atticus Geiger",
+            "Dylan Hadfield-Menell"
+        ],
+        "title": "Surgical Activation Steering via Generative Causal Mediation",
+        "abstract": "Where should we intervene in a language model (LM) to control behaviors that are diffused across many tokens of a long-form response? We introduce Generative Causal Mediation (GCM), a procedure for selecting model components, e.g., attention heads, to steer a binary concept (e.g., talk in verse vs. talk in prose) from contrastive long-form responses. In GCM, we first construct a dataset of contrasting inputs and responses. Then, we quantify how individual model components mediate the contrastive concept and select the strongest mediators for steering. We evaluate GCM on three tasks--refusal, sycophancy, and style transfer--across three language models. GCM successfully localizes concepts expressed in long-form responses and consistently outperforms correlational probe-based baselines when steering with a sparse set of attention heads. Together, these results demonstrate that GCM provides an effective approach for localizing and controlling the long-form responses of LMs.",
+        "arxiv_id": "2602.16080"
+    },
+    "2602.16473": {
+        "SCORE": 17,
+        "ARXIVID": "2602.16473",
+        "COMMENT": "Matches Model Architecture/Analysis: formal verification and synthesis of Transformer programs (C-RASP) via SMT-backed model checking and learning.",
+        "RELEVANCE": 9,
+        "NOVELTY": 8,
+        "authors": [
+            "Hongjian Jiang",
+            "Matthew Hague",
+            "Philipp R\\\"ummer",
+            "Anthony Widjaja Lin"
+        ],
+        "title": "Synthesis and Verification of Transformer Programs",
+        "abstract": "C-RASP is a simple programming language that was recently shown to capture concepts expressible by transformers. In this paper, we develop new algorithmic techniques for automatically verifying C-RASPs. To this end, we establish a connection to the verification of synchronous dataflow programs in Lustre, which enables us to exploit state-of-the-art model checkers utilizing highly optimized SMT-solvers. Our second contribution addresses learning a C-RASP program in the first place. To this end, we provide a new algorithm for learning a C-RASP from examples using local search. We demonstrate efficacy of our implementation for benchmarks of C-RASPs in the literature, in particular in connection to the following applications: (1) transformer program optimization, and (2) constrained learning of transformer programs (based on a partial specification).",
+        "arxiv_id": "2602.16473"
+    },
+    "2602.16642": {
+        "SCORE": 17,
+        "ARXIVID": "2602.16642",
+        "COMMENT": "Representation Learning/Training Dynamics: provides theoretical and empirical analysis of optimizer-dependent Neural Collapse and the role of weight-decay coupling and momentum.",
+        "RELEVANCE": 9,
+        "NOVELTY": 8,
+        "authors": [
+            "Jim Zhao",
+            "Tin Sum Cheng",
+            "Wojciech Masarczyk",
+            "Aurelien Lucchi"
+        ],
+        "title": "Optimizer choice matters for the emergence of Neural Collapse",
+        "abstract": "Neural Collapse (NC) refers to the emergence of highly symmetric geometric structures in the representations of deep neural networks during the terminal phase of training. Despite its prevalence, the theoretical understanding of NC remains limited. Existing analyses largely ignore the role of the optimizer, thereby suggesting that NC is universal across optimization methods. In this work, we challenge this assumption and demonstrate that the choice of optimizer plays a critical role in the emergence of NC. The phenomenon is typically quantified through NC metrics, which, however, are difficult to track and analyze theoretically. To overcome this limitation, we introduce a novel diagnostic metric, NC0, whose convergence to zero is a necessary condition for NC. Using NC0, we provide theoretical evidence that NC cannot emerge under decoupled weight decay in adaptive optimizers, as implemented in AdamW. Concretely, we prove that SGD, SignGD with coupled weight decay (a special case of Adam), and SignGD with decoupled weight decay (a special case of AdamW) exhibit qualitatively different NC0 dynamics. Also, we show the accelerating effect of momentum on NC (beyond convergence of train loss) when trained with SGD, being the first result concerning momentum in the context of NC. Finally, we conduct extensive empirical experiments consisting of 3,900 training runs across various datasets, architectures, optimizers, and hyperparameters, confirming our theoretical results. This work provides the first theoretical explanation for optimizer-dependent emergence of NC and highlights the overlooked role of weight-decay coupling in shaping the implicit biases of optimizers.",
+        "arxiv_id": "2602.16642"
+    },
+    "2602.16603": {
+        "SCORE": 17,
+        "ARXIVID": "2602.16603",
+        "COMMENT": "Matches High Performance Computing: operator-level preemption and event-driven scheduling for LLM serving to mitigate HoL blocking and optimize TTFT-goodput.",
+        "RELEVANCE": 9,
+        "NOVELTY": 8,
+        "authors": [
+            "Chia-chi Hsieh",
+            "Zan Zong",
+            "Xinyang Chen",
+            "Jianjiang Li",
+            "Jidong Zhai",
+            "Lijie Wen"
+        ],
+        "title": "FlowPrefill: Decoupling Preemption from Prefill Scheduling Granularity to Mitigate Head-of-Line Blocking in LLM Serving",
+        "abstract": "The growing demand for large language models (LLMs) requires serving systems to handle many concurrent requests with diverse service level objectives (SLOs). This exacerbates head-of-line (HoL) blocking during the compute-intensive prefill phase, where long-running requests monopolize resources and delay higher-priority ones, leading to widespread time-to-first-token (TTFT) SLO violations. While chunked prefill enables interruptibility, it introduces an inherent trade-off between responsiveness and throughput: reducing chunk size improves response latency but degrades computational efficiency, whereas increasing chunk size maximizes throughput but exacerbates blocking. This necessitates an adaptive preemption mechanism. However, dynamically balancing execution granularity against scheduling overheads remains a key challenge.   In this paper, we propose FlowPrefill, a TTFT-goodput-optimized serving system that resolves this conflict by decoupling preemption granularity from scheduling frequency. To achieve adaptive prefill scheduling, FlowPrefill introduces two key innovations: 1) Operator-Level Preemption, which leverages operator boundaries to enable fine-grained execution interruption without the efficiency loss associated with fixed small chunking; and 2) Event-Driven Scheduling, which triggers scheduling decisions only upon request arrival or completion events, thereby supporting efficient preemption responsiveness while minimizing control-plane overhead. Evaluation on real-world production traces shows that FlowPrefill improves maximum goodput by up to 5.6$\\times$ compared to state-of-the-art systems while satisfying heterogeneous SLOs.",
+        "arxiv_id": "2602.16603"
+    },
+    "2602.15997": {
+        "SCORE": 16,
+        "ARXIVID": "2602.15997",
+        "COMMENT": "Representation Learning/Training Dynamics: geometric analysis of capability emergence, scale-invariant representation collapse, and top-down layer reorganization across model scales.",
+        "RELEVANCE": 9,
+        "NOVELTY": 7,
+        "authors": [
+            "Jayadev Billa"
+        ],
+        "title": "Anatomy of Capability Emergence: Scale-Invariant Representation Collapse and Top-Down Reorganization in Neural Networks",
+        "abstract": "Capability emergence during neural network training remains mechanistically opaque. We track five geometric measures across five model scales (405K-85M parameters), 120+ emergence events in eight algorithmic tasks, and three Pythia language models (160M-2.8B). We find: (1) training begins with a universal representation collapse to task-specific floors that are scale-invariant across a 210X parameter range (e.g., modular arithmetic collapses to RANKME ~ 2.0 regardless of model size); (2) collapse propagates top-down through layers (32/32 task X model consistency), contradicting bottom-up feature-building intuition; (3) a geometric hierarchy in which representation geometry leads emergence (75-100% precursor rate for hard tasks), while the local learning coefficient is synchronous (0/24 precursor) and Hessian measures lag. We also delineate prediction limits: geometric measures encode coarse task difficulty but not fine-grained timing (within-class concordance 27%; when task ordering reverses across scales, prediction fails at 26%). On Pythia, global geometric patterns replicate but per-task precursor signals do not -- the precursor relationship requires task-training alignment that naturalistic pre-training does not provide. Our contribution is the geometric anatomy of emergence and its boundary conditions, not a prediction tool.",
+        "arxiv_id": "2602.15997"
+    },
+    "2602.16189": {
+        "SCORE": 16,
+        "ARXIVID": "2602.16189",
+        "COMMENT": "Matches Model Architecture and Efficiency: training-free module transplantation via activation-selected internal modules for immediate capability transfer.",
+        "RELEVANCE": 8,
+        "NOVELTY": 8,
+        "authors": [
+            "Namkyung Yoon",
+            "Kyeonghyun Yoo",
+            "Wooyong Jung",
+            "Sanghong Kim",
+            "Hwangnam Kim"
+        ],
+        "title": "Beyond Learning: A Training-Free Alternative to Model Adaptation",
+        "abstract": "Despite the continuous research and evolution of language models, they sometimes underperform previous versions. Existing approaches to overcome these challenges are resource-intensive, highlighting the need for alternatives that enable immediate action. We assume that each language model has a local module inside that is suitable for a specific function. First, this work identifies a set of modules showing consistent and local activation changes under an inference workload through activation-based analysis. Subsequently, we transplant an internal module that is properly activated for a specific task into the target model, leading to immediate and measurable functional changes without additional training or fine-tuning. To experimentally demonstrate the effectiveness of the transplant technique, we quantify the relationship between transplant strength and performance improvement under different conditions for two language models. In the cross-generation setting, we find that transplanting activation-selected modules can substantially improve the underperforming model, reaching up to twice the target baseline and achieving gap-based recovery above 100%. Moreover, in transplant experiments between a base model and its instruction-tuned counterpart, transplantation improves the underperforming model toward the stronger baseline, yielding up to about 2.33 times the target baseline with gap-based recovery reaching up to 100% in the best case. These results show that meaningful capacity transfer can be realized through the implantation of highly localized modules implied by language models. Overall, this work provides empirical evidence for task-localized modularity in language models and presents a new research area: model transplantation.",
+        "arxiv_id": "2602.16189"
+    },
+    "2602.16673": {
+        "SCORE": 15,
+        "ARXIVID": "2602.16673",
+        "COMMENT": "HPC/Efficiency for ANN: introduces neighborhood stability measures (clustering-NSM, point-NSM) to predict searchability and ANNS accuracy from nearest-neighbor structure.",
+        "RELEVANCE": 8,
+        "NOVELTY": 7,
+        "authors": [
+            "Thomas Vecchiato",
+            "Sebastian Bruch"
+        ],
+        "title": "Neighborhood Stability as a Measure of Nearest Neighbor Searchability",
+        "abstract": "Clustering-based Approximate Nearest Neighbor Search (ANNS) organizes a set of points into partitions, and searches only a few of them to find the nearest neighbors of a query. Despite its popularity, there are virtually no analytical tools to determine the suitability of clustering-based ANNS for a given dataset -- what we call \"searchability.\" To address that gap, we present two measures for flat clusterings of high-dimensional points in Euclidean space. First is Clustering-Neighborhood Stability Measure (clustering-NSM), an internal measure of clustering quality -- a function of a clustering of a dataset -- that we show to be predictive of ANNS accuracy. The second, Point-Neighborhood Stability Measure (point-NSM), is a measure of clusterability -- a function of the dataset itself -- that is predictive of clustering-NSM. The two together allow us to determine whether a dataset is searchable by clustering-based ANNS given only the data points. Importantly, both are functions of nearest neighbor relationships between points, not distances, making them applicable to various distance functions including inner product.",
+        "arxiv_id": "2602.16673"
+    },
+    "2602.16125": {
+        "SCORE": 15,
+        "ARXIVID": "2602.16125",
+        "COMMENT": "Representation Learning: theory and algorithms for source screening to learn a shared low-dimensional subspace, achieving minimax-optimal subspace estimation from selected sources.",
+        "RELEVANCE": 8,
+        "NOVELTY": 7,
+        "authors": [
+            "Leo (Muxing)",
+            "Wang",
+            "Connor Mclaughlin",
+            "Lili Su"
+        ],
+        "title": "On the Power of Source Screening for Learning Shared Feature Extractors",
+        "abstract": "Learning with shared representation is widely recognized as an effective way to separate commonalities from heterogeneity across various heterogeneous sources. Most existing work includes all related data sources via simultaneously training a common feature extractor and source-specific heads. It is well understood that data sources with low relevance or poor quality may hinder representation learning. In this paper, we further dive into the question of which data sources should be learned jointly by focusing on the traditionally deemed ``good'' collection of sources, in which individual sources have similar relevance and qualities with respect to the true underlying common structure. Towards tractability, we focus on the linear setting where sources share a low-dimensional subspace. We find that source screening can play a central role in statistically optimal subspace estimation. We show that, for a broad class of problem instances, training on a carefully selected subset of sources suffices to achieve minimax optimality, even when a substantial portion of data is discarded. We formalize the notion of an informative subpopulation, develop algorithms and practical heuristics for identifying such subsets, and validate their effectiveness through both theoretical analysis and empirical evaluations on synthetic and real-world datasets.",
+        "arxiv_id": "2602.16125"
+    },
+    "2602.16689": {
+        "SCORE": 15,
+        "ARXIVID": "2602.16689",
+        "COMMENT": "Representation Learning: rigorous evaluation of object-centric versus dense vision encoders for compositional generalization under controlled data/compute regimes.",
+        "RELEVANCE": 8,
+        "NOVELTY": 7,
+        "authors": [
+            "Ferdinand Kapl",
+            "Amir Mohammad Karimi Mamaghan",
+            "Maximilian Seitzer",
+            "Karl Henrik Johansson",
+            "Carsten Marr",
+            "Stefan Bauer",
+            "Andrea Dittadi"
+        ],
+        "title": "Are Object-Centric Representations Better At Compositional Generalization?",
+        "abstract": "Compositional generalization, the ability to reason about novel combinations of familiar concepts, is fundamental to human cognition and a critical challenge for machine learning. Object-centric (OC) representations, which encode a scene as a set of objects, are often argued to support such generalization, but systematic evidence in visually rich settings is limited. We introduce a Visual Question Answering benchmark across three controlled visual worlds (CLEVRTex, Super-CLEVR, and MOVi-C) to measure how well vision encoders, with and without object-centric biases, generalize to unseen combinations of object properties. To ensure a fair and comprehensive comparison, we carefully account for training data diversity, sample size, representation size, downstream model capacity, and compute. We use DINOv2 and SigLIP2, two widely used vision encoders, as the foundation models and their OC counterparts. Our key findings reveal that (1) OC approaches are superior in harder compositional generalization settings; (2) original dense representations surpass OC only on easier settings and typically require substantially more downstream compute; and (3) OC models are more sample efficient, achieving stronger generalization with fewer images, whereas dense encoders catch up or surpass them only with sufficient data and diversity. Overall, object-centric representations offer stronger compositional generalization when any one of dataset size, training data diversity, or downstream compute is constrained.",
+        "arxiv_id": "2602.16689"
+    },
+    "2602.16337": {
+        "SCORE": 15,
+        "ARXIVID": "2602.16337",
+        "COMMENT": "Model Architecture: introduces a parameter-efficient INR (SMN) with learnable periodic activations and modulatory filters inspired by subtractive synthesis.",
+        "RELEVANCE": 8,
+        "NOVELTY": 7,
+        "authors": [
+            "Tiou Wang",
+            "Zhuoqian Yang",
+            "Markus Flierl",
+            "Mathieu Salzmann",
+            "Sabine S\\\"usstrunk"
+        ],
+        "title": "Subtractive Modulative Network with Learnable Periodic Activations",
+        "abstract": "We propose the Subtractive Modulative Network (SMN), a novel, parameter-efficient Implicit Neural Representation (INR) architecture inspired by classical subtractive synthesis. The SMN is designed as a principled signal processing pipeline, featuring a learnable periodic activation layer (Oscillator) that generates a multi-frequency basis, and a series of modulative mask modules (Filters) that actively generate high-order harmonics. We provide both theoretical analysis and empirical validation for our design. Our SMN achieves a PSNR of $40+$ dB on two image datasets, comparing favorably against state-of-the-art methods in terms of both reconstruction accuracy and parameter efficiency. Furthermore, consistent advantage is observed on the challenging 3D NeRF novel view synthesis task. Supplementary materials are available at https://inrainbws.github.io/smn/.",
+        "arxiv_id": "2602.16337"
+    },
+    "2602.15847": {
+        "SCORE": 15,
+        "ARXIVID": "2602.15847",
+        "COMMENT": "Matches Representation Learning: geometric analysis of latent subspaces for personality steering and effects of orthonormalization.",
+        "RELEVANCE": 8,
+        "NOVELTY": 7,
+        "authors": [
+            "Pranav Bhandari",
+            "Usman Naseem",
+            "Mehwish Nasim"
+        ],
+        "title": "Do Personality Traits Interfere? Geometric Limitations of Steering in Large Language Models",
+        "abstract": "Personality steering in large language models (LLMs) commonly relies on injecting trait-specific steering vectors, implicitly assuming that personality traits can be controlled independently. In this work, we examine whether this assumption holds by analysing the geometric relationships between Big Five personality steering directions. We study steering vectors extracted from two model families (LLaMA-3-8B and Mistral-8B) and apply a range of geometric conditioning schemes, from unconstrained directions to soft and hard orthonormalisation. Our results show that personality steering directions exhibit substantial geometric dependence: steering one trait consistently induces changes in others, even when linear overlap is explicitly removed. While hard orthonormalisation enforces geometric independence, it does not eliminate cross-trait behavioural effects and can reduce steering strength. These findings suggest that personality traits in LLMs occupy a slightly coupled subspace, limiting fully independent trait control.",
+        "arxiv_id": "2602.15847"
+    },
+    "2602.15856": {
+        "SCORE": 15,
+        "ARXIVID": "2602.15856",
+        "COMMENT": "Matches Compression/Efficiency: query-conditioned selector-based soft context compression for RAG that reduces computation while preserving performance.",
+        "RELEVANCE": 8,
+        "NOVELTY": 7,
+        "authors": [
+            "Yunhao Liu",
+            "Zian Jia",
+            "Xinyu Gao",
+            "Kanjun Xu",
+            "Yun Xiong"
+        ],
+        "title": "Rethinking Soft Compression in Retrieval-Augmented Generation: A Query-Conditioned Selector Perspective",
+        "abstract": "Retrieval-Augmented Generation (RAG) effectively grounds Large Language Models (LLMs) with external knowledge and is widely applied to Web-related tasks. However, its scalability is hindered by excessive context length and redundant retrievals. Recent research on soft context compression aims to address this by encoding long documents into compact embeddings, yet they often underperform non-compressed RAG due to their reliance on auto-encoder-like full-compression that forces the encoder to compress all document information regardless of relevance to the input query.   In this work, we conduct an analysis on this paradigm and reveal two fundamental limitations: (I) Infeasibility, full-compression conflicts with the LLM's downstream generation behavior; and (II) Non-necessity: full-compression is unnecessary and dilutes task-relevant information density. Motivated by these insights, we introduce SeleCom, a selector-based soft compression framework for RAG that redefines the encoder's role as query-conditioned information selector. The selector is decoder-only and is trained with a massive, diverse and difficulty-graded synthetic QA dataset with curriculum learning.   Extensive experiments show that SeleCom significantly outperforms existing soft compression approaches and achieves competitive or superior performance to non-compression baselines, while reducing computation and latency by 33.8%~84.6%.",
+        "arxiv_id": "2602.15856"
+    },
+    "2602.16340": {
+        "SCORE": 15,
+        "ARXIVID": "2602.16340",
+        "COMMENT": "Representation Learning/Training Dynamics: analyzes implicit bias of momentum-based optimizers (Muon, Adam, Signum) in homogeneous neural networks, linking to margin maximization norms.",
+        "RELEVANCE": 8,
+        "NOVELTY": 7,
+        "authors": [
+            "Eitan Gronich",
+            "Gal Vardi"
+        ],
+        "title": "The Implicit Bias of Adam and Muon on Smooth Homogeneous Neural Networks",
+        "abstract": "We study the implicit bias of momentum-based optimizers on homogeneous models. We first extend existing results on the implicit bias of steepest descent in homogeneous models to normalized steepest descent with an optional learning rate schedule. We then show that for smooth homogeneous models, momentum steepest descent algorithms like Muon (spectral norm), MomentumGD ($\\ell_2$ norm), and Signum ($\\ell_\\infty$ norm) are approximate steepest descent trajectories under a decaying learning rate schedule, proving that these algorithms too have a bias towards KKT points of the corresponding margin maximization problem. We extend the analysis to Adam (without the stability constant), which maximizes the $\\ell_\\infty$ margin, and to Muon-Signum and Muon-Adam, which maximize a hybrid norm. Our experiments corroborate the theory and show that the identity of the margin maximized depends on the choice of optimizer. Overall, our results extend earlier lines of work on steepest descent in homogeneous models and momentum-based optimizers in linear models.",
+        "arxiv_id": "2602.16340"
+    },
+    "2602.16086": {
+        "SCORE": 15,
+        "ARXIVID": "2602.16086",
+        "COMMENT": "Model Architecture/Representation Learning: introduces a learnable discrete tokenizer (LGQ) with differentiable soft assignments and utilization regularizers to address codebook collapse and scalability.",
+        "RELEVANCE": 8,
+        "NOVELTY": 7,
+        "authors": [
+            "Idil Bilge Altun",
+            "Mert Onur Cakiroglu",
+            "Elham Buxton",
+            "Mehmet Dalkilic",
+            "Hasan Kurban"
+        ],
+        "title": "LGQ: Learning Discretization Geometry for Scalable and Stable Image Tokenization",
+        "abstract": "Discrete image tokenization is a key bottleneck for scalable visual generation: a tokenizer must remain compact for efficient latent-space priors while preserving semantic structure and using discrete capacity effectively. Existing quantizers face a trade-off: vector-quantized tokenizers learn flexible geometries but often suffer from biased straight-through optimization, codebook under-utilization, and representation collapse at large vocabularies. Structured scalar or implicit tokenizers ensure stable, near-complete utilization by design, yet rely on fixed discretization geometries that may allocate capacity inefficiently under heterogeneous latent statistics.   We introduce Learnable Geometric Quantization (LGQ), a discrete image tokenizer that learns discretization geometry end-to-end. LGQ replaces hard nearest-neighbor lookup with temperature-controlled soft assignments, enabling fully differentiable training while recovering hard assignments at inference. The assignments correspond to posterior responsibilities of an isotropic Gaussian mixture and minimize a variational free-energy objective, provably converging to nearest-neighbor quantization in the low-temperature limit. LGQ combines a token-level peakedness regularizer with a global usage regularizer to encourage confident yet balanced code utilization without imposing rigid grids.   Under a controlled VQGAN-style backbone on ImageNet across multiple vocabulary sizes, LGQ achieves stable optimization and balanced utilization. At 16K codebook size, LGQ improves rFID by 11.88% over FSQ while using 49.96% fewer active codes, and improves rFID by 6.06% over SimVQ with 49.45% lower effective representation rate, achieving comparable fidelity with substantially fewer active entries. Our GitHub repository is available at: https://github.com/KurbanIntelligenceLab/LGQ",
+        "arxiv_id": "2602.16086"
+    },
+    "2602.16054": {
+        "SCORE": 15,
+        "ARXIVID": "2602.16054",
+        "COMMENT": "Model Efficiency: cross-layer attention aggregation to stabilize token-importance ranking and accelerate LLM prefill, reducing TTFT substantially.",
+        "RELEVANCE": 8,
+        "NOVELTY": 7,
+        "authors": [
+            "Bradley McDanel",
+            "Steven Li",
+            "Harshit Khaitan"
+        ],
+        "title": "CLAA: Cross-Layer Attention Aggregation for Accelerating LLM Prefill",
+        "abstract": "The prefill stage in long-context LLM inference remains a computational bottleneck. Recent token-ranking heuristics accelerate inference by selectively processing a subset of semantically relevant tokens. However, existing methods suffer from unstable token importance estimation, often varying between layers. Evaluating token-ranking quality independently from heuristic-specific architectures is challenging. To address this, we introduce an Answer-Informed Oracle, which defines ground-truth token importance by measuring attention from generated answers back to the prompt. This oracle reveals that existing heuristics exhibit high variance across layers: rankings can degrade sharply at specific layers, a failure mode invisible to end-to-end benchmarks. The diagnosis suggests a simple fix: aggregate scores across layers rather than relying on any single one. We implement this as Cross-Layer Attention Aggregation (CLAA), which closes the gap to the oracle upper bound and reduces Time-to-First-Token (TTFT) by up to 39\\% compared to the Full KV Cache baseline.",
+        "arxiv_id": "2602.16054"
+    },
+    "2602.16530": {
+        "SCORE": 15,
+        "ARXIVID": "2602.16530",
+        "COMMENT": "Matches Model Architecture: proposes a KAN variant (FEKAN) that improves efficiency and representation capacity with theoretical guarantees, without increasing parameters.",
+        "RELEVANCE": 8,
+        "NOVELTY": 7,
+        "authors": [
+            "Sidharth S. Menon",
+            "Ameya D. Jagtap"
+        ],
+        "title": "FEKAN: Feature-Enriched Kolmogorov-Arnold Networks",
+        "abstract": "Kolmogorov-Arnold Networks (KANs) have recently emerged as a compelling alternative to multilayer perceptrons, offering enhanced interpretability via functional decomposition. However, existing KAN architectures, including spline-, wavelet-, radial-basis variants, etc., suffer from high computational cost and slow convergence, limiting scalability and practical applicability. Here, we introduce Feature-Enriched Kolmogorov-Arnold Networks (FEKAN), a simple yet effective extension that preserves all the advantages of KAN while improving computational efficiency and predictive accuracy through feature enrichment, without increasing the number of trainable parameters. By incorporating these additional features, FEKAN accelerates convergence, increases representation capacity, and substantially mitigates the computational overhead characteristic of state-of-the-art KAN architectures. We investigate FEKAN across a comprehensive set of benchmarks, including function-approximation tasks, physics-informed formulations for diverse partial differential equations (PDEs), and neural operator settings that map between input and output function spaces. For function approximation, we systematically compare FEKAN against a broad family of KAN variants, FastKAN, WavKAN, ReLUKAN, HRKAN, ChebyshevKAN, RBFKAN, and the original SplineKAN. Across all tasks, FEKAN demonstrates substantially faster convergence and consistently higher approximation accuracy than the underlying baseline architectures. We also establish the theoretical foundations for FEKAN, showing its superior representation capacity compared to KAN, which contributes to improved accuracy and efficiency.",
+        "arxiv_id": "2602.16530"
+    },
+    "2602.16209": {
+        "SCORE": 15,
+        "ARXIVID": "2602.16209",
+        "COMMENT": "Matches Model Architecture/Representation Learning: Lie group-constrained latent dynamics with low-rank parameterization to enforce geometric inductive biases in neural operators.",
+        "RELEVANCE": 8,
+        "NOVELTY": 7,
+        "authors": [
+            "Jiaquan Zhang",
+            "Fachrina Dewi Puspitasari",
+            "Songbo Zhang",
+            "Yibei Liu",
+            "Kuien Liu",
+            "Caiyan Qin",
+            "Fan Mo",
+            "Peng Wang",
+            "Yang Yang",
+            "Chaoning Zhang"
+        ],
+        "title": "Geometric Neural Operators via Lie Group-Constrained Latent Dynamics",
+        "abstract": "Neural operators offer an effective framework for learning solutions of partial differential equations for many physical systems in a resolution-invariant and data-driven manner. Existing neural operators, however, often suffer from instability in multi-layer iteration and long-horizon rollout, which stems from the unconstrained Euclidean latent space updates that violate the geometric and conservation laws. To address this challenge, we propose to constrain manifolds with low-rank Lie algebra parameterization that performs group action updates on the latent representation. Our method, termed Manifold Constraining based on Lie group (MCL), acts as an efficient \\emph{plug-and-play} module that enforces geometric inductive bias to existing neural operators. Extensive experiments on various partial differential equations, such as 1-D Burgers and 2-D Navier-Stokes, over a wide range of parameters and steps demonstrate that our method effectively lowers the relative prediction error by 30-50\\% at the cost of 2.26\\% of parameter increase. The results show that our approach provides a scalable solution for improving long-term prediction fidelity by addressing the principled geometric constraints absent in the neural operator updates.",
+        "arxiv_id": "2602.16209"
+    },
+    "2602.16336": {
+        "SCORE": 15,
+        "ARXIVID": "2602.16336",
+        "COMMENT": "Matches Compression/Efficiency (hardware-aware): multi-level sensitivity scoring and predictive models to integrate approximate computing blocks for scalable DNN approximation.",
+        "RELEVANCE": 8,
+        "NOVELTY": 7,
+        "authors": [
+            "Samira Nazari",
+            "Mohammad Saeed Almasi",
+            "Mahdi Taheri",
+            "Ali Azarpeyvand",
+            "Ali Mokhtari",
+            "Ali Mahani",
+            "Christian Herglotz"
+        ],
+        "title": "HAWX: A Hardware-Aware FrameWork for Fast and Scalable ApproXimation of DNNs",
+        "abstract": "This work presents HAWX, a hardware-aware scalable exploration framework that employs multi-level sensitivity scoring at different DNN abstraction levels (operator, filter, layer, and model) to guide selective integration of heterogeneous AxC blocks. Supported by predictive models for accuracy, power, and area, HAWX accelerates the evaluation of candidate configurations, achieving over 23* speedup in a layer-level search with two candidate approximate blocks and more than (3*106)* speedup at the filter-level search only for LeNet-5, while maintaining accuracy comparable to exhaustive search. Experiments across state-of-the-art DNN benchmarks such as VGG-11, ResNet-18, and EfficientNetLite demonstrate that the efficiency benefits of HAWX scale exponentially with network size. The HAWX hardware-aware search algorithm supports both spatial and temporal accelerator architectures, leveraging either off-the-shelf approximate components or customized designs.",
+        "arxiv_id": "2602.16336"
+    },
+    "2602.15883": {
+        "SCORE": 15,
+        "ARXIVID": "2602.15883",
+        "COMMENT": "Matches High Performance Computing: distributed PINNs via domain decomposition with CUDA graphs/JIT and global pressure consistency enforcement.",
+        "RELEVANCE": 8,
+        "NOVELTY": 7,
+        "authors": [
+            "Yixiao Qian",
+            "Jiaxu Liu",
+            "Zewei Xia",
+            "Song Chen",
+            "Chao Xu",
+            "Shengze Cai"
+        ],
+        "title": "Distributed physics-informed neural networks via domain decomposition for fast flow reconstruction",
+        "abstract": "Physics-Informed Neural Networks (PINNs) offer a powerful paradigm for flow reconstruction, seamlessly integrating sparse velocity measurements with the governing Navier-Stokes equations to recover complete velocity and latent pressure fields. However, scaling such models to large spatiotemporal domains is hindered by computational bottlenecks and optimization instabilities. In this work, we propose a robust distributed PINNs framework designed for efficient flow reconstruction via spatiotemporal domain decomposition. A critical challenge in such distributed solvers is pressure indeterminacy, where independent sub-networks drift into inconsistent local pressure baselines. We address this issue through a reference anchor normalization strategy coupled with decoupled asymmetric weighting. By enforcing a unidirectional information flow from designated master ranks where the anchor point lies to neighboring ranks, our approach eliminates gauge freedom and guarantees global pressure uniqueness while preserving temporal continuity. Furthermore, to mitigate the Python interpreter overhead associated with computing high-order physics residuals, we implement a high-performance training pipeline accelerated by CUDA graphs and JIT compilation. Extensive validation on complex flow benchmarks demonstrates that our method achieves near-linear strong scaling and high-fidelity reconstruction, establishing a scalable and physically rigorous pathway for flow reconstruction and understanding of complex hydrodynamics.",
+        "arxiv_id": "2602.15883"
+    }
+}

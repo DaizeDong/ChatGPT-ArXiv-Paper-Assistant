@@ -1,0 +1,571 @@
+{
+    "2505.06839": {
+        "SCORE": 18,
+        "ARXIVID": "2505.06839",
+        "COMMENT": "The paper focuses on Mixture-of-Experts (MoE) and provides theoretical insights into the impact of granularity on network expressivity, which aligns closely with the 'Model Architecture' criterion.",
+        "RELEVANCE": 10,
+        "NOVELTY": 8,
+        "authors": [
+            "Enric Boix-Adsera",
+            "Philippe Rigollet"
+        ],
+        "title": "The power of fine-grained experts: Granularity boosts expressivity in Mixture of Experts",
+        "abstract": "Mixture-of-Experts (MoE) layers are increasingly central to frontier model architectures. By selectively activating parameters, they reduce computational cost while scaling total parameter count. This paper investigates the impact of the number of active experts, termed granularity, comparing architectures with many (e.g., 8 per layer in DeepSeek) to those with fewer (e.g., 1 per layer in Llama-4 models). We prove an exponential separation in network expressivity based on this design parameter, suggesting that models benefit from higher granularity. Experimental results corroborate our theoretical findings and illustrate this separation.",
+        "arxiv_id": "2505.06839"
+    },
+    "2505.06653": {
+        "SCORE": 18,
+        "ARXIVID": "2505.06653",
+        "COMMENT": "The paper proposes a novel 4-bit quantization method (BOF4) for LLMs, which directly aligns with the 'Model Compression' criterion and introduces significant improvements.",
+        "RELEVANCE": 10,
+        "NOVELTY": 8,
+        "authors": [
+            "Patrick Blumenberg",
+            "Thomas Graave",
+            "Tim Fingscheidt"
+        ],
+        "title": "Improving Block-Wise LLM Quantization by 4-bit Block-Wise Optimal Float (BOF4): Analysis and Variations",
+        "abstract": "Large language models (LLMs) demand extensive memory capacity during both fine-tuning and inference. To enable memory-efficient fine-tuning, existing methods apply block-wise quantization techniques, such as NF4 and AF4, to the network weights. We show that these quantization techniques incur suboptimal quantization errors. Therefore, as a first novelty, we propose an optimization approach for block-wise quantization. Using this method, we design a family of quantizers named 4-bit block-wise optimal float (BOF4), which consistently reduces the quantization error compared to both baseline methods. We provide both a theoretical and a data-driven solution for the optimization process and prove their practical equivalence. Secondly, we propose a modification to the employed normalization method based on the signed absolute block maximum (BOF4-S), enabling further reduction of the quantization error and empirically achieving less degradation in language modeling performance. Thirdly, we explore additional variations of block-wise quantization methods applied to LLMs through an experimental study on the importance of accurately representing zero and large-amplitude weights on the one hand, and optimization towards various error metrics on the other hand. Lastly, we introduce a mixed-precision quantization strategy dubbed outlier-preserving quantization (OPQ) to address the distributional mismatch induced by outlier weights in block-wise quantization. By storing outlier weights in 16-bit precision (OPQ) while applying BOF4-S, we achieve top performance among 4-bit block-wise quantization techniques w.r.t. perplexity.",
+        "arxiv_id": "2505.06653"
+    },
+    "2505.07260": {
+        "SCORE": 18,
+        "ARXIVID": "2505.07260",
+        "COMMENT": "The paper introduces UMoE, a novel architecture unifying MoE designs in attention and FFN layers, which directly aligns with the 'Model Architecture' criterion, particularly focusing on Mixture-of-Experts (MoE).",
+        "RELEVANCE": 10,
+        "NOVELTY": 8,
+        "authors": [
+            "Yuanhang Yang",
+            "Chaozheng Wang",
+            "Jing Li"
+        ],
+        "title": "UMoE: Unifying Attention and FFN with Shared Experts",
+        "abstract": "Sparse Mixture of Experts (MoE) architectures have emerged as a promising approach for scaling Transformer models. While initial works primarily incorporated MoE into feed-forward network (FFN) layers, recent studies have explored extending the MoE paradigm to attention layers to enhance model performance. However, existing attention-based MoE layers require specialized implementations and demonstrate suboptimal performance compared to their FFN-based counterparts. In this paper, we aim to unify the MoE designs in attention and FFN layers by introducing a novel reformulation of the attention mechanism, revealing an underlying FFN-like structure within attention modules. Our proposed architecture, UMoE, achieves superior performance through attention-based MoE layers while enabling efficient parameter sharing between FFN and attention components.",
+        "arxiv_id": "2505.07260"
+    },
+    "2505.06481": {
+        "SCORE": 17,
+        "ARXIVID": "2505.06481",
+        "COMMENT": "The paper focuses on memory efficiency and runtime reconfiguration for serving Mixture-of-Experts LLMs, which directly aligns with the MoE and model compression criteria.",
+        "RELEVANCE": 9,
+        "NOVELTY": 8,
+        "authors": [
+            "HamidReza Imani",
+            "Jiaxin Peng",
+            "Peiman Mohseni",
+            "Abdolah Amirany",
+            "Tarek El-Ghazawi"
+        ],
+        "title": "QoS-Efficient Serving of Multiple Mixture-of-Expert LLMs Using Partial Runtime Reconfiguration",
+        "abstract": "The deployment of mixture-of-experts (MoE) large language models (LLMs) presents significant challenges due to their high memory demands. These challenges become even more pronounced in multi-tenant environments, where shared resources must accommodate multiple models, limiting the effectiveness of conventional virtualization techniques. This paper addresses the problem of efficiently serving multiple fine-tuned MoE-LLMs on a single-GPU. We propose a serving system that employs \\textit{similarity-based expert consolidation} to reduce the overall memory footprint by sharing similar experts across models. To ensure output quality, we introduce \\textit{runtime partial reconfiguration}, dynamically replacing non-expert layers when processing requests from different models. As a result, our approach achieves a competitive output quality while maintaining throughput comparable to serving a single model while incurring a negligible increase in time-to-first-token (TTFT). Experiments on a server with a single NVIDIA A100 GPU (80GB) using Mixtral-8x7B models demonstrate an 85\\% average reduction in turnaround time compared to NVIDIA's multi-instance GPU (MIG). Furthermore, experiments on Google's Switch Transformer Base-8 model with up to four variants demonstrate the scalability and resilience of our approach in maintaining output quality compared to other model merging baselines, highlighting its effectiveness.",
+        "arxiv_id": "2505.06481"
+    },
+    "2505.07558": {
+        "SCORE": 17,
+        "ARXIVID": "2505.07558",
+        "COMMENT": "The paper introduces a statistically consistent method for aligning LLMs, which aligns with foundational research in LLM alignment and theoretical insights.",
+        "RELEVANCE": 9,
+        "NOVELTY": 8,
+        "authors": [
+            "Rei Higuchi",
+            "Taiji Suzuki"
+        ],
+        "title": "Direct Density Ratio Optimization: A Statistically Consistent Approach to Aligning Large Language Models",
+        "abstract": "Aligning large language models (LLMs) with human preferences is crucial for safe deployment, yet existing methods assume specific preference models like Bradley-Terry model. This assumption leads to statistical inconsistency, where more data doesn't guarantee convergence to true human preferences. To address this critical gap, we introduce a novel alignment method Direct Density Ratio Optimization (DDRO). DDRO directly estimates the density ratio between preferred and unpreferred output distributions, circumventing the need for explicit human preference modeling. We theoretically prove that DDRO is statistically consistent, ensuring convergence to the true preferred distribution as the data size grows, regardless of the underlying preference structure. Experiments demonstrate that DDRO achieves superior performance compared to existing methods on many major benchmarks. DDRO unlocks the potential for truly data-driven alignment, paving the way for more reliable and human-aligned LLMs.",
+        "arxiv_id": "2505.07558"
+    },
+    "2505.07792": {
+        "SCORE": 17,
+        "ARXIVID": "2505.07792",
+        "COMMENT": "The paper provides an analytic theory of dropout regularization, offering theoretical insights into training dynamics and generalization error. This aligns with the representation learning criterion, particularly in understanding how networks encode information.",
+        "RELEVANCE": 9,
+        "NOVELTY": 8,
+        "authors": [
+            "Francesco Mori",
+            "Francesca Mignacco"
+        ],
+        "title": "Analytic theory of dropout regularization",
+        "abstract": "Dropout is a regularization technique widely used in training artificial neural networks to mitigate overfitting. It consists of dynamically deactivating subsets of the network during training to promote more robust representations. Despite its widespread adoption, dropout probabilities are often selected heuristically, and theoretical explanations of its success remain sparse. Here, we analytically study dropout in two-layer neural networks trained with online stochastic gradient descent. In the high-dimensional limit, we derive a set of ordinary differential equations that fully characterize the evolution of the network during training and capture the effects of dropout. We obtain a number of exact results describing the generalization error and the optimal dropout probability at short, intermediate, and long training times. Our analysis shows that dropout reduces detrimental correlations between hidden nodes, mitigates the impact of label noise, and that the optimal dropout probability increases with the level of noise in the data. Our results are validated by extensive numerical simulations.",
+        "arxiv_id": "2505.07792"
+    },
+    "2505.07124": {
+        "SCORE": 17,
+        "ARXIVID": "2505.07124",
+        "COMMENT": "The paper introduces sharpened Fenchel-Young losses for inverse problems, which is a novel theoretical contribution relevant to representation learning and optimization.",
+        "RELEVANCE": 9,
+        "NOVELTY": 8,
+        "authors": [
+            "Francisco Andrade",
+            "Gabriel Peyr\\'e",
+            "Clarice Poon"
+        ],
+        "title": "Learning from Samples: Inverse Problems over measures via Sharpened Fenchel-Young Losses",
+        "abstract": "Estimating parameters from samples of an optimal probability distribution is essential in applications ranging from socio-economic modeling to biological system analysis. In these settings, the probability distribution arises as the solution to an optimization problem that captures either static interactions among agents or the dynamic evolution of a system over time. Our approach relies on minimizing a new class of loss functions, called sharpened Fenchel-Young losses, which measure the sub-optimality gap of the optimization problem over the space of measures. We study the stability of this estimation method when only a finite number of sample is available. The parameters to be estimated typically correspond to a cost function in static problems and to a potential function in dynamic problems. To analyze stability, we introduce a general methodology that leverages the strong convexity of the loss function together with the sample complexity of the forward optimization problem. Our analysis emphasizes two specific settings in the context of optimal transport, where our method provides explicit stability guarantees: The first is inverse unbalanced optimal transport (iUOT) with entropic regularization, where the parameters to estimate are cost functions that govern transport computations; this method has applications such as link prediction in machine learning. The second is inverse gradient flow (iJKO), where the objective is to recover a potential function that drives the evolution of a probability distribution via the Jordan-Kinderlehrer-Otto (JKO) time-discretization scheme; this is particularly relevant for understanding cell population dynamics in single-cell genomics. Finally, we validate our approach through numerical experiments on Gaussian distributions, where closed-form solutions are available, to demonstrate the practical performance of our methods",
+        "arxiv_id": "2505.07124"
+    },
+    "2505.07411": {
+        "SCORE": 17,
+        "ARXIVID": "2505.07411",
+        "COMMENT": "The paper introduces ICE-Pruning, a novel pruning pipeline for model compression, which is directly relevant to foundational research in model efficiency.",
+        "RELEVANCE": 9,
+        "NOVELTY": 8,
+        "authors": [
+            "Wenhao Hu",
+            "Paul Henderson",
+            "Jos\\'e Cano"
+        ],
+        "title": "ICE-Pruning: An Iterative Cost-Efficient Pruning Pipeline for Deep Neural Networks",
+        "abstract": "Pruning is a widely used method for compressing Deep Neural Networks (DNNs), where less relevant parameters are removed from a DNN model to reduce its size. However, removing parameters reduces model accuracy, so pruning is typically combined with fine-tuning, and sometimes other operations such as rewinding weights, to recover accuracy. A common approach is to repeatedly prune and then fine-tune, with increasing amounts of model parameters being removed in each step. While straightforward to implement, pruning pipelines that follow this approach are computationally expensive due to the need for repeated fine-tuning.   In this paper we propose ICE-Pruning, an iterative pruning pipeline for DNNs that significantly decreases the time required for pruning by reducing the overall cost of fine-tuning, while maintaining a similar accuracy to existing pruning pipelines. ICE-Pruning is based on three main components: i) an automatic mechanism to determine after which pruning steps fine-tuning should be performed; ii) a freezing strategy for faster fine-tuning in each pruning step; and iii) a custom pruning-aware learning rate scheduler to further improve the accuracy of each pruning step and reduce the overall time consumption. We also propose an efficient auto-tuning stage for the hyperparameters (e.g., freezing percentage) introduced by the three components. We evaluate ICE-Pruning on several DNN models and datasets, showing that it can accelerate pruning by up to 9.61x. Code is available at https://github.com/gicLAB/ICE-Pruning",
+        "arxiv_id": "2505.07411"
+    },
+    "2505.06257": {
+        "SCORE": 17,
+        "ARXIVID": "2505.06257",
+        "COMMENT": "The paper explores a novel approach to attention mechanisms inspired by neurobiology, which aligns with architectural innovations and emerging trends.",
+        "RELEVANCE": 9,
+        "NOVELTY": 8,
+        "authors": [
+            "Ahsan Adeel"
+        ],
+        "title": "Beyond Attention: Toward Machines with Intrinsic Higher Mental States",
+        "abstract": "Attending to what is relevant is fundamental to both the mammalian brain and modern machine learning models such as Transformers. Yet, determining relevance remains a core challenge, traditionally offloaded to learning algorithms like backpropagation. Inspired by recent cellular neurobiological evidence linking neocortical pyramidal cells to distinct mental states, this work shows how models (e.g., Transformers) can emulate high-level perceptual processing and awake thought (imagination) states to pre-select relevant information before applying attention. Triadic neuronal-level modulation loops among questions ($Q$), clues (keys, $K$), and hypotheses (values, $V$) enable diverse, deep, parallel reasoning chains at the representation level and allow a rapid shift from initial biases to refined understanding. This leads to orders-of-magnitude faster learning with significantly reduced computational demand (e.g., fewer heads, layers, and tokens), at an approximate cost of $\\mathcal{O}(N)$, where $N$ is the number of input tokens. Results span reinforcement learning (e.g., CarRacing in a high-dimensional visual setup), computer vision, and natural language question answering.",
+        "arxiv_id": "2505.06257"
+    },
+    "2505.06993": {
+        "SCORE": 17,
+        "ARXIVID": "2505.06993",
+        "COMMENT": "The paper provides a theoretical analysis of the generalization dynamics in DNNs, which is highly relevant to representation learning and training dynamics. The discovery of three-phase dynamics is novel and insightful.",
+        "RELEVANCE": 9,
+        "NOVELTY": 8,
+        "authors": [
+            "Yuxuan He",
+            "Junpeng Zhang",
+            "Hongyuan Zhang",
+            "Quanshi Zhang"
+        ],
+        "title": "Towards the Three-Phase Dynamics of Generalization Power of a DNN",
+        "abstract": "This paper proposes a new perspective for analyzing the generalization power of deep neural networks (DNNs), i.e., directly disentangling and analyzing the dynamics of generalizable and non-generalizable interaction encoded by a DNN through the training process. Specifically, this work builds upon the recent theoretical achievement in explainble AI, which proves that the detailed inference logic of DNNs can be can be strictly rewritten as a small number of AND-OR interaction patterns. Based on this, we propose an efficient method to quantify the generalization power of each interaction, and we discover a distinct three-phase dynamics of the generalization power of interactions during training. In particular, the early phase of training typically removes noisy and non-generalizable interactions and learns simple and generalizable ones. The second and the third phases tend to capture increasingly complex interactions that are harder to generalize. Experimental results verify that the learning of non-generalizable interactions is the the direct cause for the gap between the training and testing losses.",
+        "arxiv_id": "2505.06993"
+    },
+    "2505.07004": {
+        "SCORE": 17,
+        "ARXIVID": "2505.07004",
+        "COMMENT": "The paper introduces a novel quantization method for LLMs, which is highly relevant to model compression and efficiency. The integration of gradient information into the quantization objective is a significant contribution.",
+        "RELEVANCE": 9,
+        "NOVELTY": 8,
+        "authors": [
+            "Jinuk Kim",
+            "Marwa El Halabi",
+            "Wonpyo Park",
+            "Clemens JS Schaefer",
+            "Deokjae Lee",
+            "Yeonhong Park",
+            "Jae W. Lee",
+            "Hyun Oh Song"
+        ],
+        "title": "GuidedQuant: Large Language Model Quantization via Exploiting End Loss Guidance",
+        "abstract": "Post-training quantization is a key technique for reducing the memory and inference latency of large language models by quantizing weights and activations without requiring retraining. However, existing methods either (1) fail to account for the varying importance of hidden features to the end loss or, when incorporating end loss, (2) neglect the critical interactions between model weights. To address these limitations, we propose GuidedQuant, a novel quantization approach that integrates gradient information from the end loss into the quantization objective while preserving cross-weight dependencies within output channels. GuidedQuant consistently boosts the performance of state-of-the-art quantization methods across weight-only scalar, weight-only vector, and weight-and-activation quantization. Additionally, we introduce a novel non-uniform scalar quantization algorithm, which is guaranteed to monotonically decrease the quantization objective value, and outperforms existing methods in this category. We release the code at https://github.com/snu-mllab/GuidedQuant.",
+        "arxiv_id": "2505.07004"
+    },
+    "2505.06745": {
+        "SCORE": 17,
+        "ARXIVID": "2505.06745",
+        "COMMENT": "The paper proposes a framework for symbolic rule extraction from Vision Transformers, which aligns with representation learning and interpretability. The use of sparse concept layers and symbolic reasoning is novel and foundational.",
+        "RELEVANCE": 9,
+        "NOVELTY": 8,
+        "authors": [
+            "Parth Padalkar",
+            "Gopal Gupta"
+        ],
+        "title": "Symbolic Rule Extraction from Attention-Guided Sparse Representations in Vision Transformers",
+        "abstract": "Recent neuro-symbolic approaches have successfully extracted symbolic rule-sets from CNN-based models to enhance interpretability. However, applying similar techniques to Vision Transformers (ViTs) remains challenging due to their lack of modular concept detectors and reliance on global self-attention mechanisms. We propose a framework for symbolic rule extraction from ViTs by introducing a sparse concept layer inspired by Sparse Autoencoders (SAEs). This linear layer operates on attention-weighted patch representations and learns a disentangled, binarized representation in which individual neurons activate for high-level visual concepts. To encourage interpretability, we apply a combination of L1 sparsity, entropy minimization, and supervised contrastive loss. These binarized concept activations are used as input to the FOLD-SE-M algorithm, which generates a rule-set in the form of logic programs. Our method achieves a 5.14% better classification accuracy than the standard ViT while enabling symbolic reasoning. Crucially, the extracted rule-set is not merely post-hoc but acts as a logic-based decision layer that operates directly on the sparse concept representations. The resulting programs are concise and semantically meaningful. This work is the first to extract executable logic programs from ViTs using sparse symbolic representations. It bridges the gap between transformer-based vision models and symbolic logic programming, providing a step forward in interpretable and verifiable neuro-symbolic AI.",
+        "arxiv_id": "2505.06745"
+    },
+    "2505.06288": {
+        "SCORE": 17,
+        "ARXIVID": "2505.06288",
+        "COMMENT": "The paper proposes a novel method for geometric representation learning using Riemannian manifolds, which aligns with the 'Representation Learning' criterion by addressing how data is encoded while preserving geometric properties.",
+        "RELEVANCE": 9,
+        "NOVELTY": 8,
+        "authors": [
+            "Zihao Chen",
+            "Wenyong Wang",
+            "Jiachen Yang",
+            "Yu Xiang"
+        ],
+        "title": "IIKL: Isometric Immersion Kernel Learning with Riemannian Manifold for Geometric Preservation",
+        "abstract": "Geometric representation learning in preserving the intrinsic geometric and topological properties for discrete non-Euclidean data is crucial in scientific applications. Previous research generally mapped non-Euclidean discrete data into Euclidean space during representation learning, which may lead to the loss of some critical geometric information. In this paper, we propose a novel Isometric Immersion Kernel Learning (IIKL) method to build Riemannian manifold and isometrically induce Riemannian metric from discrete non-Euclidean data. We prove that Isometric immersion is equivalent to the kernel function in the tangent bundle on the manifold, which explicitly guarantees the invariance of the inner product between vectors in the arbitrary tangent space throughout the learning process, thus maintaining the geometric structure of the original data. Moreover, a novel parameterized learning model based on IIKL is introduced, and an alternating training method for this model is derived using Maximum Likelihood Estimation (MLE), ensuring efficient convergence. Experimental results proved that using the learned Riemannian manifold and its metric, our model preserved the intrinsic geometric representation of data in both 3D and high-dimensional datasets successfully, and significantly improved the accuracy of downstream tasks, such as data reconstruction and classification. It is showed that our method could reduce the inner product invariant loss by more than 90% compared to state-of-the-art (SOTA) methods, also achieved an average 40% improvement in downstream reconstruction accuracy and a 90% reduction in error for geometric metrics involving isometric and conformal.",
+        "arxiv_id": "2505.06288"
+    },
+    "2505.06858": {
+        "SCORE": 17,
+        "ARXIVID": "2505.06858",
+        "COMMENT": "The paper proposes FreqMoE, a novel MoE-based framework for solving PDEs, which aligns with the 'Model Architecture' criterion by innovating in the MoE space.",
+        "RELEVANCE": 9,
+        "NOVELTY": 8,
+        "authors": [
+            "Tianyu Chen",
+            "Haoyi Zhou",
+            "Ying Li",
+            "Hao Wang",
+            "Zhenzhe Zhang",
+            "Tianchen Zhu",
+            "Shanghang Zhang",
+            "Jianxin Li"
+        ],
+        "title": "FreqMoE: Dynamic Frequency Enhancement for Neural PDE Solvers",
+        "abstract": "Fourier Neural Operators (FNO) have emerged as promising solutions for efficiently solving partial differential equations (PDEs) by learning infinite-dimensional function mappings through frequency domain transformations. However, the sparsity of high-frequency signals limits computational efficiency for high-dimensional inputs, and fixed-pattern truncation often causes high-frequency signal loss, reducing performance in scenarios such as high-resolution inputs or long-term predictions. To address these challenges, we propose FreqMoE, an efficient and progressive training framework that exploits the dependency of high-frequency signals on low-frequency components. The model first learns low-frequency weights and then applies a sparse upward-cycling strategy to construct a mixture of experts (MoE) in the frequency domain, effectively extending the learned weights to high-frequency regions. Experiments on both regular and irregular grid PDEs demonstrate that FreqMoE achieves up to 16.6% accuracy improvement while using merely 2.1% parameters (47.32x reduction) compared to dense FNO. Furthermore, the approach demonstrates remarkable stability in long-term predictions and generalizes seamlessly to various FNO variants and grid structures, establishing a new ``Low frequency Pretraining, High frequency Fine-tuning'' paradigm for solving PDEs.",
+        "arxiv_id": "2505.06858"
+    },
+    "2505.07070": {
+        "SCORE": 17,
+        "ARXIVID": "2505.07070",
+        "COMMENT": "The paper provides theoretical insights into representation learning and scaling laws in hierarchical languages, aligning with the 'Representation Learning' criterion by analyzing how architectures encode information.",
+        "RELEVANCE": 9,
+        "NOVELTY": 8,
+        "authors": [
+            "Francesco Cagnetta",
+            "Alessandro Favero",
+            "Antonio Sclocchi",
+            "Matthieu Wyart"
+        ],
+        "title": "Scaling Laws and Representation Learning in Simple Hierarchical Languages: Transformers vs. Convolutional Architectures",
+        "abstract": "How do neural language models acquire a language's structure when trained for next-token prediction? We address this question by deriving theoretical scaling laws for neural network performance on synthetic datasets generated by the Random Hierarchy Model (RHM) -- an ensemble of probabilistic context-free grammars designed to capture the hierarchical structure of natural language while remaining analytically tractable. Previously, we developed a theory of representation learning based on data correlations that explains how deep learning models capture the hierarchical structure of the data sequentially, one layer at a time. Here, we extend our theoretical framework to account for architectural differences. In particular, we predict and empirically validate that convolutional networks, whose structure aligns with that of the generative process through locality and weight sharing, enjoy a faster scaling of performance compared to transformer models, which rely on global self-attention mechanisms. This finding clarifies the architectural biases underlying neural scaling laws and highlights how representation learning is shaped by the interaction between model architecture and the statistical properties of data.",
+        "arxiv_id": "2505.07070"
+    },
+    "2505.07137": {
+        "SCORE": 16,
+        "ARXIVID": "2505.07137",
+        "COMMENT": "The paper provides a theoretical proof for efficient ReLU DNNs and aligns with 'Model Architecture' by addressing the representation of piecewise linear functions.",
+        "RELEVANCE": 9,
+        "NOVELTY": 7,
+        "authors": [
+            "Danny Calegari"
+        ],
+        "title": "Triangulating PL functions and the existence of efficient ReLU DNNs",
+        "abstract": "We show that every piecewise linear function $f:R^d \\to R$ with compact support a polyhedron $P$ has a representation as a sum of so-called `simplex functions'. Such representations arise from degree 1 triangulations of the relative homology class (in $R^{d+1}$) bounded by $P$ and the graph of $f$, and give a short elementary proof of the existence of efficient universal ReLU neural networks that simultaneously compute all such functions $f$ of bounded complexity.",
+        "arxiv_id": "2505.07137"
+    },
+    "2505.06316": {
+        "SCORE": 16,
+        "ARXIVID": "2505.06316",
+        "COMMENT": "The paper introduces a novel graph-based compression method using temporal graph autoencoders, which aligns with model compression and representation learning.",
+        "RELEVANCE": 8,
+        "NOVELTY": 8,
+        "authors": [
+            "Guozhong Li",
+            "Muhannad Alhumaidi",
+            "Spiros Skiadopoulos",
+            "Ibrahim Hoteit",
+            "Panos Kalnis"
+        ],
+        "title": "GraphComp: Extreme Error-bounded Compression of Scientific Data via Temporal Graph Autoencoders",
+        "abstract": "The generation of voluminous scientific data poses significant challenges for efficient storage, transfer, and analysis. Recently, error-bounded lossy compression methods emerged due to their ability to achieve high compression ratios while controlling data distortion. However, they often overlook the inherent spatial and temporal correlations within scientific data, thus missing opportunities for higher compression. In this paper we propose GRAPHCOMP, a novel graph-based method for error-bounded lossy compression of scientific data. We perform irregular segmentation of the original grid data and generate a graph representation that preserves the spatial and temporal correlations. Inspired by Graph Neural Networks (GNNs), we then propose a temporal graph autoencoder to learn latent representations that significantly reduce the size of the graph, effectively compressing the original data. Decompression reverses the process and utilizes the learnt graph model together with the latent representation to reconstruct an approximation of the original data. The decompressed data are guaranteed to satisfy a user-defined point-wise error bound. We compare our method against the state-of-the-art error-bounded lossy methods (i.e., HPEZ, SZ3.1, SPERR, and ZFP) on large-scale real and synthetic data. GRAPHCOMP consistently achieves the highest compression ratio across most datasets, outperforming the second-best method by margins ranging from 22% to 50%.",
+        "arxiv_id": "2505.06316"
+    },
+    "2505.07067": {
+        "SCORE": 16,
+        "ARXIVID": "2505.07067",
+        "COMMENT": "The paper provides a theoretical analysis of learning curves for hierarchically compositional data, which aligns with representation learning and emerging trends.",
+        "RELEVANCE": 8,
+        "NOVELTY": 8,
+        "authors": [
+            "Francesco Cagnetta",
+            "Hyunmo Kang",
+            "Matthieu Wyart"
+        ],
+        "title": "Learning curves theory for hierarchically compositional data with power-law distributed features",
+        "abstract": "Recent theories suggest that Neural Scaling Laws arise whenever the task is linearly decomposed into power-law distributed units. Alternatively, scaling laws also emerge when data exhibit a hierarchically compositional structure, as is thought to occur in language and images. To unify these views, we consider classification and next-token prediction tasks based on probabilistic context-free grammars -- probabilistic models that generate data via a hierarchy of production rules. For classification, we show that having power-law distributed production rules results in a power-law learning curve with an exponent depending on the rules' distribution and a large multiplicative constant that depends on the hierarchical structure. By contrast, for next-token prediction, the distribution of production rules controls the local details of the learning curve, but not the exponent describing the large-scale behaviour.",
+        "arxiv_id": "2505.07067"
+    },
+    "2505.06753": {
+        "SCORE": 16,
+        "ARXIVID": "2505.06753",
+        "COMMENT": "The paper introduces the Boltzmann Classifier, which is a novel energy-based approach to supervised learning, aligning with emerging trends and foundational innovations.",
+        "RELEVANCE": 8,
+        "NOVELTY": 8,
+        "authors": [
+            "Muhamed Amin",
+            "Bernard R. Brooks"
+        ],
+        "title": "Boltzmann Classifier: A Thermodynamic-Inspired Approach to Supervised Learning",
+        "abstract": "We propose a novel classification algorithm, the Boltzmann Classifier, inspired by the thermodynamic principles underlying the Boltzmann distribution. Our method computes a probabilistic estimate for each class based on an energy function derived from feature-wise deviations between input samples and class-specific centroids. The resulting probabilities are proportional to the exponential negative energies, normalized across classes, analogous to the Boltzmann distribution used in statistical mechanics. In addition, the KT variable can be used to allow the high energy states to be more accessible, which allows the tuning of their probabilities as needed. We evaluate the model performance on several datasets from different applications. The model achieves a high accuracy, which indicates that the Boltzmann Classifier is competitive with standard models like logistic regression and k-nearest neighbors while offering a thermodynamically motivated probabilistic interpretation. our classifier does not require iterative optimization or backpropagation and is thus computationally efficient and easy to integrate into existing workflows. This work demonstrates how ideas from physics can inform new directions in machine learning, providing a foundation for interpretable, energy-based decision-making systems.",
+        "arxiv_id": "2505.06753"
+    },
+    "2505.07640": {
+        "SCORE": 16,
+        "ARXIVID": "2505.07640",
+        "COMMENT": "The paper proposes a high-dimensional unlearning algorithm with theoretical guarantees, which aligns with 'Emerging Trends' due to its novel approach to machine unlearning.",
+        "RELEVANCE": 8,
+        "NOVELTY": 8,
+        "authors": [
+            "Haolin Zou",
+            "Arnab Auddy",
+            "Yongchan Kwon",
+            "Kamiar Rahnama Rad",
+            "Arian Maleki"
+        ],
+        "title": "Certified Data Removal Under High-dimensional Settings",
+        "abstract": "Machine unlearning focuses on the computationally efficient removal of specific training data from trained models, ensuring that the influence of forgotten data is effectively eliminated without the need for full retraining. Despite advances in low-dimensional settings, where the number of parameters \\( p \\) is much smaller than the sample size \\( n \\), extending similar theoretical guarantees to high-dimensional regimes remains challenging. We propose an unlearning algorithm that starts from the original model parameters and performs a theory-guided sequence of Newton steps \\( T \\in \\{ 1,2\\}\\). After this update, carefully scaled isotropic Laplacian noise is added to the estimate to ensure that any (potential) residual influence of forget data is completely removed. We show that when both \\( n, p \\to \\infty \\) with a fixed ratio \\( n/p \\), significant theoretical and computational obstacles arise due to the interplay between the complexity of the model and the finite signal-to-noise ratio. Finally, we show that, unlike in low-dimensional settings, a single Newton step is insufficient for effective unlearning in high-dimensional problems -- however, two steps are enough to achieve the desired certifiebility. We provide numerical experiments to support the certifiability and accuracy claims of this approach.",
+        "arxiv_id": "2505.07640"
+    },
+    "2505.07503": {
+        "SCORE": 16,
+        "ARXIVID": "2505.07503",
+        "COMMENT": "The paper proposes a method for identifying causal direction using variational Bayesian compression, which involves foundational insights into representation learning through succinctness and model fitness. This aligns well with the criteria for representation learning.",
+        "RELEVANCE": 8,
+        "NOVELTY": 8,
+        "authors": [
+            "Quang-Duy Tran",
+            "Bao Duong",
+            "Phuoc Nguyen",
+            "Thin Nguyen"
+        ],
+        "title": "Identifying Causal Direction via Variational Bayesian Compression",
+        "abstract": "Telling apart the cause and effect between two random variables with purely observational data is a challenging problem that finds applications in various scientific disciplines. A key principle utilized in this task is the algorithmic Markov condition, which postulates that the joint distribution, when factorized according to the causal direction, yields a more succinct codelength compared to the anti-causal direction. Previous approaches approximate these codelengths by relying on simple functions or Gaussian processes (GPs) with easily evaluable complexity, compromising between model fitness and computational complexity. To overcome these limitations, we propose leveraging the variational Bayesian learning of neural networks as an interpretation of the codelengths. Consequently, we can enhance the model fitness while promoting the succinctness of the codelengths, while avoiding the significant computational complexity of the GP-based approaches. Extensive experiments on both synthetic and real-world benchmarks in cause-effect identification demonstrate the effectiveness of our proposed method, surpassing the overall performance of related complexity-based and structural causal model regression-based approaches.",
+        "arxiv_id": "2505.07503"
+    },
+    "2505.06270": {
+        "SCORE": 15,
+        "ARXIVID": "2505.06270",
+        "COMMENT": "The paper discusses a mathematical rationale for dynamically adjusting the balancing parameter in knowledge distillation, which aligns with model compression and training dynamics in neural networks.",
+        "RELEVANCE": 8,
+        "NOVELTY": 7,
+        "authors": [
+            "Seongmin Kim",
+            "Kwanho Kim",
+            "Minseung Kim",
+            "Kanghyun Jo"
+        ],
+        "title": "Importance Analysis for Dynamic Control of Balancing Parameter in a Simple Knowledge Distillation Setting",
+        "abstract": "Although deep learning models owe their remarkable success to deep and complex architectures, this very complexity typically comes at the expense of real-time performance. To address this issue, a variety of model compression techniques have been proposed, among which knowledge distillation (KD) stands out for its strong empirical performance. The KD contains two concurrent processes: (i) matching the outputs of a large, pre-trained teacher network and a lightweight student network, and (ii) training the student to solve its designated downstream task. The associated loss functions are termed the distillation loss and the downsteam-task loss, respectively. Numerous prior studies report that KD is most effective when the influence of the distillation loss outweighs that of the downstream-task loss. The influence(or importance) is typically regulated by a balancing parameter. This paper provides a mathematical rationale showing that in a simple KD setting when the loss is decreasing, the balancing parameter should be dynamically adjusted",
+        "arxiv_id": "2505.06270"
+    },
+    "2505.07680": {
+        "SCORE": 15,
+        "ARXIVID": "2505.07680",
+        "COMMENT": "The paper introduces an adaptive routing framework for LLM inference, focusing on efficiency improvements through KV cache management and speculative decoding. This aligns with the model compression criterion, particularly in terms of algorithmic efficiency breakthroughs.",
+        "RELEVANCE": 8,
+        "NOVELTY": 7,
+        "authors": [
+            "Hang Wu",
+            "Jianian Zhu",
+            "Yinghui Li",
+            "Haojie Wang",
+            "Biao Hou",
+            "Jidong Zhai"
+        ],
+        "title": "SpecRouter: Adaptive Routing for Multi-Level Speculative Decoding in Large Language Models",
+        "abstract": "Large Language Models (LLMs) present a critical trade-off between inference quality and computational cost: larger models offer superior capabilities but incur significant latency, while smaller models are faster but less powerful. Existing serving strategies often employ fixed model scales or static two-stage speculative decoding, failing to dynamically adapt to the varying complexities of user requests or fluctuations in system performance. This paper introduces \\systemname{}, a novel framework that reimagines LLM inference as an adaptive routing problem solved through multi-level speculative decoding. \\systemname{} dynamically constructs and optimizes inference \"paths\" (chains of models) based on real-time feedback, addressing the limitations of static approaches. Our contributions are threefold: (1) An \\textbf{adaptive model chain scheduling} mechanism that leverages performance profiling (execution times) and predictive similarity metrics (derived from token distribution divergence) to continuously select the optimal sequence of draft and verifier models, minimizing predicted latency per generated token. (2) A \\textbf{multi-level collaborative verification} framework where intermediate models within the selected chain can validate speculative tokens, reducing the verification burden on the final, most powerful target model. (3) A \\textbf{synchronized state management} system providing efficient, consistent KV cache handling across heterogeneous models in the chain, including precise, low-overhead rollbacks tailored for asynchronous batch processing inherent in multi-level speculation. Preliminary experiments demonstrate the validity of our method.",
+        "arxiv_id": "2505.07680"
+    },
+    "2505.06282": {
+        "SCORE": 15,
+        "ARXIVID": "2505.06282",
+        "COMMENT": "The paper proposes a semantically guided graph contrastive learning method, which aligns with representation learning through its focus on improving contrastive methods and addressing sampling bias.",
+        "RELEVANCE": 8,
+        "NOVELTY": 7,
+        "authors": [
+            "Zixu Wang",
+            "Bingbing Xu",
+            "Yige Yuan",
+            "Huawei Shen",
+            "Xueqi Cheng"
+        ],
+        "title": "InfoNCE is a Free Lunch for Semantically guided Graph Contrastive Learning",
+        "abstract": "As an important graph pre-training method, Graph Contrastive Learning (GCL) continues to play a crucial role in the ongoing surge of research on graph foundation models or LLM as enhancer for graphs. Traditional GCL optimizes InfoNCE by using augmentations to define self-supervised tasks, treating augmented pairs as positive samples and others as negative. However, this leads to semantically similar pairs being classified as negative, causing significant sampling bias and limiting performance. In this paper, we argue that GCL is essentially a Positive-Unlabeled (PU) learning problem, where the definition of self-supervised tasks should be semantically guided, i.e., augmented samples with similar semantics are considered positive, while others, with unknown semantics, are treated as unlabeled. From this perspective, the key lies in how to extract semantic information. To achieve this, we propose IFL-GCL, using InfoNCE as a \"free lunch\" to extract semantic information. Specifically, We first prove that under InfoNCE, the representation similarity of node pairs aligns with the probability that the corresponding contrastive sample is positive. Then we redefine the maximum likelihood objective based on the corrected samples, leading to a new InfoNCE loss function. Extensive experiments on both the graph pretraining framework and LLM as an enhancer show significantly improvements of IFL-GCL in both IID and OOD scenarios, achieving up to a 9.05% improvement, validating the effectiveness of semantically guided. Code for IFL-GCL is publicly available at: https://github.com/Camel-Prince/IFL-GCL.",
+        "arxiv_id": "2505.06282"
+    },
+    "2505.07765": {
+        "SCORE": 15,
+        "ARXIVID": "2505.07765",
+        "COMMENT": "The paper proposes a sparse radial basis function network for solving nonlinear PDEs, focusing on sparsity and adaptive feature selection. This aligns with the model compression criterion, particularly in sparsity and efficiency.",
+        "RELEVANCE": 8,
+        "NOVELTY": 7,
+        "authors": [
+            "Zihan Shao",
+            "Konstantin Pieper",
+            "Xiaochuan Tian"
+        ],
+        "title": "Solving Nonlinear PDEs with Sparse Radial Basis Function Networks",
+        "abstract": "We propose a novel framework for solving nonlinear PDEs using sparse radial basis function (RBF) networks. Sparsity-promoting regularization is employed to prevent over-parameterization and reduce redundant features. This work is motivated by longstanding challenges in traditional RBF collocation methods, along with the limitations of physics-informed neural networks (PINNs) and Gaussian process (GP) approaches, aiming to blend their respective strengths in a unified framework. The theoretical foundation of our approach lies in the function space of Reproducing Kernel Banach Spaces (RKBS) induced by one-hidden-layer neural networks of possibly infinite width. We prove a representer theorem showing that the solution to the sparse optimization problem in the RKBS admits a finite solution and establishes error bounds that offer a foundation for generalizing classical numerical analysis. The algorithmic framework is based on a three-phase algorithm to maintain computational efficiency through adaptive feature selection, second-order optimization, and pruning of inactive neurons. Numerical experiments demonstrate the effectiveness of our method and highlight cases where it offers notable advantages over GP approaches. This work opens new directions for adaptive PDE solvers grounded in rigorous analysis with efficient, learning-inspired implementation.",
+        "arxiv_id": "2505.07765"
+    },
+    "2505.06297": {
+        "SCORE": 15,
+        "ARXIVID": "2505.06297",
+        "COMMENT": "The paper investigates lossless compression of LLM-generated text using next-token prediction, aligning with the model compression criterion through its focus on efficient compression techniques.",
+        "RELEVANCE": 8,
+        "NOVELTY": 7,
+        "authors": [
+            "Yu Mao",
+            "Holger Pirk",
+            "Chun Jason Xue"
+        ],
+        "title": "Lossless Compression of Large Language Model-Generated Text via Next-Token Prediction",
+        "abstract": "As large language models (LLMs) continue to be deployed and utilized across domains, the volume of LLM-generated data is growing rapidly. This trend highlights the increasing importance of effective and lossless compression for such data in modern text management systems. However, compressing LLM-generated data presents unique challenges compared to traditional human- or machine-generated content. Traditional machine-generated data is typically derived from computational processes or device outputs, often highly structured and limited to low-level elements like labels or numerical values. This structure enables conventional lossless compressors to perform efficiently. In contrast, LLM-generated data is more complex and diverse, requiring new approaches for effective compression. In this work, we conduct the first systematic investigation of lossless compression techniques tailored specifically to LLM-generated data. Notably, because LLMs are trained via next-token prediction, we find that LLM-generated data is highly predictable for the models themselves. This predictability enables LLMs to serve as efficient compressors of their own outputs. Through extensive experiments with 14 representative LLMs and 8 LLM-generated datasets from diverse domains, we show that LLM-based prediction methods achieve remarkable compression rates, exceeding 20x, far surpassing the 3x rate achieved by Gzip, a widely used general-purpose compressor. Furthermore, this advantage holds across different LLM sizes and dataset types, demonstrating the robustness and practicality of LLM-based methods in lossless text compression under generative AI workloads.",
+        "arxiv_id": "2505.06297"
+    },
+    "2505.07272": {
+        "SCORE": 15,
+        "ARXIVID": "2505.07272",
+        "COMMENT": "The paper introduces a novel subspace learning method for heteroscedastic data, which aligns with representation learning and foundational methods in dimensionality reduction.",
+        "RELEVANCE": 8,
+        "NOVELTY": 7,
+        "authors": [
+            "Javier Salazar Cavazos",
+            "Jeffrey A. Fessler",
+            "Laura Balzano"
+        ],
+        "title": "ALPCAH: Subspace Learning for Sample-wise Heteroscedastic Data",
+        "abstract": "Principal component analysis (PCA) is a key tool in the field of data dimensionality reduction. However, some applications involve heterogeneous data that vary in quality due to noise characteristics associated with each data sample. Heteroscedastic methods aim to deal with such mixed data quality. This paper develops a subspace learning method, named ALPCAH, that can estimate the sample-wise noise variances and use this information to improve the estimate of the subspace basis associated with the low-rank structure of the data. Our method makes no distributional assumptions of the low-rank component and does not assume that the noise variances are known. Further, this method uses a soft rank constraint that does not require subspace dimension to be known. Additionally, this paper develops a matrix factorized version of ALPCAH, named LR-ALPCAH, that is much faster and more memory efficient at the cost of requiring subspace dimension to be known or estimated. Simulations and real data experiments show the effectiveness of accounting for data heteroscedasticity compared to existing algorithms. Code available at https://github.com/javiersc1/ALPCAH.",
+        "arxiv_id": "2505.07272"
+    },
+    "2505.06711": {
+        "SCORE": 15,
+        "ARXIVID": "2505.06711",
+        "COMMENT": "The paper proposes an efficient parallelization framework for message passing neural networks, which is relevant to model architecture and efficiency improvements.",
+        "RELEVANCE": 8,
+        "NOVELTY": 7,
+        "authors": [
+            "Junfan Xia",
+            "Bin Jiang"
+        ],
+        "title": "Efficient Parallelization of Message Passing Neural Networks",
+        "abstract": "Machine learning potentials have achieved great success in accelerating atomistic simulations. Many of them rely on local descriptors that readily allow parallelization. More recent message passing neural network (MPNN) models have demonstrated their superior accuracy and become increasingly popular. However, parallelizing MPNN models for large-scale simulations across compute nodes remains a challenge, as the previously argued poor scalability with the number of MP layers and the necessity of data communication. Here, we propose an efficient parallel algorithm for MPNN models, in which additional data communication is minimized among local atoms only in each MP layer without redundant computation, thus scaling linearly with the layer number. Integrated with our recursively embedded atom neural network model, this algorithm demonstrates excellent strong scaling and weak scaling behaviors in several benchmark systems. This approach enables massive molecular dynamics simulations on MPNN models for hundreds of millions of atoms as fast as on strictly local models, vastly extending the applicability of the MPNN potential to an unprecedented scale. This general parallelization framework can empower various MPNN models to efficiently simulate very large and complex systems.",
+        "arxiv_id": "2505.06711"
+    },
+    "2505.06331": {
+        "SCORE": 15,
+        "ARXIVID": "2505.06331",
+        "COMMENT": "The paper proposes Mask-PINNs to improve feature distribution stability in physics-informed neural networks, which aligns with representation learning and foundational methods.",
+        "RELEVANCE": 8,
+        "NOVELTY": 7,
+        "authors": [
+            "Feilong Jiang",
+            "Xiaonan Hou",
+            "Jianqiao Ye",
+            "Min Xia"
+        ],
+        "title": "Mask-PINNs: Regulating Feature Distributions in Physics-Informed Neural Networks",
+        "abstract": "Physics-Informed Neural Networks (PINNs) are a class of deep learning models designed to solve partial differential equations by incorporating physical laws directly into the loss function. However, the internal covariate shift, which has been largely overlooked, hinders the effective utilization of neural network capacity in PINNs. To this end, we propose Mask-PINNs, a novel architecture designed to address this issue in PINNs. Unlike traditional normalization methods such as BatchNorm or LayerNorm, we introduce a learnable, nonlinear mask function that constrains the feature distributions without violating underlying physics. The experimental results show that the proposed method significantly improves feature distribution stability, accuracy, and robustness across various activation functions and PDE benchmarks. Furthermore, it enables the stable and efficient training of wider networks a capability that has been largely overlooked in PINNs.",
+        "arxiv_id": "2505.06331"
+    },
+    "2505.06520": {
+        "SCORE": 15,
+        "ARXIVID": "2505.06520",
+        "COMMENT": "The paper proposes a novel patching-based framework for certifiable unlearning, which aligns with model compression and efficiency breakthroughs.",
+        "RELEVANCE": 8,
+        "NOVELTY": 7,
+        "authors": [
+            "Xuran Li",
+            "Jingyi Wang",
+            "Xiaohan Yuan",
+            "Peixin Zhang",
+            "Zhan Qin",
+            "Zhibo Wang",
+            "Kui Ren"
+        ],
+        "title": "PRUNE: A Patching Based Repair Framework for Certiffable Unlearning of Neural Networks",
+        "abstract": "It is often desirable to remove (a.k.a. unlearn) a speciffc part of the training data from a trained neural network model. A typical application scenario is to protect the data holder's right to be forgotten, which has been promoted by many recent regulation rules. Existing unlearning methods involve training alternative models with remaining data, which may be costly and challenging to verify from the data holder or a thirdparty auditor's perspective. In this work, we provide a new angle and propose a novel unlearning approach by imposing carefully crafted \"patch\" on the original neural network to achieve targeted \"forgetting\" of the requested data to delete. Speciffcally, inspired by the research line of neural network repair, we propose to strategically seek a lightweight minimum \"patch\" for unlearning a given data point with certiffable guarantee. Furthermore, to unlearn a considerable amount of data points (or an entire class), we propose to iteratively select a small subset of representative data points to unlearn, which achieves the effect of unlearning the whole set. Extensive experiments on multiple categorical datasets demonstrates our approach's effectiveness, achieving measurable unlearning while preserving the model's performance and being competitive in efffciency and memory consumption compared to various baseline methods.",
+        "arxiv_id": "2505.06520"
+    },
+    "2505.06475": {
+        "SCORE": 15,
+        "ARXIVID": "2505.06475",
+        "COMMENT": "The paper investigates in-context learning with a focus on task complexity and model architecture, providing insights into architectural behavior and generalization.",
+        "RELEVANCE": 8,
+        "NOVELTY": 7,
+        "authors": [
+            "Binwen Liu",
+            "Peiyu Xu",
+            "Quan Yuan",
+            "Yihong Chen"
+        ],
+        "title": "Probing In-Context Learning: Impact of Task Complexity and Model Architecture on Generalization and Efficiency",
+        "abstract": "We investigate in-context learning (ICL) through a meticulous experimental framework that systematically varies task complexity and model architecture. Extending beyond the linear regression baseline, we introduce Gaussian kernel regression and nonlinear dynamical system tasks, which emphasize temporal and recursive reasoning. We evaluate four distinct models: a GPT2-style Transformer, a Transformer with FlashAttention mechanism, a convolutional Hyena-based model, and the Mamba state-space model. Each model is trained from scratch on synthetic datasets and assessed for generalization during testing. Our findings highlight that model architecture significantly shapes ICL performance. The standard Transformer demonstrates robust performance across diverse tasks, while Mamba excels in temporally structured dynamics. Hyena effectively captures long-range dependencies but shows higher variance early in training, and FlashAttention offers computational efficiency but is more sensitive in low-data regimes. Further analysis uncovers locality-induced shortcuts in Gaussian kernel tasks, enhanced nonlinear separability through input range scaling, and the critical role of curriculum learning in mastering high-dimensional tasks.",
+        "arxiv_id": "2505.06475"
+    },
+    "2505.07239": {
+        "SCORE": 15,
+        "ARXIVID": "2505.07239",
+        "COMMENT": "The paper introduces a private inference system leveraging activation sparsity in LLMs, which aligns with 'Model Compression' through its focus on efficiency improvements.",
+        "RELEVANCE": 8,
+        "NOVELTY": 7,
+        "authors": [
+            "Guang Yan",
+            "Yuhui Zhang",
+            "Zimu Guo",
+            "Lutan Zhao",
+            "Xiaojun Chen",
+            "Chen Wang",
+            "Wenhao Wang",
+            "Dan Meng",
+            "Rui Hou"
+        ],
+        "title": "Comet: Accelerating Private Inference for Large Language Model by Predicting Activation Sparsity",
+        "abstract": "With the growing use of large language models (LLMs) hosted on cloud platforms to offer inference services, privacy concerns about the potential leakage of sensitive information are escalating. Secure multi-party computation (MPC) is a promising solution to protect the privacy in LLM inference. However, MPC requires frequent inter-server communication, causing high performance overhead.   Inspired by the prevalent activation sparsity of LLMs, where most neuron are not activated after non-linear activation functions, we propose an efficient private inference system, Comet. This system employs an accurate and fast predictor to predict the sparsity distribution of activation function output. Additionally, we introduce a new private inference protocol. It efficiently and securely avoids computations involving zero values by exploiting the spatial locality of the predicted sparse distribution. While this computation-avoidance approach impacts the spatiotemporal continuity of KV cache entries, we address this challenge with a low-communication overhead cache refilling strategy that merges miss requests and incorporates a prefetching mechanism. Finally, we evaluate Comet on four common LLMs and compare it with six state-of-the-art private inference systems. Comet achieves a 1.87x-2.63x speedup and a 1.94x-2.64x communication reduction.",
+        "arxiv_id": "2505.07239"
+    },
+    "2505.06977": {
+        "SCORE": 15,
+        "ARXIVID": "2505.06977",
+        "COMMENT": "The paper introduces a novel training-free framework for model merging, which aligns with foundational research in model architecture and efficiency. The focus on resolving conflicts in task vector accumulation is relevant to representation learning and model compression.",
+        "RELEVANCE": 8,
+        "NOVELTY": 7,
+        "authors": [
+            "Wenju Sun",
+            "Qingyong Li",
+            "Yangli-ao Geng",
+            "Boyang Li"
+        ],
+        "title": "CAT Merging: A Training-Free Approach for Resolving Conflicts in Model Merging",
+        "abstract": "Multi-task model merging offers a promising paradigm for integrating multiple expert models into a unified model without additional training. Existing state-of-the-art techniques, such as Task Arithmetic and its variants, merge models by accumulating task vectors -- the parameter differences between pretrained and finetuned models. However, task vector accumulation is often hindered by knowledge conflicts, leading to performance degradation. To address this challenge, we propose Conflict-Aware Task Merging (CAT Merging), a novel training-free framework that selectively trims conflict-prone components from the task vectors. CAT Merging introduces several parameter-specific strategies, including projection for linear weights and masking for scaling and shifting parameters in normalization layers. Extensive experiments on vision, language, and vision-language tasks demonstrate that CAT Merging effectively suppresses knowledge conflicts, achieving average accuracy improvements of up to 2.5% (ViT-B/32) and 2.0% (ViT-L/14) over state-of-the-art methods.",
+        "arxiv_id": "2505.06977"
+    },
+    "2505.07244": {
+        "SCORE": 15,
+        "ARXIVID": "2505.07244",
+        "COMMENT": "The paper explores the universal approximation property of neural DDEs, which is relevant to emerging trends in model architecture and theoretical insights. The focus on memory capacity and its influence is novel.",
+        "RELEVANCE": 8,
+        "NOVELTY": 7,
+        "authors": [
+            "Christian Kuehn",
+            "Sara-Viola Kuntz"
+        ],
+        "title": "The Influence of the Memory Capacity of Neural DDEs on the Universal Approximation Property",
+        "abstract": "Neural Ordinary Differential Equations (Neural ODEs), which are the continuous-time analog of Residual Neural Networks (ResNets), have gained significant attention in recent years. Similarly, Neural Delay Differential Equations (Neural DDEs) can be interpreted as an infinite depth limit of Densely Connected Residual Neural Networks (DenseResNets). In contrast to traditional ResNet architectures, DenseResNets are feed-forward networks that allow for shortcut connections across all layers. These additional connections introduce memory in the network architecture, as typical in many modern architectures. In this work, we explore how the memory capacity in neural DDEs influences the universal approximation property. The key parameter for studying the memory capacity is the product $K \\tau$ of the Lipschitz constant and the delay of the DDE. In the case of non-augmented architectures, where the network width is not larger than the input and output dimensions, neural ODEs and classical feed-forward neural networks cannot have the universal approximation property. We show that if the memory capacity $K\\tau$ is sufficiently small, the dynamics of the neural DDE can be approximated by a neural ODE. Consequently, non-augmented neural DDEs with a small memory capacity also lack the universal approximation property. In contrast, if the memory capacity $K\\tau$ is sufficiently large, we can establish the universal approximation property of neural DDEs for continuous functions. If the neural DDE architecture is augmented, we can expand the parameter regions in which universal approximation is possible. Overall, our results show that by increasing the memory capacity $K\\tau$, the infinite-dimensional phase space of DDEs with positive delay $\\tau>0$ is not sufficient to guarantee a direct jump transition to universal approximation, but only after a certain memory threshold, universal approximation holds.",
+        "arxiv_id": "2505.07244"
+    },
+    "2505.06731": {
+        "SCORE": 15,
+        "ARXIVID": "2505.06731",
+        "COMMENT": "The paper introduces DxANN, a novel architecture embedding explainability directly into the training process, which aligns with the 'Model Architecture' criterion by proposing an innovative design.",
+        "RELEVANCE": 8,
+        "NOVELTY": 7,
+        "authors": [
+            "David Zucker"
+        ],
+        "title": "Deeply Explainable Artificial Neural Network",
+        "abstract": "While deep learning models have demonstrated remarkable success in numerous domains, their black-box nature remains a significant limitation, especially in critical fields such as medical image analysis and inference. Existing explainability methods, such as SHAP, LIME, and Grad-CAM, are typically applied post hoc, adding computational overhead and sometimes producing inconsistent or ambiguous results. In this paper, we present the Deeply Explainable Artificial Neural Network (DxANN), a novel deep learning architecture that embeds explainability ante hoc, directly into the training process. Unlike conventional models that require external interpretation methods, DxANN is designed to produce per-sample, per-feature explanations as part of the forward pass. Built on a flow-based framework, it enables both accurate predictions and transparent decision-making, and is particularly well-suited for image-based tasks. While our focus is on medical imaging, the DxANN architecture is readily adaptable to other data modalities, including tabular and sequential data. DxANN marks a step forward toward intrinsically interpretable deep learning, offering a practical solution for applications where trust and accountability are essential.",
+        "arxiv_id": "2505.06731"
+    },
+    "2505.06595": {
+        "SCORE": 15,
+        "ARXIVID": "2505.06595",
+        "COMMENT": "The paper introduces a novel method for feature representation transfer using perception coherence, aligning with the 'Representation Learning' criterion by addressing how features are encoded and transferred.",
+        "RELEVANCE": 8,
+        "NOVELTY": 7,
+        "authors": [
+            "Hai-Vy Nguyen",
+            "Fabrice Gamboa",
+            "Sixin Zhang",
+            "Reda Chhaibi",
+            "Serge Gratton",
+            "Thierry Giaccone"
+        ],
+        "title": "Feature Representation Transferring to Lightweight Models via Perception Coherence",
+        "abstract": "In this paper, we propose a method for transferring feature representation to lightweight student models from larger teacher models. We mathematically define a new notion called \\textit{perception coherence}. Based on this notion, we propose a loss function, which takes into account the dissimilarities between data points in feature space through their ranking. At a high level, by minimizing this loss function, the student model learns to mimic how the teacher model \\textit{perceives} inputs. More precisely, our method is motivated by the fact that the representational capacity of the student model is weaker than the teacher model. Hence, we aim to develop a new method allowing for a better relaxation. This means that, the student model does not need to preserve the absolute geometry of the teacher one, while preserving global coherence through dissimilarity ranking. Our theoretical insights provide a probabilistic perspective on the process of feature representation transfer. Our experiments results show that our method outperforms or achieves on-par performance compared to strong baseline methods for representation transferring.",
+        "arxiv_id": "2505.06595"
+    }
+}

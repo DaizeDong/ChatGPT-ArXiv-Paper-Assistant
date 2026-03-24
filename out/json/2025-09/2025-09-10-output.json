@@ -1,0 +1,346 @@
+{
+    "2509.07963": {
+        "SCORE": 19,
+        "ARXIVID": "2509.07963",
+        "COMMENT": "Strongly matches Model Architecture and Efficiency: proposes new attention scoring via high-rank efficient structured matrices (BTT/MLR) to encode distance-dependent compute biases and improve scaling.",
+        "RELEVANCE": 10,
+        "NOVELTY": 9,
+        "authors": [
+            "Yilun Kuang",
+            "Noah Amsel",
+            "Sanae Lotfi",
+            "Shikai Qiu",
+            "Andres Potapczynski",
+            "Andrew Gordon Wilson"
+        ],
+        "title": "Customizing the Inductive Biases of Softmax Attention using Structured Matrices",
+        "abstract": "The core component of attention is the scoring function, which transforms the inputs into low-dimensional queries and keys and takes the dot product of each pair. While the low-dimensional projection improves efficiency, it causes information loss for certain tasks that have intrinsically high-dimensional inputs. Additionally, attention uses the same scoring function for all input pairs, without imposing a distance-dependent compute bias for neighboring tokens in the sequence. In this work, we address these shortcomings by proposing new scoring functions based on computationally efficient structured matrices with high ranks, including Block Tensor-Train (BTT) and Multi-Level Low Rank (MLR) matrices. On in-context regression tasks with high-dimensional inputs, our proposed scoring functions outperform standard attention for any fixed compute budget. On language modeling, a task that exhibits locality patterns, our MLR-based attention method achieves improved scaling laws compared to both standard attention and variants of sliding window attention. Additionally, we show that both BTT and MLR fall under a broader family of efficient structured matrices capable of encoding either full-rank or distance-dependent compute biases, thereby addressing significant shortcomings of standard attention. Finally, we show that MLR attention has promising results for long-range time-series forecasting.",
+        "arxiv_id": "2509.07963"
+    },
+    "2509.07301": {
+        "SCORE": 19,
+        "ARXIVID": "2509.07301",
+        "COMMENT": "Model Architecture: introduces CASTLE, a causal attention variant with lookahead keys and an equivalent parallelizable formulation.",
+        "RELEVANCE": 10,
+        "NOVELTY": 9,
+        "authors": [
+            "Zhuoqing Song",
+            "Peng Sun",
+            "Huizhuo Yuan",
+            "Quanquan Gu"
+        ],
+        "title": "Causal Attention with Lookahead Keys",
+        "abstract": "In standard causal attention, each token's query, key, and value (QKV) are static and encode only preceding context. We introduce CAuSal aTtention with Lookahead kEys (CASTLE), an attention mechanism that continually updates each token's keys as the context unfolds. We term these updated keys lookahead keys because they belong to earlier positions yet integrate information from tokens that appear later relative to those positions, while strictly preserving the autoregressive property. Although the mechanism appears sequential, we derive a mathematical equivalence that avoids explicitly materializing lookahead keys at each position and enables efficient parallel training. On language modeling benchmarks, CASTLE consistently outperforms standard causal attention across model scales, reducing validation perplexity and improving performance on a range of downstream tasks.",
+        "arxiv_id": "2509.07301"
+    },
+    "2509.07727": {
+        "SCORE": 17,
+        "ARXIVID": "2509.07727",
+        "COMMENT": "Matches both Model Architecture (MoE) and Model Compression and Efficiency: compresses non-activated experts with error-bounded lossy methods and analyzes layer-wise sensitivity on inference accuracy.",
+        "RELEVANCE": 10,
+        "NOVELTY": 7,
+        "authors": [
+            "Songkai Ma",
+            "Zhaorui Zhang",
+            "Sheng Di",
+            "Benben Liu",
+            "Xiaodong Yu",
+            "Xiaoyi Lu",
+            "Dan Wang"
+        ],
+        "title": "MoE-Compression: How the Compression Error of Experts Affects the Inference Accuracy of MoE Model?",
+        "abstract": "With the widespread application of Mixture of Experts (MoE) reasoning models in the field of LLM learning, efficiently serving MoE models under limited GPU memory constraints has emerged as a significant challenge. Offloading the non-activated experts to main memory has been identified as an efficient approach to address such a problem, while it brings the challenges of transferring the expert between the GPU memory and main memory. We need to explore an efficient approach to compress the expert and analyze how the compression error affects the inference performance.   To bridge this gap, we propose employing error-bounded lossy compression algorithms (such as SZ3 and CuSZp) to compress non-activated experts, thereby reducing data transfer overhead during MoE inference. We conduct extensive experiments across various benchmarks and present a comprehensive analysis of how compression-induced errors in different experts affect overall inference accuracy. The results indicate that experts in the shallow layers, which are primarily responsible for the attention mechanism and the transformation of input tokens into vector representations, exhibit minimal degradation in inference accuracy when subjected to bounded errors. In contrast, errors in the middle-layer experts, which are central to model reasoning, significantly impair inference accuracy. Interestingly, introducing bounded errors in the deep-layer experts, which are mainly responsible for instruction following and output integration, can sometimes lead to improvements in inference accuracy.",
+        "arxiv_id": "2509.07727"
+    },
+    "2509.07025": {
+        "SCORE": 17,
+        "ARXIVID": "2509.07025",
+        "COMMENT": "Strongly matches Compression/Efficiency: introduces binary normalized layers with 1-bit (0/1) parameters across all layers, an extreme quantization approach claiming near-parity performance.",
+        "RELEVANCE": 10,
+        "NOVELTY": 7,
+        "authors": [
+            "Eduardo Lobo Lustoda Cabral",
+            "Paulo Pirozelli",
+            "Larissa Driemeier"
+        ],
+        "title": "1 bit is all we need: binary normalized neural networks",
+        "abstract": "The increasing size of large neural network models, specifically language models and foundational image models, poses deployment challenges, prompting efforts to reduce memory requirements and enhance computational efficiency. These efforts are critical to ensure practical deployment and effective utilization of these models across various applications. In this work, a novel type of neural network layers and models is developed that uses only single-bit parameters. In this novel type of models all parameters of all layers, including kernel weights and biases, only have values equal to zero or one. This novel type of models uses layers named as binary normalized layer. These binary normalized layers can be of any type, such as fully connected, convolutional, attention, etc., and they consist of slight variations of the corresponding conventional layers. To show the effectiveness of the binary normalized layers, two different models are configured to solve a multiclass image classification problem and a language decoder to predict the next token of a sequence. The model to solve the image classification has convolutional and fully connected layers, and the language model is composed of transformer blocks with multi-head attention. The results show that models with binary normalized layers present almost the same results obtained by equivalent models with real 32-bit parameters. The binary normalized layers allow to develop models that use 32 times less memory than current models and have equivalent performance. Besides, the binary normalized layers can be easily implemented on current computers using 1-bit arrays, and do not require the development of dedicated electronic hardware. This novel type of layers opens a new era for large neural network models with reduced memory requirements that can be deployed using simple and cheap hardware, such as mobile devices or only cpus.",
+        "arxiv_id": "2509.07025"
+    },
+    "2509.07115": {
+        "SCORE": 17,
+        "ARXIVID": "2509.07115",
+        "COMMENT": "Matches Model Architecture: introduces a principled Riemannian batch normalization (GyroBN) for gyrogroups with theoretical conditions and instantiations across multiple manifolds.",
+        "RELEVANCE": 9,
+        "NOVELTY": 8,
+        "authors": [
+            "Ziheng Chen",
+            "Xiao-Jun Wu",
+            "Nicu Sebe"
+        ],
+        "title": "Riemannian Batch Normalization: A Gyro Approach",
+        "abstract": "Normalization layers are crucial for deep learning, but their Euclidean formulations are inadequate for data on manifolds. On the other hand, many Riemannian manifolds in machine learning admit gyro-structures, enabling principled extensions of Euclidean neural networks to non-Euclidean domains. Inspired by this, we introduce GyroBN, a principled Riemannian batch normalization framework for gyrogroups. We establish two necessary conditions, namely \\emph{pseudo-reduction} and \\emph{gyroisometric gyrations}, that guarantee GyroBN with theoretical control over sample statistics, and show that these conditions hold for all known gyrogroups in machine learning. Our framework also incorporates several existing Riemannian normalization methods as special cases. We further instantiate GyroBN on seven representative geometries, including the Grassmannian, five constant curvature spaces, and the correlation manifold, and derive novel gyro and Riemannian structures to enable these instantiations. Experiments across these geometries demonstrate the effectiveness of GyroBN. The code is available at https://github.com/GitZH-Chen/GyroBN.git.",
+        "arxiv_id": "2509.07115"
+    },
+    "2509.07339": {
+        "SCORE": 17,
+        "ARXIVID": "2509.07339",
+        "COMMENT": "Representation learning/training dynamics: empirical study of intermediate token generation (Chain-of-Thought) vs problem complexity using transformers trained from scratch.",
+        "RELEVANCE": 9,
+        "NOVELTY": 8,
+        "authors": [
+            "Vardhan Palod",
+            "Karthik Valmeekam",
+            "Kaya Stechly",
+            "Subbarao Kambhampati"
+        ],
+        "title": "Performative Thinking? The Brittle Correlation Between CoT Length and Problem Complexity",
+        "abstract": "Intermediate token generation (ITG), where a model produces output before the solution, has been proposed as a method to improve the performance of language models on reasoning tasks. While these reasoning traces or Chain of Thoughts (CoTs) are correlated with performance gains, the mechanisms underlying them remain unclear. A prevailing assumption in the community has been to anthropomorphize these tokens as \"thinking\", treating longer traces as evidence of higher problem-adaptive computation. In this work, we critically examine whether intermediate token sequence length reflects or correlates with problem difficulty. To do so, we train transformer models from scratch on derivational traces of the A* search algorithm, where the number of operations required to solve a maze problem provides a precise and verifiable measure of problem complexity. We first evaluate the models on trivial free-space problems, finding that even for the simplest tasks, they often produce excessively long reasoning traces and sometimes fail to generate a solution. We then systematically evaluate the model on out-of-distribution problems and find that the intermediate token length and ground truth A* trace length only loosely correlate. We notice that the few cases where correlation appears are those where the problems are closer to the training distribution, suggesting that the effect arises from approximate recall rather than genuine problem-adaptive computation. This suggests that the inherent computational complexity of the problem instance is not a significant factor, but rather its distributional distance from the training data. These results challenge the assumption that intermediate trace generation is adaptive to problem difficulty and caution against interpreting longer sequences in systems like R1 as automatically indicative of \"thinking effort\".",
+        "arxiv_id": "2509.07339"
+    },
+    "2509.07236": {
+        "SCORE": 17,
+        "ARXIVID": "2509.07236",
+        "COMMENT": "Model Architecture/Training Dynamics: relaxes forward-backward gradient symmetry, enabling non-differentiable activations (e.g., Heaviside) with alternative gradient signals.",
+        "RELEVANCE": 9,
+        "NOVELTY": 8,
+        "authors": [
+            "Luigi Troiano",
+            "Francesco Gissi",
+            "Vincenzo Benedetto",
+            "Genny Tortora"
+        ],
+        "title": "Breaking the Conventional Forward-Backward Tie in Neural Networks: Activation Functions",
+        "abstract": "Gradient-based neural network training traditionally enforces symmetry between forward and backward propagation, requiring activation functions to be differentiable (or sub-differentiable) and strictly monotonic in certain regions to prevent flat gradient areas. This symmetry, linking forward activations closely to backward gradients, significantly restricts the selection of activation functions, particularly excluding those with substantial flat or non-differentiable regions. In this paper, we challenge this assumption through mathematical analysis, demonstrating that precise gradient magnitudes derived from activation functions are largely redundant, provided the gradient direction is preserved. Empirical experiments conducted on foundational architectures - such as Multi-Layer Perceptrons (MLPs), Convolutional Neural Networks (CNNs), and Binary Neural Networks (BNNs) - confirm that relaxing forward-backward symmetry and substituting traditional gradients with simpler or stochastic alternatives does not impair learning and may even enhance training stability and efficiency. We explicitly demonstrate that neural networks with flat or non-differentiable activation functions, such as the Heaviside step function, can be effectively trained, thereby expanding design flexibility and computational efficiency. Further empirical validation with more complex architectures remains a valuable direction for future research.",
+        "arxiv_id": "2509.07236"
+    },
+    "2509.07972": {
+        "SCORE": 17,
+        "ARXIVID": "2509.07972",
+        "COMMENT": "Training dynamics/optimization theory: analyzes why learning rate warmup accelerates convergence under generalized smoothness.",
+        "RELEVANCE": 9,
+        "NOVELTY": 8,
+        "authors": [
+            "Yuxing Liu",
+            "Yuze Ge",
+            "Rui Pan",
+            "An Kang",
+            "Tong Zhang"
+        ],
+        "title": "Theoretical Analysis on how Learning Rate Warmup Accelerates Convergence",
+        "abstract": "Learning rate warmup is a popular and practical technique in training large-scale deep neural networks. Despite the huge success in practice, the theoretical advantages of this strategy of gradually increasing the learning rate at the beginning of the training process have not been fully understood. To resolve this gap between theory and practice, we first propose a novel family of generalized smoothness assumptions, and validate its applicability both theoretically and empirically. Under the novel smoothness assumption, we study the convergence properties of gradient descent (GD) in both deterministic and stochastic settings. It is shown that learning rate warmup consistently accelerates GD, and GD with warmup can converge at most $\\Theta(T)$ times faster than with a non-increasing learning rate schedule in some specific cases, providing insights into the benefits of this strategy from an optimization theory perspective.",
+        "arxiv_id": "2509.07972"
+    },
+    "2509.07103": {
+        "SCORE": 17,
+        "ARXIVID": "2509.07103",
+        "COMMENT": "Model Architecture + Compression/Efficiency: proposes lmKANs as a drop-in replacement for linear layers using spline lookup multivariate functions, cutting inference FLOPs (up to 6x) with dedicated CUDA kernels.",
+        "RELEVANCE": 9,
+        "NOVELTY": 8,
+        "authors": [
+            "Sergey Pozdnyakov",
+            "Philippe Schwaller"
+        ],
+        "title": "Lookup multivariate Kolmogorov-Arnold Networks",
+        "abstract": "High-dimensional linear mappings, or linear layers, dominate both the parameter count and the computational cost of most modern deep-learning models. We introduce a general drop-in replacement, lookup multivariate Kolmogorov-Arnold Networks (lmKANs), which deliver a substantially better trade-off between capacity and inference cost. Our construction expresses a general high-dimensional mapping through trainable low-dimensional multivariate functions. These functions can carry dozens or hundreds of trainable parameters each, and yet it takes only a few multiplications to compute them because they are implemented as spline lookup tables. Empirically, lmKANs reduce inference FLOPs by up to 6.0x while matching the flexibility of MLPs in general high-dimensional function approximation. In another feedforward fully connected benchmark, on the tabular-like dataset of randomly displaced methane configurations, lmKANs enable more than 10x higher H100 throughput at equal accuracy. Within frameworks of Convolutional Neural Networks, lmKAN-based CNNs cut inference FLOPs at matched accuracy by 1.6-2.1x and by 1.7x on the CIFAR-10 and ImageNet-1k datasets, respectively. Our code, including dedicated CUDA kernels, is available online at https://github.com/schwallergroup/lmkan.",
+        "arxiv_id": "2509.07103"
+    },
+    "2509.07003": {
+        "SCORE": 16,
+        "ARXIVID": "2509.07003",
+        "COMMENT": "Matches High Performance Computing: eager-mode SPMD system with a novel distributed RNG ensuring single-device consistency and communication-efficient training.",
+        "RELEVANCE": 9,
+        "NOVELTY": 7,
+        "authors": [
+            "Youjie Li",
+            "Cheng Wan",
+            "Zhiqi Lin",
+            "Hongyu Zhu",
+            "Jiacheng Yang",
+            "Ziang Song",
+            "Xinyi Di",
+            "Jiawei Wu",
+            "Huiyao Shu",
+            "Wenlei Bao",
+            "Yanghua Peng",
+            "Haibin Lin",
+            "Li-Wen Chang"
+        ],
+        "title": "veScale: Consistent and Efficient Tensor Programming with Eager-Mode SPMD",
+        "abstract": "Large Language Models (LLMs) have scaled rapidly in size and complexity, requiring increasingly intricate parallelism for distributed training, such as 3D parallelism. This sophistication motivates a shift toward simpler, more debuggable programming paradigm like Single Program Multiple Data (SPMD). However, SPMD in eager execution introduces two key challenges: ensuring consistency with single-device execution and achieving high performance at scale. In this paper, we introduce veScale, an eager-mode training system that fully embraces SPMD paradigm to democratize distributed tensor programming. veScale addresses the prevalent issue of inconsistent results in systems like PyTorch by introducing a novel algorithm of distributed Random Number Generation (RNG) compatible with arbitrary sharded operators. veScale also significantly boosts training performance by reducing PyTorch primitive's overhead and improving communication efficiency. Evaluations show that veScale delivers up to 2.2x speedup over the state-of-the-art training systems, like TorchTitan, and cuts code complexity by 78.4%, while preserving single-device-equivalent results.",
+        "arxiv_id": "2509.07003"
+    },
+    "2509.07324": {
+        "SCORE": 16,
+        "ARXIVID": "2509.07324",
+        "COMMENT": "Matches Model Architecture: refines self-attention via one-step belief propagation to counter attention localization; introduces GTD to analyze multi-hop dependencies.",
+        "RELEVANCE": 9,
+        "NOVELTY": 7,
+        "authors": [
+            "Nakyung Lee",
+            "Yeongoon Kim",
+            "Minhae Oh",
+            "Suhwan Kim",
+            "Jin Woo Koo",
+            "Hyewon Jo",
+            "Jungwoo Lee"
+        ],
+        "title": "Mitigating Attention Localization in Small Scale: Self-Attention Refinement via One-step Belief Propagation",
+        "abstract": "Transformer-based self-attention mechanism serves as the core of modern language models, yet it often suffers from localization, where attentions collapse onto a limited subset of tokens and fail to capture long-range dependencies. To address this issue, we propose Self-Attention One-step Belief Propagation (SAOBP), a refinement framework that injects multi-hop relationships through a belief propagation process. To interpret and quantify these interactions, we introduce Global Token Dependency (GTD) that captures the relative contribution of multihop connections within the attention graph. Empirical results indicate that SAOBP helps prevent entropy collapse in deeper layers and adaptively maintains GTD at task-appropriate levels, thereby supporting improvements in model performance. Importantly, we observe competitive gains in small-scale models, highlighting its potential for improving inference quality in resource-constrained scenarios.",
+        "arxiv_id": "2509.07324"
+    },
+    "2509.07282": {
+        "SCORE": 16,
+        "ARXIVID": "2509.07282",
+        "COMMENT": "Matches Model Architecture and Representation Learning: introduces a bijective decoding head (Gumbel-Sinkhorn) in a Transformer and analyzes layer-wise strategies for combinatorial generalization.",
+        "RELEVANCE": 8,
+        "NOVELTY": 8,
+        "authors": [
+            "Jeff Shen",
+            "Lindsay Smith"
+        ],
+        "title": "ALICE: An Interpretable Neural Architecture for Generalization in Substitution Ciphers",
+        "abstract": "We present cryptogram solving as an ideal testbed for studying neural network generalization in combinatorially complex domains. In this task, models must decrypt text encoded with substitution ciphers, choosing from 26! possible mappings without explicit access to the cipher. We develop ALICE (an Architecture for Learning Interpretable Cryptogram dEcipherment): a simple encoder-only Transformer that sets a new state-of-the-art for both accuracy and speed on this decryption problem. Surprisingly, ALICE generalizes to unseen ciphers after training on only ${\\sim}1500$ unique ciphers, a minute fraction ($3.7 \\times 10^{-24}$) of the possible cipher space. To enhance interpretability, we introduce a novel bijective decoding head that explicitly models permutations via the Gumbel-Sinkhorn method, enabling direct extraction of learned cipher mappings. Through early exit analysis, we reveal how ALICE progressively refines its predictions in a way that appears to mirror common human strategies for this task: early layers employ frequency-based heuristics, middle layers form word structures, and final layers correct individual characters. Our architectural innovations and analysis methods extend beyond cryptograms to any domain with bijective mappings and combinatorial structure, offering new insights into neural network generalization and interpretability.",
+        "arxiv_id": "2509.07282"
+    },
+    "2509.07289": {
+        "SCORE": 15,
+        "ARXIVID": "2509.07289",
+        "COMMENT": "Matches Representation Learning: kernelizes the VICReg SSL objective in RKHS with Hilbert\u2013Schmidt norms, offering a principled nonlinear representation learning formulation that avoids collapse.",
+        "RELEVANCE": 8,
+        "NOVELTY": 7,
+        "authors": [
+            "M. Hadi Sepanj",
+            "Benyamin Ghojogh",
+            "Paul Fieguth"
+        ],
+        "title": "Kernel VICReg for Self-Supervised Learning in Reproducing Kernel Hilbert Space",
+        "abstract": "Self-supervised learning (SSL) has emerged as a powerful paradigm for representation learning by optimizing geometric objectives--such as invariance to augmentations, variance preservation, and feature decorrelation--without requiring labels. However, most existing methods operate in Euclidean space, limiting their ability to capture nonlinear dependencies and geometric structures. In this work, we propose Kernel VICReg, a novel self-supervised learning framework that lifts the VICReg objective into a Reproducing Kernel Hilbert Space (RKHS). By kernelizing each term of the loss-variance, invariance, and covariance--we obtain a general formulation that operates on double-centered kernel matrices and Hilbert-Schmidt norms, enabling nonlinear feature learning without explicit mappings.   We demonstrate that Kernel VICReg not only avoids representational collapse but also improves performance on tasks with complex or small-scale data. Empirical evaluations across MNIST, CIFAR-10, STL-10, TinyImageNet, and ImageNet100 show consistent gains over Euclidean VICReg, with particularly strong improvements on datasets where nonlinear structures are prominent. UMAP visualizations further confirm that kernel-based embeddings exhibit better isometry and class separation. Our results suggest that kernelizing SSL objectives is a promising direction for bridging classical kernel methods with modern representation learning.",
+        "arxiv_id": "2509.07289"
+    },
+    "2509.07665": {
+        "SCORE": 15,
+        "ARXIVID": "2509.07665",
+        "COMMENT": "Model architecture: neurosymbolic framework that layers symbolic reasoning with Graph Neural Predicates, enabling neural\u2013symbolic integration beyond fixed pipelines.",
+        "RELEVANCE": 8,
+        "NOVELTY": 7,
+        "authors": [
+            "Adem Kikaj",
+            "Giuseppe Marra",
+            "Floris Geerts",
+            "Robin Manhaeve",
+            "Luc De Raedt"
+        ],
+        "title": "DeepGraphLog for Layered Neurosymbolic AI",
+        "abstract": "Neurosymbolic AI (NeSy) aims to integrate the statistical strengths of neural networks with the interpretability and structure of symbolic reasoning. However, current NeSy frameworks like DeepProbLog enforce a fixed flow where symbolic reasoning always follows neural processing. This restricts their ability to model complex dependencies, especially in irregular data structures such as graphs. In this work, we introduce DeepGraphLog, a novel NeSy framework that extends ProbLog with Graph Neural Predicates. DeepGraphLog enables multi-layer neural-symbolic reasoning, allowing neural and symbolic components to be layered in arbitrary order. In contrast to DeepProbLog, which cannot handle symbolic reasoning via neural methods, DeepGraphLog treats symbolic representations as graphs, enabling them to be processed by Graph Neural Networks (GNNs). We showcase the capabilities of DeepGraphLog on tasks in planning, knowledge graph completion with distant supervision, and GNN expressivity. Our results demonstrate that DeepGraphLog effectively captures complex relational dependencies, overcoming key limitations of existing NeSy systems. By broadening the applicability of neurosymbolic AI to graph-structured domains, DeepGraphLog offers a more expressive and flexible framework for neural-symbolic integration.",
+        "arxiv_id": "2509.07665"
+    },
+    "2509.07021": {
+        "SCORE": 15,
+        "ARXIVID": "2509.07021",
+        "COMMENT": "Model Compression/Efficiency: unified soft pruning and reduced per-primitive parameters to cut memory in 3D Gaussian Splatting.",
+        "RELEVANCE": 8,
+        "NOVELTY": 7,
+        "authors": [
+            "Jiarui Chen",
+            "Yikeng Chen",
+            "Yingshuang Zou",
+            "Ye Huang",
+            "Peng Wang",
+            "Yuan Liu",
+            "Yujing Sun",
+            "Wenping Wang"
+        ],
+        "title": "MEGS$^{2}$: Memory-Efficient Gaussian Splatting via Spherical Gaussians and Unified Pruning",
+        "abstract": "3D Gaussian Splatting (3DGS) has emerged as a dominant novel-view synthesis technique, but its high memory consumption severely limits its applicability on edge devices. A growing number of 3DGS compression methods have been proposed to make 3DGS more efficient, yet most only focus on storage compression and fail to address the critical bottleneck of rendering memory. To address this problem, we introduce MEGS$^{2}$, a novel memory-efficient framework that tackles this challenge by jointly optimizing two key factors: the total primitive number and the parameters per primitive, achieving unprecedented memory compression. Specifically, we replace the memory-intensive spherical harmonics with lightweight arbitrarily-oriented spherical Gaussian lobes as our color representations. More importantly, we propose a unified soft pruning framework that models primitive-number and lobe-number pruning as a single constrained optimization problem. Experiments show that MEGS$^{2}$ achieves a 50% static VRAM reduction and a 40% rendering VRAM reduction compared to existing methods, while maintaining comparable rendering quality.",
+        "arxiv_id": "2509.07021"
+    },
+    "2509.07523": {
+        "SCORE": 15,
+        "ARXIVID": "2509.07523",
+        "COMMENT": "Representation Learning: introduces a robust, scalable convolutional dictionary learning algorithm for unsupervised pattern discovery.",
+        "RELEVANCE": 8,
+        "NOVELTY": 7,
+        "authors": [
+            "Jad Yehya",
+            "Mansour Benbakoura",
+            "C\\'edric Allain",
+            "Beno\\^it Malezieux",
+            "Matthieu Kowalski",
+            "Thomas Moreau"
+        ],
+        "title": "RoseCDL: Robust and Scalable Convolutional Dictionary Learning for Rare-event Detection",
+        "abstract": "Identifying recurring patterns and rare events in large-scale signals is a fundamental challenge in fields such as astronomy, physical simulations, and biomedical science. Convolutional Dictionary Learning (CDL) offers a powerful framework for modeling local structures in signals, but its use for detecting rare or anomalous events remains largely unexplored. In particular, CDL faces two key challenges in this setting: high computational cost and sensitivity to artifacts and outliers. In this paper, we introduce RoseCDL, a scalable and robust CDL algorithm designed for unsupervised rare event detection in long signals. RoseCDL combines stochastic windowing for efficient training on large datasets with inline outlier detection to enhance robustness and isolate anomalous patterns. This reframes CDL as a practical tool for event discovery and characterization in real-world signals, extending its role beyond traditional tasks like compression or denoising.",
+        "arxiv_id": "2509.07523"
+    },
+    "2509.07955": {
+        "SCORE": 14,
+        "ARXIVID": "2509.07955",
+        "COMMENT": "Matches Representation Learning: addresses underspecification and spurious correlations by learning diverse concept sets via confident selective disagreement (self-training).",
+        "RELEVANCE": 7,
+        "NOVELTY": 7,
+        "authors": [
+            "Oliver Daniels",
+            "Stuart Armstrong",
+            "Alexandre Maranh\\~ao",
+            "Mahirah Fairuz Rahman",
+            "Benjamin M. Marlin",
+            "Rebecca Gorman"
+        ],
+        "title": "ACE and Diverse Generalization via Selective Disagreement",
+        "abstract": "Deep neural networks are notoriously sensitive to spurious correlations - where a model learns a shortcut that fails out-of-distribution. Existing work on spurious correlations has often focused on incomplete correlations,leveraging access to labeled instances that break the correlation. But in cases where the spurious correlations are complete, the correct generalization is fundamentally \\textit{underspecified}. To resolve this underspecification, we propose learning a set of concepts that are consistent with training data but make distinct predictions on a subset of novel unlabeled inputs. Using a self-training approach that encourages \\textit{confident} and \\textit{selective} disagreement, our method ACE matches or outperforms existing methods on a suite of complete-spurious correlation benchmarks, while remaining robust to incomplete spurious correlations. ACE is also more configurable than prior approaches, allowing for straight-forward encoding of prior knowledge and principled unsupervised model selection. In an early application to language-model alignment, we find that ACE achieves competitive performance on the measurement tampering detection benchmark \\textit{without} access to untrusted measurements. While still subject to important limitations, ACE represents significant progress towards overcoming underspecification.",
+        "arxiv_id": "2509.07955"
+    },
+    "2509.07295": {
+        "SCORE": 14,
+        "ARXIVID": "2509.07295",
+        "COMMENT": "Representation learning/training dynamics: post-training self-supervised reconstruction to realign understanding and generation in unified multimodal models with efficient compute.",
+        "RELEVANCE": 7,
+        "NOVELTY": 7,
+        "authors": [
+            "Ji Xie",
+            "Trevor Darrell",
+            "Luke Zettlemoyer",
+            "XuDong Wang"
+        ],
+        "title": "Reconstruction Alignment Improves Unified Multimodal Models",
+        "abstract": "Unified multimodal models (UMMs) unify visual understanding and generation within a single architecture. However, conventional training relies on image-text pairs (or sequences) whose captions are typically sparse and miss fine-grained visual details--even when they use hundreds of words to describe a simple image. We introduce Reconstruction Alignment (RecA), a resource-efficient post-training method that leverages visual understanding encoder embeddings as dense \"text prompts,\" providing rich supervision without captions. Concretely, RecA conditions a UMM on its own visual understanding embeddings and optimizes it to reconstruct the input image with a self-supervised reconstruction loss, thereby realigning understanding and generation. Despite its simplicity, RecA is broadly applicable: across autoregressive, masked-autoregressive, and diffusion-based UMMs, it consistently improves generation and editing fidelity. With only 27 GPU-hours, post-training with RecA substantially improves image generation performance on GenEval (0.73$\\rightarrow$0.90) and DPGBench (80.93$\\rightarrow$88.15), while also boosting editing benchmarks (ImgEdit 3.38$\\rightarrow$3.75, GEdit 6.94$\\rightarrow$7.25). Notably, RecA surpasses much larger open-source models and applies broadly across diverse UMM architectures, establishing it as an efficient and general post-training alignment strategy for UMMs",
+        "arxiv_id": "2509.07295"
+    },
+    "2509.07506": {
+        "SCORE": 14,
+        "ARXIVID": "2509.07506",
+        "COMMENT": "High Performance Computing: LLM-based multi-agent system for GPU kernel optimization, automating loop/memory transformations to accelerate LLM serving kernels.",
+        "RELEVANCE": 7,
+        "NOVELTY": 7,
+        "authors": [
+            "Anjiang Wei",
+            "Tianran Sun",
+            "Yogesh Seenichamy",
+            "Hang Song",
+            "Anne Ouyang",
+            "Azalia Mirhoseini",
+            "Ke Wang",
+            "Alex Aiken"
+        ],
+        "title": "Astra: A Multi-Agent System for GPU Kernel Performance Optimization",
+        "abstract": "GPU kernel optimization has long been a central challenge at the intersection of high-performance computing and machine learning. Efficient kernels are crucial for accelerating large language model (LLM) training and serving, yet attaining high performance typically requires extensive manual tuning. Compiler-based systems reduce some of this burden, but still demand substantial manual design and engineering effort. Recently, researchers have explored using LLMs for GPU kernel generation, though prior work has largely focused on translating high-level PyTorch modules into CUDA code. In this work, we introduce Astra, the first LLM-based multi-agent system for GPU kernel optimization. Unlike previous approaches, Astra starts from existing CUDA implementations extracted from SGLang, a widely deployed framework for serving LLMs, rather than treating PyTorch modules as the specification. Within Astra, specialized LLM agents collaborate through iterative code generation, testing, profiling, and planning to produce kernels that are both correct and high-performance. On kernels from SGLang, Astra achieves an average speedup of 1.32x using zero-shot prompting with OpenAI o4-mini. A detailed case study further demonstrates that LLMs can autonomously apply loop transformations, optimize memory access patterns, exploit CUDA intrinsics, and leverage fast math operations to yield substantial performance gains. Our work highlights multi-agent LLM systems as a promising new paradigm for GPU kernel optimization.",
+        "arxiv_id": "2509.07506"
+    },
+    "2509.07681": {
+        "SCORE": 14,
+        "ARXIVID": "2509.07681",
+        "COMMENT": "Representation Learning/Efficiency: introduces a fast neighbour embedding method with a novel iterative approximate nearest neighbour search allowing flexible embedding dimensionality.",
+        "RELEVANCE": 7,
+        "NOVELTY": 7,
+        "authors": [
+            "Pierre Lambert",
+            "Edouard Couplet",
+            "Michel Verleysen",
+            "John Aldo Lee"
+        ],
+        "title": "FUnc-SNE: A flexible, Fast, and Unconstrained algorithm for neighbour embeddings",
+        "abstract": "Neighbour embeddings (NE) allow the representation of high dimensional datasets into lower dimensional spaces and are often used in data visualisation. In practice, accelerated approximations are employed to handle very large datasets. Accelerating NE is challenging, and two main directions have been explored: very coarse approximations based on negative sampling (as in UMAP) achieve high effective speed but may lack quality in the extracted structures; less coarse approximations, as used in FIt-SNE or BH-t-SNE, offer better structure preservation at the cost of speed, while also restricting the target dimensionality to 2 or 3, limiting NE to visualisation. In some variants, the precision of these costlier accelerations also enables finer-grained control on the extracted structures through dedicated hyperparameters.   This paper proposes to bridge the gab between both approaches by introducing a novel way to accelerate NE, requiring a small number of computations per iteration while maintaining good fine-grained structure preservation and flexibility through hyperparameter tuning, without limiting the dimensionality of the embedding space. The method was designed for interactive exploration of data; as such, it abandons the traditional two-phased approach of other NE methods, allowing instantaneous visual feedback when changing hyperparameters, even when these control processes happening on the high-dimensional side of the computations. Experiments using a publicly available, GPU accelerated GUI integration of the method show promising results in terms of speed, flexibility in the structures getting extracted, and show potential uses in broader machine learning contexts with minimal algorithmic modifications. Central to this algorithm is a novel approach to iterative approximate nearest neighbour search, which shows promising results compared to nearest neighbour descent.",
+        "arxiv_id": "2509.07681"
+    }
+}

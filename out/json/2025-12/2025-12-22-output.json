@@ -1,0 +1,202 @@
+{
+    "2512.17452": {
+        "SCORE": 18,
+        "ARXIVID": "2512.17452",
+        "COMMENT": "Transformer efficiency: learned KV admission (write-gated KV) and compact global+local cache to reduce KV size and attention cost\u2014cache/memory optimization for long-context inference.",
+        "RELEVANCE": 10,
+        "NOVELTY": 8,
+        "authors": [
+            "Yen-Chieh Huang",
+            "Rui Fang",
+            "Ming-Syan Chen",
+            "Pi-Cheng Hsiu"
+        ],
+        "title": "Learning What to Write: Write-Gated KV for Efficient Long-Context Inference",
+        "abstract": "Long-context LLM inference is bottlenecked by the quadratic attention complexity and linear KV cache growth. Prior approaches mitigate this via post-hoc selection or eviction but overlook the root inefficiency: indiscriminate writing to persistent memory. In this paper, we formalize KV cache management as a causal system of three primitives: KV Admission, Selection, and Eviction. We instantiate KV Admission via Write-Gated KV, a lightweight mechanism that learns to predict token utility before it enters the cache. By filtering out low-utility states early to maintain a compact global cache alongside a sliding local cache, Write-Gated KV reduces memory usage by 46-57% and delivers 3.03-3.45$\\times$ prefill and 1.89-2.56$\\times$ decode speedups on Llama model with negligible accuracy loss, all while remaining compatible with FlashAttention and paged-KV systems. These results demonstrate that learning what to write, is a principled and practical recipe for efficient long-context inference. Code is available at https://github.com/EMCLab-Sinica/WG-KV .",
+        "arxiv_id": "2512.17452"
+    },
+    "2512.17593": {
+        "SCORE": 18,
+        "ARXIVID": "2512.17593",
+        "COMMENT": "Foundational architecture theory: unified continuum representation (DiPaNet) linking infinite width/depth, residual nets, and neural ODEs with approximation error analysis.",
+        "RELEVANCE": 10,
+        "NOVELTY": 8,
+        "authors": [
+            "Christophe Prieur",
+            "Mircea Lazar",
+            "Bogdan Robu"
+        ],
+        "title": "A Unified Representation of Neural Networks Architectures",
+        "abstract": "In this paper we consider the limiting case of neural networks (NNs) architectures when the number of neurons in each hidden layer and the number of hidden layers tend to infinity thus forming a continuum, and we derive approximation errors as a function of the number of neurons and/or hidden layers. Firstly, we consider the case of neural networks with a single hidden layer and we derive an integral infinite width neural representation that generalizes existing continuous neural networks (CNNs) representations. Then we extend this to deep residual CNNs that have a finite number of integral hidden layers and residual connections. Secondly, we revisit the relation between neural ODEs and deep residual NNs and we formalize approximation errors via discretization techniques. Then, we merge these two approaches into a unified homogeneous representation of NNs as a Distributed Parameter neural Network (DiPaNet) and we show that most of the existing finite and infinite-dimensional NNs architectures are related via homogeneization/discretization with the DiPaNet representation. Our approach is purely deterministic and applies to general, uniformly continuous matrix weight functions. Differences and similarities with neural fields are discussed along with further possible generalizations and applications of the DiPaNet framework.",
+        "arxiv_id": "2512.17593"
+    },
+    "2512.17073": {
+        "SCORE": 18,
+        "ARXIVID": "2512.17073",
+        "COMMENT": "Model Architecture (Mixture-of-Experts) + Model Compression/Efficiency \u2014 router-guided low-rank compensation with quantization/offloading to cut bandwidth while preserving accuracy.",
+        "RELEVANCE": 10,
+        "NOVELTY": 8,
+        "authors": [
+            "Zhenyu Liu",
+            "Yunzhen Liu",
+            "Zehao Fan",
+            "Garrett Gagnon",
+            "Yayue Hou",
+            "Nan Wu",
+            "Yangwook Kang",
+            "Liu Liu"
+        ],
+        "title": "Bandwidth-Efficient Adaptive Mixture-of-Experts via Low-Rank Compensation",
+        "abstract": "Mixture-of-Experts (MoE) models scale capacity via sparse activation but stress memory and bandwidth. Offloading alleviates GPU memory by fetching experts on demand, yet token-level routing causes irregular transfers that make inference I/O-bound. Static uniform quantization reduces traffic but degrades accuracy under aggressive compression by ignoring expert heterogeneity. We present Bandwidth-Efficient Adaptive Mixture-of-Experts via Low-Rank Compensation, which performs router-guided precision restoration using precomputed low-rank compensators. At inference time, our method transfers compact low-rank factors with Top-n (n<k) experts per token and applies compensation to them, keeping others low-bit. Integrated with offloading on GPU and GPU-NDP systems, our method delivers a superior bandwidth-accuracy trade-off and improved throughput.",
+        "arxiv_id": "2512.17073"
+    },
+    "2512.17570": {
+        "SCORE": 17,
+        "ARXIVID": "2512.17570",
+        "COMMENT": "Systems/HPC contribution: SSD-offloaded LLM training with vertical micro-batch scheduling and optimizer-step overlap for memory/throughput optimization.",
+        "RELEVANCE": 9,
+        "NOVELTY": 8,
+        "authors": [
+            "Yikang Yue",
+            "Yishu Yin",
+            "Xuehai Qian"
+        ],
+        "title": "GreedySnake: Accelerating SSD-Offloaded LLM Training with Efficient Scheduling and Optimizer Step Overlapping",
+        "abstract": "SSD-offloaded training offers a practical and promising approach to making LLM training cost-effective. Building on gradient accumulation with micro-batches, this paper introduces GreedySnake, a new SSD-offloaded training system that employs vertical scheduling, which executes all microbatches of a layer before proceeding to the next. Compared to existing systems that use horizontal scheduling (i.e., executing micro-batches sequentially), GreedySnake achieves higher training throughput with smaller batch sizes, bringing the system much closer to the ideal scenario predicted by the roofline model. To further mitigate the I/O bottleneck, GreedySnake overlaps part of the optimization step with the forward pass of the next iteration. Experimental results on A100 GPUs show that GreedySnake achieves saturated training throughput improvements over ZeRO-Infinity: 1.96x on 1 GPU and 1.93x on 4 GPUs for GPT-65B, and 2.53x on 1 GPU for GPT-175B. The code is open-sourced at https://github.com/npz7yyk/GreedySnake",
+        "arxiv_id": "2512.17570"
+    },
+    "2512.17109": {
+        "SCORE": 17,
+        "ARXIVID": "2512.17109",
+        "COMMENT": "Momentum/curvature-aware optimization that preserves factorized statistics for curvature-aware model merging\u2014low-rank optimization and efficient model composition.",
+        "RELEVANCE": 9,
+        "NOVELTY": 8,
+        "authors": [
+            "Alireza Moayedikia",
+            "Alicia Troncoso"
+        ],
+        "title": "Bridging Training and Merging Through Momentum-Aware Optimization",
+        "abstract": "Training large neural networks and merging task-specific models both exploit low-rank structure and require parameter importance estimation, yet these challenges have been pursued in isolation. Current workflows compute curvature information during training, discard it, then recompute similar information for merging -- wasting computation and discarding valuable trajectory data. We introduce a unified framework that maintains factorized momentum and curvature statistics during training, then reuses this information for geometry-aware model composition. The proposed method achieves memory efficiency comparable to state-of-the-art approaches while accumulating task saliency scores that enable curvature-aware merging without post-hoc Fisher computation. We establish convergence guarantees for non-convex objectives with approximation error bounded by gradient singular value decay. On natural language understanding benchmarks, curvature-aware parameter selection outperforms magnitude-only baselines across all sparsity levels, with multi-task merging improving over strong baselines. The proposed framework exhibits rank-invariant convergence and superior hyperparameter robustness compared to existing low-rank optimizers. By treating the optimization trajectory as a reusable asset rather than discarding it, our approach eliminates redundant computation while enabling more principled model composition.",
+        "arxiv_id": "2512.17109"
+    },
+    "2512.16975": {
+        "SCORE": 17,
+        "ARXIVID": "2512.16975",
+        "COMMENT": "Model Compression and Efficiency: introduces an ELBO-based adaptive video tokenization framework that reduces token budget; Model Architecture: transformer-based adaptive compressor for variable-rate discrete tokens.",
+        "RELEVANCE": 9,
+        "NOVELTY": 8,
+        "authors": [
+            "Haotian Ye",
+            "Qiyuan He",
+            "Jiaqi Han",
+            "Puheng Li",
+            "Jiaojiao Fan",
+            "Zekun Hao",
+            "Fitsum Reda",
+            "Yogesh Balaji",
+            "Huayu Chen",
+            "Sheng Liu",
+            "Angela Yao",
+            "James Zou",
+            "Stefano Ermon",
+            "Haoxiang Wang",
+            "Ming-Yu Liu"
+        ],
+        "title": "InfoTok: Adaptive Discrete Video Tokenizer via Information-Theoretic Compression",
+        "abstract": "Accurate and efficient discrete video tokenization is essential for long video sequences processing. Yet, the inherent complexity and variable information density of videos present a significant bottleneck for current tokenizers, which rigidly compress all content at a fixed rate, leading to redundancy or information loss. Drawing inspiration from Shannon's information theory, this paper introduces InfoTok, a principled framework for adaptive video tokenization. We rigorously prove that existing data-agnostic training methods are suboptimal in representation length, and present a novel evidence lower bound (ELBO)-based algorithm that approaches theoretical optimality. Leveraging this framework, we develop a transformer-based adaptive compressor that enables adaptive tokenization. Empirical results demonstrate state-of-the-art compression performance, saving 20% tokens without influence on performance, and achieving 2.3x compression rates while still outperforming prior heuristic adaptive approaches. By allocating tokens according to informational richness, InfoTok enables a more compressed yet accurate tokenization for video representation, offering valuable insights for future research.",
+        "arxiv_id": "2512.16975"
+    },
+    "2512.17127": {
+        "SCORE": 17,
+        "ARXIVID": "2512.17127",
+        "COMMENT": "Representation Learning: unifies diffusion and VAE ELBOs in a score-based autoencoder to learn interpretable, disentangled latent representations.",
+        "RELEVANCE": 9,
+        "NOVELTY": 8,
+        "authors": [
+            "Benjamin S. H. Lyo",
+            "Eero P. Simoncelli",
+            "Cristina Savin"
+        ],
+        "title": "Disentangled representations via score-based variational autoencoders",
+        "abstract": "We present the Score-based Autoencoder for Multiscale Inference (SAMI), a method for unsupervised representation learning that combines the theoretical frameworks of diffusion models and VAEs. By unifying their respective evidence lower bounds, SAMI formulates a principled objective that learns representations through score-based guidance of the underlying diffusion process. The resulting representations automatically capture meaningful structure in the data: it recovers ground truth generative factors in our synthetic dataset, learns factorized, semantic latent dimensions from complex natural images, and encodes video sequences into latent trajectories that are straighter than those of alternative encoders, despite training exclusively on static images. Furthermore, SAMI can extract useful representations from pre-trained diffusion models with minimal additional training. Finally, the explicitly probabilistic formulation provides new ways to identify semantically meaningful axes in the absence of supervised labels, and its mathematical exactness allows us to make formal statements about the nature of the learned representation. Overall, these results indicate that implicit structural information in diffusion models can be made explicit and interpretable through synergistic combination with a variational autoencoder.",
+        "arxiv_id": "2512.17127"
+    },
+    "2512.17131": {
+        "SCORE": 17,
+        "ARXIVID": "2512.17131",
+        "COMMENT": "High Performance Computing \u2014 optimizer-level innovation (Generalized Primal Averaging) that accelerates LLM training with reduced memory and convergence guarantees.",
+        "RELEVANCE": 9,
+        "NOVELTY": 8,
+        "authors": [
+            "Aaron Defazio",
+            "Konstantin Mishchenko",
+            "Parameswaran Raman",
+            "Hao-Jun Michael Shi",
+            "Lin Xiao"
+        ],
+        "title": "Smoothing DiLoCo with Primal Averaging for Faster Training of LLMs",
+        "abstract": "We propose Generalized Primal Averaging (GPA), an extension of Nesterov's method in its primal averaging formulation that addresses key limitations of recent averaging-based optimizers such as single-worker DiLoCo and Schedule-Free (SF) in the non-distributed setting. These two recent algorithmic approaches improve the performance of base optimizers, such as AdamW, through different iterate averaging strategies. Schedule-Free explicitly maintains a uniform average of past weights, while single-worker DiLoCo performs implicit averaging by periodically aggregating trajectories, called pseudo-gradients, to update the model parameters. However, single-worker DiLoCo's periodic averaging introduces a two-loop structure, increasing its memory requirements and number of hyperparameters. GPA overcomes these limitations by decoupling the interpolation constant in the primal averaging formulation of Nesterov. This decoupling enables GPA to smoothly average iterates at every step, generalizing and improving upon single-worker DiLoCo. Empirically, GPA consistently outperforms single-worker DiLoCo while removing the two-loop structure, simplifying hyperparameter tuning, and reducing its memory overhead to a single additional buffer. On the Llama-160M model, GPA provides a 24.22% speedup in terms of steps to reach the baseline (AdamW's) validation loss. Likewise, GPA achieves speedups of 12% and 27% on small and large batch setups, respectively, to attain AdamW's validation accuracy on the ImageNet ViT workload. Furthermore, we prove that for any base optimizer with regret bounded by $O(\\sqrt{T})$, where $T$ is the number of iterations, GPA can match or exceed the convergence guarantee of the original optimizer, depending on the choice of interpolation constants.",
+        "arxiv_id": "2512.17131"
+    },
+    "2512.17720": {
+        "SCORE": 16,
+        "ARXIVID": "2512.17720",
+        "COMMENT": "Parameter-efficient fine-tuning: Low-Rank Adaptation with Laplace-based weight-space regularization to mitigate forgetting\u2014low-rank/PEFT and training dynamics.",
+        "RELEVANCE": 9,
+        "NOVELTY": 7,
+        "authors": [
+            "Joanna Sliwa",
+            "Frank Schneider",
+            "Philipp Hennig",
+            "Jose Miguel Hernandez-Lobato"
+        ],
+        "title": "Mitigating Forgetting in Low Rank Adaptation",
+        "abstract": "Parameter-efficient fine-tuning methods, such as Low-Rank Adaptation (LoRA), enable fast specialization of large pre-trained models to different downstream applications. However, this process often leads to catastrophic forgetting of the model's prior domain knowledge. We address this issue with LaLoRA, a weight-space regularization technique that applies a Laplace approximation to Low-Rank Adaptation. Our approach estimates the model's confidence in each parameter and constrains updates in high-curvature directions, preserving prior knowledge while enabling efficient target-domain learning. By applying the Laplace approximation only to the LoRA weights, the method remains lightweight. We evaluate LaLoRA by fine-tuning a Llama model for mathematical reasoning and demonstrate an improved learning-forgetting trade-off, which can be directly controlled via the method's regularization strength. We further explore different loss landscape curvature approximations for estimating parameter confidence, analyze the effect of the data used for the Laplace approximation, and study robustness across hyperparameters.",
+        "arxiv_id": "2512.17720"
+    },
+    "2512.16928": {
+        "SCORE": 16,
+        "ARXIVID": "2512.16928",
+        "COMMENT": "Optimizer efficiency: Shrinks Muon\u2019s orthonormalization step via sampled rows/columns, inducing sparse updates to reduce compute/communication costs.",
+        "RELEVANCE": 9,
+        "NOVELTY": 7,
+        "authors": [
+            "Kwangjun Ahn",
+            "Noah Amsel",
+            "John Langford"
+        ],
+        "title": "Dion2: A Simple Method to Shrink Matrix in Muon",
+        "abstract": "The Muon optimizer enjoys strong empirical performance and theoretical grounding. However, the super-linear cost of its orthonormalization step introduces increasing overhead with scale. To alleviate this cost, several works have attempted to reduce the size of the matrix entering the orthonormalization step. We introduce Dion2, a much simpler method for shrinking the matrix involved in Muon's computation compared to prior approaches. At a high level, Dion2 selects a fraction of rows or columns at each iteration and orthonormalizes only those. This sampling procedure makes the update sparse, reducing both computation and communication costs which in turn improves the scalability of Muon.",
+        "arxiv_id": "2512.16928"
+    },
+    "2512.17574": {
+        "SCORE": 15,
+        "ARXIVID": "2512.17574",
+        "COMMENT": "Systems-level inference optimization: GPU-internal scheduling and resource sharing across multimodal preprocessing, vision encoding, and LLM inference to reduce latency and improve utilization.",
+        "RELEVANCE": 8,
+        "NOVELTY": 7,
+        "authors": [
+            "Lingxiao Zhao",
+            "Haoran Zhou",
+            "Yuezhi Che",
+            "Dazhao Cheng"
+        ],
+        "title": "Enabling Disaggregated Multi-Stage MLLM Inference via GPU-Internal Scheduling and Resource Sharing",
+        "abstract": "Multimodal large language models (MLLMs) extend LLMs with visual understanding through a three-stage pipeline: multimodal preprocessing, vision encoding, and LLM inference. While these stages enhance capability, they introduce significant system bottlenecks. First, multimodal preprocessing-especially video decoding-often dominates Time-to-First-Token (TTFT). Most systems rely on CPU-based decoding, which severely limits throughput, while existing GPU-based approaches prioritize throughput-oriented parallelism and fail to meet the latency-sensitive requirements of MLLM inference. Second, the vision encoder is a standalone, compute-intensive stage that produces visual embeddings and cannot be co-batched with LLM prefill or decoding. This heterogeneity forces inter-stage blocking and increases token-generation latency. Even when deployed on separate GPUs, these stages underutilize available compute and memory resources, reducing overall utilization and constraining system throughput.   To address these challenges, we present FlashCodec and UnifiedServe, two complementary designs that jointly optimize the end-to-end MLLM pipeline. FlashCodec accelerates the multimodal preprocessing stage through collaborative multi-GPU video decoding, reducing decoding latency while preserving high throughput. UnifiedServe optimizes the vision-to-text and inference stages using a logically decoupled their execution to eliminate inter-stage blocking, yet physically sharing GPU resources to maximize GPU system utilization. By carefully orchestrating execution across stages and minimizing interference, UnifiedServe Together, our proposed framework forms an end-to-end optimized stack that can serve up to 3.0$\\times$ more requests or enforce 1.5$\\times$ tighter SLOs, while achieving up to 4.4$\\times$ higher throughput compared to state-of-the-art systems.",
+        "arxiv_id": "2512.17574"
+    },
+    "2512.17398": {
+        "SCORE": 15,
+        "ARXIVID": "2512.17398",
+        "COMMENT": "Model Compression and Efficiency: architectural sharing of DReLU across channels and layers to cut expensive non-linear operations in private inference, with expressivity analysis.",
+        "RELEVANCE": 8,
+        "NOVELTY": 7,
+        "authors": [
+            "Yonathan Bornfeld",
+            "Shai Avidan"
+        ],
+        "title": "DeepShare: Sharing ReLU Across Channels and Layers for Efficient Private Inference",
+        "abstract": "Private Inference (PI) uses cryptographic primitives to perform privacy preserving machine learning. In this setting, the owner of the network runs inference on the data of the client without learning anything about the data and without revealing any information about the model. It has been observed that a major computational bottleneck of PI is the calculation of the gate (i.e., ReLU), so a considerable amount of effort have been devoted to reducing the number of ReLUs in a given network.   We focus on the DReLU, which is the non-linear step function of the ReLU and show that one DReLU can serve many ReLU operations. We suggest a new activation module where the DReLU operation is only performed on a subset of the channels (Prototype channels), while the rest of the channels (replicate channels) replicates the DReLU of each of their neurons from the corresponding neurons in one of the prototype channels. We then extend this idea to work across different layers.   We show that this formulation can drastically reduce the number of DReLU operations in resnet type network. Furthermore, our theoretical analysis shows that this new formulation can solve an extended version of the XOR problem, using just one non-linearity and two neurons, something that traditional formulations and some PI specific methods cannot achieve. We achieve new SOTA results on several classification setups, and achieve SOTA results on image segmentation.",
+        "arxiv_id": "2512.17398"
+    }
+}

@@ -1,0 +1,597 @@
+{
+    "2502.05164": {
+        "SCORE": 19,
+        "ARXIVID": "2502.05164",
+        "COMMENT": "Explores connections between attention mechanisms and associative memory in transformers within a theoretical framework, linking strongly to foundational representation learning and transformer behaviors.",
+        "RELEVANCE": 10,
+        "NOVELTY": 9,
+        "authors": [
+            "Matthew Smart",
+            "Alberto Bietti",
+            "Anirvan M. Sengupta"
+        ],
+        "title": "In-context denoising with one-layer transformers: connections between attention and associative memory retrieval",
+        "abstract": "We introduce in-context denoising, a task that refines the connection between attention-based architectures and dense associative memory (DAM) networks, also known as modern Hopfield networks. Using a Bayesian framework, we show theoretically and empirically that certain restricted denoising problems can be solved optimally even by a single-layer transformer. We demonstrate that a trained attention layer processes each denoising prompt by performing a single gradient descent update on a context-aware DAM energy landscape, where context tokens serve as associative memories and the query token acts as an initial state. This one-step update yields better solutions than exact retrieval of either a context token or a spurious local minimum, providing a concrete example of DAM networks extending beyond the standard retrieval paradigm. Overall, this work solidifies the link between associative memory and attention mechanisms first identified by Ramsauer et al., and demonstrates the relevance of associative memory models in the study of in-context learning.",
+        "arxiv_id": "2502.05164"
+    },
+    "2502.04667": {
+        "SCORE": 18,
+        "ARXIVID": "2502.04667",
+        "COMMENT": "The paper investigates the mechanism of explicit Chain-of-Thought (CoT) training, which aligns with understanding LLM training dynamics and behaviors, directly addressing foundational insights for reasoning enhancement.",
+        "RELEVANCE": 10,
+        "NOVELTY": 8,
+        "authors": [
+            "Xinhao Yao",
+            "Ruifeng Ren",
+            "Yun Liao",
+            "Yong Liu"
+        ],
+        "title": "Unveiling the Mechanisms of Explicit CoT Training: How Chain-of-Thought Enhances Reasoning Generalization",
+        "abstract": "Training large language models (LLMs) with high-quality Chain-of-Thought (CoT) annotations has become a widely adopted strategy due to its significant enhancement of reasoning capabilities. To fully comprehend this approach, two questions naturally arise: (Q1) What advantages does training with CoT offer compared to training without CoT? (Q2) If there are advantages, what are the underlying mechanisms of explicit CoT training? Analyzing the advantages and mechanisms of CoT training is challenging due to the many factors involved. To address this, we conduct a detailed analysis using clear and controllable data distributions and, for the first time, reveal that CoT training offers the following advantages: (1) Training with CoT markedly improves reasoning generalization, extending it from in-distribution (ID) to both ID and out-of-distribution (OOD) scenarios, while also speeding up convergence; (2) Even when training with CoT includes a certain range of erroneous reasoning steps, it still enables the model to learn reasoning patterns, leading to systematic generalization. We further explore the underlying mechanisms from a circuit perspective: (1) The data distribution (e.g., ratio $\\lambda$ and pattern) plays a crucial role in influencing the model's systematic generalization; (2) CoT training (with two-hop facts) internalizes reasoning into a two-stage generalizing circuit, where the number of stages corresponds to the explicit reasoning steps during training. Our findings elucidate the mechanisms underlying explicit CoT training and offer critical insights into tuning strategies for LLMs to achieve robust generalization.",
+        "arxiv_id": "2502.04667"
+    },
+    "2502.05172": {
+        "SCORE": 18,
+        "ARXIVID": "2502.05172",
+        "COMMENT": "Analyzes joint scaling laws for memory-efficient MoE models, directly addressing theoretical and computational efficiency, which is highly relevant to 'Mixture of Experts' and architectural principles.",
+        "RELEVANCE": 10,
+        "NOVELTY": 8,
+        "authors": [
+            "Jan Ludziejewski",
+            "Maciej Pi\\'oro",
+            "Jakub Krajewski",
+            "Maciej Stefaniak",
+            "Micha{\\l} Krutul",
+            "Jan Ma{\\l}a\\'snicki",
+            "Marek Cygan",
+            "Piotr Sankowski",
+            "Kamil Adamczewski",
+            "Piotr Mi{\\l}o\\'s",
+            "Sebastian Jaszczur"
+        ],
+        "title": "Joint MoE Scaling Laws: Mixture of Experts Can Be Memory Efficient",
+        "abstract": "Mixture of Experts (MoE) architectures have significantly increased computational efficiency in both research and real-world applications of large-scale machine learning models. However, their scalability and efficiency under memory constraints remain relatively underexplored. In this work, we present joint scaling laws for dense and MoE models, incorporating key factors such as the number of active parameters, dataset size, and the number of experts. Our findings provide a principled framework for selecting the optimal MoE configuration under fixed memory and compute budgets. Surprisingly, we show that MoE models can be more memory-efficient than dense models, contradicting conventional wisdom. To derive and validate the theoretical predictions of our scaling laws, we conduct over 280 experiments with up to 2.7B active parameters and up to 5B total parameters. These results offer actionable insights for designing and deploying MoE models in practical large-scale training scenarios.",
+        "arxiv_id": "2502.05172"
+    },
+    "2502.05003": {
+        "SCORE": 17,
+        "ARXIVID": "2502.05003",
+        "COMMENT": "This paper introduces QuEST, which explores cutting-edge quantization-aware training and demonstrates stable performance with weights and activations in 1-bit. This directly aligns with the criterion on model compression breakthroughs.",
+        "RELEVANCE": 9,
+        "NOVELTY": 8,
+        "authors": [
+            "Andrei Panferov",
+            "Jiale Chen",
+            "Soroush Tabesh",
+            "Roberto L. Castro",
+            "Mahdi Nikdan",
+            "Dan Alistarh"
+        ],
+        "title": "QuEST: Stable Training of LLMs with 1-Bit Weights and Activations",
+        "abstract": "One approach to reducing the massive costs of large language models (LLMs) is the use of quantized or sparse representations for training or deployment. While post-training compression methods are very popular, the question of obtaining even more accurate compressed models by directly training over such representations, i.e., Quantization-Aware Training (QAT), is still open: for example, a recent study (arXiv:2411.04330v2) put the \"optimal\" bit-width at which models can be trained using QAT, while staying accuracy-competitive with standard FP16/BF16 precision, at 8-bits weights and activations.   We advance this state-of-the-art via a new method called QuEST, which is Pareto-competitive with FP16, i.e., it provides better accuracy at lower model size, while training models with weights and activations in 4-bits or less. Moreover, QuEST allows stable training with 1-bit weights and activations. QuEST achieves this by improving two key aspects of QAT methods: (1) accurate and fast quantization of the (continuous) distributions of weights and activations via Hadamard normalization and MSE-optimal fitting; (2) a new trust gradient estimator based on the idea of explicitly minimizing the error between the noisy gradient computed over quantized states and the \"true\" (but unknown) full-precision gradient. Experiments on Llama-type architectures show that QuEST induces stable scaling laws across the entire range of hardware-supported precisions, and can be extended to sparse representations. We provide GPU kernel support showing that models produced by QuEST can be executed efficiently. Our code is available at https://github.com/IST-DASLab/QuEST.",
+        "arxiv_id": "2502.05003"
+    },
+    "2502.04411": {
+        "SCORE": 17,
+        "ARXIVID": "2502.04411",
+        "COMMENT": "Relevant to Large Language Models and sparsity. Discusses novel techniques for memory-efficient model merging using sparseness in experts, addressing efficiency and storage concerns.",
+        "RELEVANCE": 9,
+        "NOVELTY": 8,
+        "authors": [
+            "Kunfeng Lai",
+            "Zhenheng Tang",
+            "Xinglin Pan",
+            "Peijie Dong",
+            "Xiang Liu",
+            "Haolan Chen",
+            "Li Shen",
+            "Bo Li",
+            "Xiaowen Chu"
+        ],
+        "title": "Mediator: Memory-efficient LLM Merging with Less Parameter Conflicts and Uncertainty Based Routing",
+        "abstract": "Model merging aggregates Large Language Models (LLMs) finetuned on different tasks into a stronger one. However, parameter conflicts between models leads to performance degradation in averaging. While model routing addresses this issue by selecting individual models during inference, it imposes excessive storage and compute costs, and fails to leverage the common knowledge from different models. In this work, we observe that different layers exhibit varying levels of parameter conflicts. Building on this insight, we average layers with minimal parameter conflicts and use a novel task-level expert routing for layers with significant conflicts. To further reduce storage costs, inspired by task arithmetic sparsity, we decouple multiple fine-tuned experts into a dense expert and several sparse experts. Considering the out-of-distribution samples, we select and merge appropriate experts based on the task uncertainty of the input data. We conduct extensive experiments on both LLaMA and Qwen with varying parameter scales, and evaluate on real-world reasoning tasks. Results demonstrate that our method consistently achieves significant performance improvements while requiring less system cost compared to existing methods.",
+        "arxiv_id": "2502.04411"
+    },
+    "2502.04750": {
+        "SCORE": 17,
+        "ARXIVID": "2502.04750",
+        "COMMENT": "Introduces a tighter sparse variational Gaussian process, relevant for sparsity and representation learning. Strong theoretical contribution in GP optimization.",
+        "RELEVANCE": 9,
+        "NOVELTY": 8,
+        "authors": [
+            "Thang D. Bui",
+            "Matthew Ashman",
+            "Richard E. Turner"
+        ],
+        "title": "Tighter sparse variational Gaussian processes",
+        "abstract": "Sparse variational Gaussian process (GP) approximations based on inducing points have become the de facto standard for scaling GPs to large datasets, owing to their theoretical elegance, computational efficiency, and ease of implementation. This paper introduces a provably tighter variational approximation by relaxing the standard assumption that the conditional approximate posterior given the inducing points must match that in the prior. The key innovation is to modify the conditional posterior to have smaller variances than that of the prior at the training points. We derive the collapsed bound for the regression case, describe how to use the proposed approximation in large data settings, and discuss its application to handle orthogonally structured inducing points and GP latent variable models. Extensive experiments on regression benchmarks, classification, and latent variable models demonstrate that the proposed approximation consistently matches or outperforms standard sparse variational GPs while maintaining the same computational cost. An implementation will be made available in all popular GP packages.",
+        "arxiv_id": "2502.04750"
+    },
+    "2502.04959": {
+        "SCORE": 17,
+        "ARXIVID": "2502.04959",
+        "COMMENT": "The isotropic model merging framework introduces innovative techniques for task-specific model integration, offering novel insights into representation alignment and efficiency in merged models.",
+        "RELEVANCE": 9,
+        "NOVELTY": 8,
+        "authors": [
+            "Daniel Marczak",
+            "Simone Magistri",
+            "Sebastian Cygert",
+            "Bart{\\l}omiej Twardowski",
+            "Andrew D. Bagdanov",
+            "Joost van de Weijer"
+        ],
+        "title": "No Task Left Behind: Isotropic Model Merging with Common and Task-Specific Subspaces",
+        "abstract": "Model merging integrates the weights of multiple task-specific models into a single multi-task model. Despite recent interest in the problem, a significant performance gap between the combined and single-task models remains. In this paper, we investigate the key characteristics of task matrices -- weight update matrices applied to a pre-trained model -- that enable effective merging. We show that alignment between singular components of task-specific and merged matrices strongly correlates with performance improvement over the pre-trained model. Based on this, we propose an isotropic merging framework that flattens the singular value spectrum of task matrices, enhances alignment, and reduces the performance gap. Additionally, we incorporate both common and task-specific subspaces to further improve alignment and performance. Our proposed approach achieves state-of-the-art performance across multiple scenarios, including various sets of tasks and model scales. This work advances the understanding of model merging dynamics, offering an effective methodology to merge models without requiring additional training. Code is available at https://github.com/danielm1405/iso-merging .",
+        "arxiv_id": "2502.04959"
+    },
+    "2502.05171": {
+        "SCORE": 17,
+        "ARXIVID": "2502.05171",
+        "COMMENT": "Proposes a novel recurrent depth mechanism for latent reasoning, exploring architectural innovation - relevant and potentially foundational for test-time computation scaling.",
+        "RELEVANCE": 9,
+        "NOVELTY": 8,
+        "authors": [
+            "Jonas Geiping",
+            "Sean McLeish",
+            "Neel Jain",
+            "John Kirchenbauer",
+            "Siddharth Singh",
+            "Brian R. Bartoldson",
+            "Bhavya Kailkhura",
+            "Abhinav Bhatele",
+            "Tom Goldstein"
+        ],
+        "title": "Scaling up Test-Time Compute with Latent Reasoning: A Recurrent Depth Approach",
+        "abstract": "We study a novel language model architecture that is capable of scaling test-time computation by implicitly reasoning in latent space. Our model works by iterating a recurrent block, thereby unrolling to arbitrary depth at test-time. This stands in contrast to mainstream reasoning models that scale up compute by producing more tokens. Unlike approaches based on chain-of-thought, our approach does not require any specialized training data, can work with small context windows, and can capture types of reasoning that are not easily represented in words. We scale a proof-of-concept model to 3.5 billion parameters and 800 billion tokens. We show that the resulting model can improve its performance on reasoning benchmarks, sometimes dramatically, up to a computation load equivalent to 50 billion parameters.",
+        "arxiv_id": "2502.05171"
+    },
+    "2502.05122": {
+        "SCORE": 17,
+        "ARXIVID": "2502.05122",
+        "COMMENT": "The causal velocity model for bivariate SCMs offers a novel parametrization and theoretical insights, aligning with 'Emerging Trends' for causal modeling in foundational AI research.",
+        "RELEVANCE": 9,
+        "NOVELTY": 8,
+        "authors": [
+            "Johnny Xi",
+            "Hugh Dance",
+            "Peter Orbanz",
+            "Benjamin Bloem-Reddy"
+        ],
+        "title": "Distinguishing Cause from Effect with Causal Velocity Models",
+        "abstract": "Bivariate structural causal models (SCM) are often used to infer causal direction by examining their goodness-of-fit under restricted model classes. In this paper, we describe a parametrization of bivariate SCMs in terms of a causal velocity by viewing the cause variable as time in a dynamical system. The velocity implicitly defines counterfactual curves via the solution of initial value problems where the observation specifies the initial condition. Using tools from measure transport, we obtain a unique correspondence between SCMs and the score function of the generated distribution via its causal velocity. Based on this, we derive an objective function that directly regresses the velocity against the score function, the latter of which can be estimated non-parametrically from observational data. We use this to develop a method for bivariate causal discovery that extends beyond known model classes such as additive or location scale noise, and that requires no assumptions on the noise distributions. When the score is estimated well, the objective is also useful for detecting model non-identifiability and misspecification. We present positive results in simulation and benchmark experiments where many existing methods fail, and perform ablation studies to examine the method's sensitivity to accurate score estimation.",
+        "arxiv_id": "2502.05122"
+    },
+    "2502.04602": {
+        "SCORE": 17,
+        "ARXIVID": "2502.04602",
+        "COMMENT": "The paper explores the concept of 'superficial knowledge' in alignment for LLMs, addressing interpretability and alignment transfer, which is a relevant topic in investigating LLM behavior.",
+        "RELEVANCE": 9,
+        "NOVELTY": 8,
+        "authors": [
+            "Runjin Chen",
+            "Gabriel Jacob Perin",
+            "Xuxi Chen",
+            "Xilun Chen",
+            "Yan Han",
+            "Nina S. T. Hirata",
+            "Junyuan Hong",
+            "Bhavya Kailkhura"
+        ],
+        "title": "Extracting and Understanding the Superficial Knowledge in Alignment",
+        "abstract": "Alignment of large language models (LLMs) with human values and preferences, often achieved through fine-tuning based on human feedback, is essential for ensuring safe and responsible AI behaviors. However, the process typically requires substantial data and computation resources. Recent studies have revealed that alignment might be attainable at lower costs through simpler methods, such as in-context learning. This leads to the question: Is alignment predominantly superficial? In this paper, we delve into this question and provide a quantitative analysis. We formalize the concept of superficial knowledge, defining it as knowledge that can be acquired through easily token restyling, without affecting the model's ability to capture underlying causal relationships between tokens. We propose a method to extract and isolate superficial knowledge from aligned models, focusing on the shallow modifications to the final token selection process. By comparing models augmented only with superficial knowledge to fully aligned models, we quantify the superficial portion of alignment. Our findings reveal that while superficial knowledge constitutes a significant portion of alignment, particularly in safety and detoxification tasks, it is not the whole story. Tasks requiring reasoning and contextual understanding still rely on deeper knowledge. Additionally, we demonstrate two practical advantages of isolated superficial knowledge: (1) it can be transferred between models, enabling efficient offsite alignment of larger models using extracted superficial knowledge from smaller models, and (2) it is recoverable, allowing for the restoration of alignment in compromised models without sacrificing performance.",
+        "arxiv_id": "2502.04602"
+    },
+    "2502.04382": {
+        "SCORE": 17,
+        "ARXIVID": "2502.04382",
+        "COMMENT": "Introduces sparse autoencoders for interpretable feature generation, which resonates with 'Representation Learning' in foundational research, especially around sparsity and interpretability in embeddings.",
+        "RELEVANCE": 9,
+        "NOVELTY": 8,
+        "authors": [
+            "Rajiv Movva",
+            "Kenny Peng",
+            "Nikhil Garg",
+            "Jon Kleinberg",
+            "Emma Pierson"
+        ],
+        "title": "Sparse Autoencoders for Hypothesis Generation",
+        "abstract": "We describe HypotheSAEs, a general method to hypothesize interpretable relationships between text data (e.g., headlines) and a target variable (e.g., clicks). HypotheSAEs has three steps: (1) train a sparse autoencoder on text embeddings to produce interpretable features describing the data distribution, (2) select features that predict the target variable, and (3) generate a natural language interpretation of each feature (e.g., \"mentions being surprised or shocked\") using an LLM. Each interpretation serves as a hypothesis about what predicts the target variable. Compared to baselines, our method better identifies reference hypotheses on synthetic datasets (at least +0.06 in F1) and produces more predictive hypotheses on real datasets (~twice as many significant findings), despite requiring 1-2 orders of magnitude less compute than recent LLM-based methods. HypotheSAEs also produces novel discoveries on two well-studied tasks: explaining partisan differences in Congressional speeches and identifying drivers of engagement with online headlines.",
+        "arxiv_id": "2502.04382"
+    },
+    "2502.04390": {
+        "SCORE": 17,
+        "ARXIVID": "2502.04390",
+        "COMMENT": "Proposes cognitive-dissonance-aware knowledge updates in LLMs, aligning with insights into LLM behavior and robustness, which makes it highly relevant.",
+        "RELEVANCE": 9,
+        "NOVELTY": 8,
+        "authors": [
+            "Simone Clemente",
+            "Zied Ben Houidi",
+            "Alexis Huet",
+            "Dario Rossi",
+            "Giulio Franzese",
+            "Pietro Michiardi"
+        ],
+        "title": "In Praise of Stubbornness: The Case for Cognitive-Dissonance-Aware Knowledge Updates in LLMs",
+        "abstract": "Despite remarkable capabilities, large language models (LLMs) struggle to continually update their knowledge without catastrophic forgetting. In contrast, humans effortlessly integrate new information, detect conflicts with existing beliefs, and selectively update their mental models. This paper introduces a cognitive-inspired investigation paradigm to study continual knowledge updating in LLMs. We implement two key components inspired by human cognition: (1) Dissonance and Familiarity Awareness, analyzing model behavior to classify information as novel, familiar, or dissonant; and (2) Targeted Network Updates, which track neural activity to identify frequently used (stubborn) and rarely used (plastic) neurons. Through carefully designed experiments in controlled settings, we uncover a number of empirical findings demonstrating the potential of this approach. First, dissonance detection is feasible using simple activation and gradient features, suggesting potential for cognitive-inspired training. Second, we find that non-dissonant updates largely preserve prior knowledge regardless of targeting strategy, revealing inherent robustness in LLM knowledge integration. Most critically, we discover that dissonant updates prove catastrophically destructive to the model's knowledge base, indiscriminately affecting even information unrelated to the current updates. This suggests fundamental limitations in how neural networks handle contradictions and motivates the need for new approaches to knowledge updating that better mirror human cognitive mechanisms.",
+        "arxiv_id": "2502.04390"
+    },
+    "2502.04404": {
+        "SCORE": 17,
+        "ARXIVID": "2502.04404",
+        "COMMENT": "Introduces a backtracking method for LLM reasoning improvement, falling squarely within insights into reasoning processes and mechanisms, specifically for LLMs.",
+        "RELEVANCE": 9,
+        "NOVELTY": 8,
+        "authors": [
+            "Xiao-Wen Yang",
+            "Xuan-Yi Zhu",
+            "Wen-Da Wei",
+            "Ding-Chu Zhang",
+            "Jie-Jing Shao",
+            "Zhi Zhou",
+            "Lan-Zhe Guo",
+            "Yu-Feng Li"
+        ],
+        "title": "Step Back to Leap Forward: Self-Backtracking for Boosting Reasoning of Language Models",
+        "abstract": "The integration of slow-thinking mechanisms into large language models (LLMs) offers a promising way toward achieving Level 2 AGI Reasoners, as exemplified by systems like OpenAI's o1. However, several significant challenges remain, including inefficient overthinking and an overreliance on auxiliary reward models. We point out that these limitations stem from LLMs' inability to internalize the search process, a key component of effective reasoning. A critical step toward addressing this issue is enabling LLMs to autonomously determine when and where to backtrack, a fundamental operation in traditional search algorithms. To this end, we propose a self-backtracking mechanism that equips LLMs with the ability to backtrack during both training and inference. This mechanism not only enhances reasoning ability but also efficiency by transforming slow-thinking processes into fast-thinking through self-improvement. Empirical evaluations demonstrate that our proposal significantly enhances the reasoning capabilities of LLMs, achieving a performance gain of over 40 percent compared to the optimal-path supervised fine-tuning method. We believe this study introduces a novel and promising pathway for developing more advanced and robust Reasoners.",
+        "arxiv_id": "2502.04404"
+    },
+    "2502.04664": {
+        "SCORE": 17,
+        "ARXIVID": "2502.04664",
+        "COMMENT": "The paper characterizes implicit biases of optimization algorithms (SignGD and Adam) in multiclass classification, contributing to foundational research in training dynamics of neural networks.",
+        "RELEVANCE": 9,
+        "NOVELTY": 8,
+        "authors": [
+            "Chen Fan",
+            "Mark Schmidt",
+            "Christos Thrampoulidis"
+        ],
+        "title": "Implicit Bias of SignGD and Adam on Multiclass Separable Data",
+        "abstract": "In the optimization of overparameterized models, different gradient-based methods can achieve zero training error yet converge to distinctly different solutions inducing different generalization properties. While a decade of research on implicit optimization bias has illuminated this phenomenon in various settings, even the foundational case of linear classification with separable data still has important open questions. We resolve a fundamental gap by characterizing the implicit bias of both Adam and Sign Gradient Descent in multi-class cross-entropy minimization: we prove that their iterates converge to solutions that maximize the margin with respect to the classifier matrix's max-norm and characterize the rate of convergence. We extend our results to general p-norm normalized steepest descent algorithms and to other multi-class losses.",
+        "arxiv_id": "2502.04664"
+    },
+    "2502.04420": {
+        "SCORE": 17,
+        "ARXIVID": "2502.04420",
+        "COMMENT": "Presents KV cache quantization for LLM inference, directly aligning with model compression and efficiency while offering insights into layer-wise sensitivity and optimization.",
+        "RELEVANCE": 9,
+        "NOVELTY": 8,
+        "authors": [
+            "Xing Li",
+            "Zeyu Xing",
+            "Yiming Li",
+            "Linping Qu",
+            "Hui-Ling Zhen",
+            "Wulong Liu",
+            "Yiwu Yao",
+            "Sinno Jialin Pan",
+            "Mingxuan Yuan"
+        ],
+        "title": "KVTuner: Sensitivity-Aware Layer-wise Mixed Precision KV Cache Quantization for Efficient and Nearly Lossless LLM Inference",
+        "abstract": "KV cache quantization can improve Large Language Models (LLMs) inference throughput and latency in long contexts and large batch-size scenarios while preserving LLMs effectiveness. However, current methods have three unsolved issues: overlooking layer-wise sensitivity to KV cache quantization, high overhead of online fine-grained decision-making, and low flexibility to different LLMs and constraints. Therefore, we thoroughly analyze the inherent correlation of layer-wise transformer attention patterns to KV cache quantization errors and study why key cache is more important than value cache for quantization error reduction. We further propose a simple yet effective framework KVTuner to adaptively search for the optimal hardware-friendly layer-wise KV quantization precision pairs for coarse-grained KV cache with multi-objective optimization and directly utilize the offline searched configurations during online inference. To reduce the computational cost of offline calibration, we utilize the intra-layer KV precision pair pruning and inter-layer clustering to reduce the search space. Experimental results show that we can achieve nearly lossless 3.25-bit mixed precision KV cache quantization for LLMs like Llama-3.1-8B-Instruct and 4.0-bit for sensitive models like Qwen2.5-7B-Instruct on mathematical reasoning tasks. The maximum inference throughput can be improved by 38.3% compared with KV8 quantization over various context lengths.",
+        "arxiv_id": "2502.04420"
+    },
+    "2502.04556": {
+        "SCORE": 16,
+        "ARXIVID": "2502.04556",
+        "COMMENT": "TruthFlow introduces a novel representation correction technique for LLMs, showing potential as a foundational method for controlling LLM behavior. This aligns with theoretical insights into LLM representation and interpretability.",
+        "RELEVANCE": 8,
+        "NOVELTY": 8,
+        "authors": [
+            "Hanyu Wang",
+            "Bochuan Cao",
+            "Yuanpu Cao",
+            "Jinghui Chen"
+        ],
+        "title": "TruthFlow: Truthful LLM Generation via Representation Flow Correction",
+        "abstract": "Large language models (LLMs) are known to struggle with consistently generating truthful responses. While various representation intervention techniques have been proposed, these methods typically apply a universal representation correction vector to all input queries, limiting their effectiveness against diverse queries in practice. In this study, we introduce TruthFlow, a novel method that leverages the Flow Matching technique for query-specific truthful representation correction. Specifically, TruthFlow first uses a flow model to learn query-specific correction vectors that transition representations from hallucinated to truthful states. Then, during inference, the trained flow model generates these correction vectors to enhance the truthfulness of LLM outputs. Experimental results demonstrate that TruthFlow significantly improves performance on open-ended generation tasks across various advanced LLMs evaluated on TruthfulQA. Moreover, the trained TruthFlow model exhibits strong transferability, performing effectively on other unseen hallucination benchmarks.",
+        "arxiv_id": "2502.04556"
+    },
+    "2502.04375": {
+        "SCORE": 16,
+        "ARXIVID": "2502.04375",
+        "COMMENT": "This examines initialization scale effects on reasoning bias in LLMs, aligning closely with training dynamics and theoretical understanding of LLM behavior, which are foundational research topics.",
+        "RELEVANCE": 9,
+        "NOVELTY": 7,
+        "authors": [
+            "Junjie Yao",
+            "Zhongwang Zhang",
+            "Zhi-Qin John Xu"
+        ],
+        "title": "An Analysis for Reasoning Bias of Language Models with Small Initialization",
+        "abstract": "Transformer-based Large Language Models (LLMs) have revolutionized Natural Language Processing by demonstrating exceptional performance across diverse tasks. This study investigates the impact of the parameter initialization scale on the training behavior and task preferences of LLMs. We discover that smaller initialization scales encourage models to favor reasoning tasks, whereas larger initialization scales lead to a preference for memorization tasks. We validate this reasoning bias via real datasets and meticulously designed anchor functions. Further analysis of initial training dynamics suggests that specific model components, particularly the embedding space and self-attention mechanisms, play pivotal roles in shaping these learning biases. We provide a theoretical framework from the perspective of model training dynamics to explain these phenomena. Additionally, experiments on real-world language tasks corroborate our theoretical insights. This work enhances our understanding of how initialization strategies influence LLM performance on reasoning tasks and offers valuable guidelines for training models.",
+        "arxiv_id": "2502.04375"
+    },
+    "2502.04577": {
+        "SCORE": 16,
+        "ARXIVID": "2502.04577",
+        "COMMENT": "The paper proposes position-aware circuit discovery for understanding LLM mechanisms, introducing improvements to circuit analysis. This ties into interpretability and underlying structural insights, relevant for foundational LLM analysis.",
+        "RELEVANCE": 8,
+        "NOVELTY": 8,
+        "authors": [
+            "Tal Haklay",
+            "Hadas Orgad",
+            "David Bau",
+            "Aaron Mueller",
+            "Yonatan Belinkov"
+        ],
+        "title": "Position-aware Automatic Circuit Discovery",
+        "abstract": "A widely used strategy to discover and understand language model mechanisms is circuit analysis. A circuit is a minimal subgraph of a model's computation graph that executes a specific task. We identify a gap in existing circuit discovery methods: they assume circuits are position-invariant, treating model components as equally relevant across input positions. This limits their ability to capture cross-positional interactions or mechanisms that vary across positions. To address this gap, we propose two improvements to incorporate positionality into circuits, even on tasks containing variable-length examples. First, we extend edge attribution patching, a gradient-based method for circuit discovery, to differentiate between token positions. Second, we introduce the concept of a dataset schema, which defines token spans with similar semantics across examples, enabling position-aware circuit discovery in datasets with variable length examples. We additionally develop an automated pipeline for schema generation and application using large language models. Our approach enables fully automated discovery of position-sensitive circuits, yielding better trade-offs between circuit size and faithfulness compared to prior work.",
+        "arxiv_id": "2502.04577"
+    },
+    "2502.04591": {
+        "SCORE": 16,
+        "ARXIVID": "2502.04591",
+        "COMMENT": "This paper analyzes oversmoothing in GNNs using a rank-based perspective, which could be highly relevant for representation learning and training dynamics in graph structures.",
+        "RELEVANCE": 8,
+        "NOVELTY": 8,
+        "authors": [
+            "Piero Deidda",
+            "Kaicheng Zhang",
+            "Desmond Higham",
+            "Francesco Tudisco"
+        ],
+        "title": "Rethinking Oversmoothing in Graph Neural Networks: A Rank-Based Perspective",
+        "abstract": "Oversmoothing is a fundamental challenge in graph neural networks (GNNs): as the number of layers increases, node embeddings become increasingly similar, and model performance drops sharply. Traditionally, oversmoothing has been quantified using metrics that measure the similarity of neighbouring node features, such as the Dirichlet energy. While these metrics are related to oversmoothing, we argue they have critical limitations and fail to reliably capture oversmoothing in realistic scenarios. For instance, they provide meaningful insights only for very deep networks and under somewhat strict conditions on the norm of network weights and feature representations. As an alternative, we propose measuring oversmoothing by examining the numerical or effective rank of the feature representations. We provide theoretical support for this approach, demonstrating that the numerical rank of feature representations converges to one for a broad family of nonlinear activation functions under the assumption of nonnegative trained weights. To the best of our knowledge, this is the first result that proves the occurrence of oversmoothing without assumptions on the boundedness of the weight matrices. Along with the theoretical findings, we provide extensive numerical evaluation across diverse graph architectures. Our results show that rank-based metrics consistently capture oversmoothing, whereas energy-based metrics often fail. Notably, we reveal that a significant drop in the rank aligns closely with performance degradation, even in scenarios where energy metrics remain unchanged.",
+        "arxiv_id": "2502.04591"
+    },
+    "2502.04728": {
+        "SCORE": 16,
+        "ARXIVID": "2502.04728",
+        "COMMENT": "The work addresses the use of PDDL for state transition modeling in LLMs, presenting a novel system for symbolic world modeling that links planning with model-generation tasks, aligning partially with large model behavior insights.",
+        "RELEVANCE": 8,
+        "NOVELTY": 8,
+        "authors": [
+            "Zhouliang Yu",
+            "Yuhuan Yuan",
+            "Tim Z. Xiao",
+            "Fuxiang Frank Xia",
+            "Jie Fu",
+            "Ge Zhang",
+            "Ge Lin",
+            "Weiyang Liu"
+        ],
+        "title": "Generating Symbolic World Models via Test-time Scaling of Large Language Models",
+        "abstract": "Solving complex planning problems requires Large Language Models (LLMs) to explicitly model the state transition to avoid rule violations, comply with constraints, and ensure optimality-a task hindered by the inherent ambiguity of natural language. To overcome such ambiguity, Planning Domain Definition Language (PDDL) is leveraged as a planning abstraction that enables precise and formal state descriptions. With PDDL, we can generate a symbolic world model where classic searching algorithms, such as A*, can be seamlessly applied to find optimal plans. However, directly generating PDDL domains with current LLMs remains an open challenge due to the lack of PDDL training data. To address this challenge, we propose to scale up the test-time computation of LLMs to enhance their PDDL reasoning capabilities, thereby enabling the generation of high-quality PDDL domains. Specifically, we introduce a simple yet effective algorithm, which first employs a Best-of-N sampling approach to improve the quality of the initial solution and then refines the solution in a fine-grained manner with verbalized machine learning. Our method outperforms o1-mini by a considerable margin in the generation of PDDL domain, achieving over 50% success rate on two tasks (i.e., generating PDDL domains from natural language description or PDDL problems). This is done without requiring additional training. By taking advantage of PDDL as state abstraction, our method is able to outperform current state-of-the-art methods on almost all competition-level planning tasks.",
+        "arxiv_id": "2502.04728"
+    },
+    "2502.04563": {
+        "SCORE": 16,
+        "ARXIVID": "2502.04563",
+        "COMMENT": "The work proposes novel architectures and strategies for wafer-scale LLM inference, which relates closely to model efficiency and architecture-level innovations.",
+        "RELEVANCE": 8,
+        "NOVELTY": 8,
+        "authors": [
+            "Congjie He",
+            "Yeqi Huang",
+            "Pei Mu",
+            "Ziming Miao",
+            "Jilong Xue",
+            "Lingxiao Ma",
+            "Fan Yang",
+            "Luo Mai"
+        ],
+        "title": "WaferLLM: A Wafer-Scale LLM Inference System",
+        "abstract": "Emerging AI accelerators increasingly adopt wafer-scale manufacturing technologies, integrating hundreds of thousands of AI cores in a mesh-based architecture with large distributed on-chip memory (tens of GB in total) and ultra-high on-chip memory bandwidth (tens of PB/s). However, current LLM inference systems, optimized for shared memory architectures like GPUs, fail to fully exploit these accelerators. We introduce WaferLLM, the first wafer-scale LLM inference system. WaferLLM is guided by a novel PLMR device model that captures the unique hardware characteristics of wafer-scale architectures. Leveraging this model, WaferLLM pioneers wafer-scale LLM parallelism, optimizing the utilization of hundreds of thousands of on-chip cores. It also introduces MeshGEMM and MeshGEMV, the first GEMM and GEMV implementations designed to scale effectively on wafer-scale accelerators. Evaluations show that WaferLLM achieves 200$\\times$ better wafer-scale accelerator utilization than state-of-the-art systems. On a commodity wafer-scale accelerator, WaferLLM delivers 606$\\times$ faster and 22$\\times$ more energy-efficient GEMV compared to an advanced GPU. For LLMs, WaferLLM enables 39$\\times$ faster decoding with 1.7$\\times$ better energy efficiency. We anticipate these numbers will grow significantly as wafer-scale AI models, software, and hardware continue to mature.",
+        "arxiv_id": "2502.04563"
+    },
+    "2502.04679": {
+        "SCORE": 15,
+        "ARXIVID": "2502.04679",
+        "COMMENT": "This paper investigates vulnerabilities in Vision Transformers and introduces a neural defense mechanism. Its insights into ViT behavior and robustness align with the 'analysis on existing architectures' criterion.",
+        "RELEVANCE": 8,
+        "NOVELTY": 7,
+        "authors": [
+            "Chashi Mahiul Islam",
+            "Samuel Jacob Chacko",
+            "Mao Nishino",
+            "Xiuwen Liu"
+        ],
+        "title": "Mechanistic Understandings of Representation Vulnerabilities and Engineering Robust Vision Transformers",
+        "abstract": "While transformer-based models dominate NLP and vision applications, their underlying mechanisms to map the input space to the label space semantically are not well understood. In this paper, we study the sources of known representation vulnerabilities of vision transformers (ViT), where perceptually identical images can have very different representations and semantically unrelated images can have the same representation. Our analysis indicates that imperceptible changes to the input can result in significant representation changes, particularly in later layers, suggesting potential instabilities in the performance of ViTs. Our comprehensive study reveals that adversarial effects, while subtle in early layers, propagate and amplify through the network, becoming most pronounced in middle to late layers. This insight motivates the development of NeuroShield-ViT, a novel defense mechanism that strategically neutralizes vulnerable neurons in earlier layers to prevent the cascade of adversarial effects. We demonstrate NeuroShield-ViT's effectiveness across various attacks, particularly excelling against strong iterative attacks, and showcase its remarkable zero-shot generalization capabilities. Without fine-tuning, our method achieves a competitive accuracy of 77.8% on adversarial examples, surpassing conventional robustness methods. Our results shed new light on how adversarial effects propagate through ViT layers, while providing a promising approach to enhance the robustness of vision transformers against adversarial attacks. Additionally, they provide a promising approach to enhance the robustness of vision transformers against adversarial attacks.",
+        "arxiv_id": "2502.04679"
+    },
+    "2502.04469": {
+        "SCORE": 15,
+        "ARXIVID": "2502.04469",
+        "COMMENT": "Novel approach to continual learning in VQA using attention distillation and question-only memory. Relevant to representation learning and efficient memory methods.",
+        "RELEVANCE": 8,
+        "NOVELTY": 7,
+        "authors": [
+            "Imad Eddine Marouf",
+            "Enzo Tartaglione",
+            "Stephane Lathuiliere",
+            "Joost van de Weijer"
+        ],
+        "title": "No Images, No Problem: Retaining Knowledge in Continual VQA with Questions-Only Memory",
+        "abstract": "Continual Learning in Visual Question Answering (VQACL) requires models to learn new visual-linguistic tasks (plasticity) while retaining knowledge from previous tasks (stability). The multimodal nature of VQACL presents unique challenges, requiring models to balance stability across visual and textual domains while maintaining plasticity to adapt to novel objects and reasoning tasks. Existing methods, predominantly designed for unimodal tasks, often struggle to balance these demands effectively. In this work, we introduce QUestion-only replay with Attention Distillation (QUAD), a novel approach for VQACL that leverages only past task questions for regularisation, eliminating the need to store visual data and addressing both memory and privacy concerns. QUAD achieves stability by introducing a question-only replay mechanism that selectively uses questions from previous tasks to prevent overfitting to the current task's answer space, thereby mitigating the out-of-answer-set problem. Complementing this, we propose attention consistency distillation, which uniquely enforces both intra-modal and inter-modal attention consistency across tasks, preserving essential visual-linguistic associations. Extensive experiments on VQAv2 and NExT-QA demonstrate that QUAD significantly outperforms state-of-the-art methods, achieving robust performance in continual VQA.",
+        "arxiv_id": "2502.04469"
+    },
+    "2502.04371": {
+        "SCORE": 15,
+        "ARXIVID": "2502.04371",
+        "COMMENT": "Presents a novel optimization method for aligning multimodal LLMs' perception, which could contribute to representation learning innovations.",
+        "RELEVANCE": 8,
+        "NOVELTY": 7,
+        "authors": [
+            "Zining Zhu",
+            "Liang Zhao",
+            "Kangheng Lin",
+            "Jinze Yang",
+            "En Yu",
+            "Chenglong Liu",
+            "Haoran Wei",
+            "Jianjian Sun",
+            "Zheng Ge",
+            "Xiangyu Zhang"
+        ],
+        "title": "PerPO: Perceptual Preference Optimization via Discriminative Rewarding",
+        "abstract": "This paper presents Perceptual Preference Optimization (PerPO), a perception alignment method aimed at addressing the visual discrimination challenges in generative pre-trained multimodal large language models (MLLMs). To align MLLMs with human visual perception process, PerPO employs discriminative rewarding to gather diverse negative samples, followed by listwise preference optimization to rank them.By utilizing the reward as a quantitative margin for ranking, our method effectively bridges generative preference optimization and discriminative empirical risk minimization. PerPO significantly enhances MLLMs' visual discrimination capabilities while maintaining their generative strengths, mitigates image-unconditional reward hacking, and ensures consistent performance across visual tasks. This work marks a crucial step towards more perceptually aligned and versatile MLLMs. We also hope that PerPO will encourage the community to rethink MLLM alignment strategies.",
+        "arxiv_id": "2502.04371"
+    },
+    "2502.05073": {
+        "SCORE": 15,
+        "ARXIVID": "2502.05073",
+        "COMMENT": "Exploring noise sensitivity and hierarchical structures has potential implications for deep learning theory, particularly of representation learning and gradient descent complexity, making it relevant.",
+        "RELEVANCE": 8,
+        "NOVELTY": 7,
+        "authors": [
+            "Rupert Li",
+            "Elchanan Mossel"
+        ],
+        "title": "Noise Sensitivity of Hierarchical Functions and Deep Learning Lower Bounds in General Product Measures",
+        "abstract": "Recent works explore deep learning's success by examining functions or data with hierarchical structure. Complementarily, research on gradient descent performance for deep nets has shown that noise sensitivity of functions under independent and identically distributed (i.i.d.) Bernoulli inputs establishes learning complexity bounds. This paper aims to bridge these research streams by demonstrating that functions constructed through repeated composition of non-linear functions are noise sensitive under general product measures.",
+        "arxiv_id": "2502.05073"
+    },
+    "2502.04557": {
+        "SCORE": 15,
+        "ARXIVID": "2502.04557",
+        "COMMENT": "SPRINTER improves speculative decoding efficiency in LLMs, potentially aligning with model compression and efficiency gains in LLMs.",
+        "RELEVANCE": 8,
+        "NOVELTY": 7,
+        "authors": [
+            "Meiyu Zhong",
+            "Noel Teku",
+            "Ravi Tandon"
+        ],
+        "title": "Speeding up Speculative Decoding via Approximate Verification",
+        "abstract": "Speculative Decoding (SD) is a recently proposed technique for faster inference using Large Language Models (LLMs). SD operates by using a smaller draft LLM for autoregressively generating a sequence of tokens and a larger target LLM for parallel verification to ensure statistical consistency. However, periodic parallel calls to the target LLM for verification prevent SD from achieving even lower latencies. We propose SPRINTER, which utilizes a low-complexity verifier trained to predict if tokens generated from a draft LLM would be accepted by the target LLM. By performing approximate sequential verification, SPRINTER does not require verification by the target LLM and is only invoked when a token is deemed unacceptable. This leads to reducing the number of calls to the larger LLM and can achieve further speedups. We present a theoretical analysis of SPRINTER, examining the statistical properties of the generated tokens, as well as the expected reduction in latency as a function of the verifier. We evaluate SPRINTER on several datasets and model pairs, demonstrating that approximate verification can still maintain high quality generation while further reducing latency. For instance, on Wiki-Summaries dataset, SPRINTER achieves a 1.7x latency speedup and requires 8.3x fewer flops relative to SD, while still generating high-quality responses when using GPT2-Small and GPT2-XL as draft/target models.",
+        "arxiv_id": "2502.04557"
+    },
+    "2502.04567": {
+        "SCORE": 15,
+        "ARXIVID": "2502.04567",
+        "COMMENT": "The paper formulates preference optimization through contrastive divergence with theoretical and algorithmic contributions, overlapping with theoretical insights into training and representation learning.",
+        "RELEVANCE": 8,
+        "NOVELTY": 7,
+        "authors": [
+            "Zhuotong Chen",
+            "Fang Liu",
+            "Xuan Zhu",
+            "Yanjun Qi",
+            "Mohammad Ghavamzadeh"
+        ],
+        "title": "Preference Optimization via Contrastive Divergence: Your Reward Model is Secretly an NLL Estimator",
+        "abstract": "Existing studies on preference optimization (PO) have centered on constructing pairwise preference data following simple heuristics, such as maximizing the margin between preferred and dispreferred completions based on human (or AI) ranked scores. However, none of these heuristics has a full theoretical justification. In this work, we develop a novel PO framework that provides theoretical guidance to effectively sample dispreferred completions. To achieve this, we formulate PO as minimizing the negative log-likelihood (NLL) of a probability model and propose to estimate its normalization constant via a sampling strategy. As we will demonstrate, these estimative samples can act as dispreferred completions in PO. We then select contrastive divergence (CD) as the sampling strategy, and propose a novel MC-PO algorithm that applies the Monte Carlo (MC) kernel from CD to sample hard negatives w.r.t. the parameterized reward model. Finally, we propose the OnMC-PO algorithm, an extension of MC-PO to the online setting. On popular alignment benchmarks, MC-PO outperforms existing SOTA baselines, and OnMC-PO leads to further improvement.",
+        "arxiv_id": "2502.04567"
+    },
+    "2502.04891": {
+        "SCORE": 14,
+        "ARXIVID": "2502.04891",
+        "COMMENT": "The paper proposes new strategies for graph optimization and rewiring to enhance GNNs, especially by increasing alignment between label and community structures. It contributes to graph-related architectural refinements, which are relevant to model architecture analysis.",
+        "RELEVANCE": 7,
+        "NOVELTY": 7,
+        "authors": [
+            "Celia Rubio-Madrigal",
+            "Adarsh Jamadandi",
+            "Rebekka Burkholz"
+        ],
+        "title": "GNNs Getting ComFy: Community and Feature Similarity Guided Rewiring",
+        "abstract": "Maximizing the spectral gap through graph rewiring has been proposed to enhance the performance of message-passing graph neural networks (GNNs) by addressing over-squashing. However, as we show, minimizing the spectral gap can also improve generalization. To explain this, we analyze how rewiring can benefit GNNs within the context of stochastic block models. Since spectral gap optimization primarily influences community strength, it improves performance when the community structure aligns with node labels. Building on this insight, we propose three distinct rewiring strategies that explicitly target community structure, node labels, and their alignment: (a) community structure-based rewiring (ComMa), a more computationally efficient alternative to spectral gap optimization that achieves similar goals; (b) feature similarity-based rewiring (FeaSt), which focuses on maximizing global homophily; and (c) a hybrid approach (ComFy), which enhances local feature similarity while preserving community structure to optimize label-community alignment. Extensive experiments confirm the effectiveness of these strategies and support our theoretical insights.",
+        "arxiv_id": "2502.04891"
+    },
+    "2502.04409": {
+        "SCORE": 14,
+        "ARXIVID": "2502.04409",
+        "COMMENT": "Proposes representation learning techniques for ensemble forecasts using autoencoders. Relevant to dimensionality reduction and representation learning.",
+        "RELEVANCE": 7,
+        "NOVELTY": 7,
+        "authors": [
+            "Jieyu Chen",
+            "Kevin H\\\"ohlein",
+            "Sebastian Lerch"
+        ],
+        "title": "Learning low-dimensional representations of ensemble forecast fields using autoencoder-based methods",
+        "abstract": "Large-scale numerical simulations often produce high-dimensional gridded data that is challenging to process for downstream applications. A prime example is numerical weather prediction, where atmospheric processes are modeled using discrete gridded representations of the physical variables and dynamics. Uncertainties are assessed by running the simulations multiple times, yielding ensembles of simulated fields as a high-dimensional stochastic representation of the forecast distribution. The high-dimensionality and large volume of ensemble datasets poses major computing challenges for subsequent forecasting stages. Data-driven dimensionality reduction techniques could help to reduce the data volume before further processing by learning meaningful and compact representations. However, existing dimensionality reduction methods are typically designed for deterministic and single-valued inputs, and thus cannot handle ensemble data from multiple randomized simulations. In this study, we propose novel dimensionality reduction approaches specifically tailored to the format of ensemble forecast fields. We present two alternative frameworks, which yield low-dimensional representations of ensemble forecasts while respecting their probabilistic character. The first approach derives a distribution-based representation of an input ensemble by applying standard dimensionality reduction techniques in a member-by-member fashion and merging the member representations into a joint parametric distribution model. The second approach achieves a similar representation by encoding all members jointly using a tailored variational autoencoder. We evaluate and compare both approaches in a case study using 10 years of temperature and wind speed forecasts over Europe. The approaches preserve key spatial and statistical characteristics of the ensemble and enable probabilistic reconstructions of the forecast fields.",
+        "arxiv_id": "2502.04409"
+    },
+    "2502.05169": {
+        "SCORE": 14,
+        "ARXIVID": "2502.05169",
+        "COMMENT": "Explores network equivariance for computational efficiency, which aligns partially with model architecture innovations and computational efficiency, albeit with a narrow focus.",
+        "RELEVANCE": 7,
+        "NOVELTY": 7,
+        "authors": [
+            "Georg B\\\"okman",
+            "David Nordstr\\\"om",
+            "Fredrik Kahl"
+        ],
+        "title": "Flopping for FLOPs: Leveraging equivariance for computational efficiency",
+        "abstract": "Incorporating geometric invariance into neural networks enhances parameter efficiency but typically increases computational costs. This paper introduces new equivariant neural networks that preserve symmetry while maintaining a comparable number of floating-point operations (FLOPs) per parameter to standard non-equivariant networks. We focus on horizontal mirroring (flopping) invariance, common in many computer vision tasks. The main idea is to parametrize the feature spaces in terms of mirror-symmetric and mirror-antisymmetric features, i.e., irreps of the flopping group. This decomposes the linear layers to be block-diagonal, requiring half the number of FLOPs. Our approach reduces both FLOPs and wall-clock time, providing a practical solution for efficient, scalable symmetry-aware architectures.",
+        "arxiv_id": "2502.05169"
+    },
+    "2502.04428": {
+        "SCORE": 13,
+        "ARXIVID": "2502.04428",
+        "COMMENT": "The paper studies uncertainty-based routing in SLMs versus LLMs, highlighting architectural efficiency for on-device setups, which aligns partially with compression/dynamic routing interests.",
+        "RELEVANCE": 7,
+        "NOVELTY": 6,
+        "authors": [
+            "Yu-Neng Chuang",
+            "Leisheng Yu",
+            "Guanchu Wang",
+            "Lizhe Zhang",
+            "Zirui Liu",
+            "Xuanting Cai",
+            "Yang Sui",
+            "Vladimir Braverman",
+            "Xia Hu"
+        ],
+        "title": "Confident or Seek Stronger: Exploring Uncertainty-Based On-device LLM Routing From Benchmarking to Generalization",
+        "abstract": "Large language models (LLMs) are increasingly deployed and democratized on edge devices. To improve the efficiency of on-device deployment, small language models (SLMs) are often adopted due to their efficient decoding latency and reduced energy consumption. However, these SLMs often generate inaccurate responses when handling complex queries. One promising solution is uncertainty-based SLM routing, offloading high-stakes queries to stronger LLMs when resulting in low-confidence responses on SLM. This follows the principle of \"If you lack confidence, seek stronger support\" to enhance reliability. Relying on more powerful LLMs is yet effective but increases invocation costs. Therefore, striking a routing balance between efficiency and efficacy remains a critical challenge. Additionally, efficiently generalizing the routing strategy to new datasets remains under-explored. In this paper, we conduct a comprehensive investigation into benchmarking and generalization of uncertainty-driven routing strategies from SLMs to LLMs over 1500+ settings. Our findings highlight: First, uncertainty-correctness alignment in different uncertainty quantification (UQ) methods significantly impacts routing performance. Second, uncertainty distributions depend more on both the specific SLM and the chosen UQ method, rather than downstream data. Building on the insight, we propose a calibration data construction instruction pipeline and open-source a constructed hold-out set to enhance routing generalization on new downstream scenarios. The experimental results indicate calibration data effectively bootstraps routing performance without any new data.",
+        "arxiv_id": "2502.04428"
+    },
+    "2502.04576": {
+        "SCORE": 13,
+        "ARXIVID": "2502.04576",
+        "COMMENT": "This paper proposes a self-regulation mechanism for LLMs, which aligns with research into model behavior and interpretability. However, the approach relies heavily on reinforcement learning and task-specific interventions, limiting its relevance to foundational LLM research.",
+        "RELEVANCE": 7,
+        "NOVELTY": 6,
+        "authors": [
+            "So Yeon Min",
+            "Yue Wu",
+            "Jimin Sun",
+            "Max Kaufmann",
+            "Fahim Tajwar",
+            "Yonatan Bisk",
+            "Ruslan Salakhutdinov"
+        ],
+        "title": "Self-Regulation and Requesting Interventions",
+        "abstract": "Human intelligence involves metacognitive abilities like self-regulation, recognizing limitations, and seeking assistance only when needed. While LLM Agents excel in many domains, they often lack this awareness. Overconfident agents risk catastrophic failures, while those that seek help excessively hinder efficiency. A key challenge is enabling agents with a limited intervention budget $C$ is to decide when to request assistance. In this paper, we propose an offline framework that trains a \"helper\" policy to request interventions, such as more powerful models or test-time compute, by combining LLM-based process reward models (PRMs) with tabular reinforcement learning. Using state transitions collected offline, we score optimal intervention timing with PRMs and train the helper model on these labeled trajectories. This offline approach significantly reduces costly intervention calls during training. Furthermore, the integration of PRMs with tabular RL enhances robustness to off-policy data while avoiding the inefficiencies of deep RL. We empirically find that our method delivers optimal helper behavior.",
+        "arxiv_id": "2502.04576"
+    },
+    "2502.04352": {
+        "SCORE": 13,
+        "ARXIVID": "2502.04352",
+        "COMMENT": "This examines the robustness of deductive reasoning in LLMs, focusing on logical deduction tasks and perturbation robustness. It offers empirical insights but lacks fundamental architectural or theoretical advancements.",
+        "RELEVANCE": 7,
+        "NOVELTY": 6,
+        "authors": [
+            "Fabian Hoppe",
+            "Filip Ilievski",
+            "Jan-Christoph Kalo"
+        ],
+        "title": "Investigating the Robustness of Deductive Reasoning with Large Language Models",
+        "abstract": "Large Language Models (LLMs) have been shown to achieve impressive results for many reasoning-based Natural Language Processing (NLP) tasks, suggesting a degree of deductive reasoning capability. However, it remains unclear to which extent LLMs, in both informal and autoformalisation methods, are robust on logical deduction tasks. Moreover, while many LLM-based deduction methods have been proposed, there is a lack of a systematic study that analyses the impact of their design components. Addressing these two challenges, we propose the first study of the robustness of LLM-based deductive reasoning methods. We devise a framework with two families of perturbations: adversarial noise and counterfactual statements, which jointly generate seven perturbed datasets. We organize the landscape of LLM reasoners according to their reasoning format, formalisation syntax, and feedback for error recovery. The results show that adversarial noise affects autoformalisation, while counterfactual statements influence all approaches. Detailed feedback does not improve overall accuracy despite reducing syntax errors, pointing to the challenge of LLM-based methods to self-correct effectively.",
+        "arxiv_id": "2502.04352"
+    },
+    "2502.04369": {
+        "SCORE": 13,
+        "ARXIVID": "2502.04369",
+        "COMMENT": "This paper proposes a style transfer module focused on computational efficiency, which is relevant to compression and sparsity research due to attention-based mechanisms being optimized.",
+        "RELEVANCE": 7,
+        "NOVELTY": 6,
+        "authors": [
+            "Shuhao Zhang",
+            "Hui Kang",
+            "Yang Liu",
+            "Fang Mei",
+            "Hongjuan Li"
+        ],
+        "title": "HSI: A Holistic Style Injector for Arbitrary Style Transfer",
+        "abstract": "Attention-based arbitrary style transfer methods have gained significant attention recently due to their impressive ability to synthesize style details. However, the point-wise matching within the attention mechanism may overly focus on local patterns such that neglect the remarkable global features of style images. Additionally, when processing large images, the quadratic complexity of the attention mechanism will bring high computational load. To alleviate above problems, we propose Holistic Style Injector (HSI), a novel attention-style transformation module to deliver artistic expression of target style. Specifically, HSI performs stylization only based on global style representation that is more in line with the characteristics of style transfer, to avoid generating local disharmonious patterns in stylized images. Moreover, we propose a dual relation learning mechanism inside the HSI to dynamically render images by leveraging semantic similarity in content and style, ensuring the stylized images preserve the original content and improve style fidelity. Note that the proposed HSI achieves linear computational complexity because it establishes feature mapping through element-wise multiplication rather than matrix multiplication. Qualitative and quantitative results demonstrate that our method outperforms state-of-the-art approaches in both effectiveness and efficiency.",
+        "arxiv_id": "2502.04369"
+    }
+}

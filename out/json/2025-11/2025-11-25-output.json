@@ -1,0 +1,684 @@
+{
+    "2511.17864": {
+        "SCORE": 19,
+        "ARXIVID": "2511.17864",
+        "COMMENT": "Representation Learning/Architecture Analysis: proves context effects equal rank-1 MLP weight patches (plus RMSNorm) across modern transformer blocks incl. MoE; constructive multi-layer algorithm.",
+        "RELEVANCE": 10,
+        "NOVELTY": 9,
+        "authors": [
+            "Adrian Goldwaser",
+            "Michael Munn",
+            "Javier Gonzalvo",
+            "Benoit Dherin"
+        ],
+        "title": "Equivalence of Context and Parameter Updates in Modern Transformer Blocks",
+        "abstract": "Recent research has established that the impact of context in a vanilla transformer can be represented implicitly by forming a token-dependent, rank-1 patch to its MLP weights. This work extends that foundational theory to the diverse architectures of modern Large Language Models. We first demonstrate a precise, analytical solution for a Gemma-style transformer block, proving that the entire effect of a context can be perfectly mapped to rank-1 patches on its MLP weight matrices and a patch to the RMSNorm scale. We then generalize this result, providing a constructive proof and algorithm for multi-layer models. To unify these findings, we introduce a general framework centered on two core properties: input controllability and output controllability. We prove that a perfect implicit weight patch is possible for any MLP block where the inner function is input-controllable and the outer function is output-controllable. This provides a simpler and more powerful lens for understanding how transformer models transmute prompts into effective weights. This setup generalizes to a wide range of modern LLM architectures including gating, pre-/post-norm, mixture of experts and sequential/parallel transformer blocks.",
+        "arxiv_id": "2511.17864"
+    },
+    "2511.18936": {
+        "SCORE": 18,
+        "ARXIVID": "2511.18936",
+        "COMMENT": "Compression/Efficiency: decompression-free KV-cache compression (orthogonal rotation + pruning) with runtime-tunable ratio.",
+        "RELEVANCE": 10,
+        "NOVELTY": 8,
+        "authors": [
+            "Santhosh G S",
+            "Saurav Prakash",
+            "Balaraman Ravindran"
+        ],
+        "title": "SWAN: Sparse Winnowed Attention for Reduced Inference Memory via Decompression-Free KV-Cache Compression",
+        "abstract": "Large Language Models (LLMs) face a significant bottleneck during autoregressive inference due to the massive memory footprint of the Key-Value (KV) cache. Existing compression techniques like token eviction, quantization, or other low-rank methods often risk information loss, have fixed limits, or introduce significant computational overhead from explicit decompression steps. In this work, we introduce SWAN, a novel, fine-tuning-free framework that eliminates this overhead. Our method uses an offline orthogonal matrix to rotate and prune the KV-cache, which is then used directly in the attention computation without any reconstruction. Our extensive experiments demonstrate that SWAN, augmented with a small dense buffer, offers a robust trade-off, maintaining performance close to the uncompressed baseline even at aggressive 50-60% memory savings per-token on KV-cache. A key advantage is its runtime-tunable compression level, allowing operators to dynamically adjust the memory footprint, a flexibility absent in methods requiring fixed offline configurations. This combination of a decompression-free design, high performance under compression, and adaptability makes SWAN a practical and efficient solution for serving LLMs with long contexts.",
+        "arxiv_id": "2511.18936"
+    },
+    "2511.18314": {
+        "SCORE": 18,
+        "ARXIVID": "2511.18314",
+        "COMMENT": "Model Architecture (MoE): budget-aware dynamic routing allocating variable expert slots per token across modalities.",
+        "RELEVANCE": 10,
+        "NOVELTY": 8,
+        "authors": [
+            "Yuting Gao",
+            "Wang Lan",
+            "Hengyuan Zhao",
+            "Linjiang Huang",
+            "Si Liu",
+            "Qingpei Guo"
+        ],
+        "title": "AnyExperts: On-Demand Expert Allocation for Multimodal Language Models with Mixture of Expert",
+        "abstract": "Multimodal Mixture-of-Experts (MoE) models offer a promising path toward scalable and efficient large vision-language systems. However, existing approaches rely on rigid routing strategies (typically activating a fixed number of experts per token) ignoring the inherent heterogeneity in semantic importance across modalities. This leads to suboptimal compute allocation, where redundant tokens consume as many resources as critical ones. To address this, we propose AnyExperts, a novel on-demand, budget-aware dynamic routing framework that allocates a variable total number of expert slots per token based on its semantic importance. Crucially, to prevent uncontrolled compute growth, the total slots per token are constrained within a fixed range, and each slot is filled by either a real expert or a virtual expert, with the virtual share capped at a small maximum (e.g., 20%). The model then adaptively balances the real-to-virtual ratio per token, assigning more real experts to semantically rich regions and relying more on virtual experts for redundant content. Evaluated across diverse tasks in visual understanding, audio understanding, and NLP understanding, AnyExperts improves performance under the same compute budget. Notably, on general image/video tasks, it achieves comparable accuracy with 40% fewer real expert activations; on text-dense tasks (OCR and NLP), it maintains performance while reducing real expert usage by 10%. These results demonstrate that fine-grained, importance-driven expert allocation significantly enhances both the efficiency and effectiveness of multimodal MoE models.",
+        "arxiv_id": "2511.18314"
+    },
+    "2511.17826": {
+        "SCORE": 18,
+        "ARXIVID": "2511.17826",
+        "COMMENT": "HPC/Systems: TP-invariant matmul/reduction kernels (tree-based) enabling bitwise deterministic inference across tensor parallel sizes.",
+        "RELEVANCE": 10,
+        "NOVELTY": 8,
+        "authors": [
+            "Ziyang Zhang",
+            "Xinheng Ding",
+            "Jiayi Yuan",
+            "Rixin Liu",
+            "Huizi Mao",
+            "Jiarong Xing",
+            "Zirui Liu"
+        ],
+        "title": "Deterministic Inference across Tensor Parallel Sizes That Eliminates Training-Inference Mismatch",
+        "abstract": "Deterministic inference is increasingly critical for large language model (LLM) applications such as LLM-as-a-judge evaluation, multi-agent systems, and Reinforcement Learning (RL). However, existing LLM serving frameworks exhibit non-deterministic behavior: identical inputs can yield different outputs when system configurations (e.g., tensor parallel (TP) size, batch size) vary, even under greedy decoding. This arises from the non-associativity of floating-point arithmetic and inconsistent reduction orders across GPUs. While prior work has addressed batch-size-related nondeterminism through batch-invariant kernels, determinism across different TP sizes remains an open problem, particularly in RL settings, where the training engine typically uses Fully Sharded Data Parallel (i.e., TP = 1) while the rollout engine relies on multi-GPU TP to maximize the inference throughput, creating a natural mismatch between the two. This precision mismatch problem may lead to suboptimal performance or even collapse for RL training. We identify and analyze the root causes of TP-induced inconsistency and propose Tree-Based Invariant Kernels (TBIK), a set of TP-invariant matrix multiplication and reduction primitives that guarantee bit-wise identical results regardless of TP size. Our key insight is to align intra- and inter-GPU reduction orders through a unified hierarchical binary tree structure. We implement these kernels in Triton and integrate them into vLLM and FSDP. Experiments confirm zero probability divergence and bit-wise reproducibility for deterministic inference across different TP sizes. Also, we achieve bit-wise identical results between vLLM and FSDP in RL training pipelines with different parallel strategy. Code is available at https://github.com/nanomaoli/llm_reproducibility.",
+        "arxiv_id": "2511.17826"
+    },
+    "2511.18643": {
+        "SCORE": 18,
+        "ARXIVID": "2511.18643",
+        "COMMENT": "Model Compression and Efficiency: mixed-precision 2-bit KV cache quantization with dynamic channel-wise precision boost and system-level kernels/layouts.",
+        "RELEVANCE": 10,
+        "NOVELTY": 8,
+        "authors": [
+            "Haojun Xia",
+            "Xiaoxia Wu",
+            "Jisen Li",
+            "Robert Wu",
+            "Junxiong Wang",
+            "Jue Wang",
+            "Chenxi Li",
+            "Aman Singhal",
+            "Alay Dilipbhai Shah",
+            "Alpay Ariyak",
+            "Donglin Zhuang",
+            "Zhongzhu Zhou",
+            "Ben Athiwaratkun",
+            "Zhen Zheng",
+            "Shuaiwen Leon Song"
+        ],
+        "title": "Kitty: Accurate and Efficient 2-bit KV Cache Quantization with Dynamic Channel-wise Precision Boost",
+        "abstract": "The KV cache is a dominant memory bottleneck for LLM inference. While 4-bit KV quantization preserves accuracy, 2-bit often degrades it, especially on long-context reasoning. We close this gap via an algorithm-system co-design for mixed-precision KV caching: Kitty. On the algorithm side, extensive experiments show that Dynamic Channel-wise Precision Boost -- which ranks Key-cache channels by sensitivity and keeps only a small fraction at higher precision -- maintains near-zero loss in accuracy drop while approaching 2-bit memory. The main challenge is handling dynamic 4-bit channel boosts while keeping the page layout coalesced and the dequantization uniform, with no scattered reads or hard-coded masks. Kitty addresses these issues by decompose each mixed-precision Key page into two tensors with unified 2-bit precision. Based on this, Kitty provides a page-centric KV layout, Triton-compatible page dequantization kernels, and a lightweight runtime pipeline that preserves coalescing and avoids divergence. Across seven tasks and two model families (Qwen3, LLaMA3), Kitty cuts KV memory by nearly 8x with negligible accuracy loss, enabling up to 8x larger batches and 2.1x-4.1x higher throughput under the same memory budget. We release the full implementation of Kitty at https://github.com/Summer-Summer/Kitty.",
+        "arxiv_id": "2511.18643"
+    },
+    "2511.17809": {
+        "SCORE": 18,
+        "ARXIVID": "2511.17809",
+        "COMMENT": "Strong match to Model Compression and Efficiency: adaptive layer-wise transformations for post-training quantization of LLMs (addresses outliers heterogeneously).",
+        "RELEVANCE": 10,
+        "NOVELTY": 8,
+        "authors": [
+            "Cuong Pham",
+            "Hoang Anh Dung",
+            "Cuong C. Nguyen",
+            "Trung Le",
+            "Gustavo Carneiro",
+            "Jianfei Cai",
+            "Thanh-Toan Do"
+        ],
+        "title": "Adaptive Layer-Wise Transformations for Post-Training Quantization of Large Language Models",
+        "abstract": "Large language models require significant computational resources for deployment, making quantization essential for practical applications. However, the main obstacle to effective quantization lies in systematic outliers in activations and weights, which cause substantial LLM performance degradation, especially at low-bit settings. While existing transformation-based methods like affine and rotation transformations successfully mitigate outliers, they apply the homogeneous transformation setting, i.e., using the same transformation types across all layers, ignoring the heterogeneous distribution characteristics within LLMs. In this paper, we propose an adaptive transformation selection framework that systematically determines optimal transformations on a per-layer basis. To this end, we first formulate transformation selection as a differentiable optimization problem to achieve the accurate transformation type for each layer. However, searching for optimal layer-wise transformations for every model is computationally expensive. To this end, we establish the connection between weight distribution kurtosis and accurate transformation type. Specifically, we propose an outlier-guided layer selection method using robust $z$-score normalization that achieves comparable performance to differentiable search with significantly reduced overhead. Comprehensive experiments on LLaMA family models demonstrate that our adaptive approach consistently outperforms the widely-used fixed transformation settings. For example, our method achieves an improvement of up to 4.58 perplexity points and a 2.11% gain in average six-task zero-shot accuracy under aggressive W3A3K2V2 quantization settings for the LLaMA-3-8B model compared to the current best existing method, FlatQuant, demonstrating the necessity of heterogeneous transformation selection for optimal LLM quantization.",
+        "arxiv_id": "2511.17809"
+    },
+    "2511.17560": {
+        "SCORE": 18,
+        "ARXIVID": "2511.17560",
+        "COMMENT": "Compression/Efficiency: attention-aware KV cache fusion for LLM serving to cut latency/memory.",
+        "RELEVANCE": 10,
+        "NOVELTY": 8,
+        "authors": [
+            "Yuechi Zhou",
+            "Yi Su",
+            "Jianxin Zhang",
+            "Juntao Li",
+            "Qingrong Xia",
+            "Zhefeng Wang",
+            "Xinyu Duan",
+            "Baoxing Huai"
+        ],
+        "title": "$A^3$: Attention-Aware Accurate KV Cache Fusion for Fast Large Language Model Serving",
+        "abstract": "Large language models (LLMs) have demonstrated strong capabilities in processing long contexts, enabling them to tackle tasks involving long textual inputs such as multi-turn conversations, legal documents, or retrieved documents in Retrieval-Augmented Generation (RAG) systems. However, despite their ability to handle long sequences, the resulting decoding latency and memory overhead remain substantial, posing challenges for real-world deployment. Recent advances in KV Cache reuse have shown potential to mitigate these costs, but still suffer from notable performance degradation. To address this issue, we conduct an in-depth investigation of recomputation-based reuse methods and observe that the recomputed tokens often fail to align with the context segments most relevant to the question. This misalignment hinders proper updates to the critical contextual representations. Therefore, we propose the $\\textbf{A}$ttention-$\\textbf{A}$ware $\\textbf{A}$ccurate KV Cache Fusion algorithm ($A^3$), which precomputes and selectively fuses the KV Cache of text chunks based on their relevance to the question, achieving accurate integration with minimal computational overhead. Extensive experiments on various benchmarks and LLMs demonstrate that $A^3$ achieves the best task performance compared to four baselines while reducing the time-to-first-token (TTFT) by 2$\\times$.",
+        "arxiv_id": "2511.17560"
+    },
+    "2511.18417": {
+        "SCORE": 18,
+        "ARXIVID": "2511.18417",
+        "COMMENT": "Model Architecture/Theory: category-equivariant neural networks with general equivariant universal approximation theorems.",
+        "RELEVANCE": 9,
+        "NOVELTY": 9,
+        "authors": [
+            "Yoshihiro Maruyama"
+        ],
+        "title": "Categorical Equivariant Deep Learning: Category-Equivariant Neural Networks and Universal Approximation Theorems",
+        "abstract": "We develop a theory of category-equivariant neural networks (CENNs) that unifies group/groupoid-equivariant networks, poset/lattice-equivariant networks, graph and sheaf neural networks. Equivariance is formulated as naturality in a topological category with Radon measures, formulating linear and nonlinear layers in the categorical setup. We prove the equivariant universal approximation theorem in the general setting: the class of finite-depth CENNs is dense in the space of continuous equivariant transformations. We instantiate the framework for groups/groupoids, posets/lattices, graphs and cellular sheaves, deriving universal approximation theorems for them in a systematic manner. Categorical equivariant deep learning thus allows us to expand the horizons of equivariant deep learning beyond group actions, encompassing not only geometric symmetries but also contextual and compositional symmetries.",
+        "arxiv_id": "2511.18417"
+    },
+    "2511.17840": {
+        "SCORE": 18,
+        "ARXIVID": "2511.17840",
+        "COMMENT": "Model Architecture: graded transformers with typed morphisms and utility-driven differentiable routing yielding sparse, interpretable internal computation.",
+        "RELEVANCE": 9,
+        "NOVELTY": 9,
+        "authors": [
+            "Tony Shaska"
+        ],
+        "title": "Internalizing Tools as Morphisms in Graded Transformers",
+        "abstract": "We introduce a graded formulation of internal symbolic computation for transformers. The hidden space is endowed with a grading $V=\\bigoplus_{g\\in G}V_g$, and symbolic operations are realized as typed block maps (morphisms) $\\phi_{h\\leftarrow g}:V_g\\to V_h$ that are activated selectively by a differentiable routing policy. A self-supervised \\emph{graded utility functional}, defined as the loss reduction induced by a candidate morphism, governs activation and yields sparse, interpretable behavior. We develop the algebraic and geometric foundations: an internal model category whose objects are homogeneous components and whose morphisms are admissible grade transitions; adjoint pairs encoding typed round trips; and information-geometric interpretations in terms of KL gain, mirror descent with Bregman divergences, and Fisher natural gradients. Methodologically, we specify a utility--aware routing mechanism and objective that remain fully end-to-end differentiable. Analytic case studies and lightweight sanity checks illustrate selective morphic activation on hybrid symbolic-linguistic tasks. The framework unifies symbolic computation, geometry, and self--supervised learning within the \\emph{graded transformer} formalism \\cite{sh-89,sh-95}, while subsuming prior external-tool paradigms (e.g., Toolformer \\cite{toolformer2023}) as a special case via functorial internalization.",
+        "arxiv_id": "2511.17840"
+    },
+    "2511.17885": {
+        "SCORE": 17,
+        "ARXIVID": "2511.17885",
+        "COMMENT": "Strong match to Model Architecture (MoE) and Efficiency: dynamic expert activation and routing-aware token pruning for MoE-based MLLMs.",
+        "RELEVANCE": 10,
+        "NOVELTY": 7,
+        "authors": [
+            "Guoyang Xia",
+            "Yifeng Ding",
+            "Fengfa Li",
+            "Lei Ren",
+            "Wei Chen",
+            "Fangxiang Feng",
+            "Xiaojie Wang"
+        ],
+        "title": "FastMMoE: Accelerating Multimodal Large Language Models through Dynamic Expert Activation and Routing-Aware Token Pruning",
+        "abstract": "Multimodal large language models (MLLMs) have achieved impressive performance, but high-resolution visual inputs result in long sequences of visual tokens and substantial inference latency. Reducing redundant visual tokens is critical to ease computational/memory burdens while preserving performance, enabling MLLM deployment in resource-constrained or latency-sensitive scenarios. Current visual token pruning methods mainly rely on attention-based redundancy analysis and are tailored to dense architectures. We propose Fast Multimodal Mixture-of-Experts (FastMMoE), a training-free acceleration framework for mixture-of-experts (MoE) based MLLMs, developed from a routing analysis perspective. FastMMoE combines two complementary strategies: (i) expert activation reduction for visual tokens to minimize unnecessary expert computation; and (ii) routing-aware token pruning that leverages similarity in routing probability distributions to identify and remove highly redundant visual tokens. Experiments on large-scale MoE-MLLMs such as DeepSeek-VL2 and InternVL3.5 demonstrate that FastMMoE can reduce FLOPs by up to 55.0% while retaining approximately 95.5% of the original performance, consistently outperforming dense-model pruning baselines including FastV and SparseVLM across multiple retention rates.",
+        "arxiv_id": "2511.17885"
+    },
+    "2511.17801": {
+        "SCORE": 17,
+        "ARXIVID": "2511.17801",
+        "COMMENT": "Compression/Efficiency: layer-wise optimization of high-impact parameter ratios for extreme PTQ of LLMs with inter-layer dependencies.",
+        "RELEVANCE": 9,
+        "NOVELTY": 8,
+        "authors": [
+            "Cuong Pham",
+            "Hoang Anh Dung",
+            "Cuong C. Nguyen",
+            "Trung Le",
+            "Gustavo Carneiro",
+            "Thanh-Toan Do"
+        ],
+        "title": "Layer-Wise High-Impact Parameter Ratio Optimization in Post-Training Quantization for Large Language Models",
+        "abstract": "Large language models (LLMs) have significantly advanced natural language processing, but their massive parameter counts create substantial computational and memory challenges during deployment. Post-training quantization (PTQ) has emerged as a promising approach to mitigate these challenges with minimal overhead. While existing PTQ methods can effectively quantize LLMs, they experience substantial accuracy loss at extremely low bit-widths, primarily due to high-impact parameters that significantly influence quantization performance. Several approaches address these issues by identifying and retaining the high-impact parameters in FP16 format. However, they apply fixed ratios of high-impact parameters across all layers, overlooking layer-wise sensitivity variations. In this paper, we propose a quadratic optimization framework that determines layer-specific ratios of high-impact parameters while considering inter-layer dependencies. We quantize high-impact parameters to moderate bit-widths, which often result in negligible performance degradation in quantized LLMs, while the remaining parameters can be quantized to extremely low bit-widths. Under the same resource-constrained budget, this allows for preserving more high-impact parameters than methods that keep selecting a few in FP16 format. Additionally, the proposed framework allows us to leverage an advanced quantization method that often requires extensive learnable parameters solely for high-impact parameters, while applying a computationally efficient method to the rest. Our approach achieves an effective balance between computational efficiency and model accuracy while maintaining high performance compared to state-of-the-art methods.",
+        "arxiv_id": "2511.17801"
+    },
+    "2511.18105": {
+        "SCORE": 17,
+        "ARXIVID": "2511.18105",
+        "COMMENT": "Model Architecture/Efficiency: unified adaptive Transformer controlling width, depth, and tokens with joint training for Pareto-efficient inference.",
+        "RELEVANCE": 9,
+        "NOVELTY": 8,
+        "authors": [
+            "Purvish Jajal",
+            "Nick John Eliopoulos",
+            "Benjamin Shiue-Hal Chou",
+            "George K. Thiruvathukal",
+            "Yung-Hsiang Lu",
+            "James C. Davis"
+        ],
+        "title": "AdaPerceiver: Transformers with Adaptive Width, Depth, and Tokens",
+        "abstract": "Modern transformer architectures achieve remarkable performance across tasks and domains but remain rigid in how they allocate computation at inference time. Real-world deployment often requires models to adapt to diverse hardware and latency constraints, yet most approaches to dynamic computation focus on a single axis -- such as reducing the number of tokens. We present a novel capability: AdaPerceiver, the first transformer architecture with unified adaptivity across depth, width, and tokens within a single model. We propose an architecture that supports adaptivity along these axes. We couple this with an efficient joint training regime that ensures the model maintains performance across its various configurations. We evaluate AdaPerceiver on image classification, semantic segmentation, and depth estimation tasks. On image classification, AdaPerceiver expands the accuracy-throughput Pareto front. It achieves 85.4% accuracy while yielding 36% higher throughput than FlexiViT-L. On dense prediction, AdaPerceiver matches ViT-H/14 while having $\\sim$26x fewer encoder FLOPs (floating-point operations) on semantic segmentation and depth estimation. Finally, we show how AdaPerceiver equipped with a policy can maintain ImageNet1K accuracy ($\\pm0.1$ percentage points) while reducing FLOPs by $24-33$%.",
+        "arxiv_id": "2511.18105"
+    },
+    "2511.17852": {
+        "SCORE": 17,
+        "ARXIVID": "2511.17852",
+        "COMMENT": "Representation Learning/Training Dynamics: theoretical analysis showing transformers learn k-sparse Boolean functions via RL vs SFT with CoT-style supervision.",
+        "RELEVANCE": 9,
+        "NOVELTY": 8,
+        "authors": [
+            "Bochen Lyu",
+            "Yiyang Jia",
+            "Xiaohao Cai",
+            "Zhanxing Zhu"
+        ],
+        "title": "Transformers with RL or SFT Provably Learn Sparse Boolean Functions, But Differently",
+        "abstract": "Transformers can acquire Chain-of-Thought (CoT) capabilities to solve complex reasoning tasks through fine-tuning. Reinforcement learning (RL) and supervised fine-tuning (SFT) are two primary approaches to this end, yet their underlying mechanisms and differences remain theoretically unclear. In this work, we examine these aspects specifically for learning $k$-sparse Boolean functions with a one-layer transformer and intermediate supervision that is akin to CoT. In particular, we consider $k$-sparse Boolean functions that can be recursively decomposed into fixed 2-sparse Boolean functions. We analyze the learning dynamics of fine-tuning the transformer via either RL or SFT with CoT to identify sufficient conditions for it to provably learn these functions. We verify that these conditions hold for three basic examples, including $k$-PARITY, $k$-AND, and $k$-OR, thus demonstrating the learnability of both approaches. Notably, we reveal that RL and SFT exhibit distinct learning behaviors: RL learns the whole CoT chain simultaneously, whereas SFT learns the CoT chain step-by-step. Overall, our findings provide theoretical insights into the underlying mechanisms of RL and SFT as well as how they differ in triggering the CoT capabilities of transformers.",
+        "arxiv_id": "2511.17852"
+    },
+    "2511.18890": {
+        "SCORE": 17,
+        "ARXIVID": "2511.18890",
+        "COMMENT": "Model Architecture and Efficiency: latency-optimal SLMs via depth\u2013width/operator design, efficient attention choices, and evolutionary search; training stabilization via weight norm.",
+        "RELEVANCE": 9,
+        "NOVELTY": 8,
+        "authors": [
+            "Yonggan Fu",
+            "Xin Dong",
+            "Shizhe Diao",
+            "Matthijs Van keirsbilck",
+            "Hanrong Ye",
+            "Wonmin Byeon",
+            "Yashaswi Karnati",
+            "Lucas Liebenwein",
+            "Hannah Zhang",
+            "Nikolaus Binder",
+            "Maksim Khadkevich",
+            "Alexander Keller",
+            "Jan Kautz",
+            "Yingyan Celine Lin",
+            "Pavlo Molchanov"
+        ],
+        "title": "Nemotron-Flash: Towards Latency-Optimal Hybrid Small Language Models",
+        "abstract": "Efficient deployment of small language models (SLMs) is essential for numerous real-world applications with stringent latency constraints. While previous work on SLM design has primarily focused on reducing the number of parameters to achieve parameter-optimal SLMs, parameter efficiency does not necessarily translate into proportional real-device speed-ups. This work aims to identify the key determinants of SLMs' real-device latency and offer generalizable principles and methodologies for SLM design and training when real-device latency is the primary consideration. Specifically, we identify two central architectural factors: depth-width ratios and operator choices. The former is crucial for small-batch-size latency, while the latter affects both latency and large-batch-size throughput. In light of this, we first study latency-optimal depth-width ratios, with the key finding that although deep-thin models generally achieve better accuracy under the same parameter budget, they may not lie on the accuracy-latency trade-off frontier. Next, we explore emerging efficient attention alternatives to evaluate their potential as candidate building operators. Using the identified promising operators, we construct an evolutionary search framework to automatically discover latency-optimal combinations of these operators within hybrid SLMs, thereby advancing the accuracy-latency frontier. In addition to architectural improvements, we further enhance SLM training using a weight normalization technique that enables more effective weight updates and improves final convergence. Combining these methods, we introduce a new family of hybrid SLMs, called Nemotron-Flash, which significantly advances the accuracy-efficiency frontier of state-of-the-art SLMs, e.g., achieving over +5.5% average accuracy, 1.3x/1.9x lower latency, and 18.7x/45.6x higher throughput compared to Qwen3-1.7B/0.6B, respectively.",
+        "arxiv_id": "2511.18890"
+    },
+    "2511.17637": {
+        "SCORE": 17,
+        "ARXIVID": "2511.17637",
+        "COMMENT": "Matches Model Compression and Efficiency: compresses LLM weights via latent codebook + meta-network decoder enabling extreme model compression.",
+        "RELEVANCE": 9,
+        "NOVELTY": 8,
+        "authors": [
+            "Ye Tian",
+            "Chengcheng Wang",
+            "Jing Han",
+            "Yehui Tang",
+            "Kai Han"
+        ],
+        "title": "PocketLLM: Ultimate Compression of Large Language Models via Meta Networks",
+        "abstract": "As Large Language Models (LLMs) continue to grow in size, storing and transmitting them on edge devices becomes increasingly challenging. Traditional methods like quantization and pruning struggle to achieve extreme compression of LLMs without sacrificing accuracy. In this paper, we introduce PocketLLM, a novel approach to compress LLMs in a latent space via meta-networks. A simple encoder network is proposed to project the weights of LLMs into discrete latent vectors, which are then represented using a compact codebook. A lightweight decoder network is employed to map the codebook's representative vectors back to the original weight space. This method allows for significant compression of the large weights in LLMs, consisting solely of a small decoder, a concise codebook, and an index. Extensive experiments show that PocketLLM achieves superior performance even at significantly high compression ratios, e.g., compressing Llama 2-7B by 10x with a negligible drop in accuracy.",
+        "arxiv_id": "2511.17637"
+    },
+    "2511.18670": {
+        "SCORE": 16,
+        "ARXIVID": "2511.18670",
+        "COMMENT": "Model Architecture/Efficiency: deterministic continuous replacement to swap self-attention with efficient operators in pretrained Transformers, reducing gradient variance and stabilizing optimization.",
+        "RELEVANCE": 9,
+        "NOVELTY": 7,
+        "authors": [
+            "Rowan Bradbury",
+            "Aniket Srinivasan Ashok",
+            "Sai Ram Kasanagottu",
+            "Gunmay Jhingran",
+            "Shuai Meng"
+        ],
+        "title": "Deterministic Continuous Replacement: Fast and Stable Module Replacement in Pretrained Transformers",
+        "abstract": "Replacing modules in pretrained models, especially swapping quadratic self-attention for efficient attention alternatives, poses a hard optimization problem: cold-start reinitialization destabilizes frozen backbones. We isolate this core stability challenge in a controlled study. Deterministic Continuous Replacement (DCR) blends teacher and student outputs with a deterministic, annealed weight. Theoretically, DCR eliminates gate-induced gradient variance inherent to stochastic replacement. In a single-seed study, DCR attains faster convergence and stronger alignment than stochastic gating and distillation baselines on controlled attention replacement, establishing a foundation for heterogeneous operator swaps.",
+        "arxiv_id": "2511.18670"
+    },
+    "2511.19023": {
+        "SCORE": 16,
+        "ARXIVID": "2511.19023",
+        "COMMENT": "Model Architecture (MoE): leverages router expert-score hierarchy to create self-supervised preference signals for alignment without human labels.",
+        "RELEVANCE": 9,
+        "NOVELTY": 7,
+        "authors": [
+            "Yuting Gao",
+            "Weihao Chen",
+            "Lan Wang",
+            "Ruihan Xu",
+            "Qingpei Guo"
+        ],
+        "title": "OrdMoE: Preference Alignment via Hierarchical Expert Group Ranking in Multimodal Mixture-of-Experts LLMs",
+        "abstract": "Preference learning has recently emerged as a pivotal strategy for post-training alignment of Multimodal Large Language Models (MLLMs). However, existing approaches predominantly rely on external human-annotated preference data, which is costly and labor-intensive to collect. In this work, we propose OrdMoE, a novel preference alignment framework that bypasses the reliance on external human preferences entirely by leveraging intrinsic signals within Mixture-of-Experts (MoE) architectures. Specifically, we observe that the router's expert selection scores implicitly encode a quality-aware ranking of responses (i.e. higher-scoring experts consistently generate higher-quality outputs). Building on this insight, OrdMoE constructs an internal preference hierarchy by grouping experts into ranked tiers based on their per-token routing scores and activating each tier separately to produce a sequence of responses with increasing quality. This yields a zero-cost, self-supervised preference ordering over generated responses, which can be directly optimized using standard preference learning objectives. Extensive experiments across multiple multimodal benchmarks demnstrate that OrdMoE significantly enhances both alignment and overall performance of multimodal Mixture-of-Experts LLMs, achieving competitive results without requiring any human-annotated preference data.",
+        "arxiv_id": "2511.19023"
+    },
+    "2511.19328": {
+        "SCORE": 16,
+        "ARXIVID": "2511.19328",
+        "COMMENT": "Representation Learning: analyzes staged training dynamics of transformers learning latent structure.",
+        "RELEVANCE": 9,
+        "NOVELTY": 7,
+        "authors": [
+            "Rohan Saha",
+            "Farzane Aminmansour",
+            "Alona Fyshe"
+        ],
+        "title": "Understanding the Staged Dynamics of Transformers in Learning Latent Structure",
+        "abstract": "While transformers can discover latent structure from context, the dynamics of how they acquire different components of the latent structure remain poorly understood. In this work, we use the Alchemy benchmark, to investigate the dynamics of latent structure learning. We train a small decoder-only transformer on three task variants: 1) inferring missing rules from partial contextual information, 2) composing simple rules to solve multi-step sequences, and 3) decomposing complex multi-step examples to infer intermediate steps. By factorizing each task into interpretable events, we show that the model acquires capabilities in discrete stages, first learning the coarse grained rules, before learning the complete latent structure. We also identify a crucial asymmetry, where the model can compose fundamental rules robustly, but struggles to decompose complex examples to discover the fundamental rules. These findings offer new insights into understanding how a transformer model learns latent structures, providing a granular view of how these capabilities evolve during training.",
+        "arxiv_id": "2511.19328"
+    },
+    "2511.18493": {
+        "SCORE": 16,
+        "ARXIVID": "2511.18493",
+        "COMMENT": "Model Architecture: dynamic expert routing with hierarchical gating (MoE-like) across CNN/Transformer paths for adaptive computation.",
+        "RELEVANCE": 9,
+        "NOVELTY": 7,
+        "authors": [
+            "Gia Huy Thai",
+            "Hoang-Nguyen Vu",
+            "Anh-Minh Phan",
+            "Quang-Thinh Ly",
+            "Tram Dinh",
+            "Thi-Ngoc-Truc Nguyen",
+            "Nhat Ho"
+        ],
+        "title": "Shape-Adapting Gated Experts: Dynamic Expert Routing for Colonoscopic Lesion Segmentation",
+        "abstract": "The substantial diversity in cell scale and form remains a primary challenge in computer-aided cancer detection on gigapixel Whole Slide Images (WSIs), attributable to cellular heterogeneity. Existing CNN-Transformer hybrids rely on static computation graphs with fixed routing, which consequently causes redundant computation and limits their adaptability to input variability. We propose Shape-Adapting Gated Experts (SAGE), an input-adaptive framework that enables dynamic expert routing in heterogeneous visual networks. SAGE reconfigures static backbones into dynamically routed expert architectures. SAGE's dual-path design features a backbone stream that preserves representation and selectively activates an expert path through hierarchical gating. This gating mechanism operates at multiple hierarchical levels, performing a two-level, hierarchical selection between shared and specialized experts to modulate model logits for Top-K activation. Our Shape-Adapting Hub (SA-Hub) harmonizes structural and semantic representations across the CNN and the Transformer module, effectively bridging diverse modules. Embodied as SAGE-UNet, our model achieves superior segmentation on three medical benchmarks: EBHI, DigestPath, and GlaS, yielding state-of-the-art Dice Scores of 95.57%, 95.16%, and 94.17%, respectively, and robustly generalizes across domains by adaptively balancing local refinement and global context. SAGE provides a scalable foundation for dynamic expert routing, enabling flexible visual reasoning.",
+        "arxiv_id": "2511.18493"
+    },
+    "2511.18977": {
+        "SCORE": 16,
+        "ARXIVID": "2511.18977",
+        "COMMENT": "Model Compression and Efficiency: LLM pruning via decoupled single-step RL discovering non-uniform sparsity policies efficiently.",
+        "RELEVANCE": 9,
+        "NOVELTY": 7,
+        "authors": [
+            "Xin Yuan",
+            "Siqi Li",
+            "Jiateng Wei",
+            "Chengrui Zhu",
+            "Yanming Wu",
+            "Qingpeng Li",
+            "Jiajun Lv",
+            "Xiaoke Lan",
+            "Jun Chen",
+            "Yong Liu"
+        ],
+        "title": "FastForward Pruning: Efficient LLM Pruning via Single-Step Reinforcement Learning",
+        "abstract": "Pruning is an effective method for compressing Large Language Models, but finding an optimal, non-uniform layer-wise sparsity allocation remains a key challenge. While heuristic methods are fast but yield suboptimal performance, more powerful search-based approaches like Reinforcement Learning are often hindered by prohibitive computational costs on large-scale models. To overcome this efficiency barrier, we propose FastForward Pruning. Its core is a decoupled, single-step RL framework that separates policy optimization from the complex budget satisfaction problem. Such a decoupling is crucial for efficiently searching the vast policy space of LLMs. This curriculum-based strategy begins with low-cost, simple tasks and gradually increases in complexity, significantly reducing the search's computational overhead. Evaluated on the LLaMA, Mistral, and OPT model families, our framework discovers pruning policies that achieve superior performance over strong heuristic baselines. Crucially, when compared to other search-based algorithms, our method achieves competitive or superior results at a fraction of the computational cost, demonstrating a clear advantage in search efficiency.",
+        "arxiv_id": "2511.18977"
+    },
+    "2511.18692": {
+        "SCORE": 16,
+        "ARXIVID": "2511.18692",
+        "COMMENT": "Model Compression and Efficiency: I/O-aware activation sparsification via chunking aligned to flash access patterns for VLMs.",
+        "RELEVANCE": 9,
+        "NOVELTY": 7,
+        "authors": [
+            "Kichang Yang",
+            "Seonjun Kim",
+            "Minjae Kim",
+            "Nairan Zhang",
+            "Chi Zhang",
+            "Youngki Lee"
+        ],
+        "title": "VLM in a flash: I/O-Efficient Sparsification of Vision-Language Model via Neuron Chunking",
+        "abstract": "Edge deployment of large Vision-Language Models (VLMs) increasingly relies on flash-based weight offloading, where activation sparsification is used to reduce I/O overhead. However, conventional sparsification remains model-centric, selecting neurons solely by activation magnitude and neglecting how access patterns influence flash performance. We present Neuron Chunking, an I/O-efficient sparsification strategy that operates on chunks (i.e., groups of contiguous neurons in memory) and couples neuron importance with storage access cost. The method models I/O latency through a lightweight abstraction of access contiguity and selects chunks with high utility, defined as neuron importance normalized by estimated latency. By aligning sparsification decisions with the underlying storage behavior, Neuron Chunking improves I/O efficiency by up to 4.65x and 5.76x on Jetson Orin Nano and Jetson AGX Orin, respectively.",
+        "arxiv_id": "2511.18692"
+    },
+    "2511.17550": {
+        "SCORE": 16,
+        "ARXIVID": "2511.17550",
+        "COMMENT": "Model Architecture: Boolean-domain Transformer with XNOR-based Boolean attention and Boolean RoPE; emphasizes hardware-efficient discrete computation.",
+        "RELEVANCE": 8,
+        "NOVELTY": 8,
+        "authors": [
+            "Xianshuai Shi",
+            "Jianfeng Zhu",
+            "Leibo Liu"
+        ],
+        "title": "Gate-level boolean evolutionary geometric attention neural networks",
+        "abstract": "This paper presents a gate-level Boolean evolutionary geometric attention neural network that models images as Boolean fields governed by logic gates. Each pixel is a Boolean variable (0 or 1) embedded on a two-dimensional geometric manifold (for example, a discrete toroidal lattice), which defines adjacency and information propagation among pixels. The network updates image states through a Boolean reaction-diffusion mechanism: pixels receive Boolean diffusion from neighboring pixels (diffusion process) and perform local logic updates via trainable gate-level logic kernels (reaction process), forming a reaction-diffusion logic network.   A Boolean self-attention mechanism is introduced, using XNOR-based Boolean Query-Key (Q-K) attention to modulate neighborhood diffusion pathways and realize logic attention. We also propose Boolean Rotary Position Embedding (RoPE), which encodes relative distances by parity-bit flipping to simulate Boolean ``phase'' offsets.   The overall structure resembles a Transformer but operates entirely in the Boolean domain. Trainable parameters include Q-K pattern bits and gate-level kernel configurations. Because outputs are discrete, continuous relaxation methods (such as sigmoid approximation or soft-logic operators) ensure differentiable training.   Theoretical analysis shows that the network achieves universal expressivity, interpretability, and hardware efficiency, capable of reproducing convolutional and attention mechanisms. Applications include high-speed image processing, interpretable artificial intelligence, and digital hardware acceleration, offering promising future research directions.",
+        "arxiv_id": "2511.17550"
+    },
+    "2511.19279": {
+        "SCORE": 16,
+        "ARXIVID": "2511.19279",
+        "COMMENT": "Model Architecture: Transformer with input-dependent positional embeddings to disentangle structure vs content and learn cognitive maps (OOD generalization).",
+        "RELEVANCE": 8,
+        "NOVELTY": 8,
+        "authors": [
+            "Victor Rambaud",
+            "Salvador Mascarenhas",
+            "Yair Lakretz"
+        ],
+        "title": "MapFormer: Self-Supervised Learning of Cognitive Maps with Input-Dependent Positional Embeddings",
+        "abstract": "A cognitive map is an internal model which encodes the abstract relationships among entities in the world, giving humans and animals the flexibility to adapt to new situations, with a strong out-of-distribution (OOD) generalization that current AI systems still do not possess. To bridge this gap, we introduce MapFormers, new architectures based on Transformer models, which can learn cognitive maps from observational data and perform path integration in parallel, in a self-supervised manner. Cognitive maps are learned in the model by disentangling structural relationships in the inputs from their specific content, a property that can be achieved naturally by updating the positional encoding in Transformers with input-dependent matrices. We developed two variants of MapFormers that unify absolute and relative positional encoding to model episodic (EM) and working memory (WM), respectively. We tested MapFormers on several tasks, including a classic 2D navigation task, showing that our models can learn a cognitive map of the underlying space and generalize OOD (e.g., to longer sequences) with near-perfect performance, unlike current architectures. Together, these results demonstrate the superiority of models designed to learn a cognitive map, and the importance of introducing a structural bias for structure-content disentanglement, which can be achieved in Transformers with input-dependent positional encoding. MapFormers have broad applications in both neuroscience and AI, by explaining the neural mechanisms giving rise to cognitive maps, while allowing these relation models to be learned at scale.",
+        "arxiv_id": "2511.19279"
+    },
+    "2511.19428": {
+        "SCORE": 16,
+        "ARXIVID": "2511.19428",
+        "COMMENT": "Matches Model Compression/Efficiency: data-free distillation of flow maps to accelerate sampling (algorithmic efficiency for generative models).",
+        "RELEVANCE": 8,
+        "NOVELTY": 8,
+        "authors": [
+            "Shangyuan Tong",
+            "Nanye Ma",
+            "Saining Xie",
+            "Tommi Jaakkola"
+        ],
+        "title": "Flow Map Distillation Without Data",
+        "abstract": "State-of-the-art flow models achieve remarkable quality but require slow, iterative sampling. To accelerate this, flow maps can be distilled from pre-trained teachers, a procedure that conventionally requires sampling from an external dataset. We argue that this data-dependency introduces a fundamental risk of Teacher-Data Mismatch, as a static dataset may provide an incomplete or even misaligned representation of the teacher's full generative capabilities. This leads us to question whether this reliance on data is truly necessary for successful flow map distillation. In this work, we explore a data-free alternative that samples only from the prior distribution, a distribution the teacher is guaranteed to follow by construction, thereby circumventing the mismatch risk entirely. To demonstrate the practical viability of this philosophy, we introduce a principled framework that learns to predict the teacher's sampling path while actively correcting for its own compounding errors to ensure high fidelity. Our approach surpasses all data-based counterparts and establishes a new state-of-the-art by a significant margin. Specifically, distilling from SiT-XL/2+REPA, our method reaches an impressive FID of 1.45 on ImageNet 256x256, and 1.49 on ImageNet 512x512, both with only 1 sampling step. We hope our work establishes a more robust paradigm for accelerating generative models and motivates the broader adoption of flow map distillation without data.",
+        "arxiv_id": "2511.19428"
+    },
+    "2511.17693": {
+        "SCORE": 15,
+        "ARXIVID": "2511.17693",
+        "COMMENT": "Architecture/Efficiency: continual transformer for streaming with linear per-layer compute and redundancy-free inference.",
+        "RELEVANCE": 8,
+        "NOVELTY": 7,
+        "authors": [
+            "Gin\\'es Carreto Pic\\'on",
+            "Peng Yuan Zhou",
+            "Qi Zhang",
+            "Alexandros Iosifidis"
+        ],
+        "title": "DeepCoT: Deep Continual Transformers for Real-Time Inference on Data Streams",
+        "abstract": "Transformer-based models have dramatically increased their size and parameter count to tackle increasingly complex tasks. At the same time, there is a growing demand for low-latency inference on resource-constrained devices that achieves high performance. In particular, stream data inference is typically performed over a sliding temporal window, leading to highly redundant computations. The recent Continual Transformers have addressed this issue, but they can only be effectively used in shallow models, which limits their scope and generalization power. In this paper, we propose the Deep Continual Transformer (DeepCoT), a redundancy-free encoder-only model that can be applied over existing deep encoder architectures with minimal changes. In our experiments over audio, video, and text streams, we show that DeepCoTs retain comparative performance to their non-continual baselines while offering a linear computational cost for all Transformer layers, which reduces up to two orders of magnitude in the running time compared to previous efficient models.",
+        "arxiv_id": "2511.17693"
+    },
+    "2511.18191": {
+        "SCORE": 15,
+        "ARXIVID": "2511.18191",
+        "COMMENT": "Efficiency: adapts speculative decoding to continuous autoregressive time-series foundation models to cut sequential passes.",
+        "RELEVANCE": 8,
+        "NOVELTY": 7,
+        "authors": [
+            "Pranav Subbaraman",
+            "Fang Sun",
+            "Yue Yao",
+            "Huacong Tang",
+            "Xiao Luo",
+            "Yizhou Sun"
+        ],
+        "title": "Accelerating Time Series Foundation Models with Speculative Decoding",
+        "abstract": "Modern web applications--from real-time content recommendation and dynamic pricing to CDN optimization--increasingly rely on time-series forecasting to deliver personalized experiences to billions of users. Large-scale Transformer-based models have achieved state-of-the-art performance in time-series forecasting but suffer from high computational costs, limiting their deployment in latency-sensitive web applications. To address this challenge, we propose a general inference acceleration framework that adapts speculative decoding to autoregressive time-series models. Our approach employs a smaller \"draft\" model to propose future time-series patches, which are then verified in parallel by a larger \"target\" model, reducing the number of sequential forward passes required. We address key technical challenges in adapting this technique from discrete language tokens to continuous time-series distributions, including the design of acceptance criteria for multivariate Gaussian patches and practical variants that balance efficiency with accuracy. Through experiments on time series forecasting benchmarks relevant to web applications, we demonstrate significant inference speedups while maintaining competitive accuracy. The framework requires no architectural modifications to existing foundation models, making it immediately applicable to accelerate deployed time-series forecasting systems. Our implementation can be found at https://github.com/PranavSubbaraman/STRIDE",
+        "arxiv_id": "2511.18191"
+    },
+    "2511.19037": {
+        "SCORE": 15,
+        "ARXIVID": "2511.19037",
+        "COMMENT": "Representation/Architecture: invariant Laplacian spectral encodings with theory surpassing WL limits for node identifiability.",
+        "RELEVANCE": 8,
+        "NOVELTY": 7,
+        "authors": [
+            "Zimo Yan",
+            "Zheng Xie",
+            "Chang Liu",
+            "Yuan Wang"
+        ],
+        "title": "Resolving Node Identifiability in Graph Neural Processes via Laplacian Spectral Encodings",
+        "abstract": "Message passing graph neural networks are widely used for learning on graphs, yet their expressive power is limited by the one-dimensional Weisfeiler-Lehman test and can fail to distinguish structurally different nodes. We provide rigorous theory for a Laplacian positional encoding that is invariant to eigenvector sign flips and to basis rotations within eigenspaces. We prove that this encoding yields node identifiability from a constant number of observations and establishes a sample-complexity separation from architectures constrained by the Weisfeiler-Lehman test. The analysis combines a monotone link between shortest-path and diffusion distance, spectral trilateration with a constant set of anchors, and quantitative spectral injectivity with logarithmic embedding size. As an instantiation, pairing this encoding with a neural-process style decoder yields significant gains on a drug-drug interaction task on chemical graphs, improving both the area under the ROC curve and the F1 score and demonstrating the practical benefits of resolving theoretical expressiveness limitations with principled positional information.",
+        "arxiv_id": "2511.19037"
+    },
+    "2511.17582": {
+        "SCORE": 15,
+        "ARXIVID": "2511.17582",
+        "COMMENT": "PEFT Architecture/Efficiency: token-aware gating modulating LoRA/DoRA/HiRA updates with entropy regularization for sparse adaptation.",
+        "RELEVANCE": 8,
+        "NOVELTY": 7,
+        "authors": [
+            "Jie Ou",
+            "Shuaihong Jiang",
+            "Yingjun Du",
+            "Cees G. M. Snoek"
+        ],
+        "title": "GateRA: Token-Aware Modulation for Parameter-Efficient Fine-Tuning",
+        "abstract": "Parameter-efficient fine-tuning (PEFT) methods, such as LoRA, DoRA, and HiRA, enable lightweight adaptation of large pre-trained models via low-rank updates. However, existing PEFT approaches apply static, input-agnostic updates to all tokens, disregarding the varying importance and difficulty of different inputs. This uniform treatment can lead to overfitting on trivial content or under-adaptation on more informative regions, especially in autoregressive settings with distinct prefill and decoding dynamics. In this paper, we propose GateRA, a unified framework that introduces token-aware modulation to dynamically adjust the strength of PEFT updates. By incorporating adaptive gating into standard PEFT branches, GateRA enables selective, token-level adaptation, preserving pre-trained knowledge for well-modeled inputs while focusing capacity on challenging cases. Empirical visualizations reveal phase-sensitive behaviors, where GateRA automatically suppresses updates for redundant prefill tokens while emphasizing adaptation during decoding. To promote confident and efficient modulation, we further introduce an entropy-based regularization that encourages near-binary gating decisions. This regularization prevents diffuse update patterns and leads to interpretable, sparse adaptation without hard thresholding. Finally, we present a theoretical analysis showing that GateRA induces a soft gradient-masking effect over the PEFT path, enabling continuous and differentiable control over adaptation. Experiments on multiple commonsense reasoning benchmarks demonstrate that GateRA consistently outperforms or matches prior PEFT methods.",
+        "arxiv_id": "2511.17582"
+    },
+    "2511.17699": {
+        "SCORE": 15,
+        "ARXIVID": "2511.17699",
+        "COMMENT": "Representation learning/mechanistic interpretability: identifies and traces internal counting mechanisms in LLMs/LVLMs across layers.",
+        "RELEVANCE": 8,
+        "NOVELTY": 7,
+        "authors": [
+            "Hosein Hasani",
+            "Amirmohammad Izadi",
+            "Fatemeh Askari",
+            "Mobin Bagherian",
+            "Sadegh Mohammadian",
+            "Mohammad Izadi",
+            "Mahdieh Soleymani Baghshah"
+        ],
+        "title": "Understanding Counting Mechanisms in Large Language and Vision-Language Models",
+        "abstract": "This paper examines how large language models (LLMs) and large vision-language models (LVLMs) represent and compute numerical information in counting tasks. We use controlled experiments with repeated textual and visual items and analyze model behavior through causal mediation and activation patching. To this end, we design a specialized tool, CountScope, for mechanistic interpretability of numerical content. Results show that individual tokens or visual features encode latent positional count information that can be extracted and transferred across contexts. Layerwise analyses reveal a progressive emergence of numerical representations, with lower layers encoding small counts and higher layers representing larger ones. We identify an internal counter mechanism that updates with each item, stored mainly in the final token or region and transferable between contexts. In LVLMs, numerical information also appears in visual embeddings, shifting between background and foreground regions depending on spatial composition. Models rely on structural cues such as separators in text, which act as shortcuts for tracking item counts and influence the accuracy of numerical predictions. Overall, counting emerges as a structured, layerwise process in LLMs and follows the same general pattern in LVLMs, shaped by the properties of the vision encoder.",
+        "arxiv_id": "2511.17699"
+    },
+    "2511.17594": {
+        "SCORE": 15,
+        "ARXIVID": "2511.17594",
+        "COMMENT": "High Performance Computing: input-aware CUDA scheduler for sparse SpMM/SDDMM and CSR attention with on-device micro-probes and caching for kernel selection.",
+        "RELEVANCE": 8,
+        "NOVELTY": 7,
+        "authors": [
+            "Aleksandar Stankovic"
+        ],
+        "title": "AutoSAGE: Input-Aware CUDA Scheduling for Sparse GNN Aggregation (SpMM/SDDMM) and CSR Attention",
+        "abstract": "Sparse GNN aggregations (CSR SpMM/SDDMM) vary widely in performance with degree skew, feature width, and GPU micro-architecture. We present AutoSAGE, an input-aware CUDA scheduler that chooses tiling and mapping per input using a lightweight estimate refined by on-device micro-probes, with a guardrail that safely falls back to vendor kernels and a persistent cache for deterministic replay. AutoSAGE covers SpMM and SDDMM and composes into a CSR attention pipeline (SDDMM -> row-softmax -> SpMM). On Reddit and OGBN-Products, it matches vendor baselines at bandwidth-bound feature widths and finds gains at small widths; on synthetic sparsity and skew stress tests it achieves up to 4.7x kernel-level speedups. We release CUDA sources, Python bindings, a reproducible harness, and replayable cache logs.",
+        "arxiv_id": "2511.17594"
+    },
+    "2511.17970": {
+        "SCORE": 15,
+        "ARXIVID": "2511.17970",
+        "COMMENT": "Representation Learning/Training Dynamics: controllability-based Influence Score to quantify token impact in SSM (Mamba) LMs.",
+        "RELEVANCE": 8,
+        "NOVELTY": 7,
+        "authors": [
+            "Mohamed Mabrok",
+            "Yalda Zafari"
+        ],
+        "title": "Controllability Analysis of State Space-based Language Model",
+        "abstract": "State-space models (SSMs), particularly Mamba, have become powerful architectures for sequence modeling, yet their internal dynamics remain poorly understood compared to attention-based models. We introduce and validate the Influence Score, a controllability-based metric derived from the discretized state-space parameters of Mamba and computed through a backward recurrence analogous to system observability. The score quantifies how strongly a token at position k affects all later states and outputs. We evaluate this measure across three Mamba variants: mamba-130m, mamba-2.8b, and mamba-2.8b-slimpj, using six experiments that test its sensitivity to temperature, prompt complexity, token type, layer depth, token position, and input perturbations. The results show three main insights: (1) the Influence Score increases with model size and training data, reflecting model capacity; (2) Mamba exhibits consistent architectural patterns, including recency bias and concentrated influence in mid-to-late layers; and (3) emergent behaviors appear only at scale, with mamba-2.8b-slimpj uniquely prioritizing content words and reducing internal influence in the presence of noise. These findings establish the Influence Score as a practical diagnostic tool for interpreting and comparing SSM-based language models.",
+        "arxiv_id": "2511.17970"
+    },
+    "2511.17583": {
+        "SCORE": 15,
+        "ARXIVID": "2511.17583",
+        "COMMENT": "Model Architecture/Efficiency: variational flow matching with latent code to enforce straight trajectories for near one-step generation.",
+        "RELEVANCE": 8,
+        "NOVELTY": 7,
+        "authors": [
+            "Chenrui Ma",
+            "Xi Xiao",
+            "Tianyang Wang",
+            "Xiao Wang",
+            "Yanning Shen"
+        ],
+        "title": "Learning Straight Flows: Variational Flow Matching for Efficient Generation",
+        "abstract": "Flow Matching has limited ability in achieving one-step generation due to its reliance on learned curved trajectories. Previous studies have attempted to address this limitation by either modifying the coupling distribution to prevent interpolant intersections or introducing consistency and mean-velocity modeling to promote straight trajectory learning. However, these approaches often suffer from discrete approximation errors, training instability, and convergence difficulties. To tackle these issues, in the present work, we propose \\textbf{S}traight \\textbf{V}ariational \\textbf{F}low \\textbf{M}atching (\\textbf{S-VFM}), which integrates a variational latent code representing the ``generation overview'' into the Flow Matching framework. \\textbf{S-VFM} explicitly enforces trajectory straightness, ideally producing linear generation paths. The proposed method achieves competitive performance across three challenge benchmarks and demonstrates advantages in both training and inference efficiency compared with existing methods.",
+        "arxiv_id": "2511.17583"
+    },
+    "2511.18777": {
+        "SCORE": 15,
+        "ARXIVID": "2511.18777",
+        "COMMENT": "Model Architecture/Efficiency: Wavelet Attention (linear complexity) fused with Fourier Attention in a spectral Transformer (SAOT).",
+        "RELEVANCE": 8,
+        "NOVELTY": 7,
+        "authors": [
+            "Chenhong Zhou",
+            "Jie Chen",
+            "Zaifeng Yang"
+        ],
+        "title": "SAOT: An Enhanced Locality-Aware Spectral Transformer for Solving PDEs",
+        "abstract": "Neural operators have shown great potential in solving a family of Partial Differential Equations (PDEs) by modeling the mappings between input and output functions. Fourier Neural Operator (FNO) implements global convolutions via parameterizing the integral operators in Fourier space. However, it often results in over-smoothing solutions and fails to capture local details and high-frequency components. To address these limitations, we investigate incorporating the spatial-frequency localization property of Wavelet transforms into the Transformer architecture. We propose a novel Wavelet Attention (WA) module with linear computational complexity to efficiently learn locality-aware features. Building upon WA, we further develop the Spectral Attention Operator Transformer (SAOT), a hybrid spectral Transformer framework that integrates WA's localized focus with the global receptive field of Fourier-based Attention (FA) through a gated fusion block. Experimental results demonstrate that WA significantly mitigates the limitations of FA and outperforms existing Wavelet-based neural operators by a large margin. By integrating the locality-aware and global spectral representations, SAOT achieves state-of-the-art performance on six operator learning benchmarks and exhibits strong discretization-invariant ability.",
+        "arxiv_id": "2511.18777"
+    },
+    "2511.17971": {
+        "SCORE": 15,
+        "ARXIVID": "2511.17971",
+        "COMMENT": "HPC/Systems: unified co-exploration of contraction path, hardware architecture, and dataflow for tensorized NN accelerators.",
+        "RELEVANCE": 8,
+        "NOVELTY": 7,
+        "authors": [
+            "Jinsong Zhang",
+            "Minghe Li",
+            "Jiayi Tian",
+            "Jinming Lu",
+            "Zheng Zhang"
+        ],
+        "title": "Comprehensive Design Space Exploration for Tensorized Neural Network Hardware Accelerators",
+        "abstract": "High-order tensor decomposition has been widely adopted to obtain compact deep neural networks for edge deployment. However, existing studies focus primarily on its algorithmic advantages such as accuracy and compression ratio-while overlooking the hardware deployment efficiency. Such hardware-unaware designs often obscure the potential latency and energy benefits of tensorized models. Although several works attempt to reduce computational cost by optimizing the contraction sequence based on the number of multiply-accumulate operations, they typically neglect the underlying hardware characteristics, resulting in suboptimal real-world performance. We observe that the contraction path, hardware architecture, and dataflow mapping are tightly coupled and must be optimized jointly within a unified design space to maximize deployment efficiency on real devices. To this end, we propose a co-exploration framework that unifies these dimensions within a unified design space for efficient training and inference of tensorized neural networks on edge platforms. The framework formulates a latency oriented search objective and solves it via a global latency-driven exploration across the unified design space to achieve end-to-end model efficiency. The optimized configurations are implemented on a configurable FPGA kernel, achieving up to 4 and 3.85 lower inference and training latency compared with the dense baseline.",
+        "arxiv_id": "2511.17971"
+    },
+    "2511.18474": {
+        "SCORE": 15,
+        "ARXIVID": "2511.18474",
+        "COMMENT": "Model Compression and Efficiency: adaptive bit-width quantization across mesh nodes/edges/clusters for neural PDE solvers via auxiliary difficulty predictor.",
+        "RELEVANCE": 8,
+        "NOVELTY": 7,
+        "authors": [
+            "Winfried van den Dool",
+            "Maksim Zhdanov",
+            "Yuki M. Asano",
+            "Max Welling"
+        ],
+        "title": "Adaptive Mesh-Quantization for Neural PDE Solvers",
+        "abstract": "Physical systems commonly exhibit spatially varying complexity, presenting a significant challenge for neural PDE solvers. While Graph Neural Networks can handle the irregular meshes required for complex geometries and boundary conditions, they still apply uniform computational effort across all nodes regardless of the underlying physics complexity. This leads to inefficient resource allocation where computationally simple regions receive the same treatment as complex phenomena. We address this challenge by introducing Adaptive Mesh Quantization: spatially adaptive quantization across mesh node, edge, and cluster features, dynamically adjusting the bit-width used by a quantized model. We propose an adaptive bit-width allocation strategy driven by a lightweight auxiliary model that identifies high-loss regions in the input mesh. This enables dynamic resource distribution in the main model, where regions of higher difficulty are allocated increased bit-width, optimizing computational resource utilization. We demonstrate our framework's effectiveness by integrating it with two state-of-the-art models, MP-PDE and GraphViT, to evaluate performance across multiple tasks: 2D Darcy flow, large-scale unsteady fluid dynamics in 2D, steady-state Navier-Stokes simulations in 3D, and a 2D hyper-elasticity problem. Our framework demonstrates consistent Pareto improvements over uniformly quantized baselines, yielding up to 50% improvements in performance at the same cost.",
+        "arxiv_id": "2511.18474"
+    },
+    "2511.18278": {
+        "SCORE": 15,
+        "ARXIVID": "2511.18278",
+        "COMMENT": "Matches Representation Learning: frequency-domain analysis revealing spectral adaptivity in TabPFN and its inductive biases.",
+        "RELEVANCE": 8,
+        "NOVELTY": 7,
+        "authors": [
+            "Jianqiao Zheng",
+            "Cameron Gordon",
+            "Yiping Ji",
+            "Hemanth Saratchandran",
+            "Simon Lucey"
+        ],
+        "title": "From Tables to Signals: Revealing Spectral Adaptivity in TabPFN",
+        "abstract": "Task-agnostic tabular foundation models such as TabPFN have achieved impressive performance on tabular learning tasks, yet the origins of their inductive biases remain poorly understood. In this work, we study TabPFN through the lens of signal reconstruction and provide the first frequency-based analysis of its in-context learning behavior. We show that TabPFN possesses a broader effective frequency capacity than standard ReLU-MLPs, even without hyperparameter tuning. Moreover, unlike MLPs whose spectra evolve primarily over training epochs, we find that TabPFN's spectral capacity adapts directly to the number of samples provided in-context, a phenomenon we term Spectral Adaptivity. We further demonstrate that positional encoding modulates TabPFN's frequency response, mirroring classical results in implicit neural representations. Finally, we show that these properties enable TabPFN to perform training-free and hyperparameter-free image denoising, illustrating its potential as a task-agnostic implicit model. Our analysis provides new insight into the structure and inductive biases of tabular foundation models and highlights their promise for broader signal reconstruction tasks.",
+        "arxiv_id": "2511.18278"
+    },
+    "2511.18375": {
+        "SCORE": 15,
+        "ARXIVID": "2511.18375",
+        "COMMENT": "Matches Model Architecture: introduces and evaluates progressive attention locality schedules for interpretable LLMs.",
+        "RELEVANCE": 8,
+        "NOVELTY": 7,
+        "authors": [
+            "Joachim Diederich"
+        ],
+        "title": "Progressive Localisation in Localist LLMs",
+        "abstract": "This paper demonstrates that progressive localization, the gradual increase of attention locality from early distributed layers to late localized layers, represents the optimal architecture for creating interpretable large language models while preserving performance. Through systematic experimentation with GPT-2 fine tuned on The Psychology of Artificial Superintelligence, we evaluate seven locality configurations ranging from fully distributed to strictly localist, with five progressive schedules implementing polynomial increases (linear through quintic). Our key finding is that late-layer localization is critical for AI safety applications: the progressive quintic schedule achieves perplexity of 14.64, only 1.89 times worse than the fully distributed baseline while providing interpretable attention patterns in output layers where safety-critical decisions are made. This represents an 84.2% improvement over previous localist implementations and narrows the performance gap from 6.6 times to 1.89 times. The systematic relationship between localization schedule steepness and performance validates the hypothesis that early layers require distributed processing for feature extraction while late layers benefit from localized, interpretable attention for decision-making. These findings establish progressive localization as the principled approach for building transparent AI systems in safety-critical domains, where human oversight of model reasoning is essential.",
+        "arxiv_id": "2511.18375"
+    },
+    "2511.18260": {
+        "SCORE": 15,
+        "ARXIVID": "2511.18260",
+        "COMMENT": "Matches Model Architecture and Efficiency: reduced-basis DeepONet with label-free residual training and certified RB trunk for parametric PDE operators.",
+        "RELEVANCE": 8,
+        "NOVELTY": 7,
+        "authors": [
+            "Yueqi Wang",
+            "Guang Lin"
+        ],
+        "title": "Reduced-Basis Deep Operator Learning for Parametric PDEs with Independently Varying Boundary and Source Data",
+        "abstract": "Parametric PDEs power modern simulation, design, and digital-twin systems, yet their many-query workloads still hinge on repeatedly solving large finite-element systems. Existing operator-learning approaches accelerate this process but often rely on opaque learned trunks, require extensive labeled data, or break down when boundary and source data vary independently from physical parameters. We introduce RB-DeepONet, a hybrid operator-learning framework that fuses reduced-basis (RB) numerical structure with the branch-trunk architecture of DeepONet. The trunk is fixed to a rigorously constructed RB space generated offline via Greedy selection, granting physical interpretability, stability, and certified error control. The branch network predicts only RB coefficients and is trained label-free using a projected variational residual that targets the RB-Galerkin solution. For problems with independently varying loads or boundary conditions, we develop boundary and source modal encodings that compress exogenous data into low-dimensional coordinates while preserving accuracy. Combined with affine or empirical interpolation decompositions, RB-DeepONet achieves a strict offline-online split: all heavy lifting occurs offline, and online evaluation scales only with the RB dimension rather than the full mesh. We provide convergence guarantees separating RB approximation error from statistical learning error, and numerical experiments show that RB-DeepONet attains accuracy competitive with intrusive RB-Galerkin, POD-DeepONet, and FEONet while using dramatically fewer trainable parameters and achieving significant speedups. This establishes RB-DeepONet as an efficient, stable, and interpretable operator learner for large-scale parametric PDEs.",
+        "arxiv_id": "2511.18260"
+    },
+    "2511.18930": {
+        "SCORE": 15,
+        "ARXIVID": "2511.18930",
+        "COMMENT": "Matches Model Architecture: Monte Carlo-type neural operator that directly approximates kernel integrals, enabling resolution generalization.",
+        "RELEVANCE": 8,
+        "NOVELTY": 7,
+        "authors": [
+            "Salah Eddine Choutri",
+            "Prajwal Chauhan",
+            "Othmane Mazhar",
+            "Saif Eddin Jabari"
+        ],
+        "title": "Learning Solution Operators for Partial Differential Equations via Monte Carlo-Type Approximation",
+        "abstract": "The Monte Carlo-type Neural Operator (MCNO) introduces a lightweight architecture for learning solution operators for parametric PDEs by directly approximating the kernel integral using a Monte Carlo approach. Unlike Fourier Neural Operators, MCNO makes no spectral or translation-invariance assumptions. The kernel is represented as a learnable tensor over a fixed set of randomly sampled points. This design enables generalization across multiple grid resolutions without relying on fixed global basis functions or repeated sampling during training. Experiments on standard 1D PDE benchmarks show that MCNO achieves competitive accuracy with low computational cost, providing a simple and practical alternative to spectral and graph-based neural operators.",
+        "arxiv_id": "2511.18930"
+    },
+    "2511.18667": {
+        "SCORE": 15,
+        "ARXIVID": "2511.18667",
+        "COMMENT": "Model Architecture: deep equilibrium models with implicit differentiation; Representation Learning: equivariant training approximating proximal maps of invariant priors.",
+        "RELEVANCE": 8,
+        "NOVELTY": 7,
+        "authors": [
+            "Alexander Mehta",
+            "Ruangrawee Kitichotkul",
+            "Vivek K Goyal",
+            "Juli\\'an Tachella"
+        ],
+        "title": "Equivariant Deep Equilibrium Models for Imaging Inverse Problems",
+        "abstract": "Equivariant imaging (EI) enables training signal reconstruction models without requiring ground truth data by leveraging signal symmetries. Deep equilibrium models (DEQs) are a powerful class of neural networks where the output is a fixed point of a learned operator. However, training DEQs with complex EI losses requires implicit differentiation through fixed-point computations, whose implementation can be challenging. We show that backpropagation can be implemented modularly, simplifying training. Experiments demonstrate that DEQs trained with implicit differentiation outperform those trained with Jacobian-free backpropagation and other baseline methods. Additionally, we find evidence that EI-trained DEQs approximate the proximal map of an invariant prior.",
+        "arxiv_id": "2511.18667"
+    }
+}

@@ -1,0 +1,784 @@
+{
+    "2502.13685": {
+        "SCORE": 19,
+        "ARXIVID": "2502.13685",
+        "COMMENT": "The paper proposes Mixture-of-Memories (MoM), a novel architecture for linear sequence modeling inspired by neuroscience, which aligns with the model architecture criterion and introduces a new paradigm.",
+        "RELEVANCE": 10,
+        "NOVELTY": 9,
+        "authors": [
+            "Jusen Du",
+            "Weigao Sun",
+            "Disen Lan",
+            "Jiaxi Hu",
+            "Yu Cheng"
+        ],
+        "title": "MoM: Linear Sequence Modeling with Mixture-of-Memories",
+        "abstract": "Linear sequence modeling methods, such as linear attention, state space modeling, and linear RNNs, offer significant efficiency improvements by reducing the complexity of training and inference. However, these methods typically compress the entire input sequence into a single fixed-size memory state, which leads to suboptimal performance on recall-intensive downstream tasks. Drawing inspiration from neuroscience, particularly the brain's ability to maintain robust long-term memory while mitigating \"memory interference\", we introduce a novel architecture called Mixture-of-Memories (MoM). MoM utilizes multiple independent memory states, with a router network directing input tokens to specific memory states. This approach greatly enhances the overall memory capacity while minimizing memory interference. As a result, MoM performs exceptionally well on recall-intensive tasks, surpassing existing linear sequence modeling techniques. Despite incorporating multiple memory states, the computation of each memory state remains linear in complexity, allowing MoM to retain the linear-complexity advantage during training, while constant-complexity during inference. Our experimental results show that MoM significantly outperforms current linear sequence models on downstream language tasks, particularly recall-intensive tasks, and even achieves performance comparable to Transformer models. The code is released at https://github.com/OpenSparseLLMs/MoM and is also released as a part of https://github.com/OpenSparseLLMs/Linear-MoE.",
+        "arxiv_id": "2502.13685"
+    },
+    "2502.13179": {
+        "SCORE": 19,
+        "ARXIVID": "2502.13179",
+        "COMMENT": "The paper introduces a novel post-training quantization method for LLMs, achieving extremely low-bit quantization (1.61-bit) with innovative preprocessing and optimization techniques. This directly aligns with the 'Model Compression' criterion, particularly in quantization.",
+        "RELEVANCE": 10,
+        "NOVELTY": 9,
+        "authors": [
+            "Jiaqi Zhao",
+            "Miao Zhang",
+            "Ming Wang",
+            "Yuzhang Shang",
+            "Kaihao Zhang",
+            "Weili Guan",
+            "Yaowei Wang",
+            "Min Zhang"
+        ],
+        "title": "PTQ1.61: Push the Real Limit of Extremely Low-Bit Post-Training Quantization Methods for Large Language Models",
+        "abstract": "Large Language Models (LLMs) suffer severe performance degradation when facing extremely low-bit (sub 2-bit) quantization. Several existing sub 2-bit post-training quantization (PTQ) methods utilize a mix-precision scheme by leveraging an unstructured fine-grained mask to explicitly distinguish salient weights, while which introduces an extra 1-bit or more per weight. To explore the real limit of PTQ, we propose an extremely low-bit PTQ method called PTQ1.61, which enables weight quantization to 1.61-bit for the first time. Specifically, we first introduce a one-dimensional structured mask with negligibly additional 0.0002-bit per weight based on input activations from the perspective of reducing the upper bound of quantization error to allocate corresponding salient weight channels to 4-bit. For non-salient channels binarization, an efficient block-wise scaling factors optimization framework is then presented to take implicit row-wise correlations and angular biases into account. Different from prior works that concentrate on adjusting quantization methodologies, we further propose a novel paradigm called quantization preprocessing, where we argue that transforming the weight distribution of the pretrained model before quantization can alleviate the difficulty in per-channel extremely low-bit PTQ. Extensive experiments indicate our PTQ1.61 achieves state-of-the-art performance in extremely low-bit quantization. Codes are available at https://github.com/zjq0455/PTQ1.61.",
+        "arxiv_id": "2502.13179"
+    },
+    "2502.09720": {
+        "SCORE": 19,
+        "ARXIVID": "2502.09720",
+        "COMMENT": "The paper introduces a novel quantization scheme (NestQuant) for LLMs, achieving state-of-the-art results in low-bit quantization. This directly aligns with the 'Model Compression' criterion, particularly in quantization.",
+        "RELEVANCE": 10,
+        "NOVELTY": 9,
+        "authors": [
+            "Semyon Savkin",
+            "Eitan Porat",
+            "Or Ordentlich",
+            "Yury Polyanskiy"
+        ],
+        "title": "NestQuant: Nested Lattice Quantization for Matrix Products and LLMs",
+        "abstract": "Post-training quantization (PTQ) has emerged as a critical technique for efficient deployment of large language models (LLMs). This work proposes NestQuant, a novel PTQ scheme for weights and activations that is based on self-similar nested lattices. Recent work have mathematically shown such quantizers to be information-theoretically optimal for low-precision matrix multiplication. We implement a practical low-complexity version of NestQuant based on Gosset lattice, making it a drop-in quantizer for any matrix multiplication step (e.g., in self-attention, MLP etc). For example, NestQuant quantizes weights, KV-cache, and activations of Llama-3-8B to 4 bits, achieving perplexity of 6.6 on wikitext2. This represents more than 55% reduction in perplexity gap with respect to unquantized model (perplexity of 6.14) compared to state-of-the-art Meta's SpinQuant (perplexity 7.3). Comparisons on various LLM evaluation benchmarks also show a reduction in performance degradation induced by quantization.",
+        "arxiv_id": "2502.09720"
+    },
+    "2502.13961": {
+        "SCORE": 19,
+        "ARXIVID": "2502.13961",
+        "COMMENT": "The paper provides theoretical insights into the computational advantages of depth in neural networks, aligning closely with representation learning and training dynamics.",
+        "RELEVANCE": 10,
+        "NOVELTY": 9,
+        "authors": [
+            "Yatin Dandi",
+            "Luca Pesce",
+            "Lenka Zdeborov\\'a",
+            "Florent Krzakala"
+        ],
+        "title": "The Computational Advantage of Depth: Learning High-Dimensional Hierarchical Functions with Gradient Descent",
+        "abstract": "Understanding the advantages of deep neural networks trained by gradient descent (GD) compared to shallow models remains an open theoretical challenge. While the study of multi-index models with Gaussian data in high dimensions has provided analytical insights into the benefits of GD-trained neural networks over kernels, the role of depth in improving sample complexity and generalization in GD-trained networks remains poorly understood. In this paper, we introduce a class of target functions (single and multi-index Gaussian hierarchical targets) that incorporate a hierarchy of latent subspace dimensionalities. This framework enables us to analytically study the learning dynamics and generalization performance of deep networks compared to shallow ones in the high-dimensional limit. Specifically, our main theorem shows that feature learning with GD reduces the effective dimensionality, transforming a high-dimensional problem into a sequence of lower-dimensional ones. This enables learning the target function with drastically less samples than with shallow networks. While the results are proven in a controlled training setting, we also discuss more common training procedures and argue that they learn through the same mechanisms. These findings open the way to further quantitative studies of the crucial role of depth in learning hierarchical structures with deep networks.",
+        "arxiv_id": "2502.13961"
+    },
+    "2502.13176": {
+        "SCORE": 18,
+        "ARXIVID": "2502.13176",
+        "COMMENT": "The paper introduces BaKlaVa, a method for optimizing KV-cache memory allocation in LLMs, which directly addresses model compression and efficiency in LLM inference.",
+        "RELEVANCE": 10,
+        "NOVELTY": 8,
+        "authors": [
+            "Ahmed Burak Gulhan",
+            "Krishna Teja Chitty-Venkata",
+            "Murali Emani",
+            "Mahmut Kandemir",
+            "Venkatram Vishwanath"
+        ],
+        "title": "BaKlaVa -- Budgeted Allocation of KV cache for Long-context Inference",
+        "abstract": "In Large Language Model (LLM) inference, Key-Value (KV) caches (KV-caches) are essential for reducing time complexity. However, they result in a linear increase in GPU memory as the context length grows. While recent work explores KV-cache eviction and compression policies to reduce memory usage, they often consider uniform KV-caches across all attention heads, leading to suboptimal performance. We introduce BaKlaVa, a method to allocate optimal memory for individual KV-caches across the model by estimating the importance of each KV-cache. Our empirical analysis demonstrates that not all KV-caches are equally critical for LLM performance. Using a one-time profiling approach, BaKlaVa assigns optimal memory budgets to each KV-cache. We evaluated our method on LLaMA-3-8B, and Qwen2.5-7B models, achieving up to a 70\\% compression ratio while keeping baseline performance and delivering up to an order-of-magnitude accuracy improvement at higher compression levels.",
+        "arxiv_id": "2502.13176"
+    },
+    "2502.13794": {
+        "SCORE": 18,
+        "ARXIVID": "2502.13794",
+        "COMMENT": "LESA proposes a learnable method for scaling up LLM layers, which directly addresses architectural innovations and efficiency in LLM training.",
+        "RELEVANCE": 10,
+        "NOVELTY": 8,
+        "authors": [
+            "Yifei Yang",
+            "Zouying Cao",
+            "Xinbei Ma",
+            "Yao Yao",
+            "Libo Qin",
+            "Zhi Chen",
+            "Hai Zhao"
+        ],
+        "title": "LESA: Learnable LLM Layer Scaling-Up",
+        "abstract": "Training Large Language Models (LLMs) from scratch requires immense computational resources, making it prohibitively expensive. Model scaling-up offers a promising solution by leveraging the parameters of smaller models to create larger ones. However, existing depth scaling-up methods rely on empirical heuristic rules for layer duplication, which result in poorer initialization and slower convergence during continual pre-training. We propose \\textbf{LESA}, a novel learnable method for depth scaling-up. By concatenating parameters from each layer and applying Singular Value Decomposition, we uncover latent patterns between layers, suggesting that inter-layer parameters can be learned. LESA uses a neural network to predict the parameters inserted between adjacent layers, enabling better initialization and faster training. Experiments show that LESA outperforms existing baselines, achieving superior performance with less than half the computational cost during continual pre-training. Extensive analyses demonstrate its effectiveness across different model sizes and tasks.",
+        "arxiv_id": "2502.13794"
+    },
+    "2502.13189": {
+        "SCORE": 18,
+        "ARXIVID": "2502.13189",
+        "COMMENT": "The paper introduces Mixture of Block Attention (MoBA), which applies Mixture of Experts (MoE) principles to attention mechanisms in LLMs. This aligns closely with the 'Model Architecture' and 'Large Language Models' criteria, focusing on architectural innovation and efficiency improvements.",
+        "RELEVANCE": 10,
+        "NOVELTY": 8,
+        "authors": [
+            "Enzhe Lu",
+            "Zhejun Jiang",
+            "Jingyuan Liu",
+            "Yulun Du",
+            "Tao Jiang",
+            "Chao Hong",
+            "Shaowei Liu",
+            "Weiran He",
+            "Enming Yuan",
+            "Yuzhi Wang",
+            "Zhiqi Huang",
+            "Huan Yuan",
+            "Suting Xu",
+            "Xinran Xu",
+            "Guokun Lai",
+            "Yanru Chen",
+            "Huabin Zheng",
+            "Junjie Yan",
+            "Jianlin Su",
+            "Yuxin Wu",
+            "Neo Y. Zhang",
+            "Zhilin Yang",
+            "Xinyu Zhou",
+            "Mingxing Zhang",
+            "Jiezhong Qiu"
+        ],
+        "title": "MoBA: Mixture of Block Attention for Long-Context LLMs",
+        "abstract": "Scaling the effective context length is essential for advancing large language models (LLMs) toward artificial general intelligence (AGI). However, the quadratic increase in computational complexity inherent in traditional attention mechanisms presents a prohibitive overhead. Existing approaches either impose strongly biased structures, such as sink or window attention which are task-specific, or radically modify the attention mechanism into linear approximations, whose performance in complex reasoning tasks remains inadequately explored.   In this work, we propose a solution that adheres to the ``less structure'' principle, allowing the model to determine where to attend autonomously, rather than introducing predefined biases. We introduce Mixture of Block Attention (MoBA), an innovative approach that applies the principles of Mixture of Experts (MoE) to the attention mechanism. This novel architecture demonstrates superior performance on long-context tasks while offering a key advantage: the ability to seamlessly transition between full and sparse attention, enhancing efficiency without the risk of compromising performance. MoBA has already been deployed to support Kimi's long-context requests and demonstrates significant advancements in efficient attention computation for LLMs. Our code is available at https://github.com/MoonshotAI/MoBA.",
+        "arxiv_id": "2502.13189"
+    },
+    "2502.13287": {
+        "SCORE": 18,
+        "ARXIVID": "2502.13287",
+        "COMMENT": "This paper introduces a new paradigm for generative AI based on the minimal maximum entropy principle, which aligns with foundational research in representation learning and generative paradigms.",
+        "RELEVANCE": 9,
+        "NOVELTY": 9,
+        "authors": [
+            "Mattia Miotto",
+            "Lorenzo Monacelli"
+        ],
+        "title": "Breaking the bonds of generative artificial intelligence by minimizing the maximum entropy",
+        "abstract": "The emergence of generative artificial intelligence (GenAI), comprising large language models, text-to-image generators, and AI algorithms for medical drug and material design, had a transformative impact on society. However, despite an initial exponential growth surpassing Moore's law, progress is now plateauing, suggesting we are approaching the limits of current technology. Indeed, these models are notoriously data-hungry, prone to overfitting, and challenging to direct during the generative process, hampering their effective professional employment. To cope with these limitations, we propose a paradigm shift in GenAI by introducing an ab initio method based on the minimal maximum entropy principle. Our approach does not fit the data. Instead, it compresses information in the training set by finding a latent representation parameterized by arbitrary nonlinear functions, such as neural networks. The result is a general physics-driven model, which is data-efficient, resistant to overfitting, and flexible, permitting to control and influence the generative process. Benchmarking shows that our method outperforms variational autoencoders (VAEs) with similar neural architectures, particularly on undersampled datasets. We demonstrate the methods effectiveness in generating images, even with limited training data, and its unprecedented capability to customize the generation process a posteriori without the need of any fine-tuning or retraining.",
+        "arxiv_id": "2502.13287"
+    },
+    "2502.13913": {
+        "SCORE": 17,
+        "ARXIVID": "2502.13913",
+        "COMMENT": "This paper provides theoretical insights into the training dynamics of transformers for two-hop reasoning, which aligns with understanding training dynamics and interpretability in LLMs.",
+        "RELEVANCE": 9,
+        "NOVELTY": 8,
+        "authors": [
+            "Tianyu Guo",
+            "Hanlin Zhu",
+            "Ruiqi Zhang",
+            "Jiantao Jiao",
+            "Song Mei",
+            "Michael I. Jordan",
+            "Stuart Russell"
+        ],
+        "title": "How Do LLMs Perform Two-Hop Reasoning in Context?",
+        "abstract": "\"Socrates is human. All humans are mortal. Therefore, Socrates is mortal.\" This classical example demonstrates two-hop reasoning, where a conclusion logically follows from two connected premises. While transformer-based Large Language Models (LLMs) can make two-hop reasoning, they tend to collapse to random guessing when faced with distracting premises. To understand the underlying mechanism, we train a three-layer transformer on synthetic two-hop reasoning tasks. The training dynamics show two stages: a slow learning phase, where the 3-layer transformer performs random guessing like LLMs, followed by an abrupt phase transitions, where the 3-layer transformer suddenly reaches $100%$ accuracy. Through reverse engineering, we explain the inner mechanisms for how models learn to randomly guess between distractions initially, and how they learn to ignore distractions eventually. We further propose a three-parameter model that supports the causal claims for the mechanisms to the training dynamics of the transformer. Finally, experiments on LLMs suggest that the discovered mechanisms generalize across scales. Our methodologies provide new perspectives for scientific understandings of LLMs and our findings provide new insights into how reasoning emerges during training.",
+        "arxiv_id": "2502.13913"
+    },
+    "2502.13577": {
+        "SCORE": 17,
+        "ARXIVID": "2502.13577",
+        "COMMENT": "The paper investigates stratified manifold structures in LLM embedding spaces using a sparse Mixture-of-Experts (MoE) model, which aligns with representation learning and MoE analysis.",
+        "RELEVANCE": 9,
+        "NOVELTY": 8,
+        "authors": [
+            "Xin Li",
+            "Anand Sarwate"
+        ],
+        "title": "Unraveling the Localized Latents: Learning Stratified Manifold Structures in LLM Embedding Space with Sparse Mixture-of-Experts",
+        "abstract": "However, real-world data often exhibit complex local structures that can be challenging for single-model approaches with a smooth global manifold in the embedding space to unravel. In this work, we conjecture that in the latent space of these large language models, the embeddings live in a local manifold structure with different dimensions depending on the perplexities and domains of the input data, commonly referred to as a Stratified Manifold structure, which in combination form a structured space known as a Stratified Space. To investigate the validity of this structural claim, we propose an analysis framework based on a Mixture-of-Experts (MoE) model where each expert is implemented with a simple dictionary learning algorithm at varying sparsity levels. By incorporating an attention-based soft-gating network, we verify that our model learns specialized sub-manifolds for an ensemble of input data sources, reflecting the semantic stratification in LLM embedding space. We further analyze the intrinsic dimensions of these stratified sub-manifolds and present extensive statistics on expert assignments, gating entropy, and inter-expert distances. Our experimental results demonstrate that our method not only validates the claim of a stratified manifold structure in the LLM embedding space, but also provides interpretable clusters that align with the intrinsic semantic variations of the input data.",
+        "arxiv_id": "2502.13577"
+    },
+    "2502.13568": {
+        "SCORE": 17,
+        "ARXIVID": "2502.13568",
+        "COMMENT": "The paper proposes a novel low-separation-rank kernel for parameter-efficient fine-tuning, which aligns with the model compression criterion and introduces a structural innovation.",
+        "RELEVANCE": 9,
+        "NOVELTY": 8,
+        "authors": [
+            "Xin Li",
+            "Anand Sarwate"
+        ],
+        "title": "LSR-Adapt: Ultra-Efficient Parameter Tuning with Matrix Low Separation Rank Kernel Adaptation",
+        "abstract": "Imposing an effective structural assumption on neural network weight matrices has been the major paradigm for designing Parameter-Efficient Fine-Tuning (PEFT) systems for adapting modern large pre-trained models to various downstream tasks. However, low rank based adaptation has become increasingly challenging due to the sheer scale of modern large language models. In this paper, we propose an effective kernelization to further reduce the number of parameters required for adaptation tasks. Specifically, from the classical idea in numerical analysis regarding matrix Low-Separation-Rank (LSR) representations, we develop a kernel using this representation for the low rank adapter matrices of the linear layers from large networks, named the Low Separation Rank Adaptation (LSR-Adapt) kernel. With the ultra-efficient kernel representation of the low rank adapter matrices, we manage to achieve state-of-the-art performance with even higher accuracy with almost half the number of parameters as compared to conventional low rank based methods. This structural assumption also opens the door to further GPU-side optimizations due to the highly parallelizable nature of Kronecker computations.",
+        "arxiv_id": "2502.13568"
+    },
+    "2502.13181": {
+        "SCORE": 17,
+        "ARXIVID": "2502.13181",
+        "COMMENT": "The paper introduces RingFormer, a recurrent Transformer with parameter-sharing and low-rank matrices, which aligns with the model architecture criterion and offers a novel approach to efficiency.",
+        "RELEVANCE": 9,
+        "NOVELTY": 8,
+        "authors": [
+            "Jaemu Heo",
+            "Eldor Fozilov",
+            "Hyunmin Song",
+            "Taehwan Kim"
+        ],
+        "title": "RingFormer: Rethinking Recurrent Transformer with Adaptive Level Signals",
+        "abstract": "Transformers have achieved great success in effectively processing sequential data such as text. Their architecture consisting of several attention and feedforward blocks can model relations between elements of a sequence in parallel manner, which makes them very efficient to train and effective in sequence modeling. Even though they have shown strong performance in processing sequential data, the size of their parameters is considerably larger when compared to other architectures such as RNN and CNN based models. Therefore, several approaches have explored parameter sharing and recurrence in Transformer models to address their computational demands. However, such methods struggle to maintain high performance compared to the original transformer model. To address this challenge, we propose our novel approach, RingFormer, which employs one Transformer layer that processes input repeatedly in a circular, ring-like manner, while utilizing low-rank matrices to generate input-dependent level signals. This allows us to reduce the model parameters substantially while maintaining high performance in a variety of tasks such as translation and image classification, as validated in the experiments.",
+        "arxiv_id": "2502.13181"
+    },
+    "2502.13533": {
+        "SCORE": 17,
+        "ARXIVID": "2502.13533",
+        "COMMENT": "The paper introduces LoRAM, a memory-efficient LoRA training scheme for LLMs, which aligns with the model compression criterion and offers a novel approach to efficiency.",
+        "RELEVANCE": 9,
+        "NOVELTY": 8,
+        "authors": [
+            "Jun Zhang",
+            "Jue Wang",
+            "Huan Li",
+            "Lidan Shou",
+            "Ke Chen",
+            "Yang You",
+            "Guiming Xie",
+            "Xuejian Gong",
+            "Kunlong Zhou"
+        ],
+        "title": "Train Small, Infer Large: Memory-Efficient LoRA Training for Large Language Models",
+        "abstract": "Large Language Models (LLMs) have significantly advanced natural language processing with exceptional task generalization capabilities. Low-Rank Adaption (LoRA) offers a cost-effective fine-tuning solution, freezing the original model parameters and training only lightweight, low-rank adapter matrices. However, the memory footprint of LoRA is largely dominated by the original model parameters. To mitigate this, we propose LoRAM, a memory-efficient LoRA training scheme founded on the intuition that many neurons in over-parameterized LLMs have low training utility but are essential for inference. LoRAM presents a unique twist: it trains on a pruned (small) model to obtain pruned low-rank matrices, which are then recovered and utilized with the original (large) model for inference. Additionally, minimal-cost continual pre-training, performed by the model publishers in advance, aligns the knowledge discrepancy between pruned and original models. Our extensive experiments demonstrate the efficacy of LoRAM across various pruning strategies and downstream tasks. For a model with 70 billion parameters, LoRAM enables training on a GPU with only 20G HBM, replacing an A100-80G GPU for LoRA training and 15 GPUs for full fine-tuning. Specifically, QLoRAM implemented by structured pruning combined with 4-bit quantization, for LLaMA-3.1-70B (LLaMA-2-70B), reduces the parameter storage cost that dominates the memory usage in low-rank matrix training by 15.81$\\times$ (16.95$\\times$), while achieving dominant performance gains over both the original LLaMA-3.1-70B (LLaMA-2-70B) and LoRA-trained LLaMA-3.1-8B (LLaMA-2-13B).",
+        "arxiv_id": "2502.13533"
+    },
+    "2502.13542": {
+        "SCORE": 17,
+        "ARXIVID": "2502.13542",
+        "COMMENT": "The paper focuses on improving inference efficiency for long-context LLMs by introducing a novel activation-aware approach for key-value retrieval. This aligns with the 'Model Compression' criterion, specifically in the context of KV cache optimization.",
+        "RELEVANCE": 9,
+        "NOVELTY": 8,
+        "authors": [
+            "Qingfa Xiao",
+            "Jiachuan Wang",
+            "Haoyang Li",
+            "Cheng Deng",
+            "Jiaqi Tang",
+            "Shuangyin Li",
+            "Yongqi Zhang",
+            "Jun Wang",
+            "Lei Chen"
+        ],
+        "title": "Activation-aware Probe-Query: Effective Key-Value Retrieval for Long-Context LLMs Inference",
+        "abstract": "Recent advances in large language models (LLMs) have showcased exceptional performance in long-context tasks, while facing significant inference efficiency challenges with limited GPU memory. Existing solutions first proposed the sliding-window approach to accumulate a set of historical \\textbf{key-value} (KV) pairs for reuse, then further improvements selectively retain its subsets at each step. However, due to the sparse attention distribution across a long context, it is hard to identify and recall relevant KV pairs, as the attention is distracted by massive candidate pairs. Additionally, we found it promising to select representative tokens as probe-Query in each sliding window to effectively represent the entire context, which is an approach overlooked by existing methods. Thus, we propose \\textbf{ActQKV}, a training-free, \\textbf{Act}ivation-aware approach that dynamically determines probe-\\textbf{Q}uery and leverages it to retrieve the relevant \\textbf{KV} pairs for inference. Specifically, ActQKV monitors a token-level indicator, Activation Bias, within each context window, enabling the proper construction of probe-Query for retrieval at pre-filling stage. To accurately recall the relevant KV pairs and minimize the irrelevant ones, we design a dynamic KV cut-off mechanism guided by information density across layers at the decoding stage. Experiments on the Long-Bench and $\\infty$ Benchmarks demonstrate its state-of-the-art performance with competitive inference quality and resource efficiency.",
+        "arxiv_id": "2502.13542"
+    },
+    "2502.13811": {
+        "SCORE": 17,
+        "ARXIVID": "2502.13811",
+        "COMMENT": "The paper explores the duality between gradient transformations and adapters, providing insights into memory-efficient training. This aligns with the 'Model Compression' criterion, particularly in efficiency improvements.",
+        "RELEVANCE": 9,
+        "NOVELTY": 8,
+        "authors": [
+            "Lucas Torroba-Hennigen",
+            "Hunter Lang",
+            "Han Guo",
+            "Yoon Kim"
+        ],
+        "title": "On the Duality between Gradient Transformations and Adapters",
+        "abstract": "We study memory-efficient optimization of neural networks with linear gradient transformations, where the gradients are linearly mapped to a lower dimensional space than the full parameter space, thus saving memory required for gradient accumulation and optimizer state persistence. The model parameters are updated by first performing an optimization step in the lower dimensional space and then going back into the original parameter space via the linear map's transpose. We show that optimizing the model in this transformed space is equivalent to reparameterizing the original model through a linear adapter that additively modifies the model parameters, and then only optimizing the adapter's parameters. When the transformation is Kronecker-factored, this establishes an equivalence between GaLore and one-sided LoRA. We show that this duality between gradient transformations and adapter-based reparameterizations unifies existing approaches to memory-efficient training and suggests new techniques for improving training efficiency and memory use.",
+        "arxiv_id": "2502.13811"
+    },
+    "2502.13632": {
+        "SCORE": 17,
+        "ARXIVID": "2502.13632",
+        "COMMENT": "The paper introduces Concept Layers to enhance interpretability and intervenability in LLMs, which aligns with foundational research in model architecture and interpretability.",
+        "RELEVANCE": 9,
+        "NOVELTY": 8,
+        "authors": [
+            "Or Raphael Bidusa",
+            "Shaul Markovitch"
+        ],
+        "title": "Concept Layers: Enhancing Interpretability and Intervenability via LLM Conceptualization",
+        "abstract": "The opaque nature of Large Language Models (LLMs) has led to significant research efforts aimed at enhancing their interpretability, primarily through post-hoc methods. More recent in-hoc approaches, such as Concept Bottleneck Models (CBMs), offer both interpretability and intervenability by incorporating explicit concept representations. However, these methods suffer from key limitations, including reliance on labeled concept datasets and significant architectural modifications that challenges re-integration into existing system pipelines. In this work, we introduce a new methodology for incorporating interpretability and intervenability into an existing model by integrating Concept Layers (CLs) into its architecture. Our approach projects the model's internal vector representations into a conceptual, explainable vector space before reconstructing and feeding them back into the model. Furthermore, we eliminate the need for a human-selected concept set by algorithmically searching an ontology for a set of concepts that can be either task-specific or task-agnostic. We evaluate CLs across multiple tasks, demonstrating that they maintain the original model's performance and agreement while enabling meaningful interventions. Additionally, we present a proof of concept showcasing an intervenability interface, allowing users to adjust model behavior dynamically, such as mitigating biases during inference.",
+        "arxiv_id": "2502.13632"
+    },
+    "2502.13441": {
+        "SCORE": 17,
+        "ARXIVID": "2502.13441",
+        "COMMENT": "The paper explores self-improvement in LLMs, focusing on generating synthetic data autonomously, which aligns with foundational research in LLM behavior and training dynamics.",
+        "RELEVANCE": 9,
+        "NOVELTY": 8,
+        "authors": [
+            "Yutao Sun",
+            "Mingshuai Chen",
+            "Tiancheng Zhao",
+            "Ruochen Xu",
+            "Zilun Zhang",
+            "Jianwei Yin"
+        ],
+        "title": "The Self-Improvement Paradox: Can Language Models Bootstrap Reasoning Capabilities without External Scaffolding?",
+        "abstract": "Self-improving large language models (LLMs) -- i.e., to improve the performance of an LLM by fine-tuning it with synthetic data generated by itself -- is a promising way to advance the capabilities of LLMs while avoiding extensive supervision. Existing approaches to self-improvement often rely on external supervision signals in the form of seed data and/or assistance from third-party models. This paper presents Crescent -- a simple yet effective framework for generating high-quality synthetic question-answer data in a fully autonomous manner. Crescent first elicits the LLM to generate raw questions via a bait prompt, then diversifies these questions leveraging a rejection sampling-based self-deduplication, and finally feeds the questions to the LLM and collects the corresponding answers by means of majority voting. We show that Crescent sheds light on the potential of true self-improvement with zero external supervision signals for math reasoning; in particular, Crescent-generated question-answer pairs suffice to (i) improve the reasoning capabilities of an LLM while preserving its general performance (especially in the 0-shot setting); and (ii) distil LLM knowledge to weaker models more effectively than existing methods based on seed-dataset augmentation.",
+        "arxiv_id": "2502.13441"
+    },
+    "2502.13170": {
+        "SCORE": 17,
+        "ARXIVID": "2502.13170",
+        "COMMENT": "The paper introduces a novel reasoning pipeline for LLMs, focusing on hypothesis decomposition and amendment, which aligns with foundational research in LLM reasoning and interpretability.",
+        "RELEVANCE": 9,
+        "NOVELTY": 8,
+        "authors": [
+            "Yuze Zhao",
+            "Tianyun Ji",
+            "Wenjun Feng",
+            "Zhenya Huang",
+            "Qi Liu",
+            "Zhiding Liu",
+            "Yixiao Ma",
+            "Kai Zhang",
+            "Enhong Chen"
+        ],
+        "title": "Unveiling the Magic of Code Reasoning through Hypothesis Decomposition and Amendment",
+        "abstract": "The reasoning abilities are one of the most enigmatic and captivating aspects of large language models (LLMs). Numerous studies are dedicated to exploring and expanding the boundaries of this reasoning capability. However, tasks that embody both reasoning and recall characteristics are often overlooked. In this paper, we introduce such a novel task, code reasoning, to provide a new perspective for the reasoning abilities of LLMs. We summarize three meta-benchmarks based on established forms of logical reasoning, and instantiate these into eight specific benchmark tasks. Our testing on these benchmarks reveals that LLMs continue to struggle with identifying satisfactory reasoning pathways. Additionally, we present a new pathway exploration pipeline inspired by human intricate problem-solving methods. This Reflective Hypothesis Decomposition and Amendment (RHDA) pipeline consists of the following iterative steps: (1) Proposing potential hypotheses based on observations and decomposing them; (2) Utilizing tools to validate hypotheses and reflection outcomes; (3) Revising hypothesis in light of observations. Our approach effectively mitigates logical chain collapses arising from forgetting or hallucination issues in multi-step reasoning, resulting in performance gains of up to $3\\times$. Finally, we expanded this pipeline by applying it to simulate complex household tasks in real-world scenarios, specifically in VirtualHome, enhancing the handling of failure cases. We release our code and all of results at https://github.com/TnTWoW/code_reasoning.",
+        "arxiv_id": "2502.13170"
+    },
+    "2502.13283": {
+        "SCORE": 17,
+        "ARXIVID": "2502.13283",
+        "COMMENT": "The paper explores the implicit bias and regularization effects of early stopping in gradient descent for overparameterized logistic regression, which provides insights into training dynamics and representation learning.",
+        "RELEVANCE": 9,
+        "NOVELTY": 8,
+        "authors": [
+            "Jingfeng Wu",
+            "Peter Bartlett",
+            "Matus Telgarsky",
+            "Bin Yu"
+        ],
+        "title": "Benefits of Early Stopping in Gradient Descent for Overparameterized Logistic Regression",
+        "abstract": "In overparameterized logistic regression, gradient descent (GD) iterates diverge in norm while converging in direction to the maximum $\\ell_2$-margin solution -- a phenomenon known as the implicit bias of GD. This work investigates additional regularization effects induced by early stopping in well-specified high-dimensional logistic regression. We first demonstrate that the excess logistic risk vanishes for early-stopped GD but diverges to infinity for GD iterates at convergence. This suggests that early-stopped GD is well-calibrated, whereas asymptotic GD is statistically inconsistent. Second, we show that to attain a small excess zero-one risk, polynomially many samples are sufficient for early-stopped GD, while exponentially many samples are necessary for any interpolating estimator, including asymptotic GD. This separation underscores the statistical benefits of early stopping in the overparameterized regime. Finally, we establish nonasymptotic bounds on the norm and angular differences between early-stopped GD and $\\ell_2$-regularized empirical risk minimizer, thereby connecting the implicit regularization of GD with explicit $\\ell_2$-regularization.",
+        "arxiv_id": "2502.13283"
+    },
+    "2502.13251": {
+        "SCORE": 17,
+        "ARXIVID": "2502.13251",
+        "COMMENT": "The paper introduces Neural Attention Search (NAtS), a framework for reducing KV cache sizes in transformers, aligning with the 'Model Compression' and 'Model Architecture' criteria.",
+        "RELEVANCE": 9,
+        "NOVELTY": 8,
+        "authors": [
+            "Difan Deng",
+            "Marius Lindauer"
+        ],
+        "title": "Neural Attention Search",
+        "abstract": "We present Neural Attention Search (NAtS), a framework that automatically evaluates the importance of each token within a sequence and determines if the corresponding token can be dropped after several steps. This approach can efficiently reduce the KV cache sizes required by transformer-based models during inference and thus reduce inference costs. In this paper, we design a search space that contains three token types: (i) Global Tokens will be preserved and queried by all the following tokens. (ii) Local Tokens survive until the next global token appears. (iii) Sliding Window Tokens have an impact on the inference of a fixed size of the next following tokens. Similar to the One-Shot Neural Architecture Search approach, this token-type information can be learned jointly with the architecture weights via a learnable attention mask. Experiments on both training a new transformer from scratch and fine-tuning existing large language models show that NAtS can efficiently reduce the KV cache size required for the models while maintaining the models' performance.",
+        "arxiv_id": "2502.13251"
+    },
+    "2502.13575": {
+        "SCORE": 17,
+        "ARXIVID": "2502.13575",
+        "COMMENT": "The paper introduces Efficient Tree Search (ETS), which optimizes KV cache sharing during inference-time scaling, aligning with the model compression criterion through its focus on memory efficiency and algorithmic improvements.",
+        "RELEVANCE": 9,
+        "NOVELTY": 8,
+        "authors": [
+            "Coleman Hooper",
+            "Sehoon Kim",
+            "Suhong Moon",
+            "Kerem Dilmen",
+            "Monishwaran Maheswaran",
+            "Nicholas Lee",
+            "Michael W. Mahoney",
+            "Sophia Shao",
+            "Kurt Keutzer",
+            "Amir Gholami"
+        ],
+        "title": "ETS: Efficient Tree Search for Inference-Time Scaling",
+        "abstract": "Test-time compute scaling has emerged as a new axis along which to improve model accuracy, where additional computation is used at inference time to allow the model to think longer for more challenging problems. One promising approach for test-time compute scaling is search against a process reward model, where a model generates multiple potential candidates at each step of the search, and these partial trajectories are then scored by a separate reward model in order to guide the search process. The diversity of trajectories in the tree search process affects the accuracy of the search, since increasing diversity promotes more exploration. However, this diversity comes at a cost, as divergent trajectories have less KV sharing, which means they consume more memory and slow down the search process. Previous search methods either do not perform sufficient exploration, or else explore diverse trajectories but have high latency. We address this challenge by proposing Efficient Tree Search (ETS), which promotes KV sharing by pruning redundant trajectories while maintaining necessary diverse trajectories. ETS incorporates a linear programming cost model to promote KV cache sharing by penalizing the number of nodes retained, while incorporating a semantic coverage term into the cost model to ensure that we retain trajectories which are semantically different. We demonstrate how ETS can achieve 1.8$\\times$ reduction in average KV cache size during the search process, leading to 1.4$\\times$ increased throughput relative to prior state-of-the-art methods, with minimal accuracy degradation and without requiring any custom kernel implementation. Code is available at: https://github.com/SqueezeAILab/ETS.",
+        "arxiv_id": "2502.13575"
+    },
+    "2502.13873": {
+        "SCORE": 17,
+        "ARXIVID": "2502.13873",
+        "COMMENT": "NVR addresses cache misses in sparse DNN workloads with a novel prefetching mechanism, aligning with the model compression criterion through its focus on sparsity and hardware efficiency.",
+        "RELEVANCE": 9,
+        "NOVELTY": 8,
+        "authors": [
+            "Hui Wang",
+            "Zhengpeng Zhao",
+            "Jing Wang",
+            "Yushu Du",
+            "Yuan Cheng",
+            "Bing Guo",
+            "He Xiao",
+            "Chenhao Ma",
+            "Xiaomeng Han",
+            "Dean You",
+            "Jiapeng Guan",
+            "Ran Wei",
+            "Dawei Yang",
+            "Zhe Jiang"
+        ],
+        "title": "NVR: Vector Runahead on NPUs for Sparse Memory Access",
+        "abstract": "Deep Neural Networks are increasingly leveraging sparsity to reduce the scaling up of model parameter size. However, reducing wall-clock time through sparsity and pruning remains challenging due to irregular memory access patterns, leading to frequent cache misses. In this paper, we present NPU Vector Runahead (NVR), a prefetching mechanism tailored for NPUs to address cache miss problems in sparse DNN workloads. Rather than optimising memory patterns with high overhead and poor portability, NVR adapts runahead execution to the unique architecture of NPUs. NVR provides a general micro-architectural solution for sparse DNN workloads without requiring compiler or algorithmic support, operating as a decoupled, speculative, lightweight hardware sub-thread alongside the NPU, with minimal hardware overhead (under 5%). NVR achieves an average 90% reduction in cache misses compared to SOTA prefetching in general-purpose processors, delivering 4x average speedup on sparse workloads versus NPUs without prefetching. Moreover, we investigate the advantages of incorporating a small cache (16KB) into the NPU combined with NVR. Our evaluation shows that expanding this modest cache delivers 5x higher performance benefits than increasing the L2 cache size by the same amount.",
+        "arxiv_id": "2502.13873"
+    },
+    "2502.13810": {
+        "SCORE": 17,
+        "ARXIVID": "2502.13810",
+        "COMMENT": "The paper provides a theoretical foundation by linking error minimization algorithms to Kan extensions, which is a novel and cutting-edge theoretical contribution relevant to emerging trends.",
+        "RELEVANCE": 8,
+        "NOVELTY": 9,
+        "authors": [
+            "Matthew Pugh",
+            "Jo Grundy",
+            "Corina Cirstea",
+            "Nick Harris"
+        ],
+        "title": "Learning Is a Kan Extension",
+        "abstract": "Previous work has demonstrated that efficient algorithms exist for computing Kan extensions and that some Kan extensions have interesting similarities to various machine learning algorithms. This paper closes the gap by proving that all error minimisation algorithms may be presented as a Kan extension. This result provides a foundation for future work to investigate the optimisation of machine learning algorithms through their presentation as Kan extensions. A corollary of this representation of error-minimising algorithms is a presentation of error from the perspective of lossy and lossless transformations of data.",
+        "arxiv_id": "2502.13810"
+    },
+    "2502.13329": {
+        "SCORE": 16,
+        "ARXIVID": "2502.13329",
+        "COMMENT": "The paper explores the ability of LLMs to predict their own behavior using internal representations, which aligns with interpretability and efficiency in LLMs.",
+        "RELEVANCE": 9,
+        "NOVELTY": 7,
+        "authors": [
+            "Dhananjay Ashok",
+            "Jonathan May"
+        ],
+        "title": "Language Models Can Predict Their Own Behavior",
+        "abstract": "Autoregressive Language Models output text by sequentially predicting the next token to generate, with modern methods like Chain-of-Thought (CoT) prompting achieving state-of-the-art reasoning capabilities by scaling the number of generated tokens. However, are there times when we can infer how the model will behave (e.g. abstain from answering a question) early in the computation, making generation unnecessary? We show that internal representation of input tokens alone can often precisely predict, not just the next token, but eventual behavior over the entire output sequence. We leverage this capacity and learn probes on internal states to create early warning (and exit) systems. Specifically, if the probes can confidently estimate the way the LM is going to behave, then the system will avoid generating tokens altogether and return the estimated behavior instead. On 27 text classification datasets spanning five different tasks, we apply this method to estimate the eventual answer of an LM under CoT prompting, reducing inference costs by 65% (average) while suffering an accuracy loss of no more than 1.4% (worst case). We demonstrate the potential of this method to pre-emptively identify when a model will abstain from answering a question, fail to follow output format specifications, or give a low-confidence response. We explore the limits of this capability, showing that probes generalize to unseen datasets, but perform worse when LM outputs are longer and struggle to predict properties that require access to knowledge that the models themselves lack. Encouragingly, performance scales with model size, suggesting applicability to the largest of models",
+        "arxiv_id": "2502.13329"
+    },
+    "2502.13490": {
+        "SCORE": 16,
+        "ARXIVID": "2502.13490",
+        "COMMENT": "The paper analyzes internal states of LLMs to understand hallucinations, which provides theoretical insights into LLM behavior and interpretability.",
+        "RELEVANCE": 9,
+        "NOVELTY": 7,
+        "authors": [
+            "Peiran Wang",
+            "Yang Liu",
+            "Yunfei Lu",
+            "Jue Hong",
+            "Ye Wu"
+        ],
+        "title": "What are Models Thinking about? Understanding Large Language Model Hallucinations \"Psychology\" through Model Inner State Analysis",
+        "abstract": "Large language model (LLM) systems suffer from the models' unstable ability to generate valid and factual content, resulting in hallucination generation. Current hallucination detection methods heavily rely on out-of-model information sources, such as RAG to assist the detection, thus bringing heavy additional latency. Recently, internal states of LLMs' inference have been widely used in numerous research works, such as prompt injection detection, etc. Considering the interpretability of LLM internal states and the fact that they do not require external information sources, we introduce such states into LLM hallucination detection. In this paper, we systematically analyze different internal states' revealing features during inference forward and comprehensively evaluate their ability in hallucination detection. Specifically, we cut the forward process of a large language model into three stages: understanding, query, generation, and extracting the internal state from these stages. By analyzing these states, we provide a deep understanding of why the hallucinated content is generated and what happened in the internal state of the models. Then, we introduce these internal states into hallucination detection and conduct comprehensive experiments to discuss the advantages and limitations.",
+        "arxiv_id": "2502.13490"
+    },
+    "2502.13178": {
+        "SCORE": 16,
+        "ARXIVID": "2502.13178",
+        "COMMENT": "The paper benchmarks post-training quantization (PTQ) for LLMs, providing a comprehensive taxonomy and evaluation. This aligns with the 'Model Compression' criterion, offering insights into quantization strategies.",
+        "RELEVANCE": 9,
+        "NOVELTY": 7,
+        "authors": [
+            "Jiaqi Zhao",
+            "Ming Wang",
+            "Miao Zhang",
+            "Yuzhang Shang",
+            "Xuebo Liu",
+            "Yaowei Wang",
+            "Min Zhang",
+            "Liqiang Nie"
+        ],
+        "title": "Benchmarking Post-Training Quantization in LLMs: Comprehensive Taxonomy, Unified Evaluation, and Comparative Analysis",
+        "abstract": "Post-training Quantization (PTQ) technique has been extensively adopted for large language models (LLMs) compression owing to its efficiency and low resource requirement. However, current research lacks a in-depth analysis of the superior and applicable scenarios of each PTQ strategy. In addition, existing algorithms focus primarily on performance, overlooking the trade-off among model size, performance, and quantization bitwidth. To mitigate these confusions, we provide a novel benchmark for LLMs PTQ in this paper. Firstly, in order to support our benchmark, we propose a comprehensive taxonomy for existing mainstream methods by scrutinizing their computational strategies (e.g., optimization-based, compensation-based, etc.). Then, we conduct extensive experiments with the baseline within each class, covering models with various sizes (7B-70B), bitwidths, training levels (LLaMA1/2/3/3.1), architectures (Mixtral, DeepSeekMoE and Mamba) and modality (LLaVA1.5 and VILA1.5) on a wide range of evaluation metrics.Through comparative analysis on the results, we summarize the superior of each PTQ strategy and modelsize-bitwidth trade-off considering the performance. For example, our benchmark reveals that compensation-based technique demonstrates outstanding cross-architecture robustness and extremely low-bit PTQ for ultra large models should be reexamined. Finally, we further accordingly claim that a practical combination of compensation and other PTQ strategy can achieve SOTA various robustness. We believe that our benchmark will provide valuable recommendations for the deployment of LLMs and future research on PTQ approaches.",
+        "arxiv_id": "2502.13178"
+    },
+    "2502.13660": {
+        "SCORE": 16,
+        "ARXIVID": "2502.13660",
+        "COMMENT": "The paper proposes a regularization method to enforce invariance to node identifiers in GNNs, which is relevant to representation learning and introduces a novel theoretical perspective.",
+        "RELEVANCE": 8,
+        "NOVELTY": 8,
+        "authors": [
+            "Maya Bechler-Speicher",
+            "Moshe Eliasof",
+            "Carola-Bibiane Schonlieb",
+            "Ran Gilad-Bachrach",
+            "Amir Globerson"
+        ],
+        "title": "Towards Invariance to Node Identifiers in Graph Neural Networks",
+        "abstract": "Message-Passing Graph Neural Networks (GNNs) are known to have limited expressive power, due to their message passing structure. One mechanism for circumventing this limitation is to add unique node identifiers (IDs), which break the symmetries that underlie the expressivity limitation. In this work, we highlight a key limitation of the ID framework, and propose an approach for addressing it. We begin by observing that the final output of the GNN should clearly not depend on the specific IDs used. We then show that in practice this does not hold, and thus the learned network does not possess this desired structural property. Such invariance to node IDs may be enforced in several ways, and we discuss their theoretical properties.   We then propose a novel regularization method that effectively enforces ID invariance to the network. Extensive evaluations on both real-world and synthetic tasks demonstrate that our approach significantly improves ID invariance and, in turn, often boosts generalization performance.",
+        "arxiv_id": "2502.13660"
+    },
+    "2502.13886": {
+        "SCORE": 16,
+        "ARXIVID": "2502.13886",
+        "COMMENT": "The paper introduces 'fill-tuning' for improving embeddings in foundation models, which aligns with representation learning and offers a novel methodology for general performance improvement.",
+        "RELEVANCE": 8,
+        "NOVELTY": 8,
+        "authors": [
+            "Matthew P. Wilson",
+            "Edward O. Pyzer-Knapp",
+            "Nicolas Galichet",
+            "Luke Dicks"
+        ],
+        "title": "Refining embeddings with fill-tuning: data-efficient generalised performance improvements for materials foundation models",
+        "abstract": "Pretrained foundation models learn embeddings that can be used for a wide range of downstream tasks. These embeddings optimise general performance, and if insufficiently accurate at a specific task the model can be fine-tuned to improve performance. For all current methodologies this operation necessarily degrades performance on all out-of-distribution tasks. In this work we present 'fill-tuning', a novel methodology to generate datasets for continued pretraining of foundation models that are not suited to a particular downstream task, but instead aim to correct poor regions of the embedding. We present the application of roughness analysis to latent space topologies and illustrate how it can be used to propose data that will be most valuable to improving the embedding. We apply fill-tuning to a set of state-of-the-art materials foundation models trained on $O(10^9)$ data points and show model improvement of almost 1% in all downstream tasks with the addition of only 100 data points. This method provides a route to the general improvement of foundation models at the computational cost of fine-tuning.",
+        "arxiv_id": "2502.13886"
+    },
+    "2502.13257": {
+        "SCORE": 16,
+        "ARXIVID": "2502.13257",
+        "COMMENT": "The paper proposes Random Forest Autoencoders for supervised visualization, combining autoencoders with random forests. This aligns with the 'Representation Learning' criterion, particularly in guided feature learning.",
+        "RELEVANCE": 8,
+        "NOVELTY": 8,
+        "authors": [
+            "Adrien Aumon",
+            "Shuang Ni",
+            "Myriam Lizotte",
+            "Guy Wolf",
+            "Kevin R. Moon",
+            "Jake S. Rhodes"
+        ],
+        "title": "Random Forest Autoencoders for Guided Representation Learning",
+        "abstract": "Decades of research have produced robust methods for unsupervised data visualization, yet supervised visualization$\\unicode{x2013}$where expert labels guide representations$\\unicode{x2013}$remains underexplored, as most supervised approaches prioritize classification over visualization. Recently, RF-PHATE, a diffusion-based manifold learning method leveraging random forests and information geometry, marked significant progress in supervised visualization. However, its lack of an explicit mapping function limits scalability and prevents application to unseen data, posing challenges for large datasets and label-scarce scenarios. To overcome these limitations, we introduce Random Forest Autoencoders (RF-AE), a neural network-based framework for out-of-sample kernel extension that combines the flexibility of autoencoders with the supervised learning strengths of random forests and the geometry captured by RF-PHATE. RF-AE enables efficient out-of-sample supervised visualization and outperforms existing methods, including RF-PHATE's standard kernel extension, in both accuracy and interpretability. Additionally, RF-AE is robust to the choice of hyper-parameters and generalizes to any kernel-based dimensionality reduction method.",
+        "arxiv_id": "2502.13257"
+    },
+    "2502.13260": {
+        "SCORE": 16,
+        "ARXIVID": "2502.13260",
+        "COMMENT": "The paper proposes a method to improve Chain-of-Thought reasoning efficiency in LLMs, which aligns with foundational research in LLM behavior and training dynamics.",
+        "RELEVANCE": 8,
+        "NOVELTY": 8,
+        "authors": [
+            "Yingqian Cui",
+            "Pengfei He",
+            "Jingying Zeng",
+            "Hui Liu",
+            "Xianfeng Tang",
+            "Zhenwei Dai",
+            "Yan Han",
+            "Chen Luo",
+            "Jing Huang",
+            "Zhen Li",
+            "Suhang Wang",
+            "Yue Xing",
+            "Jiliang Tang",
+            "Qi He"
+        ],
+        "title": "Stepwise Perplexity-Guided Refinement for Efficient Chain-of-Thought Reasoning in Large Language Models",
+        "abstract": "Chain-of-Thought (CoT) reasoning, which breaks down complex tasks into intermediate reasoning steps, has significantly enhanced the performance of large language models (LLMs) on challenging tasks. However, the detailed reasoning process in CoT often incurs long generation times and high computational costs, partly due to the inclusion of unnecessary steps. To address this, we propose a method to identify critical reasoning steps using perplexity as a measure of their importance: a step is deemed critical if its removal causes a significant increase in perplexity. Our method enables models to focus solely on generating these critical steps. This can be achieved through two approaches: refining demonstration examples in few-shot CoT or fine-tuning the model using selected examples that include only critical steps. Comprehensive experiments validate the effectiveness of our method, which achieves a better balance between the reasoning accuracy and efficiency of CoT.",
+        "arxiv_id": "2502.13260"
+    },
+    "2502.13662": {
+        "SCORE": 16,
+        "ARXIVID": "2502.13662",
+        "COMMENT": "The paper provides theoretical bounds for denoising score matching under relaxed manifold assumptions, which aligns with foundational research in representation learning.",
+        "RELEVANCE": 8,
+        "NOVELTY": 8,
+        "authors": [
+            "Konstantin Yakovlev",
+            "Nikita Puchkin"
+        ],
+        "title": "Generalization error bound for denoising score matching under relaxed manifold assumption",
+        "abstract": "We examine theoretical properties of the denoising score matching estimate. We model the density of observations with a nonparametric Gaussian mixture. We significantly relax the standard manifold assumption allowing the samples step away from the manifold. At the same time, we are still able to leverage a nice distribution structure. We derive non-asymptotic bounds on the approximation and generalization errors of the denoising score matching estimate. The rates of convergence are determined by the intrinsic dimension. Furthermore, our bounds remain valid even if we allow the ambient dimension grow polynomially with the sample size.",
+        "arxiv_id": "2502.13662"
+    },
+    "2502.13834": {
+        "SCORE": 16,
+        "ARXIVID": "2502.13834",
+        "COMMENT": "The paper combines LLMs and symbolic reasoning for mathematical theorem proving, which aligns with foundational research in LLM reasoning capabilities.",
+        "RELEVANCE": 8,
+        "NOVELTY": 8,
+        "authors": [
+            "Zenan Li",
+            "Zhaoyu Li",
+            "Wen Tang",
+            "Xian Zhang",
+            "Yuan Yao",
+            "Xujie Si",
+            "Fan Yang",
+            "Kaiyu Yang",
+            "Xiaoxing Ma"
+        ],
+        "title": "Proving Olympiad Inequalities by Synergizing LLMs and Symbolic Reasoning",
+        "abstract": "Large language models (LLMs) can prove mathematical theorems formally by generating proof steps (\\textit{a.k.a.} tactics) within a proof system. However, the space of possible tactics is vast and complex, while the available training data for formal proofs is limited, posing a significant challenge to LLM-based tactic generation. To address this, we introduce a neuro-symbolic tactic generator that synergizes the mathematical intuition learned by LLMs with domain-specific insights encoded by symbolic methods. The key aspect of this integration is identifying which parts of mathematical reasoning are best suited to LLMs and which to symbolic methods. While the high-level idea of neuro-symbolic integration is broadly applicable to various mathematical problems, in this paper, we focus specifically on Olympiad inequalities (Figure~1). We analyze how humans solve these problems and distill the techniques into two types of tactics: (1) scaling, handled by symbolic methods, and (2) rewriting, handled by LLMs. In addition, we combine symbolic tools with LLMs to prune and rank the proof goals for efficient proof search. We evaluate our framework on 161 challenging inequalities from multiple mathematics competitions, achieving state-of-the-art performance and significantly outperforming existing LLM and symbolic approaches without requiring additional training data.",
+        "arxiv_id": "2502.13834"
+    },
+    "2502.13825": {
+        "SCORE": 16,
+        "ARXIVID": "2502.13825",
+        "COMMENT": "The paper introduces a probabilistic perspective on mixup regularization, which is relevant to representation learning and provides a novel theoretical framework for conditional density estimation.",
+        "RELEVANCE": 8,
+        "NOVELTY": 8,
+        "authors": [
+            "Yousef El-Laham",
+            "Niccolo Dalmasso",
+            "Svitlana Vyetrenko",
+            "Vamsi Potluru",
+            "Manuela Veloso"
+        ],
+        "title": "Mixup Regularization: A Probabilistic Perspective",
+        "abstract": "In recent years, mixup regularization has gained popularity as an effective way to improve the generalization performance of deep learning models by training on convex combinations of training data. While many mixup variants have been explored, the proper adoption of the technique to conditional density estimation and probabilistic machine learning remains relatively unexplored. This work introduces a novel framework for mixup regularization based on probabilistic fusion that is better suited for conditional density estimation tasks. For data distributed according to a member of the exponential family, we show that likelihood functions can be analytically fused using log-linear pooling. We further propose an extension of probabilistic mixup, which allows for fusion of inputs at an arbitrary intermediate layer of the neural network. We provide a theoretical analysis comparing our approach to standard mixup variants. Empirical results on synthetic and real datasets demonstrate the benefits of our proposed framework compared to existing mixup variants.",
+        "arxiv_id": "2502.13825"
+    },
+    "2502.13870": {
+        "SCORE": 16,
+        "ARXIVID": "2502.13870",
+        "COMMENT": "SPEX introduces a novel sparse Fourier transform-based method for scalable feature interaction explanations in LLMs, aligning with the representation learning criterion by addressing how models encode and interact with input features.",
+        "RELEVANCE": 8,
+        "NOVELTY": 8,
+        "authors": [
+            "Justin Singh Kang",
+            "Landon Butler",
+            "Abhineet Agarwal",
+            "Yigit Efe Erginbas",
+            "Ramtin Pedarsani",
+            "Kannan Ramchandran",
+            "Bin Yu"
+        ],
+        "title": "SPEX: Scaling Feature Interaction Explanations for LLMs",
+        "abstract": "Large language models (LLMs) have revolutionized machine learning due to their ability to capture complex interactions between input features. Popular post-hoc explanation methods like SHAP provide marginal feature attributions, while their extensions to interaction importances only scale to small input lengths ($\\approx 20$). We propose Spectral Explainer (SPEX), a model-agnostic interaction attribution algorithm that efficiently scales to large input lengths ($\\approx 1000)$. SPEX exploits underlying natural sparsity among interactions -- common in real-world data -- and applies a sparse Fourier transform using a channel decoding algorithm to efficiently identify important interactions. We perform experiments across three difficult long-context datasets that require LLMs to utilize interactions between inputs to complete the task. For large inputs, SPEX outperforms marginal attribution methods by up to 20% in terms of faithfully reconstructing LLM outputs. Further, SPEX successfully identifies key features and interactions that strongly influence model output. For one of our datasets, HotpotQA, SPEX provides interactions that align with human annotations. Finally, we use our model-agnostic approach to generate explanations to demonstrate abstract reasoning in closed-source LLMs (GPT-4o mini) and compositional reasoning in vision-language models.",
+        "arxiv_id": "2502.13870"
+    },
+    "2502.13339": {
+        "SCORE": 16,
+        "ARXIVID": "2502.13339",
+        "COMMENT": "The paper studies the expressive power of Knowledge Graph Foundation Models (KGFMs) and proposes richer motifs for relation representation, aligning with representation learning and foundational model analysis.",
+        "RELEVANCE": 8,
+        "NOVELTY": 8,
+        "authors": [
+            "Xingyue Huang",
+            "Pablo Barcel\\'o",
+            "Michael M. Bronstein",
+            "\\.Ismail \\.Ilkan Ceylan",
+            "Mikhail Galkin",
+            "Juan L Reutter",
+            "Miguel Romero Orth"
+        ],
+        "title": "How Expressive are Knowledge Graph Foundation Models?",
+        "abstract": "Knowledge Graph Foundation Models (KGFMs) are at the frontier for deep learning on knowledge graphs (KGs), as they can generalize to completely novel knowledge graphs with different relational vocabularies. Despite their empirical success, our theoretical understanding of KGFMs remains very limited. In this paper, we conduct a rigorous study of the expressive power of KGFMs. Specifically, we show that the expressive power of KGFMs directly depends on the motifs that are used to learn the relation representations. We then observe that the most typical motifs used in the existing literature are binary, as the representations are learned based on how pairs of relations interact, which limits the model's expressiveness. As part of our study, we design more expressive KGFMs using richer motifs, which necessitate learning relation representations based on, e.g., how triples of relations interact with each other. Finally, we empirically validate our theoretical findings, showing that the use of richer motifs results in better performance on a wide range of datasets drawn from different domains.",
+        "arxiv_id": "2502.13339"
+    },
+    "2502.13967": {
+        "SCORE": 16,
+        "ARXIVID": "2502.13967",
+        "COMMENT": "FlexTok introduces a novel approach to image tokenization with variable-length sequences, which aligns with model architecture innovations through its hierarchical and semantic compression.",
+        "RELEVANCE": 8,
+        "NOVELTY": 8,
+        "authors": [
+            "Roman Bachmann",
+            "Jesse Allardice",
+            "David Mizrahi",
+            "Enrico Fini",
+            "O\\u{g}uzhan Fatih Kar",
+            "Elmira Amirloo",
+            "Alaaeldin El-Nouby",
+            "Amir Zamir",
+            "Afshin Dehghan"
+        ],
+        "title": "FlexTok: Resampling Images into 1D Token Sequences of Flexible Length",
+        "abstract": "Image tokenization has enabled major advances in autoregressive image generation by providing compressed, discrete representations that are more efficient to process than raw pixels. While traditional approaches use 2D grid tokenization, recent methods like TiTok have shown that 1D tokenization can achieve high generation quality by eliminating grid redundancies. However, these methods typically use a fixed number of tokens and thus cannot adapt to an image's inherent complexity. We introduce FlexTok, a tokenizer that projects 2D images into variable-length, ordered 1D token sequences. For example, a 256x256 image can be resampled into anywhere from 1 to 256 discrete tokens, hierarchically and semantically compressing its information. By training a rectified flow model as the decoder and using nested dropout, FlexTok produces plausible reconstructions regardless of the chosen token sequence length. We evaluate our approach in an autoregressive generation setting using a simple GPT-style Transformer. On ImageNet, this approach achieves an FID<2 across 8 to 128 tokens, outperforming TiTok and matching state-of-the-art methods with far fewer tokens. We further extend the model to support to text-conditioned image generation and examine how FlexTok relates to traditional 2D tokenization. A key finding is that FlexTok enables next-token prediction to describe images in a coarse-to-fine \"visual vocabulary\", and that the number of tokens to generate depends on the complexity of the generation task.",
+        "arxiv_id": "2502.13967"
+    },
+    "2502.13285": {
+        "SCORE": 15,
+        "ARXIVID": "2502.13285",
+        "COMMENT": "The paper investigates task shift from classification to regression in overparameterized linear models, providing theoretical insights into generalization and interpolation. This aligns with foundational research in representation learning.",
+        "RELEVANCE": 8,
+        "NOVELTY": 7,
+        "authors": [
+            "Tyler LaBonte",
+            "Kuo-Wei Lai",
+            "Vidya Muthukumar"
+        ],
+        "title": "Task Shift: From Classification to Regression in Overparameterized Linear Models",
+        "abstract": "Modern machine learning methods have recently demonstrated remarkable capability to generalize under task shift, where latent knowledge is transferred to a different, often more difficult, task under a similar data distribution. We investigate this phenomenon in an overparameterized linear regression setting where the task shifts from classification during training to regression during evaluation. In the zero-shot case, wherein no regression data is available, we prove that task shift is impossible in both sparse signal and random signal models for any Gaussian covariate distribution. In the few-shot case, wherein limited regression data is available, we propose a simple postprocessing algorithm which asymptotically recovers the ground-truth predictor. Our analysis leverages a fine-grained characterization of individual parameters arising from minimum-norm interpolation which may be of independent interest. Our results show that while minimum-norm interpolators for classification cannot transfer to regression a priori, they experience surprisingly structured attenuation which enables successful task shift with limited additional data.",
+        "arxiv_id": "2502.13285"
+    },
+    "2502.13313": {
+        "SCORE": 15,
+        "ARXIVID": "2502.13313",
+        "COMMENT": "The paper revisits trade-offs in privacy, utility, and efficiency during LLM fine-tuning, providing insights into efficient fine-tuning methods like LoRA. This aligns with model compression and efficiency.",
+        "RELEVANCE": 8,
+        "NOVELTY": 7,
+        "authors": [
+            "Soumi Das",
+            "Camila Kolling",
+            "Mohammad Aflah Khan",
+            "Mahsa Amani",
+            "Bishwamittra Ghosh",
+            "Qinyuan Wu",
+            "Till Speicher",
+            "Krishna P. Gummadi"
+        ],
+        "title": "Revisiting Privacy, Utility, and Efficiency Trade-offs when Fine-Tuning Large Language Models",
+        "abstract": "We study the inherent trade-offs in minimizing privacy risks and maximizing utility, while maintaining high computational efficiency, when fine-tuning large language models (LLMs). A number of recent works in privacy research have attempted to mitigate privacy risks posed by memorizing fine-tuning data by using differentially private training methods (e.g., DP), albeit at a significantly higher computational cost (inefficiency). In parallel, several works in systems research have focussed on developing (parameter) efficient fine-tuning methods (e.g., LoRA), but few works, if any, investigated whether such efficient methods enhance or diminish privacy risks. In this paper, we investigate this gap and arrive at a surprising conclusion: efficient fine-tuning methods like LoRA mitigate privacy risks similar to private fine-tuning methods like DP. Our empirical finding directly contradicts prevailing wisdom that privacy and efficiency objectives are at odds during fine-tuning. Our finding is established by (a) carefully defining measures of privacy and utility that distinguish between memorizing sensitive and non-sensitive tokens in training and test datasets used in fine-tuning and (b) extensive evaluations using multiple open-source language models from Pythia, Gemma, and Llama families and different domain-specific datasets.",
+        "arxiv_id": "2502.13313"
+    },
+    "2502.13928": {
+        "SCORE": 15,
+        "ARXIVID": "2502.13928",
+        "COMMENT": "The paper introduces a novel finetuning objective (S-VCO) for vision-language models, which aligns with representation learning and architectural insights.",
+        "RELEVANCE": 8,
+        "NOVELTY": 7,
+        "authors": [
+            "Shengguang Wu",
+            "Fan-Yun Sun",
+            "Kaiyue Wen",
+            "Nick Haber"
+        ],
+        "title": "Symmetrical Visual Contrastive Optimization: Aligning Vision-Language Models with Minimal Contrastive Images",
+        "abstract": "Recent studies have shown that Large Vision-Language Models (VLMs) tend to neglect image content and over-rely on language-model priors, resulting in errors in visually grounded tasks and hallucinations. We hypothesize that this issue arises because existing VLMs are not explicitly trained to generate texts that are accurately grounded in fine-grained image details. To enhance visual feedback during VLM training, we propose S-VCO (Symmetrical Visual Contrastive Optimization), a novel finetuning objective that steers the model toward capturing important visual details and aligning them with corresponding text tokens. To further facilitate this detailed alignment, we introduce MVC, a paired image-text dataset built by automatically filtering and augmenting visual counterfactual data to challenge the model with hard contrastive cases involving Minimal Visual Contrasts. Experiments show that our method consistently improves VLM performance across diverse benchmarks covering various abilities and domains, achieving up to a 22% reduction in hallucinations, and significant gains in vision-centric and general tasks. Notably, these improvements become increasingly pronounced in benchmarks with higher visual dependency. In short, S-VCO offers a significant enhancement of VLM's visually-dependent task performance while retaining or even improving the model's general abilities. We opensource our code at https://s-vco.github.io/",
+        "arxiv_id": "2502.13928"
+    },
+    "2502.13946": {
+        "SCORE": 15,
+        "ARXIVID": "2502.13946",
+        "COMMENT": "The paper investigates safety alignment vulnerabilities in LLMs, providing theoretical insights into their behavior under adversarial conditions.",
+        "RELEVANCE": 8,
+        "NOVELTY": 7,
+        "authors": [
+            "Chak Tou Leong",
+            "Qingyu Yin",
+            "Jian Wang",
+            "Wenjie Li"
+        ],
+        "title": "Why Safeguarded Ships Run Aground? Aligned Large Language Models' Safety Mechanisms Tend to Be Anchored in The Template Region",
+        "abstract": "The safety alignment of large language models (LLMs) remains vulnerable, as their initial behavior can be easily jailbroken by even relatively simple attacks. Since infilling a fixed template between the input instruction and initial model output is a common practice for existing LLMs, we hypothesize that this template is a key factor behind their vulnerabilities: LLMs' safety-related decision-making overly relies on the aggregated information from the template region, which largely influences these models' safety behavior. We refer to this issue as template-anchored safety alignment. In this paper, we conduct extensive experiments and verify that template-anchored safety alignment is widespread across various aligned LLMs. Our mechanistic analyses demonstrate how it leads to models' susceptibility when encountering inference-time jailbreak attacks. Furthermore, we show that detaching safety mechanisms from the template region is promising in mitigating vulnerabilities to jailbreak attacks. We encourage future research to develop more robust safety alignment techniques that reduce reliance on the template region.",
+        "arxiv_id": "2502.13946"
+    },
+    "2502.13394": {
+        "SCORE": 15,
+        "ARXIVID": "2502.13394",
+        "COMMENT": "The paper provides a theoretical framework for flow-based generative models, which aligns with foundational research in generative modeling and representation learning.",
+        "RELEVANCE": 8,
+        "NOVELTY": 7,
+        "authors": [
+            "Yao Xie",
+            "Xiuyuan Cheng"
+        ],
+        "title": "Flow-based generative models as iterative algorithms in probability space",
+        "abstract": "Generative AI (GenAI) has revolutionized data-driven modeling by enabling the synthesis of high-dimensional data across various applications, including image generation, language modeling, biomedical signal processing, and anomaly detection. Flow-based generative models provide a powerful framework for capturing complex probability distributions, offering exact likelihood estimation, efficient sampling, and deterministic transformations between distributions. These models leverage invertible mappings governed by Ordinary Differential Equations (ODEs), enabling precise density estimation and likelihood evaluation. This tutorial presents an intuitive mathematical framework for flow-based generative models, formulating them as neural network-based representations of continuous probability densities. We explore key theoretical principles, including the Wasserstein metric, gradient flows, and density evolution governed by ODEs, to establish convergence guarantees and bridge empirical advancements with theoretical insights. By providing a rigorous yet accessible treatment, we aim to equip researchers and practitioners with the necessary tools to effectively apply flow-based generative models in signal processing and machine learning.",
+        "arxiv_id": "2502.13394"
+    },
+    "2502.13220": {
+        "SCORE": 14,
+        "ARXIVID": "2502.13220",
+        "COMMENT": "The paper investigates the impact of conformer quality on 3D representation learning models, which aligns with the 'Representation Learning' criterion. It provides insights into how input quality affects learned representations, making it relevant. However, the novelty is moderate as it primarily raises practical considerations rather than introducing groundbreaking methods.",
+        "RELEVANCE": 8,
+        "NOVELTY": 6,
+        "authors": [
+            "Keir Adams",
+            "Connor W. Coley"
+        ],
+        "title": "The impact of conformer quality on learned representations of molecular conformer ensembles",
+        "abstract": "Training machine learning models to predict properties of molecular conformer ensembles is an increasingly popular strategy to accelerate the conformational analysis of drug-like small molecules, reactive organic substrates, and homogeneous catalysts. For high-throughput analyses especially, trained surrogate models can help circumvent traditional approaches to conformational analysis that rely on expensive conformer searches and geometry optimizations. Here, we question how the performance of surrogate models for predicting 3D conformer-dependent properties (of a single, active conformer) is affected by the quality of the 3D conformers used as their input. How well do lower-quality conformers inform the prediction of properties of higher-quality conformers? Does the fidelity of geometry optimization matter when encoding random conformers? For models that encode sets of conformers, how does the presence of the active conformer that induces the target property affect model accuracy? How do predictions from a surrogate model compare to estimating the properties from cheap ensembles themselves? We explore these questions in the context of predicting Sterimol parameters of conformer ensembles optimized with density functional theory. Although answers will be case-specific, our analyses provide a valuable perspective on 3D representation learning models and raise practical considerations regarding when conformer quality matters.",
+        "arxiv_id": "2502.13220"
+    },
+    "2502.13957": {
+        "SCORE": 14,
+        "ARXIVID": "2502.13957",
+        "COMMENT": "The paper introduces a novel framework for retrieval-augmented generation (RAG) and proposes a new agent architecture, which is relevant to model architecture innovations but leans towards application-driven improvements.",
+        "RELEVANCE": 7,
+        "NOVELTY": 7,
+        "authors": [
+            "Guangzhi Xiong",
+            "Qiao Jin",
+            "Xiao Wang",
+            "Yin Fang",
+            "Haolin Liu",
+            "Yifan Yang",
+            "Fangyuan Chen",
+            "Zhixing Song",
+            "Dengyu Wang",
+            "Minjia Zhang",
+            "Zhiyong Lu",
+            "Aidong Zhang"
+        ],
+        "title": "RAG-Gym: Optimizing Reasoning and Search Agents with Process Supervision",
+        "abstract": "Retrieval-augmented generation (RAG) has shown great potential for knowledge-intensive tasks, but its traditional architectures rely on static retrieval, limiting their effectiveness for complex questions that require sequential information-seeking. While agentic reasoning and search offer a more adaptive approach, most existing methods depend heavily on prompt engineering. In this work, we introduce RAG-Gym, a unified optimization framework that enhances information-seeking agents through fine-grained process supervision at each search step. We also propose ReSearch, a novel agent architecture that synergizes answer reasoning and search query generation within the RAG-Gym framework. Experiments on four challenging datasets show that RAG-Gym improves performance by up to 25.6\\% across various agent architectures, with ReSearch consistently outperforming existing baselines. Further analysis highlights the effectiveness of advanced LLMs as process reward judges and the transferability of trained reward models as verifiers for different LLMs. Additionally, we examine the scaling properties of training and inference in agentic RAG. The project homepage is available at https://rag-gym.github.io/.",
+        "arxiv_id": "2502.13957"
+    }
+}

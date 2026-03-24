@@ -1,0 +1,308 @@
+{
+    "2602.23349": {
+        "SCORE": 18,
+        "ARXIVID": "2602.23349",
+        "COMMENT": "Matches Compression/Efficiency and HPC: optimizer-state quantization via companding and bounded master weight splitting cuts per-parameter training memory to ~7 bytes while preserving quality.",
+        "RELEVANCE": 10,
+        "NOVELTY": 8,
+        "authors": [
+            "Jose Javier Gonzalez Ortiz",
+            "Abhay Gupta",
+            "Chris Renard",
+            "Davis Blalock"
+        ],
+        "title": "FlashOptim: Optimizers for Memory Efficient Training",
+        "abstract": "Standard mixed-precision training of neural networks requires many bytes of accelerator memory for each model parameter. These bytes reflect not just the parameter itself, but also its gradient and one or more optimizer state variables. With each of these values typically requiring 4 bytes, training even a 7 billion parameter model can be impractical for researchers with less than 100GB of accelerator memory.   We introduce FlashOptim, a suite of optimizations that reduces per-parameter memory by over 50% while preserving model quality and API compatibility. Our approach introduces two key techniques. First, we improve master weight splitting by finding and exploiting a tight bound on its quantization error. Second, we design companding functions that greatly reduce the error in 8-bit optimizer state quantization. Together with 16-bit gradients, these techniques reduce AdamW memory from 16 bytes to 7 bytes per parameter, or 5 bytes with gradient release. They also cut model checkpoint sizes by more than half.   Experiments with FlashOptim applied to SGD, AdamW, and Lion show no measurable quality degradation on any task from a collection of standard vision and language benchmarks, including Llama-3.1-8B finetuning.",
+        "arxiv_id": "2602.23349"
+    },
+    "2602.22575": {
+        "SCORE": 18,
+        "ARXIVID": "2602.22575",
+        "COMMENT": "Matches Compression/Efficiency: online permutation plus early-stopping for sparse attention substantially raises effective sparsity and delivers large end-to-end speedups for long-context transformers.",
+        "RELEVANCE": 10,
+        "NOVELTY": 8,
+        "authors": [
+            "Yu Zhang",
+            "Songwei Liu",
+            "Chenqian Yan",
+            "Sheng Lin",
+            "Beichen Ning",
+            "Fangmin Chen",
+            "Xing Wang"
+        ],
+        "title": "S2O: Early Stopping for Sparse Attention via Online Permutation",
+        "abstract": "Attention scales quadratically with sequence length, fundamentally limiting long-context inference. Existing block-granularity sparsification can reduce latency, but coarse blocks impose an intrinsic sparsity ceiling, making further improvements difficult even with carefully engineered designs. We present S2O, which performs early stopping for sparse attention via online permutation. Inspired by virtual-to-physical address mapping in memory systems, S2O revisits and factorizes FlashAttention execution, enabling inference to load non-contiguous tokens rather than a contiguous span in the original order. Motivated by fine-grained structures in attention heatmaps, we transform explicit permutation into an online, index-guided, discrete loading policy; with extremely lightweight preprocessing and index-remapping overhead, it concentrates importance on a small set of high-priority blocks. Building on this importance-guided online permutation for loading, S2O further introduces an early-stopping rule: computation proceeds from high to low importance; once the current block score falls below a threshold, S2O terminates early and skips the remaining low-contribution blocks, thereby increasing effective sparsity and reducing computation under a controlled error budget.   As a result, S2O substantially raises the practical sparsity ceiling. On Llama-3.1-8B under a 128K context, S2O reduces single-operator MSE by 3.82$\\times$ at matched sparsity, and reduces prefill compute density by 3.31$\\times$ at matched MSE; meanwhile, it preserves end-to-end accuracy and achieves 7.51$\\times$ attention and 3.81$\\times$ end-to-end speedups.",
+        "arxiv_id": "2602.22575"
+    },
+    "2602.22437": {
+        "SCORE": 18,
+        "ARXIVID": "2602.22437",
+        "COMMENT": "High Performance Computing: redesigned FSDP with RaggedShard and structure-aware planning; supports block-wise quantized training and non-element-wise optimizers at scale.",
+        "RELEVANCE": 10,
+        "NOVELTY": 8,
+        "authors": [
+            "Zezhou Wang",
+            "Youjie Li",
+            "Zhiqi Lin",
+            "Jiacheng Yang",
+            "Cong Xie",
+            "Guanyu Feng",
+            "Zheng Zhong",
+            "Ziyue Huang",
+            "Hongyu Zhu",
+            "Zhi Zhang",
+            "Yanghua Peng",
+            "Xin Liu"
+        ],
+        "title": "veScale-FSDP: Flexible and High-Performance FSDP at Scale",
+        "abstract": "Fully Sharded Data Parallel (FSDP), also known as ZeRO, is widely used for training large-scale models, featuring its flexibility and minimal intrusion on model code. However, current FSDP systems struggle with structure-aware training methods (e.g., block-wise quantized training) and with non-element-wise optimizers (e.g., Shampoo and Muon) used in cutting-edge models (e.g., Gemini, Kimi K2). FSDP's fixed element- or row-wise sharding formats conflict with the block-structured computations. In addition, today's implementations fall short in communication and memory efficiency, limiting scaling to tens of thousands of GPUs. We introduce veScale-FSDP, a redesigned FSDP system that couples a flexible sharding format, RaggedShard, with a structure-aware planning algorithm to deliver both flexibility and performance at scale. veScale-FSDP natively supports efficient data placement required by FSDP, empowering block-wise quantization and non-element-wise optimizers. As a result, veScale-FSDP achieves 5~66% higher throughput and 16~30% lower memory usage than existing FSDP systems, while scaling efficiently to tens of thousands of GPUs.",
+        "arxiv_id": "2602.22437"
+    },
+    "2602.23136": {
+        "SCORE": 18,
+        "ARXIVID": "2602.23136",
+        "COMMENT": "Matches Representation Learning/Theory: frames modality collapse as mismatched decoding with GMI bounds; shows encoder retains attributes but decoder scoring rule limits accessible information; objective-level fix validated.",
+        "RELEVANCE": 9,
+        "NOVELTY": 9,
+        "authors": [
+            "Jayadev Billa"
+        ],
+        "title": "Modality Collapse as Mismatched Decoding: Information-Theoretic Limits of Multimodal LLMs",
+        "abstract": "Multimodal LLMs can process speech and images, but they cannot hear a speaker's voice or see an object's texture. We show this is not a failure of encoding: speaker identity, emotion, and visual attributes survive through every LLM layer (3--55$\\times$ above chance in linear probes), yet removing 64--71% of modality-specific variance improves decoder loss. The decoder has no learned use for these directions; their presence is noise.   We formalize this as a mismatched decoder problem: a decoder trained on text can only extract information along text-aligned directions. Accessible information is bounded by the Generalized Mutual Information (GMI), with degradation scaling with distributional distance and decoder sensitivity. The bound is a property of the decoder's scoring rule, not of any particular architecture; it applies whether non-text inputs arrive through a learned projection, a discrete codebook, or no explicit adapter at all. We validate this across five models spanning speech and vision. A controlled experiment (two Prismatic VLMs differing only in encoder text-alignment) confirms the bottleneck is the decoder's scoring rule, not the encoder or projection. A LoRA intervention demonstrates the fix: training with an emotion objective improves emotion accessibility ($+$7.5%) without affecting other attributes, confirming that the training objective determines what becomes accessible.",
+        "arxiv_id": "2602.23136"
+    },
+    "2602.22873": {
+        "SCORE": 18,
+        "ARXIVID": "2602.22873",
+        "COMMENT": "Matches Model Architecture and Representation Learning: multi-chart autoencoders as atlases, tangent bundle recovery, and topological invariants (characteristic classes).",
+        "RELEVANCE": 9,
+        "NOVELTY": 9,
+        "authors": [
+            "Eduardo Paluzo-Hidalgo",
+            "Yuichi Ike"
+        ],
+        "title": "Learning Tangent Bundles and Characteristic Classes with Autoencoder Atlases",
+        "abstract": "We introduce a theoretical framework that connects multi-chart autoencoders in manifold learning with the classical theory of vector bundles and characteristic classes. Rather than viewing autoencoders as producing a single global Euclidean embedding, we treat a collection of locally trained encoder-decoder pairs as a learned atlas on a manifold. We show that any reconstruction-consistent autoencoder atlas canonically defines transition maps satisfying the cocycle condition, and that linearising these transition maps yields a vector bundle coinciding with the tangent bundle when the latent dimension matches the intrinsic dimension of the manifold. This construction provides direct access to differential-topological invariants of the data. In particular, we show that the first Stiefel-Whitney class can be computed from the signs of the Jacobians of learned transition maps, yielding an algorithmic criterion for detecting orientability. We also show that non-trivial characteristic classes provide obstructions to single-chart representations, and that the minimum number of autoencoder charts is determined by the good cover structure of the manifold. Finally, we apply our methodology to low-dimensional orientable and non-orientable manifolds, as well as to a non-orientable high-dimensional image dataset.",
+        "arxiv_id": "2602.22873"
+    },
+    "2602.22988": {
+        "SCORE": 17,
+        "ARXIVID": "2602.22988",
+        "COMMENT": "Matches Representation Learning/Training Dynamics: single-pass Koopman spectral profiling predicts transformer divergence and shaping stabilizes training across architectures (incl. MoE/SSMs).",
+        "RELEVANCE": 9,
+        "NOVELTY": 8,
+        "authors": [
+            "Bum Jun Kim",
+            "Shohei Taniguchi",
+            "Makoto Kawano",
+            "Yusuke Iwasawa",
+            "Yutaka Matsuo"
+        ],
+        "title": "Residual Koopman Spectral Profiling for Predicting and Preventing Transformer Training Instability",
+        "abstract": "Training divergence in transformers wastes compute, yet practitioners discover instability only after expensive runs begin. They therefore need an expected probability of failure for a transformer before training starts. Our study of Residual Koopman Spectral Profiling (RKSP) provides such an estimate. From a single forward pass at initialization, RKSP extracts Koopman spectral features by applying whitened dynamic mode decomposition to layer-wise residual snapshots. Our central diagnostic, the near-unit spectral mass, quantifies the fraction of modes concentrated near the unit circle, which captures instability risk. For predicting divergence across extensive configurations, this estimator achieves an AUROC of 0.995, outperforming the best gradient baseline. We further make this diagnostic actionable through Koopman Spectral Shaping (KSS), which reshapes spectra during training. We empirically validate that our method works in practice: RKSP predicts divergence at initialization, and when RKSP flags high risk, turning on KSS successfully prevents divergence. In the challenging high learning rate regime without normalization layers, KSS reduces the divergence rate from 66.7% to 12.5% and enables learning rates that are 50% to 150% higher. These findings generalize to WikiText-103 language modeling, vision transformers on CIFAR-10, and pretrained language models, including GPT-2 and LLaMA-2 up to 7B, as well as emerging architectures such as MoE, Mamba-style SSMs, and KAN.",
+        "arxiv_id": "2602.22988"
+    },
+    "2602.22911": {
+        "SCORE": 17,
+        "ARXIVID": "2602.22911",
+        "COMMENT": "Matches Model Compression/Efficiency via low-rank adaptation and Model Architecture: a non-linear adapter (gating + structural dropout) breaking LoRA\u2019s linear rank ceiling.",
+        "RELEVANCE": 9,
+        "NOVELTY": 8,
+        "authors": [
+            "Hung-Hsuan Chen"
+        ],
+        "title": "NoRA: Breaking the Linear Ceiling of Low-Rank Adaptation via Manifold Expansion",
+        "abstract": "Low-Rank Adaptation (LoRA) dominates parameter-efficient fine-tuning (PEFT). However, it faces a critical ``linear ceiling'' in complex reasoning tasks: simply increasing the rank yields diminishing returns due to intrinsic linear constraints. We introduce NoRA (Non-linear Rank Adaptation), a weight-level parallel adapter that injects SiLU gating and structural dropout to induce manifold expansion. On the SlimOrca benchmark, NoRA breaks this linear barrier: NoRA remarkably at rank 64 (PPL 3.89) outperforms LoRA at rank 512 (PPL 3.90), demonstrating superior spectral efficiency. This advantage generalizes to mathematical reasoning, where NoRA achieves a perplexity of 1.97 on MathInstruct, significantly surpassing LoRA's saturation point of 2.07. Mechanism analysis via Singular Value Decomposition (SVD) confirms that NoRA activates the dormant tail of the singular value spectrum, effectively preventing the rank collapse observed in linear methods.",
+        "arxiv_id": "2602.22911"
+    },
+    "2602.22603": {
+        "SCORE": 17,
+        "ARXIVID": "2602.22603",
+        "COMMENT": "Matches Model Compression and Efficiency: model-driven KV cache management (auxiliary parallel task) for long-horizon reasoning; memory/context optimization.",
+        "RELEVANCE": 9,
+        "NOVELTY": 8,
+        "authors": [
+            "Sanjay Kariyappa",
+            "G. Edward Suh"
+        ],
+        "title": "SideQuest: Model-Driven KV Cache Management for Long-Horizon Agentic Reasoning",
+        "abstract": "Long-running agentic tasks, such as deep research, require multi-hop reasoning over information distributed across multiple webpages and documents. In such tasks, the LLM context is dominated by tokens from external retrieval, causing memory usage to grow rapidly and limiting decode performance. While several KV cache compression techniques exist for long-context inputs, we find that existing heuristics fail to support multi-step reasoning models effectively. We address this challenge with SideQuest -- a novel approach that leverages the Large Reasoning Model (LRM) itself to perform KV cache compression by reasoning about the usefulness of tokens in its context. To prevent the tokens associated with this management process from polluting the model's memory, we frame KV cache compression as an auxiliary task executed in parallel to the main reasoning task. Our evaluations, using a model trained with just 215 samples, show that SideQuest reduces peak token usage by up to 65% on agentic tasks with minimal degradation in accuracy, outperforming heuristic-based KV cache compression techniques.",
+        "arxiv_id": "2602.22603"
+    },
+    "2602.22446": {
+        "SCORE": 17,
+        "ARXIVID": "2602.22446",
+        "COMMENT": "Matches Model Architecture and High-Performance Computing/Efficiency: introduces a conditional Topology-Aware Router (dynamic routing) and memory-sharded full-batch contrastive training with chunked O(N\u00b7K) similarity to bypass O(N^2) memory, a systems-level algorithmic optimization for scalable GNNs.",
+        "RELEVANCE": 9,
+        "NOVELTY": 8,
+        "authors": [
+            "Emilio Ferrara"
+        ],
+        "title": "ECHO: Encoding Communities via High-order Operators",
+        "abstract": "Community detection in attributed networks faces a fundamental divide: topological algorithms ignore semantic features, while Graph Neural Networks (GNNs) encounter devastating computational bottlenecks. Specifically, GNNs suffer from a Semantic Wall of feature over smoothing in dense or heterophilic networks, and a Systems Wall driven by the O(N^2) memory constraints of pairwise clustering. To dismantle these barriers, we introduce ECHO (Encoding Communities via High order Operators), a scalable, self supervised architecture that reframes community detection as an adaptive, multi scale diffusion process. ECHO features a Topology Aware Router that automatically analyzes structural heuristics sparsity, density, and assortativity to route graphs through the optimal inductive bias, preventing heterophilic poisoning while ensuring semantic densification. Coupled with a memory sharded full batch contrastive objective and a novel chunked O(N \\cdot K) similarity extraction method, ECHO completely bypasses traditional O(N^2) memory bottlenecks without sacrificing the mathematical precision of global gradients. Extensive evaluations demonstrate that this topology feature synergy consistently overcomes the classical resolution limit. On synthetic LFR benchmarks scaled up to 1 million nodes, ECHO achieves scale invariant accuracy despite severe topological noise. Furthermore, on massive real world social networks with over 1.6 million nodes and 30 million edges, it completes clustering in mere minutes with throughputs exceeding 2,800 nodes per second matching the speed of highly optimized purely topological baselines. The implementation utilizes a unified framework that automatically engages memory sharded optimization to support adoption across varying hardware constraints. GitHub Repository: https://github.com/emilioferrara/ECHO-GNN",
+        "arxiv_id": "2602.22446"
+    },
+    "2602.23057": {
+        "SCORE": 16,
+        "ARXIVID": "2602.23057",
+        "COMMENT": "Model Architecture: proposes Affine-Scaled Attention that relaxes softmax unit-sum via input-dependent scaling/bias, improving stability and training dynamics.",
+        "RELEVANCE": 9,
+        "NOVELTY": 7,
+        "authors": [
+            "Jeongin Bae",
+            "Baeseong Park",
+            "Gunho Park",
+            "Minsub Kim",
+            "Joonhyung Lee",
+            "Junhee Yoo",
+            "Sunghyeon Woo",
+            "Jiwon Ryu",
+            "Se Jung Kwon",
+            "Dongsoo Lee"
+        ],
+        "title": "Affine-Scaled Attention: Towards Flexible and Stable Transformer Attention",
+        "abstract": "Transformer attention is typically implemented using softmax normalization, which enforces attention weights with unit sum normalization. While effective in many settings, this constraint can limit flexibility in controlling attention magnitudes and may contribute to overly concentrated or unstable attention patterns during training. Prior work has explored modifications such as attention sinks or gating mechanisms, but these approaches provide only limited or indirect control over attention reweighting. We propose Affine-Scaled Attention, a simple extension to standard attention that introduces input-dependent scaling and a corresponding bias term applied to softmax-normalized attention weights. This design relaxes the strict normalization constraint while maintaining aggregation of value representations, allowing the model to adjust both the relative distribution and the scale of attention in a controlled manner.   We empirically evaluate Affine-Scaled Attention in large-scale language model pretraining across multiple model sizes. Experimental results show consistent improvements in training stability, optimization behavior, and downstream task performance compared to standard softmax attention and attention sink baselines. These findings suggest that modest reweighting of attention outputs provides a practical and effective way to improve attention behavior in Transformer models.",
+        "arxiv_id": "2602.23057"
+    },
+    "2602.22543": {
+        "SCORE": 16,
+        "ARXIVID": "2602.22543",
+        "COMMENT": "Model Architecture + HPC: variable-depth early-exit \u2018Familial Model\u2019 with 3D parallel training and parameter sharing for efficient train/deploy.",
+        "RELEVANCE": 9,
+        "NOVELTY": 7,
+        "authors": [
+            "Huan Song",
+            "Shuyu Tian",
+            "Junyi Hao",
+            "Minxiu Xu",
+            "Hongjun An",
+            "Yiliang Song",
+            "Jiawei Shao",
+            "Xuelong Li"
+        ],
+        "title": "Ruyi2 Technical Report",
+        "abstract": "Large Language Models (LLMs) face significant challenges regarding deployment costs and latency, necessitating adaptive computing strategies. Building upon the AI Flow framework, we introduce Ruyi2 as an evolution of our adaptive model series designed for efficient variable-depth computation. While early-exit architectures offer a viable efficiency-performance balance, the Ruyi model and existing methods often struggle with optimization complexity and compatibility with large-scale distributed training. To bridge this gap, Ruyi2 introduces a stable \"Familial Model\" based on Megatron-LM. By using 3D parallel training, it achieves a 2-3 times speedup over Ruyi, while performing comparably to same-sized Qwen3 models. These results confirm that family-based parameter sharing is a highly effective strategy, establishing a new \"Train Once, Deploy Many\" paradigm and providing a key reference for balancing architectural efficiency with high-performance capabilities.",
+        "arxiv_id": "2602.22543"
+    },
+    "2602.23353": {
+        "SCORE": 15,
+        "ARXIVID": "2602.23353",
+        "COMMENT": "Matches Representation Learning: semi-supervised alignment of frozen unimodal encoders using OT-based divergence to transfer relational structure with minimal paired data.",
+        "RELEVANCE": 8,
+        "NOVELTY": 7,
+        "authors": [
+            "Simon Roschmann",
+            "Paul Krzakala",
+            "Sonia Mazelet",
+            "Quentin Bouniot",
+            "Zeynep Akata"
+        ],
+        "title": "SOTAlign: Semi-Supervised Alignment of Unimodal Vision and Language Models via Optimal Transport",
+        "abstract": "The Platonic Representation Hypothesis posits that neural networks trained on different modalities converge toward a shared statistical model of the world. Recent work exploits this convergence by aligning frozen pretrained vision and language models with lightweight alignment layers, but typically relies on contrastive losses and millions of paired samples. In this work, we ask whether meaningful alignment can be achieved with substantially less supervision. We introduce a semi-supervised setting in which pretrained unimodal encoders are aligned using a small number of image-text pairs together with large amounts of unpaired data. To address this challenge, we propose SOTAlign, a two-stage framework that first recovers a coarse shared geometry from limited paired data using a linear teacher, then refines the alignment on unpaired samples via an optimal-transport-based divergence that transfers relational structure without overconstraining the target space. Unlike existing semi-supervised methods, SOTAlign effectively leverages unpaired images and text, learning robust joint embeddings across datasets and encoder pairs, and significantly outperforming supervised and semi-supervised baselines.",
+        "arxiv_id": "2602.23353"
+    },
+    "2602.22968": {
+        "SCORE": 15,
+        "ARXIVID": "2602.22968",
+        "COMMENT": "Matches Representation Learning/Mechanistic Interpretability: certifies stability of discovered circuits via randomized subsampling, yielding provably robust subnet explanations.",
+        "RELEVANCE": 8,
+        "NOVELTY": 7,
+        "authors": [
+            "Alaa Anani",
+            "Tobias Lorenz",
+            "Bernt Schiele",
+            "Mario Fritz",
+            "Jonas Fischer"
+        ],
+        "title": "Certified Circuits: Stability Guarantees for Mechanistic Circuits",
+        "abstract": "Understanding how neural networks arrive at their predictions is essential for debugging, auditing, and deployment. Mechanistic interpretability pursues this goal by identifying circuits - minimal subnetworks responsible for specific behaviors. However, existing circuit discovery methods are brittle: circuits depend strongly on the chosen concept dataset and often fail to transfer out-of-distribution, raising doubts whether they capture concept or dataset-specific artifacts. We introduce Certified Circuits, which provide provable stability guarantees for circuit discovery. Our framework wraps any black-box discovery algorithm with randomized data subsampling to certify that circuit component inclusion decisions are invariant to bounded edit-distance perturbations of the concept dataset. Unstable neurons are abstained from, yielding circuits that are more compact and more accurate. On ImageNet and OOD datasets, certified circuits achieve up to 91% higher accuracy while using 45% fewer neurons, and remain reliable where baselines degrade. Certified Circuits puts circuit discovery on formal ground by producing mechanistic explanations that are provably stable and better aligned with the target concept. Code will be released soon!",
+        "arxiv_id": "2602.22968"
+    },
+    "2602.23153": {
+        "SCORE": 15,
+        "ARXIVID": "2602.23153",
+        "COMMENT": "Matches Model Architecture and Efficiency: encoder-free 3D tokenizer where FFT approximates self-attention; structured superpoints + token merging; Fourier-augmented LoRA adapters.",
+        "RELEVANCE": 8,
+        "NOVELTY": 7,
+        "authors": [
+            "Guofeng Mei",
+            "Wei Lin",
+            "Luigi Riz",
+            "Yujiao Wu",
+            "Yiming Wang",
+            "Fabio Poiesi"
+        ],
+        "title": "Efficient Encoder-Free Fourier-based 3D Large Multimodal Model",
+        "abstract": "Large Multimodal Models (LMMs) that process 3D data typically rely on heavy, pre-trained visual encoders to extract geometric features. While recent 2D LMMs have begun to eliminate such encoders for efficiency and scalability, extending this paradigm to 3D remains challenging due to the unordered and large-scale nature of point clouds. This leaves a critical unanswered question: How can we design an LMM that tokenizes unordered 3D data effectively and efficiently without a cumbersome encoder? We propose Fase3D, the first efficient encoder-free Fourier-based 3D scene LMM. Fase3D tackles the challenges of scalability and permutation invariance with a novel tokenizer that combines point cloud serialization and the Fast Fourier Transform (FFT) to approximate self-attention. This design enables an effective and computationally minimal architecture, built upon three key innovations: First, we represent large scenes compactly via structured superpoints. Second, our space-filling curve serialization followed by an FFT enables efficient global context modeling and graph-based token merging. Lastly, our Fourier-augmented LoRA adapters inject global frequency-aware interactions into the LLMs at a negligible cost. Fase3D achieves performance comparable to encoder-based 3D LMMs while being significantly more efficient in computation and parameters. Project website: https://tev-fbk.github.io/Fase3D.",
+        "arxiv_id": "2602.23153"
+    },
+    "2602.22495": {
+        "SCORE": 15,
+        "ARXIVID": "2602.22495",
+        "COMMENT": "Representation Learning/Training Dynamics: RL-aware distillation with a trust-region ratio objective (PPO/GRPO-style) replacing KL for on-policy teacher guidance.",
+        "RELEVANCE": 8,
+        "NOVELTY": 7,
+        "authors": [
+            "Zhaoyang Zhang",
+            "Shuli Jiang",
+            "Yantao Shen",
+            "Yuting Zhang",
+            "Dhananjay Ram",
+            "Shuo Yang",
+            "Zhuowen Tu",
+            "Wei Xia",
+            "Stefano Soatto"
+        ],
+        "title": "Reinforcement-aware Knowledge Distillation for LLM Reasoning",
+        "abstract": "Reinforcement learning (RL) post-training has recently driven major gains in long chain-of-thought reasoning large language models (LLMs), but the high inference cost of such models motivates distillation into smaller students. Most existing knowledge distillation (KD) methods are designed for supervised fine-tuning (SFT), relying on fixed teacher traces or teacher-student Kullback-Leibler (KL) divergence-based regularization. When combined with RL, these approaches often suffer from distribution mismatch and objective interference: teacher supervision may not align with the student's evolving rollout distribution, and the KL regularizer can compete with reward maximization and require careful loss balancing. To address these issues, we propose RL-aware distillation (RLAD), which performs selective imitation during RL -- guiding the student toward the teacher only when it improves the current policy update. Our core component, Trust Region Ratio Distillation (TRRD), replaces the teacher-student KL regularizer with a PPO/GRPO-style likelihood-ratio objective anchored to a teacher--old-policy mixture, yielding advantage-aware, trust-region-bounded distillation on student rollouts and naturally balancing exploration, exploitation, and imitation. Across diverse logic reasoning and math benchmarks, RLAD consistently outperforms offline distillation, standard GRPO, and KL-based on-policy teacher-student knowledge distillation.",
+        "arxiv_id": "2602.22495"
+    },
+    "2602.22296": {
+        "SCORE": 15,
+        "ARXIVID": "2602.22296",
+        "COMMENT": "Training Dynamics/Representation Learning: MI-based reward within GRPO to optimize pass@k by promoting diverse, skill-specific trajectories.",
+        "RELEVANCE": 8,
+        "NOVELTY": 7,
+        "authors": [
+            "Devan Shah",
+            "Owen Yang",
+            "Daniel Yang",
+            "Chongyi Zheng",
+            "Benjamin Eysenbach"
+        ],
+        "title": "UpSkill: Mutual Information Skill Learning for Structured Response Diversity in LLMs",
+        "abstract": "Reinforcement Learning with Verifiable Rewards (RLVR) has improved the reasoning abilities of large language models (LLMs) on mathematics and programming tasks, but standard approaches that optimize single-attempt accuracy can inadvertently suppress response diversity across repeated attempts, narrowing exploration and overlooking underrepresented strategies. We introduce UpSkill, a training time method that adapts Mutual Information Skill Learning (MISL) to LLMs for optimizing pass@k correctness. We propose a novel reward that we implement within Group Relative Policy Optimization (GRPO): a token-level mutual information (MI) reward that encourages trajectory specificity to z. Experiments on GSM8K with three open-weight models, Llama 3.1-8B, Qwen 2.5-7B, and R1-Distilled-Qwen2.5-Math-1.5B, show that UpSkill improves multi-attempt metrics on the stronger base models, yielding mean gains of ~3% in pass@k for both Qwen and Llama without degrading pass@1. Additionally, we find both empirical and theoretical evidence that improvements in pass@k are closely tied to the mutual information objective.",
+        "arxiv_id": "2602.22296"
+    },
+    "2602.23334": {
+        "SCORE": 15,
+        "ARXIVID": "2602.23334",
+        "COMMENT": "Compression/Efficiency + HPC Hardware: runtime-reconfigurable multi-precision quantized multiplication via bitwise systolic array supporting mixed-precision QNNs.",
+        "RELEVANCE": 8,
+        "NOVELTY": 7,
+        "authors": [
+            "Yuhao Liu",
+            "Salim Ullah",
+            "Akash Kumar"
+        ],
+        "title": "Bitwise Systolic Array Architecture for Runtime-Reconfigurable Multi-precision Quantized Multiplication on Hardware Accelerators",
+        "abstract": "Neural network accelerators have been widely applied to edge devices for complex tasks like object tracking, image recognition, etc. Previous works have explored the quantization technologies in related lightweight accelerator designs to reduce hardware resource consumption. However, low precision leads to high accuracy loss in inference. Therefore, mixed-precision quantization becomes an alternative solution by applying different precision in different layers to trade off resource consumption and accuracy. Because regular designs for multiplication on hardware cannot support the precision reconfiguration for a multi-precision Quantized Neural Network (QNN) model in runtime, we propose a runtime reconfigurable multi-precision multi-channel bitwise systolic array design for QNN accelerators. We have implemented and evaluated our work on the Ultra96 FPGA platform. Results show that our work can achieve 1.3185 to 3.5671 times speedup in inferring mixed-precision models and has less critical path delay, supporting a higher clock frequency (250MHz).",
+        "arxiv_id": "2602.23334"
+    },
+    "2602.23036": {
+        "SCORE": 15,
+        "ARXIVID": "2602.23036",
+        "COMMENT": "High Performance Computing: unified runtime-driven simulator modeling heterogeneous/disaggregated LLM serving (batching, routing, offloading, memory, power).",
+        "RELEVANCE": 8,
+        "NOVELTY": 7,
+        "authors": [
+            "Jaehong Cho",
+            "Hyunmin Choi",
+            "Guseul Heo",
+            "Jongse Park"
+        ],
+        "title": "LLMServingSim 2.0: A Unified Simulator for Heterogeneous and Disaggregated LLM Serving Infrastructure",
+        "abstract": "Large language model (LLM) serving infrastructures are undergoing a shift toward heterogeneity and disaggregation. Modern deployments increasingly integrate diverse accelerators and near-memory processing technologies, introducing significant hardware heterogeneity, while system software increasingly separates computation, memory, and model components across distributed resources to improve scalability and efficiency. As a result, LLM serving performance is no longer determined by hardware or software choices in isolation, but by their runtime interaction through scheduling, data movement, and interconnect behavior. However, understanding these interactions remains challenging, as existing simulators lack the ability to jointly model heterogeneous hardware and disaggregated serving techniques within a unified, runtime-driven framework.   This paper presents LLMServingSim 2.0, a unified system-level simulator designed to make runtime-driven hardware-software interactions in heterogeneous and disaggregated LLM serving infrastructures explicit and analyzable. LLMServingSim 2.0 embeds serving decisions and hardware behavior into a single runtime loop, enabling interaction-aware modeling of batching, routing, offloading, memory, and power. The simulator supports extensible integration of emerging accelerators and memory systems through profile-based modeling, while capturing dynamic serving behavior and system-level effects. We validate LLMServingSim 2.0 against real deployments, showing that it reproduces key performance, memory, and power metrics with an average error of 0.97%, while maintaining simulation times of around 10 minutes even for complex configurations. These results demonstrate that LLMServingSim 2.0 provides a practical bridge between hardware innovation and serving-system design, enabling systematic exploration and co-design for next-generation LLM serving infrastructures.",
+        "arxiv_id": "2602.23036"
+    }
+}

@@ -17,7 +17,16 @@ export function withBasePath(href: string) {
   if (!href || /^[a-z]+:/i.test(href) || href.startsWith("//")) {
     return href;
   }
-  const base = import.meta.env.BASE_URL || "/";
+  const inferredBase =
+    typeof window !== "undefined"
+      ? (() => {
+          const marker = "/hot";
+          const pathname = window.location.pathname || "";
+          const index = pathname.indexOf(marker);
+          return index > 0 ? pathname.slice(0, index) : "";
+        })()
+      : "";
+  const base = inferredBase || import.meta.env.BASE_URL || "/";
   if (!href.startsWith("/")) {
     return href;
   }

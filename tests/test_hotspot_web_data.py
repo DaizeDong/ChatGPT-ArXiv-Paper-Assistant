@@ -363,10 +363,10 @@ class TestHotspotWebData(unittest.TestCase):
             self.assertEqual(year_index["totals"]["days"], 2)
             self.assertEqual(year_index["months"][0]["source_section_totals"]["x-buzz"], 2)
             self.assertEqual(latest_daily["meta"]["previous_date"], "2026-03-20")
-            self.assertEqual(latest_daily["meta"]["paper_routes"]["day"], "/archive/2026-03/21/")
-            self.assertEqual(month_index["paper_routes"]["month"], "/archive/2026-03/")
-            self.assertEqual(year_index["paper_routes"]["year"], "/archive/2026/")
-            self.assertEqual(root_index["dates"][-1]["paper_routes"]["day"], "/archive/2026-03/21/")
+            self.assertEqual(latest_daily["meta"]["paper_routes"]["day"], "../../archive/2026-03/21/")
+            self.assertEqual(month_index["paper_routes"]["month"], "../../archive/2026-03/")
+            self.assertEqual(year_index["paper_routes"]["year"], "../../archive/2026/")
+            self.assertEqual(root_index["dates"][-1]["paper_routes"]["day"], "../../archive/2026-03/21/")
 
     def test_item_ranking_prefers_multi_source_topic_support_inside_a_section(self) -> None:
         report = {

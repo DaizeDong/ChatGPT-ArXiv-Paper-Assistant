@@ -1,11 +1,9 @@
-import { Link } from "react-router-dom";
-
 export function CrossSiteSwitch({ href, label }: { href: string; label: string }) {
   return (
     <div className="cross-site-switch">
-      <Link className="cross-site-switch-link" to={href}>
+      <a className="cross-site-switch-link" href={href}>
         {label}
-      </Link>
+      </a>
     </div>
   );
 }

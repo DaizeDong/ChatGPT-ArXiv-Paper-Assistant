@@ -25,18 +25,6 @@ jobs:
         with:
           python-version: "3.12"
 
-      - name: Checkout to `auto_update` Branch
-        run: |
-          git fetch origin
-          if ! git show-ref --verify --quiet refs/remotes/origin/auto_update; then
-            echo "auto_update branch does not exist. Creating it from main."
-            git checkout -b auto_update origin/main
-            git push origin auto_update
-          else
-            echo "auto_update branch exists. Checking out to it."
-            git checkout -b auto_update origin/auto_update
-          fi
-
       - name: Download artifact
         id: download-artifact
         uses: dawidd6/action-download-artifact@v19
@@ -44,21 +32,21 @@ jobs:
           workflow: cron_runs.yaml
           workflow_conclusion: success
           name: arxiv-scanner-outputs
-          path: out/
+          path: artifact_out/
 
-      - name: Verify /out directory and contents
+      - name: Verify artifact /out directory and contents
         run: |
-          if [ -d "out" ] && [ "$(ls -A out)" ]; then
-              echo "Contents in /out:"
-              ls -la out/
+          if [ -d "artifact_out/out" ] && [ "$(ls -A artifact_out/out)" ]; then
+              echo "Contents in artifact_out/out:"
+              ls -la artifact_out/out/
           else
-              echo "/out directory is empty or does not exist. Aborting."
+              echo "artifact_out/out directory is empty or does not exist. Aborting."
               exit 1
           fi
 
       - name: Remove CI-only site build outputs
         run: |
-          rm -rf out/site out/site_html out/site_preview
+          rm -rf artifact_out/out/site artifact_out/out/site_html artifact_out/out/site_preview
 
       - name: Install dependencies
         run: |
@@ -71,7 +59,24 @@ jobs:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
           OPENAI_BASE_URL: ${{ secrets.OPENAI_BASE_URL }}
         run: |
-          python scripts/generate_monthly_summaries.py --output-root out
+          python scripts/generate_monthly_summaries.py --output-root artifact_out/out
+
+      - name: Checkout to `auto_update` Branch
+        run: |
+          git fetch origin
+          if ! git show-ref --verify --quiet refs/remotes/origin/auto_update; then
+            echo "auto_update branch does not exist. Creating it from main."
+            git checkout -b auto_update origin/main
+            git push origin auto_update
+          else
+            echo "auto_update branch exists. Checking out to it."
+            git checkout -b auto_update origin/auto_update
+          fi
+
+      - name: Replace tracked /out with processed artifact contents
+        run: |
+          rm -rf out
+          mv artifact_out/out out
 
 #      - name: Debug via Browser
 #        uses: fawazahmed0/action-debug-vscode@main

@@ -172,10 +172,10 @@ def _paper_routes_for_day(date_str: str, paper_archive_routes: dict[str, set[str
     month = date_str[:7]
     year = date_str[:4]
     return {
-        "home": "/",
-        "day": f"/archive/{month}/{date_str[8:10]}/" if date_str in paper_archive_routes["dates"] else None,
-        "month": f"/archive/{month}/" if month in paper_archive_routes["months"] else None,
-        "year": f"/archive/{year}/" if year in paper_archive_routes["years"] else None,
+        "home": "../../",
+        "day": f"../../archive/{month}/{date_str[8:10]}/" if date_str in paper_archive_routes["dates"] else None,
+        "month": f"../../archive/{month}/" if month in paper_archive_routes["months"] else None,
+        "year": f"../../archive/{year}/" if year in paper_archive_routes["years"] else None,
     }
 
 
@@ -183,17 +183,17 @@ def _paper_routes_for_month(month: str, paper_archive_routes: dict[str, set[str]
     paper_archive_routes = paper_archive_routes or {"dates": set(), "months": set(), "years": set()}
     year = month[:4]
     return {
-        "home": "/",
-        "month": f"/archive/{month}/" if month in paper_archive_routes["months"] else None,
-        "year": f"/archive/{year}/" if year in paper_archive_routes["years"] else None,
+        "home": "../../",
+        "month": f"../../archive/{month}/" if month in paper_archive_routes["months"] else None,
+        "year": f"../../archive/{year}/" if year in paper_archive_routes["years"] else None,
     }
 
 
 def _paper_routes_for_year(year: str, paper_archive_routes: dict[str, set[str]] | None) -> dict[str, str | None]:
     paper_archive_routes = paper_archive_routes or {"dates": set(), "months": set(), "years": set()}
     return {
-        "home": "/",
-        "year": f"/archive/{year}/" if year in paper_archive_routes["years"] else None,
+        "home": "../../",
+        "year": f"../../archive/{year}/" if year in paper_archive_routes["years"] else None,
     }
 
 

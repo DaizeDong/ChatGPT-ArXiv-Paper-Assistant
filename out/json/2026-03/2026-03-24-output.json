@@ -1,0 +1,784 @@
+{
+    "2603.21862": {
+        "SCORE": 18,
+        "ARXIVID": "2603.21862",
+        "COMMENT": "MoE architecture mechanism: derives holistic scaling laws and fairness constraints to map compute budgets to optimal MoE configurations.",
+        "RELEVANCE": 10,
+        "NOVELTY": 8,
+        "authors": [
+            "Weilin Wan",
+            "Jingtao Han",
+            "Weizhong Zhang",
+            "Cheng Jin"
+        ],
+        "title": "Holistic Scaling Laws for Optimal Mixture-of-Experts Architecture Optimization",
+        "abstract": "Scaling laws for Large Language Models govern macroscopic resource allocation, yet translating them into precise Mixture-of-Experts (MoE) architectural configurations remains an open problem due to the combinatorially vast design space. Existing MoE scaling studies are constrained by experimental budgets to either augment scaling formulas with extra MoE variables, risking unreliable fits, or fix all non-MoE factors, ignoring global interactions. We propose a reusable framework for holistic MoE architectural optimization that bridges this gap. We first show that FLOPs per token alone is an inadequate fairness metric for MoE models because differing computational densities across layer types can inflate parameters without proportional compute cost, and establish a joint constraint triad of FLOPs per token, active parameters, and total parameters. We then reduce the 16-dimensional architectural search space to two sequential low-dimensional phases through algebraic constraints and a rank-preserving property of the hidden dimension. Validated across hundreds of MoE models spanning six orders of magnitude in compute, our framework yields robust scaling laws that map any compute budget to a complete, optimal MoE architecture. A key finding is that the near-optimal configuration band widens with scale, giving practitioners quantitative flexibility to balance scaling law recommendations against infrastructure constraints.",
+        "arxiv_id": "2603.21862"
+    },
+    "2603.21502": {
+        "SCORE": 17,
+        "ARXIVID": "2603.21502",
+        "COMMENT": "Representation learning theory: develops quotient-space geometry to remove parameter symmetries and analyze intrinsic curvature and implicit bias.",
+        "RELEVANCE": 9,
+        "NOVELTY": 8,
+        "authors": [
+            "Hang-Cheng Dong",
+            "Pengcheng Cheng"
+        ],
+        "title": "Quotient Geometry, Effective Curvature, and Implicit Bias in Simple Shallow Neural Networks",
+        "abstract": "Overparameterized shallow neural networks admit substantial parameter redundancy: distinct parameter vectors may represent the same predictor due to hidden-unit permutations, rescalings, and related symmetries. As a result, geometric quantities computed directly in the ambient Euclidean parameter space can reflect artifacts of representation rather than intrinsic properties of the predictor. In this paper, we develop a differential-geometric framework for analyzing simple shallow networks through the quotient space obtained by modding out parameter symmetries on a regular set. We first characterize the symmetry and quotient structure of regular shallow-network parameters and show that the finite-sample realization map induces a natural metric on the quotient manifold. This leads to an effective notion of curvature that removes degeneracy along symmetry orbits and yields a symmetry-reduced Hessian capturing intrinsic local geometry. We then study gradient flows on the quotient and show that only the horizontal component of parameter motion contributes to first-order predictor evolution, while the vertical component corresponds purely to gauge variation. Finally, we formulate an implicit-bias viewpoint at the quotient level, arguing that meaningful complexity should be assigned to predictor classes rather than to individual parameter representatives. Our experiments confirm that ambient flatness is representation-dependent, that local dynamics are better organized by quotient-level curvature summaries, and that in underdetermined regimes, implicit bias is most naturally described in quotient coordinates.",
+        "arxiv_id": "2603.21502"
+    },
+    "2603.22446": {
+        "SCORE": 17,
+        "ARXIVID": "2603.22446",
+        "COMMENT": "Training dynamics: token-level analysis shows RLVR gains come from sparse critical distribution shifts and tests targeted interventions.",
+        "RELEVANCE": 9,
+        "NOVELTY": 8,
+        "authors": [
+            "Haoming Meng",
+            "Kexin Huang",
+            "Shaohang Wei",
+            "Chiyu Ma",
+            "Shuo Yang",
+            "Xue Wang",
+            "Guoyin Wang",
+            "Bolin Ding",
+            "Jingren Zhou"
+        ],
+        "title": "Sparse but Critical: A Token-Level Analysis of Distributional Shifts in RLVR Fine-Tuning of LLMs",
+        "abstract": "Reinforcement learning with verifiable rewards (RLVR) has significantly improved reasoning in large language models (LLMs), yet the token-level mechanisms underlying these improvements remain unclear. We present a systematic empirical study of RLVR's distributional effects organized around three main analyses: (1) token-level characterization of distributional shifts between base and RL models, (2) the impact of token-level distributional shifts on sequence-level reasoning performance through cross-sampling interventions, and (3) fine-grained mechanics of these shifts at the token level. We find that RL fine-tuning induces highly sparse and targeted changes, with only a small fraction of token distributions exhibiting meaningful divergence between the base and RL policies. We further characterize the structure and evolution of these shifts through analyses of token entropy, positional concentration, and reallocation of probability mass. To assess the functional importance of these sparse changes, we conduct cross-sampling experiments that selectively swap token choices between the base and RL models with varying intervention budgets. We show that inserting only a small fraction of RL-sampled tokens into base generations progressively recovers RL performance gains, while injecting a similarly small number of base token choices into otherwise RL-generated sequences collapses performance to base levels, isolating a small set of token-level decisions directly responsible for RLVR's performance gains. Finally, we explore divergence-weighted variants of the advantage signal as a diagnostic intervention, finding that they can yield improvements over baselines. Together, our results shed light on the distributional changes induced by RLVR and provide a fine-grained, token-level lens for understanding RLVR fine-tuning as a targeted refinement process.",
+        "arxiv_id": "2603.22446"
+    },
+    "2603.21676": {
+        "SCORE": 17,
+        "ARXIVID": "2603.21676",
+        "COMMENT": "Architectural mechanism for depth-recurrent transformers that decouple parameter count from inference-time reasoning depth, with explicit stability design.",
+        "RELEVANCE": 9,
+        "NOVELTY": 8,
+        "authors": [
+            "Hung-Hsuan Chen"
+        ],
+        "title": "Thinking Deeper, Not Longer: Depth-Recurrent Transformers for Compositional Generalization",
+        "abstract": "Standard Transformers have a fixed computational depth, fundamentally limiting their ability to generalize to tasks requiring variable-depth reasoning, such as multi-hop graph traversal or nested logic. We propose a depth-recurrent Transformer that decouples computational depth from parameter count by iteratively applying a shared-weight Transformer block in latent space -- enabling the model to trade recurrence steps for deeper reasoning at inference time. Our architecture incorporates three mechanisms to make deep recurrence (20+ steps) stable: (1) a silent thinking objective that supervises only the final output, forcing genuine multi-step reasoning rather than intermediate heuristic shortcuts; (2) LayerScale initialization to protect fragile reasoning states from untrained layer noise; and (3) an identity-biased recurrence that creates a gradient highway across many steps. We evaluate on three compositional reasoning domains with decreasing inductive biases: graph reachability (strict adjacency masking), nested boolean logic (relative positioning), and unstructured relational text (where sequence position provides no structural hints). Across all tasks, we observe a clear \\emph{computational frontier} -- a boundary where performance transitions from chance to near-perfect as thinking steps scale with task complexity. Moreover, these tasks reveal qualitatively different generalization behaviors: precise but brittle (graph), approximate but robust (logic), and autonomous latent routing without structural hints (text). This progression illuminates how the interplay between a task-invariant recurrent reasoning core and task-specific perceptual interfaces shapes out-of-distribution (OOD) generalization, offering a mechanistic perspective on vertical chain-of-thought that complements the prevailing horizontal token-generation paradigm.",
+        "arxiv_id": "2603.21676"
+    },
+    "2603.22473": {
+        "SCORE": 17,
+        "ARXIVID": "2603.22473",
+        "COMMENT": "Functional ablation study of hybrid attention-SSM/linear-attention LMs revealing component specialization, positional importance, and redundancy patterns.",
+        "RELEVANCE": 9,
+        "NOVELTY": 8,
+        "authors": [
+            "Hector Borobia",
+            "Elies Segu\u00ed-Mas",
+            "Guillermina Tormo-Carb\u00f3"
+        ],
+        "title": "Functional Component Ablation Reveals Specialization Patterns in Hybrid Language Model Architectures",
+        "abstract": "Hybrid language models combining attention with state space models (SSMs) or linear attention offer improved efficiency, but whether both components are genuinely utilized remains unclear. We present a functional component ablation framework applied to two sub-1B hybrid models -- Qwen3.5-0.8B (sequential: Gated DeltaNet + softmax attention) and Falcon-H1-0.5B (parallel: Mamba-2 + attention) -- with a pure Transformer control (Qwen2.5-0.5B). Through group ablations, layer-wise sweeps, positional ablations, matched random controls, and perplexity analysis across five benchmarks, we establish four findings: (1) both component types are essential and neither is bypassed; (2) the alternative component (linear attention or SSM) is the primary language modeling backbone, causing >35,000x perplexity degradation when removed versus ~82x for attention; (3) component importance follows a positional gradient, with early layers being disproportionately critical; and (4) hybrid architectures exhibit 20-119x greater resilience to random layer removal than pure Transformers, revealing built-in functional redundancy between component types. These results provide actionable guidance for hybrid model compression, architecture design, and fault-tolerant deployment.",
+        "arxiv_id": "2603.22473"
+    },
+    "2603.22273": {
+        "SCORE": 17,
+        "ARXIVID": "2603.22273",
+        "COMMENT": "New training paradigm that decouples exploration from policy optimization using uncertainty-guided tree search for hard exploration.",
+        "RELEVANCE": 8,
+        "NOVELTY": 9,
+        "authors": [
+            "Zakaria Mhammedi",
+            "James Cohan"
+        ],
+        "title": "Decoupling Exploration and Policy Optimization: Uncertainty Guided Tree Search for Hard Exploration",
+        "abstract": "The process of discovery requires active exploration -- the act of collecting new and informative data. However, efficient autonomous exploration remains a major unsolved problem. The dominant paradigm addresses this challenge by using Reinforcement Learning (RL) to train agents with intrinsic motivation, maximizing a composite objective of extrinsic and intrinsic rewards. We suggest that this approach incurs unnecessary overhead: while policy optimization is necessary for precise task execution, employing such machinery solely to expand state coverage may be inefficient. In this paper, we propose a new paradigm that explicitly separates exploration from exploitation and bypasses RL during the exploration phase. Our method uses a tree-search strategy inspired by the Go-With-The-Winner algorithm, paired with a measure of epistemic uncertainty to systematically drive exploration. By removing the overhead of policy optimization, our approach explores an order of magnitude more efficiently than standard intrinsic motivation baselines on hard Atari benchmarks. Further, we demonstrate that the discovered trajectories can be distilled into deployable policies using existing supervised backward learning algorithms, achieving state-of-the-art scores by a wide margin on Montezuma's Revenge, Pitfall!, and Venture without relying on domain-specific knowledge. Finally, we demonstrate the generality of our framework in high-dimensional continuous action spaces by solving the MuJoCo Adroit dexterous manipulation and AntMaze tasks in a sparse-reward setting, directly from image observations and without expert demonstrations or offline datasets. To the best of our knowledge, this has not been achieved before.",
+        "arxiv_id": "2603.22273"
+    },
+    "2603.22370": {
+        "SCORE": 16,
+        "ARXIVID": "2603.22370",
+        "COMMENT": "Compression and efficient inference: introduces NVFP4-specific adaptive rounding and format-aligned fine-tuning for ultra-low-bit quantization.",
+        "RELEVANCE": 9,
+        "NOVELTY": 7,
+        "authors": [
+            "Hanglin Li",
+            "Shuchang Tian",
+            "Chen Lin",
+            "Zhiyong Zhao",
+            "Kun Zhan"
+        ],
+        "title": "FAAR: Format-Aware Adaptive Rounding for NVFP4",
+        "abstract": "Deploying large language models (LLMs) on edge devices requires extremely low-bit quantization. Ultra-low precision formats such as NVFP4 offer a promising solution for reducing memory footprint and accelerating computation. However, existing quantization methods typically rely on conventional rounding strategies and fail to account for the non-uniformity of the NVFP4 numerical grid, resulting in suboptimal rounding decisions and amplified quantization errors. To address this, we propose Format-Aware Adaptive Rounding (FAAR), a learnable rounding strategy tailored for the NVFP4 format. Unlike conventional quantization paradigms, FAAR explicitly incorporates the non-uniform NVFP4 grid into the optimization process. By adaptively adjusting rounding decisions guided by loss gradients, our method effectively approximates the theoretically optimal quantization. To complement FAAR, we introduce a 2-stages Format Alignment (2FA) fine-tuning scheme that aligns LLM parameters layer-by-layer to the NVFP4 numerical space, further narrowing the performance gap. Remarkably, this learnable optimization incurs a minimal training overhead of only 4 GPU hours on Llama3-1B. Extensive experiments demonstrate the effectiveness of our approach. Compared with Round-to-Nearest (RTN), our method reduces perplexity on WikiText-2 from 14.28 to 12.60 on Llama3-1B and from 23.06 to 21.27 on Qwen3-1.7B. Additionally, our method consistently outperforms state-of-the-art approaches across various zero-shot downstream tasks.",
+        "arxiv_id": "2603.22370"
+    },
+    "2603.22286": {
+        "SCORE": 16,
+        "ARXIVID": "2603.22286",
+        "COMMENT": "Content-aware activation caching for diffusion transformers with motion-adaptive reuse and warping, targeting efficient inference without retraining.",
+        "RELEVANCE": 9,
+        "NOVELTY": 7,
+        "authors": [
+            "Umair Nawaz",
+            "Ahmed Heakl",
+            "Ufaq Khan",
+            "Abdelrahman Shaker",
+            "Salman Khan",
+            "Fahad Shahbaz Khan"
+        ],
+        "title": "WorldCache: Content-Aware Caching for Accelerated Video World Models",
+        "abstract": "Diffusion Transformers (DiTs) power high-fidelity video world models but remain computationally expensive due to sequential denoising and costly spatio-temporal attention. Training-free feature caching accelerates inference by reusing intermediate activations across denoising steps; however, existing methods largely rely on a Zero-Order Hold assumption i.e., reusing cached features as static snapshots when global drift is small. This often leads to ghosting artifacts, blur, and motion inconsistencies in dynamic scenes. We propose \\textbf{WorldCache}, a Perception-Constrained Dynamical Caching framework that improves both when and how to reuse features. WorldCache introduces motion-adaptive thresholds, saliency-weighted drift estimation, optimal approximation via blending and warping, and phase-aware threshold scheduling across diffusion steps. Our cohesive approach enables adaptive, motion-consistent feature reuse without retraining. On Cosmos-Predict2.5-2B evaluated on PAI-Bench, WorldCache achieves \\textbf{2.3$\\times$} inference speedup while preserving \\textbf{99.4\\%} of baseline quality, substantially outperforming prior training-free caching approaches. Our code can be accessed on \\href{https://umair1221.github.io/World-Cache/}{World-Cache}.",
+        "arxiv_id": "2603.22286"
+    },
+    "2603.22276": {
+        "SCORE": 16,
+        "ARXIVID": "2603.22276",
+        "COMMENT": "Compression and efficient inference: introduces a memory-saving factored norm and fused kernels that make high-rank DoRA feasible without materializing dense BA products.",
+        "RELEVANCE": 9,
+        "NOVELTY": 7,
+        "authors": [
+            "Alexandra Zelenin",
+            "Alexandra Zhuravlyova"
+        ],
+        "title": "Scaling DoRA: High-Rank Adaptation via Factored Norms and Fused Kernels",
+        "abstract": "Weight-Decomposed Low-Rank Adaptation (DoRA) extends LoRA by decoupling weight magnitude from direction, but its forward pass requires the row-wise norm of W + sBA, a computation that every major framework we surveyed implements by materializing the dense [d_out, d_in] product BA. At d_in = 8192 and rank r = 384, a single module's norm requires about 512 MB of transient working memory in bf16, making high-rank DoRA costly and often infeasible on common single-GPU setups once hundreds of adapted modules and checkpointing are involved. We present two systems contributions. A factored norm decomposes the squared norm into base, cross, and Gram terms computable through O(d_out r + r^2) intermediates, eliminating the dense product. Fused Triton kernels collapse the four-kernel DoRA composition into a single pass, reducing memory traffic by about 4x and using a numerically stable form that avoids catastrophic cancellation in the near-unity rescaling regime where magnitude scales concentrate in practice. Across six 8-32B vision-language models (VLMs) on three NVIDIA GPUs (RTX 6000 PRO, H200, B200) at r = 384 in bf16, the fused implementation is 1.5-2.0x faster than Hugging Face PEFT's DoRA implementation for inference and 1.5-1.9x faster for gradient computation (optimizer step excluded), with up to 7 GB lower peak VRAM. Microbenchmarks on six GPUs spanning four architecture generations (L40S, A100, RTX 6000 PRO, H200, B200, B300) confirm 1.5-2.7x compose-kernel speedup. Final-logit cosine similarity exceeds 0.9999 across all model/GPU pairs, and multi-seed training curves match within 7.1 x 10^-4 mean per-step loss delta over 2000 steps.",
+        "arxiv_id": "2603.22276"
+    },
+    "2603.21705": {
+        "SCORE": 16,
+        "ARXIVID": "2603.21705",
+        "COMMENT": "Training dynamics and model merging: gives a Fisher/Hessian-based theory for layer-adaptive merging and a data-free merging method.",
+        "RELEVANCE": 8,
+        "NOVELTY": 8,
+        "authors": [
+            "Tian Xia"
+        ],
+        "title": "Data-Free Layer-Adaptive Merging via Fisher Information for Long-to-Short Reasoning LLMs",
+        "abstract": "Model merging has emerged as a practical approach to combine capabilities of specialized large language models (LLMs) without additional training. In the Long-to-Short (L2S) scenario, merging a base model with a long-chain-of-thought reasoning model aims to preserve reasoning accuracy while reducing output length. Existing methods rely on Task Arithmetic and its variants, which implicitly assume that model outputs vary linearly with the merging coefficient -- an assumption we show is systematically violated in L2S settings. We provide the first theoretical justification for layer-adaptive merging: we prove that merging error is bounded by a term proportional to the per-layer Hessian norm (Proposition~1), and establish that the Fisher Information Matrix (FIM) is a principled, computable proxy for this bound via the Fisher-Hessian equivalence at local optima. Building on this theory, we propose \\textbf{FIM-Merging}, which computes diagonal FIM using only random token inputs (no domain-specific calibration data required) and uses it to assign per-layer merging coefficients. On the 7B L2S benchmark, FIM-TIES achieves state-of-the-art performance on five out of six evaluation benchmarks, including a \\textbf{+6.2} point gain on MATH500 over ACM-TIES (90.2 vs.\\ 84.0), while requiring no calibration data. On the 1.5B benchmark, FIM-TIES achieves an average accuracy of \\textbf{47.3}, surpassing the previous best ACM-TIES (43.3) by \\textbf{+3.9} points, while reducing average response length by \\textbf{91.9\\%} relative to the long-CoT model. Our framework also provides a unified theoretical explanation for why existing layer-adaptive methods such as ACM empirically outperform uniform merging.",
+        "arxiv_id": "2603.21705"
+    },
+    "2603.21607": {
+        "SCORE": 16,
+        "ARXIVID": "2603.21607",
+        "COMMENT": "Mechanistic understanding: identifies an induction-head/entropy-neuron interaction in RAG and uses it for uncertainty gating.",
+        "RELEVANCE": 8,
+        "NOVELTY": 8,
+        "authors": [
+            "Alexandra Bazarova",
+            "Andrei Volodichev",
+            "Daria Kotova",
+            "Alexey Zaytsev"
+        ],
+        "title": "INTRYGUE: Induction-Aware Entropy Gating for Reliable RAG Uncertainty Estimation",
+        "abstract": "While retrieval-augmented generation (RAG) significantly improves the factual reliability of LLMs, it does not eliminate hallucinations, so robust uncertainty quantification (UQ) remains essential. In this paper, we reveal that standard entropy-based UQ methods often fail in RAG settings due to a mechanistic paradox. An internal \"tug-of-war\" inherent to context utilization appears: while induction heads promote grounded responses by copying the correct answer, they collaterally trigger the previously established \"entropy neurons\". This interaction inflates predictive entropy, causing the model to signal false uncertainty on accurate outputs. To address this, we propose INTRYGUE (Induction-Aware Entropy Gating for Uncertainty Estimation), a mechanistically grounded method that gates predictive entropy based on the activation patterns of induction heads. Evaluated across four RAG benchmarks and six open-source LLMs (4B to 13B parameters), INTRYGUE consistently matches or outperforms a wide range of UQ baselines. Our findings demonstrate that hallucination detection in RAG benefits from combining predictive uncertainty with interpretable, internal signals of context utilization.",
+        "arxiv_id": "2603.21607"
+    },
+    "2603.21576": {
+        "SCORE": 16,
+        "ARXIVID": "2603.21576",
+        "COMMENT": "Memory-efficient inference systems: targets the KV-cache memory wall with O(1) photonic block selection for long-context decoding.",
+        "RELEVANCE": 8,
+        "NOVELTY": 8,
+        "authors": [
+            "Hyoseok Park",
+            "Yeonsang Park"
+        ],
+        "title": "PRISM: Breaking the O(n) Memory Wall in Long-Context LLM Inference via O(1) Photonic Block Selection",
+        "abstract": "Long-context LLM inference is bottlenecked not by compute but by the O(n) memory bandwidth cost of scanning the KV cache at every decode step -- a wall that no amount of arithmetic scaling can break. Recent photonic accelerators have demonstrated impressive throughput for dense attention computation; however, these approaches inherit the same O(n) memory scaling as electronic attention when applied to long contexts. We observe that the real leverage point is the coarse block-selection step: a memory-bound similarity search that determines which KV blocks to fetch. We identify, for the first time, that this task is structurally matched to the photonic broadcast-and-weight paradigm -- the query fans out to all candidates via passive splitting, signatures are quasi-static (matching electro-optic MRR programming), and only rank order matters (relaxing precision to 4-6 bits). Crucially, the photonic advantage grows with context length: as N increases, the electronic scan cost rises linearly while the photonic evaluation remains O(1). We instantiate this insight in PRISM (Photonic Ranking via Inner-product Similarity with Microring weights), a thin-film lithium niobate (TFLN) similarity engine. Hardware-impaired needle-in-a-haystack evaluation on Qwen2.5-7B confirms 100% accuracy from 4K through 64K tokens at k=32, with 16x traffic reduction at 64K context. PRISM achieves a four-order-of-magnitude energy advantage over GPU baselines at practical context lengths (n >= 4K).",
+        "arxiv_id": "2603.21576"
+    },
+    "2603.22117": {
+        "SCORE": 16,
+        "ARXIVID": "2603.22117",
+        "COMMENT": "Training-dynamics study identifying the direction of RLVR-induced log-probability updates as the key sparse signal, with test-time and training-time exploitation.",
+        "RELEVANCE": 8,
+        "NOVELTY": 8,
+        "authors": [
+            "Kexin Huang",
+            "Haoming Meng",
+            "Junkang Wu",
+            "Jinda Lu",
+            "Chiyu Ma",
+            "Ziqian Chen",
+            "Xue Wang",
+            "Bolin Ding",
+            "Jiancan Wu",
+            "Xiang Wang",
+            "Xiangnan He",
+            "Guoyin Wang",
+            "Jingren Zhou"
+        ],
+        "title": "On the Direction of RLVR Updates for LLM Reasoning: Identification and Exploitation",
+        "abstract": "Reinforcement learning with verifiable rewards (RLVR) has substantially improved the reasoning capabilities of large language models. While existing analyses identify that RLVR-induced changes are sparse, they primarily focus on the \\textbf{magnitude} of these updates, largely overlooking their \\textbf{direction}. In this work, we argue that the direction of updates is a more critical lens for understanding RLVR's effects, which can be captured by the signed, token-level log probability difference $\u0394\\log p$ between the base and final RLVR models. Through statistical analysis and token-replacement interventions, we demonstrate that $\u0394\\log p$ more effectively identifies sparse, yet reasoning-critical updates than magnitude-based metrics (\\eg divergence or entropy). Building on this insight, we propose two practical applications: (1) a \\textit{test-time extrapolation} method that amplifies the policy along the learned $\u0394\\log p$ direction to improve reasoning accuracy without further training; (2) a \\textit{training-time reweighting} method that focuses learning on low-probability (corresponding to higher $\u0394\\log p$) tokens, which improves reasoning performance across models and benchmarks. Our work establishes the direction of change as a key principle for analyzing and improving RLVR.",
+        "arxiv_id": "2603.22117"
+    },
+    "2603.22283": {
+        "SCORE": 16,
+        "ARXIVID": "2603.22283",
+        "COMMENT": "Unified single-stage training of tokenizer and latent denoiser via shared generative encoder, directly changing latent-model training structure.",
+        "RELEVANCE": 8,
+        "NOVELTY": 8,
+        "authors": [
+            "Shivam Duggal",
+            "Xingjian Bai",
+            "Zongze Wu",
+            "Richard Zhang",
+            "Eli Shechtman",
+            "Antonio Torralba",
+            "Phillip Isola",
+            "William T. Freeman"
+        ],
+        "title": "End-to-End Training for Unified Tokenization and Latent Denoising",
+        "abstract": "Latent diffusion models (LDMs) enable high-fidelity synthesis by operating in learned latent spaces. However, training state-of-the-art LDMs requires complex staging: a tokenizer must be trained first, before the diffusion model can be trained in the frozen latent space. We propose UNITE - an autoencoder architecture for unified tokenization and latent diffusion. UNITE consists of a Generative Encoder that serves as both image tokenizer and latent generator via weight sharing. Our key insight is that tokenization and generation can be viewed as the same latent inference problem under different conditioning regimes: tokenization infers latents from fully observed images, whereas generation infers them from noise together with text or class conditioning. Motivated by this, we introduce a single-stage training procedure that jointly optimizes both tasks via two forward passes through the same Generative Encoder. The shared parameters enable gradients to jointly shape the latent space, encouraging a \"common latent language\". Across image and molecule modalities, UNITE achieves near state of the art performance without adversarial losses or pretrained encoders (e.g., DINO), reaching FID 2.12 and 1.73 for Base and Large models on ImageNet 256 x 256. We further analyze the Generative Encoder through the lenses of representation alignment and compression. These results show that single stage joint training of tokenization & generation from scratch is feasible.",
+        "arxiv_id": "2603.22283"
+    },
+    "2603.21461": {
+        "SCORE": 16,
+        "ARXIVID": "2603.21461",
+        "COMMENT": "Data-efficient preference alignment via prompt-conditional SAE steering at inference time, offering mechanistic control without weight updates.",
+        "RELEVANCE": 8,
+        "NOVELTY": 8,
+        "authors": [
+            "James Wedgwood",
+            "Aashiq Muhamed",
+            "Mona T. Diab",
+            "Virginia Smith"
+        ],
+        "title": "DSPA: Dynamic SAE Steering for Data-Efficient Preference Alignment",
+        "abstract": "Preference alignment is usually achieved by weight-updating training on preference data, which adds substantial alignment-stage compute and provides limited mechanistic visibility. We propose Dynamic SAE Steering for Preference Alignment (DSPA), an inference-time method that makes sparse autoencoder (SAE) steering prompt-conditional. From preference triples, DSPA computes a conditional-difference map linking prompt features to generation-control features; during decoding, it modifies only token-active latents, without base-model weight updates. Across Gemma-2-2B/9B and Qwen3-8B, DSPA improves MT-Bench and is competitive on AlpacaEval while preserving multiple-choice accuracy. Under restricted preference data, DSPA remains robust and can rival the two-stage RAHF-SCIT pipeline while requiring up to $4.47\\times$ fewer alignment-stage FLOPs. Finally, we audit the SAE features DSPA modifies, finding that preference directions are dominated by discourse and stylistic signals, and provide theory clarifying the conditional-difference map estimate and when top-$k$ ablation is principled.",
+        "arxiv_id": "2603.21461"
+    },
+    "2603.22364": {
+        "SCORE": 16,
+        "ARXIVID": "2603.22364",
+        "COMMENT": "Theoretical result equating classifier-free guidance with a likelihood-ratio alignment objective, giving a mechanistic account of conditional diffusion guidance.",
+        "RELEVANCE": 8,
+        "NOVELTY": 8,
+        "authors": [
+            "Xiang Li",
+            "Yixuan Jia",
+            "Xiao Li",
+            "Jeffrey A. Fessler",
+            "Rongrong Wang",
+            "Qing Qu"
+        ],
+        "title": "MCLR: Improving Conditional Modeling in Visual Generative Models via Inter-Class Likelihood-Ratio Maximization and Establishing the Equivalence between Classifier-Free Guidance and Alignment Objectives",
+        "abstract": "Diffusion models have achieved state-of-the-art performance in generative modeling, but their success often relies heavily on classifier-free guidance (CFG), an inference-time heuristic that modifies the sampling trajectory. From a theoretical perspective, diffusion models trained with standard denoising score matching (DSM) are expected to recover the target data distribution, raising the question of why inference-time guidance is necessary in practice. In this work, we ask whether the DSM training objective can be modified in a principled manner such that standard reverse-time sampling, without inference-time guidance, yields effects comparable to CFG. We identify insufficient inter-class separation as a key limitation of standard diffusion models. To address this, we propose MCLR, a principled alignment objective that explicitly maximizes inter-class likelihood-ratios during training. Models fine-tuned with MCLR exhibit CFG-like improvements under standard sampling, achieving comparable qualitative and quantitative gains without requiring inference-time guidance. Beyond empirical benefits, we provide a theoretical result showing that the CFG-guided score is exactly the optimal solution to a weighted MCLR objective. This establishes a formal equivalence between classifier-free guidance and alignment-based objectives, offering a mechanistic interpretation of CFG.",
+        "arxiv_id": "2603.22364"
+    },
+    "2603.22248": {
+        "SCORE": 16,
+        "ARXIVID": "2603.22248",
+        "COMMENT": "First efficiency theory for confidence-based decoding in diffusion language models, linking expected iterations to target entropy.",
+        "RELEVANCE": 8,
+        "NOVELTY": 8,
+        "authors": [
+            "Changxiao Cai",
+            "Gen Li"
+        ],
+        "title": "Confidence-Based Decoding is Provably Efficient for Diffusion Language Models",
+        "abstract": "Diffusion language models (DLMs) have emerged as a promising alternative to autoregressive (AR) models for language modeling, allowing flexible generation order and parallel generation of multiple tokens. However, this flexibility introduces a challenge absent in AR models: the \\emph{decoding strategy} -- which determines the order and number of tokens generated at each iteration -- critically affects sampling efficiency. Among decoding strategies explored in practice, confidence-based methods, which adaptively select which and how many tokens to unmask based on prediction confidence, have shown strong empirical performance. Despite this success, our theoretical understanding of confidence-based decoding remains limited. In this work, we develop the first theoretical analysis framework for confidence-based decoding in DLMs. We focus on an entropy sum-based strategy that continues unmasking tokens within each iteration until the cumulative entropy exceeds a threshold, and show that it achieves $\\varepsilon$-accurate sampling in KL divergence with an expected number of iterations $\\widetilde O(H(X_0)/\\varepsilon)$, where $H(X_0)$ denotes the entropy of the target data distribution. Notably, this strategy yields substantial sampling acceleration when the data distribution has low entropy relative to the sequence length, while automatically adapting to the intrinsic complexity of data without requiring prior knowledge or hyperparameter tuning. Overall, our results provide a theoretical foundation for confidence-based decoding and may inform the design of more efficient decoding strategies for DLMs.",
+        "arxiv_id": "2603.22248"
+    },
+    "2603.22161": {
+        "SCORE": 16,
+        "ARXIVID": "2603.22161",
+        "COMMENT": "Mechanistic evidence for an internal confidence representation causally steering LLM abstention behavior fits representation structure and model behavior analysis.",
+        "RELEVANCE": 8,
+        "NOVELTY": 8,
+        "authors": [
+            "Dharshan Kumaran",
+            "Nathaniel Daw",
+            "Simon Osindero",
+            "Petar Velickovic",
+            "Viorica Patraucean"
+        ],
+        "title": "Causal Evidence that Language Models use Confidence to Drive Behavior",
+        "abstract": "Metacognition -- the ability to assess one's own cognitive performance -- is documented across species, with internal confidence estimates serving as a key signal for adaptive behavior. While confidence can be extracted from Large Language Model (LLM) outputs, whether models actively use these signals to regulate behavior remains a fundamental question. We investigate this through a four-phase abstention paradigm.Phase 1 established internal confidence estimates in the absence of an abstention option. Phase 2 revealed that LLMs apply implicit thresholds to these estimates when deciding to answer or abstain. Confidence emerged as the dominant predictor of behavior, with effect sizes an order of magnitude larger than knowledge retrieval accessibility (RAG scores) or surface-level semantic features. Phase 3 provided causal evidence through activation steering: manipulating internal confidence signals correspondingly shifted abstention rates. Finally, Phase 4 demonstrated that models can systematically vary abstention policies based on instructed thresholds.Our findings indicate that abstention arises from the joint operation of internal confidence representations and threshold-based policies, mirroring the two-stage metacognitive control found in biological systems. This capacity is essential as LLMs transition into autonomous agents that must recognize their own uncertainty to decide when to act or seek help.",
+        "arxiv_id": "2603.22161"
+    },
+    "2603.21621": {
+        "SCORE": 16,
+        "ARXIVID": "2603.21621",
+        "COMMENT": "Reformulating PPO in path space for diffusion/flow policies is a foundational training-objective contribution for generative policies.",
+        "RELEVANCE": 8,
+        "NOVELTY": 8,
+        "authors": [
+            "Yuehu Gong",
+            "Zeyuan Wang",
+            "Yulin Chen",
+            "Yanwei Fu"
+        ],
+        "title": "Proximal Policy Optimization in Path Space: A Schr\u00f6dinger Bridge Perspective",
+        "abstract": "On-policy reinforcement learning with generative policies is promising but remains underexplored. A central challenge is that proximal policy optimization (PPO) is traditionally formulated in terms of action-space probability ratios, whereas diffusion- and flow-based policies are more naturally represented as trajectory-level generative processes. In this work, we propose GSB-PPO, a path-space formulation of generative PPO inspired by the Generalized Schr\u00f6dinger Bridge (GSB). Our framework lifts PPO-style proximal updates from terminal actions to full generation trajectories, yielding a unified view of on-policy optimization for generative policies. Within this framework, we develop two concrete objectives: a clipping-based objective, GSB-PPO-Clip, and a penalty-based objective, GSB-PPO-Penalty. Experimental results show that while both objectives are compatible with on-policy training, the penalty formulation consistently delivers better stability and performance than the clipping counterpart. Overall, our results highlight path-space proximal regularization as an effective principle for training generative policies with PPO.",
+        "arxiv_id": "2603.21621"
+    },
+    "2603.21928": {
+        "SCORE": 16,
+        "ARXIVID": "2603.21928",
+        "COMMENT": "Representation-structure result identifying a minimal adaptation subspace and linking it to classifier row space, with AGOP as an online estimator.",
+        "RELEVANCE": 8,
+        "NOVELTY": 8,
+        "authors": [
+            "Guannan Lai",
+            "Da-Wei Zhou",
+            "Zhenguo Li",
+            "Han-Jia Ye"
+        ],
+        "title": "The Golden Subspace: Where Efficiency Meets Generalization in Continual Test-Time Adaptation",
+        "abstract": "Continual Test-Time Adaptation (CTTA) aims to enable models to adapt online to unlabeled data streams under distribution shift without accessing source data. Existing CTTA methods face an efficiency-generalization trade-off: updating more parameters improves adaptation but severely reduces online inference efficiency. An ideal solution is to achieve comparable adaptation with minimal feature updates; we call this minimal subspace the golden subspace. We prove its existence in a single-step adaptation setting and show that it coincides with the row space of the pretrained classifier. To enable online maintenance of this subspace, we introduce the sample-wise Average Gradient Outer Product (AGOP) as an efficient proxy for estimating the classifier weights without retraining. Building on these insights, we propose Guided Online Low-rank Directional adaptation (GOLD), which uses a lightweight adapter to project features onto the golden subspace and learns a compact scaling vector while the subspace is dynamically updated via AGOP. Extensive experiments on classification and segmentation benchmarks, including autonomous-driving scenarios, demonstrate that GOLD attains superior efficiency, stability, and overall performance. Our code is available at https://github.com/AIGNLAI/GOLD.",
+        "arxiv_id": "2603.21928"
+    },
+    "2603.22644": {
+        "SCORE": 16,
+        "ARXIVID": "2603.22644",
+        "COMMENT": "Theory of PAC-Bayesian prediction characterizing when Bayesian-style under-regularization overfits and when larger lambda yields vanishing excess risk.",
+        "RELEVANCE": 8,
+        "NOVELTY": 8,
+        "authors": [
+            "Xiaohan Zhu",
+            "Mesrob I. Ohannessian",
+            "Nathan Srebro"
+        ],
+        "title": "Overfitting and Generalizing with (PAC) Bayesian Prediction in Noisy Binary Classification",
+        "abstract": "We consider a PAC-Bayes type learning rule for binary classification, balancing the training error of a randomized ''posterior'' predictor with its KL divergence to a pre-specified ''prior''. This can be seen as an extension of a modified two-part-code Minimum Description Length (MDL) learning rule, to continuous priors and randomized predictions. With a balancing parameter of $\u03bb=1$ this learning rule recovers an (empirical) Bayes posterior and a modified variant recovers the profile posterior, linking with standard Bayesian prediction (up to the treatment of the single-parameter noise level). However, from a risk-minimization prediction perspective, this Bayesian predictor overfits and can lead to non-vanishing excess loss in the agnostic case. Instead a choice of $\u03bb\\gg 1$, which can be seen as using a sample-size-dependent-prior, ensures uniformly vanishing excess loss even in the agnostic case. We precisely characterize the effect of under-regularizing (and over-regularizing) as a function of the balance parameter $\u03bb$, understanding the regimes in which this under-regularization is tempered or catastrophic. This work extends previous work by Zhu and Srebro [2025] that considered only discrete priors to PAC Bayes type learning rules and, through their rigorous Bayesian interpretation, to Bayesian prediction more generally.",
+        "arxiv_id": "2603.22644"
+    },
+    "2603.22619": {
+        "SCORE": 16,
+        "ARXIVID": "2603.22619",
+        "COMMENT": "Architecture/training paper diagnosing the know-act gap as token-level autoregression entangling task selection with generation, then proposing task-level autoregressive reasoning.",
+        "RELEVANCE": 8,
+        "NOVELTY": 8,
+        "authors": [
+            "Jihyun Janice Ahn",
+            "Ryo Kamoi",
+            "Berk Atil",
+            "Renze Lou",
+            "WonWoo Kang",
+            "Heehyun Park",
+            "Sarkar Snigdha Sarathi Das",
+            "Zhuoyang Zou",
+            "Xiaoxin Lu",
+            "Yusen Zhang",
+            "Asfahan Shah",
+            "Ridwanul Hasan Tanvir",
+            "Lingxiao Zhao",
+            "Hongxi Huang",
+            "Vignesh Venkatesh",
+            "Dianjun Lin",
+            "Hamid Shah",
+            "Wentao Wang",
+            "Zhanpeng Song",
+            "Joshua Reed Bassin",
+            "Dax Patel",
+            "Ishan Appareddy Agrahar",
+            "Sahil Pardasani",
+            "Xin Dong",
+            "Fatemeh Rahbari",
+            "Benjamin David Rishel",
+            "Soochan Andrew Lee",
+            "Yuv Boghani",
+            "Ali B. AlNaseeb",
+            "Pranav Suby",
+            "Seokhyeon Bae",
+            "Shreya Buddharaju",
+            "Damien Kula",
+            "Soumyadeep Das",
+            "Hanyang Frank Liu",
+            "Faye Mo",
+            "Wenpeng Yin"
+        ],
+        "title": "Bridging the Know-Act Gap via Task-Level Autoregressive Reasoning",
+        "abstract": "LLMs often generate seemingly valid answers to flawed or ill-posed inputs. This is not due to missing knowledge: under discriminative prompting, the same models can mostly identify such issues, yet fail to reflect this in standard generative responses. This reveals a fundamental know-act gap between discriminative recognition and generative behavior. Prior work largely characterizes this issue in narrow settings, such as math word problems or question answering, with limited focus on how to integrate these two modes. In this work, we present a comprehensive analysis using FaultyScience, a newly constructed large-scale, cross-disciplinary benchmark of faulty scientific questions. We show that the gap is pervasive and stems from token-level autoregression, which entangles task selection (validate vs. answer) with content generation, preventing discriminative knowledge from being utilized. To address this, we propose DeIllusionLLM, a task-level autoregressive framework that explicitly models this decision. Through self-distillation, the model unifies discriminative judgment and generative reasoning within a single backbone. Empirically, DeIllusionLLM substantially reduces answer-despite-error failures under natural prompting while maintaining general reasoning performance, demonstrating that self-distillation is an effective and scalable solution for bridging the discriminative-generative know-act gap",
+        "arxiv_id": "2603.22619"
+    },
+    "2603.22479": {
+        "SCORE": 16,
+        "ARXIVID": "2603.22479",
+        "COMMENT": "Curriculum/meta-training proposal for skill discovery via cross-entropy games, directly targeting training dynamics and learning mechanisms.",
+        "RELEVANCE": 8,
+        "NOVELTY": 8,
+        "authors": [
+            "Cl\u00e9ment Hongler",
+            "Franck Gabriel",
+            "Valentin Hartmann",
+            "Arthur Renard",
+            "Andrew Emil"
+        ],
+        "title": "Cognitive Training for Language Models: Towards General Capabilities via Cross-Entropy Games",
+        "abstract": "Defining a constructive process to build general capabilities for language models in an automatic manner is considered an open problem in artificial intelligence. Towards this, we consider the problem of building a curriculum of tasks that grows a model via relevant skill discovery. We provide a concrete framework for this task, using a family of tasks called cross-entropy games, which we postulate is universal in a suitable sense. We show that if it is possible to grow the curriculum for relevant skill discovery by iterating a greedy optimization algorithm, then, under natural assumptions, there is essentially only one meta-objective possible (up to a few hyperparameters). We call the resulting process cognitive training. We postulate that, given sufficiently capable language models as players and meta-samplers and sufficient training time, cognitive training provides a principled way to relevant skill discovery; and hence to the extent general capabilities are achievable via greedy curriculum learning, cognitive training would be a solution.",
+        "arxiv_id": "2603.22479"
+    },
+    "2603.21782": {
+        "SCORE": 16,
+        "ARXIVID": "2603.21782",
+        "COMMENT": "Representation learning theory and structure: training-free sampling from feature-invariance fibers gives a mechanistic probe of what representations preserve or discard.",
+        "RELEVANCE": 8,
+        "NOVELTY": 8,
+        "authors": [
+            "Armand Rousselot",
+            "Joran Wendebourg",
+            "Ullrich K\u00f6the"
+        ],
+        "title": "Show Me What You Don't Know: Efficient Sampling from Invariant Sets for Model Validation",
+        "abstract": "The performance of machine learning models is determined by the quality of their learned features. They should be invariant under irrelevant data variation but sensitive to task-relevant details. To visualize whether this is the case, we propose a method to analyze feature extractors by sampling from their fibers -- equivalence classes defined by their invariances -- given an arbitrary representative. Unlike existing work where a dedicated generative model is trained for each feature detector, our algorithm is training-free and exploits a pretrained diffusion or flow-matching model as a prior. The fiber loss -- which penalizes mismatch in features -- guides the denoising process toward the desired equivalence class, via non-linear diffusion trajectory matching. This replaces days of training for invariance learning with a single guided generation procedure at comparable fidelity. Experiments on popular datasets (ImageNet, CheXpert) and model types (ResNet, DINO, BiomedClip) demonstrate that our framework can reveal invariances ranging from very desirable to concerning behaviour. For instance, we show how Qwen-2B places patients with situs inversus (heart on the right side) in the same fiber as typical anatomy.",
+        "arxiv_id": "2603.21782"
+    },
+    "2603.21567": {
+        "SCORE": 16,
+        "ARXIVID": "2603.21567",
+        "COMMENT": "Representation/theory: gives an information-theoretic complexity bound for LLM steganography and connects it to a practical perplexity-based detection proxy.",
+        "RELEVANCE": 8,
+        "NOVELTY": 8,
+        "authors": [
+            "Andrii Shportko"
+        ],
+        "title": "Kolmogorov Complexity Bounds for LLM Steganography and a Perplexity-Based Detection Proxy",
+        "abstract": "Large language models can rewrite text to embed hidden payloads while preserving surface-level meaning, a capability that opens covert channels between cooperating AI systems and poses challenges for alignment monitoring. We study the information-theoretic cost of such embedding. Our main result is that any steganographic scheme that preserves the semantic load of a covertext~$M_1$ while encoding a payload~$P$ into a stegotext~$M_2$ must satisfy $K(M_2) \\geq K(M_1) + K(P) - O(\\log n)$, where $K$ denotes Kolmogorov complexity and $n$ is the combined message length. A corollary is that any non-trivial payload forces a strict complexity increase in the stegotext, regardless of how cleverly the encoder distributes the signal. Because Kolmogorov complexity is uncomputable, we ask whether practical proxies can detect this predicted increase. Drawing on the classical correspondence between lossless compression and Kolmogorov complexity, we argue that language-model perplexity occupies an analogous role in the probabilistic regime and propose the Binoculars perplexity-ratio score as one such proxy. Preliminary experiments with a color-based LLM steganographic scheme support the theoretical prediction: a paired $t$-test over 300 samples yields $t = 5.11$, $p < 10^{-6}$.",
+        "arxiv_id": "2603.21567"
+    },
+    "2603.21564": {
+        "SCORE": 15,
+        "ARXIVID": "2603.21564",
+        "COMMENT": "Memory architecture theory: formalizes hierarchical memory for language agents via extraction, coarsening, and traversal operators.",
+        "RELEVANCE": 8,
+        "NOVELTY": 7,
+        "authors": [
+            "Yashar Talebirad",
+            "Ali Parsaee",
+            "Csongor Y. Szepesvari",
+            "Amirhossein Nadiri",
+            "Osmar Zaiane"
+        ],
+        "title": "Toward a Theory of Hierarchical Memory for Language Agents",
+        "abstract": "Many recent long-context and agentic systems address context-length limitations by adding hierarchical memory: they extract atomic units from raw data, build multi-level representatives by grouping and compression, and traverse this structure to retrieve content under a token budget. Despite recurring implementations, there is no shared formalism for comparing design choices. We propose a unifying theory in terms of three operators. Extraction ($\u03b1$) maps raw data to atomic information units; coarsening ($C = (\u03c0, \u03c1)$) partitions units and assigns a representative to each group; and traversal ($\u03c4$) selects which units to include in context given a query and budget. We identify a self-sufficiency spectrum for the representative function $\u03c1$ and show how it constrains viable retrieval strategies (a coarsening-traversal coupling). Finally, we instantiate the decomposition on eleven existing systems spanning document hierarchies, conversational memory, and agent execution traces, showcasing its generality.",
+        "arxiv_id": "2603.21564"
+    },
+    "2603.21606": {
+        "SCORE": 15,
+        "ARXIVID": "2603.21606",
+        "COMMENT": "Training dynamics: studies heterogeneous overfitting across dataset mixtures and proposes an iterative checkpoint-reverting multi-task SFT algorithm.",
+        "RELEVANCE": 8,
+        "NOVELTY": 7,
+        "authors": [
+            "Woosung Koh",
+            "Jeyoung Jeon",
+            "Youngjin Song",
+            "Yujin Cheon",
+            "Soowon Oh",
+            "Jaehyeong Choi",
+            "Se-Young Yun"
+        ],
+        "title": "mSFT: Addressing Dataset Mixtures Overfitting Heterogeneously in Multi-task SFT",
+        "abstract": "Current language model training commonly applies multi-task Supervised Fine-Tuning (SFT) using a homogeneous compute budget across all sub-datasets. This approach is fundamentally sub-optimal: heterogeneous learning dynamics cause faster-learning tasks to overfit early while slower ones remain under-fitted. To address this, we introduce mSFT, an iterative, overfitting-aware search algorithm for multi-task data mixtures. mSFT trains the model on an active mixture, identifies and excludes the earliest overfitting sub-dataset, and reverts to that specific optimal checkpoint before continuing. Extensive evaluations demonstrate that mSFT consistently outperforms 4 baselines across 10 benchmarks and 6 base models. Further analysis confirms mSFT maintains robust gains across diverse dataset sizes, task granularities, and is insensitive to its single new hyperparameter (compute budget). Notably, at low compute budget, mSFT can improve performance while lowering training FLOPs. Ultimately, mSFT establishes a practical overfitting-aware algorithm for multi-task SFT that maximizes the potential of models across diverse data mixtures.",
+        "arxiv_id": "2603.21606"
+    },
+    "2603.22278": {
+        "SCORE": 15,
+        "ARXIVID": "2603.22278",
+        "COMMENT": "Mechanistic analysis of where spatial reasoning is represented inside VLMs, separating vision-encoder versus LM-backbone contributions.",
+        "RELEVANCE": 8,
+        "NOVELTY": 7,
+        "authors": [
+            "Kelly Cui",
+            "Nikhil Prakash",
+            "Ayush Raina",
+            "David Bau",
+            "Antonio Torralba",
+            "Tamar Rott Shaham"
+        ],
+        "title": "The Dual Mechanisms of Spatial Reasoning in Vision-Language Models",
+        "abstract": "Many multimodal tasks, such as image captioning and visual question answering, require vision-language models (VLMs) to associate objects with their properties and spatial relations. Yet it remains unclear where and how such associations are computed within VLMs. In this work, we show that VLMs rely on two concurrent mechanisms to represent such associations. In the language model backbone, intermediate layers represent content-independent spatial relations on top of visual tokens corresponding to objects. However, this mechanism plays only a secondary role in shaping model predictions. Instead, the dominant source of spatial information originates in the vision encoder, whose representations encode the layout of objects and are directly exploited by the language model backbone. Notably, this spatial signal is distributed globally across visual tokens, extending beyond object regions into surrounding background areas. We show that enhancing these vision-derived spatial representations globally across all image tokens improves spatial reasoning performance on naturalistic images. Together, our results clarify how spatial association is computed within VLMs and highlight the central role of vision encoders in enabling spatial reasoning.",
+        "arxiv_id": "2603.22278"
+    },
+    "2603.22593": {
+        "SCORE": 15,
+        "ARXIVID": "2603.22593",
+        "COMMENT": "Automated interpretability method using causal steering of SAE vision features to elicit language explanations of learned visual concepts.",
+        "RELEVANCE": 8,
+        "NOVELTY": 7,
+        "authors": [
+            "Javier Ferrando",
+            "Enrique Lopez-Cuena",
+            "Pablo Agustin Martin-Torres",
+            "Daniel Hinjos",
+            "Anna Arias-Duart",
+            "Dario Garcia-Gasulla"
+        ],
+        "title": "Language Models Can Explain Visual Features via Steering",
+        "abstract": "Sparse Autoencoders uncover thousands of features in vision models, yet explaining these features without requiring human intervention remains an open challenge. While previous work has proposed generating correlation-based explanations based on top activating input examples, we present a fundamentally different alternative based on causal interventions. We leverage the structure of Vision-Language Models and steer individual SAE features in the vision encoder after providing an empty image. Then, we prompt the language model to explain what it ``sees'', effectively eliciting the visual concept represented by each feature. Results show that Steering offers an scalable alternative that complements traditional approaches based on input examples, serving as a new axis for automated interpretability in vision models. Moreover, the quality of explanations improves consistently with the scale of the language model, highlighting our method as a promising direction for future research. Finally, we propose Steering-informed Top-k, a hybrid approach that combines the strengths of causal interventions and input-based approaches to achieve state-of-the-art explanation quality without additional computational cost.",
+        "arxiv_id": "2603.22593"
+    },
+    "2603.21541": {
+        "SCORE": 15,
+        "ARXIVID": "2603.21541",
+        "COMMENT": "Theory paper deriving architecture-dependent generalization bounds for Transformers using offset Rademacher complexity and covering-number analysis.",
+        "RELEVANCE": 8,
+        "NOVELTY": 7,
+        "authors": [
+            "Yawen Li",
+            "Tao Hu",
+            "Zhouhui Lian",
+            "Wan Tian",
+            "Yijie Peng",
+            "Huiming Zhang",
+            "Zhongyi Li"
+        ],
+        "title": "Sharper Generalization Bounds for Transformer",
+        "abstract": "This paper studies generalization error bounds for Transformer models. Based on the offset Rademacher complexity, we derive sharper generalization bounds for different Transformer architectures, including single-layer single-head, single-layer multi-head, and multi-layer Transformers. We first express the excess risk of Transformers in terms of the offset Rademacher complexity. By exploiting its connection with the empirical covering numbers of the corresponding hypothesis spaces, we obtain excess risk bounds that achieve optimal convergence rates up to constant factors. We then derive refined excess risk bounds by upper bounding the covering numbers of Transformer hypothesis spaces using matrix ranks and matrix norms, leading to precise, architecture-dependent generalization bounds. Finally, we relax the boundedness assumption on feature mappings and extend our theoretical results to settings with unbounded (sub-Gaussian) features and heavy-tailed distributions.",
+        "arxiv_id": "2603.21541"
+    },
+    "2603.21701": {
+        "SCORE": 15,
+        "ARXIVID": "2603.21701",
+        "COMMENT": "Learned prompt-agnostic token compression framework for LVLMs that unifies pruning and merging as a trainable compression mapping.",
+        "RELEVANCE": 8,
+        "NOVELTY": 7,
+        "authors": [
+            "Yi Wang",
+            "Haofei Zhang",
+            "Qihan Huang",
+            "Anda Cao",
+            "Gongfan Fang",
+            "Wei Wang",
+            "Xuan Jin",
+            "Jie Song",
+            "Mingli Song",
+            "Xinchao Wang"
+        ],
+        "title": "Rethinking Token Reduction for Large Vision-Language Models",
+        "abstract": "Large Vision-Language Models (LVLMs) excel in visual understanding and reasoning, but the excessive visual tokens lead to high inference costs. Although recent token reduction methods mitigate this issue, they mainly target single-turn Visual Question Answering (VQA), leaving the more practical multi-turn VQA (MT-VQA) scenario largely unexplored. MT-VQA introduces additional challenges, as subsequent questions are unknown beforehand and may refer to arbitrary image regions, making existing reduction strategies ineffective. Specifically, current approaches fall into two categories: prompt-dependent methods, which bias toward the initial text prompt and discard information useful for subsequent turns; prompt-agnostic ones, which, though technically applicable to multi-turn settings, rely on heuristic reduction metrics such as attention scores, leading to suboptimal performance. In this paper, we propose a learning-based prompt-agnostic method, termed MetaCompress, overcoming the limitations of heuristic designs. We begin by formulating token reduction as a learnable compression mapping, unifying existing formats such as pruning and merging into a single learning objective. Upon this formulation, we introduce a data-efficient training paradigm capable of learning optimal compression mappings with limited computational costs. Extensive experiments on MT-VQA benchmarks and across multiple LVLM architectures demonstrate that MetaCompress achieves superior efficiency-accuracy trade-offs while maintaining strong generalization across dialogue turns. Our code is available at https://github.com/MArSha1147/MetaCompress.",
+        "arxiv_id": "2603.21701"
+    },
+    "2603.21546": {
+        "SCORE": 15,
+        "ARXIVID": "2603.21546",
+        "COMMENT": "Interpretability study of world models showing linearly decodable state variables and causal use of latent directions across two architectures.",
+        "RELEVANCE": 8,
+        "NOVELTY": 7,
+        "authors": [
+            "Xinyu Zhang"
+        ],
+        "title": "What Do World Models Learn in RL? Probing Latent Representations in Learned Environment Simulators",
+        "abstract": "World models learn to simulate environment dynamics from experience, enabling sample-efficient reinforcement learning. But what do these models actually represent internally? We apply interpretability techniques--including linear and nonlinear probing, causal interventions, and attention analysis--to two architecturally distinct world models: IRIS (discrete token transformer) and DIAMOND (continuous diffusion UNet), trained on Atari Breakout and Pong. Using linear probes, we find that both models develop linearly decodable representations of game state variables (object positions, scores), with MLP probes yielding only marginally higher R^2, confirming that these representations are approximately linear. Causal interventions--shifting hidden states along probe-derived directions--produce correlated changes in model predictions, providing evidence that representations are functionally used rather than merely correlated. Analysis of IRIS attention heads reveals spatial specialization: specific heads attend preferentially to tokens overlapping with game objects. Multi-baseline token ablation experiments consistently identify object-containing tokens as disproportionately important. Our findings provide interpretability evidence that learned world models develop structured, approximately linear internal representations of environment state across two games and two architectures.",
+        "arxiv_id": "2603.21546"
+    },
+    "2603.21725": {
+        "SCORE": 15,
+        "ARXIVID": "2603.21725",
+        "COMMENT": "Memory-efficient fine-tuning method using curvature-guided sparse zeroth-order updates with adaptive coordinate selection from scalar feedback.",
+        "RELEVANCE": 8,
+        "NOVELTY": 7,
+        "authors": [
+            "Shuo Wang",
+            "Ziyu Chen",
+            "Ming Tang"
+        ],
+        "title": "CurvZO: Adaptive Curvature-Guided Sparse Zeroth-Order Optimization for Efficient LLM Fine-Tuning",
+        "abstract": "Fine-tuning large language models (LLMs) with backpropagation achieves high performance but incurs substantial memory overhead, limiting scalability on resource-constrained hardware. Zeroth-order (ZO) optimization provides a memory-efficient alternative by relying solely on forward passes, yet it typically suffers from slow or unstable convergence due to high-variance gradient estimates. Sparse ZO updates partially address this issue by perturbing only a subset of parameters, but their effectiveness hinges on selecting informative parameters, which is challenging in ZO optimization because each query yields only scalar feedback. We propose \\textbf{Adaptive Curvature-Guided Sparse Zeroth-Order Optimization (CurvZO)}, which tracks curvature signals online from scalar ZO feedback and leverages these signals to construct a parameter-wise sampling distribution for selecting coordinates at each update, reducing the variance of the sparse ZO gradient estimator. Moreover, CurvZO dynamically adapts the perturbation budget to the evolving curvature signal distribution, yielding sparse ZO updates that remain both focused and sufficiently exploratory. Extensive experiments on OPT and Llama across diverse NLP tasks show that CurvZO consistently improves fine-tuning performance and reduces training time over ZO baselines. It improves accuracy by up to 4.4 points and achieves up to a $2\\times$ speedup, while preserving memory efficiency.",
+        "arxiv_id": "2603.21725"
+    },
+    "2603.21991": {
+        "SCORE": 15,
+        "ARXIVID": "2603.21991",
+        "COMMENT": "Activation-design paper introducing learnable GELU hardness to study and control progressive ReLU-ization of deep networks.",
+        "RELEVANCE": 8,
+        "NOVELTY": 7,
+        "authors": [
+            "Cristian P\u00e9rez-Corral",
+            "Alberto Fern\u00e1ndez-Hern\u00e1ndez",
+            "Jose I. Mestre",
+            "Manuel F. Dolz",
+            "Enrique S. Quintana-Ort\u00ed"
+        ],
+        "title": "\u03bb-GELU: Learning Gating Hardness for Controlled ReLU-ization in Deep Networks",
+        "abstract": "Gaussian Error Linear Unit (GELU) is a widely used smooth alternative to Rectifier Linear Unit (ReLU), yet many deployment, compression, and analysis toolchains are most naturally expressed for piecewise-linear (ReLU-type) networks. We study a hardness-parameterized formulation of GELU, f(x;\u03bb)=x\u03a6(\u03bb x), where \u03a6 is the Gaussian CDF and \u03bb \\in [1, infty) controls gate sharpness, with the goal of turning smooth gated training into a controlled path toward ReLU-compatible models. Learning \u03bb is non-trivial: naive updates yield unstable dynamics and effective gradient attenuation, so we introduce a constrained reparameterization and an optimizer-aware update scheme. Empirically, across a diverse set of model--dataset pairs spanning MLPs, CNNs, and Transformers, we observe structured layerwise hardness profiles and assess their robustness under different initializations. We further study a deterministic ReLU-ization strategy in which the learned gates are progressively hardened toward a principled target, enabling a post-training substitution of \u03bb-GELU by ReLU with reduced disruption. Overall, \u03bb-GELU provides a minimal and interpretable knob to profile and control gating hardness, bridging smooth training with ReLU-centric downstream pipelines.",
+        "arxiv_id": "2603.21991"
+    },
+    "2603.21658": {
+        "SCORE": 15,
+        "ARXIVID": "2603.21658",
+        "COMMENT": "Cross-model mechanistic analysis of memorization, including shared decoding patterns and family-specific important attention heads.",
+        "RELEVANCE": 8,
+        "NOVELTY": 7,
+        "authors": [
+            "Bowen Chen",
+            "Namgi Han",
+            "Yusuke Miyao"
+        ],
+        "title": "A Comparative Analysis of LLM Memorization at Statistical and Internal Levels: Cross-Model Commonalities and Model-Specific Signatures",
+        "abstract": "Memorization is a fundamental component of intelligence for both humans and LLMs. However, while LLM performance scales rapidly, our understanding of memorization lags. Due to limited access to the pre-training data of LLMs, most previous studies focus on a single model series, leading to isolated observations among series, making it unclear which findings are general or specific. In this study, we collect multiple model series (Pythia, OpenLLaMa, StarCoder, OLMo1/2/3) and analyze their shared or unique memorization behavior at both the statistical and internal levels, connecting individual observations while showing new findings. At the statistical level, we reveal that the memorization rate scales log-linearly with model size, and memorized sequences can be further compressed. Further analysis demonstrated a shared frequency and domain distribution pattern for memorized sequences. However, different models also show individual features under the above observations. At the internal level, we find that LLMs can remove certain injected perturbations, while memorized sequences are more sensitive. By decoding middle layers and attention head ablation, we revealed the general decoding process and shared important heads for memorization. However, the distribution of those important heads differs between families, showing a unique family-level feature. Through bridging various experiments and revealing new findings, this study paves the way for a universal and fundamental understanding of memorization in LLM.",
+        "arxiv_id": "2603.21658"
+    },
+    "2603.22030": {
+        "SCORE": 15,
+        "ARXIVID": "2603.22030",
+        "COMMENT": "Representation-learning theory/structure: analyzes how priors and overparameterization reshape Bayesian neural network posterior geometry via balancedness, weight reallocation, and prior conformity.",
+        "RELEVANCE": 8,
+        "NOVELTY": 7,
+        "authors": [
+            "Julius Kobialka",
+            "Emanuel Sommer",
+            "Chris Kolb",
+            "Juntae Kwon",
+            "Daniel Dold",
+            "David R\u00fcgamer"
+        ],
+        "title": "On the Interplay of Priors and Overparametrization in Bayesian Neural Network Posteriors",
+        "abstract": "Bayesian neural network (BNN) posteriors are often considered impractical for inference, as symmetries fragment them, non-identifiabilities inflate dimensionality, and weight-space priors are seen as meaningless. In this work, we study how overparametrization and priors together reshape BNN posteriors and derive implications allowing us to better understand their interplay. We show that redundancy introduces three key phenomena that fundamentally reshape the posterior geometry: balancedness, weight reallocation on equal-probability manifolds, and prior conformity. We validate our findings through extensive experiments with posterior sampling budgets that far exceed those of earlier works, and demonstrate how overparametrization induces structured, prior-aligned weight posterior distributions.",
+        "arxiv_id": "2603.22030"
+    },
+    "2603.21884": {
+        "SCORE": 15,
+        "ARXIVID": "2603.21884",
+        "COMMENT": "Adaptive per-layer LoRA rank selection directly targets compression/parameter-efficiency rather than using a fixed rank everywhere.",
+        "RELEVANCE": 8,
+        "NOVELTY": 7,
+        "authors": [
+            "Donald Shenaj",
+            "Federico Errica",
+            "Antonio Carta"
+        ],
+        "title": "Not All Layers Are Created Equal: Adaptive LoRA Ranks for Personalized Image Generation",
+        "abstract": "Low Rank Adaptation (LoRA) is the de facto fine-tuning strategy to generate personalized images from pre-trained diffusion models. Choosing a good rank is extremely critical, since it trades off performance and memory consumption, but today the decision is often left to the community's consensus, regardless of the personalized subject's complexity. The reason is evident: the cost of selecting a good rank for each LoRA component is combinatorial, so we opt for practical shortcuts such as fixing the same rank for all components. In this paper, we take a first step to overcome this challenge. Inspired by variational methods that learn an adaptive width of neural networks, we let the ranks of each layer freely adapt during fine-tuning on a subject. We achieve it by imposing an ordering of importance on the rank's positions, effectively encouraging the creation of higher ranks when strictly needed. Qualitatively and quantitatively, our approach, LoRA$^2$, achieves a competitive trade-off between DINO, CLIP-I, and CLIP-T across 29 subjects while requiring much less memory and lower rank than high rank LoRA versions. Code: https://github.com/donaldssh/NotAllLayersAreCreatedEqual.",
+        "arxiv_id": "2603.21884"
+    },
+    "2603.22375": {
+        "SCORE": 15,
+        "ARXIVID": "2603.22375",
+        "COMMENT": "Few-step diffusion acceleration via layer-wise time-embedding optimization is a concrete efficient-inference mechanism with architectural insight.",
+        "RELEVANCE": 8,
+        "NOVELTY": 7,
+        "authors": [
+            "Yuren Cai",
+            "Guangyi Wang",
+            "Zongqing Li",
+            "Li Li",
+            "Zhihui Liu",
+            "Songzhi Su"
+        ],
+        "title": "Three Creates All: You Only Sample 3 Steps",
+        "abstract": "Diffusion models deliver high-fidelity generation but remain slow at inference time due to many sequential network evaluations. We find that standard timestep conditioning becomes a key bottleneck for few-step sampling. Motivated by layer-dependent denoising dynamics, we propose Multi-layer Time Embedding Optimization (MTEO), which freeze the pretrained diffusion backbone and distill a small set of step-wise, layer-wise time embeddings from reference trajectories. MTEO is plug-and-play with existing ODE solvers, adds no inference-time overhead, and trains only a tiny fraction of parameters. Extensive experiments across diverse datasets and backbones show state-of-the-art performance in the few-step sampling and substantially narrow the gap between distillation-based and lightweight methods. Code will be available.",
+        "arxiv_id": "2603.22375"
+    },
+    "2603.21491": {
+        "SCORE": 15,
+        "ARXIVID": "2603.21491",
+        "COMMENT": "Training-dynamics paper on latent feedback reliability: uses trajectory-level signals and a slow trust variable to prevent stable convergence to wrong beliefs.",
+        "RELEVANCE": 8,
+        "NOVELTY": 7,
+        "authors": [
+            "Zhipeng Zhang",
+            "Zhenjie Yao",
+            "Kai Li",
+            "Lei Yang"
+        ],
+        "title": "Learning Can Converge Stably to the Wrong Belief under Latent Reliability",
+        "abstract": "Learning systems are typically optimized by minimizing loss or maximizing reward, assuming that improvements in these signals reflect progress toward the true objective. However, when feedback reliability is unobservable, this assumption can fail, and learning algorithms may converge stably to incorrect solutions. This failure arises because single-step feedback does not reveal whether an experience is informative or persistently biased. When information is aggregated over learning trajectories, however, systematic differences between reliable and unreliable regimes can emerge. We propose a Monitor-Trust-Regulator (MTR) framework that infers reliability from learning dynamics and modulates updates through a slow-timescale trust variable. Across reinforcement learning and supervised learning settings, standard algorithms exhibit stable optimization behavior while learning incorrect solutions under latent unreliability, whereas trust-modulated systems reduce bias accumulation and improve recovery. These results suggest that learning dynamics are not only optimization traces but also a source of information about feedback reliability.",
+        "arxiv_id": "2603.21491"
+    },
+    "2603.22492": {
+        "SCORE": 15,
+        "ARXIVID": "2603.22492",
+        "COMMENT": "Efficient inference method: verifier operates directly on diffusion hidden states, avoiding decode/re-encode overhead in test-time scaling.",
+        "RELEVANCE": 8,
+        "NOVELTY": 7,
+        "authors": [
+            "Davide Bucciarelli",
+            "Evelyn Turri",
+            "Lorenzo Baraldi",
+            "Marcella Cornia",
+            "Lorenzo Baraldi",
+            "Rita Cucchiara"
+        ],
+        "title": "Tiny Inference-Time Scaling with Latent Verifiers",
+        "abstract": "Inference-time scaling has emerged as an effective way to improve generative models at test time by using a verifier to score and select candidate outputs. A common choice is to employ Multimodal Large Language Models (MLLMs) as verifiers, which can improve performance but introduce substantial inference-time cost. Indeed, diffusion pipelines operate in an autoencoder latent space to reduce computation, yet MLLM verifiers still require decoding candidates to pixel space and re-encoding them into the visual embedding space, leading to redundant and costly operations. In this work, we propose Verifier on Hidden States (VHS), a verifier that operates directly on intermediate hidden representations of Diffusion Transformer (DiT) single-step generators. VHS analyzes generator features without decoding to pixel space, thereby reducing the per-candidate verification cost while improving or matching the performance of MLLM-based competitors. We show that, under tiny inference budgets with only a small number of candidates per prompt, VHS enables more efficient inference-time scaling reducing joint generation-and-verification time by 63.3%, compute FLOPs by 51% and VRAM usage by 14.5% with respect to a standard MLLM verifier, achieving a +2.7% improvement on GenEval at the same inference-time budget.",
+        "arxiv_id": "2603.22492"
+    },
+    "2603.21563": {
+        "SCORE": 15,
+        "ARXIVID": "2603.21563",
+        "COMMENT": "Multi-agent training-dynamics method for credit assignment: counterfactual agent-specific advantages reduce free-riding in collaborative LLM RL.",
+        "RELEVANCE": 8,
+        "NOVELTY": 7,
+        "authors": [
+            "Zhongyi Li",
+            "Wan Tian",
+            "Yikun Ban",
+            "Jinju Chen",
+            "Huiming Zhang",
+            "Yang Liu",
+            "Fuzhen Zhuang"
+        ],
+        "title": "Counterfactual Credit Policy Optimization for Multi-Agent Collaboration",
+        "abstract": "Collaborative multi-agent large language models (LLMs) can solve complex reasoning tasks by decomposing roles and aggregating diverse hypotheses. Yet, reinforcement learning (RL) for such systems is often undermined by credit assignment: a shared global reward obscures individual contributions, inflating update variance and encouraging free-riding. We introduce Counterfactual Credit Policy Optimization (CCPO), a framework that assigns agent-specific learning signals by estimating each agent's marginal contribution through counterfactual trajectories. CCPO builds dynamic counterfactual baselines that simulate outcomes with an agent's contribution removed, yielding role-sensitive advantages for policy optimization. To further improve stability under heterogeneous tasks and data distributions, we propose a global-history-aware normalization scheme that calibrates advantages using global rollout statistics. We evaluate CCPO on two collaboration topologies: a sequential Think--Reason dyad and multi-agent voting. Across mathematical and logical reasoning benchmarks, CCPO mitigates free-riding and outperforms strong multi-agent RL baselines, yielding finer-grained and more effective credit assignment for collaborative LLM training. Our code is available at https://github.com/bhai114/ccpo.",
+        "arxiv_id": "2603.21563"
+    },
+    "2603.21574": {
+        "SCORE": 15,
+        "ARXIVID": "2603.21574",
+        "COMMENT": "Architecture mechanisms and training dynamics: introduces an adaptive robust estimator for noisy, heavy-tailed reward signals in multi-agent RL, directly targeting training stability and credit assignment.",
+        "RELEVANCE": 8,
+        "NOVELTY": 7,
+        "authors": [
+            "Zhongyi Li",
+            "Wan Tian",
+            "Jingyu Chen",
+            "Kangyao Huang",
+            "Huiming Zhang",
+            "Hui Yang",
+            "Tao Ren",
+            "Jinyang Jiang",
+            "Yijie Peng",
+            "Yikun Ban",
+            "Fuzhen Zhuang"
+        ],
+        "title": "Adaptive Robust Estimator for Multi-Agent Reinforcement Learning",
+        "abstract": "Multi-agent collaboration has emerged as a powerful paradigm for enhancing the reasoning capabilities of large language models, yet it suffers from interaction-level ambiguity that blurs generation, critique, and revision, making credit assignment across agents difficult. Moreover, policy optimization in this setting is vulnerable to heavy-tailed and noisy rewards, which can bias advantage estimation and trigger unstable or even divergent training. To address both issues, we propose a robust multi-agent reinforcement learning framework for collaborative reasoning, consisting of two components: Dual-Agent Answer-Critique-Rewrite (DACR) and an Adaptive Robust Estimator (ARE). DACR decomposes reasoning into a structured three-stage pipeline: answer, critique, and rewrite, while enabling explicit attribution of each agent's marginal contribution to its partner's performance. ARE provides robust estimation of batch experience means during multi-agent policy optimization. Across mathematical reasoning and embodied intelligence benchmarks, even under noisy rewards, our method consistently outperforms the baseline in both homogeneous and heterogeneous settings. These results indicate stronger robustness to reward noise and more stable training dynamics, effectively preventing optimization failures caused by noisy reward signals.",
+        "arxiv_id": "2603.21574"
+    },
+    "2603.21684": {
+        "SCORE": 15,
+        "ARXIVID": "2603.21684",
+        "COMMENT": "Architecture mechanisms and training stability: provides a Lipschitz-continuous amplitude-modifier design with formal conditions for certified stable audio models.",
+        "RELEVANCE": 8,
+        "NOVELTY": 7,
+        "authors": [
+            "Kazuki Matsumoto",
+            "Ren Uchida",
+            "Kohei Yatabe"
+        ],
+        "title": "LipsAM: Lipschitz-Continuous Amplitude Modifier for Audio Signal Processing and its Application to Plug-and-Play Dereverberation",
+        "abstract": "The robustness of deep neural networks (DNNs) can be certified through their Lipschitz continuity, which has made the construction of Lipschitz-continuous DNNs an active research field. However, DNNs for audio processing have not been a major focus due to their poor compatibility with existing results. In this paper, we consider the amplitude modifier (AM), a popular architecture for handling audio signals, and propose its Lipschitz-continuous variants, which we refer to as LipsAM. We prove a sufficient condition for an AM to be Lipschitz continuous and propose two architectures as examples of LipsAM. The proposed architectures were applied to a Plug-and-Play algorithm for speech dereverberation, and their improved stability is demonstrated through numerical experiments.",
+        "arxiv_id": "2603.21684"
+    },
+    "2603.22465": {
+        "SCORE": 15,
+        "ARXIVID": "2603.22465",
+        "COMMENT": "Compression and efficient training: proposes energy-aware gradient pruning with a cost-weighted selection rule grounded in a constrained projection formulation.",
+        "RELEVANCE": 8,
+        "NOVELTY": 7,
+        "authors": [
+            "Emmanouil M. Athanasakos"
+        ],
+        "title": "A Theoretical Framework for Energy-Aware Gradient Pruning in Federated Learning",
+        "abstract": "Federated Learning (FL) is constrained by the communication and energy limitations of decentralized edge devices. While gradient sparsification via Top-K magnitude pruning effectively reduces the communication payload, it remains inherently energy-agnostic. It assumes all parameter updates incur identical downstream transmission and memory-update costs, ignoring hardware realities. We formalize the pruning process as an energy-constrained projection problem that accounts for the hardware-level disparities between memory-intensive and compute-efficient operations during the post-backpropagation phase. We propose Cost-Weighted Magnitude Pruning (CWMP), a selection rule that prioritizes parameter updates based on their magnitude relative to their physical cost. We demonstrate that CWMP is the optimal greedy solution to this constrained projection and provide a probabilistic analysis of its global energy efficiency. Numerical results on a non-IID CIFAR-10 benchmark show that CWMP consistently establishes a superior performance-energy Pareto frontier compared to the Top-K baseline.",
+        "arxiv_id": "2603.22465"
+    },
+    "2603.22206": {
+        "SCORE": 15,
+        "ARXIVID": "2603.22206",
+        "COMMENT": "Large-scale serving systems: predictive scheduling for heterogeneous LLM clusters using semantic routing, output-length prediction, and congestion-aware load balancing.",
+        "RELEVANCE": 8,
+        "NOVELTY": 7,
+        "authors": [
+            "Kangqi Ni",
+            "Wenyue Hua",
+            "Xiaoxiang Shi",
+            "Jiang Guo",
+            "Shiyu Chang",
+            "Tianlong Chen"
+        ],
+        "title": "Chimera: Latency- and Performance-Aware Multi-agent Serving for Heterogeneous LLMs",
+        "abstract": "Multi-agent applications often execute complex tasks as multi-stage workflows, where each stage is an LLM call whose output becomes part of context for subsequent steps. Existing LLM serving systems largely assume homogeneous clusters with identical model replicas. This design overlooks the potential of heterogeneous deployments, where models of different sizes and capabilities enable finer trade-offs between latency and performance. However, heterogeneity introduces new challenges in scheduling across models with diverse throughput and performance. We present Chimera, a predictive scheduling system for multi-agent workflow serving on heterogeneous LLM clusters that jointly improves end-to-end latency and task performance. Chimera applies semantic routing to estimate per-model confidence scores for each request, predicts the total remaining output length of the workflow, and estimates per-model congestion using in-flight predicted token volumes for load balancing. We evaluate Chimera on representative agentic workflows for code generation and math reasoning using multiple heterogeneous LLM configurations. Across comparable settings, Chimera traces the best latency-performance frontier, reducing end-to-end latency by 1.2--2.4$\\times$ and improving task performance by 8.0-9.5 percentage points on average over competitive baselines including vLLM.",
+        "arxiv_id": "2603.22206"
+    }
+}

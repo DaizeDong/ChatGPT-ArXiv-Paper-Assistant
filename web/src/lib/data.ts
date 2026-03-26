@@ -1,5 +1,17 @@
 import type { DailyHotspotPayload, MonthIndexPayload, RootIndexPayload, YearIndexPayload } from "../types/hotspot";
 
+export class JsonFetchError extends Error {
+  readonly relativePath: string;
+  readonly status: number;
+
+  constructor(relativePath: string, status: number) {
+    super(`Failed to fetch ${relativePath}: ${status}`);
+    this.name = "JsonFetchError";
+    this.relativePath = relativePath;
+    this.status = status;
+  }
+}
+
 function assetPath(relativePath: string) {
   const basePath = import.meta.env.BASE_URL || "/";
   const cleanedBase = basePath.endsWith("/") ? basePath : `${basePath}/`;
@@ -10,9 +22,13 @@ function assetPath(relativePath: string) {
 async function fetchJson<T>(relativePath: string): Promise<T> {
   const response = await fetch(assetPath(relativePath));
   if (!response.ok) {
-    throw new Error(`Failed to fetch ${relativePath}: ${response.status}`);
+    throw new JsonFetchError(relativePath, response.status);
   }
   return (await response.json()) as T;
+}
+
+export function isNotFoundError(error: unknown): error is JsonFetchError {
+  return error instanceof JsonFetchError && error.status === 404;
 }
 
 export function loadRootIndex() {

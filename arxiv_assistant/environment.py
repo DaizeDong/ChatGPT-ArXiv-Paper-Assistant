@@ -30,9 +30,6 @@ def parse_authors(lines):
 CONFIG = configparser.ConfigParser()
 CONFIG.read("configs/config.ini")
 
-print({section: dict(CONFIG[section]) for section in CONFIG.sections()})
-print(f"###################################################################")
-
 # load authors.txt
 with open("configs/authors.txt", "r", encoding="utf-8") as fopen:
     author_names, author_ids = parse_authors(fopen.readlines())
@@ -51,12 +48,6 @@ OPENAI_API_KEY = os.environ.get("OPENAI_API_KEY")
 OPENAI_BASE_URL = os.environ.get("OPENAI_BASE_URL", "https://api.openai.com/v1")
 SLACK_KEY = os.environ.get("SLACK_KEY")
 SLACK_CHANNEL_ID = os.environ.get("SLACK_CHANNEL_ID")
-
-print(f"S2_API_KEY: {S2_API_KEY}")
-print(f"OPENAI_API_KEY: {OPENAI_API_KEY}")
-print(f"OPENAI_BASE_URL: {OPENAI_BASE_URL}")
-print(f"SLACK_KEY: {SLACK_KEY}")
-print(f"SLACK_CHANNEL_ID: {SLACK_CHANNEL_ID}")
 
 if OPENAI_API_KEY is None:
     raise ValueError("OpenAI key is not set - please set OPENAI_API_KEY to your OpenAI key")
@@ -81,10 +72,6 @@ except Exception as ex:
     NOW_MONTH = int(NOW_TIME.strftime("%m"))
     NOW_DAY = int(NOW_TIME.strftime("%d"))
 
-print(f"NOW_YEAR: {NOW_YEAR}")
-print(f"NOW_MONTH: {NOW_MONTH}")
-print(f"NOW_DAY: {NOW_DAY}")
-
 # output path
 OUTPUT_DEBUG_DIR = os.path.join(CONFIG["OUTPUT"]["output_path"], "debug", f"{NOW_YEAR}-{format(NOW_MONTH, '02d')}", f"{NOW_YEAR}-{format(NOW_MONTH, '02d')}-{format(NOW_DAY, '02d')}")
 OUTPUT_DEBUG_FILE_FORMAT = os.path.join(OUTPUT_DEBUG_DIR, "{}")
@@ -97,11 +84,3 @@ create_dir(OUTPUT_MD_DIR)
 OUTPUT_JSON_DIR = os.path.join(CONFIG["OUTPUT"]["output_path"], "json", f"{NOW_YEAR}-{format(NOW_MONTH, '02d')}")
 OUTPUT_JSON_FILE_FORMAT = os.path.join(OUTPUT_JSON_DIR, f"{NOW_YEAR}-{format(NOW_MONTH, '02d')}-{format(NOW_DAY, '02d')}-" + "{}")
 create_dir(OUTPUT_JSON_DIR)
-
-print(f"OUTPUT_DEBUG_DIR: {OUTPUT_DEBUG_DIR}")
-print(f"OUTPUT_DEBUG_FILE_FORMAT: {OUTPUT_DEBUG_FILE_FORMAT}")
-print(f"OUTPUT_MD_DIR: {OUTPUT_MD_DIR}")
-print(f"OUTPUT_MD_FILE_FORMAT: {OUTPUT_MD_FILE_FORMAT}")
-print(f"OUTPUT_JSON_DIR: {OUTPUT_JSON_DIR}")
-print(f"OUTPUT_JSON_FILE_FORMAT: {OUTPUT_JSON_FILE_FORMAT}")
-print(f"###################################################################")

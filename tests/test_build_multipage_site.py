@@ -32,8 +32,13 @@ class BuildMultipageSiteTests(unittest.TestCase):
                 "# Daily AI Hotspots 2026-03-20\n\nHotspot digest 20.",
                 encoding="utf-8",
             )
+            (out_root / "hot" / "md" / "2026-03" / "2026-03-16-hotspots.md").write_text(
+                "# Daily AI Hotspots 2026-03-16\n\nOld hotspot digest.",
+                encoding="utf-8",
+            )
 
             for day, topics, watchlist, summary in [
+                (16, 1, 0, "Old summary that should not publish."),
                 (19, 2, 1, "Agents and evals drove discussion."),
                 (20, 3, 0, "Model releases and tooling led the day."),
             ]:
@@ -55,6 +60,7 @@ class BuildMultipageSiteTests(unittest.TestCase):
             self.assertTrue((site_root / "hot" / "2026-03-20" / "index.md").exists())
             self.assertTrue((site_root / "hot" / "2026-03" / "index.md").exists())
             self.assertTrue((site_root / "hot" / "2026" / "index.md").exists())
+            self.assertFalse((site_root / "hot" / "2026-03-16" / "index.md").exists())
 
             paper_home = (site_root / "index.md").read_text(encoding="utf-8")
             paper_day = (site_root / "archive" / "2026-03" / "20" / "index.md").read_text(encoding="utf-8")
@@ -64,7 +70,7 @@ class BuildMultipageSiteTests(unittest.TestCase):
             paper_month = (site_root / "archive" / "2026-03" / "index.md").read_text(encoding="utf-8")
             paper_year = (site_root / "archive" / "2026" / "index.md").read_text(encoding="utf-8")
 
-            self.assertIn('href="hot"', paper_home)
+            self.assertIn('href="hot/2026-03-20"', paper_home)
             self.assertIn("Daily AI Hotspots", paper_day)
             self.assertIn("Daily AI Hotspots", paper_home)
             self.assertIn("Daily AI Hotspots", paper_month)
@@ -76,6 +82,8 @@ class BuildMultipageSiteTests(unittest.TestCase):
             self.assertIn("Report days", hot_month)
             self.assertIn("Months active", hot_year)
             self.assertIn("March", hot_year)
+            self.assertNotIn("2026-03-16", hot_home)
+            self.assertNotIn("2026-03-16", hot_month)
 
             css_source = Path(temp_dir) / "site.css"
             css_source.write_text("body { color: black; }", encoding="utf-8")
@@ -85,6 +93,41 @@ class BuildMultipageSiteTests(unittest.TestCase):
             self.assertTrue((dist_root / "hot" / "index.html").exists())
             self.assertTrue((dist_root / "hot" / "2026-03-20" / "index.html").exists())
             self.assertTrue((dist_root / "hot" / "2026-03" / "index.html").exists())
+            self.assertFalse((dist_root / "hot" / "2026-03-16" / "index.html").exists())
+
+    def test_build_multipage_site_falls_back_to_hotspot_archive_routes_for_historical_paper_pages(self):
+        with tempfile.TemporaryDirectory() as temp_dir:
+            out_root = Path(temp_dir) / "out"
+            (out_root / "md" / "2025-03").mkdir(parents=True)
+            (out_root / "hot" / "md" / "2026-03").mkdir(parents=True)
+            (out_root / "hot" / "reports").mkdir(parents=True)
+
+            (out_root / "md" / "2025-03" / "2025-03-03-output.md").write_text(
+                "# Personalized Daily ArXiv Papers 2025-03-03\n\nHistorical paper digest.",
+                encoding="utf-8",
+            )
+            (out_root / "hot" / "md" / "2026-03" / "2026-03-23-hotspots.md").write_text(
+                "# Daily AI Hotspots 2026-03-23\n\nHotspot digest.",
+                encoding="utf-8",
+            )
+            (out_root / "hot" / "reports" / "2026-03-23.json").write_text(
+                json.dumps({"date": "2026-03-23", "summary": "One day", "top_topics": [{}], "watchlist": []}, indent=2),
+                encoding="utf-8",
+            )
+
+            site_root = build_multipage_site(out_root)
+            self.assertIsNotNone(site_root)
+
+            paper_day = (site_root / "archive" / "2025-03" / "03" / "index.md").read_text(encoding="utf-8")
+            paper_month = (site_root / "archive" / "2025-03" / "index.md").read_text(encoding="utf-8")
+            paper_year = (site_root / "archive" / "2025" / "index.md").read_text(encoding="utf-8")
+
+            self.assertIn('href="../../../hot/2026-03-23"', paper_day)
+            self.assertIn("Daily AI Hotspots", paper_day)
+            self.assertIn('href="../../hot/2026-03"', paper_month)
+            self.assertIn("Daily AI Hotspots", paper_month)
+            self.assertIn('href="../../hot/2026"', paper_year)
+            self.assertIn("Daily AI Hotspots", paper_year)
 
 
 if __name__ == "__main__":

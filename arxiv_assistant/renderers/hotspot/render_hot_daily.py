@@ -42,10 +42,41 @@ def _radar_excerpt(topic: dict[str, Any], max_length: int = 160) -> str:
     return text[: max_length - 3].rstrip() + "..."
 
 
+def _render_paper_spotlight_item(item: dict[str, Any]) -> list[str]:
+    title = item.get("title", "Untitled paper")
+    url = item.get("url", "")
+    arxiv_id = item.get("arxiv_id", "")
+    primary_topic_label = item.get("primary_topic_label", "")
+    spotlight_comment = (item.get("spotlight_comment") or "").strip()
+    summary = (item.get("summary") or "").strip()
+    daily_score = item.get("daily_score", 0)
+    relevance = item.get("relevance", 0)
+    novelty = item.get("novelty", 0)
+    if url:
+        lines = [f"- [{title}]({url})"]
+    else:
+        lines = [f"- {title}"]
+    meta_bits = []
+    if arxiv_id:
+        meta_bits.append(f"arXiv {arxiv_id}")
+    if primary_topic_label:
+        meta_bits.append(primary_topic_label)
+    meta_bits.append(f"score={daily_score}")
+    meta_bits.append(f"rel={relevance}")
+    meta_bits.append(f"nov={novelty}")
+    lines.append(f"  - {' | '.join(meta_bits)}")
+    if spotlight_comment:
+        lines.append(f"  - {spotlight_comment}")
+    elif summary:
+        lines.append(f"  - {summary}")
+    return lines
+
+
 def render_hot_daily_md(report: dict[str, Any]) -> str:
     featured_topics = report.get("featured_topics") or report.get("top_topics") or []
     category_sections = report.get("category_sections") or []
     long_tail_sections = report.get("long_tail_sections") or []
+    paper_spotlight = report.get("paper_spotlight") or []
     x_buzz = report.get("x_buzz") or []
     watchlist = report.get("watchlist") or []
 
@@ -59,6 +90,7 @@ def render_hot_daily_md(report: dict[str, Any]) -> str:
         f'- Featured topics: {len(featured_topics)}',
         f'- Category radar topics: {sum(len(section.get("topics", [])) for section in category_sections)}',
         f'- Long-tail signals: {sum(len(section.get("topics", [])) for section in long_tail_sections)}',
+        f'- Paper spotlight items: {sum(len(section.get("items", [])) for section in paper_spotlight)}',
         f'- X Buzz items: {len(x_buzz)}',
         f'- Watchlist topics: {len(watchlist)}',
         f'- Raw items scanned: {report.get("totals", {}).get("raw_items", 0)}',
@@ -71,6 +103,19 @@ def render_hot_daily_md(report: dict[str, Any]) -> str:
 
     for source_name, count in sorted((report.get("source_stats") or {}).items()):
         lines.append(f"- `{source_name}`: {count}")
+
+    if paper_spotlight:
+        lines.extend(["", "## Paper Spotlight", ""])
+        for section in paper_spotlight:
+            label = section.get("label", "Paper Spotlight")
+            description = (section.get("description") or "").strip()
+            items = section.get("items", [])
+            lines.extend([f"### {label} ({len(items)})", ""])
+            if description:
+                lines.extend([description, ""])
+            for item in items:
+                lines.extend(_render_paper_spotlight_item(item))
+            lines.append("")
 
     lines.extend(["", "## Featured Topics", ""])
     if not featured_topics:

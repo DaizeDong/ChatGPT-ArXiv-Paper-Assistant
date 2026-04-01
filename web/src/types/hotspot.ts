@@ -48,6 +48,10 @@ export type SourceSectionItem = {
   tags: string[];
   authors: string[];
   signal_score: number;
+  spotlight_kinds?: string[];
+  spotlight_primary_kind?: string;
+  spotlight_primary_label?: string;
+  spotlight_comment?: string;
   signals: {
     activity: number;
     github_stars: number;
@@ -137,6 +141,7 @@ export type DailyHotspotPayload = {
   source_stats: Record<string, number>;
   source_section_counts: Record<string, number>;
   source_sections: SourceSection[];
+  paper_spotlight: SourceSection[];
   topic_summary: Array<{
     topic_id: string;
     slug: string;

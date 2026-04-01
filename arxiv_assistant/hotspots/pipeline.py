@@ -45,6 +45,14 @@ APP_TIMEZONE = ZoneInfo("America/New_York")
 DAY_OUTPUT_PATTERN = re.compile(r"(?P<year>\d{4})-(?P<month>\d{2})-(?P<day>\d{2})-output\.json$")
 SOCIAL_PRIMARY_ROLES = {"community_heat"}
 SOCIAL_BACKFILL_ROLES = {"headline_consensus", "builder_momentum", "hn_discussion"}
+PAPER_SPOTLIGHT_LABELS = {
+    "new_frontier": "New Frontier Papers",
+    "daily_hot": "Daily Hot Papers",
+}
+PAPER_SPOTLIGHT_DESCRIPTIONS = {
+    "new_frontier": "Papers that appear to open a genuinely new direction, paradigm, or field.",
+    "daily_hot": "Papers that feel broadly important to the day and belong in the hotspot paper feed.",
+}
 SOCIAL_HOST_SNIPPETS = ("x.com", "twitter.com", "reddit.com", "news.ycombinator.com")
 CATEGORY_DISPLAY_ORDER = [
     "Product Release",
@@ -256,6 +264,85 @@ def _build_x_buzz_items(
                 break
 
     return selected[:target_count]
+
+
+def _paper_spotlight_item_score(item: HotspotItem) -> float:
+    metadata = item.metadata or {}
+    score = 0.0
+    score += float(metadata.get("daily_score", 0) or 0) * 0.8
+    score += float(metadata.get("relevance", 0) or 0) * 0.35
+    score += float(metadata.get("novelty", 0) or 0) * 0.35
+    if metadata.get("spotlight_primary_kind") == "new_frontier":
+        score += 1.0
+    return round(score, 3)
+
+
+def _build_paper_spotlight(
+    raw_items: list[HotspotItem],
+    *,
+    max_daily_hot: int,
+    max_new_frontier: int,
+) -> list[dict[str, Any]]:
+    grouped: dict[str, list[tuple[float, dict[str, Any]]]] = {"new_frontier": [], "daily_hot": []}
+    seen_ids: set[tuple[str, str]] = set()
+
+    for item in raw_items:
+        metadata = item.metadata or {}
+        spotlight_kind = str(metadata.get("spotlight_primary_kind", "") or "").strip()
+        if spotlight_kind not in grouped:
+            continue
+        arxiv_id = str(metadata.get("arxiv_id", "") or "").strip()
+        dedupe_key = (spotlight_kind, arxiv_id or item.canonical_url or item.url)
+        if dedupe_key in seen_ids:
+            continue
+        seen_ids.add(dedupe_key)
+        payload = {
+            "title": item.title,
+            "summary": item.summary,
+            "url": item.url,
+            "canonical_url": item.canonical_url,
+            "source_id": item.source_id,
+            "source_name": item.source_name,
+            "source_role": item.source_role,
+            "arxiv_id": arxiv_id,
+            "authors": list(item.authors),
+            "primary_topic_id": metadata.get("primary_topic_id", ""),
+            "primary_topic_label": metadata.get("primary_topic_label", ""),
+            "spotlight_primary_kind": spotlight_kind,
+            "spotlight_primary_label": metadata.get("spotlight_primary_label", PAPER_SPOTLIGHT_LABELS.get(spotlight_kind, "")),
+            "spotlight_comment": metadata.get("spotlight_comment", ""),
+            "daily_score": int(metadata.get("daily_score", 0) or 0),
+            "relevance": int(metadata.get("relevance", 0) or 0),
+            "novelty": int(metadata.get("novelty", 0) or 0),
+        }
+        grouped[spotlight_kind].append((_paper_spotlight_item_score(item), payload))
+
+    sections: list[dict[str, Any]] = []
+    for kind, limit in (("new_frontier", max_new_frontier), ("daily_hot", max_daily_hot)):
+        ranked_items = [
+            payload
+            for _, payload in sorted(
+                grouped[kind],
+                key=lambda row: (
+                    row[0],
+                    row[1].get("novelty", 0),
+                    row[1].get("daily_score", 0),
+                    row[1].get("title", "").lower(),
+                ),
+                reverse=True,
+            )
+        ][:limit]
+        if not ranked_items:
+            continue
+        sections.append(
+            {
+                "kind": kind,
+                "label": PAPER_SPOTLIGHT_LABELS[kind],
+                "description": PAPER_SPOTLIGHT_DESCRIPTIONS[kind],
+                "items": ranked_items,
+            }
+        )
+    return sections
 
 
 def _topic_occurrence_score(topic: dict[str, Any]) -> float:
@@ -1264,6 +1351,11 @@ def generate_daily_hotspot_report(output_root: str | Path, target_date: datetime
     llm_completion_tokens += digest_completion_tokens
     llm_requests += digest_requests
     x_buzz = _build_x_buzz_items(raw_items, featured_topics, watchlist)
+    paper_spotlight = _build_paper_spotlight(
+        raw_items,
+        max_daily_hot=config["HOTSPOTS"].getint("paper_spotlight_max_daily_hot", fallback=6),
+        max_new_frontier=config["HOTSPOTS"].getint("paper_spotlight_max_new_frontier", fallback=4),
+    )
     usage = _build_usage_payload(
         config,
         effective_mode,
@@ -1293,6 +1385,7 @@ def generate_daily_hotspot_report(output_root: str | Path, target_date: datetime
             "screening_review_candidates": screening_stats["review"],
             "screening_reviewed_by_llm": len(review_clusters),
             "screening_heuristic_fallback": len(heuristic_fallback_topics),
+            "paper_spotlight_items": sum(len(section.get("items", [])) for section in paper_spotlight),
         },
         "costs": {"prompt": round(prompt_cost, 6), "completion": round(completion_cost, 6), "total": round(prompt_cost + completion_cost, 6)},
         "usage": usage,
@@ -1300,6 +1393,7 @@ def generate_daily_hotspot_report(output_root: str | Path, target_date: datetime
         "featured_topics": featured_topics,
         "category_sections": category_sections,
         "long_tail_sections": long_tail_sections,
+        "paper_spotlight": paper_spotlight,
         "x_buzz": x_buzz,
         "watchlist": watchlist,
     }

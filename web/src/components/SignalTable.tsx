@@ -8,13 +8,16 @@ function emptyCell() {
 
 function renderTitleCell(item: SourceSectionItem) {
   const topic = displayTopicRef(item);
+  const spotlightComment = (item.spotlight_comment ?? "").trim();
   return (
     <div className="title-cell">
       <a className="table-link title-link" href={item.url} target="_blank" rel="noreferrer">
         {item.title}
       </a>
+      {spotlightComment ? <div className="title-subline">{spotlightComment}</div> : null}
       <div className="title-tag-row">
         {topic ? <span className="title-tag topic-tag">{topic.headline}</span> : null}
+        {item.spotlight_primary_label ? <span className="title-tag topic-tag">{item.spotlight_primary_label}</span> : null}
         <span className="title-tag">{item.source_name}</span>
         <span className="title-tag">{formatSourceRole(item.source_role)}</span>
       </div>

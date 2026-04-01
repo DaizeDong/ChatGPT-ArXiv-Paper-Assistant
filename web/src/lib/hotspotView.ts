@@ -78,6 +78,8 @@ export function matchesSearch(item: SourceSectionItem, query: string) {
     item.source_name,
     item.source_role,
     item.source_type,
+    item.spotlight_primary_label ?? "",
+    item.spotlight_comment ?? "",
     item.tags.join(" "),
     item.topic_refs.map((topic) => topic.headline).join(" "),
   ]

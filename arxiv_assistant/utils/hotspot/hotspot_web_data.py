@@ -51,6 +51,16 @@ SOURCE_FAMILIES = [
 
 SOURCE_FAMILY_LOOKUP = {entry["slug"]: entry for entry in SOURCE_FAMILIES}
 SOURCE_FAMILY_ORDER = [entry["slug"] for entry in SOURCE_FAMILIES]
+PAPER_SPOTLIGHT_SECTION_META = {
+    "new_frontier": {
+        "label": "New Frontier Papers",
+        "description": "Papers that appear to open a genuinely new direction, paradigm, or field.",
+    },
+    "daily_hot": {
+        "label": "Daily Hot Papers",
+        "description": "Papers that feel broadly important to the day and belong in the hotspot paper feed.",
+    },
+}
 SOURCE_FAMILY_ORDER_BOOST = {
     "x-buzz": 2.5,
     "official": 2.35,
@@ -437,6 +447,10 @@ def _build_source_sections(raw_items: list[HotspotItem], report: dict[str, Any],
                 },
                 "signal_score": _item_signal_score(item, topic_lookup),
                 "topic_refs": linked_topics,
+                "spotlight_kinds": list(item.metadata.get("spotlight_kinds", [])),
+                "spotlight_primary_kind": str(item.metadata.get("spotlight_primary_kind", "") or ""),
+                "spotlight_primary_label": str(item.metadata.get("spotlight_primary_label", "") or ""),
+                "spotlight_comment": str(item.metadata.get("spotlight_comment", "") or ""),
             }
         )
 
@@ -466,6 +480,36 @@ def _build_source_sections(raw_items: list[HotspotItem], report: dict[str, Any],
     return sections
 
 
+def _build_paper_spotlight_sections(source_sections: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    paper_section = next((section for section in source_sections if section.get("slug") == "papers"), None)
+    if paper_section is None:
+        return []
+
+    grouped: dict[str, list[dict[str, Any]]] = {kind: [] for kind in PAPER_SPOTLIGHT_SECTION_META}
+    for item in paper_section.get("items", []):
+        spotlight_kind = str(item.get("spotlight_primary_kind", "") or "").strip()
+        if spotlight_kind in grouped:
+            grouped[spotlight_kind].append(dict(item))
+
+    sections: list[dict[str, Any]] = []
+    for kind in ("new_frontier", "daily_hot"):
+        items = grouped.get(kind, [])
+        if not items:
+            continue
+        meta = PAPER_SPOTLIGHT_SECTION_META[kind]
+        sections.append(
+            {
+                "slug": f"paper-spotlight-{kind}",
+                "kind": kind,
+                "label": meta["label"],
+                "description": meta["description"],
+                "count": len(items),
+                "items": items,
+            }
+        )
+    return sections
+
+
 def build_daily_hotspot_web_payload(
     report: dict[str, Any],
     raw_items: list[HotspotItem],
@@ -476,6 +520,7 @@ def build_daily_hotspot_web_payload(
 ) -> dict[str, Any]:
     topic_lookup, all_topics = _build_topic_lookup(report)
     source_sections = _build_source_sections(raw_items, report, topic_lookup)
+    paper_spotlight = _build_paper_spotlight_sections(source_sections)
     featured_topics = [
         _build_compact_topic(_build_topic_paths_and_merge(report, topic))
         for topic in report.get("featured_topics") or report.get("top_topics") or []
@@ -516,6 +561,7 @@ def build_daily_hotspot_web_payload(
                 "topic_summary": len(topic_summary),
                 "category_radar": sum(len(section["topics"]) for section in category_sections),
                 "long_tail": sum(len(section["topics"]) for section in long_tail_sections),
+                "paper_spotlight": sum(len(section["items"]) for section in paper_spotlight),
                 "x_buzz": len(report.get("x_buzz") or []),
                 "watchlist": len(watchlist_topics),
                 "source_items": sum(section["count"] for section in source_sections),
@@ -527,6 +573,7 @@ def build_daily_hotspot_web_payload(
         "source_stats": dict(report.get("source_stats") or {}),
         "source_section_counts": section_counts,
         "source_sections": source_sections,
+        "paper_spotlight": paper_spotlight,
         "topic_summary": topic_summary,
         "featured_topics": featured_topics,
         "category_sections": category_sections,

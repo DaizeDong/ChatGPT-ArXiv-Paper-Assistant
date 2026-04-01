@@ -11,7 +11,7 @@ from unittest.mock import patch
 from arxiv_assistant.apis.hotspot.hotspot_ainews import _choose_best_anchor, _derive_segment_title
 from arxiv_assistant.apis.hotspot.hotspot_github import fetch_hotspot_items as fetch_github_hotspot_items
 from arxiv_assistant.apis.hotspot.hotspot_hn import fetch_hotspot_items as fetch_hn_hotspot_items
-from arxiv_assistant.apis.hotspot.hotspot_local_papers import _resolve_best_source_path
+from arxiv_assistant.apis.hotspot.hotspot_local_papers import _resolve_best_source_path, fetch_hotspot_items as fetch_local_hotspot_items
 from arxiv_assistant.apis.hotspot.hotspot_official_blogs import _extract_anthropic_rows
 from arxiv_assistant.filters.filter_hotspots import _cluster_signal_scores, _digest_prompt_payload
 from arxiv_assistant.renderers.hotspot.render_hot_daily import render_hot_daily_md
@@ -37,6 +37,69 @@ class TestHotspotPipeline(unittest.TestCase):
             resolved_date, resolved_path = resolved
             self.assertEqual(resolved_date.isoformat(), "2026-03-20")
             self.assertEqual(resolved_path, target)
+
+    def test_local_papers_loads_hotspot_spotlight_companion(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            json_root = Path(tmp_dir) / "json" / "2026-04"
+            json_root.mkdir(parents=True, exist_ok=True)
+            (json_root / "2026-04-01-output.json").write_text(
+                json.dumps(
+                    {
+                        "2604.00001": {
+                            "arxiv_id": "2604.00001",
+                            "title": "Personalized paper",
+                            "abstract": "Foundational paper.",
+                            "authors": ["A"],
+                            "PRIMARY_TOPIC_ID": "memory_systems",
+                            "PRIMARY_TOPIC_LABEL": "Memory Structures and Agent Memory Systems",
+                            "SCORE": 18,
+                            "RELEVANCE": 9,
+                            "NOVELTY": 9,
+                        }
+                    }
+                ),
+                encoding="utf-8",
+            )
+            (json_root / "2026-04-01-hotspot-papers.json").write_text(
+                json.dumps(
+                    {
+                        "schema_version": 1,
+                        "papers": {
+                            "2604.00002": {
+                                "arxiv_id": "2604.00002",
+                                "title": "Hot frontier paper",
+                                "abstract": "Opens a new direction.",
+                                "authors": ["B"],
+                                "PRIMARY_TOPIC_ID": "architecture_training",
+                                "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+                                "SCORE": 17,
+                                "RELEVANCE": 8,
+                                "NOVELTY": 9,
+                                "HOTSPOT_PAPER_TAGS": ["new_frontier"],
+                                "HOTSPOT_PAPER_PRIMARY_KIND": "new_frontier",
+                                "HOTSPOT_PAPER_PRIMARY_LABEL": "New Frontier Papers",
+                                "HOTSPOT_PAPER_COMMENT": "Likely opens a new direction.",
+                            }
+                        },
+                        "sections": [
+                            {
+                                "kind": "new_frontier",
+                                "label": "New Frontier Papers",
+                                "paper_ids": ["2604.00002"],
+                            }
+                        ],
+                    }
+                ),
+                encoding="utf-8",
+            )
+
+            items = fetch_local_hotspot_items(datetime(2026, 4, 1, tzinfo=UTC), tmp_dir)
+
+            self.assertEqual(len(items), 2)
+            spotlight_item = next(item for item in items if item.source_id == "local_hotspot_papers")
+            self.assertEqual(spotlight_item.source_role, "paper_trending")
+            self.assertEqual(spotlight_item.metadata["spotlight_primary_kind"], "new_frontier")
+            self.assertIn("New Frontier Papers", spotlight_item.tags)
 
     def test_ainews_prefers_non_media_external_anchor(self) -> None:
         segment_html = """
@@ -842,6 +905,25 @@ class TestHotspotPipeline(unittest.TestCase):
             "summary": "Strong multi-source AI discussion across releases, tooling, and research.",
             "source_stats": {"ainews": 3, "github_trend": 5},
             "totals": {"raw_items": 20, "clusters": 15},
+            "paper_spotlight": [
+                {
+                    "kind": "new_frontier",
+                    "label": "New Frontier Papers",
+                    "description": "Papers that appear to open a genuinely new direction, paradigm, or field.",
+                    "items": [
+                        {
+                            "title": "Hot frontier paper",
+                            "url": "https://arxiv.org/abs/2603.00001",
+                            "arxiv_id": "2603.00001",
+                            "primary_topic_label": "Architecture and Training Dynamics",
+                            "spotlight_comment": "Likely opens a new direction.",
+                            "daily_score": 18,
+                            "relevance": 9,
+                            "novelty": 9,
+                        }
+                    ],
+                }
+            ],
             "featured_topics": [
                 {
                     "TOPIC_ID": "featured-official",
@@ -903,6 +985,8 @@ class TestHotspotPipeline(unittest.TestCase):
         rendered = render_hot_daily_md(report)
 
         self.assertIn("## Featured Topics", rendered)
+        self.assertIn("## Paper Spotlight", rendered)
+        self.assertIn("### New Frontier Papers (1)", rendered)
         self.assertIn("## Topic Radar By Category", rendered)
         self.assertIn("## Long-tail Signals", rendered)
         self.assertIn("### Tooling (1 shown / 2 candidates)", rendered)

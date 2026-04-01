@@ -3,6 +3,7 @@
 ### 2026-04-01
 
 - Reformated the structure for daily arXiv papers by grouping them into multiple topics.
+- Routed daily hotspot-worthy papers into the Daily AI Hotspots paper spotlight section.
 
 ### 2026-03-23
 

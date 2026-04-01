@@ -158,6 +158,7 @@ export function DailyHotspotPage({ date }: { date: string }) {
   const { payload } = state;
   const searchQuery = (searchParams.get("q") ?? "").trim().toLowerCase();
   const visibleSections = filterSectionsBySearch(payload.source_sections, searchQuery);
+  const visiblePaperSpotlight = filterSectionsBySearch(payload.paper_spotlight ?? [], searchQuery);
   const visibleTopicSummary = buildVisibleTopicSummary(payload, searchQuery);
   const paperHref = bestPaperRoute(payload.meta.paper_routes, ["day", "month", "year", "home"]);
   const usageRows = buildUsageRows(payload);
@@ -216,8 +217,9 @@ export function DailyHotspotPage({ date }: { date: string }) {
         <div className="archive-head-meta">
           <span>{payload.meta.date}</span>
           <span>{payload.meta.counts.source_items} items</span>
+          <span>{payload.meta.counts.paper_spotlight ?? 0} spotlight papers</span>
           <span>{visibleTopicSummary.length} topics</span>
-          <span>{visibleSections.length} sections</span>
+          <span>{visiblePaperSpotlight.length + visibleSections.length} sections</span>
         </div>
       </section>
 
@@ -258,6 +260,15 @@ export function DailyHotspotPage({ date }: { date: string }) {
           </div>
         </section>
       ) : null}
+
+      {visiblePaperSpotlight.map((section) => (
+        <section className="panel source-family-panel compact-panel" id={`section-${section.slug}`} key={section.slug}>
+          <div className="section-header table-header">
+            <h2>{sectionTitle(section)}</h2>
+          </div>
+          <SignalTable items={section.filteredItems} />
+        </section>
+      ))}
 
       <section className="panel compact-panel">
         <div className="section-header table-header">

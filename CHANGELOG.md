@@ -1,5 +1,9 @@
 # Changelog
 
+### 2026-04-01
+
+- Reformated the structure for daily arXiv papers by grouping them into multiple topics.
+
 ### 2026-03-23
 
 - Added daily hotspot usage reporting for OpenAI tokens/cost and external API request counts.

@@ -1,6 +1,6 @@
 # ChatGPT ArXiv Paper Assistant
 
-> *Last update: 2026-03-22*  
+> *Last update: 2026-04-01*  
 > An enhanced version of the [GPT paper assistant](https://github.com/tatsu-lab/gpt_paper_assistant).  
 > This repo now supports both Personalized Daily Arxiv Paper and a daily AI hotspots digest, then publishes them as a multi-page static site.
 

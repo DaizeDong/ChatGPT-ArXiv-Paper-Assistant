@@ -6,6 +6,7 @@ from arxiv_assistant.apis.semantic_scholar import get_authors
 from arxiv_assistant.environment import AUTHOR_ID_SET, SYSTEM_PROMPT, CONFIG, NOW_DAY, NOW_MONTH, NOW_YEAR, OUTPUT_DEBUG_FILE_FORMAT, OUTPUT_JSON_FILE_FORMAT, OUTPUT_MD_FILE_FORMAT, POSTFIX_PROMPT_ABSTRACT, POSTFIX_PROMPT_TITLE, S2_API_KEY, SCORE_PROMPT, SLACK_KEY, TOPIC_PROMPT
 from arxiv_assistant.filters.filter_author import filter_papers_by_hindex, select_by_author
 from arxiv_assistant.filters.filter_gpt import filter_by_gpt
+from arxiv_assistant.paper_topics import build_daily_topic_bundle, ensure_topic_fields_for_mapping, sort_paper_mapping_for_daily_display
 from arxiv_assistant.push_to_slack import push_to_slack
 from arxiv_assistant.renderers.paper.render_daily import render_daily_md, render_summary_table
 from arxiv_assistant.utils.io import copy_file_or_dir, delete_file_or_dir
@@ -86,15 +87,22 @@ if __name__ == "__main__":
         total_prompt_cost, total_completion_cost, total_prompt_tokens, total_completion_tokens = 0.0, 0.0, 0, 0
         print("Skipping GPT filtering")
 
-    # sort the papers by relevance and novelty
-    selected_paper_dict = {
-        k: v
-        for k, v in sorted(
-            selected_paper_dict.items(),
-            key=lambda x: (x[1].get("SCORE", 0), x[1].get("RELEVANCE", 0)),  # sort first by total scores then by relevance
-            reverse=True
-        )
-    }
+    selected_paper_dict = sort_paper_mapping_for_daily_display(selected_paper_dict)
+    filtered_paper_dict = ensure_topic_fields_for_mapping(filtered_paper_dict)
+    daily_topic_bundle = build_daily_topic_bundle(
+        (NOW_YEAR, NOW_MONTH, NOW_DAY),
+        selected_paper_dict,
+        usage={
+            "model": CONFIG["SELECTION"]["model"],
+            "prompt_tokens": total_prompt_tokens,
+            "completion_tokens": total_completion_tokens,
+            "prompt_cost": total_prompt_cost,
+            "completion_cost": total_completion_cost,
+            "total_arxiv_papers": len(all_entries),
+            "total_scanned_papers": sum(len(area_papers) for area_papers in arxiv_paper_dict.values()),
+            "total_relevant_papers": len(selected_paper_dict),
+        },
+    )
 
     # dump filtered & selected papers for debugging
     if CONFIG["OUTPUT"].getboolean("dump_debug_file"):
@@ -102,10 +110,14 @@ if __name__ == "__main__":
             json.dump(selected_paper_dict, outfile, cls=EnhancedJSONEncoder, indent=4)
         with open(OUTPUT_DEBUG_FILE_FORMAT.format("filtered_paper_dict.json"), "w") as outfile:
             json.dump(filtered_paper_dict, outfile, cls=EnhancedJSONEncoder, indent=4)
+        with open(OUTPUT_DEBUG_FILE_FORMAT.format("topic_diagnostics.json"), "w") as outfile:
+            json.dump(daily_topic_bundle["diagnostics"], outfile, indent=4)
 
     if CONFIG["OUTPUT"].getboolean("dump_json"):
         with open(OUTPUT_JSON_FILE_FORMAT.format("output.json"), "w") as outfile:
             json.dump(selected_paper_dict, outfile, indent=4)
+        with open(OUTPUT_JSON_FILE_FORMAT.format("daily-papers.json"), "w") as outfile:
+            json.dump(daily_topic_bundle, outfile, indent=4)
 
     if CONFIG["OUTPUT"].getboolean("dump_md"):
         head_table = {
@@ -121,7 +133,7 @@ if __name__ == "__main__":
             )
         }
         with open(OUTPUT_MD_FILE_FORMAT.format("latest.md"), "w") as f:
-            f.write(render_daily_md(all_entries, arxiv_paper_dict, selected_paper_dict, now_date=(NOW_YEAR, NOW_MONTH, NOW_DAY), prompts=(SYSTEM_PROMPT, POSTFIX_PROMPT_ABSTRACT, SCORE_PROMPT, TOPIC_PROMPT), head_table=head_table))
+            f.write(render_daily_md(all_entries, arxiv_paper_dict, selected_paper_dict, now_date=(NOW_YEAR, NOW_MONTH, NOW_DAY), prompts=(SYSTEM_PROMPT, TOPIC_PROMPT, SCORE_PROMPT, POSTFIX_PROMPT_ABSTRACT), head_table=head_table))
 
     # only push to slack for non-empty dicts
     if CONFIG["OUTPUT"].getboolean("push_to_slack"):

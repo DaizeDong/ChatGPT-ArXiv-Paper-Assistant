@@ -15,15 +15,22 @@ REPO_ROOT = Path(__file__).resolve().parents[1]
 if str(REPO_ROOT) not in sys.path:
     sys.path.insert(0, str(REPO_ROOT))
 
-from arxiv_assistant.renderers.paper.monthly_summary import MONTH_CATEGORY_ORDER, discover_daily_json
+from arxiv_assistant.paper_daily_io import discover_daily_json, extract_paper_mapping
+from arxiv_assistant.paper_topics import (
+    build_topic_registry_prompt_block,
+    ensure_topic_fields,
+    get_topic_registry,
+    normalize_topic_ids,
+)
+from arxiv_assistant.renderers.paper.monthly_summary import MONTH_TOPIC_ORDER
 from arxiv_assistant.renderers.site_paths import site_day_page_path
 from arxiv_assistant.utils.local_env import load_local_env
-from arxiv_assistant.utils.prompt_loader import read_prompt
 from arxiv_assistant.utils.pricing_loader import get_model_pricing
+from arxiv_assistant.utils.prompt_loader import read_prompt
 
 load_local_env()
 
-ALLOWED_CATEGORIES = set(MONTH_CATEGORY_ORDER)
+ALLOWED_TOPIC_IDS = set(MONTH_TOPIC_ORDER)
 MONTHLY_PRIORITY_POSITIVE_SIGNALS = {
     "theory": 50,
     "theoretical": 50,
@@ -48,6 +55,10 @@ MONTHLY_PRIORITY_POSITIVE_SIGNALS = {
     "representation learning": 25,
     "contrastive": 20,
     "interpretability": 18,
+    "world model": 30,
+    "exploration": 22,
+    "continual rl": 18,
+    "episodic memory": 18,
 }
 MONTHLY_PRIORITY_NEGATIVE_SIGNALS = {
     "survey": -120,
@@ -94,7 +105,7 @@ def load_config(config_path: Path) -> configparser.ConfigParser:
     return config
 
 
-def _paper_sort_key(paper_entry: Dict) -> Tuple[int, int, int, Tuple[int, int, int], str]:
+def _paper_sort_key(paper_entry: Dict) -> Tuple[int, int, int, int, Tuple[int, int, int], str]:
     return (
         int(paper_entry.get("MONTHLY_PRIORITY", 0)),
         int(paper_entry.get("SCORE", 0)),
@@ -103,16 +114,17 @@ def _paper_sort_key(paper_entry: Dict) -> Tuple[int, int, int, Tuple[int, int, i
         tuple(paper_entry.get("SOURCE_DATE", (0, 0, 0))),
         str(paper_entry.get("arxiv_id", "")),
     )
-
-
 def _normalize_paper_entry(date: Tuple[int, int, int], arxiv_id: str, paper_entry: Dict) -> Dict:
-    return {
-        **paper_entry,
-        "arxiv_id": paper_entry.get("arxiv_id", arxiv_id),
-        "ARXIVID": paper_entry.get("ARXIVID", arxiv_id),
-        "SOURCE_DATE": list(date),
-        "SOURCE_DAY_PAGE": site_day_page_path(date),
-    }
+    return ensure_topic_fields(
+        {
+            **paper_entry,
+            "arxiv_id": paper_entry.get("arxiv_id", arxiv_id),
+            "ARXIVID": paper_entry.get("ARXIVID", arxiv_id),
+            "SOURCE_DATE": list(date),
+            "SOURCE_DAY_PAGE": site_day_page_path(date),
+        },
+        arxiv_id=paper_entry.get("arxiv_id", arxiv_id),
+    )
 
 
 def collect_monthly_papers(json_root: Path) -> Dict[Tuple[int, int], List[Dict]]:
@@ -125,7 +137,7 @@ def collect_monthly_papers(json_root: Path) -> Dict[Tuple[int, int], List[Dict]]
             daily_payload = json.load(infile)
 
         month_bucket = month_entries.setdefault(month_key, {})
-        for arxiv_id, paper_entry in daily_payload.items():
+        for arxiv_id, paper_entry in extract_paper_mapping(daily_payload).items():
             normalized_entry = _normalize_paper_entry(date, arxiv_id, paper_entry)
             existing_entry = month_bucket.get(arxiv_id)
             if existing_entry is None or _paper_sort_key(normalized_entry) > _paper_sort_key(existing_entry):
@@ -151,16 +163,19 @@ def is_month_closed(month_key: Tuple[int, int], now_time: datetime, include_open
 def build_source_hash(papers: List[Dict]) -> str:
     digest = hashlib.sha256()
     for paper in papers:
-        digest.update(json.dumps(
-            {
-                "arxiv_id": paper["arxiv_id"],
-                "title": paper.get("title", ""),
-                "comment": paper.get("COMMENT", ""),
-                "score": paper.get("SCORE", 0),
-                "source_date": paper.get("SOURCE_DATE", []),
-            },
-            sort_keys=True,
-        ).encode("utf-8"))
+        digest.update(
+            json.dumps(
+                {
+                    "arxiv_id": paper["arxiv_id"],
+                    "title": paper.get("title", ""),
+                    "comment": paper.get("COMMENT", ""),
+                    "score": paper.get("SCORE", 0),
+                    "primary_topic_id": paper.get("PRIMARY_TOPIC_ID", ""),
+                    "source_date": paper.get("SOURCE_DATE", []),
+                },
+                sort_keys=True,
+            ).encode("utf-8")
+        )
     return digest.hexdigest()
 
 
@@ -184,7 +199,7 @@ def build_openai_batch_prompt(criteria_prompt: str, postfix_prompt: str, papers:
         [
             "## Digest Size Guidance",
             f"- Aim to keep roughly {config['MONTHLY_SUMMARY']['target_total_papers']} papers total for the month when possible.",
-            f"- Avoid keeping more than about {config['MONTHLY_SUMMARY']['max_papers_per_category']} papers in any one category unless the month is unusually strong.",
+            f"- Avoid keeping more than about {config['MONTHLY_SUMMARY']['max_papers_per_category']} papers in any one topic unless the month is unusually strong.",
         ]
     )
     rendered_papers = []
@@ -200,6 +215,7 @@ def build_openai_batch_prompt(criteria_prompt: str, postfix_prompt: str, papers:
                     f"Daily Relevance: {paper.get('RELEVANCE', 0)}",
                     f"Daily Novelty: {paper.get('NOVELTY', 0)}",
                     f"Daily Comment: {paper.get('COMMENT', '')}",
+                    f"Daily Topic: {paper.get('PRIMARY_TOPIC_LABEL', '')} ({paper.get('PRIMARY_TOPIC_ID', '')})",
                     f"Abstract: {paper.get('abstract', '')[:3500]}",
                 ]
             )
@@ -208,6 +224,7 @@ def build_openai_batch_prompt(criteria_prompt: str, postfix_prompt: str, papers:
     return "\n\n".join(
         [
             criteria_prompt,
+            build_topic_registry_prompt_block(),
             selection_guidance,
             "## Papers",
             "\n\n".join(rendered_papers),
@@ -261,6 +278,7 @@ def classify_month_with_openai(
     if not openai_api_key:
         raise ValueError("OPENAI_API_KEY is required for monthly summary generation in openai mode")
 
+    topic_registry = get_topic_registry()
     client = OpenAI(api_key=openai_api_key, base_url=openai_base_url)
     classified: Dict[str, Dict] = {}
     total_prompt_cost = 0.0
@@ -289,23 +307,38 @@ def classify_month_with_openai(
                 last_error = ex
                 continue
 
-            parsed_by_id = {
-                row["ARXIVID"]: row
-                for row in parsed_rows
-                if row.get("PRIMARY_CATEGORY") in ALLOWED_CATEGORIES
-            }
+            parsed_by_id = {}
+            for row in parsed_rows:
+                primary_topic_id = topic_registry.normalize(row.get("PRIMARY_TOPIC_ID") or row.get("PRIMARY_CATEGORY"))
+                if primary_topic_id not in ALLOWED_TOPIC_IDS:
+                    continue
+                parsed_by_id[row["ARXIVID"]] = {
+                    **row,
+                    "PRIMARY_TOPIC_ID": primary_topic_id,
+                }
+
             missing_ids = {paper["arxiv_id"] for paper in remaining} - set(parsed_by_id.keys())
             for paper in remaining:
                 row = parsed_by_id.get(paper["arxiv_id"])
                 if row is None:
                     continue
+                secondary_topic_ids = normalize_topic_ids(
+                    row.get("SECONDARY_TOPIC_IDS") or row.get("SECONDARY_CATEGORIES") or [],
+                    primary_topic_id=row["PRIMARY_TOPIC_ID"],
+                )
                 classified[paper["arxiv_id"]] = {
                     **paper,
-                    "PRIMARY_CATEGORY": row["PRIMARY_CATEGORY"],
-                    "SECONDARY_CATEGORIES": [
-                        category
-                        for category in row.get("SECONDARY_CATEGORIES", [])
-                        if category in ALLOWED_CATEGORIES and category != row["PRIMARY_CATEGORY"]
+                    "PRIMARY_TOPIC_ID": row["PRIMARY_TOPIC_ID"],
+                    "PRIMARY_TOPIC_LABEL": topic_registry.labels_by_id[row["PRIMARY_TOPIC_ID"]],
+                    "SECONDARY_TOPIC_IDS": [
+                        topic_id
+                        for topic_id in secondary_topic_ids
+                        if topic_id != row["PRIMARY_TOPIC_ID"]
+                    ],
+                    "SECONDARY_TOPIC_LABELS": [
+                        topic_registry.labels_by_id[topic_id]
+                        for topic_id in secondary_topic_ids
+                        if topic_id != row["PRIMARY_TOPIC_ID"]
                     ],
                     "KEEP_IN_MONTHLY": bool(row.get("KEEP_IN_MONTHLY", False)),
                     "MONTHLY_COMMENT": row.get("MONTHLY_COMMENT", ""),
@@ -319,20 +352,21 @@ def classify_month_with_openai(
                 raise last_error
 
         for paper in remaining:
-            if paper["arxiv_id"] not in classified:
-                classified[paper["arxiv_id"]] = {
-                    **paper,
-                    "PRIMARY_CATEGORY": "Other Foundational Research",
-                    "SECONDARY_CATEGORIES": [],
-                    "KEEP_IN_MONTHLY": False,
-                    "MONTHLY_COMMENT": "Excluded because monthly classification did not return a stable structured result.",
-                }
+            if paper["arxiv_id"] in classified:
+                continue
+            fallback_entry = ensure_topic_fields(paper, arxiv_id=paper["arxiv_id"])
+            classified[paper["arxiv_id"]] = {
+                **fallback_entry,
+                "SECONDARY_TOPIC_IDS": [],
+                "SECONDARY_TOPIC_LABELS": [],
+                "KEEP_IN_MONTHLY": False,
+                "MONTHLY_COMMENT": "Excluded because monthly classification did not return a stable structured result.",
+            }
 
     return list(classified.values()), total_prompt_cost, total_completion_cost
 
 
 def classify_month_with_heuristic(papers: List[Dict]) -> List[Dict]:
-    from arxiv_assistant.renderers.paper.monthly_summary import classify_monthly_summary_category
     config = load_config(REPO_ROOT / "configs" / "config.ini")
     score_cutoff = int(config["MONTHLY_SUMMARY"]["fallback_score_cutoff"])
     relevance_cutoff = int(config["MONTHLY_SUMMARY"]["fallback_relevance_cutoff"])
@@ -343,11 +377,12 @@ def classify_month_with_heuristic(papers: List[Dict]) -> List[Dict]:
         score = int(paper.get("SCORE", 0))
         relevance = int(paper.get("RELEVANCE", 0))
         novelty = int(paper.get("NOVELTY", 0))
+        topic_entry = ensure_topic_fields(paper, arxiv_id=paper["arxiv_id"])
         classified.append(
             {
-                **paper,
-                "PRIMARY_CATEGORY": classify_monthly_summary_category(paper),
-                "SECONDARY_CATEGORIES": [],
+                **topic_entry,
+                "SECONDARY_TOPIC_IDS": [],
+                "SECONDARY_TOPIC_LABELS": [],
                 "KEEP_IN_MONTHLY": score >= score_cutoff and relevance >= relevance_cutoff and novelty >= novelty_cutoff,
                 "MONTHLY_COMMENT": paper.get("COMMENT", ""),
             }
@@ -364,7 +399,7 @@ def compute_monthly_priority(paper: Dict) -> int:
     if relevance == 0 and novelty == 0:
         base_priority -= 300
 
-    if paper.get("PRIMARY_CATEGORY") == "Other Foundational Research":
+    if paper.get("TOPIC_ASSIGNMENT_SOURCE") == "default":
         base_priority -= 25
 
     title_text = str(paper.get("title", "")).lower()
@@ -379,7 +414,7 @@ def compute_monthly_priority(paper: Dict) -> int:
         if signal in text:
             base_priority += penalty
 
-    if "author match" in comment_text and relevance == 0 and novelty == 0:
+    if "author match" in comment_text and score == 0:
         base_priority -= 400
 
     return base_priority
@@ -388,48 +423,45 @@ def compute_monthly_priority(paper: Dict) -> int:
 def apply_digest_caps(papers: List[Dict], config: configparser.ConfigParser) -> List[Dict]:
     max_per_category = int(config["MONTHLY_SUMMARY"]["max_papers_per_category"])
     target_total = int(config["MONTHLY_SUMMARY"]["target_total_papers"])
+    topic_registry = get_topic_registry()
     enriched_papers = [{**paper, "MONTHLY_PRIORITY": compute_monthly_priority(paper)} for paper in papers]
 
-    kept_by_category: Dict[str, List[Dict]] = {category: [] for category in MONTH_CATEGORY_ORDER}
-    dropped_ids = set()
+    kept_by_topic: Dict[str, List[Dict]] = {topic_id: [] for topic_id in MONTH_TOPIC_ORDER}
 
     for paper in enriched_papers:
         if not paper.get("KEEP_IN_MONTHLY", False):
             continue
-        category = paper.get("PRIMARY_CATEGORY", "Other Foundational Research")
-        if category not in kept_by_category:
-            category = "Other Foundational Research"
-        kept_by_category[category].append(paper)
+        topic_id = paper.get("PRIMARY_TOPIC_ID", topic_registry.default_topic_id)
+        if topic_id not in kept_by_topic:
+            topic_id = topic_registry.default_topic_id
+        kept_by_topic[topic_id].append(paper)
 
-    for category in MONTH_CATEGORY_ORDER:
-        kept_by_category[category] = sorted(kept_by_category[category], key=_paper_sort_key, reverse=True)
-        if max_per_category > 0 and len(kept_by_category[category]) > max_per_category:
-            dropped_ids.update(paper["arxiv_id"] for paper in kept_by_category[category][max_per_category:])
-            kept_by_category[category] = kept_by_category[category][:max_per_category]
+    for topic_id in MONTH_TOPIC_ORDER:
+        kept_by_topic[topic_id] = sorted(kept_by_topic[topic_id], key=_paper_sort_key, reverse=True)
+        if max_per_category > 0 and len(kept_by_topic[topic_id]) > max_per_category:
+            kept_by_topic[topic_id] = kept_by_topic[topic_id][:max_per_category]
 
-    kept_after_category_cap = [paper for category in MONTH_CATEGORY_ORDER for paper in kept_by_category[category]]
-    kept_after_category_cap = sorted(kept_after_category_cap, key=_paper_sort_key, reverse=True)
+    kept_after_topic_cap = [paper for topic_id in MONTH_TOPIC_ORDER for paper in kept_by_topic[topic_id]]
+    kept_after_topic_cap = sorted(kept_after_topic_cap, key=_paper_sort_key, reverse=True)
 
-    if target_total > 0 and len(kept_after_category_cap) > target_total:
+    if target_total > 0 and len(kept_after_topic_cap) > target_total:
         preserved_ids = []
-        for category in MONTH_CATEGORY_ORDER:
-            if kept_by_category[category]:
-                preserved_ids.append(kept_by_category[category][0]["arxiv_id"])
+        for topic_id in MONTH_TOPIC_ORDER:
+            if kept_by_topic[topic_id]:
+                preserved_ids.append(kept_by_topic[topic_id][0]["arxiv_id"])
         preserved_set = set(preserved_ids)
 
         final_ids = list(preserved_ids)
         remaining_capacity = max(target_total - len(final_ids), 0)
         remaining_candidates = [
             paper["arxiv_id"]
-            for paper in kept_after_category_cap
+            for paper in kept_after_topic_cap
             if paper["arxiv_id"] not in preserved_set
         ]
         final_ids.extend(remaining_candidates[:remaining_capacity])
         final_set = set(final_ids)
-        dropped_ids.update(paper["arxiv_id"] for paper in kept_after_category_cap if paper["arxiv_id"] not in final_set)
-
     else:
-        final_set = {paper["arxiv_id"] for paper in kept_after_category_cap}
+        final_set = {paper["arxiv_id"] for paper in kept_after_topic_cap}
 
     adjusted = []
     for paper in enriched_papers:
@@ -465,6 +497,7 @@ def write_monthly_report(
         "month": f"{month_key[0]:04d}-{month_key[1]:02d}",
         "generated_at": datetime.now(UTC).isoformat(),
         "model": model_name,
+        "topic_schema_version": get_topic_registry().schema_version,
         "source_hash": source_hash,
         "prompt_cost": prompt_cost,
         "completion_cost": completion_cost,

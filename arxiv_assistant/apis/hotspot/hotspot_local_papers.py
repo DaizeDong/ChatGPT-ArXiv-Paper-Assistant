@@ -68,6 +68,9 @@ def fetch_hotspot_items(target_date: datetime, output_root: str | Path, max_stal
 
     for arxiv_id, paper in payload.items():
         url = f"https://arxiv.org/abs/{paper.get('arxiv_id', arxiv_id)}"
+        primary_topic_id = paper.get("PRIMARY_TOPIC_ID")
+        primary_topic_label = paper.get("PRIMARY_TOPIC_LABEL")
+        tags = [tag for tag in [primary_topic_id, primary_topic_label] if tag]
         items.append(
             HotspotItem(
                 source_id="local_papers",
@@ -79,7 +82,7 @@ def fetch_hotspot_items(target_date: datetime, output_root: str | Path, max_stal
                 url=url,
                 canonical_url=url,
                 published_at=published_at,
-                tags=[],
+                tags=tags,
                 authors=list(paper.get("authors", [])),
                 metadata={
                     "arxiv_id": paper.get("arxiv_id", arxiv_id),
@@ -87,6 +90,8 @@ def fetch_hotspot_items(target_date: datetime, output_root: str | Path, max_stal
                     "relevance": paper.get("RELEVANCE", 0),
                     "novelty": paper.get("NOVELTY", 0),
                     "comment": paper.get("COMMENT", ""),
+                    "primary_topic_id": primary_topic_id,
+                    "primary_topic_label": primary_topic_label,
                 },
             )
         )

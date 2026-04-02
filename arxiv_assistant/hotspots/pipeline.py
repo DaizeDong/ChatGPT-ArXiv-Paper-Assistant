@@ -12,11 +12,13 @@ from zoneinfo import ZoneInfo
 REPO_ROOT = Path(__file__).resolve().parents[2]
 
 from arxiv_assistant.apis.hotspot.hotspot_ainews import fetch_hotspot_items as fetch_ainews_items
+from arxiv_assistant.apis.hotspot.hotspot_analysis_feeds import fetch_hotspot_items as fetch_analysis_feed_items
 from arxiv_assistant.apis.hotspot.hotspot_github import fetch_hotspot_items as fetch_github_items
 from arxiv_assistant.apis.hotspot.hotspot_hf_papers import fetch_hotspot_items as fetch_hf_items
 from arxiv_assistant.apis.hotspot.hotspot_hn import fetch_hotspot_items as fetch_hn_items
 from arxiv_assistant.apis.hotspot.hotspot_local_papers import fetch_hotspot_items as fetch_local_paper_items
 from arxiv_assistant.apis.hotspot.hotspot_official_blogs import fetch_hotspot_items as fetch_official_blog_items
+from arxiv_assistant.apis.hotspot.hotspot_reddit import fetch_hotspot_items as fetch_reddit_items
 from arxiv_assistant.apis.hotspot.hotspot_roundups import fetch_hotspot_items as fetch_roundup_items
 from arxiv_assistant.apis.hotspot.hotspot_x_ainews import fetch_hotspot_items as fetch_x_ainews_items
 from arxiv_assistant.apis.hotspot.hotspot_x_official import fetch_hotspot_items as fetch_x_official_items
@@ -100,6 +102,8 @@ SOURCE_USAGE_META = {
     "ainews": {"provider": "AINews RSS", "billing_model": "free"},
     "official_blogs": {"provider": "Official blogs", "billing_model": "free"},
     "roundup_sites": {"provider": "Roundup sites", "billing_model": "free"},
+    "analysis_feeds": {"provider": "Analysis RSS feeds", "billing_model": "free"},
+    "reddit": {"provider": "Reddit JSON API", "billing_model": "free"},
     "x_ainews_twitter": {"provider": "AINews Twitter recap", "billing_model": "free"},
     "x_paperpulse": {"provider": "PaperPulse", "billing_model": "free"},
     "x_official": {"provider": "X API", "billing_model": "quota"},
@@ -716,10 +720,19 @@ def fetch_source_payloads(
         specs.append(("hf_papers", lambda: fetch_hf_items(target_date, freshness_hours, result_limit=hf_result_limit)))
     if hotspot_sources.getboolean("use_ainews", fallback=True):
         specs.append(("ainews", lambda: fetch_ainews_items(target_date, freshness_hours)))
+    official_blogs_registry = REPO_ROOT / "configs" / "hotspot" / "official_blogs.json"
     if hotspot_sources.getboolean("use_official_blogs", fallback=True):
-        specs.append(("official_blogs", lambda: fetch_official_blog_items(target_date, freshness_hours)))
+        specs.append(("official_blogs", lambda: fetch_official_blog_items(
+            target_date, freshness_hours,
+            registry_path=str(official_blogs_registry) if official_blogs_registry.exists() else None,
+        )))
     if hotspot_sources.getboolean("use_roundup_sites", fallback=True):
         specs.append(("roundup_sites", lambda: fetch_roundup_items(target_date, freshness_hours, registry_path)))
+    analysis_feeds_registry = REPO_ROOT / "configs" / "hotspot" / "analysis_feeds.json"
+    if hotspot_sources.getboolean("use_analysis_feeds", fallback=True) and analysis_feeds_registry.exists():
+        specs.append(("analysis_feeds", lambda: fetch_analysis_feed_items(target_date, freshness_hours, analysis_feeds_registry)))
+    if hotspot_sources.getboolean("use_reddit", fallback=True):
+        specs.append(("reddit", lambda: fetch_reddit_items(target_date, freshness_hours)))
     if hotspot_sources.getboolean("use_x_ainews_twitter", fallback=True):
         specs.append(("x_ainews_twitter", lambda: fetch_x_ainews_items(target_date, freshness_hours)))
     if hotspot_sources.getboolean("use_x_paperpulse", fallback=True):

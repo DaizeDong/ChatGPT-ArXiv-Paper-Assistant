@@ -10,7 +10,7 @@ from bs4 import BeautifulSoup
 from arxiv_assistant.utils.hotspot.hotspot_schema import HotspotItem, clean_text
 from arxiv_assistant.utils.hotspot.hotspot_sources import clip_text, fetch_text, is_fresh, normalize_url, parse_datetime
 
-OFFICIAL_SOURCES = [
+FALLBACK_OFFICIAL_SOURCES = [
     {
         "source_id": "openai_news",
         "source_name": "OpenAI News",
@@ -36,6 +36,17 @@ OFFICIAL_SOURCES = [
         "mode": "meta_html",
     },
 ]
+
+
+def _load_official_blog_registry(registry_path: str | None = None) -> list[dict[str, Any]]:
+    if registry_path:
+        from pathlib import Path
+        path = Path(registry_path)
+        if path.exists():
+            import json
+            sources = json.loads(path.read_text(encoding="utf-8"))
+            return [s for s in sources if s.get("enabled", True)]
+    return FALLBACK_OFFICIAL_SOURCES
 GENERIC_TITLES = {"news", "newsroom", "ai", "blog", "home", "featured", "learn more"}
 DATE_PATTERN = re.compile(r"\b(?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)[a-z]* \d{1,2}, \d{4}\b", re.I)
 ANTHROPIC_PREFIX_PATTERN = re.compile(
@@ -179,25 +190,72 @@ def _extract_meta_rows(page_html: str, base_url: str) -> list[dict[str, Any]]:
     return rows
 
 
+def _extract_generic_blog_rows(page_html: str, base_url: str) -> list[dict[str, Any]]:
+    """Generic HTML blog extractor for blogs without RSS."""
+    soup = BeautifulSoup(page_html, "html.parser")
+    rows: list[dict[str, Any]] = []
+    seen: set[str] = set()
+
+    for anchor in soup.find_all("a", href=True):
+        href = normalize_url(anchor["href"], base_url)
+        if href == normalize_url(base_url) or href in seen:
+            continue
+        # Must be an internal link to a blog/news post
+        base_domain = re.sub(r"^www\.", "", (base_url.split("//", 1)[-1]).split("/", 1)[0])
+        if base_domain not in href:
+            continue
+
+        title_node = anchor.find(["h1", "h2", "h3", "h4"])
+        title = clean_text(title_node.get_text(" ", strip=True)) if title_node else clean_text(anchor.get_text(" ", strip=True))
+        title = _normalize_official_title(title)
+        if not title or _looks_generic_title(title, href, base_url) or len(title) < 15:
+            continue
+
+        # Look for date and summary in container
+        container = anchor.parent
+        parent_text = clean_text(container.get_text(" ", strip=True)) if container else ""
+        published_at = _extract_date_from_text(parent_text)
+        time_node = anchor.find("time") or (container.find("time") if container else None)
+        if not published_at and time_node:
+            published_at = time_node.get("datetime") or clean_text(time_node.get_text(" ", strip=True))
+            if published_at:
+                parsed = parse_datetime(published_at)
+                published_at = parsed.astimezone(UTC).isoformat() if parsed else None
+
+        summary_node = anchor.find("p") or (container.find("p") if container else None)
+        summary = clean_text(summary_node.get_text(" ", strip=True)) if summary_node else ""
+
+        seen.add(href)
+        rows.append({"title": title, "summary": summary, "url": href, "published_at": published_at})
+        if len(rows) >= 8:
+            break
+    return rows
+
+
 def _fetch_html_source(source: dict[str, str], target_date: datetime, freshness_hours: int) -> list[HotspotItem]:
     page_html = fetch_text(source["url"])
     if source["mode"] == "anthropic_html":
         rows = _extract_anthropic_rows(page_html, source["url"])
     elif source["mode"] == "meta_html":
         rows = _extract_meta_rows(page_html, source["url"])
+    elif source["mode"] == "generic_html":
+        rows = _extract_generic_blog_rows(page_html, source["url"])
     else:
         rows = []
 
     items: list[HotspotItem] = []
     for row in rows:
-        published_at = row["published_at"]
-        if not is_fresh(published_at, target_date, freshness_hours):
+        published_at = row.get("published_at")
+        if published_at and not is_fresh(published_at, target_date, freshness_hours):
+            continue
+        # Skip items without dates for HTML sources (can't verify freshness)
+        if not published_at and source["mode"] != "rss":
             continue
         items.append(
             _build_item(
                 source,
                 title=row["title"],
-                summary=row["summary"],
+                summary=row.get("summary", ""),
                 url=row["url"],
                 published_at=published_at,
             )
@@ -205,14 +263,16 @@ def _fetch_html_source(source: dict[str, str], target_date: datetime, freshness_
     return items[:8]
 
 
-def fetch_hotspot_items(target_date: datetime, freshness_hours: int) -> list[HotspotItem]:
+def fetch_hotspot_items(target_date: datetime, freshness_hours: int, registry_path: str | None = None) -> list[HotspotItem]:
+    sources = _load_official_blog_registry(registry_path)
     items: list[HotspotItem] = []
-    for source in OFFICIAL_SOURCES:
+    for source in sources:
+        source_id = source.get("source_id", source.get("name", "unknown"))
         try:
             if source["mode"] == "rss":
                 items.extend(_fetch_rss_source(source, target_date, freshness_hours))
             else:
                 items.extend(_fetch_html_source(source, target_date, freshness_hours))
         except Exception as ex:
-            print(f"Warning: failed to fetch official blog source {source['source_id']}: {ex}")
+            print(f"Warning: failed to fetch official blog source {source_id}: {ex}")
     return items

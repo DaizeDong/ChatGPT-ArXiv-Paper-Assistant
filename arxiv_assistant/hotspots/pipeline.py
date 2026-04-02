@@ -913,6 +913,43 @@ def _fallback_digest_summary(top_topics: list[dict[str, Any]]) -> str:
     return f"Today's AI discussion centered on {headlines[0]}, {headlines[1]}, and {headlines[2]}."
 
 
+def _heuristic_takeaways(topic: dict[str, Any], max_takeaways: int = 3) -> list[str]:
+    """Extract meaningful takeaways from a topic's items in heuristic mode."""
+    title_lower = topic.get("title", "").lower().strip()
+    title_tokens = set(title_lower.split())
+    title_prefix = title_lower[:40]
+    seen: set[str] = set()
+    takeaways: list[str] = []
+    for item in topic.get("items", []):
+        summary = str(item.get("summary", "")).strip()
+        if not summary or len(summary) < 20:
+            continue
+        summary_lower = summary.lower()
+        item_title_lower = str(item.get("title", "")).lower().strip()
+        # Skip if summary is essentially the item's own title
+        if item_title_lower and (summary_lower.startswith(item_title_lower[:40]) or item_title_lower in summary_lower):
+            continue
+        # Skip if summary starts with the same prefix as the cluster title
+        if title_prefix and summary_lower.startswith(title_prefix):
+            continue
+        # Skip if cluster title is a substring of the summary
+        if title_lower and title_lower in summary_lower:
+            continue
+        # Skip if too similar to the cluster title by token overlap
+        s_tokens = set(summary_lower.split())
+        if title_tokens and len(s_tokens & title_tokens) / max(len(s_tokens), 1) > 0.7:
+            continue
+        # Skip near-duplicate takeaways
+        s_key = " ".join(sorted(s_tokens)[:8])
+        if s_key in seen:
+            continue
+        seen.add(s_key)
+        takeaways.append(summary if len(summary) <= 200 else summary[:197] + "...")
+        if len(takeaways) >= max_takeaways:
+            break
+    return takeaways
+
+
 def apply_digest_synthesis(
     top_topics: list[dict[str, Any]],
     watchlist: list[dict[str, Any]],
@@ -924,7 +961,7 @@ def apply_digest_synthesis(
     for topic in top_topics:
         topic["HEADLINE"] = topic.get("title", "")
         if not topic.get("KEY_TAKEAWAYS"):
-            topic["KEY_TAKEAWAYS"] = [topic.get("WHY_IT_MATTERS", "")]
+            topic["KEY_TAKEAWAYS"] = _heuristic_takeaways(topic)
 
     if mode != "openai" or not top_topics:
         return _fallback_digest_summary(top_topics), 0.0, 0.0, 0, 0, 0

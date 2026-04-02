@@ -14,6 +14,24 @@ LOW_SIGNAL_TITLE_SNIPPETS = ("how to ", "also:", "plus:", "special:", "use ", "g
 DATE_PREFIX_PATTERN = re.compile(r"^(?:[A-Z][a-z]{2,8} \d{1,2}, \d{4}\s+)+")
 EMOJI_PREFIX_PATTERN = re.compile(r"^[^\w\"']+")
 
+# Paper URL patterns that should come from dedicated paper sources, not roundups
+PAPER_URL_PATTERNS = ("arxiv.org", "huggingface.co/papers")
+
+# Signal keywords for low-trust source filtering
+SIGNAL_KEYWORDS = {
+    "openai", "anthropic", "google", "deepmind", "meta", "nvidia", "microsoft",
+    "claude", "gpt", "gemini", "llama", "mistral", "qwen", "deepseek",
+    "model", "launch", "release", "benchmark", "training", "inference",
+    "agent", "reasoning", "transformer", "multimodal", "api",
+}
+
+# Tier-aware per-site limits
+LOW_TRUST_ROLES = {"headline_consensus"}
+TRUSTED_ROLES = {"editorial_depth", "builder_momentum"}
+LOW_TRUST_MAX_ITEMS = 2
+TRUSTED_MAX_ITEMS = 5
+MIN_TITLE_LENGTH = 30
+
 
 def _normalize_roundup_title(title: str) -> str:
     normalized = " ".join((title or "").split())
@@ -31,13 +49,22 @@ def _normalize_roundup_title(title: str) -> str:
 
 def _is_low_signal_title(title: str, url: str) -> bool:
     lowered = (title or "").strip().lower()
-    if len(lowered) < 18:
+    if len(lowered) < MIN_TITLE_LENGTH:
         return True
     if any(lowered.startswith(prefix) for prefix in LOW_SIGNAL_TITLE_PREFIXES):
         return True
     if any(snippet in lowered for snippet in LOW_SIGNAL_TITLE_SNIPPETS):
         return True
     return "university." in url
+
+
+def _is_paper_url(url: str) -> bool:
+    return any(pattern in url.lower() for pattern in PAPER_URL_PATTERNS)
+
+
+def _has_signal_keyword(title: str) -> bool:
+    words = set(re.split(r"\W+", title.lower()))
+    return bool(words & SIGNAL_KEYWORDS)
 
 
 def _extract_generic_roundup_items(page_html: str, base_url: str) -> list[dict]:
@@ -98,6 +125,9 @@ def fetch_hotspot_items(target_date: datetime, freshness_hours: int, registry_pa
         except Exception as ex:
             print(f"Warning: failed to fetch roundup site {site['site_id']}: {ex}")
             continue
+        signal_role = site.get("signal_role", "headline_consensus")
+        is_low_trust = signal_role in LOW_TRUST_ROLES
+        max_per_site = LOW_TRUST_MAX_ITEMS if is_low_trust else TRUSTED_MAX_ITEMS
         seen: set[str] = set()
         kept = 0
         for row in rows:
@@ -105,9 +135,19 @@ def fetch_hotspot_items(target_date: datetime, freshness_hours: int, registry_pa
             if url in seen:
                 continue
             seen.add(url)
+
+            # Skip paper URLs in roundups (should come from dedicated sources)
+            if _is_paper_url(url):
+                continue
+
             title = _normalize_roundup_title(row["title"])
             if _is_low_signal_title(title, url):
                 continue
+
+            # For low-trust sources, require at least one signal keyword
+            if is_low_trust and not _has_signal_keyword(title):
+                continue
+
             published_at = row.get("published_at")
             if published_at and not is_fresh(published_at, target_date, freshness_hours):
                 continue
@@ -115,7 +155,7 @@ def fetch_hotspot_items(target_date: datetime, freshness_hours: int, registry_pa
                 HotspotItem(
                     source_id=site["site_id"],
                     source_name=site["name"],
-                    source_role=site.get("signal_role", "headline_consensus"),
+                    source_role=signal_role,
                     source_type="roundup",
                     title=title,
                     summary=clip_text(row.get("summary", ""), 480),
@@ -128,6 +168,6 @@ def fetch_hotspot_items(target_date: datetime, freshness_hours: int, registry_pa
                 )
             )
             kept += 1
-            if kept >= 5:
+            if kept >= max_per_site:
                 break
     return items

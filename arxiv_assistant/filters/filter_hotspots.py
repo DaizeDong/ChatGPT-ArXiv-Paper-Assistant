@@ -167,7 +167,7 @@ def _cluster_signal_scores(cluster: HotspotCluster) -> dict[str, float]:
     technical_depth += min(0.7, source_quality * 0.45)
     technical_depth = _clamp(technical_depth)
 
-    resonance = 1.6 + min(3.0, max(source_count - 1, 0) * 1.15) + min(1.6, max(source_type_count - 1, 0) * 0.8)
+    resonance = 1.6 + min(3.0, max(source_count - 1, 0) * 1.4) + min(2.0, max(source_type_count - 1, 0) * 1.0)
     resonance += min(1.5, math.log1p(upvotes) / 1.9)
     resonance += min(1.0, math.log1p(hn_score) / 2.2)
     resonance += min(1.6, math.log1p(community_activity) / 2.0)
@@ -205,9 +205,9 @@ def _cluster_signal_scores(cluster: HotspotCluster) -> dict[str, float]:
 
     hype_penalty = 0.3
     if has_roundup and not (has_paper or has_official or has_repo):
-        hype_penalty += 3.4
+        hype_penalty += 4.0
     if source_count == 1 and has_roundup and not has_repo and not has_official:
-        hype_penalty += 1.6
+        hype_penalty += 2.0
     if source_count == 1 and has_paper and not has_repo and not has_official:
         hype_penalty += 0.8
     if not (has_research_terms or has_tooling_terms or has_release_terms) and has_roundup:

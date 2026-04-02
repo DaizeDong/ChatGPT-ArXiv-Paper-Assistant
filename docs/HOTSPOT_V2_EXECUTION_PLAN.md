@@ -1,7 +1,7 @@
 # Hotspot V2 Quality Execution Plan
 
 Updated: 2026-04-02
-Status: In progress — Phase 1 COMPLETE
+Status: In progress — Phase 2 COMPLETE
 Estimated execution time: 8 hours continuous
 Target quality: Industry-grade daily AI intelligence brief (top-conference / paid-tool level)
 
@@ -299,6 +299,24 @@ Run full evaluation. Compare to Phase 1 baseline:
 - Expect: resurfacing_rate near 0%, awesome-list count = 0
 
 **Commit:** `feat(hotspot): Phase 2 — tighten source quality gates`
+
+#### Phase 2 Results (2026-04-02)
+
+Forward simulation comparison:
+
+| Metric | Before | After | Target |
+|--------|--------|-------|--------|
+| HF Paper resurfacing rate | 63% | 0% | ≤10% |
+| GitHub avg stars | ~60 | 2466 | ≥100 |
+| Awesome-list repos | variable | 0 | 0 |
+| Total items (5 sources) | ~111 | 56 | - |
+| Low-trust roundup items | ~12 | 6 | ≤8 |
+
+Changes applied:
+- HF Papers: age filter (>14d skipped), upvote minimum (≥5), limit 24→12
+- GitHub: stars_cutoff 20→80, created_within_days 10→5, limit 30→15, blacklist patterns
+- Roundups: tier-aware limits (low-trust: 2/site, trusted: 5/site), min title 30 chars, paper URL dedup, signal keyword requirement
+- Scoring: increased HYPE_PENALTY for single-source roundups (3.4→4.0, 1.6→2.0), boosted multi-source RESONANCE
 
 ---
 

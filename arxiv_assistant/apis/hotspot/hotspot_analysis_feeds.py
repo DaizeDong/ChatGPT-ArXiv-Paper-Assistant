@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import json
+import re
 from datetime import datetime
 from pathlib import Path
 
@@ -9,6 +10,16 @@ import feedparser
 
 from arxiv_assistant.utils.hotspot.hotspot_schema import HotspotItem, clean_text
 from arxiv_assistant.utils.hotspot.hotspot_sources import clip_text, fetch_text, is_fresh
+
+# Matches titles like "package-name 0.2a1", "tool 1.3.0", "lib-v2.0"
+_VERSION_ONLY_RE = re.compile(
+    r"^[\w\-]+\s+v?\d+\.\d+[\.\w]*$"
+    r"|^[\w\-]+\s+\d+\.\d+[\.\w]*\s*[\(\[]",
+    re.IGNORECASE,
+)
+
+# Minimum summary length for analysis content (release notes tend to be short)
+_MIN_ANALYSIS_SUMMARY_LEN = 80
 
 
 def _load_feed_registry(registry_path: str | Path) -> list[dict]:
@@ -56,6 +67,15 @@ def fetch_hotspot_items(
                 continue
 
             summary = clean_text(entry.get("summary", "") or entry.get("description", ""))
+
+            # Skip version-only release notes (e.g., "datasette-enrichments-llm 0.2a1")
+            if _VERSION_ONLY_RE.match(title):
+                continue
+
+            # Analysis content should have substantive summaries
+            if len(summary) < _MIN_ANALYSIS_SUMMARY_LEN:
+                continue
+
             url = clean_text(entry.get("link", feed_url))
 
             items.append(

@@ -1,16 +1,33 @@
 ## Daily Hotspot Digest Writer
 
-You will receive the strongest hotspot clusters for a given date.
+You will receive the strongest hotspot clusters for a given date. Write a concise, opinionated daily digest aimed at senior AI engineers and researchers.
 
-Write a structured, concise daily digest.
+### Summary Rules
 
-Rules:
+The "summary" field is a 2-3 sentence overview of the day. It must:
+- Lead with the single most important development, not a generic intro like "today's topics included..."
+- Name specific companies, models, papers, or products — never be vague
+- Be written for a reader who will only see this summary and nothing else
+- Example tone: "OpenAI shipped GPT-5 Turbo with 2x context and 40% cost reduction. DeepSeek open-sourced a 236B MoE model matching GPT-4o on MATH. The rest of the day was dominated by community reaction to Google's agent SDK deprecation."
 
-- Keep the summary selective.
-- Prefer concrete, evidence-backed claims.
-- Do not repeat the same point in different wording.
-- Avoid generic newsletter filler.
-- The top topics should be distinct from one another.
+### Topic Rules
+
+- Each top_topic must be distinct from every other — no two topics about the same underlying event
+- HEADLINE: concise, specific, news-style (e.g., "Anthropic Ships Claude 4 with Tool Use" not "New Claude Model Released")
+- WHY_IT_MATTERS: one sentence explaining lasting impact, not just restating the headline
+- KEY_TAKEAWAYS: 2-4 concrete, non-trivial points. Each must add information beyond the headline. Name specific numbers, benchmarks, capabilities, or limitations. Never restate the headline or WHY_IT_MATTERS.
+
+### Watchlist Rules
+
+- WHY_IT_IS_EARLY: explain what evidence is missing (e.g., "single-source report, awaiting official confirmation" or "paper just posted, no independent replication yet")
+
+### Quality Checks
+
+Before returning, verify:
+1. The summary does not start with "Today" or "This week" or any generic opener
+2. Every KEY_TAKEAWAY adds new information
+3. No two top_topics cover the same real-world event
+4. No watchlist item duplicates a top_topic
 
 Return JSON with this shape:
 

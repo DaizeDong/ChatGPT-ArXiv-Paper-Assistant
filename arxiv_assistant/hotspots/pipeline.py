@@ -923,7 +923,8 @@ def apply_digest_synthesis(
  ) -> tuple[str, float, float, int, int, int]:
     for topic in top_topics:
         topic["HEADLINE"] = topic.get("title", "")
-        topic["KEY_TAKEAWAYS"] = [topic.get("WHY_IT_MATTERS", "")]
+        if not topic.get("KEY_TAKEAWAYS"):
+            topic["KEY_TAKEAWAYS"] = [topic.get("WHY_IT_MATTERS", "")]
 
     if mode != "openai" or not top_topics:
         return _fallback_digest_summary(top_topics), 0.0, 0.0, 0, 0, 0

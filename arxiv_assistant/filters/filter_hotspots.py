@@ -297,22 +297,25 @@ def _clean_json_text(raw_text: str) -> str:
 
 
 def _cluster_prompt_text(cluster: HotspotCluster) -> str:
+    items = _cluster_items(cluster)
     lines = [
         f"Cluster ID: {cluster.cluster_id}",
         f"Cluster Title: {cluster.title}",
         f"Deterministic Score: {cluster.deterministic_score}",
+        f"Independent Sources: {len(cluster.source_ids)} ({len(cluster.source_types)} distinct types)",
         f"Source Names: {', '.join(cluster.source_names)}",
         f"Source Roles: {', '.join(cluster.source_roles)}",
         f"Source Types: {', '.join(cluster.source_types)}",
         f"Tags: {', '.join(cluster.tags)}",
-        "Representative items:",
+        f"Representative items ({len(items)} total):",
     ]
-    for item in _cluster_items(cluster)[:4]:
+    for item in items[:4]:
         metadata = item.get("metadata", {}) or {}
         metadata_bits = []
-        for key in ("daily_score", "score", "upvotes", "github_stars", "stars", "hn_score"):
-            if metadata.get(key) not in (None, "", 0):
-                metadata_bits.append(f"{key}={metadata[key]}")
+        for key in ("daily_score", "score", "upvotes", "github_stars", "stars", "hn_score", "is_official"):
+            val = metadata.get(key)
+            if val not in (None, "", 0, False):
+                metadata_bits.append(f"{key}={val}")
         lines.append(
             "* "
             + " | ".join(
@@ -322,7 +325,7 @@ def _cluster_prompt_text(cluster: HotspotCluster) -> str:
                         str(item.get("source_name", "")),
                         str(item.get("source_role", "")),
                         str(item.get("title", "")),
-                        str(item.get("summary", ""))[:180],
+                        str(item.get("summary", ""))[:200],
                         ", ".join(metadata_bits),
                     ],
                 )
@@ -408,6 +411,7 @@ def _build_topic(cluster: HotspotCluster, *, keep: bool, watchlist: bool, catego
         "CONFIDENCE": signals["CONFIDENCE"],
         "SHORT_COMMENT": summary.strip() or _default_summary(cluster),
         "WHY_IT_MATTERS": why_it_matters.strip() or _default_why(cluster, category),
+        "KEY_TAKEAWAYS": [],
         "FINAL_SCORE": round(final_score, 3),
         "published_at": cluster.published_at,
     }
@@ -461,6 +465,29 @@ def heuristic_screen_clusters(clusters: list[HotspotCluster], score_cutoff: floa
     return kept, watchlist
 
 
+def _validate_key_takeaways(takeaways: list[str], title: str, summary: str) -> list[str]:
+    if not takeaways:
+        return []
+    title_lower = title.lower().strip()
+    summary_lower = summary.lower().strip()
+    valid = []
+    for ta in takeaways:
+        ta_str = str(ta).strip()
+        if len(ta_str) < 15:
+            continue
+        ta_lower = ta_str.lower()
+        # Reject takeaways that merely restate the headline or summary
+        if ta_lower == title_lower or ta_lower == summary_lower:
+            continue
+        # Reject if >80% token overlap with title (near-restatement)
+        ta_tokens = set(ta_lower.split())
+        title_tokens = set(title_lower.split())
+        if title_tokens and len(ta_tokens & title_tokens) / max(len(ta_tokens), 1) > 0.7:
+            continue
+        valid.append(ta_str)
+    return valid
+
+
 def _normalize_screening_row(cluster: HotspotCluster, row: dict[str, Any], score_cutoff: float, watchlist_cutoff: float) -> dict[str, Any]:
     category = row.get("CATEGORY", "").strip()
     if category not in ALLOWED_HOTSPOT_CATEGORIES:
@@ -468,20 +495,39 @@ def _normalize_screening_row(cluster: HotspotCluster, row: dict[str, Any], score
     quality = int(_clamp(int(row.get("QUALITY", 0) or 0), 1, 10))
     heat = int(_clamp(int(row.get("HEAT", 0) or 0), 1, 10))
     importance = int(_clamp(int(row.get("IMPORTANCE", 0) or 0), 1, 10))
+    raw_title = str(row.get("TITLE", "")).strip() or cluster.title
+    raw_summary = str(row.get("SUMMARY", "")).strip() or _default_summary(cluster)
+    raw_takeaways = row.get("KEY_TAKEAWAYS", [])
+    if not isinstance(raw_takeaways, list):
+        raw_takeaways = []
+    keep = bool(row.get("KEEP", False))
+    watchlist_flag = bool(row.get("WATCHLIST", False))
+
+    # KEY_TAKEAWAYS quality gate: KEEP requires at least 2 valid takeaways
+    valid_takeaways = _validate_key_takeaways(raw_takeaways, raw_title, raw_summary)
+    demoted_by_takeaway_gate = False
+    if keep and len(valid_takeaways) < 2:
+        keep = False
+        watchlist_flag = True
+        demoted_by_takeaway_gate = True
+
     topic = _build_topic(
         cluster,
-        keep=bool(row.get("KEEP", False)),
-        watchlist=bool(row.get("WATCHLIST", False)),
+        keep=keep,
+        watchlist=watchlist_flag,
         category=category,
         quality=quality,
         heat=heat,
         importance=importance,
-        summary=str(row.get("SUMMARY", "")).strip() or _default_summary(cluster),
+        summary=raw_summary,
         why_it_matters=str(row.get("WHY_IT_MATTERS", "")).strip() or _default_why(cluster, category),
     )
-    if not topic["KEEP_IN_DAILY_HOTSPOTS"] and topic["FINAL_SCORE"] >= score_cutoff:
-        topic["KEEP_IN_DAILY_HOTSPOTS"] = True
-        topic["WATCHLIST"] = False
+    topic["KEY_TAKEAWAYS"] = valid_takeaways
+    # Score-based re-promotion, but not if explicitly demoted by takeaway quality gate
+    if not demoted_by_takeaway_gate:
+        if not topic["KEEP_IN_DAILY_HOTSPOTS"] and topic["FINAL_SCORE"] >= score_cutoff:
+            topic["KEEP_IN_DAILY_HOTSPOTS"] = True
+            topic["WATCHLIST"] = False
     if not topic["KEEP_IN_DAILY_HOTSPOTS"] and not topic["WATCHLIST"] and topic["FINAL_SCORE"] >= watchlist_cutoff:
         topic["WATCHLIST"] = True
     return topic
@@ -587,6 +633,7 @@ def _digest_prompt_payload(top_topics: list[dict[str, Any]], watchlist: list[dic
                 "HEAT": topic["HEAT"],
                 "IMPORTANCE": topic["IMPORTANCE"],
                 "WHY_IT_MATTERS": topic["WHY_IT_MATTERS"],
+                "KEY_TAKEAWAYS": topic.get("KEY_TAKEAWAYS", []),
                 "SOURCE_NAMES": topic["source_names"],
                 "EVIDENCE": [
                     {"source_name": item.get("source_name"), "title": item.get("title")}

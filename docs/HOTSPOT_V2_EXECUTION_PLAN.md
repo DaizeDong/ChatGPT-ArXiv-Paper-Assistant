@@ -1,7 +1,7 @@
 # Hotspot V2 Quality Execution Plan
 
 Updated: 2026-04-02
-Status: In progress — Phase 4 COMPLETE
+Status: In progress — Phase 5 COMPLETE
 Estimated execution time: 8 hours continuous
 Target quality: Industry-grade daily AI intelligence brief (top-conference / paid-tool level)
 
@@ -556,6 +556,18 @@ Run with LLM screening on latest available data. Compare:
 - Expect: daily summary is specific and informative
 
 **Commit:** `feat(hotspot): Phase 5 — improve LLM screening and synthesis`
+
+#### Phase 5 Results (2026-04-02)
+
+Changes applied:
+- **Screening criteria** (`screening_criteria.txt`): Added source tier hierarchy with explicit examples, strict KEEP criteria (official + announcement, multi-source convergence, or high-impact research), WATCHLIST criteria for single-source signals, explicit DROP criteria (awesome-lists, wrappers, resurfaced papers, funding news, conference announcements), deep reads identification for blog_analysis sources
+- **Postfix prompt** (`postfix_prompt_screening.txt`): Added KEY_TAKEAWAYS field (2-4 concrete, non-trivial points per topic), calibration against scoring rubric, explicit DROP criteria enforcement, blog_analysis deep read tagging
+- **System prompt** (`system_prompt.txt`): Upgraded target audience to "senior AI engineers and researchers", added source tier weighting guidance, reinforced zero-filler principle
+- **Digest writer** (`digest_writer.txt`): Complete rewrite with opinionated summary rules (lead with most important development, name specific entities, 2-3 sentences), topic quality rules (distinct topics, non-trivial KEY_TAKEAWAYS), watchlist evidence requirements, quality self-check before output
+- **KEY_TAKEAWAYS quality gate** (`filter_hotspots.py`): Added `_validate_key_takeaways()` that rejects takeaways shorter than 15 chars, exact restations of title/summary, and >70% token overlap with title. KEEP requires ≥2 valid takeaways; failure demotes to WATCHLIST without score-based re-promotion
+- **Cluster prompt enrichment** (`filter_hotspots.py`): Added independent source count, distinct type count, total item count, and is_official flag to LLM-facing cluster text
+- **Pipeline integration** (`pipeline.py`): Preserved screening-produced KEY_TAKEAWAYS through digest synthesis instead of overwriting with WHY_IT_MATTERS fallback
+- **Digest payload** (`filter_hotspots.py`): KEY_TAKEAWAYS now included in digest writer input for synthesis refinement
 
 ---
 

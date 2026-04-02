@@ -16,6 +16,24 @@ def _render_source_list(items: list[dict[str, Any]], limit: int = 4) -> str:
     return "\n".join(lines)
 
 
+_ARTIFACT_LABELS = {
+    "paper": "research",
+    "official_post": "official",
+    "repo": "tooling",
+    "newsletter_recap": "community",
+    "discussion": "community",
+    "blog_analysis": "analysis",
+}
+
+
+def _topic_label(topic: dict[str, Any]) -> str:
+    """Return a short semantic label for a topic."""
+    if topic.get("IS_RESURFACED"):
+        return "resurfaced"
+    artifact_type = topic.get("ARTIFACT_TYPE", "")
+    return _ARTIFACT_LABELS.get(artifact_type, "")
+
+
 def _compact_topic_line(topic: dict[str, Any]) -> str:
     headline = topic.get("HEADLINE") or topic.get("title") or "Untitled Topic"
     final_score = topic.get("FINAL_SCORE", 0)
@@ -23,7 +41,10 @@ def _compact_topic_line(topic: dict[str, Any]) -> str:
     occurrence = topic.get("OCCURRENCE_SCORE", len(topic.get("source_names", [])) or len(topic.get("items", [])))
     source_count = len(topic.get("source_names", []))
     status = topic.get("LLM_STATUS", "")
+    label = _topic_label(topic)
     suffix = f" | final={final_score} | heat={heat} | occurrence={occurrence} | sources={source_count}"
+    if label:
+        suffix += f" | {label}"
     if status == "watchlist":
         suffix += " | watchlist"
     elif status == "featured":
@@ -57,8 +78,7 @@ def render_hot_daily_md(report: dict[str, Any]) -> str:
         "## Coverage Snapshot",
         "",
         f'- Featured topics: {len(featured_topics)}',
-        f'- Category radar topics: {sum(len(section.get("topics", [])) for section in category_sections)}',
-        f'- Long-tail signals: {sum(len(section.get("topics", [])) for section in long_tail_sections)}',
+        f'- Section topics: {sum(len(section.get("topics", [])) for section in category_sections)}',
         f'- X Buzz items: {len(x_buzz)}',
         f'- Watchlist topics: {len(watchlist)}',
         f'- Raw items scanned: {report.get("totals", {}).get("raw_items", 0)}',
@@ -82,7 +102,8 @@ def render_hot_daily_md(report: dict[str, Any]) -> str:
                 [
                     f"### {idx}. {headline}",
                     "",
-                    f'- Category: {topic.get("PRIMARY_CATEGORY", "Other Frontier AI")}',
+                    f'- Category: {topic.get("PRIMARY_CATEGORY", "Other Frontier AI")}'
+                    + (f' | {_topic_label(topic)}' if _topic_label(topic) else ''),
                     f'- Scores: final={topic.get("FINAL_SCORE", 0)} quality={topic.get("QUALITY", 0)} heat={topic.get("HEAT", 0)} importance={topic.get("IMPORTANCE", 0)}',
                     f'- Sources: {", ".join(topic.get("source_names", [])) or "Unknown"}',
                     "",
@@ -104,7 +125,7 @@ def render_hot_daily_md(report: dict[str, Any]) -> str:
             lines.append("")
 
     if category_sections:
-        lines.extend(["## Topic Radar By Category", "", "Broader same-day coverage beyond the featured list. Entries stay intentionally short so the page can cover more of the day's signal surface.", ""])
+        lines.extend(["## Signal Sections", ""])
         for section in category_sections:
             category = section.get("category", "Other")
             displayed = len(section.get("topics", []))
@@ -126,17 +147,6 @@ def render_hot_daily_md(report: dict[str, Any]) -> str:
                         else:
                             evidence_bits.append(title)
                     lines.append(f"  - Evidence: {' | '.join(evidence_bits)}")
-            lines.append("")
-
-    if long_tail_sections:
-        lines.extend(["## Long-tail Signals", "", "Lower-priority but still relevant same-day candidates, compressed to one line each for breadth.", ""])
-        for section in long_tail_sections:
-            category = section.get("category", "Other")
-            displayed = len(section.get("topics", []))
-            total_candidates = section.get("total_candidates", displayed)
-            lines.extend([f"### {category} ({displayed} shown / {total_candidates} candidates)", ""])
-            for topic in section.get("topics", []):
-                lines.append(_compact_topic_line(topic))
             lines.append("")
 
     if x_buzz:

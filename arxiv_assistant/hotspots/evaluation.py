@@ -65,6 +65,11 @@ class DailyMetrics:
     paper_leakage_rate: float = 0.0
     category_purity: float = 1.0
 
+    # Iteration 4 metrics
+    multi_source_featured_ratio: float = 0.0
+    section_count: int = 0
+    deep_read_count: int = 0
+
     # Supplementary
     hf_paper_ages_days: list[float] = field(default_factory=list)
     x_official_count: int = 0
@@ -87,6 +92,9 @@ class DailyMetrics:
             "low_trust_source_share": round(self.low_trust_source_share, 4),
             "paper_leakage_rate": round(self.paper_leakage_rate, 4),
             "category_purity": round(self.category_purity, 4),
+            "multi_source_featured_ratio": round(self.multi_source_featured_ratio, 4),
+            "section_count": self.section_count,
+            "deep_read_count": self.deep_read_count,
             "x_official_count": self.x_official_count,
             "official_blogs_count": self.official_blogs_count,
             "errors": self.errors,
@@ -262,12 +270,22 @@ def compute_daily_metrics(report: dict[str, Any]) -> DailyMetrics:
             errors["category_mismatch"] = errors.get("category_mismatch", 0) + 1
 
     n = len(featured)
+    multi_source = sum(1 for t in featured if len(t.get("source_ids", t.get("source_names", []))) >= 2)
     metrics.single_source_featured_ratio = single_source / n
+    metrics.multi_source_featured_ratio = multi_source / n
     metrics.paper_like_featured_ratio = paper_like / n
     metrics.old_paper_resurfacing_rate = old_paper_in_research / research_featured if research_featured > 0 else 0.0
     metrics.primary_source_rate = product_with_primary / product_launch_count if product_launch_count > 0 else 1.0
     metrics.low_trust_source_share = low_trust_only / n
     metrics.category_purity = pure_category / n
+
+    # Section metrics (Iteration 4)
+    sections = report.get("category_sections", [])
+    metrics.section_count = len(sections)
+    for section in sections:
+        slug = section.get("slug", "")
+        if slug == "deep_reads" or section.get("category") == "Deep Reads":
+            metrics.deep_read_count = len(section.get("topics", []))
 
     # Paper leakage rate: check category_sections for non-research sections containing papers
     paper_leak_count = 0
@@ -315,6 +333,9 @@ class AggregateMetrics:
     avg_low_trust_source_share: float = 0.0
     avg_paper_leakage_rate: float = 0.0
     avg_category_purity: float = 0.0
+    avg_multi_source_featured_ratio: float = 0.0
+    avg_section_count: float = 0.0
+    deep_read_hit_rate_per_week: float = 0.0
 
     hf_paper_age_median: float = 0.0
     hf_paper_age_p90: float = 0.0
@@ -330,6 +351,7 @@ class AggregateMetrics:
     iteration_1_pass: dict[str, bool] = field(default_factory=dict)
     iteration_2_pass: dict[str, bool] = field(default_factory=dict)
     iteration_3_pass: dict[str, bool] = field(default_factory=dict)
+    iteration_4_pass: dict[str, bool] = field(default_factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
         return {
@@ -343,6 +365,9 @@ class AggregateMetrics:
             "avg_low_trust_source_share": round(self.avg_low_trust_source_share, 4),
             "avg_paper_leakage_rate": round(self.avg_paper_leakage_rate, 4),
             "avg_category_purity": round(self.avg_category_purity, 4),
+            "avg_multi_source_featured_ratio": round(self.avg_multi_source_featured_ratio, 4),
+            "avg_section_count": round(self.avg_section_count, 2),
+            "deep_read_hit_rate_per_week": round(self.deep_read_hit_rate_per_week, 2),
             "hf_paper_age_median_days": round(self.hf_paper_age_median, 1),
             "hf_paper_age_p90_days": round(self.hf_paper_age_p90, 1),
             "hf_paper_age_p95_days": round(self.hf_paper_age_p95, 1),
@@ -354,6 +379,7 @@ class AggregateMetrics:
                 "iteration_1": self.iteration_1_pass,
                 "iteration_2": self.iteration_2_pass,
                 "iteration_3": self.iteration_3_pass,
+                "iteration_4": self.iteration_4_pass,
             },
         }
 
@@ -379,6 +405,11 @@ def aggregate_metrics(daily_list: list[DailyMetrics]) -> AggregateMetrics:
     agg.avg_low_trust_source_share = _avg([m.low_trust_source_share for m in daily_list])
     agg.avg_paper_leakage_rate = _avg([m.paper_leakage_rate for m in daily_list])
     agg.avg_category_purity = _avg([m.category_purity for m in daily_list])
+    agg.avg_multi_source_featured_ratio = _avg([m.multi_source_featured_ratio for m in daily_list])
+    agg.avg_section_count = _avg([float(m.section_count) for m in daily_list])
+    total_deep_reads = sum(m.deep_read_count for m in daily_list)
+    weeks = max(1.0, agg.num_days / 7.0)
+    agg.deep_read_hit_rate_per_week = total_deep_reads / weeks
     agg.avg_x_official_count = _avg([float(m.x_official_count) for m in daily_list])
     agg.avg_official_blogs_count = _avg([float(m.official_blogs_count) for m in daily_list])
     agg.avg_featured_count = _avg([float(m.featured_count) for m in daily_list])
@@ -412,6 +443,11 @@ def aggregate_metrics(daily_list: list[DailyMetrics]) -> AggregateMetrics:
         "category_purity_ge_90pct": agg.avg_category_purity >= 0.90,
         "paper_leakage_rate_le_3pct": agg.avg_paper_leakage_rate <= 0.03,
         "old_paper_resurfacing_rate_le_15pct": agg.avg_old_paper_resurfacing_rate <= 0.15,
+    }
+    agg.iteration_4_pass = {
+        "multi_source_featured_ge_80pct": agg.avg_multi_source_featured_ratio >= 0.80,
+        "avg_section_count_ge_3": agg.avg_section_count >= 3.0,
+        "deep_read_hit_rate_ge_4_per_week": agg.deep_read_hit_rate_per_week >= 4.0,
     }
 
     return agg
@@ -519,6 +555,11 @@ def print_evaluation_summary(eval_result: dict[str, Any]) -> str:
         f"  P90 age:    {agg['hf_paper_age_p90_days']:.0f} days",
         f"  P95 age:    {agg['hf_paper_age_p95_days']:.0f} days",
         "",
+        "--- Section & Diversity ---",
+        f"  Multi-source Featured Ratio: {agg['avg_multi_source_featured_ratio']:.1%}  (target ≥80%)",
+        f"  Avg section count/day:       {agg['avg_section_count']:.1f}  (target ≥3)",
+        f"  Deep-read hit rate/week:     {agg['deep_read_hit_rate_per_week']:.1f}  (target ≥4)",
+        "",
         "--- Source Coverage ---",
         f"  Avg X official items/day:    {agg['avg_x_official_count']:.1f}",
         f"  Avg official blogs/day:      {agg['avg_official_blogs_count']:.1f}",
@@ -544,7 +585,7 @@ def print_evaluation_summary(eval_result: dict[str, Any]) -> str:
         "--- Iteration Target Status ---",
     ])
 
-    for iteration_key, label in [("iteration_1", "Iteration 1"), ("iteration_2", "Iteration 2"), ("iteration_3", "Iteration 3")]:
+    for iteration_key, label in [("iteration_1", "Iteration 1"), ("iteration_2", "Iteration 2"), ("iteration_3", "Iteration 3"), ("iteration_4", "Iteration 4")]:
         targets = agg["iteration_targets"].get(iteration_key, {})
         passed = sum(1 for v in targets.values() if v)
         total = len(targets)

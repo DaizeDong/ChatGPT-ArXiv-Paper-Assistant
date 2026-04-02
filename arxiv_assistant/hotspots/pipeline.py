@@ -480,6 +480,204 @@ def _merge_display_candidates(
     return merged
 
 
+# ---------------------------------------------------------------------------
+# Semantic section definitions and section-specific ranking (Iteration 4)
+# ---------------------------------------------------------------------------
+
+SEMANTIC_SECTIONS = [
+    {
+        "name": "Top Developments",
+        "slug": "top_developments",
+        "max_topics": 5,
+        "min_sources": 2,
+        "description": "Defining events of the day across all types",
+    },
+    {
+        "name": "Research Frontiers",
+        "slug": "research_frontiers",
+        "max_topics": 3,
+        "description": "Fresh research papers and findings",
+    },
+    {
+        "name": "Product & Platform",
+        "slug": "product_platform",
+        "max_topics": 3,
+        "description": "Official launches, model releases, product updates",
+    },
+    {
+        "name": "Deep Reads",
+        "slug": "deep_reads",
+        "max_topics": 2,
+        "description": "Long-form analysis, explainers, and commentary",
+    },
+    {
+        "name": "Builder Momentum",
+        "slug": "builder_momentum",
+        "max_topics": 3,
+        "description": "Trending repos, tools, frameworks, and SDKs",
+    },
+]
+
+
+def _section_priority_top_developments(topic: dict[str, Any]) -> float:
+    """Rank for Top Developments: multi-source, high-signal, any type."""
+    source_count = len(topic.get("source_names", []))
+    multi_source_boost = min(source_count, 4) * 0.4
+    official_boost = 0.5 if "official_news" in set(topic.get("source_roles", [])) else 0.0
+    return (
+        float(topic.get("DISPLAY_PRIORITY", 0.0))
+        + multi_source_boost
+        + official_boost
+    )
+
+
+def _section_priority_research(topic: dict[str, Any]) -> float:
+    """Rank for Research: paper quality, freshness, NOT resurfaced."""
+    if topic.get("IS_RESURFACED"):
+        return -1.0  # never appear in research section
+    quality = float(topic.get("QUALITY", 0.0))
+    heat = float(topic.get("HEAT", 0.0))
+    depth = float(topic.get("TECHNICAL_DEPTH", 0.0))
+    return quality * 0.4 + heat * 0.3 + depth * 0.2 + float(topic.get("DISPLAY_PRIORITY", 0.0)) * 0.1
+
+
+def _section_priority_product(topic: dict[str, Any]) -> float:
+    """Rank for Product & Platform: official sources, vendor launches."""
+    roles = set(topic.get("source_roles", []))
+    official_boost = 1.5 if "official_news" in roles else 0.0
+    source_count = len(topic.get("source_names", []))
+    multi_source_boost = min(source_count, 3) * 0.3
+    return float(topic.get("DISPLAY_PRIORITY", 0.0)) + official_boost + multi_source_boost
+
+
+def _section_priority_deep_reads(topic: dict[str, Any]) -> float:
+    """Rank for Deep Reads: editorial depth, analysis quality."""
+    roles = set(topic.get("source_roles", []))
+    editorial_boost = 0.8 if "editorial_depth" in roles else 0.0
+    quality = float(topic.get("QUALITY", 0.0))
+    return quality * 0.4 + float(topic.get("DISPLAY_PRIORITY", 0.0)) * 0.3 + editorial_boost
+
+
+def _section_priority_builder(topic: dict[str, Any]) -> float:
+    """Rank for Builder Momentum: repo signals, stars, tools."""
+    roles = set(topic.get("source_roles", []))
+    builder_boost = 0.6 if roles & {"github_trend", "builder_momentum"} else 0.0
+    return float(topic.get("DISPLAY_PRIORITY", 0.0)) + builder_boost
+
+
+def _route_to_section(topic: dict[str, Any]) -> str | None:
+    """Route a topic to its best-fit semantic section slug, or None if no fit."""
+    event_type = topic.get("EVENT_TYPE", "")
+    artifact_type = topic.get("ARTIFACT_TYPE", "")
+    roles = set(topic.get("source_roles", []))
+
+    if artifact_type == "paper" or event_type == "research_paper":
+        return "research_frontiers"
+    if event_type in ("model_release", "product_launch") or artifact_type == "official_post":
+        return "product_platform"
+    if event_type == "deep_analysis" or artifact_type == "blog_analysis":
+        return "deep_reads"
+    if event_type == "tooling_update" or artifact_type == "repo":
+        return "builder_momentum"
+    if artifact_type in ("discussion", "newsletter_recap") or event_type in ("community_discussion", "industry_move"):
+        return None  # eligible for top_developments if strong enough
+    return None
+
+
+_SECTION_RANKERS = {
+    "top_developments": _section_priority_top_developments,
+    "research_frontiers": _section_priority_research,
+    "product_platform": _section_priority_product,
+    "deep_reads": _section_priority_deep_reads,
+    "builder_momentum": _section_priority_builder,
+}
+
+
+def _build_semantic_sections(
+    display_candidates: list[dict[str, Any]],
+    featured_topics: list[dict[str, Any]],
+    *,
+    min_display_score: float,
+) -> list[dict[str, Any]]:
+    """Build semantic sections with section-specific routing and ranking."""
+    featured_ids = {topic["TOPIC_ID"] for topic in featured_topics}
+    assigned_ids: set[str] = set()
+
+    # Section-specific display score thresholds
+    section_min_score = {
+        "top_developments": min_display_score,
+        "research_frontiers": min_display_score,
+        "product_platform": min_display_score * 0.7,  # official posts often single-source
+        "deep_reads": min_display_score * 0.5,  # editorial items are typically single-source
+        "builder_momentum": min_display_score * 0.7,  # repos are typically single-source
+    }
+
+    # Pre-filter candidates (permissive — section-specific filtering below)
+    eligible: list[dict[str, Any]] = []
+    lowest_threshold = min(section_min_score.values())
+    for topic in display_candidates:
+        title = (topic.get("HEADLINE") or topic.get("title") or "").strip().lower()
+        if topic["TOPIC_ID"] in featured_ids:
+            continue
+        if float(topic.get("DISPLAY_PRIORITY", 0.0)) < lowest_threshold:
+            continue
+        if title in GENERIC_DISPLAY_TITLES:
+            continue
+        eligible.append(topic)
+
+    # Route topics to section pools
+    section_pools: dict[str, list[dict[str, Any]]] = {s["slug"]: [] for s in SEMANTIC_SECTIONS}
+    top_dev_pool: list[dict[str, Any]] = []
+
+    for topic in eligible:
+        section_slug = _route_to_section(topic)
+        if section_slug and section_slug in section_pools:
+            section_pools[section_slug].append(topic)
+        # ALL topics are also candidates for top_developments
+        top_dev_pool.append(topic)
+    section_pools["top_developments"] = top_dev_pool
+
+    # Build each section with section-specific ranking
+    sections: list[dict[str, Any]] = []
+    for section_def in SEMANTIC_SECTIONS:
+        slug = section_def["slug"]
+        max_topics = section_def["max_topics"]
+        pool = section_pools.get(slug, [])
+        ranker = _SECTION_RANKERS.get(slug, _section_priority_top_developments)
+
+        # Rank by section-specific function
+        ranked = sorted(pool, key=ranker, reverse=True)
+
+        # Section-specific display score threshold
+        section_threshold = section_min_score.get(slug, min_display_score)
+
+        # Select topics (skip already-assigned)
+        selected: list[dict[str, Any]] = []
+        for topic in ranked:
+            if topic["TOPIC_ID"] in assigned_ids:
+                continue
+            if float(topic.get("DISPLAY_PRIORITY", 0.0)) < section_threshold:
+                continue
+            # top_developments requires multi-source
+            if slug == "top_developments":
+                if len(topic.get("source_names", [])) < section_def.get("min_sources", 1):
+                    continue
+            selected.append(topic)
+            assigned_ids.add(topic["TOPIC_ID"])
+            if len(selected) >= max_topics:
+                break
+
+        if selected:
+            sections.append({
+                "category": section_def["name"],
+                "slug": slug,
+                "total_candidates": len(pool),
+                "topics": selected,
+            })
+
+    return sections
+
+
 def _build_category_sections(
     display_candidates: list[dict[str, Any]],
     featured_topics: list[dict[str, Any]],
@@ -1271,21 +1469,15 @@ def generate_daily_hotspot_report(output_root: str | Path, target_date: datetime
     display_lookup = {topic["TOPIC_ID"]: topic for topic in display_candidates}
     featured_topics = [{**display_lookup.get(topic["TOPIC_ID"], {}), **topic} for topic in featured_topics]
     watchlist = [{**display_lookup.get(topic["TOPIC_ID"], {}), **topic} for topic in watchlist]
-    category_sections = _build_category_sections(
+    # Semantic sections with section-specific ranking (Iteration 4)
+    semantic_sections = _build_semantic_sections(
         display_candidates,
         featured_topics,
-        target_total_topics=config["HOTSPOTS"].getint("target_category_topics", fallback=12),
-        max_per_category=config["HOTSPOTS"].getint("max_topics_per_category", fallback=4),
         min_display_score=config["HOTSPOTS"].getfloat("category_display_score_cutoff", fallback=max(2.8, watchlist_cutoff - 0.5)),
     )
-    long_tail_sections = _build_long_tail_sections(
-        display_candidates,
-        featured_topics,
-        category_sections,
-        target_total_topics=config["HOTSPOTS"].getint("target_long_tail_topics", fallback=18),
-        max_per_category=config["HOTSPOTS"].getint("max_long_tail_per_category", fallback=8),
-        min_display_score=config["HOTSPOTS"].getfloat("long_tail_display_score_cutoff", fallback=1.6),
-    )
+    # Legacy category_sections for backward compat (web data, evaluation)
+    category_sections = semantic_sections
+    long_tail_sections: list[dict[str, Any]] = []
     summary, digest_prompt_cost, digest_completion_cost, digest_prompt_tokens, digest_completion_tokens, digest_requests = apply_digest_synthesis(
         featured_topics,
         watchlist,

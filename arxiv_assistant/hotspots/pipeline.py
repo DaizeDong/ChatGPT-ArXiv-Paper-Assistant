@@ -947,6 +947,25 @@ def _heuristic_takeaways(topic: dict[str, Any], max_takeaways: int = 3) -> list[
         takeaways.append(summary if len(summary) <= 200 else summary[:197] + "...")
         if len(takeaways) >= max_takeaways:
             break
+
+    # Fallback: use item titles that differ from cluster title
+    if not takeaways:
+        for item in topic.get("items", []):
+            item_title = str(item.get("title", "")).strip()
+            if not item_title or len(item_title) < 20:
+                continue
+            it_lower = item_title.lower()
+            it_tokens = set(it_lower.split())
+            if title_tokens and len(it_tokens & title_tokens) / max(len(it_tokens), 1) > 0.6:
+                continue
+            if title_prefix and it_lower.startswith(title_prefix):
+                continue
+            # Strip leading timestamps like "23 hours ago —", "2 days ago 🙀"
+            item_title = re.sub(r"^\d+\s+(?:hours?|minutes?|days?)\s+ago\s*\W+\s*", "", item_title).strip()
+            takeaways.append(item_title if len(item_title) <= 200 else item_title[:197] + "...")
+            if len(takeaways) >= max_takeaways:
+                break
+
     return takeaways
 
 

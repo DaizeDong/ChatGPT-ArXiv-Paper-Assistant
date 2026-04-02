@@ -168,13 +168,25 @@ def _is_high_signal_item(title: str, url: str, activity: int) -> bool:
 
 
 def fetch_hotspot_items(target_date: datetime, freshness_hours: int) -> list[HotspotItem]:
-    feed = feedparser.parse(fetch_text(AINEWS_RSS_URL))
+    # AINews publishes on weekdays only; use wider window to avoid missing issues
+    effective_freshness = max(freshness_hours, 96)
+    try:
+        rss_text = fetch_text(AINEWS_RSS_URL)
+    except Exception as ex:
+        print(f"Warning: AINews RSS fetch failed ({AINEWS_RSS_URL}): {ex}")
+        return []
+    feed = feedparser.parse(rss_text)
+    if feed.bozo:
+        print(f"Warning: AINews RSS parse error: {feed.bozo_exception}")
+    if not feed.entries:
+        print("Warning: AINews RSS returned 0 entries")
+        return []
     items: list[HotspotItem] = []
     seen: set[tuple[str, str]] = set()
 
     for entry in feed.entries:
         published_at = entry.get("published") or entry.get("updated")
-        if not is_fresh(published_at, target_date, freshness_hours):
+        if not is_fresh(published_at, target_date, effective_freshness):
             continue
 
         issue_title = clean_text(entry.get("title", "AINews issue"))

@@ -206,6 +206,9 @@ def fetch_hotspot_items(
 ) -> list[HotspotItem]:
     bearer_token = _get_bearer_token()
     if not bearer_token:
+        print("Warning: X API bearer token not configured. Set one of "
+              f"{BEARER_TOKEN_ENV_KEYS} to enable X/Twitter source. "
+              "Skipping x_official source.")
         return []
 
     registry = load_x_authority_registry(seed_path=seed_path, snapshot_path=snapshot_path, max_age_hours=max_age_hours)

@@ -51,8 +51,38 @@ def _is_reply_or_retweet(tweet: dict[str, Any]) -> bool:
 
 
 def fetch_hotspot_items(target_date: datetime, freshness_hours: int, *, result_limit: int = 20) -> list[HotspotItem]:
-    payload = fetch_json(PAPERPULSE_RESEARCHER_FEED_URL)
+    try:
+        payload = fetch_json(PAPERPULSE_RESEARCHER_FEED_URL)
+    except Exception as ex:
+        print(f"Warning: PaperPulse API fetch failed ({PAPERPULSE_RESEARCHER_FEED_URL}): {ex}")
+        return []
     rows = payload.get("tweets", []) if isinstance(payload, dict) else []
+    if not rows:
+        print("Warning: PaperPulse API returned 0 tweets")
+        return []
+
+    # Check if the API is returning stale data (frozen feed)
+    from arxiv_assistant.utils.hotspot.hotspot_sources import parse_datetime
+    newest_date = None
+    for row in rows[:5]:
+        dt = parse_datetime(row.get("created_at"))
+        if dt and (newest_date is None or dt > newest_date):
+            newest_date = dt
+    if newest_date:
+        from datetime import UTC, timedelta
+        staleness_limit = target_date - timedelta(days=7)
+        if newest_date.tzinfo is None:
+            newest_date = newest_date.replace(tzinfo=UTC)
+        if target_date.tzinfo is None:
+            target_date_tz = target_date.replace(tzinfo=UTC)
+        else:
+            target_date_tz = target_date
+        if newest_date < staleness_limit:
+            age_days = (target_date_tz - newest_date).days
+            print(f"Warning: PaperPulse API data is stale (newest tweet is {age_days} days old). "
+                  f"API may be frozen. Returning 0 items.")
+            return []
+
     items: list[HotspotItem] = []
     seen_urls: set[str] = set()
 

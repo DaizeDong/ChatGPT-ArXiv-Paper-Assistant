@@ -1218,6 +1218,7 @@ def _trim_topics(top_topics: list[dict[str, Any]], watchlist: list[dict[str, Any
         else:
             selected_top.append(topic)
 
+    reserve_min_score = config["HOTSPOTS"].getfloat("reserve_min_score", fallback=4.5)
     reserve_predicates = [
         lambda topic: _topic_bucket(topic) == "official",
         lambda topic: _topic_bucket(topic) == "community",
@@ -1226,6 +1227,8 @@ def _trim_topics(top_topics: list[dict[str, Any]], watchlist: list[dict[str, Any
     for predicate in reserve_predicates:
         for topic in combined:
             if topic.get("DEMOTED_LOW_CONFIDENCE"):
+                continue
+            if float(topic.get("FINAL_SCORE", 0.0)) < reserve_min_score:
                 continue
             if predicate(topic):
                 candidate = _diverse_select(selected_top + [topic], len(selected_top) + 1)

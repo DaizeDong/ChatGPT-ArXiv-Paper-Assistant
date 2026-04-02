@@ -78,6 +78,36 @@ SOURCE_ROLE_WEIGHTS = {
 PAPER_LIKE_SOURCE_TYPES = {"paper"}
 
 
+DOMAIN_CANONICAL_MAP = {
+    "paperswithcode.com": "paperswithcode",
+    "huggingface.co": "huggingface",
+    "github.com": "github",
+    "arxiv.org": "arxiv",
+}
+
+# Company/product name patterns for entity matching
+ENTITY_PATTERNS = [
+    re.compile(r"\b(openai|gpt[-\s]?\d|o[1-3]|chatgpt)\b", re.I),
+    re.compile(r"\b(anthropic|claude[\s-]?\d?)\b", re.I),
+    re.compile(r"\b(google|deepmind|gemini|bard)\b", re.I),
+    re.compile(r"\b(meta|llama[\s-]?\d?)\b", re.I),
+    re.compile(r"\b(mistral[\s-]?\w*)\b", re.I),
+    re.compile(r"\b(deepseek[\s-]?\w*)\b", re.I),
+    re.compile(r"\b(qwen[\s-]?\d?)\b", re.I),
+    re.compile(r"\b(nvidia|cuda)\b", re.I),
+    re.compile(r"\b(microsoft|copilot|phi[-\s]?\d)\b", re.I),
+    re.compile(r"\b(stability[\s-]?ai|stable[\s-]?diffusion)\b", re.I),
+]
+
+
+def _extract_entities(text: str) -> set[str]:
+    entities = set()
+    for pattern in ENTITY_PATTERNS:
+        for match in pattern.finditer(text):
+            entities.add(match.group(0).lower().strip())
+    return entities
+
+
 def canonicalize_url(url: str) -> str:
     if "arxiv.org/abs/" in url:
         arxiv_id = url.rsplit("/", 1)[-1]
@@ -140,9 +170,37 @@ def _cluster_match_score(item: HotspotItem, cluster_seed: HotspotItem) -> float:
     right_repo = canonicalize_url(str(cluster_seed.metadata.get("github_url", "") or cluster_seed.url or ""))
     if left_repo and right_repo and left_repo == right_repo and "github.com" in left_repo:
         return 1.0
+
+    # Link-following: if a roundup URL points to an official blog URL
+    item_urls = {item.url, item.canonical_url}
+    seed_urls = {cluster_seed.url, cluster_seed.canonical_url}
+    if item_urls & seed_urls:
+        return 1.0
+
     if _is_paper_like(item) and _is_paper_like(cluster_seed):
         return 0.0
-    return max(title_similarity(item.title, cluster_seed.title), title_overlap_boost(item.title, cluster_seed.title))
+
+    base_score = max(title_similarity(item.title, cluster_seed.title), title_overlap_boost(item.title, cluster_seed.title))
+
+    # Entity matching boost: if both mention the same company/product
+    # and are from different source types (e.g., official + roundup)
+    if base_score >= 0.40 and item.source_type != cluster_seed.source_type:
+        item_entities = _extract_entities(item.title)
+        seed_entities = _extract_entities(cluster_seed.title)
+        shared_entities = item_entities & seed_entities
+        if shared_entities:
+            # Strong entity match with moderate title similarity → likely same event
+            base_score = max(base_score, 0.70)
+
+    # Lower threshold for (official + roundup/community) pairs
+    is_cross_type = (
+        (item.source_role == "official_news" and cluster_seed.source_role != "official_news") or
+        (cluster_seed.source_role == "official_news" and item.source_role != "official_news")
+    )
+    if is_cross_type and base_score >= 0.60:
+        base_score = max(base_score, 0.68)
+
+    return base_score
 
 
 def _cluster_id(items: Iterable[HotspotItem]) -> str:

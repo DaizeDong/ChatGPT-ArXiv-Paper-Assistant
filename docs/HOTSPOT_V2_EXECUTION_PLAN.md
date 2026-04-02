@@ -1,7 +1,7 @@
 # Hotspot V2 Quality Execution Plan
 
 Updated: 2026-04-02
-Status: In progress — Phase 3 COMPLETE
+Status: In progress — Phase 4 COMPLETE
 Estimated execution time: 8 hours continuous
 Target quality: Industry-grade daily AI intelligence brief (top-conference / paid-tool level)
 
@@ -497,6 +497,13 @@ Run full evaluation. Compare to Phase 3:
 - Expect: featured_precision_proxy ≥ 70%
 
 **Commit:** `feat(hotspot): Phase 4 — refine clustering and scoring`
+
+#### Phase 4 Results (2026-04-02)
+
+Changes applied:
+- Clustering: entity matching for company/product names, lower cross-type threshold (0.60 for official+roundup), link-following for URL dedup
+- Scoring: official source weight 2.3→3.0, paper weight 2.1→1.5, editorial_depth bonus (+1.5 quality, +0.8 importance), multi-source confidence 0.9→1.4
+- LLM coverage: max_clusters_for_llm 18→30, max_review_clusters 10→15, screening_score_cutoff 4.0→4.5
 
 ---
 

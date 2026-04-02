@@ -132,6 +132,7 @@ def _cluster_signal_scores(cluster: HotspotCluster) -> dict[str, float]:
     has_repo = _bool_signal(cluster, lambda item: (item.get("metadata", {}) or {}).get("github_url") or (item.get("metadata", {}) or {}).get("github_stars") or (item.get("metadata", {}) or {}).get("stars"))
     has_official = _bool_signal(cluster, lambda item: (item.get("metadata", {}) or {}).get("is_official")) or "official_news" in cluster.source_roles
     has_roundup = _bool_signal(cluster, lambda item: item.get("source_type") == "roundup")
+    has_editorial_depth = "editorial_depth" in cluster.source_roles or _bool_signal(cluster, lambda item: item.get("source_type") == "blog_analysis")
 
     text = _cluster_text(cluster)
     has_research_terms = any(term in text for term in RESEARCH_TERMS)
@@ -148,7 +149,8 @@ def _cluster_signal_scores(cluster: HotspotCluster) -> dict[str, float]:
     community_activity = _sum_metadata_int(cluster, "activity")
     source_quality = _avg_metadata_float(cluster, "source_quality")
 
-    frontierness = 1.6 + (2.1 if has_paper else 0.0) + (1.4 if has_research_terms else 0.0)
+    frontierness = 1.6 + (1.5 if has_paper else 0.0) + (1.4 if has_research_terms else 0.0)
+    frontierness += 1.5 if has_editorial_depth else 0.0
     frontierness += 2.0 if has_official and has_release_terms else (1.1 if has_official else 0.0)
     frontierness += 1.0 if has_repo and has_tooling_terms else 0.0
     frontierness += 1.0 if has_product_news and has_roundup else 0.0
@@ -177,7 +179,8 @@ def _cluster_signal_scores(cluster: HotspotCluster) -> dict[str, float]:
     resonance += min(0.7, source_quality * 0.45)
     resonance = _clamp(resonance)
 
-    importance = 2.0 + (2.3 if has_official else 0.0) + (1.3 if has_paper else 0.0) + (1.1 if has_repo else 0.0)
+    importance = 2.0 + (3.0 if has_official else 0.0) + (1.0 if has_paper else 0.0) + (1.1 if has_repo else 0.0)
+    importance += 0.8 if has_editorial_depth else 0.0
     importance += 2.2 if has_official and has_release_terms else (0.9 if has_release_terms else 0.0)
     importance += 1.2 if has_product_news and has_roundup else 0.0
     importance += 0.8 if has_repo and community_activity >= 300 else 0.0
@@ -223,9 +226,9 @@ def _cluster_signal_scores(cluster: HotspotCluster) -> dict[str, float]:
     hype_penalty = _clamp(hype_penalty, 0.0, 10.0)
 
     confidence = 1.8 + 0.38 * evidence_strength + 0.26 * resonance + 0.18 * importance
-    confidence += 0.9 if source_count > 1 else 0.0
-    confidence += 0.7 if source_type_count > 1 else 0.0
-    confidence += 0.8 if has_official else 0.0
+    confidence += 1.4 if source_count > 1 else 0.0
+    confidence += 0.9 if source_type_count > 1 else 0.0
+    confidence += 1.0 if has_official else 0.0
     confidence += 0.6 if has_repo else 0.0
     confidence += 0.4 if has_paper else 0.0
     confidence -= 0.45 * hype_penalty

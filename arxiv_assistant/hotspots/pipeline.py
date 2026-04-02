@@ -1117,14 +1117,19 @@ def _topic_sort_key(topic: dict[str, Any]) -> tuple[float, float, float, float, 
 
 def _diverse_select(candidates: list[dict[str, Any]], limit: int, max_per_category: int = 3, max_per_source: int = 2) -> list[dict[str, Any]]:
     selected: list[dict[str, Any]] = []
+    selected_ids: set[str] = set()
     category_counts: dict[str, int] = {}
     source_counts: dict[str, int] = {}
     bucket_counts: dict[str, int] = {}
     paper_heavy_count = 0
     isolated_research_count = 0
     bucket_caps = {"research": 3, "official": 2, "community": 2, "tooling": 2}
+    ranked = sorted(candidates, key=_topic_sort_key, reverse=True)
 
-    for topic in sorted(candidates, key=_topic_sort_key, reverse=True):
+    # First pass: strict diversity caps
+    for topic in ranked:
+        if len(selected) >= limit:
+            return selected
         category = topic.get("PRIMARY_CATEGORY", "Unknown")
         source = _source_signature(topic)
         bucket = _topic_bucket(topic)
@@ -1139,6 +1144,7 @@ def _diverse_select(candidates: list[dict[str, Any]], limit: int, max_per_catego
         if _is_isolated_research_topic(topic) and isolated_research_count >= 1:
             continue
         selected.append(topic)
+        selected_ids.add(topic["TOPIC_ID"])
         category_counts[category] = category_counts.get(category, 0) + 1
         source_counts[source] = source_counts.get(source, 0) + 1
         bucket_counts[bucket] = bucket_counts.get(bucket, 0) + 1
@@ -1146,8 +1152,23 @@ def _diverse_select(candidates: list[dict[str, Any]], limit: int, max_per_catego
             paper_heavy_count += 1
         if _is_isolated_research_topic(topic):
             isolated_research_count += 1
-        if len(selected) >= limit:
-            return selected
+
+    # Second pass: relax bucket caps for multi-source quality topics
+    if len(selected) < limit:
+        for topic in ranked:
+            if len(selected) >= limit:
+                break
+            if topic["TOPIC_ID"] in selected_ids:
+                continue
+            if len(topic.get("source_names", [])) < 2:
+                continue
+            source = _source_signature(topic)
+            if source_counts.get(source, 0) >= max_per_source:
+                continue
+            selected.append(topic)
+            selected_ids.add(topic["TOPIC_ID"])
+            source_counts[source] = source_counts.get(source, 0) + 1
+
     return selected
 
 

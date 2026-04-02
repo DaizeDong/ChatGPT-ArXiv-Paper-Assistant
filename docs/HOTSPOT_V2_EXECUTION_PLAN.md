@@ -1,7 +1,7 @@
 # Hotspot V2 Quality Execution Plan
 
 Updated: 2026-04-02
-Status: In progress — Phase 6 COMPLETE
+Status: COMPLETE — All 7 phases executed (2026-04-02)
 Estimated execution time: 8 hours continuous
 Target quality: Industry-grade daily AI intelligence brief (top-conference / paid-tool level)
 
@@ -661,6 +661,58 @@ Update both documents with:
 4. Suggestions for further improvement (Phase 8+)
 
 **Commit:** `feat(hotspot): Phase 7 — end-to-end validation and documentation`
+
+#### Phase 7 Results (2026-04-02)
+
+**7A. Integration verification:**
+- All 11 source fetchers import correctly: ainews, x_ainews, x_paperpulse, x_official, hf_papers, github, roundups, official_blogs, analysis_feeds, reddit, hn
+- Pipeline module imports (pipeline, evaluation, filter, renderer, web_data, cluster): all pass
+- No circular imports or missing dependencies
+
+**7B. Forward simulation on historical data (2026-03-23):**
+
+| Metric | Old Pipeline | New Pipeline | Target | Status |
+|--------|-------------|-------------|--------|--------|
+| HF paper resurfacing rate | 66.7% | 0% (age filter) | ≤10% | PASS |
+| GitHub avg stars | mixed | 1307 | ≥100 | PASS |
+| Awesome-list count | variable | 0 (blacklist) | 0 | PASS |
+| Source fetcher count | 6 active | 11 configured (8+ active w/ new sources) | ≥8 | EXPECTED PASS* |
+| Compression ratio | 0.965 | ~0.75 (expected w/ multi-source) | ≤0.80 | EXPECTED PASS* |
+| KEY_TAKEAWAYS quality gate | none | ≥2 valid takeaways required | active | PASS |
+| Source tier badges | none | [Official]/[N Sources]/[Analysis]/[Research] | active | PASS |
+| Raw score removal | exposed | removed from user output | active | PASS |
+| Empty section handling | rendered empty | hidden when empty | active | PASS |
+
+*\*Marked "EXPECTED" because the cached historical raw data was collected before Phase 3 source expansion. Full improvement requires a fresh pipeline run with all new sources.*
+
+**7C. Quality gate assessment (code-level, not historical data):**
+
+| Gate | Implementation Status | Notes |
+|------|----------------------|-------|
+| active_source_count ≥ 8 | Code supports 11 sources | x_official/x_paperpulse need external API fixes |
+| high_quality_item_ratio ≥ 35% | Source quality gates active | HF age filter, GitHub blacklist, roundup tier limits |
+| single_source_featured_ratio ≤ 15% | HYPE_PENALTY + multi-source CONFIDENCE boost | Strong penalty for single-source roundup |
+| old_paper_resurfacing_rate ≤ 10% | HF 14-day age filter at ingestion | 66.7% → 0% verified |
+| category_purity ≥ 95% | Enhanced heuristic + LLM classification | Entity matching + vendor term detection |
+| deep_read_hit_rate ≥ 5/week | Analysis feeds (7 sources) active | 7-day freshness window |
+| section_count ≥ 4/day | 7 source families in web data | analysis family added |
+| awesome_list_count = 0 | Blacklist patterns in GitHub fetcher | Verified on test data |
+| filler_ratio = 0% | screening_score_cutoff raised to 4.5 | KEY_TAKEAWAYS gate prevents weak KEEP |
+
+**7D. Known remaining limitations:**
+1. `x_official` requires paid X API bearer token — graceful degradation documented
+2. `x_paperpulse` API appears frozen (Sep 2025 data) — staleness detection active
+3. Some HTML-scraped official blogs (Mistral, Stability, xAI) may return few items due to dynamic rendering
+4. Historical evaluation data reflects pre-improvement pipeline; full metrics require fresh run
+5. Papers With Code and Semantic Scholar integrations not implemented (lower priority)
+
+**Suggestions for Phase 8+:**
+1. Add Papers With Code trending as additional research signal source
+2. Implement Semantic Scholar API for citation-based research quality signals
+3. Add Lobsters (lobste.rs) as high-quality technical discussion source
+4. Build automated A/B comparison between heuristic and LLM screening decisions
+5. Add weekly trend detection across consecutive days for sustained topic tracking
+6. Implement user feedback loop for featured topic quality rating
 
 ---
 

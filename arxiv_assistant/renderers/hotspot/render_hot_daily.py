@@ -2,33 +2,62 @@ from __future__ import annotations
 
 from typing import Any
 
+CATEGORY_SUBTITLES = {
+    "Research": "Fresh papers with frontier impact",
+    "Product Release": "Official launches and model updates",
+    "Tooling": "Developer tools, frameworks, and infrastructure",
+    "Industry Update": "Policy, partnerships, and ecosystem shifts",
+    "Community Signal": "Discussion trends and emerging narratives",
+}
+
+
+def _source_tier_badge(topic: dict[str, Any]) -> str:
+    source_roles = set(topic.get("source_roles", []))
+    source_count = len(topic.get("source_names", []))
+    badges = []
+    if "official_news" in source_roles:
+        badges.append("[Official]")
+    if source_count >= 2:
+        badges.append(f"[{source_count} Sources]")
+    if "editorial_depth" in source_roles:
+        badges.append("[Analysis]")
+    if "research_backbone" in source_roles or "paper_trending" in source_roles:
+        if "paper" in set(topic.get("source_types", [])):
+            badges.append("[Research]")
+    if "github_trend" in source_roles:
+        badges.append("[GitHub]")
+    return " ".join(badges)
+
 
 def _render_source_list(items: list[dict[str, Any]], limit: int = 4) -> str:
     lines = []
-    for item in items[:limit]:
+    # Sort: official sources first, then by source_role weight
+    role_priority = {"official_news": 0, "research_backbone": 1, "paper_trending": 2, "editorial_depth": 3, "community_heat": 4, "headline_consensus": 5, "github_trend": 6, "builder_momentum": 7, "hn_discussion": 8}
+    sorted_items = sorted(items[:limit * 2], key=lambda item: role_priority.get(item.get("source_role", ""), 9))[:limit]
+    for item in sorted_items:
         title = item.get("title", "Untitled")
         url = item.get("url", "")
         source_name = item.get("source_name", item.get("source_id", "source"))
+        source_role = item.get("source_role", "")
+        role_label = ""
+        if source_role == "official_news":
+            role_label = " [Primary]"
+        elif source_role in ("headline_consensus", "community_heat", "hn_discussion"):
+            role_label = " [Corroboration]"
         if url:
-            lines.append(f"- [{title}]({url}) ({source_name})")
+            lines.append(f"- [{title}]({url}) ({source_name}{role_label})")
         else:
-            lines.append(f"- {title} ({source_name})")
+            lines.append(f"- {title} ({source_name}{role_label})")
     return "\n".join(lines)
 
 
 def _compact_topic_line(topic: dict[str, Any]) -> str:
     headline = topic.get("HEADLINE") or topic.get("title") or "Untitled Topic"
-    final_score = topic.get("FINAL_SCORE", 0)
-    heat = topic.get("HEAT", 0)
-    occurrence = topic.get("OCCURRENCE_SCORE", len(topic.get("source_names", [])) or len(topic.get("items", [])))
+    badge = _source_tier_badge(topic)
+    if badge:
+        return f"- **{headline}** {badge}"
     source_count = len(topic.get("source_names", []))
-    status = topic.get("LLM_STATUS", "")
-    suffix = f" | final={final_score} | heat={heat} | occurrence={occurrence} | sources={source_count}"
-    if status == "watchlist":
-        suffix += " | watchlist"
-    elif status == "featured":
-        suffix += " | featured"
-    return f"- **{headline}**{suffix}"
+    return f"- **{headline}** ({source_count} sources)"
 
 
 def _radar_excerpt(topic: dict[str, Any], max_length: int = 160) -> str:
@@ -49,9 +78,6 @@ def _render_paper_spotlight_item(item: dict[str, Any]) -> list[str]:
     primary_topic_label = item.get("primary_topic_label", "")
     spotlight_comment = (item.get("spotlight_comment") or "").strip()
     summary = (item.get("summary") or "").strip()
-    daily_score = item.get("daily_score", 0)
-    relevance = item.get("relevance", 0)
-    novelty = item.get("novelty", 0)
     if url:
         lines = [f"- [{title}]({url})"]
     else:
@@ -61,10 +87,8 @@ def _render_paper_spotlight_item(item: dict[str, Any]) -> list[str]:
         meta_bits.append(f"arXiv {arxiv_id}")
     if primary_topic_label:
         meta_bits.append(primary_topic_label)
-    meta_bits.append(f"score={daily_score}")
-    meta_bits.append(f"rel={relevance}")
-    meta_bits.append(f"nov={novelty}")
-    lines.append(f"  - {' | '.join(meta_bits)}")
+    if meta_bits:
+        lines.append(f"  - {' | '.join(meta_bits)}")
     if spotlight_comment:
         lines.append(f"  - {spotlight_comment}")
     elif summary:
@@ -80,6 +104,11 @@ def render_hot_daily_md(report: dict[str, Any]) -> str:
     x_buzz = report.get("x_buzz") or []
     watchlist = report.get("watchlist") or []
 
+    source_stats = report.get("source_stats") or {}
+    active_sources = sum(1 for count in source_stats.values() if count > 0)
+    total_sources = len(source_stats)
+    inactive_sources = [name for name, count in sorted(source_stats.items()) if count == 0]
+
     lines = [
         f'# Daily AI Hotspots {report["date"]}',
         "",
@@ -91,18 +120,22 @@ def render_hot_daily_md(report: dict[str, Any]) -> str:
         f'- Category radar topics: {sum(len(section.get("topics", [])) for section in category_sections)}',
         f'- Long-tail signals: {sum(len(section.get("topics", [])) for section in long_tail_sections)}',
         f'- Paper spotlight items: {sum(len(section.get("items", [])) for section in paper_spotlight)}',
-        f'- X Buzz items: {len(x_buzz)}',
         f'- Watchlist topics: {len(watchlist)}',
+        f'- Active sources: {active_sources}/{total_sources}',
         f'- Raw items scanned: {report.get("totals", {}).get("raw_items", 0)}',
-        f'- Clusters formed: {report.get("totals", {}).get("clusters", 0)}',
-        f'- Radar clusters considered: {report.get("totals", {}).get("radar_clusters", 0)}',
-        "",
-        "## Source Stats",
         "",
     ]
 
-    for source_name, count in sorted((report.get("source_stats") or {}).items()):
-        lines.append(f"- `{source_name}`: {count}")
+    if inactive_sources:
+        lines.append(f'*Inactive sources: {", ".join(inactive_sources)}*')
+        lines.append("")
+
+    lines.extend(["## Source Stats", ""])
+    for source_name, count in sorted(source_stats.items()):
+        if count > 0:
+            lines.append(f"- `{source_name}`: {count}")
+        else:
+            lines.append(f"- `{source_name}`: 0 (inactive)")
 
     if paper_spotlight:
         lines.extend(["", "## Paper Spotlight", ""])
@@ -117,19 +150,22 @@ def render_hot_daily_md(report: dict[str, Any]) -> str:
                 lines.extend(_render_paper_spotlight_item(item))
             lines.append("")
 
-    lines.extend(["", "## Featured Topics", ""])
-    if not featured_topics:
-        lines.append("- No topic cleared the featured threshold.")
-    else:
+    if featured_topics:
+        lines.extend(["", "## Featured Topics", ""])
         for idx, topic in enumerate(featured_topics, start=1):
             headline = topic.get("HEADLINE") or topic.get("title") or f"Topic {idx}"
+            badge = _source_tier_badge(topic)
+            category = topic.get("PRIMARY_CATEGORY", "Other Frontier AI")
+            source_names = ", ".join(topic.get("source_names", [])) or "Unknown"
+            header_line = f"### {idx}. {headline}"
+            if badge:
+                header_line += f"  {badge}"
             lines.extend(
                 [
-                    f"### {idx}. {headline}",
+                    header_line,
                     "",
-                    f'- Category: {topic.get("PRIMARY_CATEGORY", "Other Frontier AI")}',
-                    f'- Scores: final={topic.get("FINAL_SCORE", 0)} quality={topic.get("QUALITY", 0)} heat={topic.get("HEAT", 0)} importance={topic.get("IMPORTANCE", 0)}',
-                    f'- Sources: {", ".join(topic.get("source_names", [])) or "Unknown"}',
+                    f"- Category: {category}",
+                    f"- Sources: {source_names}",
                     "",
                     topic.get("WHY_IT_MATTERS", "").strip() or topic.get("SHORT_COMMENT", "").strip(),
                     "",
@@ -137,10 +173,10 @@ def render_hot_daily_md(report: dict[str, Any]) -> str:
             )
             takeaways = [takeaway for takeaway in topic.get("KEY_TAKEAWAYS", []) if takeaway]
             if takeaways:
-                lines.append("Key takeaways:")
+                lines.append("**Key takeaways:**")
                 lines.extend(f"- {takeaway}" for takeaway in takeaways)
                 lines.append("")
-            lines.append("Representative sources:")
+            lines.append("**Sources:**")
             rendered_sources = _render_source_list(topic.get("items", []))
             if rendered_sources:
                 lines.append(rendered_sources)
@@ -148,13 +184,18 @@ def render_hot_daily_md(report: dict[str, Any]) -> str:
                 lines.append("- No representative sources available.")
             lines.append("")
 
-    if category_sections:
-        lines.extend(["## Topic Radar By Category", "", "Broader same-day coverage beyond the featured list. Entries stay intentionally short so the page can cover more of the day's signal surface.", ""])
-        for section in category_sections:
+    non_empty_category_sections = [section for section in category_sections if section.get("topics")]
+    if non_empty_category_sections:
+        lines.extend(["## Topic Radar By Category", "", "Broader same-day coverage beyond the featured list.", ""])
+        for section in non_empty_category_sections:
             category = section.get("category", "Other")
             displayed = len(section.get("topics", []))
             total_candidates = section.get("total_candidates", displayed)
-            lines.extend([f"### {category} ({displayed} shown / {total_candidates} candidates)", ""])
+            subtitle = CATEGORY_SUBTITLES.get(category, "")
+            header = f"### {category} ({displayed} shown / {total_candidates} candidates)"
+            if subtitle:
+                header += f" — {subtitle}"
+            lines.extend([header, ""])
             for topic in section.get("topics", []):
                 lines.append(_compact_topic_line(topic))
                 short_text = _radar_excerpt(topic)
@@ -173,9 +214,10 @@ def render_hot_daily_md(report: dict[str, Any]) -> str:
                     lines.append(f"  - Evidence: {' | '.join(evidence_bits)}")
             lines.append("")
 
-    if long_tail_sections:
-        lines.extend(["## Long-tail Signals", "", "Lower-priority but still relevant same-day candidates, compressed to one line each for breadth.", ""])
-        for section in long_tail_sections:
+    non_empty_long_tail = [section for section in long_tail_sections if section.get("topics")]
+    if non_empty_long_tail:
+        lines.extend(["## Long-tail Signals", "", "Lower-priority same-day candidates worth tracking.", ""])
+        for section in non_empty_long_tail:
             category = section.get("category", "Other")
             displayed = len(section.get("topics", []))
             total_candidates = section.get("total_candidates", displayed)

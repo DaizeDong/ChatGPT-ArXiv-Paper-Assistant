@@ -28,6 +28,11 @@ SOURCE_FAMILIES = [
         "description": "Product, research, and platform updates from official vendor or lab channels.",
     },
     {
+        "slug": "analysis",
+        "label": "Deep Reads / Analysis",
+        "description": "Long-form expert analysis and research explainers with substantive depth.",
+    },
+    {
         "slug": "blogs",
         "label": "Blogs / Newsletters",
         "description": "Curated roundup and newsletter coverage that helps track same-day narrative consensus.",
@@ -64,6 +69,7 @@ PAPER_SPOTLIGHT_SECTION_META = {
 SOURCE_FAMILY_ORDER_BOOST = {
     "x-buzz": 2.5,
     "official": 2.35,
+    "analysis": 2.2,
     "blogs": 2.0,
     "github": 1.9,
     "papers": 1.6,
@@ -87,6 +93,7 @@ LLM_STATUS_ORDER_BOOST = {
 }
 SOCIAL_HOST_SNIPPETS = ("x.com", "twitter.com", "reddit.com")
 BLOG_HOST_HINTS = ("rundown", "superhuman", "neuron", "smol.ai", "ben", "newsletter", "substack")
+ANALYSIS_HOST_HINTS = ("thegradient", "lilianweng", "simonwillison", "jalammar", "sebastianraschka", "huyenchip", "distill.pub")
 GITHUB_HOSTS = ("github.com",)
 DISCUSSION_HOSTS = ("news.ycombinator.com", "reddit.com")
 YEAR_PATTERN = re.compile(r"^\d{4}$")
@@ -220,13 +227,15 @@ def _classify_source_family(item: HotspotItem) -> str:
         return "x-buzz"
     if item.source_role == "official_news" or bool(metadata.get("is_official")):
         return "official"
+    if item.source_role == "editorial_depth" or item.source_type == "blog_analysis" or any(hint in host for hint in ANALYSIS_HOST_HINTS):
+        return "analysis"
     if item.source_type == "paper" or metadata.get("arxiv_id"):
         return "papers"
     if item.source_role == "github_trend" or any(repo_host in host for repo_host in GITHUB_HOSTS) or metadata.get("github_url") or metadata.get("github_stars") or metadata.get("stars"):
         return "github"
     if item.source_role == "hn_discussion" or item.source_type == "discussion" or any(snippet in host for snippet in DISCUSSION_HOSTS):
         return "discussions"
-    if item.source_role in {"headline_consensus", "editorial_depth", "builder_momentum"} or any(hint in host for hint in BLOG_HOST_HINTS):
+    if item.source_role in {"headline_consensus", "builder_momentum"} or any(hint in host for hint in BLOG_HOST_HINTS):
         return "blogs"
     return "blogs"
 
@@ -384,6 +393,17 @@ def _build_compact_topic(topic: dict[str, Any]) -> dict[str, Any]:
                 "source_name": item.get("source_name", item.get("source_id", "source")),
             }
         )
+    source_roles = set(topic.get("source_roles", []))
+    source_tier = "community"
+    if "official_news" in source_roles:
+        source_tier = "official"
+    elif "editorial_depth" in source_roles:
+        source_tier = "trusted_analysis"
+    elif "research_backbone" in source_roles or "paper_trending" in source_roles:
+        source_tier = "trusted_research"
+    elif len(topic.get("source_names", [])) >= 2:
+        source_tier = "multi_source"
+
     return {
         "topic_id": topic["topic_id"],
         "slug": topic["slug"],
@@ -391,6 +411,7 @@ def _build_compact_topic(topic: dict[str, Any]) -> dict[str, Any]:
         "category": topic.get("PRIMARY_CATEGORY", "Research"),
         "summary_short": _short_text(topic.get("SHORT_COMMENT") or topic.get("summary") or topic.get("WHY_IT_MATTERS") or "", 150),
         "why_it_matters": _short_text(topic.get("WHY_IT_MATTERS", ""), 220),
+        "key_takeaways": list(topic.get("KEY_TAKEAWAYS", [])),
         "scores": {
             "final": _topic_score(topic, "FINAL_SCORE"),
             "quality": _topic_score(topic, "QUALITY"),
@@ -400,6 +421,7 @@ def _build_compact_topic(topic: dict[str, Any]) -> dict[str, Any]:
             "display_priority": _topic_score(topic, "DISPLAY_PRIORITY"),
             "confidence": _topic_score(topic, "CONFIDENCE"),
         },
+        "source_tier": source_tier,
         "source_names": list(topic.get("source_names", [])),
         "source_roles": list(topic.get("source_roles", [])),
         "source_types": list(topic.get("source_types", [])),

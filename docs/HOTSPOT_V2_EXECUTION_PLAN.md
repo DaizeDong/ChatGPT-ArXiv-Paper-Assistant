@@ -1,7 +1,7 @@
 # Hotspot V2 Quality Execution Plan
 
 Updated: 2026-04-02
-Status: In progress — Phase 5 COMPLETE
+Status: In progress — Phase 6 COMPLETE
 Estimated execution time: 8 hours continuous
 Target quality: Industry-grade daily AI intelligence brief (top-conference / paid-tool level)
 
@@ -605,6 +605,24 @@ Add to the Coverage Snapshot section:
 Visual inspection of rendered output. Must look professional and information-dense.
 
 **Commit:** `feat(hotspot): Phase 6 — polish rendering and output format`
+
+#### Phase 6 Results (2026-04-02)
+
+Changes applied:
+- **Markdown renderer** (`render_hot_daily.py`):
+  - Added source tier badges: `[Official]`, `[N Sources]`, `[Analysis]`, `[Research]`, `[GitHub]`
+  - Removed raw numeric scores (final=, quality=, heat=, importance=) from featured topics and paper spotlight
+  - Added semantic category subtitles (e.g., "Research — Fresh papers with frontier impact")
+  - Source evidence now shows `[Primary]` / `[Corroboration]` labels with official sources first
+  - Empty sections are no longer rendered (empty categories, long-tail, etc.)
+  - Coverage snapshot now shows active/total source count and lists inactive sources
+  - Compact topic lines use badges instead of redundant raw metrics
+- **Web data output** (`hotspot_web_data.py`):
+  - Added "analysis" source family for Deep Reads / Analysis content
+  - New source family classification: `editorial_depth` and `blog_analysis` → "analysis" family
+  - Added `source_tier` field to compact topic payload (official/trusted_analysis/trusted_research/multi_source/community)
+  - Added `key_takeaways` field to compact topic payload for frontend rendering
+  - Analysis host hints for classification (thegradient, lilianweng, simonwillison, etc.)
 
 ---
 

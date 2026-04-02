@@ -33,7 +33,7 @@ RESEARCH_TERMS = {
 RELEASE_TERMS = {"launch", "launches", "launched", "release", "released", "announced", "announcement", "introducing", "preview", "api", "available", "acquire", "acquisition", "rollout", "model", "revamps", "debuts", "limits", "doubles"}
 TOOLING_TERMS = {"tool", "sdk", "framework", "platform", "editor", "cli", "workflow", "inference", "serving", "deployment", "memory", "retrieval", "ocr", "design", "app"}
 VENDOR_TERMS = {"openai", "anthropic", "google", "deepmind", "meta", "nvidia", "amazon", "apple", "cursor", "claude", "gpt", "gemini", "qwen", "deepseek", "mistral", "llama"}
-NEWS_ACTION_TERMS = {"launch", "launches", "released", "release", "introducing", "revamp", "revamps", "debuts", "doubles", "limits", "acquire", "acquisition", "built", "bets", "move", "moves"}
+NEWS_ACTION_TERMS = {"launch", "launches", "released", "release", "introducing", "revamp", "revamps", "debuts", "doubles", "limits", "acquire", "acquisition", "built", "bets", "move", "moves", "testing", "tests", "tested", "unveils", "unveiled", "announces", "announced"}
 
 
 def calc_price(model: str, usage) -> tuple[float, float]:
@@ -262,19 +262,24 @@ def _cluster_signal_scores(cluster: HotspotCluster) -> dict[str, float]:
 
 def classify_category_heuristically(cluster: HotspotCluster) -> str:
     text = _cluster_text(cluster)
+    title_text = cluster.title.lower()
     scores = {
         category: sum(1 for token in CATEGORY_KEYWORDS[category] if token in text)
         for category in ALLOWED_HOTSPOT_CATEGORIES
     }
-    has_vendor_terms = any(term in text for term in VENDOR_TERMS)
-    has_news_action_terms = any(term in text for term in NEWS_ACTION_TERMS)
-    has_product_news = has_vendor_terms and has_news_action_terms
+    # Check vendor + action co-occurrence in title only (not full text)
+    # to avoid false positives from user comments like "I was testing..."
+    has_vendor_in_title = any(term in title_text for term in VENDOR_TERMS)
+    has_action_in_title = any(term in title_text for term in NEWS_ACTION_TERMS)
+    has_vendor_terms = has_vendor_in_title or any(term in text for term in VENDOR_TERMS)
+    has_news_action_terms = has_action_in_title or any(term in text for term in NEWS_ACTION_TERMS)
+    has_product_news = has_vendor_in_title and has_action_in_title
     if "github_trend" in cluster.source_roles and "paper" not in cluster.source_types:
         return "Tooling"
     if "official_news" in cluster.source_roles and (scores["Product Release"] > 0 or any(term in text for term in RELEASE_TERMS)):
         return "Product Release"
     if has_product_news and ("headline_consensus" in cluster.source_roles or "community_heat" in cluster.source_roles) and "paper_trending" not in cluster.source_roles and "research_backbone" not in cluster.source_roles:
-        return "Tooling" if scores["Tooling"] > 0 else "Product Release"
+        return "Tooling" if scores["Tooling"] > scores["Product Release"] else "Product Release"
     if scores["Research"] and ("paper" in cluster.source_types or "paper_trending" in cluster.source_roles or "research_backbone" in cluster.source_roles):
         return "Research"
     if "paper" in cluster.source_types or "paper_trending" in cluster.source_roles or "research_backbone" in cluster.source_roles:

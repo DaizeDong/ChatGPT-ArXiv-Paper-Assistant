@@ -1,0 +1,148 @@
+{
+  "_comment": "Source tier registry for hotspot quality gating. Sources are matched by source_id first, then by source_role fallback.",
+  "sources": {
+    "local_papers": {
+      "tier": "trusted_research",
+      "lane": "research_signals",
+      "can_anchor_featured": true,
+      "freshness_required": true,
+      "max_age_days": 7
+    },
+    "hf_papers": {
+      "tier": "community",
+      "lane": "research_signals",
+      "can_anchor_featured": false,
+      "freshness_required": true,
+      "max_age_days": 14,
+      "notes": "Trending papers are community-curated resurfaces; old papers must be clearly labeled and cannot anchor featured topics alone"
+    },
+    "openai_news": {
+      "tier": "official",
+      "lane": "authoritative_releases",
+      "can_anchor_featured": true
+    },
+    "anthropic_news": {
+      "tier": "official",
+      "lane": "authoritative_releases",
+      "can_anchor_featured": true
+    },
+    "google_ai_blog": {
+      "tier": "official",
+      "lane": "authoritative_releases",
+      "can_anchor_featured": true
+    },
+    "meta_ai_blog": {
+      "tier": "official",
+      "lane": "authoritative_releases",
+      "can_anchor_featured": true
+    },
+    "ainews": {
+      "tier": "community",
+      "lane": "community_heat",
+      "can_anchor_featured": false
+    },
+    "ainews_twitter": {
+      "tier": "community",
+      "lane": "community_heat",
+      "can_anchor_featured": false
+    },
+    "x_official": {
+      "tier": "official",
+      "lane": "authoritative_releases",
+      "can_anchor_featured": true
+    },
+    "x_ainews_twitter": {
+      "tier": "community",
+      "lane": "community_heat",
+      "can_anchor_featured": false
+    },
+    "x_paperpulse": {
+      "tier": "trusted_research",
+      "lane": "research_signals",
+      "can_anchor_featured": false,
+      "freshness_required": true,
+      "max_age_days": 14
+    },
+    "github_trend": {
+      "tier": "builder",
+      "lane": "builder_momentum",
+      "can_anchor_featured": false,
+      "notes": "Cannot independently anchor featured unless explicitly promoted"
+    },
+    "hn_discussion": {
+      "tier": "community",
+      "lane": "community_heat",
+      "can_anchor_featured": false
+    },
+    "the_batch": {
+      "tier": "trusted_analysis",
+      "lane": "analysis_and_explainers",
+      "can_anchor_featured": false
+    },
+    "import_ai": {
+      "tier": "trusted_analysis",
+      "lane": "analysis_and_explainers",
+      "can_anchor_featured": false
+    },
+    "last_week_in_ai": {
+      "tier": "trusted_analysis",
+      "lane": "analysis_and_explainers",
+      "can_anchor_featured": false
+    },
+    "the_rundown_ai": {
+      "tier": "low_trust_recap",
+      "lane": "community_heat",
+      "can_anchor_featured": false
+    },
+    "superhuman_ai": {
+      "tier": "low_trust_recap",
+      "lane": "community_heat",
+      "can_anchor_featured": false
+    },
+    "the_neuron": {
+      "tier": "low_trust_recap",
+      "lane": "community_heat",
+      "can_anchor_featured": false
+    },
+    "tldr_ai": {
+      "tier": "low_trust_recap",
+      "lane": "community_heat",
+      "can_anchor_featured": false
+    },
+    "bens_bites": {
+      "tier": "community",
+      "lane": "builder_momentum",
+      "can_anchor_featured": false
+    },
+    "alphasignal": {
+      "tier": "community",
+      "lane": "builder_momentum",
+      "can_anchor_featured": false
+    }
+  },
+  "roundup_overrides": {
+    "the_batch": {
+      "tier": "trusted_analysis",
+      "lane": "analysis_and_explainers",
+      "can_anchor_featured": false
+    },
+    "import_ai": {
+      "tier": "trusted_analysis",
+      "lane": "analysis_and_explainers",
+      "can_anchor_featured": false
+    },
+    "last_week_in_ai": {
+      "tier": "trusted_analysis",
+      "lane": "analysis_and_explainers",
+      "can_anchor_featured": false
+    }
+  },
+  "tier_hierarchy": {
+    "official": 5,
+    "trusted_analysis": 4,
+    "trusted_research": 3,
+    "community": 2,
+    "builder": 2,
+    "low_trust_recap": 1
+  }
+}

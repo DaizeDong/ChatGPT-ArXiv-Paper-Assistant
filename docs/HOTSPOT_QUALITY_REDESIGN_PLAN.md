@@ -540,15 +540,32 @@ Why first:
 
 - without this, every redesign is subjective
 
-## Iteration 1. Source gating and hard section contracts
+## Iteration 1. Source gating and hard section contracts ✅ COMPLETED
 
 Scope:
 
-- add source tiers
-- reduce or disable low-trust feeds from featured generation
-- force official-first product handling
-- cap builder/community lanes
-- eliminate filler long-tail from primary page
+- add source tiers → `configs/hotspot/source_tiers.json`
+- reduce or disable low-trust feeds from featured generation → `source_registry.py` with `cluster_featured_eligible()`
+- force official-first product handling → official tier sources can anchor featured alone
+- cap builder/community lanes → builder/community/low_trust_recap cannot anchor featured
+- eliminate filler long-tail from primary page → reduced `target_long_tail_topics` 18→10, `max_long_tail_per_category` 8→4, raised `long_tail_display_score_cutoff` 1.6→2.4
+
+Implementation files:
+
+- `arxiv_assistant/hotspots/source_registry.py` — source tier registry with role-based fallback
+- `configs/hotspot/source_tiers.json` — tier definitions for all known sources
+- `arxiv_assistant/apis/hotspot/hotspot_hf_papers.py` — paper age tagging (`paper_age_days`, `is_resurfaced`)
+- `arxiv_assistant/filters/filter_hotspots.py` — resurfaced paper hype penalty (+2.0/+3.5), single-source confidence penalty (-1.2)
+- `arxiv_assistant/hotspots/pipeline.py` — featured eligibility gating via source registry
+- `configs/config.ini` — reduced section quotas
+
+Projected gains (simulated on existing 14 days):
+
+| Metric | Baseline | Projected |
+|--------|----------|-----------|
+| Single-source Featured Ratio | 39.8% | ~22.9% |
+| Resurfaced old paper in featured | 30.9% | ~0% |
+| Long-tail section size | 18+8 | 10+4 |
 
 Expected gain:
 

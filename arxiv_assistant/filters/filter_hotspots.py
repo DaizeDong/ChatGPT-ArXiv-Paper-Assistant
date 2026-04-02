@@ -132,6 +132,7 @@ def _cluster_signal_scores(cluster: HotspotCluster) -> dict[str, float]:
     has_repo = _bool_signal(cluster, lambda item: (item.get("metadata", {}) or {}).get("github_url") or (item.get("metadata", {}) or {}).get("github_stars") or (item.get("metadata", {}) or {}).get("stars"))
     has_official = _bool_signal(cluster, lambda item: (item.get("metadata", {}) or {}).get("is_official")) or "official_news" in cluster.source_roles
     has_roundup = _bool_signal(cluster, lambda item: item.get("source_type") == "roundup")
+    has_resurfaced_paper = _bool_signal(cluster, lambda item: (item.get("metadata", {}) or {}).get("is_resurfaced", False))
 
     text = _cluster_text(cluster)
     has_research_terms = any(term in text for term in RESEARCH_TERMS)
@@ -214,6 +215,11 @@ def _cluster_signal_scores(cluster: HotspotCluster) -> dict[str, float]:
         hype_penalty += 1.4
     if item_count >= 4 and source_type_count == 1 and has_roundup and not has_official:
         hype_penalty += 1.2
+    # Resurfaced old paper penalty: old HF papers should not compete with fresh signals
+    if has_resurfaced_paper and not has_official:
+        hype_penalty += 2.0
+        if source_count == 1:
+            hype_penalty += 1.5
     if has_product_news and source_count > 1:
         hype_penalty -= 1.0
     if has_repo or has_official:
@@ -231,6 +237,9 @@ def _cluster_signal_scores(cluster: HotspotCluster) -> dict[str, float]:
     confidence -= 0.45 * hype_penalty
     if source_count == 1 and has_roundup and not (has_official or has_repo or has_paper):
         confidence -= 0.9
+    # Single-source penalty: single-source clusters get lower confidence
+    if source_count == 1 and not has_official:
+        confidence -= 1.2
     confidence = _clamp(confidence)
 
     quality = round(_clamp(0.35 * frontierness + 0.27 * technical_depth + 0.18 * importance + 0.20 * evidence_strength))

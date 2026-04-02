@@ -3,7 +3,7 @@ from __future__ import annotations
 import html
 import json
 import re
-from datetime import datetime
+from datetime import datetime, timezone
 
 from arxiv_assistant.utils.hotspot.hotspot_schema import HotspotItem
 from arxiv_assistant.utils.hotspot.hotspot_sources import clip_text, fetch_text
@@ -35,6 +35,18 @@ def fetch_hotspot_items(target_date: datetime, freshness_hours: int, result_limi
             continue
         published_at = paper.get("publishedAt") or target_date.isoformat()
         canonical_url = f"https://arxiv.org/abs/{paper_id}"
+
+        # Compute paper age and freshness label
+        paper_age_days = 0
+        is_resurfaced = False
+        try:
+            pub_dt = datetime.fromisoformat(published_at.replace("Z", "+00:00"))
+            target_aware = target_date if target_date.tzinfo else target_date.replace(tzinfo=timezone.utc)
+            paper_age_days = max(0, (target_aware - pub_dt).days)
+            is_resurfaced = paper_age_days > 30
+        except (ValueError, TypeError):
+            pass
+
         items.append(
             HotspotItem(
                 source_id="hf_papers",
@@ -54,6 +66,8 @@ def fetch_hotspot_items(target_date: datetime, freshness_hours: int, result_limi
                     "github_url": paper.get("githubRepo"),
                     "hf_url": f"https://huggingface.co/papers/{paper_id}",
                     "ai_summary": paper.get("ai_summary", ""),
+                    "paper_age_days": paper_age_days,
+                    "is_resurfaced": is_resurfaced,
                 },
             )
         )

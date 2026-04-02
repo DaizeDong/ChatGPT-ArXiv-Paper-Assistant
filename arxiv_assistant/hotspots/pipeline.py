@@ -29,6 +29,7 @@ from arxiv_assistant.utils.hotspot.hotspot_schema import HotspotCluster, Hotspot
 from arxiv_assistant.utils.hotspot.hotspot_sources import api_usage_scope, reset_api_usage, snapshot_api_usage
 from arxiv_assistant.utils.prompt_loader import read_prompt
 from arxiv_assistant.utils.hotspot.hotspot_web_data import write_hotspot_web_data
+from arxiv_assistant.hotspots.source_registry import get_source_registry
 
 ROLE_PRIORITY = {
     "research_backbone": 0,
@@ -313,15 +314,18 @@ def _display_priority(topic: dict[str, Any]) -> float:
 
 def _screening_decision(topic: dict[str, Any], score_cutoff: float, watchlist_cutoff: float, config: configparser.ConfigParser) -> str:
     hotspot_config = config["HOTSPOTS"]
+    registry = get_source_registry()
     final_score = float(topic.get("FINAL_SCORE", 0.0))
     confidence = float(topic.get("CONFIDENCE", 0.0))
     evidence = float(topic.get("EVIDENCE_STRENGTH", 0.0))
     resonance = float(topic.get("CROSS_SOURCE_RESONANCE", 0.0))
     hype_penalty = float(topic.get("HYPE_PENALTY", 0.0))
     source_count = len(topic.get("source_names", []))
+    source_ids = topic.get("source_ids", [])
     roles = set(topic.get("source_roles", []))
     source_types = set(topic.get("source_types", []))
     has_official = "official_news" in roles
+    featured_eligible = registry.cluster_featured_eligible(source_ids, list(roles))
     has_non_paper_signal = bool(roles - {"research_backbone", "paper_trending"})
     has_repo_signal = "repo" in source_types
     has_discussion_signal = "discussion" in source_types
@@ -356,7 +360,7 @@ def _screening_decision(topic: dict[str, Any], score_cutoff: float, watchlist_cu
         return "auto_drop"
 
     strong_multi_source = source_count >= 2 or has_official or (has_non_paper_signal and resonance >= 4.8)
-    if (strong_evidence_keep or final_score >= auto_keep_score) and confidence >= auto_keep_conf and evidence >= auto_keep_evidence and strong_multi_source and hype_penalty <= 5.2:
+    if (strong_evidence_keep or final_score >= auto_keep_score) and confidence >= auto_keep_conf and evidence >= auto_keep_evidence and strong_multi_source and hype_penalty <= 5.2 and featured_eligible:
         return "auto_keep"
     auto_watch_upper_bound = max(watchlist_cutoff + 1.2, score_cutoff + 0.9)
     if auto_watch_score <= final_score <= auto_watch_upper_bound and confidence >= auto_watch_conf and evidence >= auto_keep_evidence - 0.6 and (source_count >= 2 or has_official or resonance >= 5.2):
@@ -1018,12 +1022,30 @@ def _trim_topics(top_topics: list[dict[str, Any]], watchlist: list[dict[str, Any
     min_topics = config["HOTSPOTS"].getint("min_topics", fallback=3)
     target_watchlist_topics = config["HOTSPOTS"].getint("target_watchlist_topics", fallback=3)
 
+    registry = get_source_registry()
+
     def should_demote_featured(topic: dict[str, Any]) -> bool:
+        source_ids = topic.get("source_ids", [])
         roles = set(topic.get("source_roles", []))
         source_count = len(topic.get("source_names", []))
         final_score = float(topic.get("FINAL_SCORE", 0.0))
         evidence = float(topic.get("EVIDENCE_STRENGTH", 0.0))
         confidence = float(topic.get("CONFIDENCE", max(final_score - 1.0, evidence, 0.0)))
+
+        # Source tier check: demote if no anchor-eligible source and single-source
+        if not registry.cluster_featured_eligible(source_ids, list(roles)):
+            return True
+
+        # Resurfaced old paper check
+        items = topic.get("items", [])
+        all_resurfaced = all(
+            (item.get("metadata") or {}).get("is_resurfaced", False)
+            for item in items
+            if item.get("source_type") == "paper"
+        ) if any(item.get("source_type") == "paper" for item in items) else False
+        if all_resurfaced and source_count <= 1 and "official_news" not in roles:
+            return True
+
         if source_count > 1:
             return False
         if "official_news" in roles:

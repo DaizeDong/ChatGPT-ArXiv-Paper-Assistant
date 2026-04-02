@@ -933,6 +933,18 @@ def _decide_mode(requested_mode: str) -> str:
 def _topic_bucket(topic: dict[str, Any]) -> str:
     roles = set(topic.get("source_roles", []))
     category = topic.get("PRIMARY_CATEGORY", "")
+    event_type = topic.get("EVENT_TYPE", "")
+    artifact_type = topic.get("ARTIFACT_TYPE", "")
+    # Use typed event/artifact info when available
+    if event_type in ("model_release", "product_launch") or artifact_type == "official_post":
+        return "official"
+    if event_type == "tooling_update" or artifact_type == "repo":
+        return "tooling"
+    if event_type == "research_paper" or artifact_type == "paper":
+        return "research"
+    if event_type in ("community_discussion", "deep_analysis") or artifact_type in ("discussion", "blog_analysis", "newsletter_recap"):
+        return "community"
+    # Fallback to role-based routing
     if "official_news" in roles or category in {"Product Release", "Industry Update"}:
         return "official"
     if category == "Tooling" or roles & {"builder_momentum", "github_trend"}:
@@ -1036,14 +1048,16 @@ def _trim_topics(top_topics: list[dict[str, Any]], watchlist: list[dict[str, Any
         if not registry.cluster_featured_eligible(source_ids, list(roles)):
             return True
 
-        # Resurfaced old paper check
-        items = topic.get("items", [])
-        all_resurfaced = all(
-            (item.get("metadata") or {}).get("is_resurfaced", False)
-            for item in items
-            if item.get("source_type") == "paper"
-        ) if any(item.get("source_type") == "paper" for item in items) else False
-        if all_resurfaced and source_count <= 1 and "official_news" not in roles:
+        # Resurfaced old paper check: use LLM flag or metadata
+        is_resurfaced = topic.get("IS_RESURFACED", False)
+        if not is_resurfaced:
+            items = topic.get("items", [])
+            is_resurfaced = all(
+                (item.get("metadata") or {}).get("is_resurfaced", False)
+                for item in items
+                if item.get("source_type") == "paper"
+            ) if any(item.get("source_type") == "paper" for item in items) else False
+        if is_resurfaced and source_count <= 1 and "official_news" not in roles:
             return True
 
         if source_count > 1:

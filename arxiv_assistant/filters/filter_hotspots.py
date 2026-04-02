@@ -303,6 +303,12 @@ def _clean_json_text(raw_text: str) -> str:
 
 
 def _cluster_prompt_text(cluster: HotspotCluster) -> str:
+    from arxiv_assistant.hotspots.source_registry import get_source_registry
+    registry = get_source_registry()
+    source_tiers = []
+    for sid in cluster.source_ids:
+        tier_info = registry.get(sid)
+        source_tiers.append(f"{sid}={tier_info.tier}")
     lines = [
         f"Cluster ID: {cluster.cluster_id}",
         f"Cluster Title: {cluster.title}",
@@ -310,6 +316,7 @@ def _cluster_prompt_text(cluster: HotspotCluster) -> str:
         f"Source Names: {', '.join(cluster.source_names)}",
         f"Source Roles: {', '.join(cluster.source_roles)}",
         f"Source Types: {', '.join(cluster.source_types)}",
+        f"Source Tiers: {', '.join(source_tiers)}",
         f"Tags: {', '.join(cluster.tags)}",
         "Representative items:",
     ]
@@ -319,6 +326,22 @@ def _cluster_prompt_text(cluster: HotspotCluster) -> str:
         for key in ("daily_score", "score", "upvotes", "github_stars", "stars", "hn_score"):
             if metadata.get(key) not in (None, "", 0):
                 metadata_bits.append(f"{key}={metadata[key]}")
+        if metadata.get("is_resurfaced"):
+            metadata_bits.append("is_resurfaced=true")
+        # Compute paper age from published_at if available
+        pub = item.get("published_at", "")
+        if pub and item.get("source_type") == "paper":
+            try:
+                from datetime import datetime, timezone
+                pub_dt = datetime.fromisoformat(pub.replace("Z", "+00:00"))
+                age_days = (datetime.now(timezone.utc) - pub_dt).days
+                metadata_bits.append(f"paper_age_days={age_days}")
+                if age_days > 30:
+                    metadata_bits.append("is_resurfaced=true")
+            except (ValueError, TypeError):
+                pass
+        elif metadata.get("paper_age_days"):
+            metadata_bits.append(f"paper_age_days={metadata['paper_age_days']}")
         lines.append(
             "* "
             + " | ".join(
@@ -374,8 +397,76 @@ def _default_why(cluster: HotspotCluster, category: str) -> str:
     return "This cluster surfaced repeatedly enough to warrant tracking, even if the evidence is still maturing."
 
 
-def _build_topic(cluster: HotspotCluster, *, keep: bool, watchlist: bool, category: str, quality: int, heat: int, importance: int, summary: str, why_it_matters: str) -> dict[str, Any]:
+ALLOWED_ARTIFACT_TYPES = {"paper", "official_post", "repo", "newsletter_recap", "discussion", "blog_analysis"}
+ALLOWED_EVENT_TYPES = {"model_release", "product_launch", "research_paper", "deep_analysis", "tooling_update", "industry_move", "community_discussion"}
+
+# Mapping from artifact_type/event_type to best-fit category
+_ARTIFACT_CATEGORY_MAP = {
+    "paper": "Research",
+    "official_post": "Product Release",
+    "repo": "Tooling",
+    "newsletter_recap": "Community Signal",
+    "discussion": "Community Signal",
+    "blog_analysis": "Industry Update",
+}
+_EVENT_CATEGORY_MAP = {
+    "model_release": "Product Release",
+    "product_launch": "Product Release",
+    "research_paper": "Research",
+    "deep_analysis": "Industry Update",
+    "tooling_update": "Tooling",
+    "industry_move": "Industry Update",
+    "community_discussion": "Community Signal",
+}
+
+
+def infer_artifact_type(cluster: HotspotCluster) -> str:
+    """Heuristic artifact type when LLM typing is unavailable."""
+    if "paper" in cluster.source_types or "research_backbone" in cluster.source_roles or "paper_trending" in cluster.source_roles:
+        return "paper"
+    if "official_news" in cluster.source_roles:
+        return "official_post"
+    if "github_trend" in cluster.source_roles or "builder_momentum" in cluster.source_roles:
+        return "repo"
+    if any(r in cluster.source_roles for r in ("editorial_depth",)):
+        return "blog_analysis"
+    if any(r in cluster.source_roles for r in ("headline_consensus",)):
+        return "newsletter_recap"
+    if any(r in cluster.source_roles for r in ("community_heat", "hn_discussion")):
+        return "discussion"
+    return "discussion"
+
+
+def infer_event_type(cluster: HotspotCluster) -> str:
+    """Heuristic event type when LLM typing is unavailable."""
+    text = _cluster_text(cluster)
+    has_release_terms = any(term in text for term in RELEASE_TERMS)
+    # Paper and repo sources take priority over release-term heuristics
+    if "paper" in cluster.source_types or "research_backbone" in cluster.source_roles:
+        return "research_paper"
+    if "github_trend" in cluster.source_roles or "builder_momentum" in cluster.source_roles:
+        return "tooling_update"
+    if "official_news" in cluster.source_roles and has_release_terms:
+        return "product_launch"
+    if "official_news" in cluster.source_roles:
+        return "industry_move"
+    if has_release_terms and any(term in text for term in VENDOR_TERMS):
+        return "model_release" if "model" in text else "product_launch"
+    if "editorial_depth" in cluster.source_roles:
+        return "deep_analysis"
+    return "community_discussion"
+
+
+def _build_topic(cluster: HotspotCluster, *, keep: bool, watchlist: bool, category: str, quality: int, heat: int, importance: int, summary: str, why_it_matters: str, artifact_type: str = "", event_type: str = "", is_resurfaced: bool = False) -> dict[str, Any]:
     signals = _cluster_signal_scores(cluster)
+    if not artifact_type:
+        artifact_type = infer_artifact_type(cluster)
+    if not event_type:
+        event_type = infer_event_type(cluster)
+    # Resurfaced penalty: reduce final score for old resurfaced content
+    resurfaced_penalty = 0.0
+    if is_resurfaced:
+        resurfaced_penalty = 1.5
     final_score = _clamp(
         0.33 * quality
         + 0.28 * heat
@@ -383,7 +474,8 @@ def _build_topic(cluster: HotspotCluster, *, keep: bool, watchlist: bool, catego
         + 0.07 * signals["ACTIONABILITY"]
         + 0.06 * signals["EVIDENCE_STRENGTH"]
         + 0.04 * signals["CONFIDENCE"]
-        - 0.08 * signals["HYPE_PENALTY"],
+        - 0.08 * signals["HYPE_PENALTY"]
+        - 0.10 * resurfaced_penalty,
         0.0,
         10.0,
     )
@@ -400,6 +492,9 @@ def _build_topic(cluster: HotspotCluster, *, keep: bool, watchlist: bool, catego
         "tags": cluster.tags,
         "PRIMARY_CATEGORY": category,
         "SECONDARY_CATEGORIES": [],
+        "ARTIFACT_TYPE": artifact_type,
+        "EVENT_TYPE": event_type,
+        "IS_RESURFACED": is_resurfaced,
         "KEEP_IN_DAILY_HOTSPOTS": keep,
         "WATCHLIST": watchlist,
         "QUALITY": int(quality),
@@ -423,7 +518,36 @@ def build_candidate_topics(clusters: list[HotspotCluster]) -> list[dict[str, Any
     topics: list[dict[str, Any]] = []
     for cluster in clusters:
         signals = _cluster_signal_scores(cluster)
-        category = classify_category_heuristically(cluster)
+        artifact_type = infer_artifact_type(cluster)
+        event_type = infer_event_type(cluster)
+        # Typed category inference: artifact > event > keyword heuristic
+        if artifact_type == "paper":
+            category = "Research"
+        elif event_type in _EVENT_CATEGORY_MAP:
+            category = _EVENT_CATEGORY_MAP[event_type]
+        elif artifact_type in _ARTIFACT_CATEGORY_MAP:
+            category = _ARTIFACT_CATEGORY_MAP[artifact_type]
+        else:
+            category = classify_category_heuristically(cluster)
+        # Detect resurfaced papers: metadata flag OR age > 30 days
+        is_resurfaced = False
+        for item in _cluster_items(cluster):
+            if item.get("source_type") != "paper":
+                continue
+            if (item.get("metadata") or {}).get("is_resurfaced", False):
+                is_resurfaced = True
+                break
+            pub = item.get("published_at", "")
+            if pub:
+                try:
+                    from datetime import datetime, timezone
+                    pub_dt = datetime.fromisoformat(pub.replace("Z", "+00:00"))
+                    age_days = (datetime.now(timezone.utc) - pub_dt).days
+                    if age_days > 30:
+                        is_resurfaced = True
+                        break
+                except (ValueError, TypeError):
+                    pass
         topics.append(
             _build_topic(
                 cluster,
@@ -435,6 +559,9 @@ def build_candidate_topics(clusters: list[HotspotCluster]) -> list[dict[str, Any
                 importance=signals["IMPORTANCE"],
                 summary=_default_summary(cluster),
                 why_it_matters=_default_why(cluster, category),
+                artifact_type=artifact_type,
+                event_type=event_type,
+                is_resurfaced=is_resurfaced,
             )
         )
     topics.sort(
@@ -458,6 +585,10 @@ def heuristic_screen_clusters(clusters: list[HotspotCluster], score_cutoff: floa
     for topic in build_candidate_topics(clusters):
         keep = topic["FINAL_SCORE"] >= score_cutoff and topic["QUALITY"] >= 5
         watch = not keep and topic["FINAL_SCORE"] >= watchlist_cutoff
+        # Resurfaced items are auto-demoted from keep to watchlist
+        if keep and topic.get("IS_RESURFACED"):
+            keep = False
+            watch = True
         topic["KEEP_IN_DAILY_HOTSPOTS"] = keep
         topic["WATCHLIST"] = watch
         if keep:
@@ -469,11 +600,36 @@ def heuristic_screen_clusters(clusters: list[HotspotCluster], score_cutoff: floa
 
 def _normalize_screening_row(cluster: HotspotCluster, row: dict[str, Any], score_cutoff: float, watchlist_cutoff: float) -> dict[str, Any]:
     category = row.get("CATEGORY", "").strip()
+    artifact_type = str(row.get("ARTIFACT_TYPE", "")).strip()
+    event_type = str(row.get("EVENT_TYPE", "")).strip()
+    is_resurfaced = bool(row.get("IS_RESURFACED", False))
+
+    if artifact_type not in ALLOWED_ARTIFACT_TYPES:
+        artifact_type = ""
+    if event_type not in ALLOWED_EVENT_TYPES:
+        event_type = ""
+
+    # Use LLM category if valid; otherwise use typed inference; fallback to heuristic
+    # artifact_type "paper" always maps to Research (strongest signal)
     if category not in ALLOWED_HOTSPOT_CATEGORIES:
-        category = classify_category_heuristically(cluster)
+        if artifact_type == "paper":
+            category = "Research"
+        elif event_type and event_type in _EVENT_CATEGORY_MAP:
+            category = _EVENT_CATEGORY_MAP[event_type]
+        elif artifact_type and artifact_type in _ARTIFACT_CATEGORY_MAP:
+            category = _ARTIFACT_CATEGORY_MAP[artifact_type]
+        else:
+            category = classify_category_heuristically(cluster)
+
     quality = int(_clamp(int(row.get("QUALITY", 0) or 0), 1, 10))
     heat = int(_clamp(int(row.get("HEAT", 0) or 0), 1, 10))
     importance = int(_clamp(int(row.get("IMPORTANCE", 0) or 0), 1, 10))
+
+    # LLM-flagged resurfaced items should not be KEEP
+    if is_resurfaced and bool(row.get("KEEP", False)):
+        row["KEEP"] = False
+        row["WATCHLIST"] = True
+
     topic = _build_topic(
         cluster,
         keep=bool(row.get("KEEP", False)),
@@ -484,8 +640,12 @@ def _normalize_screening_row(cluster: HotspotCluster, row: dict[str, Any], score
         importance=importance,
         summary=str(row.get("SUMMARY", "")).strip() or _default_summary(cluster),
         why_it_matters=str(row.get("WHY_IT_MATTERS", "")).strip() or _default_why(cluster, category),
+        artifact_type=artifact_type,
+        event_type=event_type,
+        is_resurfaced=is_resurfaced,
     )
-    if not topic["KEEP_IN_DAILY_HOTSPOTS"] and topic["FINAL_SCORE"] >= score_cutoff:
+    # Score-based promotion, but never re-promote resurfaced items to KEEP
+    if not topic["KEEP_IN_DAILY_HOTSPOTS"] and not is_resurfaced and topic["FINAL_SCORE"] >= score_cutoff:
         topic["KEEP_IN_DAILY_HOTSPOTS"] = True
         topic["WATCHLIST"] = False
     if not topic["KEEP_IN_DAILY_HOTSPOTS"] and not topic["WATCHLIST"] and topic["FINAL_SCORE"] >= watchlist_cutoff:

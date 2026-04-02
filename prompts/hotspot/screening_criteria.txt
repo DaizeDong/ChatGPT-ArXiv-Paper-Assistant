@@ -29,6 +29,28 @@ Evaluate each candidate topic on three axes from 1 to 10.
 - A single paper, single repo, or single roundup mention should usually be WATCHLIST rather than KEEP unless it is obviously one of the day's defining events.
 - Do not fill the main list with several isolated paper topics from the same feed.
 
+### ARTIFACT_TYPE
+Classify the primary artifact type of this cluster:
+- "paper" — an academic research paper (arXiv, conference, journal)
+- "official_post" — an official blog post, announcement, or product page from a company
+- "repo" — a GitHub repository, open-source tool, or code release
+- "newsletter_recap" — a roundup or newsletter that summarizes other stories
+- "discussion" — a forum thread, social media discussion, or community debate
+- "blog_analysis" — a long-form analysis, explainer, or editorial from an independent source
+
+### EVENT_TYPE
+Classify the underlying event:
+- "model_release" — a new model, checkpoint, or model update is released
+- "product_launch" — a product, API, platform feature, or service is launched or updated
+- "research_paper" — new research results, findings, or a method is presented
+- "deep_analysis" — a substantive analysis, explainer, or technical deep-dive
+- "tooling_update" — a new tool, framework, SDK, or developer resource
+- "industry_move" — funding, acquisition, partnership, policy, or organizational change
+- "community_discussion" — community debate, reaction, viral moment, or social buzz
+
+### IS_RESURFACED
+Set to true if the primary content is an old paper or project (older than ~30 days) that is being discussed again, not genuinely new. Trending papers on Hugging Face are often resurfaced old papers.
+
 ### Category
 Choose one category:
 - Research
@@ -36,3 +58,12 @@ Choose one category:
 - Tooling
 - Industry Update
 - Community Signal
+
+### Source Tier Context
+Each candidate has source tier information. Use it to calibrate trust:
+- "official" tier: company blogs, official announcements — highest trust
+- "trusted_research" tier: curated daily papers — high trust for research
+- "trusted_analysis" tier: high-quality newsletters (The Batch, Import AI) — high trust for analysis
+- "community" tier: community-curated feeds (HF trending, AINews) — medium trust
+- "builder" tier: GitHub trending — medium trust for tooling
+- "low_trust_recap" tier: recap newsletters (The Rundown, Superhuman) — low trust, treat as supporting evidence only

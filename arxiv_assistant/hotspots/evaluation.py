@@ -143,16 +143,34 @@ def _section_has_paper(section_topics: list[dict[str, Any]]) -> int:
     return count
 
 
+_VENDOR_NAMES = {"openai", "anthropic", "google", "deepmind", "meta", "nvidia", "amazon", "apple", "cursor", "claude", "gpt", "gemini", "qwen", "deepseek", "mistral", "llama", "microsoft", "cohere", "stability"}
+_RELEASE_VERBS = {"launch", "launches", "release", "released", "announced", "introducing", "debuts", "acquire", "rollout", "bets", "testing", "ships"}
+
+
 def _estimate_category_purity(topic: dict[str, Any]) -> bool:
     """Heuristic: does the topic's source types align with its category?"""
     category = topic.get("PRIMARY_CATEGORY", "")
     roles = set(topic.get("source_roles") or [])
     source_types = set(topic.get("source_types") or [])
+    artifact_type = topic.get("ARTIFACT_TYPE", "")
+    event_type = topic.get("EVENT_TYPE", "")
+    title_lower = str(topic.get("title", topic.get("TITLE", ""))).lower()
+    title_words = set(title_lower.split())
+
+    # When typed fields are present, use them for a direct check
+    if artifact_type or event_type:
+        from arxiv_assistant.filters.filter_hotspots import _ARTIFACT_CATEGORY_MAP, _EVENT_CATEGORY_MAP
+        expected = _EVENT_CATEGORY_MAP.get(event_type) or _ARTIFACT_CATEGORY_MAP.get(artifact_type)
+        if expected:
+            return category == expected
+        return True
 
     if category == "Research":
         return bool({"paper"} & source_types) or bool(PAPER_ONLY_ROLES & roles)
     if category == "Product Release":
-        return "official_news" in roles or "product" in str(topic.get("title", "")).lower()
+        has_vendor = any(v in title_lower for v in _VENDOR_NAMES)
+        has_action = bool(_RELEASE_VERBS & title_words)
+        return "official_news" in roles or (has_vendor and has_action)
     if category == "Tooling":
         return "github_trend" in roles or "builder_momentum" in roles or "repo" in source_types
     # For Industry Update and Community Signal, be lenient

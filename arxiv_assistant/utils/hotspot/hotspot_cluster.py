@@ -46,6 +46,7 @@ STOPWORDS = {
     "2026",
 }
 GENERIC_OVERLAP_TOKENS = {
+    # AI/ML domain generic terms
     "open",
     "source",
     "research",
@@ -61,6 +62,103 @@ GENERIC_OVERLAP_TOKENS = {
     "benchmark",
     "system",
     "systems",
+    "data",
+    "dataset",
+    "training",
+    "inference",
+    "language",
+    "learning",
+    "neural",
+    "network",
+    "transformer",
+    "generation",
+    "evaluation",
+    "performance",
+    "framework",
+    "tool",
+    "tools",
+    "platform",
+    "release",
+    "update",
+    "latest",
+    "announces",
+    "introducing",
+    "available",
+    # High-frequency English words that pass len>=4 filter
+    "local",
+    "using",
+    "built",
+    "just",
+    "works",
+    "entirely",
+    "about",
+    "been",
+    "best",
+    "better",
+    "comes",
+    "does",
+    "doesnt",
+    "done",
+    "every",
+    "first",
+    "gets",
+    "good",
+    "great",
+    "heres",
+    "high",
+    "like",
+    "long",
+    "made",
+    "make",
+    "makes",
+    "many",
+    "more",
+    "most",
+    "much",
+    "need",
+    "never",
+    "next",
+    "only",
+    "over",
+    "real",
+    "really",
+    "right",
+    "some",
+    "still",
+    "than",
+    "that",
+    "them",
+    "then",
+    "there",
+    "they",
+    "this",
+    "time",
+    "very",
+    "want",
+    "well",
+    "what",
+    "when",
+    "will",
+    "your",
+    "isnt",
+    "cant",
+    "dont",
+    "wont",
+    "near",
+    "even",
+    "show",
+    "test",
+    "runs",
+    "full",
+    "ever",
+    "here",
+    "back",
+    "free",
+    "fast",
+    "small",
+    "large",
+    "speed",
+    "quality",
 }
 
 SOURCE_ROLE_WEIGHTS = {
@@ -148,10 +246,14 @@ def title_overlap_boost(left: str, right: str) -> float:
         for token in (significant_title_tokens(left) & significant_title_tokens(right))
         if token not in GENERIC_OVERLAP_TOKENS
     }
-    if len(overlap) >= 2:
+    if len(overlap) >= 3:
         return 0.84
-    if overlap and any(any(char.isdigit() for char in token) for token in overlap):
+    # Two overlapping tokens: only boost if they include a specific name/version token
+    if len(overlap) == 2 and any(any(char.isdigit() for char in token) for token in overlap):
         return 0.78
+    # Single token with version number (e.g., "gpt4", "llama3") — weak signal
+    if len(overlap) == 1 and any(any(char.isdigit() for char in token) for token in overlap):
+        return 0.40
     return 0.0
 
 
@@ -184,13 +286,26 @@ def _cluster_match_score(item: HotspotItem, cluster_seed: HotspotItem) -> float:
 
     # Entity matching boost: if both mention the same company/product
     # and are from different source types (e.g., official + roundup)
-    if base_score >= 0.40 and item.source_type != cluster_seed.source_type:
+    # Requires either moderate title similarity OR an official source to avoid false merges
+    if base_score >= 0.25 and item.source_type != cluster_seed.source_type:
         item_entities = _extract_entities(item.title)
         seed_entities = _extract_entities(cluster_seed.title)
         shared_entities = item_entities & seed_entities
         if shared_entities:
-            # Strong entity match with moderate title similarity → likely same event
-            base_score = max(base_score, 0.70)
+            has_official = item.source_role == "official_news" or cluster_seed.source_role == "official_news"
+            # Need BOTH entity match AND meaningful title overlap (not just entity alone)
+            non_generic_overlap = {
+                token
+                for token in (significant_title_tokens(item.title) & significant_title_tokens(cluster_seed.title))
+                if token not in GENERIC_OVERLAP_TOKENS
+            } - shared_entities  # Exclude the entity itself from overlap count
+            if has_official and base_score >= 0.25:
+                # Official + entity match: strong signal, lower bar
+                base_score = max(base_score, 0.70)
+            elif len(non_generic_overlap) >= 1 and base_score >= 0.30:
+                # Entity match + at least 1 additional non-generic token overlap
+                base_score = max(base_score, 0.70)
+            # Entity match alone (no other overlap): NOT enough — too many false positives
 
     # Lower threshold for (official + roundup/community) pairs
     is_cross_type = (

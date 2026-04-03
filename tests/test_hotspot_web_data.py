@@ -49,7 +49,7 @@ class TestHotspotWebData(unittest.TestCase):
                 {
                     "TOPIC_ID": "cursor-news",
                     "HEADLINE": "Cursor Composer 2 debate",
-                    "PRIMARY_CATEGORY": "Community Signal",
+                    "PRIMARY_CATEGORY": "Industry Update",
                     "DISPLAY_PRIORITY": 8.2,
                     "FINAL_SCORE": 8.0,
                     "HEAT": 9,
@@ -149,12 +149,11 @@ class TestHotspotWebData(unittest.TestCase):
         self.assertEqual(payload["usage"]["llm"]["prompt_tokens"], 1200)
         self.assertEqual(payload["usage"]["external"]["x_official"]["requests"], 8)
         section_lookup = {section["slug"]: section for section in payload["source_sections"]}
-        self.assertEqual(section_lookup["x-buzz"]["count"], 1)
+        self.assertEqual(section_lookup["industry"]["count"], 1)
         self.assertEqual(section_lookup["papers"]["count"], 1)
         self.assertEqual(section_lookup["official"]["count"], 1)
-        self.assertEqual(section_lookup["blogs"]["count"], 0)
-        x_item = section_lookup["x-buzz"]["items"][0]
-        self.assertEqual(x_item["topic_refs"][0]["topic_id"], "cursor-news")
+        industry_item = section_lookup["industry"]["items"][0]
+        self.assertEqual(industry_item["topic_refs"][0]["topic_id"], "cursor-news")
         self.assertEqual(payload["paper_spotlight"], [])
         featured = payload["featured_topics"][0]
         self.assertEqual(featured["headline"], "Cursor Composer 2 debate")
@@ -173,7 +172,7 @@ class TestHotspotWebData(unittest.TestCase):
                 {
                     "TOPIC_ID": "cursor-news",
                     "HEADLINE": "Cursor Composer 2 debate",
-                    "PRIMARY_CATEGORY": "Community Signal",
+                    "PRIMARY_CATEGORY": "Industry Update",
                     "DISPLAY_PRIORITY": 8.3,
                     "FINAL_SCORE": 8.0,
                     "HEAT": 9,
@@ -291,7 +290,7 @@ class TestHotspotWebData(unittest.TestCase):
         payload = build_daily_hotspot_web_payload(report, raw_items)
         ordered_slugs = [section["slug"] for section in payload["source_sections"] if section["count"] > 0]
 
-        self.assertEqual(ordered_slugs, ["x-buzz", "official", "github", "papers"])
+        self.assertEqual(ordered_slugs, ["official", "papers", "github", "industry"])
 
     def test_daily_payload_exposes_paper_spotlight_sections(self) -> None:
         report = {
@@ -373,7 +372,7 @@ class TestHotspotWebData(unittest.TestCase):
                         {
                             "TOPIC_ID": f"topic-{date}",
                             "HEADLINE": f"Headline {date}",
-                            "PRIMARY_CATEGORY": "Community Signal",
+                            "PRIMARY_CATEGORY": "Industry Update",
                             "DISPLAY_PRIORITY": 7.0,
                             "FINAL_SCORE": 7.0,
                             "HEAT": 7,
@@ -405,11 +404,11 @@ class TestHotspotWebData(unittest.TestCase):
             self.assertEqual(month_index["month"], "2026-03")
             self.assertEqual(len(month_index["days"]), 2)
             self.assertEqual(month_index["totals"]["days"], 2)
-            self.assertEqual(month_index["source_section_totals"]["x-buzz"], 2)
+            self.assertEqual(month_index["source_section_totals"]["industry"], 2)
             self.assertEqual(year_index["year"], "2026")
             self.assertEqual(len(year_index["months"]), 1)
             self.assertEqual(year_index["totals"]["days"], 2)
-            self.assertEqual(year_index["months"][0]["source_section_totals"]["x-buzz"], 2)
+            self.assertEqual(year_index["months"][0]["source_section_totals"]["industry"], 2)
             self.assertEqual(latest_daily["meta"]["previous_date"], "2026-03-20")
             self.assertEqual(latest_daily["meta"]["paper_routes"]["day"], "../../archive/2026-03/21/")
             self.assertEqual(month_index["paper_routes"]["month"], "../../archive/2026-03/")
@@ -478,10 +477,10 @@ class TestHotspotWebData(unittest.TestCase):
         ]
 
         payload = build_daily_hotspot_web_payload(report, raw_items)
-        blogs_section = next(section for section in payload["source_sections"] if section["slug"] == "blogs")
+        industry_section = next(section for section in payload["source_sections"] if section["slug"] == "industry")
 
-        self.assertEqual(blogs_section["items"][0]["title"], "Google bets on vibe design with Stitch")
-        self.assertGreater(blogs_section["items"][0]["signal_score"], blogs_section["items"][1]["signal_score"])
+        self.assertEqual(industry_section["items"][0]["title"], "Google bets on vibe design with Stitch")
+        self.assertGreater(industry_section["items"][0]["signal_score"], industry_section["items"][1]["signal_score"])
 
     def test_topic_summary_prefers_cross_source_topics_over_isolated_papers(self) -> None:
         report = {

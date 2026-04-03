@@ -9,8 +9,18 @@ Evaluate each candidate topic on three axes from 1 to 10.
 - **Community signals** (Reddit, HN, AINews, X/Twitter): valuable as corroboration, weaker as sole evidence.
 - **Low-trust recaps** (The Rundown AI, Superhuman AI, The Neuron): useful for trend detection, but never sufficient as sole evidence for KEEP.
 
+### Artifact Requirement (MANDATORY for KEEP)
+Every KEEP topic must have at least one concrete artifact:
+- **Product artifact**: A named model, API, platform, SDK, or feature (e.g., "GPT-5 Turbo", "Claude 4 Tool Use API")
+- **Financial artifact**: A funding event with dollar amount, valuation, or acquisition with named parties (e.g., "$500M Series C", "acquired by Google")
+- **Company artifact**: A named startup launch, pivot, or major strategic move (e.g., "xAI comes out of stealth")
+- **Research artifact**: A paper with verifiable SOTA claims, benchmark numbers, or novel architecture (e.g., "outperforms GPT-4o on MATH by 12%")
+- **Strategic artifact**: A named partnership, regulatory change, or infrastructure investment (e.g., "NVIDIA partners with AWS for H200 deployment")
+
+Topics WITHOUT a concrete artifact are automatically WATCHLIST or DROP, regardless of scores.
+
 ### QUALITY
-- 9-10: strong technical, product, or research substance; clearly worth expert attention
+- 9-10: strong technical, product, or research substance; clearly worth executive attention
 - 7-8: meaningful and non-trivial, but narrower or less foundational
 - 5-6: somewhat interesting, but limited depth or significance
 - 1-4: weak, repetitive, or mostly promotional
@@ -21,29 +31,38 @@ Evaluate each candidate topic on three axes from 1 to 10.
 - 5-6: some traction, but not a defining daily topic
 - 1-4: little evidence of wider attention
 
-### IMPORTANCE
-- 9-10: likely to matter beyond the day; major release, research, platform change, or shift in direction
-- 7-8: materially useful or relevant to practitioners/researchers
-- 5-6: modest significance
-- 1-4: low lasting impact
+### IMPORTANCE (calibrated for investors/executives)
+- 9-10: boardroom significance — major product launch, $100M+ funding, paradigm shift, regulatory change affecting the industry
+- 7-8: materially impacts investment thesis, product strategy, or research direction
+- 5-6: relevant to practitioners but limited strategic impact
+- 1-4: low lasting impact, would not change any decision
 
-### Strict KEEP Criteria (must meet at least one)
-- Official source + genuine product/model/policy announcement
-- Multi-source (>=2 independent sources) convergence on the same topic
-- High-impact research from trusted_research source with supporting evidence (high citations, code, benchmark results)
+### Strict KEEP Criteria (must meet ALL of the following)
+1. **Concrete artifact**: The topic has a specific, nameable output (see Artifact Requirement above)
+2. **Frontier significance**: The topic represents a genuinely new development — a new release, a new paper, a new product, a policy shift, or a breakthrough. Discussions, commentary, or benchmarks of existing techniques do NOT qualify.
+3. **Authoritative evidence**: At least one of:
+   - Official source (company blog, official announcement)
+   - High-impact research paper (arXiv, top venue, strong benchmarks)
+   - Multi-source (>=2 independent sources) convergence
+4. **Industry impact**: The topic would matter to AI investors, executives, or research leaders.
 
 ### WATCHLIST Criteria
-- Single-source topics that are interesting but lack corroboration
+- Single-source topics with interesting artifacts but lacking corroboration
 - Early signals that may develop into KEEP-worthy topics
 
 ### Explicit DROP Criteria (always drop these)
-- Awesome-lists and curated link collections (e.g., "awesome-llm", "awesome-agents")
+- Community discussions, opinion threads, "what do you think" posts
+- Awesome-lists and curated link collections
 - Generic agent/MCP wrapper repos with <300 stars
 - Resurfaced papers (>14 days old) unless there is a specific new development
-- Funding/investment news without a primary source
-- Conference/workshop/hackathon announcements
 - Newsletter self-promotion or subscription appeals
-- Repos that are just thin wrappers around existing APIs
+- Tutorials, guides, walkthroughs, cookbooks
+- Personal benchmarks ("I tested X on my GPU"), hardware comparisons
+- Analysis of leaked/existing source code
+- Commentary or opinions without a new underlying development
+- Clickbait titles ("X is dead", "mind-blowing", "you won't believe")
+- Funding/investment news without a primary source or dollar amount
+- Conference/workshop/hackathon announcements
 
 ### Deep Reads Identification
 - If a topic comes from a blog_analysis source (editorial_depth role) with substantive content, mark it with CATEGORY="Research" and note in SUMMARY that it is a deep analysis piece.
@@ -54,4 +73,4 @@ Choose one category:
 - Product Release
 - Tooling
 - Industry Update
-- Community Signal
+- Market Signal

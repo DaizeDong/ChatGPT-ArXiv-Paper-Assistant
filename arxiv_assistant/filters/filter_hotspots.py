@@ -7,6 +7,7 @@ from typing import Any
 
 from openai import OpenAI
 
+from arxiv_assistant.utils.hotspot.hotspot_cluster import title_similarity, title_overlap_boost
 from arxiv_assistant.utils.hotspot.hotspot_schema import HotspotCluster
 from arxiv_assistant.utils.pricing_loader import get_model_pricing
 
@@ -15,15 +16,15 @@ ALLOWED_HOTSPOT_CATEGORIES = {
     "Product Release",
     "Tooling",
     "Industry Update",
-    "Community Signal",
+    "Market Signal",
 }
 
 CATEGORY_KEYWORDS = {
     "Research": {"paper", "arxiv", "training", "reasoning", "representation", "quantization", "transformer", "moe", "benchmark", "theory"},
     "Product Release": {"launch", "launches", "release", "released", "announced", "introducing", "api", "preview", "available", "acquire", "acquisition", "rollout", "model", "revamps", "debuts", "limits"},
     "Tooling": {"tool", "sdk", "framework", "cli", "workflow", "inference", "serving", "editor", "platform", "memory", "retrieval", "ocr", "design", "app"},
-    "Industry Update": {"policy", "funding", "partnership", "infrastructure", "chip", "datacenter", "deployment"},
-    "Community Signal": {"viral", "discussion", "thread", "debate", "reaction", "trend", "community"},
+    "Industry Update": {"policy", "partnership", "infrastructure", "chip", "datacenter", "deployment"},
+    "Market Signal": {"funding", "raise", "raised", "series", "acquisition", "valuation", "ipo", "merger", "investment", "venture", "startup", "founded"},
 }
 
 RESEARCH_TERMS = {
@@ -34,6 +35,142 @@ RELEASE_TERMS = {"launch", "launches", "launched", "release", "released", "annou
 TOOLING_TERMS = {"tool", "sdk", "framework", "platform", "editor", "cli", "workflow", "inference", "serving", "deployment", "memory", "retrieval", "ocr", "design", "app"}
 VENDOR_TERMS = {"openai", "anthropic", "google", "deepmind", "meta", "nvidia", "amazon", "apple", "cursor", "claude", "gpt", "gemini", "qwen", "deepseek", "mistral", "llama"}
 NEWS_ACTION_TERMS = {"launch", "launches", "released", "release", "introducing", "revamp", "revamps", "debuts", "doubles", "limits", "acquire", "acquisition", "built", "bets", "move", "moves", "testing", "tests", "tested", "unveils", "unveiled", "announces", "announced"}
+
+# --- Per-item frontier relevance detection ---
+
+ENGINEERING_DISCUSSION_PATTERNS = [
+    re.compile(r"\b(?:how to|step by step|getting started)\b", re.I),
+    re.compile(r"\b(?:my setup|my rig|on my|fitting on)\b", re.I),
+    re.compile(r"\b(?:i tested|i tried|i benchmarked|i compared|i ran)\b", re.I),
+    re.compile(r"\b(?:tutorial|walkthrough|guide to|cookbook)\b", re.I),
+    re.compile(r"\b(?:fine-?tuning guide|quantiz\w+ trick|inference trick)\b", re.I),
+    re.compile(r"\b(?:deploy locally|run locally|local(?:ly)? run)\b", re.I),
+    re.compile(r"\b(?:source code (?:leak|analysis|reverse))\b", re.I),
+    re.compile(r"\b(?:leak(?:ed|s)?\b|dug through|reverse engineer|decompil)\b", re.I),
+    re.compile(r"\b(?:(?:are |is )very good|isn't just for)\b", re.I),
+    re.compile(r"\b(?:vs |versus |comparison)\b", re.I),
+    re.compile(r"\b(?:running on|run(?:s|ning)? (?:on |with )?(?:my |a )?(?:\d+gb|rtx|gpu|mac|laptop))\b", re.I),
+    re.compile(r"\b(?:unhinged|wild|insane|crazy)\b", re.I),
+    re.compile(r"\b(?:analyze its own|built .* from it)\b", re.I),
+    re.compile(r"\banalyzing\b.*\bsource code\b", re.I),
+    re.compile(r"\blocal\b.*\b(?:llm|embedding|model)\b.*\bno (?:api|cloud)\b", re.I),
+    re.compile(r"\b(?:in big trouble|dead zone)\b", re.I),
+    re.compile(r"\b(?:falls? (?:right )?into)\b", re.I),
+    re.compile(r"\b(?:extracted its|I extracted)\b", re.I),
+    re.compile(r"\b(?:cache|kv|attention)\s+trick\b", re.I),
+    re.compile(r"\blands?\s+in\s+(?:llama|vllm|pytorch|transformers)", re.I),
+]
+
+FRONTIER_NEWS_PATTERNS = [
+    re.compile(r"\b(?:launch(?:es|ed)?|releas(?:es|ed)?|announc(?:es|ed)?|introducing|unveil(?:s|ed)?)\b", re.I),
+    re.compile(r"\b(?:breakthrough|state[- ]of[- ]the[- ]art|novel|first[- ]ever|outperforms)\b", re.I),
+    re.compile(r"\b(?:open[- ]source(?:s|d)?)\s+(?:model|release|framework)\b", re.I),
+    re.compile(r"\b(?:new model|new api|new platform|new architecture)\b", re.I),
+]
+
+# --- Artifact detection: concrete outputs that matter to investors/executives ---
+
+ARTIFACT_PATTERNS = {
+    "product_release": [
+        re.compile(r"\b(?:launch(?:es|ed)?|releas(?:es|ed)?|ship(?:s|ped)?|roll(?:s|ed)?\s*out)\b", re.I),
+        re.compile(r"\b(?:v\d+(?:\.\d+)*|version\s+\d+|beta|preview|GA|general\s+availability)\b", re.I),
+        re.compile(r"\b(?:new\s+(?:model|api|platform|sdk|feature|tool|service))\b", re.I),
+        re.compile(r"\b(?:open[- ]?sourc(?:es|ed|ing))\b", re.I),
+    ],
+    "funding_event": [
+        re.compile(r"\$\s*\d+(?:\.\d+)?\s*(?:million|billion|[mb])\b", re.I),
+        re.compile(r"\b(?:series\s+[a-f]|seed\s+round|funding|fundraise|raise[ds]?)\b", re.I),
+        re.compile(r"\b(?:valuation|valued\s+at|worth)\b", re.I),
+        re.compile(r"\b(?:acqui(?:re[ds]?|sition)|merg(?:er|es|ed)|buyout|IPO)\b", re.I),
+    ],
+    "startup_event": [
+        re.compile(r"\b(?:co-?found(?:er|ed)|launch(?:es|ed)?\s+(?:a\s+)?(?:startup|company|venture))\b", re.I),
+        re.compile(r"\b(?:pivot(?:s|ed)?|rebrand(?:s|ed)?|spin[- ]?off)\b", re.I),
+        re.compile(r"\b(?:stealth\s+(?:mode|startup)|comes?\s+out\s+of\s+stealth)\b", re.I),
+    ],
+    "research_breakthrough": [
+        re.compile(r"\b(?:state[- ]of[- ]the[- ]art|SOTA|new\s+(?:record|benchmark))\b", re.I),
+        re.compile(r"\b(?:outperforms?|surpass(?:es|ed)?|exceed(?:s|ed)?)\b", re.I),
+        re.compile(r"\b(?:novel\s+(?:architecture|method|approach|technique))\b", re.I),
+        re.compile(r"\b(?:first[- ]ever|breakthrough|paradigm[- ]shift)\b", re.I),
+    ],
+}
+
+# --- Substance detection: opinion/clickbait/promo patterns ---
+
+OPINION_DISCUSSION_PATTERNS = [
+    re.compile(r"\b(?:what do you think|thoughts on|hot take|unpopular opinion)\b", re.I),
+    re.compile(r"\b(?:am i the only|anyone else|does anyone)\b", re.I),
+    re.compile(r"\b(?:overrated|underrated|overhyped)\b", re.I),
+    re.compile(r"\b(?:should i|which (?:is|should)|recommend(?:ation)?s?)\b", re.I),
+    re.compile(r"\b(?:my experience|my take|my opinion|personally)\b", re.I),
+]
+
+CLICKBAIT_PATTERNS = [
+    re.compile(r"\b(?:you won'?t believe|mind[- ]?blow(?:n|ing)|game[- ]?chang(?:er|ing))\b", re.I),
+    re.compile(r"\b(?:is dead|is dying|killer|destroys?)\b", re.I),
+    re.compile(r"\b(?:secret|shocking|insane|unhinged|wild|crazy)\b", re.I),
+    re.compile(r"\b(?:just leaked|got leaked|leak(?:ed|s)?)\b", re.I),
+    re.compile(r"\b(?:in big trouble|dead zone)\b", re.I),
+]
+
+NEWSLETTER_PROMO_PATTERNS = [
+    re.compile(r"\b(?:subscribe|sign up|join (?:our|the))\b.*\bnewsletter\b", re.I),
+    re.compile(r"\b(?:top \d+ (?:tools|apps|stories)|weekly (?:digest|roundup|wrap))\b", re.I),
+]
+
+ENGINEERING_EXEMPT_ROLES = {"official_news", "editorial_depth", "research_backbone"}
+
+_ENGINEERING_ROLE_BASE = {
+    "community_heat": 0.40,
+    "hn_discussion": 0.40,
+    "headline_consensus": 0.30,
+    "builder_momentum": 0.35,
+    "github_trend": 0.25,
+    "paper_trending": 0.0,
+}
+
+
+def _item_engineering_score(title: str, summary: str, source_role: str) -> float:
+    """Return 0.0 (pure frontier news) to 1.0 (pure engineering discussion)."""
+    if source_role in ENGINEERING_EXEMPT_ROLES:
+        return 0.0
+    text = f"{title} {summary}".lower()
+    eng_hits = sum(1 for p in ENGINEERING_DISCUSSION_PATTERNS if p.search(text))
+    frontier_hits = sum(1 for p in FRONTIER_NEWS_PATTERNS if p.search(text))
+    score = _ENGINEERING_ROLE_BASE.get(source_role, 0.20) + eng_hits * 0.15 - frontier_hits * 0.20
+    return max(0.0, min(1.0, score))
+
+
+def _item_substance_score(title: str, summary: str, source_role: str) -> float:
+    """Return 0.0 (substantive) to 1.0 (pure opinion/clickbait/promo)."""
+    if source_role in ENGINEERING_EXEMPT_ROLES:
+        return 0.0
+    text = f"{title} {summary}".lower()
+    opinion_hits = sum(1 for p in OPINION_DISCUSSION_PATTERNS if p.search(text))
+    clickbait_hits = sum(1 for p in CLICKBAIT_PATTERNS if p.search(text))
+    promo_hits = sum(1 for p in NEWSLETTER_PROMO_PATTERNS if p.search(text))
+    frontier_hits = sum(1 for p in FRONTIER_NEWS_PATTERNS if p.search(text))
+    score = opinion_hits * 0.25 + clickbait_hits * 0.20 + promo_hits * 0.30 - frontier_hits * 0.15
+    return max(0.0, min(1.0, score))
+
+
+def _cluster_artifact_score(cluster: "HotspotCluster") -> dict[str, float]:
+    """Return per-category artifact confidence and an overall score."""
+    items = _cluster_items(cluster)
+    text_parts = [cluster.title, cluster.summary]
+    for item in items[:6]:
+        text_parts.append(str(item.get("title", "")))
+        text_parts.append(str(item.get("summary", "")))
+    text = " ".join(text_parts)
+
+    category_scores: dict[str, float] = {}
+    for category, patterns in ARTIFACT_PATTERNS.items():
+        hits = sum(1 for p in patterns if p.search(text))
+        category_scores[category] = min(1.0, hits / max(len(patterns) * 0.5, 1.0))
+
+    overall = max(category_scores.values()) if category_scores else 0.0
+    return {**category_scores, "overall": overall}
 
 
 def calc_price(model: str, usage) -> tuple[float, float]:
@@ -149,7 +286,9 @@ def _cluster_signal_scores(cluster: HotspotCluster) -> dict[str, float]:
     community_activity = _sum_metadata_int(cluster, "activity")
     source_quality = _avg_metadata_float(cluster, "source_quality")
 
-    frontierness = 1.6 + (1.5 if has_paper else 0.0) + (1.4 if has_research_terms else 0.0)
+    has_research_source = bool({"research_backbone", "paper_trending"} & set(cluster.source_roles))
+    research_term_boost = 1.4 if has_research_terms and (has_research_source or has_paper) else (0.5 if has_research_terms else 0.0)
+    frontierness = 1.6 + (1.5 if has_paper else 0.0) + research_term_boost
     frontierness += 1.5 if has_editorial_depth else 0.0
     frontierness += 2.0 if has_official and has_release_terms else (1.1 if has_official else 0.0)
     frontierness += 1.0 if has_repo and has_tooling_terms else 0.0
@@ -157,6 +296,10 @@ def _cluster_signal_scores(cluster: HotspotCluster) -> dict[str, float]:
     frontierness += min(1.5, daily_score / 12.0)
     frontierness += min(0.9, math.log1p(github_stars) / 3.2)
     frontierness += min(0.8, source_quality * 0.55)
+    # Cap FRONTIERNESS for community-only sources (no paper, no official, no editorial)
+    is_community_only = not has_paper and not has_official and not has_editorial_depth and not has_research_source
+    if is_community_only:
+        frontierness = min(frontierness, 4.0)
     frontierness = _clamp(frontierness)
 
     technical_depth = 1.8 + (1.9 if has_paper else 0.0) + (1.2 if has_research_terms else 0.0)
@@ -225,6 +368,37 @@ def _cluster_signal_scores(cluster: HotspotCluster) -> dict[str, float]:
         hype_penalty -= 0.6
     hype_penalty = _clamp(hype_penalty, 0.0, 10.0)
 
+    # Engineering discussion penalty (content-based, per-item)
+    eng_scores = [_item_engineering_score(str(item.get("title", "")), str(item.get("summary", "")), str(item.get("source_role", ""))) for item in items]
+    avg_eng_score = sum(eng_scores) / len(eng_scores) if eng_scores else 0.0
+    engineering_penalty = avg_eng_score * 5.0
+    if has_official or has_editorial_depth:
+        engineering_penalty *= 0.2
+    if has_paper and source_count >= 2:
+        engineering_penalty *= 0.4
+    engineering_penalty = _clamp(engineering_penalty, 0.0, 5.0)
+
+    # Substance penalty (opinion/clickbait/promo content)
+    sub_scores = [_item_substance_score(str(item.get("title", "")), str(item.get("summary", "")), str(item.get("source_role", ""))) for item in items]
+    avg_sub_score = sum(sub_scores) / len(sub_scores) if sub_scores else 0.0
+    substance_penalty = avg_sub_score * 5.0
+    if has_official or has_editorial_depth:
+        substance_penalty *= 0.2
+    if has_paper and source_count >= 2:
+        substance_penalty *= 0.3
+    substance_penalty = _clamp(substance_penalty, 0.0, 5.0)
+
+    # Artifact boost (concrete deliverables: product releases, funding, breakthroughs)
+    artifact_scores = _cluster_artifact_score(cluster)
+    artifact_boost = artifact_scores.get("overall", 0.0)
+    # Funding/startup artifacts get extra frontierness
+    if artifact_scores.get("funding_event", 0.0) >= 0.5 or artifact_scores.get("startup_event", 0.0) >= 0.5:
+        frontierness = min(10.0, frontierness + 1.5)
+    # Community-only cap lowered further without artifact
+    if is_community_only and artifact_boost < 0.3:
+        frontierness = min(frontierness, 3.0)
+    frontierness = _clamp(frontierness)
+
     confidence = 1.8 + 0.38 * evidence_strength + 0.26 * resonance + 0.18 * importance
     confidence += 1.4 if source_count > 1 else 0.0
     confidence += 0.9 if source_type_count > 1 else 0.0
@@ -240,7 +414,15 @@ def _cluster_signal_scores(cluster: HotspotCluster) -> dict[str, float]:
     heat = round(_clamp(0.70 * resonance + 0.30 * min(10.0, 2.0 + item_count)))
     importance_score = round(_clamp(0.58 * importance + 0.22 * evidence_strength + 0.20 * frontierness))
     final_score = _clamp(
-        0.28 * quality + 0.28 * heat + 0.24 * importance_score + 0.10 * actionability + 0.10 * evidence_strength - 0.05 * hype_penalty,
+        0.30 * importance_score
+        + 0.25 * quality
+        + 0.15 * heat
+        + 0.12 * evidence_strength
+        + 0.10 * actionability
+        + 0.08 * artifact_boost * 10
+        - 0.06 * hype_penalty
+        - 0.18 * engineering_penalty
+        - 0.15 * substance_penalty,
         0.0,
         10.0,
     )
@@ -255,9 +437,15 @@ def _cluster_signal_scores(cluster: HotspotCluster) -> dict[str, float]:
         "ACTIONABILITY": round(actionability, 3),
         "EVIDENCE_STRENGTH": round(evidence_strength, 3),
         "HYPE_PENALTY": round(hype_penalty, 3),
+        "ENGINEERING_PENALTY": round(engineering_penalty, 3),
+        "SUBSTANCE_PENALTY": round(substance_penalty, 3),
+        "ARTIFACT_BOOST": round(artifact_boost, 3),
         "CONFIDENCE": round(confidence, 3),
         "FINAL_SCORE": round(final_score, 3),
     }
+
+
+MARKET_SIGNAL_RE = re.compile(r"\$\s*\d+(?:\.\d+)?\s*(?:million|billion|[mb])\b", re.I)
 
 
 def classify_category_heuristically(cluster: HotspotCluster) -> str:
@@ -274,6 +462,9 @@ def classify_category_heuristically(cluster: HotspotCluster) -> str:
     has_vendor_terms = has_vendor_in_title or any(term in text for term in VENDOR_TERMS)
     has_news_action_terms = has_action_in_title or any(term in text for term in NEWS_ACTION_TERMS)
     has_product_news = has_vendor_in_title and has_action_in_title
+    # Market Signal: funding/M&A with dollar amounts or strong keyword match
+    if scores["Market Signal"] >= 2 or (scores["Market Signal"] >= 1 and MARKET_SIGNAL_RE.search(text)):
+        return "Market Signal"
     if "github_trend" in cluster.source_roles and "paper" not in cluster.source_types:
         return "Tooling"
     if "official_news" in cluster.source_roles and (scores["Product Release"] > 0 or any(term in text for term in RELEASE_TERMS)):
@@ -288,11 +479,9 @@ def classify_category_heuristically(cluster: HotspotCluster) -> str:
         return "Tooling"
     if scores["Industry Update"] and "official_news" in cluster.source_roles:
         return "Industry Update"
-    if scores["Community Signal"]:
-        return "Community Signal"
     if "official_news" in cluster.source_roles:
         return "Industry Update"
-    return "Community Signal"
+    return "Industry Update"
 
 
 def _clean_json_text(raw_text: str) -> str:
@@ -373,19 +562,24 @@ def _default_why(cluster: HotspotCluster, category: str) -> str:
         return "This topic stands out as a practical tooling or workflow update with strong builder interest."
     if category == "Industry Update":
         return "This appears to be a substantive ecosystem update, not just chatter, based on the available evidence."
-    return "This cluster surfaced repeatedly enough to warrant tracking, even if the evidence is still maturing."
+    if category == "Market Signal":
+        return "This represents a notable funding, acquisition, or strategic market event in the AI landscape."
+    return "This topic surfaced with enough authoritative evidence to warrant tracking."
 
 
 def _build_topic(cluster: HotspotCluster, *, keep: bool, watchlist: bool, category: str, quality: int, heat: int, importance: int, summary: str, why_it_matters: str) -> dict[str, Any]:
     signals = _cluster_signal_scores(cluster)
     final_score = _clamp(
-        0.33 * quality
-        + 0.28 * heat
-        + 0.22 * importance
+        0.30 * importance
+        + 0.28 * quality
+        + 0.15 * heat
+        + 0.08 * signals["EVIDENCE_STRENGTH"]
         + 0.07 * signals["ACTIONABILITY"]
-        + 0.06 * signals["EVIDENCE_STRENGTH"]
+        + 0.06 * signals["ARTIFACT_BOOST"] * 10
         + 0.04 * signals["CONFIDENCE"]
-        - 0.08 * signals["HYPE_PENALTY"],
+        - 0.06 * signals["HYPE_PENALTY"]
+        - 0.18 * signals["ENGINEERING_PENALTY"]
+        - 0.12 * signals["SUBSTANCE_PENALTY"],
         0.0,
         10.0,
     )
@@ -413,6 +607,9 @@ def _build_topic(cluster: HotspotCluster, *, keep: bool, watchlist: bool, catego
         "ACTIONABILITY": signals["ACTIONABILITY"],
         "EVIDENCE_STRENGTH": signals["EVIDENCE_STRENGTH"],
         "HYPE_PENALTY": signals["HYPE_PENALTY"],
+        "ENGINEERING_PENALTY": signals["ENGINEERING_PENALTY"],
+        "SUBSTANCE_PENALTY": signals["SUBSTANCE_PENALTY"],
+        "ARTIFACT_BOOST": signals["ARTIFACT_BOOST"],
         "CONFIDENCE": signals["CONFIDENCE"],
         "SHORT_COMMENT": summary.strip() or _default_summary(cluster),
         "WHY_IT_MATTERS": why_it_matters.strip() or _default_why(cluster, category),
@@ -452,7 +649,28 @@ def build_candidate_topics(clusters: list[HotspotCluster]) -> list[dict[str, Any
         ),
         reverse=True,
     )
+    # Post-clustering topic dedup: merge topics with high title similarity
+    topics = _dedupe_topics(topics)
     return topics
+
+
+def _dedupe_topics(topics: list[dict[str, Any]], threshold: float = 0.50) -> list[dict[str, Any]]:
+    """Remove near-duplicate topics, keeping the higher-scored one."""
+    if len(topics) <= 1:
+        return topics
+    kept: list[dict[str, Any]] = []
+    for topic in topics:
+        title = topic.get("title", "")
+        is_dup = False
+        for existing in kept:
+            existing_title = existing.get("title", "")
+            sim = max(title_similarity(title, existing_title), title_overlap_boost(title, existing_title))
+            if sim >= threshold:
+                is_dup = True
+                break
+        if not is_dup:
+            kept.append(topic)
+    return kept
 
 
 def heuristic_screen_clusters(clusters: list[HotspotCluster], score_cutoff: float, watchlist_cutoff: float) -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:

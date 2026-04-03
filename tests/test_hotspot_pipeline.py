@@ -17,7 +17,7 @@ from arxiv_assistant.filters.filter_hotspots import _cluster_signal_scores, _dig
 from arxiv_assistant.renderers.hotspot.render_hot_daily import render_hot_daily_md
 from arxiv_assistant.utils.hotspot.hotspot_cluster import build_hotspot_clusters
 from arxiv_assistant.utils.hotspot.hotspot_schema import HotspotCluster, HotspotItem
-from arxiv_assistant.hotspots.pipeline import _build_category_sections, _build_x_buzz_items, _merge_display_candidates, _screening_queue, _trim_topics, detect_latest_local_output_date
+from arxiv_assistant.hotspots.pipeline import _build_category_sections, _build_market_signal_items, _merge_display_candidates, _screening_queue, _trim_topics, detect_latest_local_output_date
 
 
 class TestHotspotPipeline(unittest.TestCase):
@@ -374,7 +374,7 @@ class TestHotspotPipeline(unittest.TestCase):
             },
             {
                 "TOPIC_ID": "community-a",
-                "PRIMARY_CATEGORY": "Community Signal",
+                "PRIMARY_CATEGORY": "Industry Update",
                 "source_roles": ["community_heat", "headline_consensus"],
                 "source_names": ["AINews", "The Rundown AI"],
                 "source_ids": ["ainews", "the_rundown_ai"],
@@ -451,7 +451,7 @@ class TestHotspotPipeline(unittest.TestCase):
             },
             {
                 "TOPIC_ID": "community-a",
-                "PRIMARY_CATEGORY": "Community Signal",
+                "PRIMARY_CATEGORY": "Industry Update",
                 "source_roles": ["community_heat", "headline_consensus"],
                 "source_names": ["AINews", "The Rundown AI"],
                 "source_ids": ["ainews", "the_rundown_ai"],
@@ -515,7 +515,7 @@ class TestHotspotPipeline(unittest.TestCase):
             },
             {
                 "TOPIC_ID": "community-low",
-                "PRIMARY_CATEGORY": "Community Signal",
+                "PRIMARY_CATEGORY": "Industry Update",
                 "source_roles": ["community_heat"],
                 "source_names": ["AINews"],
                 "source_ids": ["ainews"],
@@ -575,60 +575,61 @@ class TestHotspotPipeline(unittest.TestCase):
         )
         self.assertTrue(all(topic.get("DEMOTED_LOW_CONFIDENCE") for topic in watchlist))
 
-    def test_x_buzz_prefers_social_proxy_and_backfills_when_needed(self) -> None:
+    def test_market_signals_filters_for_artifacts_and_authoritative_sources(self) -> None:
         raw_items = [
             HotspotItem(
                 source_id="ainews",
                 source_name="AINews",
                 source_role="community_heat",
                 source_type="roundup",
-                title="Cursor's new Composer 2 just beat Claude Opus at coding and it's 10x cheaper",
-                summary="AINews social buzz item.",
-                url="https://www.reddit.com/r/DeepSeek/comments/example1",
-                canonical_url="https://www.reddit.com/r/DeepSeek/comments/example1",
+                title="Mistral raises $600M Series B at $6B valuation",
+                summary="Major funding round for European AI startup.",
+                url="https://www.reddit.com/r/MachineLearning/comments/example1",
+                canonical_url="https://www.reddit.com/r/MachineLearning/comments/example1",
                 published_at="2026-03-21T00:00:00+00:00",
                 metadata={"activity": 900, "host": "reddit.com"},
             ),
             HotspotItem(
-                source_id="the_rundown_ai",
-                source_name="The Rundown AI",
-                source_role="headline_consensus",
-                source_type="roundup",
-                title="OpenAI quietly expands enterprise agent workflows",
-                summary="Rundown item.",
-                url="https://www.rundown.ai/openai-enterprise-agent-workflows",
-                canonical_url="https://www.rundown.ai/openai-enterprise-agent-workflows",
+                source_id="openai_news",
+                source_name="OpenAI News",
+                source_role="official_news",
+                source_type="official_blog",
+                title="OpenAI launches GPT-5 Turbo with 2x context",
+                summary="New model release with improved capabilities.",
+                url="https://openai.com/index/gpt-5-turbo",
+                canonical_url="https://openai.com/index/gpt-5-turbo",
                 published_at="2026-03-21T00:00:00+00:00",
-                metadata={},
+                metadata={"is_official": True},
             ),
             HotspotItem(
                 source_id="hn_discussion",
                 source_name="Hacker News",
                 source_role="hn_discussion",
                 source_type="discussion",
-                title="ArXiv declares independence from Cornell",
-                summary="HN discussion.",
-                url="https://www.science.org/content/article/arxiv-pioneering-preprint-server-declares-independence-cornell",
-                canonical_url="https://www.science.org/content/article/arxiv-pioneering-preprint-server-declares-independence-cornell",
+                title="What do you think about local LLM setups?",
+                summary="Community opinion thread.",
+                url="https://news.ycombinator.com/item?id=12345",
+                canonical_url="https://news.ycombinator.com/item?id=12345",
                 published_at="2026-03-21T00:00:00+00:00",
                 metadata={"hn_score": 120},
             ),
         ]
         top_topics = [
             {
-                "TOPIC_ID": "cursor",
-                "HEADLINE": "Cursor controversy",
+                "TOPIC_ID": "mistral",
+                "HEADLINE": "Mistral funding",
                 "items": [{"title": raw_items[0].title, "url": raw_items[0].url}],
             }
         ]
 
-        x_buzz = _build_x_buzz_items(raw_items, top_topics, [], target_count=3, min_count=3)
+        signals = _build_market_signal_items(raw_items, top_topics, [], target_count=3, min_count=1)
 
-        self.assertEqual(len(x_buzz), 3)
-        self.assertEqual(x_buzz[0]["source_id"], "ainews")
-        self.assertEqual(x_buzz[0]["linked_topic"], "Cursor controversy")
-        self.assertIn("the_rundown_ai", {item["source_id"] for item in x_buzz})
-        self.assertIn("hn_discussion", {item["source_id"] for item in x_buzz})
+        # Should include funding item (artifact match) and official item (authoritative)
+        # Should exclude opinion thread (no artifact, not authoritative)
+        signal_ids = {item["source_id"] for item in signals}
+        self.assertIn("ainews", signal_ids)
+        self.assertIn("openai_news", signal_ids)
+        self.assertNotIn("hn_discussion", signal_ids)
 
     def test_category_sections_expand_coverage_without_repeating_featured_topics(self) -> None:
         candidate_topics = [
@@ -647,6 +648,7 @@ class TestHotspotPipeline(unittest.TestCase):
                 "QUALITY": 8,
                 "HEAT": 8,
                 "IMPORTANCE": 9,
+                "FRONTIERNESS": 7.0,
             },
             {
                 "TOPIC_ID": "tooling-1",
@@ -663,6 +665,7 @@ class TestHotspotPipeline(unittest.TestCase):
                 "QUALITY": 7,
                 "HEAT": 7,
                 "IMPORTANCE": 7,
+                "FRONTIERNESS": 5.0,
             },
             {
                 "TOPIC_ID": "research-1",
@@ -679,11 +682,12 @@ class TestHotspotPipeline(unittest.TestCase):
                 "QUALITY": 8,
                 "HEAT": 6,
                 "IMPORTANCE": 7,
+                "FRONTIERNESS": 5.5,
             },
             {
                 "TOPIC_ID": "community-1",
                 "title": "Debate over model provenance",
-                "PRIMARY_CATEGORY": "Community Signal",
+                "PRIMARY_CATEGORY": "Industry Update",
                 "source_roles": ["community_heat", "hn_discussion"],
                 "source_names": ["AINews", "Hacker News"],
                 "source_ids": ["ainews", "hn_discussion"],
@@ -695,11 +699,12 @@ class TestHotspotPipeline(unittest.TestCase):
                 "QUALITY": 6,
                 "HEAT": 8,
                 "IMPORTANCE": 6,
+                "FRONTIERNESS": 4.0,
             },
             {
                 "TOPIC_ID": "generic-notice",
                 "title": "Information Collection Notice",
-                "PRIMARY_CATEGORY": "Community Signal",
+                "PRIMARY_CATEGORY": "Industry Update",
                 "source_roles": ["headline_consensus"],
                 "source_names": ["Ben's Bites"],
                 "source_ids": ["bens_bites"],
@@ -715,7 +720,7 @@ class TestHotspotPipeline(unittest.TestCase):
             {
                 "TOPIC_ID": "off-topic-news",
                 "title": "Amazon's secret phone project",
-                "PRIMARY_CATEGORY": "Community Signal",
+                "PRIMARY_CATEGORY": "Industry Update",
                 "source_roles": ["headline_consensus"],
                 "source_names": ["The Rundown AI"],
                 "source_ids": ["the_rundown_ai"],
@@ -784,7 +789,7 @@ class TestHotspotPipeline(unittest.TestCase):
             },
             {
                 "TOPIC_ID": "weak-roundup",
-                "PRIMARY_CATEGORY": "Community Signal",
+                "PRIMARY_CATEGORY": "Industry Update",
                 "source_roles": ["headline_consensus"],
                 "source_names": ["Newsletter"],
                 "source_types": ["roundup"],
@@ -961,13 +966,13 @@ class TestHotspotPipeline(unittest.TestCase):
             ],
             "long_tail_sections": [
                 {
-                    "category": "Community Signal",
+                    "category": "Industry Update",
                     "total_candidates": 1,
                     "topics": [
                         {
                             "TOPIC_ID": "tail-1",
                             "title": "Open-source AI coding agent",
-                            "PRIMARY_CATEGORY": "Community Signal",
+                            "PRIMARY_CATEGORY": "Industry Update",
                             "FINAL_SCORE": 2.8,
                             "HEAT": 4,
                             "OCCURRENCE_SCORE": 3.9,
@@ -990,7 +995,7 @@ class TestHotspotPipeline(unittest.TestCase):
         self.assertIn("## Topic Radar By Category", rendered)
         self.assertIn("## Long-tail Signals", rendered)
         self.assertIn("### Tooling (1 shown / 2 candidates)", rendered)
-        self.assertIn("### Community Signal (1 shown / 1 candidates)", rendered)
+        self.assertIn("### Industry Update (1 shown / 1 candidates)", rendered)
         self.assertIn("Open-source agent runtime", rendered)
 
 

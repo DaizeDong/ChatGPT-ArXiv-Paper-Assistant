@@ -108,8 +108,18 @@ def _derive_segment_title(segment_text: str) -> str:
     return title
 
 
-def _anchor_score(url: str, anchor_text: str) -> tuple[int, int]:
+def _title_tokens(title: str) -> set[str]:
+    """Extract significant lowercase tokens from a title for URL matching."""
+    tokens = set(re.findall(r"[a-z0-9]+", title.lower()))
+    tokens -= {"the", "and", "for", "are", "with", "that", "this", "from", "very",
+               "good", "more", "about", "just", "some", "been", "have", "will",
+               "new", "can", "all", "not", "but", "was", "its", "has"}
+    return {t for t in tokens if len(t) >= 3}
+
+
+def _anchor_score(url: str, anchor_text: str, title_keys: set[str] = frozenset()) -> tuple[int, int]:
     host = urlsplit(url).netloc.lower()
+    path = urlsplit(url).path.lower()
     text = clean_text(anchor_text).lower()
     score = 0
     if not _is_external_link(url) or _is_media_url(url):
@@ -124,17 +134,26 @@ def _anchor_score(url: str, anchor_text: str) -> tuple[int, int]:
         score += 2
     if "github repository" in text:
         score += 1
+    # Title-keyword relevance: prefer anchors whose URL/text matches the title
+    if title_keys:
+        url_tokens = set(re.findall(r"[a-z0-9]+", f"{path} {text}"))
+        overlap = len(title_keys & url_tokens)
+        if overlap >= 2:
+            score += 5
+        elif overlap >= 1:
+            score += 3
     return (score, -len(text))
 
 
-def _choose_best_anchor(segment_html: str) -> str | None:
+def _choose_best_anchor(segment_html: str, title: str = "") -> str | None:
     anchors = extract_anchor_pairs(segment_html)
     if not anchors:
         return None
+    title_keys = _title_tokens(title) if title else frozenset()
     best_url: str | None = None
     best_score = (-100, 0)
     for url, anchor_text in anchors:
-        score = _anchor_score(url, anchor_text)
+        score = _anchor_score(url, anchor_text, title_keys)
         if score > best_score:
             best_score = score
             best_url = normalize_url(url)
@@ -200,7 +219,7 @@ def fetch_hotspot_items(target_date: datetime, freshness_hours: int) -> list[Hot
             title = _derive_segment_title(segment_text)
             if _is_low_signal_title(title):
                 continue
-            url = _choose_best_anchor(segment_html)
+            url = _choose_best_anchor(segment_html, title)
             if not url:
                 continue
             activity = _extract_activity(segment_text)

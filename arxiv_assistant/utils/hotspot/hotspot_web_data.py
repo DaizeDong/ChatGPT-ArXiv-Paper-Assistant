@@ -15,27 +15,28 @@ from arxiv_assistant.utils.hotspot.hotspot_dates import (
     is_supported_hotspot_year,
 )
 from arxiv_assistant.utils.hotspot.hotspot_schema import HotspotItem
+from arxiv_assistant.utils.hotspot.hotspot_sources import url_title_consistent
 
 SOURCE_FAMILIES = [
-    {
-        "slug": "x-buzz",
-        "label": "X / Buzz",
-        "description": "Fast-moving social and community signal proxied through roundup and discussion sources.",
-    },
     {
         "slug": "official",
         "label": "Official Updates",
         "description": "Product, research, and platform updates from official vendor or lab channels.",
     },
     {
+        "slug": "market-signals",
+        "label": "Market Signals",
+        "description": "Funding rounds, acquisitions, valuations, and strategic moves in the AI industry.",
+    },
+    {
         "slug": "analysis",
-        "label": "Deep Reads / Analysis",
+        "label": "Expert Analysis",
         "description": "Long-form expert analysis and research explainers with substantive depth.",
     },
     {
-        "slug": "blogs",
-        "label": "Blogs / Newsletters",
-        "description": "Curated roundup and newsletter coverage that helps track same-day narrative consensus.",
+        "slug": "papers",
+        "label": "Research Papers",
+        "description": "Research papers and paper-trending signals tied to the current day.",
     },
     {
         "slug": "github",
@@ -43,14 +44,9 @@ SOURCE_FAMILIES = [
         "description": "Repositories, tooling launches, and builder momentum around practical AI systems.",
     },
     {
-        "slug": "papers",
-        "label": "Papers",
-        "description": "Research papers and paper-trending signals tied to the current day.",
-    },
-    {
-        "slug": "discussions",
-        "label": "Discussions",
-        "description": "Forum-style discussion threads and broader community reactions.",
+        "slug": "industry",
+        "label": "Industry News",
+        "description": "Curated industry coverage from newsletters, blogs, and community sources with substance.",
     },
 ]
 
@@ -67,24 +63,23 @@ PAPER_SPOTLIGHT_SECTION_META = {
     },
 }
 SOURCE_FAMILY_ORDER_BOOST = {
-    "x-buzz": 2.5,
-    "official": 2.35,
-    "analysis": 2.2,
-    "blogs": 2.0,
-    "github": 1.9,
-    "papers": 1.6,
-    "discussions": 1.4,
+    "official": 3.0,
+    "market-signals": 2.8,
+    "analysis": 2.5,
+    "papers": 2.2,
+    "github": 2.0,
+    "industry": 1.5,
 }
 SOURCE_ROLE_ORDER_BOOST = {
-    "community_heat": 1.2,
-    "official_news": 1.15,
-    "headline_consensus": 0.9,
-    "editorial_depth": 0.95,
-    "builder_momentum": 0.8,
+    "official_news": 1.5,
+    "editorial_depth": 1.3,
+    "research_backbone": 1.0,
     "github_trend": 0.95,
-    "research_backbone": 0.85,
-    "paper_trending": 0.8,
-    "hn_discussion": 0.7,
+    "paper_trending": 0.85,
+    "builder_momentum": 0.7,
+    "community_heat": 0.5,
+    "headline_consensus": 0.4,
+    "hn_discussion": 0.35,
 }
 LLM_STATUS_ORDER_BOOST = {
     "featured": 1.0,
@@ -92,10 +87,11 @@ LLM_STATUS_ORDER_BOOST = {
     "candidate": 0.0,
 }
 SOCIAL_HOST_SNIPPETS = ("x.com", "twitter.com", "reddit.com")
-BLOG_HOST_HINTS = ("rundown", "superhuman", "neuron", "smol.ai", "ben", "newsletter", "substack")
+INDUSTRY_HOST_HINTS = ("rundown", "superhuman", "neuron", "smol.ai", "ben", "newsletter", "substack")
 ANALYSIS_HOST_HINTS = ("thegradient", "lilianweng", "simonwillison", "jalammar", "sebastianraschka", "huyenchip", "distill.pub")
 GITHUB_HOSTS = ("github.com",)
-DISCUSSION_HOSTS = ("news.ycombinator.com", "reddit.com")
+MARKET_SIGNAL_RE = re.compile(r"\$\s*\d+(?:\.\d+)?\s*(?:million|billion|[mb])\b", re.I)
+FUNDING_KEYWORDS = {"funding", "raise", "raised", "series", "acquisition", "valuation", "ipo", "merger", "investment", "acquires", "acquired"}
 YEAR_PATTERN = re.compile(r"^\d{4}$")
 MONTH_PATTERN = re.compile(r"^\d{4}-\d{2}$")
 DATE_PATTERN = re.compile(r"^\d{4}-\d{2}-\d{2}\.json$")
@@ -129,6 +125,88 @@ def _topic_slug(topic: dict[str, Any]) -> str:
     topic_id = str(topic.get("TOPIC_ID", "")).strip() or "topic"
     headline = str(topic.get("HEADLINE") or topic.get("title") or topic_id).strip()
     return _slugify(headline, fallback=_slugify(topic_id, fallback="topic"))
+
+
+# --- Title cleaning and item filtering for source sections ---
+
+_TITLE_TIMESTAMP_RE = re.compile(r"^\d+\s+hours?\s+ago\s*", re.I)
+_TITLE_EMOJI_PREFIX_RE = re.compile(r"^[\U0001F300-\U0001FAFF\U00002702-\U000027B0\U0000FE00-\U0000FE0F\U0000200D\s]+")
+_TITLE_QUOTING_RE = re.compile(r"^Quoting\s+.+$", re.I)
+
+_LOW_QUALITY_TITLE_PATTERNS = [
+    re.compile(r"^Quoting\s+", re.I),
+    re.compile(r"sponsors?-only newsletter", re.I),
+    re.compile(r"^Can we block\b", re.I),
+    re.compile(r"^help me\b", re.I),
+    re.compile(r"^what plugins\b", re.I),
+    re.compile(r"\bsubscribe\b.*\bnewsletter\b", re.I),
+    re.compile(r"^\[?\s*removed\s*\]?$", re.I),
+    re.compile(r"^\[deleted\]$", re.I),
+    re.compile(r"^\d+\s+hours?\s+ago\b", re.I),
+    re.compile(r"\bwhat are your wishes\b", re.I),
+    re.compile(r"\breacts? to\b.*\bleak\b", re.I),
+    re.compile(r"\bin big trouble\b", re.I),
+    re.compile(r"\bdead zone\b", re.I),
+    re.compile(r"\bjust leaked\b", re.I),
+    re.compile(r"\bsource (?:just )?leaked\b", re.I),
+    re.compile(r"\b(?:code|source)\s+leak\b", re.I),
+    re.compile(r"\bleak\b.*\b(?:blueprint|orchestration|system prompt)\b", re.I),
+    re.compile(r"^\[P\]\s+", re.I),
+    re.compile(r"·\s*Hugging\s*Face\s*$", re.I),
+    re.compile(r"\bgot leaked\b", re.I),
+    re.compile(r"^\[D\]\s+", re.I),
+    re.compile(r"\bcourse\b.*\b(?:starts?|open to|register)\b", re.I),
+]
+
+# GitHub repos that are clones/forks of leaked code or low-signal wrappers
+_CLONE_REPO_PATTERNS = [
+    re.compile(r"\bclaude[-_]?code\b", re.I),
+    re.compile(r"\bopen[-_]?claude\b", re.I),
+    re.compile(r"\bclaude[-_]?from[-_]?scratch\b", re.I),
+    re.compile(r"\bclaude[-_]?reviews?\b", re.I),
+    re.compile(r"\bclaude[-_]?book\b", re.I),
+    re.compile(r"\bclaude[-_]?prompt\b", re.I),
+    re.compile(r"\bhow[-_]claude[-_]code\b", re.I),
+    re.compile(r"\blearn[-_]coding[-_]agent\b", re.I),
+    re.compile(r"\bai[-_]agent[-_]deep[-_]dive\b", re.I),
+    re.compile(r"\bprompt[-_]research\b", re.I),
+]
+
+_LOW_QUALITY_SOURCES = {
+    "the_neuron",
+    "superhuman_ai",
+    "the_rundown",
+}
+
+
+def _clean_display_title(title: str) -> str:
+    """Clean a title for display: remove timestamps, emoji prefixes, etc."""
+    cleaned = title.strip()
+    # Remove leading timestamps like "3 hours ago", "13 hours ago"
+    cleaned = _TITLE_TIMESTAMP_RE.sub("", cleaned).strip()
+    # Remove leading emoji clusters
+    cleaned = _TITLE_EMOJI_PREFIX_RE.sub("", cleaned).strip()
+    # Remove leading punctuation artifacts
+    cleaned = cleaned.lstrip("·•|—- ").strip()
+    return cleaned if cleaned else title.strip()
+
+
+def _is_low_quality_display_item(item: HotspotItem) -> bool:
+    """Check if an item should be excluded from source section display."""
+    title = item.title.strip()
+    if len(title) < 10:
+        return True
+    for pattern in _LOW_QUALITY_TITLE_PATTERNS:
+        if pattern.search(title):
+            return True
+    # Filter GitHub clone repos (leaked code derivatives)
+    url = (item.url or "").lower()
+    if "github.com" in url:
+        combined = f"{title} {url}"
+        for pattern in _CLONE_REPO_PATTERNS:
+            if pattern.search(combined):
+                return True
+    return False
 
 
 def _topic_score(topic: dict[str, Any], key: str, default: float = 0.0) -> float:
@@ -223,21 +301,29 @@ def _paper_routes_for_year(year: str, paper_archive_routes: dict[str, set[str]] 
 def _classify_source_family(item: HotspotItem) -> str:
     host = _url_host(item.url or item.canonical_url)
     metadata = item.metadata or {}
-    if item.source_role == "community_heat" or any(snippet in host for snippet in SOCIAL_HOST_SNIPPETS):
-        return "x-buzz"
+    text = f"{item.title} {item.summary or ''}".lower()
+
+    # Official sources first
     if item.source_role == "official_news" or bool(metadata.get("is_official")):
         return "official"
+    # Funding/M&A detection → market-signals
+    has_funding_keyword = any(kw in text for kw in FUNDING_KEYWORDS)
+    has_dollar_amount = bool(MARKET_SIGNAL_RE.search(text))
+    if has_funding_keyword and has_dollar_amount:
+        return "market-signals"
+    if has_funding_keyword and item.source_role in {"official_news", "editorial_depth", "headline_consensus"}:
+        return "market-signals"
+    # Expert analysis
     if item.source_role == "editorial_depth" or item.source_type == "blog_analysis" or any(hint in host for hint in ANALYSIS_HOST_HINTS):
         return "analysis"
+    # Research papers
     if item.source_type == "paper" or metadata.get("arxiv_id"):
         return "papers"
+    # GitHub / tools
     if item.source_role == "github_trend" or any(repo_host in host for repo_host in GITHUB_HOSTS) or metadata.get("github_url") or metadata.get("github_stars") or metadata.get("stars"):
         return "github"
-    if item.source_role == "hn_discussion" or item.source_type == "discussion" or any(snippet in host for snippet in DISCUSSION_HOSTS):
-        return "discussions"
-    if item.source_role in {"headline_consensus", "builder_momentum"} or any(hint in host for hint in BLOG_HOST_HINTS):
-        return "blogs"
-    return "blogs"
+    # Everything else → industry (newsletters, community, discussions)
+    return "industry"
 
 
 def _item_signal_score(item: HotspotItem, topic_lookup: dict[str, dict[str, Any]]) -> float:
@@ -367,7 +453,7 @@ def _build_topic_summary(topics: list[dict[str, Any]]) -> list[dict[str, Any]]:
             {
                 "topic_id": topic["topic_id"],
                 "slug": topic["slug"],
-                "headline": topic.get("HEADLINE") or topic.get("title") or "Untitled Topic",
+                "headline": _clean_display_title(topic.get("HEADLINE") or topic.get("title") or "Untitled Topic"),
                 "category": topic.get("PRIMARY_CATEGORY", "Research"),
                 "final_score": _topic_score(topic, "FINAL_SCORE"),
                 "heat": _topic_score(topic, "HEAT"),
@@ -407,7 +493,7 @@ def _build_compact_topic(topic: dict[str, Any]) -> dict[str, Any]:
     return {
         "topic_id": topic["topic_id"],
         "slug": topic["slug"],
-        "headline": topic.get("HEADLINE") or topic.get("title") or "Untitled Topic",
+        "headline": _clean_display_title(topic.get("HEADLINE") or topic.get("title") or "Untitled Topic"),
         "category": topic.get("PRIMARY_CATEGORY", "Research"),
         "summary_short": _short_text(topic.get("SHORT_COMMENT") or topic.get("summary") or topic.get("WHY_IT_MATTERS") or "", 150),
         "why_it_matters": _short_text(topic.get("WHY_IT_MATTERS", ""), 220),
@@ -432,12 +518,28 @@ def _build_compact_topic(topic: dict[str, Any]) -> dict[str, Any]:
 
 
 def _build_source_sections(raw_items: list[HotspotItem], report: dict[str, Any], topic_lookup: dict[str, dict[str, Any]]) -> list[dict[str, Any]]:
+    from arxiv_assistant.filters.filter_hotspots import _item_engineering_score
     grouped: dict[str, list[dict[str, Any]]] = defaultdict(list)
+    seen_urls: dict[str, set[str]] = defaultdict(set)  # family -> set of canonical URLs
     date_str = str(report.get("date", ""))
     for item in raw_items:
+        # Skip items with mismatched URLs (title/URL inconsistency)
+        if not url_title_consistent(item.title, item.url):
+            continue
+        # Skip low-quality display items
+        if _is_low_quality_display_item(item):
+            continue
+        # Skip engineering discussion items (items with any eng pattern hit get >= 0.55)
+        eng_score = _item_engineering_score(item.title, item.summary or "", item.source_role)
+        if eng_score >= 0.45:
+            continue
         family = _classify_source_family(item)
-        linked_topics = []
+        # Deduplicate by canonical URL within each source family
         canonical = item.canonical_url or item.url
+        if canonical in seen_urls[family]:
+            continue
+        seen_urls[family].add(canonical)
+        linked_topics = []
         if canonical and canonical in topic_lookup:
             linked_topics.append(_topic_paths(date_str, topic_lookup[canonical]))
         title_key = item.title.lower()
@@ -445,10 +547,11 @@ def _build_source_sections(raw_items: list[HotspotItem], report: dict[str, Any],
             candidate = _topic_paths(date_str, topic_lookup[title_key])
             if not any(existing["topic_id"] == candidate["topic_id"] for existing in linked_topics):
                 linked_topics.append(candidate)
+        display_title = _clean_display_title(item.title)
         grouped[family].append(
             {
                 "id": _item_identifier(item),
-                "title": item.title,
+                "title": display_title,
                 "summary_short": _short_text(item.summary, 180),
                 "url": item.url,
                 "canonical_url": item.canonical_url,
@@ -476,6 +579,15 @@ def _build_source_sections(raw_items: list[HotspotItem], report: dict[str, Any],
             }
         )
 
+    # Per-family display caps to keep sections focused
+    _FAMILY_DISPLAY_CAPS = {
+        "official": 10,
+        "market-signals": 6,
+        "analysis": 8,
+        "papers": 12,
+        "github": 6,
+        "industry": 6,
+    }
     sections = []
     for family in SOURCE_FAMILY_ORDER:
         items = sorted(
@@ -488,6 +600,8 @@ def _build_source_sections(raw_items: list[HotspotItem], report: dict[str, Any],
             ),
             reverse=True,
         )
+        cap = _FAMILY_DISPLAY_CAPS.get(family, 12)
+        items = items[:cap]
         entry = SOURCE_FAMILY_LOOKUP[family]
         sections.append(
             {
@@ -563,7 +677,11 @@ def build_daily_hotspot_web_payload(
         }
         for section in report.get("long_tail_sections") or []
     ]
-    watchlist_topics = [_build_compact_topic(_build_topic_paths_and_merge(report, topic)) for topic in report.get("watchlist") or []]
+    watchlist_topics = [
+        _build_compact_topic(_build_topic_paths_and_merge(report, topic))
+        for topic in report.get("watchlist") or []
+        if not any(p.search((topic.get("HEADLINE") or topic.get("title") or "").strip()) for p in _LOW_QUALITY_TITLE_PATTERNS)
+    ]
     topic_summary = _build_topic_summary(all_topics)
     section_counts = {section["slug"]: section["count"] for section in source_sections}
     return {

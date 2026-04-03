@@ -162,15 +162,15 @@ GENERIC_OVERLAP_TOKENS = {
 }
 
 SOURCE_ROLE_WEIGHTS = {
+    "official_news": 6.0,
     "research_backbone": 5.4,
+    "editorial_depth": 5.0,
     "paper_trending": 4.8,
-    "community_heat": 4.5,
-    "official_news": 5.0,
-    "headline_consensus": 4.0,
-    "builder_momentum": 3.8,
-    "editorial_depth": 3.4,
     "github_trend": 4.2,
-    "hn_discussion": 3.0,
+    "builder_momentum": 3.5,
+    "community_heat": 2.0,
+    "headline_consensus": 1.5,
+    "hn_discussion": 1.5,
 }
 
 PAPER_LIKE_SOURCE_TYPES = {"paper"}

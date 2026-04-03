@@ -223,6 +223,40 @@ export function DailyHotspotPage({ date }: { date: string }) {
         </div>
       </section>
 
+      {visiblePaperSpotlight.map((section) => (
+        <section className="panel source-family-panel compact-panel" id={`section-${section.slug}`} key={section.slug}>
+          <div className="section-header table-header">
+            <h2>{sectionTitle(section)}</h2>
+          </div>
+          <SignalTable items={section.filteredItems} />
+        </section>
+      ))}
+
+      <section className="panel compact-panel">
+        <div className="section-header table-header">
+          <h2>Daily Topics</h2>
+          <div className="section-header-actions">
+            <span className="plain-meta">{visibleTopicSummary.length}</span>
+          </div>
+        </div>
+        <TopicSummaryTable topics={visibleTopicSummary} />
+      </section>
+
+      {visibleSections.map((section) => (
+        <section className="panel source-family-panel compact-panel" id={`section-${section.slug}`} key={section.slug}>
+          <div className="section-header table-header">
+            <h2>{sectionTitle(section)}</h2>
+          </div>
+          <SignalTable items={section.filteredItems} />
+        </section>
+      ))}
+
+      {!visibleSections.length ? (
+        <section className="panel">
+          <h2>No matching signals</h2>
+        </section>
+      ) : null}
+
       {usageRows.length ? (
         <section className="panel compact-panel">
           <div className="section-header table-header">
@@ -258,40 +292,6 @@ export function DailyHotspotPage({ date }: { date: string }) {
               </tbody>
             </table>
           </div>
-        </section>
-      ) : null}
-
-      {visiblePaperSpotlight.map((section) => (
-        <section className="panel source-family-panel compact-panel" id={`section-${section.slug}`} key={section.slug}>
-          <div className="section-header table-header">
-            <h2>{sectionTitle(section)}</h2>
-          </div>
-          <SignalTable items={section.filteredItems} />
-        </section>
-      ))}
-
-      <section className="panel compact-panel">
-        <div className="section-header table-header">
-          <h2>Daily Topics</h2>
-          <div className="section-header-actions">
-            <span className="plain-meta">{visibleTopicSummary.length}</span>
-          </div>
-        </div>
-        <TopicSummaryTable topics={visibleTopicSummary} />
-      </section>
-
-      {visibleSections.map((section) => (
-        <section className="panel source-family-panel compact-panel" id={`section-${section.slug}`} key={section.slug}>
-          <div className="section-header table-header">
-            <h2>{sectionTitle(section)}</h2>
-          </div>
-          <SignalTable items={section.filteredItems} />
-        </section>
-      ))}
-
-      {!visibleSections.length ? (
-        <section className="panel">
-          <h2>No matching signals</h2>
         </section>
       ) : null}
     </div>

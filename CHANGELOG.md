@@ -1,5 +1,9 @@
 # Changelog
 
+### 2026-04-02
+
+- Repositioned Daily AI Hotspots as an artifact-centric executive brief: added artifact detection, substance penalty, rebalanced source weights and scoring toward official/research sources, and tightened screening to drop community-only noise.
+
 ### 2026-04-01
 
 - Reformated the structure for daily arXiv papers by grouping them into multiple topics.

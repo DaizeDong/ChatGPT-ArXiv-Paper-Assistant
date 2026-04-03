@@ -73,7 +73,9 @@ def fetch_hotspot_items(
                 continue
 
             # Analysis content should have substantive summaries
-            if len(summary) < _MIN_ANALYSIS_SUMMARY_LEN:
+            # Allow per-feed override for sources with short teasers (e.g., Chinese media)
+            min_len = feed_config.get("min_summary_len", _MIN_ANALYSIS_SUMMARY_LEN)
+            if len(summary) < min_len:
                 continue
 
             url = clean_text(entry.get("link", feed_url))

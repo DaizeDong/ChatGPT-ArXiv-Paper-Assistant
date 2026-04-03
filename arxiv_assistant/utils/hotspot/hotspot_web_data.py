@@ -88,7 +88,11 @@ LLM_STATUS_ORDER_BOOST = {
 }
 SOCIAL_HOST_SNIPPETS = ("x.com", "twitter.com", "reddit.com")
 INDUSTRY_HOST_HINTS = ("rundown", "superhuman", "neuron", "smol.ai", "ben", "newsletter", "substack")
-ANALYSIS_HOST_HINTS = ("thegradient", "lilianweng", "simonwillison", "jalammar", "sebastianraschka", "huyenchip", "distill.pub")
+ANALYSIS_HOST_HINTS = (
+    "thegradient", "lilianweng", "simonwillison", "jalammar", "sebastianraschka", "huyenchip", "distill.pub",
+    "jiqizhixin", "qbitai", "venturebeat", "techcrunch", "theverge", "arstechnica",
+    "bair.berkeley", "news.mit.edu",
+)
 GITHUB_HOSTS = ("github.com",)
 MARKET_SIGNAL_RE = re.compile(r"\$\s*\d+(?:\.\d+)?\s*(?:million|billion|[mb])\b", re.I)
 FUNDING_KEYWORDS = {"funding", "raise", "raised", "series", "acquisition", "valuation", "ipo", "merger", "investment", "acquires", "acquired"}

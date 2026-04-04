@@ -601,7 +601,7 @@ def _extract_with_llm(page_text: str, source: dict[str, Any]) -> list[dict[str, 
 
     api_key = os.environ.get("OPENAI_API_KEY")
     base_url = os.environ.get("OPENAI_BASE_URL", "https://api.openai.com/v1")
-    model = source.get("llm_model", "grok-4.1-mini")
+    model = source.get("llm_model", "gpt-5.4")
 
     try:
         resp = requests.post(

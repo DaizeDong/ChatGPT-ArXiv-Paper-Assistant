@@ -97,11 +97,13 @@ class HotspotItem:
 
 所有缺少 `published_at` 字段的条目被直接移除。这一策略基于以下判断：无法确认发布日期的条目无法验证其新鲜度，是潜在的过期内容污染源。早期版本允许无日期的 `official_news` 条目通过交叉验证保留，但实践表明这些条目大多是旧产品页面而非当日新闻。
 
-### 4.3 36 小时新鲜度门控
+对于 Playwright/LLM 模式采集的 SPA 站点和 LLM 提取的条目，系统使用 `target_date` 作为 `published_at` 的 fallback，确保实时抓取的内容不会因缺少日期而被丢弃。
 
-所有有日期的条目必须满足 `published_at >= target_date - 36h`，即发布时间在目标日期前 36 小时以内。36 小时窗口的设计考虑了跨时区和深夜发布的情况。
+### 4.3 36 小时新鲜度门控与 `fetched_at` 语义
 
-对于 Hugging Face 论文源，额外在源头层面限制 `MAX_PAPER_AGE_DAYS = 1`，确保只采集最近一天内提交的论文。
+所有有日期的条目必须满足新鲜度门控，即有效日期在目标日期前 36 小时以内。36 小时窗口的设计考虑了跨时区和深夜发布的情况。
+
+新鲜度判断通过 `get_freshness_date()` 函数统一处理，优先使用 `metadata["fetched_at"]`（采集/trending 日期），回退到 `published_at`（原始发布日期）。这一设计解决了 HF 论文（`publishedAt` 是 arXiv 提交日期而非 trending 日期）和 GitHub 仓库（`created_at` 是创建日期而非 trending 日期）的日期语义问题——"3 天前提交但今天才上 trending"的内容不再被错误过滤。
 
 该过滤统一应用于所有来源——包括论文、GitHub repo、newsletter、官方博客。系统不再对不同来源使用不同的时间窗口。
 
@@ -169,7 +171,7 @@ class Story:
 
 **第三轮：实体共现。** 如果两个条目至少共享一个非泛化实体且标题有一定重叠，合并。例外：论文-论文对不通过此轮合并，避免将讨论同一模型但本质不同的论文错误合并。
 
-**第四轮：标题相似度。** Jaccard 相似度 ≥ 0.55 或标题包含关系（短标题 token ≥ 80% 出现在长标题中），合并。同样排除论文-论文对。
+**第四轮：标题相似度。** 三种匹配方式任一触发即合并：(1) 标题包含关系（短标题 token ≥ 80% 出现在长标题中）；(2) Jaccard 相似度 ≥ 0.55；(3) `SequenceMatcher.ratio() ≥ 0.65`（捕获同义词替换，如 "acquires" vs "buys"）。同样排除论文-论文对。LLM enrichment 阶段会按主要实体排序后再分批，使相关条目更可能同批处理，提升 `same_event_as` 跨批覆盖率。
 
 ### 6.3 代表性条目选择
 
@@ -205,7 +207,7 @@ canonical = max(items, key=lambda ei: (
 
 ```
 raw = (source_weight_sum + evidence_breadth + avg_importance) × event_weight × freshness
-score = min(10.0, raw / 5.5)
+score = min(10.0, raw / normalizer)
 ```
 
 其中：
@@ -213,8 +215,9 @@ score = min(10.0, raw / 5.5)
 - **source_weight_sum** = Σ SOURCE_ROLE_WEIGHTS[item.source_role]，上限 25.0
 - **evidence_breadth** = 独立来源 ID 数 × 1.5 + 独立来源类型数 × 0.8
 - **avg_importance** = 所有条目 importance 的均值（来自 LLM 或启发式）
-- **event_weight** = 事件类型权重（product_release: 2.0, funding: 1.8, research_paper: 1.5, tooling: 1.3, opinion: 0.3 等）
-- **freshness** = 基于最新条目年龄的衰减（< 12h: 1.0, 12-24h: 0.8, 24-36h: 0.6, > 36h: 0.4）
+- **event_weight** = 事件类型权重（product_release: 2.0, funding: 1.8, research_paper: 1.5, tooling: 1.3, opinion: 0.3 等）。对于 opinion 类型，如果关联实体包含行业关键人物（如 Sam Altman、Geoffrey Hinton、Yann LeCun 等 20 位），权重从 0.3 提升到 1.2
+- **freshness** = 基于最新条目有效日期（优先 `fetched_at`，回退 `published_at`）的衰减（< 12h: 1.0, 12-24h: 0.8, 24-36h: 0.6, > 36h: 0.4）
+- **normalizer** = 三段式动态归一化：P50 映射到 5.0，P95 映射到 9.5，max 映射到 10.0，各段内线性插值。替代了早期硬编码的 `/5.5`，确保全分数范围都有区分度
 
 ### 7.2 与早期评分的对比
 
@@ -352,21 +355,17 @@ X 是最容易引入噪声的来源，系统对其采用比其他来源更严格
 
 ## 14. 局限性
 
-### 14.1 论文与 GitHub 的日期语义
+### 14.1 LLM 标注质量受限于上下文
 
-HF Papers 的 `publishedAt` 是 arXiv 提交日期而非 trending 日期，GitHub repo 的 `created_at` 是创建日期而非 trending 日期。严格的 36 小时新鲜度门控可能导致"3 天前提交但今天才上 trending"的高质量内容被过滤。这是覆盖面与严格性之间的权衡。
+每个条目仅提供标题和 200 字符摘要用于 LLM 标注，`importance` 和 `same_event_as` 的准确度受限于这一窄窗口。系统通过启发式后补和实体合并部分缓解此问题。Enrichment 阶段按主要实体排序后分批，提升了批内交叉引用覆盖率，但跨批交叉引用仍依赖后续 Union-Find 的 URL/实体/标题相似度合并。
 
-### 14.2 LLM 标注质量受限于上下文
-
-每个条目仅提供标题和 200 字符摘要用于 LLM 标注，`importance` 和 `same_event_as` 的准确度受限于这一窄窗口。系统通过启发式后补和实体合并部分缓解此问题。
-
-### 14.3 X 覆盖受限于账号库
+### 14.2 X 覆盖受限于账号库
 
 权威账号库需要定期更新，否则会遗漏新兴高质量来源。
 
-### 14.4 Playwright/LLM 模式不提取日期
+### 14.3 评分归一化对极端分布的敏感性
 
-通过 Playwright + LLM 提取的官方博客条目（如 Zhipu、ByteDance Seed 等 SPA 站点）无法获取发布日期，在当前的无日期过滤策略下会被移除。
+动态归一化使用 P90 作为参考点。当数据量极少（<5 条）或分布极度偏斜时，归一化因子可能不稳定。下限保护（normalizer ≥ 0.5）部分缓解此问题。
 
 ## 附录 A：实现文件映射
 

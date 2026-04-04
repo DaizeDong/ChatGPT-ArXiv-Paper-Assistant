@@ -27,11 +27,6 @@ function StoryCard({ topic }: { topic: CompactTopic }) {
       </div>
       <h3 className="story-headline">{tz(topic.headline, any.headline_zh as string)}</h3>
       {topic.summary_short ? <p className="story-summary story-summary-full">{tz(topic.summary_short, any.summary_short_zh as string)}</p> : null}
-      {topic.why_it_matters ? (
-        <p className="story-why story-why-full">
-          <strong>{t("label.why")}</strong> {tz(topic.why_it_matters, any.why_it_matters_zh as string)}
-        </p>
-      ) : null}
       {topic.key_takeaways?.length ? (
         <ul className="story-takeaways">
           {((any.key_takeaways_zh as string[] | undefined) && lang === "zh"

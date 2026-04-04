@@ -142,6 +142,20 @@ def parse_datetime(value: str | None) -> datetime | None:
     return None
 
 
+def get_freshness_date(item: "HotspotItem") -> str | None:
+    """Return the most appropriate date for freshness evaluation.
+
+    Uses metadata['fetched_at'] (trending/fetch date) when available,
+    falling back to published_at. This ensures items like HF trending papers
+    and GitHub trending repos use their fetch date rather than their original
+    publication/creation date for freshness checks.
+    """
+    fetched_at = (item.metadata or {}).get("fetched_at")
+    if fetched_at:
+        return fetched_at
+    return item.published_at
+
+
 def is_fresh(published_at: str | None, target_date: datetime, freshness_hours: int) -> bool:
     if published_at is None:
         return True

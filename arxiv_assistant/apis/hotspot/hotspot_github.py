@@ -105,6 +105,7 @@ def fetch_hotspot_items(
                     tags=list(row.get("topics") or []),
                     authors=[row.get("owner", {}).get("login", "")] if row.get("owner", {}).get("login") else [],
                     metadata={
+                        "fetched_at": target_date.isoformat(),
                         "stars": row.get("stargazers_count", 0),
                         "forks": row.get("forks_count", 0),
                         "language": row.get("language", ""),

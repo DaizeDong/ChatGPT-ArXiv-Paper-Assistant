@@ -535,6 +535,8 @@ def _fetch_playwright_source(source: dict[str, Any], target_date: datetime, fres
         published_at = row.get("published_at")
         if published_at and not is_fresh(published_at, target_date, freshness_hours):
             continue
+        # Standard HTML extraction may return old blog posts without dates;
+        # only skip if require_date is true (default).
         if not published_at and source.get("require_date", True):
             continue
         items.append(
@@ -628,7 +630,9 @@ def _fetch_playwright_llm_source(source: dict[str, Any], target_date: datetime, 
     # First try standard extraction
     rows = _extract_generic_blog_rows(page_html, source["url"])
     if len(rows) >= 2:
-        # Standard extraction worked; use it
+        # Standard extraction worked; use it.
+        # Don't assign target_date to dateless items here — generic HTML
+        # extraction may return old blog posts mixed with current ones.
         items: list[HotspotItem] = []
         for row in rows:
             published_at = row.get("published_at")
@@ -661,7 +665,7 @@ def _fetch_playwright_llm_source(source: dict[str, Any], target_date: datetime, 
             continue
         summary = clean_text(item.get("summary", ""))
         url = item.get("url", source["url"])
-        items.append(_build_item(source, title, summary, url, published_at=None))
+        items.append(_build_item(source, title, summary, url, published_at=target_date.isoformat()))
     return items[:8]
 
 

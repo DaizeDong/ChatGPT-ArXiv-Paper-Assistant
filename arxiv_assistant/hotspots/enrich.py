@@ -215,8 +215,16 @@ def enrich_items_batch(
     prompt_template = read_prompt("hotspot.enrich")
     enriched: list[EnrichedItem] = []
 
-    for batch_start in range(0, len(items), batch_size):
-        batch = items[batch_start : batch_start + batch_size]
+    # Sort items by primary entity so related items land in the same batch,
+    # maximizing LLM same_event_as cross-reference coverage.
+    def _entity_sort_key(item: HotspotItem) -> str:
+        entities = _heuristic_entities(item)
+        return entities[0]["name"].lower() if entities else item.source_name.lower()
+
+    sorted_items = sorted(items, key=_entity_sort_key)
+
+    for batch_start in range(0, len(sorted_items), batch_size):
+        batch = sorted_items[batch_start : batch_start + batch_size]
         items_text = _format_items_for_prompt(batch, offset=batch_start)
         user_prompt = prompt_template.replace("{items}", items_text)
 

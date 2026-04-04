@@ -627,9 +627,11 @@ def _is_item_on_date(item: HotspotItem, date_str: str) -> bool:
     from datetime import datetime, timedelta, timezone
     if not date_str:
         return True
-    if not item.published_at:
+    from arxiv_assistant.utils.hotspot.hotspot_sources import get_freshness_date
+    effective_date = get_freshness_date(item)
+    if not effective_date:
         return False  # no date → reject
-    dt = parse_datetime(item.published_at)
+    dt = parse_datetime(effective_date)
     if dt is None:
         return False  # unparseable → reject
     try:

@@ -1574,14 +1574,14 @@ def generate_daily_hotspot_report(output_root: str | Path, target_date: datetime
         print(f"Date filter: removed {pre_date - len(raw_items)} items without published_at ({len(raw_items)} remaining)")
 
     # Freshness gate: only keep items published within 1 day of target date.
-    from arxiv_assistant.utils.hotspot.hotspot_sources import parse_datetime
+    from arxiv_assistant.utils.hotspot.hotspot_sources import get_freshness_date, parse_datetime
     from datetime import timedelta, timezone as tz
     target_utc = target_date.replace(tzinfo=tz.utc) if target_date.tzinfo is None else target_date
     freshness_cutoff = target_utc - timedelta(hours=36)
     pre_fresh = len(raw_items)
     fresh_items = []
     for item in raw_items:
-        dt = parse_datetime(item.published_at)
+        dt = parse_datetime(get_freshness_date(item))
         if dt is None or dt >= freshness_cutoff:
             fresh_items.append(item)
     raw_items = fresh_items

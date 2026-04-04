@@ -2,8 +2,10 @@
 
 ### 2026-04-04
 
-- Enforced strict 1-day freshness for all hotspot sources: items without a publication date are dropped, and dated items older than 36 hours are filtered out.
-- Merged redundant "Source Feed" into topic-centric layout: topic-covered items and papers (shown in Paper Spotlight) are no longer duplicated; remaining items appear under "Other Updates".
+- Fixed date semantics for HF Papers and GitHub sources: introduced `fetched_at` metadata to distinguish trending date from original publish date, ensuring correct freshness evaluation.
+- Improved clustering quality: entity-sorted batching for better cross-batch `same_event_as` coverage, and added `SequenceMatcher` as a fallback similarity measure to catch synonym substitutions.
+- Replaced hardcoded scoring normalization with P50/P95/max dynamic 3-segment mapping for better score differentiation across varying data distributions.
+- Merged Source Feed into "Other Updates" in the frontend.
 
 ### 2026-04-02
 

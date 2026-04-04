@@ -11,9 +11,9 @@ from arxiv_assistant.utils.hotspot.hotspot_cluster import (
     SOURCE_ROLE_WEIGHTS,
     canonicalize_url,
     significant_title_tokens,
-    title_similarity,
 )
-from arxiv_assistant.utils.hotspot.hotspot_sources import parse_datetime
+from arxiv_assistant.utils.hotspot.hotspot_sources import get_freshness_date, parse_datetime
+from difflib import SequenceMatcher
 
 EVENT_TYPE_WEIGHTS = {
     "product_release": 2.0,
@@ -26,6 +26,21 @@ EVENT_TYPE_WEIGHTS = {
     "opinion": 0.3,
     "recap": 0.2,
     "other": 0.8,
+}
+
+# Key AI figures whose opinions carry higher weight
+KEY_FIGURES = {
+    "sam altman", "greg brockman", "mira murati",
+    "dario amodei", "daniela amodei",
+    "demis hassabis", "jeff dean", "sundar pichai",
+    "mark zuckerberg", "yann lecun",
+    "geoffrey hinton", "yoshua bengio", "andrew ng", "fei-fei li",
+    "jensen huang",
+    "satya nadella",
+    "arthur mensch",  # Mistral
+    "ilya sutskever",
+    "noam brown",  # OpenAI reasoning
+    "jan leike",
 }
 
 
@@ -159,9 +174,10 @@ def group_into_stories(enriched_items: list[EnrichedItem]) -> list[Story]:
                 if overlap:
                     uf.union(a, b)
 
-    # Pass 4: Title containment and similarity
-    # Pre-compute tokens
+    # Pass 4: Title containment, Jaccard, and sequence similarity
+    # Pre-compute tokens and lowered titles
     tokens_cache = [significant_title_tokens(ei.item.title) for ei in enriched_items]
+    titles_lower = [ei.item.title.lower().strip() for ei in enriched_items]
 
     for a in range(n):
         for b in range(a + 1, n):
@@ -173,19 +189,24 @@ def group_into_stories(enriched_items: list[EnrichedItem]) -> list[Story]:
 
             a_tokens = tokens_cache[a]
             b_tokens = tokens_cache[b]
-            if not a_tokens or not b_tokens:
-                continue
 
             # Title containment: smaller ⊂ larger ≥ 80%
-            smaller, larger = (a_tokens, b_tokens) if len(a_tokens) <= len(b_tokens) else (b_tokens, a_tokens)
-            if len(smaller) >= 2 and len(smaller & larger) / len(smaller) >= 0.80:
-                uf.union(a, b)
-                continue
+            if a_tokens and b_tokens:
+                smaller, larger = (a_tokens, b_tokens) if len(a_tokens) <= len(b_tokens) else (b_tokens, a_tokens)
+                if len(smaller) >= 2 and len(smaller & larger) / len(smaller) >= 0.80:
+                    uf.union(a, b)
+                    continue
 
-            # Title Jaccard similarity ≥ 0.55
-            intersection = len(a_tokens & b_tokens)
-            union_size = len(a_tokens | b_tokens)
-            if union_size > 0 and intersection / union_size >= 0.55:
+                # Title Jaccard similarity ≥ 0.55
+                intersection = len(a_tokens & b_tokens)
+                union_size = len(a_tokens | b_tokens)
+                if union_size > 0 and intersection / union_size >= 0.55:
+                    uf.union(a, b)
+                    continue
+
+            # SequenceMatcher: catches synonym substitutions that Jaccard misses
+            # e.g., "OpenAI acquires TBPN" vs "OpenAI buys tech podcast TBPN"
+            if SequenceMatcher(None, titles_lower[a], titles_lower[b]).ratio() >= 0.65:
                 uf.union(a, b)
 
     # Build groups
@@ -230,7 +251,12 @@ def group_into_stories(enriched_items: list[EnrichedItem]) -> list[Story]:
 
 
 def score_stories(stories: list[Story]) -> list[Story]:
-    """Score stories using 5-factor formula, sort descending."""
+    """Score stories using 5-factor formula with dynamic normalization."""
+    if not stories:
+        return stories
+
+    # First pass: compute raw scores
+    raw_scores: list[float] = []
     for story in stories:
         source_weight_sum = min(
             25.0,
@@ -241,13 +267,44 @@ def score_stories(stories: list[Story]) -> list[Story]:
         evidence_breadth = unique_source_ids * 1.5 + unique_source_types * 0.8
 
         avg_importance = sum(ei.importance for ei in story.items) / len(story.items)
-        event_weight = EVENT_TYPE_WEIGHTS.get(story.event_type, 0.8)
 
-        published_dates = [ei.item.published_at for ei in story.items if ei.item.published_at]
-        freshness = _freshness_weight(max(published_dates) if published_dates else None)
+        # Opinion differentiation: boost weight when key figures are involved
+        event_weight = EVENT_TYPE_WEIGHTS.get(story.event_type, 0.8)
+        if story.event_type == "opinion" and story.entity_names & KEY_FIGURES:
+            event_weight = 1.2
+
+        # Use fetched_at for freshness when available (trending date > creation date)
+        freshness_dates = [get_freshness_date(ei.item) for ei in story.items]
+        freshness_dates = [d for d in freshness_dates if d]
+        freshness = _freshness_weight(max(freshness_dates) if freshness_dates else None)
 
         raw = (source_weight_sum + evidence_breadth + avg_importance) * event_weight * freshness
-        story.score = round(min(10.0, raw / 5.5), 3)
+        raw_scores.append(raw)
+
+    # Dynamic normalization: linear mapping with full-range discrimination.
+    # P50 → 5.0, P95 → 9.5, max → 10.0. This ensures differentiation at every level.
+    sorted_raw = sorted(raw_scores)
+    n_raw = len(sorted_raw)
+    p50 = sorted_raw[max(0, int(n_raw * 0.5) - 1)]
+    p95 = sorted_raw[max(0, int(n_raw * 0.95) - 1)]
+
+    for story, raw in zip(stories, raw_scores):
+        if p95 <= p50 or n_raw < 3:
+            # Degenerate case: all scores similar or too few stories
+            story.score = round(min(10.0, max(1.0, raw / max(p50 / 5.0, 0.5))), 3)
+        elif raw <= p50:
+            # Bottom half: map [0, p50] → [1.0, 5.0]
+            story.score = round(max(1.0, 1.0 + 4.0 * raw / p50), 3)
+        elif raw <= p95:
+            # Upper half: map [p50, p95] → [5.0, 9.5]
+            story.score = round(5.0 + 4.5 * (raw - p50) / (p95 - p50), 3)
+        else:
+            # Top 5%: map [p95, max] → [9.5, 10.0]
+            raw_max = sorted_raw[-1]
+            if raw_max > p95:
+                story.score = round(9.5 + 0.5 * (raw - p95) / (raw_max - p95), 3)
+            else:
+                story.score = 10.0
 
     stories.sort(key=lambda s: s.score, reverse=True)
     return stories

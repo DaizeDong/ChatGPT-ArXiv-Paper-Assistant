@@ -6,7 +6,7 @@ import re
 from datetime import datetime
 
 from arxiv_assistant.utils.hotspot.hotspot_schema import HotspotItem
-from arxiv_assistant.utils.hotspot.hotspot_sources import clip_text, fetch_text, parse_datetime
+from arxiv_assistant.utils.hotspot.hotspot_sources import clip_text, fetch_text
 
 HF_TRENDING_URL = "https://huggingface.co/papers/trending"
 DAILY_PAPERS_PATTERN = re.compile(
@@ -23,7 +23,6 @@ def _parse_daily_papers(page_html: str) -> list[dict]:
     return payload.get("dailyPapers", [])
 
 
-MAX_PAPER_AGE_DAYS = 1
 MIN_UPVOTES = 5
 
 
@@ -37,7 +36,6 @@ def fetch_hotspot_items(
     page_html = fetch_text(HF_TRENDING_URL)
     daily_papers = _parse_daily_papers(page_html)
     items: list[HotspotItem] = []
-    skipped_old = 0
     skipped_upvotes = 0
 
     for row in daily_papers:
@@ -47,18 +45,6 @@ def fetch_hotspot_items(
             continue
         published_at = paper.get("publishedAt") or target_date.isoformat()
         upvotes = int(paper.get("upvotes", 0) or 0)
-
-        # Age filter: skip papers older than MAX_PAPER_AGE_DAYS
-        pub_dt = parse_datetime(published_at)
-        if pub_dt:
-            from datetime import UTC, timedelta
-            if pub_dt.tzinfo is None:
-                pub_dt = pub_dt.replace(tzinfo=UTC)
-            target_tz = target_date if target_date.tzinfo else target_date.replace(tzinfo=UTC)
-            age_days = (target_tz - pub_dt).days
-            if age_days > MAX_PAPER_AGE_DAYS:
-                skipped_old += 1
-                continue
 
         # Upvote filter: skip low-engagement papers
         if upvotes < MIN_UPVOTES:
@@ -90,6 +76,7 @@ def fetch_hotspot_items(
                 tags=list(paper.get("ai_keywords") or []),
                 authors=[author.get("name", "") for author in paper.get("authors", []) if author.get("name")],
                 metadata={
+                    "fetched_at": target_date.isoformat(),
                     "arxiv_id": paper_id,
                     "upvotes": upvotes,
                     "daily_score": upvotes,
@@ -107,7 +94,6 @@ def fetch_hotspot_items(
         if len(items) >= result_limit:
             break
 
-    if skipped_old > 0 or skipped_upvotes > 0:
-        print(f"HF Papers: kept {len(items)}, skipped {skipped_old} old (>{MAX_PAPER_AGE_DAYS}d), "
-              f"{skipped_upvotes} low-upvotes (<{MIN_UPVOTES})")
+    if skipped_upvotes > 0:
+        print(f"HF Papers: kept {len(items)}, skipped {skipped_upvotes} low-upvotes (<{MIN_UPVOTES})")
     return items

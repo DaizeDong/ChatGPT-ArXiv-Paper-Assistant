@@ -34,11 +34,6 @@ function TopicItem({ topic }: { topic: CompactTopic }) {
         </div>
       </div>
       {topic.summary_short ? <p className="category-topic-summary">{tz(topic.summary_short, any.summary_short_zh as string)}</p> : null}
-      {topic.why_it_matters ? (
-        <p className="category-topic-why">
-          <strong>{t("label.why")}</strong> {tz(topic.why_it_matters, any.why_it_matters_zh as string)}
-        </p>
-      ) : null}
       {topic.evidence.length > 0 ? (
         <div className="category-topic-evidence">
           {topic.evidence.map((ev, i) => (

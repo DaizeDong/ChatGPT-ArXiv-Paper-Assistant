@@ -1,6 +1,8 @@
 import type { PropsWithChildren } from "react";
 import { useEffect, useState } from "react";
 
+import { LangSwitch } from "./LangSwitch";
+
 const MODE_KEY = "arxiv_site_color_mode";
 
 export function PageShell({ children }: PropsWithChildren) {
@@ -24,10 +26,13 @@ export function PageShell({ children }: PropsWithChildren) {
 
   return (
     <div className="app-shell">
-      <button className="theme-toggle" type="button" aria-label="Toggle dark mode" title="Toggle dark mode" onClick={toggleColorMode}>
-        <span className="theme-toggle-track" />
-        <span className="theme-toggle-thumb">{colorMode === "dark" ? "\u263E" : "\u2600"}</span>
-      </button>
+      <div className="floating-controls">
+        <LangSwitch />
+        <button className="theme-toggle" type="button" aria-label="Toggle dark mode" title="Toggle dark mode" onClick={toggleColorMode}>
+          <span className="theme-toggle-track" />
+          <span className="theme-toggle-thumb">{colorMode === "dark" ? "\u263E" : "\u2600"}</span>
+        </button>
+      </div>
       <main className="page-content">{children}</main>
     </div>
   );

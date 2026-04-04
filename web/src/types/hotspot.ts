@@ -48,6 +48,10 @@ export type SourceSectionItem = {
   tags: string[];
   authors: string[];
   signal_score: number;
+  spotlight_kinds?: string[];
+  spotlight_primary_kind?: string;
+  spotlight_primary_label?: string;
+  spotlight_comment?: string;
   signals: {
     activity: number;
     github_stars: number;
@@ -74,6 +78,7 @@ export type CompactTopic = {
   category: string;
   summary_short: string;
   why_it_matters: string;
+  key_takeaways: string[];
   scores: {
     final: number;
     quality: number;
@@ -81,7 +86,9 @@ export type CompactTopic = {
     importance: number;
     occurrence: number;
     display_priority: number;
+    confidence: number;
   };
+  source_tier: string;
   source_names: string[];
   source_roles: string[];
   source_types: string[];
@@ -137,6 +144,7 @@ export type DailyHotspotPayload = {
   source_stats: Record<string, number>;
   source_section_counts: Record<string, number>;
   source_sections: SourceSection[];
+  paper_spotlight: SourceSection[];
   topic_summary: Array<{
     topic_id: string;
     slug: string;

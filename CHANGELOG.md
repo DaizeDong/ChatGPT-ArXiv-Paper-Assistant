@@ -1,8 +1,20 @@
 # Changelog
 
+### 2026-04-04
+
+- Fixed date semantics for HF Papers and GitHub sources: introduced `fetched_at` metadata to distinguish trending date from original publish date, ensuring correct freshness evaluation.
+- Improved clustering quality: entity-sorted batching for better cross-batch `same_event_as` coverage, and added `SequenceMatcher` as a fallback similarity measure to catch synonym substitutions.
+- Replaced hardcoded scoring normalization with P50/P95/max dynamic 3-segment mapping for better score differentiation across varying data distributions.
+- Merged Source Feed into "Other Updates" in the frontend.
+
+### 2026-04-02
+
+- Repositioned Daily AI Hotspots as an artifact-centric executive brief: added artifact detection, substance penalty, rebalanced source weights and scoring toward official/research sources, and tightened screening to drop community-only noise.
+
 ### 2026-04-01
 
 - Reformated the structure for daily arXiv papers by grouping them into multiple topics.
+- Routed daily hotspot-worthy papers into the Daily AI Hotspots paper spotlight section.
 
 ### 2026-03-23
 

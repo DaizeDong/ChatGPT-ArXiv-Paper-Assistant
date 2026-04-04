@@ -49,7 +49,7 @@ class TestHotspotWebData(unittest.TestCase):
                 {
                     "TOPIC_ID": "cursor-news",
                     "HEADLINE": "Cursor Composer 2 debate",
-                    "PRIMARY_CATEGORY": "Community Signal",
+                    "PRIMARY_CATEGORY": "Industry Update",
                     "DISPLAY_PRIORITY": 8.2,
                     "FINAL_SCORE": 8.0,
                     "HEAT": 9,
@@ -149,12 +149,12 @@ class TestHotspotWebData(unittest.TestCase):
         self.assertEqual(payload["usage"]["llm"]["prompt_tokens"], 1200)
         self.assertEqual(payload["usage"]["external"]["x_official"]["requests"], 8)
         section_lookup = {section["slug"]: section for section in payload["source_sections"]}
-        self.assertEqual(section_lookup["x-buzz"]["count"], 1)
+        self.assertEqual(section_lookup["industry"]["count"], 1)
         self.assertEqual(section_lookup["papers"]["count"], 1)
         self.assertEqual(section_lookup["official"]["count"], 1)
-        self.assertEqual(section_lookup["blogs"]["count"], 0)
-        x_item = section_lookup["x-buzz"]["items"][0]
-        self.assertEqual(x_item["topic_refs"][0]["topic_id"], "cursor-news")
+        industry_item = section_lookup["industry"]["items"][0]
+        self.assertEqual(industry_item["topic_refs"][0]["topic_id"], "cursor-news")
+        self.assertEqual(payload["paper_spotlight"], [])
         featured = payload["featured_topics"][0]
         self.assertEqual(featured["headline"], "Cursor Composer 2 debate")
         self.assertEqual(featured["route"], "/hot/2026-03-21/topic/cursor-composer-2-debate/")
@@ -172,7 +172,7 @@ class TestHotspotWebData(unittest.TestCase):
                 {
                     "TOPIC_ID": "cursor-news",
                     "HEADLINE": "Cursor Composer 2 debate",
-                    "PRIMARY_CATEGORY": "Community Signal",
+                    "PRIMARY_CATEGORY": "Industry Update",
                     "DISPLAY_PRIORITY": 8.3,
                     "FINAL_SCORE": 8.0,
                     "HEAT": 9,
@@ -290,7 +290,54 @@ class TestHotspotWebData(unittest.TestCase):
         payload = build_daily_hotspot_web_payload(report, raw_items)
         ordered_slugs = [section["slug"] for section in payload["source_sections"] if section["count"] > 0]
 
-        self.assertEqual(ordered_slugs, ["x-buzz", "official", "github", "papers"])
+        self.assertEqual(ordered_slugs, ["official", "papers", "github", "industry"])
+
+    def test_daily_payload_exposes_paper_spotlight_sections(self) -> None:
+        report = {
+            "date": "2026-04-01",
+            "generated_at": "2026-04-01T12:00:00+00:00",
+            "mode": "heuristic",
+            "summary": "Daily summary.",
+            "totals": {"raw_items": 1, "clusters": 1, "candidate_clusters": 1, "radar_clusters": 1, "paper_spotlight_items": 1},
+            "costs": {"prompt": 0.0, "completion": 0.0, "total": 0.0},
+            "source_stats": {"local_hotspot_papers": 1},
+            "featured_topics": [],
+            "category_sections": [],
+            "long_tail_sections": [],
+            "watchlist": [],
+            "x_buzz": [],
+        }
+        raw_items = [
+            HotspotItem(
+                source_id="local_hotspot_papers",
+                source_name="Daily Hotspot Papers",
+                source_role="paper_trending",
+                source_type="paper",
+                title="Frontier paper",
+                summary="A frontier-opening paper.",
+                url="https://arxiv.org/abs/2604.00001",
+                canonical_url="https://arxiv.org/abs/2604.00001",
+                metadata={
+                    "arxiv_id": "2604.00001",
+                    "daily_score": 18,
+                    "relevance": 8,
+                    "novelty": 9,
+                    "spotlight_kinds": ["new_frontier"],
+                    "spotlight_primary_kind": "new_frontier",
+                    "spotlight_primary_label": "New Frontier Papers",
+                    "spotlight_comment": "Likely opens a new direction.",
+                    "primary_topic_id": "architecture_training",
+                    "primary_topic_label": "Architecture and Training Dynamics",
+                },
+            )
+        ]
+
+        payload = build_daily_hotspot_web_payload(report, raw_items)
+
+        self.assertEqual(payload["meta"]["counts"]["paper_spotlight"], 1)
+        self.assertEqual(len(payload["paper_spotlight"]), 1)
+        self.assertEqual(payload["paper_spotlight"][0]["label"], "New Frontier Papers")
+        self.assertEqual(payload["paper_spotlight"][0]["items"][0]["spotlight_primary_kind"], "new_frontier")
 
     def test_write_hotspot_web_data_builds_root_month_and_year_indexes(self) -> None:
         with tempfile.TemporaryDirectory() as tmp_dir:
@@ -325,7 +372,7 @@ class TestHotspotWebData(unittest.TestCase):
                         {
                             "TOPIC_ID": f"topic-{date}",
                             "HEADLINE": f"Headline {date}",
-                            "PRIMARY_CATEGORY": "Community Signal",
+                            "PRIMARY_CATEGORY": "Industry Update",
                             "DISPLAY_PRIORITY": 7.0,
                             "FINAL_SCORE": 7.0,
                             "HEAT": 7,
@@ -357,11 +404,11 @@ class TestHotspotWebData(unittest.TestCase):
             self.assertEqual(month_index["month"], "2026-03")
             self.assertEqual(len(month_index["days"]), 2)
             self.assertEqual(month_index["totals"]["days"], 2)
-            self.assertEqual(month_index["source_section_totals"]["x-buzz"], 2)
+            self.assertEqual(month_index["source_section_totals"]["industry"], 2)
             self.assertEqual(year_index["year"], "2026")
             self.assertEqual(len(year_index["months"]), 1)
             self.assertEqual(year_index["totals"]["days"], 2)
-            self.assertEqual(year_index["months"][0]["source_section_totals"]["x-buzz"], 2)
+            self.assertEqual(year_index["months"][0]["source_section_totals"]["industry"], 2)
             self.assertEqual(latest_daily["meta"]["previous_date"], "2026-03-20")
             self.assertEqual(latest_daily["meta"]["paper_routes"]["day"], "../../archive/2026-03/21/")
             self.assertEqual(month_index["paper_routes"]["month"], "../../archive/2026-03/")
@@ -430,10 +477,10 @@ class TestHotspotWebData(unittest.TestCase):
         ]
 
         payload = build_daily_hotspot_web_payload(report, raw_items)
-        blogs_section = next(section for section in payload["source_sections"] if section["slug"] == "blogs")
+        industry_section = next(section for section in payload["source_sections"] if section["slug"] == "industry")
 
-        self.assertEqual(blogs_section["items"][0]["title"], "Google bets on vibe design with Stitch")
-        self.assertGreater(blogs_section["items"][0]["signal_score"], blogs_section["items"][1]["signal_score"])
+        self.assertEqual(industry_section["items"][0]["title"], "Google bets on vibe design with Stitch")
+        self.assertGreater(industry_section["items"][0]["signal_score"], industry_section["items"][1]["signal_score"])
 
     def test_topic_summary_prefers_cross_source_topics_over_isolated_papers(self) -> None:
         report = {

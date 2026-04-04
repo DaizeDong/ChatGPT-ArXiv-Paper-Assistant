@@ -2,12 +2,12 @@ import type { SourceSection, SourceSectionItem } from "../types/hotspot";
 
 export type DensityMode = "compact" | "comfortable";
 export const SOURCE_FAMILY_LABELS: Record<string, string> = {
-  "x-buzz": "X / Buzz",
-  blogs: "Blogs / Newsletters",
   official: "Official Updates",
-  papers: "Papers",
+  "market-signals": "Market Signals",
+  analysis: "Expert Analysis",
+  papers: "Research Papers",
   github: "GitHub / Tools",
-  discussions: "Discussions",
+  industry: "Industry News",
 };
 
 const SOURCE_ROLE_LABELS: Record<string, string> = {
@@ -78,6 +78,8 @@ export function matchesSearch(item: SourceSectionItem, query: string) {
     item.source_name,
     item.source_role,
     item.source_type,
+    item.spotlight_primary_label ?? "",
+    item.spotlight_comment ?? "",
     item.tags.join(" "),
     item.topic_refs.map((topic) => topic.headline).join(" "),
   ]
@@ -86,11 +88,14 @@ export function matchesSearch(item: SourceSectionItem, query: string) {
   return haystack.includes(query);
 }
 
-export function filterSectionsBySearch(sections: SourceSection[], searchQuery: string) {
+export function filterSectionsBySearch(sections: SourceSection[], searchQuery: string, excludeTopicCovered = false) {
   const query = searchQuery.trim().toLowerCase();
   return sections
     .map((section) => {
-      const filteredItems = section.items.filter((item) => matchesSearch(item, query));
+      let filteredItems = section.items.filter((item) => matchesSearch(item, query));
+      if (excludeTopicCovered) {
+        filteredItems = filteredItems.filter((item) => !item.topic_refs.length);
+      }
       return { ...section, filteredItems };
     })
     .filter((section) => section.filteredItems.length > 0);
@@ -98,12 +103,12 @@ export function filterSectionsBySearch(sections: SourceSection[], searchQuery: s
 
 export function defaultVisibleCount(section: SourceSection, density: DensityMode) {
   const compactMap: Record<string, number> = {
-    "x-buzz": 16,
-    blogs: 18,
     official: 10,
-    papers: 18,
-    github: 18,
-    discussions: 12,
+    "market-signals": 6,
+    analysis: 8,
+    papers: 12,
+    github: 6,
+    industry: 6,
   };
   const compactDefault = compactMap[section.slug] ?? 12;
   return density === "compact" ? compactDefault : Math.max(8, compactDefault - 4);

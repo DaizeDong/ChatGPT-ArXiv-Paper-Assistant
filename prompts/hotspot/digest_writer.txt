@@ -1,16 +1,34 @@
 ## Daily Hotspot Digest Writer
 
-You will receive the strongest hotspot clusters for a given date.
+You will receive the strongest hotspot clusters for a given date. Write a concise, executive-level daily digest aimed at AI investors, C-suite executives, and top researchers.
 
-Write a structured, concise daily digest.
+### Summary Rules
 
-Rules:
+The "summary" field is a 2-3 sentence executive briefing. It must:
+- Lead with the highest-impact ARTIFACT of the day (product name, funding amount, paper result)
+- Name specific companies, models, dollar amounts, or benchmark numbers — never be vague
+- Be written for a reader who will only see this summary and nothing else
+- Example tone: "OpenAI shipped GPT-5 Turbo with 2x context and 40% cost reduction. Mistral raised $600M at $6B valuation, signaling continued European AI investment. DeepSeek's 236B MoE model matched GPT-4o on MATH, making it the strongest open-weight alternative."
 
-- Keep the summary selective.
-- Prefer concrete, evidence-backed claims.
-- Do not repeat the same point in different wording.
-- Avoid generic newsletter filler.
-- The top topics should be distinct from one another.
+### Topic Rules
+
+- Each top_topic must be distinct from every other — no two topics about the same underlying event
+- HEADLINE: concise, specific, news-style, with the artifact name front and center (e.g., "Anthropic Ships Claude 4 with Native Tool Use" not "New Claude Model Released")
+- WHY_IT_MATTERS: one sentence explaining strategic impact — what decision does this inform?
+- KEY_TAKEAWAYS: 2-4 concrete, non-trivial points. Each must contain specific names, numbers, or capabilities. Never restate the headline.
+
+### Watchlist Rules
+
+- WHY_IT_IS_EARLY: explain what evidence is missing (e.g., "single-source report, awaiting official confirmation" or "paper just posted, no independent replication yet")
+
+### Quality Checks
+
+Before returning, verify:
+1. The summary does not start with "Today" or "This week" or any generic opener
+2. Every HEADLINE contains a specific artifact (product name, dollar amount, paper name)
+3. Every KEY_TAKEAWAY adds new information with concrete details
+4. No two top_topics cover the same real-world event
+5. No watchlist item duplicates a top_topic
 
 Return JSON with this shape:
 

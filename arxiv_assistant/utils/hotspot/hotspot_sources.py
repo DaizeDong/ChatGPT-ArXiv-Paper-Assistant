@@ -142,6 +142,20 @@ def parse_datetime(value: str | None) -> datetime | None:
     return None
 
 
+def get_freshness_date(item: "HotspotItem") -> str | None:
+    """Return the most appropriate date for freshness evaluation.
+
+    Uses metadata['fetched_at'] (trending/fetch date) when available,
+    falling back to published_at. This ensures items like HF trending papers
+    and GitHub trending repos use their fetch date rather than their original
+    publication/creation date for freshness checks.
+    """
+    fetched_at = (item.metadata or {}).get("fetched_at")
+    if fetched_at:
+        return fetched_at
+    return item.published_at
+
+
 def is_fresh(published_at: str | None, target_date: datetime, freshness_hours: int) -> bool:
     if published_at is None:
         return True
@@ -162,3 +176,88 @@ def clip_text(text: str | None, limit: int = 500) -> str:
     if len(normalized) <= limit:
         return normalized
     return normalized[: limit - 3].rstrip() + "..."
+
+
+# --- URL-title consistency validation ---
+
+import re as _re
+
+_TRUSTED_URL_HOSTS = {
+    "arxiv.org", "huggingface.co", "openai.com", "anthropic.com",
+    "blog.google", "deepmind.google", "ai.meta.com", "microsoft.com",
+    "nvidia.com", "deeplearning.ai", "x.com", "twitter.com",
+}
+
+_URL_STOPWORDS = {
+    "the", "and", "for", "are", "with", "that", "this", "from", "very",
+    "good", "more", "about", "just", "some", "been", "have", "will",
+    "new", "can", "all", "not", "but", "was", "its", "has", "how",
+    "into", "than", "your", "models", "model", "code", "open", "source",
+}
+
+
+def url_title_consistent(title: str, url: str) -> bool:
+    """Check if a URL is plausibly related to the given title.
+
+    Returns True (pass) for trusted domains, short titles, or titles with
+    keyword overlap in the URL path.  Returns False when the URL has no
+    detectable relation to the title — a strong signal of mis-extraction.
+    """
+    if not url or not title:
+        return True
+
+    parsed = urlsplit(url)
+    host = parsed.netloc.lower()
+
+    # Trusted domains always pass
+    if any(trusted in host for trusted in _TRUSTED_URL_HOSTS):
+        return True
+
+    # Reddit URLs encode the title in the slug — always pass
+    if "reddit.com" in host:
+        return True
+
+    # Titles with significant non-ASCII content (CJK, etc.) can't be
+    # checked against URL slugs — always pass them through.
+    non_ascii = sum(1 for c in title if ord(c) > 127)
+    if non_ascii >= len(title) * 0.3:
+        return True
+
+    # Extract significant title tokens (>= 3 chars, not stopwords)
+    title_tokens = {
+        t for t in _re.findall(r"[a-z0-9]+", title.lower())
+        if len(t) >= 3 and t not in _URL_STOPWORDS
+    }
+    if len(title_tokens) < 2:
+        return True  # Too little info to judge
+
+    # Also check stemmed forms (strip trailing 's' for plural)
+    title_stems = title_tokens | {t.rstrip("s") for t in title_tokens if len(t) >= 4}
+
+    # Extract tokens from URL path (repo name, article slug, etc.)
+    path_tokens = set(_re.findall(r"[a-z0-9]+", parsed.path.lower()))
+    url_full = f"{host}{parsed.path}".lower()
+
+    # Check host for concatenated names (e.g., artificialintelligencemadesimple.com)
+    host_raw = host.replace("www.", "")
+    if any(t in host_raw for t in title_tokens if len(t) >= 4):
+        return True
+
+    # Check if any longer title token appears as substring in full URL
+    if any(t in url_full for t in title_stems if len(t) >= 5):
+        return True
+
+    # For GitHub: check repo name and owner
+    if "github.com" in host:
+        parts = parsed.path.strip("/").split("/")
+        if len(parts) >= 2:
+            repo_tokens = set(_re.findall(r"[a-z0-9]+", parts[1].lower()))
+            owner_tokens = set(_re.findall(r"[a-z0-9]+", parts[0].lower()))
+            combined = repo_tokens | owner_tokens
+            if title_tokens & combined:
+                return True
+        return False  # GitHub URL with no title overlap → mismatch
+
+    # General check: any title token in URL path or host tokens
+    host_tokens = set(_re.findall(r"[a-z0-9]+", host))
+    return bool(title_tokens & (path_tokens | host_tokens))

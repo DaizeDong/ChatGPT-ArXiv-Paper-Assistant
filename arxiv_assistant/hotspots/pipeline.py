@@ -12,20 +12,23 @@ from zoneinfo import ZoneInfo
 REPO_ROOT = Path(__file__).resolve().parents[2]
 
 from arxiv_assistant.apis.hotspot.hotspot_ainews import fetch_hotspot_items as fetch_ainews_items
+from arxiv_assistant.apis.hotspot.hotspot_analysis_feeds import fetch_hotspot_items as fetch_analysis_feed_items
 from arxiv_assistant.apis.hotspot.hotspot_github import fetch_hotspot_items as fetch_github_items
 from arxiv_assistant.apis.hotspot.hotspot_hf_papers import fetch_hotspot_items as fetch_hf_items
 from arxiv_assistant.apis.hotspot.hotspot_hn import fetch_hotspot_items as fetch_hn_items
 from arxiv_assistant.apis.hotspot.hotspot_local_papers import fetch_hotspot_items as fetch_local_paper_items
 from arxiv_assistant.apis.hotspot.hotspot_official_blogs import fetch_hotspot_items as fetch_official_blog_items
+from arxiv_assistant.apis.hotspot.hotspot_reddit import fetch_hotspot_items as fetch_reddit_items
 from arxiv_assistant.apis.hotspot.hotspot_roundups import fetch_hotspot_items as fetch_roundup_items
 from arxiv_assistant.apis.hotspot.hotspot_x_ainews import fetch_hotspot_items as fetch_x_ainews_items
 from arxiv_assistant.apis.hotspot.hotspot_x_official import fetch_hotspot_items as fetch_x_official_items
 from arxiv_assistant.apis.hotspot.hotspot_x_paperpulse import fetch_hotspot_items as fetch_x_paperpulse_items
-from arxiv_assistant.filters.filter_hotspots import build_candidate_topics, heuristic_screen_clusters, screen_clusters_with_openai, synthesize_digest_with_openai
+from arxiv_assistant.filters.filter_hotspots import synthesize_digest_with_openai
+from arxiv_assistant.hotspots.enrich import enrich_items_batch, enrich_items_heuristic
+from arxiv_assistant.hotspots.story import Story, group_into_stories, score_stories, select_and_categorize
 from arxiv_assistant.renderers.hotspot.render_hot_daily import render_hot_daily_md
-from arxiv_assistant.utils.hotspot.hotspot_cluster import build_hotspot_clusters
 from arxiv_assistant.utils.hotspot.hotspot_config import build_hotspot_paths, ensure_parent_dirs
-from arxiv_assistant.utils.hotspot.hotspot_schema import HotspotCluster, HotspotItem
+from arxiv_assistant.utils.hotspot.hotspot_schema import HotspotItem
 from arxiv_assistant.utils.hotspot.hotspot_sources import api_usage_scope, reset_api_usage, snapshot_api_usage
 from arxiv_assistant.utils.prompt_loader import read_prompt
 from arxiv_assistant.utils.hotspot.hotspot_web_data import write_hotspot_web_data
@@ -45,19 +48,66 @@ APP_TIMEZONE = ZoneInfo("America/New_York")
 DAY_OUTPUT_PATTERN = re.compile(r"(?P<year>\d{4})-(?P<month>\d{2})-(?P<day>\d{2})-output\.json$")
 SOCIAL_PRIMARY_ROLES = {"community_heat"}
 SOCIAL_BACKFILL_ROLES = {"headline_consensus", "builder_momentum", "hn_discussion"}
+PAPER_SPOTLIGHT_LABELS = {
+    "new_frontier": "New Frontier Papers",
+    "daily_hot": "Daily Hot Papers",
+}
+PAPER_SPOTLIGHT_DESCRIPTIONS = {
+    "new_frontier": "Papers that appear to open a genuinely new direction, paradigm, or field.",
+    "daily_hot": "Papers that feel broadly important to the day and belong in the hotspot paper feed.",
+}
 SOCIAL_HOST_SNIPPETS = ("x.com", "twitter.com", "reddit.com", "news.ycombinator.com")
 CATEGORY_DISPLAY_ORDER = [
     "Product Release",
-    "Tooling",
+    "Market Signal",
     "Industry Update",
+    "Tooling",
     "Research",
-    "Community Signal",
 ]
 GENERIC_DISPLAY_TITLES = {
     "information collection notice",
     "privacy policy",
     "terms of service",
 }
+
+_LOW_QUALITY_DISPLAY_RE = [
+    re.compile(r"^quoting\s+", re.I),
+    re.compile(r"sponsors?-only newsletter", re.I),
+    re.compile(r"^can we block\b", re.I),
+    re.compile(r"^help me\b", re.I),
+    re.compile(r"^what plugins\b", re.I),
+    re.compile(r"\bsubscribe\b.*\bnewsletter\b", re.I),
+    re.compile(r"^\d+\s+hours?\s+ago\b", re.I),
+    re.compile(r"^\[?\s*(?:removed|deleted)\s*\]?$", re.I),
+    re.compile(r"\bwhat are your wishes\b", re.I),
+    re.compile(r"\breacts? to\b.*\bleak\b", re.I),
+    re.compile(r"\bin big trouble\b", re.I),
+    re.compile(r"\bdead zone\b", re.I),
+    re.compile(r"\bjust leaked\b", re.I),
+    re.compile(r"\bsource (?:just )?leaked\b", re.I),
+    re.compile(r"\b(?:code|source)\s+leak\b", re.I),
+    re.compile(r"\bleak\b.*\b(?:blueprint|orchestration|system prompt)\b", re.I),
+    re.compile(r"^\[P\]\s+", re.I),
+    re.compile(r"·\s*Hugging\s*Face\s*$", re.I),
+    re.compile(r"\bgot leaked\b", re.I),
+    re.compile(r"^\[D\]\s+", re.I),
+    re.compile(r"\bcourse\b.*\b(?:starts?|open to|register)\b", re.I),
+    re.compile(r"\bwhat do you think\b", re.I),
+    re.compile(r"\bhot take\b", re.I),
+    re.compile(r"\bunpopular opinion\b", re.I),
+    re.compile(r"\bam i the only\b", re.I),
+    re.compile(r"\bweekly (?:digest|roundup|wrap)\b", re.I),
+    re.compile(r"\btop \d+ (?:tools|apps|stories)\b", re.I),
+    re.compile(r"^[A-Za-z0-9_-]+/[A-Za-z0-9_-]+$"),  # GitHub repo names like "user/repo"
+    re.compile(r"\b\d{4}/\d{2}/\d{2}\b"),  # Stale date patterns like "2024/07/25"
+    re.compile(r"^(?:Mac|Android|iOS|Windows)\s+(?:适用|扫码|下载|available)", re.I),  # App download links
+]
+
+
+def _is_low_quality_display_title(title: str) -> bool:
+    if len(title) < 8:
+        return True
+    return any(p.search(title) for p in _LOW_QUALITY_DISPLAY_RE)
 AI_RELEVANCE_TERMS = {
     "ai",
     "llm",
@@ -92,6 +142,8 @@ SOURCE_USAGE_META = {
     "ainews": {"provider": "AINews RSS", "billing_model": "free"},
     "official_blogs": {"provider": "Official blogs", "billing_model": "free"},
     "roundup_sites": {"provider": "Roundup sites", "billing_model": "free"},
+    "analysis_feeds": {"provider": "Analysis RSS feeds", "billing_model": "free"},
+    "reddit": {"provider": "Reddit JSON API", "billing_model": "free"},
     "x_ainews_twitter": {"provider": "AINews Twitter recap", "billing_model": "free"},
     "x_paperpulse": {"provider": "PaperPulse", "billing_model": "free"},
     "x_official": {"provider": "X API", "billing_model": "quota"},
@@ -193,7 +245,7 @@ def _x_buzz_item_score(item: HotspotItem, linked_topic: str) -> float:
     return score
 
 
-def _build_x_buzz_items(
+def _build_market_signal_items(
     raw_items: list[HotspotItem],
     top_topics: list[dict[str, Any]],
     watchlist: list[dict[str, Any]],
@@ -201,6 +253,9 @@ def _build_x_buzz_items(
     target_count: int = 5,
     min_count: int = 3,
 ) -> list[dict[str, Any]]:
+    """Build market signal items: only items with artifact patterns or from official/editorial sources."""
+    from arxiv_assistant.filters.filter_hotspots import _item_engineering_score, _item_substance_score, ARTIFACT_PATTERNS
+
     topic_lookup: dict[str, str] = {}
     for topic in top_topics + watchlist:
         topic_title = topic.get("HEADLINE") or topic.get("title") or ""
@@ -212,13 +267,36 @@ def _build_x_buzz_items(
             if title:
                 topic_lookup[title] = topic_title
 
-    primary_candidates: list[tuple[float, dict[str, Any]]] = []
-    backfill_candidates: list[tuple[float, dict[str, Any]]] = []
+    candidates: list[tuple[float, dict[str, Any]]] = []
     seen_keys: set[tuple[str, str]] = set()
 
+    # Roles that can contribute market signals
+    signal_roles = SOCIAL_PRIMARY_ROLES | SOCIAL_BACKFILL_ROLES | {"official_news", "editorial_depth"}
+
     for item in raw_items:
-        if item.source_role not in SOCIAL_PRIMARY_ROLES | SOCIAL_BACKFILL_ROLES:
+        if item.source_role not in signal_roles:
             continue
+        # Filter out engineering discussion and substance issues
+        eng_score = _item_engineering_score(item.title, item.summary or "", item.source_role)
+        if eng_score >= 0.45:
+            continue
+        sub_score = _item_substance_score(item.title, item.summary or "", item.source_role)
+        if sub_score >= 0.4:
+            continue
+        if _is_low_quality_display_title(item.title):
+            continue
+
+        # Must have artifact pattern match OR be from official/editorial source
+        text = f"{item.title} {item.summary or ''}".lower()
+        has_artifact = any(
+            p.search(text)
+            for patterns in ARTIFACT_PATTERNS.values()
+            for p in patterns
+        )
+        is_authoritative = item.source_role in {"official_news", "editorial_depth"}
+        if not has_artifact and not is_authoritative:
+            continue
+
         url_key = item.url.strip()
         title_key = item.title.strip().lower()
         dedupe_key = (url_key, title_key)
@@ -235,27 +313,96 @@ def _build_x_buzz_items(
             "source_role": item.source_role,
             "linked_topic": linked_topic,
         }
-        ranked = (_x_buzz_item_score(item, linked_topic), payload)
-        if item.source_role in SOCIAL_PRIMARY_ROLES:
-            primary_candidates.append(ranked)
-        else:
-            backfill_candidates.append(ranked)
+        candidates.append((_x_buzz_item_score(item, linked_topic), payload))
 
     selected: list[dict[str, Any]] = []
-    for _, payload in sorted(primary_candidates, key=lambda row: row[0], reverse=True):
+    for _, payload in sorted(candidates, key=lambda row: row[0], reverse=True):
+        if any(existing["url"] == payload["url"] and existing["title"] == payload["title"] for existing in selected):
+            continue
         selected.append(payload)
         if len(selected) >= target_count:
-            return selected
-
-    if len(selected) < min_count:
-        for _, payload in sorted(backfill_candidates, key=lambda row: row[0], reverse=True):
-            if any(existing["url"] == payload["url"] and existing["title"] == payload["title"] for existing in selected):
-                continue
-            selected.append(payload)
-            if len(selected) >= target_count:
-                break
+            break
 
     return selected[:target_count]
+
+
+def _paper_spotlight_item_score(item: HotspotItem) -> float:
+    metadata = item.metadata or {}
+    score = 0.0
+    score += float(metadata.get("daily_score", 0) or 0) * 0.8
+    score += float(metadata.get("relevance", 0) or 0) * 0.35
+    score += float(metadata.get("novelty", 0) or 0) * 0.35
+    if metadata.get("spotlight_primary_kind") == "new_frontier":
+        score += 1.0
+    return round(score, 3)
+
+
+def _build_paper_spotlight(
+    raw_items: list[HotspotItem],
+    *,
+    max_daily_hot: int,
+    max_new_frontier: int,
+) -> list[dict[str, Any]]:
+    grouped: dict[str, list[tuple[float, dict[str, Any]]]] = {"new_frontier": [], "daily_hot": []}
+    seen_ids: set[tuple[str, str]] = set()
+
+    for item in raw_items:
+        metadata = item.metadata or {}
+        spotlight_kind = str(metadata.get("spotlight_primary_kind", "") or "").strip()
+        if spotlight_kind not in grouped:
+            continue
+        arxiv_id = str(metadata.get("arxiv_id", "") or "").strip()
+        dedupe_key = (spotlight_kind, arxiv_id or item.canonical_url or item.url)
+        if dedupe_key in seen_ids:
+            continue
+        seen_ids.add(dedupe_key)
+        payload = {
+            "title": item.title,
+            "summary": item.summary,
+            "url": item.url,
+            "canonical_url": item.canonical_url,
+            "source_id": item.source_id,
+            "source_name": item.source_name,
+            "source_role": item.source_role,
+            "arxiv_id": arxiv_id,
+            "authors": list(item.authors),
+            "primary_topic_id": metadata.get("primary_topic_id", ""),
+            "primary_topic_label": metadata.get("primary_topic_label", ""),
+            "spotlight_primary_kind": spotlight_kind,
+            "spotlight_primary_label": metadata.get("spotlight_primary_label", PAPER_SPOTLIGHT_LABELS.get(spotlight_kind, "")),
+            "spotlight_comment": metadata.get("spotlight_comment", ""),
+            "daily_score": int(metadata.get("daily_score", 0) or 0),
+            "relevance": int(metadata.get("relevance", 0) or 0),
+            "novelty": int(metadata.get("novelty", 0) or 0),
+        }
+        grouped[spotlight_kind].append((_paper_spotlight_item_score(item), payload))
+
+    sections: list[dict[str, Any]] = []
+    for kind, limit in (("new_frontier", max_new_frontier), ("daily_hot", max_daily_hot)):
+        ranked_items = [
+            payload
+            for _, payload in sorted(
+                grouped[kind],
+                key=lambda row: (
+                    row[0],
+                    row[1].get("novelty", 0),
+                    row[1].get("daily_score", 0),
+                    row[1].get("title", "").lower(),
+                ),
+                reverse=True,
+            )
+        ][:limit]
+        if not ranked_items:
+            continue
+        sections.append(
+            {
+                "kind": kind,
+                "label": PAPER_SPOTLIGHT_LABELS[kind],
+                "description": PAPER_SPOTLIGHT_DESCRIPTIONS[kind],
+                "items": ranked_items,
+            }
+        )
+    return sections
 
 
 def _topic_occurrence_score(topic: dict[str, Any]) -> float:
@@ -300,9 +447,9 @@ def _display_priority(topic: dict[str, Any]) -> float:
     return round(
         0.42 * float(topic.get("FINAL_SCORE", 0.0))
         + 0.24 * float(topic.get("OCCURRENCE_SCORE", 0.0))
-        + 0.16 * float(topic.get("EVIDENCE_STRENGTH", 0.0))
+        + 0.20 * float(topic.get("EVIDENCE_STRENGTH", 0.0))
         + 0.10 * confidence
-        + 0.12 * float(topic.get("HEAT", 0.0))
+        + 0.06 * float(topic.get("HEAT", 0.0))
         + 0.04 * float(topic.get("QUALITY", 0.0))
         + llm_boost
         - paper_penalty
@@ -346,11 +493,47 @@ def _screening_decision(topic: dict[str, Any], score_cutoff: float, watchlist_cu
     heuristic_only_score = hotspot_config.getfloat("screening_heuristic_only_score_cutoff", fallback=5.8)
     strong_evidence_keep = confidence >= 8.0 and evidence >= 6.5 and resonance >= 5.5 and source_count >= 2
 
+    engineering_penalty = float(topic.get("ENGINEERING_PENALTY", 0.0))
+    substance_penalty = float(topic.get("SUBSTANCE_PENALTY", 0.0))
+    artifact_boost = float(topic.get("ARTIFACT_BOOST", 0.0))
+    frontierness = float(topic.get("FRONTIERNESS", 0.0))
+    # Aggressive engineering penalty routing (exempt papers with low eng penalty)
+    if engineering_penalty >= 1.0 and not has_official and not (has_paper_signal and engineering_penalty < 1.5):
+        return "auto_drop"
+    if engineering_penalty >= 0.8 and source_count <= 1 and not has_official and not has_paper_signal:
+        return "auto_drop"
+    # Substance penalty routing (opinion/clickbait/promo)
+    if substance_penalty >= 1.0 and not has_official and not has_paper_signal:
+        return "auto_drop"
+    if substance_penalty >= 0.6 and source_count <= 1 and not has_official:
+        return "auto_drop"
+    # Community-only must have artifact signal
+    community_only_roles = {"community_heat", "headline_consensus", "hn_discussion"}
+    if roles.issubset(community_only_roles) and artifact_boost < 0.3 and not has_official:
+        return "auto_drop"
+    # FRONTIERNESS floor: community-only content without frontier signal
+    if frontierness < 4.0 and not has_official and not has_paper_signal:
+        if source_count <= 1:
+            return "auto_drop"
+        if confidence >= heuristic_only_conf and final_score >= heuristic_only_score:
+            return "heuristic_only"
+        return "auto_drop"
+    # Community-only roles without authoritative backing
+    if roles.issubset(community_only_roles) and not has_official and not has_paper_signal:
+        if source_count <= 2 and final_score < auto_keep_score:
+            if confidence >= heuristic_only_conf and final_score >= heuristic_only_score:
+                return "heuristic_only"
+            return "auto_drop"
+
     if (
         source_count <= 1
         and not has_official
         and any(roles.issubset(role_group) for role_group in weak_single_source_roles)
     ):
+        # Research papers with good frontierness get a lower bar for heuristic_only
+        if has_paper_signal and frontierness >= 5.0 and engineering_penalty < 0.5:
+            if final_score >= heuristic_only_score - 1.5:
+                return "heuristic_only"
         if confidence >= heuristic_only_conf and evidence >= heuristic_only_evidence and final_score >= heuristic_only_score:
             return "heuristic_only"
         return "auto_drop"
@@ -503,8 +686,20 @@ def _build_category_sections(
             continue
         if title in GENERIC_DISPLAY_TITLES:
             continue
-        category = topic.get("PRIMARY_CATEGORY", "Community Signal")
-        if category in {"Community Signal", "Industry Update", "Product Release"} and not any(term in text for term in AI_RELEVANCE_TERMS):
+        # Filter out engineering discussions and low-frontier content
+        eng_penalty = float(topic.get("ENGINEERING_PENALTY", 0.0))
+        frontierness = float(topic.get("FRONTIERNESS", 0.0))
+        if eng_penalty >= 1.0:
+            continue
+        if frontierness < 3.0 and "official_news" not in set(topic.get("source_roles", [])):
+            continue
+        # Filter out low-quality titles
+        if _is_low_quality_display_title(title):
+            continue
+        if len(title.split()) <= 2 and not any(term in text for term in AI_RELEVANCE_TERMS):
+            continue
+        category = topic.get("PRIMARY_CATEGORY", "Industry Update")
+        if category in {"Market Signal", "Industry Update", "Product Release"} and not any(term in text for term in AI_RELEVANCE_TERMS):
             continue
         grouped.setdefault(category, []).append(topic)
 
@@ -569,10 +764,23 @@ def _build_long_tail_sections(
             continue
         if float(topic.get("DISPLAY_PRIORITY", 0.0)) < min_display_score:
             continue
+        if float(topic.get("FINAL_SCORE", 0.0)) < 1.5:
+            continue
         if title in GENERIC_DISPLAY_TITLES:
             continue
-        category = topic.get("PRIMARY_CATEGORY", "Community Signal")
-        if category in {"Community Signal", "Industry Update", "Product Release"} and not any(term in text for term in AI_RELEVANCE_TERMS):
+        # Filter out engineering discussions and low-frontier content
+        eng_penalty = float(topic.get("ENGINEERING_PENALTY", 0.0))
+        frontierness = float(topic.get("FRONTIERNESS", 0.0))
+        if eng_penalty >= 1.0:
+            continue
+        if frontierness < 3.0 and "official_news" not in set(topic.get("source_roles", [])):
+            continue
+        if _is_low_quality_display_title(title):
+            continue
+        if len(title.split()) <= 2 and not any(term in text for term in AI_RELEVANCE_TERMS):
+            continue
+        category = topic.get("PRIMARY_CATEGORY", "Industry Update")
+        if category in {"Market Signal", "Industry Update", "Product Release"} and not any(term in text for term in AI_RELEVANCE_TERMS):
             continue
         grouped.setdefault(category, []).append(topic)
 
@@ -625,14 +833,27 @@ def fetch_source_payloads(
     specs = []
     if hotspot_sources.getboolean("use_local_papers", fallback=True):
         specs.append(("local_papers", lambda: fetch_local_paper_items(target_date, output_root, max_staleness_days=local_papers_max_staleness_days)))
+    hf_daily_hot_score_cutoff = hotspot_config.getint("paper_spotlight_daily_hot_score_cutoff", fallback=15)
     if hotspot_sources.getboolean("use_hf_papers", fallback=True):
-        specs.append(("hf_papers", lambda: fetch_hf_items(target_date, freshness_hours, result_limit=hf_result_limit)))
+        specs.append(("hf_papers", lambda: fetch_hf_items(
+            target_date, freshness_hours, result_limit=hf_result_limit,
+            daily_hot_score_cutoff=hf_daily_hot_score_cutoff,
+        )))
     if hotspot_sources.getboolean("use_ainews", fallback=True):
         specs.append(("ainews", lambda: fetch_ainews_items(target_date, freshness_hours)))
+    official_blogs_registry = REPO_ROOT / "configs" / "hotspot" / "official_blogs.json"
     if hotspot_sources.getboolean("use_official_blogs", fallback=True):
-        specs.append(("official_blogs", lambda: fetch_official_blog_items(target_date, freshness_hours)))
+        specs.append(("official_blogs", lambda: fetch_official_blog_items(
+            target_date, freshness_hours,
+            registry_path=str(official_blogs_registry) if official_blogs_registry.exists() else None,
+        )))
     if hotspot_sources.getboolean("use_roundup_sites", fallback=True):
         specs.append(("roundup_sites", lambda: fetch_roundup_items(target_date, freshness_hours, registry_path)))
+    analysis_feeds_registry = REPO_ROOT / "configs" / "hotspot" / "analysis_feeds.json"
+    if hotspot_sources.getboolean("use_analysis_feeds", fallback=True) and analysis_feeds_registry.exists():
+        specs.append(("analysis_feeds", lambda: fetch_analysis_feed_items(target_date, freshness_hours, analysis_feeds_registry)))
+    if hotspot_sources.getboolean("use_reddit", fallback=True):
+        specs.append(("reddit", lambda: fetch_reddit_items(target_date, freshness_hours)))
     if hotspot_sources.getboolean("use_x_ainews_twitter", fallback=True):
         specs.append(("x_ainews_twitter", lambda: fetch_x_ainews_items(target_date, freshness_hours)))
     if hotspot_sources.getboolean("use_x_paperpulse", fallback=True):
@@ -762,14 +983,14 @@ def deterministic_trim(clusters: list[HotspotCluster], max_clusters: int) -> lis
 
     ranked = sorted(clusters, key=cluster_priority, reverse=True)
     role_budgets = {
-        "official_news": 4,
-        "community_heat": 4,
-        "headline_consensus": 4,
-        "research_backbone": 2,
+        "official_news": 6,
+        "editorial_depth": 4,
+        "research_backbone": 3,
         "paper_trending": 4,
-        "editorial_depth": 2,
-        "builder_momentum": 1,
         "github_trend": 1,
+        "builder_momentum": 1,
+        "community_heat": 2,
+        "headline_consensus": 1,
         "hn_discussion": 1,
     }
     selected: list[HotspotCluster] = []
@@ -805,12 +1026,73 @@ def deterministic_trim(clusters: list[HotspotCluster], max_clusters: int) -> lis
 def _fallback_digest_summary(top_topics: list[dict[str, Any]]) -> str:
     if not top_topics:
         return "No strong AI hotspots cleared the selection threshold today."
-    headlines = [topic.get("HEADLINE") or topic.get("title") for topic in top_topics[:3]]
-    if len(headlines) == 1:
-        return f"Today's strongest AI hotspot was {headlines[0]}."
-    if len(headlines) == 2:
-        return f"Today's AI discussion centered on {headlines[0]} and {headlines[1]}."
-    return f"Today's AI discussion centered on {headlines[0]}, {headlines[1]}, and {headlines[2]}."
+    lines: list[str] = []
+    for topic in top_topics[:5]:
+        headline = topic.get("HEADLINE") or topic.get("title", "")
+        category = topic.get("PRIMARY_CATEGORY", "")
+        why = topic.get("WHY_IT_MATTERS", "")
+        tag = f"[{category}] " if category else ""
+        if why and why.lower() != headline.lower():
+            lines.append(f"• {tag}{headline} — {why}")
+        else:
+            lines.append(f"• {tag}{headline}")
+    return "\n".join(lines)
+
+
+def _heuristic_takeaways(topic: dict[str, Any], max_takeaways: int = 3) -> list[str]:
+    """Extract meaningful takeaways from a topic's items in heuristic mode."""
+    title_lower = topic.get("title", "").lower().strip()
+    title_tokens = set(title_lower.split())
+    title_prefix = title_lower[:40]
+    seen: set[str] = set()
+    takeaways: list[str] = []
+    for item in topic.get("items", []):
+        summary = str(item.get("summary", "")).strip()
+        if not summary or len(summary) < 20:
+            continue
+        summary_lower = summary.lower()
+        item_title_lower = str(item.get("title", "")).lower().strip()
+        # Skip if summary is essentially the item's own title
+        if item_title_lower and (summary_lower.startswith(item_title_lower[:40]) or item_title_lower in summary_lower):
+            continue
+        # Skip if summary starts with the same prefix as the cluster title
+        if title_prefix and summary_lower.startswith(title_prefix):
+            continue
+        # Skip if cluster title is a substring of the summary
+        if title_lower and title_lower in summary_lower:
+            continue
+        # Skip if too similar to the cluster title by token overlap
+        s_tokens = set(summary_lower.split())
+        if title_tokens and len(s_tokens & title_tokens) / max(len(s_tokens), 1) > 0.7:
+            continue
+        # Skip near-duplicate takeaways
+        s_key = " ".join(sorted(s_tokens)[:8])
+        if s_key in seen:
+            continue
+        seen.add(s_key)
+        takeaways.append(summary if len(summary) <= 200 else summary[:197] + "...")
+        if len(takeaways) >= max_takeaways:
+            break
+
+    # Fallback: use item titles that differ from cluster title
+    if not takeaways:
+        for item in topic.get("items", []):
+            item_title = str(item.get("title", "")).strip()
+            if not item_title or len(item_title) < 20:
+                continue
+            it_lower = item_title.lower()
+            it_tokens = set(it_lower.split())
+            if title_tokens and len(it_tokens & title_tokens) / max(len(it_tokens), 1) > 0.6:
+                continue
+            if title_prefix and it_lower.startswith(title_prefix):
+                continue
+            # Strip leading timestamps like "23 hours ago —", "2 days ago 🙀"
+            item_title = re.sub(r"^\d+\s+(?:hours?|minutes?|days?)\s+ago\s*\W+\s*", "", item_title).strip()
+            takeaways.append(item_title if len(item_title) <= 200 else item_title[:197] + "...")
+            if len(takeaways) >= max_takeaways:
+                break
+
+    return takeaways
 
 
 def apply_digest_synthesis(
@@ -823,7 +1105,8 @@ def apply_digest_synthesis(
  ) -> tuple[str, float, float, int, int, int]:
     for topic in top_topics:
         topic["HEADLINE"] = topic.get("title", "")
-        topic["KEY_TAKEAWAYS"] = [topic.get("WHY_IT_MATTERS", "")]
+        if not topic.get("KEY_TAKEAWAYS"):
+            topic["KEY_TAKEAWAYS"] = _heuristic_takeaways(topic)
 
     if mode != "openai" or not top_topics:
         return _fallback_digest_summary(top_topics), 0.0, 0.0, 0, 0, 0
@@ -918,6 +1201,8 @@ def _build_usage_payload(
 
 
 def _decide_mode(requested_mode: str) -> str:
+    from arxiv_assistant.utils.local_env import load_local_env
+    load_local_env()
     has_openai_key = bool(os.environ.get("OPENAI_API_KEY"))
     if requested_mode == "heuristic":
         return "heuristic"
@@ -929,7 +1214,7 @@ def _decide_mode(requested_mode: str) -> str:
 def _topic_bucket(topic: dict[str, Any]) -> str:
     roles = set(topic.get("source_roles", []))
     category = topic.get("PRIMARY_CATEGORY", "")
-    if "official_news" in roles or category in {"Product Release", "Industry Update"}:
+    if "official_news" in roles or category in {"Product Release", "Industry Update", "Market Signal"}:
         return "official"
     if category == "Tooling" or roles & {"builder_momentum", "github_trend"}:
         return "tooling"
@@ -979,14 +1264,19 @@ def _topic_sort_key(topic: dict[str, Any]) -> tuple[float, float, float, float, 
 
 def _diverse_select(candidates: list[dict[str, Any]], limit: int, max_per_category: int = 3, max_per_source: int = 2) -> list[dict[str, Any]]:
     selected: list[dict[str, Any]] = []
+    selected_ids: set[str] = set()
     category_counts: dict[str, int] = {}
     source_counts: dict[str, int] = {}
     bucket_counts: dict[str, int] = {}
     paper_heavy_count = 0
     isolated_research_count = 0
-    bucket_caps = {"research": 3, "official": 2, "community": 2, "tooling": 2}
+    bucket_caps = {"research": 4, "official": 2, "community": 2, "tooling": 2}
+    ranked = sorted(candidates, key=_topic_sort_key, reverse=True)
 
-    for topic in sorted(candidates, key=_topic_sort_key, reverse=True):
+    # First pass: strict diversity caps
+    for topic in ranked:
+        if len(selected) >= limit:
+            return selected
         category = topic.get("PRIMARY_CATEGORY", "Unknown")
         source = _source_signature(topic)
         bucket = _topic_bucket(topic)
@@ -996,11 +1286,12 @@ def _diverse_select(candidates: list[dict[str, Any]], limit: int, max_per_catego
             continue
         if bucket_counts.get(bucket, 0) >= bucket_caps.get(bucket, 2):
             continue
-        if _is_paper_heavy(topic) and paper_heavy_count >= 2:
+        if _is_paper_heavy(topic) and paper_heavy_count >= 3:
             continue
-        if _is_isolated_research_topic(topic) and isolated_research_count >= 1:
+        if _is_isolated_research_topic(topic) and isolated_research_count >= 2:
             continue
         selected.append(topic)
+        selected_ids.add(topic["TOPIC_ID"])
         category_counts[category] = category_counts.get(category, 0) + 1
         source_counts[source] = source_counts.get(source, 0) + 1
         bucket_counts[bucket] = bucket_counts.get(bucket, 0) + 1
@@ -1008,8 +1299,23 @@ def _diverse_select(candidates: list[dict[str, Any]], limit: int, max_per_catego
             paper_heavy_count += 1
         if _is_isolated_research_topic(topic):
             isolated_research_count += 1
-        if len(selected) >= limit:
-            return selected
+
+    # Second pass: relax bucket caps for multi-source quality topics
+    if len(selected) < limit:
+        for topic in ranked:
+            if len(selected) >= limit:
+                break
+            if topic["TOPIC_ID"] in selected_ids:
+                continue
+            if len(topic.get("source_names", [])) < 2:
+                continue
+            source = _source_signature(topic)
+            if source_counts.get(source, 0) >= max_per_source:
+                continue
+            selected.append(topic)
+            selected_ids.add(topic["TOPIC_ID"])
+            source_counts[source] = source_counts.get(source, 0) + 1
+
     return selected
 
 
@@ -1024,11 +1330,23 @@ def _trim_topics(top_topics: list[dict[str, Any]], watchlist: list[dict[str, Any
         final_score = float(topic.get("FINAL_SCORE", 0.0))
         evidence = float(topic.get("EVIDENCE_STRENGTH", 0.0))
         confidence = float(topic.get("CONFIDENCE", max(final_score - 1.0, evidence, 0.0)))
+        frontierness = float(topic.get("FRONTIERNESS", 0.0))
+        eng_penalty = float(topic.get("ENGINEERING_PENALTY", 0.0))
+        # Engineering content always demoted
+        if eng_penalty >= 1.0:
+            return True
+        # Low frontierness always demoted (except papers with high frontierness)
+        has_paper = "paper" in set(topic.get("source_types", []))
+        if frontierness < 4.5 and "official_news" not in roles and not (has_paper and frontierness >= 4.0):
+            return True
         if source_count > 1:
             return False
         if "official_news" in roles:
             return confidence < 5.0 or evidence < 4.4 or final_score < 4.8
         if roles.issubset({"research_backbone", "paper_trending"}):
+            # Allow high-frontierness papers with good scores
+            if has_paper and frontierness >= 5.0 and eng_penalty < 0.5 and final_score >= 4.5:
+                return False
             return True
         if roles.issubset({"github_trend", "builder_momentum"}):
             return True
@@ -1042,10 +1360,16 @@ def _trim_topics(top_topics: list[dict[str, Any]], watchlist: list[dict[str, Any
         final_score = float(topic.get("FINAL_SCORE", 0.0))
         evidence = float(topic.get("EVIDENCE_STRENGTH", max(final_score - 1.2, 0.0)))
         confidence = float(topic.get("CONFIDENCE", max(final_score - 1.0, evidence, 0.0)))
+        frontierness_val = float(topic.get("FRONTIERNESS", 0.0))
+        eng_val = float(topic.get("ENGINEERING_PENALTY", 0.0))
         if source_count >= 2:
             return True
         if "official_news" in roles:
             return confidence >= 5.0 and evidence >= 4.4 and final_score >= 4.8
+        # Single-source papers with high frontierness
+        has_paper = "paper" in set(topic.get("source_types", []))
+        if has_paper and frontierness_val >= 5.0 and eng_val < 0.5 and final_score >= 4.5:
+            return True
         return False
 
     demoted_watchlist: list[dict[str, Any]] = []
@@ -1080,6 +1404,7 @@ def _trim_topics(top_topics: list[dict[str, Any]], watchlist: list[dict[str, Any
         else:
             selected_top.append(topic)
 
+    reserve_min_score = config["HOTSPOTS"].getfloat("reserve_min_score", fallback=4.5)
     reserve_predicates = [
         lambda topic: _topic_bucket(topic) == "official",
         lambda topic: _topic_bucket(topic) == "community",
@@ -1088,6 +1413,8 @@ def _trim_topics(top_topics: list[dict[str, Any]], watchlist: list[dict[str, Any
     for predicate in reserve_predicates:
         for topic in combined:
             if topic.get("DEMOTED_LOW_CONFIDENCE"):
+                continue
+            if float(topic.get("FINAL_SCORE", 0.0)) < reserve_min_score:
                 continue
             if predicate(topic):
                 candidate = _diverse_select(selected_top + [topic], len(selected_top) + 1)
@@ -1147,6 +1474,82 @@ def _trim_topics(top_topics: list[dict[str, Any]], watchlist: list[dict[str, Any
     return selected_top[:target_topics], _diverse_select(remaining_watchlist, target_watchlist_topics, max_per_category=1, max_per_source=1)
 
 
+def _story_to_topic_dict(story: Story, *, keep: bool = False, watchlist: bool = False) -> dict[str, Any]:
+    """Bridge: convert a Story to the existing topic dict format."""
+    items_data = [ei.item.to_dict() for ei in story.items[:4]]
+    source_ids = sorted({ei.item.source_id for ei in story.items})
+    source_names = sorted({ei.item.source_name for ei in story.items})
+    source_roles = sorted({ei.item.source_role for ei in story.items})
+    source_types = sorted({ei.item.source_type for ei in story.items})
+    tags = sorted({tag for ei in story.items for tag in ei.item.tags})
+
+    n_sources = len(source_ids)
+    n_types = len(source_types)
+    avg_importance = sum(ei.importance for ei in story.items) / len(story.items)
+    has_official = "official_news" in source_roles
+    has_paper = "paper" in source_types
+
+    quality = max(1, min(10, round(story.score * 0.9 + (1.0 if has_paper else 0.0))))
+    heat = max(1, min(10, round(2.0 + len(story.items) * 1.0 + (n_types - 1) * 0.8)))
+    importance = max(1, min(10, round(avg_importance)))
+
+    evidence = max(1.0, min(10.0, 2.0 + n_sources * 1.3 + n_types * 0.8 + (1.5 if has_official else 0.0)))
+    confidence = max(1.0, min(10.0, evidence * 0.6 + story.score * 0.3 + (1.0 if n_sources > 1 else 0.0)))
+    resonance = max(1.0, min(10.0, 1.5 + max(n_sources - 1, 0) * 1.4 + max(n_types - 1, 0) * 1.0))
+    frontierness = min(10.0, 3.0 + story.score * 0.5 + (2.0 if has_official else 0.0) + (1.0 if has_paper else 0.0))
+
+    published_dates = [ei.item.published_at for ei in story.items if ei.item.published_at]
+    published_at = max(published_dates) if published_dates else None
+    occurrence = round(min(10.0, 1.2 + n_sources * 1.3 + max(n_types - 1, 0) * 0.9 + min(2.2, len(story.items) * 0.45)), 3)
+    display_priority = round(
+        0.42 * story.score + 0.24 * occurrence + 0.20 * evidence + 0.10 * confidence + 0.06 * heat
+        + (1.0 if keep else 0.45 if watchlist else 0.0),
+        3,
+    )
+
+    default_why = f"This {story.event_type.replace('_', ' ')} surfaced across {n_sources} independent source(s)."
+
+    return {
+        "TOPIC_ID": story.story_id,
+        "cluster_id": story.story_id,
+        "title": story.headline,
+        "summary": story.summary,
+        "items": items_data,
+        "source_ids": source_ids,
+        "source_names": source_names,
+        "source_roles": source_roles,
+        "source_types": source_types,
+        "tags": tags,
+        "PRIMARY_CATEGORY": story.category,
+        "SECONDARY_CATEGORIES": [],
+        "KEEP_IN_DAILY_HOTSPOTS": keep,
+        "WATCHLIST": watchlist,
+        "QUALITY": quality,
+        "HEAT": heat,
+        "IMPORTANCE": importance,
+        "FRONTIERNESS": round(frontierness, 3),
+        "TECHNICAL_DEPTH": round(min(10.0, 2.0 + story.score * 0.5), 3),
+        "CROSS_SOURCE_RESONANCE": round(resonance, 3),
+        "ACTIONABILITY": round(min(10.0, 2.0 + (2.0 if has_official else 0.0) + (1.5 if "repo" in source_types else 0.0)), 3),
+        "EVIDENCE_STRENGTH": round(evidence, 3),
+        "HYPE_PENALTY": 0.3,
+        "ENGINEERING_PENALTY": 0.0,
+        "SUBSTANCE_PENALTY": 0.0,
+        "ARTIFACT_BOOST": 0.5 if story.event_type in ("product_release", "funding", "acquisition") else 0.0,
+        "CONFIDENCE": round(confidence, 3),
+        "SHORT_COMMENT": story.summary,
+        "WHY_IT_MATTERS": story.why_it_matters or default_why,
+        "HEADLINE": story.headline,
+        "KEY_TAKEAWAYS": story.key_takeaways,
+        "FINAL_SCORE": round(story.score, 3),
+        "DISPLAY_PRIORITY": display_priority,
+        "OCCURRENCE_SCORE": occurrence,
+        "LLM_STATUS": "featured" if keep else "watchlist" if watchlist else "candidate",
+        "published_at": published_at,
+        "event_type": story.event_type,
+    }
+
+
 def generate_daily_hotspot_report(output_root: str | Path, target_date: datetime, config: configparser.ConfigParser, mode_override: str = "auto", force: bool = False) -> dict[str, Any] | None:
     if not config["HOTSPOTS"].getboolean("enabled", fallback=False):
         return None
@@ -1157,99 +1560,90 @@ def generate_daily_hotspot_report(output_root: str | Path, target_date: datetime
     raw_items, source_stats, api_usage = fetch_source_payloads(target_date, output_root, config, force)
     raw_items = raw_items[: config["HOTSPOTS"].getint("max_raw_items", fallback=120)]
 
-    clusters = build_hotspot_clusters(raw_items)
-    candidate_clusters = deterministic_trim(clusters, config["HOTSPOTS"].getint("max_clusters_for_llm", fallback=24))
-    radar_clusters = sorted(clusters, key=lambda cluster: cluster.deterministic_score, reverse=True)[
-        : config["HOTSPOTS"].getint("max_clusters_for_radar", fallback=48)
-    ]
-    candidate_topics = build_candidate_topics(radar_clusters)
+    # Filter items with mismatched URLs (title-URL inconsistency)
+    from arxiv_assistant.utils.hotspot.hotspot_sources import url_title_consistent
+    pre_filter_count = len(raw_items)
+    raw_items = [item for item in raw_items if url_title_consistent(item.title, item.url)]
+    if len(raw_items) < pre_filter_count:
+        print(f"URL-title filter: removed {pre_filter_count - len(raw_items)} items with mismatched URLs")
 
-    system_prompt = read_prompt("hotspot.system_prompt")
-    criteria_prompt = read_prompt("hotspot.screening_criteria")
-    postfix_prompt = read_prompt("hotspot.postfix_screening")
-    digest_prompt = read_prompt("hotspot.digest_writer")
+    # Skip items without a publication date — can't verify freshness.
+    pre_date = len(raw_items)
+    raw_items = [item for item in raw_items if item.published_at]
+    if len(raw_items) < pre_date:
+        print(f"Date filter: removed {pre_date - len(raw_items)} items without published_at ({len(raw_items)} remaining)")
 
-    score_cutoff = config["HOTSPOTS"].getfloat("screening_score_cutoff", fallback=6.0)
-    watchlist_cutoff = config["HOTSPOTS"].getfloat("watchlist_score_cutoff", fallback=4.9)
-    candidate_screen_topics = build_candidate_topics(candidate_clusters)
-    auto_keep_topics, auto_watch_topics, review_topics, heuristic_only_topics, screening_stats = _screening_queue(
-        candidate_screen_topics,
-        score_cutoff,
-        watchlist_cutoff,
-        config,
-    )
-    target_topics = config["HOTSPOTS"].getint("target_topics", fallback=5)
-    target_watchlist_topics = config["HOTSPOTS"].getint("target_watchlist_topics", fallback=3)
-    llm_review_budget = min(
-        config["HOTSPOTS"].getint("max_review_clusters", fallback=10),
-        max(6, target_topics + target_watchlist_topics + 1 - len(auto_keep_topics) - len(auto_watch_topics)),
-    )
-    review_topic_ids = {topic["TOPIC_ID"] for topic in review_topics[:llm_review_budget]}
-    review_clusters = [cluster for cluster in candidate_clusters if cluster.cluster_id in review_topic_ids]
-    heuristic_fallback_topics = heuristic_only_topics + [topic for topic in review_topics if topic["TOPIC_ID"] not in review_topic_ids]
+    # Freshness gate: only keep items published within 1 day of target date.
+    from arxiv_assistant.utils.hotspot.hotspot_sources import get_freshness_date, parse_datetime
+    from datetime import timedelta, timezone as tz
+    target_utc = target_date.replace(tzinfo=tz.utc) if target_date.tzinfo is None else target_date
+    freshness_cutoff = target_utc - timedelta(hours=36)
+    pre_fresh = len(raw_items)
+    fresh_items = []
+    for item in raw_items:
+        dt = parse_datetime(get_freshness_date(item))
+        if dt is None or dt >= freshness_cutoff:
+            fresh_items.append(item)
+    raw_items = fresh_items
+    if len(raw_items) < pre_fresh:
+        print(f"Freshness gate: removed {pre_fresh - len(raw_items)} items older than 36h ({len(raw_items)} remaining)")
 
-    prompt_cost = 0.0
-    completion_cost = 0.0
-    llm_prompt_tokens = 0
-    llm_completion_tokens = 0
-    llm_requests = 0
-    llm_kept: list[dict[str, Any]] = []
-    llm_watchlist: list[dict[str, Any]] = []
-    if effective_mode == "openai" and review_clusters:
-        kept, watchlist, prompt_cost, completion_cost, review_prompt_tokens, review_completion_tokens, review_requests = screen_clusters_with_openai(
-            clusters=review_clusters,
-            system_prompt=system_prompt,
-            criteria_prompt=criteria_prompt,
-            postfix_prompt=postfix_prompt,
-            model=config["HOTSPOTS"].get("model_screen"),
-            batch_size=config["HOTSPOTS"].getint("screen_batch_size", fallback=8),
-            retry_count=config["HOTSPOTS"].getint("retry", fallback=3),
-            score_cutoff=score_cutoff,
-            watchlist_cutoff=watchlist_cutoff,
-        )
-        llm_prompt_tokens += review_prompt_tokens
-        llm_completion_tokens += review_completion_tokens
-        llm_requests += review_requests
-        llm_kept.extend(kept)
-        llm_watchlist.extend(watchlist)
+    # --- Story-centric pipeline ---
+    hotspot_config = config["HOTSPOTS"]
+    model_enrich = hotspot_config.get("model_enrich", hotspot_config.get("model_screen"))
+    enrich_batch_size = hotspot_config.getint("enrich_batch_size", fallback=20)
+    retry_count = hotspot_config.getint("retry", fallback=3)
+
+    # Stage 3: Enrich
+    if effective_mode == "openai":
+        enriched_items = enrich_items_batch(raw_items, model_enrich, enrich_batch_size, retry_count)
     else:
-        kept, watchlist = heuristic_screen_clusters(review_clusters, score_cutoff, watchlist_cutoff)
-        llm_kept.extend(kept)
-        llm_watchlist.extend(watchlist)
+        enriched_items = enrich_items_heuristic(raw_items)
 
-    fallback_kept: list[dict[str, Any]] = []
-    fallback_watchlist: list[dict[str, Any]] = []
-    for topic in heuristic_fallback_topics:
-        if topic["FINAL_SCORE"] >= score_cutoff and topic["QUALITY"] >= 5:
-            fallback_kept.append({**topic, "KEEP_IN_DAILY_HOTSPOTS": True, "WATCHLIST": False, "SCREENING_DECISION": "heuristic_fallback"})
-        elif topic["FINAL_SCORE"] >= watchlist_cutoff:
-            fallback_watchlist.append({**topic, "KEEP_IN_DAILY_HOTSPOTS": False, "WATCHLIST": True, "SCREENING_DECISION": "heuristic_fallback"})
+    # Stage 4-5: Group into stories → Score
+    stories = score_stories(group_into_stories(enriched_items))
 
-    kept = auto_keep_topics + llm_kept + fallback_kept
-    watchlist = auto_watch_topics + llm_watchlist + fallback_watchlist
+    # Stage 6: Select & categorize
+    target_topics = hotspot_config.getint("target_topics", fallback=5)
+    target_watchlist_topics = hotspot_config.getint("target_watchlist_topics", fallback=3)
+    featured_stories, watchlist_stories, _ = select_and_categorize(
+        stories,
+        target_featured=target_topics,
+        target_watchlist=target_watchlist_topics,
+        max_per_category=hotspot_config.getint("max_topics_per_category", fallback=4),
+    )
 
-    screened_kept = list(kept)
-    screened_watchlist = list(watchlist)
-    featured_topics, watchlist = _trim_topics(kept, watchlist, config)
-    display_candidates = _merge_display_candidates(candidate_topics, screened_kept, screened_watchlist)
-    display_lookup = {topic["TOPIC_ID"]: topic for topic in display_candidates}
-    featured_topics = [{**display_lookup.get(topic["TOPIC_ID"], {}), **topic} for topic in featured_topics]
-    watchlist = [{**display_lookup.get(topic["TOPIC_ID"], {}), **topic} for topic in watchlist]
+    # Bridge: Story → topic dict
+    featured_topics = [_story_to_topic_dict(s, keep=True) for s in featured_stories]
+    watchlist = [_story_to_topic_dict(s, watchlist=True) for s in watchlist_stories]
+    display_candidates = [_story_to_topic_dict(s) for s in stories]
+
+    # Category and long-tail sections (reuse existing builders)
+    watchlist_cutoff = hotspot_config.getfloat("watchlist_score_cutoff", fallback=4.9)
     category_sections = _build_category_sections(
         display_candidates,
         featured_topics,
-        target_total_topics=config["HOTSPOTS"].getint("target_category_topics", fallback=12),
-        max_per_category=config["HOTSPOTS"].getint("max_topics_per_category", fallback=4),
-        min_display_score=config["HOTSPOTS"].getfloat("category_display_score_cutoff", fallback=max(2.8, watchlist_cutoff - 0.5)),
+        target_total_topics=hotspot_config.getint("target_category_topics", fallback=12),
+        max_per_category=hotspot_config.getint("max_topics_per_category", fallback=4),
+        min_display_score=hotspot_config.getfloat("category_display_score_cutoff", fallback=max(2.8, watchlist_cutoff - 0.5)),
     )
     long_tail_sections = _build_long_tail_sections(
         display_candidates,
         featured_topics,
         category_sections,
-        target_total_topics=config["HOTSPOTS"].getint("target_long_tail_topics", fallback=18),
-        max_per_category=config["HOTSPOTS"].getint("max_long_tail_per_category", fallback=8),
-        min_display_score=config["HOTSPOTS"].getfloat("long_tail_display_score_cutoff", fallback=1.6),
+        target_total_topics=hotspot_config.getint("target_long_tail_topics", fallback=18),
+        max_per_category=hotspot_config.getint("max_long_tail_per_category", fallback=8),
+        min_display_score=hotspot_config.getfloat("long_tail_display_score_cutoff", fallback=1.6),
     )
+
+    # Stage 7: Digest synthesis
+    system_prompt = read_prompt("hotspot.system_prompt")
+    digest_prompt = read_prompt("hotspot.digest_writer")
+    prompt_cost = 0.0
+    completion_cost = 0.0
+    llm_prompt_tokens = 0
+    llm_completion_tokens = 0
+    llm_requests = 0
     summary, digest_prompt_cost, digest_completion_cost, digest_prompt_tokens, digest_completion_tokens, digest_requests = apply_digest_synthesis(
         featured_topics,
         watchlist,
@@ -1263,7 +1657,21 @@ def generate_daily_hotspot_report(output_root: str | Path, target_date: datetime
     llm_prompt_tokens += digest_prompt_tokens
     llm_completion_tokens += digest_completion_tokens
     llm_requests += digest_requests
-    x_buzz = _build_x_buzz_items(raw_items, featured_topics, watchlist)
+
+    # Waterfall dedup safety net
+    claimed_ids: set[str] = {t["TOPIC_ID"] for t in featured_topics}
+    for section in category_sections:
+        claimed_ids.update(t["TOPIC_ID"] for t in section.get("topics", []))
+    for section in long_tail_sections:
+        claimed_ids.update(t["TOPIC_ID"] for t in section.get("topics", []))
+    watchlist = [t for t in watchlist if t["TOPIC_ID"] not in claimed_ids]
+
+    x_buzz = _build_market_signal_items(raw_items, featured_topics, watchlist)
+    paper_spotlight = _build_paper_spotlight(
+        raw_items,
+        max_daily_hot=hotspot_config.getint("paper_spotlight_max_daily_hot", fallback=6),
+        max_new_frontier=hotspot_config.getint("paper_spotlight_max_new_frontier", fallback=4),
+    )
     usage = _build_usage_payload(
         config,
         effective_mode,
@@ -1283,16 +1691,13 @@ def generate_daily_hotspot_report(output_root: str | Path, target_date: datetime
         "source_stats": source_stats,
         "totals": {
             "raw_items": len(raw_items),
-            "clusters": len(clusters),
-            "candidate_clusters": len(candidate_clusters),
-            "radar_clusters": len(radar_clusters),
-            "screening_auto_keep": screening_stats["auto_keep"],
-            "screening_auto_watchlist": screening_stats["auto_watchlist"],
-            "screening_heuristic_only": screening_stats["heuristic_only"],
-            "screening_auto_drop": screening_stats["auto_drop"],
-            "screening_review_candidates": screening_stats["review"],
-            "screening_reviewed_by_llm": len(review_clusters),
-            "screening_heuristic_fallback": len(heuristic_fallback_topics),
+            "enriched_items": len(enriched_items),
+            "stories": len(stories),
+            "featured": len(featured_topics),
+            "watchlist": len(watchlist),
+            "category_topics": sum(len(s.get("topics", [])) for s in category_sections),
+            "long_tail_topics": sum(len(s.get("topics", [])) for s in long_tail_sections),
+            "paper_spotlight_items": sum(len(section.get("items", [])) for section in paper_spotlight),
         },
         "costs": {"prompt": round(prompt_cost, 6), "completion": round(completion_cost, 6), "total": round(prompt_cost + completion_cost, 6)},
         "usage": usage,
@@ -1300,6 +1705,7 @@ def generate_daily_hotspot_report(output_root: str | Path, target_date: datetime
         "featured_topics": featured_topics,
         "category_sections": category_sections,
         "long_tail_sections": long_tail_sections,
+        "paper_spotlight": paper_spotlight,
         "x_buzz": x_buzz,
         "watchlist": watchlist,
     }
@@ -1307,7 +1713,6 @@ def generate_daily_hotspot_report(output_root: str | Path, target_date: datetime
     paths = build_hotspot_paths(output_root, target_date.date())
     ensure_parent_dirs(paths)
     write_json(paths.normalized_path, _serialize_items(raw_items))
-    write_json(paths.clusters_path, [cluster.to_dict() for cluster in clusters])
     write_json(paths.report_path, report)
     write_hotspot_web_data(output_root, report, raw_items)
     paths.markdown_path.write_text(render_hot_daily_md(report), encoding="utf-8")

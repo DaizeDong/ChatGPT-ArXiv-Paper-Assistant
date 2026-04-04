@@ -46,6 +46,7 @@ STOPWORDS = {
     "2026",
 }
 GENERIC_OVERLAP_TOKENS = {
+    # AI/ML domain generic terms
     "open",
     "source",
     "research",
@@ -61,21 +62,151 @@ GENERIC_OVERLAP_TOKENS = {
     "benchmark",
     "system",
     "systems",
+    "data",
+    "dataset",
+    "training",
+    "inference",
+    "language",
+    "learning",
+    "neural",
+    "network",
+    "transformer",
+    "generation",
+    "evaluation",
+    "performance",
+    "framework",
+    "tool",
+    "tools",
+    "platform",
+    "release",
+    "update",
+    "latest",
+    "announces",
+    "introducing",
+    "available",
+    # High-frequency English words that pass len>=4 filter
+    "local",
+    "using",
+    "built",
+    "just",
+    "works",
+    "entirely",
+    "about",
+    "been",
+    "best",
+    "better",
+    "comes",
+    "does",
+    "doesnt",
+    "done",
+    "every",
+    "first",
+    "gets",
+    "good",
+    "great",
+    "heres",
+    "high",
+    "like",
+    "long",
+    "made",
+    "make",
+    "makes",
+    "many",
+    "more",
+    "most",
+    "much",
+    "need",
+    "never",
+    "next",
+    "only",
+    "over",
+    "real",
+    "really",
+    "right",
+    "some",
+    "still",
+    "than",
+    "that",
+    "them",
+    "then",
+    "there",
+    "they",
+    "this",
+    "time",
+    "very",
+    "want",
+    "well",
+    "what",
+    "when",
+    "will",
+    "your",
+    "isnt",
+    "cant",
+    "dont",
+    "wont",
+    "near",
+    "even",
+    "show",
+    "test",
+    "runs",
+    "full",
+    "ever",
+    "here",
+    "back",
+    "free",
+    "fast",
+    "small",
+    "large",
+    "speed",
+    "quality",
+    # Financial/scale words that shouldn't count as meaningful overlap
+    "billion",
+    "million",
 }
 
 SOURCE_ROLE_WEIGHTS = {
+    "official_news": 6.0,
     "research_backbone": 5.4,
+    "editorial_depth": 5.0,
     "paper_trending": 4.8,
-    "community_heat": 4.5,
-    "official_news": 5.0,
-    "headline_consensus": 4.0,
-    "builder_momentum": 3.8,
-    "editorial_depth": 3.4,
     "github_trend": 4.2,
-    "hn_discussion": 3.0,
+    "builder_momentum": 3.5,
+    "community_heat": 2.0,
+    "headline_consensus": 1.5,
+    "hn_discussion": 1.5,
 }
 
 PAPER_LIKE_SOURCE_TYPES = {"paper"}
+
+
+DOMAIN_CANONICAL_MAP = {
+    "paperswithcode.com": "paperswithcode",
+    "huggingface.co": "huggingface",
+    "github.com": "github",
+    "arxiv.org": "arxiv",
+}
+
+# Company/product name patterns for entity matching
+ENTITY_PATTERNS = [
+    re.compile(r"\b(openai|gpt[-\s]?\d|o[1-3]|chatgpt)\b", re.I),
+    re.compile(r"\b(anthropic|claude[\s-]?\d?)\b", re.I),
+    re.compile(r"\b(google|deepmind|gemini|bard)\b", re.I),
+    re.compile(r"\b(meta|llama[\s-]?\d?)\b", re.I),
+    re.compile(r"\b(mistral[\s-]?\w*)\b", re.I),
+    re.compile(r"\b(deepseek[\s-]?\w*)\b", re.I),
+    re.compile(r"\b(qwen[\s-]?\d?)\b", re.I),
+    re.compile(r"\b(nvidia|cuda)\b", re.I),
+    re.compile(r"\b(microsoft|copilot|phi[-\s]?\d)\b", re.I),
+    re.compile(r"\b(stability[\s-]?ai|stable[\s-]?diffusion)\b", re.I),
+]
+
+
+def _extract_entities(text: str) -> set[str]:
+    entities = set()
+    for pattern in ENTITY_PATTERNS:
+        for match in pattern.finditer(text):
+            entities.add(match.group(0).lower().strip())
+    return entities
 
 
 def canonicalize_url(url: str) -> str:
@@ -95,11 +226,11 @@ def normalize_title(title: str) -> str:
 
 
 def significant_title_tokens(title: str) -> set[str]:
-    return {
-        token
-        for token in normalize_title(title).split()
-        if len(token) >= 4
-    }
+    raw = normalize_title(title).split()
+    # Normalize number+scale tokens before length filter: "122b" → "122"
+    normalized = [re.sub(r'^(\d+)[bmk]$', r'\1', t) for t in raw]
+    # Keep tokens ≥4 chars, or numeric tokens ≥3 chars (e.g. "122")
+    return {t for t in normalized if len(t) >= 4 or (len(t) >= 3 and t.isdigit())}
 
 
 def title_similarity(left: str, right: str) -> float:
@@ -118,10 +249,14 @@ def title_overlap_boost(left: str, right: str) -> float:
         for token in (significant_title_tokens(left) & significant_title_tokens(right))
         if token not in GENERIC_OVERLAP_TOKENS
     }
-    if len(overlap) >= 2:
+    if len(overlap) >= 3:
         return 0.84
-    if overlap and any(any(char.isdigit() for char in token) for token in overlap):
+    # Two overlapping tokens: only boost if they include a specific name/version token
+    if len(overlap) == 2 and any(any(char.isdigit() for char in token) for token in overlap):
         return 0.78
+    # Single token with version number (e.g., "gpt4", "llama3") — weak signal
+    if len(overlap) == 1 and any(any(char.isdigit() for char in token) for token in overlap):
+        return 0.40
     return 0.0
 
 
@@ -140,9 +275,50 @@ def _cluster_match_score(item: HotspotItem, cluster_seed: HotspotItem) -> float:
     right_repo = canonicalize_url(str(cluster_seed.metadata.get("github_url", "") or cluster_seed.url or ""))
     if left_repo and right_repo and left_repo == right_repo and "github.com" in left_repo:
         return 1.0
+
+    # Link-following: if a roundup URL points to an official blog URL
+    item_urls = {item.url, item.canonical_url}
+    seed_urls = {cluster_seed.url, cluster_seed.canonical_url}
+    if item_urls & seed_urls:
+        return 1.0
+
     if _is_paper_like(item) and _is_paper_like(cluster_seed):
         return 0.0
-    return max(title_similarity(item.title, cluster_seed.title), title_overlap_boost(item.title, cluster_seed.title))
+
+    base_score = max(title_similarity(item.title, cluster_seed.title), title_overlap_boost(item.title, cluster_seed.title))
+
+    # Entity matching boost: if both mention the same company/product
+    # and are from different source types (e.g., official + roundup)
+    # Requires either moderate title similarity OR an official source to avoid false merges
+    if base_score >= 0.25 and item.source_type != cluster_seed.source_type:
+        item_entities = _extract_entities(item.title)
+        seed_entities = _extract_entities(cluster_seed.title)
+        shared_entities = item_entities & seed_entities
+        if shared_entities:
+            has_official = item.source_role == "official_news" or cluster_seed.source_role == "official_news"
+            # Need BOTH entity match AND meaningful title overlap (not just entity alone)
+            non_generic_overlap = {
+                token
+                for token in (significant_title_tokens(item.title) & significant_title_tokens(cluster_seed.title))
+                if token not in GENERIC_OVERLAP_TOKENS
+            } - shared_entities  # Exclude the entity itself from overlap count
+            if has_official and base_score >= 0.25:
+                # Official + entity match: strong signal, lower bar
+                base_score = max(base_score, 0.70)
+            elif len(non_generic_overlap) >= 1 and base_score >= 0.30:
+                # Entity match + at least 1 additional non-generic token overlap
+                base_score = max(base_score, 0.70)
+            # Entity match alone (no other overlap): NOT enough — too many false positives
+
+    # Lower threshold for (official + roundup/community) pairs
+    is_cross_type = (
+        (item.source_role == "official_news" and cluster_seed.source_role != "official_news") or
+        (cluster_seed.source_role == "official_news" and item.source_role != "official_news")
+    )
+    if is_cross_type and base_score >= 0.60:
+        base_score = max(base_score, 0.68)
+
+    return base_score
 
 
 def _cluster_id(items: Iterable[HotspotItem]) -> str:
@@ -239,5 +415,36 @@ def build_hotspot_clusters(items: list[HotspotItem], similarity_threshold: float
                 deterministic_score=compute_deterministic_cluster_score(bucket_sorted),
             )
         )
+
+    # Merge pass: combine clusters with very similar titles that the greedy pass missed
+    merged = True
+    while merged:
+        merged = False
+        i = 0
+        while i < len(clusters):
+            j = i + 1
+            while j < len(clusters):
+                if title_similarity(clusters[i].title, clusters[j].title) >= 0.85:
+                    # Merge smaller into larger
+                    big, small = (i, j) if len(clusters[i].items) >= len(clusters[j].items) else (j, i)
+                    big_c, small_c = clusters[big], clusters[small]
+                    existing_urls = {item.get("canonical_url") or item.get("url") for item in big_c.items}
+                    for item in small_c.items:
+                        if (item.get("canonical_url") or item.get("url")) not in existing_urls:
+                            big_c.items.append(item)
+                    big_c.source_ids = sorted(set(big_c.source_ids) | set(small_c.source_ids))
+                    big_c.source_names = sorted(set(big_c.source_names) | set(small_c.source_names))
+                    big_c.source_roles = sorted(set(big_c.source_roles) | set(small_c.source_roles))
+                    big_c.source_types = sorted(set(big_c.source_types) | set(small_c.source_types))
+                    big_c.tags = sorted(set(big_c.tags) | set(small_c.tags))
+                    clusters.pop(small)
+                    merged = True
+                    if big > small:
+                        i = small  # re-check from the shifted position
+                        break
+                else:
+                    j += 1
+            else:
+                i += 1
 
     return sorted(clusters, key=lambda cluster: cluster.deterministic_score, reverse=True)

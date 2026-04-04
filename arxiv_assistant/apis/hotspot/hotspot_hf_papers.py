@@ -3,7 +3,7 @@ from __future__ import annotations
 import html
 import json
 import re
-from datetime import datetime, timezone
+from datetime import datetime
 
 from arxiv_assistant.utils.hotspot.hotspot_schema import HotspotItem
 from arxiv_assistant.utils.hotspot.hotspot_sources import clip_text, fetch_text
@@ -23,10 +23,20 @@ def _parse_daily_papers(page_html: str) -> list[dict]:
     return payload.get("dailyPapers", [])
 
 
-def fetch_hotspot_items(target_date: datetime, freshness_hours: int, result_limit: int = 24) -> list[HotspotItem]:
+MIN_UPVOTES = 5
+
+
+def fetch_hotspot_items(
+    target_date: datetime,
+    freshness_hours: int,
+    result_limit: int = 12,
+    *,
+    daily_hot_score_cutoff: int = 15,
+) -> list[HotspotItem]:
     page_html = fetch_text(HF_TRENDING_URL)
     daily_papers = _parse_daily_papers(page_html)
     items: list[HotspotItem] = []
+    skipped_upvotes = 0
 
     for row in daily_papers:
         paper = row.get("paper", {})
@@ -34,18 +44,23 @@ def fetch_hotspot_items(target_date: datetime, freshness_hours: int, result_limi
         if not paper_id:
             continue
         published_at = paper.get("publishedAt") or target_date.isoformat()
+        upvotes = int(paper.get("upvotes", 0) or 0)
+
+        # Upvote filter: skip low-engagement papers
+        if upvotes < MIN_UPVOTES:
+            skipped_upvotes += 1
+            continue
+
         canonical_url = f"https://arxiv.org/abs/{paper_id}"
 
-        # Compute paper age and freshness label
-        paper_age_days = 0
-        is_resurfaced = False
-        try:
-            pub_dt = datetime.fromisoformat(published_at.replace("Z", "+00:00"))
-            target_aware = target_date if target_date.tzinfo else target_date.replace(tzinfo=timezone.utc)
-            paper_age_days = max(0, (target_aware - pub_dt).days)
-            is_resurfaced = paper_age_days > 30
-        except (ValueError, TypeError):
-            pass
+        # Classify for paper spotlight based on upvotes
+        spotlight_kind = ""
+        spotlight_label = ""
+        spotlight_comment = ""
+        if upvotes >= daily_hot_score_cutoff:
+            spotlight_kind = "daily_hot"
+            spotlight_label = "Daily Hot Papers"
+            spotlight_comment = clip_text(paper.get("summary", ""), 300)
 
         items.append(
             HotspotItem(
@@ -61,16 +76,24 @@ def fetch_hotspot_items(target_date: datetime, freshness_hours: int, result_limi
                 tags=list(paper.get("ai_keywords") or []),
                 authors=[author.get("name", "") for author in paper.get("authors", []) if author.get("name")],
                 metadata={
+                    "fetched_at": target_date.isoformat(),
                     "arxiv_id": paper_id,
-                    "upvotes": paper.get("upvotes", 0),
+                    "upvotes": upvotes,
+                    "daily_score": upvotes,
+                    "relevance": 0,
+                    "novelty": 0,
                     "github_url": paper.get("githubRepo"),
                     "hf_url": f"https://huggingface.co/papers/{paper_id}",
                     "ai_summary": paper.get("ai_summary", ""),
-                    "paper_age_days": paper_age_days,
-                    "is_resurfaced": is_resurfaced,
+                    "spotlight_primary_kind": spotlight_kind,
+                    "spotlight_primary_label": spotlight_label,
+                    "spotlight_comment": spotlight_comment,
                 },
             )
         )
         if len(items) >= result_limit:
             break
+
+    if skipped_upvotes > 0:
+        print(f"HF Papers: kept {len(items)}, skipped {skipped_upvotes} low-upvotes (<{MIN_UPVOTES})")
     return items

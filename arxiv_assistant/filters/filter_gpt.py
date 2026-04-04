@@ -11,10 +11,18 @@ from openai import OpenAI
 from tqdm import tqdm
 
 from arxiv_assistant.environment import OPENAI_API_KEY, OPENAI_BASE_URL, OUTPUT_DEBUG_FILE_FORMAT
+from arxiv_assistant.paper_topics import build_topic_registry_prompt_block, ensure_topic_fields
 from arxiv_assistant.utils.pricing_loader import get_model_pricing
 from arxiv_assistant.utils.utils import EnhancedJSONEncoder, Paper, batched
 
 ABSTRACT_CUTOFF = 4000
+
+
+def _coerce_int(value, default=0):
+    try:
+        return int(value)
+    except (TypeError, ValueError):
+        return default
 
 
 def calc_price(model, usage):
@@ -83,6 +91,7 @@ def get_user_prompt_for_abstract_filtering(topic_prompt, score_prompt, postfix_p
         [
             topic_prompt,
             score_prompt,
+            build_topic_registry_prompt_block(),
             "## Papers",
             "\n\n".join(batch_str),
             postfix_prompt,
@@ -323,20 +332,24 @@ def filter_papers_by_abstract(
                     print(f"Exception happened: ARXIVID \"{jdict['ARXIVID']}\" not found in `id_paper_mapping`")
                 continue
 
-            result = {
-                "SCORE": jdict["RELEVANCE"] + jdict["NOVELTY"],
+            relevance = _coerce_int(jdict.get("RELEVANCE"))
+            novelty = _coerce_int(jdict.get("NOVELTY"))
+            result = ensure_topic_fields({
                 **jdict,
+                "SCORE": relevance + novelty,
+                "RELEVANCE": relevance,
+                "NOVELTY": novelty,
                 **dataclasses.asdict(id_paper_mapping[jdict["ARXIVID"]]),
-            }
+            }, arxiv_id=jdict["ARXIVID"])
             this_scored_batch.append(result)
 
             filtered = (
-                int(jdict["RELEVANCE"]) < int(config["FILTERING"]["relevance_cutoff"]) or
-                int(jdict["NOVELTY"]) < int(config["FILTERING"]["novelty_cutoff"])
+                relevance < int(config["FILTERING"]["relevance_cutoff"]) or
+                novelty < int(config["FILTERING"]["novelty_cutoff"])
             )
             if filtered:
                 filtered_results[jdict["ARXIVID"]] = result
-                print(f"Filtered out paper {jdict['ARXIVID']} by score (RELEVANCE={jdict['RELEVANCE']}, NOVELTY={jdict['NOVELTY']}) ({id_paper_mapping[jdict['ARXIVID']].title})")
+                print(f"Filtered out paper {jdict['ARXIVID']} by score (RELEVANCE={relevance}, NOVELTY={novelty}) ({id_paper_mapping[jdict['ARXIVID']].title})")
             else:
                 selected_results[jdict["ARXIVID"]] = result
 
@@ -440,7 +453,10 @@ def filter_by_gpt(
         )
     else:
         scored_batches = []
-        selected_results = {paper.arxiv_id: {**dataclasses.asdict(paper)} for paper in paper_list}
+        selected_results = {
+            paper.arxiv_id: ensure_topic_fields(dataclasses.asdict(paper), arxiv_id=paper.arxiv_id)
+            for paper in paper_list
+        }
         filtered_results = {}
         prompt_cost, completion_cost, prompt_tokens, completion_tokens = 0.0, 0.0, 0, 0
         print("Skipping GPT abstract filtering")

@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import os
+import re
 from datetime import UTC, datetime, timedelta
 
 from arxiv_assistant.utils.hotspot.hotspot_schema import HotspotItem
@@ -8,6 +9,16 @@ from arxiv_assistant.utils.hotspot.hotspot_sources import clip_text, fetch_json
 
 GITHUB_SEARCH_URL = "https://api.github.com/search/repositories"
 GITHUB_API_VERSION = "2026-03-10"
+
+BLACKLIST_NAME_PATTERNS = [
+    re.compile(r"^awesome[-_]", re.I),
+    re.compile(r"[-_]awesome$", re.I),
+]
+BLACKLIST_DESC_KEYWORDS_LOW_STARS = {
+    "wrapper", "wechat", "weixin", "\u5fae\u4fe1",  # 微信
+}
+BLACKLIST_DESC_KEYWORD_STAR_THRESHOLD = 500
+MCP_AGENT_SDK_STAR_THRESHOLD = 300
 
 
 def _github_headers() -> dict[str, str]:
@@ -58,6 +69,26 @@ def fetch_hotspot_items(
             html_url = row.get("html_url")
             if not full_name or not html_url or full_name in seen_repos:
                 continue
+
+            # Blacklist: skip awesome-lists
+            repo_name = full_name.split("/", 1)[-1] if "/" in full_name else full_name
+            if any(pat.search(repo_name) for pat in BLACKLIST_NAME_PATTERNS):
+                continue
+
+            stars = int(row.get("stargazers_count", 0) or 0)
+            description = (row.get("description") or "").lower()
+
+            # Blacklist: skip wrapper/wechat repos below star threshold
+            if any(kw in description for kw in BLACKLIST_DESC_KEYWORDS_LOW_STARS) and stars < BLACKLIST_DESC_KEYWORD_STAR_THRESHOLD:
+                continue
+
+            # Blacklist: skip generic mcp/agent-sdk repos below threshold
+            name_lower = repo_name.lower()
+            if (name_lower.startswith("mcp-") or name_lower.endswith("-mcp") or
+                name_lower.endswith("-agent-sdk")) and stars < MCP_AGENT_SDK_STAR_THRESHOLD:
+                if not any(term in description for term in ("model", "training", "benchmark", "transformer")):
+                    continue
+
             seen_repos.add(full_name)
             created_at = row.get("created_at") or row.get("updated_at") or datetime.now(UTC).isoformat()
             items.append(
@@ -74,6 +105,7 @@ def fetch_hotspot_items(
                     tags=list(row.get("topics") or []),
                     authors=[row.get("owner", {}).get("login", "")] if row.get("owner", {}).get("login") else [],
                     metadata={
+                        "fetched_at": target_date.isoformat(),
                         "stars": row.get("stargazers_count", 0),
                         "forks": row.get("forks_count", 0),
                         "language": row.get("language", ""),

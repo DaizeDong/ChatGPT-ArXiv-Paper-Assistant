@@ -171,6 +171,7 @@ def run_remedy_plan(plan: RemedyPlan, output_root: str, build_site: bool) -> Non
     )
     from arxiv_assistant.filters.filter_author import filter_papers_by_hindex, select_by_author
     from arxiv_assistant.filters.filter_gpt import filter_by_gpt
+    from arxiv_assistant.paper_topics import build_daily_topic_bundle, build_hotspot_paper_bundle, ensure_topic_fields_for_mapping, sort_paper_mapping_for_daily_display
     from arxiv_assistant.push_to_slack import push_to_slack
     from arxiv_assistant.renderers.build_multipage_site import build_multipage_site
     from arxiv_assistant.renderers.paper.render_daily import render_daily_md
@@ -265,6 +266,8 @@ def run_remedy_plan(plan: RemedyPlan, output_root: str, build_site: bool) -> Non
         else:
             print("Skipping h-index filtering")
 
+        hotspot_paper_bundle = build_hotspot_paper_bundle(remedy_date, {})
+
         if CONFIG["SELECTION"].getboolean("run_openai"):
             selected_results, filtered_results, total_prompt_cost, total_completion_cost, total_prompt_tokens, total_completion_tokens = filter_by_gpt(
                 paper_list,
@@ -277,28 +280,77 @@ def run_remedy_plan(plan: RemedyPlan, output_root: str, build_site: bool) -> Non
             )
             selected_paper_dict.update(selected_results)
             filtered_paper_dict.update(filtered_results)
+
+            scored_results_for_hotspot = ensure_topic_fields_for_mapping(
+                {
+                    arxiv_id: paper_entry
+                    for arxiv_id, paper_entry in {**selected_results, **filtered_results}.items()
+                    if "RELEVANCE" in paper_entry or "NOVELTY" in paper_entry
+                }
+            )
+            hotspot_paper_bundle = build_hotspot_paper_bundle(
+                remedy_date,
+                scored_results_for_hotspot,
+                max_daily_hot=CONFIG["HOTSPOTS"].getint("paper_spotlight_max_daily_hot", fallback=6),
+                max_new_frontier=CONFIG["HOTSPOTS"].getint("paper_spotlight_max_new_frontier", fallback=4),
+                daily_hot_score_cutoff=CONFIG["HOTSPOTS"].getint("paper_spotlight_daily_hot_score_cutoff", fallback=15),
+                daily_hot_relevance_cutoff=CONFIG["HOTSPOTS"].getint("paper_spotlight_daily_hot_relevance_cutoff", fallback=7),
+                new_frontier_score_cutoff=CONFIG["HOTSPOTS"].getint("paper_spotlight_new_frontier_score_cutoff", fallback=15),
+                new_frontier_novelty_cutoff=CONFIG["HOTSPOTS"].getint("paper_spotlight_new_frontier_novelty_cutoff", fallback=8),
+            )
+            hotspot_paper_ids = set(hotspot_paper_bundle["papers"].keys())
+            if hotspot_paper_ids:
+                selected_paper_dict = {
+                    arxiv_id: paper_entry
+                    for arxiv_id, paper_entry in selected_paper_dict.items()
+                    if arxiv_id not in hotspot_paper_ids
+                }
+                for arxiv_id in hotspot_paper_ids:
+                    spotlight_entry = dict(scored_results_for_hotspot[arxiv_id])
+                    spotlight_entry["DIVERTED_TO_HOTSPOT_PAPERS"] = True
+                    spotlight_entry["FILTER_REASON"] = "Diverted to the daily hotspot paper spotlight."
+                    filtered_paper_dict[arxiv_id] = {
+                        **filtered_paper_dict.get(arxiv_id, {}),
+                        **spotlight_entry,
+                    }
         else:
             total_prompt_cost, total_completion_cost, total_prompt_tokens, total_completion_tokens = 0.0, 0.0, 0, 0
             print("Skipping GPT filtering")
 
-        selected_paper_dict = {
-            key: value
-            for key, value in sorted(
-                selected_paper_dict.items(),
-                key=lambda item: (item[1].get("SCORE", 0), item[1].get("RELEVANCE", 0)),
-                reverse=True,
-            )
-        }
+        selected_paper_dict = sort_paper_mapping_for_daily_display(selected_paper_dict)
+        filtered_paper_dict = ensure_topic_fields_for_mapping(filtered_paper_dict)
+        daily_topic_bundle = build_daily_topic_bundle(
+            remedy_date,
+            selected_paper_dict,
+            usage={
+                "model": CONFIG["SELECTION"]["model"],
+                "prompt_tokens": total_prompt_tokens,
+                "completion_tokens": total_completion_tokens,
+                "prompt_cost": total_prompt_cost,
+                "completion_cost": total_completion_cost,
+                "total_arxiv_papers": len(all_entries),
+                "total_scanned_papers": sum(len(area_papers) for area_papers in arxiv_paper_dict.values()),
+                "total_relevant_papers": len(selected_paper_dict),
+            },
+        )
 
         if CONFIG["OUTPUT"].getboolean("dump_debug_file"):
             with open(output_debug_file_format.format("selected_paper_dict.json"), "w", encoding="utf-8") as outfile:
                 json.dump(selected_paper_dict, outfile, cls=EnhancedJSONEncoder, indent=4)
             with open(output_debug_file_format.format("filtered_paper_dict.json"), "w", encoding="utf-8") as outfile:
                 json.dump(filtered_paper_dict, outfile, cls=EnhancedJSONEncoder, indent=4)
+            with open(output_debug_file_format.format("topic_diagnostics.json"), "w", encoding="utf-8") as outfile:
+                json.dump(daily_topic_bundle["diagnostics"], outfile, indent=4)
+            with open(output_debug_file_format.format("hotspot_paper_bundle.json"), "w", encoding="utf-8") as outfile:
+                json.dump(hotspot_paper_bundle, outfile, indent=4)
 
         if CONFIG["OUTPUT"].getboolean("dump_json"):
             with open(output_json_file_format.format("output.json"), "w", encoding="utf-8") as outfile:
                 json.dump(selected_paper_dict, outfile, indent=4)
+            with open(output_json_file_format.format("daily-papers.json"), "w", encoding="utf-8") as outfile:
+                json.dump(daily_topic_bundle, outfile, indent=4)
+            with open(output_json_file_format.format("hotspot-papers.json"), "w", encoding="utf-8") as outfile:
+                json.dump(hotspot_paper_bundle, outfile, indent=4)
 
         if CONFIG["OUTPUT"].getboolean("dump_md"):
             head_table = {

@@ -1,17 +1,16 @@
 Return JSONL only. Output exactly one JSON object per candidate cluster, one object per line:
 
-{"CLUSTER_ID":"...","KEEP":true,"WATCHLIST":false,"CATEGORY":"...","ARTIFACT_TYPE":"...","EVENT_TYPE":"...","IS_RESURFACED":false,"TITLE":"...","QUALITY":0,"HEAT":0,"IMPORTANCE":0,"SUMMARY":"...","WHY_IT_MATTERS":"..."}
+{"CLUSTER_ID":"...","KEEP":true,"WATCHLIST":false,"CATEGORY":"...","TITLE":"...","QUALITY":0,"HEAT":0,"IMPORTANCE":0,"SUMMARY":"...","WHY_IT_MATTERS":"...","KEY_TAKEAWAYS":["...","..."]}
 
 Rules:
 - CLUSTER_ID must exactly match the provided candidate cluster id.
 - TITLE should be a concise topic title, not a full article headline unless that is the clearest choice.
-- SUMMARY should be brief and concrete.
-- WHY_IT_MATTERS should state the main reason this topic matters today.
-- QUALITY, HEAT, and IMPORTANCE must be integers from 1 to 10.
-- ARTIFACT_TYPE must be one of: paper, official_post, repo, newsletter_recap, discussion, blog_analysis.
-- EVENT_TYPE must be one of: model_release, product_launch, research_paper, deep_analysis, tooling_update, industry_move, community_discussion.
-- IS_RESURFACED should be true if the primary content is old (>30 days) being re-discussed, false otherwise.
-- Prefer KEEP only when the cluster has enough independent evidence or clearly stands out as a defining event.
+- SUMMARY should be brief and concrete (1-2 sentences).
+- WHY_IT_MATTERS should state the main reason this topic matters today, naming specific companies, models, or techniques.
+- KEY_TAKEAWAYS must contain 2-4 concrete, non-trivial points. Each takeaway must add information beyond the headline. Do NOT restate the TITLE or SUMMARY. Good takeaways name specifics: numbers, model names, benchmarks, or concrete capabilities.
+- QUALITY, HEAT, and IMPORTANCE must be integers from 1 to 10. Calibrate against the scoring rubric in the criteria above.
+- KEEP requires meeting at least one of the strict KEEP criteria above. When in doubt, use WATCHLIST.
 - If a cluster is only a single-source research or tooling signal, default to WATCHLIST unless it is unusually strong.
-- Low-trust recap sources (The Rundown, Superhuman, The Neuron, TLDR) should not independently anchor a KEEP decision.
+- If the cluster matches any explicit DROP criteria, set both KEEP and WATCHLIST to false.
+- For blog_analysis source items with substantive content, set CATEGORY to "Research" and note in SUMMARY that it is a deep analysis piece.
 - Do not output markdown, code fences, comments, or extra text.

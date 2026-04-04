@@ -2,8 +2,25 @@
 
 Evaluate each candidate topic on three axes from 1 to 10.
 
+### Source Tier Hierarchy (use this to calibrate your judgments)
+- **Official sources** (company blogs, official announcements): highest credibility. An official_post from OpenAI News about a model release is inherently more significant than a newsletter_recap about the same topic.
+- **Trusted research** (arXiv papers, HF trending with high upvotes): high credibility for research claims.
+- **Trusted analysis** (expert blogs like Simon Willison, Lilian Weng, Import AI): high credibility for technical depth.
+- **Community signals** (Reddit, HN, AINews, X/Twitter): valuable as corroboration, weaker as sole evidence.
+- **Low-trust recaps** (The Rundown AI, Superhuman AI, The Neuron): useful for trend detection, but never sufficient as sole evidence for KEEP.
+
+### Artifact Requirement (MANDATORY for KEEP)
+Every KEEP topic must have at least one concrete artifact:
+- **Product artifact**: A named model, API, platform, SDK, or feature (e.g., "GPT-5 Turbo", "Claude 4 Tool Use API")
+- **Financial artifact**: A funding event with dollar amount, valuation, or acquisition with named parties (e.g., "$500M Series C", "acquired by Google")
+- **Company artifact**: A named startup launch, pivot, or major strategic move (e.g., "xAI comes out of stealth")
+- **Research artifact**: A paper with verifiable SOTA claims, benchmark numbers, or novel architecture (e.g., "outperforms GPT-4o on MATH by 12%")
+- **Strategic artifact**: A named partnership, regulatory change, or infrastructure investment (e.g., "NVIDIA partners with AWS for H200 deployment")
+
+Topics WITHOUT a concrete artifact are automatically WATCHLIST or DROP, regardless of scores.
+
 ### QUALITY
-- 9-10: strong technical, product, or research substance; clearly worth expert attention
+- 9-10: strong technical, product, or research substance; clearly worth executive attention
 - 7-8: meaningful and non-trivial, but narrower or less foundational
 - 5-6: somewhat interesting, but limited depth or significance
 - 1-4: weak, repetitive, or mostly promotional
@@ -14,42 +31,41 @@ Evaluate each candidate topic on three axes from 1 to 10.
 - 5-6: some traction, but not a defining daily topic
 - 1-4: little evidence of wider attention
 
-### IMPORTANCE
-- 9-10: likely to matter beyond the day; major release, research, platform change, or shift in direction
-- 7-8: materially useful or relevant to practitioners/researchers
-- 5-6: modest significance
-- 1-4: low lasting impact
+### IMPORTANCE (calibrated for investors/executives)
+- 9-10: boardroom significance — major product launch, $100M+ funding, paradigm shift, regulatory change affecting the industry
+- 7-8: materially impacts investment thesis, product strategy, or research direction
+- 5-6: relevant to practitioners but limited strategic impact
+- 1-4: low lasting impact, would not change any decision
 
-### Keep / Watchlist Guidance
-- KEEP should be true only for the strongest topics of the day.
-- WATCHLIST should be true for borderline topics that are worth tracking but not worthy of the main list.
-- A topic should not be both KEEP and WATCHLIST.
-- If the evidence is weak, set both KEEP and WATCHLIST to false.
-- Prefer topics with independent confirmation from multiple source families.
-- A single paper, single repo, or single roundup mention should usually be WATCHLIST rather than KEEP unless it is obviously one of the day's defining events.
-- Do not fill the main list with several isolated paper topics from the same feed.
+### Strict KEEP Criteria (must meet ALL of the following)
+1. **Concrete artifact**: The topic has a specific, nameable output (see Artifact Requirement above)
+2. **Frontier significance**: The topic represents a genuinely new development — a new release, a new paper, a new product, a policy shift, or a breakthrough. Discussions, commentary, or benchmarks of existing techniques do NOT qualify.
+3. **Authoritative evidence**: At least one of:
+   - Official source (company blog, official announcement)
+   - High-impact research paper (arXiv, top venue, strong benchmarks)
+   - Multi-source (>=2 independent sources) convergence
+4. **Industry impact**: The topic would matter to AI investors, executives, or research leaders.
 
-### ARTIFACT_TYPE
-Classify the primary artifact type of this cluster:
-- "paper" — an academic research paper (arXiv, conference, journal)
-- "official_post" — an official blog post, announcement, or product page from a company
-- "repo" — a GitHub repository, open-source tool, or code release
-- "newsletter_recap" — a roundup or newsletter that summarizes other stories
-- "discussion" — a forum thread, social media discussion, or community debate
-- "blog_analysis" — a long-form analysis, explainer, or editorial from an independent source
+### WATCHLIST Criteria
+- Single-source topics with interesting artifacts but lacking corroboration
+- Early signals that may develop into KEEP-worthy topics
 
-### EVENT_TYPE
-Classify the underlying event:
-- "model_release" — a new model, checkpoint, or model update is released
-- "product_launch" — a product, API, platform feature, or service is launched or updated
-- "research_paper" — new research results, findings, or a method is presented
-- "deep_analysis" — a substantive analysis, explainer, or technical deep-dive
-- "tooling_update" — a new tool, framework, SDK, or developer resource
-- "industry_move" — funding, acquisition, partnership, policy, or organizational change
-- "community_discussion" — community debate, reaction, viral moment, or social buzz
+### Explicit DROP Criteria (always drop these)
+- Community discussions, opinion threads, "what do you think" posts
+- Awesome-lists and curated link collections
+- Generic agent/MCP wrapper repos with <300 stars
+- Resurfaced papers (>14 days old) unless there is a specific new development
+- Newsletter self-promotion or subscription appeals
+- Tutorials, guides, walkthroughs, cookbooks
+- Personal benchmarks ("I tested X on my GPU"), hardware comparisons
+- Analysis of leaked/existing source code
+- Commentary or opinions without a new underlying development
+- Clickbait titles ("X is dead", "mind-blowing", "you won't believe")
+- Funding/investment news without a primary source or dollar amount
+- Conference/workshop/hackathon announcements
 
-### IS_RESURFACED
-Set to true if the primary content is an old paper or project (older than ~30 days) that is being discussed again, not genuinely new. Trending papers on Hugging Face are often resurfaced old papers.
+### Deep Reads Identification
+- If a topic comes from a blog_analysis source (editorial_depth role) with substantive content, mark it with CATEGORY="Research" and note in SUMMARY that it is a deep analysis piece.
 
 ### Category
 Choose one category:
@@ -57,13 +73,4 @@ Choose one category:
 - Product Release
 - Tooling
 - Industry Update
-- Community Signal
-
-### Source Tier Context
-Each candidate has source tier information. Use it to calibrate trust:
-- "official" tier: company blogs, official announcements — highest trust
-- "trusted_research" tier: curated daily papers — high trust for research
-- "trusted_analysis" tier: high-quality newsletters (The Batch, Import AI) — high trust for analysis
-- "community" tier: community-curated feeds (HF trending, AINews) — medium trust
-- "builder" tier: GitHub trending — medium trust for tooling
-- "low_trust_recap" tier: recap newsletters (The Rundown, Superhuman) — low trust, treat as supporting evidence only
+- Market Signal

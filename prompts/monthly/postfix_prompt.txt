@@ -2,16 +2,11 @@
 
 Respond in JSONL. Output exactly one JSON object per paper, one per line:
 
-{"ARXIVID":"...","PRIMARY_CATEGORY":"...","SECONDARY_CATEGORIES":[],"KEEP_IN_MONTHLY":true,"MONTHLY_COMMENT":"..."}
+{"ARXIVID":"...","PRIMARY_TOPIC_ID":"...","SECONDARY_TOPIC_IDS":[],"KEEP_IN_MONTHLY":true,"MONTHLY_COMMENT":"..."}
 
 Rules:
-- PRIMARY_CATEGORY must be exactly one of:
-  - Model Architecture
-  - Model Compression and Efficiency
-  - High Performance Computing
-  - Representation Learning
-  - Other Foundational Research
-- SECONDARY_CATEGORIES may contain zero or more items from the same allowed set, but do not repeat PRIMARY_CATEGORY.
+- PRIMARY_TOPIC_ID must be exactly one stable topic ID from the shared topic registry.
+- SECONDARY_TOPIC_IDS may contain zero or more topic IDs from the same allowed set, but do not repeat PRIMARY_TOPIC_ID.
 - KEEP_IN_MONTHLY must be true or false.
 - MONTHLY_COMMENT should briefly explain the strongest reason for the classification and monthly keep/drop decision.
 - Default to KEEP_IN_MONTHLY=false unless the paper is clearly one of the stronger papers for a monthly digest.

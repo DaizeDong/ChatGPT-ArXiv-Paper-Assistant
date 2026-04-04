@@ -1,6 +1,7 @@
 from typing import Dict, List, Tuple
 
-from arxiv_assistant.renderers.paper.monthly_summary import MONTH_CATEGORY_ORDER
+from arxiv_assistant.paper_topics import get_topic_registry
+from arxiv_assistant.renderers.paper.monthly_summary import MONTH_TOPIC_ORDER
 from arxiv_assistant.renderers.site_paths import (
     relative_site_href,
     site_day_page_path,
@@ -59,6 +60,7 @@ def _render_summary_header(
 
 
 def _render_summary_stats(category_buckets: Dict[str, List[Dict]]) -> str:
+    topic_registry = get_topic_registry()
     total_papers = sum(len(papers) for papers in category_buckets.values())
     lines = [
         "<table>",
@@ -69,9 +71,9 @@ def _render_summary_stats(category_buckets: Dict[str, List[Dict]]) -> str:
         f"        <tr><td><strong>Total Papers</strong></td><td align=\"center\">{total_papers}</td></tr>",
     ]
 
-    for category in MONTH_CATEGORY_ORDER:
+    for topic_id in MONTH_TOPIC_ORDER:
         lines.append(
-            f"        <tr><td>{category}</td><td align=\"center\">{len(category_buckets.get(category, []))}</td></tr>"
+            f"        <tr><td>{topic_registry.labels_by_id[topic_id]}</td><td align=\"center\">{len(category_buckets.get(topic_id, []))}</td></tr>"
         )
 
     lines.extend(["    </tbody>", "</table>"])
@@ -99,20 +101,21 @@ def _render_paper_line(current_page_path: str, paper_entry: Dict, idx: int) -> s
 
 
 def _render_category_section(
-    category: str,
+    topic_id: str,
     papers: List[Dict],
     current_page_path: str,
 ) -> str:
     if not papers:
         return ""
 
+    topic_registry = get_topic_registry()
     paper_lines = [
         _render_paper_line(current_page_path, paper_entry, idx + 1)
         for idx, paper_entry in enumerate(papers)
     ]
     return "\n\n".join(
         [
-            f"## {category} ({len(papers)})",
+            f"## {topic_registry.labels_by_id[topic_id]} ({len(papers)})",
             "\n\n".join(paper_lines),
         ]
     )
@@ -128,8 +131,8 @@ def render_monthly_summary_md_with_hyperlink(
     head_string = _render_summary_header(current_page_path, now_month, all_summary_months_list)
     stats_table = _render_summary_stats(category_buckets)
     sections = [
-        _render_category_section(category, category_buckets.get(category, []), current_page_path)
-        for category in MONTH_CATEGORY_ORDER
+        _render_category_section(topic_id, category_buckets.get(topic_id, []), current_page_path)
+        for topic_id in MONTH_TOPIC_ORDER
     ]
     rendered_sections = [section for section in sections if section]
 

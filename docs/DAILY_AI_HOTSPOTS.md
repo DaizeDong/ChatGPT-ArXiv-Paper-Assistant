@@ -1,430 +1,404 @@
-# Daily AI Hotspots：一个面向前沿 AI 信号的多源、成本感知热点聚合系统
+# Daily AI Hotspots：一个故事驱动的多源 AI 热点聚合系统
 
-更新日期：2026-03-23
+更新日期：2026-04-04
 
 ## 摘要
 
-本文档描述本仓库当前实现的 `Daily AI Hotspots` 算法系统。该系统面向“同一天内前沿 AI 领域发生了什么”这一问题，聚合论文、新闻通讯、官方博客、GitHub、社区讨论以及 X/Twitter 等异构来源，先将原始信号统一映射为结构化条目，再通过保守聚类、确定性打分、置信度分流和选择性 LLM 复审得到最终热点结果。系统设计的核心矛盾在于：一方面需要尽可能覆盖同日重要动态，另一方面又必须抑制社交噪声、控制 API 成本，并保持结果可解释、可重建。当前实现采用“规则优先、模型补充”的混合架构，通过跨源共振、证据强度、权威来源优先和动态评审预算来提升热点质量。最终产物为一个 source-first 的静态热点站点，重点突出跨来源一致出现的高价值主题，而非单一来源的偶发噪声。
+本文档描述本仓库当前实现的 `Daily AI Hotspots` 系统。该系统面向"同一天前沿 AI 领域发生了什么"这一问题，聚合论文、新闻通讯、官方博客、GitHub、社区讨论及 X/Twitter 等 12 类异构来源。核心架构为"故事驱动"（story-centric）：每个原始信号首先经 LLM 批量语义标注获取事件类型、实体和重要性，再通过四轮 Union-Find 将同一真实事件的多条报道合并为统一的 Story。Story 经五因子评分、多样性选择和可选的 LLM 摘要合成，最终输出为静态 JSON 站点。该设计消除了早期基于标题相似度的脆弱聚类，以及 topic 与 source section 之间的结构性重复，同时通过严格的 36 小时新鲜度门控确保输出仅包含当日信息。
 
 ## 1. 引言
 
-前沿 AI 信息的传播呈现明显碎片化特征。研究论文通常首先出现在 arXiv 或 Hugging Face，产品动态和平台变更更常由官方账号、博客或新闻稿发布，开发者工具动向则集中在 GitHub 和社区论坛，而 X/Twitter 往往承载最快速的讨论与扩散。如果简单地把这些来源混合排序，系统通常会退化成两种低质量形态之一：
+前沿 AI 信息的传播呈现明显碎片化特征。论文首先出现在 arXiv 或 Hugging Face，产品动态由官方博客和新闻稿发布，开发者工具集中在 GitHub 和社区论坛，而 X/Twitter 承载最快速的讨论与扩散。
 
-- 过度偏论文，只能反映研究面，无法覆盖产品、生态和社区层面的关键变化；
-- 过度偏社交热度，被低信息量讨论、宣传性内容和单点爆款牵着走。
+早期版本采用"保守聚类 → 14 因子启发式评分 → 置信度分流 → 选择性 LLM 复审"的架构。该设计的核心矛盾在于：(1) topic 和 source section 两条独立数据路径导致同一事件在页面上重复出现；(2) 14 个启发式因子（FRONTIERNESS, TECHNICAL_DEPTH, RESONANCE 等）手工调权，难以解释且常不准确；(3) LLM 仅在最后的 screening 阶段介入，前面全靠正则和关键词匹配；(4) 基于标题 token 重叠的聚类脆弱——同一事件的不同标题措辞可能 Jaccard 值很低而无法合并。
 
-`Daily AI Hotspots` 的目标并不是构建一个“AI 全网抓取器”，也不是单纯替代 `Personalized Daily Arxiv Paper`。它更像一个面向同日信号的聚合与筛选系统，试图回答下面这个问题：
+当前版本引入 **Story** 作为核心数据单元。一个 Story 代表一个真实世界事件（产品发布、融资、论文等），多个来源对同一事件的报道被合并进同一个 Story。Topic section 和 source section 均从同一个 Story 列表派生，使得跨 section 重复在结构上不可能出现。
 
-> 在当天所有高质量 AI 信息源中，哪些事件、发布、研究或讨论真正构成了值得关注的热点？
+## 2. 系统架构概览
 
-围绕这个目标，当前算法同时追求以下四点：
+当前 pipeline 由七个串行阶段组成：
 
-1. 尽量覆盖不同来源家族，而不是只服务于单一信息形态；
-2. 将“多个不同来源指向同一主题”视为热点成立的重要条件；
-3. 将 LLM 用在最需要复审的边界样本上，而不是无差别筛一遍全部候选；
-4. 保持产物完全静态化、可回放、可在 GitHub Pages 上复现。
-
-## 2. 系统目标
-
-当前实现围绕以下目标展开：
-
-- 在保证质量的前提下扩大同日覆盖面，而不是把页面压缩成极少数“精选摘要”；
-- 优先保留来自官方、公司、研究人员或高信任编辑源的证据，而不是简单追逐热度；
-- 允许单源条目在列表中保留，但只有跨源支持的主题才能进入真正的热点摘要层；
-- 通过确定性过滤和动态预算降低 OpenAI 调用开销；
-- 让结果可以从 `out/` 目录完全重建，而不依赖任何在线状态。
-
-该系统不试图实现实时流式推荐，也不试图覆盖所有 AI 社交噪声。它的定位是一个高质量、可复现的每日热点聚合器。
-
-## 3. 多源数据输入
-
-系统首先从多个来源家族收集原始信号，并将其统一标准化为 `HotspotItem`。
-
-### 3.1 研究与论文源
-
-研究类信号主要来自：
-
-- 本仓库已经筛出的每日论文结果；
-- Hugging Face trending papers；
-- 官方或研究导向的博客源。
-
-这一层天然提供较强的 `frontierness` 和 `technical_depth`，但如果单独依赖，会导致系统退化为“另一种论文榜单”。
-
-### 3.2 编辑与综述源
-
-编辑类信号主要来自：
-
-- AINews / smol.ai；
-- `configs/hotspot/roundup_sites.json` 中登记的 roundup/newsletter 源；
-- 官方博客与厂商博客适配器。
-
-这类来源的价值在于，它们往往代表对当天事件的二次整理，因此对“跨源共识”具有较强指示意义。
-
-### 3.3 构建者与讨论源
-
-补充性来源包括：
-
-- GitHub 趋势与工具源；
-- Hacker News 讨论源。
-
-它们有助于捕捉开发者动向、工具流行度和社区反馈，但同时也更容易混入单点噪声，因此在排序中并不被直接视为高权威证据。
-
-### 3.4 X/Twitter 相关源
-
-当前系统将 X 视为最重要的前沿动向来源之一，但不再采用“大面积抓取后再清洗”的策略，而是只通过受控高质量入口接入：
-
-- 基于权威账号库的官方 recent-search 抓取；
-- AINews 中的 `AI Twitter Recap`；
-- PaperPulse 的研究人员 feed。
-
-也就是说，X 不再是一个开放噪声池，而是经过账号质量和新闻性双重约束后的信号源。
-
-## 4. 统一表示层
-
-所有原始信号首先被转换为统一的结构化条目。一个标准化后的 `HotspotItem` 至少包含以下信息：
-
-- 标题；
-- 简短摘要；
-- 规范化 URL；
-- 来源 ID 与来源名称；
-- 来源角色 `source_role`；
-- 来源类型 `source_type`；
-- 发布时间；
-- 标签；
-- 元数据，例如 stars、upvotes、activity、是否官方等。
-
-这里最重要的抽象不是“它来自哪个网站”，而是“它在信息链中的角色”。当前系统使用的角色包括：
-
-- `research_backbone`
-- `paper_trending`
-- `official_news`
-- `community_heat`
-- `headline_consensus`
-- `builder_momentum`
-- `github_trend`
-- `hn_discussion`
-
-后续的聚类、排序、筛选和展示都依赖这一层角色抽象，而不是硬编码每个来源的特殊逻辑。
-
-## 5. 主题构建：保守的相似性聚类
-
-在进入热点筛选之前，系统先将同一事件或同一主题的不同条目聚合为 cluster。
-
-### 5.1 聚类匹配规则
-
-两个条目只有在满足较强证据时才会被合并：
-
-- 规范化 URL 相同；
-- arXiv ID 相同；
-- GitHub 仓库 URL 相同；
-- 或者标题具有足够强的非泛化词重叠。
-
-其中论文聚类采用了更保守的规则。两篇仅仅讨论相似任务的论文不会被简单合并，这可以避免系统把宽泛研究方向误判成一个具体热点。
-
-### 5.2 cluster 的确定性分数
-
-每个 cluster 都会先获得一个确定性分数，用于后续预算分配与候选预排序。其组成主要包括：
-
-- 来源角色权重；
-- 不同 source ID 的数量；
-- 不同 source type 的数量；
-- stars、upvotes、HN score 等源内热度；
-- 是否官方；
-- 是否关联 GitHub 仓库。
-
-这个分数并不直接等于最终热点分，而是后续候选筛选与资源分配的第一层先验。
-
-## 6. 确定性主题特征
-
-每个 cluster 在被转换为 topic 候选后，会进一步计算一组可解释的中间特征。当前实现中，最重要的特征包括：
-
-- `FRONTIERNESS`
-- `TECHNICAL_DEPTH`
-- `CROSS_SOURCE_RESONANCE`
-- `ACTIONABILITY`
-- `EVIDENCE_STRENGTH`
-- `HYPE_PENALTY`
-- `CONFIDENCE`
-
-这些中间变量再被压缩成用户更容易理解的分数：
-
-- `QUALITY`
-- `HEAT`
-- `IMPORTANCE`
-- `FINAL_SCORE`
-
-其逻辑可概括为：
-
-```text
-QUALITY    <- frontierness, technical_depth, importance, evidence
-HEAT       <- cross-source resonance + item-level activity
-IMPORTANCE <- importance, evidence, frontierness
-FINAL      <- quality + heat + importance + actionability + evidence - hype_penalty
+```
+Stage 1  FETCH        12+ 来源 → raw_items[]
+Stage 2  FILTER       URL一致性 + 无日期过滤 + 36h新鲜度门控
+Stage 3  ENRICH       LLM 批量标注 or 启发式回退 → EnrichedItem[]
+Stage 4  GROUP        四轮 Union-Find → Story[]
+Stage 5  SCORE        五因子公式 → 带分数的 Story[]
+Stage 6  SELECT       多样性约束选择 → featured / watchlist / categories
+Stage 7  SYNTHESIZE   LLM 摘要合成 or 启发式回退 → 最终 report
 ```
 
-这种拆分的价值在于，系统显式地区分了三类常被混淆的概念：
+最终产物为结构化 JSON report，由 web data builder 转换为前端 payload，部署为静态站点。
 
-- 技术价值；
-- 社区或市场关注度；
-- 证据是否充分。
+## 3. 多源数据采集
 
-一个主题可以“很热但证据不足”，也可以“技术上强但传播不足”，还可以“很重要但当前充满噪声”。只有把这些维度拆开，系统才不会被单一指标劫持。
+### 3.1 来源分类
 
-## 7. 置信度感知筛选与 API 成本控制
+系统从以下来源家族采集原始信号，并统一标准化为 `HotspotItem`：
 
-当前系统最关键的成本控制机制，是将 LLM 只用于必要的边界案例，而不是对所有候选一视同仁。
+| 来源家族 | 实现模块 | 来源角色 | 典型数据源 |
+|---------|---------|---------|----------|
+| 官方博客 | `hotspot_official_blogs.py` | `official_news` | OpenAI、Anthropic、Google、Meta、NVIDIA 等 30 个博客 |
+| 编辑综述 | `hotspot_roundups.py` | `headline_consensus` / `editorial_depth` | The Rundown AI、The Neuron、The Batch、Import AI 等 10 个 newsletter |
+| 分析 Feed | `hotspot_analysis_feeds.py` | `editorial_depth` | 专业 RSS 分析源 |
+| 论文趋势 | `hotspot_hf_papers.py` | `paper_trending` | Hugging Face trending papers |
+| 本地论文 | `hotspot_local_papers.py` | `research_backbone` | 本仓库每日论文筛选结果 |
+| GitHub | `hotspot_github.py` | `github_trend` | GitHub trending repos |
+| Hacker News | `hotspot_hn.py` | `hn_discussion` | HN 热门 AI 讨论 |
+| Reddit | `hotspot_reddit.py` | `community_heat` | r/MachineLearning、r/LocalLLaMA 等 |
+| AINews | `hotspot_ainews.py` | `community_heat` | AINews (smol.ai) RSS |
+| X 官方 | `hotspot_x_official.py` | `official_news` | 基于权威账号库的 X API 抓取 |
+| X AINews Recap | `hotspot_x_ainews.py` | `community_heat` | AINews 中的 Twitter recap |
+| X PaperPulse | `hotspot_x_paperpulse.py` | `paper_trending` | PaperPulse 研究人员 feed |
 
-### 7.1 四路预分流
+### 3.2 统一表示层
 
-在任何 OpenAI 调用之前，候选 topic 会先被划分到以下几类：
+所有来源的原始信号被映射为 `HotspotItem` 结构：
 
-- `auto_keep`
-- `auto_watch`
-- `auto_drop`
-- `review`
+```python
+@dataclass
+class HotspotItem:
+    source_id: str
+    source_name: str
+    source_role: str        # official_news, paper_trending, community_heat, ...
+    source_type: str        # blog_announcement, paper, discussion, repo, ...
+    title: str
+    summary: str
+    url: str
+    canonical_url: str
+    published_at: str | None
+    tags: list[str]
+    authors: list[str]
+    metadata: dict[str, Any]
+```
 
-此外，系统还保留一个实际很重要的 `heuristic_only` 路径，用于那些值得出现在广覆盖层里、但不值得消耗 LLM 成本复审的尾部候选。
+系统后续所有操作都基于 `source_role`（信息链中的角色）而非具体来源站点来区分权重，使得添加新来源不需要修改核心逻辑。
 
-该分流主要依据以下量：
+### 3.3 日期解析
 
-- `FINAL_SCORE`
-- `CONFIDENCE`
-- `EVIDENCE_STRENGTH`
-- `CROSS_SOURCE_RESONANCE`
-- 来源数量；
-- 是否包含官方来源；
-- 是否只是孤立的 repo / discussion / 单篇 paper。
+`parse_datetime()` 函数统一处理所有来源的日期格式：
 
-### 7.2 这一设计的意义
+- ISO 8601（含 `Z` 后缀、时区偏移、毫秒）
+- RFC 822（RSS 标准：`Wed, 02 Apr 2026 14:00:00 GMT`）
+- 日期字符串（`YYYY-MM-DD`、`Apr 2, 2026`、`April 2, 2026`）
+- Unix 时间戳（由各来源预转换为 ISO）
 
-如果不做这一步，系统会在大量明显样本上浪费成本，例如：
+所有结果统一转为 UTC 时区。对于 newsletter 来源，当 HTML 中无法提取 `<time>` 标签时，系统依次尝试页面级 `<meta>`、JSON-LD `datePublished` 和 `target_date` 作为 fallback。
 
-- 弱单源 GitHub repo；
-- 孤立社区讨论片段；
-- 低证据 paper-only 尾部主题；
-- 已经足够明确的多源官方发布。
+## 4. 过滤层
 
-当前设计只把真正模糊、但又可能有价值的候选送入模型审核。
+采集到的原始信号在进入 enrichment 之前经过三层过滤：
 
-### 7.3 动态复审预算
+### 4.1 URL-标题一致性过滤
 
-当前 review 队列不是固定大小，而是根据当天 `featured/watchlist` 的目标数量动态计算。这意味着：
+`url_title_consistent()` 检测标题与 URL 指向不一致的条目（常见于 newsletter 中链接指向不相关页面的情况），将其移除。
 
-- 热点较少的日期不会无意义消耗大预算；
-- 热点较多的日期仍能给高价值候选足够复审空间；
-- API 成本更接近“当天的真实不确定性”，而不是“候选总量”。
+### 4.2 无日期过滤
 
-## 8. LLM 辅助筛选
+所有缺少 `published_at` 字段的条目被直接移除。这一策略基于以下判断：无法确认发布日期的条目无法验证其新鲜度，是潜在的过期内容污染源。早期版本允许无日期的 `official_news` 条目通过交叉验证保留，但实践表明这些条目大多是旧产品页面而非当日新闻。
 
-进入 `review` 阶段的候选会通过 OpenAI 接受结构化筛选。模型输出包括：
+对于 Playwright/LLM 模式采集的 SPA 站点和 LLM 提取的条目，系统使用 `target_date` 作为 `published_at` 的 fallback，确保实时抓取的内容不会因缺少日期而被丢弃。
 
-- 类别；
-- 是否进入当日热点；
-- 是否进入 watchlist；
-- 简短摘要；
-- 为什么值得关注；
-- 与排序兼容的数值判断。
+### 4.3 36 小时新鲜度门控与 `fetched_at` 语义
 
-随后，这些结果会被重新规范化回统一的 topic 结构，因此下游逻辑无需区分一个主题是“纯规则产生”还是“LLM 复审产生”。
+所有有日期的条目必须满足新鲜度门控，即有效日期在目标日期前 36 小时以内。36 小时窗口的设计考虑了跨时区和深夜发布的情况。
 
-为了提高 token 利用率，当前实现还做了两项额外优化：
+新鲜度判断通过 `get_freshness_date()` 函数统一处理，优先使用 `metadata["fetched_at"]`（采集/trending 日期），回退到 `published_at`（原始发布日期）。这一设计解决了 HF 论文（`publishedAt` 是 arXiv 提交日期而非 trending 日期）和 GitHub 仓库（`created_at` 是创建日期而非 trending 日期）的日期语义问题——"3 天前提交但今天才上 trending"的内容不再被错误过滤。
 
-- 每个 cluster 只放少量代表性 evidence；
-- digest synthesis 阶段去掉不必要的 URL，并限制每个主题可携带的证据条数。
+该过滤统一应用于所有来源——包括论文、GitHub repo、newsletter、官方博客。系统不再对不同来源使用不同的时间窗口。
 
-因此，LLM 在系统中的角色不是“全面替代规则”，而是“补足规则在边界案例上的不确定性”。
+## 5. LLM 语义标注
 
-## 9. 最终主题选择
+过滤后的条目进入 enrichment 阶段，为每个条目补充结构化语义信息。
 
-在 heuristic 与 LLM 结果合并之后，系统会进入最后的 trimming 阶段，以形成：
+### 5.1 标注内容
 
-- `featured_topics`
-- `watchlist`
-- `category_sections`
-- `long_tail_sections`
+每个条目被标注以下字段，封装为 `EnrichedItem`：
 
-这一阶段并不是简单按分排序，而是明确考虑组合质量，避免：
+```python
+@dataclass
+class EnrichedItem:
+    item: HotspotItem
+    event_type: str       # product_release, funding, acquisition, research_paper,
+                          # tooling, industry_move, opinion, tutorial, recap, other
+    entities: list[dict]  # [{name: str, type: str}]
+    summary: str          # 标准化的两句事实描述
+    importance: int       # 1-10
+    same_event_as: int | None  # 批内同事件交叉引用
+```
 
-- featured 被过多孤立论文占满；
-- featured 被弱 GitHub-only 项目占满；
-- 某一个来源家族过度刷屏。
+### 5.2 LLM 批量标注
 
-因此，最终首页更像一个“有结构的编辑前台”，而不是一张单纯的分数排行榜。
+在 `openai` 模式下，`enrich_items_batch()` 将条目按批次（默认 20 条/批）提交给 LLM，每批提供 index、标题、摘要前 200 字符、来源名称和来源角色。LLM 返回 JSON 数组，包含每个条目的 `event_type`、`entities`、`summary`、`importance` 和 `same_event_as`。
 
-## 10. X 权威账号库与新闻性过滤
+`same_event_as` 字段是 LLM 标注的核心增值：它允许模型在同一批次内识别"这两条报道说的是同一件事"，为后续 Story 合并提供第一层证据。
 
-X 是当前系统中最敏感也最容易失控的一层，因此这里采取了比其他来源更严格的质量约束。
+单个条目的 LLM 标注失败时，系统 fallback 到启发式标注，确保管线不因个别解析错误中断。LLM 提取的实体与启发式提取的实体会被合并，以提高召回率。
 
-### 10.1 权威账号库
+### 5.3 启发式回退
 
-当前系统维护一个动态 `authority registry`，其种子来自：
+在 `heuristic` 模式下，`enrich_items_heuristic()` 使用正则模式匹配确定 `event_type`，基于 `source_role` 权重和元数据信号计算 `importance`，通过正则提取实体。该路径不产生 `same_event_as` 引用。
 
-- 手工整理的官方账号、公司账号和研究人员账号；
-- `follow-the-ai-leaders`；
-- `PaperPulse` 的 researcher authors。
+## 6. Story 构建：四轮 Union-Find
 
-运行时，这些种子会被刷新为缓存化的权威账号库，再作为 direct X 抓取的唯一账号集合。这样，系统就从：
+Enrichment 之后，系统将多个报道同一事件的 `EnrichedItem` 合并为 `Story`。
 
-> 先抓一个很大的 AI 推文面，再靠文本过滤
+### 6.1 数据模型
 
-转变为：
+```python
+@dataclass
+class Story:
+    story_id: str              # 基于代表性条目的 SHA1
+    canonical_item: EnrichedItem  # 最高权重的代表性条目
+    items: list[EnrichedItem]
+    event_type: str
+    entity_names: set[str]
+    category: str              # 从 event_type 映射
+    score: float
+    headline: str
+    summary: str
+    why_it_matters: str
+    key_takeaways: list[str]
+```
 
-> 先限定账号质量，再抓取内容
+### 6.2 合并算法
 
-这是 X 层质量提升的关键原因。
+`group_into_stories()` 使用 Union-Find 数据结构执行四轮合并，任一轮触发即合并：
 
-### 10.2 新闻性过滤
+**第一轮：LLM 交叉引用。** 如果两个条目的 `same_event_as` 指向对方（或指向同一第三方），直接合并。这一轮完全依赖 LLM 标注，是最精确但覆盖最窄的合并条件。
 
-即使账号本身权威，也不代表它发布的所有内容都值得进入热点系统。当前实现因此会显式过滤以下内容：
+**第二轮：共享 URL/ID。** 如果两个条目共享规范化 URL、arXiv ID 或 GitHub 仓库 URL，合并。这覆盖了"多个来源链接到同一原始资源"的场景。
 
-- 招聘、报名、活动安排；
-- webinar、workshop、conference chatter；
-- 泛聊天、情绪表达、无信息量对话；
-- 单篇 work/paper 的自我宣传；
-- 低信息量、低实质性的 AI 邻近帖子。
+**第三轮：实体共现。** 如果两个条目至少共享一个非泛化实体且标题有一定重叠，合并。例外：论文-论文对不通过此轮合并，避免将讨论同一模型但本质不同的论文错误合并。
 
-对官方/公司账号，系统要求同时满足：
+**第四轮：标题相似度。** 三种匹配方式任一触发即合并：(1) 标题包含关系（短标题 token ≥ 80% 出现在长标题中）；(2) Jaccard 相似度 ≥ 0.55；(3) `SequenceMatcher.ratio() ≥ 0.65`（捕获同义词替换，如 "acquires" vs "buys"）。同样排除论文-论文对。LLM enrichment 阶段会按主要实体排序后再分批，使相关条目更可能同批处理，提升 `same_event_as` 跨批覆盖率。
 
-- 文本确实与 AI 相关；
-- 并且具有明确新闻模式，或者具有足够强的产品/平台/研究实质性。
+### 6.3 代表性条目选择
 
-对研究人员账号，要求更严格：
+每个 Story 的代表性条目（`canonical_item`）选取权重最高的来源：
 
-- 禁止 self-paper announce；
-- 必须带外链证据；
-- 低 activity 帖子直接过滤；
-- 文本要更像评论、评测、政策、安全、发布解读或研究判断。
+```python
+canonical = max(items, key=lambda ei: (
+    SOURCE_ROLE_WEIGHTS[ei.item.source_role],
+    ei.importance,
+    len(ei.item.summary)
+))
+```
 
-因此，X 层现在优化的不是“数量”，而是“有新闻意义的权威信号”。
+`SOURCE_ROLE_WEIGHTS` 反映信息链中的角色权威性：
 
-## 11. Daily Topics 的语义
+| 角色 | 权重 |
+|------|------|
+| `official_news` | 6.0 |
+| `editorial_depth` | 4.0 |
+| `research_backbone` | 3.5 |
+| `paper_trending` | 3.0 |
+| `github_trend` | 2.5 |
+| `builder_momentum` | 2.5 |
+| `community_heat` | 2.0 |
+| `headline_consensus` | 1.5 |
+| `hn_discussion` | 1.2 |
 
-`Daily Topics` 不应该被理解为“页面里所有 tag 的集合”。在当前算法中，它表示的是跨源一致出现的主题摘要。
+## 7. Story 评分
 
-具体来说，当前实现只保留：
+每个 Story 通过五因子公式计算最终分数。
 
-- 至少由两个来源支持的 topic。
+### 7.1 评分公式
 
-这意味着 `Daily Topics` 是对“当天到底围绕哪些东西形成了热点”的抽象，而不是一个由前端展示反推出的标签索引。
+```
+raw = (source_weight_sum + evidence_breadth + avg_importance) × event_weight × freshness
+score = min(10.0, raw / normalizer)
+```
 
-## 12. Web Data 与展示层
+其中：
 
-当前系统输出的是结构化 web data，而不是把 markdown 当作最终展示结构。
+- **source_weight_sum** = Σ SOURCE_ROLE_WEIGHTS[item.source_role]，上限 25.0
+- **evidence_breadth** = 独立来源 ID 数 × 1.5 + 独立来源类型数 × 0.8
+- **avg_importance** = 所有条目 importance 的均值（来自 LLM 或启发式）
+- **event_weight** = 事件类型权重（product_release: 2.0, funding: 1.8, research_paper: 1.5, tooling: 1.3, opinion: 0.3 等）。对于 opinion 类型，如果关联实体包含行业关键人物（如 Sam Altman、Geoffrey Hinton、Yann LeCun 等 20 位），权重从 0.3 提升到 1.2
+- **freshness** = 基于最新条目有效日期（优先 `fetched_at`，回退 `published_at`）的衰减（< 12h: 1.0, 12-24h: 0.8, 24-36h: 0.6, > 36h: 0.4）
+- **normalizer** = 三段式动态归一化：P50 映射到 5.0，P95 映射到 9.5，max 映射到 10.0，各段内线性插值。替代了早期硬编码的 `/5.5`，确保全分数范围都有区分度
 
-每日 payload 至少包含：
+### 7.2 与早期评分的对比
 
-- `meta`
-- `totals`
-- `costs`
-- `source_stats`
-- `source_sections`
-- `topic_summary`
-- `featured_topics`
-- `category_sections`
-- `long_tail_sections`
-- `watchlist`
-- `x_buzz`
+早期版本使用 14 个启发式因子（FRONTIERNESS, TECHNICAL_DEPTH, RESONANCE, ACTIONABILITY, EVIDENCE_STRENGTH, HYPE_PENALTY, CONFIDENCE 等），手工设定权重和阈值组合。当前五因子公式的每个分量都有明确物理意义：有多少来源报道了它、来源有多权威、LLM 认为它多重要、它是什么类型的事件、它有多新。
 
-随后前端以 source-first 的紧凑表格视图来渲染这些数据。这里的职责划分是刻意为之：
+## 8. Story 选择与分类
 
-- Python 决定什么值得保留、如何聚合、如何排序；
-- 前端负责把这些结果以高密度、低废话的方式展示出来。
+### 8.1 多样性约束选择
 
-## 13. 构建与可复现性
+`select_and_categorize()` 从评分后的 Story 列表中选出：
 
-整个热点系统是静态可构建的。当前的端到端流程为：
+- **featured**：默认 5 个，每个 category 最多 3 个，每个来源最多 2 个
+- **watchlist**：默认 3 个，应用相同多样性约束
+- **categories**：剩余 Story 按 `event_type → category` 映射分组
 
-1. 采集并标准化原始信号；
-2. 构建 cluster；
-3. 计算确定性分数并进行候选分流；
-4. 对边界案例做 LLM 复审；
-5. 写出 report JSON 与 web-data JSON；
-6. 构建前端静态资源；
-7. 合并到最终静态站点并部署。
+如果首轮选择未达目标数量，第二轮放宽约束（提高 per-category 上限）。
 
-当前仓库仍然保持代码与数据分支分离：
+### 8.2 Category 映射
 
-- `main` 只放代码；
-- `auto_update` 承载 `out/` 数据产物。
+```
+product_release  → Product Release
+funding          → Market Signal
+acquisition      → Market Signal
+research_paper   → Research
+tooling          → Tooling
+industry_move    → Industry Update
+opinion          → Industry Update
+tutorial         → Tooling
+recap            → Other
+other            → Other
+```
 
-这使得历史回放、问题排查与前端重建都相对稳定。
+## 9. 摘要合成
 
-## 14. 当前系统的经验性表现
+进入 featured 的 Story 通过 `apply_digest_synthesis()` 生成结构化摘要：
 
-结合最近多次本地运行，当前实现已经表现出几个明确特征：
+- **headline**：一行新闻标题
+- **summary_short**：2-3 句核心事实
+- **why_it_matters**：为什么值得关注
+- **key_takeaways**：3-5 个要点
 
-- X 官方抓取在具备正确 X API 权限时已经可正常运行；
-- 通过 authority registry 与 newsworthiness 过滤，低质量 X 杂讯已经显著下降；
-- 在“安静日”上，系统会宁缺毋滥，不再为了凑数把弱单源主题硬塞进 featured；
-- 在“热闹日”上，跨源官方/产品/研究主题能够正确进入主层；
-- OpenAI 成本相比早期实现已有显著下降，主要得益于前置分流与动态 review 预算，而不是单纯换模型。
+在 `openai` 模式下由 LLM 生成，`heuristic` 模式下从代表性条目的标题和摘要中提取。
 
-这说明当前质量提升的核心，并不是“让模型做更多事”，而是“让模型只做该做的事”。
+## 10. Web Data 构建与展示
 
-## 15. 局限性
+### 10.1 Payload 结构
 
-尽管当前版本已经明显优于早期实现，但仍有几个结构性局限。
+`build_daily_hotspot_web_payload()` 将 report 转换为前端优化的 JSON payload：
 
-### 15.1 X 覆盖仍受账号库约束
+```
+payload
+├── meta              # 日期、导航链接、统计数字
+├── featured_topics   # 今日要闻（CompactTopic[]）
+├── category_sections # 分类话题（按 event_type 分组）
+├── long_tail_sections # 长尾话题
+├── watchlist         # 关注列表
+├── paper_spotlight   # 论文聚焦（daily_hot / new_frontier）
+├── source_sections   # 信息源条目（6 个来源家族）
+├── topic_summary     # 多源话题摘要
+├── usage             # API 使用量统计
+└── costs             # 成本统计
+```
 
-authority registry 提升了质量，但也意味着系统对新出现的研究者、团队或账号不够敏感。若不定期更新种子库，就可能漏掉新兴高质量来源。
+### 10.2 Source Section 去重
 
-### 15.2 跨源约束可能压制早期弱信号
+Source section 构建时应用多层去重：
 
-要求多个来源共同支持有助于抑制噪声，但也会导致一些“刚刚出现、还未扩散”的早期重要信号被延后识别。
+1. **日期过滤**：`_is_item_on_date()` 检查 36h 窗口
+2. **URL 去重**：全局 canonical URL 去重
+3. **标题去重**：Jaccard ≥ 0.55 或 80% 包含关系的标题视为重复
+4. **低质量过滤**：28 个正则模式过滤导航文本、CTA、下载链接等
+5. **工程讨论过滤**：`engineering_score ≥ 0.45` 的纯工程讨论被移除
 
-### 15.3 排序先验仍然部分依赖手工阈值
+六个来源家族各有独立的展示上限：official (10)、market-signals (6)、analysis (8)、papers (12)、github (6)、industry (6)。
 
-当前不少权重与阈值是可解释的启发式设计，而不是通过长期标注数据学习出来的。因此它们具备工程实用性，但仍有进一步量化评估与校准空间。
+### 10.3 前端页面结构
 
-### 15.4 展示层与算法层故意解耦
+前端使用 React + Vite 构建，页面从上到下展示：
 
-这有利于维护，但也意味着视觉层的优化并不自动代表聚合质量的提升。真正的质量评估必须回到 report 层，而不能只看页面是否更美观。
+1. **今日要闻**（FeaturedStories）：featured topics 的卡片视图，含标题、摘要、关键要点
+2. **论文聚焦**（Paper Spotlight）：按 daily_hot / new_frontier 分组的论文列表
+3. **全部话题**（CategoryRadar）：category_sections + long_tail_sections + watchlist 的统一视图
+4. **其他动态**（Other Updates）：source section 中未被任何 topic 覆盖且非论文的条目
+5. **每日用量**（Usage）：API 调用统计
 
-## 16. 结论
+"其他动态"仅展示不属于任何 topic（无 `topic_refs`）且非论文家族的条目，消除了早期 "Source Feed" 与 "All Topics" 之间的内容重复。
 
-当前 `Daily AI Hotspots` 更适合被理解为一个“面向前沿 AI 日信号的多源聚合与筛选系统”，而不是一个普通的 AI 新闻抓取器。它的主要贡献在于：
+### 10.4 国际化
 
-- 将异构来源统一映射到可比较的信号表示；
-- 采用保守聚类来避免虚假主题合并；
-- 将排序拆解为多个可解释维度；
-- 通过置信度感知分流显著降低 API 成本；
-- 通过权威账号库与新闻性过滤显著提升 X 层质量；
-- 保持整个系统可静态部署、可历史重建。
+前端支持中英文切换，通过 `I18nProvider` 和 `useI18n()` hook 实现。UI 标签使用 `t()` 函数翻译，数据字段使用 `tz()` 函数在 `_zh` 后缀变体和原始值之间切换。翻译由 `scripts/translate_hotspot_web_data.py` 批量调用 OpenAI API 生成并写入数据文件。
 
-在当前数据源和工程约束下，这套设计在质量、覆盖、成本之间取得了一个较强的平衡。
+## 11. X/Twitter 权威账号体系
 
-## 附录 A：实现映射
+X 是最容易引入噪声的来源，系统对其采用比其他来源更严格的约束。
 
-当前热点算法的核心实现分布在以下文件中：
+### 11.1 权威账号库
 
-- `arxiv_assistant/hotspots/pipeline.py`
-- `arxiv_assistant/filters/filter_hotspots.py`
-- `arxiv_assistant/utils/hotspot_cluster.py`
-- `arxiv_assistant/utils/hotspot_web_data.py`
-- `arxiv_assistant/utils/x_authority_registry.py`
-- `arxiv_assistant/apis/hotspot/hotspot_x_common.py`
-- `arxiv_assistant/apis/hotspot/hotspot_x_official.py`
-- `arxiv_assistant/apis/hotspot/hotspot_x_ainews.py`
-- `arxiv_assistant/apis/hotspot/hotspot_x_paperpulse.py`
+系统维护一个可更新的 `authority registry`，种子来自手工整理的官方账号、`follow-the-ai-leaders` 和 PaperPulse researcher authors。运行时种子被刷新为缓存化的权威账号库，作为 X API 抓取的唯一账号集合。
 
-## 附录 B：运行时配置
+### 11.2 新闻性过滤
 
-当前与热点系统最相关的运行时配置包括：
+即使账号权威，也并非所有内容都值得进入热点系统。系统过滤：招聘/活动安排、webinar/workshop chatter、泛聊天与情绪表达、self-paper announce、低信息量 AI 邻近帖子。
 
-- `configs/config.ini`
-- `configs/hotspot/roundup_sites.json`
-- `configs/hotspot/x_authority_seeds.json`
+## 12. 构建与可复现性
 
-本地调试可通过以下环境文件配置：
+整个系统是静态可构建的：
 
-- `.env`
-- `.env.local`
+1. `scripts/generate_daily_hotspots.py` — 执行 7 阶段 pipeline，输出 report JSON 和 normalized items
+2. `scripts/rebuild_hotspot_web_data.py` — 从保存的 report 和 normalized items 重建 web data
+3. `scripts/translate_hotspot_web_data.py` — 批量生成中文翻译
+4. 前端 `npm run build` — 构建静态站点
 
-常用变量包括：
+所有中间产物保存在 `out/` 目录下，支持完整的历史回放和问题排查。
 
-- `OPENAI_API_KEY`
-- `OPENAI_BASE_URL`
-- `X_BEARER_TOKEN`
-- `GITHUB_TOKEN`
+## 13. 运行时配置
 
+### 13.1 关键参数
+
+| 参数 | 默认值 | 说明 |
+|------|--------|------|
+| `target_topics` | 5 | featured story 数量 |
+| `target_watchlist_topics` | 3 | watchlist 数量 |
+| `target_category_topics` | 16 | category section 话题数上限 |
+| `max_raw_items` | 240 | 采集条目上限 |
+| `enrich_batch_size` | 20 | LLM 标注批次大小 |
+| `freshness_hours` | 36 | 新鲜度窗口（小时） |
+| `paper_spotlight_daily_hot_score_cutoff` | 15 | 论文热度阈值 |
+
+### 13.2 来源配置
+
+- `configs/hotspot/official_blogs.json` — 30 个官方博客（RSS / HTML / Playwright / LLM 四种模式）
+- `configs/hotspot/roundup_sites.json` — 10 个 newsletter（daily / weekly 两种节奏）
+- `configs/hotspot/source_tiers.json` — 6 级来源可信度分层，40+ 来源 ID 映射
+- `configs/hotspot/x_authority_seeds.json` — X 权威账号种子库
+
+## 14. 局限性
+
+### 14.1 LLM 标注质量受限于上下文
+
+每个条目仅提供标题和 200 字符摘要用于 LLM 标注，`importance` 和 `same_event_as` 的准确度受限于这一窄窗口。系统通过启发式后补和实体合并部分缓解此问题。Enrichment 阶段按主要实体排序后分批，提升了批内交叉引用覆盖率，但跨批交叉引用仍依赖后续 Union-Find 的 URL/实体/标题相似度合并。
+
+### 14.2 X 覆盖受限于账号库
+
+权威账号库需要定期更新，否则会遗漏新兴高质量来源。
+
+### 14.3 评分归一化对极端分布的敏感性
+
+动态归一化使用 P90 作为参考点。当数据量极少（<5 条）或分布极度偏斜时，归一化因子可能不稳定。下限保护（normalizer ≥ 0.5）部分缓解此问题。
+
+## 附录 A：实现文件映射
+
+| 文件 | 职责 |
+|------|------|
+| `arxiv_assistant/hotspots/pipeline.py` | 主 pipeline 流程 |
+| `arxiv_assistant/hotspots/enrich.py` | LLM 批量标注与启发式回退 |
+| `arxiv_assistant/hotspots/story.py` | Story 数据模型、Union-Find 合并、评分、选择 |
+| `arxiv_assistant/filters/filter_hotspots.py` | 工程讨论评分、摘要合成、辅助函数 |
+| `arxiv_assistant/utils/hotspot/hotspot_cluster.py` | 标题相似度、实体提取、来源权重 |
+| `arxiv_assistant/utils/hotspot/hotspot_web_data.py` | Web payload 构建、source section、新鲜度过滤 |
+| `arxiv_assistant/utils/hotspot/hotspot_sources.py` | 日期解析、URL 标准化、新鲜度判断 |
+| `arxiv_assistant/utils/hotspot/hotspot_schema.py` | HotspotItem 数据模型 |
+| `arxiv_assistant/apis/hotspot/hotspot_official_blogs.py` | 30 个官方博客适配器 |
+| `arxiv_assistant/apis/hotspot/hotspot_roundups.py` | Newsletter 爬虫 |
+| `arxiv_assistant/apis/hotspot/hotspot_hf_papers.py` | HF trending papers |
+| `arxiv_assistant/apis/hotspot/hotspot_github.py` | GitHub trending repos |
+| `arxiv_assistant/apis/hotspot/hotspot_reddit.py` | Reddit 抓取 |
+| `arxiv_assistant/apis/hotspot/hotspot_hn.py` | Hacker News 抓取 |
+| `arxiv_assistant/apis/hotspot/hotspot_x_official.py` | X 权威账号抓取 |
+
+## 附录 B：运行命令
+
+```bash
+# 生成当日热点报告（自动选择 openai/heuristic 模式）
+python -X utf8 scripts/generate_daily_hotspots.py --mode auto --force
+
+# 从已有 report 重建 web data
+python -X utf8 scripts/rebuild_hotspot_web_data.py
+
+# 批量翻译 web data 为中文
+python -X utf8 scripts/translate_hotspot_web_data.py
+
+# 启动前端开发服务器
+cd web && npm run dev
+```

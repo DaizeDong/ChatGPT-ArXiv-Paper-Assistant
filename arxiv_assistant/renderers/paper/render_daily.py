@@ -5,6 +5,12 @@ from typing import Dict, List, Tuple
 from tabulate import tabulate
 
 from arxiv_assistant.filters.filter_gpt import get_user_prompt_for_abstract_filtering
+from arxiv_assistant.paper_topics import (
+    group_sorted_papers_by_topic,
+    paper_anchor_id,
+    sort_paper_mapping_for_daily_display,
+    topic_anchor_id,
+)
 from arxiv_assistant.utils.io import add_prefix_to_lines
 from arxiv_assistant.utils.utils import Paper, align_markdown_table
 
@@ -67,7 +73,7 @@ def render_summary_table(
 def render_title_and_author(paper_entry: Dict, idx: int) -> str:
     title = paper_entry["title"]
     authors = paper_entry["authors"]
-    paper_string = f"{idx}. [{title}](#user-content-link{idx})\n"
+    paper_string = f"{idx}. [{title}](#{paper_anchor_id(paper_entry['arxiv_id'])})\n"
     paper_string += f'**Authors:** {", ".join(authors)}'
     return paper_string
 
@@ -88,13 +94,24 @@ def render_paper_content(paper_entry: Dict, idx: int) -> str:
     abstract = paper_entry["abstract"]
     # get the authors
     authors = paper_entry["authors"]
-    paper_string = f'## {idx}. [{title}]({arxiv_url}) <a id="link{idx}"></a>\n\n'
+    paper_string = f'### {idx}. [{title}]({arxiv_url}) <a id="{paper_anchor_id(arxiv_id)}"></a>\n\n'
     paper_string += f"**ArXiv ID:** {arxiv_id}\n\n"
+    paper_string += f"**Primary Topic:** {paper_entry.get('PRIMARY_TOPIC_LABEL', '')}\n\n"
+    matched_topic_labels = [
+        label
+        for label in paper_entry.get("MATCHED_TOPIC_LABELS", [])
+        if label != paper_entry.get("PRIMARY_TOPIC_LABEL", "")
+    ]
+    if matched_topic_labels:
+        paper_string += f"**Also Matches:** {', '.join(matched_topic_labels)}\n\n"
     paper_string += f'**Authors:** {", ".join(authors)}\n\n'
     paper_string += f"**Abstract:** {abstract}\n\n"
     if "COMMENT" in paper_entry:
         comment = paper_entry["COMMENT"]
         paper_string += f"**Comment:** {comment}\n\n"
+    topic_match_comment = paper_entry.get("TOPIC_MATCH_COMMENT", "")
+    if topic_match_comment and topic_match_comment != paper_entry.get("COMMENT", ""):
+        paper_string += f"**Topic Match:** {topic_match_comment}\n\n"
     if "RELEVANCE" in paper_entry and "NOVELTY" in paper_entry:
         # get the relevance and novelty scores
         relevance = paper_entry["RELEVANCE"]
@@ -102,6 +119,51 @@ def render_paper_content(paper_entry: Dict, idx: int) -> str:
         paper_string += f"**Relevance:** {relevance}\n"
         paper_string += f"**Novelty:** {novelty}"
     return paper_string
+
+
+def render_topic_coverage_table(topic_sections: List[Dict]) -> str:
+    lines = [
+        "<table>",
+        "    <thead>",
+        "        <tr><th>Topic</th><th>Papers</th></tr>",
+        "    </thead>",
+        "    <tbody>",
+    ]
+    for section in topic_sections:
+        lines.append(
+            "        <tr>"
+            f"<td><a href=\"#{topic_anchor_id(section['topic_id'])}\">{section['topic_label']}</a></td>"
+            f"<td align=\"center\">{section['paper_count']}</td>"
+            "</tr>"
+        )
+    lines.extend(["    </tbody>", "</table>"])
+    return "\n".join(lines)
+
+
+def render_topic_toc_section(topic_section: Dict) -> str:
+    title_strings = [
+        render_title_and_author(paper, idx + 1)
+        for idx, paper in enumerate(topic_section["papers"])
+    ]
+    return "\n\n".join(
+        [
+            f"## [{topic_section['topic_label']}](#{topic_anchor_id(topic_section['topic_id'])}) ({topic_section['paper_count']})",
+            "\n\n".join(title_strings),
+        ]
+    )
+
+
+def render_topic_section(topic_section: Dict) -> str:
+    paper_strings = [
+        render_paper_content(paper, idx + 1)
+        for idx, paper in enumerate(topic_section["papers"])
+    ]
+    return "\n\n".join(
+        [
+            f"## {topic_section['topic_label']} ({topic_section['paper_count']}) <a id=\"{topic_anchor_id(topic_section['topic_id'])}\"></a>",
+            "\n\n---\n\n".join(paper_strings),
+        ]
+    )
 
 
 def render_daily_md(
@@ -129,14 +191,16 @@ def render_daily_md(
     else:
         head_table_strings = ""
 
-    # render each paper
-    title_strings = [
-        render_title_and_author(paper, i + 1)
-        for i, paper in enumerate(selected_paper_dict.values())
+    selected_paper_dict = sort_paper_mapping_for_daily_display(selected_paper_dict)
+    sorted_papers = list(selected_paper_dict.values())
+    topic_sections = group_sorted_papers_by_topic(sorted_papers)
+    toc_sections = [
+        render_topic_toc_section(section)
+        for section in topic_sections
     ]
-    paper_strings = [
-        render_paper_content(paper, i + 1)
-        for i, paper in enumerate(selected_paper_dict.values())
+    paper_sections = [
+        render_topic_section(section)
+        for section in topic_sections
     ]
 
     # render prompt
@@ -156,10 +220,12 @@ def render_daily_md(
     output_string = "\n\n".join([
         f"# Personalized Daily ArXiv Papers {date_string}",
         head_table_strings,
-        "**Table of contents with paper titles:**",
-        "\n\n".join(title_strings),
+        "**Topic Coverage:**",
+        render_topic_coverage_table(topic_sections) if topic_sections else "No papers selected.",
+        "**Table of contents by topic:**",
+        "\n\n".join(toc_sections),
         "---",
-        "\n\n---\n\n".join(paper_strings),
+        "\n\n---\n\n".join(paper_sections),
         "---",
         "# Paper Selection Prompt",
         "## System Prompt",

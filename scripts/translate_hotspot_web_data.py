@@ -1,0 +1,265 @@
+"""Translate hotspot web data JSON files to Chinese using LLM.
+
+Reads each daily_hotspot.json, collects all English text fields,
+batch-translates them via the configured OpenAI-compatible API,
+and writes *_zh fields alongside the originals.
+
+Usage:
+    python -X utf8 scripts/translate_hotspot_web_data.py [--date 2026-04-03]
+"""
+
+from __future__ import annotations
+
+import argparse
+import json
+import os
+import re
+import sys
+import time
+from pathlib import Path
+
+REPO_ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(REPO_ROOT))
+
+from arxiv_assistant.utils.local_env import load_local_env
+
+# ---------------------------------------------------------------------------
+# LLM helper
+# ---------------------------------------------------------------------------
+
+def _chat(model: str, messages: list[dict], temperature: float = 0.1) -> str:
+    import requests
+
+    load_local_env()
+    api_key = os.environ.get("OPENAI_API_KEY", "")
+    base_url = os.environ.get("OPENAI_BASE_URL", "https://api.openai.com/v1").rstrip("/")
+    resp = requests.post(
+        f"{base_url}/chat/completions",
+        headers={"Authorization": f"Bearer {api_key}", "Content-Type": "application/json"},
+        json={"model": model, "temperature": temperature, "messages": messages},
+        timeout=180,
+    )
+    resp.raise_for_status()
+    return resp.json()["choices"][0]["message"]["content"]
+
+
+# ---------------------------------------------------------------------------
+# Translation
+# ---------------------------------------------------------------------------
+
+SYSTEM_PROMPT = """\
+You are a professional translator. Translate the following JSON array of English text strings into Chinese.
+Rules:
+- Return a JSON array of the same length, each element being the Chinese translation.
+- Keep proper nouns (company names, product names, people names) in their original form or use their well-known Chinese translation.
+- Technical terms can keep English if no standard Chinese translation exists.
+- Keep translations concise and natural.
+- If a string is already in Chinese, return it unchanged.
+- If a string is empty, return empty string.
+- Return ONLY the JSON array, no markdown fences, no explanation."""
+
+
+def _is_chinese(text: str) -> bool:
+    """Check if text is predominantly Chinese."""
+    if not text.strip():
+        return True
+    chinese_chars = sum(1 for ch in text if "\u4e00" <= ch <= "\u9fff")
+    return chinese_chars > len(text.strip()) * 0.3
+
+
+def batch_translate(texts: list[str], model: str, batch_size: int = 40) -> list[str]:
+    """Translate a list of texts to Chinese, skipping already-Chinese ones."""
+    results = [""] * len(texts)
+    # Mark which ones need translation
+    to_translate: list[tuple[int, str]] = []
+    for i, t in enumerate(texts):
+        if not t.strip() or _is_chinese(t):
+            results[i] = t
+        else:
+            to_translate.append((i, t))
+
+    if not to_translate:
+        return results
+
+    # Batch
+    for start in range(0, len(to_translate), batch_size):
+        batch = to_translate[start : start + batch_size]
+        batch_texts = [t for _, t in batch]
+        user_msg = json.dumps(batch_texts, ensure_ascii=False)
+
+        for attempt in range(3):
+            try:
+                raw = _chat(model, [
+                    {"role": "system", "content": SYSTEM_PROMPT},
+                    {"role": "user", "content": user_msg},
+                ])
+                # Parse JSON from response
+                raw = raw.strip()
+                if raw.startswith("```"):
+                    raw = re.sub(r"^```\w*\n?", "", raw)
+                    raw = re.sub(r"\n?```$", "", raw)
+                translated = json.loads(raw)
+                if len(translated) != len(batch_texts):
+                    raise ValueError(f"Expected {len(batch_texts)} translations, got {len(translated)}")
+                for (idx, _), zh in zip(batch, translated):
+                    results[idx] = zh
+                break
+            except Exception as e:
+                print(f"  Batch {start//batch_size + 1} attempt {attempt+1} failed: {e}")
+                if attempt < 2:
+                    time.sleep(2)
+                else:
+                    # Fallback: keep originals
+                    for idx, orig in batch:
+                        results[idx] = orig
+
+        print(f"  Translated batch {start//batch_size + 1}/{(len(to_translate) + batch_size - 1) // batch_size} ({len(batch)} items)")
+
+    return results
+
+
+# ---------------------------------------------------------------------------
+# JSON traversal
+# ---------------------------------------------------------------------------
+
+# Fields to translate with their paths
+TOPIC_TEXT_FIELDS = ["headline", "summary_short", "why_it_matters", "category"]
+TOPIC_LIST_FIELDS = ["key_takeaways"]
+EVIDENCE_FIELDS = ["title"]
+ITEM_TEXT_FIELDS = ["title", "summary_short", "spotlight_comment"]
+SECTION_TEXT_FIELDS = ["label", "description"]
+
+
+def collect_and_translate(data: dict, model: str) -> dict:
+    """Add _zh fields to all translatable text in the payload."""
+    all_texts: list[str] = []
+    registry: list[tuple[dict, str, int]] = []  # (obj, field_name, index_in_all_texts)
+
+    def register(obj: dict, field: str):
+        val = obj.get(field, "")
+        if isinstance(val, str):
+            idx = len(all_texts)
+            all_texts.append(val)
+            registry.append((obj, field, idx))
+
+    def register_list(obj: dict, field: str):
+        val = obj.get(field, [])
+        if isinstance(val, list):
+            for item in val:
+                if isinstance(item, str):
+                    idx = len(all_texts)
+                    all_texts.append(item)
+                    registry.append((obj, f"{field}[]", idx))
+
+    # Collect from featured_topics
+    for topic in data.get("featured_topics", []):
+        for f in TOPIC_TEXT_FIELDS:
+            register(topic, f)
+        register_list(topic, "key_takeaways")
+        for ev in topic.get("evidence", []):
+            for f in EVIDENCE_FIELDS:
+                register(ev, f)
+
+    # category_sections + long_tail_sections
+    for section_list_key in ("category_sections", "long_tail_sections"):
+        for sec in data.get(section_list_key, []):
+            register(sec, "category")
+            for topic in sec.get("topics", []):
+                for f in TOPIC_TEXT_FIELDS:
+                    register(topic, f)
+                register_list(topic, "key_takeaways")
+                for ev in topic.get("evidence", []):
+                    for f in EVIDENCE_FIELDS:
+                        register(ev, f)
+
+    # watchlist
+    for topic in data.get("watchlist", []):
+        for f in TOPIC_TEXT_FIELDS:
+            register(topic, f)
+        register_list(topic, "key_takeaways")
+        for ev in topic.get("evidence", []):
+            for f in EVIDENCE_FIELDS:
+                register(ev, f)
+
+    # source_sections + paper_spotlight
+    for section_list_key in ("source_sections", "paper_spotlight"):
+        for sec in data.get(section_list_key, []):
+            for f in SECTION_TEXT_FIELDS:
+                register(sec, f)
+            for item in sec.get("items", []):
+                for f in ITEM_TEXT_FIELDS:
+                    register(item, f)
+
+    # meta summary
+    if "meta" in data and "summary" in data["meta"]:
+        register(data["meta"], "summary")
+
+    print(f"  Collected {len(all_texts)} text fields to translate")
+
+    # Translate all at once
+    translated = batch_translate(all_texts, model)
+
+    # Write back as _zh fields
+    key_takeaways_map: dict[int, list[str]] = {}  # obj_id -> list of translated items
+    for obj, field, idx in registry:
+        zh = translated[idx]
+        if field.endswith("[]"):
+            base = field[:-2]
+            obj_id = id(obj)
+            if obj_id not in key_takeaways_map:
+                key_takeaways_map[obj_id] = []
+            key_takeaways_map[obj_id].append(zh)
+            obj[f"{base}_zh"] = key_takeaways_map[obj_id]
+        else:
+            obj[f"{field}_zh"] = zh
+
+    return data
+
+
+# ---------------------------------------------------------------------------
+# Main
+# ---------------------------------------------------------------------------
+
+def translate_file(json_path: Path, model: str):
+    print(f"Translating {json_path.name}...")
+    data = json.loads(json_path.read_text(encoding="utf-8"))
+    data = collect_and_translate(data, model)
+    json_path.write_text(json.dumps(data, ensure_ascii=False, indent=None), encoding="utf-8")
+    print(f"  Done: {json_path.name}")
+
+
+def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--date", help="Translate a specific date (e.g. 2026-04-03)")
+    parser.add_argument("--model", default="gpt-5.4", help="LLM model to use")
+    parser.add_argument("--batch-size", type=int, default=40, help="Texts per LLM call")
+    args = parser.parse_args()
+
+    out_dir = REPO_ROOT / "out" / "web_data" / "hot"
+    web_dir = REPO_ROOT / "web" / "public" / "web_data" / "hot"
+
+    if args.date:
+        targets = [out_dir / f"{args.date}.json"]
+    else:
+        targets = sorted(out_dir.glob("202*.json"))
+
+    for path in targets:
+        if not path.exists():
+            print(f"Skipping {path} (not found)")
+            continue
+        translate_file(path, args.model)
+
+    # Copy to web/public
+    import shutil
+    if web_dir.exists():
+        for path in targets:
+            if path.exists():
+                dest = web_dir / path.name
+                shutil.copy2(path, dest)
+                print(f"  Copied to {dest}")
+
+    print("Translation complete!")
+
+
+if __name__ == "__main__":
+    main()

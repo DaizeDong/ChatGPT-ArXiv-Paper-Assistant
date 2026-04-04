@@ -1,148 +1,116 @@
 {
-  "_comment": "Source tier registry for hotspot quality gating. Sources are matched by source_id first, then by source_role fallback.",
-  "sources": {
-    "local_papers": {
-      "tier": "trusted_research",
-      "lane": "research_signals",
-      "can_anchor_featured": true,
-      "freshness_required": true,
-      "max_age_days": 7
+  "tiers": {
+    "official": {
+      "description": "Official company/lab announcements and blog posts",
+      "trust_level": "high",
+      "weight_multiplier": 1.5,
+      "sources": [
+        "official_blogs",
+        "x_authority:openai",
+        "x_authority:anthropicai",
+        "x_authority:googledeepmind",
+        "x_authority:meta"
+      ]
     },
-    "hf_papers": {
-      "tier": "community",
-      "lane": "research_signals",
-      "can_anchor_featured": false,
-      "freshness_required": true,
-      "max_age_days": 14,
-      "notes": "Trending papers are community-curated resurfaces; old papers must be clearly labeled and cannot anchor featured topics alone"
+    "trusted_research": {
+      "description": "Peer-reviewed or high-citation research sources",
+      "trust_level": "high",
+      "weight_multiplier": 1.3,
+      "sources": [
+        "local_papers",
+        "hf_papers"
+      ]
     },
-    "openai_news": {
-      "tier": "official",
-      "lane": "authoritative_releases",
-      "can_anchor_featured": true
+    "trusted_analysis": {
+      "description": "Long-form analysis from recognized experts and tech media AI coverage",
+      "trust_level": "high",
+      "weight_multiplier": 1.3,
+      "sources": [
+        "import_ai",
+        "the_batch",
+        "last_week_in_ai",
+        "analysis_the_gradient",
+        "analysis_lilian_weng",
+        "analysis_simon_willison",
+        "analysis_jay_alammar",
+        "analysis_sebastian_raschka",
+        "analysis_chip_huyen",
+        "analysis_distill_pub",
+        "analysis_jiqizhixin",
+        "analysis_qbitai",
+        "analysis_venturebeat_ai",
+        "analysis_techcrunch_ai",
+        "analysis_theverge_ai",
+        "analysis_arstechnica_ai",
+        "analysis_bair_blog",
+        "analysis_mit_ai_news"
+      ]
     },
-    "anthropic_news": {
-      "tier": "official",
-      "lane": "authoritative_releases",
-      "can_anchor_featured": true
+    "community_signal": {
+      "description": "Community discussion and social signals",
+      "trust_level": "medium",
+      "weight_multiplier": 1.0,
+      "sources": [
+        "hn_discussion",
+        "ainews",
+        "ainews_twitter",
+        "paperpulse_researcher_feed",
+        "reddit"
+      ]
     },
-    "google_ai_blog": {
-      "tier": "official",
-      "lane": "authoritative_releases",
-      "can_anchor_featured": true
+    "builder_ecosystem": {
+      "description": "GitHub trending and builder-focused sources",
+      "trust_level": "medium",
+      "weight_multiplier": 1.0,
+      "sources": [
+        "github_trend",
+        "bens_bites"
+      ]
     },
-    "meta_ai_blog": {
-      "tier": "official",
-      "lane": "authoritative_releases",
-      "can_anchor_featured": true
-    },
-    "ainews": {
-      "tier": "community",
-      "lane": "community_heat",
-      "can_anchor_featured": false
-    },
-    "ainews_twitter": {
-      "tier": "community",
-      "lane": "community_heat",
-      "can_anchor_featured": false
-    },
-    "x_official": {
-      "tier": "official",
-      "lane": "authoritative_releases",
-      "can_anchor_featured": true
-    },
-    "x_ainews_twitter": {
-      "tier": "community",
-      "lane": "community_heat",
-      "can_anchor_featured": false
-    },
-    "x_paperpulse": {
-      "tier": "trusted_research",
-      "lane": "research_signals",
-      "can_anchor_featured": false,
-      "freshness_required": true,
-      "max_age_days": 14
-    },
-    "github_trend": {
-      "tier": "builder",
-      "lane": "builder_momentum",
-      "can_anchor_featured": false,
-      "notes": "Cannot independently anchor featured unless explicitly promoted"
-    },
-    "hn_discussion": {
-      "tier": "community",
-      "lane": "community_heat",
-      "can_anchor_featured": false
-    },
-    "the_batch": {
-      "tier": "trusted_analysis",
-      "lane": "analysis_and_explainers",
-      "can_anchor_featured": false
-    },
-    "import_ai": {
-      "tier": "trusted_analysis",
-      "lane": "analysis_and_explainers",
-      "can_anchor_featured": false
-    },
-    "last_week_in_ai": {
-      "tier": "trusted_analysis",
-      "lane": "analysis_and_explainers",
-      "can_anchor_featured": false
-    },
-    "the_rundown_ai": {
-      "tier": "low_trust_recap",
-      "lane": "community_heat",
-      "can_anchor_featured": false
-    },
-    "superhuman_ai": {
-      "tier": "low_trust_recap",
-      "lane": "community_heat",
-      "can_anchor_featured": false
-    },
-    "the_neuron": {
-      "tier": "low_trust_recap",
-      "lane": "community_heat",
-      "can_anchor_featured": false
-    },
-    "tldr_ai": {
-      "tier": "low_trust_recap",
-      "lane": "community_heat",
-      "can_anchor_featured": false
-    },
-    "bens_bites": {
-      "tier": "community",
-      "lane": "builder_momentum",
-      "can_anchor_featured": false
-    },
-    "alphasignal": {
-      "tier": "community",
-      "lane": "builder_momentum",
-      "can_anchor_featured": false
+    "low_trust_recap": {
+      "description": "Newsletter recaps and aggregator headlines",
+      "trust_level": "low",
+      "weight_multiplier": 0.7,
+      "sources": [
+        "the_rundown_ai",
+        "superhuman_ai",
+        "the_neuron",
+        "tldr_ai"
+      ]
     }
   },
-  "roundup_overrides": {
-    "the_batch": {
-      "tier": "trusted_analysis",
-      "lane": "analysis_and_explainers",
-      "can_anchor_featured": false
-    },
-    "import_ai": {
-      "tier": "trusted_analysis",
-      "lane": "analysis_and_explainers",
-      "can_anchor_featured": false
-    },
-    "last_week_in_ai": {
-      "tier": "trusted_analysis",
-      "lane": "analysis_and_explainers",
-      "can_anchor_featured": false
-    }
-  },
-  "tier_hierarchy": {
-    "official": 5,
-    "trusted_analysis": 4,
-    "trusted_research": 3,
-    "community": 2,
-    "builder": 2,
-    "low_trust_recap": 1
+  "source_id_to_tier": {
+    "official_blogs": "official",
+    "local_papers": "trusted_research",
+    "hf_papers": "trusted_research",
+    "hn_discussion": "community_signal",
+    "ainews": "community_signal",
+    "ainews_twitter": "community_signal",
+    "paperpulse_researcher_feed": "community_signal",
+    "github_trend": "builder_ecosystem",
+    "the_rundown_ai": "low_trust_recap",
+    "superhuman_ai": "low_trust_recap",
+    "the_neuron": "low_trust_recap",
+    "tldr_ai": "low_trust_recap",
+    "import_ai": "trusted_analysis",
+    "the_batch": "trusted_analysis",
+    "last_week_in_ai": "trusted_analysis",
+    "bens_bites": "builder_ecosystem",
+    "reddit": "community_signal",
+    "analysis_the_gradient": "trusted_analysis",
+    "analysis_lilian_weng": "trusted_analysis",
+    "analysis_simon_willison": "trusted_analysis",
+    "analysis_jay_alammar": "trusted_analysis",
+    "analysis_sebastian_raschka": "trusted_analysis",
+    "analysis_chip_huyen": "trusted_analysis",
+    "analysis_distill_pub": "trusted_analysis",
+    "analysis_jiqizhixin": "trusted_analysis",
+    "analysis_qbitai": "trusted_analysis",
+    "analysis_venturebeat_ai": "trusted_analysis",
+    "analysis_techcrunch_ai": "trusted_analysis",
+    "analysis_theverge_ai": "trusted_analysis",
+    "analysis_arstechnica_ai": "trusted_analysis",
+    "analysis_bair_blog": "trusted_analysis",
+    "analysis_mit_ai_news": "trusted_analysis"
   }
 }

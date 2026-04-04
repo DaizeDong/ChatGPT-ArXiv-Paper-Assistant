@@ -11,13 +11,13 @@ from unittest.mock import patch
 from arxiv_assistant.apis.hotspot.hotspot_ainews import _choose_best_anchor, _derive_segment_title
 from arxiv_assistant.apis.hotspot.hotspot_github import fetch_hotspot_items as fetch_github_hotspot_items
 from arxiv_assistant.apis.hotspot.hotspot_hn import fetch_hotspot_items as fetch_hn_hotspot_items
-from arxiv_assistant.apis.hotspot.hotspot_local_papers import _resolve_best_source_path
+from arxiv_assistant.apis.hotspot.hotspot_local_papers import _resolve_best_source_path, fetch_hotspot_items as fetch_local_hotspot_items
 from arxiv_assistant.apis.hotspot.hotspot_official_blogs import _extract_anthropic_rows
 from arxiv_assistant.filters.filter_hotspots import _cluster_signal_scores, _digest_prompt_payload
 from arxiv_assistant.renderers.hotspot.render_hot_daily import render_hot_daily_md
 from arxiv_assistant.utils.hotspot.hotspot_cluster import build_hotspot_clusters
 from arxiv_assistant.utils.hotspot.hotspot_schema import HotspotCluster, HotspotItem
-from arxiv_assistant.hotspots.pipeline import _build_category_sections, _build_x_buzz_items, _merge_display_candidates, _screening_queue, _trim_topics, detect_latest_local_output_date
+from arxiv_assistant.hotspots.pipeline import _build_category_sections, _build_market_signal_items, _merge_display_candidates, _screening_queue, _trim_topics, detect_latest_local_output_date
 
 
 class TestHotspotPipeline(unittest.TestCase):
@@ -37,6 +37,69 @@ class TestHotspotPipeline(unittest.TestCase):
             resolved_date, resolved_path = resolved
             self.assertEqual(resolved_date.isoformat(), "2026-03-20")
             self.assertEqual(resolved_path, target)
+
+    def test_local_papers_loads_hotspot_spotlight_companion(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            json_root = Path(tmp_dir) / "json" / "2026-04"
+            json_root.mkdir(parents=True, exist_ok=True)
+            (json_root / "2026-04-01-output.json").write_text(
+                json.dumps(
+                    {
+                        "2604.00001": {
+                            "arxiv_id": "2604.00001",
+                            "title": "Personalized paper",
+                            "abstract": "Foundational paper.",
+                            "authors": ["A"],
+                            "PRIMARY_TOPIC_ID": "memory_systems",
+                            "PRIMARY_TOPIC_LABEL": "Memory Structures and Agent Memory Systems",
+                            "SCORE": 18,
+                            "RELEVANCE": 9,
+                            "NOVELTY": 9,
+                        }
+                    }
+                ),
+                encoding="utf-8",
+            )
+            (json_root / "2026-04-01-hotspot-papers.json").write_text(
+                json.dumps(
+                    {
+                        "schema_version": 1,
+                        "papers": {
+                            "2604.00002": {
+                                "arxiv_id": "2604.00002",
+                                "title": "Hot frontier paper",
+                                "abstract": "Opens a new direction.",
+                                "authors": ["B"],
+                                "PRIMARY_TOPIC_ID": "architecture_training",
+                                "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+                                "SCORE": 17,
+                                "RELEVANCE": 8,
+                                "NOVELTY": 9,
+                                "HOTSPOT_PAPER_TAGS": ["new_frontier"],
+                                "HOTSPOT_PAPER_PRIMARY_KIND": "new_frontier",
+                                "HOTSPOT_PAPER_PRIMARY_LABEL": "New Frontier Papers",
+                                "HOTSPOT_PAPER_COMMENT": "Likely opens a new direction.",
+                            }
+                        },
+                        "sections": [
+                            {
+                                "kind": "new_frontier",
+                                "label": "New Frontier Papers",
+                                "paper_ids": ["2604.00002"],
+                            }
+                        ],
+                    }
+                ),
+                encoding="utf-8",
+            )
+
+            items = fetch_local_hotspot_items(datetime(2026, 4, 1, tzinfo=UTC), tmp_dir)
+
+            self.assertEqual(len(items), 2)
+            spotlight_item = next(item for item in items if item.source_id == "local_hotspot_papers")
+            self.assertEqual(spotlight_item.source_role, "paper_trending")
+            self.assertEqual(spotlight_item.metadata["spotlight_primary_kind"], "new_frontier")
+            self.assertIn("New Frontier Papers", spotlight_item.tags)
 
     def test_ainews_prefers_non_media_external_anchor(self) -> None:
         segment_html = """
@@ -311,7 +374,7 @@ class TestHotspotPipeline(unittest.TestCase):
             },
             {
                 "TOPIC_ID": "community-a",
-                "PRIMARY_CATEGORY": "Community Signal",
+                "PRIMARY_CATEGORY": "Industry Update",
                 "source_roles": ["community_heat", "headline_consensus"],
                 "source_names": ["AINews", "The Rundown AI"],
                 "source_ids": ["ainews", "the_rundown_ai"],
@@ -388,7 +451,7 @@ class TestHotspotPipeline(unittest.TestCase):
             },
             {
                 "TOPIC_ID": "community-a",
-                "PRIMARY_CATEGORY": "Community Signal",
+                "PRIMARY_CATEGORY": "Industry Update",
                 "source_roles": ["community_heat", "headline_consensus"],
                 "source_names": ["AINews", "The Rundown AI"],
                 "source_ids": ["ainews", "the_rundown_ai"],
@@ -452,7 +515,7 @@ class TestHotspotPipeline(unittest.TestCase):
             },
             {
                 "TOPIC_ID": "community-low",
-                "PRIMARY_CATEGORY": "Community Signal",
+                "PRIMARY_CATEGORY": "Industry Update",
                 "source_roles": ["community_heat"],
                 "source_names": ["AINews"],
                 "source_ids": ["ainews"],
@@ -512,60 +575,61 @@ class TestHotspotPipeline(unittest.TestCase):
         )
         self.assertTrue(all(topic.get("DEMOTED_LOW_CONFIDENCE") for topic in watchlist))
 
-    def test_x_buzz_prefers_social_proxy_and_backfills_when_needed(self) -> None:
+    def test_market_signals_filters_for_artifacts_and_authoritative_sources(self) -> None:
         raw_items = [
             HotspotItem(
                 source_id="ainews",
                 source_name="AINews",
                 source_role="community_heat",
                 source_type="roundup",
-                title="Cursor's new Composer 2 just beat Claude Opus at coding and it's 10x cheaper",
-                summary="AINews social buzz item.",
-                url="https://www.reddit.com/r/DeepSeek/comments/example1",
-                canonical_url="https://www.reddit.com/r/DeepSeek/comments/example1",
+                title="Mistral raises $600M Series B at $6B valuation",
+                summary="Major funding round for European AI startup.",
+                url="https://www.reddit.com/r/MachineLearning/comments/example1",
+                canonical_url="https://www.reddit.com/r/MachineLearning/comments/example1",
                 published_at="2026-03-21T00:00:00+00:00",
                 metadata={"activity": 900, "host": "reddit.com"},
             ),
             HotspotItem(
-                source_id="the_rundown_ai",
-                source_name="The Rundown AI",
-                source_role="headline_consensus",
-                source_type="roundup",
-                title="OpenAI quietly expands enterprise agent workflows",
-                summary="Rundown item.",
-                url="https://www.rundown.ai/openai-enterprise-agent-workflows",
-                canonical_url="https://www.rundown.ai/openai-enterprise-agent-workflows",
+                source_id="openai_news",
+                source_name="OpenAI News",
+                source_role="official_news",
+                source_type="official_blog",
+                title="OpenAI launches GPT-5 Turbo with 2x context",
+                summary="New model release with improved capabilities.",
+                url="https://openai.com/index/gpt-5-turbo",
+                canonical_url="https://openai.com/index/gpt-5-turbo",
                 published_at="2026-03-21T00:00:00+00:00",
-                metadata={},
+                metadata={"is_official": True},
             ),
             HotspotItem(
                 source_id="hn_discussion",
                 source_name="Hacker News",
                 source_role="hn_discussion",
                 source_type="discussion",
-                title="ArXiv declares independence from Cornell",
-                summary="HN discussion.",
-                url="https://www.science.org/content/article/arxiv-pioneering-preprint-server-declares-independence-cornell",
-                canonical_url="https://www.science.org/content/article/arxiv-pioneering-preprint-server-declares-independence-cornell",
+                title="What do you think about local LLM setups?",
+                summary="Community opinion thread.",
+                url="https://news.ycombinator.com/item?id=12345",
+                canonical_url="https://news.ycombinator.com/item?id=12345",
                 published_at="2026-03-21T00:00:00+00:00",
                 metadata={"hn_score": 120},
             ),
         ]
         top_topics = [
             {
-                "TOPIC_ID": "cursor",
-                "HEADLINE": "Cursor controversy",
+                "TOPIC_ID": "mistral",
+                "HEADLINE": "Mistral funding",
                 "items": [{"title": raw_items[0].title, "url": raw_items[0].url}],
             }
         ]
 
-        x_buzz = _build_x_buzz_items(raw_items, top_topics, [], target_count=3, min_count=3)
+        signals = _build_market_signal_items(raw_items, top_topics, [], target_count=3, min_count=1)
 
-        self.assertEqual(len(x_buzz), 3)
-        self.assertEqual(x_buzz[0]["source_id"], "ainews")
-        self.assertEqual(x_buzz[0]["linked_topic"], "Cursor controversy")
-        self.assertIn("the_rundown_ai", {item["source_id"] for item in x_buzz})
-        self.assertIn("hn_discussion", {item["source_id"] for item in x_buzz})
+        # Should include funding item (artifact match) and official item (authoritative)
+        # Should exclude opinion thread (no artifact, not authoritative)
+        signal_ids = {item["source_id"] for item in signals}
+        self.assertIn("ainews", signal_ids)
+        self.assertIn("openai_news", signal_ids)
+        self.assertNotIn("hn_discussion", signal_ids)
 
     def test_category_sections_expand_coverage_without_repeating_featured_topics(self) -> None:
         candidate_topics = [
@@ -584,6 +648,7 @@ class TestHotspotPipeline(unittest.TestCase):
                 "QUALITY": 8,
                 "HEAT": 8,
                 "IMPORTANCE": 9,
+                "FRONTIERNESS": 7.0,
             },
             {
                 "TOPIC_ID": "tooling-1",
@@ -600,6 +665,7 @@ class TestHotspotPipeline(unittest.TestCase):
                 "QUALITY": 7,
                 "HEAT": 7,
                 "IMPORTANCE": 7,
+                "FRONTIERNESS": 5.0,
             },
             {
                 "TOPIC_ID": "research-1",
@@ -616,11 +682,12 @@ class TestHotspotPipeline(unittest.TestCase):
                 "QUALITY": 8,
                 "HEAT": 6,
                 "IMPORTANCE": 7,
+                "FRONTIERNESS": 5.5,
             },
             {
                 "TOPIC_ID": "community-1",
                 "title": "Debate over model provenance",
-                "PRIMARY_CATEGORY": "Community Signal",
+                "PRIMARY_CATEGORY": "Industry Update",
                 "source_roles": ["community_heat", "hn_discussion"],
                 "source_names": ["AINews", "Hacker News"],
                 "source_ids": ["ainews", "hn_discussion"],
@@ -632,11 +699,12 @@ class TestHotspotPipeline(unittest.TestCase):
                 "QUALITY": 6,
                 "HEAT": 8,
                 "IMPORTANCE": 6,
+                "FRONTIERNESS": 4.0,
             },
             {
                 "TOPIC_ID": "generic-notice",
                 "title": "Information Collection Notice",
-                "PRIMARY_CATEGORY": "Community Signal",
+                "PRIMARY_CATEGORY": "Industry Update",
                 "source_roles": ["headline_consensus"],
                 "source_names": ["Ben's Bites"],
                 "source_ids": ["bens_bites"],
@@ -652,7 +720,7 @@ class TestHotspotPipeline(unittest.TestCase):
             {
                 "TOPIC_ID": "off-topic-news",
                 "title": "Amazon's secret phone project",
-                "PRIMARY_CATEGORY": "Community Signal",
+                "PRIMARY_CATEGORY": "Industry Update",
                 "source_roles": ["headline_consensus"],
                 "source_names": ["The Rundown AI"],
                 "source_ids": ["the_rundown_ai"],
@@ -721,7 +789,7 @@ class TestHotspotPipeline(unittest.TestCase):
             },
             {
                 "TOPIC_ID": "weak-roundup",
-                "PRIMARY_CATEGORY": "Community Signal",
+                "PRIMARY_CATEGORY": "Industry Update",
                 "source_roles": ["headline_consensus"],
                 "source_names": ["Newsletter"],
                 "source_types": ["roundup"],
@@ -842,6 +910,25 @@ class TestHotspotPipeline(unittest.TestCase):
             "summary": "Strong multi-source AI discussion across releases, tooling, and research.",
             "source_stats": {"ainews": 3, "github_trend": 5},
             "totals": {"raw_items": 20, "clusters": 15},
+            "paper_spotlight": [
+                {
+                    "kind": "new_frontier",
+                    "label": "New Frontier Papers",
+                    "description": "Papers that appear to open a genuinely new direction, paradigm, or field.",
+                    "items": [
+                        {
+                            "title": "Hot frontier paper",
+                            "url": "https://arxiv.org/abs/2603.00001",
+                            "arxiv_id": "2603.00001",
+                            "primary_topic_label": "Architecture and Training Dynamics",
+                            "spotlight_comment": "Likely opens a new direction.",
+                            "daily_score": 18,
+                            "relevance": 9,
+                            "novelty": 9,
+                        }
+                    ],
+                }
+            ],
             "featured_topics": [
                 {
                     "TOPIC_ID": "featured-official",
@@ -879,13 +966,13 @@ class TestHotspotPipeline(unittest.TestCase):
             ],
             "long_tail_sections": [
                 {
-                    "category": "Community Signal",
+                    "category": "Industry Update",
                     "total_candidates": 1,
                     "topics": [
                         {
                             "TOPIC_ID": "tail-1",
                             "title": "Open-source AI coding agent",
-                            "PRIMARY_CATEGORY": "Community Signal",
+                            "PRIMARY_CATEGORY": "Industry Update",
                             "FINAL_SCORE": 2.8,
                             "HEAT": 4,
                             "OCCURRENCE_SCORE": 3.9,
@@ -903,10 +990,12 @@ class TestHotspotPipeline(unittest.TestCase):
         rendered = render_hot_daily_md(report)
 
         self.assertIn("## Featured Topics", rendered)
+        self.assertIn("## Paper Spotlight", rendered)
+        self.assertIn("### New Frontier Papers (1)", rendered)
         self.assertIn("## Topic Radar By Category", rendered)
         self.assertIn("## Long-tail Signals", rendered)
         self.assertIn("### Tooling (1 shown / 2 candidates)", rendered)
-        self.assertIn("### Community Signal (1 shown / 1 candidates)", rendered)
+        self.assertIn("### Industry Update (1 shown / 1 candidates)", rendered)
         self.assertIn("Open-source agent runtime", rendered)
 
 

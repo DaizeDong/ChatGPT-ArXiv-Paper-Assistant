@@ -2,11 +2,19 @@
 
 Respond in JSONL. Output exactly one JSON object per paper, one per line:
 
-{"ARXIVID":"...","COMMENT":"...","RELEVANCE":0,"NOVELTY":0}
+{"ARXIVID":"...","COMMENT":"...","RELEVANCE":0,"NOVELTY":0,"PRIMARY_TOPIC_ID":"...","MATCHED_TOPIC_IDS":[],"TOPIC_MATCH_COMMENT":"...","HOTSPOT_PAPER_TAGS":[],"HOTSPOT_PAPER_COMMENT":"..."}
 
 Rules:
 - ARXIVID: the arXiv ID.
 - COMMENT: identify the single strongest matching criterion. Be brief and specific. Do not rely on generic phrases like "language modeling" or "advancement". Do not mention non-matching criteria.
 - RELEVANCE: integer from 1 to 10.
 - NOVELTY: integer from 1 to 10.
+- PRIMARY_TOPIC_ID: exactly one stable topic ID from the allowed topic registry.
+- MATCHED_TOPIC_IDS: zero or more stable topic IDs from the same allowed set. Include PRIMARY_TOPIC_ID when there are multiple matches.
+- TOPIC_MATCH_COMMENT: briefly explain why the primary topic is the best fit.
+- HOTSPOT_PAPER_TAGS: zero or more tags from this exact set only: `daily_hot`, `new_frontier`.
+- HOTSPOT_PAPER_COMMENT: briefly explain why the paper belongs in the daily hotspot paper feed when HOTSPOT_PAPER_TAGS is non-empty; otherwise use an empty string.
+- Use HOTSPOT_PAPER_TAGS sparingly. Most papers should return `[]`.
+- `daily_hot` means the paper feels broadly important to the day and belongs in the daily hotspot paper section even if it is not part of the personalized foundational reading list.
+- `new_frontier` means the paper appears to open a genuinely new direction, paradigm, or field, even if the work is still early.
 - Do not output markdown, code fences, or any extra text.

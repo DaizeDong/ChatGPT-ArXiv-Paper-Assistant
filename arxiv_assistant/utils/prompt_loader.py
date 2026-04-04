@@ -42,6 +42,9 @@ PROMPT_PATHS = {
         REPO_ROOT / "prompts" / "hotspot" / "digest_writer.txt",
         REPO_ROOT / "prompts" / "hotspot_digest_writer.txt",
     ],
+    "hotspot.enrich": [
+        REPO_ROOT / "prompts" / "hotspot" / "enrich_prompt.txt",
+    ],
     "monthly.system_prompt": [
         REPO_ROOT / "prompts" / "monthly" / "system_prompt.txt",
         REPO_ROOT / "prompts" / "monthly_summary_system_prompt.txt",

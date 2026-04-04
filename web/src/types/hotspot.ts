@@ -78,6 +78,7 @@ export type CompactTopic = {
   category: string;
   summary_short: string;
   why_it_matters: string;
+  key_takeaways: string[];
   scores: {
     final: number;
     quality: number;
@@ -85,7 +86,9 @@ export type CompactTopic = {
     importance: number;
     occurrence: number;
     display_priority: number;
+    confidence: number;
   };
+  source_tier: string;
   source_names: string[];
   source_roles: string[];
   source_types: string[];

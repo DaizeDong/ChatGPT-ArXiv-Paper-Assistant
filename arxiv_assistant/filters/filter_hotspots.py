@@ -2,13 +2,15 @@ from __future__ import annotations
 
 import json
 import math
+import os
 import re
 from typing import Any
 
-from openai import OpenAI
+import requests
 
 from arxiv_assistant.utils.hotspot.hotspot_cluster import title_similarity, title_overlap_boost
 from arxiv_assistant.utils.hotspot.hotspot_schema import HotspotCluster
+from arxiv_assistant.utils.local_env import load_local_env
 from arxiv_assistant.utils.pricing_loader import get_model_pricing
 
 ALLOWED_HOTSPOT_CATEGORIES = {
@@ -178,9 +180,16 @@ def calc_price(model: str, usage) -> tuple[float, float]:
     if model not in model_pricing:
         return 0.0, 0.0
 
-    cached_tokens = usage.model_extra.get("prompt_tokens_details", {}).get("cached_tokens", 0)
-    prompt_tokens = usage.prompt_tokens - cached_tokens
-    completion_tokens = usage.completion_tokens
+    # Support both OpenAI response objects (attribute access) and raw dicts
+    if isinstance(usage, dict):
+        details = usage.get("prompt_tokens_details", {}) or {}
+        cached_tokens = details.get("cached_tokens", 0)
+        prompt_tokens = int(usage.get("prompt_tokens", 0) or 0) - cached_tokens
+        completion_tokens = int(usage.get("completion_tokens", 0) or 0)
+    else:
+        cached_tokens = getattr(usage, "model_extra", {}).get("prompt_tokens_details", {}).get("cached_tokens", 0)
+        prompt_tokens = usage.prompt_tokens - cached_tokens
+        completion_tokens = usage.completion_tokens
     cache_pricing = model_pricing[model].get("cache", model_pricing[model]["prompt"])
     prompt_pricing = model_pricing[model]["prompt"]
     completion_pricing = model_pricing[model]["completion"]
@@ -756,6 +765,21 @@ def _normalize_screening_row(cluster: HotspotCluster, row: dict[str, Any], score
     return topic
 
 
+def _chat_completion(model: str, messages: list[dict[str, str]], temperature: float = 0.1) -> dict[str, Any]:
+    """Call the chat completions API using requests.post (compatible with API proxy)."""
+    load_local_env()
+    api_key = os.environ.get("OPENAI_API_KEY", "")
+    base_url = os.environ.get("OPENAI_BASE_URL", "https://api.openai.com/v1").rstrip("/")
+    resp = requests.post(
+        f"{base_url}/chat/completions",
+        headers={"Authorization": f"Bearer {api_key}", "Content-Type": "application/json"},
+        json={"model": model, "temperature": temperature, "messages": messages},
+        timeout=120,
+    )
+    resp.raise_for_status()
+    return resp.json()
+
+
 def screen_clusters_with_openai(
     clusters: list[HotspotCluster],
     system_prompt: str,
@@ -767,7 +791,6 @@ def screen_clusters_with_openai(
     score_cutoff: float,
     watchlist_cutoff: float,
  ) -> tuple[list[dict[str, Any]], list[dict[str, Any]], float, float, int, int, int]:
-    client = OpenAI()
     kept: list[dict[str, Any]] = []
     watchlist: list[dict[str, Any]] = []
     total_prompt_cost = 0.0
@@ -783,17 +806,18 @@ def screen_clusters_with_openai(
         last_exception: Exception | None = None
         for _ in range(max(retry_count, 1)):
             try:
-                response = client.chat.completions.create(
+                data = _chat_completion(
                     model=model,
-                    temperature=0.1,
                     messages=[{"role": "system", "content": system_prompt}, {"role": "user", "content": batch_prompt}],
                 )
-                parsed_rows = parse_jsonl_response(response.choices[0].message.content or "")
-                prompt_cost, completion_cost = calc_price(model, response.usage)
+                raw_content = data["choices"][0]["message"]["content"] or ""
+                parsed_rows = parse_jsonl_response(raw_content)
+                usage = data.get("usage", {})
+                prompt_cost, completion_cost = calc_price(model, usage)
                 total_prompt_cost += prompt_cost
                 total_completion_cost += completion_cost
-                total_prompt_tokens += int(getattr(response.usage, "prompt_tokens", 0) or 0)
-                total_completion_tokens += int(getattr(response.usage, "completion_tokens", 0) or 0)
+                total_prompt_tokens += int(usage.get("prompt_tokens", 0) or 0)
+                total_completion_tokens += int(usage.get("completion_tokens", 0) or 0)
                 total_requests += 1
                 break
             except Exception as ex:
@@ -859,7 +883,11 @@ def _digest_prompt_payload(top_topics: list[dict[str, Any]], watchlist: list[dic
                 "KEY_TAKEAWAYS": topic.get("KEY_TAKEAWAYS", []),
                 "SOURCE_NAMES": topic["source_names"],
                 "EVIDENCE": [
-                    {"source_name": item.get("source_name"), "title": item.get("title")}
+                    {
+                        "source_name": item.get("source_name"),
+                        "title": item.get("title"),
+                        **({"summary": item["summary"][:300]} if item.get("summary") else {}),
+                    }
                     for item in topic.get("items", [])[:DIGEST_EVIDENCE_CAP]
                 ],
             }
@@ -881,24 +909,24 @@ def synthesize_digest_with_openai(
     model: str,
     retry_count: int,
 ) -> tuple[dict[str, Any], float, float, int, int, int]:
-    client = OpenAI()
     last_exception: Exception | None = None
     user_prompt = "\n\n".join([digest_prompt.strip(), _digest_prompt_payload(top_topics, watchlist)])
     for _ in range(max(retry_count, 1)):
         try:
-            response = client.chat.completions.create(
+            data = _chat_completion(
                 model=model,
-                temperature=0.1,
                 messages=[{"role": "system", "content": system_prompt}, {"role": "user", "content": user_prompt}],
             )
-            payload = parse_json_object_response(response.choices[0].message.content or "{}")
-            prompt_cost, completion_cost = calc_price(model, response.usage)
+            raw_content = data["choices"][0]["message"]["content"] or "{}"
+            payload = parse_json_object_response(raw_content)
+            usage = data.get("usage", {})
+            prompt_cost, completion_cost = calc_price(model, usage)
             return (
                 payload,
                 prompt_cost,
                 completion_cost,
-                int(getattr(response.usage, "prompt_tokens", 0) or 0),
-                int(getattr(response.usage, "completion_tokens", 0) or 0),
+                int(usage.get("prompt_tokens", 0) or 0),
+                int(usage.get("completion_tokens", 0) or 0),
                 1,
             )
         except Exception as ex:

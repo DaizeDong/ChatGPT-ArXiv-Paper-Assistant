@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+import logging
 import re
 import shutil
 from collections import defaultdict
@@ -9,13 +10,16 @@ from pathlib import Path
 from typing import Any
 from urllib.parse import urlparse
 
+logger = logging.getLogger(__name__)
+
 from arxiv_assistant.utils.hotspot.hotspot_dates import (
     is_supported_hotspot_date,
     is_supported_hotspot_month,
     is_supported_hotspot_year,
 )
+from arxiv_assistant.utils.hotspot.hotspot_cluster import title_similarity
 from arxiv_assistant.utils.hotspot.hotspot_schema import HotspotItem
-from arxiv_assistant.utils.hotspot.hotspot_sources import url_title_consistent
+from arxiv_assistant.utils.hotspot.hotspot_sources import parse_datetime, url_title_consistent
 
 SOURCE_FAMILIES = [
     {
@@ -117,6 +121,75 @@ def _short_text(value: str, limit: int = 180) -> str:
     if len(normalized) <= limit:
         return normalized
     return normalized[: limit - 3].rstrip() + "..."
+
+
+def _concise_text(value: str, limit: int = 300) -> str:
+    """Truncate text at the last complete sentence within *limit* characters.
+
+    Unlike ``_short_text``, this never appends '...' — it drops trailing
+    incomplete sentences so the result always reads as finished prose.
+    """
+    text = _normalize_text(value)
+    if not text:
+        return ""
+    # Strip trailing "..." / "…" that sources sometimes leave
+    text = re.sub(r"\.{2,}$", ".", text)
+    text = re.sub(r"…$", ".", text)
+    # Strip HTML entities like &#8230; (ellipsis)
+    text = re.sub(r"\[?&#\d+;?\]?$", "", text).rstrip()
+    if len(text) <= limit:
+        return text
+    # Find the last sentence-ending punctuation within the limit
+    candidate = text[:limit]
+    # Look for last sentence end (. ! ? followed by space or end)
+    last_end = -1
+    for m in re.finditer(r'[.!?](?:\s|$)', candidate):
+        last_end = m.end()
+    if last_end > limit * 0.3:
+        return candidate[:last_end].rstrip()
+    # No good sentence boundary — cut at last space, no ellipsis
+    space_pos = candidate.rfind(" ")
+    if space_pos > limit * 0.3:
+        return candidate[:space_pos].rstrip(",:;")
+    return candidate.rstrip()
+
+
+# Patterns for cleaning raw scraped summaries
+_ACTIVITY_PREFIX_RE = re.compile(r"^.{0,200}\(Activity:\s*\d+\)\s*:\s*", re.I)
+_MARKDOWN_LINK_RE = re.compile(r"\[([^\]]*)\]\([^)]+\)")
+_RAW_URL_RE = re.compile(r"https?://\S+")
+_SCORE_PREFIX_RE = re.compile(r"^\(Score:\s*[\d.]+\)\s*", re.I)
+
+
+def _clean_raw_summary(summary: str, title: str) -> str:
+    """Clean a raw scraped summary: strip metadata, URLs, title repetition."""
+    text = _normalize_text(summary)
+    if not text:
+        return ""
+    # Strip "(Activity: NNN):" prefix (title can be long, so allow up to 200 chars before it)
+    text = _ACTIVITY_PREFIX_RE.sub("", text).strip()
+    # Strip "(Score: X.X)" prefix
+    text = _SCORE_PREFIX_RE.sub("", text).strip()
+    # Replace markdown links with their text
+    text = _MARKDOWN_LINK_RE.sub(r"\1", text).strip()
+    # Remove bare URLs
+    text = _RAW_URL_RE.sub("", text).strip()
+    # Remove leading/trailing punctuation artifacts
+    text = text.strip(":;,. \t[](){}")
+    # If result is too short to be useful, return empty
+    if len(text) <= 3:
+        return ""
+    # If summary is just the title repeated, return empty
+    if text.lower() == title.lower().strip():
+        return ""
+    # If summary starts with the title, strip it
+    if text.lower().startswith(title.lower().strip()):
+        remainder = text[len(title):].lstrip(":;,. \t")
+        if remainder:
+            text = remainder
+        else:
+            return ""
+    return text
 
 
 def _url_host(url: str | None) -> str:
@@ -499,8 +572,11 @@ def _build_compact_topic(topic: dict[str, Any]) -> dict[str, Any]:
         "slug": topic["slug"],
         "headline": _clean_display_title(topic.get("HEADLINE") or topic.get("title") or "Untitled Topic"),
         "category": topic.get("PRIMARY_CATEGORY", "Research"),
-        "summary_short": _short_text(topic.get("SHORT_COMMENT") or topic.get("summary") or topic.get("WHY_IT_MATTERS") or "", 150),
-        "why_it_matters": _short_text(topic.get("WHY_IT_MATTERS", ""), 220),
+        "summary_short": _concise_text(_clean_raw_summary(
+            topic.get("SHORT_COMMENT") or topic.get("summary") or topic.get("WHY_IT_MATTERS") or "",
+            topic.get("HEADLINE") or topic.get("title") or "",
+        ), 300),
+        "why_it_matters": _concise_text(topic.get("WHY_IT_MATTERS", ""), 300),
         "key_takeaways": list(topic.get("KEY_TAKEAWAYS", [])),
         "scores": {
             "final": _topic_score(topic, "FINAL_SCORE"),
@@ -521,28 +597,191 @@ def _build_compact_topic(topic: dict[str, Any]) -> dict[str, Any]:
     }
 
 
+def _is_title_duplicate(title: str, seen: list[str], sim_threshold: float = 0.55) -> bool:
+    """Check if *title* is a duplicate of any already-seen title.
+
+    Uses both Jaccard similarity AND containment (short title contained in long
+    title), which catches cases like "OpenAI acquires TBPN" vs the same with a
+    longer subtitle.
+    """
+    from arxiv_assistant.utils.hotspot.hotspot_cluster import significant_title_tokens
+    new_tokens = significant_title_tokens(title)
+    if not new_tokens:
+        return False
+    for existing in seen:
+        # Fast Jaccard check
+        if title_similarity(title, existing) >= sim_threshold:
+            return True
+        # Containment check: if the smaller token set is ≥80% contained in the larger
+        existing_tokens = significant_title_tokens(existing)
+        if not existing_tokens:
+            continue
+        smaller, larger = (new_tokens, existing_tokens) if len(new_tokens) <= len(existing_tokens) else (existing_tokens, new_tokens)
+        if len(smaller) >= 2 and len(smaller & larger) / len(smaller) >= 0.80:
+            return True
+    return False
+
+
+def _is_item_on_date(item: HotspotItem, date_str: str) -> bool:
+    """Check if item was published within 36 hours before the target date."""
+    from datetime import datetime, timedelta, timezone
+    if not date_str:
+        return True
+    if not item.published_at:
+        return False  # no date → reject
+    dt = parse_datetime(item.published_at)
+    if dt is None:
+        return False  # unparseable → reject
+    try:
+        target = datetime.strptime(date_str, "%Y-%m-%d").replace(tzinfo=timezone.utc)
+    except ValueError:
+        return True
+    cutoff = target - timedelta(hours=36)
+    return dt >= cutoff
+
+
+# ---------------------------------------------------------------------------
+# Freshness filter: cross-reference undated topics against dated items
+# ---------------------------------------------------------------------------
+
+
+def _topic_has_dated_items(topic_dict: dict[str, Any]) -> bool:
+    """Check if a topic has at least one item with a valid published_at date."""
+    items = topic_dict.get("items", [])
+    return any(it.get("published_at") for it in items)
+
+
+def _collect_dated_titles(report: dict[str, Any], raw_items: list[HotspotItem]) -> list[str]:
+    """Gather all titles from items that have a valid published_at date."""
+    titles: list[str] = []
+    # From raw normalized items
+    for item in raw_items:
+        if item.published_at:
+            titles.append(item.title)
+    # From topic items in the report
+    for key in ("featured_topics", "top_topics", "category_sections", "long_tail_sections", "watchlist"):
+        data = report.get(key, [])
+        if not isinstance(data, list) or not data:
+            continue
+        entries = data
+        if isinstance(data[0], dict) and "topics" in data[0]:
+            entries = [t for sec in data for t in sec.get("topics", [])]
+        for topic in entries:
+            if not isinstance(topic, dict):
+                continue
+            for it in topic.get("items", []):
+                if it.get("published_at"):
+                    titles.append(it.get("title", ""))
+    return titles
+
+
+def _is_topic_cross_referenced(headline: str, dated_titles: list[str], threshold: float = 0.35) -> bool:
+    """Check if a topic headline matches any dated item title."""
+    for dt in dated_titles:
+        if title_similarity(headline, dt) >= threshold:
+            return True
+    return False
+
+
+def _filter_stale_topics_in_payload(payload: dict[str, Any], report: dict[str, Any], raw_items: list[HotspotItem]) -> None:
+    """Remove topics whose items all lack dates and have no cross-reference to dated items."""
+    date_str = str(payload.get("meta", {}).get("date", ""))
+    if not date_str:
+        return
+
+    dated_titles = _collect_dated_titles(report, raw_items)
+    if not dated_titles:
+        return
+
+    removed_count = 0
+
+    def _is_fresh_topic(raw_topic: dict[str, Any], headline: str) -> bool:
+        if _topic_has_dated_items(raw_topic):
+            return True
+        return _is_topic_cross_referenced(headline, dated_titles)
+
+    # Filter featured_topics
+    src = report.get("featured_topics") or report.get("top_topics") or []
+    keep_featured: list[dict[str, Any]] = []
+    for i, topic in enumerate(payload.get("featured_topics", [])):
+        raw_topic = src[i] if i < len(src) else {}
+        if _is_fresh_topic(raw_topic, topic.get("headline", "")):
+            keep_featured.append(topic)
+        else:
+            removed_count += 1
+            logger.info("Stale featured topic removed: [%s] %s", date_str, topic.get("headline", ""))
+    payload["featured_topics"] = keep_featured
+
+    # Filter category_sections and long_tail_sections
+    for key in ("category_sections", "long_tail_sections"):
+        raw_sections = report.get(key, [])
+        for si, section in enumerate(payload.get(key, [])):
+            raw_sec = raw_sections[si] if si < len(raw_sections) else {}
+            raw_topics = raw_sec.get("topics", [])
+            keep: list[dict[str, Any]] = []
+            for ti, topic in enumerate(section.get("topics", [])):
+                raw_topic = raw_topics[ti] if ti < len(raw_topics) else {}
+                if _is_fresh_topic(raw_topic, topic.get("headline", "")):
+                    keep.append(topic)
+                else:
+                    removed_count += 1
+                    logger.info("Stale topic removed: [%s] %s", date_str, topic.get("headline", ""))
+            section["topics"] = keep
+
+    # Filter watchlist
+    raw_watchlist = report.get("watchlist", [])
+    keep_watchlist: list[dict[str, Any]] = []
+    for i, topic in enumerate(payload.get("watchlist", [])):
+        raw_topic = raw_watchlist[i] if i < len(raw_watchlist) else {}
+        if _is_fresh_topic(raw_topic, topic.get("headline", "")):
+            keep_watchlist.append(topic)
+        else:
+            removed_count += 1
+            logger.info("Stale watchlist topic removed: [%s] %s", date_str, topic.get("headline", ""))
+    payload["watchlist"] = keep_watchlist
+
+    if removed_count:
+        logger.info("Removed %d stale topic(s) for %s", removed_count, date_str)
+
+    # Remove empty category sections
+    for key in ("category_sections", "long_tail_sections"):
+        payload[key] = [s for s in payload.get(key, []) if s.get("topics")]
+
+    # Update counts
+    counts = payload.get("meta", {}).get("counts", {})
+    counts["featured_topics"] = len(payload.get("featured_topics", []))
+    counts["category_radar"] = sum(len(s.get("topics", [])) for s in payload.get("category_sections", []))
+    counts["long_tail"] = sum(len(s.get("topics", [])) for s in payload.get("long_tail_sections", []))
+    counts["watchlist"] = len(payload.get("watchlist", []))
+
+
 def _build_source_sections(raw_items: list[HotspotItem], report: dict[str, Any], topic_lookup: dict[str, dict[str, Any]]) -> list[dict[str, Any]]:
     from arxiv_assistant.filters.filter_hotspots import _item_engineering_score
     grouped: dict[str, list[dict[str, Any]]] = defaultdict(list)
-    seen_urls: dict[str, set[str]] = defaultdict(set)  # family -> set of canonical URLs
+    seen_urls: set[str] = set()  # global URL dedup
+    seen_titles: list[str] = []  # for title-similarity story dedup
     date_str = str(report.get("date", ""))
-    for item in raw_items:
-        # Skip items with mismatched URLs (title/URL inconsistency)
+    # Sort by family priority so higher-priority families claim stories first
+    items_sorted = sorted(raw_items, key=lambda it: SOURCE_FAMILY_ORDER_BOOST.get(_classify_source_family(it), 1.0), reverse=True)
+    for item in items_sorted:
+        if not _is_item_on_date(item, date_str):
+            continue
         if not url_title_consistent(item.title, item.url):
             continue
-        # Skip low-quality display items
         if _is_low_quality_display_item(item):
             continue
-        # Skip engineering discussion items (items with any eng pattern hit get >= 0.55)
         eng_score = _item_engineering_score(item.title, item.summary or "", item.source_role)
         if eng_score >= 0.45:
             continue
         family = _classify_source_family(item)
-        # Deduplicate by canonical URL within each source family
         canonical = item.canonical_url or item.url
-        if canonical in seen_urls[family]:
+        if canonical in seen_urls:
             continue
-        seen_urls[family].add(canonical)
+        # Story-level dedup: skip if a similar title was already claimed
+        if _is_title_duplicate(item.title, seen_titles):
+            continue
+        seen_urls.add(canonical)
+        seen_titles.append(item.title)
         linked_topics = []
         if canonical and canonical in topic_lookup:
             linked_topics.append(_topic_paths(date_str, topic_lookup[canonical]))
@@ -552,11 +791,22 @@ def _build_source_sections(raw_items: list[HotspotItem], report: dict[str, Any],
             if not any(existing["topic_id"] == candidate["topic_id"] for existing in linked_topics):
                 linked_topics.append(candidate)
         display_title = _clean_display_title(item.title)
+        # Prefer AI-generated summary from linked topic; fall back to cleaned raw summary
+        # Only use topic summary if the topic headline is relevant to this item
+        raw_summary = ""
+        linked_topic = topic_lookup.get(canonical) or topic_lookup.get(title_key)
+        if linked_topic:
+            topic_headline = str(linked_topic.get("HEADLINE") or linked_topic.get("title") or "")
+            if title_similarity(item.title, topic_headline) >= 0.35:
+                raw_summary = str(linked_topic.get("summary") or linked_topic.get("SHORT_COMMENT") or "").strip()
+        if not raw_summary:
+            raw_summary = item.summary or ""
+        item_summary = _concise_text(_clean_raw_summary(raw_summary, item.title), 300)
         grouped[family].append(
             {
                 "id": _item_identifier(item),
                 "title": display_title,
-                "summary_short": _short_text(item.summary, 180),
+                "summary_short": item_summary,
                 "url": item.url,
                 "canonical_url": item.canonical_url,
                 "source_id": item.source_id,
@@ -579,7 +829,9 @@ def _build_source_sections(raw_items: list[HotspotItem], report: dict[str, Any],
                 "spotlight_kinds": list(item.metadata.get("spotlight_kinds", [])),
                 "spotlight_primary_kind": str(item.metadata.get("spotlight_primary_kind", "") or ""),
                 "spotlight_primary_label": str(item.metadata.get("spotlight_primary_label", "") or ""),
-                "spotlight_comment": str(item.metadata.get("spotlight_comment", "") or ""),
+                "spotlight_comment": _concise_text(
+                    str(item.metadata.get("spotlight_comment", "") or ""), 250
+                ),
             }
         )
 
@@ -688,7 +940,7 @@ def build_daily_hotspot_web_payload(
     ]
     topic_summary = _build_topic_summary(all_topics)
     section_counts = {section["slug"]: section["count"] for section in source_sections}
-    return {
+    payload = {
         "schema_version": 1,
         "meta": {
             "date": report.get("date"),
@@ -725,6 +977,11 @@ def build_daily_hotspot_web_payload(
         "watchlist": watchlist_topics,
         "x_buzz": list(report.get("x_buzz") or []),
     }
+
+    # Filter out stale topics that lack date metadata
+    _filter_stale_topics_in_payload(payload, report, raw_items)
+
+    return payload
 
 
 def _build_topic_paths_and_merge(report: dict[str, Any], topic: dict[str, Any]) -> dict[str, Any]:

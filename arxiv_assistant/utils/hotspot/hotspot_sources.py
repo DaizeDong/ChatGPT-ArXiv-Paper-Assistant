@@ -203,6 +203,12 @@ def url_title_consistent(title: str, url: str) -> bool:
     if "reddit.com" in host:
         return True
 
+    # Titles with significant non-ASCII content (CJK, etc.) can't be
+    # checked against URL slugs — always pass them through.
+    non_ascii = sum(1 for c in title if ord(c) > 127)
+    if non_ascii >= len(title) * 0.3:
+        return True
+
     # Extract significant title tokens (>= 3 chars, not stopwords)
     title_tokens = {
         t for t in _re.findall(r"[a-z0-9]+", title.lower())

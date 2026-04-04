@@ -23,11 +23,17 @@ def _parse_daily_papers(page_html: str) -> list[dict]:
     return payload.get("dailyPapers", [])
 
 
-MAX_PAPER_AGE_DAYS = 14
+MAX_PAPER_AGE_DAYS = 1
 MIN_UPVOTES = 5
 
 
-def fetch_hotspot_items(target_date: datetime, freshness_hours: int, result_limit: int = 12) -> list[HotspotItem]:
+def fetch_hotspot_items(
+    target_date: datetime,
+    freshness_hours: int,
+    result_limit: int = 12,
+    *,
+    daily_hot_score_cutoff: int = 15,
+) -> list[HotspotItem]:
     page_html = fetch_text(HF_TRENDING_URL)
     daily_papers = _parse_daily_papers(page_html)
     items: list[HotspotItem] = []
@@ -60,6 +66,16 @@ def fetch_hotspot_items(target_date: datetime, freshness_hours: int, result_limi
             continue
 
         canonical_url = f"https://arxiv.org/abs/{paper_id}"
+
+        # Classify for paper spotlight based on upvotes
+        spotlight_kind = ""
+        spotlight_label = ""
+        spotlight_comment = ""
+        if upvotes >= daily_hot_score_cutoff:
+            spotlight_kind = "daily_hot"
+            spotlight_label = "Daily Hot Papers"
+            spotlight_comment = clip_text(paper.get("summary", ""), 300)
+
         items.append(
             HotspotItem(
                 source_id="hf_papers",
@@ -76,9 +92,15 @@ def fetch_hotspot_items(target_date: datetime, freshness_hours: int, result_limi
                 metadata={
                     "arxiv_id": paper_id,
                     "upvotes": upvotes,
+                    "daily_score": upvotes,
+                    "relevance": 0,
+                    "novelty": 0,
                     "github_url": paper.get("githubRepo"),
                     "hf_url": f"https://huggingface.co/papers/{paper_id}",
                     "ai_summary": paper.get("ai_summary", ""),
+                    "spotlight_primary_kind": spotlight_kind,
+                    "spotlight_primary_label": spotlight_label,
+                    "spotlight_comment": spotlight_comment,
                 },
             )
         )

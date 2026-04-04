@@ -1,5 +1,10 @@
 # Changelog
 
+### 2026-04-04
+
+- Enforced strict 1-day freshness for all hotspot sources: items without a publication date are dropped, and dated items older than 36 hours are filtered out.
+- Merged redundant "Source Feed" into topic-centric layout: topic-covered items and papers (shown in Paper Spotlight) are no longer duplicated; remaining items appear under "Other Updates".
+
 ### 2026-04-02
 
 - Repositioned Daily AI Hotspots as an artifact-centric executive brief: added artifact detection, substance penalty, rebalanced source weights and scoring toward official/research sources, and tightened screening to drop community-only noise.

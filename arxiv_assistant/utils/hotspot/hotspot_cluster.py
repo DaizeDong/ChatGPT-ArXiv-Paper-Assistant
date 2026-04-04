@@ -159,6 +159,9 @@ GENERIC_OVERLAP_TOKENS = {
     "large",
     "speed",
     "quality",
+    # Financial/scale words that shouldn't count as meaningful overlap
+    "billion",
+    "million",
 }
 
 SOURCE_ROLE_WEIGHTS = {
@@ -223,11 +226,11 @@ def normalize_title(title: str) -> str:
 
 
 def significant_title_tokens(title: str) -> set[str]:
-    return {
-        token
-        for token in normalize_title(title).split()
-        if len(token) >= 4
-    }
+    raw = normalize_title(title).split()
+    # Normalize number+scale tokens before length filter: "122b" → "122"
+    normalized = [re.sub(r'^(\d+)[bmk]$', r'\1', t) for t in raw]
+    # Keep tokens ≥4 chars, or numeric tokens ≥3 chars (e.g. "122")
+    return {t for t in normalized if len(t) >= 4 or (len(t) >= 3 and t.isdigit())}
 
 
 def title_similarity(left: str, right: str) -> float:
@@ -412,5 +415,36 @@ def build_hotspot_clusters(items: list[HotspotItem], similarity_threshold: float
                 deterministic_score=compute_deterministic_cluster_score(bucket_sorted),
             )
         )
+
+    # Merge pass: combine clusters with very similar titles that the greedy pass missed
+    merged = True
+    while merged:
+        merged = False
+        i = 0
+        while i < len(clusters):
+            j = i + 1
+            while j < len(clusters):
+                if title_similarity(clusters[i].title, clusters[j].title) >= 0.85:
+                    # Merge smaller into larger
+                    big, small = (i, j) if len(clusters[i].items) >= len(clusters[j].items) else (j, i)
+                    big_c, small_c = clusters[big], clusters[small]
+                    existing_urls = {item.get("canonical_url") or item.get("url") for item in big_c.items}
+                    for item in small_c.items:
+                        if (item.get("canonical_url") or item.get("url")) not in existing_urls:
+                            big_c.items.append(item)
+                    big_c.source_ids = sorted(set(big_c.source_ids) | set(small_c.source_ids))
+                    big_c.source_names = sorted(set(big_c.source_names) | set(small_c.source_names))
+                    big_c.source_roles = sorted(set(big_c.source_roles) | set(small_c.source_roles))
+                    big_c.source_types = sorted(set(big_c.source_types) | set(small_c.source_types))
+                    big_c.tags = sorted(set(big_c.tags) | set(small_c.tags))
+                    clusters.pop(small)
+                    merged = True
+                    if big > small:
+                        i = small  # re-check from the shifted position
+                        break
+                else:
+                    j += 1
+            else:
+                i += 1
 
     return sorted(clusters, key=lambda cluster: cluster.deterministic_score, reverse=True)

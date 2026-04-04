@@ -111,9 +111,52 @@ def _extract_generic_roundup_items(page_html: str, base_url: str) -> list[dict]:
     return rows
 
 
+def _extract_page_date(page_html: str) -> str | None:
+    """Try to extract a page-level publication date from HTML meta/time/JSON-LD."""
+    from arxiv_assistant.utils.hotspot.hotspot_sources import parse_datetime
+    soup = BeautifulSoup(page_html, "html.parser")
+
+    # 1. <meta property="article:published_time">
+    for prop in ("article:published_time", "og:updated_time", "date"):
+        meta = soup.find("meta", attrs={"property": prop}) or soup.find("meta", attrs={"name": prop})
+        if meta and meta.get("content"):
+            dt = parse_datetime(meta["content"])
+            if dt:
+                return dt.isoformat()
+
+    # 2. Top-level <time datetime="..."> (outside <article>)
+    for time_node in soup.find_all("time", limit=3):
+        if time_node.find_parent("article"):
+            continue
+        dt_str = time_node.get("datetime")
+        if dt_str:
+            dt = parse_datetime(dt_str)
+            if dt:
+                return dt.isoformat()
+
+    # 3. JSON-LD datePublished
+    for script in soup.find_all("script", type="application/ld+json"):
+        try:
+            import json
+            data = json.loads(script.string or "")
+            if isinstance(data, list):
+                data = data[0] if data else {}
+            for key in ("datePublished", "dateCreated", "dateModified"):
+                if data.get(key):
+                    dt = parse_datetime(data[key])
+                    if dt:
+                        return dt.isoformat()
+        except Exception:
+            pass
+
+    return None
+
+
 def fetch_hotspot_items(target_date: datetime, freshness_hours: int, registry_path: str | Path) -> list[HotspotItem]:
+    from datetime import timezone
     registry = load_roundup_registry(registry_path)
     items: list[HotspotItem] = []
+    target_date_iso = target_date.replace(tzinfo=timezone.utc).isoformat() if target_date.tzinfo is None else target_date.isoformat()
     for site in registry:
         if not site.get("enabled") or site.get("site_id") in {"ainews", "alphasignal"}:
             continue
@@ -125,6 +168,10 @@ def fetch_hotspot_items(target_date: datetime, freshness_hours: int, registry_pa
         except Exception as ex:
             print(f"Warning: failed to fetch roundup site {site['site_id']}: {ex}")
             continue
+
+        # Extract page-level date; fall back to target_date for newsletters
+        page_date = _extract_page_date(page_html) or target_date_iso
+
         signal_role = site.get("signal_role", "headline_consensus")
         is_low_trust = signal_role in LOW_TRUST_ROLES
         max_per_site = LOW_TRUST_MAX_ITEMS if is_low_trust else TRUSTED_MAX_ITEMS
@@ -148,7 +195,7 @@ def fetch_hotspot_items(target_date: datetime, freshness_hours: int, registry_pa
             if is_low_trust and not _has_signal_keyword(title):
                 continue
 
-            published_at = row.get("published_at")
+            published_at = row.get("published_at") or page_date
             if published_at and not is_fresh(published_at, target_date, freshness_hours):
                 continue
             items.append(

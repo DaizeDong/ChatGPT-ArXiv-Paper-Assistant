@@ -88,11 +88,14 @@ export function matchesSearch(item: SourceSectionItem, query: string) {
   return haystack.includes(query);
 }
 
-export function filterSectionsBySearch(sections: SourceSection[], searchQuery: string) {
+export function filterSectionsBySearch(sections: SourceSection[], searchQuery: string, excludeTopicCovered = false) {
   const query = searchQuery.trim().toLowerCase();
   return sections
     .map((section) => {
-      const filteredItems = section.items.filter((item) => matchesSearch(item, query));
+      let filteredItems = section.items.filter((item) => matchesSearch(item, query));
+      if (excludeTopicCovered) {
+        filteredItems = filteredItems.filter((item) => !item.topic_refs.length);
+      }
       return { ...section, filteredItems };
     })
     .filter((section) => section.filteredItems.length > 0);

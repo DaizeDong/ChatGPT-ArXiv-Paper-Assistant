@@ -2,13 +2,15 @@ import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 
 import { ArchiveNav } from "../components/ArchiveNav";
+import { CategoryRadar } from "../components/CategoryRadar";
 import { CrossSiteSwitch } from "../components/CrossSiteSwitch";
+import { FeaturedStories } from "../components/FeaturedStories";
 import { SignalTable } from "../components/SignalTable";
-import { TopicSummaryTable, type TopicSummaryRow } from "../components/TopicSummaryTable";
 import { isNotFoundError, loadDailyHotspot } from "../lib/data";
 import { filterSectionsBySearch } from "../lib/hotspotView";
+import { useI18n } from "../lib/i18n";
 import { bestPaperRoute } from "../lib/routes";
-import type { DailyHotspotPayload, SourceSection } from "../types/hotspot";
+import type { CompactTopic, DailyHotspotPayload, SourceSection } from "../types/hotspot";
 import { NotFoundPage } from "./NotFoundPage";
 
 type AsyncState =
@@ -19,36 +21,6 @@ type AsyncState =
 
 function sectionTitle(section: SourceSection) {
   return `${section.label} (${section.count})`;
-}
-
-function buildVisibleTopicSummary(payload: DailyHotspotPayload, searchQuery: string) {
-  return payload.topic_summary
-    .filter((topic) => topic.source_count >= 2)
-    .filter((topic) => !searchQuery || `${topic.headline} ${topic.category} ${topic.llm_status}`.toLowerCase().includes(searchQuery))
-    .map<TopicSummaryRow>((topic) => ({
-      topic_id: topic.topic_id,
-      headline: topic.headline,
-      final_score: topic.final_score,
-      heat: topic.heat,
-      display_priority: topic.display_priority,
-      source_count: topic.source_count,
-      item_count: topic.item_count,
-    }))
-    .sort((left, right) => {
-      if (right.source_count !== left.source_count) {
-        return right.source_count - left.source_count;
-      }
-      if ((right.item_count ?? 0) !== (left.item_count ?? 0)) {
-        return (right.item_count ?? 0) - (left.item_count ?? 0);
-      }
-      if ((right.display_priority ?? right.final_score) !== (left.display_priority ?? left.final_score)) {
-        return (right.display_priority ?? right.final_score) - (left.display_priority ?? left.final_score);
-      }
-      if (right.heat !== left.heat) {
-        return right.heat - left.heat;
-      }
-      return left.headline.localeCompare(right.headline, undefined, { sensitivity: "base" });
-    });
 }
 
 type UsageRow = {
@@ -64,7 +36,7 @@ type UsageRow = {
 
 function formatCount(value: number | null) {
   if (value === null) {
-    return "—";
+    return "\u2014";
   }
   return value.toLocaleString();
 }
@@ -122,6 +94,7 @@ function buildUsageRows(payload: DailyHotspotPayload): UsageRow[] {
 export function DailyHotspotPage({ date }: { date: string }) {
   const [state, setState] = useState<AsyncState>({ status: "loading" });
   const [searchParams, setSearchParams] = useSearchParams();
+  const { t } = useI18n();
 
   useEffect(() => {
     let active = true;
@@ -157,41 +130,64 @@ export function DailyHotspotPage({ date }: { date: string }) {
 
   const { payload } = state;
   const searchQuery = (searchParams.get("q") ?? "").trim().toLowerCase();
-  const visibleSections = filterSectionsBySearch(payload.source_sections, searchQuery);
   const visiblePaperSpotlight = filterSectionsBySearch(payload.paper_spotlight ?? [], searchQuery);
-  const visibleTopicSummary = buildVisibleTopicSummary(payload, searchQuery);
+  // "Other Updates": source items not covered by any topic AND not papers (papers live in Paper Spotlight)
+  const otherSections = filterSectionsBySearch(
+    (payload.source_sections ?? []).filter((sec) => sec.slug !== "papers"),
+    searchQuery,
+    true,
+  );
   const paperHref = bestPaperRoute(payload.meta.paper_routes, ["day", "month", "year", "home"]);
   const usageRows = buildUsageRows(payload);
+
+  // Merge category_sections, long_tail_sections, and watchlist into a unified list
+  const watchlistByCategory = new Map<string, CompactTopic[]>();
+  for (const tp of payload.watchlist ?? []) {
+    const cat = tp.category || "Other";
+    const list = watchlistByCategory.get(cat);
+    if (list) list.push(tp);
+    else watchlistByCategory.set(cat, [tp]);
+  }
+  const watchlistSections = Array.from(watchlistByCategory.entries()).map(([category, topics]) => ({
+    category,
+    total_candidates: topics.length,
+    topics,
+  }));
+  const allCategorySections = [...(payload.category_sections ?? []), ...(payload.long_tail_sections ?? []), ...watchlistSections];
+
+  const counts = payload.meta.counts;
 
   return (
     <div className="stack hotspot-stack">
       <section className="archive-head">
         <div className="archive-titlebar">
-          <h1>Daily AI Hotspots {payload.meta.date}</h1>
-          <label className="nav-search archive-search">
-            <input
-              type="search"
-              value={searchParams.get("q") ?? ""}
-              onChange={(event) => {
-                const next = new URLSearchParams(searchParams);
-                const value = event.target.value.trimStart();
-                if (value) {
-                  next.set("q", value);
-                } else {
-                  next.delete("q");
-                }
-                setSearchParams(next, { replace: true });
-              }}
-              placeholder="Search"
-            />
-          </label>
+          <h1>{t("site.title")} {payload.meta.date}</h1>
+          <div className="archive-titlebar-controls">
+            <label className="nav-search archive-search">
+              <input
+                type="search"
+                value={searchParams.get("q") ?? ""}
+                onChange={(event) => {
+                  const next = new URLSearchParams(searchParams);
+                  const value = event.target.value.trimStart();
+                  if (value) {
+                    next.set("q", value);
+                  } else {
+                    next.delete("q");
+                  }
+                  setSearchParams(next, { replace: true });
+                }}
+                placeholder={t("label.search")}
+              />
+            </label>
+          </div>
         </div>
         <ArchiveNav
           previous={
             payload.meta.previous_date
               ? {
                   href: `/hot/${payload.meta.previous_date}`,
-                  title: "Previous Day",
+                  title: t("nav.prev"),
                   subtitle: payload.meta.previous_date,
                   arrow: "left",
                 }
@@ -199,30 +195,34 @@ export function DailyHotspotPage({ date }: { date: string }) {
           }
           center={{
             href: `/hot/${payload.meta.month}`,
-            title: "Monthly Overview",
+            title: t("nav.monthly"),
             subtitle: payload.meta.month,
           }}
           next={
             payload.meta.next_date
               ? {
                   href: `/hot/${payload.meta.next_date}`,
-                  title: "Next Day",
+                  title: t("nav.next"),
                   subtitle: payload.meta.next_date,
                   arrow: "right",
                 }
               : null
           }
         />
-        <CrossSiteSwitch href={paperHref} label="Personalized Daily Arxiv Paper" />
+        <CrossSiteSwitch href={paperHref} label={t("nav.paper")} />
         <div className="archive-head-meta">
           <span>{payload.meta.date}</span>
-          <span>{payload.meta.counts.source_items} items</span>
-          <span>{payload.meta.counts.paper_spotlight ?? 0} spotlight papers</span>
-          <span>{visibleTopicSummary.length} topics</span>
-          <span>{visiblePaperSpotlight.length + visibleSections.length} sections</span>
+          <span>{counts.featured_topics ?? 0} {t("label.featured")}</span>
+          <span>{counts.category_radar ?? 0} {t("label.categorized")}</span>
+          <span>{counts.paper_spotlight ?? 0} {t("label.spotlight")}</span>
+          <span>{counts.source_items ?? 0} {t("label.otherItems")}</span>
         </div>
       </section>
 
+      {/* Featured Stories */}
+      <FeaturedStories topics={payload.featured_topics} searchQuery={searchQuery} />
+
+      {/* Paper Spotlight */}
       {visiblePaperSpotlight.map((section) => (
         <section className="panel source-family-panel compact-panel" id={`section-${section.slug}`} key={section.slug}>
           <div className="section-header table-header">
@@ -232,47 +232,45 @@ export function DailyHotspotPage({ date }: { date: string }) {
         </section>
       ))}
 
-      <section className="panel compact-panel">
-        <div className="section-header table-header">
-          <h2>Daily Topics</h2>
-          <div className="section-header-actions">
-            <span className="plain-meta">{visibleTopicSummary.length}</span>
-          </div>
-        </div>
-        <TopicSummaryTable topics={visibleTopicSummary} />
-      </section>
+      {/* All Topics */}
+      <CategoryRadar title={t("section.topics")} sections={allCategorySections} searchQuery={searchQuery} />
 
-      {visibleSections.map((section) => (
-        <section className="panel source-family-panel compact-panel" id={`section-${section.slug}`} key={section.slug}>
-          <div className="section-header table-header">
-            <h2>{sectionTitle(section)}</h2>
-          </div>
-          <SignalTable items={section.filteredItems} />
-        </section>
-      ))}
+      {/* Other Updates — non-paper items not covered by any topic */}
+      {otherSections.length > 0 ? (() => {
+        const otherItems = otherSections.flatMap((sec) => sec.filteredItems);
+        return (
+          <section className="panel source-family-panel compact-panel" id="other-updates">
+            <div className="section-header table-header">
+              <h2>{t("section.other")} ({otherItems.length})</h2>
+            </div>
+            <SignalTable items={otherItems} />
+          </section>
+        );
+      })() : null}
 
-      {!visibleSections.length ? (
+      {!otherSections.length && !visiblePaperSpotlight.length && !payload.featured_topics.length ? (
         <section className="panel">
-          <h2>No matching signals</h2>
+          <h2>{t("label.noSignals")}</h2>
         </section>
       ) : null}
 
+      {/* Usage Table */}
       {usageRows.length ? (
         <section className="panel compact-panel">
           <div className="section-header table-header">
-            <h2>Daily Usage</h2>
+            <h2>{t("section.usage")}</h2>
           </div>
           <div className="table-wrap">
             <table className="signal-table usage-table">
               <thead>
                 <tr>
-                  <th className="col-title">API</th>
-                  <th className="col-signal align-left">Mode</th>
-                  <th className="col-score align-center">Requests</th>
-                  <th className="col-score align-center">Items</th>
-                  <th className="col-score align-center">Prompt</th>
-                  <th className="col-score align-center">Completion</th>
-                  <th className="col-heat align-center">Cost</th>
+                  <th className="col-title">{t("usage.api")}</th>
+                  <th className="col-signal align-left">{t("usage.mode")}</th>
+                  <th className="col-score align-center">{t("usage.requests")}</th>
+                  <th className="col-score align-center">{t("usage.items")}</th>
+                  <th className="col-score align-center">{t("usage.prompt")}</th>
+                  <th className="col-score align-center">{t("usage.completion")}</th>
+                  <th className="col-heat align-center">{t("usage.cost")}</th>
                 </tr>
               </thead>
               <tbody>

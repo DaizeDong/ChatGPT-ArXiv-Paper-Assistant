@@ -23,11 +23,12 @@ from arxiv_assistant.apis.hotspot.hotspot_roundups import fetch_hotspot_items as
 from arxiv_assistant.apis.hotspot.hotspot_x_ainews import fetch_hotspot_items as fetch_x_ainews_items
 from arxiv_assistant.apis.hotspot.hotspot_x_official import fetch_hotspot_items as fetch_x_official_items
 from arxiv_assistant.apis.hotspot.hotspot_x_paperpulse import fetch_hotspot_items as fetch_x_paperpulse_items
-from arxiv_assistant.filters.filter_hotspots import build_candidate_topics, heuristic_screen_clusters, screen_clusters_with_openai, synthesize_digest_with_openai
+from arxiv_assistant.filters.filter_hotspots import synthesize_digest_with_openai
+from arxiv_assistant.hotspots.enrich import enrich_items_batch, enrich_items_heuristic
+from arxiv_assistant.hotspots.story import Story, group_into_stories, score_stories, select_and_categorize
 from arxiv_assistant.renderers.hotspot.render_hot_daily import render_hot_daily_md
-from arxiv_assistant.utils.hotspot.hotspot_cluster import build_hotspot_clusters
 from arxiv_assistant.utils.hotspot.hotspot_config import build_hotspot_paths, ensure_parent_dirs
-from arxiv_assistant.utils.hotspot.hotspot_schema import HotspotCluster, HotspotItem
+from arxiv_assistant.utils.hotspot.hotspot_schema import HotspotItem
 from arxiv_assistant.utils.hotspot.hotspot_sources import api_usage_scope, reset_api_usage, snapshot_api_usage
 from arxiv_assistant.utils.prompt_loader import read_prompt
 from arxiv_assistant.utils.hotspot.hotspot_web_data import write_hotspot_web_data
@@ -97,6 +98,9 @@ _LOW_QUALITY_DISPLAY_RE = [
     re.compile(r"\bam i the only\b", re.I),
     re.compile(r"\bweekly (?:digest|roundup|wrap)\b", re.I),
     re.compile(r"\btop \d+ (?:tools|apps|stories)\b", re.I),
+    re.compile(r"^[A-Za-z0-9_-]+/[A-Za-z0-9_-]+$"),  # GitHub repo names like "user/repo"
+    re.compile(r"\b\d{4}/\d{2}/\d{2}\b"),  # Stale date patterns like "2024/07/25"
+    re.compile(r"^(?:Mac|Android|iOS|Windows)\s+(?:适用|扫码|下载|available)", re.I),  # App download links
 ]
 
 
@@ -692,6 +696,8 @@ def _build_category_sections(
         # Filter out low-quality titles
         if _is_low_quality_display_title(title):
             continue
+        if len(title.split()) <= 2 and not any(term in text for term in AI_RELEVANCE_TERMS):
+            continue
         category = topic.get("PRIMARY_CATEGORY", "Industry Update")
         if category in {"Market Signal", "Industry Update", "Product Release"} and not any(term in text for term in AI_RELEVANCE_TERMS):
             continue
@@ -758,6 +764,8 @@ def _build_long_tail_sections(
             continue
         if float(topic.get("DISPLAY_PRIORITY", 0.0)) < min_display_score:
             continue
+        if float(topic.get("FINAL_SCORE", 0.0)) < 1.5:
+            continue
         if title in GENERIC_DISPLAY_TITLES:
             continue
         # Filter out engineering discussions and low-frontier content
@@ -768,6 +776,8 @@ def _build_long_tail_sections(
         if frontierness < 3.0 and "official_news" not in set(topic.get("source_roles", [])):
             continue
         if _is_low_quality_display_title(title):
+            continue
+        if len(title.split()) <= 2 and not any(term in text for term in AI_RELEVANCE_TERMS):
             continue
         category = topic.get("PRIMARY_CATEGORY", "Industry Update")
         if category in {"Market Signal", "Industry Update", "Product Release"} and not any(term in text for term in AI_RELEVANCE_TERMS):
@@ -823,8 +833,12 @@ def fetch_source_payloads(
     specs = []
     if hotspot_sources.getboolean("use_local_papers", fallback=True):
         specs.append(("local_papers", lambda: fetch_local_paper_items(target_date, output_root, max_staleness_days=local_papers_max_staleness_days)))
+    hf_daily_hot_score_cutoff = hotspot_config.getint("paper_spotlight_daily_hot_score_cutoff", fallback=15)
     if hotspot_sources.getboolean("use_hf_papers", fallback=True):
-        specs.append(("hf_papers", lambda: fetch_hf_items(target_date, freshness_hours, result_limit=hf_result_limit)))
+        specs.append(("hf_papers", lambda: fetch_hf_items(
+            target_date, freshness_hours, result_limit=hf_result_limit,
+            daily_hot_score_cutoff=hf_daily_hot_score_cutoff,
+        )))
     if hotspot_sources.getboolean("use_ainews", fallback=True):
         specs.append(("ainews", lambda: fetch_ainews_items(target_date, freshness_hours)))
     official_blogs_registry = REPO_ROOT / "configs" / "hotspot" / "official_blogs.json"
@@ -1012,12 +1026,17 @@ def deterministic_trim(clusters: list[HotspotCluster], max_clusters: int) -> lis
 def _fallback_digest_summary(top_topics: list[dict[str, Any]]) -> str:
     if not top_topics:
         return "No strong AI hotspots cleared the selection threshold today."
-    headlines = [topic.get("HEADLINE") or topic.get("title") for topic in top_topics[:3]]
-    if len(headlines) == 1:
-        return f"Today's strongest AI hotspot was {headlines[0]}."
-    if len(headlines) == 2:
-        return f"Today's AI discussion centered on {headlines[0]} and {headlines[1]}."
-    return f"Today's AI discussion centered on {headlines[0]}, {headlines[1]}, and {headlines[2]}."
+    lines: list[str] = []
+    for topic in top_topics[:5]:
+        headline = topic.get("HEADLINE") or topic.get("title", "")
+        category = topic.get("PRIMARY_CATEGORY", "")
+        why = topic.get("WHY_IT_MATTERS", "")
+        tag = f"[{category}] " if category else ""
+        if why and why.lower() != headline.lower():
+            lines.append(f"• {tag}{headline} — {why}")
+        else:
+            lines.append(f"• {tag}{headline}")
+    return "\n".join(lines)
 
 
 def _heuristic_takeaways(topic: dict[str, Any], max_takeaways: int = 3) -> list[str]:
@@ -1182,6 +1201,8 @@ def _build_usage_payload(
 
 
 def _decide_mode(requested_mode: str) -> str:
+    from arxiv_assistant.utils.local_env import load_local_env
+    load_local_env()
     has_openai_key = bool(os.environ.get("OPENAI_API_KEY"))
     if requested_mode == "heuristic":
         return "heuristic"
@@ -1453,6 +1474,82 @@ def _trim_topics(top_topics: list[dict[str, Any]], watchlist: list[dict[str, Any
     return selected_top[:target_topics], _diverse_select(remaining_watchlist, target_watchlist_topics, max_per_category=1, max_per_source=1)
 
 
+def _story_to_topic_dict(story: Story, *, keep: bool = False, watchlist: bool = False) -> dict[str, Any]:
+    """Bridge: convert a Story to the existing topic dict format."""
+    items_data = [ei.item.to_dict() for ei in story.items[:4]]
+    source_ids = sorted({ei.item.source_id for ei in story.items})
+    source_names = sorted({ei.item.source_name for ei in story.items})
+    source_roles = sorted({ei.item.source_role for ei in story.items})
+    source_types = sorted({ei.item.source_type for ei in story.items})
+    tags = sorted({tag for ei in story.items for tag in ei.item.tags})
+
+    n_sources = len(source_ids)
+    n_types = len(source_types)
+    avg_importance = sum(ei.importance for ei in story.items) / len(story.items)
+    has_official = "official_news" in source_roles
+    has_paper = "paper" in source_types
+
+    quality = max(1, min(10, round(story.score * 0.9 + (1.0 if has_paper else 0.0))))
+    heat = max(1, min(10, round(2.0 + len(story.items) * 1.0 + (n_types - 1) * 0.8)))
+    importance = max(1, min(10, round(avg_importance)))
+
+    evidence = max(1.0, min(10.0, 2.0 + n_sources * 1.3 + n_types * 0.8 + (1.5 if has_official else 0.0)))
+    confidence = max(1.0, min(10.0, evidence * 0.6 + story.score * 0.3 + (1.0 if n_sources > 1 else 0.0)))
+    resonance = max(1.0, min(10.0, 1.5 + max(n_sources - 1, 0) * 1.4 + max(n_types - 1, 0) * 1.0))
+    frontierness = min(10.0, 3.0 + story.score * 0.5 + (2.0 if has_official else 0.0) + (1.0 if has_paper else 0.0))
+
+    published_dates = [ei.item.published_at for ei in story.items if ei.item.published_at]
+    published_at = max(published_dates) if published_dates else None
+    occurrence = round(min(10.0, 1.2 + n_sources * 1.3 + max(n_types - 1, 0) * 0.9 + min(2.2, len(story.items) * 0.45)), 3)
+    display_priority = round(
+        0.42 * story.score + 0.24 * occurrence + 0.20 * evidence + 0.10 * confidence + 0.06 * heat
+        + (1.0 if keep else 0.45 if watchlist else 0.0),
+        3,
+    )
+
+    default_why = f"This {story.event_type.replace('_', ' ')} surfaced across {n_sources} independent source(s)."
+
+    return {
+        "TOPIC_ID": story.story_id,
+        "cluster_id": story.story_id,
+        "title": story.headline,
+        "summary": story.summary,
+        "items": items_data,
+        "source_ids": source_ids,
+        "source_names": source_names,
+        "source_roles": source_roles,
+        "source_types": source_types,
+        "tags": tags,
+        "PRIMARY_CATEGORY": story.category,
+        "SECONDARY_CATEGORIES": [],
+        "KEEP_IN_DAILY_HOTSPOTS": keep,
+        "WATCHLIST": watchlist,
+        "QUALITY": quality,
+        "HEAT": heat,
+        "IMPORTANCE": importance,
+        "FRONTIERNESS": round(frontierness, 3),
+        "TECHNICAL_DEPTH": round(min(10.0, 2.0 + story.score * 0.5), 3),
+        "CROSS_SOURCE_RESONANCE": round(resonance, 3),
+        "ACTIONABILITY": round(min(10.0, 2.0 + (2.0 if has_official else 0.0) + (1.5 if "repo" in source_types else 0.0)), 3),
+        "EVIDENCE_STRENGTH": round(evidence, 3),
+        "HYPE_PENALTY": 0.3,
+        "ENGINEERING_PENALTY": 0.0,
+        "SUBSTANCE_PENALTY": 0.0,
+        "ARTIFACT_BOOST": 0.5 if story.event_type in ("product_release", "funding", "acquisition") else 0.0,
+        "CONFIDENCE": round(confidence, 3),
+        "SHORT_COMMENT": story.summary,
+        "WHY_IT_MATTERS": story.why_it_matters or default_why,
+        "HEADLINE": story.headline,
+        "KEY_TAKEAWAYS": story.key_takeaways,
+        "FINAL_SCORE": round(story.score, 3),
+        "DISPLAY_PRIORITY": display_priority,
+        "OCCURRENCE_SCORE": occurrence,
+        "LLM_STATUS": "featured" if keep else "watchlist" if watchlist else "candidate",
+        "published_at": published_at,
+        "event_type": story.event_type,
+    }
+
+
 def generate_daily_hotspot_report(output_root: str | Path, target_date: datetime, config: configparser.ConfigParser, mode_override: str = "auto", force: bool = False) -> dict[str, Any] | None:
     if not config["HOTSPOTS"].getboolean("enabled", fallback=False):
         return None
@@ -1470,106 +1567,83 @@ def generate_daily_hotspot_report(output_root: str | Path, target_date: datetime
     if len(raw_items) < pre_filter_count:
         print(f"URL-title filter: removed {pre_filter_count - len(raw_items)} items with mismatched URLs")
 
-    clusters = build_hotspot_clusters(raw_items)
-    candidate_clusters = deterministic_trim(clusters, config["HOTSPOTS"].getint("max_clusters_for_llm", fallback=24))
-    radar_clusters = sorted(clusters, key=lambda cluster: cluster.deterministic_score, reverse=True)[
-        : config["HOTSPOTS"].getint("max_clusters_for_radar", fallback=48)
-    ]
-    candidate_topics = build_candidate_topics(radar_clusters)
+    # Skip items without a publication date — can't verify freshness.
+    pre_date = len(raw_items)
+    raw_items = [item for item in raw_items if item.published_at]
+    if len(raw_items) < pre_date:
+        print(f"Date filter: removed {pre_date - len(raw_items)} items without published_at ({len(raw_items)} remaining)")
 
-    system_prompt = read_prompt("hotspot.system_prompt")
-    criteria_prompt = read_prompt("hotspot.screening_criteria")
-    postfix_prompt = read_prompt("hotspot.postfix_screening")
-    digest_prompt = read_prompt("hotspot.digest_writer")
+    # Freshness gate: only keep items published within 1 day of target date.
+    from arxiv_assistant.utils.hotspot.hotspot_sources import parse_datetime
+    from datetime import timedelta, timezone as tz
+    target_utc = target_date.replace(tzinfo=tz.utc) if target_date.tzinfo is None else target_date
+    freshness_cutoff = target_utc - timedelta(hours=36)
+    pre_fresh = len(raw_items)
+    fresh_items = []
+    for item in raw_items:
+        dt = parse_datetime(item.published_at)
+        if dt is None or dt >= freshness_cutoff:
+            fresh_items.append(item)
+    raw_items = fresh_items
+    if len(raw_items) < pre_fresh:
+        print(f"Freshness gate: removed {pre_fresh - len(raw_items)} items older than 36h ({len(raw_items)} remaining)")
 
-    score_cutoff = config["HOTSPOTS"].getfloat("screening_score_cutoff", fallback=6.0)
-    watchlist_cutoff = config["HOTSPOTS"].getfloat("watchlist_score_cutoff", fallback=4.9)
-    candidate_screen_topics = build_candidate_topics(candidate_clusters)
-    auto_keep_topics, auto_watch_topics, review_topics, heuristic_only_topics, screening_stats = _screening_queue(
-        candidate_screen_topics,
-        score_cutoff,
-        watchlist_cutoff,
-        config,
-    )
-    target_topics = config["HOTSPOTS"].getint("target_topics", fallback=5)
-    target_watchlist_topics = config["HOTSPOTS"].getint("target_watchlist_topics", fallback=3)
-    llm_review_budget = min(
-        config["HOTSPOTS"].getint("max_review_clusters", fallback=10),
-        max(6, target_topics + target_watchlist_topics + 1 - len(auto_keep_topics) - len(auto_watch_topics)),
-    )
-    review_topic_ids = {topic["TOPIC_ID"] for topic in review_topics[:llm_review_budget]}
-    review_clusters = [cluster for cluster in candidate_clusters if cluster.cluster_id in review_topic_ids]
-    heuristic_fallback_topics = heuristic_only_topics + [topic for topic in review_topics if topic["TOPIC_ID"] not in review_topic_ids]
+    # --- Story-centric pipeline ---
+    hotspot_config = config["HOTSPOTS"]
+    model_enrich = hotspot_config.get("model_enrich", hotspot_config.get("model_screen"))
+    enrich_batch_size = hotspot_config.getint("enrich_batch_size", fallback=20)
+    retry_count = hotspot_config.getint("retry", fallback=3)
 
-    prompt_cost = 0.0
-    completion_cost = 0.0
-    llm_prompt_tokens = 0
-    llm_completion_tokens = 0
-    llm_requests = 0
-    llm_kept: list[dict[str, Any]] = []
-    llm_watchlist: list[dict[str, Any]] = []
-    if effective_mode == "openai" and review_clusters:
-        kept, watchlist, prompt_cost, completion_cost, review_prompt_tokens, review_completion_tokens, review_requests = screen_clusters_with_openai(
-            clusters=review_clusters,
-            system_prompt=system_prompt,
-            criteria_prompt=criteria_prompt,
-            postfix_prompt=postfix_prompt,
-            model=config["HOTSPOTS"].get("model_screen"),
-            batch_size=config["HOTSPOTS"].getint("screen_batch_size", fallback=8),
-            retry_count=config["HOTSPOTS"].getint("retry", fallback=3),
-            score_cutoff=score_cutoff,
-            watchlist_cutoff=watchlist_cutoff,
-        )
-        llm_prompt_tokens += review_prompt_tokens
-        llm_completion_tokens += review_completion_tokens
-        llm_requests += review_requests
-        llm_kept.extend(kept)
-        llm_watchlist.extend(watchlist)
+    # Stage 3: Enrich
+    if effective_mode == "openai":
+        enriched_items = enrich_items_batch(raw_items, model_enrich, enrich_batch_size, retry_count)
     else:
-        kept, watchlist = heuristic_screen_clusters(review_clusters, score_cutoff, watchlist_cutoff)
-        llm_kept.extend(kept)
-        llm_watchlist.extend(watchlist)
+        enriched_items = enrich_items_heuristic(raw_items)
 
-    fallback_kept: list[dict[str, Any]] = []
-    fallback_watchlist: list[dict[str, Any]] = []
-    for topic in heuristic_fallback_topics:
-        topic_frontierness = float(topic.get("FRONTIERNESS", 0.0))
-        topic_eng = float(topic.get("ENGINEERING_PENALTY", 0.0))
-        has_paper = "paper" in set(topic.get("source_types", []))
-        # Research papers with high frontierness and low engineering penalty get a lower bar
-        effective_cutoff = score_cutoff
-        if has_paper and topic_frontierness >= 5.0 and topic_eng < 0.5:
-            effective_cutoff = score_cutoff - 1.5
-        if topic["FINAL_SCORE"] >= effective_cutoff and topic["QUALITY"] >= 5:
-            fallback_kept.append({**topic, "KEEP_IN_DAILY_HOTSPOTS": True, "WATCHLIST": False, "SCREENING_DECISION": "heuristic_fallback"})
-        elif topic["FINAL_SCORE"] >= watchlist_cutoff:
-            fallback_watchlist.append({**topic, "KEEP_IN_DAILY_HOTSPOTS": False, "WATCHLIST": True, "SCREENING_DECISION": "heuristic_fallback"})
+    # Stage 4-5: Group into stories → Score
+    stories = score_stories(group_into_stories(enriched_items))
 
-    kept = auto_keep_topics + llm_kept + fallback_kept
-    watchlist = auto_watch_topics + llm_watchlist + fallback_watchlist
+    # Stage 6: Select & categorize
+    target_topics = hotspot_config.getint("target_topics", fallback=5)
+    target_watchlist_topics = hotspot_config.getint("target_watchlist_topics", fallback=3)
+    featured_stories, watchlist_stories, _ = select_and_categorize(
+        stories,
+        target_featured=target_topics,
+        target_watchlist=target_watchlist_topics,
+        max_per_category=hotspot_config.getint("max_topics_per_category", fallback=4),
+    )
 
-    screened_kept = list(kept)
-    screened_watchlist = list(watchlist)
-    featured_topics, watchlist = _trim_topics(kept, watchlist, config)
-    display_candidates = _merge_display_candidates(candidate_topics, screened_kept, screened_watchlist)
-    display_lookup = {topic["TOPIC_ID"]: topic for topic in display_candidates}
-    featured_topics = [{**display_lookup.get(topic["TOPIC_ID"], {}), **topic} for topic in featured_topics]
-    watchlist = [{**display_lookup.get(topic["TOPIC_ID"], {}), **topic} for topic in watchlist]
+    # Bridge: Story → topic dict
+    featured_topics = [_story_to_topic_dict(s, keep=True) for s in featured_stories]
+    watchlist = [_story_to_topic_dict(s, watchlist=True) for s in watchlist_stories]
+    display_candidates = [_story_to_topic_dict(s) for s in stories]
+
+    # Category and long-tail sections (reuse existing builders)
+    watchlist_cutoff = hotspot_config.getfloat("watchlist_score_cutoff", fallback=4.9)
     category_sections = _build_category_sections(
         display_candidates,
         featured_topics,
-        target_total_topics=config["HOTSPOTS"].getint("target_category_topics", fallback=12),
-        max_per_category=config["HOTSPOTS"].getint("max_topics_per_category", fallback=4),
-        min_display_score=config["HOTSPOTS"].getfloat("category_display_score_cutoff", fallback=max(2.8, watchlist_cutoff - 0.5)),
+        target_total_topics=hotspot_config.getint("target_category_topics", fallback=12),
+        max_per_category=hotspot_config.getint("max_topics_per_category", fallback=4),
+        min_display_score=hotspot_config.getfloat("category_display_score_cutoff", fallback=max(2.8, watchlist_cutoff - 0.5)),
     )
     long_tail_sections = _build_long_tail_sections(
         display_candidates,
         featured_topics,
         category_sections,
-        target_total_topics=config["HOTSPOTS"].getint("target_long_tail_topics", fallback=18),
-        max_per_category=config["HOTSPOTS"].getint("max_long_tail_per_category", fallback=8),
-        min_display_score=config["HOTSPOTS"].getfloat("long_tail_display_score_cutoff", fallback=1.6),
+        target_total_topics=hotspot_config.getint("target_long_tail_topics", fallback=18),
+        max_per_category=hotspot_config.getint("max_long_tail_per_category", fallback=8),
+        min_display_score=hotspot_config.getfloat("long_tail_display_score_cutoff", fallback=1.6),
     )
+
+    # Stage 7: Digest synthesis
+    system_prompt = read_prompt("hotspot.system_prompt")
+    digest_prompt = read_prompt("hotspot.digest_writer")
+    prompt_cost = 0.0
+    completion_cost = 0.0
+    llm_prompt_tokens = 0
+    llm_completion_tokens = 0
+    llm_requests = 0
     summary, digest_prompt_cost, digest_completion_cost, digest_prompt_tokens, digest_completion_tokens, digest_requests = apply_digest_synthesis(
         featured_topics,
         watchlist,
@@ -1583,11 +1657,20 @@ def generate_daily_hotspot_report(output_root: str | Path, target_date: datetime
     llm_prompt_tokens += digest_prompt_tokens
     llm_completion_tokens += digest_completion_tokens
     llm_requests += digest_requests
+
+    # Waterfall dedup safety net
+    claimed_ids: set[str] = {t["TOPIC_ID"] for t in featured_topics}
+    for section in category_sections:
+        claimed_ids.update(t["TOPIC_ID"] for t in section.get("topics", []))
+    for section in long_tail_sections:
+        claimed_ids.update(t["TOPIC_ID"] for t in section.get("topics", []))
+    watchlist = [t for t in watchlist if t["TOPIC_ID"] not in claimed_ids]
+
     x_buzz = _build_market_signal_items(raw_items, featured_topics, watchlist)
     paper_spotlight = _build_paper_spotlight(
         raw_items,
-        max_daily_hot=config["HOTSPOTS"].getint("paper_spotlight_max_daily_hot", fallback=6),
-        max_new_frontier=config["HOTSPOTS"].getint("paper_spotlight_max_new_frontier", fallback=4),
+        max_daily_hot=hotspot_config.getint("paper_spotlight_max_daily_hot", fallback=6),
+        max_new_frontier=hotspot_config.getint("paper_spotlight_max_new_frontier", fallback=4),
     )
     usage = _build_usage_payload(
         config,
@@ -1608,16 +1691,12 @@ def generate_daily_hotspot_report(output_root: str | Path, target_date: datetime
         "source_stats": source_stats,
         "totals": {
             "raw_items": len(raw_items),
-            "clusters": len(clusters),
-            "candidate_clusters": len(candidate_clusters),
-            "radar_clusters": len(radar_clusters),
-            "screening_auto_keep": screening_stats["auto_keep"],
-            "screening_auto_watchlist": screening_stats["auto_watchlist"],
-            "screening_heuristic_only": screening_stats["heuristic_only"],
-            "screening_auto_drop": screening_stats["auto_drop"],
-            "screening_review_candidates": screening_stats["review"],
-            "screening_reviewed_by_llm": len(review_clusters),
-            "screening_heuristic_fallback": len(heuristic_fallback_topics),
+            "enriched_items": len(enriched_items),
+            "stories": len(stories),
+            "featured": len(featured_topics),
+            "watchlist": len(watchlist),
+            "category_topics": sum(len(s.get("topics", [])) for s in category_sections),
+            "long_tail_topics": sum(len(s.get("topics", [])) for s in long_tail_sections),
             "paper_spotlight_items": sum(len(section.get("items", [])) for section in paper_spotlight),
         },
         "costs": {"prompt": round(prompt_cost, 6), "completion": round(completion_cost, 6), "total": round(prompt_cost + completion_cost, 6)},
@@ -1634,7 +1713,6 @@ def generate_daily_hotspot_report(output_root: str | Path, target_date: datetime
     paths = build_hotspot_paths(output_root, target_date.date())
     ensure_parent_dirs(paths)
     write_json(paths.normalized_path, _serialize_items(raw_items))
-    write_json(paths.clusters_path, [cluster.to_dict() for cluster in clusters])
     write_json(paths.report_path, report)
     write_hotspot_web_data(output_root, report, raw_items)
     paths.markdown_path.write_text(render_hot_daily_md(report), encoding="utf-8")

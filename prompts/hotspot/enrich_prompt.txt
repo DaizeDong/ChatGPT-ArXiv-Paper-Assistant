@@ -1,0 +1,40 @@
+You are an AI news analyst. For each item below, extract structured information.
+
+## Items
+
+{items}
+
+## Instructions
+
+For each item (indexed 0 to N-1), return a JSON array with one object per item:
+
+```json
+[
+  {
+    "index": 0,
+    "event_type": "product_release",
+    "entities": [{"name": "OpenAI", "type": "company"}, {"name": "GPT-5", "type": "product"}],
+    "summary": "Two-sentence factual description of what happened.",
+    "importance": 7,
+    "same_event_as": null
+  }
+]
+```
+
+### Field guidelines
+
+- **event_type**: One of: product_release, funding, acquisition, research_paper, tooling, industry_move, opinion, tutorial, recap, other
+- **entities**: Extract companies, products, models, and people mentioned. Use type: company, product, model, person.
+- **summary**: Write 2 concise factual sentences. No opinions or speculation.
+- **importance**: 1-10 scale.
+- **same_event_as**: If this item reports the SAME real-world event as another item in this batch, set to that item's index. Otherwise null. Be conservative — only link items that clearly describe the same specific event, not just the same topic.
+
+### Importance calibration
+
+- 9-10: Boardroom-level. Major product launch by a top-5 lab, $1B+ funding, paradigm-shifting paper.
+- 7-8: Industry-notable. Significant model release, important open-source tool, notable acquisition.
+- 5-6: Interesting. New tool/paper with moderate impact, routine product update.
+- 3-4: Minor. Opinion piece, tutorial, minor tool update.
+- 1-2: Noise. Weekly roundup, self-promotion, no actionable information.
+
+Return ONLY the JSON array, no other text.

@@ -10,7 +10,7 @@ from urllib.parse import urljoin, urlsplit, urlunsplit
 import requests
 
 
-USER_AGENT = "ChatGPT-ArXiv-Paper-Assistant/1.0 (+https://github.com/DaizeDong/ChatGPT-ArXiv-Paper-Assistant)"
+USER_AGENT = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36"
 _CURRENT_USAGE_SOURCE: str | None = None
 _CURRENT_USAGE_PROVIDER: str | None = None
 _API_USAGE: dict[str, dict[str, Any]] = {}

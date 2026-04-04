@@ -1,0 +1,530 @@
+<div style="display: flex; align-items: flex-start; justify-content: space-between; width: 100%;"><div style="width: 33.33%; text-align: left;"><a href="../06"><img src="../../../assets/nav/day/2026-03-09-prev.svg" alt="Previous Day 2026-03-06"></a></div><div style="width: 33.33%; text-align: center;"><a href=".."><img src="../../../assets/nav/day/2026-03-09-center.svg" alt="Monthly Overview 2026-03"></a></div><div style="width: 33.33%; text-align: right;"><a href="../11"><img src="../../../assets/nav/day/2026-03-09-next.svg" alt="Next Day 2026-03-11"></a></div></div>
+
+# Personalized Daily ArXiv Papers 2026-03-09
+
+| *[gpt-5]*   | Prompt   | Completion   | Total   |
+|:-----------:|:--------:|:------------:|:-------:|
+| **Token**   | 40909    | 35068        | 75977   |
+| **Cost**    | $0.05    | $0.35        | $0.4    |
+
+Total arXiv papers: 493
+
+Total scanned papers: 274
+
+Total relevant papers: 23
+
+**Table of contents with paper titles:**
+
+1. [EvoESAP: Non-Uniform Expert Pruning for Sparse MoE](#user-content-link1)
+**Authors:** Zongfang Liu, Shengkun Tang, Boyang Sun, Zhiqiang Shen, Xin Yuan
+
+2. [Why Depth Matters in Parallelizable Sequence Models: A Lie Algebraic View](#user-content-link2)
+**Authors:** Gyuryang Heo, Timothy Ngotiaoco, Kazuki Irie, Samuel J. Gershman, Bernardo Sabatini
+
+3. [Gradient Flow Polarizes Softmax Outputs towards Low-Entropy Solutions](#user-content-link3)
+**Authors:** Aditya Varre, Mark Rofin, Nicolas Flammarion
+
+4. [MoEless: Efficient MoE LLM Serving via Serverless Computing](#user-content-link4)
+**Authors:** Hanfei Yu, Bei Ouyang, Shwai He, Ang Li, Hao Wang
+
+5. [Attention Meets Reachability: Structural Equivalence and Efficiency in Grammar-Constrained LLM Decoding](#user-content-link5)
+**Authors:** Faruk Alpay, Bilge Senturk
+
+6. [ROSE: Reordered SparseGPT for More Accurate One-Shot Large Language Models Pruning](#user-content-link6)
+**Authors:** Mingluo Su, Huan Wang
+
+7. [Causal Interpretation of Neural Network Computations with Contribution Decomposition](#user-content-link7)
+**Authors:** Joshua Brendan Melander, Zaki Alaoui, Shenghua Liu, Surya Ganguli, Stephen A. Baccus
+
+8. [A Persistent-State Dataflow Accelerator for Memory-Bound Linear Attention Decode on FPGA](#user-content-link8)
+**Authors:** Neelesh Gupta, Peter Wang, Rajgopal Kannan, Viktor K. Prasanna
+
+9. [RAC: Rectified Flow Auto Coder](#user-content-link9)
+**Authors:** Sen Fang, Yalin Feng, Yanxin Zhang, Dimitris N. Metaxas
+
+10. [Omni-Masked Gradient Descent: Memory-Efficient Optimization via Mask Traversal with Improved Convergence](#user-content-link10)
+**Authors:** Hui Yang, Tao Ren, Jinyang Jiang, Wan Tian, Yijie Peng
+
+11. [Energy-Driven Adaptive Visual Token Pruning for Efficient Vision-Language Models](#user-content-link11)
+**Authors:** Jialuo He, Huangxun Chen
+
+12. [Stem: Rethinking Causal Information Flow in Sparse Attention](#user-content-link12)
+**Authors:** Lin Niu, Xin Luo, Linchuan Xie, Yifu Sun, Guanghua Yu, Jianchen Zhu, S Kevin Zhou
+
+13. [Warm Starting State-Space Models with Automata Learning](#user-content-link13)
+**Authors:** William Fishell, Sam Nicholas Kouteili, Mark Santolucito
+
+14. [Omni-C: Compressing Heterogeneous Modalities into a Single Dense Encoder](#user-content-link14)
+**Authors:** Kin Wai Lau, Yasar Abbas Ur Rehman, Lai-Man Po, Pedro Porto Buarque de Gusm\~ao
+
+15. [FlashPrefill: Instantaneous Pattern Discovery and Thresholding for Ultra-Fast Long-Context Prefilling](#user-content-link15)
+**Authors:** Qihang Fan, Huaibo Huang, Zhiying Wu, Juqiu Wang, Bingning Wang, Ran He
+
+16. [COLD-Steer: Steering Large Language Models via In-Context One-step Learning Dynamics](#user-content-link16)
+**Authors:** Kartik Sharma, Rakshit S. Trivedi
+
+17. [Visual Words Meet BM25: Sparse Auto-Encoder Visual Word Scoring for Image Retrieval](#user-content-link17)
+**Authors:** Donghoon Han, Eunhwan Park, Seunghyeon Seo
+
+18. [Do Foundation Models Know Geometry? Probing Frozen Features for Continuous Physical Measurement](#user-content-link18)
+**Authors:** Yakov Pyotr Shkolnikov
+
+19. [Bias In, Bias Out? Finding Unbiased Subnetworks in Vanilla Models](#user-content-link19)
+**Authors:** Ivan Luiz De Moura Matos, Abdel Djalil Sad Saoud, Ekaterina Iakovleva, Vito Paolo Pastore, Enzo Tartaglione
+
+20. [DC-Merge: Improving Model Merging with Directional Consistency](#user-content-link20)
+**Authors:** Han-Chen Zhang, Zi-Hao Zhou, Mao-Lin Luo, Shimin Di, Min-Ling Zhang, Tong Wei
+
+21. [HiPP-Prune: Hierarchical Preference-Conditioned Structured Pruning for Vision-Language Models](#user-content-link21)
+**Authors:** Lincen Bai, Hedi Tabia, Raul Santos-Rodriguez
+
+22. [Knowing without Acting: The Disentangled Geometry of Safety Mechanisms in Large Language Models](#user-content-link22)
+**Authors:** Jinman Wu, Yi Xie, Shen Lin, Shiqian Zhao, Xiaofeng Chen
+
+23. [Bridging Domains through Subspace-Aware Model Merging](#user-content-link23)
+**Authors:** Levy Chaves, Chao Zhou, Rebekka Burkholz, Eduardo Valle, Sandra Avila
+
+---
+
+## 1. [EvoESAP: Non-Uniform Expert Pruning for Sparse MoE](https://arxiv.org/abs/2603.06003) <a id="link1"></a>
+
+**ArXiv ID:** 2603.06003
+
+**Authors:** Zongfang Liu, Shengkun Tang, Boyang Sun, Zhiqiang Shen, Xin Yuan
+
+**Abstract:** Sparse Mixture-of-Experts (SMoE) language models achieve strong capability at low per-token compute, yet deployment remains memory- and throughput-bound because the full expert pool must be stored and served. Post-training expert pruning reduces this cost, but most methods focus on which experts to prune within each layer and default to a uniform layer-wise sparsity allocation, even though the allocation can strongly affect performance. We decouple pruning into within-layer expert ranking and across-layer budget allocation, and introduce \textbf{E}xpected \textbf{S}peculative \textbf{A}cceptance \textbf{P}roxy (\textbf{ESAP}), a speculative-decoding-inspired, teacher-forced metric that measures how well a pruned model matches the full model. ESAP is bounded and stable, enabling cheap comparison of many candidates without costly autoregressive decoding. Building on ESAP, we propose EvoESAP, an evolutionary searching framework that optimizes a non-uniform layer-wise sparsity allocation under a fixed global budget while holding the within-layer pruning order fixed, making it a plug-and-play method with criteria such as Frequency, EAN, SEER, and REAP. Across 7B--30B SMoE LLMs at 25\% and 50\% sparsity, EvoESAP consistently discovers non-uniform allocations that improve open-ended generation (up to \textbf{+19.6\%} on MATH-500 at 50\% sparsity) while preserving competitive multiple-choice accuracy compared with uniform pruning at the same sparsity.
+
+**Comment:** Model Compression and Efficiency (MoE): non-uniform layer-wise expert pruning using a stable ESAP proxy and evolutionary search to optimize memory/throughput under a budget.
+
+**Relevance:** 10
+**Novelty:** 8
+
+---
+
+## 2. [Why Depth Matters in Parallelizable Sequence Models: A Lie Algebraic View](https://arxiv.org/abs/2603.05573) <a id="link2"></a>
+
+**ArXiv ID:** 2603.05573
+
+**Authors:** Gyuryang Heo, Timothy Ngotiaoco, Kazuki Irie, Samuel J. Gershman, Bernardo Sabatini
+
+**Abstract:** Scalable sequence models, such as Transformer variants and structured state-space models, often trade expressivity power for sequence-level parallelism, which enables efficient training. Here we examine the bounds on error and how error scales when models operate outside of their expressivity regimes using a Lie-algebraic control perspective. Our theory formulates a correspondence between the depth of a sequence model and the tower of Lie algebra extensions. Echoing recent theoretical studies, we characterize the Lie-algebraic class of constant-depth sequence models and their corresponding expressivity bounds. Furthermore, we analytically derive an approximation error bound and show that error diminishes exponentially as the depth increases, consistent with the strong empirical performance of these models. We validate our theoretical predictions using experiments on symbolic word and continuous-valued state-tracking problems.
+
+**Comment:** Theory of model architecture/expressivity: Lie-algebraic analysis of depth in parallelizable sequence models (Transformers/SSMs).
+
+**Relevance:** 10
+**Novelty:** 8
+
+---
+
+## 3. [Gradient Flow Polarizes Softmax Outputs towards Low-Entropy Solutions](https://arxiv.org/abs/2603.06248) <a id="link3"></a>
+
+**ArXiv ID:** 2603.06248
+
+**Authors:** Aditya Varre, Mark Rofin, Nicolas Flammarion
+
+**Abstract:** Understanding the intricate non-convex training dynamics of softmax-based models is crucial for explaining the empirical success of transformers. In this article, we analyze the gradient flow dynamics of the value-softmax model, defined as ${L}(\mathbf{V} \sigma(\mathbf{a}))$, where $\mathbf{V}$ and $\mathbf{a}$ are a learnable value matrix and attention vector, respectively. As the matrix times softmax vector parameterization constitutes the core building block of self-attention, our analysis provides direct insight into transformer's training dynamics. We reveal that gradient flow on this structure inherently drives the optimization toward solutions characterized by low-entropy outputs. We demonstrate the universality of this polarizing effect across various objectives, including logistic and square loss. Furthermore, we discuss the practical implications of these theoretical results, offering a formal mechanism for empirical phenomena such as attention sinks and massive activations.
+
+**Comment:** Training dynamics theory: gradient flow on value–softmax drives low-entropy outputs, explaining attention phenomena.
+
+**Relevance:** 10
+**Novelty:** 8
+
+---
+
+## 4. [MoEless: Efficient MoE LLM Serving via Serverless Computing](https://arxiv.org/abs/2603.06350) <a id="link4"></a>
+
+**ArXiv ID:** 2603.06350
+
+**Authors:** Hanfei Yu, Bei Ouyang, Shwai He, Ang Li, Hao Wang
+
+**Abstract:** Large Language Models (LLMs) have become a cornerstone of AI, driving progress across diverse domains such as content creation, search and recommendation systems, and AI-assisted workflows. To alleviate extreme training costs and advancing model scales, Mixture-of-Experts (MoE) has become a popular backbone for modern LLMs, which are commonly served in distributed deployment using expert parallelism (EP). However, MoE's sparse activation mechanism leads to severe expert load imbalance, where a few experts become overloaded while others remain idle, resulting in expert stragglers that inflate inference latency and serving cost. Existing expert load balancing solutions assume static resource configurations on serverful infrastructures, limiting expert scalability and elasticity, and resulting in either costly real-time expert swapping or degraded generation quality. We present MoEless, the first serverless MoE serving framework that mitigates expert load imbalance and accelerates inference via serverless experts. MoEless employs lightweight, layer-aware predictors to accurately estimate incoming expert load distributions and proactively identify stragglers. We design optimized expert scaling and placement strategies to maximize function locality, improve GPU utilization, and balance loads across experts and GPUs. MoEless is prototyped on top of Megatron-LM and deployed on an eight-GPU testbed. Experiments with open-source MoE models and real-world workloads show that MoEless reduces inference latency by 43% and inference cost by 84% compared to state-of-the-art solutions.
+
+**Comment:** High Performance Computing / MoE Systems: serverless MoE serving with expert load prediction and elastic scaling/placement to reduce latency/cost.
+
+**Relevance:** 10
+**Novelty:** 8
+
+---
+
+## 5. [Attention Meets Reachability: Structural Equivalence and Efficiency in Grammar-Constrained LLM Decoding](https://arxiv.org/abs/2603.05540) <a id="link5"></a>
+
+**ArXiv ID:** 2603.05540
+
+**Authors:** Faruk Alpay, Bilge Senturk
+
+**Abstract:** We study grammar-constrained decoding (GCD) as a coupling between an autoregressive next-token distribution and a reachability oracle over a pushdown system compiled from a context-free grammar (CFG). We prove an oracle invariance theorem: language-equivalent grammars induce identical admissible next-token sets for every prefix, hence identical logit masks, yet can yield provably different compiled state spaces and online ambiguity costs. We give exact control-state blowup counts for the canonical $a^n b^n$ language under redundant nonterminal delegation, and introduce a left-to-right structural ambiguity cost (SAC) measuring incremental packed-parse-forest growth per token. For two equivalent grammars over all finite strings, SAC is $O(1)$ per token under right-recursion but $\Theta(t^2)$ per token and $\Theta(n^3)$ cumulatively under concatenation. We establish engine-independent lower bounds: any sound, retrieval-efficient, parse-preserving online masking engine must incur $\Omega(t^2)$ work per token on a specific constant-size CFG family, unconditionally within this model. We define decoding-cost equivalence classes of grammars and prove existence of minimal-SAC representatives within bounded rewrite families. Finally, we characterize the true conditional sampler via a Doob $h$-transform and derive sharp one-step KL and total-variation distortion bounds for hard-masked decoding in terms of survival-probability spread among admissible next tokens. We integrate these results with Transformer and Mixture-of-Experts architectures, derive latency envelopes in terms of vocabulary size, active state sets, and beam width, and connect SAC to instrumentation-based predictive performance models and automated grammar optimization.
+
+**Comment:** High Performance Computing and Architecture: formal analysis and lower bounds for grammar-constrained decoding; connects to Transformers/MoE with latency envelopes.
+
+**Relevance:** 9
+**Novelty:** 9
+
+---
+
+## 6. [ROSE: Reordered SparseGPT for More Accurate One-Shot Large Language Models Pruning](https://arxiv.org/abs/2603.05878) <a id="link6"></a>
+
+**ArXiv ID:** 2603.05878
+
+**Authors:** Mingluo Su, Huan Wang
+
+**Abstract:** Pruning is widely recognized as an effective method for reducing the parameters of large language models (LLMs), potentially leading to more efficient deployment and inference. One classic and prominent path of LLM one-shot pruning is to leverage second-order gradients (i.e., Hessian), represented by the pioneering work SparseGPT. However, the predefined left-to-right pruning order in SparseGPT leads to suboptimal performance when the weights exhibit columnar patterns. This paper studies the effect of pruning order under the SparseGPT framework. The analyses lead us to propose ROSE, a reordered SparseGPT method that prioritizes weights with larger potential pruning errors to be pruned earlier. ROSE first performs pre-pruning to identify candidate weights for removal, and estimates both column and block pruning loss. Subsequently, two-level reordering is performed: columns within each block are reordered in descending order of column loss, while blocks are reordered based on block loss. We introduce the relative range of block loss as a metric to identify columnar layers, enabling adaptive reordering across the entire model. Substantial empirical results on prevalent LLMs (LLaMA2-7B/13B/70B, LLaMA3-8B, Mistral-7B) demonstrate that ROSE surpasses the original SparseGPT and other counterpart pruning methods. Our code is available at https://github.com/mingluo-su/ROSE.
+
+**Comment:** Model Compression and Efficiency: improves one-shot LLM pruning (SparseGPT) via loss-driven two-level reordering of columns/blocks to reduce pruning error.
+
+**Relevance:** 10
+**Novelty:** 7
+
+---
+
+## 7. [Causal Interpretation of Neural Network Computations with Contribution Decomposition](https://arxiv.org/abs/2603.06557) <a id="link7"></a>
+
+**ArXiv ID:** 2603.06557
+
+**Authors:** Joshua Brendan Melander, Zaki Alaoui, Shenghua Liu, Surya Ganguli, Stephen A. Baccus
+
+**Abstract:** Understanding how neural networks transform inputs into outputs is crucial for interpreting and manipulating their behavior. Most existing approaches analyze internal representations by identifying hidden-layer activation patterns correlated with human-interpretable concepts. Here we take a direct approach to examine how hidden neurons act to drive network outputs. We introduce CODEC (Contribution Decomposition), a method that uses sparse autoencoders to decompose network behavior into sparse motifs of hidden-neuron contributions, revealing causal processes that cannot be determined by analyzing activations alone. Applying CODEC to benchmark image-classification networks, we find that contributions grow in sparsity and dimensionality across layers and, unexpectedly, that they progressively decorrelate positive and negative effects on network outputs. We further show that decomposing contributions into sparse modes enables greater control and interpretation of intermediate layers, supporting both causal manipulations of network output and human-interpretable visualizations of distinct image components that combine to drive that output. Finally, by analyzing state-of-the-art models of neural activity in the vertebrate retina, we demonstrate that CODEC uncovers combinatorial actions of model interneurons and identifies the sources of dynamic receptive fields. Overall, CODEC provides a rich and interpretable framework for understanding how nonlinear computations evolve across hierarchical layers, establishing contribution modes as an informative unit of analysis for mechanistic insights into artificial neural networks.
+
+**Comment:** Representation Learning — uses sparse autoencoders to causally decompose hidden-neuron contributions, enabling mechanistic interpretability and controllable interventions.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 8. [A Persistent-State Dataflow Accelerator for Memory-Bound Linear Attention Decode on FPGA](https://arxiv.org/abs/2603.05931) <a id="link8"></a>
+
+**ArXiv ID:** 2603.05931
+
+**Authors:** Neelesh Gupta, Peter Wang, Rajgopal Kannan, Viktor K. Prasanna
+
+**Abstract:** Gated DeltaNet (GDN) is a linear attention mechanism that replaces the growing KV cache with a fixed-size recurrent state. Hybrid LLMs like Qwen3-Next use 75% GDN layers and achieve competitive accuracy to attention-only models. However, at batch-1, GDN decode is memory-bound on GPUs since the full recurrent state must be round-tripped through HBM every token. We show that this bottleneck is architectural, not algorithmic, as all subquadratic sequence models exhibit arithmetic intensities below 1 FLOP/B at decode time, making them more memory-bound than standard Transformers. We present an FPGA accelerator that eliminates this bottleneck by holding the full 2 MB recurrent state persistently in on-chip BRAM, converting the workload from memory-bound to compute-bound. Our design fuses the GDN recurrence into a five-phase pipelined datapath that performs only one read and one write pass over each state matrix per token, exploits Grouped Value Attention for paired-head parallelism, and overlaps preparation, computation, and output storage via dataflow pipelining. We explore four design points on an AMD Alveo U55C using Vitis HLS, varying head-level parallelism from 2 to 16 value-heads per iteration. Our fastest configuration achieves 63 $\mu$s per token, 4.5$\times$ faster than the GPU reference on NVIDIA H100 PCIe. Post-implementation power analysis reports 9.96 W on-chip, yielding up to 60$\times$ greater energy efficiency per token decoded.
+
+**Comment:** HPC/systems: FPGA accelerator and memory optimization for linear attention decode by keeping recurrent state on-chip.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 9. [RAC: Rectified Flow Auto Coder](https://arxiv.org/abs/2603.05925) <a id="link9"></a>
+
+**ArXiv ID:** 2603.05925
+
+**Authors:** Sen Fang, Yalin Feng, Yanxin Zhang, Dimitris N. Metaxas
+
+**Abstract:** In this paper, we propose a Rectified Flow Auto Coder (RAC) inspired by Rectified Flow to replace the traditional VAE: 1. It achieves multi-step decoding by applying the decoder to flow timesteps. Its decoding path is straight and correctable, enabling step-by-step refinement. 2. The model inherently supports bidirectional inference, where the decoder serves as the encoder through time reversal (hence Coder rather than encoder or decoder), reducing parameter count by nearly 41%. 3. This generative decoding method improves generation quality since the model can correct latent variables along the path, partially addressing the reconstruction--generation gap. Experiments show that RAC surpasses SOTA VAEs in both reconstruction and generation with approximately 70% lower computational cost.
+
+**Comment:** Architecture: Rectified Flow-based autoencoder enabling multi-step, bidirectional inference and reduced parameters.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 10. [Omni-Masked Gradient Descent: Memory-Efficient Optimization via Mask Traversal with Improved Convergence](https://arxiv.org/abs/2603.05960) <a id="link10"></a>
+
+**ArXiv ID:** 2603.05960
+
+**Authors:** Hui Yang, Tao Ren, Jinyang Jiang, Wan Tian, Yijie Peng
+
+**Abstract:** Memory-efficient optimization methods have recently gained increasing attention for scaling full-parameter training of large language models under the GPU-memory bottleneck. Existing approaches either lack clear convergence guarantees, or only achieve the standard ${\mathcal{O}}(\epsilon^{-4})$ iteration complexity in the nonconvex settings. We propose Omni-Masked Gradient Descent (OMGD), an optimization method based on mask traversal for memory efficient training, and provide a nonconvex convergence analysis that establishes a strictly improved iteration complexity of $\tilde{\mathcal{O}}(\epsilon^{-3})$ for finding an $\epsilon$-approximate stationary point. Empirically, OMGD is a lightweight, plug-and-play approach that integrates seamlessly into most mainstream optimizers, yielding consistent improvements over competitive baselines in both fine-tuning and pre-training tasks.
+
+**Comment:** Efficiency/HPC: memory-efficient optimization via mask traversal with improved nonconvex convergence (O(eps^-3)).
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 11. [Energy-Driven Adaptive Visual Token Pruning for Efficient Vision-Language Models](https://arxiv.org/abs/2603.05950) <a id="link11"></a>
+
+**ArXiv ID:** 2603.05950
+
+**Authors:** Jialuo He, Huangxun Chen
+
+**Abstract:** Visual token reduction is critical for accelerating Vision-Language Models (VLMs), yet most existing approaches rely on a fixed budget shared across all inputs, overlooking the substantial variation in image information density. We propose E-AdaPrune, an energy-driven adaptive pruning framework that determines the token budget from the singular value spectrum of the visual features space. By preserving a certain proportion of spectral energy, our method allocates more tokens to information-dense scenes while aggressively compressing redundant ones, without introducing additional learnable parameters. We evaluate E-AdaPrune on nine benchmarks and three VLM backbones, LLaVA-1.5-7B, LLaVA-1.5-13B, and LLaVA-NeXT-8B. Under matched average token budgets, E-AdaPrune consistently yields an average improvement of up to 0.6\%, including a significant +5.1\% relative boost on the MMVet reasoning task. Using randomized singular value decomposition, the additional latency is limited to 8ms per image.
+
+**Comment:** Model Compression and Efficiency — adaptive visual token pruning based on singular value spectrum (low-rank/spectral energy) for compute-efficient VLM inference.
+
+**Relevance:** 9
+**Novelty:** 7
+
+---
+
+## 12. [Stem: Rethinking Causal Information Flow in Sparse Attention](https://arxiv.org/abs/2603.06274) <a id="link12"></a>
+
+**ArXiv ID:** 2603.06274
+
+**Authors:** Lin Niu, Xin Luo, Linchuan Xie, Yifu Sun, Guanghua Yu, Jianchen Zhu, S Kevin Zhou
+
+**Abstract:** The quadratic computational complexity of self-attention remains a fundamental bottleneck for scaling Large Language Models (LLMs) to long contexts, particularly during the pre-filling phase. In this paper, we rethink the causal attention mechanism from the perspective of information flow. Due to causal constraints, tokens at initial positions participate in the aggregation of every subsequent token. However, existing sparse methods typically apply a uniform top-k selection across all token positions within a layer, ignoring the cumulative dependency of token information inherent in causal architectures. To address this, we propose Stem, a novel, plug-and-play sparsity module aligned with information flow. First, Stem employs the Token Position-Decay strategy, applying position-dependent top-k within each layer to retain initial tokens for recursive dependencies. Second, to preserve information-rich tokens, Stem utilizes the Output-Aware Metric. It prioritizes high-impact tokens based on approximate output magnitude. Extensive evaluations demonstrate that Stem achieves superior accuracy with reduced computation and pre-filling latency.
+
+**Comment:** Model Compression and Efficiency: proposes position-dependent sparse attention (Token Position-Decay) with an output-aware token metric to reduce prefill compute in causal Transformers.
+
+**Relevance:** 9
+**Novelty:** 7
+
+---
+
+## 13. [Warm Starting State-Space Models with Automata Learning](https://arxiv.org/abs/2603.05694) <a id="link13"></a>
+
+**ArXiv ID:** 2603.05694
+
+**Authors:** William Fishell, Sam Nicholas Kouteili, Mark Santolucito
+
+**Abstract:** We prove that Moore machines can be exactly realized as state-space models (SSMs), establishing a formal correspondence between symbolic automata and these continuous machine learning architectures. These Moore-SSMs preserve both the complete symbolic structure and input-output behavior of the original Moore machine, but operate in Euclidean space. With this correspondence, we compare the training of SSMs with both passive and active automata learning. In recovering automata from the SYNTCOMP benchmark, we show that SSMs require orders of magnitude more data than symbolic methods and fail to learn state structure. This suggests that symbolic structure provides a strong inductive bias for learning these systems. We leverage this insight to combine the strengths of both automata learning and SSMs in order to learn complex systems efficiently. We learn an adaptive arbitration policy on a suite of arbiters from SYNTCOMP and show that initializing SSMs with symbolically-learned approximations learn both faster and better. We see 2-5 times faster convergence compared to randomly initialized models and better overall model accuracies on test data. Our work lifts automata learning out of purely discrete spaces, enabling principled exploitation of symbolic structure in continuous domains for efficiently learning in complex settings.
+
+**Comment:** Model architecture/theory: proves exact realization of Moore machines as state-space models and uses symbolic automata to warm-start SSMs.
+
+**Relevance:** 9
+**Novelty:** 7
+
+---
+
+## 14. [Omni-C: Compressing Heterogeneous Modalities into a Single Dense Encoder](https://arxiv.org/abs/2603.05528) <a id="link14"></a>
+
+**ArXiv ID:** 2603.05528
+
+**Authors:** Kin Wai Lau, Yasar Abbas Ur Rehman, Lai-Man Po, Pedro Porto Buarque de Gusm\~ao
+
+**Abstract:** Recent multimodal systems often rely on separate expert modality encoders which cause linearly scaling complexity and computational overhead with added modalities. While unified Omni-models address this via Mixture-of-Expert (MoE) architectures with specialized experts and routing, they still inflate parameter counts and introduce routing overhead. In this paper, we propose Omni-C (Omni-Compress), a single dense Transformer-based encoder that learns competitive shared representations across heterogeneous modalities--images, audio, and text--through unimodal contrastive pretraining on large-scale unaligned data. By maximizing parameter sharing in the backbone and using lightweight modality-specific projection heads, Omni-C effectively mitigates inter-modality conflicts without requiring MoE, paired supervision, or routing. This design supports efficient deployment on memory-constrained systems via sequential modality processing and low-memory inference, eliminating the need for parallel expert loading or specialized hardware. Experiments show Omni-C achieves performance comparable to expert models in unimodal and cross-model tasks, with modest zero-shot degradation on audio and text that is largely recovered through lightweight linear probing or parameter efficient fine-tuning. The unified architecture substantially reduces inference memory usage compared to multi-encoder baselines, advancing efficient and scalable multimodal learning.
+
+**Comment:** Architecture/efficiency: single dense Transformer encoder unifying modalities, replacing MoE/routing with shared parameters.
+
+**Relevance:** 9
+**Novelty:** 7
+
+---
+
+## 15. [FlashPrefill: Instantaneous Pattern Discovery and Thresholding for Ultra-Fast Long-Context Prefilling](https://arxiv.org/abs/2603.06199) <a id="link15"></a>
+
+**ArXiv ID:** 2603.06199
+
+**Authors:** Qihang Fan, Huaibo Huang, Zhiying Wu, Juqiu Wang, Bingning Wang, Ran He
+
+**Abstract:** Long-context modeling is a pivotal capability for Large Language Models, yet the quadratic complexity of attention remains a critical bottleneck, particularly during the compute-intensive prefilling phase. While various sparse attention mechanisms have been explored, they typically suffer from either significant search latency or insufficient sparsity. In this paper, we propose FlashPrefill, a framework enabling ultra-fast prefilling via instantaneous pattern discovery and thresholding. FlashPrefill leverages a fast block-searching technique to simultaneously locate dynamic vertical, slash, and block-sparse attention patterns. Crucially, it introduces a dynamic thresholding mechanism that bypasses the prohibitive overhead of sorting or accumulating attention scores while effectively eliminating the long-tail distribution to enhance sparsity. Extensive evaluations demonstrate that FlashPrefill achieves a substantial leap in efficiency, delivering an unprecedented 27.78x speedup on 256K sequences. Notably, unlike existing methods that incur efficiency degradation on shorter contexts, FlashPrefill maintains a 1.71x speedup even at a 4K context length, demonstrating its robustness and practical utility across varying sequence scales.
+
+**Comment:** Model Compression and Efficiency: proposes dynamic sparse attention (instantaneous pattern discovery + thresholding) to accelerate long-context prefilling.
+
+**Relevance:** 9
+**Novelty:** 7
+
+---
+
+## 16. [COLD-Steer: Steering Large Language Models via In-Context One-step Learning Dynamics](https://arxiv.org/abs/2603.06495) <a id="link16"></a>
+
+**ArXiv ID:** 2603.06495
+
+**Authors:** Kartik Sharma, Rakshit S. Trivedi
+
+**Abstract:** Activation steering methods enable inference-time control of large language model (LLM) behavior without retraining, but current approaches face a fundamental trade-off: sample-efficient methods suboptimally capture steering signals from labeled examples, while methods that better extract these signals require hundreds to thousands of examples. We introduce COLD-Steer, a training-free framework that steers LLM activations by approximating the representational changes that would result from gradient descent on in-context examples. Our key insight is that the effect of fine-tuning on a small set of examples can be efficiently approximated at inference time without actual parameter updates. We formalize this through two complementary approaches: (i) a unit kernel approximation method that updates the activations directly using gradients with respect to them, normalized across examples, and (ii) a finite-difference approximation requiring only two forward passes regardless of example count. Experiments across a variety of steering tasks and benchmarks demonstrate that COLD-Steer achieves upto 95% steering effectiveness while using 50 times fewer samples compared to the best baseline. COLD-Steer facilitates accommodating diverse perspectives without extensive demonstration data, which we validate through our experiments on pluralistic alignment tasks. Our framework opens new possibilities for adaptive, context-aware model control that can flexibly address varying loss-driven human preferences through principled approximation of learning dynamics rather than specialized training procedures.
+
+**Comment:** Model Architecture / Representation Learning — training-free activation steering approximating one-step learning dynamics for in-context control of LLM internal representations.
+
+**Relevance:** 8
+**Novelty:** 8
+
+---
+
+## 17. [Visual Words Meet BM25: Sparse Auto-Encoder Visual Word Scoring for Image Retrieval](https://arxiv.org/abs/2603.05781) <a id="link17"></a>
+
+**ArXiv ID:** 2603.05781
+
+**Authors:** Donghoon Han, Eunhwan Park, Seunghyeon Seo
+
+**Abstract:** Dense image retrieval is accurate but offers limited interpretability and attribution, and it can be compute-intensive at scale. We present \textbf{BM25-V}, which applies Okapi BM25 scoring to sparse visual-word activations from a Sparse Auto-Encoder (SAE) on Vision Transformer patch features. Across a large gallery, visual-word document frequencies are highly imbalanced and follow a Zipfian-like distribution, making BM25's inverse document frequency (IDF) weighting well suited for suppressing ubiquitous, low-information words and emphasizing rare, discriminative ones. BM25-V retrieves high-recall candidates via sparse inverted-index operations and serves as an efficient first-stage retriever for dense reranking. Across seven benchmarks, BM25-V achieves Recall@200 $\geq$ 0.993, enabling a two-stage pipeline that reranks only $K{=}200$ candidates per query and recovers near-dense accuracy within $0.2$\% on average. An SAE trained once on ImageNet-1K transfers zero-shot to seven fine-grained benchmarks without fine-tuning, and BM25-V retrieval decisions are attributable to specific visual words with quantified IDF contributions.
+
+**Comment:** Representation Learning — sparse auto-encoder yields interpretable visual words and enables sparse inverted-index retrieval (sparse coding aligning with efficiency/interpretability).
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 18. [Do Foundation Models Know Geometry? Probing Frozen Features for Continuous Physical Measurement](https://arxiv.org/abs/2603.06459) <a id="link18"></a>
+
+**ArXiv ID:** 2603.06459
+
+**Authors:** Yakov Pyotr Shkolnikov
+
+**Abstract:** Vision-language models encode continuous geometry that their text pathway fails to express: a 6,000-parameter linear probe extracts hand joint angles at 6.1 degrees MAE from frozen features, while the best text output achieves only 20.0 degrees -- a 3.3x bottleneck. LoRA fine-tuning (r=16, 2,000 images) narrows this gap to 6.5 degrees, providing evidence for a pathway-training deficit rather than a representational one. Training objective determines accuracy more than architecture: five encoders spanning self-supervised, contrastive, and hybrid paradigms converge to statistically equivalent accuracy (R^2 approximately 0.55, TOST-equivalent at delta=0.03) despite sharing as little as CKA=0.41 representational similarity -- functional convergence without representational convergence. Autoregressive generation damages geometric fidelity, but the damage originates in the generation process, not in language alignment: Qwen2.5-VL's LLM layers actually improve probe accuracy over its raw vision encoder. Layer-wise analysis reveals a universal mid-network accuracy peak across all architectures, with attention heads in layers 18-22 carrying disproportionate geometric signal. These findings enable a single frozen backbone to function as a multi-task geometric sensor through lightweight probes, without fine-tuning or text generation.
+
+**Comment:** Representation Learning — probes frozen foundation-model features for continuous geometry, with layer-wise signal localization and objective/architecture comparisons.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 19. [Bias In, Bias Out? Finding Unbiased Subnetworks in Vanilla Models](https://arxiv.org/abs/2603.05582) <a id="link19"></a>
+
+**ArXiv ID:** 2603.05582
+
+**Authors:** Ivan Luiz De Moura Matos, Abdel Djalil Sad Saoud, Ekaterina Iakovleva, Vito Paolo Pastore, Enzo Tartaglione
+
+**Abstract:** The issue of algorithmic biases in deep learning has led to the development of various debiasing techniques, many of which perform complex training procedures or dataset manipulation. However, an intriguing question arises: is it possible to extract fair and bias-agnostic subnetworks from standard vanilla-trained models without relying on additional data, such as unbiased training set? In this work, we introduce Bias-Invariant Subnetwork Extraction (BISE), a learning strategy that identifies and isolates "bias-free" subnetworks that already exist within conventionally trained models, without retraining or finetuning the original parameters. Our approach demonstrates that such subnetworks can be extracted via pruning and can operate without modification, effectively relying less on biased features and maintaining robust performance. Our findings contribute towards efficient bias mitigation through structural adaptation of pre-trained neural networks via parameter removal, as opposed to costly strategies that are either data-centric or involve (re)training all model parameters. Extensive experiments on common benchmarks show the advantages of our approach in terms of the performance and computational efficiency of the resulting debiased model.
+
+**Comment:** Compression/sparsity: pruning to extract bias-invariant subnetworks from vanilla models without retraining.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 20. [DC-Merge: Improving Model Merging with Directional Consistency](https://arxiv.org/abs/2603.06242) <a id="link20"></a>
+
+**ArXiv ID:** 2603.06242
+
+**Authors:** Han-Chen Zhang, Zi-Hao Zhou, Mao-Lin Luo, Shimin Di, Min-Ling Zhang, Tong Wei
+
+**Abstract:** Model merging aims to integrate multiple task-adapted models into a unified model that preserves the knowledge of each task. In this paper, we identify that the key to this knowledge retention lies in maintaining the directional consistency of singular spaces between merged multi-task vector and individual task vectors. However, this consistency is frequently compromised by two issues: i) an imbalanced energy distribution within task vectors, where a small fraction of singular values dominate the total energy, leading to the neglect of semantically important but weaker components upon merging, and ii) the geometric inconsistency of task vectors in parameter space, which causes direct merging to distort their underlying directional geometry. To address these challenges, we propose DC-Merge, a method for directional-consistent model merging. It first balances the energy distribution of each task vector by smoothing its singular values, ensuring all knowledge components are adequately represented. These energy-balanced vectors are then projected onto a shared orthogonal subspace to align their directional geometries with minimal reconstruction error. Finally, the aligned vectors are aggregated in the shared orthogonal subspace and projected back to the original parameter space. Extensive experiments on vision and vision-language benchmarks show that DC-Merge consistently achieves state-of-the-art performance in both full fine-tuning and LoRA settings. The implementation code is available at https://github.com/Tobeginwith/DC-Merge.
+
+**Comment:** Model merging/parameter-space geometry: enforces directional consistency via singular-space smoothing and orthogonal subspace alignment.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 21. [HiPP-Prune: Hierarchical Preference-Conditioned Structured Pruning for Vision-Language Models](https://arxiv.org/abs/2603.06270) <a id="link21"></a>
+
+**ArXiv ID:** 2603.06270
+
+**Authors:** Lincen Bai, Hedi Tabia, Raul Santos-Rodriguez
+
+**Abstract:** Pruning vision-language models (VLMs) for efficient deployment is challenging because compression can affect not only task utility but also visual grounding, often amplifying object hallucinations even at the same sparsity level. We present HiPP-Prune, a hierarchical preference-conditioned structured pruning framework that treats pruning as conditional resource allocation under multiple objectives. HiPP-Prune makes plan-level decisions: a single policy invocation outputs a global pruning blueprint by factorizing decisions into an overall sparsity budget and a layer-wise allocation, enabling queryable trade-offs via a user-specified preference vector. To account for VLM-specific failure modes, our policy state integrates a visual sensitivity signal derived from attention flow between vision tokens and language hidden states, discouraging over-pruning of vision-critical layers that facilitate cross-modal fusion. We optimize pruning plans with plan-level Group Relative Policy Optimization (GRPO) under a multi-objective return that combines task utility, hallucination robustness (POPE), compression, and a synaptic-flow-inspired stability proxy to reduce unproductive exploration in high-sparsity regimes. Experiments on LLaVA with POPE and ScienceQA demonstrate that HiPP-Prune discovers diverse non-dominated pruning plans and provides controllable robustness--utility trade-offs under matched sparsity budgets.
+
+**Comment:** Model Compression and Efficiency: hierarchical, preference-conditioned structured pruning with VLM-aware sensitivity signals and plan-level GRPO.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 22. [Knowing without Acting: The Disentangled Geometry of Safety Mechanisms in Large Language Models](https://arxiv.org/abs/2603.05773) <a id="link22"></a>
+
+**ArXiv ID:** 2603.05773
+
+**Authors:** Jinman Wu, Yi Xie, Shen Lin, Shiqian Zhao, Xiaofeng Chen
+
+**Abstract:** Safety alignment is often conceptualized as a monolithic process wherein harmfulness detection automatically triggers refusal. However, the persistence of jailbreak attacks suggests a fundamental mechanistic decoupling. We propose the \textbf{\underline{D}}isentangled \textbf{\underline{S}}afety \textbf{\underline{H}}ypothesis \textbf{(DSH)}, positing that safety computation operates on two distinct subspaces: a \textit{Recognition Axis} ($\mathbf{v}_H$, ``Knowing'') and an \textit{Execution Axis} ($\mathbf{v}_R$, ``Acting''). Our geometric analysis reveals a universal ``Reflex-to-Dissociation'' evolution, where these signals transition from antagonistic entanglement in early layers to structural independence in deep layers. To validate this, we introduce \textit{Double-Difference Extraction} and \textit{Adaptive Causal Steering}. Using our curated \textsc{AmbiguityBench}, we demonstrate a causal double dissociation, effectively creating a state of ``Knowing without Acting.'' Crucially, we leverage this disentanglement to propose the \textbf{Refusal Erasure Attack (REA)}, which achieves State-of-the-Art attack success rates by surgically lobotomizing the refusal mechanism. Furthermore, we uncover a critical architectural divergence, contrasting the \textit{Explicit Semantic Control} of Llama3.1 with the \textit{Latent Distributed Control} of Qwen2.5. The code and dataset are available at https://anonymous.4open.science/r/DSH.
+
+**Comment:** Representation Learning / Mechanistic Interpretability: disentangled safety subspaces (recognition vs execution) with causal steering in LLMs.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 23. [Bridging Domains through Subspace-Aware Model Merging](https://arxiv.org/abs/2603.05768) <a id="link23"></a>
+
+**ArXiv ID:** 2603.05768
+
+**Authors:** Levy Chaves, Chao Zhou, Rebekka Burkholz, Eduardo Valle, Sandra Avila
+
+**Abstract:** Model merging integrates multiple task-specific models into a single consolidated one. Recent research has made progress in improving merging performance for in-distribution or multi-task scenarios, but domain generalization in model merging remains underexplored. We investigate how merging models fine-tuned on distinct domains affects generalization to unseen domains. Through an analysis of parameter competition in the task matrix using singular value decomposition, we show that merging models trained under different distribution shifts induces stronger conflicts between their subspaces compared to traditional multi-task settings. To mitigate this issue, we propose SCORE (Subspace COnflict-Resolving mErging), a method designed to alleviate such singular subspace conflicts. SCORE finds a shared orthogonal basis by computing the principal components of the concatenated leading singular vectors of all models. It then projects each task matrix into the shared basis, pruning off-diagonal components to remove conflicting singular directions. SCORE consistently outperforms, on average, existing model merging approaches in domain generalization settings across a variety of architectures and model scales, demonstrating its effectiveness and scalability.
+
+**Comment:** Model Architecture: subspace-aware model merging (SCORE) resolving singular subspace conflicts via shared orthogonal basis and pruning.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+# Paper Selection Prompt
+
+## System Prompt
+
+> You are a helpful paper reading assistant whose job is to read daily posts from ArXiv and identify a few papers that your friend will enjoy reading.
+> Your job is to carefully read the paper titles and abstracts below and find the ones that match the criteria below.
+
+## User Prompt
+
+> ## Instructions
+> 
+> Write the response in JSONL format with {ARXIVID, COMMENT, RELEVANCE, NOVELTY} on each line, one for each paper.
+> 
+> - ARXIVID: should be the ArXiv ID.
+> - COMMENT: should identify whether there is a criteria that match the paper very closely. These matches should not be based on general terms like "language modeling" or "advancements" and should specifically refer to a criterion. No need to mention the non-matching criteria.
+> - RELEVANCE: should be a score from 1-10.
+> - NOVELTY: should be a score from 1-10.
+> 
+> ## Scoring Criteria
+> 
+> > The "Relevance" score measures how closely the paper aligns with the core topics of the prompt.
+> > The "Novelty" score assesses the originality and impact of the paper.
+> > They are two **ORTHONORMAL** axes and **SHOULD NOT** be confused with each other.
+> 
+> ### Relevance Scoring
+> 
+> - Relevance 9-10 (Completely Relevant)
+>   - Focus: Fully aligned with core topics with no deviation, score the highest if contains relevant keywords in it.
+>   - Examples: Papers focused on foundational methods or theoretical research, whose titles contain topic keywords like "MoE".
+> 
+> - Relevance 7-8 (Relevant)
+>   - Focus: Retain a solid link to the main research area, though may touch on peripheral elements.
+>   - Examples: Papers research on the fundamental part of MoE through a less critical aspect like its behavior in GNN.
+> 
+> - Relevance 5-6 (Borderline)
+>   - Focus: Maintains a link to the core topic but also extends into at least one other domain/area beyond the primary focus.
+>   - Examples: Work referencing MoE centered on reinforcement learning.
+> 
+> - Relevance 3-4 (Irrelevant)
+>   - Focus: Largely outside our interests with no association to our topics.
+>   - Examples: Application-focused papers like using MoE to solve a problem in the real world.
+> 
+> - Relevance 1-2 (Ignore)
+>   - Focus: Purely unrelated to our topics. Completely a different domain.
+>   - **Exception**: If the paper hints at a cutting-edge, radically new direction that could eventually transform the primary domain, consider a score of 9–10 despite initial appearances. (Usually a very rare concept that belongs to the fundamental research)
+> 
+> ### Novelty Scoring
+> 
+> - Novelty 9-10 (Breakthrough)
+>   - Definition: Groundbreaking methods/theory introducing new directions or solving major challenges.
+>   - Examples: Entirely new paradigm for foundational models; a novel theory transforming representation learning.
+> 
+> - Novelty 7-8 (Improvements)
+>   - Definition: Substantial insights/enhancements, though not a full paradigm shift.
+>   - Examples: Modifications on existing methods yielding significantly better results.
+> 
+> - Novelty 5-6 (Borderline)
+>   - Definition: Incremental contributions with possible long-term benefits, not immediately transformative.
+>   - Examples: Moderately novel extension to an existing architecture; refining current methods without fundamentally altering them.
+> 
+> - Novelty 3-4 (Tangential)
+>   - Definition: Minor or domain-specific improvements with limited broader impact.
+>   - Examples: Slight modifications to known methods with strange motivation; purely engineering jobs like a new benchmark/dataset.
+> 
+> - Novelty 1-2 (Low)
+>   - Definition: Minimal originality, applying standard approaches without real innovation.
+>   - Examples: Using an off-the-shelf model without adding new insights; purely application-driven studies like finetuning a pretrained model using existing methods.
+> 
+> ## Papers
+> 
+> [PAPER LIST HERE]
+> 
+> ## Relevant Topics
+> 
+> Use the following relevance criteria to focus on foundational research. Keep **relevant** papers and filter out **irrelevant** ones. Avoid purely **application-driven** work.
+> 
+> 1. Model Architecture
+>    - Relevant: Mixture-of-Experts (MoE), Transformers, Conditional/Dynamic Networks, Autoencoders, analysis/innovations on existing architectures.
+>    - Irrelevant: Merely using existing architectures for a certain task without insights into the structure themselves.
+> 
+> 2. Model Compression and Efficiency
+>    - Relevant: Sparsity, pruning, quantization, low-rank approaches, cache, or other algorithmic/theoretical efficiency breakthroughs.
+>    - Irrelevant: Straightforward applications of existing compression methods to new tasks.
+> 
+> 3. High Performance Computing
+>    - Relevant: Algorithmic or systems-level innovations enabling training of large-scale models, distributed training techniques, memory optimization.
+>    - Irrelevant: Incremental engineering improvements without novel algorithmic contributions.
+> 
+> 4. Representation Learning
+>    - Relevant: Insights into how deep networks encode information, feature/dictionary learning, sparse/contrastive methods, training dynamics in neural networks.
+>    - Irrelevant: Standard applications of known techniques lacking new theoretical or methodological contributions.
+> 
+> **Keywords:**
+> 
+> - Relevant: Mixture of Experts (MoE), Representation Learning, Compression/Efficiency, Sparse/Sparsity, Pruning, Quantization, Low-rank, Foundation Model, etc.
+> - Irrelevant: Reinforcement Learning, Transfer Learning, Federated Learning, Online Learning, Diffusion Models, etc.
+> - Application: Image Segmentation, Medical Imaging, 3D Vision, Video Understanding, Information Retrieval, Summarization, Recommendation Systems, Machine Translation, Speech Recognition, Signal Processing, Spatial/Temporal Modeling, Time Series, Knowledge Graph, etc.

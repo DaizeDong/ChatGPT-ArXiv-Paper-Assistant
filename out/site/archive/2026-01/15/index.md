@@ -1,0 +1,674 @@
+<div style="display: flex; align-items: flex-start; justify-content: space-between; width: 100%;"><div style="width: 33.33%; text-align: left;"><a href="../14"><img src="../../../assets/nav/day/2026-01-15-prev.svg" alt="Previous Day 2026-01-14"></a></div><div style="width: 33.33%; text-align: center;"><a href=".."><img src="../../../assets/nav/day/2026-01-15-center.svg" alt="Monthly Overview 2026-01"></a></div><div style="width: 33.33%; text-align: right;"><a href="../16"><img src="../../../assets/nav/day/2026-01-15-next.svg" alt="Next Day 2026-01-16"></a></div></div>
+
+# Personalized Daily ArXiv Papers 2026-01-15
+
+| *[gpt-5]*   | Prompt   | Completion   | Total   |
+|:-----------:|:--------:|:------------:|:-------:|
+| **Token**   | 46670    | 41405        | 88075   |
+| **Cost**    | $0.06    | $0.41        | $0.47   |
+
+Total arXiv papers: 519
+
+Total scanned papers: 292
+
+Total relevant papers: 31
+
+**Table of contents with paper titles:**
+
+1. [Sherry: Hardware-Efficient 1.25-Bit Ternary Quantization via Fine-grained Sparsification](#user-content-link1)
+**Authors:** Hong Huang, Decheng Wu, Qiangqiang Hu, Guanghua Yu, Jinhai Yang, Jianchen Zhu, Xue Liu, Dapeng Wu
+
+2. [Demystifying the Slash Pattern in Attention: The Role of RoPE](#user-content-link2)
+**Authors:** Yuan Cheng, Fengzhuo Zhang, Yunlong Hou, Cunxiao Du, Chao Du, Tianyu Pang, Aixin Sun, Zhuoran Yang
+
+3. [KVzap: Fast, Adaptive, and Faithful KV Cache Pruning](#user-content-link3)
+**Authors:** Simon Jegou, Maximilian Jeblick
+
+4. [Hierarchical Sparse Plus Low Rank Compression of LLM](#user-content-link4)
+**Authors:** Pawan Kumar, Aditi Gupta
+
+5. [Sliced-Wasserstein Distribution Alignment Loss Improves the Ultra-Low-Bit Quantization of Large Language Models](#user-content-link5)
+**Authors:** Deyu Cao, Yixin Yin, Samin Aref
+
+6. [Horseshoe Mixtures-of-Experts (HS-MoE)](#user-content-link6)
+**Authors:** Nick Polson, Vadim Sokolov
+
+7. [Reasoning Beyond Chain-of-Thought: A Latent Computational Mode in Large Language Models](#user-content-link7)
+**Authors:** Zhenghao He, Guangzhi Xiong, Bohan Liu, Sanchit Sinha, Aidong Zhang
+
+8. [Controlled LLM Training on Spectral Sphere](#user-content-link8)
+**Authors:** Tian Xie, Haoming Luo, Haoyu Tang, Yiwen Hu, Jason Klein Liu, Qingnan Ren, Yang Wang, Wayne Xin Zhao, Rui Yan, Bing Su, Chong Luo, Baining Guo
+
+9. [Parallelizable memory recurrent units](#user-content-link9)
+**Authors:** Florent De Geeter, Gaspard Lambrechts, Damien Ernst, Guillaume Drion
+
+10. [WaveFormer: Frequency-Time Decoupled Vision Modeling with Wave Equation](#user-content-link10)
+**Authors:** Zishan Shu, Juntong Wu, Wei Yan, Xudong Liu, Hongyu Zhang, Chang Liu, Youdong Mao, Jie Chen
+
+11. [Layer-Parallel Training for Transformers](#user-content-link11)
+**Authors:** Shuai Jiang, Marc Salvado, Eric C. Cyr, Alena Kopani\v{c}\'akov\'a, Rolf Krause, Jacob B. Schroder
+
+12. [Multiplex Thinking: Reasoning via Token-wise Branch-and-Merge](#user-content-link12)
+**Authors:** Yao Tang, Li Dong, Yaru Hao, Qingxiu Dong, Furu Wei, Jiatao Gu
+
+13. [$D^2Prune$: Sparsifying Large Language Models via Dual Taylor Expansion and Attention Distribution Awareness](#user-content-link13)
+**Authors:** Lang Xiong, Ning Liu, Ao Ren, Yuheng Bai, Haining Fang, BinYan Zhang, Zhe Jiang, Yujuan Tan, Duo Liu
+
+14. [HIPPO: Accelerating Video Large Language Models Inference via Holistic-aware Parallel Speculative Decoding](#user-content-link14)
+**Authors:** Qitan Lv, Tianyu Liu, Wen Wu, Xuenan Xu, Bowen Zhou, Feng Wu, Chao Zhang
+
+15. [YaPO: Learnable Sparse Activation Steering Vectors for Domain Adaptation](#user-content-link15)
+**Authors:** Abdelaziz Bounhar, Rania Hossam Elmohamady Elbadry, Hadi Abdine, Preslav Nakov, Michalis Vazirgiannis, Guokan Shang
+
+16. [Towards Specialized Generalists: A Multi-Task MoE-LoRA Framework for Domain-Specific LLM Adaptation](#user-content-link16)
+**Authors:** Yuxin Yang, Aoxiong Zeng, Xiangquan Yang
+
+17. [GeoRA: Geometry-Aware Low-Rank Adaptation for RLVR](#user-content-link17)
+**Authors:** Jiaying Zhang, Lei Shi, Jiguo Li, Jun Xu, Jiuchong Gao, Jinghua Hao, Renqing He
+
+18. [Deconstructing Pre-training: Knowledge Attribution Analysis in MoE and Dense Models](#user-content-link18)
+**Authors:** Bo Wang, Junzhuo Li, Hong Chen, Yuanlin Chu, Yuxuan Fan, Xuming Hu
+
+19. [Dynamic Graph Structure Learning via Resistance Curvature Flow](#user-content-link19)
+**Authors:** Chaoqun Fei, Huanjiang Liu, Tinglve Zhou, Yangyang Li, Tianyong Hao
+
+20. [Greedy Is Enough: Sparse Action Discovery in Agentic LLMs](#user-content-link20)
+**Authors:** Angshul Majumdar
+
+21. [Sparsity Is Necessary: Polynomial-Time Stability for Agentic LLMs in Large Action Spaces](#user-content-link21)
+**Authors:** Angshul Majumdar
+
+22. [Universal Latent Homeomorphic Manifolds: Cross-Domain Representation Learning via Homeomorphism Verification](#user-content-link22)
+**Authors:** Tong Wu, Tayab Uddin Wara, Daniel Hernandez, Sidong Lei
+
+23. [Toward Understanding Unlearning Difficulty: A Mechanistic Perspective and Circuit-Guided Difficulty Metric](#user-content-link23)
+**Authors:** Jiali Cheng, Ziheng Chen, Chirag Agarwal, Hadi Amiri
+
+24. [Hidden States as Early Signals: Step-level Trace Evaluation and Pruning for Efficient Test-Time Scaling](#user-content-link24)
+**Authors:** Zhixiang Liang, Beichen Huang, Zheng Wang, Minjia Zhang
+
+25. [Ability Transfer and Recovery via Modularized Parameters Localization](#user-content-link25)
+**Authors:** Songyao Jin, Kun Zhou, Wenqi Li, Peng Wang, Biwei Huang
+
+26. [Disentangling Task Conflicts in Multi-Task LoRA via Orthogonal Gradient Projection](#user-content-link26)
+**Authors:** Ziyu Yang, Guibin Chen, Yuxin Yang, Aoxiong Zeng, Xiangquan Yang
+
+27. [Mechanisms are Transferable: Data-Efficient Low-Resource Adaptation via Circuit-Targeted Supervised Fine-Tuning](#user-content-link27)
+**Authors:** Khumaisa Nur'aini, Ayu Purwarianti, Alham Fikri Aji, Derry Wijaya
+
+28. [From Hawkes Processes to Attention: Time-Modulated Mechanisms for Event Sequences](#user-content-link28)
+**Authors:** Xinzi Tan, Kejian Zhang, Junhan Yu, Doudou Zhou
+
+29. [Annealed Relaxation of Speculative Decoding for Faster Autoregressive Image Generation](#user-content-link29)
+**Authors:** Xingyao Li, Fengzhuo Zhang, Cunxiao Du, Hui Ji
+
+30. [Q-realign: Piggybacking Realignment on Quantization for Safe and Efficient LLM Deployment](#user-content-link30)
+**Authors:** Qitao Tan, Xiaoying Song, Ningxi Cheng, Ninghao Liu, Xiaoming Zhai, Lingzi Hong, Yanzhi Wang, Zhen Xiang, Geng Yuan
+
+31. [Distribution-Aligned Sequence Distillation for Superior Long-CoT Reasoning](#user-content-link31)
+**Authors:** Shaotian Yan, Kaiyuan Liu, Chen Shen, Bing Wang, Sinan Fan, Jun Zhang, Yue Wu, Zheng Wang, Jieping Ye
+
+---
+
+## 1. [Sherry: Hardware-Efficient 1.25-Bit Ternary Quantization via Fine-grained Sparsification](https://arxiv.org/abs/2601.07892) <a id="link1"></a>
+
+**ArXiv ID:** 2601.07892
+
+**Authors:** Hong Huang, Decheng Wu, Qiangqiang Hu, Guanghua Yu, Jinhai Yang, Jianchen Zhu, Xue Liu, Dapeng Wu
+
+**Abstract:** The deployment of Large Language Models (LLMs) on resource-constrained edge devices is increasingly hindered by prohibitive memory and computational requirements. While ternary quantization offers a compelling solution by reducing weights to {-1, 0, +1}, current implementations suffer from a fundamental misalignment with commodity hardware. Most existing methods must choose between 2-bit aligned packing, which incurs significant bit wastage, or 1.67-bit irregular packing, which degrades inference speed. To resolve this tension, we propose Sherry, a hardware-efficient ternary quantization framework. Sherry introduces a 3:4 fine-grained sparsity that achieves a regularized 1.25-bit width by packing blocks of four weights into five bits, restoring power-of-two alignment. Furthermore, we identify weight trapping issue in sparse ternary training, which leads to representational collapse. To address this, Sherry introduces Arenas, an annealing residual synapse mechanism that maintains representational diversity during training. Empirical evaluations on LLaMA-3.2 across five benchmarks demonstrate that Sherry matches state-of-the-art ternary performance while significantly reducing model size. Notably, on an Intel i7-14700HX CPU, our 1B model achieves zero accuracy loss compared to SOTA baselines while providing 25% bit savings and 10% speed up. The code is available at https://github.com/Tencent/AngelSlim .
+
+**Comment:** Model Compression and Efficiency: hardware-aligned 1.25-bit ternary quantization via 3:4 fine-grained sparsity and an annealing residual synapse mechanism (Arenas) to avoid representational collapse.
+
+**Relevance:** 10
+**Novelty:** 8
+
+---
+
+## 2. [Demystifying the Slash Pattern in Attention: The Role of RoPE](https://arxiv.org/abs/2601.08297) <a id="link2"></a>
+
+**ArXiv ID:** 2601.08297
+
+**Authors:** Yuan Cheng, Fengzhuo Zhang, Yunlong Hou, Cunxiao Du, Chao Du, Tianyu Pang, Aixin Sun, Zhuoran Yang
+
+**Abstract:** Large Language Models (LLMs) often exhibit slash attention patterns, where attention scores concentrate along the $\Delta$-th sub-diagonal for some offset $\Delta$. These patterns play a key role in passing information across tokens. But why do they emerge? In this paper, we demystify the emergence of these Slash-Dominant Heads (SDHs) from both empirical and theoretical perspectives. First, by analyzing open-source LLMs, we find that SDHs are intrinsic to models and generalize to out-of-distribution prompts. To explain the intrinsic emergence, we analyze the queries, keys, and Rotary Position Embedding (RoPE), which jointly determine attention scores. Our empirical analysis reveals two characteristic conditions of SDHs: (1) Queries and keys are almost rank-one, and (2) RoPE is dominated by medium- and high-frequency components. Under these conditions, queries and keys are nearly identical across tokens, and interactions between medium- and high-frequency components of RoPE give rise to SDHs. Beyond empirical evidence, we theoretically show that these conditions are sufficient to ensure the emergence of SDHs by formalizing them as our modeling assumptions. Particularly, we analyze the training dynamics of a shallow Transformer equipped with RoPE under these conditions, and prove that models trained via gradient descent exhibit SDHs. The SDHs generalize to out-of-distribution prompts.
+
+**Comment:** Representation/Architecture analysis: theoretical and empirical explanation of slash attention patterns via RoPE and training dynamics.
+
+**Relevance:** 10
+**Novelty:** 8
+
+---
+
+## 3. [KVzap: Fast, Adaptive, and Faithful KV Cache Pruning](https://arxiv.org/abs/2601.07891) <a id="link3"></a>
+
+**ArXiv ID:** 2601.07891
+
+**Authors:** Simon Jegou, Maximilian Jeblick
+
+**Abstract:** Growing context lengths in transformer-based language models have made the key-value (KV) cache a critical inference bottleneck. While many KV cache pruning methods have been proposed, they have not yet been adopted in major inference engines due to speed--accuracy trade-offs. We introduce KVzap, a fast, input-adaptive approximation of KVzip that works in both prefilling and decoding. On Qwen3-8B, Llama-3.1-8B-Instruct, and Qwen3-32B across long-context and reasoning tasks, KVzap achieves $2$--$4\times$ KV cache compression with negligible accuracy loss and achieves state-of-the-art performance on the KVpress leaderboard. Code and models are available at https://github.com/NVIDIA/kvpress.
+
+**Comment:** Model Compression and Efficiency: fast, adaptive KV cache pruning for both prefilling and decoding; cache/pruning focus.
+
+**Relevance:** 10
+**Novelty:** 8
+
+---
+
+## 4. [Hierarchical Sparse Plus Low Rank Compression of LLM](https://arxiv.org/abs/2601.07839) <a id="link4"></a>
+
+**ArXiv ID:** 2601.07839
+
+**Authors:** Pawan Kumar, Aditi Gupta
+
+**Abstract:** Modern large language models (LLMs) place extraordinary pressure on memory and compute budgets, making principled compression indispensable for both deployment and continued training. We present Hierarchical Sparse Plus Low-Rank (HSS) compression, a two-stage scheme that (i) removes the largest-magnitude weights into a sparse matrix S and (ii) applies a recursive Hierarchically Sparse Separable (HSS) low-rank factorisation to the dense residual matrix. A recursive rank-reducing strategy and a reverse Cuthill-Mckee (RCM) permutation are introduced to align high weights towards the diagonal with the block-diagonal hierarchy, maximising off-diagonal compressibility (because they are touched only once). HSS is hardware-friendly: its matrix-vector multiply reduces to one sparse and a sequence of thin-matrix multiplications and can be trained end-to-end with standard optimisers.   Experiments on LLaMA-7B show that targeting only the self-attention projections (1.6 B parameters of Q, K, and V matrices out of a total 7B parameters) suffices to yield large memory savings while retaining comparable state-of-the-art perplexity scores on test samples of the WikiText dataset. For example, with a 30\% sparsity budget and an outer rank of 512, sHSS-RCM achieves a perplexity of 1.64, outperforming dense baselines and classical sparse-plus-SVD variants, while also achieving significant memory savings.
+
+**Comment:** Model Compression and Efficiency: hierarchical sparse-plus-low-rank (HSS) factorization with sparsity for LLM layers.
+
+**Relevance:** 10
+**Novelty:** 8
+
+---
+
+## 5. [Sliced-Wasserstein Distribution Alignment Loss Improves the Ultra-Low-Bit Quantization of Large Language Models](https://arxiv.org/abs/2601.07878) <a id="link5"></a>
+
+**ArXiv ID:** 2601.07878
+
+**Authors:** Deyu Cao, Yixin Yin, Samin Aref
+
+**Abstract:** The benefits of most large language models come with steep and often hidden economic and environmental costs due to their resource usage inefficiency during deployment. Model quantization improves energy and memory efficiency through representing model parameters by lower-precision values. However, compression below 4-bits often distorts activation distributions and degrades performance. We address this challenge by introducing a sliced Wasserstein loss function for distribution-aware calibration in ultra-low-bit post-training quantization. The proposed loss aligns the output distributions of full-precision and quantized models under random linear projections, complementing standard mean-squared error loss without adding any computational overhead during inference. Our proposed loss function can be incorporated with any post-training quantization framework that has a retraining component. We demonstrate the performance gains of our proposed model by incorporating it with two frontier methods known as OmniQuant and TesseraQ. Compared to these two baselines, the proposed loss consistently improves both perplexity and downstream task accuracy across multiple ultra-low-bit settings. Our proposed loss function recovers 4.12-20.37% of the OmniQuant's lost accuracy on the language model LLaMA-2-7B, 0.93-7.65% on OPT-6.7B, and 2.26-6.20% on LLaMA-2-13B. TesseraQ's accuracy degradation is recovered by 3.63-7.63% in relative terms when augmented by our proposed loss function. Taken together, these results demonstrate that distributional alignment provides a simple yet effective performance boost that can push the limits of frontier quantization methods. Our method is available on GitHub to facilitate future progress in ultra-low-bit quantization.
+
+**Comment:** Model Compression and Efficiency: proposes a sliced-Wasserstein distribution alignment loss for ultra-low-bit post-training quantization of LLMs, improving calibration of activation/output distributions.
+
+**Relevance:** 10
+**Novelty:** 7
+
+---
+
+## 6. [Horseshoe Mixtures-of-Experts (HS-MoE)](https://arxiv.org/abs/2601.09043) <a id="link6"></a>
+
+**ArXiv ID:** 2601.09043
+
+**Authors:** Nick Polson, Vadim Sokolov
+
+**Abstract:** Horseshoe mixtures-of-experts (HS-MoE) models provide a Bayesian framework for sparse expert selection in mixture-of-experts architectures. We combine the horseshoe prior's adaptive global-local shrinkage with input-dependent gating, yielding data-adaptive sparsity in expert usage. Our primary methodological contribution is a particle learning algorithm for sequential inference, in which the filter is propagated forward in time while tracking only sufficient statistics. We also discuss how HS-MoE relates to modern mixture-of-experts layers in large language models, which are deployed under extreme sparsity constraints (e.g., activating a small number of experts per token out of a large pool).
+
+**Comment:** Model Architecture: Mixture-of-Experts with Bayesian horseshoe priors for sparse expert selection and a particle learning algorithm for sequential inference.
+
+**Relevance:** 10
+**Novelty:** 7
+
+---
+
+## 7. [Reasoning Beyond Chain-of-Thought: A Latent Computational Mode in Large Language Models](https://arxiv.org/abs/2601.08058) <a id="link7"></a>
+
+**ArXiv ID:** 2601.08058
+
+**Authors:** Zhenghao He, Guangzhi Xiong, Bohan Liu, Sanchit Sinha, Aidong Zhang
+
+**Abstract:** Chain-of-Thought (CoT) prompting has improved the reasoning performance of large language models (LLMs), but it remains unclear why it works and whether it is the unique mechanism for triggering reasoning in large language models. In this work, we study this question by directly analyzing and intervening on the internal representations of LLMs with Sparse Autoencoders (SAEs), identifying a small set of latent features that are causally associated with LLM reasoning behavior. Across multiple model families and reasoning benchmarks, we find that steering a single reasoning-related latent feature can substantially improve accuracy without explicit CoT prompting. For large models, latent steering achieves performance comparable to standard CoT prompting while producing more efficient outputs. We further observe that this reasoning-oriented internal state is triggered early in generation and can override prompt-level instructions that discourage explicit reasoning. Overall, our results suggest that multi-step reasoning in LLMs is supported by latent internal activations that can be externally activated, while CoT prompting is one effective, but not unique, way of activating this mechanism rather than its necessary cause.
+
+**Comment:** Representation Learning: uses sparse autoencoders to identify and steer latent reasoning features, causally linking internal activations to multi-step reasoning without explicit CoT.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 8. [Controlled LLM Training on Spectral Sphere](https://arxiv.org/abs/2601.08393) <a id="link8"></a>
+
+**ArXiv ID:** 2601.08393
+
+**Authors:** Tian Xie, Haoming Luo, Haoyu Tang, Yiwen Hu, Jason Klein Liu, Qingnan Ren, Yang Wang, Wayne Xin Zhao, Rui Yan, Bing Su, Chong Luo, Baining Guo
+
+**Abstract:** Scaling large models requires optimization strategies that ensure rapid convergence grounded in stability. Maximal Update Parametrization ($\boldsymbol{\mu}$P) provides a theoretical safeguard for width-invariant $\Theta(1)$ activation control, whereas emerging optimizers like Muon are only ``half-aligned'' with these constraints: they control updates but allow weights to drift. To address this limitation, we introduce the \textbf{Spectral Sphere Optimizer (SSO)}, which enforces strict module-wise spectral constraints on both weights and their updates. By deriving the steepest descent direction on the spectral sphere, SSO realizes a fully $\boldsymbol{\mu}$P-aligned optimization process. To enable large-scale training, we implement SSO as an efficient parallel algorithm within Megatron. Through extensive pretraining on diverse architectures, including Dense 1.7B, MoE 8B-A1B, and 200-layer DeepNet models, SSO consistently outperforms AdamW and Muon. Furthermore, we observe significant practical stability benefits, including improved MoE router load balancing, suppressed outliers, and strictly bounded activations.
+
+**Comment:** High-Performance Training/Optimization: Spectral Sphere Optimizer enforces module-wise spectral constraints, fully muP-aligned, improving stability (incl. MoE router balance) over AdamW/Muon.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 9. [Parallelizable memory recurrent units](https://arxiv.org/abs/2601.09495) <a id="link9"></a>
+
+**ArXiv ID:** 2601.09495
+
+**Authors:** Florent De Geeter, Gaspard Lambrechts, Damien Ernst, Guillaume Drion
+
+**Abstract:** With the emergence of massively parallel processing units, parallelization has become a desirable property for new sequence models. The ability to parallelize the processing of sequences with respect to the sequence length during training is one of the main factors behind the uprising of the Transformer architecture. However, Transformers lack efficiency at sequence generation, as they need to reprocess all past timesteps at every generation step. Recently, state-space models (SSMs) emerged as a more efficient alternative. These new kinds of recurrent neural networks (RNNs) keep the efficient update of the RNNs while gaining parallelization by getting rid of nonlinear dynamics (or recurrence). SSMs can reach state-of-the art performance through the efficient training of potentially very large networks, but still suffer from limited representation capabilities. In particular, SSMs cannot exhibit persistent memory, or the capacity of retaining information for an infinite duration, because of their monostability. In this paper, we introduce a new family of RNNs, the memory recurrent units (MRUs), that combine the persistent memory capabilities of nonlinear RNNs with the parallelizable computations of SSMs. These units leverage multistability as a source of persistent memory, while getting rid of transient dynamics for efficient computations. We then derive a specific implementation as proof-of-concept: the bistable memory recurrent unit (BMRU). This new RNN is compatible with the parallel scan algorithm. We show that BMRU achieves good results in tasks with long-term dependencies, and can be combined with state-space models to create hybrid networks that are parallelizable and have transient dynamics as well as persistent memory.
+
+**Comment:** Model Architecture and Efficiency: new recurrent units (MRU/BMRU) with parallel scan compatibility and persistent memory.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 10. [WaveFormer: Frequency-Time Decoupled Vision Modeling with Wave Equation](https://arxiv.org/abs/2601.08602) <a id="link10"></a>
+
+**ArXiv ID:** 2601.08602
+
+**Authors:** Zishan Shu, Juntong Wu, Wei Yan, Xudong Liu, Hongyu Zhang, Chang Liu, Youdong Mao, Jie Chen
+
+**Abstract:** Vision modeling has advanced rapidly with Transformers, whose attention mechanisms capture visual dependencies but lack a principled account of how semantic information propagates spatially. We revisit this problem from a wave-based perspective: feature maps are treated as spatial signals whose evolution over an internal propagation time (aligned with network depth) is governed by an underdamped wave equation. In this formulation, spatial frequency-from low-frequency global layout to high-frequency edges and textures-is modeled explicitly, and its interaction with propagation time is controlled rather than implicitly fixed. We derive a closed-form, frequency-time decoupled solution and implement it as the Wave Propagation Operator (WPO), a lightweight module that models global interactions in O(N log N) time-far lower than attention. Building on WPO, we propose a family of WaveFormer models as drop-in replacements for standard ViTs and CNNs, achieving competitive accuracy across image classification, object detection, and semantic segmentation, while delivering up to 1.6x higher throughput and 30% fewer FLOPs than attention-based alternatives. Furthermore, our results demonstrate that wave propagation introduces a complementary modeling bias to heat-based methods, effectively capturing both global coherence and high-frequency details essential for rich visual semantics. Codes are available at: https://github.com/ZishanShu/WaveFormer.
+
+**Comment:** Model Architecture and Efficiency: wave-based global interaction operator as O(N log N) alternative to attention (WaveFormer).
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 11. [Layer-Parallel Training for Transformers](https://arxiv.org/abs/2601.09026) <a id="link11"></a>
+
+**ArXiv ID:** 2601.09026
+
+**Authors:** Shuai Jiang, Marc Salvado, Eric C. Cyr, Alena Kopani\v{c}\'akov\'a, Rolf Krause, Jacob B. Schroder
+
+**Abstract:** We present a new training methodology for transformers using a multilevel, layer-parallel approach. Through a neural ODE formulation of transformers, our application of a multilevel parallel-in-time algorithm for the forward and backpropagation phases of training achieves parallel acceleration over the layer dimension. This dramatically enhances parallel scalability as the network depth increases, which is particularly useful for increasingly large foundational models. However, achieving this introduces errors that cause systematic bias in the gradients, which in turn reduces convergence when closer to the minima. We develop an algorithm to detect this critical transition and either switch to serial training or systematically increase the accuracy of layer-parallel training. Results, including BERT, GPT2, ViT, and machine translation architectures, demonstrate parallel-acceleration as well as accuracy commensurate with serial pre-training while fine-tuning is unaffected.
+
+**Comment:** High Performance Computing: parallel-in-time, layer-parallel training of Transformers via neural ODE formulation with accuracy control.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 12. [Multiplex Thinking: Reasoning via Token-wise Branch-and-Merge](https://arxiv.org/abs/2601.08808) <a id="link12"></a>
+
+**ArXiv ID:** 2601.08808
+
+**Authors:** Yao Tang, Li Dong, Yaru Hao, Qingxiu Dong, Furu Wei, Jiatao Gu
+
+**Abstract:** Large language models often solve complex reasoning tasks more effectively with Chain-of-Thought (CoT), but at the cost of long, low-bandwidth token sequences. Humans, by contrast, often reason softly by maintaining a distribution over plausible next steps. Motivated by this, we propose Multiplex Thinking, a stochastic soft reasoning mechanism that, at each thinking step, samples K candidate tokens and aggregates their embeddings into a single continuous multiplex token. This preserves the vocabulary embedding prior and the sampling dynamics of standard discrete generation, while inducing a tractable probability distribution over multiplex rollouts. Consequently, multiplex trajectories can be directly optimized with on-policy reinforcement learning (RL). Importantly, Multiplex Thinking is self-adaptive: when the model is confident, the multiplex token is nearly discrete and behaves like standard CoT; when it is uncertain, it compactly represents multiple plausible next steps without increasing sequence length. Across challenging math reasoning benchmarks, Multiplex Thinking consistently outperforms strong discrete CoT and RL baselines from Pass@1 through Pass@1024, while producing shorter sequences. The code and checkpoints are available at https://github.com/GMLR-Penn/Multiplex-Thinking.
+
+**Comment:** Model Architecture: token-wise branch-and-merge (Multiplex Thinking) aggregates K sampled token embeddings into a single multiplex token for soft reasoning.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 13. [$D^2Prune$: Sparsifying Large Language Models via Dual Taylor Expansion and Attention Distribution Awareness](https://arxiv.org/abs/2601.09176) <a id="link13"></a>
+
+**ArXiv ID:** 2601.09176
+
+**Authors:** Lang Xiong, Ning Liu, Ao Ren, Yuheng Bai, Haining Fang, BinYan Zhang, Zhe Jiang, Yujuan Tan, Duo Liu
+
+**Abstract:** Large language models (LLMs) face significant deployment challenges due to their massive computational demands. % While pruning offers a promising compression solution, existing methods suffer from two critical limitations: (1) They neglect activation distribution shifts between calibration data and test data, resulting in inaccurate error estimations; (2) They overlook the long-tail distribution characteristics of activations in the attention module. To address these limitations, this paper proposes a novel pruning method, $D^2Prune$. First, we propose a dual Taylor expansion-based method that jointly models weight and activation perturbations for precise error estimation, leading to precise pruning mask selection and weight updating and facilitating error minimization during pruning. % Second, we propose an attention-aware dynamic update strategy that preserves the long-tail attention pattern by jointly minimizing the KL divergence of attention distributions and the reconstruction error. Extensive experiments show that $D^2Prune$ consistently outperforms SOTA methods across various LLMs (e.g., OPT-125M, LLaMA2/3, and Qwen3). Moreover, the dynamic attention update mechanism also generalizes well to ViT-based vision models like DeiT, achieving superior accuracy on ImageNet-1K.
+
+**Comment:** Model Compression and Efficiency: proposes dual Taylor expansion pruning with attention distribution awareness for precise LLM sparsification.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 14. [HIPPO: Accelerating Video Large Language Models Inference via Holistic-aware Parallel Speculative Decoding](https://arxiv.org/abs/2601.08273) <a id="link14"></a>
+
+**ArXiv ID:** 2601.08273
+
+**Authors:** Qitan Lv, Tianyu Liu, Wen Wu, Xuenan Xu, Bowen Zhou, Feng Wu, Chao Zhang
+
+**Abstract:** Speculative decoding (SD) has emerged as a promising approach to accelerate LLM inference without sacrificing output quality. Existing SD methods tailored for video-LLMs primarily focus on pruning redundant visual tokens to mitigate the computational burden of massive visual inputs. However, existing methods do not achieve inference acceleration comparable to text-only LLMs. We observe from extensive experiments that this phenomenon mainly stems from two limitations: (i) their pruning strategies inadequately preserve visual semantic tokens, degrading draft quality and acceptance rates; (ii) even with aggressive pruning (e.g., 90% visual tokens removed), the draft model's remaining inference cost limits overall speedup. To address these limitations, we propose HIPPO, a general holistic-aware parallel speculative decoding framework. Specifically, HIPPO proposes (i) a semantic-aware token preservation method, which fuses global attention scores with local visual semantics to retain semantic information at high pruning ratios; (ii) a video parallel SD algorithm that decouples and overlaps draft generation and target verification phases. Experiments on four video-LLMs across six benchmarks demonstrate HIPPO's effectiveness, yielding up to 3.51x speedup compared to vanilla auto-regressive decoding.
+
+**Comment:** High Performance Computing/Efficiency: holistic-aware parallel speculative decoding with semantic token preservation for video-LLMs.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 15. [YaPO: Learnable Sparse Activation Steering Vectors for Domain Adaptation](https://arxiv.org/abs/2601.08441) <a id="link15"></a>
+
+**ArXiv ID:** 2601.08441
+
+**Authors:** Abdelaziz Bounhar, Rania Hossam Elmohamady Elbadry, Hadi Abdine, Preslav Nakov, Michalis Vazirgiannis, Guokan Shang
+
+**Abstract:** Steering Large Language Models (LLMs) through activation interventions has emerged as a lightweight alternative to fine-tuning for alignment and personalization. Recent work on Bi-directional Preference Optimization (BiPO) shows that dense steering vectors can be learned directly from preference data in a Direct Preference Optimization (DPO) fashion, enabling control over truthfulness, hallucinations, and safety behaviors. However, dense steering vectors often entangle multiple latent factors due to neuron multi-semanticity, limiting their effectiveness and stability in fine-grained settings such as cultural alignment, where closely related values and behaviors (e.g., among Middle Eastern cultures) must be distinguished. In this paper, we propose Yet another Policy Optimization (YaPO), a \textit{reference-free} method that learns \textit{sparse steering vectors} in the latent space of a Sparse Autoencoder (SAE). By optimizing sparse codes, YaPO produces disentangled, interpretable, and efficient steering directions. Empirically, we show that YaPO converges faster, achieves stronger performance, and exhibits improved training stability compared to dense steering baselines. Beyond cultural alignment, YaPO generalizes to a range of alignment-related behaviors, including hallucination, wealth-seeking, jailbreak, and power-seeking. Importantly, YaPO preserves general knowledge, with no measurable degradation on MMLU. Overall, our results show that YaPO provides a general recipe for efficient, stable, and fine-grained alignment of LLMs, with broad applications to controllability and domain adaptation. The associated code and data are publicly available\footnote{https://github.com/MBZUAI-Paris/YaPO}.
+
+**Comment:** Representation Learning: learns sparse, disentangled activation steering vectors in SAE latent space for controllability/alignment without a reference model (reference-free).
+
+**Relevance:** 9
+**Novelty:** 7
+
+---
+
+## 16. [Towards Specialized Generalists: A Multi-Task MoE-LoRA Framework for Domain-Specific LLM Adaptation](https://arxiv.org/abs/2601.07935) <a id="link16"></a>
+
+**ArXiv ID:** 2601.07935
+
+**Authors:** Yuxin Yang, Aoxiong Zeng, Xiangquan Yang
+
+**Abstract:** The rapid evolution of Large Language Models (LLMs) has shifted focus from general-purpose capabilities to domain-specific expertise. However, adapting LLMs to specialized fields such as medicine presents two challenge: (1) the "Stability-Plasticity Dilemma", where the model must acquire complex clinical knowledge without suffering from catastrophic forgetting of general world knowledge; and (2) "Task Interference", where disparate sub-tasks, such as medical diagnosis, report summarization, and drug-drug interaction prediction, compete for limited low-rank parameter space. In this paper, we propose Med-MoE-LoRA, a novel framework that integrates Mixture-of-Experts (MoE) with Low-Rank Adaptation (LoRA) to enable efficient multi-task domain adaptation, especially for medical scenarios. Drawing inspiration from recent advances, our framework employs an asymmetric expert distribution where deeper layers are equipped with a higher density of LoRA experts to capture complex semantic abstractions. We further introduce a "Knowledge-Preservation Plugin", inspired by LoRA MoE, to isolate and protect general-purpose reasoning. By utilizing soft merging with adaptive routing and rank-wise decoupling, Med-MoE-LoRA achieves superior performance in medical benchmarks while reducing interference. Experimental results demonstrate that our approach consistently outperforms standard LoRA and conventional MoE architectures across multiple clinical NLP tasks while retaining the model's general cognitive capabilities.
+
+**Comment:** Model Architecture: integrates Mixture-of-Experts with LoRA (adaptive routing, rank-wise decoupling) for parameter-efficient multi-task adaptation.
+
+**Relevance:** 9
+**Novelty:** 7
+
+---
+
+## 17. [GeoRA: Geometry-Aware Low-Rank Adaptation for RLVR](https://arxiv.org/abs/2601.09361) <a id="link17"></a>
+
+**ArXiv ID:** 2601.09361
+
+**Authors:** Jiaying Zhang, Lei Shi, Jiguo Li, Jun Xu, Jiuchong Gao, Jinghua Hao, Renqing He
+
+**Abstract:** Reinforcement Learning with Verifiable Rewards (RLVR) is crucial for advancing large-scale reasoning models. However, existing parameter-efficient methods, such as PiSSA and MiLoRA, are designed for Supervised Fine-Tuning (SFT) and do not account for the distinct optimization dynamics and geometric structures of RLVR. Applying these methods directly leads to spectral collapse and optimization instability, which severely limit model performance. Meanwhile, alternative approaches that leverage update sparsity encounter significant efficiency bottlenecks on modern hardware due to unstructured computations. To address these challenges, we propose GeoRA (Geometry-Aware Low-Rank Adaptation), which exploits the anisotropic and compressible nature of RL update subspaces. GeoRA initializes adapters by extracting principal directions via Singular Value Decomposition (SVD) within a geometrically constrained subspace while freezing the residual components. This method preserves the pre-trained geometric structure and enables efficient GPU computation through dense operators. Experiments on Qwen and Llama demonstrate that GeoRA mitigates optimization bottlenecks caused by geometric misalignment. It consistently outperforms established low-rank baselines on key mathematical benchmarks, achieving state-of-the-art (SOTA) results. Moreover, GeoRA shows superior generalization and resilience to catastrophic forgetting in out-of-domain tasks.
+
+**Comment:** Model Compression/Efficiency: geometry-aware low-rank adapters (LoRA) initialized by SVD to stabilize RLVR updates while using dense operators.
+
+**Relevance:** 9
+**Novelty:** 7
+
+---
+
+## 18. [Deconstructing Pre-training: Knowledge Attribution Analysis in MoE and Dense Models](https://arxiv.org/abs/2601.08383) <a id="link18"></a>
+
+**ArXiv ID:** 2601.08383
+
+**Authors:** Bo Wang, Junzhuo Li, Hong Chen, Yuanlin Chu, Yuxuan Fan, Xuming Hu
+
+**Abstract:** Mixture-of-Experts (MoE) architectures decouple model capacity from per-token computation, enabling scaling beyond the computational limits imposed by dense scaling laws. Yet how MoE architectures shape knowledge acquisition during pre-training, and how this process differs from dense architectures, remains unknown. To address this issue, we introduce Gated-LPI (Log-Probability Increase), a neuron-level attribution metric that decomposes log-probability increase across neurons. We present a time-resolved comparison of knowledge acquisition dynamics in MoE and dense architectures, tracking checkpoints over 1.2M training steps (~ 5.0T tokens) and 600K training steps (~ 2.5T tokens), respectively. Our experiments uncover three patterns: (1) Low-entropy backbone. The top approximately 1% of MoE neurons capture over 45% of positive updates, forming a high-utility core, which is absent in the dense baseline. (2) Early consolidation. The MoE model locks into a stable importance profile within < 100K steps, whereas the dense model remains volatile throughout training. (3) Functional robustness. Masking the ten most important MoE attention heads reduces relational HIT@10 by  50% for the dense model, showing that sparsity fosters distributed -- rather than brittle -- knowledge storage. These patterns collectively demonstrate that sparsity fosters an intrinsically stable and distributed computational backbone from early in training, helping bridge the gap between sparse architectures and training-time interpretability.
+
+**Comment:** Model Architecture (MoE): attribution-based analysis of knowledge acquisition dynamics in MoE vs. dense models.
+
+**Relevance:** 9
+**Novelty:** 7
+
+---
+
+## 19. [Dynamic Graph Structure Learning via Resistance Curvature Flow](https://arxiv.org/abs/2601.08149) <a id="link19"></a>
+
+**ArXiv ID:** 2601.08149
+
+**Authors:** Chaoqun Fei, Huanjiang Liu, Tinglve Zhou, Yangyang Li, Tianyong Hao
+
+**Abstract:** Geometric Representation Learning (GRL) aims to approximate the non-Euclidean topology of high-dimensional data through discrete graph structures, grounded in the manifold hypothesis. However, traditional static graph construction methods based on Euclidean distance often fail to capture the intrinsic curvature characteristics of the data manifold. Although Ollivier-Ricci Curvature Flow (OCF) has proven to be a powerful tool for dynamic topological optimization, its core reliance on Optimal Transport (Wasserstein distance) leads to prohibitive computational complexity, severely limiting its application in large-scale datasets and deep learning frameworks. To break this bottleneck, this paper proposes a novel geometric evolution framework: Resistance Curvature Flow (RCF). Leveraging the concept of effective resistance from circuit physics, RCF transforms expensive curvature optimization into efficient matrix operations. This approach achieves over 100x computational acceleration while maintaining geometric optimization capabilities comparable to OCF. We provide an in-depth exploration of the theoretical foundations and dynamical principles of RCF, elucidating how it guides the redistribution of edge weights via curvature gradients to eliminate topological noise and strengthen local cluster structures. Furthermore, we provide a mechanistic explanation of RCF's role in manifold enhancement and noise suppression, as well as its compatibility with deep learning models. We design a graph optimization algorithm, DGSL-RCF, based on this framework. Experimental results across deep metric learning, manifold learning, and graph structure learning demonstrate that DGSL-RCF significantly improves representation quality and downstream task performance.
+
+**Comment:** Representation Learning/Efficiency: Resistance Curvature Flow replaces OT-based curvature optimization with effective-resistance matrix ops for dynamic graph structure learning (>100x speedup).
+
+**Relevance:** 8
+**Novelty:** 8
+
+---
+
+## 20. [Greedy Is Enough: Sparse Action Discovery in Agentic LLMs](https://arxiv.org/abs/2601.08280) <a id="link20"></a>
+
+**ArXiv ID:** 2601.08280
+
+**Authors:** Angshul Majumdar
+
+**Abstract:** Modern agentic systems operate in environments with extremely large action spaces, such as tool-augmented language models with thousands of available APIs or retrieval operations. Despite this scale, empirical evidence suggests that only a small subset of actions meaningfully influences performance in a given deployment. Motivated by this observation, we study a contextual linear reward model in which action relevance is governed by a structured sparsity assumption: only a small number of actions have nonzero effects across latent states.   We formulate action discovery as a block-sparse recovery problem and analyze a greedy algorithm inspired by Orthogonal Matching Pursuit. Under standard assumptions on incoherence, signal strength, and action coverage, we prove that the greedy procedure exactly recovers the relevant action set with high probability, using a number of samples that scales polynomially in the sparsity level and latent dimension, and only logarithmically in the total number of actions. We further provide estimation error guarantees for refitted parameters and show that the resulting decision rule is near-optimal for new latent states.   Complementing these results, we establish information-theoretic lower bounds demonstrating that sparsity and sufficient coverage are necessary for tractability. Together, our results identify sparse action discovery as a fundamental principle underlying large-action decision-making and provide a theoretical foundation for action pruning in agentic systems.
+
+**Comment:** Compression/Efficiency/Theory: frames sparse action discovery as block-sparse recovery and proves a greedy OMP-style algorithm recovers the relevant action set with sample guarantees.
+
+**Relevance:** 8
+**Novelty:** 8
+
+---
+
+## 21. [Sparsity Is Necessary: Polynomial-Time Stability for Agentic LLMs in Large Action Spaces](https://arxiv.org/abs/2601.08271) <a id="link21"></a>
+
+**ArXiv ID:** 2601.08271
+
+**Authors:** Angshul Majumdar
+
+**Abstract:** Tool-augmented LLM systems expose a control regime that learning theory has largely ignored: sequential decision-making with a massive discrete action universe (tools, APIs, documents) in which only a small, unknown subset is relevant for any fixed task distribution. We formalize this setting as Sparse Agentic Control (SAC), where policies admit block-sparse representations over M >> 1 actions and rewards depend on sparse main effects and (optionally) sparse synergies. We study ell_{1,2}-regularized policy learning through a convex surrogate and establish sharp, compressed-sensing-style results: (i) estimation and value suboptimality scale as k (log M / T)^{1/2} under a Policy-RSC condition; (ii) exact tool-support recovery holds via primal-dual witness arguments when T > k log M under incoherence and beta-min; and (iii) any dense policy class requires Omega(M) samples, explaining the instability of prompt-only controllers. We further show that under partial observability, LLMs matter only through a belief/representation error epsilon_b, yielding an additive O(epsilon_b) degradation while preserving logarithmic dependence on M. Extensions cover tuning-free, online, robust, group-sparse, and interaction-aware SAC.
+
+**Comment:** Model Compression/Efficiency: theory for block-sparse policies with ℓ1,2 regularization yielding sample complexity and support recovery in large action spaces.
+
+**Relevance:** 8
+**Novelty:** 8
+
+---
+
+## 22. [Universal Latent Homeomorphic Manifolds: Cross-Domain Representation Learning via Homeomorphism Verification](https://arxiv.org/abs/2601.09025) <a id="link22"></a>
+
+**ArXiv ID:** 2601.09025
+
+**Authors:** Tong Wu, Tayab Uddin Wara, Daniel Hernandez, Sidong Lei
+
+**Abstract:** We present the Universal Latent Homeomorphic Manifold (ULHM), a framework that unifies semantic representations (e.g., human descriptions, diagnostic labels) and observation-driven machine representations (e.g., pixel intensities, sensor readings) into a single latent structure. Despite originating from fundamentally different pathways, both modalities capture the same underlying reality. We establish \emph{homeomorphism}, a continuous bijection preserving topological structure, as the mathematical criterion for determining when latent manifolds induced by different semantic-observation pairs can be rigorously unified. This criterion provides theoretical guarantees for three critical applications: (1) semantic-guided sparse recovery from incomplete observations, (2) cross-domain transfer learning with verified structural compatibility, and (3) zero-shot compositional learning via valid transfer from semantic to observation space. Our framework learns continuous manifold-to-manifold transformations through conditional variational inference, avoiding brittle point-to-point mappings. We develop practical verification algorithms, including trust, continuity, and Wasserstein distance metrics, that empirically validate homeomorphic structure from finite samples. Experiments demonstrate: (1) sparse image recovery from 5\% of CelebA pixels and MNIST digit reconstruction at multiple sparsity levels, (2) cross-domain classifier transfer achieving 86.73\% accuracy from MNIST to Fashion-MNIST without retraining, and (3) zero-shot classification on unseen classes achieving 89.47\% on MNIST, 84.70\% on Fashion-MNIST, and 78.76\% on CIFAR-10. Critically, the homeomorphism criterion correctly rejects incompatible datasets, preventing invalid unification and providing a feasible way to principled decomposition of general foundation models into verified domain-specific components.
+
+**Comment:** Representation Learning: proposes a topology-based (homeomorphism) framework and verification algorithms to unify latent manifolds across modalities, offering theoretical insights into learned representations.
+
+**Relevance:** 8
+**Novelty:** 8
+
+---
+
+## 23. [Toward Understanding Unlearning Difficulty: A Mechanistic Perspective and Circuit-Guided Difficulty Metric](https://arxiv.org/abs/2601.09624) <a id="link23"></a>
+
+**ArXiv ID:** 2601.09624
+
+**Authors:** Jiali Cheng, Ziheng Chen, Chirag Agarwal, Hadi Amiri
+
+**Abstract:** Machine unlearning is becoming essential for building trustworthy and compliant language models. Yet unlearning success varies considerably across individual samples: some are reliably erased, while others persist despite the same procedure. We argue that this disparity is not only a data-side phenomenon, but also reflects model-internal mechanisms that encode and protect memorized information. We study this problem from a mechanistic perspective based on model circuits--structured interaction pathways that govern how predictions are formed. We propose Circuit-guided Unlearning Difficulty (CUD), a {\em pre-unlearning} metric that assigns each sample a continuous difficulty score using circuit-level signals. Extensive experiments demonstrate that CUD reliably separates intrinsically easy and hard samples, and remains stable across unlearning methods. We identify key circuit-level patterns that reveal a mechanistic signature of difficulty: easy-to-unlearn samples are associated with shorter, shallower interactions concentrated in earlier-to-intermediate parts of the original model, whereas hard samples rely on longer and deeper pathways closer to late-stage computation. Compared to existing qualitative studies, CUD takes a first step toward a principled, fine-grained, and interpretable analysis of unlearning difficulty; and motivates the development of unlearning methods grounded in model mechanisms.
+
+**Comment:** Representation Learning: introduces a circuit-level, mechanistic pre-unlearning difficulty metric (CUD) grounded in model circuits and interaction pathways.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 24. [Hidden States as Early Signals: Step-level Trace Evaluation and Pruning for Efficient Test-Time Scaling](https://arxiv.org/abs/2601.09093) <a id="link24"></a>
+
+**ArXiv ID:** 2601.09093
+
+**Authors:** Zhixiang Liang, Beichen Huang, Zheng Wang, Minjia Zhang
+
+**Abstract:** Large Language Models (LLMs) can enhance reasoning capabilities through test-time scaling by generating multiple traces. However, the combination of lengthy reasoning traces with multiple sampling introduces substantial computation and high end-to-end latency. Prior work on accelerating this process has relied on similarity-based or confidence-based pruning, but these signals do not reliably indicate trace quality. To address these limitations, we propose STEP: Step-level Trace Evaluation and Pruning, a novel pruning framework that evaluates reasoning steps using hidden states and dynamically prunes unpromising traces during generation. We train a lightweight step scorer to estimate trace quality, and design a GPU memory-aware pruning strategy that triggers pruning as the GPU memory is saturated by KV cache to reduce end-to-end latency. Experiments across challenging reasoning benchmarks demonstrate that STEP reduces end-to-end inference latency by 45%-70% on average compared to self-consistency while also improving reasoning accuracy. Our code is released at: https://github.com/Supercomputing-System-AI-Lab/STEP
+
+**Comment:** Model Efficiency: hidden-state-based step scoring and KV-cache-aware pruning for test-time scaling.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 25. [Ability Transfer and Recovery via Modularized Parameters Localization](https://arxiv.org/abs/2601.09398) <a id="link25"></a>
+
+**ArXiv ID:** 2601.09398
+
+**Authors:** Songyao Jin, Kun Zhou, Wenqi Li, Peng Wang, Biwei Huang
+
+**Abstract:** Large language models can be continually pre-trained or fine-tuned to improve performance in specific domains, languages, or skills, but this specialization often degrades other capabilities and may cause catastrophic forgetting. We investigate how abilities are distributed within LLM parameters by analyzing module activations under domain- and language-specific inputs for closely related models. Across layers and modules, we find that ability-related activations are highly concentrated in a small set of channels (typically <5\%), and these channels are largely disentangled with good sufficiency and stability. Building on these observations, we propose ACT (Activation-Guided Channel-wise Ability Transfer), which localizes ability-relevant channels via activation differences and selectively transfers only the corresponding parameters, followed by lightweight fine-tuning for compatibility. Experiments on multilingual mathematical and scientific reasoning show that ACT can recover forgotten abilities while preserving retained skills. It can also merge multiple specialized models to integrate several abilities into a single model with minimal interference. Our code and data will be publicly released.
+
+**Comment:** Parameter modularization: activation-guided channel-wise ability transfer; insights into ability localization in LLM parameters (Representation Learning/Model Editing).
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 26. [Disentangling Task Conflicts in Multi-Task LoRA via Orthogonal Gradient Projection](https://arxiv.org/abs/2601.09684) <a id="link26"></a>
+
+**ArXiv ID:** 2601.09684
+
+**Authors:** Ziyu Yang, Guibin Chen, Yuxin Yang, Aoxiong Zeng, Xiangquan Yang
+
+**Abstract:** Multi-Task Learning (MTL) combined with Low-Rank Adaptation (LoRA) has emerged as a promising direction for parameter-efficient deployment of Large Language Models (LLMs). By sharing a single adapter across multiple tasks, one can significantly reduce storage overhead. However, this approach suffers from negative transfer, where conflicting gradient updates from distinct tasks degrade the performance of individual tasks compared to single-task fine-tuning. This problem is exacerbated in LoRA due to the low-rank constraint, which limits the optimization landscape's capacity to accommodate diverse task requirements. In this paper, we propose Ortho-LoRA, a gradient projection method specifically tailored for the bipartite structure of LoRA. Ortho-LoRA dynamically projects conflicting task gradients onto the orthogonal complement of each other within the intrinsic LoRA subspace. Extensive experiments on the GLUE benchmark demonstrate that Ortho-LoRA effectively mitigates task interference, outperforming standard joint training and recovering 95\% of the performance gap between multi-task and single-task baselines with negligible computational overhead.
+
+**Comment:** Parameter-efficient training: orthogonal gradient projection tailored to LoRA subspace to mitigate task interference (Model Architecture/Training).
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 27. [Mechanisms are Transferable: Data-Efficient Low-Resource Adaptation via Circuit-Targeted Supervised Fine-Tuning](https://arxiv.org/abs/2601.08146) <a id="link27"></a>
+
+**ArXiv ID:** 2601.08146
+
+**Authors:** Khumaisa Nur'aini, Ayu Purwarianti, Alham Fikri Aji, Derry Wijaya
+
+**Abstract:** Adapting LLMs to low-resource languages is difficult: labeled data is scarce, full-model fine-tuning is unstable, and continued cross-lingual tuning can cause catastrophic forgetting. We propose Circuit-Targeted Supervised Fine-Tuning (CT-SFT): a counterfactual-free adaptation of CD-T (Contextual Decomposition Transformer) that uses a label-balanced mean baseline and task-directional relevance scoring to identify a sparse set of task-relevant attention heads in a proxy-language checkpoint, then transfer learns to a target language by updating only those heads (plus LayerNorm) via head-level gradient masking. Across NusaX-Senti and XNLI, CT-SFT improves cross-lingual accuracy over continued full fine-tuning while updating only a small subset of model parameters. We find an editing-preserving trade-off: harder transfers favor editing circuit heads, while easier transfers often favor near-zero (i.e., low-relevance heads) updates, preserving the source mechanism. CT-SFT also substantially reduces catastrophic forgetting, preserving proxy/source-language competence during transfer.
+
+**Comment:** Model Compression/Efficiency: updates only a sparse subset of attention heads (head-level gradient masking) based on mechanistic relevance, reducing parameters and forgetting.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 28. [From Hawkes Processes to Attention: Time-Modulated Mechanisms for Event Sequences](https://arxiv.org/abs/2601.09220) <a id="link28"></a>
+
+**ArXiv ID:** 2601.09220
+
+**Authors:** Xinzi Tan, Kejian Zhang, Junhan Yu, Doudou Zhou
+
+**Abstract:** Marked Temporal Point Processes (MTPPs) arise naturally in medical, social, commercial, and financial domains. However, existing Transformer-based methods mostly inject temporal information only via positional encodings, relying on shared or parametric decay structures, which limits their ability to capture heterogeneous and type-specific temporal effects. Inspired by this observation, we derive a novel attention operator called Hawkes Attention from the multivariate Hawkes process theory for MTPP, using learnable per-type neural kernels to modulate query, key and value projections, thereby replacing the corresponding parts in the traditional attention. Benefited from the design, Hawkes Attention unifies event timing and content interaction, learning both the time-relevant behavior and type-specific excitation patterns from the data. The experimental results show that our method achieves better performance compared to the baselines. In addition to the general MTPP, our attention mechanism can also be easily applied to specific temporal structures, such as time series forecasting.
+
+**Comment:** Model Architecture: introduces Hawkes Attention—a time-modulated attention operator replacing Q/K/V projections with per-type kernels.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 29. [Annealed Relaxation of Speculative Decoding for Faster Autoregressive Image Generation](https://arxiv.org/abs/2601.09212) <a id="link29"></a>
+
+**ArXiv ID:** 2601.09212
+
+**Authors:** Xingyao Li, Fengzhuo Zhang, Cunxiao Du, Hui Ji
+
+**Abstract:** Despite significant progress in autoregressive image generation, inference remains slow due to the sequential nature of AR models and the ambiguity of image tokens, even when using speculative decoding. Recent works attempt to address this with relaxed speculative decoding but lack theoretical grounding. In this paper, we establish the theoretical basis of relaxed SD and propose COOL-SD, an annealed relaxation of speculative decoding built on two key insights. The first analyzes the total variation (TV) distance between the target model and relaxed speculative decoding and yields an optimal resampling distribution that minimizes an upper bound of the distance. The second uses perturbation analysis to reveal an annealing behaviour in relaxed speculative decoding, motivating our annealed design. Together, these insights enable COOL-SD to generate images faster with comparable quality, or achieve better quality at similar latency. Experiments validate the effectiveness of COOL-SD, showing consistent improvements over prior methods in speed-quality trade-offs.
+
+**Comment:** Compression/Efficiency: theoretically grounded relaxed speculative decoding with annealed resampling for faster AR generation.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 30. [Q-realign: Piggybacking Realignment on Quantization for Safe and Efficient LLM Deployment](https://arxiv.org/abs/2601.08089) <a id="link30"></a>
+
+**ArXiv ID:** 2601.08089
+
+**Authors:** Qitao Tan, Xiaoying Song, Ningxi Cheng, Ninghao Liu, Xiaoming Zhai, Lingzi Hong, Yanzhi Wang, Zhen Xiang, Geng Yuan
+
+**Abstract:** Public large language models (LLMs) are typically safety-aligned during pretraining, yet task-specific fine-tuning required for deployment often erodes this alignment and introduces safety risks. Existing defenses either embed safety recovery into fine-tuning or rely on fine-tuning-derived priors for post-hoc correction, leaving safety recovery tightly coupled with training and incurring high computational overhead and a complex workflow. To address these challenges, we propose \texttt{Q-realign}, a post-hoc defense method based on post-training quantization, guided by an analysis of representational structure. By reframing quantization as a dual-objective procedure for compression and safety, \texttt{Q-realign} decouples safety alignment from fine-tuning and naturally piggybacks into modern deployment pipelines. Experiments across multiple models and datasets demonstrate that our method substantially reduces unsafe behaviors while preserving task performance, with significant reductions in memory usage and GPU hours. Notably, our approach can recover the safety alignment of a fine-tuned 7B LLM on a single RTX 4090 within 40 minutes. Overall, our work provides a practical, turnkey solution for safety-aware deployment.
+
+**Comment:** Model Compression and Efficiency: post-training quantization repurposed for safety realignment, decoupled from fine-tuning.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 31. [Distribution-Aligned Sequence Distillation for Superior Long-CoT Reasoning](https://arxiv.org/abs/2601.09088) <a id="link31"></a>
+
+**ArXiv ID:** 2601.09088
+
+**Authors:** Shaotian Yan, Kaiyuan Liu, Chen Shen, Bing Wang, Sinan Fan, Jun Zhang, Yue Wu, Zheng Wang, Jieping Ye
+
+**Abstract:** In this report, we introduce DASD-4B-Thinking, a lightweight yet highly capable, fully open-source reasoning model. It achieves SOTA performance among open-source models of comparable scale across challenging benchmarks in mathematics, scientific reasoning, and code generation -- even outperforming several larger models. We begin by critically reexamining a widely adopted distillation paradigm in the community: SFT on teacher-generated responses, also known as sequence-level distillation. Although a series of recent works following this scheme have demonstrated remarkable efficiency and strong empirical performance, they are primarily grounded in the SFT perspective. Consequently, these approaches focus predominantly on designing heuristic rules for SFT data filtering, while largely overlooking the core principle of distillation itself -- enabling the student model to learn the teacher's full output distribution so as to inherit its generalization capability. Specifically, we identify three critical limitations in current practice: i) Inadequate representation of the teacher's sequence-level distribution; ii) Misalignment between the teacher's output distribution and the student's learning capacity; and iii) Exposure bias arising from teacher-forced training versus autoregressive inference. In summary, these shortcomings reflect a systemic absence of explicit teacher-student interaction throughout the distillation process, leaving the essence of distillation underexploited. To address these issues, we propose several methodological innovations that collectively form an enhanced sequence-level distillation training pipeline. Remarkably, DASD-4B-Thinking obtains competitive results using only 448K training samples -- an order of magnitude fewer than those employed by most existing open-source efforts. To support community research, we publicly release our models and the training dataset.
+
+**Comment:** High Performance Computing/Training: distribution-aligned sequence distillation to better match teacher output distributions and mitigate exposure bias.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+# Paper Selection Prompt
+
+## System Prompt
+
+> You are a helpful paper reading assistant whose job is to read daily posts from ArXiv and identify a few papers that your friend will enjoy reading.
+> Your job is to carefully read the paper titles and abstracts below and find the ones that match the criteria below.
+
+## User Prompt
+
+> ## Instructions
+> 
+> Write the response in JSONL format with {ARXIVID, COMMENT, RELEVANCE, NOVELTY} on each line, one for each paper.
+> 
+> - ARXIVID: should be the ArXiv ID.
+> - COMMENT: should identify whether there is a criteria that match the paper very closely. These matches should not be based on general terms like "language modeling" or "advancements" and should specifically refer to a criterion. No need to mention the non-matching criteria.
+> - RELEVANCE: should be a score from 1-10.
+> - NOVELTY: should be a score from 1-10.
+> 
+> ## Scoring Criteria
+> 
+> > The "Relevance" score measures how closely the paper aligns with the core topics of the prompt.
+> > The "Novelty" score assesses the originality and impact of the paper.
+> > They are two **ORTHONORMAL** axes and **SHOULD NOT** be confused with each other.
+> 
+> ### Relevance Scoring
+> 
+> - Relevance 9-10 (Completely Relevant)
+>   - Focus: Fully aligned with core topics with no deviation, score the highest if contains relevant keywords in it.
+>   - Examples: Papers focused on foundational methods or theoretical research, whose titles contain topic keywords like "MoE".
+> 
+> - Relevance 7-8 (Relevant)
+>   - Focus: Retain a solid link to the main research area, though may touch on peripheral elements.
+>   - Examples: Papers research on the fundamental part of MoE through a less critical aspect like its behavior in GNN.
+> 
+> - Relevance 5-6 (Borderline)
+>   - Focus: Maintains a link to the core topic but also extends into at least one other domain/area beyond the primary focus.
+>   - Examples: Work referencing MoE centered on reinforcement learning.
+> 
+> - Relevance 3-4 (Irrelevant)
+>   - Focus: Largely outside our interests with no association to our topics.
+>   - Examples: Application-focused papers like using MoE to solve a problem in the real world.
+> 
+> - Relevance 1-2 (Ignore)
+>   - Focus: Purely unrelated to our topics. Completely a different domain.
+>   - **Exception**: If the paper hints at a cutting-edge, radically new direction that could eventually transform the primary domain, consider a score of 9–10 despite initial appearances. (Usually a very rare concept that belongs to the fundamental research)
+> 
+> ### Novelty Scoring
+> 
+> - Novelty 9-10 (Breakthrough)
+>   - Definition: Groundbreaking methods/theory introducing new directions or solving major challenges.
+>   - Examples: Entirely new paradigm for foundational models; a novel theory transforming representation learning.
+> 
+> - Novelty 7-8 (Improvements)
+>   - Definition: Substantial insights/enhancements, though not a full paradigm shift.
+>   - Examples: Modifications on existing methods yielding significantly better results.
+> 
+> - Novelty 5-6 (Borderline)
+>   - Definition: Incremental contributions with possible long-term benefits, not immediately transformative.
+>   - Examples: Moderately novel extension to an existing architecture; refining current methods without fundamentally altering them.
+> 
+> - Novelty 3-4 (Tangential)
+>   - Definition: Minor or domain-specific improvements with limited broader impact.
+>   - Examples: Slight modifications to known methods with strange motivation; purely engineering jobs like a new benchmark/dataset.
+> 
+> - Novelty 1-2 (Low)
+>   - Definition: Minimal originality, applying standard approaches without real innovation.
+>   - Examples: Using an off-the-shelf model without adding new insights; purely application-driven studies like finetuning a pretrained model using existing methods.
+> 
+> ## Papers
+> 
+> [PAPER LIST HERE]
+> 
+> ## Relevant Topics
+> 
+> Use the following relevance criteria to focus on foundational research. Keep **relevant** papers and filter out **irrelevant** ones. Avoid purely **application-driven** work.
+> 
+> 1. Model Architecture
+>    - Relevant: Mixture-of-Experts (MoE), Transformers, Conditional/Dynamic Networks, Autoencoders, analysis/innovations on existing architectures.
+>    - Irrelevant: Merely using existing architectures for a certain task without insights into the structure themselves.
+> 
+> 2. Model Compression and Efficiency
+>    - Relevant: Sparsity, pruning, quantization, low-rank approaches, cache, or other algorithmic/theoretical efficiency breakthroughs.
+>    - Irrelevant: Straightforward applications of existing compression methods to new tasks.
+> 
+> 3. High Performance Computing
+>    - Relevant: Algorithmic or systems-level innovations enabling training of large-scale models, distributed training techniques, memory optimization.
+>    - Irrelevant: Incremental engineering improvements without novel algorithmic contributions.
+> 
+> 4. Representation Learning
+>    - Relevant: Insights into how deep networks encode information, feature/dictionary learning, sparse/contrastive methods, training dynamics in neural networks.
+>    - Irrelevant: Standard applications of known techniques lacking new theoretical or methodological contributions.
+> 
+> **Keywords:**
+> 
+> - Relevant: Mixture of Experts (MoE), Representation Learning, Compression/Efficiency, Sparse/Sparsity, Pruning, Quantization, Low-rank, Foundation Model, etc.
+> - Irrelevant: Reinforcement Learning, Transfer Learning, Federated Learning, Online Learning, Diffusion Models, etc.
+> - Application: Image Segmentation, Medical Imaging, 3D Vision, Video Understanding, Information Retrieval, Summarization, Recommendation Systems, Machine Translation, Speech Recognition, Signal Processing, Spatial/Temporal Modeling, Time Series, Knowledge Graph, etc.

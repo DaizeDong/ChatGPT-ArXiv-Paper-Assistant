@@ -1,0 +1,426 @@
+<div style="display: flex; align-items: flex-start; justify-content: space-between; width: 100%;"><div style="width: 33.33%; text-align: left;"><a href="../27"><img src="../../../assets/nav/day/2025-03-28-prev.svg" alt="Previous Day 2025-03-27"></a></div><div style="width: 33.33%; text-align: center;"><a href=".."><img src="../../../assets/nav/day/2025-03-28-center.svg" alt="Monthly Overview 2025-03"></a></div><div style="width: 33.33%; text-align: right;"><a href="../29"><img src="../../../assets/nav/day/2025-03-28-next.svg" alt="Next Day 2025-03-29"></a></div></div>
+
+# Personalized Daily Arxiv Papers 3/28/2025
+
+| *[gpt-4o]*   | Prompt   | Completion   | Total   |
+|:--------------:|:----------:|:--------------:|:---------:|
+| **Token**    | 35005    | 4344         | 39349   |
+| **Cost**     | $0.09    | $0.04        | $0.13   |
+
+Total arXiv papers: 390
+
+Total scanned papers: 227
+
+Total relevant papers: 17
+
+**Table of contents with paper titles:**
+
+1. [MoQa: Rethinking MoE Quantization with Multi-stage Data-model Distribution Awareness](#user-content-link1)
+**Authors:** Zihao Zheng (Eric), Xiuping Cui (Eric), Size Zheng (Eric), Maoliang Li (Eric), Jiayu Chen (Eric), Yun (Eric), Liang, Xiang Chen
+
+2. [Exploring the Energy Landscape of RBMs: Reciprocal Space Insights into Bosons, Hierarchical Learning and Symmetry Breaking](#user-content-link2)
+**Authors:** J. Quetzalc\'oatl Toledo-Marin, Anindita Maiti, Geoffrey C. Fox, Roger G. Melko
+
+3. [Collab: Controlled Decoding using Mixture of Agents for LLM Alignment](#user-content-link3)
+**Authors:** Souradip Chakraborty, Sujay Bhatt, Udari Madhushani Sehwag, Soumya Suvra Ghosal, Jiahao Qiu, Mengdi Wang, Dinesh Manocha, Furong Huang, Alec Koppel, Sumitra Ganesh
+
+4. [Neuroplasticity in Artificial Intelligence -- An Overview and Inspirations on Drop In \& Out Learning](#user-content-link4)
+**Authors:** Yupei Li, Manuel Milling, Bj\"orn W. Schuller
+
+5. [Shared Global and Local Geometry of Language Model Embeddings](#user-content-link5)
+**Authors:** Andrew Lee, Melanie Weber, Fernanda Vi\'egas, Martin Wattenberg
+
+6. [HOT: Hadamard-based Optimized Training](#user-content-link6)
+**Authors:** Seonggon Kim, Juncheol Shin, Seung-taek Woo, Eunhyeok Park
+
+7. [Nonlinear Multiple Response Regression and Learning of Latent Spaces](#user-content-link7)
+**Authors:** Ye Tian, Sanyou Wu, Long Feng
+
+8. [How do language models learn facts? Dynamics, curricula and hallucinations](#user-content-link8)
+**Authors:** Nicolas Zucchet, J\"org Bornschein, Stephanie Chan, Andrew Lampinen, Razvan Pascanu, Soham De
+
+9. [Stochastic Engrams for Efficient Continual Learning with Binarized Neural Networks](#user-content-link9)
+**Authors:** Isabelle Aguilar, Luis Fernando Herbozo Contreras, Omid Kavehei
+
+10. [Scalable Expectation Estimation with Subtractive Mixture Models](#user-content-link10)
+**Authors:** Lena Zellinger, Nicola Branchini, V\'ictor Elvira, Antonio Vergari
+
+11. [Consistent Multigroup Low-Rank Approximation](#user-content-link11)
+**Authors:** Antonis Matakos, Martino Ciaperoni, Heikki Mannila
+
+12. [F-INR: Functional Tensor Decomposition for Implicit Neural Representations](#user-content-link12)
+**Authors:** Sai Karthikeya Vemuri, Tim B\"uchner, Joachim Denzler
+
+13. [Uncertainty propagation in feed-forward neural network models](#user-content-link13)
+**Authors:** Jeremy Diamzon, Daniele Venturi
+
+14. [Outlier dimensions favor frequent tokens in language model](#user-content-link14)
+**Authors:** Iuri Macocco, Nora Graichen, Gemma Boleda, Marco Baroni
+
+15. [Offline Action-Free Learning of Ex-BMDPs by Comparing Diverse Datasets](#user-content-link15)
+**Authors:** Alexander Levine, Peter Stone, Amy Zhang
+
+16. [Effective Skill Unlearning through Intervention and Abstention](#user-content-link16)
+**Authors:** Yongce Li, Chung-En Sun, Tsui-Wei Weng
+
+17. [Fundamental Safety-Capability Trade-offs in Fine-tuning Large Language Models](#user-content-link17)
+**Authors:** Pin-Yu Chen, Han Shen, Payel Das, Tianyi Chen
+
+---
+
+## 1. [MoQa: Rethinking MoE Quantization with Multi-stage Data-model Distribution Awareness](https://arxiv.org/abs/2503.21135) <a id="link1"></a>
+
+**ArXiv ID:** 2503.21135
+
+**Authors:** Zihao Zheng (Eric), Xiuping Cui (Eric), Size Zheng (Eric), Maoliang Li (Eric), Jiayu Chen (Eric), Yun (Eric), Liang, Xiang Chen
+
+**Abstract:** With the advances in artificial intelligence, Mix-of-Experts (MoE) has become the main form of Large Language Models (LLMs), and its demand for model compression is increasing. Quantization is an effective method that not only compresses the models but also significantly accelerates their performance. Existing quantization methods have gradually shifted the focus from parameter scaling to the analysis of data distributions. However, their analysis is designed for dense LLMs and relies on the simple one-model-all-data mapping, which is unsuitable for MoEs. This paper proposes a new quantization framework called MoQa. MoQa decouples the data-model distribution complexity of MoEs in multiple analysis stages, quantitively revealing the dynamics during sparse data activation, data-parameter mapping, and inter-expert correlations. Based on these, MoQa identifies particular experts' and parameters' significance with optimal data-model distribution awareness and proposes a series of fine-grained mix-quantization strategies adaptive to various data activation and expert combination scenarios. Moreover, MoQa discusses the limitations of existing quantization and analyzes the impact of each stage analysis, showing novel insights for MoE quantization. Experiments show that MoQa achieves a 1.69~2.18 perplexity decrease in language modeling tasks and a 1.58%~8.91% accuracy improvement in zero-shot inference tasks. We believe MoQa will play a role in future MoE construction, optimization, and compression.
+
+**Comment:** This paper introduces a novel quantization framework for MoE models, addressing compression and efficiency challenges specific to sparse data activation and expert combinations. It aligns with the model compression and MoE criteria.
+
+**Relevance:** 10
+**Novelty:** 8
+
+---
+
+## 2. [Exploring the Energy Landscape of RBMs: Reciprocal Space Insights into Bosons, Hierarchical Learning and Symmetry Breaking](https://arxiv.org/abs/2503.21536) <a id="link2"></a>
+
+**ArXiv ID:** 2503.21536
+
+**Authors:** J. Quetzalc\'oatl Toledo-Marin, Anindita Maiti, Geoffrey C. Fox, Roger G. Melko
+
+**Abstract:** Deep generative models have become ubiquitous due to their ability to learn and sample from complex distributions. Despite the proliferation of various frameworks, the relationships among these models remain largely unexplored, a gap that hinders the development of a unified theory of AI learning. We address two central challenges: clarifying the connections between different deep generative models and deepening our understanding of their learning mechanisms. We focus on Restricted Boltzmann Machines (RBMs), known for their universal approximation capabilities for discrete distributions. By introducing a reciprocal space formulation, we reveal a connection between RBMs, diffusion processes, and coupled Bosons. We show that at initialization, the RBM operates at a saddle point, where the local curvature is determined by the singular values, whose distribution follows the Marcenko-Pastur law and exhibits rotational symmetry. During training, this rotational symmetry is broken due to hierarchical learning, where different degrees of freedom progressively capture features at multiple levels of abstraction. This leads to a symmetry breaking in the energy landscape, reminiscent of Landau theory. This symmetry breaking in the energy landscape is characterized by the singular values and the weight matrix eigenvector matrix. We derive the corresponding free energy in a mean-field approximation. We show that in the limit of infinite size RBM, the reciprocal variables are Gaussian distributed. Our findings indicate that in this regime, there will be some modes for which the diffusion process will not converge to the Boltzmann distribution. To illustrate our results, we trained replicas of RBMs with different hidden layer sizes using the MNIST dataset. Our findings bridge the gap between disparate generative frameworks and also shed light on the processes underpinning learning in generative models.
+
+**Comment:** The paper explores the energy landscape of RBMs and connects them to broader theoretical frameworks like symmetry breaking and hierarchical learning, which aligns with representation learning and theoretical insights into generative models.
+
+**Relevance:** 9
+**Novelty:** 9
+
+---
+
+## 3. [Collab: Controlled Decoding using Mixture of Agents for LLM Alignment](https://arxiv.org/abs/2503.21720) <a id="link3"></a>
+
+**ArXiv ID:** 2503.21720
+
+**Authors:** Souradip Chakraborty, Sujay Bhatt, Udari Madhushani Sehwag, Soumya Suvra Ghosal, Jiahao Qiu, Mengdi Wang, Dinesh Manocha, Furong Huang, Alec Koppel, Sumitra Ganesh
+
+**Abstract:** Alignment of Large Language models (LLMs) is crucial for safe and trustworthy deployment in applications. Reinforcement learning from human feedback (RLHF) has emerged as an effective technique to align LLMs to human preferences and broader utilities, but it requires updating billions of model parameters, which is computationally expensive. Controlled Decoding, by contrast, provides a mechanism for aligning a model at inference time without retraining. However, single-agent decoding approaches often struggle to adapt to diverse tasks due to the complexity and variability inherent in these tasks. To strengthen the test-time performance w.r.t the target task, we propose a mixture of agent-based decoding strategies leveraging the existing off-the-shelf aligned LLM policies. Treating each prior policy as an agent in the spirit of mixture of agent collaboration, we develop a decoding method that allows for inference-time alignment through a token-level selection strategy among multiple agents. For each token, the most suitable LLM is dynamically chosen from a pool of models based on a long-term utility metric. This policy-switching mechanism ensures optimal model selection at each step, enabling efficient collaboration and alignment among LLMs during decoding. Theoretical analysis of our proposed algorithm establishes optimal performance with respect to the target task represented via a target reward for the given off-the-shelf models. We conduct comprehensive empirical evaluations with open-source aligned models on diverse tasks and preferences, which demonstrates the merits of this approach over single-agent decoding baselines. Notably, Collab surpasses the current SoTA decoding strategy, achieving an improvement of up to 1.56x in average reward and 71.89% in GPT-4 based win-tie rate.
+
+**Comment:** The paper introduces Model Assembly Learning (MAL) for merging heterogeneous model architectures, which aligns with foundational research in model architecture and parameter integration. The focus on merging across heterogeneous layers is novel and impactful.
+
+**Relevance:** 9
+**Novelty:** 9
+
+---
+
+## 4. [Neuroplasticity in Artificial Intelligence -- An Overview and Inspirations on Drop In \& Out Learning](https://arxiv.org/abs/2503.21419) <a id="link4"></a>
+
+**ArXiv ID:** 2503.21419
+
+**Authors:** Yupei Li, Manuel Milling, Bj\"orn W. Schuller
+
+**Abstract:** Artificial Intelligence (AI) has achieved new levels of performance and spread in public usage with the rise of deep neural networks (DNNs). Initially inspired by human neurons and their connections, NNs have become the foundation of AI models for many advanced architectures. However, some of the most integral processes in the human brain, particularly neurogenesis and neuroplasticity in addition to the more spread neuroapoptosis have largely been ignored in DNN architecture design. Instead, contemporary AI development predominantly focuses on constructing advanced frameworks, such as large language models, which retain a static structure of neural connections during training and inference. In this light, we explore how neurogenesis, neuroapoptosis, and neuroplasticity can inspire future AI advances. Specifically, we examine analogous activities in artificial NNs, introducing the concepts of ``dropin'' for neurogenesis and revisiting ``dropout'' and structural pruning for neuroapoptosis. We additionally suggest neuroplasticity combining the two for future large NNs in ``life-long learning'' settings following the biological inspiration. We conclude by advocating for greater research efforts in this interdisciplinary domain and identifying promising directions for future exploration.
+
+**Comment:** The paper explores neuroplasticity-inspired mechanisms like 'dropin' and 'dropout' for neural networks, which aligns with emerging trends and foundational research in model architecture and lifelong learning.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 5. [Shared Global and Local Geometry of Language Model Embeddings](https://arxiv.org/abs/2503.21073) <a id="link5"></a>
+
+**ArXiv ID:** 2503.21073
+
+**Authors:** Andrew Lee, Melanie Weber, Fernanda Vi\'egas, Martin Wattenberg
+
+**Abstract:** Researchers have recently suggested that models share common representations. In this work, we find that the token embeddings of language models exhibit common geometric structure. First, we find ``global'' similarities: token embeddings often share similar relative orientations. Next, we characterize local geometry in two ways: (1) by using Locally Linear Embeddings, and (2) by defining a simple measure for the intrinsic dimension of each token embedding. Our intrinsic dimension measure demonstrates that token embeddings lie on a lower dimensional manifold. We qualitatively show that tokens with lower intrinsic dimensions often have semantically coherent clusters, while those with higher intrinsic dimensions do not. Both characterizations allow us to find similarities in the local geometry of token embeddings. Perhaps most surprisingly, we find that alignment in token embeddings persists through the hidden states of language models, allowing us to develop an application for interpretability. Namely, we empirically demonstrate that steering vectors from one language model can be transferred to another, despite the two models having different dimensions.
+
+**Comment:** The paper explores the geometric structure of token embeddings in language models, providing insights into representation learning and interpretability. It aligns with the criterion of understanding how deep networks encode information.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 6. [HOT: Hadamard-based Optimized Training](https://arxiv.org/abs/2503.21261) <a id="link6"></a>
+
+**ArXiv ID:** 2503.21261
+
+**Authors:** Seonggon Kim, Juncheol Shin, Seung-taek Woo, Eunhyeok Park
+
+**Abstract:** It has become increasingly important to optimize backpropagation to reduce memory usage and computational overhead. Achieving this goal is highly challenging, as multiple objectives must be considered jointly while maintaining training quality. In this paper, we focus on matrix multiplication, which accounts for the largest portion of training costs, and analyze its backpropagation in detail to identify lightweight techniques that offer the best benefits. Based on this analysis, we introduce a novel method, Hadamard-based Optimized Training (HOT). In this approach, we apply Hadamard-based optimizations, such as Hadamard quantization and Hadamard low-rank approximation, selectively and with awareness of the suitability of each optimization for different backward paths. Additionally, we introduce two enhancements: activation buffer compression and layer-wise quantizer selection. Our extensive analysis shows that HOT achieves up to 75% memory savings and a 2.6 times acceleration on real GPUs, with negligible accuracy loss compared to FP32 precision.
+
+**Comment:** The paper introduces Hadamard-based optimizations for backpropagation, focusing on memory and computational efficiency, which aligns with model compression and efficiency breakthroughs.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 7. [Nonlinear Multiple Response Regression and Learning of Latent Spaces](https://arxiv.org/abs/2503.21608) <a id="link7"></a>
+
+**ArXiv ID:** 2503.21608
+
+**Authors:** Ye Tian, Sanyou Wu, Long Feng
+
+**Abstract:** Identifying low-dimensional latent structures within high-dimensional data has long been a central topic in the machine learning community, driven by the need for data compression, storage, transmission, and deeper data understanding. Traditional methods, such as principal component analysis (PCA) and autoencoders (AE), operate in an unsupervised manner, ignoring label information even when it is available. In this work, we introduce a unified method capable of learning latent spaces in both unsupervised and supervised settings. We formulate the problem as a nonlinear multiple-response regression within an index model context. By applying the generalized Stein's lemma, the latent space can be estimated without knowing the nonlinear link functions. Our method can be viewed as a nonlinear generalization of PCA. Moreover, unlike AE and other neural network methods that operate as "black boxes", our approach not only offers better interpretability but also reduces computational complexity while providing strong theoretical guarantees. Comprehensive numerical experiments and real data analyses demonstrate the superior performance of our method.
+
+**Comment:** This paper proposes a novel method for learning latent spaces, which aligns with representation learning. The approach offers interpretability and theoretical guarantees, making it relevant to foundational research.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 8. [How do language models learn facts? Dynamics, curricula and hallucinations](https://arxiv.org/abs/2503.21676) <a id="link8"></a>
+
+**ArXiv ID:** 2503.21676
+
+**Authors:** Nicolas Zucchet, J\"org Bornschein, Stephanie Chan, Andrew Lampinen, Razvan Pascanu, Soham De
+
+**Abstract:** Large language models accumulate vast knowledge during pre-training, yet the dynamics governing this acquisition remain poorly understood. This work investigates the learning dynamics of language models on a synthetic factual recall task, uncovering three key findings: First, language models learn in three phases, exhibiting a performance plateau before acquiring precise factual knowledge. Mechanistically, this plateau coincides with the formation of attention-based circuits that support recall. Second, the training data distribution significantly impacts learning dynamics, as imbalanced distributions lead to shorter plateaus. Finally, hallucinations emerge simultaneously with knowledge, and integrating new knowledge into the model through fine-tuning is challenging, as it quickly corrupts its existing parametric memories. Our results emphasize the importance of data distribution in knowledge acquisition and suggest novel data scheduling strategies to accelerate neural network training.
+
+**Comment:** This paper investigates the learning dynamics of large language models, focusing on factual knowledge acquisition and the emergence of hallucinations. It provides theoretical insights into LLM behavior, aligning well with the foundational research on LLMs.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 9. [Stochastic Engrams for Efficient Continual Learning with Binarized Neural Networks](https://arxiv.org/abs/2503.21436) <a id="link9"></a>
+
+**ArXiv ID:** 2503.21436
+
+**Authors:** Isabelle Aguilar, Luis Fernando Herbozo Contreras, Omid Kavehei
+
+**Abstract:** The ability to learn continuously in artificial neural networks (ANNs) is often limited by catastrophic forgetting, a phenomenon in which new knowledge becomes dominant. By taking mechanisms of memory encoding in neuroscience (aka. engrams) as inspiration, we propose a novel approach that integrates stochastically-activated engrams as a gating mechanism for metaplastic binarized neural networks (mBNNs). This method leverages the computational efficiency of mBNNs combined with the robustness of probabilistic memory traces to mitigate forgetting and maintain the model's reliability. Previously validated metaplastic optimization techniques have been incorporated to enhance synaptic stability further. Compared to baseline binarized models and benchmark fully connected continual learning approaches, our method is the only strategy capable of reaching average accuracies over 20% in class-incremental scenarios and achieving comparable domain-incremental results to full precision state-of-the-art methods. Furthermore, we achieve a significant reduction in peak GPU and RAM usage, under 5% and 20%, respectively. Our findings demonstrate (A) an improved stability vs. plasticity trade-off, (B) a reduced memory intensiveness, and (C) an enhanced performance in binarized architectures. By uniting principles of neuroscience and efficient computing, we offer new insights into the design of scalable and robust deep learning systems.
+
+**Comment:** The paper proposes a neuroscience-inspired approach to continual learning using binarized neural networks, which aligns with model compression (binarization) and sparsity. The integration of stochastic engrams adds a novel perspective.
+
+**Relevance:** 8
+**Novelty:** 8
+
+---
+
+## 10. [Scalable Expectation Estimation with Subtractive Mixture Models](https://arxiv.org/abs/2503.21346) <a id="link10"></a>
+
+**ArXiv ID:** 2503.21346
+
+**Authors:** Lena Zellinger, Nicola Branchini, V\'ictor Elvira, Antonio Vergari
+
+**Abstract:** Many Monte Carlo (MC) and importance sampling (IS) methods use mixture models (MMs) for their simplicity and ability to capture multimodal distributions. Recently, subtractive mixture models (SMMs), i.e. MMs with negative coefficients, have shown greater expressiveness and success in generative modeling. However, their negative parameters complicate sampling, requiring costly auto-regressive techniques or accept-reject algorithms that do not scale in high dimensions. In this work, we use the difference representation of SMMs to construct an unbiased IS estimator ($\Delta\text{Ex}$) that removes the need to sample from the SMM, enabling high-dimensional expectation estimation with SMMs. In our experiments, we show that $\Delta\text{Ex}$ can achieve comparable estimation quality to auto-regressive sampling while being considerably faster in MC estimation. Moreover, we conduct initial experiments with $\Delta\text{Ex}$ using hand-crafted proposals, gaining first insights into how to construct safe proposals for $\Delta\text{Ex}$.
+
+**Comment:** The paper introduces subtractive mixture models (SMMs) for scalable expectation estimation, which is a novel contribution to generative modeling and aligns with representation learning through advanced mixture models.
+
+**Relevance:** 8
+**Novelty:** 8
+
+---
+
+## 11. [Consistent Multigroup Low-Rank Approximation](https://arxiv.org/abs/2503.21563) <a id="link11"></a>
+
+**ArXiv ID:** 2503.21563
+
+**Authors:** Antonis Matakos, Martino Ciaperoni, Heikki Mannila
+
+**Abstract:** We consider the problem of consistent low-rank approximation for multigroup data: we ask for a sequence of $k$ basis vectors such that projecting the data onto their spanned subspace treats all groups as equally as possible, by minimizing the maximum error among the groups. Additionally, we require that the sequence of basis vectors satisfies the natural consistency property: when looking for the best $k$ vectors, the first $d<k$ vectors are the best possible solution to the problem of finding $d$ basis vectors. Thus, this multigroup low-rank approximation method naturally generalizes \svd and reduces to \svd for data with a single group. We give an iterative algorithm for this task that sequentially adds to the basis the vector that gives the best rank$-1$ projection according to the min-max criterion, and then projects the data onto the orthogonal complement of that vector. For finding the best rank$-1$ projection, we use primal-dual approaches or semidefinite programming. We analyze the theoretical properties of the algorithms and demonstrate empirically that the proposed methods compare favorably to existing methods for multigroup (or fair) PCA.
+
+**Comment:** The paper proposes a consistent low-rank approximation method for multigroup data, which aligns with model compression through low-rank approaches and introduces a novel iterative algorithm for fair PCA.
+
+**Relevance:** 8
+**Novelty:** 8
+
+---
+
+## 12. [F-INR: Functional Tensor Decomposition for Implicit Neural Representations](https://arxiv.org/abs/2503.21507) <a id="link12"></a>
+
+**ArXiv ID:** 2503.21507
+
+**Authors:** Sai Karthikeya Vemuri, Tim B\"uchner, Joachim Denzler
+
+**Abstract:** Implicit Neural Representation (INR) has emerged as a powerful tool for encoding discrete signals into continuous, differentiable functions using neural networks. However, these models often have an unfortunate reliance on monolithic architectures to represent high-dimensional data, leading to prohibitive computational costs as dimensionality grows. We propose F-INR, a framework that reformulates INR learning through functional tensor decomposition, breaking down high-dimensional tasks into lightweight, axis-specific sub-networks. Each sub-network learns a low-dimensional data component (e.g., spatial or temporal). Then, we combine these components via tensor operations, reducing forward pass complexity while improving accuracy through specialized learning. F-INR is modular and, therefore, architecture-agnostic, compatible with MLPs, SIREN, WIRE, or other state-of-the-art INR architecture. It is also decomposition-agnostic, supporting CP, TT, and Tucker modes with user-defined rank for speed-accuracy control. In our experiments, F-INR trains $100\times$ faster than existing approaches on video tasks while achieving higher fidelity (+3.4 dB PSNR). Similar gains hold for image compression, physics simulations, and 3D geometry reconstruction. Through this, F-INR offers a new scalable, flexible solution for high-dimensional signal modeling.
+
+**Comment:** F-INR proposes a novel framework for implicit neural representations using functional tensor decomposition, which aligns with model compression and efficiency topics. The modular and decomposition-agnostic approach is a significant contribution to scalable signal modeling.
+
+**Relevance:** 8
+**Novelty:** 8
+
+---
+
+## 13. [Uncertainty propagation in feed-forward neural network models](https://arxiv.org/abs/2503.21059) <a id="link13"></a>
+
+**ArXiv ID:** 2503.21059
+
+**Authors:** Jeremy Diamzon, Daniele Venturi
+
+**Abstract:** We develop new uncertainty propagation methods for feed-forward neural network architectures with leaky ReLu activation functions subject to random perturbations in the input vectors. In particular, we derive analytical expressions for the probability density function (PDF) of the neural network output and its statistical moments as a function of the input uncertainty and the parameters of the network, i.e., weights and biases. A key finding is that an appropriate linearization of the leaky ReLu activation function yields accurate statistical results even for large perturbations in the input vectors. This can be attributed to the way information propagates through the network. We also propose new analytically tractable Gaussian copula surrogate models to approximate the full joint PDF of the neural network output. To validate our theorical results, we conduct Monte Carlo simulations and a thorough error analysis on a multi-layer neural network representing a nonlinear integro-differential operator between two polynomial function spaces. Our findings demonstrate excellent agreement between the theoretical predictions and Monte Carlo simulations.
+
+**Comment:** The paper develops analytical methods for uncertainty propagation in neural networks, which could provide foundational insights into training dynamics and network behavior.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 14. [Outlier dimensions favor frequent tokens in language model](https://arxiv.org/abs/2503.21718) <a id="link14"></a>
+
+**ArXiv ID:** 2503.21718
+
+**Authors:** Iuri Macocco, Nora Graichen, Gemma Boleda, Marco Baroni
+
+**Abstract:** We study last-layer outlier dimensions, i.e.dimensions that display extreme activations for the majority of inputs. We show that outlier dimensions arise in many different modern language models, and trace their function back to the heuristic of constantly predicting frequent words. We further show how a model can block this heuristic when it is not contextually appropriate, by assigning a counterbalancing weight mass to the remaining dimensions, and we investigate which model parameters boost outlier dimensions and when they arise during training. We conclude that outlier dimensions are a specialized mechanism discovered by many distinct models to implement a useful token prediction heuristic.
+
+**Comment:** The study of outlier dimensions in language models provides insights into token prediction heuristics and their training dynamics, aligning with representation learning and interpretability.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 15. [Offline Action-Free Learning of Ex-BMDPs by Comparing Diverse Datasets](https://arxiv.org/abs/2503.21018) <a id="link15"></a>
+
+**ArXiv ID:** 2503.21018
+
+**Authors:** Alexander Levine, Peter Stone, Amy Zhang
+
+**Abstract:** While sequential decision-making environments often involve high-dimensional observations, not all features of these observations are relevant for control. In particular, the observation space may capture factors of the environment which are not controllable by the agent, but which add complexity to the observation space. The need to ignore these "noise" features in order to operate in a tractably-small state space poses a challenge for efficient policy learning. Due to the abundance of video data available in many such environments, task-independent representation learning from action-free offline data offers an attractive solution. However, recent work has highlighted theoretical limitations in action-free learning under the Exogenous Block MDP (Ex-BMDP) model, where temporally-correlated noise features are present in the observations. To address these limitations, we identify a realistic setting where representation learning in Ex-BMDPs becomes tractable: when action-free video data from multiple agents with differing policies are available. Concretely, this paper introduces CRAFT (Comparison-based Representations from Action-Free Trajectories), a sample-efficient algorithm leveraging differences in controllable feature dynamics across agents to learn representations. We provide theoretical guarantees for CRAFT's performance and demonstrate its feasibility on a toy example, offering a foundation for practical methods in similar settings.
+
+**Comment:** The paper introduces a novel representation learning algorithm (CRAFT) for action-free environments, aligning with the representation learning criterion. It provides theoretical guarantees, which adds to its foundational relevance.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 16. [Effective Skill Unlearning through Intervention and Abstention](https://arxiv.org/abs/2503.21730) <a id="link16"></a>
+
+**ArXiv ID:** 2503.21730
+
+**Authors:** Yongce Li, Chung-En Sun, Tsui-Wei Weng
+
+**Abstract:** Large language Models (LLMs) have demonstrated remarkable skills across various domains. Understanding the mechanisms behind their abilities and implementing controls over them is becoming increasingly important for developing better models. In this paper, we focus on skill unlearning in LLMs, specifically unlearning a particular skill while retaining their overall capabilities. We introduce two lightweight, training-free machine skill unlearning techniques for LLMs. First, we observe that the pre-activation distribution of neurons in each Feed-Forward Layer (FFL) differs when the model demonstrates different skills. Additionally, we find that queries triggering the same skill cluster within the FFL key space and can be separated from other queries using a hypercube. Based on these observations, we propose two lightweight, training-free skill unlearning methods via \textit{intervention} and \textit{abstention} respectively: \texttt{Neuron Adjust} and \texttt{Key Space Detection}. We evaluate our methods on unlearning math-solving, Python-coding, and comprehension skills across seven different languages. The results demonstrate their strong unlearning capabilities for the designated skills. Specifically, \texttt{Key Space Detection} achieves over 80\% relative performance drop on the forgetting skill and less than 10\% relative performance drop on other skills and the model's general knowledge (MMLU) for most unlearning tasks. Our code is available at https://github.com/Trustworthy-ML-Lab/effective_skill_unlearning
+
+**Comment:** The paper proposes lightweight, training-free methods for skill unlearning in LLMs, which aligns with foundational research in understanding and controlling LLM behavior.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 17. [Fundamental Safety-Capability Trade-offs in Fine-tuning Large Language Models](https://arxiv.org/abs/2503.20807) <a id="link17"></a>
+
+**ArXiv ID:** 2503.20807
+
+**Authors:** Pin-Yu Chen, Han Shen, Payel Das, Tianyi Chen
+
+**Abstract:** Fine-tuning Large Language Models (LLMs) on some task-specific datasets has been a primary use of LLMs. However, it has been empirically observed that this approach to enhancing capability inevitably compromises safety, a phenomenon also known as the safety-capability trade-off in LLM fine-tuning. This paper presents a theoretical framework for understanding the interplay between safety and capability in two primary safety-aware LLM fine-tuning strategies, providing new insights into the effects of data similarity, context overlap, and alignment loss landscape. Our theoretical results characterize the fundamental limits of the safety-capability trade-off in LLM fine-tuning, which are also validated by numerical experiments.
+
+**Comment:** The paper provides a theoretical framework for understanding the safety-capability trade-offs in fine-tuning LLMs. While it focuses on fine-tuning, the theoretical insights into alignment loss landscape and data similarity are relevant to foundational research in LLM behavior and interpretability.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+# Paper Selection Prompt
+
+You are a helpful paper reading assistant whose job is to read daily posts from ArXiv and identify a few papers that your friend will enjoy reading.
+Your job is to carefully read the paper titles and abstracts below and find the ones that match the criteria below.
+
+## Instructions
+
+Write the response in JSONL format with {ARXIVID, COMMENT, RELEVANCE, NOVELTY} on each line, one for each paper.
+
+- ARXIVID: should be the ArXiv ID.
+- COMMENT: should identify whether there is a criteria that match the paper very closely. These matches should not be based on general terms like "language modeling" or "advancements" and should specifically refer to a criterion. No need to mention the non-matching criteria.
+- RELEVANCE: should be a score from 1-10.
+- NOVELTY: should be a score from 1-10.
+
+## Scoring Criteria
+
+> The "Relevance" score measures how closely the paper aligns with the core topics of the prompt.
+> The "Novelty" score assesses the originality and impact of the paper.
+> They are two **ORTHONORMAL** axes and **SHOULD NOT** be confused with each other.
+
+### Relevance Scoring
+
+- Relevance 9-10 (Completely Relevant)
+  - Focus: Fully aligned with core topics with no deviation, score the highest if contains relevant keywords in it.
+  - Examples: Papers focused on foundational methods or theoretical research, whose titles contain topic keywords like "MoE".
+
+- Relevance 7-8 (Relevant)
+  - Focus: Retain a solid link to the main research area, though may touch on peripheral elements.
+  - Examples: Papers research on the fundamental part of MoE through a less critical aspect like its behavior in GNN.
+
+- Relevance 5-6 (Borderline)
+  - Focus: Maintains a link to the core topic but also extends into at least one other domain/area beyond the primary focus.
+  - Examples: Work referencing MoE centered on reinforcement learning.
+
+- Relevance 3-4 (Irrelevant)
+  - Focus: Largely outside our interests with no association to our topics.
+  - Examples: Application-focused papers like using MoE to solve a problem in the real world.
+
+- Relevance 1-2 (Ignore)
+  - Focus: Purely unrelated to our topics. Completely a different domain.
+  - **Exception**: If the paper hints at a cutting-edge, radically new direction that could eventually transform the primary domain, consider a score of 9–10 despite initial appearances. (Usually a very rare concept that belongs to the fundamental research)
+
+### Novelty Scoring
+
+- Novelty 9-10 (Breakthrough)
+  - Definition: Groundbreaking methods/theory introducing new directions or solving major challenges.
+  - Examples: Entirely new paradigm for foundational models; a novel theory transforming representation learning.
+
+- Novelty 7-8 (Improvements)
+  - Definition: Substantial insights/enhancements, though not a full paradigm shift.
+  - Examples: Modifications on existing methods yielding significantly better results.
+
+- Novelty 5-6 (Borderline)
+  - Definition: Incremental contributions with possible long-term benefits, not immediately transformative.
+  - Examples: Moderately novel extension to an existing architecture; refining current methods without fundamentally altering them.
+
+- Novelty 3-4 (Tangential)
+  - Definition: Minor or domain-specific improvements with limited broader impact.
+  - Examples: Slight modifications to known methods with strange motivation; purely engineering jobs like a new benchmark/dataset.
+
+- Novelty 1-2 (Low)
+  - Definition: Minimal originality, applying standard approaches without real innovation.
+  - Examples: Using an off-the-shelf model without adding new insights; purely application-driven studies like finetuning a pretrained model using existing methods.
+
+## Papers
+
+[PAPER LIST HERE]
+
+## Relevant Topics
+
+Use the following relevance criteria to focus on foundational research. Keep **relevant** papers and filter out **irrelevant** ones. Avoid purely **application-driven** work.
+
+1. Representation Learning
+   - Relevant: Insights into how deep networks encode information, feature/dictionary learning, sparse/contrastive methods, training dynamics in neural networks.
+   - Irrelevant: Standard applications of known techniques lacking new theoretical or methodological contributions.
+
+2. Model Architecture
+   - Relevant: Mixture-of-Experts (MoE), Transformers, Conditional/Dynamic Networks, Autoencoders, analysis on existing architectures (like encoder-decoder), or other architectural innovations.
+   - Irrelevant: Merely using existing architectures for a certain task without insights into the structure themselves.
+
+3. Model Compression
+   - Relevant: Sparsity, pruning, quantization, low-rank approaches, KV cache, or other algorithmic/theoretical efficiency breakthroughs.
+   - Irrelevant: Straightforward applications of existing compression methods to new tasks.
+
+4. Large Language Models (LLMs)
+   - Relevant: Major breakthroughs in pretraining or architecture, theoretical insights into LLM behavior/interpretability.
+   - Irrelevant: Domain-specific usage (e.g., translation, jail-breaking), finetuning or inference tricks (e.g., instruction tuning, chain-of-thoughts, data mixing), or empirical dataset/benchmark studies and text-level analysis (e.g. hallucination, reasoning, safety).
+
+5. AI for Science
+   - Relevant: Foundational research in molecular/protein modeling, new generative paradigms, or significant architecture-level innovations.
+   - Irrelevant: Conventional, domain-specific applications without new theoretical perspectives.
+
+6. Emerging Trends
+   - Relevant: Cutting-edge theoretical work challenging established assumptions or introducing broad new paradigms.
+   - Irrelevant: Incremental improvements or trend-following without novel insights.
+
+**Keywords:**
+
+- Relevant: Mixture of Experts (MoE), Representation Learning, Compression/Efficiency, Sparse/Sparsity, Pruning, Quantization, Low-rank, Foundation Model, etc.
+- Irrelevant: Reinforcement Learning, Transfer Learning, Federated Learning, Online Learning, Diffusion Models, etc.
+- Application: Image Segmentation, Medical Imaging, 3D Vision, Video Understanding, Information Retrieval, Summarization, Recommendation Systems, Machine Translation, Speech Recognition, Signal Processing, Spatial/Temporal Modeling, Time Series, Knowledge Graph, etc.

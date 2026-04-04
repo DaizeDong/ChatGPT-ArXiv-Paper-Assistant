@@ -1,0 +1,448 @@
+<div style="display: flex; align-items: flex-start; justify-content: space-between; width: 100%;"><div style="width: 33.33%; text-align: left;"><a href="../24"><img src="../../../assets/nav/day/2025-06-25-prev.svg" alt="Previous Day 2025-06-24"></a></div><div style="width: 33.33%; text-align: center;"><a href=".."><img src="../../../assets/nav/day/2025-06-25-center.svg" alt="Monthly Overview 2025-06"></a></div><div style="width: 33.33%; text-align: right;"><a href="../26"><img src="../../../assets/nav/day/2025-06-25-next.svg" alt="Next Day 2025-06-26"></a></div></div>
+
+# Personalized Daily ArXiv Papers 2025-06-25
+
+| *[gpt-4o]*   | Prompt   | Completion   | Total   |
+|:------------:|:--------:|:------------:|:-------:|
+| **Token**    | 28271    | 3381         | 31652   |
+| **Cost**     | $0.07    | $0.03        | $0.1    |
+
+Total arXiv papers: 433
+
+Total scanned papers: 278
+
+Total relevant papers: 18
+
+**Table of contents with paper titles:**
+
+1. [Chain-of-Experts: Unlocking the Communication Power of Mixture-of-Experts Models](#user-content-link1)
+**Authors:** Zihan Wang, Rui Pan, Jiarui Yao, Robert Csordas, Linjie Li, Lu Yin, Jiajun Wu, Tong Zhang, Manling Li, Shiwei Liu
+
+2. [RCStat: A Statistical Framework for using Relative Contextualization in Transformers](#user-content-link2)
+**Authors:** Debabrata Mahapatra, Shubham Agarwal, Apoorv Saxena, Subrata Mitra
+
+3. [In-Context Occam's Razor: How Transformers Prefer Simpler Hypotheses on the Fly](#user-content-link3)
+**Authors:** Puneesh Deora, Bhavya Vasudeva, Tina Behnia, Christos Thrampoulidis
+
+4. [Safe Pruning LoRA: Robust Distance-Guided Pruning for Safety Alignment in Adaptation of LLMs](#user-content-link4)
+**Authors:** Shuang Ao, Yi Dong, Jinwei Hu, Sarvapali Ramchurn
+
+5. [Riemannian generative decoder](#user-content-link5)
+**Authors:** Andreas Bjerregaard, S{\o}ren Hauberg, Anders Krogh
+
+6. [First-Order Sparse Convex Optimization: Better Rates with Sparse Updates](#user-content-link6)
+**Authors:** Dan Garber
+
+7. [Uncovering Conceptual Blindspots in Generative Image Models Using Sparse Autoencoders](#user-content-link7)
+**Authors:** Matyas Bohacek, Thomas Fel, Maneesh Agrawala, Ekdeep Singh Lubana
+
+8. [Who Does What in Deep Learning? Multidimensional Game-Theoretic Attribution of Function of Neural Units](#user-content-link8)
+**Authors:** Shrey Dixit, Kayson Fakhar, Fatemeh Hadaeghi, Patrick Mineault, Konrad P. Kording, Claus C. Hilgetag
+
+9. [From memories to maps: Mechanisms of in context reinforcement learning in transformers](#user-content-link9)
+**Authors:** Ching Fang, Kanaka Rajan
+
+10. [Finding Clustering Algorithms in the Transformer Architecture](#user-content-link10)
+**Authors:** Kenneth L. Clarkson, Lior Horesh, Takuya Ito, Charlotte Park, Parikshit Ram
+
+11. [ProxelGen: Generating Proteins as 3D Densities](#user-content-link11)
+**Authors:** Felix Faltings, Hannes Stark, Regina Barzilay, Tommi Jaakkola
+
+12. [The Effect of Depth on the Expressivity of Deep Linear State-Space Models](#user-content-link12)
+**Authors:** Zeyu Bao, Penghao Yu, Haotian Jiang, Qianxiao Li
+
+13. [Thought Anchors: Which LLM Reasoning Steps Matter?](#user-content-link13)
+**Authors:** Paul C. Bogdan, Uzay Macar, Neel Nanda, Arthur Conmy
+
+14. [Discrepancy-Aware Graph Mask Auto-Encoder](#user-content-link14)
+**Authors:** Ziyu Zheng, Yaming Yang, Ziyu Guan, Wei Zhao, Weigang Lu
+
+15. [On the algorithmic construction of deep ReLU networks](#user-content-link15)
+**Authors:** Daan Huybrechs
+
+16. [Inference-Time Reward Hacking in Large Language Models](#user-content-link16)
+**Authors:** Hadi Khalaf, Claudio Mayrink Verdun, Alex Oesterling, Himabindu Lakkaraju, Flavio du Pin Calmon
+
+17. [Tensor-Parallelism with Partially Synchronized Activations](#user-content-link17)
+**Authors:** Itay Lamprecht, Asaf Karnieli, Yair Hanani, Niv Giladi, Daniel Soudry
+
+18. [Outlier-Safe Pre-Training for Robust 4-Bit Quantization of Large Language Models](#user-content-link18)
+**Authors:** Jungwoo Park, Taewhoo Lee, Chanwoong Yoon, Hyeon Hwang, Jaewoo Kang
+
+---
+
+## 1. [Chain-of-Experts: Unlocking the Communication Power of Mixture-of-Experts Models](https://arxiv.org/abs/2506.18945) <a id="link1"></a>
+
+**ArXiv ID:** 2506.18945
+
+**Authors:** Zihan Wang, Rui Pan, Jiarui Yao, Robert Csordas, Linjie Li, Lu Yin, Jiajun Wu, Tong Zhang, Manling Li, Shiwei Liu
+
+**Abstract:** We propose Chain-of-Experts (CoE), a new Mixture-of-Experts (MoE) architecture that introduces sequential expert communication within each layer. Unlike traditional MoE models, where experts operate independently in parallel, CoE processes tokens iteratively across a chain of experts inside a layer. To support dynamic expert selection across iterations, CoE employs a dedicated router at each iteration step within a layer. This design allows tokens to re-evaluate and select different experts during each iteration, rather than being statically assigned. As a result, CoE introduces a flexible routing mechanism that increases the diversity of expert combinations and enriches the model's representational capacity. CoE demonstrates improved performance under fixed compute: on math reasoning tasks, it reduces validation loss from 1.20 to 1.12 compared to a standard MoE. Beyond performance, CoE offers a new scaling axis: depth through expert iteration, which complements conventional width/depth scaling. For example, using 2x iterations matches the performance of 3x expert selections (in width), while reducing memory usage by 17.6-42% relative to other scaling strategies. Our analysis reveals that CoE's benefits stem from its iterative residual structure and enhanced expert specialization empowered by iterative routing, which together unlock more expressive representations. Code is available at https://github.com/ZihanWang314/coe.
+
+**Comment:** The paper introduces a new Mixture-of-Experts architecture, Chain-of-Experts, which is highly relevant to model architecture innovations.
+
+**Relevance:** 10
+**Novelty:** 9
+
+---
+
+## 2. [RCStat: A Statistical Framework for using Relative Contextualization in Transformers](https://arxiv.org/abs/2506.19549) <a id="link2"></a>
+
+**ArXiv ID:** 2506.19549
+
+**Authors:** Debabrata Mahapatra, Shubham Agarwal, Apoorv Saxena, Subrata Mitra
+
+**Abstract:** Prior work on input-token importance in auto-regressive transformers has relied on Softmax-normalized attention weights, which obscure the richer structure of pre-Softmax query-key logits. We introduce RCStat, a statistical framework that harnesses raw attention logits via Relative Contextualization (RC), a random variable measuring contextual alignment between token segments, and derive an efficient upper bound for RC. We demonstrate two applications: (i) Key-Value compression, where RC-based thresholds drive adaptive key-value eviction for substantial cache reduction with minimal quality loss; and (ii) Attribution, where RC yields higher-fidelity token-, sentence-, and chunk-level explanations than post-Softmax methods. Across question answering, summarization, and attribution benchmarks, RCStat achieves significant empirical gains, delivering state-of-the-art compression and attribution performance without any model retraining.
+
+**Comment:** The paper introduces RCStat, a framework for using relative contextualization in transformers, which relates to model architecture and compression through key-value compression.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 3. [In-Context Occam's Razor: How Transformers Prefer Simpler Hypotheses on the Fly](https://arxiv.org/abs/2506.19351) <a id="link3"></a>
+
+**ArXiv ID:** 2506.19351
+
+**Authors:** Puneesh Deora, Bhavya Vasudeva, Tina Behnia, Christos Thrampoulidis
+
+**Abstract:** In-context learning (ICL) enables transformers to adapt to new tasks through contextual examples without parameter updates. While existing research has typically studied ICL in fixed-complexity environments, practical language models encounter tasks spanning diverse complexity levels. This paper investigates how transformers navigate hierarchical task structures where higher-complexity categories can perfectly represent any pattern generated by simpler ones. We design well-controlled testbeds based on Markov chains and linear regression that reveal transformers not only identify the appropriate complexity level for each task but also accurately infer the corresponding parameters--even when the in-context examples are compatible with multiple complexity hypotheses. Notably, when presented with data generated by simpler processes, transformers consistently favor the least complex sufficient explanation. We theoretically explain this behavior through a Bayesian framework, demonstrating that transformers effectively implement an in-context Bayesian Occam's razor by balancing model fit against complexity penalties. We further ablate on the roles of model size, training mixture distribution, inference context length, and architecture. Finally, we validate this Occam's razor-like inductive bias on a pretrained GPT-4 model with Boolean-function tasks as case study, suggesting it may be inherent to transformers trained on diverse task distributions.
+
+**Comment:** The paper provides theoretical insights into how transformers prefer simpler hypotheses, aligning with the core topic of theoretical insights into LLM behavior.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 4. [Safe Pruning LoRA: Robust Distance-Guided Pruning for Safety Alignment in Adaptation of LLMs](https://arxiv.org/abs/2506.18931) <a id="link4"></a>
+
+**ArXiv ID:** 2506.18931
+
+**Authors:** Shuang Ao, Yi Dong, Jinwei Hu, Sarvapali Ramchurn
+
+**Abstract:** Fine-tuning Large Language Models (LLMs) with Low-Rank Adaptation (LoRA) enhances adaptability while reducing computational costs. However, fine-tuning can compromise safety alignment, even with benign data, increasing susceptibility to harmful outputs. Existing safety alignment methods struggle to capture complex parameter shifts, leading to suboptimal safety-utility trade-offs. To address this issue, we propose Safe Pruning LoRA (SPLoRA), a novel pruning-based approach that selectively removes LoRA layers that weaken safety alignment, improving safety while preserving performance. At its core, we introduce Empirical-DIEM (E-DIEM), a dimension-insensitive similarity metric that effectively detects safety misalignment in LoRA-adapted models. We conduct extensive experiments on LLMs fine-tuned with mixed of benign and malicious data, and purely benign datasets, evaluating SPLoRA across utility, safety, and reliability metrics. Results demonstrate that SPLoRA outperforms state-of-the-art safety alignment techniques, significantly reducing safety risks while maintaining or improving model performance and reliability. Additionally, SPLoRA reduces inference overhead, making it a scalable and efficient solution for deploying safer and more reliable LLMs. The code is available at https://github.com/AoShuang92/SPLoRA.
+
+**Comment:** The paper introduces a novel pruning-based approach for improving safety alignment in LLMs, which aligns with model compression and efficiency breakthroughs.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 5. [Riemannian generative decoder](https://arxiv.org/abs/2506.19133) <a id="link5"></a>
+
+**ArXiv ID:** 2506.19133
+
+**Authors:** Andreas Bjerregaard, S{\o}ren Hauberg, Anders Krogh
+
+**Abstract:** Riemannian representation learning typically relies on approximating densities on chosen manifolds. This involves optimizing difficult objectives, potentially harming models. To completely circumvent this issue, we introduce the Riemannian generative decoder which finds manifold-valued maximum likelihood latents with a Riemannian optimizer while training a decoder network. By discarding the encoder, we vastly simplify the manifold constraint compared to current approaches which often only handle few specific manifolds. We validate our approach on three case studies -- a synthetic branching diffusion process, human migrations inferred from mitochondrial DNA, and cells undergoing a cell division cycle -- each showing that learned representations respect the prescribed geometry and capture intrinsic non-Euclidean structure. Our method requires only a decoder, is compatible with existing architectures, and yields interpretable latent spaces aligned with data geometry.
+
+**Comment:** The paper presents a Riemannian generative decoder, which is a novel approach in representation learning, focusing on manifold-valued latents.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 6. [First-Order Sparse Convex Optimization: Better Rates with Sparse Updates](https://arxiv.org/abs/2506.19075) <a id="link6"></a>
+
+**ArXiv ID:** 2506.19075
+
+**Authors:** Dan Garber
+
+**Abstract:** In was recently established that for convex optimization problems with a sparse optimal solution (may it be entry-wise sparsity or matrix rank-wise sparsity) it is possible to have linear convergence rates which depend on an improved mixed-norm condition number of the form $\frac{\beta_1{}s}{\alpha_2}$, where $\beta_1$ is the $\ell_1$-Lipchitz continuity constant of the gradient, $\alpha_2$ is the $\ell_2$-quadratic growth constant, and $s$ is the sparsity of the optimal solution. However, beyond the improved convergence rate, these methods are unable to leverage the sparsity of optimal solutions towards improving also the runtime of each iteration, which may still be prohibitively high for high-dimensional problems. In this work, we establish that linear convergence rates which depend on this improved condition number can be obtained using only sparse updates, which may result in overall significantly improved running times. Moreover, our methods are considerably easier to implement.
+
+**Comment:** The paper discusses sparse updates in convex optimization, which aligns with the model compression topic through sparsity and efficiency improvements.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 7. [Uncovering Conceptual Blindspots in Generative Image Models Using Sparse Autoencoders](https://arxiv.org/abs/2506.19708) <a id="link7"></a>
+
+**ArXiv ID:** 2506.19708
+
+**Authors:** Matyas Bohacek, Thomas Fel, Maneesh Agrawala, Ekdeep Singh Lubana
+
+**Abstract:** Despite their impressive performance, generative image models trained on large-scale datasets frequently fail to produce images with seemingly simple concepts -- e.g., human hands or objects appearing in groups of four -- that are reasonably expected to appear in the training data. These failure modes have largely been documented anecdotally, leaving open the question of whether they reflect idiosyncratic anomalies or more structural limitations of these models. To address this, we introduce a systematic approach for identifying and characterizing "conceptual blindspots" -- concepts present in the training data but absent or misrepresented in a model's generations. Our method leverages sparse autoencoders (SAEs) to extract interpretable concept embeddings, enabling a quantitative comparison of concept prevalence between real and generated images. We train an archetypal SAE (RA-SAE) on DINOv2 features with 32,000 concepts -- the largest such SAE to date -- enabling fine-grained analysis of conceptual disparities. Applied to four popular generative models (Stable Diffusion 1.5/2.1, PixArt, and Kandinsky), our approach reveals specific suppressed blindspots (e.g., bird feeders, DVD discs, and whitespaces on documents) and exaggerated blindspots (e.g., wood background texture and palm trees). At the individual datapoint level, we further isolate memorization artifacts -- instances where models reproduce highly specific visual templates seen during training. Overall, we propose a theoretically grounded framework for systematically identifying conceptual blindspots in generative models by assessing their conceptual fidelity with respect to the underlying data-generating process.
+
+**Comment:** The paper uses sparse autoencoders to identify conceptual blindspots in generative models, relevant to representation learning and model architecture analysis.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 8. [Who Does What in Deep Learning? Multidimensional Game-Theoretic Attribution of Function of Neural Units](https://arxiv.org/abs/2506.19732) <a id="link8"></a>
+
+**ArXiv ID:** 2506.19732
+
+**Authors:** Shrey Dixit, Kayson Fakhar, Fatemeh Hadaeghi, Patrick Mineault, Konrad P. Kording, Claus C. Hilgetag
+
+**Abstract:** Neural networks now generate text, images, and speech with billions of parameters, producing a need to know how each neural unit contributes to these high-dimensional outputs. Existing explainable-AI methods, such as SHAP, attribute importance to inputs, but cannot quantify the contributions of neural units across thousands of output pixels, tokens, or logits. Here we close that gap with Multiperturbation Shapley-value Analysis (MSA), a model-agnostic game-theoretic framework. By systematically lesioning combinations of units, MSA yields Shapley Modes, unit-wise contribution maps that share the exact dimensionality of the model's output. We apply MSA across scales, from multi-layer perceptrons to the 56-billion-parameter Mixtral-8x7B and Generative Adversarial Networks (GAN). The approach demonstrates how regularisation concentrates computation in a few hubs, exposes language-specific experts inside the LLM, and reveals an inverted pixel-generation hierarchy in GANs. Together, these results showcase MSA as a powerful approach for interpreting, editing, and compressing deep neural networks.
+
+**Comment:** The paper presents a game-theoretic framework for understanding neural unit contributions, relevant to representation learning and model interpretability.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 9. [From memories to maps: Mechanisms of in context reinforcement learning in transformers](https://arxiv.org/abs/2506.19686) <a id="link9"></a>
+
+**ArXiv ID:** 2506.19686
+
+**Authors:** Ching Fang, Kanaka Rajan
+
+**Abstract:** Humans and animals show remarkable learning efficiency, adapting to new environments with minimal experience. This capability is not well captured by standard reinforcement learning algorithms that rely on incremental value updates. Rapid adaptation likely depends on episodic memory -- the ability to retrieve specific past experiences to guide decisions in novel contexts. Transformers provide a useful setting for studying these questions because of their ability to learn rapidly in-context and because their key-value architecture resembles episodic memory systems in the brain. We train a transformer to in-context reinforcement learn in a distribution of planning tasks inspired by rodent behavior. We then characterize the learning algorithms that emerge in the model. We first find that representation learning is supported by in-context structure learning and cross-context alignment, where representations are aligned across environments with different sensory stimuli. We next demonstrate that the reinforcement learning strategies developed by the model are not interpretable as standard model-free or model-based planning. Instead, we show that in-context reinforcement learning is supported by caching intermediate computations within the model's memory tokens, which are then accessed at decision time. Overall, we find that memory may serve as a computational resource, storing both raw experience and cached computations to support flexible behavior. Furthermore, the representations developed in the model resemble computations associated with the hippocampal-entorhinal system in the brain, suggesting that our findings may be relevant for natural cognition. Taken together, our work offers a mechanistic hypothesis for the rapid adaptation that underlies in-context learning in artificial and natural settings.
+
+**Comment:** The paper explores representation learning in transformers, focusing on in-context reinforcement learning and memory mechanisms, which aligns with the representation learning criterion. It provides insights into how deep networks encode information and the role of memory in learning, which is foundational research.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 10. [Finding Clustering Algorithms in the Transformer Architecture](https://arxiv.org/abs/2506.19125) <a id="link10"></a>
+
+**ArXiv ID:** 2506.19125
+
+**Authors:** Kenneth L. Clarkson, Lior Horesh, Takuya Ito, Charlotte Park, Parikshit Ram
+
+**Abstract:** The invention of the transformer architecture has revolutionized Artificial Intelligence (AI), yielding unprecedented success in areas such as natural language processing, computer vision, and multimodal reasoning. Despite these advances, it is unclear whether transformers are able to learn and implement precise algorithms. Here, we demonstrate that transformers can exactly implement a fundamental and widely used algorithm for $k$-means clustering: Lloyd's algorithm. First, we theoretically prove the existence of such a transformer architecture, which we term the $k$-means transformer, that exactly implements Lloyd's algorithm for $k$-means clustering using the standard ingredients of modern transformers: attention and residual connections. Next, we numerically implement this transformer and demonstrate in experiments the exact correspondence between our architecture and Lloyd's algorithm, providing a fully neural implementation of $k$-means clustering. Finally, we demonstrate that interpretable alterations (e.g., incorporating layer normalizations or multilayer perceptrons) to this architecture yields diverse and novel variants of clustering algorithms, such as soft $k$-means, spherical $k$-means, trimmed $k$-means, and more. Collectively, our findings demonstrate how transformer mechanisms can precisely map onto algorithmic procedures, offering a clear and interpretable perspective on implementing precise algorithms in transformers.
+
+**Comment:** The paper explores the implementation of clustering algorithms within the transformer architecture, providing insights into model architecture and representation learning.
+
+**Relevance:** 8
+**Novelty:** 8
+
+---
+
+## 11. [ProxelGen: Generating Proteins as 3D Densities](https://arxiv.org/abs/2506.19820) <a id="link11"></a>
+
+**ArXiv ID:** 2506.19820
+
+**Authors:** Felix Faltings, Hannes Stark, Regina Barzilay, Tommi Jaakkola
+
+**Abstract:** We develop ProxelGen, a protein structure generative model that operates on 3D densities as opposed to the prevailing 3D point cloud representations. Representing proteins as voxelized densities, or proxels, enables new tasks and conditioning capabilities. We generate proteins encoded as proxels via a 3D CNN-based VAE in conjunction with a diffusion model operating on its latent space. Compared to state-of-the-art models, ProxelGen's samples achieve higher novelty, better FID scores, and the same level of designability as the training set. ProxelGen's advantages are demonstrated in a standard motif scaffolding benchmark, and we show how 3D density-based generation allows for more flexible shape conditioning.
+
+**Comment:** The paper introduces a new protein generative model using 3D densities, relevant to AI for Science with a focus on foundational research in molecular modeling.
+
+**Relevance:** 8
+**Novelty:** 8
+
+---
+
+## 12. [The Effect of Depth on the Expressivity of Deep Linear State-Space Models](https://arxiv.org/abs/2506.19296) <a id="link12"></a>
+
+**ArXiv ID:** 2506.19296
+
+**Authors:** Zeyu Bao, Penghao Yu, Haotian Jiang, Qianxiao Li
+
+**Abstract:** Deep state-space models (SSMs) have gained increasing popularity in sequence modelling. While there are numerous theoretical investigations of shallow SSMs, how the depth of the SSM affects its expressiveness remains a crucial problem. In this paper, we systematically investigate the role of depth and width in deep linear SSMs, aiming to characterize how they influence the expressive capacity of the architecture. First, we rigorously prove that in the absence of parameter constraints, increasing depth and increasing width are generally equivalent, provided that the parameter count remains within the same order of magnitude. However, under the assumption that the parameter norms are constrained, the effects of depth and width differ significantly. We show that a shallow linear SSM with large parameter norms can be represented by a deep linear SSM with smaller norms using a constructive method. In particular, this demonstrates that deep SSMs are more capable of representing targets with large norms than shallow SSMs under norm constraints. Finally, we derive upper bounds on the minimal depth required for a deep linear SSM to represent a given shallow linear SSM under constrained parameter norms. We also validate our theoretical results with numerical experiments
+
+**Comment:** The paper investigates the expressivity of deep linear state-space models, which aligns with foundational research in model architecture by exploring the effects of depth and width.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 13. [Thought Anchors: Which LLM Reasoning Steps Matter?](https://arxiv.org/abs/2506.19143) <a id="link13"></a>
+
+**ArXiv ID:** 2506.19143
+
+**Authors:** Paul C. Bogdan, Uzay Macar, Neel Nanda, Arthur Conmy
+
+**Abstract:** Reasoning large language models have recently achieved state-of-the-art performance in many fields. However, their long-form chain-of-thought reasoning creates interpretability challenges as each generated token depends on all previous ones, making the computation harder to decompose. We argue that analyzing reasoning traces at the sentence level is a promising approach to understanding reasoning processes. We present three complementary attribution methods: (1) a black-box method measuring each sentence's counterfactual importance by comparing final answers across 100 rollouts conditioned on the model generating that sentence or one with a different meaning; (2) a white-box method of aggregating attention patterns between pairs of sentences, which identified ``broadcasting'' sentences that receive disproportionate attention from all future sentences via ``receiver'' attention heads; (3) a causal attribution method measuring logical connections between sentences by suppressing attention toward one sentence and measuring the effect on each future sentence's tokens. Each method provides evidence for the existence of thought anchors, reasoning steps that have outsized importance and that disproportionately influence the subsequent reasoning process. These thought anchors are typically planning or backtracking sentences. We provide an open-source tool (www.thought-anchors.com) for visualizing the outputs of our methods, and present a case study showing converging patterns across methods that map how a model performs multi-step reasoning. The consistency across methods demonstrates the potential of sentence-level analysis for a deeper understanding of reasoning models.
+
+**Comment:** The paper analyzes reasoning steps in large language models, focusing on interpretability and thought anchors, which aligns with foundational research in understanding LLM behavior.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 14. [Discrepancy-Aware Graph Mask Auto-Encoder](https://arxiv.org/abs/2506.19343) <a id="link14"></a>
+
+**ArXiv ID:** 2506.19343
+
+**Authors:** Ziyu Zheng, Yaming Yang, Ziyu Guan, Wei Zhao, Weigang Lu
+
+**Abstract:** Masked Graph Auto-Encoder, a powerful graph self-supervised training paradigm, has recently shown superior performance in graph representation learning. Existing works typically rely on node contextual information to recover the masked information. However, they fail to generalize well to heterophilic graphs where connected nodes may be not similar, because they focus only on capturing the neighborhood information and ignoring the discrepancy information between different nodes, resulting in indistinguishable node representations. In this paper, to address this issue, we propose a Discrepancy-Aware Graph Mask Auto-Encoder (DGMAE). It obtains more distinguishable node representations by reconstructing the discrepancy information of neighboring nodes during the masking process. We conduct extensive experiments on 17 widely-used benchmark datasets. The results show that our DGMAE can effectively preserve the discrepancies of nodes in low-dimensional space. Moreover, DGMAE significantly outperforms state-of-the-art graph self-supervised learning methods on three graph analytic including tasks node classification, node clustering, and graph classification, demonstrating its remarkable superiority. The code of DGMAE is available at https://github.com/zhengziyu77/DGMAE.
+
+**Comment:** The paper introduces a new graph auto-encoder focusing on discrepancy-aware representation learning, which aligns with the core topic of representation learning.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 15. [On the algorithmic construction of deep ReLU networks](https://arxiv.org/abs/2506.19104) <a id="link15"></a>
+
+**ArXiv ID:** 2506.19104
+
+**Authors:** Daan Huybrechs
+
+**Abstract:** It is difficult to describe in mathematical terms what a neural network trained on data represents. On the other hand, there is a growing mathematical understanding of what neural networks are in principle capable of representing. Feedforward neural networks using the ReLU activation function represent continuous and piecewise linear functions and can approximate many others. The study of their expressivity addresses the question: which ones? Contributing to the available answers, we take the perspective of a neural network as an algorithm. In this analogy, a neural network is programmed constructively, rather than trained from data. An interesting example is a sorting algorithm: we explicitly construct a neural network that sorts its inputs exactly, not approximately, and that, in a sense, has optimal computational complexity if the input dimension is large. Such constructed networks may have several billion parameters. We construct and analyze several other examples, both existing and new. We find that, in these examples, neural networks as algorithms are typically recursive and parallel. Compared to conventional algorithms, ReLU networks are restricted by having to be continuous. Moreover, the depth of recursion is limited by the depth of the network, with deep networks having superior properties over shallow ones.
+
+**Comment:** The paper explores the algorithmic construction of deep ReLU networks, providing insights into model architecture and expressivity, aligning with the core topic of model architecture.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 16. [Inference-Time Reward Hacking in Large Language Models](https://arxiv.org/abs/2506.19248) <a id="link16"></a>
+
+**ArXiv ID:** 2506.19248
+
+**Authors:** Hadi Khalaf, Claudio Mayrink Verdun, Alex Oesterling, Himabindu Lakkaraju, Flavio du Pin Calmon
+
+**Abstract:** A common paradigm to improve the performance of large language models is optimizing for a reward model. Reward models assign a numerical score to LLM outputs indicating, for example, which response would likely be preferred by a user or is most aligned with safety goals. However, reward models are never perfect. They inevitably function as proxies for complex desiderata such as correctness, helpfulness, and safety. By overoptimizing for a misspecified reward, we can subvert intended alignment goals and reduce overall performance -- a phenomenon commonly referred to as reward hacking. In this work, we characterize reward hacking in inference-time alignment and demonstrate when and how we can mitigate it by hedging on the proxy reward. We study this phenomenon under Best-of-$n$ (BoN) and Soft-Best-of-$n$ (SBoN), and we introduce Best-of-Poisson (BoP) that provides an efficient, near-exact approximation of the optimal reward-KL divergence policy at inference time. We show that the characteristic pattern of hacking as observed in practice (where the true reward first increases before declining) is an inevitable property of a broad class of inference-time mechanisms, including BoN and BoP. To counter this effect, hedging offers a tactical choice to avoid placing undue confidence in high but potentially misleading proxy reward signals. We introduce HedgeTune, an efficient algorithm to find the optimal inference-time parameter and avoid reward hacking. We demonstrate through experiments that hedging mitigates reward hacking and achieves superior distortion-reward tradeoffs with minimal computational overhead.
+
+**Comment:** The paper addresses reward hacking in LLMs, which is relevant to understanding LLM behavior and interpretability.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 17. [Tensor-Parallelism with Partially Synchronized Activations](https://arxiv.org/abs/2506.19645) <a id="link17"></a>
+
+**ArXiv ID:** 2506.19645
+
+**Authors:** Itay Lamprecht, Asaf Karnieli, Yair Hanani, Niv Giladi, Daniel Soudry
+
+**Abstract:** Training and inference of Large Language Models (LLMs) with tensor-parallelism requires substantial communication to synchronize activations. Our findings suggest that with a few minor adjustments to current practices, LLMs can be trained without fully synchronizing activations, reducing bandwidth demands. We name this "Communication-Aware Architecture for Tensor-parallelism" (CAAT-Net). We train 1B and 7B parameter CAAT-Net models, with a 50% reduction in tensor-parallel communication and no significant drop in pretraining accuracy. Furthermore, we demonstrate how CAAT-Net accelerates both training and inference workloads.
+
+**Comment:** The paper introduces a novel approach to tensor-parallelism in LLMs, which reduces communication overhead, aligning with model architecture and efficiency improvements.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 18. [Outlier-Safe Pre-Training for Robust 4-Bit Quantization of Large Language Models](https://arxiv.org/abs/2506.19697) <a id="link18"></a>
+
+**ArXiv ID:** 2506.19697
+
+**Authors:** Jungwoo Park, Taewhoo Lee, Chanwoong Yoon, Hyeon Hwang, Jaewoo Kang
+
+**Abstract:** Extreme activation outliers in Large Language Models (LLMs) critically degrade quantization performance, hindering efficient on-device deployment. While channel-wise operations and adaptive gradient scaling are recognized causes, practical mitigation remains challenging. We introduce Outlier-Safe Pre-Training (OSP), a practical guideline that proactively prevents outlier formation rather than relying on post-hoc mitigation. OSP combines three key innovations: (1) the Muon optimizer, eliminating privileged bases while maintaining training efficiency; (2) Single-Scale RMSNorm, preventing channel-wise amplification; and (3) a learnable embedding projection, redistributing activation magnitudes originating from embedding matrices. We validate OSP by training a 1.4B-parameter model on 1 trillion tokens, which is the first production-scale LLM trained without such outliers. Under aggressive 4-bit quantization, our OSP model achieves a 35.7 average score across 10 benchmarks (compared to 26.5 for an Adam-trained model), with only a 2% training overhead. Remarkably, OSP models exhibit near-zero excess kurtosis (0.04) compared to extreme values (1818.56) in standard models, fundamentally altering LLM quantization behavior. Our work demonstrates that outliers are not inherent to LLMs but are consequences of training strategies, paving the way for more efficient LLM deployment. The source code and pretrained checkpoints are available at https://github.com/dmis-lab/Outlier-Safe-Pre-Training.
+
+**Comment:** The paper focuses on pre-training strategies to improve quantization in LLMs, relevant to model compression and efficiency.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+# Paper Selection Prompt
+
+## System Prompt
+
+> You are a helpful paper reading assistant whose job is to read daily posts from ArXiv and identify a few papers that your friend will enjoy reading.
+> Your job is to carefully read the paper titles and abstracts below and find the ones that match the criteria below.
+
+## User Prompt
+
+> ## Instructions
+> 
+> Write the response in JSONL format with {ARXIVID, COMMENT, RELEVANCE, NOVELTY} on each line, one for each paper.
+> 
+> - ARXIVID: should be the ArXiv ID.
+> - COMMENT: should identify whether there is a criteria that match the paper very closely. These matches should not be based on general terms like "language modeling" or "advancements" and should specifically refer to a criterion. No need to mention the non-matching criteria.
+> - RELEVANCE: should be a score from 1-10.
+> - NOVELTY: should be a score from 1-10.
+> 
+> ## Scoring Criteria
+> 
+> > The "Relevance" score measures how closely the paper aligns with the core topics of the prompt.
+> > The "Novelty" score assesses the originality and impact of the paper.
+> > They are two **ORTHONORMAL** axes and **SHOULD NOT** be confused with each other.
+> 
+> ### Relevance Scoring
+> 
+> - Relevance 9-10 (Completely Relevant)
+>   - Focus: Fully aligned with core topics with no deviation, score the highest if contains relevant keywords in it.
+>   - Examples: Papers focused on foundational methods or theoretical research, whose titles contain topic keywords like "MoE".
+> 
+> - Relevance 7-8 (Relevant)
+>   - Focus: Retain a solid link to the main research area, though may touch on peripheral elements.
+>   - Examples: Papers research on the fundamental part of MoE through a less critical aspect like its behavior in GNN.
+> 
+> - Relevance 5-6 (Borderline)
+>   - Focus: Maintains a link to the core topic but also extends into at least one other domain/area beyond the primary focus.
+>   - Examples: Work referencing MoE centered on reinforcement learning.
+> 
+> - Relevance 3-4 (Irrelevant)
+>   - Focus: Largely outside our interests with no association to our topics.
+>   - Examples: Application-focused papers like using MoE to solve a problem in the real world.
+> 
+> - Relevance 1-2 (Ignore)
+>   - Focus: Purely unrelated to our topics. Completely a different domain.
+>   - **Exception**: If the paper hints at a cutting-edge, radically new direction that could eventually transform the primary domain, consider a score of 9–10 despite initial appearances. (Usually a very rare concept that belongs to the fundamental research)
+> 
+> ### Novelty Scoring
+> 
+> - Novelty 9-10 (Breakthrough)
+>   - Definition: Groundbreaking methods/theory introducing new directions or solving major challenges.
+>   - Examples: Entirely new paradigm for foundational models; a novel theory transforming representation learning.
+> 
+> - Novelty 7-8 (Improvements)
+>   - Definition: Substantial insights/enhancements, though not a full paradigm shift.
+>   - Examples: Modifications on existing methods yielding significantly better results.
+> 
+> - Novelty 5-6 (Borderline)
+>   - Definition: Incremental contributions with possible long-term benefits, not immediately transformative.
+>   - Examples: Moderately novel extension to an existing architecture; refining current methods without fundamentally altering them.
+> 
+> - Novelty 3-4 (Tangential)
+>   - Definition: Minor or domain-specific improvements with limited broader impact.
+>   - Examples: Slight modifications to known methods with strange motivation; purely engineering jobs like a new benchmark/dataset.
+> 
+> - Novelty 1-2 (Low)
+>   - Definition: Minimal originality, applying standard approaches without real innovation.
+>   - Examples: Using an off-the-shelf model without adding new insights; purely application-driven studies like finetuning a pretrained model using existing methods.
+> 
+> ## Papers
+> 
+> [PAPER LIST HERE]
+> 
+> ## Relevant Topics
+> 
+> Use the following relevance criteria to focus on foundational research. Keep **relevant** papers and filter out **irrelevant** ones. Avoid purely **application-driven** work.
+> 
+> 1. Representation Learning
+>    - Relevant: Insights into how deep networks encode information, feature/dictionary learning, sparse/contrastive methods, training dynamics in neural networks.
+>    - Irrelevant: Standard applications of known techniques lacking new theoretical or methodological contributions.
+> 
+> 2. Model Architecture
+>    - Relevant: Mixture-of-Experts (MoE), Transformers, Conditional/Dynamic Networks, Autoencoders, analysis on existing architectures (like encoder-decoder), or other architectural innovations.
+>    - Irrelevant: Merely using existing architectures for a certain task without insights into the structure themselves.
+> 
+> 3. Model Compression
+>    - Relevant: Sparsity, pruning, quantization, low-rank approaches, KV cache, or other algorithmic/theoretical efficiency breakthroughs.
+>    - Irrelevant: Straightforward applications of existing compression methods to new tasks.
+> 
+> 4. Large Language Models (LLMs)
+>    - Relevant: Major breakthroughs in pretraining or architecture, theoretical insights into LLM behavior/interpretability.
+>    - Irrelevant: Domain-specific usage (e.g., translation, jail-breaking), finetuning or inference tricks (e.g., instruction tuning, chain-of-thoughts, data mixing), or empirical dataset/benchmark studies and text-level analysis (e.g. hallucination, reasoning, safety).
+> 
+> 5. AI for Science
+>    - Relevant: Foundational research in molecular/protein modeling, new generative paradigms, or significant architecture-level innovations.
+>    - Irrelevant: Conventional, domain-specific applications without new theoretical perspectives.
+> 
+> 6. Emerging Trends
+>    - Relevant: Cutting-edge theoretical work challenging established assumptions or introducing broad new paradigms.
+>    - Irrelevant: Incremental improvements or trend-following without novel insights.
+> 
+> **Keywords:**
+> 
+> - Relevant: Mixture of Experts (MoE), Representation Learning, Compression/Efficiency, Sparse/Sparsity, Pruning, Quantization, Low-rank, Foundation Model, etc.
+> - Irrelevant: Reinforcement Learning, Transfer Learning, Federated Learning, Online Learning, Diffusion Models, etc.
+> - Application: Image Segmentation, Medical Imaging, 3D Vision, Video Understanding, Information Retrieval, Summarization, Recommendation Systems, Machine Translation, Speech Recognition, Signal Processing, Spatial/Temporal Modeling, Time Series, Knowledge Graph, etc.

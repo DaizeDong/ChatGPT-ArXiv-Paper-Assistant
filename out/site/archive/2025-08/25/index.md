@@ -1,0 +1,484 @@
+<div style="display: flex; align-items: flex-start; justify-content: space-between; width: 100%;"><div style="width: 33.33%; text-align: left;"><a href="../22"><img src="../../../assets/nav/day/2025-08-25-prev.svg" alt="Previous Day 2025-08-22"></a></div><div style="width: 33.33%; text-align: center;"><a href=".."><img src="../../../assets/nav/day/2025-08-25-center.svg" alt="Monthly Overview 2025-08"></a></div><div style="width: 33.33%; text-align: right;"><a href="../26"><img src="../../../assets/nav/day/2025-08-25-next.svg" alt="Next Day 2025-08-26"></a></div></div>
+
+# Personalized Daily ArXiv Papers 2025-08-25
+
+| *[gpt-4o]*   | Prompt   | Completion   | Total   |
+|:------------:|:--------:|:------------:|:-------:|
+| **Token**    | 31443    | 3336         | 34779   |
+| **Cost**     | $0.08    | $0.03        | $0.11   |
+
+Total arXiv papers: 433
+
+Total scanned papers: 273
+
+Total relevant papers: 20
+
+**Table of contents with paper titles:**
+
+1. [From Confidence to Collapse in LLM Factual Robustness](#user-content-link1)
+**Authors:** Alina Fastowski, Bardh Prenkaj, Gjergji Kasneci
+
+2. [TPLA: Tensor Parallel Latent Attention for Efficient Disaggregated Prefill \& Decode Inference](#user-content-link2)
+**Authors:** Xiaojuan Tang, Fanxu Meng, Pingzhi Tang, Yuxuan Wang, Di Yin, Xing Sun, Muhan Zhang
+
+3. [CommonKV: Compressing KV Cache with Cross-layer Parameter Sharing](#user-content-link3)
+**Authors:** Yixuan Wang, Haoyu Qiao, Lujun Li, Qingfu Zhu, Wanxiang Che
+
+4. [Jet-Nemotron: Efficient Language Model with Post Neural Architecture Search](#user-content-link4)
+**Authors:** Yuxian Gu, Qinghao Hu, Shang Yang, Haocheng Xi, Junyu Chen, Song Han, Han Cai
+
+5. [Z-Pruner: Post-Training Pruning of Large Language Models for Efficiency without Retraining](#user-content-link5)
+**Authors:** Samiul Basir Bhuiyan, Md. Sazzad Hossain Adib, Mohammed Aman Bhuiyan, Muhammad Rafsan Kabir, Moshiur Farazi, Shafin Rahman, Nabeel Mohammed
+
+6. [On Task Vectors and Gradients](#user-content-link6)
+**Authors:** Luca Zhou, Daniele Solombrino, Donato Crisostomi, Maria Sofia Bucarelli, Giuseppe Alessio D'Inverno, Fabrizio Silvestri, Emanuele Rodol\`a
+
+7. [Scalable Equilibrium Propagation via Intermediate Error Signals for Deep Convolutional CRNNs](#user-content-link7)
+**Authors:** Jiaqi Lin, Malyaban Bal, Abhronil Sengupta
+
+8. [Closer to Reality: Practical Semi-Supervised Federated Learning for Foundation Model Adaptation](#user-content-link8)
+**Authors:** Guangyu Sun, Jingtao Li, Weiming Zhuang, Chen Chen, Chen Chen, Lingjuan Lyu
+
+9. [SCOPE: A Generative Approach for LLM Prompt Compression](#user-content-link9)
+**Authors:** Tinghui Zhang, Yifan Wang, Daisy Zhe Wang
+
+10. [GEM: A Scale-Aware and Distribution-Sensitive Sparse Fine-Tuning Framework for Effective Downstream Adaptation](#user-content-link10)
+**Authors:** Sungmin Kang, Jisoo Kim, Salman Avestimehr, Sunwoo Lee
+
+11. [Tessellation Groups, Harmonic Analysis on Non-compact Symmetric Spaces and the Heat Kernel in view of Cartan Convolutional Neural Networks](#user-content-link11)
+**Authors:** Pietro Fr\'e, Federico Milanesio, Marcelo Oyarzo, Matteo Santoro, Mario Trigiante
+
+12. [Transforming Causality: Transformer-Based Temporal Causal Discovery with Prior Knowledge Integration](#user-content-link12)
+**Authors:** Jihua Huang, Yi Yao, Ajay Divakaran
+
+13. [SpecVLM: Enhancing Speculative Decoding of Video LLMs via Verifier-Guided Token Pruning](#user-content-link13)
+**Authors:** Yicheng Ji, Jun Zhang, Heming Xia, Jinpeng Chen, Lidan Shou, Gang Chen, Huan Li
+
+14. [Low-dimensional embeddings of high-dimensional data](#user-content-link14)
+**Authors:** Cyril de Bodt, Alex Diaz-Papkovich, Michael Bleher, Kerstin Bunte, Corinna Coupette, Sebastian Damrich, Enrique Fita Sanmartin, Fred A. Hamprecht, Em\H{o}ke-\'Agnes Horv\'at, Dhruv Kohli, Smita Krishnaswamy, John A. Lee, Boudewijn P. F. Lelieveldt, Leland McInnes, Ian T. Nabney, Maximilian Noichl, Pavlin G. Poli\v{c}ar, Bastian Rieck, Guy Wolf, Gal Mishne, Dmitry Kobak
+
+15. [Representation Learning with Adaptive Superpixel Coding](#user-content-link15)
+**Authors:** Mahmoud Khalil, Ahmad Khalil, Alioune Ngom
+
+16. [Interpretable Kernels](#user-content-link16)
+**Authors:** Patrick J. F. Groenen, Michael Greenacre
+
+17. [Lean Meets Theoretical Computer Science: Scalable Synthesis of Theorem Proving Challenges in Formal-Informal Pairs](#user-content-link17)
+**Authors:** Terry Jingchen Zhang, Wenyuan Jiang, Rongchuan Liu, Yisong Wang, Junran Yang, Ning Wang, Nicole Ni, Yinya Huang, Mrinmaya Sachan
+
+18. [Generative Foundation Model for Structured and Unstructured Electronic Health Records](#user-content-link18)
+**Authors:** Sonish Sivarajkumar, Hang Zhang, Yuelyu Ji, Maneesh Bilalpur, Xizhi Wu, Chenyu Li, Min Gu Kwak, Shyam Visweswaran, Yanshan Wang
+
+19. [SDEC: Semantic Deep Embedded Clustering](#user-content-link19)
+**Authors:** Mohammad Wali Ur Rahman, Ric Nevarez, Lamia Tasnim Mim, Salim Hariri
+
+20. [HyperFlexis: Joint Design of Algorithms and Systems for Multi-SLO Serving and Fast Scaling](#user-content-link20)
+**Authors:** Zahra Yousefijamarani, Xinglu Wang, Qian Wang, Morgan Lindsay Heisler, Taha Shabani, Niloofar Gholipour, Parham Yassini, Hong Chang, Kan Chen, Qiantao Zhang, Xiaolong Bai, Jiannan Wang, Ying Xiong, Yong Zhang, Zhenan Fan
+
+---
+
+## 1. [From Confidence to Collapse in LLM Factual Robustness](https://arxiv.org/abs/2508.16267) <a id="link1"></a>
+
+**ArXiv ID:** 2508.16267
+
+**Authors:** Alina Fastowski, Bardh Prenkaj, Gjergji Kasneci
+
+**Abstract:** Ensuring the robustness of factual knowledge in LLMs is critical for reliable applications in tasks such as question answering and reasoning. However, existing evaluation methods predominantly focus on performance-based metrics, often investigating from the perspective of prompt perturbations, which captures only the externally triggered side of knowledge robustness. To bridge this gap, we introduce a principled approach to measure factual robustness from the perspective of the generation process by analyzing token distribution entropy in combination with temperature scaling sensitivity. These two factors build the Factual Robustness Score (FRS), a novel metric which quantifies the stability of a fact against perturbations in decoding conditions, given its initial uncertainty. To validate our approach, we conduct extensive experiments on 5 LLMs across 3 closed-book QA datasets (SQuAD, TriviaQA, and HotpotQA). We show that factual robustness varies significantly -- smaller models report an FRS of $0.76$, larger ones $0.93$ -- with accuracy degrading by ~$60\%$ under increased uncertainty. These insights demonstrate how entropy and temperature scaling impact factual accuracy, and lay a foundation for developing more robust knowledge retention and retrieval in future models.
+
+**Comment:** The paper introduces a novel metric for evaluating factual robustness in LLMs, which aligns with theoretical insights into LLM behavior.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 2. [TPLA: Tensor Parallel Latent Attention for Efficient Disaggregated Prefill \& Decode Inference](https://arxiv.org/abs/2508.15881) <a id="link2"></a>
+
+**ArXiv ID:** 2508.15881
+
+**Authors:** Xiaojuan Tang, Fanxu Meng, Pingzhi Tang, Yuxuan Wang, Di Yin, Xing Sun, Muhan Zhang
+
+**Abstract:** Multi-Head Latent Attention (MLA), introduced in DeepSeek-V2, compresses key-value states into a low-rank latent vector, caching only this vector to reduce memory. In tensor parallelism (TP), however, attention heads are computed across multiple devices, and each device must load the full cache, eroding the advantage of MLA over Grouped Query Attention (GQA). We propose Tensor-Parallel Latent Attention (TPLA): a scheme that partitions both the latent representation and each head's input dimension across devices, performs attention independently per shard, and then combines results with an all-reduce. TPLA preserves the benefits of a compressed KV cache while unlocking TP efficiency. Unlike Grouped Latent Attention (GLA), every head in TPLA still leverages the full latent representation, maintaining stronger representational capacity. TPLA is drop-in compatible with models pre-trained using MLA: it supports MLA-style prefilling and enables efficient tensor-parallel decoding without retraining. Applying simple orthogonal transforms -- e.g., the Hadamard transform or PCA -- before TP slicing further mitigates cross-shard interference, yielding minimal accuracy degradation. By reducing the per-device KV cache for DeepSeek-V3 and Kimi-K2, we achieve 1.79x and 1.93x speedups, respectively, at a 32K-token context length while maintaining performance on commonsense and LongBench benchmarks. TPLA can be implemented with FlashAttention-3, enabling practical end-to-end acceleration.
+
+**Comment:** The paper introduces Tensor-Parallel Latent Attention, focusing on model compression and efficiency improvements, relevant to model compression.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 3. [CommonKV: Compressing KV Cache with Cross-layer Parameter Sharing](https://arxiv.org/abs/2508.16134) <a id="link3"></a>
+
+**ArXiv ID:** 2508.16134
+
+**Authors:** Yixuan Wang, Haoyu Qiao, Lujun Li, Qingfu Zhu, Wanxiang Che
+
+**Abstract:** Large Language Models (LLMs) confront significant memory challenges due to the escalating KV cache with increasing sequence length. As a crucial technique, existing cross-layer KV cache sharing methods either necessitate modified model architectures with subsequent pre-training or incur significant performance degradation at high compression rates. To mitigate these challenges, we propose CommonKV, a training-free method for cross-layer KV cache compression through adjacent parameters sharing. Inspired by the high similarity observed in cross-layer hidden states, we utilize Singular Value Decomposition (SVD) to achieve weight sharing across adjacent parameters, resulting in a more easily mergeable latent KV cache. Furthermore, we also introduce an adaptive budget allocation strategy. It dynamically assigns compression budgets based on cosine similarity, ensuring that dissimilar caches are not over-compressed. Experiments across multiple backbone models and benchmarks including LongBench and Ruler demonstrate that the proposed method consistently outperforms existing low-rank and cross-layer approaches at various compression ratios. Moreover, we find that the benefits of CommonKV are orthogonal to other quantization and eviction methods. By integrating these approaches, we can ultimately achieve a 98\% compression ratio without significant performance loss.
+
+**Comment:** The paper introduces CommonKV, a novel method for compressing KV cache in LLMs using cross-layer parameter sharing and SVD, which aligns with the model compression criterion.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 4. [Jet-Nemotron: Efficient Language Model with Post Neural Architecture Search](https://arxiv.org/abs/2508.15884) <a id="link4"></a>
+
+**ArXiv ID:** 2508.15884
+
+**Authors:** Yuxian Gu, Qinghao Hu, Shang Yang, Haocheng Xi, Junyu Chen, Song Han, Han Cai
+
+**Abstract:** We present Jet-Nemotron, a new family of hybrid-architecture language models, which matches or exceeds the accuracy of leading full-attention models while significantly improving generation throughput. Jet-Nemotron is developed using Post Neural Architecture Search (PostNAS), a novel neural architecture exploration pipeline that enables efficient model design. Unlike prior approaches, PostNAS begins with a pre-trained full-attention model and freezes its MLP weights, allowing efficient exploration of attention block designs. The pipeline includes four key components: (1) learning optimal full-attention layer placement and elimination, (2) linear attention block selection, (3) designing new attention blocks, and (4) performing hardware-aware hyperparameter search. Our Jet-Nemotron-2B model achieves comparable or superior accuracy to Qwen3, Qwen2.5, Gemma3, and Llama3.2 across a comprehensive suite of benchmarks while delivering up to 53.6x generation throughput speedup and 6.1x prefilling speedup. It also achieves higher accuracy on MMLU and MMLU-Pro than recent advanced MoE full-attention models, such as DeepSeek-V3-Small and Moonlight, despite their larger scale with 15B total and 2.2B activated parameters.
+
+**Comment:** Jet-Nemotron presents a new hybrid-architecture language model developed using a novel neural architecture exploration pipeline, which aligns with the model architecture criterion.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 5. [Z-Pruner: Post-Training Pruning of Large Language Models for Efficiency without Retraining](https://arxiv.org/abs/2508.15828) <a id="link5"></a>
+
+**ArXiv ID:** 2508.15828
+
+**Authors:** Samiul Basir Bhuiyan, Md. Sazzad Hossain Adib, Mohammed Aman Bhuiyan, Muhammad Rafsan Kabir, Moshiur Farazi, Shafin Rahman, Nabeel Mohammed
+
+**Abstract:** Large language models (LLMs) have rapidly advanced in recent years, achieving remarkable performance across a wide range of natural language processing tasks. However, this progress has come at the cost of increasingly large model sizes, which pose significant challenges for deployment, scalability, and energy efficiency. To address these limitations, post-training pruning has emerged as a promising approach for reducing model size and inference latency without the need for retraining. Despite these advantages, many existing pruning methods result in substantial performance degradation or require computationally expensive fine-tuning. In this work, we introduce Z-Pruner, a novel post-training pruning method designed to induce sparsity in pretrained LLMs without any retraining. Unlike conventional approaches, Z-Pruner leverages both weight update magnitudes and activation patterns to identify and eliminate redundant parameters more effectively. Our method is model-agnostic, efficient, and easy to implement. We evaluate Z-Pruner using multiple widely-used LLM architectures, including LLaMA-2, LLaMA-3, and OPT, across a diverse set of standard language benchmarks. Experimental results demonstrate that Z-Pruner surpasses state-of-the-art pruning methods that require intensive weight updates. Specifically, Z-Pruner achieves the lowest perplexity scores and the highest overall average score for zero-shot accuracy. We have made the corresponding codes publicly available at https://github.com/sazzadadib/Z-Pruner.
+
+**Comment:** Z-Pruner introduces a novel post-training pruning method for LLMs, focusing on inducing sparsity without retraining, which aligns with the model compression criterion.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 6. [On Task Vectors and Gradients](https://arxiv.org/abs/2508.16082) <a id="link6"></a>
+
+**ArXiv ID:** 2508.16082
+
+**Authors:** Luca Zhou, Daniele Solombrino, Donato Crisostomi, Maria Sofia Bucarelli, Giuseppe Alessio D'Inverno, Fabrizio Silvestri, Emanuele Rodol\`a
+
+**Abstract:** Task arithmetic has emerged as a simple yet powerful technique for model merging, enabling the combination of multiple finetuned models into one. Despite its empirical success, a clear theoretical explanation of why and when it works is lacking. This paper provides a rigorous theoretical foundation for task arithmetic by establishing a connection between task vectors and gradients of the task losses. We show that under standard gradient descent, a task vector generated from one epoch of finetuning is exactly equivalent to the negative gradient of the loss, scaled by the learning rate. For the practical multi-epoch setting, we prove that this equivalence holds approximately, with a second-order error term that we explicitly bound for feed-forward networks. Our empirical analysis across seven vision benchmarks corroborates our theory, demonstrating that the first-epoch gradient dominates the finetuning trajectory in both norm and direction. A key implication is that merging models finetuned for only a single epoch often yields performance comparable to merging fully converged models. These findings reframe task arithmetic as a form of approximate multitask learning, providing a clear rationale for its effectiveness and highlighting the critical role of early training dynamics in model merging.
+
+**Comment:** The paper provides a theoretical foundation for task arithmetic, which is relevant to representation learning and offers substantial insights into training dynamics.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 7. [Scalable Equilibrium Propagation via Intermediate Error Signals for Deep Convolutional CRNNs](https://arxiv.org/abs/2508.15989) <a id="link7"></a>
+
+**ArXiv ID:** 2508.15989
+
+**Authors:** Jiaqi Lin, Malyaban Bal, Abhronil Sengupta
+
+**Abstract:** Equilibrium Propagation (EP) is a biologically inspired local learning rule first proposed for convergent recurrent neural networks (CRNNs), in which synaptic updates depend only on neuron states from two distinct phases. EP estimates gradients that closely align with those computed by Backpropagation Through Time (BPTT) while significantly reducing computational demands, positioning it as a potential candidate for on-chip training in neuromorphic architectures. However, prior studies on EP have been constrained to shallow architectures, as deeper networks suffer from the vanishing gradient problem, leading to convergence difficulties in both energy minimization and gradient computation. To address the vanishing gradient problem in deep EP networks, we propose a novel EP framework that incorporates intermediate error signals to enhance information flow and convergence of neuron dynamics. This is the first work to integrate knowledge distillation and local error signals into EP, enabling the training of significantly deeper architectures. Our proposed approach achieves state-of-the-art performance on the CIFAR-10 and CIFAR-100 datasets, showcasing its scalability on deep VGG architectures. These results represent a significant advancement in the scalability of EP, paving the way for its application in real-world systems.
+
+**Comment:** The paper presents a novel framework for Equilibrium Propagation in deep networks, addressing the vanishing gradient problem and enhancing scalability, which aligns with representation learning and training dynamics in neural networks.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 8. [Closer to Reality: Practical Semi-Supervised Federated Learning for Foundation Model Adaptation](https://arxiv.org/abs/2508.16568) <a id="link8"></a>
+
+**ArXiv ID:** 2508.16568
+
+**Authors:** Guangyu Sun, Jingtao Li, Weiming Zhuang, Chen Chen, Chen Chen, Lingjuan Lyu
+
+**Abstract:** Foundation models (FMs) exhibit remarkable generalization but require adaptation to downstream tasks, particularly in privacy-sensitive applications. Due to data privacy regulations, cloud-based FMs cannot directly access private edge data, limiting their adaptation. Federated learning (FL) provides a privacy-aware alternative, but existing FL approaches overlook the constraints imposed by edge devices -- namely, limited computational resources and the scarcity of labeled data. To address these challenges, we introduce Practical Semi-Supervised Federated Learning (PSSFL), where edge devices hold only unlabeled, low-resolution data, while the server has limited labeled, high-resolution data. In this setting, we propose the Federated Mixture of Experts (FedMox), a novel framework that enhances FM adaptation in FL. FedMox tackles computational and resolution mismatch challenges via a sparse Mixture-of-Experts architecture, employing a spatial router to align features across resolutions and a Soft-Mixture strategy to stabilize semi-supervised learning. We take object detection as a case study, and experiments on real-world autonomous driving datasets demonstrate that FedMox effectively adapts FMs under PSSFL, significantly improving performance with constrained memory costs on edge devices. Our work paves the way for scalable and privacy-preserving FM adaptation in federated scenarios.
+
+**Comment:** The paper introduces a novel framework, FedMox, which uses a sparse Mixture-of-Experts architecture for federated learning, aligning with the Model Architecture and Model Compression criteria.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 9. [SCOPE: A Generative Approach for LLM Prompt Compression](https://arxiv.org/abs/2508.15813) <a id="link9"></a>
+
+**ArXiv ID:** 2508.15813
+
+**Authors:** Tinghui Zhang, Yifan Wang, Daisy Zhe Wang
+
+**Abstract:** Prompt compression methods enhance the efficiency of Large Language Models (LLMs) and minimize the cost by reducing the length of input context. The goal of prompt compression is to shorten the LLM prompt while maintaining a high generation quality. However, existing solutions, mainly based on token removal, face challenges such as information loss and structural incoherence, like missing grammar elements in a sentence, or incomplete word phrases after token removal. Such challenges limit the final generation quality of LLM.   To overcome these limitations, we present a novel generative prompt compression method. Unlike the existing token removal methods, our method centers at a chunking-and-summarization mechanism. Specifically, our method splits prompt into semantically coherent chunks and rewrites the chunks to be more concise. The chunks are reconstructed into meaningful prompt finally. We design several optimization techniques for the mechanism, including optimized semantic chunking, outlier chunk handling, dynamic compression ratio, compression prioritization, and keyword maintaining. These techniques effectively improve the identifying and preserving of critical information and coherence among texts, as well as providing finer grind control of the compression ratio. We conduct extensive evaluation on question-answering and summarization tasks, with datasets covering multiple different domain. The evaluation shows our method achieves a significantly better compression quality, and higher stability than the state-of-the-art methods, especially under high compression ratio, which proves the effectiveness and practicality of our method.
+
+**Comment:** The paper introduces a generative approach for prompt compression in LLMs, focusing on efficiency and coherence, which aligns with model compression and LLM efficiency.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 10. [GEM: A Scale-Aware and Distribution-Sensitive Sparse Fine-Tuning Framework for Effective Downstream Adaptation](https://arxiv.org/abs/2508.16191) <a id="link10"></a>
+
+**ArXiv ID:** 2508.16191
+
+**Authors:** Sungmin Kang, Jisoo Kim, Salman Avestimehr, Sunwoo Lee
+
+**Abstract:** Parameter-efficient fine-tuning (PEFT) has become a popular way to adapt large pre-trained models to new tasks. Most PEFT methods update only a small subset of parameters while freezing the rest, avoiding redundant computation. As they maximize the absolute size of the updates without regard to the parameters' original scale, the resulting changes in model behavior can be minimal. In contrast, we maximize updates relative to each parameter's scale, yielding more meaningful downstream adaptation. We propose Gradient-to-Weight Ratio and Entropy-guided Masking (GEM), a parameter scale-aware, distribution-sensitive sparse fine-tuning framework. GEM prioritizes parameters whose updates are significant in proportion to their initial pre-trained values. It also adaptively determines how many parameters to tune at each layer based on the entropy of parameter values, thereby making the most effective use of the computational budget in PEFT. Our empirical study demonstrates the efficacy of GEM on both general-domain tasks (GLUE and SuperGLUE) and domain-specific tasks (GSM8k and MBPP), achieving up to a 1.6% improvement in fine-tuning accuracy over full fine-tuning while updating only 0.1% of model parameters.
+
+**Comment:** The paper proposes a sparse fine-tuning framework that is scale-aware and distribution-sensitive, aligning with model compression and efficiency breakthroughs.
+
+**Relevance:** 9
+**Novelty:** 7
+
+---
+
+## 11. [Tessellation Groups, Harmonic Analysis on Non-compact Symmetric Spaces and the Heat Kernel in view of Cartan Convolutional Neural Networks](https://arxiv.org/abs/2508.16015) <a id="link11"></a>
+
+**ArXiv ID:** 2508.16015
+
+**Authors:** Pietro Fr\'e, Federico Milanesio, Marcelo Oyarzo, Matteo Santoro, Mario Trigiante
+
+**Abstract:** In this paper, we continue the development of the Cartan neural networks programme, launched with three previous publications, by focusing on some mathematical foundational aspects that we deem necessary for our next steps forward. The mathematical and conceptual results are diverse and span various mathematical fields, but the inspiring motivation is unified. The aim is to introduce layers that are mathematically modeled as non-compact symmetric spaces, each mapped onto the next one by solvable group homomorphisms. In particular, in the spirit of Convolutional neural networks, we have introduced the notion of Tits Satake (TS) vector bundles where the TS submanifold is the base space. Within this framework, the tiling of the base manifold, the representation of bundle sections using harmonics, and the need for a general theory of separator walls motivated a series of mathematical investigations that produced both definite and partial results. Specifically, we present the group theoretical construction of the separators for all non-compact symmetric spaces $\mathrm{U/H}$, as well as of the $\Delta_{8,3,2}$ tiling group and its normal Fuchsian subgroups, respectively yielding the uniformization of the genus $g=3$ Fermat Quartic and of the genus $g=2$ Bolza surface. The quotient automorphic groups are studied. Furthermore, we found a new representation of the Laplacian Green function and the Heat Kernel on Hyperbolic Spaces $\mathbb{H}^{n}$, and a setup for the construction of the harmonic functions in terms of the spinor representation of pseudo-orthogonal groups. Finally, to obtain an explicit construction of the Laplacian eigenfunctions on the Bolza Riemann surface, we propose and conjecture a new strategy relying on the Abel-Jacobi map of the Riemann surface to its Jacobian variety and the Siegel Theta function.
+
+**Comment:** The paper discusses mathematical foundations for Cartan Convolutional Neural Networks, which is a novel architectural concept, aligning with model architecture innovations.
+
+**Relevance:** 8
+**Novelty:** 8
+
+---
+
+## 12. [Transforming Causality: Transformer-Based Temporal Causal Discovery with Prior Knowledge Integration](https://arxiv.org/abs/2508.15928) <a id="link12"></a>
+
+**ArXiv ID:** 2508.15928
+
+**Authors:** Jihua Huang, Yi Yao, Ajay Divakaran
+
+**Abstract:** We introduce a novel framework for temporal causal discovery and inference that addresses two key challenges: complex nonlinear dependencies and spurious correlations. Our approach employs a multi-layer Transformer-based time-series forecaster to capture long-range, nonlinear temporal relationships among variables. After training, we extract the underlying causal structure and associated time lags from the forecaster using gradient-based analysis, enabling the construction of a causal graph. To mitigate the impact of spurious causal relationships, we introduce a prior knowledge integration mechanism based on attention masking, which consistently enforces user-excluded causal links across multiple Transformer layers. Extensive experiments show that our method significantly outperforms other state-of-the-art approaches, achieving a 12.8% improvement in F1-score for causal discovery and 98.9% accuracy in estimating causal lags.
+
+**Comment:** The paper presents a Transformer-based framework for temporal causal discovery, focusing on architecture-level innovations.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 13. [SpecVLM: Enhancing Speculative Decoding of Video LLMs via Verifier-Guided Token Pruning](https://arxiv.org/abs/2508.16201) <a id="link13"></a>
+
+**ArXiv ID:** 2508.16201
+
+**Authors:** Yicheng Ji, Jun Zhang, Heming Xia, Jinpeng Chen, Lidan Shou, Gang Chen, Huan Li
+
+**Abstract:** Video large language models (Vid-LLMs) have shown strong capabilities in understanding video content. However, their reliance on dense video token representations introduces substantial memory and computational overhead in both prefilling and decoding. To mitigate the information loss of recent video token reduction methods and accelerate the decoding stage of Vid-LLMs losslessly, we introduce SpecVLM, a training-free speculative decoding (SD) framework tailored for Vid-LLMs that incorporates staged video token pruning. Building on our novel finding that the draft model's speculation exhibits low sensitivity to video token pruning, SpecVLM prunes up to 90% of video tokens, enabling efficient speculation without sacrificing accuracy. To achieve this, it performs a two-stage pruning process: Stage I selects highly informative tokens guided by attention signals from the verifier (target model), while Stage II prunes remaining redundant ones in a spatially uniform manner. Extensive experiments on four video understanding benchmarks demonstrate the effectiveness and robustness of SpecVLM, which achieves up to 2.68$\times$ decoding speedup for LLaVA-OneVision-72B and 2.11$\times$ speedup for Qwen2.5-VL-32B.
+
+**Comment:** The paper introduces a speculative decoding framework for video LLMs, focusing on efficiency improvements through token pruning, relevant to model compression.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 14. [Low-dimensional embeddings of high-dimensional data](https://arxiv.org/abs/2508.15929) <a id="link14"></a>
+
+**ArXiv ID:** 2508.15929
+
+**Authors:** Cyril de Bodt, Alex Diaz-Papkovich, Michael Bleher, Kerstin Bunte, Corinna Coupette, Sebastian Damrich, Enrique Fita Sanmartin, Fred A. Hamprecht, Em\H{o}ke-\'Agnes Horv\'at, Dhruv Kohli, Smita Krishnaswamy, John A. Lee, Boudewijn P. F. Lelieveldt, Leland McInnes, Ian T. Nabney, Maximilian Noichl, Pavlin G. Poli\v{c}ar, Bastian Rieck, Guy Wolf, Gal Mishne, Dmitry Kobak
+
+**Abstract:** Large collections of high-dimensional data have become nearly ubiquitous across many academic fields and application domains, ranging from biology to the humanities. Since working directly with high-dimensional data poses challenges, the demand for algorithms that create low-dimensional representations, or embeddings, for data visualization, exploration, and analysis is now greater than ever. In recent years, numerous embedding algorithms have been developed, and their usage has become widespread in research and industry. This surge of interest has resulted in a large and fragmented research field that faces technical challenges alongside fundamental debates, and it has left practitioners without clear guidance on how to effectively employ existing methods. Aiming to increase coherence and facilitate future work, in this review we provide a detailed and critical overview of recent developments, derive a list of best practices for creating and using low-dimensional embeddings, evaluate popular approaches on a variety of datasets, and discuss the remaining challenges and open problems in the field.
+
+**Comment:** The paper provides a comprehensive review of low-dimensional embeddings, which is relevant to representation learning as it discusses foundational methods for data visualization and analysis.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 15. [Representation Learning with Adaptive Superpixel Coding](https://arxiv.org/abs/2508.15959) <a id="link15"></a>
+
+**ArXiv ID:** 2508.15959
+
+**Authors:** Mahmoud Khalil, Ahmad Khalil, Alioune Ngom
+
+**Abstract:** Deep learning vision models are typically tailored for specific modalities and often rely on domain-specific assumptions, such as the grid structures used by nearly all existing vision models. In this work, we propose a self-supervised model based on Transformers, which we call Adaptive Superpixel Coding (ASC). The key insight of our model is to overcome the limitations of traditional Vision Transformers, which depend on fixed-size and non-adaptive patch partitioning. Instead, ASC employs adaptive superpixel layers that dynamically adjust to the underlying image content. We analyze key properties of the approach that make it effective, and find that our method outperforms widely-used alternatives on standard image downstream task benchmarks.
+
+**Comment:** The paper proposes a self-supervised model based on Transformers with adaptive superpixel coding, which aligns with the core topic of model architecture innovation.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 16. [Interpretable Kernels](https://arxiv.org/abs/2508.15932) <a id="link16"></a>
+
+**ArXiv ID:** 2508.15932
+
+**Authors:** Patrick J. F. Groenen, Michael Greenacre
+
+**Abstract:** The use of kernels for nonlinear prediction is widespread in machine learning. They have been popularized in support vector machines and used in kernel ridge regression, amongst others. Kernel methods share three aspects. First, instead of the original matrix of predictor variables or features, each observation is mapped into an enlarged feature space. Second, a ridge penalty term is used to shrink the coefficients on the features in the enlarged feature space. Third, the solution is not obtained in this enlarged feature space, but through solving a dual problem in the observation space. A major drawback in the present use of kernels is that the interpretation in terms of the original features is lost. In this paper, we argue that in the case of a wide matrix of features, where there are more features than observations, the kernel solution can be re-expressed in terms of a linear combination of the original matrix of features and a ridge penalty that involves a special metric. Consequently, the exact same predicted values can be obtained as a weighted linear combination of the features in the usual manner and thus can be interpreted. In the case where the number of features is less than the number of observations, we discuss a least-squares approximation of the kernel matrix that still allows the interpretation in terms of a linear combination. It is shown that these results hold for any function of a linear combination that minimizes the coefficients and has a ridge penalty on these coefficients, such as in kernel logistic regression and kernel Poisson regression. This work makes a contribution to interpretable artificial intelligence.
+
+**Comment:** The paper discusses interpretable kernels, contributing to interpretable AI by re-expressing kernel solutions in terms of original features, which aligns with representation learning.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 17. [Lean Meets Theoretical Computer Science: Scalable Synthesis of Theorem Proving Challenges in Formal-Informal Pairs](https://arxiv.org/abs/2508.15878) <a id="link17"></a>
+
+**ArXiv ID:** 2508.15878
+
+**Authors:** Terry Jingchen Zhang, Wenyuan Jiang, Rongchuan Liu, Yisong Wang, Junran Yang, Ning Wang, Nicole Ni, Yinya Huang, Mrinmaya Sachan
+
+**Abstract:** Formal theorem proving (FTP) has emerged as a critical foundation for evaluating the reasoning capabilities of large language models, enabling automated verification of mathematical proofs at scale. However, progress has been constrained by limited datasets due to the high cost of manual curation and the scarcity of challenging problems with verified formal-informal correspondences. We propose leveraging theoretical computer science (TCS) as a scalable source of rigorous proof problems, where algorithmic definitions enable automated generation of arbitrarily many challenging theorem-proof pairs. We demonstrate this approach on two TCS domains: Busy Beaver problems, which involve proving bounds on Turing machine halting behavior, and Mixed Boolean Arithmetic problems, which combine logical and arithmetic reasoning. Our framework automatically synthesizes problems with parallel formal (Lean4) and informal (Markdown) specifications, creating a scalable pipeline for generating verified proof challenges. Evaluation on frontier models reveals substantial gaps in automated theorem proving: while DeepSeekProver-V2-671B achieves 57.5\% success on Busy Beaver problems, it manages only 12\% on Mixed Boolean Arithmetic problems. These results highlight the difficulty of long-form proof generation even for problems that are computationally easy to verify, demonstrating the value of TCS domains for advancing automated reasoning research.
+
+**Comment:** The paper leverages theoretical computer science to generate theorem proving challenges, which is relevant to foundational research in AI for science and automated reasoning.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 18. [Generative Foundation Model for Structured and Unstructured Electronic Health Records](https://arxiv.org/abs/2508.16054) <a id="link18"></a>
+
+**ArXiv ID:** 2508.16054
+
+**Authors:** Sonish Sivarajkumar, Hang Zhang, Yuelyu Ji, Maneesh Bilalpur, Xizhi Wu, Chenyu Li, Min Gu Kwak, Shyam Visweswaran, Yanshan Wang
+
+**Abstract:** Electronic health records (EHRs) are rich clinical data sources but complex repositories of patient data, spanning structured elements (demographics, vitals, lab results, codes), unstructured clinical notes and other modalities of data. Harnessing this heterogeneity is critical for improving patient outcomes. Recent advances in large language models (LLMs) have enabled foundation models that can learn from multiple data modalities and support clinical tasks. However, most current approaches simply serialize numeric EHR data into text, which risks losing temporal and quantitative detail. We introduce Generative Deep Patient (GDP), a multimodal foundation model that natively encodes structured EHR time-series via a CNN-Transformer encoder and fuses it with unstructured EHRs through cross-modal attention into a LLaMA-based decoder. GDP is trained in two stages: (1) generative pretraining, where it learns to produce clinical narratives from raw patient timelines while also performing masked feature prediction (MFP) and next time-step prediction (NTP) to capture temporal dynamics; and (2) multi-task fine-tuning for clinically meaningful predictions (e.g., heart failure, type 2 diabetes, 30-day readmission). In clinical prediction, GDP demonstrated superior performance on MIMIC-IV: heart failure AUROC = 0.923, type 2 diabetes AUROC = 0.817, and 30-day readmission AUROC = 0.627. For narrative generation, GDP achieved ROUGE-L = 0.135 and BERTScore-F1 = 0.545. In a blinded human evaluation, GDP-Instruct scored highest on faithfulness, fluency, and overall clinical utility, suggesting reduced hospital documentation workload without sacrificing accuracy. Our results demonstrate that a single multimodal foundation model can both predict clinically actionable events and generate high-quality clinical narratives. Furthermore, GDP's flexible architecture can be extended to additional modalities.
+
+**Comment:** The paper presents a multimodal foundation model, GDP, with a CNN-Transformer encoder and cross-modal attention, aligning with the Model Architecture and Large Language Models criteria.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 19. [SDEC: Semantic Deep Embedded Clustering](https://arxiv.org/abs/2508.15823) <a id="link19"></a>
+
+**ArXiv ID:** 2508.15823
+
+**Authors:** Mohammad Wali Ur Rahman, Ric Nevarez, Lamia Tasnim Mim, Salim Hariri
+
+**Abstract:** The high dimensional and semantically complex nature of textual Big data presents significant challenges for text clustering, which frequently lead to suboptimal groupings when using conventional techniques like k-means or hierarchical clustering. This work presents Semantic Deep Embedded Clustering (SDEC), an unsupervised text clustering framework that combines an improved autoencoder with transformer-based embeddings to overcome these challenges. This novel method preserves semantic relationships during data reconstruction by combining Mean Squared Error (MSE) and Cosine Similarity Loss (CSL) within an autoencoder. Furthermore, a semantic refinement stage that takes advantage of the contextual richness of transformer embeddings is used by SDEC to further improve a clustering layer with soft cluster assignments and distributional loss. The capabilities of SDEC are demonstrated by extensive testing on five benchmark datasets: AG News, Yahoo! Answers, DBPedia, Reuters 2, and Reuters 5. The framework not only outperformed existing methods with a clustering accuracy of 85.7% on AG News and set a new benchmark of 53.63% on Yahoo! Answers, but also showed robust performance across other diverse text corpora. These findings highlight the significant improvements in accuracy and semantic comprehension of text data provided by SDEC's advances in unsupervised text clustering.
+
+**Comment:** The paper presents a novel method combining autoencoders and transformer-based embeddings for text clustering, which aligns with representation learning and model architecture insights.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 20. [HyperFlexis: Joint Design of Algorithms and Systems for Multi-SLO Serving and Fast Scaling](https://arxiv.org/abs/2508.15919) <a id="link20"></a>
+
+**ArXiv ID:** 2508.15919
+
+**Authors:** Zahra Yousefijamarani, Xinglu Wang, Qian Wang, Morgan Lindsay Heisler, Taha Shabani, Niloofar Gholipour, Parham Yassini, Hong Chang, Kan Chen, Qiantao Zhang, Xiaolong Bai, Jiannan Wang, Ying Xiong, Yong Zhang, Zhenan Fan
+
+**Abstract:** Modern large language model (LLM) serving systems face challenges from highly variable requests with diverse lengths, priorities, and stage-specific service-level objectives (SLOs). Meeting these requires real-time scheduling, rapid and cost-effective scaling, and support for both collocated and disaggregated Prefill/Decode (P/D) architectures.   We present \textbf{HyperFlexis}, a unified LLM serving system that integrates algorithmic and system-level innovations to jointly optimize scheduling and scaling under multiple SLOs. It features a multi-SLO-aware scheduler that leverages budget estimation and request prioritization to ensure proactive SLO compliance for both new and ongoing requests. The system supports prefill- and decode-stage multi-SLO scheduling for P/D-disaggregated architectures and KV cache transfers. It also enables cost-effective scaling decisions, prefill-decode instance linking during scaling, and rapid P/D role transitions. To accelerate scaling and reduce cold-start latency, a device-to-device (D2D) weight transfer mechanism is proposed that lowers weight loading overhead by up to \textbf{19.39$\times$}. These optimizations allow the system to achieve up to \textbf{4.44$\times$} higher SLO attainment, \textbf{65.82\%} lower request latency, and cost parity with state-of-the-art baselines. The code will be released soon.
+
+**Comment:** The paper discusses a unified LLM serving system with innovations in scheduling and scaling, relevant to model compression and efficiency in LLMs.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+# Paper Selection Prompt
+
+## System Prompt
+
+> You are a helpful paper reading assistant whose job is to read daily posts from ArXiv and identify a few papers that your friend will enjoy reading.
+> Your job is to carefully read the paper titles and abstracts below and find the ones that match the criteria below.
+
+## User Prompt
+
+> ## Instructions
+> 
+> Write the response in JSONL format with {ARXIVID, COMMENT, RELEVANCE, NOVELTY} on each line, one for each paper.
+> 
+> - ARXIVID: should be the ArXiv ID.
+> - COMMENT: should identify whether there is a criteria that match the paper very closely. These matches should not be based on general terms like "language modeling" or "advancements" and should specifically refer to a criterion. No need to mention the non-matching criteria.
+> - RELEVANCE: should be a score from 1-10.
+> - NOVELTY: should be a score from 1-10.
+> 
+> ## Scoring Criteria
+> 
+> > The "Relevance" score measures how closely the paper aligns with the core topics of the prompt.
+> > The "Novelty" score assesses the originality and impact of the paper.
+> > They are two **ORTHONORMAL** axes and **SHOULD NOT** be confused with each other.
+> 
+> ### Relevance Scoring
+> 
+> - Relevance 9-10 (Completely Relevant)
+>   - Focus: Fully aligned with core topics with no deviation, score the highest if contains relevant keywords in it.
+>   - Examples: Papers focused on foundational methods or theoretical research, whose titles contain topic keywords like "MoE".
+> 
+> - Relevance 7-8 (Relevant)
+>   - Focus: Retain a solid link to the main research area, though may touch on peripheral elements.
+>   - Examples: Papers research on the fundamental part of MoE through a less critical aspect like its behavior in GNN.
+> 
+> - Relevance 5-6 (Borderline)
+>   - Focus: Maintains a link to the core topic but also extends into at least one other domain/area beyond the primary focus.
+>   - Examples: Work referencing MoE centered on reinforcement learning.
+> 
+> - Relevance 3-4 (Irrelevant)
+>   - Focus: Largely outside our interests with no association to our topics.
+>   - Examples: Application-focused papers like using MoE to solve a problem in the real world.
+> 
+> - Relevance 1-2 (Ignore)
+>   - Focus: Purely unrelated to our topics. Completely a different domain.
+>   - **Exception**: If the paper hints at a cutting-edge, radically new direction that could eventually transform the primary domain, consider a score of 9–10 despite initial appearances. (Usually a very rare concept that belongs to the fundamental research)
+> 
+> ### Novelty Scoring
+> 
+> - Novelty 9-10 (Breakthrough)
+>   - Definition: Groundbreaking methods/theory introducing new directions or solving major challenges.
+>   - Examples: Entirely new paradigm for foundational models; a novel theory transforming representation learning.
+> 
+> - Novelty 7-8 (Improvements)
+>   - Definition: Substantial insights/enhancements, though not a full paradigm shift.
+>   - Examples: Modifications on existing methods yielding significantly better results.
+> 
+> - Novelty 5-6 (Borderline)
+>   - Definition: Incremental contributions with possible long-term benefits, not immediately transformative.
+>   - Examples: Moderately novel extension to an existing architecture; refining current methods without fundamentally altering them.
+> 
+> - Novelty 3-4 (Tangential)
+>   - Definition: Minor or domain-specific improvements with limited broader impact.
+>   - Examples: Slight modifications to known methods with strange motivation; purely engineering jobs like a new benchmark/dataset.
+> 
+> - Novelty 1-2 (Low)
+>   - Definition: Minimal originality, applying standard approaches without real innovation.
+>   - Examples: Using an off-the-shelf model without adding new insights; purely application-driven studies like finetuning a pretrained model using existing methods.
+> 
+> ## Papers
+> 
+> [PAPER LIST HERE]
+> 
+> ## Relevant Topics
+> 
+> Use the following relevance criteria to focus on foundational research. Keep **relevant** papers and filter out **irrelevant** ones. Avoid purely **application-driven** work.
+> 
+> 1. Representation Learning
+>    - Relevant: Insights into how deep networks encode information, feature/dictionary learning, sparse/contrastive methods, training dynamics in neural networks.
+>    - Irrelevant: Standard applications of known techniques lacking new theoretical or methodological contributions.
+> 
+> 2. Model Architecture
+>    - Relevant: Mixture-of-Experts (MoE), Transformers, Conditional/Dynamic Networks, Autoencoders, analysis on existing architectures (like encoder-decoder), or other architectural innovations.
+>    - Irrelevant: Merely using existing architectures for a certain task without insights into the structure themselves.
+> 
+> 3. Model Compression
+>    - Relevant: Sparsity, pruning, quantization, low-rank approaches, KV cache, or other algorithmic/theoretical efficiency breakthroughs.
+>    - Irrelevant: Straightforward applications of existing compression methods to new tasks.
+> 
+> 4. Large Language Models (LLMs)
+>    - Relevant: Major breakthroughs in pretraining or architecture, theoretical insights into LLM behavior/interpretability.
+>    - Irrelevant: Domain-specific usage (e.g., translation, jail-breaking), finetuning or inference tricks (e.g., instruction tuning, chain-of-thoughts, data mixing), or empirical dataset/benchmark studies and text-level analysis (e.g. hallucination, reasoning, safety).
+> 
+> 5. AI for Science
+>    - Relevant: Foundational research in molecular/protein modeling, new generative paradigms, or significant architecture-level innovations.
+>    - Irrelevant: Conventional, domain-specific applications without new theoretical perspectives.
+> 
+> 6. Emerging Trends
+>    - Relevant: Cutting-edge theoretical work challenging established assumptions or introducing broad new paradigms.
+>    - Irrelevant: Incremental improvements or trend-following without novel insights.
+> 
+> **Keywords:**
+> 
+> - Relevant: Mixture of Experts (MoE), Representation Learning, Compression/Efficiency, Sparse/Sparsity, Pruning, Quantization, Low-rank, Foundation Model, etc.
+> - Irrelevant: Reinforcement Learning, Transfer Learning, Federated Learning, Online Learning, Diffusion Models, etc.
+> - Application: Image Segmentation, Medical Imaging, 3D Vision, Video Understanding, Information Retrieval, Summarization, Recommendation Systems, Machine Translation, Speech Recognition, Signal Processing, Spatial/Temporal Modeling, Time Series, Knowledge Graph, etc.

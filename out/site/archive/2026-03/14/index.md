@@ -1,0 +1,649 @@
+<div style="display: flex; align-items: flex-start; justify-content: space-between; width: 100%;"><div style="width: 33.33%; text-align: left;"><a href="../13"><img src="../../../assets/nav/day/2026-03-14-prev.svg" alt="Previous Day 2026-03-13"></a></div><div style="width: 33.33%; text-align: center;"><a href=".."><img src="../../../assets/nav/day/2026-03-14-center.svg" alt="Monthly Overview 2026-03"></a></div><div style="width: 33.33%; text-align: right;"><a href="../16"><img src="../../../assets/nav/day/2026-03-14-next.svg" alt="Next Day 2026-03-16"></a></div></div>
+
+> This is a remedial run for missed papers from 03/13/2026 to 03/13/2026.
+> 
+> Results generated on 03/21/2026.
+
+# Personalized Daily ArXiv Papers 2026-03-14
+
+| *[gpt-5.4]*   | Prompt   | Completion   | Total   |
+|:-------------:|:--------:|:------------:|:-------:|
+| **Token**     | 113479   | 5647         | 119126  |
+| **Cost**      | $0.28    | $0.08        | $0.37   |
+
+**Table of contents with paper titles:**
+
+1. [NCCL EP: Towards a Unified Expert Parallel Communication API for NCCL](#user-content-link1)
+**Authors:** Amos Goldman, Nimrod Boker, Maayan Sheraizin, Nimrod Admoni, Artem Polyakov, Subhadeep Bhattacharya, Fan Yu, Kai Sun, Georgios Theodorakis, Hsin-Chun Yin, Peter-Jan Gootzen, Aamir Shafi, Assaf Ravid, Salvatore Di Girolamo, Manjunath Gorentla Venkata, Gil Bloch
+
+2. [A theory of learning data statistics in diffusion models, from easy to hard](#user-content-link2)
+**Authors:** Lorenzo Bardone, Claudia Merger, Sebastian Goldt
+
+3. [Fractals made Practical: Denoising Diffusion as Partitioned Iterated Function Systems](#user-content-link3)
+**Authors:** Ann Dooms
+
+4. [From Gradients to Riccati Geometry: Kalman World Models for Single-Pass Learning](#user-content-link4)
+**Authors:** Andrew Kiruluta
+
+5. [As Language Models Scale, Low-order Linear Depth Dynamics Emerge](#user-content-link5)
+**Authors:** Buddhika Nettasinghe, Geethu Joseph
+
+6. [Reconciling In-Context and In-Weight Learning via Dual Representation Space Encoding](#user-content-link6)
+**Authors:** Guanyu Chen, Ruichen Wang, Tianren Zhang, Feng Chen
+
+7. [When Drafts Evolve: Speculative Decoding Meets Online Learning](#user-content-link7)
+**Authors:** Yu-Yang Qian, Hao-Cong Wu, Yichao Fu, Hao Zhang, Peng Zhao
+
+8. [Ghosts of Softmax: Complex Singularities That Limit Safe Step Sizes in Cross-Entropy](#user-content-link8)
+**Authors:** Piyush Sao
+
+9. [State-space models through the lens of ensemble control](#user-content-link9)
+**Authors:** Ye Feng, Jianfeng Lu
+
+10. [Influence Malleability in Linearized Attention: Dual Implications of Non-Convergent NTK Dynamics](#user-content-link10)
+**Authors:** Jose Marie Antonio Miñoza, Paulo Mario P. Medina, Sebastian C. Ibañez
+
+11. [MXNorm: Reusing MXFP block scales for efficient tensor normalisation](#user-content-link11)
+**Authors:** Callum McLean, Luke Y. Prince, Alexandre Payot, Paul Balança, Carlo Luschi
+
+12. [LightMoE: Reducing Mixture-of-Experts Redundancy through Expert Replacing](#user-content-link12)
+**Authors:** Jiawei Hao, Zhiwei Hao, Jianyuan Guo, Li Shen, Yong Luo, Han Hu, Dan Zeng
+
+13. [ZO-SAM: Zero-Order Sharpness-Aware Minimization for Efficient Sparse Training](#user-content-link13)
+**Authors:** Jie Ji, Gen Li, Kaiyuan Deng, Fatemeh Afghah, Xiaolong Ma
+
+14. [Self-Supervised Speech Models Encode Phonetic Context via Position-dependent Orthogonal Subspaces](#user-content-link14)
+**Authors:** Kwanghee Choi, Eunjung Yeo, Cheol Jun Cho, David R. Mortensen, David Harwath
+
+15. [Upper Bounds for Local Learning Coefficients of Three-Layer Neural Networks](#user-content-link15)
+**Authors:** Yuki Kurumadani
+
+16. [Cost-Efficient Multimodal LLM Inference via Cross-Tier GPU Heterogeneity](#user-content-link16)
+**Authors:** Donglin Yu
+
+17. [Probabilistic Gaussian Homotopy: A Probability-Space Continuation Framework for Nonconvex Optimization](#user-content-link17)
+**Authors:** Eshed Gal, Samy Wu Fung, Eldad Haber
+
+18. [Asymptotic and Finite-Time Guarantees for Langevin-Based Temperature Annealing in InfoNCE](#user-content-link18)
+**Authors:** Faris Chaudhry
+
+19. [Equivalence of approximation by networks of single- and multi-spike neurons](#user-content-link19)
+**Authors:** Dominik Dold, Philipp Christian Petersen
+
+20. [Deconstructing the Failure of Ideal Noise Correction: A Three-Pillar Diagnosis](#user-content-link20)
+**Authors:** Chen Feng, Zhuo Zhi, Zhao Huang, Jiawei Ge, Ling Xiao, Nicu Sebe, Georgios Tzimiropoulos, Ioannis Patras
+
+21. [SRAM-Based Compute-in-Memory Accelerator for Linear-decay Spiking Neural Networks](#user-content-link21)
+**Authors:** Hongyang Shang, Shuai Dong, Yahan Yang, Junyi Yang, Peng Zhou, Arindam Basu
+
+22. [Scalable Machines with Intrinsic Higher Mental-State Dynamics](#user-content-link22)
+**Authors:** Ahsan Adeel, M. Bilal
+
+23. [Modality-free Graph In-context Alignment](#user-content-link23)
+**Authors:** Wei Zhuo, Siqiang Luo
+
+24. [PLUME: Building a Network-Native Foundation Model for Wireless Traces via Protocol-Aware Tokenization](#user-content-link24)
+**Authors:** Swadhin Pradhan, Shazal Irshad, Jerome Henry
+
+25. [Maximizing Incremental Information Entropy for Contrastive Learning](#user-content-link25)
+**Authors:** Jiansong Zhang, Zhuoqin Yang, Xu Wu, Xiaoling Luo, Peizhong Liu, Linlin Shen
+
+26. [Resolving Interference (RI): Disentangling Models for Improved Model Merging](#user-content-link26)
+**Authors:** Pratik Ramesh, George Stoica, Arun Iyer, Leshem Choshen, Judy Hoffman
+
+27. [Deep Invertible Autoencoders for Dimensionality Reduction of Dynamical Systems](#user-content-link27)
+**Authors:** Nicolò Botteghi, Silke Glas, Christoph Brune
+
+28. [Dependency-Aware Parallel Decoding via Attention for Diffusion LLMs](#user-content-link28)
+**Authors:** Bumjun Kim, Dongjae Jeon, Moongyu Jeon, Albert No
+
+29. [Representation Learning for Spatiotemporal Physical Systems](#user-content-link29)
+**Authors:** Helen Qu, Rudy Morel, Michael McCabe, Alberto Bietti, François Lanusse, Shirley Ho, Yann LeCun
+
+30. [Orla: A Library for Serving LLM-Based Multi-Agent Systems](#user-content-link30)
+**Authors:** Rana Shahout, Hayder Tirmazi, Minlan Yu, Michael Mitzenmacher
+
+31. [TERMINATOR: Learning Optimal Exit Points for Early Stopping in Chain-of-Thought Reasoning](#user-content-link31)
+**Authors:** Alliot Nagle, Jakhongir Saydaliev, Dhia Garbaya, Michael Gastpar, Ashok Vardhan Makkuva, Hyeji Kim
+
+---
+
+## 1. [NCCL EP: Towards a Unified Expert Parallel Communication API for NCCL](https://arxiv.org/abs/2603.13606) <a id="link1"></a>
+
+**ArXiv ID:** 2603.13606
+
+**Authors:** Amos Goldman, Nimrod Boker, Maayan Sheraizin, Nimrod Admoni, Artem Polyakov, Subhadeep Bhattacharya, Fan Yu, Kai Sun, Georgios Theodorakis, Hsin-Chun Yin, Peter-Jan Gootzen, Aamir Shafi, Assaf Ravid, Salvatore Di Girolamo, Manjunath Gorentla Venkata, Gil Bloch
+
+**Abstract:** Mixture-of-Experts (MoE) architectures have become essential for scaling large language models, driving the development of specialized device-initiated communication libraries such as DeepEP, Hybrid-EP, and others. These libraries demonstrate the performance benefits of GPU-initiated RDMA for MoE dispatch and combine operations. This paper presents NCCL EP (Expert Parallelism), a ground-up MoE communication library built entirely on NCCL's Device API. NCCL EP provides unified ncclEpDispatch and ncclEpCombine primitives with both C and Python interfaces, supporting Low-Latency (LL) mode for inference decoding and High-Throughput (HT) mode for training and inference prefill. LL targets small batch sizes (1-128 tokens) using direct all-to-all RDMA+NVLink mesh connectivity with double-buffered communication for overlapping dispatch and combine phases. HT targets large batches (4096+ tokens) using hierarchical communication that aggregates tokens within NVLink domains before inter-node RDMA transmission. Both modes leverage Device API for both intra- and inter-node communications, taking advantage of its topology awareness and optimized GPU-initiated implementation. We evaluate NCCL EP on an H100-based cluster across multi-node configurations, demonstrating competitive LL kernel performance and presenting end-to-end results with vLLM integration. By building MoE communication natively within NCCL, NCCL EP provides a supported path for expert parallelism on current and emerging NVIDIA platforms.
+
+**Comment:** High-performance computing for MoE: unified NCCL expert-parallel dispatch/combine API with topology-aware low-latency and high-throughput modes.
+
+**Relevance:** 10
+**Novelty:** 8
+
+---
+
+## 2. [A theory of learning data statistics in diffusion models, from easy to hard](https://arxiv.org/abs/2603.12901) <a id="link2"></a>
+
+**ArXiv ID:** 2603.12901
+
+**Authors:** Lorenzo Bardone, Claudia Merger, Sebastian Goldt
+
+**Abstract:** While diffusion models have emerged as a powerful class of generative models, their learning dynamics remain poorly understood. We address this issue first by empirically showing that standard diffusion models trained on natural images exhibit a distributional simplicity bias, learning simple, pair-wise input statistics before specializing to higher-order correlations. We reproduce this behaviour in simple denoisers trained on a minimal data model, the mixed cumulant model, where we precisely control both pair-wise and higher-order correlations of the inputs. We identify a scalar invariant of the model that governs the sample complexity of learning pair-wise and higher-order correlations that we call the diffusion information exponent, in analogy to related invariants in different learning paradigms. Using this invariant, we prove that the denoiser learns simple, pair-wise statistics of the inputs at linear sample complexity, while more complex higher-order statistics, such as the fourth cumulant, require at least cubic sample complexity. We also prove that the sample complexity of learning the fourth cumulant is linear if pair-wise and higher-order statistics share a correlated latent structure. Our work describes a key mechanism for how diffusion models can learn distributions of increasing complexity.
+
+**Comment:** Theory for representation learning in diffusion models: proves easy-to-hard learning of low- vs high-order data statistics via a diffusion information exponent.
+
+**Relevance:** 9
+**Novelty:** 9
+
+---
+
+## 3. [Fractals made Practical: Denoising Diffusion as Partitioned Iterated Function Systems](https://arxiv.org/abs/2603.13069) <a id="link3"></a>
+
+**ArXiv ID:** 2603.13069
+
+**Authors:** Ann Dooms
+
+**Abstract:** What is a diffusion model actually doing when it turns noise into a photograph? We show that the deterministic DDIM reverse chain operates as a Partitioned Iterated Function System (PIFS) and that this framework serves as a unified design language for denoising diffusion model schedules, architectures, and training objectives. From the PIFS structure we derive three computable geometric quantities: a per-step contraction threshold $L^*_t$, a diagonal expansion function $f_t(λ)$ and a global expansion threshold $λ^{**}$. These quantities require no model evaluation and fully characterize the denoising dynamics. They structurally explain the two-regime behavior of diffusion models: global context assembly at high noise via diffuse cross-patch attention and fine-detail synthesis at low noise via patch-by-patch suppression release in strict variance order. Self-attention emerges as the natural primitive for PIFS contraction. The Kaplan-Yorke dimension of the PIFS attractor is determined analytically through a discrete Moran equation on the Lyapunov spectrum. Through the study of the fractal geometry of the PIFS, we derive three optimal design criteria and show that four prominent empirical design choices (the cosine schedule offset, resolution-dependent logSNR shift, Min-SNR loss weighting, and Align Your Steps sampling) each arise as approximate solutions to our explicit geometric optimization problems tuning theory into practice.
+
+**Comment:** Theoretical reinterpretation of diffusion models as partitioned iterated function systems, yielding computable geometric design criteria for schedules and objectives.
+
+**Relevance:** 9
+**Novelty:** 9
+
+---
+
+## 4. [From Gradients to Riccati Geometry: Kalman World Models for Single-Pass Learning](https://arxiv.org/abs/2603.13423) <a id="link4"></a>
+
+**ArXiv ID:** 2603.13423
+
+**Authors:** Andrew Kiruluta
+
+**Abstract:** Backpropagation dominates modern machine learning, yet it is not the only principled method for optimizing dynamical systems. We propose Kalman World Models (KWM), a class of learned state-space models trained via recursive Bayesian filtering rather than reverse-mode automatic differentiation. Instead of gradient descent updates, we replace parameter learning with Kalman-style gain adaptation. Training becomes online filtering; error signals become innovations. We further extend this framework to transformer-based large language models (LLMs), where internal activations are treated as latent dynamical states corrected via innovation terms. This yields a gradient-free training and adaptation paradigm grounded in control theory. We derive stability conditions, analyze computational complexity, and provide empirical results on sequence modeling tasks demonstrating competitive performance with improved robustness and continual adaptation properties.
+
+**Comment:** Proposes a gradient-free training paradigm for state-space models and transformers using Kalman-style recursive filtering, with stability and complexity analysis.
+
+**Relevance:** 9
+**Novelty:** 9
+
+---
+
+## 5. [As Language Models Scale, Low-order Linear Depth Dynamics Emerge](https://arxiv.org/abs/2603.12541) <a id="link5"></a>
+
+**ArXiv ID:** 2603.12541
+
+**Authors:** Buddhika Nettasinghe, Geethu Joseph
+
+**Abstract:** Large language models are often viewed as high-dimensional nonlinear systems and treated as black boxes. Here, we show that transformer depth dynamics admit accurate low-order linear surrogates within context. Across tasks including toxicity, irony, hate speech and sentiment, a 32-dimensional linear surrogate reproduces the layerwise sensitivity profile of GPT-2-large with near-perfect agreement, capturing how the final output shifts under additive injections at each layer. We then uncover a surprising scaling principle: for a fixed-order linear surrogate, agreement with the full model improves monotonically with model size across the GPT-2 family. This linear surrogate also enables principled multi-layer interventions that require less energy than standard heuristic schedules when applied to the full model. Together, our results reveal that as language models scale, low-order linear depth dynamics emerge within contexts, offering a systems-theoretic foundation for analyzing and controlling them.
+
+**Comment:** Core architecture analysis: identifies low-order linear surrogate dynamics emerging across transformer depth as models scale.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 6. [Reconciling In-Context and In-Weight Learning via Dual Representation Space Encoding](https://arxiv.org/abs/2603.13459) <a id="link6"></a>
+
+**ArXiv ID:** 2603.13459
+
+**Authors:** Guanyu Chen, Ruichen Wang, Tianren Zhang, Feng Chen
+
+**Abstract:** In-context learning (ICL) is a valuable capability exhibited by Transformers pretrained on diverse sequence tasks. However, previous studies have observed that ICL often conflicts with the model's inherent in-weight learning (IWL) ability. By examining the representation space learned by a toy model in synthetic experiments, we identify the shared encoding space for context and samples in Transformers as a potential source of this conflict. To address this, we modify the model architecture to separately encode the context and samples into two distinct spaces: a task representation space and a sample representation space. We model these two spaces under a simple yet principled framework, assuming a linear representational structure and treating them as a pair of dual spaces. Both theoretical analysis and empirical results demonstrate the effectiveness of our proposed architecture, CoQE, in the single-value answer setting. It not only enhances ICL performance through improved representation learning, but also successfully reconciles ICL and IWL capabilities across synthetic few-shot classification and a newly designed pseudo-arithmetic task. Code: https://github.com/McGuinnessChen/dual-representation-space-encoding
+
+**Comment:** Model architecture: separates context and sample encoding into dual representation spaces to reconcile in-context and in-weight learning.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 7. [When Drafts Evolve: Speculative Decoding Meets Online Learning](https://arxiv.org/abs/2603.12617) <a id="link7"></a>
+
+**ArXiv ID:** 2603.12617
+
+**Authors:** Yu-Yang Qian, Hao-Cong Wu, Yichao Fu, Hao Zhang, Peng Zhao
+
+**Abstract:** Speculative decoding has emerged as a widely adopted paradigm for accelerating large language model inference, where a lightweight draft model rapidly generates candidate tokens that are then verified in parallel by a larger target model. However, due to limited model capacity, drafts often struggle to approximate the target distribution, resulting in shorter acceptance lengths and diminished speedup. A key yet under-explored observation is that speculative decoding inherently provides verification feedback that quantifies the deviation between the draft and target models at no additional cost. This process naturally forms an iterative "draft commits-feedback provides-draft adapts" evolving loop, which precisely matches the online learning paradigm. Motivated by this connection, we propose OnlineSpec, a unified framework that systematically leverages interactive feedback to continuously evolve draft models. Grounded in dynamic regret minimization, we establish a formal link between online learning performance and speculative system's acceleration rate, and develop novel algorithms via modern online learning techniques, including optimistic online learning that adaptively reuses historical gradients as predictive update hints, and online ensemble learning that dynamically maintains multiple draft models. Our algorithms are equipped with theoretical justifications and improved acceleration rates, achieving up to 24% speedup over seven benchmarks and three foundation models.
+
+**Comment:** Inference efficiency: speculative decoding cast as online learning, with regret-based algorithms that adapt draft models from verification feedback.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 8. [Ghosts of Softmax: Complex Singularities That Limit Safe Step Sizes in Cross-Entropy](https://arxiv.org/abs/2603.13552) <a id="link8"></a>
+
+**ArXiv ID:** 2603.13552
+
+**Authors:** Piyush Sao
+
+**Abstract:** Optimization analyses for cross-entropy training rely on local Taylor models of the loss to predict whether a proposed step will decrease the objective. These surrogates are reliable only inside the Taylor convergence radius of the true loss along the update direction. That radius is set not by real-line curvature alone but by the nearest complex singularity. For cross-entropy, the softmax partition function $F=\sum_j \exp(z_j)$ has complex zeros -- ``ghosts of softmax'' -- that induce logarithmic singularities in the loss and cap this radius. To make this geometry usable, we derive closed-form expressions under logit linearization along the proposed update direction. In the binary case, the exact radius is $ρ^*=\sqrt{δ^2+ π^2}/Δ_a$. In the multiclass case, we obtain the lower bound $ρ_a=π/Δ_a$, where $Δ_a=\max_k a_k-\min_k a_k$ is the spread of directional logit derivatives $a_k=\nabla z_k\cdot v$. This bound costs one Jacobian-vector product and reveals what makes a step fragile: samples that are both near a decision flip and highly sensitive to the proposed direction tighten the radius. The normalized step size $r=τ/ρ_a$ separates safe from dangerous updates. Across six tested architectures and multiple step directions, no model fails for $r<1$, yet collapse appears once $r\ge 1$. Temperature scaling confirms the mechanism: normalizing by $ρ_a$ shrinks the onset-threshold spread from standard deviation $0.992$ to $0.164$. A controller that enforces $τ\leρ_a$ survives learning-rate spikes up to $10{,} 000\times$ in our tests, where gradient clipping still collapses. Together, these results identify a geometric constraint on cross-entropy optimization that operates through Taylor convergence rather than Hessian curvature.
+
+**Comment:** Optimization theory for transformers trained with cross-entropy: derives complex-singularity step-size bounds from softmax geometry with a cheap JVP-based safety criterion.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 9. [State-space models through the lens of ensemble control](https://arxiv.org/abs/2603.13587) <a id="link9"></a>
+
+**ArXiv ID:** 2603.13587
+
+**Authors:** Ye Feng, Jianfeng Lu
+
+**Abstract:** State-space models (SSMs) are effective architectures for sequential modeling, but a rigorous theoretical understanding of their training dynamics is still lacking. In this work, we formulate the training of SSMs as an ensemble optimal control problem, where a shared control law governs a population of input-dependent dynamical systems. We derive Pontryagin's maximum principle (PMP) for this ensemble control formulation, providing necessary conditions for optimality. Motivated by these conditions, we introduce an algorithm based on the method of successive approximations. We prove convergence of this iterative scheme along a subsequence and establish sufficient conditions for global optimality. The resulting framework provides a control-theoretic perspective on SSM training.
+
+**Comment:** Provides a control-theoretic foundation for state-space models by casting training as an ensemble optimal control problem and deriving PMP-based optimality conditions.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 10. [Influence Malleability in Linearized Attention: Dual Implications of Non-Convergent NTK Dynamics](https://arxiv.org/abs/2603.13085) <a id="link10"></a>
+
+**ArXiv ID:** 2603.13085
+
+**Authors:** Jose Marie Antonio Miñoza, Paulo Mario P. Medina, Sebastian C. Ibañez
+
+**Abstract:** Understanding the theoretical foundations of attention mechanisms remains challenging due to their complex, non-linear dynamics. This work reveals a fundamental trade-off in the learning dynamics of linearized attention. Using a linearized attention mechanism with exact correspondence to a data-dependent Gram-induced kernel, both empirical and theoretical analysis through the Neural Tangent Kernel (NTK) framework shows that linearized attention does not converge to its infinite-width NTK limit, even at large widths. A spectral amplification result establishes this formally: the attention transformation cubes the Gram matrix's condition number, requiring width $m = Ω(κ^6)$ for convergence, a threshold that exceeds any practical width for natural image datasets. This non-convergence is characterized through influence malleability, the capacity to dynamically alter reliance on training examples. Attention exhibits 6--9$\times$ higher malleability than ReLU networks, with dual implications: its data-dependent kernel can reduce approximation error by aligning with task structure, but this same sensitivity increases susceptibility to adversarial manipulation of training data. These findings suggest that attention's power and vulnerability share a common origin in its departure from the kernel regime.
+
+**Comment:** NTK-based theory for linearized attention showing non-convergence and introducing influence malleability as a core property.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 11. [MXNorm: Reusing MXFP block scales for efficient tensor normalisation](https://arxiv.org/abs/2603.13180) <a id="link11"></a>
+
+**ArXiv ID:** 2603.13180
+
+**Authors:** Callum McLean, Luke Y. Prince, Alexandre Payot, Paul Balança, Carlo Luschi
+
+**Abstract:** Matrix multiplication performance has long been the major bottleneck to scaling deep learning workloads, which has stimulated the design of new accelerators that use increasingly low-precision number formats. However, improvements in matrix multiplication performance have far outstripped improvements in performance on reductions and elementwise computations, which are still being performed in higher precision. In this work, we propose MXNorm, a drop-in replacement for RMSNorm that estimates the RMS using only the block scales calculated as part of the MXFP8 cast and enables a 32x decrease in the size of reduction needed for normalization. We validate our approximation method on pre-training of Llama 3 models of 125M, 1B and 8B parameters, finding minimal loss of training accuracy compared to a baseline using RMSNorm with MXFP8 matmuls. We also show practical kernel speedups using only torch.compile of up to 2.4x for MXNorm over RMSNorm, corresponding to a 1.3% speedup in Llama 3 8B transformer layers in MXFP8 and a 2.6% speedup in NVFP4.
+
+**Comment:** Model efficiency: normalization redesign that reuses MXFP block scales to cut reduction cost and speed low-precision transformer training.
+
+**Relevance:** 9
+**Novelty:** 7
+
+---
+
+## 12. [LightMoE: Reducing Mixture-of-Experts Redundancy through Expert Replacing](https://arxiv.org/abs/2603.12645) <a id="link12"></a>
+
+**ArXiv ID:** 2603.12645
+
+**Authors:** Jiawei Hao, Zhiwei Hao, Jianyuan Guo, Li Shen, Yong Luo, Han Hu, Dan Zeng
+
+**Abstract:** Mixture-of-Experts (MoE) based Large Language Models (LLMs) have demonstrated impressive performance and computational efficiency. However, their deployment is often constrained by substantial memory demands, primarily due to the need to load numerous expert modules. While existing expert compression techniques like pruning or merging attempt to mitigate this, they often suffer from irreversible knowledge loss or high training overhead. In this paper, we propose a novel expert compression paradigm termed expert replacing, which replaces redundant experts with parameter-efficient modules and recovers their capabilities with low training costs. We find that even a straightforward baseline of this paradigm yields promising performance. Building on this foundation, we introduce LightMoE, a framework that enhances the paradigm by introducing adaptive expert selection, hierarchical expert construction, and an annealed recovery strategy. Experimental results show that LightMoE matches the performance of LoRA fine-tuning at a 30% compression ratio. Even under a more aggressive 50% compression rate, it outperforms existing methods and achieves average performance improvements of 5.6% across five diverse tasks. These findings demonstrate that LightMoE strikes a superior balance among memory efficiency, training efficiency, and model performance.
+
+**Comment:** Model compression for MoE: replaces redundant experts with parameter-efficient modules to reduce memory without full expert merging/pruning.
+
+**Relevance:** 9
+**Novelty:** 7
+
+---
+
+## 13. [ZO-SAM: Zero-Order Sharpness-Aware Minimization for Efficient Sparse Training](https://arxiv.org/abs/2603.13115) <a id="link13"></a>
+
+**ArXiv ID:** 2603.13115
+
+**Authors:** Jie Ji, Gen Li, Kaiyuan Deng, Fatemeh Afghah, Xiaolong Ma
+
+**Abstract:** Deep learning models, despite their impressive achievements, suffer from high computational costs and memory requirements, limiting their usability in resource-constrained environments. Sparse neural networks significantly alleviate these constraints by dramatically reducing parameter count and computational overhead. However, existing sparse training methods often experience chaotic and noisy gradient signals, severely hindering convergence and generalization performance, particularly at high sparsity levels. To tackle this critical challenge, we propose Zero-Order Sharpness-Aware Minimization (ZO-SAM), a novel optimization framework that strategically integrates zero-order optimization within the SAM approach. Unlike traditional SAM, ZO-SAM requires only a single backpropagation step during perturbation, selectively utilizing zero-order gradient estimations. This innovative approach reduces the backpropagation computational cost by half compared to conventional SAM, significantly lowering gradient variance and effectively eliminating associated computational overhead. By harnessing SAM's capacity for identifying flat minima, ZO-SAM stabilizes the training process and accelerates convergence. These efficiency gains are particularly important in sparse training scenarios, where computational cost is the primary bottleneck that limits the practicality of SAM. Moreover, models trained with ZO-SAM exhibit improved robustness under distribution shift, further broadening its practicality in real-world deployments.
+
+**Comment:** Optimization method for efficient sparse training: zero-order SAM cuts backprop cost while stabilizing high-sparsity learning.
+
+**Relevance:** 9
+**Novelty:** 7
+
+---
+
+## 14. [Self-Supervised Speech Models Encode Phonetic Context via Position-dependent Orthogonal Subspaces](https://arxiv.org/abs/2603.12642) <a id="link14"></a>
+
+**ArXiv ID:** 2603.12642
+
+**Authors:** Kwanghee Choi, Eunjung Yeo, Cheol Jun Cho, David R. Mortensen, David Harwath
+
+**Abstract:** Transformer-based self-supervised speech models (S3Ms) are often described as contextualized, yet what this entails remains unclear. Here, we focus on how a single frame-level S3M representation can encode phones and their surrounding context. Prior work has shown that S3Ms represent phones compositionally; for example, phonological vectors such as voicing, bilabiality, and nasality vectors are superposed in the S3M representation of [m]. We extend this view by proposing that phonological information from a sequence of neighboring phones is also compositionally encoded in a single frame, such that vectors corresponding to previous, current, and next phones are superposed within a single frame-level representation. We show that this structure has several properties, including orthogonality between relative positions, and emergence of implicit phonetic boundaries. Together, our findings advance our understanding of context-dependent S3M representations.
+
+**Comment:** Representation learning analysis: shows self-supervised speech models encode neighboring phonetic context in position-dependent orthogonal subspaces.
+
+**Relevance:** 8
+**Novelty:** 8
+
+---
+
+## 15. [Upper Bounds for Local Learning Coefficients of Three-Layer Neural Networks](https://arxiv.org/abs/2603.12785) <a id="link15"></a>
+
+**ArXiv ID:** 2603.12785
+
+**Authors:** Yuki Kurumadani
+
+**Abstract:** Three-layer neural networks are known to form singular learning models, and their Bayesian asymptotic behavior is governed by the learning coefficient, or real log canonical threshold. Although this quantity has been clarified for regular models and for some special singular models, broadly applicable methods for evaluating it in neural networks remain limited. Recently, a formula for the local learning coefficient of semiregular models was proposed, yielding an upper bound on the learning coefficient. However, this formula applies only to nonsingular points in the set of realization parameters and cannot be used at singular points. In particular, for three-layer neural networks, the resulting upper bound has been shown to differ substantially from learning coefficient values already known in some cases. In this paper, we derive an upper-bound formula for the local learning coefficient at singular points in three-layer neural networks. This formula can be interpreted as a counting rule under budget constraints and demand-supply constraints, and is applicable to general analytic activation functions. In particular, it covers the swish function and polynomial functions, extending previous results to a wider class of activation functions. We further show that, when the input dimension is one, the upper bound obtained here coincides with the already known learning coefficient, thereby partially resolving the discrepancy above. Our result also provides a systematic perspective on how the weight parameters of three-layer neural networks affect the learning coefficient.
+
+**Comment:** Theory: derives upper bounds for local learning coefficients at singular points in three-layer neural networks.
+
+**Relevance:** 8
+**Novelty:** 8
+
+---
+
+## 16. [Cost-Efficient Multimodal LLM Inference via Cross-Tier GPU Heterogeneity](https://arxiv.org/abs/2603.12707) <a id="link16"></a>
+
+**ArXiv ID:** 2603.12707
+
+**Authors:** Donglin Yu
+
+**Abstract:** Multimodal large language model (MLLM) inference splits into two phases with opposing hardware demands: vision encoding is compute-bound, while language generation is memory-bandwidth-bound. We show that under standard transformer KV caching, the modality boundary (between vision encoder and language model) minimizes cross-device transfer among all partition points that preserve standard stage-based execution. Partitioning here reduces transfer complexity from $O(L * s_ctx)$ bytes (GB-scale KV caches under stage-level disaggregation) to $O(N_v * d)$ bytes (MB-scale embeddings), an O(L) reduction where L is the transformer depth. The result holds across attention mechanisms (MHA/GQA), dynamic vision resolutions, and model scales, and the advantage grows as models deepen. A direct implication is that existing stage-level disaggregation systems are constrained to high-bandwidth interconnects (e.g., NVLink), whereas modality-level disaggregation enables cross-tier heterogeneous serving over commodity PCIe. A closed-form cost model shows that heterogeneous deployment is cost-optimal under phase-separable workloads (predicts 31.4% savings; observed 40.6%). We build HeteroServe, a phase-aware runtime with modality-level partitioning and cross-tier scheduling, and evaluate it on LLaVA-1.5-7B and Qwen2.5-VL against vLLM v0.3.0. On identical 4xA100 hardware, engine optimizations raise throughput by up to 54%. Under a fixed budget, a heterogeneous cluster (\$38k) improves Tokens/\$ by 37% over a homogeneous baseline (\$64k) without degrading latency.
+
+**Comment:** Inference systems contribution: proves modality-boundary partitioning minimizes transfer under KV caching and enables cost-efficient cross-tier heterogeneous serving.
+
+**Relevance:** 8
+**Novelty:** 8
+
+---
+
+## 17. [Probabilistic Gaussian Homotopy: A Probability-Space Continuation Framework for Nonconvex Optimization](https://arxiv.org/abs/2603.13546) <a id="link17"></a>
+
+**ArXiv ID:** 2603.13546
+
+**Authors:** Eshed Gal, Samy Wu Fung, Eldad Haber
+
+**Abstract:** We introduce Probabilistic Gaussian Homotopy (PGH), a probability-space continuation framework for nonconvex optimization. Unlike classical Gaussian homotopy, which smooths the objective and uniformly averages gradients, PGH deforms the associated Boltzmann distribution and induces Boltzmann-weighted aggregation of perturbed gradients, which exponentially biases descent directions toward low-energy regions. We show that PGH corresponds to a log-sum-exp (soft-min) homotopy that smooths a nonconvex objective at scale $λ>0$ and recovers the original objective as $λ\to 0$, yielding a posterior-mean generalization of the Moreau envelope, and we derive a dynamical system governing minimizer evolution along an annealed homotopy path. This establishes a principled connection between Gaussian continuation, Bayesian denoising, and diffusion-style smoothing. We further propose Probabilistic Gaussian Homotopy Optimization (PGHO), a practical stochastic algorithm based on Monte Carlo gradient estimation, and demonstrate strong performance on high-dimensional nonconvex benchmarks and sparse recovery problems where classical gradient methods and objective-space smoothing frequently fail.
+
+**Comment:** Foundational nonconvex optimization method: probability-space homotopy with Boltzmann-weighted gradient aggregation and a derived annealed minimizer dynamics.
+
+**Relevance:** 8
+**Novelty:** 8
+
+---
+
+## 18. [Asymptotic and Finite-Time Guarantees for Langevin-Based Temperature Annealing in InfoNCE](https://arxiv.org/abs/2603.12552) <a id="link18"></a>
+
+**ArXiv ID:** 2603.12552
+
+**Authors:** Faris Chaudhry
+
+**Abstract:** The InfoNCE loss in contrastive learning depends critically on a temperature parameter, yet its dynamics under fixed versus annealed schedules remain poorly understood. We provide a theoretical analysis by modeling embedding evolution under Langevin dynamics on a compact Riemannian manifold. Under mild smoothness and energy-barrier assumptions, we show that classical simulated annealing guarantees extend to this setting: slow logarithmic inverse-temperature schedules ensure convergence in probability to a set of globally optimal representations, while faster schedules risk becoming trapped in suboptimal minima. Our results establish a link between contrastive learning and simulated annealing, providing a principled basis for understanding and tuning temperature schedules.
+
+**Comment:** Theoretical representation-learning result linking InfoNCE temperature schedules to Langevin simulated annealing with asymptotic and finite-time guarantees.
+
+**Relevance:** 8
+**Novelty:** 8
+
+---
+
+## 19. [Equivalence of approximation by networks of single- and multi-spike neurons](https://arxiv.org/abs/2603.13478) <a id="link19"></a>
+
+**ArXiv ID:** 2603.13478
+
+**Authors:** Dominik Dold, Philipp Christian Petersen
+
+**Abstract:** In a spiking neural network, is it enough for each neuron to spike at most once? In recent work, approximation bounds for spiking neural networks have been derived, quantifying how well they can fit target functions. However, these results are only valid for neurons that spike at most once, which is commonly thought to be a strong limitation. Here, we show that the opposite is true for a large class of spiking neuron models, including the commonly used leaky integrate-and-fire model with subtractive reset: for every approximation bound that is valid for a set of multi-spike neural networks, there is an equivalent set of single-spike neural networks with only linearly more neurons (in the maximum number of spikes) for which the bound holds. The same is true for the reverse direction too, showing that regarding their approximation capabilities in general machine learning tasks, single-spike and multi-spike neural networks are equivalent. Consequently, many approximation results in the literature for single-spike neural networks also hold for the multi-spike case.
+
+**Comment:** Architecture theory for spiking networks: proves approximation-equivalence between single-spike and multi-spike neuron networks up to linear overhead.
+
+**Relevance:** 8
+**Novelty:** 8
+
+---
+
+## 20. [Deconstructing the Failure of Ideal Noise Correction: A Three-Pillar Diagnosis](https://arxiv.org/abs/2603.12997) <a id="link20"></a>
+
+**ArXiv ID:** 2603.12997
+
+**Authors:** Chen Feng, Zhuo Zhi, Zhao Huang, Jiawei Ge, Ling Xiao, Nicu Sebe, Georgios Tzimiropoulos, Ioannis Patras
+
+**Abstract:** Statistically consistent methods based on the noise transition matrix ($T$) offer a theoretically grounded solution to Learning with Noisy Labels (LNL), with guarantees of convergence to the optimal clean-data classifier. In practice, however, these methods are often outperformed by empirical approaches such as sample selection, and this gap is usually attributed to the difficulty of accurately estimating $T$. The common assumption is that, given a perfect $T$, noise-correction methods would recover their theoretical advantage. In this work, we put this longstanding hypothesis to a decisive test. We conduct experiments under idealized conditions, providing correction methods with a perfect, oracle transition matrix. Even under these ideal conditions, we observe that these methods still suffer from performance collapse during training. This compellingly demonstrates that the failure is not fundamentally a $T$-estimation problem, but stems from a more deeply rooted flaw. To explain this behaviour, we provide a unified analysis that links three levels: macroscopic convergence states, microscopic optimisation dynamics, and information-theoretic limits on what can be learned from noisy labels. Together, these results give a formal account of why ideal noise correction fails and offer concrete guidance for designing more reliable methods for learning with noisy labels.
+
+**Comment:** Foundational analysis of why ideal noise-correction fails, linking optimization dynamics, convergence states, and information-theoretic limits.
+
+**Relevance:** 8
+**Novelty:** 8
+
+---
+
+## 21. [SRAM-Based Compute-in-Memory Accelerator for Linear-decay Spiking Neural Networks](https://arxiv.org/abs/2603.12739) <a id="link21"></a>
+
+**ArXiv ID:** 2603.12739
+
+**Authors:** Hongyang Shang, Shuai Dong, Yahan Yang, Junyi Yang, Peng Zhou, Arindam Basu
+
+**Abstract:** Spiking Neural Networks (SNNs) have emerged as a biologically inspired alternative to conventional deep networks, offering event-driven and energy-efficient computation. However, their throughput remains constrained by the serial update of neuron membrane states. While many hardware accelerators and Compute-in-Memory (CIM) architectures efficiently parallelize the synaptic operation (W x I) achieving O(1) complexity for matrix-vector multiplication, the subsequent state update step still requires O(N) time to refresh all neuron membrane potentials. This mismatch makes state update the dominant latency and energy bottleneck in SNN inference. To address this challenge, we propose an SRAM-based CIM for SNN with Linear Decay Leaky Integrate-and-Fire (LD-LIF) Neuron that co-optimizes algorithm and hardware. At the algorithmic level, we replace the conventional exponential membrane decay with a linear decay approximation, converting costly multiplications into simple additions while accuracy drops only around 1%. At the architectural level, we introduce an in-memory parallel update scheme that performs in-place decay directly within the SRAM array, eliminating the need for global sequential updates. Evaluated on benchmark SNN workloads, the proposed method achieves a 1.1 x to 16.7 x reduction of SOP energy consumption, while providing 15.9 x to 69 x more energy efficiency, with negligible accuracy loss relative to original decay models. This work highlights that beyond accelerating the (W x I) computation, optimizing state-update dynamics within CIM architectures is essential for scalable, low-power, and real-time neuromorphic processing.
+
+**Comment:** Algorithm-hardware co-design for compute-in-memory SNNs that removes the state-update bottleneck via in-memory parallel decay.
+
+**Relevance:** 8
+**Novelty:** 8
+
+---
+
+## 22. [Scalable Machines with Intrinsic Higher Mental-State Dynamics](https://arxiv.org/abs/2603.13453) <a id="link22"></a>
+
+**ArXiv ID:** 2603.13453
+
+**Authors:** Ahsan Adeel, M. Bilal
+
+**Abstract:** Drawing on recent breakthroughs in cellular neurobiology and detailed biophysical modeling linking neocortical pyramidal neurons to distinct mental-state regimes, this work introduces a mathematically grounded formulation showing how models (e.g., Transformers) can implement computational principles underlying awake imaginative thought to pre-select relevant information before attention is applied via triadic modulation loops among queries ($Q$), keys ($K$), and values ($V$).~Scalability experiments on ImageNet-1K, benchmarked against a standard Vision Transformer (ViT), demonstrate significantly faster learning with reduced computational demand (fewer heads, layers, and tokens), consistent with our prior findings in reinforcement learning and language modeling. The approach operates at approximately $\mathcal{O}(N)$ complexity with respect to the number of input tokens $N$.
+
+**Comment:** Presents a core architectural modification to transformer attention via triadic modulation loops that pre-select relevant information with claimed linear-time scaling.
+
+**Relevance:** 8
+**Novelty:** 8
+
+---
+
+## 23. [Modality-free Graph In-context Alignment](https://arxiv.org/abs/2603.13434) <a id="link23"></a>
+
+**ArXiv ID:** 2603.13434
+
+**Authors:** Wei Zhuo, Siqiang Luo
+
+**Abstract:** In-context learning (ICL) converts static encoders into task-conditioned reasoners, enabling adaptation to new data from just a few examples without updating pretrained parameters. This capability is essential for graph foundation models (GFMs) to approach LLM-level generality. Yet current GFMs struggle with cross-domain alignment, typically relying on modality-specific encoders that fail when graphs are pre-vectorized or raw data is inaccessible. In this paper, we introduce Modality-Free Graph In-context Alignment (MF-GIA), a framework that makes a pretrained graph encoder promptable for few-shot prediction across heterogeneous domains without modality assumptions. MF-GIA captures domain characteristics through gradient fingerprints, which parameterize lightweight transformations that align pre-encoded features and indexed labels into unified semantic spaces. During pretraining, a dual prompt-aware attention mechanism with episodic objective learns to match queries against aligned support examples to establish prompt-based reasoning capabilities. At inference, MF-GIA performs parameter-update-free adaptation using only a few-shot support set to trigger cross-domain alignment and enable immediate prediction on unseen domains. Experiments demonstrate that MF-GIA achieves superior few-shot performance across diverse graph domains and strong generalization to unseen domains.
+
+**Comment:** Method for graph foundation models: parameter-update-free in-context alignment across heterogeneous domains via gradient fingerprints.
+
+**Relevance:** 8
+**Novelty:** 8
+
+---
+
+## 24. [PLUME: Building a Network-Native Foundation Model for Wireless Traces via Protocol-Aware Tokenization](https://arxiv.org/abs/2603.13647) <a id="link24"></a>
+
+**ArXiv ID:** 2603.13647
+
+**Authors:** Swadhin Pradhan, Shazal Irshad, Jerome Henry
+
+**Abstract:** Foundation models succeed when they learn in the native structure of a modality, whether morphology-respecting tokens in language or pixels in vision. Wireless packet traces deserve the same treatment: meaning emerges from layered headers, typed fields, timing gaps, and cross-packet state machines, not flat strings. We present Plume (Protocol Language Understanding Model for Exchanges), a compact 140M-parameter foundation model for 802.11 traces that learns from structured PDML dissections. A protocol-aware tokenizer splits along the dissector field tree, emits gap tokens for timing, and normalizes identifiers, yielding 6.2x shorter sequences than BPE with higher per token information density. Trained on a curated corpus, Plume achieves 74-97% next-packet token accuracy across five real-world failure categories and AUROC >= 0.99 for zero-shot anomaly detection. On the same prediction task, frontier LLMs (Claude Opus 4.6, GPT-5.4) score comparably despite receiving identical protocol context, yet Plume does so with > 600x fewer parameters, fitting on a single GPU at effectively zero marginal cost vs. cloud API pricing, enabling on-prem, privacy-preserving root cause analysis.
+
+**Comment:** Protocol-aware tokenization for network traces defines a modality-native foundation model design that greatly improves efficiency over generic tokenization.
+
+**Relevance:** 8
+**Novelty:** 8
+
+---
+
+## 25. [Maximizing Incremental Information Entropy for Contrastive Learning](https://arxiv.org/abs/2603.12594) <a id="link25"></a>
+
+**ArXiv ID:** 2603.12594
+
+**Authors:** Jiansong Zhang, Zhuoqin Yang, Xu Wu, Xiaoling Luo, Peizhong Liu, Linlin Shen
+
+**Abstract:** Contrastive learning has achieved remarkable success in self-supervised representation learning, often guided by information-theoretic objectives such as mutual information maximization. Motivated by the limitations of static augmentations and rigid invariance constraints, we propose IE-CL (Incremental-Entropy Contrastive Learning), a framework that explicitly optimizes the entropy gain between augmented views while preserving semantic consistency. Our theoretical framework reframes the challenge by identifying the encoder as an information bottleneck and proposes a joint optimization of two components: a learnable transformation for entropy generation and an encoder regularizer for its preservation. Experiments on CIFAR-10/100, STL-10, and ImageNet demonstrate that IE-CL consistently improves performance under small-batch settings. Moreover, our core modules can be seamlessly integrated into existing frameworks. This work bridges theoretical principles and practice, offering a new perspective in contrastive learning.
+
+**Comment:** Representation learning: contrastive objective that explicitly maximizes incremental entropy with an information-bottleneck formulation.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 26. [Resolving Interference (RI): Disentangling Models for Improved Model Merging](https://arxiv.org/abs/2603.13467) <a id="link26"></a>
+
+**ArXiv ID:** 2603.13467
+
+**Authors:** Pratik Ramesh, George Stoica, Arun Iyer, Leshem Choshen, Judy Hoffman
+
+**Abstract:** Model merging has shown that multitask models can be created by directly combining the parameters of different models that are each specialized on tasks of interest. However, models trained independently on distinct tasks often exhibit interference that degrades the merged model's performance. To solve this problem, we formally define the notion of Cross-Task Interference as the drift in the representation of the merged model relative to its constituent models. Reducing cross-task interference is key to improving merging performance. To address this issue, we propose our method, Resolving Interference (RI), a light-weight adaptation framework which disentangles expert models to be functionally orthogonal to the space of other tasks, thereby reducing cross-task interference. RI does this whilst using only unlabeled auxiliary data as input (i.e., no task-data is needed), allowing it to be applied in data-scarce scenarios. RI consistently improves the performance of state-of-the-art merging methods by up to 3.8% and generalization to unseen domains by up to 2.3%. We also find RI to be robust to the source of auxiliary input while being significantly less sensitive to tuning of merging hyperparameters. Our codebase is available at: https://github.com/pramesh39/resolving_interference
+
+**Comment:** Core methodology for model merging: reduces cross-task interference by functionally orthogonalizing constituent models using unlabeled auxiliary data.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 27. [Deep Invertible Autoencoders for Dimensionality Reduction of Dynamical Systems](https://arxiv.org/abs/2603.13496) <a id="link27"></a>
+
+**ArXiv ID:** 2603.13496
+
+**Authors:** Nicolò Botteghi, Silke Glas, Christoph Brune
+
+**Abstract:** Constructing reduced-order models (ROMs) capable of efficiently predicting the evolution of high-dimensional, parametric systems is crucial in many applications in engineering and applied sciences. A popular class of projection-based ROMs projects the high-dimensional full-order model (FOM) dynamics onto a low-dimensional manifold. These projection-based ROMs approaches often rely on classical model reduction techniques such as proper orthogonal decomposition (POD) or, more recently, on neural network architectures such as autoencoders (AEs). In the case that the ROM is constructed by the POD, one has approximation guaranteed based based on the singular values of the problem at hand. However, POD-based techniques can suffer from slow decay of the singular values in transport- and advection-dominated problems. In contrast to that, AEs allow for better reduction capabilities than the POD, often with the first few modes, but at the price of theoretical considerations. In addition, it is often observed, that AEs exhibits a plateau of the projection error with the increment of the dimension of the trial manifold. In this work, we propose a deep invertible AE architecture, named inv-AE, that improves upon the stagnation of the projection error typical of traditional AE architectures, e.g., convolutional, and the reconstructions quality. Inv-AE is composed of several invertible neural network layers that allows for gradually recovering more information about the FOM solutions the more we increase the dimension of the reduced manifold. Through the application of inv-AE to a parametric 1D Burgers' equation and a parametric 2D fluid flow around an obstacle with variable geometry, we show that (i) inv-AE mitigates the issue of the characteristic plateau of (convolutional) AEs and (ii) inv-AE can be combined with popular projection-based ROM approaches to improve their accuracy.
+
+**Comment:** Core autoencoder architecture contribution: invertible autoencoders for dimensionality reduction that mitigate projection-error plateaus as latent dimension grows.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 28. [Dependency-Aware Parallel Decoding via Attention for Diffusion LLMs](https://arxiv.org/abs/2603.12996) <a id="link28"></a>
+
+**ArXiv ID:** 2603.12996
+
+**Authors:** Bumjun Kim, Dongjae Jeon, Moongyu Jeon, Albert No
+
+**Abstract:** Parallel decoding for diffusion LLMs (dLLMs) is difficult because each denoising step provides only token-wise marginal distributions, while unmasking multiple tokens simultaneously requires accounting for inter-token dependencies. We propose Dependency-Aware Parallel Decoding (DAPD), a simple, training-free decoding method that uses self-attention to induce a conditional dependency graph over masked tokens. At each iteration, edges in this graph capture strong token interactions, while non-edges indicate weak dependence. Parallel decoding is then reduced to selecting an independent set on the graph and unmasking the selected tokens in parallel. This avoids co-updating strongly coupled tokens without auxiliary models or retraining. Experiments on LLaDA and Dream show that DAPD improves the accuracy-steps trade-off over existing methods and enables more globally distributed parallel updates that better exploit the any-order generation capability of dLLMs.
+
+**Comment:** Training-free parallel decoding for diffusion LLMs using self-attention-induced dependency graphs and independent-set selection.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 29. [Representation Learning for Spatiotemporal Physical Systems](https://arxiv.org/abs/2603.13227) <a id="link29"></a>
+
+**ArXiv ID:** 2603.13227
+
+**Authors:** Helen Qu, Rudy Morel, Michael McCabe, Alberto Bietti, François Lanusse, Shirley Ho, Yann LeCun
+
+**Abstract:** Machine learning approaches to spatiotemporal physical systems have primarily focused on next-frame prediction, with the goal of learning an accurate emulator for the system's evolution in time. However, these emulators are computationally expensive to train and are subject to performance pitfalls, such as compounding errors during autoregressive rollout. In this work, we take a different perspective and look at scientific tasks further downstream of predicting the next frame, such as estimation of a system's governing physical parameters. Accuracy on these tasks offers a uniquely quantifiable glimpse into the physical relevance of the representations of these models. We evaluate the effectiveness of general-purpose self-supervised methods in learning physics-grounded representations that are useful for downstream scientific tasks. Surprisingly, we find that not all methods designed for physical modeling outperform generic self-supervised learning methods on these tasks, and methods that learn in the latent space (e.g., joint embedding predictive architectures, or JEPAs) outperform those optimizing pixel-level prediction objectives. Code is available at https://github.com/helenqu/physical-representation-learning.
+
+**Comment:** Directly studies representation learning by comparing self-supervised objectives for physically meaningful latent representations, highlighting latent-space methods like JEPA.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 30. [Orla: A Library for Serving LLM-Based Multi-Agent Systems](https://arxiv.org/abs/2603.13605) <a id="link30"></a>
+
+**ArXiv ID:** 2603.13605
+
+**Authors:** Rana Shahout, Hayder Tirmazi, Minlan Yu, Michael Mitzenmacher
+
+**Abstract:** We introduce Orla, a library for constructing and running LLM-based agentic systems. Modern agentic applications consist of workflows that combine multiple LLM inference steps, tool calls, and heterogeneous infrastructure. Today, developers typically build these systems by manually composing orchestration code with LLM serving engines and tool execution logic. Orla provides a general abstraction that separates request execution from workflow-level policy. It acts as a serving layer above existing LLM inference engines: developers define workflows composed of stages, while Orla manages how those stages are mapped, executed, and coordinated across models and backends. It provides agent-level control through three mechanisms: a stage mapper, which assigns each stage to an appropriate model and backend; a workflow orchestrator, which schedules stages and manages their resources and context; and a memory manager, which manages inference state such as the KV cache across workflow boundaries. We demonstrate Orla with a customer support workflow that exercises many of its capabilities. We evaluate Orla on two datasets, showing that stage mapping improves latency and cost compared to a single-model vLLM baseline, while workflow-level cache management reduces time-to-first-token.
+
+**Comment:** Introduces systems-level mechanisms for multi-agent LLM serving, especially workflow orchestration and KV-cache management across workflow boundaries.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 31. [TERMINATOR: Learning Optimal Exit Points for Early Stopping in Chain-of-Thought Reasoning](https://arxiv.org/abs/2603.12529) <a id="link31"></a>
+
+**ArXiv ID:** 2603.12529
+
+**Authors:** Alliot Nagle, Jakhongir Saydaliev, Dhia Garbaya, Michael Gastpar, Ashok Vardhan Makkuva, Hyeji Kim
+
+**Abstract:** Large Reasoning Models (LRMs) achieve impressive performance on complex reasoning tasks via Chain-of-Thought (CoT) reasoning, which enables them to generate intermediate thinking tokens before arriving at the final answer. However, LRMs often suffer from significant overthinking, spending excessive compute time even after the answer is generated early on. Prior work has identified the existence of an optimal reasoning length such that truncating reasoning at this point significantly shortens CoT outputs with virtually no change in performance. However, determining optimal CoT lengths for practical datasets is highly non-trivial as they are fully task and model-dependent. In this paper, we precisely address this and design TERMINATOR, an early-exit strategy for LRMs at inference to mitigate overthinking. The central idea underpinning TERMINATOR is that the first arrival of an LRM's final answer is often predictable, and we leverage these first answer positions to create a novel dataset of optimal reasoning lengths to train TERMINATOR. Powered by this approach, TERMINATOR achieves significant reductions in CoT lengths of 14%-55% on average across four challenging practical datasets: MATH-500, AIME 2025, HumanEval, and GPQA, whilst outperforming current state-of-the-art methods.
+
+**Comment:** Inference-efficiency method for reasoning models: learns optimal early-exit points to cut Chain-of-Thought compute.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+# Paper Selection Prompt
+
+## System Prompt
+
+> You are a helpful paper reading assistant whose job is to read daily posts from ArXiv and identify a few papers that your friend will enjoy reading.
+> Your job is to carefully read the paper titles and abstracts below and find the ones that match the criteria below.
+
+## User Prompt
+
+> ## Instructions
+> 
+> Respond in JSONL. Output exactly one JSON object per paper, one per line:
+> 
+> {"ARXIVID":"...","COMMENT":"...","RELEVANCE":0,"NOVELTY":0}
+> 
+> Rules:
+> - ARXIVID: the arXiv ID.
+> - COMMENT: identify the single strongest matching criterion. Be brief and specific. Do not rely on generic phrases like "language modeling" or "advancement". Do not mention non-matching criteria.
+> - RELEVANCE: integer from 1 to 10.
+> - NOVELTY: integer from 1 to 10.
+> - Do not output markdown, code fences, or any extra text.
+> 
+> 
+> ## Scoring Criteria
+> 
+> Relevance and Novelty are independent axes. Score both from 1 to 10.
+> 
+> ### Relevance Scoring
+> 
+> - 9-10: directly centered on the target foundational topics; highest when the core contribution is clearly within them.
+> - 7-8: substantially related, but partly peripheral or focused on a narrower aspect.
+> - 5-6: touches the target topics, but the main contribution is elsewhere.
+> - 3-4: largely outside the target topics, often application-focused or domain-specific.
+> - 1-2: unrelated.
+> 
+> Rare exception:
+> If a paper looks off-topic at first glance but plausibly introduces a new foundational direction with major future impact, you may still assign Relevance 9-10.
+> 
+> ### Novelty Scoring
+> 
+> - 9-10: new paradigm, theory, or major methodological breakthrough.
+> - 7-8: substantial methodological advance or strong new insight.
+> - 5-6: meaningful but incremental extension or refinement.
+> - 3-4: minor, narrow, or mostly engineering or domain-specific improvement.
+> - 1-2: little originality; mainly standard application of existing methods.
+> 
+> 
+> ## Papers
+> 
+> [PAPER LIST HERE]
+> 
+> ## Relevant Topics
+> 
+> Focus on foundational research. Keep papers whose main contribution is methodological, theoretical, or systems-level. Filter out papers that are mainly application-driven.
+> 
+> 1. Model Architecture
+> - Keep: Mixture-of-Experts (MoE), Transformers, conditional or dynamic networks, autoencoders, or analysis and innovation on core architectures.
+> - Filter: papers that mainly apply existing architectures to a task without architectural insight.
+> 
+> 2. Model Compression and Efficiency
+> - Keep: sparsity, pruning, quantization, low-rank methods, cache, or other algorithmic and theoretical efficiency advances.
+> - Filter: straightforward application of known compression methods to a new task.
+> 
+> 3. High Performance Computing
+> - Keep: algorithmic or systems innovations for training large models, distributed training, or memory optimization.
+> - Filter: incremental engineering improvements without clear methodological contribution.
+> 
+> 4. Representation Learning
+> - Keep: work on how networks encode information, feature or dictionary learning, sparse or contrastive methods, or training dynamics.
+> - Filter: standard applications of known techniques without new theoretical or methodological insight.
+> 
+> Usually irrelevant unless the core contribution is clearly foundational:
+> - Reinforcement Learning, Transfer Learning, Federated Learning, Online Learning
+> - Domain applications such as medical imaging, segmentation, 3D vision, video understanding, information retrieval, summarization, recommendation, machine translation, speech recognition, time series, knowledge graphs, etc.

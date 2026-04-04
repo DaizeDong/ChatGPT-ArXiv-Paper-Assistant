@@ -1,0 +1,570 @@
+<div style="display: flex; align-items: flex-start; justify-content: space-between; width: 100%;"><div style="width: 33.33%; text-align: left;"><a href="../29"><img src="../../../assets/nav/day/2025-04-30-prev.svg" alt="Previous Day 2025-04-29"></a></div><div style="width: 33.33%; text-align: center;"><a href=".."><img src="../../../assets/nav/day/2025-04-30-center.svg" alt="Monthly Overview 2025-04"></a></div><div style="width: 33.33%; text-align: right;"><a href="../../2025-05/01"><img src="../../../assets/nav/day/2025-04-30-next.svg" alt="Next Day 2025-05-01"></a></div></div>
+
+# Personalized Daily ArXiv Papers 2025-04-30
+
+| *[gpt-4o]*   | Prompt   | Completion   | Total   |
+|:------------:|:--------:|:------------:|:-------:|
+| **Token**    | 35188    | 5033         | 40221   |
+| **Cost**     | $0.09    | $0.05        | $0.14   |
+
+Total arXiv papers: 438
+
+Total scanned papers: 289
+
+Total relevant papers: 25
+
+**Table of contents with paper titles:**
+
+1. [Towards Understanding the Nature of Attention with Low-Rank Sparse Decomposition](#user-content-link1)
+**Authors:** Zhengfu He, Junxuan Wang, Rui Lin, Xuyang Ge, Wentao Shu, Qiong Tang, Junping Zhang, Xipeng Qiu
+
+2. [Nonlinear Computation with Linear Optics via Source-Position Encoding](#user-content-link2)
+**Authors:** N. Richardson, C. Bosch, R. P. Adams
+
+3. [Partial Answer of How Transformers Learn Automata](#user-content-link3)
+**Authors:** Tiantian (Crystal), Zhang
+
+4. [GaLore 2: Large-Scale LLM Pre-Training by Gradient Low-Rank Projection](#user-content-link4)
+**Authors:** DiJia Su, Andrew Gu, Jane Xu, Yuandong Tian, Jiawei Zhao
+
+5. [Softpick: No Attention Sink, No Massive Activations with Rectified Softmax](#user-content-link5)
+**Authors:** Zayd M. K. Zuhri, Erland Hilman Fuadi, Alham Fikri Aji
+
+6. [The Limits of AI Explainability: An Algorithmic Information Theory Approach](#user-content-link6)
+**Authors:** Shrisha Rao
+
+7. [Learning Laplacian Positional Encodings for Heterophilous Graphs](#user-content-link7)
+**Authors:** Michael Ito, Jiong Zhu, Dexiong Chen, Danai Koutra, Jenna Wiens
+
+8. [Reviving Any-Subset Autoregressive Models with Principled Parallel Sampling and Speculative Decoding](#user-content-link8)
+**Authors:** Gabe Guo, Stefano Ermon
+
+9. [Jekyll-and-Hyde Tipping Point in an AI's Behavior](#user-content-link9)
+**Authors:** Neil F. Johnson, Frank Yingjie Huo
+
+10. [Equivariant non-linear maps for neural networks on homogeneous spaces](#user-content-link10)
+**Authors:** Elias Nyholm, Oscar Carlsson, Maurice Weiler, Daniel Persson
+
+11. [Energy-Based Coarse-Graining in Molecular Dynamics: A Flow-Based Framework Without Data](#user-content-link11)
+**Authors:** Maximilian Stupp, P. S. Koutsourelakis
+
+12. [Coreset selection for the Sinkhorn divergence and generic smooth divergences](#user-content-link12)
+**Authors:** Alex Kokot, Alex Luedtke
+
+13. [FourierSpecNet: Neural Collision Operator Approximation Inspired by the Fourier Spectral Method for Solving the Boltzmann Equation](#user-content-link13)
+**Authors:** Jae Yong Lee, Gwang Jae Jung, Byung Chan Lim, Hyung Ju Hwang
+
+14. [Provably faster randomized and quantum algorithms for k-means clustering via uniform sampling](#user-content-link14)
+**Authors:** Tyler Chen, Archan Ray, Akshay Seshadri, Dylan Herman, Bao Bach, Pranav Deshpande, Abhishek Som, Niraj Kumar, Marco Pistoia
+
+15. [Learning and Generalization with Mixture Data](#user-content-link15)
+**Authors:** Harsh Vardhan, Avishek Ghosh, Arya Mazumdar
+
+16. [FX-DARTS: Designing Topology-unconstrained Architectures with Differentiable Architecture Search and Entropy-based Super-network Shrinking](#user-content-link16)
+**Authors:** Xuan Rao, Bo Zhao, Derong Liu, Cesare Alippi
+
+17. [Beyond the Last Answer: Your Reasoning Trace Uncovers More than You Think](#user-content-link17)
+**Authors:** Hasan Abed Al Kader Hammoud, Hani Itani, Bernard Ghanem
+
+18. [Head-Tail-Aware KL Divergence in Knowledge Distillation for Spiking Neural Networks](#user-content-link18)
+**Authors:** Tianqing Zhang, Zixin Zhu, Kairong Yu, Hongwei Wang
+
+19. [DYNAMAX: Dynamic computing for Transformers and Mamba based architectures](#user-content-link19)
+**Authors:** Miguel Nogales, Matteo Gambella, Manuel Roveri
+
+20. [Can Large Language Models Learn Formal Logic? A Data-Driven Training and Evaluation Framework](#user-content-link20)
+**Authors:** Yuan Xia, Akanksha Atrey, Fadoua Khmaissia, Kedar S. Namjoshi
+
+21. [Group Relative Knowledge Distillation: Learning from Teacher's Relational Inductive Bias](#user-content-link21)
+**Authors:** Chao Li, Changhua Zhou, Jia Chen
+
+22. [SFi-Former: Sparse Flow Induced Attention for Graph Transformer](#user-content-link22)
+**Authors:** Zhonghao Li, Ji Shi, Xinming Zhang, Miao Zhang, Bo Li
+
+23. [On Stochastic Rounding with Few Random Bits](#user-content-link23)
+**Authors:** Andrew Fitzgibbon, Stephen Felix
+
+24. [Guessing Efficiently for Constrained Subspace Approximation](#user-content-link24)
+**Authors:** Aditya Bhaskara, Sepideh Mahabadi, Madhusudhan Reddy Pittu, Ali Vakilian, David P. Woodruff
+
+25. [Explanations Go Linear: Interpretable and Individual Latent Encoding for Post-hoc Explainability](#user-content-link25)
+**Authors:** Simone Piaggesi, Riccardo Guidotti, Fosca Giannotti, Dino Pedreschi
+
+---
+
+## 1. [Towards Understanding the Nature of Attention with Low-Rank Sparse Decomposition](https://arxiv.org/abs/2504.20938) <a id="link1"></a>
+
+**ArXiv ID:** 2504.20938
+
+**Authors:** Zhengfu He, Junxuan Wang, Rui Lin, Xuyang Ge, Wentao Shu, Qiong Tang, Junping Zhang, Xipeng Qiu
+
+**Abstract:** We propose Low-Rank Sparse Attention (Lorsa), a sparse replacement model of Transformer attention layers to disentangle original Multi Head Self Attention (MHSA) into individually comprehensible components. Lorsa is designed to address the challenge of attention superposition to understand attention-mediated interaction between features in different token positions. We show that Lorsa heads find cleaner and finer-grained versions of previously discovered MHSA behaviors like induction heads, successor heads and attention sink behavior (i.e., heavily attending to the first token). Lorsa and Sparse Autoencoder (SAE) are both sparse dictionary learning methods applied to different Transformer components, and lead to consistent findings in many ways. For instance, we discover a comprehensive family of arithmetic-specific Lorsa heads, each corresponding to an atomic operation in Llama-3.1-8B. Automated interpretability analysis indicates that Lorsa achieves parity with SAE in interpretability while Lorsa exhibits superior circuit discovery properties, especially for features computed collectively by multiple MHSA heads. We also conduct extensive experiments on architectural design ablation, Lorsa scaling law and error analysis.
+
+**Comment:** The paper introduces Low-Rank Sparse Attention (Lorsa), which aligns with the criteria of representation learning and model compression by exploring sparse dictionary learning and low-rank decomposition in Transformer attention layers. It also provides insights into training dynamics and interpretability.
+
+**Relevance:** 10
+**Novelty:** 8
+
+---
+
+## 2. [Nonlinear Computation with Linear Optics via Source-Position Encoding](https://arxiv.org/abs/2504.20401) <a id="link2"></a>
+
+**ArXiv ID:** 2504.20401
+
+**Authors:** N. Richardson, C. Bosch, R. P. Adams
+
+**Abstract:** Optical computing systems provide an alternate hardware model which appears to be aligned with the demands of neural network workloads. However, the challenge of implementing energy efficient nonlinearities in optics -- a key requirement for realizing neural networks -- is a conspicuous missing link. In this work we introduce a novel method to achieve nonlinear computation in fully linear media. Our method can operate at low power and requires only the ability to drive the optical system at a data-dependent spatial position. Leveraging this positional encoding, we formulate a fully automated, topology-optimization-based hardware design framework for extremely specialized optical neural networks, drawing on modern advancements in optimization and machine learning. We evaluate our optical designs on machine learning classification tasks: demonstrating significant improvements over linear methods, and competitive performance when compared to standard artificial neural networks.
+
+**Comment:** The paper proposes a novel method for nonlinear computation in linear optical systems, which aligns with 'Emerging Trends' and foundational advancements in hardware for neural networks.
+
+**Relevance:** 9
+**Novelty:** 9
+
+---
+
+## 3. [Partial Answer of How Transformers Learn Automata](https://arxiv.org/abs/2504.20395) <a id="link3"></a>
+
+**ArXiv ID:** 2504.20395
+
+**Authors:** Tiantian (Crystal), Zhang
+
+**Abstract:** We introduce a novel framework for simulating finite automata using representation-theoretic semidirect products and Fourier modules, achieving more efficient Transformer-based implementations.
+
+**Comment:** The paper introduces a novel framework for simulating finite automata using representation-theoretic methods, which aligns with representation learning and theoretical insights into Transformer behavior.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 4. [GaLore 2: Large-Scale LLM Pre-Training by Gradient Low-Rank Projection](https://arxiv.org/abs/2504.20437) <a id="link4"></a>
+
+**ArXiv ID:** 2504.20437
+
+**Authors:** DiJia Su, Andrew Gu, Jane Xu, Yuandong Tian, Jiawei Zhao
+
+**Abstract:** Large language models (LLMs) have revolutionized natural language understanding and generation but face significant memory bottlenecks during training. GaLore, Gradient Low-Rank Projection, addresses this issue by leveraging the inherent low-rank structure of weight gradients, enabling substantial memory savings without sacrificing performance. Recent works further extend GaLore from various aspects, including low-bit quantization and higher-order tensor structures. However, there are several remaining challenges for GaLore, such as the computational overhead of SVD for subspace updates and the integration with state-of-the-art training parallelization strategies (e.g., FSDP). In this paper, we present GaLore 2, an efficient and scalable GaLore framework that addresses these challenges and incorporates recent advancements. In addition, we demonstrate the scalability of GaLore 2 by pre-training Llama 7B from scratch using up to 500 billion training tokens, highlighting its potential impact on real LLM pre-training scenarios.
+
+**Comment:** The paper introduces GaLore 2, which focuses on gradient low-rank projection for efficient LLM pretraining, aligning with model compression and efficiency breakthroughs.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 5. [Softpick: No Attention Sink, No Massive Activations with Rectified Softmax](https://arxiv.org/abs/2504.20966) <a id="link5"></a>
+
+**ArXiv ID:** 2504.20966
+
+**Authors:** Zayd M. K. Zuhri, Erland Hilman Fuadi, Alham Fikri Aji
+
+**Abstract:** We introduce softpick, a rectified, not sum-to-one, drop-in replacement for softmax in transformer attention mechanisms that eliminates attention sink and massive activations. Our experiments with 340M parameter models demonstrate that softpick maintains performance parity with softmax on standard benchmarks while achieving 0% sink rate. The softpick transformer produces hidden states with significantly lower kurtosis (340 vs 33,510) and creates sparse attention maps (46.97% sparsity). Models using softpick consistently outperform softmax when quantized, with particularly pronounced advantages at lower bit precisions. Our analysis and discussion shows how softpick has the potential to open new possibilities for quantization, low-precision training, sparsity optimization, pruning, and interpretability. Our code is available at https://github.com/zaydzuhri/softpick-attention.
+
+**Comment:** Introduces 'softpick', a rectified softmax replacement for transformer attention mechanisms, with implications for sparsity, quantization, and interpretability, directly aligning with model architecture and compression topics.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 6. [The Limits of AI Explainability: An Algorithmic Information Theory Approach](https://arxiv.org/abs/2504.20676) <a id="link6"></a>
+
+**ArXiv ID:** 2504.20676
+
+**Authors:** Shrisha Rao
+
+**Abstract:** This paper establishes a theoretical foundation for understanding the fundamental limits of AI explainability through algorithmic information theory. We formalize explainability as the approximation of complex models by simpler ones, quantifying both approximation error and explanation complexity using Kolmogorov complexity. Our key theoretical contributions include: (1) a complexity gap theorem proving that any explanation significantly simpler than the original model must differ from it on some inputs; (2) precise bounds showing that explanation complexity grows exponentially with input dimension but polynomially with error tolerance for Lipschitz functions; and (3) a characterization of the gap between local and global explainability, demonstrating that local explanations can be significantly simpler while maintaining accuracy in relevant regions. We further establish a regulatory impossibility theorem proving that no governance framework can simultaneously pursue unrestricted AI capabilities, human-interpretable explanations, and negligible error. These results highlight considerations likely to be relevant to the design, evaluation, and oversight of explainable AI systems.
+
+**Comment:** This paper provides a theoretical foundation for AI explainability using algorithmic information theory, aligning with the 'Emerging Trends' criterion for foundational research.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 7. [Learning Laplacian Positional Encodings for Heterophilous Graphs](https://arxiv.org/abs/2504.20430) <a id="link7"></a>
+
+**ArXiv ID:** 2504.20430
+
+**Authors:** Michael Ito, Jiong Zhu, Dexiong Chen, Danai Koutra, Jenna Wiens
+
+**Abstract:** In this work, we theoretically demonstrate that current graph positional encodings (PEs) are not beneficial and could potentially hurt performance in tasks involving heterophilous graphs, where nodes that are close tend to have different labels. This limitation is critical as many real-world networks exhibit heterophily, and even highly homophilous graphs can contain local regions of strong heterophily. To address this limitation, we propose Learnable Laplacian Positional Encodings (LLPE), a new PE that leverages the full spectrum of the graph Laplacian, enabling them to capture graph structure on both homophilous and heterophilous graphs. Theoretically, we prove LLPE's ability to approximate a general class of graph distances and demonstrate its generalization properties. Empirically, our evaluation on 12 benchmarks demonstrates that LLPE improves accuracy across a variety of GNNs, including graph transformers, by up to 35% and 14% on synthetic and real-world graphs, respectively. Going forward, our work represents a significant step towards developing PEs that effectively capture complex structures in heterophilous graphs.
+
+**Comment:** The paper introduces Learnable Laplacian Positional Encodings, which aligns with foundational research in representation learning and graph neural networks.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 8. [Reviving Any-Subset Autoregressive Models with Principled Parallel Sampling and Speculative Decoding](https://arxiv.org/abs/2504.20456) <a id="link8"></a>
+
+**ArXiv ID:** 2504.20456
+
+**Authors:** Gabe Guo, Stefano Ermon
+
+**Abstract:** In arbitrary-order language models, it is an open question how to sample tokens in parallel from the correct joint distribution. With discrete diffusion models, the more tokens they generate in parallel, the less their predicted distributions adhere to the originally learned data distribution, as they rely on a conditional independence assumption that only works with infinitesimally small timesteps. We find that a different class of models, any-subset autoregressive models (AS-ARMs), holds the solution. As implied by the name, AS-ARMs can generate tokens in any order, and in parallel. Moreover, AS-ARMs support parallelized joint probability density estimation, allowing them to correct their own parallel-generated token distributions, via our Any-Subset Speculative Decoding (ASSD) algorithm. ASSD provably enables generation of tokens from the correct joint distribution, with the number of neural network calls upper bounded by the number of tokens predicted. We empirically verify that ASSD speeds up language generation, without sacrificing quality. Furthermore, we provide a mathematically justified scheme for training AS-ARMs for generation, and show that AS-ARMs achieve state-of-the-art performance among sub-200M parameter models on infilling benchmark tasks, and nearly match the performance of models 50X larger on code generation. Our theoretical and empirical results indicate that the once-forgotten AS-ARMs are a promising direction of language modeling.
+
+**Comment:** The paper revives Any-Subset Autoregressive Models (AS-ARMs) with a principled approach to parallel sampling and decoding, which aligns with the 'Large Language Models' criterion by providing theoretical insights into language model behavior.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 9. [Jekyll-and-Hyde Tipping Point in an AI's Behavior](https://arxiv.org/abs/2504.20980) <a id="link9"></a>
+
+**ArXiv ID:** 2504.20980
+
+**Authors:** Neil F. Johnson, Frank Yingjie Huo
+
+**Abstract:** Trust in AI is undermined by the fact that there is no science that predicts -- or that can explain to the public -- when an LLM's output (e.g. ChatGPT) is likely to tip mid-response to become wrong, misleading, irrelevant or dangerous. With deaths and trauma already being blamed on LLMs, this uncertainty is even pushing people to treat their 'pet' LLM more politely to 'dissuade' it (or its future Artificial General Intelligence offspring) from suddenly turning on them. Here we address this acute need by deriving from first principles an exact formula for when a Jekyll-and-Hyde tipping point occurs at LLMs' most basic level. Requiring only secondary school mathematics, it shows the cause to be the AI's attention spreading so thin it suddenly snaps. This exact formula provides quantitative predictions for how the tipping-point can be delayed or prevented by changing the prompt and the AI's training. Tailored generalizations will provide policymakers and the public with a firm platform for discussing any of AI's broader uses and risks, e.g. as a personal counselor, medical advisor, decision-maker for when to use force in a conflict situation. It also meets the need for clear and transparent answers to questions like ''should I be polite to my LLM?''
+
+**Comment:** The paper derives a formula for tipping points in LLM behavior, aligning with the 'Large Language Models' criterion by providing theoretical insights into LLM behavior and interpretability.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 10. [Equivariant non-linear maps for neural networks on homogeneous spaces](https://arxiv.org/abs/2504.20974) <a id="link10"></a>
+
+**ArXiv ID:** 2504.20974
+
+**Authors:** Elias Nyholm, Oscar Carlsson, Maurice Weiler, Daniel Persson
+
+**Abstract:** This paper presents a novel framework for non-linear equivariant neural network layers on homogeneous spaces. The seminal work of Cohen et al. on equivariant $G$-CNNs on homogeneous spaces characterized the representation theory of such layers in the linear setting, finding that they are given by convolutions with kernels satisfying so-called steerability constraints. Motivated by the empirical success of non-linear layers, such as self-attention or input dependent kernels, we set out to generalize these insights to the non-linear setting. We derive generalized steerability constraints that any such layer needs to satisfy and prove the universality of our construction. The insights gained into the symmetry-constrained functional dependence of equivariant operators on feature maps and group elements informs the design of future equivariant neural network layers. We demonstrate how several common equivariant network architectures - $G$-CNNs, implicit steerable kernel networks, conventional and relative position embedded attention based transformers, and LieTransformers - may be derived from our framework.
+
+**Comment:** This paper provides a theoretical framework for non-linear equivariant neural network layers, which aligns with architectural innovations and foundational research.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 11. [Energy-Based Coarse-Graining in Molecular Dynamics: A Flow-Based Framework Without Data](https://arxiv.org/abs/2504.20940) <a id="link11"></a>
+
+**ArXiv ID:** 2504.20940
+
+**Authors:** Maximilian Stupp, P. S. Koutsourelakis
+
+**Abstract:** Coarse-grained (CG) models offer an effective route to reducing the complexity of molecular simulations, yet conventional approaches depend heavily on long all-atom molecular dynamics (MD) trajectories to adequately sample configurational space. This data-driven dependence limits their accuracy and generalizability, as unvisited configurations remain excluded from the resulting CG model. We introduce a data-free generative framework for coarse-graining that directly targets the all-atom Boltzmann distribution. Our model defines a structured latent space comprising slow collective variables, which are statistically associated with multimodal marginal densities capturing metastable states, and fast variables, which represent the remaining degrees of freedom with simple, unimodal conditional distributions. A potentially learnable, bijective map from the full latent space to the all-atom configuration space enables automatic and accurate reconstruction of molecular structures. The model is trained using an energy-based objective that minimizes the reverse Kullback-Leibler divergence, relying solely on the interatomic potential rather than sampled trajectories. A tempering scheme is used to stabilize training and promote exploration of diverse configurations. Once trained, the model can generate unbiased, one-shot equilibrium all-atom samples. We validate the method on two synthetic systems-a double-well potential and a Gaussian mixture-as well as on the benchmark alanine dipeptide. The model captures all relevant modes of the Boltzmann distribution, accurately reconstructs atomic configurations, and learns physically meaningful coarse-grained representations, all without any simulation data.
+
+**Comment:** The paper introduces a data-free generative framework for coarse-graining in molecular dynamics, aligning with 'AI for Science' and foundational generative modeling.
+
+**Relevance:** 8
+**Novelty:** 8
+
+---
+
+## 12. [Coreset selection for the Sinkhorn divergence and generic smooth divergences](https://arxiv.org/abs/2504.20194) <a id="link12"></a>
+
+**ArXiv ID:** 2504.20194
+
+**Authors:** Alex Kokot, Alex Luedtke
+
+**Abstract:** We introduce CO2, an efficient algorithm to produce convexly-weighted coresets with respect to generic smooth divergences. By employing a functional Taylor expansion, we show a local equivalence between sufficiently regular losses and their second order approximations, reducing the coreset selection problem to maximum mean discrepancy minimization. We apply CO2 to the Sinkhorn divergence, providing a novel sampling procedure that requires logarithmically many data points to match the approximation guarantees of random sampling. To show this, we additionally verify several new regularity properties for entropically regularized optimal transport of independent interest. Our approach leads to a new perspective linking coreset selection and kernel quadrature to classical statistical methods such as moment and score matching. We showcase this method with a practical application of subsampling image data, and highlight key directions to explore for improved algorithmic efficiency and theoretical guarantees.
+
+**Comment:** The paper introduces a coreset selection algorithm for smooth divergences, which is a foundational contribution to optimization and efficiency methods.
+
+**Relevance:** 8
+**Novelty:** 8
+
+---
+
+## 13. [FourierSpecNet: Neural Collision Operator Approximation Inspired by the Fourier Spectral Method for Solving the Boltzmann Equation](https://arxiv.org/abs/2504.20408) <a id="link13"></a>
+
+**ArXiv ID:** 2504.20408
+
+**Authors:** Jae Yong Lee, Gwang Jae Jung, Byung Chan Lim, Hyung Ju Hwang
+
+**Abstract:** The Boltzmann equation, a fundamental model in kinetic theory, describes the evolution of particle distribution functions through a nonlinear, high-dimensional collision operator. However, its numerical solution remains computationally demanding, particularly for inelastic collisions and high-dimensional velocity domains. In this work, we propose the Fourier Neural Spectral Network (FourierSpecNet), a hybrid framework that integrates the Fourier spectral method with deep learning to approximate the collision operator in Fourier space efficiently. FourierSpecNet achieves resolution-invariant learning and supports zero-shot super-resolution, enabling accurate predictions at unseen resolutions without retraining. Beyond empirical validation, we establish a consistency result showing that the trained operator converges to the spectral solution as the discretization is refined. We evaluate our method on several benchmark cases, including Maxwellian and hard-sphere molecular models, as well as inelastic collision scenarios. The results demonstrate that FourierSpecNet offers competitive accuracy while significantly reducing computational cost compared to traditional spectral solvers. Our approach provides a robust and scalable alternative for solving the Boltzmann equation across both elastic and inelastic regimes.
+
+**Comment:** The paper proposes a hybrid framework for solving the Boltzmann equation using deep learning, which is foundational research in AI for Science.
+
+**Relevance:** 8
+**Novelty:** 8
+
+---
+
+## 14. [Provably faster randomized and quantum algorithms for k-means clustering via uniform sampling](https://arxiv.org/abs/2504.20982) <a id="link14"></a>
+
+**ArXiv ID:** 2504.20982
+
+**Authors:** Tyler Chen, Archan Ray, Akshay Seshadri, Dylan Herman, Bao Bach, Pranav Deshpande, Abhishek Som, Niraj Kumar, Marco Pistoia
+
+**Abstract:** The $k$-means algorithm (Lloyd's algorithm) is a widely used method for clustering unlabeled data. A key bottleneck of the $k$-means algorithm is that each iteration requires time linear in the number of data points, which can be expensive in big data applications. This was improved in recent works proposing quantum and quantum-inspired classical algorithms to approximate the $k$-means algorithm locally, in time depending only logarithmically on the number of data points (along with data dependent parameters) [$q$-means: A quantum algorithm for unsupervised machine learning; Kerenidis, Landman, Luongo, and Prakash, NeurIPS 2019; Do you know what $q$-means?, Doriguello, Luongo, Tang]. In this work, we describe a simple randomized mini-batch $k$-means algorithm and a quantum algorithm inspired by the classical algorithm. We prove worse-case guarantees that significantly improve upon the bounds for previous algorithms. Our improvements are due to a careful use of uniform sampling, which preserves certain symmetries of the $k$-means problem that are not preserved in previous algorithms that use data norm-based sampling.
+
+**Comment:** The paper proposes randomized and quantum algorithms for k-means clustering, which is foundational research in optimization and efficiency methods.
+
+**Relevance:** 8
+**Novelty:** 8
+
+---
+
+## 15. [Learning and Generalization with Mixture Data](https://arxiv.org/abs/2504.20651) <a id="link15"></a>
+
+**ArXiv ID:** 2504.20651
+
+**Authors:** Harsh Vardhan, Avishek Ghosh, Arya Mazumdar
+
+**Abstract:** In many, if not most, machine learning applications the training data is naturally heterogeneous (e.g. federated learning, adversarial attacks and domain adaptation in neural net training). Data heterogeneity is identified as one of the major challenges in modern day large-scale learning. A classical way to represent heterogeneous data is via a mixture model. In this paper, we study generalization performance and statistical rates when data is sampled from a mixture distribution. We first characterize the heterogeneity of the mixture in terms of the pairwise total variation distance of the sub-population distributions. Thereafter, as a central theme of this paper, we characterize the range where the mixture may be treated as a single (homogeneous) distribution for learning. In particular, we study the generalization performance under the classical PAC framework and the statistical error rates for parametric (linear regression, mixture of hyperplanes) as well as non-parametric (Lipschitz, convex and H\"older-smooth) regression problems. In order to do this, we obtain Rademacher complexity and (local) Gaussian complexity bounds with mixture data, and apply them to get the generalization and convergence rates respectively. We observe that as the (regression) function classes get more complex, the requirement on the pairwise total variation distance gets stringent, which matches our intuition. We also do a finer analysis for the case of mixed linear regression and provide a tight bound on the generalization error in terms of heterogeneity.
+
+**Comment:** The paper studies generalization and statistical rates for mixture data, providing theoretical insights into heterogeneous data learning. This aligns with foundational research in representation learning and generalization theory.
+
+**Relevance:** 8
+**Novelty:** 8
+
+---
+
+## 16. [FX-DARTS: Designing Topology-unconstrained Architectures with Differentiable Architecture Search and Entropy-based Super-network Shrinking](https://arxiv.org/abs/2504.20079) <a id="link16"></a>
+
+**ArXiv ID:** 2504.20079
+
+**Authors:** Xuan Rao, Bo Zhao, Derong Liu, Cesare Alippi
+
+**Abstract:** Strong priors are imposed on the search space of Differentiable Architecture Search (DARTS), such that cells of the same type share the same topological structure and each intermediate node retains two operators from distinct nodes. While these priors reduce optimization difficulties and improve the applicability of searched architectures, they hinder the subsequent development of automated machine learning (Auto-ML) and prevent the optimization algorithm from exploring more powerful neural networks through improved architectural flexibility. This paper aims to reduce these prior constraints by eliminating restrictions on cell topology and modifying the discretization mechanism for super-networks. Specifically, the Flexible DARTS (FX-DARTS) method, which leverages an Entropy-based Super-Network Shrinking (ESS) framework, is presented to address the challenges arising from the elimination of prior constraints. Notably, FX-DARTS enables the derivation of neural architectures without strict prior rules while maintaining the stability in the enlarged search space. Experimental results on image classification benchmarks demonstrate that FX-DARTS is capable of exploring a set of neural architectures with competitive trade-offs between performance and computational complexity within a single search procedure.
+
+**Comment:** The paper introduces FX-DARTS, which focuses on differentiable architecture search and entropy-based super-network shrinking, aligning with the model architecture criterion by exploring architectural flexibility and optimization.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 17. [Beyond the Last Answer: Your Reasoning Trace Uncovers More than You Think](https://arxiv.org/abs/2504.20708) <a id="link17"></a>
+
+**ArXiv ID:** 2504.20708
+
+**Authors:** Hasan Abed Al Kader Hammoud, Hani Itani, Bernard Ghanem
+
+**Abstract:** Large Language Models (LLMs) leverage step-by-step reasoning to solve complex problems. Standard evaluation practice involves generating a complete reasoning trace and assessing the correctness of the final answer presented at its conclusion. In this paper, we challenge the reliance on the final answer by posing the following two questions: Does the final answer reliably represent the model's optimal conclusion? Can alternative reasoning paths yield different results? To answer these questions, we analyze intermediate reasoning steps, termed subthoughts, and propose a method based on our findings. Our approach involves segmenting a reasoning trace into sequential subthoughts based on linguistic cues. We start by prompting the model to generate continuations from the end-point of each intermediate subthought. We extract a potential answer from every completed continuation originating from different subthoughts. We find that aggregating these answers by selecting the most frequent one (the mode) often yields significantly higher accuracy compared to relying solely on the answer derived from the original complete trace. Analyzing the consistency among the answers derived from different subthoughts reveals characteristics that correlate with the model's confidence and correctness, suggesting potential for identifying less reliable answers. Our experiments across various LLMs and challenging mathematical reasoning datasets (AIME2024 and AIME2025) show consistent accuracy improvements, with gains reaching up to 13\% and 10\% respectively. Implementation is available at: https://github.com/hammoudhasan/SubthoughtReasoner.
+
+**Comment:** The paper explores reasoning trace analysis in LLMs, which aligns with foundational research in understanding LLM behavior and interpretability.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 18. [Head-Tail-Aware KL Divergence in Knowledge Distillation for Spiking Neural Networks](https://arxiv.org/abs/2504.20445) <a id="link18"></a>
+
+**ArXiv ID:** 2504.20445
+
+**Authors:** Tianqing Zhang, Zixin Zhu, Kairong Yu, Hongwei Wang
+
+**Abstract:** Spiking Neural Networks (SNNs) have emerged as a promising approach for energy-efficient and biologically plausible computation. However, due to limitations in existing training methods and inherent model constraints, SNNs often exhibit a performance gap when compared to Artificial Neural Networks (ANNs). Knowledge distillation (KD) has been explored as a technique to transfer knowledge from ANN teacher models to SNN student models to mitigate this gap. Traditional KD methods typically use Kullback-Leibler (KL) divergence to align output distributions. However, conventional KL-based approaches fail to fully exploit the unique characteristics of SNNs, as they tend to overemphasize high-probability predictions while neglecting low-probability ones, leading to suboptimal generalization. To address this, we propose Head-Tail Aware Kullback-Leibler (HTA-KL) divergence, a novel KD method for SNNs. HTA-KL introduces a cumulative probability-based mask to dynamically distinguish between high- and low-probability regions. It assigns adaptive weights to ensure balanced knowledge transfer, enhancing the overall performance. By integrating forward KL (FKL) and reverse KL (RKL) divergence, our method effectively align both head and tail regions of the distribution. We evaluate our methods on CIFAR-10, CIFAR-100 and Tiny ImageNet datasets. Our method outperforms existing methods on most datasets with fewer timesteps.
+
+**Comment:** Proposes a novel Head-Tail Aware KL divergence for knowledge distillation in Spiking Neural Networks, which aligns with model compression and efficiency breakthroughs.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 19. [DYNAMAX: Dynamic computing for Transformers and Mamba based architectures](https://arxiv.org/abs/2504.20922) <a id="link19"></a>
+
+**ArXiv ID:** 2504.20922
+
+**Authors:** Miguel Nogales, Matteo Gambella, Manuel Roveri
+
+**Abstract:** Early exits (EEs) offer a promising approach to reducing computational costs and latency by dynamically terminating inference once a satisfactory prediction confidence on a data sample is achieved. Although many works integrate EEs into encoder-only Transformers, their application to decoder-only architectures and, more importantly, Mamba models, a novel family of state-space architectures in the LLM realm, remains insufficiently explored. This work introduces DYNAMAX, the first framework to exploit the unique properties of Mamba architectures for early exit mechanisms. We not only integrate EEs into Mamba but also repurpose Mamba as an efficient EE classifier for both Mamba-based and transformer-based LLMs, showcasing its versatility. Our experiments employ the Mistral 7B transformer compared to the Codestral 7B Mamba model, using data sets such as TruthfulQA, CoQA, and TriviaQA to evaluate computational savings, accuracy, and consistency. The results highlight the adaptability of Mamba as a powerful EE classifier and its efficiency in balancing computational cost and performance quality across NLP tasks. By leveraging Mamba's inherent design for dynamic processing, we open pathways for scalable and efficient inference in embedded applications and resource-constrained environments. This study underscores the transformative potential of Mamba in redefining dynamic computing paradigms for LLMs.
+
+**Comment:** Proposes DYNAMAX, a framework for early exits in Mamba and transformer architectures, aligning with dynamic computing and efficiency improvements in model architecture.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 20. [Can Large Language Models Learn Formal Logic? A Data-Driven Training and Evaluation Framework](https://arxiv.org/abs/2504.20213) <a id="link20"></a>
+
+**ArXiv ID:** 2504.20213
+
+**Authors:** Yuan Xia, Akanksha Atrey, Fadoua Khmaissia, Kedar S. Namjoshi
+
+**Abstract:** This paper investigates the logical reasoning capabilities of large language models (LLMs). For a precisely defined yet tractable formulation, we choose the conceptually simple but technically complex task of constructing proofs in Boolean logic. A trained LLM receives as input a set of assumptions and a goal, and produces as output a proof that formally derives the goal from the assumptions. Incorrect proofs are caught by an automated proof checker. A critical obstacle for training is the scarcity of real-world proofs. We propose an efficient, randomized procedure for synthesizing valid proofs and introduce Template Transformation, a data augmentation technique that enhances the model's ability to handle complex logical expressions. The central evaluation question is whether an LLM has indeed learned to reason. We propose tests to measure the reasoning ability of a black-box LLM. By these measures, experiments demonstrate strong reasoning capabilities for assertions with short proofs, which decline with proof complexity. Notably, template transformation improves accuracy even for smaller models, suggesting its effectiveness across model scales.
+
+**Comment:** Investigates LLMs' ability to learn formal logic with a data-driven framework, which aligns with theoretical insights into LLM behavior.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 21. [Group Relative Knowledge Distillation: Learning from Teacher's Relational Inductive Bias](https://arxiv.org/abs/2504.20482) <a id="link21"></a>
+
+**ArXiv ID:** 2504.20482
+
+**Authors:** Chao Li, Changhua Zhou, Jia Chen
+
+**Abstract:** Knowledge distillation typically transfers knowledge from a teacher model to a student model by minimizing differences between their output distributions. However, existing distillation approaches largely focus on mimicking absolute probabilities and neglect the valuable relational inductive biases embedded in the teacher's relative predictions, leading to exposure bias. In this paper, we propose Group Relative Knowledge Distillation (GRKD), a novel framework that distills teacher knowledge by learning the relative ranking among classes, rather than directly fitting the absolute distribution. Specifically, we introduce a group relative loss that encourages the student model to preserve the pairwise preference orderings provided by the teacher's outputs. Extensive experiments on classification benchmarks demonstrate that GRKD achieves superior generalization compared to existing methods, especially in tasks requiring fine-grained class differentiation. Our method provides a new perspective on exploiting teacher knowledge, focusing on relational structure rather than absolute likelihood.
+
+**Comment:** Proposes Group Relative Knowledge Distillation (GRKD), focusing on relational inductive biases in knowledge distillation, which aligns with representation learning and model compression.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 22. [SFi-Former: Sparse Flow Induced Attention for Graph Transformer](https://arxiv.org/abs/2504.20666) <a id="link22"></a>
+
+**ArXiv ID:** 2504.20666
+
+**Authors:** Zhonghao Li, Ji Shi, Xinming Zhang, Miao Zhang, Bo Li
+
+**Abstract:** Graph Transformers (GTs) have demonstrated superior performance compared to traditional message-passing graph neural networks in many studies, especially in processing graph data with long-range dependencies. However, GTs tend to suffer from weak inductive bias, overfitting and over-globalizing problems due to the dense attention. In this paper, we introduce SFi-attention, a novel attention mechanism designed to learn sparse pattern by minimizing an energy function based on network flows with l1-norm regularization, to relieve those issues caused by dense attention. Furthermore, SFi-Former is accordingly devised which can leverage the sparse attention pattern of SFi-attention to generate sparse network flows beyond adjacency matrix of graph data. Specifically, SFi-Former aggregates features selectively from other nodes through flexible adaptation of the sparse attention, leading to a more robust model. We validate our SFi-Former on various graph datasets, especially those graph data exhibiting long-range dependencies. Experimental results show that our SFi-Former obtains competitive performance on GNN Benchmark datasets and SOTA performance on LongRange Graph Benchmark (LRGB) datasets. Additionally, our model gives rise to smaller generalization gaps, which indicates that it is less prone to over-fitting. Click here for codes.
+
+**Comment:** The paper introduces a novel sparse attention mechanism (SFi-attention) for Graph Transformers, which aligns with the 'Model Architecture' criterion by addressing architectural innovations and sparsity.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 23. [On Stochastic Rounding with Few Random Bits](https://arxiv.org/abs/2504.20634) <a id="link23"></a>
+
+**ArXiv ID:** 2504.20634
+
+**Authors:** Andrew Fitzgibbon, Stephen Felix
+
+**Abstract:** Large-scale numerical computations make increasing use of low-precision (LP) floating point formats and mixed precision arithmetic, which can be enhanced by the technique of stochastic rounding (SR), that is, rounding an intermediate high-precision value up or down randomly as a function of the value's distance to the two rounding candidates. Stochastic rounding requires, in addition to the high-precision input value, a source of random bits. As the provision of high-quality random bits is an additional computational cost, it is of interest to require as few bits as possible while maintaining the desirable properties of SR in a given computation, or computational domain. This paper examines a number of possible implementations of few-bit stochastic rounding (FBSR), and shows how several natural implementations can introduce sometimes significant bias into the rounding process, which are not present in the case of infinite-bit, infinite-precision examinations of these implementations. The paper explores the impact of these biases in machine learning examples, and hence opens another class of configuration parameters of which practitioners should be aware when developing or adopting low-precision floating point. Code is available at http://github.com/graphcore-research/arith25-stochastic-rounding.
+
+**Comment:** The paper explores stochastic rounding with few random bits, which aligns with the 'Model Compression' criterion by addressing low-precision computations and efficiency improvements.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 24. [Guessing Efficiently for Constrained Subspace Approximation](https://arxiv.org/abs/2504.20883) <a id="link24"></a>
+
+**ArXiv ID:** 2504.20883
+
+**Authors:** Aditya Bhaskara, Sepideh Mahabadi, Madhusudhan Reddy Pittu, Ali Vakilian, David P. Woodruff
+
+**Abstract:** In this paper we study constrained subspace approximation problem. Given a set of $n$ points $\{a_1,\ldots,a_n\}$ in $\mathbb{R}^d$, the goal of the {\em subspace approximation} problem is to find a $k$ dimensional subspace that best approximates the input points. More precisely, for a given $p\geq 1$, we aim to minimize the $p$th power of the $\ell_p$ norm of the error vector $(\|a_1-\bm{P}a_1\|,\ldots,\|a_n-\bm{P}a_n\|)$, where $\bm{P}$ denotes the projection matrix onto the subspace and the norms are Euclidean. In \emph{constrained} subspace approximation (CSA), we additionally have constraints on the projection matrix $\bm{P}$. In its most general form, we require $\bm{P}$ to belong to a given subset $\mathcal{S}$ that is described explicitly or implicitly.   We introduce a general framework for constrained subspace approximation. Our approach, that we term coreset-guess-solve, yields either $(1+\varepsilon)$-multiplicative or $\varepsilon$-additive approximations for a variety of constraints. We show that it provides new algorithms for partition-constrained subspace approximation with applications to {\it fair} subspace approximation, $k$-means clustering, and projected non-negative matrix factorization, among others. Specifically, while we reconstruct the best known bounds for $k$-means clustering in Euclidean spaces, we improve the known results for the remainder of the problems.
+
+**Comment:** The paper introduces a coreset-guess-solve framework for constrained subspace approximation, which aligns with 'Representation Learning' by addressing theoretical aspects of subspace approximation.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 25. [Explanations Go Linear: Interpretable and Individual Latent Encoding for Post-hoc Explainability](https://arxiv.org/abs/2504.20667) <a id="link25"></a>
+
+**ArXiv ID:** 2504.20667
+
+**Authors:** Simone Piaggesi, Riccardo Guidotti, Fosca Giannotti, Dino Pedreschi
+
+**Abstract:** Post-hoc explainability is essential for understanding black-box machine learning models. Surrogate-based techniques are widely used for local and global model-agnostic explanations but have significant limitations. Local surrogates capture non-linearities but are computationally expensive and sensitive to parameters, while global surrogates are more efficient but struggle with complex local behaviors. In this paper, we present ILLUME, a flexible and interpretable framework grounded in representation learning, that can be integrated with various surrogate models to provide explanations for any black-box classifier. Specifically, our approach combines a globally trained surrogate with instance-specific linear transformations learned with a meta-encoder to generate both local and global explanations. Through extensive empirical evaluations, we demonstrate the effectiveness of ILLUME in producing feature attributions and decision rules that are not only accurate but also robust and faithful to the black-box, thus providing a unified explanation framework that effectively addresses the limitations of traditional surrogate methods.
+
+**Comment:** The paper introduces ILLUME, a framework for post-hoc explainability using representation learning, which aligns with 'Representation Learning' by addressing interpretable latent encoding.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+# Paper Selection Prompt
+
+You are a helpful paper reading assistant whose job is to read daily posts from ArXiv and identify a few papers that your friend will enjoy reading.
+Your job is to carefully read the paper titles and abstracts below and find the ones that match the criteria below.
+
+## Instructions
+
+Write the response in JSONL format with {ARXIVID, COMMENT, RELEVANCE, NOVELTY} on each line, one for each paper.
+
+- ARXIVID: should be the ArXiv ID.
+- COMMENT: should identify whether there is a criteria that match the paper very closely. These matches should not be based on general terms like "language modeling" or "advancements" and should specifically refer to a criterion. No need to mention the non-matching criteria.
+- RELEVANCE: should be a score from 1-10.
+- NOVELTY: should be a score from 1-10.
+
+## Scoring Criteria
+
+> The "Relevance" score measures how closely the paper aligns with the core topics of the prompt.
+> The "Novelty" score assesses the originality and impact of the paper.
+> They are two **ORTHONORMAL** axes and **SHOULD NOT** be confused with each other.
+
+### Relevance Scoring
+
+- Relevance 9-10 (Completely Relevant)
+  - Focus: Fully aligned with core topics with no deviation, score the highest if contains relevant keywords in it.
+  - Examples: Papers focused on foundational methods or theoretical research, whose titles contain topic keywords like "MoE".
+
+- Relevance 7-8 (Relevant)
+  - Focus: Retain a solid link to the main research area, though may touch on peripheral elements.
+  - Examples: Papers research on the fundamental part of MoE through a less critical aspect like its behavior in GNN.
+
+- Relevance 5-6 (Borderline)
+  - Focus: Maintains a link to the core topic but also extends into at least one other domain/area beyond the primary focus.
+  - Examples: Work referencing MoE centered on reinforcement learning.
+
+- Relevance 3-4 (Irrelevant)
+  - Focus: Largely outside our interests with no association to our topics.
+  - Examples: Application-focused papers like using MoE to solve a problem in the real world.
+
+- Relevance 1-2 (Ignore)
+  - Focus: Purely unrelated to our topics. Completely a different domain.
+  - **Exception**: If the paper hints at a cutting-edge, radically new direction that could eventually transform the primary domain, consider a score of 9–10 despite initial appearances. (Usually a very rare concept that belongs to the fundamental research)
+
+### Novelty Scoring
+
+- Novelty 9-10 (Breakthrough)
+  - Definition: Groundbreaking methods/theory introducing new directions or solving major challenges.
+  - Examples: Entirely new paradigm for foundational models; a novel theory transforming representation learning.
+
+- Novelty 7-8 (Improvements)
+  - Definition: Substantial insights/enhancements, though not a full paradigm shift.
+  - Examples: Modifications on existing methods yielding significantly better results.
+
+- Novelty 5-6 (Borderline)
+  - Definition: Incremental contributions with possible long-term benefits, not immediately transformative.
+  - Examples: Moderately novel extension to an existing architecture; refining current methods without fundamentally altering them.
+
+- Novelty 3-4 (Tangential)
+  - Definition: Minor or domain-specific improvements with limited broader impact.
+  - Examples: Slight modifications to known methods with strange motivation; purely engineering jobs like a new benchmark/dataset.
+
+- Novelty 1-2 (Low)
+  - Definition: Minimal originality, applying standard approaches without real innovation.
+  - Examples: Using an off-the-shelf model without adding new insights; purely application-driven studies like finetuning a pretrained model using existing methods.
+
+## Papers
+
+[PAPER LIST HERE]
+
+## Relevant Topics
+
+Use the following relevance criteria to focus on foundational research. Keep **relevant** papers and filter out **irrelevant** ones. Avoid purely **application-driven** work.
+
+1. Representation Learning
+   - Relevant: Insights into how deep networks encode information, feature/dictionary learning, sparse/contrastive methods, training dynamics in neural networks.
+   - Irrelevant: Standard applications of known techniques lacking new theoretical or methodological contributions.
+
+2. Model Architecture
+   - Relevant: Mixture-of-Experts (MoE), Transformers, Conditional/Dynamic Networks, Autoencoders, analysis on existing architectures (like encoder-decoder), or other architectural innovations.
+   - Irrelevant: Merely using existing architectures for a certain task without insights into the structure themselves.
+
+3. Model Compression
+   - Relevant: Sparsity, pruning, quantization, low-rank approaches, KV cache, or other algorithmic/theoretical efficiency breakthroughs.
+   - Irrelevant: Straightforward applications of existing compression methods to new tasks.
+
+4. Large Language Models (LLMs)
+   - Relevant: Major breakthroughs in pretraining or architecture, theoretical insights into LLM behavior/interpretability.
+   - Irrelevant: Domain-specific usage (e.g., translation, jail-breaking), finetuning or inference tricks (e.g., instruction tuning, chain-of-thoughts, data mixing), or empirical dataset/benchmark studies and text-level analysis (e.g. hallucination, reasoning, safety).
+
+5. AI for Science
+   - Relevant: Foundational research in molecular/protein modeling, new generative paradigms, or significant architecture-level innovations.
+   - Irrelevant: Conventional, domain-specific applications without new theoretical perspectives.
+
+6. Emerging Trends
+   - Relevant: Cutting-edge theoretical work challenging established assumptions or introducing broad new paradigms.
+   - Irrelevant: Incremental improvements or trend-following without novel insights.
+
+**Keywords:**
+
+- Relevant: Mixture of Experts (MoE), Representation Learning, Compression/Efficiency, Sparse/Sparsity, Pruning, Quantization, Low-rank, Foundation Model, etc.
+- Irrelevant: Reinforcement Learning, Transfer Learning, Federated Learning, Online Learning, Diffusion Models, etc.
+- Application: Image Segmentation, Medical Imaging, 3D Vision, Video Understanding, Information Retrieval, Summarization, Recommendation Systems, Machine Translation, Speech Recognition, Signal Processing, Spatial/Temporal Modeling, Time Series, Knowledge Graph, etc.

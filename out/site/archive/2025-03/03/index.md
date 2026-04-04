@@ -1,0 +1,696 @@
+<div style="display: flex; align-items: flex-start; justify-content: space-between; width: 100%;"><div style="width: 33.33%; text-align: left;"><a href="../../2025-02/28"><img src="../../../assets/nav/day/2025-03-03-prev.svg" alt="Previous Day 2025-02-28"></a></div><div style="width: 33.33%; text-align: center;"><a href=".."><img src="../../../assets/nav/day/2025-03-03-center.svg" alt="Monthly Overview 2025-03"></a></div><div style="width: 33.33%; text-align: right;"><a href="../04"><img src="../../../assets/nav/day/2025-03-03-next.svg" alt="Next Day 2025-03-04"></a></div></div>
+
+# Personalized Daily Arxiv Papers 03/03/2025
+
+| *[gpt-4o]*   | Prompt   | Completion   | Total   |
+|--------------|----------|--------------|---------|
+| **Token**    | 41849    | 5791         | 47640   |
+| **Cost**     | $0.1     | $0.06        | $0.16   |
+
+Total ArXiv papers: 562
+
+Total scanned papers: 271
+
+Total relevant papers: 32
+
+**Table of contents with paper titles:**
+
+1. [Dataset Distillation with Neural Characteristic Function: A Minmax Perspective](#user-content-link1)
+**Authors:** Shaobo Wang, Yicun Yang, Zhiyuan Liu, Chenghao Sun, Xuming Hu, Conghui He, Linfeng Zhang
+
+2. [Transformers Learn to Implement Multi-step Gradient Descent with Chain of Thought](#user-content-link2)
+**Authors:** Jianhao Huang, Zixuan Wang, Jason D. Lee
+
+3. [Position: Solve Layerwise Linear Models First to Understand Neural Dynamical Phenomena (Neural Collapse, Emergence, Lazy/Rich Regime, and Grokking)](#user-content-link3)
+**Authors:** Yoonsoo Nam, Seok Hyeong Lee, Clementine Domine, Yea Chan Park, Charles London, Wonyl Choi, Niclas Goring, Seungjai Lee
+
+4. [FANformer: Improving Large Language Models Through Effective Periodicity Modeling](#user-content-link4)
+**Authors:** Yihong Dong, Ge Li, Xue Jiang, Yongding Tao, Kechi Zhang, Hao Zhu, Huanyu Liu, Jiazheng Ding, Jia Li, Jinliang Deng, Hong Mei
+
+5. [Learning Dynamics of Deep Linear Networks Beyond the Edge of Stability](#user-content-link5)
+**Authors:** Avrajit Ghosh, Soo Min Kwon, Rongrong Wang, Saiprasad Ravishankar, Qing Qu
+
+6. [Triple Phase Transitions: Understanding the Learning Dynamics of Large Language Models from a Neuroscience Perspective](#user-content-link6)
+**Authors:** Yuko Nakagi, Keigo Tada, Sota Yoshino, Shinji Nishimoto, Yu Takagi
+
+7. [Disentangling Feature Structure: A Mathematically Provable Two-Stage Training Dynamics in Transformers](#user-content-link7)
+**Authors:** Zixuan Gong, Jiaye Teng, Yong Liu
+
+8. [Revisiting Kernel Attention with Correlated Gaussian Process Representation](#user-content-link8)
+**Authors:** Long Minh Bui, Tho Tran Huu, Duy Dinh, Tan Minh Nguyen, Trong Nghia Hoang
+
+9. [Oscillation-Reduced MXFP4 Training for Vision Transformers](#user-content-link9)
+**Authors:** Yuxiang Chen, Haocheng Xi, Jun Zhu, Jianfei Chen
+
+10. [Dynamical Decoupling of Generalization and Overfitting in Large Two-Layer Networks](#user-content-link10)
+**Authors:** Andrea Montanari, Pierfrancesco Urbani
+
+11. [Stochastic Rounding for LLM Training: Theory and Practice](#user-content-link11)
+**Authors:** Kaan Ozkara, Tao Yu, Youngsuk Park
+
+12. [Training LLMs with MXFP4](#user-content-link12)
+**Authors:** Albert Tseng, Tao Yu, Youngsuk Park
+
+13. [Brain-Inspired Exploration of Functional Networks and Key Neurons in Large Language Models](#user-content-link13)
+**Authors:** Yiheng Liu, Xiaohui Gao, Haiyang Sun, Bao Ge, Tianming Liu, Junwei Han, Xintao Hu
+
+14. [BAnG: Bidirectional Anchored Generation for Conditional RNA Design](#user-content-link14)
+**Authors:** Roman Klypa, Alberto Bietti, Sergei Grudinin
+
+15. [Backpropagation-free Spiking Neural Networks with the Forward-Forward Algorithm](#user-content-link15)
+**Authors:** Mohammadnavid Ghader, Saeed Reza Kheradpisheh, Bahar Farahani, Mahmood Fazlali
+
+16. [Unsupervised Parameter Efficient Source-free Post-pretraining](#user-content-link16)
+**Authors:** Abhishek Jha, Tinne Tuytelaars, Yuki M. Asano
+
+17. [Interpreting CLIP with Hierarchical Sparse Autoencoders](#user-content-link17)
+**Authors:** Vladimir Zaigrajew, Hubert Baniecki, Przemyslaw Biecek
+
+18. [Data Distributional Properties As Inductive Bias for Systematic Generalization](#user-content-link18)
+**Authors:** Felipe del R\'io, Alain Raymond-S\'aez, Daniel Florea, Rodrigo Toro Icarte, Julio Hurtado, Cristi\'an Buc Calder\'on, \'Alvaro Soto
+
+19. [Discovering Global False Negatives On the Fly for Self-supervised Contrastive Learning](#user-content-link19)
+**Authors:** Vicente Balmaseda, Bokun Wang, Ching-Long Lin, Tianbao Yang
+
+20. [Information-Theoretic Perspectives on Optimizers](#user-content-link20)
+**Authors:** Zhiquan Tan, Weiran Huang
+
+21. [Promote, Suppress, Iterate: How Language Models Answer One-to-Many Factual Queries](#user-content-link21)
+**Authors:** Tianyi Lorena Yan, Robin Jia
+
+22. [Amortized Conditional Independence Testing](#user-content-link22)
+**Authors:** Bao Duong, Nu Hoang, Thin Nguyen
+
+23. [FlexPrefill: A Context-Aware Sparse Attention Mechanism for Efficient Long-Sequence Inference](#user-content-link23)
+**Authors:** Xunhao Lai, Jianqiao Lu, Yao Luo, Yiyuan Ma, Xun Zhou
+
+24. [An Algebraic Framework for Hierarchical Probabilistic Abstraction](#user-content-link24)
+**Authors:** Nijesh Upreti, Vaishak Belle
+
+25. [SEKI: Self-Evolution and Knowledge Inspiration based Neural Architecture Search via Large Language Models](#user-content-link25)
+**Authors:** Zicheng Cai, Yaohua Tang, Yutao Lai, Hua Wang, Zhi Chen, Hao Chen
+
+26. [Transfer Learning through Enhanced Sufficient Representation: Enriching Source Domain Knowledge with Target Data](#user-content-link26)
+**Authors:** Yeheng Ge, Xueyu Zhou, Jian Huang
+
+27. [SPD: Sync-Point Drop for efficient tensor parallelism of Large Language Models](#user-content-link27)
+**Authors:** Han-Byul Kim, Duc Hoang, Arnav Kundu, Mohammad Samragh, Minsik Cho
+
+28. [LiteASR: Efficient Automatic Speech Recognition with Low-Rank Approximation](#user-content-link28)
+**Authors:** Keisuke Kamahori, Jungo Kasai, Noriyuki Kojima, Baris Kasikci
+
+29. [Tuning-Free Structured Sparse PCA via Deep Unfolding Networks](#user-content-link29)
+**Authors:** Long Chen, Xianchao Xiu
+
+30. [Neuro-Symbolic Learning for Galois Groups: Unveiling Probabilistic Trends in Polynomials](#user-content-link30)
+**Authors:** Elira Shaska, Tony Shaska
+
+31. [ByteScale: Efficient Scaling of LLM Training with a 2048K Context Length on More Than 12,000 GPUs](#user-content-link31)
+**Authors:** Hao Ge, Junda Feng, Qi Huang, Fangcheng Fu, Xiaonan Nie, Lei Zuo, Haibin Lin, Bin Cui, Xin Liu
+
+32. [Fuzzy Speculative Decoding for a Tunable Accuracy-Runtime Tradeoff](#user-content-link32)
+**Authors:** Maximilian Holsman, Yukun Huang, Bhuwan Dhingra
+
+---
+
+## 1. [Dataset Distillation with Neural Characteristic Function: A Minmax Perspective](https://arxiv.org/abs/2502.20653) <a id="link1"></a>
+
+**ArXiv ID:** 2502.20653
+
+**Authors:** Shaobo Wang, Yicun Yang, Zhiyuan Liu, Chenghao Sun, Xuming Hu, Conghui He, Linfeng Zhang
+
+**Abstract:** Dataset distillation has emerged as a powerful approach for reducing data requirements in deep learning. Among various methods, distribution matching-based approaches stand out for their balance of computational efficiency and strong performance. However, existing distance metrics used in distribution matching often fail to accurately capture distributional differences, leading to unreliable measures of discrepancy. In this paper, we reformulate dataset distillation as a minmax optimization problem and introduce Neural Characteristic Function Discrepancy (NCFD), a comprehensive and theoretically grounded metric for measuring distributional differences. NCFD leverages the Characteristic Function (CF) to encapsulate full distributional information, employing a neural network to optimize the sampling strategy for the CF's frequency arguments, thereby maximizing the discrepancy to enhance distance estimation. Simultaneously, we minimize the difference between real and synthetic data under this optimized NCFD measure. Our approach, termed Neural Characteristic Function Matching (\mymethod{}), inherently aligns the phase and amplitude of neural features in the complex plane for both real and synthetic data, achieving a balance between realism and diversity in synthetic samples. Experiments demonstrate that our method achieves significant performance gains over state-of-the-art methods on both low- and high-resolution datasets. Notably, we achieve a 20.5\% accuracy boost on ImageSquawk. Our method also reduces GPU memory usage by over 300$\times$ and achieves 20$\times$ faster processing speeds compared to state-of-the-art methods. To the best of our knowledge, this is the first work to achieve lossless compression of CIFAR-100 on a single NVIDIA 2080 Ti GPU using only 2.3 GB of memory.
+
+**Comment:** The paper introduces Neural Characteristic Function Matching for dataset distillation, which is a novel approach to representation learning with significant theoretical contributions.
+
+**Relevance:** 9
+**Novelty:** 9
+
+---
+
+## 2. [Transformers Learn to Implement Multi-step Gradient Descent with Chain of Thought](https://arxiv.org/abs/2502.21212) <a id="link2"></a>
+
+**ArXiv ID:** 2502.21212
+
+**Authors:** Jianhao Huang, Zixuan Wang, Jason D. Lee
+
+**Abstract:** Chain of Thought (CoT) prompting has been shown to significantly improve the performance of large language models (LLMs), particularly in arithmetic and reasoning tasks, by instructing the model to produce intermediate reasoning steps. Despite the remarkable empirical success of CoT and its theoretical advantages in enhancing expressivity, the mechanisms underlying CoT training remain largely unexplored. In this paper, we study the training dynamics of transformers over a CoT objective on an in-context weight prediction task for linear regression. We prove that while a one-layer linear transformer without CoT can only implement a single step of gradient descent (GD) and fails to recover the ground-truth weight vector, a transformer with CoT prompting can learn to perform multi-step GD autoregressively, achieving near-exact recovery. Furthermore, we show that the trained transformer effectively generalizes on the unseen data. With our technique, we also show that looped transformers significantly improve final performance compared to transformers without looping in the in-context learning of linear regression. Empirically, we demonstrate that CoT prompting yields substantial performance improvements.
+
+**Comment:** The paper provides theoretical insights into how transformers implement multi-step gradient descent with Chain of Thought prompting, aligning with 'Large Language Models' and 'Representation Learning'.
+
+**Relevance:** 9
+**Novelty:** 9
+
+---
+
+## 3. [Position: Solve Layerwise Linear Models First to Understand Neural Dynamical Phenomena (Neural Collapse, Emergence, Lazy/Rich Regime, and Grokking)](https://arxiv.org/abs/2502.21009) <a id="link3"></a>
+
+**ArXiv ID:** 2502.21009
+
+**Authors:** Yoonsoo Nam, Seok Hyeong Lee, Clementine Domine, Yea Chan Park, Charles London, Wonyl Choi, Niclas Goring, Seungjai Lee
+
+**Abstract:** In physics, complex systems are often simplified into minimal, solvable models that retain only the core principles. In machine learning, layerwise linear models (e.g., linear neural networks) act as simplified representations of neural network dynamics. These models follow the dynamical feedback principle, which describes how layers mutually govern and amplify each other's evolution. This principle extends beyond the simplified models, successfully explaining a wide range of dynamical phenomena in deep neural networks, including neural collapse, emergence, lazy and rich regimes, and grokking. In this position paper, we call for the use of layerwise linear models retaining the core principles of neural dynamical phenomena to accelerate the science of deep learning.
+
+**Comment:** This position paper advocates for using layerwise linear models to understand neural dynamical phenomena like neural collapse and grokking, which directly aligns with foundational research in representation learning and training dynamics.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 4. [FANformer: Improving Large Language Models Through Effective Periodicity Modeling](https://arxiv.org/abs/2502.21309) <a id="link4"></a>
+
+**ArXiv ID:** 2502.21309
+
+**Authors:** Yihong Dong, Ge Li, Xue Jiang, Yongding Tao, Kechi Zhang, Hao Zhu, Huanyu Liu, Jiazheng Ding, Jia Li, Jinliang Deng, Hong Mei
+
+**Abstract:** Periodicity, as one of the most important basic characteristics, lays the foundation for facilitating structured knowledge acquisition and systematic cognitive processes within human learning paradigms. However, the potential flaws of periodicity modeling in Transformer affect the learning efficiency and establishment of underlying principles from data for large language models (LLMs) built upon it. In this paper, we demonstrate that integrating effective periodicity modeling can improve the learning efficiency and performance of LLMs. We introduce FANformer, which integrates Fourier Analysis Network (FAN) into attention mechanism to achieve efficient periodicity modeling, by modifying the feature projection process of attention mechanism. Extensive experimental results on language modeling show that FANformer consistently outperforms Transformer when scaling up model size and training tokens, underscoring its superior learning efficiency. To further validate the effectiveness of FANformer, we pretrain a FANformer-1B on 1 trillion tokens. FANformer-1B exhibits marked improvements on downstream tasks compared to open-source LLMs with similar model parameters or training tokens. The results position FANformer as an effective and promising architecture for advancing LLMs.
+
+**Comment:** FANformer integrates Fourier Analysis Network into the attention mechanism, providing a novel architectural improvement for LLMs with potential foundational impact on periodicity modeling in transformers.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 5. [Learning Dynamics of Deep Linear Networks Beyond the Edge of Stability](https://arxiv.org/abs/2502.20531) <a id="link5"></a>
+
+**ArXiv ID:** 2502.20531
+
+**Authors:** Avrajit Ghosh, Soo Min Kwon, Rongrong Wang, Saiprasad Ravishankar, Qing Qu
+
+**Abstract:** Deep neural networks trained using gradient descent with a fixed learning rate $\eta$ often operate in the regime of "edge of stability" (EOS), where the largest eigenvalue of the Hessian equilibrates about the stability threshold $2/\eta$. In this work, we present a fine-grained analysis of the learning dynamics of (deep) linear networks (DLNs) within the deep matrix factorization loss beyond EOS. For DLNs, loss oscillations beyond EOS follow a period-doubling route to chaos. We theoretically analyze the regime of the 2-period orbit and show that the loss oscillations occur within a small subspace, with the dimension of the subspace precisely characterized by the learning rate. The crux of our analysis lies in showing that the symmetry-induced conservation law for gradient flow, defined as the balancing gap among the singular values across layers, breaks at EOS and decays monotonically to zero. Overall, our results contribute to explaining two key phenomena in deep networks: (i) shallow models and simple tasks do not always exhibit EOS; and (ii) oscillations occur within top features. We present experiments to support our theory, along with examples demonstrating how these phenomena occur in nonlinear networks and how they differ from those which have benign landscape such as in DLNs.
+
+**Comment:** The paper provides a theoretical analysis of learning dynamics in deep linear networks, contributing to foundational understanding of training dynamics in neural networks.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 6. [Triple Phase Transitions: Understanding the Learning Dynamics of Large Language Models from a Neuroscience Perspective](https://arxiv.org/abs/2502.20779) <a id="link6"></a>
+
+**ArXiv ID:** 2502.20779
+
+**Authors:** Yuko Nakagi, Keigo Tada, Sota Yoshino, Shinji Nishimoto, Yu Takagi
+
+**Abstract:** Large language models (LLMs) often exhibit abrupt emergent behavior, whereby new abilities arise at certain points during their training. This phenomenon, commonly referred to as a ''phase transition'', remains poorly understood. In this study, we conduct an integrative analysis of such phase transitions by examining three interconnected perspectives: the similarity between LLMs and the human brain, the internal states of LLMs, and downstream task performance. We propose a novel interpretation for the learning dynamics of LLMs that vary in both training data and architecture, revealing that three phase transitions commonly emerge across these models during training: (1) alignment with the entire brain surges as LLMs begin adhering to task instructions Brain Alignment and Instruction Following, (2) unexpectedly, LLMs diverge from the brain during a period in which downstream task accuracy temporarily stagnates Brain Detachment and Stagnation, and (3) alignment with the brain reoccurs as LLMs become capable of solving the downstream tasks Brain Realignment and Consolidation. These findings illuminate the underlying mechanisms of phase transitions in LLMs, while opening new avenues for interdisciplinary research bridging AI and neuroscience.
+
+**Comment:** The paper explores phase transitions in LLMs from a neuroscience perspective, providing theoretical insights into emergent behaviors in LLM training.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 7. [Disentangling Feature Structure: A Mathematically Provable Two-Stage Training Dynamics in Transformers](https://arxiv.org/abs/2502.20681) <a id="link7"></a>
+
+**ArXiv ID:** 2502.20681
+
+**Authors:** Zixuan Gong, Jiaye Teng, Yong Liu
+
+**Abstract:** Transformers may exhibit two-stage training dynamics during the real-world training process. For instance, when training GPT-2 on the Counterfact dataset, the answers progress from syntactically incorrect to syntactically correct to semantically correct. However, existing theoretical analyses hardly account for this two-stage phenomenon. In this paper, we theoretically demonstrate how such two-stage training dynamics occur in transformers. Specifically, we analyze the dynamics of transformers using feature learning techniques under in-context learning regimes, based on a disentangled two-type feature structure. Such disentanglement of feature structure is general in practice, e.g., natural languages contain syntax and semantics, and proteins contain primary and secondary structures. To our best known, this is the first rigorous result regarding a two-stage optimization process in transformers. Additionally, a corollary indicates that such a two-stage process is closely related to the spectral properties of the attention weights, which accords well with empirical findings.
+
+**Comment:** The paper provides a theoretical analysis of two-stage training dynamics in transformers, contributing to understanding of feature disentanglement and optimization processes.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 8. [Revisiting Kernel Attention with Correlated Gaussian Process Representation](https://arxiv.org/abs/2502.20525) <a id="link8"></a>
+
+**ArXiv ID:** 2502.20525
+
+**Authors:** Long Minh Bui, Tho Tran Huu, Duy Dinh, Tan Minh Nguyen, Trong Nghia Hoang
+
+**Abstract:** Transformers have increasingly become the de facto method to model sequential data with state-of-the-art performance. Due to its widespread use, being able to estimate and calibrate its modeling uncertainty is important to understand and design robust transformer models. To achieve this, previous works have used Gaussian processes (GPs) to perform uncertainty calibration for the attention units of transformers and attained notable successes. However, such approaches have to confine the transformers to the space of symmetric attention to ensure the necessary symmetric requirement of their GP's kernel specification, which reduces the representation capacity of the model. To mitigate this restriction, we propose the Correlated Gaussian Process Transformer (CGPT), a new class of transformers whose self-attention units are modeled as cross-covariance between two correlated GPs (CGPs). This allows asymmetries in attention and can enhance the representation capacity of GP-based transformers. We also derive a sparse approximation for CGP to make it scale better. Our empirical studies show that both CGP-based and sparse CGP-based transformers achieve better performance than state-of-the-art GP-based transformers on a variety of benchmark tasks. The code for our experiments is available at https://github.com/MinhLong210/CGP-Transformers.
+
+**Comment:** The paper introduces a novel transformer architecture using Correlated Gaussian Processes (CGPs) to enhance representation capacity, aligning with the 'Model Architecture' criterion. It also includes a sparse approximation, which touches on 'Model Compression'.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 9. [Oscillation-Reduced MXFP4 Training for Vision Transformers](https://arxiv.org/abs/2502.20853) <a id="link9"></a>
+
+**ArXiv ID:** 2502.20853
+
+**Authors:** Yuxiang Chen, Haocheng Xi, Jun Zhu, Jianfei Chen
+
+**Abstract:** Pre-training Transformers in FP4 precision is becoming a promising approach to gain substantial speedup, but it comes with a considerable loss of accuracy. Microscaling (MX) data format provides a fine-grained per-group quantization method to improve the representation ability of the FP4 format and is supported by the next-generation Blackwell GPU architecture. However, training with MXFP4 data format still results in significant degradation and there is a lack of systematic research on the reason.   In this work, we propose a novel training method TetraJet for a more accurate FP4 training. We comprehensively evaluate all of the quantizers involved in the training, and identify the weight oscillation problem in the forward pass as the main source of the degradation in MXFP4 training. Therefore, we introduce two novel methods, EMA Quantizer (Q-EMA) and Adaptive Ramping Optimizer (Q-Ramping), to resolve the oscillation problem. Extensive experiments on Vision Transformers demonstrate that TetraJet consistently outperforms the existing 4-bit training methods, and Q-EMA & Q-Ramping can provide additional enhancement by effectively reducing oscillation. We decreased the accuracy degradation by more than $50\%$ compared to the baseline, and can even achieve competitive performance compared to full precision training. The codes are available at https://github.com/thu-ml/TetraJet-MXFP4Training
+
+**Comment:** The paper addresses FP4 training for Vision Transformers with novel methods to reduce weight oscillation, aligning with 'Model Compression' and efficiency breakthroughs.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 10. [Dynamical Decoupling of Generalization and Overfitting in Large Two-Layer Networks](https://arxiv.org/abs/2502.21269) <a id="link10"></a>
+
+**ArXiv ID:** 2502.21269
+
+**Authors:** Andrea Montanari, Pierfrancesco Urbani
+
+**Abstract:** The inductive bias and generalization properties of large machine learning models are -- to a substantial extent -- a byproduct of the optimization algorithm used for training. Among others, the scale of the random initialization, the learning rate, and early stopping all have crucial impact on the quality of the model learnt by stochastic gradient descent or related algorithms. In order to understand these phenomena, we study the training dynamics of large two-layer neural networks. We use a well-established technique from non-equilibrium statistical physics (dynamical mean field theory) to obtain an asymptotic high-dimensional characterization of this dynamics. This characterization applies to a Gaussian approximation of the hidden neurons non-linearity, and empirically captures well the behavior of actual neural network models.   Our analysis uncovers several interesting new phenomena in the training dynamics: $(i)$ The emergence of a slow time scale associated with the growth in Gaussian/Rademacher complexity; $(ii)$ As a consequence, algorithmic inductive bias towards small complexity, but only if the initialization has small enough complexity; $(iii)$ A separation of time scales between feature learning and overfitting; $(iv)$ A non-monotone behavior of the test error and, correspondingly, a `feature unlearning' phase at large times.
+
+**Comment:** The paper provides a theoretical analysis of training dynamics in large two-layer networks, uncovering phenomena like time-scale separation and feature unlearning. This aligns with the 'Representation Learning' criterion, focusing on training dynamics and generalization.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 11. [Stochastic Rounding for LLM Training: Theory and Practice](https://arxiv.org/abs/2502.20566) <a id="link11"></a>
+
+**ArXiv ID:** 2502.20566
+
+**Authors:** Kaan Ozkara, Tao Yu, Youngsuk Park
+
+**Abstract:** As the parameters of Large Language Models (LLMs) have scaled to hundreds of billions, the demand for efficient training methods -- balancing faster computation and reduced memory usage without sacrificing accuracy -- has become more critical than ever. In recent years, various mixed precision strategies, which involve different precision levels for optimization components, have been proposed to increase training speed with minimal accuracy degradation. However, these strategies often require manual adjustments and lack theoretical justification. In this work, we leverage stochastic rounding (SR) to address numerical errors of training with low-precision representation. We provide theoretical analyses of implicit regularization and convergence under the Adam optimizer when SR is utilized. With the insights from these analyses, we extend previous BF16 + SR strategy to be used in distributed settings, enhancing the stability and performance for large scale training. Empirical results from pre-training models with up to 6.7B parameters, for the first time, demonstrate that our BF16 with SR strategy outperforms (BF16, FP32) mixed precision strategies, achieving better validation perplexity, up to $1.54\times$ higher throughput, and $30\%$ less memory usage.
+
+**Comment:** The paper explores stochastic rounding for LLM training, providing theoretical insights into implicit regularization and convergence. This aligns with the 'Large Language Models' criterion, focusing on foundational efficiency improvements.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 12. [Training LLMs with MXFP4](https://arxiv.org/abs/2502.20586) <a id="link12"></a>
+
+**ArXiv ID:** 2502.20586
+
+**Authors:** Albert Tseng, Tao Yu, Youngsuk Park
+
+**Abstract:** Low precision (LP) datatypes such as MXFP4 can accelerate matrix multiplications (GEMMs) and reduce training costs. However, directly using MXFP4 instead of BF16 during training significantly degrades model quality. In this work, we present the first near-lossless training recipe that uses MXFP4 GEMMs, which are $2\times$ faster than FP8 on supported hardware. Our key insight is to compute unbiased gradient estimates with stochastic rounding (SR), resulting in more accurate model updates. However, directly applying SR to MXFP4 can result in high variance from block-level outliers, harming convergence. To overcome this, we use the random Hadamard tranform to theoretically bound the variance of SR. We train GPT models up to 6.7B parameters and find that our method induces minimal degradation over mixed-precision BF16 training. Our recipe computes $>1/2$ the training FLOPs in MXFP4, enabling an estimated speedup of $>1.3\times$ over FP8 and $>1.7\times$ over BF16 during backpropagation.
+
+**Comment:** The paper focuses on low-precision training with MXFP4, which aligns with the model compression criterion, specifically addressing efficiency breakthroughs through stochastic rounding and variance reduction techniques.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 13. [Brain-Inspired Exploration of Functional Networks and Key Neurons in Large Language Models](https://arxiv.org/abs/2502.20408) <a id="link13"></a>
+
+**ArXiv ID:** 2502.20408
+
+**Authors:** Yiheng Liu, Xiaohui Gao, Haiyang Sun, Bao Ge, Tianming Liu, Junwei Han, Xintao Hu
+
+**Abstract:** In recent years, the rapid advancement of large language models (LLMs) in natural language processing has sparked significant interest among researchers to understand their mechanisms and functional characteristics. Although existing studies have attempted to explain LLM functionalities by identifying and interpreting specific neurons, these efforts mostly focus on individual neuron contributions, neglecting the fact that human brain functions are realized through intricate interaction networks. Inspired by cognitive neuroscience research on functional brain networks (FBNs), this study introduces a novel approach to investigate whether similar functional networks exist within LLMs. We use methods similar to those in the field of functional neuroimaging analysis to locate and identify functional networks in LLM. Experimental results show that, similar to the human brain, LLMs contain functional networks that frequently recur during operation. Further analysis shows that these functional networks are crucial for LLM performance. Masking key functional networks significantly impairs the model's performance, while retaining just a subset of these networks is adequate to maintain effective operation. This research provides novel insights into the interpretation of LLMs and the lightweighting of LLMs for certain downstream tasks. Code is available at https://github.com/WhatAboutMyStar/LLM_ACTIVATION.
+
+**Comment:** The paper explores functional networks in LLMs inspired by cognitive neuroscience, providing insights into LLM behavior and interpretability, which aligns with the LLM criterion.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 14. [BAnG: Bidirectional Anchored Generation for Conditional RNA Design](https://arxiv.org/abs/2502.21274) <a id="link14"></a>
+
+**ArXiv ID:** 2502.21274
+
+**Authors:** Roman Klypa, Alberto Bietti, Sergei Grudinin
+
+**Abstract:** Designing RNA molecules that interact with specific proteins is a critical challenge in experimental and computational biology. Existing computational approaches require a substantial amount of experimentally determined RNA sequences for each specific protein or a detailed knowledge of RNA structure, restricting their utility in practice. To address this limitation, we develop RNA-BAnG, a deep learning-based model designed to generate RNA sequences for protein interactions without these requirements. Central to our approach is a novel generative method, Bidirectional Anchored Generation (BAnG), which leverages the observation that protein-binding RNA sequences often contain functional binding motifs embedded within broader sequence contexts. We first validate our method on generic synthetic tasks involving similar localized motifs to those appearing in RNAs, demonstrating its benefits over existing generative approaches. We then evaluate our model on biological sequences, showing its effectiveness for conditional RNA sequence design given a binding protein.
+
+**Comment:** The paper explores identifiability in mechanistic interpretability, which aligns with emerging trends and foundational research in understanding neural networks.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 15. [Backpropagation-free Spiking Neural Networks with the Forward-Forward Algorithm](https://arxiv.org/abs/2502.20411) <a id="link15"></a>
+
+**ArXiv ID:** 2502.20411
+
+**Authors:** Mohammadnavid Ghader, Saeed Reza Kheradpisheh, Bahar Farahani, Mahmood Fazlali
+
+**Abstract:** Spiking Neural Networks (SNNs) offer a biologically inspired computational paradigm that emulates neuronal activity through discrete spike-based processing. Despite their advantages, training SNNs with traditional backpropagation (BP) remains challenging due to computational inefficiencies and a lack of biological plausibility. This study explores the Forward-Forward (FF) algorithm as an alternative learning framework for SNNs. Unlike backpropagation, which relies on forward and backward passes, the FF algorithm employs two forward passes, enabling localized learning, enhanced computational efficiency, and improved compatibility with neuromorphic hardware. We introduce an FF-based SNN training framework and evaluate its performance across both non-spiking (MNIST, Fashion-MNIST, CIFAR-10) and spiking (Neuro-MNIST, SHD) datasets. Experimental results demonstrate that our model surpasses existing FF-based SNNs by over 5% on MNIST and Fashion-MNIST while achieving accuracy comparable to state-of-the-art backpropagation-trained SNNs. On more complex tasks such as CIFAR-10 and SHD, our approach outperforms other SNN models by up to 6% and remains competitive with leading backpropagation-trained SNNs. These findings highlight the FF algorithm's potential to advance SNN training methodologies and neuromorphic computing by addressing key limitations of backpropagation.
+
+**Comment:** The paper explores the Forward-Forward algorithm for training spiking neural networks, which is a novel training methodology with potential foundational impact on neuromorphic computing and representation learning.
+
+**Relevance:** 8
+**Novelty:** 8
+
+---
+
+## 16. [Unsupervised Parameter Efficient Source-free Post-pretraining](https://arxiv.org/abs/2502.21313) <a id="link16"></a>
+
+**ArXiv ID:** 2502.21313
+
+**Authors:** Abhishek Jha, Tinne Tuytelaars, Yuki M. Asano
+
+**Abstract:** Following the success in NLP, the best vision models are now in the billion parameter ranges. Adapting these large models to a target distribution has become computationally and economically prohibitive. Addressing this challenge, we introduce UpStep, an Unsupervised Parameter-efficient Source-free post-pretraining approach, designed to efficiently adapt a base model from a source domain to a target domain: i) we design a self-supervised training scheme to adapt a pretrained model on an unlabeled target domain in a setting where source domain data is unavailable. Such source-free setting comes with the risk of catastrophic forgetting, hence, ii) we propose center vector regularization (CVR), a set of auxiliary operations that minimize catastrophic forgetting and additionally reduces the computational cost by skipping backpropagation in 50\% of the training iterations. Finally iii) we perform this adaptation process in a parameter-efficient way by adapting the pretrained model through low-rank adaptation methods, resulting in a fraction of parameters to optimize. We utilize various general backbone architectures, both supervised and unsupervised, trained on Imagenet as our base model and adapt them to a diverse set of eight target domains demonstrating the adaptability and generalizability of our proposed approach.
+
+**Comment:** The paper introduces a parameter-efficient method for adapting large models in a source-free setting, aligning with 'Model Compression' and efficiency breakthroughs.
+
+**Relevance:** 8
+**Novelty:** 8
+
+---
+
+## 17. [Interpreting CLIP with Hierarchical Sparse Autoencoders](https://arxiv.org/abs/2502.20578) <a id="link17"></a>
+
+**ArXiv ID:** 2502.20578
+
+**Authors:** Vladimir Zaigrajew, Hubert Baniecki, Przemyslaw Biecek
+
+**Abstract:** Sparse autoencoders (SAEs) are useful for detecting and steering interpretable features in neural networks, with particular potential for understanding complex multimodal representations. Given their ability to uncover interpretable features, SAEs are particularly valuable for analyzing large-scale vision-language models (e.g., CLIP and SigLIP), which are fundamental building blocks in modern systems yet remain challenging to interpret and control. However, current SAE methods are limited by optimizing both reconstruction quality and sparsity simultaneously, as they rely on either activation suppression or rigid sparsity constraints. To this end, we introduce Matryoshka SAE (MSAE), a new architecture that learns hierarchical representations at multiple granularities simultaneously, enabling a direct optimization of both metrics without compromise. MSAE establishes a new state-of-the-art Pareto frontier between reconstruction quality and sparsity for CLIP, achieving 0.99 cosine similarity and less than 0.1 fraction of variance unexplained while maintaining ~80% sparsity. Finally, we demonstrate the utility of MSAE as a tool for interpreting and controlling CLIP by extracting over 120 semantic concepts from its representation to perform concept-based similarity search and bias analysis in downstream tasks like CelebA.
+
+**Comment:** The paper introduces a hierarchical sparse autoencoder (MSAE) for interpreting and controlling CLIP, aligning with 'Representation Learning' and sparse methods.
+
+**Relevance:** 8
+**Novelty:** 8
+
+---
+
+## 18. [Data Distributional Properties As Inductive Bias for Systematic Generalization](https://arxiv.org/abs/2502.20499) <a id="link18"></a>
+
+**ArXiv ID:** 2502.20499
+
+**Authors:** Felipe del R\'io, Alain Raymond-S\'aez, Daniel Florea, Rodrigo Toro Icarte, Julio Hurtado, Cristi\'an Buc Calder\'on, \'Alvaro Soto
+
+**Abstract:** Deep neural networks (DNNs) struggle at systematic generalization (SG). Several studies have evaluated the possibility to promote SG through the proposal of novel architectures, loss functions or training methodologies. Few studies, however, have focused on the role of training data properties in promoting SG. In this work, we investigate the impact of certain data distributional properties, as inductive biases for the SG ability of a multi-modal language model. To this end, we study three different properties. First, data diversity, instantiated as an increase in the possible values a latent property in the training distribution may take. Second, burstiness, where we probabilistically restrict the number of possible values of latent factors on particular inputs during training. Third, latent intervention, where a particular latent factor is altered randomly during training. We find that all three factors significantly enhance SG, with diversity contributing an 89\% absolute increase in accuracy in the most affected property. Through a series of experiments, we test various hypotheses to understand why these properties promote SG. Finally, we find that Normalized Mutual Information (NMI) between latent attributes in the training distribution is strongly predictive of out-of-distribution generalization. We find that a mechanism by which lower NMI induces SG is in the geometry of representations. In particular, we find that NMI induces more parallelism in neural representations (i.e., input features coded in parallel neural vectors) of the model, a property related to the capacity of reasoning by analogy.
+
+**Comment:** The paper investigates data distributional properties as inductive biases for systematic generalization, which is relevant to representation learning and provides insights into training dynamics.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 19. [Discovering Global False Negatives On the Fly for Self-supervised Contrastive Learning](https://arxiv.org/abs/2502.20612) <a id="link19"></a>
+
+**ArXiv ID:** 2502.20612
+
+**Authors:** Vicente Balmaseda, Bokun Wang, Ching-Long Lin, Tianbao Yang
+
+**Abstract:** In self-supervised contrastive learning, negative pairs are typically constructed using an anchor image and a sample drawn from the entire dataset, excluding the anchor. However, this approach can result in the creation of negative pairs with similar semantics, referred to as "false negatives", leading to their embeddings being falsely pushed apart. To address this issue, we introduce GloFND, an optimization-based approach that automatically learns on the fly the threshold for each anchor data to identify its false negatives during training. In contrast to previous methods for false negative discovery, our approach globally detects false negatives across the entire dataset rather than locally within the mini-batch. Moreover, its per-iteration computation cost remains independent of the dataset size. Experimental results on image and image-text data demonstrate the effectiveness of the proposed method. Our implementation is available at https://github.com/vibalcam/GloFND .
+
+**Comment:** The paper addresses false negatives in self-supervised contrastive learning, which is a relevant topic in representation learning, particularly in improving training dynamics and embedding quality.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 20. [Information-Theoretic Perspectives on Optimizers](https://arxiv.org/abs/2502.20763) <a id="link20"></a>
+
+**ArXiv ID:** 2502.20763
+
+**Authors:** Zhiquan Tan, Weiran Huang
+
+**Abstract:** The interplay of optimizers and architectures in neural networks is complicated and hard to understand why some optimizers work better on some specific architectures. In this paper, we find that the traditionally used sharpness metric does not fully explain the intricate interplay and introduces information-theoretic metrics called entropy gap to better help analyze. It is found that both sharpness and entropy gap affect the performance, including the optimization dynamic and generalization. We further use information-theoretic tools to understand a recently proposed optimizer called Lion and find ways to improve it.
+
+**Comment:** The paper introduces an information-theoretic perspective on optimizers, which provides foundational insights into the interplay between optimizers and architectures, aligning with the core topics.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 21. [Promote, Suppress, Iterate: How Language Models Answer One-to-Many Factual Queries](https://arxiv.org/abs/2502.20475) <a id="link21"></a>
+
+**ArXiv ID:** 2502.20475
+
+**Authors:** Tianyi Lorena Yan, Robin Jia
+
+**Abstract:** To answer one-to-many factual queries (e.g., listing cities of a country), a language model (LM) must simultaneously recall knowledge and avoid repeating previous answers. How are these two subtasks implemented and integrated internally? Across multiple datasets and models, we identify a promote-then-suppress mechanism: the model first recalls all answers, and then suppresses previously generated ones. Specifically, LMs use both the subject and previous answer tokens to perform knowledge recall, with attention propagating subject information and MLPs promoting the answers. Then, attention attends to and suppresses previous answer tokens, while MLPs amplify the suppression signal. Our mechanism is corroborated by extensive experimental evidence: in addition to using early decoding and causal tracing, we analyze how components use different tokens by introducing both \emph{Token Lens}, which decodes aggregated attention updates from specified tokens, and a knockout method that analyzes changes in MLP outputs after removing attention to specified tokens. Overall, we provide new insights into how LMs' internal components interact with different input tokens to support complex factual recall. Code is available at https://github.com/Lorenayannnnn/how-lms-answer-one-to-many-factual-queries.
+
+**Comment:** The paper provides insights into how LLMs answer one-to-many factual queries, which aligns with foundational research into LLM behavior and interpretability.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 22. [Amortized Conditional Independence Testing](https://arxiv.org/abs/2502.20925) <a id="link22"></a>
+
+**ArXiv ID:** 2502.20925
+
+**Authors:** Bao Duong, Nu Hoang, Thin Nguyen
+
+**Abstract:** Testing for the conditional independence structure in data is a fundamental and critical task in statistics and machine learning, which finds natural applications in causal discovery - a highly relevant problem to many scientific disciplines. Existing methods seek to design explicit test statistics that quantify the degree of conditional dependence, which is highly challenging yet cannot capture nor utilize prior knowledge in a data-driven manner. In this study, an entirely new approach is introduced, where we instead propose to amortize conditional independence testing and devise ACID - a novel transformer-based neural network architecture that learns to test for conditional independence. ACID can be trained on synthetic data in a supervised learning fashion, and the learned model can then be applied to any dataset of similar natures or adapted to new domains by fine-tuning with a negligible computational cost. Our extensive empirical evaluations on both synthetic and real data reveal that ACID consistently achieves state-of-the-art performance against existing baselines under multiple metrics, and is able to generalize robustly to unseen sample sizes, dimensionalities, as well as non-linearities with a remarkably low inference time.
+
+**Comment:** The paper introduces a novel transformer-based architecture (ACID) for conditional independence testing, which aligns with foundational research in representation learning and model architecture.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 23. [FlexPrefill: A Context-Aware Sparse Attention Mechanism for Efficient Long-Sequence Inference](https://arxiv.org/abs/2502.20766) <a id="link23"></a>
+
+**ArXiv ID:** 2502.20766
+
+**Authors:** Xunhao Lai, Jianqiao Lu, Yao Luo, Yiyuan Ma, Xun Zhou
+
+**Abstract:** Large language models (LLMs) encounter computational challenges during long-sequence inference, especially in the attention pre-filling phase, where the complexity grows quadratically with the prompt length. Previous efforts to mitigate these challenges have relied on fixed sparse attention patterns or identifying sparse attention patterns based on limited cases. However, these methods lacked the flexibility to efficiently adapt to varying input demands. In this paper, we introduce FlexPrefill, a Flexible sparse Pre-filling mechanism that dynamically adjusts sparse attention patterns and computational budget in real-time to meet the specific requirements of each input and attention head. The flexibility of our method is demonstrated through two key innovations: 1) Query-Aware Sparse Pattern Determination: By measuring Jensen-Shannon divergence, this component adaptively switches between query-specific diverse attention patterns and predefined attention patterns. 2) Cumulative-Attention Based Index Selection: This component dynamically selects query-key indexes to be computed based on different attention patterns, ensuring the sum of attention scores meets a predefined threshold. FlexPrefill adaptively optimizes the sparse pattern and sparse ratio of each attention head based on the prompt, enhancing efficiency in long-sequence inference tasks. Experimental results show significant improvements in both speed and accuracy over prior methods, providing a more flexible and efficient solution for LLM inference.
+
+**Comment:** FlexPrefill introduces a context-aware sparse attention mechanism for efficient long-sequence inference, which is relevant to model compression and efficiency improvements in LLMs.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 24. [An Algebraic Framework for Hierarchical Probabilistic Abstraction](https://arxiv.org/abs/2502.21216) <a id="link24"></a>
+
+**ArXiv ID:** 2502.21216
+
+**Authors:** Nijesh Upreti, Vaishak Belle
+
+**Abstract:** Abstraction is essential for reducing the complexity of systems across diverse fields, yet designing effective abstraction methodology for probabilistic models is inherently challenging due to stochastic behaviors and uncertainties. Current approaches often distill detailed probabilistic data into higher-level summaries to support tractable and interpretable analyses, though they typically struggle to fully represent the relational and probabilistic hierarchies through single-layered abstractions. We introduce a hierarchical probabilistic abstraction framework aimed at addressing these challenges by extending a measure-theoretic foundation for hierarchical abstraction. The framework enables modular problem-solving via layered mappings, facilitating both detailed layer-specific analysis and a cohesive system-wide understanding. This approach bridges high-level conceptualization with low-level perceptual data, enhancing interpretability and allowing layered analysis. Our framework provides a robust foundation for abstraction analysis across AI subfields, particularly in aligning System 1 and System 2 thinking, thereby supporting the development of diverse abstraction methodologies.
+
+**Comment:** The paper introduces a hierarchical probabilistic abstraction framework, which aligns with foundational research in representation learning and abstraction methodologies.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 25. [SEKI: Self-Evolution and Knowledge Inspiration based Neural Architecture Search via Large Language Models](https://arxiv.org/abs/2502.20422) <a id="link25"></a>
+
+**ArXiv ID:** 2502.20422
+
+**Authors:** Zicheng Cai, Yaohua Tang, Yutao Lai, Hua Wang, Zhi Chen, Hao Chen
+
+**Abstract:** We introduce SEKI, a novel large language model (LLM)-based neural architecture search (NAS) method. Inspired by the chain-of-thought (CoT) paradigm in modern LLMs, SEKI operates in two key stages: self-evolution and knowledge distillation. In the self-evolution stage, LLMs initially lack sufficient reference examples, so we implement an iterative refinement mechanism that enhances architectures based on performance feedback. Over time, this process accumulates a repository of high-performance architectures. In the knowledge distillation stage, LLMs analyze common patterns among these architectures to generate new, optimized designs. Combining these two stages, SEKI greatly leverages the capacity of LLMs on NAS and without requiring any domain-specific data. Experimental results show that SEKI achieves state-of-the-art (SOTA) performance across various datasets and search spaces while requiring only 0.05 GPU-days, outperforming existing methods in both efficiency and accuracy. Furthermore, SEKI demonstrates strong generalization capabilities, achieving SOTA-competitive results across multiple tasks.
+
+**Comment:** The paper proposes a novel LLM-based neural architecture search method, which aligns with model architecture innovations and demonstrates strong generalization capabilities.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 26. [Transfer Learning through Enhanced Sufficient Representation: Enriching Source Domain Knowledge with Target Data](https://arxiv.org/abs/2502.20414) <a id="link26"></a>
+
+**ArXiv ID:** 2502.20414
+
+**Authors:** Yeheng Ge, Xueyu Zhou, Jian Huang
+
+**Abstract:** Transfer learning is an important approach for addressing the challenges posed by limited data availability in various applications. It accomplishes this by transferring knowledge from well-established source domains to a less familiar target domain. However, traditional transfer learning methods often face difficulties due to rigid model assumptions and the need for a high degree of similarity between source and target domain models. In this paper, we introduce a novel method for transfer learning called Transfer learning through Enhanced Sufficient Representation (TESR). Our approach begins by estimating a sufficient and invariant representation from the source domains. This representation is then enhanced with an independent component derived from the target data, ensuring that it is sufficient for the target domain and adaptable to its specific characteristics. A notable advantage of TESR is that it does not rely on assuming similar model structures across different tasks. For example, the source domain models can be regression models, while the target domain task can be classification. This flexibility makes TESR applicable to a wide range of supervised learning problems. We explore the theoretical properties of TESR and validate its performance through simulation studies and real-world data applications, demonstrating its effectiveness in finite sample settings.
+
+**Comment:** The paper proposes a novel transfer learning method (TESR) with theoretical contributions to representation learning by enhancing sufficient representations, aligning with the 'Representation Learning' criterion.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 27. [SPD: Sync-Point Drop for efficient tensor parallelism of Large Language Models](https://arxiv.org/abs/2502.20727) <a id="link27"></a>
+
+**ArXiv ID:** 2502.20727
+
+**Authors:** Han-Byul Kim, Duc Hoang, Arnav Kundu, Mohammad Samragh, Minsik Cho
+
+**Abstract:** With the rapid expansion in the scale of large language models (LLMs), enabling efficient distributed inference across multiple computing units has become increasingly critical. However, communication overheads from popular distributed inference techniques such as Tensor Parallelism pose a significant challenge to achieve scalability and low latency. Therefore, we introduce a novel optimization technique, Sync-Point Drop (SPD), to reduce communication overheads in tensor parallelism by selectively dropping synchronization on attention outputs. In detail, we first propose a block design that allows execution to proceed without communication through SPD. Second, we apply different SPD strategies to attention blocks based on their sensitivity to the model accuracy. The proposed methods effectively alleviate communication bottlenecks while minimizing accuracy degradation during LLM inference, offering a scalable solution for diverse distributed environments: SPD offered about 20% overall inference latency reduction with < 1% accuracy regression for LLaMA2-70B inference over 8 GPUs.
+
+**Comment:** The paper introduces Sync-Point Drop (SPD), a novel optimization technique for reducing communication overhead in tensor parallelism for LLMs. This aligns with the 'Model Compression' criterion, focusing on efficiency improvements in distributed inference.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 28. [LiteASR: Efficient Automatic Speech Recognition with Low-Rank Approximation](https://arxiv.org/abs/2502.20583) <a id="link28"></a>
+
+**ArXiv ID:** 2502.20583
+
+**Authors:** Keisuke Kamahori, Jungo Kasai, Noriyuki Kojima, Baris Kasikci
+
+**Abstract:** Modern automatic speech recognition (ASR) models, such as OpenAI's Whisper, rely on deep encoder-decoder architectures, and their encoders are a critical bottleneck for efficient deployment due to high computational intensity. We introduce LiteASR, a low-rank compression scheme for ASR encoders that significantly reduces inference costs while maintaining transcription accuracy. Our approach leverages the strong low-rank properties observed in intermediate activations: by applying principal component analysis (PCA) with a small calibration dataset, we approximate linear transformations with a chain of low-rank matrix multiplications, and further optimize self-attention to work in the reduced dimension. Evaluation results show that our method can compress Whisper large-v3's encoder size by over 50%, matching Whisper medium's size with better transcription accuracy, thereby establishing a new Pareto-optimal frontier of efficiency and performance. The code of LiteASR is available at https://github.com/efeslab/LiteASR.
+
+**Comment:** The paper introduces LiteASR, a low-rank compression scheme for ASR encoders, which aligns with the 'Model Compression' criterion by leveraging low-rank approximations for efficiency improvements.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 29. [Tuning-Free Structured Sparse PCA via Deep Unfolding Networks](https://arxiv.org/abs/2502.20837) <a id="link29"></a>
+
+**ArXiv ID:** 2502.20837
+
+**Authors:** Long Chen, Xianchao Xiu
+
+**Abstract:** Sparse principal component analysis (PCA) is a well-established dimensionality reduction technique that is often used for unsupervised feature selection (UFS). However, determining the regularization parameters is rather challenging, and conventional approaches, including grid search and Bayesian optimization, not only bring great computational costs but also exhibit high sensitivity. To address these limitations, we first establish a structured sparse PCA formulation by integrating $\ell_1$-norm and $\ell_{2,1}$-norm to capture the local and global structures, respectively. Building upon the off-the-shelf alternating direction method of multipliers (ADMM) optimization framework, we then design an interpretable deep unfolding network that translates iterative optimization steps into trainable neural architectures. This innovation enables automatic learning of the regularization parameters, effectively bypassing the empirical tuning requirements of conventional methods. Numerical experiments on benchmark datasets validate the advantages of our proposed method over the existing state-of-the-art methods. Our code will be accessible at https://github.com/xianchaoxiu/SPCA-Net.
+
+**Comment:** The paper introduces a deep unfolding network for structured sparse PCA, aligning with the 'Representation Learning' criterion by addressing unsupervised feature selection and dimensionality reduction.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 30. [Neuro-Symbolic Learning for Galois Groups: Unveiling Probabilistic Trends in Polynomials](https://arxiv.org/abs/2502.20844) <a id="link30"></a>
+
+**ArXiv ID:** 2502.20844
+
+**Authors:** Elira Shaska, Tony Shaska
+
+**Abstract:** This paper presents a neurosymbolic approach to classifying Galois groups of polynomials, integrating classical Galois theory with machine learning to address challenges in algebraic computation. By combining neural networks with symbolic reasoning we develop a model that outperforms purely numerical methods in accuracy and interpretability. Focusing on sextic polynomials with height $\leq 6$, we analyze a database of 53,972 irreducible examples, uncovering novel distributional trends, such as the 20 sextic polynomials with Galois group $C_6$ spanning just seven invariant-defined equivalence classes. These findings offer the first empirical insights into Galois group probabilities under height constraints and lay the groundwork for exploring solvability by radicals. Demonstrating AI's potential to reveal patterns beyond traditional symbolic techniques, this work paves the way for future research in computational algebra, with implications for probabilistic conjectures and higher degree classifications.
+
+**Comment:** The paper combines neural networks with symbolic reasoning to classify Galois groups, which is an emerging trend in AI for science with potential foundational implications.
+
+**Relevance:** 7
+**Novelty:** 8
+
+---
+
+## 31. [ByteScale: Efficient Scaling of LLM Training with a 2048K Context Length on More Than 12,000 GPUs](https://arxiv.org/abs/2502.21231) <a id="link31"></a>
+
+**ArXiv ID:** 2502.21231
+
+**Authors:** Hao Ge, Junda Feng, Qi Huang, Fangcheng Fu, Xiaonan Nie, Lei Zuo, Haibin Lin, Bin Cui, Xin Liu
+
+**Abstract:** Scaling long-context ability is essential for Large Language Models (LLMs). To amortize the memory consumption across multiple devices in long-context training, inter-data partitioning (a.k.a. Data Parallelism) and intra-data partitioning (a.k.a. Context Parallelism) are commonly used. Current training frameworks predominantly treat the two techniques as orthogonal, and establish static communication groups to organize the devices as a static mesh (e.g., a 2D mesh). However, the sequences for LLM training typically vary in lengths, no matter for texts, multi-modalities or reinforcement learning. The mismatch between data heterogeneity and static mesh causes redundant communication and imbalanced computation, degrading the training efficiency.   In this work, we introduce ByteScale, an efficient, flexible, and scalable LLM training framework for large-scale mixed training of long and short sequences. The core of ByteScale is a novel parallelism strategy, namely Hybrid Data Parallelism (HDP), which unifies the inter- and intra-data partitioning with a dynamic mesh design. In particular, we build a communication optimizer, which eliminates the redundant communication for short sequences by data-aware sharding and dynamic communication, and further compresses the communication cost for long sequences by selective offloading. Besides, we also develop a balance scheduler to mitigate the imbalanced computation by parallelism-aware data assignment. We evaluate ByteScale with the model sizes ranging from 7B to 141B, context lengths from 256K to 2048K, on a production cluster with more than 12,000 GPUs. Experiment results show that ByteScale outperforms the state-of-the-art training system by up to 7.89x.
+
+**Comment:** ByteScale introduces a novel parallelism strategy for efficient LLM training, which is relevant to model compression and efficiency but focuses more on engineering optimizations than foundational breakthroughs.
+
+**Relevance:** 7
+**Novelty:** 6
+
+---
+
+## 32. [Fuzzy Speculative Decoding for a Tunable Accuracy-Runtime Tradeoff](https://arxiv.org/abs/2502.20704) <a id="link32"></a>
+
+**ArXiv ID:** 2502.20704
+
+**Authors:** Maximilian Holsman, Yukun Huang, Bhuwan Dhingra
+
+**Abstract:** Speculative Decoding (SD) enforces strict distributional equivalence to the target model, limiting potential speed ups as distributions of near-equivalence achieve comparable outcomes in many cases. Furthermore, enforcing distributional equivalence means that users are unable to trade deviations from the target model distribution for further inference speed gains. To address these limitations, we introduce Fuzzy Speculative Decoding (FSD) - a decoding algorithm that generalizes SD by accepting candidate tokens purely based on the divergences between the target and draft model distributions. By allowing for controlled divergence from the target model, FSD enables users to flexibly trade generation quality for inference speed. Across several benchmarks, our method is able to achieve significant runtime improvements of over 5 tokens per second faster than SD at only an approximate 2% absolute reduction in benchmark accuracy. In many cases, FSD is even able to match SD benchmark accuracy at over 2 tokens per second faster, demonstrating that distributional equivalence is not necessary to maintain target model performance.
+
+**Comment:** Fuzzy Speculative Decoding provides a novel tradeoff mechanism for accuracy and runtime in LLM inference, which is relevant to model efficiency but lacks broader foundational insights.
+
+**Relevance:** 7
+**Novelty:** 6
+
+---
+
+# Paper Selection Prompt
+
+You are a helpful paper reading assistant whose job is to read daily posts from ArXiv and identify a few papers that your friend will enjoy reading.
+Your job is to carefully read the paper titles and abstracts below and find the ones that match the criteria below.
+
+## Relevant Topics
+
+Use the following relevance criteria to focus on foundational research. Keep **relevant** papers and filter out **irrelevant** ones. Avoid purely **application-driven** work.
+
+1. Representation Learning
+   - Relevant: Insights into how deep networks encode information, feature/dictionary learning, sparse/contrastive methods, training dynamics in neural networks.
+   - Irrelevant: Standard applications of known techniques lacking new theoretical or methodological contributions.
+
+2. Model Architecture
+   - Relevant: Mixture-of-Experts (MoE), Transformers, Conditional/Dynamic Networks, Autoencoders, analysis on existing architectures (like encoder-decoder), or other architectural innovations.
+   - Irrelevant: Merely using existing architectures for a certain task without insights into the structure themselves.
+
+3. Model Compression
+   - Relevant: Sparsity, pruning, quantization, low-rank approaches, KV cache, or other algorithmic/theoretical efficiency breakthroughs.
+   - Irrelevant: Straightforward applications of existing compression methods to new tasks.
+
+4. Large Language Models (LLMs)
+   - Relevant: Major breakthroughs in pretraining or architecture, theoretical insights into LLM behavior/interpretability.
+   - Irrelevant: Domain-specific usage (e.g., translation, jail-breaking), finetuning or inference tricks (e.g., instruction tuning, chain-of-thoughts, data mixing), or empirical dataset/benchmark studies and text-level analysis (e.g. hallucination, reasoning, safety).
+
+5. AI for Science
+   - Relevant: Foundational research in molecular/protein modeling, new generative paradigms, or significant architecture-level innovations.
+   - Irrelevant: Conventional, domain-specific applications without new theoretical perspectives.
+
+6. Emerging Trends
+   - Relevant: Cutting-edge theoretical work challenging established assumptions or introducing broad new paradigms.
+   - Irrelevant: Incremental improvements or trend-following without novel insights.
+
+**Keywords:**
+
+- Relevant: Mixture of Experts (MoE), Representation Learning, Compression/Efficiency, Sparse/Sparsity, Pruning, Quantization, Low-rank, Foundation Model, etc.
+- Irrelevant: Reinforcement Learning, Transfer Learning, Federated Learning, Online Learning, Diffusion Models, etc.
+- Application: Image Segmentation, Medical Imaging, 3D Vision, Video Understanding, Information Retrieval, Summarization, Recommendation Systems, Machine Translation, Speech Recognition, Signal Processing, Spatial/Temporal Modeling, Time Series, Knowledge Graph, etc.
+
+## Scoring Criteria
+
+> The "Relevance" score measures how closely the paper aligns with the core topics of the prompt.
+> The "Novelty" score assesses the originality and impact of the paper.
+> They are two **ORTHONORMAL** axes and **SHOULD NOT** be confused with each other.
+
+### Relevance Scoring
+
+- Relevance 9-10 (Completely Relevant)
+  - Focus: Fully aligned with core topics with no deviation, score the highest if contains relevant keywords in it.
+  - Examples: Papers focused on foundational methods or theoretical research, whose titles contain topic keywords like "MoE".
+
+- Relevance 7-8 (Relevant)
+  - Focus: Retain a solid link to the main research area, though may touch on peripheral elements.
+  - Examples: Papers research on the fundamental part of MoE through a less critical aspect like its behavior in GNN.
+
+- Relevance 5-6 (Borderline)
+  - Focus: Maintains a link to the core topic but also extends into at least one other domain/area beyond the primary focus.
+  - Examples: Work referencing MoE centered on reinforcement learning.
+
+- Relevance 3-4 (Irrelevant)
+  - Focus: Largely outside our interests with no association to our topics.
+  - Examples: Application-focused papers like using MoE to solve a problem in the real world.
+
+- Relevance 1-2 (Ignore)
+  - Focus: Purely unrelated to our topics. Completely a different domain.
+  - **Exception**: If the paper hints at a cutting-edge, radically new direction that could eventually transform the primary domain, consider a score of 9–10 despite initial appearances. (Usually a very rare concept that belongs to the fundamental research)
+
+### Novelty Scoring
+
+- Novelty 9-10 (Breakthrough)
+  - Definition: Groundbreaking methods/theory introducing new directions or solving major challenges.
+  - Examples: Entirely new paradigm for foundational models; a novel theory transforming representation learning.
+
+- Novelty 7-8 (Improvements)
+  - Definition: Substantial insights/enhancements, though not a full paradigm shift.
+  - Examples: Modifications on existing methods yielding significantly better results.
+
+- Novelty 5-6 (Borderline)
+  - Definition: Incremental contributions with possible long-term benefits, not immediately transformative.
+  - Examples: Moderately novel extension to an existing architecture; refining current methods without fundamentally altering them.
+
+- Novelty 3-4 (Tangential)
+  - Definition: Minor or domain-specific improvements with limited broader impact.
+  - Examples: Slight modifications to known methods with strange motivation; purely engineering jobs like a new benchmark/dataset.
+
+- Novelty 1-2 (Low)
+  - Definition: Minimal originality, applying standard approaches without real innovation.
+  - Examples: Using an off-the-shelf model without adding new insights; purely application-driven studies like finetuning a pretrained model using existing methods.
+
+## Papers
+
+[PAPER LIST HERE]
+
+## Instructions
+
+Write the response in JSONL format with {ARXIVID, COMMENT, RELEVANCE, NOVELTY} on each line, one for each paper.
+
+- ARXIVID: should be the ArXiv ID.
+- COMMENT: should identify whether there is a criteria that match the paper very closely. These matches should not be based on general terms like "language modeling" or "advancements" and should specifically refer to a criterion. No need to mention the non-matching criteria.
+- RELEVANCE: should be a score from 1-10.
+- NOVELTY: should be a score from 1-10.

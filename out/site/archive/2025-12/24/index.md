@@ -1,0 +1,386 @@
+<div style="display: flex; align-items: flex-start; justify-content: space-between; width: 100%;"><div style="width: 33.33%; text-align: left;"><a href="../23"><img src="../../../assets/nav/day/2025-12-24-prev.svg" alt="Previous Day 2025-12-23"></a></div><div style="width: 33.33%; text-align: center;"><a href=".."><img src="../../../assets/nav/day/2025-12-24-center.svg" alt="Monthly Overview 2025-12"></a></div><div style="width: 33.33%; text-align: right;"><a href="../25"><img src="../../../assets/nav/day/2025-12-24-next.svg" alt="Next Day 2025-12-25"></a></div></div>
+
+# Personalized Daily ArXiv Papers 2025-12-24
+
+| *[gpt-5]*   | Prompt   | Completion   | Total   |
+|:-----------:|:--------:|:------------:|:-------:|
+| **Token**   | 29156    | 31877        | 61033   |
+| **Cost**    | $0.04    | $0.32        | $0.36   |
+
+Total arXiv papers: 403
+
+Total scanned papers: 236
+
+Total relevant papers: 15
+
+**Table of contents with paper titles:**
+
+1. [Block-Recurrent Dynamics in Vision Transformers](#user-content-link1)
+**Authors:** Mozes Jacobs, Thomas Fel, Richard Hakim, Alessandra Brondetta, Demba Ba, T. Andy Keller
+
+2. [UCCL-EP: Portable Expert-Parallel Communication](#user-content-link2)
+**Authors:** Ziming Mao, Yihan Zhang, Chihan Cui, Kaichao You, Zhongjie Chen, Zhiying Xu, Scott Shenker, Costin Raiciu, Yang Zhou, Ion Stoica
+
+3. [How Many Experts Are Enough? Towards Optimal Semantic Specialization for Mixture-of-Experts](#user-content-link3)
+**Authors:** Sumin Park, Noseong Park
+
+4. [Demystifying LLM-as-a-Judge: Analytically Tractable Model for Inference-Time Scaling](#user-content-link4)
+**Authors:** Indranil Halder, Cengiz Pehlevan
+
+5. [BRIDGE: Budget-aware Reasoning via Intermediate Distillation with Guided Examples](#user-content-link5)
+**Authors:** Xuan-An Le, Minh-Nam Tran, Son Nguyen
+
+6. [Saddle-to-Saddle Dynamics Explains A Simplicity Bias Across Neural Network Architectures](#user-content-link6)
+**Authors:** Yedi Zhang, Andrew Saxe, Peter E. Latham
+
+7. [Distilling to Hybrid Attention Models via KL-Guided Layer Selection](#user-content-link7)
+**Authors:** Yanhong Li, Songlin Yang, Shawn Tan, Mayank Mishra, Rameswar Panda, Jiawei Zhou, Yoon Kim
+
+8. [Relu and softplus neural nets as zero-sum turn-based games](#user-content-link8)
+**Authors:** Stephane Gaubert, Yiannis Vlassopoulos
+
+9. [ActionFlow: A Pipelined Action Acceleration for Vision Language Models on Edge](#user-content-link9)
+**Authors:** Yuntao Dai, Hang Gu, Teng Wang, Qianyu Cheng, Yifei Zheng, Zhiyong Qiu, Lei Gong, Wenqi Lou, Xuehai Zhou
+
+10. [How Much 3D Do Video Foundation Models Encode?](#user-content-link10)
+**Authors:** Zixuan Huang, Xiang Li, Zhaoyang Lv, James M. Rehg
+
+11. [Field-Space Attention for Structure-Preserving Earth System Transformers](#user-content-link11)
+**Authors:** Maximilian Witte, Johannes Meuer, \'Etienne Pl\'esiat, Christopher Kadow
+
+12. [High-Performance Self-Supervised Learning by Joint Training of Flow Matching](#user-content-link12)
+**Authors:** Kosuke Ukita, Tsuyoshi Okita
+
+13. [Learning to Reason in LLMs by Expectation Maximization](#user-content-link13)
+**Authors:** Junghyun Lee, Branislav Kveton, Sunav Choudhary, Subhojyoti Mukherjee, Anup Rao, Ryan A. Rossi, Alexa Siu
+
+14. [PairFlow: Closed-Form Source-Target Coupling for Few-Step Generation in Discrete Flow Models](#user-content-link14)
+**Authors:** Mingue Park, Jisung Hwang, Seungwoo Yoo, Kyeongmin Yeo, Minhyuk Sung
+
+15. [Fail Fast, Win Big: Rethinking the Drafting Strategy in Speculative Decoding via Diffusion LLMs](#user-content-link15)
+**Authors:** Rui Pan, Zhuofu Chen, Ravi Netravali
+
+---
+
+## 1. [Block-Recurrent Dynamics in Vision Transformers](https://arxiv.org/abs/2512.19941) <a id="link1"></a>
+
+**ArXiv ID:** 2512.19941
+
+**Authors:** Mozes Jacobs, Thomas Fel, Richard Hakim, Alessandra Brondetta, Demba Ba, T. Andy Keller
+
+**Abstract:** As Vision Transformers (ViTs) become standard vision backbones, a mechanistic account of their computational phenomenology is essential. Despite architectural cues that hint at dynamical structure, there is no settled framework that interprets Transformer depth as a well-characterized flow. In this work, we introduce the Block-Recurrent Hypothesis (BRH), arguing that trained ViTs admit a block-recurrent depth structure such that the computation of the original $L$ blocks can be accurately rewritten using only $k \ll L$ distinct blocks applied recurrently. Across diverse ViTs, between-layer representational similarity matrices suggest few contiguous phases. To determine whether these phases reflect genuinely reusable computation, we train block-recurrent surrogates of pretrained ViTs: Recurrent Approximations to Phase-structured TransfORmers (Raptor). In small-scale, we demonstrate that stochastic depth and training promote recurrent structure and subsequently correlate with our ability to accurately fit Raptor. We then provide an empirical existence proof for BRH by training a Raptor model to recover $96\%$ of DINOv2 ImageNet-1k linear probe accuracy in only 2 blocks at equivalent computational cost. Finally, we leverage our hypothesis to develop a program of Dynamical Interpretability. We find i) directional convergence into class-dependent angular basins with self-correcting trajectories under small perturbations, ii) token-specific dynamics, where cls executes sharp late reorientations while patch tokens exhibit strong late-stage coherence toward their mean direction, and iii) a collapse to low rank updates in late depth, consistent with convergence to low-dimensional attractors. Altogether, we find a compact recurrent program emerges along ViT depth, pointing to a low-complexity normative solution that enables these models to be studied through principled dynamical systems analysis.
+
+**Comment:** Model Architecture and Representation Learning: discovers block-recurrent depth structure in ViTs and trains recurrent surrogates (Raptor), with dynamical/low-rank analyses.
+
+**Relevance:** 10
+**Novelty:** 8
+
+---
+
+## 2. [UCCL-EP: Portable Expert-Parallel Communication](https://arxiv.org/abs/2512.19849) <a id="link2"></a>
+
+**ArXiv ID:** 2512.19849
+
+**Authors:** Ziming Mao, Yihan Zhang, Chihan Cui, Kaichao You, Zhongjie Chen, Zhiying Xu, Scott Shenker, Costin Raiciu, Yang Zhou, Ion Stoica
+
+**Abstract:** Mixture-of-Experts (MoE) workloads rely on expert parallelism (EP) to achieve high GPU efficiency. State-of-the-art EP communication systems such as DeepEP demonstrate strong performance but exhibit poor portability across heterogeneous GPU and NIC platforms. The poor portability is rooted in architecture: GPU-initiated token-level RDMA communication requires tight vertical integration between GPUs and NICs, e.g., GPU writes to NIC driver/MMIO interfaces.   We present UCCL-EP, a portable EP communication system that delivers DeepEP-level performance across heterogeneous GPU and NIC hardware. UCCL-EP replaces GPU-initiated RDMA with a high-throughput GPU-CPU control channel: compact token-routing commands are transferred to multithreaded CPU proxies, which then issue GPUDirect RDMA operations on behalf of GPUs. UCCL-EP further emulates various ordering semantics required by specialized EP communication modes using RDMA immediate data, enabling correctness on NICs that lack such ordering, e.g., AWS EFA. We implement UCCL-EP on NVIDIA and AMD GPUs with EFA and Broadcom NICs. On EFA, it outperforms the best existing EP solution by up to $2.1\times$ for dispatch and combine throughput. On NVIDIA-only platform, UCCL-EP achieves comparable performance to the original DeepEP. UCCL-EP also improves token throughput on SGLang by up to 40% on the NVIDIA+EFA platform, and improves DeepSeek-V3 training throughput over the AMD Primus/Megatron-LM framework by up to 45% on a 16-node AMD+Broadcom platform.
+
+**Comment:** High Performance Computing (MoE): portable expert-parallel communication using GPU–CPU control channel and GPUDirect RDMA, enabling DeepEP-level performance across GPU/NICs.
+
+**Relevance:** 10
+**Novelty:** 8
+
+---
+
+## 3. [How Many Experts Are Enough? Towards Optimal Semantic Specialization for Mixture-of-Experts](https://arxiv.org/abs/2512.19765) <a id="link3"></a>
+
+**ArXiv ID:** 2512.19765
+
+**Authors:** Sumin Park, Noseong Park
+
+**Abstract:** Finding the optimal configuration of Sparse Mixture-ofExperts (SMoE) that maximizes semantic differentiation among experts is essential for exploiting the full potential of MoE architectures. However, existing SMoE frameworks either heavily rely on hyperparameter tuning or overlook the importance of diversifying semantic roles across experts when adapting the expert pool size. We propose Mixture-of-Experts for Adaptive Semantic Specialization (MASS), a semanticaware MoE framework for adaptive expert expansion and dynamic routing. MASS introduces two key advancements: (i) a gradient-based semantic drift detector that prompts targeted expert expansion when the existing expert pool lacks capacity to capture the full semantic diversity of the data, and (ii) an integration of adaptive routing strategy that dynamically adjusts expert usage based on token-level routing confidence mass. We first demonstrate that MASS reliably converges to the point of optimal balance between cost-performance trade-off with notably improved sematic specialization in a highly controlled synthetic setup. Further empirical results on real-world datasets across language and vision domains show that MASS consistently outperforms a range of strong MoE baselines, demonstrating its domain robustness and enhanced expert specialization.
+
+**Comment:** Model Architecture (MoE): adaptive expert expansion with semantic drift detection and dynamic routing to optimize expert specialization.
+
+**Relevance:** 10
+**Novelty:** 8
+
+---
+
+## 4. [Demystifying LLM-as-a-Judge: Analytically Tractable Model for Inference-Time Scaling](https://arxiv.org/abs/2512.19905) <a id="link4"></a>
+
+**ArXiv ID:** 2512.19905
+
+**Authors:** Indranil Halder, Cengiz Pehlevan
+
+**Abstract:** Recent developments in large language models have shown advantages in reallocating a notable share of computational resource from training time to inference time. However, the principles behind inference time scaling are not well understood. In this paper, we introduce an analytically tractable model of inference-time scaling: Bayesian linear regression with a reward-weighted sampler, where the reward is determined from a linear model, modeling LLM-as-a-judge scenario. We study this problem in the high-dimensional regime, where the deterministic equivalents dictate a closed-form expression for the posterior predictive mean and variance. We analyze the generalization error when training data are sampled from a teacher model. We draw $k$ inference-time samples and select via softmax at a temperature applied to a quadratic reward. When the reward is not too different from the teacher, the generalization error decreases monotonically with increasing inference time samples $k$. However, the specific reward that optimizes inference-time selection generally differs from the teacher. In contrast, substantial reward misspecification induces a finite optimal $k$ beyond which more sampling can increase the generalization error. For fixed $k$, there exists an optimal sampling temperature. We experimentally verify these facts in large language model inference with an additional large language model as a judge. In the "best-of-$k$" limit with the teacher as reward, we theoretically show that the generalization error decays as $\Theta(1/k^2)$ and determine the leading coefficient via extreme value theory. These formulas delineate domains where scaling inference-time computation is provably preferable to collecting more data. Finally, we demonstrate that when task difficulty increases, the previously mentioned advantage of inference-time compute degrades.
+
+**Comment:** Representation Learning/Training Dynamics: analytically tractable inference-time scaling with best-of-k theory for LLM-as-a-judge.
+
+**Relevance:** 9
+**Novelty:** 9
+
+---
+
+## 5. [BRIDGE: Budget-aware Reasoning via Intermediate Distillation with Guided Examples](https://arxiv.org/abs/2512.20403) <a id="link5"></a>
+
+**ArXiv ID:** 2512.20403
+
+**Authors:** Xuan-An Le, Minh-Nam Tran, Son Nguyen
+
+**Abstract:** Distilling knowledge from large proprietary models (e.g., GPT-4) to tiny deployable models (less than 1B parameters) faces a critical capacity-budget trap: the 1000x capacity gap between teachers and students prevents effective direct transfer, while API costs prohibit extensive data collection. We introduce BRIDGE (Budget-Aware Reasoning via Intermediate Distillation), a two-phase framework that resolves these constraints through strategic intermediation and budget asymmetry. In Phase 1, a mid-sized Teacher Assistant (TA; e.g., about 7B) learns from the black-box teacher on a strictly limited subset of data (e.g., 3-5%), selected via a zero-API-cost pipeline that balances entropic difficulty and semantic diversity using only local TA inference. In Phase 2, we exploit this asymmetry-teacher queries are expensive, whereas TA inference is free to amplify supervision: the refined TA generates synthetic rationales for the full dataset to train the tiny student. Crucially, we apply an instruction-tuning curriculum to establish behavioral alignment in the tiny student before transferring reasoning. Our theoretical analysis shows that BRIDGE yields tighter generalization bounds than direct distillation when data is abundant. Experiments across medical, legal, and financial benchmarks demonstrate consistent improvements: BRIDGE delivers student performance gains of 28-41%, closing the capability gap with proprietary teachers by 12-16% while using 10x fewer teacher queries. Notably, BRIDGE defies the conventional cost-performance frontier, surpassing direct distillation baselines that use 100% of the budget while consuming only 5% of the resources.
+
+**Comment:** Model Compression/Efficiency: budget-aware distillation via teacher assistant with theoretical generalization bounds.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 6. [Saddle-to-Saddle Dynamics Explains A Simplicity Bias Across Neural Network Architectures](https://arxiv.org/abs/2512.20607) <a id="link6"></a>
+
+**ArXiv ID:** 2512.20607
+
+**Authors:** Yedi Zhang, Andrew Saxe, Peter E. Latham
+
+**Abstract:** Neural networks trained with gradient descent often learn solutions of increasing complexity over time, a phenomenon known as simplicity bias. Despite being widely observed across architectures, existing theoretical treatments lack a unifying framework. We present a theoretical framework that explains a simplicity bias arising from saddle-to-saddle learning dynamics for a general class of neural networks, incorporating fully-connected, convolutional, and attention-based architectures. Here, simple means expressible with few hidden units, i.e., hidden neurons, convolutional kernels, or attention heads. Specifically, we show that linear networks learn solutions of increasing rank, ReLU networks learn solutions with an increasing number of kinks, convolutional networks learn solutions with an increasing number of convolutional kernels, and self-attention models learn solutions with an increasing number of attention heads. By analyzing fixed points, invariant manifolds, and dynamics of gradient descent learning, we show that saddle-to-saddle dynamics operates by iteratively evolving near an invariant manifold, approaching a saddle, and switching to another invariant manifold. Our analysis also illuminates the effects of data distribution and weight initialization on the duration and number of plateaus in learning, dissociating previously confounding factors. Overall, our theory offers a framework for understanding when and why gradient descent progressively learns increasingly complex solutions.
+
+**Comment:** Representation Learning/Training Dynamics: unified theory of simplicity bias via saddle-to-saddle dynamics across FCN, CNN, and attention architectures.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 7. [Distilling to Hybrid Attention Models via KL-Guided Layer Selection](https://arxiv.org/abs/2512.20569) <a id="link7"></a>
+
+**ArXiv ID:** 2512.20569
+
+**Authors:** Yanhong Li, Songlin Yang, Shawn Tan, Mayank Mishra, Rameswar Panda, Jiawei Zhou, Yoon Kim
+
+**Abstract:** Distilling pretrained softmax attention Transformers into more efficient hybrid architectures that interleave softmax and linear attention layers is a promising approach for improving the inference efficiency of LLMs without requiring expensive pretraining from scratch. A critical factor in the conversion process is layer selection, i.e., deciding on which layers to convert to linear attention variants. This paper describes a simple and efficient recipe for layer selection that uses layer importance scores derived from a small amount of training on generic text data. Once the layers have been selected we use a recent pipeline for the distillation process itself \citep[RADLADS;][]{goldstein2025radlads}, which consists of attention weight transfer, hidden state alignment, KL-based distribution matching, followed by a small amount of finetuning. We find that this approach is more effective than existing approaches for layer selection, including heuristics that uniformly interleave linear attentions based on a fixed ratio, as well as more involved approaches that rely on specialized diagnostic datasets.
+
+**Comment:** Model Architecture and Efficiency: KL-guided layer selection to convert selected Transformer layers to linear attention, distilling into hybrid attention models.
+
+**Relevance:** 9
+**Novelty:** 7
+
+---
+
+## 8. [Relu and softplus neural nets as zero-sum turn-based games](https://arxiv.org/abs/2512.20582) <a id="link8"></a>
+
+**ArXiv ID:** 2512.20582
+
+**Authors:** Stephane Gaubert, Yiannis Vlassopoulos
+
+**Abstract:** We show that the output of a ReLU neural network can be interpreted as the value of a zero-sum, turn-based, stopping game, which we call the ReLU net game. The game runs in the direction opposite to that of the network, and the input of the network serves as the terminal reward of the game. In fact, evaluating the network is the same as running the Shapley-Bellman backward recursion for the value of the game. Using the expression of the value of the game as an expected total payoff with respect to the path measure induced by the transition probabilities and a pair of optimal policies, we derive a discrete Feynman-Kac-type path-integral formula for the network output. This game-theoretic representation can be used to derive bounds on the output from bounds on the input, leveraging the monotonicity of Shapley operators, and to verify robustness properties using policies as certificates. Moreover, training the neural network becomes an inverse game problem: given pairs of terminal rewards and corresponding values, one seeks transition probabilities and rewards of a game that reproduces them. Finally, we show that a similar approach applies to neural networks with Softplus activation functions, where the ReLU net game is replaced by its entropic regularization.
+
+**Comment:** Representation Learning: game-theoretic and path-integral formulation of ReLU/Softplus networks enabling robustness certificates and training insights.
+
+**Relevance:** 8
+**Novelty:** 8
+
+---
+
+## 9. [ActionFlow: A Pipelined Action Acceleration for Vision Language Models on Edge](https://arxiv.org/abs/2512.20276) <a id="link9"></a>
+
+**ArXiv ID:** 2512.20276
+
+**Authors:** Yuntao Dai, Hang Gu, Teng Wang, Qianyu Cheng, Yifei Zheng, Zhiyong Qiu, Lei Gong, Wenqi Lou, Xuehai Zhou
+
+**Abstract:** Vision-Language-Action (VLA) models have emerged as a unified paradigm for robotic perception and control, enabling emergent generalization and long-horizon task execution. However, their deployment in dynamic, real-world environments is severely hin dered by high inference latency. While smooth robotic interaction requires control frequencies of 20 to 30 Hz, current VLA models typi cally operate at only 3-5 Hz on edge devices due to the memory bound nature of autoregressive decoding. Existing optimizations often require extensive retraining or compromise model accuracy. To bridge this gap, we introduce ActionFlow, a system-level inference framework tailored for resource-constrained edge plat forms. At the core of ActionFlow is a Cross-Request Pipelin ing strategy, a novel scheduler that redefines VLA inference as a macro-pipeline of micro-requests. The strategy intelligently batches memory-bound Decode phases with compute-bound Prefill phases across continuous time steps to maximize hardware utilization. Furthermore, to support this scheduling, we propose a Cross Request State Packed Forward operator and a Unified KV Ring Buffer, which fuse fragmented memory operations into efficient dense computations. Experimental results demonstrate that ActionFlow achieves a 2.55x improvement in FPS on the OpenVLA-7B model without retraining, enabling real-time dy namic manipulation on edge hardware. Our work is available at https://anonymous.4open.science/r/ActionFlow-1D47.
+
+**Comment:** High Performance Computing/Efficiency: cross-request pipelining and unified KV ring buffer to accelerate autoregressive VLA inference on edge.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 10. [How Much 3D Do Video Foundation Models Encode?](https://arxiv.org/abs/2512.19949) <a id="link10"></a>
+
+**ArXiv ID:** 2512.19949
+
+**Authors:** Zixuan Huang, Xiang Li, Zhaoyang Lv, James M. Rehg
+
+**Abstract:** Videos are continuous 2D projections of 3D worlds. After training on large video data, will global 3D understanding naturally emerge? We study this by quantifying the 3D understanding of existing Video Foundation Models (VidFMs) pretrained on vast video data. We propose the first model-agnostic framework that measures the 3D awareness of various VidFMs by estimating multiple 3D properties from their features via shallow read-outs. Our study presents meaningful findings regarding the 3D awareness of VidFMs on multiple axes. In particular, we show that state-of-the-art video generation models exhibit a strong understanding of 3D objects and scenes, despite not being trained on any 3D data. Such understanding can even surpass that of large expert models specifically trained for 3D tasks. Our findings, together with the 3D benchmarking of major VidFMs, provide valuable observations for building scalable 3D models.
+
+**Comment:** Representation Learning: model-agnostic probing of VidFM features to quantify 3D properties via shallow readouts.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 11. [Field-Space Attention for Structure-Preserving Earth System Transformers](https://arxiv.org/abs/2512.20350) <a id="link11"></a>
+
+**ArXiv ID:** 2512.20350
+
+**Authors:** Maximilian Witte, Johannes Meuer, \'Etienne Pl\'esiat, Christopher Kadow
+
+**Abstract:** Accurate and physically consistent modeling of Earth system dynamics requires machine-learning architectures that operate directly on continuous geophysical fields and preserve their underlying geometric structure. Here we introduce Field-Space attention, a mechanism for Earth system Transformers that computes attention in the physical domain rather than in a learned latent space. By maintaining all intermediate representations as continuous fields on the sphere, the architecture enables interpretable internal states and facilitates the enforcement of scientific constraints. The model employs a fixed, non-learned multiscale decomposition and learns structure-preserving deformations of the input field, allowing coherent integration of coarse and fine-scale information while avoiding the optimization instabilities characteristic of standard single-scale Vision Transformers. Applied to global temperature super-resolution on a HEALPix grid, Field-Space Transformers converge more rapidly and stably than conventional Vision Transformers and U-Net baselines, while requiring substantially fewer parameters. The explicit preservation of field structure throughout the network allows physical and statistical priors to be embedded directly into the architecture, yielding improved fidelity and reliability in data-driven Earth system modeling. These results position Field-Space Attention as a compact, interpretable, and physically grounded building block for next-generation Earth system prediction and generative modeling frameworks.
+
+**Comment:** Model Architecture and Efficiency: field-space attention operating on continuous fields with fixed multiscale decomposition for compact, stable Earth system transformers.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 12. [High-Performance Self-Supervised Learning by Joint Training of Flow Matching](https://arxiv.org/abs/2512.19729) <a id="link12"></a>
+
+**ArXiv ID:** 2512.19729
+
+**Authors:** Kosuke Ukita, Tsuyoshi Okita
+
+**Abstract:** Diffusion models can learn rich representations during data generation, showing potential for Self-Supervised Learning (SSL), but they face a trade-off between generative quality and discriminative performance. Their iterative sampling also incurs substantial computational and energy costs, hindering industrial and edge AI applications. To address these issues, we propose the Flow Matching-based Foundation Model (FlowFM), which jointly trains a representation encoder and a conditional flow matching generator. This decoupled design achieves both high-fidelity generation and effective recognition. By using flow matching to learn a simpler velocity field, FlowFM accelerates and stabilizes training, improving its efficiency for representation learning. Experiments on wearable sensor data show FlowFM reduces training time by 50.4\% compared to a diffusion-based approach. On downstream tasks, FlowFM surpassed the state-of-the-art SSL method (SSL-Wearables) on all five datasets while achieving up to a 51.0x inference speedup and maintaining high generative quality. The implementation code is available at https://github.com/Okita-Laboratory/jointOptimizationFlowMatching.
+
+**Comment:** Representation Learning and Efficiency: joint training of an encoder with conditional flow matching generator for faster, stable SSL.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 13. [Learning to Reason in LLMs by Expectation Maximization](https://arxiv.org/abs/2512.20169) <a id="link13"></a>
+
+**ArXiv ID:** 2512.20169
+
+**Authors:** Junghyun Lee, Branislav Kveton, Sunav Choudhary, Subhojyoti Mukherjee, Anup Rao, Ryan A. Rossi, Alexa Siu
+
+**Abstract:** Large language models (LLMs) solve reasoning problems by first generating a rationale and then answering. We formalize reasoning as a latent variable model and derive an expectation-maximization (EM) objective for learning to reason. This view connects EM and modern reward-based optimization, and shows that the main challenge lies in designing a sampling distribution that generates rationales that justify correct answers. We instantiate and compare several sampling schemes: rejection sampling with a budget, self-taught reasoner (STaR), and prompt posterior sampling (PPS), which only keeps the rationalization stage of STaR. Our experiments on the ARC, MMLU, and OpenBookQA datasets with the Llama and Qwen models show that the sampling scheme can significantly affect the accuracy of learned reasoning models. Despite its simplicity, we observe that PPS outperforms the other sampling schemes.
+
+**Comment:** Training Objective/Representation Learning: formulates reasoning as a latent variable and applies an EM objective; studies sampling schemes for rationale learning.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 14. [PairFlow: Closed-Form Source-Target Coupling for Few-Step Generation in Discrete Flow Models](https://arxiv.org/abs/2512.20063) <a id="link14"></a>
+
+**ArXiv ID:** 2512.20063
+
+**Authors:** Mingue Park, Jisung Hwang, Seungwoo Yoo, Kyeongmin Yeo, Minhyuk Sung
+
+**Abstract:** We introduce $\texttt{PairFlow}$, a lightweight preprocessing step for training Discrete Flow Models (DFMs) to achieve few-step sampling without requiring a pretrained teacher. DFMs have recently emerged as a new class of generative models for discrete data, offering strong performance. However, they suffer from slow sampling due to their iterative nature. Existing acceleration methods largely depend on finetuning, which introduces substantial additional training overhead. $\texttt{PairFlow}$ addresses this issue with a lightweight preprocessing step. Inspired by ReFlow and its extension to DFMs, we train DFMs from coupled samples of source and target distributions, without requiring any pretrained teacher. At the core of our approach is a closed-form inversion for DFMs, which allows efficient construction of paired source-target samples. Despite its extremely low cost, taking only up to 1.7% of the compute needed for full model training, $\texttt{PairFlow}$ matches or even surpasses the performance of two-stage training involving finetuning. Furthermore, models trained with our framework provide stronger base models for subsequent distillation, yielding further acceleration after finetuning. Experiments on molecular data as well as binary and RGB images demonstrate the broad applicability and effectiveness of our approach.
+
+**Comment:** Model Efficiency: accelerates discrete flow models to few-step sampling via closed-form inversion–based source–target coupling without a teacher.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 15. [Fail Fast, Win Big: Rethinking the Drafting Strategy in Speculative Decoding via Diffusion LLMs](https://arxiv.org/abs/2512.20573) <a id="link15"></a>
+
+**ArXiv ID:** 2512.20573
+
+**Authors:** Rui Pan, Zhuofu Chen, Ravi Netravali
+
+**Abstract:** Diffusion Large Language Models (dLLMs) offer fast, parallel token generation, but their standalone use is plagued by an inherent efficiency-quality tradeoff. We show that, if carefully applied, the attributes of dLLMs can actually be a strength for drafters in speculative decoding with autoregressive (AR) verifiers. Our core insight is that dLLM's speed from parallel decoding drastically lowers the risk of costly rejections, providing a practical mechanism to effectively realize the (elusive) lengthy drafts that lead to large speedups with speculative decoding. We present FailFast, a dLLM-based speculative decoding framework that realizes this approach by dynamically adapting its speculation length. It "fails fast" by spending minimal compute in hard-to-speculate regions to shrink speculation latency and "wins big" by aggressively extending draft lengths in easier regions to reduce verification latency (in many cases, speculating and accepting 70 tokens at a time!). Without any fine-tuning, FailFast delivers lossless acceleration of AR LLMs and achieves up to 4.9$\times$ speedup over vanilla decoding, 1.7$\times$ over the best naive dLLM drafter, and 1.4$\times$ over EAGLE-3 across diverse models and workloads. We open-source FailFast at https://github.com/ruipeterpan/failfast.
+
+**Comment:** Inference Efficiency/HPC: speculative decoding with diffusion LLM drafters and adaptive speculation length for lossless AR acceleration.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+# Paper Selection Prompt
+
+## System Prompt
+
+> You are a helpful paper reading assistant whose job is to read daily posts from ArXiv and identify a few papers that your friend will enjoy reading.
+> Your job is to carefully read the paper titles and abstracts below and find the ones that match the criteria below.
+
+## User Prompt
+
+> ## Instructions
+> 
+> Write the response in JSONL format with {ARXIVID, COMMENT, RELEVANCE, NOVELTY} on each line, one for each paper.
+> 
+> - ARXIVID: should be the ArXiv ID.
+> - COMMENT: should identify whether there is a criteria that match the paper very closely. These matches should not be based on general terms like "language modeling" or "advancements" and should specifically refer to a criterion. No need to mention the non-matching criteria.
+> - RELEVANCE: should be a score from 1-10.
+> - NOVELTY: should be a score from 1-10.
+> 
+> ## Scoring Criteria
+> 
+> > The "Relevance" score measures how closely the paper aligns with the core topics of the prompt.
+> > The "Novelty" score assesses the originality and impact of the paper.
+> > They are two **ORTHONORMAL** axes and **SHOULD NOT** be confused with each other.
+> 
+> ### Relevance Scoring
+> 
+> - Relevance 9-10 (Completely Relevant)
+>   - Focus: Fully aligned with core topics with no deviation, score the highest if contains relevant keywords in it.
+>   - Examples: Papers focused on foundational methods or theoretical research, whose titles contain topic keywords like "MoE".
+> 
+> - Relevance 7-8 (Relevant)
+>   - Focus: Retain a solid link to the main research area, though may touch on peripheral elements.
+>   - Examples: Papers research on the fundamental part of MoE through a less critical aspect like its behavior in GNN.
+> 
+> - Relevance 5-6 (Borderline)
+>   - Focus: Maintains a link to the core topic but also extends into at least one other domain/area beyond the primary focus.
+>   - Examples: Work referencing MoE centered on reinforcement learning.
+> 
+> - Relevance 3-4 (Irrelevant)
+>   - Focus: Largely outside our interests with no association to our topics.
+>   - Examples: Application-focused papers like using MoE to solve a problem in the real world.
+> 
+> - Relevance 1-2 (Ignore)
+>   - Focus: Purely unrelated to our topics. Completely a different domain.
+>   - **Exception**: If the paper hints at a cutting-edge, radically new direction that could eventually transform the primary domain, consider a score of 9–10 despite initial appearances. (Usually a very rare concept that belongs to the fundamental research)
+> 
+> ### Novelty Scoring
+> 
+> - Novelty 9-10 (Breakthrough)
+>   - Definition: Groundbreaking methods/theory introducing new directions or solving major challenges.
+>   - Examples: Entirely new paradigm for foundational models; a novel theory transforming representation learning.
+> 
+> - Novelty 7-8 (Improvements)
+>   - Definition: Substantial insights/enhancements, though not a full paradigm shift.
+>   - Examples: Modifications on existing methods yielding significantly better results.
+> 
+> - Novelty 5-6 (Borderline)
+>   - Definition: Incremental contributions with possible long-term benefits, not immediately transformative.
+>   - Examples: Moderately novel extension to an existing architecture; refining current methods without fundamentally altering them.
+> 
+> - Novelty 3-4 (Tangential)
+>   - Definition: Minor or domain-specific improvements with limited broader impact.
+>   - Examples: Slight modifications to known methods with strange motivation; purely engineering jobs like a new benchmark/dataset.
+> 
+> - Novelty 1-2 (Low)
+>   - Definition: Minimal originality, applying standard approaches without real innovation.
+>   - Examples: Using an off-the-shelf model without adding new insights; purely application-driven studies like finetuning a pretrained model using existing methods.
+> 
+> ## Papers
+> 
+> [PAPER LIST HERE]
+> 
+> ## Relevant Topics
+> 
+> Use the following relevance criteria to focus on foundational research. Keep **relevant** papers and filter out **irrelevant** ones. Avoid purely **application-driven** work.
+> 
+> 1. Model Architecture
+>    - Relevant: Mixture-of-Experts (MoE), Transformers, Conditional/Dynamic Networks, Autoencoders, analysis/innovations on existing architectures.
+>    - Irrelevant: Merely using existing architectures for a certain task without insights into the structure themselves.
+> 
+> 2. Model Compression and Efficiency
+>    - Relevant: Sparsity, pruning, quantization, low-rank approaches, cache, or other algorithmic/theoretical efficiency breakthroughs.
+>    - Irrelevant: Straightforward applications of existing compression methods to new tasks.
+> 
+> 3. High Performance Computing
+>    - Relevant: Algorithmic or systems-level innovations enabling training of large-scale models, distributed training techniques, memory optimization.
+>    - Irrelevant: Incremental engineering improvements without novel algorithmic contributions.
+> 
+> 4. Representation Learning
+>    - Relevant: Insights into how deep networks encode information, feature/dictionary learning, sparse/contrastive methods, training dynamics in neural networks.
+>    - Irrelevant: Standard applications of known techniques lacking new theoretical or methodological contributions.
+> 
+> **Keywords:**
+> 
+> - Relevant: Mixture of Experts (MoE), Representation Learning, Compression/Efficiency, Sparse/Sparsity, Pruning, Quantization, Low-rank, Foundation Model, etc.
+> - Irrelevant: Reinforcement Learning, Transfer Learning, Federated Learning, Online Learning, Diffusion Models, etc.
+> - Application: Image Segmentation, Medical Imaging, 3D Vision, Video Understanding, Information Retrieval, Summarization, Recommendation Systems, Machine Translation, Speech Recognition, Signal Processing, Spatial/Temporal Modeling, Time Series, Knowledge Graph, etc.

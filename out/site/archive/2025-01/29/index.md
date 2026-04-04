@@ -1,0 +1,301 @@
+<div style="display: flex; align-items: flex-start; justify-content: space-between; width: 100%;"><div style="width: 33.33%; text-align: left;"><a href="../28"><img src="../../../assets/nav/day/2025-01-29-prev.svg" alt="Previous Day 2025-01-28"></a></div><div style="width: 33.33%; text-align: center;"><a href=".."><img src="../../../assets/nav/day/2025-01-29-center.svg" alt="Monthly Overview 2025-01"></a></div><div style="width: 33.33%; text-align: right;"><a href="../30"><img src="../../../assets/nav/day/2025-01-29-next.svg" alt="Next Day 2025-01-30"></a></div></div>
+
+# Personalized Daily Arxiv Papers 01/29/2025
+
+|           | Prompt   | Completion   | Total   |
+|-----------|----------|--------------|---------|
+| **Token** | 33605    | 2684         | 36289   |
+| **Cost**  | $0.84    | $0.27        | $1.11   |
+
+Total scanned papers: 282
+
+Total relevant papers: 10
+
+**Table of contents with paper titles:**
+
+1. [TopoNets: High Performing Vision and Language Models with Brain-Like Topography](#user-content-link1)
+**Authors:** Mayukh Deb, Mainak Deb, N. Apurva Ratan Murty
+
+2. [A Stochastic Dynamical Theory of LLM Self-Adversariality: Modeling Severity Drift as a Critical Process](#user-content-link2)
+**Authors:** Jack David Carson
+
+3. [DOCS: Quantifying Weight Similarity for Deeper Insights into Large Language Models](#user-content-link3)
+**Authors:** Zeping Min, Xinshang Wang
+
+4. [Overcoming Semantic Dilution in Transformer-Based Next Frame Prediction](#user-content-link4)
+**Authors:** Hy Nguyen, Srikanth Thudumu, Hung Du, Rajesh Vasa, Kon Mouzakis
+
+5. [Over-Tokenized Transformer: Vocabulary is Generally Worth Scaling](#user-content-link5)
+**Authors:** Hongzhi Huang, Defa Zhu, Banggu Wu, Yutao Zeng, Ya Wang, Qiyang Min, Xun Zhou
+
+6. [Sparse Autoencoders Trained on the Same Data Learn Different Features](#user-content-link6)
+**Authors:** Gon\c{c}alo Paulo, Nora Belrose
+
+7. [Explore Activation Sparsity in Recurrent LLMs for Energy-Efficient Neuromorphic Computing](#user-content-link7)
+**Authors:** Ivan Knunyants, Maryam Tavakol, Manolis Sifalakis, Yingfu Xu, Amirreza Yousefzadeh, Guangzhi Tang
+
+8. [Generative quantum combinatorial optimization by means of a novel conditional generative quantum eigensolver](#user-content-link8)
+**Authors:** Shunya Minami, Kouhei Nakaji, Yohichi Suzuki, Al\'an Aspuru-Guzik, Tadashi Kadowaki
+
+9. [Mamba-Shedder: Post-Transformer Compression for Efficient Selective Structured State Space Models](#user-content-link9)
+**Authors:** J. Pablo Mu\~noz, Jinjie Yuan, Nilesh Jain
+
+10. [Enhancing Non-Intrusive Load Monitoring with Features Extracted by Independent Component Analysis](#user-content-link10)
+**Authors:** Sahar Moghimian Hoosh, Ilia Kamyshev, Henni Ouerdane
+
+---
+
+## 1. [TopoNets: High Performing Vision and Language Models with Brain-Like Topography](https://arxiv.org/abs/2501.16396) <a id="link1"></a>
+
+**ArXiv ID:** 2501.16396
+
+**Authors:** Mayukh Deb, Mainak Deb, N. Apurva Ratan Murty
+
+**Abstract:** Neurons in the brain are organized such that nearby cells tend to share similar functions. AI models lack this organization, and past efforts to introduce topography have often led to trade-offs between topography and task performance. In this work, we present TopoLoss, a new loss function that promotes spatially organized topographic representations in AI models without significantly sacrificing task performance. TopoLoss is highly adaptable and can be seamlessly integrated into the training of leading model architectures. We validate our method on both vision (ResNet-18, ResNet-50, ViT) and language models (GPT-Neo-125M, NanoGPT), collectively TopoNets. TopoNets are the highest-performing supervised topographic models to date, exhibiting brain-like properties such as localized feature processing, lower dimensionality, and increased efficiency. TopoNets also predict responses in the brain and replicate the key topographic signatures observed in the brain's visual and language cortices. Together, this work establishes a robust and generalizable framework for integrating topography into leading model architectures, advancing the development of high-performing models that more closely emulate the computational strategies of the human brain.
+
+**Comment:** The paper introduces TopoLoss, a loss function promoting topographic organization in models, closely aligning with the criteria for new methodologies in representation learning. Additionally, the integration into leading architectures like ResNet and GPT-Neo addresses architectural analysis. It also offers insights into neural encoding and efficiency, which are essential for foundational research.
+
+**Relevance:** 10
+**Novelty:** 8
+
+---
+
+## 2. [A Stochastic Dynamical Theory of LLM Self-Adversariality: Modeling Severity Drift as a Critical Process](https://arxiv.org/abs/2501.16783) <a id="link2"></a>
+
+**ArXiv ID:** 2501.16783
+
+**Authors:** Jack David Carson
+
+**Abstract:** This paper introduces a continuous-time stochastic dynamical framework for understanding how large language models (LLMs) may self-amplify latent biases or toxicity through their own chain-of-thought reasoning. The model posits an instantaneous "severity" variable $x(t) \in [0,1]$ evolving under a stochastic differential equation (SDE) with a drift term $\mu(x)$ and diffusion $\sigma(x)$. Crucially, such a process can be consistently analyzed via the Fokker--Planck approach if each incremental step behaves nearly Markovian in severity space. The analysis investigates critical phenomena, showing that certain parameter regimes create phase transitions from subcritical (self-correcting) to supercritical (runaway severity). The paper derives stationary distributions, first-passage times to harmful thresholds, and scaling laws near critical points. Finally, it highlights implications for agents and extended LLM reasoning models: in principle, these equations might serve as a basis for formal verification of whether a model remains stable or propagates bias over repeated inferences.
+
+**Comment:** This paper provides a theoretical approach to understanding biases in large language models via a stochastic dynamical framework, offering insights into LLM behavior which aligns with foundational research on LLM interpretability and dynamics.
+
+**Relevance:** 10
+**Novelty:** 8
+
+---
+
+## 3. [DOCS: Quantifying Weight Similarity for Deeper Insights into Large Language Models](https://arxiv.org/abs/2501.16650) <a id="link3"></a>
+
+**ArXiv ID:** 2501.16650
+
+**Authors:** Zeping Min, Xinshang Wang
+
+**Abstract:** We introduce a novel index, the Distribution of Cosine Similarity (DOCS), for quantitatively assessing the similarity between weight matrices in Large Language Models (LLMs), aiming to facilitate the analysis of their complex architectures. Leveraging DOCS, our analysis uncovers intriguing patterns in the latest open-source LLMs: adjacent layers frequently exhibit high weight similarity and tend to form clusters, suggesting depth-wise functional specialization. Additionally, we prove that DOCS is theoretically effective in quantifying similarity for orthogonal matrices, a crucial aspect given the prevalence of orthogonal initializations in LLMs. This research contributes to a deeper understanding of LLM architecture and behavior, offering tools with potential implications for developing more efficient and interpretable models.
+
+**Comment:** The paper offers a theoretically grounded method for analyzing weight similarity in Large Language Models (LLMs) via a novel index, which aligns with the criteria for foundational insights in LLMs and architectural analysis. The focus on clusters and functional specialization supports deeper interpretability and efficiency insights.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 4. [Overcoming Semantic Dilution in Transformer-Based Next Frame Prediction](https://arxiv.org/abs/2501.16753) <a id="link4"></a>
+
+**ArXiv ID:** 2501.16753
+
+**Authors:** Hy Nguyen, Srikanth Thudumu, Hung Du, Rajesh Vasa, Kon Mouzakis
+
+**Abstract:** Next-frame prediction in videos is crucial for applications such as autonomous driving, object tracking, and motion prediction. The primary challenge in next-frame prediction lies in effectively capturing and processing both spatial and temporal information from previous video sequences. The transformer architecture, known for its prowess in handling sequence data, has made remarkable progress in this domain. However, transformer-based next-frame prediction models face notable issues: (a) The multi-head self-attention (MHSA) mechanism requires the input embedding to be split into $N$ chunks, where $N$ is the number of heads. Each segment captures only a fraction of the original embeddings information, which distorts the representation of the embedding in the latent space, resulting in a semantic dilution problem; (b) These models predict the embeddings of the next frames rather than the frames themselves, but the loss function based on the errors of the reconstructed frames, not the predicted embeddings -- this creates a discrepancy between the training objective and the model output. We propose a Semantic Concentration Multi-Head Self-Attention (SCMHSA) architecture, which effectively mitigates semantic dilution in transformer-based next-frame prediction. Additionally, we introduce a loss function that optimizes SCMHSA in the latent space, aligning the training objective more closely with the model output. Our method demonstrates superior performance compared to the original transformer-based predictors.
+
+**Comment:** The paper addresses semantic dilution in transformer-based models for next-frame prediction, aligning with architecture insights and improvements, and introduces a semantic concentration mechanism, aligning with model architecture innovation.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 5. [Over-Tokenized Transformer: Vocabulary is Generally Worth Scaling](https://arxiv.org/abs/2501.16975) <a id="link5"></a>
+
+**ArXiv ID:** 2501.16975
+
+**Authors:** Hongzhi Huang, Defa Zhu, Banggu Wu, Yutao Zeng, Ya Wang, Qiyang Min, Xun Zhou
+
+**Abstract:** Tokenization is a fundamental component of large language models (LLMs), yet its influence on model scaling and performance is not fully explored. In this paper, we introduce Over-Tokenized Transformers, a novel framework that decouples input and output vocabularies to improve language modeling performance. Specifically, our approach scales up input vocabularies to leverage multi-gram tokens. Through extensive experiments, we uncover a log-linear relationship between input vocabulary size and training loss, demonstrating that larger input vocabularies consistently enhance model performance, regardless of model size. Using a large input vocabulary, we achieve performance comparable to double-sized baselines with no additional cost. Our findings highlight the importance of tokenization in scaling laws and provide practical insight for tokenizer design, paving the way for more efficient and powerful LLMs.
+
+**Comment:** The paper investigates tokenization in LLMs and introduces a framework for scaling vocabularies, directly addressing foundational aspects of language model architecture and training efficiency by highlighting a new scaling law around tokenization.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 6. [Sparse Autoencoders Trained on the Same Data Learn Different Features](https://arxiv.org/abs/2501.16615) <a id="link6"></a>
+
+**ArXiv ID:** 2501.16615
+
+**Authors:** Gon\c{c}alo Paulo, Nora Belrose
+
+**Abstract:** Sparse autoencoders (SAEs) are a useful tool for uncovering human-interpretable features in the activations of large language models (LLMs). While some expect SAEs to find the true underlying features used by a model, our research shows that SAEs trained on the same model and data, differing only in the random seed used to initialize their weights, identify different sets of features. For example, in an SAE with 131K latents trained on a feedforward network in Llama 3 8B, only 30% of the features were shared across different seeds. We observed this phenomenon across multiple layers of three different LLMs, two datasets, and several SAE architectures. While ReLU SAEs trained with the L1 sparsity loss showed greater stability across seeds, SAEs using the state-of-the-art TopK activation function were more seed-dependent, even when controlling for the level of sparsity. Our results suggest that the set of features uncovered by an SAE should be viewed as a pragmatically useful decomposition of activation space, rather than an exhaustive and universal list of features "truly used" by the model.
+
+**Comment:** The paper focuses on the inherent variability in features learned by sparse autoencoders, touching upon representation learning and sparsity, offering insights into how such models encode information.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 7. [Explore Activation Sparsity in Recurrent LLMs for Energy-Efficient Neuromorphic Computing](https://arxiv.org/abs/2501.16337) <a id="link7"></a>
+
+**ArXiv ID:** 2501.16337
+
+**Authors:** Ivan Knunyants, Maryam Tavakol, Manolis Sifalakis, Yingfu Xu, Amirreza Yousefzadeh, Guangzhi Tang
+
+**Abstract:** The recent rise of Large Language Models (LLMs) has revolutionized the deep learning field. However, the desire to deploy LLMs on edge devices introduces energy efficiency and latency challenges. Recurrent LLM (R-LLM) architectures have proven effective in mitigating the quadratic complexity of self-attention, making them a potential paradigm for computing on-edge neuromorphic processors. In this work, we propose a low-cost, training-free algorithm to sparsify R-LLMs' activations to enhance energy efficiency on neuromorphic hardware. Our approach capitalizes on the inherent structure of these models, rendering them well-suited for energy-constrained environments. Although primarily designed for R-LLMs, this method can be generalized to other LLM architectures, such as transformers, as demonstrated on the OPT model, achieving comparable sparsity and efficiency improvements. Empirical studies illustrate that our method significantly reduces computational demands while maintaining competitive accuracy across multiple zero-shot learning benchmarks. Additionally, hardware simulations with the SENECA neuromorphic processor underscore notable energy savings and latency improvements. These results pave the way for low-power, real-time neuromorphic deployment of LLMs and demonstrate the feasibility of training-free on-chip adaptation using activation sparsity.
+
+**Comment:** The paper explores activation sparsity in recurrent LLMs to enhance energy efficiency, which aligns well with the model compression criterion, specifically focusing on sparsity for neuromorphic hardware efficiency.
+
+**Relevance:** 9
+**Novelty:** 7
+
+---
+
+## 8. [Generative quantum combinatorial optimization by means of a novel conditional generative quantum eigensolver](https://arxiv.org/abs/2501.16986) <a id="link8"></a>
+
+**ArXiv ID:** 2501.16986
+
+**Authors:** Shunya Minami, Kouhei Nakaji, Yohichi Suzuki, Al\'an Aspuru-Guzik, Tadashi Kadowaki
+
+**Abstract:** Quantum computing is entering a transformative phase with the emergence of logical quantum processors, which hold the potential to tackle complex problems beyond classical capabilities. While significant progress has been made, applying quantum algorithms to real-world problems remains challenging. Hybrid quantum-classical techniques have been explored to bridge this gap, but they often face limitations in expressiveness, trainability, or scalability. In this work, we introduce conditional Generative Quantum Eigensolver (conditional-GQE), a context-aware quantum circuit generator powered by an encoder-decoder Transformer. Focusing on combinatorial optimization, we train our generator for solving problems with up to 10 qubits, exhibiting nearly perfect performance on new problems. By leveraging the high expressiveness and flexibility of classical generative models, along with an efficient preference-based training scheme, conditional-GQE provides a generalizable and scalable framework for quantum circuit generation. Our approach advances hybrid quantum-classical computing and contributes to accelerate the transition toward fault-tolerant quantum computing.
+
+**Comment:** The paper introduces a novel conditional generative quantum eigensolver using an encoder-decoder Transformer, aligning with architecture innovation. It doesn't directly address foundational AI models but presents an interesting fusion of quantum and classical methods.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 9. [Mamba-Shedder: Post-Transformer Compression for Efficient Selective Structured State Space Models](https://arxiv.org/abs/2501.17088) <a id="link9"></a>
+
+**ArXiv ID:** 2501.17088
+
+**Authors:** J. Pablo Mu\~noz, Jinjie Yuan, Nilesh Jain
+
+**Abstract:** Large pre-trained models have achieved outstanding results in sequence modeling. The Transformer block and its attention mechanism have been the main drivers of the success of these models. Recently, alternative architectures, such as Selective Structured State Space Models (SSMs), have been proposed to address the inefficiencies of Transformers. This paper explores the compression of SSM-based models, particularly Mamba and its hybrids. We study the sensitivity of these models to the removal of selected components at different granularities to reduce the model size and computational overhead, thus improving their efficiency while maintaining accuracy. The proposed solutions, collectively referred to as Mamba-Shedder, achieve a speedup of up to 1.4x during inference, demonstrating that model efficiency can be improved by eliminating several redundancies with minimal impact on the overall model performance. The code is available at https://github.com/IntelLabs/Hardware-Aware-Automated-Machine-Learning.
+
+**Comment:** The work focuses on compressing Selective Structured State Space Models by identifying redundancies, which aligns with model compression through novel efficiency improvements. However, it lacks broader theoretical contributions or completely novel techniques, focusing primarily on application-specific pruning of an alternative architecture.
+
+**Relevance:** 7
+**Novelty:** 7
+
+---
+
+## 10. [Enhancing Non-Intrusive Load Monitoring with Features Extracted by Independent Component Analysis](https://arxiv.org/abs/2501.16817) <a id="link10"></a>
+
+**ArXiv ID:** 2501.16817
+
+**Authors:** Sahar Moghimian Hoosh, Ilia Kamyshev, Henni Ouerdane
+
+**Abstract:** In this paper, a novel neural network architecture is proposed to address the challenges in energy disaggregation algorithms. These challenges include the limited availability of data and the complexity of disaggregating a large number of appliances operating simultaneously. The proposed model utilizes independent component analysis as the backbone of the neural network and is evaluated using the F1-score for varying numbers of appliances working concurrently. Our results demonstrate that the model is less prone to overfitting, exhibits low complexity, and effectively decomposes signals with many individual components. Furthermore, we show that the proposed model outperforms existing algorithms when applied to real-world data.
+
+**Comment:** The paper uses independent component analysis in a novel neural architecture for energy disaggregation, focusing on representation learning by extracting features, making it relevant to core topics.
+
+**Relevance:** 7
+**Novelty:** 6
+
+---
+
+# Paper Selection Prompt
+
+You are a helpful paper reading assistant whose job is to read daily posts from ArXiv and identify a few papers that your friend will enjoy reading.
+Your job is to carefully read the paper titles and abstracts below and find the ones that match the criteria below.
+
+## Relevant Topics
+
+Use the following relevance criteria to focus on foundational research, avoiding purely application-driven work:
+
+1. Representation Learning
+   - Relevant: Insights into how deep networks encode information, feature/dictionary learning, sparse/contrastive methods, training dynamics in neural networks.
+   - Irrelevant: Standard applications of known techniques lacking new theoretical or methodological contributions.
+
+2. Model Architecture
+   - Relevant: Mixture-of-Experts (MoE), Transformers, Conditional/Dynamic Networks, Autoencoders, analysis on existing architectures (like encoder-decoder), or other architectural innovations.
+   - Irrelevant: Merely using existing architectures for a certain task without insights into the structure themselves.
+
+3. Model Compression
+   - Relevant: Sparsity, pruning, quantization, low-rank approaches, KV cache, or other algorithmic/theoretical efficiency breakthroughs.
+   - Irrelevant: Straightforward applications of existing compression methods to new tasks.
+
+4. Large Language Models (LLMs)
+   - Relevant: Major breakthroughs in training or architecture, theoretical insights into LLM behavior/interpretability.
+   - Irrelevant: Domain-specific usage (e.g., translation, jail-breaking), minor tweaks (e.g., instruction tuning, CoT, data mixing), or purely empirical dataset/benchmark studies and text-level analysis (e.g. hallucination, reasoning, safety).
+
+5. AI for Science
+   - Relevant: Foundational research in molecular/protein modeling, new generative paradigms, or significant architecture-level innovations.
+   - Irrelevant: Conventional, domain-specific applications without new theoretical perspectives.
+
+6. Emerging Trends
+   - Relevant: Cutting-edge theoretical work challenging established assumptions or introducing broad new paradigms.
+   - Irrelevant: Incremental improvements or trend-following without novel insights.
+
+**Keywords for Relevant Domains:**
+Mixture of Experts (MoE), Representation Learning, Compression/Efficiency, Sparse/Sparsity, Pruning, Quantization, Low-rank, Foundation Model, etc.
+
+**Hints on Irrelevant Domains:**
+Reinforcement Learning, Transfer Learning, Federated Learning, Online Learning, Diffusion Models, etc.
+
+**Hints on Application Tasks:**
+Image Segmentation, Medical Imaging, 3D Vision, Video Understanding, Information Retrieval, Summarization, Recommendation Systems, Machine Translation, Speech Recognition, Signal Processing, Spatial/Temporal Modeling, Time Series, etc.
+
+## Scoring Criteria
+
+> The "Relevance" score measures how closely the paper aligns with the core topics of the prompt.
+> The "Novelty" score assesses the originality and impact of the paper.
+> They are two **ORTHONORMAL** axes and **SHOULD NOT** be confused with each other.
+
+### Relevance Scoring
+
+- Relevance 9-10 (Completely Relevant)
+  - Focus: Fully aligned with core topics with no deviation, score the highest if contains keywords in it.
+  - Examples: Papers focused on foundational methods or theoretical research, whose titles contain topic keywords like "MoE".
+
+- Relevance 7-8 (Relevant)
+  - Focus: Retain a solid link to the main research area, though may touch on peripheral elements.
+  - Examples: Papers research on the fundamental part of MoE through a less critical aspect like its behavior in GNN.
+
+- Relevance 5-6 (Borderline)
+  - Focus: Maintains a link to the core topic but also extends into at least one other domain/area beyond the primary focus.
+  - Examples: Work referencing MoE centered on reinforcement learning.
+
+- Relevance 3-4 (Irrelevant)
+  - Focus: Largely outside our interests with no association to our topics.
+  - Examples: Application-focused papers like using MoE to solve a problem in the real world.
+
+- Relevance 1-2 (Ignore)
+  - Focus: Purely unrelated to our topics. Completely a different domain.
+  - **Exception**: If the paper hints at a cutting-edge, radically new direction that could eventually transform the primary domain, consider a score of 9–10 despite initial appearances. (Usually a very rare concept that belongs to the fundamental research)
+
+### Novelty Scoring
+
+- Novelty 9-10 (Breakthrough)
+  - Definition: Groundbreaking methods/theory introducing new directions or solving major challenges.
+  - Examples: Entirely new paradigm for foundational models; a novel theory transforming representation learning.
+
+- Novelty 7-8 (Improvements)
+  - Definition: Substantial insights/enhancements, though not a full paradigm shift.
+  - Examples: Modifications on existing methods yielding significantly better results.
+
+- Novelty 5-6 (Borderline)
+  - Definition: Incremental contributions with possible long-term benefits, not immediately transformative.
+  - Examples: Moderately novel extension to an existing architecture; refining current methods without fundamentally altering them.
+
+- Novelty 3-4 (Tangential)
+  - Definition: Minor or domain-specific improvements with limited broader impact.
+  - Examples: Slight modifications to known methods with strange motivation; purely engineering jobs like a new benchmark/dataset.
+
+- Novelty 1-2 (Low)
+  - Definition: Minimal originality, applying standard approaches without real innovation.
+  - Examples: Using an off-the-shelf model without adding new insights; purely application-driven studies like finetuning a pretrained model using existing methods.
+
+## Papers
+
+[PAPER LIST HERE]
+
+## Instructions
+
+Write the response in JSONL format with {ARXIVID, COMMENT, RELEVANCE, NOVELTY} on each line, one for each paper.
+
+- ARXIVID: should be the ArXiv ID.
+- COMMENT: should identify whether there is a criteria that match the paper very closely. These matches should not be based on general terms like "language modeling" or "advancements" and should specifically refer to a criterion. No need to mention the non-matching criteria.
+- RELEVANCE: should be a score from 1-10.
+- NOVELTY: should be a score from 1-10.

@@ -1,0 +1,566 @@
+<div style="display: flex; align-items: flex-start; justify-content: space-between; width: 100%;"><div style="width: 33.33%; text-align: left;"><a href="../19"><img src="../../../assets/nav/day/2025-11-20-prev.svg" alt="Previous Day 2025-11-19"></a></div><div style="width: 33.33%; text-align: center;"><a href=".."><img src="../../../assets/nav/day/2025-11-20-center.svg" alt="Monthly Overview 2025-11"></a></div><div style="width: 33.33%; text-align: right;"><a href="../21"><img src="../../../assets/nav/day/2025-11-20-next.svg" alt="Next Day 2025-11-21"></a></div></div>
+
+# Personalized Daily ArXiv Papers 2025-11-20
+
+| *[gpt-5]*   | Prompt   | Completion   | Total   |
+|:-----------:|:--------:|:------------:|:-------:|
+| **Token**   | 53818    | 43848        | 97666   |
+| **Cost**    | $0.07    | $0.44        | $0.51   |
+
+Total arXiv papers: 517
+
+Total scanned papers: 305
+
+Total relevant papers: 25
+
+**Table of contents with paper titles:**
+
+1. [Transformer Injectivity & Geometric Robustness - Analytic Margins and Bi-Lipschitz Uniformity of Sequence-Level Hidden States](#user-content-link1)
+**Authors:** Mikael von Strauss
+
+2. [Neural Networks Learn Generic Multi-Index Models Near Information-Theoretic Limit](#user-content-link2)
+**Authors:** Bohan Zhang, Zihao Wang, Hengyu Fu, Jason D. Lee
+
+3. [Dynamic Expert Quantization for Scalable Mixture-of-Experts Inference](#user-content-link3)
+**Authors:** Kexin Chu, Dawei Xiang, Zixu Shen, Yiwei Yang, Zecheng Liu, Wei Zhang
+
+4. [Quant-Trim in Practice: Improved Cross-Platform Low-Bit Deployment on Edge NPUs](#user-content-link4)
+**Authors:** Rayen Dhahri, Steffen Urban
+
+5. [Near-Lossless Model Compression Enables Longer Context Inference in DNA Large Language Models](#user-content-link5)
+**Authors:** Rui Zhu, Xiaopu Zhou, Haixu Tang, Stephen W. Scherer, Lucila Ohno-Machado
+
+6. [Compiling to recurrent neurons](#user-content-link6)
+**Authors:** Joey Velez-Ginorio, Nada Amin, Konrad Kording, Steve Zdancewic
+
+7. [MoETTA: Test-Time Adaptation Under Mixed Distribution Shifts with MoE-LayerNorm](#user-content-link7)
+**Authors:** Xiao Fan, Jingyan Jiang, Zhaoru Chen, Fanding Huang, Xiao Chen, Qinting Jiang, Bowen Zhang, Xing Tang, Zhi Wang
+
+8. [Structured Contrastive Learning for Interpretable Latent Representations](#user-content-link8)
+**Authors:** Zhengyang Shen, Hua Tu, Mayue Shi
+
+9. [AdaTok: Adaptive Token Compression with Object-Aware Representations for Efficient Multimodal LLMs](#user-content-link9)
+**Authors:** Xinliang Zhang, Lei Zhu, Hangzhou He, Shuang Zeng, Ourui Fu, Jiakui Hu, Zhengjian Yao, Yanye Lu
+
+10. [D4C: Data-free Quantization for Contrastive Language-Image Pre-training Models](#user-content-link10)
+**Authors:** Wenlun Zhang, Yunshan Zhong, Zihao Ding, Xinyu Li, Kentaro Yoshioka
+
+11. [Hierarchical Token Prepending: Enhancing Information Flow in Decoder-based LLM Embeddings](#user-content-link11)
+**Authors:** Xueying Ding, Xingyue Huang, Mingxuan Ju, Liam Collins, Yozen Liu, Leman Akoglu, Neil Shah, Tong Zhao
+
+12. [A Tensor Compiler for Processing-In-Memory Architectures](#user-content-link12)
+**Authors:** Peiming Yang, Sankeerth Durvasula, Ivan Fernandez, Mohammad Sadrosadati, Onur Mutlu, Gennady Pekhimenko, Christina Giannoula
+
+13. [Compute-in-Memory Implementation of State Space Models for Event Sequence Processing](#user-content-link13)
+**Authors:** Xiaoyu Zhang, Mingtao Hu, Sen Lu, Soohyeon Kim, Eric Yeu-Jer Lee, Yuyang Liu, Wei D. Lu
+
+14. [Dynamic Nested Hierarchies: Pioneering Self-Evolution in Machine Learning Architectures for Lifelong Intelligence](#user-content-link14)
+**Authors:** Akbar Anbar Jafari, Cagri Ozcinar, Gholamreza Anbarjafari
+
+15. [Tokenisation over Bounded Alphabets is Hard](#user-content-link15)
+**Authors:** Violeta Kastreva, Philip Whittington, Dennis Komm, Tiago Pimentel
+
+16. [Weight Variance Amplifier Improves Accuracy in High-Sparsity One-Shot Pruning](#user-content-link16)
+**Authors:** Vincent-Daniel Yun, Junhyuk Jo, Sunwoo Lee
+
+17. [Logit-Based Losses Limit the Effectiveness of Feature Knowledge Distillation](#user-content-link17)
+**Authors:** Nicholas Cooper, Lijun Chen, Sailesh Dwivedy, Danna Gurari
+
+18. [Credal Ensemble Distillation for Uncertainty Quantification](#user-content-link18)
+**Authors:** Kaizheng Wang, Fabio Cuzzolin, David Moens, Hans Hallez
+
+19. [SymLoc: Symbolic Localization of Hallucination across HaluEval and TruthfulQA](#user-content-link19)
+**Authors:** Naveen Lamba, Sanju Tiwari, Manas Gaur
+
+20. [NTK-Guided Implicit Neural Teaching](#user-content-link20)
+**Authors:** Chen Zhang, Wei Zuo, Bingyang Cheng, Yikun Wang, Wei-Bin Kou, Yik Chung WU, Ngai Wong
+
+21. [DeepDefense: Layer-Wise Gradient-Feature Alignment for Building Robust Neural Networks](#user-content-link21)
+**Authors:** Ci Lin, Tet Yeap, Iluju Kiringa, Biwei Zhang
+
+22. [Parameter Importance-Driven Continual Learning for Foundation Models](#user-content-link22)
+**Authors:** Lingxiang Wang, Hainan Zhang, Zhiming Zheng
+
+23. [EntroPIC: Towards Stable Long-Term Training of LLMs via Entropy Stabilization with Proportional-Integral Control](#user-content-link23)
+**Authors:** Kai Yang, Xin Xu, Yangkun Chen, Weijie Liu, Jiafei Lyu, Zichuan Lin, Deheng Ye, Saiyong Yang
+
+24. [Walrus: A Cross-Domain Foundation Model for Continuum Dynamics](#user-content-link24)
+**Authors:** Michael McCabe, Payel Mukhopadhyay, Tanya Marwah, Bruno Regaldo-Saint Blancard, Francois Rozet, Cristiana Diaconu, Lucas Meyer, Kaze W. K. Wong, Hadi Sotoudeh, Alberto Bietti, Irina Espejo, Rio Fear, Siavash Golkar, Tom Hehir, Keiya Hirashima, Geraud Krawezik, Francois Lanusse, Rudy Morel, Ruben Ohana, Liam Parker, Mariel Pettee, Jeff Shen, Kyunghyun Cho, Miles Cranmer, Shirley Ho
+
+25. [Unveiling Intrinsic Dimension of Texts: from Academic Abstract to Creative Story](#user-content-link25)
+**Authors:** Vladislav Pedashenko, Laida Kushnareva, Yana Khassan Nibal, Eduard Tulchinskii, Kristian Kuznetsov, Vladislav Zharchinskii, Yury Maximov, Irina Piontkovskaya
+
+---
+
+## 1. [Transformer Injectivity & Geometric Robustness - Analytic Margins and Bi-Lipschitz Uniformity of Sequence-Level Hidden States](https://arxiv.org/abs/2511.14808) <a id="link1"></a>
+
+**ArXiv ID:** 2511.14808
+
+**Authors:** Mikael von Strauss
+
+**Abstract:** Under real-analytic assumptions on decoder-only Transformers, recent work shows that the map from discrete prompts to last-token hidden states is generically injective on finite prompt sets. We refine this picture: for each layer $\ell$ we define a collision discriminant $\Delta^\ell \subset \Theta$ and injective stratum $U^\ell = \Theta \setminus \Delta^\ell$, and prove a dichotomy -- either the model is nowhere injective on the set, or $U^\ell$ is open and dense and every $F^\ell_\theta$ is injective. Under mild non-singularity assumptions on the optimizer and an absolutely continuous initialization, generic injectivity persists along smooth training trajectories over any fixed horizon. We also treat symmetry groups $G$, showing that discriminants and injective strata descend to the quotient $\Theta/G$, so injectivity is naturally a property of functional equivalence classes.   We complement these results with an empirical study of layerwise geometric diagnostics. We define a separation margin and a co-Lipschitz (lower Lipschitz) constant between prompt space and last-token representation space, estimated via nearest-neighbor statistics on large prompt sets. Applying these diagnostics to pretrained LLaMA-3 and Qwen models, we study behavior across layers, sequence lengths, model scales, and 8- and 4-bit activation quantization. On our sampled prompts we see no collisions in full precision or at 8 bits, while 4-bit quantization induces a small number of collisions and markedly shrinks co-Lipschitz estimates. For a small GPT-2 trained from scratch, normalized metrics remain stable over training. Overall, the results suggest that Transformer representations are generically and persistently injective in the continuous-parameter idealization, while their practical invertibility can be probed using simple geometric diagnostics.
+
+**Comment:** Representation Learning/Theory: proves generic injectivity and bi-Lipschitz properties of Transformer sequence-level states; quantization effects analyzed.
+
+**Relevance:** 10
+**Novelty:** 9
+
+---
+
+## 2. [Neural Networks Learn Generic Multi-Index Models Near Information-Theoretic Limit](https://arxiv.org/abs/2511.15120) <a id="link2"></a>
+
+**ArXiv ID:** 2511.15120
+
+**Authors:** Bohan Zhang, Zihao Wang, Hengyu Fu, Jason D. Lee
+
+**Abstract:** In deep learning, a central issue is to understand how neural networks efficiently learn high-dimensional features. To this end, we explore the gradient descent learning of a general Gaussian Multi-index model $f(\boldsymbol{x})=g(\boldsymbol{U}\boldsymbol{x})$ with hidden subspace $\boldsymbol{U}\in \mathbb{R}^{r\times d}$, which is the canonical setup to study representation learning. We prove that under generic non-degenerate assumptions on the link function, a standard two-layer neural network trained via layer-wise gradient descent can agnostically learn the target with $o_d(1)$ test error using $\widetilde{\mathcal{O}}(d)$ samples and $\widetilde{\mathcal{O}}(d^2)$ time. The sample and time complexity both align with the information-theoretic limit up to leading order and are therefore optimal. During the first stage of gradient descent learning, the proof proceeds via showing that the inner weights can perform a power-iteration process. This process implicitly mimics a spectral start for the whole span of the hidden subspace and eventually eliminates finite-sample noise and recovers this span. It surprisingly indicates that optimal results can only be achieved if the first layer is trained for more than $\mathcal{O}(1)$ steps. This work demonstrates the ability of neural networks to effectively learn hierarchical functions with respect to both sample and time efficiency.
+
+**Comment:** Matches Criterion 4 (Representation Learning): theory shows two-layer nets learn generic multi-index models near info-theoretic limits, analyzing training dynamics and sample/time complexity.
+
+**Relevance:** 10
+**Novelty:** 9
+
+---
+
+## 3. [Dynamic Expert Quantization for Scalable Mixture-of-Experts Inference](https://arxiv.org/abs/2511.15015) <a id="link3"></a>
+
+**ArXiv ID:** 2511.15015
+
+**Authors:** Kexin Chu, Dawei Xiang, Zixu Shen, Yiwei Yang, Zecheng Liu, Wei Zhang
+
+**Abstract:** Mixture-of-Experts (MoE) models scale LLM capacity efficiently, but deployment on consumer GPUs is limited by the large memory footprint of inactive experts. Static post-training quantization reduces storage costs but cannot adapt to shifting activation patterns, causing accuracy loss under aggressive compression. So we present DynaExq, a runtime system that treats expert precision as a first-class, dynamically managed resource. DynaExq combines (1) a hotness-aware precision controller that continuously aligns expert bit-widths with long-term activation statistics, (2) a fully asynchronous precision-switching pipeline that overlaps promotion and demotion with MoE computation, and (3) a fragmentation-free memory pooling mechanism that supports hybrid-precision experts with deterministic allocation. Together, these components enable stable, non-blocking precision transitions under strict HBM budgets.   Across Qwen3-30B and Qwen3-80B MoE models and six representative benchmarks, DynaExq deploys large LLMs on single RTX 5090 and A6000 GPUs and improves accuracy by up to 4.03 points over static low-precision baselines. The results show that adaptive, workload-aware quantization is an effective strategy for memory-constrained MoE serving.
+
+**Comment:** Model Architecture: Mixture-of-Experts; Model Compression/Efficiency: dynamic expert quantization and runtime precision management for MoE serving.
+
+**Relevance:** 10
+**Novelty:** 8
+
+---
+
+## 4. [Quant-Trim in Practice: Improved Cross-Platform Low-Bit Deployment on Edge NPUs](https://arxiv.org/abs/2511.15300) <a id="link4"></a>
+
+**ArXiv ID:** 2511.15300
+
+**Authors:** Rayen Dhahri, Steffen Urban
+
+**Abstract:** Specialized edge accelerators rely on low-bit quantization, but vendor compilers differ in scaling, clipping, and kernel support, often as black boxes. The same floating-point (FP) checkpoint can therefore yield inconsistent accuracy across backends, forcing practitioners to tweak flags or refactor models to vendor-friendly operator subsets. We introduce Quant-Trim, a training-phase method that produces a hardware-neutral checkpoint robust to backend and precision choices. It combines progressive fake quantization to align training with the deployed integer grid and reverse pruning to tame outlier-driven scale inflation while preserving learnability. Quant-Trim is agnostic to quantization schemes (symmetric/asymmetric,per-tensor/per-channel, INT8/INT4) and requires no vendor-specific graph changes.Across models and tasks, it narrows the FP,low-bit gap, reduces dependence on compiler heuristics/calibration, and avoids per-backend retraining. We report accuracy and edge metrics latency, throughput, energy/inference, and cost under static/dynamic activation scaling and varying operator coverage.
+
+**Comment:** Model Compression and Efficiency: hardware-agnostic low-bit quantization via progressive fake quantization and reverse pruning for robust deployment.
+
+**Relevance:** 10
+**Novelty:** 8
+
+---
+
+## 5. [Near-Lossless Model Compression Enables Longer Context Inference in DNA Large Language Models](https://arxiv.org/abs/2511.14694) <a id="link5"></a>
+
+**ArXiv ID:** 2511.14694
+
+**Authors:** Rui Zhu, Xiaopu Zhou, Haixu Tang, Stephen W. Scherer, Lucila Ohno-Machado
+
+**Abstract:** Trained on massive cross-species DNA corpora, DNA large language models (LLMs) learn the fundamental "grammar" and evolutionary patterns of genomic sequences. This makes them powerful priors for DNA sequence modeling, particularly over long ranges. However, two major constraints hinder their use in practice: the quadratic computational cost of self-attention and the growing memory required for key-value (KV) caches during autoregressive decoding. These constraints force the use of heuristics such as fixed-window truncation or sliding windows, which compromise fidelity on ultra-long sequences by discarding distant information. We introduce FOCUS (Feature-Oriented Compression for Ultra-long Self-attention), a progressive context-compression module that can be plugged into pretrained DNA LLMs. FOCUS combines the established k-mer representation in genomics with learnable hierarchical compression: it inserts summary tokens at k-mer granularity and progressively compresses attention key and value activations across multiple Transformer layers, retaining only the summary KV states across windows while discarding ordinary-token KV. A shared-boundary windowing scheme yields a stationary cross-window interface that propagates long-range information with minimal loss. We validate FOCUS on an Evo-2-based DNA LLM fine-tuned on GRCh38 chromosome 1 with self-supervised training and randomized compression schedules to promote robustness across compression ratios. On held-out human chromosomes, FOCUS achieves near-lossless fidelity: compressing a 1 kb context into only 10 summary tokens (about 100x) shifts the average per-nucleotide probability by only about 0.0004. Compared to a baseline without compression, FOCUS reduces KV-cache memory and converts effective inference scaling from O(N^2) to near-linear O(N), enabling about 100x longer inference windows on commodity GPUs with near-lossless fidelity.
+
+**Comment:** Model Compression and Efficiency: progressive KV/cache and context compression via summary tokens enabling near-linear long-context Transformer inference.
+
+**Relevance:** 10
+**Novelty:** 8
+
+---
+
+## 6. [Compiling to recurrent neurons](https://arxiv.org/abs/2511.14953) <a id="link6"></a>
+
+**ArXiv ID:** 2511.14953
+
+**Authors:** Joey Velez-Ginorio, Nada Amin, Konrad Kording, Steve Zdancewic
+
+**Abstract:** Discrete structures are currently second-class in differentiable programming. Since functions over discrete structures lack overt derivatives, differentiable programs do not differentiate through them and limit where they can be used. For example, when programming a neural network, conditionals and iteration cannot be used everywhere; they can break the derivatives necessary for gradient-based learning to work. This limits the class of differentiable algorithms we can directly express, imposing restraints on how we build neural networks and differentiable programs more generally. However, these restraints are not fundamental. Recent work shows conditionals can be first-class, by compiling them into differentiable form as linear neurons. Similarly, this work shows iteration can be first-class -- by compiling to linear recurrent neurons. We present a minimal typed, higher-order and linear programming language with iteration called $\textsf{Cajal}\scriptstyle(\mathbb{\multimap}, \mathbb{2}, \mathbb{N})$. We prove its programs compile correctly to recurrent neurons, allowing discrete algorithms to be expressed in a differentiable form compatible with gradient-based learning. With our implementation, we conduct two experiments where we link these recurrent neurons against a neural network solving an iterative image transformation task. This determines part of its function prior to learning. As a result, the network learns faster and with greater data-efficiency relative to a neural network programmed without first-class iteration. A key lesson is that recurrent neurons enable a rich interplay between learning and the discrete structures of ordinary programming.
+
+**Comment:** Model Architecture: introduces a typed language that compiles iteration into linear recurrent neurons, enabling first-class control flow within differentiable networks with formal correctness.
+
+**Relevance:** 9
+**Novelty:** 9
+
+---
+
+## 7. [MoETTA: Test-Time Adaptation Under Mixed Distribution Shifts with MoE-LayerNorm](https://arxiv.org/abs/2511.13760) <a id="link7"></a>
+
+**ArXiv ID:** 2511.13760
+
+**Authors:** Xiao Fan, Jingyan Jiang, Zhaoru Chen, Fanding Huang, Xiao Chen, Qinting Jiang, Bowen Zhang, Xing Tang, Zhi Wang
+
+**Abstract:** Test-Time adaptation (TTA) has proven effective in mitigating performance drops under single-domain distribution shifts by updating model parameters during inference. However, real-world deployments often involve mixed distribution shifts, where test samples are affected by diverse and potentially conflicting domain factors, posing significant challenges even for SOTA TTA methods. A key limitation in existing approaches is their reliance on a unified adaptation path, which fails to account for the fact that optimal gradient directions can vary significantly across different domains. Moreover, current benchmarks focus only on synthetic or homogeneous shifts, failing to capture the complexity of real-world heterogeneous mixed distribution shifts. To address this, we propose MoETTA, a novel entropy-based TTA framework that integrates the Mixture-of-Experts (MoE) architecture. Rather than enforcing a single parameter update rule for all test samples, MoETTA introduces a set of structurally decoupled experts, enabling adaptation along diverse gradient directions. This design allows the model to better accommodate heterogeneous shifts through flexible and disentangled parameter updates. To simulate realistic deployment conditions, we introduce two new benchmarks: potpourri and potpourri+. While classical settings focus solely on synthetic corruptions, potpourri encompasses a broader range of domain shifts--including natural, artistic, and adversarial distortions--capturing more realistic deployment challenges. Additionally, potpourri+ further includes source-domain samples to evaluate robustness against catastrophic forgetting. Extensive experiments across three mixed distribution shifts settings show that MoETTA consistently outperforms strong baselines, establishing SOTA performance and highlighting the benefit of modeling multiple adaptation directions via expert-level diversity.
+
+**Comment:** Matches Criterion 1 (Model Architecture): Mixture-of-Experts-based TTA with expert-level adaptation to heterogeneous mixed distribution shifts; introduces MoE-LayerNorm expertization for conditional updates.
+
+**Relevance:** 10
+**Novelty:** 7
+
+---
+
+## 8. [Structured Contrastive Learning for Interpretable Latent Representations](https://arxiv.org/abs/2511.14920) <a id="link8"></a>
+
+**ArXiv ID:** 2511.14920
+
+**Authors:** Zhengyang Shen, Hua Tu, Mayue Shi
+
+**Abstract:** Neural networks exhibit severe brittleness to semantically irrelevant transformations. A mere 75ms electrocardiogram (ECG) phase shift degrades latent cosine similarity from 1.0 to 0.2, while sensor rotations collapse activity recognition performance with inertial measurement units (IMUs). We identify the root cause as "laissez-faire" representation learning, where latent spaces evolve unconstrained provided task performance is satisfied. We propose Structured Contrastive Learning (SCL), a framework that partitions latent space representations into three semantic groups: invariant features that remain consistent under given transformations (e.g., phase shifts or rotations), variant features that actively differentiate transformations via a novel variant mechanism, and free features that preserve task flexibility. This creates controllable push-pull dynamics where different latent dimensions serve distinct, interpretable purposes. The variant mechanism enhances contrastive learning by encouraging variant features to differentiate within positive pairs, enabling simultaneous robustness and interpretability. Our approach requires no architectural modifications and integrates seamlessly into existing training pipelines. Experiments on ECG phase invariance and IMU rotation robustness demonstrate superior performance: ECG similarity improves from 0.25 to 0.91 under phase shifts, while WISDM activity recognition achieves 86.65% accuracy with 95.38% rotation consistency, consistently outperforming traditional data augmentation. This work represents a paradigm shift from reactive data augmentation to proactive structural learning, enabling interpretable latent representations in neural networks.
+
+**Comment:** Matches representation-learning criterion by structuring latent spaces into invariant/variant/free components with contrastive training.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 9. [AdaTok: Adaptive Token Compression with Object-Aware Representations for Efficient Multimodal LLMs](https://arxiv.org/abs/2511.14169) <a id="link9"></a>
+
+**ArXiv ID:** 2511.14169
+
+**Authors:** Xinliang Zhang, Lei Zhu, Hangzhou He, Shuang Zeng, Ourui Fu, Jiakui Hu, Zhengjian Yao, Yanye Lu
+
+**Abstract:** Multimodal Large Language Models (MLLMs) have demonstrated substantial value in unified text-image understanding and reasoning, primarily by converting images into sequences of patch-level tokens that align with their architectural paradigm. However, patch-level tokenization leads to a quadratic growth in image tokens, burdening MLLMs' understanding and reasoning with enormous computation and memory. Additionally, the traditional patch-wise scanning tokenization workflow misaligns with the human vision cognition system, further leading to hallucination and computational redundancy. To address this issue, we propose an object-level token merging strategy for Adaptive Token compression, revealing the consistency with human vision system. The experiments are conducted on multiple comprehensive benchmarks, which show that our approach averagely, utilizes only 10% tokens while achieving almost 96% of the vanilla model's performance. More extensive experimental results in comparison with relevant works demonstrate the superiority of our method in balancing compression ratio and performance. Our code will be available.
+
+**Comment:** Strongly matches compression/efficiency criterion via adaptive object-aware token compression for MLLMs.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 10. [D4C: Data-free Quantization for Contrastive Language-Image Pre-training Models](https://arxiv.org/abs/2511.15411) <a id="link10"></a>
+
+**ArXiv ID:** 2511.15411
+
+**Authors:** Wenlun Zhang, Yunshan Zhong, Zihao Ding, Xinyu Li, Kentaro Yoshioka
+
+**Abstract:** Data-Free Quantization (DFQ) offers a practical solution for model compression without requiring access to real data, making it particularly attractive in privacy-sensitive scenarios. While DFQ has shown promise for unimodal models, its extension to Vision-Language Models such as Contrastive Language-Image Pre-training (CLIP) models remains underexplored. In this work, we reveal that directly applying existing DFQ techniques to CLIP results in substantial performance degradation due to two key limitations: insufficient semantic content and low intra-image diversity in synthesized samples. To tackle these challenges, we propose D4C, the first DFQ framework tailored for CLIP. D4C synthesizes semantically rich and structurally diverse pseudo images through three key components: (1) Prompt-Guided Semantic Injection aligns generated images with real-world semantics using text prompts; (2) Structural Contrastive Generation reproduces compositional structures of natural images by leveraging foreground-background contrastive synthesis; and (3) Perturbation-Aware Enhancement applies controlled perturbations to improve sample diversity and robustness. These components jointly empower D4C to synthesize images that are both semantically informative and structurally diverse, effectively bridging the performance gap of DFQ on CLIP. Extensive experiments validate the effectiveness of D4C, showing significant performance improvements on various bit-widths and models. For example, under the W4A8 setting with CLIP ResNet-50 and ViT-B/32, D4C achieves Top-1 accuracy improvement of 12.4% and 18.9% on CIFAR-10, 6.8% and 19.7% on CIFAR-100, and 1.4% and 5.7% on ImageNet-1K in zero-shot classification, respectively.
+
+**Comment:** Model Compression and Efficiency: first data-free quantization framework tailored for CLIP with semantic/diverse synthetic data.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 11. [Hierarchical Token Prepending: Enhancing Information Flow in Decoder-based LLM Embeddings](https://arxiv.org/abs/2511.14868) <a id="link11"></a>
+
+**ArXiv ID:** 2511.14868
+
+**Authors:** Xueying Ding, Xingyue Huang, Mingxuan Ju, Liam Collins, Yozen Liu, Leman Akoglu, Neil Shah, Tong Zhao
+
+**Abstract:** Large language models produce powerful text embeddings, but their causal attention mechanism restricts the flow of information from later to earlier tokens, degrading representation quality. While recent methods attempt to solve this by prepending a single summary token, they over-compress information, hence harming performance on long documents. We propose Hierarchical Token Prepending (HTP), a method that resolves two critical bottlenecks. To mitigate attention-level compression, HTP partitions the input into blocks and prepends block-level summary tokens to subsequent blocks, creating multiple pathways for backward information flow. To address readout-level over-squashing, we replace last-token pooling with mean-pooling, a choice supported by theoretical analysis. HTP achieves consistent performance gains across 11 retrieval datasets and 30 general embedding benchmarks, especially in long-context settings. As a simple, architecture-agnostic method, HTP enhances both zero-shot and finetuned models, offering a scalable route to superior long-document embeddings.
+
+**Comment:** Model Architecture and Representation Learning: modifies Transformer information flow with hierarchical prepended summary tokens and mean pooling to improve embeddings, especially for long context.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 12. [A Tensor Compiler for Processing-In-Memory Architectures](https://arxiv.org/abs/2511.15503) <a id="link12"></a>
+
+**ArXiv ID:** 2511.15503
+
+**Authors:** Peiming Yang, Sankeerth Durvasula, Ivan Fernandez, Mohammad Sadrosadati, Onur Mutlu, Gennady Pekhimenko, Christina Giannoula
+
+**Abstract:** Processing-In-Memory (PIM) devices integrated with high-performance Host processors (e.g., GPUs) can accelerate memory-intensive kernels in Machine Learning (ML) models, including Large Language Models (LLMs), by leveraging high memory bandwidth at PIM cores. However, Host processors and PIM cores require different data layouts: Hosts need consecutive elements distributed across DRAM banks, while PIM cores need them within local banks. This necessitates data rearrangements in ML kernel execution that pose significant performance and programmability challenges, further exacerbated by the need to support diverse PIM backends. Current compilation approaches lack systematic optimization for diverse ML kernels across multiple PIM backends and may largely ignore data rearrangements during compute code optimization. We demonstrate that data rearrangements and compute code optimization are interdependent, and need to be jointly optimized during the tuning process. To address this, we design DCC, the first data-centric ML compiler for PIM systems that jointly co-optimizes data rearrangements and compute code in a unified tuning process. DCC integrates a multi-layer PIM abstraction that enables various data distribution and processing strategies on different PIM backends. DCC enables effective co-optimization by mapping data partitioning strategies to compute loop partitions, applying PIM-specific code optimizations and leveraging a fast and accurate performance prediction model to select optimal configurations. Our evaluations in various individual ML kernels demonstrate that DCC achieves up to 7.68x speedup (2.7x average) on HBM-PIM and up to 13.17x speedup (5.75x average) on AttAcc PIM backend over GPU-only execution. In end-to-end LLM inference, DCC on AttAcc accelerates GPT-3 and LLaMA-2 by up to 7.71x (4.88x average) over GPU.
+
+**Comment:** High Performance Computing: data-centric ML compiler co-optimizing data rearrangements and compute for PIM backends to accelerate LLM kernels.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 13. [Compute-in-Memory Implementation of State Space Models for Event Sequence Processing](https://arxiv.org/abs/2511.13912) <a id="link13"></a>
+
+**ArXiv ID:** 2511.13912
+
+**Authors:** Xiaoyu Zhang, Mingtao Hu, Sen Lu, Soohyeon Kim, Eric Yeu-Jer Lee, Yuyang Liu, Wei D. Lu
+
+**Abstract:** State space models (SSMs) have recently emerged as a powerful framework for long sequence processing, outperforming traditional methods on diverse benchmarks. Fundamentally, SSMs can generalize both recurrent and convolutional networks and have been shown to even capture key functions of biological systems. Here we report an approach to implement SSMs in energy-efficient compute-in-memory (CIM) hardware to achieve real-time, event-driven processing. Our work re-parameterizes the model to function with real-valued coefficients and shared decay constants, reducing the complexity of model mapping onto practical hardware systems. By leveraging device dynamics and diagonalized state transition parameters, the state evolution can be natively implemented in crossbar-based CIM systems combined with memristors exhibiting short-term memory effects. Through this algorithm and hardware co-design, we show the proposed system offers both high accuracy and high energy efficiency while supporting fully asynchronous processing for event-based vision and audio tasks.
+
+**Comment:** High Performance Computing/Efficiency: algorithm–hardware co-design mapping state space models onto memristor-based CIM with reparameterization for real-valued coefficients.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 14. [Dynamic Nested Hierarchies: Pioneering Self-Evolution in Machine Learning Architectures for Lifelong Intelligence](https://arxiv.org/abs/2511.14823) <a id="link14"></a>
+
+**ArXiv ID:** 2511.14823
+
+**Authors:** Akbar Anbar Jafari, Cagri Ozcinar, Gholamreza Anbarjafari
+
+**Abstract:** Contemporary machine learning models, including large language models, exhibit remarkable capabilities in static tasks yet falter in non-stationary environments due to rigid architectures that hinder continual adaptation and lifelong learning. Building upon the nested learning paradigm, which decomposes models into multi-level optimization problems with fixed update frequencies, this work proposes dynamic nested hierarchies as the next evolutionary step in advancing artificial intelligence and machine learning. Dynamic nested hierarchies empower models to autonomously adjust the number of optimization levels, their nesting structures, and update frequencies during training or inference, inspired by neuroplasticity to enable self-evolution without predefined constraints. This innovation addresses the anterograde amnesia in existing models, facilitating true lifelong learning by dynamically compressing context flows and adapting to distribution shifts. Through rigorous mathematical formulations, theoretical proofs of convergence, expressivity bounds, and sublinear regret in varying regimes, alongside empirical demonstrations of superior performance in language modeling, continual learning, and long-context reasoning, dynamic nested hierarchies establish a foundational advancement toward adaptive, general-purpose intelligence.
+
+**Comment:** Matches Criterion 1 (Model Architecture) and Criterion 4 (Representation Learning): proposes dynamic nested hierarchies that adapt optimization levels/structure with convergence and expressivity analysis for lifelong learning.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 15. [Tokenisation over Bounded Alphabets is Hard](https://arxiv.org/abs/2511.15709) <a id="link15"></a>
+
+**ArXiv ID:** 2511.15709
+
+**Authors:** Violeta Kastreva, Philip Whittington, Dennis Komm, Tiago Pimentel
+
+**Abstract:** Recent works have shown that tokenisation is NP-complete. However, these works assume tokenisation is applied to inputs with unboundedly large alphabets -- an unrealistic assumption, given that in practice tokenisers operate over fixed-size alphabets, such as bytes or Unicode characters. We close this gap by analysing tokenisation over bounded $n$-ary alphabets, considering two natural variants: bottom-up tokenisation and direct tokenisation, where we must, respectively, select a sequence of merge operations or a vocabulary whose application optimally compresses a dataset. First, we note that proving hardness results for an $n$-ary alphabet proves the same results for alphabets of any larger size. We then prove that even with binary alphabets, both variants are not only NP-complete, but admit no polynomial-time approximation scheme (unless P=NP). We further show that direct tokenisation remains NP-complete even when applied to unary alphabets. While unary alphabets may not be practically useful, this result establishes that the computational intractability of tokenisation is not an artifact of large alphabets or complex constructions, but a fundamental barrier. Overall, our results explain why practical algorithms such as BPE and UnigramLM are heuristic, and points toward approximation algorithms being an important path going forward for tokenisation research.
+
+**Comment:** Matches algorithmic/theoretical efficiency criterion via hardness and approximability results for tokenizer design in foundation models.
+
+**Relevance:** 8
+**Novelty:** 9
+
+---
+
+## 16. [Weight Variance Amplifier Improves Accuracy in High-Sparsity One-Shot Pruning](https://arxiv.org/abs/2511.14282) <a id="link16"></a>
+
+**ArXiv ID:** 2511.14282
+
+**Authors:** Vincent-Daniel Yun, Junhyuk Jo, Sunwoo Lee
+
+**Abstract:** Deep neural networks achieve outstanding performance in visual recognition tasks, yet their large number of parameters makes them less practical for real-world applications. Recently, one-shot pruning has emerged as an effective strategy for reducing model size without additional training. However, models trained with standard objective functions often suffer a significant drop in accuracy after aggressive pruning. Some existing pruning-robust optimizers, such as SAM, and CrAM, mitigate this accuracy drop by guiding the model toward flatter regions of the parameter space, but they inevitably incur non-negligible additional computations. We propose a Variance Amplifying Regularizer (VAR) that deliberately increases the variance of model parameters during training. Our study reveals an intriguing finding that parameters with higher variance exhibit greater pruning robustness. VAR exploits this property by promoting such variance in the weight distribution, thereby mitigating the adverse effects of pruning. We further provide a theoretical analysis of its convergence behavior, supported by extensive empirical results demonstrating the superior pruning robustness of VAR.
+
+**Comment:** Matches Criterion 2 (Compression/Efficiency): proposes a variance-amplifying regularizer to improve robustness under high-sparsity one-shot pruning, directly addressing pruning and sparsity.
+
+**Relevance:** 9
+**Novelty:** 7
+
+---
+
+## 17. [Logit-Based Losses Limit the Effectiveness of Feature Knowledge Distillation](https://arxiv.org/abs/2511.14981) <a id="link17"></a>
+
+**ArXiv ID:** 2511.14981
+
+**Authors:** Nicholas Cooper, Lijun Chen, Sailesh Dwivedy, Danna Gurari
+
+**Abstract:** Knowledge distillation (KD) methods can transfer knowledge of a parameter-heavy teacher model to a light-weight student model. The status quo for feature KD methods is to utilize loss functions based on logits (i.e., pre-softmax class scores) and intermediate layer features (i.e., latent representations). Unlike previous approaches, we propose a feature KD framework for training the student's backbone using feature-based losses exclusively (i.e., without logit-based losses such as cross entropy). Leveraging recent discoveries about the geometry of latent representations, we introduce a knowledge quality metric for identifying which teacher layers provide the most effective knowledge for distillation. Experiments on three image classification datasets with four diverse student-teacher pairs, spanning convolutional neural networks and vision transformers, demonstrate our KD method achieves state-of-the-art performance, delivering top-1 accuracy boosts of up to 15% over standard approaches. We publically share our code to facilitate future work at https://github.com/Thegolfingocto/KD_wo_CE.
+
+**Comment:** Matches model compression and representation-learning criteria via feature-only knowledge distillation and layer-quality metric.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 18. [Credal Ensemble Distillation for Uncertainty Quantification](https://arxiv.org/abs/2511.13766) <a id="link18"></a>
+
+**ArXiv ID:** 2511.13766
+
+**Authors:** Kaizheng Wang, Fabio Cuzzolin, David Moens, Hans Hallez
+
+**Abstract:** Deep ensembles (DE) have emerged as a powerful approach for quantifying predictive uncertainty and distinguishing its aleatoric and epistemic components, thereby enhancing model robustness and reliability. However, their high computational and memory costs during inference pose significant challenges for wide practical deployment. To overcome this issue, we propose credal ensemble distillation (CED), a novel framework that compresses a DE into a single model, CREDIT, for classification tasks. Instead of a single softmax probability distribution, CREDIT predicts class-wise probability intervals that define a credal set, a convex set of probability distributions, for uncertainty quantification. Empirical results on out-of-distribution detection benchmarks demonstrate that CED achieves superior or comparable uncertainty estimation compared to several existing baselines, while substantially reducing inference overhead compared to DE.
+
+**Comment:** Matches model compression/efficiency criterion by distilling deep ensembles into a single credal model with calibrated uncertainty.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 19. [SymLoc: Symbolic Localization of Hallucination across HaluEval and TruthfulQA](https://arxiv.org/abs/2511.14172) <a id="link19"></a>
+
+**ArXiv ID:** 2511.14172
+
+**Authors:** Naveen Lamba, Sanju Tiwari, Manas Gaur
+
+**Abstract:** LLMs still struggle with hallucination, especially when confronted with symbolic triggers like modifiers, negation, numbers, exceptions, and named entities. Yet, we lack a clear understanding of where these symbolic hallucinations originate, making it crucial to systematically handle such triggers and localize the emergence of hallucination inside the model. While prior work explored localization using statistical techniques like LSC and activation variance analysis, these methods treat all tokens equally and overlook the role symbolic linguistic knowledge plays in triggering hallucinations. So far, no approach has investigated how symbolic elements specifically drive hallucination failures across model layers, nor has symbolic linguistic knowledge been used as the foundation for a localization framework. We propose the first symbolic localization framework that leverages symbolic linguistic and semantic knowledge to meaningfully trace the development of hallucinations across all model layers. By focusing on how models process symbolic triggers, we analyze five models using HaluEval and TruthfulQA. Our symbolic knowledge approach reveals that attention variance for these linguistic elements explodes to critical instability in early layers (2-4), with negation triggering catastrophic variance levels, demonstrating that symbolic semantic processing breaks down from the very beginning. Through the lens of symbolic linguistic knowledge, despite larger model sizes, hallucination rates remain consistently high (78.3%-83.7% across Gemma variants), with steep attention drops for symbolic semantic triggers throughout deeper layers. Our findings demonstrate that hallucination is fundamentally a symbolic linguistic processing failure, not a general generation problem, revealing that symbolic semantic knowledge provides the key to understanding and localizing hallucination mechanisms in LLMs.
+
+**Comment:** Representation Learning: symbolic, layer-wise localization of hallucination with attention variance analysis provides insight into internal processing.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 20. [NTK-Guided Implicit Neural Teaching](https://arxiv.org/abs/2511.15487) <a id="link20"></a>
+
+**ArXiv ID:** 2511.15487
+
+**Authors:** Chen Zhang, Wei Zuo, Bingyang Cheng, Yikun Wang, Wei-Bin Kou, Yik Chung WU, Ngai Wong
+
+**Abstract:** Implicit Neural Representations (INRs) parameterize continuous signals via multilayer perceptrons (MLPs), enabling compact, resolution-independent modeling for tasks like image, audio, and 3D reconstruction. However, fitting high-resolution signals demands optimizing over millions of coordinates, incurring prohibitive computational costs. To address it, we propose NTK-Guided Implicit Neural Teaching (NINT), which accelerates training by dynamically selecting coordinates that maximize global functional updates. Leveraging the Neural Tangent Kernel (NTK), NINT scores examples by the norm of their NTK-augmented loss gradients, capturing both fitting errors and heterogeneous leverage (self-influence and cross-coordinate coupling). This dual consideration enables faster convergence compared to existing methods. Through extensive experiments, we demonstrate that NINT significantly reduces training time by nearly half while maintaining or improving representation quality, establishing state-of-the-art acceleration among recent sampling-based strategies.
+
+**Comment:** Model Compression and Efficiency: NTK-guided coordinate selection accelerates INR training via algorithmic efficiency gains.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 21. [DeepDefense: Layer-Wise Gradient-Feature Alignment for Building Robust Neural Networks](https://arxiv.org/abs/2511.13749) <a id="link21"></a>
+
+**ArXiv ID:** 2511.13749
+
+**Authors:** Ci Lin, Tet Yeap, Iluju Kiringa, Biwei Zhang
+
+**Abstract:** Deep neural networks are known to be vulnerable to adversarial perturbations, which are small and carefully crafted inputs that lead to incorrect predictions. In this paper, we propose DeepDefense, a novel defense framework that applies Gradient-Feature Alignment (GFA) regularization across multiple layers to suppress adversarial vulnerability. By aligning input gradients with internal feature representations, DeepDefense promotes a smoother loss landscape in tangential directions, thereby reducing the model's sensitivity to adversarial noise.   We provide theoretical insights into how adversarial perturbation can be decomposed into radial and tangential components and demonstrate that alignment suppresses loss variation in tangential directions, where most attacks are effective. Empirically, our method achieves significant improvements in robustness across both gradient-based and optimization-based attacks. For example, on CIFAR-10, CNN models trained with DeepDefense outperform standard adversarial training by up to 15.2% under APGD attacks and 24.7% under FGSM attacks. Against optimization-based attacks such as DeepFool and EADEN, DeepDefense requires 20 to 30 times higher perturbation magnitudes to cause misclassification, indicating stronger decision boundaries and a flatter loss landscape. Our approach is architecture-agnostic, simple to implement, and highly effective, offering a promising direction for improving the adversarial robustness of deep learning models.
+
+**Comment:** Representation Learning/Training Dynamics: proposes Gradient-Feature Alignment regularization with theory on tangential vs radial perturbations to improve robustness.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 22. [Parameter Importance-Driven Continual Learning for Foundation Models](https://arxiv.org/abs/2511.15375) <a id="link22"></a>
+
+**ArXiv ID:** 2511.15375
+
+**Authors:** Lingxiang Wang, Hainan Zhang, Zhiming Zheng
+
+**Abstract:** Domain-specific post-training often causes catastrophic forgetting, making foundation models lose their general reasoning ability and limiting their adaptability to dynamic real-world environments. Preserving general capabilities while acquiring downstream domain knowledge is a central challenge for large language and multimodal models. Traditional continual learning methods, such as regularization, replay and architectural isolation, suffer from poor downstream performance, reliance on inaccessible historical data, or additional parameter overhead. While recent parameter-efficient tuning (PET) methods can alleviate forgetting, their effectiveness strongly depends on the choice of parameters and update strategies. In this paper, we introduce PIECE, a Parameter Importance Estimation-based Continual Enhancement method that preserves general ability while efficiently learning domain knowledge without accessing prior training data or increasing model parameters. PIECE selectively updates only 0.1% of core parameters most relevant to new tasks, guided by two importance estimators: PIECE-F based on Fisher Information, and PIECE-S based on a second-order normalization that combines gradient and curvature information. Experiments across three language models and two multimodal models show that PIECE maintains general capabilities and achieves state-of-the-art continual learning performance across diverse downstream tasks. Our results highlight a practical path to scalable, domain-adaptive foundation models without catastrophic forgetting.
+
+**Comment:** Compression/Efficiency: updates only 0.1% most important parameters via Fisher/second-order estimators to mitigate forgetting in continual post-training.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 23. [EntroPIC: Towards Stable Long-Term Training of LLMs via Entropy Stabilization with Proportional-Integral Control](https://arxiv.org/abs/2511.15248) <a id="link23"></a>
+
+**ArXiv ID:** 2511.15248
+
+**Authors:** Kai Yang, Xin Xu, Yangkun Chen, Weijie Liu, Jiafei Lyu, Zichuan Lin, Deheng Ye, Saiyong Yang
+
+**Abstract:** Long-term training of large language models (LLMs) requires maintaining stable exploration to prevent the model from collapsing into sub-optimal behaviors. Entropy is crucial in this context, as it controls exploration and helps avoid premature convergence to sub-optimal solutions. However, existing reinforcement learning methods struggle to maintain an appropriate level of entropy, as the training process involves a mix of positive and negative samples, each affecting entropy in different ways across steps. To address this, we propose Entropy stablilization via Proportional-Integral Control (EntroPIC), a novel method that adaptively adjusts the influence of positive and negative samples by dynamically tuning their loss coefficients. This approach stabilizes entropy throughout training, ensuring efficient exploration and steady progress. We provide a comprehensive theoretical analysis for both on-policy and off-policy learning settings, demonstrating that EntroPIC is effective at controlling entropy in large-scale LLM training. Experimental results show that our method successfully maintains desired entropy levels, enabling stable and optimal RL training for LLMs.
+
+**Comment:** Training Dynamics: entropy stabilization in RLHF-style LLM training via proportional–integral control on loss coefficients.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 24. [Walrus: A Cross-Domain Foundation Model for Continuum Dynamics](https://arxiv.org/abs/2511.15684) <a id="link24"></a>
+
+**ArXiv ID:** 2511.15684
+
+**Authors:** Michael McCabe, Payel Mukhopadhyay, Tanya Marwah, Bruno Regaldo-Saint Blancard, Francois Rozet, Cristiana Diaconu, Lucas Meyer, Kaze W. K. Wong, Hadi Sotoudeh, Alberto Bietti, Irina Espejo, Rio Fear, Siavash Golkar, Tom Hehir, Keiya Hirashima, Geraud Krawezik, Francois Lanusse, Rudy Morel, Ruben Ohana, Liam Parker, Mariel Pettee, Jeff Shen, Kyunghyun Cho, Miles Cranmer, Shirley Ho
+
+**Abstract:** Foundation models have transformed machine learning for language and vision, but achieving comparable impact in physical simulation remains a challenge. Data heterogeneity and unstable long-term dynamics inhibit learning from sufficiently diverse dynamics, while varying resolutions and dimensionalities challenge efficient training on modern hardware. Through empirical and theoretical analysis, we incorporate new approaches to mitigate these obstacles, including a harmonic-analysis-based stabilization method, load-balanced distributed 2D and 3D training strategies, and compute-adaptive tokenization. Using these tools, we develop Walrus, a transformer-based foundation model developed primarily for fluid-like continuum dynamics. Walrus is pretrained on nineteen diverse scenarios spanning astrophysics, geoscience, rheology, plasma physics, acoustics, and classical fluids. Experiments show that Walrus outperforms prior foundation models on both short and long term prediction horizons on downstream tasks and across the breadth of pretraining data, while ablation studies confirm the value of our contributions to forecast stability, training throughput, and transfer performance over conventional approaches. Code and weights are released for community use.
+
+**Comment:** Matches Criterion 3 (High Performance Computing): introduces load-balanced distributed 2D/3D training and compute-adaptive tokenization; also stabilization for long-term dynamics in transformer training.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 25. [Unveiling Intrinsic Dimension of Texts: from Academic Abstract to Creative Story](https://arxiv.org/abs/2511.15210) <a id="link25"></a>
+
+**ArXiv ID:** 2511.15210
+
+**Authors:** Vladislav Pedashenko, Laida Kushnareva, Yana Khassan Nibal, Eduard Tulchinskii, Kristian Kuznetsov, Vladislav Zharchinskii, Yury Maximov, Irina Piontkovskaya
+
+**Abstract:** Intrinsic dimension (ID) is an important tool in modern LLM analysis, informing studies of training dynamics, scaling behavior, and dataset structure, yet its textual determinants remain underexplored. We provide the first comprehensive study grounding ID in interpretable text properties through cross-encoder analysis, linguistic features, and sparse autoencoders (SAEs). In this work, we establish three key findings. First, ID is complementary to entropy-based metrics: after controlling for length, the two are uncorrelated, with ID capturing geometric complexity orthogonal to prediction quality. Second, ID exhibits robust genre stratification: scientific prose shows low ID (~8), encyclopedic content medium ID (~9), and creative/opinion writing high ID (~10.5) across all models tested. This reveals that contemporary LLMs find scientific text "representationally simple" while fiction requires additional degrees of freedom. Third, using SAEs, we identify causal features: scientific signals (formal tone, report templates, statistics) reduce ID; humanized signals (personalization, emotion, narrative) increase it. Steering experiments confirm these effects are causal. Thus, for contemporary models, scientific writing appears comparatively "easy", whereas fiction, opinion, and affect add representational degrees of freedom. Our multi-faceted analysis provides practical guidance for the proper use of ID and the sound interpretation of ID-based results.
+
+**Comment:** Matches Criterion 4 (Representation Learning): analyzes intrinsic dimension of text with cross-encoders and SAEs, identifying causal linguistic features and providing steering evidence.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+# Paper Selection Prompt
+
+## System Prompt
+
+> You are a helpful paper reading assistant whose job is to read daily posts from ArXiv and identify a few papers that your friend will enjoy reading.
+> Your job is to carefully read the paper titles and abstracts below and find the ones that match the criteria below.
+
+## User Prompt
+
+> ## Instructions
+> 
+> Write the response in JSONL format with {ARXIVID, COMMENT, RELEVANCE, NOVELTY} on each line, one for each paper.
+> 
+> - ARXIVID: should be the ArXiv ID.
+> - COMMENT: should identify whether there is a criteria that match the paper very closely. These matches should not be based on general terms like "language modeling" or "advancements" and should specifically refer to a criterion. No need to mention the non-matching criteria.
+> - RELEVANCE: should be a score from 1-10.
+> - NOVELTY: should be a score from 1-10.
+> 
+> ## Scoring Criteria
+> 
+> > The "Relevance" score measures how closely the paper aligns with the core topics of the prompt.
+> > The "Novelty" score assesses the originality and impact of the paper.
+> > They are two **ORTHONORMAL** axes and **SHOULD NOT** be confused with each other.
+> 
+> ### Relevance Scoring
+> 
+> - Relevance 9-10 (Completely Relevant)
+>   - Focus: Fully aligned with core topics with no deviation, score the highest if contains relevant keywords in it.
+>   - Examples: Papers focused on foundational methods or theoretical research, whose titles contain topic keywords like "MoE".
+> 
+> - Relevance 7-8 (Relevant)
+>   - Focus: Retain a solid link to the main research area, though may touch on peripheral elements.
+>   - Examples: Papers research on the fundamental part of MoE through a less critical aspect like its behavior in GNN.
+> 
+> - Relevance 5-6 (Borderline)
+>   - Focus: Maintains a link to the core topic but also extends into at least one other domain/area beyond the primary focus.
+>   - Examples: Work referencing MoE centered on reinforcement learning.
+> 
+> - Relevance 3-4 (Irrelevant)
+>   - Focus: Largely outside our interests with no association to our topics.
+>   - Examples: Application-focused papers like using MoE to solve a problem in the real world.
+> 
+> - Relevance 1-2 (Ignore)
+>   - Focus: Purely unrelated to our topics. Completely a different domain.
+>   - **Exception**: If the paper hints at a cutting-edge, radically new direction that could eventually transform the primary domain, consider a score of 9–10 despite initial appearances. (Usually a very rare concept that belongs to the fundamental research)
+> 
+> ### Novelty Scoring
+> 
+> - Novelty 9-10 (Breakthrough)
+>   - Definition: Groundbreaking methods/theory introducing new directions or solving major challenges.
+>   - Examples: Entirely new paradigm for foundational models; a novel theory transforming representation learning.
+> 
+> - Novelty 7-8 (Improvements)
+>   - Definition: Substantial insights/enhancements, though not a full paradigm shift.
+>   - Examples: Modifications on existing methods yielding significantly better results.
+> 
+> - Novelty 5-6 (Borderline)
+>   - Definition: Incremental contributions with possible long-term benefits, not immediately transformative.
+>   - Examples: Moderately novel extension to an existing architecture; refining current methods without fundamentally altering them.
+> 
+> - Novelty 3-4 (Tangential)
+>   - Definition: Minor or domain-specific improvements with limited broader impact.
+>   - Examples: Slight modifications to known methods with strange motivation; purely engineering jobs like a new benchmark/dataset.
+> 
+> - Novelty 1-2 (Low)
+>   - Definition: Minimal originality, applying standard approaches without real innovation.
+>   - Examples: Using an off-the-shelf model without adding new insights; purely application-driven studies like finetuning a pretrained model using existing methods.
+> 
+> ## Papers
+> 
+> [PAPER LIST HERE]
+> 
+> ## Relevant Topics
+> 
+> Use the following relevance criteria to focus on foundational research. Keep **relevant** papers and filter out **irrelevant** ones. Avoid purely **application-driven** work.
+> 
+> 1. Model Architecture
+>    - Relevant: Mixture-of-Experts (MoE), Transformers, Conditional/Dynamic Networks, Autoencoders, analysis/innovations on existing architectures.
+>    - Irrelevant: Merely using existing architectures for a certain task without insights into the structure themselves.
+> 
+> 2. Model Compression and Efficiency
+>    - Relevant: Sparsity, pruning, quantization, low-rank approaches, cache, or other algorithmic/theoretical efficiency breakthroughs.
+>    - Irrelevant: Straightforward applications of existing compression methods to new tasks.
+> 
+> 3. High Performance Computing
+>    - Relevant: Algorithmic or systems-level innovations enabling training of large-scale models, distributed training techniques, memory optimization.
+>    - Irrelevant: Incremental engineering improvements without novel algorithmic contributions.
+> 
+> 4. Representation Learning
+>    - Relevant: Insights into how deep networks encode information, feature/dictionary learning, sparse/contrastive methods, training dynamics in neural networks.
+>    - Irrelevant: Standard applications of known techniques lacking new theoretical or methodological contributions.
+> 
+> **Keywords:**
+> 
+> - Relevant: Mixture of Experts (MoE), Representation Learning, Compression/Efficiency, Sparse/Sparsity, Pruning, Quantization, Low-rank, Foundation Model, etc.
+> - Irrelevant: Reinforcement Learning, Transfer Learning, Federated Learning, Online Learning, Diffusion Models, etc.
+> - Application: Image Segmentation, Medical Imaging, 3D Vision, Video Understanding, Information Retrieval, Summarization, Recommendation Systems, Machine Translation, Speech Recognition, Signal Processing, Spatial/Temporal Modeling, Time Series, Knowledge Graph, etc.

@@ -1,0 +1,425 @@
+<div style="display: flex; align-items: flex-start; justify-content: space-between; width: 100%;"><div style="width: 33.33%; text-align: left;"><a href="../22"><img src="../../../assets/nav/day/2025-01-23-prev.svg" alt="Previous Day 2025-01-22"></a></div><div style="width: 33.33%; text-align: center;"><a href=".."><img src="../../../assets/nav/day/2025-01-23-center.svg" alt="Monthly Overview 2025-01"></a></div><div style="width: 33.33%; text-align: right;"><a href="../24"><img src="../../../assets/nav/day/2025-01-23-next.svg" alt="Next Day 2025-01-24"></a></div></div>
+
+# Personalized Daily Arxiv Papers 01/23/2025
+
+|           | Prompt   | Completion   | Total    |
+|-----------|----------|--------------|----------|
+| **Token** | 47901    | 4076         | 51977    |
+| **Cost**  | $1.19752 | $0.4076      | $1.60512 |
+
+Total relevant papers: 17
+
+**Table of contents with paper titles:**
+
+1. [Autonomy-of-Experts Models](#user-content-link1)
+**Authors:** Ang Lv, Ruobing Xie, Yining Qian, Songhao Wu, Xingwu Sun, Zhanhui Kang, Di Wang, Rui Yan
+
+2. [Irrational Complex Rotations Empower Low-bit Optimizers](#user-content-link2)
+**Authors:** Zhen Tian, Wayne Xin Zhao, Ji-Rong Wen
+
+3. [GANQ: GPU-Adaptive Non-Uniform Quantization for Large Language Models](#user-content-link3)
+**Authors:** Pengxiang Zhao, Xiaoming Yuan
+
+4. [Human-like conceptual representations emerge from language prediction](#user-content-link4)
+**Authors:** Ningyu Xu, Qi Zhang, Chao Du, Qiang Luo, Xipeng Qiu, Xuanjing Huang, Menghan Zhang
+
+5. [A Rate-Distortion Framework for Summarization](#user-content-link5)
+**Authors:** Enes Arda, Aylin Yener
+
+6. [NExtLong: Toward Effective Long-Context Training without Long Documents](#user-content-link6)
+**Authors:** Chaochen Gao, Xing Wu, Zijia Lin, Debing Zhang, Songlin Hu
+
+7. [EchoLM: Accelerating LLM Serving with Real-time Knowledge Distillation](#user-content-link7)
+**Authors:** Yifan Yu, Yu Gan, Lily Tasi, Nikhil Sarda, Jiaming Shen, Yanqi Zhou, Arvind Krishnamurthy, Fan Lai, Henry M. Levy, David Culler
+
+8. [Stability and Generalization of Quantum Neural Networks](#user-content-link8)
+**Authors:** Jiaqi Yang, Wei Xie, Xiaohua Xu
+
+9. [HierPromptLM: A Pure PLM-based Framework for Representation Learning on Heterogeneous Text-rich Networks](#user-content-link9)
+**Authors:** Qiuyu Zhu, Liang Zhang, Qianxiong Xu, Cheng Long
+
+10. [Machine Learning Modeling for Multi-order Human Visual Motion Processing](#user-content-link10)
+**Authors:** Zitang Sun, Yen-Ju Chen, Yung-Hao Yang, Yuan Li, Shin'ya Nishida
+
+11. [On Tradeoffs in Learning-Augmented Algorithms](#user-content-link11)
+**Authors:** Ziyad Benomar, Vianney Perchet
+
+12. [Manifold learning and optimization using tangent space proxies](#user-content-link12)
+**Authors:** Ryan A. Robinett, Lorenzo Orecchia, Samantha J. Riesenfeld
+
+13. [R2D2: Remembering, Reflecting and Dynamic Decision Making for Web Agents](#user-content-link13)
+**Authors:** Tenghao Huang, Kinjal Basu, Ibrahim Abdelaziz, Pavan Kapanipathi, Jonathan May, Muhao Chen
+
+14. [Generalization Performance of Hypergraph Neural Networks](#user-content-link14)
+**Authors:** Yifan Wang, Gonzalo R. Arce, Guangmo Tong
+
+15. [Multiscale Training of Convolutional Neural Networks](#user-content-link15)
+**Authors:** Niloufar Zakariaei, Shadab Ahamed, Eldad Haber, Moshe Eliasof
+
+16. [Modality Interactive Mixture-of-Experts for Fake News Detection](#user-content-link16)
+**Authors:** Yifan Liu, Yaokun Liu, Zelin Li, Ruichen Yao, Yang Zhang, Dong Wang
+
+17. [Hybrid Losses for Hierarchical Embedding Learning](#user-content-link17)
+**Authors:** Haokun Tian, Stefan Lattner, Brian McFee, Charalampos Saitis
+
+---
+
+## 1. [Autonomy-of-Experts Models](https://arxiv.org/abs/2501.13074) <a id="link1"></a>
+
+**ArXiv ID:** 2501.13074
+
+**Authors:** Ang Lv, Ruobing Xie, Yining Qian, Songhao Wu, Xingwu Sun, Zhanhui Kang, Di Wang, Rui Yan
+
+**Abstract:** Mixture-of-Experts (MoE) models mostly use a router to assign tokens to specific expert modules, activating only partial parameters and often outperforming dense models. We argue that the separation between the router's decision-making and the experts' execution is a critical yet overlooked issue, leading to suboptimal expert selection and ineffective learning. To address this, we propose Autonomy-of-Experts (AoE), a novel MoE paradigm in which experts autonomously select themselves to process inputs. AoE is based on the insight that an expert is aware of its own capacity to effectively process a token, an awareness reflected in the scale of its internal activations. In AoE, routers are removed; instead, experts pre-compute internal activations for inputs and are ranked based on their activation norms. Only the top-ranking experts proceed with the forward pass, while the others abort. The overhead of pre-computing activations is reduced through a low-rank weight factorization. This self-evaluating-then-partner-comparing approach ensures improved expert selection and effective learning. We pre-train language models having 700M up to 4B parameters, demonstrating that AoE outperforms traditional MoE models with comparable efficiency.
+
+**Comment:** The paper proposes a novel Mixture-of-Experts variation using expert-driven selection without a router, directly challenging foundational aspects of MoE architectures. Highly relevant to core architectural innovations.
+
+**Relevance:** 10
+**Novelty:** 9
+
+---
+
+## 2. [Irrational Complex Rotations Empower Low-bit Optimizers](https://arxiv.org/abs/2501.12896) <a id="link2"></a>
+
+**ArXiv ID:** 2501.12896
+
+**Authors:** Zhen Tian, Wayne Xin Zhao, Ji-Rong Wen
+
+**Abstract:** In this paper, we propose a novel optimizer state compression algorithm, namely $\pi$-Quant, which leverages the properties of irrational numbers (e.g., $\pi$) for memory-efficient training. The core idea is based on our mathematical findings, which show that a pair of parameters can be represented by a single rotation angle using the complex rotation scheme. Building on this insight, we map the parameters into a complex space and perform quantization using the corresponding rotation angles. To efficiently integrate it into optimization process, we develop an efficient system of geometric equations that computes the precise rotation angles with linear complexity. We evaluate $\pi$-Quant on a wide range of tasks. Our experiments show that it can reduce the bit-width of parameters to 3.32-bit, achieving a 75% reduction in parameter scale and a 40% decrease in GPU memory usage, all while maintaining full accuracy.
+
+**Comment:** The paper presents a novel optimizer state compression algorithm leveraging properties of irrational numbers for memory-efficient training. This directly relates to model compression, focusing on bit-width reduction and parameter quantization, which matches the core interest in sparsity, quantization, and low-rank approaches.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 3. [GANQ: GPU-Adaptive Non-Uniform Quantization for Large Language Models](https://arxiv.org/abs/2501.12956) <a id="link3"></a>
+
+**ArXiv ID:** 2501.12956
+
+**Authors:** Pengxiang Zhao, Xiaoming Yuan
+
+**Abstract:** Large Language Models (LLMs) face significant deployment challenges due to their substantial resource requirements. While low-bit quantized weights can reduce memory usage and improve inference efficiency, current hardware lacks native support for mixed-precision General Matrix Multiplication (mpGEMM), resulting in inefficient dequantization-based implementations. Moreover, uniform quantization methods often fail to capture weight distributions adequately, leading to performance degradation. We propose GANQ (GPU-Adaptive Non-Uniform Quantization), a layer-wise post-training non-uniform quantization framework optimized for hardware-efficient lookup table-based mpGEMM. GANQ achieves superior quantization performance by utilizing a training-free, GPU-adaptive optimization algorithm to efficiently reduce layer-wise quantization errors. Extensive experiments demonstrate GANQ's ability to reduce the perplexity gap from the FP16 baseline compared to state-of-the-art methods for both 3-bit and 4-bit quantization. Furthermore, when deployed on a single NVIDIA RTX 4090 GPU, GANQ's quantized models achieve up to 2.57$\times$ speedup over the baseline, advancing memory and inference efficiency in LLM deployment.
+
+**Comment:** This paper introduces a novel non-uniform quantization approach for LLMs (GANQ). It focuses on foundational model compression concepts like quantization and low-rank methods, which are highly relevant.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 4. [Human-like conceptual representations emerge from language prediction](https://arxiv.org/abs/2501.12547) <a id="link4"></a>
+
+**ArXiv ID:** 2501.12547
+
+**Authors:** Ningyu Xu, Qi Zhang, Chao Du, Qiang Luo, Xipeng Qiu, Xuanjing Huang, Menghan Zhang
+
+**Abstract:** Recent advances in large language models (LLMs) provide a new opportunity to address the long-standing question of how concepts are represented and organized in the mind, which is central to unravelling the nature of human cognition. Here, we reframed the classic reverse dictionary task to simulate human concept inference in context and investigated the emergence of human-like conceptual representations within LLMs. We found that LLMs were able to infer concepts from definitional descriptions and construct representation spaces that converge towards a shared, context-independent structure. These representations effectively predicted human behavioural judgments and aligned well with neural activity patterns in the human brain, offering evidence for biological plausibility. These findings demonstrate that human-like conceptual representations and organization can naturally emerge from language prediction, even without real-world grounding. Our work supports the view that LLMs serve as valuable tools for understanding complex human cognition and paves the way for better alignment between artificial and human intelligence.
+
+**Comment:** Explores conceptual representations in LLMs and their alignment with human cognition, offering insights into representation learning and theoretical alignment with neuroscience.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 5. [A Rate-Distortion Framework for Summarization](https://arxiv.org/abs/2501.13100) <a id="link5"></a>
+
+**ArXiv ID:** 2501.13100
+
+**Authors:** Enes Arda, Aylin Yener
+
+**Abstract:** This paper introduces an information-theoretic framework for text summarization. We define the summarizer rate-distortion function and show that it provides a fundamental lower bound on summarizer performance. We describe an iterative procedure, similar to Blahut-Arimoto algorithm, for computing this function. To handle real-world text datasets, we also propose a practical method that can calculate the summarizer rate-distortion function with limited data. Finally, we empirically confirm our theoretical results by comparing the summarizer rate-distortion function with the performances of different summarizers used in practice.
+
+**Comment:** Introduces a rate-distortion framework for summarization using information theory, aligning with foundational advancements in representation and compression methods. Clear theoretical depth.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 6. [NExtLong: Toward Effective Long-Context Training without Long Documents](https://arxiv.org/abs/2501.12766) <a id="link6"></a>
+
+**ArXiv ID:** 2501.12766
+
+**Authors:** Chaochen Gao, Xing Wu, Zijia Lin, Debing Zhang, Songlin Hu
+
+**Abstract:** Large language models (LLMs) with extended context windows have made significant strides yet remain a challenge due to the scarcity of long documents. Existing methods tend to synthesize long-context data but lack a clear mechanism to reinforce the long-range dependency modeling. To address this limitation, we propose NExtLong, a novel framework for synthesizing long-context data through Negative document Extension. NExtLong decomposes a document into multiple meta-chunks and extends the context by interleaving hard negative distractors retrieved from pretraining corpora. This approach compels the model to discriminate long-range dependent context from distracting content, enhancing its ability to model long-range dependencies. Extensive experiments demonstrate that NExtLong achieves significant performance improvements on the HELMET and RULER benchmarks compared to existing long-context synthesis approaches and leading models, which are trained on non-synthetic long documents. These findings highlight NExtLong's ability to reduce reliance on non-synthetic long documents, making it an effective framework for developing advanced long-context LLMs.
+
+**Comment:** The paper proposes NExtLong, a framework for data synthesis that enhances long-context LLM training, which is related to representation learning and challenges in long-range dependency modeling.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 7. [EchoLM: Accelerating LLM Serving with Real-time Knowledge Distillation](https://arxiv.org/abs/2501.12689) <a id="link7"></a>
+
+**ArXiv ID:** 2501.12689
+
+**Authors:** Yifan Yu, Yu Gan, Lily Tasi, Nikhil Sarda, Jiaming Shen, Yanqi Zhou, Arvind Krishnamurthy, Fan Lai, Henry M. Levy, David Culler
+
+**Abstract:** Large language models (LLMs) have excelled in various applications, yet serving them at scale is challenging due to their substantial resource demands and high latency. Our real-world studies reveal that over 60% of user requests to LLMs have semantically similar counterparts, suggesting the potential for knowledge sharing among requests. However, naively caching and reusing past responses leads to large quality degradation. In this paper, we introduce EchoLM, an in-context caching system that leverages historical requests as examples to guide response generation, enabling selective offloading of requests to more efficient LLMs. However, enabling this real-time knowledge transfer leads to intricate tradeoffs between response quality, latency, and system throughput at scale. For a new request, EchoLM identifies similar, high-utility examples and efficiently prepends them to the input for better response. At scale, EchoLM adaptively routes requests to LLMs of varying capabilities, accounting for response quality and serving loads. EchoLM employs a cost-aware cache replay mechanism to improve example quality and coverage offline, maximizing cache utility and runtime efficiency. Evaluations on millions of open-source requests demonstrate that EchoLM has a throughput improvement of 1.4-5.9x while reducing latency by 28-71% without hurting response quality on average.
+
+**Comment:** Presents a novel caching system for improving LLM efficiency by leveraging knowledge distillation, aligning with interests in model compression and efficiency breakthroughs.
+
+**Relevance:** 8
+**Novelty:** 8
+
+---
+
+## 8. [Stability and Generalization of Quantum Neural Networks](https://arxiv.org/abs/2501.12737) <a id="link8"></a>
+
+**ArXiv ID:** 2501.12737
+
+**Authors:** Jiaqi Yang, Wei Xie, Xiaohua Xu
+
+**Abstract:** Quantum neural networks (QNNs) play an important role as an emerging technology in the rapidly growing field of quantum machine learning. While their empirical success is evident, the theoretical explorations of QNNs, particularly their generalization properties, are less developed and primarily focus on the uniform convergence approach. In this paper, we exploit an advanced tool in statistical learning theory, i.e., algorithmic stability, to study the generalization of QNNs. We first establish high-probability generalization bounds for QNNs via uniform stability. Our bounds shed light on the key factors influencing the generalization performance of QNNs and provide practical insights into both the design and training processes. We next explore the generalization of QNNs on near-term noisy intermediate-scale quantum (NISQ) devices, highlighting the potential benefits of quantum noise. Moreover, we argue that previous analysis characterizes worst-case generalization guarantees, and we establish a refined optimization-dependent generalization bound for QNNs via on-average stability. Numerical experiments on various real-world datasets support our theoretical findings.
+
+**Comment:** The paper provides theoretical generalization bounds for quantum neural networks using advanced tools in statistical learning theory, which challenges existing paradigms and offers foundational insights into generalization properties.
+
+**Relevance:** 8
+**Novelty:** 8
+
+---
+
+## 9. [HierPromptLM: A Pure PLM-based Framework for Representation Learning on Heterogeneous Text-rich Networks](https://arxiv.org/abs/2501.12857) <a id="link9"></a>
+
+**ArXiv ID:** 2501.12857
+
+**Authors:** Qiuyu Zhu, Liang Zhang, Qianxiong Xu, Cheng Long
+
+**Abstract:** Representation learning on heterogeneous text-rich networks (HTRNs), which consist of multiple types of nodes and edges with each node associated with textual information, is essential for various real-world applications. Given the success of pretrained language models (PLMs) in processing text data, recent efforts have focused on integrating PLMs into HTRN representation learning. These methods typically handle textual and structural information separately, using both PLMs and heterogeneous graph neural networks (HGNNs). However, this separation fails to capture the critical interactions between these two types of information within HTRNs. Additionally, it necessitates an extra alignment step, which is challenging due to the fundamental differences between distinct embedding spaces generated by PLMs and HGNNs. To deal with it, we propose HierPromptLM, a novel pure PLM-based framework that seamlessly models both text data and graph structures without the need for separate processing. Firstly, we develop a Hierarchical Prompt module that employs prompt learning to integrate text data and heterogeneous graph structures at both the node and edge levels, within a unified textual space. Building upon this foundation, we further introduce two innovative HTRN-tailored pretraining tasks to fine-tune PLMs for representation learning by emphasizing the inherent heterogeneity and interactions between textual and structural information within HTRNs. Extensive experiments on two real-world HTRN datasets demonstrate HierPromptLM outperforms state-of-the-art methods, achieving significant improvements of up to 6.08% for node classification and 10.84% for link prediction.
+
+**Comment:** The paper proposes a novel PLM-based methodology for representation learning on heterogeneous text-rich networks. The use of hierarchical prompting and tailored pretraining tasks suggests notable methodological contributions relevant to representation learning.
+
+**Relevance:** 8
+**Novelty:** 8
+
+---
+
+## 10. [Machine Learning Modeling for Multi-order Human Visual Motion Processing](https://arxiv.org/abs/2501.12810) <a id="link10"></a>
+
+**ArXiv ID:** 2501.12810
+
+**Authors:** Zitang Sun, Yen-Ju Chen, Yung-Hao Yang, Yuan Li, Shin'ya Nishida
+
+**Abstract:** Our research aims to develop machines that learn to perceive visual motion as do humans. While recent advances in computer vision (CV) have enabled DNN-based models to accurately estimate optical flow in naturalistic images, a significant disparity remains between CV models and the biological visual system in both architecture and behavior. This disparity includes humans' ability to perceive the motion of higher-order image features (second-order motion), which many CV models fail to capture because of their reliance on the intensity conservation law. Our model architecture mimics the cortical V1-MT motion processing pathway, utilizing a trainable motion energy sensor bank and a recurrent graph network. Supervised learning employing diverse naturalistic videos allows the model to replicate psychophysical and physiological findings about first-order (luminance-based) motion perception. For second-order motion, inspired by neuroscientific findings, the model includes an additional sensing pathway with nonlinear preprocessing before motion energy sensing, implemented using a simple multilayer 3D CNN block. When exploring how the brain acquired the ability to perceive second-order motion in natural environments, in which pure second-order signals are rare, we hypothesized that second-order mechanisms were critical when estimating robust object motion amidst optical fluctuations, such as highlights on glossy surfaces. We trained our dual-pathway model on novel motion datasets with varying material properties of moving objects. We found that training to estimate object motion from non-Lambertian materials naturally endowed the model with the capacity to perceive second-order motion, as can humans. The resulting model effectively aligns with biological systems while generalizing to both first- and second-order motion phenomena in natural scenes.
+
+**Comment:** The paper develops a biologically inspired model for human-like visual motion perception, aligning with representation learning and architecture innovations. The exploration of motion energy sensing and cortical-inspired pathways provides foundational contributions.
+
+**Relevance:** 8
+**Novelty:** 8
+
+---
+
+## 11. [On Tradeoffs in Learning-Augmented Algorithms](https://arxiv.org/abs/2501.12770) <a id="link11"></a>
+
+**ArXiv ID:** 2501.12770
+
+**Authors:** Ziyad Benomar, Vianney Perchet
+
+**Abstract:** The field of learning-augmented algorithms has gained significant attention in recent years. These algorithms, using potentially inaccurate predictions, must exhibit three key properties: consistency, robustness, and smoothness. In scenarios where distributional information about predictions is available, a strong expected performance is required. Typically, the design of these algorithms involves a natural tradeoff between consistency and robustness, and previous works aimed to achieve Pareto-optimal tradeoffs for specific problems. However, in some settings, this comes at the expense of smoothness. This paper demonstrates that certain problems involve multiple tradeoffs between consistency, robustness, smoothness, and average performance.
+
+**Comment:** The paper discusses tradeoffs in learning-augmented algorithms, with theoretical insights about consistency, robustness, and smoothness. This type of foundational work exploring theoretical tradeoffs aligns with emerging trends in AI research.
+
+**Relevance:** 7
+**Novelty:** 8
+
+---
+
+## 12. [Manifold learning and optimization using tangent space proxies](https://arxiv.org/abs/2501.12678) <a id="link12"></a>
+
+**ArXiv ID:** 2501.12678
+
+**Authors:** Ryan A. Robinett, Lorenzo Orecchia, Samantha J. Riesenfeld
+
+**Abstract:** We present a framework for efficiently approximating differential-geometric primitives on arbitrary manifolds via construction of an atlas graph representation, which leverages the canonical characterization of a manifold as a finite collection, or atlas, of overlapping coordinate charts. We first show the utility of this framework in a setting where the manifold is expressed in closed form, specifically, a runtime advantage, compared with state-of-the-art approaches, for first-order optimization over the Grassmann manifold. Moreover, using point cloud data for which a complex manifold structure was previously established, i.e., high-contrast image patches, we show that an atlas graph with the correct geometry can be directly learned from the point cloud. Finally, we demonstrate that learning an atlas graph enables downstream key machine learning tasks. In particular, we implement a Riemannian generalization of support vector machines that uses the learned atlas graph to approximate complex differential-geometric primitives, including Riemannian logarithms and vector transports. These settings suggest the potential of this framework for even more complex settings, where ambient dimension and noise levels may be much higher.
+
+**Comment:** The paper explores manifold learning and optimization through tangent space proxies, which aligns with representation learning and foundational research. It showcases a framework for differential-geometric primitives which could have implications for representation theory.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 13. [R2D2: Remembering, Reflecting and Dynamic Decision Making for Web Agents](https://arxiv.org/abs/2501.12485) <a id="link13"></a>
+
+**ArXiv ID:** 2501.12485
+
+**Authors:** Tenghao Huang, Kinjal Basu, Ibrahim Abdelaziz, Pavan Kapanipathi, Jonathan May, Muhao Chen
+
+**Abstract:** The proliferation of web agents necessitates advanced navigation and interaction strategies within complex web environments. Current models often struggle with efficient navigation and action execution due to limited visibility and understanding of web structures. Our proposed R2D2 framework addresses these challenges by integrating two paradigms: Remember and Reflect. The Remember paradigm utilizes a replay buffer that aids agents in reconstructing the web environment dynamically, thus enabling the formulation of a detailed ``map'' of previously visited pages. This helps in reducing navigational errors and optimizing the decision-making process during web interactions. Conversely, the Reflect paradigm allows agents to learn from past mistakes by providing a mechanism for error analysis and strategy refinement, enhancing overall task performance. We evaluate R2D2 using the WEBARENA benchmark, demonstrating significant improvements over existing methods, including a 50% reduction in navigation errors and a threefold increase in task completion rates. Our findings suggest that a combination of memory-enhanced navigation and reflective learning promisingly advances the capabilities of web agents, potentially benefiting various applications such as automated customer service and personal digital assistants.
+
+**Comment:** The R2D2 framework introduces an innovative architecture design with reflective learning and memory augmentation, relevant to the conditional/dynamic network category.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 14. [Generalization Performance of Hypergraph Neural Networks](https://arxiv.org/abs/2501.12554) <a id="link14"></a>
+
+**ArXiv ID:** 2501.12554
+
+**Authors:** Yifan Wang, Gonzalo R. Arce, Guangmo Tong
+
+**Abstract:** Hypergraph neural networks have been promising tools for handling learning tasks involving higher-order data, with notable applications in web graphs, such as modeling multi-way hyperlink structures and complex user interactions. Yet, their generalization abilities in theory are less clear to us. In this paper, we seek to develop margin-based generalization bounds for four representative classes of hypergraph neural networks, including convolutional-based methods (UniGCN), set-based aggregation (AllDeepSets), invariant and equivariant transformations (M-IGN), and tensor-based approaches (T-MPHN). Through the PAC-Bayes framework, our results reveal the manner in which hypergraph structure and spectral norms of the learned weights can affect the generalization bounds, where the key technical challenge lies in developing new perturbation analysis for hypergraph neural networks, which offers a rigorous understanding of how variations in the model's weights and hypergraph structure impact its generalization behavior. Our empirical study examines the relationship between the practical performance and theoretical bounds of the models over synthetic and real-world datasets. One of our primary observations is the strong correlation between the theoretical bounds and empirical loss, with statistically significant consistency in most cases.
+
+**Comment:** The study develops theoretical generalization bounds for hypergraph neural networks, which aligns with representation learning insights and theoretical contributions, making it relevant to our criteria.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 15. [Multiscale Training of Convolutional Neural Networks](https://arxiv.org/abs/2501.12739) <a id="link15"></a>
+
+**ArXiv ID:** 2501.12739
+
+**Authors:** Niloufar Zakariaei, Shadab Ahamed, Eldad Haber, Moshe Eliasof
+
+**Abstract:** Convolutional Neural Networks (CNNs) are the backbone of many deep learning methods, but optimizing them remains computationally expensive. To address this, we explore multiscale training frameworks and mathematically identify key challenges, particularly when dealing with noisy inputs. Our analysis reveals that in the presence of noise, the gradient of standard CNNs in multiscale training may fail to converge as the mesh-size approaches to , undermining the optimization process. This insight drives the development of Mesh-Free Convolutions (MFCs), which are independent of input scale and avoid the pitfalls of traditional convolution kernels. We demonstrate that MFCs, with their robust gradient behavior, ensure convergence even with noisy inputs, enabling more efficient neural network optimization in multiscale settings. To validate the generality and effectiveness of our multiscale training approach, we show that (i) MFCs can theoretically deliver substantial computational speedups without sacrificing performance in practice, and (ii) standard convolutions benefit from our multiscale training framework in practice.
+
+**Comment:** The paper introduces Mesh-Free Convolutions (MFCs) as a solution to challenges in multiscale training for CNNs, proposing a theoretical foundation and practical improvements. This has relevance to architectural insights, aligning well with multi-level optimization techniques.
+
+**Relevance:** 7
+**Novelty:** 7
+
+---
+
+## 16. [Modality Interactive Mixture-of-Experts for Fake News Detection](https://arxiv.org/abs/2501.12431) <a id="link16"></a>
+
+**ArXiv ID:** 2501.12431
+
+**Authors:** Yifan Liu, Yaokun Liu, Zelin Li, Ruichen Yao, Yang Zhang, Dong Wang
+
+**Abstract:** The proliferation of fake news on social media platforms disproportionately impacts vulnerable populations, eroding trust, exacerbating inequality, and amplifying harmful narratives. Detecting fake news in multimodal contexts -- where deceptive content combines text and images -- is particularly challenging due to the nuanced interplay between modalities. Existing multimodal fake news detection methods often emphasize cross-modal consistency but ignore the complex interactions between text and visual elements, which may complement, contradict, or independently influence the predicted veracity of a post. To address these challenges, we present Modality Interactive Mixture-of-Experts for Fake News Detection (MIMoE-FND), a novel hierarchical Mixture-of-Experts framework designed to enhance multimodal fake news detection by explicitly modeling modality interactions through an interaction gating mechanism. Our approach models modality interactions by evaluating two key aspects of modality interactions: unimodal prediction agreement and semantic alignment. The hierarchical structure of MIMoE-FND allows for distinct learning pathways tailored to different fusion scenarios, adapting to the unique characteristics of each modality interaction. By tailoring fusion strategies to diverse modality interaction scenarios, MIMoE-FND provides a more robust and nuanced approach to multimodal fake news detection. We evaluate our approach on three real-world benchmarks spanning two languages, demonstrating its superior performance compared to state-of-the-art methods. By enhancing the accuracy and interpretability of fake news detection, MIMoE-FND offers a promising tool to mitigate the spread of misinformation, with the potential to better safeguard vulnerable communities against its harmful effects.
+
+**Comment:** Focuses on a Mixture-of-Experts (MoE) framework, which aligns with the interest in architectural innovation. However, the primary application is task-specific (fake news detection), making it less relevant for foundational methodology.
+
+**Relevance:** 7
+**Novelty:** 6
+
+---
+
+## 17. [Hybrid Losses for Hierarchical Embedding Learning](https://arxiv.org/abs/2501.12796) <a id="link17"></a>
+
+**ArXiv ID:** 2501.12796
+
+**Authors:** Haokun Tian, Stefan Lattner, Brian McFee, Charalampos Saitis
+
+**Abstract:** In traditional supervised learning, the cross-entropy loss treats all incorrect predictions equally, ignoring the relevance or proximity of wrong labels to the correct answer. By leveraging a tree hierarchy for fine-grained labels, we investigate hybrid losses, such as generalised triplet and cross-entropy losses, to enforce similarity between labels within a multi-task learning framework. We propose metrics to evaluate the embedding space structure and assess the model's ability to generalise to unseen classes, that is, to infer similar classes for data belonging to unseen categories. Our experiments on OrchideaSOL, a four-level hierarchical instrument sound dataset with nearly 200 detailed categories, demonstrate that the proposed hybrid losses outperform previous works in classification, retrieval, embedding space structure, and generalisation.
+
+**Comment:** The paper introduces hybrid losses for embedding learning using hierarchical label structures, which connects to representation learning by exploring embedding space properties and similarity enforcement.
+
+**Relevance:** 7
+**Novelty:** 6
+
+---
+
+# Paper Selection Prompt
+
+You are a helpful paper reading assistant whose job is to read daily posts from ArXiv and identify a few papers that your friend will enjoy reading.
+Your job is to carefully read the paper titles and abstracts below and find the ones that match the criteria below.
+
+## Relevant Topics
+
+Use the following relevance criteria to focus on foundational research, avoiding purely application-driven work:
+
+1. Representation Learning
+   - Relevant: Insights into how deep networks encode information, feature/dictionary learning, sparse/contrastive methods, training dynamics in neural networks.
+   - Irrelevant: Standard applications of known techniques lacking new theoretical or methodological contributions.
+
+2. Model Architecture
+   - Relevant: Mixture-of-Experts (MoE), Transformers, Conditional/Dynamic Networks, Autoencoders, or other core architectural innovations.
+   - Irrelevant: Merely repurposing existing architectures without structural or theoretical advances.
+
+3. Model Compression
+   - Relevant: Sparsity, pruning, quantization, low-rank approaches, KV cache, or other algorithmic/theoretical efficiency breakthroughs.
+   - Irrelevant: Straightforward applications of existing compression methods to new tasks.
+
+4. Large Language Models (LLMs)
+   - Relevant: Theoretical insights into LLM behavior, major breakthroughs in training or architecture.
+   - Irrelevant: Domain-specific usage (e.g., translation, jail-breaking), minor tweaks (e.g., instruction tuning, CoT, data mixing), or purely empirical dataset/benchmark studies and text-level analysis (e.g. hallucination, reasoning, safety).
+
+5. AI for Science
+   - Relevant: Foundational research in molecular/protein modeling, new generative paradigms, or significant architecture-level innovations.
+   - Irrelevant: Conventional, domain-specific applications without new theoretical perspectives.
+
+6. Emerging Trends
+   - Relevant: Cutting-edge theoretical work challenging established assumptions or introducing broad new paradigms.
+   - Irrelevant: Incremental improvements or trend-following without novel insights.
+
+**Hints on Irrelevant Domains:**
+Reinforcement Learning, Federated Learning, Online Learning, Transfer Learning, Diffusion Models, etc.
+
+**Hints on Application Tasks:**
+Image Segmentation, Medical Imaging, Speech Recognition, Video Understanding, Recommendation Systems, 3D Vision, Machine Translation, Information Retrieval, Signal Processing, Spatial/Temporal Modeling, Time Series, etc.
+
+
+## Scoring Criteria
+
+> The "Relevance" score measures how closely the paper aligns with the core topics of the prompt.
+> The "Novelty" score assesses the originality and impact of the paper.
+> They are two **ORTHONORMAL** axes and **SHOULD NOT** be confused with each other. E.g., a paper with high relevance can be of low novelty, or vice versa.
+
+### Relevance Scoring
+
+- Relevance 9-10 (Completely Relevant)
+  - Focus: Fully aligned with core topics, score the highest if also contains keywords in it.
+  - Keywords: “Mixture of Experts (MoE),” “Representation Learning,” “Compression,” “Sparse/Sparsity,” “Pruning,” “Quantization,” “Low-rank,” “Scaling,” “Foundation Models,” etc.
+  - Examples: Papers focused on foundational methods or theoretical research, whose titles contain topic keywords like "MoE".
+
+- Relevance 7-8 (Relevant)
+  - Focus: Clearly tied to our main topics, may not fully hit the interest in foundational methods.
+  - Examples: Pure research on representation/architecture on MoE with no other domain focus.
+
+- Relevance 5-6 (Optional)
+  - Focus: Link to our topics—covers relevant ideas but also includes another area of interest.
+  - Examples: Work referencing MoE centered on another domain.
+
+- Relevance 3-4 (Irrelevant)
+  - Focus: Largely outside our interests, with no association to our topics.
+  - Examples: Application-focused papers like using MoE to solve a problem in real world.
+
+- Relevance 1-2 (Ignore)
+  - Focus: Purely unrelated to our topics. Completely a different domain.
+  - Exception: If you think it is an emerging trend (that may lead to a thorough breakthrough in the future), you can give a score of 9-10. (Usually a very rare concept that belongs to the fundamental research)
+
+### Novelty Scoring
+
+- Novelty 9-10 (Breakthrough)
+  - Definition: Groundbreaking methods/theory introducing new directions or solving major challenges.
+  - Examples: Entirely new paradigm for foundational models; a novel theory transforming representation learning.
+
+- Novelty 7-8 (Improvements)
+  - Definition: Substantial insights/enhancements, though not a full paradigm shift.
+  - Examples: Modifications on existing methods yielding significantly better results.
+
+- Novelty 5-6 (Moderate)
+  - Definition: Incremental contributions with possible long-term benefits, not immediately transformative.
+  - Examples: Moderately novel extension to an existing architecture; refining current methods without fundamentally altering them.
+
+- Novelty 3-4 (Tangential)
+  - Definition: Minor or domain-specific improvements with limited broader impact.
+  - Examples: Slight modifications to known methods with strange motivation; purely engineering jobs like a new benchmark/dataset.
+
+- Novelty 1-2 (Low)
+  - Definition: Minimal originality, applying standard approaches without real innovation.
+  - Examples: Using an off-the-shelf model without adding new insights; purely application-driven studies like finetuning a pretrained model using existing methods.
+
+
+## Papers
+
+[PAPER LIST HERE]
+
+## Instructions
+
+Write the response in JSONL format with {ARXIVID, COMMENT, RELEVANCE, NOVELTY} on each line, one for each paper.
+
+- ARXIVID: should be the ArXiv ID.
+- COMMENT: should identify whether there is a criteria that match the paper very closely. These matches should not be based on general terms like "language modeling" or "advancements" and should specifically refer to a criterion. No need to mention the non-matching criteria.
+- RELEVANCE: should be a score from 1-10.
+- NOVELTY: should be a score from 1-10.

@@ -1,0 +1,463 @@
+<div style="display: flex; align-items: flex-start; justify-content: space-between; width: 100%;"><div style="width: 33.33%; text-align: left;"><a href="../13"><img src="../../../assets/nav/day/2025-02-14-prev.svg" alt="Previous Day 2025-02-13"></a></div><div style="width: 33.33%; text-align: center;"><a href=".."><img src="../../../assets/nav/day/2025-02-14-center.svg" alt="Monthly Overview 2025-02"></a></div><div style="width: 33.33%; text-align: right;"><a href="../17"><img src="../../../assets/nav/day/2025-02-14-next.svg" alt="Next Day 2025-02-17"></a></div></div>
+
+# Personalized Daily Arxiv Papers 02/14/2025
+
+|           | Prompt   | Completion   | Total   |
+|-----------|----------|--------------|---------|
+| **Token** | 82335    | 6722         | 89057   |
+| **Cost**  | $0.21    | $0.07        | $0.27   |
+
+Total scanned papers: 337
+
+Total relevant papers: 19
+
+**Table of contents with paper titles:**
+
+1. [RoSTE: An Efficient Quantization-Aware Supervised Fine-Tuning Approach for Large Language Models](#user-content-link1)
+**Authors:** Quan Wei (Katie), Chung-Yiu Yau (Katie), Hoi-To Wai (Katie), Yang (Katie), Zhao, Dongyeop Kang, Youngsuk Park, Mingyi Hong
+
+2. [When do neural networks learn world models?](#user-content-link2)
+**Authors:** Tianren Zhang, Guanyu Chen, Feng Chen
+
+3. [On the Importance of Embedding Norms in Self-Supervised Learning](#user-content-link3)
+**Authors:** Andrew Draganov, Sharvaree Vadgama, Sebastian Damrich, Jan Niklas B\"ohm, Lucas Maes, Dmitry Kobak, Erik Bekkers
+
+4. [LoRA Training Provably Converges to a Low-Rank Global Minimum or It Fails Loudly (But it Probably Won't Fail)](#user-content-link4)
+**Authors:** Junsu Kim, Jaeyeon Kim, Ernest K. Ryu
+
+5. [Skrr: Skip and Re-use Text Encoder Layers for Memory Efficient Text-to-Image Generation](#user-content-link5)
+**Authors:** Hoigi Seo, Wongi Jeong, Jae-sun Seo, Se Young Chun
+
+6. [Spectral Journey: How Transformers Predict the Shortest Path](#user-content-link6)
+**Authors:** Andrew Cohen, Andrey Gromov, Kaiyu Yang, Yuandong Tian
+
+7. [InfiniteHiP: Extending Language Model Context Up to 3 Million Tokens on a Single GPU](#user-content-link7)
+**Authors:** Heejun Lee, Geon Park, Jaduk Suh, Sung Ju Hwang
+
+8. [Scalable First-order Method for Certifying Optimal k-Sparse GLMs](#user-content-link8)
+**Authors:** Jiachang Liu, Soroosh Shafiee, Andrea Lodi
+
+9. [On multi-token prediction for efficient LLM inference](#user-content-link9)
+**Authors:** Somesh Mehra, Javier Alonso Garcia, Lukas Mauch
+
+10. [Improving Deep Regression with Tightness](#user-content-link10)
+**Authors:** Shihao Zhang, Yuguang Yan, Angela Yao
+
+11. [Generalizability through Explainability: Countering Overfitting with Counterfactual Examples](#user-content-link11)
+**Authors:** Flavio Giorgi, Fabiano Veglianti, Fabrizio Silvestri, Gabriele Tolomei
+
+12. [New Bounds for Sparse Variational Gaussian Processes](#user-content-link12)
+**Authors:** Michalis K. Titsias
+
+13. [Cost-Saving LLM Cascades with Early Abstention](#user-content-link13)
+**Authors:** Michael J. Zellinger, Rex Liu, Matt Thomson
+
+14. [Self-Consistency of the Internal Reward Models Improves Self-Rewarding Language Models](#user-content-link14)
+**Authors:** Xin Zhou, Yiwen Guo, Ruotian Ma, Tao Gui, Qi Zhang, Xuanjing Huang
+
+15. [Trust Me, I Know the Way: Predictive Uncertainty in the Presence of Shortcut Learning](#user-content-link15)
+**Authors:** Lisa Wimmer, Bernd Bischl, Ludwig Bothmann
+
+16. [Biologically Plausible Brain Graph Transformer](#user-content-link16)
+**Authors:** Ciyuan Peng, Yuelong Huang, Qichao Dong, Shuo Yu, Feng Xia, Chengqi Zhang, Yaochu Jin
+
+17. [Neural Force Field: Learning Generalized Physical Representation from a Few Examples](#user-content-link17)
+**Authors:** Shiqian Li, Ruihong Shen, Chi Zhang, Yixin Zhu
+
+18. [Designing a Conditional Prior Distribution for Flow-Based Generative Models](#user-content-link18)
+**Authors:** Noam Issachar, Mohammad Salama, Raanan Fattal, Sagie Benaim
+
+19. [CoT-Valve: Length-Compressible Chain-of-Thought Tuning](#user-content-link19)
+**Authors:** Xinyin Ma, Guangnian Wan, Runpeng Yu, Gongfan Fang, Xinchao Wang
+
+---
+
+## 1. [RoSTE: An Efficient Quantization-Aware Supervised Fine-Tuning Approach for Large Language Models](https://arxiv.org/abs/2502.09003) <a id="link1"></a>
+
+**ArXiv ID:** 2502.09003
+
+**Authors:** Quan Wei (Katie), Chung-Yiu Yau (Katie), Hoi-To Wai (Katie), Yang (Katie), Zhao, Dongyeop Kang, Youngsuk Park, Mingyi Hong
+
+**Abstract:** Supervised fine-tuning is a standard method for adapting pre-trained large language models (LLMs) to downstream tasks. Quantization has been recently studied as a post-training technique for efficient LLM deployment. To obtain quantized fine-tuned LLMs, conventional pipelines would first fine-tune the pre-trained models, followed by post-training quantization. This often yields suboptimal performance as it fails to leverage the synergy between fine-tuning and quantization. To effectively realize low-bit quantization of weights, activations, and KV caches in LLMs, we propose an algorithm named Rotated Straight-Through-Estimator (RoSTE), which combines quantization-aware supervised fine-tuning (QA-SFT) with an adaptive rotation strategy that identifies an effective rotation configuration to reduce activation outliers. We provide theoretical insights on RoSTE by analyzing its prediction error when applied to an overparameterized least square quantized training problem. Our findings reveal that the prediction error is directly proportional to the quantization error of the converged weights, which can be effectively managed through an optimized rotation configuration. Experiments on Pythia and Llama models of different sizes demonstrate the effectiveness of RoSTE. Compared to existing post-SFT quantization baselines, our method consistently achieves superior performances across various tasks and different LLM architectures.
+
+**Comment:** The paper proposes a quantization-aware fine-tuning approach for LLMs, which is highly relevant to model compression and efficiency.
+
+**Relevance:** 10
+**Novelty:** 8
+
+---
+
+## 2. [When do neural networks learn world models?](https://arxiv.org/abs/2502.09297) <a id="link2"></a>
+
+**ArXiv ID:** 2502.09297
+
+**Authors:** Tianren Zhang, Guanyu Chen, Feng Chen
+
+**Abstract:** Humans develop world models that capture the underlying generation process of data. Whether neural networks can learn similar world models remains an open problem. In this work, we provide the first theoretical results for this problem, showing that in a multi-task setting, models with a low-degree bias provably recover latent data-generating variables under mild assumptions -- even if proxy tasks involve complex, non-linear functions of the latents. However, such recovery is also sensitive to model architecture. Our analysis leverages Boolean models of task solutions via the Fourier-Walsh transform and introduces new techniques for analyzing invertible Boolean transforms, which may be of independent interest. We illustrate the algorithmic implications of our results and connect them to related research areas, including self-supervised learning, out-of-distribution generalization, and the linear representation hypothesis in large language models.
+
+**Comment:** The paper provides theoretical insights into when neural networks learn world models, which aligns with representation learning and foundational research into training dynamics.
+
+**Relevance:** 9
+**Novelty:** 9
+
+---
+
+## 3. [On the Importance of Embedding Norms in Self-Supervised Learning](https://arxiv.org/abs/2502.09252) <a id="link3"></a>
+
+**ArXiv ID:** 2502.09252
+
+**Authors:** Andrew Draganov, Sharvaree Vadgama, Sebastian Damrich, Jan Niklas B\"ohm, Lucas Maes, Dmitry Kobak, Erik Bekkers
+
+**Abstract:** Self-supervised learning (SSL) allows training data representations without a supervised signal and has become an important paradigm in machine learning. Most SSL methods employ the cosine similarity between embedding vectors and hence effectively embed data on a hypersphere. While this seemingly implies that embedding norms cannot play any role in SSL, a few recent works have suggested that embedding norms have properties related to network convergence and confidence. In this paper, we resolve this apparent contradiction and systematically establish the embedding norm's role in SSL training. Using theoretical analysis, simulations, and experiments, we show that embedding norms (i) govern SSL convergence rates and (ii) encode network confidence, with smaller norms corresponding to unexpected samples. Additionally, we show that manipulating embedding norms can have large effects on convergence speed. Our findings demonstrate that SSL embedding norms are integral to understanding and optimizing network behavior.
+
+**Comment:** This paper provides theoretical insights into the role of embedding norms in self-supervised learning, which aligns with representation learning and training dynamics in neural networks.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 4. [LoRA Training Provably Converges to a Low-Rank Global Minimum or It Fails Loudly (But it Probably Won't Fail)](https://arxiv.org/abs/2502.09376) <a id="link4"></a>
+
+**ArXiv ID:** 2502.09376
+
+**Authors:** Junsu Kim, Jaeyeon Kim, Ernest K. Ryu
+
+**Abstract:** Low-rank adaptation (LoRA) has become a standard approach for fine-tuning large foundation models. However, our theoretical understanding of LoRA remains limited as prior analyses of LoRA's training dynamics either rely on linearization arguments or consider highly simplified setups. In this work, we analyze the LoRA loss landscape without such restrictive assumptions. We define two regimes: a ``special regime'', which includes idealized setups where linearization arguments hold, and a ``generic regime'' representing more realistic setups where linearization arguments do not hold. In the generic regime, we show that LoRA training converges to a global minimizer with low rank and small magnitude, or a qualitatively distinct solution with high rank and large magnitude. Finally, we argue that the zero-initialization and weight decay in LoRA training induce an implicit bias toward the low-rank, small-magnitude region of the parameter space -- where global minima lie -- thus shedding light on why LoRA training usually succeeds in finding global minima.
+
+**Comment:** The paper provides a theoretical analysis of LoRA training dynamics, which aligns with the model compression criterion, specifically low-rank approaches. It offers foundational insights into why LoRA training converges effectively.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 5. [Skrr: Skip and Re-use Text Encoder Layers for Memory Efficient Text-to-Image Generation](https://arxiv.org/abs/2502.08690) <a id="link5"></a>
+
+**ArXiv ID:** 2502.08690
+
+**Authors:** Hoigi Seo, Wongi Jeong, Jae-sun Seo, Se Young Chun
+
+**Abstract:** Large-scale text encoders in text-to-image (T2I) diffusion models have demonstrated exceptional performance in generating high-quality images from textual prompts. Unlike denoising modules that rely on multiple iterative steps, text encoders require only a single forward pass to produce text embeddings. However, despite their minimal contribution to total inference time and floating-point operations (FLOPs), text encoders demand significantly higher memory usage, up to eight times more than denoising modules. To address this inefficiency, we propose Skip and Re-use layers (Skrr), a simple yet effective pruning strategy specifically designed for text encoders in T2I diffusion models. Skrr exploits the inherent redundancy in transformer blocks by selectively skipping or reusing certain layers in a manner tailored for T2I tasks, thereby reducing memory consumption without compromising performance. Extensive experiments demonstrate that Skrr maintains image quality comparable to the original model even under high sparsity levels, outperforming existing blockwise pruning methods. Furthermore, Skrr achieves state-of-the-art memory efficiency while preserving performance across multiple evaluation metrics, including the FID, CLIP, DreamSim, and GenEval scores.
+
+**Comment:** The paper proposes a memory-efficient pruning strategy (Skrr) for text encoders in text-to-image diffusion models, which aligns with model compression and sparsity techniques.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 6. [Spectral Journey: How Transformers Predict the Shortest Path](https://arxiv.org/abs/2502.08794) <a id="link6"></a>
+
+**ArXiv ID:** 2502.08794
+
+**Authors:** Andrew Cohen, Andrey Gromov, Kaiyu Yang, Yuandong Tian
+
+**Abstract:** Decoder-only transformers lead to a step-change in capability of large language models. However, opinions are mixed as to whether they are really planning or reasoning. A path to making progress in this direction is to study the model's behavior in a setting with carefully controlled data. Then interpret the learned representations and reverse-engineer the computation performed internally. We study decoder-only transformer language models trained from scratch to predict shortest paths on simple, connected and undirected graphs. In this setting, the representations and the dynamics learned by the model are interpretable. We present three major results: (1) Two-layer decoder-only language models can learn to predict shortest paths on simple, connected graphs containing up to 10 nodes. (2) Models learn a graph embedding that is correlated with the spectral decomposition of the line graph. (3) Following the insights, we discover a novel approximate path-finding algorithm Spectral Line Navigator (SLN) that finds shortest path by greedily selecting nodes in the space of spectral embedding of the line graph.
+
+**Comment:** The paper studies how transformers predict shortest paths and provides insights into their internal representations, which aligns with foundational research into model behavior and architecture.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 7. [InfiniteHiP: Extending Language Model Context Up to 3 Million Tokens on a Single GPU](https://arxiv.org/abs/2502.08910) <a id="link7"></a>
+
+**ArXiv ID:** 2502.08910
+
+**Authors:** Heejun Lee, Geon Park, Jaduk Suh, Sung Ju Hwang
+
+**Abstract:** In modern large language models (LLMs), handling very long context lengths presents significant challenges as it causes slower inference speeds and increased memory costs. Additionally, most existing pre-trained LLMs fail to generalize beyond their original training sequence lengths. To enable efficient and practical long-context utilization, we introduce InfiniteHiP, a novel, and practical LLM inference framework that accelerates processing by dynamically eliminating irrelevant context tokens through a modular hierarchical token pruning algorithm. Our method also allows generalization to longer sequences by selectively applying various RoPE adjustment methods according to the internal attention patterns within LLMs. Furthermore, we offload the key-value cache to host memory during inference, significantly reducing GPU memory pressure. As a result, InfiniteHiP enables the processing of up to 3 million tokens on a single L40s 48GB GPU -- 3x larger -- without any permanent loss of context information. Our framework achieves an 18.95x speedup in attention decoding for a 1 million token context without requiring additional training. We implement our method in the SGLang framework and demonstrate its effectiveness and practicality through extensive evaluations.
+
+**Comment:** The paper introduces a novel framework for handling extremely long context lengths in LLMs, addressing efficiency and memory challenges. This aligns with the 'Large Language Models' and 'Model Compression' criteria.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 8. [Scalable First-order Method for Certifying Optimal k-Sparse GLMs](https://arxiv.org/abs/2502.09502) <a id="link8"></a>
+
+**ArXiv ID:** 2502.09502
+
+**Authors:** Jiachang Liu, Soroosh Shafiee, Andrea Lodi
+
+**Abstract:** This paper investigates the problem of certifying optimality for sparse generalized linear models (GLMs), where sparsity is enforced through an $\ell_0$ cardinality constraint. While branch-and-bound (BnB) frameworks can certify optimality by pruning nodes using dual bounds, existing methods for computing these bounds are either computationally intensive or exhibit slow convergence, limiting their scalability to large-scale problems. To address this challenge, we propose a first-order proximal gradient algorithm designed to solve the perspective relaxation of the problem within a BnB framework. Specifically, we formulate the relaxed problem as a composite optimization problem and demonstrate that the proximal operator of the non-smooth component can be computed exactly in log-linear time complexity, eliminating the need to solve a computationally expensive second-order cone program. Furthermore, we introduce a simple restart strategy that enhances convergence speed while maintaining low per-iteration complexity. Extensive experiments on synthetic and real-world datasets show that our approach significantly accelerates dual bound computations and is highly effective in providing optimality certificates for large-scale problems.
+
+**Comment:** The paper proposes a scalable first-order method for certifying optimality in sparse GLMs, which directly relates to the model compression criterion through its focus on sparsity and efficient optimization techniques.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 9. [On multi-token prediction for efficient LLM inference](https://arxiv.org/abs/2502.09419) <a id="link9"></a>
+
+**ArXiv ID:** 2502.09419
+
+**Authors:** Somesh Mehra, Javier Alonso Garcia, Lukas Mauch
+
+**Abstract:** We systematically investigate multi-token prediction (MTP) capabilities within LLMs pre-trained for next-token prediction (NTP). We first show that such models inherently possess MTP capabilities via numerical marginalization over intermediate token probabilities, though performance is data-dependent and improves with model scale. Furthermore, we explore the challenges of integrating MTP heads into frozen LLMs and find that their hidden layers are strongly specialized for NTP, making adaptation non-trivial. Finally, we show that while joint training of MTP heads with the backbone improves performance, it cannot fully overcome this barrier, prompting further research in this direction. Our findings provide a deeper understanding of MTP applied to pretrained LLMs, informing strategies for accelerating inference through parallel token prediction.
+
+**Comment:** The paper investigates multi-token prediction for efficient LLM inference, which aligns with foundational research in model efficiency and training dynamics.
+
+**Relevance:** 9
+**Novelty:** 7
+
+---
+
+## 10. [Improving Deep Regression with Tightness](https://arxiv.org/abs/2502.09122) <a id="link10"></a>
+
+**ArXiv ID:** 2502.09122
+
+**Authors:** Shihao Zhang, Yuguang Yan, Angela Yao
+
+**Abstract:** For deep regression, preserving the ordinality of the targets with respect to the feature representation improves performance across various tasks. However, a theoretical explanation for the benefits of ordinality is still lacking. This work reveals that preserving ordinality reduces the conditional entropy $H(Z|Y)$ of representation $Z$ conditional on the target $Y$. However, our findings reveal that typical regression losses do little to reduce $H(Z|Y)$, even though it is vital for generalization performance. With this motivation, we introduce an optimal transport-based regularizer to preserve the similarity relationships of targets in the feature space to reduce $H(Z|Y)$. Additionally, we introduce a simple yet efficient strategy of duplicating the regressor targets, also with the aim of reducing $H(Z|Y)$. Experiments on three real-world regression tasks verify the effectiveness of our strategies to improve deep regression. Code: https://github.com/needylove/Regression_tightness.
+
+**Comment:** The paper introduces a theoretical explanation for improving deep regression by reducing conditional entropy and proposes novel regularization strategies. This aligns with representation learning and training dynamics.
+
+**Relevance:** 8
+**Novelty:** 8
+
+---
+
+## 11. [Generalizability through Explainability: Countering Overfitting with Counterfactual Examples](https://arxiv.org/abs/2502.09193) <a id="link11"></a>
+
+**ArXiv ID:** 2502.09193
+
+**Authors:** Flavio Giorgi, Fabiano Veglianti, Fabrizio Silvestri, Gabriele Tolomei
+
+**Abstract:** Overfitting is a well-known issue in machine learning that occurs when a model struggles to generalize its predictions to new, unseen data beyond the scope of its training set. Traditional techniques to mitigate overfitting include early stopping, data augmentation, and regularization. In this work, we demonstrate that the degree of overfitting of a trained model is correlated with the ability to generate counterfactual examples. The higher the overfitting, the easier it will be to find a valid counterfactual example for a randomly chosen input data point. Therefore, we introduce CF-Reg, a novel regularization term in the training loss that controls overfitting by ensuring enough margin between each instance and its corresponding counterfactual. Experiments conducted across multiple datasets and models show that our counterfactual regularizer generally outperforms existing regularization techniques.
+
+**Comment:** The paper introduces CF-Reg, a novel regularization method leveraging counterfactual examples to mitigate overfitting. This aligns with representation learning and training dynamics in neural networks.
+
+**Relevance:** 8
+**Novelty:** 8
+
+---
+
+## 12. [New Bounds for Sparse Variational Gaussian Processes](https://arxiv.org/abs/2502.08730) <a id="link12"></a>
+
+**ArXiv ID:** 2502.08730
+
+**Authors:** Michalis K. Titsias
+
+**Abstract:** Sparse variational Gaussian processes (GPs) construct tractable posterior approximations to GP models. At the core of these methods is the assumption that the true posterior distribution over training function values ${\bf f}$ and inducing variables ${\bf u}$ is approximated by a variational distribution that incorporates the conditional GP prior $p({\bf f} | {\bf u})$ in its factorization. While this assumption is considered as fundamental, we show that for model training we can relax it through the use of a more general variational distribution $q({\bf f} | {\bf u})$ that depends on $N$ extra parameters, where $N$ is the number of training examples. In GP regression, we can analytically optimize the evidence lower bound over the extra parameters and express a tractable collapsed bound that is tighter than the previous bound. The new bound is also amenable to stochastic optimization and its implementation requires minor modifications to existing sparse GP code. Further, we also describe extensions to non-Gaussian likelihoods. On several datasets we demonstrate that our method can reduce bias when learning the hyperpaparameters and can lead to better predictive performance.
+
+**Comment:** The paper introduces a tighter bound for sparse variational Gaussian processes, aligning with the 'Representation Learning' criterion due to its focus on improving foundational methods.
+
+**Relevance:** 8
+**Novelty:** 8
+
+---
+
+## 13. [Cost-Saving LLM Cascades with Early Abstention](https://arxiv.org/abs/2502.09054) <a id="link13"></a>
+
+**ArXiv ID:** 2502.09054
+
+**Authors:** Michael J. Zellinger, Rex Liu, Matt Thomson
+
+**Abstract:** LLM cascades are based on the idea that processing all queries with the largest and most expensive LLMs is inefficient. Instead, cascades deploy small LLMs to answer the majority of queries, limiting the use of large and expensive LLMs to only the most difficult queries. This approach can significantly reduce costs without impacting performance. However, risk-sensitive domains such as finance or medicine place an additional premium on avoiding model errors. Recognizing that even the most expensive models may make mistakes, applications in these domains benefit from allowing LLM systems to completely abstain from answering a query when the chance of making a mistake is significant. However, giving a cascade the ability to abstain poses an immediate design question for LLM cascades: should abstention only be allowed at the final model or also at earlier models? Since the error patterns of small and large models are correlated, the latter strategy may further reduce inference costs by letting inexpensive models anticipate abstention decisions by expensive models, thereby obviating the need to run the expensive models. We investigate the benefits of "early abstention" in LLM cascades and find that it reduces the overall test loss by 2.2% on average across six benchmarks (GSM8K, MedMCQA, MMLU, TriviaQA, TruthfulQA, and XSum). These gains result from a more effective use of abstention, which trades a 4.1% average increase in the overall abstention rate for a 13.0% reduction in cost and a 5.0% reduction in error rate. Our findings demonstrate that it is possible to leverage correlations between the error patterns of different language models to drive performance improvements for LLM systems with abstention.
+
+**Comment:** The paper explores cost-saving strategies for LLM cascades with early abstention, which provides insights into efficiency and decision-making in LLMs, aligning with model compression and efficiency.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 14. [Self-Consistency of the Internal Reward Models Improves Self-Rewarding Language Models](https://arxiv.org/abs/2502.08922) <a id="link14"></a>
+
+**ArXiv ID:** 2502.08922
+
+**Authors:** Xin Zhou, Yiwen Guo, Ruotian Ma, Tao Gui, Qi Zhang, Xuanjing Huang
+
+**Abstract:** Aligning Large Language Models (LLMs) with human preferences is crucial for their deployment in real-world applications. Recent advancements in Self-Rewarding Language Models suggest that an LLM can use its internal reward models (such as LLM-as-a-Judge) \cite{yuanself} to generate preference data, improving alignment performance without costly human annotation. However, we find that different internal reward models within the same LLM often generate inconsistent preferences. This inconsistency raises concerns about the reliability of self-generated preference data, hinders overall alignment performance, and highlights the need for further research to ensure reliable and coherent alignment with human preferences. To address this limitation, we propose Self-Consistent Internal Rewards (SCIR), a novel framework designed to enhance consistency among internal reward models during training. In each training step, we collect preference predictions from multiple pre-defined internal reward models and enforce consistency and confidence through an inconsistency penalty mechanism, thereby improving the reliability of these internal reward models. We selectively use data with consistent predictions for preference optimization, ensuring the quality of the preference data. By employing self-consistent internal rewards, our method significantly improves the alignment performance and reward modeling capability of LLMs, outperforming baseline methods by a notable margin.
+
+**Comment:** The paper introduces a framework to improve self-rewarding LLMs by enhancing consistency among internal reward models. It aligns with foundational research on LLM behavior and interpretability.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 15. [Trust Me, I Know the Way: Predictive Uncertainty in the Presence of Shortcut Learning](https://arxiv.org/abs/2502.09137) <a id="link15"></a>
+
+**ArXiv ID:** 2502.09137
+
+**Authors:** Lisa Wimmer, Bernd Bischl, Ludwig Bothmann
+
+**Abstract:** The correct way to quantify predictive uncertainty in neural networks remains a topic of active discussion. In particular, it is unclear whether the state-of-the art entropy decomposition leads to a meaningful representation of model, or epistemic, uncertainty (EU) in the light of a debate that pits ignorance against disagreement perspectives. We aim to reconcile the conflicting viewpoints by arguing that both are valid but arise from different learning situations. Notably, we show that the presence of shortcuts is decisive for EU manifesting as disagreement.
+
+**Comment:** The paper discusses predictive uncertainty in neural networks in the context of shortcut learning. It provides theoretical insights into representation learning, making it relevant to foundational research.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 16. [Biologically Plausible Brain Graph Transformer](https://arxiv.org/abs/2502.08958) <a id="link16"></a>
+
+**ArXiv ID:** 2502.08958
+
+**Authors:** Ciyuan Peng, Yuelong Huang, Qichao Dong, Shuo Yu, Feng Xia, Chengqi Zhang, Yaochu Jin
+
+**Abstract:** State-of-the-art brain graph analysis methods fail to fully encode the small-world architecture of brain graphs (accompanied by the presence of hubs and functional modules), and therefore lack biological plausibility to some extent. This limitation hinders their ability to accurately represent the brain's structural and functional properties, thereby restricting the effectiveness of machine learning models in tasks such as brain disorder detection. In this work, we propose a novel Biologically Plausible Brain Graph Transformer (BioBGT) that encodes the small-world architecture inherent in brain graphs. Specifically, we present a network entanglement-based node importance encoding technique that captures the structural importance of nodes in global information propagation during brain graph communication, highlighting the biological properties of the brain structure. Furthermore, we introduce a functional module-aware self-attention to preserve the functional segregation and integration characteristics of brain graphs in the learned representations. Experimental results on three benchmark datasets demonstrate that BioBGT outperforms state-of-the-art models, enhancing biologically plausible brain graph representations for various brain graph analytical tasks
+
+**Comment:** The paper introduces a biologically plausible brain graph transformer, which aligns with architectural innovations and representation learning by encoding small-world properties of brain graphs.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 17. [Neural Force Field: Learning Generalized Physical Representation from a Few Examples](https://arxiv.org/abs/2502.08987) <a id="link17"></a>
+
+**ArXiv ID:** 2502.08987
+
+**Authors:** Shiqian Li, Ruihong Shen, Chi Zhang, Yixin Zhu
+
+**Abstract:** Physical reasoning is a remarkable human ability that enables rapid learning and generalization from limited experience. Current AI models, despite extensive training, still struggle to achieve similar generalization, especially in Out-of-distribution (OOD) settings. This limitation stems from their inability to abstract core physical principles from observations. A key challenge is developing representations that can efficiently learn and generalize physical dynamics from minimal data. Here we present Neural Force Field (NFF) a modeling framework built on Neural Ordinary Differential Equation (NODE) that learns interpretable force field representations which can be efficiently integrated through an Ordinary Differential Equation ( ODE) solver to predict object trajectories. Unlike existing approaches that rely on high-dimensional latent spaces, NFF captures fundamental physical concepts such as gravity, support, and collision in an interpretable manner. Experiments on two challenging physical reasoning tasks demonstrate that NFF, trained with only a few examples, achieves strong generalization to unseen scenarios. This physics-grounded representation enables efficient forward-backward planning and rapid adaptation through interactive refinement. Our work suggests that incorporating physics-inspired representations into learning systems can help bridge the gap between artificial and human physical reasoning capabilities.
+
+**Comment:** This paper introduces Neural Force Field (NFF), a physics-inspired representation learning framework using Neural ODEs. It aligns with the representation learning criterion by focusing on interpretable and generalizable representations of physical dynamics, which is foundational.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 18. [Designing a Conditional Prior Distribution for Flow-Based Generative Models](https://arxiv.org/abs/2502.09611) <a id="link18"></a>
+
+**ArXiv ID:** 2502.09611
+
+**Authors:** Noam Issachar, Mohammad Salama, Raanan Fattal, Sagie Benaim
+
+**Abstract:** Flow-based generative models have recently shown impressive performance for conditional generation tasks, such as text-to-image generation. However, current methods transform a general unimodal noise distribution to a specific mode of the target data distribution. As such, every point in the initial source distribution can be mapped to every point in the target distribution, resulting in long average paths. To this end, in this work, we tap into a non-utilized property of conditional flow-based models: the ability to design a non-trivial prior distribution. Given an input condition, such as a text prompt, we first map it to a point lying in data space, representing an ``average" data point with the minimal average distance to all data points of the same conditional mode (e.g., class). We then utilize the flow matching formulation to map samples from a parametric distribution centered around this point to the conditional target distribution. Experimentally, our method significantly improves training times and generation efficiency (FID, KID and CLIP alignment scores) compared to baselines, producing high quality samples using fewer sampling steps.
+
+**Comment:** The paper proposes a novel approach to designing conditional prior distributions for flow-based generative models, which is relevant to architectural innovations in generative modeling.
+
+**Relevance:** 7
+**Novelty:** 8
+
+---
+
+## 19. [CoT-Valve: Length-Compressible Chain-of-Thought Tuning](https://arxiv.org/abs/2502.09601) <a id="link19"></a>
+
+**ArXiv ID:** 2502.09601
+
+**Authors:** Xinyin Ma, Guangnian Wan, Runpeng Yu, Gongfan Fang, Xinchao Wang
+
+**Abstract:** Chain-of-Thought significantly enhances a model's reasoning capability, but it also comes with a considerable increase in inference costs due to long chains. With the observation that the reasoning path can be easily compressed under easy tasks but struggle on hard tasks, we explore the feasibility of elastically controlling the length of reasoning paths with only one model, thereby reducing the inference overhead of reasoning models dynamically based on task difficulty. We introduce a new tuning and inference strategy named CoT-Valve, designed to allow models to generate reasoning chains of varying lengths. To achieve this, we propose to identify a direction in the parameter space that, when manipulated, can effectively control the length of generated CoT. Moreover, we show that this property is valuable for compressing the reasoning chain. We construct datasets with chains from long to short for the same questions and explore two enhanced strategies for CoT-Valve: (1) a precise length-compressible CoT tuning method, and (2) a progressive chain length compression approach. Our experiments show that CoT-Valve successfully enables controllability and compressibility of the chain and shows better performance than the prompt-based control. We applied this method to QwQ-32B-Preview, reducing reasoning chains on GSM8K from 741 to 225 tokens with a minor performance drop (95.07% to 94.92%) and on AIME from 6827 to 4629 tokens, with only one additional incorrect answer.
+
+**Comment:** The paper introduces CoT-Valve, a method for dynamically controlling reasoning chain lengths in LLMs, which aligns with efficiency and interpretability in LLMs. However, it is more of an optimization strategy than a foundational breakthrough.
+
+**Relevance:** 7
+**Novelty:** 7
+
+---
+
+# Paper Selection Prompt
+
+You are a helpful paper reading assistant whose job is to read daily posts from ArXiv and identify a few papers that your friend will enjoy reading.
+Your job is to carefully read the paper titles and abstracts below and find the ones that match the criteria below.
+
+## Relevant Topics
+
+Use the following relevance criteria to focus on foundational research, avoiding purely application-driven work:
+
+1. Representation Learning
+   - Relevant: Insights into how deep networks encode information, feature/dictionary learning, sparse/contrastive methods, training dynamics in neural networks.
+   - Irrelevant: Standard applications of known techniques lacking new theoretical or methodological contributions.
+
+2. Model Architecture
+   - Relevant: Mixture-of-Experts (MoE), Transformers, Conditional/Dynamic Networks, Autoencoders, analysis on existing architectures (like encoder-decoder), or other architectural innovations.
+   - Irrelevant: Merely using existing architectures for a certain task without insights into the structure themselves.
+
+3. Model Compression
+   - Relevant: Sparsity, pruning, quantization, low-rank approaches, KV cache, or other algorithmic/theoretical efficiency breakthroughs.
+   - Irrelevant: Straightforward applications of existing compression methods to new tasks.
+
+4. Large Language Models (LLMs)
+   - Relevant: Major breakthroughs in training or architecture, theoretical insights into LLM behavior/interpretability.
+   - Irrelevant: Domain-specific usage (e.g., translation, jail-breaking), minor tweaks (e.g., instruction tuning, CoT, data mixing), or purely empirical dataset/benchmark studies and text-level analysis (e.g. hallucination, reasoning, safety).
+
+5. AI for Science
+   - Relevant: Foundational research in molecular/protein modeling, new generative paradigms, or significant architecture-level innovations.
+   - Irrelevant: Conventional, domain-specific applications without new theoretical perspectives.
+
+6. Emerging Trends
+   - Relevant: Cutting-edge theoretical work challenging established assumptions or introducing broad new paradigms.
+   - Irrelevant: Incremental improvements or trend-following without novel insights.
+
+**Keywords for Relevant Domains:**
+Mixture of Experts (MoE), Representation Learning, Compression/Efficiency, Sparse/Sparsity, Pruning, Quantization, Low-rank, Foundation Model, etc.
+
+**Hints on Irrelevant Domains:**
+Reinforcement Learning, Transfer Learning, Federated Learning, Online Learning, Diffusion Models, etc.
+
+**Hints on Application Tasks:**
+Image Segmentation, Medical Imaging, 3D Vision, Video Understanding, Information Retrieval, Summarization, Recommendation Systems, Machine Translation, Speech Recognition, Signal Processing, Spatial/Temporal Modeling, Time Series, etc.
+
+## Scoring Criteria
+
+> The "Relevance" score measures how closely the paper aligns with the core topics of the prompt.
+> The "Novelty" score assesses the originality and impact of the paper.
+> They are two **ORTHONORMAL** axes and **SHOULD NOT** be confused with each other.
+
+### Relevance Scoring
+
+- Relevance 9-10 (Completely Relevant)
+  - Focus: Fully aligned with core topics with no deviation, score the highest if contains keywords in it.
+  - Examples: Papers focused on foundational methods or theoretical research, whose titles contain topic keywords like "MoE".
+
+- Relevance 7-8 (Relevant)
+  - Focus: Retain a solid link to the main research area, though may touch on peripheral elements.
+  - Examples: Papers research on the fundamental part of MoE through a less critical aspect like its behavior in GNN.
+
+- Relevance 5-6 (Borderline)
+  - Focus: Maintains a link to the core topic but also extends into at least one other domain/area beyond the primary focus.
+  - Examples: Work referencing MoE centered on reinforcement learning.
+
+- Relevance 3-4 (Irrelevant)
+  - Focus: Largely outside our interests with no association to our topics.
+  - Examples: Application-focused papers like using MoE to solve a problem in the real world.
+
+- Relevance 1-2 (Ignore)
+  - Focus: Purely unrelated to our topics. Completely a different domain.
+  - **Exception**: If the paper hints at a cutting-edge, radically new direction that could eventually transform the primary domain, consider a score of 9–10 despite initial appearances. (Usually a very rare concept that belongs to the fundamental research)
+
+### Novelty Scoring
+
+- Novelty 9-10 (Breakthrough)
+  - Definition: Groundbreaking methods/theory introducing new directions or solving major challenges.
+  - Examples: Entirely new paradigm for foundational models; a novel theory transforming representation learning.
+
+- Novelty 7-8 (Improvements)
+  - Definition: Substantial insights/enhancements, though not a full paradigm shift.
+  - Examples: Modifications on existing methods yielding significantly better results.
+
+- Novelty 5-6 (Borderline)
+  - Definition: Incremental contributions with possible long-term benefits, not immediately transformative.
+  - Examples: Moderately novel extension to an existing architecture; refining current methods without fundamentally altering them.
+
+- Novelty 3-4 (Tangential)
+  - Definition: Minor or domain-specific improvements with limited broader impact.
+  - Examples: Slight modifications to known methods with strange motivation; purely engineering jobs like a new benchmark/dataset.
+
+- Novelty 1-2 (Low)
+  - Definition: Minimal originality, applying standard approaches without real innovation.
+  - Examples: Using an off-the-shelf model without adding new insights; purely application-driven studies like finetuning a pretrained model using existing methods.
+
+## Papers
+
+[PAPER LIST HERE]
+
+## Instructions
+
+Write the response in JSONL format with {ARXIVID, COMMENT, RELEVANCE, NOVELTY} on each line, one for each paper.
+
+- ARXIVID: should be the ArXiv ID.
+- COMMENT: should identify whether there is a criteria that match the paper very closely. These matches should not be based on general terms like "language modeling" or "advancements" and should specifically refer to a criterion. No need to mention the non-matching criteria.
+- RELEVANCE: should be a score from 1-10.
+- NOVELTY: should be a score from 1-10.

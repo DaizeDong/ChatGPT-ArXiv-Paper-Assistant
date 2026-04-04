@@ -1,0 +1,318 @@
+<div style="display: flex; align-items: flex-start; justify-content: space-between; width: 100%;"><div style="width: 33.33%; text-align: left;"><a href="../02"><img src="../../../assets/nav/day/2025-05-05-prev.svg" alt="Previous Day 2025-05-02"></a></div><div style="width: 33.33%; text-align: center;"><a href=".."><img src="../../../assets/nav/day/2025-05-05-center.svg" alt="Monthly Overview 2025-05"></a></div><div style="width: 33.33%; text-align: right;"><a href="../06"><img src="../../../assets/nav/day/2025-05-05-next.svg" alt="Next Day 2025-05-06"></a></div></div>
+
+# Personalized Daily ArXiv Papers 2025-05-05
+
+| *[gpt-4o]*   | Prompt   | Completion   | Total   |
+|:------------:|:--------:|:------------:|:-------:|
+| **Token**    | 32232    | 4357         | 36589   |
+| **Cost**     | $0.08    | $0.04        | $0.12   |
+
+Total arXiv papers: 336
+
+Total scanned papers: 217
+
+Total relevant papers: 11
+
+**Table of contents with paper titles:**
+
+1. [Improving Routing in Sparse Mixture of Experts with Graph of Tokens](#user-content-link1)
+**Authors:** Tam Nguyen, Ngoc N. Tran, Khai Nguyen, Richard G. Baraniuk
+
+2. [CoCoAFusE: Beyond Mixtures of Experts via Model Fusion](#user-content-link2)
+**Authors:** Aurelio Raffa Ugolini, Mara Tanelli, Valentina Breschi
+
+3. [Multi-Step Consistency Models: Fast Generation with Theoretical Guarantees](#user-content-link3)
+**Authors:** Nishant Jain, Xunpeng Huang, Yian Ma, Tong Zhang
+
+4. [How Transformers Learn Regular Language Recognition: A Theoretical Study on Training Dynamics and Implicit Bias](#user-content-link4)
+**Authors:** Ruiquan Huang, Yingbin Liang, Jing Yang
+
+5. [Dual Filter: A Mathematical Framework for Inference using Transformer-like Architectures](#user-content-link5)
+**Authors:** Heng-Sheng Chang, Prashant G. Mehta
+
+6. [ICQuant: Index Coding enables Low-bit LLM Quantization](#user-content-link6)
+**Authors:** Xinlin Li, Osama Hanna, Christina Fragouli, Suhas Diggavi
+
+7. [StablePCA: Learning Shared Representations across Multiple Sources via Minimax Optimization](#user-content-link7)
+**Authors:** Zhenyu Wang, Molei Liu, Jing Lei, Francis Bach, Zijian Guo
+
+8. [Compact Recurrent Transformer with Persistent Memory](#user-content-link8)
+**Authors:** Edison Mucllari, Zachary Daniels, David Zhang, Qiang Ye
+
+9. [Learning and Transferring Physical Models through Derivatives](#user-content-link9)
+**Authors:** Alessandro Trenta, Andrea Cossu, Davide Bacciu
+
+10. [Incorporating Inductive Biases to Energy-based Generative Models](#user-content-link10)
+**Authors:** Yukun Li, Li-Ping Liu
+
+11. [Aggregation of Dependent Expert Distributions in Multimodal Variational Autoencoders](#user-content-link11)
+**Authors:** Rogelio A Mancisidor, Robert Jenssen, Shujian Yu, Michael Kampffmeyer
+
+---
+
+## 1. [Improving Routing in Sparse Mixture of Experts with Graph of Tokens](https://arxiv.org/abs/2505.00792) <a id="link1"></a>
+
+**ArXiv ID:** 2505.00792
+
+**Authors:** Tam Nguyen, Ngoc N. Tran, Khai Nguyen, Richard G. Baraniuk
+
+**Abstract:** Sparse Mixture of Experts (SMoE) has emerged as a key to achieving unprecedented scalability in deep learning. By activating only a small subset of parameters per sample, SMoE achieves an exponential increase in parameter counts while maintaining a constant computational overhead. However, SMoE models are susceptible to routing fluctuations--changes in the routing of a given input to its target expert--at the late stage of model training, leading to model non-robustness. In this work, we unveil the limitation of SMoE through the perspective of the probabilistic graphical model (PGM). Through this PGM framework, we highlight the independence in the expert-selection of tokens, which exposes the model to routing fluctuation and non-robustness. Alleviating this independence, we propose the novel Similarity-Aware (S)MoE, which considers interactions between tokens during expert selection. We then derive a new PGM underlying an (S)MoE-Attention block, going beyond just a single (S)MoE layer. Leveraging the token similarities captured by the attention matrix, we propose the innovative Attention-Aware (S)MoE, which employs the attention matrix to guide the routing of tokens to appropriate experts in (S)MoE. We theoretically prove that Similarity/Attention-Aware routing help reduce the entropy of expert selection, resulting in more stable token routing mechanisms. We empirically validate our models on various tasks and domains, showing significant improvements in reducing routing fluctuations, enhancing accuracy, and increasing model robustness over the baseline MoE-Transformer with token routing via softmax gating.
+
+**Comment:** This paper addresses routing stability in Sparse Mixture of Experts (SMoE) through novel probabilistic graphical modeling and attention-aware mechanisms, directly contributing to foundational research in model architecture and sparsity.
+
+**Relevance:** 10
+**Novelty:** 8
+
+---
+
+## 2. [CoCoAFusE: Beyond Mixtures of Experts via Model Fusion](https://arxiv.org/abs/2505.01105) <a id="link2"></a>
+
+**ArXiv ID:** 2505.01105
+
+**Authors:** Aurelio Raffa Ugolini, Mara Tanelli, Valentina Breschi
+
+**Abstract:** Many learning problems involve multiple patterns and varying degrees of uncertainty dependent on the covariates. Advances in Deep Learning (DL) have addressed these issues by learning highly nonlinear input-output dependencies. However, model interpretability and Uncertainty Quantification (UQ) have often straggled behind. In this context, we introduce the Competitive/Collaborative Fusion of Experts (CoCoAFusE), a novel, Bayesian Covariates-Dependent Modeling technique. CoCoAFusE builds on the very philosophy behind Mixtures of Experts (MoEs), blending predictions from several simple sub-models (or "experts") to achieve high levels of expressiveness while retaining a substantial degree of local interpretability. Our formulation extends that of a classical Mixture of Experts by contemplating the fusion of the experts' distributions in addition to their more usual mixing (i.e., superimposition). Through this additional feature, CoCoAFusE better accommodates different scenarios for the intermediate behavior between generating mechanisms, resulting in tighter credible bounds on the response variable. Indeed, only resorting to mixing, as in classical MoEs, may lead to multimodality artifacts, especially over smooth transitions. Instead, CoCoAFusE can avoid these artifacts even under the same structure and priors for the experts, leading to greater expressiveness and flexibility in modeling. This new approach is showcased extensively on a suite of motivating numerical examples and a collection of real-data ones, demonstrating its efficacy in tackling complex regression problems where uncertainty is a key quantity of interest.
+
+**Comment:** The paper introduces CoCoAFusE, which extends Mixture of Experts (MoE) with a novel fusion mechanism. This aligns closely with the model architecture criterion, particularly innovations in MoE frameworks.
+
+**Relevance:** 10
+**Novelty:** 8
+
+---
+
+## 3. [Multi-Step Consistency Models: Fast Generation with Theoretical Guarantees](https://arxiv.org/abs/2505.01049) <a id="link3"></a>
+
+**ArXiv ID:** 2505.01049
+
+**Authors:** Nishant Jain, Xunpeng Huang, Yian Ma, Tong Zhang
+
+**Abstract:** Consistency models have recently emerged as a compelling alternative to traditional SDE based diffusion models, offering a significant acceleration in generation by producing high quality samples in very few steps. Despite their empirical success, a proper theoretic justification for their speed up is still lacking. In this work, we provide the analysis which bridges this gap, showing that given a consistency model which can map the input at a given time to arbitrary timestamps along the reverse trajectory, one can achieve KL divergence of order $ O(\varepsilon^2) $ using only $ O\left(\log\left(\frac{d}{\varepsilon}\right)\right) $ iterations with constant step size, where d is the data dimension. Additionally, under minimal assumptions on the data distribution an increasingly common setting in recent diffusion model analyses we show that a similar KL convergence guarantee can be obtained, with the number of steps scaling as $ O\left(d \log\left(\frac{d}{\varepsilon}\right)\right) $. Going further, we also provide a theoretical analysis for estimation of such consistency models, concluding that accurate learning is feasible using small discretization steps, both in smooth and non smooth settings. Notably, our results for the non smooth case yield best in class convergence rates compared to existing SDE or ODE based analyses under minimal assumptions.
+
+**Comment:** The paper provides theoretical guarantees for consistency models, which are an emerging trend in generative modeling. It offers foundational insights into the efficiency and theoretical underpinnings of these models, aligning with the 'Emerging Trends' criterion.
+
+**Relevance:** 9
+**Novelty:** 9
+
+---
+
+## 4. [How Transformers Learn Regular Language Recognition: A Theoretical Study on Training Dynamics and Implicit Bias](https://arxiv.org/abs/2505.00926) <a id="link4"></a>
+
+**ArXiv ID:** 2505.00926
+
+**Authors:** Ruiquan Huang, Yingbin Liang, Jing Yang
+
+**Abstract:** Language recognition tasks are fundamental in natural language processing (NLP) and have been widely used to benchmark the performance of large language models (LLMs). These tasks also play a crucial role in explaining the working mechanisms of transformers. In this work, we focus on two representative tasks in the category of regular language recognition, known as `even pairs' and `parity check', the aim of which is to determine whether the occurrences of certain subsequences in a given sequence are even. Our goal is to explore how a one-layer transformer, consisting of an attention layer followed by a linear layer, learns to solve these tasks by theoretically analyzing its training dynamics under gradient descent. While even pairs can be solved directly by a one-layer transformer, parity check need to be solved by integrating Chain-of-Thought (CoT), either into the inference stage of a transformer well-trained for the even pairs task, or into the training of a one-layer transformer. For both problems, our analysis shows that the joint training of attention and linear layers exhibits two distinct phases. In the first phase, the attention layer grows rapidly, mapping data sequences into separable vectors. In the second phase, the attention layer becomes stable, while the linear layer grows logarithmically and approaches in direction to a max-margin hyperplane that correctly separates the attention layer outputs into positive and negative samples, and the loss decreases at a rate of $O(1/t)$. Our experiments validate those theoretical results.
+
+**Comment:** This paper provides theoretical insights into how transformers learn regular language recognition tasks, analyzing training dynamics and implicit bias. It aligns with the core topic of representation learning and offers foundational insights into transformer behavior.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 5. [Dual Filter: A Mathematical Framework for Inference using Transformer-like Architectures](https://arxiv.org/abs/2505.00818) <a id="link5"></a>
+
+**ArXiv ID:** 2505.00818
+
+**Authors:** Heng-Sheng Chang, Prashant G. Mehta
+
+**Abstract:** This paper presents a mathematical framework for causal nonlinear prediction in settings where observations are generated from an underlying hidden Markov model (HMM). Both the problem formulation and the proposed solution are motivated by the decoder-only transformer architecture, in which a finite sequence of observations (tokens) is mapped to the conditional probability of the next token. Our objective is not to construct a mathematical model of a transformer. Rather, our interest lies in deriving, from first principles, transformer-like architectures that solve the prediction problem for which the transformer is designed. The proposed framework is based on an original optimal control approach, where the prediction objective (MMSE) is reformulated as an optimal control problem. An analysis of the optimal control problem is presented leading to a fixed-point equation on the space of probability measures. To solve the fixed-point equation, we introduce the dual filter, an iterative algorithm that closely parallels the architecture of decoder-only transformers. These parallels are discussed in detail along with the relationship to prior work on mathematical modeling of transformers as transport on the space of probability measures. Numerical experiments are provided to illustrate the performance of the algorithm using parameter values used in researchscale transformer models.
+
+**Comment:** The paper provides a mathematical framework inspired by transformer architectures, focusing on deriving transformer-like architectures from first principles. This aligns with the 'Model Architecture' criterion, particularly in understanding and analyzing existing architectures.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 6. [ICQuant: Index Coding enables Low-bit LLM Quantization](https://arxiv.org/abs/2505.00850) <a id="link6"></a>
+
+**ArXiv ID:** 2505.00850
+
+**Authors:** Xinlin Li, Osama Hanna, Christina Fragouli, Suhas Diggavi
+
+**Abstract:** The rapid deployment of Large Language Models (LLMs) highlights the need for efficient low-bit post-training quantization (PTQ), due to their high memory costs. A key challenge in weight quantization is the presence of outliers, which inflate quantization ranges and lead to large errors. While a number of outlier suppression techniques have been proposed, they either: fail to effectively shrink the quantization range, or incur (relatively) high bit overhead. In this paper, we present ICQuant, a novel framework that leverages outlier statistics to design an efficient index coding scheme for outlier-aware weight-only quantization. Compared to existing outlier suppression techniques requiring $\approx 1$ bit overhead to halve the quantization range, ICQuant requires only $\approx 0.3$ bits; a significant saving in extreme compression regimes (e.g., 2-3 bits per weight). ICQuant can be used on top of any existing quantizers to eliminate outliers, improving the quantization quality. Using just 2.3 bits per weight and simple scalar quantizers, ICQuant improves the zero-shot accuracy of the 2-bit Llama3-70B model by up to 130% and 150% relative to QTIP and QuIP#; and it achieves comparable performance to the best-known fine-tuned quantizer (PV-tuning) without fine-tuning.
+
+**Comment:** The paper introduces ICQuant, a novel low-bit quantization framework addressing outliers in LLMs. This aligns closely with the 'Model Compression' criterion, particularly in advancing quantization techniques.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 7. [StablePCA: Learning Shared Representations across Multiple Sources via Minimax Optimization](https://arxiv.org/abs/2505.00940) <a id="link7"></a>
+
+**ArXiv ID:** 2505.00940
+
+**Authors:** Zhenyu Wang, Molei Liu, Jing Lei, Francis Bach, Zijian Guo
+
+**Abstract:** When synthesizing multisource high-dimensional data, a key objective is to extract low-dimensional feature representations that effectively approximate the original features across different sources. Such general feature extraction facilitates the discovery of transferable knowledge, mitigates systematic biases such as batch effects, and promotes fairness. In this paper, we propose Stable Principal Component Analysis (StablePCA), a novel method for group distributionally robust learning of latent representations from high-dimensional multi-source data. A primary challenge in generalizing PCA to the multi-source regime lies in the nonconvexity of the fixed rank constraint, rendering the minimax optimization nonconvex. To address this challenge, we employ the Fantope relaxation, reformulating the problem as a convex minimax optimization, with the objective defined as the maximum loss across sources. To solve the relaxed formulation, we devise an optimistic-gradient Mirror Prox algorithm with explicit closed-form updates. Theoretically, we establish the global convergence of the Mirror Prox algorithm, with the convergence rate provided from the optimization perspective. Furthermore, we offer practical criteria to assess how closely the solution approximates the original nonconvex formulation. Through extensive numerical experiments, we demonstrate StablePCA's high accuracy and efficiency in extracting robust low-dimensional representations across various finite-sample scenarios.
+
+**Comment:** The paper proposes StablePCA, a novel method for robust representation learning across multiple sources using minimax optimization. This aligns well with representation learning and introduces a theoretically grounded approach to address nonconvexity challenges.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 8. [Compact Recurrent Transformer with Persistent Memory](https://arxiv.org/abs/2505.00929) <a id="link8"></a>
+
+**ArXiv ID:** 2505.00929
+
+**Authors:** Edison Mucllari, Zachary Daniels, David Zhang, Qiang Ye
+
+**Abstract:** The Transformer architecture has shown significant success in many language processing and visual tasks. However, the method faces challenges in efficiently scaling to long sequences because the self-attention computation is quadratic with respect to the input length. To overcome this limitation, several approaches scale to longer sequences by breaking long sequences into a series of segments, restricting self-attention to local dependencies between tokens within each segment and using a memory mechanism to manage information flow between segments. However, these approached generally introduce additional compute overhead that restricts them from being used for applications where limited compute memory and power are of great concern (such as edge computing). We propose a novel and efficient Compact Recurrent Transformer (CRT), which combines shallow Transformer models that process short local segments with recurrent neural networks to compress and manage a single persistent memory vector that summarizes long-range global information between segments. We evaluate CRT on WordPTB and WikiText-103 for next-token-prediction tasks, as well as on the Toyota Smarthome video dataset for classification. CRT achieves comparable or superior prediction results to full-length Transformers in the language datasets while using significantly shorter segments (half or quarter size) and substantially reduced FLOPs. Our approach also demonstrates state-of-the-art performance on the Toyota Smarthome video dataset.
+
+**Comment:** The paper introduces Compact Recurrent Transformer (CRT), which innovates on Transformer architecture by combining it with RNNs for efficient long-sequence processing. This aligns with the model architecture criterion, particularly in addressing efficiency and scalability challenges.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 9. [Learning and Transferring Physical Models through Derivatives](https://arxiv.org/abs/2505.01391) <a id="link9"></a>
+
+**ArXiv ID:** 2505.01391
+
+**Authors:** Alessandro Trenta, Andrea Cossu, Davide Bacciu
+
+**Abstract:** We propose Derivative Learning (DERL), a supervised approach that models physical systems by learning their partial derivatives. We also leverage DERL to build physical models incrementally, by designing a distillation protocol that effectively transfers knowledge from a pre-trained to a student model. We provide theoretical guarantees that our approach can learn the true physical system, being consistent with the underlying physical laws, even when using empirical derivatives. DERL outperforms state-of-the-art methods in generalizing an ODE to unseen initial conditions and a parametric PDE to unseen parameters. We finally propose a method based on DERL to transfer physical knowledge across models by extending them to new portions of the physical domain and new range of PDE parameters. We believe this is the first attempt at building physical models incrementally in multiple stages.
+
+**Comment:** The paper introduces a novel approach, Derivative Learning (DERL), for modeling physical systems through partial derivatives and incremental knowledge transfer. This aligns with the 'AI for Science' criterion as it provides foundational insights into modeling physical systems.
+
+**Relevance:** 8
+**Novelty:** 8
+
+---
+
+## 10. [Incorporating Inductive Biases to Energy-based Generative Models](https://arxiv.org/abs/2505.01111) <a id="link10"></a>
+
+**ArXiv ID:** 2505.01111
+
+**Authors:** Yukun Li, Li-Ping Liu
+
+**Abstract:** With the advent of score-matching techniques for model training and Langevin dynamics for sample generation, energy-based models (EBMs) have gained renewed interest as generative models. Recent EBMs usually use neural networks to define their energy functions. In this work, we introduce a novel hybrid approach that combines an EBM with an exponential family model to incorporate inductive bias into data modeling. Specifically, we augment the energy term with a parameter-free statistic function to help the model capture key data statistics. Like an exponential family model, the hybrid model aims to align the distribution statistics with data statistics during model training, even when it only approximately maximizes the data likelihood. This property enables us to impose constraints on the hybrid model. Our empirical study validates the hybrid model's ability to match statistics. Furthermore, experimental results show that data fitting and generation improve when suitable informative statistics are incorporated into the hybrid model.
+
+**Comment:** The paper introduces a hybrid energy-based model that incorporates inductive biases, aligning with the 'Representation Learning' criterion. It provides foundational insights into improving generative modeling through statistical constraints.
+
+**Relevance:** 8
+**Novelty:** 8
+
+---
+
+## 11. [Aggregation of Dependent Expert Distributions in Multimodal Variational Autoencoders](https://arxiv.org/abs/2505.01134) <a id="link11"></a>
+
+**ArXiv ID:** 2505.01134
+
+**Authors:** Rogelio A Mancisidor, Robert Jenssen, Shujian Yu, Michael Kampffmeyer
+
+**Abstract:** Multimodal learning with variational autoencoders (VAEs) requires estimating joint distributions to evaluate the evidence lower bound (ELBO). Current methods, the product and mixture of experts, aggregate single-modality distributions assuming independence for simplicity, which is an overoptimistic assumption. This research introduces a novel methodology for aggregating single-modality distributions by exploiting the principle of consensus of dependent experts (CoDE), which circumvents the aforementioned assumption. Utilizing the CoDE method, we propose a novel ELBO that approximates the joint likelihood of the multimodal data by learning the contribution of each subset of modalities. The resulting CoDE-VAE model demonstrates better performance in terms of balancing the trade-off between generative coherence and generative quality, as well as generating more precise log-likelihood estimations. CoDE-VAE further minimizes the generative quality gap as the number of modalities increases. In certain cases, it reaches a generative quality similar to that of unimodal VAEs, which is a desirable property that is lacking in most current methods. Finally, the classification accuracy achieved by CoDE-VAE is comparable to that of state-of-the-art multimodal VAE models.
+
+**Comment:** The paper introduces a novel aggregation method for multimodal VAEs, which aligns with the representation learning criterion, particularly in the context of generative models. The CoDE method offers a new perspective on joint distribution estimation.
+
+**Relevance:** 8
+**Novelty:** 8
+
+---
+
+# Paper Selection Prompt
+
+You are a helpful paper reading assistant whose job is to read daily posts from ArXiv and identify a few papers that your friend will enjoy reading.
+Your job is to carefully read the paper titles and abstracts below and find the ones that match the criteria below.
+
+## Instructions
+
+Write the response in JSONL format with {ARXIVID, COMMENT, RELEVANCE, NOVELTY} on each line, one for each paper.
+
+- ARXIVID: should be the ArXiv ID.
+- COMMENT: should identify whether there is a criteria that match the paper very closely. These matches should not be based on general terms like "language modeling" or "advancements" and should specifically refer to a criterion. No need to mention the non-matching criteria.
+- RELEVANCE: should be a score from 1-10.
+- NOVELTY: should be a score from 1-10.
+
+## Scoring Criteria
+
+> The "Relevance" score measures how closely the paper aligns with the core topics of the prompt.
+> The "Novelty" score assesses the originality and impact of the paper.
+> They are two **ORTHONORMAL** axes and **SHOULD NOT** be confused with each other.
+
+### Relevance Scoring
+
+- Relevance 9-10 (Completely Relevant)
+  - Focus: Fully aligned with core topics with no deviation, score the highest if contains relevant keywords in it.
+  - Examples: Papers focused on foundational methods or theoretical research, whose titles contain topic keywords like "MoE".
+
+- Relevance 7-8 (Relevant)
+  - Focus: Retain a solid link to the main research area, though may touch on peripheral elements.
+  - Examples: Papers research on the fundamental part of MoE through a less critical aspect like its behavior in GNN.
+
+- Relevance 5-6 (Borderline)
+  - Focus: Maintains a link to the core topic but also extends into at least one other domain/area beyond the primary focus.
+  - Examples: Work referencing MoE centered on reinforcement learning.
+
+- Relevance 3-4 (Irrelevant)
+  - Focus: Largely outside our interests with no association to our topics.
+  - Examples: Application-focused papers like using MoE to solve a problem in the real world.
+
+- Relevance 1-2 (Ignore)
+  - Focus: Purely unrelated to our topics. Completely a different domain.
+  - **Exception**: If the paper hints at a cutting-edge, radically new direction that could eventually transform the primary domain, consider a score of 9–10 despite initial appearances. (Usually a very rare concept that belongs to the fundamental research)
+
+### Novelty Scoring
+
+- Novelty 9-10 (Breakthrough)
+  - Definition: Groundbreaking methods/theory introducing new directions or solving major challenges.
+  - Examples: Entirely new paradigm for foundational models; a novel theory transforming representation learning.
+
+- Novelty 7-8 (Improvements)
+  - Definition: Substantial insights/enhancements, though not a full paradigm shift.
+  - Examples: Modifications on existing methods yielding significantly better results.
+
+- Novelty 5-6 (Borderline)
+  - Definition: Incremental contributions with possible long-term benefits, not immediately transformative.
+  - Examples: Moderately novel extension to an existing architecture; refining current methods without fundamentally altering them.
+
+- Novelty 3-4 (Tangential)
+  - Definition: Minor or domain-specific improvements with limited broader impact.
+  - Examples: Slight modifications to known methods with strange motivation; purely engineering jobs like a new benchmark/dataset.
+
+- Novelty 1-2 (Low)
+  - Definition: Minimal originality, applying standard approaches without real innovation.
+  - Examples: Using an off-the-shelf model without adding new insights; purely application-driven studies like finetuning a pretrained model using existing methods.
+
+## Papers
+
+[PAPER LIST HERE]
+
+## Relevant Topics
+
+Use the following relevance criteria to focus on foundational research. Keep **relevant** papers and filter out **irrelevant** ones. Avoid purely **application-driven** work.
+
+1. Representation Learning
+   - Relevant: Insights into how deep networks encode information, feature/dictionary learning, sparse/contrastive methods, training dynamics in neural networks.
+   - Irrelevant: Standard applications of known techniques lacking new theoretical or methodological contributions.
+
+2. Model Architecture
+   - Relevant: Mixture-of-Experts (MoE), Transformers, Conditional/Dynamic Networks, Autoencoders, analysis on existing architectures (like encoder-decoder), or other architectural innovations.
+   - Irrelevant: Merely using existing architectures for a certain task without insights into the structure themselves.
+
+3. Model Compression
+   - Relevant: Sparsity, pruning, quantization, low-rank approaches, KV cache, or other algorithmic/theoretical efficiency breakthroughs.
+   - Irrelevant: Straightforward applications of existing compression methods to new tasks.
+
+4. Large Language Models (LLMs)
+   - Relevant: Major breakthroughs in pretraining or architecture, theoretical insights into LLM behavior/interpretability.
+   - Irrelevant: Domain-specific usage (e.g., translation, jail-breaking), finetuning or inference tricks (e.g., instruction tuning, chain-of-thoughts, data mixing), or empirical dataset/benchmark studies and text-level analysis (e.g. hallucination, reasoning, safety).
+
+5. AI for Science
+   - Relevant: Foundational research in molecular/protein modeling, new generative paradigms, or significant architecture-level innovations.
+   - Irrelevant: Conventional, domain-specific applications without new theoretical perspectives.
+
+6. Emerging Trends
+   - Relevant: Cutting-edge theoretical work challenging established assumptions or introducing broad new paradigms.
+   - Irrelevant: Incremental improvements or trend-following without novel insights.
+
+**Keywords:**
+
+- Relevant: Mixture of Experts (MoE), Representation Learning, Compression/Efficiency, Sparse/Sparsity, Pruning, Quantization, Low-rank, Foundation Model, etc.
+- Irrelevant: Reinforcement Learning, Transfer Learning, Federated Learning, Online Learning, Diffusion Models, etc.
+- Application: Image Segmentation, Medical Imaging, 3D Vision, Video Understanding, Information Retrieval, Summarization, Recommendation Systems, Machine Translation, Speech Recognition, Signal Processing, Spatial/Temporal Modeling, Time Series, Knowledge Graph, etc.

@@ -1,0 +1,322 @@
+<div style="display: flex; align-items: flex-start; justify-content: space-between; width: 100%;"><div style="width: 33.33%; text-align: left;"><a href="../18"><img src="../../../assets/nav/day/2025-07-21-prev.svg" alt="Previous Day 2025-07-18"></a></div><div style="width: 33.33%; text-align: center;"><a href=".."><img src="../../../assets/nav/day/2025-07-21-center.svg" alt="Monthly Overview 2025-07"></a></div><div style="width: 33.33%; text-align: right;"><a href="../22"><img src="../../../assets/nav/day/2025-07-21-next.svg" alt="Next Day 2025-07-22"></a></div></div>
+
+# Personalized Daily ArXiv Papers 2025-07-21
+
+| *[gpt-4o]*   | Prompt   | Completion   | Total   |
+|:------------:|:--------:|:------------:|:-------:|
+| **Token**    | 30111    | 2560         | 32671   |
+| **Cost**     | $0.08    | $0.03        | $0.1    |
+
+Total arXiv papers: 381
+
+Total scanned papers: 223
+
+Total relevant papers: 11
+
+**Table of contents with paper titles:**
+
+1. [Apple Intelligence Foundation Language Models: Tech Report 2025](#user-content-link1)
+**Authors:** Hanzhi Zhou (Taoyi), Erik Hornberger (Taoyi), Pengsheng Guo (Taoyi), Xiyou Zhou (Taoyi), Saiwen Wang (Taoyi), Xin Wang (Taoyi), Yifei He (Taoyi), Xuankai Chang (Taoyi), Rene Rauch (Taoyi), Louis D'hauwe (Taoyi), John Peebles (Taoyi), Alec Doane (Taoyi), Kohen Chia (Taoyi), Jenna Thibodeau (Taoyi), Zi-Yi Dou (Taoyi), Yuanyang Zhang (Taoyi), Ruoming Pang (Taoyi), Reed Li (Taoyi), Zhifeng Chen (Taoyi), Jeremy Warner (Taoyi), Zhaoyang Xu (Taoyi), Sophy Lee (Taoyi), David Mizrahi (Taoyi), Ramsey Tantawi (Taoyi), Chris Chaney (Taoyi), Kelsey Peterson (Taoyi), Jun Qin (Taoyi), Alex Dombrowski (Taoyi), Mira Chiang (Taoyi), Aiswarya Raghavan (Taoyi), Gerard Casamayor (Taoyi), Qibin Chen (Taoyi), Aonan Zhang (Taoyi), Nathalie Tran (Taoyi), Jianyu Wang (Taoyi), Hang Su (Taoyi), Thomas Voice (Taoyi), Alessandro Pappalardo (Taoyi), Brycen Wershing (Taoyi), Prasanth Yadla (Taoyi), Rui Li (Taoyi), Priyal Chhatrapati (Taoyi), Ismael Fernandez (Taoyi), Yusuf Goren (Taoyi), Xin Zheng (Taoyi), Forrest Huang (Taoyi), Tao Lei (Taoyi), Eray Yildiz (Taoyi), Alper Kokmen (Taoyi), Gokul Santhanam (Taoyi), Areeba Kamal (Taoyi), Kaan Elgin (Taoyi), Dian Ang Yap (Taoyi), Jeremy Liu (Taoyi), Peter Gray (Taoyi), Howard Xing (Taoyi), Kieran Liu (Taoyi), Matteo Ronchi (Taoyi), Moritz Schwarzer-Becker (Taoyi), Yun Zhu (Taoyi), Mandana Saebi (Taoyi), Jeremy Snow (Taoyi), David Griffiths (Taoyi), Guillaume Tartavel (Taoyi), Erin Feldman (Taoyi), Simon Lehnerer (Taoyi), Fernando Berm\'udez-Medina (Taoyi), Hans Han (Taoyi), Joe Zhou (Taoyi), Xiaoyi Ren (Taoyi), Sujeeth Reddy (Taoyi), Zirui Wang (Taoyi), Tom Gunter (Taoyi), Albert Antony (Taoyi), Yuanzhi Li (Taoyi), John Dennison (Taoyi), Tony Sun (Taoyi), Yena Han (Taoyi), Yi Qin (Taoyi), Sam Davarnia (Taoyi), Jeffrey Bigham (Taoyi), Wayne Shan (Taoyi), Hannah Gillis Coleman (Taoyi), Guillaume Klein (Taoyi), Peng Liu (Taoyi), Muyang Yu (Taoyi), Jack Cackler (Taoyi), Yuan Gao (Taoyi), Crystal Xiao (Taoyi), Binazir Karimzadeh (Taoyi), Zhengdong Zhang (Taoyi), Felix Bai (Taoyi), Albin Madappally Jose (Taoyi), Feng Nan (Taoyi), Nazir Kamaldin (Taoyi), Dong Yin (Taoyi), Hans Hao (Taoyi), Yanchao Sun (Taoyi), Yi Hua (Taoyi), Charles Maalouf (Taoyi), Alex Guillen Garcia (Taoyi), Guoli Yin (Taoyi), Lezhi Li (Taoyi), Mohana Prasad Sathya Moorthy (Taoyi), Hongbin Gao (Taoyi), Jay Tang (Taoyi), Joanna Arreaza-Taylor (Taoyi), Faye Lao (Taoyi), Carina Peng (Taoyi), Josh Shaffer (Taoyi), Dan Masi (Taoyi), Sushma Rao (Taoyi), Tommi Vehvilainen (Taoyi), Senyu Tong (Taoyi), Dongcai Shen (Taoyi), Yang Zhao (Taoyi), Chris Bartels (Taoyi), Peter Fu (Taoyi), Qingqing Cao (Taoyi), Christopher Neubauer (Taoyi), Ethan Li (Taoyi), Mingfei Gao (Taoyi), Rebecca Callahan (Taoyi), Richard Wei (Taoyi), Patrick Dong (Taoyi), Alex Braunstein (Taoyi), Sachin Ravi (Taoyi), Adolfo Lopez Mendez (Taoyi), Kaiwei Huang (Taoyi), Kun Duan (Taoyi), Haoshuo Huang (Taoyi), Rui Qian (Taoyi), Stefano Ligas (Taoyi), Jordan Huffaker (Taoyi), Dongxu Li (Taoyi), Bailin Wang (Taoyi), Nanzhu Wang (Taoyi), Anuva Agarwal (Taoyi), Tait Madsen (Taoyi), Josh Newnham (Taoyi), Abhishek Sharma (Taoyi), Zhile Ren (Taoyi), Deepak Gopinath (Taoyi), Erik Daxberger (Taoyi), Saptarshi Guha (Taoyi), Oron Levy (Taoyi), Jing Lu (Taoyi), Nan Dun (Taoyi), Marc Kirchner (Taoyi), Yinfei Yang (Taoyi), Manjot Bilkhu (Taoyi), Dave Nelson (Taoyi), Anthony Spalvieri-Kruse (Taoyi), Juan Lao Tebar (Taoyi), Yang Xu (Taoyi), Phani Mutyala (Taoyi), Gabriel Jacoby-Cooper (Taoyi), Yingbo Wang (Taoyi), Karla Vega (Taoyi), Vishaal Mahtani (Taoyi), Darren Botten (Taoyi), Eric Wang (Taoyi), Hanli Li (Taoyi), Matthias Paulik (Taoyi), Haoran Yan (Taoyi), Navid Shiee (Taoyi), Yihao Qian (Taoyi), Bugu Wu (Taoyi), Qi Zhu (Taoyi), Ob Adaranijo (Taoyi), Bhuwan Dhingra (Taoyi), Zhe Gan (Taoyi), Nicholas Seidl (Taoyi), Grace Duanmu (Taoyi), Rong Situ (Taoyi), Yiping Ma (Taoyi), Yin Xia (Taoyi), David Riazati (Taoyi), Vasileios Saveris (Taoyi), Anh Nguyen (Taoyi), Michael (Taoyi), Lee, Patrick Sonnenberg, Chinguun Erdenebileg, Yanghao Li, Vivian Ma, James Chou, Isha Garg, Mark Lee, Keen You, Yuhong Li, Ransen Niu, Nandhitha Raghuram, Pulkit Agrawal, Henry Mason, Sumeet Singh, Keyu He, Hong-You Chen, Lucas Guibert, Shiyu Li, Varsha Paidi, Narendran Raghavan, Mingze Xu, Yuli Yang, Sergiu Sima, Irina Belousova, Sprite Chu, Afshin Dehghan, Philipp Dufter, David Haldimann, Zhen Yang, Margit Bowler, Chang Liu, Ying-Chang Cheng, Vivek Rathod, Syd Evans, Wilson Tsao, Dustin Withers, Haitian Sun, Biyao Wang, Peter Grasch, Walker Cheng, Yihao Feng, Vivek Kumar, Frank Chu, Victoria M\"onchJuan Haladjian, Doug Kang, Jiarui Lu, Ciro Sannino, Max Lam, Floris Weers, Bowen Pan, Kenneth Jung, Dhaval Doshi, Fangping Shi, Olli Saarikivi, Alp Aygar, Josh Elman, Cheng Leong, Eshan Verma, Matthew Lei, Jeff Nichols, Jiulong Shan, Donald Zhang, Lawrence Zhou, Stephen Murphy, Xianzhi Du, Chang Lan, Ankur Jain, Elmira Amirloo, Marcin Eichner, Naomy Sabo, Anupama Mann Anupama, David Qiu, Zhao Meng, Michael FitzMaurice, Peng Zhang, Simon Yeung, Chen Chen, Marco Zuliani, Andrew Hansen, Yang Lu, Brent Ramerth, Ziyi Zhong, Parsa Mazaheri, Matthew Hopkins, Mengyu Li, Simon Wang, David Chen, Farzin Rasteh, Chong Wang, Josh Gardner, Asaf Liberman, Haoxuan You, Andrew Walkingshaw, Xingyu Zhou, Jinhao Lei, Yan Meng, Quentin Keunebroek, Sam Wiseman, Anders Boesen Lindbo Larsen, Yi Zhang, Zaid Ahmed, Haiming Gang, Aaron Franklin, Kelvin Zou, Guillaume Seguin, Jonathan Janke, Rachel Burger, Co Giang, Cheng Shen, Jen Liu, Sanskruti Shah, Xiang Kong, Yiran Fei, TJ Collins, Chen Zhang, Zhiyun Lu, Michael Booker, Qin Ba, Yasutaka Tanaka, Andres Romero Mier Y Teran, Federico Scozzafava, Regan Poston, Jane Li, Eduardo Jimenez, Bas Straathof, Karanjeet Singh, Lindsay Hislop, Rajat Arora, Deepa Seshadri, Boyue Li, Colorado Reed, Zhen Li, TJ Lu, Yi Wang, Kaelen Haag, Nicholas Lusskin, Raunak Sinha, Rahul Nair, Eldon Schoop, Mary Beth Kery, Mehrdad Farajtbar, Brenda Yang, George Horrell, Shiwen Zhao, Dhruti Shah, Cha Chen, Bowen Zhang, Chang Gao, Devi Krishna, Jennifer Mallalieu, Javier Movellan, Di Feng, Emily Zhang, Sam Xu, Junting Pan, Dominik Moritz, Suma Jayaram, Kevin Smith, Dongseong Hwang, Daniel Parilla, Jiaming Hu, You-Cyuan Jhang, Emad Soroush, Fred Hohman, Nan Du, Emma Wang, Sam Dodge, Pragnya Sridhar, Joris Pelemans, Wei Fang, Nina Wenzel, Joseph Yitan Cheng, Hadas Kotek, Chung-Cheng Chiu, Meng Cao, Haijing Fu, Ruixuan Hou, Ke Ye, Diane Zhu, Nikhil Bhendawade, Joseph Astrauskas, Jian Liu, Sai Aitharaju, Wentao Wu, Artsiom Peshko, Hyunjik Kim, Nilesh Shahdadpuri, Andy De Wang, Qi Shan, Piotr Maj, Raul Rea Menacho, Justin Lazarow, Eric Liang Yang, Arsalan Farooq, Donghan Yu, David G\"uera, Minsik Cho, Kavya Nerella, Yongqiang Wang, Tao Jia, John Park, Jeff Lai, Haotian Zhang, Futang Peng, Daniele Molinari, Aparna Rajamani, Tyler Johnson, Lauren Gardiner, Chao Jia, Violet Yao, Wojciech Kryscinski, Xiujun Li, Shang-Chen Wu
+
+2. [Causal Language Control in Multilingual Transformers via Sparse Feature Steering](#user-content-link2)
+**Authors:** Cheng-Ting Chou, George Liu, Jessica Sun, Cole Blondin, Kevin Zhu, Vasu Sharma, Sean O'Brien
+
+3. [Large Language Models as Innovators: A Framework to Leverage Latent Space Exploration for Novelty Discovery](#user-content-link3)
+**Authors:** Mateusz Bystro\'nski, Miko{\l}aj Ho{\l}ysz, Grzegorz Piotrowski, Nitesh V. Chawla, Tomasz Kajdanowicz
+
+4. [Change of Thought: Adaptive Test-Time Computation](#user-content-link4)
+**Authors:** Mrinal Mathur, Mike Doan, Barak Pearlmutter, Sergey Plis
+
+5. [Provable Low-Frequency Bias of In-Context Learning of Representations](#user-content-link5)
+**Authors:** Yongyi Yang, Hidenori Tanaka, Wei Hu
+
+6. [Exploiting Primacy Effect To Improve Large Language Models](#user-content-link6)
+**Authors:** Bianca Raimondi, Maurizio Gabbrielli
+
+7. [On-the-Fly Fine-Tuning of Foundational Neural Network Potentials: A Bayesian Neural Network Approach](#user-content-link7)
+**Authors:** Tim Rensmeyer, Denis Kramer, Oliver Niggemann
+
+8. [Minimalist Concept Erasure in Generative Models](#user-content-link8)
+**Authors:** Yang Zhang, Er Jin, Yanfei Dong, Yixuan Wu, Philip Torr, Ashkan Khakzar, Johannes Stegmaier, Kenji Kawaguchi
+
+9. [SPARQL Query Generation with LLMs: Measuring the Impact of Training Data Memorization and Knowledge Injection](#user-content-link9)
+**Authors:** Aleksandr Gashkov, Aleksandr Perevalov, Maria Eltsova, Andreas Both
+
+10. [Kolmogorov Arnold Networks (KANs) for Imbalanced Data -- An Empirical Perspective](#user-content-link10)
+**Authors:** Pankaj Yadav, Vivek Vijay
+
+11. [OmniVec2 -- A Novel Transformer based Network for Large Scale Multimodal and Multitask Learning](#user-content-link11)
+**Authors:** Siddharth Srivastava, Gaurav Sharma
+
+---
+
+## 1. [Apple Intelligence Foundation Language Models: Tech Report 2025](https://arxiv.org/abs/2507.13575) <a id="link1"></a>
+
+**ArXiv ID:** 2507.13575
+
+**Authors:** Hanzhi Zhou (Taoyi), Erik Hornberger (Taoyi), Pengsheng Guo (Taoyi), Xiyou Zhou (Taoyi), Saiwen Wang (Taoyi), Xin Wang (Taoyi), Yifei He (Taoyi), Xuankai Chang (Taoyi), Rene Rauch (Taoyi), Louis D'hauwe (Taoyi), John Peebles (Taoyi), Alec Doane (Taoyi), Kohen Chia (Taoyi), Jenna Thibodeau (Taoyi), Zi-Yi Dou (Taoyi), Yuanyang Zhang (Taoyi), Ruoming Pang (Taoyi), Reed Li (Taoyi), Zhifeng Chen (Taoyi), Jeremy Warner (Taoyi), Zhaoyang Xu (Taoyi), Sophy Lee (Taoyi), David Mizrahi (Taoyi), Ramsey Tantawi (Taoyi), Chris Chaney (Taoyi), Kelsey Peterson (Taoyi), Jun Qin (Taoyi), Alex Dombrowski (Taoyi), Mira Chiang (Taoyi), Aiswarya Raghavan (Taoyi), Gerard Casamayor (Taoyi), Qibin Chen (Taoyi), Aonan Zhang (Taoyi), Nathalie Tran (Taoyi), Jianyu Wang (Taoyi), Hang Su (Taoyi), Thomas Voice (Taoyi), Alessandro Pappalardo (Taoyi), Brycen Wershing (Taoyi), Prasanth Yadla (Taoyi), Rui Li (Taoyi), Priyal Chhatrapati (Taoyi), Ismael Fernandez (Taoyi), Yusuf Goren (Taoyi), Xin Zheng (Taoyi), Forrest Huang (Taoyi), Tao Lei (Taoyi), Eray Yildiz (Taoyi), Alper Kokmen (Taoyi), Gokul Santhanam (Taoyi), Areeba Kamal (Taoyi), Kaan Elgin (Taoyi), Dian Ang Yap (Taoyi), Jeremy Liu (Taoyi), Peter Gray (Taoyi), Howard Xing (Taoyi), Kieran Liu (Taoyi), Matteo Ronchi (Taoyi), Moritz Schwarzer-Becker (Taoyi), Yun Zhu (Taoyi), Mandana Saebi (Taoyi), Jeremy Snow (Taoyi), David Griffiths (Taoyi), Guillaume Tartavel (Taoyi), Erin Feldman (Taoyi), Simon Lehnerer (Taoyi), Fernando Berm\'udez-Medina (Taoyi), Hans Han (Taoyi), Joe Zhou (Taoyi), Xiaoyi Ren (Taoyi), Sujeeth Reddy (Taoyi), Zirui Wang (Taoyi), Tom Gunter (Taoyi), Albert Antony (Taoyi), Yuanzhi Li (Taoyi), John Dennison (Taoyi), Tony Sun (Taoyi), Yena Han (Taoyi), Yi Qin (Taoyi), Sam Davarnia (Taoyi), Jeffrey Bigham (Taoyi), Wayne Shan (Taoyi), Hannah Gillis Coleman (Taoyi), Guillaume Klein (Taoyi), Peng Liu (Taoyi), Muyang Yu (Taoyi), Jack Cackler (Taoyi), Yuan Gao (Taoyi), Crystal Xiao (Taoyi), Binazir Karimzadeh (Taoyi), Zhengdong Zhang (Taoyi), Felix Bai (Taoyi), Albin Madappally Jose (Taoyi), Feng Nan (Taoyi), Nazir Kamaldin (Taoyi), Dong Yin (Taoyi), Hans Hao (Taoyi), Yanchao Sun (Taoyi), Yi Hua (Taoyi), Charles Maalouf (Taoyi), Alex Guillen Garcia (Taoyi), Guoli Yin (Taoyi), Lezhi Li (Taoyi), Mohana Prasad Sathya Moorthy (Taoyi), Hongbin Gao (Taoyi), Jay Tang (Taoyi), Joanna Arreaza-Taylor (Taoyi), Faye Lao (Taoyi), Carina Peng (Taoyi), Josh Shaffer (Taoyi), Dan Masi (Taoyi), Sushma Rao (Taoyi), Tommi Vehvilainen (Taoyi), Senyu Tong (Taoyi), Dongcai Shen (Taoyi), Yang Zhao (Taoyi), Chris Bartels (Taoyi), Peter Fu (Taoyi), Qingqing Cao (Taoyi), Christopher Neubauer (Taoyi), Ethan Li (Taoyi), Mingfei Gao (Taoyi), Rebecca Callahan (Taoyi), Richard Wei (Taoyi), Patrick Dong (Taoyi), Alex Braunstein (Taoyi), Sachin Ravi (Taoyi), Adolfo Lopez Mendez (Taoyi), Kaiwei Huang (Taoyi), Kun Duan (Taoyi), Haoshuo Huang (Taoyi), Rui Qian (Taoyi), Stefano Ligas (Taoyi), Jordan Huffaker (Taoyi), Dongxu Li (Taoyi), Bailin Wang (Taoyi), Nanzhu Wang (Taoyi), Anuva Agarwal (Taoyi), Tait Madsen (Taoyi), Josh Newnham (Taoyi), Abhishek Sharma (Taoyi), Zhile Ren (Taoyi), Deepak Gopinath (Taoyi), Erik Daxberger (Taoyi), Saptarshi Guha (Taoyi), Oron Levy (Taoyi), Jing Lu (Taoyi), Nan Dun (Taoyi), Marc Kirchner (Taoyi), Yinfei Yang (Taoyi), Manjot Bilkhu (Taoyi), Dave Nelson (Taoyi), Anthony Spalvieri-Kruse (Taoyi), Juan Lao Tebar (Taoyi), Yang Xu (Taoyi), Phani Mutyala (Taoyi), Gabriel Jacoby-Cooper (Taoyi), Yingbo Wang (Taoyi), Karla Vega (Taoyi), Vishaal Mahtani (Taoyi), Darren Botten (Taoyi), Eric Wang (Taoyi), Hanli Li (Taoyi), Matthias Paulik (Taoyi), Haoran Yan (Taoyi), Navid Shiee (Taoyi), Yihao Qian (Taoyi), Bugu Wu (Taoyi), Qi Zhu (Taoyi), Ob Adaranijo (Taoyi), Bhuwan Dhingra (Taoyi), Zhe Gan (Taoyi), Nicholas Seidl (Taoyi), Grace Duanmu (Taoyi), Rong Situ (Taoyi), Yiping Ma (Taoyi), Yin Xia (Taoyi), David Riazati (Taoyi), Vasileios Saveris (Taoyi), Anh Nguyen (Taoyi), Michael (Taoyi), Lee, Patrick Sonnenberg, Chinguun Erdenebileg, Yanghao Li, Vivian Ma, James Chou, Isha Garg, Mark Lee, Keen You, Yuhong Li, Ransen Niu, Nandhitha Raghuram, Pulkit Agrawal, Henry Mason, Sumeet Singh, Keyu He, Hong-You Chen, Lucas Guibert, Shiyu Li, Varsha Paidi, Narendran Raghavan, Mingze Xu, Yuli Yang, Sergiu Sima, Irina Belousova, Sprite Chu, Afshin Dehghan, Philipp Dufter, David Haldimann, Zhen Yang, Margit Bowler, Chang Liu, Ying-Chang Cheng, Vivek Rathod, Syd Evans, Wilson Tsao, Dustin Withers, Haitian Sun, Biyao Wang, Peter Grasch, Walker Cheng, Yihao Feng, Vivek Kumar, Frank Chu, Victoria M\"onchJuan Haladjian, Doug Kang, Jiarui Lu, Ciro Sannino, Max Lam, Floris Weers, Bowen Pan, Kenneth Jung, Dhaval Doshi, Fangping Shi, Olli Saarikivi, Alp Aygar, Josh Elman, Cheng Leong, Eshan Verma, Matthew Lei, Jeff Nichols, Jiulong Shan, Donald Zhang, Lawrence Zhou, Stephen Murphy, Xianzhi Du, Chang Lan, Ankur Jain, Elmira Amirloo, Marcin Eichner, Naomy Sabo, Anupama Mann Anupama, David Qiu, Zhao Meng, Michael FitzMaurice, Peng Zhang, Simon Yeung, Chen Chen, Marco Zuliani, Andrew Hansen, Yang Lu, Brent Ramerth, Ziyi Zhong, Parsa Mazaheri, Matthew Hopkins, Mengyu Li, Simon Wang, David Chen, Farzin Rasteh, Chong Wang, Josh Gardner, Asaf Liberman, Haoxuan You, Andrew Walkingshaw, Xingyu Zhou, Jinhao Lei, Yan Meng, Quentin Keunebroek, Sam Wiseman, Anders Boesen Lindbo Larsen, Yi Zhang, Zaid Ahmed, Haiming Gang, Aaron Franklin, Kelvin Zou, Guillaume Seguin, Jonathan Janke, Rachel Burger, Co Giang, Cheng Shen, Jen Liu, Sanskruti Shah, Xiang Kong, Yiran Fei, TJ Collins, Chen Zhang, Zhiyun Lu, Michael Booker, Qin Ba, Yasutaka Tanaka, Andres Romero Mier Y Teran, Federico Scozzafava, Regan Poston, Jane Li, Eduardo Jimenez, Bas Straathof, Karanjeet Singh, Lindsay Hislop, Rajat Arora, Deepa Seshadri, Boyue Li, Colorado Reed, Zhen Li, TJ Lu, Yi Wang, Kaelen Haag, Nicholas Lusskin, Raunak Sinha, Rahul Nair, Eldon Schoop, Mary Beth Kery, Mehrdad Farajtbar, Brenda Yang, George Horrell, Shiwen Zhao, Dhruti Shah, Cha Chen, Bowen Zhang, Chang Gao, Devi Krishna, Jennifer Mallalieu, Javier Movellan, Di Feng, Emily Zhang, Sam Xu, Junting Pan, Dominik Moritz, Suma Jayaram, Kevin Smith, Dongseong Hwang, Daniel Parilla, Jiaming Hu, You-Cyuan Jhang, Emad Soroush, Fred Hohman, Nan Du, Emma Wang, Sam Dodge, Pragnya Sridhar, Joris Pelemans, Wei Fang, Nina Wenzel, Joseph Yitan Cheng, Hadas Kotek, Chung-Cheng Chiu, Meng Cao, Haijing Fu, Ruixuan Hou, Ke Ye, Diane Zhu, Nikhil Bhendawade, Joseph Astrauskas, Jian Liu, Sai Aitharaju, Wentao Wu, Artsiom Peshko, Hyunjik Kim, Nilesh Shahdadpuri, Andy De Wang, Qi Shan, Piotr Maj, Raul Rea Menacho, Justin Lazarow, Eric Liang Yang, Arsalan Farooq, Donghan Yu, David G\"uera, Minsik Cho, Kavya Nerella, Yongqiang Wang, Tao Jia, John Park, Jeff Lai, Haotian Zhang, Futang Peng, Daniele Molinari, Aparna Rajamani, Tyler Johnson, Lauren Gardiner, Chao Jia, Violet Yao, Wojciech Kryscinski, Xiujun Li, Shang-Chen Wu
+
+**Abstract:** We introduce two multilingual, multimodal foundation language models that power Apple Intelligence features across Apple devices and services: i a 3B-parameter on-device model optimized for Apple silicon through architectural innovations such as KV-cache sharing and 2-bit quantization-aware training; and ii a scalable server model built on a novel Parallel-Track Mixture-of-Experts PT-MoE transformer that combines track parallelism, mixture-of-experts sparse computation, and interleaved global-local attention to deliver high quality with competitive cost on Apple's Private Cloud Compute platform. Both models are trained on large-scale multilingual and multimodal datasets sourced via responsible web crawling, licensed corpora, and high-quality synthetic data, then further refined with supervised fine-tuning and reinforcement learning on a new asynchronous platform. The resulting models support several additional languages while understanding images and executing tool calls. In public benchmarks and human evaluations, both the server model and the on-device model match or surpass comparably sized open baselines.   A new Swift-centric Foundation Models framework exposes guided generation, constrained tool calling, and LoRA adapter fine-tuning, allowing developers to integrate these capabilities with a few lines of code. The latest advancements in Apple Intelligence models are grounded in our Responsible AI approach with safeguards like content filtering and locale-specific evaluation, as well as our commitment to protecting our users' privacy with innovations like Private Cloud Compute.
+
+**Comment:** The paper discusses architectural innovations in foundation models, including a novel Parallel-Track Mixture-of-Experts transformer, which is relevant to model architecture and LLMs.
+
+**Relevance:** 10
+**Novelty:** 8
+
+---
+
+## 2. [Causal Language Control in Multilingual Transformers via Sparse Feature Steering](https://arxiv.org/abs/2507.13410) <a id="link2"></a>
+
+**ArXiv ID:** 2507.13410
+
+**Authors:** Cheng-Ting Chou, George Liu, Jessica Sun, Cole Blondin, Kevin Zhu, Vasu Sharma, Sean O'Brien
+
+**Abstract:** Deterministically controlling the target generation language of large multilingual language models (LLMs) remains a fundamental challenge, particularly in zero-shot settings where neither explicit language prompts nor fine-tuning are available. In this work, we investigate whether sparse autoencoder (SAE) features, previously shown to correlate with interpretable model behaviors, can be leveraged to steer the generated language of LLMs during inference. Leveraging pretrained SAEs on the residual streams of Gemma-2B and Gemma-9B, we identify features whose activations differ most significantly between English and four target languages: Chinese, Japanese, Spanish, and French. By modifying just a single SAE feature at one transformer layer, we achieve controlled language shifts with up to 90\% success, as measured by FastText language classification, while preserving semantic fidelity according to LaBSE (Language-Agnostic BERT Sentence Embedding) similarity. Our analysis reveals that language steering is most effective in mid-to-late transformer layers and is amplified by specific attention heads disproportionately associated with language-sensitive SAE features. These results demonstrate the promise of sparse feature steering as a lightweight and interpretable mechanism for controllable multilingual generation.
+
+**Comment:** The paper explores sparse feature steering in multilingual transformers, which aligns with representation learning and model architecture insights, particularly in sparse methods and transformer layers.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 3. [Large Language Models as Innovators: A Framework to Leverage Latent Space Exploration for Novelty Discovery](https://arxiv.org/abs/2507.13874) <a id="link3"></a>
+
+**ArXiv ID:** 2507.13874
+
+**Authors:** Mateusz Bystro\'nski, Miko{\l}aj Ho{\l}ysz, Grzegorz Piotrowski, Nitesh V. Chawla, Tomasz Kajdanowicz
+
+**Abstract:** Innovative idea generation remains a core challenge in AI, as large language models (LLMs) often struggle to produce outputs that are both novel and relevant. Despite their fluency, LLMs tend to replicate patterns seen during training, limiting their ability to diverge creatively without extensive prompt engineering. Prior work has addressed this through domain-specific heuristics and structured prompting pipelines, but such solutions are brittle and difficult to generalize. In this paper, we propose a model-agnostic latent-space ideation framework that enables controlled, scalable creativity by navigating the continuous embedding space of ideas. Unlike prior methods, our framework requires no handcrafted rules and adapts easily to different domains, input formats, and creative tasks. This paper introduces an early-stage prototype of our method, outlining the conceptual framework and preliminary results highlighting its potential as a general-purpose co-ideator for human-AI collaboration.
+
+**Comment:** The paper introduces a model-agnostic latent-space ideation framework for LLMs, which aligns with foundational research in LLM behavior and interpretability.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 4. [Change of Thought: Adaptive Test-Time Computation](https://arxiv.org/abs/2507.13569) <a id="link4"></a>
+
+**ArXiv ID:** 2507.13569
+
+**Authors:** Mrinal Mathur, Mike Doan, Barak Pearlmutter, Sergey Plis
+
+**Abstract:** Transformers evaluated in a single, fixed-depth pass are provably limited in expressive power to the constant-depth circuit class TC0. Running a Transformer autoregressively removes that ceiling -- first in next-token prediction and, more recently, in chain-of-thought reasoning. Both regimes rely on feedback loops that decode internal states into tokens only to re-encode them in subsequent steps. While this "thinking aloud" mirrors human reasoning, biological brains iterate without externalising intermediate states as language. To boost the expressive power of encoder Transformers without resorting to token-level autoregression, we introduce the SELF-Transformer: an encoder layer that iteratively refines its own attention weights to a fixed point. Instead of producing -- in one pass -- the alignment matrix that remixes the input sequence, the SELF-Transformer iteratively updates that matrix internally, scaling test-time computation with input difficulty. This adaptivity yields up to 20\% accuracy gains on encoder-style benchmarks without increasing parameter count, demonstrating that input-adaptive alignment at test time offers substantial benefits for only a modest extra compute budget. Self-Transformers thus recover much of the expressive power of iterative reasoning while preserving the simplicity of pure encoder architectures.
+
+**Comment:** The paper presents a novel SELF-Transformer architecture that iteratively refines attention weights, contributing to model architecture innovation.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 5. [Provable Low-Frequency Bias of In-Context Learning of Representations](https://arxiv.org/abs/2507.13540) <a id="link5"></a>
+
+**ArXiv ID:** 2507.13540
+
+**Authors:** Yongyi Yang, Hidenori Tanaka, Wei Hu
+
+**Abstract:** In-context learning (ICL) enables large language models (LLMs) to acquire new behaviors from the input sequence alone without any parameter updates. Recent studies have shown that ICL can surpass the original meaning learned in pretraining stage through internalizing the structure the data-generating process (DGP) of the prompt into the hidden representations. However, the mechanisms by which LLMs achieve this ability is left open. In this paper, we present the first rigorous explanation of such phenomena by introducing a unified framework of double convergence, where hidden representations converge both over context and across layers. This double convergence process leads to an implicit bias towards smooth (low-frequency) representations, which we prove analytically and verify empirically. Our theory explains several open empirical observations, including why learned representations exhibit globally structured but locally distorted geometry, and why their total energy decays without vanishing. Moreover, our theory predicts that ICL has an intrinsic robustness towards high-frequency noise, which we empirically confirm. These results provide new insights into the underlying mechanisms of ICL, and a theoretical foundation to study it that hopefully extends to more general data distributions and settings.
+
+**Comment:** The paper provides a theoretical explanation of in-context learning in LLMs, focusing on representation learning and offering new insights into the mechanisms of ICL.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 6. [Exploiting Primacy Effect To Improve Large Language Models](https://arxiv.org/abs/2507.13949) <a id="link6"></a>
+
+**ArXiv ID:** 2507.13949
+
+**Authors:** Bianca Raimondi, Maurizio Gabbrielli
+
+**Abstract:** Large Language Models (LLMs) have become essential in many Natural Language Processing (NLP) tasks, leveraging extensive pre-training and fine-tuning to achieve high accuracy. However, like humans, LLMs exhibit biases, particularly positional biases such as primacy and recency effects, which can influence the accuracy of the answers. The primacy effect-where items presented first are more likely to be remembered or selected-plays a key role in Multiple Choice Question Answering (MCQA), where the order of answer options can affect prediction outcomes. This study focuses on primacy bias in fine-tuned LLMs: We first show that fine-tuning amplifies this bias, probably due to exposure to human-like patterns. Hence, we strategically leverage this effect by reordering response options based on semantic similarity to the query, without requiring knowledge of the correct answer. Our experimental results show that this approach significantly improves performance in MCQA. More generally, our findings underscore the dual nature of biases as both challenges and opportunities, offering insights for bias-aware model design and NLP applications.
+
+**Comment:** The paper explores the primacy effect in LLMs, providing insights into LLM behavior and interpretability, which is relevant to foundational research in LLMs.
+
+**Relevance:** 9
+**Novelty:** 7
+
+---
+
+## 7. [On-the-Fly Fine-Tuning of Foundational Neural Network Potentials: A Bayesian Neural Network Approach](https://arxiv.org/abs/2507.13805) <a id="link7"></a>
+
+**ArXiv ID:** 2507.13805
+
+**Authors:** Tim Rensmeyer, Denis Kramer, Oliver Niggemann
+
+**Abstract:** Due to the computational complexity of evaluating interatomic forces from first principles, the creation of interatomic machine learning force fields has become a highly active field of research. However, the generation of training datasets of sufficient size and sample diversity itself comes with a computational burden that can make this approach impractical for modeling rare events or systems with a large configuration space. Fine-tuning foundation models that have been pre-trained on large-scale material or molecular databases offers a promising opportunity to reduce the amount of training data necessary to reach a desired level of accuracy. However, even if this approach requires less training data overall, creating a suitable training dataset can still be a very challenging problem, especially for systems with rare events and for end-users who don't have an extensive background in machine learning. In on-the-fly learning, the creation of a training dataset can be largely automated by using model uncertainty during the simulation to decide if the model is accurate enough or if a structure should be recalculated with classical methods and used to update the model. A key challenge for applying this form of active learning to the fine-tuning of foundation models is how to assess the uncertainty of those models during the fine-tuning process, even though most foundation models lack any form of uncertainty quantification. In this paper, we overcome this challenge by introducing a fine-tuning approach based on Bayesian neural network methods and a subsequent on-the-fly workflow that automatically fine-tunes the model while maintaining a pre-specified accuracy and can detect rare events such as transition states and sample them at an increased rate relative to their occurrence.
+
+**Comment:** The paper introduces a Bayesian neural network approach for fine-tuning foundational models in molecular modeling, which aligns with foundational research in AI for Science.
+
+**Relevance:** 9
+**Novelty:** 7
+
+---
+
+## 8. [Minimalist Concept Erasure in Generative Models](https://arxiv.org/abs/2507.13386) <a id="link8"></a>
+
+**ArXiv ID:** 2507.13386
+
+**Authors:** Yang Zhang, Er Jin, Yanfei Dong, Yixuan Wu, Philip Torr, Ashkan Khakzar, Johannes Stegmaier, Kenji Kawaguchi
+
+**Abstract:** Recent advances in generative models have demonstrated remarkable capabilities in producing high-quality images, but their reliance on large-scale unlabeled data has raised significant safety and copyright concerns. Efforts to address these issues by erasing unwanted concepts have shown promise. However, many existing erasure methods involve excessive modifications that compromise the overall utility of the model. In this work, we address these issues by formulating a novel minimalist concept erasure objective based \emph{only} on the distributional distance of final generation outputs. Building on our formulation, we derive a tractable loss for differentiable optimization that leverages backpropagation through all generation steps in an end-to-end manner. We also conduct extensive analysis to show theoretical connections with other models and methods. To improve the robustness of the erasure, we incorporate neuron masking as an alternative to model fine-tuning. Empirical evaluations on state-of-the-art flow-matching models demonstrate that our method robustly erases concepts without degrading overall model performance, paving the way for safer and more responsible generative models.
+
+**Comment:** The paper introduces a novel minimalist concept erasure method in generative models, which involves theoretical insights into model behavior and optimization. This aligns with the emerging trends criterion.
+
+**Relevance:** 8
+**Novelty:** 8
+
+---
+
+## 9. [SPARQL Query Generation with LLMs: Measuring the Impact of Training Data Memorization and Knowledge Injection](https://arxiv.org/abs/2507.13859) <a id="link9"></a>
+
+**ArXiv ID:** 2507.13859
+
+**Authors:** Aleksandr Gashkov, Aleksandr Perevalov, Maria Eltsova, Andreas Both
+
+**Abstract:** Nowadays, the importance of software with natural-language user interfaces cannot be underestimated. In particular, in Question Answering (QA) systems, generating a SPARQL query for a given natural-language question (often named Query Building) from the information retrieved from the same question is the central task of QA systems working over Knowledge Graphs (KGQA). Due to the rise of Large Language Models (LLMs), they are considered a well-suited method to increase the quality of the question-answering functionality, as there is still a lot of room for improvement, aiming for enhanced quality and trustworthiness. However, LLMs are trained on web data, where researchers have no control over whether the benchmark or the knowledge graph was already included in the training data. In this paper, we introduce a novel method that evaluates the quality of LLMs by generating a SPARQL query from a natural-language question under various conditions: (1) zero-shot SPARQL generation, (2) with knowledge injection, and (3) with "anonymized" knowledge injection. This enables us, for the first time, to estimate the influence of the training data on the QA quality improved by LLMs. Ultimately, this will help to identify how portable a method is or whether good results might mostly be achieved because a benchmark was already included in the training data (cf. LLM memorization). The developed method is portable, robust, and supports any knowledge graph; therefore, it could be easily applied to any KGQA or LLM, s.t., generating consistent insights into the actual LLM capabilities is possible.
+
+**Comment:** The paper discusses the impact of training data memorization and knowledge injection in LLMs, which relates to theoretical insights into LLM behavior.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 10. [Kolmogorov Arnold Networks (KANs) for Imbalanced Data -- An Empirical Perspective](https://arxiv.org/abs/2507.14121) <a id="link10"></a>
+
+**ArXiv ID:** 2507.14121
+
+**Authors:** Pankaj Yadav, Vivek Vijay
+
+**Abstract:** Kolmogorov Arnold Networks (KANs) are recent architectural advancement in neural computation that offer a mathematically grounded alternative to standard neural networks. This study presents an empirical evaluation of KANs in context of class imbalanced classification, using ten benchmark datasets. We observe that KANs can inherently perform well on raw imbalanced data more effectively than Multi-Layer Perceptrons (MLPs) without any resampling strategy. However, conventional imbalance strategies fundamentally conflict with KANs mathematical structure as resampling and focal loss implementations significantly degrade KANs performance, while marginally benefiting MLPs. Crucially, KANs suffer from prohibitive computational costs without proportional performance gains. Statistical validation confirms that MLPs with imbalance techniques achieve equivalence with KANs (|d| < 0.08 across metrics) at minimal resource costs. These findings reveal that KANs represent a specialized solution for raw imbalanced data where resources permit. But their severe performance-resource tradeoffs and incompatibility with standard resampling techniques currently limits practical deployment. We identify critical research priorities as developing KAN specific architectural modifications for imbalance learning, optimizing computational efficiency, and theoretical reconciling their conflict with data augmentation. This work establishes foundational insights for next generation KAN architectures in imbalanced classification scenarios.
+
+**Comment:** The paper introduces Kolmogorov Arnold Networks (KANs) as a new architectural advancement, which is relevant to model architecture innovations.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 11. [OmniVec2 -- A Novel Transformer based Network for Large Scale Multimodal and Multitask Learning](https://arxiv.org/abs/2507.13364) <a id="link11"></a>
+
+**ArXiv ID:** 2507.13364
+
+**Authors:** Siddharth Srivastava, Gaurav Sharma
+
+**Abstract:** We present a novel multimodal multitask network and associated training algorithm. The method is capable of ingesting data from approximately 12 different modalities namely image, video, audio, text, depth, point cloud, time series, tabular, graph, X-ray, infrared, IMU, and hyperspectral. The proposed approach utilizes modality specialized tokenizers, a shared transformer architecture, and cross-attention mechanisms to project the data from different modalities into a unified embedding space. It addresses multimodal and multitask scenarios by incorporating modality-specific task heads for different tasks in respective modalities. We propose a novel pretraining strategy with iterative modality switching to initialize the network, and a training algorithm which trades off fully joint training over all modalities, with training on pairs of modalities at a time. We provide comprehensive evaluation across 25 datasets from 12 modalities and show state of the art performances, demonstrating the effectiveness of the proposed architecture, pretraining strategy and adapted multitask training.
+
+**Comment:** The paper presents a novel transformer-based architecture for multimodal and multitask learning, which is relevant to model architecture innovations.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+# Paper Selection Prompt
+
+## System Prompt
+
+> You are a helpful paper reading assistant whose job is to read daily posts from ArXiv and identify a few papers that your friend will enjoy reading.
+> Your job is to carefully read the paper titles and abstracts below and find the ones that match the criteria below.
+
+## User Prompt
+
+> ## Instructions
+> 
+> Write the response in JSONL format with {ARXIVID, COMMENT, RELEVANCE, NOVELTY} on each line, one for each paper.
+> 
+> - ARXIVID: should be the ArXiv ID.
+> - COMMENT: should identify whether there is a criteria that match the paper very closely. These matches should not be based on general terms like "language modeling" or "advancements" and should specifically refer to a criterion. No need to mention the non-matching criteria.
+> - RELEVANCE: should be a score from 1-10.
+> - NOVELTY: should be a score from 1-10.
+> 
+> ## Scoring Criteria
+> 
+> > The "Relevance" score measures how closely the paper aligns with the core topics of the prompt.
+> > The "Novelty" score assesses the originality and impact of the paper.
+> > They are two **ORTHONORMAL** axes and **SHOULD NOT** be confused with each other.
+> 
+> ### Relevance Scoring
+> 
+> - Relevance 9-10 (Completely Relevant)
+>   - Focus: Fully aligned with core topics with no deviation, score the highest if contains relevant keywords in it.
+>   - Examples: Papers focused on foundational methods or theoretical research, whose titles contain topic keywords like "MoE".
+> 
+> - Relevance 7-8 (Relevant)
+>   - Focus: Retain a solid link to the main research area, though may touch on peripheral elements.
+>   - Examples: Papers research on the fundamental part of MoE through a less critical aspect like its behavior in GNN.
+> 
+> - Relevance 5-6 (Borderline)
+>   - Focus: Maintains a link to the core topic but also extends into at least one other domain/area beyond the primary focus.
+>   - Examples: Work referencing MoE centered on reinforcement learning.
+> 
+> - Relevance 3-4 (Irrelevant)
+>   - Focus: Largely outside our interests with no association to our topics.
+>   - Examples: Application-focused papers like using MoE to solve a problem in the real world.
+> 
+> - Relevance 1-2 (Ignore)
+>   - Focus: Purely unrelated to our topics. Completely a different domain.
+>   - **Exception**: If the paper hints at a cutting-edge, radically new direction that could eventually transform the primary domain, consider a score of 9–10 despite initial appearances. (Usually a very rare concept that belongs to the fundamental research)
+> 
+> ### Novelty Scoring
+> 
+> - Novelty 9-10 (Breakthrough)
+>   - Definition: Groundbreaking methods/theory introducing new directions or solving major challenges.
+>   - Examples: Entirely new paradigm for foundational models; a novel theory transforming representation learning.
+> 
+> - Novelty 7-8 (Improvements)
+>   - Definition: Substantial insights/enhancements, though not a full paradigm shift.
+>   - Examples: Modifications on existing methods yielding significantly better results.
+> 
+> - Novelty 5-6 (Borderline)
+>   - Definition: Incremental contributions with possible long-term benefits, not immediately transformative.
+>   - Examples: Moderately novel extension to an existing architecture; refining current methods without fundamentally altering them.
+> 
+> - Novelty 3-4 (Tangential)
+>   - Definition: Minor or domain-specific improvements with limited broader impact.
+>   - Examples: Slight modifications to known methods with strange motivation; purely engineering jobs like a new benchmark/dataset.
+> 
+> - Novelty 1-2 (Low)
+>   - Definition: Minimal originality, applying standard approaches without real innovation.
+>   - Examples: Using an off-the-shelf model without adding new insights; purely application-driven studies like finetuning a pretrained model using existing methods.
+> 
+> ## Papers
+> 
+> [PAPER LIST HERE]
+> 
+> ## Relevant Topics
+> 
+> Use the following relevance criteria to focus on foundational research. Keep **relevant** papers and filter out **irrelevant** ones. Avoid purely **application-driven** work.
+> 
+> 1. Representation Learning
+>    - Relevant: Insights into how deep networks encode information, feature/dictionary learning, sparse/contrastive methods, training dynamics in neural networks.
+>    - Irrelevant: Standard applications of known techniques lacking new theoretical or methodological contributions.
+> 
+> 2. Model Architecture
+>    - Relevant: Mixture-of-Experts (MoE), Transformers, Conditional/Dynamic Networks, Autoencoders, analysis on existing architectures (like encoder-decoder), or other architectural innovations.
+>    - Irrelevant: Merely using existing architectures for a certain task without insights into the structure themselves.
+> 
+> 3. Model Compression
+>    - Relevant: Sparsity, pruning, quantization, low-rank approaches, KV cache, or other algorithmic/theoretical efficiency breakthroughs.
+>    - Irrelevant: Straightforward applications of existing compression methods to new tasks.
+> 
+> 4. Large Language Models (LLMs)
+>    - Relevant: Major breakthroughs in pretraining or architecture, theoretical insights into LLM behavior/interpretability.
+>    - Irrelevant: Domain-specific usage (e.g., translation, jail-breaking), finetuning or inference tricks (e.g., instruction tuning, chain-of-thoughts, data mixing), or empirical dataset/benchmark studies and text-level analysis (e.g. hallucination, reasoning, safety).
+> 
+> 5. AI for Science
+>    - Relevant: Foundational research in molecular/protein modeling, new generative paradigms, or significant architecture-level innovations.
+>    - Irrelevant: Conventional, domain-specific applications without new theoretical perspectives.
+> 
+> 6. Emerging Trends
+>    - Relevant: Cutting-edge theoretical work challenging established assumptions or introducing broad new paradigms.
+>    - Irrelevant: Incremental improvements or trend-following without novel insights.
+> 
+> **Keywords:**
+> 
+> - Relevant: Mixture of Experts (MoE), Representation Learning, Compression/Efficiency, Sparse/Sparsity, Pruning, Quantization, Low-rank, Foundation Model, etc.
+> - Irrelevant: Reinforcement Learning, Transfer Learning, Federated Learning, Online Learning, Diffusion Models, etc.
+> - Application: Image Segmentation, Medical Imaging, 3D Vision, Video Understanding, Information Retrieval, Summarization, Recommendation Systems, Machine Translation, Speech Recognition, Signal Processing, Spatial/Temporal Modeling, Time Series, Knowledge Graph, etc.

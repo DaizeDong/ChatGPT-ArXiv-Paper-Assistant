@@ -1,0 +1,592 @@
+<div style="display: flex; align-items: flex-start; justify-content: space-between; width: 100%;"><div style="width: 33.33%; text-align: left;"><a href="../13"><img src="../../../assets/nav/day/2025-06-16-prev.svg" alt="Previous Day 2025-06-13"></a></div><div style="width: 33.33%; text-align: center;"><a href=".."><img src="../../../assets/nav/day/2025-06-16-center.svg" alt="Monthly Overview 2025-06"></a></div><div style="width: 33.33%; text-align: right;"><a href="../17"><img src="../../../assets/nav/day/2025-06-16-next.svg" alt="Next Day 2025-06-17"></a></div></div>
+
+# Personalized Daily ArXiv Papers 2025-06-16
+
+| *[gpt-4o]*   | Prompt   | Completion   | Total   |
+|:------------:|:--------:|:------------:|:-------:|
+| **Token**    | 41131    | 5352         | 46483   |
+| **Cost**     | $0.1     | $0.05        | $0.16   |
+
+Total arXiv papers: 610
+
+Total scanned papers: 396
+
+Total relevant papers: 26
+
+**Table of contents with paper titles:**
+
+1. [Forward Target Propagation: A Forward-Only Approach to Global Error Credit Assignment via Local Losses](#user-content-link1)
+**Authors:** Nazmus Saadat As-Saquib, A N M Nafiz Abeer, Hung-Ta Chien, Byung-Jun Yoon, Suhas Kumar, Su-in Yi
+
+2. [HEIST: A Graph Foundation Model for Spatial Transcriptomics and Proteomics Data](#user-content-link2)
+**Authors:** Hiren Madhu, Jo\~ao Felipe Rocha, Tinglin Huang, Siddharth Viswanath, Smita Krishnaswamy, Rex Ying
+
+3. [Large Language Models and Emergence: A Complex Systems Perspective](#user-content-link3)
+**Authors:** David C. Krakauer, John W. Krakauer, Melanie Mitchell
+
+4. [Interpretable representation learning of quantum data enabled by probabilistic variational autoencoders](#user-content-link4)
+**Authors:** Paulin de Schoulepnikoff, Gorka Mu\~noz-Gil, Hendrik Poulsen Nautrup, Hans J. Briegel
+
+5. [Boost Post-Training Quantization via Null Space Optimization for Large Language Models](#user-content-link5)
+**Authors:** Jiaqi Zhao, Miao Zhang, Weili Guan, Liqiang Nie
+
+6. [FIMA-Q: Post-Training Quantization for Vision Transformers by Fisher Information Matrix Approximation](#user-content-link6)
+**Authors:** Zhuguanyu Wu, Shihe Wang, Jiayi Zhang, Jiaxin Chen, Yunhong Wang
+
+7. [Dynamic Sparse Training of Diagonally Sparse Networks](#user-content-link7)
+**Authors:** Abhishek Tyagi, Arjun Iyer, William H Renninger, Christopher Kanan, Yuhao Zhu
+
+8. [A Framework for Non-Linear Attention via Modern Hopfield Networks](#user-content-link8)
+**Authors:** Ahmed Farooq
+
+9. [How Visual Representations Map to Language Feature Space in Multimodal LLMs](#user-content-link9)
+**Authors:** Constantin Venhoff, Ashkan Khakzar, Sonia Joseph, Philip Torr, Neel Nanda
+
+10. [Long-Short Alignment for Effective Long-Context Modeling in LLMs](#user-content-link10)
+**Authors:** Tianqi Du, Haotian Huang, Yifei Wang, Yisen Wang
+
+11. [MoTE: Mixture of Task-specific Experts for Pre-Trained ModelBased Class-incremental Learning](#user-content-link11)
+**Authors:** Linjie Li, Zhenyu Wu, Yang Ji
+
+12. [DAM: Dynamic Attention Mask for Long-Context Large Language Model Inference Acceleration](#user-content-link12)
+**Authors:** Hanzhi Zhang, Heng Fan, Kewei Sha, Yan Huang, Yunhe Feng
+
+13. [Solving Inverse Problems in Stochastic Self-Organising Systems through Invariant Representations](#user-content-link13)
+**Authors:** Elias Najarro, Nicolas Bessone, Sebastian Risi
+
+14. [Spectral Estimation with Free Decompression](#user-content-link14)
+**Authors:** Siavash Ameli, Chris van der Heide, Liam Hodgkinson, Michael W. Mahoney
+
+15. [Delayformer: spatiotemporal transformation for predicting high-dimensional dynamics](#user-content-link15)
+**Authors:** Zijian Wang, Peng Tao, Luonan Chen
+
+16. [Lifting Data-Tracing Machine Unlearning to Knowledge-Tracing for Foundation Models](#user-content-link16)
+**Authors:** Yuwen Tan, Boqing Gong
+
+17. [Brewing Knowledge in Context: Distillation Perspectives on In-Context Learning](#user-content-link17)
+**Authors:** Chengye Li, Haiyun Liu, Yuanxi Li
+
+18. [Tversky Neural Networks: Psychologically Plausible Deep Learning with Differentiable Tversky Similarity](#user-content-link18)
+**Authors:** Moussa Koulako Bala Doumbouya, Dan Jurafsky, Christopher D. Manning
+
+19. [STRCMP: Integrating Graph Structural Priors with Language Models for Combinatorial Optimization](#user-content-link19)
+**Authors:** Xijun Li, Jiexiang Yang, Jinghao Wang, Bo Peng, Jianguo Yao, Haibing Guan
+
+20. [TruncQuant: Truncation-Ready Quantization for DNNs with Flexible Weight Bit Precision](#user-content-link20)
+**Authors:** Jinhee Kim, Seoyeon Yoon, Taeho Lee, Joo Chan Lee, Kang Eun Jeon, Jong Hwan Ko
+
+21. [PolyMicros: Bootstrapping a Foundation Model for Polycrystalline Material Structure](#user-content-link21)
+**Authors:** Michael Buzzy, Andreas Robertson, Peng Chen, Surya Kalidindi
+
+22. [Tracing LLM Reasoning Processes with Strategic Games: A Framework for Planning, Revision, and Resource-Constrained Decision Making](#user-content-link22)
+**Authors:** Xiaopeng Yuan, Xingjian Zhang, Ke Xu, Yifan Xu, Lijun Yu, Jindong Wang, Yushun Dong, Haohan Wang
+
+23. [GenFT: A Generative Parameter-Efficient Fine-Tuning Method for Pretrained Foundation Models](#user-content-link23)
+**Authors:** Baoquan Zhang, Guangning Xu, Michael. K. Ng
+
+24. [Understanding Input Selectivity in Mamba: Impact on Approximation Power, Memorization, and Associative Recall Capacity](#user-content-link24)
+**Authors:** Ningyuan Huang, Miguel Sarabia, Abhinav Moudgil, Pau Rodriguez, Luca Zappella, Federico Danieli
+
+25. [An Attention-based Spatio-Temporal Neural Operator for Evolving Physics](#user-content-link25)
+**Authors:** Vispi Karkaria, Doksoo Lee, Yi-Ping Chen, Yue Yu, Wei Chen
+
+26. [Improving Large Language Model Safety with Contrastive Representation Learning](#user-content-link26)
+**Authors:** Samuel Simko, Mrinmaya Sachan, Bernhard Sch\"olkopf, Zhijing Jin
+
+---
+
+## 1. [Forward Target Propagation: A Forward-Only Approach to Global Error Credit Assignment via Local Losses](https://arxiv.org/abs/2506.11030) <a id="link1"></a>
+
+**ArXiv ID:** 2506.11030
+
+**Authors:** Nazmus Saadat As-Saquib, A N M Nafiz Abeer, Hung-Ta Chien, Byung-Jun Yoon, Suhas Kumar, Su-in Yi
+
+**Abstract:** Training neural networks has traditionally relied on backpropagation (BP), a gradient-based algorithm that, despite its widespread success, suffers from key limitations in both biological and hardware perspectives. These include backward error propagation by symmetric weights, non-local credit assignment, and frozen activity during backward passes. We propose Forward Target Propagation (FTP), a biologically plausible and computationally efficient alternative that replaces the backward pass with a second forward pass. FTP estimates layerwise targets using only feedforward computations, eliminating the need for symmetric feedback weights or learnable inverse functions, hence enabling modular and local learning. We evaluate FTP on fully connected networks, CNNs, and RNNs, demonstrating accuracies competitive with BP on MNIST, CIFAR10, and CIFAR100, as well as effective modeling of long-term dependencies in sequential tasks. Moreover, FTP outperforms BP under quantized low-precision and emerging hardware constraints while also demonstrating substantial efficiency gains over other biologically inspired methods such as target propagation variants and forward-only learning algorithms. With its minimal computational overhead, forward-only nature, and hardware compatibility, FTP provides a promising direction for energy-efficient on-device learning and neuromorphic computing.
+
+**Comment:** The paper introduces Forward Target Propagation, a novel approach to error credit assignment, relevant to model architecture and training dynamics.
+
+**Relevance:** 9
+**Novelty:** 9
+
+---
+
+## 2. [HEIST: A Graph Foundation Model for Spatial Transcriptomics and Proteomics Data](https://arxiv.org/abs/2506.11152) <a id="link2"></a>
+
+**ArXiv ID:** 2506.11152
+
+**Authors:** Hiren Madhu, Jo\~ao Felipe Rocha, Tinglin Huang, Siddharth Viswanath, Smita Krishnaswamy, Rex Ying
+
+**Abstract:** Single-cell transcriptomics has become a great source for data-driven insights into biology, enabling the use of advanced deep learning methods to understand cellular heterogeneity and transcriptional regulation at the single-cell level. With the advent of spatial transcriptomics data we have the promise of learning about cells within a tissue context as it provides both spatial coordinates and transcriptomic readouts. However, existing models either ignore spatial resolution or the gene regulatory information. Gene regulation in cells can change depending on microenvironmental cues from neighboring cells, but existing models neglect gene regulatory patterns with hierarchical dependencies across levels of abstraction. In order to create contextualized representations of cells and genes from spatial transcriptomics data, we introduce HEIST, a hierarchical graph transformer-based foundation model for spatial transcriptomics and proteomics data. HEIST models tissue as spatial cellular neighborhood graphs, and each cell is, in turn, modeled as a gene regulatory network graph. The framework includes a hierarchical graph transformer that performs cross-level message passing and message passing within levels. HEIST is pre-trained on 22.3M cells from 124 tissues across 15 organs using spatially-aware contrastive learning and masked auto-encoding objectives. Unsupervised analysis of HEIST representations of cells, shows that it effectively encodes the microenvironmental influences in cell embeddings, enabling the discovery of spatially-informed subpopulations that prior models fail to differentiate. Further, HEIST achieves state-of-the-art results on four downstream task such as clinical outcome prediction, cell type annotation, gene imputation, and spatially-informed cell clustering across multiple technologies, highlighting the importance of hierarchical modeling and GRN-based representations.
+
+**Comment:** The paper introduces HEIST, a hierarchical graph transformer-based foundation model for spatial transcriptomics and proteomics data, which aligns with the AI for Science criterion focusing on foundational research in molecular/protein modeling.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 3. [Large Language Models and Emergence: A Complex Systems Perspective](https://arxiv.org/abs/2506.11135) <a id="link3"></a>
+
+**ArXiv ID:** 2506.11135
+
+**Authors:** David C. Krakauer, John W. Krakauer, Melanie Mitchell
+
+**Abstract:** Emergence is a concept in complexity science that describes how many-body systems manifest novel higher-level properties, properties that can be described by replacing high-dimensional mechanisms with lower-dimensional effective variables and theories. This is captured by the idea "more is different". Intelligence is a consummate emergent property manifesting increasingly efficient -- cheaper and faster -- uses of emergent capabilities to solve problems. This is captured by the idea "less is more". In this paper, we first examine claims that Large Language Models exhibit emergent capabilities, reviewing several approaches to quantifying emergence, and secondly ask whether LLMs possess emergent intelligence.
+
+**Comment:** The paper examines the emergent capabilities of LLMs from a complex systems perspective, aligning with the Large Language Models criterion focusing on theoretical insights.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 4. [Interpretable representation learning of quantum data enabled by probabilistic variational autoencoders](https://arxiv.org/abs/2506.11982) <a id="link4"></a>
+
+**ArXiv ID:** 2506.11982
+
+**Authors:** Paulin de Schoulepnikoff, Gorka Mu\~noz-Gil, Hendrik Poulsen Nautrup, Hans J. Briegel
+
+**Abstract:** Interpretable machine learning is rapidly becoming a crucial tool for scientific discovery. Among existing approaches, variational autoencoders (VAEs) have shown promise in extracting the hidden physical features of some input data, with no supervision nor prior knowledge of the system at study. Yet, the ability of VAEs to create meaningful, interpretable representations relies on their accurate approximation of the underlying probability distribution of their input. When dealing with quantum data, VAEs must hence account for its intrinsic randomness and complex correlations. While VAEs have been previously applied to quantum data, they have often neglected its probabilistic nature, hindering the extraction of meaningful physical descriptors. Here, we demonstrate that two key modifications enable VAEs to learn physically meaningful latent representations: a decoder capable of faithfully reproduce quantum states and a probabilistic loss tailored to this task. Using benchmark quantum spin models, we identify regimes where standard methods fail while the representations learned by our approach remain meaningful and interpretable. Applied to experimental data from Rydberg atom arrays, the model autonomously uncovers the phase structure without access to prior labels, Hamiltonian details, or knowledge of relevant order parameters, highlighting its potential as an unsupervised and interpretable tool for the study of quantum systems.
+
+**Comment:** The paper focuses on representation learning using variational autoencoders (VAEs) for quantum data, introducing modifications to improve interpretability and representation of quantum states.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 5. [Boost Post-Training Quantization via Null Space Optimization for Large Language Models](https://arxiv.org/abs/2506.11044) <a id="link5"></a>
+
+**ArXiv ID:** 2506.11044
+
+**Authors:** Jiaqi Zhao, Miao Zhang, Weili Guan, Liqiang Nie
+
+**Abstract:** Existing post-training quantization methods for large language models (LLMs) offer remarkable success. However, the increasingly marginal performance gains suggest that existing quantization strategies are insufficient to support the development of more compressed models. To inspire new directions for future research, this paper introduces the concept of null space into LLMs quantization. We argue that the quantization error can be effectively alleviated by constraining the post-quantization weight perturbation to lie within the null space of input activations. To prove this idea, we propose a plug-and-play null space projection module for existing milestone PTQ baselines named Q2N. Specifically, we first design an efficient and accurate null space projection approximation method tailored to the characteristics of LLMs. Subsequently, we theoretically derive a closed-form solution for an equivalent vector of the obtained projection matrix, which satisfies practical inference condition while avoiding additional memory overhead. Extensive experiments are conducted on various state-of-the-art LLMs (LLaMA3, DeepSeek, Qwen3) and baselines, demonstrating the effectiveness of both our Q2N and the perspective of null space optimization for LLMs quantization. We view this paper the first step to further alleviate the quantization error based on the insights of null space, hoping it inspiring future researchers to design more advanced quantization methods. Codes are available at https://github.com/zjq0455/q2n.
+
+**Comment:** The paper introduces a novel approach to post-training quantization for large language models using null space optimization, which is a significant contribution to model compression.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 6. [FIMA-Q: Post-Training Quantization for Vision Transformers by Fisher Information Matrix Approximation](https://arxiv.org/abs/2506.11543) <a id="link6"></a>
+
+**ArXiv ID:** 2506.11543
+
+**Authors:** Zhuguanyu Wu, Shihe Wang, Jiayi Zhang, Jiaxin Chen, Yunhong Wang
+
+**Abstract:** Post-training quantization (PTQ) has stood out as a cost-effective and promising model compression paradigm in recent years, as it avoids computationally intensive model retraining. Nevertheless, current PTQ methods for Vision Transformers (ViTs) still suffer from significant accuracy degradation, especially under low-bit quantization. To address these shortcomings, we analyze the prevailing Hessian-guided quantization loss, and uncover certain limitations of conventional Hessian approximations. By following the block-wise reconstruction framework, we propose a novel PTQ method for ViTs, dubbed FIMA-Q. Specifically, we firstly establish the connection between KL divergence and FIM, which enables fast computation of the quantization loss during reconstruction. We further propose an efficient FIM approximation method, namely DPLR-FIM, by employing the diagonal plus low-rank principle, and formulate the ultimate quantization loss. Our extensive experiments, conducted across various vision tasks with representative ViT-based architectures on public datasets, demonstrate that our method substantially promotes the accuracy compared to the state-of-the-art approaches, especially in the case of low-bit quantization. The source code is available at https://github.com/ShiheWang/FIMA-Q.
+
+**Comment:** The paper introduces FIMA-Q, a post-training quantization method for Vision Transformers using Fisher Information Matrix approximation, contributing to model compression.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 7. [Dynamic Sparse Training of Diagonally Sparse Networks](https://arxiv.org/abs/2506.11449) <a id="link7"></a>
+
+**ArXiv ID:** 2506.11449
+
+**Authors:** Abhishek Tyagi, Arjun Iyer, William H Renninger, Christopher Kanan, Yuhao Zhu
+
+**Abstract:** Recent advances in Dynamic Sparse Training (DST) have pushed the frontier of sparse neural network training in structured and unstructured contexts, matching dense-model performance while drastically reducing parameter counts to facilitate model scaling. However, unstructured sparsity often fails to translate into practical speedups on modern hardware. To address this shortcoming, we propose DynaDiag, a novel structured sparse-to-sparse DST method that performs at par with unstructured sparsity. DynaDiag enforces a diagonal sparsity pattern throughout training and preserves sparse computation in forward and backward passes. We further leverage the diagonal structure to accelerate computation via a custom CUDA kernel, rendering the method hardware-friendly. Empirical evaluations on diverse neural architectures demonstrate that our method maintains accuracy on par with unstructured counterparts while benefiting from tangible computational gains. Notably, with 90% sparse linear layers in ViTs, we observe up to a 3.13x speedup in online inference without sacrificing model performance and a 1.59x speedup in training on a GPU compared to equivalent unstructured layers. Our source code is available at https://github.com/horizon-research/DynaDiag/.
+
+**Comment:** The paper proposes a novel structured sparse-to-sparse training method, which aligns with the model compression criterion.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 8. [A Framework for Non-Linear Attention via Modern Hopfield Networks](https://arxiv.org/abs/2506.11043) <a id="link8"></a>
+
+**ArXiv ID:** 2506.11043
+
+**Authors:** Ahmed Farooq
+
+**Abstract:** In this work we propose an energy functional along the lines of Modern Hopfield Networks (MNH), the stationary points of which correspond to the attention due to Vaswani et al. [12], thus unifying both frameworks. The minima of this landscape form "context wells" - stable configurations that encapsulate the contextual relationships among tokens. A compelling picture emerges: across $n$ token embeddings an energy landscape is defined whose gradient corresponds to the attention computation. Non-linear attention mechanisms offer a means to enhance the capabilities of transformer models for various sequence modeling tasks by improving the model's understanding of complex relationships, learning of representations, and overall efficiency and performance. A rough analogy can be seen via cubic splines which offer a richer representation of non-linear data where a simpler linear model may be inadequate. This approach can be used for the introduction of non-linear heads in transformer based models such as BERT, [6], etc.
+
+**Comment:** The paper proposes a framework for non-linear attention via Modern Hopfield Networks, which aligns with the model architecture criterion.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 9. [How Visual Representations Map to Language Feature Space in Multimodal LLMs](https://arxiv.org/abs/2506.11976) <a id="link9"></a>
+
+**ArXiv ID:** 2506.11976
+
+**Authors:** Constantin Venhoff, Ashkan Khakzar, Sonia Joseph, Philip Torr, Neel Nanda
+
+**Abstract:** Effective multimodal reasoning depends on the alignment of visual and linguistic representations, yet the mechanisms by which vision-language models (VLMs) achieve this alignment remain poorly understood. We introduce a methodological framework that deliberately maintains a frozen large language model (LLM) and a frozen vision transformer (ViT), connected solely by training a linear adapter during visual instruction tuning. This design is fundamental to our approach: by keeping the language model frozen, we ensure it maintains its original language representations without adaptation to visual data. Consequently, the linear adapter must map visual features directly into the LLM's existing representational space rather than allowing the language model to develop specialized visual understanding through fine-tuning. Our experimental design uniquely enables the use of pre-trained sparse autoencoders (SAEs) of the LLM as analytical probes. These SAEs remain perfectly aligned with the unchanged language model and serve as a snapshot of the learned language feature-representations. Through systematic analysis of SAE reconstruction error, sparsity patterns, and feature SAE descriptions, we reveal the layer-wise progression through which visual representations gradually align with language feature representations, converging in middle-to-later layers. This suggests a fundamental misalignment between ViT outputs and early LLM layers, raising important questions about whether current adapter-based architectures optimally facilitate cross-modal representation learning.
+
+**Comment:** The paper explores the alignment of visual and linguistic representations in multimodal models, focusing on representation learning and the use of sparse autoencoders.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 10. [Long-Short Alignment for Effective Long-Context Modeling in LLMs](https://arxiv.org/abs/2506.11769) <a id="link10"></a>
+
+**ArXiv ID:** 2506.11769
+
+**Authors:** Tianqi Du, Haotian Huang, Yifei Wang, Yisen Wang
+
+**Abstract:** Large language models (LLMs) have exhibited impressive performance and surprising emergent properties. However, their effectiveness remains limited by the fixed context window of the transformer architecture, posing challenges for long-context modeling. Among these challenges, length generalization -- the ability to generalize to sequences longer than those seen during training -- is a classical and fundamental problem. In this work, we propose a fresh perspective on length generalization, shifting the focus from the conventional emphasis on input features such as positional encodings or data structures to the output distribution of the model. Specifically, through case studies on synthetic tasks, we highlight the critical role of \textbf{long-short alignment} -- the consistency of output distributions across sequences of varying lengths. Extending this insight to natural language tasks, we propose a metric called Long-Short Misalignment to quantify this phenomenon, uncovering a strong correlation between the metric and length generalization performance. Building on these findings, we develop a regularization term that promotes long-short alignment during training. Extensive experiments validate the effectiveness of our approach, offering new insights for achieving more effective long-context modeling in LLMs. Code is available at https://github.com/PKU-ML/LongShortAlignment.
+
+**Comment:** The paper proposes a new perspective on length generalization in LLMs, focusing on long-short alignment, relevant to LLM behavior and architecture.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 11. [MoTE: Mixture of Task-specific Experts for Pre-Trained ModelBased Class-incremental Learning](https://arxiv.org/abs/2506.11038) <a id="link11"></a>
+
+**ArXiv ID:** 2506.11038
+
+**Authors:** Linjie Li, Zhenyu Wu, Yang Ji
+
+**Abstract:** Class-incremental learning (CIL) requires deep learning models to continuously acquire new knowledge from streaming data while preserving previously learned information. Recently, CIL based on pre-trained models (PTMs) has achieved remarkable success. However, prompt-based approaches suffer from prompt overwriting, while adapter-based methods face challenges such as dimensional misalignment between tasks. While the idea of expert fusion in Mixture of Experts (MoE) can help address dimensional inconsistency, both expert and routing parameters are prone to being overwritten in dynamic environments, making MoE challenging to apply directly in CIL. To tackle these issues, we propose a mixture of task-specific experts (MoTE) framework that effectively mitigates the miscalibration caused by inconsistent output dimensions across tasks. Inspired by the weighted feature fusion and sparse activation mechanisms in MoE, we introduce task-aware expert filtering and reliable expert joint inference during the inference phase, mimicking the behavior of routing layers without inducing catastrophic forgetting. Extensive experiments demonstrate the superiority of our method without requiring an exemplar set. Furthermore, the number of tasks in MoTE scales linearly with the number of adapters. Building on this, we further explore the trade-off between adapter expansion and model performance and propose the Adapter-Limited MoTE. The code is available at https://github.com/Franklilinjie/MoTE.
+
+**Comment:** The paper proposes MoTE, a mixture of task-specific experts framework, aligning with the Model Architecture criterion focusing on Mixture-of-Experts.
+
+**Relevance:** 9
+**Novelty:** 7
+
+---
+
+## 12. [DAM: Dynamic Attention Mask for Long-Context Large Language Model Inference Acceleration](https://arxiv.org/abs/2506.11104) <a id="link12"></a>
+
+**ArXiv ID:** 2506.11104
+
+**Authors:** Hanzhi Zhang, Heng Fan, Kewei Sha, Yan Huang, Yunhe Feng
+
+**Abstract:** Long-context understanding is crucial for many NLP applications, yet transformers struggle with efficiency due to the quadratic complexity of self-attention. Sparse attention methods alleviate this cost but often impose static, predefined masks, failing to capture heterogeneous attention patterns. This results in suboptimal token interactions, limiting adaptability and retrieval accuracy in long-sequence tasks. This work introduces a dynamic sparse attention mechanism that assigns adaptive masks at the attention-map level, preserving heterogeneous patterns across layers and heads. Unlike existing approaches, our method eliminates the need for fine-tuning and predefined mask structures while maintaining computational efficiency. By learning context-aware attention structures, it achieves high alignment with full-attention models, ensuring minimal performance degradation while reducing memory and compute overhead. This approach provides a scalable alternative to full attention, enabling the practical deployment of large-scale Large Language Models (LLMs) without sacrificing retrieval performance. DAM is available at: https://github.com/HanzhiZhang-Ulrica/DAM.
+
+**Comment:** The paper introduces a dynamic sparse attention mechanism for LLMs, which aligns with the model compression and LLM criteria.
+
+**Relevance:** 9
+**Novelty:** 7
+
+---
+
+## 13. [Solving Inverse Problems in Stochastic Self-Organising Systems through Invariant Representations](https://arxiv.org/abs/2506.11796) <a id="link13"></a>
+
+**ArXiv ID:** 2506.11796
+
+**Authors:** Elias Najarro, Nicolas Bessone, Sebastian Risi
+
+**Abstract:** Self-organising systems demonstrate how simple local rules can generate complex stochastic patterns. Many natural systems rely on such dynamics, making self-organisation central to understanding natural complexity. A fundamental challenge in modelling such systems is solving the inverse problem: finding the unknown causal parameters from macroscopic observations. This task becomes particularly difficult when observations have a strong stochastic component, yielding diverse yet equivalent patterns. Traditional inverse methods fail in this setting, as pixel-wise metrics cannot capture feature similarities between variable outcomes. In this work, we introduce a novel inverse modelling method specifically designed to handle stochasticity in the observable space, leveraging the capacity of visual embeddings to produce robust representations that capture perceptual invariances. By mapping the pattern representations onto an invariant embedding space, we can effectively recover unknown causal parameters without the need for handcrafted objective functions or heuristics. We evaluate the method on two canonical models--a reaction-diffusion system and an agent-based model of social segregation--and show that it reliably recovers parameters despite stochasticity in the outcomes. We further apply the method to real biological patterns, highlighting its potential as a tool for both theorists and experimentalists to investigate the dynamics underlying complex stochastic pattern formation.
+
+**Comment:** The paper introduces a novel inverse modeling method for stochastic self-organizing systems, aligning with the Emerging Trends criterion focusing on cutting-edge theoretical work.
+
+**Relevance:** 8
+**Novelty:** 8
+
+---
+
+## 14. [Spectral Estimation with Free Decompression](https://arxiv.org/abs/2506.11994) <a id="link14"></a>
+
+**ArXiv ID:** 2506.11994
+
+**Authors:** Siavash Ameli, Chris van der Heide, Liam Hodgkinson, Michael W. Mahoney
+
+**Abstract:** Computing eigenvalues of very large matrices is a critical task in many machine learning applications, including the evaluation of log-determinants, the trace of matrix functions, and other important metrics. As datasets continue to grow in scale, the corresponding covariance and kernel matrices become increasingly large, often reaching magnitudes that make their direct formation impractical or impossible. Existing techniques typically rely on matrix-vector products, which can provide efficient approximations, if the matrix spectrum behaves well. However, in settings like distributed learning, or when the matrix is defined only indirectly, access to the full data set can be restricted to only very small sub-matrices of the original matrix. In these cases, the matrix of nominal interest is not even available as an implicit operator, meaning that even matrix-vector products may not be available. In such settings, the matrix is "impalpable," in the sense that we have access to only masked snapshots of it. We draw on principles from free probability theory to introduce a novel method of "free decompression" to estimate the spectrum of such matrices. Our method can be used to extrapolate from the empirical spectral densities of small submatrices to infer the eigenspectrum of extremely large (impalpable) matrices (that we cannot form or even evaluate with full matrix-vector products). We demonstrate the effectiveness of this approach through a series of examples, comparing its performance against known limiting distributions from random matrix theory in synthetic settings, as well as applying it to submatrices of real-world datasets, matching them with their full empirical eigenspectra.
+
+**Comment:** The paper introduces a novel method for spectral estimation using free decompression, which is a theoretical advancement in handling large matrices.
+
+**Relevance:** 8
+**Novelty:** 8
+
+---
+
+## 15. [Delayformer: spatiotemporal transformation for predicting high-dimensional dynamics](https://arxiv.org/abs/2506.11528) <a id="link15"></a>
+
+**ArXiv ID:** 2506.11528
+
+**Authors:** Zijian Wang, Peng Tao, Luonan Chen
+
+**Abstract:** Predicting time-series is of great importance in various scientific and engineering fields. However, in the context of limited and noisy data, accurately predicting dynamics of all variables in a high-dimensional system is a challenging task due to their nonlinearity and also complex interactions. Current methods including deep learning approaches often perform poorly for real-world systems under such circumstances. This study introduces the Delayformer framework for simultaneously predicting dynamics of all variables, by developing a novel multivariate spatiotemporal information (mvSTI) transformation that makes each observed variable into a delay-embedded state (vector) and further cross-learns those states from different variables. From dynamical systems viewpoint, Delayformer predicts system states rather than individual variables, thus theoretically and computationally overcoming such nonlinearity and cross-interaction problems. Specifically, it first utilizes a single shared Visual Transformer (ViT) encoder to cross-represent dynamical states from observed variables in a delay embedded form and then employs distinct linear decoders for predicting next states, i.e. equivalently predicting all original variables parallelly. By leveraging the theoretical foundations of delay embedding theory and the representational capabilities of Transformers, Delayformer outperforms current state-of-the-art methods in forecasting tasks on both synthetic and real-world datasets. Furthermore, the potential of Delayformer as a foundational time-series model is demonstrated through cross-domain forecasting tasks, highlighting its broad applicability across various scenarios.
+
+**Comment:** The paper introduces Delayformer, a novel framework for time-series prediction using spatiotemporal transformation, which is a new paradigm in time-series modeling.
+
+**Relevance:** 8
+**Novelty:** 8
+
+---
+
+## 16. [Lifting Data-Tracing Machine Unlearning to Knowledge-Tracing for Foundation Models](https://arxiv.org/abs/2506.11253) <a id="link16"></a>
+
+**ArXiv ID:** 2506.11253
+
+**Authors:** Yuwen Tan, Boqing Gong
+
+**Abstract:** Machine unlearning removes certain training data points and their influence on AI models (e.g., when a data owner revokes their decision to allow models to learn from the data). In this position paper, we propose to lift data-tracing machine unlearning to knowledge-tracing for foundation models (FMs). We support this position based on practical needs and insights from cognitive studies. Practically, tracing data cannot meet the diverse unlearning requests for FMs, which may be from regulators, enterprise users, product teams, etc., having no access to FMs' massive training data. Instead, it is convenient for these parties to issue an unlearning request about the knowledge or capability FMs (should not) possess. Cognitively, knowledge-tracing unlearning aligns with how the human brain forgets more closely than tracing individual training data points. Finally, we provide a concrete case study about a vision-language FM to illustrate how an unlearner might instantiate the knowledge-tracing machine unlearning paradigm.
+
+**Comment:** The paper discusses knowledge-tracing for foundation models, which is a novel perspective on model unlearning and relevant to foundational model research.
+
+**Relevance:** 8
+**Novelty:** 8
+
+---
+
+## 17. [Brewing Knowledge in Context: Distillation Perspectives on In-Context Learning](https://arxiv.org/abs/2506.11516) <a id="link17"></a>
+
+**ArXiv ID:** 2506.11516
+
+**Authors:** Chengye Li, Haiyun Liu, Yuanxi Li
+
+**Abstract:** In-context learning (ICL) allows large language models (LLMs) to solve novel tasks without weight updates. Despite its empirical success, the mechanism behind ICL remains poorly understood, limiting our ability to interpret, improve, and reliably apply it. In this paper, we propose a new theoretical perspective that interprets ICL as an implicit form of knowledge distillation (KD), where prompt demonstrations guide the model to form a task-specific reference model during inference. Under this view, we derive a Rademacher complexity-based generalization bound and prove that the bias of the distilled weights grows linearly with the Maximum Mean Discrepancy (MMD) between the prompt and target distributions. This theoretical framework explains several empirical phenomena and unifies prior gradient-based and distributional analyses. To the best of our knowledge, this is the first to formalize inference-time attention as a distillation process, which provides theoretical insights for future prompt engineering and automated demonstration selection.
+
+**Comment:** The paper offers a theoretical perspective on in-context learning as knowledge distillation, relevant to understanding LLM behavior.
+
+**Relevance:** 8
+**Novelty:** 8
+
+---
+
+## 18. [Tversky Neural Networks: Psychologically Plausible Deep Learning with Differentiable Tversky Similarity](https://arxiv.org/abs/2506.11035) <a id="link18"></a>
+
+**ArXiv ID:** 2506.11035
+
+**Authors:** Moussa Koulako Bala Doumbouya, Dan Jurafsky, Christopher D. Manning
+
+**Abstract:** Work in psychology has highlighted that the geometric model of similarity standard in deep learning is not psychologically plausible because its metric properties such as symmetry do not align with human perception. In contrast, Tversky (1977) proposed an axiomatic theory of similarity based on a representation of objects as sets of features, and their similarity as a function of common and distinctive features. However, this model has not been used in deep learning before, partly due to the challenge of incorporating discrete set operations. We develop a differentiable parameterization of Tversky's similarity that is learnable through gradient descent, and derive neural network building blocks such as the Tversky projection layer, which unlike the linear projection layer can model non-linear functions such as XOR. Through experiments with image recognition and language modeling, we show that the Tversky projection layer is a beneficial replacement for the linear projection layer, which employs geometric similarity. On the NABirds image classification task, a frozen ResNet-50 adapted with a Tversky projection layer achieves a 24.7% relative accuracy improvement over the linear layer adapter baseline. With Tversky projection layers, GPT-2's perplexity on PTB decreases by 7.5%, and its parameter count by 34.8%. Finally, we propose a unified interpretation of both projection layers as computing similarities of input stimuli to learned prototypes, for which we also propose a novel visualization technique highlighting the interpretability of Tversky projection layers. Our work offers a new paradigm for thinking about the similarity model implicit in deep learning, and designing networks that are interpretable under an established theory of psychological similarity.
+
+**Comment:** The paper introduces a novel neural network building block based on Tversky's similarity, which is relevant to model architecture innovations.
+
+**Relevance:** 8
+**Novelty:** 8
+
+---
+
+## 19. [STRCMP: Integrating Graph Structural Priors with Language Models for Combinatorial Optimization](https://arxiv.org/abs/2506.11057) <a id="link19"></a>
+
+**ArXiv ID:** 2506.11057
+
+**Authors:** Xijun Li, Jiexiang Yang, Jinghao Wang, Bo Peng, Jianguo Yao, Haibing Guan
+
+**Abstract:** Combinatorial optimization (CO) problems, central to operation research and theoretical computer science, present significant computational challenges due to their NP-hard nature. While large language models (LLMs) have emerged as promising tools for CO--either by directly generating solutions or synthesizing solver-specific codes--existing approaches often neglect critical structural priors inherent to CO problems, leading to suboptimality and iterative inefficiency. Inspired by human experts' success in leveraging CO structures for algorithm design, we propose STRCMP, a novel structure-aware LLM-based algorithm discovery framework that systematically integrates structure priors to enhance solution quality and solving efficiency. Our framework combines a graph neural network (GNN) for extracting structural embeddings from CO instances with an LLM conditioned on these embeddings to identify high-performing algorithms in the form of solver-specific codes. This composite architecture ensures syntactic correctness, preserves problem topology, and aligns with natural language objectives, while an evolutionary refinement process iteratively optimizes generated algorithm. Extensive evaluations across Mixed Integer Linear Programming and Boolean Satisfiability problems, using nine benchmark datasets, demonstrate that our proposed STRCMP outperforms five strong neural and LLM-based methods by a large margin, in terms of both solution optimality and computational efficiency. The code and learned model will be publicly available upon the acceptance of the paper.
+
+**Comment:** The paper introduces a novel framework integrating graph structural priors with LLMs for combinatorial optimization, aligning with foundational research in model architecture and LLMs.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 20. [TruncQuant: Truncation-Ready Quantization for DNNs with Flexible Weight Bit Precision](https://arxiv.org/abs/2506.11431) <a id="link20"></a>
+
+**ArXiv ID:** 2506.11431
+
+**Authors:** Jinhee Kim, Seoyeon Yoon, Taeho Lee, Joo Chan Lee, Kang Eun Jeon, Jong Hwan Ko
+
+**Abstract:** The deployment of deep neural networks on edge devices is a challenging task due to the increasing complexity of state-of-the-art models, requiring efforts to reduce model size and inference latency. Recent studies explore models operating at diverse quantization settings to find the optimal point that balances computational efficiency and accuracy. Truncation, an effective approach for achieving lower bit precision mapping, enables a single model to adapt to various hardware platforms with little to no cost. However, formulating a training scheme for deep neural networks to withstand the associated errors introduced by truncation remains a challenge, as the current quantization-aware training schemes are not designed for the truncation process. We propose TruncQuant, a novel truncation-ready training scheme allowing flexible bit precision through bit-shifting in runtime. We achieve this by aligning TruncQuant with the output of the truncation process, demonstrating strong robustness across bit-width settings, and offering an easily implementable training scheme within existing quantization-aware frameworks. Our code is released at https://github.com/a2jinhee/TruncQuant.
+
+**Comment:** The paper introduces a novel quantization method, TruncQuant, which is relevant to model compression and efficiency.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 21. [PolyMicros: Bootstrapping a Foundation Model for Polycrystalline Material Structure](https://arxiv.org/abs/2506.11055) <a id="link21"></a>
+
+**ArXiv ID:** 2506.11055
+
+**Authors:** Michael Buzzy, Andreas Robertson, Peng Chen, Surya Kalidindi
+
+**Abstract:** Recent advances in Foundation Models for Materials Science are poised to revolutionize the discovery, manufacture, and design of novel materials with tailored properties and responses. Although great strides have been made, successes have been restricted to materials classes where multi-million sample data repositories can be readily curated (e.g., atomistic structures). Unfortunately, for many structural and functional materials (e.g., mesoscale structured metal alloys), such datasets are too costly or prohibitive to construct; instead, datasets are limited to very few examples. To address this challenge, we introduce a novel machine learning approach for learning from hyper-sparse, complex spatial data in scientific domains. Our core contribution is a physics-driven data augmentation scheme that leverages an ensemble of local generative models, trained on as few as five experimental observations, and coordinates them through a novel diversity curation strategy to generate a large-scale, physically diverse dataset. We utilize this framework to construct PolyMicros, the first Foundation Model for polycrystalline materials (a structural material class important across a broad range of industrial and scientific applications). We demonstrate the utility of PolyMicros by zero-shot solving several long standing challenges related to accelerating 3D experimental microscopy. Finally, we make both our models and datasets openly available to the community.
+
+**Comment:** The paper introduces a foundation model for polycrystalline materials, which is relevant to foundational research in AI for Science.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 22. [Tracing LLM Reasoning Processes with Strategic Games: A Framework for Planning, Revision, and Resource-Constrained Decision Making](https://arxiv.org/abs/2506.12012) <a id="link22"></a>
+
+**ArXiv ID:** 2506.12012
+
+**Authors:** Xiaopeng Yuan, Xingjian Zhang, Ke Xu, Yifan Xu, Lijun Yu, Jindong Wang, Yushun Dong, Haohan Wang
+
+**Abstract:** Large language models (LLMs) are increasingly used for tasks that require complex reasoning. Most benchmarks focus on final outcomes but overlook the intermediate reasoning steps - such as planning, revision, and decision making under resource constraints. We argue that measuring these internal processes is essential for understanding model behavior and improving reliability. We propose using strategic games as a natural evaluation environment: closed, rule-based systems with clear states, limited resources, and automatic feedback. We introduce a framework that evaluates LLMs along three core dimensions: planning, revision, and resource-constrained decision making. To operationalize this, we define metrics beyond win rate, including overcorrection risk rate, correction success rate, improvement slope, and over-budget ratio. In 4320 adversarial rounds across 12 leading models, ChatGPT-o3-mini achieves the top composite score, with a win rate of 74.7 percent, a correction success rate of 78.6 percent, and an improvement slope of 0.041. By contrast, Qwen-Plus, despite an overcorrection risk rate of 81.6 percent, wins only 25.6 percent of its matches - primarily due to excessive resource use. We also observe a negative correlation between overcorrection risk rate and correction success rate (Pearson r = -0.51, p = 0.093), suggesting that more frequent edits do not always improve outcomes. Our findings highlight the value of assessing not only what LLMs decide but how they arrive at those decisions
+
+**Comment:** The paper discusses a framework for evaluating LLMs' reasoning processes, which aligns with the Large Language Models criterion focusing on theoretical insights into LLM behavior.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 23. [GenFT: A Generative Parameter-Efficient Fine-Tuning Method for Pretrained Foundation Models](https://arxiv.org/abs/2506.11042) <a id="link23"></a>
+
+**ArXiv ID:** 2506.11042
+
+**Authors:** Baoquan Zhang, Guangning Xu, Michael. K. Ng
+
+**Abstract:** Pretrained Foundation Models (PFMs) have transformed numerous applications by enabling efficient adaptation to customized tasks. Parameter-Efficient Fine-Tuning (PEFT) has emerged as a resource-efficient alternative to full fine-tuning, especially leveraging reparameterized weights $\Delta W$ to adapt models for downstream tasks. However, a critical yet underexplored question remains: can we utilize well-pretrained weights $W_0$ to guide the update of task-specific $\Delta W$, avoiding inefficient training it from scratch? To end this, we propose Generative Parameter-Efficient Fine-Tuning (GenFT), a novel method that extracts structured, transferable information from $W_0$ for efficient $\Delta W$ training. To extract row and column structure information, GenFT applies row and column transformations to distill essential patterns from $W_0$. A tailored policy further decomposes $\Delta W$ into layer-shared and layer-specific components, balancing information reuse and individualized flexibility. GenFT is simple yet effective, achieving superior performance across CV and NLP tasks. Extensive experiments on VTAB-1K, FGVC, and GLUE benchmarks demonstrate that GenFT outperforms state-of-the-art PEFT methods, offering a new perspective for efficient model adaptation.
+
+**Comment:** The paper proposes GenFT, a generative parameter-efficient fine-tuning method for pretrained foundation models, which is a novel approach in model adaptation.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 24. [Understanding Input Selectivity in Mamba: Impact on Approximation Power, Memorization, and Associative Recall Capacity](https://arxiv.org/abs/2506.11891) <a id="link24"></a>
+
+**ArXiv ID:** 2506.11891
+
+**Authors:** Ningyuan Huang, Miguel Sarabia, Abhinav Moudgil, Pau Rodriguez, Luca Zappella, Federico Danieli
+
+**Abstract:** State-Space Models (SSMs), and particularly Mamba, have recently emerged as a promising alternative to Transformers. Mamba introduces input selectivity to its SSM layer (S6) and incorporates convolution and gating into its block definition. While these modifications do improve Mamba's performance over its SSM predecessors, it remains largely unclear how Mamba leverages the additional functionalities provided by input selectivity, and how these interact with the other operations in the Mamba architecture. In this work, we demystify the role of input selectivity in Mamba, investigating its impact on function approximation power, long-term memorization, and associative recall capabilities. In particular: (i) we prove that the S6 layer of Mamba can represent projections onto Haar wavelets, providing an edge over its Diagonal SSM (S4D) predecessor in approximating discontinuous functions commonly arising in practice; (ii) we show how the S6 layer can dynamically counteract memory decay; (iii) we provide analytical solutions to the MQAR associative recall task using the Mamba architecture with different mixers -- Mamba, Mamba-2, and S4D. We demonstrate the tightness of our theoretical constructions with empirical results on concrete tasks. Our findings offer a mechanistic understanding of Mamba and reveal opportunities for improvement.
+
+**Comment:** The paper provides a theoretical analysis of input selectivity in Mamba, a state-space model, contributing to understanding model architecture and representation learning.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 25. [An Attention-based Spatio-Temporal Neural Operator for Evolving Physics](https://arxiv.org/abs/2506.11328) <a id="link25"></a>
+
+**ArXiv ID:** 2506.11328
+
+**Authors:** Vispi Karkaria, Doksoo Lee, Yi-Ping Chen, Yue Yu, Wei Chen
+
+**Abstract:** In scientific machine learning (SciML), a key challenge is learning unknown, evolving physical processes and making predictions across spatio-temporal scales. For example, in real-world manufacturing problems like additive manufacturing, users adjust known machine settings while unknown environmental parameters simultaneously fluctuate. To make reliable predictions, it is desired for a model to not only capture long-range spatio-temporal interactions from data but also adapt to new and unknown environments; traditional machine learning models excel at the first task but often lack physical interpretability and struggle to generalize under varying environmental conditions. To tackle these challenges, we propose the Attention-based Spatio-Temporal Neural Operator (ASNO), a novel architecture that combines separable attention mechanisms for spatial and temporal interactions and adapts to unseen physical parameters. Inspired by the backward differentiation formula (BDF), ASNO learns a transformer for temporal prediction and extrapolation and an attention-based neural operator for handling varying external loads, enhancing interpretability by isolating historical state contributions and external forces, enabling the discovery of underlying physical laws and generalizability to unseen physical environments. Empirical results on SciML benchmarks demonstrate that ASNO outperforms over existing models, establishing its potential for engineering applications, physics discovery, and interpretable machine learning.
+
+**Comment:** The paper introduces a novel architecture combining attention mechanisms for spatio-temporal interactions, which aligns with the model architecture criterion.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 26. [Improving Large Language Model Safety with Contrastive Representation Learning](https://arxiv.org/abs/2506.11938) <a id="link26"></a>
+
+**ArXiv ID:** 2506.11938
+
+**Authors:** Samuel Simko, Mrinmaya Sachan, Bernhard Sch\"olkopf, Zhijing Jin
+
+**Abstract:** Large Language Models (LLMs) are powerful tools with profound societal impacts, yet their ability to generate responses to diverse and uncontrolled inputs leaves them vulnerable to adversarial attacks. While existing defenses often struggle to generalize across varying attack types, recent advancements in representation engineering offer promising alternatives. In this work, we propose a defense framework that formulates model defense as a contrastive representation learning (CRL) problem. Our method finetunes a model using a triplet-based loss combined with adversarial hard negative mining to encourage separation between benign and harmful representations. Our experimental results across multiple models demonstrate that our approach outperforms prior representation engineering-based defenses, improving robustness against both input-level and embedding-space attacks without compromising standard performance. Our code is available at https://github.com/samuelsimko/crl-llm-defense
+
+**Comment:** The paper proposes a defense framework using contrastive representation learning to improve LLM safety, aligning with representation learning.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+# Paper Selection Prompt
+
+## System Prompt
+
+> You are a helpful paper reading assistant whose job is to read daily posts from ArXiv and identify a few papers that your friend will enjoy reading.
+> Your job is to carefully read the paper titles and abstracts below and find the ones that match the criteria below.
+
+## User Prompt
+
+> ## Instructions
+> 
+> Write the response in JSONL format with {ARXIVID, COMMENT, RELEVANCE, NOVELTY} on each line, one for each paper.
+> 
+> - ARXIVID: should be the ArXiv ID.
+> - COMMENT: should identify whether there is a criteria that match the paper very closely. These matches should not be based on general terms like "language modeling" or "advancements" and should specifically refer to a criterion. No need to mention the non-matching criteria.
+> - RELEVANCE: should be a score from 1-10.
+> - NOVELTY: should be a score from 1-10.
+> 
+> ## Scoring Criteria
+> 
+> > The "Relevance" score measures how closely the paper aligns with the core topics of the prompt.
+> > The "Novelty" score assesses the originality and impact of the paper.
+> > They are two **ORTHONORMAL** axes and **SHOULD NOT** be confused with each other.
+> 
+> ### Relevance Scoring
+> 
+> - Relevance 9-10 (Completely Relevant)
+>   - Focus: Fully aligned with core topics with no deviation, score the highest if contains relevant keywords in it.
+>   - Examples: Papers focused on foundational methods or theoretical research, whose titles contain topic keywords like "MoE".
+> 
+> - Relevance 7-8 (Relevant)
+>   - Focus: Retain a solid link to the main research area, though may touch on peripheral elements.
+>   - Examples: Papers research on the fundamental part of MoE through a less critical aspect like its behavior in GNN.
+> 
+> - Relevance 5-6 (Borderline)
+>   - Focus: Maintains a link to the core topic but also extends into at least one other domain/area beyond the primary focus.
+>   - Examples: Work referencing MoE centered on reinforcement learning.
+> 
+> - Relevance 3-4 (Irrelevant)
+>   - Focus: Largely outside our interests with no association to our topics.
+>   - Examples: Application-focused papers like using MoE to solve a problem in the real world.
+> 
+> - Relevance 1-2 (Ignore)
+>   - Focus: Purely unrelated to our topics. Completely a different domain.
+>   - **Exception**: If the paper hints at a cutting-edge, radically new direction that could eventually transform the primary domain, consider a score of 9–10 despite initial appearances. (Usually a very rare concept that belongs to the fundamental research)
+> 
+> ### Novelty Scoring
+> 
+> - Novelty 9-10 (Breakthrough)
+>   - Definition: Groundbreaking methods/theory introducing new directions or solving major challenges.
+>   - Examples: Entirely new paradigm for foundational models; a novel theory transforming representation learning.
+> 
+> - Novelty 7-8 (Improvements)
+>   - Definition: Substantial insights/enhancements, though not a full paradigm shift.
+>   - Examples: Modifications on existing methods yielding significantly better results.
+> 
+> - Novelty 5-6 (Borderline)
+>   - Definition: Incremental contributions with possible long-term benefits, not immediately transformative.
+>   - Examples: Moderately novel extension to an existing architecture; refining current methods without fundamentally altering them.
+> 
+> - Novelty 3-4 (Tangential)
+>   - Definition: Minor or domain-specific improvements with limited broader impact.
+>   - Examples: Slight modifications to known methods with strange motivation; purely engineering jobs like a new benchmark/dataset.
+> 
+> - Novelty 1-2 (Low)
+>   - Definition: Minimal originality, applying standard approaches without real innovation.
+>   - Examples: Using an off-the-shelf model without adding new insights; purely application-driven studies like finetuning a pretrained model using existing methods.
+> 
+> ## Papers
+> 
+> [PAPER LIST HERE]
+> 
+> ## Relevant Topics
+> 
+> Use the following relevance criteria to focus on foundational research. Keep **relevant** papers and filter out **irrelevant** ones. Avoid purely **application-driven** work.
+> 
+> 1. Representation Learning
+>    - Relevant: Insights into how deep networks encode information, feature/dictionary learning, sparse/contrastive methods, training dynamics in neural networks.
+>    - Irrelevant: Standard applications of known techniques lacking new theoretical or methodological contributions.
+> 
+> 2. Model Architecture
+>    - Relevant: Mixture-of-Experts (MoE), Transformers, Conditional/Dynamic Networks, Autoencoders, analysis on existing architectures (like encoder-decoder), or other architectural innovations.
+>    - Irrelevant: Merely using existing architectures for a certain task without insights into the structure themselves.
+> 
+> 3. Model Compression
+>    - Relevant: Sparsity, pruning, quantization, low-rank approaches, KV cache, or other algorithmic/theoretical efficiency breakthroughs.
+>    - Irrelevant: Straightforward applications of existing compression methods to new tasks.
+> 
+> 4. Large Language Models (LLMs)
+>    - Relevant: Major breakthroughs in pretraining or architecture, theoretical insights into LLM behavior/interpretability.
+>    - Irrelevant: Domain-specific usage (e.g., translation, jail-breaking), finetuning or inference tricks (e.g., instruction tuning, chain-of-thoughts, data mixing), or empirical dataset/benchmark studies and text-level analysis (e.g. hallucination, reasoning, safety).
+> 
+> 5. AI for Science
+>    - Relevant: Foundational research in molecular/protein modeling, new generative paradigms, or significant architecture-level innovations.
+>    - Irrelevant: Conventional, domain-specific applications without new theoretical perspectives.
+> 
+> 6. Emerging Trends
+>    - Relevant: Cutting-edge theoretical work challenging established assumptions or introducing broad new paradigms.
+>    - Irrelevant: Incremental improvements or trend-following without novel insights.
+> 
+> **Keywords:**
+> 
+> - Relevant: Mixture of Experts (MoE), Representation Learning, Compression/Efficiency, Sparse/Sparsity, Pruning, Quantization, Low-rank, Foundation Model, etc.
+> - Irrelevant: Reinforcement Learning, Transfer Learning, Federated Learning, Online Learning, Diffusion Models, etc.
+> - Application: Image Segmentation, Medical Imaging, 3D Vision, Video Understanding, Information Retrieval, Summarization, Recommendation Systems, Machine Translation, Speech Recognition, Signal Processing, Spatial/Temporal Modeling, Time Series, Knowledge Graph, etc.

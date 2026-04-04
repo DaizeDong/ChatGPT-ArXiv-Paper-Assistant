@@ -1,0 +1,638 @@
+<div style="display: flex; align-items: flex-start; justify-content: space-between; width: 100%;"><div style="width: 33.33%; text-align: left;"><a href="../../2025-11/27"><img src="../../../assets/nav/day/2025-12-01-prev.svg" alt="Previous Day 2025-11-27"></a></div><div style="width: 33.33%; text-align: center;"><a href=".."><img src="../../../assets/nav/day/2025-12-01-center.svg" alt="Monthly Overview 2025-12"></a></div><div style="width: 33.33%; text-align: right;"><a href="../02"><img src="../../../assets/nav/day/2025-12-01-next.svg" alt="Next Day 2025-12-02"></a></div></div>
+
+# Personalized Daily ArXiv Papers 2025-12-01
+
+| *[gpt-5]*   | Prompt   | Completion   | Total   |
+|:-----------:|:--------:|:------------:|:-------:|
+| **Token**   | 60344    | 53141        | 113485  |
+| **Cost**    | $0.08    | $0.53        | $0.61   |
+
+Total arXiv papers: 758
+
+Total scanned papers: 460
+
+Total relevant papers: 29
+
+**Table of contents with paper titles:**
+
+1. [Every Token Counts: Generalizing 16M Ultra-Long Context in Large Language Models](#user-content-link1)
+**Authors:** Xiang Hu, Zhanchao Zhou, Ruiqi Liang, Zehuan Li, Wei Wu, Jianguo Li
+
+2. [TWEO: Transformers Without Extreme Outliers Enables FP8 Training And Quantization For Dummies](#user-content-link2)
+**Authors:** Guang Liang, Jie Shao, Ningyuan Tang, Xinyao Liu, Jianxin Wu
+
+3. [Closed-Loop Transformers: Autoregressive Modeling as Iterative Latent Equilibrium](#user-content-link3)
+**Authors:** Akbar Anbar Jafari, Gholamreza Anbarjafari
+
+4. [R2Q: Towards Robust 2-Bit Large Language Models via Residual Refinement Quantization](#user-content-link4)
+**Authors:** Jiayi Chen, Jieqi Shi, Jing Huo, Chen Wu
+
+5. [Towards Understanding Transformers in Learning Random Walks](#user-content-link5)
+**Authors:** Wei Shi, Yuan Cao
+
+6. [On the Effect of Regularization on Nonparametric Mean-Variance Regression](#user-content-link6)
+**Authors:** Eliot Wong-Toi, Alex Boyd, Vincent Fortuin, Stephan Mandt
+
+7. [Serving Heterogeneous LoRA Adapters in Distributed LLM Inference Systems](#user-content-link7)
+**Authors:** Shashwat Jaiswal, Shrikara Arun, Anjaly Parayil, Ankur Mallick, Spyros Mastorakis, Alind Khare, Chloi Alverti, Renee St Amant, Chetan Bansal, Victor R\"uhle, Josep Torrellas
+
+8. [CSV-Decode: Certifiable Sub-Vocabulary Decoding for Efficient Large Language Model Inference](#user-content-link8)
+**Authors:** Dong Liu, Yanxuan Yu, Ben Lengerich
+
+9. [LFM2 Technical Report](#user-content-link9)
+**Authors:** Alexander Amini, Anna Banaszak, Harold Benoit, Arthur B\"o\"ok, Tarek Dakhran, Song Duong, Alfred Eng, Fernando Fernandes, Marc H\"ark\"onen, Anne Harrington, Ramin Hasani, Saniya Karwa, Yuri Khrustalev, Maxime Labonne, Mathias Lechner, Valentine Lechner, Simon Lee, Zetian Li, Noel Loo, Jacob Marks, Edoardo Mosca, Samuel J. Paech, Paul Pak, Rom N. Parnichkun, Alex Quach, Ryan Rogers, Daniela Rus, Nayan Saxena, Bettina Schlager, Tim Seyde, Jimmy T. H. Smith, Aditya Tadimeti, Neehal Tumma
+
+10. [Dynamical Implicit Neural Representations](#user-content-link10)
+**Authors:** Yesom Park, Kelvin Kan, Thomas Flynn, Yi Huang, Shinjae Yoo, Stanley Osher, Xihaier Luo
+
+11. [Experts are all you need: A Composable Framework for Large Language Model Inference](#user-content-link11)
+**Authors:** Shrihari Sridharan, Sourjya Roy, Anand Raghunathan, Kaushik Roy
+
+12. [SingleQuant: Efficient Quantization of Large Language Models in a Single Pass](#user-content-link12)
+**Authors:** Jinying Xiao, Bin Ji, Shasha Li, Xiaodong Liu, Ma Jun, Ye Zhong, Wei Li, Xuan Xie, Qingbo Wu, Jie Yu
+
+13. [db-SP: Accelerating Sparse Attention for Visual Generative Models with Dual-Balanced Sequence Parallelism](#user-content-link13)
+**Authors:** Siqi Chen, Ke Hong, Tianchen Zhao, Ruiqi Xie, Zhenhua Zhu, Xudong Zhang, Yu Wang
+
+14. [Decomposed Trust: Exploring Privacy, Adversarial Robustness, Fairness, and Ethics of Low-Rank LLMs](#user-content-link14)
+**Authors:** Daniel Agyei Asante, Md Mokarram Chowdhury, Yang Li
+
+15. [Enhancing Trustworthiness with Mixed Precision: Benchmarks, Opportunities, and Challenges](#user-content-link15)
+**Authors:** Guanxi Lu, Hao Mark Chen, Zhiqiang Que, Wayne Luk, Hongxiang Fan
+
+16. [PerfMamba: Performance Analysis and Pruning of Selective State Space Models](#user-content-link16)
+**Authors:** Abdullah Al Asif, Mobina Kashaniyan, Sixing Yu, Juan Pablo Mu\~noz, Ali Jannesari
+
+17. [Convergence Dynamics of Over-Parameterized Score Matching for a Single Gaussian](#user-content-link17)
+**Authors:** Yiran Zhang, Weihang Xu, Mo Zhou, Maryam Fazel, Simon Shaolei Du
+
+18. [Exact Learning of Arithmetic with Differentiable Agents](#user-content-link18)
+**Authors:** Hristo Papazov, Francesco D'Angelo, Nicolas Flammarion
+
+19. [A Variational Manifold Embedding Framework for Nonlinear Dimensionality Reduction](#user-content-link19)
+**Authors:** John J. Vastola, Samuel J. Gershman, Kanaka Rajan
+
+20. [From Topology to Retrieval: Decoding Embedding Spaces with Unified Signatures](#user-content-link20)
+**Authors:** Florian Rottach, William Rudman, Bastain Rieck, Harrisen Scells, Carsten Eickhoff
+
+21. [Orchestrating Dual-Boundaries: An Arithmetic Intensity Inspired Acceleration Framework for Diffusion Language Models](#user-content-link21)
+**Authors:** Linye Wei, Wenjue Chen, Pingzhi Tang, Xiaotian Guo, Le Ye, Runsheng Wang, Meng Li
+
+22. [Towards Understanding Generalization in DP-GD: A Case Study in Training Two-Layer CNNs](#user-content-link22)
+**Authors:** Zhongjie Shi, Puyu Wang, Chenyang Zhang, Yuan Cao
+
+23. [Towards a Foundation Model for Partial Differential Equations Across Physics Domains](#user-content-link23)
+**Authors:** Eduardo Soares, Emilio Vital Brazil, Victor Shirasuna, Breno W. S. R. de Carvalho, Cristiano Malossi
+
+24. [AutoTailor: Automatic and Efficient Adaptive Model Deployment for Diverse Edge Devices](#user-content-link24)
+**Authors:** Mengyang Liu, Chenyu Lu, Haodong Tian, Fang Dong, Ruiting Zhou, Wei Wang, Dian Shen, Guangtong Li, Ye Wan, Li Li
+
+25. [Quantized-Tinyllava: a new multimodal foundation model enables efficient split learning](#user-content-link25)
+**Authors:** Jiajun Guo, Xin Luo, Jie Liu
+
+26. [Cacheback: Speculative Decoding With Nothing But Cache](#user-content-link26)
+**Authors:** Zhiyao Ma, In Gim, Lin Zhong
+
+27. [RoSA: Enhancing Parameter-Efficient Fine-Tuning via RoPE-aware Selective Adaptation in Large Language Models](#user-content-link27)
+**Authors:** Dayan Pan, Jingyuan Wang, Yilong Zhou, Jiawei Cheng, Pengyue Jia, Xiangyu Zhao
+
+28. [Accelerated Execution of Bayesian Neural Networks using a Single Probabilistic Forward Pass and Code Generation](#user-content-link28)
+**Authors:** Bernhard Klein, Falk Selker, Hendrik Borras, Sophie Steger, Franz Pernkopf, Holger Fr\"oning
+
+29. [Distributed Dynamic Associative Memory via Online Convex Optimization](#user-content-link29)
+**Authors:** Bowen Wang, Matteo Zecchin, Osvaldo Simeone
+
+---
+
+## 1. [Every Token Counts: Generalizing 16M Ultra-Long Context in Large Language Models](https://arxiv.org/abs/2511.23319) <a id="link1"></a>
+
+**ArXiv ID:** 2511.23319
+
+**Authors:** Xiang Hu, Zhanchao Zhou, Ruiqi Liang, Zehuan Li, Wei Wu, Jianguo Li
+
+**Abstract:** This work explores the challenge of building ``Machines that Can Remember'', framing long-term memory as the problem of efficient ultra-long context modeling. We argue that this requires three key properties: \textbf{sparsity}, \textbf{random-access flexibility}, and \textbf{length generalization}. To address ultra-long-context modeling, we leverage Hierarchical Sparse Attention (HSA), a novel attention mechanism that satisfies all three properties. We integrate HSA into Transformers to build HSA-UltraLong, which is an 8B-parameter MoE model trained on over 8 trillion tokens and is rigorously evaluated on different tasks with in-domain and out-of-domain context lengths to demonstrate its capability in handling ultra-long contexts. Results show that our model performs comparably to full-attention baselines on in-domain lengths while achieving over 90\% accuracy on most in-context retrieval tasks with contexts up to 16M. This report outlines our experimental insights and open problems, contributing a foundation for future research in ultra-long context modeling.
+
+**Comment:** Model Architecture and Efficiency: Hierarchical Sparse Attention enabling ultra-long (up to 16M) context with sparsity and length generalization; MoE-based ultra-long LLM.
+
+**Relevance:** 10
+**Novelty:** 9
+
+---
+
+## 2. [TWEO: Transformers Without Extreme Outliers Enables FP8 Training And Quantization For Dummies](https://arxiv.org/abs/2511.23225) <a id="link2"></a>
+
+**ArXiv ID:** 2511.23225
+
+**Authors:** Guang Liang, Jie Shao, Ningyuan Tang, Xinyao Liu, Jianxin Wu
+
+**Abstract:** Native FP8 support in modern hardware is essential for training large Transformers, but is severely hindered by extreme activation outliers. Existing solutions either rely on complex mixed-precision engineering or invasive architectural modifications. This paper fundamentally challenges the conventional wisdom that outliers are data-driven. We demonstrate that extreme outliers are a data-independent, mechanically-produced artifact of training, originating from specific structural properties of the weight matrices (i.e., colinearity). Based on this insight, we propose TWEO (Transformers Without Extreme Outliers), a novel, non-invasive loss function. TWEO effectively prevents extreme outliers via a very simple loss term, which reduces outliers from 10000+ to less than 20. TWEO then enables full-model FP8 pre-training with neither engineering tricks nor architectural changes for both LLM and ViT. When standard FP8 training catastrophically collapses, TWEO achieves performance comparable to the BF16 baseline while delivering a 36% increase in training throughput. Also, TWEO enables a new quantization paradigm. Hardware-friendly W8A8 per-tensor static quantization of LLMs, previously considered completely unusable due to outliers, achieves SOTA performance for the first time on TWEO-trained models.
+
+**Comment:** Model Compression/Efficiency & HPC: simple loss (TWEO) to eliminate extreme outliers enabling full-model FP8 training and hardware-friendly W8A8 quantization.
+
+**Relevance:** 10
+**Novelty:** 9
+
+---
+
+## 3. [Closed-Loop Transformers: Autoregressive Modeling as Iterative Latent Equilibrium](https://arxiv.org/abs/2511.21882) <a id="link3"></a>
+
+**ArXiv ID:** 2511.21882
+
+**Authors:** Akbar Anbar Jafari, Gholamreza Anbarjafari
+
+**Abstract:** Contemporary autoregressive transformers operate in open loop: each hidden state is computed in a single forward pass and never revised, causing errors to propagate uncorrected through the sequence. We identify this open-loop bottleneck as a fundamental architectural limitation underlying well-documented failures in long-range reasoning, factual consistency, and multi-step planning. To address this limitation, we introduce the closed-loop prediction principle, which requires that models iteratively refine latent representations until reaching a self-consistent equilibrium before committing to each token. We instantiate this principle as Equilibrium Transformers (EqT), which augment standard transformer layers with an Equilibrium Refinement Module that minimizes a learned energy function via gradient descent in latent space. The energy function enforces bidirectional prediction consistency, episodic memory coherence, and output confidence, all computed without external supervision. Theoretically, we prove that EqT performs approximate MAP inference in a latent energy-based model, establish linear convergence guarantees, and show that refinement improves predictions precisely on hard instances where one-shot inference is suboptimal. The framework unifies deep equilibrium models, diffusion language models, and test-time training as special cases. Preliminary experiments on the binary parity task demonstrate +3.28% average improvement on challenging sequences, with gains reaching +8.07% where standard transformers approach random performance, validating that the benefit of deliberation scales with task difficulty. Just as attention mechanisms resolved the sequential bottleneck of recurrent networks, we propose that closed-loop equilibrium may resolve the commitment bottleneck of open-loop autoregression, representing a foundational step toward language models.
+
+**Comment:** Model Architecture: introduces Equilibrium Transformers with iterative latent refinement via learned energy minimization, a closed-loop alternative to standard autoregression.
+
+**Relevance:** 10
+**Novelty:** 8
+
+---
+
+## 4. [R2Q: Towards Robust 2-Bit Large Language Models via Residual Refinement Quantization](https://arxiv.org/abs/2511.21736) <a id="link4"></a>
+
+**ArXiv ID:** 2511.21736
+
+**Authors:** Jiayi Chen, Jieqi Shi, Jing Huo, Chen Wu
+
+**Abstract:** The rapid progress of Large Language Models (LLMs) has brought substantial computational and memory demands, spurring the adoption of low-bit quantization. While 8-bit and 4-bit formats have become prevalent, extending quantization to 2 bits remains challenging due to severe accuracy degradation. To address this, we propose Residual Refinement Quantization (R2Q)-a novel 2-bit quantization framework that decomposes the process into two sequential 1-bit sub-quantizations, forming an adaptive quantization lattice. Extensive evaluations on Llama, OPT, and Qwen across diverse benchmarks-covering question answering, commonsense reasoning, and language modeling-demonstrate that R2Q consistently outperforms existing 2-bit quantization methods in both fine-grained and coarse-grained settings. By refining quantization through a residual learning mechanism, R2Q enhances performance, improves training stability, and accelerates convergence under extreme compression. Furthermore, its modular design enables seamless integration with existing quantization-aware training (QAT) frameworks.
+
+**Comment:** Model Compression/Efficiency: extreme low-bit (2-bit) LLM quantization via residual refinement (two sequential 1-bit sub-quantizations).
+
+**Relevance:** 10
+**Novelty:** 8
+
+---
+
+## 5. [Towards Understanding Transformers in Learning Random Walks](https://arxiv.org/abs/2511.23239) <a id="link5"></a>
+
+**ArXiv ID:** 2511.23239
+
+**Authors:** Wei Shi, Yuan Cao
+
+**Abstract:** Transformers have proven highly effective across various applications, especially in handling sequential data such as natural languages and time series. However, transformer models often lack clear interpretability, and the success of transformers has not been well understood in theory. In this paper, we study the capability and interpretability of transformers in learning a family of classic statistical models, namely random walks on circles. We theoretically demonstrate that, after training with gradient descent, a one-layer transformer model can achieve optimal accuracy in predicting random walks. Importantly, our analysis reveals that the trained model is interpretable: the trained softmax attention serves as a token selector, focusing on the direct parent state; subsequently, the value matrix executes a one-step probability transition to predict the location of the next state based on this parent state. We also show that certain edge cases not covered by our theory are indeed failure cases, demonstrating that our theoretical conditions are tight. By investigating these success and failure cases, it is revealed that gradient descent with small initialization may fail or struggle to converge to a good solution in certain simple tasks even beyond random walks. Experiments are conducted to support our theoretical findings.
+
+**Comment:** Representation Learning/Theory: interpretable analysis of transformer attention and training dynamics on random walks with optimality guarantees.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 6. [On the Effect of Regularization on Nonparametric Mean-Variance Regression](https://arxiv.org/abs/2511.22004) <a id="link6"></a>
+
+**ArXiv ID:** 2511.22004
+
+**Authors:** Eliot Wong-Toi, Alex Boyd, Vincent Fortuin, Stephan Mandt
+
+**Abstract:** Uncertainty quantification is vital for decision-making and risk assessment in machine learning. Mean-variance regression models, which predict both a mean and residual noise for each data point, provide a simple approach to uncertainty quantification. However, overparameterized mean-variance models struggle with signal-to-noise ambiguity, deciding whether prediction targets should be attributed to signal (mean) or noise (variance). At one extreme, models fit all training targets perfectly with zero residual noise, while at the other, they provide constant, uninformative predictions and explain the targets as noise. We observe a sharp phase transition between these extremes, driven by model regularization. Empirical studies with varying regularization levels illustrate this transition, revealing substantial variability across repeated runs. To explain this behavior, we develop a statistical field theory framework, which captures the observed phase transition in alignment with experimental results. This analysis reduces the regularization hyperparameter search space from two dimensions to one, significantly lowering computational costs. Experiments on UCI datasets and the large-scale ClimSim dataset demonstrate robust calibration performance, effectively quantifying predictive uncertainty.
+
+**Comment:** Representation Learning/Training Dynamics: analyzes phase transitions in mean-variance regression via statistical field theory, reducing regularization search dimensionality.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 7. [Serving Heterogeneous LoRA Adapters in Distributed LLM Inference Systems](https://arxiv.org/abs/2511.22880) <a id="link7"></a>
+
+**ArXiv ID:** 2511.22880
+
+**Authors:** Shashwat Jaiswal, Shrikara Arun, Anjaly Parayil, Ankur Mallick, Spyros Mastorakis, Alind Khare, Chloi Alverti, Renee St Amant, Chetan Bansal, Victor R\"uhle, Josep Torrellas
+
+**Abstract:** Low-Rank Adaptation (LoRA) has become the de facto method for parameter-efficient fine-tuning of large language models (LLMs), enabling rapid adaptation to diverse domains. In production, LoRA-based models are served at scale, creating multi-tenant environments with hundreds of adapters sharing a base model. However, state-of-the-art serving systems co-batch heterogeneous adapters without accounting for rank (size) variability, leading to severe performance skew, which ultimately requires adding more GPUs to satisfy service-level objectives (SLOs). Existing optimizations, focused on loading, caching, and kernel execution, ignore this heterogeneity, leaving GPU resources underutilized. We present LoRAServe, a workload-aware dynamic adapter placement and routing framework designed to tame rank diversity in LoRA serving. By dynamically rebalancing adapters across GPUs and leveraging GPU Direct RDMA for remote access, LoRAServe maximizes throughput and minimizes tail latency under real-world workload drift. Evaluations on production traces from Company X show that LoRAServe elicits up to 2$\times$ higher throughput, up to 9$\times$ lower TTFT, while using up to 50% fewer GPUs under SLO constraints compared to state-of-the-art systems.
+
+**Comment:** High Performance Computing: systems-level framework for serving heterogeneous LoRA adapters with dynamic placement, routing, and GPU Direct RDMA to improve throughput and tail latency.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 8. [CSV-Decode: Certifiable Sub-Vocabulary Decoding for Efficient Large Language Model Inference](https://arxiv.org/abs/2511.21702) <a id="link8"></a>
+
+**ArXiv ID:** 2511.21702
+
+**Authors:** Dong Liu, Yanxuan Yu, Ben Lengerich
+
+**Abstract:** Large language models face significant computational bottlenecks during inference due to the expensive output layer computation over large vocabularies. We present CSV-Decode, a novel approach that uses geometric upper bounds to construct small sub-vocabularies for each decoding step, enabling efficient sparse computation while maintaining dual correctness guarantees: exact top-$k$ certification and $\varepsilon$-certified softmax approximations. Our method clusters vocabulary embeddings offline and uses centroid-plus-radius bounds to identify which tokens can be safely omitted from computation. We provide a complete system implementation with sparse GEMV kernels, multi-GPU sharding, and CUDA Graph optimization. Experimental results demonstrate significant speedup over full vocabulary decoding while maintaining distributional guarantees and low fallback rates. Our code implementation available at \href{https://github.com/FastLM/CSV-Decode}{https://github.com/FastLM/CSV-Decode}.
+
+**Comment:** Model Efficiency/HPC: certifiable sub-vocabulary decoding with geometric bounds, sparse kernels, and multi-GPU sharding for output layer acceleration.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 9. [LFM2 Technical Report](https://arxiv.org/abs/2511.23404) <a id="link9"></a>
+
+**ArXiv ID:** 2511.23404
+
+**Authors:** Alexander Amini, Anna Banaszak, Harold Benoit, Arthur B\"o\"ok, Tarek Dakhran, Song Duong, Alfred Eng, Fernando Fernandes, Marc H\"ark\"onen, Anne Harrington, Ramin Hasani, Saniya Karwa, Yuri Khrustalev, Maxime Labonne, Mathias Lechner, Valentine Lechner, Simon Lee, Zetian Li, Noel Loo, Jacob Marks, Edoardo Mosca, Samuel J. Paech, Paul Pak, Rom N. Parnichkun, Alex Quach, Ryan Rogers, Daniela Rus, Nayan Saxena, Bettina Schlager, Tim Seyde, Jimmy T. H. Smith, Aditya Tadimeti, Neehal Tumma
+
+**Abstract:** We present LFM2, a family of Liquid Foundation Models designed for efficient on-device deployment and strong task capabilities. Using hardware-in-the-loop architecture search under edge latency and memory constraints, we obtain a compact hybrid backbone that combines gated short convolutions with a small number of grouped query attention blocks, delivering up to 2x faster prefill and decode on CPUs compared to similarly sized models. The LFM2 family covers 350M-8.3B parameters, including dense models (350M, 700M, 1.2B, 2.6B) and a mixture-of-experts variant (8.3B total, 1.5B active), all with 32K context length. LFM2's training pipeline includes a tempered, decoupled Top-K knowledge distillation objective that avoids support mismatch; curriculum learning with difficulty-ordered data; and a three-stage post-training recipe of supervised fine-tuning, length-normalized preference optimization, and model merging. Pre-trained on 10-12T tokens, LFM2 models achieve strong results across diverse benchmarks; for example, LFM2-2.6B reaches 79.56% on IFEval and 82.41% on GSM8K. We further build multimodal and retrieval variants: LFM2-VL for vision-language tasks, LFM2-Audio for speech, and LFM2-ColBERT for retrieval. LFM2-VL supports tunable accuracy-latency tradeoffs via token-efficient visual processing, while LFM2-Audio separates audio input and output pathways to enable real-time speech-to-speech interaction competitive with models 3x larger. LFM2-ColBERT provides a low-latency encoder for queries and documents, enabling high-performance retrieval across multiple languages. All models are released with open weights and deployment packages for ExecuTorch, llama.cpp, and vLLM, making LFM2 a practical base for edge applications that need fast, memory-efficient inference and strong task capabilities.
+
+**Comment:** Matches Model Architecture (MoE, hybrid attention+convolution) and Compression/Efficiency (edge-latency/memory-constrained design, on-device deployment).
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 10. [Dynamical Implicit Neural Representations](https://arxiv.org/abs/2511.21787) <a id="link10"></a>
+
+**ArXiv ID:** 2511.21787
+
+**Authors:** Yesom Park, Kelvin Kan, Thomas Flynn, Yi Huang, Shinjae Yoo, Stanley Osher, Xihaier Luo
+
+**Abstract:** Implicit Neural Representations (INRs) provide a powerful continuous framework for modeling complex visual and geometric signals, but spectral bias remains a fundamental challenge, limiting their ability to capture high-frequency details. Orthogonal to existing remedy strategies, we introduce Dynamical Implicit Neural Representations (DINR), a new INR modeling framework that treats feature evolution as a continuous-time dynamical system rather than a discrete stack of layers. This dynamical formulation mitigates spectral bias by enabling richer, more adaptive frequency representations through continuous feature evolution. Theoretical analysis based on Rademacher complexity and the Neural Tangent Kernel demonstrates that DINR enhances expressivity and improves training dynamics. Moreover, regularizing the complexity of the underlying dynamics provides a principled way to balance expressivity and generalization. Extensive experiments on image representation, field reconstruction, and data compression confirm that DINR delivers more stable convergence, higher signal fidelity, and stronger generalization than conventional static INRs.
+
+**Comment:** Model Architecture/Representation Learning: Dynamical INRs (continuous-time feature evolution) mitigate spectral bias with supporting theory (NTK, Rademacher).
+
+**Relevance:** 9
+**Novelty:** 7
+
+---
+
+## 11. [Experts are all you need: A Composable Framework for Large Language Model Inference](https://arxiv.org/abs/2511.22955) <a id="link11"></a>
+
+**ArXiv ID:** 2511.22955
+
+**Authors:** Shrihari Sridharan, Sourjya Roy, Anand Raghunathan, Kaushik Roy
+
+**Abstract:** Large Language Models (LLMs) have achieved state-of-the-art accuracies in a variety of natural language processing (NLP) tasks. However, this success comes at the cost of increased model sizes which leads to additional computational burden. Mixture of Experts (MoEs) overcome this bottleneck by decoupling model capacity from computation by only activating a subset of parameters or "experts". However, these models require joint pretraining of these experts along with the router and do not model multi-step reasoning. In contrast, multi-agent frameworks improve reasoning by decomposing complex problems into modular subtasks. However, these frameworks rely on sequential "plan--act--observe" loops, which introduce significant latency. Our work, Comp-LLM, addresses these challenges by introducing a composable inference framework that enables cross-expert collaboration via an explicit sub-query dependency graph. Comp-LLM consists of three components: (1) A Sub-query Generator that decomposes an input query, assigns each sub-query to an appropriate expert using embedding similarity, and constructs a dependency graph; (2) A Query Executor that processes nodes in the graph and identifies opportunities for parallelism based on dependencies and resource constraints; and (3) A Response Aggregator that synthesizes intermediate expert responses into a coherent final answer. Across several benchmarks, Comp-LLM achieves up to 11.01% accuracy improvement over monolithic LLMs of similar size, while offering 1.67x--3.56x reduction in model size with no significant degradation relative to the largest model in its family. Additionally, Comp-LLM provides 1.1x--1.7x latency improvement compared to sequential sub-query processing.
+
+**Comment:** Model Architecture/Inference: composable expert framework with routing and parallel sub-query execution (MoE-like dispatch without joint pretraining).
+
+**Relevance:** 9
+**Novelty:** 7
+
+---
+
+## 12. [SingleQuant: Efficient Quantization of Large Language Models in a Single Pass](https://arxiv.org/abs/2511.22316) <a id="link12"></a>
+
+**ArXiv ID:** 2511.22316
+
+**Authors:** Jinying Xiao, Bin Ji, Shasha Li, Xiaodong Liu, Ma Jun, Ye Zhong, Wei Li, Xuan Xie, Qingbo Wu, Jie Yu
+
+**Abstract:** Large Language Models (LLMs) quantization facilitates deploying LLMs in resource-limited settings, but existing methods that combine incompatible gradient optimization and quantization truncation lead to serious convergence pathology. This prolongs quantization time and degrades LLMs' task performance. Our studies confirm that Straight-Through Estimator (STE) on Stiefel manifolds introduce non-smoothness and gradient noise, obstructing optimization convergence and blocking high-fidelity quantized LLM development despite extensive training. To tackle the above limitations, we propose SingleQuant, a single-pass quantization framework that decouples from quantization truncation, thereby eliminating the above non-smoothness and gradient noise factors. Specifically, SingleQuant constructs Alignment Rotation Transformation (ART) and Uniformity Rotation Transformation (URT) targeting distinct activation outliers, where ART achieves smoothing of outlier values via closed-form optimal rotations, and URT reshapes distributions through geometric mapping. Both matrices comprise strictly formulated Givens rotations with predetermined dimensions and rotation angles, enabling promising LLMs task performance within a short time. Experimental results demonstrate SingleQuant's superiority over the selected baselines across diverse tasks on 7B-70B LLMs. To be more precise, SingleQuant enables quantized LLMs to achieve higher task performance while necessitating less time for quantization. For example, when quantizing LLaMA-2-13B, SingleQuant achieves 1,400$\times$ quantization speedup and increases +0.57\% average task performance compared to the selected best baseline.
+
+**Comment:** Model Compression and Efficiency: proposes a single-pass LLM quantization framework with structured Givens-rotation transforms to remove STE-induced non-smoothness and accelerate quantization.
+
+**Relevance:** 9
+**Novelty:** 7
+
+---
+
+## 13. [db-SP: Accelerating Sparse Attention for Visual Generative Models with Dual-Balanced Sequence Parallelism](https://arxiv.org/abs/2511.23113) <a id="link13"></a>
+
+**ArXiv ID:** 2511.23113
+
+**Authors:** Siqi Chen, Ke Hong, Tianchen Zhao, Ruiqi Xie, Zhenhua Zhu, Xudong Zhang, Yu Wang
+
+**Abstract:** Scaling Diffusion Transformer (DiT) inference via sequence parallelism is critical for reducing latency in visual generation, but is severely hampered by workload imbalance when applied to models employing block-wise sparse attention. The imbalance stems from the inherent variation in sparsity across attention heads and the irregular distribution of dense blocks within the sparse mask, when sequence parallelism is applied along the head dimension (as in Ulysses) or the block dimension (as in Ring Attention). In this paper, we formalize a sparse imbalance ratio to quantify the imbalance, and propose db-SP, a sparsity-aware sequence parallelism technique that tackles the challenge. db-SP contains a dual-level partitioning approach that achieves near-perfect workload balance at both the head and block levels with negligible overhead. Furthermore, to handle the evolving sparsity patterns across denoising steps and layers, db-SP dynamically determines the parallel degrees for the head and block dimensions at runtime. Experimental results demonstrate that db-SP delivers an end-to-end speedup of 1.25x and an attention-specific speedup of 1.40x over state-of-the-art sequence parallel methods on average. Code is available at https://github.com/thu-nics/db-SP.
+
+**Comment:** High Performance Computing: sparsity-aware dual-balanced sequence parallelism for block-sparse attention with dynamic runtime partitioning.
+
+**Relevance:** 9
+**Novelty:** 7
+
+---
+
+## 14. [Decomposed Trust: Exploring Privacy, Adversarial Robustness, Fairness, and Ethics of Low-Rank LLMs](https://arxiv.org/abs/2511.22099) <a id="link14"></a>
+
+**ArXiv ID:** 2511.22099
+
+**Authors:** Daniel Agyei Asante, Md Mokarram Chowdhury, Yang Li
+
+**Abstract:** Large language models (LLMs) have driven major advances across domains, yet their massive size hinders deployment in resource-constrained settings. Model compression addresses this challenge, with low-rank factorization emerging as a particularly effective method for reducing size, memory, and computation while maintaining accuracy. However, while these compressed models boast of benign performance and system-level advantages, their trustworthiness implications remain poorly understood. In this paper, we present the first comprehensive study of how low-rank factorization affects LLM trustworthiness across privacy, adversarial robustness, fairness, and ethical alignment. We evaluate multiple LLMs of different sizes and variants compressed with diverse low-rank algorithms, revealing key insights: (1) low-rank compression preserves or improves training data privacy but weakens PII protection during conversation; (2) adversarial robustness is generally preserved and often enhanced, even under deep compression; (3) ethical reasoning degrades in zero-shot settings but partially recovers with few-shot prompting; (4) fairness declines under compression. Beyond compression, we investigate how model scale and fine-tuning affect trustworthiness, as both are important in low-rank methods. To guide trustworthy compression strategies, we end our paper with a gradient-based attribution analysis to identify which layers in LLMs contribute most to adversarial robustness.
+
+**Comment:** Matches Compression/Efficiency: low-rank factorization of LLMs with comprehensive trustworthiness analysis; introduces methods to mitigate with precision-aware strategies.
+
+**Relevance:** 9
+**Novelty:** 7
+
+---
+
+## 15. [Enhancing Trustworthiness with Mixed Precision: Benchmarks, Opportunities, and Challenges](https://arxiv.org/abs/2511.22483) <a id="link15"></a>
+
+**ArXiv ID:** 2511.22483
+
+**Authors:** Guanxi Lu, Hao Mark Chen, Zhiqiang Que, Wayne Luk, Hongxiang Fan
+
+**Abstract:** Large language models (LLMs) have shown promising performance across various tasks. However, their autoregressive decoding process poses significant challenges for efficient deployment on existing AI hardware. Quantization alleviates memory and compute pressure by compressing weights, activations, and KV caches to low precisions while preserving generation quality. However, existing quantization frameworks typically focus on perplexity or classification accuracy, often omitting critical trustworthiness metrics. This gap introduces risks when applying quantized LLMs to downstream high-stakes domains such as finance and healthcare. In this work, we systematically investigate the impact of quantization on four trustworthiness metrics (adversarial robustness, fairness, machine ethics, and out-of-distribution robustness) and identify the instability across compression ratios and quantization methods. Building on these observations, we develop a novel precision-ensemble voting approach that leverages predictions from mixed-precision variants of the same model and consistently improves performance by up to $5.8\%$ on trustworthiness metrics. Our results highlight the importance of considering trustworthiness when developing model compression techniques and point to research opportunities at the intersection of compression and trustworthiness for safety-critical applications.
+
+**Comment:** Matches Compression/Efficiency: mixed-precision/quantization analysis for LLMs with a precision-ensemble voting method targeting trustworthy deployment.
+
+**Relevance:** 9
+**Novelty:** 7
+
+---
+
+## 16. [PerfMamba: Performance Analysis and Pruning of Selective State Space Models](https://arxiv.org/abs/2511.22849) <a id="link16"></a>
+
+**ArXiv ID:** 2511.22849
+
+**Authors:** Abdullah Al Asif, Mobina Kashaniyan, Sixing Yu, Juan Pablo Mu\~noz, Ali Jannesari
+
+**Abstract:** Recent advances in sequence modeling have introduced selective SSMs as promising alternatives to Transformer architectures, offering theoretical computational efficiency and sequence processing advantages. A comprehensive understanding of selective SSMs in runtime behavior, resource utilization patterns, and scaling characteristics still remains unexplored, thus obstructing their optimal deployment and further architectural improvements. This paper presents a thorough empirical study of Mamba-1 and Mamba-2, systematically profiled for performance to assess the design principles that contribute to their efficiency in state-space modeling. A detailed analysis of computation patterns, memory access, I/O characteristics, and scaling properties was performed for sequence lengths ranging from 64 to 16384 tokens. Our findings show that the SSM component, a central part of the selective SSM architecture, demands a significant portion of computational resources compared to other components in the Mamba block. Based on these insights, we propose a pruning technique that selectively removes low-activity states within the SSM component, achieving measurable throughput and memory gains while maintaining accuracy within a moderate pruning regime. This approach results in performance improvements across varying sequence lengths, achieving a 1.14x speedup and reducing memory usage by 11.50\%. These results offer valuable guidance for designing more efficient SSM architectures that can be applied to a wide range of real-world applications.
+
+**Comment:** Compression/Efficiency—prunes low-activity states in selective SSMs (Mamba) for speed/memory gains; HPC—systematic runtime/memory/I/O profiling and scaling analysis.
+
+**Relevance:** 9
+**Novelty:** 7
+
+---
+
+## 17. [Convergence Dynamics of Over-Parameterized Score Matching for a Single Gaussian](https://arxiv.org/abs/2511.22069) <a id="link17"></a>
+
+**ArXiv ID:** 2511.22069
+
+**Authors:** Yiran Zhang, Weihang Xu, Mo Zhou, Maryam Fazel, Simon Shaolei Du
+
+**Abstract:** Score matching has become a central training objective in modern generative modeling, particularly in diffusion models, where it is used to learn high-dimensional data distributions through the estimation of score functions. Despite its empirical success, the theoretical understanding of the optimization behavior of score matching, particularly in over-parameterized regimes, remains limited. In this work, we study gradient descent for training over-parameterized models to learn a single Gaussian distribution. Specifically, we use a student model with $n$ learnable parameters and train it on data generated from a single ground-truth Gaussian using the population score matching objective. We analyze the optimization dynamics under multiple regimes. When the noise scale is sufficiently large, we prove a global convergence result for gradient descent. In the low-noise regime, we identify the existence of a stationary point, highlighting the difficulty of proving global convergence in this case. Nevertheless, we show convergence under certain initialization conditions: when the parameters are initialized to be exponentially small, gradient descent ensures convergence of all parameters to the ground truth. We further prove that without the exponentially small initialization, the parameters may not converge to the ground truth. Finally, we consider the case where parameters are randomly initialized from a Gaussian distribution far from the ground truth. We prove that, with high probability, only one parameter converges while the others diverge, yet the loss still converges to zero with a $1/\tau$ rate, where $\tau$ is the number of iterations. We also establish a nearly matching lower bound on the convergence rate in this regime. This is the first work to establish global convergence guarantees for Gaussian mixtures with at least three components under the score matching framework.
+
+**Comment:** Training dynamics/representation learning theory: convergence behavior of over-parameterized score matching (foundational for diffusion/score models).
+
+**Relevance:** 8
+**Novelty:** 8
+
+---
+
+## 18. [Exact Learning of Arithmetic with Differentiable Agents](https://arxiv.org/abs/2511.22751) <a id="link18"></a>
+
+**ArXiv ID:** 2511.22751
+
+**Authors:** Hristo Papazov, Francesco D'Angelo, Nicolas Flammarion
+
+**Abstract:** We explore the possibility of exact algorithmic learning with gradient-based methods and introduce a differentiable framework capable of strong length generalization on arithmetic tasks. Our approach centers on Differentiable Finite-State Transducers (DFSTs), a Turing-complete model family that avoids the pitfalls of prior architectures by enabling constant-precision, constant-time generation, and end-to-end log-parallel differentiable training. Leveraging policy-trajectory observations from expert agents, we train DFSTs to perform binary and decimal addition and multiplication. Remarkably, models trained on tiny datasets generalize without error to inputs thousands of times longer than the training examples. These results show that training differentiable agents on structured intermediate supervision could pave the way towards exact gradient-based learning of algorithmic skills. Code available at \href{https://github.com/dngfra/differentiable-exact-algorithmic-learner.git}{https://github.com/dngfra/differentiable-exact-algorithmic-learner.git}.
+
+**Comment:** Model Architecture: differentiable finite-state transducers enabling exact algorithmic learning with strong length generalization.
+
+**Relevance:** 8
+**Novelty:** 8
+
+---
+
+## 19. [A Variational Manifold Embedding Framework for Nonlinear Dimensionality Reduction](https://arxiv.org/abs/2511.22128) <a id="link19"></a>
+
+**ArXiv ID:** 2511.22128
+
+**Authors:** John J. Vastola, Samuel J. Gershman, Kanaka Rajan
+
+**Abstract:** Dimensionality reduction algorithms like principal component analysis (PCA) are workhorses of machine learning and neuroscience, but each has well-known limitations. Variants of PCA are simple and interpretable, but not flexible enough to capture nonlinear data manifold structure. More flexible approaches have other problems: autoencoders are generally difficult to interpret, and graph-embedding-based methods can produce pathological distortions in manifold geometry. Motivated by these shortcomings, we propose a variational framework that casts dimensionality reduction algorithms as solutions to an optimal manifold embedding problem. By construction, this framework permits nonlinear embeddings, allowing its solutions to be more flexible than PCA. Moreover, the variational nature of the framework has useful consequences for interpretability: each solution satisfies a set of partial differential equations, and can be shown to reflect symmetries of the embedding objective. We discuss these features in detail and show that solutions can be analytically characterized in some cases. Interestingly, one special case exactly recovers PCA.
+
+**Comment:** Matches Representation Learning: variational framework for nonlinear manifold embedding with PDE characterization; foundational dimensionality reduction.
+
+**Relevance:** 8
+**Novelty:** 8
+
+---
+
+## 20. [From Topology to Retrieval: Decoding Embedding Spaces with Unified Signatures](https://arxiv.org/abs/2511.22150) <a id="link20"></a>
+
+**ArXiv ID:** 2511.22150
+
+**Authors:** Florian Rottach, William Rudman, Bastain Rieck, Harrisen Scells, Carsten Eickhoff
+
+**Abstract:** Studying how embeddings are organized in space not only enhances model interpretability but also uncovers factors that drive downstream task performance. In this paper, we present a comprehensive analysis of topological and geometric measures across a wide set of text embedding models and datasets. We find a high degree of redundancy among these measures and observe that individual metrics often fail to sufficiently differentiate embedding spaces. Building on these insights, we introduce Unified Topological Signatures (UTS), a holistic framework for characterizing embedding spaces. We show that UTS can predict model-specific properties and reveal similarities driven by model architecture. Further, we demonstrate the utility of our method by linking topological structure to ranking effectiveness and accurately predicting document retrievability. We find that a holistic, multi-attribute perspective is essential to understanding and leveraging the geometry of text embeddings.
+
+**Comment:** Representation Learning: analyzes topology/geometry of embedding spaces and proposes Unified Topological Signatures to link embedding structure to model behavior.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 21. [Orchestrating Dual-Boundaries: An Arithmetic Intensity Inspired Acceleration Framework for Diffusion Language Models](https://arxiv.org/abs/2511.21759) <a id="link21"></a>
+
+**ArXiv ID:** 2511.21759
+
+**Authors:** Linye Wei, Wenjue Chen, Pingzhi Tang, Xiaotian Guo, Le Ye, Runsheng Wang, Meng Li
+
+**Abstract:** Diffusion-based large language models (dLLMs) have recently gained significant attention for their exceptional performance and inherent potential for parallel decoding. Existing frameworks further enhance its inference efficiency by enabling KV caching. However, its bidirectional attention mechanism necessitates periodic cache refreshes that interleave prefill and decoding phases, both contributing substantial inference cost and constraining achievable speedup. Inspired by the heterogeneous arithmetic intensity of the prefill and decoding phases, we propose ODB-dLLM, a framework that orchestrates dual-boundaries to accelerate dLLM inference. In the prefill phase, we find that the predefined fixed response length introduces heavy yet redundant computational overhead, which affects efficiency. To alleviate this, ODB-dLLM incorporates an adaptive length prediction mechanism that progressively reduces prefill overhead and unnecessary computation. In the decoding phase, we analyze the computational characteristics of dLLMs and propose a dLLM-specific jump-share speculative decoding method to enhance efficiency by reducing the number of decoding iterations. Experimental results demonstrate that ODB-dLLM achieves 46-162x and 2.63-6.30x speedups over the baseline dLLM and Fast-dLLM, respectively, while simultaneously mitigating the accuracy degradation in existing acceleration frameworks.
+
+**Comment:** Model Compression/Efficiency: adaptive prefill length prediction and dLLM-specific speculative decoding to reduce inference cost.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 22. [Towards Understanding Generalization in DP-GD: A Case Study in Training Two-Layer CNNs](https://arxiv.org/abs/2511.22270) <a id="link22"></a>
+
+**ArXiv ID:** 2511.22270
+
+**Authors:** Zhongjie Shi, Puyu Wang, Chenyang Zhang, Yuan Cao
+
+**Abstract:** Modern deep learning techniques focus on extracting intricate information from data to achieve accurate predictions. However, the training datasets may be crowdsourced and include sensitive information, such as personal contact details, financial data, and medical records. As a result, there is a growing emphasis on developing privacy-preserving training algorithms for neural networks that maintain good performance while preserving privacy. In this paper, we investigate the generalization and privacy performances of the differentially private gradient descent (DP-GD) algorithm, which is a private variant of the gradient descent (GD) by incorporating additional noise into the gradients during each iteration. Moreover, we identify a concrete learning task where DP-GD can achieve superior generalization performance compared to GD in training two-layer Huberized ReLU convolutional neural networks (CNNs). Specifically, we demonstrate that, under mild conditions, a small signal-to-noise ratio can result in GD producing training models with poor test accuracy, whereas DP-GD can yield training models with good test accuracy and privacy guarantees if the signal-to-noise ratio is not too small. This indicates that DP-GD has the potential to enhance model performance while ensuring privacy protection in certain learning tasks. Numerical simulations are further conducted to support our theoretical results.
+
+**Comment:** Training dynamics/Representation Learning: theory showing DP-GD can generalize better than GD in two-layer CNNs under certain regimes.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 23. [Towards a Foundation Model for Partial Differential Equations Across Physics Domains](https://arxiv.org/abs/2511.21861) <a id="link23"></a>
+
+**ArXiv ID:** 2511.21861
+
+**Authors:** Eduardo Soares, Emilio Vital Brazil, Victor Shirasuna, Breno W. S. R. de Carvalho, Cristiano Malossi
+
+**Abstract:** We present PDE-FM, a modular foundation model for physics-informed machine learning that unifies spatial, spectral, and temporal reasoning across heterogeneous partial differential equation (PDE) systems. PDE-FM combines spatial-spectral tokenization, physics-aware conditioning, and a Mamba-based state-space backbone with an operator-theoretic decoder, enabling scalable and data-efficient modeling of complex physical dynamics. In contrast to task-specific neural operators, PDE-FM is pretrained once on diverse PDE datasets and can be transferred to new physical regimes without architectural or data-specific modifications. Evaluated on twelve 2D and 3D datasets from The Well benchmark - spanning hydrodynamic, radiative, elastic, and astrophysical phenomena - PDE-FM achieves state-of-the-art accuracy in six domains, reducing mean VRMSE by 46% relative to prior operator-learning baselines. The model demonstrates robust cross-physics generalization, excelling in turbulent and radiative systems while maintaining strong performance in linear and steady-state regimes. These results suggest that large-scale pretraining across diverse physical processes can yield transferable representations of dynamics, marking a step toward unified, foundation-level surrogates for multi-physics simulation and scientific discovery.
+
+**Comment:** Model Architecture/Foundation Model: PDE-FM combines spatial–spectral tokenization, physics-aware conditioning, Mamba backbone, and operator-theoretic decoder for cross-physics generalization.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 24. [AutoTailor: Automatic and Efficient Adaptive Model Deployment for Diverse Edge Devices](https://arxiv.org/abs/2511.22355) <a id="link24"></a>
+
+**ArXiv ID:** 2511.22355
+
+**Authors:** Mengyang Liu, Chenyu Lu, Haodong Tian, Fang Dong, Ruiting Zhou, Wei Wang, Dian Shen, Guangtong Li, Ye Wan, Li Li
+
+**Abstract:** On-device machine learning (ML) has become a fundamental component of emerging mobile applications. Adaptive model deployment delivers efficient inference for heterogeneous device capabilities and performance requirements through customizing neural architectures. SuperNet-based approaches offer a promising solution by generating a large number of model variants from a pre-trained ML model. However, applying SuperNet in existing frameworks suffers from tedious model-aware development and time-consuming hardware-aware profiling, which limits their practical adoption.   We present AutoTailor, the first framework to enable automated, end-to-end SuperNet-based adaptive model deployment for edge devices. Unlike manual SuperNet construction, AutoTailor employs a computation graph-guided compilation approach to automatically transform user-provided ML models into SuperNets. To support efficient specialization, AutoTailor incorporates learning-free latency and accuracy predictors, enabling low-cost yet accurate performance prediction. Our extended evaluations demonstrate that AutoTailor reduces the lines of code for SuperNet construction by 11--27$\times$, decreases hardware-aware profiling costs by at least 11$\times$, and achieves up to 15.60\% absolute accuracy improvement and 60.03\% latency reduction compared to state-of-the-art approaches across diverse models and devices.
+
+**Comment:** Systems/Efficiency: automated SuperNet construction with learning-free latency/accuracy predictors for adaptive edge deployment.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 25. [Quantized-Tinyllava: a new multimodal foundation model enables efficient split learning](https://arxiv.org/abs/2511.23402) <a id="link25"></a>
+
+**ArXiv ID:** 2511.23402
+
+**Authors:** Jiajun Guo, Xin Luo, Jie Liu
+
+**Abstract:** Split learning is well known as a method for resolving data privacy concerns by training a model on distributed devices, thereby avoiding data sharing that raises privacy issues. However, high network communication costs are always an impediment to split learning, especially for large foundation models that require transmitting large amounts of high-dimensional data. To resolve this issue, we present a new multimodal model structure that incorporates a learning-based data compression method, which compresses model embeddings into low-bit integers while preserving the model's performance, greatly reducing the transmission costs between partitions. We then determine the optimal number of discrete representation levels based on a solid theoretical foundation from entropy coding.
+
+**Comment:** Model Compression and Efficiency: quantizes/intermediately compresses multimodal embeddings to low-bit integers for communication-efficient split learning.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 26. [Cacheback: Speculative Decoding With Nothing But Cache](https://arxiv.org/abs/2511.21699) <a id="link26"></a>
+
+**ArXiv ID:** 2511.21699
+
+**Authors:** Zhiyao Ma, In Gim, Lin Zhong
+
+**Abstract:** We present Cacheback Decoding, a training-free and model-agnostic speculative decoding method that exploits the locality in language to accelerate Large Language Model (LLM) inference. Cacheback leverages only Least Recently Used (LRU) cache tables of token n-grams to generate draft sequences. Cacheback achieves state-of-the-art performance among comparable methods despite its minimalist design, and its simplicity allows easy integration into existing systems. Cacheback also shows potential for fast adaptation to new domains.
+
+**Comment:** Model Compression/Efficiency: training-free, model-agnostic speculative decoding via cache-only draft generation to accelerate LLM inference.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 27. [RoSA: Enhancing Parameter-Efficient Fine-Tuning via RoPE-aware Selective Adaptation in Large Language Models](https://arxiv.org/abs/2511.21733) <a id="link27"></a>
+
+**ArXiv ID:** 2511.21733
+
+**Authors:** Dayan Pan, Jingyuan Wang, Yilong Zhou, Jiawei Cheng, Pengyue Jia, Xiangyu Zhao
+
+**Abstract:** Fine-tuning large language models is essential for task-specific adaptation, yet it remains computationally prohibitive. Parameter-Efficient Fine-Tuning (PEFT) methods have emerged as a solution, but current approaches typically ignore the distinct roles of model components and the heterogeneous importance across layers, thereby limiting adaptation efficiency. Motivated by the observation that Rotary Position Embeddings (RoPE) induce critical activations in the low-frequency dimensions of attention states, we propose RoPE-aware Selective Adaptation (RoSA), a novel PEFT framework that allocates trainable parameters in a more targeted and effective manner. RoSA comprises a RoPE-aware Attention Enhancement (RoAE) module, which selectively enhances the low-frequency components of RoPE-influenced attention states, and a Dynamic Layer Selection (DLS) strategy that adaptively identifies and updates the most critical layers based on LayerNorm gradient norms. By combining dimension-wise enhancement with layer-wise adaptation, RoSA achieves more targeted and efficient fine-tuning. Extensive experiments on fifteen commonsense and arithmetic benchmarks demonstrate that RoSA outperforms existing mainstream PEFT methods under comparable trainable parameters. The code is available to ease reproducibility at https://github.com/Applied-Machine-Learning-Lab/RoSA.
+
+**Comment:** Model Compression/Efficiency: PEFT via RoPE-aware attention enhancement and dynamic layer selection for targeted adaptation.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 28. [Accelerated Execution of Bayesian Neural Networks using a Single Probabilistic Forward Pass and Code Generation](https://arxiv.org/abs/2511.23440) <a id="link28"></a>
+
+**ArXiv ID:** 2511.23440
+
+**Authors:** Bernhard Klein, Falk Selker, Hendrik Borras, Sophie Steger, Franz Pernkopf, Holger Fr\"oning
+
+**Abstract:** Machine learning models perform well across domains such as diagnostics, weather forecasting, NLP, and autonomous driving, but their limited uncertainty handling restricts use in safety-critical settings. Traditional neural networks often fail to detect out-of-domain (OOD) data and may output confident yet incorrect predictions. Bayesian neural networks (BNNs) address this by providing probabilistic estimates, but incur high computational cost because predictions require sampling weight distributions and multiple forward passes. The Probabilistic Forward Pass (PFP) offers a highly efficient approximation to Stochastic Variational Inference (SVI) by assuming Gaussian-distributed weights and activations, enabling fully analytic uncertainty propagation and replacing sampling with a single deterministic forward pass. We present an end-to-end pipeline for training, compiling, optimizing, and deploying PFP-based BNNs on embedded ARM CPUs. Using the TVM deep learning compiler, we implement a dedicated library of Gaussian-propagating operators for multilayer perceptrons and convolutional neural networks, combined with manual and automated tuning strategies. Ablation studies show that PFP consistently outperforms SVI in computational efficiency, achieving speedups of up to 4200x for small mini-batches. PFP-BNNs match SVI-BNNs on Dirty-MNIST in accuracy, uncertainty estimation, and OOD detection while greatly reducing compute cost. These results highlight the potential of combining Bayesian approximations with code generation to enable efficient BNN deployment on resource-constrained systems.
+
+**Comment:** Model Efficiency/HPC: single probabilistic forward pass for BNNs with TVM code generation and Gaussian-propagating ops for embedded deployment.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 29. [Distributed Dynamic Associative Memory via Online Convex Optimization](https://arxiv.org/abs/2511.23347) <a id="link29"></a>
+
+**ArXiv ID:** 2511.23347
+
+**Authors:** Bowen Wang, Matteo Zecchin, Osvaldo Simeone
+
+**Abstract:** An associative memory (AM) enables cue-response recall, and it has recently been recognized as a key mechanism underlying modern neural architectures such as Transformers. In this work, we introduce the concept of distributed dynamic associative memory (DDAM), which extends classical AM to settings with multiple agents and time-varying data streams. In DDAM, each agent maintains a local AM that must not only store its own associations but also selectively memorize information from other agents based on a specified interest matrix. To address this problem, we propose a novel tree-based distributed online gradient descent algorithm, termed DDAM-TOGD, which enables each agent to update its memory on the fly via inter-agent communication over designated routing trees. We derive rigorous performance guarantees for DDAM-TOGD, proving sublinear static regret in stationary environments and a path-length dependent dynamic regret bound in non-stationary environments. These theoretical results provide insights into how communication delays and network structure impact performance. Building on the regret analysis, we further introduce a combinatorial tree design strategy that optimizes the routing trees to minimize communication delays, thereby improving regret bounds. Numerical experiments demonstrate that the proposed DDAM-TOGD framework achieves superior accuracy and robustness compared to representative online learning baselines such as consensus-based distributed optimization, confirming the benefits of the proposed approach in dynamic, distributed environments.
+
+**Comment:** Matches Representation Learning (associative memory formalism) and High Performance Computing/Distributed Training (tree-based distributed online optimization with regret bounds).
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+# Paper Selection Prompt
+
+## System Prompt
+
+> You are a helpful paper reading assistant whose job is to read daily posts from ArXiv and identify a few papers that your friend will enjoy reading.
+> Your job is to carefully read the paper titles and abstracts below and find the ones that match the criteria below.
+
+## User Prompt
+
+> ## Instructions
+> 
+> Write the response in JSONL format with {ARXIVID, COMMENT, RELEVANCE, NOVELTY} on each line, one for each paper.
+> 
+> - ARXIVID: should be the ArXiv ID.
+> - COMMENT: should identify whether there is a criteria that match the paper very closely. These matches should not be based on general terms like "language modeling" or "advancements" and should specifically refer to a criterion. No need to mention the non-matching criteria.
+> - RELEVANCE: should be a score from 1-10.
+> - NOVELTY: should be a score from 1-10.
+> 
+> ## Scoring Criteria
+> 
+> > The "Relevance" score measures how closely the paper aligns with the core topics of the prompt.
+> > The "Novelty" score assesses the originality and impact of the paper.
+> > They are two **ORTHONORMAL** axes and **SHOULD NOT** be confused with each other.
+> 
+> ### Relevance Scoring
+> 
+> - Relevance 9-10 (Completely Relevant)
+>   - Focus: Fully aligned with core topics with no deviation, score the highest if contains relevant keywords in it.
+>   - Examples: Papers focused on foundational methods or theoretical research, whose titles contain topic keywords like "MoE".
+> 
+> - Relevance 7-8 (Relevant)
+>   - Focus: Retain a solid link to the main research area, though may touch on peripheral elements.
+>   - Examples: Papers research on the fundamental part of MoE through a less critical aspect like its behavior in GNN.
+> 
+> - Relevance 5-6 (Borderline)
+>   - Focus: Maintains a link to the core topic but also extends into at least one other domain/area beyond the primary focus.
+>   - Examples: Work referencing MoE centered on reinforcement learning.
+> 
+> - Relevance 3-4 (Irrelevant)
+>   - Focus: Largely outside our interests with no association to our topics.
+>   - Examples: Application-focused papers like using MoE to solve a problem in the real world.
+> 
+> - Relevance 1-2 (Ignore)
+>   - Focus: Purely unrelated to our topics. Completely a different domain.
+>   - **Exception**: If the paper hints at a cutting-edge, radically new direction that could eventually transform the primary domain, consider a score of 9–10 despite initial appearances. (Usually a very rare concept that belongs to the fundamental research)
+> 
+> ### Novelty Scoring
+> 
+> - Novelty 9-10 (Breakthrough)
+>   - Definition: Groundbreaking methods/theory introducing new directions or solving major challenges.
+>   - Examples: Entirely new paradigm for foundational models; a novel theory transforming representation learning.
+> 
+> - Novelty 7-8 (Improvements)
+>   - Definition: Substantial insights/enhancements, though not a full paradigm shift.
+>   - Examples: Modifications on existing methods yielding significantly better results.
+> 
+> - Novelty 5-6 (Borderline)
+>   - Definition: Incremental contributions with possible long-term benefits, not immediately transformative.
+>   - Examples: Moderately novel extension to an existing architecture; refining current methods without fundamentally altering them.
+> 
+> - Novelty 3-4 (Tangential)
+>   - Definition: Minor or domain-specific improvements with limited broader impact.
+>   - Examples: Slight modifications to known methods with strange motivation; purely engineering jobs like a new benchmark/dataset.
+> 
+> - Novelty 1-2 (Low)
+>   - Definition: Minimal originality, applying standard approaches without real innovation.
+>   - Examples: Using an off-the-shelf model without adding new insights; purely application-driven studies like finetuning a pretrained model using existing methods.
+> 
+> ## Papers
+> 
+> [PAPER LIST HERE]
+> 
+> ## Relevant Topics
+> 
+> Use the following relevance criteria to focus on foundational research. Keep **relevant** papers and filter out **irrelevant** ones. Avoid purely **application-driven** work.
+> 
+> 1. Model Architecture
+>    - Relevant: Mixture-of-Experts (MoE), Transformers, Conditional/Dynamic Networks, Autoencoders, analysis/innovations on existing architectures.
+>    - Irrelevant: Merely using existing architectures for a certain task without insights into the structure themselves.
+> 
+> 2. Model Compression and Efficiency
+>    - Relevant: Sparsity, pruning, quantization, low-rank approaches, cache, or other algorithmic/theoretical efficiency breakthroughs.
+>    - Irrelevant: Straightforward applications of existing compression methods to new tasks.
+> 
+> 3. High Performance Computing
+>    - Relevant: Algorithmic or systems-level innovations enabling training of large-scale models, distributed training techniques, memory optimization.
+>    - Irrelevant: Incremental engineering improvements without novel algorithmic contributions.
+> 
+> 4. Representation Learning
+>    - Relevant: Insights into how deep networks encode information, feature/dictionary learning, sparse/contrastive methods, training dynamics in neural networks.
+>    - Irrelevant: Standard applications of known techniques lacking new theoretical or methodological contributions.
+> 
+> **Keywords:**
+> 
+> - Relevant: Mixture of Experts (MoE), Representation Learning, Compression/Efficiency, Sparse/Sparsity, Pruning, Quantization, Low-rank, Foundation Model, etc.
+> - Irrelevant: Reinforcement Learning, Transfer Learning, Federated Learning, Online Learning, Diffusion Models, etc.
+> - Application: Image Segmentation, Medical Imaging, 3D Vision, Video Understanding, Information Retrieval, Summarization, Recommendation Systems, Machine Translation, Speech Recognition, Signal Processing, Spatial/Temporal Modeling, Time Series, Knowledge Graph, etc.

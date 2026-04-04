@@ -1,0 +1,430 @@
+<div style="display: flex; align-items: flex-start; justify-content: space-between; width: 100%;"><div style="width: 33.33%; text-align: left;"><a href="../30"><img src="../../../assets/nav/day/2025-07-31-prev.svg" alt="Previous Day 2025-07-30"></a></div><div style="width: 33.33%; text-align: center;"><a href=".."><img src="../../../assets/nav/day/2025-07-31-center.svg" alt="Monthly Overview 2025-07"></a></div><div style="width: 33.33%; text-align: right;"><a href="../../2025-08/01"><img src="../../../assets/nav/day/2025-07-31-next.svg" alt="Next Day 2025-08-01"></a></div></div>
+
+# Personalized Daily ArXiv Papers 2025-07-31
+
+| *[gpt-4o]*   | Prompt   | Completion   | Total   |
+|:------------:|:--------:|:------------:|:-------:|
+| **Token**    | 25146    | 2372         | 27518   |
+| **Cost**     | $0.06    | $0.02        | $0.09   |
+
+Total arXiv papers: 377
+
+Total scanned papers: 224
+
+Total relevant papers: 17
+
+**Table of contents with paper titles:**
+
+1. [Teaching the Teacher: Improving Neural Network Distillability for Symbolic Regression via Jacobian Regularization](#user-content-link1)
+**Authors:** Soumyadeep Dhar, Kei Sen Fong, Mehul Motani
+
+2. [FGFP: A Fractional Gaussian Filter and Pruning for Deep Neural Networks Compression](#user-content-link2)
+**Authors:** Kuan-Ting Tu, Po-Hsien Yu, Yu-Syuan Tseng, Shao-Yi Chien
+
+3. [Better Together: Cross and Joint Covariances Enhance Signal Detectability in Undersampled Data](#user-content-link3)
+**Authors:** Arabind Swain, Sean Alexander Ridout, Ilya Nemenman
+
+4. [LLM-Crowdsourced: A Benchmark-Free Paradigm for Mutual Evaluation of Large Language Models](#user-content-link4)
+**Authors:** Qianhong Guo, Wei Xie, Xiaofang Cai, Enze Wang, Shuoyoucheng Ma, Kai Chen, Xiaofeng Wang, Baosheng Wang
+
+5. [Amorphous Solid Model of Vectorial Hopfield Neural Networks](#user-content-link5)
+**Authors:** F. Gallavotti, A. Zaccone
+
+6. [DO-EM: Density Operator Expectation Maximization](#user-content-link6)
+**Authors:** Adit Vishnu, Abhay Shastry, Dhruva Kashyap, Chiranjib Bhattacharyya
+
+7. [MSQ: Memory-Efficient Bit Sparsification Quantization](#user-content-link7)
+**Authors:** Seokho Han, Seoyeon Yoon, Jinhee Kim, Dongwei Wang, Kang Eun Jeon, Huanrui Yang, Jong Hwan Ko
+
+8. [MoCHA: Advanced Vision-Language Reasoning with MoE Connector and Hierarchical Group Attention](#user-content-link8)
+**Authors:** Yuqi Pang, Bowen Yang, Yun Cao, Fan Rong, Xiaoyu Li, Chen He
+
+9. [Representation biases: will we achieve complete understanding by analyzing representations?](#user-content-link9)
+**Authors:** Andrew Kyle Lampinen, Stephanie C. Y. Chan, Yuxuan Li, Katherine Hermann
+
+10. [Synchronization of mean-field models on the circle](#user-content-link10)
+**Authors:** Yury Polyanskiy, Philippe Rigollet, Andrew Yao
+
+11. [Stacked SVD or SVD stacked? A Random Matrix Theory perspective on data integration](#user-content-link11)
+**Authors:** Tavor Z. Baharav, Phillip B. Nicol, Rafael A. Irizarry, Rong Ma
+
+12. [When Truthful Representations Flip Under Deceptive Instructions?](#user-content-link12)
+**Authors:** Xianxuan Long, Yao Fu, Runchao Li, Mu Sheng, Haotian Yu, Xiaotian Han, Pan Li
+
+13. [Consistency of Feature Attribution in Deep Learning Architectures for Multi-Omics](#user-content-link13)
+**Authors:** Daniel Claborne, Javier Flores, Samantha Erwin, Luke Durell, Rachel Richardson, Ruby Fore, Lisa Bramer
+
+14. [What is an "Abstract Reasoner"? Revisiting Experiments and Arguments about Large Language Models](#user-content-link14)
+**Authors:** Tian Yun, Chen Sun, Ellie Pavlick
+
+15. [Meaning-infused grammar: Gradient Acceptability Shapes the Geometric Representations of Constructions in LLMs](#user-content-link15)
+**Authors:** Supantho Rakshit, Adele Goldberg
+
+16. [RCR-AF: Enhancing Model Generalization via Rademacher Complexity Reduction Activation Function](#user-content-link16)
+**Authors:** Yunrui Yu, Kafeng Wang, Hang Su, Jun Zhu
+
+17. [Subgrid BoostCNN: Efficient Boosting of Convolutional Networks via Gradient-Guided Feature Selection](#user-content-link17)
+**Authors:** Biyi Fang, Jean Utke, Truong Vo, Diego Klabjan
+
+---
+
+## 1. [Teaching the Teacher: Improving Neural Network Distillability for Symbolic Regression via Jacobian Regularization](https://arxiv.org/abs/2507.22767) <a id="link1"></a>
+
+**ArXiv ID:** 2507.22767
+
+**Authors:** Soumyadeep Dhar, Kei Sen Fong, Mehul Motani
+
+**Abstract:** Distilling large neural networks into simple, human-readable symbolic formulas is a promising path toward trustworthy and interpretable AI. However, this process is often brittle, as the complex functions learned by standard networks are poor targets for symbolic discovery, resulting in low-fidelity student models. In this work, we propose a novel training paradigm to address this challenge. Instead of passively distilling a pre-trained network, we introduce a \textbf{Jacobian-based regularizer} that actively encourages the ``teacher'' network to learn functions that are not only accurate but also inherently smoother and more amenable to distillation. We demonstrate through extensive experiments on a suite of real-world regression benchmarks that our method is highly effective. By optimizing the regularization strength for each problem, we improve the $R^2$ score of the final distilled symbolic model by an average of \textbf{120\% (relative)} compared to the standard distillation pipeline, all while maintaining the teacher's predictive accuracy. Our work presents a practical and principled method for significantly improving the fidelity of interpretable models extracted from complex neural networks.
+
+**Comment:** The paper introduces a novel training paradigm using Jacobian regularization to improve neural network distillability, which is relevant to representation learning and model compression.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 2. [FGFP: A Fractional Gaussian Filter and Pruning for Deep Neural Networks Compression](https://arxiv.org/abs/2507.22527) <a id="link2"></a>
+
+**ArXiv ID:** 2507.22527
+
+**Authors:** Kuan-Ting Tu, Po-Hsien Yu, Yu-Syuan Tseng, Shao-Yi Chien
+
+**Abstract:** Network compression techniques have become increasingly important in recent years because the loads of Deep Neural Networks (DNNs) are heavy for edge devices in real-world applications. While many methods compress neural network parameters, deploying these models on edge devices remains challenging. To address this, we propose the fractional Gaussian filter and pruning (FGFP) framework, which integrates fractional-order differential calculus and Gaussian function to construct fractional Gaussian filters (FGFs). To reduce the computational complexity of fractional-order differential operations, we introduce Gr\"unwald-Letnikov fractional derivatives to approximate the fractional-order differential equation. The number of parameters for each kernel in FGF is minimized to only seven. Beyond the architecture of Fractional Gaussian Filters, our FGFP framework also incorporates Adaptive Unstructured Pruning (AUP) to achieve higher compression ratios. Experiments on various architectures and benchmarks show that our FGFP framework outperforms recent methods in accuracy and compression. On CIFAR-10, ResNet-20 achieves only a 1.52% drop in accuracy while reducing the model size by 85.2%. On ImageNet2012, ResNet-50 achieves only a 1.63% drop in accuracy while reducing the model size by 69.1%.
+
+**Comment:** The paper introduces a novel framework for model compression using fractional Gaussian filters and pruning, which aligns with interests in model compression and efficiency.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 3. [Better Together: Cross and Joint Covariances Enhance Signal Detectability in Undersampled Data](https://arxiv.org/abs/2507.22207) <a id="link3"></a>
+
+**ArXiv ID:** 2507.22207
+
+**Authors:** Arabind Swain, Sean Alexander Ridout, Ilya Nemenman
+
+**Abstract:** Many data-science applications involve detecting a shared signal between two high-dimensional variables. Using random matrix theory methods, we determine when such signal can be detected and reconstructed from sample correlations, despite the background of sampling noise induced correlations. We consider three different covariance matrices constructed from two high-dimensional variables: their individual self covariance, their cross covariance, and the self covariance of the concatenated (joint) variable, which incorporates the self and the cross correlation blocks. We observe the expected Baik, Ben Arous, and P\'ech\'e detectability phase transition in all these covariance matrices, and we show that joint and cross covariance matrices always reconstruct the shared signal earlier than the self covariances. Whether the joint or the cross approach is better depends on the mismatch of dimensionalities between the variables. We discuss what these observations mean for choosing the right method for detecting linear correlations in data and how these findings may generalize to nonlinear statistical dependencies.
+
+**Comment:** The paper discusses the use of covariance matrices to detect shared signals in high-dimensional data, which aligns with representation learning and foundational research in understanding data encoding.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 4. [LLM-Crowdsourced: A Benchmark-Free Paradigm for Mutual Evaluation of Large Language Models](https://arxiv.org/abs/2507.22359) <a id="link4"></a>
+
+**ArXiv ID:** 2507.22359
+
+**Authors:** Qianhong Guo, Wei Xie, Xiaofang Cai, Enze Wang, Shuoyoucheng Ma, Kai Chen, Xiaofeng Wang, Baosheng Wang
+
+**Abstract:** Although large language models (LLMs) demonstrate remarkable capabilities across various tasks, evaluating their capabilities remains a challenging task. Existing evaluation methods suffer from issues such as data contamination, black-box operation, and subjective preference. These issues make it difficult to evaluate the LLMs' true capabilities comprehensively. To tackle these challenges, we propose a novel benchmark-free evaluation paradigm, LLM-Crowdsourced. It utilizes LLMs to generate questions, answer independently, and evaluate mutually. This method integrates four key evaluation criteria: dynamic, transparent, objective, and professional, which existing evaluation methods cannot satisfy simultaneously. Experiments on eight mainstream LLMs across mathematics and programming verify the advantages of our method in distinguishing LLM performance. Furthermore, our study reveals several novel findings that are difficult for traditional methods to detect, including but not limited to: (1) Gemini demonstrates the highest original and professional question-design capabilities among others; (2) Some LLMs exhibit ''memorization-based answering'' by misrecognizing questions as familiar ones with a similar structure; (3) LLM evaluation results demonstrate high consistency (robustness).
+
+**Comment:** The paper proposes a novel benchmark-free evaluation paradigm for LLMs, which aligns with foundational research in evaluating LLM capabilities and introduces a new evaluation method.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 5. [Amorphous Solid Model of Vectorial Hopfield Neural Networks](https://arxiv.org/abs/2507.22787) <a id="link5"></a>
+
+**ArXiv ID:** 2507.22787
+
+**Authors:** F. Gallavotti, A. Zaccone
+
+**Abstract:** We present a vectorial extension of the Hopfield associative memory model inspired by the theory of amorphous solids, where binary neural states are replaced by unit vectors $\mathbf{s}_i \in \mathbb{R}^3$ on the sphere $S^2$. The generalized Hebbian learning rule creates a block-structured weight matrix through outer products of stored pattern vectors, analogous to the Hessian matrix structure in amorphous solids. We demonstrate that this model exhibits quantifiable structural properties characteristic of disordered materials: energy landscapes with deep minima for stored patterns versus random configurations (energy gaps $\sim 7$ units), strongly anisotropic correlations encoded in the weight matrix (anisotropy ratios $\sim 10^2$), and order-disorder transitions controlled by the pattern density $\gamma = P/(N \cdot d)$. The enhanced memory capacity ($\gamma_c \approx 0.55$ for a fully-connected network) compared to binary networks ($\gamma_c \approx 0.138$) and the emergence of orientational correlations establish connections between associative memory mechanisms and amorphous solid physics, particularly in systems with continuous orientational degrees of freedom. We also unveil the scaling with the coordination number $Z$ of the memory capacity: $\gamma_c \sim (Z-6)$ from the isostatic point $Z_c =6$ of the 3D elastic network, which closely mirrors the scaling of the shear modulus $G \sim (Z-6)$ in 3D central-force spring networks.
+
+**Comment:** The paper introduces a novel extension of the Hopfield model with connections to amorphous solid physics, which is relevant to representation learning and emerging trends.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 6. [DO-EM: Density Operator Expectation Maximization](https://arxiv.org/abs/2507.22786) <a id="link6"></a>
+
+**ArXiv ID:** 2507.22786
+
+**Authors:** Adit Vishnu, Abhay Shastry, Dhruva Kashyap, Chiranjib Bhattacharyya
+
+**Abstract:** Density operators, quantum generalizations of probability distributions, are gaining prominence in machine learning due to their foundational role in quantum computing. Generative modeling based on density operator models (\textbf{DOMs}) is an emerging field, but existing training algorithms -- such as those for the Quantum Boltzmann Machine -- do not scale to real-world data, such as the MNIST dataset. The Expectation-Maximization algorithm has played a fundamental role in enabling scalable training of probabilistic latent variable models on real-world datasets. \textit{In this paper, we develop an Expectation-Maximization framework to learn latent variable models defined through \textbf{DOMs} on classical hardware, with resources comparable to those used for probabilistic models, while scaling to real-world data.} However, designing such an algorithm is nontrivial due to the absence of a well-defined quantum analogue to conditional probability, which complicates the Expectation step. To overcome this, we reformulate the Expectation step as a quantum information projection (QIP) problem and show that the Petz Recovery Map provides a solution under sufficient conditions. Using this formulation, we introduce the Density Operator Expectation Maximization (DO-EM) algorithm -- an iterative Minorant-Maximization procedure that optimizes a quantum evidence lower bound. We show that the \textbf{DO-EM} algorithm ensures non-decreasing log-likelihood across iterations for a broad class of models. Finally, we present Quantum Interleaved Deep Boltzmann Machines (\textbf{QiDBMs}), a \textbf{DOM} that can be trained with the same resources as a DBM. When trained with \textbf{DO-EM} under Contrastive Divergence, a \textbf{QiDBM} outperforms larger classical DBMs in image generation on the MNIST dataset, achieving a 40--60\% reduction in the Fr\'echet Inception Distance.
+
+**Comment:** The paper presents a novel Expectation-Maximization framework for density operator models, which is a foundational research in quantum generative modeling, aligning with emerging trends.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 7. [MSQ: Memory-Efficient Bit Sparsification Quantization](https://arxiv.org/abs/2507.22349) <a id="link7"></a>
+
+**ArXiv ID:** 2507.22349
+
+**Authors:** Seokho Han, Seoyeon Yoon, Jinhee Kim, Dongwei Wang, Kang Eun Jeon, Huanrui Yang, Jong Hwan Ko
+
+**Abstract:** As deep neural networks (DNNs) see increased deployment on mobile and edge devices, optimizing model efficiency has become crucial. Mixed-precision quantization is widely favored, as it offers a superior balance between efficiency and accuracy compared to uniform quantization. However, finding the optimal precision for each layer is challenging. Recent studies utilizing bit-level sparsity have shown promise, yet they often introduce substantial training complexity and high GPU memory requirements. In this paper, we propose Memory-Efficient Bit Sparsification Quantization (MSQ), a novel approach that addresses these limitations. MSQ applies a round-clamp quantizer to enable differentiable computation of the least significant bits (LSBs) from model weights. It further employs regularization to induce sparsity in these LSBs, enabling effective precision reduction without explicit bit-level parameter splitting. Additionally, MSQ incorporates Hessian information, allowing the simultaneous pruning of multiple LSBs to further enhance training efficiency. Experimental results show that MSQ achieves up to 8.00x reduction in trainable parameters and up to 86% reduction in training time compared to previous bit-level quantization, while maintaining competitive accuracy and compression rates. This makes it a practical solution for training efficient DNNs on resource-constrained devices.
+
+**Comment:** The paper proposes a novel quantization method, MSQ, which addresses memory efficiency and training complexity, aligning with the model compression criterion.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 8. [MoCHA: Advanced Vision-Language Reasoning with MoE Connector and Hierarchical Group Attention](https://arxiv.org/abs/2507.22805) <a id="link8"></a>
+
+**ArXiv ID:** 2507.22805
+
+**Authors:** Yuqi Pang, Bowen Yang, Yun Cao, Fan Rong, Xiaoyu Li, Chen He
+
+**Abstract:** Vision large language models (VLLMs) are focusing primarily on handling complex and fine-grained visual information by incorporating advanced vision encoders and scaling up visual models. However, these approaches face high training and inference costs, as well as challenges in extracting visual details, effectively bridging across modalities. In this work, we propose a novel visual framework, MoCHA, to address these issues. Our framework integrates four vision backbones (i.e., CLIP, SigLIP, DINOv2 and ConvNeXt) to extract complementary visual features and is equipped with a sparse Mixture of Experts Connectors (MoECs) module to dynamically select experts tailored to different visual dimensions. To mitigate redundant or insufficient use of the visual information encoded by the MoECs module, we further design a Hierarchical Group Attention (HGA) with intra- and inter-group operations and an adaptive gating strategy for encoded visual features. We train MoCHA on two mainstream LLMs (e.g., Phi2-2.7B and Vicuna-7B) and evaluate their performance across various benchmarks. Notably, MoCHA outperforms state-of-the-art open-weight models on various tasks. For example, compared to CuMo (Mistral-7B), our MoCHA (Phi2-2.7B) presents outstanding abilities to mitigate hallucination by showing improvements of 3.25% in POPE and to follow visual instructions by raising 153 points on MME. Finally, ablation studies further confirm the effectiveness and robustness of the proposed MoECs and HGA in improving the overall performance of MoCHA.
+
+**Comment:** The paper presents MoCHA, which uses a sparse Mixture of Experts Connectors module, aligning with the model architecture criterion.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 9. [Representation biases: will we achieve complete understanding by analyzing representations?](https://arxiv.org/abs/2507.22216) <a id="link9"></a>
+
+**ArXiv ID:** 2507.22216
+
+**Authors:** Andrew Kyle Lampinen, Stephanie C. Y. Chan, Yuxuan Li, Katherine Hermann
+
+**Abstract:** A common approach in neuroscience is to study neural representations as a means to understand a system -- increasingly, by relating the neural representations to the internal representations learned by computational models. However, a recent work in machine learning (Lampinen, 2024) shows that learned feature representations may be biased to over-represent certain features, and represent others more weakly and less-consistently. For example, simple (linear) features may be more strongly and more consistently represented than complex (highly nonlinear) features. These biases could pose challenges for achieving full understanding of a system through representational analysis. In this perspective, we illustrate these challenges -- showing how feature representation biases can lead to strongly biased inferences from common analyses like PCA, regression, and RSA. We also present homomorphic encryption as a simple case study of the potential for strong dissociation between patterns of representation and computation. We discuss the implications of these results for representational comparisons between systems, and for neuroscience more generally.
+
+**Comment:** The paper discusses representation biases in neural networks, which aligns with the topic of representation learning by providing insights into how deep networks encode information.
+
+**Relevance:** 9
+**Novelty:** 7
+
+---
+
+## 10. [Synchronization of mean-field models on the circle](https://arxiv.org/abs/2507.22857) <a id="link10"></a>
+
+**ArXiv ID:** 2507.22857
+
+**Authors:** Yury Polyanskiy, Philippe Rigollet, Andrew Yao
+
+**Abstract:** This paper considers a mean-field model of $n$ interacting particles whose state space is the unit circle, a generalization of the classical Kuramoto model. Global synchronization is said to occur if after starting from almost any initial state, all particles coalesce to a common point on the circle. We propose a general synchronization criterion in terms of $L_1$-norm of the third derivative of the particle interaction function. As an application we resolve a conjecture for the so-called self-attention dynamics (stylized model of transformers), by showing synchronization for all $\beta \ge -0.16$, which significantly extends the previous bound of $0\le \beta \le 1$ from Criscitiello, Rebjock, McRae, and Boumal (2024). We also show that global synchronization does not occur when $\beta < -2/3$.
+
+**Comment:** The paper provides theoretical insights into synchronization in mean-field models, with an application to self-attention dynamics in transformers, which aligns with the interest in model architecture analysis.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 11. [Stacked SVD or SVD stacked? A Random Matrix Theory perspective on data integration](https://arxiv.org/abs/2507.22170) <a id="link11"></a>
+
+**ArXiv ID:** 2507.22170
+
+**Authors:** Tavor Z. Baharav, Phillip B. Nicol, Rafael A. Irizarry, Rong Ma
+
+**Abstract:** Modern data analysis increasingly requires identifying shared latent structure across multiple high-dimensional datasets. A commonly used model assumes that the data matrices are noisy observations of low-rank matrices with a shared singular subspace. In this case, two primary methods have emerged for estimating this shared structure, which vary in how they integrate information across datasets. The first approach, termed Stack-SVD, concatenates all the datasets, and then performs a singular value decomposition (SVD). The second approach, termed SVD-Stack, first performs an SVD separately for each dataset, then aggregates the top singular vectors across these datasets, and finally computes a consensus amongst them. While these methods are widely used, they have not been rigorously studied in the proportional asymptotic regime, which is of great practical relevance in today's world of increasing data size and dimensionality. This lack of theoretical understanding has led to uncertainty about which method to choose and limited the ability to fully exploit their potential. To address these challenges, we derive exact expressions for the asymptotic performance and phase transitions of these two methods and develop optimal weighting schemes to further improve both methods. Our analysis reveals that while neither method uniformly dominates the other in the unweighted case, optimally weighted Stack-SVD dominates optimally weighted SVD-Stack. We extend our analysis to accommodate multiple shared components, and provide practical algorithms for estimating optimal weights from data, offering theoretical guidance for method selection in practical data integration problems. Extensive numerical simulations and semi-synthetic experiments on genomic data corroborate our theoretical findings.
+
+**Comment:** The paper provides a theoretical analysis of data integration methods using random matrix theory, which is relevant to representation learning and foundational research.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 12. [When Truthful Representations Flip Under Deceptive Instructions?](https://arxiv.org/abs/2507.22149) <a id="link12"></a>
+
+**ArXiv ID:** 2507.22149
+
+**Authors:** Xianxuan Long, Yao Fu, Runchao Li, Mu Sheng, Haotian Yu, Xiaotian Han, Pan Li
+
+**Abstract:** Large language models (LLMs) tend to follow maliciously crafted instructions to generate deceptive responses, posing safety challenges. How deceptive instructions alter the internal representations of LLM compared to truthful ones remains poorly understood beyond output analysis. To bridge this gap, we investigate when and how these representations ``flip'', such as from truthful to deceptive, under deceptive versus truthful/neutral instructions. Analyzing the internal representations of Llama-3.1-8B-Instruct and Gemma-2-9B-Instruct on a factual verification task, we find the model's instructed True/False output is predictable via linear probes across all conditions based on the internal representation. Further, we use Sparse Autoencoders (SAEs) to show that the Deceptive instructions induce significant representational shifts compared to Truthful/Neutral representations (which are similar), concentrated in early-to-mid layers and detectable even on complex datasets. We also identify specific SAE features highly sensitive to deceptive instruction and use targeted visualizations to confirm distinct truthful/deceptive representational subspaces. % Our analysis pinpoints layer-wise and feature-level correlates of instructed dishonesty, offering insights for LLM detection and control. Our findings expose feature- and layer-level signatures of deception, offering new insights for detecting and mitigating instructed dishonesty in LLMs.
+
+**Comment:** The paper investigates how deceptive instructions affect internal representations in LLMs, providing insights into LLM behavior and interpretability.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 13. [Consistency of Feature Attribution in Deep Learning Architectures for Multi-Omics](https://arxiv.org/abs/2507.22877) <a id="link13"></a>
+
+**ArXiv ID:** 2507.22877
+
+**Authors:** Daniel Claborne, Javier Flores, Samantha Erwin, Luke Durell, Rachel Richardson, Ruby Fore, Lisa Bramer
+
+**Abstract:** Machine and deep learning have grown in popularity and use in biological research over the last decade but still present challenges in interpretability of the fitted model. The development and use of metrics to determine features driving predictions and increase model interpretability continues to be an open area of research. We investigate the use of Shapley Additive Explanations (SHAP) on a multi-view deep learning model applied to multi-omics data for the purposes of identifying biomolecules of interest. Rankings of features via these attribution methods are compared across various architectures to evaluate consistency of the method. We perform multiple computational experiments to assess the robustness of SHAP and investigate modeling approaches and diagnostics to increase and measure the reliability of the identification of important features. Accuracy of a random-forest model fit on subsets of features selected as being most influential as well as clustering quality using only these features are used as a measure of effectiveness of the attribution method. Our findings indicate that the rankings of features resulting from SHAP are sensitive to the choice of architecture as well as different random initializations of weights, suggesting caution when using attribution methods on multi-view deep learning models applied to multi-omics data. We present an alternative, simple method to assess the robustness of identification of important biomolecules.
+
+**Comment:** The paper investigates feature attribution methods in deep learning architectures, which relates to representation learning and interpretability, a foundational aspect of understanding model behavior.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 14. [What is an "Abstract Reasoner"? Revisiting Experiments and Arguments about Large Language Models](https://arxiv.org/abs/2507.22457) <a id="link14"></a>
+
+**ArXiv ID:** 2507.22457
+
+**Authors:** Tian Yun, Chen Sun, Ellie Pavlick
+
+**Abstract:** Recent work has argued that large language models (LLMs) are not "abstract reasoners", citing their poor zero-shot performance on a variety of challenging tasks as evidence. We revisit these experiments in order to add nuance to the claim. First, we show that while LLMs indeed perform poorly in a zero-shot setting, even tuning a small subset of parameters for input encoding can enable near-perfect performance. However, we also show that this finetuning does not necessarily transfer across datasets. We take this collection of empirical results as an invitation to (re-)open the discussion of what it means to be an "abstract reasoner", and why it matters whether LLMs fit the bill.
+
+**Comment:** The paper revisits the concept of 'abstract reasoning' in LLMs, which aligns with the interest in theoretical insights into LLM behavior.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 15. [Meaning-infused grammar: Gradient Acceptability Shapes the Geometric Representations of Constructions in LLMs](https://arxiv.org/abs/2507.22286) <a id="link15"></a>
+
+**ArXiv ID:** 2507.22286
+
+**Authors:** Supantho Rakshit, Adele Goldberg
+
+**Abstract:** The usage-based constructionist (UCx) approach posits that language comprises a network of learned form-meaning pairings (constructions) whose use is largely determined by their meanings or functions, requiring them to be graded and probabilistic. This study investigates whether the internal representations in Large Language Models (LLMs) reflect the proposed function-infused gradience. We analyze the neural representations of the English dative constructions (Double Object and Prepositional Object) in Pythia-$1.4$B, using a dataset of $5000$ sentence pairs systematically varied for human-rated preference strength. A macro-level geometric analysis finds that the separability between construction representations, as measured by Energy Distance or Jensen-Shannon Divergence, is systematically modulated by gradient preference strength. More prototypical exemplars of each construction occupy more distinct regions in the activation space of LLMs. These results provide strong evidence that LLMs learn rich, meaning-infused, graded representations of constructions and offer support for geometric measures of basic constructionist principles in LLMs.
+
+**Comment:** The paper investigates the internal representations in LLMs, which aligns with the interest in representation learning and theoretical insights into LLM behavior.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 16. [RCR-AF: Enhancing Model Generalization via Rademacher Complexity Reduction Activation Function](https://arxiv.org/abs/2507.22446) <a id="link16"></a>
+
+**ArXiv ID:** 2507.22446
+
+**Authors:** Yunrui Yu, Kafeng Wang, Hang Su, Jun Zhu
+
+**Abstract:** Despite their widespread success, deep neural networks remain critically vulnerable to adversarial attacks, posing significant risks in safety-sensitive applications. This paper investigates activation functions as a crucial yet underexplored component for enhancing model robustness. We propose a Rademacher Complexity Reduction Activation Function (RCR-AF), a novel activation function designed to improve both generalization and adversarial resilience. RCR-AF uniquely combines the advantages of GELU (including smoothness, gradient stability, and negative information retention) with ReLU's desirable monotonicity, while simultaneously controlling both model sparsity and capacity through built-in clipping mechanisms governed by two hyperparameters, $\alpha$ and $\gamma$. Our theoretical analysis, grounded in Rademacher complexity, demonstrates that these parameters directly modulate the model's Rademacher complexity, offering a principled approach to enhance robustness. Comprehensive empirical evaluations show that RCR-AF consistently outperforms widely-used alternatives (ReLU, GELU, and Swish) in both clean accuracy under standard training and in adversarial robustness within adversarial training paradigms.
+
+**Comment:** The paper introduces a novel activation function, RCR-AF, which enhances model robustness and generalization by controlling model sparsity and capacity. This aligns with the representation learning criterion.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 17. [Subgrid BoostCNN: Efficient Boosting of Convolutional Networks via Gradient-Guided Feature Selection](https://arxiv.org/abs/2507.22842) <a id="link17"></a>
+
+**ArXiv ID:** 2507.22842
+
+**Authors:** Biyi Fang, Jean Utke, Truong Vo, Diego Klabjan
+
+**Abstract:** Convolutional Neural Networks (CNNs) have achieved remarkable success across a wide range of machine learning tasks by leveraging hierarchical feature learning through deep architectures. However, the large number of layers and millions of parameters often make CNNs computationally expensive to train, requiring extensive time and manual tuning to discover optimal architectures. In this paper, we introduce a novel framework for boosting CNN performance that integrates dynamic feature selection with the principles of BoostCNN. Our approach incorporates two key strategies: subgrid selection and importance sampling, to guide training toward informative regions of the feature space. We further develop a family of algorithms that embed boosting weights directly into the network training process using a least squares loss formulation. This integration not only alleviates the burden of manual architecture design but also enhances accuracy and efficiency. Experimental results across several fine-grained classification benchmarks demonstrate that our boosted CNN variants consistently outperform conventional CNNs in both predictive performance and training speed.
+
+**Comment:** The paper introduces a novel framework for boosting CNN performance by integrating dynamic feature selection, which aligns with representation learning and model architecture innovation.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+# Paper Selection Prompt
+
+## System Prompt
+
+> You are a helpful paper reading assistant whose job is to read daily posts from ArXiv and identify a few papers that your friend will enjoy reading.
+> Your job is to carefully read the paper titles and abstracts below and find the ones that match the criteria below.
+
+## User Prompt
+
+> ## Instructions
+> 
+> Write the response in JSONL format with {ARXIVID, COMMENT, RELEVANCE, NOVELTY} on each line, one for each paper.
+> 
+> - ARXIVID: should be the ArXiv ID.
+> - COMMENT: should identify whether there is a criteria that match the paper very closely. These matches should not be based on general terms like "language modeling" or "advancements" and should specifically refer to a criterion. No need to mention the non-matching criteria.
+> - RELEVANCE: should be a score from 1-10.
+> - NOVELTY: should be a score from 1-10.
+> 
+> ## Scoring Criteria
+> 
+> > The "Relevance" score measures how closely the paper aligns with the core topics of the prompt.
+> > The "Novelty" score assesses the originality and impact of the paper.
+> > They are two **ORTHONORMAL** axes and **SHOULD NOT** be confused with each other.
+> 
+> ### Relevance Scoring
+> 
+> - Relevance 9-10 (Completely Relevant)
+>   - Focus: Fully aligned with core topics with no deviation, score the highest if contains relevant keywords in it.
+>   - Examples: Papers focused on foundational methods or theoretical research, whose titles contain topic keywords like "MoE".
+> 
+> - Relevance 7-8 (Relevant)
+>   - Focus: Retain a solid link to the main research area, though may touch on peripheral elements.
+>   - Examples: Papers research on the fundamental part of MoE through a less critical aspect like its behavior in GNN.
+> 
+> - Relevance 5-6 (Borderline)
+>   - Focus: Maintains a link to the core topic but also extends into at least one other domain/area beyond the primary focus.
+>   - Examples: Work referencing MoE centered on reinforcement learning.
+> 
+> - Relevance 3-4 (Irrelevant)
+>   - Focus: Largely outside our interests with no association to our topics.
+>   - Examples: Application-focused papers like using MoE to solve a problem in the real world.
+> 
+> - Relevance 1-2 (Ignore)
+>   - Focus: Purely unrelated to our topics. Completely a different domain.
+>   - **Exception**: If the paper hints at a cutting-edge, radically new direction that could eventually transform the primary domain, consider a score of 9–10 despite initial appearances. (Usually a very rare concept that belongs to the fundamental research)
+> 
+> ### Novelty Scoring
+> 
+> - Novelty 9-10 (Breakthrough)
+>   - Definition: Groundbreaking methods/theory introducing new directions or solving major challenges.
+>   - Examples: Entirely new paradigm for foundational models; a novel theory transforming representation learning.
+> 
+> - Novelty 7-8 (Improvements)
+>   - Definition: Substantial insights/enhancements, though not a full paradigm shift.
+>   - Examples: Modifications on existing methods yielding significantly better results.
+> 
+> - Novelty 5-6 (Borderline)
+>   - Definition: Incremental contributions with possible long-term benefits, not immediately transformative.
+>   - Examples: Moderately novel extension to an existing architecture; refining current methods without fundamentally altering them.
+> 
+> - Novelty 3-4 (Tangential)
+>   - Definition: Minor or domain-specific improvements with limited broader impact.
+>   - Examples: Slight modifications to known methods with strange motivation; purely engineering jobs like a new benchmark/dataset.
+> 
+> - Novelty 1-2 (Low)
+>   - Definition: Minimal originality, applying standard approaches without real innovation.
+>   - Examples: Using an off-the-shelf model without adding new insights; purely application-driven studies like finetuning a pretrained model using existing methods.
+> 
+> ## Papers
+> 
+> [PAPER LIST HERE]
+> 
+> ## Relevant Topics
+> 
+> Use the following relevance criteria to focus on foundational research. Keep **relevant** papers and filter out **irrelevant** ones. Avoid purely **application-driven** work.
+> 
+> 1. Representation Learning
+>    - Relevant: Insights into how deep networks encode information, feature/dictionary learning, sparse/contrastive methods, training dynamics in neural networks.
+>    - Irrelevant: Standard applications of known techniques lacking new theoretical or methodological contributions.
+> 
+> 2. Model Architecture
+>    - Relevant: Mixture-of-Experts (MoE), Transformers, Conditional/Dynamic Networks, Autoencoders, analysis on existing architectures (like encoder-decoder), or other architectural innovations.
+>    - Irrelevant: Merely using existing architectures for a certain task without insights into the structure themselves.
+> 
+> 3. Model Compression
+>    - Relevant: Sparsity, pruning, quantization, low-rank approaches, KV cache, or other algorithmic/theoretical efficiency breakthroughs.
+>    - Irrelevant: Straightforward applications of existing compression methods to new tasks.
+> 
+> 4. Large Language Models (LLMs)
+>    - Relevant: Major breakthroughs in pretraining or architecture, theoretical insights into LLM behavior/interpretability.
+>    - Irrelevant: Domain-specific usage (e.g., translation, jail-breaking), finetuning or inference tricks (e.g., instruction tuning, chain-of-thoughts, data mixing), or empirical dataset/benchmark studies and text-level analysis (e.g. hallucination, reasoning, safety).
+> 
+> 5. AI for Science
+>    - Relevant: Foundational research in molecular/protein modeling, new generative paradigms, or significant architecture-level innovations.
+>    - Irrelevant: Conventional, domain-specific applications without new theoretical perspectives.
+> 
+> 6. Emerging Trends
+>    - Relevant: Cutting-edge theoretical work challenging established assumptions or introducing broad new paradigms.
+>    - Irrelevant: Incremental improvements or trend-following without novel insights.
+> 
+> **Keywords:**
+> 
+> - Relevant: Mixture of Experts (MoE), Representation Learning, Compression/Efficiency, Sparse/Sparsity, Pruning, Quantization, Low-rank, Foundation Model, etc.
+> - Irrelevant: Reinforcement Learning, Transfer Learning, Federated Learning, Online Learning, Diffusion Models, etc.
+> - Application: Image Segmentation, Medical Imaging, 3D Vision, Video Understanding, Information Retrieval, Summarization, Recommendation Systems, Machine Translation, Speech Recognition, Signal Processing, Spatial/Temporal Modeling, Time Series, Knowledge Graph, etc.

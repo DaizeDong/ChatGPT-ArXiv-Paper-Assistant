@@ -1,0 +1,466 @@
+<div style="display: flex; align-items: flex-start; justify-content: space-between; width: 100%;"><div style="width: 33.33%; text-align: left;"><a href="../29"><img src="../../../assets/nav/day/2025-07-30-prev.svg" alt="Previous Day 2025-07-29"></a></div><div style="width: 33.33%; text-align: center;"><a href=".."><img src="../../../assets/nav/day/2025-07-30-center.svg" alt="Monthly Overview 2025-07"></a></div><div style="width: 33.33%; text-align: right;"><a href="../31"><img src="../../../assets/nav/day/2025-07-30-next.svg" alt="Next Day 2025-07-31"></a></div></div>
+
+# Personalized Daily ArXiv Papers 2025-07-30
+
+| *[gpt-4o]*   | Prompt   | Completion   | Total   |
+|:------------:|:--------:|:------------:|:-------:|
+| **Token**    | 32402    | 3989         | 36391   |
+| **Cost**     | $0.08    | $0.04        | $0.12   |
+
+Total arXiv papers: 519
+
+Total scanned papers: 339
+
+Total relevant papers: 19
+
+**Table of contents with paper titles:**
+
+1. [EvoSLD: Automated Neural Scaling Law Discovery With Large Language Models](#user-content-link1)
+**Authors:** Haowei Lin, Xiangyu Wang, Jianzhu Ma, Yitao Liang
+
+2. [Hyperbolic Genome Embeddings](#user-content-link2)
+**Authors:** Raiyan R. Khan, Philippe Chlenski, Itsik Pe'er
+
+3. [The Geometry of Harmfulness in LLMs through Subconcept Probing](#user-content-link3)
+**Authors:** McNair Shah, Saleena Angeline, Adhitya Rajendra Kumar, Naitik Chheda, Kevin Zhu, Vasu Sharma, Sean O'Brien, Will Cai
+
+4. [MemShare: Memory Efficient Inference for Large Reasoning Models through KV Cache Reuse](#user-content-link4)
+**Authors:** Kaiwen Chen, Xin Tan, Minchen Yu, Hong Xu
+
+5. [Shapley Uncertainty in Natural Language Generation](#user-content-link5)
+**Authors:** Meilin Zhu, Gaojie Jin, Xiaowei Huang, Lijun Zhang
+
+6. [What Does it Mean for a Neural Network to Learn a "World Model"?](#user-content-link6)
+**Authors:** Kenneth Li, Fernanda Vi\'egas, Martin Wattenberg
+
+7. [Reviving Your MNEME: Predicting The Side Effects of LLM Unlearning and Fine-Tuning via Sparse Model Diffing](#user-content-link7)
+**Authors:** Aly M. Kassem, Zhuan Shi, Negar Rostamzadeh, Golnoosh Farnadi
+
+8. [Quantum Geometry of Data](#user-content-link8)
+**Authors:** Alexander G. Abanov, Luca Candelori, Harold C. Steinacker, Martin T. Wells, Jerome R. Busemeyer, Cameron J. Hogan, Vahagn Kirakosyan, Nicola Marzari, Sunil Pinnamaneni, Dario Villani, Mengjia Xu, Kharen Musaelian
+
+9. [Higher-Order Kuramoto Oscillator Network for Dense Associative Memory](#user-content-link9)
+**Authors:** Jona Nagerl, Natalia G. Berloff
+
+10. [Multi-state Protein Design with DynamicMPNN](#user-content-link10)
+**Authors:** Alex Abrudan, Sebastian Pujalte Ojeda, Chaitanya K. Joshi, Matthew Greenig, Felipe Engelberger, Alena Khmelinskaia, Jens Meiler, Michele Vendruscolo, Tuomas P. J. Knowles
+
+11. [Detection Transformers Under the Knife: A Neuroscience-Inspired Approach to Ablations](#user-content-link11)
+**Authors:** Nils H\"utten, Florian H\"olken, Hasan Tercan, Tobias Meisen
+
+12. [Reservoir Computation with Networks of Differentiating Neuron Ring Oscillators](#user-content-link12)
+**Authors:** Alexander Yeung, Peter DelMastro, Arjun Karuvally, Hava Siegelmann, Edward Rietman, Hananel Hazan
+
+13. [DEM-NeRF: A Neuro-Symbolic Method for Scientific Discovery through Physics-Informed Simulation](#user-content-link13)
+**Authors:** Wenkai Tan, Alvaro Velasquez, Houbing Song
+
+14. [Contrast-CAT: Contrasting Activations for Enhanced Interpretability in Transformer-based Text Classifiers](#user-content-link14)
+**Authors:** Sungmin Han, Jeonghyun Lee, Sangkyun Lee
+
+15. [Torque-based Graph Surgery:Enhancing Graph Neural Networks with Hierarchical Rewiring](#user-content-link15)
+**Authors:** Sujia Huang, Lele Fu, Zhen Cui, Tong Zhang, Na Song, Bo Huang
+
+16. [Weight-Parameterization in Continuous Time Deep Neural Networks for Surrogate Modeling](#user-content-link16)
+**Authors:** Haley Rosso, Lars Ruthotto, Khachik Sargsyan
+
+17. [Deep Polynomial Chaos Expansion](#user-content-link17)
+**Authors:** Johannes Exenberger, Sascha Ranftl, Robert Peharz
+
+18. [Hierarchical Stochastic Differential Equation Models for Latent Manifold Learning in Neural Time Series](#user-content-link18)
+**Authors:** Pedram Rajaei, Maryam Ostadsharif Memar, Navid Ziaei, Behzad Nazari, Ali Yousefi
+
+19. [Unlocking Interpretability for RF Sensing: A Complex-Valued White-Box Transformer](#user-content-link19)
+**Authors:** Xie Zhang, Yina Wang, Chenshu Wu
+
+---
+
+## 1. [EvoSLD: Automated Neural Scaling Law Discovery With Large Language Models](https://arxiv.org/abs/2507.21184) <a id="link1"></a>
+
+**ArXiv ID:** 2507.21184
+
+**Authors:** Haowei Lin, Xiangyu Wang, Jianzhu Ma, Yitao Liang
+
+**Abstract:** Scaling laws are fundamental mathematical relationships that predict how neural network performance evolves with changes in variables such as model size, dataset size, and computational resources. Traditionally, discovering these laws requires extensive human expertise and manual experimentation. We introduce EvoSLD, an automated framework for Scaling Law Discovery (SLD) that leverages evolutionary algorithms guided by Large Language Models (LLMs) to co-evolve symbolic expressions and their optimization routines. Formulated to handle scaling variables, control variables, and response metrics across diverse experimental settings, EvoSLD searches for parsimonious, universal functional forms that minimize fitting errors on grouped data subsets. Evaluated on five real-world scenarios from recent literature, EvoSLD rediscovers exact human-derived laws in two cases and surpasses them in others, achieving up to orders-of-magnitude reductions in normalized mean squared error on held-out test sets. Compared to baselines like symbolic regression and ablated variants, EvoSLD demonstrates superior accuracy, interpretability, and efficiency, highlighting its potential to accelerate AI research. Code is available at https://github.com/linhaowei1/SLD.
+
+**Comment:** The paper introduces EvoSLD, an automated framework for discovering scaling laws using evolutionary algorithms and LLMs, which aligns with foundational research in LLMs and representation learning.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 2. [Hyperbolic Genome Embeddings](https://arxiv.org/abs/2507.21648) <a id="link2"></a>
+
+**ArXiv ID:** 2507.21648
+
+**Authors:** Raiyan R. Khan, Philippe Chlenski, Itsik Pe'er
+
+**Abstract:** Current approaches to genomic sequence modeling often struggle to align the inductive biases of machine learning models with the evolutionarily-informed structure of biological systems. To this end, we formulate a novel application of hyperbolic CNNs that exploits this structure, enabling more expressive DNA sequence representations. Our strategy circumvents the need for explicit phylogenetic mapping while discerning key properties of sequences pertaining to core functional and regulatory behavior. Across 37 out of 42 genome interpretation benchmark datasets, our hyperbolic models outperform their Euclidean equivalents. Notably, our approach even surpasses state-of-the-art performance on seven GUE benchmark datasets, consistently outperforming many DNA language models while using orders of magnitude fewer parameters and avoiding pretraining. Our results include a novel set of benchmark datasets--the Transposable Elements Benchmark--which explores a major but understudied component of the genome with deep evolutionary significance. We further motivate our work by exploring how our hyperbolic models recognize genomic signal under various data-generating conditions and by constructing an empirical method for interpreting the hyperbolicity of dataset embeddings. Throughout these assessments, we find persistent evidence highlighting the potential of our hyperbolic framework as a robust paradigm for genome representation learning. Our code and benchmark datasets are available at https://github.com/rrkhan/HGE.
+
+**Comment:** The paper introduces hyperbolic CNNs for genomic sequence modeling, contributing to representation learning with a novel approach.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 3. [The Geometry of Harmfulness in LLMs through Subconcept Probing](https://arxiv.org/abs/2507.21141) <a id="link3"></a>
+
+**ArXiv ID:** 2507.21141
+
+**Authors:** McNair Shah, Saleena Angeline, Adhitya Rajendra Kumar, Naitik Chheda, Kevin Zhu, Vasu Sharma, Sean O'Brien, Will Cai
+
+**Abstract:** Recent advances in large language models (LLMs) have intensified the need to understand and reliably curb their harmful behaviours. We introduce a multidimensional framework for probing and steering harmful content in model internals. For each of 55 distinct harmfulness subconcepts (e.g., racial hate, employment scams, weapons), we learn a linear probe, yielding 55 interpretable directions in activation space. Collectively, these directions span a harmfulness subspace that we show is strikingly low-rank. We then test ablation of the entire subspace from model internals, as well as steering and ablation in the subspace's dominant direction. We find that dominant direction steering allows for near elimination of harmfulness with a low decrease in utility. Our findings advance the emerging view that concept subspaces provide a scalable lens on LLM behaviour and offer practical tools for the community to audit and harden future generations of language models.
+
+**Comment:** The paper explores the geometry of harmfulness in LLMs through subconcept probing, providing theoretical insights into LLM behavior and interpretability.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 4. [MemShare: Memory Efficient Inference for Large Reasoning Models through KV Cache Reuse](https://arxiv.org/abs/2507.21433) <a id="link4"></a>
+
+**ArXiv ID:** 2507.21433
+
+**Authors:** Kaiwen Chen, Xin Tan, Minchen Yu, Hong Xu
+
+**Abstract:** Large Reasoning Models (LRMs) have achieved significant advances in mathematical reasoning and formal logic tasks. However, their tendency to generate lengthy chain-of-thought sequences leads to substantial memory overhead during inference. We observe that LRMs frequently produce highly similar intermediate reasoning steps, which correspond to similar KV cache states across layers. Motivated by this observation, we propose MemShare, a novel KV cache management approach that effectively reduces memory overhead. MemShare employs a collaborative filtering algorithm to efficiently identify reusable KV cache blocks and enables zero copy cache reuse to significantly reduce memory overhead, improve throughput while maintaining accuracy. Experimental results demonstrate that MemShare delivers up to 84.79\% improvement in throughput while maintaining better accuracy compared to existing KV cache management methods.
+
+**Comment:** The paper introduces MemShare, a novel KV cache management approach for memory efficiency in large reasoning models, which aligns with model compression through KV cache reuse.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 5. [Shapley Uncertainty in Natural Language Generation](https://arxiv.org/abs/2507.21406) <a id="link5"></a>
+
+**ArXiv ID:** 2507.21406
+
+**Authors:** Meilin Zhu, Gaojie Jin, Xiaowei Huang, Lijun Zhang
+
+**Abstract:** In question-answering tasks, determining when to trust the outputs is crucial to the alignment of large language models (LLMs). Kuhn et al. (2023) introduces semantic entropy as a measure of uncertainty, by incorporating linguistic invariances from the same meaning. It primarily relies on setting threshold to measure the level of semantic equivalence relation. We propose a more nuanced framework that extends beyond such thresholding by developing a Shapley-based uncertainty metric that captures the continuous nature of semantic relationships. We establish three fundamental properties that characterize valid uncertainty metrics and prove that our Shapley uncertainty satisfies these criteria. Through extensive experiments, we demonstrate that our Shapley uncertainty more accurately predicts LLM performance in question-answering and other datasets, compared to similar baseline measures.
+
+**Comment:** The paper introduces a Shapley-based uncertainty metric for LLMs, which provides theoretical insights into LLM behavior and interpretability.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 6. [What Does it Mean for a Neural Network to Learn a "World Model"?](https://arxiv.org/abs/2507.21513) <a id="link6"></a>
+
+**ArXiv ID:** 2507.21513
+
+**Authors:** Kenneth Li, Fernanda Vi\'egas, Martin Wattenberg
+
+**Abstract:** We propose a set of precise criteria for saying a neural net learns and uses a "world model." The goal is to give an operational meaning to terms that are often used informally, in order to provide a common language for experimental investigation. We focus specifically on the idea of representing a latent "state space" of the world, leaving modeling the effect of actions to future work. Our definition is based on ideas from the linear probing literature, and formalizes the notion of a computation that factors through a representation of the data generation process. An essential addition to the definition is a set of conditions to check that such a "world model" is not a trivial consequence of the neural net's data or task.
+
+**Comment:** The paper proposes criteria for neural networks to learn a 'world model', offering theoretical insights into representation learning.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 7. [Reviving Your MNEME: Predicting The Side Effects of LLM Unlearning and Fine-Tuning via Sparse Model Diffing](https://arxiv.org/abs/2507.21084) <a id="link7"></a>
+
+**ArXiv ID:** 2507.21084
+
+**Authors:** Aly M. Kassem, Zhuan Shi, Negar Rostamzadeh, Golnoosh Farnadi
+
+**Abstract:** Large language models (LLMs) are frequently fine-tuned or unlearned to adapt to new tasks or eliminate undesirable behaviors. While existing evaluation methods assess performance after such interventions, there remains no general approach for detecting unintended side effects, such as unlearning biology content degrading performance on chemistry tasks, particularly when these effects are unpredictable or emergent. To address this issue, we introduce MNEME, Model diffiNg for Evaluating Mechanistic Effects, a lightweight framework for identifying these side effects using sparse model diffing. MNEME compares base and fine-tuned models on task-agnostic data (for example, The Pile, LMSYS-Chat-1M) without access to fine-tuning data to isolate behavioral shifts. Applied to five LLMs across three scenarios: WMDP knowledge unlearning, emergent misalignment, and benign fine-tuning, MNEME achieves up to 95 percent accuracy in predicting side effects, aligning with known benchmarks and requiring no custom heuristics. Furthermore, we show that retraining on high-activation samples can partially reverse these effects. Our results demonstrate that sparse probing and diffing offer a scalable and automated lens into fine-tuning-induced model changes, providing practical tools for understanding and managing LLM behavior.
+
+**Comment:** The paper presents MNEME, a framework for detecting side effects in LLMs using sparse model diffing, contributing to theoretical insights into LLM behavior.
+
+**Relevance:** 9
+**Novelty:** 7
+
+---
+
+## 8. [Quantum Geometry of Data](https://arxiv.org/abs/2507.21135) <a id="link8"></a>
+
+**ArXiv ID:** 2507.21135
+
+**Authors:** Alexander G. Abanov, Luca Candelori, Harold C. Steinacker, Martin T. Wells, Jerome R. Busemeyer, Cameron J. Hogan, Vahagn Kirakosyan, Nicola Marzari, Sunil Pinnamaneni, Dario Villani, Mengjia Xu, Kharen Musaelian
+
+**Abstract:** We demonstrate how Quantum Cognition Machine Learning (QCML) encodes data as quantum geometry. In QCML, features of the data are represented by learned Hermitian matrices, and data points are mapped to states in Hilbert space. The quantum geometry description endows the dataset with rich geometric and topological structure - including intrinsic dimension, quantum metric, and Berry curvature - derived directly from the data. QCML captures global properties of data, while avoiding the curse of dimensionality inherent in local methods. We illustrate this on a number of synthetic and real-world examples. Quantum geometric representation of QCML could advance our understanding of cognitive phenomena within the framework of quantum cognition.
+
+**Comment:** The paper explores quantum geometry in data representation, which is relevant to emerging trends in representation learning.
+
+**Relevance:** 8
+**Novelty:** 8
+
+---
+
+## 9. [Higher-Order Kuramoto Oscillator Network for Dense Associative Memory](https://arxiv.org/abs/2507.21984) <a id="link9"></a>
+
+**ArXiv ID:** 2507.21984
+
+**Authors:** Jona Nagerl, Natalia G. Berloff
+
+**Abstract:** Networks of phase oscillators can serve as dense associative memories if they incorporate higher-order coupling beyond the classical Kuramoto model's pairwise interactions. Here we introduce a generalized Kuramoto model with combined second-harmonic (pairwise) and fourth-harmonic (quartic) coupling, inspired by dense Hopfield memory theory. Using mean-field theory and its dynamical approximation, we obtain a phase diagram for dense associative memory model that exhibits a tricritical point at which the continuous onset of memory retrieval is supplanted by a discontinuous, hysteretic transition. In the quartic-dominated regime, the system supports bistable phase-locked states corresponding to stored memory patterns, with a sizable energy barrier between memory and incoherent states. We analytically determine this bistable region and show that the escape time from a memory state (due to noise) grows exponentially with network size, indicating robust storage. Extending the theory to finite memory load, we show that higher-order couplings achieve superlinear scaling of memory capacity with system size, far exceeding the limit of pairwise-only oscillators. Large-scale simulations of the oscillator network confirm our theoretical predictions, demonstrating rapid pattern retrieval and robust storage of many phase patterns. These results bridge the Kuramoto synchronization with modern Hopfield memories, pointing toward experimental realization of high-capacity, analog associative memory in oscillator systems.
+
+**Comment:** The paper introduces a higher-order Kuramoto oscillator network for dense associative memory, which is relevant to emerging trends in foundational research.
+
+**Relevance:** 8
+**Novelty:** 8
+
+---
+
+## 10. [Multi-state Protein Design with DynamicMPNN](https://arxiv.org/abs/2507.21938) <a id="link10"></a>
+
+**ArXiv ID:** 2507.21938
+
+**Authors:** Alex Abrudan, Sebastian Pujalte Ojeda, Chaitanya K. Joshi, Matthew Greenig, Felipe Engelberger, Alena Khmelinskaia, Jens Meiler, Michele Vendruscolo, Tuomas P. J. Knowles
+
+**Abstract:** Structural biology has long been dominated by the one sequence, one structure, one function paradigm, yet many critical biological processes - from enzyme catalysis to membrane transport - depend on proteins that adopt multiple conformational states. Existing multi-state design approaches rely on post-hoc aggregation of single-state predictions, achieving poor experimental success rates compared to single-state design. We introduce DynamicMPNN, an inverse folding model explicitly trained to generate sequences compatible with multiple conformations through joint learning across conformational ensembles. Trained on 46,033 conformational pairs covering 75% of CATH superfamilies and evaluated using AlphaFold initial guess, DynamicMPNN outperforms ProteinMPNN by up to 13% on structure-normalized RMSD across our challenging multi-state protein benchmark.
+
+**Comment:** The paper introduces DynamicMPNN, a model for multi-state protein design, which is relevant to foundational research in AI for Science.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 11. [Detection Transformers Under the Knife: A Neuroscience-Inspired Approach to Ablations](https://arxiv.org/abs/2507.21723) <a id="link11"></a>
+
+**ArXiv ID:** 2507.21723
+
+**Authors:** Nils H\"utten, Florian H\"olken, Hasan Tercan, Tobias Meisen
+
+**Abstract:** In recent years, Explainable AI has gained traction as an approach to enhancing model interpretability and transparency, particularly in complex models such as detection transformers. Despite rapid advancements, a substantial research gap remains in understanding the distinct roles of internal components - knowledge that is essential for improving transparency and efficiency. Inspired by neuroscientific ablation studies, which investigate the functions of brain regions through selective impairment, we systematically analyze the impact of ablating key components in three state-of-the-art detection transformer models: Detection transformer (DETR), deformable detection transformer (DDETR), and DETR with improved denoising anchor boxes (DINO). The ablations target query embeddings, encoder and decoder multi-head self-attentions (MHSA) as well as decoder multi-head cross-attention (MHCA) layers. We evaluate the effects of these ablations on the performance metrics gIoU and F1-score, quantifying effects on both the classification and regression sub-tasks on the COCO dataset. To facilitate reproducibility and future research, we publicly release the DeepDissect library. Our findings reveal model-specific resilience patterns: while DETR is particularly sensitive to ablations in encoder MHSA and decoder MHCA, DDETR's multi-scale deformable attention enhances robustness, and DINO exhibits the greatest resilience due to its look-forward twice update rule, which helps distributing knowledge across blocks. These insights also expose structural redundancies, particularly in DDETR's and DINO's decoder MHCA layers, highlighting opportunities for model simplification without sacrificing performance. This study advances XAI for DETRs by clarifying the contributions of internal components to model performance, offering insights to optimize and improve transparency and efficiency in critical applications.
+
+**Comment:** The paper provides insights into the internal components of detection transformers, contributing to model architecture analysis.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 12. [Reservoir Computation with Networks of Differentiating Neuron Ring Oscillators](https://arxiv.org/abs/2507.21377) <a id="link12"></a>
+
+**ArXiv ID:** 2507.21377
+
+**Authors:** Alexander Yeung, Peter DelMastro, Arjun Karuvally, Hava Siegelmann, Edward Rietman, Hananel Hazan
+
+**Abstract:** Reservoir Computing is a machine learning approach that uses the rich repertoire of complex system dynamics for function approximation. Current approaches to reservoir computing use a network of coupled integrating neurons that require a steady current to maintain activity. Here, we introduce a small world graph of differentiating neurons that are active only when there are changes in input as an alternative to integrating neurons as a reservoir computing substrate. We find the coupling strength and network topology that enable these small world networks to function as an effective reservoir. We demonstrate the efficacy of these networks in the MNIST digit recognition task, achieving comparable performance of 90.65% to existing reservoir computing approaches. The findings suggest that differentiating neurons can be a potential alternative to integrating neurons and can provide a sustainable future alternative for power-hungry AI applications.
+
+**Comment:** The paper introduces a novel approach to reservoir computing using differentiating neurons, which is relevant to emerging trends in machine learning architectures.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 13. [DEM-NeRF: A Neuro-Symbolic Method for Scientific Discovery through Physics-Informed Simulation](https://arxiv.org/abs/2507.21350) <a id="link13"></a>
+
+**ArXiv ID:** 2507.21350
+
+**Authors:** Wenkai Tan, Alvaro Velasquez, Houbing Song
+
+**Abstract:** Neural networks have emerged as a powerful tool for modeling physical systems, offering the ability to learn complex representations from limited data while integrating foundational scientific knowledge. In particular, neuro-symbolic approaches that combine data-driven learning, the neuro, with symbolic equations and rules, the symbolic, address the tension between methods that are purely empirical, which risk straying from established physical principles, and traditional numerical solvers that demand complete geometric knowledge and can be prohibitively expensive for high-fidelity simulations. In this work, we present a novel neuro-symbolic framework for reconstructing and simulating elastic objects directly from sparse multi-view image sequences, without requiring explicit geometric information. Specifically, we integrate a neural radiance field (NeRF) for object reconstruction with physics-informed neural networks (PINN) that incorporate the governing partial differential equations of elasticity. In doing so, our method learns a spatiotemporal representation of deforming objects that leverages both image supervision and symbolic physical constraints. To handle complex boundary and initial conditions, which are traditionally confronted using finite element methods, boundary element methods, or sensor-based measurements, we employ an energy-constrained Physics-Informed Neural Network architecture. This design enhances both simulation accuracy and the explainability of results.
+
+**Comment:** The paper presents a neuro-symbolic framework combining neural networks with symbolic equations for scientific discovery, which involves foundational research in AI for science.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 14. [Contrast-CAT: Contrasting Activations for Enhanced Interpretability in Transformer-based Text Classifiers](https://arxiv.org/abs/2507.21186) <a id="link14"></a>
+
+**ArXiv ID:** 2507.21186
+
+**Authors:** Sungmin Han, Jeonghyun Lee, Sangkyun Lee
+
+**Abstract:** Transformers have profoundly influenced AI research, but explaining their decisions remains challenging -- even for relatively simpler tasks such as classification -- which hinders trust and safe deployment in real-world applications. Although activation-based attribution methods effectively explain transformer-based text classification models, our findings reveal that these methods can be undermined by class-irrelevant features within activations, leading to less reliable interpretations. To address this limitation, we propose Contrast-CAT, a novel activation contrast-based attribution method that refines token-level attributions by filtering out class-irrelevant features. By contrasting the activations of an input sequence with reference activations, Contrast-CAT generates clearer and more faithful attribution maps. Experimental results across various datasets and models confirm that Contrast-CAT consistently outperforms state-of-the-art methods. Notably, under the MoRF setting, it achieves average improvements of x1.30 in AOPC and x2.25 in LOdds over the most competing methods, demonstrating its effectiveness in enhancing interpretability for transformer-based text classification.
+
+**Comment:** The paper proposes Contrast-CAT, a novel method for enhancing interpretability in transformer-based text classifiers, which relates to representation learning and model architecture.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 15. [Torque-based Graph Surgery:Enhancing Graph Neural Networks with Hierarchical Rewiring](https://arxiv.org/abs/2507.21422) <a id="link15"></a>
+
+**ArXiv ID:** 2507.21422
+
+**Authors:** Sujia Huang, Lele Fu, Zhen Cui, Tong Zhang, Na Song, Bo Huang
+
+**Abstract:** Graph Neural Networks (GNNs) have emerged as powerful tools for learning from graph-structured data, leveraging message passing to diffuse information and update node representations. However, most efforts have suggested that native interactions encoded in the graph may not be friendly for this process, motivating the development of graph rewiring methods. In this work, we propose a torque-driven hierarchical rewiring strategy, inspired by the notion of torque in classical mechanics, dynamically modulating message passing to improve representation learning in heterophilous graphs and enhance robustness against noisy graphs. Specifically, we define an interference-aware torque metric that integrates structural distance and energy scores to quantify the perturbation induced by edges, thereby encouraging each node to aggregate information from its nearest low-energy neighbors. We use the metric to hierarchically reconfigure the receptive field of each layer by judiciously pruning high-torque edges and adding low-torque links, suppressing propagation noise and boosting pertinent signals. Extensive evaluations on benchmark datasets show that our approach surpasses state-of-the-art methods on both heterophilous and homophilous graphs, and maintains high accuracy on noisy graph.
+
+**Comment:** The paper proposes a novel torque-driven hierarchical rewiring strategy for GNNs, which enhances representation learning by dynamically modulating message passing. This aligns with representation learning and model architecture innovation.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 16. [Weight-Parameterization in Continuous Time Deep Neural Networks for Surrogate Modeling](https://arxiv.org/abs/2507.22045) <a id="link16"></a>
+
+**ArXiv ID:** 2507.22045
+
+**Authors:** Haley Rosso, Lars Ruthotto, Khachik Sargsyan
+
+**Abstract:** Continuous-time deep learning models, such as neural ordinary differential equations (ODEs), offer a promising framework for surrogate modeling of complex physical systems. A central challenge in training these models lies in learning expressive yet stable time-varying weights, particularly under computational constraints. This work investigates weight parameterization strategies that constrain the temporal evolution of weights to a low-dimensional subspace spanned by polynomial basis functions. We evaluate both monomial and Legendre polynomial bases within neural ODE and residual network (ResNet) architectures under discretize-then-optimize and optimize-then-discretize training paradigms. Experimental results across three high-dimensional benchmark problems show that Legendre parameterizations yield more stable training dynamics, reduce computational cost, and achieve accuracy comparable to or better than both monomial parameterizations and unconstrained weight models. These findings elucidate the role of basis choice in time-dependent weight parameterization and demonstrate that using orthogonal polynomial bases offers a favorable tradeoff between model expressivity and training efficiency.
+
+**Comment:** The paper investigates weight parameterization strategies in continuous-time deep learning models, which relates to representation learning and model architecture. It provides insights into training dynamics and efficiency improvements.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 17. [Deep Polynomial Chaos Expansion](https://arxiv.org/abs/2507.21273) <a id="link17"></a>
+
+**ArXiv ID:** 2507.21273
+
+**Authors:** Johannes Exenberger, Sascha Ranftl, Robert Peharz
+
+**Abstract:** Polynomial chaos expansion (PCE) is a classical and widely used surrogate modeling technique in physical simulation and uncertainty quantification. By taking a linear combination of a set of basis polynomials - orthonormal with respect to the distribution of uncertain input parameters - PCE enables tractable inference of key statistical quantities, such as (conditional) means, variances, covariances, and Sobol sensitivity indices, which are essential for understanding the modeled system and identifying influential parameters and their interactions. As the number of basis functions grows exponentially with the number of parameters, PCE does not scale well to high-dimensional problems. We address this challenge by combining PCE with ideas from probabilistic circuits, resulting in the deep polynomial chaos expansion (DeepPCE) - a deep generalization of PCE that scales effectively to high-dimensional input spaces. DeepPCE achieves predictive performance comparable to that of multi-layer perceptrons (MLPs), while retaining PCE's ability to compute exact statistical inferences via simple forward passes.
+
+**Comment:** The paper introduces Deep Polynomial Chaos Expansion, combining PCE with probabilistic circuits for high-dimensional input spaces, which relates to representation learning and efficiency improvements.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 18. [Hierarchical Stochastic Differential Equation Models for Latent Manifold Learning in Neural Time Series](https://arxiv.org/abs/2507.21531) <a id="link18"></a>
+
+**ArXiv ID:** 2507.21531
+
+**Authors:** Pedram Rajaei, Maryam Ostadsharif Memar, Navid Ziaei, Behzad Nazari, Ali Yousefi
+
+**Abstract:** The manifold hypothesis suggests that high-dimensional neural time series lie on a low-dimensional manifold shaped by simpler underlying dynamics. To uncover this structure, latent dynamical variable models such as state-space models, recurrent neural networks, neural ordinary differential equations, and Gaussian Process Latent Variable Models are widely used. We propose a novel hierarchical stochastic differential equation (SDE) model that balances computational efficiency and interpretability, addressing key limitations of existing methods. Our model assumes the trajectory of a manifold can be reconstructed from a sparse set of samples from the manifold trajectory. The latent space is modeled using Brownian bridge SDEs, with points - specified in both time and value - sampled from a multivariate marked point process. These Brownian bridges define the drift of a second set of SDEs, which are then mapped to the observed data. This yields a continuous, differentiable latent process capable of modeling arbitrarily complex time series as the number of manifold points increases. We derive training and inference procedures and show that the computational cost of inference scales linearly with the length of the observation data. We then validate our model on both synthetic data and neural recordings to demonstrate that it accurately recovers the underlying manifold structure and scales effectively with data dimensionality.
+
+**Comment:** The paper proposes a novel hierarchical stochastic differential equation model for latent manifold learning, which aligns with representation learning and offers insights into neural time series.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 19. [Unlocking Interpretability for RF Sensing: A Complex-Valued White-Box Transformer](https://arxiv.org/abs/2507.21799) <a id="link19"></a>
+
+**ArXiv ID:** 2507.21799
+
+**Authors:** Xie Zhang, Yina Wang, Chenshu Wu
+
+**Abstract:** The empirical success of deep learning has spurred its application to the radio-frequency (RF) domain, leading to significant advances in Deep Wireless Sensing (DWS). However, most existing DWS models function as black boxes with limited interpretability, which hampers their generalizability and raises concerns in security-sensitive physical applications. In this work, inspired by the remarkable advances of white-box transformers, we present RF-CRATE, the first mathematically interpretable deep network architecture for RF sensing, grounded in the principles of complex sparse rate reduction. To accommodate the unique RF signals, we conduct non-trivial theoretical derivations that extend the original real-valued white-box transformer to the complex domain. By leveraging the CR-Calculus framework, we successfully construct a fully complex-valued white-box transformer with theoretically derived self-attention and residual multi-layer perceptron modules. Furthermore, to improve the model's ability to extract discriminative features from limited wireless data, we introduce Subspace Regularization, a novel regularization strategy that enhances feature diversity, resulting in an average performance improvement of 19.98% across multiple sensing tasks. We extensively evaluate RF-CRATE against seven baselines with multiple public and self-collected datasets involving different RF signals. The results show that RF-CRATE achieves performance on par with thoroughly engineered black-box models, while offering full mathematical interpretability. More importantly, by extending CRATE to the complex domain, RF-CRATE yields substantial improvements, achieving an average classification gain of 5.08% and reducing regression error by 10.34% across diverse sensing tasks compared to CRATE. RF-CRATE is fully open-sourced at: https://github.com/rfcrate/RF_CRATE.
+
+**Comment:** The paper introduces a complex-valued white-box transformer for RF sensing, focusing on interpretability and feature extraction, which aligns with the interest in model architecture and representation learning.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+# Paper Selection Prompt
+
+## System Prompt
+
+> You are a helpful paper reading assistant whose job is to read daily posts from ArXiv and identify a few papers that your friend will enjoy reading.
+> Your job is to carefully read the paper titles and abstracts below and find the ones that match the criteria below.
+
+## User Prompt
+
+> ## Instructions
+> 
+> Write the response in JSONL format with {ARXIVID, COMMENT, RELEVANCE, NOVELTY} on each line, one for each paper.
+> 
+> - ARXIVID: should be the ArXiv ID.
+> - COMMENT: should identify whether there is a criteria that match the paper very closely. These matches should not be based on general terms like "language modeling" or "advancements" and should specifically refer to a criterion. No need to mention the non-matching criteria.
+> - RELEVANCE: should be a score from 1-10.
+> - NOVELTY: should be a score from 1-10.
+> 
+> ## Scoring Criteria
+> 
+> > The "Relevance" score measures how closely the paper aligns with the core topics of the prompt.
+> > The "Novelty" score assesses the originality and impact of the paper.
+> > They are two **ORTHONORMAL** axes and **SHOULD NOT** be confused with each other.
+> 
+> ### Relevance Scoring
+> 
+> - Relevance 9-10 (Completely Relevant)
+>   - Focus: Fully aligned with core topics with no deviation, score the highest if contains relevant keywords in it.
+>   - Examples: Papers focused on foundational methods or theoretical research, whose titles contain topic keywords like "MoE".
+> 
+> - Relevance 7-8 (Relevant)
+>   - Focus: Retain a solid link to the main research area, though may touch on peripheral elements.
+>   - Examples: Papers research on the fundamental part of MoE through a less critical aspect like its behavior in GNN.
+> 
+> - Relevance 5-6 (Borderline)
+>   - Focus: Maintains a link to the core topic but also extends into at least one other domain/area beyond the primary focus.
+>   - Examples: Work referencing MoE centered on reinforcement learning.
+> 
+> - Relevance 3-4 (Irrelevant)
+>   - Focus: Largely outside our interests with no association to our topics.
+>   - Examples: Application-focused papers like using MoE to solve a problem in the real world.
+> 
+> - Relevance 1-2 (Ignore)
+>   - Focus: Purely unrelated to our topics. Completely a different domain.
+>   - **Exception**: If the paper hints at a cutting-edge, radically new direction that could eventually transform the primary domain, consider a score of 9–10 despite initial appearances. (Usually a very rare concept that belongs to the fundamental research)
+> 
+> ### Novelty Scoring
+> 
+> - Novelty 9-10 (Breakthrough)
+>   - Definition: Groundbreaking methods/theory introducing new directions or solving major challenges.
+>   - Examples: Entirely new paradigm for foundational models; a novel theory transforming representation learning.
+> 
+> - Novelty 7-8 (Improvements)
+>   - Definition: Substantial insights/enhancements, though not a full paradigm shift.
+>   - Examples: Modifications on existing methods yielding significantly better results.
+> 
+> - Novelty 5-6 (Borderline)
+>   - Definition: Incremental contributions with possible long-term benefits, not immediately transformative.
+>   - Examples: Moderately novel extension to an existing architecture; refining current methods without fundamentally altering them.
+> 
+> - Novelty 3-4 (Tangential)
+>   - Definition: Minor or domain-specific improvements with limited broader impact.
+>   - Examples: Slight modifications to known methods with strange motivation; purely engineering jobs like a new benchmark/dataset.
+> 
+> - Novelty 1-2 (Low)
+>   - Definition: Minimal originality, applying standard approaches without real innovation.
+>   - Examples: Using an off-the-shelf model without adding new insights; purely application-driven studies like finetuning a pretrained model using existing methods.
+> 
+> ## Papers
+> 
+> [PAPER LIST HERE]
+> 
+> ## Relevant Topics
+> 
+> Use the following relevance criteria to focus on foundational research. Keep **relevant** papers and filter out **irrelevant** ones. Avoid purely **application-driven** work.
+> 
+> 1. Representation Learning
+>    - Relevant: Insights into how deep networks encode information, feature/dictionary learning, sparse/contrastive methods, training dynamics in neural networks.
+>    - Irrelevant: Standard applications of known techniques lacking new theoretical or methodological contributions.
+> 
+> 2. Model Architecture
+>    - Relevant: Mixture-of-Experts (MoE), Transformers, Conditional/Dynamic Networks, Autoencoders, analysis on existing architectures (like encoder-decoder), or other architectural innovations.
+>    - Irrelevant: Merely using existing architectures for a certain task without insights into the structure themselves.
+> 
+> 3. Model Compression
+>    - Relevant: Sparsity, pruning, quantization, low-rank approaches, KV cache, or other algorithmic/theoretical efficiency breakthroughs.
+>    - Irrelevant: Straightforward applications of existing compression methods to new tasks.
+> 
+> 4. Large Language Models (LLMs)
+>    - Relevant: Major breakthroughs in pretraining or architecture, theoretical insights into LLM behavior/interpretability.
+>    - Irrelevant: Domain-specific usage (e.g., translation, jail-breaking), finetuning or inference tricks (e.g., instruction tuning, chain-of-thoughts, data mixing), or empirical dataset/benchmark studies and text-level analysis (e.g. hallucination, reasoning, safety).
+> 
+> 5. AI for Science
+>    - Relevant: Foundational research in molecular/protein modeling, new generative paradigms, or significant architecture-level innovations.
+>    - Irrelevant: Conventional, domain-specific applications without new theoretical perspectives.
+> 
+> 6. Emerging Trends
+>    - Relevant: Cutting-edge theoretical work challenging established assumptions or introducing broad new paradigms.
+>    - Irrelevant: Incremental improvements or trend-following without novel insights.
+> 
+> **Keywords:**
+> 
+> - Relevant: Mixture of Experts (MoE), Representation Learning, Compression/Efficiency, Sparse/Sparsity, Pruning, Quantization, Low-rank, Foundation Model, etc.
+> - Irrelevant: Reinforcement Learning, Transfer Learning, Federated Learning, Online Learning, Diffusion Models, etc.
+> - Application: Image Segmentation, Medical Imaging, 3D Vision, Video Understanding, Information Retrieval, Summarization, Recommendation Systems, Machine Translation, Speech Recognition, Signal Processing, Spatial/Temporal Modeling, Time Series, Knowledge Graph, etc.

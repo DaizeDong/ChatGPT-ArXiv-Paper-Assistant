@@ -1,0 +1,458 @@
+<div style="display: flex; align-items: flex-start; justify-content: space-between; width: 100%;"><div style="width: 33.33%; text-align: left;"><a href="../20"><img src="../../../assets/nav/day/2025-11-21-prev.svg" alt="Previous Day 2025-11-20"></a></div><div style="width: 33.33%; text-align: center;"><a href=".."><img src="../../../assets/nav/day/2025-11-21-center.svg" alt="Monthly Overview 2025-11"></a></div><div style="width: 33.33%; text-align: right;"><a href="../24"><img src="../../../assets/nav/day/2025-11-21-next.svg" alt="Next Day 2025-11-24"></a></div></div>
+
+# Personalized Daily ArXiv Papers 2025-11-21
+
+| *[gpt-5]*   | Prompt   | Completion   | Total   |
+|:-----------:|:--------:|:------------:|:-------:|
+| **Token**   | 36183    | 37347        | 73530   |
+| **Cost**    | $0.05    | $0.37        | $0.42   |
+
+Total arXiv papers: 439
+
+Total scanned papers: 252
+
+Total relevant papers: 19
+
+**Table of contents with paper titles:**
+
+1. [Neural Networks Learn Generic Multi-Index Models Near Information-Theoretic Limit](#user-content-link1)
+**Authors:** Bohan Zhang, Zihao Wang, Hengyu Fu, Jason D. Lee
+
+2. [Change-of-Basis Pruning via Rotational Invariance](#user-content-link2)
+**Authors:** Alex Ning, Vainateya Rangaraju
+
+3. [Transformer Injectivity & Geometric Robustness - Analytic Margins and Bi-Lipschitz Uniformity of Sequence-Level Hidden States](#user-content-link3)
+**Authors:** Mikael von Strauss
+
+4. [Dynamic Expert Quantization for Scalable Mixture-of-Experts Inference](#user-content-link4)
+**Authors:** Kexin Chu, Dawei Xiang, Zixu Shen, Yiwei Yang, Zecheng Liu, Wei Zhang
+
+5. [Sparse Autoencoders are Topic Models](#user-content-link5)
+**Authors:** Leander Girrbach, Zeynep Akata
+
+6. [Evolution Strategies at the Hyperscale](#user-content-link6)
+**Authors:** Bidipta Sarkar, Mattie Fellows, Juan Agustin Duque, Alistair Letcher, Antonio Le\'on Villares, Anya Sims, Dylan Cope, Jarek Liesen, Lukas Seier, Theo Wolf, Uljad Berdica, Alexander David Goldie, Aaron Courville, Karin Sevegnani, Shimon Whiteson, Jakob Nicolaus Foerster
+
+7. [Breaking the Bottleneck with DiffuApriel: High-Throughput Diffusion LMs with Mamba Backbone](#user-content-link7)
+**Authors:** Vaibhav Singh, Oleksiy Ostapenko, Pierre-Andr\'e No\"el, Torsten Scholak
+
+8. [PolyKAN: Efficient Fused GPU Operators for Polynomial Kolmogorov-Arnold Network Variants](#user-content-link8)
+**Authors:** Mingkun Yu, Heming Zhong, Dan Huang, Yutong Lu, Jiazhi Jiang
+
+9. [Almost Sure Convergence Analysis of Differentially Private Stochastic Gradient Methods](#user-content-link9)
+**Authors:** Amartya Mukherjee, Jun Liu
+
+10. [Walrus: A Cross-Domain Foundation Model for Continuum Dynamics](#user-content-link10)
+**Authors:** Michael McCabe, Payel Mukhopadhyay, Tanya Marwah, Bruno Regaldo-Saint Blancard, Francois Rozet, Cristiana Diaconu, Lucas Meyer, Kaze W. K. Wong, Hadi Sotoudeh, Alberto Bietti, Irina Espejo, Rio Fear, Siavash Golkar, Tom Hehir, Keiya Hirashima, Geraud Krawezik, Francois Lanusse, Rudy Morel, Ruben Ohana, Liam Parker, Mariel Pettee, Jeff Shen, Kyunghyun Cho, Miles Cranmer, Shirley Ho
+
+11. [Descend or Rewind? Stochastic Gradient Descent Unlearning](#user-content-link11)
+**Authors:** Siqiao Mu, Diego Klabjan
+
+12. [Taming the Long-Tail: Efficient Reasoning RL Training with Adaptive Drafter](#user-content-link12)
+**Authors:** Qinghao Hu, Shang Yang, Junxian Guo, Xiaozhe Yao, Yujun Lin, Yuxian Gu, Han Cai, Chuang Gan, Ana Klimovic, Song Han
+
+13. [ODE-ViT: Plug & Play Attention Layer from the Generalization of the ViT as an Ordinary Differential Equation](#user-content-link13)
+**Authors:** Carlos Boned Riera, David Romero Sanchez, Oriol Ramos Terrades
+
+14. [Unveiling Intrinsic Dimension of Texts: from Academic Abstract to Creative Story](#user-content-link14)
+**Authors:** Vladislav Pedashenko, Laida Kushnareva, Yana Khassan Nibal, Eduard Tulchinskii, Kristian Kuznetsov, Vladislav Zharchinskii, Yury Maximov, Irina Piontkovskaya
+
+15. [iLTM: Integrated Large Tabular Model](#user-content-link15)
+**Authors:** David Bonet, Mar\c{c}al Comajoan Cara, Alvaro Calafell, Daniel Mas Montserrat, Alexander G. Ioannidis
+
+16. [GLOBE: Accurate and Generalizable PDE Surrogates using Domain-Inspired Architectures and Equivariances](#user-content-link16)
+**Authors:** Peter Sharpe
+
+17. [Anatomy of an Idiom: Tracing Non-Compositionality in Language Models](#user-content-link17)
+**Authors:** Andrew Gomes
+
+18. [Gauge-Equivariant Graph Networks via Self-Interference Cancellation](#user-content-link18)
+**Authors:** Yoonhyuk Choi, Chong-Kwon Kim
+
+19. [Logit-Based Losses Limit the Effectiveness of Feature Knowledge Distillation](#user-content-link19)
+**Authors:** Nicholas Cooper, Lijun Chen, Sailesh Dwivedy, Danna Gurari
+
+---
+
+## 1. [Neural Networks Learn Generic Multi-Index Models Near Information-Theoretic Limit](https://arxiv.org/abs/2511.15120) <a id="link1"></a>
+
+**ArXiv ID:** 2511.15120
+
+**Authors:** Bohan Zhang, Zihao Wang, Hengyu Fu, Jason D. Lee
+
+**Abstract:** In deep learning, a central issue is to understand how neural networks efficiently learn high-dimensional features. To this end, we explore the gradient descent learning of a general Gaussian Multi-index model $f(\boldsymbol{x})=g(\boldsymbol{U}\boldsymbol{x})$ with hidden subspace $\boldsymbol{U}\in \mathbb{R}^{r\times d}$, which is the canonical setup to study representation learning. We prove that under generic non-degenerate assumptions on the link function, a standard two-layer neural network trained via layer-wise gradient descent can agnostically learn the target with $o_d(1)$ test error using $\widetilde{\mathcal{O}}(d)$ samples and $\widetilde{\mathcal{O}}(d^2)$ time. The sample and time complexity both align with the information-theoretic limit up to leading order and are therefore optimal. During the first stage of gradient descent learning, the proof proceeds via showing that the inner weights can perform a power-iteration process. This process implicitly mimics a spectral start for the whole span of the hidden subspace and eventually eliminates finite-sample noise and recovers this span. It surprisingly indicates that optimal results can only be achieved if the first layer is trained for more than $\mathcal{O}(1)$ steps. This work demonstrates the ability of neural networks to effectively learn hierarchical functions with respect to both sample and time efficiency.
+
+**Comment:** Representation Learning: provable sample/time-optimal learning of multi-index models by two-layer nets via gradient descent.
+
+**Relevance:** 10
+**Novelty:** 9
+
+---
+
+## 2. [Change-of-Basis Pruning via Rotational Invariance](https://arxiv.org/abs/2511.16061) <a id="link2"></a>
+
+**ArXiv ID:** 2511.16061
+
+**Authors:** Alex Ning, Vainateya Rangaraju
+
+**Abstract:** Structured pruning removes entire neurons or channels, but its effectiveness depends on how importance is distributed across the representation space. Change-of-basis (CoB) pruning addresses this challenge by applying orthogonal linear transformations that concentrate importance within certain dimensions. However, many standard deep learning architectures are not inherently invariant to such transformations. To enable compatibility, we introduce two-subspace radial activations (TSRAs): an activation family that is invariant to orthogonal linear transformations applied independently within its two activation subspaces. This invariance allows CoB transformations to be merged into surrounding weights without incurring extra parameters. We position this work as a proof-of-concept that a rotationally invariant design may offer a principled approach towards change-of-basis pruning. We do not provide an analysis of multiple TSRA candidates nor do we explore weight initialization for any TSRAs. These limitations, combined with other necessary modifications we make to permit rotational invariance, result in a slight accuracy drop of $4.52\%$ compared to a ReLU-based control. However, using activation-magnitude importance, VGG-16 implementing our CoB+TSRA framework shows encouraging results on CIFAR-10. Under fixed-ratio structured pruning, CoB improves accuracy over a TSRA baseline at all pruning ratios and extends reliable pruning frontier from roughly $30\%$ to $70\%$ of parameters without post-prune fine tuning. Under threshold-based pruning strategies, CoB prunes $90-96\%$ of parameters while maintaining $1-6\%$ accuracy drop after fine-tuning. Together, these results indicate that rotationally invariant architectures may offer a promising path towards CoB pruning.
+
+**Comment:** Strongly matches Model Compression/Efficiency criterion: change-of-basis structured pruning enabled by rotationally invariant activations (TSRAs) to concentrate importance and prune effectively.
+
+**Relevance:** 10
+**Novelty:** 8
+
+---
+
+## 3. [Transformer Injectivity & Geometric Robustness - Analytic Margins and Bi-Lipschitz Uniformity of Sequence-Level Hidden States](https://arxiv.org/abs/2511.14808) <a id="link3"></a>
+
+**ArXiv ID:** 2511.14808
+
+**Authors:** Mikael von Strauss
+
+**Abstract:** Under real-analytic assumptions on decoder-only Transformers, recent work shows that the map from discrete prompts to last-token hidden states is generically injective on finite prompt sets. We refine this picture: for each layer $\ell$ we define a collision discriminant $\Delta^\ell \subset \Theta$ and injective stratum $U^\ell = \Theta \setminus \Delta^\ell$, and prove a dichotomy -- either the model is nowhere injective on the set, or $U^\ell$ is open and dense and every $F^\ell_\theta$ is injective. Under mild non-singularity assumptions on the optimizer and an absolutely continuous initialization, generic injectivity persists along smooth training trajectories over any fixed horizon. We also treat symmetry groups $G$, showing that discriminants and injective strata descend to the quotient $\Theta/G$, so injectivity is naturally a property of functional equivalence classes.   We complement these results with an empirical study of layerwise geometric diagnostics. We define a separation margin and a co-Lipschitz (lower Lipschitz) constant between prompt space and last-token representation space, estimated via nearest-neighbor statistics on large prompt sets. Applying these diagnostics to pretrained LLaMA-3 and Qwen models, we study behavior across layers, sequence lengths, model scales, and 8- and 4-bit activation quantization. On our sampled prompts we see no collisions in full precision or at 8 bits, while 4-bit quantization induces a small number of collisions and markedly shrinks co-Lipschitz estimates. For a small GPT-2 trained from scratch, normalized metrics remain stable over training. Overall, the results suggest that Transformer representations are generically and persistently injective in the continuous-parameter idealization, while their practical invertibility can be probed using simple geometric diagnostics.
+
+**Comment:** Model Architecture / Representation Learning: theoretical analysis of Transformer injectivity and bi-Lipschitz properties with layerwise geometric diagnostics (including quantization effects).
+
+**Relevance:** 10
+**Novelty:** 8
+
+---
+
+## 4. [Dynamic Expert Quantization for Scalable Mixture-of-Experts Inference](https://arxiv.org/abs/2511.15015) <a id="link4"></a>
+
+**ArXiv ID:** 2511.15015
+
+**Authors:** Kexin Chu, Dawei Xiang, Zixu Shen, Yiwei Yang, Zecheng Liu, Wei Zhang
+
+**Abstract:** Mixture-of-Experts (MoE) models scale LLM capacity efficiently, but deployment on consumer GPUs is limited by the large memory footprint of inactive experts. Static post-training quantization reduces storage costs but cannot adapt to shifting activation patterns, causing accuracy loss under aggressive compression. So we present DynaExq, a runtime system that treats expert precision as a first-class, dynamically managed resource. DynaExq combines (1) a hotness-aware precision controller that continuously aligns expert bit-widths with long-term activation statistics, (2) a fully asynchronous precision-switching pipeline that overlaps promotion and demotion with MoE computation, and (3) a fragmentation-free memory pooling mechanism that supports hybrid-precision experts with deterministic allocation. Together, these components enable stable, non-blocking precision transitions under strict HBM budgets.   Across Qwen3-30B and Qwen3-80B MoE models and six representative benchmarks, DynaExq deploys large LLMs on single RTX 5090 and A6000 GPUs and improves accuracy by up to 4.03 points over static low-precision baselines. The results show that adaptive, workload-aware quantization is an effective strategy for memory-constrained MoE serving.
+
+**Comment:** Model Compression and Efficiency: adaptive, runtime expert quantization for MoE inference under strict HBM budgets.
+
+**Relevance:** 10
+**Novelty:** 8
+
+---
+
+## 5. [Sparse Autoencoders are Topic Models](https://arxiv.org/abs/2511.16309) <a id="link5"></a>
+
+**ArXiv ID:** 2511.16309
+
+**Authors:** Leander Girrbach, Zeynep Akata
+
+**Abstract:** Sparse autoencoders (SAEs) are used to analyze embeddings, but their role and practical value are debated. We propose a new perspective on SAEs by demonstrating that they can be naturally understood as topic models. We extend Latent Dirichlet Allocation to embedding spaces and derive the SAE objective as a maximum a posteriori estimator under this model. This view implies SAE features are thematic components rather than steerable directions. Based on this, we introduce SAE-TM, a topic modeling framework that: (1) trains an SAE to learn reusable topic atoms, (2) interprets them as word distributions on downstream data, and (3) merges them into any number of topics without retraining. SAE-TM yields more coherent topics than strong baselines on text and image datasets while maintaining diversity. Finally, we analyze thematic structure in image datasets and trace topic changes over time in Japanese woodblock prints. Our work positions SAEs as effective tools for large-scale thematic analysis across modalities. Code and data will be released upon publication.
+
+**Comment:** Representation Learning/Sparsity: theoretical reinterpretation of sparse autoencoders as topic models and a new SAE-TM framework for thematic analysis.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 6. [Evolution Strategies at the Hyperscale](https://arxiv.org/abs/2511.16652) <a id="link6"></a>
+
+**ArXiv ID:** 2511.16652
+
+**Authors:** Bidipta Sarkar, Mattie Fellows, Juan Agustin Duque, Alistair Letcher, Antonio Le\'on Villares, Anya Sims, Dylan Cope, Jarek Liesen, Lukas Seier, Theo Wolf, Uljad Berdica, Alexander David Goldie, Aaron Courville, Karin Sevegnani, Shimon Whiteson, Jakob Nicolaus Foerster
+
+**Abstract:** We introduce Evolution Guided General Optimization via Low-rank Learning (EGGROLL), an evolution strategies (ES) algorithm designed to scale backprop-free optimization to large population sizes for modern large neural network architectures with billions of parameters. ES is a set of powerful blackbox optimisation methods that can handle non-differentiable or noisy objectives with excellent scaling potential through parallelisation. Na{\"i}ve ES becomes prohibitively expensive at scale due to the computational and memory costs associated with generating matrix perturbations $E\in\mathbb{R}^{m\times n}$ and the batched matrix multiplications needed to compute per-member forward passes. EGGROLL overcomes these bottlenecks by generating random matrices $A\in \mathbb{R}^{m\times r},\ B\in \mathbb{R}^{n\times r}$ with $r\ll \min(m,n)$ to form a low-rank matrix perturbation $A B^\top$ that are used in place of the full-rank perturbation $E$. As the overall update is an average across a population of $N$ workers, this still results in a high-rank update but with significant memory and computation savings, reducing the auxiliary storage from $mn$ to $r(m+n)$ per layer and the cost of a forward pass from $\mathcal{O}(mn)$ to $\mathcal{O}(r(m+n))$ when compared to full-rank ES. A theoretical analysis reveals our low-rank update converges to the full-rank update at a fast $\mathcal{O}\left(\frac{1}{r}\right)$ rate. Our experiments show that (1) EGGROLL does not compromise the performance of ES in tabula-rasa RL settings, despite being faster, (2) it is competitive with GRPO as a technique for improving LLM reasoning, and (3) EGGROLL enables stable pre-training of nonlinear recurrent language models that operate purely in integer datatypes.
+
+**Comment:** High Performance Computing + Efficiency: low-rank evolution strategies enabling scalable, backprop-free training for large networks.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 7. [Breaking the Bottleneck with DiffuApriel: High-Throughput Diffusion LMs with Mamba Backbone](https://arxiv.org/abs/2511.15927) <a id="link7"></a>
+
+**ArXiv ID:** 2511.15927
+
+**Authors:** Vaibhav Singh, Oleksiy Ostapenko, Pierre-Andr\'e No\"el, Torsten Scholak
+
+**Abstract:** Diffusion-based language models have recently emerged as a promising alternative to autoregressive generation, yet their reliance on Transformer backbones limits inference efficiency due to quadratic attention and KV-cache overhead. In this work, we introduce DiffuApriel, a masked diffusion language model built on a bidirectional Mamba backbone that combines the diffusion objective with linear-time sequence modeling. DiffuApriel matches the performance of Transformer-based diffusion models while achieving up to 4.4x higher inference throughput for long sequences with a 1.3B model. We further propose DiffuApriel-H, a hybrid variant that interleaves attention and mamba layers, offering up to 2.6x throughput improvement with balanced global and local context modeling. Our results demonstrate that bidirectional state-space architectures serve as strong denoisers in masked diffusion LMs, providing a practical and scalable foundation for faster, memory-efficient text generation.
+
+**Comment:** Efficiency/Architecture: diffusion LM with bidirectional Mamba backbone for linear-time, high-throughput generation.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 8. [PolyKAN: Efficient Fused GPU Operators for Polynomial Kolmogorov-Arnold Network Variants](https://arxiv.org/abs/2511.14852) <a id="link8"></a>
+
+**ArXiv ID:** 2511.14852
+
+**Authors:** Mingkun Yu, Heming Zhong, Dan Huang, Yutong Lu, Jiazhi Jiang
+
+**Abstract:** Kolmogorov-Arnold Networks (KANs) promise higher expressive capability and stronger interpretability than Multi-Layer Perceptron, particularly in the domain of AI for Science. However, practical adoption has been hindered by low GPU utilization of existing parallel implementations. To address this challenge, we present a GPU-accelerated operator library, named PolyKAN which is the first general open-source implementation of KAN and its variants. PolyKAN fuses the forward and backward passes of polynomial KAN layers into a concise set of optimized CUDA kernels. Four orthogonal techniques underpin the design: (i) \emph{lookup-table} with linear interpolation that replaces runtime expensive math-library functions; (ii) \emph{2D tiling} to expose thread-level parallelism with preserving memory locality; (iii) a \emph{two-stage reduction} scheme converting scattered atomic updates into a single controllable merge step; and (iv) \emph{coefficient-layout reordering} yielding unit-stride reads under the tiled schedule. Using a KAN variant, Chebyshev KAN, as a case-study, PolyKAN delivers $1.2$--$10\times$ faster inference and $1.4$--$12\times$ faster training than a Triton + cuBLAS baseline, with identical accuracy on speech, audio-enhancement, and tabular-regression workloads on both highend GPU and consumer-grade GPU.
+
+**Comment:** High Performance Computing: fused CUDA operators and kernel-level optimizations for KAN variants to boost GPU utilization.
+
+**Relevance:** 9
+**Novelty:** 7
+
+---
+
+## 9. [Almost Sure Convergence Analysis of Differentially Private Stochastic Gradient Methods](https://arxiv.org/abs/2511.16587) <a id="link9"></a>
+
+**ArXiv ID:** 2511.16587
+
+**Authors:** Amartya Mukherjee, Jun Liu
+
+**Abstract:** Differentially private stochastic gradient descent (DP-SGD) has become the standard algorithm for training machine learning models with rigorous privacy guarantees. Despite its widespread use, the theoretical understanding of its long-run behavior remains limited: existing analyses typically establish convergence in expectation or with high probability, but do not address the almost sure convergence of single trajectories. In this work, we prove that DP-SGD converges almost surely under standard smoothness assumptions, both in nonconvex and strongly convex settings, provided the step sizes satisfy some standard decaying conditions. Our analysis extends to momentum variants such as the stochastic heavy ball (DP-SHB) and Nesterov's accelerated gradient (DP-NAG), where we show that careful energy constructions yield similar guarantees. These results provide stronger theoretical foundations for differentially private optimization and suggest that, despite privacy-induced distortions, the algorithm remains pathwise stable in both convex and nonconvex regimes.
+
+**Comment:** Matches Training Dynamics/Optimization theory criterion: establishes almost sure convergence of DP-SGD and momentum variants under standard assumptions.
+
+**Relevance:** 8
+**Novelty:** 8
+
+---
+
+## 10. [Walrus: A Cross-Domain Foundation Model for Continuum Dynamics](https://arxiv.org/abs/2511.15684) <a id="link10"></a>
+
+**ArXiv ID:** 2511.15684
+
+**Authors:** Michael McCabe, Payel Mukhopadhyay, Tanya Marwah, Bruno Regaldo-Saint Blancard, Francois Rozet, Cristiana Diaconu, Lucas Meyer, Kaze W. K. Wong, Hadi Sotoudeh, Alberto Bietti, Irina Espejo, Rio Fear, Siavash Golkar, Tom Hehir, Keiya Hirashima, Geraud Krawezik, Francois Lanusse, Rudy Morel, Ruben Ohana, Liam Parker, Mariel Pettee, Jeff Shen, Kyunghyun Cho, Miles Cranmer, Shirley Ho
+
+**Abstract:** Foundation models have transformed machine learning for language and vision, but achieving comparable impact in physical simulation remains a challenge. Data heterogeneity and unstable long-term dynamics inhibit learning from sufficiently diverse dynamics, while varying resolutions and dimensionalities challenge efficient training on modern hardware. Through empirical and theoretical analysis, we incorporate new approaches to mitigate these obstacles, including a harmonic-analysis-based stabilization method, load-balanced distributed 2D and 3D training strategies, and compute-adaptive tokenization. Using these tools, we develop Walrus, a transformer-based foundation model developed primarily for fluid-like continuum dynamics. Walrus is pretrained on nineteen diverse scenarios spanning astrophysics, geoscience, rheology, plasma physics, acoustics, and classical fluids. Experiments show that Walrus outperforms prior foundation models on both short and long term prediction horizons on downstream tasks and across the breadth of pretraining data, while ablation studies confirm the value of our contributions to forecast stability, training throughput, and transfer performance over conventional approaches. Code and weights are released for community use.
+
+**Comment:** High Performance Computing + Model Architecture: transformer-based foundation model for continuum dynamics with harmonic-analysis stabilization, load-balanced distributed 2D/3D training, and compute-adaptive tokenization.
+
+**Relevance:** 8
+**Novelty:** 8
+
+---
+
+## 11. [Descend or Rewind? Stochastic Gradient Descent Unlearning](https://arxiv.org/abs/2511.15983) <a id="link11"></a>
+
+**ArXiv ID:** 2511.15983
+
+**Authors:** Siqiao Mu, Diego Klabjan
+
+**Abstract:** Machine unlearning algorithms aim to remove the impact of selected training data from a model without the computational expenses of retraining from scratch. Two such algorithms are ``Descent-to-Delete" (D2D) and ``Rewind-to-Delete" (R2D), full-batch gradient descent algorithms that are easy to implement and satisfy provable unlearning guarantees. In particular, the stochastic version of D2D is widely implemented as the ``finetuning" unlearning baseline, despite lacking theoretical backing on nonconvex functions. In this work, we prove $(\epsilon, \delta)$ certified unlearning guarantees for stochastic R2D and D2D for strongly convex, convex, and nonconvex loss functions, by analyzing unlearning through the lens of disturbed or biased gradient systems, which may be contracting, semi-contracting, or expansive respectively. Our argument relies on optimally coupling the random behavior of the unlearning and retraining trajectories, resulting in a probabilistic sensitivity bound that can be combined with a novel relaxed Gaussian mechanism to achieve $(\epsilon, \delta)$ unlearning. We determine that D2D can yield tighter guarantees for strongly convex functions compared to R2D by relying on contraction to a unique global minimum. However, unlike D2D, R2D can achieve unlearning in the convex and nonconvex setting because it draws the unlearned model closer to the retrained model by reversing the accumulated disturbances.
+
+**Comment:** Training dynamics/optimization: certified SGD unlearning guarantees for stochastic D2D/R2D across convex and nonconvex losses.
+
+**Relevance:** 8
+**Novelty:** 8
+
+---
+
+## 12. [Taming the Long-Tail: Efficient Reasoning RL Training with Adaptive Drafter](https://arxiv.org/abs/2511.16665) <a id="link12"></a>
+
+**ArXiv ID:** 2511.16665
+
+**Authors:** Qinghao Hu, Shang Yang, Junxian Guo, Xiaozhe Yao, Yujun Lin, Yuxian Gu, Han Cai, Chuang Gan, Ana Klimovic, Song Han
+
+**Abstract:** The emergence of Large Language Models (LLMs) with strong reasoning capabilities marks a significant milestone, unlocking new frontiers in complex problem-solving. However, training these reasoning models, typically using Reinforcement Learning (RL), encounters critical efficiency bottlenecks: response generation during RL training exhibits a persistent long-tail distribution, where a few very long responses dominate execution time, wasting resources and inflating costs. To address this, we propose TLT, a system that accelerates reasoning RL training losslessly by integrating adaptive speculative decoding. Applying speculative decoding in RL is challenging due to the dynamic workloads, evolving target model, and draft model training overhead. TLT overcomes these obstacles with two synergistic components: (1) Adaptive Drafter, a lightweight draft model trained continuously on idle GPUs during long-tail generation to maintain alignment with the target model at no extra cost; and (2) Adaptive Rollout Engine, which maintains a memory-efficient pool of pre-captured CUDAGraphs and adaptively select suitable SD strategies for each input batch. Evaluations demonstrate that TLT achieves over 1.7x end-to-end RL training speedup over state-of-the-art systems, preserves the model accuracy, and yields a high-quality draft model as a free byproduct suitable for efficient deployment. Code is released at https://github.com/mit-han-lab/fastrl.
+
+**Comment:** Matches High Performance Computing criterion: systems-level acceleration of RL training via adaptive speculative decoding and a memory-efficient CUDA Graphs rollout engine.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 13. [ODE-ViT: Plug & Play Attention Layer from the Generalization of the ViT as an Ordinary Differential Equation](https://arxiv.org/abs/2511.16501) <a id="link13"></a>
+
+**ArXiv ID:** 2511.16501
+
+**Authors:** Carlos Boned Riera, David Romero Sanchez, Oriol Ramos Terrades
+
+**Abstract:** In recent years, increasingly large models have achieved outstanding performance across CV tasks. However, these models demand substantial computational resources and storage, and their growing complexity limits our understanding of how they make decisions. Most of these architectures rely on the attention mechanism within Transformer-based designs. Building upon the connection between residual neural networks and ordinary differential equations (ODEs), we introduce ODE-ViT, a Vision Transformer reformulated as an ODE system that satisfies the conditions for well-posed and stable dynamics. Experiments on CIFAR-10 and CIFAR-100 demonstrate that ODE-ViT achieves stable, interpretable, and competitive performance with up to one order of magnitude fewer parameters, surpassing prior ODE-based Transformer approaches in classification tasks. We further propose a plug-and-play teacher-student framework in which a discrete ViT guides the continuous trajectory of ODE-ViT by treating the intermediate representations of the teacher as solutions of the ODE. This strategy improves performance by more than 10% compared to training a free ODE-ViT from scratch.
+
+**Comment:** Matches Model Architecture criterion: reformulates ViT as an ODE system with stability guarantees and a plug-and-play attention layer, plus teacher-student guidance of continuous trajectories.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 14. [Unveiling Intrinsic Dimension of Texts: from Academic Abstract to Creative Story](https://arxiv.org/abs/2511.15210) <a id="link14"></a>
+
+**ArXiv ID:** 2511.15210
+
+**Authors:** Vladislav Pedashenko, Laida Kushnareva, Yana Khassan Nibal, Eduard Tulchinskii, Kristian Kuznetsov, Vladislav Zharchinskii, Yury Maximov, Irina Piontkovskaya
+
+**Abstract:** Intrinsic dimension (ID) is an important tool in modern LLM analysis, informing studies of training dynamics, scaling behavior, and dataset structure, yet its textual determinants remain underexplored. We provide the first comprehensive study grounding ID in interpretable text properties through cross-encoder analysis, linguistic features, and sparse autoencoders (SAEs). In this work, we establish three key findings. First, ID is complementary to entropy-based metrics: after controlling for length, the two are uncorrelated, with ID capturing geometric complexity orthogonal to prediction quality. Second, ID exhibits robust genre stratification: scientific prose shows low ID (~8), encyclopedic content medium ID (~9), and creative/opinion writing high ID (~10.5) across all models tested. This reveals that contemporary LLMs find scientific text "representationally simple" while fiction requires additional degrees of freedom. Third, using SAEs, we identify causal features: scientific signals (formal tone, report templates, statistics) reduce ID; humanized signals (personalization, emotion, narrative) increase it. Steering experiments confirm these effects are causal. Thus, for contemporary models, scientific writing appears comparatively "easy", whereas fiction, opinion, and affect add representational degrees of freedom. Our multi-faceted analysis provides practical guidance for the proper use of ID and the sound interpretation of ID-based results.
+
+**Comment:** Matches Representation Learning criterion: analyzes intrinsic dimension of text using SAEs and links causal linguistic features to representational complexity.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 15. [iLTM: Integrated Large Tabular Model](https://arxiv.org/abs/2511.15941) <a id="link15"></a>
+
+**ArXiv ID:** 2511.15941
+
+**Authors:** David Bonet, Mar\c{c}al Comajoan Cara, Alvaro Calafell, Daniel Mas Montserrat, Alexander G. Ioannidis
+
+**Abstract:** Tabular data underpins decisions across science, industry, and public services. Despite rapid progress, advances in deep learning have not fully carried over to the tabular domain, where gradient-boosted decision trees (GBDTs) remain a default choice in practice. We present iLTM, an integrated Large Tabular Model that unifies tree-derived embeddings, dimensionality-agnostic representations, a meta-trained hypernetwork, multilayer perceptrons (MLPs), and retrieval within a single architecture. Pretrained on more than 1,800 heterogeneous classification datasets, iLTM achieves consistently superior performance across tabular classification and regression tasks, from small datasets to large and high-dimensional tasks. After light fine-tuning, the meta-trained hypernetwork transfers to regression targets, matching or surpassing strong baselines. Extensive experiments show that iLTM outperforms well-tuned GBDTs and leading deep tabular models while requiring less task-specific tuning. By bridging the gap between tree-based and neural methods, iLTM offers a new framework for tabular foundation models for robust, adaptable, and scalable tabular learning.
+
+**Comment:** Model Architecture: integrated tabular foundation model combining tree-derived embeddings, dimensionality-agnostic reps, a meta-trained hypernetwork, MLPs, and retrieval.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 16. [GLOBE: Accurate and Generalizable PDE Surrogates using Domain-Inspired Architectures and Equivariances](https://arxiv.org/abs/2511.15856) <a id="link16"></a>
+
+**ArXiv ID:** 2511.15856
+
+**Authors:** Peter Sharpe
+
+**Abstract:** We introduce GLOBE, a new neural surrogate for homogeneous PDEs that draws inductive bias from boundary-element methods and equivariant ML. GLOBE represents solutions as superpositions of learnable Green's-function-like kernels evaluated from boundary faces to targets, composed across multiscale branches and communication hyperlayers. The architecture is translation-, rotation-, and parity-equivariant; discretization-invariant in the fine-mesh limit; and units-invariant via rigorous nondimensionalization. An explicit far-field decay envelope stabilizes extrapolation, boundary-to-boundary hyperlayer communication mediates long-range coupling, and the all-to-all boundary-to-target evaluation yields a global receptive field that respects PDE information flow, even for elliptic PDEs.   On AirFRANS (steady incompressible RANS over NACA airfoils), GLOBE achieves substantial accuracy improvements. On the "Full" split, it reduces mean-squared error by roughly 200x on all fields relative to the dataset's reference baselines, and roughly 50x relative to the next-best-performing model. In the "Scarce" split, it achieves over 100x lower error on velocity and pressure fields and over 600x lower error on surface pressure than Transolver. Qualitative results show sharp near-wall gradients, coherent wakes, and limited errors under modest extrapolation in Reynolds number and angle of attack.   In addition to this accuracy, the model is quite compact (117k parameters), and fields can be evaluated at arbitrary points during inference. We also demonstrate the ability to train and predict with non-watertight meshes, which has strong practical implications.   These results show that rigorous physics- and domain-inspired inductive biases can achieve large gains in accuracy, generalizability, and practicality for ML-based PDE surrogates for industrial computer-aided engineering (CAE).
+
+**Comment:** Model Architecture: domain-inspired, equivariant neural surrogate for PDEs with global receptive field and compact parameterization (117k params).
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 17. [Anatomy of an Idiom: Tracing Non-Compositionality in Language Models](https://arxiv.org/abs/2511.16467) <a id="link17"></a>
+
+**ArXiv ID:** 2511.16467
+
+**Authors:** Andrew Gomes
+
+**Abstract:** We investigate the processing of idiomatic expressions in transformer-based language models using a novel set of techniques for circuit discovery and analysis. First discovering circuits via a modified path patching algorithm, we find that idiom processing exhibits distinct computational patterns. We identify and investigate ``Idiom Heads,'' attention heads that frequently activate across different idioms, as well as enhanced attention between idiom tokens due to earlier processing, which we term ``augmented reception.'' We analyze these phenomena and the general features of the discovered circuits as mechanisms by which transformers balance computational efficiency and robustness. Finally, these findings provide insights into how transformers handle non-compositional language and suggest pathways for understanding the processing of more complex grammatical constructions.
+
+**Comment:** Representation Learning/Interpretability: circuit discovery for idiom processing in transformers, identifying reusable “Idiom Heads” and attention mechanisms.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 18. [Gauge-Equivariant Graph Networks via Self-Interference Cancellation](https://arxiv.org/abs/2511.16062) <a id="link18"></a>
+
+**ArXiv ID:** 2511.16062
+
+**Authors:** Yoonhyuk Choi, Chong-Kwon Kim
+
+**Abstract:** Graph Neural Networks (GNNs) excel on homophilous graphs but often fail under heterophily due to self-reinforcing and phase-inconsistent signals. We propose a Gauge-Equivariant Graph Network with Self-Interference Cancellation (GESC), which replaces additive aggregation with a projection-based interference mechanism. Unlike prior magnetic or gauge-equivariant GNNs that typically focus on phase handling in spectral filtering while largely relying on scalar weighting, GESC introduces a $\mathrm{U}(1)$ phase connection followed by a rank-1 projection that attenuates self-parallel components before attention. A sign- and phase-aware gate further regulates neighbor influence, attenuating components aligned with current node states and acting as a local notch on low-frequency modes. Across diverse graph benchmarks, our method consistently outperforms recent state-of-the-art models while offering a unified, interference-aware view of message passing. Our code is available at \href{here}{https://anonymous.4open.science/r/GESC-1B22}.
+
+**Comment:** Model Architecture: gauge-equivariant GNN with projection-based self-interference cancellation for heterophilous graphs.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 19. [Logit-Based Losses Limit the Effectiveness of Feature Knowledge Distillation](https://arxiv.org/abs/2511.14981) <a id="link19"></a>
+
+**ArXiv ID:** 2511.14981
+
+**Authors:** Nicholas Cooper, Lijun Chen, Sailesh Dwivedy, Danna Gurari
+
+**Abstract:** Knowledge distillation (KD) methods can transfer knowledge of a parameter-heavy teacher model to a light-weight student model. The status quo for feature KD methods is to utilize loss functions based on logits (i.e., pre-softmax class scores) and intermediate layer features (i.e., latent representations). Unlike previous approaches, we propose a feature KD framework for training the student's backbone using feature-based losses exclusively (i.e., without logit-based losses such as cross entropy). Leveraging recent discoveries about the geometry of latent representations, we introduce a knowledge quality metric for identifying which teacher layers provide the most effective knowledge for distillation. Experiments on three image classification datasets with four diverse student-teacher pairs, spanning convolutional neural networks and vision transformers, demonstrate our KD method achieves state-of-the-art performance, delivering top-1 accuracy boosts of up to 15% over standard approaches. We publically share our code to facilitate future work at https://github.com/Thegolfingocto/KD_wo_CE.
+
+**Comment:** Model Compression and Efficiency: feature-only knowledge distillation framework challenging logit-based losses.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+# Paper Selection Prompt
+
+## System Prompt
+
+> You are a helpful paper reading assistant whose job is to read daily posts from ArXiv and identify a few papers that your friend will enjoy reading.
+> Your job is to carefully read the paper titles and abstracts below and find the ones that match the criteria below.
+
+## User Prompt
+
+> ## Instructions
+> 
+> Write the response in JSONL format with {ARXIVID, COMMENT, RELEVANCE, NOVELTY} on each line, one for each paper.
+> 
+> - ARXIVID: should be the ArXiv ID.
+> - COMMENT: should identify whether there is a criteria that match the paper very closely. These matches should not be based on general terms like "language modeling" or "advancements" and should specifically refer to a criterion. No need to mention the non-matching criteria.
+> - RELEVANCE: should be a score from 1-10.
+> - NOVELTY: should be a score from 1-10.
+> 
+> ## Scoring Criteria
+> 
+> > The "Relevance" score measures how closely the paper aligns with the core topics of the prompt.
+> > The "Novelty" score assesses the originality and impact of the paper.
+> > They are two **ORTHONORMAL** axes and **SHOULD NOT** be confused with each other.
+> 
+> ### Relevance Scoring
+> 
+> - Relevance 9-10 (Completely Relevant)
+>   - Focus: Fully aligned with core topics with no deviation, score the highest if contains relevant keywords in it.
+>   - Examples: Papers focused on foundational methods or theoretical research, whose titles contain topic keywords like "MoE".
+> 
+> - Relevance 7-8 (Relevant)
+>   - Focus: Retain a solid link to the main research area, though may touch on peripheral elements.
+>   - Examples: Papers research on the fundamental part of MoE through a less critical aspect like its behavior in GNN.
+> 
+> - Relevance 5-6 (Borderline)
+>   - Focus: Maintains a link to the core topic but also extends into at least one other domain/area beyond the primary focus.
+>   - Examples: Work referencing MoE centered on reinforcement learning.
+> 
+> - Relevance 3-4 (Irrelevant)
+>   - Focus: Largely outside our interests with no association to our topics.
+>   - Examples: Application-focused papers like using MoE to solve a problem in the real world.
+> 
+> - Relevance 1-2 (Ignore)
+>   - Focus: Purely unrelated to our topics. Completely a different domain.
+>   - **Exception**: If the paper hints at a cutting-edge, radically new direction that could eventually transform the primary domain, consider a score of 9–10 despite initial appearances. (Usually a very rare concept that belongs to the fundamental research)
+> 
+> ### Novelty Scoring
+> 
+> - Novelty 9-10 (Breakthrough)
+>   - Definition: Groundbreaking methods/theory introducing new directions or solving major challenges.
+>   - Examples: Entirely new paradigm for foundational models; a novel theory transforming representation learning.
+> 
+> - Novelty 7-8 (Improvements)
+>   - Definition: Substantial insights/enhancements, though not a full paradigm shift.
+>   - Examples: Modifications on existing methods yielding significantly better results.
+> 
+> - Novelty 5-6 (Borderline)
+>   - Definition: Incremental contributions with possible long-term benefits, not immediately transformative.
+>   - Examples: Moderately novel extension to an existing architecture; refining current methods without fundamentally altering them.
+> 
+> - Novelty 3-4 (Tangential)
+>   - Definition: Minor or domain-specific improvements with limited broader impact.
+>   - Examples: Slight modifications to known methods with strange motivation; purely engineering jobs like a new benchmark/dataset.
+> 
+> - Novelty 1-2 (Low)
+>   - Definition: Minimal originality, applying standard approaches without real innovation.
+>   - Examples: Using an off-the-shelf model without adding new insights; purely application-driven studies like finetuning a pretrained model using existing methods.
+> 
+> ## Papers
+> 
+> [PAPER LIST HERE]
+> 
+> ## Relevant Topics
+> 
+> Use the following relevance criteria to focus on foundational research. Keep **relevant** papers and filter out **irrelevant** ones. Avoid purely **application-driven** work.
+> 
+> 1. Model Architecture
+>    - Relevant: Mixture-of-Experts (MoE), Transformers, Conditional/Dynamic Networks, Autoencoders, analysis/innovations on existing architectures.
+>    - Irrelevant: Merely using existing architectures for a certain task without insights into the structure themselves.
+> 
+> 2. Model Compression and Efficiency
+>    - Relevant: Sparsity, pruning, quantization, low-rank approaches, cache, or other algorithmic/theoretical efficiency breakthroughs.
+>    - Irrelevant: Straightforward applications of existing compression methods to new tasks.
+> 
+> 3. High Performance Computing
+>    - Relevant: Algorithmic or systems-level innovations enabling training of large-scale models, distributed training techniques, memory optimization.
+>    - Irrelevant: Incremental engineering improvements without novel algorithmic contributions.
+> 
+> 4. Representation Learning
+>    - Relevant: Insights into how deep networks encode information, feature/dictionary learning, sparse/contrastive methods, training dynamics in neural networks.
+>    - Irrelevant: Standard applications of known techniques lacking new theoretical or methodological contributions.
+> 
+> **Keywords:**
+> 
+> - Relevant: Mixture of Experts (MoE), Representation Learning, Compression/Efficiency, Sparse/Sparsity, Pruning, Quantization, Low-rank, Foundation Model, etc.
+> - Irrelevant: Reinforcement Learning, Transfer Learning, Federated Learning, Online Learning, Diffusion Models, etc.
+> - Application: Image Segmentation, Medical Imaging, 3D Vision, Video Understanding, Information Retrieval, Summarization, Recommendation Systems, Machine Translation, Speech Recognition, Signal Processing, Spatial/Temporal Modeling, Time Series, Knowledge Graph, etc.

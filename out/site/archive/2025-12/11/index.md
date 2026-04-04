@@ -1,0 +1,510 @@
+<div style="display: flex; align-items: flex-start; justify-content: space-between; width: 100%;"><div style="width: 33.33%; text-align: left;"><a href="../10"><img src="../../../assets/nav/day/2025-12-11-prev.svg" alt="Previous Day 2025-12-10"></a></div><div style="width: 33.33%; text-align: center;"><a href=".."><img src="../../../assets/nav/day/2025-12-11-center.svg" alt="Monthly Overview 2025-12"></a></div><div style="width: 33.33%; text-align: right;"><a href="../12"><img src="../../../assets/nav/day/2025-12-11-next.svg" alt="Next Day 2025-12-12"></a></div></div>
+
+# Personalized Daily ArXiv Papers 2025-12-11
+
+| *[gpt-5]*   | Prompt   | Completion   | Total   |
+|:-----------:|:--------:|:------------:|:-------:|
+| **Token**   | 30293    | 27558        | 57851   |
+| **Cost**    | $0.04    | $0.28        | $0.31   |
+
+Total arXiv papers: 436
+
+Total scanned papers: 260
+
+Total relevant papers: 22
+
+**Table of contents with paper titles:**
+
+1. [FALCON: Few-step Accurate Likelihoods for Continuous Flows](#user-content-link1)
+**Authors:** Danyal Rehman, Tara Akhound-Sadegh, Artem Gazizov, Yoshua Bengio, Alexander Tong
+
+2. [Closing the Train-Test Gap in World Models for Gradient-Based Planning](#user-content-link2)
+**Authors:** Arjun Parthasarathy, Nimit Kalra, Rohun Agrawal, Yann LeCun, Oumayma Bounou, Pavel Izmailov, Micah Goldblum
+
+3. [StructuredDNA: A Bio-Physical Framework for Energy-Aware Transformer Routing](#user-content-link3)
+**Authors:** Mustapha Hamdi
+
+4. [Rates and architectures for learning geometrically non-trivial operators](#user-content-link4)
+**Authors:** T. Mitchell Roddenberry, Leo Tzou, Ivan Dokmani\'c, Maarten V. de Hoop, Richard G. Baraniuk
+
+5. [Provably Learning from Modern Language Models via Low Logit Rank](#user-content-link5)
+**Authors:** Noah Golowich, Allen Liu, Abhishek Shetty
+
+6. [Towards Lossless Ultimate Vision Token Compression for VLMs](#user-content-link6)
+**Authors:** Dehua Zheng, Mouxiao Huang, Borui Jiang, Hailin Hu, Xinghao Chen
+
+7. [Tensor-Compressed and Fully-Quantized Training of Neural PDE Solvers](#user-content-link7)
+**Authors:** Jinming Lu, Jiayi Tian, Yequan Zhao, Hai Li, Zheng Zhang
+
+8. [Impact of Positional Encoding: Clean and Adversarial Rademacher Complexity for Transformers under In-Context Regression](#user-content-link8)
+**Authors:** Weiyi He, Yue Xing
+
+9. [Self-Supervised Learning with Gaussian Processes](#user-content-link9)
+**Authors:** Yunshan Duan, Sinead Williamson
+
+10. [Drawback of Enforcing Equivariance and its Compensation via the Lens of Expressive Power](#user-content-link10)
+**Authors:** Yuzhu Chen, Tian Qin, Xinmei Tian, Fengxiang He, Dacheng Tao
+
+11. [HPM-KD: Hierarchical Progressive Multi-Teacher Framework for Knowledge Distillation and Efficient Model Compression](#user-content-link11)
+**Authors:** Gustavo Coelho Haase, Paulo Henrique Dourado da Silva
+
+12. [WarmServe: Enabling One-for-Many GPU Prewarming for Multi-LLM Serving](#user-content-link12)
+**Authors:** Chiheng Lou, Sheng Qi, Rui Kang, Yong Zhang, Chen Sun, Pengcheng Wang, Bingyang Liu, Xuanzhe Liu, Xin Jin
+
+13. [Supervised learning pays attention](#user-content-link13)
+**Authors:** Erin Craig, Robert Tibshirani
+
+14. [TinyD\'ej\`aVu: Smaller Memory Footprint & Faster Inference on Sensor Data Streams with Always-On Microcontrollers](#user-content-link14)
+**Authors:** Zhaolan Huang, Emmanuel Baccelli
+
+15. [Resolving Conflicts in Lifelong Learning via Aligning Updates in Subspaces](#user-content-link15)
+**Authors:** Yueer Zhou, Yichen Wu, Ying Wei
+
+16. [Luxical: High-Speed Lexical-Dense Text Embeddings](#user-content-link16)
+**Authors:** DatologyAI, :, Luke Merrick, Alex Fang, Aldo Carranza, Alvin Deng, Amro Abbas, Brett Larsen, Cody Blakeney, Darren Teh, David Schwab, Fan Pan, Haakon Mongstad, Haoli Yin, Jack Urbanek, Jason Lee, Jason Telanoff, Josh Wills, Kaleigh Mentzer, Paul Burstein, Parth Doshi, Paul Burnstein, Pratyush Maini, Ricardo Monti, Rishabh Adiga, Scott Loftin, Siddharth Joshi, Spandan Das, Tony Jiang, Vineeth Dorma, Zhengping Wang, Bogdan Gaza, Ari Morcos, Matthew Leavitt
+
+17. [Branching Strategies Based on Subgraph GNNs: A Study on Theoretical Promise versus Practical Reality](#user-content-link17)
+**Authors:** Junru Zhou, Yicheng Wang, Pan Li
+
+18. [Efficient Continual Learning in Neural Machine Translation: A Low-Rank Adaptation Approach](#user-content-link18)
+**Authors:** Salvador Carri\'on, Francisco Casacuberta
+
+19. [Understanding temperature tuning in energy-based models](#user-content-link19)
+**Authors:** Peter W Fields, Vudtiwat Ngampruetikorn, David J Schwab, Stephanie E Palmer
+
+20. [Circuits, Features, and Heuristics in Molecular Transformers](#user-content-link20)
+**Authors:** Kristof Varadi, Mark Marosi, Peter Antal
+
+21. [Spectral Embedding via Chebyshev Bases for Robust DeepONet Approximation](#user-content-link21)
+**Authors:** Muhammad Abid, Omer San
+
+22. [Banach neural operator for Navier-Stokes equations](#user-content-link22)
+**Authors:** Bo Zhang
+
+---
+
+## 1. [FALCON: Few-step Accurate Likelihoods for Continuous Flows](https://arxiv.org/abs/2512.09914) <a id="link1"></a>
+
+**ArXiv ID:** 2512.09914
+
+**Authors:** Danyal Rehman, Tara Akhound-Sadegh, Artem Gazizov, Yoshua Bengio, Alexander Tong
+
+**Abstract:** Scalable sampling of molecular states in thermodynamic equilibrium is a long-standing challenge in statistical physics. Boltzmann Generators tackle this problem by pairing a generative model, capable of exact likelihood computation, with importance sampling to obtain consistent samples under the target distribution. Current Boltzmann Generators primarily use continuous normalizing flows (CNFs) trained with flow matching for efficient training of powerful models. However, likelihood calculation for these models is extremely costly, requiring thousands of function evaluations per sample, severely limiting their adoption. In this work, we propose Few-step Accurate Likelihoods for Continuous Flows (FALCON), a method which allows for few-step sampling with a likelihood accurate enough for importance sampling applications by introducing a hybrid training objective that encourages invertibility. We show FALCON outperforms state-of-the-art normalizing flow models for molecular Boltzmann sampling and is two orders of magnitude faster than the equivalently performing CNF model.
+
+**Comment:** Author match
+
+
+
+---
+
+## 2. [Closing the Train-Test Gap in World Models for Gradient-Based Planning](https://arxiv.org/abs/2512.09929) <a id="link2"></a>
+
+**ArXiv ID:** 2512.09929
+
+**Authors:** Arjun Parthasarathy, Nimit Kalra, Rohun Agrawal, Yann LeCun, Oumayma Bounou, Pavel Izmailov, Micah Goldblum
+
+**Abstract:** World models paired with model predictive control (MPC) can be trained offline on large-scale datasets of expert trajectories and enable generalization to a wide range of planning tasks at inference time. Compared to traditional MPC procedures, which rely on slow search algorithms or on iteratively solving optimization problems exactly, gradient-based planning offers a computationally efficient alternative. However, the performance of gradient-based planning has thus far lagged behind that of other approaches. In this paper, we propose improved methods for training world models that enable efficient gradient-based planning. We begin with the observation that although a world model is trained on a next-state prediction objective, it is used at test-time to instead estimate a sequence of actions. The goal of our work is to close this train-test gap. To that end, we propose train-time data synthesis techniques that enable significantly improved gradient-based planning with existing world models. At test time, our approach outperforms or matches the classical gradient-free cross-entropy method (CEM) across a variety of object manipulation and navigation tasks in 10% of the time budget.
+
+**Comment:** Author match
+
+
+
+---
+
+## 3. [StructuredDNA: A Bio-Physical Framework for Energy-Aware Transformer Routing](https://arxiv.org/abs/2512.08968) <a id="link3"></a>
+
+**ArXiv ID:** 2512.08968
+
+**Authors:** Mustapha Hamdi
+
+**Abstract:** The rapid scaling of large computational models has led to a critical increase in energy and compute costs. Inspired by biological systems where structure and function emerge from low-energy configurations, we introduce StructuredDNA, a sparse architecture framework for modular, energy-aware Transformer routing. StructuredDNA replaces dense Mixture-of-Experts routing with a bio-physical, energy-guided routing layer based on semantic energy minimization. Inputs are dynamically grouped into semantic codons, and routing selects a single expert by minimizing a global energy functional that combines cohesion, uncertainty, and computational cost.   We validate StructuredDNA on both specialized (BioASQ) and open-domain benchmarks (WikiText-103). On BioASQ (K = 50), we achieve a 97.7% reduction in Energy Utilization Density (EUD) and a Semantic Stability Index (SSI) of 0.998. We further demonstrate a Semantic Scaling Law on WikiText-103, showing that the architecture generalizes to open domains by scaling expert granularity (K = 2048) while maintaining more than 99% energy efficiency. StructuredDNA thus establishes a robust, domain-agnostic paradigm for future sparse computational frameworks.   StructuredDNA provides an explicit link between bio-physical principles and sparse expert routing in Transformer architectures, and points toward future energy-aware, modular, and scalable computational systems. We discuss limitations of this proof-of-concept study and outline directions for scaling the approach to larger models, datasets, and hardware platforms. The StructuredDNA implementation is available at https://github.com/InnoDeep-repos/StructuredDNA .
+
+**Comment:** Model Architecture and Efficiency: sparse single-expert Transformer routing replacing dense MoE via an energy-minimization routing layer.
+
+**Relevance:** 10
+**Novelty:** 8
+
+---
+
+## 4. [Rates and architectures for learning geometrically non-trivial operators](https://arxiv.org/abs/2512.09376) <a id="link4"></a>
+
+**ArXiv ID:** 2512.09376
+
+**Authors:** T. Mitchell Roddenberry, Leo Tzou, Ivan Dokmani\'c, Maarten V. de Hoop, Richard G. Baraniuk
+
+**Abstract:** Deep learning methods have proven capable of recovering operators between high-dimensional spaces, such as solution maps of PDEs and similar objects in mathematical physics, from very few training samples. This phenomenon of data-efficiency has been proven for certain classes of elliptic operators with simple geometry, i.e., operators that do not change the domain of the function or propagate singularities. However, scientific machine learning is commonly used for problems that do involve the propagation of singularities in a priori unknown ways, such as waves, advection, and fluid dynamics. In light of this, we expand the learning theory to include double fibration transforms--geometric integral operators that include generalized Radon and geodesic ray transforms. We prove that this class of operators does not suffer from the curse of dimensionality: the error decays superalgebraically, that is, faster than any fixed power of the reciprocal of the number of training samples. Furthermore, we investigate architectures that explicitly encode the geometry of these transforms, demonstrating that an architecture reminiscent of cross-attention based on levelset methods yields a parameterization that is universal, stable, and learns double fibration transforms from very few training examples. Our results contribute to a rapidly-growing line of theoretical work on learning operators for scientific machine learning.
+
+**Comment:** Model Architecture + Representation Learning: theory and architectures for learning geometric integral operators; proposes cross-attention–reminiscent architecture with superalgebraic sample efficiency.
+
+**Relevance:** 9
+**Novelty:** 9
+
+---
+
+## 5. [Provably Learning from Modern Language Models via Low Logit Rank](https://arxiv.org/abs/2512.09892) <a id="link5"></a>
+
+**ArXiv ID:** 2512.09892
+
+**Authors:** Noah Golowich, Allen Liu, Abhishek Shetty
+
+**Abstract:** While modern language models and their inner workings are incredibly complex, recent work (Golowich, Liu & Shetty; 2025) has proposed a simple and potentially tractable abstraction for them through the observation that empirically, these language models all seem to have approximately low logit rank. Roughly, this means that a matrix formed by the model's log probabilities of various tokens conditioned on certain sequences of tokens is well approximated by a low rank matrix.   In this paper, our focus is on understanding how this structure can be exploited algorithmically for obtaining provable learning guarantees. Since low logit rank models can encode hard-to-learn distributions such as noisy parities, we study a query learning model with logit queries that reflects the access model for common APIs. Our main result is an efficient algorithm for learning any approximately low logit rank model from queries. We emphasize that our structural assumption closely reflects the behavior that is empirically observed in modern language models. Thus, our result gives what we believe is the first end-to-end learning guarantee for a generative model that plausibly captures modern language models.
+
+**Comment:** Representation/Low-Rank Theory: exploits empirically low logit rank to give provable, efficient learning algorithms under logit queries.
+
+**Relevance:** 9
+**Novelty:** 9
+
+---
+
+## 6. [Towards Lossless Ultimate Vision Token Compression for VLMs](https://arxiv.org/abs/2512.09010) <a id="link6"></a>
+
+**ArXiv ID:** 2512.09010
+
+**Authors:** Dehua Zheng, Mouxiao Huang, Borui Jiang, Hailin Hu, Xinghao Chen
+
+**Abstract:** Visual language models encounter challenges in computational efficiency and latency, primarily due to the substantial redundancy in the token representations of high-resolution images and videos. Current attention/similarity-based compression algorithms suffer from either position bias or class imbalance, leading to significant accuracy degradation. They also fail to generalize to shallow LLM layers, which exhibit weaker cross-modal interactions. To address this, we extend token compression to the visual encoder through an effective iterative merging scheme that is orthogonal in spatial axes to accelerate the computation across the entire VLM. Furthermoer, we integrate a spectrum pruning unit into LLM through an attention/similarity-free low-pass filter, which gradually prunes redundant visual tokens and is fully compatible to modern FlashAttention. On this basis, we propose Lossless Ultimate Vision tokens Compression (LUVC) framework. LUVC systematically compresses visual tokens until complete elimination at the final layer of LLM, so that the high-dimensional visual features are gradually fused into the multimodal queries. The experiments show that LUVC achieves a 2 speedup inference in language model with negligible accuracy degradation, and the training-free characteristic enables immediate deployment across multiple VLMs.
+
+**Comment:** Model Compression and Efficiency: training-free iterative visual token merging and spectrum pruning compatible with FlashAttention for end-to-end VLM token compression.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 7. [Tensor-Compressed and Fully-Quantized Training of Neural PDE Solvers](https://arxiv.org/abs/2512.09202) <a id="link7"></a>
+
+**ArXiv ID:** 2512.09202
+
+**Authors:** Jinming Lu, Jiayi Tian, Yequan Zhao, Hai Li, Zheng Zhang
+
+**Abstract:** Physics-Informed Neural Networks (PINNs) have emerged as a promising paradigm for solving partial differential equations (PDEs) by embedding physical laws into neural network training objectives. However, their deployment on resource-constrained platforms is hindered by substantial computational and memory overhead, primarily stemming from higher-order automatic differentiation, intensive tensor operations, and reliance on full-precision arithmetic. To address these challenges, we present a framework that enables scalable and energy-efficient PINN training on edge devices. This framework integrates fully quantized training, Stein's estimator (SE)-based residual loss computation, and tensor-train (TT) decomposition for weight compression. It contributes three key innovations: (1) a mixed-precision training method that use a square-block MX (SMX) format to eliminate data duplication during backpropagation; (2) a difference-based quantization scheme for the Stein's estimator that mitigates underflow; and (3) a partial-reconstruction scheme (PRS) for TT-Layers that reduces quantization-error accumulation. We further design PINTA, a precision-scalable hardware accelerator, to fully exploit the performance of the framework. Experiments on the 2-D Poisson, 20-D Hamilton-Jacobi-Bellman (HJB), and 100-D Heat equations demonstrate that the proposed framework achieves accuracy comparable to or better than full-precision, uncompressed baselines while delivering 5.5x to 83.5x speedups and 159.6x to 2324.1x energy savings. This work enables real-time PDE solving on edge devices and paves the way for energy-efficient scientific computing at scale.
+
+**Comment:** Compression/Efficiency + HPC: fully-quantized training, tensor-train compression, and a precision-scalable accelerator for efficient PINN/PDE solvers.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 8. [Impact of Positional Encoding: Clean and Adversarial Rademacher Complexity for Transformers under In-Context Regression](https://arxiv.org/abs/2512.09275) <a id="link8"></a>
+
+**ArXiv ID:** 2512.09275
+
+**Authors:** Weiyi He, Yue Xing
+
+**Abstract:** Positional encoding (PE) is a core architectural component of Transformers, yet its impact on the Transformer's generalization and robustness remains unclear. In this work, we provide the first generalization analysis for a single-layer Transformer under in-context regression that explicitly accounts for a completely trainable PE module. Our result shows that PE systematically enlarges the generalization gap. Extending to the adversarial setting, we derive the adversarial Rademacher generalization bound. We find that the gap between models with and without PE is magnified under attack, demonstrating that PE amplifies the vulnerability of models. Our bounds are empirically validated by a simulation study. Together, this work establishes a new framework for understanding the clean and adversarial generalization in ICL with PE.
+
+**Comment:** Representation Learning/Transformer analysis: clean and adversarial generalization bounds (Rademacher) quantifying the impact of positional encoding in in-context regression.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 9. [Self-Supervised Learning with Gaussian Processes](https://arxiv.org/abs/2512.09322) <a id="link9"></a>
+
+**ArXiv ID:** 2512.09322
+
+**Authors:** Yunshan Duan, Sinead Williamson
+
+**Abstract:** Self supervised learning (SSL) is a machine learning paradigm where models learn to understand the underlying structure of data without explicit supervision from labeled samples. The acquired representations from SSL have demonstrated useful for many downstream tasks including clustering, and linear classification, etc. To ensure smoothness of the representation space, most SSL methods rely on the ability to generate pairs of observations that are similar to a given instance. However, generating these pairs may be challenging for many types of data. Moreover, these methods lack consideration of uncertainty quantification and can perform poorly in out-of-sample prediction settings. To address these limitations, we propose Gaussian process self supervised learning (GPSSL), a novel approach that utilizes Gaussian processes (GP) models on representation learning. GP priors are imposed on the representations, and we obtain a generalized Bayesian posterior minimizing a loss function that encourages informative representations. The covariance function inherent in GPs naturally pulls representations of similar units together, serving as an alternative to using explicitly defined positive samples. We show that GPSSL is closely related to both kernel PCA and VICReg, a popular neural network-based SSL method, but unlike both allows for posterior uncertainties that can be propagated to downstream tasks. Experiments on various datasets, considering classification and regression tasks, demonstrate that GPSSL outperforms traditional methods in terms of accuracy, uncertainty quantification, and error control.
+
+**Comment:** Representation Learning: GP priors on representations with connections to kernel PCA and VICReg, enabling uncertainty-aware SSL.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 10. [Drawback of Enforcing Equivariance and its Compensation via the Lens of Expressive Power](https://arxiv.org/abs/2512.09673) <a id="link10"></a>
+
+**ArXiv ID:** 2512.09673
+
+**Authors:** Yuzhu Chen, Tian Qin, Xinmei Tian, Fengxiang He, Dacheng Tao
+
+**Abstract:** Equivariant neural networks encode symmetry as an inductive bias and have achieved strong empirical performance in wide domains. However, their expressive power remains not well understood. Focusing on 2-layer ReLU networks, this paper investigates the impact of equivariance constraints on the expressivity of equivariant and layer-wise equivariant networks. By examining the boundary hyperplanes and the channel vectors of ReLU networks, we construct an example showing that equivariance constraints could strictly limit expressive power. However, we demonstrate that this drawback can be compensated via enlarging the model size. Furthermore, we show that despite a larger model size, the resulting architecture could still correspond to a hypothesis space with lower complexity, implying superior generalizability for equivariant networks.
+
+**Comment:** Representation/Architecture Theory: analyzes expressivity-generalization tradeoffs in equivariant networks and compensation via model size.
+
+**Relevance:** 9
+**Novelty:** 7
+
+---
+
+## 11. [HPM-KD: Hierarchical Progressive Multi-Teacher Framework for Knowledge Distillation and Efficient Model Compression](https://arxiv.org/abs/2512.09886) <a id="link11"></a>
+
+**ArXiv ID:** 2512.09886
+
+**Authors:** Gustavo Coelho Haase, Paulo Henrique Dourado da Silva
+
+**Abstract:** Knowledge Distillation (KD) has emerged as a promising technique for model compression but faces critical limitations: (1) sensitivity to hyperparameters requiring extensive manual tuning, (2) capacity gap when distilling from very large teachers to small students, (3) suboptimal coordination in multi-teacher scenarios, and (4) inefficient use of computational resources. We present \textbf{HPM-KD}, a framework that integrates six synergistic components: (i) Adaptive Configuration Manager via meta-learning that eliminates manual hyperparameter tuning, (ii) Progressive Distillation Chain with automatically determined intermediate models, (iii) Attention-Weighted Multi-Teacher Ensemble that learns dynamic per-sample weights, (iv) Meta-Learned Temperature Scheduler that adapts temperature throughout training, (v) Parallel Processing Pipeline with intelligent load balancing, and (vi) Shared Optimization Memory for cross-experiment reuse. Experiments on CIFAR-10, CIFAR-100, and tabular datasets demonstrate that HPM-KD: achieves 10x-15x compression while maintaining 85% accuracy retention, eliminates the need for manual tuning, and reduces training time by 30-40% via parallelization. Ablation studies confirm independent contribution of each component (0.10-0.98 pp). HPM-KD is available as part of the open-source DeepBridge library.
+
+**Comment:** Matches Model Compression and Efficiency: hierarchical progressive multi-teacher knowledge distillation with adaptive hyperparameters and parallelization.
+
+**Relevance:** 9
+**Novelty:** 7
+
+---
+
+## 12. [WarmServe: Enabling One-for-Many GPU Prewarming for Multi-LLM Serving](https://arxiv.org/abs/2512.09472) <a id="link12"></a>
+
+**ArXiv ID:** 2512.09472
+
+**Authors:** Chiheng Lou, Sheng Qi, Rui Kang, Yong Zhang, Chen Sun, Pengcheng Wang, Bingyang Liu, Xuanzhe Liu, Xin Jin
+
+**Abstract:** Deploying multiple models within shared GPU clusters is promising for improving resource efficiency in large language model (LLM) serving. Existing multi-LLM serving systems optimize GPU utilization at the cost of worse inference performance, especially time-to-first-token (TTFT). We identify the root cause of such compromise as their unawareness of future workload characteristics. In contrast, recent analysis on real-world traces has shown the high periodicity and long-term predictability of LLM serving workloads.   We propose universal GPU workers to enable one-for-many GPU prewarming that loads models with knowledge of future workloads. Based on universal GPU workers, we design and build WarmServe, a multi-LLM serving system that (1) mitigates cluster-wide prewarming interference by adopting an evict-aware model placement strategy, (2) prepares universal GPU workers in advance by proactive prewarming, and (3) manages GPU memory with a zero-overhead memory switching mechanism. Evaluation under real-world datasets shows that WarmServe improves TTFT by up to 50.8$\times$ compared to the state-of-the-art autoscaling-based system, while being capable of serving up to 2.5$\times$ more requests compared to the GPU-sharing system.
+
+**Comment:** High Performance Computing (serving systems): predictive one-for-many GPU prewarming, evict-aware placement, and zero-overhead memory switching for multi-LLM serving.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 13. [Supervised learning pays attention](https://arxiv.org/abs/2512.09912) <a id="link13"></a>
+
+**ArXiv ID:** 2512.09912
+
+**Authors:** Erin Craig, Robert Tibshirani
+
+**Abstract:** In-context learning with attention enables large neural networks to make context-specific predictions by selectively focusing on relevant examples. Here, we adapt this idea to supervised learning procedures such as lasso regression and gradient boosting, for tabular data. Our goals are to (1) flexibly fit personalized models for each prediction point and (2) retain model simplicity and interpretability.   Our method fits a local model for each test observation by weighting the training data according to attention, a supervised similarity measure that emphasizes features and interactions that are predictive of the outcome. Attention weighting allows the method to adapt to heterogeneous data in a data-driven way, without requiring cluster or similarity pre-specification. Further, our approach is uniquely interpretable: for each test observation, we identify which features are most predictive and which training observations are most relevant. We then show how to use attention weighting for time series and spatial data, and we present a method for adapting pretrained tree-based models to distributional shift using attention-weighted residual corrections. Across real and simulated datasets, attention weighting improves predictive performance while preserving interpretability, and theory shows that attention-weighting linear models attain lower mean squared error than the standard linear model under mixture-of-models data-generating processes with known subgroup structure.
+
+**Comment:** Model Architecture/Representation Learning: introduces attention-weighted supervised learning to fit personalized local models with theoretical MSE benefits under mixture-of-models.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 14. [TinyD\'ej\`aVu: Smaller Memory Footprint & Faster Inference on Sensor Data Streams with Always-On Microcontrollers](https://arxiv.org/abs/2512.09786) <a id="link14"></a>
+
+**ArXiv ID:** 2512.09786
+
+**Authors:** Zhaolan Huang, Emmanuel Baccelli
+
+**Abstract:** Always-on sensors are increasingly expected to embark a variety of tiny neural networks and to continuously perform inference on time-series of the data they sense. In order to fit lifetime and energy consumption requirements when operating on battery, such hardware uses microcontrollers (MCUs) with tiny memory budget e.g., 128kB of RAM. In this context, optimizing data flows across neural network layers becomes crucial. In this paper, we introduce TinyD\'ej\`aVu, a new framework and novel algorithms we designed to drastically reduce the RAM footprint required by inference using various tiny ML models for sensor data time-series on typical microcontroller hardware. We publish the implementation of TinyD\'ej\`aVu as open source, and we perform reproducible benchmarks on hardware. We show that TinyD\'ej\`aVu can save more than 60% of RAM usage and eliminate up to 90% of redundant compute on overlapping sliding window inputs.
+
+**Comment:** Model Compression and Efficiency: systems-level memory optimization and redundant compute elimination for sliding-window inference on MCUs.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 15. [Resolving Conflicts in Lifelong Learning via Aligning Updates in Subspaces](https://arxiv.org/abs/2512.08960) <a id="link15"></a>
+
+**ArXiv ID:** 2512.08960
+
+**Authors:** Yueer Zhou, Yichen Wu, Ying Wei
+
+**Abstract:** Low-Rank Adaptation (LoRA) enables efficient Continual Learning but often suffers from catastrophic forgetting due to destructive interference between tasks. Our analysis reveals that this degradation is primarily driven by antagonistic directional updates where new task gradients directly oppose the historical weight trajectory. To address this, we propose PS-LoRA (Parameter Stability LoRA), a framework designed to resolve conflicts by aligning updates within the optimization subspace. Our approach employs a dual-regularization objective that penalizes conflicting directions and constrains magnitude deviations to ensure consistency with prior knowledge. Additionally, we implement a magnitude-based merging strategy to consolidate sequential adapters into a robust representation without retraining. Experiments on NLP and Vision benchmarks show that PS-LoRA outperforms state-of-the-art methods by preserving the stability of learned representations while efficiently adapting to new domains.
+
+**Comment:** Model Compression and Efficiency: low-rank adaptation (LoRA) with subspace-aligned updates and adapter merging for continual learning.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 16. [Luxical: High-Speed Lexical-Dense Text Embeddings](https://arxiv.org/abs/2512.09015) <a id="link16"></a>
+
+**ArXiv ID:** 2512.09015
+
+**Authors:** DatologyAI, :, Luke Merrick, Alex Fang, Aldo Carranza, Alvin Deng, Amro Abbas, Brett Larsen, Cody Blakeney, Darren Teh, David Schwab, Fan Pan, Haakon Mongstad, Haoli Yin, Jack Urbanek, Jason Lee, Jason Telanoff, Josh Wills, Kaleigh Mentzer, Paul Burstein, Parth Doshi, Paul Burnstein, Pratyush Maini, Ricardo Monti, Rishabh Adiga, Scott Loftin, Siddharth Joshi, Spandan Das, Tony Jiang, Vineeth Dorma, Zhengping Wang, Bogdan Gaza, Ari Morcos, Matthew Leavitt
+
+**Abstract:** Frontier language model quality increasingly hinges on our ability to organize web-scale text corpora for training. Today's dominant tools trade off speed and flexibility: lexical classifiers (e.g., FastText) are fast but limited to producing classification output scores, while the vector-valued outputs of transformer text embedding models flexibly support numerous workflows (e.g., clustering, classification, and retrieval) but are computationally expensive to produce. We introduce Luxical, a library for high-speed "lexical-dense" text embeddings that aims to recover the best properties of both approaches for web-scale text organization. Luxical combines sparse TF--IDF features, a small ReLU network, and a knowledge distillation training regimen to approximate large transformer embedding models at a fraction of their operational cost. In this technical report, we describe the Luxical architecture and training objective and evaluate a concrete Luxical model in two disparate applications: a targeted webcrawl document retrieval test and an end-to-end language model data curation task grounded in text classification. In these tasks we demonstrate speedups ranging from 3x to 100x over varying-sized neural baselines, and comparable to FastText model inference during the data curation task. On these evaluations, the tested Luxical model illustrates favorable compute/quality trade-offs for large-scale text organization, matching the quality of neural baselines. Luxical is available as open-source software at https://github.com/datologyai/luxical.
+
+**Comment:** Model Compression and Efficiency: high-speed lexical-dense embeddings distilling transformer embeddings into sparse TF–IDF + small ReLU networks.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 17. [Branching Strategies Based on Subgraph GNNs: A Study on Theoretical Promise versus Practical Reality](https://arxiv.org/abs/2512.09355) <a id="link17"></a>
+
+**ArXiv ID:** 2512.09355
+
+**Authors:** Junru Zhou, Yicheng Wang, Pan Li
+
+**Abstract:** Graph Neural Networks (GNNs) have emerged as a promising approach for ``learning to branch'' in Mixed-Integer Linear Programming (MILP). While standard Message-Passing GNNs (MPNNs) are efficient, they theoretically lack the expressive power to fully represent MILP structures. Conversely, higher-order GNNs (like 2-FGNNs) are expressive but computationally prohibitive. In this work, we investigate Subgraph GNNs as a theoretical middle ground. Crucially, while previous work [Chen et al., 2025] demonstrated that GNNs with 3-WL expressive power can approximate Strong Branching, we prove a sharper result: node-anchored Subgraph GNNs whose expressive power is strictly lower than 3-WL [Zhang et al., 2023] are sufficient to approximate Strong Branching scores. However, our extensive empirical evaluation on four benchmark datasets reveals a stark contrast between theory and practice. While node-anchored Subgraph GNNs theoretically offer superior branching decisions, their $O(n)$ complexity overhead results in significant memory bottlenecks and slower solving times than MPNNs and heuristics. Our results indicate that for MILP branching, the computational cost of expressive GNNs currently outweighs their gains in decision quality, suggesting that future research must focus on efficiency-preserving expressivity.
+
+**Comment:** Model Architecture Theory/Efficiency: proves subgraph GNNs (below 3-WL) can approximate strong branching and studies expressivity–efficiency trade-offs.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 18. [Efficient Continual Learning in Neural Machine Translation: A Low-Rank Adaptation Approach](https://arxiv.org/abs/2512.09910) <a id="link18"></a>
+
+**ArXiv ID:** 2512.09910
+
+**Authors:** Salvador Carri\'on, Francisco Casacuberta
+
+**Abstract:** Continual learning in Neural Machine Translation (NMT) faces the dual challenges of catastrophic forgetting and the high computational cost of retraining. This study establishes Low-Rank Adaptation (LoRA) as a parameter-efficient framework to address these challenges in dedicated NMT architectures. We first demonstrate that LoRA-based fine-tuning adapts NMT models to new languages and domains with performance on par with full-parameter techniques, while utilizing only a fraction of the parameter space. Second, we propose an interactive adaptation method using a calibrated linear combination of LoRA modules. This approach functions as a gate-free mixture of experts, enabling real-time, user-controllable adjustments to domain and style without retraining. Finally, to mitigate catastrophic forgetting, we introduce a novel gradient-based regularization strategy specifically designed for low-rank decomposition matrices. Unlike methods that regularize the full parameter set, our approach weights the penalty on the low-rank updates using historical gradient information. Experimental results indicate that this strategy efficiently preserves prior domain knowledge while facilitating the acquisition of new tasks, offering a scalable paradigm for interactive and continual NMT.
+
+**Comment:** Model Compression and Efficiency: LoRA-based continual learning with gate-free mixture of LoRA modules and gradient-regularized low-rank updates.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 19. [Understanding temperature tuning in energy-based models](https://arxiv.org/abs/2512.09152) <a id="link19"></a>
+
+**ArXiv ID:** 2512.09152
+
+**Authors:** Peter W Fields, Vudtiwat Ngampruetikorn, David J Schwab, Stephanie E Palmer
+
+**Abstract:** Generative models of complex systems often require post-hoc parameter adjustments to produce useful outputs. For example, energy-based models for protein design are sampled at an artificially low ''temperature'' to generate novel, functional sequences. This temperature tuning is a common yet poorly understood heuristic used across machine learning contexts to control the trade-off between generative fidelity and diversity. Here, we develop an interpretable, physically motivated framework to explain this phenomenon. We demonstrate that in systems with a large ''energy gap'' - separating a small fraction of meaningful states from a vast space of unrealistic states - learning from sparse data causes models to systematically overestimate high-energy state probabilities, a bias that lowering the sampling temperature corrects. More generally, we characterize how the optimal sampling temperature depends on the interplay between data size and the system's underlying energy landscape. Crucially, our results show that lowering the sampling temperature is not always desirable; we identify the conditions where \emph{raising} it results in better generative performance. Our framework thus casts post-hoc temperature tuning as a diagnostic tool that reveals properties of the true data distribution and the limits of the learned model.
+
+**Comment:** Representation/Training Dynamics: interpretable framework for temperature tuning in energy-based models and its impact on generative performance.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 20. [Circuits, Features, and Heuristics in Molecular Transformers](https://arxiv.org/abs/2512.09757) <a id="link20"></a>
+
+**ArXiv ID:** 2512.09757
+
+**Authors:** Kristof Varadi, Mark Marosi, Peter Antal
+
+**Abstract:** Transformers generate valid and diverse chemical structures, but little is known about the mechanisms that enable these models to capture the rules of molecular representation. We present a mechanistic analysis of autoregressive transformers trained on drug-like small molecules to reveal the computational structure underlying their capabilities across multiple levels of abstraction. We identify computational patterns consistent with low-level syntactic parsing and more abstract chemical validity constraints. Using sparse autoencoders (SAEs), we extract feature dictionaries associated with chemically relevant activation patterns. We validate our findings on downstream tasks and find that mechanistic insights can translate to predictive performance in various practical settings.
+
+**Comment:** Matches Representation Learning: mechanistic interpretability of Transformers with sparse autoencoders revealing learned feature dictionaries.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 21. [Spectral Embedding via Chebyshev Bases for Robust DeepONet Approximation](https://arxiv.org/abs/2512.09165) <a id="link21"></a>
+
+**ArXiv ID:** 2512.09165
+
+**Authors:** Muhammad Abid, Omer San
+
+**Abstract:** Deep Operator Networks (DeepONets) have become a central tool in data-driven operator learning, providing flexible surrogates for nonlinear mappings arising in partial differential equations (PDEs). However, the standard trunk design based on fully connected layers acting on raw spatial or spatiotemporal coordinates struggles to represent sharp gradients, boundary layers, and non-periodic structures commonly found in PDEs posed on bounded domains with Dirichlet or Neumann boundary conditions. To address these limitations, we introduce the Spectral-Embedded DeepONet (SEDONet), a new DeepONet variant in which the trunk is driven by a fixed Chebyshev spectral dictionary rather than coordinate inputs. This non-periodic spectral embedding provides a principled inductive bias tailored to bounded domains, enabling the learned operator to capture fine-scale non-periodic features that are difficult for Fourier or MLP trunks to represent. SEDONet is evaluated on a suite of PDE benchmarks including 2D Poisson, 1D Burgers, 1D advection-diffusion, Allen-Cahn dynamics, and the Lorenz-96 chaotic system, covering elliptic, parabolic, advective, and multiscale temporal phenomena, all of which can be viewed as canonical problems in computational mechanics. Across all datasets, SEDONet consistently achieves the lowest relative L2 errors among DeepONet, FEDONet, and SEDONet, with average improvements of about 30-40% over the baseline DeepONet and meaningful gains over Fourier-embedded variants on non-periodic geometries. Spectral analyses further show that SEDONet more accurately preserves high-frequency and boundary-localized features, demonstrating the value of Chebyshev embeddings in non-periodic operator learning. The proposed architecture offers a simple, parameter-neutral modification to DeepONets, delivering a robust and efficient spectral framework for surrogate modeling of PDEs on bounded domains.
+
+**Comment:** Matches Model Architecture: DeepONet trunk replaced by Chebyshev spectral embedding for robust operator learning on bounded domains.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 22. [Banach neural operator for Navier-Stokes equations](https://arxiv.org/abs/2512.09070) <a id="link22"></a>
+
+**ArXiv ID:** 2512.09070
+
+**Authors:** Bo Zhang
+
+**Abstract:** Classical neural networks are known for their ability to approximate mappings between finite-dimensional spaces, but they fall short in capturing complex operator dynamics across infinite-dimensional function spaces. Neural operators, in contrast, have emerged as powerful tools in scientific machine learning for learning such mappings. However, standard neural operators typically lack mechanisms for mixing or attending to input information across space and time. In this work, we introduce the Banach neural operator (BNO) -- a novel framework that integrates Koopman operator theory with deep neural networks to predict nonlinear, spatiotemporal dynamics from partial observations. The BNO approximates a nonlinear operator between Banach spaces by combining spectral linearization (via Koopman theory) with deep feature learning (via convolutional neural networks and nonlinear activations). This sequence-to-sequence model captures dominant dynamic modes and allows for mesh-independent prediction. Numerical experiments on the Navier-Stokes equations demonstrate the method's accuracy and generalization capabilities. In particular, BNO achieves robust zero-shot super-resolution in unsteady flow prediction and consistently outperforms conventional Koopman-based methods and deep learning models.
+
+**Comment:** Matches Model Architecture: Banach neural operator integrating Koopman theory with deep networks for spatiotemporal dynamics.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+# Paper Selection Prompt
+
+## System Prompt
+
+> You are a helpful paper reading assistant whose job is to read daily posts from ArXiv and identify a few papers that your friend will enjoy reading.
+> Your job is to carefully read the paper titles and abstracts below and find the ones that match the criteria below.
+
+## User Prompt
+
+> ## Instructions
+> 
+> Write the response in JSONL format with {ARXIVID, COMMENT, RELEVANCE, NOVELTY} on each line, one for each paper.
+> 
+> - ARXIVID: should be the ArXiv ID.
+> - COMMENT: should identify whether there is a criteria that match the paper very closely. These matches should not be based on general terms like "language modeling" or "advancements" and should specifically refer to a criterion. No need to mention the non-matching criteria.
+> - RELEVANCE: should be a score from 1-10.
+> - NOVELTY: should be a score from 1-10.
+> 
+> ## Scoring Criteria
+> 
+> > The "Relevance" score measures how closely the paper aligns with the core topics of the prompt.
+> > The "Novelty" score assesses the originality and impact of the paper.
+> > They are two **ORTHONORMAL** axes and **SHOULD NOT** be confused with each other.
+> 
+> ### Relevance Scoring
+> 
+> - Relevance 9-10 (Completely Relevant)
+>   - Focus: Fully aligned with core topics with no deviation, score the highest if contains relevant keywords in it.
+>   - Examples: Papers focused on foundational methods or theoretical research, whose titles contain topic keywords like "MoE".
+> 
+> - Relevance 7-8 (Relevant)
+>   - Focus: Retain a solid link to the main research area, though may touch on peripheral elements.
+>   - Examples: Papers research on the fundamental part of MoE through a less critical aspect like its behavior in GNN.
+> 
+> - Relevance 5-6 (Borderline)
+>   - Focus: Maintains a link to the core topic but also extends into at least one other domain/area beyond the primary focus.
+>   - Examples: Work referencing MoE centered on reinforcement learning.
+> 
+> - Relevance 3-4 (Irrelevant)
+>   - Focus: Largely outside our interests with no association to our topics.
+>   - Examples: Application-focused papers like using MoE to solve a problem in the real world.
+> 
+> - Relevance 1-2 (Ignore)
+>   - Focus: Purely unrelated to our topics. Completely a different domain.
+>   - **Exception**: If the paper hints at a cutting-edge, radically new direction that could eventually transform the primary domain, consider a score of 9–10 despite initial appearances. (Usually a very rare concept that belongs to the fundamental research)
+> 
+> ### Novelty Scoring
+> 
+> - Novelty 9-10 (Breakthrough)
+>   - Definition: Groundbreaking methods/theory introducing new directions or solving major challenges.
+>   - Examples: Entirely new paradigm for foundational models; a novel theory transforming representation learning.
+> 
+> - Novelty 7-8 (Improvements)
+>   - Definition: Substantial insights/enhancements, though not a full paradigm shift.
+>   - Examples: Modifications on existing methods yielding significantly better results.
+> 
+> - Novelty 5-6 (Borderline)
+>   - Definition: Incremental contributions with possible long-term benefits, not immediately transformative.
+>   - Examples: Moderately novel extension to an existing architecture; refining current methods without fundamentally altering them.
+> 
+> - Novelty 3-4 (Tangential)
+>   - Definition: Minor or domain-specific improvements with limited broader impact.
+>   - Examples: Slight modifications to known methods with strange motivation; purely engineering jobs like a new benchmark/dataset.
+> 
+> - Novelty 1-2 (Low)
+>   - Definition: Minimal originality, applying standard approaches without real innovation.
+>   - Examples: Using an off-the-shelf model without adding new insights; purely application-driven studies like finetuning a pretrained model using existing methods.
+> 
+> ## Papers
+> 
+> [PAPER LIST HERE]
+> 
+> ## Relevant Topics
+> 
+> Use the following relevance criteria to focus on foundational research. Keep **relevant** papers and filter out **irrelevant** ones. Avoid purely **application-driven** work.
+> 
+> 1. Model Architecture
+>    - Relevant: Mixture-of-Experts (MoE), Transformers, Conditional/Dynamic Networks, Autoencoders, analysis/innovations on existing architectures.
+>    - Irrelevant: Merely using existing architectures for a certain task without insights into the structure themselves.
+> 
+> 2. Model Compression and Efficiency
+>    - Relevant: Sparsity, pruning, quantization, low-rank approaches, cache, or other algorithmic/theoretical efficiency breakthroughs.
+>    - Irrelevant: Straightforward applications of existing compression methods to new tasks.
+> 
+> 3. High Performance Computing
+>    - Relevant: Algorithmic or systems-level innovations enabling training of large-scale models, distributed training techniques, memory optimization.
+>    - Irrelevant: Incremental engineering improvements without novel algorithmic contributions.
+> 
+> 4. Representation Learning
+>    - Relevant: Insights into how deep networks encode information, feature/dictionary learning, sparse/contrastive methods, training dynamics in neural networks.
+>    - Irrelevant: Standard applications of known techniques lacking new theoretical or methodological contributions.
+> 
+> **Keywords:**
+> 
+> - Relevant: Mixture of Experts (MoE), Representation Learning, Compression/Efficiency, Sparse/Sparsity, Pruning, Quantization, Low-rank, Foundation Model, etc.
+> - Irrelevant: Reinforcement Learning, Transfer Learning, Federated Learning, Online Learning, Diffusion Models, etc.
+> - Application: Image Segmentation, Medical Imaging, 3D Vision, Video Understanding, Information Retrieval, Summarization, Recommendation Systems, Machine Translation, Speech Recognition, Signal Processing, Spatial/Temporal Modeling, Time Series, Knowledge Graph, etc.

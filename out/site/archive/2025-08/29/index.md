@@ -1,0 +1,430 @@
+<div style="display: flex; align-items: flex-start; justify-content: space-between; width: 100%;"><div style="width: 33.33%; text-align: left;"><a href="../28"><img src="../../../assets/nav/day/2025-08-29-prev.svg" alt="Previous Day 2025-08-28"></a></div><div style="width: 33.33%; text-align: center;"><a href=".."><img src="../../../assets/nav/day/2025-08-29-center.svg" alt="Monthly Overview 2025-08"></a></div><div style="width: 33.33%; text-align: right;"><a href="../../2025-09/01"><img src="../../../assets/nav/day/2025-08-29-next.svg" alt="Next Day 2025-09-01"></a></div></div>
+
+# Personalized Daily ArXiv Papers 2025-08-29
+
+| *[gpt-4o]*   | Prompt   | Completion   | Total   |
+|:------------:|:--------:|:------------:|:-------:|
+| **Token**    | 25087    | 3145         | 28232   |
+| **Cost**     | $0.06    | $0.03        | $0.09   |
+
+Total arXiv papers: 381
+
+Total scanned papers: 249
+
+Total relevant papers: 17
+
+**Table of contents with paper titles:**
+
+1. [What can we learn from signals and systems in a transformer? Insights for probabilistic modeling and inference architecture](#user-content-link1)
+**Authors:** Heng-Sheng Chang, Prashant G. Mehta
+
+2. [On the Theoretical Limitations of Embedding-Based Retrieval](#user-content-link2)
+**Authors:** Orion Weller, Michael Boratko, Iftekhar Naim, Jinhyuk Lee
+
+3. [Turning the Spell Around: Lightweight Alignment Amplification via Rank-One Safety Injection](#user-content-link3)
+**Authors:** Harethah Abu Shairah, Hasan Abed Al Kader Hammoud, George Turkiyyah, Bernard Ghanem
+
+4. [Spatio-Temporal Pruning for Compressed Spiking Large Language Models](#user-content-link4)
+**Authors:** Yi Jiang, Malyaban Bal, Brian Matejek, Susmit Jha, Adam Cobb, Abhronil Sengupta
+
+5. [Measuring Reasoning Utility in LLMs via Conditional Entropy Reduction](#user-content-link5)
+**Authors:** Xu Guo
+
+6. [ExpertSim: Fast Particle Detector Simulation Using Mixture-of-Generative-Experts](#user-content-link6)
+**Authors:** Patryk B\k{e}dkowski, Jan Dubi\'nski, Filip Szatkowski, Kamil Deja, Przemys{\l}aw Rokita, Tomasz Trzci\'nski
+
+7. [Beacon: Post-Training Quantization with Integrated Grid Selection](#user-content-link7)
+**Authors:** Shihao Zhang, Rayan Saab
+
+8. [Turning Tabular Foundation Models into Graph Foundation Models](#user-content-link8)
+**Authors:** Dmitry Eremeev, Gleb Bazhenov, Oleg Platonov, Artem Babenko, Liudmila Prokhorenkova
+
+9. [Mixture of Contexts for Long Video Generation](#user-content-link9)
+**Authors:** Shengqu Cai, Ceyuan Yang, Lvmin Zhang, Yuwei Guo, Junfei Xiao, Ziyan Yang, Yinghao Xu, Zhenheng Yang, Alan Yuille, Leonidas Guibas, Maneesh Agrawala, Lu Jiang, Gordon Wetzstein
+
+10. [CoFormer: Collaborating with Heterogeneous Edge Devices for Scalable Transformer Inference](#user-content-link10)
+**Authors:** Guanyu Xu, Zhiwei Hao, Li Shen, Yong Luo, Fuhui Sun, Xiaoyan Wang, Han Hu, Yonggang Wen
+
+11. [MERIT: Maximum-normalized Element-wise Ratio for Language Model Large-batch Training](#user-content-link11)
+**Authors:** Yang Luo, Zangwei Zheng, Ziheng Qin, Zirui Zhu, Yong Liu, Yang You
+
+12. [Towards Mitigating Excessive Forgetting in LLM Unlearning via Entanglement-Aware Unlearning with Proxy Constraint](#user-content-link12)
+**Authors:** Zhihao Liu, Jian Lou, Yuke Hu, Xiaochen Li, Tailun Chen, Yitian Chen, Zhan Qin
+
+13. [Fast Convergence Rates for Subsampled Natural Gradient Algorithms on Quadratic Model Problems](#user-content-link13)
+**Authors:** Gil Goldshlager, Jiang Hu, Lin Lin
+
+14. [Uncertainty Under the Curve: A Sequence-Level Entropy Area Metric for Reasoning LLM](#user-content-link14)
+**Authors:** Yongfu Zhu, Lin Sun, Guangxiang Zhao, Weihong Lin, Xiangzheng Zhang
+
+15. [Efficient Neuro-Symbolic Learning of Constraints and Objective](#user-content-link15)
+**Authors:** Marianne Defresne, Romain Gambardella, Sophie Barbe, Thomas Schiex
+
+16. [Self-Composing Neural Operators with Depth and Accuracy Scaling via Adaptive Train-and-Unroll Approach](#user-content-link16)
+**Authors:** Juncai He, Xinliang Liu, Jinchao Xu
+
+17. [Uncovering the Spectral Bias in Diagonal State Space Models](#user-content-link17)
+**Authors:** Ruben Solozabal, Velibor Bojkovic, Hilal AlQuabeh, Kentaro Inui, Martin Tak\'a\v{c}
+
+---
+
+## 1. [What can we learn from signals and systems in a transformer? Insights for probabilistic modeling and inference architecture](https://arxiv.org/abs/2508.20211) <a id="link1"></a>
+
+**ArXiv ID:** 2508.20211
+
+**Authors:** Heng-Sheng Chang, Prashant G. Mehta
+
+**Abstract:** In the 1940s, Wiener introduced a linear predictor, where the future prediction is computed by linearly combining the past data. A transformer generalizes this idea: it is a nonlinear predictor where the next-token prediction is computed by nonlinearly combining the past tokens. In this essay, we present a probabilistic model that interprets transformer signals as surrogates of conditional measures, and layer operations as fixed-point updates. An explicit form of the fixed-point update is described for the special case when the probabilistic model is a hidden Markov model (HMM). In part, this paper is in an attempt to bridge the classical nonlinear filtering theory with modern inference architectures.
+
+**Comment:** The paper provides insights into transformers by connecting them with classical nonlinear filtering theory, which aligns with the model architecture criterion by offering a theoretical perspective on transformer operations.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 2. [On the Theoretical Limitations of Embedding-Based Retrieval](https://arxiv.org/abs/2508.21038) <a id="link2"></a>
+
+**ArXiv ID:** 2508.21038
+
+**Authors:** Orion Weller, Michael Boratko, Iftekhar Naim, Jinhyuk Lee
+
+**Abstract:** Vector embeddings have been tasked with an ever-increasing set of retrieval tasks over the years, with a nascent rise in using them for reasoning, instruction-following, coding, and more. These new benchmarks push embeddings to work for any query and any notion of relevance that could be given. While prior works have pointed out theoretical limitations of vector embeddings, there is a common assumption that these difficulties are exclusively due to unrealistic queries, and those that are not can be overcome with better training data and larger models. In this work, we demonstrate that we may encounter these theoretical limitations in realistic settings with extremely simple queries. We connect known results in learning theory, showing that the number of top-k subsets of documents capable of being returned as the result of some query is limited by the dimension of the embedding. We empirically show that this holds true even if we restrict to k=2, and directly optimize on the test set with free parameterized embeddings. We then create a realistic dataset called LIMIT that stress tests models based on these theoretical results, and observe that even state-of-the-art models fail on this dataset despite the simple nature of the task. Our work shows the limits of embedding models under the existing single vector paradigm and calls for future research to develop methods that can resolve this fundamental limitation.
+
+**Comment:** The paper discusses the theoretical limitations of embedding-based retrieval, which aligns with the representation learning criterion by addressing fundamental challenges in vector embeddings.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 3. [Turning the Spell Around: Lightweight Alignment Amplification via Rank-One Safety Injection](https://arxiv.org/abs/2508.20766) <a id="link3"></a>
+
+**ArXiv ID:** 2508.20766
+
+**Authors:** Harethah Abu Shairah, Hasan Abed Al Kader Hammoud, George Turkiyyah, Bernard Ghanem
+
+**Abstract:** Safety alignment in Large Language Models (LLMs) often involves mediating internal representations to refuse harmful requests. Recent research has demonstrated that these safety mechanisms can be bypassed by ablating or removing specific representational directions within the model. In this paper, we propose the opposite approach: Rank-One Safety Injection (ROSI), a white-box method that amplifies a model's safety alignment by permanently steering its activations toward the refusal-mediating subspace. ROSI operates as a simple, fine-tuning-free rank-one weight modification applied to all residual stream write matrices. The required safety direction can be computed from a small set of harmful and harmless instruction pairs. We show that ROSI consistently increases safety refusal rates - as evaluated by Llama Guard 3 - while preserving the utility of the model on standard benchmarks such as MMLU, HellaSwag, and Arc. Furthermore, we show that ROSI can also re-align 'uncensored' models by amplifying their own latent safety directions, demonstrating its utility as an effective last-mile safety procedure. Our results suggest that targeted, interpretable weight steering is a cheap and potent mechanism to improve LLM safety, complementing more resource-intensive fine-tuning paradigms.
+
+**Comment:** The paper introduces Rank-One Safety Injection (ROSI), a novel method for enhancing safety alignment in LLMs, which aligns with foundational research in LLM behavior and interpretability.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 4. [Spatio-Temporal Pruning for Compressed Spiking Large Language Models](https://arxiv.org/abs/2508.20122) <a id="link4"></a>
+
+**ArXiv ID:** 2508.20122
+
+**Authors:** Yi Jiang, Malyaban Bal, Brian Matejek, Susmit Jha, Adam Cobb, Abhronil Sengupta
+
+**Abstract:** Large Language Models (LLMs) present significant challenges for deployment in energy-constrained environments due to their large model sizes and high inference latency. Spiking Neural Networks (SNNs), inspired by the sparse event-driven neural processing and energy-efficient information transmission in the brain, offer a promising alternative for achieving low-power computing. Integrating the event-driven efficiency of spiking neurons with the advanced capabilities of LLMs represents a promising direction for power-efficient LLMs. This work specifically delves into the design of compressed spiking LLMs. Here, we revisit spatial and temporal pruning from the perspective of SNNs and propose a novel spatio-temporal pruning framework for Spiking LLMs to optimize computational efficiency while preserving high performance. Our spatial pruning technique reduces the number of active neurons and attention heads, effectively lowering the computational complexity of the model. Meanwhile, temporal pruning minimizes inference latency by dynamically adjusting the number of timesteps required for different layers. By combining these approaches with other compression techniques, we present the first work in the domain of Spiking LLMs to jointly explore spatial pruning, temporal pruning, extreme quantization and knowledge distillation strategies. Extensive experimental evaluation of our proposed framework for SpikingBERT on the large-scale GLUE benchmark demonstrates the efficacy of our approach in terms of computational operations and inference latency. Our approach offers a compelling solution for real-time, low-power natural language processing applications, making Spiking LLMs more practical for deployment on edge devices and in power-constrained settings.
+
+**Comment:** The paper explores spatio-temporal pruning for Spiking LLMs, which is relevant to model compression and efficiency in large language models.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 5. [Measuring Reasoning Utility in LLMs via Conditional Entropy Reduction](https://arxiv.org/abs/2508.20395) <a id="link5"></a>
+
+**ArXiv ID:** 2508.20395
+
+**Authors:** Xu Guo
+
+**Abstract:** Recent advancements in large language models (LLMs) often rely on generating intermediate reasoning steps to enhance accuracy. However, little work has examined how reasoning utility contributes to the final answer's correctness. Due to the stochastic nature of autoregressive generation, generating more context does not guarantee increased confidence in the answer. If we could predict, during generation, whether a reasoning step will be useful, we could stop early or prune ineffective steps, avoiding distractions in the final decision.   We present an oracle study on MATH dataset, using Qwen2.5-32B and GPT-4o to generate reasoning chains, and then employing a separate model (Qwen3-8B) to quantify the utility of these chains for final accuracy. Specifically, we measure the model's uncertainty on the answer span Y at each reasoning step using conditional entropy (expected negative log-likelihood over the vocabulary) with context expanding step by step. Our results show a clear pattern: conditional entropy that decreases over steps is strongly associated with correct answers, whereas flat or increasing entropy often results in wrong answers. We also corroborate that incorrect reasoning paths tend to be longer than correct ones, suggesting that longer reasoning does not necessarily yield better outcomes. These findings serve as a foundation to inspire future work on designing efficient reasoning pipelines that detect and avoid unproductive reasoning early.
+
+**Comment:** The paper examines reasoning utility in LLMs using conditional entropy, providing theoretical insights into LLM behavior.
+
+**Relevance:** 9
+**Novelty:** 7
+
+---
+
+## 6. [ExpertSim: Fast Particle Detector Simulation Using Mixture-of-Generative-Experts](https://arxiv.org/abs/2508.20991) <a id="link6"></a>
+
+**ArXiv ID:** 2508.20991
+
+**Authors:** Patryk B\k{e}dkowski, Jan Dubi\'nski, Filip Szatkowski, Kamil Deja, Przemys{\l}aw Rokita, Tomasz Trzci\'nski
+
+**Abstract:** Simulating detector responses is a crucial part of understanding the inner workings of particle collisions in the Large Hadron Collider at CERN. Such simulations are currently performed with statistical Monte Carlo methods, which are computationally expensive and put a significant strain on CERN's computational grid. Therefore, recent proposals advocate for generative machine learning methods to enable more efficient simulations. However, the distribution of the data varies significantly across the simulations, which is hard to capture with out-of-the-box methods. In this study, we present ExpertSim - a deep learning simulation approach tailored for the Zero Degree Calorimeter in the ALICE experiment. Our method utilizes a Mixture-of-Generative-Experts architecture, where each expert specializes in simulating a different subset of the data. This allows for a more precise and efficient generation process, as each expert focuses on a specific aspect of the calorimeter response. ExpertSim not only improves accuracy, but also provides a significant speedup compared to the traditional Monte-Carlo methods, offering a promising solution for high-efficiency detector simulations in particle physics experiments at CERN. We make the code available at https://github.com/patrick-bedkowski/expertsim-mix-of-generative-experts.
+
+**Comment:** The paper introduces a Mixture-of-Generative-Experts architecture for particle detector simulation, aligning with the model architecture criterion, specifically MoE.
+
+**Relevance:** 9
+**Novelty:** 7
+
+---
+
+## 7. [Beacon: Post-Training Quantization with Integrated Grid Selection](https://arxiv.org/abs/2508.20293) <a id="link7"></a>
+
+**ArXiv ID:** 2508.20293
+
+**Authors:** Shihao Zhang, Rayan Saab
+
+**Abstract:** Quantization is a widely used compression technique for reducing the memory and computation costs of large pre-trained models. A key challenge in per-channel post-training quantization (PTQ) is selecting appropriate scaling factors to replace weight values with values from a scaled quantization grid. Existing methods typically fix the scale at the outset via heuristic tuning or grid search. In this note, we propose Beacon, a simple and effective algorithm that eliminates the need for such manual tuning. Beacon performs per-channel PTQ directly using a fixed non-scaled alphabet and automatically determines the optimal scaling factors by exploiting the geometry of symmetric scalar quantization. It supports both symmetric and asymmetric quantization with minimal modifications and does not rely on back-propagation or large calibration sets. Despite its simplicity and tuning-free nature, Beacon achieves competitive performance compared to state-of-the-art methods, making it a practical solution for efficient model deployment.
+
+**Comment:** The paper presents Beacon, a novel algorithm for post-training quantization, which is relevant to model compression techniques.
+
+**Relevance:** 9
+**Novelty:** 7
+
+---
+
+## 8. [Turning Tabular Foundation Models into Graph Foundation Models](https://arxiv.org/abs/2508.20906) <a id="link8"></a>
+
+**ArXiv ID:** 2508.20906
+
+**Authors:** Dmitry Eremeev, Gleb Bazhenov, Oleg Platonov, Artem Babenko, Liudmila Prokhorenkova
+
+**Abstract:** While foundation models have revolutionized such fields as natural language processing and computer vision, their application and potential within graph machine learning remain largely unexplored. One of the key challenges in designing graph foundation models (GFMs) is handling diverse node features that can vary across different graph datasets. Although many works on GFMs have been focused exclusively on text-attributed graphs, the problem of handling arbitrary features of other types in GFMs has not been fully addressed. However, this problem is not unique to the graph domain, as it also arises in the field of machine learning for tabular data. In this work, motivated by the recent success of tabular foundation models like TabPFNv2, we propose G2T-FM, a simple graph foundation model that employs TabPFNv2 as a backbone. Specifically, G2T-FM augments the original node features with neighborhood feature aggregation, adds structural embeddings, and then applies TabPFNv2 to the constructed node representations. Even in a fully in-context regime, our model achieves strong results, significantly outperforming publicly available GFMs and performing on par with well-tuned GNNs trained from scratch. Moreover, after finetuning, G2T-FM surpasses well-tuned GNN baselines, highlighting the potential of the proposed approach. More broadly, our paper reveals a previously overlooked direction of utilizing tabular foundation models for graph machine learning tasks.
+
+**Comment:** The paper proposes a novel approach to turn tabular foundation models into graph foundation models, which aligns with foundational research in model architecture.
+
+**Relevance:** 8
+**Novelty:** 8
+
+---
+
+## 9. [Mixture of Contexts for Long Video Generation](https://arxiv.org/abs/2508.21058) <a id="link9"></a>
+
+**ArXiv ID:** 2508.21058
+
+**Authors:** Shengqu Cai, Ceyuan Yang, Lvmin Zhang, Yuwei Guo, Junfei Xiao, Ziyan Yang, Yinghao Xu, Zhenheng Yang, Alan Yuille, Leonidas Guibas, Maneesh Agrawala, Lu Jiang, Gordon Wetzstein
+
+**Abstract:** Long video generation is fundamentally a long context memory problem: models must retain and retrieve salient events across a long range without collapsing or drifting. However, scaling diffusion transformers to generate long-context videos is fundamentally limited by the quadratic cost of self-attention, which makes memory and computation intractable and difficult to optimize for long sequences. We recast long-context video generation as an internal information retrieval task and propose a simple, learnable sparse attention routing module, Mixture of Contexts (MoC), as an effective long-term memory retrieval engine. In MoC, each query dynamically selects a few informative chunks plus mandatory anchors (caption, local windows) to attend to, with causal routing that prevents loop closures. As we scale the data and gradually sparsify the routing, the model allocates compute to salient history, preserving identities, actions, and scenes over minutes of content. Efficiency follows as a byproduct of retrieval (near-linear scaling), which enables practical training and synthesis, and the emergence of memory and consistency at the scale of minutes.
+
+**Comment:** The paper introduces a novel sparse attention routing module for long video generation, which aligns with foundational research in model architecture.
+
+**Relevance:** 8
+**Novelty:** 8
+
+---
+
+## 10. [CoFormer: Collaborating with Heterogeneous Edge Devices for Scalable Transformer Inference](https://arxiv.org/abs/2508.20375) <a id="link10"></a>
+
+**ArXiv ID:** 2508.20375
+
+**Authors:** Guanyu Xu, Zhiwei Hao, Li Shen, Yong Luo, Fuhui Sun, Xiaoyan Wang, Han Hu, Yonggang Wen
+
+**Abstract:** The impressive performance of transformer models has sparked the deployment of intelligent applications on resource-constrained edge devices. However, ensuring high-quality service for real-time edge systems is a significant challenge due to the considerable computational demands and resource requirements of these models. Existing strategies typically either offload transformer computations to other devices or directly deploy compressed models on individual edge devices. These strategies, however, result in either considerable communication overhead or suboptimal trade-offs between accuracy and efficiency. To tackle these challenges, we propose a collaborative inference system for general transformer models, termed CoFormer. The central idea behind CoFormer is to exploit the divisibility and integrability of transformer. An off-the-shelf large transformer can be decomposed into multiple smaller models for distributed inference, and their intermediate results are aggregated to generate the final output. We formulate an optimization problem to minimize both inference latency and accuracy degradation under heterogeneous hardware constraints. DeBo algorithm is proposed to first solve the optimization problem to derive the decomposition policy, and then progressively calibrate decomposed models to restore performance. We demonstrate the capability to support a wide range of transformer models on heterogeneous edge devices, achieving up to 3.1$\times$ inference speedup with large transformer models. Notably, CoFormer enables the efficient inference of GPT2-XL with 1.6 billion parameters on edge devices, reducing memory requirements by 76.3\%. CoFormer can also reduce energy consumption by approximately 40\% while maintaining satisfactory inference performance.
+
+**Comment:** CoFormer introduces a novel collaborative inference system for transformer models, focusing on architectural innovation and efficiency improvements.
+
+**Relevance:** 8
+**Novelty:** 8
+
+---
+
+## 11. [MERIT: Maximum-normalized Element-wise Ratio for Language Model Large-batch Training](https://arxiv.org/abs/2508.20577) <a id="link11"></a>
+
+**ArXiv ID:** 2508.20577
+
+**Authors:** Yang Luo, Zangwei Zheng, Ziheng Qin, Zirui Zhu, Yong Liu, Yang You
+
+**Abstract:** Large-batch training has become a cornerstone in accelerating the training of deep neural networks, yet it poses challenges in optimization and generalization. Existing optimizers like AdamW present performance degradation during language models' large-batch training, due to the information bottleneck in attention layers caused by the sharp increase of max attention logit. While the LAMB optimizer partially addresses this issue, some attention layers still face this issue. The reason is that $l_2$-norm-based trust ratios in LAMB are less effective in directly influencing the max value of query/key weights. Furthermore, the weight-wise trust ratio in LAMB is error-prone as it overlooks relationships of weight values within rows or columns. Building on these observations, we propose a novel optimizer, MERIT, which leverages the max-norm to calculate the trust ratio to constrain the max attention logit more effectively. Moreover, we further construct element-wise trust ratios to provide more robust update scaling by focusing on local weight structures. Extensive experiments of large-batch training across various sizes of GPT-2 models demonstrate the superior performance of MERIT. Notably, during the training of GPT-2 Medium, MERIT enables a 6k batch size without any performance degradation compared to the standard batch size (480) with 48B training tokens. This work highlights the importance of considering the max attention logit and finer-granularity trust ratio in large-batch training. It successfully improves the training stability and paves the way for larger batch usage, enabling faster development and iteration of large language models. Code is available at https://github.com/NUS-HPC-AI-Lab/MERIT.
+
+**Comment:** The paper introduces a novel optimizer, MERIT, for large-batch training in language models, focusing on improving training stability and efficiency, which aligns with the model compression and efficiency criteria.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 12. [Towards Mitigating Excessive Forgetting in LLM Unlearning via Entanglement-Aware Unlearning with Proxy Constraint](https://arxiv.org/abs/2508.20443) <a id="link12"></a>
+
+**ArXiv ID:** 2508.20443
+
+**Authors:** Zhihao Liu, Jian Lou, Yuke Hu, Xiaochen Li, Tailun Chen, Yitian Chen, Zhan Qin
+
+**Abstract:** Large language models (LLMs) are trained on massive datasets that may include private or copyrighted content. Due to growing privacy and ownership concerns, data owners may request the removal of their data from trained models. Machine unlearning provides a practical solution by removing the influence of specific data without full retraining. However, most existing methods lack a sound forgetting boundary, causing some samples to be under-forgotten, leaving residual leakage risks, while others remain over-forgotten at the expense of degraded utility.   In this work, we propose EAGLE-PC (Entanglement-Awareness Guided Loss Reweighting with Proxy Constraint), a novel unlearning framework that addresses these limitations through two key components. First, entanglement-awareness guided loss reweighting determines the forgetting effort of each sample by measuring its similarity to retain samples in the embedding space, enabling more targeted and effective unlearning. Second, a proxy constraint leveraging ICL (In-Context Learning) generated test data softly regularizes the forgetting process, effectively mitigating over-forgetting. EAGLE-PC is compatible with existing gradient-based objectives and serves as a plug-and-play enhancement. We evaluate EAGLE-PC on the TOFU and MUSE benchmarks, showing consistent improvements in the forgetting-utility trade-off across multiple LLMs. Combined with the NPO+GD optimizer, it approaches full retraining performance, offering a scalable and robust unlearning solution.
+
+**Comment:** The paper proposes a novel unlearning framework for LLMs, which aligns with foundational research in LLM behavior and interpretability.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 13. [Fast Convergence Rates for Subsampled Natural Gradient Algorithms on Quadratic Model Problems](https://arxiv.org/abs/2508.21022) <a id="link13"></a>
+
+**ArXiv ID:** 2508.21022
+
+**Authors:** Gil Goldshlager, Jiang Hu, Lin Lin
+
+**Abstract:** Subsampled natural gradient descent (SNGD) has shown impressive results for parametric optimization tasks in scientific machine learning, such as neural network wavefunctions and physics-informed neural networks, but it has lacked a theoretical explanation. We address this gap by analyzing the convergence of SNGD and its accelerated variant, SPRING, for idealized parametric optimization problems where the model is linear and the loss function is strongly convex and quadratic. In the special case of a least-squares loss, namely the standard linear least-squares problem, we prove that SNGD is equivalent to a regularized Kaczmarz method while SPRING is equivalent to an accelerated regularized Kaczmarz method. As a result, by leveraging existing analyses we obtain under mild conditions (i) the first fast convergence rate for SNGD, (ii) the first convergence guarantee for SPRING in any setting, and (iii) the first proof that SPRING can accelerate SNGD. In the case of a general strongly convex quadratic loss, we extend the analysis of the regularized Kaczmarz method to obtain a fast convergence rate for SNGD under stronger conditions, providing the first explanation for the effectiveness of SNGD outside of the least-squares setting. Overall, our results illustrate how tools from randomized linear algebra can shed new light on the interplay between subsampling and curvature-aware optimization strategies.
+
+**Comment:** The paper provides theoretical insights into subsampled natural gradient algorithms, which is relevant to foundational research in optimization and training dynamics.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 14. [Uncertainty Under the Curve: A Sequence-Level Entropy Area Metric for Reasoning LLM](https://arxiv.org/abs/2508.20384) <a id="link14"></a>
+
+**ArXiv ID:** 2508.20384
+
+**Authors:** Yongfu Zhu, Lin Sun, Guangxiang Zhao, Weihong Lin, Xiangzheng Zhang
+
+**Abstract:** In this work, we introduce Entropy Area Score (EAS), a simple yet effective metric to quantify uncertainty in the answer generation process of reasoning large language models (LLMs). EAS requires neither external models nor repeated sampling, it integrates token-level predictive entropy from the model itself to capture the evolution of uncertainty during generation. Empirical results show that EAS is strongly correlated with answer entropy across models and datasets. In training data selection, EAS identifies high-potential samples and consistently outperforms Pass Rate filtering under equal sample budgets, improving student model accuracy on math benchmarks. EAS is both efficient and interpretable, offering a practical tool for uncertainty modeling and data quality assessment in LLM training.
+
+**Comment:** The paper introduces Entropy Area Score (EAS), a novel metric for quantifying uncertainty in LLMs, which contributes to foundational research in LLM behavior.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 15. [Efficient Neuro-Symbolic Learning of Constraints and Objective](https://arxiv.org/abs/2508.20978) <a id="link15"></a>
+
+**ArXiv ID:** 2508.20978
+
+**Authors:** Marianne Defresne, Romain Gambardella, Sophie Barbe, Thomas Schiex
+
+**Abstract:** In the ongoing quest for hybridizing discrete reasoning with neural nets, there is an increasing interest in neural architectures that can learn how to solve discrete reasoning or optimization problems from natural inputs, a task that Large Language Models seem to struggle with.   Objectives: We introduce a differentiable neuro-symbolic architecture and a loss function dedicated to learning how to solve NP-hard reasoning problems.   Methods: Our new probabilistic loss allows for learning both the constraints and the objective, thus delivering a complete model that can be scrutinized and completed with side constraints. By pushing the combinatorial solver out of the training loop, our architecture also offers scalable training while exact inference gives access to maximum accuracy.   Results: We empirically show that it can efficiently learn how to solve NP-hard reasoning problems from natural inputs. On three variants of the Sudoku benchmark -- symbolic, visual, and many-solution --, our approach requires a fraction of training time of other hybrid methods. On a visual Min-Cut/Max-cut task, it optimizes the regret better than a Decision-Focused-Learning regret-dedicated loss. Finally, it efficiently learns the energy optimization formulation of the large real-world problem of designing proteins.
+
+**Comment:** The paper introduces a differentiable neuro-symbolic architecture for solving NP-hard reasoning problems, which aligns with foundational research in representation learning and model architecture.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 16. [Self-Composing Neural Operators with Depth and Accuracy Scaling via Adaptive Train-and-Unroll Approach](https://arxiv.org/abs/2508.20650) <a id="link16"></a>
+
+**ArXiv ID:** 2508.20650
+
+**Authors:** Juncai He, Xinliang Liu, Jinchao Xu
+
+**Abstract:** In this work, we propose a novel framework to enhance the efficiency and accuracy of neural operators through self-composition, offering both theoretical guarantees and practical benefits. Inspired by iterative methods in solving numerical partial differential equations (PDEs), we design a specific neural operator by repeatedly applying a single neural operator block, we progressively deepen the model without explicitly adding new blocks, improving the model's capacity. To train these models efficiently, we introduce an adaptive train-and-unroll approach, where the depth of the neural operator is gradually increased during training. This approach reveals an accuracy scaling law with model depth and offers significant computational savings through our adaptive training strategy. Our architecture achieves state-of-the-art (SOTA) performance on standard benchmarks. We further demonstrate its efficacy on a challenging high-frequency ultrasound computed tomography (USCT) problem, where a multigrid-inspired backbone enables superior performance in resolving complex wave phenomena. The proposed framework provides a computationally tractable, accurate, and scalable solution for large-scale data-driven scientific machine learning applications.
+
+**Comment:** The paper proposes a novel framework for neural operators with a focus on efficiency and accuracy, relevant to model architecture innovations.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 17. [Uncovering the Spectral Bias in Diagonal State Space Models](https://arxiv.org/abs/2508.20441) <a id="link17"></a>
+
+**ArXiv ID:** 2508.20441
+
+**Authors:** Ruben Solozabal, Velibor Bojkovic, Hilal AlQuabeh, Kentaro Inui, Martin Tak\'a\v{c}
+
+**Abstract:** Current methods for initializing state space models (SSMs) parameters mainly rely on the \textit{HiPPO framework}, which is based on an online approximation of orthogonal polynomials. Recently, diagonal alternatives have shown to reach a similar level of performance while being significantly more efficient due to the simplification in the kernel computation. However, the \textit{HiPPO framework} does not explicitly study the role of its diagonal variants. In this paper, we take a further step to investigate the role of diagonal SSM initialization schemes from the frequency perspective. Our work seeks to systematically understand how to parameterize these models and uncover the learning biases inherent in such diagonal state-space models. Based on our observations, we propose a diagonal initialization on the discrete Fourier domain \textit{S4D-DFouT}. The insights in the role of pole placing in the initialization enable us to further scale them and achieve state-of-the-art results on the Long Range Arena benchmark, allowing us to train from scratch on very large datasets as PathX-256.
+
+**Comment:** The paper investigates the spectral bias in diagonal state space models, contributing to foundational research in model architecture and representation learning.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+# Paper Selection Prompt
+
+## System Prompt
+
+> You are a helpful paper reading assistant whose job is to read daily posts from ArXiv and identify a few papers that your friend will enjoy reading.
+> Your job is to carefully read the paper titles and abstracts below and find the ones that match the criteria below.
+
+## User Prompt
+
+> ## Instructions
+> 
+> Write the response in JSONL format with {ARXIVID, COMMENT, RELEVANCE, NOVELTY} on each line, one for each paper.
+> 
+> - ARXIVID: should be the ArXiv ID.
+> - COMMENT: should identify whether there is a criteria that match the paper very closely. These matches should not be based on general terms like "language modeling" or "advancements" and should specifically refer to a criterion. No need to mention the non-matching criteria.
+> - RELEVANCE: should be a score from 1-10.
+> - NOVELTY: should be a score from 1-10.
+> 
+> ## Scoring Criteria
+> 
+> > The "Relevance" score measures how closely the paper aligns with the core topics of the prompt.
+> > The "Novelty" score assesses the originality and impact of the paper.
+> > They are two **ORTHONORMAL** axes and **SHOULD NOT** be confused with each other.
+> 
+> ### Relevance Scoring
+> 
+> - Relevance 9-10 (Completely Relevant)
+>   - Focus: Fully aligned with core topics with no deviation, score the highest if contains relevant keywords in it.
+>   - Examples: Papers focused on foundational methods or theoretical research, whose titles contain topic keywords like "MoE".
+> 
+> - Relevance 7-8 (Relevant)
+>   - Focus: Retain a solid link to the main research area, though may touch on peripheral elements.
+>   - Examples: Papers research on the fundamental part of MoE through a less critical aspect like its behavior in GNN.
+> 
+> - Relevance 5-6 (Borderline)
+>   - Focus: Maintains a link to the core topic but also extends into at least one other domain/area beyond the primary focus.
+>   - Examples: Work referencing MoE centered on reinforcement learning.
+> 
+> - Relevance 3-4 (Irrelevant)
+>   - Focus: Largely outside our interests with no association to our topics.
+>   - Examples: Application-focused papers like using MoE to solve a problem in the real world.
+> 
+> - Relevance 1-2 (Ignore)
+>   - Focus: Purely unrelated to our topics. Completely a different domain.
+>   - **Exception**: If the paper hints at a cutting-edge, radically new direction that could eventually transform the primary domain, consider a score of 9–10 despite initial appearances. (Usually a very rare concept that belongs to the fundamental research)
+> 
+> ### Novelty Scoring
+> 
+> - Novelty 9-10 (Breakthrough)
+>   - Definition: Groundbreaking methods/theory introducing new directions or solving major challenges.
+>   - Examples: Entirely new paradigm for foundational models; a novel theory transforming representation learning.
+> 
+> - Novelty 7-8 (Improvements)
+>   - Definition: Substantial insights/enhancements, though not a full paradigm shift.
+>   - Examples: Modifications on existing methods yielding significantly better results.
+> 
+> - Novelty 5-6 (Borderline)
+>   - Definition: Incremental contributions with possible long-term benefits, not immediately transformative.
+>   - Examples: Moderately novel extension to an existing architecture; refining current methods without fundamentally altering them.
+> 
+> - Novelty 3-4 (Tangential)
+>   - Definition: Minor or domain-specific improvements with limited broader impact.
+>   - Examples: Slight modifications to known methods with strange motivation; purely engineering jobs like a new benchmark/dataset.
+> 
+> - Novelty 1-2 (Low)
+>   - Definition: Minimal originality, applying standard approaches without real innovation.
+>   - Examples: Using an off-the-shelf model without adding new insights; purely application-driven studies like finetuning a pretrained model using existing methods.
+> 
+> ## Papers
+> 
+> [PAPER LIST HERE]
+> 
+> ## Relevant Topics
+> 
+> Use the following relevance criteria to focus on foundational research. Keep **relevant** papers and filter out **irrelevant** ones. Avoid purely **application-driven** work.
+> 
+> 1. Representation Learning
+>    - Relevant: Insights into how deep networks encode information, feature/dictionary learning, sparse/contrastive methods, training dynamics in neural networks.
+>    - Irrelevant: Standard applications of known techniques lacking new theoretical or methodological contributions.
+> 
+> 2. Model Architecture
+>    - Relevant: Mixture-of-Experts (MoE), Transformers, Conditional/Dynamic Networks, Autoencoders, analysis on existing architectures (like encoder-decoder), or other architectural innovations.
+>    - Irrelevant: Merely using existing architectures for a certain task without insights into the structure themselves.
+> 
+> 3. Model Compression
+>    - Relevant: Sparsity, pruning, quantization, low-rank approaches, KV cache, or other algorithmic/theoretical efficiency breakthroughs.
+>    - Irrelevant: Straightforward applications of existing compression methods to new tasks.
+> 
+> 4. Large Language Models (LLMs)
+>    - Relevant: Major breakthroughs in pretraining or architecture, theoretical insights into LLM behavior/interpretability.
+>    - Irrelevant: Domain-specific usage (e.g., translation, jail-breaking), finetuning or inference tricks (e.g., instruction tuning, chain-of-thoughts, data mixing), or empirical dataset/benchmark studies and text-level analysis (e.g. hallucination, reasoning, safety).
+> 
+> 5. AI for Science
+>    - Relevant: Foundational research in molecular/protein modeling, new generative paradigms, or significant architecture-level innovations.
+>    - Irrelevant: Conventional, domain-specific applications without new theoretical perspectives.
+> 
+> 6. Emerging Trends
+>    - Relevant: Cutting-edge theoretical work challenging established assumptions or introducing broad new paradigms.
+>    - Irrelevant: Incremental improvements or trend-following without novel insights.
+> 
+> **Keywords:**
+> 
+> - Relevant: Mixture of Experts (MoE), Representation Learning, Compression/Efficiency, Sparse/Sparsity, Pruning, Quantization, Low-rank, Foundation Model, etc.
+> - Irrelevant: Reinforcement Learning, Transfer Learning, Federated Learning, Online Learning, Diffusion Models, etc.
+> - Application: Image Segmentation, Medical Imaging, 3D Vision, Video Understanding, Information Retrieval, Summarization, Recommendation Systems, Machine Translation, Speech Recognition, Signal Processing, Spatial/Temporal Modeling, Time Series, Knowledge Graph, etc.

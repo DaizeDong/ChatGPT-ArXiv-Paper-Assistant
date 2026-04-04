@@ -1,0 +1,408 @@
+<div style="display: flex; align-items: flex-start; justify-content: space-between; width: 100%;"><div style="width: 33.33%; text-align: left;"><a href="../22"><img src="../../../assets/nav/day/2025-04-23-prev.svg" alt="Previous Day 2025-04-22"></a></div><div style="width: 33.33%; text-align: center;"><a href=".."><img src="../../../assets/nav/day/2025-04-23-center.svg" alt="Monthly Overview 2025-04"></a></div><div style="width: 33.33%; text-align: right;"><a href="../24"><img src="../../../assets/nav/day/2025-04-23-next.svg" alt="Next Day 2025-04-24"></a></div></div>
+
+# Personalized Daily ArXiv Papers 2025-04-23
+
+| *[gpt-4o]*   | Prompt   | Completion   | Total   |
+|:------------:|:--------:|:------------:|:-------:|
+| **Token**    | 33658    | 4226         | 37884   |
+| **Cost**     | $0.08    | $0.04        | $0.13   |
+
+Total arXiv papers: 346
+
+Total scanned papers: 212
+
+Total relevant papers: 16
+
+**Table of contents with paper titles:**
+
+1. [Markov Kernels, Distances and Optimal Control: A Parable of Linear Quadratic Non-Gaussian Distribution Steering](#user-content-link1)
+**Authors:** Alexis M. H. Teter, Wenqing Wang, Sachin Shivakumar, Abhishek Halder
+
+2. [Transport f divergences](#user-content-link2)
+**Authors:** Wuchen Li
+
+3. [Universal Approximation with Softmax Attention](#user-content-link3)
+**Authors:** Jerry Yao-Chieh Hu, Hude Liu, Hong-Yu Chen, Weimin Wu, Han Liu
+
+4. [Shannon invariants: A scalable approach to information decomposition](#user-content-link4)
+**Authors:** Aaron J. Gutknecht, Fernando E. Rosas, David A. Ehrlich, Abdullah Makkeh, Pedro A. M. Mediano, Michael Wibral
+
+5. [LongMamba: Enhancing Mamba's Long Context Capabilities via Training-Free Receptive Field Enlargement](#user-content-link5)
+**Authors:** Zhifan Ye, Kejing Xia, Yonggan Fu, Xin Dong, Jihoon Hong, Xiangchi Yuan, Shizhe Diao, Jan Kautz, Pavlo Molchanov, Yingyan Celine Lin
+
+6. [Learning Adaptive Parallel Reasoning with Language Models](#user-content-link6)
+**Authors:** Jiayi Pan, Xiuyu Li, Long Lian, Charlie Snell, Yifei Zhou, Adam Yala, Trevor Darrell, Kurt Keutzer, Alane Suhr
+
+7. [Riemannian Neural Geodesic Interpolant](#user-content-link7)
+**Authors:** Jiawen Wu, Bingguang Chen, Yuyi Zhou, Qi Meng, Rongchan Zhu, Zhi-Ming Ma
+
+8. [SUPRA: Subspace Parameterized Attention for Neural Operator on General Domains](#user-content-link8)
+**Authors:** Zherui Yang, Zhengyang Xue, Ligang Liu
+
+9. [Deep learning with missing data](#user-content-link9)
+**Authors:** Tianyi Ma, Tengyao Wang, Richard J. Samworth
+
+10. [Unifying Image Counterfactuals and Feature Attributions with Latent-Space Adversarial Attacks](#user-content-link10)
+**Authors:** Jeremy Goldwasser, Giles Hooker
+
+11. [An XAI-based Analysis of Shortcut Learning in Neural Networks](#user-content-link11)
+**Authors:** Phuong Quynh Le, J\"org Schl\"otterer, Christin Seifert
+
+12. [W-PCA Based Gradient-Free Proxy for Efficient Search of Lightweight Language Models](#user-content-link12)
+**Authors:** Shang Wang
+
+13. [Emergence and Evolution of Interpretable Concepts in Diffusion Models](#user-content-link13)
+**Authors:** Berk Tinaz, Zalan Fabian, Mahdi Soltanolkotabi
+
+14. [Low-Rank Adaptation of Neural Fields](#user-content-link14)
+**Authors:** Anh Truong, Ahmed H. Mahmoud, Mina Konakovi\'c Lukovi\'c, Justin Solomon
+
+15. [Analytical Softmax Temperature Setting from Feature Dimensions for Model- and Domain-Robust Classification](#user-content-link15)
+**Authors:** Tatsuhito Hasegawa, Shunsuke Sakai
+
+16. [Improving Learning to Optimize Using Parameter Symmetries](#user-content-link16)
+**Authors:** Guy Zamir, Aryan Dokania, Bo Zhao, Rose Yu
+
+---
+
+## 1. [Markov Kernels, Distances and Optimal Control: A Parable of Linear Quadratic Non-Gaussian Distribution Steering](https://arxiv.org/abs/2504.15753) <a id="link1"></a>
+
+**ArXiv ID:** 2504.15753
+
+**Authors:** Alexis M. H. Teter, Wenqing Wang, Sachin Shivakumar, Abhishek Halder
+
+**Abstract:** For a controllable linear time-varying (LTV) pair $(\boldsymbol{A}_t,\boldsymbol{B}_t)$ and $\boldsymbol{Q}_{t}$ positive semidefinite, we derive the Markov kernel for the It\^{o} diffusion ${\mathrm{d}}\boldsymbol{x}_{t}=\boldsymbol{A}_{t}\boldsymbol{x}_t {\mathrm{d}} t + \sqrt{2}\boldsymbol{B}_{t}{\mathrm{d}}\boldsymbol{w}_{t}$ with an accompanying killing of probability mass at rate $\frac{1}{2}\boldsymbol{x}^{\top}\boldsymbol{Q}_{t}\boldsymbol{x}$. This Markov kernel is the Green's function for an associated linear reaction-advection-diffusion partial differential equation. Our result generalizes the recently derived kernel for the special case $\left(\boldsymbol{A}_t,\boldsymbol{B}_t\right)=\left(\boldsymbol{0},\boldsymbol{I}\right)$, and depends on the solution of an associated Riccati matrix ODE. A consequence of this result is that the linear quadratic non-Gaussian Schr\"{o}dinger bridge is exactly solvable. This means that the problem of steering a controlled LTV diffusion from a given non-Gaussian distribution to another over a fixed deadline while minimizing an expected quadratic cost can be solved using dynamic Sinkhorn recursions performed with the derived kernel. Our derivation for the $\left(\boldsymbol{A}_t,\boldsymbol{B}_t,\boldsymbol{Q}_t\right)$-parametrized kernel pursues a new idea that relies on finding a state-time dependent distance-like functional given by the solution of a deterministic optimal control problem. This technique breaks away from existing methods, such as generalizing Hermite polynomials or Weyl calculus, which have seen limited success in the reaction-diffusion context. Our technique uncovers a new connection between Markov kernels, distances, and optimal control. This connection is of interest beyond its immediate application in solving the linear quadratic Schr\"{o}dinger bridge problem.
+
+**Comment:** The paper explores Markov kernels and optimal control, introducing a novel connection between Markov kernels, distances, and control. This is a cutting-edge theoretical contribution with potential foundational impact.
+
+**Relevance:** 9
+**Novelty:** 9
+
+---
+
+## 2. [Transport f divergences](https://arxiv.org/abs/2504.15515) <a id="link2"></a>
+
+**ArXiv ID:** 2504.15515
+
+**Authors:** Wuchen Li
+
+**Abstract:** We define a class of divergences to measure differences between probability density functions in one-dimensional sample space. The construction is based on the convex function with the Jacobi operator of mapping function that pushforwards one density to the other. We call these information measures {\em transport $f$-divergences}. We present several properties of transport $f$-divergences, including invariances, convexities, variational formulations, and Taylor expansions in terms of mapping functions. Examples of transport $f$-divergences in generative models are provided.
+
+**Comment:** The paper introduces transport f-divergences, a novel theoretical framework for measuring differences between probability densities, aligning with emerging trends and foundational research.
+
+**Relevance:** 9
+**Novelty:** 9
+
+---
+
+## 3. [Universal Approximation with Softmax Attention](https://arxiv.org/abs/2504.15956) <a id="link3"></a>
+
+**ArXiv ID:** 2504.15956
+
+**Authors:** Jerry Yao-Chieh Hu, Hude Liu, Hong-Yu Chen, Weimin Wu, Han Liu
+
+**Abstract:** We prove that with linear transformations, both (i) two-layer self-attention and (ii) one-layer self-attention followed by a softmax function are universal approximators for continuous sequence-to-sequence functions on compact domains. Our main technique is a new interpolation-based method for analyzing attention's internal mechanism. This leads to our key insight: self-attention is able to approximate a generalized version of ReLU to arbitrary precision, and hence subsumes many known universal approximators. Building on these, we show that two-layer multi-head attention alone suffices as a sequence-to-sequence universal approximator. In contrast, prior works rely on feed-forward networks to establish universal approximation in Transformers. Furthermore, we extend our techniques to show that, (softmax-)attention-only layers are capable of approximating various statistical models in-context. We believe these techniques hold independent interest.
+
+**Comment:** The paper provides theoretical insights into the universal approximation capabilities of softmax attention, which is highly relevant to foundational research in model architecture.
+
+**Relevance:** 9
+**Novelty:** 9
+
+---
+
+## 4. [Shannon invariants: A scalable approach to information decomposition](https://arxiv.org/abs/2504.15779) <a id="link4"></a>
+
+**ArXiv ID:** 2504.15779
+
+**Authors:** Aaron J. Gutknecht, Fernando E. Rosas, David A. Ehrlich, Abdullah Makkeh, Pedro A. M. Mediano, Michael Wibral
+
+**Abstract:** Distributed systems, such as biological and artificial neural networks, process information via complex interactions engaging multiple subsystems, resulting in high-order patterns with distinct properties across scales. Investigating how these systems process information remains challenging due to difficulties in defining appropriate multivariate metrics and ensuring their scalability to large systems. To address these challenges, we introduce a novel framework based on what we call "Shannon invariants" -- quantities that capture essential properties of high-order information processing in a way that depends only on the definition of entropy and can be efficiently calculated for large systems. Our theoretical results demonstrate how Shannon invariants can be used to resolve long-standing ambiguities regarding the interpretation of widely used multivariate information-theoretic measures. Moreover, our practical results reveal distinctive information-processing signatures of various deep learning architectures across layers, which lead to new insights into how these systems process information and how this evolves during training. Overall, our framework resolves fundamental limitations in analyzing high-order phenomena and offers broad opportunities for theoretical developments and empirical analyses.
+
+**Comment:** The paper introduces 'Shannon invariants' for scalable information decomposition, offering insights into how deep learning architectures process information. This aligns with representation learning and training dynamics.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 5. [LongMamba: Enhancing Mamba's Long Context Capabilities via Training-Free Receptive Field Enlargement](https://arxiv.org/abs/2504.16053) <a id="link5"></a>
+
+**ArXiv ID:** 2504.16053
+
+**Authors:** Zhifan Ye, Kejing Xia, Yonggan Fu, Xin Dong, Jihoon Hong, Xiangchi Yuan, Shizhe Diao, Jan Kautz, Pavlo Molchanov, Yingyan Celine Lin
+
+**Abstract:** State space models (SSMs) have emerged as an efficient alternative to Transformer models for language modeling, offering linear computational complexity and constant memory usage as context length increases. However, despite their efficiency in handling long contexts, recent studies have shown that SSMs, such as Mamba models, generally underperform compared to Transformers in long-context understanding tasks. To address this significant shortfall and achieve both efficient and accurate long-context understanding, we propose LongMamba, a training-free technique that significantly enhances the long-context capabilities of Mamba models. LongMamba builds on our discovery that the hidden channels in Mamba can be categorized into local and global channels based on their receptive field lengths, with global channels primarily responsible for long-context capability. These global channels can become the key bottleneck as the input context lengthens. Specifically, when input lengths largely exceed the training sequence length, global channels exhibit limitations in adaptively extend their receptive fields, leading to Mamba's poor long-context performance. The key idea of LongMamba is to mitigate the hidden state memory decay in these global channels by preventing the accumulation of unimportant tokens in their memory. This is achieved by first identifying critical tokens in the global channels and then applying token filtering to accumulate only those critical tokens. Through extensive benchmarking across synthetic and real-world long-context scenarios, LongMamba sets a new standard for Mamba's long-context performance, significantly extending its operational range without requiring additional training. Our code is available at https://github.com/GATECH-EIC/LongMamba.
+
+**Comment:** The paper introduces LongMamba, a training-free method to enhance state space models (SSMs) for long-context understanding. It aligns with foundational research in model architecture by addressing limitations in SSMs and proposing a novel technique for improving their performance.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 6. [Learning Adaptive Parallel Reasoning with Language Models](https://arxiv.org/abs/2504.15466) <a id="link6"></a>
+
+**ArXiv ID:** 2504.15466
+
+**Authors:** Jiayi Pan, Xiuyu Li, Long Lian, Charlie Snell, Yifei Zhou, Adam Yala, Trevor Darrell, Kurt Keutzer, Alane Suhr
+
+**Abstract:** Scaling inference-time computation has substantially improved the reasoning capabilities of language models. However, existing methods have significant limitations: serialized chain-of-thought approaches generate overly long outputs, leading to increased latency and exhausted context windows, while parallel methods such as self-consistency suffer from insufficient coordination, resulting in redundant computations and limited performance gains. To address these shortcomings, we propose Adaptive Parallel Reasoning (APR), a novel reasoning framework that enables language models to orchestrate both serialized and parallel computations end-to-end. APR generalizes existing reasoning methods by enabling adaptive multi-threaded inference using spawn() and join() operations. A key innovation is our end-to-end reinforcement learning strategy, optimizing both parent and child inference threads to enhance task success rate without requiring predefined reasoning structures. Experiments on the Countdown reasoning task demonstrate significant benefits of APR: (1) higher performance within the same context window (83.4% vs. 60.0% at 4k context); (2) superior scalability with increased computation (80.1% vs. 66.6% at 20k total tokens); (3) improved accuracy at equivalent latency (75.2% vs. 57.3% at approximately 5,000ms). APR represents a step towards enabling language models to autonomously optimize their reasoning processes through adaptive allocation of computation.
+
+**Comment:** The paper introduces Adaptive Parallel Reasoning (APR), which explores novel reasoning frameworks for LLMs, aligning with the criterion of theoretical insights into LLM behavior and architecture-level innovations.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 7. [Riemannian Neural Geodesic Interpolant](https://arxiv.org/abs/2504.15736) <a id="link7"></a>
+
+**ArXiv ID:** 2504.15736
+
+**Authors:** Jiawen Wu, Bingguang Chen, Yuyi Zhou, Qi Meng, Rongchan Zhu, Zhi-Ming Ma
+
+**Abstract:** Stochastic interpolants are efficient generative models that bridge two arbitrary probability density functions in finite time, enabling flexible generation from the source to the target distribution or vice versa. These models are primarily developed in Euclidean space, and are therefore limited in their application to many distribution learning problems defined on Riemannian manifolds in real-world scenarios. In this work, we introduce the Riemannian Neural Geodesic Interpolant (RNGI) model, which interpolates between two probability densities on a Riemannian manifold along the stochastic geodesics, and then samples from one endpoint as the final state using the continuous flow originating from the other endpoint. We prove that the temporal marginal density of RNGI solves a transport equation on the Riemannian manifold. After training the model's the neural velocity and score fields, we propose the Embedding Stochastic Differential Equation (E-SDE) algorithm for stochastic sampling of RNGI. E-SDE significantly improves the sampling quality by reducing the accumulated error caused by the excessive intrinsic discretization of Riemannian Brownian motion in the classical Geodesic Random Walk (GRW) algorithm. We also provide theoretical bounds on the generative bias measured in terms of KL-divergence. Finally, we demonstrate the effectiveness of the proposed RNGI and E-SDE through experiments conducted on both collected and synthetic distributions on S2 and SO(3).
+
+**Comment:** The paper introduces a Riemannian Neural Geodesic Interpolant for generative modeling on manifolds, which is a novel contribution to model architecture and representation learning.
+
+**Relevance:** 8
+**Novelty:** 8
+
+---
+
+## 8. [SUPRA: Subspace Parameterized Attention for Neural Operator on General Domains](https://arxiv.org/abs/2504.15897) <a id="link8"></a>
+
+**ArXiv ID:** 2504.15897
+
+**Authors:** Zherui Yang, Zhengyang Xue, Ligang Liu
+
+**Abstract:** Neural operators are efficient surrogate models for solving partial differential equations (PDEs), but their key components face challenges: (1) in order to improve accuracy, attention mechanisms suffer from computational inefficiency on large-scale meshes, and (2) spectral convolutions rely on the Fast Fourier Transform (FFT) on regular grids and assume a flat geometry, which causes accuracy degradation on irregular domains. To tackle these problems, we regard the matrix-vector operations in the standard attention mechanism on vectors in Euclidean space as bilinear forms and linear operators in vector spaces and generalize the attention mechanism to function spaces. This new attention mechanism is fully equivalent to the standard attention but impossible to compute due to the infinite dimensionality of function spaces. To address this, inspired by model reduction techniques, we propose a Subspace Parameterized Attention (SUPRA) neural operator, which approximates the attention mechanism within a finite-dimensional subspace. To construct a subspace on irregular domains for SUPRA, we propose using the Laplacian eigenfunctions, which naturally adapt to domains' geometry and guarantee the optimal approximation for smooth functions. Experiments show that the SUPRA neural operator reduces error rates by up to 33% on various PDE datasets while maintaining state-of-the-art computational efficiency.
+
+**Comment:** The paper introduces a novel attention mechanism (SUPRA) for neural operators, which aligns with architectural innovations and efficiency improvements, particularly in irregular domains.
+
+**Relevance:** 8
+**Novelty:** 8
+
+---
+
+## 9. [Deep learning with missing data](https://arxiv.org/abs/2504.15388) <a id="link9"></a>
+
+**ArXiv ID:** 2504.15388
+
+**Authors:** Tianyi Ma, Tengyao Wang, Richard J. Samworth
+
+**Abstract:** In the context of multivariate nonparametric regression with missing covariates, we propose Pattern Embedded Neural Networks (PENNs), which can be applied in conjunction with any existing imputation technique. In addition to a neural network trained on the imputed data, PENNs pass the vectors of observation indicators through a second neural network to provide a compact representation. The outputs are then combined in a third neural network to produce final predictions. Our main theoretical result exploits an assumption that the observation patterns can be partitioned into cells on which the Bayes regression function behaves similarly, and belongs to a compositional H\"older class. It provides a finite-sample excess risk bound that holds for an arbitrary missingness mechanism, and in combination with a complementary minimax lower bound, demonstrates that our PENN estimator attains in typical cases the minimax rate of convergence as if the cells of the partition were known in advance, up to a poly-logarithmic factor in the sample size. Numerical experiments on simulated, semi-synthetic and real data confirm that the PENN estimator consistently improves, often dramatically, on standard neural networks without pattern embedding. Code to reproduce our experiments, as well as a tutorial on how to apply our method, is publicly available.
+
+**Comment:** The paper introduces Pattern Embedded Neural Networks (PENNs) for handling missing data, which provides theoretical insights into representation learning and achieves minimax rates.
+
+**Relevance:** 8
+**Novelty:** 8
+
+---
+
+## 10. [Unifying Image Counterfactuals and Feature Attributions with Latent-Space Adversarial Attacks](https://arxiv.org/abs/2504.15479) <a id="link10"></a>
+
+**ArXiv ID:** 2504.15479
+
+**Authors:** Jeremy Goldwasser, Giles Hooker
+
+**Abstract:** Counterfactuals are a popular framework for interpreting machine learning predictions. These what if explanations are notoriously challenging to create for computer vision models: standard gradient-based methods are prone to produce adversarial examples, in which imperceptible modifications to image pixels provoke large changes in predictions. We introduce a new, easy-to-implement framework for counterfactual images that can flexibly adapt to contemporary advances in generative modeling. Our method, Counterfactual Attacks, resembles an adversarial attack on the representation of the image along a low-dimensional manifold. In addition, given an auxiliary dataset of image descriptors, we show how to accompany counterfactuals with feature attribution that quantify the changes between the original and counterfactual images. These importance scores can be aggregated into global counterfactual explanations that highlight the overall features driving model predictions. While this unification is possible for any counterfactual method, it has particular computational efficiency for ours. We demonstrate the efficacy of our approach with the MNIST and CelebA datasets.
+
+**Comment:** The paper introduces a novel framework for counterfactual explanations in computer vision models, leveraging latent-space adversarial attacks. It aligns with representation learning by addressing interpretability and feature attribution in a computationally efficient manner.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 11. [An XAI-based Analysis of Shortcut Learning in Neural Networks](https://arxiv.org/abs/2504.15664) <a id="link11"></a>
+
+**ArXiv ID:** 2504.15664
+
+**Authors:** Phuong Quynh Le, J\"org Schl\"otterer, Christin Seifert
+
+**Abstract:** Machine learning models tend to learn spurious features - features that strongly correlate with target labels but are not causal. Existing approaches to mitigate models' dependence on spurious features work in some cases, but fail in others. In this paper, we systematically analyze how and where neural networks encode spurious correlations. We introduce the neuron spurious score, an XAI-based diagnostic measure to quantify a neuron's dependence on spurious features. We analyze both convolutional neural networks (CNNs) and vision transformers (ViTs) using architecture-specific methods. Our results show that spurious features are partially disentangled, but the degree of disentanglement varies across model architectures. Furthermore, we find that the assumptions behind existing mitigation methods are incomplete. Our results lay the groundwork for the development of novel methods to mitigate spurious correlations and make AI models safer to use in practice.
+
+**Comment:** The paper systematically analyzes shortcut learning in neural networks using an XAI-based diagnostic measure. It aligns with representation learning by providing insights into how spurious correlations are encoded and disentangled in different architectures.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 12. [W-PCA Based Gradient-Free Proxy for Efficient Search of Lightweight Language Models](https://arxiv.org/abs/2504.15983) <a id="link12"></a>
+
+**ArXiv ID:** 2504.15983
+
+**Authors:** Shang Wang
+
+**Abstract:** The demand for efficient natural language processing (NLP) systems has led to the development of lightweight language models. Previous work in this area has primarily focused on manual design or training-based neural architecture search (NAS) methods. Recently, zero-shot NAS methods have been proposed for evaluating language models without the need for training. However, prevailing approaches to zero-shot NAS often face challenges such as biased evaluation metrics and computational inefficiencies. In this paper, we introduce weight-weighted PCA (W-PCA), a novel zero-shot NAS method specifically tailored for lightweight language models. Our approach utilizes two evaluation proxies: the parameter count and the number of principal components with cumulative contribution exceeding $\eta$ in the feed-forward neural (FFN) layer. Additionally, by eliminating the need for gradient computations, we optimize the evaluation time, thus enhancing the efficiency of designing and evaluating lightweight language models. We conduct a comparative analysis on the GLUE and SQuAD datasets to evaluate our approach. The results demonstrate that our method significantly reduces training time compared to one-shot NAS methods and achieves higher scores in the testing phase compared to previous state-of-the-art training-based methods. Furthermore, we perform ranking evaluations on a dataset sampled from the FlexiBERT search space. Our approach exhibits superior ranking correlation and further reduces solving time compared to other zero-shot NAS methods that require gradient computation.
+
+**Comment:** The paper introduces W-PCA, a novel zero-shot NAS method for lightweight language models, focusing on efficiency and evaluation proxies. This aligns with model compression and efficiency breakthroughs.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 13. [Emergence and Evolution of Interpretable Concepts in Diffusion Models](https://arxiv.org/abs/2504.15473) <a id="link13"></a>
+
+**ArXiv ID:** 2504.15473
+
+**Authors:** Berk Tinaz, Zalan Fabian, Mahdi Soltanolkotabi
+
+**Abstract:** Diffusion models have become the go-to method for text-to-image generation, producing high-quality images from noise through a process called reverse diffusion. Understanding the dynamics of the reverse diffusion process is crucial in steering the generation and achieving high sample quality. However, the inner workings of diffusion models is still largely a mystery due to their black-box nature and complex, multi-step generation process. Mechanistic Interpretability (MI) techniques, such as Sparse Autoencoders (SAEs), aim at uncovering the operating principles of models through granular analysis of their internal representations. These MI techniques have been successful in understanding and steering the behavior of large language models at scale. However, the great potential of SAEs has not yet been applied toward gaining insight into the intricate generative process of diffusion models. In this work, we leverage the SAE framework to probe the inner workings of a popular text-to-image diffusion model, and uncover a variety of human-interpretable concepts in its activations. Interestingly, we find that even before the first reverse diffusion step is completed, the final composition of the scene can be predicted surprisingly well by looking at the spatial distribution of activated concepts. Moreover, going beyond correlational analysis, we show that the discovered concepts have a causal effect on the model output and can be leveraged to steer the generative process. We design intervention techniques aimed at manipulating image composition and style, and demonstrate that (1) in early stages of diffusion image composition can be effectively controlled, (2) in the middle stages of diffusion image composition is finalized, however stylistic interventions are effective, and (3) in the final stages of diffusion only minor textural details are subject to change.
+
+**Comment:** The paper applies Sparse Autoencoders to diffusion models for mechanistic interpretability, aligning with representation learning and emerging trends in understanding generative models.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 14. [Low-Rank Adaptation of Neural Fields](https://arxiv.org/abs/2504.15933) <a id="link14"></a>
+
+**ArXiv ID:** 2504.15933
+
+**Authors:** Anh Truong, Ahmed H. Mahmoud, Mina Konakovi\'c Lukovi\'c, Justin Solomon
+
+**Abstract:** Processing visual data often involves small adjustments or sequences of changes, such as in image filtering, surface smoothing, and video storage. While established graphics techniques like normal mapping and video compression exploit redundancy to encode such small changes efficiently, the problem of encoding small changes to neural fields (NF) -- neural network parameterizations of visual or physical functions -- has received less attention.   We propose a parameter-efficient strategy for updating neural fields using low-rank adaptations (LoRA). LoRA, a method from the parameter-efficient fine-tuning LLM community, encodes small updates to pre-trained models with minimal computational overhead. We adapt LoRA to instance-specific neural fields, avoiding the need for large pre-trained models yielding a pipeline suitable for low-compute hardware.   We validate our approach with experiments in image filtering, video compression, and geometry editing, demonstrating its effectiveness and versatility for representing neural field updates.
+
+**Comment:** The paper adapts LoRA for neural fields, which aligns with model compression and efficiency topics. It introduces a novel application of LoRA to neural fields, making it relevant to foundational research in parameter-efficient methods.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 15. [Analytical Softmax Temperature Setting from Feature Dimensions for Model- and Domain-Robust Classification](https://arxiv.org/abs/2504.15594) <a id="link15"></a>
+
+**ArXiv ID:** 2504.15594
+
+**Authors:** Tatsuhito Hasegawa, Shunsuke Sakai
+
+**Abstract:** In deep learning-based classification tasks, the softmax function's temperature parameter $T$ critically influences the output distribution and overall performance. This study presents a novel theoretical insight that the optimal temperature $T^*$ is uniquely determined by the dimensionality of the feature representations, thereby enabling training-free determination of $T^*$. Despite this theoretical grounding, empirical evidence reveals that $T^*$ fluctuates under practical conditions owing to variations in models, datasets, and other confounding factors. To address these influences, we propose and optimize a set of temperature determination coefficients that specify how $T^*$ should be adjusted based on the theoretical relationship to feature dimensionality. Additionally, we insert a batch normalization layer immediately before the output layer, effectively stabilizing the feature space. Building on these coefficients and a suite of large-scale experiments, we develop an empirical formula to estimate $T^*$ without additional training while also introducing a corrective scheme to refine $T^*$ based on the number of classes and task complexity. Our findings confirm that the derived temperature not only aligns with the proposed theoretical perspective but also generalizes effectively across diverse tasks, consistently enhancing classification performance and offering a practical, training-free solution for determining $T^*$.
+
+**Comment:** The paper provides a theoretical insight into the relationship between feature dimensionality and the softmax temperature parameter, which aligns with representation learning and training dynamics. The work introduces a novel empirical formula and optimization scheme, making it relevant to foundational research.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 16. [Improving Learning to Optimize Using Parameter Symmetries](https://arxiv.org/abs/2504.15399) <a id="link16"></a>
+
+**ArXiv ID:** 2504.15399
+
+**Authors:** Guy Zamir, Aryan Dokania, Bo Zhao, Rose Yu
+
+**Abstract:** We analyze a learning-to-optimize (L2O) algorithm that exploits parameter space symmetry to enhance optimization efficiency. Prior work has shown that jointly learning symmetry transformations and local updates improves meta-optimizer performance. Supporting this, our theoretical analysis demonstrates that even without identifying the optimal group element, the method locally resembles Newton's method. We further provide an example where the algorithm provably learns the correct symmetry transformation during training. To empirically evaluate L2O with teleportation, we introduce a benchmark, analyze its success and failure cases, and show that enhancements like momentum further improve performance. Our results highlight the potential of leveraging neural network parameter space symmetry to advance meta-optimization.
+
+**Comment:** The paper investigates learning-to-optimize (L2O) algorithms by leveraging parameter space symmetry, which is relevant to representation learning and training dynamics. The theoretical analysis and empirical benchmarks add novelty to the field.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+# Paper Selection Prompt
+
+You are a helpful paper reading assistant whose job is to read daily posts from ArXiv and identify a few papers that your friend will enjoy reading.
+Your job is to carefully read the paper titles and abstracts below and find the ones that match the criteria below.
+
+## Instructions
+
+Write the response in JSONL format with {ARXIVID, COMMENT, RELEVANCE, NOVELTY} on each line, one for each paper.
+
+- ARXIVID: should be the ArXiv ID.
+- COMMENT: should identify whether there is a criteria that match the paper very closely. These matches should not be based on general terms like "language modeling" or "advancements" and should specifically refer to a criterion. No need to mention the non-matching criteria.
+- RELEVANCE: should be a score from 1-10.
+- NOVELTY: should be a score from 1-10.
+
+## Scoring Criteria
+
+> The "Relevance" score measures how closely the paper aligns with the core topics of the prompt.
+> The "Novelty" score assesses the originality and impact of the paper.
+> They are two **ORTHONORMAL** axes and **SHOULD NOT** be confused with each other.
+
+### Relevance Scoring
+
+- Relevance 9-10 (Completely Relevant)
+  - Focus: Fully aligned with core topics with no deviation, score the highest if contains relevant keywords in it.
+  - Examples: Papers focused on foundational methods or theoretical research, whose titles contain topic keywords like "MoE".
+
+- Relevance 7-8 (Relevant)
+  - Focus: Retain a solid link to the main research area, though may touch on peripheral elements.
+  - Examples: Papers research on the fundamental part of MoE through a less critical aspect like its behavior in GNN.
+
+- Relevance 5-6 (Borderline)
+  - Focus: Maintains a link to the core topic but also extends into at least one other domain/area beyond the primary focus.
+  - Examples: Work referencing MoE centered on reinforcement learning.
+
+- Relevance 3-4 (Irrelevant)
+  - Focus: Largely outside our interests with no association to our topics.
+  - Examples: Application-focused papers like using MoE to solve a problem in the real world.
+
+- Relevance 1-2 (Ignore)
+  - Focus: Purely unrelated to our topics. Completely a different domain.
+  - **Exception**: If the paper hints at a cutting-edge, radically new direction that could eventually transform the primary domain, consider a score of 9–10 despite initial appearances. (Usually a very rare concept that belongs to the fundamental research)
+
+### Novelty Scoring
+
+- Novelty 9-10 (Breakthrough)
+  - Definition: Groundbreaking methods/theory introducing new directions or solving major challenges.
+  - Examples: Entirely new paradigm for foundational models; a novel theory transforming representation learning.
+
+- Novelty 7-8 (Improvements)
+  - Definition: Substantial insights/enhancements, though not a full paradigm shift.
+  - Examples: Modifications on existing methods yielding significantly better results.
+
+- Novelty 5-6 (Borderline)
+  - Definition: Incremental contributions with possible long-term benefits, not immediately transformative.
+  - Examples: Moderately novel extension to an existing architecture; refining current methods without fundamentally altering them.
+
+- Novelty 3-4 (Tangential)
+  - Definition: Minor or domain-specific improvements with limited broader impact.
+  - Examples: Slight modifications to known methods with strange motivation; purely engineering jobs like a new benchmark/dataset.
+
+- Novelty 1-2 (Low)
+  - Definition: Minimal originality, applying standard approaches without real innovation.
+  - Examples: Using an off-the-shelf model without adding new insights; purely application-driven studies like finetuning a pretrained model using existing methods.
+
+## Papers
+
+[PAPER LIST HERE]
+
+## Relevant Topics
+
+Use the following relevance criteria to focus on foundational research. Keep **relevant** papers and filter out **irrelevant** ones. Avoid purely **application-driven** work.
+
+1. Representation Learning
+   - Relevant: Insights into how deep networks encode information, feature/dictionary learning, sparse/contrastive methods, training dynamics in neural networks.
+   - Irrelevant: Standard applications of known techniques lacking new theoretical or methodological contributions.
+
+2. Model Architecture
+   - Relevant: Mixture-of-Experts (MoE), Transformers, Conditional/Dynamic Networks, Autoencoders, analysis on existing architectures (like encoder-decoder), or other architectural innovations.
+   - Irrelevant: Merely using existing architectures for a certain task without insights into the structure themselves.
+
+3. Model Compression
+   - Relevant: Sparsity, pruning, quantization, low-rank approaches, KV cache, or other algorithmic/theoretical efficiency breakthroughs.
+   - Irrelevant: Straightforward applications of existing compression methods to new tasks.
+
+4. Large Language Models (LLMs)
+   - Relevant: Major breakthroughs in pretraining or architecture, theoretical insights into LLM behavior/interpretability.
+   - Irrelevant: Domain-specific usage (e.g., translation, jail-breaking), finetuning or inference tricks (e.g., instruction tuning, chain-of-thoughts, data mixing), or empirical dataset/benchmark studies and text-level analysis (e.g. hallucination, reasoning, safety).
+
+5. AI for Science
+   - Relevant: Foundational research in molecular/protein modeling, new generative paradigms, or significant architecture-level innovations.
+   - Irrelevant: Conventional, domain-specific applications without new theoretical perspectives.
+
+6. Emerging Trends
+   - Relevant: Cutting-edge theoretical work challenging established assumptions or introducing broad new paradigms.
+   - Irrelevant: Incremental improvements or trend-following without novel insights.
+
+**Keywords:**
+
+- Relevant: Mixture of Experts (MoE), Representation Learning, Compression/Efficiency, Sparse/Sparsity, Pruning, Quantization, Low-rank, Foundation Model, etc.
+- Irrelevant: Reinforcement Learning, Transfer Learning, Federated Learning, Online Learning, Diffusion Models, etc.
+- Application: Image Segmentation, Medical Imaging, 3D Vision, Video Understanding, Information Retrieval, Summarization, Recommendation Systems, Machine Translation, Speech Recognition, Signal Processing, Spatial/Temporal Modeling, Time Series, Knowledge Graph, etc.

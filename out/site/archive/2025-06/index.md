@@ -1,0 +1,17 @@
+<div style="display: flex; align-items: flex-start; justify-content: space-between; width: 100%;"><div style="width: 33.33%; text-align: left;"><a href="../2025-05"><img src="../../assets/nav/month/2025-06-prev.svg" alt="Previous Month 2025-05"></a></div><div style="width: 33.33%; text-align: center;"><a href="../2025"><img src="../../assets/nav/month/2025-06-center.svg" alt="Yearly Overview 2025"></a></div><div style="width: 33.33%; text-align: right;"><a href="../2025-07"><img src="../../assets/nav/month/2025-06-next.svg" alt="Next Month 2025-07"></a></div></div>
+
+# Personalized Monthly ArXiv Paper Summary 2025/06
+
+<table style="margin: 0 auto; border-collapse: collapse; text-align: center;">
+    <thead>
+        <tr><th colspan="7" style="padding: 8px 0;">2025/06</th></tr>
+        <tr><th style="padding: 6px;">Sunday</th><th style="padding: 6px;">Monday</th><th style="padding: 6px;">Tuesday</th><th style="padding: 6px;">Wednesday</th><th style="padding: 6px;">Thursday</th><th style="padding: 6px;">Friday</th><th style="padding: 6px;">Saturday</th></tr>
+    </thead>
+    <tbody>
+        <tr><td style="padding: 8px;">1</td><td style="padding: 8px;"><a href="02" style="text-decoration: none;">2</a></td><td style="padding: 8px;"><a href="03" style="text-decoration: none;">3</a></td><td style="padding: 8px;"><a href="04" style="text-decoration: none;">4</a></td><td style="padding: 8px;"><a href="05" style="text-decoration: none;">5</a></td><td style="padding: 8px;"><a href="06" style="text-decoration: none;">6</a></td><td style="padding: 8px;">7</td></tr>
+        <tr><td style="padding: 8px;">8</td><td style="padding: 8px;"><a href="09" style="text-decoration: none;">9</a></td><td style="padding: 8px;"><a href="10" style="text-decoration: none;">10</a></td><td style="padding: 8px;"><a href="11" style="text-decoration: none;">11</a></td><td style="padding: 8px;">12</td><td style="padding: 8px;"><a href="13" style="text-decoration: none;">13</a></td><td style="padding: 8px;">14</td></tr>
+        <tr><td style="padding: 8px;">15</td><td style="padding: 8px;"><a href="16" style="text-decoration: none;">16</a></td><td style="padding: 8px;"><a href="17" style="text-decoration: none;">17</a></td><td style="padding: 8px;"><a href="18" style="text-decoration: none;">18</a></td><td style="padding: 8px;">19</td><td style="padding: 8px;">20</td><td style="padding: 8px;">21</td></tr>
+        <tr><td style="padding: 8px;">22</td><td style="padding: 8px;"><a href="23" style="text-decoration: none;">23</a></td><td style="padding: 8px;"><a href="24" style="text-decoration: none;">24</a></td><td style="padding: 8px;"><a href="25" style="text-decoration: none;">25</a></td><td style="padding: 8px;"><a href="26" style="text-decoration: none;">26</a></td><td style="padding: 8px;"><a href="27" style="text-decoration: none;">27</a></td><td style="padding: 8px;">28</td></tr>
+        <tr><td style="padding: 8px;">29</td><td style="padding: 8px;"><a href="30" style="text-decoration: none;">30</a></td><td style="padding: 8px;"></td><td style="padding: 8px;"></td><td style="padding: 8px;"></td><td style="padding: 8px;"></td><td style="padding: 8px;"></td></tr>
+    </tbody>
+</table>

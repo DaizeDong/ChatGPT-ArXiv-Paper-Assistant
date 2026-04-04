@@ -1,0 +1,458 @@
+<div style="display: flex; align-items: flex-start; justify-content: space-between; width: 100%;"><div style="width: 33.33%; text-align: left;"><a href="../04"><img src="../../../assets/nav/day/2025-12-05-prev.svg" alt="Previous Day 2025-12-04"></a></div><div style="width: 33.33%; text-align: center;"><a href=".."><img src="../../../assets/nav/day/2025-12-05-center.svg" alt="Monthly Overview 2025-12"></a></div><div style="width: 33.33%; text-align: right;"><a href="../08"><img src="../../../assets/nav/day/2025-12-05-next.svg" alt="Next Day 2025-12-08"></a></div></div>
+
+# Personalized Daily ArXiv Papers 2025-12-05
+
+| *[gpt-5]*   | Prompt   | Completion   | Total   |
+|:-----------:|:--------:|:------------:|:-------:|
+| **Token**   | 36714    | 33874        | 70588   |
+| **Cost**    | $0.05    | $0.34        | $0.38   |
+
+Total arXiv papers: 436
+
+Total scanned papers: 256
+
+Total relevant papers: 19
+
+**Table of contents with paper titles:**
+
+1. [BEP: A Binary Error Propagation Algorithm for Binary Neural Networks Training](#user-content-link1)
+**Authors:** Luca Colombo, Fabrizio Pittorino, Daniele Zambon, Carlo Baldassi, Manuel Roveri, Cesare Alippi
+
+2. [Network of Theseus (like the ship)](#user-content-link2)
+**Authors:** Vighnesh Subramaniam, Colin Conwell, Boris Katz, Andrei Barbu, Brian Cheung
+
+3. [Cache What Lasts: Token Retention for Memory-Bounded KV Cache in LLMs](#user-content-link3)
+**Authors:** Ngoc Bui, Shubham Sharma, Simran Lamba, Saumitra Mishra, Rex Ying
+
+4. [KVNAND: Efficient On-Device Large Language Model Inference Using DRAM-Free In-Flash Computing](#user-content-link4)
+**Authors:** Lishuo Deng, Shaojie Xu, Jinwu Chen, Changwei Yan, Jiajie Wang, Zhe Jiang, Weiwei Shan
+
+5. [Context-Aware Mixture-of-Experts Inference on CXL-Enabled GPU-NDP Systems](#user-content-link5)
+**Authors:** Zehao Fan, Zhenyu Liu, Yunzhen Liu, Yayue Hou, Hadjer Benmeziane, Kaoutar El Maghraoui, Liu Liu
+
+6. [A note on the impossibility of conditional PAC-efficient reasoning in large language models](#user-content-link6)
+**Authors:** Hao Zeng
+
+7. [UniQL: Unified Quantization and Low-rank Compression for Adaptive Edge LLMs](#user-content-link7)
+**Authors:** Hung-Yueh Chiang, Chi-Chih Chang, Yu-Chen Lu, Chien-Yu Lin, Kai-Chiang Wu, Mohamed S. Abdelfattah, Diana Marculescu
+
+8. [When do spectral gradient updates help in deep learning?](#user-content-link8)
+**Authors:** Damek Davis, Dmitriy Drusvyatskiy
+
+9. [Arbitrage: Efficient Reasoning via Advantage-Aware Speculation](#user-content-link9)
+**Authors:** Monishwaran Maheswaran, Rishabh Tiwari, Yuezhou Hu, Kerem Dilmen, Coleman Hooper, Haocheng Xi, Nicholas Lee, Mehrdad Farajtabar, Michael W. Mahoney, Kurt Keutzer, Amir Gholami
+
+10. [PSA: Pyramid Sparse Attention for Efficient Video Understanding and Generation](#user-content-link10)
+**Authors:** Xiaolong Li, Youping Gu, Xi Lin, Weijie Wang, Bohan Zhuang
+
+11. [The Universal Weight Subspace Hypothesis](#user-content-link11)
+**Authors:** Prakhar Kaushik, Shravan Chaudhari, Ankit Vaidya, Rama Chellappa, Alan Yuille
+
+12. [The Initialization Determines Whether In-Context Learning Is Gradient Descent](#user-content-link12)
+**Authors:** Shifeng Xie, Rui Yuan, Simone Rossi, Thomas Hannagan
+
+13. [Rethinking Decoupled Knowledge Distillation: A Predictive Distribution Perspective](#user-content-link13)
+**Authors:** Bowen Zheng, Ran Cheng
+
+14. [SuperActivators: Only the Tail of the Distribution Contains Reliable Concept Signals](#user-content-link14)
+**Authors:** Cassandra Goldberg, Chaehyeon Kim, Adam Stein, Eric Wong
+
+15. [GRASP: GRouped Activation Shared Parameterization for Parameter-Efficient Fine-Tuning and Robust Inference of Transformers](#user-content-link15)
+**Authors:** Malyaban Bal, Abhronil Sengupta
+
+16. [On the Limits of Test-Time Compute: Sequential Reward Filtering for Better Inference](#user-content-link16)
+**Authors:** Yue Yu, Qiwei Di, Quanquan Gu, Dongruo Zhou
+
+17. [TV2TV: A Unified Framework for Interleaved Language and Video Generation](#user-content-link17)
+**Authors:** Xiaochuang Han, Youssef Emad, Melissa Hall, John Nguyen, Karthik Padthe, Liam Robbins, Amir Bar, Delong Chen, Michal Drozdzal, Maha Elbayad, Yushi Hu, Shang-Wen Li, Sreya Dutta Roy, Jakob Verbeek, XuDong Wang, Marjan Ghazvininejad, Luke Zettlemoyer, Emily Dinan
+
+18. [Mitigating the Curse of Detail: Scaling Arguments for Feature Learning and Sample Complexity](#user-content-link18)
+**Authors:** Noa Rubin, Orit Davidovich, Zohar Ringel
+
+19. [Mitigating Intra- and Inter-modal Forgetting in Continual Learning of Unified Multimodal Models](#user-content-link19)
+**Authors:** Xiwen Wei, Mustafa Munir, Radu Marculescu
+
+---
+
+## 1. [BEP: A Binary Error Propagation Algorithm for Binary Neural Networks Training](https://arxiv.org/abs/2512.04189) <a id="link1"></a>
+
+**ArXiv ID:** 2512.04189
+
+**Authors:** Luca Colombo, Fabrizio Pittorino, Daniele Zambon, Carlo Baldassi, Manuel Roveri, Cesare Alippi
+
+**Abstract:** Binary Neural Networks (BNNs), which constrain both weights and activations to binary values, offer substantial reductions in computational complexity, memory footprint, and energy consumption. These advantages make them particularly well suited for deployment on resource-constrained devices. However, training BNNs via gradient-based optimization remains challenging due to the discrete nature of their variables. The dominant approach, quantization-aware training, circumvents this issue by employing surrogate gradients. Yet, this method requires maintaining latent full-precision parameters and performing the backward pass with floating-point arithmetic, thereby forfeiting the efficiency of binary operations during training. While alternative approaches based on local learning rules exist, they are unsuitable for global credit assignment and for back-propagating errors in multi-layer architectures. This paper introduces Binary Error Propagation (BEP), the first learning algorithm to establish a principled, discrete analog of the backpropagation chain rule. This mechanism enables error signals, represented as binary vectors, to be propagated backward through multiple layers of a neural network. BEP operates entirely on binary variables, with all forward and backward computations performed using only bitwise operations. Crucially, this makes BEP the first solution to enable end-to-end binary training for recurrent neural network architectures. We validate the effectiveness of BEP on both multi-layer perceptrons and recurrent neural networks, demonstrating gains of up to +6.89% and +10.57% in test accuracy, respectively. The proposed algorithm is released as an open-source repository.
+
+**Comment:** Model Compression and Efficiency: introduces Binary Error Propagation, a discrete analog of backprop enabling fully binary forward and backward passes (including RNNs) with only bitwise ops.
+
+**Relevance:** 10
+**Novelty:** 9
+
+---
+
+## 2. [Network of Theseus (like the ship)](https://arxiv.org/abs/2512.04198) <a id="link2"></a>
+
+**ArXiv ID:** 2512.04198
+
+**Authors:** Vighnesh Subramaniam, Colin Conwell, Boris Katz, Andrei Barbu, Brian Cheung
+
+**Abstract:** A standard assumption in deep learning is that the inductive bias introduced by a neural network architecture must persist from training through inference. The architecture you train with is the architecture you deploy. This assumption constrains the community from selecting architectures that may have desirable efficiency or design properties due to difficulties with optimization. We challenge this assumption with Network of Theseus (NoT), a method for progressively converting a trained, or even untrained, guide network architecture part-by-part into an entirely different target network architecture while preserving the performance of the guide network. At each stage, components in the guide network architecture are incrementally replaced with target architecture modules and aligned via representational similarity metrics. This procedure largely preserves the functionality of the guide network even under substantial architectural changes-for example, converting a convolutional network into a multilayer perceptron, or GPT-2 into a recurrent neural network. By decoupling optimization from deployment, NoT expands the space of viable inference-time architectures, opening opportunities for better accuracy-efficiency tradeoffs and enabling more directed exploration of the architectural design space.
+
+**Comment:** Matches Model Architecture: progressive architecture conversion using representational similarity alignment to decouple optimization from deployment, enabling new accuracy–efficiency tradeoffs.
+
+**Relevance:** 10
+**Novelty:** 9
+
+---
+
+## 3. [Cache What Lasts: Token Retention for Memory-Bounded KV Cache in LLMs](https://arxiv.org/abs/2512.03324) <a id="link3"></a>
+
+**ArXiv ID:** 2512.03324
+
+**Authors:** Ngoc Bui, Shubham Sharma, Simran Lamba, Saumitra Mishra, Rex Ying
+
+**Abstract:** Memory and computation remain core bottlenecks in long-horizon LLM inference due to the quadratic cost of self-attention and the ever-growing key-value (KV) cache. Existing strategies for memory-bounded inference, such as quantization, offloading, or heuristic KV eviction, either incur high orchestration costs or rely on unreliable attention-based proxies of importance. We propose TRIM-KV, a novel approach that learns each token's intrinsic importance at creation time via a lightweight retention gate. Each gate predicts a scalar retention score that decays over time, reflecting the long-term utility of the token for a specific layer and head. Tokens with low scores are evicted when the memory budget is exceeded, ensuring that the cache always contains the most critical tokens. TRIM-KV is trained efficiently through distillation from a frozen LLM combined with a capacity loss, requiring only gate fine-tuning and adding negligible inference overhead. Across mathematical reasoning (GSM8K, MATH-500, AIME24), procedural generation (LongProc), conversational long-memory benchmarks (LongMemEval), and long-context understanding (LongBench and SCBench), TRIM-KV consistently outperforms strong eviction and learnable retrieval baselines, especially in low-memory regimes. Remarkably, it even surpasses full-cache models in some settings, showing that selective retention can serve as a form of regularization, suppressing noise from uninformative tokens. Qualitative analyses further reveal that learned retention scores align with human intuition, naturally recovering heuristics such as sink tokens, sliding windows, and gist compression without explicit design. Beyond efficiency, retention scores provide insights into layer- and head-specific roles, suggesting a new path toward LLM interpretability.
+
+**Comment:** Model Efficiency: memory-bounded KV cache via learned per-token retention gates (layer/head-specific) for eviction; aligns with pruning/selection for inference efficiency.
+
+**Relevance:** 10
+**Novelty:** 8
+
+---
+
+## 4. [KVNAND: Efficient On-Device Large Language Model Inference Using DRAM-Free In-Flash Computing](https://arxiv.org/abs/2512.03608) <a id="link4"></a>
+
+**ArXiv ID:** 2512.03608
+
+**Authors:** Lishuo Deng, Shaojie Xu, Jinwu Chen, Changwei Yan, Jiajie Wang, Zhe Jiang, Weiwei Shan
+
+**Abstract:** Deploying large language models (LLMs) on edge devices enables personalized agents with strong privacy and low cost. However, with tens to hundreds of billions of parameters, single-batch autoregressive inference suffers from extremely low arithmetic intensity, creating severe weight-loading and bandwidth pressures on resource-constrained platforms. Recent in-flash computing (IFC) solutions alleviate this bottleneck by co-locating weight-related linear computations in the decode phase with flash, yet still rely on DRAM for the key-value (KV) cache. As context length grows, the KV cache can exceed model weights in size, imposing prohibitive DRAM cost and capacity requirements. Attempts to offload KV cache to flash suffer from severe performance penalties.   We propose KVNAND, the first DRAM-free, IFC-based architecture that stores both model weights and KV cache entirely in compute-enabled 3D NAND flash. KVNAND addresses the fundamental performance challenges of flash under intensive KV cache access by leveraging IFC for all memory-bound operations to reduce data transfer overhead, introducing head-group parallelism to boost throughput, and employing page-level KV cache mapping to align token access patterns with flash organization. In addition, we propose a design space exploration framework that evaluates discrete and compact KVNAND variants to balance weight and KV placement, automatically identifying the optimal design trade-off. These techniques mitigate latency, energy, and reliability concerns, turning flash into a practical medium for long-context KV storage. Evaluations on MHA 7B and GQA 70B LLMs show that KVNAND achieves 1.98\(\times\)/1.94\(\times\)/2.05\(\times\) geomean speedup at 128/1K/10K-token contexts compared to DRAM-equipped IFC designs and addresses out-of-memory failures at 100K context length.
+
+**Comment:** High Performance Computing: systems-level innovation for LLM inference by storing both weights and KV cache in compute-enabled 3D NAND, with head-group parallelism and page-level KV mapping to cut data movement.
+
+**Relevance:** 10
+**Novelty:** 8
+
+---
+
+## 5. [Context-Aware Mixture-of-Experts Inference on CXL-Enabled GPU-NDP Systems](https://arxiv.org/abs/2512.04476) <a id="link5"></a>
+
+**ArXiv ID:** 2512.04476
+
+**Authors:** Zehao Fan, Zhenyu Liu, Yunzhen Liu, Yayue Hou, Hadjer Benmeziane, Kaoutar El Maghraoui, Liu Liu
+
+**Abstract:** Mixture-of-Experts (MoE) models scale large language models through conditional computation, but inference becomes memory-bound once expert weights exceed the capacity of GPU memory. In this case, weights must be offloaded to external memory, and fetching them incurs costly and repeated transfers. We address this by adopting CXL-attached near-data processing (CXL-NDP) as the offloading tier to execute cold experts in place, converting expensive parameter movement into cheaper activation movement. Unlike prior GPU-NDP systems that are largely context-agnostic and reactive, we develop a context-aware MoE system that uses prefill-stage activation statistics to guide decoding-stage expert placement, dynamically pins hot experts in GPU-side HBM, and maps the remainder to CXL-NDP. To meet NDP's limited compute throughput, we introduce context-aware mixed-precision quantization that allocates per-expert bitwidths (1-4 bit) based on prefill stage. The resulting MoE inference system overlaps GPU and NDP execution while minimizing cross-device movement. The evaluation on the GPU-NDP system shows that our approach achieves up to an 8.7-fold decoding throughput improvement over the state-of-the-art method, while incurring only a 0.13% average accuracy drop.
+
+**Comment:** Model Architecture (MoE) + HPC/Efficiency: context-aware expert placement using prefill activations, CXL-attached near-data processing, and per-expert mixed-precision quantization to cut cross-device transfers.
+
+**Relevance:** 10
+**Novelty:** 8
+
+---
+
+## 6. [A note on the impossibility of conditional PAC-efficient reasoning in large language models](https://arxiv.org/abs/2512.03057) <a id="link6"></a>
+
+**ArXiv ID:** 2512.03057
+
+**Authors:** Hao Zeng
+
+**Abstract:** We prove an impossibility result for conditional Probably Approximately Correct (PAC)-efficient reasoning in large language models. While recent work has established marginal PAC efficiency guarantees for composite models that switch between expensive expert models and cheaper fast models, we show that conditional (pointwise) guarantees are impossible in the distribution-free setting. Specifically, for non-atomic input spaces, any algorithm achieving conditional PAC efficiency must be trivial in the sense that it defers to the expert model with probability at least $1-\alpha$ for almost every input.
+
+**Comment:** Theory of Conditional/Dynamic Networks: impossibility of conditional PAC-efficient deferral between fast and expert models in a distribution-free setting.
+
+**Relevance:** 10
+**Novelty:** 8
+
+---
+
+## 7. [UniQL: Unified Quantization and Low-rank Compression for Adaptive Edge LLMs](https://arxiv.org/abs/2512.03383) <a id="link7"></a>
+
+**ArXiv ID:** 2512.03383
+
+**Authors:** Hung-Yueh Chiang, Chi-Chih Chang, Yu-Chen Lu, Chien-Yu Lin, Kai-Chiang Wu, Mohamed S. Abdelfattah, Diana Marculescu
+
+**Abstract:** Deploying large language model (LLM) models on mobile platforms faces significant challenges due to the limited memory and shared computational resources of the device. Resource availability may be an issue as it is directly impacted by the current device workload, adding to the uncertainty of model deployment. We introduce UniQL, a unified post-training quantization and low-rank compression framework with on-device configurable pruning rates for edge LLMs. UniQL is a general framework that integrates quantization and low-rank compression for Transformers, State Space Models (SSMs), and hybrid models to support diverse edge applications. In our proposed joint framework, we introduce an efficient structured weight-sorting method that speeds up computation by 20x, quantization-aware singular value decomposition (SVD) to minimize quantization errors, state-aware weight sorting for SSMs, and a fused rotary positional embedding (RoPE) kernel for pruned models. Our framework performs weight-sorting, fine-tuning, and quantization in the cloud in a single-pass workflow, while enabling on-device configurable pruning rates up to 35%. Our experiments show that quantized and pruned models achieve a memory reduction of 4x-5.7x and a token-throughput improvement of 2.7x-3.4x, maintaining accuracy within 5% of the original models at 15% pruning across Transformers (Llama3 and Qwen2.5), SSMs (Mamba2), and hybrid models (Nemotron-H and Bamba-v2). The code and quantized models are available at: https://github.com/enyac-group/UniQL.
+
+**Comment:** Matches Model Compression and Efficiency: unified quantization + low-rank compression with structured weight-sorting, quantization-aware SVD, and fused RoPE kernel supporting configurable pruning.
+
+**Relevance:** 10
+**Novelty:** 8
+
+---
+
+## 8. [When do spectral gradient updates help in deep learning?](https://arxiv.org/abs/2512.04299) <a id="link8"></a>
+
+**ArXiv ID:** 2512.04299
+
+**Authors:** Damek Davis, Dmitriy Drusvyatskiy
+
+**Abstract:** Spectral gradient methods, such as the recently popularized Muon optimizer, are a promising alternative to standard Euclidean gradient descent for training deep neural networks and transformers, but it is still unclear in which regimes they are expected to perform better. We propose a simple layerwise condition that predicts when a spectral update yields a larger decrease in the loss than a Euclidean gradient step. This condition compares, for each parameter block, the squared nuclear-to-Frobenius ratio of the gradient to the stable rank of the incoming activations. To understand when this condition may be satisfied, we first prove that post-activation matrices have low stable rank at Gaussian initialization in random feature regression, feedforward networks, and transformer blocks. In spiked random feature models we then show that, after a short burn-in, the Euclidean gradient's nuclear-to-Frobenius ratio grows with the data dimension while the stable rank of the activations remains bounded, so the predicted advantage of spectral updates scales with dimension. We validate these predictions in synthetic regression experiments and in NanoGPT-scale language model training, where we find that intermediate activations have low-stable-rank throughout training and the corresponding gradients maintain large nuclear-to-Frobenius ratios. Together, these results identify conditions for spectral gradient methods, such as Muon, to be effective in training deep networks and transformers.
+
+**Comment:** Representation Learning/Training Dynamics: theoretical conditions for spectral gradient methods (e.g., Muon) to outperform Euclidean updates in deep nets/transformers.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 9. [Arbitrage: Efficient Reasoning via Advantage-Aware Speculation](https://arxiv.org/abs/2512.05033) <a id="link9"></a>
+
+**ArXiv ID:** 2512.05033
+
+**Authors:** Monishwaran Maheswaran, Rishabh Tiwari, Yuezhou Hu, Kerem Dilmen, Coleman Hooper, Haocheng Xi, Nicholas Lee, Mehrdad Farajtabar, Michael W. Mahoney, Kurt Keutzer, Amir Gholami
+
+**Abstract:** Modern Large Language Models achieve impressive reasoning capabilities with long Chain of Thoughts, but they incur substantial computational cost during inference, and this motivates techniques to improve the performance-cost ratio. Among these techniques, Speculative Decoding accelerates inference by employing a fast but inaccurate draft model to autoregressively propose tokens, which are then verified in parallel by a more capable target model. However, due to unnecessary rejections caused by token mismatches in semantically equivalent steps, traditional token-level Speculative Decoding struggles in reasoning tasks. Although recent works have shifted to step-level semantic verification, which improve efficiency by accepting or rejecting entire reasoning steps, existing step-level methods still regenerate many rejected steps with little improvement, wasting valuable target compute. To address this challenge, we propose Arbitrage, a novel step-level speculative generation framework that routes generation dynamically based on the relative advantage between draft and target models. Instead of applying a fixed acceptance threshold, Arbitrage uses a lightweight router trained to predict when the target model is likely to produce a meaningfully better step. This routing approximates an ideal Arbitrage Oracle that always chooses the higher-quality step, achieving near-optimal efficiency-accuracy trade-offs. Across multiple mathematical reasoning benchmarks, Arbitrage consistently surpasses prior step-level Speculative Decoding baselines, reducing inference latency by up to $\sim2\times$ at matched accuracy.
+
+**Comment:** Model Efficiency: step-level speculative decoding with advantage-aware routing to reduce inference cost while maintaining reasoning quality.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 10. [PSA: Pyramid Sparse Attention for Efficient Video Understanding and Generation](https://arxiv.org/abs/2512.04025) <a id="link10"></a>
+
+**ArXiv ID:** 2512.04025
+
+**Authors:** Xiaolong Li, Youping Gu, Xi Lin, Weijie Wang, Bohan Zhuang
+
+**Abstract:** Attention mechanisms are the core of foundation models, but their quadratic complexity remains a critical bottleneck for scaling. This challenge has driven the development of efficient attention mechanisms, with sparsity emerging as the dominant paradigm. Current methods typically retain or discard entire key-value blocks with binary masks, resulting in substantial information loss under high sparsity. To mitigate this gap, we present Pyramid Sparse Attention (PSA), a versatile module applicable to both video understanding and generation tasks. Instead of binary masking, PSA introduces multi-level pooled KV representations, enabling finer mask granularity. Specifically, each query block dynamically allocates lower pooling levels to critical KV blocks and higher levels to less important ones, creating an informative interpolation between full retention and complete pruning. This design, analogous to fixed-point quantization and classical feature pyramid networks in computer vision, effectively mitigates information loss while preserving computational efficiency under a low compute budget. It works with a native, hardware-friendly kernel that leverages decoupled block-tile design to ensure efficient execution. Across video understanding and generation benchmarks, PSA preserves contextual information and visual fidelity, consistently outperforming or achieving comparable performance over existing sparse attention baselines with superior efficiency-quality trade-offs. Our code and model weights are publicly available at: http://ziplab.co/PSA
+
+**Comment:** Model Compression and Efficiency: introduces a sparse attention variant with multi-level pooled KV representations and a hardware-friendly kernel to reduce quadratic attention cost while preserving information.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 11. [The Universal Weight Subspace Hypothesis](https://arxiv.org/abs/2512.05117) <a id="link11"></a>
+
+**ArXiv ID:** 2512.05117
+
+**Authors:** Prakhar Kaushik, Shravan Chaudhari, Ankit Vaidya, Rama Chellappa, Alan Yuille
+
+**Abstract:** We show that deep neural networks trained across diverse tasks exhibit remarkably similar low-dimensional parametric subspaces. We provide the first large-scale empirical evidence that demonstrates that neural networks systematically converge to shared spectral subspaces regardless of initialization, task, or domain. Through mode-wise spectral analysis of over 1100 models - including 500 Mistral-7B LoRAs, 500 Vision Transformers, and 50 LLaMA-8B models - we identify universal subspaces capturing majority variance in just a few principal directions. By applying spectral decomposition techniques to the weight matrices of various architectures trained on a wide range of tasks and datasets, we identify sparse, joint subspaces that are consistently exploited, within shared architectures across diverse tasks and datasets. Our findings offer new insights into the intrinsic organization of information within deep networks and raise important questions about the possibility of discovering these universal subspaces without the need for extensive data and computational resources. Furthermore, this inherent structure has significant implications for model reusability, multi-task learning, model merging, and the development of training and inference-efficient algorithms, potentially reducing the carbon footprint of large-scale neural models.
+
+**Comment:** Representation Learning: identifies universal low-dimensional/sparse spectral subspaces in weight matrices across architectures; also connects to low-rank compression potential.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 12. [The Initialization Determines Whether In-Context Learning Is Gradient Descent](https://arxiv.org/abs/2512.04268) <a id="link12"></a>
+
+**ArXiv ID:** 2512.04268
+
+**Authors:** Shifeng Xie, Rui Yuan, Simone Rossi, Thomas Hannagan
+
+**Abstract:** In-context learning (ICL) in large language models (LLMs) is a striking phenomenon, yet its underlying mechanisms remain only partially understood. Previous work connects linear self-attention (LSA) to gradient descent (GD), this connection has primarily been established under simplified conditions with zero-mean Gaussian priors and zero initialization for GD. However, subsequent studies have challenged this simplified view by highlighting its overly restrictive assumptions, demonstrating instead that under conditions such as multi-layer or nonlinear attention, self-attention performs optimization-like inference, akin to but distinct from GD. We investigate how multi-head LSA approximates GD under more realistic conditions specifically when incorporating non-zero Gaussian prior means in linear regression formulations of ICL. We first extend multi-head LSA embedding matrix by introducing an initial estimation of the query, referred to as the initial guess. We prove an upper bound on the number of heads needed for ICL linear regression setup. Our experiments confirm this result and further observe that a performance gap between one-step GD and multi-head LSA persists. To address this gap, we introduce yq-LSA, a simple generalization of single-head LSA with a trainable initial guess yq. We theoretically establish the capabilities of yq-LSA and provide experimental validation on linear regression tasks, thereby extending the theory that bridges ICL and GD. Finally, inspired by our findings in the case of linear regression, we consider widespread LLMs augmented with initial guess capabilities, and show that their performance is improved on a semantic similarity task.
+
+**Comment:** Representation Learning/Training Dynamics: theoretical link between multi-head linear self-attention and gradient descent via initialization (yq-LSA).
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 13. [Rethinking Decoupled Knowledge Distillation: A Predictive Distribution Perspective](https://arxiv.org/abs/2512.04625) <a id="link13"></a>
+
+**ArXiv ID:** 2512.04625
+
+**Authors:** Bowen Zheng, Ran Cheng
+
+**Abstract:** In the history of knowledge distillation, the focus has once shifted over time from logit-based to feature-based approaches. However, this transition has been revisited with the advent of Decoupled Knowledge Distillation (DKD), which re-emphasizes the importance of logit knowledge through advanced decoupling and weighting strategies. While DKD marks a significant advancement, its underlying mechanisms merit deeper exploration. As a response, we rethink DKD from a predictive distribution perspective. First, we introduce an enhanced version, the Generalized Decoupled Knowledge Distillation (GDKD) loss, which offers a more versatile method for decoupling logits. Then we pay particular attention to the teacher model's predictive distribution and its impact on the gradients of GDKD loss, uncovering two critical insights often overlooked: (1) the partitioning by the top logit considerably improves the interrelationship of non-top logits, and (2) amplifying the focus on the distillation loss of non-top logits enhances the knowledge extraction among them. Utilizing these insights, we further propose a streamlined GDKD algorithm with an efficient partition strategy to handle the multimodality of teacher models' predictive distribution. Our comprehensive experiments conducted on a variety of benchmarks, including CIFAR-100, ImageNet, Tiny-ImageNet, CUB-200-2011, and Cityscapes, demonstrate GDKD's superior performance over both the original DKD and other leading knowledge distillation methods. The code is available at https://github.com/ZaberKo/GDKD.
+
+**Comment:** Compression/Efficiency: advances logit-based knowledge distillation with generalized decoupling and analysis of teacher predictive distributions.
+
+**Relevance:** 9
+**Novelty:** 7
+
+---
+
+## 14. [SuperActivators: Only the Tail of the Distribution Contains Reliable Concept Signals](https://arxiv.org/abs/2512.05038) <a id="link14"></a>
+
+**ArXiv ID:** 2512.05038
+
+**Authors:** Cassandra Goldberg, Chaehyeon Kim, Adam Stein, Eric Wong
+
+**Abstract:** Concept vectors aim to enhance model interpretability by linking internal representations with human-understandable semantics, but their utility is often limited by noisy and inconsistent activations. In this work, we uncover a clear pattern within the noise, which we term the SuperActivator Mechanism: while in-concept and out-of-concept activations overlap considerably, the token activations in the extreme high tail of the in-concept distribution provide a reliable signal of concept presence. We demonstrate the generality of this mechanism by showing that SuperActivator tokens consistently outperform standard vector-based and prompting concept detection approaches, achieving up to a 14% higher F1 score across image and text modalities, model architectures, model layers, and concept extraction techniques. Finally, we leverage SuperActivator tokens to improve feature attributions for concepts.
+
+**Comment:** Representation Learning/Interpretability: identifies a robust tail-activation signal (SuperActivators) for concept detection, improving concept attribution across modalities and layers.
+
+**Relevance:** 9
+**Novelty:** 7
+
+---
+
+## 15. [GRASP: GRouped Activation Shared Parameterization for Parameter-Efficient Fine-Tuning and Robust Inference of Transformers](https://arxiv.org/abs/2512.04296) <a id="link15"></a>
+
+**ArXiv ID:** 2512.04296
+
+**Authors:** Malyaban Bal, Abhronil Sengupta
+
+**Abstract:** Parameter-efficient fine-tuning (PEFT) provides a scalable alternative to full-model adaptation by updating only a small subset of parameters in large pre-trained models. We introduce GRASP - GRouped Activation Shared Parameterization - a lightweight PEFT framework that partitions the D-dimensional token representations of selected layers into K << D groups and learns a shared scaling and shifting vector for each group. This grouped modulation reduces the number of trainable parameters significantly while preserving the ability of the model to learn task-specific features. Building on this formulation, we further propose StochGRASP, which learns Gaussian distributions as perturbations to the pre-trained weights rather than deterministic values. This probabilistic parameterization along with a noise-aware loss function formulation enables modelling hardware-level variability in programmed weights and significantly improves robustness under non-ideal inference conditions-an important requirement for deployment on edge-based emerging AI hardware. Across GLUE (RoBERTa-base & RoBERTa-large) and E2E NLG (GPT-2 Medium), GRASP matches or exceeds the performance of established PEFT methods while achieving an order of magnitude reduction in trainable parameters compared to LoRA and BitFit. Under varying levels of noise, StochGRASP consistently outperforms deterministic variants, demonstrating its suitability for energy-efficient and noise-prone hardware platforms.
+
+**Comment:** Compression/Efficiency: PEFT via grouped activation shared parameterization; stochastic variant improves robustness under hardware noise.
+
+**Relevance:** 9
+**Novelty:** 7
+
+---
+
+## 16. [On the Limits of Test-Time Compute: Sequential Reward Filtering for Better Inference](https://arxiv.org/abs/2512.04558) <a id="link16"></a>
+
+**ArXiv ID:** 2512.04558
+
+**Authors:** Yue Yu, Qiwei Di, Quanquan Gu, Dongruo Zhou
+
+**Abstract:** Test-time compute (TTC) has become an increasingly prominent paradigm for enhancing large language models (LLMs). Despite the empirical success of methods such as best-of-$n$ (BoN) sampling and sequential revision, their fundamental limits remain unclear. We address this gap by analyzing a mixture-of-reference policy model and proving that standard BoN is inherently suboptimal. To move closer to the optimal frontier, we study reward-filtered sequential inference, a simple procedure that selectively incorporates only high-reward generations into the context. This mechanism concentrates computation on superior policy candidates and suppresses inferior ones. On the theoretical side, we show that reward-filtered sequential inference yields strictly stronger guarantees than standard TTC paradigms. On the empirical side, we evaluate such an inference strategy across diverse benchmarks and observe consistent improvements over widely used approaches, demonstrating the practical effectiveness of our framework.
+
+**Comment:** Model Compression/Efficiency: theoretical and algorithmic advances in test-time compute via reward-filtered sequential inference with stronger guarantees than BoN.
+
+**Relevance:** 8
+**Novelty:** 8
+
+---
+
+## 17. [TV2TV: A Unified Framework for Interleaved Language and Video Generation](https://arxiv.org/abs/2512.05103) <a id="link17"></a>
+
+**ArXiv ID:** 2512.05103
+
+**Authors:** Xiaochuang Han, Youssef Emad, Melissa Hall, John Nguyen, Karthik Padthe, Liam Robbins, Amir Bar, Delong Chen, Michal Drozdzal, Maha Elbayad, Yushi Hu, Shang-Wen Li, Sreya Dutta Roy, Jakob Verbeek, XuDong Wang, Marjan Ghazvininejad, Luke Zettlemoyer, Emily Dinan
+
+**Abstract:** Video generation models are rapidly advancing, but can still struggle with complex video outputs that require significant semantic branching or repeated high-level reasoning about what should happen next. In this paper, we introduce a new class of omni video-text models that integrate ideas from recent LM reasoning advances to address this challenge. More specifically, we present TV2TV, a unified generative modeling framework which decomposes video generation into an interleaved text and video generation process. TV2TV jointly learns language modeling (next-token prediction) and video flow matching (next-frame prediction) using a Mixture-of-Transformers (MoT) architecture. At inference time, TV2TV decides when to alternate between generating text and video frames, allowing the model to "think in words" about subsequent content before ``acting in pixels'' to produce frames. This design offloads much of the responsibility for deciding what should happen next to the language modeling tower, enabling improved visual quality and prompt alignment of generated videos. It also enables fine-grained controllability, allowing users to modify the video generation trajectory through text interventions at any point in the process. In controlled experiments on video game data, TV2TV demonstrates substantial improvements in both visual quality and controllability. TV2TV also scales to natural videos, as we show by augmenting sports videos with interleaved natural language action descriptions using vision-language models (VLMs). Training TV2TV on this corpus yields strong visual quality and prompt alignment, showcasing the model's ability to reason about and generate complex real-world action sequences. Together, these results highlight TV2TV as a promising step toward video generation with open-ended textual reasoning and control.
+
+**Comment:** Model Architecture: introduces a Mixture-of-Transformers with interleaved text/video generation (conditional alternation) for unified modeling.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 18. [Mitigating the Curse of Detail: Scaling Arguments for Feature Learning and Sample Complexity](https://arxiv.org/abs/2512.04165) <a id="link18"></a>
+
+**ArXiv ID:** 2512.04165
+
+**Authors:** Noa Rubin, Orit Davidovich, Zohar Ringel
+
+**Abstract:** Two pressing topics in the theory of deep learning are the interpretation of feature learning mechanisms and the determination of implicit bias of networks in the rich regime. Current theories of rich feature learning effects revolve around networks with one or two trainable layers or deep linear networks. Furthermore, even under such limiting settings, predictions often appear in the form of high-dimensional non-linear equations, which require computationally intensive numerical solutions. Given the many details that go into defining a deep learning problem, this analytical complexity is a significant and often unavoidable challenge. Here, we propose a powerful heuristic route for predicting the data and width scales at which various patterns of feature learning emerge. This form of scale analysis is considerably simpler than such exact theories and reproduces the scaling exponents of various known results. In addition, we make novel predictions on complex toy architectures, such as three-layer non-linear networks and attention heads, thus extending the scope of first-principle theories of deep learning.
+
+**Comment:** Representation Learning/Training Dynamics: scaling analysis predicting when feature learning emerges in deep networks, including attention heads.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 19. [Mitigating Intra- and Inter-modal Forgetting in Continual Learning of Unified Multimodal Models](https://arxiv.org/abs/2512.03125) <a id="link19"></a>
+
+**ArXiv ID:** 2512.03125
+
+**Authors:** Xiwen Wei, Mustafa Munir, Radu Marculescu
+
+**Abstract:** Unified Multimodal Generative Models (UMGMs) unify visual understanding and image generation within a single autoregressive framework. However, their ability to continually learn new tasks is severely hindered by catastrophic forgetting, both within a modality (intra-modal) and across modalities (inter-modal). While intra-modal forgetting has been studied in prior continual learning (CL) work, inter-modal forgetting remains largely unexplored. In this paper, we identify and empirically validate this phenomenon in UMGMs and provide a theoretical explanation rooted in gradient conflict between modalities. To address both intra- and inter-modal forgetting, we propose Modality-Decoupled Experts (MoDE), a lightweight and scalable architecture that isolates modality-specific updates to mitigate the gradient conflict and leverages knowledge distillation to prevent catastrophic forgetting and preserve pre-trained capabilities. Unlike previous CL methods that remain modality-coupled and suffer from modality gradient conflict, MoDE explicitly decouples modalities to prevent interference. Experiments across diverse benchmarks demonstrate that MoDE significantly mitigates both inter- and intra-modal forgetting, outperforming prior CL baselines in unified multimodal generation settings. Codes will be publicly available: https://github.com/Christina200/MoDE-official.git
+
+**Comment:** Matches Model Architecture (MoE-style): modality-decoupled experts to mitigate gradient conflict; also provides analysis relevant to representation learning/training dynamics.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+# Paper Selection Prompt
+
+## System Prompt
+
+> You are a helpful paper reading assistant whose job is to read daily posts from ArXiv and identify a few papers that your friend will enjoy reading.
+> Your job is to carefully read the paper titles and abstracts below and find the ones that match the criteria below.
+
+## User Prompt
+
+> ## Instructions
+> 
+> Write the response in JSONL format with {ARXIVID, COMMENT, RELEVANCE, NOVELTY} on each line, one for each paper.
+> 
+> - ARXIVID: should be the ArXiv ID.
+> - COMMENT: should identify whether there is a criteria that match the paper very closely. These matches should not be based on general terms like "language modeling" or "advancements" and should specifically refer to a criterion. No need to mention the non-matching criteria.
+> - RELEVANCE: should be a score from 1-10.
+> - NOVELTY: should be a score from 1-10.
+> 
+> ## Scoring Criteria
+> 
+> > The "Relevance" score measures how closely the paper aligns with the core topics of the prompt.
+> > The "Novelty" score assesses the originality and impact of the paper.
+> > They are two **ORTHONORMAL** axes and **SHOULD NOT** be confused with each other.
+> 
+> ### Relevance Scoring
+> 
+> - Relevance 9-10 (Completely Relevant)
+>   - Focus: Fully aligned with core topics with no deviation, score the highest if contains relevant keywords in it.
+>   - Examples: Papers focused on foundational methods or theoretical research, whose titles contain topic keywords like "MoE".
+> 
+> - Relevance 7-8 (Relevant)
+>   - Focus: Retain a solid link to the main research area, though may touch on peripheral elements.
+>   - Examples: Papers research on the fundamental part of MoE through a less critical aspect like its behavior in GNN.
+> 
+> - Relevance 5-6 (Borderline)
+>   - Focus: Maintains a link to the core topic but also extends into at least one other domain/area beyond the primary focus.
+>   - Examples: Work referencing MoE centered on reinforcement learning.
+> 
+> - Relevance 3-4 (Irrelevant)
+>   - Focus: Largely outside our interests with no association to our topics.
+>   - Examples: Application-focused papers like using MoE to solve a problem in the real world.
+> 
+> - Relevance 1-2 (Ignore)
+>   - Focus: Purely unrelated to our topics. Completely a different domain.
+>   - **Exception**: If the paper hints at a cutting-edge, radically new direction that could eventually transform the primary domain, consider a score of 9–10 despite initial appearances. (Usually a very rare concept that belongs to the fundamental research)
+> 
+> ### Novelty Scoring
+> 
+> - Novelty 9-10 (Breakthrough)
+>   - Definition: Groundbreaking methods/theory introducing new directions or solving major challenges.
+>   - Examples: Entirely new paradigm for foundational models; a novel theory transforming representation learning.
+> 
+> - Novelty 7-8 (Improvements)
+>   - Definition: Substantial insights/enhancements, though not a full paradigm shift.
+>   - Examples: Modifications on existing methods yielding significantly better results.
+> 
+> - Novelty 5-6 (Borderline)
+>   - Definition: Incremental contributions with possible long-term benefits, not immediately transformative.
+>   - Examples: Moderately novel extension to an existing architecture; refining current methods without fundamentally altering them.
+> 
+> - Novelty 3-4 (Tangential)
+>   - Definition: Minor or domain-specific improvements with limited broader impact.
+>   - Examples: Slight modifications to known methods with strange motivation; purely engineering jobs like a new benchmark/dataset.
+> 
+> - Novelty 1-2 (Low)
+>   - Definition: Minimal originality, applying standard approaches without real innovation.
+>   - Examples: Using an off-the-shelf model without adding new insights; purely application-driven studies like finetuning a pretrained model using existing methods.
+> 
+> ## Papers
+> 
+> [PAPER LIST HERE]
+> 
+> ## Relevant Topics
+> 
+> Use the following relevance criteria to focus on foundational research. Keep **relevant** papers and filter out **irrelevant** ones. Avoid purely **application-driven** work.
+> 
+> 1. Model Architecture
+>    - Relevant: Mixture-of-Experts (MoE), Transformers, Conditional/Dynamic Networks, Autoencoders, analysis/innovations on existing architectures.
+>    - Irrelevant: Merely using existing architectures for a certain task without insights into the structure themselves.
+> 
+> 2. Model Compression and Efficiency
+>    - Relevant: Sparsity, pruning, quantization, low-rank approaches, cache, or other algorithmic/theoretical efficiency breakthroughs.
+>    - Irrelevant: Straightforward applications of existing compression methods to new tasks.
+> 
+> 3. High Performance Computing
+>    - Relevant: Algorithmic or systems-level innovations enabling training of large-scale models, distributed training techniques, memory optimization.
+>    - Irrelevant: Incremental engineering improvements without novel algorithmic contributions.
+> 
+> 4. Representation Learning
+>    - Relevant: Insights into how deep networks encode information, feature/dictionary learning, sparse/contrastive methods, training dynamics in neural networks.
+>    - Irrelevant: Standard applications of known techniques lacking new theoretical or methodological contributions.
+> 
+> **Keywords:**
+> 
+> - Relevant: Mixture of Experts (MoE), Representation Learning, Compression/Efficiency, Sparse/Sparsity, Pruning, Quantization, Low-rank, Foundation Model, etc.
+> - Irrelevant: Reinforcement Learning, Transfer Learning, Federated Learning, Online Learning, Diffusion Models, etc.
+> - Application: Image Segmentation, Medical Imaging, 3D Vision, Video Understanding, Information Retrieval, Summarization, Recommendation Systems, Machine Translation, Speech Recognition, Signal Processing, Spatial/Temporal Modeling, Time Series, Knowledge Graph, etc.

@@ -1,0 +1,970 @@
+<div style="display: flex; align-items: flex-start; justify-content: space-between; width: 100%;"><div style="width: 33.33%; text-align: left;"><a href="../18"><img src="../../../assets/nav/day/2025-06-23-prev.svg" alt="Previous Day 2025-06-18"></a></div><div style="width: 33.33%; text-align: center;"><a href=".."><img src="../../../assets/nav/day/2025-06-23-center.svg" alt="Monthly Overview 2025-06"></a></div><div style="width: 33.33%; text-align: right;"><a href="../24"><img src="../../../assets/nav/day/2025-06-23-next.svg" alt="Next Day 2025-06-24"></a></div></div>
+
+# Personalized Daily ArXiv Papers 2025-06-23
+
+| *[gpt-4o]*   | Prompt   | Completion   | Total   |
+|:------------:|:--------:|:------------:|:-------:|
+| **Token**    | 46938    | 6268         | 53206   |
+| **Cost**     | $0.12    | $0.06        | $0.18   |
+
+Total arXiv papers: 809
+
+Total scanned papers: 496
+
+Total relevant papers: 47
+
+**Table of contents with paper titles:**
+
+1. [Floating-Point Neural Networks Are Provably Robust Universal Approximators](#user-content-link1)
+**Authors:** Geonho Hwang, Wonyeol Lee, Yeachan Park, Sejun Park, Feras Saad
+
+2. [Drag-and-Drop LLMs: Zero-Shot Prompt-to-Weights](#user-content-link2)
+**Authors:** Zhiyuan Liang, Dongwen Tang, Yuhao Zhou, Xuanlei Zhao, Mingjia Shi, Wangbo Zhao, Zekai Li, Peihao Wang, Konstantin Sch\"urholt, Damian Borth, Michael M. Bronstein, Yang You, Zhangyang Wang, Kai Wang
+
+3. [On the Theoretical Understanding of Identifiable Sparse Autoencoders and Beyond](#user-content-link3)
+**Authors:** Jingyi Cui, Qi Zhang, Yifei Wang, Yisen Wang
+
+4. [Feedback-driven recurrent quantum neural network universality](#user-content-link4)
+**Authors:** Lukas Gonon, Rodrigo Mart\'inez-Pe\~na, Juan-Pablo Ortega
+
+5. [From Concepts to Components: Concept-Agnostic Attention Module Discovery in Transformers](#user-content-link5)
+**Authors:** Jingtong Su, Julia Kempe, Karen Ullrich
+
+6. [Machine Mental Imagery: Empower Multimodal Reasoning with Latent Visual Tokens](#user-content-link6)
+**Authors:** Zeyuan Yang, Xueyang Yu, Delin Chen, Maohao Shen, Chuang Gan
+
+7. [SlepNet: Spectral Subgraph Representation Learning for Neural Dynamics](#user-content-link7)
+**Authors:** Siddharth Viswanath, Rahul Singh, Yanlei Zhang, J. Adam Noah, Joy Hirsch, Smita Krishnaswamy
+
+8. [Revisiting LoRA through the Lens of Parameter Redundancy: Spectral Encoding Helps](#user-content-link8)
+**Authors:** Jiashun Cheng, Aochuan Chen, Nuo Chen, Ziqi Gao, Yuhan Li, Jia Li, Fugee Tsung
+
+9. [Variational Learning of Disentangled Representations](#user-content-link9)
+**Authors:** Yuli Slavutsky, Ozgur Beker, David Blei, Bianca Dumitrascu
+
+10. [Latent Concept Disentanglement in Transformer-based Language Models](#user-content-link10)
+**Authors:** Guan Zhe Hong, Bhavya Vasudeva, Vatsal Sharan, Cyrus Rashtchian, Prabhakar Raghavan, Rina Panigrahy
+
+11. [Joint Tensor-Train Parameterization for Efficient and Expressive Low-Rank Adaptation](#user-content-link11)
+**Authors:** Jun Qi, Chen-Yu Liu, Sabato Marco Siniscalchi, Chao-Han Huck Yang, Min-Hsiu Hsieh
+
+12. [Can structural correspondences ground real world representational content in Large Language Models?](#user-content-link12)
+**Authors:** Iwan Williams
+
+13. [Measuring (a Sufficient) World Model in LLMs: A Variance Decomposition Framework](#user-content-link13)
+**Authors:** Nadav Kunievsky, James A. Evans
+
+14. [BASE-Q: Bias and Asymmetric Scaling Enhanced Rotational Quantization for Large Language Models](#user-content-link14)
+**Authors:** Liulu He, Shenli Zhen, Karwei Sun, Yijiang Liu, Yufei Zhao, Chongkang Tan, Huanrui Yang, Yuan Du, Li Du
+
+15. [Formal Models of Active Learning from Contrastive Examples](#user-content-link15)
+**Authors:** Farnam Mansouri, Hans U. Simon, Adish Singla, Yuxin Chen, Sandra Zilles
+
+16. [Large Language Models are Near-Optimal Decision-Makers with a Non-Human Learning Behavior](#user-content-link16)
+**Authors:** Hao Li, Gengrui Zhang, Petter Holme, Shuyue Hu, Zhen Wang
+
+17. [EvoLM: In Search of Lost Language Model Training Dynamics](#user-content-link17)
+**Authors:** Zhenting Qi, Fan Nie, Alexandre Alahi, James Zou, Himabindu Lakkaraju, Yilun Du, Eric Xing, Sham Kakade, Hanlin Zhang
+
+18. [Generative Modeling of Full-Atom Protein Conformations using Latent Diffusion on Graph Embeddings](#user-content-link18)
+**Authors:** Aditya Sengar, Ali Hariri, Daniel Probst, Patrick Barth, Pierre Vandergheynst
+
+19. [Generating Directed Graphs with Dual Attention and Asymmetric Encoding](#user-content-link19)
+**Authors:** Alba Carballo-Castro, Manuel Madeira, Yiming Qin, Dorina Thanou, Pascal Frossard
+
+20. [BREAD: Branched Rollouts from Expert Anchors Bridge SFT & RL for Reasoning](#user-content-link20)
+**Authors:** Xuechen Zhang, Zijian Huang, Yingcong Li, Chenshun Ni, Jiasi Chen, Samet Oymak
+
+21. [Random feature approximation for general spectral methods](#user-content-link21)
+**Authors:** Mike Nguyen, Nicole M\"ucke
+
+22. [Mitigating Over-Squashing in Graph Neural Networks by Spectrum-Preserving Sparsification](#user-content-link22)
+**Authors:** Langzhang Liang, Fanchen Bu, Zixing Song, Zenglin Xu, Shirui Pan, Kijung Shin
+
+23. [One Period to Rule Them All: Identifying Critical Learning Periods in Deep Networks](#user-content-link23)
+**Authors:** Vinicius Yuiti Fukase, Heitor Gama, Barbara Bueno, Lucas Libanio, Anna Helena Reali Costa, Artur Jordao
+
+24. [Probing the Robustness of Large Language Models Safety to Latent Perturbations](#user-content-link24)
+**Authors:** Tianle Gu, Kexin Huang, Zongqi Wang, Yixu Wang, Jie Li, Yuanqi Yao, Yang Yao, Yujiu Yang, Yan Teng, Yingchun Wang
+
+25. [What Do Latent Action Models Actually Learn?](#user-content-link25)
+**Authors:** Chuheng Zhang, Tim Pearce, Pushi Zhang, Kaixin Wang, Xiaoyu Chen, Wei Shen, Li Zhao, Jiang Bian
+
+26. [A Scalable Factorization Approach for High-Order Structured Tensor Recovery](#user-content-link26)
+**Authors:** Zhen Qin, Michael B. Wakin, Zhihui Zhu
+
+27. [SLR: An Automated Synthesis Framework for Scalable Logical Reasoning](#user-content-link27)
+**Authors:** Lukas Helff, Ahmad Omar, Felix Friedrich, Wolfgang Stammer, Antonia W\"ust, Tim Woydt, Rupert Mitchell, Patrick Schramowski, Kristian Kersting
+
+28. [$\texttt{SPECS}$: Faster Test-Time Scaling through Speculative Drafts](#user-content-link28)
+**Authors:** Mert Cemri, Nived Rajaraman, Rishabh Tiwari, Xiaoxuan Liu, Kurt Keutzer, Ion Stoica, Kannan Ramchandran, Ahmad Beirami, Ziteng Sun
+
+29. [MEXA: Towards General Multimodal Reasoning with Dynamic Multi-Expert Aggregation](#user-content-link29)
+**Authors:** Shoubin Yu, Yue Zhang, Ziyang Wang, Jaehong Yoon, Mohit Bansal
+
+30. [Mathematical Proof as a Litmus Test: Revealing Failure Modes of Advanced Large Reasoning Models](#user-content-link30)
+**Authors:** Dadi Guo (May), Jiayu Liu (May), Zhiyuan Fan (May), Zhitao He (May), Haoran Li (May), Yumeng Wang (May), Yi R. (May), Fung
+
+31. [Subspace-Boosted Model Merging](#user-content-link31)
+**Authors:** Ronald Skorobogat, Karsten Roth, Mariana-Iuliana Georgescu, Zeynep Akata
+
+32. [LazyEviction: Lagged KV Eviction with Attention Pattern Observation for Efficient Long Reasoning](#user-content-link32)
+**Authors:** Haoyue Zhang, Hualei Zhang, Xiaosong Ma, Jie Zhang, Song Guo
+
+33. [T-SHRED: Symbolic Regression for Regularization and Model Discovery with Transformer Shallow Recurrent Decoders](#user-content-link33)
+**Authors:** Alexey Yermakov, David Zoro, Mars Liyao Gao, J. Nathan Kutz
+
+34. [FLAME: Towards Federated Fine-Tuning Large Language Models Through Adaptive SMoE](#user-content-link34)
+**Authors:** Khiem Le, Tuan Tran, Ting Hua, Nitesh V. Chawla
+
+35. [From Local Interactions to Global Operators: Scalable Gaussian Process Operator for Physical Systems](#user-content-link35)
+**Authors:** Sawan Kumar, Tapas Tripura, Rajdip Nayek, Souvik Chakraborty
+
+36. [MadaKV: Adaptive Modality-Perception KV Cache Eviction for Efficient Multimodal Long-Context Inference](#user-content-link36)
+**Authors:** Kunxi Li, Zhonghua Jiang, Zhouzhou Shen, Zhaode Wang, Chengfei Lv, Shengyu Zhang, Fan Wu, Fei Wu
+
+37. [NeuronSeek: On Stability and Expressivity of Task-driven Neurons](#user-content-link37)
+**Authors:** Hanyu Pei, Jing-Xiao Liao, Qibin Zhao, Ting Gao, Shijun Zhang, Xiaoge Zhang, Feng-Lei Fan
+
+38. [ML-Master: Towards AI-for-AI via Integration of Exploration and Reasoning](#user-content-link38)
+**Authors:** Zexi Liu, Yuzhu Cai, Xinyu Zhu, Yujie Zheng, Runkun Chen, Ying Wen, Yanfeng Wang, Weinan E, Siheng Chen
+
+39. [One Sample is Enough to Make Conformal Prediction Robust](#user-content-link39)
+**Authors:** Soroush H. Zargarbashi, Mohammad Sadegh Akhondzadeh, Aleksandar Bojchevski
+
+40. [Relational Deep Learning: Challenges, Foundations and Next-Generation Architectures](#user-content-link40)
+**Authors:** Vijay Prakash Dwivedi, Charilaos Kanatsoulis, Shenyang Huang, Jure Leskovec
+
+41. [CORAL: Disentangling Latent Representations in Long-Tailed Diffusion](#user-content-link41)
+**Authors:** Esther Rodriguez, Monica Welfert, Samuel McDowell, Nathan Stromberg, Julian Antolin Camarena, Lalitha Sankar
+
+42. [Metapath-based Hyperbolic Contrastive Learning for Heterogeneous Graph Embedding](#user-content-link42)
+**Authors:** Jongmin Park, Seunghoon Han, Won-Yong Shin, Sungsu Lim
+
+43. [Mesh-Informed Neural Operator : A Transformer Generative Approach](#user-content-link43)
+**Authors:** Yaozhong Shi, Zachary E. Ross, Domniki Asimaki, Kamyar Azizzadenesheli
+
+44. [MoR: Better Handling Diverse Queries with a Mixture of Sparse, Dense, and Human Retrievers](#user-content-link44)
+**Authors:** Jushaan Singh Kalra, Xinran Zhao, To Eun Kim, Fengyu Cai, Fernando Diaz, Tongshuang Wu
+
+45. [Simulating Correlated Electrons with Symmetry-Enforced Normalizing Flows](#user-content-link45)
+**Authors:** Dominic Schuh, Janik Kreit, Evan Berkowitz, Lena Funcke, Thomas Luu, Kim A. Nicoli, Marcel Rodekamp
+
+46. [Exploring and Improving Initialization for Deep Graph Neural Networks: A Signal Propagation Perspective](#user-content-link46)
+**Authors:** Senmiao Wang, Yupeng Chen, Yushun Zhang, Ruoyu Sun, Tian Ding
+
+47. [From General to Targeted Rewards: Surpassing GPT-4 in Open-Ended Long-Context Generation](#user-content-link47)
+**Authors:** Zhihan Guo, Jiele Wu, Wenqian Cui, Yifei Zhang, Minda Hu, Yufei Wang, Irwin King
+
+---
+
+## 1. [Floating-Point Neural Networks Are Provably Robust Universal Approximators](https://arxiv.org/abs/2506.16065) <a id="link1"></a>
+
+**ArXiv ID:** 2506.16065
+
+**Authors:** Geonho Hwang, Wonyeol Lee, Yeachan Park, Sejun Park, Feras Saad
+
+**Abstract:** The classical universal approximation (UA) theorem for neural networks establishes mild conditions under which a feedforward neural network can approximate a continuous function $f$ with arbitrary accuracy. A recent result shows that neural networks also enjoy a more general interval universal approximation (IUA) theorem, in the sense that the abstract interpretation semantics of the network using the interval domain can approximate the direct image map of $f$ (i.e., the result of applying $f$ to a set of inputs) with arbitrary accuracy. These theorems, however, rest on the unrealistic assumption that the neural network computes over infinitely precise real numbers, whereas their software implementations in practice compute over finite-precision floating-point numbers. An open question is whether the IUA theorem still holds in the floating-point setting.   This paper introduces the first IUA theorem for floating-point neural networks that proves their remarkable ability to perfectly capture the direct image map of any rounded target function $f$, showing no limits exist on their expressiveness. Our IUA theorem in the floating-point setting exhibits material differences from the real-valued setting, which reflects the fundamental distinctions between these two computational models. This theorem also implies surprising corollaries, which include (i) the existence of provably robust floating-point neural networks; and (ii) the computational completeness of the class of straight-line programs that use only floating-point additions and multiplications for the class of all floating-point programs that halt.
+
+**Comment:** The paper introduces a new IUA theorem for floating-point neural networks, providing theoretical insights into their approximation capabilities, which is relevant to foundational research in neural networks.
+
+**Relevance:** 9
+**Novelty:** 9
+
+---
+
+## 2. [Drag-and-Drop LLMs: Zero-Shot Prompt-to-Weights](https://arxiv.org/abs/2506.16406) <a id="link2"></a>
+
+**ArXiv ID:** 2506.16406
+
+**Authors:** Zhiyuan Liang, Dongwen Tang, Yuhao Zhou, Xuanlei Zhao, Mingjia Shi, Wangbo Zhao, Zekai Li, Peihao Wang, Konstantin Sch\"urholt, Damian Borth, Michael M. Bronstein, Yang You, Zhangyang Wang, Kai Wang
+
+**Abstract:** Modern Parameter-Efficient Fine-Tuning (PEFT) methods such as low-rank adaptation (LoRA) reduce the cost of customizing large language models (LLMs), yet still require a separate optimization run for every downstream dataset. We introduce \textbf{Drag-and-Drop LLMs (\textit{DnD})}, a prompt-conditioned parameter generator that eliminates per-task training by mapping a handful of unlabeled task prompts directly to LoRA weight updates. A lightweight text encoder distills each prompt batch into condition embeddings, which are then transformed by a cascaded hyper-convolutional decoder into the full set of LoRA matrices. Once trained in a diverse collection of prompt-checkpoint pairs, DnD produces task-specific parameters in seconds, yielding i) up to \textbf{12,000$\times$} lower overhead than full fine-tuning, ii) average gains up to \textbf{30\%} in performance over the strongest training LoRAs on unseen common-sense reasoning, math, coding, and multimodal benchmarks, and iii) robust cross-domain generalization despite never seeing the target data or labels. Our results demonstrate that prompt-conditioned parameter generation is a viable alternative to gradient-based adaptation for rapidly specializing LLMs. Our project is available at \href{https://jerryliang24.github.io/DnD}{https://jerryliang24.github.io/DnD}.
+
+**Comment:** The paper introduces a novel approach to parameter-efficient fine-tuning of LLMs using prompt-conditioned parameter generation, which is relevant to model compression and efficiency.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 3. [On the Theoretical Understanding of Identifiable Sparse Autoencoders and Beyond](https://arxiv.org/abs/2506.15963) <a id="link3"></a>
+
+**ArXiv ID:** 2506.15963
+
+**Authors:** Jingyi Cui, Qi Zhang, Yifei Wang, Yisen Wang
+
+**Abstract:** Sparse autoencoders (SAEs) have emerged as a powerful tool for interpreting features learned by large language models (LLMs). It aims to recover complex superposed polysemantic features into interpretable monosemantic ones through feature reconstruction via sparsely activated neural networks. Despite the wide applications of SAEs, it remains unclear under what conditions an SAE can fully recover the ground truth monosemantic features from the superposed polysemantic ones. In this paper, through theoretical analysis, we for the first time propose the necessary and sufficient conditions for identifiable SAEs (SAEs that learn unique and ground truth monosemantic features), including 1) extreme sparsity of the ground truth feature, 2) sparse activation of SAEs, and 3) enough hidden dimensions of SAEs. Moreover, when the identifiable conditions are not fully met, we propose a reweighting strategy to improve the identifiability. Specifically, following the theoretically suggested weight selection principle, we prove that the gap between the loss functions of SAE reconstruction and monosemantic feature reconstruction can be narrowed, so that the reweighted SAEs have better reconstruction of the ground truth monosemantic features than the uniformly weighted ones. In experiments, we validate our theoretical findings and show that our weighted SAE significantly improves feature monosemanticity and interpretability.
+
+**Comment:** The paper provides theoretical insights into sparse autoencoders, focusing on conditions for identifiability and improving feature reconstruction, which is relevant to representation learning.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 4. [Feedback-driven recurrent quantum neural network universality](https://arxiv.org/abs/2506.16332) <a id="link4"></a>
+
+**ArXiv ID:** 2506.16332
+
+**Authors:** Lukas Gonon, Rodrigo Mart\'inez-Pe\~na, Juan-Pablo Ortega
+
+**Abstract:** Quantum reservoir computing uses the dynamics of quantum systems to process temporal data, making it particularly well-suited for learning with noisy intermediate-scale quantum devices. Early experimental proposals, such as the restarting and rewinding protocols, relied on repeating previous steps of the quantum map to avoid backaction. However, this approach compromises real-time processing and increases computational overhead. Recent developments have introduced alternative protocols that address these limitations. These include online, mid-circuit measurement, and feedback techniques, which enable real-time computation while preserving the input history. Among these, the feedback protocol stands out for its ability to process temporal information with comparatively fewer components. Despite this potential advantage, the theoretical foundations of feedback-based quantum reservoir computing remain underdeveloped, particularly with regard to the universality and the approximation capabilities of this approach. This paper addresses this issue by presenting a recurrent quantum neural network architecture that extends a class of existing feedforward models to a dynamic, feedback-driven reservoir setting. We provide theoretical guarantees for variational recurrent quantum neural networks, including approximation bounds and universality results. Notably, our analysis demonstrates that the model is universal with linear readouts, making it both powerful and experimentally accessible. These results pave the way for practical and theoretically grounded quantum reservoir computing with real-time processing capabilities.
+
+**Comment:** The paper presents a recurrent quantum neural network architecture with theoretical guarantees, which is relevant to emerging trends in quantum computing and neural networks.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 5. [From Concepts to Components: Concept-Agnostic Attention Module Discovery in Transformers](https://arxiv.org/abs/2506.17052) <a id="link5"></a>
+
+**ArXiv ID:** 2506.17052
+
+**Authors:** Jingtong Su, Julia Kempe, Karen Ullrich
+
+**Abstract:** Transformers have achieved state-of-the-art performance across language and vision tasks. This success drives the imperative to interpret their internal mechanisms with the dual goals of enhancing performance and improving behavioral control. Attribution methods help advance interpretability by assigning model outputs associated with a target concept to specific model components. Current attribution research primarily studies multi-layer perceptron neurons and addresses relatively simple concepts such as factual associations (e.g., Paris is located in France). This focus tends to overlook the impact of the attention mechanism and lacks a unified approach for analyzing more complex concepts. To fill these gaps, we introduce Scalable Attention Module Discovery (SAMD), a concept-agnostic method for mapping arbitrary, complex concepts to specific attention heads of general transformer models. We accomplish this by representing each concept as a vector, calculating its cosine similarity with each attention head, and selecting the TopK-scoring heads to construct the concept-associated attention module. We then propose Scalar Attention Module Intervention (SAMI), a simple strategy to diminish or amplify the effects of a concept by adjusting the attention module using only a single scalar parameter. Empirically, we demonstrate SAMD on concepts of varying complexity, and visualize the locations of their corresponding modules. Our results demonstrate that module locations remain stable before and after LLM post-training, and confirm prior work on the mechanics of LLM multilingualism. Through SAMI, we facilitate jailbreaking on HarmBench (+72.7%) by diminishing "safety" and improve performance on the GSM8K benchmark (+1.6%) by amplifying "reasoning". Lastly, we highlight the domain-agnostic nature of our approach by suppressing the image classification accuracy of vision transformers on ImageNet.
+
+**Comment:** The paper introduces a concept-agnostic attention module discovery method in transformers, relevant to model architecture and interpretability.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 6. [Machine Mental Imagery: Empower Multimodal Reasoning with Latent Visual Tokens](https://arxiv.org/abs/2506.17218) <a id="link6"></a>
+
+**ArXiv ID:** 2506.17218
+
+**Authors:** Zeyuan Yang, Xueyang Yu, Delin Chen, Maohao Shen, Chuang Gan
+
+**Abstract:** Vision-language models (VLMs) excel at multimodal understanding, yet their text-only decoding forces them to verbalize visual reasoning, limiting performance on tasks that demand visual imagination. Recent attempts train VLMs to render explicit images, but the heavy image-generation pre-training often hinders the reasoning ability. Inspired by the way humans reason with mental imagery-the internal construction and manipulation of visual cues-we investigate whether VLMs can reason through interleaved multimodal trajectories without producing explicit images. To this end, we present a Machine Mental Imagery framework, dubbed as Mirage, which augments VLM decoding with latent visual tokens alongside ordinary text. Concretely, whenever the model chooses to ``think visually'', it recasts its hidden states as next tokens, thereby continuing a multimodal trajectory without generating pixel-level images. Begin by supervising the latent tokens through distillation from ground-truth image embeddings, we then switch to text-only supervision to make the latent trajectory align tightly with the task objective. A subsequent reinforcement learning stage further enhances the multimodal reasoning capability. Experiments on diverse benchmarks demonstrate that Mirage unlocks stronger multimodal reasoning without explicit image generation.
+
+**Comment:** The paper introduces a novel framework for vision-language models that augments decoding with latent visual tokens, aligning with representation learning by exploring how models encode and manipulate information without explicit image generation.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 7. [SlepNet: Spectral Subgraph Representation Learning for Neural Dynamics](https://arxiv.org/abs/2506.16602) <a id="link7"></a>
+
+**ArXiv ID:** 2506.16602
+
+**Authors:** Siddharth Viswanath, Rahul Singh, Yanlei Zhang, J. Adam Noah, Joy Hirsch, Smita Krishnaswamy
+
+**Abstract:** Graph neural networks have been useful in machine learning on graph-structured data, particularly for node classification and some types of graph classification tasks. However, they have had limited use in representing patterning of signals over graphs. Patterning of signals over graphs and in subgraphs carries important information in many domains including neuroscience. Neural signals are spatiotemporally patterned, high dimensional and difficult to decode. Graph signal processing and associated GCN models utilize the graph Fourier transform and are unable to efficiently represent spatially or spectrally localized signal patterning on graphs. Wavelet transforms have shown promise here, but offer non-canonical representations and cannot be tightly confined to subgraphs. Here we propose SlepNet, a novel GCN architecture that uses Slepian bases rather than graph Fourier harmonics. In SlepNet, the Slepian harmonics optimally concentrate signal energy on specifically relevant subgraphs that are automatically learned with a mask. Thus, they can produce canonical and highly resolved representations of neural activity, focusing energy of harmonics on areas of the brain which are activated. We evaluated SlepNet across three fMRI datasets, spanning cognitive and visual tasks, and two traffic dynamics datasets, comparing its performance against conventional GNNs and graph signal processing constructs. SlepNet outperforms the baselines in all datasets. Moreover, the extracted representations of signal patterns from SlepNet offers more resolution in distinguishing between similar patterns, and thus represent brain signaling transients as informative trajectories. Here we have shown that these extracted trajectory representations can be used for other downstream untrained tasks. Thus we establish that SlepNet is useful both for prediction and representation learning in spatiotemporal data.
+
+**Comment:** The paper introduces SlepNet, a novel GCN architecture using Slepian bases for spectral subgraph representation learning, contributing to representation learning and architectural innovation.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 8. [Revisiting LoRA through the Lens of Parameter Redundancy: Spectral Encoding Helps](https://arxiv.org/abs/2506.16787) <a id="link8"></a>
+
+**ArXiv ID:** 2506.16787
+
+**Authors:** Jiashun Cheng, Aochuan Chen, Nuo Chen, Ziqi Gao, Yuhan Li, Jia Li, Fugee Tsung
+
+**Abstract:** Low-Rank Adaptation (LoRA) has emerged as a prominent technique for fine-tuning large foundation models. Despite its successes, the substantial parameter redundancy, which limits the capacity and efficiency of LoRA, has been recognized as a bottleneck. In this work, we systematically investigate the impact of redundancy in fine-tuning LoRA and reveal that reducing density redundancy does not degrade expressiveness. Based on this insight, we introduce \underline{S}pectral-\underline{e}ncoding \underline{L}ow-\underline{R}ank \underline{A}daptation (SeLoRA), which harnesses the robust expressiveness of spectral bases to re-parameterize LoRA from a sparse spectral subspace. Designed with simplicity, SeLoRA enables seamless integration with various LoRA variants for performance boosting, serving as a scalable plug-and-play framework. Extensive experiments substantiate that SeLoRA achieves greater efficiency with fewer parameters, delivering superior performance enhancements over strong baselines on various downstream tasks, including commonsense reasoning, math reasoning, and code generation.
+
+**Comment:** The paper introduces SeLoRA, a novel approach to reduce parameter redundancy in LoRA, contributing to model compression and efficiency.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 9. [Variational Learning of Disentangled Representations](https://arxiv.org/abs/2506.17182) <a id="link9"></a>
+
+**ArXiv ID:** 2506.17182
+
+**Authors:** Yuli Slavutsky, Ozgur Beker, David Blei, Bianca Dumitrascu
+
+**Abstract:** Disentangled representations enable models to separate factors of variation that are shared across experimental conditions from those that are condition-specific. This separation is essential in domains such as biomedical data analysis, where generalization to new treatments, patients, or species depends on isolating stable biological signals from context-dependent effects. While extensions of the variational autoencoder (VAE) framework have been proposed to address this problem, they frequently suffer from leakage between latent representations, limiting their ability to generalize to unseen conditions. Here, we introduce DISCoVeR, a new variational framework that explicitly separates condition-invariant and condition-specific factors. DISCoVeR integrates three key components: (i) a dual-latent architecture that models shared and specific factors separately; (ii) two parallel reconstructions that ensure both representations remain informative; and (iii) a novel max-min objective that encourages clean separation without relying on handcrafted priors, while making only minimal assumptions. Theoretically, we show that this objective maximizes data likelihood while promoting disentanglement, and that it admits a unique equilibrium. Empirically, we demonstrate that DISCoVeR achieves improved disentanglement on synthetic datasets, natural images, and single-cell RNA-seq data. Together, these results establish DISCoVeR as a principled approach for learning disentangled representations in multi-condition settings.
+
+**Comment:** The paper introduces a new variational framework for disentangled representations, which is relevant to representation learning.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 10. [Latent Concept Disentanglement in Transformer-based Language Models](https://arxiv.org/abs/2506.16975) <a id="link10"></a>
+
+**ArXiv ID:** 2506.16975
+
+**Authors:** Guan Zhe Hong, Bhavya Vasudeva, Vatsal Sharan, Cyrus Rashtchian, Prabhakar Raghavan, Rina Panigrahy
+
+**Abstract:** When large language models (LLMs) use in-context learning (ICL) to solve a new task, they seem to grasp not only the goal of the task but also core, latent concepts in the demonstration examples. This begs the question of whether transformers represent latent structures as part of their computation or whether they take shortcuts to solve the problem. Prior mechanistic work on ICL does not address this question because it does not sufficiently examine the relationship between the learned representation and the latent concept, and the considered problem settings often involve only single-step reasoning. In this work, we examine how transformers disentangle and use latent concepts. We show that in 2-hop reasoning tasks with a latent, discrete concept, the model successfully identifies the latent concept and does step-by-step concept composition. In tasks parameterized by a continuous latent concept, we find low-dimensional subspaces in the representation space where the geometry mimics the underlying parameterization. Together, these results refine our understanding of ICL and the representation of transformers, and they provide evidence for highly localized structures in the model that disentangle latent concepts in ICL tasks.
+
+**Comment:** The paper examines latent concept disentanglement in transformer-based language models, which is relevant to representation learning and LLM behavior.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 11. [Joint Tensor-Train Parameterization for Efficient and Expressive Low-Rank Adaptation](https://arxiv.org/abs/2506.16456) <a id="link11"></a>
+
+**ArXiv ID:** 2506.16456
+
+**Authors:** Jun Qi, Chen-Yu Liu, Sabato Marco Siniscalchi, Chao-Han Huck Yang, Min-Hsiu Hsieh
+
+**Abstract:** Low-Rank Adaptation (LoRA) is widely recognized for its parameter-efficient fine-tuning of large-scale neural models. However, standard LoRA independently optimizes low-rank matrices, which inherently limits its expressivity and generalization capabilities. While classical tensor-train (TT) decomposition can be separately employed on individual LoRA matrices, this work demonstrates that the classical TT-based approach neither significantly improves parameter efficiency nor achieves substantial performance gains. This paper proposes TensorGuide, a novel tensor-train-guided adaptation framework to overcome these limitations. TensorGuide generates two correlated low-rank LoRA matrices through a unified TT structure driven by controlled Gaussian noise. The resulting joint TT representation inherently provides structured, low-rank adaptations, significantly enhancing expressivity, generalization, and parameter efficiency without increasing the number of trainable parameters. Theoretically, we justify these improvements through neural tangent kernel analyses, demonstrating superior optimization dynamics and enhanced generalization. Extensive experiments on quantum dot classification and GPT-2 fine-tuning benchmarks demonstrate that TensorGuide-based LoRA consistently outperforms standard LoRA and TT-LoRA, achieving improved accuracy and scalability with fewer parameters.
+
+**Comment:** The paper proposes a novel tensor-train-guided adaptation framework for low-rank adaptation, relevant to model compression through low-rank approaches.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 12. [Can structural correspondences ground real world representational content in Large Language Models?](https://arxiv.org/abs/2506.16370) <a id="link12"></a>
+
+**ArXiv ID:** 2506.16370
+
+**Authors:** Iwan Williams
+
+**Abstract:** Large Language Models (LLMs) such as GPT-4 produce compelling responses to a wide range of prompts. But their representational capacities are uncertain. Many LLMs have no direct contact with extra-linguistic reality: their inputs, outputs and training data consist solely of text, raising the questions (1) can LLMs represent anything and (2) if so, what? In this paper, I explore what it would take to answer these questions according to a structural-correspondence based account of representation, and make an initial survey of this evidence. I argue that the mere existence of structural correspondences between LLMs and worldly entities is insufficient to ground representation of those entities. However, if these structural correspondences play an appropriate role - they are exploited in a way that explains successful task performance - then they could ground real world contents. This requires overcoming a challenge: the text-boundedness of LLMs appears, on the face of it, to prevent them engaging in the right sorts of tasks.
+
+**Comment:** The paper explores the representational capacities of LLMs, which aligns with the interest in theoretical insights into LLM behavior.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 13. [Measuring (a Sufficient) World Model in LLMs: A Variance Decomposition Framework](https://arxiv.org/abs/2506.16584) <a id="link13"></a>
+
+**ArXiv ID:** 2506.16584
+
+**Authors:** Nadav Kunievsky, James A. Evans
+
+**Abstract:** Understanding whether large language models (LLMs) possess a world model-a structured understanding of the world that supports generalization beyond surface-level patterns-is central to assessing their reliability, especially in high-stakes applications. We propose a formal framework for evaluating whether an LLM exhibits a sufficiently robust world model, defined as producing consistent outputs across semantically equivalent prompts while distinguishing between prompts that express different intents. We introduce a new evaluation approach to measure this that decomposes model response variability into three components: variability due to user purpose, user articulation, and model instability. An LLM with a strong world model should attribute most of the variability in its responses to changes in foundational purpose rather than superficial changes in articulation. This approach allows us to quantify how much of a model's behavior is semantically grounded rather than driven by model instability or alternative wording. We apply this framework to evaluate LLMs across diverse domains. Our results show how larger models attribute a greater share of output variability to changes in user purpose, indicating a more robust world model. This improvement is not uniform, however: larger models do not consistently outperform smaller ones across all domains, and their advantage in robustness is often modest. These findings highlight the importance of moving beyond accuracy-based benchmarks toward semantic diagnostics that more directly assess the structure and stability of a model's internal understanding of the world.
+
+**Comment:** The paper introduces a framework to evaluate the robustness of LLMs' world models, which aligns with the interest in theoretical insights into LLM behavior.
+
+**Relevance:** 9
+**Novelty:** 7
+
+---
+
+## 14. [BASE-Q: Bias and Asymmetric Scaling Enhanced Rotational Quantization for Large Language Models](https://arxiv.org/abs/2506.15689) <a id="link14"></a>
+
+**ArXiv ID:** 2506.15689
+
+**Authors:** Liulu He, Shenli Zhen, Karwei Sun, Yijiang Liu, Yufei Zhao, Chongkang Tan, Huanrui Yang, Yuan Du, Li Du
+
+**Abstract:** Rotations have become essential to state-of-the-art quantization pipelines for large language models (LLMs) by effectively smoothing outliers in weights and activations. However, further optimizing the rotation parameters offers only limited performance gains and introduces significant training overhead: due to rotation parameter sharing, full-model must be loaded simultaneously to enable backpropagation, resulting in substantial memory consumption and limited practical utility. In this work, we identify two fundamental limitations of current rotational quantization methods: (i) rotation fails to align channel means, resulting in wider quantization bounds and increased rounding errors; and (ii) rotation makes the activation distribution more Gaussian-like, increasing energy loss caused by clipping errors. To address these issues, we introduce \textbf{BASE-Q}, a simple yet powerful approach that combines bias correction and asymmetric scaling to effectively reduce rounding and clipping errors. Furthermore, BASE-Q enables blockwise optimization, eliminating the need for memory-intensive full-model backpropagation. Extensive experiments on various LLMs and benchmarks demonstrate the effectiveness of BASE-Q, narrowing the accuracy gap to full-precision models by 50.5\%, 42.9\%, and 29.2\% compared to QuaRot, SpinQuant, and OSTQuant, respectively. The code will be released soon.
+
+**Comment:** The paper introduces a new quantization method for LLMs, which is relevant to model compression and efficiency improvements.
+
+**Relevance:** 9
+**Novelty:** 7
+
+---
+
+## 15. [Formal Models of Active Learning from Contrastive Examples](https://arxiv.org/abs/2506.15893) <a id="link15"></a>
+
+**ArXiv ID:** 2506.15893
+
+**Authors:** Farnam Mansouri, Hans U. Simon, Adish Singla, Yuxin Chen, Sandra Zilles
+
+**Abstract:** Machine learning can greatly benefit from providing learning algorithms with pairs of contrastive training examples -- typically pairs of instances that differ only slightly, yet have different class labels. Intuitively, the difference in the instances helps explain the difference in the class labels. This paper proposes a theoretical framework in which the effect of various types of contrastive examples on active learners is studied formally. The focus is on the sample complexity of learning concept classes and how it is influenced by the choice of contrastive examples. We illustrate our results with geometric concept classes and classes of Boolean functions. Interestingly, we reveal a connection between learning from contrastive examples and the classical model of self-directed learning.
+
+**Comment:** The paper proposes a theoretical framework for learning from contrastive examples, relevant to representation learning.
+
+**Relevance:** 9
+**Novelty:** 7
+
+---
+
+## 16. [Large Language Models are Near-Optimal Decision-Makers with a Non-Human Learning Behavior](https://arxiv.org/abs/2506.16163) <a id="link16"></a>
+
+**ArXiv ID:** 2506.16163
+
+**Authors:** Hao Li, Gengrui Zhang, Petter Holme, Shuyue Hu, Zhen Wang
+
+**Abstract:** Human decision-making belongs to the foundation of our society and civilization, but we are on the verge of a future where much of it will be delegated to artificial intelligence. The arrival of Large Language Models (LLMs) has transformed the nature and scope of AI-supported decision-making; however, the process by which they learn to make decisions, compared to humans, remains poorly understood. In this study, we examined the decision-making behavior of five leading LLMs across three core dimensions of real-world decision-making: uncertainty, risk, and set-shifting. Using three well-established experimental psychology tasks designed to probe these dimensions, we benchmarked LLMs against 360 newly recruited human participants. Across all tasks, LLMs often outperformed humans, approaching near-optimal performance. Moreover, the processes underlying their decisions diverged fundamentally from those of humans. On the one hand, our finding demonstrates the ability of LLMs to manage uncertainty, calibrate risk, and adapt to changes. On the other hand, this disparity highlights the risks of relying on them as substitutes for human judgment, calling for further inquiry.
+
+**Comment:** The paper provides insights into the decision-making behavior of LLMs, which aligns with the interest in understanding LLM behavior and interpretability.
+
+**Relevance:** 9
+**Novelty:** 7
+
+---
+
+## 17. [EvoLM: In Search of Lost Language Model Training Dynamics](https://arxiv.org/abs/2506.16029) <a id="link17"></a>
+
+**ArXiv ID:** 2506.16029
+
+**Authors:** Zhenting Qi, Fan Nie, Alexandre Alahi, James Zou, Himabindu Lakkaraju, Yilun Du, Eric Xing, Sham Kakade, Hanlin Zhang
+
+**Abstract:** Modern language model (LM) training has been divided into multiple stages, making it difficult for downstream developers to evaluate the impact of design choices made at each stage. We present EvoLM, a model suite that enables systematic and transparent analysis of LMs' training dynamics across pre-training, continued pre-training, supervised fine-tuning, and reinforcement learning. By training over 100 LMs with 1B and 4B parameters from scratch, we rigorously evaluate both upstream (language modeling) and downstream (problem-solving) reasoning capabilities, including considerations of both in-domain and out-of-domain generalization. Key insights highlight the diminishing returns from excessive pre-training and post-training, the importance and practices of mitigating forgetting during domain-specific continued pre-training, the crucial role of continued pre-training in bridging pre-training and post-training phases, and various intricate trade-offs when configuring supervised fine-tuning and reinforcement learning. To facilitate open research and reproducibility, we release all pre-trained and post-trained models, training datasets for all stages, and our entire training and evaluation pipeline.
+
+**Comment:** The paper presents EvoLM, a model suite for analyzing language model training dynamics, providing insights into LLM behavior and training processes.
+
+**Relevance:** 9
+**Novelty:** 7
+
+---
+
+## 18. [Generative Modeling of Full-Atom Protein Conformations using Latent Diffusion on Graph Embeddings](https://arxiv.org/abs/2506.17064) <a id="link18"></a>
+
+**ArXiv ID:** 2506.17064
+
+**Authors:** Aditya Sengar, Ali Hariri, Daniel Probst, Patrick Barth, Pierre Vandergheynst
+
+**Abstract:** Generating diverse, all-atom conformational ensembles of dynamic proteins such as G-protein-coupled receptors (GPCRs) is critical for understanding their function, yet most generative models simplify atomic detail or ignore conformational diversity altogether. We present latent diffusion for full protein generation (LD-FPG), a framework that constructs complete all-atom protein structures, including every side-chain heavy atom, directly from molecular dynamics (MD) trajectories. LD-FPG employs a Chebyshev graph neural network (ChebNet) to obtain low-dimensional latent embeddings of protein conformations, which are processed using three pooling strategies: blind, sequential and residue-based. A diffusion model trained on these latent representations generates new samples that a decoder, optionally regularized by dihedral-angle losses, maps back to Cartesian coordinates. Using D2R-MD, a 2-microsecond MD trajectory (12 000 frames) of the human dopamine D2 receptor in a membrane environment, the sequential and residue-based pooling strategy reproduces the reference ensemble with high structural fidelity (all-atom lDDT of approximately 0.7; C-alpha-lDDT of approximately 0.8) and recovers backbone and side-chain dihedral-angle distributions with a Jensen-Shannon divergence of less than 0.03 compared to the MD data. LD-FPG thereby offers a practical route to system-specific, all-atom ensemble generation for large proteins, providing a promising tool for structure-based therapeutic design on complex, dynamic targets. The D2R-MD dataset and our implementation are freely available to facilitate further research.
+
+**Comment:** The paper presents a generative model for protein conformations using latent diffusion, which is relevant to AI for Science with a focus on foundational research in molecular modeling.
+
+**Relevance:** 8
+**Novelty:** 8
+
+---
+
+## 19. [Generating Directed Graphs with Dual Attention and Asymmetric Encoding](https://arxiv.org/abs/2506.16404) <a id="link19"></a>
+
+**ArXiv ID:** 2506.16404
+
+**Authors:** Alba Carballo-Castro, Manuel Madeira, Yiming Qin, Dorina Thanou, Pascal Frossard
+
+**Abstract:** Directed graphs naturally model systems with asymmetric, ordered relationships, essential to applications in biology, transportation, social networks, and visual understanding. Generating such graphs enables tasks such as simulation, data augmentation and novel instance discovery; however, directed graph generation remains underexplored. We identify two key factors limiting progress in this direction: first, modeling edge directionality introduces a substantially larger dependency space, making the underlying distribution harder to learn; second, the absence of standardized benchmarks hinders rigorous evaluation. Addressing the former requires more expressive models that are sensitive to directional topologies. We propose Directo, the first generative model for directed graphs built upon the discrete flow matching framework. Our approach combines: (i) principled positional encodings tailored to asymmetric pairwise relations, (ii) a dual-attention mechanism capturing both incoming and outgoing dependencies, and (iii) a robust, discrete generative framework. To support evaluation, we introduce a benchmark suite covering synthetic and real-world datasets. It shows that our method performs strongly across diverse settings and even competes with specialized models for particular classes, such as directed acyclic graphs. Our results highlight the effectiveness and generality of our approach, establishing a solid foundation for future research in directed graph generation.
+
+**Comment:** The paper presents a novel generative model for directed graphs using dual attention and asymmetric encoding, relevant to model architecture innovations.
+
+**Relevance:** 8
+**Novelty:** 8
+
+---
+
+## 20. [BREAD: Branched Rollouts from Expert Anchors Bridge SFT & RL for Reasoning](https://arxiv.org/abs/2506.17211) <a id="link20"></a>
+
+**ArXiv ID:** 2506.17211
+
+**Authors:** Xuechen Zhang, Zijian Huang, Yingcong Li, Chenshun Ni, Jiasi Chen, Samet Oymak
+
+**Abstract:** Small language models (SLMs) struggle to learn complex reasoning behaviors, especially when high-quality traces are scarce or difficult to learn from. The standard training approach combines a supervised fine-tuning (SFT) stage, often to distill capabilities of a larger model, followed by a reinforcement learning (RL)stage such as Group Relative Policy Optimization (GRPO). In this paper, we investigate the fundamental limitations of this SFT + RL paradigm and propose methods to overcome them. Under a suitable theoretical model, we demonstrate that the SFT + RL strategy can fail completely when (1) the expert's traces are too difficult for the small model to express, or (2) the small model's initialization has exponentially small likelihood of success. To address these, we introduce BREAD: a GRPO variant that unifies the SFT and RL stages via partial expert guidance and branched rollouts. When self-generated traces fail, BREAD adaptively inserts short expert prefixes/hints, allowing the small model to complete the rest of the reasoning path, and ensuring that each update includes at least one successful trace. This mechanism both densifies the reward signal and induces a natural learning curriculum. BREAD requires fewer than 40% of ground-truth traces, consistently outperforming standard GRPO while speeding up the training by about 3 times. Importantly, we demonstrate that BREAD helps the model solve problems that are otherwise unsolvable by the SFT + RL strategy, highlighting how branched rollouts and expert guidance can substantially boost SLM reasoning.
+
+**Comment:** The paper addresses limitations in the SFT + RL paradigm for small language models, proposing a novel method that could impact LLM training strategies.
+
+**Relevance:** 8
+**Novelty:** 8
+
+---
+
+## 21. [Random feature approximation for general spectral methods](https://arxiv.org/abs/2506.16283) <a id="link21"></a>
+
+**ArXiv ID:** 2506.16283
+
+**Authors:** Mike Nguyen, Nicole M\"ucke
+
+**Abstract:** Random feature approximation is arguably one of the most widely used techniques for kernel methods in large-scale learning algorithms. In this work, we analyze the generalization properties of random feature methods, extending previous results for Tikhonov regularization to a broad class of spectral regularization techniques. This includes not only explicit methods but also implicit schemes such as gradient descent and accelerated algorithms like the Heavy-Ball and Nesterov method. Through this framework, we enable a theoretical analysis of neural networks and neural operators through the lens of the Neural Tangent Kernel (NTK) approach trained via gradient descent. For our estimators we obtain optimal learning rates over regularity classes (even for classes that are not included in the reproducing kernel Hilbert space), which are defined through appropriate source conditions. This improves or completes previous results obtained in related settings for specific kernel algorithms.
+
+**Comment:** The paper discusses random feature approximation and its generalization properties, which is relevant to representation learning and theoretical insights into neural networks.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 22. [Mitigating Over-Squashing in Graph Neural Networks by Spectrum-Preserving Sparsification](https://arxiv.org/abs/2506.16110) <a id="link22"></a>
+
+**ArXiv ID:** 2506.16110
+
+**Authors:** Langzhang Liang, Fanchen Bu, Zixing Song, Zenglin Xu, Shirui Pan, Kijung Shin
+
+**Abstract:** The message-passing paradigm of Graph Neural Networks often struggles with exchanging information across distant nodes typically due to structural bottlenecks in certain graph regions, a limitation known as \textit{over-squashing}. To reduce such bottlenecks, \textit{graph rewiring}, which modifies graph topology, has been widely used. However, existing graph rewiring techniques often overlook the need to preserve critical properties of the original graph, e.g., \textit{spectral properties}. Moreover, many approaches rely on increasing edge count to improve connectivity, which introduces significant computational overhead and exacerbates the risk of over-smoothing. In this paper, we propose a novel graph rewiring method that leverages \textit{spectrum-preserving} graph \textit{sparsification}, for mitigating over-squashing. Our method generates graphs with enhanced connectivity while maintaining sparsity and largely preserving the original graph spectrum, effectively balancing structural bottleneck reduction and graph property preservation. Experimental results validate the effectiveness of our approach, demonstrating its superiority over strong baseline methods in classification accuracy and retention of the Laplacian spectrum.
+
+**Comment:** The paper proposes a method for mitigating over-squashing in GNNs using spectrum-preserving sparsification, which is relevant to model architecture and sparsity.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 23. [One Period to Rule Them All: Identifying Critical Learning Periods in Deep Networks](https://arxiv.org/abs/2506.15954) <a id="link23"></a>
+
+**ArXiv ID:** 2506.15954
+
+**Authors:** Vinicius Yuiti Fukase, Heitor Gama, Barbara Bueno, Lucas Libanio, Anna Helena Reali Costa, Artur Jordao
+
+**Abstract:** Critical Learning Periods comprehend an important phenomenon involving deep learning, where early epochs play a decisive role in the success of many training recipes, such as data augmentation. Existing works confirm the existence of this phenomenon and provide useful insights. However, the literature lacks efforts to precisely identify when critical periods occur. In this work, we fill this gap by introducing a systematic approach for identifying critical periods during the training of deep neural networks, focusing on eliminating computationally intensive regularization techniques and effectively applying mechanisms for reducing computational costs, such as data pruning. Our method leverages generalization prediction mechanisms to pinpoint critical phases where training recipes yield maximum benefits to the predictive ability of models. By halting resource-intensive recipes beyond these periods, we significantly accelerate the learning phase and achieve reductions in training time, energy consumption, and CO$_2$ emissions. Experiments on standard architectures and benchmarks confirm the effectiveness of our method. Specifically, we achieve significant milestones by reducing the training time of popular architectures by up to 59.67%, leading to a 59.47% decrease in CO$_2$ emissions and a 60% reduction in financial costs, without compromising performance. Our work enhances understanding of training dynamics and paves the way for more sustainable and efficient deep learning practices, particularly in resource-constrained environments. In the era of the race for foundation models, we believe our method emerges as a valuable framework. The repository is available at https://github.com/baunilhamarga/critical-periods
+
+**Comment:** The paper identifies critical learning periods in deep networks, which is relevant to training dynamics and representation learning.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 24. [Probing the Robustness of Large Language Models Safety to Latent Perturbations](https://arxiv.org/abs/2506.16078) <a id="link24"></a>
+
+**ArXiv ID:** 2506.16078
+
+**Authors:** Tianle Gu, Kexin Huang, Zongqi Wang, Yixu Wang, Jie Li, Yuanqi Yao, Yang Yao, Yujiu Yang, Yan Teng, Yingchun Wang
+
+**Abstract:** Safety alignment is a key requirement for building reliable Artificial General Intelligence. Despite significant advances in safety alignment, we observe that minor latent shifts can still trigger unsafe responses in aligned models. We argue that this stems from the shallow nature of existing alignment methods, which focus on surface-level refusal behaviors without sufficiently altering internal representations. Consequently, small shifts in hidden activations can re-trigger harmful behaviors embedded in the latent space. To explore the robustness of safety alignment to latent perturbations, we introduce a probing method that measures the Negative Log-Likelihood of the original response generated by the model. This probe quantifies local sensitivity in the latent space, serving as a diagnostic tool for identifying vulnerable directions. Based on this signal, we construct effective jailbreak trajectories, giving rise to the Activation Steering Attack (ASA). More importantly, these insights offer a principled foundation for improving alignment robustness. To this end, we introduce Layer-wise Adversarial Patch Training~(LAPT), a fine-tuning strategy that inject controlled perturbations into hidden representations during training. Experimental results highlight that LAPT strengthen alignment robustness without compromising general capabilities. Our findings reveal fundamental flaws in current alignment paradigms and call for representation-level training strategies that move beyond surface-level behavior supervision. Codes and results are available at https://github.com/Carol-gutianle/LatentSafety.
+
+**Comment:** The paper discusses safety alignment in LLMs, focusing on robustness to latent perturbations, which is relevant to theoretical insights into LLM behavior.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 25. [What Do Latent Action Models Actually Learn?](https://arxiv.org/abs/2506.15691) <a id="link25"></a>
+
+**ArXiv ID:** 2506.15691
+
+**Authors:** Chuheng Zhang, Tim Pearce, Pushi Zhang, Kaixin Wang, Xiaoyu Chen, Wei Shen, Li Zhao, Jiang Bian
+
+**Abstract:** Latent action models (LAMs) aim to learn action-relevant changes from unlabeled videos by compressing changes between frames as latents. However, differences between video frames can be caused by controllable changes as well as exogenous noise, leading to an important concern -- do latents capture the changes caused by actions or irrelevant noise? This paper studies this issue analytically, presenting a linear model that encapsulates the essence of LAM learning, while being tractable.This provides several insights, including connections between LAM and principal component analysis (PCA), desiderata of the data-generating policy, and justification of strategies to encourage learning controllable changes using data augmentation, data cleaning, and auxiliary action-prediction. We also provide illustrative results based on numerical simulation, shedding light on the specific structure of observations, actions, and noise in data that influence LAM learning.
+
+**Comment:** The paper provides theoretical insights into latent action models, connecting them to principal component analysis and discussing data augmentation strategies, which aligns with representation learning.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 26. [A Scalable Factorization Approach for High-Order Structured Tensor Recovery](https://arxiv.org/abs/2506.16032) <a id="link26"></a>
+
+**ArXiv ID:** 2506.16032
+
+**Authors:** Zhen Qin, Michael B. Wakin, Zhihui Zhu
+
+**Abstract:** Tensor decompositions, which represent an $N$-order tensor using approximately $N$ factors of much smaller dimensions, can significantly reduce the number of parameters. This is particularly beneficial for high-order tensors, as the number of entries in a tensor grows exponentially with the order. Consequently, they are widely used in signal recovery and data analysis across domains such as signal processing, machine learning, and quantum physics. A computationally and memory-efficient approach to these problems is to optimize directly over the factors using local search algorithms such as gradient descent, a strategy known as the factorization approach in matrix and tensor optimization. However, the resulting optimization problems are highly nonconvex due to the multiplicative interactions between factors, posing significant challenges for convergence analysis and recovery guarantees.   In this paper, we present a unified framework for the factorization approach to solving various tensor decomposition problems. Specifically, by leveraging the canonical form of tensor decompositions--where most factors are constrained to be orthonormal to mitigate scaling ambiguity--we apply Riemannian gradient descent (RGD) to optimize these orthonormal factors on the Stiefel manifold. Under a mild condition on the loss function, we establish a Riemannian regularity condition for the factorized objective and prove that RGD converges to the ground-truth tensor at a linear rate when properly initialized. Notably, both the initialization requirement and the convergence rate scale polynomially rather than exponentially with $N$, improving upon existing results for Tucker and tensor-train format tensors.
+
+**Comment:** The paper presents a scalable factorization approach for tensor recovery, which is relevant to model compression and efficiency through tensor decompositions.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 27. [SLR: An Automated Synthesis Framework for Scalable Logical Reasoning](https://arxiv.org/abs/2506.15787) <a id="link27"></a>
+
+**ArXiv ID:** 2506.15787
+
+**Authors:** Lukas Helff, Ahmad Omar, Felix Friedrich, Wolfgang Stammer, Antonia W\"ust, Tim Woydt, Rupert Mitchell, Patrick Schramowski, Kristian Kersting
+
+**Abstract:** We introduce SLR, an end-to-end framework for systematic evaluation and training of Large Language Models (LLMs) via Scalable Logical Reasoning. Given a user's task specification, SLR enables scalable, automated synthesis of inductive reasoning tasks with precisely controlled difficulty. For each task, SLR synthesizes (i) a latent ground-truth rule, (ii) an executable validation program used by a symbolic judge to deterministically verify model outputs, and (iii) an instruction prompt for the reasoning task. Using SLR, we create SLR-Bench, a benchmark comprising over 19k prompts spanning 20 curriculum levels that progressively increase in relational, arithmetic, and recursive complexity. Large-scale evaluation reveals that contemporary LLMs readily produce syntactically valid rules, yet often fail at correct logical inference. Recent reasoning LLMs do somewhat better, but incur substantial increases in test-time compute, sometimes exceeding 15k completion tokens. Finally, logic-tuning via SLR doubles Llama-3-8B accuracy on SLR-Bench, achieving parity with Gemini-Flash-Thinking at a fraction of computational cost. SLR is fully automated, requires no human annotation, ensures dataset novelty, and offers a scalable environment for probing and advancing LLMs' reasoning capabilities.
+
+**Comment:** The paper introduces a framework for scalable logical reasoning in LLMs, which is relevant to understanding and improving LLM behavior.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 28. [$\texttt{SPECS}$: Faster Test-Time Scaling through Speculative Drafts](https://arxiv.org/abs/2506.15733) <a id="link28"></a>
+
+**ArXiv ID:** 2506.15733
+
+**Authors:** Mert Cemri, Nived Rajaraman, Rishabh Tiwari, Xiaoxuan Liu, Kurt Keutzer, Ion Stoica, Kannan Ramchandran, Ahmad Beirami, Ziteng Sun
+
+**Abstract:** Scaling test-time compute has driven the recent advances in the reasoning capabilities of large language models (LLMs), typically by allocating additional computation for more thorough exploration. However, increased compute often comes at the expense of higher user-facing latency, directly impacting user experience. Current test-time scaling methods primarily optimize for accuracy based on total compute resources (FLOPS), often overlooking latency constraints. To address this gap, we propose $\texttt{SPECS}$, a latency-aware test-time scaling method inspired by speculative decoding. $\texttt{SPECS}$~uses a smaller, faster model to generate candidate sequences efficiently, and evaluates these candidates using signals from both a larger target model and a dedicated reward model. We introduce new integration strategies, including reward-guided soft verification and a reward-based deferral mechanism. Empirical results on MATH500, AMC23 and OlympiadBench datasets show that $\texttt{SPECS}$~matches or surpasses beam search accuracy while reducing latency by up to $\sim$19.1\%. Our theoretical analysis shows that our algorithm converges to the solution of a KL-regularized reinforcement learning objective with increasing beam width.
+
+**Comment:** The paper proposes a latency-aware test-time scaling method for LLMs, which is relevant to model efficiency and compression.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 29. [MEXA: Towards General Multimodal Reasoning with Dynamic Multi-Expert Aggregation](https://arxiv.org/abs/2506.17113) <a id="link29"></a>
+
+**ArXiv ID:** 2506.17113
+
+**Authors:** Shoubin Yu, Yue Zhang, Ziyang Wang, Jaehong Yoon, Mohit Bansal
+
+**Abstract:** Combining pre-trained expert models offers substantial potential for scalable multimodal reasoning, but building a unified framework remains challenging due to the increasing diversity of input modalities and task complexity. For instance, medical diagnosis requires precise reasoning over structured clinical tables, while financial forecasting depends on interpreting plot-based data to make informed predictions. To tackle this challenge, we introduce MEXA, a training-free framework that performs modality- and task-aware aggregation of multiple expert models to enable effective multimodal reasoning across diverse and distinct domains. MEXA dynamically selects expert models based on the input modality and the task-specific reasoning demands (i.e., skills). Each expert model, specialized in a modality task pair, generates interpretable textual reasoning outputs. MEXA then aggregates and reasons over these outputs using a Large Reasoning Model (LRM) to produce the final answer. This modular design allows flexible and transparent multimodal reasoning across diverse domains without additional training overhead. We extensively evaluate our approach on diverse multimodal benchmarks, including Video Reasoning, Audio Reasoning, 3D Understanding, and Medical QA. MEXA consistently delivers performance improvements over strong multimodal baselines, highlighting the effectiveness and broad applicability of our expert-driven selection and aggregation in diverse multimodal reasoning tasks.
+
+**Comment:** The paper introduces a framework for multimodal reasoning with dynamic multi-expert aggregation, which is relevant to model architecture innovations.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 30. [Mathematical Proof as a Litmus Test: Revealing Failure Modes of Advanced Large Reasoning Models](https://arxiv.org/abs/2506.17114) <a id="link30"></a>
+
+**ArXiv ID:** 2506.17114
+
+**Authors:** Dadi Guo (May), Jiayu Liu (May), Zhiyuan Fan (May), Zhitao He (May), Haoran Li (May), Yumeng Wang (May), Yi R. (May), Fung
+
+**Abstract:** Large reasoning models (e.g., R1, o3) have demonstrated remarkable mathematical problem-solving abilities. However, the high reported accuracy of these advanced models on popular datasets, reliance on purely numerical evaluation and potential benchmark leakage, often masks their true reasoning shortcomings. To address this, we propose leveraging the inherent rigor and methodological complexity of mathematical proofs as a diagnostic tool to expose these hidden failures. Specifically, we introduce the RFMDataset (Reveal Failure Modes), a collection of 200 diverse mathematical proof problems, and thoroughly evaluate advanced models' performance on it. Our in-depth analysis of their failures uncovers 10 fine-grained error types, which shows fundamental limitations in current large reasoning models: 1) large reasoning models grapple profoundly with mathematical proofs, with some generating entirely correct proofs for less than 20% of problems and failing even on basic ones; 2) models exhibit a diverse spectrum of reasoning failures, prominently demonstrating the lack of guarantees for the correctness and rigor of single-step reasoning; and 3) models show hallucination and incompleteness during the reasoning process. Our findings reveal that models' self-reflection is insufficient to resolve the current logical dilemmas, necessitating formalized and fine-grained logical training.
+
+**Comment:** The paper uses mathematical proofs to reveal failure modes in large reasoning models, providing insights into LLM behavior and limitations.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 31. [Subspace-Boosted Model Merging](https://arxiv.org/abs/2506.16506) <a id="link31"></a>
+
+**ArXiv ID:** 2506.16506
+
+**Authors:** Ronald Skorobogat, Karsten Roth, Mariana-Iuliana Georgescu, Zeynep Akata
+
+**Abstract:** Model merging enables the combination of multiple specialized expert models into a single model capable of performing multiple tasks. However, the benefits of merging an increasing amount of specialized experts generally lead to diminishing returns and reduced overall performance gains. In this work, we offer an explanation and analysis from a task arithmetic perspective; revealing that as the merging process (across numerous existing merging methods) continues for more and more experts, the associated task vector space experiences rank collapse. To mitigate this issue, we introduce Subspace Boosting, which operates on the singular value decomposed task vector space and maintains task vector ranks. Subspace Boosting raises merging efficacy for up to 20 expert models by large margins of more than 10% when evaluated on vision benchmarks. Moreover, we propose employing Higher-Order Generalized Singular Value Decomposition to further quantify task similarity, offering a new interpretable perspective on model merging.
+
+**Comment:** The paper introduces Subspace Boosting for model merging, which is relevant to representation learning and model architecture as it provides insights into task vector space and merging efficacy.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 32. [LazyEviction: Lagged KV Eviction with Attention Pattern Observation for Efficient Long Reasoning](https://arxiv.org/abs/2506.15969) <a id="link32"></a>
+
+**ArXiv ID:** 2506.15969
+
+**Authors:** Haoyue Zhang, Hualei Zhang, Xiaosong Ma, Jie Zhang, Song Guo
+
+**Abstract:** Large Language Models (LLMs) exhibit enhanced reasoning capabilities by employing Chain-of-Thought (CoT). However, the extended reasoning sequences introduce significant GPU memory overhead due to increased key-value (KV) cache size, particularly in tasks requiring long reasoning sequences, such as mathematics and programming. Existing KV cache compression methods mitigate memory bottlenecks but struggle in long reasoning tasks. In this paper, we analyze attention patterns in reasoning tasks and reveal a Token Importance Recurrence phenomenon: a large proportion of tokens receive renewed attention after multiple decoding steps, which is failed to capture by existing works and may lead to unpredictable eviction on such periodically critical tokens. To address this, we propose LazyEviction, a lagged KV eviction framework designed to maintain reasoning performance while reducing KV memory. LazyEviction is an Observation Window-based Lagged Eviction Mechanism retaining latent recurring tokens by performing lagged evictions across decoding steps, which contains two key components: (1) Recurrence Interval Tracking for capturing temporal variations in token importance, and (2) an Maximum Recurrence Interval-Centric Eviction Policy that prioritizes eviction based on tokens' recurrence patterns. Extensive experiments demonstrate that LazyEviction reduces KV cache size by 50% while maintaining comparable accuracy on mathematics reasoning datasets, outperforming state-of-the-art methods. Our findings highlight the importance of preserving recurring tokens, which are critical for maintaining knowledge continuity in multi-step reasoning tasks.
+
+**Comment:** LazyEviction addresses KV cache size in LLMs, relevant to model compression and efficiency, particularly in maintaining reasoning performance.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 33. [T-SHRED: Symbolic Regression for Regularization and Model Discovery with Transformer Shallow Recurrent Decoders](https://arxiv.org/abs/2506.15881) <a id="link33"></a>
+
+**ArXiv ID:** 2506.15881
+
+**Authors:** Alexey Yermakov, David Zoro, Mars Liyao Gao, J. Nathan Kutz
+
+**Abstract:** SHallow REcurrent Decoders (SHRED) are effective for system identification and forecasting from sparse sensor measurements. Such models are light-weight and computationally efficient, allowing them to be trained on consumer laptops. SHRED-based models rely on Recurrent Neural Networks (RNNs) and a simple Multi-Layer Perceptron (MLP) for the temporal encoding and spatial decoding respectively. Despite the relatively simple structure of SHRED, they are able to predict chaotic dynamical systems on different physical, spatial, and temporal scales directly from a sparse set of sensor measurements. In this work, we improve SHRED by leveraging transformers (T-SHRED) for the temporal encoding which improves performance on next-step state prediction on large datasets. We also introduce a sparse identification of nonlinear dynamics (SINDy) attention mechanism into T-SHRED to perform symbolic regression directly on the latent space as part of the model regularization architecture. Symbolic regression improves model interpretability by learning and regularizing the dynamics of the latent space during training. We analyze the performance of T-SHRED on three different dynamical systems ranging from low-data to high-data regimes. We observe that SINDy attention T-SHRED accurately predicts future frames based on an interpretable symbolic model across all tested datasets.
+
+**Comment:** T-SHRED introduces transformers for temporal encoding and symbolic regression for model regularization, relevant to model architecture and representation learning.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 34. [FLAME: Towards Federated Fine-Tuning Large Language Models Through Adaptive SMoE](https://arxiv.org/abs/2506.16600) <a id="link34"></a>
+
+**ArXiv ID:** 2506.16600
+
+**Authors:** Khiem Le, Tuan Tran, Ting Hua, Nitesh V. Chawla
+
+**Abstract:** Existing resource-adaptive LoRA federated fine-tuning methods enable clients to fine-tune models using compressed versions of global LoRA matrices, in order to accommodate various compute resources across clients. This compression requirement will lead to suboptimal performance due to information loss. To address this, we propose FLAME, a novel federated learning framework based on the Sparse Mixture-of-Experts (SMoE) architecture. Unlike prior approaches, FLAME retains full (uncompressed) global LoRA matrices and achieves client-side adaptability by varying the number of activated experts per client. However, incorporating SMoE into federated learning introduces unique challenges, specifically, the mismatch in output magnitude from partial expert activation and the imbalance in expert training quality across clients. FLAME tackles these challenges through a lightweight rescaling mechanism and an activation-aware aggregation scheme. Empirical results across diverse computational settings demonstrate that FLAME consistently outperforms existing methods, providing a robust and effective solution for resource-adaptive federated learning.
+
+**Comment:** FLAME introduces a federated learning framework using Sparse Mixture-of-Experts, relevant to model architecture and compression.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 35. [From Local Interactions to Global Operators: Scalable Gaussian Process Operator for Physical Systems](https://arxiv.org/abs/2506.15906) <a id="link35"></a>
+
+**ArXiv ID:** 2506.15906
+
+**Authors:** Sawan Kumar, Tapas Tripura, Rajdip Nayek, Souvik Chakraborty
+
+**Abstract:** Operator learning offers a powerful paradigm for solving parametric partial differential equations (PDEs), but scaling probabilistic neural operators such as the recently proposed Gaussian Processes Operators (GPOs) to high-dimensional, data-intensive regimes remains a significant challenge. In this work, we introduce a novel, scalable GPO, which capitalizes on sparsity, locality, and structural information through judicious kernel design. Addressing the fundamental limitation of cubic computational complexity, our method leverages nearest-neighbor-based local kernel approximations in the spatial domain, sparse kernel approximation in the parameter space, and structured Kronecker factorizations to enable tractable inference on large-scale datasets and high-dimensional input. While local approximations often introduce accuracy trade-offs due to limited kernel interactions, we overcome this by embedding operator-aware kernel structures and employing expressive, task-informed mean functions derived from neural operator architectures. Through extensive evaluations on a broad class of nonlinear PDEs - including Navier-Stokes, wave advection, Darcy flow, and Burgers' equations - we demonstrate that our framework consistently achieves high accuracy across varying discretization scales. These results underscore the potential of our approach to bridge the gap between scalability and fidelity in GPO, offering a compelling foundation for uncertainty-aware modeling in complex physical systems.
+
+**Comment:** The paper introduces a novel scalable Gaussian Process Operator leveraging sparsity and structural information, relevant to model compression and efficiency.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 36. [MadaKV: Adaptive Modality-Perception KV Cache Eviction for Efficient Multimodal Long-Context Inference](https://arxiv.org/abs/2506.15724) <a id="link36"></a>
+
+**ArXiv ID:** 2506.15724
+
+**Authors:** Kunxi Li, Zhonghua Jiang, Zhouzhou Shen, Zhaode Wang, Chengfei Lv, Shengyu Zhang, Fan Wu, Fei Wu
+
+**Abstract:** This paper introduces MadaKV, a modality-adaptive key-value (KV) cache eviction strategy designed to enhance the efficiency of multimodal large language models (MLLMs) in long-context inference. In multimodal scenarios, attention heads exhibit varying preferences for different modalities, resulting in significant disparities in modality importance across attention heads. Traditional KV cache eviction methods, which are tailored for unimodal settings, fail to capture modality-specific information, thereby yielding suboptimal performance. MadaKV addresses these challenges through two key components: modality preference adaptation and hierarchical compression compensation. By dynamically sensing modality information within attention heads and adaptively retaining critical tokens, MadaKV achieves substantial reductions in KV cache memory footprint and model inference decoding latency (1.3 to 1.5 times improvement) while maintaining high accuracy across various multimodal long-context tasks. Extensive experiments on representative MLLMs and the MileBench benchmark demonstrate the effectiveness of MadaKV compared to existing KV cache eviction methods.
+
+**Comment:** The paper introduces MadaKV, a KV cache eviction strategy for multimodal LLMs, relevant to model compression and efficiency.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 37. [NeuronSeek: On Stability and Expressivity of Task-driven Neurons](https://arxiv.org/abs/2506.15715) <a id="link37"></a>
+
+**ArXiv ID:** 2506.15715
+
+**Authors:** Hanyu Pei, Jing-Xiao Liao, Qibin Zhao, Ting Gao, Shijun Zhang, Xiaoge Zhang, Feng-Lei Fan
+
+**Abstract:** Drawing inspiration from our human brain that designs different neurons for different tasks, recent advances in deep learning have explored modifying a network's neurons to develop so-called task-driven neurons. Prototyping task-driven neurons (referred to as NeuronSeek) employs symbolic regression (SR) to discover the optimal neuron formulation and construct a network from these optimized neurons. Along this direction, this work replaces symbolic regression with tensor decomposition (TD) to discover optimal neuronal formulations, offering enhanced stability and faster convergence. Furthermore, we establish theoretical guarantees that modifying the aggregation functions with common activation functions can empower a network with a fixed number of parameters to approximate any continuous function with an arbitrarily small error, providing a rigorous mathematical foundation for the NeuronSeek framework. Extensive empirical evaluations demonstrate that our NeuronSeek-TD framework not only achieves superior stability, but also is competitive relative to the state-of-the-art models across diverse benchmarks. The code is available at https://github.com/HanyuPei22/NeuronSeek.
+
+**Comment:** The paper introduces NeuronSeek, a framework for task-driven neurons using tensor decomposition, relevant to representation learning and model architecture.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 38. [ML-Master: Towards AI-for-AI via Integration of Exploration and Reasoning](https://arxiv.org/abs/2506.16499) <a id="link38"></a>
+
+**ArXiv ID:** 2506.16499
+
+**Authors:** Zexi Liu, Yuzhu Cai, Xinyu Zhu, Yujie Zheng, Runkun Chen, Ying Wen, Yanfeng Wang, Weinan E, Siheng Chen
+
+**Abstract:** As AI capabilities advance toward and potentially beyond human-level performance, a natural transition emerges where AI-driven development becomes more efficient than human-centric approaches. A promising pathway toward this transition lies in AI-for-AI (AI4AI), which leverages AI techniques to automate and optimize the design, training, and deployment of AI systems themselves. While LLM-based agents have shown the potential to realize AI4AI, they are often unable to fully leverage the experience accumulated by agents during the exploration of solutions in the reasoning process, leading to inefficiencies and suboptimal performance. To address this limitation, we propose ML-Master, a novel AI4AI agent that seamlessly integrates exploration and reasoning by employing a selectively scoped memory mechanism. This approach allows ML-Master to efficiently combine diverse insights from parallel solution trajectories with analytical reasoning, guiding further exploration without overwhelming the agent with excessive context. We evaluate ML-Master on the MLE-Bench, where it achieves a 29.3% average medal rate, significantly surpassing existing methods, particularly in medium-complexity tasks, while accomplishing this superior performance within a strict 12-hour time constraint-half the 24-hour limit used by previous baselines. These results demonstrate ML-Master's potential as a powerful tool for advancing AI4AI.
+
+**Comment:** The paper discusses a novel AI4AI agent that integrates exploration and reasoning, which is an emerging trend in AI development, potentially leading to foundational changes in AI system design.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 39. [One Sample is Enough to Make Conformal Prediction Robust](https://arxiv.org/abs/2506.16553) <a id="link39"></a>
+
+**ArXiv ID:** 2506.16553
+
+**Authors:** Soroush H. Zargarbashi, Mohammad Sadegh Akhondzadeh, Aleksandar Bojchevski
+
+**Abstract:** Given any model, conformal prediction (CP) returns prediction sets guaranteed to include the true label with high adjustable probability. Robust CP (RCP) extends this to inputs with worst-case noise. A well-established approach is to use randomized smoothing for RCP since it is applicable to any black-box model and provides smaller sets compared to deterministic methods. However, current smoothing-based RCP requires many model forward passes per each input which is computationally expensive. We show that conformal prediction attains some robustness even with a forward pass on a single randomly perturbed input. Using any binary certificate we propose a single sample robust CP (RCP1). Our approach returns robust sets with smaller average set size compared to SOTA methods which use many (e.g. around 100) passes per input. Our key insight is to certify the conformal prediction procedure itself rather than individual scores. Our approach is agnostic to the setup (classification and regression). We further extend our approach to smoothing-based robust conformal risk control.
+
+**Comment:** The paper proposes a novel approach to robust conformal prediction, which aligns with model compression and efficiency by reducing computational costs.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 40. [Relational Deep Learning: Challenges, Foundations and Next-Generation Architectures](https://arxiv.org/abs/2506.16654) <a id="link40"></a>
+
+**ArXiv ID:** 2506.16654
+
+**Authors:** Vijay Prakash Dwivedi, Charilaos Kanatsoulis, Shenyang Huang, Jure Leskovec
+
+**Abstract:** Graph machine learning has led to a significant increase in the capabilities of models that learn on arbitrary graph-structured data and has been applied to molecules, social networks, recommendation systems, and transportation, among other domains. Data in multi-tabular relational databases can also be constructed as 'relational entity graphs' for Relational Deep Learning (RDL) - a new blueprint that enables end-to-end representation learning without traditional feature engineering. Compared to arbitrary graph-structured data, relational entity graphs have key properties: (i) their structure is defined by primary-foreign key relationships between entities in different tables, (ii) the structural connectivity is a function of the relational schema defining a database, and (iii) the graph connectivity is temporal and heterogeneous in nature. In this paper, we provide a comprehensive review of RDL by first introducing the representation of relational databases as relational entity graphs, and then reviewing public benchmark datasets that have been used to develop and evaluate recent GNN-based RDL models. We discuss key challenges including large-scale multi-table integration and the complexities of modeling temporal dynamics and heterogeneous data, while also surveying foundational neural network methods and recent architectural advances specialized for relational entity graphs. Finally, we explore opportunities to unify these distinct modeling challenges, highlighting how RDL converges multiple sub-fields in graph machine learning towards the design of foundation models that can transform the processing of relational data.
+
+**Comment:** The paper provides a comprehensive review of relational deep learning, discussing foundational challenges and architectural advances, which aligns with model architecture and emerging trends.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 41. [CORAL: Disentangling Latent Representations in Long-Tailed Diffusion](https://arxiv.org/abs/2506.15933) <a id="link41"></a>
+
+**ArXiv ID:** 2506.15933
+
+**Authors:** Esther Rodriguez, Monica Welfert, Samuel McDowell, Nathan Stromberg, Julian Antolin Camarena, Lalitha Sankar
+
+**Abstract:** Diffusion models have achieved impressive performance in generating high-quality and diverse synthetic data. However, their success typically assumes a class-balanced training distribution. In real-world settings, multi-class data often follow a long-tailed distribution, where standard diffusion models struggle -- producing low-diversity and lower-quality samples for tail classes. While this degradation is well-documented, its underlying cause remains poorly understood. In this work, we investigate the behavior of diffusion models trained on long-tailed datasets and identify a key issue: the latent representations (from the bottleneck layer of the U-Net) for tail class subspaces exhibit significant overlap with those of head classes, leading to feature borrowing and poor generation quality. Importantly, we show that this is not merely due to limited data per class, but that the relative class imbalance significantly contributes to this phenomenon. To address this, we propose COntrastive Regularization for Aligning Latents (CORAL), a contrastive latent alignment framework that leverages supervised contrastive losses to encourage well-separated latent class representations. Experiments demonstrate that CORAL significantly improves both the diversity and visual quality of samples generated for tail classes relative to state-of-the-art methods.
+
+**Comment:** The paper investigates diffusion models in long-tailed distributions and proposes a method to improve latent representation separation, contributing to representation learning.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 42. [Metapath-based Hyperbolic Contrastive Learning for Heterogeneous Graph Embedding](https://arxiv.org/abs/2506.16754) <a id="link42"></a>
+
+**ArXiv ID:** 2506.16754
+
+**Authors:** Jongmin Park, Seunghoon Han, Won-Yong Shin, Sungsu Lim
+
+**Abstract:** The hyperbolic space, characterized by a constant negative curvature and exponentially expanding space, aligns well with the structural properties of heterogeneous graphs. However, although heterogeneous graphs inherently possess diverse power-law structures, most hyperbolic heterogeneous graph embedding models rely on a single hyperbolic space. This approach may fail to effectively capture the diverse power-law structures within heterogeneous graphs. To address this limitation, we propose a Metapath-based Hyperbolic Contrastive Learning framework (MHCL), which uses multiple hyperbolic spaces to capture diverse complex structures within heterogeneous graphs. Specifically, by learning each hyperbolic space to describe the distribution of complex structures corresponding to each metapath, it is possible to capture semantic information effectively. Since metapath embeddings represent distinct semantic information, preserving their discriminability is important when aggregating them to obtain node representations. Therefore, we use a contrastive learning approach to optimize MHCL and improve the discriminability of metapath embeddings. In particular, our contrastive learning method minimizes the distance between embeddings of the same metapath and maximizes the distance between those of different metapaths in hyperbolic space, thereby improving the separability of metapath embeddings with distinct semantic information. We conduct comprehensive experiments to evaluate the effectiveness of MHCL. The experimental results demonstrate that MHCL outperforms state-of-the-art baselines in various graph machine learning tasks, effectively capturing the complex structures of heterogeneous graphs.
+
+**Comment:** The paper focuses on hyperbolic contrastive learning for heterogeneous graph embedding, which aligns with representation learning through contrastive methods.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 43. [Mesh-Informed Neural Operator : A Transformer Generative Approach](https://arxiv.org/abs/2506.16656) <a id="link43"></a>
+
+**ArXiv ID:** 2506.16656
+
+**Authors:** Yaozhong Shi, Zachary E. Ross, Domniki Asimaki, Kamyar Azizzadenesheli
+
+**Abstract:** Generative models in function spaces, situated at the intersection of generative modeling and operator learning, are attracting increasing attention due to their immense potential in diverse scientific and engineering applications. While functional generative models are theoretically domain- and discretization-agnostic, current implementations heavily rely on the Fourier Neural Operator (FNO), limiting their applicability to regular grids and rectangular domains. To overcome these critical limitations, we introduce the Mesh-Informed Neural Operator (MINO). By leveraging graph neural operators and cross-attention mechanisms, MINO offers a principled, domain- and discretization-agnostic backbone for generative modeling in function spaces. This advancement significantly expands the scope of such models to more diverse applications in generative, inverse, and regression tasks. Furthermore, MINO provides a unified perspective on integrating neural operators with general advanced deep learning architectures. Finally, we introduce a suite of standardized evaluation metrics that enable objective comparison of functional generative models, addressing another critical gap in the field.
+
+**Comment:** The paper introduces a new generative model architecture, the Mesh-Informed Neural Operator, which is relevant to model architecture innovations.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 44. [MoR: Better Handling Diverse Queries with a Mixture of Sparse, Dense, and Human Retrievers](https://arxiv.org/abs/2506.15862) <a id="link44"></a>
+
+**ArXiv ID:** 2506.15862
+
+**Authors:** Jushaan Singh Kalra, Xinran Zhao, To Eun Kim, Fengyu Cai, Fernando Diaz, Tongshuang Wu
+
+**Abstract:** Retrieval-augmented Generation (RAG) is powerful, but its effectiveness hinges on which retrievers we use and how. Different retrievers offer distinct, often complementary signals: BM25 captures lexical matches; dense retrievers, semantic similarity. Yet in practice, we typically fix a single retriever based on heuristics, which fails to generalize across diverse information needs. Can we dynamically select and integrate multiple retrievers for each individual query, without the need for manual selection? In our work, we validate this intuition with quantitative analysis and introduce mixture of retrievers: a zero-shot, weighted combination of heterogeneous retrievers. Extensive experiments show that such mixtures are effective and efficient: Despite totaling just 0.8B parameters, this mixture outperforms every individual retriever and even larger 7B models by +10.8% and +3.9% on average, respectively. Further analysis also shows that this mixture framework can help incorporate specialized non-oracle human information sources as retrievers to achieve good collaboration, with a 58.9% relative performance improvement over simulated humans alone.
+
+**Comment:** The paper discusses a mixture of retrievers for retrieval-augmented generation, which is relevant to model architecture through the use of mixture models.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 45. [Simulating Correlated Electrons with Symmetry-Enforced Normalizing Flows](https://arxiv.org/abs/2506.17015) <a id="link45"></a>
+
+**ArXiv ID:** 2506.17015
+
+**Authors:** Dominic Schuh, Janik Kreit, Evan Berkowitz, Lena Funcke, Thomas Luu, Kim A. Nicoli, Marcel Rodekamp
+
+**Abstract:** We present the first proof of principle that normalizing flows can accurately learn the Boltzmann distribution of the fermionic Hubbard model - a key framework for describing the electronic structure of graphene and related materials. State-of-the-art methods like Hybrid Monte Carlo often suffer from ergodicity issues near the time-continuum limit, leading to biased estimates. Leveraging symmetry-aware architectures as well as independent and identically distributed sampling, our approach resolves these issues and achieves significant speed-ups over traditional methods.
+
+**Comment:** The paper presents a method using normalizing flows for simulating correlated electrons, which is relevant to AI for Science through foundational research in molecular modeling.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 46. [Exploring and Improving Initialization for Deep Graph Neural Networks: A Signal Propagation Perspective](https://arxiv.org/abs/2506.16790) <a id="link46"></a>
+
+**ArXiv ID:** 2506.16790
+
+**Authors:** Senmiao Wang, Yupeng Chen, Yushun Zhang, Ruoyu Sun, Tian Ding
+
+**Abstract:** Graph Neural Networks (GNNs) often suffer from performance degradation as the network depth increases. This paper addresses this issue by introducing initialization methods that enhance signal propagation (SP) within GNNs. We propose three key metrics for effective SP in GNNs: forward propagation, backward propagation, and graph embedding variation (GEV). While the first two metrics derive from classical SP theory, the third is specifically designed for GNNs. We theoretically demonstrate that a broad range of commonly used initialization methods for GNNs, which exhibit performance degradation with increasing depth, fail to control these three metrics simultaneously. To deal with this limitation, a direct exploitation of the SP analysis--searching for weight initialization variances that optimize the three metrics--is shown to significantly enhance the SP in deep GCNs. This approach is called Signal Propagation on Graph-guided Initialization (SPoGInit). Our experiments demonstrate that SPoGInit outperforms commonly used initialization methods on various tasks and architectures. Notably, SPoGInit enables performance improvements as GNNs deepen, which represents a significant advancement in addressing depth-related challenges and highlights the validity and effectiveness of the SP analysis framework.
+
+**Comment:** The paper introduces a new initialization method for deep GNNs to enhance signal propagation, which is relevant to model architecture innovations.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 47. [From General to Targeted Rewards: Surpassing GPT-4 in Open-Ended Long-Context Generation](https://arxiv.org/abs/2506.16024) <a id="link47"></a>
+
+**ArXiv ID:** 2506.16024
+
+**Authors:** Zhihan Guo, Jiele Wu, Wenqian Cui, Yifei Zhang, Minda Hu, Yufei Wang, Irwin King
+
+**Abstract:** Current research on long-form context in Large Language Models (LLMs) primarily focuses on the understanding of long-contexts, the Open-ended Long Text Generation (Open-LTG) remains insufficiently explored. Training a long-context generation model requires curation of gold standard reference data, which is typically nonexistent for informative Open-LTG tasks. However, previous methods only utilize general assessments as reward signals, which limits accuracy. To bridge this gap, we introduce ProxyReward, an innovative reinforcement learning (RL) based framework, which includes a dataset and a reward signal computation method. Firstly, ProxyReward Dataset generation is accomplished through simple prompts that enables the model to create automatically, obviating extensive labeled data or significant manual effort. Secondly, ProxyReward Signal offers a targeted evaluation of information comprehensiveness and accuracy for specific questions. The experimental results indicate that our method ProxyReward surpasses even GPT-4-Turbo. It can significantly enhance performance by 20% on the Open-LTG task when training widely used open-source models, while also surpassing the LLM-as-a-Judge approach. Our work presents effective methods to enhance the ability of LLMs to address complex open-ended questions posed by human.
+
+**Comment:** The paper introduces a new framework for long-context generation in LLMs, which is relevant to theoretical insights into LLM behavior.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+# Paper Selection Prompt
+
+## System Prompt
+
+> You are a helpful paper reading assistant whose job is to read daily posts from ArXiv and identify a few papers that your friend will enjoy reading.
+> Your job is to carefully read the paper titles and abstracts below and find the ones that match the criteria below.
+
+## User Prompt
+
+> ## Instructions
+> 
+> Write the response in JSONL format with {ARXIVID, COMMENT, RELEVANCE, NOVELTY} on each line, one for each paper.
+> 
+> - ARXIVID: should be the ArXiv ID.
+> - COMMENT: should identify whether there is a criteria that match the paper very closely. These matches should not be based on general terms like "language modeling" or "advancements" and should specifically refer to a criterion. No need to mention the non-matching criteria.
+> - RELEVANCE: should be a score from 1-10.
+> - NOVELTY: should be a score from 1-10.
+> 
+> ## Scoring Criteria
+> 
+> > The "Relevance" score measures how closely the paper aligns with the core topics of the prompt.
+> > The "Novelty" score assesses the originality and impact of the paper.
+> > They are two **ORTHONORMAL** axes and **SHOULD NOT** be confused with each other.
+> 
+> ### Relevance Scoring
+> 
+> - Relevance 9-10 (Completely Relevant)
+>   - Focus: Fully aligned with core topics with no deviation, score the highest if contains relevant keywords in it.
+>   - Examples: Papers focused on foundational methods or theoretical research, whose titles contain topic keywords like "MoE".
+> 
+> - Relevance 7-8 (Relevant)
+>   - Focus: Retain a solid link to the main research area, though may touch on peripheral elements.
+>   - Examples: Papers research on the fundamental part of MoE through a less critical aspect like its behavior in GNN.
+> 
+> - Relevance 5-6 (Borderline)
+>   - Focus: Maintains a link to the core topic but also extends into at least one other domain/area beyond the primary focus.
+>   - Examples: Work referencing MoE centered on reinforcement learning.
+> 
+> - Relevance 3-4 (Irrelevant)
+>   - Focus: Largely outside our interests with no association to our topics.
+>   - Examples: Application-focused papers like using MoE to solve a problem in the real world.
+> 
+> - Relevance 1-2 (Ignore)
+>   - Focus: Purely unrelated to our topics. Completely a different domain.
+>   - **Exception**: If the paper hints at a cutting-edge, radically new direction that could eventually transform the primary domain, consider a score of 9–10 despite initial appearances. (Usually a very rare concept that belongs to the fundamental research)
+> 
+> ### Novelty Scoring
+> 
+> - Novelty 9-10 (Breakthrough)
+>   - Definition: Groundbreaking methods/theory introducing new directions or solving major challenges.
+>   - Examples: Entirely new paradigm for foundational models; a novel theory transforming representation learning.
+> 
+> - Novelty 7-8 (Improvements)
+>   - Definition: Substantial insights/enhancements, though not a full paradigm shift.
+>   - Examples: Modifications on existing methods yielding significantly better results.
+> 
+> - Novelty 5-6 (Borderline)
+>   - Definition: Incremental contributions with possible long-term benefits, not immediately transformative.
+>   - Examples: Moderately novel extension to an existing architecture; refining current methods without fundamentally altering them.
+> 
+> - Novelty 3-4 (Tangential)
+>   - Definition: Minor or domain-specific improvements with limited broader impact.
+>   - Examples: Slight modifications to known methods with strange motivation; purely engineering jobs like a new benchmark/dataset.
+> 
+> - Novelty 1-2 (Low)
+>   - Definition: Minimal originality, applying standard approaches without real innovation.
+>   - Examples: Using an off-the-shelf model without adding new insights; purely application-driven studies like finetuning a pretrained model using existing methods.
+> 
+> ## Papers
+> 
+> [PAPER LIST HERE]
+> 
+> ## Relevant Topics
+> 
+> Use the following relevance criteria to focus on foundational research. Keep **relevant** papers and filter out **irrelevant** ones. Avoid purely **application-driven** work.
+> 
+> 1. Representation Learning
+>    - Relevant: Insights into how deep networks encode information, feature/dictionary learning, sparse/contrastive methods, training dynamics in neural networks.
+>    - Irrelevant: Standard applications of known techniques lacking new theoretical or methodological contributions.
+> 
+> 2. Model Architecture
+>    - Relevant: Mixture-of-Experts (MoE), Transformers, Conditional/Dynamic Networks, Autoencoders, analysis on existing architectures (like encoder-decoder), or other architectural innovations.
+>    - Irrelevant: Merely using existing architectures for a certain task without insights into the structure themselves.
+> 
+> 3. Model Compression
+>    - Relevant: Sparsity, pruning, quantization, low-rank approaches, KV cache, or other algorithmic/theoretical efficiency breakthroughs.
+>    - Irrelevant: Straightforward applications of existing compression methods to new tasks.
+> 
+> 4. Large Language Models (LLMs)
+>    - Relevant: Major breakthroughs in pretraining or architecture, theoretical insights into LLM behavior/interpretability.
+>    - Irrelevant: Domain-specific usage (e.g., translation, jail-breaking), finetuning or inference tricks (e.g., instruction tuning, chain-of-thoughts, data mixing), or empirical dataset/benchmark studies and text-level analysis (e.g. hallucination, reasoning, safety).
+> 
+> 5. AI for Science
+>    - Relevant: Foundational research in molecular/protein modeling, new generative paradigms, or significant architecture-level innovations.
+>    - Irrelevant: Conventional, domain-specific applications without new theoretical perspectives.
+> 
+> 6. Emerging Trends
+>    - Relevant: Cutting-edge theoretical work challenging established assumptions or introducing broad new paradigms.
+>    - Irrelevant: Incremental improvements or trend-following without novel insights.
+> 
+> **Keywords:**
+> 
+> - Relevant: Mixture of Experts (MoE), Representation Learning, Compression/Efficiency, Sparse/Sparsity, Pruning, Quantization, Low-rank, Foundation Model, etc.
+> - Irrelevant: Reinforcement Learning, Transfer Learning, Federated Learning, Online Learning, Diffusion Models, etc.
+> - Application: Image Segmentation, Medical Imaging, 3D Vision, Video Understanding, Information Retrieval, Summarization, Recommendation Systems, Machine Translation, Speech Recognition, Signal Processing, Spatial/Temporal Modeling, Time Series, Knowledge Graph, etc.

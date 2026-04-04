@@ -1,0 +1,476 @@
+<div style="display: flex; align-items: flex-start; justify-content: space-between; width: 100%;"><div style="width: 33.33%; text-align: left;"><a href="../06"><img src="../../../assets/nav/day/2025-11-07-prev.svg" alt="Previous Day 2025-11-06"></a></div><div style="width: 33.33%; text-align: center;"><a href=".."><img src="../../../assets/nav/day/2025-11-07-center.svg" alt="Monthly Overview 2025-11"></a></div><div style="width: 33.33%; text-align: right;"><a href="../10"><img src="../../../assets/nav/day/2025-11-07-next.svg" alt="Next Day 2025-11-10"></a></div></div>
+
+# Personalized Daily ArXiv Papers 2025-11-07
+
+| *[gpt-5]*   | Prompt   | Completion   | Total   |
+|:-----------:|:--------:|:------------:|:-------:|
+| **Token**   | 36053    | 34849        | 70902   |
+| **Cost**    | $0.05    | $0.35        | $0.39   |
+
+Total arXiv papers: 458
+
+Total scanned papers: 251
+
+Total relevant papers: 20
+
+**Table of contents with paper titles:**
+
+1. [TwIST: Rigging the Lottery in Transformers with Independent Subnetwork Training](#user-content-link1)
+**Authors:** Michael Menezes, Barbara Su, Xinze Feng, Yehya Farhat, Hamza Shili, Anastasios Kyrillidis
+
+2. [The Strong Lottery Ticket Hypothesis for Multi-Head Attention Mechanisms](#user-content-link2)
+**Authors:** Hikari Otsuka, Daiki Chijiwa, Yasuyuki Okoshi, Daichi Fujiki, Susumu Takeuchi, Masato Motomura
+
+3. [Block Rotation is All You Need for MXFP4 Quantization](#user-content-link3)
+**Authors:** Yuantian Shao, Peisong Wang, Yuanteng Chen, Chang Xu, Zhihui Wei, Jian Cheng
+
+4. [GMoPE:A Prompt-Expert Mixture Framework for Graph Foundation Models](#user-content-link4)
+**Authors:** Zhibin Wang, Zhixing Zhang, Shuqi Wang, Xuanting Xie, Zhao Kang
+
+5. [DartQuant: Efficient Rotational Distribution Calibration for LLM Quantization](#user-content-link5)
+**Authors:** Yuantian Shao, Yuanteng Chen, Peisong Wang, Jianlin Yu, Jing Lin, Yiwu Yao, Zhihui Wei, Jian Cheng
+
+6. [SnapStream: Efficient Long Sequence Decoding on Dataflow Accelerators](#user-content-link6)
+**Authors:** Jonathan Li, Nasim Farahini, Evgenii Iuliugin, Magnus Vesterlund, Christian Haggstrom, Guangtao Wang, Shubhangi Upasani, Ayush Sachdeva, Rui Li, Faline Fu, Chen Wu, Ayesha Siddiqua, John Long, Tuowen Zhao, Matheen Musaddiq, Hakan Zeffer, Yun Du, Mingran Wang, Qinghua Li, Bo Li, Urmish Thakker, Raghu Prabhakar
+
+7. [High-dimensional limit theorems for SGD: Momentum and Adaptive Step-sizes](#user-content-link7)
+**Authors:** Aukosh Jagannath, Taj Jones-McCormick, Varnan Sarangian
+
+8. [Non-Asymptotic Optimization and Generalization Bounds for Stochastic Gauss-Newton in Overparameterized Models](#user-content-link8)
+**Authors:** Semih Cayci
+
+9. [An Augmentation Overlap Theory of Contrastive Learning](#user-content-link9)
+**Authors:** Qi Zhang, Yifei Wang, Yisen Wang
+
+10. [Efficient Linear Attention for Multivariate Time Series Modeling via Entropy Equality](#user-content-link10)
+**Authors:** Mingtao Zhang, Guoli Yang, Zhanxing Zhu, Mengzhu Wang, Xiaoying Bai
+
+11. [ODE approximation for the Adam algorithm: General and overparametrized setting](#user-content-link11)
+**Authors:** Steffen Dereich, Arnulf Jentzen, Sebastian Kassing
+
+12. [Memory- and Latency-Constrained Inference of Large Language Models via Adaptive Split Computing](#user-content-link12)
+**Authors:** Mingyu Sung, Vikas Palakonda, Suhwan Im, Sunghwan Moon, Il-Min Kim, Sangseok Yun, Jae-Mo Kang
+
+13. [Distribution-Aware Tensor Decomposition for Compression of Convolutional Neural Networks](#user-content-link13)
+**Authors:** Alper Kalle, Theo Rudkiewicz, Mohamed-Oumar Ouerfelli, Mohamed Tamaazousti
+
+14. [Efficient Neural Networks with Discrete Cosine Transform Activations](#user-content-link14)
+**Authors:** Marc Martinez-Gost, Sara Pepe, Ana P\'erez-Neira, Miguel \'Angel Lagunas
+
+15. [Robustness of Minimum-Volume Nonnegative Matrix Factorization under an Expanded Sufficiently Scattered Condition](#user-content-link15)
+**Authors:** Giovanni Barbarino, Nicolas Gillis, Subhayan Saha
+
+16. [Sketch-Augmented Features Improve Learning Long-Range Dependencies in Graph Neural Networks](#user-content-link16)
+**Authors:** Ryien Hosseini, Filippo Simini, Venkatram Vishwanath, Rebecca Willett, Henry Hoffmann
+
+17. [Spurious Correlation-Aware Embedding Regularization for Worst-Group Robustness](#user-content-link17)
+**Authors:** Subeen Park, Joowang Kim, Hakyung Lee, Sunjae Yoo, Kyungwoo Song
+
+18. [PerfDojo: Automated ML Library Generation for Heterogeneous Architectures](#user-content-link18)
+**Authors:** Andrei Ivanov, Siyuan Shen, Gioele Gottardo, Marcin Chrapek, Afif Boudaoud, Timo Schneider, Luca Benini, Torsten Hoefler
+
+19. [AILA--First Experiments with Localist Language Models](#user-content-link19)
+**Authors:** Joachim Diederich
+
+20. [Optimizing Reasoning Efficiency through Prompt Difficulty Prediction](#user-content-link20)
+**Authors:** Bo Zhao, Berkcan Kapusuzoglu, Kartik Balasubramaniam, Sambit Sahu, Supriyo Chakraborty, Genta Indra Winata
+
+---
+
+## 1. [TwIST: Rigging the Lottery in Transformers with Independent Subnetwork Training](https://arxiv.org/abs/2511.03983) <a id="link1"></a>
+
+**ArXiv ID:** 2511.03983
+
+**Authors:** Michael Menezes, Barbara Su, Xinze Feng, Yehya Farhat, Hamza Shili, Anastasios Kyrillidis
+
+**Abstract:** We introduce TwIST, a distributed training framework for efficient large language model (LLM) sparsification. TwIST trains multiple subnetworks in parallel, periodically aggregates their parameters, and resamples new subnetworks during training. This process identifies high-quality subnetworks ("golden tickets") without requiring post-training procedures such as calibration or Hessian-based recovery. As a result, TwIST enables zero-cost pruning at deployment time while achieving perplexity competitive with state-of-the-art post-training sparsification methods. The benefits are most pronounced under aggressive sparsity (e.g., 50%+), where TwIST significantly outperforms baseline methods; for example, reaching 23.14 PPL compared to 31.64 for the closest prior approach. Unlike unstructured pruning, TwIST produces structured, dense matrices that offer practical inference speedups and memory reductions on commodity hardware (e.g., CPUs) that do not support efficient sparse computation. TwIST provides an efficient training-time path to deployable sparse LLMs without additional fine-tuning or recovery overhead.
+
+**Comment:** Model Compression and Efficiency: distributed training-time sparsification via independent subnetwork training and aggregation enabling zero-cost, structured pruning; also an HPC-oriented distributed framework.
+
+**Relevance:** 10
+**Novelty:** 9
+
+---
+
+## 2. [The Strong Lottery Ticket Hypothesis for Multi-Head Attention Mechanisms](https://arxiv.org/abs/2511.04217) <a id="link2"></a>
+
+**ArXiv ID:** 2511.04217
+
+**Authors:** Hikari Otsuka, Daiki Chijiwa, Yasuyuki Okoshi, Daichi Fujiki, Susumu Takeuchi, Masato Motomura
+
+**Abstract:** The strong lottery ticket hypothesis (SLTH) conjectures that high-performing subnetworks, called strong lottery tickets (SLTs), are hidden in randomly initialized neural networks. Although recent theoretical studies have established the SLTH across various neural architectures, the SLTH for transformer architectures still lacks theoretical understanding. In particular, the current theory of the SLTH does not yet account for the multi-head attention (MHA) mechanism, a core component of transformers. To address this gap, we introduce a theoretical analysis of the existence of SLTs within MHAs. We prove that, if a randomly initialized MHA of $H$ heads and input dimension $d$ has the hidden dimension $O(d\log(Hd^{3/2}))$ for the key and value, it contains an SLT that approximates an arbitrary MHA with the same input dimension with high probability. Furthermore, by leveraging this theory for MHAs, we extend the SLTH to transformers without normalization layers. We empirically validate our theoretical findings, demonstrating that the approximation error between the SLT within a source model (MHA and transformer) and an approximate target counterpart decreases exponentially by increasing the hidden dimension of the source model.
+
+**Comment:** Model Architecture: establishes a strong lottery ticket existence result for multi-head attention in transformers, advancing sparsity/lottery-ticket theory for this core component.
+
+**Relevance:** 10
+**Novelty:** 9
+
+---
+
+## 3. [Block Rotation is All You Need for MXFP4 Quantization](https://arxiv.org/abs/2511.04214) <a id="link3"></a>
+
+**ArXiv ID:** 2511.04214
+
+**Authors:** Yuantian Shao, Peisong Wang, Yuanteng Chen, Chang Xu, Zhihui Wei, Jian Cheng
+
+**Abstract:** Large language models (LLMs) have achieved remarkable success, but their rapidly growing scale imposes prohibitive costs in memory, computation, and energy. Post-training quantization (PTQ) is a promising solution for efficient deployment, yet achieving accurate W4A4 quantization remains an open challenge. While most existing methods are designed for INT4 formats, the emergence of MXFP4 -- a new FP4 format with various hardware support (NVIDIA, AMD, Intel)-- raises questions about the applicability of current techniques. In this work, we establish a comprehensive benchmark of PTQ methods under the MXFP4 format. Through systematic evaluation, we find that methods like GPTQ consistently deliver strong performance, whereas rotation-based approaches, which are almost used by all state-of-the-art approaches, suffer from severe incompatibility with MXFP4. We further provide the first in-depth analysis of this conflict, tracing its root to a fundamental mismatch between MXFP4's PoT (power-of-two) block scaling and the redistribution of outlier energy via global rotation. Building on this insight, we propose a simple yet effective block rotation strategy that adapts rotation-based methods to MXFP4, leading to substantial accuracy improvements across diverse LLMs. Our findings not only offer clear guidance for practitioners but also set a foundation for advancing PTQ research under emerging low-precision formats.
+
+**Comment:** Model Compression: PTQ under MXFP4 (FP4) with a block-rotation strategy resolving incompatibility with power-of-two block scaling.
+
+**Relevance:** 10
+**Novelty:** 8
+
+---
+
+## 4. [GMoPE:A Prompt-Expert Mixture Framework for Graph Foundation Models](https://arxiv.org/abs/2511.03251) <a id="link4"></a>
+
+**ArXiv ID:** 2511.03251
+
+**Authors:** Zhibin Wang, Zhixing Zhang, Shuqi Wang, Xuanting Xie, Zhao Kang
+
+**Abstract:** Graph Neural Networks (GNNs) have demonstrated impressive performance on task-specific benchmarks, yet their ability to generalize across diverse domains and tasks remains limited. Existing approaches often struggle with negative transfer, scalability issues, and high adaptation costs. To address these challenges, we propose GMoPE (Graph Mixture of Prompt-Experts), a novel framework that seamlessly integrates the Mixture-of-Experts (MoE) architecture with prompt-based learning for graphs. GMoPE leverages expert-specific prompt vectors and structure-aware MoE routing to enable each expert to specialize in distinct subdomains and dynamically contribute to predictions. To promote diversity and prevent expert collapse, we introduce a soft orthogonality constraint across prompt vectors, encouraging expert specialization and facilitating a more balanced expert utilization. Additionally, we adopt a prompt-only fine-tuning strategy that significantly reduces spatiotemporal complexity during transfer. We validate GMoPE through extensive experiments under various pretraining strategies and multiple downstream tasks. Results show that GMoPE consistently outperforms state-of-the-art baselines and achieves performance comparable to full parameter fine-tuning-while requiring only a fraction of the adaptation overhead. Our work provides a principled and scalable framework for advancing generalizable and efficient graph foundation models.
+
+**Comment:** Model Architecture: Mixture-of-Experts framework for graph foundation models with structure-aware routing and prompt-expert vectors; prompt-only fine-tuning improves efficiency.
+
+**Relevance:** 10
+**Novelty:** 8
+
+---
+
+## 5. [DartQuant: Efficient Rotational Distribution Calibration for LLM Quantization](https://arxiv.org/abs/2511.04063) <a id="link5"></a>
+
+**ArXiv ID:** 2511.04063
+
+**Authors:** Yuantian Shao, Yuanteng Chen, Peisong Wang, Jianlin Yu, Jing Lin, Yiwu Yao, Zhihui Wei, Jian Cheng
+
+**Abstract:** Quantization plays a crucial role in accelerating the inference of large-scale models, and rotational matrices have been shown to effectively improve quantization performance by smoothing outliers. However, end-to-end fine-tuning of rotational optimization algorithms incurs high computational costs and is prone to overfitting. To address this challenge, we propose an efficient distribution-aware rotational calibration method, DartQuant, which reduces the complexity of rotational optimization by constraining the distribution of the activations after rotation. This approach also effectively reduces reliance on task-specific losses, thereby mitigating the risk of overfitting. Additionally, we introduce the QR-Orth optimization scheme, which replaces expensive alternating optimization with a more efficient solution. In a variety of model quantization experiments, DartQuant demonstrates superior performance. Compared to existing methods, it achieves 47$\times$ acceleration and 10$\times$ memory savings for rotational optimization on a 70B model. Furthermore, it is the first to successfully complete rotational calibration for a 70B model on a single 3090 GPU, making quantization of large language models feasible in resource-constrained environments. Code is available at https://github.com/CAS-CLab/DartQuant.git.
+
+**Comment:** Model Compression and Efficiency: distribution-aware rotational calibration (DartQuant) with efficient QR-orth optimization for LLM quantization at large scale.
+
+**Relevance:** 10
+**Novelty:** 8
+
+---
+
+## 6. [SnapStream: Efficient Long Sequence Decoding on Dataflow Accelerators](https://arxiv.org/abs/2511.03092) <a id="link6"></a>
+
+**ArXiv ID:** 2511.03092
+
+**Authors:** Jonathan Li, Nasim Farahini, Evgenii Iuliugin, Magnus Vesterlund, Christian Haggstrom, Guangtao Wang, Shubhangi Upasani, Ayush Sachdeva, Rui Li, Faline Fu, Chen Wu, Ayesha Siddiqua, John Long, Tuowen Zhao, Matheen Musaddiq, Hakan Zeffer, Yun Du, Mingran Wang, Qinghua Li, Bo Li, Urmish Thakker, Raghu Prabhakar
+
+**Abstract:** The proliferation of 100B+ parameter Large Language Models (LLMs) with 100k+ context length support have resulted in increasing demands for on-chip memory to support large KV caches. Techniques such as StreamingLLM and SnapKV demonstrate how to control KV cache size while maintaining model accuracy. Yet, these techniques are not commonly used within industrial deployments using frameworks like vLLM or SGLang. The reason is twofold: on one hand, the static graphs and continuous batching methodology employed by these frameworks make it difficult to admit modifications to the standard multi-head attention algorithm, while on the other hand, the accuracy implications of such techniques on modern instruction-following and reasoning models are not well understood, obfuscating the need for implementing these techniques. In this paper, we explore these accuracy implications on Llama-3.1-8B-Instruct and DeepSeek-R1, and develop SnapStream, a KV cache compression method that can be deployed at scale. We demonstrate the efficacy of SnapStream in a 16-way tensor-parallel deployment of DeepSeek-671B on SambaNova SN40L accelerators running at 128k context length and up to 1832 tokens per second in a real production setting. SnapStream enables $4\times$ improved on-chip memory usage and introduces minimal accuracy degradation on LongBench-v2, AIME24 and LiveCodeBench. To the best of our knowledge, this is the first implementation of sparse KV attention techniques deployed in a production inference system with static graphs and continuous batching.
+
+**Comment:** High-Performance Inference/Memory Optimization: deployable KV-cache compression compatible with static-graph, continuous-batching accelerators for long-context LLMs.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 7. [High-dimensional limit theorems for SGD: Momentum and Adaptive Step-sizes](https://arxiv.org/abs/2511.03952) <a id="link7"></a>
+
+**ArXiv ID:** 2511.03952
+
+**Authors:** Aukosh Jagannath, Taj Jones-McCormick, Varnan Sarangian
+
+**Abstract:** We develop a high-dimensional scaling limit for Stochastic Gradient Descent with Polyak Momentum (SGD-M) and adaptive step-sizes. This provides a framework to rigourously compare online SGD with some of its popular variants. We show that the scaling limits of SGD-M coincide with those of online SGD after an appropriate time rescaling and a specific choice of step-size. However, if the step-size is kept the same between the two algorithms, SGD-M will amplify high-dimensional effects, potentially degrading performance relative to online SGD. We demonstrate our framework on two popular learning problems: Spiked Tensor PCA and Single Index Models. In both cases, we also examine online SGD with an adaptive step-size based on normalized gradients. In the high-dimensional regime, this algorithm yields multiple benefits: its dynamics admit fixed points closer to the population minimum and widens the range of admissible step-sizes for which the iterates converge to such solutions. These examples provide a rigorous account, aligning with empirical motivation, of how early preconditioners can stabilize and improve dynamics in settings where online SGD fails.
+
+**Comment:** Training Dynamics Theory: high-dimensional scaling limits comparing SGD, momentum, and adaptive step-sizes with rigorous implications for optimization and generalization.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 8. [Non-Asymptotic Optimization and Generalization Bounds for Stochastic Gauss-Newton in Overparameterized Models](https://arxiv.org/abs/2511.03972) <a id="link8"></a>
+
+**ArXiv ID:** 2511.03972
+
+**Authors:** Semih Cayci
+
+**Abstract:** An important question in deep learning is how higher-order optimization methods affect generalization. In this work, we analyze a stochastic Gauss-Newton (SGN) method with Levenberg-Marquardt damping and mini-batch sampling for training overparameterized deep neural networks with smooth activations in a regression setting. Our theoretical contributions are twofold. First, we establish finite-time convergence bounds via a variable-metric analysis in parameter space, with explicit dependencies on the batch size, network width and depth. Second, we derive non-asymptotic generalization bounds for SGN using uniform stability in the overparameterized regime, characterizing the impact of curvature, batch size, and overparameterization on generalization performance. Our theoretical results identify a favorable generalization regime for SGN in which a larger minimum eigenvalue of the Gauss-Newton matrix along the optimization path yields tighter stability bounds.
+
+**Comment:** Optimization Theory: non-asymptotic convergence and uniform-stability generalization bounds for stochastic Gauss-Newton in overparameterized DNNs.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 9. [An Augmentation Overlap Theory of Contrastive Learning](https://arxiv.org/abs/2511.03114) <a id="link9"></a>
+
+**ArXiv ID:** 2511.03114
+
+**Authors:** Qi Zhang, Yifei Wang, Yisen Wang
+
+**Abstract:** Recently, self-supervised contrastive learning has achieved great success on various tasks. However, its underlying working mechanism is yet unclear. In this paper, we first provide the tightest bounds based on the widely adopted assumption of conditional independence. Further, we relax the conditional independence assumption to a more practical assumption of augmentation overlap and derive the asymptotically closed bounds for the downstream performance. Our proposed augmentation overlap theory hinges on the insight that the support of different intra-class samples will become more overlapped under aggressive data augmentations, thus simply aligning the positive samples (augmented views of the same sample) could make contrastive learning cluster intra-class samples together. Moreover, from the newly derived augmentation overlap perspective, we develop an unsupervised metric for the representation evaluation of contrastive learning, which aligns well with the downstream performance almost without relying on additional modules. Code is available at https://github.com/PKU-ML/GARC.
+
+**Comment:** Representation Learning: provides tight bounds and an augmentation-overlap theory for contrastive learning, plus an unsupervised evaluation metric aligned with downstream performance.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 10. [Efficient Linear Attention for Multivariate Time Series Modeling via Entropy Equality](https://arxiv.org/abs/2511.03190) <a id="link10"></a>
+
+**ArXiv ID:** 2511.03190
+
+**Authors:** Mingtao Zhang, Guoli Yang, Zhanxing Zhu, Mengzhu Wang, Xiaoying Bai
+
+**Abstract:** Attention mechanisms have been extensively employed in various applications, including time series modeling, owing to their capacity to capture intricate dependencies; however, their utility is often constrained by quadratic computational complexity, which impedes scalability for long sequences. In this work, we propose a novel linear attention mechanism designed to overcome these limitations. Our approach is grounded in a theoretical demonstration that entropy, as a strictly concave function on the probability simplex, implies that distributions with aligned probability rankings and similar entropy values exhibit structural resemblance. Building on this insight, we develop an efficient approximation algorithm that computes the entropy of dot-product-derived distributions with only linear complexity, enabling the implementation of a linear attention mechanism based on entropy equality. Through rigorous analysis, we reveal that the effectiveness of attention in spatio-temporal time series modeling may not primarily stem from the non-linearity of softmax but rather from the attainment of a moderate and well-balanced weight distribution. Extensive experiments on four spatio-temporal datasets validate our method, demonstrating competitive or superior forecasting performance while achieving substantial reductions in both memory usage and computational time.
+
+**Comment:** Model Architecture and Efficiency: introduces a theoretically grounded linear attention via entropy-equality, achieving linear complexity and balanced attention weights.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 11. [ODE approximation for the Adam algorithm: General and overparametrized setting](https://arxiv.org/abs/2511.04622) <a id="link11"></a>
+
+**ArXiv ID:** 2511.04622
+
+**Authors:** Steffen Dereich, Arnulf Jentzen, Sebastian Kassing
+
+**Abstract:** The Adam optimizer is currently presumably the most popular optimization method in deep learning. In this article we develop an ODE based method to study the Adam optimizer in a fast-slow scaling regime. For fixed momentum parameters and vanishing step-sizes, we show that the Adam algorithm is an asymptotic pseudo-trajectory of the flow of a particular vector field, which is referred to as the Adam vector field. Leveraging properties of asymptotic pseudo-trajectories, we establish convergence results for the Adam algorithm. In particular, in a very general setting we show that if the Adam algorithm converges, then the limit must be a zero of the Adam vector field, rather than a local minimizer or critical point of the objective function.   In contrast, in the overparametrized empirical risk minimization setting, the Adam algorithm is able to locally find the set of minima. Specifically, we show that in a neighborhood of the global minima, the objective function serves as a Lyapunov function for the flow induced by the Adam vector field. As a consequence, if the Adam algorithm enters a neighborhood of the global minima infinitely often, it converges to the set of global minima.
+
+**Comment:** Training Dynamics: ODE-based analysis of Adam shows convergence to zeros of an Adam vector field; Lyapunov characterization in overparameterized settings.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 12. [Memory- and Latency-Constrained Inference of Large Language Models via Adaptive Split Computing](https://arxiv.org/abs/2511.04002) <a id="link12"></a>
+
+**ArXiv ID:** 2511.04002
+
+**Authors:** Mingyu Sung, Vikas Palakonda, Suhwan Im, Sunghwan Moon, Il-Min Kim, Sangseok Yun, Jae-Mo Kang
+
+**Abstract:** Large language models (LLMs) have achieved near-human performance across diverse reasoning tasks, yet their deployment on resource-constrained Internet-of-Things (IoT) devices remains impractical due to massive parameter footprints and memory-intensive autoregressive decoding. While split computing offers a promising solution by partitioning model execution between edge devices and cloud servers, existing approaches fail to address the unique challenges of autoregressive inference, particularly the iterative token generation process and expanding key-value (KV) cache requirements. This work introduces the first autoregressive-aware split computing framework designed explicitly for LLM deployment on edge devices. Our approach makes three key contributions. First, we develop one-point split compression (OPSC), a mixed-precision quantization scheme that prevents out-of-memory failures by strategically partitioning models into front-end and back-end segments with different precision levels. Second, we propose a two-stage intermediate compression pipeline that combines threshold splitting (TS) and token-wise adaptive bit quantization (TAB-Q) to preserve accuracy-critical activations while dramatically reducing communication overhead. Third, we formulate a unified optimization framework that jointly selects optimal split points, quantization settings, and sequence lengths to satisfy strict memory and latency constraints. Extensive evaluations across diverse LLMs and hardware platforms demonstrate superior performance compared to state-of-the-art quantization methods, including SmoothQuant, OmniQuant, and Atom. The framework achieves a 1.49 inference speedup and significant communication overhead reduction while maintaining or improving model accuracy.
+
+**Comment:** Model Compression and Efficiency: autoregressive-aware split computing with mixed-precision quantization and adaptive intermediate compression under memory/latency constraints for LLMs.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 13. [Distribution-Aware Tensor Decomposition for Compression of Convolutional Neural Networks](https://arxiv.org/abs/2511.04494) <a id="link13"></a>
+
+**ArXiv ID:** 2511.04494
+
+**Authors:** Alper Kalle, Theo Rudkiewicz, Mohamed-Oumar Ouerfelli, Mohamed Tamaazousti
+
+**Abstract:** Neural networks are widely used for image-related tasks but typically demand considerable computing power. Once a network has been trained, however, its memory- and compute-footprint can be reduced by compression. In this work, we focus on compression through tensorization and low-rank representations. Whereas classical approaches search for a low-rank approximation by minimizing an isotropic norm such as the Frobenius norm in weight-space, we use data-informed norms that measure the error in function space. Concretely, we minimize the change in the layer's output distribution, which can be expressed as $\lVert (W - \widetilde{W}) \Sigma^{1/2}\rVert_F$ where $\Sigma^{1/2}$ is the square root of the covariance matrix of the layer's input and $W$, $\widetilde{W}$ are the original and compressed weights. We propose new alternating least square algorithms for the two most common tensor decompositions (Tucker-2 and CPD) that directly optimize the new norm. Unlike conventional compression pipelines, which almost always require post-compression fine-tuning, our data-informed approach often achieves competitive accuracy without any fine-tuning. We further show that the same covariance-based norm can be transferred from one dataset to another with only a minor accuracy drop, enabling compression even when the original training dataset is unavailable. Experiments on several CNN architectures (ResNet-18/50, and GoogLeNet) and datasets (ImageNet, FGVC-Aircraft, Cifar10, and Cifar100) confirm the advantages of the proposed method.
+
+**Comment:** Matches Model Compression and Efficiency: low-rank tensor decompositions for CNN compression with data-informed norms and new ALS algorithms minimizing function-space error; reduces or removes fine-tuning.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 14. [Efficient Neural Networks with Discrete Cosine Transform Activations](https://arxiv.org/abs/2511.03531) <a id="link14"></a>
+
+**ArXiv ID:** 2511.03531
+
+**Authors:** Marc Martinez-Gost, Sara Pepe, Ana P\'erez-Neira, Miguel \'Angel Lagunas
+
+**Abstract:** In this paper, we extend our previous work on the Expressive Neural Network (ENN), a multilayer perceptron with adaptive activation functions parametrized using the Discrete Cosine Transform (DCT). Building upon previous work that demonstrated the strong expressiveness of ENNs with compact architectures, we now emphasize their efficiency, interpretability and pruning capabilities. The DCT-based parameterization provides a structured and decorrelated representation that reveals the functional role of each neuron and allows direct identification of redundant components. Leveraging this property, we propose an efficient pruning strategy that removes unnecessary DCT coefficients with negligible or no loss in performance. Experimental results across classification and implicit neural representation tasks confirm that ENNs achieve state-of-the-art accuracy while maintaining a low number of parameters. Furthermore, up to 40% of the activation coefficients can be safely pruned, thanks to the orthogonality and bounded nature of the DCT basis. Overall, these findings demonstrate that the ENN framework offers a principled integration of signal processing concepts into neural network design, achieving a balanced trade-off between expressiveness, compactness, and interpretability.
+
+**Comment:** Model Compression and Efficiency: DCT-parameterized adaptive activations enable structured, coefficient-level pruning and compact, interpretable networks.
+
+**Relevance:** 9
+**Novelty:** 7
+
+---
+
+## 15. [Robustness of Minimum-Volume Nonnegative Matrix Factorization under an Expanded Sufficiently Scattered Condition](https://arxiv.org/abs/2511.04291) <a id="link15"></a>
+
+**ArXiv ID:** 2511.04291
+
+**Authors:** Giovanni Barbarino, Nicolas Gillis, Subhayan Saha
+
+**Abstract:** Minimum-volume nonnegative matrix factorization (min-vol NMF) has been used successfully in many applications, such as hyperspectral imaging, chemical kinetics, spectroscopy, topic modeling, and audio source separation. However, its robustness to noise has been a long-standing open problem. In this paper, we prove that min-vol NMF identifies the groundtruth factors in the presence of noise under a condition referred to as the expanded sufficiently scattered condition which requires the data points to be sufficiently well scattered in the latent simplex generated by the basis vectors.
+
+**Comment:** Matches Representation Learning: theoretical robustness guarantees for NMF (dictionary/factorization learning) under expanded sufficiently scattered condition.
+
+**Relevance:** 8
+**Novelty:** 8
+
+---
+
+## 16. [Sketch-Augmented Features Improve Learning Long-Range Dependencies in Graph Neural Networks](https://arxiv.org/abs/2511.03824) <a id="link16"></a>
+
+**ArXiv ID:** 2511.03824
+
+**Authors:** Ryien Hosseini, Filippo Simini, Venkatram Vishwanath, Rebecca Willett, Henry Hoffmann
+
+**Abstract:** Graph Neural Networks learn on graph-structured data by iteratively aggregating local neighborhood information. While this local message passing paradigm imparts a powerful inductive bias and exploits graph sparsity, it also yields three key challenges: (i) oversquashing of long-range information, (ii) oversmoothing of node representations, and (iii) limited expressive power. In this work we inject randomized global embeddings of node features, which we term \textit{Sketched Random Features}, into standard GNNs, enabling them to efficiently capture long-range dependencies. The embeddings are unique, distance-sensitive, and topology-agnostic -- properties which we analytically and empirically show alleviate the aforementioned limitations when injected into GNNs. Experimental results on real-world graph learning tasks confirm that this strategy consistently improves performance over baseline GNNs, offering both a standalone solution and a complementary enhancement to existing techniques such as graph positional encodings. Our source code is available at \href{https://github.com/ryienh/sketched-random-features}{https://github.com/ryienh/sketched-random-features}.
+
+**Comment:** Model Architecture + Representation Learning: inject sketched random global feature embeddings into GNNs to mitigate oversquashing/oversmoothing and capture long-range dependencies.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 17. [Spurious Correlation-Aware Embedding Regularization for Worst-Group Robustness](https://arxiv.org/abs/2511.04401) <a id="link17"></a>
+
+**ArXiv ID:** 2511.04401
+
+**Authors:** Subeen Park, Joowang Kim, Hakyung Lee, Sunjae Yoo, Kyungwoo Song
+
+**Abstract:** Deep learning models achieve strong performance across various domains but often rely on spurious correlations, making them vulnerable to distribution shifts. This issue is particularly severe in subpopulation shift scenarios, where models struggle in underrepresented groups. While existing methods have made progress in mitigating this issue, their performance gains are still constrained. They lack a rigorous theoretical framework connecting the embedding space representations with worst-group error. To address this limitation, we propose Spurious Correlation-Aware Embedding Regularization for Worst-Group Robustness (SCER), a novel approach that directly regularizes feature representations to suppress spurious cues. We show theoretically that worst-group error is influenced by how strongly the classifier relies on spurious versus core directions, identified from differences in group-wise mean embeddings across domains and classes. By imposing theoretical constraints at the embedding level, SCER encourages models to focus on core features while reducing sensitivity to spurious patterns. Through systematic evaluation on multiple vision and language, we show that SCER outperforms prior state-of-the-art studies in worst-group accuracy. Our code is available at \href{https://github.com/MLAI-Yonsei/SCER}{https://github.com/MLAI-Yonsei/SCER}.
+
+**Comment:** Representation Learning: theoretically grounded embedding-space regularization to suppress spurious features and improve worst-group robustness.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 18. [PerfDojo: Automated ML Library Generation for Heterogeneous Architectures](https://arxiv.org/abs/2511.03586) <a id="link18"></a>
+
+**ArXiv ID:** 2511.03586
+
+**Authors:** Andrei Ivanov, Siyuan Shen, Gioele Gottardo, Marcin Chrapek, Afif Boudaoud, Timo Schneider, Luca Benini, Torsten Hoefler
+
+**Abstract:** The increasing complexity of machine learning models and the proliferation of diverse hardware architectures (CPUs, GPUs, accelerators) make achieving optimal performance a significant challenge. Heterogeneity in instruction sets, specialized kernel requirements for different data types and model features (e.g., sparsity, quantization), and architecture-specific optimizations complicate performance tuning. Manual optimization is resource-intensive, while existing automatic approaches often rely on complex hardware-specific heuristics and uninterpretable intermediate representations, hindering performance portability. We introduce PerfLLM, a novel automatic optimization methodology leveraging Large Language Models (LLMs) and Reinforcement Learning (RL). Central to this is PerfDojo, an environment framing optimization as an RL game using a human-readable, mathematically-inspired code representation that guarantees semantic validity through transformations. This allows effective optimization without prior hardware knowledge, facilitating both human analysis and RL agent training. We demonstrate PerfLLM's ability to achieve significant performance gains across diverse CPU (x86, Arm, RISC-V) and GPU architectures.
+
+**Comment:** High Performance Computing: systems-level optimization for heterogeneous ML kernels via an LLM+RL framework (PerfDojo) with a human-readable IR enabling performance portability.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 19. [AILA--First Experiments with Localist Language Models](https://arxiv.org/abs/2511.03559) <a id="link19"></a>
+
+**ArXiv ID:** 2511.03559
+
+**Authors:** Joachim Diederich
+
+**Abstract:** This paper presents the first empirical demonstration of controllable locality in transformer language models, a novel architectural framework that enables continuous control over the degree of representation localization through a tunable locality dial parameter. Unlike traditional language models that rely exclusively on distributed representations, our approach allows dynamic interpolation between highly interpretable localist encodings and efficient distributed representations without requiring model retraining. We conducted experiments on the WikiText corpus using a two-layer transformer architecture, systematically varying the locality parameter {\lambda} across the full spectrum from 1.0 (fully localist) to 0.0 (fully distributed). Our results demonstrate that localist configurations achieve dramatically lower attention entropy, with {\lambda} = 1.0 yielding 5.36 bits compared to 7.18 bits at {\lambda} = 0.0, while maintaining substantially higher pointer fidelity scores reflecting stronger alignment with rule-specified targets. Prediction experiments reveal that intermediate locality values optimize the tradeoff between interpretability and performance, with {\lambda} = 0.6 achieving test perplexity of 4.65 and accuracy of 84.7%. These findings establish that localist language models provide a practical framework for applications in regulated domains requiring both transparency and capability, offering precise mathematical control over the interpretability-performance spectrum through explicit penalty thresholds and information-theoretic design principles.
+
+**Comment:** Model Architecture: introduces a tunable locality dial in transformer LMs to control representation localization, trading interpretability vs performance without retraining.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 20. [Optimizing Reasoning Efficiency through Prompt Difficulty Prediction](https://arxiv.org/abs/2511.03808) <a id="link20"></a>
+
+**ArXiv ID:** 2511.03808
+
+**Authors:** Bo Zhao, Berkcan Kapusuzoglu, Kartik Balasubramaniam, Sambit Sahu, Supriyo Chakraborty, Genta Indra Winata
+
+**Abstract:** Reasoning language models perform well on complex tasks but are costly to deploy due to their size and long reasoning traces. We propose a routing approach that assigns each problem to the smallest model likely to solve it, reducing compute without sacrificing accuracy. Using intermediate representations from s1.1-32B, we train lightweight predictors of problem difficulty or model correctness to guide routing across a pool of reasoning models. On diverse math benchmarks, routing improves efficiency over random assignment and matches s1.1-32B's performance while using significantly less compute. Our results demonstrate that difficulty-aware routing is effective for cost-efficient deployment of reasoning models.
+
+**Comment:** Conditional/Dynamic Networks and Efficiency: difficulty-aware routing to assign problems to the smallest adequate reasoning model to cut compute cost.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+# Paper Selection Prompt
+
+## System Prompt
+
+> You are a helpful paper reading assistant whose job is to read daily posts from ArXiv and identify a few papers that your friend will enjoy reading.
+> Your job is to carefully read the paper titles and abstracts below and find the ones that match the criteria below.
+
+## User Prompt
+
+> ## Instructions
+> 
+> Write the response in JSONL format with {ARXIVID, COMMENT, RELEVANCE, NOVELTY} on each line, one for each paper.
+> 
+> - ARXIVID: should be the ArXiv ID.
+> - COMMENT: should identify whether there is a criteria that match the paper very closely. These matches should not be based on general terms like "language modeling" or "advancements" and should specifically refer to a criterion. No need to mention the non-matching criteria.
+> - RELEVANCE: should be a score from 1-10.
+> - NOVELTY: should be a score from 1-10.
+> 
+> ## Scoring Criteria
+> 
+> > The "Relevance" score measures how closely the paper aligns with the core topics of the prompt.
+> > The "Novelty" score assesses the originality and impact of the paper.
+> > They are two **ORTHONORMAL** axes and **SHOULD NOT** be confused with each other.
+> 
+> ### Relevance Scoring
+> 
+> - Relevance 9-10 (Completely Relevant)
+>   - Focus: Fully aligned with core topics with no deviation, score the highest if contains relevant keywords in it.
+>   - Examples: Papers focused on foundational methods or theoretical research, whose titles contain topic keywords like "MoE".
+> 
+> - Relevance 7-8 (Relevant)
+>   - Focus: Retain a solid link to the main research area, though may touch on peripheral elements.
+>   - Examples: Papers research on the fundamental part of MoE through a less critical aspect like its behavior in GNN.
+> 
+> - Relevance 5-6 (Borderline)
+>   - Focus: Maintains a link to the core topic but also extends into at least one other domain/area beyond the primary focus.
+>   - Examples: Work referencing MoE centered on reinforcement learning.
+> 
+> - Relevance 3-4 (Irrelevant)
+>   - Focus: Largely outside our interests with no association to our topics.
+>   - Examples: Application-focused papers like using MoE to solve a problem in the real world.
+> 
+> - Relevance 1-2 (Ignore)
+>   - Focus: Purely unrelated to our topics. Completely a different domain.
+>   - **Exception**: If the paper hints at a cutting-edge, radically new direction that could eventually transform the primary domain, consider a score of 9–10 despite initial appearances. (Usually a very rare concept that belongs to the fundamental research)
+> 
+> ### Novelty Scoring
+> 
+> - Novelty 9-10 (Breakthrough)
+>   - Definition: Groundbreaking methods/theory introducing new directions or solving major challenges.
+>   - Examples: Entirely new paradigm for foundational models; a novel theory transforming representation learning.
+> 
+> - Novelty 7-8 (Improvements)
+>   - Definition: Substantial insights/enhancements, though not a full paradigm shift.
+>   - Examples: Modifications on existing methods yielding significantly better results.
+> 
+> - Novelty 5-6 (Borderline)
+>   - Definition: Incremental contributions with possible long-term benefits, not immediately transformative.
+>   - Examples: Moderately novel extension to an existing architecture; refining current methods without fundamentally altering them.
+> 
+> - Novelty 3-4 (Tangential)
+>   - Definition: Minor or domain-specific improvements with limited broader impact.
+>   - Examples: Slight modifications to known methods with strange motivation; purely engineering jobs like a new benchmark/dataset.
+> 
+> - Novelty 1-2 (Low)
+>   - Definition: Minimal originality, applying standard approaches without real innovation.
+>   - Examples: Using an off-the-shelf model without adding new insights; purely application-driven studies like finetuning a pretrained model using existing methods.
+> 
+> ## Papers
+> 
+> [PAPER LIST HERE]
+> 
+> ## Relevant Topics
+> 
+> Use the following relevance criteria to focus on foundational research. Keep **relevant** papers and filter out **irrelevant** ones. Avoid purely **application-driven** work.
+> 
+> 1. Model Architecture
+>    - Relevant: Mixture-of-Experts (MoE), Transformers, Conditional/Dynamic Networks, Autoencoders, analysis/innovations on existing architectures.
+>    - Irrelevant: Merely using existing architectures for a certain task without insights into the structure themselves.
+> 
+> 2. Model Compression and Efficiency
+>    - Relevant: Sparsity, pruning, quantization, low-rank approaches, cache, or other algorithmic/theoretical efficiency breakthroughs.
+>    - Irrelevant: Straightforward applications of existing compression methods to new tasks.
+> 
+> 3. High Performance Computing
+>    - Relevant: Algorithmic or systems-level innovations enabling training of large-scale models, distributed training techniques, memory optimization.
+>    - Irrelevant: Incremental engineering improvements without novel algorithmic contributions.
+> 
+> 4. Representation Learning
+>    - Relevant: Insights into how deep networks encode information, feature/dictionary learning, sparse/contrastive methods, training dynamics in neural networks.
+>    - Irrelevant: Standard applications of known techniques lacking new theoretical or methodological contributions.
+> 
+> **Keywords:**
+> 
+> - Relevant: Mixture of Experts (MoE), Representation Learning, Compression/Efficiency, Sparse/Sparsity, Pruning, Quantization, Low-rank, Foundation Model, etc.
+> - Irrelevant: Reinforcement Learning, Transfer Learning, Federated Learning, Online Learning, Diffusion Models, etc.
+> - Application: Image Segmentation, Medical Imaging, 3D Vision, Video Understanding, Information Retrieval, Summarization, Recommendation Systems, Machine Translation, Speech Recognition, Signal Processing, Spatial/Temporal Modeling, Time Series, Knowledge Graph, etc.

@@ -1,0 +1,376 @@
+<div style="display: flex; align-items: flex-start; justify-content: space-between; width: 100%;"><div style="width: 33.33%; text-align: left;"><a href="../../2025-07/31"><img src="../../../assets/nav/day/2025-08-01-prev.svg" alt="Previous Day 2025-07-31"></a></div><div style="width: 33.33%; text-align: center;"><a href=".."><img src="../../../assets/nav/day/2025-08-01-center.svg" alt="Monthly Overview 2025-08"></a></div><div style="width: 33.33%; text-align: right;"><a href="../04"><img src="../../../assets/nav/day/2025-08-01-next.svg" alt="Next Day 2025-08-04"></a></div></div>
+
+# Personalized Daily ArXiv Papers 2025-08-01
+
+| *[gpt-4o]*   | Prompt   | Completion   | Total   |
+|:------------:|:--------:|:------------:|:-------:|
+| **Token**    | 24470    | 3003         | 27473   |
+| **Cost**     | $0.06    | $0.03        | $0.09   |
+
+Total arXiv papers: 400
+
+Total scanned papers: 240
+
+Total relevant papers: 14
+
+**Table of contents with paper titles:**
+
+1. [Invisible Architectures of Thought: Toward a New Science of AI as Cognitive Infrastructure](#user-content-link1)
+**Authors:** Giuseppe Riva
+
+2. [How does Chain of Thought Think? Mechanistic Interpretability of Chain-of-Thought Reasoning with Sparse Autoencoding](#user-content-link2)
+**Authors:** Xi Chen, Aske Plaat, Niki van Stein
+
+3. [Model Directions, Not Words: Mechanistic Topic Models Using Sparse Autoencoders](#user-content-link3)
+**Authors:** Carolina Zheng, Nicolas Beltran-Velez, Sweta Karlekar, Claudia Shi, Achille Nazaret, Asif Mallik, Amir Feder, David M. Blei
+
+4. [Semantic Convergence: Investigating Shared Representations Across Scaled LLMs](#user-content-link4)
+**Authors:** Daniel Son, Sanjana Rathore, Andrew Rufail, Adrian Simon, Daniel Zhang, Soham Dave, Cole Blondin, Kevin Zhu, Sean O'Brien
+
+5. [BAR Conjecture: the Feasibility of Inference Budget-Constrained LLM Services with Authenticity and Reasoning](#user-content-link5)
+**Authors:** Jinan Zhou, Rajat Ghosh, Vaishnavi Bhargava, Debojyoti Dutta, Aryan Singhal
+
+6. [Seed-Prover: Deep and Broad Reasoning for Automated Theorem Proving](#user-content-link6)
+**Authors:** Luoxin Chen, Jinming Gu, Liankai Huang, Wenhao Huang, Zhicheng Jiang, Allan Jie, Xiaoran Jin, Xing Jin, Chenggang Li, Kaijing Ma, Cheng Ren, Jiawei Shen, Wenlei Shi, Tong Sun, He Sun, Jiahui Wang, Siran Wang, Zhihong Wang, Chenrui Wei, Shufa Wei, Yonghui Wu, Yuchen Wu, Yihang Xia, Huajian Xin, Fan Yang, Huaiyuan Ying, Hongyi Yuan, Zheng Yuan, Tianyang Zhan, Chi Zhang, Yue Zhang, Ge Zhang, Tianyun Zhao, Jianqiu Zhao, Yichi Zhou, Thomas Hanwen Zhu
+
+7. [A Verifier Hierarchy](#user-content-link7)
+**Authors:** Maurits Kaptein
+
+8. [AI paradigm for solving differential equations: first-principles data generation and scale-dilation operator AI solver](#user-content-link8)
+**Authors:** Xiangshu Gong, Zhiqiang Xie, Xiaowei Jin, Chen Wang, Yanling Qu, Wangmeng Zuo, Hui Li
+
+9. [Differentially Private Clipped-SGD: High-Probability Convergence with Arbitrary Clipping Level](#user-content-link9)
+**Authors:** Saleh Vatan Khah, Savelii Chezhegov, Shahrokh Farahmand, Samuel Horv\'ath, Eduard Gorbunov
+
+10. [Coflex: Enhancing HW-NAS with Sparse Gaussian Processes for Efficient and Scalable DNN Accelerator Design](#user-content-link10)
+**Authors:** Yinhui Ma, Tomomasa Yamasaki, Zhehui Wang, Tao Luo, Bo Wang
+
+11. [Efficient Machine Unlearning via Influence Approximation](#user-content-link11)
+**Authors:** Jiawei Liu, Chenwang Wu, Defu Lian, Enhong Chen
+
+12. [Solution-aware vs global ReLU selection: partial MILP strikes back for DNN verification](#user-content-link12)
+**Authors:** Yuke Liao, Blaise Genest, Kuldeep Meel, Shaan Aryaman
+
+13. [SimuRA: Towards General Goal-Oriented Agent via Simulative Reasoning Architecture with LLM-Based World Model](#user-content-link13)
+**Authors:** Mingkai Deng, Jinyu Hou, Yilin Shen, Hongxia Jin, Graham Neubig, Zhiting Hu, Eric Xing
+
+14. [Improved Algorithms for Kernel Matrix-Vector Multiplication Under Sparsity Assumptions](#user-content-link14)
+**Authors:** Piotr Indyk, Michael Kapralov, Kshiteej Sheth, Tal Wagner
+
+---
+
+## 1. [Invisible Architectures of Thought: Toward a New Science of AI as Cognitive Infrastructure](https://arxiv.org/abs/2507.22893) <a id="link1"></a>
+
+**ArXiv ID:** 2507.22893
+
+**Authors:** Giuseppe Riva
+
+**Abstract:** Contemporary human-AI interaction research overlooks how AI systems fundamentally reshape human cognition pre-consciously, a critical blind spot for understanding distributed cognition. This paper introduces "Cognitive Infrastructure Studies" (CIS) as a new interdisciplinary domain to reconceptualize AI as "cognitive infrastructures": foundational, often invisible systems conditioning what is knowable and actionable in digital societies. These semantic infrastructures transport meaning, operate through anticipatory personalization, and exhibit adaptive invisibility, making their influence difficult to detect. Critically, they automate "relevance judgment," shifting the "locus of epistemic agency" to non-human systems. Through narrative scenarios spanning individual (cognitive dependency), collective (democratic deliberation), and societal (governance) scales, we describe how cognitive infrastructures reshape human cognition, public reasoning, and social epistemologies. CIS aims to address how AI preprocessing reshapes distributed cognition across individual, collective, and cultural scales, requiring unprecedented integration of diverse disciplinary methods. The framework also addresses critical gaps across disciplines: cognitive science lacks population-scale preprocessing analysis capabilities, digital sociology cannot access individual cognitive mechanisms, and computational approaches miss cultural transmission dynamics. To achieve this goal CIS also provides methodological innovations for studying invisible algorithmic influence: "infrastructure breakdown methodologies", experimental approaches that reveal cognitive dependencies by systematically withdrawing AI preprocessing after periods of habituation.
+
+**Comment:** The paper introduces 'Cognitive Infrastructure Studies' as a new interdisciplinary domain, which could be considered an emerging trend challenging established assumptions.
+
+**Relevance:** 9
+**Novelty:** 9
+
+---
+
+## 2. [How does Chain of Thought Think? Mechanistic Interpretability of Chain-of-Thought Reasoning with Sparse Autoencoding](https://arxiv.org/abs/2507.22928) <a id="link2"></a>
+
+**ArXiv ID:** 2507.22928
+
+**Authors:** Xi Chen, Aske Plaat, Niki van Stein
+
+**Abstract:** Chain-of-thought (CoT) prompting boosts Large Language Models accuracy on multi-step tasks, yet whether the generated "thoughts" reflect the true internal reasoning process is unresolved. We present the first feature-level causal study of CoT faithfulness. Combining sparse autoencoders with activation patching, we extract monosemantic features from Pythia-70M and Pythia-2.8B while they tackle GSM8K math problems under CoT and plain (noCoT) prompting. Swapping a small set of CoT-reasoning features into a noCoT run raises answer log-probabilities significantly in the 2.8B model, but has no reliable effect in 70M, revealing a clear scale threshold. CoT also leads to significantly higher activation sparsity and feature interpretability scores in the larger model, signalling more modular internal computation. For example, the model's confidence in generating correct answers improves from 1.2 to 4.3. We introduce patch-curves and random-feature patching baselines, showing that useful CoT information is not only present in the top-K patches but widely distributed. Overall, our results indicate that CoT can induce more interpretable internal structures in high-capacity LLMs, validating its role as a structured prompting method.
+
+**Comment:** The paper investigates the mechanistic interpretability of Chain-of-Thought reasoning using sparse autoencoding, which aligns with representation learning and LLM interpretability.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 3. [Model Directions, Not Words: Mechanistic Topic Models Using Sparse Autoencoders](https://arxiv.org/abs/2507.23220) <a id="link3"></a>
+
+**ArXiv ID:** 2507.23220
+
+**Authors:** Carolina Zheng, Nicolas Beltran-Velez, Sweta Karlekar, Claudia Shi, Achille Nazaret, Asif Mallik, Amir Feder, David M. Blei
+
+**Abstract:** Traditional topic models are effective at uncovering latent themes in large text collections. However, due to their reliance on bag-of-words representations, they struggle to capture semantically abstract features. While some neural variants use richer representations, they are similarly constrained by expressing topics as word lists, which limits their ability to articulate complex topics. We introduce Mechanistic Topic Models (MTMs), a class of topic models that operate on interpretable features learned by sparse autoencoders (SAEs). By defining topics over this semantically rich space, MTMs can reveal deeper conceptual themes with expressive feature descriptions. Moreover, uniquely among topic models, MTMs enable controllable text generation using topic-based steering vectors. To properly evaluate MTM topics against word-list-based approaches, we propose \textit{topic judge}, an LLM-based pairwise comparison evaluation framework. Across five datasets, MTMs match or exceed traditional and neural baselines on coherence metrics, are consistently preferred by topic judge, and enable effective steering of LLM outputs.
+
+**Comment:** The paper introduces Mechanistic Topic Models using sparse autoencoders, aligning with representation learning and offering novel insights into topic modeling.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 4. [Semantic Convergence: Investigating Shared Representations Across Scaled LLMs](https://arxiv.org/abs/2507.22918) <a id="link4"></a>
+
+**ArXiv ID:** 2507.22918
+
+**Authors:** Daniel Son, Sanjana Rathore, Andrew Rufail, Adrian Simon, Daniel Zhang, Soham Dave, Cole Blondin, Kevin Zhu, Sean O'Brien
+
+**Abstract:** We investigate feature universality in Gemma-2 language models (Gemma-2-2B and Gemma-2-9B), asking whether models with a four-fold difference in scale still converge on comparable internal concepts. Using the Sparse Autoencoder (SAE) dictionary-learning pipeline, we utilize SAEs on each model's residual-stream activations, align the resulting monosemantic features via activation correlation, and compare the matched feature spaces with SVCCA and RSA. Middle layers yield the strongest overlap, while early and late layers show far less similarity. Preliminary experiments extend the analysis from single tokens to multi-token subspaces, showing that semantically similar subspaces interact similarly with language models. These results strengthen the case that large language models carve the world into broadly similar, interpretable features despite size differences, reinforcing universality as a foundation for cross-model interpretability.
+
+**Comment:** The paper investigates feature universality in LLMs using Sparse Autoencoders, relevant to representation learning and LLM behavior analysis.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 5. [BAR Conjecture: the Feasibility of Inference Budget-Constrained LLM Services with Authenticity and Reasoning](https://arxiv.org/abs/2507.23170) <a id="link5"></a>
+
+**ArXiv ID:** 2507.23170
+
+**Authors:** Jinan Zhou, Rajat Ghosh, Vaishnavi Bhargava, Debojyoti Dutta, Aryan Singhal
+
+**Abstract:** When designing LLM services, practitioners care about three key properties: inference-time budget, factual authenticity, and reasoning capacity. However, our analysis shows that no model can simultaneously optimize for all three. We formally prove this trade-off and propose a principled framework named The BAR Theorem for LLM-application design.
+
+**Comment:** The paper introduces the BAR Theorem, which provides a theoretical framework for understanding trade-offs in LLM services, aligning with the interest in theoretical insights into LLM behavior.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 6. [Seed-Prover: Deep and Broad Reasoning for Automated Theorem Proving](https://arxiv.org/abs/2507.23726) <a id="link6"></a>
+
+**ArXiv ID:** 2507.23726
+
+**Authors:** Luoxin Chen, Jinming Gu, Liankai Huang, Wenhao Huang, Zhicheng Jiang, Allan Jie, Xiaoran Jin, Xing Jin, Chenggang Li, Kaijing Ma, Cheng Ren, Jiawei Shen, Wenlei Shi, Tong Sun, He Sun, Jiahui Wang, Siran Wang, Zhihong Wang, Chenrui Wei, Shufa Wei, Yonghui Wu, Yuchen Wu, Yihang Xia, Huajian Xin, Fan Yang, Huaiyuan Ying, Hongyi Yuan, Zheng Yuan, Tianyang Zhan, Chi Zhang, Yue Zhang, Ge Zhang, Tianyun Zhao, Jianqiu Zhao, Yichi Zhou, Thomas Hanwen Zhu
+
+**Abstract:** LLMs have demonstrated strong mathematical reasoning abilities by leveraging reinforcement learning with long chain-of-thought, yet they continue to struggle with theorem proving due to the lack of clear supervision signals when solely using natural language. Dedicated domain-specific languages like Lean provide clear supervision via formal verification of proofs, enabling effective training through reinforcement learning. In this work, we propose \textbf{Seed-Prover}, a lemma-style whole-proof reasoning model. Seed-Prover can iteratively refine its proof based on Lean feedback, proved lemmas, and self-summarization. To solve IMO-level contest problems, we design three test-time inference strategies that enable both deep and broad reasoning. Seed-Prover proves $78.1\%$ of formalized past IMO problems, saturates MiniF2F, and achieves over 50\% on PutnamBench, outperforming the previous state-of-the-art by a large margin. To address the lack of geometry support in Lean, we introduce a geometry reasoning engine \textbf{Seed-Geometry}, which outperforms previous formal geometry engines. We use these two systems to participate in IMO 2025 and fully prove 5 out of 6 problems. This work represents a significant advancement in automated mathematical reasoning, demonstrating the effectiveness of formal verification with long chain-of-thought reasoning.
+
+**Comment:** The paper presents Seed-Prover, a model for automated theorem proving with architectural innovations, aligning with the AI for Science criterion.
+
+**Relevance:** 8
+**Novelty:** 8
+
+---
+
+## 7. [A Verifier Hierarchy](https://arxiv.org/abs/2507.23504) <a id="link7"></a>
+
+**ArXiv ID:** 2507.23504
+
+**Authors:** Maurits Kaptein
+
+**Abstract:** We investigate the trade-off between certificate length and verifier runtime. We prove a Verifier Trade-off Theorem showing that reducing the inherent verification time of a language from \(f(n)\) to \(g(n)\), where \(f(n) \ge g(n)\), requires certificates of length at least \(\Omega(\log(f(n) / g(n)))\). This theorem induces a natural hierarchy based on certificate complexity. We demonstrate its applicability to analyzing conjectured separations between complexity classes (e.g., \(\np\) and \(\exptime\)) and to studying natural problems such as string periodicity and rotation detection. Additionally, we provide perspectives on the \(\p\) vs. \(\np\) problem by relating it to the existence of sub-linear certificates.
+
+**Comment:** The paper presents a Verifier Trade-off Theorem, contributing to theoretical insights in complexity theory, which is relevant to emerging trends.
+
+**Relevance:** 8
+**Novelty:** 8
+
+---
+
+## 8. [AI paradigm for solving differential equations: first-principles data generation and scale-dilation operator AI solver](https://arxiv.org/abs/2507.23141) <a id="link8"></a>
+
+**ArXiv ID:** 2507.23141
+
+**Authors:** Xiangshu Gong, Zhiqiang Xie, Xiaowei Jin, Chen Wang, Yanling Qu, Wangmeng Zuo, Hui Li
+
+**Abstract:** Many problems are governed by differential equations (DEs). Artificial intelligence (AI) is a new path for solving DEs. However, data is very scarce and existing AI solvers struggle with approximation of high frequency components (AHFC). We propose an AI paradigm for solving diverse DEs, including DE-ruled first-principles data generation methodology and scale-dilation operator (SDO) AI solver. Using either prior knowledge or random fields, we generate solutions and then substitute them into the DEs to derive the sources and initial/boundary conditions through balancing DEs, thus producing arbitrarily vast amount of, first-principles-consistent training datasets at extremely low computational cost. We introduce a reversible SDO that leverages the Fourier transform of the multiscale solutions to fix AHFC, and design a spatiotemporally coupled, attention-based Transformer AI solver of DEs with SDO. An upper bound on the Hessian condition number of the loss function is proven to be proportional to the squared 2-norm of the solution gradient, revealing that SDO yields a smoother loss landscape, consequently fixing AHFC with efficient training. Extensive tests on diverse DEs demonstrate that our AI paradigm achieves consistently superior accuracy over state-of-the-art methods. This work makes AI solver of DEs to be truly usable in broad nature and engineering fields.
+
+**Comment:** The paper introduces a novel AI paradigm for solving differential equations using a Transformer-based AI solver, which aligns with the Model Architecture criterion. It also provides theoretical insights into the training dynamics, relevant to Representation Learning.
+
+**Relevance:** 8
+**Novelty:** 8
+
+---
+
+## 9. [Differentially Private Clipped-SGD: High-Probability Convergence with Arbitrary Clipping Level](https://arxiv.org/abs/2507.23512) <a id="link9"></a>
+
+**ArXiv ID:** 2507.23512
+
+**Authors:** Saleh Vatan Khah, Savelii Chezhegov, Shahrokh Farahmand, Samuel Horv\'ath, Eduard Gorbunov
+
+**Abstract:** Gradient clipping is a fundamental tool in Deep Learning, improving the high-probability convergence of stochastic first-order methods like SGD, AdaGrad, and Adam under heavy-tailed noise, which is common in training large language models. It is also a crucial component of Differential Privacy (DP) mechanisms. However, existing high-probability convergence analyses typically require the clipping threshold to increase with the number of optimization steps, which is incompatible with standard DP mechanisms like the Gaussian mechanism. In this work, we close this gap by providing the first high-probability convergence analysis for DP-Clipped-SGD with a fixed clipping level, applicable to both convex and non-convex smooth optimization under heavy-tailed noise, characterized by a bounded central $\alpha$-th moment assumption, $\alpha \in (1,2]$. Our results show that, with a fixed clipping level, the method converges to a neighborhood of the optimal solution with a faster rate than the existing ones. The neighborhood can be balanced against the noise introduced by DP, providing a refined trade-off between convergence speed and privacy guarantees.
+
+**Comment:** The paper provides a high-probability convergence analysis for DP-Clipped-SGD with a fixed clipping level, relevant to model compression and efficiency.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 10. [Coflex: Enhancing HW-NAS with Sparse Gaussian Processes for Efficient and Scalable DNN Accelerator Design](https://arxiv.org/abs/2507.23437) <a id="link10"></a>
+
+**ArXiv ID:** 2507.23437
+
+**Authors:** Yinhui Ma, Tomomasa Yamasaki, Zhehui Wang, Tao Luo, Bo Wang
+
+**Abstract:** Hardware-Aware Neural Architecture Search (HW-NAS) is an efficient approach to automatically co-optimizing neural network performance and hardware energy efficiency, making it particularly useful for the development of Deep Neural Network accelerators on the edge. However, the extensive search space and high computational cost pose significant challenges to its practical adoption. To address these limitations, we propose Coflex, a novel HW-NAS framework that integrates the Sparse Gaussian Process (SGP) with multi-objective Bayesian optimization. By leveraging sparse inducing points, Coflex reduces the GP kernel complexity from cubic to near-linear with respect to the number of training samples, without compromising optimization performance. This enables scalable approximation of large-scale search space, substantially decreasing computational overhead while preserving high predictive accuracy. We evaluate the efficacy of Coflex across various benchmarks, focusing on accelerator-specific architecture. Our experi- mental results show that Coflex outperforms state-of-the-art methods in terms of network accuracy and Energy-Delay-Product, while achieving a computational speed-up ranging from 1.9x to 9.5x.
+
+**Comment:** The paper introduces a novel HW-NAS framework integrating Sparse Gaussian Processes for efficient DNN accelerator design, which aligns with model architecture and compression topics.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 11. [Efficient Machine Unlearning via Influence Approximation](https://arxiv.org/abs/2507.23257) <a id="link11"></a>
+
+**ArXiv ID:** 2507.23257
+
+**Authors:** Jiawei Liu, Chenwang Wu, Defu Lian, Enhong Chen
+
+**Abstract:** Due to growing privacy concerns, machine unlearning, which aims at enabling machine learning models to ``forget" specific training data, has received increasing attention. Among existing methods, influence-based unlearning has emerged as a prominent approach due to its ability to estimate the impact of individual training samples on model parameters without retraining. However, this approach suffers from prohibitive computational overhead arising from the necessity to compute the Hessian matrix and its inverse across all training samples and parameters, rendering it impractical for large-scale models and scenarios involving frequent data deletion requests. This highlights the difficulty of forgetting. Inspired by cognitive science, which suggests that memorizing is easier than forgetting, this paper establishes a theoretical link between memorizing (incremental learning) and forgetting (unlearning). This connection allows machine unlearning to be addressed from the perspective of incremental learning. Unlike the time-consuming Hessian computations in unlearning (forgetting), incremental learning (memorizing) typically relies on more efficient gradient optimization, which supports the aforementioned cognitive theory. Based on this connection, we introduce the Influence Approximation Unlearning (IAU) algorithm for efficient machine unlearning from the incremental perspective. Extensive empirical evaluations demonstrate that IAU achieves a superior balance among removal guarantee, unlearning efficiency, and comparable model utility, while outperforming state-of-the-art methods across diverse datasets and model architectures. Our code is available at https://github.com/Lolo1222/IAU.
+
+**Comment:** The paper introduces Influence Approximation Unlearning, linking incremental learning and unlearning, relevant to model compression and efficiency.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 12. [Solution-aware vs global ReLU selection: partial MILP strikes back for DNN verification](https://arxiv.org/abs/2507.23197) <a id="link12"></a>
+
+**ArXiv ID:** 2507.23197
+
+**Authors:** Yuke Liao, Blaise Genest, Kuldeep Meel, Shaan Aryaman
+
+**Abstract:** To handle complex instances, we revisit a divide-and-conquer approach to break down the complexity: instead of few complex BaB calls, we rely on many small {\em partial} MILP calls. The crucial step is to select very few but very important ReLUs to treat using (costly) binary variables. The previous attempts were suboptimal in that respect. To select these important ReLU variables, we propose a novel {\em solution-aware} ReLU scoring ({\sf SAS}), as well as adapt the BaB-SR and BaB-FSB branching functions as {\em global} ReLU scoring ({\sf GS}) functions. We compare them theoretically as well as experimentally, and {\sf SAS} is more efficient at selecting a set of variables to open using binary variables. Compared with previous attempts, SAS reduces the number of binary variables by around 6 times, while maintaining the same level of accuracy. Implemented in {\em Hybrid MILP}, calling first $\alpha,\beta$-CROWN with a short time-out to solve easier instances, and then partial MILP, produces a very accurate yet efficient verifier, reducing by up to $40\%$ the number of undecided instances to low levels ($8-15\%$), while keeping a reasonable runtime ($46s-417s$ on average per instance), even for fairly large CNNs with 2 million parameters.
+
+**Comment:** The paper introduces a novel solution-aware ReLU selection method for DNN verification, which aligns with the Model Architecture criterion by proposing a new approach to handle ReLU variables in neural networks.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 13. [SimuRA: Towards General Goal-Oriented Agent via Simulative Reasoning Architecture with LLM-Based World Model](https://arxiv.org/abs/2507.23773) <a id="link13"></a>
+
+**ArXiv ID:** 2507.23773
+
+**Authors:** Mingkai Deng, Jinyu Hou, Yilin Shen, Hongxia Jin, Graham Neubig, Zhiting Hu, Eric Xing
+
+**Abstract:** AI agents built on large language models (LLMs) hold enormous promise, but current practice focuses on a one-task-one-agent approach, which not only falls short of scalability and generality, but also suffers from the fundamental limitations of autoregressive LLMs. On the other hand, humans are general agents who reason by mentally simulating the outcomes of their actions and plans. Moving towards a more general and powerful AI agent, we introduce SimuRA, a goal-oriented architecture for generalized agentic reasoning. Based on a principled formulation of optimal agent in any environment, \modelname overcomes the limitations of autoregressive reasoning by introducing a world model for planning via simulation. The generalized world model is implemented using LLM, which can flexibly plan in a wide range of environments using the concept-rich latent space of natural language. Experiments on difficult web browsing tasks show that \modelname improves the success of flight search from 0\% to 32.2\%. World-model-based planning, in particular, shows consistent advantage of up to 124\% over autoregressive planning, demonstrating the advantage of world model simulation as a reasoning paradigm. We are excited about the possibility for training a single, general agent model based on LLMs that can act superintelligently in all environments. To start, we make SimuRA, a web-browsing agent built on \modelname with pretrained LLMs, available as a research demo for public testing.
+
+**Comment:** The paper proposes a new architecture, SimuRA, for generalized agentic reasoning using LLMs, which aligns with interests in architectural innovations and theoretical insights into LLM behavior.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 14. [Improved Algorithms for Kernel Matrix-Vector Multiplication Under Sparsity Assumptions](https://arxiv.org/abs/2507.23539) <a id="link14"></a>
+
+**ArXiv ID:** 2507.23539
+
+**Authors:** Piotr Indyk, Michael Kapralov, Kshiteej Sheth, Tal Wagner
+
+**Abstract:** Motivated by the problem of fast processing of attention matrices, we study fast algorithms for computing matrix-vector products for asymmetric Gaussian Kernel matrices $K\in \mathbb{R}^{n\times n}$. $K$'s columns are indexed by a set of $n$ keys $k_1,k_2\ldots, k_n\in \mathbb{R}^d$, rows by a set of $n$ queries $q_1,q_2,\ldots,q_n\in \mathbb{R}^d $, and its $i,j$ entry is $K_{ij} = e^{-\|q_i-k_j\|_2^2/2\sigma^2}$ for some bandwidth parameter $\sigma>0$. Given a vector $x\in \mathbb{R}^n$ and error parameter $\epsilon>0$, our task is to output a $y\in \mathbb{R}^n$ such that $\|Kx-y\|_2\leq \epsilon \|x\|_2$ in time subquadratic in $n$ and linear in $d$. Our algorithms rely on the following modelling assumption about the matrices $K$: the sum of the entries of $K$ scales linearly in $n$, as opposed to worst case quadratic growth. We validate this assumption experimentally, for Gaussian kernel matrices encountered in various settings such as fast attention computation in LLMs. We obtain the first subquadratic-time algorithm that works under this assumption, for unrestricted vectors.
+
+**Comment:** The paper presents improved algorithms for kernel matrix-vector multiplication under sparsity assumptions, which aligns with interests in model compression and efficiency breakthroughs.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+# Paper Selection Prompt
+
+## System Prompt
+
+> You are a helpful paper reading assistant whose job is to read daily posts from ArXiv and identify a few papers that your friend will enjoy reading.
+> Your job is to carefully read the paper titles and abstracts below and find the ones that match the criteria below.
+
+## User Prompt
+
+> ## Instructions
+> 
+> Write the response in JSONL format with {ARXIVID, COMMENT, RELEVANCE, NOVELTY} on each line, one for each paper.
+> 
+> - ARXIVID: should be the ArXiv ID.
+> - COMMENT: should identify whether there is a criteria that match the paper very closely. These matches should not be based on general terms like "language modeling" or "advancements" and should specifically refer to a criterion. No need to mention the non-matching criteria.
+> - RELEVANCE: should be a score from 1-10.
+> - NOVELTY: should be a score from 1-10.
+> 
+> ## Scoring Criteria
+> 
+> > The "Relevance" score measures how closely the paper aligns with the core topics of the prompt.
+> > The "Novelty" score assesses the originality and impact of the paper.
+> > They are two **ORTHONORMAL** axes and **SHOULD NOT** be confused with each other.
+> 
+> ### Relevance Scoring
+> 
+> - Relevance 9-10 (Completely Relevant)
+>   - Focus: Fully aligned with core topics with no deviation, score the highest if contains relevant keywords in it.
+>   - Examples: Papers focused on foundational methods or theoretical research, whose titles contain topic keywords like "MoE".
+> 
+> - Relevance 7-8 (Relevant)
+>   - Focus: Retain a solid link to the main research area, though may touch on peripheral elements.
+>   - Examples: Papers research on the fundamental part of MoE through a less critical aspect like its behavior in GNN.
+> 
+> - Relevance 5-6 (Borderline)
+>   - Focus: Maintains a link to the core topic but also extends into at least one other domain/area beyond the primary focus.
+>   - Examples: Work referencing MoE centered on reinforcement learning.
+> 
+> - Relevance 3-4 (Irrelevant)
+>   - Focus: Largely outside our interests with no association to our topics.
+>   - Examples: Application-focused papers like using MoE to solve a problem in the real world.
+> 
+> - Relevance 1-2 (Ignore)
+>   - Focus: Purely unrelated to our topics. Completely a different domain.
+>   - **Exception**: If the paper hints at a cutting-edge, radically new direction that could eventually transform the primary domain, consider a score of 9–10 despite initial appearances. (Usually a very rare concept that belongs to the fundamental research)
+> 
+> ### Novelty Scoring
+> 
+> - Novelty 9-10 (Breakthrough)
+>   - Definition: Groundbreaking methods/theory introducing new directions or solving major challenges.
+>   - Examples: Entirely new paradigm for foundational models; a novel theory transforming representation learning.
+> 
+> - Novelty 7-8 (Improvements)
+>   - Definition: Substantial insights/enhancements, though not a full paradigm shift.
+>   - Examples: Modifications on existing methods yielding significantly better results.
+> 
+> - Novelty 5-6 (Borderline)
+>   - Definition: Incremental contributions with possible long-term benefits, not immediately transformative.
+>   - Examples: Moderately novel extension to an existing architecture; refining current methods without fundamentally altering them.
+> 
+> - Novelty 3-4 (Tangential)
+>   - Definition: Minor or domain-specific improvements with limited broader impact.
+>   - Examples: Slight modifications to known methods with strange motivation; purely engineering jobs like a new benchmark/dataset.
+> 
+> - Novelty 1-2 (Low)
+>   - Definition: Minimal originality, applying standard approaches without real innovation.
+>   - Examples: Using an off-the-shelf model without adding new insights; purely application-driven studies like finetuning a pretrained model using existing methods.
+> 
+> ## Papers
+> 
+> [PAPER LIST HERE]
+> 
+> ## Relevant Topics
+> 
+> Use the following relevance criteria to focus on foundational research. Keep **relevant** papers and filter out **irrelevant** ones. Avoid purely **application-driven** work.
+> 
+> 1. Representation Learning
+>    - Relevant: Insights into how deep networks encode information, feature/dictionary learning, sparse/contrastive methods, training dynamics in neural networks.
+>    - Irrelevant: Standard applications of known techniques lacking new theoretical or methodological contributions.
+> 
+> 2. Model Architecture
+>    - Relevant: Mixture-of-Experts (MoE), Transformers, Conditional/Dynamic Networks, Autoencoders, analysis on existing architectures (like encoder-decoder), or other architectural innovations.
+>    - Irrelevant: Merely using existing architectures for a certain task without insights into the structure themselves.
+> 
+> 3. Model Compression
+>    - Relevant: Sparsity, pruning, quantization, low-rank approaches, KV cache, or other algorithmic/theoretical efficiency breakthroughs.
+>    - Irrelevant: Straightforward applications of existing compression methods to new tasks.
+> 
+> 4. Large Language Models (LLMs)
+>    - Relevant: Major breakthroughs in pretraining or architecture, theoretical insights into LLM behavior/interpretability.
+>    - Irrelevant: Domain-specific usage (e.g., translation, jail-breaking), finetuning or inference tricks (e.g., instruction tuning, chain-of-thoughts, data mixing), or empirical dataset/benchmark studies and text-level analysis (e.g. hallucination, reasoning, safety).
+> 
+> 5. AI for Science
+>    - Relevant: Foundational research in molecular/protein modeling, new generative paradigms, or significant architecture-level innovations.
+>    - Irrelevant: Conventional, domain-specific applications without new theoretical perspectives.
+> 
+> 6. Emerging Trends
+>    - Relevant: Cutting-edge theoretical work challenging established assumptions or introducing broad new paradigms.
+>    - Irrelevant: Incremental improvements or trend-following without novel insights.
+> 
+> **Keywords:**
+> 
+> - Relevant: Mixture of Experts (MoE), Representation Learning, Compression/Efficiency, Sparse/Sparsity, Pruning, Quantization, Low-rank, Foundation Model, etc.
+> - Irrelevant: Reinforcement Learning, Transfer Learning, Federated Learning, Online Learning, Diffusion Models, etc.
+> - Application: Image Segmentation, Medical Imaging, 3D Vision, Video Understanding, Information Retrieval, Summarization, Recommendation Systems, Machine Translation, Speech Recognition, Signal Processing, Spatial/Temporal Modeling, Time Series, Knowledge Graph, etc.

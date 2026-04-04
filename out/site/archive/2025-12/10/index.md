@@ -1,0 +1,530 @@
+<div style="display: flex; align-items: flex-start; justify-content: space-between; width: 100%;"><div style="width: 33.33%; text-align: left;"><a href="../09"><img src="../../../assets/nav/day/2025-12-10-prev.svg" alt="Previous Day 2025-12-09"></a></div><div style="width: 33.33%; text-align: center;"><a href=".."><img src="../../../assets/nav/day/2025-12-10-center.svg" alt="Monthly Overview 2025-12"></a></div><div style="width: 33.33%; text-align: right;"><a href="../11"><img src="../../../assets/nav/day/2025-12-10-next.svg" alt="Next Day 2025-12-11"></a></div></div>
+
+# Personalized Daily ArXiv Papers 2025-12-10
+
+| *[gpt-5]*   | Prompt   | Completion   | Total   |
+|:-----------:|:--------:|:------------:|:-------:|
+| **Token**   | 38012    | 34218        | 72230   |
+| **Cost**    | $0.05    | $0.34        | $0.39   |
+
+Total arXiv papers: 481
+
+Total scanned papers: 283
+
+Total relevant papers: 23
+
+**Table of contents with paper titles:**
+
+1. [LUNA: Linear Universal Neural Attention with Generalization Guarantees](#user-content-link1)
+**Authors:** Ashkan Shahbazi, Ping He, Ali Abbasi, Yikun Bai, Xinran Liu, Elaheh Akbari, Darian Salehi, Navid NaderiAlizadeh, Soheil Kolouri
+
+2. [HybridToken-VLM: Hybrid Token Compression for Vision-Language Models](#user-content-link2)
+**Authors:** Jusheng Zhang, Xiaoyang Guo, Kaitong Cai, Qinhan Lv, Yijia Fan, Wenhao Chai, Jian Wang, Keze Wang
+
+3. [Generation is Required for Data-Efficient Perception](#user-content-link3)
+**Authors:** Jack Brady, Bernhard Sch\"olkopf, Thomas Kipf, Simon Buchholz, Wieland Brendel
+
+4. [LAPA: Log-Domain Prediction-Driven Dynamic Sparsity Accelerator for Transformer Model](#user-content-link4)
+**Authors:** Huizheng Wang, Hongbin Wang, Shaojun Wei, Yang Hu, Shouyi Yin
+
+5. [Do Depth-Grown Models Overcome the Curse of Depth? An In-Depth Analysis](#user-content-link5)
+**Authors:** Ferdinand Kapl, Emmanouil Angelis, Tobias H\"oppe, Kaitlin Maile, Johannes von Oswald, Nino Scherrer, Stefan Bauer
+
+6. [LayerPipe2: Multistage Pipelining and Weight Recompute via Improved Exponential Moving Average for Training Neural Networks](#user-content-link6)
+**Authors:** Nanda K. Unnikrishnan, Keshab K. Parhi
+
+7. [SkipKV: Selective Skipping of KV Generation and Storage for Efficient Inference with Large Reasoning Models](#user-content-link7)
+**Authors:** Jiayi Tian, Seyedarmin Azizi, Yequan Zhao, Erfan Baghaei Potraghloo, Sean McPherson, Sharath Nittur Sridhar, Zhengyang Wang, Zheng Zhang, Massoud Pedram, Souvik Kundu
+
+8. [GSPN-2: Efficient Parallel Sequence Modeling](#user-content-link8)
+**Authors:** Hongjun Wang, Yitong Jiang, Collin McCarthy, David Wehr, Hanrong Ye, Xinhao Li, Ka Chun Cheung, Wonmin Byeon, Jinwei Gu, Ke Chen, Kai Han, Hongxu Yin, Pavlo Molchanov, Jan Kautz, Sifei Liu
+
+9. [ThreadWeaver: Adaptive Threading for Efficient Parallel Reasoning in Language Models](#user-content-link9)
+**Authors:** Long Lian, Sida Wang, Felix Juefei-Xu, Tsu-Jui Fu, Xiuyu Li, Adam Yala, Trevor Darrell, Alane Suhr, Yuandong Tian, Xi Victoria Lin
+
+10. [InfiniteVL: Synergizing Linear and Sparse Attention for Highly-Efficient, Unlimited-Input Vision-Language Models](#user-content-link10)
+**Authors:** Hongyuan Tao, Bencheng Liao, Shaoyu Chen, Haoran Yin, Qian Zhang, Wenyu Liu, Xinggang Wang
+
+11. [Mathematical Foundations of Neural Tangents and Infinite-Width Networks](#user-content-link11)
+**Authors:** Rachana Mysore, Preksha Girish, Kavitha Jayaram, Shrey Kumar, Preksha Girish, Shravan Sanjeev Bagal, Kavitha Jayaram, Shreya Aravind Shastry
+
+12. [Softly Symbolifying Kolmogorov-Arnold Networks](#user-content-link12)
+**Authors:** James Bagrow, Josh Bongard
+
+13. [Complexity of One-Dimensional ReLU DNNs](#user-content-link13)
+**Authors:** Jonathan Kogan, Hayden Jananthan, Jeremy Kepner
+
+14. [Prismatic World Model: Learning Compositional Dynamics for Planning in Hybrid Systems](#user-content-link14)
+**Authors:** Mingwei Li, Xiaoyuan Zhang, Chengwei Yang, Zilong Zheng, Yaodong Yang
+
+15. [Short-Context Dominance: How Much Local Context Natural Language Actually Needs?](#user-content-link15)
+**Authors:** Vala Vakilian, Zimeng Wang, Ankit Singh Rawat, Christos Thrampoulidis
+
+16. [gHAWK: Local and Global Structure Encoding for Scalable Training of Graph Neural Networks on Knowledge Graphs](#user-content-link16)
+**Authors:** Humera Sabir, Fatima Farooq, Ashraf Aboulnaga
+
+17. [PR-CapsNet: Pseudo-Riemannian Capsule Network with Adaptive Curvature Routing for Graph Learning](#user-content-link17)
+**Authors:** Ye Qin, Jingchao Wang, Yang Shi, Haiying Huang, Junxu Li, Weijian Liu, Tinghui Chen, Jinghui Qin
+
+18. [MobileFineTuner: A Unified End-to-End Framework for Fine-Tuning LLMs on Mobile Phones](#user-content-link18)
+**Authors:** Jiaxiang Geng, Lunyu Zhao, Yiyi Lu, Bing Luo
+
+19. [Semi-Supervised Contrastive Learning with Orthonormal Prototypes](#user-content-link19)
+**Authors:** Huanran Li (Department of Electrical Engineering), Manh Nguyen (Statistics), Daniel Pimentel-Alarc\'on (Biostatistics, Wisconsin Institute of Discovery, University of Wisconsin-Madison)
+
+20. [Nonnegative Matrix Factorization through Cone Collapse](#user-content-link20)
+**Authors:** Manh Nguyen (Department of Statistics), Daniel Pimentel-Alarc\'on (Department of Biostatistics and Medical Informatics, Wisconsin Institute of Discovery, University of Wisconsin-Madison)
+
+21. [MixLM: High-Throughput and Effective LLM Ranking via Text-Embedding Mix-Interaction](#user-content-link21)
+**Authors:** Guoyao Li, Ran He, Shusen Jing, Kayhan Behdin, Yubo Wang, Sundara Raman Ramachandran, Chanh Nguyen, Jian Sheng, Xiaojing Ma, Chuanrui Zhu, Sriram Vasudevan, Muchen Wu, Sayan Ghosh, Lin Su, Qingquan Song, Xiaoqing Wang, Zhipeng Wang, Qing Lan, Yanning Chen, Jingwei Wu, Luke Simon, Wenjing Zhang, Qi Guo, Fedor Borisyuk
+
+22. [GeoDM: Geometry-aware Distribution Matching for Dataset Distillation](#user-content-link22)
+**Authors:** Xuhui Li, Zhengquan Luo, Zihui Cui, Zhiqiang Xu
+
+23. [Revisiting the Scaling Properties of Downstream Metrics in Large Language Model Training](#user-content-link23)
+**Authors:** Jakub Krajewski, Amitis Shidani, Dan Busbridge, Sam Wiseman, Jason Ramapuram
+
+---
+
+## 1. [LUNA: Linear Universal Neural Attention with Generalization Guarantees](https://arxiv.org/abs/2512.08061) <a id="link1"></a>
+
+**ArXiv ID:** 2512.08061
+
+**Authors:** Ashkan Shahbazi, Ping He, Ali Abbasi, Yikun Bai, Xinran Liu, Elaheh Akbari, Darian Salehi, Navid NaderiAlizadeh, Soheil Kolouri
+
+**Abstract:** Scaling attention faces a critical bottleneck: the $\mathcal{O}(n^2)$ quadratic computational cost of softmax attention, which limits its application in long-sequence domains. While linear attention mechanisms reduce this cost to $\mathcal{O}(n)$, they typically rely on fixed random feature maps, such as random Fourier features or hand-crafted functions. This reliance on static, data-agnostic kernels creates a fundamental trade-off, forcing practitioners to sacrifice significant model accuracy for computational efficiency. We introduce \textsc{LUNA}, a kernelized linear attention mechanism that eliminates this trade-off, retaining linear cost while matching and surpassing the accuracy of quadratic attention. \textsc{LUNA} is built on the key insight that the kernel feature map itself should be learned rather than fixed a priori. By parameterizing the kernel, \textsc{LUNA} learns a feature basis tailored to the specific data and task, overcoming the expressive limitations of fixed-feature methods. \textsc{Luna} implements this with a learnable feature map that induces a positive-definite kernel and admits a streaming form, yielding linear time and memory scaling in the sequence length. Empirical evaluations validate our approach across diverse settings. On the Long Range Arena (LRA), \textsc{Luna} achieves state-of-the-art average accuracy among efficient Transformers under compute parity, using the same parameter count, training steps, and approximate FLOPs. \textsc{Luna} also excels at post-hoc conversion: replacing softmax in fine-tuned BERT and ViT-B/16 checkpoints and briefly fine-tuning recovers most of the original performance, substantially outperforming fixed linearizations.
+
+**Comment:** Matches Model Architecture and Efficiency: linear attention with learned positive-definite kernel feature maps and streaming computation; retains linear time/memory.
+
+**Relevance:** 10
+**Novelty:** 9
+
+---
+
+## 2. [HybridToken-VLM: Hybrid Token Compression for Vision-Language Models](https://arxiv.org/abs/2512.08240) <a id="link2"></a>
+
+**ArXiv ID:** 2512.08240
+
+**Authors:** Jusheng Zhang, Xiaoyang Guo, Kaitong Cai, Qinhan Lv, Yijia Fan, Wenhao Chai, Jian Wang, Keze Wang
+
+**Abstract:** Vision-language models (VLMs) have transformed multimodal reasoning, but feeding hundreds of visual patch tokens into LLMs incurs quadratic computational costs, straining memory and context windows. Traditional approaches face a trade-off: continuous compression dilutes high-level semantics such as object identities, while discrete quantization loses fine-grained details such as textures. We introduce HTC-VLM, a hybrid framework that disentangles semantics and appearance through dual channels, i.e., a continuous pathway for fine-grained details via ViT patches and a discrete pathway for symbolic anchors using MGVQ quantization projected to four tokens. These are fused into a 580-token hybrid sequence and compressed into a single voco token via a disentanglement attention mask and bottleneck, ensuring efficient and grounded representations. HTC-VLM achieves an average performance retention of 87.2 percent across seven benchmarks (GQA, VQAv2, MMBench, MME, POPE, SEED-Bench, ScienceQA-Image), outperforming the leading continuous baseline at 81.0 percent with a 580-to-1 compression ratio. Attention analyses show that the compressed token prioritizes the discrete anchor, validating its semantic guidance. Our work demonstrates that a minimalist hybrid design can resolve the efficiency-fidelity dilemma and advance scalable VLMs.
+
+**Comment:** Compression/Efficiency: hybrid discrete–continuous token compression for VLMs yielding 580-to-1 compression and a single fused token.
+
+**Relevance:** 10
+**Novelty:** 9
+
+---
+
+## 3. [Generation is Required for Data-Efficient Perception](https://arxiv.org/abs/2512.08854) <a id="link3"></a>
+
+**ArXiv ID:** 2512.08854
+
+**Authors:** Jack Brady, Bernhard Sch\"olkopf, Thomas Kipf, Simon Buchholz, Wieland Brendel
+
+**Abstract:** It has been hypothesized that human-level visual perception requires a generative approach in which internal representations result from inverting a decoder. Yet today's most successful vision models are non-generative, relying on an encoder that maps images to representations without decoder inversion. This raises the question of whether generation is, in fact, necessary for machines to achieve human-level visual perception. To address this, we study whether generative and non-generative methods can achieve compositional generalization, a hallmark of human perception. Under a compositional data generating process, we formalize the inductive biases required to guarantee compositional generalization in decoder-based (generative) and encoder-based (non-generative) methods. We then show theoretically that enforcing these inductive biases on encoders is generally infeasible using regularization or architectural constraints. In contrast, for generative methods, the inductive biases can be enforced straightforwardly, thereby enabling compositional generalization by constraining a decoder and inverting it. We highlight how this inversion can be performed efficiently, either online through gradient-based search or offline through generative replay. We examine the empirical implications of our theory by training a range of generative and non-generative methods on photorealistic image datasets. We find that, without the necessary inductive biases, non-generative methods often fail to generalize compositionally and require large-scale pretraining or added supervision to improve generalization. By comparison, generative methods yield significant improvements in compositional generalization, without requiring additional data, by leveraging suitable inductive biases on a decoder along with search and replay.
+
+**Comment:** Matches Representation Learning Theory: formalizes inductive biases for compositional generalization and shows why generative inversion enables data-efficient perception.
+
+**Relevance:** 9
+**Novelty:** 9
+
+---
+
+## 4. [LAPA: Log-Domain Prediction-Driven Dynamic Sparsity Accelerator for Transformer Model](https://arxiv.org/abs/2512.07855) <a id="link4"></a>
+
+**ArXiv ID:** 2512.07855
+
+**Authors:** Huizheng Wang, Hongbin Wang, Shaojun Wei, Yang Hu, Shouyi Yin
+
+**Abstract:** Attention-based Transformers have revolutionized natural language processing (NLP) and shown strong performance in computer vision (CV) tasks. However, as the input sequence varies, the computational bottlenecks in Transformer models exhibit dynamic behavior across stages, which calls for a cross-stage sparse acceleration strategy. Unfortunately, most existing sparse Transformer approaches are single-stage based, and their sparsity prediction mechanisms lead to significant power overhead when applied across multiple stages. To this end, this paper proposes a log-domain attention prediction algorithm-architecture co-design, named LAPA. First, an asymmetric leading one computing (ALOC) scheme is designed to eliminate expensive multiplications. Next, a mixed-precision multi-round shifting accumulation (MRSA) mechanism is further proposed to mitigate the accumulation overhead. A data-feature dependent filter (DDF) strategy is designed to work in concert with the MRSA process. Finally, an elaborate accelerator is designed to translate the theoretical enhancement into practical hardware improvement. Experimental results show that LAPA achieves 3.52x, 3.24x and 2.79x higher energy efficiency than the state-of-the-art (SOTA) works Spatten, Sanger and FACT, respectively.
+
+**Comment:** Matches Compression/Efficiency: dynamic sparsity prediction and log-domain computation with hardware co-design for Transformer acceleration.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 5. [Do Depth-Grown Models Overcome the Curse of Depth? An In-Depth Analysis](https://arxiv.org/abs/2512.08819) <a id="link5"></a>
+
+**ArXiv ID:** 2512.08819
+
+**Authors:** Ferdinand Kapl, Emmanouil Angelis, Tobias H\"oppe, Kaitlin Maile, Johannes von Oswald, Nino Scherrer, Stefan Bauer
+
+**Abstract:** Gradually growing the depth of Transformers during training can not only reduce training cost but also lead to improved reasoning performance, as shown by MIDAS (Saunshi et al., 2024). Thus far, however, a mechanistic understanding of these gains has been missing. In this work, we establish a connection to recent work showing that layers in the second half of non-grown, pre-layernorm Transformers contribute much less to the final output distribution than those in the first half - also known as the Curse of Depth (Sun et al., 2025, Csord\'as et al., 2025). Using depth-wise analyses, we demonstrate that growth via gradual middle stacking yields more effective utilization of model depth, alters the residual stream structure, and facilitates the formation of permutable computational blocks. In addition, we propose a lightweight modification of MIDAS that yields further improvements in downstream reasoning benchmarks. Overall, this work highlights how the gradual growth of model depth can lead to the formation of distinct computational circuits and overcome the limited depth utilization seen in standard non-grown models.
+
+**Comment:** Training dynamics/Architecture growth: analyzes and improves gradual depth stacking to counter the Transformer curse of depth with mechanistic insights.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 6. [LayerPipe2: Multistage Pipelining and Weight Recompute via Improved Exponential Moving Average for Training Neural Networks](https://arxiv.org/abs/2512.08160) <a id="link6"></a>
+
+**ArXiv ID:** 2512.08160
+
+**Authors:** Nanda K. Unnikrishnan, Keshab K. Parhi
+
+**Abstract:** In our prior work, LayerPipe, we had introduced an approach to accelerate training of convolutional, fully connected, and spiking neural networks by overlapping forward and backward computation. However, despite empirical success, a principled understanding of how much gradient delay needs to be introduced at each layer to achieve desired level of pipelining was not addressed. This paper, LayerPipe2, fills that gap by formally deriving LayerPipe using variable delayed gradient adaptation and retiming. We identify where delays may be legally inserted and show that the required amount of delay follows directly from the network structure where inner layers require fewer delays and outer layers require longer delays. When pipelining is applied at every layer, the amount of delay depends only on the number of remaining downstream stages. When layers are pipelined in groups, all layers in the group share the same assignment of delays. These insights not only explain previously observed scheduling patterns but also expose an often overlooked challenge that pipelining implicitly requires storage of historical weights. We overcome this storage bottleneck by developing a pipeline--aware moving average that reconstructs the required past states rather than storing them explicitly. This reduces memory cost without sacrificing the accuracy guarantees that makes pipelined learning viable. The result is a principled framework that illustrates how to construct LayerPipe architectures, predicts their delay requirements, and mitigates their storage burden, thereby enabling scalable pipelined training with controlled communication computation tradeoffs.
+
+**Comment:** High Performance Computing: principled multistage pipelining with variable gradient delays and pipeline-aware EMA to reconstruct past weights and cut memory.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 7. [SkipKV: Selective Skipping of KV Generation and Storage for Efficient Inference with Large Reasoning Models](https://arxiv.org/abs/2512.07993) <a id="link7"></a>
+
+**ArXiv ID:** 2512.07993
+
+**Authors:** Jiayi Tian, Seyedarmin Azizi, Yequan Zhao, Erfan Baghaei Potraghloo, Sean McPherson, Sharath Nittur Sridhar, Zhengyang Wang, Zheng Zhang, Massoud Pedram, Souvik Kundu
+
+**Abstract:** Large reasoning models (LRMs) often cost significant key-value (KV) cache overhead, due to their linear growth with the verbose chain-of-thought (CoT) reasoning process. This costs both memory and throughput bottleneck limiting their efficient deployment. Towards reducing KV cache size during inference, we first investigate the effectiveness of existing KV cache eviction methods for CoT reasoning. Interestingly, we find that due to unstable token-wise scoring and the reduced effective KV budget caused by padding tokens, state-of-the-art (SoTA) eviction methods fail to maintain accuracy in the multi-batch setting. Additionally, these methods often generate longer sequences than the original model, as semantic-unaware token-wise eviction leads to repeated revalidation during reasoning. To address these issues, we present \textbf{SkipKV}, a \textbf{\textit{training-free}} KV compression method for selective \textit{eviction} and \textit{generation} operating at a coarse-grained sentence-level sequence removal for efficient CoT reasoning. In specific, it introduces a \textit{sentence-scoring metric} to identify and remove highly similar sentences while maintaining semantic coherence. To suppress redundant generation, SkipKV dynamically adjusts a steering vector to update the hidden activation states during inference enforcing the LRM to generate concise response. Extensive evaluations on multiple reasoning benchmarks demonstrate the effectiveness of SkipKV in maintaining up to $\mathbf{26.7}\%$ improved accuracy compared to the alternatives, at a similar compression budget. Additionally, compared to SoTA, SkipKV yields up to $\mathbf{1.6}\times$ fewer generation length while improving throughput up to $\mathbf{1.7}\times$.
+
+**Comment:** Matches Model Compression and Efficiency: training-free KV-cache compression via selective sentence-level eviction and generation control for CoT.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 8. [GSPN-2: Efficient Parallel Sequence Modeling](https://arxiv.org/abs/2512.07884) <a id="link8"></a>
+
+**ArXiv ID:** 2512.07884
+
+**Authors:** Hongjun Wang, Yitong Jiang, Collin McCarthy, David Wehr, Hanrong Ye, Xinhao Li, Ka Chun Cheung, Wonmin Byeon, Jinwei Gu, Ke Chen, Kai Han, Hongxu Yin, Pavlo Molchanov, Jan Kautz, Sifei Liu
+
+**Abstract:** Efficient vision transformer remains a bottleneck for high-resolution images and long-video related real-world applications. Generalized Spatial Propagation Network (GSPN) addresses this by replacing quadratic self-attention with a line-scan propagation scheme, bringing the cost close to linear in the number of rows or columns, while retaining accuracy. Despite this advancement, the existing GSPN implementation still suffers from (i) heavy overhead due to repeatedly launching GPU kernels, (ii) excessive data transfers from global GPU memory, and (iii) redundant computations caused by maintaining separate propagation weights for each channel. We introduce GSPN-2, a joint algorithm-system redesign. In particular, we eliminate thousands of micro-launches from the previous implementation into one single 2D kernel, explicitly pin one warp to each channel slice, and stage the previous column's activations in shared memory. On the model side, we introduce a compact channel propagation strategy that replaces per-channel matrices, trimming parameters, and align naturally with the affinity map used in transformer attention. Experiments demonstrate GSPN-2's effectiveness across image classification and text-to-image synthesis tasks, matching transformer-level accuracy with significantly lower computational cost. GSPN-2 establishes a new efficiency frontier for modeling global spatial context in vision applications through its unique combination of structured matrix transformations and GPU-optimized implementation. Project page: https://whj363636.github.io/GSPN2/
+
+**Comment:** Matches HPC and Model Architecture: algorithm–system co-design for efficient global context modeling (GSPN-2) with fused kernels and compact channel propagation as an alternative to self-attention.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 9. [ThreadWeaver: Adaptive Threading for Efficient Parallel Reasoning in Language Models](https://arxiv.org/abs/2512.07843) <a id="link9"></a>
+
+**ArXiv ID:** 2512.07843
+
+**Authors:** Long Lian, Sida Wang, Felix Juefei-Xu, Tsu-Jui Fu, Xiuyu Li, Adam Yala, Trevor Darrell, Alane Suhr, Yuandong Tian, Xi Victoria Lin
+
+**Abstract:** Scaling inference-time computation has enabled Large Language Models (LLMs) to achieve strong reasoning performance, but inherently sequential decoding leads to substantial latency, especially on complex tasks. Recent work on adaptive parallel reasoning aims to improve inference efficiency by decomposing the problem-solving process into concurrent reasoning threads when beneficial. However, existing methods on realistic tasks are either limited to supervised behavior cloning or exhibit significant accuracy drops compared to widely-used sequential long chain-of-thought (CoT) baselines. Moreover, many require customized inference engines, complicating deployment. We introduce ThreadWeaver, a framework for adaptive parallel reasoning that achieves accuracy on par with popular sequential reasoning models of comparable size while significantly reducing inference latency. ThreadWeaver's performance stems from three key innovations: 1) a two-stage parallel trajectory generator that produces large-scale, high-quality CoT data with parallel annotations for supervised fine-tuning; 2) a trie-based training-inference co-design that enables parallel reasoning on any off-the-shelf autoregressive inference engine without modifying position embeddings or KV caches; and 3) a parallelization-aware reinforcement learning framework that teaches the model to balance accuracy with effective parallelization. Across six challenging mathematical reasoning benchmarks, ThreadWeaver trained atop Qwen3-8B achieves accuracy comparable to cutting-edge sequential reasoning models (71.9% on average and 79.9% on AIME24) while delivering up to 1.53x average speedup in token latency, establishing a new Pareto frontier between accuracy and efficiency.
+
+**Comment:** Efficiency/HPC: adaptive parallel reasoning at inference with trie-based training–inference co-design avoiding KV cache/PE changes, plus RL for parallelization.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 10. [InfiniteVL: Synergizing Linear and Sparse Attention for Highly-Efficient, Unlimited-Input Vision-Language Models](https://arxiv.org/abs/2512.08829) <a id="link10"></a>
+
+**ArXiv ID:** 2512.08829
+
+**Authors:** Hongyuan Tao, Bencheng Liao, Shaoyu Chen, Haoran Yin, Qian Zhang, Wenyu Liu, Xinggang Wang
+
+**Abstract:** Window attention and linear attention represent two principal strategies for mitigating the quadratic complexity and ever-growing KV cache in Vision-Language Models (VLMs). However, we observe that window-based VLMs suffer performance degradation when sequence length exceeds the window size, while linear attention underperforms on information-intensive tasks such as OCR and document understanding. To overcome these limitations, we propose InfiniteVL, a linear-complexity VLM architecture that synergizes sliding window attention (SWA) with Gated DeltaNet. For achieving competitive multimodal performance under constrained resources, we design a three-stage training strategy comprising distillation pretraining, instruction tuning, and long-sequence SFT. Remarkably, using less than 2\% of the training data required by leading VLMs, InfiniteVL not only substantially outperforms previous linear-complexity VLMs but also matches the performance of leading Transformer-based VLMs, while demonstrating effective long-term memory retention. Compared to similar-sized Transformer-based VLMs accelerated by FlashAttention-2, InfiniteVL achieves over 3.6\times inference speedup while maintaining constant latency and memory footprint. In streaming video understanding scenarios, it sustains a stable 24 FPS real-time prefill speed while preserving long-term memory cache. Code and models are available at https://github.com/hustvl/InfiniteVL.
+
+**Comment:** Architecture + efficiency: combines sliding-window attention with linear attention (Gated DeltaNet) for linear complexity, constant KV cache, and faster inference.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 11. [Mathematical Foundations of Neural Tangents and Infinite-Width Networks](https://arxiv.org/abs/2512.08264) <a id="link11"></a>
+
+**ArXiv ID:** 2512.08264
+
+**Authors:** Rachana Mysore, Preksha Girish, Kavitha Jayaram, Shrey Kumar, Preksha Girish, Shravan Sanjeev Bagal, Kavitha Jayaram, Shreya Aravind Shastry
+
+**Abstract:** We investigate the mathematical foundations of neural networks in the infinite-width regime through the Neural Tangent Kernel (NTK). We propose the NTK-Eigenvalue-Controlled Residual Network (NTK-ECRN), an architecture integrating Fourier feature embeddings, residual connections with layerwise scaling, and stochastic depth to enable rigorous analysis of kernel evolution during training. Our theoretical contributions include deriving bounds on NTK dynamics, characterizing eigenvalue evolution, and linking spectral properties to generalization and optimization stability. Empirical results on synthetic and benchmark datasets validate the predicted kernel behavior and demonstrate improved training stability and generalization. This work provides a comprehensive framework bridging infinite-width theory and practical deep-learning architectures.
+
+**Comment:** Matches Representation Learning and Model Architecture: NTK-ECRN enables rigorous analysis with bounds on NTK dynamics/eigenvalues linking to generalization/stability.
+
+**Relevance:** 9
+**Novelty:** 7
+
+---
+
+## 12. [Softly Symbolifying Kolmogorov-Arnold Networks](https://arxiv.org/abs/2512.07875) <a id="link12"></a>
+
+**ArXiv ID:** 2512.07875
+
+**Authors:** James Bagrow, Josh Bongard
+
+**Abstract:** Kolmogorov-Arnold Networks (KANs) offer a promising path toward interpretable machine learning: their learnable activations can be studied individually, while collectively fitting complex data accurately. In practice, however, trained activations often lack symbolic fidelity, learning pathological decompositions with no meaningful correspondence to interpretable forms. We propose Softly Symbolified Kolmogorov-Arnold Networks (S2KAN), which integrate symbolic primitives directly into training. Each activation draws from a dictionary of symbolic and dense terms, with learnable gates that sparsify the representation. Crucially, this sparsification is differentiable, enabling end-to-end optimization, and is guided by a principled Minimum Description Length objective. When symbolic terms suffice, S2KAN discovers interpretable forms; when they do not, it gracefully degrades to dense splines. We demonstrate competitive or superior accuracy with substantially smaller models across symbolic benchmarks, dynamical systems forecasting, and real-world prediction tasks, and observe evidence of emergent self-sparsification even without regularization pressure.
+
+**Comment:** Matches Model Architecture and Sparsity: integrates symbolic primitives with differentiable sparsifying gates (MDL-guided) in KANs for interpretable representations.
+
+**Relevance:** 9
+**Novelty:** 7
+
+---
+
+## 13. [Complexity of One-Dimensional ReLU DNNs](https://arxiv.org/abs/2512.08091) <a id="link13"></a>
+
+**ArXiv ID:** 2512.08091
+
+**Authors:** Jonathan Kogan, Hayden Jananthan, Jeremy Kepner
+
+**Abstract:** We study the expressivity of one-dimensional (1D) ReLU deep neural networks through the lens of their linear regions. For randomly initialized, fully connected 1D ReLU networks (He scaling with nonzero bias) in the infinite-width limit, we prove that the expected number of linear regions grows as $\sum_{i = 1}^L n_i + \mathop{{o}}\left(\sum_{i = 1}^L{n_i}\right) + 1$, where $n_\ell$ denotes the number of neurons in the $\ell$-th hidden layer. We also propose a function-adaptive notion of sparsity that compares the expected regions used by the network to the minimal number needed to approximate a target within a fixed tolerance.
+
+**Comment:** Matches Representation Learning Theory: expressivity of 1D ReLU DNNs via linear region counts; introduces function-adaptive sparsity notion.
+
+**Relevance:** 9
+**Novelty:** 7
+
+---
+
+## 14. [Prismatic World Model: Learning Compositional Dynamics for Planning in Hybrid Systems](https://arxiv.org/abs/2512.08411) <a id="link14"></a>
+
+**ArXiv ID:** 2512.08411
+
+**Authors:** Mingwei Li, Xiaoyuan Zhang, Chengwei Yang, Zilong Zheng, Yaodong Yang
+
+**Abstract:** Model-based planning in robotic domains is fundamentally challenged by the hybrid nature of physical dynamics, where continuous motion is punctuated by discrete events such as contacts and impacts. Conventional latent world models typically employ monolithic neural networks that enforce global continuity, inevitably over-smoothing the distinct dynamic modes (e.g., sticking vs. sliding, flight vs. stance). For a planner, this smoothing results in catastrophic compounding errors during long-horizon lookaheads, rendering the search process unreliable at physical boundaries. To address this, we introduce the Prismatic World Model (PRISM-WM), a structured architecture designed to decompose complex hybrid dynamics into composable primitives. PRISM-WM leverages a context-aware Mixture-of-Experts (MoE) framework where a gating mechanism implicitly identifies the current physical mode, and specialized experts predict the associated transition dynamics. We further introduce a latent orthogonalization objective to ensure expert diversity, effectively preventing mode collapse. By accurately modeling the sharp mode transitions in system dynamics, PRISM-WM significantly reduces rollout drift. Extensive experiments on challenging continuous control benchmarks, including high-dimensional humanoids and diverse multi-task settings, demonstrate that PRISM-WM provides a superior high-fidelity substrate for trajectory optimization algorithms (e.g., TD-MPC), proving its potential as a powerful foundational model for next-generation model-based agents.
+
+**Comment:** Model architecture (MoE): context-aware gating with specialized experts for hybrid dynamics; adds latent orthogonalization to enforce expert diversity.
+
+**Relevance:** 9
+**Novelty:** 7
+
+---
+
+## 15. [Short-Context Dominance: How Much Local Context Natural Language Actually Needs?](https://arxiv.org/abs/2512.08082) <a id="link15"></a>
+
+**ArXiv ID:** 2512.08082
+
+**Authors:** Vala Vakilian, Zimeng Wang, Ankit Singh Rawat, Christos Thrampoulidis
+
+**Abstract:** We investigate the short-context dominance hypothesis: that for most sequences, a small local prefix suffices to predict their next tokens. Using large language models as statistical oracles, we measure the minimum context length (MCL) needed to reproduce accurate full-context predictions across datasets with sequences of varying lengths. For sequences with 1-7k tokens from long-context documents, we consistently find that 75-80% require only the last 96 tokens at most. Given the dominance of short-context tokens, we then ask whether it is possible to detect challenging long-context sequences for which a short local prefix does not suffice for prediction. We introduce a practical proxy to MCL, called Distributionally Aware MCL (DaMCL), that does not require knowledge of the actual next-token and is compatible with sampling strategies beyond greedy decoding. Our experiments validate that simple thresholding of the metric defining DaMCL achieves high performance in detecting long vs. short context sequences. Finally, to counter the bias that short-context dominance induces in LLM output distributions, we develop an intuitive decoding algorithm that leverages our detector to identify and boost tokens that are long-range-relevant. Across Q&A tasks and model architectures, we confirm that mitigating the bias improves performance.
+
+**Comment:** Matches Representation Learning/Training Dynamics: quantifies minimum context length and proposes DaMCL-based decoding to address short-context dominance.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 16. [gHAWK: Local and Global Structure Encoding for Scalable Training of Graph Neural Networks on Knowledge Graphs](https://arxiv.org/abs/2512.08274) <a id="link16"></a>
+
+**ArXiv ID:** 2512.08274
+
+**Authors:** Humera Sabir, Fatima Farooq, Ashraf Aboulnaga
+
+**Abstract:** Knowledge Graphs (KGs) are a rich source of structured, heterogeneous data, powering a wide range of applications. A common approach to leverage this data is to train a graph neural network (GNN) on the KG. However, existing message-passing GNNs struggle to scale to large KGs because they rely on the iterative message passing process to learn the graph structure, which is inefficient, especially under mini-batch training, where a node sees only a partial view of its neighborhood. In this paper, we address this problem and present gHAWK, a novel and scalable GNN training framework for large KGs. The key idea is to precompute structural features for each node that capture its local and global structure before GNN training even begins. Specifically, gHAWK introduces a preprocessing step that computes: (a)~Bloom filters to compactly encode local neighborhood structure, and (b)~TransE embeddings to represent each node's global position in the graph. These features are then fused with any domain-specific features (e.g., text embeddings), producing a node feature vector that can be incorporated into any GNN technique. By augmenting message-passing training with structural priors, gHAWK significantly reduces memory usage, accelerates convergence, and improves model accuracy. Extensive experiments on large datasets from the Open Graph Benchmark (OGB) demonstrate that gHAWK achieves state-of-the-art accuracy and lower training time on both node property prediction and link prediction tasks, topping the OGB leaderboard for three graphs.
+
+**Comment:** Matches High Performance Computing/Scalable Training: precomputed structural priors (Bloom filters, TransE) to reduce message passing and memory for large KGs.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 17. [PR-CapsNet: Pseudo-Riemannian Capsule Network with Adaptive Curvature Routing for Graph Learning](https://arxiv.org/abs/2512.08218) <a id="link17"></a>
+
+**ArXiv ID:** 2512.08218
+
+**Authors:** Ye Qin, Jingchao Wang, Yang Shi, Haiying Huang, Junxu Li, Weijian Liu, Tinghui Chen, Jinghui Qin
+
+**Abstract:** Capsule Networks (CapsNets) show exceptional graph representation capacity via dynamic routing and vectorized hierarchical representations, but they model the complex geometries of real\-world graphs poorly by fixed\-curvature space due to the inherent geodesical disconnectedness issues, leading to suboptimal performance. Recent works find that non\-Euclidean pseudo\-Riemannian manifolds provide specific inductive biases for embedding graph data, but how to leverage them to improve CapsNets is still underexplored. Here, we extend the Euclidean capsule routing into geodesically disconnected pseudo\-Riemannian manifolds and derive a Pseudo\-Riemannian Capsule Network (PR\-CapsNet), which models data in pseudo\-Riemannian manifolds of adaptive curvature, for graph representation learning. Specifically, PR\-CapsNet enhances the CapsNet with Adaptive Pseudo\-Riemannian Tangent Space Routing by utilizing pseudo\-Riemannian geometry. Unlike single\-curvature or subspace\-partitioning methods, PR\-CapsNet concurrently models hierarchical and cluster or cyclic graph structures via its versatile pseudo\-Riemannian metric. It first deploys Pseudo\-Riemannian Tangent Space Routing to decompose capsule states into spherical\-temporal and Euclidean\-spatial subspaces with diffeomorphic transformations. Then, an Adaptive Curvature Routing is developed to adaptively fuse features from different curvature spaces for complex graphs via a learnable curvature tensor with geometric attention from local manifold properties. Finally, a geometric properties\-preserved Pseudo\-Riemannian Capsule Classifier is developed to project capsule embeddings to tangent spaces and use curvature\-weighted softmax for classification. Extensive experiments on node and graph classification benchmarks show PR\-CapsNet outperforms SOTA models, validating PR\-CapsNet's strong representation power for complex graph structures.
+
+**Comment:** Model Architecture + Representation Learning: extends CapsNet with pseudo-Riemannian tangent-space routing and adaptive curvature fusion for graph embeddings.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 18. [MobileFineTuner: A Unified End-to-End Framework for Fine-Tuning LLMs on Mobile Phones](https://arxiv.org/abs/2512.08211) <a id="link18"></a>
+
+**ArXiv ID:** 2512.08211
+
+**Authors:** Jiaxiang Geng, Lunyu Zhao, Yiyi Lu, Bing Luo
+
+**Abstract:** Mobile phones are the most ubiquitous end devices, generating vast amounts of human-authored data and serving as the primary platform for end-side applications. As high-quality public data for large language models (LLMs) approaches exhaustion, on-device fine-tuning provides an opportunity to leverage private user data while preserving privacy. However, existing approaches are predominantly simulation-based or rely on IoT devices and PCs, leaving commodity mobile phones largely unexplored. A key gap is the absence of an open-source framework that enables practical LLM fine-tuning on mobile phones. We present MobileFineTuner, a unified open-source framework that enables end-to-end LLM fine-tuning directly on commodity mobile phones. MobileFineTuner is designed for efficiency, scalability, and usability, supporting full-parameters fine-tuning (Full-FT) and parameter-efficient fine-tuning (PEFT). To address the memory and energy limitations inherent to mobile phones, we introduce system-level optimizations including parameter sharding, gradient accumulation, and energy-aware computation scheduling. We demonstrate the practicality of MobileFineTuner by fine-tuning GPT-2, Gemma 3, and Qwen 2.5 on real mobile phones. Extensive experiments and ablation studies validate the effectiveness of the proposed optimizations and establish MobileFineTuner as a viable foundation for future research on on-device LLM training.
+
+**Comment:** High Performance/Systems: enables on-device LLM fine-tuning with parameter sharding, gradient accumulation, and energy-aware scheduling.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 19. [Semi-Supervised Contrastive Learning with Orthonormal Prototypes](https://arxiv.org/abs/2512.07880) <a id="link19"></a>
+
+**ArXiv ID:** 2512.07880
+
+**Authors:** Huanran Li (Department of Electrical Engineering), Manh Nguyen (Statistics), Daniel Pimentel-Alarc\'on (Biostatistics, Wisconsin Institute of Discovery, University of Wisconsin-Madison)
+
+**Abstract:** Contrastive learning has emerged as a powerful method in deep learning, excelling at learning effective representations through contrasting samples from different distributions. However, dimensional collapse, where embeddings converge into a lower-dimensional space, poses a significant challenge, especially in semi-supervised and self-supervised setups. In this paper, we first identify a critical learning-rate threshold, beyond which standard contrastive losses converge to collapsed solutions. Building on these insights, we propose CLOP, a novel semi-supervised loss function designed to prevent dimensional collapse by promoting the formation of orthogonal linear subspaces among class embeddings. Through extensive experiments on real and synthetic datasets, we demonstrate that CLOP improves performance in image classification and object detection tasks while also exhibiting greater stability across different learning rates and batch sizes.
+
+**Comment:** Representation Learning: analyzes collapse threshold in contrastive learning and proposes an orthonormal prototype loss to prevent dimensional collapse.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 20. [Nonnegative Matrix Factorization through Cone Collapse](https://arxiv.org/abs/2512.07879) <a id="link20"></a>
+
+**ArXiv ID:** 2512.07879
+
+**Authors:** Manh Nguyen (Department of Statistics), Daniel Pimentel-Alarc\'on (Department of Biostatistics and Medical Informatics, Wisconsin Institute of Discovery, University of Wisconsin-Madison)
+
+**Abstract:** Nonnegative matrix factorization (NMF) is a widely used tool for learning parts-based, low-dimensional representations of nonnegative data, with applications in vision, text, and bioinformatics. In clustering applications, orthogonal NMF (ONMF) variants further impose (approximate) orthogonality on the representation matrix so that its rows behave like soft cluster indicators. Existing algorithms, however, are typically derived from optimization viewpoints and do not explicitly exploit the conic geometry induced by NMF: data points lie in a convex cone whose extreme rays encode fundamental directions or "topics". In this work we revisit NMF from this geometric perspective and propose Cone Collapse, an algorithm that starts from the full nonnegative orthant and iteratively shrinks it toward the minimal cone generated by the data. We prove that, under mild assumptions on the data, Cone Collapse terminates in finitely many steps and recovers the minimal generating cone of $\mathbf{X}^\top$ . Building on this basis, we then derive a cone-aware orthogonal NMF model (CC-NMF) by applying uni-orthogonal NMF to the recovered extreme rays. Across 16 benchmark gene-expression, text, and image datasets, CC-NMF consistently matches or outperforms strong NMF baselines-including multiplicative updates, ANLS, projective NMF, ONMF, and sparse NMF-in terms of clustering purity. These results demonstrate that explicitly recovering the data cone can yield both theoretically grounded and empirically strong NMF-based clustering methods.
+
+**Comment:** Representation Learning: geometric Cone Collapse algorithm to recover data cone and cone-aware ONMF for parts-based dictionaries.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 21. [MixLM: High-Throughput and Effective LLM Ranking via Text-Embedding Mix-Interaction](https://arxiv.org/abs/2512.07846) <a id="link21"></a>
+
+**ArXiv ID:** 2512.07846
+
+**Authors:** Guoyao Li, Ran He, Shusen Jing, Kayhan Behdin, Yubo Wang, Sundara Raman Ramachandran, Chanh Nguyen, Jian Sheng, Xiaojing Ma, Chuanrui Zhu, Sriram Vasudevan, Muchen Wu, Sayan Ghosh, Lin Su, Qingquan Song, Xiaoqing Wang, Zhipeng Wang, Qing Lan, Yanning Chen, Jingwei Wu, Luke Simon, Wenjing Zhang, Qi Guo, Fedor Borisyuk
+
+**Abstract:** Large language models (LLMs) excel at capturing semantic nuances and therefore show impressive relevance ranking performance in modern recommendation and search systems. However, they suffer from high computational overhead under industrial latency and throughput requirements. In particular, cross-encoder ranking systems often create long context prefill-heavy workloads, as the model has to be presented with the user, query and item information. To this end, we propose MixLM, a novel LLM-based ranking framework, which significantly improves the system throughput via reducing the input context length, while preserving the semantic strength of cross-encoder rankers. In contrast to a standard ranking system where the context is presented to the model as pure text, we propose to use mix-interaction, a mixture of text and embedding tokens to represent the input. Specifically, MixLM encodes all items in the catalog into a few embedding tokens and stores in a nearline cache. The encoded item descriptions are used during online inference, effectively reducing the item length from a few thousand text tokens to a few embedding tokens. We share insights from deploying our MixLM framework to a real-world search application at LinkedIn, including a detailed discussion of our training pipelines, as well as a thorough analysis of our online serving infrastructure optimization. Comparing with strong baselines, MixLM increased throughput by 10.0x under the same latency budget, while maintaining relevance metrics. The efficiency gains delivered by MixLM enabled full-traffic deployment of LLM-powered search, which resulted in a significant 0.47% increase in Daily Active Users (DAU) in online A/B tests.
+
+**Comment:** Matches Model Compression and Efficiency: reduces LLM input context via mix-interaction of text and cached embedding tokens; systems-level serving optimizations.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 22. [GeoDM: Geometry-aware Distribution Matching for Dataset Distillation](https://arxiv.org/abs/2512.08317) <a id="link22"></a>
+
+**ArXiv ID:** 2512.08317
+
+**Authors:** Xuhui Li, Zhengquan Luo, Zihui Cui, Zhiqiang Xu
+
+**Abstract:** Dataset distillation aims to synthesize a compact subset of the original data, enabling models trained on it to achieve performance comparable to those trained on the original large dataset. Existing distribution-matching methods are confined to Euclidean spaces, making them only capture linear structures and overlook the intrinsic geometry of real data, e.g., curvature. However, high-dimensional data often lie on low-dimensional manifolds, suggesting that dataset distillation should have the distilled data manifold aligned with the original data manifold. In this work, we propose a geometry-aware distribution-matching framework, called \textbf{GeoDM}, which operates in the Cartesian product of Euclidean, hyperbolic, and spherical manifolds, with flat, hierarchical, and cyclical structures all captured by a unified representation. To adapt to the underlying data geometry, we introduce learnable curvature and weight parameters for three kinds of geometries. At the same time, we design an optimal transport loss to enhance the distribution fidelity. Our theoretical analysis shows that the geometry-aware distribution matching in a product space yields a smaller generalization error bound than the Euclidean counterparts. Extensive experiments conducted on standard benchmarks demonstrate that our algorithm outperforms state-of-the-art data distillation methods and remains effective across various distribution-matching strategies for the single geometries.
+
+**Comment:** Matches Representation Learning and Compression: geometry-aware dataset distillation with learnable curvature in product manifolds and a generalization bound.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 23. [Revisiting the Scaling Properties of Downstream Metrics in Large Language Model Training](https://arxiv.org/abs/2512.08894) <a id="link23"></a>
+
+**ArXiv ID:** 2512.08894
+
+**Authors:** Jakub Krajewski, Amitis Shidani, Dan Busbridge, Sam Wiseman, Jason Ramapuram
+
+**Abstract:** While scaling laws for Large Language Models (LLMs) traditionally focus on proxy metrics like pretraining loss, predicting downstream task performance has been considered unreliable. This paper challenges that view by proposing a direct framework to model the scaling of benchmark performance from the training budget. We find that for a fixed token-to-parameter ratio, a simple power law can accurately describe the scaling behavior of log accuracy on multiple popular downstream tasks. Our results show that the direct approach extrapolates better than the previously proposed two-stage procedure, which is prone to compounding errors. Furthermore, we introduce functional forms that predict accuracy across token-to-parameter ratios and account for inference compute under repeated sampling. We validate our findings on models with up to 17B parameters trained on up to 350B tokens across two dataset mixtures. To support reproducibility and encourage future research, we release the complete set of pretraining losses and downstream evaluation results.
+
+**Comment:** Training dynamics/scaling laws: models downstream accuracy scaling with budget across token-to-parameter ratios and inference sampling.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+# Paper Selection Prompt
+
+## System Prompt
+
+> You are a helpful paper reading assistant whose job is to read daily posts from ArXiv and identify a few papers that your friend will enjoy reading.
+> Your job is to carefully read the paper titles and abstracts below and find the ones that match the criteria below.
+
+## User Prompt
+
+> ## Instructions
+> 
+> Write the response in JSONL format with {ARXIVID, COMMENT, RELEVANCE, NOVELTY} on each line, one for each paper.
+> 
+> - ARXIVID: should be the ArXiv ID.
+> - COMMENT: should identify whether there is a criteria that match the paper very closely. These matches should not be based on general terms like "language modeling" or "advancements" and should specifically refer to a criterion. No need to mention the non-matching criteria.
+> - RELEVANCE: should be a score from 1-10.
+> - NOVELTY: should be a score from 1-10.
+> 
+> ## Scoring Criteria
+> 
+> > The "Relevance" score measures how closely the paper aligns with the core topics of the prompt.
+> > The "Novelty" score assesses the originality and impact of the paper.
+> > They are two **ORTHONORMAL** axes and **SHOULD NOT** be confused with each other.
+> 
+> ### Relevance Scoring
+> 
+> - Relevance 9-10 (Completely Relevant)
+>   - Focus: Fully aligned with core topics with no deviation, score the highest if contains relevant keywords in it.
+>   - Examples: Papers focused on foundational methods or theoretical research, whose titles contain topic keywords like "MoE".
+> 
+> - Relevance 7-8 (Relevant)
+>   - Focus: Retain a solid link to the main research area, though may touch on peripheral elements.
+>   - Examples: Papers research on the fundamental part of MoE through a less critical aspect like its behavior in GNN.
+> 
+> - Relevance 5-6 (Borderline)
+>   - Focus: Maintains a link to the core topic but also extends into at least one other domain/area beyond the primary focus.
+>   - Examples: Work referencing MoE centered on reinforcement learning.
+> 
+> - Relevance 3-4 (Irrelevant)
+>   - Focus: Largely outside our interests with no association to our topics.
+>   - Examples: Application-focused papers like using MoE to solve a problem in the real world.
+> 
+> - Relevance 1-2 (Ignore)
+>   - Focus: Purely unrelated to our topics. Completely a different domain.
+>   - **Exception**: If the paper hints at a cutting-edge, radically new direction that could eventually transform the primary domain, consider a score of 9–10 despite initial appearances. (Usually a very rare concept that belongs to the fundamental research)
+> 
+> ### Novelty Scoring
+> 
+> - Novelty 9-10 (Breakthrough)
+>   - Definition: Groundbreaking methods/theory introducing new directions or solving major challenges.
+>   - Examples: Entirely new paradigm for foundational models; a novel theory transforming representation learning.
+> 
+> - Novelty 7-8 (Improvements)
+>   - Definition: Substantial insights/enhancements, though not a full paradigm shift.
+>   - Examples: Modifications on existing methods yielding significantly better results.
+> 
+> - Novelty 5-6 (Borderline)
+>   - Definition: Incremental contributions with possible long-term benefits, not immediately transformative.
+>   - Examples: Moderately novel extension to an existing architecture; refining current methods without fundamentally altering them.
+> 
+> - Novelty 3-4 (Tangential)
+>   - Definition: Minor or domain-specific improvements with limited broader impact.
+>   - Examples: Slight modifications to known methods with strange motivation; purely engineering jobs like a new benchmark/dataset.
+> 
+> - Novelty 1-2 (Low)
+>   - Definition: Minimal originality, applying standard approaches without real innovation.
+>   - Examples: Using an off-the-shelf model without adding new insights; purely application-driven studies like finetuning a pretrained model using existing methods.
+> 
+> ## Papers
+> 
+> [PAPER LIST HERE]
+> 
+> ## Relevant Topics
+> 
+> Use the following relevance criteria to focus on foundational research. Keep **relevant** papers and filter out **irrelevant** ones. Avoid purely **application-driven** work.
+> 
+> 1. Model Architecture
+>    - Relevant: Mixture-of-Experts (MoE), Transformers, Conditional/Dynamic Networks, Autoencoders, analysis/innovations on existing architectures.
+>    - Irrelevant: Merely using existing architectures for a certain task without insights into the structure themselves.
+> 
+> 2. Model Compression and Efficiency
+>    - Relevant: Sparsity, pruning, quantization, low-rank approaches, cache, or other algorithmic/theoretical efficiency breakthroughs.
+>    - Irrelevant: Straightforward applications of existing compression methods to new tasks.
+> 
+> 3. High Performance Computing
+>    - Relevant: Algorithmic or systems-level innovations enabling training of large-scale models, distributed training techniques, memory optimization.
+>    - Irrelevant: Incremental engineering improvements without novel algorithmic contributions.
+> 
+> 4. Representation Learning
+>    - Relevant: Insights into how deep networks encode information, feature/dictionary learning, sparse/contrastive methods, training dynamics in neural networks.
+>    - Irrelevant: Standard applications of known techniques lacking new theoretical or methodological contributions.
+> 
+> **Keywords:**
+> 
+> - Relevant: Mixture of Experts (MoE), Representation Learning, Compression/Efficiency, Sparse/Sparsity, Pruning, Quantization, Low-rank, Foundation Model, etc.
+> - Irrelevant: Reinforcement Learning, Transfer Learning, Federated Learning, Online Learning, Diffusion Models, etc.
+> - Application: Image Segmentation, Medical Imaging, 3D Vision, Video Understanding, Information Retrieval, Summarization, Recommendation Systems, Machine Translation, Speech Recognition, Signal Processing, Spatial/Temporal Modeling, Time Series, Knowledge Graph, etc.

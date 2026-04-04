@@ -1,0 +1,281 @@
+<div style="display: flex; align-items: flex-start; justify-content: space-between; width: 100%;"><div style="width: 33.33%; text-align: left;"><a href="../23"><img src="../../../assets/nav/day/2025-01-24-prev.svg" alt="Previous Day 2025-01-23"></a></div><div style="width: 33.33%; text-align: center;"><a href=".."><img src="../../../assets/nav/day/2025-01-24-center.svg" alt="Monthly Overview 2025-01"></a></div><div style="width: 33.33%; text-align: right;"><a href="../27"><img src="../../../assets/nav/day/2025-01-24-next.svg" alt="Next Day 2025-01-27"></a></div></div>
+
+# Personalized Daily Arxiv Papers 01/24/2025
+
+|           | Prompt   | Completion   | Total    |
+|-----------|----------|--------------|----------|
+| **Token** | 51198    | 4208         | 55406    |
+| **Cost**  | $1.27995 | $0.4208      | $1.70075 |
+
+Total relevant papers: 9
+
+**Table of contents with paper titles:**
+
+1. [Sample complexity of data-driven tuning of model hyperparameters in neural networks with structured parameter-dependent dual function](#user-content-link1)
+**Authors:** Maria-Florina Balcan, Anh Tuan Nguyen, Dravyansh Sharma
+
+2. [Preference Curriculum: LLMs Should Always Be Pretrained on Their Preferred Data](#user-content-link2)
+**Authors:** Xuemiao Zhang, Liangyu Xu, Feiyu Duan, Yongwei Zhou, Sirui Wang, Jingang Wang, Xunliang Cai
+
+3. [RECALL: Library-Like Behavior In Language Models is Enhanced by Self-Referencing Causal Cycles](#user-content-link3)
+**Authors:** Munachiso Nwadike, Zangir Iklassov, Toluwani Aremu, Tatsuya Hiraoka, Velibor Bojkovic, Benjamin Heinzerling, Hilal Alqaubeh, Martin Tak\'a\v{c}, Kentaro Inui
+
+4. [Softplus Attention with Re-weighting Boosts Length Extrapolation in Large Language Models](#user-content-link4)
+**Authors:** Bo Gao, Michael W. Spratling
+
+5. [Tensor-Var: Variational Data Assimilation in Tensor Product Feature Space](#user-content-link5)
+**Authors:** Yiming Yang, Xiaoyuan Cheng, Daniel Giles, Sibo Cheng, Yi He, Xiao Xue, Boli Chen, Yukun Hu
+
+6. [S-LoRA: Scalable Low-Rank Adaptation for Class Incremental Learning](#user-content-link6)
+**Authors:** Yichen Wu, Hongming Piao, Long-Kai Huang, Renzhen Wang, Wanhua Li, Hanspeter Pfister, Deyu Meng, Kede Ma, Ying Wei
+
+7. [KAA: Kolmogorov-Arnold Attention for Enhancing Attentive Graph Neural Networks](#user-content-link7)
+**Authors:** Taoran Fang, Tianhong Gao, Chunping Wang, Yihao Shang, Wei Chow, Lei Chen, Yang Yang
+
+8. [Beyond Task Diversity: Provable Representation Transfer for Sequential Multi-Task Linear Bandits](#user-content-link8)
+**Authors:** Thang Duong, Zhi Wang, Chicheng Zhang
+
+9. [A Transformer-based Autoregressive Decoder Architecture for Hierarchical Text Classification](#user-content-link9)
+**Authors:** Younes Yousef, Lukas Galke, Ansgar Scherp
+
+---
+
+## 1. [Sample complexity of data-driven tuning of model hyperparameters in neural networks with structured parameter-dependent dual function](https://arxiv.org/abs/2501.13734) <a id="link1"></a>
+
+**ArXiv ID:** 2501.13734
+
+**Authors:** Maria-Florina Balcan, Anh Tuan Nguyen, Dravyansh Sharma
+
+**Abstract:** Modern machine learning algorithms, especially deep learning based techniques, typically involve careful hyperparameter tuning to achieve the best performance. Despite the surge of intense interest in practical techniques like Bayesian optimization and random search based approaches to automating this laborious and compute-intensive task, the fundamental learning theoretic complexity of tuning hyperparameters for deep neural networks is poorly understood. Inspired by this glaring gap, we initiate the formal study of hyperparameter tuning complexity in deep learning through a recently introduced data driven setting. We assume that we have a series of deep learning tasks, and we have to tune hyperparameters to do well on average over the distribution of tasks. A major difficulty is that the utility function as a function of the hyperparameter is very volatile and furthermore, it is given implicitly by an optimization problem over the model parameters. This is unlike previous work in data driven design, where one can typically explicitly model the algorithmic behavior as a function of the hyperparameters. To tackle this challenge, we introduce a new technique to characterize the discontinuities and oscillations of the utility function on any fixed problem instance as we vary the hyperparameter, our analysis relies on subtle concepts including tools from differential/algebraic geometry and constrained optimization. This can be used to show that the learning theoretic complexity of the corresponding family of utility functions is bounded. We instantiate our results and provide sample complexity bounds for concrete applications tuning a hyperparameter that interpolates neural activation functions and setting the kernel parameter in graph neural networks.
+
+**Comment:** This paper addresses hyperparameter tuning complexity in deep neural networks and introduces new theoretical insights using tools like differential geometry. It aligns closely with foundational research in representation learning and theoretical aspects of neural network training.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 2. [Preference Curriculum: LLMs Should Always Be Pretrained on Their Preferred Data](https://arxiv.org/abs/2501.13126) <a id="link2"></a>
+
+**ArXiv ID:** 2501.13126
+
+**Authors:** Xuemiao Zhang, Liangyu Xu, Feiyu Duan, Yongwei Zhou, Sirui Wang, Jingang Wang, Xunliang Cai
+
+**Abstract:** Current large language models (LLMs) generally utilize a consistent data distribution throughout the entire pretraining process. However, as the model's ability improves, it intuitively should be pretrained with differentiated data. To achieve it, we propose the Perplexity Difference based Preference Curriculum learning (PDPC) framework, which always perceives and uses the data preferred by LLMs to train and boost them. Firstly, we introduce the PD metric to measure the difference in how well strong and weak models fit the samples. Samples with high PD are more challenging for weak models to learn and are more suitable to be arranged in the later stage of pretraining. Secondly, we propose the PD preference function to approximate the model and predict the data preference of the LLM at any time, so as to complete the arrangement of the entire data offline and ensure continuous training without interruption. Experimental results on 1.3B and 3B models demonstrate that our PDPC significantly surpasses baselines. Notably, the 3B model achieved more substantial gains, with an increased average accuracy of over 4.1% across various benchmarks.
+
+**Comment:** The paper introduces a curriculum learning strategy targeting LLM pretraining ('Preference Curriculum'). It aligns best with the 'Large Language Models' criterion, offering a novel training approach with potential foundational implications.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 3. [RECALL: Library-Like Behavior In Language Models is Enhanced by Self-Referencing Causal Cycles](https://arxiv.org/abs/2501.13491) <a id="link3"></a>
+
+**ArXiv ID:** 2501.13491
+
+**Authors:** Munachiso Nwadike, Zangir Iklassov, Toluwani Aremu, Tatsuya Hiraoka, Velibor Bojkovic, Benjamin Heinzerling, Hilal Alqaubeh, Martin Tak\'a\v{c}, Kentaro Inui
+
+**Abstract:** We introduce the concept of the self-referencing causal cycle (abbreviated RECALL) - a mechanism that enables large language models (LLMs) to bypass the limitations of unidirectional causality, which underlies a phenomenon known as the reversal curse. When an LLM is prompted with sequential data, it often fails to recall preceding context. For example, when we ask an LLM to recall the line preceding "O say does that star-spangled banner yet wave" in the U.S. National Anthem, it often fails to correctly return "Gave proof through the night that our flag was still there" - this is due to the reversal curse. It occurs because language models such as ChatGPT and Llama generate text based on preceding tokens, requiring facts to be learned and reproduced in a consistent token order. While the reversal curse is often viewed as a limitation, we offer evidence of an alternative view: it is not always an obstacle in practice. We find that RECALL is driven by what we designate as cycle tokens - sequences that connect different parts of the training data, enabling recall of preceding tokens from succeeding ones. Through rigorous probabilistic formalization and controlled experiments, we demonstrate how the cycles they induce influence a model's ability to reproduce information. To facilitate reproducibility, we provide our code and experimental details at https://anonymous.4open.science/r/remember-B0B8/.
+
+**Comment:** This paper proposes the concept of self-referencing causal cycles (RECALL) to tackle the reversal curse in LLMs. It aligns with the 'Large Language Models (LLMs)' criterion as it contributes theoretical insights into behavior and mechanisms of LLMs.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 4. [Softplus Attention with Re-weighting Boosts Length Extrapolation in Large Language Models](https://arxiv.org/abs/2501.13428) <a id="link4"></a>
+
+**ArXiv ID:** 2501.13428
+
+**Authors:** Bo Gao, Michael W. Spratling
+
+**Abstract:** Large language models have achieved remarkable success in recent years, primarily due to the implementation of self-attention mechanisms. However, traditional Softmax attention suffers from numerical instability and reduced performance as the length of inference tokens increases. This paper addresses these issues by decomposing the Softmax operation into a non-linear transformation and the $l_1$-norm. We identify the latter as essential for maintaining model performance. By replacing the non-linear transformation with the Softplus activation function and introducing a dynamic length scale factor for different token lengths based on invariance entropy, we create a novel attention mechanism with performance better than conventional Softmax attention across various inference lengths. To further improve the length extrapolation ability of the proposed attention mechanism, we introduce a re-weighting mechanism that amplifies significant attention weights while diminishing weaker ones, enabling the model to concentrate more effectively on relevant tokens. When combined with our proposed attention mechanism, this approach demonstrates significant promise in managing longer sequences, maintaining nearly constant validation loss even at 16$\times$ the training token length while ensuring numerical stability. Our code is available at: https://github.com/iminfine/freeatten.
+
+**Comment:** This paper introduces a new attention mechanism based on Softplus activation and re-weighting for improving length extrapolation in large language models. It provides architectural innovation in transformers, specifically addressing scalability and numerical stability.
+
+**Relevance:** 9
+**Novelty:** 7
+
+---
+
+## 5. [Tensor-Var: Variational Data Assimilation in Tensor Product Feature Space](https://arxiv.org/abs/2501.13312) <a id="link5"></a>
+
+**ArXiv ID:** 2501.13312
+
+**Authors:** Yiming Yang, Xiaoyuan Cheng, Daniel Giles, Sibo Cheng, Yi He, Xiao Xue, Boli Chen, Yukun Hu
+
+**Abstract:** Variational data assimilation estimates the dynamical system states by minimizing a cost function that fits the numerical models with observational data. The widely used method, four-dimensional variational assimilation (4D-Var), has two primary challenges: (1) computationally demanding for complex nonlinear systems and (2) relying on state-observation mappings, which are often not perfectly known. Deep learning (DL) has been used as a more expressive class of efficient model approximators to address these challenges. However, integrating such models into 4D-Var remains challenging due to their inherent nonlinearities and the lack of theoretical guarantees for consistency in assimilation results. In this paper, we propose \textit{Tensor-Var} to address these challenges using kernel Conditional Mean Embedding (CME). Tensor-Var improves optimization efficiency by characterizing system dynamics and state-observation mappings as linear operators, leading to a convex cost function in the feature space. Furthermore, our method provides a new perspective to incorporate CME into 4D-Var, offering theoretical guarantees of consistent assimilation results between the original and feature spaces. To improve scalability, we propose a method to learn deep features (DFs) using neural networks within the Tensor-Var framework. Experiments on chaotic systems and global weather prediction with real-time observations show that Tensor-Var outperforms conventional and DL hybrid 4D-Var baselines in accuracy while achieving efficiency comparable to the static 3D-Var method.
+
+**Comment:** The paper on Tensor-Var offers a novel use of kernel Conditional Mean Embedding (CME) and tensor feature space for data assimilation. It relates to representation learning through its focus on theoretical embedding and optimization in feature spaces, which could provide insights into training dynamics.
+
+**Relevance:** 8
+**Novelty:** 8
+
+---
+
+## 6. [S-LoRA: Scalable Low-Rank Adaptation for Class Incremental Learning](https://arxiv.org/abs/2501.13198) <a id="link6"></a>
+
+**ArXiv ID:** 2501.13198
+
+**Authors:** Yichen Wu, Hongming Piao, Long-Kai Huang, Renzhen Wang, Wanhua Li, Hanspeter Pfister, Deyu Meng, Kede Ma, Ying Wei
+
+**Abstract:** Continual Learning (CL) with foundation models has recently emerged as a promising approach to harnessing the power of pre-trained models for sequential tasks. Existing prompt-based methods generally use a gating mechanism to select relevant prompts aligned with the test query for further processing. However, the success of these methods largely depends on the precision of the gating mechanism, which becomes less scalable with additional computational overhead as tasks increases. To overcome these issues, we propose a Scalable Low-Rank Adaptation (S-LoRA) method for CL (in particular class incremental learning), which incrementally decouples the learning of the direction and magnitude of LoRA parameters. S-LoRA supports efficient inference by employing the last-stage trained model for direct testing without a gating process. Our theoretical and empirical analysis demonstrates that S-LoRA tends to follow a low-loss trajectory that converges to an overlapped low-loss region, resulting in an excellent stability-plasticity trade-off in CL. Furthermore, based on our findings, we develop variants of S-LoRA with further improved scalability. Extensive experiments across multiple CL benchmarks and various foundation models consistently validate the effectiveness of S-LoRA.
+
+**Comment:** This paper proposes S-LoRA, a method involving low-rank adaptations for Class Incremental Learning. The focus on low-rank parameter adaptation links to the 'Model Compression' criterion, with moderate novelty but limited foundational breakthroughs.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 7. [KAA: Kolmogorov-Arnold Attention for Enhancing Attentive Graph Neural Networks](https://arxiv.org/abs/2501.13456) <a id="link7"></a>
+
+**ArXiv ID:** 2501.13456
+
+**Authors:** Taoran Fang, Tianhong Gao, Chunping Wang, Yihao Shang, Wei Chow, Lei Chen, Yang Yang
+
+**Abstract:** Graph neural networks (GNNs) with attention mechanisms, often referred to as attentive GNNs, have emerged as a prominent paradigm in advanced GNN models in recent years. However, our understanding of the critical process of scoring neighbor nodes remains limited, leading to the underperformance of many existing attentive GNNs. In this paper, we unify the scoring functions of current attentive GNNs and propose Kolmogorov-Arnold Attention (KAA), which integrates the Kolmogorov-Arnold Network (KAN) architecture into the scoring process. KAA enhances the performance of scoring functions across the board and can be applied to nearly all existing attentive GNNs. To compare the expressive power of KAA with other scoring functions, we introduce Maximum Ranking Distance (MRD) to quantitatively estimate their upper bounds in ranking errors for node importance. Our analysis reveals that, under limited parameters and constraints on width and depth, both linear transformation-based and MLP-based scoring functions exhibit finite expressive power. In contrast, our proposed KAA, even with a single-layer KAN parameterized by zero-order B-spline functions, demonstrates nearly infinite expressive power. Extensive experiments on both node-level and graph-level tasks using various backbone models show that KAA-enhanced scoring functions consistently outperform their original counterparts, achieving performance improvements of over 20% in some cases.
+
+**Comment:** The proposed Kolmogorov-Arnold Attention introduces a theoretically grounded improvement to attentive GNNs, offering meaningful insights into scoring functions and architecture-level innovation.
+
+**Relevance:** 7
+**Novelty:** 8
+
+---
+
+## 8. [Beyond Task Diversity: Provable Representation Transfer for Sequential Multi-Task Linear Bandits](https://arxiv.org/abs/2501.13390) <a id="link8"></a>
+
+**ArXiv ID:** 2501.13390
+
+**Authors:** Thang Duong, Zhi Wang, Chicheng Zhang
+
+**Abstract:** We study lifelong learning in linear bandits, where a learner interacts with a sequence of linear bandit tasks whose parameters lie in an $m$-dimensional subspace of $\mathbb{R}^d$, thereby sharing a low-rank representation. Current literature typically assumes that the tasks are diverse, i.e., their parameters uniformly span the $m$-dimensional subspace. This assumption allows the low-rank representation to be learned before all tasks are revealed, which can be unrealistic in real-world applications. In this work, we present the first nontrivial result for sequential multi-task linear bandits without the task diversity assumption. We develop an algorithm that efficiently learns and transfers low-rank representations. When facing $N$ tasks, each played over $\tau$ rounds, our algorithm achieves a regret guarantee of $\tilde{O}\big (Nm \sqrt{\tau} + N^{\frac{2}{3}} \tau^{\frac{2}{3}} d m^{\frac13} + Nd^2 + \tau m d \big)$ under the ellipsoid action set assumption. This result can significantly improve upon the baseline of $\tilde{O} \left (Nd \sqrt{\tau}\right)$ that does not leverage the low-rank structure when the number of tasks $N$ is sufficiently large and $m \ll d$. We also demonstrate empirically on synthetic data that our algorithm outperforms baseline algorithms, which rely on the task diversity assumption.
+
+**Comment:** The paper focuses on low-rank representation learning in sequential multi-task settings, which aligns with the 'representation learning' and 'low-rank approaches' criteria.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 9. [A Transformer-based Autoregressive Decoder Architecture for Hierarchical Text Classification](https://arxiv.org/abs/2501.13598) <a id="link9"></a>
+
+**ArXiv ID:** 2501.13598
+
+**Authors:** Younes Yousef, Lukas Galke, Ansgar Scherp
+
+**Abstract:** Recent approaches in hierarchical text classification (HTC) rely on the capabilities of a pre-trained transformer model and exploit the label semantics and a graph encoder for the label hierarchy. In this paper, we introduce an effective hierarchical text classifier RADAr (Transformer-based Autoregressive Decoder Architecture) that is based only on an off-the-shelf RoBERTa transformer to process the input and a custom autoregressive decoder with two decoder layers for generating the classification output. Thus, unlike existing approaches for HTC, the encoder of RADAr has no explicit encoding of the label hierarchy and the decoder solely relies on the label sequences of the samples observed during training. We demonstrate on three benchmark datasets that RADAr achieves results competitive to the state of the art with less training and inference time. Our model consistently performs better when organizing the label sequences from children to parents versus the inverse, as done in existing HTC approaches. Our experiments show that neither the label semantics nor an explicit graph encoder for the hierarchy is needed. This has strong practical implications for HTC as the architecture has fewer requirements and provides a speed-up by a factor of 2 at inference time. Moreover, training a separate decoder from scratch in conjunction with fine-tuning the encoder allows future researchers and practitioners to exchange the encoder part as new models arise. The source code is available at https://github.com/yousef-younes/RADAr.
+
+**Comment:** The RADAr hierarchical text classification framework introduces a simplified transformer-based autoregressive decoder architecture. This aligns strongly with interests in model architectures by proposing an effective simplification with practical implications.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+# Paper Selection Prompt
+
+You are a helpful paper reading assistant whose job is to read daily posts from ArXiv and identify a few papers that your friend will enjoy reading.
+Your job is to carefully read the paper titles and abstracts below and find the ones that match the criteria below.
+
+## Relevant Topics
+
+Use the following relevance criteria to focus on foundational research, avoiding purely application-driven work:
+
+1. Representation Learning
+   - Relevant: Insights into how deep networks encode information, feature/dictionary learning, sparse/contrastive methods, training dynamics in neural networks.
+   - Irrelevant: Standard applications of known techniques lacking new theoretical or methodological contributions.
+
+2. Model Architecture
+   - Relevant: Mixture-of-Experts (MoE), Transformers, Conditional/Dynamic Networks, Autoencoders, or other core architectural innovations.
+   - Irrelevant: Merely repurposing existing architectures without structural or theoretical advances.
+
+3. Model Compression
+   - Relevant: Sparsity, pruning, quantization, low-rank approaches, KV cache, or other algorithmic/theoretical efficiency breakthroughs.
+   - Irrelevant: Straightforward applications of existing compression methods to new tasks.
+
+4. Large Language Models (LLMs)
+   - Relevant: Theoretical insights into LLM behavior, major breakthroughs in training or architecture.
+   - Irrelevant: Domain-specific usage (e.g., translation, jail-breaking), minor tweaks (e.g., instruction tuning, CoT, data mixing), or purely empirical dataset/benchmark studies and text-level analysis (e.g. hallucination, reasoning, safety).
+
+5. AI for Science
+   - Relevant: Foundational research in molecular/protein modeling, new generative paradigms, or significant architecture-level innovations.
+   - Irrelevant: Conventional, domain-specific applications without new theoretical perspectives.
+
+6. Emerging Trends
+   - Relevant: Cutting-edge theoretical work challenging established assumptions or introducing broad new paradigms.
+   - Irrelevant: Incremental improvements or trend-following without novel insights.
+
+**Hints on Irrelevant Domains:**
+Reinforcement Learning, Federated Learning, Online Learning, Transfer Learning, Diffusion Models, etc.
+
+**Hints on Application Tasks:**
+Image Segmentation, Medical Imaging, Speech Recognition, Video Understanding, Recommendation Systems, 3D Vision, Machine Translation, Information Retrieval, Signal Processing, Spatial/Temporal Modeling, Time Series, etc.
+
+
+## Scoring Criteria
+
+> The "Relevance" score measures how closely the paper aligns with the core topics of the prompt.
+> The "Novelty" score assesses the originality and impact of the paper.
+> They are two **ORTHONORMAL** axes and **SHOULD NOT** be confused with each other. E.g., a paper with high relevance can be of low novelty, or vice versa.
+
+### Relevance Scoring
+
+- Relevance 9-10 (Completely Relevant)
+  - Focus: Fully aligned with core topics, score the highest if also contains keywords in it.
+  - Keywords: “Mixture of Experts (MoE),” “Representation Learning,” “Compression,” “Sparse/Sparsity,” “Pruning,” “Quantization,” “Low-rank,” “Scaling,” “Foundation Models,” etc.
+  - Examples: Papers focused on foundational methods or theoretical research, whose titles contain topic keywords like "MoE".
+
+- Relevance 7-8 (Relevant)
+  - Focus: Clearly tied to our main topics, may not fully hit the interest in foundational methods.
+  - Examples: Pure research on representation/architecture on MoE with no other domain focus.
+
+- Relevance 5-6 (Optional)
+  - Focus: Link to our topics—covers relevant ideas but also includes another area of interest.
+  - Examples: Work referencing MoE centered on another domain.
+
+- Relevance 3-4 (Irrelevant)
+  - Focus: Largely outside our interests, with no association to our topics.
+  - Examples: Application-focused papers like using MoE to solve a problem in real world.
+
+- Relevance 1-2 (Ignore)
+  - Focus: Purely unrelated to our topics. Completely a different domain.
+  - Exception: If you think it is an emerging trend (that may lead to a thorough breakthrough in the future), you can give a score of 9-10. (Usually a very rare concept that belongs to the fundamental research)
+
+### Novelty Scoring
+
+- Novelty 9-10 (Breakthrough)
+  - Definition: Groundbreaking methods/theory introducing new directions or solving major challenges.
+  - Examples: Entirely new paradigm for foundational models; a novel theory transforming representation learning.
+
+- Novelty 7-8 (Improvements)
+  - Definition: Substantial insights/enhancements, though not a full paradigm shift.
+  - Examples: Modifications on existing methods yielding significantly better results.
+
+- Novelty 5-6 (Moderate)
+  - Definition: Incremental contributions with possible long-term benefits, not immediately transformative.
+  - Examples: Moderately novel extension to an existing architecture; refining current methods without fundamentally altering them.
+
+- Novelty 3-4 (Tangential)
+  - Definition: Minor or domain-specific improvements with limited broader impact.
+  - Examples: Slight modifications to known methods with strange motivation; purely engineering jobs like a new benchmark/dataset.
+
+- Novelty 1-2 (Low)
+  - Definition: Minimal originality, applying standard approaches without real innovation.
+  - Examples: Using an off-the-shelf model without adding new insights; purely application-driven studies like finetuning a pretrained model using existing methods.
+
+
+## Papers
+
+[PAPER LIST HERE]
+
+## Instructions
+
+Write the response in JSONL format with {ARXIVID, COMMENT, RELEVANCE, NOVELTY} on each line, one for each paper.
+
+- ARXIVID: should be the ArXiv ID.
+- COMMENT: should identify whether there is a criteria that match the paper very closely. These matches should not be based on general terms like "language modeling" or "advancements" and should specifically refer to a criterion. No need to mention the non-matching criteria.
+- RELEVANCE: should be a score from 1-10.
+- NOVELTY: should be a score from 1-10.

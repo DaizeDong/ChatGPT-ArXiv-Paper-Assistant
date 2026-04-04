@@ -1,0 +1,584 @@
+<div style="display: flex; align-items: flex-start; justify-content: space-between; width: 100%;"><div style="width: 33.33%; text-align: left;"><a href="../28"><img src="../../../assets/nav/day/2026-01-29-prev.svg" alt="Previous Day 2026-01-28"></a></div><div style="width: 33.33%; text-align: center;"><a href=".."><img src="../../../assets/nav/day/2026-01-29-center.svg" alt="Monthly Overview 2026-01"></a></div><div style="width: 33.33%; text-align: right;"><a href="../30"><img src="../../../assets/nav/day/2026-01-29-next.svg" alt="Next Day 2026-01-30"></a></div></div>
+
+# Personalized Daily ArXiv Papers 2026-01-29
+
+| *[gpt-5]*   | Prompt   | Completion   | Total   |
+|:-----------:|:--------:|:------------:|:-------:|
+| **Token**   | 37149    | 39349        | 76498   |
+| **Cost**    | $0.05    | $0.39        | $0.44   |
+
+Total arXiv papers: 570
+
+Total scanned papers: 320
+
+Total relevant papers: 26
+
+**Table of contents with paper titles:**
+
+1. [Hyperparameter Transfer with Mixture-of-Expert Layers](#user-content-link1)
+**Authors:** Tianze Jiang, Blake Bordelon, Cengiz Pehlevan, Boris Hanin
+
+2. [HESTIA: A Hessian-Guided Differentiable Quantization-Aware Training Framework for Extremely Low-Bit LLMs](#user-content-link2)
+**Authors:** Guoan Wang, Feiyu Wang, Zongwei Lv, Yikun Zong, Tong Yang
+
+3. [Minimax Rates for Hyperbolic Hierarchical Learning](#user-content-link3)
+**Authors:** Divit Rawal, Sriram Vishwanath
+
+4. [Concept Component Analysis: A Principled Approach for Concept Extraction in LLMs](#user-content-link4)
+**Authors:** Yuhang Liu, Erdun Gao, Dong Gong, Anton van den Hengel, Javen Qinfeng Shi
+
+5. [Spectral Ghost in Representation Learning: from Component Analysis to Self-Supervised Learning](#user-content-link5)
+**Authors:** Bo Dai, Na Li, Dale Schuurmans
+
+6. [Beyond GEMM-Centric NPUs: Enabling Efficient Diffusion LLM Sampling](#user-content-link6)
+**Authors:** Binglei Lou, Haoran Wu, Yao Lai, Jiayi Nie, Can Xiao, Xuan Guo, Rika Antonova, Robert Mullins, Aaron Zhao
+
+7. [Modeling Next-Token Prediction as Left-Nested Intuitionistic Implication](#user-content-link7)
+**Authors:** Paul Tarau
+
+8. [Latent Object Permanence: Topological Phase Transitions, Free-Energy Principles, and Renormalization Group Flows in Deep Transformer Manifolds](#user-content-link8)
+**Authors:** Faruk Alpay, Bugra Kilictas
+
+9. [Towards Compact and Robust DNNs via Compression-aware Sharpness Minimization](#user-content-link9)
+**Authors:** Jialuo He, Huangxun Chen
+
+10. [Switchcodec: Adaptive residual-expert sparse quantization for high-fidelity neural audio coding](#user-content-link10)
+**Authors:** Xiangbo Wang, Wenbin Jiang, Jin Wang, Yubo You, Sheng Fang, Fei Wen
+
+11. [Decomposing multimodal embedding spaces with group-sparse autoencoders](#user-content-link11)
+**Authors:** Chiraag Kaushik, Davis Barch, Andrea Fanelli
+
+12. [Linear representations in language models can change dramatically over a conversation](#user-content-link12)
+**Authors:** Andrew Kyle Lampinen, Yuxuan Li, Eghbal Hosseini, Sangnie Bhardwaj, Murray Shanahan
+
+13. [$\mathbb{R}^{2k}$ is Theoretically Large Enough for Embedding-based Top-$k$ Retrieval](#user-content-link13)
+**Authors:** Zihao Wang, Hang Yin, Lihui Liu, Hanghang Tong, Yangqiu Song, Ginny Wong, Simon See
+
+14. [Domain Expansion: A Latent Space Construction Framework for Multi-Task Learning](#user-content-link14)
+**Authors:** Chi-Yao Huang, Khoa Vo, Aayush Atul Verma, Duo Lu, Yezhou Yang
+
+15. [Convergence Analysis of Randomized Subspace Normalized SGD under Heavy-Tailed Noise](#user-content-link15)
+**Authors:** Gaku Omiya, Pierre-Louis Poirion, Akiko Takeda
+
+16. [Implicit Hypothesis Testing and Divergence Preservation in Neural Network Representations](#user-content-link16)
+**Authors:** Kadircan Aksoy, Peter Jung, Protim Bhattacharjee
+
+17. [Leveraging Second-Order Curvature for Efficient Learned Image Compression: Theory and Empirical Evidence](#user-content-link17)
+**Authors:** Yichi Zhang, Fengqing Zhu
+
+18. [Window-Diffusion: Accelerating Diffusion Language Model Inference with Windowed Token Pruning and Caching](#user-content-link18)
+**Authors:** Fengrui Zuo, Zhiwei Ke, Yiming Liu, Wenqi Lou, Chao Wang, Xvehai Zhou
+
+19. [TABED: Test-Time Adaptive Ensemble Drafting for Robust Speculative Decoding in LVLMs](#user-content-link19)
+**Authors:** Minjae Lee, Wonjun Kang, Byeongkeun Ahn, Christian Classen, Kevin Galim, Seunghyuk Oh, Minghao Yan, Hyung Il Koo, Kangwook Lee
+
+20. [PiC-BNN: A 128-kbit 65 nm Processing-in-CAM-Based End-to-End Binary Neural Network Accelerator](#user-content-link20)
+**Authors:** Yuval Harary, Almog Sharoni, Esteban Garz\'on, Marco Lanuzza, Adam Teman, Leonid Yavits
+
+21. [Beyond Speedup -- Utilizing KV Cache for Sampling and Reasoning](#user-content-link21)
+**Authors:** Zeyu Xing, Xing Li, Hui-Ling Zhen, Mingxuan Yuan, Sinno Jialin Pan
+
+22. [LinguaMap: Which Layers of LLMs Speak Your Language and How to Tune Them?](#user-content-link22)
+**Authors:** J. Ben Tamo, Daniel Carlander-Reuterfelt, Jonathan Rubin, Dezhi Hong, Mingxian Wang, Oleg Poliannikov
+
+23. [Loss Landscape Geometry and the Learning of Symmetries: Or, What Influence Functions Reveal About Robust Generalization](#user-content-link23)
+**Authors:** James Amarel, Robyn Miller, Nicolas Hengartner, Benjamin Migliori, Emily Casleton, Alexei Skurikhin, Earl Lawrence, Gerd J. Kunde
+
+24. [Dissecting Multimodal In-Context Learning: Modality Asymmetries and Circuit Dynamics in modern Transformers](#user-content-link24)
+**Authors:** Yiran Huang, Karsten Roth, Quentin Bouniot, Wenjia Xu, Zeynep Akata
+
+25. [TINNs: Time-Induced Neural Networks for Solving Time-Dependent PDEs](#user-content-link25)
+**Authors:** Chen-Yang Dai, Che-Chia Chang, Te-Sheng Lin, Ming-Chih Lai, Chieh-Hsin Lai
+
+26. [SuperInfer: SLO-Aware Rotary Scheduling and Memory Management for LLM Inference on Superchips](#user-content-link26)
+**Authors:** Jiahuan Yu, Mingtao Hu, Zichao Lin, Minjia Zhang
+
+---
+
+## 1. [Hyperparameter Transfer with Mixture-of-Expert Layers](https://arxiv.org/abs/2601.20205) <a id="link1"></a>
+
+**ArXiv ID:** 2601.20205
+
+**Authors:** Tianze Jiang, Blake Bordelon, Cengiz Pehlevan, Boris Hanin
+
+**Abstract:** Mixture-of-Experts (MoE) layers have emerged as an important tool in scaling up modern neural networks by decoupling total trainable parameters from activated parameters in the forward pass for each token. However, sparse MoEs add complexity to training due to (i) new trainable parameters (router weights) that, like all other parameter groups, require hyperparameter (HP) tuning; (ii) new architecture scale dimensions (number of and size of experts) that must be chosen and potentially taken large. To make HP selection cheap and reliable, we propose a new parameterization for transformer models with MoE layers when scaling model width, depth, number of experts, and expert (hidden) size. Our parameterization is justified by a novel dynamical mean-field theory (DMFT) analysis. When varying different model dimensions trained at a fixed token budget, we find empirically that our parameterization enables reliable HP transfer across models from 51M to over 2B total parameters. We further take HPs identified from sweeping small models on a short token horizon to train larger models on longer horizons and report performant model behaviors.
+
+**Comment:** Model Architecture (MoE): DMFT-justified parameterization enabling hyperparameter transfer across width/depth/experts/expert-size in sparse MoE Transformers.
+
+**Relevance:** 10
+**Novelty:** 8
+
+---
+
+## 2. [HESTIA: A Hessian-Guided Differentiable Quantization-Aware Training Framework for Extremely Low-Bit LLMs](https://arxiv.org/abs/2601.20745) <a id="link2"></a>
+
+**ArXiv ID:** 2601.20745
+
+**Authors:** Guoan Wang, Feiyu Wang, Zongwei Lv, Yikun Zong, Tong Yang
+
+**Abstract:** As large language models (LLMs) continue to scale, deployment is increasingly bottlenecked by the memory wall, motivating a shift toward extremely low-bit quantization. However, most quantization-aware training (QAT) methods apply hard rounding and the straight-through estimator (STE) from the beginning of the training, which prematurely discretizes the optimization landscape and induces persistent gradient mismatch between latent weights and quantized weights, hindering effective optimization of quantized models. To address this, we propose Hestia, a Hessian-guided differentiable QAT framework for extremely low-bit LLMs, which replaces the rigid step function with a temperature-controlled softmax relaxation to maintain gradient flow early in training while progressively hardening quantization. Furthermore, Hestia leverages a tensor-wise Hessian trace metric as a lightweight curvature signal to drive fine-grained temperature annealing, enabling sensitivity-aware discretization across the model. Evaluations on Llama-3.2 show that Hestia consistently outperforms existing ternary QAT baselines, yielding average zero-shot improvements of 5.39% and 4.34% for the 1B and 3B models. These results indicate that Hessian-guided relaxation effectively recovers representational capacity, establishing a more robust training path for 1.58-bit LLMs. The code is available at https://github.com/hestia2026/Hestia.
+
+**Comment:** Model Compression and Efficiency: Hessian-guided differentiable quantization-aware training with temperature-annealed soft rounding for 1.58-bit LLMs.
+
+**Relevance:** 10
+**Novelty:** 8
+
+---
+
+## 3. [Minimax Rates for Hyperbolic Hierarchical Learning](https://arxiv.org/abs/2601.20047) <a id="link3"></a>
+
+**ArXiv ID:** 2601.20047
+
+**Authors:** Divit Rawal, Sriram Vishwanath
+
+**Abstract:** We prove an exponential separation in sample complexity between Euclidean and hyperbolic representations for learning on hierarchical data under standard Lipschitz regularization. For depth-$R$ hierarchies with branching factor $m$, we first establish a geometric obstruction for Euclidean space: any bounded-radius embedding forces volumetric collapse, mapping exponentially many tree-distant points to nearby locations. This necessitates Lipschitz constants scaling as $\exp(\Omega(R))$ to realize even simple hierarchical targets, yielding exponential sample complexity under capacity control. We then show this obstruction vanishes in hyperbolic space: constant-distortion hyperbolic embeddings admit $O(1)$-Lipschitz realizability, enabling learning with $n = O(mR \log m)$ samples. A matching $\Omega(mR \log m)$ lower bound via Fano's inequality establishes that hyperbolic representations achieve the information-theoretic optimum. We also show a geometry-independent bottleneck: any rank-$k$ prediction space captures only $O(k)$ canonical hierarchical contrasts.
+
+**Comment:** Representation Learning Theory: proves minimax-optimal sample complexity for hyperbolic representations on hierarchies and exponential separation vs Euclidean embeddings.
+
+**Relevance:** 9
+**Novelty:** 9
+
+---
+
+## 4. [Concept Component Analysis: A Principled Approach for Concept Extraction in LLMs](https://arxiv.org/abs/2601.20420) <a id="link4"></a>
+
+**ArXiv ID:** 2601.20420
+
+**Authors:** Yuhang Liu, Erdun Gao, Dong Gong, Anton van den Hengel, Javen Qinfeng Shi
+
+**Abstract:** Developing human understandable interpretation of large language models (LLMs) becomes increasingly critical for their deployment in essential domains. Mechanistic interpretability seeks to mitigate the issues through extracts human-interpretable process and concepts from LLMs' activations. Sparse autoencoders (SAEs) have emerged as a popular approach for extracting interpretable and monosemantic concepts by decomposing the LLM internal representations into a dictionary. Despite their empirical progress, SAEs suffer from a fundamental theoretical ambiguity: the well-defined correspondence between LLM representations and human-interpretable concepts remains unclear. This lack of theoretical grounding gives rise to several methodological challenges, including difficulties in principled method design and evaluation criteria. In this work, we show that, under mild assumptions, LLM representations can be approximated as a {linear mixture} of the log-posteriors over concepts given the input context, through the lens of a latent variable model where concepts are treated as latent variables. This motivates a principled framework for concept extraction, namely Concept Component Analysis (ConCA), which aims to recover the log-posterior of each concept from LLM representations through a {unsupervised} linear unmixing process. We explore a specific variant, termed sparse ConCA, which leverages a sparsity prior to address the inherent ill-posedness of the unmixing problem. We implement 12 sparse ConCA variants and demonstrate their ability to extract meaningful concepts across multiple LLMs, offering theory-backed advantages over SAEs.
+
+**Comment:** Representation Learning: principled concept extraction via unsupervised linear unmixing of LLM activations (Concept Component Analysis) with sparsity priors, offering a theory-backed alternative to SAEs.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 5. [Spectral Ghost in Representation Learning: from Component Analysis to Self-Supervised Learning](https://arxiv.org/abs/2601.20154) <a id="link5"></a>
+
+**ArXiv ID:** 2601.20154
+
+**Authors:** Bo Dai, Na Li, Dale Schuurmans
+
+**Abstract:** Self-supervised learning (SSL) have improved empirical performance by unleashing the power of unlabeled data for practical applications. Specifically, SSL extracts the representation from massive unlabeled data, which will be transferred to a plenty of down streaming tasks with limited data. The significant improvement on diverse applications of representation learning has attracted increasing attention, resulting in a variety of dramatically different self-supervised learning objectives for representation extraction, with an assortment of learning procedures, but the lack of a clear and unified understanding. Such an absence hampers the ongoing development of representation learning, leaving a theoretical understanding missing, principles for efficient algorithm design unclear, and the use of representation learning methods in practice unjustified. The urgency for a unified framework is further motivated by the rapid growth in representation learning methods. In this paper, we are therefore compelled to develop a principled foundation of representation learning. We first theoretically investigate the sufficiency of the representation from a spectral representation view, which reveals the spectral essence of the existing successful SSL algorithms and paves the path to a unified framework for understanding and analysis. Such a framework work also inspires the development of more efficient and easy-to-use representation learning algorithms with principled way in real-world applications.
+
+**Comment:** Representation Learning: unified spectral framework explaining self-supervised objectives via spectral sufficiency, offering principled foundations and algorithmic guidance.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 6. [Beyond GEMM-Centric NPUs: Enabling Efficient Diffusion LLM Sampling](https://arxiv.org/abs/2601.20706) <a id="link6"></a>
+
+**ArXiv ID:** 2601.20706
+
+**Authors:** Binglei Lou, Haoran Wu, Yao Lai, Jiayi Nie, Can Xiao, Xuan Guo, Rika Antonova, Robert Mullins, Aaron Zhao
+
+**Abstract:** Diffusion Large Language Models (dLLMs) introduce iterative denoising to enable parallel token generation, but their sampling phase displays fundamentally different characteristics compared to GEMM-centric transformer layers. Profiling on modern GPUs reveals that sampling can account for up to 70% of total model inference latency-primarily due to substantial memory loads and writes from vocabulary-wide logits, reduction-based token selection, and iterative masked updates. These processes demand large on-chip SRAM and involve irregular memory accesses that conventional NPUs struggle to handle efficiently. To address this, we identify a set of critical instructions that an NPU architecture must specifically optimize for dLLM sampling. Our design employs lightweight non-GEMM vector primitives, in-place memory reuse strategies, and a decoupled mixed-precision memory hierarchy. Together, these optimizations deliver up to a 2.53x speedup over the NVIDIA RTX A6000 GPU under an equivalent nm technology node. We also open-source our cycle-accurate simulation and post-synthesis RTL verification code, confirming functional equivalence with current dLLM PyTorch implementations.
+
+**Comment:** High Performance Computing/Systems: NPU architectural primitives and memory hierarchy tailored to diffusion LLM sampling (non-GEMM operations), delivering significant inference speedups.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 7. [Modeling Next-Token Prediction as Left-Nested Intuitionistic Implication](https://arxiv.org/abs/2601.19915) <a id="link7"></a>
+
+**ArXiv ID:** 2601.19915
+
+**Authors:** Paul Tarau
+
+**Abstract:** We introduce the \emph{Arrow Language Model}, a neural architecture derived from an intuitionistic-logic interpretation of next-token prediction. Instead of representing tokens as additive embeddings mixed by attention, we encode a prefix as a \emph{left-nested implication chain} whose structure preserves order through non-commutative composition. Next-token prediction corresponds to \emph{modus ponens}, and sequence processing becomes constructive proof extension under the Curry--Howard correspondence. Our Prolog-based specialized theorem provers validate fundamental properties of the neural models, among which relations between commutative vs. non-commutative sequencing and single-token vs. multi-token prediction choices. We show that a neural architecture equivalent to multiplicative RNNs arises naturally from a proof-theoretic interpretation of next-token prediction as nested intuitionistic implication, we present a practical low-rank neural realization and position the model relative to Transformers and state-space models.   Keywords: logic-based derivation of neural architectures, intuitionistic implicational logic, token-as-operator neural models, state-space models, alternatives to transformer-based foundational models.
+
+**Comment:** Model Architecture: logic-derived Arrow LM interpreting next-token prediction as left-nested intuitionistic implication; presents a low-rank neural realization and positions vs Transformers/SSMs.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 8. [Latent Object Permanence: Topological Phase Transitions, Free-Energy Principles, and Renormalization Group Flows in Deep Transformer Manifolds](https://arxiv.org/abs/2601.19942) <a id="link8"></a>
+
+**ArXiv ID:** 2601.19942
+
+**Authors:** Faruk Alpay, Bugra Kilictas
+
+**Abstract:** We study the emergence of multi-step reasoning in deep Transformer language models through a geometric and statistical-physics lens. Treating the hidden-state trajectory as a flow on an implicit Riemannian manifold, we analyze the layerwise covariance spectrum of activations, where $C^{(\ell)}=\mathbb{E}[h^{(\ell)}h^{(\ell)\top}]$, and track deviations from a random-matrix bulk. Across model scales (1.5B--30B), we observe a sharp reduction in effective dimensionality consistent with a phase transition: an order parameter based on sparsity/localization, $\Omega(h)=1-\|h\|_1/(\sqrt{d}\|h\|_2)$, exhibits a discontinuity near a critical normalized depth $\gamma_c\approx 0.42$ in sufficiently large models. We formalize the forward pass as a discrete coarse-graining map and relate the appearance of stable "concept basins" to fixed points of this renormalization-like dynamics. The resulting low-entropy regime is characterized by a spectral tail collapse and by the formation of transient, reusable object-like structures in representation space, which we call Transient Class Objects (TCOs). We provide theoretical conditions connecting logical separability to spectral decay and validate the predicted signatures with layerwise probes on multiple open-weight model families.
+
+**Comment:** Representation Learning: geometric/spectral analysis of Transformer hidden manifolds revealing phase transitions, effective dimensionality collapse, and renormalization-like flows.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 9. [Towards Compact and Robust DNNs via Compression-aware Sharpness Minimization](https://arxiv.org/abs/2601.20301) <a id="link9"></a>
+
+**ArXiv ID:** 2601.20301
+
+**Authors:** Jialuo He, Huangxun Chen
+
+**Abstract:** Sharpness-Aware Minimization (SAM) has recently emerged as an effective technique for improving DNN robustness to input variations. However, its interplay with the compactness requirements of on-device DNN deployments remains less explored. Simply pruning a SAM-trained model can undermine robustness, since flatness in the continuous parameter space does not necessarily translate to robustness under the discrete structural changes induced by pruning. Conversely, applying SAM after pruning may be fundamentally constrained by architectural limitations imposed by an early, robustness-agnostic pruning pattern. To address this gap, we propose Compression-aware ShArpness Minimization (C-SAM), a framework that shifts sharpness-aware learning from parameter perturbations to mask perturbations. By explicitly perturbing pruning masks during training, C-SAM promotes a flatter loss landscape with respect to model structure, enabling the discovery of pruning patterns that simultaneously optimize model compactness and robustness to input variations. Extensive experiments on CelebA-HQ, Flowers-102, and CIFAR-10-C across ResNet-18, GoogLeNet, and MobileNet-V2 show that C-SAM consistently achieves higher certified robustness than strong baselines, with improvements of up to 42%, while maintaining task accuracy comparable to the corresponding unpruned models.
+
+**Comment:** Model Compression and Efficiency: pruning-aware sharpness minimization via mask perturbations to co-optimize compactness and robustness under structural sparsity.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 10. [Switchcodec: Adaptive residual-expert sparse quantization for high-fidelity neural audio coding](https://arxiv.org/abs/2601.20362) <a id="link10"></a>
+
+**ArXiv ID:** 2601.20362
+
+**Authors:** Xiangbo Wang, Wenbin Jiang, Jin Wang, Yubo You, Sheng Fang, Fei Wen
+
+**Abstract:** Recent neural audio compression models often rely on residual vector quantization for high-fidelity coding, but using a fixed number of per-frame codebooks is suboptimal for the wide variability of audio content-especially for signals that are either very simple or highly complex. To address this limitation, we propose SwitchCodec, a neural audio codec based on Residual Experts Vector Quantization (REVQ). REVQ combines a shared quantizer with dynamically routed expert quantizers that are activated according to the input audio, decoupling bitrate from codebook capacity and improving compression efficiency. This design ensures full training and utilization of each quantizer. In addition, a variable-bitrate mechanism adjusts the number of active expert quantizers at inference, enabling multi-bitrate operation without retraining. Experiments demonstrate that SwitchCodec surpasses existing baselines on both objective metrics and subjective listening tests.
+
+**Comment:** Model Compression and Efficiency: residual-experts vector quantization (dynamic expert routing, variable bitrate) for neural audio coding—sparse quantization with MoE-like routing.
+
+**Relevance:** 9
+**Novelty:** 7
+
+---
+
+## 11. [Decomposing multimodal embedding spaces with group-sparse autoencoders](https://arxiv.org/abs/2601.20028) <a id="link11"></a>
+
+**ArXiv ID:** 2601.20028
+
+**Authors:** Chiraag Kaushik, Davis Barch, Andrea Fanelli
+
+**Abstract:** The Linear Representation Hypothesis asserts that the embeddings learned by neural networks can be understood as linear combinations of features corresponding to high-level concepts. Based on this ansatz, sparse autoencoders (SAEs) have recently become a popular method for decomposing embeddings into a sparse combination of linear directions, which have been shown empirically to often correspond to human-interpretable semantics. However, recent attempts to apply SAEs to multimodal embedding spaces (such as the popular CLIP embeddings for image/text data) have found that SAEs often learn "split dictionaries", where most of the learned sparse features are essentially unimodal, active only for data of a single modality. In this work, we study how to effectively adapt SAEs for the setting of multimodal embeddings while ensuring multimodal alignment. We first argue that the existence of a split dictionary decomposition on an aligned embedding space implies the existence of a non-split dictionary with improved modality alignment. Then, we propose a new SAE-based approach to multimodal embedding decomposition using cross-modal random masking and group-sparse regularization. We apply our method to popular embeddings for image/text (CLIP) and audio/text (CLAP) data and show that, compared to standard SAEs, our approach learns a more multimodal dictionary while reducing the number of dead neurons and improving feature semanticity. We finally demonstrate how this improvement in alignment of concepts between modalities can enable improvements in the interpretability and control of cross-modal tasks.
+
+**Comment:** Representation Learning + sparsity: group-sparse autoencoders with cross-modal masking to decompose multimodal embeddings.
+
+**Relevance:** 9
+**Novelty:** 7
+
+---
+
+## 12. [Linear representations in language models can change dramatically over a conversation](https://arxiv.org/abs/2601.20834) <a id="link12"></a>
+
+**ArXiv ID:** 2601.20834
+
+**Authors:** Andrew Kyle Lampinen, Yuxuan Li, Eghbal Hosseini, Sangnie Bhardwaj, Murray Shanahan
+
+**Abstract:** Language model representations often contain linear directions that correspond to high-level concepts. Here, we study the dynamics of these representations: how representations evolve along these dimensions within the context of (simulated) conversations. We find that linear representations can change dramatically over a conversation; for example, information that is represented as factual at the beginning of a conversation can be represented as non-factual at the end and vice versa. These changes are content-dependent; while representations of conversation-relevant information may change, generic information is generally preserved. These changes are robust even for dimensions that disentangle factuality from more superficial response patterns, and occur across different model families and layers of the model. These representation changes do not require on-policy conversations; even replaying a conversation script written by an entirely different model can produce similar changes. However, adaptation is much weaker from simply having a sci-fi story in context that is framed more explicitly as such. We also show that steering along a representational direction can have dramatically different effects at different points in a conversation. These results are consistent with the idea that representations may evolve in response to the model playing a particular role that is cued by a conversation. Our findings may pose challenges for interpretability and steering -- in particular, they imply that it may be misleading to use static interpretations of features or directions, or probes that assume a particular range of features consistently corresponds to a particular ground-truth value. However, these types of representational dynamics also point to exciting new research directions for understanding how models adapt to context.
+
+**Comment:** Representation Learning: studies dynamics of linear concept directions in LMs across conversations, impacting interpretability/steering.
+
+**Relevance:** 9
+**Novelty:** 7
+
+---
+
+## 13. [$\mathbb{R}^{2k}$ is Theoretically Large Enough for Embedding-based Top-$k$ Retrieval](https://arxiv.org/abs/2601.20844) <a id="link13"></a>
+
+**ArXiv ID:** 2601.20844
+
+**Authors:** Zihao Wang, Hang Yin, Lihui Liu, Hanghang Tong, Yangqiu Song, Ginny Wong, Simon See
+
+**Abstract:** This paper studies the minimal dimension required to embed subset memberships ($m$ elements and ${m\choose k}$ subsets of at most $k$ elements) into vector spaces, denoted as Minimal Embeddable Dimension (MED). The tight bounds of MED are derived theoretically and supported empirically for various notions of "distances" or "similarities," including the $\ell_2$ metric, inner product, and cosine similarity. In addition, we conduct numerical simulation in a more achievable setting, where the ${m\choose k}$ subset embeddings are chosen as the centroid of the embeddings of the contained elements. Our simulation easily realizes a logarithmic dependency between the MED and the number of elements to embed. These findings imply that embedding-based retrieval limitations stem primarily from learnability challenges, not geometric constraints, guiding future algorithm design.
+
+**Comment:** Representation Learning: establishes tight bounds on minimal embeddable dimension for top-k retrieval across L2/inner product/cosine, isolating geometric limits of embedding-based retrieval.
+
+**Relevance:** 8
+**Novelty:** 8
+
+---
+
+## 14. [Domain Expansion: A Latent Space Construction Framework for Multi-Task Learning](https://arxiv.org/abs/2601.20069) <a id="link14"></a>
+
+**ArXiv ID:** 2601.20069
+
+**Authors:** Chi-Yao Huang, Khoa Vo, Aayush Atul Verma, Duo Lu, Yezhou Yang
+
+**Abstract:** Training a single network with multiple objectives often leads to conflicting gradients that degrade shared representations, forcing them into a compromised state that is suboptimal for any single task--a problem we term latent representation collapse. We introduce Domain Expansion, a framework that prevents these conflicts by restructuring the latent space itself. Our framework uses a novel orthogonal pooling mechanism to construct a latent space where each objective is assigned to a mutually orthogonal subspace. We validate our approach across diverse benchmarks--including ShapeNet, MPIIGaze, and Rotated MNIST--on challenging multi-objective problems combining classification with pose and gaze estimation. Our experiments demonstrate that this structure not only prevents collapse but also yields an explicit, interpretable, and compositional latent space where concepts can be directly manipulated.
+
+**Comment:** Model Architecture/Representation Learning: orthogonal pooling constructs mutually orthogonal latent subspaces per task to resolve gradient conflicts in multi-task learning.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 15. [Convergence Analysis of Randomized Subspace Normalized SGD under Heavy-Tailed Noise](https://arxiv.org/abs/2601.20399) <a id="link15"></a>
+
+**ArXiv ID:** 2601.20399
+
+**Authors:** Gaku Omiya, Pierre-Louis Poirion, Akiko Takeda
+
+**Abstract:** Randomized subspace methods reduce per-iteration cost; however, in nonconvex optimization, most analyses are expectation-based, and high-probability bounds remain scarce even under sub-Gaussian noise. We first prove that randomized subspace SGD (RS-SGD) admits a high-probability convergence bound under sub-Gaussian noise, achieving the same order of oracle complexity as prior in-expectation results. Motivated by the prevalence of heavy-tailed gradients in modern machine learning, we then propose randomized subspace normalized SGD (RS-NSGD), which integrates direction normalization into subspace updates. Assuming the noise has bounded $p$-th moments, we establish both in-expectation and high-probability convergence guarantees, and show that RS-NSGD can achieve better oracle complexity than full-dimensional normalized SGD.
+
+**Comment:** Efficiency/Training Dynamics: randomized subspace normalized SGD with high-probability guarantees under heavy-tailed noise; reduced per-iteration cost and better oracle complexity than full-dim NSGD.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 16. [Implicit Hypothesis Testing and Divergence Preservation in Neural Network Representations](https://arxiv.org/abs/2601.20477) <a id="link16"></a>
+
+**ArXiv ID:** 2601.20477
+
+**Authors:** Kadircan Aksoy, Peter Jung, Protim Bhattacharjee
+
+**Abstract:** We study the supervised training dynamics of neural classifiers through the lens of binary hypothesis testing. We model classification as a set of binary tests between class-conditional distributions of representations and empirically show that, along training trajectories, well-generalizing networks increasingly align with Neyman-Pearson optimal decision rules via monotonic improvements in KL divergence that relate to error rate exponents. We finally discuss how this yields an explanation and possible training or regularization strategies for different classes of neural networks.
+
+**Comment:** Representation Learning/Training Dynamics: frames supervised training as implicit hypothesis testing with KL divergence alignment toward Neyman–Pearson optimality, suggesting regularization strategies.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 17. [Leveraging Second-Order Curvature for Efficient Learned Image Compression: Theory and Empirical Evidence](https://arxiv.org/abs/2601.20769) <a id="link17"></a>
+
+**ArXiv ID:** 2601.20769
+
+**Authors:** Yichi Zhang, Fengqing Zhu
+
+**Abstract:** Training learned image compression (LIC) models entails navigating a challenging optimization landscape defined by the fundamental trade-off between rate and distortion. Standard first-order optimizers, such as SGD and Adam, struggle with \emph{gradient conflicts} arising from competing objectives, leading to slow convergence and suboptimal rate-distortion performance. In this work, we demonstrate that a simple utilization of a second-order quasi-Newton optimizer, \textbf{SOAP}, dramatically improves both training efficiency and final performance across diverse LICs. Our theoretical and empirical analyses reveal that Newton preconditioning inherently resolves the intra-step and inter-step update conflicts intrinsic to the R-D objective, facilitating faster, more stable convergence. Beyond acceleration, we uncover a critical deployability benefit: second-order trained models exhibit significantly fewer activation and latent outliers. This substantially enhances robustness to post-training quantization. Together, these results establish second-order optimization, achievable as a seamless drop-in replacement of the imported optimizer, as a powerful, practical tool for advancing the efficiency and real-world readiness of LICs.
+
+**Comment:** Model Compression and Efficiency: second-order (quasi-Newton) optimizer for learned image compression improves optimization efficiency and reduces activation/latent outliers, aiding post-training quantization.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 18. [Window-Diffusion: Accelerating Diffusion Language Model Inference with Windowed Token Pruning and Caching](https://arxiv.org/abs/2601.20332) <a id="link18"></a>
+
+**ArXiv ID:** 2601.20332
+
+**Authors:** Fengrui Zuo, Zhiwei Ke, Yiming Liu, Wenqi Lou, Chao Wang, Xvehai Zhou
+
+**Abstract:** Diffusion language models (DLMs) generate text through iterative denoising, but inference requires full-sequence attention at every iteration, resulting in substantial redundant computation on masked tokens. Block-wise diffusion can reduce this cost, yet it typically relies on retraining and constrained update orders, limiting its direct applicability to pretrained DLMs. Our token-level analysis reveals pronounced structural locality in DLM inference. Decoding is driven by a small set of prefix-localized active tokens; the influence of distant undecoded context diminishes rapidly, and decoded tokens exhibit stage-wise temporal stability, enabling reuse of intermediate representations except for a brief post-decode transient. Motivated by these observations, we propose \textbf{\placeholder}\footnote{The source code is available at https://github.com/vhicrgit/Window-Diffusion.}, a window-based token pruning and caching method for inference. We maintain a local computation window that slides rightward as denoising progresses, and partition undecoded tokens into: (i) \textit{active tokens} that are computed online, (ii) \textit{buffer tokens} whose KV states are cached and periodically refreshed, and (iii) \textit{far-field tokens} that are pruned outside the window. Computation is restricted to active and buffer tokens within the window, while far-field tokens are omitted at each stage. Experiments on LLaDA and Dream show that, under matched compute budgets, our method achieves up to $99\times$ inference speedup while largely preserving generation performance.
+
+**Comment:** Model Compression and Efficiency: introduces windowed token pruning and KV caching to accelerate diffusion LM inference.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 19. [TABED: Test-Time Adaptive Ensemble Drafting for Robust Speculative Decoding in LVLMs](https://arxiv.org/abs/2601.20357) <a id="link19"></a>
+
+**ArXiv ID:** 2601.20357
+
+**Authors:** Minjae Lee, Wonjun Kang, Byeongkeun Ahn, Christian Classen, Kevin Galim, Seunghyuk Oh, Minghao Yan, Hyung Il Koo, Kangwook Lee
+
+**Abstract:** Speculative decoding (SD) has proven effective for accelerating LLM inference by quickly generating draft tokens and verifying them in parallel. However, SD remains largely unexplored for Large Vision-Language Models (LVLMs), which extend LLMs to process both image and text prompts. To address this gap, we benchmark existing inference methods with small draft models on 11 datasets across diverse input scenarios and observe scenario-specific performance fluctuations. Motivated by these findings, we propose Test-time Adaptive Batched Ensemble Drafting (TABED), which dynamically ensembles multiple drafts obtained via batch inference by leveraging deviations from past ground truths available in the SD setting. The dynamic ensemble method achieves an average robust walltime speedup of 1.74x over autoregressive decoding and a 5% improvement over single drafting methods, while remaining training-free and keeping ensembling costs negligible through parameter sharing. With its plug-and-play compatibility, we further enhance TABED by integrating advanced verification and alternative drafting methods. Code and custom-trained models are available at https://github.com/furiosa-ai/TABED.
+
+**Comment:** Model Compression and Efficiency: test-time adaptive ensemble drafting for speculative decoding to speed LVLM inference.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 20. [PiC-BNN: A 128-kbit 65 nm Processing-in-CAM-Based End-to-End Binary Neural Network Accelerator](https://arxiv.org/abs/2601.19920) <a id="link20"></a>
+
+**ArXiv ID:** 2601.19920
+
+**Authors:** Yuval Harary, Almog Sharoni, Esteban Garz\'on, Marco Lanuzza, Adam Teman, Leonid Yavits
+
+**Abstract:** Binary Neural Networks (BNNs), where weights and activations are constrained to binary values (+1, -1), are a highly efficient alternative to traditional neural networks. Unfortunately, typical BNNs, while binarizing linear layers (matrix-vector multiplication), still implement other network layers (batch normalization, softmax, output layer, and sometimes the input layer of a convolutional neural network) in full precision. This limits the area and energy benefits and requires architectural support for full precision operations. We propose PiC-BNN, a true end-to-end binary in-approximate search (Hamming distance tolerant) Content Addressable Memory based BNN accelerator. PiC-BNN is designed and manufactured in a commercial 65nm process. PiC-BNN uses Hamming distance tolerance to apply the law of large numbers to enable accurate classification without implementing full precision operations. PiC-BNN achieves baseline software accuracy (95.2%) on the MNIST dataset and 93.5% on the Hand Gesture (HG) dataset, a throughput of 560K inferences/s, and presents a power efficiency of 703M inferences/s/W when implementing a binary MLP model for MNIST/HG dataset classification.
+
+**Comment:** Compression/Efficiency: end-to-end binary neural network accelerator using processing-in-CAM, eliminating full-precision ops.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 21. [Beyond Speedup -- Utilizing KV Cache for Sampling and Reasoning](https://arxiv.org/abs/2601.20326) <a id="link21"></a>
+
+**ArXiv ID:** 2601.20326
+
+**Authors:** Zeyu Xing, Xing Li, Hui-Ling Zhen, Mingxuan Yuan, Sinno Jialin Pan
+
+**Abstract:** KV caches, typically used only to speed up autoregressive decoding, encode contextual information that can be reused for downstream tasks at no extra cost. We propose treating the KV cache as a lightweight representation, eliminating the need to recompute or store full hidden states. Despite being weaker than dedicated embeddings, KV-derived representations are shown to be sufficient for two key applications: \textbf{(i) Chain-of-Embedding}, where they achieve competitive or superior performance on Llama-3.1-8B-Instruct and Qwen2-7B-Instruct; and \textbf{(ii) Fast/Slow Thinking Switching}, where they enable adaptive reasoning on Qwen3-8B and DeepSeek-R1-Distil-Qwen-14B, reducing token generation by up to $5.7\times$ with minimal accuracy loss. Our findings establish KV caches as a free, effective substrate for sampling and reasoning, opening new directions for representation reuse in LLM inference. Code: https://github.com/cmd2001/ICLR2026_KV-Embedding.
+
+**Comment:** Efficiency: repurposes KV cache as a reusable lightweight representation to enable sampling/reasoning speedups (cache-based inference optimization).
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 22. [LinguaMap: Which Layers of LLMs Speak Your Language and How to Tune Them?](https://arxiv.org/abs/2601.20009) <a id="link22"></a>
+
+**ArXiv ID:** 2601.20009
+
+**Authors:** J. Ben Tamo, Daniel Carlander-Reuterfelt, Jonathan Rubin, Dezhi Hong, Mingxian Wang, Oleg Poliannikov
+
+**Abstract:** Despite multilingual pretraining, large language models often struggle with non-English tasks, particularly in language control, the ability to respond in the intended language. We identify and characterize two key failure modes: the multilingual transfer bottleneck (correct language, incorrect task response) and the language consistency bottleneck (correct task response, wrong language). To systematically surface these issues, we design a four-scenario evaluation protocol spanning MMLU, MGSM, and XQuAD benchmarks. To probe these issues with interpretability, we extend logit lens analysis to track language probabilities layer by layer and compute cross-lingual semantic similarity of hidden states. The results reveal a three-phase internal structure: early layers align inputs into a shared semantic space, middle layers perform task reasoning, and late layers drive language-specific generation. Guided by these insights, we introduce selective fine-tuning of only the final layers responsible for language control. On Qwen-3-32B and Bloom-7.1B, this method achieves over 98 percent language consistency across six languages while fine-tuning only 3-5 percent of parameters, without sacrificing task accuracy. Importantly, this result is nearly identical to that of full-scope fine-tuning (for example, above 98 percent language consistency for both methods across all prompt scenarios) but uses a fraction of the computational resources. To the best of our knowledge, this is the first approach to leverage layer-localization of language control for efficient multilingual adaptation.
+
+**Comment:** Representation Learning + Efficient Adaptation: layer-localization of language control with selective fine-tuning of late layers (3–5% params) to improve language consistency.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 23. [Loss Landscape Geometry and the Learning of Symmetries: Or, What Influence Functions Reveal About Robust Generalization](https://arxiv.org/abs/2601.20172) <a id="link23"></a>
+
+**ArXiv ID:** 2601.20172
+
+**Authors:** James Amarel, Robyn Miller, Nicolas Hengartner, Benjamin Migliori, Emily Casleton, Alexei Skurikhin, Earl Lawrence, Gerd J. Kunde
+
+**Abstract:** We study how neural emulators of partial differential equation solution operators internalize physical symmetries by introducing an influence-based diagnostic that measures the propagation of parameter updates between symmetry-related states, defined as the metric-weighted overlap of loss gradients evaluated along group orbits. This quantity probes the local geometry of the learned loss landscape and goes beyond forward-pass equivariance tests by directly assessing whether learning dynamics couple physically equivalent configurations. Applying our diagnostic to autoregressive fluid flow emulators, we show that orbit-wise gradient coherence provides the mechanism for learning to generalize over symmetry transformations and indicates when training selects a symmetry compatible basin. The result is a novel technique for evaluating if surrogate models have internalized symmetry properties of the known solution operator.
+
+**Comment:** Representation Learning: influence-function diagnostic measuring gradient coupling along symmetry orbits to assess robust generalization via loss landscape geometry.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 24. [Dissecting Multimodal In-Context Learning: Modality Asymmetries and Circuit Dynamics in modern Transformers](https://arxiv.org/abs/2601.20796) <a id="link24"></a>
+
+**ArXiv ID:** 2601.20796
+
+**Authors:** Yiran Huang, Karsten Roth, Quentin Bouniot, Wenjia Xu, Zeynep Akata
+
+**Abstract:** Transformer-based multimodal large language models often exhibit in-context learning (ICL) abilities. Motivated by this phenomenon, we ask: how do transformers learn to associate information across modalities from in-context examples? We investigate this question through controlled experiments on small transformers trained on synthetic classification tasks, enabling precise manipulation of data statistics and model architecture. We begin by revisiting core principles of unimodal ICL in modern transformers. While several prior findings replicate, we find that Rotary Position Embeddings (RoPE) increases the data complexity threshold for ICL. Extending to the multimodal setting reveals a fundamental learning asymmetry: when pretrained on high-diversity data from a primary modality, surprisingly low data complexity in the secondary modality suffices for multimodal ICL to emerge. Mechanistic analysis shows that both settings rely on an induction-style mechanism that copies labels from matching in-context exemplars; multimodal training refines and extends these circuits across modalities. Our findings provide a mechanistic foundation for understanding multimodal ICL in modern transformers and introduce a controlled testbed for future investigation.
+
+**Comment:** Representation Learning: mechanistic analysis of multimodal in-context learning circuits (induction-style) and RoPE effects in transformers.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 25. [TINNs: Time-Induced Neural Networks for Solving Time-Dependent PDEs](https://arxiv.org/abs/2601.20361) <a id="link25"></a>
+
+**ArXiv ID:** 2601.20361
+
+**Authors:** Chen-Yang Dai, Che-Chia Chang, Te-Sheng Lin, Ming-Chih Lai, Chieh-Hsin Lai
+
+**Abstract:** Physics-informed neural networks (PINNs) solve time-dependent partial differential equations (PDEs) by learning a mesh-free, differentiable solution that can be evaluated anywhere in space and time. However, standard space--time PINNs take time as an input but reuse a single network with shared weights across all times, forcing the same features to represent markedly different dynamics. This coupling degrades accuracy and can destabilize training when enforcing PDE, boundary, and initial constraints jointly. We propose Time-Induced Neural Networks (TINNs), a novel architecture that parameterizes the network weights as a learned function of time, allowing the effective spatial representation to evolve over time while maintaining shared structure. The resulting formulation naturally yields a nonlinear least-squares problem, which we optimize efficiently using a Levenberg--Marquardt method. Experiments on various time-dependent PDEs show up to $4\times$ improved accuracy and $10\times$ faster convergence compared to PINNs and strong baselines.
+
+**Comment:** Model Architecture: introduces a conditional/dynamic network by parameterizing weights as a learned function of time, addressing limitations of shared weights in PINNs.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 26. [SuperInfer: SLO-Aware Rotary Scheduling and Memory Management for LLM Inference on Superchips](https://arxiv.org/abs/2601.20309) <a id="link26"></a>
+
+**ArXiv ID:** 2601.20309
+
+**Authors:** Jiahuan Yu, Mingtao Hu, Zichao Lin, Minjia Zhang
+
+**Abstract:** Large Language Model (LLM) serving faces a fundamental tension between stringent latency Service Level Objectives (SLOs) and limited GPU memory capacity. When high request rates exhaust the KV cache budget, existing LLM inference systems often suffer severe head-of-line (HOL) blocking. While prior work explored PCIe-based offloading, these approaches cannot sustain responsiveness under high request rates, often failing to meet tight Time-To-First-Token (TTFT) and Time-Between-Tokens (TBT) SLOs. We present SuperInfer, a high-performance LLM inference system designed for emerging Superchips (e.g., NVIDIA GH200) with tightly coupled GPU-CPU architecture via NVLink-C2C. SuperInfer introduces RotaSched, the first proactive, SLO-aware rotary scheduler that rotates requests to maintain responsiveness on Superchips, and DuplexKV, an optimized rotation engine that enables full-duplex transfer over NVLink-C2C. Evaluations on GH200 using various models and datasets show that SuperInfer improves TTFT SLO attainment rates by up to 74.7% while maintaining comparable TBT and throughput compared to state-of-the-art systems, demonstrating that SLO-aware scheduling and memory co-design unlocks the full potential of Superchips for responsive LLM serving.
+
+**Comment:** High Performance Computing: systems-level memory optimization and SLO-aware scheduling (RotaSched, DuplexKV) for LLM serving on Superchips, addressing KV-cache bottlenecks.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+# Paper Selection Prompt
+
+## System Prompt
+
+> You are a helpful paper reading assistant whose job is to read daily posts from ArXiv and identify a few papers that your friend will enjoy reading.
+> Your job is to carefully read the paper titles and abstracts below and find the ones that match the criteria below.
+
+## User Prompt
+
+> ## Instructions
+> 
+> Write the response in JSONL format with {ARXIVID, COMMENT, RELEVANCE, NOVELTY} on each line, one for each paper.
+> 
+> - ARXIVID: should be the ArXiv ID.
+> - COMMENT: should identify whether there is a criteria that match the paper very closely. These matches should not be based on general terms like "language modeling" or "advancements" and should specifically refer to a criterion. No need to mention the non-matching criteria.
+> - RELEVANCE: should be a score from 1-10.
+> - NOVELTY: should be a score from 1-10.
+> 
+> ## Scoring Criteria
+> 
+> > The "Relevance" score measures how closely the paper aligns with the core topics of the prompt.
+> > The "Novelty" score assesses the originality and impact of the paper.
+> > They are two **ORTHONORMAL** axes and **SHOULD NOT** be confused with each other.
+> 
+> ### Relevance Scoring
+> 
+> - Relevance 9-10 (Completely Relevant)
+>   - Focus: Fully aligned with core topics with no deviation, score the highest if contains relevant keywords in it.
+>   - Examples: Papers focused on foundational methods or theoretical research, whose titles contain topic keywords like "MoE".
+> 
+> - Relevance 7-8 (Relevant)
+>   - Focus: Retain a solid link to the main research area, though may touch on peripheral elements.
+>   - Examples: Papers research on the fundamental part of MoE through a less critical aspect like its behavior in GNN.
+> 
+> - Relevance 5-6 (Borderline)
+>   - Focus: Maintains a link to the core topic but also extends into at least one other domain/area beyond the primary focus.
+>   - Examples: Work referencing MoE centered on reinforcement learning.
+> 
+> - Relevance 3-4 (Irrelevant)
+>   - Focus: Largely outside our interests with no association to our topics.
+>   - Examples: Application-focused papers like using MoE to solve a problem in the real world.
+> 
+> - Relevance 1-2 (Ignore)
+>   - Focus: Purely unrelated to our topics. Completely a different domain.
+>   - **Exception**: If the paper hints at a cutting-edge, radically new direction that could eventually transform the primary domain, consider a score of 9–10 despite initial appearances. (Usually a very rare concept that belongs to the fundamental research)
+> 
+> ### Novelty Scoring
+> 
+> - Novelty 9-10 (Breakthrough)
+>   - Definition: Groundbreaking methods/theory introducing new directions or solving major challenges.
+>   - Examples: Entirely new paradigm for foundational models; a novel theory transforming representation learning.
+> 
+> - Novelty 7-8 (Improvements)
+>   - Definition: Substantial insights/enhancements, though not a full paradigm shift.
+>   - Examples: Modifications on existing methods yielding significantly better results.
+> 
+> - Novelty 5-6 (Borderline)
+>   - Definition: Incremental contributions with possible long-term benefits, not immediately transformative.
+>   - Examples: Moderately novel extension to an existing architecture; refining current methods without fundamentally altering them.
+> 
+> - Novelty 3-4 (Tangential)
+>   - Definition: Minor or domain-specific improvements with limited broader impact.
+>   - Examples: Slight modifications to known methods with strange motivation; purely engineering jobs like a new benchmark/dataset.
+> 
+> - Novelty 1-2 (Low)
+>   - Definition: Minimal originality, applying standard approaches without real innovation.
+>   - Examples: Using an off-the-shelf model without adding new insights; purely application-driven studies like finetuning a pretrained model using existing methods.
+> 
+> ## Papers
+> 
+> [PAPER LIST HERE]
+> 
+> ## Relevant Topics
+> 
+> Use the following relevance criteria to focus on foundational research. Keep **relevant** papers and filter out **irrelevant** ones. Avoid purely **application-driven** work.
+> 
+> 1. Model Architecture
+>    - Relevant: Mixture-of-Experts (MoE), Transformers, Conditional/Dynamic Networks, Autoencoders, analysis/innovations on existing architectures.
+>    - Irrelevant: Merely using existing architectures for a certain task without insights into the structure themselves.
+> 
+> 2. Model Compression and Efficiency
+>    - Relevant: Sparsity, pruning, quantization, low-rank approaches, cache, or other algorithmic/theoretical efficiency breakthroughs.
+>    - Irrelevant: Straightforward applications of existing compression methods to new tasks.
+> 
+> 3. High Performance Computing
+>    - Relevant: Algorithmic or systems-level innovations enabling training of large-scale models, distributed training techniques, memory optimization.
+>    - Irrelevant: Incremental engineering improvements without novel algorithmic contributions.
+> 
+> 4. Representation Learning
+>    - Relevant: Insights into how deep networks encode information, feature/dictionary learning, sparse/contrastive methods, training dynamics in neural networks.
+>    - Irrelevant: Standard applications of known techniques lacking new theoretical or methodological contributions.
+> 
+> **Keywords:**
+> 
+> - Relevant: Mixture of Experts (MoE), Representation Learning, Compression/Efficiency, Sparse/Sparsity, Pruning, Quantization, Low-rank, Foundation Model, etc.
+> - Irrelevant: Reinforcement Learning, Transfer Learning, Federated Learning, Online Learning, Diffusion Models, etc.
+> - Application: Image Segmentation, Medical Imaging, 3D Vision, Video Understanding, Information Retrieval, Summarization, Recommendation Systems, Machine Translation, Speech Recognition, Signal Processing, Spatial/Temporal Modeling, Time Series, Knowledge Graph, etc.

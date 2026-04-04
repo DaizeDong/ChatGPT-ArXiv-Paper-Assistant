@@ -1,0 +1,336 @@
+<div style="display: flex; align-items: flex-start; justify-content: space-between; width: 100%;"><div style="width: 33.33%; text-align: left;"><a href="../01"><img src="../../../assets/nav/day/2025-05-02-prev.svg" alt="Previous Day 2025-05-01"></a></div><div style="width: 33.33%; text-align: center;"><a href=".."><img src="../../../assets/nav/day/2025-05-02-center.svg" alt="Monthly Overview 2025-05"></a></div><div style="width: 33.33%; text-align: right;"><a href="../05"><img src="../../../assets/nav/day/2025-05-02-next.svg" alt="Next Day 2025-05-05"></a></div></div>
+
+# Personalized Daily ArXiv Papers 2025-05-02
+
+| *[gpt-4o]*   | Prompt   | Completion   | Total   |
+|:------------:|:--------:|:------------:|:-------:|
+| **Token**    | 31381    | 3815         | 35196   |
+| **Cost**     | $0.08    | $0.04        | $0.12   |
+
+Total arXiv papers: 348
+
+Total scanned papers: 223
+
+Total relevant papers: 12
+
+**Table of contents with paper titles:**
+
+1. [Optimal Vector Compressed Sensing Using James Stein Shrinkage](#user-content-link1)
+**Authors:** Apratim Dey, David Donoho
+
+2. [Pushing the Limits of Low-Bit Optimizers: A Focus on EMA Dynamics](#user-content-link2)
+**Authors:** Cong Xu, Wenbin Liang, Mo Yu, Anan Liu, Ke-Yue Zhang, Lizhuang Ma, Jianyong Wang, Jun Wang, Wei Zhang
+
+3. [On the generalization of language models from in-context learning and finetuning: a controlled study](#user-content-link3)
+**Authors:** Andrew K. Lampinen, Arslan Chaudhry, Stephanie C. Y. Chan, Cody Wild, Diane Wan, Alex Ku, J\"org Bornschein, Razvan Pascanu, Murray Shanahan, James L. McClelland
+
+4. [FreqKV: Frequency Domain Key-Value Compression for Efficient Context Window Extension](#user-content-link4)
+**Authors:** Jushi Kai, Boyi Zeng, Yixuan Wang, Haoli Bai, Bo Jiang, Zhouhan Lin
+
+5. [Empirical Evaluation of Progressive Coding for Sparse Autoencoders](#user-content-link5)
+**Authors:** Hans Peter, Anders S{\o}gaard
+
+6. [FineScope : Precision Pruning for Domain-Specialized Large Language Models Using SAE-Guided Self-Data Cultivation](#user-content-link6)
+**Authors:** Chaitali Bhattacharyya, Yeseong Kim
+
+7. [LangVAE and LangSpace: Building and Probing for Language Model VAEs](#user-content-link7)
+**Authors:** Danilo S. Carvalho, Yingji Zhang, Harriet Unsworth, Andr\'e Freitas
+
+8. [Parameter-Efficient Fine-Tuning with Circulant and Diagonal Vectors](#user-content-link8)
+**Authors:** Xinyu Ding, Lexuan Chen, Siyu Liao, Zhongfeng Wang
+
+9. [Block Circulant Adapter for Large Language Models](#user-content-link9)
+**Authors:** Xinyu Ding, Meiqi Wang, Siyu Liao, Zhongfeng Wang
+
+10. [On the expressivity of deep Heaviside networks](#user-content-link10)
+**Authors:** Insung Kong, Juntong Chen, Sophie Langer, Johannes Schmidt-Hieber
+
+11. [Optimizing Deep Neural Networks using Safety-Guided Self Compression](#user-content-link11)
+**Authors:** Mohammad Zbeeb, Mariam Salman, Mohammad Bazzi, Ammar Mohanna
+
+12. [Scaling On-Device GPU Inference for Large Generative Models](#user-content-link12)
+**Authors:** Jiuqiang Tang, Raman Sarokin, Ekaterina Ignasheva, Grant Jensen, Lin Chen, Juhyun Lee, Andrei Kulik, Matthias Grundmann
+
+---
+
+## 1. [Optimal Vector Compressed Sensing Using James Stein Shrinkage](https://arxiv.org/abs/2505.00326) <a id="link1"></a>
+
+**ArXiv ID:** 2505.00326
+
+**Authors:** Apratim Dey, David Donoho
+
+**Abstract:** The trend in modern science and technology is to take vector measurements rather than scalars, ruthlessly scaling to ever higher dimensional vectors. For about two decades now, traditional scalar Compressed Sensing has been synonymous with a Convex Optimization based procedure called Basis Pursuit. In the vector recovery case, the natural tendency is to return to a straightforward vector extension of Basis Pursuit, also based on Convex Optimization. However, Convex Optimization is provably suboptimal, particularly when $B$ is large. In this paper, we propose SteinSense, a lightweight iterative algorithm, which is provably optimal when $B$ is large. It does not have any tuning parameter, does not need any training data, requires zero knowledge of sparsity, is embarrassingly simple to implement, and all of this makes it easily scalable to high vector dimensions. We conduct a massive volume of both real and synthetic experiments that confirm the efficacy of SteinSense, and also provide theoretical justification based on ideas from Approximate Message Passing. Fascinatingly, we discover that SteinSense is quite robust, delivering the same quality of performance on real data, and even under substantial departures from conditions under which existing theory holds.
+
+**Comment:** The paper introduces SteinSense, a novel algorithm for vector compressed sensing that is provably optimal and highly scalable. This aligns with foundational research in model compression and efficiency.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 2. [Pushing the Limits of Low-Bit Optimizers: A Focus on EMA Dynamics](https://arxiv.org/abs/2505.00347) <a id="link2"></a>
+
+**ArXiv ID:** 2505.00347
+
+**Authors:** Cong Xu, Wenbin Liang, Mo Yu, Anan Liu, Ke-Yue Zhang, Lizhuang Ma, Jianyong Wang, Jun Wang, Wei Zhang
+
+**Abstract:** The explosion in model sizes leads to continued growth in prohibitive training/fine-tuning costs, particularly for stateful optimizers which maintain auxiliary information of even 2x the model size to achieve optimal convergence. We therefore present in this work a novel type of optimizer that carries with extremely lightweight state overloads, achieved through ultra-low-precision quantization. While previous efforts have achieved certain success with 8-bit or 4-bit quantization, our approach enables optimizers to operate at precision as low as 3 bits, or even 2 bits per state element. This is accomplished by identifying and addressing two critical challenges: the signal swamping problem in unsigned quantization that results in unchanged state dynamics, and the rapidly increased gradient variance in signed quantization that leads to incorrect descent directions. The theoretical analysis suggests a tailored logarithmic quantization for the former and a precision-specific momentum value for the latter. Consequently, the proposed SOLO achieves substantial memory savings (approximately 45 GB when training a 7B model) with minimal accuracy loss. We hope that SOLO can contribute to overcoming the bottleneck in computational resources, thereby promoting greater accessibility in fundamental research.
+
+**Comment:** This paper introduces a novel low-bit optimizer with theoretical contributions addressing challenges in quantization, which aligns with the model compression criterion, particularly in sparsity and quantization.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 3. [On the generalization of language models from in-context learning and finetuning: a controlled study](https://arxiv.org/abs/2505.00661) <a id="link3"></a>
+
+**ArXiv ID:** 2505.00661
+
+**Authors:** Andrew K. Lampinen, Arslan Chaudhry, Stephanie C. Y. Chan, Cody Wild, Diane Wan, Alex Ku, J\"org Bornschein, Razvan Pascanu, Murray Shanahan, James L. McClelland
+
+**Abstract:** Large language models exhibit exciting capabilities, yet can show surprisingly narrow generalization from finetuning -- from failing to generalize to simple reversals of relations they are trained on, to missing logical deductions that can be made from trained information. These failures to generalize from fine-tuning can hinder practical application of these models. However, language models' in-context learning shows different inductive biases, and can generalize better in some of these cases. Here, we explore these differences in generalization between in-context- and fine-tuning-based learning. To do so, we constructed several novel datasets to evaluate and improve models' ability to generalize from finetuning data. The datasets are constructed to isolate the knowledge in the dataset from that in pretraining, to create clean tests of generalization. We expose pretrained large models to controlled subsets of the information in these datasets -- either in context, or through fine-tuning -- and evaluate their performance on test sets that require various types of generalization. We find overall that in data-matched settings, in-context learning can generalize more flexibly than fine-tuning (though we also find some qualifications of prior findings, such as cases when fine-tuning can generalize to reversals embedded in a larger structure of knowledge). We build on these findings to propose a method to enable improved generalization from fine-tuning: adding in-context inferences to finetuning data. We show that this method improves generalization across various splits of our datasets and other benchmarks. Our results have implications for understanding the inductive biases of different modes of learning in language models, and practically improving their performance.
+
+**Comment:** The paper explores generalization differences between in-context learning and fine-tuning in LLMs, providing theoretical insights into LLM behavior and inductive biases, which aligns with the LLM criterion.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 4. [FreqKV: Frequency Domain Key-Value Compression for Efficient Context Window Extension](https://arxiv.org/abs/2505.00570) <a id="link4"></a>
+
+**ArXiv ID:** 2505.00570
+
+**Authors:** Jushi Kai, Boyi Zeng, Yixuan Wang, Haoli Bai, Bo Jiang, Zhouhan Lin
+
+**Abstract:** Extending the context window in large language models (LLMs) is essential for applications involving long-form content generation. However, the linear increase in key-value (KV) cache memory requirements and the quadratic complexity of self-attention with respect to sequence length present significant challenges during fine-tuning and inference. Existing methods suffer from performance degradation when extending to longer contexts. In this work, we introduce a novel context extension method that optimizes both fine-tuning and inference efficiency. Our method exploits a key observation: in the frequency domain, the energy distribution of the KV cache is primarily concentrated in low-frequency components. By filtering out the high-frequency components, the KV cache can be effectively compressed with minimal information loss. Building on this insight, we propose an efficient compression technique, FreqKV, that iteratively compresses the increasing KV cache to a fixed size in the frequency domain, applicable to both fine-tuning and inference. FreqKV introduces no additional parameters or architectural modifications. With minimal fine-tuning, LLMs can learn to leverage the limited cache that is compressed in the frequency domain and extend the context window efficiently. Experiments on various long context language modeling and understanding tasks demonstrate the efficiency and efficacy of the proposed method.
+
+**Comment:** The paper introduces a novel KV cache compression method for LLMs using frequency domain techniques, which aligns with the model compression criterion and efficiency breakthroughs.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 5. [Empirical Evaluation of Progressive Coding for Sparse Autoencoders](https://arxiv.org/abs/2505.00190) <a id="link5"></a>
+
+**ArXiv ID:** 2505.00190
+
+**Authors:** Hans Peter, Anders S{\o}gaard
+
+**Abstract:** Sparse autoencoders (SAEs) \citep{bricken2023monosemanticity,gao2024scalingevaluatingsparseautoencoders} rely on dictionary learning to extract interpretable features from neural networks at scale in an unsupervised manner, with applications to representation engineering and information retrieval. SAEs are, however, computationally expensive \citep{lieberum2024gemmascopeopensparse}, especially when multiple SAEs of different sizes are needed. We show that dictionary importance in vanilla SAEs follows a power law. We compare progressive coding based on subset pruning of SAEs -- to jointly training nested SAEs, or so-called {\em Matryoshka} SAEs \citep{bussmann2024learning,nabeshima2024Matryoshka} -- on a language modeling task. We show Matryoshka SAEs exhibit lower reconstruction loss and recaptured language modeling loss, as well as higher representational similarity. Pruned vanilla SAEs are more interpretable, however. We discuss the origins and implications of this trade-off.
+
+**Comment:** The paper evaluates sparse autoencoders and introduces Matryoshka SAEs, which aligns with foundational research in representation learning and sparse methods.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 6. [FineScope : Precision Pruning for Domain-Specialized Large Language Models Using SAE-Guided Self-Data Cultivation](https://arxiv.org/abs/2505.00624) <a id="link6"></a>
+
+**ArXiv ID:** 2505.00624
+
+**Authors:** Chaitali Bhattacharyya, Yeseong Kim
+
+**Abstract:** Training large language models (LLMs) from scratch requires significant computational resources, driving interest in developing smaller, domain-specific LLMs that maintain both efficiency and strong task performance. Medium-sized models such as LLaMA, llama} have served as starting points for domain-specific adaptation, but they often suffer from accuracy degradation when tested on specialized datasets. We introduce FineScope, a framework for deriving compact, domain-optimized LLMs from larger pretrained models. FineScope leverages the Sparse Autoencoder (SAE) framework, inspired by its ability to produce interpretable feature representations, to extract domain-specific subsets from large datasets. We apply structured pruning with domain-specific constraints, ensuring that the resulting pruned models retain essential knowledge for the target domain. To further enhance performance, these pruned models undergo self-data distillation, leveraging SAE-curated datasets to restore key domain-specific information lost during pruning. Extensive experiments and ablation studies demonstrate that FineScope achieves highly competitive performance, outperforming several large-scale state-of-the-art LLMs in domain-specific tasks. Additionally, our results show that FineScope enables pruned models to regain a substantial portion of their original performance when fine-tuned with SAE-curated datasets. Furthermore, applying these datasets to fine-tune pretrained LLMs without pruning also improves their domain-specific accuracy, highlighting the robustness of our approach. The code will be released.
+
+**Comment:** This paper introduces FineScope, a framework for pruning and optimizing LLMs using sparse autoencoders. It aligns with the model compression criterion, particularly in sparsity and pruning, and offers methodological contributions.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 7. [LangVAE and LangSpace: Building and Probing for Language Model VAEs](https://arxiv.org/abs/2505.00004) <a id="link7"></a>
+
+**ArXiv ID:** 2505.00004
+
+**Authors:** Danilo S. Carvalho, Yingji Zhang, Harriet Unsworth, Andr\'e Freitas
+
+**Abstract:** We present LangVAE, a novel framework for modular construction of variational autoencoders (VAEs) on top of pre-trained large language models (LLMs). Such language model VAEs can encode the knowledge of their pre-trained components into more compact and semantically disentangled representations. The representations obtained in this way can be analysed with the LangVAE companion framework: LangSpace, which implements a collection of probing methods, such as vector traversal and interpolation, disentanglement measures, and cluster visualisations. LangVAE and LangSpace offer a flexible, efficient and scalable way of building and analysing textual representations, with simple integration for models available on the HuggingFace Hub. Additionally, we conducted a set of experiments with different encoder and decoder combinations, as well as annotated inputs, revealing a wide range of interactions across architectural families and sizes w.r.t. generalisation and disentanglement. Our findings demonstrate a promising framework for systematising the experimentation and understanding of textual representations.
+
+**Comment:** The paper presents LangVAE, a framework for building and analyzing variational autoencoders (VAEs) on top of LLMs. This contributes to representation learning by enabling compact and semantically disentangled representations, making it relevant to foundational research.
+
+**Relevance:** 9
+**Novelty:** 7
+
+---
+
+## 8. [Parameter-Efficient Fine-Tuning with Circulant and Diagonal Vectors](https://arxiv.org/abs/2505.00580) <a id="link8"></a>
+
+**ArXiv ID:** 2505.00580
+
+**Authors:** Xinyu Ding, Lexuan Chen, Siyu Liao, Zhongfeng Wang
+
+**Abstract:** Foundation models have achieved tremendous success in different domains. However, their huge computation and storage complexity make these models difficult to fine-tune and also less applicable in practice. Recent study shows training in Fourier domain can be an effective fine-tuning method in terms of both model performance and number of training parameters. In this work, we propose to further reduce the complexity by the factorization through the product of interleaved circulant and diagonal matrices. In addition, we address the case of non-square fine-tuning weights by partitioning the circulant matrix into blocks. Our method avoids the construction of weight change matrix and utilizes 1D fast Fourier transform (FFT) instead of 2D FFT. Experimental results show that our method achieves similar or better performance across various tasks with much less floating-point operations (FLOPs) and the number of trainable parameters.
+
+**Comment:** The paper proposes a parameter-efficient fine-tuning method using circulant and diagonal matrices, which aligns with model compression and efficiency topics.
+
+**Relevance:** 9
+**Novelty:** 7
+
+---
+
+## 9. [Block Circulant Adapter for Large Language Models](https://arxiv.org/abs/2505.00582) <a id="link9"></a>
+
+**ArXiv ID:** 2505.00582
+
+**Authors:** Xinyu Ding, Meiqi Wang, Siyu Liao, Zhongfeng Wang
+
+**Abstract:** Fine-tuning large language models (LLMs) is difficult due to their huge model size. Recent Fourier domain-based methods show potential for reducing fine-tuning costs. We propose a block circulant matrix-based fine-tuning method with a stable training heuristic to leverage the properties of circulant matrices and one-dimensional Fourier transforms to reduce storage and computation costs. Experiments show that our method uses $14\times$ less number of parameters than VeRA, $16\times$ smaller than LoRA and $32\times$ less FLOPs than FourierFT, while maintaining close or better task performance. Our approach presents a promising way in frequency domain to fine-tune large models on downstream tasks.
+
+**Comment:** The paper introduces a block circulant matrix-based fine-tuning method for LLMs, which aligns with model compression and efficiency improvements. The use of Fourier transforms and circulant matrices is a novel approach to reduce storage and computation costs.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 10. [On the expressivity of deep Heaviside networks](https://arxiv.org/abs/2505.00110) <a id="link10"></a>
+
+**ArXiv ID:** 2505.00110
+
+**Authors:** Insung Kong, Juntong Chen, Sophie Langer, Johannes Schmidt-Hieber
+
+**Abstract:** We show that deep Heaviside networks (DHNs) have limited expressiveness but that this can be overcome by including either skip connections or neurons with linear activation. We provide lower and upper bounds for the Vapnik-Chervonenkis (VC) dimensions and approximation rates of these network classes. As an application, we derive statistical convergence rates for DHN fits in the nonparametric regression model.
+
+**Comment:** The paper provides theoretical insights into the expressivity of deep Heaviside networks, including VC dimensions and approximation rates, which aligns with foundational research in model architecture.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 11. [Optimizing Deep Neural Networks using Safety-Guided Self Compression](https://arxiv.org/abs/2505.00350) <a id="link11"></a>
+
+**ArXiv ID:** 2505.00350
+
+**Authors:** Mohammad Zbeeb, Mariam Salman, Mohammad Bazzi, Ammar Mohanna
+
+**Abstract:** The deployment of deep neural networks on resource-constrained devices necessitates effective model com- pression strategies that judiciously balance the reduction of model size with the preservation of performance. This study introduces a novel safety-driven quantization framework that leverages preservation sets to systematically prune and quantize neural network weights, thereby optimizing model complexity without compromising accuracy. The proposed methodology is rigorously evaluated on both a convolutional neural network (CNN) and an attention-based language model, demonstrating its applicability across diverse architectural paradigms. Experimental results reveal that our framework achieves up to a 2.5% enhancement in test accuracy relative to the original unquantized models while maintaining 60% of the initial model size. In comparison to conventional quantization techniques, our approach not only augments generalization by eliminating parameter noise and retaining essential weights but also reduces variance, thereby ensuring the retention of critical model features. These findings underscore the efficacy of safety-driven quantization as a robust and reliable strategy for the efficient optimization of deep learn- ing models. The implementation and comprehensive experimental evaluations of our framework are publicly accessible at GitHub.
+
+**Comment:** The paper introduces a safety-driven quantization framework, which aligns with foundational research in model compression and efficiency.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 12. [Scaling On-Device GPU Inference for Large Generative Models](https://arxiv.org/abs/2505.00232) <a id="link12"></a>
+
+**ArXiv ID:** 2505.00232
+
+**Authors:** Jiuqiang Tang, Raman Sarokin, Ekaterina Ignasheva, Grant Jensen, Lin Chen, Juhyun Lee, Andrei Kulik, Matthias Grundmann
+
+**Abstract:** Driven by the advancements in generative AI, large machine learning models have revolutionized domains such as image processing, audio synthesis, and speech recognition. While server-based deployments remain the locus of peak performance, the imperative for on-device inference, necessitated by privacy and efficiency considerations, persists. Recognizing GPUs as the on-device ML accelerator with the widest reach, we present ML Drift--an optimized framework that extends the capabilities of state-of-the-art GPU-accelerated inference engines. ML Drift enables on-device execution of generative AI workloads which contain 10 to 100x more parameters than existing on-device generative AI models. ML Drift addresses intricate engineering challenges associated with cross-GPU API development, and ensures broad compatibility across mobile and desktop/laptop platforms, thereby facilitating the deployment of significantly more complex models on resource-constrained devices. Our GPU-accelerated ML/AI inference engine achieves an order-of-magnitude performance improvement relative to existing open-source GPU inference engines.
+
+**Comment:** The paper presents an optimized framework for on-device GPU inference for large generative models, which aligns with foundational research in model efficiency and compression.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+# Paper Selection Prompt
+
+You are a helpful paper reading assistant whose job is to read daily posts from ArXiv and identify a few papers that your friend will enjoy reading.
+Your job is to carefully read the paper titles and abstracts below and find the ones that match the criteria below.
+
+## Instructions
+
+Write the response in JSONL format with {ARXIVID, COMMENT, RELEVANCE, NOVELTY} on each line, one for each paper.
+
+- ARXIVID: should be the ArXiv ID.
+- COMMENT: should identify whether there is a criteria that match the paper very closely. These matches should not be based on general terms like "language modeling" or "advancements" and should specifically refer to a criterion. No need to mention the non-matching criteria.
+- RELEVANCE: should be a score from 1-10.
+- NOVELTY: should be a score from 1-10.
+
+## Scoring Criteria
+
+> The "Relevance" score measures how closely the paper aligns with the core topics of the prompt.
+> The "Novelty" score assesses the originality and impact of the paper.
+> They are two **ORTHONORMAL** axes and **SHOULD NOT** be confused with each other.
+
+### Relevance Scoring
+
+- Relevance 9-10 (Completely Relevant)
+  - Focus: Fully aligned with core topics with no deviation, score the highest if contains relevant keywords in it.
+  - Examples: Papers focused on foundational methods or theoretical research, whose titles contain topic keywords like "MoE".
+
+- Relevance 7-8 (Relevant)
+  - Focus: Retain a solid link to the main research area, though may touch on peripheral elements.
+  - Examples: Papers research on the fundamental part of MoE through a less critical aspect like its behavior in GNN.
+
+- Relevance 5-6 (Borderline)
+  - Focus: Maintains a link to the core topic but also extends into at least one other domain/area beyond the primary focus.
+  - Examples: Work referencing MoE centered on reinforcement learning.
+
+- Relevance 3-4 (Irrelevant)
+  - Focus: Largely outside our interests with no association to our topics.
+  - Examples: Application-focused papers like using MoE to solve a problem in the real world.
+
+- Relevance 1-2 (Ignore)
+  - Focus: Purely unrelated to our topics. Completely a different domain.
+  - **Exception**: If the paper hints at a cutting-edge, radically new direction that could eventually transform the primary domain, consider a score of 9–10 despite initial appearances. (Usually a very rare concept that belongs to the fundamental research)
+
+### Novelty Scoring
+
+- Novelty 9-10 (Breakthrough)
+  - Definition: Groundbreaking methods/theory introducing new directions or solving major challenges.
+  - Examples: Entirely new paradigm for foundational models; a novel theory transforming representation learning.
+
+- Novelty 7-8 (Improvements)
+  - Definition: Substantial insights/enhancements, though not a full paradigm shift.
+  - Examples: Modifications on existing methods yielding significantly better results.
+
+- Novelty 5-6 (Borderline)
+  - Definition: Incremental contributions with possible long-term benefits, not immediately transformative.
+  - Examples: Moderately novel extension to an existing architecture; refining current methods without fundamentally altering them.
+
+- Novelty 3-4 (Tangential)
+  - Definition: Minor or domain-specific improvements with limited broader impact.
+  - Examples: Slight modifications to known methods with strange motivation; purely engineering jobs like a new benchmark/dataset.
+
+- Novelty 1-2 (Low)
+  - Definition: Minimal originality, applying standard approaches without real innovation.
+  - Examples: Using an off-the-shelf model without adding new insights; purely application-driven studies like finetuning a pretrained model using existing methods.
+
+## Papers
+
+[PAPER LIST HERE]
+
+## Relevant Topics
+
+Use the following relevance criteria to focus on foundational research. Keep **relevant** papers and filter out **irrelevant** ones. Avoid purely **application-driven** work.
+
+1. Representation Learning
+   - Relevant: Insights into how deep networks encode information, feature/dictionary learning, sparse/contrastive methods, training dynamics in neural networks.
+   - Irrelevant: Standard applications of known techniques lacking new theoretical or methodological contributions.
+
+2. Model Architecture
+   - Relevant: Mixture-of-Experts (MoE), Transformers, Conditional/Dynamic Networks, Autoencoders, analysis on existing architectures (like encoder-decoder), or other architectural innovations.
+   - Irrelevant: Merely using existing architectures for a certain task without insights into the structure themselves.
+
+3. Model Compression
+   - Relevant: Sparsity, pruning, quantization, low-rank approaches, KV cache, or other algorithmic/theoretical efficiency breakthroughs.
+   - Irrelevant: Straightforward applications of existing compression methods to new tasks.
+
+4. Large Language Models (LLMs)
+   - Relevant: Major breakthroughs in pretraining or architecture, theoretical insights into LLM behavior/interpretability.
+   - Irrelevant: Domain-specific usage (e.g., translation, jail-breaking), finetuning or inference tricks (e.g., instruction tuning, chain-of-thoughts, data mixing), or empirical dataset/benchmark studies and text-level analysis (e.g. hallucination, reasoning, safety).
+
+5. AI for Science
+   - Relevant: Foundational research in molecular/protein modeling, new generative paradigms, or significant architecture-level innovations.
+   - Irrelevant: Conventional, domain-specific applications without new theoretical perspectives.
+
+6. Emerging Trends
+   - Relevant: Cutting-edge theoretical work challenging established assumptions or introducing broad new paradigms.
+   - Irrelevant: Incremental improvements or trend-following without novel insights.
+
+**Keywords:**
+
+- Relevant: Mixture of Experts (MoE), Representation Learning, Compression/Efficiency, Sparse/Sparsity, Pruning, Quantization, Low-rank, Foundation Model, etc.
+- Irrelevant: Reinforcement Learning, Transfer Learning, Federated Learning, Online Learning, Diffusion Models, etc.
+- Application: Image Segmentation, Medical Imaging, 3D Vision, Video Understanding, Information Retrieval, Summarization, Recommendation Systems, Machine Translation, Speech Recognition, Signal Processing, Spatial/Temporal Modeling, Time Series, Knowledge Graph, etc.

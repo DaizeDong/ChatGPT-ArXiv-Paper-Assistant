@@ -1,0 +1,534 @@
+<div style="display: flex; align-items: flex-start; justify-content: space-between; width: 100%;"><div style="width: 33.33%; text-align: left;"><a href="../05"><img src="../../../assets/nav/day/2025-05-06-prev.svg" alt="Previous Day 2025-05-05"></a></div><div style="width: 33.33%; text-align: center;"><a href=".."><img src="../../../assets/nav/day/2025-05-06-center.svg" alt="Monthly Overview 2025-05"></a></div><div style="width: 33.33%; text-align: right;"><a href="../07"><img src="../../../assets/nav/day/2025-05-06-next.svg" alt="Next Day 2025-05-07"></a></div></div>
+
+# Personalized Daily ArXiv Papers 2025-05-06
+
+| *[gpt-4o]*   | Prompt   | Completion   | Total   |
+|:------------:|:--------:|:------------:|:-------:|
+| **Token**    | 43013    | 6051         | 49064   |
+| **Cost**     | $0.11    | $0.06        | $0.17   |
+
+Total arXiv papers: 637
+
+Total scanned papers: 402
+
+Total relevant papers: 23
+
+**Table of contents with paper titles:**
+
+1. [Contextures: Representations from Contexts](#user-content-link1)
+**Authors:** Runtian Zhai, Kai Yang, Che-Ping Tsai, Burak Varici, Zico Kolter, Pradeep Ravikumar
+
+2. [MoxE: Mixture of xLSTM Experts with Entropy-Aware Routing for Efficient Language Modeling](#user-content-link2)
+**Authors:** Abdoul Majid O. Thiombiano, Brahim Hnich, Ali Ben Mrad, Mohamed Wiem Mkaouer
+
+3. [Always Skip Attention](#user-content-link3)
+**Authors:** Yiping Ji, Hemanth Saratchandran, Peyman Moghaddam, Simon Lucey
+
+4. [Sharpness-Aware Minimization with Z-Score Gradient Filtering for Neural Networks](#user-content-link4)
+**Authors:** Juyoung Yun
+
+5. [Don't be lazy: CompleteP enables compute-efficient deep transformers](#user-content-link5)
+**Authors:** Nolan Dey, Bin Claire Zhang, Lorenzo Noci, Mufan Li, Blake Bordelon, Shane Bergsma, Cengiz Pehlevan, Boris Hanin, Joel Hestness
+
+6. [Secrets of GFlowNets' Learning Behavior: A Theoretical Study](#user-content-link6)
+**Authors:** Tianshu Yu
+
+7. [What do Language Model Probabilities Represent? From Distribution Estimation to Response Prediction](#user-content-link7)
+**Authors:** Eitan Wagner, Omri Abend
+
+8. [Memory-Efficient LLM Training by Various-Grained Low-Rank Projection of Gradients](#user-content-link8)
+**Authors:** Yezhen Wang, Zhouhao Yang, Brian K Chen, Fanyi Pu, Bo Li, Tianyu Gao, Kenji Kawaguchi
+
+9. [Intra-Layer Recurrence in Transformers for Language Modeling](#user-content-link9)
+**Authors:** Anthony Nguyen, Wenjun Lin
+
+10. [Towards Quantifying the Hessian Structure of Neural Networks](#user-content-link10)
+**Authors:** Zhaorui Dong, Yushun Zhang, Zhi-Quan Luo, Jianfeng Yao, Ruoyu Sun
+
+11. [Practical Efficiency of Muon for Pretraining](#user-content-link11)
+**Authors:** Essential AI, :, Ishaan Shah, Anthony M. Polloreno, Karl Stratos, Philip Monk, Adarsh Chaluvaraju, Andrew Hojel, Andrew Ma, Anil Thomas, Ashish Tanwer, Darsh J Shah, Khoi Nguyen, Kurt Smith, Michael Callahan, Michael Pust, Mohit Parmar, Peter Rushton, Platon Mazarakis, Ritvik Kapila, Saurabh Srivastava, Somanshu Singla, Tim Romanski, Yash Vanjani, Ashish Vaswani
+
+12. [Morello: Compiling Fast Neural Networks with Dynamic Programming and Spatial Compression](#user-content-link12)
+**Authors:** Samuel J. Kaufman, Ren\'e Just, Rastislav Bodik
+
+13. [Low-Loss Space in Neural Networks is Continuous and Fully Connected](#user-content-link13)
+**Authors:** Yongding Tian, Zaid Al-Ars, Maksim Kitsak, Peter Hofstee
+
+14. [A dynamic view of the double descent](#user-content-link14)
+**Authors:** Vivek Shripad Borkar
+
+15. [Advancing Constrained Monotonic Neural Networks: Achieving Universal Approximation Beyond Bounded Activations](#user-content-link15)
+**Authors:** Davide Sartor, Alberto Sinigaglia, Gian Antonio Susto
+
+16. [Quantitative Analysis of Performance Drop in DeepSeek Model Quantization](#user-content-link16)
+**Authors:** Enbo Zhao, Yi Shen, Shuming Shi, Jieyun Huang, Zhihao Chen, Ning Wang, Siqi Xiao, Jian Zhang, Kai Wang, Shiguo Lian
+
+17. [Surrogate to Poincar\'e inequalities on manifolds for dimension reduction in nonlinear feature spaces](#user-content-link17)
+**Authors:** Anthony Nouy, Alexandre Pasco
+
+18. [Adaptively Point-weighting Curriculum Learning](#user-content-link18)
+**Authors:** Wensheng Li, Hao Wang, Ruifeng Zhou, Hanting Guan, Chao Zhang, Dacheng Tao
+
+19. [Learning Local Causal World Models with State Space Models and Attention](#user-content-link19)
+**Authors:** Francesco Petri, Luigi Asprino, Aldo Gangemi
+
+20. [BiGSCoder: State Space Model for Code Understanding](#user-content-link20)
+**Authors:** Shweta Verma, Abhinav Anand, Mira Mezini
+
+21. [A probabilistic view on Riemannian machine learning models for SPD matrices](#user-content-link21)
+**Authors:** Thibault de Surrel, Florian Yger, Fabien Lotte, Sylvain Chevallier
+
+22. [Large Language Model Partitioning for Low-Latency Inference at the Edge](#user-content-link22)
+**Authors:** Dimitrios Kafetzis, Ramin Khalili, Iordanis Koutsopoulos
+
+23. [Attention Mechanisms Perspective: Exploring LLM Processing of Graph-Structured Data](#user-content-link23)
+**Authors:** Zhong Guan, Likang Wu, Hongke Zhao, Ming He, Jianpin Fan
+
+---
+
+## 1. [Contextures: Representations from Contexts](https://arxiv.org/abs/2505.01557) <a id="link1"></a>
+
+**ArXiv ID:** 2505.01557
+
+**Authors:** Runtian Zhai, Kai Yang, Che-Ping Tsai, Burak Varici, Zico Kolter, Pradeep Ravikumar
+
+**Abstract:** Despite the empirical success of foundation models, we do not have a systematic characterization of the representations that these models learn. In this paper, we establish the contexture theory. It shows that a large class of representation learning methods can be characterized as learning from the association between the input and a context variable. Specifically, we show that many popular methods aim to approximate the top-d singular functions of the expectation operator induced by the context, in which case we say that the representation learns the contexture. We demonstrate the generality of the contexture theory by proving that representation learning within various learning paradigms -- supervised, self-supervised, and manifold learning -- can all be studied from such a perspective. We also prove that the representations that learn the contexture are optimal on those tasks that are compatible with the context. One important implication of the contexture theory is that once the model is large enough to approximate the top singular functions, further scaling up the model size yields diminishing returns. Therefore, scaling is not all we need, and further improvement requires better contexts. To this end, we study how to evaluate the usefulness of a context without knowing the downstream tasks. We propose a metric and show by experiments that it correlates well with the actual performance of the encoder on many real datasets.
+
+**Comment:** The paper introduces the contexture theory for representation learning, providing a theoretical framework that aligns with the representation learning criterion.
+
+**Relevance:** 10
+**Novelty:** 9
+
+---
+
+## 2. [MoxE: Mixture of xLSTM Experts with Entropy-Aware Routing for Efficient Language Modeling](https://arxiv.org/abs/2505.01459) <a id="link2"></a>
+
+**ArXiv ID:** 2505.01459
+
+**Authors:** Abdoul Majid O. Thiombiano, Brahim Hnich, Ali Ben Mrad, Mohamed Wiem Mkaouer
+
+**Abstract:** This paper introduces MoxE, a novel architecture that synergistically combines the Extended Long Short-Term Memory (xLSTM) with the Mixture of Experts (MoE) framework to address critical scalability and efficiency challenges in large language models (LLMs). The proposed method effectively leverages xLSTM's innovative memory structures while strategically introducing sparsity through MoE to substantially reduce computational overhead. At the heart of our approach is a novel entropy-based routing mechanism, designed to dynamically route tokens to specialized experts, thereby ensuring efficient and balanced resource utilization. This entropy awareness enables the architecture to effectively manage both rare and common tokens, with mLSTM blocks being favored to handle rare tokens. To further enhance generalization, we introduce a suite of auxiliary losses, including entropy-based and group-wise balancing losses, ensuring robust performance and efficient training. Theoretical analysis and empirical evaluations rigorously demonstrate that MoxE achieves significant efficiency gains and enhanced effectiveness compared to existing approaches, marking a notable advancement in scalable LLM architectures.
+
+**Comment:** The paper introduces MoxE, a novel MoE-based architecture with entropy-aware routing, which aligns with foundational research in model architecture and efficiency.
+
+**Relevance:** 10
+**Novelty:** 8
+
+---
+
+## 3. [Always Skip Attention](https://arxiv.org/abs/2505.01996) <a id="link3"></a>
+
+**ArXiv ID:** 2505.01996
+
+**Authors:** Yiping Ji, Hemanth Saratchandran, Peyman Moghaddam, Simon Lucey
+
+**Abstract:** We highlight a curious empirical result within modern Vision Transformers (ViTs). Specifically, self-attention catastrophically fails to train unless it is used in conjunction with a skip connection. This is in contrast to other elements of a ViT that continue to exhibit good performance (albeit suboptimal) when skip connections are removed. Further, we show that this critical dependence on skip connections is a relatively new phenomenon, with previous deep architectures (\eg, CNNs) exhibiting good performance in their absence. In this paper, we theoretically characterize that the self-attention mechanism is fundamentally ill-conditioned and is, therefore, uniquely dependent on skip connections for regularization. Additionally, we propose Token Graying -- a simple yet effective complement (to skip connections) that further improves the condition of input tokens. We validate our approach in both supervised and self-supervised training methods.
+
+**Comment:** The paper provides theoretical insights into the critical role of skip connections in Vision Transformers, which is highly relevant to model architecture analysis.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 4. [Sharpness-Aware Minimization with Z-Score Gradient Filtering for Neural Networks](https://arxiv.org/abs/2505.02369) <a id="link4"></a>
+
+**ArXiv ID:** 2505.02369
+
+**Authors:** Juyoung Yun
+
+**Abstract:** Generalizing well in deep neural networks remains a core challenge, particularly due to their tendency to converge to sharp minima that degrade robustness. Sharpness-Aware Minimization (SAM) mitigates this by seeking flatter minima but perturbs parameters using the full gradient, which can include statistically insignificant directions. We propose ZSharp, a simple yet effective extension to SAM that applies layer-wise Z-score normalization followed by percentile-based filtering to retain only statistically significant gradient components. This selective perturbation aligns updates with curvature-sensitive directions, enhancing generalization without requiring architectural changes. ZSharp introduces only one additional hyperparameter, the percentile threshold, and remains fully compatible with existing SAM variants. Experiments on CIFAR-10, CIFAR-100, and Tiny-ImageNet using ResNet, VGG, and Vision Transformers show that ZSharp consistently outperforms SAM and its variants in test accuracy, particularly on deeper and transformer-based models. These results demonstrate that ZSharp is a principled and lightweight improvement for sharpness-aware optimization.
+
+**Comment:** The paper introduces ZSharp, an improvement to Sharpness-Aware Minimization (SAM), which directly addresses optimization and generalization challenges in neural networks.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 5. [Don't be lazy: CompleteP enables compute-efficient deep transformers](https://arxiv.org/abs/2505.01618) <a id="link5"></a>
+
+**ArXiv ID:** 2505.01618
+
+**Authors:** Nolan Dey, Bin Claire Zhang, Lorenzo Noci, Mufan Li, Blake Bordelon, Shane Bergsma, Cengiz Pehlevan, Boris Hanin, Joel Hestness
+
+**Abstract:** We study compute efficiency of LLM training when using different parameterizations, i.e., rules for adjusting model and optimizer hyperparameters (HPs) as model size changes. Some parameterizations fail to transfer optimal base HPs (such as learning rate) across changes in model depth, requiring practitioners to either re-tune these HPs as they scale up (expensive), or accept sub-optimal training when re-tuning is prohibitive. Even when they achieve HP transfer, we develop theory to show parameterizations may still exist in the lazy learning regime where layers learn only features close to their linearization, preventing effective use of depth and nonlinearity. Finally, we identify and adopt the unique parameterization we call CompleteP that achieves both depth-wise HP transfer and non-lazy learning in all layers. CompleteP enables a wider range of model width/depth ratios to remain compute-efficient, unlocking shapes better suited for different hardware settings and operational contexts. Moreover, CompleteP enables 12-34\% compute efficiency improvements over the prior state-of-the-art.
+
+**Comment:** The paper introduces a parameterization method for LLM training that improves compute efficiency and avoids lazy learning. This aligns with foundational research in model architecture and training dynamics.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 6. [Secrets of GFlowNets' Learning Behavior: A Theoretical Study](https://arxiv.org/abs/2505.02035) <a id="link6"></a>
+
+**ArXiv ID:** 2505.02035
+
+**Authors:** Tianshu Yu
+
+**Abstract:** Generative Flow Networks (GFlowNets) have emerged as a powerful paradigm for generating composite structures, demonstrating considerable promise across diverse applications. While substantial progress has been made in exploring their modeling validity and connections to other generative frameworks, the theoretical understanding of their learning behavior remains largely uncharted. In this work, we present a rigorous theoretical investigation of GFlowNets' learning behavior, focusing on four fundamental dimensions: convergence, sample complexity, implicit regularization, and robustness. By analyzing these aspects, we seek to elucidate the intricate mechanisms underlying GFlowNet's learning dynamics, shedding light on its strengths and limitations. Our findings contribute to a deeper understanding of the factors influencing GFlowNet performance and provide insights into principled guidelines for their effective design and deployment. This study not only bridges a critical gap in the theoretical landscape of GFlowNets but also lays the foundation for their evolution as a reliable and interpretable framework for generative modeling. Through this, we aspire to advance the theoretical frontiers of GFlowNets and catalyze their broader adoption in the AI community.
+
+**Comment:** The paper provides a theoretical study on GFlowNets' learning behavior, contributing to foundational understanding of generative modeling dynamics.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 7. [What do Language Model Probabilities Represent? From Distribution Estimation to Response Prediction](https://arxiv.org/abs/2505.02072) <a id="link7"></a>
+
+**ArXiv ID:** 2505.02072
+
+**Authors:** Eitan Wagner, Omri Abend
+
+**Abstract:** The notion of language modeling has gradually shifted in recent years from a distribution over finite-length strings to general-purpose prediction models for textual inputs and outputs, following appropriate alignment phases. This paper analyzes the distinction between distribution estimation and response prediction in the context of LLMs, and their often conflicting goals. We examine the training phases of LLMs, which include pretraining, in-context learning, and preference tuning, and also the common use cases for their output probabilities, which include completion probabilities and explicit probabilities as output. We argue that the different settings lead to three distinct intended output distributions. We demonstrate that NLP works often assume that these distributions should be similar, which leads to misinterpretations of their experimental findings. Our work sets firmer formal foundations for the interpretation of LLMs, which will inform ongoing work on the interpretation and use of LLMs' induced distributions.
+
+**Comment:** The paper provides a theoretical analysis of LLM probabilities, contributing to foundational understanding of LLM behavior and interpretability.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 8. [Memory-Efficient LLM Training by Various-Grained Low-Rank Projection of Gradients](https://arxiv.org/abs/2505.01744) <a id="link8"></a>
+
+**ArXiv ID:** 2505.01744
+
+**Authors:** Yezhen Wang, Zhouhao Yang, Brian K Chen, Fanyi Pu, Bo Li, Tianyu Gao, Kenji Kawaguchi
+
+**Abstract:** Building upon the success of low-rank adapter (LoRA), low-rank gradient projection (LoRP) has emerged as a promising solution for memory-efficient fine-tuning. However, existing LoRP methods typically treat each row of the gradient matrix as the default projection unit, leaving the role of projection granularity underexplored. In this work, we propose a novel framework, VLoRP, that extends low-rank gradient projection by introducing an additional degree of freedom for controlling the trade-off between memory efficiency and performance, beyond the rank hyper-parameter. Through this framework, we systematically explore the impact of projection granularity, demonstrating that finer-grained projections lead to enhanced stability and efficiency even under a fixed memory budget. Regarding the optimization for VLoRP, we present ProjFactor, an adaptive memory-efficient optimizer, that significantly reduces memory requirement while ensuring competitive performance, even in the presence of gradient accumulation. Additionally, we provide a theoretical analysis of VLoRP, demonstrating the descent and convergence of its optimization trajectory under both SGD and ProjFactor. Extensive experiments are conducted to validate our findings, covering tasks such as commonsense reasoning, MMLU, and GSM8K.
+
+**Comment:** The paper introduces a novel framework for low-rank gradient projection (VLoRP) and provides theoretical analysis, aligning with the model compression criterion.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 9. [Intra-Layer Recurrence in Transformers for Language Modeling](https://arxiv.org/abs/2505.01855) <a id="link9"></a>
+
+**ArXiv ID:** 2505.01855
+
+**Authors:** Anthony Nguyen, Wenjun Lin
+
+**Abstract:** Transformer models have established new benchmarks in natural language processing; however, their increasing depth results in substantial growth in parameter counts. While existing recurrent transformer methods address this issue by reprocessing layers multiple times, they often apply recurrence indiscriminately across entire blocks of layers. In this work, we investigate Intra-Layer Recurrence (ILR), a more targeted approach that applies recurrence selectively to individual layers within a single forward pass. Our experiments show that allocating more iterations to earlier layers yields optimal results. These findings suggest that ILR offers a promising direction for optimizing recurrent structures in transformer architectures.
+
+**Comment:** The paper proposes Intra-Layer Recurrence (ILR) for Transformers, which is a novel architectural optimization and aligns with the model architecture criterion.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 10. [Towards Quantifying the Hessian Structure of Neural Networks](https://arxiv.org/abs/2505.02809) <a id="link10"></a>
+
+**ArXiv ID:** 2505.02809
+
+**Authors:** Zhaorui Dong, Yushun Zhang, Zhi-Quan Luo, Jianfeng Yao, Ruoyu Sun
+
+**Abstract:** Empirical studies reported that the Hessian matrix of neural networks (NNs) exhibits a near-block-diagonal structure, yet its theoretical foundation remains unclear. In this work, we reveal two forces that shape the Hessian structure: a ``static force'' rooted in the architecture design, and a ``dynamic force'' arisen from training. We then provide a rigorous theoretical analysis of ``static force'' at random initialization. We study linear models and 1-hidden-layer networks with the mean-square (MSE) loss and the Cross-Entropy (CE) loss for classification tasks. By leveraging random matrix theory, we compare the limit distributions of the diagonal and off-diagonal Hessian blocks and find that the block-diagonal structure arises as $C \rightarrow \infty$, where $C$ denotes the number of classes. Our findings reveal that $C$ is a primary driver of the near-block-diagonal structure. These results may shed new light on the Hessian structure of large language models (LLMs), which typically operate with a large $C$ exceeding $10^4$ or $10^5$.
+
+**Comment:** The paper provides theoretical insights into the Hessian structure of neural networks, which aligns with foundational research in understanding training dynamics and architecture behavior.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 11. [Practical Efficiency of Muon for Pretraining](https://arxiv.org/abs/2505.02222) <a id="link11"></a>
+
+**ArXiv ID:** 2505.02222
+
+**Authors:** Essential AI, :, Ishaan Shah, Anthony M. Polloreno, Karl Stratos, Philip Monk, Adarsh Chaluvaraju, Andrew Hojel, Andrew Ma, Anil Thomas, Ashish Tanwer, Darsh J Shah, Khoi Nguyen, Kurt Smith, Michael Callahan, Michael Pust, Mohit Parmar, Peter Rushton, Platon Mazarakis, Ritvik Kapila, Saurabh Srivastava, Somanshu Singla, Tim Romanski, Yash Vanjani, Ashish Vaswani
+
+**Abstract:** We demonstrate that Muon, the simplest instantiation of a second-order optimizer, explicitly expands the Pareto frontier over AdamW on the compute-time tradeoff. We find that Muon is more effective than AdamW in retaining data efficiency at large batch sizes, far beyond the so-called critical batch size, while remaining computationally efficient, thus enabling more economical training. We study the combination of Muon and the maximal update parameterization (muP) for efficient hyperparameter transfer and present a simple telescoping algorithm that accounts for all sources of error in muP while introducing only a modest overhead in resources. We validate our findings through extensive experiments with model sizes up to four billion parameters and ablations on the data distribution and architecture.
+
+**Comment:** The paper introduces Muon, a second-order optimizer, and demonstrates its efficiency in pretraining large models. This aligns with foundational research in model efficiency and optimization.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 12. [Morello: Compiling Fast Neural Networks with Dynamic Programming and Spatial Compression](https://arxiv.org/abs/2505.01637) <a id="link12"></a>
+
+**ArXiv ID:** 2505.01637
+
+**Authors:** Samuel J. Kaufman, Ren\'e Just, Rastislav Bodik
+
+**Abstract:** High-throughput neural network inference requires coordinating many optimization decisions, including parallel tiling, microkernel selection, and data layout. The product of these decisions forms a search space of programs which is typically intractably large. Existing approaches (e.g., auto-schedulers) often address this problem by sampling this space heuristically. In contrast, we introduce a dynamic-programming-based approach to explore more of the search space by iteratively decomposing large program specifications into smaller specifications reachable from a set of rewrites, then composing a final program from each rewrite that minimizes an affine cost model. To reduce memory requirements, we employ a novel memoization table representation, which indexes specifications by coordinates in $Z_{\geq 0}$ and compresses identical, adjacent solutions. This approach can visit a much larger set of programs than prior work. To evaluate the approach, we developed Morello, a compiler which lowers specifications roughly equivalent to a few-node XLA computation graph to x86. Notably, we found that an affine cost model is sufficient to surface high-throughput programs. For example, Morello synthesized a collection of matrix multiplication benchmarks targeting a Zen 1 CPU, including a 1x2048x16384, bfloat16-to-float32 vector-matrix multiply, which was integrated into Google's gemma.cpp.
+
+**Comment:** The paper introduces a novel dynamic programming-based approach for optimizing neural network inference, which aligns with model compression and efficiency breakthroughs.
+
+**Relevance:** 8
+**Novelty:** 8
+
+---
+
+## 13. [Low-Loss Space in Neural Networks is Continuous and Fully Connected](https://arxiv.org/abs/2505.02604) <a id="link13"></a>
+
+**ArXiv ID:** 2505.02604
+
+**Authors:** Yongding Tian, Zaid Al-Ars, Maksim Kitsak, Peter Hofstee
+
+**Abstract:** Visualizations of the loss landscape in neural networks suggest that minima are isolated points. However, both theoretical and empirical studies indicate that it is possible to connect two different minima with a path consisting of intermediate points that also have low loss. In this study, we propose a new algorithm which investigates low-loss paths in the full parameter space, not only between two minima. Our experiments on LeNet5, ResNet18, and Compact Convolutional Transformer architectures consistently demonstrate the existence of such continuous paths in the parameter space. These results suggest that the low-loss region is a fully connected and continuous space in the parameter space. Our findings provide theoretical insight into neural network over-parameterization, highlighting that parameters collectively define a high-dimensional low-loss space, implying parameter redundancy exists only within individual models and not throughout the entire low-loss space. Additionally, our work also provides new visualization methods and opportunities to improve model generalization by exploring the low-loss space that is closer to the origin.
+
+**Comment:** The paper provides theoretical insights into the loss landscape of neural networks, which is relevant to understanding training dynamics and over-parameterization in representation learning.
+
+**Relevance:** 8
+**Novelty:** 8
+
+---
+
+## 14. [A dynamic view of the double descent](https://arxiv.org/abs/2505.01751) <a id="link14"></a>
+
+**ArXiv ID:** 2505.01751
+
+**Authors:** Vivek Shripad Borkar
+
+**Abstract:** It has been observed by Belkin et al.\ that overparametrized neural networks exhibit a `double descent' phenomenon. That is, as the model complexity, as reflected in the number of features, increases, the training error initially decreases, then increases, and then decreases again. A counterpart of this phenomenon in the time domain has been noted in the context of epoch-wise training, viz., that the training error decreases with time, then increases, then decreases again. This note presents a plausible explanation for this phenomenon by using the theory of two time scale stochastic approximation and singularly perturbed differential equations, applied to the continuous time limit of the gradient dynamics. This adds a `dynamic' angle to an already well studied theme.
+
+**Comment:** The paper provides a theoretical explanation for the double descent phenomenon using stochastic approximation and differential equations. This aligns with foundational research in training dynamics of neural networks.
+
+**Relevance:** 8
+**Novelty:** 8
+
+---
+
+## 15. [Advancing Constrained Monotonic Neural Networks: Achieving Universal Approximation Beyond Bounded Activations](https://arxiv.org/abs/2505.02537) <a id="link15"></a>
+
+**ArXiv ID:** 2505.02537
+
+**Authors:** Davide Sartor, Alberto Sinigaglia, Gian Antonio Susto
+
+**Abstract:** Conventional techniques for imposing monotonicity in MLPs by construction involve the use of non-negative weight constraints and bounded activation functions, which pose well-known optimization challenges. In this work, we generalize previous theoretical results, showing that MLPs with non-negative weight constraint and activations that saturate on alternating sides are universal approximators for monotonic functions. Additionally, we show an equivalence between the saturation side in the activations and the sign of the weight constraint. This connection allows us to prove that MLPs with convex monotone activations and non-positive constrained weights also qualify as universal approximators, in contrast to their non-negative constrained counterparts. Our results provide theoretical grounding to the empirical effectiveness observed in previous works while leading to possible architectural simplification. Moreover, to further alleviate the optimization difficulties, we propose an alternative formulation that allows the network to adjust its activations according to the sign of the weights. This eliminates the requirement for weight reparameterization, easing initialization and improving training stability. Experimental evaluation reinforces the validity of the theoretical results, showing that our novel approach compares favourably to traditional monotonic architectures.
+
+**Comment:** The paper advances monotonic neural networks with theoretical contributions, aligning with emerging trends in foundational research.
+
+**Relevance:** 8
+**Novelty:** 8
+
+---
+
+## 16. [Quantitative Analysis of Performance Drop in DeepSeek Model Quantization](https://arxiv.org/abs/2505.02390) <a id="link16"></a>
+
+**ArXiv ID:** 2505.02390
+
+**Authors:** Enbo Zhao, Yi Shen, Shuming Shi, Jieyun Huang, Zhihao Chen, Ning Wang, Siqi Xiao, Jian Zhang, Kai Wang, Shiguo Lian
+
+**Abstract:** Recently, there is a high demand for deploying DeepSeek-R1 and V3 locally, possibly because the official service often suffers from being busy and some organizations have data privacy concerns. While single-machine deployment offers infrastructure simplicity, the models' 671B FP8 parameter configuration exceeds the practical memory limits of a standard 8-GPU machine. Quantization is a widely used technique that helps reduce model memory consumption. However, it is unclear what the performance of DeepSeek-R1 and V3 will be after being quantized. This technical report presents the first quantitative evaluation of multi-bitwidth quantization across the complete DeepSeek model spectrum. Key findings reveal that 4-bit quantization maintains little performance degradation versus FP8 while enabling single-machine deployment on standard NVIDIA GPU devices. We further propose DQ3_K_M, a dynamic 3-bit quantization method that significantly outperforms traditional Q3_K_M variant on various benchmarks, which is also comparable with 4-bit quantization (Q4_K_M) approach in most tasks. Moreover, DQ3_K_M supports single-machine deployment configurations for both NVIDIA H100/A100 and Huawei 910B. Our implementation of DQ3\_K\_M is released at https://github.com/UnicomAI/DeepSeek-Eval, containing optimized 3-bit quantized variants of both DeepSeek-R1 and DeepSeek-V3.
+
+**Comment:** The paper evaluates quantization methods for large models, which is relevant to model compression and efficiency improvements.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 17. [Surrogate to Poincar\'e inequalities on manifolds for dimension reduction in nonlinear feature spaces](https://arxiv.org/abs/2505.01807) <a id="link17"></a>
+
+**ArXiv ID:** 2505.01807
+
+**Authors:** Anthony Nouy, Alexandre Pasco
+
+**Abstract:** We aim to approximate a continuously differentiable function $u:\mathbb{R}^d \rightarrow \mathbb{R}$ by a composition of functions $f\circ g$ where $g:\mathbb{R}^d \rightarrow \mathbb{R}^m$, $m\leq d$, and $f : \mathbb{R}^m \rightarrow \mathbb{R}$ are built in a two stage procedure. For a fixed $g$, we build $f$ using classical regression methods, involving evaluations of $u$. Recent works proposed to build a nonlinear $g$ by minimizing a loss function $\mathcal{J}(g)$ derived from Poincar\'e inequalities on manifolds, involving evaluations of the gradient of $u$. A problem is that minimizing $\mathcal{J}$ may be a challenging task. Hence in this work, we introduce new convex surrogates to $\mathcal{J}$. Leveraging concentration inequalities, we provide sub-optimality results for a class of functions $g$, including polynomials, and a wide class of input probability measures. We investigate performances on different benchmarks for various training sample sizes. We show that our approach outperforms standard iterative methods for minimizing the training Poincar\'e inequality based loss, often resulting in better approximation errors, especially for rather small training sets and $m=1$.
+
+**Comment:** The paper introduces a method for dimension reduction using Poincaré inequalities, which is relevant to representation learning and feature learning.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 18. [Adaptively Point-weighting Curriculum Learning](https://arxiv.org/abs/2505.01665) <a id="link18"></a>
+
+**ArXiv ID:** 2505.01665
+
+**Authors:** Wensheng Li, Hao Wang, Ruifeng Zhou, Hanting Guan, Chao Zhang, Dacheng Tao
+
+**Abstract:** Curriculum learning (CL) is referred to as a training strategy that makes easy samples learned first and then fits hard samples. It imitates the process of humans learning knowledge, and has become a potential manner of effectively training deep networks. In this study, we develop the adaptively point-weighting (APW) curriculum learning algorithm, which adaptively assigns the weight to every training sample not only based on its training error but also considering the current training state of the network. Specifically, in the early training phase, it increases the weights of easy samples to make the network rapidly capture the overall characteristics of the dataset; and in the later training phase, the weights of hard points rise to improve the fitting performance on the discrete local regions. Moreover, we also present the theoretical analysis on the properties of APW including training effectiveness, training feasibility, training stability, and generalization performance. The numerical experiments support the superiority of APW and demonstrate the validity of our theoretical findings.
+
+**Comment:** The paper proposes a novel curriculum learning algorithm with theoretical analysis, which aligns with foundational research in training dynamics and representation learning.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 19. [Learning Local Causal World Models with State Space Models and Attention](https://arxiv.org/abs/2505.02074) <a id="link19"></a>
+
+**ArXiv ID:** 2505.02074
+
+**Authors:** Francesco Petri, Luigi Asprino, Aldo Gangemi
+
+**Abstract:** World modelling, i.e. building a representation of the rules that govern the world so as to predict its evolution, is an essential ability for any agent interacting with the physical world. Despite their impressive performance, many solutions fail to learn a causal representation of the environment they are trying to model, which would be necessary to gain a deep enough understanding of the world to perform complex tasks. With this work, we aim to broaden the research in the intersection of causality theory and neural world modelling by assessing the potential for causal discovery of the State Space Model (SSM) architecture, which has been shown to have several advantages over the widespread Transformer. We show empirically that, compared to an equivalent Transformer, a SSM can model the dynamics of a simple environment and learn a causal model at the same time with equivalent or better performance, thus paving the way for further experiments that lean into the strength of SSMs and further enhance them with causal awareness.
+
+**Comment:** The paper explores causal discovery in State Space Models (SSMs), which is relevant to representation learning and architectural innovations, particularly in comparison to Transformers.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 20. [BiGSCoder: State Space Model for Code Understanding](https://arxiv.org/abs/2505.01475) <a id="link20"></a>
+
+**ArXiv ID:** 2505.01475
+
+**Authors:** Shweta Verma, Abhinav Anand, Mira Mezini
+
+**Abstract:** We present BiGSCoder, a novel encoder-only bidirectional state-space model (SSM) featuring a gated architecture, pre-trained for code understanding on a code dataset using masked language modeling. Our work aims to systematically evaluate SSMs' capabilities in coding tasks compared to traditional transformer architectures; BiGSCoder is built for this purpose. Through comprehensive experiments across diverse pre-training configurations and code understanding benchmarks, we demonstrate that BiGSCoder outperforms transformer-based models, despite utilizing simpler pre-training strategies and much less training data. Our results indicate that BiGSCoder can serve as a more sample-efficient alternative to conventional transformer models. Furthermore, our study shows that SSMs perform better without positional embeddings and can effectively extrapolate to longer sequences during fine-tuning.
+
+**Comment:** The paper introduces BiGSCoder, a state-space model for code understanding, which provides insights into SSMs as an alternative to Transformers, aligning with architectural innovations.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 21. [A probabilistic view on Riemannian machine learning models for SPD matrices](https://arxiv.org/abs/2505.02402) <a id="link21"></a>
+
+**ArXiv ID:** 2505.02402
+
+**Authors:** Thibault de Surrel, Florian Yger, Fabien Lotte, Sylvain Chevallier
+
+**Abstract:** The goal of this paper is to show how different machine learning tools on the Riemannian manifold $\mathcal{P}_d$ of Symmetric Positive Definite (SPD) matrices can be united under a probabilistic framework. For this, we will need several Gaussian distributions defined on $\mathcal{P}_d$. We will show how popular classifiers on $\mathcal{P}_d$ can be reinterpreted as Bayes Classifiers using these Gaussian distributions. These distributions will also be used for outlier detection and dimension reduction. By showing that those distributions are pervasive in the tools used on $\mathcal{P}_d$, we allow for other machine learning tools to be extended to $\mathcal{P}_d$.
+
+**Comment:** The paper provides a probabilistic framework for machine learning on SPD matrices, which aligns with foundational research in representation learning and theoretical modeling.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 22. [Large Language Model Partitioning for Low-Latency Inference at the Edge](https://arxiv.org/abs/2505.02533) <a id="link22"></a>
+
+**ArXiv ID:** 2505.02533
+
+**Authors:** Dimitrios Kafetzis, Ramin Khalili, Iordanis Koutsopoulos
+
+**Abstract:** Large Language Models (LLMs) based on autoregressive, decoder-only Transformers generate text one token at a time, where a token represents a discrete unit of text. As each newly produced token is appended to the partial output sequence, the length grows and so does the memory and compute load, due to the expanding key-value caches, which store intermediate representations of all previously generated tokens in the multi-head attention (MHA) layer. As this iterative process steadily increases memory and compute demands, layer-based partitioning in resource-constrained edge environments often results in memory overload or high inference latency. To address this and reduce inference latency, we propose a resource-aware Transformer architecture partitioning algorithm, where the partitioning decision is updated at regular intervals during token generation. The approach is myopic in that it is based on instantaneous information about device resource availability and network link bandwidths. When first executed, the algorithm places blocks on devices, and in later executions, it migrates these blocks among devices so that the sum of migration delay and inference delay remains low. Our approach partitions the decoder at the attention head level, co-locating each attention head with its key-value cache and allowing dynamic migrations whenever resources become tight. By allocating different attention heads to different devices, we exploit parallel execution of attention heads and thus achieve substantial reductions in inference delays. Our experiments show that in small-scale settings (3-5 devices), the proposed method achieves within 15 to 20 percent of an exact optimal solver's latency, while in larger-scale tests it achieves notable improvements in inference speed and memory usage compared to state-of-the-art layer-based partitioning approaches.
+
+**Comment:** The paper proposes a resource-aware partitioning algorithm for LLM inference, which is relevant to model compression and efficiency.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 23. [Attention Mechanisms Perspective: Exploring LLM Processing of Graph-Structured Data](https://arxiv.org/abs/2505.02130) <a id="link23"></a>
+
+**ArXiv ID:** 2505.02130
+
+**Authors:** Zhong Guan, Likang Wu, Hongke Zhao, Ming He, Jianpin Fan
+
+**Abstract:** Attention mechanisms are critical to the success of large language models (LLMs), driving significant advancements in multiple fields. However, for graph-structured data, which requires emphasis on topological connections, they fall short compared to message-passing mechanisms on fixed links, such as those employed by Graph Neural Networks (GNNs). This raises a question: ``Does attention fail for graphs in natural language settings?'' Motivated by these observations, we embarked on an empirical study from the perspective of attention mechanisms to explore how LLMs process graph-structured data. The goal is to gain deeper insights into the attention behavior of LLMs over graph structures. We uncovered unique phenomena regarding how LLMs apply attention to graph-structured data and analyzed these findings to improve the modeling of such data by LLMs. The primary findings of our research are: 1) While LLMs can recognize graph data and capture text-node interactions, they struggle to model inter-node relationships within graph structures due to inherent architectural constraints. 2) The attention distribution of LLMs across graph nodes does not align with ideal structural patterns, indicating a failure to adapt to graph topology nuances. 3) Neither fully connected attention nor fixed connectivity is optimal; each has specific limitations in its application scenarios. Instead, intermediate-state attention windows improve LLM training performance and seamlessly transition to fully connected windows during inference. Source code: \href{https://github.com/millioniron/LLM_exploration}{LLM4Exploration}
+
+**Comment:** The paper explores how LLMs process graph-structured data, providing insights into attention mechanisms and their limitations. This aligns with foundational research in LLM behavior and interpretability.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+# Paper Selection Prompt
+
+You are a helpful paper reading assistant whose job is to read daily posts from ArXiv and identify a few papers that your friend will enjoy reading.
+Your job is to carefully read the paper titles and abstracts below and find the ones that match the criteria below.
+
+## Instructions
+
+Write the response in JSONL format with {ARXIVID, COMMENT, RELEVANCE, NOVELTY} on each line, one for each paper.
+
+- ARXIVID: should be the ArXiv ID.
+- COMMENT: should identify whether there is a criteria that match the paper very closely. These matches should not be based on general terms like "language modeling" or "advancements" and should specifically refer to a criterion. No need to mention the non-matching criteria.
+- RELEVANCE: should be a score from 1-10.
+- NOVELTY: should be a score from 1-10.
+
+## Scoring Criteria
+
+> The "Relevance" score measures how closely the paper aligns with the core topics of the prompt.
+> The "Novelty" score assesses the originality and impact of the paper.
+> They are two **ORTHONORMAL** axes and **SHOULD NOT** be confused with each other.
+
+### Relevance Scoring
+
+- Relevance 9-10 (Completely Relevant)
+  - Focus: Fully aligned with core topics with no deviation, score the highest if contains relevant keywords in it.
+  - Examples: Papers focused on foundational methods or theoretical research, whose titles contain topic keywords like "MoE".
+
+- Relevance 7-8 (Relevant)
+  - Focus: Retain a solid link to the main research area, though may touch on peripheral elements.
+  - Examples: Papers research on the fundamental part of MoE through a less critical aspect like its behavior in GNN.
+
+- Relevance 5-6 (Borderline)
+  - Focus: Maintains a link to the core topic but also extends into at least one other domain/area beyond the primary focus.
+  - Examples: Work referencing MoE centered on reinforcement learning.
+
+- Relevance 3-4 (Irrelevant)
+  - Focus: Largely outside our interests with no association to our topics.
+  - Examples: Application-focused papers like using MoE to solve a problem in the real world.
+
+- Relevance 1-2 (Ignore)
+  - Focus: Purely unrelated to our topics. Completely a different domain.
+  - **Exception**: If the paper hints at a cutting-edge, radically new direction that could eventually transform the primary domain, consider a score of 9–10 despite initial appearances. (Usually a very rare concept that belongs to the fundamental research)
+
+### Novelty Scoring
+
+- Novelty 9-10 (Breakthrough)
+  - Definition: Groundbreaking methods/theory introducing new directions or solving major challenges.
+  - Examples: Entirely new paradigm for foundational models; a novel theory transforming representation learning.
+
+- Novelty 7-8 (Improvements)
+  - Definition: Substantial insights/enhancements, though not a full paradigm shift.
+  - Examples: Modifications on existing methods yielding significantly better results.
+
+- Novelty 5-6 (Borderline)
+  - Definition: Incremental contributions with possible long-term benefits, not immediately transformative.
+  - Examples: Moderately novel extension to an existing architecture; refining current methods without fundamentally altering them.
+
+- Novelty 3-4 (Tangential)
+  - Definition: Minor or domain-specific improvements with limited broader impact.
+  - Examples: Slight modifications to known methods with strange motivation; purely engineering jobs like a new benchmark/dataset.
+
+- Novelty 1-2 (Low)
+  - Definition: Minimal originality, applying standard approaches without real innovation.
+  - Examples: Using an off-the-shelf model without adding new insights; purely application-driven studies like finetuning a pretrained model using existing methods.
+
+## Papers
+
+[PAPER LIST HERE]
+
+## Relevant Topics
+
+Use the following relevance criteria to focus on foundational research. Keep **relevant** papers and filter out **irrelevant** ones. Avoid purely **application-driven** work.
+
+1. Representation Learning
+   - Relevant: Insights into how deep networks encode information, feature/dictionary learning, sparse/contrastive methods, training dynamics in neural networks.
+   - Irrelevant: Standard applications of known techniques lacking new theoretical or methodological contributions.
+
+2. Model Architecture
+   - Relevant: Mixture-of-Experts (MoE), Transformers, Conditional/Dynamic Networks, Autoencoders, analysis on existing architectures (like encoder-decoder), or other architectural innovations.
+   - Irrelevant: Merely using existing architectures for a certain task without insights into the structure themselves.
+
+3. Model Compression
+   - Relevant: Sparsity, pruning, quantization, low-rank approaches, KV cache, or other algorithmic/theoretical efficiency breakthroughs.
+   - Irrelevant: Straightforward applications of existing compression methods to new tasks.
+
+4. Large Language Models (LLMs)
+   - Relevant: Major breakthroughs in pretraining or architecture, theoretical insights into LLM behavior/interpretability.
+   - Irrelevant: Domain-specific usage (e.g., translation, jail-breaking), finetuning or inference tricks (e.g., instruction tuning, chain-of-thoughts, data mixing), or empirical dataset/benchmark studies and text-level analysis (e.g. hallucination, reasoning, safety).
+
+5. AI for Science
+   - Relevant: Foundational research in molecular/protein modeling, new generative paradigms, or significant architecture-level innovations.
+   - Irrelevant: Conventional, domain-specific applications without new theoretical perspectives.
+
+6. Emerging Trends
+   - Relevant: Cutting-edge theoretical work challenging established assumptions or introducing broad new paradigms.
+   - Irrelevant: Incremental improvements or trend-following without novel insights.
+
+**Keywords:**
+
+- Relevant: Mixture of Experts (MoE), Representation Learning, Compression/Efficiency, Sparse/Sparsity, Pruning, Quantization, Low-rank, Foundation Model, etc.
+- Irrelevant: Reinforcement Learning, Transfer Learning, Federated Learning, Online Learning, Diffusion Models, etc.
+- Application: Image Segmentation, Medical Imaging, 3D Vision, Video Understanding, Information Retrieval, Summarization, Recommendation Systems, Machine Translation, Speech Recognition, Signal Processing, Spatial/Temporal Modeling, Time Series, Knowledge Graph, etc.

@@ -1,0 +1,447 @@
+<div style="display: flex; align-items: flex-start; justify-content: space-between; width: 100%;"><div style="width: 33.33%; text-align: left;"><a href="../22"><img src="../../../assets/nav/day/2025-07-23-prev.svg" alt="Previous Day 2025-07-22"></a></div><div style="width: 33.33%; text-align: center;"><a href=".."><img src="../../../assets/nav/day/2025-07-23-center.svg" alt="Monthly Overview 2025-07"></a></div><div style="width: 33.33%; text-align: right;"><a href="../24"><img src="../../../assets/nav/day/2025-07-23-next.svg" alt="Next Day 2025-07-24"></a></div></div>
+
+# Personalized Daily ArXiv Papers 2025-07-23
+
+| *[gpt-4o]*   | Prompt   | Completion   | Total   |
+|:------------:|:--------:|:------------:|:-------:|
+| **Token**    | 25575    | 3086         | 28661   |
+| **Cost**     | $0.06    | $0.03        | $0.09   |
+
+Total arXiv papers: 444
+
+Total scanned papers: 262
+
+Total relevant papers: 18
+
+**Table of contents with paper titles:**
+
+1. [Expert-Guided LLM Reasoning for Battery Discovery: From AI-Driven Hypothesis to Synthesis and Characterization](#user-content-link1)
+**Authors:** Shengchao Liu, Hannan Xu, Yan Ai, Huanxin Li, Yoshua Bengio, Harry Guo
+
+2. [The Recursive Coherence Principle: A Formal Constraint on Scalable Intelligence, Alignment, and Reasoning Architecture](#user-content-link2)
+**Authors:** Andy E. Williams
+
+3. [Identifying Pre-training Data in LLMs: A Neuron Activation-Based Detection Framework](#user-content-link3)
+**Authors:** Hongyi Tang, Zhihao Zhu, Yi Yang
+
+4. [Depth Gives a False Sense of Privacy: LLM Internal States Inversion](#user-content-link4)
+**Authors:** Tian Dong, Yan Meng, Shaofeng Li, Guoxing Chen, Zhen Liu, Haojin Zhu
+
+5. [Learning without training: The implicit dynamics of in-context learning](#user-content-link5)
+**Authors:** Benoit Dherin, Michael Munn, Hanna Mazzawi, Michael Wunder, Javier Gonzalvo
+
+6. [Self-Contradiction as Self-Improvement: Mitigating the Generation-Understanding Gap in MLLMs](#user-content-link6)
+**Authors:** Yujin Han, Hao Chen, Andi Han, Zhiheng Wang, Xinyu Lin, Yingya Zhang, Shiwei Zhang, Difan Zou
+
+7. [Reactivation: Empirical NTK Dynamics Under Task Shifts](#user-content-link7)
+**Authors:** Yuzhi Liu, Zixuan Chen, Zirui Zhang, Yufei Liu, Giulia Lanzillotta
+
+8. [ReDi: Rectified Discrete Flow](#user-content-link8)
+**Authors:** Jaehoon Yoo, Wonjung Kim, Seunghoon Hong
+
+9. [Analogy making as amortised model construction](#user-content-link9)
+**Authors:** David G. Nagy, Tingke Shen, Hanqi Zhou, Charley M. Wu, Peter Dayan
+
+10. [GASPnet: Global Agreement to Synchronize Phases](#user-content-link10)
+**Authors:** Andrea Alamiaa, Sabine Muzellec, Thomas Serre, Rufin VanRullen
+
+11. [Pixel-Resolved Long-Context Learning for Turbulence at Exascale: Resolving Small-scale Eddies Toward the Viscous Limit](#user-content-link11)
+**Authors:** Junqi Yin, Mijanur Palash, M. Paul Laiu, Muralikrishnan Gopalakrishnan Meena, John Gounley, Stephen M. de Bruyn Kops, Feiyi Wang, Ramanan Sankaran, Pei Zhang
+
+12. [C2-Evo: Co-Evolving Multimodal Data and Model for Self-Improving Reasoning](#user-content-link12)
+**Authors:** Xiuwei Chen, Wentao Hu, Hanhui Li, Jun Zhou, Zisheng Chen, Meng Cao, Yihan Zeng, Kui Zhang, Yu-Jie Yuan, Jianhua Han, Hang Xu, Xiaodan Liang
+
+13. [Differential Multimodal Transformers](#user-content-link13)
+**Authors:** Jerry Li, Timothy Oh, Joseph Hoang, Vardhit Veeramachaneni
+
+14. [ToFe: Lagged Token Freezing and Reusing for Efficient Vision Transformer Inference](#user-content-link14)
+**Authors:** Haoyue Zhang, Jie Zhang, Song Guo
+
+15. [Reducing GPU Memory Fragmentation via Spatio-Temporal Planning for Efficient Large-Scale Model Training](#user-content-link15)
+**Authors:** Zixiao Huang, Junhao Hu, Hao Lin, Chunyang Zhu, Yueran Tang, Quanlu Zhang, Zhen Guo, Zhenhua Li, Shengen Yan, Zhenhua Zhu, Guohao Dai, Yu Wang
+
+16. [Scaling Linear Attention with Sparse State Expansion](#user-content-link16)
+**Authors:** Yuqi Pan, Yongqi An, Zheng Li, Yuhong Chou, Ruijie Zhu, Xiaohui Wang, Mingxuan Wang, Jinqiao Wang, Guoqi Li
+
+17. [Improving the Generation of VAEs with High Dimensional Latent Spaces by the use of Hyperspherical Coordinates](#user-content-link17)
+**Authors:** Alejandro Ascarate, Leo Lebrat, Rodrigo Santa Cruz, Clinton Fookes, Olivier Salvado
+
+18. [Semantic-Aware Gaussian Process Calibration with Structured Layerwise Kernels for Deep Neural Networks](#user-content-link18)
+**Authors:** Kyung-hwan Lee, Kyung-tae Kim
+
+---
+
+## 1. [Expert-Guided LLM Reasoning for Battery Discovery: From AI-Driven Hypothesis to Synthesis and Characterization](https://arxiv.org/abs/2507.16110) <a id="link1"></a>
+
+**ArXiv ID:** 2507.16110
+
+**Authors:** Shengchao Liu, Hannan Xu, Yan Ai, Huanxin Li, Yoshua Bengio, Harry Guo
+
+**Abstract:** Large language models (LLMs) leverage chain-of-thought (CoT) techniques to tackle complex problems, representing a transformative breakthrough in artificial intelligence (AI). However, their reasoning capabilities have primarily been demonstrated in solving math and coding problems, leaving their potential for domain-specific applications-such as battery discovery-largely unexplored. Inspired by the idea that reasoning mirrors a form of guided search, we introduce ChatBattery, a novel agentic framework that integrates domain knowledge to steer LLMs toward more effective reasoning in materials design. Using ChatBattery, we successfully identify, synthesize, and characterize three novel lithium-ion battery cathode materials, which achieve practical capacity improvements of 28.8%, 25.2%, and 18.5%, respectively, over the widely used cathode material, LiNi0.8Mn0.1Co0.1O2 (NMC811). Beyond this discovery, ChatBattery paves a new path by showing a successful LLM-driven and reasoning-based platform for battery materials invention. This complete AI-driven cycle-from design to synthesis to characterization-demonstrates the transformative potential of AI-driven reasoning in revolutionizing materials discovery.
+
+**Comment:** Author match
+
+
+
+---
+
+## 2. [The Recursive Coherence Principle: A Formal Constraint on Scalable Intelligence, Alignment, and Reasoning Architecture](https://arxiv.org/abs/2507.15880) <a id="link2"></a>
+
+**ArXiv ID:** 2507.15880
+
+**Authors:** Andy E. Williams
+
+**Abstract:** Intelligence-biological, artificial, or collective-requires structural coherence across recursive reasoning processes to scale effectively. As complex systems grow, coherence becomes fragile unless a higher-order structure ensures semantic consistency. This paper introduces the Recursive Coherence Principle (RCP): a foundational constraint stating that for any reasoning system of order N, composed of systems operating over conceptual spaces of order N-1, semantic coherence is preserved only by a recursively evaluable generalization operator that spans and aligns those lower-order conceptual spaces. Crucially, this coherence enables structural alignment. Without recursive coherence, no system can reliably preserve goals, meanings, or reasoning consistency at scale. We formally define the Functional Model of Intelligence (FMI) as the only known operator capable of satisfying the RCP at any scale. The FMI is a minimal, composable architecture with internal functions (evaluation, modeling, adaptation, stability, decomposition, bridging) and external functions (storage, recall, System 1 and System 2 reasoning) vital for preserving semantic structure across inference and coordination layers. We prove that any system lacking the FMI will experience recursive coherence breakdown as it scales, arguing that common AI issues like misalignment, hallucination, and instability are symptoms of this structural coherence loss. Unlike other foundational principles, RCP uniquely captures the internal, recursive dynamics needed for coherent, alignable intelligence, modeling semantic coherence under recursion. This work significantly impacts AI alignment, advocating a shift from behavioral constraints to structural coherence, and offers a pathway for safely generalizable, robustly coherent AI at scale.
+
+**Comment:** The Recursive Coherence Principle introduces a new theoretical framework for scalable intelligence and reasoning architecture, aligning with emerging trends in foundational AI research.
+
+**Relevance:** 9
+**Novelty:** 9
+
+---
+
+## 3. [Identifying Pre-training Data in LLMs: A Neuron Activation-Based Detection Framework](https://arxiv.org/abs/2507.16414) <a id="link3"></a>
+
+**ArXiv ID:** 2507.16414
+
+**Authors:** Hongyi Tang, Zhihao Zhu, Yi Yang
+
+**Abstract:** The performance of large language models (LLMs) is closely tied to their training data, which can include copyrighted material or private information, raising legal and ethical concerns. Additionally, LLMs face criticism for dataset contamination and internalizing biases. To address these issues, the Pre-Training Data Detection (PDD) task was proposed to identify if specific data was included in an LLM's pre-training corpus. However, existing PDD methods often rely on superficial features like prediction confidence and loss, resulting in mediocre performance. To improve this, we introduce NA-PDD, a novel algorithm analyzing differential neuron activation patterns between training and non-training data in LLMs. This is based on the observation that these data types activate different neurons during LLM inference. We also introduce CCNewsPDD, a temporally unbiased benchmark employing rigorous data transformations to ensure consistent time distributions between training and non-training data. Our experiments demonstrate that NA-PDD significantly outperforms existing methods across three benchmarks and multiple LLMs.
+
+**Comment:** The paper introduces a novel method for detecting pre-training data in LLMs using neuron activation patterns, which is relevant to understanding LLM behavior and interpretability.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 4. [Depth Gives a False Sense of Privacy: LLM Internal States Inversion](https://arxiv.org/abs/2507.16372) <a id="link4"></a>
+
+**ArXiv ID:** 2507.16372
+
+**Authors:** Tian Dong, Yan Meng, Shaofeng Li, Guoxing Chen, Zhen Liu, Haojin Zhu
+
+**Abstract:** Large Language Models (LLMs) are increasingly integrated into daily routines, yet they raise significant privacy and safety concerns. Recent research proposes collaborative inference, which outsources the early-layer inference to ensure data locality, and introduces model safety auditing based on inner neuron patterns. Both techniques expose the LLM's Internal States (ISs), which are traditionally considered irreversible to inputs due to optimization challenges and the highly abstract representations in deep layers. In this work, we challenge this assumption by proposing four inversion attacks that significantly improve the semantic similarity and token matching rate of inverted inputs. Specifically, we first develop two white-box optimization-based attacks tailored for low-depth and high-depth ISs. These attacks avoid local minima convergence, a limitation observed in prior work, through a two-phase inversion process. Then, we extend our optimization attack under more practical black-box weight access by leveraging the transferability between the source and the derived LLMs. Additionally, we introduce a generation-based attack that treats inversion as a translation task, employing an inversion model to reconstruct inputs. Extensive evaluation of short and long prompts from medical consulting and coding assistance datasets and 6 LLMs validates the effectiveness of our inversion attacks. Notably, a 4,112-token long medical consulting prompt can be nearly perfectly inverted with 86.88 F1 token matching from the middle layer of Llama-3 model. Finally, we evaluate four practical defenses that we found cannot perfectly prevent ISs inversion and draw conclusions for future mitigation design.
+
+**Comment:** The paper challenges assumptions about LLM internal state privacy with inversion attacks, which is relevant to theoretical insights into LLM behavior.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 5. [Learning without training: The implicit dynamics of in-context learning](https://arxiv.org/abs/2507.16003) <a id="link5"></a>
+
+**ArXiv ID:** 2507.16003
+
+**Authors:** Benoit Dherin, Michael Munn, Hanna Mazzawi, Michael Wunder, Javier Gonzalvo
+
+**Abstract:** One of the most striking features of Large Language Models (LLM) is their ability to learn in context. Namely at inference time an LLM is able to learn new patterns without any additional weight update when these patterns are presented in the form of examples in the prompt, even if these patterns were not seen during training. The mechanisms through which this can happen are still largely unknown. In this work, we show that the stacking of a self-attention layer with an MLP, allows the transformer block to implicitly modify the weights of the MLP layer according to the context. We argue through theory and experimentation that this simple mechanism may be the reason why LLMs can learn in context and not only during training. Specifically, we show under mild simplifying assumptions how a transformer block implicitly transforms a context into a low-rank weight-update of the MLP layer.
+
+**Comment:** The paper provides theoretical insights into in-context learning dynamics in LLMs, which is highly relevant to understanding LLM behavior and representation learning.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 6. [Self-Contradiction as Self-Improvement: Mitigating the Generation-Understanding Gap in MLLMs](https://arxiv.org/abs/2507.16663) <a id="link6"></a>
+
+**ArXiv ID:** 2507.16663
+
+**Authors:** Yujin Han, Hao Chen, Andi Han, Zhiheng Wang, Xinyu Lin, Yingya Zhang, Shiwei Zhang, Difan Zou
+
+**Abstract:** Despite efforts to unify multimodal generation and understanding tasks in a single model, we show these MLLMs exhibit self-contradiction where generation produces images deemed misaligned with input prompts based on the model's own understanding. We define a Nonunified score that quantifies such self-contradiction. Our empirical results reveal that the self-contradiction mainly arises from weak generation that fails to align with prompts, rather than misunderstanding. This capability asymmetry indicates the potential of leveraging self-contradiction for self-improvement, where the stronger model understanding guides the weaker generation to mitigate the generation-understanding gap. Applying standard post-training methods (e.g., SFT, DPO) with such internal supervision successfully improves both generation and unification. We discover a co-improvement effect on both generation and understanding when only fine-tuning the generation branch, a phenomenon known in pre-training but underexplored in post-training. Our analysis shows improvements stem from better detection of false positives that are previously incorrectly identified as prompt-aligned. Theoretically, we show the aligned training dynamics between generation and understanding allow reduced prompt-misaligned generations to also improve mismatch detection in the understanding branch. Additionally, the framework reveals a potential risk of co-degradation under poor supervision-an overlooked phenomenon that is empirically validated in our experiments. Notably, we find intrinsic metrics like Nonunified score cannot distinguish co-degradation from co-improvement, which highlights the necessity of data quality check. Finally, we propose a curriculum-based strategy based on our findings that gradually introduces harder samples as the model improves, leading to better unification and improved MLLM generation and understanding.
+
+**Comment:** The paper discusses a novel approach to improving multimodal large language models by addressing self-contradiction, which aligns with foundational research in LLM behavior and interpretability.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 7. [Reactivation: Empirical NTK Dynamics Under Task Shifts](https://arxiv.org/abs/2507.16039) <a id="link7"></a>
+
+**ArXiv ID:** 2507.16039
+
+**Authors:** Yuzhi Liu, Zixuan Chen, Zirui Zhang, Yufei Liu, Giulia Lanzillotta
+
+**Abstract:** The Neural Tangent Kernel (NTK) offers a powerful tool to study the functional dynamics of neural networks. In the so-called lazy, or kernel regime, the NTK remains static during training and the network function is linear in the static neural tangents feature space. The evolution of the NTK during training is necessary for feature learning, a key driver of deep learning success. The study of the NTK dynamics has led to several critical discoveries in recent years, in generalization and scaling behaviours. However, this body of work has been limited to the single task setting, where the data distribution is assumed constant over time. In this work, we present a comprehensive empirical analysis of NTK dynamics in continual learning, where the data distribution shifts over time. Our findings highlight continual learning as a rich and underutilized testbed for probing the dynamics of neural training. At the same time, they challenge the validity of static-kernel approximations in theoretical treatments of continual learning, even at large scale.
+
+**Comment:** The paper provides an empirical analysis of Neural Tangent Kernel (NTK) dynamics in continual learning, which is relevant to understanding training dynamics in neural networks.
+
+**Relevance:** 9
+**Novelty:** 7
+
+---
+
+## 8. [ReDi: Rectified Discrete Flow](https://arxiv.org/abs/2507.15897) <a id="link8"></a>
+
+**ArXiv ID:** 2507.15897
+
+**Authors:** Jaehoon Yoo, Wonjung Kim, Seunghoon Hong
+
+**Abstract:** Discrete Flow-based Models (DFMs) are powerful generative models for high-quality discrete data but typically suffer from slow sampling speeds due to their reliance on iterative decoding processes. This reliance on a multi-step process originates from the factorization approximation of DFMs, which is necessary for handling high-dimensional data. In this paper, we rigorously characterize the approximation error from factorization using Conditional Total Correlation (TC), which depends on the coupling. To reduce the Conditional TC and enable efficient few-step generation, we propose Rectified Discrete Flow (ReDi), a novel iterative method that reduces factorization error by rectifying the coupling between source and target distributions. We theoretically prove that each ReDi step guarantees a monotonic decreasing Conditional TC, ensuring its convergence. Empirically, ReDi significantly reduces Conditional TC and enables few-step generation. Moreover, we demonstrate that the rectified couplings are well-suited for training efficient one-step models on image generation. ReDi offers a simple and theoretically grounded approach for tackling the few-step challenge, providing a new perspective on efficient discrete data synthesis. Code is available at https://github.com/Ugness/ReDi_discrete
+
+**Comment:** The paper introduces a novel method for discrete flow-based models, focusing on efficient data synthesis, which aligns with interests in model efficiency and generative paradigms.
+
+**Relevance:** 8
+**Novelty:** 8
+
+---
+
+## 9. [Analogy making as amortised model construction](https://arxiv.org/abs/2507.16511) <a id="link9"></a>
+
+**ArXiv ID:** 2507.16511
+
+**Authors:** David G. Nagy, Tingke Shen, Hanqi Zhou, Charley M. Wu, Peter Dayan
+
+**Abstract:** Humans flexibly construct internal models to navigate novel situations. To be useful, these internal models must be sufficiently faithful to the environment that resource-limited planning leads to adequate outcomes; equally, they must be tractable to construct in the first place. We argue that analogy plays a central role in these processes, enabling agents to reuse solution-relevant structure from past experiences and amortise the computational costs of both model construction (construal) and planning. Formalising analogies as partial homomorphisms between Markov decision processes, we sketch a framework in which abstract modules, derived from previous construals, serve as composable building blocks for new ones. This modular reuse allows for flexible adaptation of policies and representations across domains with shared structural essence.
+
+**Comment:** The paper discusses analogy making as a method for constructing internal models, which is relevant to representation learning and introduces a novel framework for model construction using analogies.
+
+**Relevance:** 8
+**Novelty:** 8
+
+---
+
+## 10. [GASPnet: Global Agreement to Synchronize Phases](https://arxiv.org/abs/2507.16674) <a id="link10"></a>
+
+**ArXiv ID:** 2507.16674
+
+**Authors:** Andrea Alamiaa, Sabine Muzellec, Thomas Serre, Rufin VanRullen
+
+**Abstract:** In recent years, Transformer architectures have revolutionized most fields of artificial intelligence, relying on an attentional mechanism based on the agreement between keys and queries to select and route information in the network. In previous work, we introduced a novel, brain-inspired architecture that leverages a similar implementation to achieve a global 'routing by agreement' mechanism. Such a system modulates the network's activity by matching each neuron's key with a single global query, pooled across the entire network. Acting as a global attentional system, this mechanism improves noise robustness over baseline levels but is insufficient for multi-classification tasks. Here, we improve on this work by proposing a novel mechanism that combines aspects of the Transformer attentional operations with a compelling neuroscience theory, namely, binding by synchrony. This theory proposes that the brain binds together features by synchronizing the temporal activity of neurons encoding those features. This allows the binding of features from the same object while efficiently disentangling those from distinct objects. We drew inspiration from this theory and incorporated angular phases into all layers of a convolutional network. After achieving phase alignment via Kuramoto dynamics, we use this approach to enhance operations between neurons with similar phases and suppresses those with opposite phases. We test the benefits of this mechanism on two datasets: one composed of pairs of digits and one composed of a combination of an MNIST item superimposed on a CIFAR-10 image. Our results reveal better accuracy than CNN networks, proving more robust to noise and with better generalization abilities. Overall, we propose a novel mechanism that addresses the visual binding problem in neural networks by leveraging the synergy between neuroscience and machine learning.
+
+**Comment:** The paper proposes a novel mechanism inspired by neuroscience for visual binding in neural networks, which is relevant to model architecture innovations.
+
+**Relevance:** 8
+**Novelty:** 8
+
+---
+
+## 11. [Pixel-Resolved Long-Context Learning for Turbulence at Exascale: Resolving Small-scale Eddies Toward the Viscous Limit](https://arxiv.org/abs/2507.16697) <a id="link11"></a>
+
+**ArXiv ID:** 2507.16697
+
+**Authors:** Junqi Yin, Mijanur Palash, M. Paul Laiu, Muralikrishnan Gopalakrishnan Meena, John Gounley, Stephen M. de Bruyn Kops, Feiyi Wang, Ramanan Sankaran, Pei Zhang
+
+**Abstract:** Turbulence plays a crucial role in multiphysics applications, including aerodynamics, fusion, and combustion. Accurately capturing turbulence's multiscale characteristics is essential for reliable predictions of multiphysics interactions, but remains a grand challenge even for exascale supercomputers and advanced deep learning models. The extreme-resolution data required to represent turbulence, ranging from billions to trillions of grid points, pose prohibitive computational costs for models based on architectures like vision transformers. To address this challenge, we introduce a multiscale hierarchical Turbulence Transformer that reduces sequence length from billions to a few millions and a novel RingX sequence parallelism approach that enables scalable long-context learning. We perform scaling and science runs on the Frontier supercomputer. Our approach demonstrates excellent performance up to 1.1 EFLOPS on 32,768 AMD GPUs, with a scaling efficiency of 94%. To our knowledge, this is the first AI model for turbulence that can capture small-scale eddies down to the dissipative range.
+
+**Comment:** The paper presents a new architecture for turbulence modeling using transformers, which is relevant to model architecture innovations.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 12. [C2-Evo: Co-Evolving Multimodal Data and Model for Self-Improving Reasoning](https://arxiv.org/abs/2507.16518) <a id="link12"></a>
+
+**ArXiv ID:** 2507.16518
+
+**Authors:** Xiuwei Chen, Wentao Hu, Hanhui Li, Jun Zhou, Zisheng Chen, Meng Cao, Yihan Zeng, Kui Zhang, Yu-Jie Yuan, Jianhua Han, Hang Xu, Xiaodan Liang
+
+**Abstract:** Recent advances in multimodal large language models (MLLMs) have shown impressive reasoning capabilities. However, further enhancing existing MLLMs necessitates high-quality vision-language datasets with carefully curated task complexities, which are both costly and challenging to scale. Although recent self-improving models that iteratively refine themselves offer a feasible solution, they still suffer from two core challenges: (i) most existing methods augment visual or textual data separately, resulting in discrepancies in data complexity (e.g., over-simplified diagrams paired with redundant textual descriptions); and (ii) the evolution of data and models is also separated, leading to scenarios where models are exposed to tasks with mismatched difficulty levels. To address these issues, we propose C2-Evo, an automatic, closed-loop self-improving framework that jointly evolves both training data and model capabilities. Specifically, given a base dataset and a base model, C2-Evo enhances them by a cross-modal data evolution loop and a data-model evolution loop. The former loop expands the base dataset by generating complex multimodal problems that combine structured textual sub-problems with iteratively specified geometric diagrams, while the latter loop adaptively selects the generated problems based on the performance of the base model, to conduct supervised fine-tuning and reinforcement learning alternately. Consequently, our method continuously refines its model and training data, and consistently obtains considerable performance gains across multiple mathematical reasoning benchmarks. Our code, models, and datasets will be released.
+
+**Comment:** The paper proposes a self-improving framework for multimodal data and model co-evolution, which is relevant to emerging trends in model training dynamics.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 13. [Differential Multimodal Transformers](https://arxiv.org/abs/2507.15875) <a id="link13"></a>
+
+**ArXiv ID:** 2507.15875
+
+**Authors:** Jerry Li, Timothy Oh, Joseph Hoang, Vardhit Veeramachaneni
+
+**Abstract:** Small language models have gained significant popularity due to their efficiency and growing capabilities. However, incorporating additional modalities, such as vision, can exacerbate the challenge of limited context windows by introducing noise. Recent studies have highlighted that Transformer attention mechanisms often disproportionately focus on irrelevant contexts. In this work, we extend the Differential Attention mechanism, originally designed for text-only models, to the text-vision model PaliGemma. Our aim is to evaluate its ability to mitigate noisy information retrieval and reduce hallucinations. To this end, we fine-tuned the PaliGemma 3B model using LoRA, incorporating Differential Attention, and experimented with various parameter settings and configurations. We demonstrate that Differential Attention can be adapted and integrated into the fine-tuning of existing models to enhance noisy information retrieval and question-answering capabilities.
+
+**Comment:** The paper focuses on extending the Differential Attention mechanism to a multimodal transformer model, which aligns with the interest in model architecture innovations.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 14. [ToFe: Lagged Token Freezing and Reusing for Efficient Vision Transformer Inference](https://arxiv.org/abs/2507.16260) <a id="link14"></a>
+
+**ArXiv ID:** 2507.16260
+
+**Authors:** Haoyue Zhang, Jie Zhang, Song Guo
+
+**Abstract:** Although vision transformers (ViT) have shown remarkable success in various vision tasks, their computationally expensive self-attention hinder their deployment on resource-constrained devices. Token reduction, which discards less important tokens during forward propagation, has been proposed to enhance the efficiency of transformer models. However, existing methods handle unimportant tokens irreversibly, preventing their reuse in subsequent blocks. Considering that transformers focus on different information among blocks, tokens reduced in early blocks might be useful later. Furthermore, to adapt transformer models for resource-constrained devices, it is crucial to strike a balance between model performance and computational overhead. To address these challenges, in this paper, we introduce a novel Token Freezing and Reusing (ToFe) framework, where we identify important tokens at each stage and temporarily freeze the unimportant ones, allowing their lagged reusing at a later stage. Specifically, we design a prediction module for token identification and an approximate module for recovery of the frozen tokens. By jointly optimizing with the backbone through computation budget-aware end-to-end training, ToFe can adaptively process the necessary tokens at each block, thereby reducing computational cost while maintaining performance. Extensive experiments demonstrate that ToFe reduces the computational cost of LV-ViT model by 50% with less than 2% drop in Top-1 accuracy, achieving a better trade-off between performance and complexity compared to state-of-the-art methods.
+
+**Comment:** The paper proposes a novel token freezing and reusing framework for efficient vision transformer inference, which is relevant to model compression and efficiency.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 15. [Reducing GPU Memory Fragmentation via Spatio-Temporal Planning for Efficient Large-Scale Model Training](https://arxiv.org/abs/2507.16274) <a id="link15"></a>
+
+**ArXiv ID:** 2507.16274
+
+**Authors:** Zixiao Huang, Junhao Hu, Hao Lin, Chunyang Zhu, Yueran Tang, Quanlu Zhang, Zhen Guo, Zhenhua Li, Shengen Yan, Zhenhua Zhu, Guohao Dai, Yu Wang
+
+**Abstract:** The rapid scaling of large language models (LLMs) has significantly increased GPU memory pressure, which is further aggravated by training optimization techniques such as virtual pipeline and recomputation that disrupt tensor lifespans and introduce considerable memory fragmentation. Default GPU memory allocators of popular deep learning frameworks like PyTorch use online strategies without knowledge of tensor lifespans, which can waste up to 43\% of memory and cause out-of-memory errors, rendering optimization techniques ineffective or even unusable.   To address this, we introduce STWeaver, a GPU memory allocator for deep learning frameworks that reduces fragmentation by exploiting the spatial and temporal regularity in memory allocation behaviors of training workloads. STWeaver introduces a novel paradigm that combines offline planning with online allocation. The offline planning leverages spatio-temporal regularities to generate a near-optimal allocation plan, while the online allocation handles complex and dynamic models such as Mixture-of-Experts (MoE). Built as a pluggable PyTorch allocator, STWeaver reduces fragmentation ratio on average by 79.2\% (up to 100\%) across both dense and sparse models, with negligible overhead. This enables more efficient, high-throughput training configurations and improves performance by up to 32.5\%.
+
+**Comment:** The paper presents a GPU memory allocator to reduce fragmentation in large-scale model training, which is relevant to model efficiency and compression.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 16. [Scaling Linear Attention with Sparse State Expansion](https://arxiv.org/abs/2507.16577) <a id="link16"></a>
+
+**ArXiv ID:** 2507.16577
+
+**Authors:** Yuqi Pan, Yongqi An, Zheng Li, Yuhong Chou, Ruijie Zhu, Xiaohui Wang, Mingxuan Wang, Jinqiao Wang, Guoqi Li
+
+**Abstract:** The Transformer architecture, despite its widespread success, struggles with long-context scenarios due to quadratic computation and linear memory growth. While various linear attention variants mitigate these efficiency constraints by compressing context into fixed-size states, they often degrade performance in tasks such as in-context retrieval and reasoning. To address this limitation and achieve more effective context compression, we propose two key innovations. First, we introduce a row-sparse update formulation for linear attention by conceptualizing state updating as information classification. This enables sparse state updates via softmax-based top-$k$ hard classification, thereby extending receptive fields and reducing inter-class interference. Second, we present Sparse State Expansion (SSE) within the sparse framework, which expands the contextual state into multiple partitions, effectively decoupling parameter size from state capacity while maintaining the sparse classification paradigm. Our design, supported by efficient parallelized implementations, yields effective classification and discriminative state representations. We extensively validate SSE in both pure linear and hybrid (SSE-H) architectures across language modeling, in-context retrieval, and mathematical reasoning benchmarks. SSE demonstrates strong retrieval performance and scales favorably with state size. Moreover, after reinforcement learning (RL) training, our 2B SSE-H model achieves state-of-the-art mathematical reasoning performance among small reasoning models, scoring 64.7 on AIME24 and 51.3 on AIME25, significantly outperforming similarly sized open-source Transformers. These results highlight SSE as a promising and efficient architecture for long-context modeling.
+
+**Comment:** The paper introduces Sparse State Expansion (SSE) for linear attention, which is relevant to model architecture innovations, particularly in improving efficiency and scalability of Transformers.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 17. [Improving the Generation of VAEs with High Dimensional Latent Spaces by the use of Hyperspherical Coordinates](https://arxiv.org/abs/2507.15900) <a id="link17"></a>
+
+**ArXiv ID:** 2507.15900
+
+**Authors:** Alejandro Ascarate, Leo Lebrat, Rodrigo Santa Cruz, Clinton Fookes, Olivier Salvado
+
+**Abstract:** Variational autoencoders (VAE) encode data into lower-dimensional latent vectors before decoding those vectors back to data. Once trained, decoding a random latent vector from the prior usually does not produce meaningful data, at least when the latent space has more than a dozen dimensions. In this paper, we investigate this issue by drawing insight from high dimensional statistics: in these regimes, the latent vectors of a standard VAE are by construction distributed uniformly on a hypersphere. We propose to formulate the latent variables of a VAE using hyperspherical coordinates, which allows compressing the latent vectors towards an island on the hypersphere, thereby reducing the latent sparsity and we show that this improves the generation ability of the VAE. We propose a new parameterization of the latent space with limited computational overhead.
+
+**Comment:** The paper proposes a novel parameterization of VAE latent spaces using hyperspherical coordinates, relevant to representation learning and improving generative models.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 18. [Semantic-Aware Gaussian Process Calibration with Structured Layerwise Kernels for Deep Neural Networks](https://arxiv.org/abs/2507.15987) <a id="link18"></a>
+
+**ArXiv ID:** 2507.15987
+
+**Authors:** Kyung-hwan Lee, Kyung-tae Kim
+
+**Abstract:** Calibrating the confidence of neural network classifiers is essential for quantifying the reliability of their predictions during inference. However, conventional Gaussian Process (GP) calibration methods often fail to capture the internal hierarchical structure of deep neural networks, limiting both interpretability and effectiveness for assessing predictive reliability. We propose a Semantic-Aware Layer-wise Gaussian Process (SAL-GP) framework that mirrors the layered architecture of the target neural network. Instead of applying a single global GP correction, SAL-GP employs a multi-layer GP model, where each layer's feature representation is mapped to a local calibration correction. These layerwise GPs are coupled through a structured multi-layer kernel, enabling joint marginalization across all layers. This design allows SAL-GP to capture both local semantic dependencies and global calibration coherence, while consistently propagating predictive uncertainty through the network. The resulting framework enhances interpretability aligned with the network architecture and enables principled evaluation of confidence consistency and uncertainty quantification in deep models.
+
+**Comment:** The paper introduces a new framework for Gaussian Process calibration in neural networks, which is relevant to representation learning and model architecture analysis.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+# Paper Selection Prompt
+
+## System Prompt
+
+> You are a helpful paper reading assistant whose job is to read daily posts from ArXiv and identify a few papers that your friend will enjoy reading.
+> Your job is to carefully read the paper titles and abstracts below and find the ones that match the criteria below.
+
+## User Prompt
+
+> ## Instructions
+> 
+> Write the response in JSONL format with {ARXIVID, COMMENT, RELEVANCE, NOVELTY} on each line, one for each paper.
+> 
+> - ARXIVID: should be the ArXiv ID.
+> - COMMENT: should identify whether there is a criteria that match the paper very closely. These matches should not be based on general terms like "language modeling" or "advancements" and should specifically refer to a criterion. No need to mention the non-matching criteria.
+> - RELEVANCE: should be a score from 1-10.
+> - NOVELTY: should be a score from 1-10.
+> 
+> ## Scoring Criteria
+> 
+> > The "Relevance" score measures how closely the paper aligns with the core topics of the prompt.
+> > The "Novelty" score assesses the originality and impact of the paper.
+> > They are two **ORTHONORMAL** axes and **SHOULD NOT** be confused with each other.
+> 
+> ### Relevance Scoring
+> 
+> - Relevance 9-10 (Completely Relevant)
+>   - Focus: Fully aligned with core topics with no deviation, score the highest if contains relevant keywords in it.
+>   - Examples: Papers focused on foundational methods or theoretical research, whose titles contain topic keywords like "MoE".
+> 
+> - Relevance 7-8 (Relevant)
+>   - Focus: Retain a solid link to the main research area, though may touch on peripheral elements.
+>   - Examples: Papers research on the fundamental part of MoE through a less critical aspect like its behavior in GNN.
+> 
+> - Relevance 5-6 (Borderline)
+>   - Focus: Maintains a link to the core topic but also extends into at least one other domain/area beyond the primary focus.
+>   - Examples: Work referencing MoE centered on reinforcement learning.
+> 
+> - Relevance 3-4 (Irrelevant)
+>   - Focus: Largely outside our interests with no association to our topics.
+>   - Examples: Application-focused papers like using MoE to solve a problem in the real world.
+> 
+> - Relevance 1-2 (Ignore)
+>   - Focus: Purely unrelated to our topics. Completely a different domain.
+>   - **Exception**: If the paper hints at a cutting-edge, radically new direction that could eventually transform the primary domain, consider a score of 9–10 despite initial appearances. (Usually a very rare concept that belongs to the fundamental research)
+> 
+> ### Novelty Scoring
+> 
+> - Novelty 9-10 (Breakthrough)
+>   - Definition: Groundbreaking methods/theory introducing new directions or solving major challenges.
+>   - Examples: Entirely new paradigm for foundational models; a novel theory transforming representation learning.
+> 
+> - Novelty 7-8 (Improvements)
+>   - Definition: Substantial insights/enhancements, though not a full paradigm shift.
+>   - Examples: Modifications on existing methods yielding significantly better results.
+> 
+> - Novelty 5-6 (Borderline)
+>   - Definition: Incremental contributions with possible long-term benefits, not immediately transformative.
+>   - Examples: Moderately novel extension to an existing architecture; refining current methods without fundamentally altering them.
+> 
+> - Novelty 3-4 (Tangential)
+>   - Definition: Minor or domain-specific improvements with limited broader impact.
+>   - Examples: Slight modifications to known methods with strange motivation; purely engineering jobs like a new benchmark/dataset.
+> 
+> - Novelty 1-2 (Low)
+>   - Definition: Minimal originality, applying standard approaches without real innovation.
+>   - Examples: Using an off-the-shelf model without adding new insights; purely application-driven studies like finetuning a pretrained model using existing methods.
+> 
+> ## Papers
+> 
+> [PAPER LIST HERE]
+> 
+> ## Relevant Topics
+> 
+> Use the following relevance criteria to focus on foundational research. Keep **relevant** papers and filter out **irrelevant** ones. Avoid purely **application-driven** work.
+> 
+> 1. Representation Learning
+>    - Relevant: Insights into how deep networks encode information, feature/dictionary learning, sparse/contrastive methods, training dynamics in neural networks.
+>    - Irrelevant: Standard applications of known techniques lacking new theoretical or methodological contributions.
+> 
+> 2. Model Architecture
+>    - Relevant: Mixture-of-Experts (MoE), Transformers, Conditional/Dynamic Networks, Autoencoders, analysis on existing architectures (like encoder-decoder), or other architectural innovations.
+>    - Irrelevant: Merely using existing architectures for a certain task without insights into the structure themselves.
+> 
+> 3. Model Compression
+>    - Relevant: Sparsity, pruning, quantization, low-rank approaches, KV cache, or other algorithmic/theoretical efficiency breakthroughs.
+>    - Irrelevant: Straightforward applications of existing compression methods to new tasks.
+> 
+> 4. Large Language Models (LLMs)
+>    - Relevant: Major breakthroughs in pretraining or architecture, theoretical insights into LLM behavior/interpretability.
+>    - Irrelevant: Domain-specific usage (e.g., translation, jail-breaking), finetuning or inference tricks (e.g., instruction tuning, chain-of-thoughts, data mixing), or empirical dataset/benchmark studies and text-level analysis (e.g. hallucination, reasoning, safety).
+> 
+> 5. AI for Science
+>    - Relevant: Foundational research in molecular/protein modeling, new generative paradigms, or significant architecture-level innovations.
+>    - Irrelevant: Conventional, domain-specific applications without new theoretical perspectives.
+> 
+> 6. Emerging Trends
+>    - Relevant: Cutting-edge theoretical work challenging established assumptions or introducing broad new paradigms.
+>    - Irrelevant: Incremental improvements or trend-following without novel insights.
+> 
+> **Keywords:**
+> 
+> - Relevant: Mixture of Experts (MoE), Representation Learning, Compression/Efficiency, Sparse/Sparsity, Pruning, Quantization, Low-rank, Foundation Model, etc.
+> - Irrelevant: Reinforcement Learning, Transfer Learning, Federated Learning, Online Learning, Diffusion Models, etc.
+> - Application: Image Segmentation, Medical Imaging, 3D Vision, Video Understanding, Information Retrieval, Summarization, Recommendation Systems, Machine Translation, Speech Recognition, Signal Processing, Spatial/Temporal Modeling, Time Series, Knowledge Graph, etc.

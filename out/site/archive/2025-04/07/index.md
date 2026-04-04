@@ -1,0 +1,426 @@
+<div style="display: flex; align-items: flex-start; justify-content: space-between; width: 100%;"><div style="width: 33.33%; text-align: left;"><a href="../04"><img src="../../../assets/nav/day/2025-04-07-prev.svg" alt="Previous Day 2025-04-04"></a></div><div style="width: 33.33%; text-align: center;"><a href=".."><img src="../../../assets/nav/day/2025-04-07-center.svg" alt="Monthly Overview 2025-04"></a></div><div style="width: 33.33%; text-align: right;"><a href="../08"><img src="../../../assets/nav/day/2025-04-07-next.svg" alt="Next Day 2025-04-08"></a></div></div>
+
+# Personalized Daily ArXiv Papers 2025-04-07
+
+| *[gpt-4o]*   | Prompt   | Completion   | Total   |
+|:------------:|:--------:|:------------:|:-------:|
+| **Token**    | 32512    | 4481         | 36993   |
+| **Cost**     | $0.08    | $0.04        | $0.13   |
+
+Total arXiv papers: 354
+
+Total scanned papers: 229
+
+Total relevant papers: 17
+
+**Table of contents with paper titles:**
+
+1. [The Dual-Route Model of Induction](#user-content-link1)
+**Authors:** Sheridan Feucht, Eric Todd, Byron Wallace, David Bau
+
+2. [How Post-Training Reshapes LLMs: A Mechanistic View on Knowledge, Truthfulness, Refusal, and Confidence](#user-content-link2)
+**Authors:** Hongzhe Du, Weikai Li, Min Cai, Karim Saraipour, Zimin Zhang, Himabindu Lakkaraju, Yizhou Sun, Shichang Zhang
+
+3. [Towards Understanding How Knowledge Evolves in Large Vision-Language Models](#user-content-link3)
+**Authors:** Sudong Wang, Yunjian Zhang, Yao Zhu, Jianing Li, Zizhe Wang, Yanwei Liu, Xiangyang Ji
+
+4. [Do Larger Language Models Imply Better Reasoning? A Pretraining Scaling Law for Reasoning](#user-content-link4)
+**Authors:** Xinyi Wang, Shawn Tan, Mingyu Jin, William Yang Wang, Rameswar Panda, Yikang Shen
+
+5. [Optimizing Specific and Shared Parameters for Efficient Parameter Tuning](#user-content-link5)
+**Authors:** Van-Anh Nguyen, Thanh-Toan Do, Mehrtash Harandi, Dinh Phung, Trung Le
+
+6. [Nemotron-H: A Family of Accurate and Efficient Hybrid Mamba-Transformer Models](#user-content-link6)
+**Authors:** NVIDIA, :, Aaron Blakeman, Aarti Basant, Abhinav Khattar, Adithya Renduchintala, Akhiad Bercovich, Aleksander Ficek, Alexis Bjorlin, Ali Taghibakhshi, Amala Sanjay Deshmukh, Ameya Sunil Mahabaleshwarkar, Andrew Tao, Anna Shors, Ashwath Aithal, Ashwin Poojary, Ayush Dattagupta, Balaram Buddharaju, Bobby Chen, Boris Ginsburg, Boxin Wang, Brandon Norick, Brian Butterfield, Bryan Catanzaro, Carlo del Mundo, Chengyu Dong, Christine Harvey, Christopher Parisien, Dan Su, Daniel Korzekwa, Danny Yin, Daria Gitman, David Mosallanezhad, Deepak Narayanan, Denys Fridman, Dima Rekesh, Ding Ma, Dmytro Pykhtar, Dong Ahn, Duncan Riach, Dusan Stosic, Eileen Long, Elad Segal, Ellie Evans, Eric Chung, Erick Galinkin, Evelina Bakhturina, Ewa Dobrowolska, Fei Jia, Fuxiao Liu, Gargi Prasad, Gerald Shen, Guilin Liu, Guo Chen, Haifeng Qian, Helen Ngo, Hongbin Liu, Hui Li, Igor Gitman, Ilia Karmanov, Ivan Moshkov, Izik Golan, Jan Kautz, Jane Polak Scowcroft, Jared Casper, Jarno Seppanen, Jason Lu, Jason Sewall, Jiaqi Zeng, Jiaxuan You, Jimmy Zhang, Jing Zhang, Jining Huang, Jinze Xue, Jocelyn Huang, Joey Conway, John Kamalu, Jon Barker, Jonathan Cohen, Joseph Jennings, Jupinder Parmar, Karan Sapra, Kari Briski, Kateryna Chumachenko, Katherine Luna, Keshav Santhanam, Kezhi Kong, Kirthi Sivamani, Krzysztof Pawelec, Kumar Anik, Kunlun Li, Lawrence McAfee, Leon Derczynski, Lindsey Pavao, Luis Vega, Lukas Voegtle, Maciej Bala, Maer Rodrigues de Melo, Makesh Narsimhan Sreedhar, Marcin Chochowski, Markus Kliegl, Marta Stepniewska-Dziubinska, Matthieu Le, Matvei Novikov, Mehrzad Samadi, Michael Andersch, Michael Evans, Miguel Martinez, Mike Chrzanowski, Mike Ranzinger, Mikolaj Blaz, Misha Smelyanskiy, Mohamed Fawzy, Mohammad Shoeybi, Mostofa Patwary, Nayeon Lee, Nima Tajbakhsh, Ning Xu, Oleg Rybakov, Oleksii Kuchaiev, Olivier Delalleau, Osvald Nitski, Parth Chadha, Pasha Shamis, Paulius Micikevicius, Pavlo Molchanov, Peter Dykas, Philipp Fischer, Pierre-Yves Aquilanti, Piotr Bialecki, Prasoon Varshney, Pritam Gundecha, Przemek Tredak, Rabeeh Karimi, Rahul Kandu, Ran El-Yaniv, Raviraj Joshi, Roger Waleffe, Ruoxi Zhang, Sabrina Kavanaugh, Sahil Jain, Samuel Kriman, Sangkug Lym, Sanjeev Satheesh, Saurav Muralidharan, Sean Narenthiran, Selvaraj Anandaraj, Seonmyeong Bak, Sergey Kashirsky, Seungju Han, Shantanu Acharya, Shaona Ghosh, Sharath Turuvekere Sreenivas, Sharon Clay, Shelby Thomas, Shrimai Prabhumoye, Shubham Pachori, Shubham Toshniwal, Shyamala Prayaga, Siddhartha Jain, Sirshak Das, Slawek Kierat, Somshubra Majumdar, Song Han, Soumye Singhal, Sriharsha Niverty, Stefania Alborghetti, Suseella Panguluri, Swetha Bhendigeri, Syeda Nahida Akter, Szymon Migacz, Tal Shiri, Terry Kong, Timo Roman, Tomer Ronen, Trisha Saar, Tugrul Konuk, Tuomas Rintamaki, Tyler Poon, Ushnish De, Vahid Noroozi, Varun Singh, Vijay Korthikanti, Vitaly Kurin, Wasi Uddin Ahmad, Wei Du, Wei Ping, Wenliang Dai, Wonmin Byeon, Xiaowei Ren, Yao Xu, Yejin Choi, Yian Zhang, Ying Lin, Yoshi Suhara, Zhiding Yu, Zhiqi Li, Zhiyu Li, Zhongbo Zhu, Zhuolin Yang, Zijia Chen
+
+7. [Beyond Progress Measures: Theoretical Insights into the Mechanism of Grokking](#user-content-link7)
+**Authors:** Zihan Gu, Ruoyu Chen, Hua Zhang, Yue Hu, Xiaochun Cao
+
+8. [SpectR: Dynamically Composing LM Experts with Spectral Routing](#user-content-link8)
+**Authors:** William Fleshman, Benjamin Van Durme
+
+9. [LLM Library Learning Fails: A LEGO-Prover Case Study](#user-content-link9)
+**Authors:** Ian Berlot-Attwell, Frank Rudzicz, Xujie Si
+
+10. [PETIMOT: A Novel Framework for Inferring Protein Motions from Sparse Data Using SE(3)-Equivariant Graph Neural Networks](#user-content-link10)
+**Authors:** Valentin Lombard, Sergei Grudinin, Elodie Laine
+
+11. [A Polynomial-Time Algorithm for Variational Inequalities under the Minty Condition](#user-content-link11)
+**Authors:** Ioannis Anagnostides, Gabriele Farina, Tuomas Sandholm, Brian Hu Zhang
+
+12. [Stochastic Optimization with Optimal Importance Sampling](#user-content-link12)
+**Authors:** Liviu Aolaritei, Bart P. G. Van Parys, Henry Lam, Michael I. Jordan
+
+13. [Persuasive Calibration](#user-content-link13)
+**Authors:** Yiding Feng, Wei Tang
+
+14. [Compressing 3D Gaussian Splatting by Noise-Substituted Vector Quantization](#user-content-link14)
+**Authors:** Haishan Wang, Mohammad Hassan Vali, Arno Solin
+
+15. [Beyond Accuracy: The Role of Calibration in Self-Improving Large Language Models](#user-content-link15)
+**Authors:** Liangjie Huang, Dawei Li, Huan Liu, Lu Cheng
+
+16. [Noiser: Bounded Input Perturbations for Attributing Large Language Models](#user-content-link16)
+**Authors:** Mohammad Reza Ghasemi Madani, Aryo Pradipta Gema, Gabriele Sarti, Yu Zhao, Pasquale Minervini, Andrea Passerini
+
+17. [ConfEviSurrogate: A Conformalized Evidential Surrogate Model for Uncertainty Quantification](#user-content-link17)
+**Authors:** Yuhan Duan, Xin Zhao, Neng Shi, Han-Wei Shen
+
+---
+
+## 1. [The Dual-Route Model of Induction](https://arxiv.org/abs/2504.03022) <a id="link1"></a>
+
+**ArXiv ID:** 2504.03022
+
+**Authors:** Sheridan Feucht, Eric Todd, Byron Wallace, David Bau
+
+**Abstract:** Prior work on in-context copying has shown the existence of induction heads, which attend to and promote individual tokens during copying. In this work we introduce a new type of induction head: concept-level induction heads, which copy entire lexical units instead of individual tokens. Concept induction heads learn to attend to the ends of multi-token words throughout training, working in parallel with token-level induction heads to copy meaningful text. We show that these heads are responsible for semantic tasks like word-level translation, whereas token induction heads are vital for tasks that can only be done verbatim, like copying nonsense tokens. These two "routes" operate independently: in fact, we show that ablation of token induction heads causes models to paraphrase where they would otherwise copy verbatim. In light of these findings, we argue that although token induction heads are vital for specific tasks, concept induction heads may be more broadly relevant for in-context learning.
+
+**Comment:** The paper introduces the concept of token-level and concept-level induction heads, providing theoretical insights into in-context learning and representation learning in LLMs. This aligns with foundational research.
+
+**Relevance:** 9
+**Novelty:** 9
+
+---
+
+## 2. [How Post-Training Reshapes LLMs: A Mechanistic View on Knowledge, Truthfulness, Refusal, and Confidence](https://arxiv.org/abs/2504.02904) <a id="link2"></a>
+
+**ArXiv ID:** 2504.02904
+
+**Authors:** Hongzhe Du, Weikai Li, Min Cai, Karim Saraipour, Zimin Zhang, Himabindu Lakkaraju, Yizhou Sun, Shichang Zhang
+
+**Abstract:** Post-training is essential for the success of large language models (LLMs), transforming pre-trained base models into more useful and aligned post-trained models. While plenty of works have studied post-training algorithms and evaluated post-training models by their outputs, it remains understudied how post-training reshapes LLMs internally. In this paper, we compare base and post-trained LLMs mechanistically from four perspectives to better understand post-training effects. Our findings across model families and datasets reveal that: (1) Post-training does not change the factual knowledge storage locations, and it adapts knowledge representations from the base model while developing new knowledge representations; (2) Both truthfulness and refusal can be represented by linear vectors in the hidden representation space. The truthfulness direction is highly similar between the base and post-trained model, and it is effectively transferable for interventions; (3) The refusal direction is different between the base and post-trained models, and it shows limited forward transferability; (4) Differences in confidence between the base and post-trained models cannot be attributed to entropy neurons. Our study provides insights into the fundamental mechanisms preserved and altered during post-training, facilitates downstream tasks like model steering, and could potentially benefit future research in interpretability and LLM post-training.
+
+**Comment:** The paper provides a mechanistic analysis of how post-training reshapes LLMs, focusing on knowledge, truthfulness, refusal, and confidence. This aligns with the criterion of theoretical insights into LLM behavior.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 3. [Towards Understanding How Knowledge Evolves in Large Vision-Language Models](https://arxiv.org/abs/2504.02862) <a id="link3"></a>
+
+**ArXiv ID:** 2504.02862
+
+**Authors:** Sudong Wang, Yunjian Zhang, Yao Zhu, Jianing Li, Zizhe Wang, Yanwei Liu, Xiangyang Ji
+
+**Abstract:** Large Vision-Language Models (LVLMs) are gradually becoming the foundation for many artificial intelligence applications. However, understanding their internal working mechanisms has continued to puzzle researchers, which in turn limits the further enhancement of their capabilities. In this paper, we seek to investigate how multimodal knowledge evolves and eventually induces natural languages in LVLMs. We design a series of novel strategies for analyzing internal knowledge within LVLMs, and delve into the evolution of multimodal knowledge from three levels, including single token probabilities, token probability distributions, and feature encodings. In this process, we identify two key nodes in knowledge evolution: the critical layers and the mutation layers, dividing the evolution process into three stages: rapid evolution, stabilization, and mutation. Our research is the first to reveal the trajectory of knowledge evolution in LVLMs, providing a fresh perspective for understanding their underlying mechanisms. Our codes are available at https://github.com/XIAO4579/Vlm-interpretability.
+
+**Comment:** The paper investigates the internal mechanisms of Large Vision-Language Models (LVLMs), focusing on how multimodal knowledge evolves. This aligns with the 'Representation Learning' and 'Large Language Models' criteria, as it provides insights into how these models encode and process information.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 4. [Do Larger Language Models Imply Better Reasoning? A Pretraining Scaling Law for Reasoning](https://arxiv.org/abs/2504.03635) <a id="link4"></a>
+
+**ArXiv ID:** 2504.03635
+
+**Authors:** Xinyi Wang, Shawn Tan, Mingyu Jin, William Yang Wang, Rameswar Panda, Yikang Shen
+
+**Abstract:** Large Language Models (LLMs) have demonstrated remarkable capabilities across a wide range of tasks requiring complex reasoning. However, the effects of scaling on their reasoning abilities remain insufficiently understood. In this paper, we introduce a synthetic multihop reasoning environment designed to closely replicate the structure and distribution of real-world large-scale knowledge graphs. Our reasoning task involves completing missing edges in the graph, which requires advanced multi-hop reasoning and mimics real-world reasoning scenarios. To evaluate this, we pretrain language models (LMs) from scratch solely on triples from the incomplete graph and assess their ability to infer the missing edges. Interestingly, we observe that overparameterization can impair reasoning performance due to excessive memorization. We investigate different factors that affect this U-shaped loss curve, including graph structure, model size, and training steps. To predict the optimal model size for a specific knowledge graph, we find an empirical scaling that linearly maps the knowledge graph search entropy to the optimal model size. This work provides new insights into the relationship between scaling and reasoning in LLMs, shedding light on possible ways to optimize their performance for reasoning tasks.
+
+**Comment:** This paper investigates the scaling laws of reasoning in LLMs, providing theoretical insights into their behavior. It aligns closely with the 'Large Language Models' criterion, particularly in understanding pretraining and reasoning capabilities.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 5. [Optimizing Specific and Shared Parameters for Efficient Parameter Tuning](https://arxiv.org/abs/2504.03450) <a id="link5"></a>
+
+**ArXiv ID:** 2504.03450
+
+**Authors:** Van-Anh Nguyen, Thanh-Toan Do, Mehrtash Harandi, Dinh Phung, Trung Le
+
+**Abstract:** Foundation models, with a vast number of parameters and pretraining on massive datasets, achieve state-of-the-art performance across various applications. However, efficiently adapting them to downstream tasks with minimal computational overhead remains a challenge. Parameter-Efficient Transfer Learning (PETL) addresses this by fine-tuning only a small subset of parameters while preserving pre-trained knowledge. In this paper, we propose SaS, a novel PETL method that effectively mitigates distributional shifts during fine-tuning. SaS integrates (1) a shared module that captures common statistical characteristics across layers using low-rank projections and (2) a layer-specific module that employs hypernetworks to generate tailored parameters for each layer. This dual design ensures an optimal balance between performance and parameter efficiency while introducing less than 0.05% additional parameters, making it significantly more compact than existing methods. Extensive experiments on diverse downstream tasks, few-shot settings and domain generalization demonstrate that SaS significantly enhances performance while maintaining superior parameter efficiency compared to existing methods, highlighting the importance of capturing both shared and layer-specific information in transfer learning. Code and data are available at https://anonymous.4open.science/r/SaS-PETL-3565.
+
+**Comment:** The paper proposes a novel PETL method using low-rank projections and hypernetworks, which aligns with model compression and efficiency topics. It introduces a dual design for shared and layer-specific parameter tuning.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 6. [Nemotron-H: A Family of Accurate and Efficient Hybrid Mamba-Transformer Models](https://arxiv.org/abs/2504.03624) <a id="link6"></a>
+
+**ArXiv ID:** 2504.03624
+
+**Authors:** NVIDIA, :, Aaron Blakeman, Aarti Basant, Abhinav Khattar, Adithya Renduchintala, Akhiad Bercovich, Aleksander Ficek, Alexis Bjorlin, Ali Taghibakhshi, Amala Sanjay Deshmukh, Ameya Sunil Mahabaleshwarkar, Andrew Tao, Anna Shors, Ashwath Aithal, Ashwin Poojary, Ayush Dattagupta, Balaram Buddharaju, Bobby Chen, Boris Ginsburg, Boxin Wang, Brandon Norick, Brian Butterfield, Bryan Catanzaro, Carlo del Mundo, Chengyu Dong, Christine Harvey, Christopher Parisien, Dan Su, Daniel Korzekwa, Danny Yin, Daria Gitman, David Mosallanezhad, Deepak Narayanan, Denys Fridman, Dima Rekesh, Ding Ma, Dmytro Pykhtar, Dong Ahn, Duncan Riach, Dusan Stosic, Eileen Long, Elad Segal, Ellie Evans, Eric Chung, Erick Galinkin, Evelina Bakhturina, Ewa Dobrowolska, Fei Jia, Fuxiao Liu, Gargi Prasad, Gerald Shen, Guilin Liu, Guo Chen, Haifeng Qian, Helen Ngo, Hongbin Liu, Hui Li, Igor Gitman, Ilia Karmanov, Ivan Moshkov, Izik Golan, Jan Kautz, Jane Polak Scowcroft, Jared Casper, Jarno Seppanen, Jason Lu, Jason Sewall, Jiaqi Zeng, Jiaxuan You, Jimmy Zhang, Jing Zhang, Jining Huang, Jinze Xue, Jocelyn Huang, Joey Conway, John Kamalu, Jon Barker, Jonathan Cohen, Joseph Jennings, Jupinder Parmar, Karan Sapra, Kari Briski, Kateryna Chumachenko, Katherine Luna, Keshav Santhanam, Kezhi Kong, Kirthi Sivamani, Krzysztof Pawelec, Kumar Anik, Kunlun Li, Lawrence McAfee, Leon Derczynski, Lindsey Pavao, Luis Vega, Lukas Voegtle, Maciej Bala, Maer Rodrigues de Melo, Makesh Narsimhan Sreedhar, Marcin Chochowski, Markus Kliegl, Marta Stepniewska-Dziubinska, Matthieu Le, Matvei Novikov, Mehrzad Samadi, Michael Andersch, Michael Evans, Miguel Martinez, Mike Chrzanowski, Mike Ranzinger, Mikolaj Blaz, Misha Smelyanskiy, Mohamed Fawzy, Mohammad Shoeybi, Mostofa Patwary, Nayeon Lee, Nima Tajbakhsh, Ning Xu, Oleg Rybakov, Oleksii Kuchaiev, Olivier Delalleau, Osvald Nitski, Parth Chadha, Pasha Shamis, Paulius Micikevicius, Pavlo Molchanov, Peter Dykas, Philipp Fischer, Pierre-Yves Aquilanti, Piotr Bialecki, Prasoon Varshney, Pritam Gundecha, Przemek Tredak, Rabeeh Karimi, Rahul Kandu, Ran El-Yaniv, Raviraj Joshi, Roger Waleffe, Ruoxi Zhang, Sabrina Kavanaugh, Sahil Jain, Samuel Kriman, Sangkug Lym, Sanjeev Satheesh, Saurav Muralidharan, Sean Narenthiran, Selvaraj Anandaraj, Seonmyeong Bak, Sergey Kashirsky, Seungju Han, Shantanu Acharya, Shaona Ghosh, Sharath Turuvekere Sreenivas, Sharon Clay, Shelby Thomas, Shrimai Prabhumoye, Shubham Pachori, Shubham Toshniwal, Shyamala Prayaga, Siddhartha Jain, Sirshak Das, Slawek Kierat, Somshubra Majumdar, Song Han, Soumye Singhal, Sriharsha Niverty, Stefania Alborghetti, Suseella Panguluri, Swetha Bhendigeri, Syeda Nahida Akter, Szymon Migacz, Tal Shiri, Terry Kong, Timo Roman, Tomer Ronen, Trisha Saar, Tugrul Konuk, Tuomas Rintamaki, Tyler Poon, Ushnish De, Vahid Noroozi, Varun Singh, Vijay Korthikanti, Vitaly Kurin, Wasi Uddin Ahmad, Wei Du, Wei Ping, Wenliang Dai, Wonmin Byeon, Xiaowei Ren, Yao Xu, Yejin Choi, Yian Zhang, Ying Lin, Yoshi Suhara, Zhiding Yu, Zhiqi Li, Zhiyu Li, Zhongbo Zhu, Zhuolin Yang, Zijia Chen
+
+**Abstract:** As inference-time scaling becomes critical for enhanced reasoning capabilities, it is increasingly becoming important to build models that are efficient to infer. We introduce Nemotron-H, a family of 8B and 56B/47B hybrid Mamba-Transformer models designed to reduce inference cost for a given accuracy level. To achieve this goal, we replace the majority of self-attention layers in the common Transformer model architecture with Mamba layers that perform constant computation and require constant memory per generated token. We show that Nemotron-H models offer either better or on-par accuracy compared to other similarly-sized state-of-the-art open-sourced Transformer models (e.g., Qwen-2.5-7B/72B and Llama-3.1-8B/70B), while being up to 3$\times$ faster at inference. To further increase inference speed and reduce the memory required at inference time, we created Nemotron-H-47B-Base from the 56B model using a new compression via pruning and distillation technique called MiniPuzzle. Nemotron-H-47B-Base achieves similar accuracy to the 56B model, but is 20% faster to infer. In addition, we introduce an FP8-based training recipe and show that it can achieve on par results with BF16-based training. This recipe is used to train the 56B model. All Nemotron-H models will be released, with support in Hugging Face, NeMo, and Megatron-LM.
+
+**Comment:** The paper introduces a hybrid Mamba-Transformer model with architectural innovations to improve inference efficiency, aligning with foundational research in model architecture and compression.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 7. [Beyond Progress Measures: Theoretical Insights into the Mechanism of Grokking](https://arxiv.org/abs/2504.03162) <a id="link7"></a>
+
+**ArXiv ID:** 2504.03162
+
+**Authors:** Zihan Gu, Ruoyu Chen, Hua Zhang, Yue Hu, Xiaochun Cao
+
+**Abstract:** Grokking, referring to the abrupt improvement in test accuracy after extended overfitting, offers valuable insights into the mechanisms of model generalization. Existing researches based on progress measures imply that grokking relies on understanding the optimization dynamics when the loss function is dominated solely by the weight decay term. However, we find that this optimization merely leads to token uniformity, which is not a sufficient condition for grokking. In this work, we investigate the grokking mechanism underlying the Transformer in the task of prime number operations. Based on theoretical analysis and experimental validation, we present the following insights: (i) The weight decay term encourages uniformity across all tokens in the embedding space when it is minimized. (ii) The occurrence of grokking is jointly determined by the uniformity of the embedding space and the distribution of the training dataset. Building on these insights, we provide a unified perspective for understanding various previously proposed progress measures and introduce a novel, concise, and effective progress measure that could trace the changes in test loss more accurately. Finally, to demonstrate the versatility of our theoretical framework, we design a dedicated dataset to validate our theory on ResNet-18, successfully showcasing the occurrence of grokking.
+
+**Comment:** The paper provides theoretical insights into the mechanism of grokking, focusing on optimization dynamics and embedding space uniformity. This aligns with foundational research in representation learning and training dynamics, making it highly relevant.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 8. [SpectR: Dynamically Composing LM Experts with Spectral Routing](https://arxiv.org/abs/2504.03454) <a id="link8"></a>
+
+**ArXiv ID:** 2504.03454
+
+**Authors:** William Fleshman, Benjamin Van Durme
+
+**Abstract:** Training large, general-purpose language models poses significant challenges. The growing availability of specialized expert models, fine-tuned from pretrained models for specific tasks or domains, offers a promising alternative. Leveraging the potential of these existing expert models in real-world applications requires effective methods to select or merge the models best suited for a given task. This paper introduces SPECTR, an approach for dynamically composing expert models at each time step during inference. Notably, our method requires no additional training and enables flexible, token- and layer-wise model combinations. Our experimental results demonstrate that SPECTR improves routing accuracy over alternative training-free methods, increasing task performance across expert domains.
+
+**Comment:** The paper introduces SPECTR, a method for dynamically composing expert models during inference. It aligns with the topic of Mixture-of-Experts (MoE) and explores token- and layer-wise model combinations, making it relevant to model architecture innovations.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 9. [LLM Library Learning Fails: A LEGO-Prover Case Study](https://arxiv.org/abs/2504.03048) <a id="link9"></a>
+
+**ArXiv ID:** 2504.03048
+
+**Authors:** Ian Berlot-Attwell, Frank Rudzicz, Xujie Si
+
+**Abstract:** Recent advancements in the coding, reasoning, and tool-using abilities of LLMs have spurred interest in library learning (i.e., online learning through the creation, storage, and retrieval of reusable and composable functions, knowledge, checklists, or lemmas). Such systems often promise improved task performance through the automatic creation of broadly applicable tools, as well as superior computational performance through the caching of reasoning (i.e., the storage of generated tools). However, we find strong reason to be skeptical. We perform a deep dive into one such system, LEGO-Prover, which purports to learn reusable lemmas for mathematical reasoning. We find no evidence of the direct reuse of learned lemmas, and find evidence against the soft reuse of learned lemmas (i.e., reuse by modifying relevant examples). Crucially, we find that LEGO-Prover does not in fact improve over the simple baseline of prompting the model - the improvements in task accuracy vanish once computational cost is accounted for. Our findings suggest that serious misconceptions exist as to the effectiveness of these techniques, that a serious re-examination of the state of LLM-based library learning is required, and that we require much stronger standards for evaluation including behavioural analysis and ensuring that an equal computational budget is used for baselines.
+
+**Comment:** The paper critiques LLM-based library learning systems and highlights misconceptions, aligning with foundational research on LLM behavior and interpretability.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 10. [PETIMOT: A Novel Framework for Inferring Protein Motions from Sparse Data Using SE(3)-Equivariant Graph Neural Networks](https://arxiv.org/abs/2504.02839) <a id="link10"></a>
+
+**ArXiv ID:** 2504.02839
+
+**Authors:** Valentin Lombard, Sergei Grudinin, Elodie Laine
+
+**Abstract:** Proteins move and deform to ensure their biological functions. Despite significant progress in protein structure prediction, approximating conformational ensembles at physiological conditions remains a fundamental open problem. This paper presents a novel perspective on the problem by directly targeting continuous compact representations of protein motions inferred from sparse experimental observations. We develop a task-specific loss function enforcing data symmetries, including scaling and permutation operations. Our method PETIMOT (Protein sEquence and sTructure-based Inference of MOTions) leverages transfer learning from pre-trained protein language models through an SE(3)-equivariant graph neural network. When trained and evaluated on the Protein Data Bank, PETIMOT shows superior performance in time and accuracy, capturing protein dynamics, particularly large/slow conformational changes, compared to state-of-the-art flow-matching approaches and traditional physics-based models.
+
+**Comment:** The paper presents a novel SE(3)-equivariant graph neural network for inferring protein motions, which is relevant to foundational AI for science. It introduces architectural innovations and task-specific loss functions.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 11. [A Polynomial-Time Algorithm for Variational Inequalities under the Minty Condition](https://arxiv.org/abs/2504.03432) <a id="link11"></a>
+
+**ArXiv ID:** 2504.03432
+
+**Authors:** Ioannis Anagnostides, Gabriele Farina, Tuomas Sandholm, Brian Hu Zhang
+
+**Abstract:** Solving (Stampacchia) variational inequalities (SVIs) is a foundational problem at the heart of optimization, with a host of critical applications ranging from engineering to economics. However, this expressivity comes at the cost of computational hardness. As a result, most research has focused on carving out specific subclasses that elude those intractability barriers. A classical property that goes back to the 1960s is the Minty condition, which postulates that the Minty VI (MVI) problem -- the weak dual of the SVI problem -- admits a solution.   In this paper, we establish the first polynomial-time algorithm -- that is, with complexity growing polynomially in the dimension $d$ and $\log(1/\epsilon)$ -- for solving $\epsilon$-SVIs for Lipschitz continuous mappings under the Minty condition. Prior approaches either incurred an exponentially worse dependence on $1/\epsilon$ (and other natural parameters of the problem) or made overly restrictive assumptions -- such as strong monotonicity. To do so, we introduce a new variant of the ellipsoid algorithm wherein separating hyperplanes are obtained after taking a gradient descent step from the center of the ellipsoid. It succeeds even though the set of SVIs can be nonconvex and not fully dimensional. Moreover, when our algorithm is applied to an instance with no MVI solution and fails to identify an SVI solution, it produces a succinct certificate of MVI infeasibility. We also show that deciding whether the Minty condition holds is $\mathsf{coNP}$-complete.   We provide several extensions and new applications of our main results. Specifically, we obtain the first polynomial-time algorithms for i) solving monotone VIs, ii) globally minimizing a (potentially nonsmooth) quasar-convex function, and iii) computing Nash equilibria in multi-player harmonic games.
+
+**Comment:** This paper presents a polynomial-time algorithm for variational inequalities under the Minty condition, contributing to foundational optimization theory. It introduces a novel algorithmic approach with broad implications.
+
+**Relevance:** 8
+**Novelty:** 9
+
+---
+
+## 12. [Stochastic Optimization with Optimal Importance Sampling](https://arxiv.org/abs/2504.03560) <a id="link12"></a>
+
+**ArXiv ID:** 2504.03560
+
+**Authors:** Liviu Aolaritei, Bart P. G. Van Parys, Henry Lam, Michael I. Jordan
+
+**Abstract:** Importance Sampling (IS) is a widely used variance reduction technique for enhancing the efficiency of Monte Carlo methods, particularly in rare-event simulation and related applications. Despite its power, the performance of IS is often highly sensitive to the choice of the proposal distribution and frequently requires stochastic calibration techniques. While the design and analysis of IS have been extensively studied in estimation settings, applying IS within stochastic optimization introduces a unique challenge: the decision and the IS distribution are mutually dependent, creating a circular optimization structure. This interdependence complicates both the analysis of convergence for decision iterates and the efficiency of the IS scheme. In this paper, we propose an iterative gradient-based algorithm that jointly updates the decision variable and the IS distribution without requiring time-scale separation between the two. Our method achieves the lowest possible asymptotic variance and guarantees global convergence under convexity of the objective and mild assumptions on the IS distribution family. Furthermore, we show that these properties are preserved under linear constraints by incorporating a recent variant of Nesterov's dual averaging method.
+
+**Comment:** The paper introduces a novel optimization algorithm with importance sampling, which is relevant to foundational research in stochastic optimization and efficiency improvements.
+
+**Relevance:** 8
+**Novelty:** 8
+
+---
+
+## 13. [Persuasive Calibration](https://arxiv.org/abs/2504.03211) <a id="link13"></a>
+
+**ArXiv ID:** 2504.03211
+
+**Authors:** Yiding Feng, Wei Tang
+
+**Abstract:** We introduce and study the persuasive calibration problem, where a principal aims to provide trustworthy predictions about underlying events to a downstream agent to make desired decisions. We adopt the standard calibration framework that regulates predictions to be unbiased conditional on their own value, and thus, they can reliably be interpreted at the face value by the agent. Allowing a small calibration error budget, we aim to answer the following question: what is and how to compute the optimal predictor under this calibration error budget, especially when there exists incentive misalignment between the principal and the agent? We focus on standard Lt-norm Expected Calibration Error (ECE) metric.   We develop a general framework by viewing predictors as post-processed versions of perfectly calibrated predictors. Using this framework, we first characterize the structure of the optimal predictor. Specifically, when the principal's utility is event-independent and for L1-norm ECE, we show: (1) the optimal predictor is over-(resp. under-) confident for high (resp. low) true expected outcomes, while remaining perfectly calibrated in the middle; (2) the miscalibrated predictions exhibit a collinearity structure with the principal's utility function. On the algorithmic side, we provide a FPTAS for computing approximately optimal predictor for general principal utility and general Lt-norm ECE. Moreover, for the L1- and L-Infinity-norm ECE, we provide polynomial-time algorithms that compute the exact optimal predictor.
+
+**Comment:** The paper introduces a novel framework for optimal predictors under calibration error budgets, which aligns with foundational research in representation learning and training dynamics. It provides theoretical insights into prediction calibration.
+
+**Relevance:** 8
+**Novelty:** 8
+
+---
+
+## 14. [Compressing 3D Gaussian Splatting by Noise-Substituted Vector Quantization](https://arxiv.org/abs/2504.03059) <a id="link14"></a>
+
+**ArXiv ID:** 2504.03059
+
+**Authors:** Haishan Wang, Mohammad Hassan Vali, Arno Solin
+
+**Abstract:** 3D Gaussian Splatting (3DGS) has demonstrated remarkable effectiveness in 3D reconstruction, achieving high-quality results with real-time radiance field rendering. However, a key challenge is the substantial storage cost: reconstructing a single scene typically requires millions of Gaussian splats, each represented by 59 floating-point parameters, resulting in approximately 1~GB of memory. To address this challenge, we propose a compression method by building separate attribute codebooks and storing only discrete code indices. Specifically, we employ noise-substituted vector quantization technique to jointly train the codebooks and model features, ensuring consistency between gradient descent optimization and parameter discretization. Our method reduces the memory consumption efficiently (around $45\times$) while maintaining competitive reconstruction quality on standard 3D benchmark scenes. Experiments on different codebook sizes show the trade-off between compression ratio and image quality. Furthermore, the trained compressed model remains fully compatible with popular 3DGS viewers and enables faster rendering speed, making it well-suited for practical applications.
+
+**Comment:** The paper proposes a novel compression method for 3D Gaussian Splatting using noise-substituted vector quantization, which aligns with the model compression criterion. The method introduces a new approach to reduce memory consumption while maintaining quality.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 15. [Beyond Accuracy: The Role of Calibration in Self-Improving Large Language Models](https://arxiv.org/abs/2504.02902) <a id="link15"></a>
+
+**ArXiv ID:** 2504.02902
+
+**Authors:** Liangjie Huang, Dawei Li, Huan Liu, Lu Cheng
+
+**Abstract:** Large Language Models (LLMs) have demonstrated remarkable self-improvement capabilities, whereby models iteratively revise their outputs through self-generated feedback. While this reflective mechanism has shown promise in enhancing task performance, recent studies suggest that it may also introduce undesirable biases-most notably, self-bias, or the tendency of LLMs to favor their own prior outputs. In this work, we extend this line of inquiry by investigating the impact on confidence estimation. We evaluate three representative self-improvement paradigms-basic prompting, Chain-of-Thought (CoT) prompting, and tuning-based methods and find that iterative self-improvement can lead to systematic overconfidence, as evidenced by a steadily increasing Expected Calibration Error (ECE) and lower accuracy with high confidence. We then further explore the integration of confidence calibration techniques with self-improvement. Specifically, we compare three strategies: (1) applying calibration after multiple rounds of self-improvement, (2) calibrating before self-improvement, and (3) applying calibration iteratively at each self-improvement step. Our results show that iterative calibration is most effective in reducing ECE, yielding improved calibration. Our work pioneers the study of self-improving LLMs from a calibration perspective, offering valuable insights into balancing model performance and reliability.
+
+**Comment:** The paper explores the calibration of self-improving LLMs, which touches on foundational aspects of LLM behavior and interpretability. This aligns with the 'Large Language Models' criterion, particularly in understanding iterative self-improvement.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 16. [Noiser: Bounded Input Perturbations for Attributing Large Language Models](https://arxiv.org/abs/2504.02911) <a id="link16"></a>
+
+**ArXiv ID:** 2504.02911
+
+**Authors:** Mohammad Reza Ghasemi Madani, Aryo Pradipta Gema, Gabriele Sarti, Yu Zhao, Pasquale Minervini, Andrea Passerini
+
+**Abstract:** Feature attribution (FA) methods are common post-hoc approaches that explain how Large Language Models (LLMs) make predictions. Accordingly, generating faithful attributions that reflect the actual inner behavior of the model is crucial. In this paper, we introduce Noiser, a perturbation-based FA method that imposes bounded noise on each input embedding and measures the robustness of the model against partially noised input to obtain the input attributions. Additionally, we propose an answerability metric that employs an instructed judge model to assess the extent to which highly scored tokens suffice to recover the predicted output. Through a comprehensive evaluation across six LLMs and three tasks, we demonstrate that Noiser consistently outperforms existing gradient-based, attention-based, and perturbation-based FA methods in terms of both faithfulness and answerability, making it a robust and effective approach for explaining language model predictions.
+
+**Comment:** The paper introduces a perturbation-based feature attribution method for LLMs, which aligns with foundational research on LLM interpretability and behavior.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 17. [ConfEviSurrogate: A Conformalized Evidential Surrogate Model for Uncertainty Quantification](https://arxiv.org/abs/2504.02919) <a id="link17"></a>
+
+**ArXiv ID:** 2504.02919
+
+**Authors:** Yuhan Duan, Xin Zhao, Neng Shi, Han-Wei Shen
+
+**Abstract:** Surrogate models, crucial for approximating complex simulation data across sciences, inherently carry uncertainties that range from simulation noise to model prediction errors. Without rigorous uncertainty quantification, predictions become unreliable and hence hinder analysis. While methods like Monte Carlo dropout and ensemble models exist, they are often costly, fail to isolate uncertainty types, and lack guaranteed coverage in prediction intervals. To address this, we introduce ConfEviSurrogate, a novel Conformalized Evidential Surrogate Model that can efficiently learn high-order evidential distributions, directly predict simulation outcomes, separate uncertainty sources, and provide prediction intervals. A conformal prediction-based calibration step further enhances interval reliability to ensure coverage and improve efficiency. Our ConfEviSurrogate demonstrates accurate predictions and robust uncertainty estimates in diverse simulations, including cosmology, ocean dynamics, and fluid dynamics.
+
+**Comment:** The paper proposes a novel conformalized evidential surrogate model for uncertainty quantification, which aligns with foundational research in model efficiency and uncertainty modeling. It introduces a new calibration step and separation of uncertainty sources.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+# Paper Selection Prompt
+
+You are a helpful paper reading assistant whose job is to read daily posts from ArXiv and identify a few papers that your friend will enjoy reading.
+Your job is to carefully read the paper titles and abstracts below and find the ones that match the criteria below.
+
+## Instructions
+
+Write the response in JSONL format with {ARXIVID, COMMENT, RELEVANCE, NOVELTY} on each line, one for each paper.
+
+- ARXIVID: should be the ArXiv ID.
+- COMMENT: should identify whether there is a criteria that match the paper very closely. These matches should not be based on general terms like "language modeling" or "advancements" and should specifically refer to a criterion. No need to mention the non-matching criteria.
+- RELEVANCE: should be a score from 1-10.
+- NOVELTY: should be a score from 1-10.
+
+## Scoring Criteria
+
+> The "Relevance" score measures how closely the paper aligns with the core topics of the prompt.
+> The "Novelty" score assesses the originality and impact of the paper.
+> They are two **ORTHONORMAL** axes and **SHOULD NOT** be confused with each other.
+
+### Relevance Scoring
+
+- Relevance 9-10 (Completely Relevant)
+  - Focus: Fully aligned with core topics with no deviation, score the highest if contains relevant keywords in it.
+  - Examples: Papers focused on foundational methods or theoretical research, whose titles contain topic keywords like "MoE".
+
+- Relevance 7-8 (Relevant)
+  - Focus: Retain a solid link to the main research area, though may touch on peripheral elements.
+  - Examples: Papers research on the fundamental part of MoE through a less critical aspect like its behavior in GNN.
+
+- Relevance 5-6 (Borderline)
+  - Focus: Maintains a link to the core topic but also extends into at least one other domain/area beyond the primary focus.
+  - Examples: Work referencing MoE centered on reinforcement learning.
+
+- Relevance 3-4 (Irrelevant)
+  - Focus: Largely outside our interests with no association to our topics.
+  - Examples: Application-focused papers like using MoE to solve a problem in the real world.
+
+- Relevance 1-2 (Ignore)
+  - Focus: Purely unrelated to our topics. Completely a different domain.
+  - **Exception**: If the paper hints at a cutting-edge, radically new direction that could eventually transform the primary domain, consider a score of 9–10 despite initial appearances. (Usually a very rare concept that belongs to the fundamental research)
+
+### Novelty Scoring
+
+- Novelty 9-10 (Breakthrough)
+  - Definition: Groundbreaking methods/theory introducing new directions or solving major challenges.
+  - Examples: Entirely new paradigm for foundational models; a novel theory transforming representation learning.
+
+- Novelty 7-8 (Improvements)
+  - Definition: Substantial insights/enhancements, though not a full paradigm shift.
+  - Examples: Modifications on existing methods yielding significantly better results.
+
+- Novelty 5-6 (Borderline)
+  - Definition: Incremental contributions with possible long-term benefits, not immediately transformative.
+  - Examples: Moderately novel extension to an existing architecture; refining current methods without fundamentally altering them.
+
+- Novelty 3-4 (Tangential)
+  - Definition: Minor or domain-specific improvements with limited broader impact.
+  - Examples: Slight modifications to known methods with strange motivation; purely engineering jobs like a new benchmark/dataset.
+
+- Novelty 1-2 (Low)
+  - Definition: Minimal originality, applying standard approaches without real innovation.
+  - Examples: Using an off-the-shelf model without adding new insights; purely application-driven studies like finetuning a pretrained model using existing methods.
+
+## Papers
+
+[PAPER LIST HERE]
+
+## Relevant Topics
+
+Use the following relevance criteria to focus on foundational research. Keep **relevant** papers and filter out **irrelevant** ones. Avoid purely **application-driven** work.
+
+1. Representation Learning
+   - Relevant: Insights into how deep networks encode information, feature/dictionary learning, sparse/contrastive methods, training dynamics in neural networks.
+   - Irrelevant: Standard applications of known techniques lacking new theoretical or methodological contributions.
+
+2. Model Architecture
+   - Relevant: Mixture-of-Experts (MoE), Transformers, Conditional/Dynamic Networks, Autoencoders, analysis on existing architectures (like encoder-decoder), or other architectural innovations.
+   - Irrelevant: Merely using existing architectures for a certain task without insights into the structure themselves.
+
+3. Model Compression
+   - Relevant: Sparsity, pruning, quantization, low-rank approaches, KV cache, or other algorithmic/theoretical efficiency breakthroughs.
+   - Irrelevant: Straightforward applications of existing compression methods to new tasks.
+
+4. Large Language Models (LLMs)
+   - Relevant: Major breakthroughs in pretraining or architecture, theoretical insights into LLM behavior/interpretability.
+   - Irrelevant: Domain-specific usage (e.g., translation, jail-breaking), finetuning or inference tricks (e.g., instruction tuning, chain-of-thoughts, data mixing), or empirical dataset/benchmark studies and text-level analysis (e.g. hallucination, reasoning, safety).
+
+5. AI for Science
+   - Relevant: Foundational research in molecular/protein modeling, new generative paradigms, or significant architecture-level innovations.
+   - Irrelevant: Conventional, domain-specific applications without new theoretical perspectives.
+
+6. Emerging Trends
+   - Relevant: Cutting-edge theoretical work challenging established assumptions or introducing broad new paradigms.
+   - Irrelevant: Incremental improvements or trend-following without novel insights.
+
+**Keywords:**
+
+- Relevant: Mixture of Experts (MoE), Representation Learning, Compression/Efficiency, Sparse/Sparsity, Pruning, Quantization, Low-rank, Foundation Model, etc.
+- Irrelevant: Reinforcement Learning, Transfer Learning, Federated Learning, Online Learning, Diffusion Models, etc.
+- Application: Image Segmentation, Medical Imaging, 3D Vision, Video Understanding, Information Retrieval, Summarization, Recommendation Systems, Machine Translation, Speech Recognition, Signal Processing, Spatial/Temporal Modeling, Time Series, Knowledge Graph, etc.

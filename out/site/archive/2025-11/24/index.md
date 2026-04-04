@@ -1,0 +1,440 @@
+<div style="display: flex; align-items: flex-start; justify-content: space-between; width: 100%;"><div style="width: 33.33%; text-align: left;"><a href="../21"><img src="../../../assets/nav/day/2025-11-24-prev.svg" alt="Previous Day 2025-11-21"></a></div><div style="width: 33.33%; text-align: center;"><a href=".."><img src="../../../assets/nav/day/2025-11-24-center.svg" alt="Monthly Overview 2025-11"></a></div><div style="width: 33.33%; text-align: right;"><a href="../25"><img src="../../../assets/nav/day/2025-11-24-next.svg" alt="Next Day 2025-11-25"></a></div></div>
+
+# Personalized Daily ArXiv Papers 2025-11-24
+
+| *[gpt-5]*   | Prompt   | Completion   | Total   |
+|:-----------:|:--------:|:------------:|:-------:|
+| **Token**   | 28863    | 28013        | 56876   |
+| **Cost**    | $0.04    | $0.28        | $0.32   |
+
+Total arXiv papers: 355
+
+Total scanned papers: 197
+
+Total relevant papers: 18
+
+**Table of contents with paper titles:**
+
+1. [Selective Rotary Position Embedding](#user-content-link1)
+**Authors:** Sajad Movahedi, Timur Carstensen, Arshia Afzal, Frank Hutter, Antonio Orvieto, Volkan Cevher
+
+2. [A Unified Stability Analysis of SAM vs SGD: Role of Data Coherence and Emergence of Simplicity Bias](#user-content-link2)
+**Authors:** Wei-Kai Chang, Rajiv Khanna
+
+3. [Fermions and Supersymmetry in Neural Network Field Theories](#user-content-link3)
+**Authors:** Samuel Frank, James Halverson, Anindita Maiti, Fabian Ruehle
+
+4. [MuM: Multi-View Masked Image Modeling for 3D Vision](#user-content-link4)
+**Authors:** David Nordstr\"om, Johan Edstedt, Fredrik Kahl, Georg B\"okman
+
+5. [Revisiting Multimodal KV Cache Compression: A Frequency-Domain-Guided Outlier-KV-Aware Approach](#user-content-link5)
+**Authors:** Yaoxin Yang, Peng Ye, Xudong Tan, Chongjun Tu, Maosen Zhao, Jia Hao, Tao Chen
+
+6. [Training Foundation Models on a Full-Stack AMD Platform: Compute, Networking, and System Design](#user-content-link6)
+**Authors:** Quentin Anthony, Yury Tokpanov, Skyler Szot, Srivatsan Rajagopal, Praneeth Medepalli, Rishi Iyer, Vasu Shyam, Anna Golubeva, Ansh Chaurasia, Xiao Yang, Tomas Figliolia, Robert Washbourne, Drew Thorstensen, Amartey Pearson, Zack Grossbart, Jason van Patten, Emad Barsoum, Zhenyu Gu, Yao Fu, Beren Millidge
+
+7. [Gradient flow for deep equilibrium single-index models](#user-content-link7)
+**Authors:** Sanjit Dandapanthula, Aaditya Ramdas
+
+8. [Sparse Mixture-of-Experts for Multi-Channel Imaging: Are All Channel Interactions Required?](#user-content-link8)
+**Authors:** Sukwon Yun, Heming Yao, Burkhard Hoeckendorf, David Richmond, Aviv Regev, Russell Littman
+
+9. [Efficient Penalty-Based Bilevel Methods: Improved Analysis, Novel Updates, and Flatness Condition](#user-content-link9)
+**Authors:** Liuyuan Jiang, Quan Xiao, Lisha Chen, Tianyi Chen
+
+10. [Deep Improvement Supervision](#user-content-link10)
+**Authors:** Arip Asadulaev, Rayan Banerjee, Fakhri Karray, Martin Takac
+
+11. [Learning to Compress: Unlocking the Potential of Large Language Models for Text Representation](#user-content-link11)
+**Authors:** Yeqin Zhang, Yizheng Zhao, Chen Hu, Binxing Jiao, Daxin Jiang, Ruihang Miao, Cam-Tu Nguyen
+
+12. [InTAct: Interval-based Task Activation Consolidation for Continual Learning](#user-content-link12)
+**Authors:** Patryk Krukowski, Jan Miksa, Piotr Helm, Jacek Tabor, Pawe{\l} Wawrzy\'nski, Przemys{\l}aw Spurek
+
+13. [Topologic Attention Networks: Attending to Direct and Indirect Neighbors through Gaussian Belief Propagation](#user-content-link13)
+**Authors:** Marshall Rosenhoover, Huaming Zhang
+
+14. [Spanning Tree Autoregressive Visual Generation](#user-content-link14)
+**Authors:** Sangkyu Lee, Changho Lee, Janghoon Han, Hosung Song, Tackgeun You, Hwasup Lim, Stanley Jungkyu Choi, Honglak Lee, Youngjae Yu
+
+15. [Energy Scaling Laws for Diffusion Models: Quantifying Compute and Carbon Emissions in Image Generation](#user-content-link15)
+**Authors:** Aniketh Iyengar, Jiaqi Han, Boris Ruf, Vincent Grari, Marcin Detyniecki, Stefano Ermon
+
+16. [DISCA: A Digital In-memory Stochastic Computing Architecture Using A Compressed Bent-Pyramid Format](#user-content-link16)
+**Authors:** Shady Agwa, Yikang Shen, Shiwei Wang, Themis Prodromakis
+
+17. [Self-Supervised Learning by Curvature Alignment](#user-content-link17)
+**Authors:** Benyamin Ghojogh, M. Hadi Sepanj, Paul Fieguth
+
+18. [ManifoldFormer: Geometric Deep Learning for Neural Dynamics on Riemannian Manifolds](#user-content-link18)
+**Authors:** Yihang Fu, Lifang He, Qingyu Chen
+
+---
+
+## 1. [Selective Rotary Position Embedding](https://arxiv.org/abs/2511.17388) <a id="link1"></a>
+
+**ArXiv ID:** 2511.17388
+
+**Authors:** Sajad Movahedi, Timur Carstensen, Arshia Afzal, Frank Hutter, Antonio Orvieto, Volkan Cevher
+
+**Abstract:** Position information is essential for language modeling. In softmax transformers, Rotary Position Embeddings (\textit{RoPE}) encode positions through \textit{fixed-angle} rotations, while in linear transformers, order is handled via input-dependent (selective) gating that decays past key-value associations. Selectivity has generally been shown to improve language-related tasks. Inspired by this, we introduce \textit{Selective RoPE}, an \textit{input-dependent} rotary embedding mechanism, that generalizes \textit{RoPE}, and enables rotation in \textit{arbitrary angles} for both linear and softmax transformers. We show that softmax attention already performs a hidden form of these rotations on query-key pairs, uncovering an implicit positional structure. We further show that in state-space models and gated linear transformers, the real part manages forgetting while the imaginary part encodes positions through rotations. We validate our method by equipping gated transformers with \textit{Selective RoPE}, demonstrating that its input-dependent rotations improve performance in language modeling and on difficult sequence tasks like copying, state tracking, and retrieval.
+
+**Comment:** Model Architecture: Selective (input-dependent) Rotary Position Embeddings generalizing RoPE across softmax/linear transformers and SSMs with analysis of implicit rotations/forgetting.
+
+**Relevance:** 10
+**Novelty:** 8
+
+---
+
+## 2. [A Unified Stability Analysis of SAM vs SGD: Role of Data Coherence and Emergence of Simplicity Bias](https://arxiv.org/abs/2511.17378) <a id="link2"></a>
+
+**ArXiv ID:** 2511.17378
+
+**Authors:** Wei-Kai Chang, Rajiv Khanna
+
+**Abstract:** Understanding the dynamics of optimization in deep learning is increasingly important as models scale. While stochastic gradient descent (SGD) and its variants reliably find solutions that generalize well, the mechanisms driving this generalization remain unclear. Notably, these algorithms often prefer flatter or simpler minima, particularly in overparameterized settings. Prior work has linked flatness to generalization, and methods like Sharpness-Aware Minimization (SAM) explicitly encourage flatness, but a unified theory connecting data structure, optimization dynamics, and the nature of learned solutions is still lacking. In this work, we develop a linear stability framework that analyzes the behavior of SGD, random perturbations, and SAM, particularly in two layer ReLU networks. Central to our analysis is a coherence measure that quantifies how gradient curvature aligns across data points, revealing why certain minima are stable and favored during training.
+
+**Comment:** Training Dynamics Theory: unified stability analysis of SGD vs SAM using a data-coherence curvature measure, explaining flatness preference and simplicity bias.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 3. [Fermions and Supersymmetry in Neural Network Field Theories](https://arxiv.org/abs/2511.16741) <a id="link3"></a>
+
+**ArXiv ID:** 2511.16741
+
+**Authors:** Samuel Frank, James Halverson, Anindita Maiti, Fabian Ruehle
+
+**Abstract:** We introduce fermionic neural network field theories via Grassmann-valued neural networks. Free theories are obtained by a generalization of the Central Limit Theorem to Grassmann variables. This enables the realization of the free Dirac spinor at infinite width and a four fermion interaction at finite width. Yukawa couplings are introduced by breaking the statistical independence of the output weights for the fermionic and bosonic fields. A large class of interacting supersymmetric quantum mechanics and field theory models are introduced by super-affine transformations on the input that realize a superspace formalism.
+
+**Comment:** Foundational Architecture Theory: Grassmann-valued neural networks realizing fermionic field theories, infinite-width limits, and supersymmetry via super-affine transformations.
+
+**Relevance:** 8
+**Novelty:** 9
+
+---
+
+## 4. [MuM: Multi-View Masked Image Modeling for 3D Vision](https://arxiv.org/abs/2511.17309) <a id="link4"></a>
+
+**ArXiv ID:** 2511.17309
+
+**Authors:** David Nordstr\"om, Johan Edstedt, Fredrik Kahl, Georg B\"okman
+
+**Abstract:** Self-supervised learning on images seeks to extract meaningful visual representations from unlabeled data. When scaled to large datasets, this paradigm has achieved state-of-the-art performance and the resulting trained models such as DINOv3 have seen widespread adoption. However, most prior efforts are optimized for semantic understanding rather than geometric reasoning. One important exception is Cross-View Completion, CroCo, which is a form of masked autoencoding (MAE) tailored for 3D understanding. In this work, we continue on the path proposed by CroCo and focus on learning features tailored for 3D vision. In a nutshell, we extend MAE to arbitrarily many views of the same scene. By uniformly masking all views and employing a lightweight decoder with inter-frame attention, our approach is inherently simpler and more scalable than CroCo. We evaluate the resulting model, MuM, extensively on downstream tasks including feedforward reconstruction, dense image matching and relative pose estimation, finding that it outperforms the state-of-the-art visual encoders DINOv3 and CroCo v2.
+
+**Comment:** Matches Representation Learning: multi-view masked autoencoding architecture with inter-frame attention tailored for 3D geometric features.
+
+**Relevance:** 9
+**Novelty:** 7
+
+---
+
+## 5. [Revisiting Multimodal KV Cache Compression: A Frequency-Domain-Guided Outlier-KV-Aware Approach](https://arxiv.org/abs/2511.16786) <a id="link5"></a>
+
+**ArXiv ID:** 2511.16786
+
+**Authors:** Yaoxin Yang, Peng Ye, Xudong Tan, Chongjun Tu, Maosen Zhao, Jia Hao, Tao Chen
+
+**Abstract:** Multimodal large language models suffer from substantial inference overhead since multimodal KV Cache grows proportionally with the visual input length. Existing multimodal KV Cache compression methods mostly rely on attention score to reduce cache size, which makes them are incompatible with established efficient attention kernels (e.g., FlashAttention) and ignores the contribution of value vectors to the attention output. In this work, we revisit multimodal KV Cache compression from the perspective of the KV matrices' distribution. First, we observe that frequency-domain energy of multimodal KV matrices is predominantly concentrated in low-frequency and extract this principal energy via a low-pass filter. Further, we find that removing KV pairs that deviate substantially from this principal energy leads to a pronounced performance drop, which we define as Outlier KVs. Considering Outlier KVs are more likely to encode features critical for inference, we propose FlashCache, a frequency-domain-guided, Outlier-KV-aware KV Cache compression framework. First, we introduce an Outlier KV Recognition Module that models the principal component of multimodal KV matrices in the frequency domain and preferentially retains KV pairs that significantly deviate from it. Furthermore, Dynamic Budget Allocation Module is designed to adaptively determine the per-layer KV Cache size to retain more Outlier KVs. Experiments on multiple MLLMs and benchmarks demonstrate that FlashCache outperforms state-of-the-art multimoal KV compression methods, achieving up to 1.69 times faster decoding with 80% lower KV memory usage while maintaining task performance.
+
+**Comment:** Model Compression and Efficiency: proposes frequency-domain, outlier-KV-aware KV cache compression for multimodal LLMs with dynamic per-layer budget; compatible with FlashAttention kernels.
+
+**Relevance:** 9
+**Novelty:** 7
+
+---
+
+## 6. [Training Foundation Models on a Full-Stack AMD Platform: Compute, Networking, and System Design](https://arxiv.org/abs/2511.17127) <a id="link6"></a>
+
+**ArXiv ID:** 2511.17127
+
+**Authors:** Quentin Anthony, Yury Tokpanov, Skyler Szot, Srivatsan Rajagopal, Praneeth Medepalli, Rishi Iyer, Vasu Shyam, Anna Golubeva, Ansh Chaurasia, Xiao Yang, Tomas Figliolia, Robert Washbourne, Drew Thorstensen, Amartey Pearson, Zack Grossbart, Jason van Patten, Emad Barsoum, Zhenyu Gu, Yao Fu, Beren Millidge
+
+**Abstract:** We report on the first large-scale mixture-of-experts (MoE) pretraining study on pure AMD hardware, utilizing both MI300X GPUs with Pollara interconnect. We distill practical guidance for both systems and model design. On the systems side, we deliver a comprehensive cluster and networking characterization: microbenchmarks for all core collectives (all-reduce, reduce-scatter, all-gather, broadcast) across message sizes and GPU counts on Pollara. To our knowledge, this is the first at this scale. We further provide MI300X microbenchmarks on kernel sizing and memory bandwidth to inform model design. On the modeling side, we introduce and apply MI300X-aware transformer sizing rules for attention and MLP blocks and justify MoE widths that jointly optimize training throughput and inference latency. We describe our training stack in depth, including often-ignored utilities such as fault-tolerance and checkpoint-reshaping, as well as detailed information on our training recipe. We also provide a preview of our model architecture and base model - ZAYA1 (760M active, 8.3B total parameters MoE) - which will be further improved upon in forthcoming papers. ZAYA1-base achieves performance comparable to leading base models such as Qwen3-4B and Gemma3-12B at its scale and larger, and outperforms models including Llama-3-8B and OLMoE across reasoning, mathematics, and coding benchmarks. Together, these results demonstrate that the AMD hardware, network, and software stack are mature and optimized enough for competitive large-scale pretraining.
+
+**Comment:** High Performance Computing and Model Architecture: large-scale MoE pretraining on AMD Pollara with detailed systems/networking microbenchmarks and MI300X-aware transformer/MoE sizing rules for throughput/latency.
+
+**Relevance:** 9
+**Novelty:** 7
+
+---
+
+## 7. [Gradient flow for deep equilibrium single-index models](https://arxiv.org/abs/2511.16976) <a id="link7"></a>
+
+**ArXiv ID:** 2511.16976
+
+**Authors:** Sanjit Dandapanthula, Aaditya Ramdas
+
+**Abstract:** Deep equilibrium models (DEQs) have recently emerged as a powerful paradigm for training infinitely deep weight-tied neural networks that achieve state of the art performance across many modern machine learning tasks. Despite their practical success, theoretically understanding the gradient descent dynamics for training DEQs remains an area of active research. In this work, we rigorously study the gradient descent dynamics for DEQs in the simple setting of linear models and single-index models, filling several gaps in the literature. We prove a conservation law for linear DEQs which implies that the parameters remain trapped on spheres during training and use this property to show that gradient flow remains well-conditioned for all time. We then prove linear convergence of gradient descent to a global minimizer for linear DEQs and deep equilibrium single-index models under appropriate initialization and with a sufficiently small step size. Finally, we validate our theoretical findings through experiments.
+
+**Comment:** Training Dynamics/Model Architecture: theoretical analysis of gradient flow and convergence for deep equilibrium (DEQ) and single-index models, including conservation law and linear convergence.
+
+**Relevance:** 9
+**Novelty:** 7
+
+---
+
+## 8. [Sparse Mixture-of-Experts for Multi-Channel Imaging: Are All Channel Interactions Required?](https://arxiv.org/abs/2511.17400) <a id="link8"></a>
+
+**ArXiv ID:** 2511.17400
+
+**Authors:** Sukwon Yun, Heming Yao, Burkhard Hoeckendorf, David Richmond, Aviv Regev, Russell Littman
+
+**Abstract:** Vision Transformers ($\text{ViTs}$) have become the backbone of vision foundation models, yet their optimization for multi-channel domains - such as cell painting or satellite imagery - remains underexplored. A key challenge in these domains is capturing interactions between channels, as each channel carries different information. While existing works have shown efficacy by treating each channel independently during tokenization, this approach naturally introduces a major computational bottleneck in the attention block - channel-wise comparisons leads to a quadratic growth in attention, resulting in excessive $\text{FLOPs}$ and high training cost. In this work, we shift focus from efficacy to the overlooked efficiency challenge in cross-channel attention and ask: "Is it necessary to model all channel interactions?". Inspired by the philosophy of Sparse Mixture-of-Experts ($\text{MoE}$), we propose MoE-ViT, a Mixture-of-Experts architecture for multi-channel images in $\text{ViTs}$, which treats each channel as an expert and employs a lightweight router to select only the most relevant experts per patch for attention. Proof-of-concept experiments on real-world datasets - JUMP-CP and So2Sat - demonstrate that $\text{MoE-ViT}$ achieves substantial efficiency gains without sacrificing, and in some cases enhancing, performance, making it a practical and attractive backbone for multi-channel imaging.
+
+**Comment:** Model Architecture and Efficiency: sparse Mixture-of-Experts treating channels as experts to reduce cross-channel attention cost in multi-channel ViTs.
+
+**Relevance:** 9
+**Novelty:** 7
+
+---
+
+## 9. [Efficient Penalty-Based Bilevel Methods: Improved Analysis, Novel Updates, and Flatness Condition](https://arxiv.org/abs/2511.16796) <a id="link9"></a>
+
+**ArXiv ID:** 2511.16796
+
+**Authors:** Liuyuan Jiang, Quan Xiao, Lisha Chen, Tianyi Chen
+
+**Abstract:** Penalty-based methods have become popular for solving bilevel optimization (BLO) problems, thanks to their effective first-order nature. However, they often require inner-loop iterations to solve the lower-level (LL) problem and small outer-loop step sizes to handle the increased smoothness induced by large penalty terms, leading to suboptimal complexity. This work considers the general BLO problems with coupled constraints (CCs) and leverages a novel penalty reformulation that decouples the upper- and lower-level variables. This yields an improved analysis of the smoothness constant, enabling larger step sizes and reduced iteration complexity for Penalty-Based Gradient Descent algorithms in ALTernating fashion (ALT-PBGD). Building on the insight of reduced smoothness, we propose PBGD-Free, a novel fully single-loop algorithm that avoids inner loops for the uncoupled constraint BLO. For BLO with CCs, PBGD-Free employs an efficient inner-loop with substantially reduced iteration complexity. Furthermore, we propose a novel curvature condition describing the "flatness" of the upper-level objective with respect to the LL variable. This condition relaxes the traditional upper-level Lipschitz requirement, enables smaller penalty constant choices, and results in a negligible penalty gradient term during upper-level variable updates. We provide rigorous convergence analysis and validate the method's efficacy through hyperparameter optimization for support vector machines and fine-tuning of large language models.
+
+**Comment:** Matches Optimization/Efficiency for training: improved penalty-based bilevel methods with larger steps, single-loop updates, and a flatness condition.
+
+**Relevance:** 8
+**Novelty:** 8
+
+---
+
+## 10. [Deep Improvement Supervision](https://arxiv.org/abs/2511.16886) <a id="link10"></a>
+
+**ArXiv ID:** 2511.16886
+
+**Authors:** Arip Asadulaev, Rayan Banerjee, Fakhri Karray, Martin Takac
+
+**Abstract:** Recently, it was shown that small, looped architectures, such as Tiny Recursive Models (TRMs), can outperform Large Language Models (LLMs) on complex reasoning tasks, including the Abstraction and Reasoning Corpus (ARC). In this work, we investigate a core question: how can we further improve the efficiency of these methods with minimal changes? To address this, we frame the latent reasoning of TRMs as a form of classifier-free guidance and implicit policy improvement algorithm. Building on these insights, we propose a novel training scheme that provides a target for each loop during training. We demonstrate that our approach significantly enhances training efficiency. Our method reduces the total number of forward passes by 18x and eliminates halting mechanisms, while maintaining quality comparable to standard TRMs. Notably, we achieve 24% accuracy on ARC-1 with only 0.8M parameters, outperforming most LLMs.
+
+**Comment:** Model Architecture/Training Efficiency: proposes a new supervision scheme for tiny recursive models that cuts forward passes 18x; insights into latent reasoning akin to classifier-free guidance.
+
+**Relevance:** 8
+**Novelty:** 8
+
+---
+
+## 11. [Learning to Compress: Unlocking the Potential of Large Language Models for Text Representation](https://arxiv.org/abs/2511.17129) <a id="link11"></a>
+
+**ArXiv ID:** 2511.17129
+
+**Authors:** Yeqin Zhang, Yizheng Zhao, Chen Hu, Binxing Jiao, Daxin Jiang, Ruihang Miao, Cam-Tu Nguyen
+
+**Abstract:** Text representation plays a critical role in tasks like clustering, retrieval, and other downstream applications. With the emergence of large language models (LLMs), there is increasing interest in harnessing their capabilities for this purpose. However, most of the LLMs are inherently causal and optimized for next-token prediction, making them suboptimal for producing holistic representations. To address this, recent studies introduced pretext tasks to adapt LLMs for text representation. Most of these tasks, however, rely on token-level prediction objectives, such as the masked next-token prediction (MNTP) used in LLM2Vec. In this work, we explore the untapped potential of context compression as a pretext task for unsupervised adaptation of LLMs. During compression pre-training, the model learns to generate compact memory tokens, which substitute the whole context for downstream sequence prediction. Experiments demonstrate that a well-designed compression objective can significantly enhance LLM-based text representations, outperforming models trained with token-level pretext tasks. Further improvements through contrastive learning produce a strong representation model (LLM2Comp) that outperforms contemporary LLM-based text encoders on a wide range of tasks while being more sample-efficient, requiring significantly less training data.
+
+**Comment:** Representation Learning: introduces a context-compression pretext objective that trains LLMs to produce compact memory tokens for holistic embeddings, further improved with contrastive learning.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 12. [InTAct: Interval-based Task Activation Consolidation for Continual Learning](https://arxiv.org/abs/2511.17439) <a id="link12"></a>
+
+**ArXiv ID:** 2511.17439
+
+**Authors:** Patryk Krukowski, Jan Miksa, Piotr Helm, Jacek Tabor, Pawe{\l} Wawrzy\'nski, Przemys{\l}aw Spurek
+
+**Abstract:** Continual learning aims to enable neural networks to acquire new knowledge without forgetting previously learned information. While recent prompt-based methods perform strongly in class-incremental settings, they remain vulnerable under domain shifts, where the input distribution changes but the label space remains fixed. This exposes a persistent problem known as representation drift. Shared representations evolve in ways that overwrite previously useful features and cause forgetting even when prompts isolate task-specific parameters. To address this issue, we introduce InTAct, a method that preserves functional behavior in shared layers without freezing parameters or storing past data. InTAct captures the characteristic activation ranges associated with previously learned tasks and constrains updates to ensure the network remains consistent within these regions, while still allowing for flexible adaptation elsewhere. In doing so, InTAct stabilizes the functional role of important neurons rather than directly restricting parameter values. The approach is architecture-agnostic and integrates seamlessly into existing prompt-based continual learning frameworks. By regulating representation changes where past knowledge is encoded, InTAct achieves a principled balance between stability and plasticity. Across diverse domain-incremental benchmarks, including DomainNet and ImageNet-R, InTAct consistently reduces representation drift and improves performance, increasing Average Accuracy by up to 8 percentage points over state-of-the-art baselines.
+
+**Comment:** Representation Learning/Continual Learning: constrains shared-layer activation intervals to stabilize representations and reduce drift without freezing parameters or replay.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 13. [Topologic Attention Networks: Attending to Direct and Indirect Neighbors through Gaussian Belief Propagation](https://arxiv.org/abs/2511.16871) <a id="link13"></a>
+
+**ArXiv ID:** 2511.16871
+
+**Authors:** Marshall Rosenhoover, Huaming Zhang
+
+**Abstract:** Graph Neural Networks rely on local message passing, which limits their ability to model long-range dependencies in graphs. Existing approaches extend this range through continuous-time dynamics or dense self-attention, but both suffer from high computational cost and limited scalability. We propose Topologic Attention Networks, a new framework that applies topologic attention, a probabilistic mechanism that learns how information should flow through both direct and indirect connections in a graph. Unlike conventional attention that depends on explicit pairwise interactions, topologic attention emerges from the learned information propagation of the graph, enabling unified reasoning over local and global relationships. This method achieves provides state-of-the-art performance across all measured baseline models. Our implementation is available at https://github.com/Marshall-Rosenhoover/Topologic-Attention-Networks.
+
+**Comment:** Model Architecture: introduces topologic attention derived from Gaussian belief propagation to attend over indirect neighbors, extending GNN receptive fields with improved scalability.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 14. [Spanning Tree Autoregressive Visual Generation](https://arxiv.org/abs/2511.17089) <a id="link14"></a>
+
+**ArXiv ID:** 2511.17089
+
+**Authors:** Sangkyu Lee, Changho Lee, Janghoon Han, Hosung Song, Tackgeun You, Hwasup Lim, Stanley Jungkyu Choi, Honglak Lee, Youngjae Yu
+
+**Abstract:** We present Spanning Tree Autoregressive (STAR) modeling, which can incorporate prior knowledge of images, such as center bias and locality, to maintain sampling performance while also providing sufficiently flexible sequence orders to accommodate image editing at inference. Approaches that expose randomly permuted sequence orders to conventional autoregressive (AR) models in visual generation for bidirectional context either suffer from a decline in performance or compromise the flexibility in sequence order choice at inference. Instead, STAR utilizes traversal orders of uniform spanning trees sampled in a lattice defined by the positions of image patches. Traversal orders are obtained through breadth-first search, allowing us to efficiently construct a spanning tree whose traversal order ensures that the connected partial observation of the image appears as a prefix in the sequence through rejection sampling. Through the tailored yet structured randomized strategy compared to random permutation, STAR preserves the capability of postfix completion while maintaining sampling performance without any significant changes to the model architecture widely adopted in the language AR modeling.
+
+**Comment:** Model Architecture: proposes spanning-tree autoregressive ordering for visual generation to retain bidirectional context and flexible conditioning without changing core AR architecture.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 15. [Energy Scaling Laws for Diffusion Models: Quantifying Compute and Carbon Emissions in Image Generation](https://arxiv.org/abs/2511.17031) <a id="link15"></a>
+
+**ArXiv ID:** 2511.17031
+
+**Authors:** Aniketh Iyengar, Jiaqi Han, Boris Ruf, Vincent Grari, Marcin Detyniecki, Stefano Ermon
+
+**Abstract:** The rapidly growing computational demands of diffusion models for image generation have raised significant concerns about energy consumption and environmental impact. While existing approaches to energy optimization focus on architectural improvements or hardware acceleration, there is a lack of principled methods to predict energy consumption across different model configurations and hardware setups. We propose an adaptation of Kaplan scaling laws to predict GPU energy consumption for diffusion models based on computational complexity (FLOPs). Our approach decomposes diffusion model inference into text encoding, iterative denoising, and decoding components, with the hypothesis that denoising operations dominate energy consumption due to their repeated execution across multiple inference steps. We conduct comprehensive experiments across four state-of-the-art diffusion models (Stable Diffusion 2, Stable Diffusion 3.5, Flux, and Qwen) on three GPU architectures (NVIDIA A100, A4000, A6000), spanning various inference configurations including resolution (256x256 to 1024x1024), precision (fp16/fp32), step counts (10-50), and classifier-free guidance settings. Our energy scaling law achieves high predictive accuracy within individual architectures (R-squared > 0.9) and exhibits strong cross-architecture generalization, maintaining high rank correlations across models and enabling reliable energy estimation for unseen model-hardware combinations. These results validate the compute-bound nature of diffusion inference and provide a foundation for sustainable AI deployment planning and carbon footprint estimation.
+
+**Comment:** Matches Model Efficiency/HPC: proposes energy scaling laws to predict GPU energy for diffusion inference across models and hardware.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 16. [DISCA: A Digital In-memory Stochastic Computing Architecture Using A Compressed Bent-Pyramid Format](https://arxiv.org/abs/2511.17265) <a id="link16"></a>
+
+**ArXiv ID:** 2511.17265
+
+**Authors:** Shady Agwa, Yikang Shen, Shiwei Wang, Themis Prodromakis
+
+**Abstract:** Nowadays, we are witnessing an Artificial Intelligence revolution that dominates the technology landscape in various application domains, such as healthcare, robotics, automotive, security, and defense. Massive-scale AI models, which mimic the human brain's functionality, typically feature millions and even billions of parameters through data-intensive matrix multiplication tasks. While conventional Von-Neumann architectures struggle with the memory wall and the end of Moore's Law, these AI applications are migrating rapidly towards the edge, such as in robotics and unmanned aerial vehicles for surveillance, thereby adding more constraints to the hardware budget of AI architectures at the edge. Although in-memory computing has been proposed as a promising solution for the memory wall, both analog and digital in-memory computing architectures suffer from substantial degradation of the proposed benefits due to various design limitations. We propose a new digital in-memory stochastic computing architecture, DISCA, utilizing a compressed version of the quasi-stochastic Bent-Pyramid data format. DISCA inherits the same computational simplicity of analog computing, while preserving the same scalability, productivity, and reliability of digital systems. Post-layout modeling results of DISCA show an energy efficiency of 3.59 TOPS/W per bit at 500 MHz using a commercial 180nm CMOS technology. Therefore, DISCA significantly improves the energy efficiency for matrix multiplication workloads by orders of magnitude if scaled and compared to its counterpart architectures.
+
+**Comment:** Matches High Performance Computing/Efficiency: digital in-memory stochastic computing with compressed Bent-Pyramid format for efficient matrix operations.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 17. [Self-Supervised Learning by Curvature Alignment](https://arxiv.org/abs/2511.17426) <a id="link17"></a>
+
+**ArXiv ID:** 2511.17426
+
+**Authors:** Benyamin Ghojogh, M. Hadi Sepanj, Paul Fieguth
+
+**Abstract:** Self-supervised learning (SSL) has recently advanced through non-contrastive methods that couple an invariance term with variance, covariance, or redundancy-reduction penalties. While such objectives shape first- and second-order statistics of the representation, they largely ignore the local geometry of the underlying data manifold. In this paper, we introduce CurvSSL, a curvature-regularized self-supervised learning framework, and its RKHS extension, kernel CurvSSL. Our approach retains a standard two-view encoder-projector architecture with a Barlow Twins-style redundancy-reduction loss on projected features, but augments it with a curvature-based regularizer. Each embedding is treated as a vertex whose $k$ nearest neighbors define a discrete curvature score via cosine interactions on the unit hypersphere; in the kernel variant, curvature is computed from a normalized local Gram matrix in an RKHS. These scores are aligned and decorrelated across augmentations by a Barlow-style loss on a curvature-derived matrix, encouraging both view invariance and consistency of local manifold bending. Experiments on MNIST and CIFAR-10 datasets with a ResNet-18 backbone show that curvature-regularized SSL yields competitive or improved linear evaluation performance compared to Barlow Twins and VICReg. Our results indicate that explicitly shaping local geometry is a simple and effective complement to purely statistical SSL regularizers.
+
+**Comment:** Representation Learning: introduces curvature-regularized SSL (and RKHS variant) aligning local manifold geometry alongside redundancy reduction.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 18. [ManifoldFormer: Geometric Deep Learning for Neural Dynamics on Riemannian Manifolds](https://arxiv.org/abs/2511.16828) <a id="link18"></a>
+
+**ArXiv ID:** 2511.16828
+
+**Authors:** Yihang Fu, Lifang He, Qingyu Chen
+
+**Abstract:** Existing EEG foundation models mainly treat neural signals as generic time series in Euclidean space, ignoring the intrinsic geometric structure of neural dynamics that constrains brain activity to low-dimensional manifolds. This fundamental mismatch between model assumptions and neural geometry limits representation quality and cross-subject generalization. ManifoldFormer addresses this limitation through a novel geometric deep learning framework that explicitly learns neural manifold representations. The architecture integrates three key innovations: a Riemannian VAE for manifold embedding that preserves geometric structure, a geometric Transformer with geodesic-aware attention mechanisms operating directly on neural manifolds, and a dynamics predictor leveraging neural ODEs for manifold-constrained temporal evolution. Extensive evaluation across four public datasets demonstrates substantial improvements over state-of-the-art methods, with 4.6-4.8% higher accuracy and 6.2-10.2% higher Cohen's Kappa, while maintaining robust cross-subject generalization. The geometric approach reveals meaningful neural patterns consistent with neurophysiological principles, establishing geometric constraints as essential for effective EEG foundation models.
+
+**Comment:** Model Architecture and Representation Learning: introduces a Riemannian VAE and geodesic-aware attention Transformer operating on manifolds, plus neural-ODE dynamics for manifold-constrained evolution.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+# Paper Selection Prompt
+
+## System Prompt
+
+> You are a helpful paper reading assistant whose job is to read daily posts from ArXiv and identify a few papers that your friend will enjoy reading.
+> Your job is to carefully read the paper titles and abstracts below and find the ones that match the criteria below.
+
+## User Prompt
+
+> ## Instructions
+> 
+> Write the response in JSONL format with {ARXIVID, COMMENT, RELEVANCE, NOVELTY} on each line, one for each paper.
+> 
+> - ARXIVID: should be the ArXiv ID.
+> - COMMENT: should identify whether there is a criteria that match the paper very closely. These matches should not be based on general terms like "language modeling" or "advancements" and should specifically refer to a criterion. No need to mention the non-matching criteria.
+> - RELEVANCE: should be a score from 1-10.
+> - NOVELTY: should be a score from 1-10.
+> 
+> ## Scoring Criteria
+> 
+> > The "Relevance" score measures how closely the paper aligns with the core topics of the prompt.
+> > The "Novelty" score assesses the originality and impact of the paper.
+> > They are two **ORTHONORMAL** axes and **SHOULD NOT** be confused with each other.
+> 
+> ### Relevance Scoring
+> 
+> - Relevance 9-10 (Completely Relevant)
+>   - Focus: Fully aligned with core topics with no deviation, score the highest if contains relevant keywords in it.
+>   - Examples: Papers focused on foundational methods or theoretical research, whose titles contain topic keywords like "MoE".
+> 
+> - Relevance 7-8 (Relevant)
+>   - Focus: Retain a solid link to the main research area, though may touch on peripheral elements.
+>   - Examples: Papers research on the fundamental part of MoE through a less critical aspect like its behavior in GNN.
+> 
+> - Relevance 5-6 (Borderline)
+>   - Focus: Maintains a link to the core topic but also extends into at least one other domain/area beyond the primary focus.
+>   - Examples: Work referencing MoE centered on reinforcement learning.
+> 
+> - Relevance 3-4 (Irrelevant)
+>   - Focus: Largely outside our interests with no association to our topics.
+>   - Examples: Application-focused papers like using MoE to solve a problem in the real world.
+> 
+> - Relevance 1-2 (Ignore)
+>   - Focus: Purely unrelated to our topics. Completely a different domain.
+>   - **Exception**: If the paper hints at a cutting-edge, radically new direction that could eventually transform the primary domain, consider a score of 9–10 despite initial appearances. (Usually a very rare concept that belongs to the fundamental research)
+> 
+> ### Novelty Scoring
+> 
+> - Novelty 9-10 (Breakthrough)
+>   - Definition: Groundbreaking methods/theory introducing new directions or solving major challenges.
+>   - Examples: Entirely new paradigm for foundational models; a novel theory transforming representation learning.
+> 
+> - Novelty 7-8 (Improvements)
+>   - Definition: Substantial insights/enhancements, though not a full paradigm shift.
+>   - Examples: Modifications on existing methods yielding significantly better results.
+> 
+> - Novelty 5-6 (Borderline)
+>   - Definition: Incremental contributions with possible long-term benefits, not immediately transformative.
+>   - Examples: Moderately novel extension to an existing architecture; refining current methods without fundamentally altering them.
+> 
+> - Novelty 3-4 (Tangential)
+>   - Definition: Minor or domain-specific improvements with limited broader impact.
+>   - Examples: Slight modifications to known methods with strange motivation; purely engineering jobs like a new benchmark/dataset.
+> 
+> - Novelty 1-2 (Low)
+>   - Definition: Minimal originality, applying standard approaches without real innovation.
+>   - Examples: Using an off-the-shelf model without adding new insights; purely application-driven studies like finetuning a pretrained model using existing methods.
+> 
+> ## Papers
+> 
+> [PAPER LIST HERE]
+> 
+> ## Relevant Topics
+> 
+> Use the following relevance criteria to focus on foundational research. Keep **relevant** papers and filter out **irrelevant** ones. Avoid purely **application-driven** work.
+> 
+> 1. Model Architecture
+>    - Relevant: Mixture-of-Experts (MoE), Transformers, Conditional/Dynamic Networks, Autoencoders, analysis/innovations on existing architectures.
+>    - Irrelevant: Merely using existing architectures for a certain task without insights into the structure themselves.
+> 
+> 2. Model Compression and Efficiency
+>    - Relevant: Sparsity, pruning, quantization, low-rank approaches, cache, or other algorithmic/theoretical efficiency breakthroughs.
+>    - Irrelevant: Straightforward applications of existing compression methods to new tasks.
+> 
+> 3. High Performance Computing
+>    - Relevant: Algorithmic or systems-level innovations enabling training of large-scale models, distributed training techniques, memory optimization.
+>    - Irrelevant: Incremental engineering improvements without novel algorithmic contributions.
+> 
+> 4. Representation Learning
+>    - Relevant: Insights into how deep networks encode information, feature/dictionary learning, sparse/contrastive methods, training dynamics in neural networks.
+>    - Irrelevant: Standard applications of known techniques lacking new theoretical or methodological contributions.
+> 
+> **Keywords:**
+> 
+> - Relevant: Mixture of Experts (MoE), Representation Learning, Compression/Efficiency, Sparse/Sparsity, Pruning, Quantization, Low-rank, Foundation Model, etc.
+> - Irrelevant: Reinforcement Learning, Transfer Learning, Federated Learning, Online Learning, Diffusion Models, etc.
+> - Application: Image Segmentation, Medical Imaging, 3D Vision, Video Understanding, Information Retrieval, Summarization, Recommendation Systems, Machine Translation, Speech Recognition, Signal Processing, Spatial/Temporal Modeling, Time Series, Knowledge Graph, etc.

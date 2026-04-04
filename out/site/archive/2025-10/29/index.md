@@ -1,0 +1,638 @@
+<div style="display: flex; align-items: flex-start; justify-content: space-between; width: 100%;"><div style="width: 33.33%; text-align: left;"><a href="../28"><img src="../../../assets/nav/day/2025-10-29-prev.svg" alt="Previous Day 2025-10-28"></a></div><div style="width: 33.33%; text-align: center;"><a href=".."><img src="../../../assets/nav/day/2025-10-29-center.svg" alt="Monthly Overview 2025-10"></a></div><div style="width: 33.33%; text-align: right;"><a href="../30"><img src="../../../assets/nav/day/2025-10-29-next.svg" alt="Next Day 2025-10-30"></a></div></div>
+
+# Personalized Daily ArXiv Papers 2025-10-29
+
+| *[gpt-5]*   | Prompt   | Completion   | Total   |
+|:-----------:|:--------:|:------------:|:-------:|
+| **Token**   | 52853    | 45118        | 97971   |
+| **Cost**    | $0.07    | $0.45        | $0.52   |
+
+Total arXiv papers: 627
+
+Total scanned papers: 378
+
+Total relevant papers: 29
+
+**Table of contents with paper titles:**
+
+1. [Non-Singularity of the Gradient Descent map for Neural Networks with Piecewise Analytic Activations](#user-content-link1)
+**Authors:** Alexandru Cr\u{a}ciun, Debarghya Ghoshdastidar
+
+2. [SALS: Sparse Attention in Latent Space for KV cache Compression](#user-content-link2)
+**Authors:** Junlin Mu, Hantao Huang, Jihang Zhang, Minghui Yu, Tao Wang, Yidong Li
+
+3. [Efficient Low Rank Attention for Long-Context Inference in Large Language Models](#user-content-link3)
+**Authors:** Tenghui Li, Guoxu Zhou, Xuyang Zhao, Yuning Qiu, Qibin Zhao
+
+4. [Statistical physics of deep learning: Optimal learning of a multi-layer perceptron near interpolation](#user-content-link4)
+**Authors:** Jean Barbier, Francesco Camilli, Minh-Toan Nguyen, Mauro Pastore, Rudy Skerk
+
+5. [Perception Learning: A Formal Separation of Sensory Representation Learning from Decision Learning](#user-content-link5)
+**Authors:** Suman Sanyal
+
+6. [The Cost of Robustness: Tighter Bounds on Parameter Complexity for Robust Memorization in ReLU Nets](#user-content-link6)
+**Authors:** Yujun Kim, Chaewon Moon, Chulhee Yun
+
+7. [ScaLoRA: Optimally Scaled Low-Rank Adaptation for Efficient High-Rank Fine-Tuning](#user-content-link7)
+**Authors:** Yilang Zhang, Xiaodong Yang, Yiwei Cai, Georgios B. Giannakis
+
+8. [Beyond Hidden-Layer Manipulation: Semantically-Aware Logit Interventions for Debiasing LLMs](#user-content-link8)
+**Authors:** Wei Xia
+
+9. [Does Object Binding Naturally Emerge in Large Pretrained Vision Transformers?](#user-content-link9)
+**Authors:** Yihao Li, Saeed Salehi, Lyle Ungar, Konrad P. Kording
+
+10. [From Memorization to Reasoning in the Spectrum of Loss Curvature](#user-content-link10)
+**Authors:** Jack Merullo, Srihita Vatsavaya, Lucius Bushnaq, Owen Lewis
+
+11. [FALQON: Accelerating LoRA Fine-tuning with Low-Bit Floating-Point Arithmetic](#user-content-link11)
+**Authors:** Kanghyun Choi, Hyeyoon Lee, SunJong Park, Dain Kwon, Jinho Lee
+
+12. [Eigenfunction Extraction for Ordered Representation Learning](#user-content-link12)
+**Authors:** Burak Var{\i}c{\i}, Che-Ping Tsai, Ritabrata Ray, Nicholas M. Boffi, Pradeep Ravikumar
+
+13. [LoRA-DA: Data-Aware Initialization for Low-Rank Adaptation via Asymptotic Analysis](#user-content-link13)
+**Authors:** Qingyue Zhang, Chang Chu, Tianren Peng, Qi Li, Xiangyang Luo, Zhihao Jiang, Shao-Lun Huang
+
+14. [Improving the Straight-Through Estimator with Zeroth-Order Information](#user-content-link14)
+**Authors:** Ningfeng Yang, Tor M. Aamodt
+
+15. [Kernelized Sparse Fine-Tuning with Bi-level Parameter Competition for Vision Models](#user-content-link15)
+**Authors:** Shufan Shen, Junshu Sun, Shuhui Wang, Qingming Huang
+
+16. [Transformers from Compressed Representations](#user-content-link16)
+**Authors:** Juan C. Leon Alcazar, Mattia Soldan, Mohammad Saatialsoruji, Alejandro Pardo, Hani Itani, Juan Camilo Perez, Bernard Ghanem
+
+17. [SpecKD: Speculative Decoding for Effective Knowledge Distillation of LLMs](#user-content-link17)
+**Authors:** Haiduo Huang, Jiangcheng Song, Yadong Zhang, Pengju Ren
+
+18. [The Structural Scalpel: Automated Contiguous Layer Pruning for Large Language Models](#user-content-link18)
+**Authors:** Yao Lu, Yuqi Li, Wenbin Xie, Shanqing Yu, Qi Xuan, Zhaowei Zhu, Shiping Wen
+
+19. [How do simple rotations affect the implicit bias of Adam?](#user-content-link19)
+**Authors:** Adela DePavia, Vasileios Charisopoulos, Rebecca Willett
+
+20. [An efficient probabilistic hardware architecture for diffusion-like models](#user-content-link20)
+**Authors:** Andra\v{z} Jelin\v{c}i\v{c}, Owen Lockwood, Akhil Garlapati, Guillaume Verdon, Trevor McCourt
+
+21. [A data free neural operator enabling fast inference of 2D and 3D Navier Stokes equations](#user-content-link21)
+**Authors:** Junho Choi, Teng-Yuan Chang, Namjung Kim, Youngjoon Hong
+
+22. [Bridging Function Approximation and Device Physics via Negative Differential Resistance Networks](#user-content-link22)
+**Authors:** Songyuan Li, Teng Wang, Jinrong Tang, Ruiqi Liu, Yuyao Lu, Feng Xu, Bin Gao, Xiangwei Zhu
+
+23. [All in one timestep: Enhancing Sparsity and Energy efficiency in Multi-level Spiking Neural Networks](#user-content-link23)
+**Authors:** Andrea Castagnetti, Alain Pegatoquet, Beno\^it Miramond
+
+24. [Verifying Large Language Models' Reasoning Paths via Correlation Matrix Rank](#user-content-link24)
+**Authors:** Jiayu Liu, Wei Dai, Zhenya Huang, Ning Miao, Enhong Chen
+
+25. [Debiasing Reward Models by Representation Learning with Guarantees](#user-content-link25)
+**Authors:** Ignavier Ng, Patrick Bl\"obaum, Siddharth Bhandari, Kun Zhang, Shiva Kasiviswanathan
+
+26. [Monotone and Separable Set Functions: Characterizations and Neural Models](#user-content-link26)
+**Authors:** Soutrik Sarangi, Yonatan Sverdlov, Nadav Dym, Abir De
+
+27. [A Physics-informed Multi-resolution Neural Operator](#user-content-link27)
+**Authors:** Sumanta Roy, Bahador Bahmani, Ioannis G. Kevrekidis, Michael D. Shields
+
+28. [VIKING: Deep variational inference with stochastic projections](#user-content-link28)
+**Authors:** Samuel G. Fadel, Hrittik Roy, Nicholas Kr\"amer, Yevgen Zainchkovskyy, Stas Syrota, Alejandro Valverde Mahou, Carl Henrik Ek, S{\o}ren Hauberg
+
+29. [Spatially Aware Linear Transformer (SAL-T) for Particle Jet Tagging](#user-content-link29)
+**Authors:** Aaron Wang, Zihan Zhao, Subash Katel, Vivekanand Gyanchand Sahu, Elham E Khoda, Abhijith Gandrakota, Jennifer Ngadiuba, Richard Cavanaugh, Javier Duarte
+
+---
+
+## 1. [Non-Singularity of the Gradient Descent map for Neural Networks with Piecewise Analytic Activations](https://arxiv.org/abs/2510.24466) <a id="link1"></a>
+
+**ArXiv ID:** 2510.24466
+
+**Authors:** Alexandru Cr\u{a}ciun, Debarghya Ghoshdastidar
+
+**Abstract:** The theory of training deep networks has become a central question of modern machine learning and has inspired many practical advancements. In particular, the gradient descent (GD) optimization algorithm has been extensively studied in recent years. A key assumption about GD has appeared in several recent works: the \emph{GD map is non-singular} -- it preserves sets of measure zero under preimages. Crucially, this assumption has been used to prove that GD avoids saddle points and maxima, and to establish the existence of a computable quantity that determines the convergence to global minima (both for GD and stochastic GD). However, the current literature either assumes the non-singularity of the GD map or imposes restrictive assumptions, such as Lipschitz smoothness of the loss (for example, Lipschitzness does not hold for deep ReLU networks with the cross-entropy loss) and restricts the analysis to GD with small step-sizes. In this paper, we investigate the neural network map as a function on the space of weights and biases. We also prove, for the first time, the non-singularity of the gradient descent (GD) map on the loss landscape of realistic neural network architectures (with fully connected, convolutional, or softmax attention layers) and piecewise analytic activations (which includes sigmoid, ReLU, leaky ReLU, etc.) for almost all step-sizes. Our work significantly extends the existing results on the convergence of GD and SGD by guaranteeing that they apply to practical neural network settings and has the potential to unlock further exploration of learning dynamics.
+
+**Comment:** Proves non-singularity of the GD map for realistic neural architectures (including attention/conv) with piecewise analytic activations—core training dynamics theory.
+
+**Relevance:** 10
+**Novelty:** 9
+
+---
+
+## 2. [SALS: Sparse Attention in Latent Space for KV cache Compression](https://arxiv.org/abs/2510.24273) <a id="link2"></a>
+
+**ArXiv ID:** 2510.24273
+
+**Authors:** Junlin Mu, Hantao Huang, Jihang Zhang, Minghui Yu, Tao Wang, Yidong Li
+
+**Abstract:** Large Language Models capable of handling extended contexts are in high demand, yet their inference remains challenging due to substantial Key-Value cache size and high memory bandwidth requirements. Previous research has demonstrated that KV cache exhibits low-rank characteristics within the hidden dimension, suggesting the potential for effective compression. However, due to the widely adopted Rotary Position Embedding mechanism in modern LLMs, naive low-rank compression suffers severe accuracy degradation or creates a new speed bottleneck, as the low-rank cache must first be reconstructed in order to apply RoPE. In this paper, we introduce two key insights: first, the application of RoPE to the key vectors increases their variance, which in turn results in a higher rank; second, after the key vectors are transformed into the latent space, they largely maintain their representation across most layers. Based on these insights, we propose the Sparse Attention in Latent Space framework. SALS projects the KV cache into a compact latent space via low-rank projection, and performs sparse token selection using RoPE-free query-key interactions in this space. By reconstructing only a small subset of important tokens, it avoids the overhead of full KV cache reconstruction. We comprehensively evaluate SALS on various tasks using two large-scale models: LLaMA2-7b-chat and Mistral-7b, and additionally verify its scalability on the RULER-128k benchmark with LLaMA3.1-8B-Instruct. Experimental results demonstrate that SALS achieves SOTA performance by maintaining competitive accuracy. Under different settings, SALS achieves 6.4-fold KV cache compression and 5.7-fold speed-up in the attention operator compared to FlashAttention2 on the 4K sequence. For the end-to-end throughput performance, we achieves 1.4-fold and 4.5-fold improvement compared to GPT-fast on 4k and 32K sequences, respectively.
+
+**Comment:** Model Compression and Efficiency: KV cache compression via latent-space sparse attention that bypasses RoPE-induced rank issues and avoids full reconstruction.
+
+**Relevance:** 10
+**Novelty:** 8
+
+---
+
+## 3. [Efficient Low Rank Attention for Long-Context Inference in Large Language Models](https://arxiv.org/abs/2510.23649) <a id="link3"></a>
+
+**ArXiv ID:** 2510.23649
+
+**Authors:** Tenghui Li, Guoxu Zhou, Xuyang Zhao, Yuning Qiu, Qibin Zhao
+
+**Abstract:** As the length of input text grows, the key-value (KV) cache in LLMs imposes prohibitive GPU memory costs and limits long-context inference on resource constrained devices. Existing approaches, such as KV quantization and pruning, reduce memory usage but suffer from numerical precision loss or suboptimal retention of key-value pairs. We introduce Low Rank Query and Key attention (LRQK), a two-stage framework that jointly decomposes the full-precision query and key matrices into compact rank-\(r\) factors during the prefill stage, and then uses these low-dimensional projections to compute proxy attention scores in \(\mathcal{O}(lr)\) time at each decode step. By selecting only the top-\(k\) tokens and a small fixed set of recent tokens, LRQK employs a mixed GPU-CPU cache with a hit-and-miss mechanism that transfers only missing full-precision KV pairs, thereby preserving exact attention outputs while reducing CPU-GPU data movement. Extensive experiments on the RULER and LongBench benchmarks with LLaMA-3-8B and Qwen2.5-7B demonstrate that LRQK matches or surpasses leading sparse-attention methods in long context settings, while delivering significant memory savings with minimal loss in accuracy. Our code is available at https://github.com/tenghuilee/LRQK.
+
+**Comment:** Model Compression and Efficiency: low-rank query/key decomposition with mixed GPU-CPU KV cache to reduce memory and transfers while preserving exact attention.
+
+**Relevance:** 10
+**Novelty:** 8
+
+---
+
+## 4. [Statistical physics of deep learning: Optimal learning of a multi-layer perceptron near interpolation](https://arxiv.org/abs/2510.24616) <a id="link4"></a>
+
+**ArXiv ID:** 2510.24616
+
+**Authors:** Jean Barbier, Francesco Camilli, Minh-Toan Nguyen, Mauro Pastore, Rudy Skerk
+
+**Abstract:** For three decades statistical physics has been providing a framework to analyse neural networks. A long-standing question remained on its capacity to tackle deep learning models capturing rich feature learning effects, thus going beyond the narrow networks or kernel methods analysed until now. We positively answer through the study of the supervised learning of a multi-layer perceptron. Importantly, (i) its width scales as the input dimension, making it more prone to feature learning than ultra wide networks, and more expressive than narrow ones or with fixed embedding layers; and (ii) we focus on the challenging interpolation regime where the number of trainable parameters and data are comparable, which forces the model to adapt to the task. We consider the matched teacher-student setting. It provides the fundamental limits of learning random deep neural network targets and helps in identifying the sufficient statistics describing what is learnt by an optimally trained network as the data budget increases. A rich phenomenology emerges with various learning transitions. With enough data optimal performance is attained through model's "specialisation" towards the target, but it can be hard to reach for training algorithms which get attracted by sub-optimal solutions predicted by the theory. Specialisation occurs inhomogeneously across layers, propagating from shallow towards deep ones, but also across neurons in each layer. Furthermore, deeper targets are harder to learn. Despite its simplicity, the Bayesian-optimal setting provides insights on how the depth, non-linearity and finite (proportional) width influence neural networks in the feature learning regime that are potentially relevant way beyond it.
+
+**Comment:** Representation Learning / Training Dynamics: statistical physics analysis of multi-layer perceptron feature learning and phase transitions near interpolation.
+
+**Relevance:** 9
+**Novelty:** 9
+
+---
+
+## 5. [Perception Learning: A Formal Separation of Sensory Representation Learning from Decision Learning](https://arxiv.org/abs/2510.24356) <a id="link5"></a>
+
+**ArXiv ID:** 2510.24356
+
+**Authors:** Suman Sanyal
+
+**Abstract:** We introduce Perception Learning (PeL), a paradigm that optimizes an agent's sensory interface $f_\phi:\mathcal{X}\to\mathcal{Z}$ using task-agnostic signals, decoupled from downstream decision learning $g_\theta:\mathcal{Z}\to\mathcal{Y}$. PeL directly targets label-free perceptual properties, such as stability to nuisances, informativeness without collapse, and controlled geometry, assessed via objective representation-invariant metrics. We formalize the separation of perception and decision, define perceptual properties independent of objectives or reparameterizations, and prove that PeL updates preserving sufficient invariants are orthogonal to Bayes task-risk gradients. Additionally, we provide a suite of task-agnostic evaluation metrics to certify perceptual quality.
+
+**Comment:** Representation Learning: formally separates perception from decision, defines representation-invariant perceptual metrics, and proves orthogonality to Bayes task-risk gradients.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 6. [The Cost of Robustness: Tighter Bounds on Parameter Complexity for Robust Memorization in ReLU Nets](https://arxiv.org/abs/2510.24643) <a id="link6"></a>
+
+**ArXiv ID:** 2510.24643
+
+**Authors:** Yujun Kim, Chaewon Moon, Chulhee Yun
+
+**Abstract:** We study the parameter complexity of robust memorization for $\mathrm{ReLU}$ networks: the number of parameters required to interpolate any given dataset with $\epsilon$-separation between differently labeled points, while ensuring predictions remain consistent within a $\mu$-ball around each training sample. We establish upper and lower bounds on the parameter count as a function of the robustness ratio $\rho = \mu / \epsilon$. Unlike prior work, we provide a fine-grained analysis across the entire range $\rho \in (0,1)$ and obtain tighter upper and lower bounds that improve upon existing results. Our findings reveal that the parameter complexity of robust memorization matches that of non-robust memorization when $\rho$ is small, but grows with increasing $\rho$.
+
+**Comment:** Model Architecture theory: tighter upper/lower bounds on parameter complexity for robust memorization in ReLU nets across the robustness ratio range.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 7. [ScaLoRA: Optimally Scaled Low-Rank Adaptation for Efficient High-Rank Fine-Tuning](https://arxiv.org/abs/2510.23818) <a id="link7"></a>
+
+**ArXiv ID:** 2510.23818
+
+**Authors:** Yilang Zhang, Xiaodong Yang, Yiwei Cai, Georgios B. Giannakis
+
+**Abstract:** As large language models (LLMs) continue to scale in size, the computational overhead has become a major bottleneck for task-specific fine-tuning. While low-rank adaptation (LoRA) effectively curtails this cost by confining the weight updates to a low-dimensional subspace, such a restriction can hinder effectiveness and slow convergence. This contribution deals with these limitations by accumulating progressively a high-rank weight update from consecutive low-rank increments. Specifically, the per update optimal low-rank matrix is identified to minimize the loss function and closely approximate full fine-tuning. To endow efficient and seamless optimization without restarting, this optimal choice is formed by appropriately scaling the columns of the original low-rank matrix. Rigorous performance guarantees reveal that the optimal scaling can be found analytically. Extensive numerical tests with popular LLMs scaling up to 12 billion parameters demonstrate a consistent performance gain and fast convergence relative to state-of-the-art LoRA variants on diverse tasks including natural language understanding, commonsense reasoning, and mathematical problem solving.
+
+**Comment:** Model Compression/Efficiency for fine-tuning: optimally scaled LoRA accumulates high-rank updates from low-rank increments with analytic scaling guarantees.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 8. [Beyond Hidden-Layer Manipulation: Semantically-Aware Logit Interventions for Debiasing LLMs](https://arxiv.org/abs/2510.23650) <a id="link8"></a>
+
+**ArXiv ID:** 2510.23650
+
+**Authors:** Wei Xia
+
+**Abstract:** We proposed Static and Dynamic -- two zero-shot logits-layer debiasing methods. Dynamic reduces bias by up to 70% with minimal fluency loss. Logits intervention outperforms hidden-layer approaches. We show semantic-aware logits intervention is stable and effective for debiasing aligned LLMs.
+
+**Comment:** Model Compression and Efficiency: introduces differentiable contiguous layer pruning with endpoint tuning for LLMs; compatible with quantization.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 9. [Does Object Binding Naturally Emerge in Large Pretrained Vision Transformers?](https://arxiv.org/abs/2510.24709) <a id="link9"></a>
+
+**ArXiv ID:** 2510.24709
+
+**Authors:** Yihao Li, Saeed Salehi, Lyle Ungar, Konrad P. Kording
+
+**Abstract:** Object binding, the brain's ability to bind the many features that collectively represent an object into a coherent whole, is central to human cognition. It groups low-level perceptual features into high-level object representations, stores those objects efficiently and compositionally in memory, and supports human reasoning about individual object instances. While prior work often imposes object-centric attention (e.g., Slot Attention) explicitly to probe these benefits, it remains unclear whether this ability naturally emerges in pre-trained Vision Transformers (ViTs). Intuitively, they could: recognizing which patches belong to the same object should be useful for downstream prediction and thus guide attention. Motivated by the quadratic nature of self-attention, we hypothesize that ViTs represent whether two patches belong to the same object, a property we term IsSameObject. We decode IsSameObject from patch embeddings across ViT layers using a similarity probe, which reaches over 90% accuracy. Crucially, this object-binding capability emerges reliably in self-supervised ViTs (DINO, MAE, CLIP), but markedly weaker in ImageNet-supervised models, suggesting that binding is not a trivial architectural artifact, but an ability acquired through specific pretraining objectives. We further discover that IsSameObject is encoded in a low-dimensional subspace on top of object features, and that this signal actively guides attention. Ablating IsSameObject from model activations degrades downstream performance and works against the learning objective, implying that emergent object binding naturally serves the pretraining objective. Our findings challenge the view that ViTs lack object binding and highlight how symbolic knowledge of "which parts belong together" emerges naturally in a connectionist system.
+
+**Comment:** Representation Learning: shows emergent object binding in ViT embeddings, identifies a low-dimensional subspace guiding attention, and validates via causal ablations.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 10. [From Memorization to Reasoning in the Spectrum of Loss Curvature](https://arxiv.org/abs/2510.24256) <a id="link10"></a>
+
+**ArXiv ID:** 2510.24256
+
+**Authors:** Jack Merullo, Srihita Vatsavaya, Lucius Bushnaq, Owen Lewis
+
+**Abstract:** We characterize how memorization is represented in transformer models and show that it can be disentangled in the weights of both language models (LMs) and vision transformers (ViTs) using a decomposition based on the loss landscape curvature. This insight is based on prior theoretical and empirical work showing that the curvature for memorized training points is much sharper than non memorized, meaning ordering weight components from high to low curvature can reveal a distinction without explicit labels. This motivates a weight editing procedure that suppresses far more recitation of untargeted memorized data more effectively than a recent unlearning method (BalancedSubnet), while maintaining lower perplexity. Since the basis of curvature has a natural interpretation for shared structure in model weights, we analyze the editing procedure extensively on its effect on downstream tasks in LMs, and find that fact retrieval and arithmetic are specifically and consistently negatively affected, even though open book fact retrieval and general logical reasoning is conserved. We posit these tasks rely heavily on specialized directions in weight space rather than general purpose mechanisms, regardless of whether those individual datapoints are memorized. We support this by showing a correspondence between task data's activation strength with low curvature components that we edit out, and the drop in task performance after the edit. Our work enhances the understanding of memorization in neural networks with practical applications towards removing it, and provides evidence for idiosyncratic, narrowly-used structures involved in solving tasks like math and fact retrieval.
+
+**Comment:** Representation Learning/Training Dynamics: disentangles memorization via loss-curvature-based weight decomposition and weight editing.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 11. [FALQON: Accelerating LoRA Fine-tuning with Low-Bit Floating-Point Arithmetic](https://arxiv.org/abs/2510.24061) <a id="link11"></a>
+
+**ArXiv ID:** 2510.24061
+
+**Authors:** Kanghyun Choi, Hyeyoon Lee, SunJong Park, Dain Kwon, Jinho Lee
+
+**Abstract:** Low-bit floating-point (FP) formats, such as FP8, provide significant acceleration and memory savings in model training thanks to native hardware support on modern GPUs and NPUs. However, we analyze that FP8 quantization offers speedup primarily for large-dimensional matrix multiplications, while inherent quantization overheads diminish speedup when applied to low-rank adaptation (LoRA), which uses small-dimensional matrices for efficient fine-tuning of large language models (LLMs). To address this limitation, we propose FALQON, a novel framework that eliminates the quantization overhead from separate LoRA computational paths by directly merging LoRA adapters into an FP8-quantized backbone during fine-tuning. Furthermore, we reformulate the forward and backward computations for merged adapters to significantly reduce quantization overhead, and introduce a row-wise proxy update mechanism that efficiently integrates substantial updates into the quantized backbone. Experimental evaluations demonstrate that FALQON achieves approximately a 3$\times$ training speedup over existing quantized LoRA methods with a similar level of accuracy, providing a practical solution for efficient large-scale model fine-tuning. Moreover, FALQON's end-to-end FP8 workflow removes the need for post-training quantization, facilitating efficient deployment. Code is available at https://github.com/iamkanghyunchoi/falqon.
+
+**Comment:** Model Compression and Efficiency: FP8 end-to-end LoRA fine-tuning by merging adapters into a quantized backbone and reducing quantization overhead.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 12. [Eigenfunction Extraction for Ordered Representation Learning](https://arxiv.org/abs/2510.24672) <a id="link12"></a>
+
+**ArXiv ID:** 2510.24672
+
+**Authors:** Burak Var{\i}c{\i}, Che-Ping Tsai, Ritabrata Ray, Nicholas M. Boffi, Pradeep Ravikumar
+
+**Abstract:** Recent advances in representation learning reveal that widely used objectives, such as contrastive and non-contrastive, implicitly perform spectral decomposition of a contextual kernel, induced by the relationship between inputs and their contexts. Yet, these methods recover only the linear span of top eigenfunctions of the kernel, whereas exact spectral decomposition is essential for understanding feature ordering and importance. In this work, we propose a general framework to extract ordered and identifiable eigenfunctions, based on modular building blocks designed to satisfy key desiderata, including compatibility with the contextual kernel and scalability to modern settings. We then show how two main methodological paradigms, low-rank approximation and Rayleigh quotient optimization, align with this framework for eigenfunction extraction. Finally, we validate our approach on synthetic kernels and demonstrate on real-world image datasets that the recovered eigenvalues act as effective importance scores for feature selection, enabling principled efficiency-accuracy tradeoffs via adaptive-dimensional representations.
+
+**Comment:** Framework for extracting ordered, identifiable eigenfunctions tied to contrastive/non-contrastive objectives—strong Representation Learning theory contribution leveraging low-rank and Rayleigh quotient ideas.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 13. [LoRA-DA: Data-Aware Initialization for Low-Rank Adaptation via Asymptotic Analysis](https://arxiv.org/abs/2510.24561) <a id="link13"></a>
+
+**ArXiv ID:** 2510.24561
+
+**Authors:** Qingyue Zhang, Chang Chu, Tianren Peng, Qi Li, Xiangyang Luo, Zhihao Jiang, Shao-Lun Huang
+
+**Abstract:** With the widespread adoption of LLMs, LoRA has become a dominant method for PEFT, and its initialization methods have attracted increasing attention. However, existing methods have notable limitations: many methods do not incorporate target-domain data, while gradient-based methods exploit data only at a shallow level by relying on one-step gradient decomposition, which remains unsatisfactory due to the weak empirical performance of the one-step fine-tuning model that serves as their basis, as well as the fact that these methods either lack a rigorous theoretical foundation or depend heavily on restrictive isotropic assumptions. In this paper, we establish a theoretical framework for data-aware LoRA initialization based on asymptotic analysis. Starting from a general optimization objective that minimizes the expectation of the parameter discrepancy between the fine-tuned and target models, we derive an optimization problem with two components: a bias term, which is related to the parameter distance between the fine-tuned and target models, and is approximated using a Fisher-gradient formulation to preserve anisotropy; and a variance term, which accounts for the uncertainty introduced by sampling stochasticity through the Fisher information. By solving this problem, we obtain an optimal initialization strategy for LoRA. Building on this theoretical framework, we develop an efficient algorithm, LoRA-DA, which estimates the terms in the optimization problem from a small set of target domain samples and obtains the optimal LoRA initialization. Empirical results across multiple benchmarks demonstrate that LoRA-DA consistently improves final accuracy over existing initialization methods. Additional studies show faster, more stable convergence, robustness across ranks, and only a small initialization overhead for LoRA-DA. The source code will be released upon publication.
+
+**Comment:** Data-aware LoRA initialization derived via asymptotic/Fisher analysis—matches Low-Rank Adaptation and Compression/Efficiency criteria.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 14. [Improving the Straight-Through Estimator with Zeroth-Order Information](https://arxiv.org/abs/2510.23926) <a id="link14"></a>
+
+**ArXiv ID:** 2510.23926
+
+**Authors:** Ningfeng Yang, Tor M. Aamodt
+
+**Abstract:** We study the problem of training neural networks with quantized parameters. Learning low-precision quantized parameters by enabling computation of gradients via the Straight-Through Estimator (STE) can be challenging. While the STE enables back-propagation, which is a first-order method, recent works have explored the use of zeroth-order (ZO) gradient descent for fine-tuning. We note that the STE provides high-quality biased gradients, and ZO gradients are unbiased but can be expensive. We thus propose First-Order-Guided Zeroth-Order Gradient Descent (FOGZO) that reduces STE bias while reducing computations relative to ZO methods. Empirically, we show FOGZO improves the tradeoff between quality and training time in Quantization-Aware Pre-Training. Specifically, versus STE at the same number of iterations, we show a 1-8\% accuracy improvement for DeiT Tiny/Small, 1-2\% accuracy improvement on ResNet 18/50, and 1-22 perplexity point improvement for LLaMA models with up to 0.3 billion parameters. For the same loss, FOGZO yields a 796$\times$ reduction in computation versus n-SPSA for a 2-layer MLP on MNIST. Code is available at https://github.com/1733116199/fogzo.
+
+**Comment:** Model Compression/Efficiency: quantization-aware training via FOGZO combining STE with zeroth-order information to reduce bias and compute.
+
+**Relevance:** 9
+**Novelty:** 7
+
+---
+
+## 15. [Kernelized Sparse Fine-Tuning with Bi-level Parameter Competition for Vision Models](https://arxiv.org/abs/2510.24037) <a id="link15"></a>
+
+**ArXiv ID:** 2510.24037
+
+**Authors:** Shufan Shen, Junshu Sun, Shuhui Wang, Qingming Huang
+
+**Abstract:** Parameter-efficient fine-tuning (PEFT) aims to adapt pre-trained vision models to downstream tasks. Among PEFT paradigms, sparse tuning achieves remarkable performance by adjusting only the weights most relevant to downstream tasks, rather than densely tuning the entire weight matrix. Current methods follow a two-stage paradigm. First, it locates task-relevant weights by gradient information, which overlooks the parameter adjustments during fine-tuning and limits the performance. Second, it updates only the located weights by applying a sparse mask to the gradient of the weight matrix, which results in high memory usage due to the storage of all weight matrices in the optimizer. In this paper, we propose a one-stage method named SNELLA to overcome the above limitations. For memory usage, SNELLA selectively updates the weight matrix by adding it to another sparse matrix that is merged by two low-rank learnable matrices. We extend the low-rank decomposition by introducing nonlinear kernel functions, thereby increasing the rank of the resulting merged matrix to prevent the interdependency among weight updates, enabling better adaptation to downstream tasks. For locating task-relevant weights, we propose an adaptive bi-level sparsity allocation mechanism that encourages weights to compete across and inside layers based on their importance scores in an end-to-end manner. Extensive experiments are conducted on classification, segmentation, and generation tasks using different pre-trained vision models. The results show that SNELLA achieves SOTA performance with low memory usage. Notably, SNELLA obtains 1.8% (91.9% v.s. 90.1%) higher Top-1 accuracy on the FGVC benchmark compared to SPT-LoRA. Compared to previous methods, SNELLA achieves a memory reduction of 31.1%-39.9% across models with parameter scales from 86M to 632M. Our source codes are available at https://github.com/ssfgunner/SNELL.
+
+**Comment:** Model Compression/Efficiency: sparse PEFT with kernelized low-rank updates and adaptive bi-level sparsity allocation, reducing memory while improving adaptation.
+
+**Relevance:** 9
+**Novelty:** 7
+
+---
+
+## 16. [Transformers from Compressed Representations](https://arxiv.org/abs/2510.23665) <a id="link16"></a>
+
+**ArXiv ID:** 2510.23665
+
+**Authors:** Juan C. Leon Alcazar, Mattia Soldan, Mohammad Saatialsoruji, Alejandro Pardo, Hani Itani, Juan Camilo Perez, Bernard Ghanem
+
+**Abstract:** Compressed file formats are the corner stone of efficient data storage and transmission, yet their potential for representation learning remains largely underexplored. We introduce TEMPEST (TransformErs froM comPressed rEpreSenTations), a method that exploits the inherent byte-stream structure of compressed files to design an effective tokenization and encoding strategy. By leveraging this compact encoding, a standard transformer can directly learn semantic representations from compressed data streams, bypassing the need for raw byte-level processing or full media decoding. Our proposal substantially reduces the number of tokens required for semantic classification, thereby lowering both computational complexity and memory usage. Through extensive experiments across diverse datasets, coding schemes, and modalities, we show that TEMPEST achieves accuracy competitive wit the state-of-the-art while delivering efficiency gains in memory and compute.
+
+**Comment:** Transformer efficiency via learning directly from compressed representations, reducing tokens/compute—matches the Compression/Efficiency criterion with an architectural tokenization strategy.
+
+**Relevance:** 9
+**Novelty:** 7
+
+---
+
+## 17. [SpecKD: Speculative Decoding for Effective Knowledge Distillation of LLMs](https://arxiv.org/abs/2510.24021) <a id="link17"></a>
+
+**ArXiv ID:** 2510.24021
+
+**Authors:** Haiduo Huang, Jiangcheng Song, Yadong Zhang, Pengju Ren
+
+**Abstract:** Knowledge Distillation (KD) has become a cornerstone technique for compressing Large Language Models (LLMs) into smaller, more efficient student models. However, conventional KD approaches typically apply the distillation loss uniformly across all tokens, regardless of the teacher's confidence. This indiscriminate mimicry can introduce noise, as the student is forced to learn from the teacher's uncertain or high-entropy predictions, which may ultimately harm student performance-especially when the teacher is much larger and more powerful. To address this, we propose Speculative Knowledge Distillation (SpecKD), a novel, plug-and-play framework that introduces a dynamic, token-level gating mechanism inspired by the "propose-and-verify" paradigm of speculative decoding. At each step, the student's token proposal is verified against the teacher's distribution; the distillation loss is selectively applied only to "accepted" tokens, while "rejected" tokens are masked out. Extensive experiments on diverse text generation tasks show that SpecKD consistently and significantly outperforms strong KD baselines, leading to more stable training and more capable student models, and achieving state-of-the-art results.
+
+**Comment:** Speculative Knowledge Distillation applies token-level gating for distillation loss—directly matches Compression/Efficiency via improved KD for LLMs.
+
+**Relevance:** 9
+**Novelty:** 7
+
+---
+
+## 18. [The Structural Scalpel: Automated Contiguous Layer Pruning for Large Language Models](https://arxiv.org/abs/2510.23652) <a id="link18"></a>
+
+**ArXiv ID:** 2510.23652
+
+**Authors:** Yao Lu, Yuqi Li, Wenbin Xie, Shanqing Yu, Qi Xuan, Zhaowei Zhu, Shiping Wen
+
+**Abstract:** Although large language models (LLMs) have achieved revolutionary breakthroughs in many fields, their large model size and high computational cost pose significant challenges for practical deployment on resource-constrained edge devices. To this end, layer pruning has been proposed to reduce the computational overhead by directly removing redundant layers. However, existing layer pruning methods typically rely on hand-crafted metrics to evaluate and remove individual layers, while ignoring the dependencies between layers. This can disrupt the model's information flow and severely degrade performance. To address these issues, we propose CLP, a novel continuous layer pruning framework that introduces two key innovations: a differentiable concave gate algorithm that automatically identifies the best continuous layer segments for pruning via gradient-based optimization; and a cutoff endpoint tuning strategy that effectively restores model performance by fine-tuning only the layers adjacent to the pruned segments. Extensive experiments across multiple model architectures (including LLaMA2, LLaMA3 and Qwen) and sizes (from $7$B to $70$B parameters) show that CLP significantly outperforms existing state-of-the-art baselines. For example, at a pruning rate of $20\%$, CLP achieves an average performance retention of $95.34\%$ on LLaMA3-70B, outperforming baselines by $4.29\%$-$30.52\%$. Furthermore, CLP can be seamlessly combined with quantization to further compress the model with only a slight performance loss.
+
+**Comment:** Model Compression and Efficiency: introduces a novel pruning framework with differentiable concave gates to select contiguous layer segments and a localized fine-tuning strategy; method-centric compression (pruning) with synergy to quantization.
+
+**Relevance:** 9
+**Novelty:** 7
+
+---
+
+## 19. [How do simple rotations affect the implicit bias of Adam?](https://arxiv.org/abs/2510.23804) <a id="link19"></a>
+
+**ArXiv ID:** 2510.23804
+
+**Authors:** Adela DePavia, Vasileios Charisopoulos, Rebecca Willett
+
+**Abstract:** Adaptive gradient methods such as Adam and Adagrad are widely used in machine learning, yet their effect on the generalization of learned models -- relative to methods like gradient descent -- remains poorly understood. Prior work on binary classification suggests that Adam exhibits a ``richness bias,'' which can help it learn nonlinear decision boundaries closer to the Bayes-optimal decision boundary relative to gradient descent. However, the coordinate-wise preconditioning scheme employed by Adam renders the overall method sensitive to orthogonal transformations of feature space. We show that this sensitivity can manifest as a reversal of Adam's competitive advantage: even small rotations of the underlying data distribution can make Adam forfeit its richness bias and converge to a linear decision boundary that is farther from the Bayes-optimal decision boundary than the one learned by gradient descent. To alleviate this issue, we show that a recently proposed reparameterization method -- which applies an orthogonal transformation to the optimization objective -- endows any first-order method with equivariance to data rotations, and we empirically demonstrate its ability to restore Adam's bias towards rich decision boundaries.
+
+**Comment:** Representation Learning / Training Dynamics: analyzes Adam’s implicit bias under rotations and uses an equivariant reparameterization to restore rotation invariance.
+
+**Relevance:** 8
+**Novelty:** 8
+
+---
+
+## 20. [An efficient probabilistic hardware architecture for diffusion-like models](https://arxiv.org/abs/2510.23972) <a id="link20"></a>
+
+**ArXiv ID:** 2510.23972
+
+**Authors:** Andra\v{z} Jelin\v{c}i\v{c}, Owen Lockwood, Akhil Garlapati, Guillaume Verdon, Trevor McCourt
+
+**Abstract:** The proliferation of probabilistic AI has promoted proposals for specialized stochastic computers. Despite promising efficiency gains, these proposals have failed to gain traction because they rely on fundamentally limited modeling techniques and exotic, unscalable hardware. In this work, we address these shortcomings by proposing an all-transistor probabilistic computer that implements powerful denoising models at the hardware level. A system-level analysis indicates that devices based on our architecture could achieve performance parity with GPUs on a simple image benchmark using approximately 10,000 times less energy.
+
+**Comment:** High Performance Computing/Efficiency: proposes an all-transistor probabilistic architecture implementing denoising models with orders-of-magnitude energy reduction.
+
+**Relevance:** 8
+**Novelty:** 8
+
+---
+
+## 21. [A data free neural operator enabling fast inference of 2D and 3D Navier Stokes equations](https://arxiv.org/abs/2510.23936) <a id="link21"></a>
+
+**ArXiv ID:** 2510.23936
+
+**Authors:** Junho Choi, Teng-Yuan Chang, Namjung Kim, Youngjoon Hong
+
+**Abstract:** Ensemble simulations of high-dimensional flow models (e.g., Navier Stokes type PDEs) are computationally prohibitive for real time applications. Neural operators enable fast inference but are limited by costly data requirements and poor generalization to 3D flows. We present a data-free operator network for the Navier Stokes equations that eliminates the need for paired solution data and enables robust, real time inference for large ensemble forecasting. The physics-grounded architecture takes initial and boundary conditions as well as forcing functions, yielding solutions robust to high variability and perturbations. Across 2D benchmarks and 3D test cases, the method surpasses prior neural operators in accuracy and, for ensembles, achieves greater efficiency than conventional numerical solvers. Notably, it delivers accurate solutions of the three dimensional Navier Stokes equations, a regime not previously demonstrated for data free neural operators. By uniting a numerically grounded architecture with the scalability of machine learning, this approach establishes a practical pathway toward data free, high fidelity PDE surrogates for end to end scientific simulation and prediction.
+
+**Comment:** Model Architecture/Efficiency: physics-grounded, data-free neural operator for Navier–Stokes enabling fast, robust inference (including 3D) without paired solution data.
+
+**Relevance:** 8
+**Novelty:** 8
+
+---
+
+## 22. [Bridging Function Approximation and Device Physics via Negative Differential Resistance Networks](https://arxiv.org/abs/2510.23638) <a id="link22"></a>
+
+**ArXiv ID:** 2510.23638
+
+**Authors:** Songyuan Li, Teng Wang, Jinrong Tang, Ruiqi Liu, Yuyao Lu, Feng Xu, Bin Gao, Xiangwei Zhu
+
+**Abstract:** Achieving fully analog neural computation requires hardware that can natively implement both linear and nonlinear operations with high efficiency. While analogue matrix-vector multiplication has advanced via compute-in-memory architectures, nonlinear activation functions remain a bottleneck, often requiring digital or hybrid solutions. Inspired by the Kolmogorov-Arnold framework, we propose KANalogue, a fully analogue implementation of Kolmogorov-Arnold Networks (KANs) using negative differential resistance devices as physical realizations of learnable univariate basis functions. By leveraging the intrinsic negative differential resistance characteristics of tunnel diodes fabricated from NbSi2N4/HfSi2N4 heterostructures, we construct coordinate-wise nonlinearities with distinct curvature and support profiles. We extract I-V data from fabricated armchair and zigzag devices, fit high-order polynomials to emulate diode behavior in software, and train KANs on vision benchmarks using these learned basis functions. Our results demonstrate that KANalogue can approximate complex functions with minimal parameters while maintaining classification accuracy competitive with digital baselines. This work bridges device-level physics and function approximation theory, charting a path toward scalable, energy-efficient analogue machine learning systems.
+
+**Comment:** Model Architecture + Efficiency/Hardware: analog implementation of Kolmogorov–Arnold Networks using negative differential resistance devices for learnable nonlinearities.
+
+**Relevance:** 8
+**Novelty:** 8
+
+---
+
+## 23. [All in one timestep: Enhancing Sparsity and Energy efficiency in Multi-level Spiking Neural Networks](https://arxiv.org/abs/2510.24637) <a id="link23"></a>
+
+**ArXiv ID:** 2510.24637
+
+**Authors:** Andrea Castagnetti, Alain Pegatoquet, Beno\^it Miramond
+
+**Abstract:** Spiking Neural Networks (SNNs) are one of the most promising bio-inspired neural networks models and have drawn increasing attention in recent years. The event-driven communication mechanism of SNNs allows for sparse and theoretically low-power operations on dedicated neuromorphic hardware. However, the binary nature of instantaneous spikes also leads to considerable information loss in SNNs, resulting in accuracy degradation. To address this issue, we propose a multi-level spiking neuron model able to provide both low-quantization error and minimal inference latency while approaching the performance of full precision Artificial Neural Networks (ANNs). Experimental results with popular network architectures and datasets, show that multi-level spiking neurons provide better information compression, allowing therefore a reduction in latency without performance loss. When compared to binary SNNs on image classification scenarios, multi-level SNNs indeed allow reducing by 2 to 3 times the energy consumption depending on the number of quantization intervals. On neuromorphic data, our approach allows us to drastically reduce the inference latency to 1 timestep, which corresponds to a compression factor of 10 compared to previously published results. At the architectural level, we propose a new residual architecture that we call Sparse-ResNet. Through a careful analysis of the spikes propagation in residual connections we highlight a spike avalanche effect, that affects most spiking residual architectures. Using our Sparse-ResNet architecture, we can provide state-of-the-art accuracy results in image classification while reducing by more than 20% the network activity compared to the previous spiking ResNets.
+
+**Comment:** Model Architecture and Efficiency: proposes multi-level spiking neurons and a Sparse-ResNet to enhance sparsity and reduce energy/latency in SNNs.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 24. [Verifying Large Language Models' Reasoning Paths via Correlation Matrix Rank](https://arxiv.org/abs/2510.24299) <a id="link24"></a>
+
+**ArXiv ID:** 2510.24299
+
+**Authors:** Jiayu Liu, Wei Dai, Zhenya Huang, Ning Miao, Enhong Chen
+
+**Abstract:** Despite the strong reasoning ability of large language models~(LLMs), they are prone to errors and hallucinations. As a result, how to check their outputs effectively and efficiently has become a critical problem in their applications. Existing checking methods heavily rely on external resources, such as trained verifiers (e.g., process/outcome reward models) or elaborate prompts, which lead to high computational overhead and are only applicable to specific domains. In this paper, we investigate whether the internal behaviors of LLMs have already implied the credibility of their reasoning paths. Specifically, we find that the rank of the correlation matrix between the input problem and the output reasoning path is a robust indicator of reasoning correctness. Different from other correctness indicators for LLMs, the calculation of the correlation matrix only relies on the LLM itself, which avoids the hassle of training a separate model or designing complicated prompts. Based on it, we design a simple, plug-and-play Self-Indicator method to reweight candidate reasoning paths, which achieves significant performance improvements than other voting and verification methods with very few computational overhead. Our experiments across multiple LLMs of varying scales and model families have further shown the effectiveness of Self-Indicator. It achieves over 75% accuracy in distinguishing correct reasoning paths from incorrect ones, and, in turn, improves the accuracies on three reasoning benchmarks by more than 8%.
+
+**Comment:** Representation Learning: leverages internal correlation-matrix rank as a self-indicator to verify reasoning paths without external verifiers.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 25. [Debiasing Reward Models by Representation Learning with Guarantees](https://arxiv.org/abs/2510.23751) <a id="link25"></a>
+
+**ArXiv ID:** 2510.23751
+
+**Authors:** Ignavier Ng, Patrick Bl\"obaum, Siddharth Bhandari, Kun Zhang, Shiva Kasiviswanathan
+
+**Abstract:** Recent alignment techniques, such as reinforcement learning from human feedback, have been widely adopted to align large language models with human preferences by learning and leveraging reward models. In practice, these models often exploit spurious correlations, involving, e.g., response length, discrimination, sycophancy, and conceptual bias, which is a problem that has received increasing attention. In this work, we propose a principled framework that mitigates these biases in reward models while preserving the underlying factors that reflect intended preferences. We first provide a formulation of the data-generating process, assuming that the observed data (e.g., text) is generated from both spurious and non-spurious latent variables. We show that, interestingly, these non-spurious latent variables can be theoretically identified from data, regardless of whether a surrogate for the spurious latent variables is available. This further inspires a practical method that uses variational inference to recover these variables and leverages them to train reward models. Experiments on synthetic and real-world datasets demonstrate that our method effectively mitigates spurious correlation issues and yields more robust reward models.
+
+**Comment:** Representation Learning: identifies non-spurious latent variables and trains reward models on them with identifiability guarantees to mitigate spurious correlations.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 26. [Monotone and Separable Set Functions: Characterizations and Neural Models](https://arxiv.org/abs/2510.23634) <a id="link26"></a>
+
+**ArXiv ID:** 2510.23634
+
+**Authors:** Soutrik Sarangi, Yonatan Sverdlov, Nadav Dym, Abir De
+
+**Abstract:** Motivated by applications for set containment problems, we consider the following fundamental problem: can we design set-to-vector functions so that the natural partial order on sets is preserved, namely $S\subseteq T \text{ if and only if } F(S)\leq F(T) $. We call functions satisfying this property Monotone and Separating (MAS) set functions. % We establish lower and upper bounds for the vector dimension necessary to obtain MAS functions, as a function of the cardinality of the multisets and the underlying ground set. In the important case of an infinite ground set, we show that MAS functions do not exist, but provide a model called our which provably enjoys a relaxed MAS property we name "weakly MAS" and is stable in the sense of Holder continuity. We also show that MAS functions can be used to construct universal models that are monotone by construction and can approximate all monotone set functions. Experimentally, we consider a variety of set containment tasks. The experiments show the benefit of using our our model, in comparison with standard set models which do not incorporate set containment as an inductive bias. Our code is available in https://github.com/yonatansverdlov/Monotone-Embedding.
+
+**Comment:** Model Architecture/Representation Learning: characterizes monotone-and-separating set functions and proposes neural models preserving set-containment order with universality.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 27. [A Physics-informed Multi-resolution Neural Operator](https://arxiv.org/abs/2510.23810) <a id="link27"></a>
+
+**ArXiv ID:** 2510.23810
+
+**Authors:** Sumanta Roy, Bahador Bahmani, Ioannis G. Kevrekidis, Michael D. Shields
+
+**Abstract:** The predictive accuracy of operator learning frameworks depends on the quality and quantity of available training data (input-output function pairs), often requiring substantial amounts of high-fidelity data, which can be challenging to obtain in some real-world engineering applications. These datasets may be unevenly discretized from one realization to another, with the grid resolution varying across samples. In this study, we introduce a physics-informed operator learning approach by extending the Resolution Independent Neural Operator (RINO) framework to a fully data-free setup, addressing both challenges simultaneously. Here, the arbitrarily (but sufficiently finely) discretized input functions are projected onto a latent embedding space (i.e., a vector space of finite dimensions), using pre-trained basis functions. The operator associated with the underlying partial differential equations (PDEs) is then approximated by a simple multi-layer perceptron (MLP), which takes as input a latent code along with spatiotemporal coordinates to produce the solution in the physical space. The PDEs are enforced via a finite difference solver in the physical space. The validation and performance of the proposed method are benchmarked on several numerical examples with multi-resolution data, where input functions are sampled at varying resolutions, including both coarse and fine discretizations.
+
+**Comment:** Model Architecture/Efficiency: extends RINO to a physics-informed, data-free operator with multi-resolution inputs and PDE-enforced training.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 28. [VIKING: Deep variational inference with stochastic projections](https://arxiv.org/abs/2510.23684) <a id="link28"></a>
+
+**ArXiv ID:** 2510.23684
+
+**Authors:** Samuel G. Fadel, Hrittik Roy, Nicholas Kr\"amer, Yevgen Zainchkovskyy, Stas Syrota, Alejandro Valverde Mahou, Carl Henrik Ek, S{\o}ren Hauberg
+
+**Abstract:** Variational mean field approximations tend to struggle with contemporary overparametrized deep neural networks. Where a Bayesian treatment is usually associated with high-quality predictions and uncertainties, the practical reality has been the opposite, with unstable training, poor predictive power, and subpar calibration. Building upon recent work on reparametrizations of neural networks, we propose a simple variational family that considers two independent linear subspaces of the parameter space. These represent functional changes inside and outside the support of training data. This allows us to build a fully-correlated approximate posterior reflecting the overparametrization that tunes easy-to-interpret hyperparameters. We develop scalable numerical routines that maximize the associated evidence lower bound (ELBO) and sample from the approximate posterior. Empirically, we observe state-of-the-art performance across tasks, models, and datasets compared to a wide array of baseline methods. Our results show that approximate Bayesian inference applied to deep neural networks is far from a lost cause when constructing inference mechanisms that reflect the geometry of reparametrizations.
+
+**Comment:** Variational family reflecting network reparametrization for fully-correlated posteriors—foundational approximate Bayesian inference for deep nets (Representation Learning/Training Dynamics).
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 29. [Spatially Aware Linear Transformer (SAL-T) for Particle Jet Tagging](https://arxiv.org/abs/2510.23641) <a id="link29"></a>
+
+**ArXiv ID:** 2510.23641
+
+**Authors:** Aaron Wang, Zihan Zhao, Subash Katel, Vivekanand Gyanchand Sahu, Elham E Khoda, Abhijith Gandrakota, Jennifer Ngadiuba, Richard Cavanaugh, Javier Duarte
+
+**Abstract:** Transformers are very effective in capturing both global and local correlations within high-energy particle collisions, but they present deployment challenges in high-data-throughput environments, such as the CERN LHC. The quadratic complexity of transformer models demands substantial resources and increases latency during inference. In order to address these issues, we introduce the Spatially Aware Linear Transformer (SAL-T), a physics-inspired enhancement of the linformer architecture that maintains linear attention. Our method incorporates spatially aware partitioning of particles based on kinematic features, thereby computing attention between regions of physical significance. Additionally, we employ convolutional layers to capture local correlations, informed by insights from jet physics. In addition to outperforming the standard linformer in jet classification tasks, SAL-T also achieves classification results comparable to full-attention transformers, while using considerably fewer resources with lower latency during inference. Experiments on a generic point cloud classification dataset (ModelNet10) further confirm this trend. Our code is available at https://github.com/aaronw5/SAL-T4HEP.
+
+**Comment:** Spatially aware linear transformer variant that maintains linear attention and reduces complexity—Architecture/Efficiency contribution.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+# Paper Selection Prompt
+
+## System Prompt
+
+> You are a helpful paper reading assistant whose job is to read daily posts from ArXiv and identify a few papers that your friend will enjoy reading.
+> Your job is to carefully read the paper titles and abstracts below and find the ones that match the criteria below.
+
+## User Prompt
+
+> ## Instructions
+> 
+> Write the response in JSONL format with {ARXIVID, COMMENT, RELEVANCE, NOVELTY} on each line, one for each paper.
+> 
+> - ARXIVID: should be the ArXiv ID.
+> - COMMENT: should identify whether there is a criteria that match the paper very closely. These matches should not be based on general terms like "language modeling" or "advancements" and should specifically refer to a criterion. No need to mention the non-matching criteria.
+> - RELEVANCE: should be a score from 1-10.
+> - NOVELTY: should be a score from 1-10.
+> 
+> ## Scoring Criteria
+> 
+> > The "Relevance" score measures how closely the paper aligns with the core topics of the prompt.
+> > The "Novelty" score assesses the originality and impact of the paper.
+> > They are two **ORTHONORMAL** axes and **SHOULD NOT** be confused with each other.
+> 
+> ### Relevance Scoring
+> 
+> - Relevance 9-10 (Completely Relevant)
+>   - Focus: Fully aligned with core topics with no deviation, score the highest if contains relevant keywords in it.
+>   - Examples: Papers focused on foundational methods or theoretical research, whose titles contain topic keywords like "MoE".
+> 
+> - Relevance 7-8 (Relevant)
+>   - Focus: Retain a solid link to the main research area, though may touch on peripheral elements.
+>   - Examples: Papers research on the fundamental part of MoE through a less critical aspect like its behavior in GNN.
+> 
+> - Relevance 5-6 (Borderline)
+>   - Focus: Maintains a link to the core topic but also extends into at least one other domain/area beyond the primary focus.
+>   - Examples: Work referencing MoE centered on reinforcement learning.
+> 
+> - Relevance 3-4 (Irrelevant)
+>   - Focus: Largely outside our interests with no association to our topics.
+>   - Examples: Application-focused papers like using MoE to solve a problem in the real world.
+> 
+> - Relevance 1-2 (Ignore)
+>   - Focus: Purely unrelated to our topics. Completely a different domain.
+>   - **Exception**: If the paper hints at a cutting-edge, radically new direction that could eventually transform the primary domain, consider a score of 9–10 despite initial appearances. (Usually a very rare concept that belongs to the fundamental research)
+> 
+> ### Novelty Scoring
+> 
+> - Novelty 9-10 (Breakthrough)
+>   - Definition: Groundbreaking methods/theory introducing new directions or solving major challenges.
+>   - Examples: Entirely new paradigm for foundational models; a novel theory transforming representation learning.
+> 
+> - Novelty 7-8 (Improvements)
+>   - Definition: Substantial insights/enhancements, though not a full paradigm shift.
+>   - Examples: Modifications on existing methods yielding significantly better results.
+> 
+> - Novelty 5-6 (Borderline)
+>   - Definition: Incremental contributions with possible long-term benefits, not immediately transformative.
+>   - Examples: Moderately novel extension to an existing architecture; refining current methods without fundamentally altering them.
+> 
+> - Novelty 3-4 (Tangential)
+>   - Definition: Minor or domain-specific improvements with limited broader impact.
+>   - Examples: Slight modifications to known methods with strange motivation; purely engineering jobs like a new benchmark/dataset.
+> 
+> - Novelty 1-2 (Low)
+>   - Definition: Minimal originality, applying standard approaches without real innovation.
+>   - Examples: Using an off-the-shelf model without adding new insights; purely application-driven studies like finetuning a pretrained model using existing methods.
+> 
+> ## Papers
+> 
+> [PAPER LIST HERE]
+> 
+> ## Relevant Topics
+> 
+> Use the following relevance criteria to focus on foundational research. Keep **relevant** papers and filter out **irrelevant** ones. Avoid purely **application-driven** work.
+> 
+> 1. Model Architecture
+>    - Relevant: Mixture-of-Experts (MoE), Transformers, Conditional/Dynamic Networks, Autoencoders, analysis/innovations on existing architectures.
+>    - Irrelevant: Merely using existing architectures for a certain task without insights into the structure themselves.
+> 
+> 2. Model Compression and Efficiency
+>    - Relevant: Sparsity, pruning, quantization, low-rank approaches, cache, or other algorithmic/theoretical efficiency breakthroughs.
+>    - Irrelevant: Straightforward applications of existing compression methods to new tasks.
+> 
+> 3. High Performance Computing
+>    - Relevant: Algorithmic or systems-level innovations enabling training of large-scale models, distributed training techniques, memory optimization.
+>    - Irrelevant: Incremental engineering improvements without novel algorithmic contributions.
+> 
+> 4. Representation Learning
+>    - Relevant: Insights into how deep networks encode information, feature/dictionary learning, sparse/contrastive methods, training dynamics in neural networks.
+>    - Irrelevant: Standard applications of known techniques lacking new theoretical or methodological contributions.
+> 
+> **Keywords:**
+> 
+> - Relevant: Mixture of Experts (MoE), Representation Learning, Compression/Efficiency, Sparse/Sparsity, Pruning, Quantization, Low-rank, Foundation Model, etc.
+> - Irrelevant: Reinforcement Learning, Transfer Learning, Federated Learning, Online Learning, Diffusion Models, etc.
+> - Application: Image Segmentation, Medical Imaging, 3D Vision, Video Understanding, Information Retrieval, Summarization, Recommendation Systems, Machine Translation, Speech Recognition, Signal Processing, Spatial/Temporal Modeling, Time Series, Knowledge Graph, etc.

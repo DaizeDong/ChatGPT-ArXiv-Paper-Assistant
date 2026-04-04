@@ -1,0 +1,538 @@
+<div style="display: flex; align-items: flex-start; justify-content: space-between; width: 100%;"><div style="width: 33.33%; text-align: left;"><a href="../12"><img src="../../../assets/nav/day/2025-08-13-prev.svg" alt="Previous Day 2025-08-12"></a></div><div style="width: 33.33%; text-align: center;"><a href=".."><img src="../../../assets/nav/day/2025-08-13-center.svg" alt="Monthly Overview 2025-08"></a></div><div style="width: 33.33%; text-align: right;"><a href="../14"><img src="../../../assets/nav/day/2025-08-13-next.svg" alt="Next Day 2025-08-14"></a></div></div>
+
+# Personalized Daily ArXiv Papers 2025-08-13
+
+| *[gpt-4o]*   | Prompt   | Completion   | Total   |
+|:------------:|:--------:|:------------:|:-------:|
+| **Token**    | 34045    | 4029         | 38074   |
+| **Cost**     | $0.09    | $0.04        | $0.13   |
+
+Total arXiv papers: 447
+
+Total scanned papers: 281
+
+Total relevant papers: 23
+
+**Table of contents with paper titles:**
+
+1. [Understanding Transformers through the Lens of Pavlovian Conditioning](#user-content-link1)
+**Authors:** Mu Qiao
+
+2. [Topos Causal Models](#user-content-link2)
+**Authors:** Sridhar Mahadevan
+
+3. [Entangled in Representations: Mechanistic Investigation of Cultural Biases in Large Language Models](#user-content-link3)
+**Authors:** Haeun Yu, Seogyeong Jeong, Siddhesh Pawar, Jisu Shin, Jiho Jin, Junho Myung, Alice Oh, Isabelle Augenstein
+
+4. [$\text{M}^{2}$LLM: Multi-view Molecular Representation Learning with Large Language Models](#user-content-link4)
+**Authors:** Jiaxin Ju, Yizhen Zheng, Huan Yee Koh, Can Wang, Shirui Pan
+
+5. [Dynamic Rank Adjustment for Accurate and Efficient Neural Network Training](#user-content-link5)
+**Authors:** Hyuntak Shin, Aecheon Jung, Sunwoo Lee, Sungeun Hong
+
+6. [Topos Theory for Generative AI and LLMs](#user-content-link6)
+**Authors:** Sridhar Mahadevan
+
+7. [Towards Scalable Lottery Ticket Networks using Genetic Algorithms](#user-content-link7)
+**Authors:** Julian Sch\"onberger, Maximilian Zorn, Jonas N\"u{\ss}lein, Thomas Gabor, Philipp Altmann
+
+8. [Selective KV-Cache Sharing to Mitigate Timing Side-Channels in LLM Inference](#user-content-link8)
+**Authors:** Kexin Chu, Zecheng Lin, Dawei Xiang, Zixu Shen, Jianchang Su, Cheng Chu, Yiwei Yang, Wenhui Zhang, Wenfei Wu, Wei Zhang
+
+9. [Fast weight programming and linear transformers: from machine learning to neurobiology](#user-content-link9)
+**Authors:** Kazuki Irie, Samuel J. Gershman
+
+10. [Evaluating Contrast Localizer for Identifying Causal Unitsin Social & Mathematical Tasks in Language Models](#user-content-link10)
+**Authors:** Yassine Jamaa, Badr AlKhamissi, Satrajit Ghosh, Martin Schrimpf
+
+11. [Intrinsic Memory Agents: Heterogeneous Multi-Agent LLM Systems through Structured Contextual Memory](#user-content-link11)
+**Authors:** Sizhe Yuen, Francisco Gomez Medina, Ting Su, Yali Du, Adam J. Sobey
+
+12. [Language Models Can Understand Spectra: A Multimodal Model for Molecular Structure Elucidation](#user-content-link12)
+**Authors:** Yunyue Su, Jiahui Chen, Zao Jiang, Zhenyi Zhong, Liang Wang, Qiang Liu
+
+13. [Interpretable Reward Model via Sparse Autoencoder](#user-content-link13)
+**Authors:** Shuyi Zhang, Wei Shi, Sihang Li, Jiayi Liao, Tao Liang, Hengxing Cai, Xiang Wang
+
+14. [Elucidating Rectified Flow with Deterministic Sampler: Polynomial Discretization Complexity for Multi and One-step Models](#user-content-link14)
+**Authors:** Ruofeng Yang, Zhaoyu Zhu, Bo Jiang, Cheng Chen, Shuai Li
+
+15. [Towards Universal Neural Inference](#user-content-link15)
+**Authors:** Shreyas Bhat Brahmavar, Yang Li, Junier Oliva
+
+16. [Deep Neural Network Calibration by Reducing Classifier Shift with Stochastic Masking](#user-content-link16)
+**Authors:** Jiani Ni, He Zhao, Yibo Yang, Dandan Guo
+
+17. [EditMF: Drawing an Invisible Fingerprint for Your Large Language Models](#user-content-link17)
+**Authors:** Jiaxuan Wu, Yinghan Zhou, Wanli Peng, Yiming Xue, Juan Wen, Ping Zhong
+
+18. [Bio-Inspired Artificial Neural Networks based on Predictive Coding](#user-content-link18)
+**Authors:** Davide Casnici, Charlotte Frenkel, Justin Dauwels
+
+19. [ASPD: Unlocking Adaptive Serial-Parallel Decoding by Exploring Intrinsic Parallelism in LLMs](#user-content-link19)
+**Authors:** Keyu Chen, Zhifeng Shen, Daohai Yu, Haoqian Wu, Wei Wen, Jianfeng He, Ruizhi Qiao, Xing Sun
+
+20. [Superclass-Guided Representation Disentanglement for Spurious Correlation Mitigation](#user-content-link20)
+**Authors:** Chenruo Liu, Hongjun Liu, Zeyu Lai, Yiqiu Shen, Chen Zhao, Qi Lei
+
+21. [Train Long, Think Short: Curriculum Learning for Efficient Reasoning](#user-content-link21)
+**Authors:** Hasan Abed Al Kader Hammoud, Kumail Alhamoud, Abed Hammoud, Elie Bou-Zeid, Marzyeh Ghassemi, Bernard Ghanem
+
+22. [Wavelet Mixture of Experts for Time Series Forecasting](#user-content-link22)
+**Authors:** Zheng Zhou, Yu-Jie Xiong, Jia-Chen Zhang, Chun-Ming Xia, Xi-Jiong Xie
+
+23. [OverFill: Two-Stage Models for Efficient Language Model Decoding](#user-content-link23)
+**Authors:** Woojeong Kim, Junxiong Wang, Jing Nathan Yan, Mohamed Abdelfattah, Alexander M. Rush
+
+---
+
+## 1. [Understanding Transformers through the Lens of Pavlovian Conditioning](https://arxiv.org/abs/2508.08289) <a id="link1"></a>
+
+**ArXiv ID:** 2508.08289
+
+**Authors:** Mu Qiao
+
+**Abstract:** Transformer architectures have revolutionized artificial intelligence (AI) through their attention mechanisms, yet the computational principles underlying their success remain opaque. We present a novel theoretical framework that reinterprets the core computation of attention as Pavlovian conditioning. Our model finds a direct mathematical analogue in linear attention, which simplifies the analysis of the underlying associative process. We demonstrate that attention's queries, keys, and values can be mapped to the three elements of classical conditioning: test stimuli that probe associations, conditional stimuli (CS) that serve as retrieval cues, and unconditional stimuli (US) that contain response information. Through this lens, we suggest that each attention operation constructs a transient associative memory via a Hebbian rule, where CS-US pairs form dynamic associations that test stimuli can later retrieve. Our framework yields several theoretical insights grounded in this linearized model: (1) a capacity theorem showing that attention heads can store O($\sqrt{d_k}$) associations before interference degrades retrieval; (2) an error propagation analysis revealing fundamental architectural trade-offs of balancing model depth, width, and head redundancy to maintain reliability; and (3) an understanding of how biologically plausible learning rules could enhance transformer architectures. By establishing this deep connection, we suggest that the success of modern AI may stem not from architectural novelty alone, but from implementing computational principles that biology optimized over millions of years of evolution.
+
+**Comment:** The paper provides a novel theoretical framework for understanding transformers, which is relevant to model architecture.
+
+**Relevance:** 10
+**Novelty:** 9
+
+---
+
+## 2. [Topos Causal Models](https://arxiv.org/abs/2508.08295) <a id="link2"></a>
+
+**ArXiv ID:** 2508.08295
+
+**Authors:** Sridhar Mahadevan
+
+**Abstract:** We propose topos causal models (TCMs), a novel class of causal models that exploit the key properties of a topos category: they are (co)complete, meaning all (co)limits exist, they admit a subobject classifier, and allow exponential objects. The main goal of this paper is to show that these properties are central to many applications in causal inference. For example, subobject classifiers allow a categorical formulation of causal intervention, which creates sub-models. Limits and colimits allow causal diagrams of arbitrary complexity to be ``solved", using a novel interpretation of causal approximation. Exponential objects enable reasoning about equivalence classes of operations on causal models, such as covered edge reversal and causal homotopy. Analogous to structural causal models (SCMs), TCMs are defined by a collection of functions, each defining a ``local autonomous" causal mechanism that assemble to induce a unique global function from exogenous to endogenous variables. Since the category of TCMs is (co)complete, which we prove in this paper, every causal diagram has a ``solution" in the form of a (co)limit: this implies that any arbitrary causal model can be ``approximated" by some global function with respect to the morphisms going into or out of the diagram. Natural transformations are crucial in measuring the quality of approximation. In addition, we show that causal interventions are modeled by subobject classifiers: any sub-model is defined by a monic arrow into its parent model. Exponential objects permit reasoning about entire classes of causal equivalences and interventions. Finally, as TCMs form a topos, they admit an internal logic defined as a Mitchell-Benabou language with an associated Kripke-Joyal semantics. We show how to reason about causal models in TCMs using this internal logic.
+
+**Comment:** The introduction of topos causal models represents a novel theoretical framework for causal inference, aligning with emerging trends in foundational research.
+
+**Relevance:** 9
+**Novelty:** 9
+
+---
+
+## 3. [Entangled in Representations: Mechanistic Investigation of Cultural Biases in Large Language Models](https://arxiv.org/abs/2508.08879) <a id="link3"></a>
+
+**ArXiv ID:** 2508.08879
+
+**Authors:** Haeun Yu, Seogyeong Jeong, Siddhesh Pawar, Jisu Shin, Jiho Jin, Junho Myung, Alice Oh, Isabelle Augenstein
+
+**Abstract:** The growing deployment of large language models (LLMs) across diverse cultural contexts necessitates a better understanding of how the overgeneralization of less documented cultures within LLMs' representations impacts their cultural understanding. Prior work only performs extrinsic evaluation of LLMs' cultural competence, without accounting for how LLMs' internal mechanisms lead to cultural (mis)representation. To bridge this gap, we propose Culturescope, the first mechanistic interpretability-based method that probes the internal representations of LLMs to elicit the underlying cultural knowledge space. CultureScope utilizes a patching method to extract the cultural knowledge. We introduce a cultural flattening score as a measure of the intrinsic cultural biases. Additionally, we study how LLMs internalize Western-dominance bias and cultural flattening, which allows us to trace how cultural biases emerge within LLMs. Our experimental results reveal that LLMs encode Western-dominance bias and cultural flattening in their cultural knowledge space. We find that low-resource cultures are less susceptible to cultural biases, likely due to their limited training resources. Our work provides a foundation for future research on mitigating cultural biases and enhancing LLMs' cultural understanding. Our codes and data used for experiments are publicly available.
+
+**Comment:** The paper investigates cultural biases in LLMs using a mechanistic interpretability-based method, providing insights into LLM behavior and interpretability.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 4. [$\text{M}^{2}$LLM: Multi-view Molecular Representation Learning with Large Language Models](https://arxiv.org/abs/2508.08657) <a id="link4"></a>
+
+**ArXiv ID:** 2508.08657
+
+**Authors:** Jiaxin Ju, Yizhen Zheng, Huan Yee Koh, Can Wang, Shirui Pan
+
+**Abstract:** Accurate molecular property prediction is a critical challenge with wide-ranging applications in chemistry, materials science, and drug discovery. Molecular representation methods, including fingerprints and graph neural networks (GNNs), achieve state-of-the-art results by effectively deriving features from molecular structures. However, these methods often overlook decades of accumulated semantic and contextual knowledge. Recent advancements in large language models (LLMs) demonstrate remarkable reasoning abilities and prior knowledge across scientific domains, leading us to hypothesize that LLMs can generate rich molecular representations when guided to reason in multiple perspectives. To address these gaps, we propose $\text{M}^{2}$LLM, a multi-view framework that integrates three perspectives: the molecular structure view, the molecular task view, and the molecular rules view. These views are fused dynamically to adapt to task requirements, and experiments demonstrate that $\text{M}^{2}$LLM achieves state-of-the-art performance on multiple benchmarks across classification and regression tasks. Moreover, we demonstrate that representation derived from LLM achieves exceptional performance by leveraging two core functionalities: the generation of molecular embeddings through their encoding capabilities and the curation of molecular features through advanced reasoning processes.
+
+**Comment:** The paper proposes a multi-view framework for molecular representation learning using LLMs, which is relevant to foundational research in representation learning and AI for Science.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 5. [Dynamic Rank Adjustment for Accurate and Efficient Neural Network Training](https://arxiv.org/abs/2508.08625) <a id="link5"></a>
+
+**ArXiv ID:** 2508.08625
+
+**Authors:** Hyuntak Shin, Aecheon Jung, Sunwoo Lee, Sungeun Hong
+
+**Abstract:** Low-rank training methods reduce the number of trainable parameters by re-parameterizing the weights with matrix decompositions (e.g., singular value decomposition). However, enforcing a fixed low-rank structure caps the rank of the weight matrices and can hinder the model's ability to learn complex patterns. Furthermore, the effective rank of the model's weights tends to decline during training, and this drop is accelerated when the model is reparameterized into a low-rank structure. In this study, we argue that strategically interleaving full-rank training epochs within low-rank training epochs can effectively restore the rank of the model's weights. Based on our findings, we propose a general dynamic-rank training framework that is readily applicable to a wide range of neural-network tasks. We first describe how to adjust the rank of weight matrix to alleviate the inevitable rank collapse that arises during training, and then present extensive empirical results that validate our claims and demonstrate the efficacy of the proposed framework. Our empirical study shows that the proposed method achieves almost the same computational cost as SVD-based low-rank training while achieving a comparable accuracy to full-rank training across various benchmarks.
+
+**Comment:** The paper proposes a dynamic-rank training framework, relevant to model compression and efficiency.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 6. [Topos Theory for Generative AI and LLMs](https://arxiv.org/abs/2508.08293) <a id="link6"></a>
+
+**ArXiv ID:** 2508.08293
+
+**Authors:** Sridhar Mahadevan
+
+**Abstract:** We propose the design of novel categorical generative AI architectures (GAIAs) using topos theory, a type of category that is ``set-like": a topos has all (co)limits, is Cartesian closed, and has a subobject classifier. Previous theoretical results on the Transformer model have shown that it is a universal sequence-to-sequence function approximator, and dense in the space of all continuous functions with compact support on the Euclidean space of embeddings of tokens. Building on this theoretical result, we explore novel architectures for LLMs that exploit the property that the category of LLMs, viewed as functions, forms a topos. Previous studies of large language models (LLMs) have focused on daisy-chained linear architectures or mixture-of-experts. In this paper, we use universal constructions in category theory to construct novel LLM architectures based on new types of compositional structures. In particular, these new compositional structures are derived from universal properties of LLM categories, and include pullback, pushout, (co) equalizers, exponential objects, and subobject classifiers. We theoretically validate these new compositional structures by showing that the category of LLMs is (co)complete, meaning that all diagrams have solutions in the form of (co)limits. Building on this completeness result, we then show that the category of LLMs forms a topos, a ``set-like" category, which requires showing the existence of exponential objects as well as subobject classifiers. We use a functorial characterization of backpropagation to define a potential implementation of an LLM topos architecture.
+
+**Comment:** The paper introduces novel LLM architectures using topos theory, which is a significant theoretical insight into LLM behavior and architecture.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 7. [Towards Scalable Lottery Ticket Networks using Genetic Algorithms](https://arxiv.org/abs/2508.08877) <a id="link7"></a>
+
+**ArXiv ID:** 2508.08877
+
+**Authors:** Julian Sch\"onberger, Maximilian Zorn, Jonas N\"u{\ss}lein, Thomas Gabor, Philipp Altmann
+
+**Abstract:** Building modern deep learning systems that are not just effective but also efficient requires rethinking established paradigms for model training and neural architecture design. Instead of adapting highly overparameterized networks and subsequently applying model compression techniques to reduce resource consumption, a new class of high-performing networks skips the need for expensive parameter updates, while requiring only a fraction of parameters, making them highly scalable. The Strong Lottery Ticket Hypothesis posits that within randomly initialized, sufficiently overparameterized neural networks, there exist subnetworks that can match the accuracy of the trained original model-without any training. This work explores the usage of genetic algorithms for identifying these strong lottery ticket subnetworks. We find that for instances of binary and multi-class classification tasks, our approach achieves better accuracies and sparsity levels than the current state-of-the-art without requiring any gradient information. In addition, we provide justification for the need for appropriate evaluation metrics when scaling to more complex network architectures and learning tasks.
+
+**Comment:** The paper explores using genetic algorithms to identify strong lottery ticket subnetworks, which is relevant to model compression and efficiency.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 8. [Selective KV-Cache Sharing to Mitigate Timing Side-Channels in LLM Inference](https://arxiv.org/abs/2508.08438) <a id="link8"></a>
+
+**ArXiv ID:** 2508.08438
+
+**Authors:** Kexin Chu, Zecheng Lin, Dawei Xiang, Zixu Shen, Jianchang Su, Cheng Chu, Yiwei Yang, Wenhui Zhang, Wenfei Wu, Wei Zhang
+
+**Abstract:** Global KV-cache sharing has emerged as a key optimization for accelerating large language model (LLM) inference. However, it exposes a new class of timing side-channel attacks, enabling adversaries to infer sensitive user inputs via shared cache entries. Existing defenses, such as per-user isolation, eliminate leakage but degrade performance by up to 38.9% in time-to-first-token (TTFT), making them impractical for high-throughput deployment. To address this gap, we introduce SafeKV (Secure and Flexible KV Cache Sharing), a privacy-aware KV-cache management framework that selectively shares non-sensitive entries while confining sensitive content to private caches. SafeKV comprises three components: (i) a hybrid, multi-tier detection pipeline that integrates rule-based pattern matching, a general-purpose privacy detector, and context-aware validation; (ii) a unified radix-tree index that manages public and private entries across heterogeneous memory tiers (HBM, DRAM, SSD); and (iii) entropy-based access monitoring to detect and mitigate residual information leakage. Our evaluation shows that SafeKV mitigates 94% - 97% of timing-based side-channel attacks. Compared to per-user isolation method, SafeKV improves TTFT by up to 40.58% and throughput by up to 2.66X across diverse LLMs and workloads. SafeKV reduces cache-induced TTFT overhead from 50.41% to 11.74% on Qwen3-235B. By combining fine-grained privacy control with high cache reuse efficiency, SafeKV reclaims the performance advantages of global sharing while providing robust runtime privacy guarantees for LLM inference.
+
+**Comment:** The paper discusses KV-cache sharing, which is relevant to model compression and efficiency in LLMs.
+
+**Relevance:** 9
+**Novelty:** 7
+
+---
+
+## 9. [Fast weight programming and linear transformers: from machine learning to neurobiology](https://arxiv.org/abs/2508.08435) <a id="link9"></a>
+
+**ArXiv ID:** 2508.08435
+
+**Authors:** Kazuki Irie, Samuel J. Gershman
+
+**Abstract:** Recent advances in artificial neural networks for machine learning, and language modeling in particular, have established a family of recurrent neural network (RNN) architectures that, unlike conventional RNNs with vector-form hidden states, use two-dimensional (2D) matrix-form hidden states. Such 2D-state RNNs, known as Fast Weight Programmers (FWPs), can be interpreted as a neural network whose synaptic weights (called fast weights) dynamically change over time as a function of input observations, and serve as short-term memory storage; corresponding synaptic weight modifications are controlled or programmed by another network (the programmer) whose parameters are trained (e.g., by gradient descent). In this Primer, we review the technical foundations of FWPs, their computational characteristics, and their connections to transformers and state space models. We also discuss connections between FWPs and models of synaptic plasticity in the brain, suggesting a convergence of natural and artificial intelligence.
+
+**Comment:** The paper reviews Fast Weight Programmers and their connections to transformers, relevant to model architecture innovations.
+
+**Relevance:** 9
+**Novelty:** 7
+
+---
+
+## 10. [Evaluating Contrast Localizer for Identifying Causal Unitsin Social & Mathematical Tasks in Language Models](https://arxiv.org/abs/2508.08276) <a id="link10"></a>
+
+**ArXiv ID:** 2508.08276
+
+**Authors:** Yassine Jamaa, Badr AlKhamissi, Satrajit Ghosh, Martin Schrimpf
+
+**Abstract:** This work adapts a neuroscientific contrast localizer to pinpoint causally relevant units for Theory of Mind (ToM) and mathematical reasoning tasks in large language models (LLMs) and vision-language models (VLMs). Across 11 LLMs and 5 VLMs ranging in size from 3B to 90B parameters, we localize top-activated units using contrastive stimulus sets and assess their causal role via targeted ablations. We compare the effect of lesioning functionally selected units against low-activation and randomly selected units on downstream accuracy across established ToM and mathematical benchmarks. Contrary to expectations, low-activation units sometimes produced larger performance drops than the highly activated ones, and units derived from the mathematical localizer often impaired ToM performance more than those from the ToM localizer. These findings call into question the causal relevance of contrast-based localizers and highlight the need for broader stimulus sets and more accurately capture task-specific units.
+
+**Comment:** The paper explores the causal relevance of units in LLMs using a neuroscientific approach, which aligns with the interest in understanding LLM behavior and interpretability.
+
+**Relevance:** 9
+**Novelty:** 7
+
+---
+
+## 11. [Intrinsic Memory Agents: Heterogeneous Multi-Agent LLM Systems through Structured Contextual Memory](https://arxiv.org/abs/2508.08997) <a id="link11"></a>
+
+**ArXiv ID:** 2508.08997
+
+**Authors:** Sizhe Yuen, Francisco Gomez Medina, Ting Su, Yali Du, Adam J. Sobey
+
+**Abstract:** Multi-agent systems built on Large Language Models (LLMs) show exceptional promise for complex collaborative problem-solving, yet they face fundamental challenges stemming from context window limitations that impair memory consistency, role adherence, and procedural integrity. This paper introduces Intrinsic Memory Agents, a novel framework that addresses these limitations through structured agent-specific memories that evolve intrinsically with agent outputs. Specifically, our method maintains role-aligned memory templates that preserve specialized perspectives while focusing on task-relevant information. We benchmark our approach on the PDDL dataset, comparing its performance to existing state-of-the-art multi-agentic memory approaches and showing an improvement of 38.6\% with the highest token efficiency. An additional evaluation is performed on a complex data pipeline design task, we demonstrate that our approach produces higher quality designs when comparing 5 metrics: scalability, reliability, usability, cost-effectiveness and documentation with additional qualitative evidence of the improvements. Our findings suggest that addressing memory limitations through structured, intrinsic approaches can improve the capabilities of multi-agent LLM systems on structured planning tasks.
+
+**Comment:** The paper proposes a novel framework for addressing memory limitations in multi-agent LLM systems, which aligns with foundational research in LLM architecture.
+
+**Relevance:** 8
+**Novelty:** 8
+
+---
+
+## 12. [Language Models Can Understand Spectra: A Multimodal Model for Molecular Structure Elucidation](https://arxiv.org/abs/2508.08441) <a id="link12"></a>
+
+**ArXiv ID:** 2508.08441
+
+**Authors:** Yunyue Su, Jiahui Chen, Zao Jiang, Zhenyi Zhong, Liang Wang, Qiang Liu
+
+**Abstract:** Structure elucidation is a fundamental technique for understanding the microscopic composition of matter and is widely applied across various disciplines in the natural sciences and engineering. However, existing methods often rely heavily on prior databases or known structural information, making it difficult to resolve unknown structures. In addition, complex structures typically require the joint analysis of multiple spectroscopic modalities. This process heavily depends on expert domain knowledge and is often accompanied by high costs in terms of both time and instrumentation. To address these challenges, we propose SpectraLLM, the first large language model designed to support multi-modal spectroscopic joint reasoning. SpectraLLM is capable of processing either single or multiple spectroscopic inputs and performing end-to-end structure elucidation. By integrating continuous and discrete spectroscopic modalities into a shared semantic space, SpectraLLM learns to uncover substructural patterns that are consistent and complementary across spectra, enabling precise molecular structure elucidation. We pretrain and fine-tune SpectraLLM in the domain of small molecules, and evaluate it on six standardized, publicly available chemical datasets. The model achieves state-of-the-art performance, significantly outperforming existing approaches trained on single modalities. Notably, SpectraLLM demonstrates strong robustness and generalization even for single-spectrum inference, while its multi-modal reasoning capability further improves the accuracy of structural prediction.
+
+**Comment:** The paper introduces a multimodal model for molecular structure elucidation, which is relevant to AI for Science with a focus on foundational research in molecular modeling.
+
+**Relevance:** 8
+**Novelty:** 8
+
+---
+
+## 13. [Interpretable Reward Model via Sparse Autoencoder](https://arxiv.org/abs/2508.08746) <a id="link13"></a>
+
+**ArXiv ID:** 2508.08746
+
+**Authors:** Shuyi Zhang, Wei Shi, Sihang Li, Jiayi Liao, Tao Liang, Hengxing Cai, Xiang Wang
+
+**Abstract:** Large language models (LLMs) have been widely deployed across numerous fields. Reinforcement Learning from Human Feedback (RLHF) leverages reward models (RMs) as proxies for human preferences to align LLM behaviors with human values, making the accuracy, reliability, and interpretability of RMs critical for effective alignment. However, traditional RMs lack interpretability, offer limited insight into the reasoning behind reward assignments, and are inflexible toward user preference shifts. While recent multidimensional RMs aim for improved interpretability, they often fail to provide feature-level attribution and require costly annotations. To overcome these limitations, we introduce the Sparse Autoencoder-enhanced Reward Model (\textbf{SARM}), a novel architecture that integrates a pretrained Sparse Autoencoder (SAE) into a reward model. SARM maps the hidden activations of LLM-based RM into an interpretable, sparse, and monosemantic feature space, from which a scalar head aggregates feature activations to produce transparent and conceptually meaningful reward scores. Empirical evaluations demonstrate that SARM facilitates direct feature-level attribution of reward assignments, allows dynamic adjustment to preference shifts, and achieves superior alignment performance compared to conventional reward models. Our code is available at https://github.com/schrieffer-z/sarm.
+
+**Comment:** The paper introduces a Sparse Autoencoder-enhanced Reward Model, which is relevant to representation learning and model architecture due to its novel integration of sparse autoencoders for interpretability.
+
+**Relevance:** 8
+**Novelty:** 8
+
+---
+
+## 14. [Elucidating Rectified Flow with Deterministic Sampler: Polynomial Discretization Complexity for Multi and One-step Models](https://arxiv.org/abs/2508.08735) <a id="link14"></a>
+
+**ArXiv ID:** 2508.08735
+
+**Authors:** Ruofeng Yang, Zhaoyu Zhu, Bo Jiang, Cheng Chen, Shuai Li
+
+**Abstract:** Recently, rectified flow (RF)-based models have achieved state-of-the-art performance in many areas for both the multi-step and one-step generation. However, only a few theoretical works analyze the discretization complexity of RF-based models. Existing works either focus on flow-based models with stochastic samplers or establish complexity results that exhibit exponential dependence on problem parameters. In this work, under the realistic bounded support assumption, we prove the first polynomial discretization complexity for multi-step and one-step RF-based models with a deterministic sampler simultaneously. For the multi-step setting, inspired by the predictor-corrector framework of diffusion models, we introduce a Langevin process as a corrector and show that RF-based models can achieve better polynomial discretization complexity than diffusion models. To achieve this result, we conduct a detailed analysis of the RF-based model and explain why it is better than previous popular models, such as variance preserving (VP) and variance exploding (VE)-based models. Based on the observation of multi-step RF-based models, we further provide the first polynomial discretization complexity result for one-step RF-based models, improving upon prior results for one-step diffusion-based models. These findings mark the first step toward theoretically understanding the impressive empirical performance of RF-based models in both multi-step and one-step generation.
+
+**Comment:** The paper provides theoretical insights into rectified flow models, which is relevant to emerging trends in model architecture and theoretical understanding.
+
+**Relevance:** 8
+**Novelty:** 8
+
+---
+
+## 15. [Towards Universal Neural Inference](https://arxiv.org/abs/2508.09100) <a id="link15"></a>
+
+**ArXiv ID:** 2508.09100
+
+**Authors:** Shreyas Bhat Brahmavar, Yang Li, Junier Oliva
+
+**Abstract:** Real-world data often appears in diverse, disjoint forms -- with varying schemas, inconsistent semantics, and no fixed feature ordering -- making it challenging to build general-purpose models that can leverage information across datasets. We introduce ASPIRE, Arbitrary Set-based Permutation-Invariant Reasoning Engine, a Universal Neural Inference model for semantic reasoning and prediction over heterogeneous structured data. ASPIRE combines a permutation-invariant, set-based Transformer with a semantic grounding module that incorporates natural language descriptions, dataset metadata, and in-context examples to learn cross-dataset feature dependencies. This architecture allows ASPIRE to ingest arbitrary sets of feature--value pairs and support examples, align semantics across disjoint tables, and make predictions for any specified target. Once trained, ASPIRE generalizes to new inference tasks without additional tuning. In addition to delivering strong results across diverse benchmarks, ASPIRE naturally supports cost-aware active feature acquisition in an open-world setting, selecting informative features under test-time budget constraints for an arbitrary unseen dataset. These capabilities position ASPIRE as a step toward truly universal, semantics-aware inference over structured data.
+
+**Comment:** The paper introduces a universal neural inference model, which is relevant to representation learning and emerging trends in model architecture.
+
+**Relevance:** 8
+**Novelty:** 8
+
+---
+
+## 16. [Deep Neural Network Calibration by Reducing Classifier Shift with Stochastic Masking](https://arxiv.org/abs/2508.09116) <a id="link16"></a>
+
+**ArXiv ID:** 2508.09116
+
+**Authors:** Jiani Ni, He Zhao, Yibo Yang, Dandan Guo
+
+**Abstract:** In recent years, deep neural networks (DNNs) have shown competitive results in many fields. Despite this success, they often suffer from poor calibration, especially in safety-critical scenarios such as autonomous driving and healthcare, where unreliable confidence estimates can lead to serious consequences. Recent studies have focused on improving calibration by modifying the classifier, yet such efforts remain limited. Moreover, most existing approaches overlook calibration errors caused by underconfidence, which can be equally detrimental. To address these challenges, we propose MaC-Cal, a novel mask-based classifier calibration method that leverages stochastic sparsity to enhance the alignment between confidence and accuracy. MaC-Cal adopts a two-stage training scheme with adaptive sparsity, dynamically adjusting mask retention rates based on the deviation between confidence and accuracy. Extensive experiments show that MaC-Cal achieves superior calibration performance and robustness under data corruption, offering a practical and effective solution for reliable confidence estimation in DNNs.
+
+**Comment:** The paper introduces a novel mask-based classifier calibration method leveraging stochastic sparsity, which aligns with representation learning through insights into training dynamics and sparsity.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 17. [EditMF: Drawing an Invisible Fingerprint for Your Large Language Models](https://arxiv.org/abs/2508.08836) <a id="link17"></a>
+
+**ArXiv ID:** 2508.08836
+
+**Authors:** Jiaxuan Wu, Yinghan Zhou, Wanli Peng, Yiming Xue, Juan Wen, Ping Zhong
+
+**Abstract:** Training large language models (LLMs) is resource-intensive and expensive, making protecting intellectual property (IP) for LLMs crucial. Recently, embedding fingerprints into LLMs has emerged as a prevalent method for establishing model ownership. However, existing back-door-based methods suffer from limited stealth and efficiency. To simultaneously address these issues, we propose EditMF, a training-free fingerprinting paradigm that achieves highly imperceptible fingerprint embedding with minimal computational overhead. Ownership bits are mapped to compact, semantically coherent triples drawn from an encrypted artificial knowledge base (e.g., virtual author-novel-protagonist facts). Causal tracing localizes the minimal set of layers influencing each triple, and a zero-space update injects the fingerprint without perturbing unrelated knowledge. Verification requires only a single black-box query and succeeds when the model returns the exact pre-embedded protagonist. Empirical results on LLaMA and Qwen families show that EditMF combines high imperceptibility with negligible model's performance loss, while delivering robustness far beyond LoRA-based fingerprinting and approaching that of SFT embeddings. Extensive experiments demonstrate that EditMF is an effective and low-overhead solution for secure LLM ownership verification.
+
+**Comment:** The paper introduces a novel fingerprinting method for LLMs, which is relevant to foundational research in LLMs.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 18. [Bio-Inspired Artificial Neural Networks based on Predictive Coding](https://arxiv.org/abs/2508.08762) <a id="link18"></a>
+
+**ArXiv ID:** 2508.08762
+
+**Authors:** Davide Casnici, Charlotte Frenkel, Justin Dauwels
+
+**Abstract:** Backpropagation (BP) of errors is the backbone training algorithm for artificial neural networks (ANNs). It updates network weights through gradient descent to minimize a loss function representing the mismatch between predictions and desired outputs. BP uses the chain rule to propagate the loss gradient backward through the network hierarchy, allowing efficient weight updates. However, this process requires weight updates at every layer to rely on a global error signal generated at the network's output.   In contrast, the Hebbian model of synaptic plasticity states that weight updates are local, depending only on the activity of pre- and post-synaptic neurons. This suggests biological brains likely do not implement BP directly. Recently, Predictive Coding (PC) has gained interest as a biologically plausible alternative that updates weights using only local information. Originating from 1950s work on signal compression, PC was later proposed as a model of the visual cortex and formalized under the free energy principle, linking it to Bayesian inference and dynamical systems. PC weight updates rely solely on local information and provide theoretical advantages such as automatic scaling of gradients based on uncertainty.   This lecture notes column offers a novel, tutorial-style introduction to PC, focusing on its formulation, derivation, and connections to well-known optimization and signal processing algorithms such as BP and the Kalman Filter (KF). It aims to support existing literature by guiding readers from the mathematical foundations of PC to practical implementation, including Python examples using PyTorch.
+
+**Comment:** The paper discusses bio-inspired neural networks based on predictive coding, offering insights into alternative training methods, relevant to representation learning.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 19. [ASPD: Unlocking Adaptive Serial-Parallel Decoding by Exploring Intrinsic Parallelism in LLMs](https://arxiv.org/abs/2508.08895) <a id="link19"></a>
+
+**ArXiv ID:** 2508.08895
+
+**Authors:** Keyu Chen, Zhifeng Shen, Daohai Yu, Haoqian Wu, Wei Wen, Jianfeng He, Ruizhi Qiao, Xing Sun
+
+**Abstract:** The increasing scale and complexity of large language models (LLMs) pose significant inference latency challenges, primarily due to their autoregressive decoding paradigm characterized by the sequential nature of next-token prediction. By re-examining the outputs of autoregressive models, we observed that some segments exhibit parallelizable structures, which we term intrinsic parallelism. Decoding each parallelizable branch simultaneously (i.e. parallel decoding) can significantly improve the overall inference speed of LLMs. In this paper, we propose an Adaptive Serial-Parallel Decoding (ASPD), which addresses two core challenges: automated construction of parallelizable data and efficient parallel decoding mechanism. More specifically, we introduce a non-invasive pipeline that automatically extracts and validates parallelizable structures from the responses of autoregressive models. To empower efficient adaptive serial-parallel decoding, we implement a Hybrid Decoding Engine which enables seamless transitions between serial and parallel decoding modes while maintaining a reusable KV cache, maximizing computational efficiency. Extensive evaluations across General Tasks, Retrieval-Augmented Generation, Mathematical Reasoning, demonstrate that ASPD achieves unprecedented performance in both effectiveness and efficiency. Notably, on Vicuna Bench, our method achieves up to 3.19x speedup (1.85x on average) while maintaining response quality within 1% difference compared to autoregressive models, realizing significant acceleration without compromising generation quality. Our framework sets a groundbreaking benchmark for efficient LLM parallel inference, paving the way for its deployment in latency-sensitive applications such as AI-powered customer service bots and answer retrieval engines.
+
+**Comment:** The paper proposes a method for adaptive serial-parallel decoding in LLMs, focusing on inference efficiency, relevant to model compression and efficiency.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 20. [Superclass-Guided Representation Disentanglement for Spurious Correlation Mitigation](https://arxiv.org/abs/2508.08570) <a id="link20"></a>
+
+**ArXiv ID:** 2508.08570
+
+**Authors:** Chenruo Liu, Hongjun Liu, Zeyu Lai, Yiqiu Shen, Chen Zhao, Qi Lei
+
+**Abstract:** To enhance group robustness to spurious correlations, prior work often relies on auxiliary annotations for groups or spurious features and assumes identical sets of groups across source and target domains. These two requirements are both unnatural and impractical in real-world settings. To overcome these limitations, we propose a method that leverages the semantic structure inherent in class labels--specifically, superclass information--to naturally reduce reliance on spurious features. Our model employs gradient-based attention guided by a pre-trained vision-language model to disentangle superclass-relevant and irrelevant features. Then, by promoting the use of all superclass-relevant features for prediction, our approach achieves robustness to more complex spurious correlations without the need to annotate any source samples. Experiments across diverse datasets demonstrate that our method significantly outperforms baselines in domain generalization tasks, with clear improvements in both quantitative metrics and qualitative visualizations.
+
+**Comment:** The paper proposes a method for representation disentanglement to mitigate spurious correlations, which is relevant to representation learning.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 21. [Train Long, Think Short: Curriculum Learning for Efficient Reasoning](https://arxiv.org/abs/2508.08940) <a id="link21"></a>
+
+**ArXiv ID:** 2508.08940
+
+**Authors:** Hasan Abed Al Kader Hammoud, Kumail Alhamoud, Abed Hammoud, Elie Bou-Zeid, Marzyeh Ghassemi, Bernard Ghanem
+
+**Abstract:** Recent work on enhancing the reasoning abilities of large language models (LLMs) has introduced explicit length control as a means of constraining computational cost while preserving accuracy. However, existing approaches rely on fixed-length training budgets, which do not take advantage of the natural progression from exploration to compression during learning. In this work, we propose a curriculum learning strategy for length-controlled reasoning using Group Relative Policy Optimization (GRPO). Our method starts with generous token budgets and gradually tightens them over training, encouraging models to first discover effective solution strategies and then distill them into more concise reasoning traces. We augment GRPO with a reward function that balances three signals: task correctness (via verifier feedback), length efficiency, and formatting adherence (via structural tags). Experiments on GSM8K, MATH500, SVAMP, College Math, and GSM+ demonstrate that curriculum-based training consistently outperforms fixed-budget baselines at the same final budget, achieving higher accuracy and significantly improved token efficiency. We further ablate the impact of reward weighting and decay schedule design, showing that progressive constraint serves as a powerful inductive bias for training efficient reasoning models. Our code and checkpoints are released at: https://github.com/hammoudhasan/curriculum_grpo.
+
+**Comment:** The paper proposes a curriculum learning strategy for efficient reasoning in LLMs, which is relevant to model architecture and training dynamics.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 22. [Wavelet Mixture of Experts for Time Series Forecasting](https://arxiv.org/abs/2508.08825) <a id="link22"></a>
+
+**ArXiv ID:** 2508.08825
+
+**Authors:** Zheng Zhou, Yu-Jie Xiong, Jia-Chen Zhang, Chun-Ming Xia, Xi-Jiong Xie
+
+**Abstract:** The field of time series forecasting is rapidly advancing, with recent large-scale Transformers and lightweight Multilayer Perceptron (MLP) models showing strong predictive performance. However, conventional Transformer models are often hindered by their large number of parameters and their limited ability to capture non-stationary features in data through smoothing. Similarly, MLP models struggle to manage multi-channel dependencies effectively. To address these limitations, we propose a novel, lightweight time series prediction model, WaveTS-B. This model combines wavelet transforms with MLP to capture both periodic and non-stationary characteristics of data in the wavelet domain. Building on this foundation, we propose a channel clustering strategy that incorporates a Mixture of Experts (MoE) framework, utilizing a gating mechanism and expert network to handle multi-channel dependencies efficiently. We propose WaveTS-M, an advanced model tailored for multi-channel time series prediction. Empirical evaluation across eight real-world time series datasets demonstrates that our WaveTS series models achieve state-of-the-art (SOTA) performance with significantly fewer parameters. Notably, WaveTS-M shows substantial improvements on multi-channel datasets, highlighting its effectiveness.
+
+**Comment:** The paper introduces a Wavelet Mixture of Experts model for time series forecasting, which involves MoE and is relevant to model architecture innovations.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 23. [OverFill: Two-Stage Models for Efficient Language Model Decoding](https://arxiv.org/abs/2508.08446) <a id="link23"></a>
+
+**ArXiv ID:** 2508.08446
+
+**Authors:** Woojeong Kim, Junxiong Wang, Jing Nathan Yan, Mohamed Abdelfattah, Alexander M. Rush
+
+**Abstract:** Large language models (LLMs) excel across diverse tasks but face significant deployment challenges due to high inference costs. LLM inference comprises prefill (compute-bound) and decode (memory-bound) stages, with decode dominating latency particularly for long sequences. Current decoder-only models handle both stages uniformly, despite their distinct computational profiles. We propose OverFill, which decouples these stages to optimize accuracy-efficiency tradeoffs. OverFill begins with a full model for prefill, processing system and user inputs in parallel. It then switches to a dense pruned model, while generating tokens sequentially. Leveraging more compute during prefill, OverFill improves generation quality with minimal latency overhead. Our 3B-to-1B OverFill configuration outperforms 1B pruned models by 83.2%, while the 8B-to-3B configuration improves over 3B pruned models by 79.2% on average across standard benchmarks. OverFill matches the performance of same-sized models trained from scratch, while using significantly less training data. Our code is available at https://github.com/friendshipkim/overfill.
+
+**Comment:** The paper proposes OverFill, a method to optimize LLM inference stages, which is relevant to model compression and efficiency.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+# Paper Selection Prompt
+
+## System Prompt
+
+> You are a helpful paper reading assistant whose job is to read daily posts from ArXiv and identify a few papers that your friend will enjoy reading.
+> Your job is to carefully read the paper titles and abstracts below and find the ones that match the criteria below.
+
+## User Prompt
+
+> ## Instructions
+> 
+> Write the response in JSONL format with {ARXIVID, COMMENT, RELEVANCE, NOVELTY} on each line, one for each paper.
+> 
+> - ARXIVID: should be the ArXiv ID.
+> - COMMENT: should identify whether there is a criteria that match the paper very closely. These matches should not be based on general terms like "language modeling" or "advancements" and should specifically refer to a criterion. No need to mention the non-matching criteria.
+> - RELEVANCE: should be a score from 1-10.
+> - NOVELTY: should be a score from 1-10.
+> 
+> ## Scoring Criteria
+> 
+> > The "Relevance" score measures how closely the paper aligns with the core topics of the prompt.
+> > The "Novelty" score assesses the originality and impact of the paper.
+> > They are two **ORTHONORMAL** axes and **SHOULD NOT** be confused with each other.
+> 
+> ### Relevance Scoring
+> 
+> - Relevance 9-10 (Completely Relevant)
+>   - Focus: Fully aligned with core topics with no deviation, score the highest if contains relevant keywords in it.
+>   - Examples: Papers focused on foundational methods or theoretical research, whose titles contain topic keywords like "MoE".
+> 
+> - Relevance 7-8 (Relevant)
+>   - Focus: Retain a solid link to the main research area, though may touch on peripheral elements.
+>   - Examples: Papers research on the fundamental part of MoE through a less critical aspect like its behavior in GNN.
+> 
+> - Relevance 5-6 (Borderline)
+>   - Focus: Maintains a link to the core topic but also extends into at least one other domain/area beyond the primary focus.
+>   - Examples: Work referencing MoE centered on reinforcement learning.
+> 
+> - Relevance 3-4 (Irrelevant)
+>   - Focus: Largely outside our interests with no association to our topics.
+>   - Examples: Application-focused papers like using MoE to solve a problem in the real world.
+> 
+> - Relevance 1-2 (Ignore)
+>   - Focus: Purely unrelated to our topics. Completely a different domain.
+>   - **Exception**: If the paper hints at a cutting-edge, radically new direction that could eventually transform the primary domain, consider a score of 9–10 despite initial appearances. (Usually a very rare concept that belongs to the fundamental research)
+> 
+> ### Novelty Scoring
+> 
+> - Novelty 9-10 (Breakthrough)
+>   - Definition: Groundbreaking methods/theory introducing new directions or solving major challenges.
+>   - Examples: Entirely new paradigm for foundational models; a novel theory transforming representation learning.
+> 
+> - Novelty 7-8 (Improvements)
+>   - Definition: Substantial insights/enhancements, though not a full paradigm shift.
+>   - Examples: Modifications on existing methods yielding significantly better results.
+> 
+> - Novelty 5-6 (Borderline)
+>   - Definition: Incremental contributions with possible long-term benefits, not immediately transformative.
+>   - Examples: Moderately novel extension to an existing architecture; refining current methods without fundamentally altering them.
+> 
+> - Novelty 3-4 (Tangential)
+>   - Definition: Minor or domain-specific improvements with limited broader impact.
+>   - Examples: Slight modifications to known methods with strange motivation; purely engineering jobs like a new benchmark/dataset.
+> 
+> - Novelty 1-2 (Low)
+>   - Definition: Minimal originality, applying standard approaches without real innovation.
+>   - Examples: Using an off-the-shelf model without adding new insights; purely application-driven studies like finetuning a pretrained model using existing methods.
+> 
+> ## Papers
+> 
+> [PAPER LIST HERE]
+> 
+> ## Relevant Topics
+> 
+> Use the following relevance criteria to focus on foundational research. Keep **relevant** papers and filter out **irrelevant** ones. Avoid purely **application-driven** work.
+> 
+> 1. Representation Learning
+>    - Relevant: Insights into how deep networks encode information, feature/dictionary learning, sparse/contrastive methods, training dynamics in neural networks.
+>    - Irrelevant: Standard applications of known techniques lacking new theoretical or methodological contributions.
+> 
+> 2. Model Architecture
+>    - Relevant: Mixture-of-Experts (MoE), Transformers, Conditional/Dynamic Networks, Autoencoders, analysis on existing architectures (like encoder-decoder), or other architectural innovations.
+>    - Irrelevant: Merely using existing architectures for a certain task without insights into the structure themselves.
+> 
+> 3. Model Compression
+>    - Relevant: Sparsity, pruning, quantization, low-rank approaches, KV cache, or other algorithmic/theoretical efficiency breakthroughs.
+>    - Irrelevant: Straightforward applications of existing compression methods to new tasks.
+> 
+> 4. Large Language Models (LLMs)
+>    - Relevant: Major breakthroughs in pretraining or architecture, theoretical insights into LLM behavior/interpretability.
+>    - Irrelevant: Domain-specific usage (e.g., translation, jail-breaking), finetuning or inference tricks (e.g., instruction tuning, chain-of-thoughts, data mixing), or empirical dataset/benchmark studies and text-level analysis (e.g. hallucination, reasoning, safety).
+> 
+> 5. AI for Science
+>    - Relevant: Foundational research in molecular/protein modeling, new generative paradigms, or significant architecture-level innovations.
+>    - Irrelevant: Conventional, domain-specific applications without new theoretical perspectives.
+> 
+> 6. Emerging Trends
+>    - Relevant: Cutting-edge theoretical work challenging established assumptions or introducing broad new paradigms.
+>    - Irrelevant: Incremental improvements or trend-following without novel insights.
+> 
+> **Keywords:**
+> 
+> - Relevant: Mixture of Experts (MoE), Representation Learning, Compression/Efficiency, Sparse/Sparsity, Pruning, Quantization, Low-rank, Foundation Model, etc.
+> - Irrelevant: Reinforcement Learning, Transfer Learning, Federated Learning, Online Learning, Diffusion Models, etc.
+> - Application: Image Segmentation, Medical Imaging, 3D Vision, Video Understanding, Information Retrieval, Summarization, Recommendation Systems, Machine Translation, Speech Recognition, Signal Processing, Spatial/Temporal Modeling, Time Series, Knowledge Graph, etc.

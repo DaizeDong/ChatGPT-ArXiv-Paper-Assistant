@@ -1,0 +1,735 @@
+<div style="display: flex; align-items: flex-start; justify-content: space-between; width: 100%;"><div style="width: 33.33%; text-align: left;"><a href="../10"><img src="../../../assets/nav/day/2025-06-11-prev.svg" alt="Previous Day 2025-06-10"></a></div><div style="width: 33.33%; text-align: center;"><a href=".."><img src="../../../assets/nav/day/2025-06-11-center.svg" alt="Monthly Overview 2025-06"></a></div><div style="width: 33.33%; text-align: right;"><a href="../13"><img src="../../../assets/nav/day/2025-06-11-next.svg" alt="Next Day 2025-06-13"></a></div></div>
+
+# Personalized Daily ArXiv Papers 2025-06-11
+
+| *[gpt-4o]*   | Prompt   | Completion   | Total   |
+|:------------:|:--------:|:------------:|:-------:|
+| **Token**    | 43637    | 5405         | 49042   |
+| **Cost**     | $0.11    | $0.05        | $0.16   |
+
+Total arXiv papers: 668
+
+Total scanned papers: 385
+
+Total relevant papers: 34
+
+**Table of contents with paper titles:**
+
+1. [Diffuse and Disperse: Image Generation with Representation Regularization](#user-content-link1)
+**Authors:** Runqian Wang, Kaiming He
+
+2. [InfoDPCCA: Information-Theoretic Dynamic Probabilistic Canonical Correlation Analysis](#user-content-link2)
+**Authors:** Shiqin Tang, Shujian Yu
+
+3. [Optimization over Sparse Support-Preserving Sets: Two-Step Projection with Global Optimality Guarantees](#user-content-link3)
+**Authors:** William de Vazelhes, Xiao-Tong Yuan, Bin Gu
+
+4. [SeerAttention-R: Sparse Attention Adaptation for Long Reasoning](#user-content-link4)
+**Authors:** Yizhao Gao, Shuming Guo, Shijie Cao, Yuqing Xia, Yu Cheng, Lei Wang, Lingxiao Ma, Yutao Sun, Tianzhu Ye, Li Dong, Hayden Kwok-Hay So, Yu Hua, Ting Cao, Fan Yang, Mao Yang
+
+5. [e3: Learning to Explore Enables Extrapolation of Test-Time Compute for LLMs](#user-content-link5)
+**Authors:** Amrith Setlur, Matthew Y. R. Yang, Charlie Snell, Jeremy Greer, Ian Wu, Virginia Smith, Max Simchowitz, Aviral Kumar
+
+6. [Diversity-Guided MLP Reduction for Efficient Large Vision Transformers](#user-content-link6)
+**Authors:** Chengchao Shen, Hourun Zhu, Gongfan Fang, Jianxin Wang, Xinchao Wang
+
+7. [Highly Compressed Tokenizer Can Generate Without Training](#user-content-link7)
+**Authors:** L. Lao Beyer, T. Li, X. Chen, S. Karaman, K. He
+
+8. [Draft-based Approximate Inference for LLMs](#user-content-link8)
+**Authors:** Kevin Galim, Ethan Ewer, Wonjun Kang, Minjae Lee, Hyung Il Koo, Kangwook Lee
+
+9. [PropMEND: Hypernetworks for Knowledge Propagation in LLMs](#user-content-link9)
+**Authors:** Zeyu Leo Liu, Greg Durrett, Eunsol Choi
+
+10. [Understanding Task Vectors in In-Context Learning: Emergence, Functionality, and Limitations](#user-content-link10)
+**Authors:** Yuxin Dong, Jiachen Jiang, Zhihui Zhu, Xia Ning
+
+11. [SWAT-NN: Simultaneous Weights and Architecture Training for Neural Networks in a Latent Space](#user-content-link11)
+**Authors:** Zitong Huang, Mansooreh Montazerin, Ajitesh Srivastava
+
+12. [Leveraging chaos in the training of artificial neural networks](#user-content-link12)
+**Authors:** Pedro Jim\'enez-Gonz\'alez, Miguel C. Soriano, Lucas Lacasa
+
+13. [sparseGeoHOPCA: A Geometric Solution to Sparse Higher-Order PCA Without Covariance Estimation](#user-content-link13)
+**Authors:** Renjie Xu, Chong Wu, Maolin Che, Zhuoheng Ran, Yimin Wei, Hong Yan
+
+14. [The Geometries of Truth Are Orthogonal Across Tasks](#user-content-link14)
+**Authors:** Waiss Azizian, Michael Kirchhof, Eugene Ndiaye, Louis Bethune, Michal Klein, Pierre Ablin, Marco Cuturi
+
+15. [Edit Flows: Flow Matching with Edit Operations](#user-content-link15)
+**Authors:** Marton Havasi, Brian Karrer, Itai Gat, Ricky T. Q. Chen
+
+16. [Why Masking Diffusion Works: Condition on the Jump Schedule for Improved Discrete Diffusion](#user-content-link16)
+**Authors:** Alan N. Amin, Nate Gruver, Andrew Gordon Wilson
+
+17. [Protriever: End-to-End Differentiable Protein Homology Search for Fitness Prediction](#user-content-link17)
+**Authors:** Ruben Weitzman, Peter M{\o}rch Groth, Lood Van Niekerk, Aoi Otani, Yarin Gal, Debora Marks, Pascal Notin
+
+18. [Improved Scaling Laws in Linear Regression via Data Reuse](#user-content-link18)
+**Authors:** Licong Lin, Jingfeng Wu, Peter L. Bartlett
+
+19. [Sharper Convergence Rates for Nonconvex Optimisation via Reduction Mappings](#user-content-link19)
+**Authors:** Evan Markou, Thalaiyasingam Ajanthan, Stephen Gould
+
+20. [AdversariaL attacK sAfety aLIgnment(ALKALI): Safeguarding LLMs through GRACE: Geometric Representation-Aware Contrastive Enhancement- Introducing Adversarial Vulnerability Quality Index (AVQI)](#user-content-link20)
+**Authors:** Danush Khanna, Krishna Kumar, Basab Ghosh, Vinija Jain, Vasu Sharma, Aman Chadha, Amitava Das
+
+21. [Explaining, Fast and Slow: Abstraction and Refinement of Provable Explanations](#user-content-link21)
+**Authors:** Shahaf Bassan, Yizhak Yisrael Elboher, Tobias Ladner, Matthias Althoff, Guy Katz
+
+22. [BLUR: A Bi-Level Optimization Approach for LLM Unlearning](#user-content-link22)
+**Authors:** Hadi Reisizadeh, Jinghan Jia, Zhiqi Bu, Bhanukiran Vinzamuri, Anil Ramakrishna, Kai-Wei Chang, Volkan Cevher, Sijia Liu, Mingyi Hong
+
+23. [On Reasoning Strength Planning in Large Reasoning Models](#user-content-link23)
+**Authors:** Leheng Sheng, An Zhang, Zijian Wu, Weixiang Zhao, Changshuo Shen, Yi Zhang, Xiang Wang, Tat-Seng Chua
+
+24. [Thermodynamically Consistent Latent Dynamics Identification for Parametric Systems](#user-content-link24)
+**Authors:** Xiaolong He, Yeonjong Shin, Anthony Gruber, Sohyeon Jung, Kookjin Lee, Youngsoo Choi
+
+25. [Text Embeddings Should Capture Implicit Semantics, Not Just Surface Meaning](#user-content-link25)
+**Authors:** Yiqun Sun, Qiang Huang, Anthony K. H. Tung, Jun Yu
+
+26. [What makes an Ensemble (Un) Interpretable?](#user-content-link26)
+**Authors:** Shahaf Bassan, Guy Amir, Meirav Zehavi, Guy Katz
+
+27. [Dense Retrievers Can Fail on Simple Queries: Revealing The Granularity Dilemma of Embeddings](#user-content-link27)
+**Authors:** Liyan Xu, Zhenlin Su, Mo Yu, Jiangnan Li, Fandong Meng, Jie Zhou
+
+28. [BioLangFusion: Multimodal Fusion of DNA, mRNA, and Protein Language Models](#user-content-link28)
+**Authors:** Amina Mollaysa, Artem Moskale, Pushpak Pati, Tommaso Mansi, Mangal Prakash, Rui Liao
+
+29. [MAC: An Efficient Gradient Preconditioning using Mean Activation Approximated Curvature](#user-content-link29)
+**Authors:** Hyunseok Seung, Jaewoo Lee, Hyunsuk Ko
+
+30. [Aligning Proteins and Language: A Foundation Model for Protein Retrieval](#user-content-link30)
+**Authors:** Qifeng Wu, Zhengzhe Liu, Han Zhu, Yizhou Zhao, Daisuke Kihara, Min Xu
+
+31. [SEMA: a Scalable and Efficient Mamba like Attention via Token Localization and Averaging](#user-content-link31)
+**Authors:** Nhat Thanh Tran, Fanghui Xue, Shuai Zhang, Jiancheng Lyu, Yunling Zheng, Yingyong Qi, Jack Xin
+
+32. [AlphaFold Database Debiasing for Robust Inverse Folding](#user-content-link32)
+**Authors:** Cheng Tan, Zhenxiao Cao, Zhangyang Gao, Siyuan Li, Yufei Huang, Stan Z. Li
+
+33. [An Adaptive Method Stabilizing Activations for Enhanced Generalization](#user-content-link33)
+**Authors:** Hyunseok Seung, Jaewoo Lee, Hyunsuk Ko
+
+34. [Propositional Logic for Probing Generalization in Neural Networks](#user-content-link34)
+**Authors:** Anna Langedijk, Jaap Jumelet, Willem Zuidema
+
+---
+
+## 1. [Diffuse and Disperse: Image Generation with Representation Regularization](https://arxiv.org/abs/2506.09027) <a id="link1"></a>
+
+**ArXiv ID:** 2506.09027
+
+**Authors:** Runqian Wang, Kaiming He
+
+**Abstract:** The development of diffusion-based generative models over the past decade has largely proceeded independently of progress in representation learning. These diffusion models typically rely on regression-based objectives and generally lack explicit regularization. In this work, we propose \textit{Dispersive Loss}, a simple plug-and-play regularizer that effectively improves diffusion-based generative models. Our loss function encourages internal representations to disperse in the hidden space, analogous to contrastive self-supervised learning, with the key distinction that it requires no positive sample pairs and therefore does not interfere with the sampling process used for regression. Compared to the recent method of representation alignment (REPA), our approach is self-contained and minimalist, requiring no pre-training, no additional parameters, and no external data. We evaluate Dispersive Loss on the ImageNet dataset across a range of models and report consistent improvements over widely used and strong baselines. We hope our work will help bridge the gap between generative modeling and representation learning.
+
+**Comment:** Author match
+
+
+
+---
+
+## 2. [InfoDPCCA: Information-Theoretic Dynamic Probabilistic Canonical Correlation Analysis](https://arxiv.org/abs/2506.08884) <a id="link2"></a>
+
+**ArXiv ID:** 2506.08884
+
+**Authors:** Shiqin Tang, Shujian Yu
+
+**Abstract:** Extracting meaningful latent representations from high-dimensional sequential data is a crucial challenge in machine learning, with applications spanning natural science and engineering. We introduce InfoDPCCA, a dynamic probabilistic Canonical Correlation Analysis (CCA) framework designed to model two interdependent sequences of observations. InfoDPCCA leverages a novel information-theoretic objective to extract a shared latent representation that captures the mutual structure between the data streams and balances representation compression and predictive sufficiency while also learning separate latent components that encode information specific to each sequence. Unlike prior dynamic CCA models, such as DPCCA, our approach explicitly enforces the shared latent space to encode only the mutual information between the sequences, improving interpretability and robustness. We further introduce a two-step training scheme to bridge the gap between information-theoretic representation learning and generative modeling, along with a residual connection mechanism to enhance training stability. Through experiments on synthetic and medical fMRI data, we demonstrate that InfoDPCCA excels as a tool for representation learning. Code of InfoDPCCA is available at https://github.com/marcusstang/InfoDPCCA.
+
+**Comment:** The paper introduces InfoDPCCA, a novel framework for representation learning using an information-theoretic approach, which aligns with the representation learning criterion.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 3. [Optimization over Sparse Support-Preserving Sets: Two-Step Projection with Global Optimality Guarantees](https://arxiv.org/abs/2506.08558) <a id="link3"></a>
+
+**ArXiv ID:** 2506.08558
+
+**Authors:** William de Vazelhes, Xiao-Tong Yuan, Bin Gu
+
+**Abstract:** In sparse optimization, enforcing hard constraints using the $\ell_0$ pseudo-norm offers advantages like controlled sparsity compared to convex relaxations. However, many real-world applications demand not only sparsity constraints but also some extra constraints. While prior algorithms have been developed to address this complex scenario with mixed combinatorial and convex constraints, they typically require the closed form projection onto the mixed constraints which might not exist, and/or only provide local guarantees of convergence which is different from the global guarantees commonly sought in sparse optimization. To fill this gap, in this paper, we study the problem of sparse optimization with extra \qw{\textit{support-preserving}} constraints commonly encountered in the literature. We present a new variant of iterative hard-thresholding algorithm equipped with a two-step consecutive projection operator customized for these mixed constraints, serving as a simple alternative to the Euclidean projection onto the mixed constraint. By introducing a novel trade-off between sparsity relaxation and sub-optimality, we provide global guarantees in objective value for the output of our algorithm, in the deterministic, stochastic, and zeroth-order settings, under the conventional restricted strong-convexity/smoothness assumptions. As a fundamental contribution in proof techniques, we develop a novel extension of the classic three-point lemma to the considered two-step non-convex projection operator, which allows us to analyze the convergence in objective value in an elegant way that has not been possible with existing techniques. In the zeroth-order case, such technique also improves upon the state-of-the-art result from de Vazelhes et. al. (2022), even in the case without additional constraints, by allowing us to remove a non-vanishing system error present in their work.
+
+**Comment:** The paper presents a new sparse optimization algorithm with global optimality guarantees, relevant to model compression through sparsity.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 4. [SeerAttention-R: Sparse Attention Adaptation for Long Reasoning](https://arxiv.org/abs/2506.08889) <a id="link4"></a>
+
+**ArXiv ID:** 2506.08889
+
+**Authors:** Yizhao Gao, Shuming Guo, Shijie Cao, Yuqing Xia, Yu Cheng, Lei Wang, Lingxiao Ma, Yutao Sun, Tianzhu Ye, Li Dong, Hayden Kwok-Hay So, Yu Hua, Ting Cao, Fan Yang, Mao Yang
+
+**Abstract:** We introduce SeerAttention-R, a sparse attention framework specifically tailored for the long decoding of reasoning models. Extended from SeerAttention, SeerAttention-R retains the design of learning attention sparsity through a self-distilled gating mechanism, while removing query pooling to accommodate auto-regressive decoding. With a lightweight plug-in gating, SeerAttention-R is flexible and can be easily integrated into existing pretrained model without modifying the original parameters. We demonstrate that SeerAttention-R, trained on just 0.4B tokens, maintains near-lossless reasoning accuracy with 4K token budget in AIME benchmark under large sparse attention block sizes (64/128). Using TileLang, we develop a highly optimized sparse decoding kernel that achieves near-theoretical speedups of up to 9x over FlashAttention-3 on H100 GPU at 90% sparsity. Code is available at: https://github.com/microsoft/SeerAttention.
+
+**Comment:** The paper introduces SeerAttention-R, a sparse attention framework, which is relevant to model architecture and efficiency through sparse methods.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 5. [e3: Learning to Explore Enables Extrapolation of Test-Time Compute for LLMs](https://arxiv.org/abs/2506.09026) <a id="link5"></a>
+
+**ArXiv ID:** 2506.09026
+
+**Authors:** Amrith Setlur, Matthew Y. R. Yang, Charlie Snell, Jeremy Greer, Ian Wu, Virginia Smith, Max Simchowitz, Aviral Kumar
+
+**Abstract:** Test-time scaling offers a promising path to improve LLM reasoning by utilizing more compute at inference time; however, the true promise of this paradigm lies in extrapolation (i.e., improvement in performance on hard problems as LLMs keep "thinking" for longer, beyond the maximum token budget they were trained on). Surprisingly, we find that most existing reasoning models do not extrapolate well. We show that one way to enable extrapolation is by training the LLM to perform in-context exploration: training the LLM to effectively spend its test time budget by chaining operations (such as generation, verification, refinement, etc.), or testing multiple hypotheses before it commits to an answer. To enable in-context exploration, we identify three key ingredients as part of our recipe e3: (1) chaining skills that the base LLM has asymmetric competence in, e.g., chaining verification (easy) with generation (hard), as a way to implement in-context search; (2) leveraging "negative" gradients from incorrect traces to amplify exploration during RL, resulting in longer search traces that chains additional asymmetries; and (3) coupling task difficulty with training token budget during training via a specifically-designed curriculum to structure in-context exploration. Our recipe e3 produces the best known 1.7B model according to AIME'25 and HMMT'25 scores, and extrapolates to 2x the training token budget. Our e3-1.7B model not only attains high pass@1 scores, but also improves pass@k over the base model.
+
+**Comment:** The paper discusses test-time scaling and in-context exploration for LLMs, which relates to foundational research in LLM architecture and theoretical insights.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 6. [Diversity-Guided MLP Reduction for Efficient Large Vision Transformers](https://arxiv.org/abs/2506.08591) <a id="link6"></a>
+
+**ArXiv ID:** 2506.08591
+
+**Authors:** Chengchao Shen, Hourun Zhu, Gongfan Fang, Jianxin Wang, Xinchao Wang
+
+**Abstract:** Transformer models achieve excellent scaling property, where the performance is improved with the increment of model capacity. However, large-scale model parameters lead to an unaffordable cost of computing and memory. We analyze popular transformer architectures and find that multilayer perceptron (MLP) modules take up the majority of model parameters. To this end, we focus on the recoverability of the compressed models and propose a Diversity-Guided MLP Reduction (DGMR) method to significantly reduce the parameters of large vision transformers with only negligible performance degradation. Specifically, we conduct a Gram-Schmidt weight pruning strategy to eliminate redundant neurons of MLP hidden layer, while preserving weight diversity for better performance recover during distillation. Compared to the model trained from scratch, our pruned model only requires 0.06\% data of LAION-2B (for the training of large vision transformers) without labels (ImageNet-1K) to recover the original performance. Experimental results on several state-of-the-art large vision transformers demonstrate that our method achieves a more than 57.0\% parameter and FLOPs reduction in a near lossless manner. Notably, for EVA-CLIP-E (4.4B), our method accomplishes a 71.5\% parameter and FLOPs reduction without performance degradation. The source code and trained weights are available at https://github.com/visresearch/DGMR.
+
+**Comment:** The paper proposes a method for MLP reduction in vision transformers, which is relevant to model compression and efficiency.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 7. [Highly Compressed Tokenizer Can Generate Without Training](https://arxiv.org/abs/2506.08257) <a id="link7"></a>
+
+**ArXiv ID:** 2506.08257
+
+**Authors:** L. Lao Beyer, T. Li, X. Chen, S. Karaman, K. He
+
+**Abstract:** Commonly used image tokenizers produce a 2D grid of spatially arranged tokens. In contrast, so-called 1D image tokenizers represent images as highly compressed one-dimensional sequences of as few as 32 discrete tokens. We find that the high degree of compression achieved by a 1D tokenizer with vector quantization enables image editing and generative capabilities through heuristic manipulation of tokens, demonstrating that even very crude manipulations -- such as copying and replacing tokens between latent representations of images -- enable fine-grained image editing by transferring appearance and semantic attributes. Motivated by the expressivity of the 1D tokenizer's latent space, we construct an image generation pipeline leveraging gradient-based test-time optimization of tokens with plug-and-play loss functions such as reconstruction or CLIP similarity. Our approach is demonstrated for inpainting and text-guided image editing use cases, and can generate diverse and realistic samples without requiring training of any generative model.
+
+**Comment:** The paper discusses a highly compressed tokenizer with vector quantization, which relates to model compression and efficiency. It introduces a novel approach to image generation without training a generative model, aligning with foundational research in representation learning.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 8. [Draft-based Approximate Inference for LLMs](https://arxiv.org/abs/2506.08373) <a id="link8"></a>
+
+**ArXiv ID:** 2506.08373
+
+**Authors:** Kevin Galim, Ethan Ewer, Wonjun Kang, Minjae Lee, Hyung Il Koo, Kangwook Lee
+
+**Abstract:** Optimizing inference for long-context Large Language Models (LLMs) is increasingly important due to the quadratic compute and linear memory complexity of Transformers. Existing approximation methods, such as key-value (KV) cache dropping, sparse attention, and prompt compression, typically rely on rough predictions of token or KV pair importance. We propose a novel framework for approximate LLM inference that leverages small draft models to more accurately predict the importance of tokens and KV pairs. Specifically, we introduce two instantiations of our proposed framework: (i) SpecKV, which leverages a draft output to accurately assess the importance of each KV pair for more effective KV cache dropping, and (ii) SpecPC, which uses the draft model's attention activations to identify and discard unimportant prompt tokens. To the best of our knowledge, this is the first work to use draft models for approximate LLM inference acceleration, extending their utility beyond traditional lossless speculative decoding. We motivate our methods with theoretical and empirical analyses, and show a strong correlation between the attention patterns of draft and target models. Extensive experiments on long-context benchmarks show that our methods consistently achieve higher accuracy than existing baselines, while preserving the same improvements in memory usage, latency, and throughput. Our code is available at https://github.com/furiosa-ai/draft-based-approx-llm.
+
+**Comment:** The paper proposes a novel framework for approximate LLM inference using draft models, which relates to model efficiency and compression. It introduces new methods for inference acceleration, aligning with foundational research in LLMs.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 9. [PropMEND: Hypernetworks for Knowledge Propagation in LLMs](https://arxiv.org/abs/2506.08920) <a id="link9"></a>
+
+**ArXiv ID:** 2506.08920
+
+**Authors:** Zeyu Leo Liu, Greg Durrett, Eunsol Choi
+
+**Abstract:** Knowledge editing techniques for large language models (LLMs) can inject knowledge that is later reproducible verbatim, but they fall short on propagating that knowledge: models cannot answer questions that require reasoning with the injected knowledge. We present a hypernetwork-based approach for knowledge propagation, named PropMEND, where we meta-learn how to modify gradients of a language modeling loss to encourage injected information to propagate. Our approach extends the meta-objective of MEND [29] so that gradient updates on knowledge are transformed to enable answering multi-hop questions involving that knowledge. We show improved performance on the RippleEdit dataset, showing almost 2x accuracy on challenging multi-hop questions whose answers are not explicitly stated in the injected fact. We further introduce a new dataset, Controlled RippleEdit, to evaluate the generalization of our hypernetwork, testing knowledge propagation along relations and entities unseen during hypernetwork training. PropMEND still outperforms existing approaches in unseen entity-relation pairs, yet the performance gap decreases substantially, suggesting future work in propagating knowledge to a wide range of relations.
+
+**Comment:** The paper introduces a hypernetwork-based approach for knowledge propagation in LLMs, which is relevant to foundational research in LLM behavior and architecture. It presents a novel method for improving knowledge propagation.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 10. [Understanding Task Vectors in In-Context Learning: Emergence, Functionality, and Limitations](https://arxiv.org/abs/2506.09048) <a id="link10"></a>
+
+**ArXiv ID:** 2506.09048
+
+**Authors:** Yuxin Dong, Jiachen Jiang, Zhihui Zhu, Xia Ning
+
+**Abstract:** Task vectors offer a compelling mechanism for accelerating inference in in-context learning (ICL) by distilling task-specific information into a single, reusable representation. Despite their empirical success, the underlying principles governing their emergence and functionality remain unclear. This work proposes the Linear Combination Conjecture, positing that task vectors act as single in-context demonstrations formed through linear combinations of the original ones. We provide both theoretical and empirical support for this conjecture. First, we show that task vectors naturally emerge in linear transformers trained on triplet-formatted prompts through loss landscape analysis. Next, we predict the failure of task vectors on representing high-rank mappings and confirm this on practical LLMs. Our findings are further validated through saliency analyses and parameter visualization, suggesting an enhancement of task vectors by injecting multiple ones into few-shot prompts. Together, our results advance the understanding of task vectors and shed light on the mechanisms underlying ICL in transformer-based models.
+
+**Comment:** The paper provides theoretical insights into task vectors in in-context learning, which relates to representation learning and understanding how deep networks encode information.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 11. [SWAT-NN: Simultaneous Weights and Architecture Training for Neural Networks in a Latent Space](https://arxiv.org/abs/2506.08270) <a id="link11"></a>
+
+**ArXiv ID:** 2506.08270
+
+**Authors:** Zitong Huang, Mansooreh Montazerin, Ajitesh Srivastava
+
+**Abstract:** Designing neural networks typically relies on manual trial and error or a neural architecture search (NAS) followed by weight training. The former is time-consuming and labor-intensive, while the latter often discretizes architecture search and weight optimization. In this paper, we propose a fundamentally different approach that simultaneously optimizes both the architecture and the weights of a neural network. Our framework first trains a universal multi-scale autoencoder that embeds both architectural and parametric information into a continuous latent space, where functionally similar neural networks are mapped closer together. Given a dataset, we then randomly initialize a point in the embedding space and update it via gradient descent to obtain the optimal neural network, jointly optimizing its structure and weights. The optimization process incorporates sparsity and compactness penalties to promote efficient models. Experiments on synthetic regression tasks demonstrate that our method effectively discovers sparse and compact neural networks with strong performance.
+
+**Comment:** The paper proposes a novel approach to simultaneously optimize neural network architecture and weights, relevant to model architecture innovations.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 12. [Leveraging chaos in the training of artificial neural networks](https://arxiv.org/abs/2506.08523) <a id="link12"></a>
+
+**ArXiv ID:** 2506.08523
+
+**Authors:** Pedro Jim\'enez-Gonz\'alez, Miguel C. Soriano, Lucas Lacasa
+
+**Abstract:** Traditional algorithms to optimize artificial neural networks when confronted with a supervised learning task are usually exploitation-type relaxational dynamics such as gradient descent (GD). Here, we explore the dynamics of the neural network trajectory along training for unconventionally large learning rates. We show that for a region of values of the learning rate, the GD optimization shifts away from purely exploitation-like algorithm into a regime of exploration-exploitation balance, as the neural network is still capable of learning but the trajectory shows sensitive dependence on initial conditions -- as characterized by positive network maximum Lyapunov exponent --. Interestingly, the characteristic training time required to reach an acceptable accuracy in the test set reaches a minimum precisely in such learning rate region, further suggesting that one can accelerate the training of artificial neural networks by locating at the onset of chaos. Our results -- initially illustrated for the MNIST classification task -- qualitatively hold for a range of supervised learning tasks, learning architectures and other hyperparameters, and showcase the emergent, constructive role of transient chaotic dynamics in the training of artificial neural networks.
+
+**Comment:** The paper explores the dynamics of neural network training with large learning rates, providing insights into training dynamics and the role of chaos, which aligns with representation learning.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 13. [sparseGeoHOPCA: A Geometric Solution to Sparse Higher-Order PCA Without Covariance Estimation](https://arxiv.org/abs/2506.08670) <a id="link13"></a>
+
+**ArXiv ID:** 2506.08670
+
+**Authors:** Renjie Xu, Chong Wu, Maolin Che, Zhuoheng Ran, Yimin Wei, Hong Yan
+
+**Abstract:** We propose sparseGeoHOPCA, a novel framework for sparse higher-order principal component analysis (SHOPCA) that introduces a geometric perspective to high-dimensional tensor decomposition. By unfolding the input tensor along each mode and reformulating the resulting subproblems as structured binary linear optimization problems, our method transforms the original nonconvex sparse objective into a tractable geometric form. This eliminates the need for explicit covariance estimation and iterative deflation, enabling significant gains in both computational efficiency and interpretability, particularly in high-dimensional and unbalanced data scenarios. We theoretically establish the equivalence between the geometric subproblems and the original SHOPCA formulation, and derive worst-case approximation error bounds based on classical PCA residuals, providing data-dependent performance guarantees. The proposed algorithm achieves a total computational complexity of $O\left(\sum_{n=1}^{N} (k_n^3 + J_n k_n^2)\right)$, which scales linearly with tensor size. Extensive experiments demonstrate that sparseGeoHOPCA accurately recovers sparse supports in synthetic settings, preserves classification performance under 10$\times$ compression, and achieves high-quality image reconstruction on ImageNet, highlighting its robustness and versatility.
+
+**Comment:** The paper presents sparseGeoHOPCA, a novel framework for sparse higher-order PCA, which is relevant to model compression and representation learning.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 14. [The Geometries of Truth Are Orthogonal Across Tasks](https://arxiv.org/abs/2506.08572) <a id="link14"></a>
+
+**ArXiv ID:** 2506.08572
+
+**Authors:** Waiss Azizian, Michael Kirchhof, Eugene Ndiaye, Louis Bethune, Michal Klein, Pierre Ablin, Marco Cuturi
+
+**Abstract:** Large Language Models (LLMs) have demonstrated impressive generalization capabilities across various tasks, but their claim to practical relevance is still mired by concerns on their reliability. Recent works have proposed examining the activations produced by an LLM at inference time to assess whether its answer to a question is correct. Some works claim that a "geometry of truth" can be learned from examples, in the sense that the activations that generate correct answers can be distinguished from those leading to mistakes with a linear classifier. In this work, we underline a limitation of these approaches: we observe that these "geometries of truth" are intrinsically task-dependent and fail to transfer across tasks. More precisely, we show that linear classifiers trained across distinct tasks share little similarity and, when trained with sparsity-enforcing regularizers, have almost disjoint supports. We show that more sophisticated approaches (e.g., using mixtures of probes and tasks) fail to overcome this limitation, likely because activation vectors commonly used to classify answers form clearly separated clusters when examined across tasks.
+
+**Comment:** The paper discusses the task-dependent nature of 'geometries of truth' in LLMs, providing theoretical insights into LLM behavior.
+
+**Relevance:** 9
+**Novelty:** 7
+
+---
+
+## 15. [Edit Flows: Flow Matching with Edit Operations](https://arxiv.org/abs/2506.09018) <a id="link15"></a>
+
+**ArXiv ID:** 2506.09018
+
+**Authors:** Marton Havasi, Brian Karrer, Itai Gat, Ricky T. Q. Chen
+
+**Abstract:** Autoregressive generative models naturally generate variable-length sequences, while non-autoregressive models struggle, often imposing rigid, token-wise structures. We propose Edit Flows, a non-autoregressive model that overcomes these limitations by defining a discrete flow over sequences through edit operations-insertions, deletions, and substitutions. By modeling these operations within a Continuous-time Markov Chain over the sequence space, Edit Flows enable flexible, position-relative generation that aligns more closely with the structure of sequence data. Our training method leverages an expanded state space with auxiliary variables, making the learning process efficient and tractable. Empirical results show that Edit Flows outperforms both autoregressive and mask models on image captioning and significantly outperforms the mask construction in text and code generation.
+
+**Comment:** The paper proposes Edit Flows, a non-autoregressive model using edit operations, which is relevant to model architecture innovations.
+
+**Relevance:** 8
+**Novelty:** 8
+
+---
+
+## 16. [Why Masking Diffusion Works: Condition on the Jump Schedule for Improved Discrete Diffusion](https://arxiv.org/abs/2506.08316) <a id="link16"></a>
+
+**ArXiv ID:** 2506.08316
+
+**Authors:** Alan N. Amin, Nate Gruver, Andrew Gordon Wilson
+
+**Abstract:** Discrete diffusion models, like continuous diffusion models, generate high-quality samples by gradually undoing noise applied to datapoints with a Markov process. Gradual generation in theory comes with many conceptual benefits; for example, inductive biases can be incorporated into the noising Markov process, and access to improved sampling algorithms. In practice, however, the consistently best performing discrete diffusion model is, surprisingly, masking diffusion, which does not denoise gradually. Here we explain the superior performance of masking diffusion by noting that it makes use of a fundamental difference between continuous and discrete Markov processes: discrete Markov processes evolve by discontinuous jumps at a fixed rate and, unlike other discrete diffusion models, masking diffusion builds in the known distribution of jump times and only learns where to jump to. We show that we can similarly bake in the known distribution of jump times into any discrete diffusion model. The resulting models - schedule-conditioned discrete diffusion (SCUD) - generalize classical discrete diffusion and masking diffusion. By applying SCUD to models with noising processes that incorporate inductive biases on images, text, and protein data, we build models that outperform masking.
+
+**Comment:** The paper explains the superior performance of masking diffusion in discrete diffusion models, which is relevant to emerging trends in model architecture.
+
+**Relevance:** 8
+**Novelty:** 8
+
+---
+
+## 17. [Protriever: End-to-End Differentiable Protein Homology Search for Fitness Prediction](https://arxiv.org/abs/2506.08954) <a id="link17"></a>
+
+**ArXiv ID:** 2506.08954
+
+**Authors:** Ruben Weitzman, Peter M{\o}rch Groth, Lood Van Niekerk, Aoi Otani, Yarin Gal, Debora Marks, Pascal Notin
+
+**Abstract:** Retrieving homologous protein sequences is essential for a broad range of protein modeling tasks such as fitness prediction, protein design, structure modeling, and protein-protein interactions. Traditional workflows have relied on a two-step process: first retrieving homologs via Multiple Sequence Alignments (MSA), then training models on one or more of these alignments. However, MSA-based retrieval is computationally expensive, struggles with highly divergent sequences or complex insertions & deletions patterns, and operates independently of the downstream modeling objective. We introduce Protriever, an end-to-end differentiable framework that learns to retrieve relevant homologs while simultaneously training for the target task. When applied to protein fitness prediction, Protriever achieves state-of-the-art performance compared to sequence-based models that rely on MSA-based homolog retrieval, while being two orders of magnitude faster through efficient vector search. Protriever is both architecture- and task-agnostic, and can flexibly adapt to different retrieval strategies and protein databases at inference time -- offering a scalable alternative to alignment-centric approaches.
+
+**Comment:** The paper introduces a new framework for protein homology search, which is foundational research in molecular modeling.
+
+**Relevance:** 8
+**Novelty:** 8
+
+---
+
+## 18. [Improved Scaling Laws in Linear Regression via Data Reuse](https://arxiv.org/abs/2506.08415) <a id="link18"></a>
+
+**ArXiv ID:** 2506.08415
+
+**Authors:** Licong Lin, Jingfeng Wu, Peter L. Bartlett
+
+**Abstract:** Neural scaling laws suggest that the test error of large language models trained online decreases polynomially as the model size and data size increase. However, such scaling can be unsustainable when running out of new data. In this work, we show that data reuse can improve existing scaling laws in linear regression. Specifically, we derive sharp test error bounds on $M$-dimensional linear models trained by multi-pass stochastic gradient descent (multi-pass SGD) on $N$ data with sketched features. Assuming that the data covariance has a power-law spectrum of degree $a$, and that the true parameter follows a prior with an aligned power-law spectrum of degree $b-a$ (with $a > b > 1$), we show that multi-pass SGD achieves a test error of $\Theta(M^{1-b} + L^{(1-b)/a})$, where $L \lesssim N^{a/b}$ is the number of iterations. In the same setting, one-pass SGD only attains a test error of $\Theta(M^{1-b} + N^{(1-b)/a})$ (see e.g., Lin et al., 2024). This suggests an improved scaling law via data reuse (i.e., choosing $L>N$) in data-constrained regimes. Numerical simulations are also provided to verify our theoretical findings.
+
+**Comment:** The paper provides theoretical insights into improving scaling laws in linear regression, which is relevant to representation learning and model efficiency.
+
+**Relevance:** 8
+**Novelty:** 8
+
+---
+
+## 19. [Sharper Convergence Rates for Nonconvex Optimisation via Reduction Mappings](https://arxiv.org/abs/2506.08428) <a id="link19"></a>
+
+**ArXiv ID:** 2506.08428
+
+**Authors:** Evan Markou, Thalaiyasingam Ajanthan, Stephen Gould
+
+**Abstract:** Many high-dimensional optimisation problems exhibit rich geometric structures in their set of minimisers, often forming smooth manifolds due to over-parametrisation or symmetries. When this structure is known, at least locally, it can be exploited through reduction mappings that reparametrise part of the parameter space to lie on the solution manifold. These reductions naturally arise from inner optimisation problems and effectively remove redundant directions, yielding a lower-dimensional objective. In this work, we introduce a general framework to understand how such reductions influence the optimisation landscape. We show that well-designed reduction mappings improve curvature properties of the objective, leading to better-conditioned problems and theoretically faster convergence for gradient-based methods. Our analysis unifies a range of scenarios where structural information at optimality is leveraged to accelerate convergence, offering a principled explanation for the empirical gains observed in such optimisation algorithms.
+
+**Comment:** The paper discusses a framework for understanding optimization landscapes, which is relevant to emerging trends in theoretical work.
+
+**Relevance:** 8
+**Novelty:** 8
+
+---
+
+## 20. [AdversariaL attacK sAfety aLIgnment(ALKALI): Safeguarding LLMs through GRACE: Geometric Representation-Aware Contrastive Enhancement- Introducing Adversarial Vulnerability Quality Index (AVQI)](https://arxiv.org/abs/2506.08885) <a id="link20"></a>
+
+**ArXiv ID:** 2506.08885
+
+**Authors:** Danush Khanna, Krishna Kumar, Basab Ghosh, Vinija Jain, Vasu Sharma, Aman Chadha, Amitava Das
+
+**Abstract:** Adversarial threats against LLMs are escalating faster than current defenses can adapt. We expose a critical geometric blind spot in alignment: adversarial prompts exploit latent camouflage, embedding perilously close to the safe representation manifold while encoding unsafe intent thereby evading surface level defenses like Direct Preference Optimization (DPO), which remain blind to the latent geometry. We introduce ALKALI, the first rigorously curated adversarial benchmark and the most comprehensive to date spanning 9,000 prompts across three macro categories, six subtypes, and fifteen attack families. Evaluation of 21 leading LLMs reveals alarmingly high Attack Success Rates (ASRs) across both open and closed source models, exposing an underlying vulnerability we term latent camouflage, a structural blind spot where adversarial completions mimic the latent geometry of safe ones. To mitigate this vulnerability, we introduce GRACE - Geometric Representation Aware Contrastive Enhancement, an alignment framework coupling preference learning with latent space regularization. GRACE enforces two constraints: latent separation between safe and adversarial completions, and adversarial cohesion among unsafe and jailbreak behaviors. These operate over layerwise pooled embeddings guided by a learned attention profile, reshaping internal geometry without modifying the base model, and achieve up to 39% ASR reduction. Moreover, we introduce AVQI, a geometry aware metric that quantifies latent alignment failure via cluster separation and compactness. AVQI reveals when unsafe completions mimic the geometry of safe ones, offering a principled lens into how models internally encode safety. We make the code publicly available at https://anonymous.4open.science/r/alkali-B416/README.md.
+
+**Comment:** The paper introduces a new framework for safeguarding LLMs against adversarial attacks, providing insights into LLM behavior and interpretability.
+
+**Relevance:** 8
+**Novelty:** 8
+
+---
+
+## 21. [Explaining, Fast and Slow: Abstraction and Refinement of Provable Explanations](https://arxiv.org/abs/2506.08505) <a id="link21"></a>
+
+**ArXiv ID:** 2506.08505
+
+**Authors:** Shahaf Bassan, Yizhak Yisrael Elboher, Tobias Ladner, Matthias Althoff, Guy Katz
+
+**Abstract:** Despite significant advancements in post-hoc explainability techniques for neural networks, many current methods rely on heuristics and do not provide formally provable guarantees over the explanations provided. Recent work has shown that it is possible to obtain explanations with formal guarantees by identifying subsets of input features that are sufficient to determine that predictions remain unchanged using neural network verification techniques. Despite the appeal of these explanations, their computation faces significant scalability challenges. In this work, we address this gap by proposing a novel abstraction-refinement technique for efficiently computing provably sufficient explanations of neural network predictions. Our method abstracts the original large neural network by constructing a substantially reduced network, where a sufficient explanation of the reduced network is also provably sufficient for the original network, hence significantly speeding up the verification process. If the explanation is in sufficient on the reduced network, we iteratively refine the network size by gradually increasing it until convergence. Our experiments demonstrate that our approach enhances the efficiency of obtaining provably sufficient explanations for neural network predictions while additionally providing a fine-grained interpretation of the network's predictions across different abstraction levels.
+
+**Comment:** The paper proposes an abstraction-refinement technique for computing provable explanations, which is relevant to representation learning and model interpretability.
+
+**Relevance:** 8
+**Novelty:** 8
+
+---
+
+## 22. [BLUR: A Bi-Level Optimization Approach for LLM Unlearning](https://arxiv.org/abs/2506.08164) <a id="link22"></a>
+
+**ArXiv ID:** 2506.08164
+
+**Authors:** Hadi Reisizadeh, Jinghan Jia, Zhiqi Bu, Bhanukiran Vinzamuri, Anil Ramakrishna, Kai-Wei Chang, Volkan Cevher, Sijia Liu, Mingyi Hong
+
+**Abstract:** Enabling large language models (LLMs) to unlearn knowledge and capabilities acquired during training has proven vital for ensuring compliance with data regulations and promoting ethical practices in generative AI. Although there are growing interests in developing various unlearning algorithms, it remains unclear how to best formulate the unlearning problem. The most popular formulation uses a weighted sum of forget and retain loss, but it often leads to performance degradation due to the inherent trade-off between forget and retain losses. In this work, we argue that it is important to model the hierarchical structure of the unlearning problem, where the forget problem (which \textit{unlearns} certain knowledge and/or capabilities) takes priority over the retain problem (which preserves model utility). This hierarchical structure naturally leads to a bi-level optimization formulation where the lower-level objective focuses on minimizing the forget loss, while the upper-level objective aims to maintain the model's utility. Based on this new formulation, we propose a novel algorithm, termed Bi-Level UnleaRning (\texttt{BLUR}), which not only possesses strong theoretical guarantees but more importantly, delivers superior performance. In particular, our extensive experiments demonstrate that \texttt{BLUR} consistently outperforms all the state-of-the-art algorithms across various unlearning tasks, models, and metrics. Codes are available at https://github.com/OptimAI-Lab/BLURLLMUnlearning.
+
+**Comment:** The paper proposes a novel bi-level optimization approach for LLM unlearning, which is relevant to foundational research in LLMs.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 23. [On Reasoning Strength Planning in Large Reasoning Models](https://arxiv.org/abs/2506.08390) <a id="link23"></a>
+
+**ArXiv ID:** 2506.08390
+
+**Authors:** Leheng Sheng, An Zhang, Zijian Wu, Weixiang Zhao, Changshuo Shen, Yi Zhang, Xiang Wang, Tat-Seng Chua
+
+**Abstract:** Recent studies empirically reveal that large reasoning models (LRMs) can automatically allocate more reasoning strengths (i.e., the number of reasoning tokens) for harder problems, exhibiting difficulty-awareness for better task performance. While this automatic reasoning strength allocation phenomenon has been widely observed, its underlying mechanism remains largely unexplored. To this end, we provide explanations for this phenomenon from the perspective of model activations. We find evidence that LRMs pre-plan the reasoning strengths in their activations even before generation, with this reasoning strength causally controlled by the magnitude of a pre-allocated directional vector. Specifically, we show that the number of reasoning tokens is predictable solely based on the question activations using linear probes, indicating that LRMs estimate the required reasoning strength in advance. We then uncover that LRMs encode this reasoning strength through a pre-allocated directional vector embedded in the activations of the model, where the vector's magnitude modulates the reasoning strength. Subtracting this vector can lead to reduced reasoning token number and performance, while adding this vector can lead to increased reasoning token number and even improved performance. We further reveal that this direction vector consistently yields positive reasoning length prediction, and it modifies the logits of end-of-reasoning token  to affect the reasoning length. Finally, we demonstrate two potential applications of our findings: overthinking behavior detection and enabling efficient reasoning on simple problems. Our work provides new insights into the internal mechanisms of reasoning in LRMs and offers practical tools for controlling their reasoning behaviors. Our code is available at https://github.com/AlphaLab-USTC/LRM-plans-CoT.
+
+**Comment:** The paper explores reasoning strength in large reasoning models, providing insights into LLM behavior, which is relevant to foundational research in LLMs.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 24. [Thermodynamically Consistent Latent Dynamics Identification for Parametric Systems](https://arxiv.org/abs/2506.08475) <a id="link24"></a>
+
+**ArXiv ID:** 2506.08475
+
+**Authors:** Xiaolong He, Yeonjong Shin, Anthony Gruber, Sohyeon Jung, Kookjin Lee, Youngsoo Choi
+
+**Abstract:** We propose an efficient thermodynamics-informed latent space dynamics identification (tLaSDI) framework for the reduced-order modeling of parametric nonlinear dynamical systems. This framework integrates autoencoders for dimensionality reduction with newly developed parametric GENERIC formalism-informed neural networks (pGFINNs), which enable efficient learning of parametric latent dynamics while preserving key thermodynamic principles such as free energy conservation and entropy generation across the parameter space. To further enhance model performance, a physics-informed active learning strategy is incorporated, leveraging a greedy, residual-based error indicator to adaptively sample informative training data, outperforming uniform sampling at equivalent computational cost. Numerical experiments on the Burgers' equation and the 1D/1V Vlasov-Poisson equation demonstrate that the proposed method achieves up to 3,528x speed-up with 1-3% relative errors, and significant reduction in training (50-90%) and inference (57-61%) cost. Moreover, the learned latent space dynamics reveal the underlying thermodynamic behavior of the system, offering valuable insights into the physical-space dynamics.
+
+**Comment:** The paper proposes a framework for reduced-order modeling using autoencoders, which is relevant to representation learning and model efficiency.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 25. [Text Embeddings Should Capture Implicit Semantics, Not Just Surface Meaning](https://arxiv.org/abs/2506.08354) <a id="link25"></a>
+
+**ArXiv ID:** 2506.08354
+
+**Authors:** Yiqun Sun, Qiang Huang, Anthony K. H. Tung, Jun Yu
+
+**Abstract:** This position paper argues that the text embedding research community should move beyond surface meaning and embrace implicit semantics as a central modeling goal. Text embedding models have become foundational in modern NLP, powering a wide range of applications and drawing increasing research attention. Yet, much of this progress remains narrowly focused on surface-level semantics. In contrast, linguistic theory emphasizes that meaning is often implicit, shaped by pragmatics, speaker intent, and sociocultural context. Current embedding models are typically trained on data that lacks such depth and evaluated on benchmarks that reward the capture of surface meaning. As a result, they struggle with tasks requiring interpretive reasoning, speaker stance, or social meaning. Our pilot study highlights this gap, showing that even state-of-the-art models perform only marginally better than simplistic baselines on implicit semantics tasks. To address this, we call for a paradigm shift: embedding research should prioritize more diverse and linguistically grounded training data, design benchmarks that evaluate deeper semantic understanding, and explicitly frame implicit meaning as a core modeling objective, better aligning embeddings with real-world language complexity.
+
+**Comment:** The paper argues for a shift in text embedding research to focus on implicit semantics, which is relevant to representation learning.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 26. [What makes an Ensemble (Un) Interpretable?](https://arxiv.org/abs/2506.08216) <a id="link26"></a>
+
+**ArXiv ID:** 2506.08216
+
+**Authors:** Shahaf Bassan, Guy Amir, Meirav Zehavi, Guy Katz
+
+**Abstract:** Ensemble models are widely recognized in the ML community for their limited interpretability. For instance, while a single decision tree is considered interpretable, ensembles of trees (e.g., boosted trees) are often treated as black-boxes. Despite this folklore recognition, there remains a lack of rigorous mathematical understanding of what particularly makes an ensemble (un)-interpretable, including how fundamental factors like the (1) *number*, (2) *size*, and (3) *type* of base models influence its interpretability. In this work, we seek to bridge this gap by applying concepts from computational complexity theory to study the challenges of generating explanations for various ensemble configurations. Our analysis uncovers nuanced complexity patterns influenced by various factors. For example, we demonstrate that under standard complexity assumptions like P$\neq$NP, interpreting ensembles remains intractable even when base models are of constant size. Surprisingly, the complexity changes drastically with the number of base models: small ensembles of decision trees are efficiently interpretable, whereas interpreting ensembles with even a constant number of linear models remains intractable. We believe that our findings provide a more robust foundation for understanding the interpretability of ensembles, emphasizing the benefits of examining it through a computational complexity lens.
+
+**Comment:** The paper analyzes the interpretability of ensemble models using computational complexity theory, which is relevant to model architecture analysis.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 27. [Dense Retrievers Can Fail on Simple Queries: Revealing The Granularity Dilemma of Embeddings](https://arxiv.org/abs/2506.08592) <a id="link27"></a>
+
+**ArXiv ID:** 2506.08592
+
+**Authors:** Liyan Xu, Zhenlin Su, Mo Yu, Jiangnan Li, Fandong Meng, Jie Zhou
+
+**Abstract:** This work focuses on an observed limitation of text encoders: embeddings may not be able to recognize fine-grained entities or events within the semantics, resulting in failed dense retrieval on even simple cases. To examine such behaviors, we first introduce a new evaluation dataset in Chinese, named CapRetrieval, whose passages are image captions, and queries are phrases inquiring entities or events in various forms. Zero-shot evaluation suggests that encoders may fail on these fine-grained matching, regardless of training sources or model sizes. Aiming for enhancement, we proceed to finetune encoders with our proposed data generation strategies, which obtains the best performance on CapRetrieval. Within this process, we further identify an issue of granularity dilemma, a challenge for embeddings to express fine-grained salience while aligning with overall semantics. Our dataset, code and models in this work are publicly released at https://github.com/lxucs/CapRetrieval.
+
+**Comment:** The paper addresses the granularity dilemma in embeddings, which is relevant to representation learning. It provides insights into the limitations of text encoders and proposes data generation strategies for improvement.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 28. [BioLangFusion: Multimodal Fusion of DNA, mRNA, and Protein Language Models](https://arxiv.org/abs/2506.08936) <a id="link28"></a>
+
+**ArXiv ID:** 2506.08936
+
+**Authors:** Amina Mollaysa, Artem Moskale, Pushpak Pati, Tommaso Mansi, Mangal Prakash, Rui Liao
+
+**Abstract:** We present BioLangFusion, a simple approach for integrating pre-trained DNA, mRNA, and protein language models into unified molecular representations. Motivated by the central dogma of molecular biology (information flow from gene to transcript to protein), we align per-modality embeddings at the biologically meaningful codon level (three nucleotides encoding one amino acid) to ensure direct cross-modal correspondence. BioLangFusion studies three standard fusion techniques: (i) codon-level embedding concatenation, (ii) entropy-regularized attention pooling inspired by multiple-instance learning, and (iii) cross-modal multi-head attention -- each technique providing a different inductive bias for combining modality-specific signals. These methods require no additional pre-training or modification of the base models, allowing straightforward integration with existing sequence-based foundation models. Across five molecular property prediction tasks, BioLangFusion outperforms strong unimodal baselines, showing that even simple fusion of pre-trained models can capture complementary multi-omic information with minimal overhead.
+
+**Comment:** The paper presents a multimodal fusion approach for molecular language models, which is relevant to AI for science. It introduces new fusion techniques for integrating pre-trained models, contributing to foundational research in molecular modeling.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 29. [MAC: An Efficient Gradient Preconditioning using Mean Activation Approximated Curvature](https://arxiv.org/abs/2506.08464) <a id="link29"></a>
+
+**ArXiv ID:** 2506.08464
+
+**Authors:** Hyunseok Seung, Jaewoo Lee, Hyunsuk Ko
+
+**Abstract:** Second-order optimization methods for training neural networks, such as KFAC, exhibit superior convergence by utilizing curvature information of loss landscape. However, it comes at the expense of high computational burden. In this work, we analyze the two components that constitute the layer-wise Fisher information matrix (FIM) used in KFAC: the Kronecker factors related to activations and pre-activation gradients. Based on empirical observations on their eigenspectra, we propose efficient approximations for them, resulting in a computationally efficient optimization method called MAC. To the best of our knowledge, MAC is the first algorithm to apply the Kronecker factorization to the FIM of attention layers used in transformers and explicitly integrate attention scores into the preconditioning. We also study the convergence property of MAC on nonlinear neural networks and provide two conditions under which it converges to global minima. Our extensive evaluations on various network architectures and datasets show that the proposed method outperforms KFAC and other state-of-the-art methods in terms of accuracy, end-to-end training time, and memory usage. Code is available at https://github.com/hseung88/mac.
+
+**Comment:** The paper introduces an efficient gradient preconditioning method for training neural networks, which relates to model architecture and optimization. It provides a novel approach to improving training efficiency.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 30. [Aligning Proteins and Language: A Foundation Model for Protein Retrieval](https://arxiv.org/abs/2506.08023) <a id="link30"></a>
+
+**ArXiv ID:** 2506.08023
+
+**Authors:** Qifeng Wu, Zhengzhe Liu, Han Zhu, Yizhou Zhao, Daisuke Kihara, Min Xu
+
+**Abstract:** This paper aims to retrieve proteins with similar structures and semantics from large-scale protein dataset, facilitating the functional interpretation of protein structures derived by structural determination methods like cryo-Electron Microscopy (cryo-EM). Motivated by the recent progress of vision-language models (VLMs), we propose a CLIP-style framework for aligning 3D protein structures with functional annotations using contrastive learning. For model training, we propose a large-scale dataset of approximately 200,000 protein-caption pairs with rich functional descriptors. We evaluate our model in both in-domain and more challenging cross-database retrieval on Protein Data Bank (PDB) and Electron Microscopy Data Bank (EMDB) dataset, respectively. In both cases, our approach demonstrates promising zero-shot retrieval performance, highlighting the potential of multimodal foundation models for structure-function understanding in protein biology.
+
+**Comment:** The paper proposes a foundation model for protein retrieval using contrastive learning, aligning with foundational research in AI for science.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 31. [SEMA: a Scalable and Efficient Mamba like Attention via Token Localization and Averaging](https://arxiv.org/abs/2506.08297) <a id="link31"></a>
+
+**ArXiv ID:** 2506.08297
+
+**Authors:** Nhat Thanh Tran, Fanghui Xue, Shuai Zhang, Jiancheng Lyu, Yunling Zheng, Yingyong Qi, Jack Xin
+
+**Abstract:** Attention is the critical component of a transformer. Yet the quadratic computational complexity of vanilla full attention in the input size and the inability of its linear attention variant to focus have been challenges for computer vision tasks. We provide a mathematical definition of generalized attention and formulate both vanilla softmax attention and linear attention within the general framework. We prove that generalized attention disperses, that is, as the number of keys tends to infinity, the query assigns equal weights to all keys. Motivated by the dispersion property and recent development of Mamba form of attention, we design Scalable and Efficient Mamba like Attention (SEMA) which utilizes token localization to avoid dispersion and maintain focusing, complemented by theoretically consistent arithmetic averaging to capture global aspect of attention. We support our approach on Imagenet-1k where classification results show that SEMA is a scalable and effective alternative beyond linear attention, outperforming recent vision Mamba models on increasingly larger scales of images at similar model parameter sizes.
+
+**Comment:** The paper introduces a new attention mechanism, SEMA, which is relevant to model architecture innovations.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 32. [AlphaFold Database Debiasing for Robust Inverse Folding](https://arxiv.org/abs/2506.08365) <a id="link32"></a>
+
+**ArXiv ID:** 2506.08365
+
+**Authors:** Cheng Tan, Zhenxiao Cao, Zhangyang Gao, Siyuan Li, Yufei Huang, Stan Z. Li
+
+**Abstract:** The AlphaFold Protein Structure Database (AFDB) offers unparalleled structural coverage at near-experimental accuracy, positioning it as a valuable resource for data-driven protein design. However, its direct use in training deep models that are sensitive to fine-grained atomic geometry, such as inverse folding, exposes a critical limitation. Comparative analysis of structural feature distributions reveals that AFDB structures exhibit distinct statistical regularities, reflecting a systematic geometric bias that deviates from the conformational diversity found in experimentally determined structures from the Protein Data Bank (PDB). While AFDB structures are cleaner and more idealized, PDB structures capture the intrinsic variability and physical realism essential for generalization in downstream tasks. To address this discrepancy, we introduce a Debiasing Structure AutoEncoder (DeSAE) that learns to reconstruct native-like conformations from intentionally corrupted backbone geometries. By training the model to recover plausible structural states, DeSAE implicitly captures a more robust and natural structural manifold. At inference, applying DeSAE to AFDB structures produces debiased structures that significantly improve inverse folding performance across multiple benchmarks. This work highlights the critical impact of subtle systematic biases in predicted structures and presents a principled framework for debiasing, significantly boosting the performance of structure-based learning tasks like inverse folding.
+
+**Comment:** The paper introduces a Debiasing Structure AutoEncoder for protein structure modeling, which is relevant to foundational research in AI for Science.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 33. [An Adaptive Method Stabilizing Activations for Enhanced Generalization](https://arxiv.org/abs/2506.08353) <a id="link33"></a>
+
+**ArXiv ID:** 2506.08353
+
+**Authors:** Hyunseok Seung, Jaewoo Lee, Hyunsuk Ko
+
+**Abstract:** We introduce AdaAct, a novel optimization algorithm that adjusts learning rates according to activation variance. Our method enhances the stability of neuron outputs by incorporating neuron-wise adaptivity during the training process, which subsequently leads to better generalization -- a complementary approach to conventional activation regularization methods. Experimental results demonstrate AdaAct's competitive performance across standard image classification benchmarks. We evaluate AdaAct on CIFAR and ImageNet, comparing it with other state-of-the-art methods. Importantly, AdaAct effectively bridges the gap between the convergence speed of Adam and the strong generalization capabilities of SGD, all while maintaining competitive execution times. Code is available at https://github.com/hseung88/adaact.
+
+**Comment:** The paper introduces AdaAct, an optimization algorithm for stabilizing activations, which is relevant to representation learning and model architecture.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 34. [Propositional Logic for Probing Generalization in Neural Networks](https://arxiv.org/abs/2506.08978) <a id="link34"></a>
+
+**ArXiv ID:** 2506.08978
+
+**Authors:** Anna Langedijk, Jaap Jumelet, Willem Zuidema
+
+**Abstract:** The extent to which neural networks are able to acquire and represent symbolic rules remains a key topic of research and debate. Much current work focuses on the impressive capabilities of large language models, as well as their often ill-understood failures on a wide range of reasoning tasks. In this paper, in contrast, we investigate the generalization behavior of three key neural architectures (Transformers, Graph Convolution Networks and LSTMs) in a controlled task rooted in propositional logic. The task requires models to generate satisfying assignments for logical formulas, making it a structured and interpretable setting for studying compositionality. We introduce a balanced extension of an existing dataset to eliminate superficial patterns and enable testing on unseen operator combinations. Using this dataset, we evaluate the ability of the three architectures to generalize beyond the training distribution. While all models perform well in-distribution, we find that generalization to unseen patterns, particularly those involving negation, remains a significant challenge. Transformers fail to apply negation compositionally, unless structural biases are introduced. Our findings highlight persistent limitations in the ability of standard architectures to learn systematic representations of logical operators, suggesting the need for stronger inductive biases to support robust rule-based reasoning.
+
+**Comment:** The paper investigates the generalization behavior of neural architectures in propositional logic tasks, which is relevant to representation learning and model architecture.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+# Paper Selection Prompt
+
+## System Prompt
+
+> You are a helpful paper reading assistant whose job is to read daily posts from ArXiv and identify a few papers that your friend will enjoy reading.
+> Your job is to carefully read the paper titles and abstracts below and find the ones that match the criteria below.
+
+## User Prompt
+
+> ## Instructions
+> 
+> Write the response in JSONL format with {ARXIVID, COMMENT, RELEVANCE, NOVELTY} on each line, one for each paper.
+> 
+> - ARXIVID: should be the ArXiv ID.
+> - COMMENT: should identify whether there is a criteria that match the paper very closely. These matches should not be based on general terms like "language modeling" or "advancements" and should specifically refer to a criterion. No need to mention the non-matching criteria.
+> - RELEVANCE: should be a score from 1-10.
+> - NOVELTY: should be a score from 1-10.
+> 
+> ## Scoring Criteria
+> 
+> > The "Relevance" score measures how closely the paper aligns with the core topics of the prompt.
+> > The "Novelty" score assesses the originality and impact of the paper.
+> > They are two **ORTHONORMAL** axes and **SHOULD NOT** be confused with each other.
+> 
+> ### Relevance Scoring
+> 
+> - Relevance 9-10 (Completely Relevant)
+>   - Focus: Fully aligned with core topics with no deviation, score the highest if contains relevant keywords in it.
+>   - Examples: Papers focused on foundational methods or theoretical research, whose titles contain topic keywords like "MoE".
+> 
+> - Relevance 7-8 (Relevant)
+>   - Focus: Retain a solid link to the main research area, though may touch on peripheral elements.
+>   - Examples: Papers research on the fundamental part of MoE through a less critical aspect like its behavior in GNN.
+> 
+> - Relevance 5-6 (Borderline)
+>   - Focus: Maintains a link to the core topic but also extends into at least one other domain/area beyond the primary focus.
+>   - Examples: Work referencing MoE centered on reinforcement learning.
+> 
+> - Relevance 3-4 (Irrelevant)
+>   - Focus: Largely outside our interests with no association to our topics.
+>   - Examples: Application-focused papers like using MoE to solve a problem in the real world.
+> 
+> - Relevance 1-2 (Ignore)
+>   - Focus: Purely unrelated to our topics. Completely a different domain.
+>   - **Exception**: If the paper hints at a cutting-edge, radically new direction that could eventually transform the primary domain, consider a score of 9–10 despite initial appearances. (Usually a very rare concept that belongs to the fundamental research)
+> 
+> ### Novelty Scoring
+> 
+> - Novelty 9-10 (Breakthrough)
+>   - Definition: Groundbreaking methods/theory introducing new directions or solving major challenges.
+>   - Examples: Entirely new paradigm for foundational models; a novel theory transforming representation learning.
+> 
+> - Novelty 7-8 (Improvements)
+>   - Definition: Substantial insights/enhancements, though not a full paradigm shift.
+>   - Examples: Modifications on existing methods yielding significantly better results.
+> 
+> - Novelty 5-6 (Borderline)
+>   - Definition: Incremental contributions with possible long-term benefits, not immediately transformative.
+>   - Examples: Moderately novel extension to an existing architecture; refining current methods without fundamentally altering them.
+> 
+> - Novelty 3-4 (Tangential)
+>   - Definition: Minor or domain-specific improvements with limited broader impact.
+>   - Examples: Slight modifications to known methods with strange motivation; purely engineering jobs like a new benchmark/dataset.
+> 
+> - Novelty 1-2 (Low)
+>   - Definition: Minimal originality, applying standard approaches without real innovation.
+>   - Examples: Using an off-the-shelf model without adding new insights; purely application-driven studies like finetuning a pretrained model using existing methods.
+> 
+> ## Papers
+> 
+> [PAPER LIST HERE]
+> 
+> ## Relevant Topics
+> 
+> Use the following relevance criteria to focus on foundational research. Keep **relevant** papers and filter out **irrelevant** ones. Avoid purely **application-driven** work.
+> 
+> 1. Representation Learning
+>    - Relevant: Insights into how deep networks encode information, feature/dictionary learning, sparse/contrastive methods, training dynamics in neural networks.
+>    - Irrelevant: Standard applications of known techniques lacking new theoretical or methodological contributions.
+> 
+> 2. Model Architecture
+>    - Relevant: Mixture-of-Experts (MoE), Transformers, Conditional/Dynamic Networks, Autoencoders, analysis on existing architectures (like encoder-decoder), or other architectural innovations.
+>    - Irrelevant: Merely using existing architectures for a certain task without insights into the structure themselves.
+> 
+> 3. Model Compression
+>    - Relevant: Sparsity, pruning, quantization, low-rank approaches, KV cache, or other algorithmic/theoretical efficiency breakthroughs.
+>    - Irrelevant: Straightforward applications of existing compression methods to new tasks.
+> 
+> 4. Large Language Models (LLMs)
+>    - Relevant: Major breakthroughs in pretraining or architecture, theoretical insights into LLM behavior/interpretability.
+>    - Irrelevant: Domain-specific usage (e.g., translation, jail-breaking), finetuning or inference tricks (e.g., instruction tuning, chain-of-thoughts, data mixing), or empirical dataset/benchmark studies and text-level analysis (e.g. hallucination, reasoning, safety).
+> 
+> 5. AI for Science
+>    - Relevant: Foundational research in molecular/protein modeling, new generative paradigms, or significant architecture-level innovations.
+>    - Irrelevant: Conventional, domain-specific applications without new theoretical perspectives.
+> 
+> 6. Emerging Trends
+>    - Relevant: Cutting-edge theoretical work challenging established assumptions or introducing broad new paradigms.
+>    - Irrelevant: Incremental improvements or trend-following without novel insights.
+> 
+> **Keywords:**
+> 
+> - Relevant: Mixture of Experts (MoE), Representation Learning, Compression/Efficiency, Sparse/Sparsity, Pruning, Quantization, Low-rank, Foundation Model, etc.
+> - Irrelevant: Reinforcement Learning, Transfer Learning, Federated Learning, Online Learning, Diffusion Models, etc.
+> - Application: Image Segmentation, Medical Imaging, 3D Vision, Video Understanding, Information Retrieval, Summarization, Recommendation Systems, Machine Translation, Speech Recognition, Signal Processing, Spatial/Temporal Modeling, Time Series, Knowledge Graph, etc.

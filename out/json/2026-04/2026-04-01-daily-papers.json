@@ -1,0 +1,651 @@
+{
+    "schema_version": 2,
+    "meta": {
+        "date": "2026-04-01",
+        "sort": [
+            "score",
+            "relevance"
+        ],
+        "topic_schema_version": 1,
+        "total_papers": 15,
+        "usage": {
+            "model": "gpt-5.4",
+            "prompt_tokens": 165268,
+            "completion_tokens": 21187,
+            "prompt_cost": 0.41317,
+            "completion_cost": 0.317805,
+            "total_arxiv_papers": 595,
+            "total_scanned_papers": 335,
+            "total_relevant_papers": 15
+        }
+    },
+    "topic_order": [
+        "architecture_training",
+        "efficiency_scaling",
+        "representation_structure",
+        "memory_systems",
+        "world_models_open_ended_rl"
+    ],
+    "diagnostics": {
+        "total_papers": 15,
+        "topic_counts": [
+            {
+                "topic_id": "architecture_training",
+                "topic_label": "Architecture and Training Dynamics",
+                "paper_count": 4
+            },
+            {
+                "topic_id": "efficiency_scaling",
+                "topic_label": "Efficiency, Compression, and Large-Scale Training",
+                "paper_count": 2
+            },
+            {
+                "topic_id": "representation_structure",
+                "topic_label": "Representation Learning Theory and Structure",
+                "paper_count": 4
+            },
+            {
+                "topic_id": "memory_systems",
+                "topic_label": "Memory Structures and Agent Memory Systems",
+                "paper_count": 0
+            },
+            {
+                "topic_id": "world_models_open_ended_rl",
+                "topic_label": "World Models, Exploration, and Open-Ended Reinforcement Learning",
+                "paper_count": 5
+            }
+        ],
+        "assignment_source_counts": {
+            "llm_exact": 15
+        },
+        "llm_assignment_count": 15,
+        "heuristic_assignment_count": 0,
+        "default_assignment_count": 0,
+        "invalid_primary_topic_fallback_count": 0,
+        "missing_primary_topic_fallback_count": 0,
+        "hotspot_paper_kind_counts": {
+            "new_frontier": 4,
+            "daily_hot": 2
+        },
+        "hotspot_paper_assignment_source_counts": {
+            "llm_exact": 6,
+            "default": 9
+        }
+    },
+    "papers": {
+        "2603.29805": {
+            "ARXIVID": "2603.29805",
+            "COMMENT": "Introduces a spectral 2-datapoint reduced density matrix observable for early warning and interpretation of phase transitions during training.",
+            "RELEVANCE": 9,
+            "NOVELTY": 8,
+            "PRIMARY_TOPIC_ID": "representation_structure",
+            "MATCHED_TOPIC_IDS": [
+                "architecture_training",
+                "representation_structure"
+            ],
+            "TOPIC_MATCH_COMMENT": "The paper is primarily about mechanistic understanding of training dynamics and emergent representation reorganization through a new spectral lens.",
+            "HOTSPOT_PAPER_TAGS": [
+                "new_frontier"
+            ],
+            "HOTSPOT_PAPER_COMMENT": "The 2RDM framing for training phase transitions appears like a genuinely new interpretability and dynamics-analysis direction.",
+            "SCORE": 17,
+            "authors": [
+                "Max Hennick",
+                "Guillaume Corlouer"
+            ],
+            "title": "From Density Matrices to Phase Transitions in Deep Learning: Spectral Early Warnings and Interpretability",
+            "abstract": "A key problem in the modern study of AI is predicting and understanding emergent capabilities in models during training. Inspired by methods for studying reactions in quantum chemistry, we present the ``2-datapoint reduced density matrix\". We show that this object provides a computationally efficient, unified observable of phase transitions during training. By tracking the eigenvalue statistics of the 2RDM over a sliding window, we derive two complementary signals: the spectral heat capacity, which we prove provides early warning of second-order phase transitions via critical slowing down, and the participation ratio, which reveals the dimensionality of the underlying reorganization. Remarkably, the top eigenvectors of the 2RDM are directly interpretable making it straightforward to study the nature of the transitions. We validate across four settings distinct settings: deep linear networks, induction head formation, grokking, and emergent misalignment. We then discuss directions for future work using the 2RDM.",
+            "arxiv_id": "2603.29805",
+            "PRIMARY_TOPIC_LABEL": "Representation Learning Theory and Structure",
+            "MATCHED_TOPIC_LABELS": [
+                "Architecture and Training Dynamics",
+                "Representation Learning Theory and Structure"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [
+                "New Frontier Papers"
+            ],
+            "HOTSPOT_PAPER_PRIMARY_KIND": "new_frontier",
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "New Frontier Papers",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "llm_exact"
+        },
+        "2603.28964": {
+            "ARXIVID": "2603.28964",
+            "COMMENT": "Proposes spectral-gap dynamics of rolling update Gram matrices as a mechanistic account of grokking and training phase transitions.",
+            "RELEVANCE": 9,
+            "NOVELTY": 8,
+            "PRIMARY_TOPIC_ID": "architecture_training",
+            "MATCHED_TOPIC_IDS": [
+                "architecture_training",
+                "representation_structure"
+            ],
+            "TOPIC_MATCH_COMMENT": "Primary fit is architecture_training because the main claim is about training dynamics and phase transitions in neural optimization, not downstream behavior.",
+            "HOTSPOT_PAPER_TAGS": [
+                "new_frontier"
+            ],
+            "HOTSPOT_PAPER_COMMENT": "It advances a distinctive mathematical thesis for training phase transitions that could seed a new mechanistic analysis direction if it holds up.",
+            "SCORE": 17,
+            "authors": [
+                "Yongzhong Xu"
+            ],
+            "title": "The Spectral Edge Thesis: A Mathematical Framework for Intra-Signal Phase Transitions in Neural Network Training",
+            "abstract": "We develop the spectral edge thesis: phase transitions in neural network training -- grokking, capability gains, loss plateaus -- are controlled by the spectral gap of the rolling-window Gram matrix of parameter updates. In the extreme aspect ratio regime (parameters $P \\sim 10^8$, window $W \\sim 10$), the classical BBP detection threshold is vacuous; the operative structure is the intra-signal gap separating dominant from subdominant modes at position $k^* = \\mathrm{argmax}\\, \\sigma_j/\\sigma_{j+1}$.   From three axioms we derive: (i) gap dynamics governed by a Dyson-type ODE with curvature asymmetry, damping, and gradient driving; (ii) a spectral loss decomposition linking each mode's learning contribution to its Davis--Kahan stability coefficient; (iii) the Gap Maximality Principle, showing that $k^*$ is the unique dynamically privileged position -- its collapse is the only one that disrupts learning, and it sustains itself through an $\\alpha$-feedback loop requiring no assumption on the optimizer. The adiabatic parameter $\\mathcal{A} = \\|\\Delta G\\|_F / (\\eta\\, g^2)$ controls circuit stability: $\\mathcal{A} \\ll 1$ (plateau), $\\mathcal{A} \\sim 1$ (phase transition), $\\mathcal{A} \\gg 1$ (forgetting).   Tested across six model families (150K--124M parameters): gap dynamics precede every grokking event (24/24 with weight decay, 0/24 without), the gap position is optimizer-dependent (Muon: $k^*=1$, AdamW: $k^*=2$ on the same model), and 19/20 quantitative predictions are confirmed. The framework is consistent with the edge of stability, Tensor Programs, Dyson Brownian motion, the Lottery Ticket Hypothesis, and neural scaling laws.",
+            "arxiv_id": "2603.28964",
+            "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+            "MATCHED_TOPIC_LABELS": [
+                "Architecture and Training Dynamics",
+                "Representation Learning Theory and Structure"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [
+                "New Frontier Papers"
+            ],
+            "HOTSPOT_PAPER_PRIMARY_KIND": "new_frontier",
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "New Frontier Papers",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "llm_exact"
+        },
+        "2603.29264": {
+            "ARXIVID": "2603.29264",
+            "COMMENT": "Learns a stable Koopman generator decomposition in latent space, giving interpretable spectra and guaranteed long-horizon stability for nonlinear dynamics.",
+            "RELEVANCE": 8,
+            "NOVELTY": 8,
+            "PRIMARY_TOPIC_ID": "architecture_training",
+            "MATCHED_TOPIC_IDS": [
+                "architecture_training",
+                "representation_structure"
+            ],
+            "TOPIC_MATCH_COMMENT": "The contribution is an architectural mechanism that constrains latent dynamics through generator structure to enforce stability and interpretability.",
+            "HOTSPOT_PAPER_TAGS": [],
+            "HOTSPOT_PAPER_COMMENT": "",
+            "SCORE": 16,
+            "authors": [
+                "Shafayeth Jamil",
+                "Rehan Kapadia"
+            ],
+            "title": "Lie Generator Networks for Nonlinear Partial Differential Equations",
+            "abstract": "Linear dynamical systems are fully characterized by their eigenspectra, accessible directly from the generator of the dynamics. For nonlinear systems governed by partial differential equations, no equivalent theory exists. We introduce Lie Generator Network--Koopman (LGN-KM), a neural operator that lifts nonlinear dynamics into a linear latent space and learns the continuous-time Koopman generator ($L_k$) through a decomposition $L_k = S - D_k$, where $S$ is skew-symmetric representing conservative inter-modal coupling, and $D_k$ is a positive-definite diagonal encoding modal dissipation. This architectural decomposition enforces stability and enables interpretability through direct spectral access to the learned dynamics. On two-dimensional Navier--Stokes turbulence, the generator recovers the known dissipation scaling and a complete multi-branch dispersion relation from trajectory data alone with no physics supervision. Independently trained models at different flow regimes recover matched gauge-invariant spectral structure, exposing a gauge freedom in the Koopman lifting. Because the generator is provably stable, it enables guaranteed long-horizon stability, continuous-time evaluation at arbitrary time, and physics-informed cross-viscosity model transfer.",
+            "arxiv_id": "2603.29264",
+            "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+            "MATCHED_TOPIC_LABELS": [
+                "Architecture and Training Dynamics",
+                "Representation Learning Theory and Structure"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [],
+            "HOTSPOT_PAPER_PRIMARY_KIND": null,
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+        },
+        "2603.29224": {
+            "ARXIVID": "2603.29224",
+            "COMMENT": "Shows that choosing which derived physical fields to carry under a storage budget is a primary bottleneck for fine-scale neural simulation fidelity.",
+            "RELEVANCE": 8,
+            "NOVELTY": 8,
+            "PRIMARY_TOPIC_ID": "representation_structure",
+            "MATCHED_TOPIC_IDS": [
+                "efficiency_scaling",
+                "representation_structure"
+            ],
+            "TOPIC_MATCH_COMMENT": "The core insight is about representational structure: which state variables preserve fine detail under compression and learned rollout.",
+            "HOTSPOT_PAPER_TAGS": [],
+            "HOTSPOT_PAPER_COMMENT": "",
+            "SCORE": 16,
+            "authors": [
+                "Wenshuo Wang",
+                "Fan Zhang"
+            ],
+            "title": "Derived Fields Preserve Fine-Scale Detail in Budgeted Neural Simulators",
+            "abstract": "Fine-scale-faithful neural simulation under fixed storage budgets remains challenging. Many existing methods reduce high-frequency error by improving architectures, training objectives, or rollout strategies. However, under budgeted coarsen-quantize-decode pipelines, fine detail can already be lost when the carried state is constructed. In the canonical periodic incompressible Navier-Stokes setting, we show that primitive and derived fields undergo systematically different retained-band distortions under the same operator. Motivated by this observation, we formulate Derived-Field Optimization (DerivOpt), a general state-design framework that chooses which physical fields are carried and how storage budget is allocated across them under a calibrated channel model. Across the full time-dependent forward subset of PDEBench, DerivOpt not only improves pooled mean rollout nRMSE, but also delivers a decisive advantage in fine-scale fidelity over a broad set of strong baselines. More importantly, the gains are already visible at input time, before rollout learning begins. This indicates that the carried state is often the dominant bottleneck under tight storage budgets. These results suggest a broader conclusion: in budgeted neural simulation, carried-state design should be treated as a first-class design axis alongside architecture, loss, and rollout strategy.",
+            "arxiv_id": "2603.29224",
+            "PRIMARY_TOPIC_LABEL": "Representation Learning Theory and Structure",
+            "MATCHED_TOPIC_LABELS": [
+                "Efficiency, Compression, and Large-Scale Training",
+                "Representation Learning Theory and Structure"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [],
+            "HOTSPOT_PAPER_PRIMARY_KIND": null,
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+        },
+        "2603.28956": {
+            "ARXIVID": "2603.28956",
+            "COMMENT": "Provides sharp generalization and bias bounds for minimum-norm interpolation under 2-uniform convexity beyond inner-product norms.",
+            "RELEVANCE": 8,
+            "NOVELTY": 8,
+            "PRIMARY_TOPIC_ID": "representation_structure",
+            "MATCHED_TOPIC_IDS": [
+                "representation_structure"
+            ],
+            "TOPIC_MATCH_COMMENT": "Primary fit is representation_structure because the paper is foundational learning theory about interpolation bias and generalization in overparameterized models.",
+            "HOTSPOT_PAPER_TAGS": [],
+            "HOTSPOT_PAPER_COMMENT": "",
+            "SCORE": 16,
+            "authors": [
+                "Gil Kur",
+                "Pierre Bizeul"
+            ],
+            "title": "Minimum Norm Interpolation via The Local Theory of Banach Spaces: The Role of $2$-Uniform Convexity",
+            "abstract": "The minimum-norm interpolator (MNI) framework has recently attracted considerable attention as a tool for understanding generalization in overparameterized models, such as neural networks. In this work, we study the MNI under a $2$-uniform convexity assumption, which is weaker than requiring the norm to be induced by an inner product, and it typically does not admit a closed-form solution. At a high level, we show that this condition yields an upper bound on the MNI bias in both linear and nonlinear models. We further show that this bound is sharp for overparameterized linear regression when the unit ball of the norm is in isotropic (or John's) position, and the covariates are isotropic, symmetric, i.i.d. sub-Gaussian, such as vectors with i.i.d. Bernoulli entries. Finally, under the same assumption on the covariates, we prove sharp generalization bounds for the $\\ell_p$-MNI when $p \\in \\bigl(1 + C/\\log d, 2\\bigr]$. To the best of our knowledge, this is the first work to establish sharp bounds for non-Gaussian covariates in linear models when the norm is not induced by an inner product. This work is deeply inspired by classical works on $K$-convexity, and more modern work on the geometry of 2-uniform and isotropic convex bodies.",
+            "arxiv_id": "2603.28956",
+            "PRIMARY_TOPIC_LABEL": "Representation Learning Theory and Structure",
+            "MATCHED_TOPIC_LABELS": [
+                "Representation Learning Theory and Structure"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [],
+            "HOTSPOT_PAPER_PRIMARY_KIND": null,
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+        },
+        "2603.28887": {
+            "ARXIVID": "2603.28887",
+            "COMMENT": "Long-horizon occupancy world model generates multi-kilometer simulations from a single frame plus ego actions.",
+            "RELEVANCE": 8,
+            "NOVELTY": 8,
+            "PRIMARY_TOPIC_ID": "world_models_open_ended_rl",
+            "MATCHED_TOPIC_IDS": [
+                "architecture_training",
+                "world_models_open_ended_rl"
+            ],
+            "TOPIC_MATCH_COMMENT": "Primary fit is world_models_open_ended_rl because the paper develops a foundational action-conditioned world simulator with unusually long-horizon generative dynamics.",
+            "HOTSPOT_PAPER_TAGS": [],
+            "HOTSPOT_PAPER_COMMENT": "",
+            "SCORE": 16,
+            "authors": [
+                "Tianran Liu",
+                "Shengwen Zhao",
+                "Mozhgan Pourkeshavarz",
+                "Weican Li",
+                "Nicholas Rhinehart"
+            ],
+            "title": "OccSim: Multi-kilometer Simulation with Long-horizon Occupancy World Models",
+            "abstract": "Data-driven autonomous driving simulation has long been constrained by its heavy reliance on pre-recorded driving logs or spatial priors, such as HD maps. This fundamental dependency severely limits scalability, restricting open-ended generation capabilities to the finite scale of existing collected datasets. To break this bottleneck, we present OccSim, the first occupancy world model-driven 3D simulator. OccSim obviates the requirement for continuous logs or HD maps; conditioned only on a single initial frame and a sequence of future ego-actions, it can stably generate over 3,000 continuous frames, enabling the continuous construction of large-scale 3D occupancy maps spanning over 4 kilometers for simulation. This represents an >80x improvement in stable generation length over previous state-of-the-art occupancy world models. OccSim is powered by two modules: W-DiT based static occupancy world model and the Layout Generator. W-DiT handles the ultra-long-horizon generation of static environments by explicitly introducing known rigid transformations in architecture design, while the Layout Generator populates the dynamic foreground with reactive agents based on the synthesized road topology. With these designs, OccSim can synthesize massive, diverse simulation streams. Extensive experiments demonstrate its downstream utility: data collected directly from OccSim can pre-train 4D semantic occupancy forecasting models to achieve up to 67% zero-shot performance on unseen data, outperforming previous asset-based simulator by 11%. When scaling the OccSim dataset to 5x the size, the zero-shot performance increases to about 74%, while the improvement over asset-based simulators expands to 22.1%.",
+            "arxiv_id": "2603.28887",
+            "PRIMARY_TOPIC_LABEL": "World Models, Exploration, and Open-Ended Reinforcement Learning",
+            "MATCHED_TOPIC_LABELS": [
+                "Architecture and Training Dynamics",
+                "World Models, Exploration, and Open-Ended Reinforcement Learning"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [],
+            "HOTSPOT_PAPER_PRIMARY_KIND": null,
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+        },
+        "2603.29768": {
+            "ARXIVID": "2603.29768",
+            "COMMENT": "Builds a measure-theoretic unification of compression methods and instantiates it with INR-based weight encoding for data-free compression.",
+            "RELEVANCE": 8,
+            "NOVELTY": 8,
+            "PRIMARY_TOPIC_ID": "efficiency_scaling",
+            "MATCHED_TOPIC_IDS": [
+                "efficiency_scaling"
+            ],
+            "TOPIC_MATCH_COMMENT": "Primary fit is efficiency_scaling because the paper is directly about principled model compression and proposes a new compression framework rather than a task-specific application.",
+            "HOTSPOT_PAPER_TAGS": [
+                "new_frontier"
+            ],
+            "HOTSPOT_PAPER_COMMENT": "The attempt to place disparate compression methods under one mathematical framework and compress via INR weight models is unusually direction-setting.",
+            "SCORE": 16,
+            "authors": [
+                "Jing-Xiao Liao",
+                "Haoran Wang",
+                "Tao Li",
+                "Daoming Lyu",
+                "Yi Zhang",
+                "Chengjun Cai",
+                "Feng-Lei Fan"
+            ],
+            "title": "Big2Small: A Unifying Neural Network Framework for Model Compression",
+            "abstract": "With the development of foundational models, model compression has become a critical requirement. Various model compression approaches have been proposed such as low-rank decomposition, pruning, quantization, ergodic dynamic systems, and knowledge distillation, which are based on different heuristics. To elevate the field from fragmentation to a principled discipline, we construct a unifying mathematical framework for model compression grounded in measure theory. We further demonstrate that each model compression technique is mathematically equivalent to a neural network subject to a regularization. Building upon this mathematical and structural equivalence, we propose an experimentally-verified data-free model compression framework, termed \\textit{Big2Small}, which translates Implicit Neural Representations (INRs) from data domain to the domain of network parameters. \\textit{Big2Small} trains compact INRs to encode the weights of larger models and reconstruct the weights during inference. To enhance reconstruction fidelity, we introduce Outlier-Aware Preprocessing to handle extreme weight values and a Frequency-Aware Loss function to preserve high-frequency details. Experiments on image classification and segmentation demonstrate that \\textit{Big2Small} achieves competitive accuracy and compression ratios compared to state-of-the-art baselines.",
+            "arxiv_id": "2603.29768",
+            "PRIMARY_TOPIC_LABEL": "Efficiency, Compression, and Large-Scale Training",
+            "MATCHED_TOPIC_LABELS": [
+                "Efficiency, Compression, and Large-Scale Training"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [
+                "New Frontier Papers"
+            ],
+            "HOTSPOT_PAPER_PRIMARY_KIND": "new_frontier",
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "New Frontier Papers",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "llm_exact"
+        },
+        "2603.29765": {
+            "ARXIVID": "2603.29765",
+            "COMMENT": "Training-free MoE upcycling composes separately specialized dense experts into a unified model via a closed-form ridge-regression construction.",
+            "RELEVANCE": 8,
+            "NOVELTY": 8,
+            "PRIMARY_TOPIC_ID": "architecture_training",
+            "MATCHED_TOPIC_IDS": [
+                "architecture_training",
+                "efficiency_scaling"
+            ],
+            "TOPIC_MATCH_COMMENT": "Primary fit is architecture_training because the main idea is a new way to construct modular expert architectures, with efficiency benefits as a secondary consequence.",
+            "HOTSPOT_PAPER_TAGS": [],
+            "HOTSPOT_PAPER_COMMENT": "",
+            "SCORE": 16,
+            "authors": [
+                "Eros Fan\\`i",
+                "O\\u{g}uzhan Ersoy"
+            ],
+            "title": "Training-Free Dynamic Upcycling of Expert Language Models",
+            "abstract": "Large Language Models (LLMs) have achieved remarkable performance on a wide range of specialized tasks, exhibiting strong problem-solving capabilities. However, training these models is prohibitively expensive, and they often lack domain-specific expertise because they rely on general knowledge datasets. Expertise finetuning can address this issue; however, it often leads to overspecialization, and developing a single multi-domain expert remains difficult due to diverging objectives. Furthermore, multitask training is challenging due to interference and catastrophic forgetting. Existing work proposes combining the expertise of dense models within a Mixture of Experts (MoE) architecture, although this approach still requires multitask finetuning. To address these issues, we introduce Dynamic Upcycling MoE (DUME), a novel approach that reuses dense experts trained on different domains to construct a unified MoE model. Our method builds a single multitask model that preserves the capabilities of the original dense experts without requiring additional training. DUME is both cost-efficient and scalable: by leveraging the closed-form solution of ridge regression, it eliminates the need for further optimization and enables experts to be added dynamically while maintaining the model's original performance. We demonstrate that DUME consistently outperforms baseline approaches in both causal language modeling and reasoning settings. Finally, we also show that the DUME model can be fine-tuned to further improve performance. We show that, in the causal language modeling setting, DUME can retain up to 97.6% of a dense expert model specialized in one particular domain, and that it can also surpass it in the reasoning setting, where it can achieve 102.1% of the dense expert performance. Our code is available at: github.com/gensyn-ai/dume.",
+            "arxiv_id": "2603.29765",
+            "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+            "MATCHED_TOPIC_LABELS": [
+                "Architecture and Training Dynamics",
+                "Efficiency, Compression, and Large-Scale Training"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [],
+            "HOTSPOT_PAPER_PRIMARY_KIND": null,
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+        },
+        "2603.29844": {
+            "ARXIVID": "2603.29844",
+            "COMMENT": "It introduces a latent world-modeling bottleneck that decouples intent from action in end-to-end VLA training.",
+            "RELEVANCE": 8,
+            "NOVELTY": 8,
+            "PRIMARY_TOPIC_ID": "world_models_open_ended_rl",
+            "MATCHED_TOPIC_IDS": [
+                "architecture_training",
+                "world_models_open_ended_rl"
+            ],
+            "TOPIC_MATCH_COMMENT": "Primary fit is world models/open-ended RL because the central idea is latent foresight as an explicit world-model-like intermediate for control.",
+            "HOTSPOT_PAPER_TAGS": [],
+            "HOTSPOT_PAPER_COMMENT": "",
+            "SCORE": 16,
+            "authors": [
+                "Yi Chen",
+                "Yuying Ge",
+                "Hui Zhou",
+                "Mingyu Ding",
+                "Yixiao Ge",
+                "Xihui Liu"
+            ],
+            "title": "DIAL: Decoupling Intent and Action via Latent World Modeling for End-to-End VLA",
+            "abstract": "The development of Vision-Language-Action (VLA) models has been significantly accelerated by pre-trained Vision-Language Models (VLMs). However, most existing end-to-end VLAs treat the VLM primarily as a multimodal encoder, directly mapping vision-language features to low-level actions. This paradigm underutilizes the VLM's potential in high-level decision making and introduces training instability, frequently degrading its rich semantic representations. To address these limitations, we introduce DIAL, a framework bridging high-level decision making and low-level motor execution through a differentiable latent intent bottleneck. Specifically, a VLM-based System-2 performs latent world modeling by synthesizing latent visual foresight within the VLM's native feature space; this foresight explicitly encodes intent and serves as the structural bottleneck. A lightweight System-1 policy then decodes this predicted intent together with the current observation into precise robot actions via latent inverse dynamics. To ensure optimization stability, we employ a two-stage training paradigm: a decoupled warmup phase where System-2 learns to predict latent futures while System-1 learns motor control under ground-truth future guidance within a unified feature space, followed by seamless end-to-end joint optimization. This enables action-aware gradients to refine the VLM backbone in a controlled manner, preserving pre-trained knowledge. Extensive experiments on the RoboCasa GR1 Tabletop benchmark show that DIAL establishes a new state-of-the-art, achieving superior performance with 10x fewer demonstrations than prior methods. Furthermore, by leveraging heterogeneous human demonstrations, DIAL learns physically grounded manipulation priors and exhibits robust zero-shot generalization to unseen objects and novel configurations during real-world deployment on a humanoid robot.",
+            "arxiv_id": "2603.29844",
+            "PRIMARY_TOPIC_LABEL": "World Models, Exploration, and Open-Ended Reinforcement Learning",
+            "MATCHED_TOPIC_LABELS": [
+                "Architecture and Training Dynamics",
+                "World Models, Exploration, and Open-Ended Reinforcement Learning"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [],
+            "HOTSPOT_PAPER_PRIMARY_KIND": null,
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+        },
+        "2603.28823": {
+            "ARXIVID": "2603.28823",
+            "COMMENT": "It derives wall-clock-constrained scaling laws on consumer GPUs, identifying a different optimal model-size exponent than compute-optimal theory.",
+            "RELEVANCE": 8,
+            "NOVELTY": 8,
+            "PRIMARY_TOPIC_ID": "efficiency_scaling",
+            "MATCHED_TOPIC_IDS": [
+                "architecture_training",
+                "efficiency_scaling"
+            ],
+            "TOPIC_MATCH_COMMENT": "Primary fit is efficiency/scaling because the contribution is a new scaling-law perspective under real time budgets rather than FLOP budgets.",
+            "HOTSPOT_PAPER_TAGS": [],
+            "HOTSPOT_PAPER_COMMENT": "",
+            "SCORE": 16,
+            "authors": [
+                "Yi Liu"
+            ],
+            "title": "Time is Not Compute: Scaling Laws for Wall-Clock Constrained Training on Consumer GPUs",
+            "abstract": "Scaling laws relate model quality to compute budget (FLOPs), but practitioners face wall-clock time constraints, not compute budgets. We study optimal model sizing under fixed time budgets from 5 minutes to 24 hours on consumer GPUs (RTX 4090). Across 70+ runs spanning 50M--1031M parameters, we find: (1)~at each time budget a U-shaped curve emerges where too-small models overfit and too-large models undertrain; (2)~optimal model size follows $N^* \\propto t^{0.60}$, growing \\emph{faster} than Chinchilla's $N^* \\propto C^{0.50}$, with $\\alpha = 0.60 \\pm 0.07$ robustly exceeding compute-optimal across all sensitivity analyses; (3)~a \\emph{dual U-shape mechanism}: short-budget U-curves arise from compute bottlenecks, while long-budget U-curves emerge from data bottlenecks (overfitting), with an intermediate regime where the U-curve temporarily disappears. These findings have immediate implications for researchers training on consumer hardware, where wall-clock time -- not FLOPs -- is the binding constraint. We release all code, logs, and 70+ experimental configurations.",
+            "arxiv_id": "2603.28823",
+            "PRIMARY_TOPIC_LABEL": "Efficiency, Compression, and Large-Scale Training",
+            "MATCHED_TOPIC_LABELS": [
+                "Architecture and Training Dynamics",
+                "Efficiency, Compression, and Large-Scale Training"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [],
+            "HOTSPOT_PAPER_PRIMARY_KIND": null,
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+        },
+        "2603.29957": {
+            "ARXIVID": "2603.29957",
+            "COMMENT": "Enables reasoning to be invoked at arbitrary token positions during code generation, turning deliberation into an on-demand dynamic computation mechanism.",
+            "RELEVANCE": 8,
+            "NOVELTY": 8,
+            "PRIMARY_TOPIC_ID": "architecture_training",
+            "MATCHED_TOPIC_IDS": [
+                "architecture_training"
+            ],
+            "TOPIC_MATCH_COMMENT": "The strongest fit is dynamic computation and training of when to think, which is a core architectural/training mechanism rather than a mere benchmark gain.",
+            "HOTSPOT_PAPER_TAGS": [
+                "daily_hot"
+            ],
+            "HOTSPOT_PAPER_COMMENT": "The idea of token-position-triggered reasoning is broadly important and likely to matter beyond code generation, so it belongs in the daily hotspot feed too.",
+            "SCORE": 16,
+            "authors": [
+                "Xue Jiang",
+                "Tianyu Zhang",
+                "Ge Li",
+                "Mengyang Liu",
+                "Taozhi Chen",
+                "Zhenhua Xu",
+                "Binhua Li",
+                "Wenpin Jiao",
+                "Zhi Jin",
+                "Yongbin Li",
+                "Yihong Dong"
+            ],
+            "title": "Think Anywhere in Code Generation",
+            "abstract": "Recent advances in reasoning Large Language Models (LLMs) have primarily relied on upfront thinking, where reasoning occurs before final answer. However, this approach suffers from critical limitations in code generation, where upfront thinking is often insufficient as problems' full complexity only reveals itself during code implementation. Moreover, it cannot adaptively allocate reasoning effort throughout the code generation process where difficulty varies significantly. In this paper, we propose Think-Anywhere, a novel reasoning mechanism that enables LLMs to invoke thinking on-demand at any token position during code generation. We achieve Think-Anywhere by first teaching LLMs to imitate the reasoning patterns through cold-start training, then leveraging outcome-based RL rewards to drive the model's autonomous exploration of when and where to invoke reasoning. Extensive experiments on four mainstream code generation benchmarks (i.e., LeetCode, LiveCodeBench, HumanEval, and MBPP) show that Think-Anywhere achieves state-of-the-art performance over both existing reasoning methods and recent post-training approaches, while demonstrating consistent generalization across diverse LLMs. Our analysis further reveals that Think-Anywhere enables the model to adaptively invoke reasoning at high-entropy positions, providing enhanced interpretability.",
+            "arxiv_id": "2603.29957",
+            "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+            "MATCHED_TOPIC_LABELS": [
+                "Architecture and Training Dynamics"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [
+                "Daily Hot Papers"
+            ],
+            "HOTSPOT_PAPER_PRIMARY_KIND": "daily_hot",
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "Daily Hot Papers",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "llm_exact"
+        },
+        "2603.29315": {
+            "ARXIVID": "2603.29315",
+            "COMMENT": "Combines learned action-conditioned pixel dynamics with model-predictive planning for multi-step robotic control learned from self-play.",
+            "RELEVANCE": 8,
+            "NOVELTY": 8,
+            "PRIMARY_TOPIC_ID": "world_models_open_ended_rl",
+            "MATCHED_TOPIC_IDS": [
+                "world_models_open_ended_rl"
+            ],
+            "TOPIC_MATCH_COMMENT": "The core is a learned world model used for planning and control, squarely matching model-based agent learning rather than downstream robotics alone.",
+            "HOTSPOT_PAPER_TAGS": [],
+            "HOTSPOT_PAPER_COMMENT": "",
+            "SCORE": 16,
+            "authors": [
+                "Yingke Wang",
+                "Hao Li",
+                "Yifeng Zhu",
+                "Hong-Xing Yu",
+                "Ken Goldberg",
+                "Li Fei-Fei",
+                "Jiajun Wu",
+                "Yunzhu Li",
+                "Ruohan Zhang"
+            ],
+            "title": "IMPASTO: Integrating Model-Based Planning with Learned Dynamics Models for Robotic Oil Painting Reproduction",
+            "abstract": "Robotic reproduction of oil paintings using soft brushes and pigments requires force-sensitive control of deformable tools, prediction of brushstroke effects, and multi-step stroke planning, often without human step-by-step demonstrations or faithful simulators. Given only a sequence of target oil painting images, can a robot infer and execute the stroke trajectories, forces, and colors needed to reproduce it? We present IMPASTO, a robotic oil-painting system that integrates learned pixel dynamics models with model-based planning. The dynamics models predict canvas updates from image observations and parameterized stroke actions; a receding-horizon model predictive control optimizer then plans trajectories and forces, while a force-sensitive controller executes strokes on a 7-DoF robot arm. IMPASTO integrates low-level force control, learned dynamics models, and high-level closed-loop planning, learns solely from robot self-play, and approximates human artists' single-stroke datasets and multi-stroke artworks, outperforming baselines in reproduction accuracy. Project website: https://impasto-robopainting.github.io/",
+            "arxiv_id": "2603.29315",
+            "PRIMARY_TOPIC_LABEL": "World Models, Exploration, and Open-Ended Reinforcement Learning",
+            "MATCHED_TOPIC_LABELS": [
+                "World Models, Exploration, and Open-Ended Reinforcement Learning"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [],
+            "HOTSPOT_PAPER_PRIMARY_KIND": null,
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+        },
+        "2603.29735": {
+            "ARXIVID": "2603.29735",
+            "COMMENT": "Uses integrated information decomposition to argue that synergistic reasoning cores emerge in middle layers and sharpen with task difficulty.",
+            "RELEVANCE": 8,
+            "NOVELTY": 8,
+            "PRIMARY_TOPIC_ID": "representation_structure",
+            "MATCHED_TOPIC_IDS": [
+                "architecture_training",
+                "representation_structure"
+            ],
+            "TOPIC_MATCH_COMMENT": "The central contribution is mechanistic analysis of how functional structure emerges inside models, which fits representation structure best.",
+            "HOTSPOT_PAPER_TAGS": [
+                "daily_hot"
+            ],
+            "HOTSPOT_PAPER_COMMENT": "Claims about emergent reasoning cores in LLMs are likely to attract broad attention and discussion beyond niche foundational readers.",
+            "SCORE": 16,
+            "authors": [
+                "Junjie Zhang",
+                "Zhen Shen",
+                "Gang Xiong",
+                "Xisong Dong"
+            ],
+            "title": "Spontaneous Functional Differentiation in Large Language Models: A Brain-Like Intelligence Economy",
+            "abstract": "The evolution of intelligence in artificial systems provides a unique opportunity to identify universal computational principles. Here we show that large language models spontaneously develop synergistic cores where information integration exceeds individual parts remarkably similar to the human brain. Using Integrated Information Decomposition across multiple architectures we find that middle layers exhibit synergistic processing while early and late layers rely on redundancy. This organization is dynamic and emerges as a physical phase transition as task difficulty increases. Crucially ablating synergistic components causes catastrophic performance loss confirming their role as the physical entity of abstract reasoning and bridging artificial and biological intelligence.",
+            "arxiv_id": "2603.29735",
+            "PRIMARY_TOPIC_LABEL": "Representation Learning Theory and Structure",
+            "MATCHED_TOPIC_LABELS": [
+                "Architecture and Training Dynamics",
+                "Representation Learning Theory and Structure"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [
+                "Daily Hot Papers"
+            ],
+            "HOTSPOT_PAPER_PRIMARY_KIND": "daily_hot",
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "Daily Hot Papers",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "llm_exact"
+        },
+        "2603.29585": {
+            "ARXIVID": "2603.29585",
+            "COMMENT": "Combines LLM-generated folding programs with a learned graph-structured world model and lookahead planning for physically valid origami generation.",
+            "RELEVANCE": 8,
+            "NOVELTY": 8,
+            "PRIMARY_TOPIC_ID": "world_models_open_ended_rl",
+            "MATCHED_TOPIC_IDS": [
+                "world_models_open_ended_rl"
+            ],
+            "TOPIC_MATCH_COMMENT": "Its core contribution is world-model-guided planning over long-horizon physical transformations, making world models the natural primary topic.",
+            "HOTSPOT_PAPER_TAGS": [
+                "new_frontier"
+            ],
+            "HOTSPOT_PAPER_COMMENT": "The use of a learned world model as a differentiable feasibility oracle for text-conditioned origami program planning feels like a genuinely new planning domain.",
+            "SCORE": 16,
+            "authors": [
+                "Yanjia Huang",
+                "Yunuo Chen",
+                "Ying Jiang",
+                "Jinru Han",
+                "Zhengzhong Tu",
+                "Yin Yang",
+                "Chenfanfu Jiang"
+            ],
+            "title": "Learn2Fold: Structured Origami Generation with World Model Planning",
+            "abstract": "The ability to transform a flat sheet into a complex three-dimensional structure is a fundamental test of physical intelligence. Unlike cloth manipulation, origami is governed by strict geometric axioms and hard kinematic constraints, where a single invalid crease or collision can invalidate the entire folding sequence. As a result, origami demands long-horizon constructive reasoning that jointly satisfies precise physical laws and high-level semantic intent. Existing approaches fall into two disjoint paradigms: optimization-based methods enforce physical validity but require dense, precisely specified inputs, making them unsuitable for sparse natural language descriptions, while generative foundation models excel at semantic and perceptual synthesis yet fail to produce long-horizon, physics-consistent folding processes. Consequently, generating valid origami folding sequences directly from text remains an open challenge. To address this gap, we introduce Learn2Fold, a neuro-symbolic framework that formulates origami folding as conditional program induction over a crease-pattern graph. Our key insight is to decouple semantic proposal from physical verification. A large language model generates candidate folding programs from abstract text prompts, while a learned graph-structured world model serves as a differentiable surrogate simulator that predicts physical feasibility and failure modes before execution. Integrated within a lookahead planning loop, Learn2Fold enables robust generation of physically valid folding sequences for complex and out-of-distribution patterns, demonstrating that effective spatial intelligence arises from the synergy between symbolic reasoning and grounded physical simulation.",
+            "arxiv_id": "2603.29585",
+            "PRIMARY_TOPIC_LABEL": "World Models, Exploration, and Open-Ended Reinforcement Learning",
+            "MATCHED_TOPIC_LABELS": [
+                "World Models, Exploration, and Open-Ended Reinforcement Learning"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [
+                "New Frontier Papers"
+            ],
+            "HOTSPOT_PAPER_PRIMARY_KIND": "new_frontier",
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "New Frontier Papers",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "llm_exact"
+        },
+        "2603.29165": {
+            "ARXIVID": "2603.29165",
+            "COMMENT": "Learns action-conditioned latent visual dynamics and carries latent tokens across steps so the navigator can dream ahead without future frames at inference.",
+            "RELEVANCE": 8,
+            "NOVELTY": 8,
+            "PRIMARY_TOPIC_ID": "world_models_open_ended_rl",
+            "MATCHED_TOPIC_IDS": [
+                "memory_systems",
+                "world_models_open_ended_rl"
+            ],
+            "TOPIC_MATCH_COMMENT": "The central idea is an action-conditioned latent dynamics model for planning-like navigation, which is more aligned with world models than memory alone.",
+            "HOTSPOT_PAPER_TAGS": [],
+            "HOTSPOT_PAPER_COMMENT": "",
+            "SCORE": 16,
+            "authors": [
+                "Haihong Hao",
+                "Lei Chen",
+                "Mingfei Han",
+                "Changlin Li",
+                "Dong An",
+                "Yuqiang Yang",
+                "Zhihui Li",
+                "Xiaojun Chang"
+            ],
+            "title": "LatentPilot: Scene-Aware Vision-and-Language Navigation by Dreaming Ahead with Latent Visual Reasoning",
+            "abstract": "Existing vision-and-language navigation (VLN) models primarily reason over past and current visual observations, while largely ignoring the future visual dynamics induced by actions. As a result, they often lack an effective understanding of the causal relationship between actions and how the visual world changes, limiting robust decision-making. Humans, in contrast, can imagine the near future by leveraging action-dynamics causality, which improves both environmental understanding and navigation choices. Inspired by this capability, we propose LatentPilot, a new paradigm that exploits future observations during training as a valuable data source to learn action-conditioned visual dynamics, while requiring no access to future frames at inference. Concretely, we propose a flywheel-style training mechanism that iteratively collects on-policy trajectories and retrains the model to better match the agent's behavior distribution, with an expert takeover triggered when the agent deviates excessively. LatentPilot further learns visual latent tokens without explicit supervision; these latent tokens attend globally in a continuous latent space and are carried across steps, serving as both the current output and the next input, thereby enabling the agent to dream ahead and reason about how actions will affect subsequent observations. Experiments on R2R-CE, RxR-CE, and R2R-PE benchmarks achieve new SOTA results, and real-robot tests across diverse environments demonstrate LatentPilot's superior understanding of environment-action dynamics in scene. Project page:https://abdd.top/latentpilot/",
+            "arxiv_id": "2603.29165",
+            "PRIMARY_TOPIC_LABEL": "World Models, Exploration, and Open-Ended Reinforcement Learning",
+            "MATCHED_TOPIC_LABELS": [
+                "Memory Structures and Agent Memory Systems",
+                "World Models, Exploration, and Open-Ended Reinforcement Learning"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [],
+            "HOTSPOT_PAPER_PRIMARY_KIND": null,
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+        }
+    },
+    "topic_sections": [
+        {
+            "topic_id": "architecture_training",
+            "topic_label": "Architecture and Training Dynamics",
+            "paper_ids": [
+                "2603.28964",
+                "2603.29264",
+                "2603.29765",
+                "2603.29957"
+            ]
+        },
+        {
+            "topic_id": "efficiency_scaling",
+            "topic_label": "Efficiency, Compression, and Large-Scale Training",
+            "paper_ids": [
+                "2603.29768",
+                "2603.28823"
+            ]
+        },
+        {
+            "topic_id": "representation_structure",
+            "topic_label": "Representation Learning Theory and Structure",
+            "paper_ids": [
+                "2603.29805",
+                "2603.29224",
+                "2603.28956",
+                "2603.29735"
+            ]
+        },
+        {
+            "topic_id": "world_models_open_ended_rl",
+            "topic_label": "World Models, Exploration, and Open-Ended Reinforcement Learning",
+            "paper_ids": [
+                "2603.28887",
+                "2603.29844",
+                "2603.29315",
+                "2603.29585",
+                "2603.29165"
+            ]
+        }
+    ]
+}

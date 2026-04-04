@@ -1,0 +1,426 @@
+<div style="display: flex; align-items: flex-start; justify-content: space-between; width: 100%;"><div style="width: 33.33%; text-align: left;"><a href="../19"><img src="../../../assets/nav/day/2025-03-20-prev.svg" alt="Previous Day 2025-03-19"></a></div><div style="width: 33.33%; text-align: center;"><a href=".."><img src="../../../assets/nav/day/2025-03-20-center.svg" alt="Monthly Overview 2025-03"></a></div><div style="width: 33.33%; text-align: right;"><a href="../21"><img src="../../../assets/nav/day/2025-03-20-next.svg" alt="Next Day 2025-03-21"></a></div></div>
+
+# Personalized Daily Arxiv Papers 03/20/2025
+
+| *[gpt-4o]*   | Prompt   | Completion   | Total   |
+|--------------|----------|--------------|---------|
+| **Token**    | 33003    | 4587         | 37590   |
+| **Cost**     | $0.08    | $0.05        | $0.13   |
+
+Total arXiv papers: 413
+
+Total scanned papers: 236
+
+Total relevant papers: 17
+
+**Table of contents with paper titles:**
+
+1. [Borsuk-Ulam and Replicable Learning of Large-Margin Halfspaces](#user-content-link1)
+**Authors:** Ari Blondal, Hamed Hatami, Pooya Hatami, Chavdar Lalov, Sivan Tretiak
+
+2. [Exploring the Limits of KV Cache Compression in Visual Autoregressive Transformers](#user-content-link2)
+**Authors:** Bo Chen, Xiaoyu Li, Yekun Ke, Yingyu Liang, Zhenmei Shi, Zhao Song
+
+3. [Machine Unlearning in Hyperbolic vs. Euclidean Multimodal Contrastive Learning: Adapting Alignment Calibration to MERU](#user-content-link3)
+**Authors:** \`Alex Pujol Vidal, Sergio Escalera, Kamal Nasrollahi, Thomas B. Moeslund
+
+4. [Conjuring Positive Pairs for Efficient Unification of Representation Learning and Image Synthesis](#user-content-link4)
+**Authors:** Imanol G. Estepa, Jes\'us M. Rodr\'iguez-de-Vera, Ignacio Saras\'ua, Bhalaji Nagarajan, Petia Radeva
+
+5. [Robust Weight Imprinting: Insights from Neural Collapse and Proxy-Based Aggregation](#user-content-link5)
+**Authors:** Justus Westerhoff, Golzar Atefi, Mario Koddenbrock, Alexei Figueroa, Alexander L\"oser, Erik Rodner, Felix A. Gers
+
+6. [LIFT: Latent Implicit Functions for Task- and Data-Agnostic Encoding](#user-content-link6)
+**Authors:** Amirhossein Kazerouni, Soroush Mehraban, Michael Brudno, Babak Taati
+
+7. [Robustness of Nonlinear Representation Learning](#user-content-link7)
+**Authors:** Simon Buchholz, Bernhard Sch\"olkopf
+
+8. [Reasoning Effort and Problem Complexity: A Scaling Analysis in LLMs](#user-content-link8)
+**Authors:** Benjamin Estermann, Roger Wattenhofer
+
+9. [Natural Quantization of Neural Networks](#user-content-link9)
+**Authors:** Richard Barney, Djamil Lakhdar-Hamina, Victor Galitski
+
+10. [Unique Hard Attention: A Tale of Two Sides](#user-content-link10)
+**Authors:** Selim Jerad, Anej Svete, Jiaoda Li, Ryan Cotterell
+
+11. [Efficient Personalization of Quantized Diffusion Model without Backpropagation](#user-content-link11)
+**Authors:** Hoigi Seo, Wongi Jeong, Kyungryeol Lee, Se Young Chun
+
+12. [Long Context Modeling with Ranked Memory-Augmented Retrieval](#user-content-link12)
+**Authors:** Ghadir Alselwi, Hao Xue, Shoaib Jameel, Basem Suleiman, Flora D. Salim, Imran Razzak
+
+13. [Squeeze Out Tokens from Sample for Finer-Grained Data Governance](#user-content-link13)
+**Authors:** Weixiong Lin, Chen Ju, Haicheng Wang, Shengchao Hu, Shuai Xiao, Mengting Chen, Yuheng Jiao, Mingshuai Yao, Jinsong Lan, Qingwen Liu, Ying Chen
+
+14. [Dynamic Accumulated Attention Map for Interpreting Evolution of Decision-Making in Vision Transformer](#user-content-link14)
+**Authors:** Yi Liao, Yongsheng Gao, Weichuan Zhang
+
+15. [Foundation models may exhibit staged progression in novel CBRN threat disclosure](#user-content-link15)
+**Authors:** Kevin M Esvelt
+
+16. [Uncertainty Distillation: Teaching Language Models to Express Semantic Confidence](#user-content-link16)
+**Authors:** Sophia Hager, David Mueller, Kevin Duh, Nicholas Andrews
+
+17. [SAUCE: Selective Concept Unlearning in Vision-Language Models with Sparse Autoencoders](#user-content-link17)
+**Authors:** Qing Li, Jiahui Geng, Derui Zhu, Fengyu Cai, Chenyang Lyu, Fakhri Karray
+
+---
+
+## 1. [Borsuk-Ulam and Replicable Learning of Large-Margin Halfspaces](https://arxiv.org/abs/2503.15294) <a id="link1"></a>
+
+**ArXiv ID:** 2503.15294
+
+**Authors:** Ari Blondal, Hamed Hatami, Pooya Hatami, Chavdar Lalov, Sivan Tretiak
+
+**Abstract:** Recent advances in learning theory have established that, for total concepts, list replicability, global stability, differentially private (DP) learnability, and shared-randomness replicability coincide precisely with the finiteness of the Littlestone dimension. Does the same hold for partial concept classes?   We answer this question by studying the large-margin half-spaces class, which has bounded Littlestone dimension and is purely DP-learnable and shared-randomness replicable even in high dimensions.   We prove that the list replicability number of $\gamma$-margin half-spaces satisfies \[ \frac{d}{2} + 1 \le \mathrm{LR}(H_{\gamma}^d) \le d, \] which increases with the dimension $d$. This reveals a surprising separation for partial concepts: list replicability and global stability do not follow from bounded Littlestone dimension, DP-learnability, or shared-randomness replicability.   By applying our main theorem, we also answer the following open problems.   - We prove that any disambiguation of an infinite-dimensional large-margin half-space to a total concept class has unbounded Littlestone dimension, answering an open question of Alon et al. (FOCS '21). - We prove that the maximum list-replicability number of any *finite* set of points and homogeneous half-spaces in $d$-dimensional Euclidean space is $d$, resolving a problem of Chase et al. (FOCS '23). - We prove that any disambiguation of the Gap Hamming Distance problem in the large gap regime has unbounded public-coin randomized communication complexity. This answers an open problem of Fang et al. (STOC '25).   We prove the lower bound via a topological argument involving the local Borsuk-Ulam theorem of Chase et al. (STOC '24). For the upper bound, we design a learning rule that relies on certain triangulations of the cross-polytope and recent results on the generalization properties of SVM.
+
+**Comment:** The paper provides theoretical insights into learning large-margin halfspaces and addresses open problems in learning theory, making it highly relevant to foundational research in representation learning.
+
+**Relevance:** 10
+**Novelty:** 9
+
+---
+
+## 2. [Exploring the Limits of KV Cache Compression in Visual Autoregressive Transformers](https://arxiv.org/abs/2503.14881) <a id="link2"></a>
+
+**ArXiv ID:** 2503.14881
+
+**Authors:** Bo Chen, Xiaoyu Li, Yekun Ke, Yingyu Liang, Zhenmei Shi, Zhao Song
+
+**Abstract:** A fundamental challenge in Visual Autoregressive models is the substantial memory overhead required during inference to store previously generated representations. Despite various attempts to mitigate this issue through compression techniques, prior works have not explicitly formalized the problem of KV-cache compression in this context. In this work, we take the first step in formally defining the KV-cache compression problem for Visual Autoregressive transformers. We then establish a fundamental negative result, proving that any mechanism for sequential visual token generation under attention-based architectures must use at least $\Omega(n^2 d)$ memory, when $d = \Omega(\log n)$, where $n$ is the number of tokens generated and $d$ is the embedding dimensionality. This result demonstrates that achieving truly sub-quadratic memory usage is impossible without additional structural constraints. Our proof is constructed via a reduction from a computational lower bound problem, leveraging randomized embedding techniques inspired by dimensionality reduction principles. Finally, we discuss how sparsity priors on visual representations can influence memory efficiency, presenting both impossibility results and potential directions for mitigating memory overhead.
+
+**Comment:** The paper formalizes KV-cache compression in visual autoregressive transformers, directly addressing the 'Model Compression' criterion with theoretical insights into memory efficiency.
+
+**Relevance:** 10
+**Novelty:** 9
+
+---
+
+## 3. [Machine Unlearning in Hyperbolic vs. Euclidean Multimodal Contrastive Learning: Adapting Alignment Calibration to MERU](https://arxiv.org/abs/2503.15166) <a id="link3"></a>
+
+**ArXiv ID:** 2503.15166
+
+**Authors:** \`Alex Pujol Vidal, Sergio Escalera, Kamal Nasrollahi, Thomas B. Moeslund
+
+**Abstract:** Machine unlearning methods have become increasingly important for selective concept removal in large pre-trained models. While recent work has explored unlearning in Euclidean contrastive vision-language models, the effectiveness of concept removal in hyperbolic spaces remains unexplored. This paper investigates machine unlearning in hyperbolic contrastive learning by adapting Alignment Calibration to MERU, a model that embeds images and text in hyperbolic space to better capture semantic hierarchies. Through systematic experiments and ablation studies, we demonstrate that hyperbolic geometry offers distinct advantages for concept removal, achieving near perfect forgetting with reasonable performance on retained concepts, particularly when scaling to multiple concept removal. Our approach introduces hyperbolic-specific components including entailment calibration and norm regularization that leverage the unique properties of hyperbolic space. Comparative analysis with Euclidean models reveals fundamental differences in unlearning dynamics, with hyperbolic unlearning reorganizing the semantic hierarchy while Euclidean approaches merely disconnect cross-modal associations. These findings not only advance machine unlearning techniques but also provide insights into the geometric properties that influence concept representation and removal in multimodal models. Source code available at https://github.com/alex-pv01/HAC
+
+**Comment:** The paper explores machine unlearning in hyperbolic contrastive learning, which aligns with representation learning and provides insights into geometric properties influencing concept representation. The focus on hyperbolic-specific components and unlearning dynamics adds theoretical depth.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 4. [Conjuring Positive Pairs for Efficient Unification of Representation Learning and Image Synthesis](https://arxiv.org/abs/2503.15060) <a id="link4"></a>
+
+**ArXiv ID:** 2503.15060
+
+**Authors:** Imanol G. Estepa, Jes\'us M. Rodr\'iguez-de-Vera, Ignacio Saras\'ua, Bhalaji Nagarajan, Petia Radeva
+
+**Abstract:** While representation learning and generative modeling seek to understand visual data, unifying both domains remains unexplored. Recent Unified Self-Supervised Learning (SSL) methods have started to bridge the gap between both paradigms. However, they rely solely on semantic token reconstruction, which requires an external tokenizer during training -- introducing a significant overhead. In this work, we introduce Sorcen, a novel unified SSL framework, incorporating a synergic Contrastive-Reconstruction objective. Our Contrastive objective, "Echo Contrast", leverages the generative capabilities of Sorcen, eliminating the need for additional image crops or augmentations during training. Sorcen "generates" an echo sample in the semantic token space, forming the contrastive positive pair. Sorcen operates exclusively on precomputed tokens, eliminating the need for an online token transformation during training, thereby significantly reducing computational overhead. Extensive experiments on ImageNet-1k demonstrate that Sorcen outperforms the previous Unified SSL SoTA by 0.4%, 1.48 FID, 1.76%, and 1.53% on linear probing, unconditional image generation, few-shot learning, and transfer learning, respectively, while being 60.8% more efficient. Additionally, Sorcen surpasses previous single-crop MIM SoTA in linear probing and achieves SoTA performance in unconditional image generation, highlighting significant improvements and breakthroughs in Unified SSL models.
+
+**Comment:** The paper proposes a unified SSL framework combining representation learning and generative modeling, introducing a novel contrastive-reconstruction objective. This aligns with representation learning and architectural efficiency.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 5. [Robust Weight Imprinting: Insights from Neural Collapse and Proxy-Based Aggregation](https://arxiv.org/abs/2503.14572) <a id="link5"></a>
+
+**ArXiv ID:** 2503.14572
+
+**Authors:** Justus Westerhoff, Golzar Atefi, Mario Koddenbrock, Alexei Figueroa, Alexander L\"oser, Erik Rodner, Felix A. Gers
+
+**Abstract:** The capacity of a foundation model allows for adaptation to new downstream tasks. Weight imprinting is a universal and efficient method to fulfill this purpose. It has been reinvented several times, but it has not been systematically studied. In this paper, we propose a framework for imprinting, identifying three main components: generation, normalization, and aggregation. This allows us to conduct an in-depth analysis of imprinting and a comparison of the existing work. We reveal the benefits of representing novel data with multiple proxies in the generation step and show the importance of proper normalization. We determine those proxies through clustering and propose a novel variant of imprinting that outperforms previous work. We motivate this by the neural collapse phenomenon -- an important connection that we can draw for the first time. Our results show an increase of up to 4% in challenging scenarios with complex data distributions for new classes.
+
+**Comment:** The paper systematically studies weight imprinting and connects it to the neural collapse phenomenon, providing insights into representation learning and model adaptation.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 6. [LIFT: Latent Implicit Functions for Task- and Data-Agnostic Encoding](https://arxiv.org/abs/2503.15420) <a id="link6"></a>
+
+**ArXiv ID:** 2503.15420
+
+**Authors:** Amirhossein Kazerouni, Soroush Mehraban, Michael Brudno, Babak Taati
+
+**Abstract:** Implicit Neural Representations (INRs) are proving to be a powerful paradigm in unifying task modeling across diverse data domains, offering key advantages such as memory efficiency and resolution independence. Conventional deep learning models are typically modality-dependent, often requiring custom architectures and objectives for different types of signals. However, existing INR frameworks frequently rely on global latent vectors or exhibit computational inefficiencies that limit their broader applicability. We introduce LIFT, a novel, high-performance framework that addresses these challenges by capturing multiscale information through meta-learning. LIFT leverages multiple parallel localized implicit functions alongside a hierarchical latent generator to produce unified latent representations that span local, intermediate, and global features. This architecture facilitates smooth transitions across local regions, enhancing expressivity while maintaining inference efficiency. Additionally, we introduce ReLIFT, an enhanced variant of LIFT that incorporates residual connections and expressive frequency encodings. With this straightforward approach, ReLIFT effectively addresses the convergence-capacity gap found in comparable methods, providing an efficient yet powerful solution to improve capacity and speed up convergence. Empirical results show that LIFT achieves state-of-the-art (SOTA) performance in generative modeling and classification tasks, with notable reductions in computational costs. Moreover, in single-task settings, the streamlined ReLIFT architecture proves effective in signal representations and inverse problem tasks.
+
+**Comment:** The paper introduces LIFT, a novel framework for task- and data-agnostic encoding using implicit neural representations (INRs). It aligns with representation learning by addressing multiscale information and meta-learning, which are foundational aspects. The hierarchical latent generator and residual connections in ReLIFT also touch on architectural innovations.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 7. [Robustness of Nonlinear Representation Learning](https://arxiv.org/abs/2503.15355) <a id="link7"></a>
+
+**ArXiv ID:** 2503.15355
+
+**Authors:** Simon Buchholz, Bernhard Sch\"olkopf
+
+**Abstract:** We study the problem of unsupervised representation learning in slightly misspecified settings, and thus formalize the study of robustness of nonlinear representation learning. We focus on the case where the mixing is close to a local isometry in a suitable distance and show based on existing rigidity results that the mixing can be identified up to linear transformations and small errors. In a second step, we investigate Independent Component Analysis (ICA) with observations generated according to $x=f(s)=As+h(s)$ where $A$ is an invertible mixing matrix and $h$ a small perturbation. We show that we can approximately recover the matrix $A$ and the independent components. Together, these two results show approximate identifiability of nonlinear ICA with almost isometric mixing functions. Those results are a step towards identifiability results for unsupervised representation learning for real-world data that do not follow restrictive model classes.
+
+**Comment:** This paper focuses on robustness in nonlinear representation learning, particularly in the context of Independent Component Analysis (ICA). It provides theoretical insights into identifiability under misspecified conditions, which is highly relevant to foundational representation learning.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 8. [Reasoning Effort and Problem Complexity: A Scaling Analysis in LLMs](https://arxiv.org/abs/2503.15113) <a id="link8"></a>
+
+**ArXiv ID:** 2503.15113
+
+**Authors:** Benjamin Estermann, Roger Wattenhofer
+
+**Abstract:** Large Language Models (LLMs) have demonstrated remarkable text generation capabilities, and recent advances in training paradigms have led to breakthroughs in their reasoning performance. In this work, we investigate how the reasoning effort of such models scales with problem complexity. We use the infinitely scalable Tents puzzle, which has a known linear-time solution, to analyze this scaling behavior. Our results show that reasoning effort scales with problem size, but only up to a critical problem complexity. Beyond this threshold, the reasoning effort does not continue to increase, and may even decrease. This observation highlights a critical limitation in the logical coherence of current LLMs as problem complexity increases, and underscores the need for strategies to improve reasoning scalability. Furthermore, our results reveal significant performance differences between current state-of-the-art reasoning models when faced with increasingly complex logical puzzles.
+
+**Comment:** The paper investigates reasoning scalability in LLMs, which aligns with foundational research into LLM behavior and interpretability, particularly in understanding limitations in reasoning.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 9. [Natural Quantization of Neural Networks](https://arxiv.org/abs/2503.15482) <a id="link9"></a>
+
+**ArXiv ID:** 2503.15482
+
+**Authors:** Richard Barney, Djamil Lakhdar-Hamina, Victor Galitski
+
+**Abstract:** We propose a natural quantization of a standard neural network, where the neurons correspond to qubits and the activation functions are implemented via quantum gates and measurements. The simplest quantized neural network corresponds to applying single-qubit rotations, with the rotation angles being dependent on the weights and measurement outcomes of the previous layer. This realization has the advantage of being smoothly tunable from the purely classical limit with no quantum uncertainty (thereby reproducing the classical neural network exactly) to a quantum case, where superpositions introduce an intrinsic uncertainty in the network. We benchmark this architecture on a subset of the standard MNIST dataset and find a regime of "quantum advantage," where the validation error rate in the quantum realization is smaller than that in the classical model. We also consider another approach where quantumness is introduced via weak measurements of ancilla qubits entangled with the neuron qubits. This quantum neural network also allows for smooth tuning of the degree of quantumness by controlling an entanglement angle, $g$, with $g=\frac\pi 2$ replicating the classical regime. We find that validation error is also minimized within the quantum regime in this approach. We also observe a quantum transition, with sharp loss of the quantum network's ability to learn at a critical point $g_c$. The proposed quantum neural networks are readily realizable in present-day quantum computers on commercial datasets.
+
+**Comment:** The paper introduces a quantum neural network architecture, which aligns with the 'Model Architecture' criterion due to its novel approach to integrating quantum mechanics into neural networks.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 10. [Unique Hard Attention: A Tale of Two Sides](https://arxiv.org/abs/2503.14615) <a id="link10"></a>
+
+**ArXiv ID:** 2503.14615
+
+**Authors:** Selim Jerad, Anej Svete, Jiaoda Li, Ryan Cotterell
+
+**Abstract:** Understanding the expressive power of transformers has recently attracted attention, as it offers insights into their abilities and limitations. Many studies analyze unique hard attention transformers, where attention selects a single position that maximizes the attention scores. When multiple positions achieve the maximum score, either the rightmost or the leftmost of those is chosen. In this paper, we highlight the importance of this seeming triviality. Recently, finite-precision transformers with both leftmost- and rightmost-hard attention were shown to be equivalent to Linear Temporal Logic (LTL). We show that this no longer holds with only leftmost-hard attention -- in that case, they correspond to a \emph{strictly weaker} fragment of LTL. Furthermore, we show that models with leftmost-hard attention are equivalent to \emph{soft} attention, suggesting they may better approximate real-world transformers than right-attention models. These findings refine the landscape of transformer expressivity and underscore the role of attention directionality.
+
+**Comment:** The paper provides theoretical insights into the expressivity of transformers by analyzing the implications of leftmost- and rightmost-hard attention. This aligns closely with foundational research on model architecture and contributes to understanding transformer behavior.
+
+**Relevance:** 9
+**Novelty:** 8
+
+---
+
+## 11. [Efficient Personalization of Quantized Diffusion Model without Backpropagation](https://arxiv.org/abs/2503.14868) <a id="link11"></a>
+
+**ArXiv ID:** 2503.14868
+
+**Authors:** Hoigi Seo, Wongi Jeong, Kyungryeol Lee, Se Young Chun
+
+**Abstract:** Diffusion models have shown remarkable performance in image synthesis, but they demand extensive computational and memory resources for training, fine-tuning and inference. Although advanced quantization techniques have successfully minimized memory usage for inference, training and fine-tuning these quantized models still require large memory possibly due to dequantization for accurate computation of gradients and/or backpropagation for gradient-based algorithms. However, memory-efficient fine-tuning is particularly desirable for applications such as personalization that often must be run on edge devices like mobile phones with private data. In this work, we address this challenge by quantizing a diffusion model with personalization via Textual Inversion and by leveraging a zeroth-order optimization on personalization tokens without dequantization so that it does not require gradient and activation storage for backpropagation that consumes considerable memory. Since a gradient estimation using zeroth-order optimization is quite noisy for a single or a few images in personalization, we propose to denoise the estimated gradient by projecting it onto a subspace that is constructed with the past history of the tokens, dubbed Subspace Gradient. In addition, we investigated the influence of text embedding in image generation, leading to our proposed time steps sampling, dubbed Partial Uniform Timestep Sampling for sampling with effective diffusion timesteps. Our method achieves comparable performance to prior methods in image and text alignment scores for personalizing Stable Diffusion with only forward passes while reducing training memory demand up to $8.2\times$.
+
+**Comment:** The paper addresses memory-efficient fine-tuning of quantized diffusion models using zeroth-order optimization, which aligns with the model compression criterion, particularly in terms of efficiency and low-resource adaptation.
+
+**Relevance:** 8
+**Novelty:** 8
+
+---
+
+## 12. [Long Context Modeling with Ranked Memory-Augmented Retrieval](https://arxiv.org/abs/2503.14800) <a id="link12"></a>
+
+**ArXiv ID:** 2503.14800
+
+**Authors:** Ghadir Alselwi, Hao Xue, Shoaib Jameel, Basem Suleiman, Flora D. Salim, Imran Razzak
+
+**Abstract:** Effective long-term memory management is crucial for language models handling extended contexts. We introduce a novel framework that dynamically ranks memory entries based on relevance. Unlike previous works, our model introduces a novel relevance scoring and a pointwise re-ranking model for key-value embeddings, inspired by learning-to-rank techniques in information retrieval. Enhanced Ranked Memory Augmented Retrieval ERMAR achieves state-of-the-art results on standard benchmarks.
+
+**Comment:** The paper introduces a novel memory-augmented retrieval framework for long-context modeling, which aligns with model architecture innovations and efficiency improvements.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 13. [Squeeze Out Tokens from Sample for Finer-Grained Data Governance](https://arxiv.org/abs/2503.14559) <a id="link13"></a>
+
+**ArXiv ID:** 2503.14559
+
+**Authors:** Weixiong Lin, Chen Ju, Haicheng Wang, Shengchao Hu, Shuai Xiao, Mengting Chen, Yuheng Jiao, Mingshuai Yao, Jinsong Lan, Qingwen Liu, Ying Chen
+
+**Abstract:** Widely observed data scaling laws, in which error falls off as a power of the training size, demonstrate the diminishing returns of unselective data expansion. Hence, data governance is proposed to downsize datasets through pruning non-informative samples. Yet, isolating the impact of a specific sample on overall model performance is challenging, due to the vast computation required for tryout all sample combinations. Current data governors circumvent this complexity by estimating sample contributions through heuristic-derived scalar scores, thereby discarding low-value ones. Despite thorough sample sieving, retained samples contain substantial undesired tokens intrinsically, underscoring the potential for further compression and purification. In this work, we upgrade data governance from a 'sieving' approach to a 'juicing' one. Instead of scanning for least-flawed samples, our dual-branch DataJuicer applies finer-grained intra-sample governance. It squeezes out informative tokens and boosts image-text alignments. Specifically, the vision branch retains salient image patches and extracts relevant object classes, while the text branch incorporates these classes to enhance captions. Consequently, DataJuicer yields more refined datasets through finer-grained governance. Extensive experiments across datasets demonstrate that DataJuicer significantly outperforms existing DataSieve in image-text retrieval, classification, and dense visual reasoning.
+
+**Comment:** The paper discusses a novel approach to data governance by introducing finer-grained intra-sample compression and purification, which aligns with the model compression criterion, particularly in terms of efficiency and sparsity.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 14. [Dynamic Accumulated Attention Map for Interpreting Evolution of Decision-Making in Vision Transformer](https://arxiv.org/abs/2503.14640) <a id="link14"></a>
+
+**ArXiv ID:** 2503.14640
+
+**Authors:** Yi Liao, Yongsheng Gao, Weichuan Zhang
+
+**Abstract:** Various Vision Transformer (ViT) models have been widely used for image recognition tasks. However, existing visual explanation methods can not display the attention flow hidden inside the inner structure of ViT models, which explains how the final attention regions are formed inside a ViT for its decision-making. In this paper, a novel visual explanation approach, Dynamic Accumulated Attention Map (DAAM), is proposed to provide a tool that can visualize, for the first time, the attention flow from the top to the bottom through ViT networks. To this end, a novel decomposition module is proposed to construct and store the spatial feature information by unlocking the [class] token generated by the self-attention module of each ViT block. The module can also obtain the channel importance coefficients by decomposing the classification score for supervised ViT models. Because of the lack of classification score in self-supervised ViT models, we propose dimension-wise importance weights to compute the channel importance coefficients. Such spatial features are linearly combined with the corresponding channel importance coefficients, forming the attention map for each block. The dynamic attention flow is revealed by block-wisely accumulating each attention map. The contribution of this work focuses on visualizing the evolution dynamic of the decision-making attention for any intermediate block inside a ViT model by proposing a novel decomposition module and dimension-wise importance weights. The quantitative and qualitative analysis consistently validate the effectiveness and superior capacity of the proposed DAAM for not only interpreting ViT models with the fully-connected layers as the classifier but also self-supervised ViT models. The code is available at https://github.com/ly9802/DynamicAccumulatedAttentionMap.
+
+**Comment:** The paper introduces a novel method for visualizing attention flow in Vision Transformers, which provides insights into the inner workings of an existing architecture, aligning with the model architecture criterion.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 15. [Foundation models may exhibit staged progression in novel CBRN threat disclosure](https://arxiv.org/abs/2503.15182) <a id="link15"></a>
+
+**ArXiv ID:** 2503.15182
+
+**Authors:** Kevin M Esvelt
+
+**Abstract:** The extent to which foundation models can disclose novel chemical, biological, radiation, and nuclear (CBRN) threats to expert users is unclear due to a lack of test cases. I leveraged the unique opportunity presented by an upcoming publication describing a novel catastrophic biothreat - "Technical Report on Mirror Bacteria: Feasibility and Risks" - to conduct a small controlled study before it became public. Graduate-trained biologists tasked with predicting the consequences of releasing mirror E. coli showed no significant differences in rubric-graded accuracy using Claude Sonnet 3.5 new (n=10) or web search only (n=2); both groups scored comparably to a web baseline (28 and 43 versus 36). However, Sonnet reasoned correctly when prompted by a report author, but a smaller model, Haiku 3.5, failed even with author guidance (80 versus 5). These results suggest distinct stages of model capability: Haiku is unable to reason about mirror life even with threat-aware expert guidance (Stage 1), while Sonnet correctly reasons only with threat-aware prompting (Stage 2). Continued advances may allow future models to disclose novel CBRN threats to naive experts (Stage 3) or unskilled users (Stage 4). While mirror life represents only one case study, monitoring new models' ability to reason about privately known threats may allow protective measures to be implemented before widespread disclosure.
+
+**Comment:** The paper discusses staged progression in foundation models' reasoning capabilities, which aligns with the 'Large Language Models' criterion, particularly in understanding theoretical insights into model behavior.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 16. [Uncertainty Distillation: Teaching Language Models to Express Semantic Confidence](https://arxiv.org/abs/2503.14749) <a id="link16"></a>
+
+**ArXiv ID:** 2503.14749
+
+**Authors:** Sophia Hager, David Mueller, Kevin Duh, Nicholas Andrews
+
+**Abstract:** As large language models (LLMs) are increasingly used for factual question-answering, it becomes more important for LLMs to have the capability to communicate the likelihood that their answer is correct. For these verbalized expressions of uncertainty to be meaningful, they should reflect the error rates at the expressed level of confidence. However, when prompted to express confidence, the error rates of current LLMs are inconsistent with their communicated confidences, highlighting the need for uncertainty quantification methods. Many prior methods calculate lexical uncertainty, estimating a model's confidence in the specific string it generated. In some cases, however, it may be more useful to estimate semantic uncertainty, or the model's confidence in the answer regardless of how it is verbalized. We propose a simple procedure, uncertainty distillation, to teach an LLM to verbalize calibrated semantic confidences. Using held-out data to map initial uncertainty estimates to meaningful probabilities, we create examples annotated with verbalized probabilities for supervised fine-tuning. We demonstrate our method yields verbalized confidences that correlate with observed error rates with a small fine-tuned language model as well as with larger instruction-tuned models, and find that our semantic uncertainty correlates well with lexical uncertainty on short answers.
+
+**Comment:** The paper proposes a method for teaching LLMs to express calibrated semantic confidence, which aligns with the 'Large Language Models' criterion by providing theoretical insights into uncertainty quantification.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+## 17. [SAUCE: Selective Concept Unlearning in Vision-Language Models with Sparse Autoencoders](https://arxiv.org/abs/2503.14530) <a id="link17"></a>
+
+**ArXiv ID:** 2503.14530
+
+**Authors:** Qing Li, Jiahui Geng, Derui Zhu, Fengyu Cai, Chenyang Lyu, Fakhri Karray
+
+**Abstract:** Unlearning methods for vision-language models (VLMs) have primarily adapted techniques from large language models (LLMs), relying on weight updates that demand extensive annotated forget sets. Moreover, these methods perform unlearning at a coarse granularity, often leading to excessive forgetting and reduced model utility. To address this issue, we introduce SAUCE, a novel method that leverages sparse autoencoders (SAEs) for fine-grained and selective concept unlearning in VLMs. Briefly, SAUCE first trains SAEs to capture high-dimensional, semantically rich sparse features. It then identifies the features most relevant to the target concept for unlearning. During inference, it selectively modifies these features to suppress specific concepts while preserving unrelated information. We evaluate SAUCE on two distinct VLMs, LLaVA-v1.5-7B and LLaMA-3.2-11B-Vision-Instruct, across two types of tasks: concrete concept unlearning (objects and sports scenes) and abstract concept unlearning (emotions, colors, and materials), encompassing a total of 60 concepts. Extensive experiments demonstrate that SAUCE outperforms state-of-the-art methods by 18.04% in unlearning quality while maintaining comparable model utility. Furthermore, we investigate SAUCE's robustness against widely used adversarial attacks, its transferability across models, and its scalability in handling multiple simultaneous unlearning requests. Our findings establish SAUCE as an effective and scalable solution for selective concept unlearning in VLMs.
+
+**Comment:** The paper proposes a novel method using sparse autoencoders for selective concept unlearning in vision-language models. The use of sparse autoencoders aligns with representation learning, and the focus on unlearning introduces a unique perspective, making it relevant to foundational research.
+
+**Relevance:** 8
+**Novelty:** 7
+
+---
+
+# Paper Selection Prompt
+
+You are a helpful paper reading assistant whose job is to read daily posts from ArXiv and identify a few papers that your friend will enjoy reading.
+Your job is to carefully read the paper titles and abstracts below and find the ones that match the criteria below.
+
+## Instructions
+
+Write the response in JSONL format with {ARXIVID, COMMENT, RELEVANCE, NOVELTY} on each line, one for each paper.
+
+- ARXIVID: should be the ArXiv ID.
+- COMMENT: should identify whether there is a criteria that match the paper very closely. These matches should not be based on general terms like "language modeling" or "advancements" and should specifically refer to a criterion. No need to mention the non-matching criteria.
+- RELEVANCE: should be a score from 1-10.
+- NOVELTY: should be a score from 1-10.
+
+## Scoring Criteria
+
+> The "Relevance" score measures how closely the paper aligns with the core topics of the prompt.
+> The "Novelty" score assesses the originality and impact of the paper.
+> They are two **ORTHONORMAL** axes and **SHOULD NOT** be confused with each other.
+
+### Relevance Scoring
+
+- Relevance 9-10 (Completely Relevant)
+  - Focus: Fully aligned with core topics with no deviation, score the highest if contains relevant keywords in it.
+  - Examples: Papers focused on foundational methods or theoretical research, whose titles contain topic keywords like "MoE".
+
+- Relevance 7-8 (Relevant)
+  - Focus: Retain a solid link to the main research area, though may touch on peripheral elements.
+  - Examples: Papers research on the fundamental part of MoE through a less critical aspect like its behavior in GNN.
+
+- Relevance 5-6 (Borderline)
+  - Focus: Maintains a link to the core topic but also extends into at least one other domain/area beyond the primary focus.
+  - Examples: Work referencing MoE centered on reinforcement learning.
+
+- Relevance 3-4 (Irrelevant)
+  - Focus: Largely outside our interests with no association to our topics.
+  - Examples: Application-focused papers like using MoE to solve a problem in the real world.
+
+- Relevance 1-2 (Ignore)
+  - Focus: Purely unrelated to our topics. Completely a different domain.
+  - **Exception**: If the paper hints at a cutting-edge, radically new direction that could eventually transform the primary domain, consider a score of 9–10 despite initial appearances. (Usually a very rare concept that belongs to the fundamental research)
+
+### Novelty Scoring
+
+- Novelty 9-10 (Breakthrough)
+  - Definition: Groundbreaking methods/theory introducing new directions or solving major challenges.
+  - Examples: Entirely new paradigm for foundational models; a novel theory transforming representation learning.
+
+- Novelty 7-8 (Improvements)
+  - Definition: Substantial insights/enhancements, though not a full paradigm shift.
+  - Examples: Modifications on existing methods yielding significantly better results.
+
+- Novelty 5-6 (Borderline)
+  - Definition: Incremental contributions with possible long-term benefits, not immediately transformative.
+  - Examples: Moderately novel extension to an existing architecture; refining current methods without fundamentally altering them.
+
+- Novelty 3-4 (Tangential)
+  - Definition: Minor or domain-specific improvements with limited broader impact.
+  - Examples: Slight modifications to known methods with strange motivation; purely engineering jobs like a new benchmark/dataset.
+
+- Novelty 1-2 (Low)
+  - Definition: Minimal originality, applying standard approaches without real innovation.
+  - Examples: Using an off-the-shelf model without adding new insights; purely application-driven studies like finetuning a pretrained model using existing methods.
+
+## Papers
+
+[PAPER LIST HERE]
+
+## Relevant Topics
+
+Use the following relevance criteria to focus on foundational research. Keep **relevant** papers and filter out **irrelevant** ones. Avoid purely **application-driven** work.
+
+1. Representation Learning
+   - Relevant: Insights into how deep networks encode information, feature/dictionary learning, sparse/contrastive methods, training dynamics in neural networks.
+   - Irrelevant: Standard applications of known techniques lacking new theoretical or methodological contributions.
+
+2. Model Architecture
+   - Relevant: Mixture-of-Experts (MoE), Transformers, Conditional/Dynamic Networks, Autoencoders, analysis on existing architectures (like encoder-decoder), or other architectural innovations.
+   - Irrelevant: Merely using existing architectures for a certain task without insights into the structure themselves.
+
+3. Model Compression
+   - Relevant: Sparsity, pruning, quantization, low-rank approaches, KV cache, or other algorithmic/theoretical efficiency breakthroughs.
+   - Irrelevant: Straightforward applications of existing compression methods to new tasks.
+
+4. Large Language Models (LLMs)
+   - Relevant: Major breakthroughs in pretraining or architecture, theoretical insights into LLM behavior/interpretability.
+   - Irrelevant: Domain-specific usage (e.g., translation, jail-breaking), finetuning or inference tricks (e.g., instruction tuning, chain-of-thoughts, data mixing), or empirical dataset/benchmark studies and text-level analysis (e.g. hallucination, reasoning, safety).
+
+5. AI for Science
+   - Relevant: Foundational research in molecular/protein modeling, new generative paradigms, or significant architecture-level innovations.
+   - Irrelevant: Conventional, domain-specific applications without new theoretical perspectives.
+
+6. Emerging Trends
+   - Relevant: Cutting-edge theoretical work challenging established assumptions or introducing broad new paradigms.
+   - Irrelevant: Incremental improvements or trend-following without novel insights.
+
+**Keywords:**
+
+- Relevant: Mixture of Experts (MoE), Representation Learning, Compression/Efficiency, Sparse/Sparsity, Pruning, Quantization, Low-rank, Foundation Model, etc.
+- Irrelevant: Reinforcement Learning, Transfer Learning, Federated Learning, Online Learning, Diffusion Models, etc.
+- Application: Image Segmentation, Medical Imaging, 3D Vision, Video Understanding, Information Retrieval, Summarization, Recommendation Systems, Machine Translation, Speech Recognition, Signal Processing, Spatial/Temporal Modeling, Time Series, Knowledge Graph, etc.

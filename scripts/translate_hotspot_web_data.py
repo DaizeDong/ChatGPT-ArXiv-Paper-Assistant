@@ -136,6 +136,9 @@ def collect_and_translate(data: dict, model: str) -> dict:
     registry: list[tuple[dict, str, int]] = []  # (obj, field_name, index_in_all_texts)
 
     def register(obj: dict, field: str):
+        zh_key = f"{field}_zh"
+        if zh_key in obj and obj[zh_key]:
+            return  # already translated
         val = obj.get(field, "")
         if isinstance(val, str):
             idx = len(all_texts)
@@ -143,6 +146,9 @@ def collect_and_translate(data: dict, model: str) -> dict:
             registry.append((obj, field, idx))
 
     def register_list(obj: dict, field: str):
+        zh_key = f"{field}_zh"
+        if zh_key in obj and obj[zh_key]:
+            return  # already translated
         val = obj.get(field, [])
         if isinstance(val, list):
             for item in val:
@@ -220,12 +226,25 @@ def collect_and_translate(data: dict, model: str) -> dict:
 # Main
 # ---------------------------------------------------------------------------
 
-def translate_file(json_path: Path, model: str):
-    print(f"Translating {json_path.name}...")
+def _has_zh_fields(data: dict) -> bool:
+    """Quick check: does the payload already have _zh fields on featured_topics?"""
+    for topic in data.get("featured_topics", []):
+        if "headline_zh" not in topic:
+            return False
+    return bool(data.get("featured_topics"))
+
+
+def translate_file(json_path: Path, model: str) -> bool:
+    """Translate a daily hotspot file. Returns True if any translation was done."""
     data = json.loads(json_path.read_text(encoding="utf-8"))
+    if _has_zh_fields(data):
+        print(f"Skipping {json_path.name} (already translated)")
+        return False
+    print(f"Translating {json_path.name}...")
     data = collect_and_translate(data, model)
     json_path.write_text(json.dumps(data, ensure_ascii=False, indent=None), encoding="utf-8")
     print(f"  Done: {json_path.name}")
+    return True
 
 
 def main():

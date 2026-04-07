@@ -93,6 +93,14 @@ jobs:
         run: |
           python scripts/rebuild_hotspot_web_data.py --output-root out
 
+      - name: Translate hotspot web data
+        continue-on-error: true
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          OPENAI_BASE_URL: ${{ secrets.OPENAI_BASE_URL }}
+        run: |
+          python -X utf8 scripts/translate_hotspot_web_data.py
+
       - name: Build multipage site
         run: |
           python -m arxiv_assistant.renderers.build_multipage_site

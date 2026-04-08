@@ -1,19 +1,25 @@
 from __future__ import annotations
 
 import os
-from datetime import datetime
+import time
+from datetime import UTC, datetime, timedelta
 from pathlib import Path
 from typing import Any
 from urllib.parse import urlsplit
 
+import requests
+
 from arxiv_assistant.apis.hotspot.hotspot_x_common import get_authority_record, is_authoritative_x_identity, is_newsworthy_x_text
 from arxiv_assistant.utils.hotspot.hotspot_schema import HotspotItem, clean_text
-from arxiv_assistant.utils.hotspot.hotspot_sources import clip_text, fetch_json, is_fresh
+from arxiv_assistant.utils.hotspot.hotspot_sources import clip_text, is_fresh, record_api_usage
 from arxiv_assistant.utils.hotspot.x_authority_registry import iter_active_authority_accounts, load_x_authority_registry
 
-X_RECENT_SEARCH_URL = "https://api.x.com/2/tweets/search/recent"
+X_USER_TIMELINE_URL = "https://api.x.com/2/users/{user_id}/tweets"
+X_USER_LOOKUP_URL = "https://api.x.com/2/users/by/username/{username}"
 BEARER_TOKEN_ENV_KEYS = ("X_BEARER_TOKEN", "X_API_BEARER_TOKEN", "TWITTER_BEARER_TOKEN")
 X_HOSTS = {"x.com", "twitter.com", "mobile.twitter.com", "www.x.com", "www.twitter.com", "pic.x.com"}
+_RATE_LIMIT_MAX_RETRIES = 2
+_RATE_LIMIT_WAIT_SECONDS = 16
 
 
 def _get_bearer_token() -> str | None:
@@ -67,66 +73,61 @@ def _expanded_urls(tweet: dict[str, Any]) -> list[str]:
     return urls
 
 
-def _build_query(handles: list[str]) -> str:
-    return "(" + " OR ".join(f"from:{handle}" for handle in handles) + ") -is:retweet -is:reply lang:en"
+def _x_api_get(url: str, headers: dict[str, str], params: dict[str, Any] | None = None) -> dict[str, Any]:
+    for attempt in range(_RATE_LIMIT_MAX_RETRIES + 1):
+        response = requests.get(url, headers=headers, params=params, timeout=30)
+        if response.status_code == 429:
+            if attempt < _RATE_LIMIT_MAX_RETRIES:
+                wait = _RATE_LIMIT_WAIT_SECONDS * (attempt + 1)
+                print(f"X API rate limited (429). Waiting {wait}s before retry {attempt + 1}...")
+                time.sleep(wait)
+                continue
+            print("X API rate limit exceeded after retries. Stopping.")
+            return {}
+        response.raise_for_status()
+        record_api_usage()
+        return response.json()
+    return {}
 
 
-def _build_query_batches(handles: list[str], *, batch_size: int = 6, max_query_length: int = 260) -> list[list[str]]:
-    batches: list[list[str]] = []
-    current: list[str] = []
-    for handle in handles:
-        candidate_parts = current + [handle]
-        candidate_query = _build_query(candidate_parts)
-        if current and (len(candidate_parts) > batch_size or len(candidate_query) > max_query_length):
-            batches.append(list(current))
-            current = [handle]
-        else:
-            current = candidate_parts
-    if current:
-        batches.append(list(current))
-    return batches
+def _lookup_user_id(handle: str, *, bearer_token: str) -> str | None:
+    url = X_USER_LOOKUP_URL.format(username=handle)
+    headers = {"Authorization": f"Bearer {bearer_token}"}
+    try:
+        payload = _x_api_get(url, headers=headers)
+    except Exception as ex:
+        print(f"Warning: X user lookup failed for @{handle}: {ex}")
+        return None
+    data = payload.get("data", {}) or {}
+    return clean_text(data.get("id"))
 
 
-def _iter_recent_search(
+def _iter_user_timeline(
     *,
-    query: str,
+    user_id: str,
+    handle: str,
     bearer_token: str,
-    max_results: int,
+    since: datetime,
+    max_results: int = 10,
 ) -> list[dict[str, Any]]:
+    url = X_USER_TIMELINE_URL.format(user_id=user_id)
     params = {
-        "query": query,
         "tweet.fields": "created_at,public_metrics,author_id,lang,entities,referenced_tweets,in_reply_to_user_id",
-        "user.fields": "username,name,verified",
-        "expansions": "author_id",
         "max_results": min(100, max_results),
+        "start_time": since.strftime("%Y-%m-%dT%H:%M:%SZ"),
+        "exclude": "retweets,replies",
     }
     headers = {"Authorization": f"Bearer {bearer_token}"}
+    try:
+        payload = _x_api_get(url, headers=headers, params=params)
+    except Exception as ex:
+        print(f"Warning: X user timeline fetch failed for @{handle} ({user_id}): {ex}")
+        return []
     rows: list[dict[str, Any]] = []
-    remaining = max_results
-    next_token: str | None = None
-
-    while remaining > 0:
-        params["max_results"] = min(100, remaining)
-        if next_token:
-            params["next_token"] = next_token
-        elif "next_token" in params:
-            del params["next_token"]
-
-        payload = fetch_json(X_RECENT_SEARCH_URL, headers=headers, params=params)
-        includes = payload.get("includes", {}) or {}
-        users_by_id = {user.get("id"): user for user in includes.get("users", []) or []}
-
-        for tweet in payload.get("data", []) or []:
-            author = users_by_id.get(tweet.get("author_id"), {})
-            enriched = dict(tweet)
-            enriched["author"] = author
-            rows.append(enriched)
-
-        remaining = max_results - len(rows)
-        next_token = (payload.get("meta") or {}).get("next_token")
-        if not next_token:
-            break
-
+    for tweet in payload.get("data", []) or []:
+        enriched = dict(tweet)
+        enriched["author"] = {"username": handle, "id": user_id}
+        rows.append(enriched)
     return rows
 
 
@@ -153,42 +154,41 @@ def _authority_priority(record: dict[str, Any]) -> tuple[int, int, int]:
     )
 
 
-def _query_accounts(
+def _fetch_timelines(
     accounts: list[dict[str, Any]],
     *,
     bearer_token: str,
-    result_limit: int,
-    batch_size: int,
+    since: datetime,
+    tweets_per_user: int = 10,
+    result_limit: int = 80,
 ) -> list[dict[str, Any]]:
     rows: list[dict[str, Any]] = []
-    remaining = result_limit
-    rate_limited = False
-    handles = [str(row.get("handle")) for row in accounts if row.get("handle")]
+    user_id_cache: dict[str, str] = {}
 
-    def fetch_handle_group(group: list[str]) -> None:
-        nonlocal remaining, rows, rate_limited
-        if remaining <= 0 or not group or rate_limited:
-            return
-        query = _build_query(group)
-        try:
-            chunk = _iter_recent_search(query=query, bearer_token=bearer_token, max_results=min(remaining, 50))
-            rows.extend(chunk)
-            remaining = result_limit - len(rows)
-        except Exception as ex:
-            if "429" in str(ex):
-                rate_limited = True
-                return
-            if len(group) == 1:
-                return
-            midpoint = len(group) // 2
-            fetch_handle_group(group[:midpoint])
-            fetch_handle_group(group[midpoint:])
-
-    for handle_group in _build_query_batches(handles, batch_size=batch_size):
-        if remaining <= 0:
+    for account in accounts:
+        if len(rows) >= result_limit:
             break
-        fetch_handle_group(handle_group)
-    return rows
+        handle = str(account.get("handle") or "")
+        if not handle:
+            continue
+
+        user_id = clean_text(account.get("x_user_id")) or user_id_cache.get(handle)
+        if not user_id:
+            user_id = _lookup_user_id(handle, bearer_token=bearer_token)
+            if not user_id:
+                continue
+            user_id_cache[handle] = user_id
+
+        chunk = _iter_user_timeline(
+            user_id=user_id,
+            handle=handle,
+            bearer_token=bearer_token,
+            since=since,
+            max_results=tweets_per_user,
+        )
+        rows.extend(chunk)
+
+    return rows[:result_limit]
 
 
 def fetch_hotspot_items(
@@ -199,10 +199,9 @@ def fetch_hotspot_items(
     default_result_limit: int = 80,
     snapshot_path: str | Path | None = None,
     max_age_hours: int = 24,
-    official_batch_size: int = 10,
-    researcher_batch_size: int = 8,
     official_account_limit: int = 24,
     researcher_account_limit: int = 18,
+    tweets_per_user: int = 10,
 ) -> list[HotspotItem]:
     bearer_token = _get_bearer_token()
     if not bearer_token:
@@ -211,24 +210,31 @@ def fetch_hotspot_items(
               "Skipping x_official source.")
         return []
 
+    if target_date.tzinfo is None:
+        since = (target_date.replace(tzinfo=UTC) - timedelta(hours=freshness_hours))
+    else:
+        since = target_date - timedelta(hours=freshness_hours)
+
     registry = load_x_authority_registry(seed_path=seed_path, snapshot_path=snapshot_path, max_age_hours=max_age_hours)
     official_accounts = iter_active_authority_accounts(registry, kinds={"official", "company"}, min_tier=2)
     researcher_accounts = iter_active_authority_accounts(registry, kinds={"researcher"}, min_tier=2)
     official_accounts = sorted(official_accounts, key=_authority_priority, reverse=True)[:official_account_limit]
     researcher_accounts = sorted(researcher_accounts, key=_authority_priority, reverse=True)[:researcher_account_limit]
 
-    rows = _query_accounts(
+    rows = _fetch_timelines(
         official_accounts,
         bearer_token=bearer_token,
+        since=since,
+        tweets_per_user=tweets_per_user,
         result_limit=default_result_limit,
-        batch_size=official_batch_size,
     )
     rows.extend(
-        _query_accounts(
+        _fetch_timelines(
             researcher_accounts,
             bearer_token=bearer_token,
+            since=since,
+            tweets_per_user=tweets_per_user,
             result_limit=max(0, default_result_limit // 3),
-            batch_size=researcher_batch_size,
         )
     )
 

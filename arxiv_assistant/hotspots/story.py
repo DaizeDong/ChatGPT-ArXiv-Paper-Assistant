@@ -51,13 +51,15 @@ def _freshness_weight(published_at: str | None) -> float:
     if dt is None:
         return 0.6
     hours = (datetime.now(timezone.utc) - dt).total_seconds() / 3600
-    if hours < 12:
+    if hours < 8:
         return 1.0
+    if hours < 16:
+        return 0.85
     if hours < 24:
-        return 0.8
+        return 0.65
     if hours < 36:
-        return 0.6
-    return 0.4
+        return 0.4
+    return 0.2
 
 
 @dataclass
@@ -306,6 +308,26 @@ def score_stories(stories: list[Story]) -> list[Story]:
             else:
                 story.score = 10.0
 
+    stories.sort(key=lambda s: s.score, reverse=True)
+    return stories
+
+
+def apply_cross_day_penalty(
+    stories: list[Story],
+    recent_headlines: list[str],
+    penalty_factor: float = 0.3,
+) -> list[Story]:
+    """Penalize stories whose headlines are semantically similar to recent days."""
+    if not recent_headlines or not stories:
+        return stories
+    from arxiv_assistant.utils.hotspot.hotspot_cluster import title_similarity
+    for story in stories:
+        max_sim = max(
+            (title_similarity(story.headline, rh) for rh in recent_headlines),
+            default=0.0,
+        )
+        if max_sim >= 0.5:
+            story.score = round(story.score * (1 - penalty_factor * max_sim), 3)
     stories.sort(key=lambda s: s.score, reverse=True)
     return stories
 

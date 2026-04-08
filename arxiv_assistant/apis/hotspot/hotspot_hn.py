@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from datetime import UTC, datetime
+from datetime import UTC, datetime, timedelta
 from html import unescape
 import re
 from urllib.parse import urlsplit
@@ -8,8 +8,8 @@ from urllib.parse import urlsplit
 from arxiv_assistant.utils.hotspot.hotspot_schema import HotspotItem, clean_text
 from arxiv_assistant.utils.hotspot.hotspot_sources import clip_text, fetch_json, is_fresh
 
-HN_TOPSTORIES_URL = "https://hacker-news.firebaseio.com/v0/topstories.json"
-HN_ITEM_URL = "https://hacker-news.firebaseio.com/v0/item/{item_id}.json"
+# Algolia-based HN Search API — supports historical date queries
+HN_SEARCH_URL = "https://hn.algolia.com/api/v1/search"
 HN_ITEM_PAGE_URL = "https://news.ycombinator.com/item?id={item_id}"
 AI_HOST_KEYWORDS = (
     "openai.com",
@@ -26,12 +26,9 @@ def _strip_html(text: str | None) -> str:
     return clean_text(re.sub(r"<[^>]+>", " ", unescape(text or "")))
 
 
-def _story_matches(story: dict, keyword_filter: list[str]) -> bool:
-    title = clean_text(story.get("title", "")).lower()
-    text = _strip_html(story.get("text", "")).lower()
-    url = clean_text(story.get("url", "")).lower()
+def _story_matches(title: str, url: str, keyword_filter: list[str]) -> bool:
     host = urlsplit(url).netloc.lower()
-    combined = " ".join([title, text, url])
+    combined = f"{title.lower()} {url.lower()}"
     if any(keyword in host for keyword in AI_HOST_KEYWORDS):
         return True
     return any(keyword and keyword in combined for keyword in keyword_filter)
@@ -45,42 +42,75 @@ def fetch_hotspot_items(
     score_cutoff: int,
     comments_cutoff: int,
 ) -> list[HotspotItem]:
-    story_ids = fetch_json(HN_TOPSTORIES_URL)
-    items: list[HotspotItem] = []
+    target_utc = target_date.replace(tzinfo=UTC) if target_date.tzinfo is None else target_date
+    window_start = target_utc - timedelta(hours=freshness_hours)
+    window_end = target_utc + timedelta(hours=6)
+    ts_start = int(window_start.timestamp())
+    ts_end = int(window_end.timestamp())
 
-    for story_id in story_ids[:story_limit]:
-        story = fetch_json(HN_ITEM_URL.format(item_id=story_id))
-        if not story or story.get("type") != "story" or story.get("deleted") or story.get("dead"):
+    # Build AI-focused search queries and merge results
+    ai_queries = ["AI", "LLM", "GPT", "machine learning", "deep learning", "neural network"]
+    seen_ids: set[str] = set()
+    all_hits: list[dict] = []
+
+    for query in ai_queries:
+        try:
+            data = fetch_json(
+                f"{HN_SEARCH_URL}?query={query}&tags=story"
+                f"&numericFilters=created_at_i>{ts_start},created_at_i<{ts_end},points>{score_cutoff}"
+                f"&hitsPerPage={story_limit}",
+                timeout=15,
+            )
+        except Exception as ex:
+            print(f"Warning: HN Algolia search failed for '{query}': {ex}")
             continue
-        if int(story.get("score", 0) or 0) < score_cutoff:
+        for hit in data.get("hits", []):
+            oid = hit.get("objectID", "")
+            if oid and oid not in seen_ids:
+                seen_ids.add(oid)
+                all_hits.append(hit)
+
+    items: list[HotspotItem] = []
+    for hit in all_hits:
+        title = clean_text(hit.get("title", ""))
+        story_url = hit.get("url") or HN_ITEM_PAGE_URL.format(item_id=hit.get("objectID", ""))
+        score = int(hit.get("points", 0) or 0)
+        comments = int(hit.get("num_comments", 0) or 0)
+
+        if score < score_cutoff:
             continue
-        if int(story.get("descendants", 0) or 0) < comments_cutoff:
+        if comments < comments_cutoff:
             continue
-        published_at = datetime.fromtimestamp(int(story.get("time", 0) or 0), tz=UTC).isoformat()
+
+        created_at = hit.get("created_at", "")
+        published_at = created_at if created_at else None
         if not is_fresh(published_at, target_date, freshness_hours):
             continue
-        if not _story_matches(story, keyword_filter):
+        if not _story_matches(title, story_url, keyword_filter):
             continue
-        story_url = story.get("url") or HN_ITEM_PAGE_URL.format(item_id=story_id)
+
         items.append(
             HotspotItem(
                 source_id="hn_discussion",
                 source_name="Hacker News",
                 source_role="hn_discussion",
                 source_type="discussion",
-                title=clean_text(story.get("title", f"HN story {story_id}")),
-                summary=clip_text(_strip_html(story.get("text")) or clean_text(story.get("title", "")), 420),
+                title=title,
+                summary=clip_text(title, 420),
                 url=story_url,
                 canonical_url=story_url,
                 published_at=published_at,
                 tags=[],
-                authors=[story.get("by", "")] if story.get("by") else [],
+                authors=[hit.get("author", "")] if hit.get("author") else [],
                 metadata={
-                    "hn_id": story_id,
-                    "hn_score": int(story.get("score", 0) or 0),
-                    "hn_comments": int(story.get("descendants", 0) or 0),
+                    "hn_id": hit.get("objectID", ""),
+                    "hn_score": score,
+                    "hn_comments": comments,
                     "host": urlsplit(story_url).netloc.lower(),
                 },
             )
         )
-    return items
+
+    # Sort by score descending, limit
+    items.sort(key=lambda x: x.metadata.get("hn_score", 0), reverse=True)
+    return items[:story_limit]

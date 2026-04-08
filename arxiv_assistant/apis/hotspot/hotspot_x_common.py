@@ -219,6 +219,8 @@ def is_newsworthy_x_text(
         return False
 
     has_external_link = _has_external_link(expanded_urls)
+    is_official = authority_kind in {"official", "company"}
+
     if authority_kind == "researcher":
         if any(pattern.search(normalized) for pattern in SELF_WORK_PATTERNS):
             return False
@@ -228,12 +230,21 @@ def is_newsworthy_x_text(
             return False
         return any(pattern.search(normalized) for pattern in (RESEARCHER_COMMENTARY_PATTERNS + OFFICIAL_NEWS_PATTERNS))
 
-    if any(pattern.search(normalized) for pattern in SELF_WORK_PATTERNS):
-        return False
-    if not has_external_link and activity < 60:
-        return False
     has_news_pattern = any(pattern.search(normalized) for pattern in OFFICIAL_NEWS_PATTERNS)
     has_substance = any(pattern.search(normalized) for pattern in OFFICIAL_SUBSTANCE_PATTERNS)
-    if has_news_pattern:
-        return True
-    return has_external_link and has_substance and activity >= 120
+    has_self_work = any(pattern.search(normalized) for pattern in SELF_WORK_PATTERNS)
+
+    if is_official:
+        if has_news_pattern or has_self_work:
+            return True
+        if has_substance:
+            return True
+        return has_external_link and activity >= 30
+    else:
+        if has_self_work:
+            return False
+        if not has_external_link and activity < 60:
+            return False
+        if has_news_pattern:
+            return True
+        return has_external_link and has_substance and activity >= 120

@@ -23,7 +23,7 @@ def fetch_hotspot_items(
 ) -> list[HotspotItem]:
     items: list[HotspotItem] = []
     seen_urls: set[str] = set()
-    cutoff = target_date - timedelta(hours=max(freshness_hours, 48))
+    cutoff = target_date - timedelta(hours=freshness_hours)
 
     for sub_config in SUBREDDITS:
         subreddit = sub_config["name"]

@@ -142,17 +142,20 @@ def parse_datetime(value: str | None) -> datetime | None:
     return None
 
 
+_FETCHED_AT_VALID_SOURCES = {"github_trend"}
+
+
 def get_freshness_date(item: "HotspotItem") -> str | None:
     """Return the most appropriate date for freshness evaluation.
 
-    Uses metadata['fetched_at'] (trending/fetch date) when available,
-    falling back to published_at. This ensures items like HF trending papers
-    and GitHub trending repos use their fetch date rather than their original
-    publication/creation date for freshness checks.
+    Only github_trend sources may use fetched_at to override published_at,
+    since GitHub repos can trend long after creation. All other sources
+    use published_at directly.
     """
-    fetched_at = (item.metadata or {}).get("fetched_at")
-    if fetched_at:
-        return fetched_at
+    if item.source_id in _FETCHED_AT_VALID_SOURCES:
+        fetched_at = (item.metadata or {}).get("fetched_at")
+        if fetched_at:
+            return fetched_at
     return item.published_at
 
 
@@ -165,7 +168,7 @@ def is_fresh(published_at: str | None, target_date: datetime, freshness_hours: i
     if target_date.tzinfo is None:
         target_date = target_date.replace(tzinfo=UTC)
     window_start = target_date - timedelta(hours=freshness_hours)
-    window_end = target_date + timedelta(hours=freshness_hours)
+    window_end = target_date + timedelta(hours=6)
     return window_start <= published_dt <= window_end
 
 

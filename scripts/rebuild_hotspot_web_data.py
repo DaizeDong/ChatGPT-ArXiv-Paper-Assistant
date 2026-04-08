@@ -32,6 +32,57 @@ def _load_raw_items(path: Path) -> list[HotspotItem]:
     return [HotspotItem(**row) for row in payload]
 
 
+def _extract_zh(data: dict) -> dict[str, dict[str, str]]:
+    """Extract _zh translations keyed by headline for later restoration."""
+    zh_map: dict[str, dict[str, str]] = {}
+
+    def _save_topic(topic: dict):
+        headline = topic.get("headline", "").strip()
+        if not headline:
+            return
+        zh_fields = {k: v for k, v in topic.items() if k.endswith("_zh") and v}
+        if zh_fields:
+            zh_map[headline] = zh_fields
+
+    for topic in data.get("featured_topics", []):
+        _save_topic(topic)
+    for sec in data.get("category_sections", []):
+        for topic in sec.get("topics", []):
+            _save_topic(topic)
+    for sec in data.get("long_tail_sections", []):
+        for topic in sec.get("topics", []):
+            _save_topic(topic)
+    for topic in data.get("watchlist", []):
+        _save_topic(topic)
+    return zh_map
+
+
+def _merge_zh(data: dict, zh_map: dict[str, dict[str, str]]) -> int:
+    """Merge saved _zh translations back into rebuilt data by headline match."""
+    restored = 0
+
+    def _restore_topic(topic: dict):
+        nonlocal restored
+        headline = topic.get("headline", "").strip()
+        if headline and headline in zh_map:
+            for k, v in zh_map[headline].items():
+                if k not in topic:
+                    topic[k] = v
+            restored += 1
+
+    for topic in data.get("featured_topics", []):
+        _restore_topic(topic)
+    for sec in data.get("category_sections", []):
+        for topic in sec.get("topics", []):
+            _restore_topic(topic)
+    for sec in data.get("long_tail_sections", []):
+        for topic in sec.get("topics", []):
+            _restore_topic(topic)
+    for topic in data.get("watchlist", []):
+        _restore_topic(topic)
+    return restored
+
+
 def rebuild_hotspot_web_data(output_root: str | Path) -> list[str]:
     output_root = Path(output_root)
     hot_root = output_root / "hot"
@@ -42,10 +93,23 @@ def rebuild_hotspot_web_data(output_root: str | Path) -> list[str]:
     if not reports_root.exists():
         return []
 
+    # Save existing _zh translations before rebuilding
+    saved_zh: dict[str, dict[str, dict[str, str]]] = {}
+    for existing in web_root.glob("202*.json"):
+        try:
+            old_data = _load_json(existing)
+            if isinstance(old_data, dict):
+                zh = _extract_zh(old_data)
+                if zh:
+                    saved_zh[existing.stem] = zh
+        except Exception:
+            pass
+
     shutil.rmtree(web_root, ignore_errors=True)
     web_root.mkdir(parents=True, exist_ok=True)
 
     rebuilt_dates: list[str] = []
+    zh_restored_days = 0
     for report_path in sorted(reports_root.glob("*.json")):
         report = _load_json(report_path)
         if not isinstance(report, dict):
@@ -59,6 +123,23 @@ def rebuild_hotspot_web_data(output_root: str | Path) -> list[str]:
         raw_items = _load_raw_items(normalized_path)
         write_hotspot_web_data(output_root, report, raw_items)
         rebuilt_dates.append(date)
+
+        # Restore _zh translations
+        if date in saved_zh:
+            web_file = web_root / f"{date}.json"
+            if web_file.exists():
+                new_data = _load_json(web_file)
+                if isinstance(new_data, dict):
+                    count = _merge_zh(new_data, saved_zh[date])
+                    if count > 0:
+                        web_file.write_text(
+                            json.dumps(new_data, ensure_ascii=False, indent=None),
+                            encoding="utf-8",
+                        )
+                        zh_restored_days += 1
+
+    if zh_restored_days > 0:
+        print(f"Restored _zh translations for {zh_restored_days} day(s).")
 
     if not rebuilt_dates:
         (web_root / "index.json").write_text(

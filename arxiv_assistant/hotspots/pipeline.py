@@ -4,7 +4,7 @@ import configparser
 import json
 import os
 import re
-from datetime import UTC, datetime
+from datetime import UTC, datetime, timedelta
 from pathlib import Path
 from typing import Any
 from zoneinfo import ZoneInfo
@@ -25,7 +25,7 @@ from arxiv_assistant.apis.hotspot.hotspot_x_official import fetch_hotspot_items 
 from arxiv_assistant.apis.hotspot.hotspot_x_paperpulse import fetch_hotspot_items as fetch_x_paperpulse_items
 from arxiv_assistant.filters.filter_hotspots import synthesize_digest_with_openai
 from arxiv_assistant.hotspots.enrich import enrich_items_batch, enrich_items_heuristic
-from arxiv_assistant.hotspots.story import Story, group_into_stories, score_stories, select_and_categorize
+from arxiv_assistant.hotspots.story import Story, apply_cross_day_penalty, group_into_stories, score_stories, select_and_categorize
 from arxiv_assistant.renderers.hotspot.render_hot_daily import render_hot_daily_md
 from arxiv_assistant.utils.hotspot.hotspot_config import build_hotspot_paths, ensure_parent_dirs
 from arxiv_assistant.utils.hotspot.hotspot_schema import HotspotItem
@@ -150,6 +150,44 @@ SOURCE_USAGE_META = {
     "github_trend": {"provider": "GitHub API", "billing_model": "free"},
     "hn_discussion": {"provider": "Hacker News API", "billing_model": "free"},
 }
+
+
+def _load_recent_featured_urls(
+    output_root: Path, target_date: datetime, lookback_days: int = 30,
+) -> tuple[set[str], list[str]]:
+    """Load URLs and headlines from recent daily reports for cross-day dedup."""
+    urls: set[str] = set()
+    headlines: list[str] = []
+    for day_offset in range(1, lookback_days + 1):
+        past_date = target_date - timedelta(days=day_offset)
+        report_path = output_root / "hot" / "reports" / f"{date_string(past_date)}.json"
+        if not report_path.exists():
+            continue
+        try:
+            report = json.loads(report_path.read_text(encoding="utf-8"))
+        except Exception:
+            continue
+        for section_key in ("featured_topics", "top_topics", "watchlist"):
+            for topic in report.get(section_key, []):
+                headline = topic.get("HEADLINE") or topic.get("title", "")
+                if headline:
+                    headlines.append(headline)
+                for item in topic.get("items", []):
+                    for url_key in ("canonical_url", "url"):
+                        url_val = str(item.get(url_key, "") or "").strip()
+                        if url_val:
+                            urls.add(url_val)
+        for section in report.get("category_sections", []):
+            for topic in section.get("topics", []):
+                headline = topic.get("HEADLINE") or topic.get("title", "")
+                if headline:
+                    headlines.append(headline)
+                for item in topic.get("items", []):
+                    for url_key in ("canonical_url", "url"):
+                        url_val = str(item.get(url_key, "") or "").strip()
+                        if url_val:
+                            urls.add(url_val)
+    return urls, headlines
 
 
 def parse_target_datetime(target_date_arg: str | None, output_root: Path) -> datetime:
@@ -423,6 +461,44 @@ def _topic_occurrence_score(topic: dict[str, Any]) -> float:
     )
 
 
+_LOW_QUALITY_HEADLINE_RE = [
+    re.compile(p, re.I)
+    for p in [
+        r"^Quoting\s+\w+",
+        r"^The strongest .* sentiment\b",
+        r"^Early .* discourse\b",
+        r"\buser sentiment\b.*\bnot about\b",
+        r"\bdiscourse was (?:positive|negative|mixed)\b",
+        r"^So,\s+\w+\s+have\s+\w+\?\s*What",
+        r"sponsors?-only newsletter",
+        r"^\[?\s*removed\s*\]?$",
+        r"^\[deleted\]$",
+        r"^\d+\s+hours?\s+ago\b",
+        r"\bwhat are your wishes\b",
+        r"\breacts? to\b.*\bleak\b",
+        r"\bjust leaked\b",
+        r"\bsource (?:just )?leaked\b",
+        r"\b(?:code|source)\s+leak\b",
+        r"\bleak\b.*\b(?:blueprint|orchestration|system prompt)\b",
+        r"\bgot leaked\b",
+        r"\bcourse\b.*\b(?:starts?|open to|register)\b",
+        r"^Kids groups say\b",
+        r"\bdidn't know .* was behind\b",
+    ]
+]
+
+
+def _is_low_quality_story(story: Story) -> bool:
+    """Filter out meta-discussions, leaks, and other noise from story candidates."""
+    headline = story.headline.strip()
+    if len(headline) < 10:
+        return True
+    for pattern in _LOW_QUALITY_HEADLINE_RE:
+        if pattern.search(headline):
+            return True
+    return False
+
+
 def _llm_status(topic: dict[str, Any]) -> str:
     if topic.get("KEEP_IN_DAILY_HOTSPOTS"):
         return "featured"
@@ -440,9 +516,9 @@ def _display_priority(topic: dict[str, Any]) -> float:
     confidence = float(topic.get("CONFIDENCE", 0.0))
     paper_penalty = 0.0
     if _is_isolated_research_topic(topic):
-        paper_penalty = 0.55
+        paper_penalty = 0.20
     elif _is_paper_heavy(topic):
-        paper_penalty = 0.25
+        paper_penalty = 0.10
     low_confidence_penalty = max(0.0, 4.8 - confidence) * 0.35
     return round(
         0.42 * float(topic.get("FINAL_SCORE", 0.0))
@@ -878,8 +954,6 @@ def fetch_source_payloads(
                     default_result_limit=int(x_config.get("list_result_limit", 80)),
                     snapshot_path=x_registry_snapshot_path,
                     max_age_hours=x_registry_max_age_hours,
-                    official_batch_size=int(x_config.get("official_batch_size", 10)),
-                    researcher_batch_size=int(x_config.get("researcher_batch_size", 8)),
                 ),
             )
         )
@@ -1344,8 +1418,8 @@ def _trim_topics(top_topics: list[dict[str, Any]], watchlist: list[dict[str, Any
         if "official_news" in roles:
             return confidence < 5.0 or evidence < 4.4 or final_score < 4.8
         if roles.issubset({"research_backbone", "paper_trending"}):
-            # Allow high-frontierness papers with good scores
-            if has_paper and frontierness >= 5.0 and eng_penalty < 0.5 and final_score >= 4.5:
+            # Allow papers with reasonable frontierness and scores
+            if has_paper and frontierness >= 4.0 and eng_penalty < 0.5 and final_score >= 4.0:
                 return False
             return True
         if roles.issubset({"github_trend", "builder_momentum"}):
@@ -1366,9 +1440,9 @@ def _trim_topics(top_topics: list[dict[str, Any]], watchlist: list[dict[str, Any
             return True
         if "official_news" in roles:
             return confidence >= 5.0 and evidence >= 4.4 and final_score >= 4.8
-        # Single-source papers with high frontierness
+        # Single-source papers with reasonable frontierness
         has_paper = "paper" in set(topic.get("source_types", []))
-        if has_paper and frontierness_val >= 5.0 and eng_val < 0.5 and final_score >= 4.5:
+        if has_paper and frontierness_val >= 4.0 and eng_val < 0.5 and final_score >= 4.0:
             return True
         return False
 
@@ -1422,6 +1496,7 @@ def _trim_topics(top_topics: list[dict[str, Any]], watchlist: list[dict[str, Any
                     add_topic(topic, promoted=topic.get("WATCHLIST", False))
                     break
 
+    min_featured_priority = config["HOTSPOTS"].getfloat("min_featured_priority", fallback=2.5)
     regular_fill = [topic for topic in ranked_top + ranked_watchlist if not topic.get("DEMOTED_LOW_CONFIDENCE") and is_quality_fill_candidate(topic)]
     demoted_fill = [topic for topic in ranked_watchlist if topic.get("DEMOTED_LOW_CONFIDENCE") and is_quality_fill_candidate(topic)]
     fill_pool = sorted(regular_fill, key=_topic_sort_key, reverse=True)
@@ -1433,6 +1508,8 @@ def _trim_topics(top_topics: list[dict[str, Any]], watchlist: list[dict[str, Any
         if topic.get("DEMOTED_LOW_CONFIDENCE") and len(selected_top) >= min_topics:
             continue
         if topic["TOPIC_ID"] in selected_ids:
+            continue
+        if float(topic.get("DISPLAY_PRIORITY", 0.0)) < min_featured_priority:
             continue
         candidate = _diverse_select(selected_top + [topic], len(selected_top) + 1)
         if any(row["TOPIC_ID"] == topic["TOPIC_ID"] for row in candidate):
@@ -1577,7 +1654,8 @@ def generate_daily_hotspot_report(output_root: str | Path, target_date: datetime
     from arxiv_assistant.utils.hotspot.hotspot_sources import get_freshness_date, parse_datetime
     from datetime import timedelta, timezone as tz
     target_utc = target_date.replace(tzinfo=tz.utc) if target_date.tzinfo is None else target_date
-    freshness_cutoff = target_utc - timedelta(hours=36)
+    freshness_hours = config["HOTSPOTS"].getint("freshness_hours", fallback=24)
+    freshness_cutoff = target_utc - timedelta(hours=freshness_hours)
     pre_fresh = len(raw_items)
     fresh_items = []
     for item in raw_items:
@@ -1586,7 +1664,39 @@ def generate_daily_hotspot_report(output_root: str | Path, target_date: datetime
             fresh_items.append(item)
     raw_items = fresh_items
     if len(raw_items) < pre_fresh:
-        print(f"Freshness gate: removed {pre_fresh - len(raw_items)} items older than 36h ({len(raw_items)} remaining)")
+        print(f"Freshness gate: removed {pre_fresh - len(raw_items)} items older than {freshness_hours}h ({len(raw_items)} remaining)")
+
+    # Hard cap on published_at: reject items published more than 14 days ago
+    # regardless of fetched_at. This prevents stale content from any source.
+    MAX_ITEM_AGE_DAYS = 14
+    published_at_cutoff = target_utc - timedelta(days=MAX_ITEM_AGE_DAYS)
+    future_cutoff = target_utc + timedelta(hours=30)  # end-of-day + 6h
+    pre_hard = len(raw_items)
+    hard_fresh = []
+    for item in raw_items:
+        if item.published_at:
+            pub_dt = parse_datetime(item.published_at)
+            if pub_dt is not None:
+                if pub_dt < published_at_cutoff:
+                    continue  # too old
+                if pub_dt > future_cutoff:
+                    continue  # future-dated (e.g. backfill cache artifact)
+        hard_fresh.append(item)
+    raw_items = hard_fresh
+    if len(raw_items) < pre_hard:
+        print(f"Published-at bounds: removed {pre_hard - len(raw_items)} items outside [{MAX_ITEM_AGE_DAYS}d ago, +30h] ({len(raw_items)} remaining)")
+
+    # Cross-day dedup: exclude URLs already featured in recent reports
+    recent_urls, recent_headlines = _load_recent_featured_urls(output_root, target_date)
+    if recent_urls:
+        pre_cross = len(raw_items)
+        raw_items = [
+            item for item in raw_items
+            if (item.canonical_url or "") not in recent_urls
+            and (item.url or "") not in recent_urls
+        ]
+        if len(raw_items) < pre_cross:
+            print(f"Cross-day URL dedup: removed {pre_cross - len(raw_items)} previously featured items ({len(raw_items)} remaining)")
 
     # --- Story-centric pipeline ---
     hotspot_config = config["HOTSPOTS"]
@@ -1602,6 +1712,16 @@ def generate_daily_hotspot_report(output_root: str | Path, target_date: datetime
 
     # Stage 4-5: Group into stories → Score
     stories = score_stories(group_into_stories(enriched_items))
+
+    # Cross-day headline penalty
+    if recent_headlines:
+        stories = apply_cross_day_penalty(stories, recent_headlines)
+
+    # Stage 5b: Filter low-quality / meta-discussion stories
+    pre_quality = len(stories)
+    stories = [s for s in stories if not _is_low_quality_story(s)]
+    if len(stories) < pre_quality:
+        print(f"Story quality filter: removed {pre_quality - len(stories)} low-quality stories ({len(stories)} remaining)")
 
     # Stage 6: Select & categorize
     target_topics = hotspot_config.getint("target_topics", fallback=5)

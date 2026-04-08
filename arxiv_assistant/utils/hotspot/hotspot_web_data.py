@@ -233,6 +233,13 @@ _LOW_QUALITY_TITLE_PATTERNS = [
     re.compile(r"\bgot leaked\b", re.I),
     re.compile(r"^\[D\]\s+", re.I),
     re.compile(r"\bcourse\b.*\b(?:starts?|open to|register)\b", re.I),
+    # Meta-discussion / sentiment summaries
+    re.compile(r"^The strongest .* sentiment\b", re.I),
+    re.compile(r"^Early .* discourse\b", re.I),
+    re.compile(r"\buser sentiment\b.*\bnot about\b", re.I),
+    re.compile(r"\bdiscourse was (?:positive|negative|mixed)\b", re.I),
+    re.compile(r"^So,\s+\w+\s+have\s+\w+\?\s*What", re.I),
+    re.compile(r"^Kids groups say\b", re.I),
 ]
 
 # GitHub repos that are clones/forks of leaked code or low-signal wrappers
@@ -554,6 +561,7 @@ def _build_compact_topic(topic: dict[str, Any]) -> dict[str, Any]:
                 "title": item.get("title", "Untitled"),
                 "url": item.get("url", ""),
                 "source_name": item.get("source_name", item.get("source_id", "source")),
+                "published_at": item.get("published_at"),
             }
         )
     source_roles = set(topic.get("source_roles", []))
@@ -623,7 +631,7 @@ def _is_title_duplicate(title: str, seen: list[str], sim_threshold: float = 0.55
 
 
 def _is_item_on_date(item: HotspotItem, date_str: str) -> bool:
-    """Check if item was published within 36 hours before the target date."""
+    """Check if item falls within the asymmetric freshness window around target date."""
     from datetime import datetime, timedelta, timezone
     if not date_str:
         return True
@@ -638,8 +646,19 @@ def _is_item_on_date(item: HotspotItem, date_str: str) -> bool:
         target = datetime.strptime(date_str, "%Y-%m-%d").replace(tzinfo=timezone.utc)
     except ValueError:
         return True
-    cutoff = target - timedelta(hours=36)
-    return dt >= cutoff
+    window_start = target - timedelta(hours=36)
+    window_end = target + timedelta(hours=30)  # end-of-day + 6h tolerance
+    if not (window_start <= dt <= window_end):
+        return False
+    # Secondary check: even if freshness_date (fetched_at) passes,
+    # reject items whose real published_at is far in the future.
+    # This catches GitHub repos whose created_at is days after the target
+    # date due to backfill caching.
+    if item.published_at:
+        pub_dt = parse_datetime(item.published_at)
+        if pub_dt is not None and pub_dt > target + timedelta(hours=30):
+            return False
+    return True
 
 
 # ---------------------------------------------------------------------------

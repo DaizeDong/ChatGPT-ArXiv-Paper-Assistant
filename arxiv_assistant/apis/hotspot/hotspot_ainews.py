@@ -188,7 +188,7 @@ def _is_high_signal_item(title: str, url: str, activity: int) -> bool:
 
 def fetch_hotspot_items(target_date: datetime, freshness_hours: int) -> list[HotspotItem]:
     # AINews publishes on weekdays only; use wider window to avoid missing issues
-    effective_freshness = max(freshness_hours, 96)
+    effective_freshness = max(freshness_hours, 36)
     try:
         rss_text = fetch_text(AINEWS_RSS_URL)
     except Exception as ex:

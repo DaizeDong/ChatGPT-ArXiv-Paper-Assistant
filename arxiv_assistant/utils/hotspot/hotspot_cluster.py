@@ -165,14 +165,14 @@ GENERIC_OVERLAP_TOKENS = {
 }
 
 SOURCE_ROLE_WEIGHTS = {
-    "official_news": 6.0,
-    "research_backbone": 5.4,
-    "editorial_depth": 5.0,
-    "paper_trending": 4.8,
+    "official_news": 7.0,
+    "research_backbone": 6.0,
+    "editorial_depth": 4.0,
+    "paper_trending": 5.0,
     "github_trend": 4.2,
     "builder_momentum": 3.5,
-    "community_heat": 2.0,
-    "headline_consensus": 1.5,
+    "community_heat": 1.5,
+    "headline_consensus": 1.2,
     "hn_discussion": 1.5,
 }
 

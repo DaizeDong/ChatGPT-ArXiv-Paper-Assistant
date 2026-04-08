@@ -109,7 +109,7 @@ def _extract_twitter_section_items(content_html: str, issue_title: str, issue_ur
 
 def fetch_hotspot_items(target_date: datetime, freshness_hours: int) -> list[HotspotItem]:
     # AINews publishes on weekdays only; use wider window to avoid missing issues
-    effective_freshness = max(freshness_hours, 96)
+    effective_freshness = max(freshness_hours, 36)
     try:
         rss_text = fetch_text(AINEWS_RSS_URL)
     except Exception as ex:

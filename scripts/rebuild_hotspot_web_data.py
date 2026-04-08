@@ -2,11 +2,9 @@ from __future__ import annotations
 
 import argparse
 import json
-import re
 import shutil
 import sys
 from pathlib import Path
-from typing import Any
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 if str(REPO_ROOT) not in sys.path:
@@ -15,86 +13,6 @@ if str(REPO_ROOT) not in sys.path:
 from arxiv_assistant.utils.hotspot.hotspot_dates import is_supported_hotspot_date
 from arxiv_assistant.utils.hotspot.hotspot_schema import HotspotItem
 from arxiv_assistant.utils.hotspot.hotspot_web_data import write_hotspot_web_data
-
-DATE_PATTERN = re.compile(r"^\d{4}-\d{2}-\d{2}\.json$")
-_ZH_MATCH_KEYS = ("topic_id", "id", "slug", "kind", "category")
-
-
-def _match_key(item: dict) -> str | None:
-    """Return a stable identifier for matching items across rebuilds."""
-    for k in _ZH_MATCH_KEYS:
-        v = item.get(k)
-        if v:
-            return f"{k}\x00{v}"
-    return None
-
-
-def _merge_zh(target: Any, source: Any) -> None:
-    """Recursively copy *_zh fields from *source* into *target* in-place."""
-    if isinstance(target, dict) and isinstance(source, dict):
-        for k, v in source.items():
-            if k.endswith("_zh") and k not in target:
-                target[k] = v
-        for k in target:
-            if k in source and isinstance(target[k], (dict, list)):
-                _merge_zh(target[k], source[k])
-    elif isinstance(target, list) and isinstance(source, list):
-        if not target or not isinstance(target[0], dict):
-            return
-        # Try key-based matching first
-        src_map: dict[str, dict] = {}
-        has_keys = False
-        for item in source:
-            if isinstance(item, dict):
-                mk = _match_key(item)
-                if mk:
-                    src_map[mk] = item
-                    has_keys = True
-        if has_keys:
-            for item in target:
-                if isinstance(item, dict):
-                    mk = _match_key(item)
-                    if mk and mk in src_map:
-                        _merge_zh(item, src_map[mk])
-        else:
-            # Fallback: index-based matching for keyless lists (e.g. evidence)
-            for i in range(min(len(target), len(source))):
-                if isinstance(target[i], dict) and isinstance(source[i], dict):
-                    _merge_zh(target[i], source[i])
-
-
-def _cache_zh_payloads(hot_dir: Path) -> dict[str, dict]:
-    """Load existing daily payloads before rebuild so _zh fields can be restored."""
-    cache: dict[str, dict] = {}
-    if not hot_dir.exists():
-        return cache
-    for fp in sorted(hot_dir.glob("*.json")):
-        if fp.name == "index.json" or not DATE_PATTERN.fullmatch(fp.name):
-            continue
-        try:
-            data = json.loads(fp.read_text(encoding="utf-8"))
-            date = str(data.get("meta", {}).get("date", "")).strip() or fp.stem
-            cache[date] = data
-        except Exception:
-            continue
-    return cache
-
-
-def _restore_zh_to_rebuilt(hot_dir: Path, zh_cache: dict[str, dict]) -> int:
-    """Merge cached _zh fields back into rebuilt daily payloads. Returns count of files updated."""
-    updated = 0
-    for fp in sorted(hot_dir.glob("*.json")):
-        if fp.name == "index.json" or not DATE_PATTERN.fullmatch(fp.name):
-            continue
-        date = fp.stem
-        old = zh_cache.get(date)
-        if not old:
-            continue
-        new_data = json.loads(fp.read_text(encoding="utf-8"))
-        _merge_zh(new_data, old)
-        fp.write_text(json.dumps(new_data, indent=2, ensure_ascii=False), encoding="utf-8")
-        updated += 1
-    return updated
 
 
 def parse_args() -> argparse.Namespace:
@@ -114,6 +32,57 @@ def _load_raw_items(path: Path) -> list[HotspotItem]:
     return [HotspotItem(**row) for row in payload]
 
 
+def _extract_zh(data: dict) -> dict[str, dict[str, str]]:
+    """Extract _zh translations keyed by headline for later restoration."""
+    zh_map: dict[str, dict[str, str]] = {}
+
+    def _save_topic(topic: dict):
+        headline = topic.get("headline", "").strip()
+        if not headline:
+            return
+        zh_fields = {k: v for k, v in topic.items() if k.endswith("_zh") and v}
+        if zh_fields:
+            zh_map[headline] = zh_fields
+
+    for topic in data.get("featured_topics", []):
+        _save_topic(topic)
+    for sec in data.get("category_sections", []):
+        for topic in sec.get("topics", []):
+            _save_topic(topic)
+    for sec in data.get("long_tail_sections", []):
+        for topic in sec.get("topics", []):
+            _save_topic(topic)
+    for topic in data.get("watchlist", []):
+        _save_topic(topic)
+    return zh_map
+
+
+def _merge_zh(data: dict, zh_map: dict[str, dict[str, str]]) -> int:
+    """Merge saved _zh translations back into rebuilt data by headline match."""
+    restored = 0
+
+    def _restore_topic(topic: dict):
+        nonlocal restored
+        headline = topic.get("headline", "").strip()
+        if headline and headline in zh_map:
+            for k, v in zh_map[headline].items():
+                if k not in topic:
+                    topic[k] = v
+            restored += 1
+
+    for topic in data.get("featured_topics", []):
+        _restore_topic(topic)
+    for sec in data.get("category_sections", []):
+        for topic in sec.get("topics", []):
+            _restore_topic(topic)
+    for sec in data.get("long_tail_sections", []):
+        for topic in sec.get("topics", []):
+            _restore_topic(topic)
+    for topic in data.get("watchlist", []):
+        _restore_topic(topic)
+    return restored
+
+
 def rebuild_hotspot_web_data(output_root: str | Path) -> list[str]:
     output_root = Path(output_root)
     hot_root = output_root / "hot"
@@ -124,13 +93,23 @@ def rebuild_hotspot_web_data(output_root: str | Path) -> list[str]:
     if not reports_root.exists():
         return []
 
-    # Cache existing _zh translations before wiping
-    zh_cache = _cache_zh_payloads(web_root)
+    # Save existing _zh translations before rebuilding
+    saved_zh: dict[str, dict[str, dict[str, str]]] = {}
+    for existing in web_root.glob("202*.json"):
+        try:
+            old_data = _load_json(existing)
+            if isinstance(old_data, dict):
+                zh = _extract_zh(old_data)
+                if zh:
+                    saved_zh[existing.stem] = zh
+        except Exception:
+            pass
 
     shutil.rmtree(web_root, ignore_errors=True)
     web_root.mkdir(parents=True, exist_ok=True)
 
     rebuilt_dates: list[str] = []
+    zh_restored_days = 0
     for report_path in sorted(reports_root.glob("*.json")):
         report = _load_json(report_path)
         if not isinstance(report, dict):
@@ -144,6 +123,23 @@ def rebuild_hotspot_web_data(output_root: str | Path) -> list[str]:
         raw_items = _load_raw_items(normalized_path)
         write_hotspot_web_data(output_root, report, raw_items)
         rebuilt_dates.append(date)
+
+        # Restore _zh translations
+        if date in saved_zh:
+            web_file = web_root / f"{date}.json"
+            if web_file.exists():
+                new_data = _load_json(web_file)
+                if isinstance(new_data, dict):
+                    count = _merge_zh(new_data, saved_zh[date])
+                    if count > 0:
+                        web_file.write_text(
+                            json.dumps(new_data, ensure_ascii=False, indent=None),
+                            encoding="utf-8",
+                        )
+                        zh_restored_days += 1
+
+    if zh_restored_days > 0:
+        print(f"Restored _zh translations for {zh_restored_days} day(s).")
 
     if not rebuilt_dates:
         (web_root / "index.json").write_text(
@@ -160,12 +156,6 @@ def rebuild_hotspot_web_data(output_root: str | Path) -> list[str]:
             ),
             encoding="utf-8",
         )
-
-    # Restore _zh translations into rebuilt payloads
-    if zh_cache:
-        restored = _restore_zh_to_rebuilt(web_root, zh_cache)
-        if restored:
-            print(f"Restored _zh translations for {restored} day(s).")
 
     return rebuilt_dates
 

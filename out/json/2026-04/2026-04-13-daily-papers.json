@@ -1,0 +1,793 @@
+{
+    "schema_version": 2,
+    "meta": {
+        "date": "2026-04-13",
+        "sort": [
+            "score",
+            "relevance"
+        ],
+        "topic_schema_version": 1,
+        "total_papers": 19,
+        "usage": {
+            "model": "gpt-5.4",
+            "prompt_tokens": 188054,
+            "completion_tokens": 15663,
+            "prompt_cost": 0.470135,
+            "completion_cost": 0.234945,
+            "total_arxiv_papers": 571,
+            "total_scanned_papers": 362,
+            "total_relevant_papers": 19
+        }
+    },
+    "topic_order": [
+        "architecture_training",
+        "efficiency_scaling",
+        "representation_structure",
+        "memory_systems",
+        "world_models_open_ended_rl"
+    ],
+    "diagnostics": {
+        "total_papers": 19,
+        "topic_counts": [
+            {
+                "topic_id": "architecture_training",
+                "topic_label": "Architecture and Training Dynamics",
+                "paper_count": 4
+            },
+            {
+                "topic_id": "efficiency_scaling",
+                "topic_label": "Efficiency, Compression, and Large-Scale Training",
+                "paper_count": 5
+            },
+            {
+                "topic_id": "representation_structure",
+                "topic_label": "Representation Learning Theory and Structure",
+                "paper_count": 4
+            },
+            {
+                "topic_id": "memory_systems",
+                "topic_label": "Memory Structures and Agent Memory Systems",
+                "paper_count": 0
+            },
+            {
+                "topic_id": "world_models_open_ended_rl",
+                "topic_label": "World Models, Exploration, and Open-Ended Reinforcement Learning",
+                "paper_count": 6
+            }
+        ],
+        "assignment_source_counts": {
+            "llm_exact": 19
+        },
+        "llm_assignment_count": 19,
+        "heuristic_assignment_count": 0,
+        "default_assignment_count": 0,
+        "invalid_primary_topic_fallback_count": 0,
+        "missing_primary_topic_fallback_count": 0,
+        "hotspot_paper_kind_counts": {
+            "new_frontier": 1,
+            "daily_hot": 7
+        },
+        "hotspot_paper_assignment_source_counts": {
+            "heuristic": 4,
+            "default": 11,
+            "llm_exact": 4
+        }
+    },
+    "papers": {
+        "2604.08556": {
+            "ARXIVID": "2604.08556",
+            "COMMENT": "Analyzes the representational limit of fixed-coefficient EMA recurrence, isolating where recurrent context fails versus input-dependent selection.",
+            "RELEVANCE": 9,
+            "NOVELTY": 8,
+            "PRIMARY_TOPIC_ID": "architecture_training",
+            "MATCHED_TOPIC_IDS": [
+                "architecture_training",
+                "representation_structure"
+            ],
+            "TOPIC_MATCH_COMMENT": "The core contribution is a mechanistic boundary analysis of a recurrent context mechanism, directly about sequence architecture capability rather than downstream application.",
+            "HOTSPOT_PAPER_TAGS": [
+                "daily_hot"
+            ],
+            "HOTSPOT_PAPER_COMMENT": "Broadly important today: Analyzes the representational limit of fixed-coefficient EMA recurrence, isolating where recurrent context fails versus input-dependent selection.",
+            "SCORE": 17,
+            "authors": [
+                "Arth Singh"
+            ],
+            "title": "EMA Is Not All You Need: Mapping the Boundary Between Structure and Content in Recurrent Context",
+            "abstract": "What exactly do efficient sequence models gain over simple temporal averaging? We use exponential moving average (EMA) traces, the simplest recurrent context (no gating, no content-based retrieval), as a controlled probe to map the boundary between what fixed-coefficient accumulation can and cannot represent. EMA traces encode temporal structure: a Hebbian architecture with multi-timescale traces achieves 96% of a supervised BiGRU on grammatical role assignment with zero labels, surpassing the supervised model on structure-dependent roles. EMA traces destroy token identity: a 130M-parameter language model using only EMA context reaches C4 perplexity 260 (8x GPT-2), and a predictor ablation (replacing the linear predictor with full softmax attention) yields identical loss, localizing the entire gap to the traces. The traces apply lossy, data-independent compression; by the data processing inequality, no downstream predictor can recover the discarded information. Fixed-coefficient accumulation, whether across time or depth, suffers irreversible information dilution that only learned, input-dependent selection can resolve.",
+            "arxiv_id": "2604.08556",
+            "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+            "MATCHED_TOPIC_LABELS": [
+                "Architecture and Training Dynamics",
+                "Representation Learning Theory and Structure"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [
+                "Daily Hot Papers"
+            ],
+            "HOTSPOT_PAPER_PRIMARY_KIND": "daily_hot",
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "Daily Hot Papers",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "heuristic"
+        },
+        "2604.08749": {
+            "ARXIVID": "2604.08749",
+            "COMMENT": "Shows that frozen random backbones plus trained low-rank adapters recover near-full performance, with mechanistic evidence that LoRA rank tracks task intrinsic dimensionality.",
+            "RELEVANCE": 9,
+            "NOVELTY": 8,
+            "PRIMARY_TOPIC_ID": "architecture_training",
+            "MATCHED_TOPIC_IDS": [
+                "architecture_training",
+                "efficiency_scaling",
+                "representation_structure"
+            ],
+            "TOPIC_MATCH_COMMENT": "The main contribution is a mechanistic architectural/training claim about where task-specific information lives and how low-rank adaptation exploits fixed random scaffolds.",
+            "HOTSPOT_PAPER_TAGS": [
+                "daily_hot"
+            ],
+            "HOTSPOT_PAPER_COMMENT": "Broadly important today: Shows that frozen random backbones plus trained low-rank adapters recover near-full performance, with mechanistic evidence that LoRA rank tracks task intrinsic dimensionality.",
+            "SCORE": 17,
+            "authors": [
+                "Hananel Hazan",
+                "Yanbo Zhang",
+                "Benedikt Hartl",
+                "Michael Levin"
+            ],
+            "title": "A Little Rank Goes a Long Way: Random Scaffolds with LoRA Adapters Are All You Need",
+            "abstract": "How many of a neural network's parameters actually encode task-specific information? We investigate this question with LottaLoRA, a training paradigm in which every backbone weight is drawn at random and frozen; only low-rank LoRA adapters are trained. Across nine benchmarks spanning diverse architecture families from single-layer classifiers to 900M parameter Transformers low-rank adapters over frozen random backbones recover 96-100% of fully trained performance while training only 0.5-40% of the parameters. The task-specific signal therefore occupies a subspace orders of magnitude smaller than the full parameter count suggests.Three mechanistic findings underpin this result:(1) the frozen backbone is actively exploited when static the learned scaling~$\\beta$ remains strictly positive across all architectures but when the scaffold is destabilized, the optimizer silences it and the LoRA factors absorb all task information; (2) the frozen backbone is preferable but interchangeable any random initialization works equally well, provided it remains fixed throughout training; and (3) the minimum LoRA rank at which performance saturates estimates the intrinsic dimensionality of the task, reminiscent of the number of components retained in Principal Component Analysis (PCA). The construction is formally analogous to Reservoir Computing unfolded along the depth axis of a feedforward network. Because the backbone is determined by a random seed alone, models can be distributed as adapters plus seed a footprint that grows with task complexity, not model size, so that storage and memory savings compound as architectures scale.",
+            "arxiv_id": "2604.08749",
+            "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+            "MATCHED_TOPIC_LABELS": [
+                "Architecture and Training Dynamics",
+                "Efficiency, Compression, and Large-Scale Training",
+                "Representation Learning Theory and Structure"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [
+                "Daily Hot Papers"
+            ],
+            "HOTSPOT_PAPER_PRIMARY_KIND": "daily_hot",
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "Daily Hot Papers",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "heuristic"
+        },
+        "2604.08584": {
+            "ARXIVID": "2604.08584",
+            "COMMENT": "Introduces a query-centric sparse attention scheme with offline prefill lookup tables that materially reduce decode-time long-context cost.",
+            "RELEVANCE": 9,
+            "NOVELTY": 8,
+            "PRIMARY_TOPIC_ID": "efficiency_scaling",
+            "MATCHED_TOPIC_IDS": [
+                "architecture_training",
+                "efficiency_scaling"
+            ],
+            "TOPIC_MATCH_COMMENT": "The paper squarely targets inference efficiency via a new attention/KV access mechanism for reusable long contexts.",
+            "HOTSPOT_PAPER_TAGS": [
+                "daily_hot"
+            ],
+            "HOTSPOT_PAPER_COMMENT": "Broadly important today: Introduces a query-centric sparse attention scheme with offline prefill lookup tables that materially reduce decode-time long-context cost.",
+            "SCORE": 17,
+            "authors": [
+                "Chuxu Song",
+                "Zhencan Peng",
+                "Jiuqi Wei",
+                "Chuanhui Yang"
+            ],
+            "title": "CSAttention: Centroid-Scoring Attention for Accelerating LLM Inference",
+            "abstract": "Long-context LLMs increasingly rely on extended, reusable prefill prompts for agents and domain Q&A, pushing attention and KV-cache to become the dominant decode-time bottlenecks. While sparse attention reduces computation and transfer costs, it often struggles to maintain accuracy at high sparsity levels due to the inherent distribution shift between Queries and Keys. We propose Centroid-Scoring Attention (CSAttention), a training-free sparse attention method optimized for high-throughput serving of reusable contexts. CSAttention adopts a storage-for-computation strategy tailored to the offline-prefill/online-decode setting: it front-loads computation into a one-time offline prefill phase that can be amortized across multiple queries, while aggressively optimizing per-step decoding latency. Specifically, CSAttention constructs query-centric lookup tables during offline prefill, whose size remains fixed during decoding, and enables online decoding to replace full-context scans with efficient table lookups and GPU-friendly score accumulation. Extensive experiments demonstrate that CSAttention achieves near-identical accuracy to full attention. Under high sparsity (95%) and long-context settings (32K-128K), CSAttention consistently outperforms state-of-the-art sparse attention methods in both model accuracy and inference speed, achieving up to 4.6x inference speedup over the most accurate baseline at a context length of 128K.",
+            "arxiv_id": "2604.08584",
+            "PRIMARY_TOPIC_LABEL": "Efficiency, Compression, and Large-Scale Training",
+            "MATCHED_TOPIC_LABELS": [
+                "Architecture and Training Dynamics",
+                "Efficiency, Compression, and Large-Scale Training"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [
+                "Daily Hot Papers"
+            ],
+            "HOTSPOT_PAPER_PRIMARY_KIND": "daily_hot",
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "Daily Hot Papers",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "heuristic"
+        },
+        "2604.09035": {
+            "ARXIVID": "2604.09035",
+            "COMMENT": "Guides diffusion world models with advantage estimates, addressing short-horizon myopia in model-based RL with policy-improvement guarantees.",
+            "RELEVANCE": 9,
+            "NOVELTY": 8,
+            "PRIMARY_TOPIC_ID": "world_models_open_ended_rl",
+            "MATCHED_TOPIC_IDS": [
+                "world_models_open_ended_rl"
+            ],
+            "TOPIC_MATCH_COMMENT": "Its main contribution is a new principle for planning/control with diffusion world models in model-based RL.",
+            "HOTSPOT_PAPER_TAGS": [
+                "daily_hot"
+            ],
+            "HOTSPOT_PAPER_COMMENT": "Broadly important today: Guides diffusion world models with advantage estimates, addressing short-horizon myopia in model-based RL with policy-improvement guarantees.",
+            "SCORE": 17,
+            "authors": [
+                "Daniele Foffano",
+                "Arvid Eriksson",
+                "David Broman",
+                "Karl H. Johansson",
+                "Alexandre Proutiere"
+            ],
+            "title": "Advantage-Guided Diffusion for Model-Based Reinforcement Learning",
+            "abstract": "Model-based reinforcement learning (MBRL) with autoregressive world models suffers from compounding errors, whereas diffusion world models mitigate this by generating trajectory segments jointly. However, existing diffusion guides are either policy-only, discarding value information, or reward-based, which becomes myopic when the diffusion horizon is short. We introduce Advantage-Guided Diffusion for MBRL (AGD-MBRL), which steers the reverse diffusion process using the agent's advantage estimates so that sampling concentrates on trajectories expected to yield higher long-term return beyond the generated window. We develop two guides: (i) Sigmoid Advantage Guidance (SAG) and (ii) Exponential Advantage Guidance (EAG). We prove that a diffusion model guided through SAG or EAG allows us to perform reweighted sampling of trajectories with weights increasing in state-action advantage-implying policy improvement under standard assumptions. Additionally, we show that the trajectories generated from AGD-MBRL follow an improved policy (that is, with higher value) compared to an unguided diffusion model. AGD integrates seamlessly with PolyGRAD-style architectures by guiding the state components while leaving action generation policy-conditioned, and requires no change to the diffusion training objective. On MuJoCo control tasks (HalfCheetah, Hopper, Walker2D and Reacher), AGD-MBRL improves sample efficiency and final return over PolyGRAD, an online Diffuser-style reward guide, and model-free baselines (PPO/TRPO), in some cases by a margin of 2x. These results show that advantage-aware guidance is a simple, effective remedy for short-horizon myopia in diffusion-model MBRL.",
+            "arxiv_id": "2604.09035",
+            "PRIMARY_TOPIC_LABEL": "World Models, Exploration, and Open-Ended Reinforcement Learning",
+            "MATCHED_TOPIC_LABELS": [
+                "World Models, Exploration, and Open-Ended Reinforcement Learning"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [
+                "Daily Hot Papers"
+            ],
+            "HOTSPOT_PAPER_PRIMARY_KIND": "daily_hot",
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "Daily Hot Papers",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "heuristic"
+        },
+        "2604.09258": {
+            "ARXIVID": "2604.09258",
+            "COMMENT": "Introduces an optimizer that pushes task-specific pretraining minima toward a common basin to improve downstream generalization at equal pretraining loss.",
+            "RELEVANCE": 8,
+            "NOVELTY": 8,
+            "PRIMARY_TOPIC_ID": "architecture_training",
+            "MATCHED_TOPIC_IDS": [
+                "architecture_training"
+            ],
+            "TOPIC_MATCH_COMMENT": "The paper is fundamentally about optimization dynamics and implicit bias during pretraining, not downstream evaluation alone.",
+            "HOTSPOT_PAPER_TAGS": [],
+            "HOTSPOT_PAPER_COMMENT": "",
+            "SCORE": 16,
+            "authors": [
+                "Huanran Chen",
+                "Huaqing Zhang",
+                "Xiao Li",
+                "Yinpeng Dong",
+                "Ke Shen",
+                "Jun Zhu"
+            ],
+            "title": "Nexus: Same Pretraining Loss, Better Downstream Generalization via Common Minima",
+            "abstract": "Pretraining is the cornerstone of Large Language Models (LLMs), dominating the vast majority of computational budget and data to serve as the primary engine for their capabilities. During pretraining, LLMs acquire foundational knowledge from an unprecedentedly massive and diverse data sources, encompassing a vast array of domains such as general language, mathematics, code, and complex reasoning. In this work, we investigate an interesting geometric question regarding the converged state of pretraining: Does the model converge to a common minimizer across all data sources (e.g., \\cref{fig:cwa_illustration:close}), or merely a minimizer of the summed loss (e.g., \\cref{fig:cwa_illustration:distant})? We hypothesize that the geometric \"closeness\" of task-specific minima is intrinsically linked to downstream generalization. We reveal that standard optimizers (e.g., AdamW) often converge to points where task-specific minima are distant from each other. To address this, we propose the Nexus optimizer, which encourages the closeness of these minima by maximizing gradient similarity during optimization. Experiments across models ranging from 130M to 3B parameters, various data mixtures and hyperparameter schedules, show that Nexus \\textit{significantly boosts downstream performance}, despite \\textit{achieving the same pretraining loss} (see \\cref{fig:demo:benchmark}). Notably, on the 3B model, Nexus reduces the out-of-distribution loss by 0.012 and yields up to a 15.0\\% accuracy improvement on complex reasoning tasks (e.g., GSM8k). This finding challenges the reliance on pretraining loss as the sole proxy for model evaluation and demonstrates the importance of implicit biases in unlocking downstream generalization.",
+            "arxiv_id": "2604.09258",
+            "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+            "MATCHED_TOPIC_LABELS": [
+                "Architecture and Training Dynamics"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [],
+            "HOTSPOT_PAPER_PRIMARY_KIND": null,
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+        },
+        "2604.09276": {
+            "ARXIVID": "2604.09276",
+            "COMMENT": "Establishes optimal regret bounds for distributed online optimization with compressed communication and gives a matching algorithm.",
+            "RELEVANCE": 8,
+            "NOVELTY": 8,
+            "PRIMARY_TOPIC_ID": "efficiency_scaling",
+            "MATCHED_TOPIC_IDS": [
+                "efficiency_scaling"
+            ],
+            "TOPIC_MATCH_COMMENT": "The paper centers on communication-efficient distributed optimization with sharp theory, a strong match to large-scale training efficiency.",
+            "HOTSPOT_PAPER_TAGS": [],
+            "HOTSPOT_PAPER_COMMENT": "",
+            "SCORE": 16,
+            "authors": [
+                "Sifan Yang",
+                "Dan-Yue Li",
+                "Lijun Zhang"
+            ],
+            "title": "Distributed Online Convex Optimization with Compressed Communication: Optimal Regret and Applications",
+            "abstract": "Distributed online convex optimization (D-OCO) is a powerful paradigm for modeling distributed scenarios with streaming data. However, the communication cost between local learners and the central server is substantial in large-scale applications. To alleviate this bottleneck, we initiate the study of D-OCO with compressed communication. Firstly, to quantify the compression impact, we establish the $\\Omega(\\delta^{-1/2}\\sqrt{T})$ and $\\Omega(\\delta^{-1}\\log{T})$ lower bounds for convex and strongly convex loss functions, respectively, where $\\delta \\in (0,1]$ is the compression ratio. Secondly, we propose an optimal algorithm, which enjoys regret bounds of $O(\\delta^{-1/2}\\sqrt{T})$ and $O(\\delta^{-1} \\log T)$ for convex and strongly convex loss functions, respectively. Our method incorporates the error feedback mechanism into the Follow-the-Regularized-Leader framework to address the coupling between the compression error and the projection error. Furthermore, we employ the online compression strategy to mitigate the accumulated error arising from the bidirectional compression. Our online method has great generality, and can be extended to the offline stochastic setting via online-to-batch conversion. We establish convergence rates of $O(\\delta^{-1/2}T^{-1/2})$ and $O(\\delta^{-1} T^{-1})$ for convex and strongly convex loss functions, respectively, providing the first guarantees for distributed non-smooth optimization with compressed communication and domain constraints.",
+            "arxiv_id": "2604.09276",
+            "PRIMARY_TOPIC_LABEL": "Efficiency, Compression, and Large-Scale Training",
+            "MATCHED_TOPIC_LABELS": [
+                "Efficiency, Compression, and Large-Scale Training"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [],
+            "HOTSPOT_PAPER_PRIMARY_KIND": null,
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+        },
+        "2604.09107": {
+            "ARXIVID": "2604.09107",
+            "COMMENT": "Introduces a reference-oriented storage abstraction that serves replicated weights in place to reduce RL training weight-transfer stalls.",
+            "RELEVANCE": 8,
+            "NOVELTY": 8,
+            "PRIMARY_TOPIC_ID": "efficiency_scaling",
+            "MATCHED_TOPIC_IDS": [
+                "efficiency_scaling"
+            ],
+            "TOPIC_MATCH_COMMENT": "This is a systems contribution that materially changes large-scale training behavior and cost by rethinking weight transfer in distributed RL training.",
+            "HOTSPOT_PAPER_TAGS": [],
+            "HOTSPOT_PAPER_COMMENT": "",
+            "SCORE": 16,
+            "authors": [
+                "Chenhao Ye",
+                "Huaizheng Zhang",
+                "Mingcong Han",
+                "Baoquan Zhong",
+                "Xiang Li",
+                "Qixiang Chen",
+                "Xinyi Zhang",
+                "Weidong Zhang",
+                "Kaihua Jiang",
+                "Wang Zhang",
+                "He Sun",
+                "Wencong Xiao",
+                "Andrea C. Arpaci-Dusseau",
+                "Remzi H. Arpaci-Dusseau"
+            ],
+            "title": "TensorHub: Scalable and Elastic Weight Transfer for LLM RL Training",
+            "abstract": "Modern LLM reinforcement learning (RL) workloads require a highly efficient weight transfer system to scale training across heterogeneous computational resources. However, existing weight transfer approaches either fail to provide flexibility for dynamically scaling clusters or incur fundamental data movement overhead, resulting in poor performance.   We introduce Reference-Oriented Storage (ROS), a new storage abstraction for RL weight transfer that exploits the highly replicated model weights in place. ROS presents the illusion that certain versions of the model weights are stored and can be fetched on demand. Underneath, ROS does not physically store any copies of the weights; instead, it tracks the workers that hold these weights on GPUs for inference. Upon request, ROS directly uses them to serve reads. We build TensorHub, a production-quality system that extends the ROS idea with topology-optimized transfer, strong consistency, and fault tolerance. Evaluation shows that TensorHub fully saturates RDMA bandwidth and adapts to three distinct rollout workloads with minimal engineering effort. Specifically, TensorHub reduces total GPU stall time by up to 6.7x for standalone rollouts, accelerates weight update for elastic rollout by 4.8x, and cuts cross-datacenter rollout stall time by 19x. TensorHub has been deployed in production to support cutting-edge RL training.",
+            "arxiv_id": "2604.09107",
+            "PRIMARY_TOPIC_LABEL": "Efficiency, Compression, and Large-Scale Training",
+            "MATCHED_TOPIC_LABELS": [
+                "Efficiency, Compression, and Large-Scale Training"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [],
+            "HOTSPOT_PAPER_PRIMARY_KIND": null,
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+        },
+        "2604.08742": {
+            "ARXIVID": "2604.08742",
+            "COMMENT": "Provides a convergent reformulation of Adam with Lyapunov analysis and accelerated-rate guarantees in convex smooth optimization.",
+            "RELEVANCE": 8,
+            "NOVELTY": 8,
+            "PRIMARY_TOPIC_ID": "efficiency_scaling",
+            "MATCHED_TOPIC_IDS": [
+                "architecture_training",
+                "efficiency_scaling"
+            ],
+            "TOPIC_MATCH_COMMENT": "The main advance is a foundational optimizer design and analysis result that could materially affect large-scale training behavior.",
+            "HOTSPOT_PAPER_TAGS": [],
+            "HOTSPOT_PAPER_COMMENT": "",
+            "SCORE": 16,
+            "authors": [
+                "Yaxin Yu",
+                "Long Chen",
+                "Zeyi Xu"
+            ],
+            "title": "Adam-HNAG: A Convergent Reformulation of Adam with Accelerated Rate",
+            "abstract": "Adam has achieved strong empirical success, but its theory remains incomplete even in the deterministic full-batch setting, largely because adaptive preconditioning and momentum are tightly coupled. In this work, a convergent reformulation of full-batch Adam is developed by combining variable and operator splitting with a curvature-aware gradient correction. This leads to a continuous-time Adam-HNAG flow with an exponentially decaying Lyapunov function, as well as two discrete methods: Adam-HNAG, and Adam-HNAG-s, a synchronous variant closer in form to Adam. Within a unified Lyapunov analysis framework, convergence guarantees are established for both methods in the convex smooth setting, including accelerated convergence. Numerical experiments support the theory and illustrate the different empirical behavior of the two discretizations. To the best of our knowledge, this provides the first convergence proof for Adam-type methods in convex optimization.",
+            "arxiv_id": "2604.08742",
+            "PRIMARY_TOPIC_LABEL": "Efficiency, Compression, and Large-Scale Training",
+            "MATCHED_TOPIC_LABELS": [
+                "Architecture and Training Dynamics",
+                "Efficiency, Compression, and Large-Scale Training"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [],
+            "HOTSPOT_PAPER_PRIMARY_KIND": null,
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+        },
+        "2604.08554": {
+            "ARXIVID": "2604.08554",
+            "COMMENT": "Gives an exactly solvable framework for recursive LLM-generated text corpora, separating drift from selection and characterizing when deeper structure survives.",
+            "RELEVANCE": 8,
+            "NOVELTY": 8,
+            "PRIMARY_TOPIC_ID": "representation_structure",
+            "MATCHED_TOPIC_IDS": [
+                "representation_structure"
+            ],
+            "TOPIC_MATCH_COMMENT": "This is a foundational theory paper about the statistical structure of learned/generated text ecosystems and how recursive training data evolve.",
+            "HOTSPOT_PAPER_TAGS": [],
+            "HOTSPOT_PAPER_COMMENT": "",
+            "SCORE": 16,
+            "authors": [
+                "S{\\o}ren Riis"
+            ],
+            "title": "Drift and selection in LLM text ecosystems",
+            "abstract": "The public text record -- the material from which both people and AI systems now learn -- is increasingly shaped by its own outputs. Generated text enters the public record, later agents learn from it, and the cycle repeats. Here we develop an exactly solvable mathematical framework for this recursive process, based on variable-order $n$-gram agents, and separate two forces acting on the public corpus. The first is drift: unfiltered reuse progressively removes rare forms, and in the infinite-corpus limit we characterise the stable distributions exactly. The second is selection: publication, ranking and verification filter what enters the record, and the outcome depends on what is selected. When publication merely reflects the statistical status quo, the corpus converges to a shallow state in which further lookahead brings no benefit. When publication is normative -- rewarding quality, correctness or novelty -- deeper structure persists, and we establish an optimal upper bound on the resulting divergence from shallow equilibria. The framework therefore identifies when recursive publication compresses public text and when selective filtering sustains richer structure, with implications for the design of AI training corpora.",
+            "arxiv_id": "2604.08554",
+            "PRIMARY_TOPIC_LABEL": "Representation Learning Theory and Structure",
+            "MATCHED_TOPIC_LABELS": [
+                "Representation Learning Theory and Structure"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [],
+            "HOTSPOT_PAPER_PRIMARY_KIND": null,
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+        },
+        "2604.08719": {
+            "ARXIVID": "2604.08719",
+            "COMMENT": "Unifies multimodal semantic understanding with generative world modeling for closed-loop driving, explicitly combining imagination and control.",
+            "RELEVANCE": 8,
+            "NOVELTY": 8,
+            "PRIMARY_TOPIC_ID": "world_models_open_ended_rl",
+            "MATCHED_TOPIC_IDS": [
+                "world_models_open_ended_rl"
+            ],
+            "TOPIC_MATCH_COMMENT": "Despite the driving domain, the foundational piece is the unified world-model-plus-understanding formulation for embodied decision-making.",
+            "HOTSPOT_PAPER_TAGS": [
+                "daily_hot"
+            ],
+            "HOTSPOT_PAPER_COMMENT": "A unified LLM-plus-world-model control system for embodied closed-loop driving is broadly notable beyond its application domain.",
+            "SCORE": 16,
+            "authors": [
+                "Hao Shao",
+                "Letian Wang",
+                "Yang Zhou",
+                "Yuxuan Hu",
+                "Zhuofan Zong",
+                "Steven L. Waslander",
+                "Wei Zhan",
+                "Hongsheng Li"
+            ],
+            "title": "LMGenDrive: Bridging Multimodal Understanding and Generative World Modeling for End-to-End Driving",
+            "abstract": "Recent years have seen remarkable progress in autonomous driving, yet generalization to long-tail and open-world scenarios remains a major bottleneck for large-scale deployment. To address this challenge, some works use LLMs and VLMs for vision-language understanding and reasoning, enabling vehicles to interpret rare and safety-critical situations when generating actions. Others study generative world models to capture the spatio-temporal evolution of driving scenes, allowing agents to imagine possible futures before acting. Inspired by human intelligence, which unifies understanding and imagination, we explore a unified model for autonomous driving. We present LMGenDrive, the first framework that combines LLM-based multimodal understanding with generative world models for end-to-end closed-loop driving. Given multi-view camera inputs and natural-language instructions, LMGenDrive generates both future driving videos and control signals. This design provides complementary benefits: video prediction improves spatio-temporal scene modeling, while the LLM contributes strong semantic priors and instruction grounding from large-scale pretraining. We further propose a progressive three-stage training strategy, from vision pretraining to multi-step long-horizon driving, to improve stability and performance. LMGenDrive supports both low-latency online planning and autoregressive offline video generation. Experiments show that it significantly outperforms prior methods on challenging closed-loop benchmarks, with clear gains in instruction following, spatio-temporal understanding, and robustness to rare scenarios. These results suggest that unifying multimodal understanding and generation is a promising direction for more generalizable and robust embodied decision-making systems.",
+            "arxiv_id": "2604.08719",
+            "PRIMARY_TOPIC_LABEL": "World Models, Exploration, and Open-Ended Reinforcement Learning",
+            "MATCHED_TOPIC_LABELS": [
+                "World Models, Exploration, and Open-Ended Reinforcement Learning"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [
+                "Daily Hot Papers"
+            ],
+            "HOTSPOT_PAPER_PRIMARY_KIND": "daily_hot",
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "Daily Hot Papers",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "llm_exact"
+        },
+        "2604.09159": {
+            "ARXIVID": "2604.09159",
+            "COMMENT": "Makes flow-based MaxEnt RL practical via a truncated rectified-flow policy that supports tractable entropy optimization and one-step multimodal action sampling.",
+            "RELEVANCE": 8,
+            "NOVELTY": 8,
+            "PRIMARY_TOPIC_ID": "world_models_open_ended_rl",
+            "MATCHED_TOPIC_IDS": [
+                "architecture_training",
+                "world_models_open_ended_rl"
+            ],
+            "TOPIC_MATCH_COMMENT": "Although architecturally interesting, the main contribution is a foundational RL policy class for expressive multimodal control.",
+            "HOTSPOT_PAPER_TAGS": [],
+            "HOTSPOT_PAPER_COMMENT": "",
+            "SCORE": 16,
+            "authors": [
+                "Xubin Zhou",
+                "Yipeng Yang",
+                "Zhan Li"
+            ],
+            "title": "Truncated Rectified Flow Policy for Reinforcement Learning with One-Step Sampling",
+            "abstract": "Maximum entropy reinforcement learning (MaxEnt RL) has become a standard framework for sequential decision making, yet its standard Gaussian policy parameterization is inherently unimodal, limiting its ability to model complex multimodal action distributions. This limitation has motivated increasing interest in generative policies based on diffusion and flow matching as more expressive alternatives. However, incorporating such policies into MaxEnt RL is challenging for two main reasons: the likelihood and entropy of continuous-time generative policies are generally intractable, and multi-step sampling introduces both long-horizon backpropagation instability and substantial inference latency. To address these challenges, we propose Truncated Rectified Flow Policy (TRFP), a framework built on a hybrid deterministic-stochastic architecture. This design makes entropy-regularized optimization tractable while supporting stable training and effective one-step sampling through gradient truncation and flow straightening. Empirical results on a toy multigoal environment and 10 MuJoCo benchmarks show that TRFP captures multimodal behavior effectively, outperforms strong baselines on most benchmarks under standard sampling, and remains highly competitive under one-step sampling.",
+            "arxiv_id": "2604.09159",
+            "PRIMARY_TOPIC_LABEL": "World Models, Exploration, and Open-Ended Reinforcement Learning",
+            "MATCHED_TOPIC_LABELS": [
+                "Architecture and Training Dynamics",
+                "World Models, Exploration, and Open-Ended Reinforcement Learning"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [],
+            "HOTSPOT_PAPER_PRIMARY_KIND": null,
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+        },
+        "2604.08685": {
+            "ARXIVID": "2604.08685",
+            "COMMENT": "Combines online RL, numeric action-model learning, and planning into a feedback loop for acquiring reusable environment dynamics from interaction.",
+            "RELEVANCE": 8,
+            "NOVELTY": 8,
+            "PRIMARY_TOPIC_ID": "world_models_open_ended_rl",
+            "MATCHED_TOPIC_IDS": [
+                "world_models_open_ended_rl"
+            ],
+            "TOPIC_MATCH_COMMENT": "The strongest fit is online acquisition of structured world/action models for planning and generalization in RL.",
+            "HOTSPOT_PAPER_TAGS": [],
+            "HOTSPOT_PAPER_COMMENT": "",
+            "SCORE": 16,
+            "authors": [
+                "Yarin Benyamin",
+                "Argaman Mordoch",
+                "Shahaf S. Shperberg",
+                "Roni Stern"
+            ],
+            "title": "RAMP: Hybrid DRL for Online Learning of Numeric Action Models",
+            "abstract": "Automated planning algorithms require an action model specifying the preconditions and effects of each action, but obtaining such a model is often hard. Learning action models from observations is feasible, but existing algorithms for numeric domains are offline, requiring expert traces as input. We propose the Reinforcement learning, Action Model learning, and Planning (RAMP) strategy for learning numeric planning action models online via interactions with the environment. RAMP simultaneously trains a Deep Reinforcement Learning (DRL) policy, learns a numeric action model from past interactions, and uses that model to plan future actions when possible. These components form a positive feedback loop: the RL policy gathers data to refine the action model, while the planner generates plans to continue training the RL policy. To facilitate this integration of RL and numeric planning, we developed Numeric PDDLGym, an automated framework for converting numeric planning problems to Gym environments. Experimental results on standard IPC numeric domains show that RAMP significantly outperforms PPO, a well-known DRL algorithm, in terms of solvability and plan quality.",
+            "arxiv_id": "2604.08685",
+            "PRIMARY_TOPIC_LABEL": "World Models, Exploration, and Open-Ended Reinforcement Learning",
+            "MATCHED_TOPIC_LABELS": [
+                "World Models, Exploration, and Open-Ended Reinforcement Learning"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [],
+            "HOTSPOT_PAPER_PRIMARY_KIND": null,
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+        },
+        "2604.08846": {
+            "ARXIVID": "2604.08846",
+            "COMMENT": "Uses a curated multimodal concept dictionary plus SAE initialization to obtain granular, semantically labeled control over safety-relevant activations.",
+            "RELEVANCE": 8,
+            "NOVELTY": 8,
+            "PRIMARY_TOPIC_ID": "representation_structure",
+            "MATCHED_TOPIC_IDS": [
+                "representation_structure"
+            ],
+            "TOPIC_MATCH_COMMENT": "The key idea is structured sparse concept decomposition and intervention on internal representations, not safety benchmarking alone.",
+            "HOTSPOT_PAPER_TAGS": [],
+            "HOTSPOT_PAPER_COMMENT": "",
+            "SCORE": 16,
+            "authors": [
+                "Jinqi Luo",
+                "Jinyu Yang",
+                "Tal Neiman",
+                "Lei Fan",
+                "Bing Yin",
+                "Son Tran",
+                "Mubarak Shah",
+                "Ren\\'e Vidal"
+            ],
+            "title": "Dictionary-Aligned Concept Control for Safeguarding Multimodal LLMs",
+            "abstract": "Multimodal Large Language Models (MLLMs) have been shown to be vulnerable to malicious queries that can elicit unsafe responses. Recent work uses prompt engineering, response classification, or finetuning to improve MLLM safety. Nevertheless, such approaches are often ineffective against evolving malicious patterns, may require rerunning the query, or demand heavy computational resources. Steering the activations of a frozen model at inference time has recently emerged as a flexible and effective solution. However, existing steering methods for MLLMs typically handle only a narrow set of safety-related concepts or struggle to adjust specific concepts without affecting others. To address these challenges, we introduce Dictionary-Aligned Concept Control (DACO), a framework that utilizes a curated concept dictionary and a Sparse Autoencoder (SAE) to provide granular control over MLLM activations. First, we curate a dictionary of 15,000 multimodal concepts by retrieving over 400,000 caption-image stimuli and summarizing their activations into concept directions. We name the dataset DACO-400K. Second, we show that the curated dictionary can be used to intervene activations via sparse coding. Third, we propose a new steering approach that uses our dictionary to initialize the training of an SAE and automatically annotate the semantics of the SAE atoms for safeguarding MLLMs. Experiments on multiple MLLMs (e.g., QwenVL, LLaVA, InternVL) across safety benchmarks (e.g., MM-SafetyBench, JailBreakV) show that DACO significantly improves MLLM safety while maintaining general-purpose capabilities.",
+            "arxiv_id": "2604.08846",
+            "PRIMARY_TOPIC_LABEL": "Representation Learning Theory and Structure",
+            "MATCHED_TOPIC_LABELS": [
+                "Representation Learning Theory and Structure"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [],
+            "HOTSPOT_PAPER_PRIMARY_KIND": null,
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+        },
+        "2604.09544": {
+            "ARXIVID": "2604.09544",
+            "COMMENT": "Shows via causal weight pruning that harmful generation relies on a compact, shared, and compressible internal mechanism distinct from benign capabilities.",
+            "RELEVANCE": 8,
+            "NOVELTY": 8,
+            "PRIMARY_TOPIC_ID": "representation_structure",
+            "MATCHED_TOPIC_IDS": [
+                "representation_structure"
+            ],
+            "TOPIC_MATCH_COMMENT": "The paper is fundamentally about the internal organization and separability of learned capabilities in model representations.",
+            "HOTSPOT_PAPER_TAGS": [
+                "daily_hot"
+            ],
+            "HOTSPOT_PAPER_COMMENT": "It has broad interpretability and safety significance beyond a niche subfield because it claims a unified mechanism for harmful generation in LLMs.",
+            "SCORE": 16,
+            "authors": [
+                "Hadas Orgad",
+                "Boyi Wei",
+                "Kaden Zheng",
+                "Martin Wattenberg",
+                "Peter Henderson",
+                "Seraphina Goldfarb-Tarrant",
+                "Yonatan Belinkov"
+            ],
+            "title": "Large Language Models Generate Harmful Content Using a Distinct, Unified Mechanism",
+            "abstract": "Large language models (LLMs) undergo alignment training to avoid harmful behaviors, yet the resulting safeguards remain brittle: jailbreaks routinely bypass them, and fine-tuning on narrow domains can induce ``emergent misalignment'' that generalizes broadly. Whether this brittleness reflects a fundamental lack of coherent internal organization for harmfulness remains unclear. Here we use targeted weight pruning as a causal intervention to probe the internal organization of harmfulness in LLMs. We find that harmful content generation depends on a compact set of weights that are general across harm types and distinct from benign capabilities. Aligned models exhibit a greater compression of harm generation weights than unaligned counterparts, indicating that alignment reshapes harmful representations internally--despite the brittleness of safety guardrails at the surface level. This compression explains emergent misalignment: if weights of harmful capabilities are compressed, fine-tuning that engages these weights in one domain can trigger broad misalignment. Consistent with this, pruning harm generation weights in a narrow domain substantially reduces emergent misalignment. Notably, LLMs harmful generation capability is dissociated from how they recognize and explain such content. Together, these results reveal a coherent internal structure for harmfulness in LLMs that may serve as a foundation for more principled approaches to safety.",
+            "arxiv_id": "2604.09544",
+            "PRIMARY_TOPIC_LABEL": "Representation Learning Theory and Structure",
+            "MATCHED_TOPIC_LABELS": [
+                "Representation Learning Theory and Structure"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [
+                "Daily Hot Papers"
+            ],
+            "HOTSPOT_PAPER_PRIMARY_KIND": "daily_hot",
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "Daily Hot Papers",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "llm_exact"
+        },
+        "2604.09452": {
+            "ARXIVID": "2604.09452",
+            "COMMENT": "Provides a provably safe policy-update method for continual RL by projecting arbitrary updates onto a certified Rashomon set that preserves prior safety constraints.",
+            "RELEVANCE": 8,
+            "NOVELTY": 8,
+            "PRIMARY_TOPIC_ID": "world_models_open_ended_rl",
+            "MATCHED_TOPIC_IDS": [
+                "world_models_open_ended_rl"
+            ],
+            "TOPIC_MATCH_COMMENT": "This is foundational continual RL work on safe adaptation under changing tasks, with formal guarantees rather than benchmark-only gains.",
+            "HOTSPOT_PAPER_TAGS": [],
+            "HOTSPOT_PAPER_COMMENT": "",
+            "SCORE": 16,
+            "authors": [
+                "Maksim Anisimov (Imperial College London)",
+                "Francesco Belardinelli (Imperial College London)",
+                "Matthew Wicker (Imperial College London)"
+            ],
+            "title": "SafeAdapt: Provably Safe Policy Updates in Deep Reinforcement Learning",
+            "abstract": "Safety guarantees are a prerequisite to the deployment of reinforcement learning (RL) agents in safety-critical tasks. Often, deployment environments exhibit non-stationary dynamics or are subject to changing performance goals, requiring updates to the learned policy. This leads to a fundamental challenge: how to update an RL policy while preserving its safety properties on previously encountered tasks? The majority of current approaches either do not provide formal guarantees or verify policy safety only a posteriori. We propose a novel a priori approach to safe policy updates in continual RL by introducing the Rashomon set: a region in policy parameter space certified to meet safety constraints within the demonstration data distribution. We then show that one can provide formal, provable guarantees for arbitrary RL algorithms used to update a policy by projecting their updates onto the Rashomon set. Empirically, we validate this approach across grid-world navigation environments (Frozen Lake and Poisoned Apple) where we guarantee an a priori provably deterministic safety on the source task during downstream adaptation. In contrast, we observe that regularisation-based baselines experience catastrophic forgetting of safety constraints while our approach enables strong adaptation with provable guarantees that safety is preserved.",
+            "arxiv_id": "2604.09452",
+            "PRIMARY_TOPIC_LABEL": "World Models, Exploration, and Open-Ended Reinforcement Learning",
+            "MATCHED_TOPIC_LABELS": [
+                "World Models, Exploration, and Open-Ended Reinforcement Learning"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [],
+            "HOTSPOT_PAPER_PRIMARY_KIND": null,
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+        },
+        "2604.09512": {
+            "ARXIVID": "2604.09512",
+            "COMMENT": "Implements analog electro-optic substitutes for Softmax/Sigmoid to reduce transformer nonlinearity latency while preserving accuracy under quantization and noise.",
+            "RELEVANCE": 8,
+            "NOVELTY": 8,
+            "PRIMARY_TOPIC_ID": "efficiency_scaling",
+            "MATCHED_TOPIC_IDS": [
+                "architecture_training",
+                "efficiency_scaling"
+            ],
+            "TOPIC_MATCH_COMMENT": "This is a strong efficiency/hardware-algorithm co-design paper aimed at a core transformer bottleneck, not a downstream application tweak.",
+            "HOTSPOT_PAPER_TAGS": [
+                "new_frontier"
+            ],
+            "HOTSPOT_PAPER_COMMENT": "Using integrated electro-optic nonlinearities for attention could open a new hardware path for transformer inference, making it broader than a niche optimization.",
+            "SCORE": 16,
+            "authors": [
+                "Luis Mickeler",
+                "Kai Lion",
+                "Alfonso Nardi",
+                "Jost Kellner",
+                "Pierre Didier",
+                "Bhavin J. Shastri",
+                "Niao He",
+                "Rachel Grange"
+            ],
+            "title": "Integrated electro-optic attention nonlinearities for transformers",
+            "abstract": "Transformers have emerged as the dominant neural-network architecture, achieving state-of-the-art performance in language processing and computer vision. At the core of these models lies the attention mechanism, which requires a nonlinear, non-negative mapping using the Softmax function. However, although Softmax operations account for less than 1% of the total operation count, they can disproportionately bottleneck overall inference latency. Here, we use thin-film lithium niobate (TFLN) Mach-Zehnder modulators (MZMs) as analog nonlinear computational elements to drastically reduce the latency of nonlinear computations. We implement electro-optic alternatives to digital Softmax and Sigmoid, and evaluate their performance in Vision Transformers and Large Language Models. Our system maintains highly competitive accuracy, even under aggressive 4-bit input-output quantization of the analog units. We further characterize system noise at encoding speeds up to 10 GBaud and assess model robustness under various noise conditions. Our findings suggest that TFLN modulators can serve as nonlinear function units within hybrid co-packaged hardware, enabling high-speed and energy-efficient nonlinear computation.",
+            "arxiv_id": "2604.09512",
+            "PRIMARY_TOPIC_LABEL": "Efficiency, Compression, and Large-Scale Training",
+            "MATCHED_TOPIC_LABELS": [
+                "Architecture and Training Dynamics",
+                "Efficiency, Compression, and Large-Scale Training"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [
+                "New Frontier Papers"
+            ],
+            "HOTSPOT_PAPER_PRIMARY_KIND": "new_frontier",
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "New Frontier Papers",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "llm_exact"
+        },
+        "2604.08591": {
+            "ARXIVID": "2604.08591",
+            "COMMENT": "Proposes a spectral sensitivity theorem linking layer-wise gain/alignment to a phase transition from dispersion to rank-1 attractors, then tests it on Whisper hallucinations.",
+            "RELEVANCE": 8,
+            "NOVELTY": 8,
+            "PRIMARY_TOPIC_ID": "representation_structure",
+            "MATCHED_TOPIC_IDS": [
+                "architecture_training",
+                "representation_structure"
+            ],
+            "TOPIC_MATCH_COMMENT": "The strongest fit is mechanistic representation analysis: a theory of spectral collapse/attractor dynamics in deep networks validated through internal eigenspectra.",
+            "HOTSPOT_PAPER_TAGS": [],
+            "HOTSPOT_PAPER_COMMENT": "",
+            "SCORE": 16,
+            "authors": [
+                "Ivan Viakhirev",
+                "Kirill Borodin",
+                "Grach Mkrtchian"
+            ],
+            "title": "From Dispersion to Attraction: Spectral Dynamics of Hallucination Across Whisper Model Scales",
+            "abstract": "Hallucinations in large ASR models present a critical safety risk. In this work, we propose the \\textit{Spectral Sensitivity Theorem}, which predicts a phase transition in deep networks from a dispersive regime (signal decay) to an attractor regime (rank-1 collapse) governed by layer-wise gain and alignment. We validate this theory by analyzing the eigenspectra of activation graphs in Whisper models (Tiny to Large-v3-Turbo) under adversarial stress. Our results confirm the theoretical prediction: intermediate models exhibit \\textit{Structural Disintegration} (Regime I), characterized by a $13.4\\%$ collapse in Cross-Attention rank. Conversely, large models enter a \\textit{Compression-Seeking Attractor} state (Regime II), where Self-Attention actively compresses rank ($-2.34\\%$) and hardens the spectral slope, decoupling the model from acoustic evidence.",
+            "arxiv_id": "2604.08591",
+            "PRIMARY_TOPIC_LABEL": "Representation Learning Theory and Structure",
+            "MATCHED_TOPIC_LABELS": [
+                "Architecture and Training Dynamics",
+                "Representation Learning Theory and Structure"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [],
+            "HOTSPOT_PAPER_PRIMARY_KIND": null,
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+        },
+        "2604.08557": {
+            "ARXIVID": "2604.08557",
+            "COMMENT": "Exposes a structural vulnerability in diffusion language models by showing safety depends on irreversible token commitments in the denoising schedule.",
+            "RELEVANCE": 8,
+            "NOVELTY": 8,
+            "PRIMARY_TOPIC_ID": "architecture_training",
+            "MATCHED_TOPIC_IDS": [
+                "architecture_training"
+            ],
+            "TOPIC_MATCH_COMMENT": "The paper's value is architectural insight into dLLM generation dynamics and how denoising schedule design creates brittle behavior.",
+            "HOTSPOT_PAPER_TAGS": [
+                "daily_hot"
+            ],
+            "HOTSPOT_PAPER_COMMENT": "Architectural weaknesses in diffusion LMs and safety bypasses are likely to attract broad daily attention beyond the specialized reading list.",
+            "SCORE": 16,
+            "authors": [
+                "Arth Singh"
+            ],
+            "title": "Re-Mask and Redirect: Exploiting Denoising Irreversibility in Diffusion Language Models",
+            "abstract": "Diffusion-based language models (dLLMs) generate text by iteratively denoising masked token sequences. We show that their safety alignment rests on a single fragile assumption: that the denoising schedule is monotonic and committed tokens are never re-evaluated. Safety-aligned dLLMs commit refusal tokens within the first 8-16 of 64 denoising steps, and the schedule treats these commitments as permanent. A trivial two-step intervention - re-masking these tokens and injecting a 12-token affirmative prefix - achieves 76.1% ASR on HarmBench (n=159, Lg=128) against LLaDA-8B-Instruct and 81.8% ASR (n=159) against Dream-7B-Instruct, without any gradient computation or adversarial search. The simplicity of this exploit is itself the central finding: augmenting with gradient-optimized perturbation via a differentiable Gumbel-softmax chain consistently degrades ASR (e.g., 41.5% vs. 76.1% at Lg=128), confirming that the vulnerability is structural rather than requiring sophisticated exploitation. These findings reveal that dLLM safety is not adversarially robust but architecturally shallow - it holds only because the denoising schedule is never violated. We discuss defenses including safety-aware unmasking schedules, step-conditional prefix detection, and post-commitment re-verification.",
+            "arxiv_id": "2604.08557",
+            "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+            "MATCHED_TOPIC_LABELS": [
+                "Architecture and Training Dynamics"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [
+                "Daily Hot Papers"
+            ],
+            "HOTSPOT_PAPER_PRIMARY_KIND": "daily_hot",
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "Daily Hot Papers",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "llm_exact"
+        },
+        "2604.09434": {
+            "ARXIVID": "2604.09434",
+            "COMMENT": "Physics-guided surrogate world modeling enables zero-shot RL control transfer from channel flow to turbulent wings at much lower training cost.",
+            "RELEVANCE": 8,
+            "NOVELTY": 8,
+            "PRIMARY_TOPIC_ID": "world_models_open_ended_rl",
+            "MATCHED_TOPIC_IDS": [
+                "world_models_open_ended_rl"
+            ],
+            "TOPIC_MATCH_COMMENT": "Primary fit is world models/open-ended RL since the paper uses transferable surrogate structure to train control policies that generalize zero-shot across environments.",
+            "HOTSPOT_PAPER_TAGS": [],
+            "HOTSPOT_PAPER_COMMENT": "",
+            "SCORE": 16,
+            "authors": [
+                "Yuning Wang",
+                "Pol Suarez",
+                "Mathis Bode",
+                "Ricardo Vinuesa"
+            ],
+            "title": "Physics-guided surrogate learning enables zero-shot control of turbulent wings",
+            "abstract": "Turbulent boundary layers over aerodynamic surfaces are a major source of aircraft drag, yet their control remains challenging due to multiscale dynamics and spatial variability, particularly under adverse pressure gradients. Reinforcement learning has outperformed state-of-the-art strategies in canonical flows, but its application to realistic geometries is limited by computational cost and transferability. Here we show that these limitations can be overcome by exploiting local structures of wall-bounded turbulence. Policies are trained in turbulent channel flows matched to wing boundary-layer statistics and deployed directly onto a NACA4412 wing at $Re_c=2\\times10^5$ without further training, being the so-called zero-shot control. This achieves a 28.7\\% reduction in skin-friction drag and a 10.7\\% reduction in total drag, outperforming the state-of-the-art opposition control by 40\\% in friction drag reduction and 5\\% in total drag. Training cost is reduced by four orders of magnitude relative to on-wing training, enabling scalable flow control.",
+            "arxiv_id": "2604.09434",
+            "PRIMARY_TOPIC_LABEL": "World Models, Exploration, and Open-Ended Reinforcement Learning",
+            "MATCHED_TOPIC_LABELS": [
+                "World Models, Exploration, and Open-Ended Reinforcement Learning"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [],
+            "HOTSPOT_PAPER_PRIMARY_KIND": null,
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+        }
+    },
+    "topic_sections": [
+        {
+            "topic_id": "architecture_training",
+            "topic_label": "Architecture and Training Dynamics",
+            "paper_ids": [
+                "2604.08556",
+                "2604.08749",
+                "2604.09258",
+                "2604.08557"
+            ]
+        },
+        {
+            "topic_id": "efficiency_scaling",
+            "topic_label": "Efficiency, Compression, and Large-Scale Training",
+            "paper_ids": [
+                "2604.08584",
+                "2604.09276",
+                "2604.09107",
+                "2604.08742",
+                "2604.09512"
+            ]
+        },
+        {
+            "topic_id": "representation_structure",
+            "topic_label": "Representation Learning Theory and Structure",
+            "paper_ids": [
+                "2604.08554",
+                "2604.08846",
+                "2604.09544",
+                "2604.08591"
+            ]
+        },
+        {
+            "topic_id": "world_models_open_ended_rl",
+            "topic_label": "World Models, Exploration, and Open-Ended Reinforcement Learning",
+            "paper_ids": [
+                "2604.09035",
+                "2604.08719",
+                "2604.09159",
+                "2604.08685",
+                "2604.09452",
+                "2604.09434"
+            ]
+        }
+    ]
+}

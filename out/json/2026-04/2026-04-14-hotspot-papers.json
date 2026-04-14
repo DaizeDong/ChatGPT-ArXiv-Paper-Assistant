@@ -1,0 +1,443 @@
+{
+    "schema_version": 1,
+    "meta": {
+        "date": "2026-04-14",
+        "total_candidates": 301,
+        "total_spotlight_papers": 10,
+        "thresholds": {
+            "daily_hot_score_cutoff": 15,
+            "daily_hot_relevance_cutoff": 7,
+            "new_frontier_score_cutoff": 15,
+            "new_frontier_novelty_cutoff": 8
+        },
+        "caps": {
+            "max_daily_hot": 6,
+            "max_new_frontier": 4
+        }
+    },
+    "diagnostics": {
+        "candidate_count_by_kind": {
+            "new_frontier": 21,
+            "daily_hot": 39
+        },
+        "selected_count_by_kind": {
+            "new_frontier": 4,
+            "daily_hot": 6
+        }
+    },
+    "papers": {
+        "2604.10848": {
+            "ARXIVID": "2604.10848",
+            "COMMENT": "Shows transformers can implement mirror descent in-context to learn latent mixture weights, giving a mechanistic theory of ICL.",
+            "RELEVANCE": 10,
+            "NOVELTY": 9,
+            "PRIMARY_TOPIC_ID": "representation_structure",
+            "MATCHED_TOPIC_IDS": [
+                "architecture_training",
+                "representation_structure"
+            ],
+            "TOPIC_MATCH_COMMENT": "This is highly aligned theoretical work on how transformers form and update internal task representations in context.",
+            "HOTSPOT_PAPER_TAGS": [
+                "new_frontier"
+            ],
+            "HOTSPOT_PAPER_COMMENT": "Strong mechanistic theory of in-context learning with an explicit optimization interpretation makes this feel like a genuinely new foundational direction.",
+            "SCORE": 19,
+            "authors": [
+                "Francesco D'Angelo",
+                "Nicolas Flammarion"
+            ],
+            "title": "Transformers Learn Latent Mixture Models In-Context via Mirror Descent",
+            "abstract": "Sequence modelling requires determining which past tokens are causally relevant from the context and their importance: a process inherent to the attention layers in transformers, yet whose underlying learned mechanisms remain poorly understood. In this work, we formalize the task of estimating token importance as an in-context learning problem by introducing a framework based on Mixture of Transition Distributions, where a latent variable determines the influence of past tokens on the next. The distribution over this latent variable is parameterized by unobserved mixture weights that transformers must learn in-context. We demonstrate that transformers can implement Mirror Descent to learn these weights from the context. Specifically, we give an explicit construction of a three-layer transformer that exactly implements one step of Mirror Descent and prove that the resulting estimator is a first-order approximation of the Bayes-optimal predictor. Corroborating our construction and its learnability via gradient descent, we empirically show that transformers trained from scratch learn solutions consistent with our theory: their predictive distributions, attention patterns, and learned transition matrix closely match the construction, while deeper models achieve performance comparable to multi-step Mirror Descent.",
+            "arxiv_id": "2604.10848",
+            "PRIMARY_TOPIC_LABEL": "Representation Learning Theory and Structure",
+            "MATCHED_TOPIC_LABELS": [
+                "Architecture and Training Dynamics",
+                "Representation Learning Theory and Structure"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [
+                "New Frontier Papers"
+            ],
+            "HOTSPOT_PAPER_PRIMARY_KIND": "new_frontier",
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "New Frontier Papers",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "llm_exact"
+        },
+        "2604.09852": {
+            "ARXIVID": "2604.09852",
+            "COMMENT": "Teaches models to segment reasoning into compressed mementos that replace full intermediate context, cutting KV cache and compute.",
+            "RELEVANCE": 10,
+            "NOVELTY": 9,
+            "PRIMARY_TOPIC_ID": "memory_systems",
+            "MATCHED_TOPIC_IDS": [
+                "efficiency_scaling",
+                "memory_systems"
+            ],
+            "TOPIC_MATCH_COMMENT": "Best fit is memory systems since the paper's core idea is a new learned mechanism for storing and recalling intermediate reasoning state.",
+            "HOTSPOT_PAPER_TAGS": [
+                "new_frontier",
+                "daily_hot"
+            ],
+            "HOTSPOT_PAPER_COMMENT": "This is a strong candidate for daily attention because it proposes a new memory abstraction for reasoning models with both algorithmic and systems impact.",
+            "SCORE": 19,
+            "authors": [
+                "Vasilis Kontonis",
+                "Yuchen Zeng",
+                "Shivam Garg",
+                "Lingjiao Chen",
+                "Hao Tang",
+                "Ziyan Wang",
+                "Ahmed Awadallah",
+                "Eric Horvitz",
+                "John Langford",
+                "Dimitris Papailiopoulos"
+            ],
+            "title": "MEMENTO: Teaching LLMs to Manage Their Own Context",
+            "abstract": "Reasoning models think in long, unstructured streams with no mechanism for compressing or organizing their own intermediate state. We introduce MEMENTO: a method that teaches models to segment reasoning into blocks, compress each block into a memento, i.e., a dense state summary, and reason forward by attending only to mementos, reducing context, KV cache, and compute. To train MEMENTO models, we release OpenMementos, a public dataset of 228K reasoning traces derived from OpenThoughts-v3, segmented and annotated with intermediate summaries. We show that a two-stage SFT recipe on OpenMementos is effective across different model families (Qwen3, Phi-4, Olmo 3) and scales (8B--32B parameters). Trained models maintain strong accuracy on math, science, and coding benchmarks while achieving ${\\sim}2.5\\times$ peak KV cache reduction. We extend vLLM to support our inference method, achieving ${\\sim}1.75\\times$ throughput improvement while also enabling us to perform RL and further improve accuracy. Finally, we identify a dual information stream: information from each reasoning block is carried both by the memento text and by the corresponding KV states, which retain implicit information from the original block. Removing this channel drops accuracy by 15\\,pp on AIME24.",
+            "arxiv_id": "2604.09852",
+            "PRIMARY_TOPIC_LABEL": "Memory Structures and Agent Memory Systems",
+            "MATCHED_TOPIC_LABELS": [
+                "Efficiency, Compression, and Large-Scale Training",
+                "Memory Structures and Agent Memory Systems"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [
+                "New Frontier Papers",
+                "Daily Hot Papers"
+            ],
+            "HOTSPOT_PAPER_PRIMARY_KIND": "new_frontier",
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "New Frontier Papers",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "llm_exact"
+        },
+        "2604.11613": {
+            "ARXIVID": "2604.11613",
+            "COMMENT": "Derives an explicit layerwise recursion for in-context classification, making transformer inference dynamics identifiable and interpretable.",
+            "RELEVANCE": 10,
+            "NOVELTY": 9,
+            "PRIMARY_TOPIC_ID": "architecture_training",
+            "MATCHED_TOPIC_IDS": [
+                "architecture_training",
+                "representation_structure"
+            ],
+            "TOPIC_MATCH_COMMENT": "The main contribution is a direct mechanistic characterization of transformer layer dynamics during in-context learning.",
+            "HOTSPOT_PAPER_TAGS": [
+                "new_frontier",
+                "daily_hot"
+            ],
+            "HOTSPOT_PAPER_COMMENT": "Broadly important today and potentially frontier-opening: Derives an explicit layerwise recursion for in-context classification, making transformer inference dynamics identifiable and interpretable.",
+            "SCORE": 19,
+            "authors": [
+                "Patrick Lutz",
+                "Themistoklis Haris",
+                "Arjun Chandra",
+                "Aditya Gangrade",
+                "Venkatesh Saligrama"
+            ],
+            "title": "Layerwise Dynamics for In-Context Classification in Transformers",
+            "abstract": "Transformers can perform in-context classification from a few labeled examples, yet the inference-time algorithm remains opaque. We study multi-class linear classification in the hard no-margin regime and make the computation identifiable by enforcing feature- and label-permutation equivariance at every layer. This enables interpretability while maintaining functional equivalence and yields highly structured weights. From these models we extract an explicit depth-indexed recursion: an end-to-end identified, emergent update rule inside a softmax transformer, to our knowledge the first of its kind. Attention matrices formed from mixed feature-label Gram structure drive coupled updates of training points, labels, and the test probe. The resulting dynamics implement a geometry-driven algorithmic motif, which can provably amplify class separation and yields robust expected class alignment.",
+            "arxiv_id": "2604.11613",
+            "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+            "MATCHED_TOPIC_LABELS": [
+                "Architecture and Training Dynamics",
+                "Representation Learning Theory and Structure"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [
+                "New Frontier Papers",
+                "Daily Hot Papers"
+            ],
+            "HOTSPOT_PAPER_PRIMARY_KIND": "new_frontier",
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "New Frontier Papers",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "heuristic"
+        },
+        "2604.10333": {
+            "ARXIVID": "2604.10333",
+            "COMMENT": "Presents a sparse temporally-factored zero-shot visual world model that learns physical understanding from child-scale experience.",
+            "RELEVANCE": 9,
+            "NOVELTY": 9,
+            "PRIMARY_TOPIC_ID": "world_models_open_ended_rl",
+            "MATCHED_TOPIC_IDS": [
+                "representation_structure",
+                "world_models_open_ended_rl"
+            ],
+            "TOPIC_MATCH_COMMENT": "The paper is fundamentally about world-model design and why such models enable transferable physical understanding from limited interaction data.",
+            "HOTSPOT_PAPER_TAGS": [
+                "new_frontier"
+            ],
+            "HOTSPOT_PAPER_COMMENT": "A developmental-efficiency framing for zero-shot world models feels like a genuinely fresh foundational direction, not just another benchmark gain.",
+            "SCORE": 18,
+            "authors": [
+                "Khai Loong Aw",
+                "Klemen Kotar",
+                "Wanhee Lee",
+                "Seungwoo Kim",
+                "Khaled Jedoui",
+                "Rahul Venkatesh",
+                "Lilian Naing Chen",
+                "Michael C. Frank",
+                "Daniel L. K. Yamins"
+            ],
+            "title": "Zero-shot World Models Are Developmentally Efficient Learners",
+            "abstract": "Young children demonstrate early abilities to understand their physical world, estimating depth, motion, object coherence, interactions, and many other aspects of physical scene understanding. Children are both data-efficient and flexible cognitive systems, creating competence despite extremely limited training data, while generalizing to myriad untrained tasks -- a major challenge even for today's best AI systems. Here we introduce a novel computational hypothesis for these abilities, the Zero-shot Visual World Model (ZWM). ZWM is based on three principles: a sparse temporally-factored predictor that decouples appearance from dynamics; zero-shot estimation through approximate causal inference; and composition of inferences to build more complex abilities. We show that ZWM can be learned from the first-person experience of a single child, rapidly generating competence across multiple physical understanding benchmarks. It also broadly recapitulates behavioral signatures of child development and builds brain-like internal representations. Our work presents a blueprint for efficient and flexible learning from human-scale data, advancing both a computational account for children's early physical understanding and a path toward data-efficient AI systems.",
+            "arxiv_id": "2604.10333",
+            "PRIMARY_TOPIC_LABEL": "World Models, Exploration, and Open-Ended Reinforcement Learning",
+            "MATCHED_TOPIC_LABELS": [
+                "Representation Learning Theory and Structure",
+                "World Models, Exploration, and Open-Ended Reinforcement Learning"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [
+                "New Frontier Papers"
+            ],
+            "HOTSPOT_PAPER_PRIMARY_KIND": "new_frontier",
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "New Frontier Papers",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "llm_exact"
+        },
+        "2604.11288": {
+            "ARXIVID": "2604.11288",
+            "COMMENT": "Adds a structural sponsorship rule for KV retention that preserves dormant but semantically critical tokens ignored by score-based eviction.",
+            "RELEVANCE": 10,
+            "NOVELTY": 8,
+            "PRIMARY_TOPIC_ID": "efficiency_scaling",
+            "MATCHED_TOPIC_IDS": [
+                "efficiency_scaling",
+                "memory_systems"
+            ],
+            "TOPIC_MATCH_COMMENT": "This is a direct KV-cache retention mechanism for memory-efficient inference, with a distinct new principle beyond better token scoring.",
+            "HOTSPOT_PAPER_TAGS": [
+                "daily_hot"
+            ],
+            "HOTSPOT_PAPER_COMMENT": "Broadly important today: Adds a structural sponsorship rule for KV retention that preserves dormant but semantically critical tokens ignored by score-based eviction.",
+            "SCORE": 18,
+            "authors": [
+                "Abhinaba Basu"
+            ],
+            "title": "Transactional Attention: Semantic Sponsorship for KV-Cache Retention",
+            "abstract": "At K=16 tokens (0.4% of a 4K context), every existing KV-cache compression method achieves 0% on credential retrieval. The failure mode is dormant tokens: credentials, API keys, and configuration values that receive near-zero attention but become essential at generation time. Because these tokens lack the statistical signals that eviction policies rely on, no method based on attention scores, reconstruction loss, or learned retention gates retains them. We introduce Transactional Attention (TA), a sponsorship mechanism in which structural anchor patterns (e.g., \"key:\", \"password:\") protect adjacent value-bearing tokens from eviction. TA achieves 100% credential retrieval at K=16 where six baselines (H2O, TOVA, SnapKV, StreamingLLM, PyramidKV, DynamicKV) achieve 0%, and sustains 100% accuracy across 200 function-calling trials. TA-Fast, an attention-free variant, reduces memory overhead by 52% and is compatible with SDPA and FlashAttention. TA is orthogonal to existing compression methods and adds less than 1% latency overhead.",
+            "arxiv_id": "2604.11288",
+            "PRIMARY_TOPIC_LABEL": "Efficiency, Compression, and Large-Scale Training",
+            "MATCHED_TOPIC_LABELS": [
+                "Efficiency, Compression, and Large-Scale Training",
+                "Memory Structures and Agent Memory Systems"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [
+                "Daily Hot Papers"
+            ],
+            "HOTSPOT_PAPER_PRIMARY_KIND": "daily_hot",
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "Daily Hot Papers",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "heuristic"
+        },
+        "2604.09780": {
+            "ARXIVID": "2604.09780",
+            "COMMENT": "Provides a mechanistic theory of MoE routing, showing expert usage is governed by hidden-state geometry rather than true expert specialization.",
+            "RELEVANCE": 10,
+            "NOVELTY": 8,
+            "PRIMARY_TOPIC_ID": "architecture_training",
+            "MATCHED_TOPIC_IDS": [
+                "architecture_training",
+                "representation_structure"
+            ],
+            "TOPIC_MATCH_COMMENT": "MoE routing behavior is a core architectural mechanism, and the paper directly analyzes how routing and load balancing shape computation.",
+            "HOTSPOT_PAPER_TAGS": [
+                "daily_hot"
+            ],
+            "HOTSPOT_PAPER_COMMENT": "MoE interpretability and routing mechanics are broadly important to current frontier model design, and this paper offers a strong mechanistic account likely to matter beyond a niche audience.",
+            "SCORE": 18,
+            "authors": [
+                "Xi Wang",
+                "Soufiane Hayou",
+                "Eric Nalisnick"
+            ],
+            "title": "The Myth of Expert Specialization in MoEs: Why Routing Reflects Geometry, Not Necessarily Domain Expertise",
+            "abstract": "Mixture of Experts (MoEs) are now ubiquitous in large language models, yet the mechanisms behind their \"expert specialization\" remain poorly understood. We show that, since MoE routers are linear maps, hidden state similarity is both necessary and sufficient to explain expert usage similarity, and specialization is therefore an emergent property of the representation space, not of the routing architecture itself. We confirm this at both token and sequence level across five pre-trained models. We additionally prove that load-balancing loss suppresses shared hidden state directions to maintain routing diversity, which might provide a theoretical explanation for specialization collapse under less diverse data, e.g. small batch. Despite this clean mechanistic account, we find that specialization patterns in pre-trained MoEs resist human interpretation: expert overlap between different models answering the same question is no higher than between entirely different questions ($\\sim$60\\%); prompt-level routing does not predict rollout-level routing; and deeper layers exhibit near-identical expert activation across semantically unrelated inputs, especially in reasoning models. We conclude that, while the efficiency perspective of MoEs is well understood, understanding expert specialization is at least as hard as understanding LLM hidden state geometry, a long-standing open problem in the literature.",
+            "arxiv_id": "2604.09780",
+            "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+            "MATCHED_TOPIC_LABELS": [
+                "Architecture and Training Dynamics",
+                "Representation Learning Theory and Structure"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [
+                "Daily Hot Papers"
+            ],
+            "HOTSPOT_PAPER_PRIMARY_KIND": "daily_hot",
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "Daily Hot Papers",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "llm_exact"
+        },
+        "2604.11501": {
+            "ARXIVID": "2604.11501",
+            "COMMENT": "Shows quantizing all KV dimensions beats rank reduction at equal cache budgets and explains why via attention-order stability.",
+            "RELEVANCE": 10,
+            "NOVELTY": 8,
+            "PRIMARY_TOPIC_ID": "efficiency_scaling",
+            "MATCHED_TOPIC_IDS": [
+                "architecture_training",
+                "efficiency_scaling"
+            ],
+            "TOPIC_MATCH_COMMENT": "This is directly about KV-cache compression, with both empirical and structural analysis of why one compression family dominates another.",
+            "HOTSPOT_PAPER_TAGS": [
+                "daily_hot"
+            ],
+            "HOTSPOT_PAPER_COMMENT": "Broadly important today: Shows quantizing all KV dimensions beats rank reduction at equal cache budgets and explains why via attention-order stability.",
+            "SCORE": 18,
+            "authors": [
+                "Samuel Salfati"
+            ],
+            "title": "Quantization Dominates Rank Reduction for KV-Cache Compression",
+            "abstract": "We compare two strategies for compressing the KV cache in transformer inference: rank reduction (discard dimensions) and quantization (keep all dimensions, reduce precision). At matched storage budgets across five models (124M-14B, MHA and GQA), we find that quantization consistently outperforms rank reduction by 4-364 PPL depending on model and compression level. The gap persists even when rank reduction is combined with quantization in hybrid baselines, and it grows with GQA aggressiveness. On LAMBADA, INT4 matches FP16 accuracy (+0.23 PPL on Mistral 7B, +0.58 on GPT-2) while rank-32 at identical storage collapses to 0.4%.   We trace this gap to a structural asymmetry: under softmax attention routing, removing a dimension can flip which token is attended (a discrete failure), while quantization noise is bounded and typically preserves score ordering. We formalize this via a perturbation result showing projection damage exceeds quantization damage by 3 x 2^(2b) per direction under the softmax Fisher metric. A basis ablation confirms the finding is basis-independent (spread <0.4 PPL), establishing that the advantage comes from preserving dimensions, not from a better coordinate system. Joint K+V INT4 quantization achieves 75% total KV reduction at only +0.18 PPL on Mistral 7B.",
+            "arxiv_id": "2604.11501",
+            "PRIMARY_TOPIC_LABEL": "Efficiency, Compression, and Large-Scale Training",
+            "MATCHED_TOPIC_LABELS": [
+                "Architecture and Training Dynamics",
+                "Efficiency, Compression, and Large-Scale Training"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [
+                "Daily Hot Papers"
+            ],
+            "HOTSPOT_PAPER_PRIMARY_KIND": "daily_hot",
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "Daily Hot Papers",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "heuristic"
+        },
+        "2604.09967": {
+            "ARXIVID": "2604.09967",
+            "COMMENT": "Improves Muon by adaptive second-moment preconditioning that makes matrix orthogonalization markedly cheaper during large-model training.",
+            "RELEVANCE": 10,
+            "NOVELTY": 8,
+            "PRIMARY_TOPIC_ID": "efficiency_scaling",
+            "MATCHED_TOPIC_IDS": [
+                "architecture_training",
+                "efficiency_scaling"
+            ],
+            "TOPIC_MATCH_COMMENT": "This is squarely about optimizer design and large-scale training efficiency, with a concrete algorithmic change that reduces training cost.",
+            "HOTSPOT_PAPER_TAGS": [
+                "daily_hot"
+            ],
+            "HOTSPOT_PAPER_COMMENT": "Broadly important today: Improves Muon by adaptive second-moment preconditioning that makes matrix orthogonalization markedly cheaper during large-model training.",
+            "SCORE": 18,
+            "authors": [
+                "Ziyue Liu",
+                "Ruijie Zhang",
+                "Zhengyang Wang",
+                "Yequan Zhao",
+                "Yupeng Su",
+                "Zi Yang",
+                "Zheng Zhang"
+            ],
+            "title": "Muon$^2$: Boosting Muon via Adaptive Second-Moment Preconditioning",
+            "abstract": "Muon has emerged as a promising optimizer for large-scale foundation model pre-training by exploiting the matrix structure of neural network updates through iterative orthogonalization. However, its practical efficiency is limited by the need for multiple Newton--Schulz (NS) iterations per optimization step, which introduces non-trivial computation and communication overhead. We propose Muon$^2$, an extension of Muon that applies Adam-style adaptive second-moment preconditioning before orthogonalization. Our key insight is that the core challenge of polar approximation in Muon lies in the ill-conditioned momentum matrix, of which the spectrum is substantially improved by Muon$^2$, leading to faster convergence toward a practically sufficient orthogonalization. We further characterize the practical orthogonalization quality via directional alignment, under which Muon$^2$ demonstrates dramatic improvement over Muon at each polar step. Across GPT and LLaMA pre-training experiments from 60M to 1.3B parameters, Muon$^2$ consistently outperforms Muon and recent Muon variants while reducing NS iterations by 40\\%. We further introduce Muon$^2$-F, a memory-efficient factorized variant that preserves most of the gains of Muon$^2$ with negligible memory overhead.",
+            "arxiv_id": "2604.09967",
+            "PRIMARY_TOPIC_LABEL": "Efficiency, Compression, and Large-Scale Training",
+            "MATCHED_TOPIC_LABELS": [
+                "Architecture and Training Dynamics",
+                "Efficiency, Compression, and Large-Scale Training"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [
+                "Daily Hot Papers"
+            ],
+            "HOTSPOT_PAPER_PRIMARY_KIND": "daily_hot",
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "Daily Hot Papers",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "heuristic"
+        },
+        "2604.10946": {
+            "ARXIVID": "2604.10946",
+            "COMMENT": "Provides theory for in-context learning under non-stationarity, showing gated linear attention induces an adaptive recency bias.",
+            "RELEVANCE": 10,
+            "NOVELTY": 8,
+            "PRIMARY_TOPIC_ID": "architecture_training",
+            "MATCHED_TOPIC_IDS": [
+                "architecture_training",
+                "representation_structure"
+            ],
+            "TOPIC_MATCH_COMMENT": "The paper centers on a core attention mechanism and its adaptation dynamics in a non-stationary regime.",
+            "HOTSPOT_PAPER_TAGS": [
+                "daily_hot"
+            ],
+            "HOTSPOT_PAPER_COMMENT": "Broadly important today: Provides theory for in-context learning under non-stationarity, showing gated linear attention induces an adaptive recency bias.",
+            "SCORE": 18,
+            "authors": [
+                "Zhen Qin",
+                "Jiachen Jiang",
+                "Zhihui Zhu"
+            ],
+            "title": "Learning to Adapt: In-Context Learning Beyond Stationarity",
+            "abstract": "Transformer models have become foundational across a wide range of scientific and engineering domains due to their strong empirical performance. A key capability underlying their success is in-context learning (ICL): when presented with a short prompt from an unseen task, transformers can perform per-token and next-token predictions without any parameter updates. Recent theoretical efforts have begun to uncover the mechanisms behind this phenomenon, particularly in supervised regression settings. However, these analyses predominantly assume stationary task distributions, which overlook a broad class of real-world scenarios where the target function varies over time. In this work, we bridge this gap by providing a theoretical analysis of ICL under non-stationary regression problems. We study how the gated linear attention (GLA) mechanism adapts to evolving input-output relationships and rigorously characterize its advantages over standard linear attention in this dynamic setting. To model non-stationarity, we adopt a first-order autoregressive process and show that GLA achieves lower training and testing errors by adaptively modulating the influence of past inputs -- effectively implementing a learnable recency bias. Our theoretical findings are further supported by empirical results, which validate the benefits of gating mechanisms in non-stationary ICL tasks.",
+            "arxiv_id": "2604.10946",
+            "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+            "MATCHED_TOPIC_LABELS": [
+                "Architecture and Training Dynamics",
+                "Representation Learning Theory and Structure"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [
+                "Daily Hot Papers"
+            ],
+            "HOTSPOT_PAPER_PRIMARY_KIND": "daily_hot",
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "Daily Hot Papers",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "heuristic"
+        },
+        "2604.10900": {
+            "ARXIVID": "2604.10900",
+            "COMMENT": "Recasts reasoning KV compression as core preservation plus selective scratch consolidation rather than better eviction scoring.",
+            "RELEVANCE": 10,
+            "NOVELTY": 8,
+            "PRIMARY_TOPIC_ID": "efficiency_scaling",
+            "MATCHED_TOPIC_IDS": [
+                "efficiency_scaling",
+                "memory_systems"
+            ],
+            "TOPIC_MATCH_COMMENT": "The paper proposes a new KV-cache compression principle for long reasoning traces, which is directly an efficiency-and-memory systems contribution.",
+            "HOTSPOT_PAPER_TAGS": [
+                "daily_hot"
+            ],
+            "HOTSPOT_PAPER_COMMENT": "Broadly important today: Recasts reasoning KV compression as core preservation plus selective scratch consolidation rather than better eviction scoring.",
+            "SCORE": 18,
+            "authors": [
+                "Buseong Kim",
+                "Heejun Gwon"
+            ],
+            "title": "CASK: Core-Aware Selective KV Compression for Reasoning Traces",
+            "abstract": "In large language models performing long-form reasoning, the KV cache grows rapidly with decode length, creating bottlenecks in memory and inference stability. Existing reasoning-oriented KV compression has mostly followed an eviction-centered view: estimate token importance more accurately, then discard lower-ranked entries. Our analysis suggests that scorer refinement alone often fails to substantially reorganize the actual keep-set and may therefore not be the main lever for preserving reasoning behavior. We instead frame reasoning KV compression as a behavior-preserving structured consolidation problem. CASK partitions the decode-time reasoning trace into a protected core that anchors answer formation and intermediate state, and mergeable scratch with high redundancy. The core is preserved, while selective consolidation is applied only to the scratch. To address prompt-heavy regimes where the prefix can exhaust the budget before decode-stage compression becomes active, CASK further uses a two-stage design: prefix eviction followed by decode-stage consolidation. On the H100 reasoning gate, CASK shows higher full-KV continuation fidelity than TriAttention at matched budgets on both AIME24 and AIME25, with recurring cask@384 > triattention@512 crossings. In prompt-heavy replay, multi_news and vcsum act as decode-active witnesses, while qmsum and gov_report expose the prefix_budget_exhausted boundary. The overall evidence supports a simple conclusion: effective reasoning KV compression depends less on more elaborate scorer engineering than on combining core preservation with selective scratch consolidation to lower the usable budget frontier.",
+            "arxiv_id": "2604.10900",
+            "PRIMARY_TOPIC_LABEL": "Efficiency, Compression, and Large-Scale Training",
+            "MATCHED_TOPIC_LABELS": [
+                "Efficiency, Compression, and Large-Scale Training",
+                "Memory Structures and Agent Memory Systems"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [
+                "Daily Hot Papers"
+            ],
+            "HOTSPOT_PAPER_PRIMARY_KIND": "daily_hot",
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "Daily Hot Papers",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "heuristic"
+        }
+    },
+    "sections": [
+        {
+            "kind": "new_frontier",
+            "label": "New Frontier Papers",
+            "description": "Papers that appear to open a genuinely new direction, paradigm, or field.",
+            "paper_ids": [
+                "2604.10848",
+                "2604.09852",
+                "2604.11613",
+                "2604.10333"
+            ]
+        },
+        {
+            "kind": "daily_hot",
+            "label": "Daily Hot Papers",
+            "description": "Papers that feel broadly important to the day and belong in the hotspot paper feed.",
+            "paper_ids": [
+                "2604.11288",
+                "2604.09780",
+                "2604.11501",
+                "2604.09967",
+                "2604.10946",
+                "2604.10900"
+            ]
+        }
+    ]
+}

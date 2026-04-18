@@ -1,0 +1,250 @@
+{
+    "2604.14722": {
+        "ARXIVID": "2604.14722",
+        "COMMENT": "Mechanistically identifies one circuit causing attention sinks in GPT-2-style transformers and shows sinks can arise through distinct circuits.",
+        "RELEVANCE": 9,
+        "NOVELTY": 8,
+        "PRIMARY_TOPIC_ID": "architecture_training",
+        "MATCHED_TOPIC_IDS": [
+            "architecture_training",
+            "representation_structure"
+        ],
+        "TOPIC_MATCH_COMMENT": "Best fit is architecture/training because the paper explains a concrete attention mechanism failure mode via circuit analysis tied to transformer design choices.",
+        "HOTSPOT_PAPER_TAGS": [
+            "daily_hot"
+        ],
+        "HOTSPOT_PAPER_COMMENT": "Broadly important today: Mechanistically identifies one circuit causing attention sinks in GPT-2-style transformers and shows sinks can arise through distinct circuits.",
+        "SCORE": 17,
+        "authors": [
+            "Yuval Ran-Milo",
+            "Hila Ofek",
+            "Shahar Mendel"
+        ],
+        "title": "A Mechanistic Account of Attention Sinks in GPT-2: One Circuit, Broader Implications for Mitigation",
+        "abstract": "Transformers commonly exhibit an attention sink: disproportionately high attention to the first position. We study this behavior in GPT-2-style models with learned query biases and absolute positional embeddings. Combining structural analysis with causal interventions, validated across natural-language, mathematical, and code inputs, we find that the sink arises from the interaction among (i) a learned query bias, (ii) the first-layer MLP transformation of the positional encoding, and (iii) structure in the key projection. Crucially, each component we identify is individually dispensable: architectures omitting each of them robustly exhibit sinks. This indicates that attention sinks may arise through distinct circuits across architectures. These findings inform mitigation of sinks, and motivate broader investigation into why sinks emerge.",
+        "arxiv_id": "2604.14722",
+        "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+        "MATCHED_TOPIC_LABELS": [
+            "Architecture and Training Dynamics",
+            "Representation Learning Theory and Structure"
+        ],
+        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+        "HOTSPOT_PAPER_LABELS": [
+            "Daily Hot Papers"
+        ],
+        "HOTSPOT_PAPER_PRIMARY_KIND": "daily_hot",
+        "HOTSPOT_PAPER_PRIMARY_LABEL": "Daily Hot Papers",
+        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "heuristic"
+    },
+    "2604.14825": {
+        "ARXIVID": "2604.14825",
+        "COMMENT": "Auto-scheduling tensor compiler that discovers FlashAttention-3-like tiled kernels from high-level tensor algebra.",
+        "RELEVANCE": 8,
+        "NOVELTY": 8,
+        "PRIMARY_TOPIC_ID": "efficiency_scaling",
+        "MATCHED_TOPIC_IDS": [
+            "efficiency_scaling"
+        ],
+        "TOPIC_MATCH_COMMENT": "The core contribution is a new compiler and auto-scheduling method that materially changes kernel efficiency for transformer workloads, fitting large-scale training/inference efficiency.",
+        "HOTSPOT_PAPER_TAGS": [],
+        "HOTSPOT_PAPER_COMMENT": "",
+        "SCORE": 16,
+        "authors": [
+            "Yifan Zhao",
+            "Yuchen Yang",
+            "Matei Budiu",
+            "Sasa Misailovic"
+        ],
+        "title": "Nautilus: An Auto-Scheduling Tensor Compiler for Efficient Tiled GPU Kernels",
+        "abstract": "We present Nautilus, a novel tensor compiler that moves toward fully automated math-to-kernel optimization. Nautilus compiles a high-level algebraic specification of tensor operators into efficient tiled GPU kernels. Nautilus's successive lowering design allows high-level optimizations, expression rewrites, and tile optimizations to be jointly applied in a single end-to-end system. Nautilus presents a novel auto-scheduler that discovers sequences of high-level optimizations, while preserving the regular program structure needed by tile optimizers. Nautilus's auto-scheduler captures complex interactions and trade-offs in the high-level optimizations, including aggressive global transformations like advanced reduction fusion. Nautilus is the first end-to-end tensor compiler capable of starting from a math-like description of attention and automatically discovering FlashAttention-3-like kernels, offloading the entire burden of optimization from the programmer to the compiler. Across five transformer-based models and 150 evaluation configurations on NVIDIA GH200 and RTX 5090 GPUs, Nautilus achieves up to 23% higher throughput than state-of-the-art compilers on GH200 and up to 42% on RTX 5090, while matching or exceeding manually written cuDNN kernels on many long-sequence configurations.",
+        "arxiv_id": "2604.14825",
+        "PRIMARY_TOPIC_LABEL": "Efficiency, Compression, and Large-Scale Training",
+        "MATCHED_TOPIC_LABELS": [
+            "Efficiency, Compression, and Large-Scale Training"
+        ],
+        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+        "HOTSPOT_PAPER_LABELS": [],
+        "HOTSPOT_PAPER_PRIMARY_KIND": null,
+        "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+    },
+    "2604.14626": {
+        "ARXIVID": "2604.14626",
+        "COMMENT": "HW-SW co-design exploits MoE expert and bit elasticity for self-speculative decoding with large serving speedups.",
+        "RELEVANCE": 8,
+        "NOVELTY": 8,
+        "PRIMARY_TOPIC_ID": "efficiency_scaling",
+        "MATCHED_TOPIC_IDS": [
+            "architecture_training",
+            "efficiency_scaling"
+        ],
+        "TOPIC_MATCH_COMMENT": "Its main contribution is an MoE-specific efficiency mechanism for inference, combining cache/speculative decoding with architectural elasticity.",
+        "HOTSPOT_PAPER_TAGS": [],
+        "HOTSPOT_PAPER_COMMENT": "",
+        "SCORE": 16,
+        "authors": [
+            "Yuseon Choi",
+            "Jingu Lee",
+            "Jungjun Oh",
+            "Sunjoo Whang",
+            "Byeongcheol Kim",
+            "Minsung Kim",
+            "Hoi-Jun Yoo",
+            "Sangjin Kim"
+        ],
+        "title": "ELMoE-3D: Leveraging Intrinsic Elasticity of MoE for Hybrid-Bonding-Enabled Self-Speculative Decoding in On-Premises Serving",
+        "abstract": "Mixture-of-Experts (MoE) models have become the dominant architecture for large-scale language models, yet on-premises serving remains fundamentally memory-bound as batching turns sparse per-token compute into dense memory activation. Memory-centric architectures (PIM, NMP) improve bandwidth but leave compute underutilized under MoE's low arithmetic intensity at high batch sizes. Speculative decoding (SD) trades idle compute for fewer target invocations, yet verification must load experts even for rejected tokens, severely limiting its benefit in MoE especially at low batch sizes. We propose ELMoE-3D, a hybrid-bonding (HB)-based HW-SW co-designed framework that unifies cache-based acceleration and speculative decoding to offer overall speedup across batch sizes. We identify two intrinsic elasticity axes of MoE-expert and bit-and jointly scale them to construct Elastic Self-Speculative Decoding (Elastic-SD), which serves as both an expert cache and a strongly aligned self-draft model accelerated by high HB bandwidth. Our LSB-augmented bit-sliced architecture exploits inherent redundancy in bit-slice representations to natively support bit-nested execution. On our 3D-stacked hardware, ELMoE-3D achieves an average $6.6\\times$ speedup and $4.4\\times$ energy efficiency gain over naive MoE serving on xPU across batch sizes 1-16, and delivers $2.2\\times$ speedup and $1.4\\times$ energy efficiency gain over the best-performing prior accelerator baseline.",
+        "arxiv_id": "2604.14626",
+        "PRIMARY_TOPIC_LABEL": "Efficiency, Compression, and Large-Scale Training",
+        "MATCHED_TOPIC_LABELS": [
+            "Architecture and Training Dynamics",
+            "Efficiency, Compression, and Large-Scale Training"
+        ],
+        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+        "HOTSPOT_PAPER_LABELS": [],
+        "HOTSPOT_PAPER_PRIMARY_KIND": null,
+        "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+    },
+    "2604.14669": {
+        "ARXIVID": "2604.14669",
+        "COMMENT": "Characterizes zeroth-order training stability via dependence on the full Hessian spectrum and edge-of-stability behavior.",
+        "RELEVANCE": 8,
+        "NOVELTY": 8,
+        "PRIMARY_TOPIC_ID": "architecture_training",
+        "MATCHED_TOPIC_IDS": [
+            "architecture_training",
+            "efficiency_scaling"
+        ],
+        "TOPIC_MATCH_COMMENT": "Although motivated partly by memory-efficient tuning, the deepest contribution is a training-dynamics theory for ZO optimization.",
+        "HOTSPOT_PAPER_TAGS": [],
+        "HOTSPOT_PAPER_COMMENT": "",
+        "SCORE": 16,
+        "authors": [
+            "Minhak Song",
+            "Liang Zhang",
+            "Bingcong Li",
+            "Niao He",
+            "Michael Muehlebach",
+            "Sewoong Oh"
+        ],
+        "title": "Zeroth-Order Optimization at the Edge of Stability",
+        "abstract": "Zeroth-order (ZO) methods are widely used when gradients are unavailable or prohibitively expensive, including black-box learning and memory-efficient fine-tuning of large models, yet their optimization dynamics in deep learning remain underexplored. In this work, we provide an explicit step size condition that exactly captures the (mean-square) linear stability of a family of ZO methods based on the standard two-point estimator. Our characterization reveals a sharp contrast with first-order (FO) methods: whereas FO stability is governed solely by the largest Hessian eigenvalue, mean-square stability of ZO methods depends on the entire Hessian spectrum. Since computing the full Hessian spectrum is infeasible in practical neural network training, we further derive tractable stability bounds that depend only on the largest eigenvalue and the Hessian trace. Empirically, we find that full-batch ZO methods operate at the edge of stability: ZO-GD, ZO-GDM, and ZO-Adam consistently stabilize near the predicted stability boundary across a range of deep learning training problems. Our results highlight an implicit regularization effect specific to ZO methods, where large step sizes primarily regularize the Hessian trace, whereas in FO methods they regularize the top eigenvalue.",
+        "arxiv_id": "2604.14669",
+        "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+        "MATCHED_TOPIC_LABELS": [
+            "Architecture and Training Dynamics",
+            "Efficiency, Compression, and Large-Scale Training"
+        ],
+        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+        "HOTSPOT_PAPER_LABELS": [],
+        "HOTSPOT_PAPER_PRIMARY_KIND": null,
+        "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+    },
+    "2604.14243": {
+        "ARXIVID": "2604.14243",
+        "COMMENT": "Studies safety-constrained model-based RL with explicit adversarial dynamics and provides regret and constraint-violation guarantees.",
+        "RELEVANCE": 8,
+        "NOVELTY": 8,
+        "PRIMARY_TOPIC_ID": "world_models_open_ended_rl",
+        "MATCHED_TOPIC_IDS": [
+            "world_models_open_ended_rl"
+        ],
+        "TOPIC_MATCH_COMMENT": "The contribution is a foundational model-based RL algorithm for robust learning under adversarial environment factors.",
+        "HOTSPOT_PAPER_TAGS": [],
+        "HOTSPOT_PAPER_COMMENT": "",
+        "SCORE": 16,
+        "authors": [
+            "Sourav Ganguly",
+            "Kartik Pandit",
+            "Arnob Ghosh"
+        ],
+        "title": "Optimistic Policy Learning under Pessimistic Adversaries with Regret and Violation Guarantees",
+        "abstract": "Real-world decision-making systems operate in environments where state transitions depend not only on the agent's actions, but also on \\textbf{exogenous factors outside its control}--competing agents, environmental disturbances, or strategic adversaries--formally, $s_{h+1} = f(s_h, a_h, \\bar{a}_h)+\\omega_h$ where $\\bar{a}_h$ is the adversary/external action, $a_h$ is the agent's action, and $\\omega_h$ is an additive noise. Ignoring such factors can yield policies that are optimal in isolation but \\textbf{fail catastrophically in deployment}, particularly when safety constraints must be satisfied.   Standard Constrained MDP formulations assume the agent is the sole driver of state evolution, an assumption that breaks down in safety-critical settings. Existing robust RL approaches address this via distributional robustness over transition kernels, but do not explicitly model the \\textbf{strategic interaction} between agent and exogenous factor, and rely on strong assumptions about divergence from a known nominal model.   We model the exogenous factor as an \\textbf{adversarial policy} $\\bar{\\pi}$ that co-determines state transitions, and ask how an agent can remain both optimal and safe against such an adversary. \\emph{To the best of our knowledge, this is the first work to study safety-constrained RL under explicit adversarial dynamics}. We propose \\textbf{Robust Hallucinated Constrained Upper-Confidence RL} (\\texttt{RHC-UCRL}), a model-based algorithm that maintains optimism over both agent and adversary policies, explicitly separating epistemic from aleatoric uncertainty. \\texttt{RHC-UCRL} achieves sub-linear regret and constraint violation guarantees.",
+        "arxiv_id": "2604.14243",
+        "PRIMARY_TOPIC_LABEL": "World Models, Exploration, and Open-Ended Reinforcement Learning",
+        "MATCHED_TOPIC_LABELS": [
+            "World Models, Exploration, and Open-Ended Reinforcement Learning"
+        ],
+        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+        "HOTSPOT_PAPER_LABELS": [],
+        "HOTSPOT_PAPER_PRIMARY_KIND": null,
+        "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+    },
+    "2604.14265": {
+        "ARXIVID": "2604.14265",
+        "COMMENT": "Recasts behavior-regularized RL as optimal transport solved by value-driven discrete gradient flow, avoiding explicit policy parameterization.",
+        "RELEVANCE": 8,
+        "NOVELTY": 8,
+        "PRIMARY_TOPIC_ID": "world_models_open_ended_rl",
+        "MATCHED_TOPIC_IDS": [
+            "world_models_open_ended_rl"
+        ],
+        "TOPIC_MATCH_COMMENT": "Primary fit is RL foundations because the paper introduces a new optimization paradigm for behavior-regularized reinforcement learning with theoretical motivation.",
+        "HOTSPOT_PAPER_TAGS": [
+            "daily_hot"
+        ],
+        "HOTSPOT_PAPER_COMMENT": "This looks broadly important for current RL methodology, spanning offline RL and LLM RL finetuning with a distinctive new optimization framing.",
+        "SCORE": 16,
+        "authors": [
+            "Haoran Xu",
+            "Kaiwen Hu",
+            "Somayeh Sojoudi",
+            "Amy Zhang"
+        ],
+        "title": "Reinforcement Learning via Value Gradient Flow",
+        "abstract": "We study behavior-regularized reinforcement learning (RL), where regularization toward a reference distribution (the dataset in offline RL or the base model in LLM RL finetuning) is essential to prevent value over-optimization caused by erroneous out-of-distribution extrapolation. Existing methods either rely on reparameterized policy gradient, which are difficult to scale to large generative models, or on reject sampling, which can be overly conservative when attempting to move beyond the behavior support. In this paper, we propose Value Gradient Flow (VGF), a scalable new paradigm for behavior-regularized RL. VGF casts behavior-regularized RL as an optimal transport problem that maps the reference distribution to the value-induced optimal policy distribution. We solve this transport problem via discrete gradient flow, where value gradients guide particles initialized from the reference distribution. Our analysis shows that VGF imposes regularization implicitly by controlling the transport budget. VGF eliminates explicit policy parameterization while remaining expressive and flexible, this enables adaptive test-time scaling by adjusting the transport budget. Extensive experiments demonstrate that VGF significantly outperforms prior methods, achieving state-of-the-art results on offline RL benchmarks (D4RL, OGBench) and LLM RL tasks. Code and runs can be found at https://ryanxhr.github.io/vgf.",
+        "arxiv_id": "2604.14265",
+        "PRIMARY_TOPIC_LABEL": "World Models, Exploration, and Open-Ended Reinforcement Learning",
+        "MATCHED_TOPIC_LABELS": [
+            "World Models, Exploration, and Open-Ended Reinforcement Learning"
+        ],
+        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+        "HOTSPOT_PAPER_LABELS": [
+            "Daily Hot Papers"
+        ],
+        "HOTSPOT_PAPER_PRIMARY_KIND": "daily_hot",
+        "HOTSPOT_PAPER_PRIMARY_LABEL": "Daily Hot Papers",
+        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "llm_exact"
+    },
+    "2604.15306": {
+        "ARXIVID": "2604.15306",
+        "COMMENT": "Uses shortest-path planning to disentangle data, RL, and inference effects on systematic generalization and length-scaling failure.",
+        "RELEVANCE": 8,
+        "NOVELTY": 8,
+        "PRIMARY_TOPIC_ID": "representation_structure",
+        "MATCHED_TOPIC_IDS": [
+            "representation_structure",
+            "world_models_open_ended_rl"
+        ],
+        "TOPIC_MATCH_COMMENT": "The strongest contribution is mechanistic analysis of problem-solving generalization and failure modes under different training regimes, which fits representation and training-structure understanding better than RL itself.",
+        "HOTSPOT_PAPER_TAGS": [
+            "daily_hot"
+        ],
+        "HOTSPOT_PAPER_COMMENT": "Systematic generalization and the limits of RL in LLM problem solving are broadly salient, so this also belongs in the daily hotspot feed.",
+        "SCORE": 16,
+        "authors": [
+            "Yao Tong",
+            "Jiayuan Ye",
+            "Anastasia Borovykh",
+            "Reza Shokri"
+        ],
+        "title": "Generalization in LLM Problem Solving: The Case of the Shortest Path",
+        "abstract": "Whether language models can systematically generalize remains actively debated. Yet empirical performance is jointly shaped by multiple factors such as training data, training paradigms, and inference-time strategies, making failures difficult to interpret. We introduce a controlled synthetic environment based on shortest-path planning, a canonical composable sequential optimization problem. The setup enables clean separation of these factors and supports two orthogonal axes of generalization: spatial transfer to unseen maps and length scaling to longer-horizon problems. We find that models exhibit strong spatial transfer but consistently fail under length scaling due to recursive instability. We further analyze how distinct stages of the learning pipeline influence systematic problem-solving: for example, data coverage sets capability limits; reinforcement learning improves training stability but does not expand those limits; and inference-time scaling enhances performance but cannot rescue length-scaling failures.",
+        "arxiv_id": "2604.15306",
+        "PRIMARY_TOPIC_LABEL": "Representation Learning Theory and Structure",
+        "MATCHED_TOPIC_LABELS": [
+            "Representation Learning Theory and Structure",
+            "World Models, Exploration, and Open-Ended Reinforcement Learning"
+        ],
+        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+        "HOTSPOT_PAPER_LABELS": [
+            "Daily Hot Papers"
+        ],
+        "HOTSPOT_PAPER_PRIMARY_KIND": "daily_hot",
+        "HOTSPOT_PAPER_PRIMARY_LABEL": "Daily Hot Papers",
+        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "llm_exact"
+    }
+}

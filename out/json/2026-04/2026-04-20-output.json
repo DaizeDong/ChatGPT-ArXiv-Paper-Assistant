@@ -1,0 +1,405 @@
+{
+    "2604.15742": {
+        "ARXIVID": "2604.15742",
+        "COMMENT": "Finite-width ResNet theory via a collective-kernel EFT that derives stochastic kernel recursions and pinpoints where G-only closure breaks.",
+        "RELEVANCE": 8,
+        "NOVELTY": 8,
+        "PRIMARY_TOPIC_ID": "architecture_training",
+        "MATCHED_TOPIC_IDS": [
+            "architecture_training",
+            "representation_structure"
+        ],
+        "TOPIC_MATCH_COMMENT": "The core contribution is a mechanistic analysis of residual-network training dynamics and kernel evolution, making architecture/training dynamics the best fit.",
+        "HOTSPOT_PAPER_TAGS": [],
+        "HOTSPOT_PAPER_COMMENT": "",
+        "SCORE": 16,
+        "authors": [
+            "Hidetoshi Kawase",
+            "Toshihiro Ota"
+        ],
+        "title": "Collective Kernel EFT for Pre-activation ResNets",
+        "abstract": "In finite-width deep neural networks, the empirical kernel $G$ evolves stochastically across layers. We develop a collective kernel effective field theory (EFT) for pre-activation ResNets based on a $G$-only closure hierarchy and diagnose its finite validity window. Exploiting the exact conditional Gaussianity of residual increments, we derive an exact stochastic recursion for $G$. Applying Gaussian approximations systematically yields a continuous-depth ODE system for the mean kernel $K_0$, the kernel covariance $V_4$, and the $1/n$ mean correction $K_{1,\\mathrm{EFT}}$, which emerges diagrammatically as a one-loop tadpole correction. Numerically, $K_0$ remains accurate at all depths. However, the $V_4$ equation residual accumulates to an $O(1)$ error at finite time, primarily driven by approximation errors in the $G$-only transport term. Furthermore, $K_{1,\\mathrm{EFT}}$ fails due to the breakdown of the source closure, which exhibits a systematic mismatch even at initialization. These findings highlight the limitations of $G$-only state-space reduction and suggest extending the state space to incorporate the sigma-kernel.",
+        "arxiv_id": "2604.15742",
+        "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+        "MATCHED_TOPIC_LABELS": [
+            "Architecture and Training Dynamics",
+            "Representation Learning Theory and Structure"
+        ],
+        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+        "HOTSPOT_PAPER_LABELS": [],
+        "HOTSPOT_PAPER_PRIMARY_KIND": null,
+        "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+    },
+    "2604.15672": {
+        "ARXIVID": "2604.15672",
+        "COMMENT": "Sequential Monte Carlo speculative decoding replaces rollback-heavy rejection with importance-weighted particle resampling for faster inference.",
+        "RELEVANCE": 8,
+        "NOVELTY": 8,
+        "PRIMARY_TOPIC_ID": "efficiency_scaling",
+        "MATCHED_TOPIC_IDS": [
+            "efficiency_scaling"
+        ],
+        "TOPIC_MATCH_COMMENT": "The paper's core idea is a new inference algorithm that improves LLM throughput by changing the verification mechanism in speculative decoding.",
+        "HOTSPOT_PAPER_TAGS": [],
+        "HOTSPOT_PAPER_COMMENT": "",
+        "SCORE": 16,
+        "authors": [
+            "Yahya Emara",
+            "Mauricio Barba da Costa",
+            "Chi-Chih Chang",
+            "Cameron Freer",
+            "Tim Vieira",
+            "Ryan Cotterell",
+            "Mohamed S. Abdelfattah"
+        ],
+        "title": "Faster LLM Inference via Sequential Monte Carlo",
+        "abstract": "Speculative decoding (SD) accelerates language model inference by drafting tokens from a cheap proposal model and verifying them against an expensive target model via rejection sampling. Because rejection truncates the draft block at the first error, throughput degrades when draft and target diverge. Rather than rejecting draft tokens outright, we propose to reweight them. To this end, we introduce sequential Monte Carlo speculative decoding (SMC-SD), which replaces token-level rejection with importance-weighted resampling over a population of draft particles. SMC-SD is a principled approximate inference scheme that trades exactness for additional speed, while preserving theoretical bounds on its per-step approximation error. Because LLM inference is memory bandwidth-bound, the arithmetic needed to draft particles and to score them in parallel comes nearly for free -- SMC-SD uses idle compute to turn verification into a vectorized, fixed-size operation with no rollback. Empirically, SMC-SD achieves 2.36x speed-up over speculative decoding and a 5.2x speed-up over autoregressive decoding, while remaining within 3% of the target model's accuracy on reasoning, instruction-following, and coding benchmarks.",
+        "arxiv_id": "2604.15672",
+        "PRIMARY_TOPIC_LABEL": "Efficiency, Compression, and Large-Scale Training",
+        "MATCHED_TOPIC_LABELS": [
+            "Efficiency, Compression, and Large-Scale Training"
+        ],
+        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+        "HOTSPOT_PAPER_LABELS": [],
+        "HOTSPOT_PAPER_PRIMARY_KIND": null,
+        "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+    },
+    "2604.15769": {
+        "ARXIVID": "2604.15769",
+        "COMMENT": "Provides an expressivity and spike-complexity theory for spiking self-attention with effective-dimension-based design rules.",
+        "RELEVANCE": 8,
+        "NOVELTY": 8,
+        "PRIMARY_TOPIC_ID": "architecture_training",
+        "MATCHED_TOPIC_IDS": [
+            "architecture_training"
+        ],
+        "TOPIC_MATCH_COMMENT": "Its main contribution is theoretical understanding of a specialized attention architecture and how architectural choices determine expressivity and compute.",
+        "HOTSPOT_PAPER_TAGS": [],
+        "HOTSPOT_PAPER_COMMENT": "",
+        "SCORE": 16,
+        "authors": [
+            "Dongxin Guo",
+            "Jikun Wu",
+            "Siu Ming Yiu"
+        ],
+        "title": "Closing the Theory-Practice Gap in Spiking Transformers via Effective Dimension",
+        "abstract": "Spiking transformers achieve competitive accuracy with conventional transformers while offering $38$-$57\\times$ energy efficiency on neuromorphic hardware, yet no theoretical framework guides their design. This paper establishes the first comprehensive expressivity theory for spiking self-attention. We prove that spiking attention with Leaky Integrate-and-Fire neurons is a universal approximator of continuous permutation-equivariant functions, providing explicit spike circuit constructions including a novel lateral inhibition network for softmax normalization with proven $O(1/\\sqrt{T})$ convergence. We derive tight spike-count lower bounds via rate-distortion theory: $\\varepsilon$-approximation requires $\\Omega(L_f^2 nd/\\varepsilon^2)$ spikes, with rigorous information-theoretic derivation. Our key insight is input-dependent bounds using measured effective dimensions ($d_{\\text{eff}}=47$--$89$ for CIFAR/ImageNet), explaining why $T=4$ timesteps suffice despite worst-case $T \\geq 10{,}000$ predictions. We provide concrete design rules with calibrated constants ($C=2.3$, 95\\% CI: $[1.9, 2.7]$). Experiments on Spikformer, QKFormer, and SpikingResformer across vision and language benchmarks validate predictions with $R^2=0.97$ ($p<0.001$). Our framework provides the first principled foundation for neuromorphic transformer design.",
+        "arxiv_id": "2604.15769",
+        "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+        "MATCHED_TOPIC_LABELS": [
+            "Architecture and Training Dynamics"
+        ],
+        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+        "HOTSPOT_PAPER_LABELS": [],
+        "HOTSPOT_PAPER_PRIMARY_KIND": null,
+        "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+    },
+    "2604.15400": {
+        "ARXIVID": "2604.15400",
+        "COMMENT": "Gives causal evidence that hallucination arises from asymmetric attractor dynamics and early trajectory commitment in transformer generation.",
+        "RELEVANCE": 8,
+        "NOVELTY": 8,
+        "PRIMARY_TOPIC_ID": "representation_structure",
+        "MATCHED_TOPIC_IDS": [
+            "architecture_training",
+            "representation_structure"
+        ],
+        "TOPIC_MATCH_COMMENT": "The main value is mechanistic understanding of internal trajectory dynamics and attractor structure in transformer representations.",
+        "HOTSPOT_PAPER_TAGS": [],
+        "HOTSPOT_PAPER_COMMENT": "",
+        "SCORE": 16,
+        "authors": [
+            "G. Aytug Akarlar"
+        ],
+        "title": "Hallucination as Trajectory Commitment: Causal Evidence for Asymmetric Attractor Dynamics in Transformer Generation",
+        "abstract": "We present causal evidence that hallucination in autoregressive language models is an early trajectory commitment governed by asymmetric attractor dynamics. Using same-prompt bifurcation, in which we repeatedly sample identical inputs to observe spontaneous divergence, we isolate trajectory dynamics from prompt-level confounds. On Qwen2.5-1.5B across 61 prompts spanning six categories, 27 prompts (44.3%) bifurcate with factual and hallucinated trajectories diverging at the first generated token (KL = 0 at step 0, KL > 1.0 at step 1). Activation patching across 28 layers reveals a pronounced causal asymmetry: injecting a hallucinated activation into a correct trajectory corrupts output in 87.5% of trials (layer 20), while the reverse recovers only 33.3% (layer 24); both exceed the 10.4% baseline (p = 0.025) and 12.5% random-patch control. Window patching shows correction requires sustained multi-step intervention, whereas corruption needs only a single perturbation. Probing the prompt encoding itself, step-0 residual states predict per-prompt hallucination rate at Pearson r = 0.776 at layer 15 (p < 0.001 against a 1000-permutation null); unsupervised clustering identifies five regime-like groups (eta^2 = 0.55) whose saddle-adjacent cluster concentrates 12 of the 13 bifurcating false-premise prompts, indicating that the basin structure is organized around regime commitments fixed at prompt encoding. These findings characterize hallucination as a locally stable attractor basin: entry is probabilistic and rapid, exit demands coordinated intervention across layers and steps, and the relevant basins are selected by clusterable regimes already discernible at step 0.",
+        "arxiv_id": "2604.15400",
+        "PRIMARY_TOPIC_LABEL": "Representation Learning Theory and Structure",
+        "MATCHED_TOPIC_LABELS": [
+            "Architecture and Training Dynamics",
+            "Representation Learning Theory and Structure"
+        ],
+        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+        "HOTSPOT_PAPER_LABELS": [],
+        "HOTSPOT_PAPER_PRIMARY_KIND": null,
+        "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+    },
+    "2604.15764": {
+        "ARXIVID": "2604.15764",
+        "COMMENT": "Provides PAC-Bayesian generalization bounds for early-exit networks in terms of expected depth and exit entropy.",
+        "RELEVANCE": 8,
+        "NOVELTY": 8,
+        "PRIMARY_TOPIC_ID": "architecture_training",
+        "MATCHED_TOPIC_IDS": [
+            "architecture_training",
+            "efficiency_scaling"
+        ],
+        "TOPIC_MATCH_COMMENT": "Although early exit improves efficiency, the paper's main contribution is theoretical understanding of adaptive-depth architectures and their generalization behavior.",
+        "HOTSPOT_PAPER_TAGS": [],
+        "HOTSPOT_PAPER_COMMENT": "",
+        "SCORE": 16,
+        "authors": [
+            "Dongxin Guo",
+            "Jikun Wu",
+            "Siu Ming Yiu"
+        ],
+        "title": "When Do Early-Exit Networks Generalize? A PAC-Bayesian Theory of Adaptive Depth",
+        "abstract": "Early-exit neural networks enable adaptive computation by allowing confident predictions to exit at intermediate layers, achieving 2-8$\\times$ inference speedup. Despite widespread deployment, their generalization properties lack theoretical understanding -- a gap explicitly identified in recent surveys. This paper establishes a unified PAC-Bayesian framework for adaptive-depth networks. (1) Novel Entropy-Based Bounds: We prove the first generalization bounds depending on exit-depth entropy $H(D)$ and expected depth $\\mathbb{E}[D]$ rather than maximum depth $K$, with sample complexity $\\mathcal{O}((\\mathbb{E}[D] \\cdot d + H(D))/\\epsilon^2)$. (2) Explicit Constructive Constants: Our analysis yields the leading coefficient $\\sqrt{2\\ln 2} \\approx 1.177$ with complete derivation. (3) Provable Early-Exit Advantages: We establish sufficient conditions under which adaptive-depth networks strictly outperform fixed-depth counterparts. (4) Extension to Approximate Label Independence: We relax the label-independence assumption to $\\epsilon$-approximate policies, broadening applicability to learned routing. (5) Comprehensive Validation: Experiments across 6 architectures on 7 benchmarks demonstrate tightness ratios of 1.52-3.87$\\times$ (all $p $100$\\times$ for classical bounds. Bound-guided threshold selection matches validation-tuned performance within 0.1-0.3%.",
+        "arxiv_id": "2604.15764",
+        "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+        "MATCHED_TOPIC_LABELS": [
+            "Architecture and Training Dynamics",
+            "Efficiency, Compression, and Large-Scale Training"
+        ],
+        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+        "HOTSPOT_PAPER_LABELS": [],
+        "HOTSPOT_PAPER_PRIMARY_KIND": null,
+        "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+    },
+    "2604.15694": {
+        "ARXIVID": "2604.15694",
+        "COMMENT": "Reparameterizes reverse CTMC diffusion into separate jump timing and jump direction heads with corresponding KL decomposition.",
+        "RELEVANCE": 8,
+        "NOVELTY": 8,
+        "PRIMARY_TOPIC_ID": "architecture_training",
+        "MATCHED_TOPIC_IDS": [
+            "architecture_training"
+        ],
+        "TOPIC_MATCH_COMMENT": "The work introduces a cleaner first-principles architecture and objective decomposition for discrete diffusion dynamics, making architectural mechanism the best fit.",
+        "HOTSPOT_PAPER_TAGS": [],
+        "HOTSPOT_PAPER_COMMENT": "",
+        "SCORE": 16,
+        "authors": [
+            "Jingyuan Li",
+            "Xiaoyi Jiang",
+            "Fukang Wen",
+            "Wei Liu",
+            "Renqian Luo",
+            "Yi Zhu",
+            "Zuoqiang Shi",
+            "Pipi Hu"
+        ],
+        "title": "Neural Continuous-Time Markov Chain: Discrete Diffusion via Decoupled Jump Timing and Direction",
+        "abstract": "Discrete diffusion models based on continuous-time Markov chains (CTMCs) have shown strong performance on language and discrete data generation, yet existing approaches typically parameterize the reverse rate matrix as a single object -- via concrete scores, clean-data predictions ($x_0$-parameterization), or denoising distributions -- rather than aligning the parameterization with the intrinsic CTMC decomposition into jump timing and jump direction. Since a CTMC is fundamentally a Poisson process fully determined by these two quantities, decomposing along this structure is closer to first principles and naturally leads to our formulation. We propose \\textbf{Neural CTMC}, which separately parameterizes the reverse process through an \\emph{exit rate} (when to jump) and a \\emph{jump distribution} (where to jump) using two dedicated network heads. We show that the evidence lower bound (ELBO) differs from a path-space KL divergence between the true and learned reverse processes by a $\\theta$-independent constant, so that the training objective is fully governed by the exit rate and jump distribution we parameterize. Moreover, this KL factorizes into a Poisson KL for timing and a categorical KL for direction. We further show that the tractable conditional surrogate preserves the gradients and minimizers of the corresponding marginal reverse-process objective under standard regularity assumptions. Our theoretical framework also covers masked and GIDD-style noise schedules. Empirically, while the uniform forward process has been explored in prior work, our model, to our best of the knowledge, is the first pure-uniform method to outperform mask-based methods on the OpenWebText dataset.To facilitate reproducibility, we release our pretrained weights at https://huggingface.co/Jiangxy1117/Neural-CTMC.",
+        "arxiv_id": "2604.15694",
+        "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+        "MATCHED_TOPIC_LABELS": [
+            "Architecture and Training Dynamics"
+        ],
+        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+        "HOTSPOT_PAPER_LABELS": [],
+        "HOTSPOT_PAPER_PRIMARY_KIND": null,
+        "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+    },
+    "2604.16111": {
+        "ARXIVID": "2604.16111",
+        "COMMENT": "Provides near-tight sample-complexity bounds for stochastic shortest path learning with a generative model, including hardness when c_min=0.",
+        "RELEVANCE": 8,
+        "NOVELTY": 8,
+        "PRIMARY_TOPIC_ID": "world_models_open_ended_rl",
+        "MATCHED_TOPIC_IDS": [
+            "world_models_open_ended_rl"
+        ],
+        "TOPIC_MATCH_COMMENT": "This is a strong fit to foundational RL because it advances theory of learnability and sample complexity in a general sequential decision setting.",
+        "HOTSPOT_PAPER_TAGS": [],
+        "HOTSPOT_PAPER_COMMENT": "",
+        "SCORE": 16,
+        "authors": [
+            "Jean Tarbouriech",
+            "Matteo Pirotta",
+            "Michal Valko",
+            "Alessandro Lazaric"
+        ],
+        "title": "Sample Complexity Bounds for Stochastic Shortest Path with a Generative Model",
+        "abstract": "We study the sample complexity of learning an $\\epsilon$-optimal policy in the Stochastic Shortest Path (SSP) problem. We first derive sample complexity bounds when the learner has access to a generative model. We show that there exists a worst-case SSP instance with $S$ states, $A$ actions, minimum cost $c_{\\min}$, and maximum expected cost of the optimal policy over all states $B_{\\star}$, where any algorithm requires at least $\\Omega(SAB_{\\star}^3/(c_{\\min}\\epsilon^2))$ samples to return an $\\epsilon$-optimal policy with high probability. Surprisingly, this implies that whenever $c_{\\min} = 0$ an SSP problem may not be learnable, thus revealing that learning in SSPs is strictly harder than in the finite-horizon and discounted settings. We complement this lower bound with an algorithm that matches it, up to logarithmic factors, in the general case, and an algorithm that matches it up to logarithmic factors even when $c_{\\min} = 0$, but only under the condition that the optimal policy has a bounded hitting time to the goal state.",
+        "arxiv_id": "2604.16111",
+        "PRIMARY_TOPIC_LABEL": "World Models, Exploration, and Open-Ended Reinforcement Learning",
+        "MATCHED_TOPIC_LABELS": [
+            "World Models, Exploration, and Open-Ended Reinforcement Learning"
+        ],
+        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+        "HOTSPOT_PAPER_LABELS": [],
+        "HOTSPOT_PAPER_PRIMARY_KIND": null,
+        "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+    },
+    "2604.15821": {
+        "ARXIVID": "2604.15821",
+        "COMMENT": "Introduces a high-dimensional distributed training framework for billion-parameter MoE interatomic models, overcoming second-derivative and exascale communication bottlenecks.",
+        "RELEVANCE": 8,
+        "NOVELTY": 8,
+        "PRIMARY_TOPIC_ID": "efficiency_scaling",
+        "MATCHED_TOPIC_IDS": [
+            "architecture_training",
+            "efficiency_scaling"
+        ],
+        "TOPIC_MATCH_COMMENT": "The strongest fit is large-scale training systems: the paper's key value is enabling billion-parameter training efficiently at exascale, even though it also uses MoE architecture.",
+        "HOTSPOT_PAPER_TAGS": [],
+        "HOTSPOT_PAPER_COMMENT": "",
+        "SCORE": 16,
+        "authors": [
+            "Yuanchang Zhou",
+            "Hongyu Wang",
+            "Yiming Du",
+            "Yan Wang",
+            "Mingzhen Li",
+            "Siyu Hu",
+            "Xiangyu Zhang",
+            "Weijian Liu",
+            "Chen Wang",
+            "Zhuoqiang Guo",
+            "Long Wang",
+            "Jingde Bu",
+            "Yutong Lu",
+            "Guangming Tan",
+            "Weile Jia"
+        ],
+        "title": "Breaking the Training Barrier of Billion-Parameter Universal Machine Learning Interatomic Potentials",
+        "abstract": "Universal Machine Learning Interatomic Potentials (uMLIPs), pre-trained on massively diverse datasets encompassing inorganic materials and organic molecules across the entire periodic table, serve as foundational models for quantum-accurate physical simulations. However, uMLIP training requires second-order derivatives, which lack corresponding parallel training frameworks; moreover, scaling to the billion-parameter regime causes explosive growth in computation and communication overhead, making its training a tremendous challenge. We introduce MatRIS-MoE, a billion-parameter Mixture-of-Experts model built upon invariant architecture, and {Janus}, a pioneering high-dimensional distributed training framework for uMLIPs with hardware-aware optimizations. Deployed across two Exascale supercomputers, our code attains a peak performance of 1.2/1.0 EFLOPS (24\\%/{35.5\\%} of theoretical peak) in single precision at over 90\\% parallel efficiency, compressing the training of billion-parameter uMLIPs from weeks to hours. This work establishes a new high-water mark for AI-for-Science (AI4S) foundation models at Exascale and provides essential infrastructure for rapid scientific discovery.",
+        "arxiv_id": "2604.15821",
+        "PRIMARY_TOPIC_LABEL": "Efficiency, Compression, and Large-Scale Training",
+        "MATCHED_TOPIC_LABELS": [
+            "Architecture and Training Dynamics",
+            "Efficiency, Compression, and Large-Scale Training"
+        ],
+        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+        "HOTSPOT_PAPER_LABELS": [],
+        "HOTSPOT_PAPER_PRIMARY_KIND": null,
+        "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+    },
+    "2604.15499": {
+        "ARXIVID": "2604.15499",
+        "COMMENT": "Uses encrypted input-adaptive routing among transformer models to cut MPC secure-inference latency with joint router/model-pool co-design.",
+        "RELEVANCE": 8,
+        "NOVELTY": 8,
+        "PRIMARY_TOPIC_ID": "efficiency_scaling",
+        "MATCHED_TOPIC_IDS": [
+            "architecture_training",
+            "efficiency_scaling"
+        ],
+        "TOPIC_MATCH_COMMENT": "The primary contribution is efficient secure inference through adaptive routing and MPC-aware model design, fitting efficiency/compression more than architecture analysis.",
+        "HOTSPOT_PAPER_TAGS": [],
+        "HOTSPOT_PAPER_COMMENT": "",
+        "SCORE": 16,
+        "authors": [
+            "Yukuan Zhang",
+            "Mengxin Zheng",
+            "Qian Lou"
+        ],
+        "title": "SecureRouter: Encrypted Routing for Efficient Secure Inference",
+        "abstract": "Cryptographically secure neural network inference typically relies on secure computing techniques such as Secure Multi-Party Computation (MPC), enabling cloud servers to process client inputs without decrypting them. Although prior privacy-preserving inference systems co-design network optimizations with MPC, they remain slow and costly, limiting real-world deployment. A major bottleneck is their use of a single, fixed transformer model for all encrypted inputs, ignoring that different inputs require different model sizes to balance efficiency and accuracy. We present SecureRouter, an end-to-end encrypted routing and inference framework that accelerates secure transformer inference through input-adaptive model selection under encryption. SecureRouter establishes a unified encrypted pipeline that integrates a secure router with an MPC-optimized model pool, enabling coordinated routing, inference, and protocol execution while preserving full data and model confidentiality. The framework includes training-phase and inference-phase components: an MPC-cost-aware secure router that predicts per-model utility and cost from encrypted features, and an MPC-optimized model pool whose architectures and quantization schemes are co-trained to minimize MPC communication and computation overhead. Compared to prior work, SecureRouter achieves a latency reduction by 1.95x with negligible accuracy loss, offering a practical path toward scalable and efficient secure AI inference. Our open-source implementation is available at: https://github.com/UCF-ML-Research/SecureRouter",
+        "arxiv_id": "2604.15499",
+        "PRIMARY_TOPIC_LABEL": "Efficiency, Compression, and Large-Scale Training",
+        "MATCHED_TOPIC_LABELS": [
+            "Architecture and Training Dynamics",
+            "Efficiency, Compression, and Large-Scale Training"
+        ],
+        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+        "HOTSPOT_PAPER_LABELS": [],
+        "HOTSPOT_PAPER_PRIMARY_KIND": null,
+        "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+    },
+    "2604.16282": {
+        "ARXIVID": "2604.16282",
+        "COMMENT": "Adds tangent-bundle and inverse-consistency regularization to autoencoders, with theory linking learned charts to latent SDE and dynamics accuracy.",
+        "RELEVANCE": 8,
+        "NOVELTY": 8,
+        "PRIMARY_TOPIC_ID": "representation_structure",
+        "MATCHED_TOPIC_IDS": [
+            "representation_structure"
+        ],
+        "TOPIC_MATCH_COMMENT": "This is fundamentally about geometric structure and identifiability of learned latent representations, with substantial theoretical treatment.",
+        "HOTSPOT_PAPER_TAGS": [],
+        "HOTSPOT_PAPER_COMMENT": "",
+        "SCORE": 16,
+        "authors": [
+            "Sean Hill",
+            "Felix X. -F. Ye"
+        ],
+        "title": "Geometric regularization of autoencoders via observed stochastic dynamics",
+        "abstract": "Stochastic dynamical systems with slow or metastable behavior evolve, on long time scales, on an unknown low-dimensional manifold in high-dimensional ambient space. Building a reduced simulator from short-burst ambient ensembles is a long-standing problem: local-chart methods like ATLAS suffer from exponential landmark scaling and per-step reprojection, while autoencoder alternatives leave tangent-bundle geometry poorly constrained, and the errors propagate into the learned drift and diffusion. We observe that the ambient covariance~$\\Lambda$ already encodes coordinate-invariant tangent-space information, its range spanning the tangent bundle. Using this, we construct a tangent-bundle penalty and an inverse-consistency penalty for a three-stage pipeline (chart learning, latent drift, latent diffusion) that learns a single nonlinear chart and the latent SDE. The penalties induce a function-space metric, the $\\rho$-metric, strictly weaker than the Sobolev $H^1$ norm yet achieving the same chart-quality generalization rate up to logarithmic factors. For the drift, we derive an encoder-pullback target via It\\^o's formula on the learned encoder and prove a bias decomposition showing the standard decoder-side formula carries systematic error for any imperfect chart. Under a $W^{2,\\infty}$ chart-convergence assumption, chart-level error propagates controllably to weak convergence of the ambient dynamics and to convergence of radial mean first-passage times. Experiments on four surfaces embedded in up to $201$ ambient dimensions reduce radial MFPT error by $50$--$70\\%$ under rotation dynamics and achieve the lowest inter-well MFPT error on most surface--transition pairs under metastable M\\\"uller--Brown Langevin dynamics, while reducing end-to-end ambient coefficient errors by up to an order of magnitude relative to an unregularized autoencoder.",
+        "arxiv_id": "2604.16282",
+        "PRIMARY_TOPIC_LABEL": "Representation Learning Theory and Structure",
+        "MATCHED_TOPIC_LABELS": [
+            "Representation Learning Theory and Structure"
+        ],
+        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+        "HOTSPOT_PAPER_LABELS": [],
+        "HOTSPOT_PAPER_PRIMARY_KIND": null,
+        "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+    },
+    "2604.15695": {
+        "ARXIVID": "2604.15695",
+        "COMMENT": "Analyzes how partner-induced gradient noise destabilizes cooperation and proposes robustness at the policy-gradient level, with theory on stability and welfare tradeoffs.",
+        "RELEVANCE": 8,
+        "NOVELTY": 8,
+        "PRIMARY_TOPIC_ID": "world_models_open_ended_rl",
+        "MATCHED_TOPIC_IDS": [
+            "world_models_open_ended_rl"
+        ],
+        "TOPIC_MATCH_COMMENT": "This is foundational multi-agent RL on learning dynamics under non-stationarity, with new theory and an algorithm targeting cooperative stability.",
+        "HOTSPOT_PAPER_TAGS": [],
+        "HOTSPOT_PAPER_COMMENT": "",
+        "SCORE": 16,
+        "authors": [
+            "Deep Kumar Ganguly",
+            "Chandradithya S Jonnalagadda",
+            "Pratham Chintamani",
+            "Adithya Ananth"
+        ],
+        "title": "The Price of Paranoia: Robust Risk-Sensitive Cooperation in Non-Stationary Multi-Agent Reinforcement Learning",
+        "abstract": "Cooperative equilibria are fragile. When agents learn alongside each other rather than in a fixed environment, the process of learning destabilizes the cooperation they are trying to sustain: every gradient step an agent takes shifts the distribution of actions its partner will play, turning a cooperative partner into a source of stochastic noise precisely where the cooperation decision is most sensitive. We study how this co-learning noise propagates through the structure of coordination games, and find that the cooperative equilibrium, even when strongly Pareto-dominant, is exponentially unstable under standard risk-neutral learning, collapsing irreversibly once partner noise crosses the game's critical cooperation threshold. The natural response to apply distributional robustness to hedge against partner uncertainty makes things strictly worse: risk-averse return objectives penalize the high-variance cooperative action relative to defection, widening the instability region rather than shrinking it, a paradox that reveals a fundamental mismatch between the domains where robustness is applied and instability originates. We resolve this by showing that robustness should target the policy gradient update variance induced by partner uncertainty, not the return distribution. This distinction yields an algorithm whose gradient updates are modulated by an online measure of partner unpredictability, provably expanding the cooperation basin in symmetric coordination games. To unify stability, sample complexity, and welfare consequences of this approach, we introduce the Price of Paranoia as the structural dual of the Price of Anarchy. Together with a novel Cooperation Window, it precisely characterizes how much welfare learning algorithms can recover under partner noise, pinning down the optimal degree of robustness as a closed-form balance between equilibrium stability and sample efficiency.",
+        "arxiv_id": "2604.15695",
+        "PRIMARY_TOPIC_LABEL": "World Models, Exploration, and Open-Ended Reinforcement Learning",
+        "MATCHED_TOPIC_LABELS": [
+            "World Models, Exploration, and Open-Ended Reinforcement Learning"
+        ],
+        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+        "HOTSPOT_PAPER_LABELS": [],
+        "HOTSPOT_PAPER_PRIMARY_KIND": null,
+        "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+    },
+    "2604.16087": {
+        "ARXIVID": "2604.16087",
+        "COMMENT": "Gives optimal-rate last-iterate convergence results for uncoupled zero-sum learning with bandit feedback, including matching lower bounds and new algorithms.",
+        "RELEVANCE": 8,
+        "NOVELTY": 8,
+        "PRIMARY_TOPIC_ID": "world_models_open_ended_rl",
+        "MATCHED_TOPIC_IDS": [
+            "world_models_open_ended_rl"
+        ],
+        "TOPIC_MATCH_COMMENT": "The paper is a foundational learning-in-games result squarely within RL/game-learning theory, focused on convergence dynamics rather than applications.",
+        "HOTSPOT_PAPER_TAGS": [],
+        "HOTSPOT_PAPER_COMMENT": "",
+        "SCORE": 16,
+        "authors": [
+            "C\\^ome Fiegel",
+            "Pierre M\\'enard",
+            "Tadashi Kozuno",
+            "Michal Valko",
+            "Vianney Perchet"
+        ],
+        "title": "The Harder Path: Last Iterate Convergence for Uncoupled Learning in Zero-Sum Games with Bandit Feedback",
+        "abstract": "We study the problem of learning in zero-sum matrix games with repeated play and bandit feedback. Specifically, we focus on developing uncoupled algorithms that guarantee, without communication between players, the convergence of the last-iterate to a Nash equilibrium. Although the non-bandit case has been studied extensively, this setting has only been explored recently, with a bound of $\\mathcal{O}(T^{-1/8})$ on the exploitability gap. We show that, for uncoupled algorithms, guaranteeing convergence of the policy profiles to a Nash equilibrium is detrimental to the performance, with the best attainable rate being $\\Omega(T^{-1/4})$ in contrast to the usual $\\Omega(T^{-1/2})$ rate for convergence of the average iterates. We then propose two algorithms that achieve this optimal rate up to constant and logarithmic factors. The first algorithm leverages a straightforward trade-off between exploration and exploitation, while the second employs a regularization technique based on a two-step mirror descent approach.",
+        "arxiv_id": "2604.16087",
+        "PRIMARY_TOPIC_LABEL": "World Models, Exploration, and Open-Ended Reinforcement Learning",
+        "MATCHED_TOPIC_LABELS": [
+            "World Models, Exploration, and Open-Ended Reinforcement Learning"
+        ],
+        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+        "HOTSPOT_PAPER_LABELS": [],
+        "HOTSPOT_PAPER_PRIMARY_KIND": null,
+        "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+    }
+}

@@ -1,0 +1,348 @@
+{
+    "schema_version": 1,
+    "meta": {
+        "date": "2026-04-20",
+        "total_candidates": 139,
+        "total_spotlight_papers": 8,
+        "thresholds": {
+            "daily_hot_score_cutoff": 15,
+            "daily_hot_relevance_cutoff": 7,
+            "new_frontier_score_cutoff": 15,
+            "new_frontier_novelty_cutoff": 8
+        },
+        "caps": {
+            "max_daily_hot": 6,
+            "max_new_frontier": 4
+        }
+    },
+    "diagnostics": {
+        "candidate_count_by_kind": {
+            "new_frontier": 6,
+            "daily_hot": 4
+        },
+        "selected_count_by_kind": {
+            "new_frontier": 4,
+            "daily_hot": 4
+        }
+    },
+    "papers": {
+        "2604.16052": {
+            "ARXIVID": "2604.16052",
+            "COMMENT": "Formulates Hebbian plasticity as Wasserstein-space memory dynamics with internal latent evolution and observable projections.",
+            "RELEVANCE": 7,
+            "NOVELTY": 9,
+            "PRIMARY_TOPIC_ID": "memory_systems",
+            "MATCHED_TOPIC_IDS": [
+                "representation_structure",
+                "memory_systems"
+            ],
+            "TOPIC_MATCH_COMMENT": "Its main conceptual contribution is a theory of memory-state evolution, consolidation, and projection, which fits memory systems more directly than generic representation theory.",
+            "HOTSPOT_PAPER_TAGS": [
+                "new_frontier"
+            ],
+            "HOTSPOT_PAPER_COMMENT": "This proposes a highly unusual geometric foundation for memory and plasticity that feels like a genuinely new conceptual direction.",
+            "SCORE": 16,
+            "authors": [
+                "Ulrich Tan"
+            ],
+            "title": "A Wasserstein Geometric Framework for Hebbian Plasticity",
+            "abstract": "We introduce the Tan-HWG framework (Hebbian-Wasserstein-Geometry), a geometric theory of Hebbian plasticity in which memory states are modeled as probability measures evolving through Wasserstein minimizing movements. Hebbian learning rules are formalized as Hebbian energies satisfying a sequential stability condition, ensuring well-posed fiberwise JKO updates, optimal-transport realizations, and an energy descent inequality.   This variational structure induces a fundamental separation between internal and observable dynamics. Internal memory states evolve along Wasserstein geodesics in a latent curved space, while observable quantities, such as effective synaptic weights, arise through geometric projection maps into external spaces. Simplicial projections recover classical affine schemes (including exponential moving averages and mirror descent), while revealing synaptic competition and pruning as geometric consequences of mass redistribution. Hilbertian projections provide a geometric account of phase alignment and multi-scale coherence.   Classical neural networks appear as flat projections of this curved dynamics, while the framework naturally accommodates richer distributional representations, including structural weights and embedding memories, and their spectral extensions in complex internal spaces.   Under mild Lipschitz regularity assumptions, including a quasi-stationary \"sleep-mode\" regime, we establish the existence of continuous-time limit curves. This yields a variational formulation of memory consolidation as a perturbed Wasserstein gradient flow. The framework thus provides a unified geometric foundation for synaptic plasticity, representation dynamics, and context-dependent computation.",
+            "arxiv_id": "2604.16052",
+            "PRIMARY_TOPIC_LABEL": "Memory Structures and Agent Memory Systems",
+            "MATCHED_TOPIC_LABELS": [
+                "Representation Learning Theory and Structure",
+                "Memory Structures and Agent Memory Systems"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [
+                "New Frontier Papers"
+            ],
+            "HOTSPOT_PAPER_PRIMARY_KIND": "new_frontier",
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "New Frontier Papers",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "llm_exact"
+        },
+        "2604.15356": {
+            "ARXIVID": "2604.15356",
+            "COMMENT": "Proposes sequential KV-cache compression using probabilistic language tries and predictive delta coding across token sequences.",
+            "RELEVANCE": 9,
+            "NOVELTY": 8,
+            "PRIMARY_TOPIC_ID": "efficiency_scaling",
+            "MATCHED_TOPIC_IDS": [
+                "efficiency_scaling",
+                "memory_systems"
+            ],
+            "TOPIC_MATCH_COMMENT": "Its core contribution is a new principle for compressing KV caches beyond per-vector limits, which is directly within model efficiency and cache design.",
+            "HOTSPOT_PAPER_TAGS": [
+                "new_frontier"
+            ],
+            "HOTSPOT_PAPER_COMMENT": "The paper proposes an unusually ambitious new framing of KV-cache compression at the sequence level, potentially opening a new compression direction even if still speculative.",
+            "SCORE": 17,
+            "authors": [
+                "Gregory Magarshak"
+            ],
+            "title": "Sequential KV Cache Compression via Probabilistic Language Tries: Beyond the Per-Vector Shannon Limit",
+            "abstract": "Recent work on KV cache quantization, culminating in TurboQuant, has approached the Shannon entropy limit for per-vector compression of transformer key-value caches. We observe that this limit applies to a strictly weaker problem than the one that actually matters: compressing the KV cache as a sequence. The tokens stored in a KV cache are not arbitrary floating-point data -- they are samples from the exact formal language the model was trained on, and the model is by construction a near-optimal predictor of that language. We introduce sequential KV compression, a two-layer architecture that exploits this structure. The first layer, probabilistic prefix deduplication, identifies semantically equivalent shared prefixes across sessions using the trie metric d_T(s, s') = -log_2 P_M(s ^ s') from Probabilistic Language Tries (PLTs). The second layer, predictive delta coding, stores only the residual of each new KV vector from the model's own prediction of it, achieving a per-token entropy bound of H(KV_{i+1} | KV_{<=i}) <= H(token_{i+1} | token_{<=i}). We prove that at typical language model perplexity -- approximately 10-20 for fluent English text -- this bound is 3.3-4.3 bits on average per token position, compared to TurboQuant's 3 bits per vector component (with typical attention heads having 64-128 components). The theoretical compression ratio over TurboQuant is approximately 914,000x at the Shannon limit. Even at 1000x above the entropy floor -- a deliberately pessimistic worst-case overhead, two orders of magnitude above the 2-5x typical of practical source coders -- the ratio remains approximately 914x over TurboQuant, with compression improving rather than degrading as context length grows. The two layers are orthogonal and compose with existing per-vector quantization methods including TurboQuant.",
+            "arxiv_id": "2604.15356",
+            "PRIMARY_TOPIC_LABEL": "Efficiency, Compression, and Large-Scale Training",
+            "MATCHED_TOPIC_LABELS": [
+                "Efficiency, Compression, and Large-Scale Training",
+                "Memory Structures and Agent Memory Systems"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [
+                "New Frontier Papers"
+            ],
+            "HOTSPOT_PAPER_PRIMARY_KIND": "new_frontier",
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "New Frontier Papers",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "llm_exact"
+        },
+        "2604.15453": {
+            "ARXIVID": "2604.15453",
+            "COMMENT": "Shows that coarse-to-fine 1D ordered tokenizations materially improve the effectiveness of verifier-guided test-time search, linking token structure to inference-time scalability.",
+            "RELEVANCE": 8,
+            "NOVELTY": 8,
+            "PRIMARY_TOPIC_ID": "architecture_training",
+            "MATCHED_TOPIC_IDS": [
+                "architecture_training",
+                "efficiency_scaling"
+            ],
+            "TOPIC_MATCH_COMMENT": "The central contribution is an architectural/computational insight: token ordering structure changes the searchability and controllability of autoregressive generation.",
+            "HOTSPOT_PAPER_TAGS": [
+                "new_frontier"
+            ],
+            "HOTSPOT_PAPER_COMMENT": "It proposes a potentially new design axis\u2014token structure as a lever for test-time scaling/search\u2014not just a routine benchmark improvement.",
+            "SCORE": 16,
+            "authors": [
+                "Zhitong Gao",
+                "Parham Rezaei",
+                "Ali Cy",
+                "Mingqiao Ye",
+                "Nata\\v{s}a Jovanovi\\'c",
+                "Jesse Allardice",
+                "Afshin Dehghan",
+                "Amir Zamir",
+                "Roman Bachmann",
+                "O\\u{g}uzhan Fatih Kar"
+            ],
+            "title": "(1D) Ordered Tokens Enable Efficient Test-Time Search",
+            "abstract": "Tokenization is a key component of autoregressive (AR) generative models, converting raw data into more manageable units for modeling. Commonly, tokens describe local information, such as regions of pixels in images or word pieces in text, and AR generation predicts these tokens in a fixed order. A worthwhile question is whether token structures affect the ability to steer the generation through test-time search, where multiple candidate generations are explored and evaluated by a verifier. Using image generation as our testbed, we hypothesize that recent 1D ordered tokenizers with coarse-to-fine structure can be more amenable to search than classical 2D grid structures. This is rooted in the fact that the intermediate states in coarse-to-fine sequences carry semantic meaning that verifiers can reliably evaluate, enabling effective steering during generation.   Through controlled experiments, we find that AR models trained on coarse-to-fine ordered tokens exhibit improved test-time scaling behavior compared to grid-based counterparts. Moreover, we demonstrate that, thanks to the ordered structure, pure test-time search over token sequences (i.e., without training an AR model) can perform training-free text-to-image generation when guided by an image-text verifier. Beyond this, we systematically study how classical search algorithms (best-of-N, beam search, lookahead search) interact with different token structures, as well as the role of different verifiers and AR priors. Our results highlight the impact of token structure on inference-time scalability and provide practical guidance for test-time scaling in AR models.",
+            "arxiv_id": "2604.15453",
+            "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+            "MATCHED_TOPIC_LABELS": [
+                "Architecture and Training Dynamics",
+                "Efficiency, Compression, and Large-Scale Training"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [
+                "New Frontier Papers"
+            ],
+            "HOTSPOT_PAPER_PRIMARY_KIND": "new_frontier",
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "New Frontier Papers",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "llm_exact"
+        },
+        "2604.15364": {
+            "ARXIVID": "2604.15364",
+            "COMMENT": "Introduces an operator-theoretic neural architecture that maps learned phase patterns to physically realizable passive optical computation.",
+            "RELEVANCE": 7,
+            "NOVELTY": 8,
+            "PRIMARY_TOPIC_ID": "architecture_training",
+            "MATCHED_TOPIC_IDS": [
+                "architecture_training",
+                "efficiency_scaling"
+            ],
+            "TOPIC_MATCH_COMMENT": "Best viewed as an architectural mechanism paper because its main contribution is a new computational architecture and formalization of how inference is executed through optical transformations.",
+            "HOTSPOT_PAPER_TAGS": [
+                "new_frontier"
+            ],
+            "HOTSPOT_PAPER_COMMENT": "It proposes a genuinely different physical substrate and architectural framing for neural inference, suggesting a new frontier beyond standard electronic compute.",
+            "SCORE": 15,
+            "authors": [
+                "Prakul Sunil Hiremath"
+            ],
+            "title": "Photonic AI: A Hybrid Diffractive Holographic Neural System for Passive Optical Real-Time Image Classification",
+            "abstract": "Edge intelligence is constrained by the energy and latency costs of shuttling data through electronic memory hierarchies. Optical systems offer a fundamentally different computational regime: once an input wavefront is launched into a structured medium, propagation, diffraction, and interference jointly enact a linear transformation whose cost is determined by wave physics rather than by clocked arithmetic. This paper develops a rigorous systems-level treatment of that regime and introduces a hybrid diffractive holographic architecture for image classification. The proposed model couples a Diffractive Optical Neural Network (DONN) with a Holographic Interference-Based Learning (HIBL) operator a formal map from digitally optimized phase distributions to physically realizable, fabrication-compatible interference patterns embeddable in passive optical elements. We express the full inference pipeline as a composition of encoding, phase modulation, free-space propagation, and intensity measurement operators, making explicit which quantities are learned, which are fixed by design, and where nonlinearity enters through photodetection. This operator-theoretic view resolves a persistent gap in the optical-ML literature between learning a transformation and physically realizing it. In physics-informed simulation on MNIST, a three-layer system with approximately 25,000 phase elements achieves 91.2% test accuracy with propagation-limited nanosecond-scale latency. The primary contribution is not a performance claim but a precise computational framework: learned representations can be physically embedded into structured optical media so that inference is executed by wavefront transformation through a passive, fabricated object rather than by sequential electronic multiply accumulate operations.",
+            "arxiv_id": "2604.15364",
+            "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+            "MATCHED_TOPIC_LABELS": [
+                "Architecture and Training Dynamics",
+                "Efficiency, Compression, and Large-Scale Training"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [
+                "New Frontier Papers"
+            ],
+            "HOTSPOT_PAPER_PRIMARY_KIND": "new_frontier",
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "New Frontier Papers",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "llm_exact"
+        },
+        "2604.15409": {
+            "ARXIVID": "2604.15409",
+            "COMMENT": "Shows FP16 KV-cache inference is systematically non-equivalent to recomputation and provides a mechanistic account of divergence propagation.",
+            "RELEVANCE": 9,
+            "NOVELTY": 8,
+            "PRIMARY_TOPIC_ID": "efficiency_scaling",
+            "MATCHED_TOPIC_IDS": [
+                "architecture_training",
+                "efficiency_scaling"
+            ],
+            "TOPIC_MATCH_COMMENT": "KV-cache behavior and numerical stability in autoregressive inference sit squarely in efficient inference systems, with a clear mechanistic contribution.",
+            "HOTSPOT_PAPER_TAGS": [
+                "daily_hot"
+            ],
+            "HOTSPOT_PAPER_COMMENT": "KV caching is ubiquitous in LLM inference, and showing deterministic FP16 divergence from cache-free decoding is broadly important for evaluation, deployment, and systems research.",
+            "SCORE": 17,
+            "authors": [
+                "Ranjith Chodavarapu",
+                "Lei Xu"
+            ],
+            "title": "The Illusion of Equivalence: Systematic FP16 Divergence in KV-Cached Autoregressive Inference",
+            "abstract": "KV caching is a ubiquitous optimization in autoregressive transformer inference, long presumed to be numerically equivalent to cache-free computation. This assumption fails under standard FP16 precision: cache-ON and cache-OFF execution paths employ different floating-point accumulation orderings which, due to FP16 non-associativity, produce a deterministic divergence in decoded token sequences. Across three open-weight models (LLaMA-2-7B, Mistral-7B-v0.3, Gemma-2-2B) evaluated on GSM8K, we observe a 100\\% token divergence rate across all sampling strategies, including greedy decoding, which rules out sampling randomness as a cause, and also with cache-ON yielding higher accuracy in 8 of 9 conditions, where the accuracy difference serves as an indicator that the divergence direction is systematic rather than random. Controlled FP32 falsification reduces divergence by eight orders of magnitude, eliminates token flips, and drops the flip rate to exactly 0.0\\%, confirming FP16 non-associativity as the sole causal driver. Layer-wise drift profiling reveals architecturally predictable propagation patterns: models using Grouped-Query Attention exhibit sharp divergence at the first layer, while Gemma's larger head dimension and sliding window attention produce uniform accumulation across all layers. Finally, activation patching of the entire residual stream fails to recover the cache-free trajectory, localizing the causal variable to the stateful KV cache. These findings establish that FP16 KV cache inference is fundamentally non-equivalent to recomputation and provide a mechanistic framework for understanding numerical instability in modern LLM inference systems.",
+            "arxiv_id": "2604.15409",
+            "PRIMARY_TOPIC_LABEL": "Efficiency, Compression, and Large-Scale Training",
+            "MATCHED_TOPIC_LABELS": [
+                "Architecture and Training Dynamics",
+                "Efficiency, Compression, and Large-Scale Training"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [
+                "Daily Hot Papers"
+            ],
+            "HOTSPOT_PAPER_PRIMARY_KIND": "daily_hot",
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "Daily Hot Papers",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "llm_exact"
+        },
+        "2604.15416": {
+            "ARXIVID": "2604.15416",
+            "COMMENT": "Unbiased sign-based optimizer with non-smooth convergence guarantees and strong FP8/LLM training stability-speed gains.",
+            "RELEVANCE": 9,
+            "NOVELTY": 8,
+            "PRIMARY_TOPIC_ID": "efficiency_scaling",
+            "MATCHED_TOPIC_IDS": [
+                "architecture_training",
+                "efficiency_scaling"
+            ],
+            "TOPIC_MATCH_COMMENT": "Its main contribution is an optimization algorithm that materially changes large-scale training efficiency and stability, especially for low-precision LLM training.",
+            "HOTSPOT_PAPER_TAGS": [
+                "daily_hot"
+            ],
+            "HOTSPOT_PAPER_COMMENT": "This is broadly important beyond a niche because it targets large-model training stability, sign optimizers, and FP8 pretraining speedups with both theory and large-scale empirical evidence.",
+            "SCORE": 17,
+            "authors": [
+                "Dingzhi Yu",
+                "Rui Pan",
+                "Yuxing Liu",
+                "Tong Zhang"
+            ],
+            "title": "StoSignSGD: Unbiased Structural Stochasticity Fixes SignSGD for Training Large Language Models",
+            "abstract": "Sign-based optimization algorithms, such as SignSGD, have garnered significant attention for their remarkable performance in distributed learning and training large foundation models. Despite their empirical superiority, SignSGD is known to diverge on non-smooth objectives, which are ubiquitous in modern machine learning due to ReLUs, max-pools, and mixture-of-experts. To overcome this fundamental limitation, we propose \\textbf{StoSignSGD}, an algorithm that injects structural stochasticity into the sign operator while maintaining an unbiased update step. In the regime of (online) convex optimization, our theoretical analysis shows that StoSignSGD rigorously resolves the non-convergence issues of SignSGD, achieving a sharp convergence rate matching the lower bound. For the more challenging non-convex non-smooth optimization, we introduce generalized stationary measures that encompass prior definitions, proving that StoSignSGD improves upon the best-known complexity bounds by dimensional factors. Empirically, StoSignSGD exhibits robust stability and superior efficiency across diverse large language model (LLM) training regimes. Notably, in low-precision FP8 pretraining -- a setting where AdamW fails catastrophically -- StoSignSGD remains highly stable and yields a remarkable 1.44$\\times$ to 2.14$\\times$ speedup relative to established baselines. Furthermore, when fine-tuning 7B LLMs on mathematical reasoning tasks, StoSignSGD delivers substantial performance gains over both AdamW and SignSGD. Finally, to dissect the mechanisms driving its success, we develop a sign conversion framework capable of transforming any general optimizer into its unbiased, sign-based counterpart. Utilizing this framework, we deconstruct the core components of StoSignSGD and present a comprehensive ablation study to empirically validate our algorithmic design choices.",
+            "arxiv_id": "2604.15416",
+            "PRIMARY_TOPIC_LABEL": "Efficiency, Compression, and Large-Scale Training",
+            "MATCHED_TOPIC_LABELS": [
+                "Architecture and Training Dynamics",
+                "Efficiency, Compression, and Large-Scale Training"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [
+                "Daily Hot Papers"
+            ],
+            "HOTSPOT_PAPER_PRIMARY_KIND": "daily_hot",
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "Daily Hot Papers",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "llm_exact"
+        },
+        "2604.15529": {
+            "ARXIVID": "2604.15529",
+            "COMMENT": "Repurposes model architecture to enable cross-thread attention so parallel reasoning paths can exchange information during inference.",
+            "RELEVANCE": 9,
+            "NOVELTY": 8,
+            "PRIMARY_TOPIC_ID": "architecture_training",
+            "MATCHED_TOPIC_IDS": [
+                "architecture_training"
+            ],
+            "TOPIC_MATCH_COMMENT": "The paper's central idea is a new architectural mechanism\u2014cross-thread attention\u2014for coordinated reasoning computation.",
+            "HOTSPOT_PAPER_TAGS": [
+                "daily_hot"
+            ],
+            "HOTSPOT_PAPER_COMMENT": "Collaborative inference across parallel reasoning threads is broadly timely and the architectural idea is prominent enough for the daily hotspot feed.",
+            "SCORE": 17,
+            "authors": [
+                "Yang Li",
+                "Zirui Zhang",
+                "Yang Liu",
+                "Chengzhi Mao"
+            ],
+            "title": "LACE: Lattice Attention for Cross-thread Exploration",
+            "abstract": "Current large language models reason in isolation. Although it is common to sample multiple reasoning paths in parallel, these trajectories do not interact, and often fail in the same redundant ways. We introduce LACE, a framework that transforms reasoning from a collection of independent trials into a coordinated, parallel process. By repurposing the model architecture to enable cross-thread attention, LACE allows concurrent reasoning paths to share intermediate insights and correct one another during inference. A central challenge is the absence of natural training data that exhibits such collaborative behavior. We address this gap with a synthetic data pipeline that explicitly teaches models to communicate and error-correct across threads. Experiments show that this unified exploration substantially outperforms standard parallel search, improving reasoning accuracy by over 7 points. Our results suggest that large language models can be more effective when parallel reasoning paths are allowed to interact.",
+            "arxiv_id": "2604.15529",
+            "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+            "MATCHED_TOPIC_LABELS": [
+                "Architecture and Training Dynamics"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [
+                "Daily Hot Papers"
+            ],
+            "HOTSPOT_PAPER_PRIMARY_KIND": "daily_hot",
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "Daily Hot Papers",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "llm_exact"
+        },
+        "2604.15350": {
+            "ARXIVID": "2604.15350",
+            "COMMENT": "Studies spectral phase transitions in hidden activations during reasoning and uses them to predict correctness from internal states.",
+            "RELEVANCE": 8,
+            "NOVELTY": 8,
+            "PRIMARY_TOPIC_ID": "representation_structure",
+            "MATCHED_TOPIC_IDS": [
+                "architecture_training",
+                "representation_structure"
+            ],
+            "TOPIC_MATCH_COMMENT": "The paper is chiefly about structure in internal representations during reasoning, using spectral geometry to characterize and predict behavior.",
+            "HOTSPOT_PAPER_TAGS": [
+                "daily_hot"
+            ],
+            "HOTSPOT_PAPER_COMMENT": "Mechanistic analyses of reasoning dynamics in LLM internals are broadly salient, and the strong correctness-prediction claim makes it day-relevant.",
+            "SCORE": 16,
+            "authors": [
+                "Yi Liu"
+            ],
+            "title": "The Spectral Geometry of Thought: Phase Transitions, Instruction Reversal, Token-Level Dynamics, and Perfect Correctness Prediction in How Transformers Reason",
+            "abstract": "We discover that large language models exhibit \\emph{spectral phase transitions} in their hidden activation spaces when engaging in reasoning versus factual recall. Through systematic spectral analysis across \\textbf{11 models} spanning \\textbf{5 architecture families} (Qwen, Pythia, Phi, Llama, DeepSeek-R1), we identify \\textbf{seven} core phenomena: (1)~\\textbf{Reasoning Spectral Compression} -- 9/11 models show significantly lower $\\alpha$ for reasoning ($p < 0.05$), with larger effects in stronger models; (2)~\\textbf{Instruction Tuning Spectral Reversal} -- base models show reasoning $\\alpha < $ factual $\\alpha$, while instruction-tuned models reverse this relationship; (3)~\\textbf{Architecture-Dependent Generation Taxonomy} -- prompt-to-response shifts partition into expansion, compression, and equilibrium regimes; (4)~\\textbf{Spectral Scaling Law} -- $\\alpha_\\text{reasoning} \\propto -0.074 \\ln N$ across 4 Qwen base models ($R^2 = 0.46$); (5)~\\textbf{Token-Level Spectral Cascade} -- per-token alpha tracking reveals local synchronization that decays exponentially with layer distance, and is weaker for reasoning than factual tasks; (6)~\\textbf{Reasoning Step Spectral Punctuation} -- phase-transition signatures align with reasoning step boundaries; and (7)~\\textbf{Spectral Correctness Prediction} -- spectral $\\alpha$ alone achieves AUC $= 1.000$ (Qwen2.5-7B, late layers) and mean AUC $= 0.893$ across 6 models in predicting correctness \\emph{before} the final answer is generated. Together, these findings establish a comprehensive \\emph{spectral theory of reasoning} in transformers, revealing that the geometry of thought is universal in direction, architecture-specific in dynamics, and predictive of outcome.",
+            "arxiv_id": "2604.15350",
+            "PRIMARY_TOPIC_LABEL": "Representation Learning Theory and Structure",
+            "MATCHED_TOPIC_LABELS": [
+                "Architecture and Training Dynamics",
+                "Representation Learning Theory and Structure"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [
+                "Daily Hot Papers"
+            ],
+            "HOTSPOT_PAPER_PRIMARY_KIND": "daily_hot",
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "Daily Hot Papers",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "llm_exact"
+        }
+    },
+    "sections": [
+        {
+            "kind": "new_frontier",
+            "label": "New Frontier Papers",
+            "description": "Papers that appear to open a genuinely new direction, paradigm, or field.",
+            "paper_ids": [
+                "2604.16052",
+                "2604.15356",
+                "2604.15453",
+                "2604.15364"
+            ]
+        },
+        {
+            "kind": "daily_hot",
+            "label": "Daily Hot Papers",
+            "description": "Papers that feel broadly important to the day and belong in the hotspot paper feed.",
+            "paper_ids": [
+                "2604.15409",
+                "2604.15416",
+                "2604.15529",
+                "2604.15350"
+            ]
+        }
+    ]
+}

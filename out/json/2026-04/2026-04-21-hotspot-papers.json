@@ -1,0 +1,428 @@
+{
+    "schema_version": 1,
+    "meta": {
+        "date": "2026-04-21",
+        "total_candidates": 255,
+        "total_spotlight_papers": 10,
+        "thresholds": {
+            "daily_hot_score_cutoff": 15,
+            "daily_hot_relevance_cutoff": 7,
+            "new_frontier_score_cutoff": 15,
+            "new_frontier_novelty_cutoff": 8
+        },
+        "caps": {
+            "max_daily_hot": 6,
+            "max_new_frontier": 4
+        }
+    },
+    "diagnostics": {
+        "candidate_count_by_kind": {
+            "new_frontier": 14,
+            "daily_hot": 27
+        },
+        "selected_count_by_kind": {
+            "new_frontier": 4,
+            "daily_hot": 6
+        }
+    },
+    "papers": {
+        "2604.18580": {
+            "ARXIVID": "2604.18580",
+            "COMMENT": "Introduces a decoder architecture that places attention inside a recurrent feedback path, yielding provable power-law memory tails.",
+            "RELEVANCE": 10,
+            "NOVELTY": 9,
+            "PRIMARY_TOPIC_ID": "architecture_training",
+            "MATCHED_TOPIC_IDS": [
+                "architecture_training",
+                "memory_systems"
+            ],
+            "TOPIC_MATCH_COMMENT": "This is directly about a new sequence-model architecture and its memory dynamics, with both theory and empirical comparison.",
+            "HOTSPOT_PAPER_TAGS": [
+                "new_frontier",
+                "daily_hot"
+            ],
+            "HOTSPOT_PAPER_COMMENT": "A new sequence architecture with explicit long-memory theory is both foundational and potentially a fresh architectural direction.",
+            "SCORE": 19,
+            "authors": [
+                "Liubomyr Horbatko"
+            ],
+            "title": "Sessa: Selective State Space Attention",
+            "abstract": "Modern sequence models are dominated by Transformers, where self-attention mixes information from the visible context in an input-dependent way. However, when retrieval is not sharp and attention remains diffuse over an effective support $S_{\\mathrm{eff}}(t)$, the influence of any individual token is diluted, typically scaling as $O(1/S_{\\mathrm{eff}}(t))$ and reaching $O(1/\\ell)$ for old tokens in full-prefix settings. Structured state-space models process sequences recurrently through an explicit feedback path; selective variants such as Mamba make this feedback input-dependent, yet when freeze time cannot be sustained over long intervals, their long-range sensitivity decays exponentially with lag. Existing architectures therefore either retrieve from the past in a single read or propagate information through a single feedback chain. We introduce Sessa, a decoder that places attention inside a feedback path, enabling recurrent many-path aggregation within a layer. Under stated assumptions, Sessa admits regimes with a power-law memory tail in lag $\\ell$ of order $O(\\ell^{-\\beta})$ for $0<\\beta<1$, which is asymptotically slower than $1/\\ell$; moreover, this rate is tight in an explicit diffuse uniform-routing setting where the influence is $\\Theta(\\ell^{-\\beta})$. Under the same conditions, only Sessa among the compared model classes realizes flexible selective retrieval, including non-decaying profiles. Empirically, under matched architectures and training budgets, Sessa achieves the strongest performance on our long-context benchmarks while remaining competitive with Transformer and Mamba style baselines on short-context language modeling.",
+            "arxiv_id": "2604.18580",
+            "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+            "MATCHED_TOPIC_LABELS": [
+                "Architecture and Training Dynamics",
+                "Memory Structures and Agent Memory Systems"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [
+                "New Frontier Papers",
+                "Daily Hot Papers"
+            ],
+            "HOTSPOT_PAPER_PRIMARY_KIND": "new_frontier",
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "New Frontier Papers",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "llm_exact"
+        },
+        "2604.18002": {
+            "ARXIVID": "2604.18002",
+            "COMMENT": "Lets a model learn KV-cache eviction decisions end-to-end from task reward, coupling reasoning with learned forgetting.",
+            "RELEVANCE": 10,
+            "NOVELTY": 9,
+            "PRIMARY_TOPIC_ID": "memory_systems",
+            "MATCHED_TOPIC_IDS": [
+                "efficiency_scaling",
+                "memory_systems"
+            ],
+            "TOPIC_MATCH_COMMENT": "This is squarely about learned memory management: storing, evicting, and recalling internal cache state as part of reasoning.",
+            "HOTSPOT_PAPER_TAGS": [
+                "new_frontier",
+                "daily_hot"
+            ],
+            "HOTSPOT_PAPER_COMMENT": "End-to-end learned forgetting for KV caches is both broadly timely and plausibly a new direction in agent/model memory design.",
+            "SCORE": 19,
+            "authors": [
+                "Michael Y. Li",
+                "Jubayer Ibn Hamid",
+                "Emily B. Fox",
+                "Noah D. Goodman"
+            ],
+            "title": "Neural Garbage Collection: Learning to Forget while Learning to Reason",
+            "abstract": "Chain-of-thought reasoning has driven striking advances in language model capability, yet every reasoning step grows the KV cache, creating a bottleneck to scaling this paradigm further. Current approaches manage these constraints on the model's behalf using hand-designed criteria. A more scalable approach would let end-to-end learning subsume this design choice entirely, following a broader pattern in deep learning. After all, if a model can learn to reason, why can't it learn to forget? We introduce Neural Garbage Collection (NGC), in which a language model learns to forget while learning to reason, trained end-to-end from outcome-based task reward alone. As the model reasons, it periodically pauses, decides which KV cache entries to evict, and continues to reason conditioned on the remaining cache. By treating tokens in a chain-of-thought and cache-eviction decisions as discrete actions sampled from the language model, we can use reinforcement learning to jointly optimize how the model reasons and how it manages its own memory: what the model evicts shapes what it remembers, what it remembers shapes its reasoning, and the correctness of that reasoning determines its reward. Crucially, the model learns this behavior entirely from a single learning signal - the outcome-based task reward - without supervised fine-tuning or proxy objectives. On Countdown, AMC, and AIME tasks, NGC maintains strong accuracy relative to the full-cache upper bound at 2-3x peak KV cache size compression and substantially outperforms eviction baselines. Our results are a first step towards a broader vision where end-to-end optimization drives both capability and efficiency in language models.",
+            "arxiv_id": "2604.18002",
+            "PRIMARY_TOPIC_LABEL": "Memory Structures and Agent Memory Systems",
+            "MATCHED_TOPIC_LABELS": [
+                "Efficiency, Compression, and Large-Scale Training",
+                "Memory Structures and Agent Memory Systems"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [
+                "New Frontier Papers",
+                "Daily Hot Papers"
+            ],
+            "HOTSPOT_PAPER_PRIMARY_KIND": "new_frontier",
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "New Frontier Papers",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "llm_exact"
+        },
+        "2604.17857": {
+            "ARXIVID": "2604.17857",
+            "COMMENT": "Shows a tiny neural cellular automaton can self-organize an internal syntax-like parsing structure from local interactions alone, with measurable grammar alignment.",
+            "RELEVANCE": 8,
+            "NOVELTY": 9,
+            "PRIMARY_TOPIC_ID": "representation_structure",
+            "MATCHED_TOPIC_IDS": [
+                "architecture_training",
+                "representation_structure"
+            ],
+            "TOPIC_MATCH_COMMENT": "The main interest is the emergent internal structure of learned computation\u2014how syntactic representations arise from local interaction rules.",
+            "HOTSPOT_PAPER_TAGS": [
+                "new_frontier"
+            ],
+            "HOTSPOT_PAPER_COMMENT": "The emergence of a CKY-like syntactic substrate in a minimalist cellular system feels like a genuinely new conceptual direction in representation emergence.",
+            "SCORE": 17,
+            "authors": [
+                "Zichao Wei"
+            ],
+            "title": "On the Emergence of Syntax by Means of Local Interaction",
+            "abstract": "Can syntactic processing emerge spontaneously from purely local interaction? We present a concrete instance on a minimal system: an 18,658-parameter two-dimensional neural cellular automaton (NCA), supervised by nothing more than a 1-bit boundary signal, is trained on the membership problem of an arithmetic-expression grammar. After training, its internal $L \\times L$ grid spontaneously self-organizes into an ordered, spatially extended representation that we name Proto-CKY. This representation satisfies three operational criteria for syntactic processing: expressive power beyond the regular languages, structural generalization beyond the training distribution, and an internal organization quantitatively aligned with grammatical structure (Pearson $r \\approx 0.71$). It emerges independently on four context-free grammars and regenerates spontaneously after perturbation. Proto-CKY is functionally aligned with the CKY algorithm but formally distinct from it: it is a physical prototype, a concrete instantiation of a mathematical ideal on a physical substrate, and the systematic distance between the two carries information about the substrate itself.",
+            "arxiv_id": "2604.17857",
+            "PRIMARY_TOPIC_LABEL": "Representation Learning Theory and Structure",
+            "MATCHED_TOPIC_LABELS": [
+                "Architecture and Training Dynamics",
+                "Representation Learning Theory and Structure"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [
+                "New Frontier Papers"
+            ],
+            "HOTSPOT_PAPER_PRIMARY_KIND": "new_frontier",
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "New Frontier Papers",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "llm_exact"
+        },
+        "2604.15356": {
+            "ARXIVID": "2604.15356",
+            "COMMENT": "Argues KV caches should be compressed as predictable sequences rather than independent vectors, using trie sharing and predictive delta coding.",
+            "RELEVANCE": 9,
+            "NOVELTY": 8,
+            "PRIMARY_TOPIC_ID": "efficiency_scaling",
+            "MATCHED_TOPIC_IDS": [
+                "efficiency_scaling",
+                "memory_systems"
+            ],
+            "TOPIC_MATCH_COMMENT": "It directly targets KV-cache compression with a new sequential-information perspective beyond standard per-vector quantization.",
+            "HOTSPOT_PAPER_TAGS": [
+                "new_frontier"
+            ],
+            "HOTSPOT_PAPER_COMMENT": "The proposed beyond-Shannon sequential KV compression framing is unusually ambitious and direction-setting, even if still highly theoretical.",
+            "SCORE": 17,
+            "authors": [
+                "Gregory Magarshak"
+            ],
+            "title": "Sequential KV Cache Compression via Probabilistic Language Tries: Beyond the Per-Vector Shannon Limit",
+            "abstract": "Recent work on KV cache quantization, culminating in TurboQuant, has approached the Shannon entropy limit for per-vector compression of transformer key-value caches. We observe that this limit applies to a strictly weaker problem than the one that actually matters: compressing the KV cache as a sequence. The tokens stored in a KV cache are not arbitrary floating-point data -- they are samples from the exact formal language the model was trained on, and the model is by construction a near-optimal predictor of that language. We introduce sequential KV compression, a two-layer architecture that exploits this structure. The first layer, probabilistic prefix deduplication, identifies semantically equivalent shared prefixes across sessions using the trie metric d_T(s, s') = -log_2 P_M(s ^ s') from Probabilistic Language Tries (PLTs). The second layer, predictive delta coding, stores only the residual of each new KV vector from the model's own prediction of it, achieving a per-token entropy bound of H(KV_{i+1} | KV_{<=i}) <= H(token_{i+1} | token_{<=i}). We prove that at typical language model perplexity -- approximately 10-20 for fluent English text -- this bound is 3.3-4.3 bits on average per token position, compared to TurboQuant's 3 bits per vector component (with typical attention heads having 64-128 components). The theoretical compression ratio over TurboQuant is approximately 914,000x at the Shannon limit. Even at 1000x above the entropy floor -- a deliberately pessimistic worst-case overhead, two orders of magnitude above the 2-5x typical of practical source coders -- the ratio remains approximately 914x over TurboQuant, with compression improving rather than degrading as context length grows. The two layers are orthogonal and compose with existing per-vector quantization methods including TurboQuant.",
+            "arxiv_id": "2604.15356",
+            "PRIMARY_TOPIC_LABEL": "Efficiency, Compression, and Large-Scale Training",
+            "MATCHED_TOPIC_LABELS": [
+                "Efficiency, Compression, and Large-Scale Training",
+                "Memory Structures and Agent Memory Systems"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [
+                "New Frontier Papers"
+            ],
+            "HOTSPOT_PAPER_PRIMARY_KIND": "new_frontier",
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "New Frontier Papers",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "llm_exact"
+        },
+        "2604.17837": {
+            "ARXIVID": "2604.17837",
+            "COMMENT": "Mechanistic analysis of MoE routing by decomposing hidden states into routing control and content channels, revealing monosemantic expert paths.",
+            "RELEVANCE": 10,
+            "NOVELTY": 8,
+            "PRIMARY_TOPIC_ID": "architecture_training",
+            "MATCHED_TOPIC_IDS": [
+                "architecture_training",
+                "representation_structure"
+            ],
+            "TOPIC_MATCH_COMMENT": "The core contribution is a new mechanistic understanding of MoE routing and layerwise computation, which is squarely about architecture behavior and training dynamics.",
+            "HOTSPOT_PAPER_TAGS": [
+                "daily_hot"
+            ],
+            "HOTSPOT_PAPER_COMMENT": "Broadly important today: Mechanistic analysis of MoE routing by decomposing hidden states into routing control and content channels, revealing monosemantic expert paths.",
+            "SCORE": 18,
+            "authors": [
+                "Charles Ye",
+                "Bo Yuan",
+                "Lee Sharkey"
+            ],
+            "title": "Polysemantic Experts, Monosemantic Paths: Routing as Control in MoEs",
+            "abstract": "An LLM's residual stream is both state and instruction: it encodes the current context and determines the next transformation. We introduce a parameter-free decomposition for Mixture-of-Experts models that splits each layer's hidden state into a control signal that causally drives routing and an orthogonal content channel invisible to the router. Across six MoE architectures, we find that models preserve surface-level features (language, token identity, position) in the content channel, while the control signal encodes an abstract function that rotates from layer to layer. Because each routing decision is low-bandwidth, this hand-off forces compositional specialization across layers. While individual experts remain polysemantic, expert paths become monosemantic, clustering tokens by semantic function across languages and surface forms. The same token (e.g., \":\") follows distinct trajectories depending on whether it serves as a type annotation, an introductory colon, or a time separator. Our decomposition identifies the source of this structure: clusters in the control subspace are substantially more monosemantic than those in the full representation. As a result, the natural unit of interpretability in MoEs is not the expert but the trajectory.",
+            "arxiv_id": "2604.17837",
+            "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+            "MATCHED_TOPIC_LABELS": [
+                "Architecture and Training Dynamics",
+                "Representation Learning Theory and Structure"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [
+                "Daily Hot Papers"
+            ],
+            "HOTSPOT_PAPER_PRIMARY_KIND": "daily_hot",
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "Daily Hot Papers",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "heuristic"
+        },
+        "2604.17221": {
+            "ARXIVID": "2604.17221",
+            "COMMENT": "Adds bilinear state-input modulation to Mamba, separating gains in memory retention from gains in multiplicative computation.",
+            "RELEVANCE": 10,
+            "NOVELTY": 8,
+            "PRIMARY_TOPIC_ID": "architecture_training",
+            "MATCHED_TOPIC_IDS": [
+                "architecture_training",
+                "memory_systems"
+            ],
+            "TOPIC_MATCH_COMMENT": "The primary contribution is a new state-space architectural mechanism that directly changes recurrent memory and computation capacity in Mamba-style models.",
+            "HOTSPOT_PAPER_TAGS": [
+                "daily_hot"
+            ],
+            "HOTSPOT_PAPER_COMMENT": "Broadly important today: Adds bilinear state-input modulation to Mamba, separating gains in memory retention from gains in multiplicative computation.",
+            "SCORE": 18,
+            "authors": [
+                "Hiroki Fujii",
+                "Masaki Yamakita"
+            ],
+            "title": "Bilinear Input Modulation for Mamba: Koopman Bilinear Forms for Memory Retention and Multiplicative Computation",
+            "abstract": "Selective State Space Models (SSMs), notably Mamba, employ diagonal state transitions that limit both memory retention and bilinear computational capacity. We propose a factorized bilinear input modulation that augments the SSM with a state-input product, interpretable as a finite-dimensional Koopman bilinear form. After introducing a shared state across channels (Coupled SSM), the modulation admits two implementations. Coupled Bilinear Input Modulation (Coupled-BIM) retains the full bilinear product at the cost of sequential computation, while Coupled Gated Modulation (Coupled-GM) linearizes it into a gate modulation that is compatible with the parallel scan. Experiments on a multiple input-delay pendulum (memory retention) and NARMA-10 (bilinear computation) reveal a clear dissociation. Coupled-GM substantially improves memory retention but not bilinear computation, while Coupled-BIM improves both. A pathway ablation confirms that the two downstream routes of the bilinear signal serve complementary roles. The improvement is statistically robust, with Coupled-BIM consistently outperforming all other variants on bilinear computation. Furthermore, only Coupled-BIM benefits from increasing the SSM state dimension, while coupling or gate modulation alone show no improvement, establishing the bilin-ear mechanism as uniquely capable of exploiting larger state spaces.",
+            "arxiv_id": "2604.17221",
+            "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+            "MATCHED_TOPIC_LABELS": [
+                "Architecture and Training Dynamics",
+                "Memory Structures and Agent Memory Systems"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [
+                "Daily Hot Papers"
+            ],
+            "HOTSPOT_PAPER_PRIMARY_KIND": "daily_hot",
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "Daily Hot Papers",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "heuristic"
+        },
+        "2604.17121": {
+            "ARXIVID": "2604.17121",
+            "COMMENT": "Foundational argument that feedforward Transformers have intrinsic limits for state tracking, motivating recurrent and continuous-thought architectures.",
+            "RELEVANCE": 9,
+            "NOVELTY": 8,
+            "PRIMARY_TOPIC_ID": "architecture_training",
+            "MATCHED_TOPIC_IDS": [
+                "architecture_training",
+                "memory_systems"
+            ],
+            "TOPIC_MATCH_COMMENT": "The core contribution is architectural analysis of sequence-state tracking limits and a taxonomy of recurrent alternatives.",
+            "HOTSPOT_PAPER_TAGS": [
+                "daily_hot"
+            ],
+            "HOTSPOT_PAPER_COMMENT": "A clear architectural thesis about limits of standard Transformers for temporally extended cognition is broadly important and likely to spark discussion.",
+            "SCORE": 17,
+            "authors": [
+                "Michael C. Mozer",
+                "Shoaib Ahmed Siddiqui",
+                "Rosanne Liu"
+            ],
+            "title": "The Topological Trouble With Transformers",
+            "abstract": "Transformers encode structure in sequences via an expanding contextual history. However, their purely feedforward architecture fundamentally limits dynamic state tracking. State tracking -- the iterative updating of latent variables reflecting an evolving environment -- involves inherently sequential dependencies that feedforward networks struggle to maintain. Consequently, feedforward models push evolving state representations deeper into their layer stack with each new input step, rendering information inaccessible in shallow layers and ultimately exhausting the model's depth. While this depth limit can be bypassed by dynamic depth models and by explicit or latent thinking that externalizes state representations, these solutions are computationally and memory inefficient. In this article, we argue that temporally extended cognition requires refocusing from explicit thought traces to implicit activation dynamics via recurrent architectures. We introduce a taxonomy of recurrent and continuous-thought transformer architectures, categorizing them by their recurrence axis (depth versus step) and their ratio of input tokens to recurrence steps. Finally, we outline promising research directions, including enhanced state-space models and coarse-grained recurrence, to better integrate state tracking into modern foundation models.",
+            "arxiv_id": "2604.17121",
+            "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+            "MATCHED_TOPIC_LABELS": [
+                "Architecture and Training Dynamics",
+                "Memory Structures and Agent Memory Systems"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [
+                "Daily Hot Papers"
+            ],
+            "HOTSPOT_PAPER_PRIMARY_KIND": "daily_hot",
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "Daily Hot Papers",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "llm_exact"
+        },
+        "2604.15409": {
+            "ARXIVID": "2604.15409",
+            "COMMENT": "Demonstrates that FP16 KV-cached and cache-free inference are systematically non-equivalent, tracing divergence to accumulation-order effects and cache-state dynamics.",
+            "RELEVANCE": 9,
+            "NOVELTY": 8,
+            "PRIMARY_TOPIC_ID": "efficiency_scaling",
+            "MATCHED_TOPIC_IDS": [
+                "architecture_training",
+                "efficiency_scaling"
+            ],
+            "TOPIC_MATCH_COMMENT": "The paper directly targets KV-cache behavior and numerical stability in transformer inference, a core specialized efficiency and systems topic.",
+            "HOTSPOT_PAPER_TAGS": [
+                "daily_hot"
+            ],
+            "HOTSPOT_PAPER_COMMENT": "KV-cache equivalence is widely assumed in LLM inference stacks, so a strong mechanistic falsification under standard FP16 has broad immediate relevance.",
+            "SCORE": 17,
+            "authors": [
+                "Ranjith Chodavarapu",
+                "Lei Xu"
+            ],
+            "title": "The Illusion of Equivalence: Systematic FP16 Divergence in KV-Cached Autoregressive Inference",
+            "abstract": "KV caching is a ubiquitous optimization in autoregressive transformer inference, long presumed to be numerically equivalent to cache-free computation. This assumption fails under standard FP16 precision: cache-ON and cache-OFF execution paths employ different floating-point accumulation orderings which, due to FP16 non-associativity, produce a deterministic divergence in decoded token sequences. Across three open-weight models (LLaMA-2-7B, Mistral-7B-v0.3, Gemma-2-2B) evaluated on GSM8K, we observe a 100\\% token divergence rate across all sampling strategies, including greedy decoding, which rules out sampling randomness as a cause, and also with cache-ON yielding higher accuracy in 8 of 9 conditions, where the accuracy difference serves as an indicator that the divergence direction is systematic rather than random. Controlled FP32 falsification reduces divergence by eight orders of magnitude, eliminates token flips, and drops the flip rate to exactly 0.0\\%, confirming FP16 non-associativity as the sole causal driver. Layer-wise drift profiling reveals architecturally predictable propagation patterns: models using Grouped-Query Attention exhibit sharp divergence at the first layer, while Gemma's larger head dimension and sliding window attention produce uniform accumulation across all layers. Finally, activation patching of the entire residual stream fails to recover the cache-free trajectory, localizing the causal variable to the stateful KV cache. These findings establish that FP16 KV cache inference is fundamentally non-equivalent to recomputation and provide a mechanistic framework for understanding numerical instability in modern LLM inference systems.",
+            "arxiv_id": "2604.15409",
+            "PRIMARY_TOPIC_LABEL": "Efficiency, Compression, and Large-Scale Training",
+            "MATCHED_TOPIC_LABELS": [
+                "Architecture and Training Dynamics",
+                "Efficiency, Compression, and Large-Scale Training"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [
+                "Daily Hot Papers"
+            ],
+            "HOTSPOT_PAPER_PRIMARY_KIND": "daily_hot",
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "Daily Hot Papers",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "llm_exact"
+        },
+        "2604.15416": {
+            "ARXIVID": "2604.15416",
+            "COMMENT": "Sign-based optimizer that fixes SignSGD's non-smooth divergence via unbiased structural stochasticity and shows strong low-precision LLM training stability.",
+            "RELEVANCE": 9,
+            "NOVELTY": 8,
+            "PRIMARY_TOPIC_ID": "efficiency_scaling",
+            "MATCHED_TOPIC_IDS": [
+                "architecture_training",
+                "efficiency_scaling"
+            ],
+            "TOPIC_MATCH_COMMENT": "The primary contribution is a large-scale training algorithm/optimizer improvement with direct implications for efficient and stable model training.",
+            "HOTSPOT_PAPER_TAGS": [
+                "daily_hot"
+            ],
+            "HOTSPOT_PAPER_COMMENT": "Optimizer advances that materially affect large-model pretraining stability and low-precision training are broadly important to the day.",
+            "SCORE": 17,
+            "authors": [
+                "Dingzhi Yu",
+                "Rui Pan",
+                "Yuxing Liu",
+                "Tong Zhang"
+            ],
+            "title": "StoSignSGD: Unbiased Structural Stochasticity Fixes SignSGD for Training Large Language Models",
+            "abstract": "Sign-based optimization algorithms, such as SignSGD, have garnered significant attention for their remarkable performance in distributed learning and training large foundation models. Despite their empirical superiority, SignSGD is known to diverge on non-smooth objectives, which are ubiquitous in modern machine learning due to ReLUs, max-pools, and mixture-of-experts. To overcome this fundamental limitation, we propose \\textbf{StoSignSGD}, an algorithm that injects structural stochasticity into the sign operator while maintaining an unbiased update step. In the regime of (online) convex optimization, our theoretical analysis shows that StoSignSGD rigorously resolves the non-convergence issues of SignSGD, achieving a sharp convergence rate matching the lower bound. For the more challenging non-convex non-smooth optimization, we introduce generalized stationary measures that encompass prior definitions, proving that StoSignSGD improves upon the best-known complexity bounds by dimensional factors. Empirically, StoSignSGD exhibits robust stability and superior efficiency across diverse large language model (LLM) training regimes. Notably, in low-precision FP8 pretraining -- a setting where AdamW fails catastrophically -- StoSignSGD remains highly stable and yields a remarkable 1.44$\\times$ to 2.14$\\times$ speedup relative to established baselines. Furthermore, when fine-tuning 7B LLMs on mathematical reasoning tasks, StoSignSGD delivers substantial performance gains over both AdamW and SignSGD. Finally, to dissect the mechanisms driving its success, we develop a sign conversion framework capable of transforming any general optimizer into its unbiased, sign-based counterpart. Utilizing this framework, we deconstruct the core components of StoSignSGD and present a comprehensive ablation study to empirically validate our algorithmic design choices.",
+            "arxiv_id": "2604.15416",
+            "PRIMARY_TOPIC_LABEL": "Efficiency, Compression, and Large-Scale Training",
+            "MATCHED_TOPIC_LABELS": [
+                "Architecture and Training Dynamics",
+                "Efficiency, Compression, and Large-Scale Training"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [
+                "Daily Hot Papers"
+            ],
+            "HOTSPOT_PAPER_PRIMARY_KIND": "daily_hot",
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "Daily Hot Papers",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "llm_exact"
+        },
+        "2604.16883": {
+            "ARXIVID": "2604.16883",
+            "COMMENT": "Explains attention sinks as a stable fixed point from training and uses that mechanism for selective long-context KV routing.",
+            "RELEVANCE": 9,
+            "NOVELTY": 8,
+            "PRIMARY_TOPIC_ID": "efficiency_scaling",
+            "MATCHED_TOPIC_IDS": [
+                "architecture_training",
+                "efficiency_scaling"
+            ],
+            "TOPIC_MATCH_COMMENT": "This is exactly a cache/long-context efficiency paper with a mechanistic account of attention behavior turned into a decoding algorithm.",
+            "HOTSPOT_PAPER_TAGS": [
+                "daily_hot"
+            ],
+            "HOTSPOT_PAPER_COMMENT": "Broadly important today: Explains attention sinks as a stable fixed point from training and uses that mechanism for selective long-context KV routing.",
+            "SCORE": 17,
+            "authors": [
+                "Junnan Liu",
+                "Xinyan Liu",
+                "Peifeng Gao",
+                "Zhaobo Qi",
+                "Beichen Zhang",
+                "Weigang Zhang",
+                "Antoni Bert Chen"
+            ],
+            "title": "SinkRouter: Sink-Aware Routing for Efficient Long-Context Decoding in Large Language and Multimodal Models",
+            "abstract": "In long-context decoding for LLMs and LMMs, attention becomes increasingly memory-bound because each decoding step must load a large amount of KV-cache data from GPU memory. Existing acceleration strategies often trade efficiency for accuracy by relying on heuristic pruning that may discard useful information. At a deeper level, they also tend to indiscriminately preserve all high-scoring tokens, treat early tokens as indispensable anchors, or rely on heuristic head routing, reflecting an insufficient mechanistic understanding of the attention sink phenomenon. In this paper, we show that the attention sink phenomenon corresponds to a stable, reachable, and error-controllable fixed point constructed during training. Based on this insight, we propose SinkRouter, a training-free selective routing framework that detects the sink signal and skips computations that would otherwise produce near-zero output. To translate this mechanism into real-world acceleration, we develop a hardware-aware Triton kernel with block-level branching and Split-K parallelism. We conduct extensive evaluations on a diverse suite of long-context benchmarks, including LongBench, InfiniteBench, CVBench, MileBench, and MMVP, using both text-only and multimodal backbones such as Llama-3.1-8B, Llama-3.1-70B, Yi-9B-200K, LLaVA-1.5-7B, and LLaVA-1.5-13B. Across these settings, SinkRouter consistently improves decoding efficiency while maintaining competitive accuracy, and reaches 2.03x speedup with a 512K context.",
+            "arxiv_id": "2604.16883",
+            "PRIMARY_TOPIC_LABEL": "Efficiency, Compression, and Large-Scale Training",
+            "MATCHED_TOPIC_LABELS": [
+                "Architecture and Training Dynamics",
+                "Efficiency, Compression, and Large-Scale Training"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [
+                "Daily Hot Papers"
+            ],
+            "HOTSPOT_PAPER_PRIMARY_KIND": "daily_hot",
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "Daily Hot Papers",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "heuristic"
+        }
+    },
+    "sections": [
+        {
+            "kind": "new_frontier",
+            "label": "New Frontier Papers",
+            "description": "Papers that appear to open a genuinely new direction, paradigm, or field.",
+            "paper_ids": [
+                "2604.18580",
+                "2604.18002",
+                "2604.17857",
+                "2604.15356"
+            ]
+        },
+        {
+            "kind": "daily_hot",
+            "label": "Daily Hot Papers",
+            "description": "Papers that feel broadly important to the day and belong in the hotspot paper feed.",
+            "paper_ids": [
+                "2604.17837",
+                "2604.17221",
+                "2604.17121",
+                "2604.15409",
+                "2604.15416",
+                "2604.16883"
+            ]
+        }
+    ]
+}

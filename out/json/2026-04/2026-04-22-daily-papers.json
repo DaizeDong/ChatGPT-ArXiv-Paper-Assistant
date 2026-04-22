@@ -1,0 +1,445 @@
+{
+    "schema_version": 2,
+    "meta": {
+        "date": "2026-04-22",
+        "sort": [
+            "score",
+            "relevance"
+        ],
+        "topic_schema_version": 1,
+        "total_papers": 10,
+        "usage": {
+            "model": "gpt-5.4",
+            "prompt_tokens": 91659,
+            "completion_tokens": 17936,
+            "prompt_cost": 0.2291475,
+            "completion_cost": 0.26903999999999995,
+            "total_arxiv_papers": 604,
+            "total_scanned_papers": 328,
+            "total_relevant_papers": 10
+        }
+    },
+    "topic_order": [
+        "architecture_training",
+        "efficiency_scaling",
+        "representation_structure",
+        "memory_systems",
+        "world_models_open_ended_rl"
+    ],
+    "diagnostics": {
+        "total_papers": 10,
+        "topic_counts": [
+            {
+                "topic_id": "architecture_training",
+                "topic_label": "Architecture and Training Dynamics",
+                "paper_count": 3
+            },
+            {
+                "topic_id": "efficiency_scaling",
+                "topic_label": "Efficiency, Compression, and Large-Scale Training",
+                "paper_count": 2
+            },
+            {
+                "topic_id": "representation_structure",
+                "topic_label": "Representation Learning Theory and Structure",
+                "paper_count": 2
+            },
+            {
+                "topic_id": "memory_systems",
+                "topic_label": "Memory Structures and Agent Memory Systems",
+                "paper_count": 0
+            },
+            {
+                "topic_id": "world_models_open_ended_rl",
+                "topic_label": "World Models, Exploration, and Open-Ended Reinforcement Learning",
+                "paper_count": 3
+            }
+        ],
+        "assignment_source_counts": {
+            "llm_exact": 10
+        },
+        "llm_assignment_count": 10,
+        "heuristic_assignment_count": 0,
+        "default_assignment_count": 0,
+        "invalid_primary_topic_fallback_count": 0,
+        "missing_primary_topic_fallback_count": 0,
+        "hotspot_paper_kind_counts": {
+            "new_frontier": 0,
+            "daily_hot": 4
+        },
+        "hotspot_paper_assignment_source_counts": {
+            "heuristic": 2,
+            "llm_exact": 2,
+            "default": 6
+        }
+    },
+    "papers": {
+        "2604.18701": {
+            "ARXIVID": "2604.18701",
+            "COMMENT": "Intrinsic reward based on predicted reduction in cumulative world-model error, separating learnable from stochastic transitions online.",
+            "RELEVANCE": 9,
+            "NOVELTY": 8,
+            "PRIMARY_TOPIC_ID": "world_models_open_ended_rl",
+            "MATCHED_TOPIC_IDS": [
+                "world_models_open_ended_rl"
+            ],
+            "TOPIC_MATCH_COMMENT": "This is directly about exploration and world-model training, with a principled curiosity objective tied to reducible prediction error.",
+            "HOTSPOT_PAPER_TAGS": [
+                "daily_hot"
+            ],
+            "HOTSPOT_PAPER_COMMENT": "Broadly important today: Intrinsic reward based on predicted reduction in cumulative world-model error, separating learnable from stochastic transitions online.",
+            "SCORE": 17,
+            "authors": [
+                "Vin Bhaskara",
+                "Haicheng Wang"
+            ],
+            "title": "Curiosity-Critic: Cumulative Prediction Error Improvement as a Tractable Intrinsic Reward for World Model Training",
+            "abstract": "Local prediction-error-based curiosity rewards focus on the current transition without considering the world model's cumulative prediction error across all visited transitions. We introduce Curiosity-Critic, which grounds its intrinsic reward in the improvement of this cumulative objective, and show that it reduces to a tractable per-step form: the difference between the current prediction error and the asymptotic error baseline of the current state transition. We estimate this baseline online with a learned critic co-trained alongside the world model; regressing a single scalar, the critic converges well before the world model saturates, redirecting exploration toward learnable transitions without oracle knowledge of the noise floor. The reward is higher for learnable transitions and collapses toward the baseline for stochastic ones, effectively separating epistemic (reducible) from aleatoric (irreducible) prediction error online. Prior prediction-error curiosity formulations, from Schmidhuber (1991) to learned-feature-space variants, emerge as special cases corresponding to specific approximations of this baseline. Experiments on a stochastic grid world show that Curiosity-Critic outperforms prediction-error and visitation-count baselines in convergence speed and final world model accuracy.",
+            "arxiv_id": "2604.18701",
+            "PRIMARY_TOPIC_LABEL": "World Models, Exploration, and Open-Ended Reinforcement Learning",
+            "MATCHED_TOPIC_LABELS": [
+                "World Models, Exploration, and Open-Ended Reinforcement Learning"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [
+                "Daily Hot Papers"
+            ],
+            "HOTSPOT_PAPER_PRIMARY_KIND": "daily_hot",
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "Daily Hot Papers",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "heuristic"
+        },
+        "2604.18603": {
+            "ARXIVID": "2604.18603",
+            "COMMENT": "Proposes a bidirectional attention mechanism with paired triangular masks that supplies positional bias without explicit positional embeddings.",
+            "RELEVANCE": 9,
+            "NOVELTY": 8,
+            "PRIMARY_TOPIC_ID": "architecture_training",
+            "MATCHED_TOPIC_IDS": [
+                "architecture_training"
+            ],
+            "TOPIC_MATCH_COMMENT": "This is a direct architectural contribution introducing a new attention variant with a distinct positional inductive bias.",
+            "HOTSPOT_PAPER_TAGS": [
+                "daily_hot"
+            ],
+            "HOTSPOT_PAPER_COMMENT": "Broadly important today: Proposes a bidirectional attention mechanism with paired triangular masks that supplies positional bias without explicit positional embeddings.",
+            "SCORE": 17,
+            "authors": [
+                "Logan Halle",
+                "Jason P. Gleghorn"
+            ],
+            "title": "Dual Triangle Attention: Effective Bidirectional Attention Without Positional Embeddings",
+            "abstract": "Bidirectional transformers are the foundation of many sequence modeling tasks across natural, biological, and chemical language domains, but they are permutation-invariant without explicit positional embeddings. In contrast, unidirectional attention inherently encodes positional information through its triangular mask, enabling models to operate without positional embeddings altogether. Here, we introduce Dual Triangle Attention, a novel bidirectional attention mechanism that separates the query-key subspace of each attention head into two complementary triangular masks: one that attends to past-and-self positions and one that attends to future-and-self positions. This design provides bidirectional context while maintaining the causal mask's implicit positional inductive bias in both directions. Using PyTorch's flex_attention, Dual Triangle Attention is implemented as a single compiled kernel call with no additional parameters beyond standard multi-head attention. We evaluated Dual Triangle Attention across three settings: (1) a synthetic argmax position probe, (2) masked language modeling (MLM) on natural language, and (3) MLM on protein sequences. In the argmax task, both Dual Triangle Attention and causal attention learn positional information without explicit positional embeddings, whereas standard bidirectional attention cannot. In the MLM experiments, Dual Triangle Attention with Rotary Positional Embeddings (RoPE) achieved the best context extension performance and strong performance across the board. These findings suggest that Dual Triangle Attention is a viable attention mechanism for bidirectional transformers, with or without positional embeddings.",
+            "arxiv_id": "2604.18603",
+            "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+            "MATCHED_TOPIC_LABELS": [
+                "Architecture and Training Dynamics"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [
+                "Daily Hot Papers"
+            ],
+            "HOTSPOT_PAPER_PRIMARY_KIND": "daily_hot",
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "Daily Hot Papers",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "heuristic"
+        },
+        "2604.19018": {
+            "ARXIVID": "2604.19018",
+            "COMMENT": "Uses local linearity of transformer activations to cast activation steering as closed-loop linear optimal control.",
+            "RELEVANCE": 8,
+            "NOVELTY": 8,
+            "PRIMARY_TOPIC_ID": "architecture_training",
+            "MATCHED_TOPIC_IDS": [
+                "architecture_training"
+            ],
+            "TOPIC_MATCH_COMMENT": "The work is primarily about an interpretable mechanistic model of layer dynamics and a new inference-time control mechanism built from that structure.",
+            "HOTSPOT_PAPER_TAGS": [
+                "daily_hot"
+            ],
+            "HOTSPOT_PAPER_COMMENT": "This is likely broadly discussed because it connects mechanistic understanding of LLM dynamics with principled control-theoretic steering and strong empirical behavior control.",
+            "SCORE": 16,
+            "authors": [
+                "Julian Skifstad",
+                "Xinyue Annie Yang",
+                "Glen Chou"
+            ],
+            "title": "Local Linearity of LLMs Enables Activation Steering via Model-Based Linear Optimal Control",
+            "abstract": "Inference-time LLM alignment methods, particularly activation steering, offer an alternative to fine-tuning by directly modifying activations during generation. Existing methods, however, often rely on non-anticipative interventions that ignore how perturbations propagate through transformer layers and lack online error feedback, resulting in suboptimal, open-loop control. To address this, we show empirically that, despite the nonlinear structure of transformer blocks, layer-wise dynamics across multiple LLM architectures and scales are well-approximated by locally-linear models. Exploiting this property, we model LLM inference as a linear time-varying dynamical system and adapt the classical linear quadratic regulator to compute feedback controllers using layer-wise Jacobians, steering activations toward desired semantic setpoints in closed-loop with minimal computational overhead and no offline training. We also derive theoretical bounds on setpoint tracking error, enabling formal guarantees on steering performance. Using a novel adaptive semantic feature setpoint signal, our method yields robust, fine-grained behavior control across models, scales, and tasks, including state-of-the-art modulation of toxicity, truthfulness, refusal, and arbitrary concepts, surpassing baseline steering methods. Our code is available at: https://github.com/trustworthyrobotics/lqr-activation-steering",
+            "arxiv_id": "2604.19018",
+            "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+            "MATCHED_TOPIC_LABELS": [
+                "Architecture and Training Dynamics"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [
+                "Daily Hot Papers"
+            ],
+            "HOTSPOT_PAPER_PRIMARY_KIND": "daily_hot",
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "Daily Hot Papers",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "llm_exact"
+        },
+        "2604.18616": {
+            "ARXIVID": "2604.18616",
+            "COMMENT": "Data-flow invariants give coding agents dense compile-time feedback for synthesizing hand-competitive GPU kernels.",
+            "RELEVANCE": 8,
+            "NOVELTY": 8,
+            "PRIMARY_TOPIC_ID": "efficiency_scaling",
+            "MATCHED_TOPIC_IDS": [
+                "efficiency_scaling"
+            ],
+            "TOPIC_MATCH_COMMENT": "The paper is fundamentally about a new systems method for producing high-performance kernels, directly relevant to efficient large-model computation.",
+            "HOTSPOT_PAPER_TAGS": [
+                "daily_hot"
+            ],
+            "HOTSPOT_PAPER_COMMENT": "It is likely a daily hotspot because it targets agentic code generation for core GPU kernels and reports near-hand-optimized performance on critical LLM workloads.",
+            "SCORE": 16,
+            "authors": [
+                "Haohui Mai",
+                "Xiaoyan Guo",
+                "Xiangyun Ding",
+                "Daifeng Li",
+                "Qiuchu Yu",
+                "Chenzhun Guo",
+                "Cong Wang",
+                "Jiacheng Zhao",
+                "Christos Kozyrakis",
+                "Binhang Yuan"
+            ],
+            "title": "ARGUS: Agentic GPU Optimization Guided by Data-Flow Invariants",
+            "abstract": "LLM-based coding agents can generate functionally correct GPU kernels, yet their performance remains far below hand-optimized libraries on critical computations such as matrix multiplication, attention, and Mixture-of-Experts (MoE). Peak GPU performance requires coordinated reasoning over tightly coupled optimizations, including tiling, shared-memory staging, software pipelining, and instruction scheduling, while existing agents rely on sparse pass/fail feedback, leaving them unable to diagnose global constraint violations.   We present Argus, an agentic framework that addresses this through data-flow invariants: compile-time specifications encoding how data must be choreographed throughout kernel execution. Argus introduces a tile-based, Pythonic DSL exposing hardware instructions and compiler policies while hiding low-level representations. The DSL provides tag functions to propagate symbolic annotations through data and control flow, and tag assertions to enforce relational constraints at use sites. When violations occur, the compiler returns concrete counterexamples identifying the thread, data element, and program point, enabling dense, structured feedback for targeted fixes. Invariants are verified at compile time via abstract interpretation over a layout algebra and SMT solving, with zero runtime overhead. An in-context reinforcement learning planner learns to select optimizations and synthesize effective invariants, supported by a curated knowledge base of GPU optimization techniques.   We evaluate Argus on the AMD MI300X GPU across GEMM, flash attention, and MoE kernels accounting for over 90% of GPU time in LLM inference. Generated kernels achieve 99-104% of state-of-the-art hand-optimized assembly throughput and are 2-1543x faster than existing agentic systems. Argus further generalizes to 200 KernelBench tasks, solving 100% of Level 1 and 90% of Level 2 problems.",
+            "arxiv_id": "2604.18616",
+            "PRIMARY_TOPIC_LABEL": "Efficiency, Compression, and Large-Scale Training",
+            "MATCHED_TOPIC_LABELS": [
+                "Efficiency, Compression, and Large-Scale Training"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [
+                "Daily Hot Papers"
+            ],
+            "HOTSPOT_PAPER_PRIMARY_KIND": "daily_hot",
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "Daily Hot Papers",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "llm_exact"
+        },
+        "2604.18901": {
+            "ARXIVID": "2604.18901",
+            "COMMENT": "Shows harmful intent is recoverable as stable geometric features in residual streams across models and alignment variants.",
+            "RELEVANCE": 8,
+            "NOVELTY": 8,
+            "PRIMARY_TOPIC_ID": "representation_structure",
+            "MATCHED_TOPIC_IDS": [
+                "representation_structure"
+            ],
+            "TOPIC_MATCH_COMMENT": "Its main value is mechanistic characterization of representation geometry in residual streams, not a downstream application.",
+            "HOTSPOT_PAPER_TAGS": [],
+            "HOTSPOT_PAPER_COMMENT": "",
+            "SCORE": 16,
+            "authors": [
+                "Isaac Llorente-Saguer"
+            ],
+            "title": "Harmful Intent as a Geometrically Recoverable Feature of LLM Residual Streams",
+            "abstract": "Harmful intent is geometrically recoverable from large language model residual streams: as a linear direction in most layers, and as angular deviation in layers where projection methods fail. Across 12 models spanning four architectural families (Qwen2.5, Qwen3.5, Llama-3.2, Gemma-3) and three alignment variants (base, instruction-tuned, abliterated), under single-turn, English evaluation, we characterise this geometry through six direction-finding strategies. Three succeed: a soft-AUC-optimised linear direction reaches mean AUROC 0.98 and TPR@1\\%FPR 0.80; a class-mean probe reaches 0.98 and 0.71 at <1ms fitting cost; a supervised angular-deviation strategy reaches AUROC 0.96 and TPR of 0.61 along a representationally distinct direction ($73^\\circ$ from projection-based solutions), uniquely sustaining detection in middle layers where projection methods collapse.   Detection remains stable across alignment variants, including abliterated models from which refusal has been surgically removed: harmful intent and refusal behaviour are functionally dissociated features of the representation. A direction fitted on AdvBench transfers to held-out HarmBench and JailbreakBench with worst-case AUROC 0.96. The same picture holds at scale: across Qwen3.5 from 0.8B to 9B parameters, AUROC remains $\\geq$0.98 and cross-variant transfer stays within 0.018 of own-direction performance   This is consistent with a simple account: models acquire a linearly decodable representation of harmful intent as part of general language understanding, and alignment then shapes what they do with such inputs without reorganising the upstream recognition signal. As a practical consequence, AUROC in the 0.97+ regime can substantially overestimate operational detectability; TPR@$1\\%$FPR should accompany AUROC in safety-adjacent evaluation.",
+            "arxiv_id": "2604.18901",
+            "PRIMARY_TOPIC_LABEL": "Representation Learning Theory and Structure",
+            "MATCHED_TOPIC_LABELS": [
+                "Representation Learning Theory and Structure"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [],
+            "HOTSPOT_PAPER_PRIMARY_KIND": null,
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+        },
+        "2604.19639": {
+            "ARXIVID": "2604.19639",
+            "COMMENT": "Uses world-model-derived score geometry to guide safe contextual control via online Riemannian optimization.",
+            "RELEVANCE": 8,
+            "NOVELTY": 8,
+            "PRIMARY_TOPIC_ID": "world_models_open_ended_rl",
+            "MATCHED_TOPIC_IDS": [
+                "world_models_open_ended_rl"
+            ],
+            "TOPIC_MATCH_COMMENT": "The paper is centered on control with black-box world models and theoretical safety guarantees, fitting the world-models/control category best.",
+            "HOTSPOT_PAPER_TAGS": [],
+            "HOTSPOT_PAPER_COMMENT": "",
+            "SCORE": 16,
+            "authors": [
+                "Tongxin Li"
+            ],
+            "title": "Safety-Critical Contextual Control via Online Riemannian Optimization with World Models",
+            "abstract": "Modern world models are becoming too complex to admit explicit dynamical descriptions. We study safety-critical contextual control, where a Planner must optimize a task objective using only feasibility samples from a black-box Simulator, conditioned on a context signal $\\xi_t$. We develop a sample-based Penalized Predictive Control (PPC) framework grounded in online Riemannian optimization, in which the Simulator compresses the feasibility manifold into a score-based density $\\hat{p}(u \\mid \\xi_t)$ that endows the action space with a Riemannian geometry guiding the Planner's gradient descent. The barrier curvature $\\kappa(\\xi_t)$, the minimum curvature of the conditional log-density $-\\ln\\hat{p}(\\cdot\\mid\\xi_t)$, governs both convergence rate and safety margin, replacing the Lipschitz constant of the unknown dynamics. Our main result is a contextual safety bound showing that the distance from the true feasibility manifold is controlled by the score estimation error and a ratio that depends on $\\kappa(\\xi_t)$, both of which improve with richer context. Simulations on a dynamic navigation task confirm that contextual PPC substantially outperforms marginal and frozen density models, with the advantage growing after environment shifts.",
+            "arxiv_id": "2604.19639",
+            "PRIMARY_TOPIC_LABEL": "World Models, Exploration, and Open-Ended Reinforcement Learning",
+            "MATCHED_TOPIC_LABELS": [
+                "World Models, Exploration, and Open-Ended Reinforcement Learning"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [],
+            "HOTSPOT_PAPER_PRIMARY_KIND": null,
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+        },
+        "2604.19569": {
+            "ARXIVID": "2604.19569",
+            "COMMENT": "Recasts constant-stepsize Q-learning as a stochastic switching system and derives finite-time bounds via JSR Lyapunov analysis.",
+            "RELEVANCE": 8,
+            "NOVELTY": 8,
+            "PRIMARY_TOPIC_ID": "world_models_open_ended_rl",
+            "MATCHED_TOPIC_IDS": [
+                "world_models_open_ended_rl"
+            ],
+            "TOPIC_MATCH_COMMENT": "This is foundational RL theory about Q-learning dynamics and convergence, not LLM post-training.",
+            "HOTSPOT_PAPER_TAGS": [],
+            "HOTSPOT_PAPER_COMMENT": "",
+            "SCORE": 16,
+            "authors": [
+                "Donghwan Lee"
+            ],
+            "title": "Lyapunov-Certified Direct Switching Theory for Q-Learning",
+            "abstract": "Q-learning is one of the most fundamental algorithms in reinforcement learning. We analyze constant-stepsize Q-learning through a direct stochastic switching system representation. The key observation is that the Bellman maximization error can be represented exactly by a stochastic policy. Therefore, the Q-learning error admits a switched linear conditional-mean recursion with martingale-difference noise. The intrinsic drift rate is the joint spectral radius (JSR) of the direct switching family, which can be strictly smaller than the standard row-sum rate. Using this representation, we derive a finite-time final-iterate bound via a JSR-induced Lyapunov function and then give a computable quadratic-certificate version.",
+            "arxiv_id": "2604.19569",
+            "PRIMARY_TOPIC_LABEL": "World Models, Exploration, and Open-Ended Reinforcement Learning",
+            "MATCHED_TOPIC_LABELS": [
+                "World Models, Exploration, and Open-Ended Reinforcement Learning"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [],
+            "HOTSPOT_PAPER_PRIMARY_KIND": null,
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+        },
+        "2604.18739": {
+            "ARXIVID": "2604.18739",
+            "COMMENT": "Derives a likelihood-free objective for fine-tuning diffusion LLMs by matching local unmasking posteriors under reward tilting.",
+            "RELEVANCE": 8,
+            "NOVELTY": 8,
+            "PRIMARY_TOPIC_ID": "architecture_training",
+            "MATCHED_TOPIC_IDS": [
+                "architecture_training"
+            ],
+            "TOPIC_MATCH_COMMENT": "The main contribution is a new training objective for diffusion language models, making architecture/training dynamics the best match.",
+            "HOTSPOT_PAPER_TAGS": [],
+            "HOTSPOT_PAPER_COMMENT": "",
+            "SCORE": 16,
+            "authors": [
+                "Yuyuan Chen",
+                "Shiyi Wang",
+                "Peter Potaptchik",
+                "Jaeyeon Kim",
+                "Michael S. Albergo"
+            ],
+            "title": "Discrete Tilt Matching",
+            "abstract": "Masked diffusion large language models (dLLMs) are a promising alternative to autoregressive generation. While reinforcement learning (RL) methods have recently been adapted to dLLM fine-tuning, their objectives typically depend on sequence-level marginal likelihoods, which are intractable for masked diffusion models. To address this, we derive Discrete Tilt Matching (DTM), a likelihood-free method that recasts dLLM fine-tuning as state-level matching of local unmasking posteriors under reward tilting. DTM takes the form of a weighted cross-entropy objective with explicit minimizer, and admits control variates that improve training stability. On a synthetic maze-planning task, we analyze how DTM's annealing schedule and control variates affect training stability and prevent mode collapse. At scale, fine-tuning LLaDA-8B-Instruct with DTM yields strong gains on Sudoku and Countdown while remaining competitive on MATH500 and GSM8K.",
+            "arxiv_id": "2604.18739",
+            "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+            "MATCHED_TOPIC_LABELS": [
+                "Architecture and Training Dynamics"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [],
+            "HOTSPOT_PAPER_PRIMARY_KIND": null,
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+        },
+        "2604.19212": {
+            "ARXIVID": "2604.19212",
+            "COMMENT": "Establishes exact logical expressiveness equivalences for topological neural networks via higher-order WL tests and counting logic.",
+            "RELEVANCE": 8,
+            "NOVELTY": 8,
+            "PRIMARY_TOPIC_ID": "representation_structure",
+            "MATCHED_TOPIC_IDS": [
+                "architecture_training",
+                "representation_structure"
+            ],
+            "TOPIC_MATCH_COMMENT": "The strongest contribution is theoretical characterization of representational expressiveness, which fits representation structure best.",
+            "HOTSPOT_PAPER_TAGS": [],
+            "HOTSPOT_PAPER_COMMENT": "",
+            "SCORE": 16,
+            "authors": [
+                "Amirreza Akbari",
+                "Amauri H. Souza",
+                "Vikas Garg"
+            ],
+            "title": "The Logical Expressiveness of Topological Neural Networks",
+            "abstract": "Graph neural networks (GNNs) are the standard for learning on graphs, yet they have limited expressive power, often expressed in terms of the Weisfeiler-Leman (WL) hierarchy or within the framework of first-order logic. In this context, topological neural networks (TNNs) have recently emerged as a promising alternative for graph representation learning. By incorporating higher-order relational structures into message-passing schemes, TNNs offer higher representational power than traditional GNNs. However, a fundamental question remains open: what is the logical expressiveness of TNNs? Answering this allows us to characterize precisely which binary classifiers TNNs can represent. In this paper, we address this question by analyzing isomorphism tests derived from the underlying mechanisms of general TNNs. We introduce and investigate the power of higher-order variants of WL-based tests for combinatorial complexes, called $k$-CCWL test. In addition, we introduce the topological counting logic (TC$_k$), an extension of standard counting logic featuring a novel pairwise counting quantifier $ \\exists^{N}(x_i,x_j)\\, \\varphi(x_i,x_j), $ which explicitly quantifies pairs $(x_i, x_j)$ satisfying property $\\varphi$. We rigorously prove the exact equivalence: $ \\text{k-CCWL} \\equiv \\text{TC}_{k{+}2} \\equiv \\text{Topological }(k{+}2)\\text{-pebble game}.$ These results establish a logical expressiveness theory for TNNs.",
+            "arxiv_id": "2604.19212",
+            "PRIMARY_TOPIC_LABEL": "Representation Learning Theory and Structure",
+            "MATCHED_TOPIC_LABELS": [
+                "Architecture and Training Dynamics",
+                "Representation Learning Theory and Structure"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [],
+            "HOTSPOT_PAPER_PRIMARY_KIND": null,
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+        },
+        "2604.18780": {
+            "ARXIVID": "2604.18780",
+            "COMMENT": "Exact semi-CRF inference with streaming forward-backward and fused kernels materially reduces memory for long structured sequences.",
+            "RELEVANCE": 8,
+            "NOVELTY": 8,
+            "PRIMARY_TOPIC_ID": "efficiency_scaling",
+            "MATCHED_TOPIC_IDS": [
+                "efficiency_scaling"
+            ],
+            "TOPIC_MATCH_COMMENT": "Best fit is efficiency/scaling because the contribution is a clear algorithmic and systems advance in memory-efficient exact inference at large scale.",
+            "HOTSPOT_PAPER_TAGS": [],
+            "HOTSPOT_PAPER_COMMENT": "",
+            "SCORE": 16,
+            "authors": [
+                "Benjamin K. Johnson",
+                "Thomas Goralski",
+                "Ayush Semwal",
+                "Hui Shen",
+                "H. Josh Jang"
+            ],
+            "title": "Streaming Structured Inference with Flash-SemiCRF",
+            "abstract": "Semi-Markov Conditional Random Fields (semi-CRFs) assign labels to segments of a sequence rather than to individual positions, enabling exact inference over segment-level features and principled uncertainty estimates at their boundaries. However, existing implementations must materialize a large edge potential tensor whose size grows with sequence length, maximum segment length, and label count, becoming prohibitive for speech-scale state spaces and intractable at genomic scales where sequences can exceed 100,000 positions. This memory bottleneck has limited the adoption of exact segment-level inference for long sequences and large label sets. We identify that the core inefficiency is materializing edge potentials that can instead be evaluated on-the-fly from a compact prefix-sum array, and make several improvements. First, replacing the stored edge tensor with prefix-sum lookup reduces the memory footprint by a factor proportional to the product of segment length and label count. Second, a streaming forward-backward pass with checkpoint-boundary normalization keeps working memory sublinear in sequence length while preserving exact gradients. Third, zero-centered cumulative scores control numerical drift and induce an adaptive duration prior under label imbalance. We integrate these ideas into Flash-SemiCRF, a fused Triton kernel that enables exact semi-CRF inference on previously intractable problem sizes. Available at https://github.com/biobenkj/flash-semicrf.",
+            "arxiv_id": "2604.18780",
+            "PRIMARY_TOPIC_LABEL": "Efficiency, Compression, and Large-Scale Training",
+            "MATCHED_TOPIC_LABELS": [
+                "Efficiency, Compression, and Large-Scale Training"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [],
+            "HOTSPOT_PAPER_PRIMARY_KIND": null,
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+        }
+    },
+    "topic_sections": [
+        {
+            "topic_id": "architecture_training",
+            "topic_label": "Architecture and Training Dynamics",
+            "paper_ids": [
+                "2604.18603",
+                "2604.19018",
+                "2604.18739"
+            ]
+        },
+        {
+            "topic_id": "efficiency_scaling",
+            "topic_label": "Efficiency, Compression, and Large-Scale Training",
+            "paper_ids": [
+                "2604.18616",
+                "2604.18780"
+            ]
+        },
+        {
+            "topic_id": "representation_structure",
+            "topic_label": "Representation Learning Theory and Structure",
+            "paper_ids": [
+                "2604.18901",
+                "2604.19212"
+            ]
+        },
+        {
+            "topic_id": "world_models_open_ended_rl",
+            "topic_label": "World Models, Exploration, and Open-Ended Reinforcement Learning",
+            "paper_ids": [
+                "2604.18701",
+                "2604.19639",
+                "2604.19569"
+            ]
+        }
+    ]
+}

@@ -1,0 +1,400 @@
+{
+    "schema_version": 1,
+    "meta": {
+        "date": "2026-04-27",
+        "total_candidates": 97,
+        "total_spotlight_papers": 8,
+        "thresholds": {
+            "daily_hot_score_cutoff": 15,
+            "daily_hot_relevance_cutoff": 7,
+            "new_frontier_score_cutoff": 15,
+            "new_frontier_novelty_cutoff": 8
+        },
+        "caps": {
+            "max_daily_hot": 6,
+            "max_new_frontier": 4
+        }
+    },
+    "diagnostics": {
+        "candidate_count_by_kind": {
+            "new_frontier": 2,
+            "daily_hot": 6
+        },
+        "selected_count_by_kind": {
+            "new_frontier": 2,
+            "daily_hot": 6
+        }
+    },
+    "papers": {
+        "2604.21999": {
+            "ARXIVID": "2604.21999",
+            "COMMENT": "Demonstrates memory tokens are necessary for single-block Universal Transformers with ACT, and identifies an ACT initialization failure mode.",
+            "RELEVANCE": 9,
+            "NOVELTY": 8,
+            "PRIMARY_TOPIC_ID": "memory_systems",
+            "MATCHED_TOPIC_IDS": [
+                "architecture_training",
+                "memory_systems"
+            ],
+            "TOPIC_MATCH_COMMENT": "The standout contribution is a concrete depth-state tradeoff showing learned memory tokens act as essential scratchpad memory in adaptive recursive reasoning.",
+            "HOTSPOT_PAPER_TAGS": [
+                "new_frontier"
+            ],
+            "HOTSPOT_PAPER_COMMENT": "The explicit claim that adaptive universal transformers need internal scratchpad memory for recursive reasoning points toward a potentially important design direction.",
+            "SCORE": 17,
+            "authors": [
+                "Grigory Sapunov"
+            ],
+            "title": "Universal Transformers Need Memory: Depth-State Trade-offs in Adaptive Recursive Reasoning",
+            "abstract": "We study learned memory tokens as computational scratchpad for a single-block Universal Transformer (UT) with Adaptive Computation Time (ACT) on Sudoku-Extreme, a combinatorial reasoning benchmark. We find that memory tokens are empirically necessary: across all configurations tested -- 3 seeds, multiple token counts, two initialization schemes, ACT and fixed-depth processing -- no configuration without memory tokens achieves non-trivial performance. The optimal count exhibits a sharp lower threshold (T=0 always fails, T=4 is borderline, T=8 reliably succeeds for 81-cell puzzles) followed by a stable plateau (T=8-32, 57.4% +/- 0.7% exact-match) and collapse from attention dilution at T=64.   During experimentation, we identify a router initialization trap that causes >70% of training runs to fail: both default zero-bias initialization (p ~ 0.5) and Graves' recommended positive bias (p ~ 0.73) cause tokens to halt after ~2 steps at initialization, settling into a shallow equilibrium (halt ~ 5-7) that the model cannot escape. Inverting the bias to -3 (\"deep start,\" p ~ 0.05) eliminates this failure mode. We confirm through ablation that the trap is inherent to ACT initialization, not an artifact of our architecture choices.   With reliable training established, we show that (1) ACT provides more consistent results than fixed-depth processing (56.9% +/- 0.7% vs 53.4% +/- 9.3% across 3 seeds); (2) ACT with lambda warmup achieves matching accuracy (57.0% +/- 1.1%) using 34% fewer ponder steps; and (3) attention heads specialize into memory readers, constraint propagators, and integrators across recursive depth. Code is available at https://github.com/che-shr-cat/utm-jax.",
+            "arxiv_id": "2604.21999",
+            "PRIMARY_TOPIC_LABEL": "Memory Structures and Agent Memory Systems",
+            "MATCHED_TOPIC_LABELS": [
+                "Architecture and Training Dynamics",
+                "Memory Structures and Agent Memory Systems"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [
+                "New Frontier Papers"
+            ],
+            "HOTSPOT_PAPER_PRIMARY_KIND": "new_frontier",
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "New Frontier Papers",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "llm_exact"
+        },
+        "2604.22032": {
+            "ARXIVID": "2604.22032",
+            "COMMENT": "Defines formal kernel contracts for correctness across heterogeneous ML hardware stacks, targeting reliable large-scale training and inference behavior.",
+            "RELEVANCE": 7,
+            "NOVELTY": 8,
+            "PRIMARY_TOPIC_ID": "efficiency_scaling",
+            "MATCHED_TOPIC_IDS": [
+                "efficiency_scaling"
+            ],
+            "TOPIC_MATCH_COMMENT": "The main contribution is a systems-level specification framework for ML kernels that affects behavior and reliability across hardware platforms, fitting large-scale training systems best.",
+            "HOTSPOT_PAPER_TAGS": [
+                "new_frontier"
+            ],
+            "HOTSPOT_PAPER_COMMENT": "The contract-based formalization of ML kernel correctness across silicon looks like a new systems direction rather than routine optimization work.",
+            "SCORE": 15,
+            "authors": [
+                "Cooper Veit"
+            ],
+            "title": "Kernel Contracts: A Specification Language for ML Kernel Correctness Across Heterogeneous Silicon",
+            "abstract": "Every ML kernel ships with an implicit contract about what it computes. People rarely write the contract down. When two kernels disagree -- when a matmul on AMD produces a different gradient than the same matmul on NVIDIA, when a fused attention kernel silently downcasts an accumulator, when an out-of-bounds access returns zero on one stack and garbage on another -- there is no formal artifact to arbitrate the dispute. Recent empirical work has measured the gap across silicon platforms, but none of it specifies the contract being violated.   We present a specification language for kernel contracts. A contract has eight parts: identifier, scope, precondition, postcondition, tolerance, reference oracle, measurement protocol, and violation signature. We use it to state twelve contract classes covering precision, ordering, compiler-induced, and exceptional-value failure modes, each grounded in published empirical evidence. We require a three-state calibration: every contract must admit at least one reference-conforming implementation and at least one contract-violating implementation that passes basic functional tests. We apply the framework to three documented incidents -- Huawei Ascend silent precision coercion, Sakana AI CUDA Engineer reward hacking, AMD out-of-bounds silent acceptance -- and show that each informal diagnosis maps to a specific contract violation with a measurable signature. A kernel contract suite is a normative reference against which conformance can be graded, in the way that ISASecure grades industrial control systems against IEC 62443.",
+            "arxiv_id": "2604.22032",
+            "PRIMARY_TOPIC_LABEL": "Efficiency, Compression, and Large-Scale Training",
+            "MATCHED_TOPIC_LABELS": [
+                "Efficiency, Compression, and Large-Scale Training"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [
+                "New Frontier Papers"
+            ],
+            "HOTSPOT_PAPER_PRIMARY_KIND": "new_frontier",
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "New Frontier Papers",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "llm_exact"
+        },
+        "2604.22407": {
+            "ARXIVID": "2604.22407",
+            "COMMENT": "Explains why gradient modification methods fail under Adam through second-moment dynamics and proposes decoupled moment routing as a fix.",
+            "RELEVANCE": 9,
+            "NOVELTY": 8,
+            "PRIMARY_TOPIC_ID": "architecture_training",
+            "MATCHED_TOPIC_IDS": [
+                "architecture_training",
+                "efficiency_scaling"
+            ],
+            "TOPIC_MATCH_COMMENT": "This is directly about training dynamics and optimizer-mechanism interaction, with a new stability repair grounded in moment routing.",
+            "HOTSPOT_PAPER_TAGS": [
+                "daily_hot"
+            ],
+            "HOTSPOT_PAPER_COMMENT": "Broadly important today: Explains why gradient modification methods fail under Adam through second-moment dynamics and proposes decoupled moment routing as a fix.",
+            "SCORE": 17,
+            "authors": [
+                "Yuelin Hu",
+                "Zhenbo Yu",
+                "Zhengxue Cheng",
+                "Wei Liu",
+                "Li Song"
+            ],
+            "title": "Hidden Failure Modes of Gradient Modification under Adam in Continual Learning, and Adaptive Decoupled Moment Routing as a Repair",
+            "abstract": "Many continual-learning methods modify gradients upstream (e.g., projection, penalty rescaling, replay mixing) while treating Adam as a neutral backend. We show this composition has a hidden failure mode. In a high-overlap, non-adaptive 8-domain continual LM, all shared-routing projection baselines collapse close to vanilla forgetting (12.5--12.8 vs. 13.2). A 0.5% replay buffer is the strongest shared alternative but still reaches 11.6, while fixed-strength decoupling falls below vanilla at 14.1. Only adaptive decoupled routing remains stable at 9.4, improving over vanilla by 3.8 units. On a 16-domain stream, its gain over the strongest shared-routing projection baseline grows to 4.5--4.8 units. The failure is largely invisible on clean benchmarks.   We explain this effect through Adam's second-moment pathway: in the tested regime, projection induces a 1/(1-alpha) inflation of the old-direction effective learning rate, matching measurements within 8% across eight alpha values. The same conflict appears with penalty methods, replay mixing, and at 7B scale under LoRA. Our fix routes the modified gradient only to the first moment while preserving magnitude-faithful second-moment statistics, with overlap-aware adaptive strength. This simple change is the only tested configuration that consistently avoids collapse across methods, optimizers, and scale.",
+            "arxiv_id": "2604.22407",
+            "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+            "MATCHED_TOPIC_LABELS": [
+                "Architecture and Training Dynamics",
+                "Efficiency, Compression, and Large-Scale Training"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [
+                "Daily Hot Papers"
+            ],
+            "HOTSPOT_PAPER_PRIMARY_KIND": "daily_hot",
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "Daily Hot Papers",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "heuristic"
+        },
+        "2604.22128": {
+            "ARXIVID": "2604.22128",
+            "COMMENT": "Shows a clean decodability-versus-causal-use gap in Dyck transformers by intervening on residual subspaces and stack-like attention.",
+            "RELEVANCE": 9,
+            "NOVELTY": 8,
+            "PRIMARY_TOPIC_ID": "representation_structure",
+            "MATCHED_TOPIC_IDS": [
+                "architecture_training",
+                "representation_structure"
+            ],
+            "TOPIC_MATCH_COMMENT": "Best fit is representation_structure because the paper is fundamentally about which internal representations are actually used versus merely decodable.",
+            "HOTSPOT_PAPER_TAGS": [
+                "daily_hot"
+            ],
+            "HOTSPOT_PAPER_COMMENT": "Broadly important today: Shows a clean decodability-versus-causal-use gap in Dyck transformers by intervening on residual subspaces and stack-like attention.",
+            "SCORE": 17,
+            "authors": [
+                "Aryan Sharma",
+                "Cutter Dawes",
+                "Shivam Raval"
+            ],
+            "title": "Dissociating Decodability and Causal Use in Bracket-Sequence Transformers",
+            "abstract": "When trained on tasks requiring an understanding of hierarchical structure, transformers have been found to represent this hierarchy in distinct ways: in the geometry of the residual stream, and in stack-like attention patterns maintaining a last-in, first-out ordering. However, it remains unclear whether these representations are causally used or merely decodable. We examine this gap in transformers trained on the Dyck language (a formal language of balanced bracket sequences), where the hierarchical ground truth is explicit. By probing and intervening on the residual stream and attention patterns, we find that depth, distance, and top-of-stack signals are all decodable, yet their causal roles diverge. Specifically, masking attention to the true top-of-stack position causes a sharp drop in long-distance accuracy, while ablating low-dimensional residual stream subspaces has comparatively little effect. These results, which extend to a templated natural language setting, suggest that even in a controlled setting where the relevant hierarchical variables are known, decodability alone does not imply causal use.",
+            "arxiv_id": "2604.22128",
+            "PRIMARY_TOPIC_LABEL": "Representation Learning Theory and Structure",
+            "MATCHED_TOPIC_LABELS": [
+                "Architecture and Training Dynamics",
+                "Representation Learning Theory and Structure"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [
+                "Daily Hot Papers"
+            ],
+            "HOTSPOT_PAPER_PRIMARY_KIND": "daily_hot",
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "Daily Hot Papers",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "heuristic"
+        },
+        "2604.22271": {
+            "ARXIVID": "2604.22271",
+            "COMMENT": "Identifies a cached internal confidence signal that causally supports LLM error detection and self-correction beyond token probabilities.",
+            "RELEVANCE": 8,
+            "NOVELTY": 8,
+            "PRIMARY_TOPIC_ID": "representation_structure",
+            "MATCHED_TOPIC_IDS": [
+                "architecture_training",
+                "representation_structure"
+            ],
+            "TOPIC_MATCH_COMMENT": "Best fit is representation structure because it studies an internal evaluative representation and its causal role in model behavior.",
+            "HOTSPOT_PAPER_TAGS": [
+                "daily_hot"
+            ],
+            "HOTSPOT_PAPER_COMMENT": "Mechanistic interpretability result on self-correction in frontier LLMs is likely of broad day-level interest.",
+            "SCORE": 16,
+            "authors": [
+                "Dharshan Kumaran",
+                "Viorica Patraucean",
+                "Simon Osindero",
+                "Petar Velickovic",
+                "Nathaniel Daw"
+            ],
+            "title": "How LLMs Detect and Correct Their Own Errors: The Role of Internal Confidence Signals",
+            "abstract": "Large language models can detect their own errors and sometimes correct them without external feedback, but the underlying mechanisms remain unknown. We investigate this through the lens of second-order models of confidence from decision neuroscience. In a first-order system, confidence derives from the generation signal itself and is therefore maximal for the chosen response, precluding error detection. Second-order models posit a partially independent evaluative signal that can disagree with the committed response, providing the basis for error detection. Kumaran et al. (2026) showed that LLMs cache a confidence representation at a token immediately following the answer (i.e. post-answer newline: PANL) -- that causally drives verbal confidence and dissociates from log-probabilities. Here we test whether this PANL signal extends beyond confidence to support error detection and self-correction. Here we test whether this signal supports error detection and self-correction, deriving predictions from the second-order framework. Using a verify-then-correct paradigm, we show that: (i) verbal confidence predicts error detection far beyond token log-probabilities, ruling out a first-order account; (ii) PANL activations predict error detection beyond verbal confidence itself; and (iii) PANL predicts which errors the model can correct -- where all behavioural signals fail. Causal interventions confirm that PANL signals rescue error detection behavior when answer information is corrupted. All findings replicate across models (Gemma 3 27B and Qwen 2.5 7B) and tasks (TriviaQA and MNLI). These results reveal that LLMs naturally implement a second-order confidence architecture whose internal evaluative signal encodes not only whether an answer is likely wrong but whether the model has the knowledge to fix it.",
+            "arxiv_id": "2604.22271",
+            "PRIMARY_TOPIC_LABEL": "Representation Learning Theory and Structure",
+            "MATCHED_TOPIC_LABELS": [
+                "Architecture and Training Dynamics",
+                "Representation Learning Theory and Structure"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [
+                "Daily Hot Papers"
+            ],
+            "HOTSPOT_PAPER_PRIMARY_KIND": "daily_hot",
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "Daily Hot Papers",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "llm_exact"
+        },
+        "2604.22575": {
+            "ARXIVID": "2604.22575",
+            "COMMENT": "Introduces dual-space sparse attention plus quantized spiking/hybrid inference for long-context efficiency at foundation-model scale.",
+            "RELEVANCE": 8,
+            "NOVELTY": 7,
+            "PRIMARY_TOPIC_ID": "efficiency_scaling",
+            "MATCHED_TOPIC_IDS": [
+                "architecture_training",
+                "efficiency_scaling"
+            ],
+            "TOPIC_MATCH_COMMENT": "The strongest match is long-context efficiency through sparse attention, quantization, and systems-level inference/training design.",
+            "HOTSPOT_PAPER_TAGS": [
+                "daily_hot"
+            ],
+            "HOTSPOT_PAPER_COMMENT": "Large long-context foundation-model architecture with substantial efficiency claims and broad interest beyond the specialized list.",
+            "SCORE": 15,
+            "authors": [
+                "Yuqi Pan",
+                "Jinghao Zhuang",
+                "Yupeng Feng",
+                "Fangzhi Zhong",
+                "Siyu Ding",
+                "Xuerui Qiu",
+                "Shaowei Gu",
+                "Bohan Sun",
+                "Zhiyong Qin",
+                "Yibo Zhong",
+                "Lingtao Ouyang",
+                "Kun Yang",
+                "Zehao Liu",
+                "Yuhong Chou",
+                "Shurong Wang",
+                "Anjie Hu",
+                "Han Xu",
+                "Bo Xu",
+                "Guoqi Li"
+            ],
+            "title": "SpikingBrain2.0: Brain-Inspired Foundation Models for Efficient Long-Context and Cross-Platform Inference",
+            "abstract": "Scaling context length is reshaping large-model development, yet full-attention Transformers suffer from prohibitive computation and inference bottlenecks at long sequences. A key challenge is to design foundation models that maintain performance and long-context efficiency with minimal training overhead. We introduce SpikingBrain2.0 (SpB2.0), a 5B model that advances both architecture and training efficiency of its predecessor.   Our contributions are two-fold. (1) Architectural Innovation: We propose Dual-Space Sparse Attention (DSSA), an inter-layer hybrid of Sparse Softmax Attention (MoBA) and Sparse Linear Attention (SSE), achieving an improved performance-efficiency trade-off for long-context modeling. SpB2.0 further supports dual quantization paths: INT8-Spiking coding enables sparse event-driven computation, while FP8 coding accelerates inference on modern GPUs. (2) Enhanced Training Strategy: We develop an optimized Transformer-to-Hybrid (T2H) pipeline with dual conversion paths for LLMs and VLMs using curated open-source data.   Empirically, SpB2.0-5B and SpB2.0-VL-5B recover most of the base Transformer (Qwen3-4B) capability with under 7k A100 GPU hours. SpB2.0 achieves a 10.13x TTFT speedup at 4M context and supports over 10M tokens on 8 A100 GPUs under vLLM, where full-attention models exceed memory limits. It also demonstrates strong cross-platform compatibility, enabling FP8 GPU inference (2.52x speedup at 250k) and efficient neuromorphic execution (64.31% sparsity, with 70.6% and 46.5% area and power reduction at 500MHz).   Overall, SpikingBrain2.0 provides a practical pathway for lightweight, multimodal, spiking foundation models, highlighting the potential of combining brain-inspired mechanisms with efficient architectures for resource-constrained and edge scenarios.",
+            "arxiv_id": "2604.22575",
+            "PRIMARY_TOPIC_LABEL": "Efficiency, Compression, and Large-Scale Training",
+            "MATCHED_TOPIC_LABELS": [
+                "Architecture and Training Dynamics",
+                "Efficiency, Compression, and Large-Scale Training"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [
+                "Daily Hot Papers"
+            ],
+            "HOTSPOT_PAPER_PRIMARY_KIND": "daily_hot",
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "Daily Hot Papers",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "llm_exact"
+        },
+        "2604.22294": {
+            "ARXIVID": "2604.22294",
+            "COMMENT": "Uses persistent structured state and reconciliation over long document collections, offering a substantive memory organization mechanism beyond context stuffing.",
+            "RELEVANCE": 8,
+            "NOVELTY": 7,
+            "PRIMARY_TOPIC_ID": "memory_systems",
+            "MATCHED_TOPIC_IDS": [
+                "memory_systems"
+            ],
+            "TOPIC_MATCH_COMMENT": "The heart of the paper is scalable memory organization: storing extracted information in structured persistent state and reconciling it for later reasoning.",
+            "HOTSPOT_PAPER_TAGS": [
+                "daily_hot"
+            ],
+            "HOTSPOT_PAPER_COMMENT": "Long-context QA over document sets is broadly timely, and the structured-state approach is likely to draw attention beyond the niche memory-systems audience.",
+            "SCORE": 15,
+            "authors": [
+                "Harshit Joshi",
+                "Priyank Shethia",
+                "Jadelynn Dao",
+                "Monica S. Lam"
+            ],
+            "title": "Contexts are Never Long Enough: Structured Reasoning for Scalable Question Answering over Long Document Sets",
+            "abstract": "Real-world document question answering is challenging. Analysts must synthesize evidence across multiple documents and different parts of each document. However, any fixed LLM context window can be exceeded as document collections grow. A common workaround is to decompose documents into chunks and assemble answers from chunk-level outputs, but this introduces an aggregation bottleneck: as the number of chunks grows, systems must still combine and reason over an increasingly large body of extracted evidence. We present SLIDERS, a framework for question answering over long document collections through structured reasoning. SLIDERS extracts salient information into a relational database, enabling scalable reasoning over persistent structured state via SQL rather than concatenated text. To make this locally extracted representation globally coherent, SLIDERS introduces a data reconciliation stage that leverages provenance, extraction rationales, and metadata to detect and repair duplicated, inconsistent, and incomplete records. SLIDERS outperforms all baselines on three existing long-context benchmarks, despite all of them fitting within the context window of strong base LLMs, exceeding GPT-4.1 by 6.6 points on average. It also improves over the next best baseline by ~19 and ~32 points on two new benchmarks at 3.9M and 36M tokens, respectively.",
+            "arxiv_id": "2604.22294",
+            "PRIMARY_TOPIC_LABEL": "Memory Structures and Agent Memory Systems",
+            "MATCHED_TOPIC_LABELS": [
+                "Memory Structures and Agent Memory Systems"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [
+                "Daily Hot Papers"
+            ],
+            "HOTSPOT_PAPER_PRIMARY_KIND": "daily_hot",
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "Daily Hot Papers",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "llm_exact"
+        },
+        "2604.22748": {
+            "ARXIVID": "2604.22748",
+            "COMMENT": "Provides a unifying taxonomy and evaluation framework for agentic world models across physical, digital, social, and scientific regimes.",
+            "RELEVANCE": 8,
+            "NOVELTY": 7,
+            "PRIMARY_TOPIC_ID": "world_models_open_ended_rl",
+            "MATCHED_TOPIC_IDS": [
+                "world_models_open_ended_rl"
+            ],
+            "TOPIC_MATCH_COMMENT": "Best fit is world_models_open_ended_rl because the paper is centrally about defining foundations, capability levels, and evaluation principles for world models in agents.",
+            "HOTSPOT_PAPER_TAGS": [
+                "daily_hot"
+            ],
+            "HOTSPOT_PAPER_COMMENT": "Broad cross-community synthesis of agentic world modeling likely belongs in the daily hotspot feed as a timely framing paper.",
+            "SCORE": 15,
+            "authors": [
+                "Meng Chu",
+                "Xuan Billy Zhang",
+                "Kevin Qinghong Lin",
+                "Lingdong Kong",
+                "Jize Zhang",
+                "Teng Tu",
+                "Weijian Ma",
+                "Ziqi Huang",
+                "Senqiao Yang",
+                "Wei Huang",
+                "Yeying Jin",
+                "Zhefan Rao",
+                "Jinhui Ye",
+                "Xinyu Lin",
+                "Xichen Zhang",
+                "Qisheng Hu",
+                "Shuai Yang",
+                "Leyang Shen",
+                "Wei Chow",
+                "Yifei Dong",
+                "Fengyi Wu",
+                "Quanyu Long",
+                "Bin Xia",
+                "Shaozuo Yu",
+                "Mingkang Zhu",
+                "Wenhu Zhang",
+                "Jiehui Huang",
+                "Haokun Gui",
+                "Haoxuan Che",
+                "Long Chen",
+                "Qifeng Chen",
+                "Wenxuan Zhang",
+                "Wenya Wang",
+                "Xiaojuan Qi",
+                "Yang Deng",
+                "Yanwei Li",
+                "Mike Zheng Shou",
+                "Zhi-Qi Cheng",
+                "See-Kiong Ng",
+                "Ziwei Liu",
+                "Philip Torr",
+                "Jiaya Jia"
+            ],
+            "title": "Agentic World Modeling: Foundations, Capabilities, Laws, and Beyond",
+            "abstract": "As AI systems move from generating text to accomplishing goals through sustained interaction, the ability to model environment dynamics becomes a central bottleneck. Agents that manipulate objects, navigate software, coordinate with others, or design experiments require predictive environment models, yet the term world model carries different meanings across research communities. We introduce a \"levels x laws\" taxonomy organized along two axes. The first defines three capability levels: L1 Predictor, which learns one-step local transition operators; L2 Simulator, which composes them into multi-step, action-conditioned rollouts that respect domain laws; and L3 Evolver, which autonomously revises its own model when predictions fail against new evidence. The second identifies four governing-law regimes: physical, digital, social, and scientific. These regimes determine what constraints a world model must satisfy and where it is most likely to fail. Using this framework, we synthesize over 400 works and summarize more than 100 representative systems spanning model-based reinforcement learning, video generation, web and GUI agents, multi-agent social simulation, and AI-driven scientific discovery. We analyze methods, failure modes, and evaluation practices across level-regime pairs, propose decision-centric evaluation principles and a minimal reproducible evaluation package, and outline architectural guidance, open problems, and governance challenges. The resulting roadmap connects previously isolated communities and charts a path from passive next-step prediction toward world models that can simulate, and ultimately reshape, the environments in which agents operate.",
+            "arxiv_id": "2604.22748",
+            "PRIMARY_TOPIC_LABEL": "World Models, Exploration, and Open-Ended Reinforcement Learning",
+            "MATCHED_TOPIC_LABELS": [
+                "World Models, Exploration, and Open-Ended Reinforcement Learning"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [
+                "Daily Hot Papers"
+            ],
+            "HOTSPOT_PAPER_PRIMARY_KIND": "daily_hot",
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "Daily Hot Papers",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "llm_exact"
+        }
+    },
+    "sections": [
+        {
+            "kind": "new_frontier",
+            "label": "New Frontier Papers",
+            "description": "Papers that appear to open a genuinely new direction, paradigm, or field.",
+            "paper_ids": [
+                "2604.21999",
+                "2604.22032"
+            ]
+        },
+        {
+            "kind": "daily_hot",
+            "label": "Daily Hot Papers",
+            "description": "Papers that feel broadly important to the day and belong in the hotspot paper feed.",
+            "paper_ids": [
+                "2604.22407",
+                "2604.22128",
+                "2604.22271",
+                "2604.22575",
+                "2604.22294",
+                "2604.22748"
+            ]
+        }
+    ]
+}

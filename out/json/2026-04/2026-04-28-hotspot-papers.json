@@ -1,0 +1,425 @@
+{
+    "schema_version": 1,
+    "meta": {
+        "date": "2026-04-28",
+        "total_candidates": 261,
+        "total_spotlight_papers": 10,
+        "thresholds": {
+            "daily_hot_score_cutoff": 15,
+            "daily_hot_relevance_cutoff": 7,
+            "new_frontier_score_cutoff": 15,
+            "new_frontier_novelty_cutoff": 8
+        },
+        "caps": {
+            "max_daily_hot": 6,
+            "max_new_frontier": 4
+        }
+    },
+    "diagnostics": {
+        "candidate_count_by_kind": {
+            "new_frontier": 15,
+            "daily_hot": 29
+        },
+        "selected_count_by_kind": {
+            "new_frontier": 4,
+            "daily_hot": 6
+        }
+    },
+    "papers": {
+        "2604.23740": {
+            "ARXIVID": "2604.23740",
+            "COMMENT": "Derives Transformer blocks as a forward-Euler discretization of a continuous score-based variational flow, linking attention, FFN/MoE, and residual-normalization to one dynamical system.",
+            "RELEVANCE": 10,
+            "NOVELTY": 9,
+            "PRIMARY_TOPIC_ID": "architecture_training",
+            "MATCHED_TOPIC_IDS": [
+                "architecture_training"
+            ],
+            "TOPIC_MATCH_COMMENT": "The paper is fundamentally a theory of Transformer architecture and training behavior, providing a unified mechanistic interpretation of attention, MoE, and normalization.",
+            "HOTSPOT_PAPER_TAGS": [
+                "new_frontier",
+                "daily_hot"
+            ],
+            "HOTSPOT_PAPER_COMMENT": "A broad architectural-theory unification of Transformers with continuous-time dynamics is both day-significant and plausibly a new conceptual direction.",
+            "SCORE": 19,
+            "authors": [
+                "Huadong Liao"
+            ],
+            "title": "Transformer as an Euler Discretization of Score-based Variational Flow",
+            "abstract": "Despite the Transformer's dominance across machine learning, its architecture remains largely heuristic and lacks a unified theoretical foundation. We introduce Score-based Variational Flow (SVFlow), a continuous-time dynamical system for representation learning in which the state evolves according to a variational posterior-weighted average of conditional log-likelihood scores, and provide a principled basis for regularization through variational consistency. We show that forward Euler discretization of spherical SVFlow exactly recovers the Transformer architecture. Multi-head attention approximates SVFlow vector field via a vMF kernel-smoothed posterior, while MoE/FFN approximates it in a relaxed network-based way, and the residual-normalization block implements a relaxed retraction that maintains spherical geometry. This unification explains why attention trains stably without explicit regularization while MoE requires auxiliary balancing losses. Experiments on pre-trained language models with prefix shuffling show that SVFlow-induced metrics correlate with task performance, reveal depth-dependent sensitivity, and reflect the intrinsic dynamics of attention.",
+            "arxiv_id": "2604.23740",
+            "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+            "MATCHED_TOPIC_LABELS": [
+                "Architecture and Training Dynamics"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [
+                "New Frontier Papers",
+                "Daily Hot Papers"
+            ],
+            "HOTSPOT_PAPER_PRIMARY_KIND": "new_frontier",
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "New Frontier Papers",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "llm_exact"
+        },
+        "2604.23681": {
+            "ARXIVID": "2604.23681",
+            "COMMENT": "Precise mechanistic analysis of transformer collapse, showing residuals prevent rank collapse while identifying head-channel non-identifiability as a distinct symmetry problem.",
+            "RELEVANCE": 10,
+            "NOVELTY": 9,
+            "PRIMARY_TOPIC_ID": "architecture_training",
+            "MATCHED_TOPIC_IDS": [
+                "architecture_training",
+                "representation_structure"
+            ],
+            "TOPIC_MATCH_COMMENT": "The core contribution is a theoretical and architectural analysis of transformer mechanisms, residuals, layer norm, and symmetry breaking, which squarely fits architecture and training dynamics.",
+            "HOTSPOT_PAPER_TAGS": [
+                "new_frontier",
+                "daily_hot"
+            ],
+            "HOTSPOT_PAPER_COMMENT": "Broadly important today and potentially frontier-opening: Precise mechanistic analysis of transformer collapse, showing residuals prevent rank collapse while identifying head-channel non-identifiability as a distinct symmetry problem.",
+            "SCORE": 19,
+            "authors": [
+                "Giansalvo Cirrincione"
+            ],
+            "title": "Rank, Head-Channel Non-Identifiability, and Symmetry Breaking: A Precise Analysis of Representational Collapse in Transformers",
+            "abstract": "A widely cited result by Dong et al. (2021) showed that Transformers built from self-attention alone, without skip connections or feed-forward layers, suffer from rapid rank collapse: all token representations converge to a single direction. The proposed remedy was the MLP. We show that this picture, while correct in the regime studied by Dong, is incomplete in ways that matter for architectural understanding.   Three results are established. First, layer normalisation is precisely affine-rank-neutral: it preserves the affine rank of the token representation set exactly. The widespread claim that LN \"plays no role\" is imprecise; the correct statement is sharper. Second, residual connections generically obstruct rank collapse in real Transformers such as BERT-base, in a measure-theoretic sense, without contribution from the MLP. The MLP's irreplaceable function is different: generating feature directions outside the linear span of the original token embeddings, which no stack of attention layers can produce. Third, a phenomenon distinct from rank collapse is identified: head-channel non-identifiability. After multi-head attention sums per-head outputs through the output projection, individual contributions cannot be canonically attributed to a specific head; n(H-1)d_k degrees of freedom per layer remain ambiguous when recovering a single head from the mixed signal. The MLP cannot remedy this because it acts on the post-summation signal.   A constructive partial remedy is proposed: a position-gated output projection (PG-OP) at parameter overhead below 1.6% of the standard output projection. The four collapse phenomena identified in the literature -- rank collapse in depth, in width, head-channel non-identifiability, and entropy collapse -- are unified under a symmetry-breaking framework, each corresponding to a distinct symmetry of the Transformer's forward pass.",
+            "arxiv_id": "2604.23681",
+            "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+            "MATCHED_TOPIC_LABELS": [
+                "Architecture and Training Dynamics",
+                "Representation Learning Theory and Structure"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [
+                "New Frontier Papers",
+                "Daily Hot Papers"
+            ],
+            "HOTSPOT_PAPER_PRIMARY_KIND": "new_frontier",
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "New Frontier Papers",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "heuristic"
+        },
+        "2604.23806": {
+            "ARXIVID": "2604.23806",
+            "COMMENT": "Derives unbiased and low-bias equilibrium-propagation training rules for bilinear thermodynamic diffusion models, closing the training loop on analog substrates.",
+            "RELEVANCE": 8,
+            "NOVELTY": 9,
+            "PRIMARY_TOPIC_ID": "architecture_training",
+            "MATCHED_TOPIC_IDS": [
+                "architecture_training",
+                "efficiency_scaling"
+            ],
+            "TOPIC_MATCH_COMMENT": "Its main contribution is a new local training mechanism for an unusual diffusion architecture, with efficiency implications secondary to the training-rule novelty.",
+            "HOTSPOT_PAPER_TAGS": [
+                "new_frontier"
+            ],
+            "HOTSPOT_PAPER_COMMENT": "Physical-substrate diffusion training via local EqProp looks like a genuinely new paradigm direction rather than a routine systems or model tweak.",
+            "SCORE": 17,
+            "authors": [
+                "Aditi De"
+            ],
+            "title": "Symmetric Equilibrium Propagation for Thermodynamic Diffusion Training",
+            "abstract": "The reverse process in score-based diffusion models is formally equivalent to overdamped Langevin dynamics in a time-dependent energy landscape. In our prior work we showed that a bilinearly-coupled analog substrate can physically realize this dynamics at a projected three-to-four orders of magnitude energy advantage over digital inference by replacing dense skip connections with low-rank inter-module couplings. Whether the \\emph{training} loop can be closed on the same substrate -- without routing gradients through an external digital accelerator -- has remained open. We resolve this affirmatively: Equilibrium Propagation applied directly to the bilinear energy yields an unbiased estimator of the denoising score-matching gradient in the zero-nudge limit. For finite nudging we derive a sharp bias bound controlled solely by substrate stiffness, local curvature, and the norm of the loss-gradient signal, with a bilinear-specific corollary showing that one dominant bias term vanishes identically for coupling-parameter updates. Symmetric nudging further upgrades the leading bias from $ \\mathcal{O}(\\beta) $ to $ \\mathcal{O}(\\beta^2) $ at negligible extra cost. Under realistic finite-relaxation budgets this upgrade is essential, as one-sided EqProp produces anti-correlated gradients while symmetric EqProp yields well-aligned updates. Bias-variance analysis determines the optimal operating point, and end-to-end physical-unit accounting projects a $ 10^3$-$10^4\\times $ energy advantage per training step over a matched GPU baseline. Symmetric bilinear EqProp is the first local, readout-only training rule that preserves the low-rank coupling enabling scalable thermodynamic diffusion models.",
+            "arxiv_id": "2604.23806",
+            "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+            "MATCHED_TOPIC_LABELS": [
+                "Architecture and Training Dynamics",
+                "Efficiency, Compression, and Large-Scale Training"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [
+                "New Frontier Papers"
+            ],
+            "HOTSPOT_PAPER_PRIMARY_KIND": "new_frontier",
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "New Frontier Papers",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "llm_exact"
+        },
+        "2604.24356": {
+            "ARXIVID": "2604.24356",
+            "COMMENT": "Shows equivalent characterizations of primitive recursion via fixed recurrent ReLU networks, polynomial ODEs, and polynomial maps, highlighting computation through dynamics rather than composition.",
+            "RELEVANCE": 8,
+            "NOVELTY": 9,
+            "PRIMARY_TOPIC_ID": "architecture_training",
+            "MATCHED_TOPIC_IDS": [
+                "architecture_training"
+            ],
+            "TOPIC_MATCH_COMMENT": "Although mathematically broad, its strongest match is foundational understanding of recurrent neural computation and dynamical architectures.",
+            "HOTSPOT_PAPER_TAGS": [
+                "new_frontier"
+            ],
+            "HOTSPOT_PAPER_COMMENT": "This proposes an unusually deep theoretical bridge between neural nets and dynamical computation models, suggesting a new conceptual direction rather than a routine result.",
+            "SCORE": 17,
+            "authors": [
+                "Olivier Bournez"
+            ],
+            "title": "Primitive Recursion without Composition: Dynamical Characterizations, from Neural Networks to Polynomial ODEs",
+            "abstract": "What do recurrent neural networks, polynomial ODEs, and discrete polynomial maps each bring to computation, and what do they lack? All three operate over the continuum--real-valued states evolved by real-valued dynamics--even when the target functions are discrete. We study them through primitive recursion.   We prove that primitive recursion admits equivalent characterizations in all three frameworks: bounded iteration of a fixed recurrent ReLU network, robust computation by a fixed polynomial ODE, and iteration of a fixed polynomial map with an externally supplied step-size parameter. In each, the time bound is itself primitive recursive, composition emerges from the dynamics rather than as a closure rule, and inputs are raw integer vectors. Every primitive recursive function is first compiled into bounded iteration of a single threshold-affine normal form, then interpreted as a ReLU computation and as a polynomial ODE.   The equivalences expose a structural asymmetry: no fixed polynomial map can round uniformly to the nearest integer or realize exact phase selection--operations polynomial ODEs perform robustly via continuous-time flow. Each formalism compensates for a limitation the others lack: the ReLU gate provides exact branching, continuous time provides autonomous rounding and control, and the step-size parameter recovers both at the cost of discretization precision. This opens dynamical characterizations of subrecursive hierarchies and complexity classes by restricting time bounds, polynomial degrees, or discretization resources within one framework.   More broadly, these models do not compute by composing subroutines: they shape the trajectory of a dynamical system through clocks, phase selectors, and error correction built into the dynamics. This differs structurally from symbolic programming, and our theorem gives a precise framework to study the difference.",
+            "arxiv_id": "2604.24356",
+            "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+            "MATCHED_TOPIC_LABELS": [
+                "Architecture and Training Dynamics"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [
+                "New Frontier Papers"
+            ],
+            "HOTSPOT_PAPER_PRIMARY_KIND": "new_frontier",
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "New Frontier Papers",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "llm_exact"
+        },
+        "2604.22778": {
+            "ARXIVID": "2604.22778",
+            "COMMENT": "Tracks full singular-value spectra during transformer pretraining and uncovers layerwise compression waves plus a persistent Q/K\u2013V asymmetry.",
+            "RELEVANCE": 10,
+            "NOVELTY": 8,
+            "PRIMARY_TOPIC_ID": "architecture_training",
+            "MATCHED_TOPIC_IDS": [
+                "architecture_training",
+                "representation_structure"
+            ],
+            "TOPIC_MATCH_COMMENT": "This is directly about training dynamics and architectural subcomponent behavior during pretraining, making architecture/training the clearest primary fit.",
+            "HOTSPOT_PAPER_TAGS": [
+                "daily_hot"
+            ],
+            "HOTSPOT_PAPER_COMMENT": "Broadly important today: Tracks full singular-value spectra during transformer pretraining and uncovers layerwise compression waves plus a persistent Q/K\u2013V asymmetry.",
+            "SCORE": 18,
+            "authors": [
+                "Yi Liu"
+            ],
+            "title": "The Spectral Lifecycle of Transformer Training: Transient Compression Waves, Persistent Spectral Gradients, and the Q/K--V Asymmetry",
+            "abstract": "We present the first systematic study of weight matrix singular value spectra \\emph{during} transformer pretraining, tracking full SVD decompositions of every weight matrix at 25-step intervals across three model scales (30M--285M parameters). We discover three phenomena: \\textbf{(1)~Transient Compression Waves:} stable rank compression propagates as a traveling wave from early to late layers, creating a dramatic gradient that peaks early then \\emph{reverses} -- late layers eventually over-compress past early layers. \\textbf{(2)~Persistent Spectral Gradients:} the power-law exponent~$\\alpha$ develops a permanent depth gradient forming a non-monotonic inverted-U in deeper models, with peaks shifting toward earlier layers as depth increases. \\textbf{(3)~Q/K--V Functional Asymmetry:} value/output projections compress uniformly while query/key projections carry the full depth-dependent dynamics. The dissociation between transient compression and persistent spectral shape reveals that \\emph{rank and spectral shape encode fundamentally different information about training}. We formalize this as a two-timescale dynamical model and derive scaling laws ($\\Delta\\alpha \\propto L^{0.26}$, $R^2{=}0.99$). We validate on nine models across three families (custom, GPT-2, Pythia; 30M--1B parameters; 8--36 layers), demonstrate that $\\alpha$ predicts layer importance ($\\rho{=}0.69$--$0.84$, $p{<}0.02$), and show that spectral-guided pruning outperforms Last-N heuristics by $1.1{\\times}$--$3.6{\\times}$ across seven models in two families (GPT-2 124M--774M, Pythia 160M--1B), with worst-vs-best gaps up to $23.7{\\times}$ confirming the causal role of spectral structure.",
+            "arxiv_id": "2604.22778",
+            "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+            "MATCHED_TOPIC_LABELS": [
+                "Architecture and Training Dynamics",
+                "Representation Learning Theory and Structure"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [
+                "Daily Hot Papers"
+            ],
+            "HOTSPOT_PAPER_PRIMARY_KIND": "daily_hot",
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "Daily Hot Papers",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "heuristic"
+        },
+        "2604.24088": {
+            "ARXIVID": "2604.24088",
+            "COMMENT": "Introduces FP8 compression of tensor-parallel intermediate tensors with adaptive scaling and fused operators that materially reduce large-scale training communication cost.",
+            "RELEVANCE": 10,
+            "NOVELTY": 8,
+            "PRIMARY_TOPIC_ID": "efficiency_scaling",
+            "MATCHED_TOPIC_IDS": [
+                "efficiency_scaling"
+            ],
+            "TOPIC_MATCH_COMMENT": "The contribution is a clear large-scale training systems and communication-compression method for tensor-parallel LLM training.",
+            "HOTSPOT_PAPER_TAGS": [
+                "daily_hot"
+            ],
+            "HOTSPOT_PAPER_COMMENT": "Broadly important today: Introduces FP8 compression of tensor-parallel intermediate tensors with adaptive scaling and fused operators that materially reduce large-scale training communication cost.",
+            "SCORE": 18,
+            "authors": [
+                "Man Liu",
+                "Xingchen Liu",
+                "Xingjian Tian",
+                "Bing Lu",
+                "Shengkay Lyu",
+                "Shengquan Yin",
+                "Wenjing Huang",
+                "Zheng Wei",
+                "Hairui Zhao",
+                "Guangming Tan",
+                "Dingwen Tao"
+            ],
+            "title": "TACO: Efficient Communication Compression of Intermediate Tensors for Scalable Tensor-Parallel LLM Training",
+            "abstract": "Handling communication overhead in large-scale tensor-parallel training remains a critical challenge due to the dense, near-zero distributions of intermediate tensors, which exacerbate errors under frequent communication and introduce significant computational overhead during compression. To this end, we propose TACO (Tensor-parallel Adaptive COmmunication compression), a robust FP8-based framework for compressing TP intermediate tensors. First, we employ a data-driven reshaping strategy combined with an Adaptive Scale-Hadamard Transform to enable high-fidelity FP8 quantization, while its Dual-Scale Quantization mechanism ensures numerical stability throughout training. Second, we design a highly fused compression operator to reduce memory traffic and kernel launch overhead, allowing efficient overlap with communication. Finally, we integrate TACO with existing state-of-the-art methods for Data and Pipeline Parallelism to develop a compression-enabled 3D-parallel training framework. Detailed experiments on GPT models and Qwen model demonstrate up to 1.87X end-to-end throughput improvement while maintaining near-lossless accuracy, validating the effectiveness and efficiency of TACO in large-scale training.",
+            "arxiv_id": "2604.24088",
+            "PRIMARY_TOPIC_LABEL": "Efficiency, Compression, and Large-Scale Training",
+            "MATCHED_TOPIC_LABELS": [
+                "Efficiency, Compression, and Large-Scale Training"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [
+                "Daily Hot Papers"
+            ],
+            "HOTSPOT_PAPER_PRIMARY_KIND": "daily_hot",
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "Daily Hot Papers",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "heuristic"
+        },
+        "2604.23036": {
+            "ARXIVID": "2604.23036",
+            "COMMENT": "Proposes an MoE SFT method that preserves long-tailed expert knowledge without auxiliary balancing losses by using condenser experts and bias-driven sparsification.",
+            "RELEVANCE": 10,
+            "NOVELTY": 8,
+            "PRIMARY_TOPIC_ID": "architecture_training",
+            "MATCHED_TOPIC_IDS": [
+                "architecture_training",
+                "efficiency_scaling"
+            ],
+            "TOPIC_MATCH_COMMENT": "The paper centers on MoE routing behavior and training stability during fine-tuning, which is a direct match to architecture and training dynamics.",
+            "HOTSPOT_PAPER_TAGS": [
+                "daily_hot"
+            ],
+            "HOTSPOT_PAPER_COMMENT": "Broadly important today: Proposes an MoE SFT method that preserves long-tailed expert knowledge without auxiliary balancing losses by using condenser experts and bias-driven sparsification.",
+            "SCORE": 18,
+            "authors": [
+                "Haoze He",
+                "Xingyuan Ding",
+                "Xuan Jiang",
+                "Xinkai Zou",
+                "Alex Cheng",
+                "Yibo Zhao",
+                "Juncheng Billy Li",
+                "Heather Miller"
+            ],
+            "title": "Preserving Long-Tailed Expert Information in Mixture-of-Experts Tuning",
+            "abstract": "Despite MoE models leading many benchmarks, supervised fine-tuning (SFT) for the MoE architectures remains difficult because its router layers are fragile. Methods such as DenseMixer and ESFT mitigate router collapse with dense mixing or auxiliary load-balancing losses, but these introduce noisy gradients that often degrade performance. In preliminary experiments, we systematically pruned experts and observed that while certain super experts are activated far more frequently, discarding less used experts still leads to notable performance degradation. This suggests that even rarely activated experts encode non-trivial knowledge useful for downstream tasks. Motivated by this, we propose an auxiliary-loss-free MoE SFT framework that combines bias-driven sparsification with always-active gated condenser experts. Rather than enforcing balanced activation across all experts, our method encourages task-relevant experts to remain active while pushing long-tailed experts toward inactivity. The condenser experts provide a persistent, learnable pathway that alleviates gradient starvation and facilitates consolidation of information that would otherwise remain fragmented across sparsely activated experts. Analysis further suggest that this design better preserves long-tailed expert information under sparse routing. Experiments on large-scale MoE models demonstrate that our approach outperforms state-of-the-art SFT baselines such as DenseMixer and ESFT, achieving average gain of 2.5%+ on both mathematical reasoning and commonsenseQA benchmarks.",
+            "arxiv_id": "2604.23036",
+            "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+            "MATCHED_TOPIC_LABELS": [
+                "Architecture and Training Dynamics",
+                "Efficiency, Compression, and Large-Scale Training"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [
+                "Daily Hot Papers"
+            ],
+            "HOTSPOT_PAPER_PRIMARY_KIND": "daily_hot",
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "Daily Hot Papers",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "heuristic"
+        },
+        "2604.23351": {
+            "ARXIVID": "2604.23351",
+            "COMMENT": "Activation patching shows hidden-state information in chain-of-thought traces can solve tasks even when the explicit reasoning text is wrong.",
+            "RELEVANCE": 9,
+            "NOVELTY": 8,
+            "PRIMARY_TOPIC_ID": "representation_structure",
+            "MATCHED_TOPIC_IDS": [
+                "representation_structure"
+            ],
+            "TOPIC_MATCH_COMMENT": "This is mechanistic analysis of where task-relevant information lives in internal representations, directly matching representation-learning structure and understanding.",
+            "HOTSPOT_PAPER_TAGS": [
+                "daily_hot"
+            ],
+            "HOTSPOT_PAPER_COMMENT": "Mechanistic understanding of CoT remains broadly important, and the hidden-state causal analysis here is likely to be of wide immediate interest.",
+            "SCORE": 17,
+            "authors": [
+                "Houman Mehrafarin",
+                "Amit Parekh",
+                "Ioannis Konstas"
+            ],
+            "title": "When Chain-of-Thought Fails, the Solution Hides in the Hidden States",
+            "abstract": "Whether intermediate reasoning is computationally useful or merely explanatory depends on whether chain-of-thought (CoT) tokens contain task-relevant information. We present a mechanistic causal analysis of CoT on GSM8K using activation patching: transferring token-level hidden states from a CoT generation to a direct-answer run for the same question, then measuring the effect on final-answer accuracy. Across models, generating after patching yields substantially higher accuracy than both direct-answer prompting and the original CoT trace, revealing that individual CoT tokens can encode sufficient information to recover the correct answer, even when the original trace is incorrect. This task-relevant information is more prevalent in correct than incorrect CoT runs and is unevenly distributed across tokens, concentrating in mid-to-late layers and appearing earlier in the reasoning trace. Moreover, patching language tokens such as verbs and entities carry task-solving information that steers generation toward correct reasoning, whereas mathematical tokens encode answer-proximal content that rarely succeeds. Patched outputs are often shorter and yet exceed the accuracy of a full CoT trace, suggesting complete reasoning chains are not always necessary. Together, these findings demonstrate that CoT encodes recoverable, token-level problem-solving information, offering new insight into how reasoning is represented and where it breaks down.",
+            "arxiv_id": "2604.23351",
+            "PRIMARY_TOPIC_LABEL": "Representation Learning Theory and Structure",
+            "MATCHED_TOPIC_LABELS": [
+                "Representation Learning Theory and Structure"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [
+                "Daily Hot Papers"
+            ],
+            "HOTSPOT_PAPER_PRIMARY_KIND": "daily_hot",
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "Daily Hot Papers",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "llm_exact"
+        },
+        "2604.23475": {
+            "ARXIVID": "2604.23475",
+            "COMMENT": "Finds a tiny set of loss-critical FFN channels ('supernodes') and shows preserving them is decisive for structured pruning.",
+            "RELEVANCE": 9,
+            "NOVELTY": 8,
+            "PRIMARY_TOPIC_ID": "representation_structure",
+            "MATCHED_TOPIC_IDS": [
+                "efficiency_scaling",
+                "representation_structure"
+            ],
+            "TOPIC_MATCH_COMMENT": "The paper's main value is mechanistic structure in learned FFN representations, with pruning serving as a diagnostic of that structure rather than the main story.",
+            "HOTSPOT_PAPER_TAGS": [
+                "daily_hot"
+            ],
+            "HOTSPOT_PAPER_COMMENT": "Broadly important today: Finds a tiny set of loss-critical FFN channels ('supernodes') and shows preserving them is decisive for structured pruning.",
+            "SCORE": 17,
+            "authors": [
+                "Audrey Cherilyn",
+                "Houman Safaai"
+            ],
+            "title": "Supernodes and Halos: Loss-Critical Hubs in LLM Feed-Forward Layers",
+            "abstract": "We study the organization of channel-level importance in transformer feed-forward networks (FFNs). Using a Fisher-style loss proxy (LP) based on activation-gradient second moments, we show that loss sensitivity is concentrated in a small set of channels within each layer. In Llama-3.1-8B, the top 1% of channels per layer accounts for a median of 58.7% of LP mass, with a range of 33.0% to 86.1%. We call these loss-critical channels supernodes. Although FFN layers also contain strong activation outliers, LP-defined supernodes overlap only weakly with activation-defined outliers and are not explained by activation power or weight norms alone. Around this core, we find a weaker but consistent halo structure: some non-supernode channels share the supernodes' write support and show stronger redundancy with the protected core. We use one-shot structured FFN pruning as a diagnostic test of this organization. At 50% FFN sparsity, baselines that prune many supernodes degrade sharply, whereas our SCAR variants explicitly protect the supernode core; the strongest variant, SCAR-Prot, reaches perplexity 54.8 compared with 989.2 for Wanda-channel. The LP-concentration pattern appears across Mistral-7B, Llama-2-7B, and Qwen2-7B, remains visible in targeted Llama-3.1-70B experiments, and increases during OLMo-2-7B pretraining. These results suggest that LLM FFNs develop a small learned core of loss-critical channels, and that preserving this core is important for reliable structured pruning.",
+            "arxiv_id": "2604.23475",
+            "PRIMARY_TOPIC_LABEL": "Representation Learning Theory and Structure",
+            "MATCHED_TOPIC_LABELS": [
+                "Efficiency, Compression, and Large-Scale Training",
+                "Representation Learning Theory and Structure"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [
+                "Daily Hot Papers"
+            ],
+            "HOTSPOT_PAPER_PRIMARY_KIND": "daily_hot",
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "Daily Hot Papers",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "heuristic"
+        },
+        "2604.22782": {
+            "ARXIVID": "2604.22782",
+            "COMMENT": "Introduces stochastic cross-layer attention during training to enable adaptive depth-wise KV-cache sharing at deployment.",
+            "RELEVANCE": 9,
+            "NOVELTY": 8,
+            "PRIMARY_TOPIC_ID": "efficiency_scaling",
+            "MATCHED_TOPIC_IDS": [
+                "architecture_training",
+                "efficiency_scaling"
+            ],
+            "TOPIC_MATCH_COMMENT": "The primary contribution is a new KV-cache efficiency mechanism that materially reduces inference memory through depth-wise cache sharing.",
+            "HOTSPOT_PAPER_TAGS": [
+                "daily_hot"
+            ],
+            "HOTSPOT_PAPER_COMMENT": "Broadly important today: Introduces stochastic cross-layer attention during training to enable adaptive depth-wise KV-cache sharing at deployment.",
+            "SCORE": 17,
+            "authors": [
+                "Anastasiia Filippova",
+                "David Grangier",
+                "Marco Cuturi",
+                "Jo\\~ao Monteiro"
+            ],
+            "title": "Stochastic KV Routing: Enabling Adaptive Depth-Wise Cache Sharing",
+            "abstract": "Serving transformer language models with high throughput requires caching Key-Values (KVs) to avoid redundant computation during autoregressive generation. The memory footprint of KV caching is significant and heavily impacts serving costs. This work proposes to lessen these memory requirements. While recent work has largely addressed KV cache reduction via compression and eviction along the temporal axis, we argue that the \\emph{depth} dimension offers an orthogonal and robust avenue for optimization. Although prior research suggests that a full cache for every layer is redundant, implementing cross-layer cache sharing remains a practical challenge; existing methods typically suffer from reduced throughput or increased time-to-first-token. In this paper, we demonstrate that dropping a layer's cache offers efficient optimization without information loss. We propose a simple training approach: random cross-layer attention. During training, layers randomly choose to attend either to their own KV states or those of a preceding layer. This stochastic process adapts the model to be robust to various depth-wise cache sharing strategies, ensuring flexibility for unknown hardware constraints at deployment time. Our evaluations show that applying this scheme during pre-training or fine-tuning enables depth-wise cache sharing for various model families. Furthermore, for larger models in data-constrained settings, this approach is suggestive of a regularization-like effect, frequently preserving or improving performance while significantly reducing the cache's memory footprint.",
+            "arxiv_id": "2604.22782",
+            "PRIMARY_TOPIC_LABEL": "Efficiency, Compression, and Large-Scale Training",
+            "MATCHED_TOPIC_LABELS": [
+                "Architecture and Training Dynamics",
+                "Efficiency, Compression, and Large-Scale Training"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [
+                "Daily Hot Papers"
+            ],
+            "HOTSPOT_PAPER_PRIMARY_KIND": "daily_hot",
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "Daily Hot Papers",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "heuristic"
+        }
+    },
+    "sections": [
+        {
+            "kind": "new_frontier",
+            "label": "New Frontier Papers",
+            "description": "Papers that appear to open a genuinely new direction, paradigm, or field.",
+            "paper_ids": [
+                "2604.23740",
+                "2604.23681",
+                "2604.23806",
+                "2604.24356"
+            ]
+        },
+        {
+            "kind": "daily_hot",
+            "label": "Daily Hot Papers",
+            "description": "Papers that feel broadly important to the day and belong in the hotspot paper feed.",
+            "paper_ids": [
+                "2604.22778",
+                "2604.24088",
+                "2604.23036",
+                "2604.23351",
+                "2604.23475",
+                "2604.22782"
+            ]
+        }
+    ]
+}

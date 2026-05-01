@@ -1,0 +1,560 @@
+{
+    "schema_version": 2,
+    "meta": {
+        "date": "2026-05-01",
+        "sort": [
+            "score",
+            "relevance"
+        ],
+        "topic_schema_version": 1,
+        "total_papers": 13,
+        "usage": {
+            "model": "gpt-5.4",
+            "prompt_tokens": 189931,
+            "completion_tokens": 18147,
+            "prompt_cost": 0.47482749999999996,
+            "completion_cost": 0.27220500000000003,
+            "total_arxiv_papers": 583,
+            "total_scanned_papers": 383,
+            "total_relevant_papers": 13
+        }
+    },
+    "topic_order": [
+        "architecture_training",
+        "efficiency_scaling",
+        "representation_structure",
+        "memory_systems",
+        "world_models_open_ended_rl"
+    ],
+    "diagnostics": {
+        "total_papers": 13,
+        "topic_counts": [
+            {
+                "topic_id": "architecture_training",
+                "topic_label": "Architecture and Training Dynamics",
+                "paper_count": 4
+            },
+            {
+                "topic_id": "efficiency_scaling",
+                "topic_label": "Efficiency, Compression, and Large-Scale Training",
+                "paper_count": 5
+            },
+            {
+                "topic_id": "representation_structure",
+                "topic_label": "Representation Learning Theory and Structure",
+                "paper_count": 1
+            },
+            {
+                "topic_id": "memory_systems",
+                "topic_label": "Memory Structures and Agent Memory Systems",
+                "paper_count": 1
+            },
+            {
+                "topic_id": "world_models_open_ended_rl",
+                "topic_label": "World Models, Exploration, and Open-Ended Reinforcement Learning",
+                "paper_count": 2
+            }
+        ],
+        "assignment_source_counts": {
+            "llm_exact": 13
+        },
+        "llm_assignment_count": 13,
+        "heuristic_assignment_count": 0,
+        "default_assignment_count": 0,
+        "invalid_primary_topic_fallback_count": 0,
+        "missing_primary_topic_fallback_count": 0,
+        "hotspot_paper_kind_counts": {
+            "new_frontier": 0,
+            "daily_hot": 4
+        },
+        "hotspot_paper_assignment_source_counts": {
+            "heuristic": 1,
+            "llm_exact": 3,
+            "default": 9
+        }
+    },
+    "papers": {
+        "2604.27124": {
+            "ARXIVID": "2604.27124",
+            "COMMENT": "Analyzes sigmoid attention as a training-stability mechanism with bounded derivatives and diagonal Jacobian, plus an efficient kernel.",
+            "RELEVANCE": 9,
+            "NOVELTY": 8,
+            "PRIMARY_TOPIC_ID": "architecture_training",
+            "MATCHED_TOPIC_IDS": [
+                "architecture_training",
+                "efficiency_scaling"
+            ],
+            "TOPIC_MATCH_COMMENT": "The strongest contribution is architectural and dynamical: a mechanistic argument and evidence that sigmoid attention changes optimization stability relative to softmax attention.",
+            "HOTSPOT_PAPER_TAGS": [
+                "daily_hot"
+            ],
+            "HOTSPOT_PAPER_COMMENT": "Broadly important today: Analyzes sigmoid attention as a training-stability mechanism with bounded derivatives and diagonal Jacobian, plus an efficient kernel.",
+            "SCORE": 17,
+            "authors": [
+                "Vijay Sadashivaiah",
+                "Georgios Dasoulas",
+                "Judith Mueller",
+                "Soumya Ghosh"
+            ],
+            "title": "Better Models, Faster Training: Sigmoid Attention for single-cell Foundation Models",
+            "abstract": "Training stable biological foundation models requires rethinking attention mechanisms: we find that using sigmoid attention as a drop in replacement for softmax attention a) produces better learned representations: on six diverse single-cell datasets, sigmoid achieves 25% higher cell-type separation, better cell-type cohesion metrics, and lower validation loss, b) faster training, models with sigmoid attention train up to 10% faster than their softmax counterparts, and c) more stable training by eliminating inherent sources of instability in softmax attention. We establish that sigmoid attention has globally bounded derivatives ($\\leq 0.25$) as opposed to softmax, and a diagonal Jacobian structure in contrast with softmax's dense coupling, which together help alleviate training instabilities. In stress tests on 160M-parameter bidirectional attention models trained without gradient clipping on 8K-token sequences, softmax diverges catastrophically, with gradients exploding by four orders of magnitude, while sigmoid remains stable. Finally, we implement and open-source TritonSigmoid, an efficient GPU kernel that achieves 515 TFLOPS on H100 GPUs, outperforming both FlashAttention-2 and FlashSigmoid, with native padding support, which is essential for biological sequences. Our results establish sigmoid attention as both theoretically grounded and empirically superior for biological foundation models. Code is available at https://github.com/MSDLLCpapers/triton-sigmoid",
+            "arxiv_id": "2604.27124",
+            "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+            "MATCHED_TOPIC_LABELS": [
+                "Architecture and Training Dynamics",
+                "Efficiency, Compression, and Large-Scale Training"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [
+                "Daily Hot Papers"
+            ],
+            "HOTSPOT_PAPER_PRIMARY_KIND": "daily_hot",
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "Daily Hot Papers",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "heuristic"
+        },
+        "2604.27089": {
+            "ARXIVID": "2604.27089",
+            "COMMENT": "Compiler-based automatic sequence parallelism for long-context training is a concrete large-scale training systems contribution.",
+            "RELEVANCE": 9,
+            "NOVELTY": 8,
+            "PRIMARY_TOPIC_ID": "efficiency_scaling",
+            "MATCHED_TOPIC_IDS": [
+                "efficiency_scaling"
+            ],
+            "TOPIC_MATCH_COMMENT": "This directly targets scalable long-context LLM training with automated parallelization and checkpointing that materially expand feasible context length.",
+            "HOTSPOT_PAPER_TAGS": [
+                "daily_hot"
+            ],
+            "HOTSPOT_PAPER_COMMENT": "Long-context training infrastructure is broadly important and likely relevant to many frontier practitioners today.",
+            "SCORE": 17,
+            "authors": [
+                "Ahan Gupta",
+                "Zhihao Wang",
+                "Neel Dani",
+                "Masahiro Tanaka",
+                "Olatunji Ruwase",
+                "Minjia Zhang"
+            ],
+            "title": "AutoSP: Unlocking Long-Context LLM Training Via Compiler-Based Sequence Parallelism",
+            "abstract": "Large-language-models (LLMs) demonstrate enormous utility in long-context tasks which require processing prompts that consist of tens to hundreds of thousands of tokens. However, existing LLM training libraries do not provide easy to use abstractions to optimize for long-context training, instead focusing on optimizations for models with large parameter counts through ZeRO-3/FSDP, Tensor and Pipeline parallelism. This forces users to rewrite LLM training libraries to incorporate compositions of various complex long-context optimizations, such as sequence-parallelism, to training pipelines; a process that requires in-depth expertise, reducing developer productivity. To tackle these challenges, we introduce AutoSP: the first automated solution to automatically optimize LLM training for longer-contexts. AutoSP compiles models and applies a targeted set of optimizations: automated sequence parallelism, and long-context aware activation-checkpointing, to drastically enhance LLM trainability at negligible cost to throughput. Our evaluation demonstrates AutoSP's capability on both NVIDIA and AMD hardware, increasing training contexts by upto 2.7$\\times$ and 2.5$\\times$ respectively over competitive hand-written baseline at negligible cost to runtime performance.",
+            "arxiv_id": "2604.27089",
+            "PRIMARY_TOPIC_LABEL": "Efficiency, Compression, and Large-Scale Training",
+            "MATCHED_TOPIC_LABELS": [
+                "Efficiency, Compression, and Large-Scale Training"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [
+                "Daily Hot Papers"
+            ],
+            "HOTSPOT_PAPER_PRIMARY_KIND": "daily_hot",
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "Daily Hot Papers",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "llm_exact"
+        },
+        "2604.27308": {
+            "ARXIVID": "2604.27308",
+            "COMMENT": "Boosting ultra-low-rank adapters across orthogonal subspaces so effective adaptation rank grows over training while keeping each round tiny and inference-free after merge.",
+            "RELEVANCE": 8,
+            "NOVELTY": 8,
+            "PRIMARY_TOPIC_ID": "efficiency_scaling",
+            "MATCHED_TOPIC_IDS": [
+                "efficiency_scaling"
+            ],
+            "TOPIC_MATCH_COMMENT": "The main idea is a PEFT/compression method that changes the capacity-cost tradeoff of low-rank adaptation, squarely fitting efficiency and compression.",
+            "HOTSPOT_PAPER_TAGS": [],
+            "HOTSPOT_PAPER_COMMENT": "",
+            "SCORE": 16,
+            "authors": [
+                "Raviteja Anantha",
+                "Nick Levato",
+                "Layne C. Price"
+            ],
+            "title": "BoostLoRA: Growing Effective Rank by Boosting Adapters",
+            "abstract": "Parameter-efficient fine-tuning (PEFT) methods face a tradeoff between adapter size and expressivity: ultra-low-parameter adapters are confined to fixed low-rank subspaces, capping performance even with extended training. We propose BoostLoRA, a gradient-boosting framework that overcomes this limit by iteratively training and merging minimal adapters on the examples the current model gets wrong. A ROTATE SVD basis strategy assigns each round to an orthogonal subspace, so cumulative effective rank grows linearly with the number of rounds while each adapter remains ultra-low-rank. After merging, adapters are discarded, leaving zero inference overhead. On Qwen2.5-3B, BoostLoRA reaches 89.1% on GSM8K and 68.8% on MATH-500, surpassing both the best single-shot ultra-low parameter adapter (TinyLoRA) and full fine-tuning; on code generation it reaches 57.2% on MBPP and 80.4% on HumanEval while full fine-tuning drops below the zero-shot baseline. We also demonstrate cross-architecture transfer on protein binding classification with ESM2-650M and cross-entropy training. BoostLoRA is, to our knowledge, the first PEFT method whose effective rank grows with training, separating per-round parameter cost from total representational capacity.",
+            "arxiv_id": "2604.27308",
+            "PRIMARY_TOPIC_LABEL": "Efficiency, Compression, and Large-Scale Training",
+            "MATCHED_TOPIC_LABELS": [
+                "Efficiency, Compression, and Large-Scale Training"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [],
+            "HOTSPOT_PAPER_PRIMARY_KIND": null,
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+        },
+        "2604.27155": {
+            "ARXIVID": "2604.27155",
+            "COMMENT": "Recasts model merging as symmetry-invariant Fr\u00e9chet averaging on appropriate manifolds, including quotient-manifold geometry for LoRA merging.",
+            "RELEVANCE": 8,
+            "NOVELTY": 8,
+            "PRIMARY_TOPIC_ID": "efficiency_scaling",
+            "MATCHED_TOPIC_IDS": [
+                "efficiency_scaling",
+                "representation_structure"
+            ],
+            "TOPIC_MATCH_COMMENT": "Although geometric, the paper\u2019s practical target is better parameter/model merging and adapter combination, which fits efficiency/compression best.",
+            "HOTSPOT_PAPER_TAGS": [],
+            "HOTSPOT_PAPER_COMMENT": "",
+            "SCORE": 16,
+            "authors": [
+                "Marvin F. da Silva",
+                "Mohammed Adnan",
+                "Felix Dangel",
+                "Sageev Oore"
+            ],
+            "title": "Generalizing the Geometry of Model Merging Through Frechet Averages",
+            "abstract": "Model merging aims to combine multiple models into one without additional training. Na\\\"ive parameter-space averaging can be fragile under architectural symmetries, as their geometry does not take them into account. In this work we show that not only the geometry, but also the averaging procedure itself, must be symmetry-invariant to achieve symmetry-aware merges. Consequently, we propose a general solution: merging as Fr\\'echet averaging, i.e., selecting parameters that minimize a sum of geodesic distances on an appropriate manifold. In this view, the key design choice is the overall geometry, i.e., the choice of metric, manifold, and distance approximation, that determines what it means for two models to be \"close\". We show that Fr\\'echet averaging, combined with simplifying assumptions, contains Fisher merging. Building on this, we examine the particular case of low-rank adapters (LoRA), whose symmetries induce a distinct geometry: that of a quotient manifold. We outline the limitations of current LoRA merging methods, propose a practical algorithm for this setting, and show how they compare with other commonly used approaches.",
+            "arxiv_id": "2604.27155",
+            "PRIMARY_TOPIC_LABEL": "Efficiency, Compression, and Large-Scale Training",
+            "MATCHED_TOPIC_LABELS": [
+                "Efficiency, Compression, and Large-Scale Training",
+                "Representation Learning Theory and Structure"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [],
+            "HOTSPOT_PAPER_PRIMARY_KIND": null,
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+        },
+        "2604.28144": {
+            "ARXIVID": "2604.28144",
+            "COMMENT": "Provides global last-iterate guarantees for constrained maximum-entropy exploration under policy parameterization via penalty-regularized policy gradients.",
+            "RELEVANCE": 8,
+            "NOVELTY": 8,
+            "PRIMARY_TOPIC_ID": "world_models_open_ended_rl",
+            "MATCHED_TOPIC_IDS": [
+                "world_models_open_ended_rl"
+            ],
+            "TOPIC_MATCH_COMMENT": "This is directly about foundational RL exploration, specifically constrained entropy-maximizing exploration with nontrivial theory and deployable guarantees.",
+            "HOTSPOT_PAPER_TAGS": [],
+            "HOTSPOT_PAPER_COMMENT": "",
+            "SCORE": 16,
+            "authors": [
+                "Florian Wolf",
+                "Ilyas Fatkhullin",
+                "Niao He"
+            ],
+            "title": "Global Optimality for Constrained Exploration via Penalty Regularization",
+            "abstract": "Efficient exploration is a central problem in reinforcement learning and is often formalized as maximizing the entropy of the state-action occupancy measure. While unconstrained maximum-entropy exploration is relatively well understood, real-world exploration is often constrained by safety, resource, or imitation requirements. This constrained setting is particularly challenging because entropy maximization lacks additive structure, rendering Bellman-equation-based methods inapplicable. Moreover, scalable approaches require policy parameterization, inducing non-convexity in both the objective and the constraints. To our knowledge, the only prior model-free policy-gradient approach for this setting under general policy parameterization is due to Ying et al. (2025). Unfortunately, their guarantees are limited to weak regret and ergodic averages, which do not imply that the final output is a single deployable policy that is near-optimal and nearly feasible. In this work we take a different approach to this problem, and propose Policy Gradient Penalty (PGP) method, a single-loop policy-space method that enforces general convex occupancy-measure constraints via quadratic-penalty regularization. PGP constructs pseudo-rewards that yield gradient estimates of the penalized objective, subsequently exploiting the classical Policy Gradient Theorem. We further establish the regularity of the penalized objective, providing the smoothness properties needed to justify the convergence of PGP. Leveraging hidden convexity and strong duality, we then establish global last-iterate convergence guarantees, attaining an $\\epsilon$-optimal constrained entropy value with $\\epsilon$ bounded constraint violation despite policy-induced non-convexity. We validate PGP through ablations on a grid-world benchmark and further demonstrate scalability on two challenging continuous-control tasks.",
+            "arxiv_id": "2604.28144",
+            "PRIMARY_TOPIC_LABEL": "World Models, Exploration, and Open-Ended Reinforcement Learning",
+            "MATCHED_TOPIC_LABELS": [
+                "World Models, Exploration, and Open-Ended Reinforcement Learning"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [],
+            "HOTSPOT_PAPER_PRIMARY_KIND": null,
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+        },
+        "2604.27167": {
+            "ARXIVID": "2604.27167",
+            "COMMENT": "Mechanistic analysis identifies and causally controls late-layer suppression of Nash-equilibrium behavior in LLMs.",
+            "RELEVANCE": 8,
+            "NOVELTY": 8,
+            "PRIMARY_TOPIC_ID": "representation_structure",
+            "MATCHED_TOPIC_IDS": [
+                "representation_structure"
+            ],
+            "TOPIC_MATCH_COMMENT": "The key contribution is mechanistic understanding of internal representations and circuits underlying strategic behavior, not benchmark play itself.",
+            "HOTSPOT_PAPER_TAGS": [
+                "daily_hot"
+            ],
+            "HOTSPOT_PAPER_COMMENT": "Mechanistic evidence about strategic behavior in LLMs has strong broad interest and likely belongs in the daily hotspot feed as well.",
+            "SCORE": 16,
+            "authors": [
+                "Paraskevas V. Lekeas",
+                "Giorgos Stamatopoulos"
+            ],
+            "title": "What Suppresses Nash Equilibrium Play in Large Language Models? Mechanistic Evidence and Causal Control",
+            "abstract": "LLM agents are known to deviate from Nash equilibria in strategic interactions, but nobody has looked inside the model to understand why, or asked whether the deviation can be reversed. We do both.   Working with four open-source models (Llama-3 and Qwen2.5, 8B to 72B parameters) playing four canonical two-player games, we establish the behavioral picture through self-play and cross-play experiments, then open up the 32-layer Llama-3-8B model and examine what actually happens during a strategic decision.   The mechanistic findings are clear. Opponent history is encoded with near-perfect fidelity at the first layer (96% probe accuracy) and consumed progressively by later ones, while Nash action encoding is weak throughout, never exceeding 56%. There is no dedicated Nash module. Instead, the model privately favors the Nash action through most of its forward pass, but a prosocial override concentrated in the final layers reverses this, reaching 84% probability of cooperation at layer 30. When we inject a learned Nash direction into the residual stream, the behavior shifts bidirectionally, confirmed through concept clamping.   The behavioral experiments surface six scale- and architecture-dependent findings, the most notable being that chain-of-thought reasoning worsens Nash play in small models but achieves near-perfect Nash play above 70B parameters. The cross-play experiments reveal three phenomena invisible in self-play: a small model can unravel any partner's cooperation by defecting early; two large models reinforce each other's cooperative instincts indefinitely; and who moves first in a coordination game determines which Nash equilibrium the system reaches. LLMs do not lack Nash-playing competence. They compute it, then suppress it.",
+            "arxiv_id": "2604.27167",
+            "PRIMARY_TOPIC_LABEL": "Representation Learning Theory and Structure",
+            "MATCHED_TOPIC_LABELS": [
+                "Representation Learning Theory and Structure"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [
+                "Daily Hot Papers"
+            ],
+            "HOTSPOT_PAPER_PRIMARY_KIND": "daily_hot",
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "Daily Hot Papers",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "llm_exact"
+        },
+        "2604.27031": {
+            "ARXIVID": "2604.27031",
+            "COMMENT": "Adaptive neurogenesis addresses continual-learning stability/plasticity by growing capacity when representational or plasticity saturation is detected.",
+            "RELEVANCE": 8,
+            "NOVELTY": 8,
+            "PRIMARY_TOPIC_ID": "architecture_training",
+            "MATCHED_TOPIC_IDS": [
+                "architecture_training",
+                "representation_structure"
+            ],
+            "TOPIC_MATCH_COMMENT": "The main idea is architectural and training-dynamical: resource-adaptive network growth as a mechanism for continual learning under unknown future task streams.",
+            "HOTSPOT_PAPER_TAGS": [],
+            "HOTSPOT_PAPER_COMMENT": "",
+            "SCORE": 16,
+            "authors": [
+                "Karthik Charan Raghunathan",
+                "Christian Metzner",
+                "Laura Kriener",
+                "Melika Payvand"
+            ],
+            "title": "NORACL: Neurogenesis for Oracle-free Resource-Adaptive Continual Learning",
+            "abstract": "In a continual learning setting, we require a model to be plastic enough to learn a new task and stable enough to not disturb previously learned capabilities. We argue that this dilemma has an architectural root. A finite network has limited representational and plastic resources, yet the required capacity depends on properties of the future task stream that are unknown: how many tasks will be encountered, and how much they overlap in feature space. Regularization-based methods preserve past knowledge within fixed-capacity architectures and therefore implicitly rely on an oracle architecture sized for this unknown future. When tasks are only weakly related, fixed architectures progressively run out of plastic resources; when tasks are few or strongly overlapping, models are often over-provisioned. Inspired by neurogenesis in biology, we propose NORACL to address the stability-plasticity dilemma by tackling the oracle architecture problem through neuronal growth. Starting from a compact network, NORACL grows only when needed by monitoring two complementary signals for representational and plasticity saturation. We evaluate NORACL against oracle-sized static baselines across varying task counts and geometries. Across all settings, NORACL achieves final average accuracies that are better than or on par with oracle-provisioned static baselines while using fewer parameters. Additionally, NORACL yields architectures with interpretable growth, i.e. dissimilar tasks predominantly expand feature-extraction layers, whereas tasks which rely on common features shift growth toward later feature-combination layers. Our analysis further explains why fixed-capacity networks lose plasticity as tasks accumulate, whereas NORACL creates fresh capacity for new tasks through growth. Together, these results show that adaptive neurogenesis pushes the stability-plasticity Pareto frontier of continual learning.",
+            "arxiv_id": "2604.27031",
+            "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+            "MATCHED_TOPIC_LABELS": [
+                "Architecture and Training Dynamics",
+                "Representation Learning Theory and Structure"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [],
+            "HOTSPOT_PAPER_PRIMARY_KIND": null,
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+        },
+        "2604.27883": {
+            "ARXIVID": "2604.27883",
+            "COMMENT": "Approximate-message-passing-based decoupled descent exactly tracks test error in stylized regimes, offering transparent training dynamics.",
+            "RELEVANCE": 8,
+            "NOVELTY": 8,
+            "PRIMARY_TOPIC_ID": "architecture_training",
+            "MATCHED_TOPIC_IDS": [
+                "architecture_training"
+            ],
+            "TOPIC_MATCH_COMMENT": "The paper is fundamentally about optimization dynamics and generalization during training, with a new algorithm motivated by exact train-test tracking.",
+            "HOTSPOT_PAPER_TAGS": [],
+            "HOTSPOT_PAPER_COMMENT": "",
+            "SCORE": 16,
+            "authors": [
+                "Max Lovig"
+            ],
+            "title": "Decoupled Descent: Exact Test Error Tracking Via Approximate Message Passing",
+            "abstract": "In modern parametric model training, full-batch gradient descent (and its variants) suffers due to progressively stronger biasing towards the exact realization of training data; this drives the systematic ``generalization gap'', where the train error becomes an unreliable proxy for test error. Existing approaches either argue this gap is benign through complex analysis or sacrifice data to a validation set. In contrast, we introduce decoupled descent (DD), a novel theory-based training algorithm that satisfies a train-test identity -- enforcing the train error to asymptotically track the test error for stylized Gaussian mixture models. Within this specific regime, leveraging approximate message passing theory, DD iteratively cancels the biases due to data reuse, rigorously demonstrating the feasibility of zero-cost validation and $100\\%$ data utilization. Moreover, DD is governed by a low-dimensional state evolution recursion, rendering the dynamics of the algorithm transparent and tractable. We validate DD on XOR classification, yielding superior performance compared to GD; additionally, we implement noisy MNIST and non-linear probing of CIFAR-10, demonstrating that even when our stylized assumptions are relaxed, DD narrows the generalization gap compared to GD.",
+            "arxiv_id": "2604.27883",
+            "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+            "MATCHED_TOPIC_LABELS": [
+                "Architecture and Training Dynamics"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [],
+            "HOTSPOT_PAPER_PRIMARY_KIND": null,
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+        },
+        "2604.26970": {
+            "ARXIVID": "2604.26970",
+            "COMMENT": "Learns heterogeneous decay surfaces for knowledge retention using velocity and volatility, replacing uniform forgetting in temporal memory graphs.",
+            "RELEVANCE": 8,
+            "NOVELTY": 8,
+            "PRIMARY_TOPIC_ID": "memory_systems",
+            "MATCHED_TOPIC_IDS": [
+                "memory_systems"
+            ],
+            "TOPIC_MATCH_COMMENT": "Its central contribution is a principled mechanism for adaptive memory decay and retention over time, not generic retrieval plumbing.",
+            "HOTSPOT_PAPER_TAGS": [],
+            "HOTSPOT_PAPER_COMMENT": "",
+            "SCORE": 16,
+            "authors": [
+                "Mandar Karhade"
+            ],
+            "title": "Not All Memories Age the Same: Autodiscovery of Adaptive Decay in Knowledge Graphs",
+            "abstract": "Knowledge graphs used for retrieval treat all facts as equally current. Existing temporal approaches apply uniform decay, using a single forgetting curve regardless of knowledge type. We show this is fundamentally misspecified: different knowledge types exhibit different temporal dynamics, and the core retrieval problem is not latency or throughput but identifying what is important at query time.   We propose a hierarchical framework that replaces uniform decay with a continuous decay surface parameterized by two orthogonal signals: velocity (how frequently a concept is observed) and volatility (how much the value changes between observations, measured via embedding distance). The decay surface is decomposed into three learnable levels: domain-level parameters capture universal patterns (some predicates are inherently permanent, others inherently transient), context-level parameters capture setting-dependent variation, and entity-level adaptation personalizes decay to specific subjects. All parameters emerge from data through survival analysis on observed value lifetimes, requiring no predefined taxonomies or domain expertise.   We formulate edge lifetime as a survival problem where the event is value supersession (a meaningfully different value replacing the current one), distinct from mere re-observation. Experiments on synthetic temporal knowledge graphs demonstrate recovery of planted hierarchical parameters (HDBSCAN ARI = 1.0).   Validation on 107 Wikipedia articles and 1,163 patient records from the Synthea clinical EHR simulator shows that velocity-volatility clusters emerge naturally, align with observable persistence patterns, and near-universally exhibit the Lindy effect (Weibull shape k < 1). Uniform decay performs 18x worse than no temporal weighting. Heterogeneous decay recovers from this, with each hierarchy level contributing measurable improvement.",
+            "arxiv_id": "2604.26970",
+            "PRIMARY_TOPIC_LABEL": "Memory Structures and Agent Memory Systems",
+            "MATCHED_TOPIC_LABELS": [
+                "Memory Structures and Agent Memory Systems"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [],
+            "HOTSPOT_PAPER_PRIMARY_KIND": null,
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+        },
+        "2604.28138": {
+            "ARXIVID": "2604.28138",
+            "COMMENT": "Semantics-aware checkpoint/restore bridges agent-turn semantics and OS state to exploit sparse recovery-relevant state changes.",
+            "RELEVANCE": 8,
+            "NOVELTY": 8,
+            "PRIMARY_TOPIC_ID": "efficiency_scaling",
+            "MATCHED_TOPIC_IDS": [
+                "efficiency_scaling",
+                "memory_systems"
+            ],
+            "TOPIC_MATCH_COMMENT": "Primary fit is efficiency and large-scale systems because the paper's main idea is a runtime design that materially reduces checkpoint traffic and recovery overhead for agent sandboxes.",
+            "HOTSPOT_PAPER_TAGS": [],
+            "HOTSPOT_PAPER_COMMENT": "",
+            "SCORE": 16,
+            "authors": [
+                "Tianyuan Wu",
+                "Chaokun Chang",
+                "Lunxi Cao",
+                "Wei Gao",
+                "Wei Wang"
+            ],
+            "title": "Crab: A Semantics-Aware Checkpoint/Restore Runtime for Agent Sandboxes",
+            "abstract": "Autonomous agents act through sandboxed containers and microVMs whose state spans filesystems, processes, and runtime artifacts. Checkpoint and restore (C/R) of this state is needed for fault tolerance, spot execution, RL rollout branching, and safe rollback-yet existing approaches fall into two extremes: application-level recovery preserves chat history but misses OS-side effects, while full per-turn checkpointing is correct but too expensive under dense co-location. The root cause is an agent-OS semantic gap: agent frameworks see tool calls but not their OS effects; the OS sees state changes but lacks turn-level context to judge recovery relevance. This gap hides massive sparsity: over 75% of agent turns produce no recovery-relevant state, so most checkpoints are unnecessary. Crab (Checkpoint-and-Restore for Agent SandBoxes) is a transparent host-side runtime that bridges this gap without modifying agents or C/R backends. An eBPF-based inspector classifies each turn's OS-visible effects to decide checkpoint granularity; a coordinator aligns checkpoints with turn boundaries and overlaps C/R with LLM wait time; and a host-scoped engine schedules checkpoint traffic across co-located sandboxes. On shell-intensive and code-repair workloads, Crab raises recovery correctness from 8% (chat-only) to 100%, cuts checkpoint traffic by up to 87%, and stays within 1.9% of fault-free execution time.",
+            "arxiv_id": "2604.28138",
+            "PRIMARY_TOPIC_LABEL": "Efficiency, Compression, and Large-Scale Training",
+            "MATCHED_TOPIC_LABELS": [
+                "Efficiency, Compression, and Large-Scale Training",
+                "Memory Structures and Agent Memory Systems"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [],
+            "HOTSPOT_PAPER_PRIMARY_KIND": null,
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+        },
+        "2604.28020": {
+            "ARXIVID": "2604.28020",
+            "COMMENT": "Formulates learning with unequal sample costs and gives cost-aware SGD/GRPO with theory and token-cost savings.",
+            "RELEVANCE": 8,
+            "NOVELTY": 8,
+            "PRIMARY_TOPIC_ID": "efficiency_scaling",
+            "MATCHED_TOPIC_IDS": [
+                "efficiency_scaling"
+            ],
+            "TOPIC_MATCH_COMMENT": "The paper is centrally about optimization under compute cost constraints, with algorithmic and theoretical implications for large-model training.",
+            "HOTSPOT_PAPER_TAGS": [],
+            "HOTSPOT_PAPER_COMMENT": "",
+            "SCORE": 16,
+            "authors": [
+                "Clara Mohri",
+                "Amir Globerson",
+                "Haim Kaplan",
+                "Tomer Koren",
+                "Yishay Mansour"
+            ],
+            "title": "Cost-Aware Learning",
+            "abstract": "We consider the problem of Cost-Aware Learning, where sampling different component functions of a finite-sum objective incurs different costs. The objective is to reach a target error while minimizing the total cost. First, we propose the Cost-Aware Stochastic Gradient Descent algorithm for convex functions, and derive its cost complexity to attain an error of $\\epsilon$. Furthermore, we establish a lower bound for this setting and provide a subset selection algorithm to further reduce the cost of training. We apply our theoretical insights to reinforcement learning with language models, where the computational cost of policy gradients varies with sequence length. To this end, we introduce Cost-Aware GRPO, an algorithm designed to reduce the cost of policy optimization while preserving performance. Empirical results on 1.5B and 8B LLMs demonstrate that our approach reduces the tokens used in policy optimization by up to about 30% while matching or exceeding baseline accuracy.",
+            "arxiv_id": "2604.28020",
+            "PRIMARY_TOPIC_LABEL": "Efficiency, Compression, and Large-Scale Training",
+            "MATCHED_TOPIC_LABELS": [
+                "Efficiency, Compression, and Large-Scale Training"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [],
+            "HOTSPOT_PAPER_PRIMARY_KIND": null,
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+        },
+        "2604.27998": {
+            "ARXIVID": "2604.27998",
+            "COMMENT": "Analyzes why GRPO becomes unstable in latent reasoning and proposes mechanisms to constrain exploration to valid latent manifolds.",
+            "RELEVANCE": 8,
+            "NOVELTY": 8,
+            "PRIMARY_TOPIC_ID": "architecture_training",
+            "MATCHED_TOPIC_IDS": [
+                "architecture_training"
+            ],
+            "TOPIC_MATCH_COMMENT": "The central issue is training dynamics in latent-space reasoning systems, especially stability and optimization behavior under RL.",
+            "HOTSPOT_PAPER_TAGS": [
+                "daily_hot"
+            ],
+            "HOTSPOT_PAPER_COMMENT": "Latent reasoning plus RL stabilization is likely to attract broad frontier attention even though the contribution is also mechanistic.",
+            "SCORE": 16,
+            "authors": [
+                "Jingcheng Deng",
+                "Zihao Wei",
+                "Liang Pang",
+                "Junhong Wu",
+                "Shicheng Xu",
+                "Zenghao Duan",
+                "Huawei Shen"
+            ],
+            "title": "Latent-GRPO: Group Relative Policy Optimization for Latent Reasoning",
+            "abstract": "Latent reasoning offers a more efficient alternative to explicit reasoning by compressing intermediate reasoning into continuous representations and substantially shortening reasoning chains. However, existing latent reasoning methods mainly focus on supervised learning, and reinforcement learning in latent space remains highly unstable. We study this problem through the lens of Group Relative Policy Optimization (GRPO), and show that directly adapting GRPO to latent reasoning is fundamentally non-trivial: latent reasoning changes both the probability density and the sampling mechanism, causing three coupled bottlenecks: absence of intrinsic latent manifolds, where unconstrained exploration pushes rollouts off the valid latent manifold; exploration-optimization misalignment, where trajectory-level rewards can induce incorrect token-level updates; and latent mixture non-closure, where jointly reinforcing multiple correct latent paths can produce an invalid averaged state. To address them, we propose \\textbf{Latent-GRPO}, which combines invalid-sample advantage masking, one-sided noise sampling, and optimal correct-path first-token selection. Across four low-difficulty benchmarks (e.g., GSM8K-Aug) and four high-difficulty benchmarks (e.g., AIME), Latent-GRPO improves over its latent initialization by 7.86 Pass@1 points on low-difficulty tasks and surpasses explicit GRPO by 4.27 points on high-difficulty tasks while using 3--4$\\times$ shorter reasoning chains. It also achieves stronger pass@$k$ performance under Gumbel sampling. These results establish Latent-GRPO as an effective approach for stable and efficient latent reasoning.",
+            "arxiv_id": "2604.27998",
+            "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+            "MATCHED_TOPIC_LABELS": [
+                "Architecture and Training Dynamics"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [
+                "Daily Hot Papers"
+            ],
+            "HOTSPOT_PAPER_PRIMARY_KIND": "daily_hot",
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "Daily Hot Papers",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "llm_exact"
+        },
+        "2604.27372": {
+            "ARXIVID": "2604.27372",
+            "COMMENT": "Builds continuous-time q-learning foundations for entropy-regularized mean-field control with common noise.",
+            "RELEVANCE": 8,
+            "NOVELTY": 8,
+            "PRIMARY_TOPIC_ID": "world_models_open_ended_rl",
+            "MATCHED_TOPIC_IDS": [
+                "world_models_open_ended_rl"
+            ],
+            "TOPIC_MATCH_COMMENT": "Best fit is world_models_open_ended_rl because it develops foundational RL theory for continuous-time control and policy iteration rather than LLM post-training.",
+            "HOTSPOT_PAPER_TAGS": [],
+            "HOTSPOT_PAPER_COMMENT": "",
+            "SCORE": 16,
+            "authors": [
+                "Zhenjie Ren",
+                "Xiaoli Wei",
+                "Xiang Yu",
+                "Xun Yu Zhou"
+            ],
+            "title": "Continuous-time q-learning for mean-field control with common noise, part-I: Theoretical foundations",
+            "abstract": "This paper investigates the continuous-time counterpart of the Q-function for entropy-regularized mean-field control (MFC) with controlled common noise, coined as q-function by Jia and Zhou (2023) in the single agent's model. We first show that, under discretely sampled actions, the value function in the exploratory formulation converges to the one in the relaxed control formulation as the time grid refines. Leveraging the relaxed control formulation, we derive the exploratory Hamilton-Jacobi-Bellman (HJB) equation, in which the controlled common noise gives rise to an additional nonlinear functional of policy, rendering the policy iteration intricate. Under certain concavity condition, we establish the existence and uniqueness of the optimal one-step policy iteration via a first-order condition using the partial linear functional derivative with respect to policy. The policy improvement at each iteration is verified by relating to an entropy-regularized optimization problem over the space of policies. In the mean-field setting, we introduce the integrated q-function (Iq-function) defined on the state distribution and the policy, and it is shown that an optimal policy is identified as a two-layer fixed point to the argmax operator of the Iq-function. Finally, we provide the explicit characterization of an optimal policy as a Gaussian distribution in the general linear-quadratic (LQ) setting.",
+            "arxiv_id": "2604.27372",
+            "PRIMARY_TOPIC_LABEL": "World Models, Exploration, and Open-Ended Reinforcement Learning",
+            "MATCHED_TOPIC_LABELS": [
+                "World Models, Exploration, and Open-Ended Reinforcement Learning"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [],
+            "HOTSPOT_PAPER_PRIMARY_KIND": null,
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+        }
+    },
+    "topic_sections": [
+        {
+            "topic_id": "architecture_training",
+            "topic_label": "Architecture and Training Dynamics",
+            "paper_ids": [
+                "2604.27124",
+                "2604.27031",
+                "2604.27883",
+                "2604.27998"
+            ]
+        },
+        {
+            "topic_id": "efficiency_scaling",
+            "topic_label": "Efficiency, Compression, and Large-Scale Training",
+            "paper_ids": [
+                "2604.27089",
+                "2604.27308",
+                "2604.27155",
+                "2604.28138",
+                "2604.28020"
+            ]
+        },
+        {
+            "topic_id": "representation_structure",
+            "topic_label": "Representation Learning Theory and Structure",
+            "paper_ids": [
+                "2604.27167"
+            ]
+        },
+        {
+            "topic_id": "memory_systems",
+            "topic_label": "Memory Structures and Agent Memory Systems",
+            "paper_ids": [
+                "2604.26970"
+            ]
+        },
+        {
+            "topic_id": "world_models_open_ended_rl",
+            "topic_label": "World Models, Exploration, and Open-Ended Reinforcement Learning",
+            "paper_ids": [
+                "2604.28144",
+                "2604.27372"
+            ]
+        }
+    ]
+}

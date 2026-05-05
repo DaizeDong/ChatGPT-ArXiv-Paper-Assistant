@@ -1,0 +1,1219 @@
+{
+    "2605.01199": {
+        "ARXIVID": "2605.01199",
+        "COMMENT": "Provides gradient-flow theory for a recurrent focus-dilution cycle in attention learning during Transformer training.",
+        "RELEVANCE": 9,
+        "NOVELTY": 8,
+        "PRIMARY_TOPIC_ID": "architecture_training",
+        "MATCHED_TOPIC_IDS": [
+            "architecture_training"
+        ],
+        "TOPIC_MATCH_COMMENT": "The paper is squarely about training dynamics of attention as a core architectural mechanism, with theory plus empirical validation.",
+        "HOTSPOT_PAPER_TAGS": [
+            "daily_hot"
+        ],
+        "HOTSPOT_PAPER_COMMENT": "Broadly important today: Provides gradient-flow theory for a recurrent focus-dilution cycle in attention learning during Transformer training.",
+        "SCORE": 17,
+        "authors": [
+            "Zheng-An Chen",
+            "Pengxiao Lin",
+            "Zhi-Qin John Xu",
+            "Tao Luo"
+        ],
+        "title": "Focus and Dilution: The Multi-stage Learning Process of Attention",
+        "abstract": "Transformer-based models have achieved remarkable success across a wide range of domains, yet our understanding of their training dynamics remains limited. In this work, we identify a recurrent focus-dilution cycle in attention learning and provide a rigorous explanation in a one-layer Transformer setting for Markovian data via gradient-flow analysis. Using stage-wise linearization around critical points, we show that a single focus-dilution cycle can be decomposed into a sequence of distinct stages. First, embedding and projection rapidly condense to a rank-one structure, while attention parameters remain effectively frozen. Then, the attention parameters begin to increase, inducing a frequency-driven focus toward high-frequency tokens. As attention continues to evolve, it generates next-order perturbations in embeddings, leading to a mass-redistribution mechanism that progressively dilutes this focus. Finally, small asymmetries among low-frequency tokens lift a degenerate critical point, opening new embedding directions and initiating the next cycle. Experiments on synthetic Markovian data as well as WikiText and TinyStories corroborate the predicted stages and cyclical dynamics.",
+        "arxiv_id": "2605.01199",
+        "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+        "MATCHED_TOPIC_LABELS": [
+            "Architecture and Training Dynamics"
+        ],
+        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+        "HOTSPOT_PAPER_LABELS": [
+            "Daily Hot Papers"
+        ],
+        "HOTSPOT_PAPER_PRIMARY_KIND": "daily_hot",
+        "HOTSPOT_PAPER_PRIMARY_LABEL": "Daily Hot Papers",
+        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "heuristic"
+    },
+    "2605.00422": {
+        "ARXIVID": "2605.00422",
+        "COMMENT": "Introduces post-training binarized-weight, low-bit-activation quantization with mechanisms to suppress activation heavy tails.",
+        "RELEVANCE": 9,
+        "NOVELTY": 8,
+        "PRIMARY_TOPIC_ID": "efficiency_scaling",
+        "MATCHED_TOPIC_IDS": [
+            "efficiency_scaling"
+        ],
+        "TOPIC_MATCH_COMMENT": "This is directly about a new quantization method that materially changes compression and inference cost for large models.",
+        "HOTSPOT_PAPER_TAGS": [
+            "daily_hot"
+        ],
+        "HOTSPOT_PAPER_COMMENT": "Aggressive W1A-lowbit PTQ for LLMs is both frontier-relevant and likely to attract broad daily attention.",
+        "SCORE": 17,
+        "authors": [
+            "Zhixiong Zhao",
+            "Zukang Xu",
+            "Dawei Yang"
+        ],
+        "title": "BWLA: Breaking the Barrier of W1AX Post-Training Quantization for LLMs",
+        "abstract": "Large language models (LLMs) have driven major progress in NLP, yet their substantial memory and compute demands still hinder practical deployment. Binarization can compress weights to 1 bit, fundamentally lowering compute and bandwidth cost. However, existing methods cannot address activation heavy tails and thus must keep activations in high precision, preventing true end-to-end acceleration. To overcome this limitation, we propose BWLA (Binarized Weights and Low-bit Activations), the first post-training quantization framework that preserves high accuracy while achieving 1-bit weight quantization together with low-bit activations (e.g., 6 bits). The Orthogonal-Kronecker Transformation (OKT) learns an orthogonal mapping via EM minimization, converting unimodal weights into symmetric bimodal forms while suppressing activation tails and incoherence. The Proximal SVD Projection (PSP) then performs lightweight low-rank refinement through proximal SVD projection, further enhancing quantizability with minimal overhead. On Qwen3-32B, BWLA reaches a Wikitext2 perplexity of 11.92 under 6-bit activations (vs. 38 from SOTA), improves five zero-shot tasks by more than 70%, and delivers 3.26 times inference speedup, demonstrating strong potential for real-world LLM compression and acceleration.",
+        "arxiv_id": "2605.00422",
+        "PRIMARY_TOPIC_LABEL": "Efficiency, Compression, and Large-Scale Training",
+        "MATCHED_TOPIC_LABELS": [
+            "Efficiency, Compression, and Large-Scale Training"
+        ],
+        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+        "HOTSPOT_PAPER_LABELS": [
+            "Daily Hot Papers"
+        ],
+        "HOTSPOT_PAPER_PRIMARY_KIND": "daily_hot",
+        "HOTSPOT_PAPER_PRIMARY_LABEL": "Daily Hot Papers",
+        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "llm_exact"
+    },
+    "2605.02144": {
+        "ARXIVID": "2605.02144",
+        "COMMENT": "Replaces learned Q/K/V projections with Gaussian kernel attention, yielding a minimal alternative attention mechanism.",
+        "RELEVANCE": 9,
+        "NOVELTY": 8,
+        "PRIMARY_TOPIC_ID": "architecture_training",
+        "MATCHED_TOPIC_IDS": [
+            "architecture_training",
+            "efficiency_scaling"
+        ],
+        "TOPIC_MATCH_COMMENT": "The core contribution is a new attention mechanism and architectural simplification, making architecture the clearest primary fit.",
+        "HOTSPOT_PAPER_TAGS": [
+            "new_frontier"
+        ],
+        "HOTSPOT_PAPER_COMMENT": "Projection-free kernel attention is a notably different Transformer design direction, even if early-scale results are mixed.",
+        "SCORE": 17,
+        "authors": [
+            "Debarshi Kundu",
+            "Archisman Ghosh",
+            "Swaroop Ghosh",
+            "Vasant Honavar"
+        ],
+        "title": "Projection-Free Transformers via Gaussian Kernel Attention",
+        "abstract": "Self-attention in Transformers is typically implemented as $\\mathrm{softmax}(QK^\\top/\\sqrt{d})V$, where $Q=XW_Q$, $K=XW_K$, and $V=XW_V$ are learned linear projections of the input $X$. We ask whether these learned projections are necessary, or whether they can be replaced by a simpler similarity-based diffusion operator. We introduce \\textbf{Gaussian Kernel Attention} (GKA), a drop-in replacement for dot-product attention that computes token affinities directly using a Gaussian radial basis function (RBF) kernel applied to per-head token features. Each head learns only a bandwidth parameter $\\sigma_h$, while a single output projection $W_O$ preserves compatibility with the standard Transformer interface. GKA can be interpreted as normalized kernel regression over tokens, linking modern Transformer architectures to classical non-local filtering and kernel smoothing methods. We evaluate GKA in both vision and language modeling settings. For autoregressive language modeling within the \\texttt{nanochat} framework, we implement causal masking and sliding-window constraints by masking and renormalizing the Gaussian kernel. At depth 20, a GKA model with $0.42\\times$ the parameters and $0.49\\times$ the total training FLOPs of a standard attention baseline trains stably, exhibits a near-zero train-validation gap, and demonstrates competitive behavior on standard benchmarks, albeit with higher bits-per-byte (BPB) at this compute scale. Overall, GKA provides a minimal, interpretable attention mechanism with an explicit locality scale, offering a dimension in the accuracy-efficiency trade-off for Transformer design.",
+        "arxiv_id": "2605.02144",
+        "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+        "MATCHED_TOPIC_LABELS": [
+            "Architecture and Training Dynamics",
+            "Efficiency, Compression, and Large-Scale Training"
+        ],
+        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+        "HOTSPOT_PAPER_LABELS": [
+            "New Frontier Papers"
+        ],
+        "HOTSPOT_PAPER_PRIMARY_KIND": "new_frontier",
+        "HOTSPOT_PAPER_PRIMARY_LABEL": "New Frontier Papers",
+        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "llm_exact"
+    },
+    "2605.02043": {
+        "ARXIVID": "2605.02043",
+        "COMMENT": "Establishes optimal asynchronous SGD rates under data-dependent delays using momentum to preserve delayed-gradient information.",
+        "RELEVANCE": 9,
+        "NOVELTY": 8,
+        "PRIMARY_TOPIC_ID": "efficiency_scaling",
+        "MATCHED_TOPIC_IDS": [
+            "architecture_training",
+            "efficiency_scaling"
+        ],
+        "TOPIC_MATCH_COMMENT": "This is a strong large-scale training algorithms paper about asynchronous optimization under realistic distributed delays.",
+        "HOTSPOT_PAPER_TAGS": [
+            "daily_hot"
+        ],
+        "HOTSPOT_PAPER_COMMENT": "Broadly important today: Establishes optimal asynchronous SGD rates under data-dependent delays using momentum to preserve delayed-gradient information.",
+        "SCORE": 17,
+        "authors": [
+            "Tehila Dahan",
+            "Roie Reshef",
+            "Sharon Goldstein",
+            "Kfir Y. Levy"
+        ],
+        "title": "Bringing Order to Asynchronous SGD: Towards Optimality under Data-Dependent Delays with Momentum",
+        "abstract": "Asynchronous stochastic gradient descent (SGD) enables scalable distributed training but suffers from gradient staleness. Existing mitigation strategies, such as delay-adaptive learning rates and staleness-aware filtering, typically attenuate or discard delayed gradients, introducing systematic bias: updates from simpler or faster-to-process samples are overrepresented, while gradients from more complex samples are delayed or suppressed. In contrast, prior approaches to data-dependent delays rely on a Lipschitz assumption that yields suboptimal rates or leave the smooth, convex case unaddressed. We propose a momentum-based asynchronous framework designed to preserve information from delayed gradients while mitigating the effects of staleness. We establish the first optimal convergence rates for data-dependent delays in both convex and non-convex smooth setups, providing a new result for asynchronous optimization under standard assumptions. Additionally, we derive robust learning-rate schedules that simplify hyperparameter tuning in practice.",
+        "arxiv_id": "2605.02043",
+        "PRIMARY_TOPIC_LABEL": "Efficiency, Compression, and Large-Scale Training",
+        "MATCHED_TOPIC_LABELS": [
+            "Architecture and Training Dynamics",
+            "Efficiency, Compression, and Large-Scale Training"
+        ],
+        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+        "HOTSPOT_PAPER_LABELS": [
+            "Daily Hot Papers"
+        ],
+        "HOTSPOT_PAPER_PRIMARY_KIND": "daily_hot",
+        "HOTSPOT_PAPER_PRIMARY_LABEL": "Daily Hot Papers",
+        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "heuristic"
+    },
+    "2605.02124": {
+        "ARXIVID": "2605.02124",
+        "COMMENT": "Analyzes the soft-to-hard routing limit in MoE through boundary-mass geometry near routing ties.",
+        "RELEVANCE": 9,
+        "NOVELTY": 8,
+        "PRIMARY_TOPIC_ID": "architecture_training",
+        "MATCHED_TOPIC_IDS": [
+            "architecture_training"
+        ],
+        "TOPIC_MATCH_COMMENT": "The paper is tightly focused on a core MoE routing mechanism and its optimization geometry, a direct architecture topic.",
+        "HOTSPOT_PAPER_TAGS": [
+            "daily_hot"
+        ],
+        "HOTSPOT_PAPER_COMMENT": "Broadly important today: Analyzes the soft-to-hard routing limit in MoE through boundary-mass geometry near routing ties.",
+        "SCORE": 17,
+        "authors": [
+            "Reza Rastegar"
+        ],
+        "title": "Boundary Mass and the Soft-to-Hard Limit in Mixture-of-Experts",
+        "abstract": "Softmax-routed mixture-of-experts models approach hard routing as the temperature tends to zero, but this limit is singular near routing ties. This paper studies that singularity at the population level for squared-loss MoE regression. The central object is the \\emph{boundary mass}, namely the probability that the top two router scores are separated by only a small margin. Under smoothness and transversality assumptions on the router and input law, we prove coarea/tube estimates showing that this mass is linear in the slab width, with leading constant given by a surface integral over the routing interface in the binary case. These estimates yield quantitative soft-to-hard risk bounds and, under compactness and uniform margin control, $\\Gamma$-convergence of the soft objectives to the hard-routing objective. The main conclusion is that the zero-temperature limit is controlled by a thin geometric layer around routing interfaces, not by the full input space. We then use this geometric core in two more model-dependent directions. In a teacher--student setting, we prove a conditional landscape-transfer principle showing that, when the profiled hard-routing problem has favorable identifiability and curvature and the relevant derivatives transfer at boundary-layer scale, small-temperature soft routing inherits approximate teacher recovery and strict-saddle behavior away from teacher-equivalent partitions. We also give a reduced two-expert Gaussian calculation that illustrates a local symmetry-breaking mechanism aligned with the teacher separator.",
+        "arxiv_id": "2605.02124",
+        "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+        "MATCHED_TOPIC_LABELS": [
+            "Architecture and Training Dynamics"
+        ],
+        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+        "HOTSPOT_PAPER_LABELS": [
+            "Daily Hot Papers"
+        ],
+        "HOTSPOT_PAPER_PRIMARY_KIND": "daily_hot",
+        "HOTSPOT_PAPER_PRIMARY_LABEL": "Daily Hot Papers",
+        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "heuristic"
+    },
+    "2605.02317": {
+        "ARXIVID": "2605.02317",
+        "COMMENT": "Optimizer with continuously tunable adaptivity and a new convergence mechanism bridging and extrapolating beyond SGD and Adam.",
+        "RELEVANCE": 9,
+        "NOVELTY": 8,
+        "PRIMARY_TOPIC_ID": "architecture_training",
+        "MATCHED_TOPIC_IDS": [
+            "architecture_training",
+            "efficiency_scaling"
+        ],
+        "TOPIC_MATCH_COMMENT": "Primary fit is architecture/training dynamics because the paper studies core optimizer design and convergence behavior, directly targeting training dynamics rather than deployment efficiency.",
+        "HOTSPOT_PAPER_TAGS": [
+            "daily_hot"
+        ],
+        "HOTSPOT_PAPER_COMMENT": "Broadly important today: Optimizer with continuously tunable adaptivity and a new convergence mechanism bridging and extrapolating beyond SGD and Adam.",
+        "SCORE": 17,
+        "authors": [
+            "Yiheng Zhang",
+            "Kaiyan Zhao",
+            "Shaowu Wu",
+            "Yiming Wang",
+            "Jiajun Wu",
+            "Leong Hou U",
+            "Steve Drew",
+            "Xiaoguang Niu"
+        ],
+        "title": "Anon: Extrapolating Optimizer Adaptivity Across the Real Spectrum",
+        "abstract": "Adaptive optimizers such as Adam have achieved great success in training large-scale models like large language models and diffusion models. However, they often generalize worse than non-adaptive methods, such as SGD on classical architectures like CNNs. We identify a key cause of this performance gap: adaptivity in pre-conditioners, which limits the optimizer's ability to adapt to diverse optimization landscapes. To address this, we propose Anon (Adaptivity Non-restricted Optimizer with Novel convergence technique), a novel optimizer with continuously tunable adaptivity in R, allowing it to interpolate between SGD-like and Adam-like behaviors and even extrapolate beyond both. To ensure convergence across the entire adaptivity spectrum, we introduce incremental delay update (IDU), a novel mechanism that is more flexible than AMSGrad's hard max-tracking strategy and enhances robustness to gradient noise. We theoretically establish convergence guarantees under both convex and non-convex settings. Empirically, Anon consistently outperforms state-of-the-art optimizers on representative image classification, diffusion, and language modeling tasks. These results demonstrate that adaptivity can serve as a valuable tunable design principle, and Anon provides the first unified and reliable framework capable of bridging the gap between classical and modern optimizers and surpassing their advantageous properties.",
+        "arxiv_id": "2605.02317",
+        "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+        "MATCHED_TOPIC_LABELS": [
+            "Architecture and Training Dynamics",
+            "Efficiency, Compression, and Large-Scale Training"
+        ],
+        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+        "HOTSPOT_PAPER_LABELS": [
+            "Daily Hot Papers"
+        ],
+        "HOTSPOT_PAPER_PRIMARY_KIND": "daily_hot",
+        "HOTSPOT_PAPER_PRIMARY_LABEL": "Daily Hot Papers",
+        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "heuristic"
+    },
+    "2605.01609": {
+        "ARXIVID": "2605.01609",
+        "COMMENT": "Finds a dual geometry where semantic directions lie in low-variance spectral tails while syntax concentrates in high-variance subspaces.",
+        "RELEVANCE": 9,
+        "NOVELTY": 8,
+        "PRIMARY_TOPIC_ID": "representation_structure",
+        "MATCHED_TOPIC_IDS": [
+            "representation_structure"
+        ],
+        "TOPIC_MATCH_COMMENT": "Primary fit is representation structure because the paper provides mechanistic spectral evidence about how concepts and syntax are organized inside transformer representations.",
+        "HOTSPOT_PAPER_TAGS": [
+            "daily_hot"
+        ],
+        "HOTSPOT_PAPER_COMMENT": "Broadly important today: Finds a dual geometry where semantic directions lie in low-variance spectral tails while syntax concentrates in high-variance subspaces.",
+        "SCORE": 17,
+        "authors": [
+            "Pratyush Acharya",
+            "Nuraj Rimal",
+            "Habish Dhakal"
+        ],
+        "title": "Concepts Whisper While Syntax Shouts: Spectral Anti-Concentration and the Dual Geometry of Transformer Representations",
+        "abstract": "We test whether the causal inner product of \\citet{park2024linear} -- defined by the unembedding covariance $\\Sigma$ -- enables cross-lingual concept transport. Across 17 models and 4 language pairs, a matched-spectrum randomization test finds that Whitened Causal Alignment is indistinguishable from spectral regularization alone ($p = 0.95$). However, this failure reveals a broader phenomenon: anti-concentration is observed in residual-stream difference-of-means vectors across five architecture families ($p < 10^{-33}$) and supported by SAE features (e.g., $p = 4.5 \\times 10^{-19}$) and linear probes on Gemma and Llama. We discover a \\emph{dual geometry}: activation-space concept directions anti-concentrate in the spectral tail, while static unembedding-row contrasts \\emph{concentrate} in high-variance directions ($p < 10^{-4}$). Split-injection causal interventions support the functional basis on Gemma and Llama (Cohen's $d$ up to $1.80$), and POS-tag probing across 8 models shows syntax preferentially encodes in the high-variance subspace in 6 of 8 architectures ($p < 0.013$), with the Qwen~2.5 family showing a significant reversal consistent with architecture-specific spectral structure. These results suggest transformers may rotate semantic content into spectrally quiet regions during contextualized processing, encoding concepts where they can be manipulated with reduced grammatical disruption.",
+        "arxiv_id": "2605.01609",
+        "PRIMARY_TOPIC_LABEL": "Representation Learning Theory and Structure",
+        "MATCHED_TOPIC_LABELS": [
+            "Representation Learning Theory and Structure"
+        ],
+        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+        "HOTSPOT_PAPER_LABELS": [
+            "Daily Hot Papers"
+        ],
+        "HOTSPOT_PAPER_PRIMARY_KIND": "daily_hot",
+        "HOTSPOT_PAPER_PRIMARY_LABEL": "Daily Hot Papers",
+        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "heuristic"
+    },
+    "2605.02105": {
+        "ARXIVID": "2605.02105",
+        "COMMENT": "Shows flatter pretraining minima from SAM or related interventions substantially reduce catastrophic forgetting after post-training and quantization.",
+        "RELEVANCE": 9,
+        "NOVELTY": 8,
+        "PRIMARY_TOPIC_ID": "architecture_training",
+        "MATCHED_TOPIC_IDS": [
+            "architecture_training",
+            "efficiency_scaling"
+        ],
+        "TOPIC_MATCH_COMMENT": "This is directly about training dynamics and model geometry during pretraining, with strong implications for downstream stability under later updates.",
+        "HOTSPOT_PAPER_TAGS": [
+            "daily_hot"
+        ],
+        "HOTSPOT_PAPER_COMMENT": "Broadly important today: Shows flatter pretraining minima from SAM or related interventions substantially reduce catastrophic forgetting after post-training and quantization.",
+        "SCORE": 17,
+        "authors": [
+            "Ishaan Watts",
+            "Catherine Li",
+            "Sachin Goyal",
+            "Jacob Mitchell Springer",
+            "Aditi Raghunathan"
+        ],
+        "title": "Sharpness-Aware Pretraining Mitigates Catastrophic Forgetting",
+        "abstract": "Pretraining optimizers are tuned to produce the strongest possible base model, on the assumption that a stronger starting point yields a stronger model after subsequent changes like post-training and quantization. This overlooks the geometry of the base model which controls how much of the base model's capabilities survive subsequent parameter updates. We study three pretraining optimization approaches that bias optimization toward flatter minima: Sharpness-Aware Minimization (SAM), large learning rates, and shortened learning rate annealing periods. Across model sizes ranging from 20M to 150M parameters, we find that these interventions consistently improve downstream performance after post-training on five common datasets with up to 80% less forgetting. These principles hold at scale: a short SAM mid-training phase applied to an existing OLMo-2-1B checkpoint reduces forgetting by 31% after MetaMath post-training and by 40% after 4-bit quantization.",
+        "arxiv_id": "2605.02105",
+        "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+        "MATCHED_TOPIC_LABELS": [
+            "Architecture and Training Dynamics",
+            "Efficiency, Compression, and Large-Scale Training"
+        ],
+        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+        "HOTSPOT_PAPER_LABELS": [
+            "Daily Hot Papers"
+        ],
+        "HOTSPOT_PAPER_PRIMARY_KIND": "daily_hot",
+        "HOTSPOT_PAPER_PRIMARY_LABEL": "Daily Hot Papers",
+        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "heuristic"
+    },
+    "2605.01107": {
+        "ARXIVID": "2605.01107",
+        "COMMENT": "Operator-theoretic analysis of feedforward representation geometry using diffusion Markov operators and smooth observables tied to training dynamics.",
+        "RELEVANCE": 9,
+        "NOVELTY": 8,
+        "PRIMARY_TOPIC_ID": "representation_structure",
+        "MATCHED_TOPIC_IDS": [
+            "representation_structure"
+        ],
+        "TOPIC_MATCH_COMMENT": "The core contribution is a mechanistic framework for analyzing learned representation geometry and its evolution during training, squarely matching representation structure.",
+        "HOTSPOT_PAPER_TAGS": [
+            "daily_hot"
+        ],
+        "HOTSPOT_PAPER_COMMENT": "Broadly important today: Operator-theoretic analysis of feedforward representation geometry using diffusion Markov operators and smooth observables tied to training dynamics.",
+        "SCORE": 17,
+        "authors": [
+            "Kanishka Reddy"
+        ],
+        "title": "Diffusion Operator Geometry of Feedforward Representations",
+        "abstract": "Neural networks transform data through learned representations whose geometry affects separation, contraction, and generalization. Recent work studies this geometry using discrete curvature on neighborhood graphs, suggesting Ricci-flow-like behavior across layers. We develop a smooth operator-theoretic alternative for feedforward representation snapshots. Each feature cloud induces a Gaussian-kernel diffusion Markov operator, and transport, spectral, label-boundary, and local-scale observables are derived from this single object via Bakry-Emery $\\Gamma$-calculus. In a balanced Gaussian class-conditional snapshot model with shared covariance, the population operator has closed-form class affinities, leakage, and coarse spectra, all controlled by pairwise regularized Mahalanobis separations $c_\\varepsilon^{(a,b)}$. We also prove that the resulting operator observables vary smoothly under feature perturbations, while hard neighborhood-graph diagnostics can change discontinuously. Synthetic experiments validate the closed-form Gaussian bridge, while learned MNIST experiments show that the same operator observables track training, width, and perturbation stability. Together, these results give a stable operator-geometric framework for analyzing feedforward representation geometry.",
+        "arxiv_id": "2605.01107",
+        "PRIMARY_TOPIC_LABEL": "Representation Learning Theory and Structure",
+        "MATCHED_TOPIC_LABELS": [
+            "Representation Learning Theory and Structure"
+        ],
+        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+        "HOTSPOT_PAPER_LABELS": [
+            "Daily Hot Papers"
+        ],
+        "HOTSPOT_PAPER_PRIMARY_KIND": "daily_hot",
+        "HOTSPOT_PAPER_PRIMARY_LABEL": "Daily Hot Papers",
+        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "heuristic"
+    },
+    "2605.00292": {
+        "ARXIVID": "2605.00292",
+        "COMMENT": "Replaces attention with causal FFT-based spectral mixing for autoregressive long-sequence modeling.",
+        "RELEVANCE": 9,
+        "NOVELTY": 8,
+        "PRIMARY_TOPIC_ID": "architecture_training",
+        "MATCHED_TOPIC_IDS": [
+            "architecture_training",
+            "efficiency_scaling"
+        ],
+        "TOPIC_MATCH_COMMENT": "This is primarily a new core sequence architecture and causal computation mechanism rather than an application or benchmark paper.",
+        "HOTSPOT_PAPER_TAGS": [
+            "daily_hot"
+        ],
+        "HOTSPOT_PAPER_COMMENT": "Broadly important today: Replaces attention with causal FFT-based spectral mixing for autoregressive long-sequence modeling.",
+        "SCORE": 17,
+        "authors": [
+            "Bingzheng Gan",
+            "Tianyi Zhang",
+            "Yusu Li",
+            "Jing Huang",
+            "Wei Shi",
+            "Yangkai Ding",
+            "Tao Yu"
+        ],
+        "title": "Caracal: Causal Architecture via Spectral Mixing",
+        "abstract": "The scalability of Large Language Models to long sequences is hindered by the quadratic cost of attention and the limitations of positional encodings. To address these, we introduce Caracal, a novel architecture that replaces attention with a parameter-efficient, $\\mathcal{O}(L \\log L)$ Multi-Head Fourier (MHF) module. Our contributions are threefold: (1) We leverage the Fast Fourier Transform (FFT) for sequence mixing, inherently addressing both bottlenecks mentioned above. (2) We apply a frequency-domain causal masking technique that enforces autoregressive capabilities via asymmetric padding and truncation, overcoming a critical barrier for Fourier-based generative models. (3) Unlike efficient models relying on hardware-specific implementations (e.g., Mamba), we uses standard library operators. This ensures robust portability, eliminating common deployment barriers. Evaluations demonstrate that Caracal performs competitively with Transformer and SSM baselines, offering a scalable and simple pathway for efficient long-sequence modeling. Code is available in Appendix.",
+        "arxiv_id": "2605.00292",
+        "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+        "MATCHED_TOPIC_LABELS": [
+            "Architecture and Training Dynamics",
+            "Efficiency, Compression, and Large-Scale Training"
+        ],
+        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+        "HOTSPOT_PAPER_LABELS": [
+            "Daily Hot Papers"
+        ],
+        "HOTSPOT_PAPER_PRIMARY_KIND": "daily_hot",
+        "HOTSPOT_PAPER_PRIMARY_LABEL": "Daily Hot Papers",
+        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "heuristic"
+    },
+    "2605.01255": {
+        "ARXIVID": "2605.01255",
+        "COMMENT": "Develops theory and an algorithm for safe activation compression in LLM training, with convergence guarantees for linear operators.",
+        "RELEVANCE": 9,
+        "NOVELTY": 8,
+        "PRIMARY_TOPIC_ID": "efficiency_scaling",
+        "MATCHED_TOPIC_IDS": [
+            "efficiency_scaling"
+        ],
+        "TOPIC_MATCH_COMMENT": "Activation compression for memory-efficient large-model training is exactly within the efficiency and large-scale training topic.",
+        "HOTSPOT_PAPER_TAGS": [
+            "daily_hot"
+        ],
+        "HOTSPOT_PAPER_COMMENT": "Broadly important today: Develops theory and an algorithm for safe activation compression in LLM training, with convergence guarantees for linear operators.",
+        "SCORE": 17,
+        "authors": [
+            "Wen-Da Wei",
+            "Han-Bin Fang",
+            "Yang-Di Liu",
+            "Jiang-Xin Shi",
+            "James Kwok",
+            "Yu-Feng Li"
+        ],
+        "title": "Activation Compression in LLMs: Theoretical Analysis and Efficient Algorithm",
+        "abstract": "Training large language models (LLMs) is highly memory-intensive, as training must store not only weights and optimizer states but also intermediate activations for backpropagation. While existing memory-efficient methods largely focus on gradients and optimizer states, activation compression is less well established due to the lack of LLM-tailored theory and guarantees. In this work, we develop a theoretical framework showing that activation compression is safe for linear operators when activation compression is unbiased, but problematic for nonlinear ones. We further derive gradient variance bound and establish convergence guarantees for applying activation compression to all linear operators under the standard $L$-smoothness assumption, showing that it does not change the convergence rate. Guided by the theory, we propose an activation-gradient co-compression method that reuses low-rank activation factors to compress linear-layer gradients without extra computation or additional gradient error. We conduct extensive experiments on Qwen and LLaMA models using a pretraining benchmark and multiple fine-tuning benchmarks to validate our theory and demonstrate competitive performance of our method in both accuracy and compression efficiency. We provide our code in the supplementary material for reproducibility.",
+        "arxiv_id": "2605.01255",
+        "PRIMARY_TOPIC_LABEL": "Efficiency, Compression, and Large-Scale Training",
+        "MATCHED_TOPIC_LABELS": [
+            "Efficiency, Compression, and Large-Scale Training"
+        ],
+        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+        "HOTSPOT_PAPER_LABELS": [
+            "Daily Hot Papers"
+        ],
+        "HOTSPOT_PAPER_PRIMARY_KIND": "daily_hot",
+        "HOTSPOT_PAPER_PRIMARY_LABEL": "Daily Hot Papers",
+        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "heuristic"
+    },
+    "2605.01058": {
+        "ARXIVID": "2605.01058",
+        "COMMENT": "Shows a training incompatibility between layer-wise distillation and convergence-based early exit, then adds an objective that restores exitability.",
+        "RELEVANCE": 9,
+        "NOVELTY": 8,
+        "PRIMARY_TOPIC_ID": "efficiency_scaling",
+        "MATCHED_TOPIC_IDS": [
+            "architecture_training",
+            "efficiency_scaling"
+        ],
+        "TOPIC_MATCH_COMMENT": "The main point is an efficiency method that materially changes inference cost by modifying pretraining objectives to enable effective early exiting.",
+        "HOTSPOT_PAPER_TAGS": [
+            "daily_hot"
+        ],
+        "HOTSPOT_PAPER_COMMENT": "Broadly important today: Shows a training incompatibility between layer-wise distillation and convergence-based early exit, then adds an objective that restores exitability.",
+        "SCORE": 17,
+        "authors": [
+            "Shashank Kapadia",
+            "Deep Naryan Mishra",
+            "Sujal Reddy Alugubelli",
+            "Haoan Wang",
+            "Saipraveen Vabbilisetty",
+            "Rishi Bhatia",
+            "Anupriya Sharma"
+        ],
+        "title": "LEAP: Layer-wise Exit-Aware Pretraining for Efficient Transformer Inference",
+        "abstract": "Layer-aligned distillation and convergence-based early exit represent two predominant computational efficiency paradigms for transformer inference; yet we establish that they exhibit systematic incompatibility under standard deployment conditions for convergence-based early exit. Distillation objectives that align intermediate student layers to teacher representations suppress the representational convergence that early-exit mechanisms exploit, rendering such mechanisms ineffective on distilled models. We introduce LEAP (Layer-wise Exit-Aware Pretraining), an auxiliary training objective that reconciles this incompatibility. LEAP requires no architectural modifications; it augments standard distillation with a single constraint ensuring intermediate layers approximate final-layer representations. LEAP-MiniLM achieves 1.61$\\times$ measured wall-clock speedup (batch=1, NVIDIA L4) at $\\theta$=0.95, with 91.9% of samples exiting by layer 7 and 1.80$\\times$ theoretical layer reduction, where standard distilled models achieve zero effective speedup. We validate across sentence similarity (STS-B: 0.760 $\\pm$ 0.006) and retrieval benchmarks (BEIR), providing operational guidance including latency measurements, decision thresholds, and deployment criteria.",
+        "arxiv_id": "2605.01058",
+        "PRIMARY_TOPIC_LABEL": "Efficiency, Compression, and Large-Scale Training",
+        "MATCHED_TOPIC_LABELS": [
+            "Architecture and Training Dynamics",
+            "Efficiency, Compression, and Large-Scale Training"
+        ],
+        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+        "HOTSPOT_PAPER_LABELS": [
+            "Daily Hot Papers"
+        ],
+        "HOTSPOT_PAPER_PRIMARY_KIND": "daily_hot",
+        "HOTSPOT_PAPER_PRIMARY_LABEL": "Daily Hot Papers",
+        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "heuristic"
+    },
+    "2605.01897": {
+        "ARXIVID": "2605.01897",
+        "COMMENT": "Provides a spectral-control theory for multi-label neural collapse under label imbalance and correlation, identifying label covariance spectrum as the geometry-controlling quantity.",
+        "RELEVANCE": 9,
+        "NOVELTY": 8,
+        "PRIMARY_TOPIC_ID": "representation_structure",
+        "MATCHED_TOPIC_IDS": [
+            "representation_structure"
+        ],
+        "TOPIC_MATCH_COMMENT": "The core contribution is a theoretical account of how representation geometry forms in multi-label networks, directly matching representation structure and training-endpoint analysis.",
+        "HOTSPOT_PAPER_TAGS": [
+            "daily_hot"
+        ],
+        "HOTSPOT_PAPER_COMMENT": "Broadly important today: Provides a spectral-control theory for multi-label neural collapse under label imbalance and correlation, identifying label covariance spectrum as the geometry-controlling quantity.",
+        "SCORE": 17,
+        "authors": [
+            "Xiaoxuan Ma",
+            "Yixuan Yang",
+            "Song Li",
+            "Xiangyun Hui"
+        ],
+        "title": "How Label Imbalance Shapes Geometry: A General Spectral Analysis of Multi-Label Neural Collapse",
+        "abstract": "This work investigates the phenomenon of Neural Collapse (NC) in multi-label classification, extending its conceptual framework from multi-class learning to general correlated and imbalanced multi-label settings. Although recent studies have identified a ''tag-wise averaging'' structure for multi-label features, this view relies on implicit assumptions of label balance and combinatorial symmetry. Consequently, it fails to account for the geometrical distortions caused by intrinsic label correlations and data imbalance, which are common in practice. We resolve the multiplicity-one imbalance conjecture raised by Li et al. (2024), showing that higher-multiplicity prototypes obey a class-frequency-weighted synthesis rule rather than uniform averaging. To address this, we propose a rigorous spectral-control framework to analyze the terminal phase of multi-label learning under general imbalanced conditions. We introduce the label covariance spectrum $\\kappa_m$, a scalar controlling the distribution-dependent lower-bound geometry, derived from the second-order moment matrix of the label distribution. Contrary to the averaging perspective, our analysis reveals that the centered label covariance spectrum controls the stability of terminal geometry by quantifying the weakest centered inter-class contrast directions. We prove that the classical Tag-wise Averaging emerges only as a special case under perfect orthogonality. Numerical experiments on synthetic distributions validate our theoretical bounds. This work resolves the scaled-average aspect of the imbalance conjecture and establishes a unifying theoretical framework that extends Neural Collapse to complex, imbalanced multi-label settings.",
+        "arxiv_id": "2605.01897",
+        "PRIMARY_TOPIC_LABEL": "Representation Learning Theory and Structure",
+        "MATCHED_TOPIC_LABELS": [
+            "Representation Learning Theory and Structure"
+        ],
+        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+        "HOTSPOT_PAPER_LABELS": [
+            "Daily Hot Papers"
+        ],
+        "HOTSPOT_PAPER_PRIMARY_KIND": "daily_hot",
+        "HOTSPOT_PAPER_PRIMARY_LABEL": "Daily Hot Papers",
+        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "heuristic"
+    },
+    "2605.01172": {
+        "ARXIVID": "2605.01172",
+        "COMMENT": "Presents a generalization theory linking feature-learning dynamics, kernel partitions, and SGD signal-vs-noise accumulation.",
+        "RELEVANCE": 8,
+        "NOVELTY": 8,
+        "PRIMARY_TOPIC_ID": "representation_structure",
+        "MATCHED_TOPIC_IDS": [
+            "architecture_training",
+            "representation_structure"
+        ],
+        "TOPIC_MATCH_COMMENT": "Its main value is mechanistic theory of how representations and signal/noise structure drive generalization, more than any specific architecture.",
+        "HOTSPOT_PAPER_TAGS": [
+            "new_frontier"
+        ],
+        "HOTSPOT_PAPER_COMMENT": "Ambitious unified theory paper with unusually broad claims about feature-learning generalization and a derived optimizer objective.",
+        "SCORE": 16,
+        "authors": [
+            "Elon Litman",
+            "Gabe Guo"
+        ],
+        "title": "A Theory of Generalization in Deep Learning",
+        "abstract": "We present a non-asymptotic theory of generalization in deep learning where the empirical neural tangent kernel partitions the output space. In directions corresponding to signal, error dissipates rapidly; in the vast orthogonal dimensions corresponding to noise, the kernel's near-zero eigenvalues trap residual error in a test-invisible reservoir. Within the signal channel, minibatch SGD ensures that coherent population signal accumulates via fast linear drift, while idiosyncratic memorization is suppressed into a slow, diffusive random walk. We prove generalization survives even when the kernel evolves $\\mathcal{O}(1)$ in operator norm, the full feature-learning regime. This theory naturally explains disparate phenomena in deep learning theory, such as benign overfitting, double descent, implicit bias, and grokking. Lastly, we derive an exact population-risk objective from a single training run with no validation data, for any architecture, loss, or optimizer, and prove that it measures precisely the noise in the signal channel. This objective reduces in practice to an SNR preconditioner on top of Adam, adding one state vector at no extra cost; it accelerates grokking by $5 \\times$, suppresses memorization in PINNs and implicit neural representations, and improves DPO fine-tuning under noisy preferences while staying $3 \\times$ closer to the reference policy.",
+        "arxiv_id": "2605.01172",
+        "PRIMARY_TOPIC_LABEL": "Representation Learning Theory and Structure",
+        "MATCHED_TOPIC_LABELS": [
+            "Architecture and Training Dynamics",
+            "Representation Learning Theory and Structure"
+        ],
+        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+        "HOTSPOT_PAPER_LABELS": [
+            "New Frontier Papers"
+        ],
+        "HOTSPOT_PAPER_PRIMARY_KIND": "new_frontier",
+        "HOTSPOT_PAPER_PRIMARY_LABEL": "New Frontier Papers",
+        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "llm_exact"
+    },
+    "2605.01192": {
+        "ARXIVID": "2605.01192",
+        "COMMENT": "Clarifies capacity limits in computation in superposition by separating linear-readout floors from threshold-recovery regimes.",
+        "RELEVANCE": 8,
+        "NOVELTY": 8,
+        "PRIMARY_TOPIC_ID": "representation_structure",
+        "MATCHED_TOPIC_IDS": [
+            "representation_structure"
+        ],
+        "TOPIC_MATCH_COMMENT": "The paper is fundamentally about representational capacity and recovery limits in superposed feature representations.",
+        "HOTSPOT_PAPER_TAGS": [],
+        "HOTSPOT_PAPER_COMMENT": "",
+        "SCORE": 16,
+        "authors": [
+            "Hector Borobia",
+            "Elies Segu\\'i-Mas",
+            "Guillermina Tormo-Carb\\'o"
+        ],
+        "title": "Linear-Readout Floors and Threshold Recovery in Computation in Superposition",
+        "abstract": "Two recent approaches to computation in superposition reach different recursive capacity regimes: H\\\"anni et al. certify $\\tilde{O}(d^{3/2})$ computable features in width $d$ via an approximate-linear recursive template, while Adler and Shavit reach near-quadratic capacity (up to logarithmic factors) using thresholded Boolean recovery. The main contribution of this paper is conceptual: we argue these results are not contradictory because they maintain different interface invariants, and we formalize the distinction.   As a tool, we record a rank-trace Welch-type lower bound for biorthogonal linear readouts: for $F \\gg d$, the worst-case off-diagonal cross-talk of any unit-diagonal linear readout is $\\Omega(d^{-1/2})$, and the bound is tight on average for unit-norm tight frames. At quadratic feature load $F=d^2$, random-support threshold recovery succeeds for sparsities $s=O(d/\\log d)$, while linear readouts still incur $\\Omega(s/d)$ average per-coordinate squared error on Bernoulli sparse states. Matching the Welch floor against the published tolerance of the H\\\"anni correction layer explains the $d^{3/2}$ scale as a compatibility threshold for that template, not a universal upper bound. Robust nonlinear reset beyond the H\\\"anni template is left open.",
+        "arxiv_id": "2605.01192",
+        "PRIMARY_TOPIC_LABEL": "Representation Learning Theory and Structure",
+        "MATCHED_TOPIC_LABELS": [
+            "Representation Learning Theory and Structure"
+        ],
+        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+        "HOTSPOT_PAPER_LABELS": [],
+        "HOTSPOT_PAPER_PRIMARY_KIND": null,
+        "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+    },
+    "2605.01242": {
+        "ARXIVID": "2605.01242",
+        "COMMENT": "Gives a provably efficient actor-critic for low-rank MDPs using only policy evaluation as the computational oracle.",
+        "RELEVANCE": 8,
+        "NOVELTY": 8,
+        "PRIMARY_TOPIC_ID": "world_models_open_ended_rl",
+        "MATCHED_TOPIC_IDS": [
+            "world_models_open_ended_rl"
+        ],
+        "TOPIC_MATCH_COMMENT": "This is foundational RL theory on efficient learning in structured MDPs, not LLM post-training.",
+        "HOTSPOT_PAPER_TAGS": [],
+        "HOTSPOT_PAPER_COMMENT": "",
+        "SCORE": 16,
+        "authors": [
+            "Ruiquan Huang",
+            "Donghao Li",
+            "Yingbin Liang",
+            "Jing Yang"
+        ],
+        "title": "Breaking the Computational Barrier: Provably Efficient Actor-Critic for Low-Rank MDPs",
+        "abstract": "Reinforcement learning (RL) is a fundamental framework for sequential decision-making, in which an agent learns an optimal policy through interactions with an unknown environment. In settings with function approximation, many existing RL algorithms achieve favorable sample complexity, but often rely on computationally intractable oracles. In this paper, we use supervised learning as a computational proxy to establish a clear hierarchy of commonly adopted RL oracles under low-rank Markov Decision Processes (MDPs). This hierarchy shows that policy evaluation is the most computationally efficient oracle, provided that supervised learning can be efficiently solved. Motivated by this observation, we propose a novel optimistic actor-critic algorithm that relies solely on the policy evaluation oracle. We prove that our algorithm outperforms the existing sample complexity guarantees for low-rank MDPs while avoiding computationally expensive planning or optimization oracles commonly assumed in prior works. We further extend our theoretical results to approximately low-rank MDPs and demonstrate that this setting captures a broad class of real-world environments. Finally, we validate our theoretical results with experiments on several standard Gym environments.",
+        "arxiv_id": "2605.01242",
+        "PRIMARY_TOPIC_LABEL": "World Models, Exploration, and Open-Ended Reinforcement Learning",
+        "MATCHED_TOPIC_LABELS": [
+            "World Models, Exploration, and Open-Ended Reinforcement Learning"
+        ],
+        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+        "HOTSPOT_PAPER_LABELS": [],
+        "HOTSPOT_PAPER_PRIMARY_KIND": null,
+        "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+    },
+    "2605.00435": {
+        "ARXIVID": "2605.00435",
+        "COMMENT": "Attributes LLM mode collapse to geometric collapse in internal state space and intervenes through low-rank cache damping.",
+        "RELEVANCE": 8,
+        "NOVELTY": 8,
+        "PRIMARY_TOPIC_ID": "memory_systems",
+        "MATCHED_TOPIC_IDS": [
+            "representation_structure",
+            "memory_systems"
+        ],
+        "TOPIC_MATCH_COMMENT": "The intervention acts on the Transformer value cache as a memory-like internal state, making cache dynamics the best match.",
+        "HOTSPOT_PAPER_TAGS": [],
+        "HOTSPOT_PAPER_COMMENT": "",
+        "SCORE": 16,
+        "authors": [
+            "Xin Du",
+            "Kumiko Tanaka-Ishii"
+        ],
+        "title": "Escaping Mode Collapse in LLM Generation via Geometric Regulation",
+        "abstract": "Mode collapse is a persistent challenge in generative modeling and appears in autoregressive text generation as behaviors ranging from explicit looping to gradual loss of diversity and premature trajectory convergence. We take a dynamical-systems view and reinterpret mode collapse as reduced state-space accessibility caused by *geometric collapse*: during generation, the model's internal trajectory becomes confined to a low-dimensional region of its representation space. This implies mode collapse is not purely a token-level phenomenon and cannot be reliably solved by symbolic constraints or probability-only decoding heuristics. Guided by this perspective, we propose *Reinforced Mode Regulation* (RMR), a lightweight, online state-space intervention that regulates dominant self-reinforcing directions in the Transformer value cache (implemented as low-rank damping). Across multiple large language models, RMR substantially reduces mode collapse and enables stable, high-quality generation at extremely low entropy rates (down to 0.8 nats/step), whereas standard decoding typically collapses near 2.0 nats/step.",
+        "arxiv_id": "2605.00435",
+        "PRIMARY_TOPIC_LABEL": "Memory Structures and Agent Memory Systems",
+        "MATCHED_TOPIC_LABELS": [
+            "Representation Learning Theory and Structure",
+            "Memory Structures and Agent Memory Systems"
+        ],
+        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+        "HOTSPOT_PAPER_LABELS": [],
+        "HOTSPOT_PAPER_PRIMARY_KIND": null,
+        "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+    },
+    "2605.01699": {
+        "ARXIVID": "2605.01699",
+        "COMMENT": "Identifies a causally separable memorization signature in internal representations and removes it with rank-one probe-geometry interventions.",
+        "RELEVANCE": 8,
+        "NOVELTY": 8,
+        "PRIMARY_TOPIC_ID": "representation_structure",
+        "MATCHED_TOPIC_IDS": [
+            "representation_structure"
+        ],
+        "TOPIC_MATCH_COMMENT": "Primary fit is representation structure because the paper isolates and intervenes on a specific internal representation associated with memorization, with mechanistic evidence.",
+        "HOTSPOT_PAPER_TAGS": [],
+        "HOTSPOT_PAPER_COMMENT": "",
+        "SCORE": 16,
+        "authors": [
+            "Anamika Paul Rupa",
+            "Anietie Andy"
+        ],
+        "title": "Probe-Geometry Alignment: Erasing the Cross-Sequence Memorization Signature Below Chance",
+        "abstract": "Recent attacks show that behavioural unlearning of large language models leaves internal traces recoverable by adversarial probes. We characterise where this retention lives and show it can be surgically removed without measurable capability cost. Our central protocol is a leave-one-out cross-sequence probe that tests whether a memorisation signature generalises across held-out sequences. The signature is real and consistent across scale: memorisation-specific gaps of +0.32, +0.19, +0.30 on Pythia-70M, GPT-2 medium, and Mistral-7B; on Pythia-70M, the random-initialisation control collapses to -0.04 at the deepest layer where the pretrained signature peaks. The probe direction is causally separable from recall -- projecting it out collapses the signature locally (+0.44 -> -0.19) while behavioural recall barely changes -- and a probe trained on naturally memorised content does not classify fine-tuning-injected secrets, marking two representationally distinct regimes. We then introduce probe-geometry alignment (PGA), a surgical erasure that aligns activations along the probe's live readout direction at each depth. PGA drives the cross-sequence probe below random chance at all four scales tested (toy depth-4: 0.17; Pythia-70M: 0.07; Mistral-7B: 0.45; GPT-2 medium: 0.06 via MD-PGA k=2) and remains robust to six adversarial probe variants. Against a re-fitting attacker who trains a fresh probe on PGA-treated activations, we extend PGA adversarially, defeating the re-fit probe at every memorisation-relevant depth while preserving five zero-shot capability benchmarks within 2.8 percentage points per task (mean {\\Delta}acc = +0.2pp). The cross-sequence signature is a real, causally separable, regime-specific property of pretrained representations -- removable below chance with a single rank-one intervention per depth at no measurable capability cost.",
+        "arxiv_id": "2605.01699",
+        "PRIMARY_TOPIC_LABEL": "Representation Learning Theory and Structure",
+        "MATCHED_TOPIC_LABELS": [
+            "Representation Learning Theory and Structure"
+        ],
+        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+        "HOTSPOT_PAPER_LABELS": [],
+        "HOTSPOT_PAPER_PRIMARY_KIND": null,
+        "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+    },
+    "2605.01358": {
+        "ARXIVID": "2605.01358",
+        "COMMENT": "Evaluates UED environments by the policy parameter change they induce, grounding curriculum selection in realized learning progress.",
+        "RELEVANCE": 8,
+        "NOVELTY": 8,
+        "PRIMARY_TOPIC_ID": "world_models_open_ended_rl",
+        "MATCHED_TOPIC_IDS": [
+            "world_models_open_ended_rl"
+        ],
+        "TOPIC_MATCH_COMMENT": "Primary fit is open-ended RL because the paper proposes a new unsupervised environment design principle for generating useful training experience and better generalization.",
+        "HOTSPOT_PAPER_TAGS": [],
+        "HOTSPOT_PAPER_COMMENT": "",
+        "SCORE": 16,
+        "authors": [
+            "Fang Yuan",
+            "Quanjun Yin",
+            "Siqi Shen",
+            "Yuxiang Xie",
+            "Junqiang Yang",
+            "Long Qin",
+            "Junjie Zeng",
+            "Qinglun Li"
+        ],
+        "title": "PACE: Parameter Change for Unsupervised Environment Design",
+        "abstract": "Unsupervised Environment Design (UED) offers a promising paradigm for improving reinforcement learning generalization by adaptively shaping training environments, but it requires reliable environment evaluation to remain effective. However, existing UED methods evaluate environments using indirect proxy signals such as regret, value-based errors, or Monte Carlo, which suffer from bias, high variance, or substantial computational overhead and fail to reflect agent realized learning progress. To address these limitations, we propose Parameter Change Environment Design (PACE), which evaluates an environment through the policy parameter change induced by training on that environment, directly grounding environment selection in realized learning progress. Specifically, PACE assigns environment value using a first-order approximation of the policy optimization objective, where the improvement induced by an environment is proportional to the squared L2 norm of the corresponding parameter update, enabling low-variance and computation-efficient evaluation without additional rollouts. Experiments on MiniGrid and Craftax show that PACE consistently outperforms established UED baselines, achieving higher IQM and smaller Optimality Gap on OOD evaluations, including an IQM of 96.4% and an Optimality Gap of 17.2% on MiniGrid.",
+        "arxiv_id": "2605.01358",
+        "PRIMARY_TOPIC_LABEL": "World Models, Exploration, and Open-Ended Reinforcement Learning",
+        "MATCHED_TOPIC_LABELS": [
+            "World Models, Exploration, and Open-Ended Reinforcement Learning"
+        ],
+        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+        "HOTSPOT_PAPER_LABELS": [],
+        "HOTSPOT_PAPER_PRIMARY_KIND": null,
+        "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+    },
+    "2605.02196": {
+        "ARXIVID": "2605.02196",
+        "COMMENT": "Shows INT4 quantization can recover supposedly forgotten content and introduces quantization-aware forgetting to make unlearning durable.",
+        "RELEVANCE": 8,
+        "NOVELTY": 8,
+        "PRIMARY_TOPIC_ID": "efficiency_scaling",
+        "MATCHED_TOPIC_IDS": [
+            "efficiency_scaling"
+        ],
+        "TOPIC_MATCH_COMMENT": "Primary fit is efficiency/compression because the central finding is that low-bit deployment changes model behavior in a fundamental way, and the method directly addresses quantization robustness.",
+        "HOTSPOT_PAPER_TAGS": [],
+        "HOTSPOT_PAPER_COMMENT": "",
+        "SCORE": 16,
+        "authors": [
+            "Abdullah Ahmad Khan",
+            "Ferdous Sohel"
+        ],
+        "title": "DurableUn: Quantization-Induced Recovery Attacks in Machine Unlearning",
+        "abstract": "Machine unlearning aims to remove specified training data to satisfy privacy regulations such as GDPR. However, existing evaluations assume identical precision at unlearning and deployment, overlooking that production LLMs are deployed at low-bit precision. We show that INT4 quantization systematically restores forgotten content even when models pass compliance audits at bfloat16 (BF16), we term this the quantization recovery attack (QRA). We conduct the first systematic study of unlearning robustness under adapter-space INT4 quantization in the NF4+LoRA regime, evaluating seven methods on LLaMA-3-8B-Instruct across TOFU, MUSE-News, and WikiBio-WPU. INT8 is benign; INT4 induces recovery of up to 22x, worsening with dataset difficulty. We identify the FA-RA-Q-INT4 trilemma: no method simultaneously achieves strong forgetting, high utility, and quantization robustness. A dense Pareto sweep reveals a sharp phase transition once robustness is achieved, retaining accuracy collapses regardless of further tuning. To address this, we propose DURABLEUN-SAF (Sharpness-Aware Forgetting), a quantization-aware objective using Straight-Through Estimator gradients through INT4 rounding. DURABLEUN-SAF is the only method to achieve a stable empirical (0.047, {BF16, INT8, INT4})- durability certificate: Q-INT4= 0.043 +- 0.002, cert rate= 3/3, versus SalUn's cert rate= 1/3 at its own published hyperparameters. We call for Q-INT4 to be adopted as a standard evaluation metric alongside FA and RA.",
+        "arxiv_id": "2605.02196",
+        "PRIMARY_TOPIC_LABEL": "Efficiency, Compression, and Large-Scale Training",
+        "MATCHED_TOPIC_LABELS": [
+            "Efficiency, Compression, and Large-Scale Training"
+        ],
+        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+        "HOTSPOT_PAPER_LABELS": [],
+        "HOTSPOT_PAPER_PRIMARY_KIND": null,
+        "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+    },
+    "2605.00347": {
+        "ARXIVID": "2605.00347",
+        "COMMENT": "Identifies algorithmic ingredients that make RL stable for 100+ turn VLM decision-making, including an adapted PPO with a turn-level critic.",
+        "RELEVANCE": 8,
+        "NOVELTY": 8,
+        "PRIMARY_TOPIC_ID": "world_models_open_ended_rl",
+        "MATCHED_TOPIC_IDS": [
+            "architecture_training",
+            "world_models_open_ended_rl"
+        ],
+        "TOPIC_MATCH_COMMENT": "The paper is centered on long-horizon interactive RL for multimodal agents, with methodological insights about stable training rather than pure benchmark reporting.",
+        "HOTSPOT_PAPER_TAGS": [
+            "daily_hot"
+        ],
+        "HOTSPOT_PAPER_COMMENT": "Long-horizon RL for VLM agents in games is broadly salient and likely of wide daily interest beyond the specialized reading list.",
+        "SCORE": 16,
+        "authors": [
+            "Chengshuai Shi",
+            "Wenzhe Li",
+            "Xinran Liang",
+            "Yizhou Lu",
+            "Wenjia Yang",
+            "Ruirong Feng",
+            "Seth Karten",
+            "Ziran Yang",
+            "Zihan Ding",
+            "Gabriel Sarch",
+            "Danqi Chen",
+            "Karthik Narasimhan",
+            "Chi Jin"
+        ],
+        "title": "Odysseus: Scaling VLMs to 100+ Turn Decision-Making in Games via Reinforcement Learning",
+        "abstract": "Given the rapidly growing capabilities of vision-language models (VLMs), extending them to interactive decision-making tasks such as video games has emerged as a promising frontier. However, existing approaches either rely on large-scale supervised fine-tuning (SFT) on human trajectories or apply reinforcement learning (RL) only in relatively short-horizon settings (typically around 20--30 turns). In this work, we study RL-based training of VLMs for long-horizon decision-making in Super Mario Land, a visually grounded environment requiring 100+ turns of interaction with coordinated perception, reasoning, and action. We begin with a systematic investigation of key algorithmic components and propose an adapted variant of PPO with a lightweight turn-level critic, which substantially improves training stability and sample efficiency over critic-free methods such as GRPO and Reinforce++. We further show that pretrained VLMs provide strong action priors, significantly improving sample efficiency during RL training and reducing the need for manual design choices such as action engineering, compared to classical deep RL trained from scratch. Building on these insights, we introduce Odysseus, an open training framework for VLM agents, achieving substantial gains across multiple levels of the game and at least 3 times average game progresses than frontier models. Moreover, the trained models exhibit consistent improvements under both in-game and cross-game generalization settings, while maintaining general-domain capabilities. Overall, our results identify key ingredients for making RL stable and effective in long-horizon, multi-modal settings, and provide practical guidance for developing VLMs as embodied agents.",
+        "arxiv_id": "2605.00347",
+        "PRIMARY_TOPIC_LABEL": "World Models, Exploration, and Open-Ended Reinforcement Learning",
+        "MATCHED_TOPIC_LABELS": [
+            "Architecture and Training Dynamics",
+            "World Models, Exploration, and Open-Ended Reinforcement Learning"
+        ],
+        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+        "HOTSPOT_PAPER_LABELS": [
+            "Daily Hot Papers"
+        ],
+        "HOTSPOT_PAPER_PRIMARY_KIND": "daily_hot",
+        "HOTSPOT_PAPER_PRIMARY_LABEL": "Daily Hot Papers",
+        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "llm_exact"
+    },
+    "2605.00667": {
+        "ARXIVID": "2605.00667",
+        "COMMENT": "Stabilizes state-wise constrained RL by replacing unstable dual ascent on multiplier networks with an augmented Lagrangian plus supervised dual-target regression.",
+        "RELEVANCE": 8,
+        "NOVELTY": 8,
+        "PRIMARY_TOPIC_ID": "world_models_open_ended_rl",
+        "MATCHED_TOPIC_IDS": [
+            "architecture_training",
+            "world_models_open_ended_rl"
+        ],
+        "TOPIC_MATCH_COMMENT": "This is foundational RL methodology for safe control with state-dependent constraints, not LLM post-training or benchmark-only safe RL.",
+        "HOTSPOT_PAPER_TAGS": [],
+        "HOTSPOT_PAPER_COMMENT": "",
+        "SCORE": 16,
+        "authors": [
+            "Jiaming Zhang",
+            "Yujie Yang",
+            "Yao Lyu",
+            "Shengbo Eben Li",
+            "Liping Zhang"
+        ],
+        "title": "Augmented Lagrangian Multiplier Network for State-wise Safety in Reinforcement Learning",
+        "abstract": "Safety is a primary challenge in real-world reinforcement learning (RL). Formulating safety requirements as state-wise constraints has become a prominent paradigm. Handling state-wise constraints with the Lagrangian method requires a distinct multiplier for every state, necessitating neural networks to approximate them as a multiplier network. However, applying standard dual gradient ascent to multiplier networks induces severe training oscillations. This is because the inherent instability of dual ascent is exacerbated by network generalization -- local overshoots and delayed updates propagate to adjacent states, further amplifying policy fluctuations. Existing stabilization techniques are designed for scalar multipliers, which are inadequate for state-dependent multiplier networks. To address this challenge, we propose an augmented Lagrangian multiplier network (ALaM) framework for stable learning of state-wise multipliers. ALaM consists of two key components. First, a quadratic penalty is introduced into the augmented Lagrangian to compensate for delayed multiplier updates and establish the local convexity near the optimum, thereby mitigating policy oscillations. Second, the multiplier network is trained via supervised regression toward a dual target, which stabilizes training and promotes convergence. Theoretically, we show that ALaM guarantees multiplier convergence and thus recovers the optimal policy of the constrained problem. Building on this framework, we integrate soft actor-critic (SAC) with ALaM to develop the SAC-ALaM algorithm. Experiments demonstrate that SAC-ALaM outperforms state-of-the-art safe RL baselines in both safety and return, while also stabilizing training dynamics and learning well-calibrated multipliers for risk identification.",
+        "arxiv_id": "2605.00667",
+        "PRIMARY_TOPIC_LABEL": "World Models, Exploration, and Open-Ended Reinforcement Learning",
+        "MATCHED_TOPIC_LABELS": [
+            "Architecture and Training Dynamics",
+            "World Models, Exploration, and Open-Ended Reinforcement Learning"
+        ],
+        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+        "HOTSPOT_PAPER_LABELS": [],
+        "HOTSPOT_PAPER_PRIMARY_KIND": null,
+        "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+    },
+    "2605.00402": {
+        "ARXIVID": "2605.00402",
+        "COMMENT": "Proposes scalable recurrent spiking networks trained without backprop by combining local plasticity, random broadcast alignment, and modulatory three-factor rules.",
+        "RELEVANCE": 8,
+        "NOVELTY": 8,
+        "PRIMARY_TOPIC_ID": "architecture_training",
+        "MATCHED_TOPIC_IDS": [
+            "architecture_training"
+        ],
+        "TOPIC_MATCH_COMMENT": "The paper introduces a nonstandard recurrent architecture and biologically motivated training mechanism, making architecture/training dynamics the best fit.",
+        "HOTSPOT_PAPER_TAGS": [],
+        "HOTSPOT_PAPER_COMMENT": "",
+        "SCORE": 16,
+        "authors": [
+            "Bo Tang",
+            "Weiwei Xie"
+        ],
+        "title": "Scalable Learning in Structured Recurrent Spiking Neural Networks without Backpropagation",
+        "abstract": "Spiking Neural Networks (SNNs) provide a promising framework for energy-efficient and biologically grounded computation; however, scalable learning in deep recurrent architectures with sparse connectivity remains a major challenge. In this work, we propose a structured multi-layer recurrent SNN architecture composed of locally dense recurrent layers augmented with sparse small-world long-range projections to a readout population. The long-range connectivity is largely fixed, preserving routing efficiency and hardware scalability, while synaptic adaptation is performed using strictly local plasticity mechanisms. To enable supervised learning without backpropagation or surrogate gradients, we introduce a biologically motivated learning framework that combines: (i) population-based winner-take-all (WTA) teaching signals at the output layer, (ii) fixed random broadcast alignment feedback pathways, and (iii) low-dimensional modulatory neuron populations that gate synaptic updates through three-factor learning rules with eligibility traces. This design supports deep recurrent computation with sparse global communication and purely local synaptic updates. We analyze the algorithmic properties, computational complexity, and hardware feasibility of the proposed approach, and demonstrate stable learning and competitive performance on benchmark classification tasks. The results highlight the potential of structured recurrence and neuromodulatory learning to enable scalable, hardware-compatible SNN training beyond gradient-based methods.",
+        "arxiv_id": "2605.00402",
+        "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+        "MATCHED_TOPIC_LABELS": [
+            "Architecture and Training Dynamics"
+        ],
+        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+        "HOTSPOT_PAPER_LABELS": [],
+        "HOTSPOT_PAPER_PRIMARY_KIND": null,
+        "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+    },
+    "2605.02675": {
+        "ARXIVID": "2605.02675",
+        "COMMENT": "Extends generalized filtering/predictive coding to online triple estimation with separated timescales for state, parameter, and uncertainty updates.",
+        "RELEVANCE": 8,
+        "NOVELTY": 8,
+        "PRIMARY_TOPIC_ID": "architecture_training",
+        "MATCHED_TOPIC_IDS": [
+            "architecture_training",
+            "memory_systems"
+        ],
+        "TOPIC_MATCH_COMMENT": "The primary contribution is an online predictive-coding learning/inference mechanism, best viewed as foundational architecture and training dynamics.",
+        "HOTSPOT_PAPER_TAGS": [
+            "new_frontier"
+        ],
+        "HOTSPOT_PAPER_COMMENT": "Online generalized predictive coding may interest the hotspot feed as a potentially new computational direction, though still early.",
+        "SCORE": 16,
+        "authors": [
+            "Mehran H. Z. Bazargani",
+            "Szymon Urbas",
+            "Adeel Razi",
+            "Thomas Brendan Murphy",
+            "Karl Friston"
+        ],
+        "title": "Online Generalised Predictive Coding",
+        "abstract": "This paper introduces an extension of generalised filtering for online applications. Generalised filtering refers to data assimilation schemes that jointly infer latent states, learn unknown model parameters, and estimate uncertainty in an integrated framework -- e.g., estimate state and observation noise -- at the same time (i.e., triple estimation). This framework appears across disciplines under different names, including variational Kalman-Bucy filtering in engineering, generalised predictive coding in neuroscience, and Dynamic Expectation Maximisation (DEM) in time-series analysis. Here, we specialise DEM for ``online'' data assimilation, through a separation of temporal scales. We describe the variational principles and procedures that allow one to assimilate data in a way that allows for a slow updating of parameters and precisions, which contextualise fast Bayesian belief updating about the dynamic hidden states. Using numerical studies, we demonstrate the validity of online DEM (ODEM) using a non-linear -- and potentially chaotic -- generative model, to show that the ODEM scheme can track the latent states of the generative process, even when its functional form differs fundamentally from the dynamics of the generative model. Framed from a neuro-mimetic predictive coding perspective, ODEM offers a biologically inspired solution to online inference, learning, and uncertainty estimation in dynamic environments.",
+        "arxiv_id": "2605.02675",
+        "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+        "MATCHED_TOPIC_LABELS": [
+            "Architecture and Training Dynamics",
+            "Memory Structures and Agent Memory Systems"
+        ],
+        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+        "HOTSPOT_PAPER_LABELS": [
+            "New Frontier Papers"
+        ],
+        "HOTSPOT_PAPER_PRIMARY_KIND": "new_frontier",
+        "HOTSPOT_PAPER_PRIMARY_LABEL": "New Frontier Papers",
+        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "llm_exact"
+    },
+    "2605.01640": {
+        "ARXIVID": "2605.01640",
+        "COMMENT": "Extends scaling laws to data-repetition regimes with a prescriptive overfitting penalty for compute-optimal training.",
+        "RELEVANCE": 8,
+        "NOVELTY": 8,
+        "PRIMARY_TOPIC_ID": "architecture_training",
+        "MATCHED_TOPIC_IDS": [
+            "architecture_training",
+            "efficiency_scaling"
+        ],
+        "TOPIC_MATCH_COMMENT": "The key value is a foundational training-law analysis of data-constrained optimization behavior, so training dynamics is the strongest match.",
+        "HOTSPOT_PAPER_TAGS": [],
+        "HOTSPOT_PAPER_COMMENT": "",
+        "SCORE": 16,
+        "authors": [
+            "Justin Lovelace",
+            "Christian Belardi",
+            "Srivatsa Kundurthy",
+            "Shriya Sudhakar",
+            "Kilian Q. Weinberger"
+        ],
+        "title": "Prescriptive Scaling Laws for Data Constrained Training",
+        "abstract": "Training compute is increasingly outpacing the availability of high-quality data. This shifts the central challenge from optimal compute allocation to extracting maximum value from limited data. The widely adopted Chinchilla scaling law assumes every training token is unique. This limits its ability to guide pretraining decisions in data-constrained regimes. We model the excess loss under repetition with a simple additive overfitting penalty and find that it accurately describes model behavior. Our scaling law yields qualitatively new compute-optimal allocation advice. Beyond a point, further repetition is counterproductive and compute is better spent on model capacity. We show that following our law's recommended configuration improves performance in data-constrained regimes. Finally, because our one-parameter form isolates overfitting in a single coefficient, it enables direct comparison across training configurations. As a case study, we show that strong weight decay ($\\lambda=1.0$) reduces this coefficient by approximately 70%, providing a scaling-law explanation for recent findings that optimal weight decay in data-constrained regimes is an order of magnitude larger than standard practice.",
+        "arxiv_id": "2605.01640",
+        "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+        "MATCHED_TOPIC_LABELS": [
+            "Architecture and Training Dynamics",
+            "Efficiency, Compression, and Large-Scale Training"
+        ],
+        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+        "HOTSPOT_PAPER_LABELS": [],
+        "HOTSPOT_PAPER_PRIMARY_KIND": null,
+        "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+    },
+    "2605.01729": {
+        "ARXIVID": "2605.01729",
+        "COMMENT": "Provides loss-to-TV guarantees and a stabilization method for notoriously unstable GFlowNet training.",
+        "RELEVANCE": 8,
+        "NOVELTY": 8,
+        "PRIMARY_TOPIC_ID": "architecture_training",
+        "MATCHED_TOPIC_IDS": [
+            "architecture_training"
+        ],
+        "TOPIC_MATCH_COMMENT": "This is chiefly about objective sensitivity, stability guarantees, and improved optimization behavior of a generative learning framework.",
+        "HOTSPOT_PAPER_TAGS": [],
+        "HOTSPOT_PAPER_COMMENT": "",
+        "SCORE": 16,
+        "authors": [
+            "Zengxiang Lei",
+            "Ananth Shreekumar",
+            "Jonathan Rosenthal",
+            "Ruoyu Song",
+            "Alvaro A. Cardenas",
+            "Daniel J. Fremont",
+            "Dongyan Xu",
+            "Satish Ukkusuri",
+            "Z. Berkay Celik"
+        ],
+        "title": "Stable GFlowNets with Probabilistic Guarantees",
+        "abstract": "Generative Flow Networks (GFlowNets) learn to sample states proportional to an unnormalized reward. Despite their theoretical promise, practical training is often unstable, exhibiting severe loss spikes and mode collapse. To tackle this, we first assess the sensitivity of GFlowNet objectives, demonstrating that a small Total Variation (TV) distance between the learned and target distributions does not preclude unbounded training loss. Motivated by this mismatch, we establish converse guarantees by deriving loss-to-TV bounds that certify global fidelity from bounded trajectory balance losses. Lastly, we propose Stable GFlowNets, an algorithm that leverages our theoretical results to stabilize training, and empirically demonstrate improved training behavior and superior distributional fidelity.",
+        "arxiv_id": "2605.01729",
+        "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+        "MATCHED_TOPIC_LABELS": [
+            "Architecture and Training Dynamics"
+        ],
+        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+        "HOTSPOT_PAPER_LABELS": [],
+        "HOTSPOT_PAPER_PRIMARY_KIND": null,
+        "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+    },
+    "2605.00528": {
+        "ARXIVID": "2605.00528",
+        "COMMENT": "Workflow-atomic GPU scheduling exploits KV-cache reuse across chained agent calls to cut task latency.",
+        "RELEVANCE": 8,
+        "NOVELTY": 8,
+        "PRIMARY_TOPIC_ID": "efficiency_scaling",
+        "MATCHED_TOPIC_IDS": [
+            "efficiency_scaling",
+            "memory_systems"
+        ],
+        "TOPIC_MATCH_COMMENT": "The paper introduces a systems idea that materially changes serving cost/latency for compound AI workloads, fitting large-scale efficiency best.",
+        "HOTSPOT_PAPER_TAGS": [
+            "daily_hot"
+        ],
+        "HOTSPOT_PAPER_COMMENT": "This is broadly important to current agent serving infrastructure because it proposes a new workflow-level scheduling abstraction with strong empirical gains.",
+        "SCORE": 16,
+        "authors": [
+            "Dongxin Guo",
+            "Jikun Wu",
+            "Siu Ming Yiu"
+        ],
+        "title": "SAGA: Workflow-Atomic Scheduling for AI Agent Inference on GPU Clusters",
+        "abstract": "AI agents execute tens to hundreds of chained LLM calls per task, yet GPU schedulers treat each call as independent, discarding gigabytes of intermediate state between steps and inflating end-to-end latency by 3-8x. We argue that this request-level abstraction is fundamentally mismatched to compound AI workloads, and propose a shift to program-level scheduling: treating the entire agent workflow (not individual inference calls) as the first-class schedulable unit. We present SAGA, a distributed scheduler that implements this abstraction through three mechanisms: (1) Agent Execution Graphs that capture workflow structure to predict KV cache reuse across tool-call boundaries, achieving within 1.31x of B\\'el\\'ady's optimal offline policy; (2) session-affinity batching with work stealing that co-locates correlated requests while maintaining global load balance; and (3) Agent Fair Share, a task-completion-time fairness metric with provable bounded-deviation guarantees. On a 64-GPU cluster serving SWE-bench coding agents and WebArena browser tasks, SAGA reduces task completion time by 1.64x (geometric mean, p < 0.001) over vLLM v0.15.1 with prefix caching and affinity routing, while improving GPU memory utilization by 1.22x and achieving 99.2% SLO attainment under multi-tenant interference. These latency gains come at a quantified cost: approximately 30% lower peak throughput than throughput-optimal batch scheduling, a tradeoff appropriate for the latency-sensitive interactive deployments that dominate compound AI usage. Our results demonstrate that workflow-aware scheduling is essential for efficient compound AI serving.",
+        "arxiv_id": "2605.00528",
+        "PRIMARY_TOPIC_LABEL": "Efficiency, Compression, and Large-Scale Training",
+        "MATCHED_TOPIC_LABELS": [
+            "Efficiency, Compression, and Large-Scale Training",
+            "Memory Structures and Agent Memory Systems"
+        ],
+        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+        "HOTSPOT_PAPER_LABELS": [
+            "Daily Hot Papers"
+        ],
+        "HOTSPOT_PAPER_PRIMARY_KIND": "daily_hot",
+        "HOTSPOT_PAPER_PRIMARY_LABEL": "Daily Hot Papers",
+        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "llm_exact"
+    },
+    "2605.01325": {
+        "ARXIVID": "2605.01325",
+        "COMMENT": "Identifies cross-modal structural similarity, measured by Gromov-Wasserstein distance, as a principled predictor of VLM alignment quality.",
+        "RELEVANCE": 8,
+        "NOVELTY": 8,
+        "PRIMARY_TOPIC_ID": "representation_structure",
+        "MATCHED_TOPIC_IDS": [
+            "representation_structure"
+        ],
+        "TOPIC_MATCH_COMMENT": "The contribution is fundamentally about representation geometry and the learnability of mappings between modality-specific structures.",
+        "HOTSPOT_PAPER_TAGS": [],
+        "HOTSPOT_PAPER_COMMENT": "",
+        "SCORE": 16,
+        "authors": [
+            "Muyang Li",
+            "Yucheng Liu",
+            "Jianbo Ma",
+            "Elliot Osborne",
+            "Bo Han",
+            "Tongliang Liu"
+        ],
+        "title": "Rethinking Model Selection in VLM Through the Lens of Gromov-Wasserstein Distance",
+        "abstract": "Vision-Language Models (VLMs) have enhanced traditional LLMs with visual capabilities through the integration of vision encoders. While recent works have explored various combinations of vision encoders and LLMs, there still lacks a principled understanding of what makes a vision encoder suitable for VLM alignment. In this paper, we systematically investigate this question via comprehensive experiments on a curated collection of 19 pre-trained vision encoders from diverse sources. We first demonstrate that common practices, such as choosing encoders with the largest size or highest zero-shot accuracy, consistently fail to identify optimal models. In fact, these metrics show only weak to moderate correlation with VLM performance. This intriguing finding begs a fundamental question: What factors of vision-encoders matter in VLM? Through comprehensive analysis, we identify that the structural similarity across modalities plays a crucial but previously overlooked role in vision-encoder selection, which we measure using the Gromov-Wasserstein distance as a proxy. From a theoretical perspective, we show that the learnability of cross-modality mapping can be provably associated with the Gromov-Wasserstein distance. Empirical verification on 60+ full VLM training runs shows that our proposed inference-only metric performs significantly better than alternative model selection strategies and exhibits a much stronger correlation with final VLM performance, thereby enabling efficient and effective prediction of VLM performance before full training.",
+        "arxiv_id": "2605.01325",
+        "PRIMARY_TOPIC_LABEL": "Representation Learning Theory and Structure",
+        "MATCHED_TOPIC_LABELS": [
+            "Representation Learning Theory and Structure"
+        ],
+        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+        "HOTSPOT_PAPER_LABELS": [],
+        "HOTSPOT_PAPER_PRIMARY_KIND": null,
+        "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+    },
+    "2605.01319": {
+        "ARXIVID": "2605.01319",
+        "COMMENT": "Reinterprets barren plateaus mechanistically as destructive interference and introduces diagnostics that connect termwise cancellation to gradient variance.",
+        "RELEVANCE": 8,
+        "NOVELTY": 8,
+        "PRIMARY_TOPIC_ID": "representation_structure",
+        "MATCHED_TOPIC_IDS": [
+            "architecture_training",
+            "representation_structure"
+        ],
+        "TOPIC_MATCH_COMMENT": "The strongest contribution is mechanistic understanding of optimization behavior via structure in gradient contributions, rather than a new model or application.",
+        "HOTSPOT_PAPER_TAGS": [],
+        "HOTSPOT_PAPER_COMMENT": "",
+        "SCORE": 16,
+        "authors": [
+            "Pilsung Kang"
+        ],
+        "title": "Barren Plateaus as Destructive Interference: A Diagnostic Framework and Implications for Structured Ansatzes",
+        "abstract": "Barren plateaus (BPs) are usually described by the exponential suppression of gradient variance, but the mechanism by which gradient signal disappears remains unclear. We show that this phenomenon can be understood as destructive interference among termwise gradient contributions. To make this perspective operational, we introduce a diagnostic framework based on the cancellation ratio $R_k$, the effective term count $N_{\\mathrm{eff},k}$, and the interference-quality measure $B_{\\mathrm{eff},k}=R_k\\sqrt{N_{\\mathrm{eff},k}}$. Under a random-sign model, $B_{\\mathrm{eff},k}$ remains near a stable baseline, defining a random-sign cancellation regime. For the transverse-field Ising model (TFIM), we find that the hardware-efficient ansatz (HEA) remains close to this regime across system sizes and depths, whereas the Hamiltonian variational ansatz (HVA) systematically escapes it. In particular, HVA exhibits larger $B_{\\mathrm{eff},k}$ not merely because $N_{\\mathrm{eff},k}$ is larger, but because $R_k$ also remains systematically larger despite the broader term participation. This pattern indicates improved sign organization rather than simple term suppression. We further establish an exact identity that connects the proposed interference diagnostics directly to the standard variance-based theory of BPs. These results position destructive interference as a mechanistic interpretation of BP-like behavior in the regimes studied here, but they do not imply that BPs and destructive interference are universally interchangeable across all architectures and settings.",
+        "arxiv_id": "2605.01319",
+        "PRIMARY_TOPIC_LABEL": "Representation Learning Theory and Structure",
+        "MATCHED_TOPIC_LABELS": [
+            "Architecture and Training Dynamics",
+            "Representation Learning Theory and Structure"
+        ],
+        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+        "HOTSPOT_PAPER_LABELS": [],
+        "HOTSPOT_PAPER_PRIMARY_KIND": null,
+        "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+    },
+    "2605.01950": {
+        "ARXIVID": "2605.01950",
+        "COMMENT": "Targets the imagined-trajectory ranking mechanism in world-model planning rather than one-step outputs, exposing a distinct long-horizon vulnerability.",
+        "RELEVANCE": 8,
+        "NOVELTY": 8,
+        "PRIMARY_TOPIC_ID": "world_models_open_ended_rl",
+        "MATCHED_TOPIC_IDS": [
+            "world_models_open_ended_rl"
+        ],
+        "TOPIC_MATCH_COMMENT": "The paper is directly about the internal planning behavior of world models and how trajectory evaluation structure shapes downstream decisions.",
+        "HOTSPOT_PAPER_TAGS": [
+            "daily_hot"
+        ],
+        "HOTSPOT_PAPER_COMMENT": "World-model security and planning failures are broadly timely, and the paper studies a planning-specific mechanism rather than a generic attack surface.",
+        "SCORE": 16,
+        "authors": [
+            "Siyuan Duan",
+            "Ke Zhang",
+            "Xizhao Luo"
+        ],
+        "title": "TRAP: Tail-aware Ranking Attack for World-Model Planning",
+        "abstract": "World models enable long-horizon planning by internally generating and evaluating imagined trajectories, making them a promising foundation for generalist agents. However, this imagination-driven decision process also introduces new security risks. Existing backdoor attacks typically aim to manipulate local features, one-step predictions, or instantaneous policy outputs. While such objectives may suffice for weaker reactive models, they are often ineffective against world models, where the learned dynamics prior and planning process can absorb or wash out the effects of shallow perturbations. More importantly, we find that world models exhibit a distinct backdoor vulnerability rooted in the long-tailed ranking structure of imagined trajectories, where disrupting the ordering of a few decision-critical trajectories can systematically hijack planning.   To exploit this vulnerability, we propose TRAP, a backdoor attack framework for world models that targets imagined trajectory ranking. TRAP combines a tail-aware ranking loss to focus optimization on decision-critical trajectories with dual gating mechanisms that stabilize optimization and regulate when and where the attack penalty is applied. Under trigger conditions, TRAP alters the relative ranking of imagined trajectories to redirect planning outcomes, while largely maintaining the normal ranking structure on clean inputs. Experiments on DreamerV3 and TD-MPC2 across diverse tasks show that TRAP consistently induces sustained behavioral deviations and significant performance degradation, highlighting the need for dedicated security evaluation of world-model-based agents.",
+        "arxiv_id": "2605.01950",
+        "PRIMARY_TOPIC_LABEL": "World Models, Exploration, and Open-Ended Reinforcement Learning",
+        "MATCHED_TOPIC_LABELS": [
+            "World Models, Exploration, and Open-Ended Reinforcement Learning"
+        ],
+        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+        "HOTSPOT_PAPER_LABELS": [
+            "Daily Hot Papers"
+        ],
+        "HOTSPOT_PAPER_PRIMARY_KIND": "daily_hot",
+        "HOTSPOT_PAPER_PRIMARY_LABEL": "Daily Hot Papers",
+        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "llm_exact"
+    },
+    "2605.02108": {
+        "ARXIVID": "2605.02108",
+        "COMMENT": "Analyzes residual-network Jacobian spectra and derives depth-wise spectral rigidity and power-law drift bounds.",
+        "RELEVANCE": 8,
+        "NOVELTY": 8,
+        "PRIMARY_TOPIC_ID": "architecture_training",
+        "MATCHED_TOPIC_IDS": [
+            "architecture_training",
+            "representation_structure"
+        ],
+        "TOPIC_MATCH_COMMENT": "Its core is mechanistic theory for deep-network spectral behavior and residual training dynamics, squarely in architecture/training foundations.",
+        "HOTSPOT_PAPER_TAGS": [],
+        "HOTSPOT_PAPER_COMMENT": "",
+        "SCORE": 16,
+        "authors": [
+            "Ziran Liu",
+            "Wei Wang",
+            "Jinhao Wang",
+            "Pengcheng Wang",
+            "Xinyi Sui",
+            "Cihan Ruan",
+            "Nam Ling",
+            "Wei Jiang"
+        ],
+        "title": "Geometric and Spectral Alignment for Deep Neural Network I",
+        "abstract": "Deep residual architectures are modeled as products of near-identity Jacobians. This paper proves deterministic quotient-geometric estimates for singular spectra of Frobenius-normalized layer factors, emphasizing a normalized top-radial Cartan coordinate and fitted power-law chart.   Full-rank factors are mapped from $\\mathrm{GL}(d)$ to the positive cone by $A\\mapsto A^\\top A$, then to ordered eigenvalue data. Under Frobenius normalization, exact power-law spectra form a trace-normalized Cartan orbit. This orbit is a Gibbs family on ranks, a Fisher information line, and a Bures--Wasserstein curve with line element $d/4$ times Fisher information.   The main rigidity theorem is a slack-aware margin inequality: interface radial amplitude, non-backtracking slack, and signed residual variation control displacement of the fitted Cartan coordinate. In the exact-chart zero-slack case, a depth-$L$ budget gives exponent drift of order $(\\log M)/L$; generally, slack and residual increments augment the bound.   We separate scalar top-radial from full-Cartan spectral control, which also needs Bures/Hellinger residual variation. We prove approximate-power-law and metric-chart versions, converse lower bounds, Fisher--KL/Bures action estimates, and near-identity expansions for normalized residual chains.   Near-identity results verify transport budgets; chart quality remains measurable. Effective rank is a spectral-energy quantile, giving finite-width power-law tail bounds and robust rank-window transition estimates. Empirical static-weight exponent profiles serve as diagnostics; full verification also requires interface budgets, slacks, and residuals for the same operator chain.",
+        "arxiv_id": "2605.02108",
+        "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+        "MATCHED_TOPIC_LABELS": [
+            "Architecture and Training Dynamics",
+            "Representation Learning Theory and Structure"
+        ],
+        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+        "HOTSPOT_PAPER_LABELS": [],
+        "HOTSPOT_PAPER_PRIMARY_KIND": null,
+        "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+    },
+    "2605.00082": {
+        "ARXIVID": "2605.00082",
+        "COMMENT": "Recasts Forward-Forward local learning with hyperspherical class prototypes to enable single-pass inference.",
+        "RELEVANCE": 8,
+        "NOVELTY": 8,
+        "PRIMARY_TOPIC_ID": "architecture_training",
+        "MATCHED_TOPIC_IDS": [
+            "architecture_training",
+            "efficiency_scaling"
+        ],
+        "TOPIC_MATCH_COMMENT": "The main contribution is a new training/inference mechanism for locally trained networks, not just a speed tweak.",
+        "HOTSPOT_PAPER_TAGS": [
+            "new_frontier"
+        ],
+        "HOTSPOT_PAPER_COMMENT": "It proposes a distinct alternative training paradigm refinement with a meaningful inference bottleneck breakthrough for Forward-Forward methods.",
+        "SCORE": 16,
+        "authors": [
+            "Shalini Sarode",
+            "Brian Moser",
+            "Joachim Folz",
+            "Federico Raue",
+            "Tobias Nauen",
+            "Stanislav Frolov",
+            "Andreas Dengel"
+        ],
+        "title": "Hyperspherical Forward-Forward with Prototypical Representations",
+        "abstract": "The Forward-Forward (FF) algorithm presents a compelling, bio-inspired alternative to backpropagation. However, while efficient in training, it has a computationally prohibitive inference process that requires a separate forward pass for every class that is evaluated. In this work, we introduce the Hyperspherical Forward-Forward (HFF), a novel reformulation that resolves this critical bottleneck. Our core innovation is to reframe the local objective of each layer from a binary goodness-of-fit task to a direct multi-class classification problem within a hyperspherical feature space. We achieve this by learning a set of class-specific, unit-norm prototypes that act as geometric anchors and implicit negatives. This architectural innovation preserves the benefits of local training while enabling weight update and inference in a single forward pass, making it >40x faster than the original FF algorithm. Our method is simple to implement, scales effectively to modern convolutional architectures, and achieves superior accuracy on standard image classification benchmarks, closing the gap with backpropagation. Most notably, we are among the first greedy local-learning methods to report over 25% top-1 accuracy on ImageNet-1k, and 65.96% with transfer learning.",
+        "arxiv_id": "2605.00082",
+        "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+        "MATCHED_TOPIC_LABELS": [
+            "Architecture and Training Dynamics",
+            "Efficiency, Compression, and Large-Scale Training"
+        ],
+        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+        "HOTSPOT_PAPER_LABELS": [
+            "New Frontier Papers"
+        ],
+        "HOTSPOT_PAPER_PRIMARY_KIND": "new_frontier",
+        "HOTSPOT_PAPER_PRIMARY_LABEL": "New Frontier Papers",
+        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "llm_exact"
+    },
+    "2605.00236": {
+        "ARXIVID": "2605.00236",
+        "COMMENT": "Shows that redirecting safety-critical attention is much more effective than ablating heads, yielding a mechanistic result about safety emerging from routing dynamics.",
+        "RELEVANCE": 8,
+        "NOVELTY": 8,
+        "PRIMARY_TOPIC_ID": "architecture_training",
+        "MATCHED_TOPIC_IDS": [
+            "architecture_training"
+        ],
+        "TOPIC_MATCH_COMMENT": "Its strongest contribution is architectural mechanism analysis of attention heads and routing, not the jailbreak benchmark itself.",
+        "HOTSPOT_PAPER_TAGS": [
+            "daily_hot"
+        ],
+        "HOTSPOT_PAPER_COMMENT": "Mechanistic safety attacks on attention routing are broadly salient beyond this niche digest and likely part of the day's wider discussion.",
+        "SCORE": 16,
+        "authors": [
+            "Aviral Srivastava",
+            "Sourav Panda"
+        ],
+        "title": "Attention Is Where You Attack",
+        "abstract": "Safety-aligned large language models rely on RLHF and instruction tuning to refuse harmful requests, yet the internal mechanisms implementing safety behavior remain poorly understood. We introduce the Attention Redistribution Attack (ARA), a white-box adversarial attack that identifies safety-critical attention heads and crafts nonsemantic adversarial tokens that redirect attention away from safety-relevant positions. Unlike prior jailbreak methods operating at the semantic or output-logit level, ARA targets the geometry of softmax attention on the probability simplex using Gumbel-softmax optimization over targeted heads. Across LLaMA-3-8B-Instruct, Mistral-7B-Instruct-v0.1, and Gemma-2-9B-it, ARA bypasses safety alignment with as few as 5 tokens and 500 optimization steps, achieving 36% ASR on Mistral-7B and 30% on LLaMA-3 against 200 HarmBench prompts, while Gemma-2 remains at 1%. Our principal mechanistic finding is a dissociation between ablation and redistribution: zeroing out the top-ranked safety heads produces at most 1 flip among 39 to 50 baseline refusals, while ARA targeting the corresponding safety-heavy layers flips 72/200 prompts on Mistral-7B and 60/200 on LLaMA-3. This suggests that safety is not localized in these heads as removable components, but emerges from the attention routing they perform. Removing a head allows compensation through the residual stream, while redirecting its attention propagates a corrupted signal downstream.",
+        "arxiv_id": "2605.00236",
+        "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+        "MATCHED_TOPIC_LABELS": [
+            "Architecture and Training Dynamics"
+        ],
+        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+        "HOTSPOT_PAPER_LABELS": [
+            "Daily Hot Papers"
+        ],
+        "HOTSPOT_PAPER_PRIMARY_KIND": "daily_hot",
+        "HOTSPOT_PAPER_PRIMARY_LABEL": "Daily Hot Papers",
+        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "llm_exact"
+    },
+    "2605.00123": {
+        "ARXIVID": "2605.00123",
+        "COMMENT": "Finds minimal local causal representation edits that flip successful jailbreaks into refusals, giving mechanistic explanations of jailbreak success.",
+        "RELEVANCE": 8,
+        "NOVELTY": 8,
+        "PRIMARY_TOPIC_ID": "representation_structure",
+        "MATCHED_TOPIC_IDS": [
+            "architecture_training",
+            "representation_structure"
+        ],
+        "TOPIC_MATCH_COMMENT": "The central contribution is causal analysis of internal representations underlying jailbreak behavior, making representation structure the best fit.",
+        "HOTSPOT_PAPER_TAGS": [],
+        "HOTSPOT_PAPER_COMMENT": "",
+        "SCORE": 16,
+        "authors": [
+            "Shubham Kumar",
+            "Narendra Ahuja"
+        ],
+        "title": "Minimal, Local, Causal Explanations for Jailbreak Success in Large Language Models",
+        "abstract": "Safety trained large language models (LLMs) can often be induced to answer harmful requests through jailbreak prompts. Because we lack a robust understanding of why LLMs are susceptible to jailbreaks, future frontier models operating more autonomously in higher-stakes settings may similarly be vulnerable to such attacks. Prior work has studied jailbreak success by examining the model's intermediate representations, identifying directions in this space that causally encode concepts like harmfulness and refusal. Then, they globally explain all jailbreak attacks as attempting to reduce or strengthen these concepts (e.g., reduce harmfulness). However, different jailbreak strategies may succeed by strengthening or suppressing different intermediate concepts, and the same jailbreak strategy may not work for different harmful request categories (e.g., violence vs. cyberattack); thus, we seek to give a local explanation -- i.e., why did this specific jailbreak succeed? To address this gap, we introduce LOCA, a method that gives Local, CAusal explanations of jailbreak success by identifying a minimal set of interpretable, intermediate representation changes that causally induce model refusal on an otherwise successful jailbreak request. We evaluate LOCA on harmful original-jailbreak pairs from a large jailbreak benchmark across Gemma and Llama chat models, comparing against prior methods adapted to this setting. LOCA can successfully induce refusal by making, on average, six interpretable changes; prior work routinely fails to achieve refusal even after 20 changes. LOCA is a step toward mechanistic, local explanations of jailbreak success in LLMs. Code to be released.",
+        "arxiv_id": "2605.00123",
+        "PRIMARY_TOPIC_LABEL": "Representation Learning Theory and Structure",
+        "MATCHED_TOPIC_LABELS": [
+            "Architecture and Training Dynamics",
+            "Representation Learning Theory and Structure"
+        ],
+        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+        "HOTSPOT_PAPER_LABELS": [],
+        "HOTSPOT_PAPER_PRIMARY_KIND": null,
+        "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+    }
+}

@@ -1,0 +1,637 @@
+{
+    "schema_version": 2,
+    "meta": {
+        "date": "2026-05-16",
+        "sort": [
+            "score",
+            "relevance"
+        ],
+        "topic_schema_version": 1,
+        "total_papers": 15,
+        "usage": {
+            "model": "gpt-5.4",
+            "prompt_tokens": 200200,
+            "completion_tokens": 32530,
+            "prompt_cost": 0.5005,
+            "completion_cost": 0.48795,
+            "total_arxiv_papers": 445,
+            "total_scanned_papers": 291,
+            "total_relevant_papers": 15
+        }
+    },
+    "topic_order": [
+        "architecture_training",
+        "efficiency_scaling",
+        "representation_structure",
+        "memory_systems",
+        "world_models_open_ended_rl"
+    ],
+    "diagnostics": {
+        "total_papers": 15,
+        "topic_counts": [
+            {
+                "topic_id": "architecture_training",
+                "topic_label": "Architecture and Training Dynamics",
+                "paper_count": 2
+            },
+            {
+                "topic_id": "efficiency_scaling",
+                "topic_label": "Efficiency, Compression, and Large-Scale Training",
+                "paper_count": 0
+            },
+            {
+                "topic_id": "representation_structure",
+                "topic_label": "Representation Learning Theory and Structure",
+                "paper_count": 4
+            },
+            {
+                "topic_id": "memory_systems",
+                "topic_label": "Memory Structures and Agent Memory Systems",
+                "paper_count": 5
+            },
+            {
+                "topic_id": "world_models_open_ended_rl",
+                "topic_label": "World Models, Exploration, and Open-Ended Reinforcement Learning",
+                "paper_count": 4
+            }
+        ],
+        "assignment_source_counts": {
+            "llm_exact": 15
+        },
+        "llm_assignment_count": 15,
+        "heuristic_assignment_count": 0,
+        "default_assignment_count": 0,
+        "invalid_primary_topic_fallback_count": 0,
+        "missing_primary_topic_fallback_count": 0,
+        "hotspot_paper_kind_counts": {
+            "new_frontier": 3,
+            "daily_hot": 3
+        },
+        "hotspot_paper_assignment_source_counts": {
+            "heuristic": 1,
+            "llm_exact": 4,
+            "default": 10
+        }
+    },
+    "papers": {
+        "2605.13974": {
+            "ARXIVID": "2605.13974",
+            "COMMENT": "Identifies sparse massive-activation channels as a controllable semantic carrier subspace in DiTs.",
+            "RELEVANCE": 9,
+            "NOVELTY": 8,
+            "PRIMARY_TOPIC_ID": "representation_structure",
+            "MATCHED_TOPIC_IDS": [
+                "architecture_training",
+                "representation_structure"
+            ],
+            "TOPIC_MATCH_COMMENT": "The paper is fundamentally about mechanistic representation structure: how semantic information is concentrated, organized, and causally used inside diffusion transformers.",
+            "HOTSPOT_PAPER_TAGS": [
+                "daily_hot"
+            ],
+            "HOTSPOT_PAPER_COMMENT": "Broadly important today: Identifies sparse massive-activation channels as a controllable semantic carrier subspace in DiTs.",
+            "SCORE": 17,
+            "authors": [
+                "Evelyn Turri",
+                "Davide Bucciarelli",
+                "Sara Sarto",
+                "Lorenzo Baraldi",
+                "Marcella Cornia"
+            ],
+            "title": "Few Channels Draw The Whole Picture: Revealing Massive Activations in Diffusion Transformers",
+            "abstract": "Diffusion Transformers (DiTs) and related flow-based architectures are now among the strongest text-to-image generators, yet the internal mechanisms through which prompts shape image semantics remain poorly understood. In this work, we study massive activations: a small subset of hidden-state channels whose responses are consistently much larger than the rest. We show that, despite their sparsity, these few channels effectively draw the whole picture, in three complementary senses. First, they are functionally critical: a controlled disruption probe that zeroes the massive channels causes a sharp collapse in generation quality, while disrupting an equally-sized set of low-statistic channels has marginal effect. Second, they are spatially organized: restricting image-stream tokens to massive channels and clustering them yields coherent partitions that closely align with the main subject and salient regions, exposing a structured spatial code hidden inside an apparently outlier-like subspace. Third, they are transferable: transporting massive activations from one prompt-conditioned trajectory into another, shifts the final image toward the source prompt while preserving substantial content from the target, producing localized semantic interpolation rather than unstructured pixel blending. We exploit this property in two use cases: text-conditioned and image-conditioned semantic transport, where massive activations transport enables prompt interpolation and subject-driven generation without any additional training. Together, these results recast massive activations not as activation anomalies, but as a sparse prompt-conditioned carrier subspace that organizes and controls semantic information in modern DiT models.",
+            "arxiv_id": "2605.13974",
+            "PRIMARY_TOPIC_LABEL": "Representation Learning Theory and Structure",
+            "MATCHED_TOPIC_LABELS": [
+                "Architecture and Training Dynamics",
+                "Representation Learning Theory and Structure"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [
+                "Daily Hot Papers"
+            ],
+            "HOTSPOT_PAPER_PRIMARY_KIND": "daily_hot",
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "Daily Hot Papers",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "heuristic"
+        },
+        "2605.15053": {
+            "ARXIVID": "2605.15053",
+            "COMMENT": "Proposes an architectural read/write decomposition that prevents cross-domain overwriting during continual pretraining at LLM scale.",
+            "RELEVANCE": 8,
+            "NOVELTY": 8,
+            "PRIMARY_TOPIC_ID": "architecture_training",
+            "MATCHED_TOPIC_IDS": [
+                "architecture_training"
+            ],
+            "TOPIC_MATCH_COMMENT": "The main contribution is a new architectural mechanism for training dynamics and catastrophic-forgetting avoidance during continual pretraining.",
+            "HOTSPOT_PAPER_TAGS": [
+                "new_frontier"
+            ],
+            "HOTSPOT_PAPER_COMMENT": "It claims a qualitatively new architectural route to replay-free continual pretraining at large scale, making it a plausible new-direction paper.",
+            "SCORE": 16,
+            "authors": [
+                "Anurup Ganguli"
+            ],
+            "title": "TFGN: Task-Free, Replay-Free Continual Pre-Training Without Catastrophic Forgetting at LLM Scale",
+            "abstract": "Continually pre-training a large language model on heterogeneous text domains, without replay or task labels, has remained an unsolved architectural problem at LLM scale. Existing methods rely on replay buffers, task identifiers, regularization penalties that scale poorly, or sentence-classification-scale evaluation.   We introduce TFGN, an architectural overlay for transformer language models that produces input-conditioned, parameter-efficient updates while leaving the rest of the transformer unchanged. On six heterogeneous text domains (Prose, Python, Math, Biomedical, Chinese, JavaScript) at 1B tokens per phase across three model scales (~398M, ~739M, ~9B) and two regimes (From-Scratch and Retrofit), TFGN achieves backward transfer of -0.007 at LLaMA 3.1 8B Retrofit, HellaSwag retention 0.506/0.504/0.510, and >=99.59% L2-orthogonal gradient separation between domain pairs - with no replay, no task IDs, no Fisher penalty.   The same matrices show positive cross-domain forward transfer: held-out JavaScript PPL drops 26.8% at LLaMA-8B Retrofit and 62.0% at GPT-2 Medium From-Scratch purely from Python training. Two extensions on the same substrate close further open problems. A closed-loop meta-control layer (Extension A) reduces forgetting by an additional 81% at ~398M, mapping onto the System A and System M roles of Dupoux et al. (arXiv:2603.15381). An operator-level plan vector (Extension B) reshapes forward-pass behavior at 99.96% cosine fidelity over 30 source->target pairs.   The architectural insight is a Read/Write decomposition: the forward pass is fully dense, while cross-domain parameter updates are structured so prior-domain subspaces are not written to. To our knowledge, TFGN is the first architecture that simultaneously closes catastrophic forgetting at LLM scale, realizes a closed-loop autonomous-learning meta-controller, and carries an operator-level latent planner.",
+            "arxiv_id": "2605.15053",
+            "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+            "MATCHED_TOPIC_LABELS": [
+                "Architecture and Training Dynamics"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [
+                "New Frontier Papers"
+            ],
+            "HOTSPOT_PAPER_PRIMARY_KIND": "new_frontier",
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "New Frontier Papers",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "llm_exact"
+        },
+        "2605.15156": {
+            "ARXIVID": "2605.15156",
+            "COMMENT": "Encodes new knowledge into a dedicated memory model with corpus-size-independent retrieval cost and frozen base LLM.",
+            "RELEVANCE": 8,
+            "NOVELTY": 8,
+            "PRIMARY_TOPIC_ID": "memory_systems",
+            "MATCHED_TOPIC_IDS": [
+                "efficiency_scaling",
+                "memory_systems"
+            ],
+            "TOPIC_MATCH_COMMENT": "The primary contribution is a new modular memory mechanism for integrating and recalling updated knowledge outside the base model.",
+            "HOTSPOT_PAPER_TAGS": [],
+            "HOTSPOT_PAPER_COMMENT": "",
+            "SCORE": 16,
+            "authors": [
+                "Ryan Wei Heng Quek",
+                "Sanghyuk Lee",
+                "Alfred Wei Lun Leong",
+                "Arun Verma",
+                "Alok Prakash",
+                "Nancy F. Chen",
+                "Bryan Kian Hsiang Low",
+                "Daniela Rus",
+                "Armando Solar-Lezama"
+            ],
+            "title": "MeMo: Memory as a Model",
+            "abstract": "Large language models (LLMs) achieve strong performance across a wide range of tasks, but remain frozen after pretraining until subsequent updates. Many real-world applications require timely, domain-specific information, motivating the need for efficient mechanisms to incorporate new knowledge. In this paper, we introduce MeMo (Memory as a Model), a modular framework that encodes new knowledge into a dedicated memory model while keeping the LLM parameters unchanged. Compared to existing methods, MeMo offers several advantages: (a) it captures complex cross-document relationships, (b) it is robust to retrieval noise, (c) it avoids catastrophic forgetting in the LLM, (d) it does not require access to the LLM's weights or output logits, enabling plug-and-play integration with both open and proprietary closed-source LLMs, and (e) its retrieval cost is independent of corpus size at inference time. Our experimental results on three benchmarks, BrowseComp-Plus, NarrativeQA, and MuSiQue, show that MeMo achieves strong performance compared to existing methods across diverse settings.",
+            "arxiv_id": "2605.15156",
+            "PRIMARY_TOPIC_LABEL": "Memory Structures and Agent Memory Systems",
+            "MATCHED_TOPIC_LABELS": [
+                "Efficiency, Compression, and Large-Scale Training",
+                "Memory Structures and Agent Memory Systems"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [],
+            "HOTSPOT_PAPER_PRIMARY_KIND": null,
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+        },
+        "2601.01972": {
+            "ARXIVID": "2601.01972",
+            "COMMENT": "Shows short triggers can irreversibly overwrite Mamba hidden states, exposing sequence-memory fragility in SSMs.",
+            "RELEVANCE": 8,
+            "NOVELTY": 8,
+            "PRIMARY_TOPIC_ID": "memory_systems",
+            "MATCHED_TOPIC_IDS": [
+                "architecture_training",
+                "memory_systems"
+            ],
+            "TOPIC_MATCH_COMMENT": "Best fit is memory systems because the core phenomenon is destructive overwriting of latent sequence memory in state-space models, directly probing how memory is stored and lost.",
+            "HOTSPOT_PAPER_TAGS": [
+                "daily_hot"
+            ],
+            "HOTSPOT_PAPER_COMMENT": "The discovery of hidden-state poisoning in Mamba-style models is broadly important for current sequence-model design and safety, making it notable beyond the specialized reading list.",
+            "SCORE": 16,
+            "authors": [
+                "Alexandre Le Mercier",
+                "Chris Develder",
+                "Thomas Demeester"
+            ],
+            "title": "Hidden State Poisoning Attacks against Mamba-based Language Models",
+            "abstract": "State space models (SSMs) like Mamba offer efficient alternatives to Transformer-based language models, with linear time complexity. Yet, their adversarial robustness remains critically unexplored. This paper studies the phenomenon whereby specific short input phrases induce a partial amnesia effect in such models, by irreversibly overwriting information in their hidden states, referred to as a Hidden State Poisoning Attack (HiSPA). Our benchmark RoBench-25 allows evaluating a model's information retrieval capabilities when subject to HiSPAs, and confirms the vulnerability of SSMs against such attacks. Even the recent Jamba-1.7-Mini SSM--Transformer (a 52B hybrid model) collapses on RoBench-25 under some HiSPA triggers, whereas pure Transformers do not. We also observe that HiSPA triggers significantly weaken the Jamba model on the popular Open-Prompt-Injections benchmark, unlike pure Transformers. We further show that the theoretical and empirical findings extend to Mamba-2, and also analyse a Mamba-2-based hybrid (Nemotron-3-Nano). Finally, our interpretability study reveals patterns in Mamba's hidden layers during HiSPAs that could be used to build a HiSPA mitigation system. The full code and data to reproduce the experiments can be found at https://anonymous.4open.science/r/hispa_anonymous-5DB0.",
+            "arxiv_id": "2601.01972",
+            "PRIMARY_TOPIC_LABEL": "Memory Structures and Agent Memory Systems",
+            "MATCHED_TOPIC_LABELS": [
+                "Architecture and Training Dynamics",
+                "Memory Structures and Agent Memory Systems"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [
+                "Daily Hot Papers"
+            ],
+            "HOTSPOT_PAPER_PRIMARY_KIND": "daily_hot",
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "Daily Hot Papers",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "llm_exact"
+        },
+        "2605.14211": {
+            "ARXIVID": "2605.14211",
+            "COMMENT": "Self-improvement loop learns from internet video plus long-term memory to sustain long-horizon embodied progress.",
+            "RELEVANCE": 8,
+            "NOVELTY": 8,
+            "PRIMARY_TOPIC_ID": "world_models_open_ended_rl",
+            "MATCHED_TOPIC_IDS": [
+                "memory_systems",
+                "world_models_open_ended_rl"
+            ],
+            "TOPIC_MATCH_COMMENT": "Best fit is world models/open-ended RL because the paper targets transferable behavior acquisition in long-horizon embodied environments through self-improvement and interaction, with memory as a supporting mechanism.",
+            "HOTSPOT_PAPER_TAGS": [
+                "new_frontier",
+                "daily_hot"
+            ],
+            "HOTSPOT_PAPER_COMMENT": "A self-improving embodied agent learning from unlabeled video and its own experience is broadly important and plausibly opens a new direction for scalable long-horizon learning.",
+            "SCORE": 16,
+            "authors": [
+                "Benjamin Schneider",
+                "Xavier Schneider",
+                "Victor Zhong",
+                "Sun Sun"
+            ],
+            "title": "ASH: Agents that Self-Hone via Embodied Learning",
+            "abstract": "Long-horizon embodied tasks remain a fundamental challenge in AI, as current methods rely on hand-engineered rewards or action-labeled demonstrations, neither of which scales. We introduce ASH, an agentic system that learns an embodied policy from unlabeled, noisy internet video, without reward shaping or expert annotation. ASH follows a self-improvement loop; when it gets stuck, ASH learns an Inverse Dynamics Model (IDM) from its own trajectories, and uses its IDM to extract supervision from relevant internet video. ASH uses unsupervised learning to identify key moments from large-scale internet video and retains them as long-term memory -- allowing it to tackle long-horizon problems. We evaluate ASH on two complementary environments demanding multi-hour planning: Pokemon Emerald, a turn-based RPG, and The Legend of Zelda: The Minish Cap, a real-time action-adventure game. In both games, behavioral cloning, retrieval-augmented and zero-shot foundation-model baselines plateau, while ASH sustains progression across our 8-hour evaluation. ASH reaches an average of $11.2/12$ milestones in Pokemon Emerald and $9.9/12$ in Legend of Zelda, while the strongest baseline gets stuck in both environments at an average of $6.5/12$ and $6.0/12$ milestones, respectively. We demonstrate that self-improving agents are a scalable recipe for long-horizon embodied learning.",
+            "arxiv_id": "2605.14211",
+            "PRIMARY_TOPIC_LABEL": "World Models, Exploration, and Open-Ended Reinforcement Learning",
+            "MATCHED_TOPIC_LABELS": [
+                "Memory Structures and Agent Memory Systems",
+                "World Models, Exploration, and Open-Ended Reinforcement Learning"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [
+                "New Frontier Papers",
+                "Daily Hot Papers"
+            ],
+            "HOTSPOT_PAPER_PRIMARY_KIND": "new_frontier",
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "New Frontier Papers",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "llm_exact"
+        },
+        "2605.14297": {
+            "ARXIVID": "2605.14297",
+            "COMMENT": "Introduces an unbiased mixed-gradient estimator for hybrid discrete-continuous action RL with variance-reducing structure near discrete best responses.",
+            "RELEVANCE": 8,
+            "NOVELTY": 8,
+            "PRIMARY_TOPIC_ID": "world_models_open_ended_rl",
+            "MATCHED_TOPIC_IDS": [
+                "world_models_open_ended_rl"
+            ],
+            "TOPIC_MATCH_COMMENT": "This is a foundational RL optimization paper about learning principles in structured action spaces, not LLM post-training.",
+            "HOTSPOT_PAPER_TAGS": [],
+            "HOTSPOT_PAPER_COMMENT": "",
+            "SCORE": 16,
+            "authors": [
+                "Matias Alvo",
+                "Daniel Russo",
+                "Yash Kanoria"
+            ],
+            "title": "Policy Optimization in Hybrid Discrete-Continuous Action Spaces via Mixed Gradients",
+            "abstract": "We study reinforcement learning in hybrid discrete-continuous action spaces, such as settings where the discrete component selects a regime (or index) and the continuous component optimizes within it -- a structure common in robotics, control, and operations problems. Standard model-free policy gradient methods rely on score-function (SF) estimators and suffer from severe credit-assignment issues in high-dimensional settings, leading to poor gradient quality. On the other hand, differentiable simulation largely sidesteps these issues by backpropagating through a simulator, but the presence of discrete actions or non-smooth dynamics yields biased or uninformative gradients. To address this, we propose Hybrid Policy Optimization (HPO), which backpropagates through the simulator wherever smoothness permits, using a mixed gradient estimator that combines pathwise and SF gradients while maintaining unbiasedness. We also show how problems with action discontinuities can be reformulated in hybrid form, further broadening its applicability. Empirically, HPO substantially outperforms PPO on inventory control and switched linear-quadratic regulator problems, with performance gaps increasing as the continuous action dimension grows. Finally, we characterize the structure of the mixed gradient, showing that its cross term -- which captures how continuous actions influence future discrete decisions -- becomes negligible near a discrete best response, thereby enabling approximate decentralized updates of the continuous and discrete components and reducing variance near optimality. All resources are available at github.com/MatiasAlvo/hybrid-rl.",
+            "arxiv_id": "2605.14297",
+            "PRIMARY_TOPIC_LABEL": "World Models, Exploration, and Open-Ended Reinforcement Learning",
+            "MATCHED_TOPIC_LABELS": [
+                "World Models, Exploration, and Open-Ended Reinforcement Learning"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [],
+            "HOTSPOT_PAPER_PRIMARY_KIND": null,
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+        },
+        "2605.14177": {
+            "ARXIVID": "2605.14177",
+            "COMMENT": "Retrieves long-horizon personal memories by generating prospective future steps as retrieval probes instead of relying on semantic similarity alone.",
+            "RELEVANCE": 8,
+            "NOVELTY": 8,
+            "PRIMARY_TOPIC_ID": "memory_systems",
+            "MATCHED_TOPIC_IDS": [
+                "memory_systems"
+            ],
+            "TOPIC_MATCH_COMMENT": "It proposes a new principle for recalling relevant user memories via prospection-guided retrieval, directly matching agent memory systems.",
+            "HOTSPOT_PAPER_TAGS": [],
+            "HOTSPOT_PAPER_COMMENT": "",
+            "SCORE": 16,
+            "authors": [
+                "Harshita Chopra",
+                "Krishna Kant Chintalapudi",
+                "Suman Nath",
+                "Ryen W. White",
+                "Chirag Shah"
+            ],
+            "title": "Thinking Ahead: Prospection-Guided Retrieval of Memory with Language Models",
+            "abstract": "Long-horizon personalization requires dialogue assistants to retrieve user-specific facts from extended interaction histories. In practice, many relevant facts often have low semanticsimilarity to the query under dense retrieval. Standard Retrieval-Augmented Generation (RAG) and GraphRAG systems are still largely retrospective: they rely on embedding similarity to the query or on fixed graph traversals, so they often miss facts that matter for the user's needs but lie far from the query in embedding space. Inspired by prospection, the human ability to use imagined futures as cues for recall, we introduce Prospection-Guided Retrieval (PGR), which decouples retrieval from how memories are stored. Given a user query, PGR first expands the goal into a short Tree-of-Thought (ToT) or linear chain of plausible next steps, and uses these steps as retrieval probes rather than relying on the original query alone. The facts retrieved by these probes are then used to personalize the next round of prospection, enabling PGR to uncover additional memories that become relevant only after the simulation is grounded in the user's history. We also introduce MemoryQuest, a challenging multi-session benchmark in which each query is annotated with 3--5 dated reference facts subject to a low query-reference similarity constraint. Across 1,625 queries spanning 185 user profiles from 3 publicly available datasets, PGR-TOT substantially improves retrieval, including nearly 3x recall on MemoryQuest over the strongest baseline. In pairwise LLM-as-judge comparisons against baselines, PGR-generated responses are preferred on 89--98% of queries, with blinded human annotations on held-out subsets showing the same trend. Overall, the results demonstrate that explicit prospection yields large gains in long-horizon retrieval and response quality relative to similarity-only baselines.",
+            "arxiv_id": "2605.14177",
+            "PRIMARY_TOPIC_LABEL": "Memory Structures and Agent Memory Systems",
+            "MATCHED_TOPIC_LABELS": [
+                "Memory Structures and Agent Memory Systems"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [],
+            "HOTSPOT_PAPER_PRIMARY_KIND": null,
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+        },
+        "2605.14358": {
+            "ARXIVID": "2605.14358",
+            "COMMENT": "Finds that long reasoning traces are often overcomplete and that minimal sufficient step subsets have cleaner, lower-dimensional representation geometry.",
+            "RELEVANCE": 8,
+            "NOVELTY": 8,
+            "PRIMARY_TOPIC_ID": "representation_structure",
+            "MATCHED_TOPIC_IDS": [
+                "representation_structure"
+            ],
+            "TOPIC_MATCH_COMMENT": "The core contribution is mechanistic analysis of how reasoning-supporting representations are organized and compressed, fitting representation structure best.",
+            "HOTSPOT_PAPER_TAGS": [],
+            "HOTSPOT_PAPER_COMMENT": "",
+            "SCORE": 16,
+            "authors": [
+                "Sanjoy Chowdhury",
+                "Dinesh Manocha"
+            ],
+            "title": "Uncovering the Representation Geometry of Minimal Cores in Overcomplete Reasoning Traces",
+            "abstract": "Language models often generate long chain-of-thought traces, but it remains unclear how much of this reasoning is necessary for preserving the final prediction. We study this through the lens of overcomplete reasoning traces: generated traces that contain more intermediate steps than are needed to support the model's answer. We define the minimal core as the smallest subset of steps that preserves either the final answer or predictive distribution, and introduce metrics for compression ratio, redundancy mass, step necessity, and necessity concentration. Across six deliberative reasoning benchmarks spanning arithmetic, competition mathematics, expert scientific reasoning, and commonsense multi-hop QA, we find substantial overcompleteness: on average, 46% of steps are removable under greedy minimal-core extraction while preserving the original answer in 86% of cases. We also find that predictive support is concentrated: the top three steps account for 65% of measured necessity mass on average. Beyond compression, minimal cores expose a cleaner geometry of reasoning: compared with full traces, they improve correct-incorrect trace separation by 11 points, reduce estimated intrinsic dimensionality by 34%, and transfer across model families with 85% off-diagonal answer retention. Theoretically, we establish existence of minimal sufficient subsets, local irreducibility guarantees for greedy elimination, and certificates of overcompleteness and sparse necessity. Together, these results suggest that full reasoning traces are often verbose and overcomplete, while minimal cores isolate the effective support underlying language-model predictions.",
+            "arxiv_id": "2605.14358",
+            "PRIMARY_TOPIC_LABEL": "Representation Learning Theory and Structure",
+            "MATCHED_TOPIC_LABELS": [
+                "Representation Learning Theory and Structure"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [],
+            "HOTSPOT_PAPER_PRIMARY_KIND": null,
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+        },
+        "2605.14619": {
+            "ARXIVID": "2605.14619",
+            "COMMENT": "Maps multi-run chain-of-thought trajectories into graph-structured process families, revealing same-answer but route-divergent reasoning isomers.",
+            "RELEVANCE": 8,
+            "NOVELTY": 8,
+            "PRIMARY_TOPIC_ID": "representation_structure",
+            "MATCHED_TOPIC_IDS": [
+                "representation_structure"
+            ],
+            "TOPIC_MATCH_COMMENT": "It is fundamentally about the geometry and organization of internal reasoning processes across runs, making representation structure the best fit.",
+            "HOTSPOT_PAPER_TAGS": [],
+            "HOTSPOT_PAPER_COMMENT": "",
+            "SCORE": 16,
+            "authors": [
+                "Kang Chen",
+                "Junjie Nian",
+                "Yixin Cao",
+                "Yugang Jiang"
+            ],
+            "title": "SliceGraph: Mapping Process Isomers in Multi-Run Chain-of-Thought Reasoning",
+            "abstract": "Multi-run chain-of-thought reasoning is usually collapsed to final-answer aggregates, which discard howsampled trajectories share, split, and rejoin through intermediate computation. We propose SliceGraph, a post-hoc problem-model-cell graph built by mutual-kNN over sparse activation-key Jaccard similarity between CoT slices, and treat it as a measurement object for process geometry rather than as a decoding program. Across sampled CoT ensembles from three primary 4B/8B models on math and science benchmarks, blinded annotation supports SliceGraph biconnected components as shared reasoning-state units and process families as within-family strategy-coherent route units. In 85.5% of 954 problem-model cells, correct CoTs sharing the same normalized answer split into multiple process families; among cells with at least two such runs, 76.6% of run pairs are cross-family on average. We call such same-answer, family-divergent correct trajectories process isomers. A label-seeded reward field provides a separate value-landscape layer: success-associated regions often split into disconnected high-value cores, and route families specialize over these core footprints rather than merely duplicating one another. A typed-state transition analysis further shows that process families navigate the same atlas with distinct transition kernels under matched null controls. Representation ablations, a cross-architecture replication, and two cross-scale replications support the robustness of the route-family scaffold, showing that final-answer aggregation overlooks this structured multi-route process geometry.",
+            "arxiv_id": "2605.14619",
+            "PRIMARY_TOPIC_LABEL": "Representation Learning Theory and Structure",
+            "MATCHED_TOPIC_LABELS": [
+                "Representation Learning Theory and Structure"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [],
+            "HOTSPOT_PAPER_PRIMARY_KIND": null,
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+        },
+        "2605.14175": {
+            "ARXIVID": "2605.14175",
+            "COMMENT": "Maintains an explicit dependency graph with retraction to verify whether new utterances remain supported by conversation history.",
+            "RELEVANCE": 8,
+            "NOVELTY": 8,
+            "PRIMARY_TOPIC_ID": "memory_systems",
+            "MATCHED_TOPIC_IDS": [
+                "memory_systems"
+            ],
+            "TOPIC_MATCH_COMMENT": "This directly targets structured conversational memory, support tracking, and forgetting/retraction, which are central memory-system concerns.",
+            "HOTSPOT_PAPER_TAGS": [],
+            "HOTSPOT_PAPER_COMMENT": "",
+            "SCORE": 16,
+            "authors": [
+                "Qisong He",
+                "Yi Dong",
+                "Xiaowei Huang"
+            ],
+            "title": "Grounded Continuation: A Linear-Time Runtime Verifier for LLM Conversations",
+            "abstract": "In long conversations, an LLM can produce a next utterance that sounds plausible but rests on premises the conversation has already abandoned. Context-manipulation attacks against deployed agents now actively exploit this gap. We close it with a runtime verifier that maintains an explicit dependency graph: an LLM classifies each turn into one of 8 update operations drawn from four formalisms (dynamic epistemic logic, abductive reasoning, awareness logic, argumentation), and a symbolic engine records which claims depend on which evidence. Checking whether a continuation is supported reduces to a graph walk; retraction propagates through the same graph to flag exactly the conclusions that lose support, with linear per-turn cost and a formal conflict-free guarantee. On LongMemEval-KU oracle (n=78), the verifier reaches 89.7% accuracy vs. 88.5% for the LLM-only baseline (+1.3pp) and 87.2% for a transcript-RAG baseline matched on retrieval budget (+2.6pp); wins among disagreements are correct abstentions where the baseline confabulates. On LoCoMo's 60 official QA items the verifier is competitive with retrieval-augmented baselines. Beyond external benchmarks, we construct two multi-agent scenarios and a 50-item grounding test: on the 15-item stale-premise subset, the verifier reaches 100% accuracy vs. 93.3% (+6.7pp). These instantiate a soundness-faithfulness decomposition: the structural check is sound by construction, and per-deployment LLM extraction faithfulness is the empirical question we measure across four LLM families. The retraction check plateaus at microseconds while history-replay grows linearly with conversation length.",
+            "arxiv_id": "2605.14175",
+            "PRIMARY_TOPIC_LABEL": "Memory Structures and Agent Memory Systems",
+            "MATCHED_TOPIC_LABELS": [
+                "Memory Structures and Agent Memory Systems"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [],
+            "HOTSPOT_PAPER_PRIMARY_KIND": null,
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+        },
+        "2605.14004": {
+            "ARXIVID": "2605.14004",
+            "COMMENT": "Adds conditional attribute estimation to autoregressive sequence models, enabling per-token credit assignment and counterfactual token-level analysis in one forward pass.",
+            "RELEVANCE": 8,
+            "NOVELTY": 8,
+            "PRIMARY_TOPIC_ID": "architecture_training",
+            "MATCHED_TOPIC_IDS": [
+                "architecture_training",
+                "representation_structure"
+            ],
+            "TOPIC_MATCH_COMMENT": "The primary fit is architectural/training design because it changes the autoregressive model\u2019s predictive mechanism to jointly model token probabilities and conditional attributes, with representation insights as a secondary benefit.",
+            "HOTSPOT_PAPER_TAGS": [
+                "new_frontier"
+            ],
+            "HOTSPOT_PAPER_COMMENT": "The paper appears to open a new modeling direction by integrating sequence-level attribute estimation, token-level credit assignment, and controllable decoding into the core autoregressive forward pass.",
+            "SCORE": 16,
+            "authors": [
+                "Erica Stutz",
+                "Giacomo Marino",
+                "Daniella Meeker",
+                "Qiao Liu",
+                "Andrew J. Loza"
+            ],
+            "title": "Conditional Attribute Estimation with Autoregressive Sequence Models",
+            "abstract": "Generative models are often trained with a next-token prediction objective, yet many downstream applications require the ability to estimate or control sequence-level properties. Next-token prediction can lead to overfitting of local patterns during training, underfitting of global structure, and requires significant downstream modifications or expensive sampling to guide or predict the global attributes of generated samples at inference time. Here, we introduce Conditional Attribute Transformers, a novel method for jointly estimating the next-token probability and the value of an attribute conditional on each potential next token selection. This framework enables three critical capabilities within a single forward pass, without modification of the input sequence: (1) per-token credit assignment across an entire sequence, by identifying how each token in a sequence is associated with an attribute's value; (2) counterfactual analysis, by quantifying attribute differences conditional on alternative next token choices; (3) steerable generation, by decoding sequences based on a combination of next-token and attribute likelihoods. Our approach achieves state of the art performance on sparse reward tasks, improves next-token prediction at sufficient model sizes, estimates attribute probabilities orders of magnitude faster than sampling, and can guide decoding of autoregressive sequence models on a range of language tasks.",
+            "arxiv_id": "2605.14004",
+            "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+            "MATCHED_TOPIC_LABELS": [
+                "Architecture and Training Dynamics",
+                "Representation Learning Theory and Structure"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [
+                "New Frontier Papers"
+            ],
+            "HOTSPOT_PAPER_PRIMARY_KIND": "new_frontier",
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "New Frontier Papers",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "llm_exact"
+        },
+        "2605.13941": {
+            "ARXIVID": "2605.13941",
+            "COMMENT": "Self-evolving retrieval configuration for long-term agent memory with closed-loop diagnosis.",
+            "RELEVANCE": 8,
+            "NOVELTY": 8,
+            "PRIMARY_TOPIC_ID": "memory_systems",
+            "MATCHED_TOPIC_IDS": [
+                "memory_systems"
+            ],
+            "TOPIC_MATCH_COMMENT": "The contribution is squarely about adaptive long-term memory systems, specifically co-evolving retrieval mechanisms rather than treating memory infrastructure as fixed.",
+            "HOTSPOT_PAPER_TAGS": [],
+            "HOTSPOT_PAPER_COMMENT": "",
+            "SCORE": 16,
+            "authors": [
+                "Jiaqi Liu",
+                "Xinyu Ye",
+                "Peng Xia",
+                "Zeyu Zheng",
+                "Cihang Xie",
+                "Mingyu Ding",
+                "Huaxiu Yao"
+            ],
+            "title": "EvolveMem:Self-Evolving Memory Architecture via AutoResearch for LLM Agents",
+            "abstract": "Long-term memory is essential for LLM agents that operate across multiple sessions, yet existing memory systems treat retrieval infrastructure as fixed: stored content evolves while scoring functions, fusion strategies, and answer-generation policies remain frozen at deployment. We argue that truly adaptive memory requires co-evolution at two levels: the stored knowledge and the retrieval mechanism that queries it. We present EvolveMem, a self-evolving memory architecture that exposes its full retrieval configuration as a structured action space optimized by an LLM-powered diagnosis module. In each evolution round, the module reads per-question failure logs, identifies root causes, and proposes targeted configuration adjustments; a guarded meta-analyzer applies them with automatic revert-on-regression and explore-on-stagnation safeguards. This closed-loop self-evolution realizes an AutoResearch process: the system autonomously conducts iterative research cycles on its own architecture, replacing manual configuration tuning. Starting from a minimal baseline, the process converges autonomously, discovering effective retrieval strategies including entirely new configuration dimensions not present in the original action space. On LoCoMo, EvolveMem outperforms the strongest baseline by 25.7% relative and achieves a 78.0% relative improvement over the minimal baseline. On MemBench, EvolveMem exceeds the strongest baseline by 18.9% relative. Evolved configurations transfer across benchmarks with positive rather than catastrophic transfer, indicating that the self-evolution process captures universal retrieval principles rather than benchmark-specific heuristics. Code is available at https://github.com/aiming-lab/SimpleMem.",
+            "arxiv_id": "2605.13941",
+            "PRIMARY_TOPIC_LABEL": "Memory Structures and Agent Memory Systems",
+            "MATCHED_TOPIC_LABELS": [
+                "Memory Structures and Agent Memory Systems"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [],
+            "HOTSPOT_PAPER_PRIMARY_KIND": null,
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+        },
+        "2605.14723": {
+            "ARXIVID": "2605.14723",
+            "COMMENT": "LLM agent learns treatment policies by interacting with a clinical world model.",
+            "RELEVANCE": 8,
+            "NOVELTY": 8,
+            "PRIMARY_TOPIC_ID": "world_models_open_ended_rl",
+            "MATCHED_TOPIC_IDS": [
+                "world_models_open_ended_rl"
+            ],
+            "TOPIC_MATCH_COMMENT": "This directly matches the topic through action-conditioned world-model interaction and agent training that leverages simulated dynamics for better sequential decision making.",
+            "HOTSPOT_PAPER_TAGS": [],
+            "HOTSPOT_PAPER_COMMENT": "",
+            "SCORE": 16,
+            "authors": [
+                "Minghao Wu",
+                "Yuting Yan",
+                "Zhenyang Cai",
+                "Ke Ji",
+                "Chuangsen Fang",
+                "Ziying Sheng",
+                "Xidong Wang",
+                "Rongsheng Wang",
+                "Hejia Zhang",
+                "Shuang Li",
+                "Benyou Wang",
+                "Hongyuan Zha"
+            ],
+            "title": "Agentifying Patient Dynamics within LLMs through Interacting with Clinical World Model",
+            "abstract": "Sepsis management in the ICU requires sequential treatment decisions under rapidly evolving patient physiology. Although large language models (LLMs) encode broad clinical knowledge and can reason over guidelines, they are not inherently grounded in action-conditioned patient dynamics. We introduce SepsisAgent, a world model-augmented LLM agent for sepsis treatment recommendation. SepsisAgent uses a learned Clinical World Model to simulate patient responses under candidate fluid--vasopressor interventions, and follows a propose--simulate--refine workflow before committing to a prescription. We first show that world-model access alone yields inconsistent LLM decision performance, motivating agent-specific training. We then train SepsisAgent through a three-stage curriculum: patient-dynamics supervised fine-tuning, propose--simulate--refine behavior cloning, and world-model-based agentic reinforcement learning. On MIMIC-IV sepsis trajectories, SepsisAgent outperforms all traditional RL and LLM-based baselines in off-policy value while achieving the best safety profile under guideline adherence and unsafe-action metrics. Further analysis shows that repeated interaction with the Clinical World Model enables the agent to learn regularities in patient evolution, which remain useful even when simulator access is removed.",
+            "arxiv_id": "2605.14723",
+            "PRIMARY_TOPIC_LABEL": "World Models, Exploration, and Open-Ended Reinforcement Learning",
+            "MATCHED_TOPIC_LABELS": [
+                "World Models, Exploration, and Open-Ended Reinforcement Learning"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [],
+            "HOTSPOT_PAPER_PRIMARY_KIND": null,
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+        },
+        "2605.14749": {
+            "ARXIVID": "2605.14749",
+            "COMMENT": "Extends model interventions from linear directions to non-linear manifolds and implicit features.",
+            "RELEVANCE": 8,
+            "NOVELTY": 8,
+            "PRIMARY_TOPIC_ID": "representation_structure",
+            "MATCHED_TOPIC_IDS": [
+                "representation_structure"
+            ],
+            "TOPIC_MATCH_COMMENT": "The paper is centrally about how features are represented inside LLMs and how to manipulate non-linearly encoded internal structure, which directly matches mechanistic representation understanding.",
+            "HOTSPOT_PAPER_TAGS": [],
+            "HOTSPOT_PAPER_COMMENT": "",
+            "SCORE": 16,
+            "authors": [
+                "Sangwoo Kim"
+            ],
+            "title": "Non-linear Interventions on Large Language Models",
+            "abstract": "Intervention is one of the most representative and widely used methods for understanding the internal representations of large language models (LLMs). However, existing intervention methods are confined to linear interventions grounded in the Linear Representation Hypothesis, leaving features encoded along non-linear manifolds beyond their reach. In this work, we introduce a general formulation of intervention that extends naturally to non-linearly represented features, together with a learning procedure that further enables intervention on implicit features lacking a direct output signature. We validate our framework on refusal bypass steering, where it steers the model more precisely than linear baselines by intervening on a non-linear feature governing refusal.",
+            "arxiv_id": "2605.14749",
+            "PRIMARY_TOPIC_LABEL": "Representation Learning Theory and Structure",
+            "MATCHED_TOPIC_LABELS": [
+                "Representation Learning Theory and Structure"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [],
+            "HOTSPOT_PAPER_PRIMARY_KIND": null,
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+        },
+        "2605.14599": {
+            "ARXIVID": "2605.14599",
+            "COMMENT": "Proves equivalence and fast statistical rates for entropy-regularized min-max inverse reinforcement learning.",
+            "RELEVANCE": 8,
+            "NOVELTY": 8,
+            "PRIMARY_TOPIC_ID": "world_models_open_ended_rl",
+            "MATCHED_TOPIC_IDS": [
+                "world_models_open_ended_rl"
+            ],
+            "TOPIC_MATCH_COMMENT": "This is foundational reinforcement learning theory on reward inference and identifiability, fitting the RL side of the target topics rather than LLM post-training.",
+            "HOTSPOT_PAPER_TAGS": [],
+            "HOTSPOT_PAPER_COMMENT": "",
+            "SCORE": 16,
+            "authors": [
+                "Andreas Schlaginhaufen",
+                "Maryam Kamgarpour"
+            ],
+            "title": "Fast Rates for Inverse Reinforcement Learning",
+            "abstract": "We establish novel structural and statistical results for entropy-regularized min-max inverse reinforcement learning (Min-Max-IRL) with linear reward classes in finite-horizon MDPs with Borel state and action spaces. On the structural side, we show that maximum likelihood estimation (MLE) and Min-Max-IRL are equivalent at the population level, and at the empirical level under deterministic dynamics. On the statistical side, exploiting pseudo-self-concordance of the Min-Max-IRL loss, we prove that both the trajectory-level KL divergence and the squared parameter error in the Hessian norm decay at the fast rate $\\mathcal{O}(n^{-1})$, where $n$ is the number of expert trajectories. Our guarantees apply under misspecification and require no exploration assumptions. We further extend reward-identifiability results to general Borel spaces and derive novel results on the derivatives of the soft-optimal value function with respect to reward parameters.",
+            "arxiv_id": "2605.14599",
+            "PRIMARY_TOPIC_LABEL": "World Models, Exploration, and Open-Ended Reinforcement Learning",
+            "MATCHED_TOPIC_LABELS": [
+                "World Models, Exploration, and Open-Ended Reinforcement Learning"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [],
+            "HOTSPOT_PAPER_PRIMARY_KIND": null,
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+        }
+    },
+    "topic_sections": [
+        {
+            "topic_id": "architecture_training",
+            "topic_label": "Architecture and Training Dynamics",
+            "paper_ids": [
+                "2605.15053",
+                "2605.14004"
+            ]
+        },
+        {
+            "topic_id": "representation_structure",
+            "topic_label": "Representation Learning Theory and Structure",
+            "paper_ids": [
+                "2605.13974",
+                "2605.14358",
+                "2605.14619",
+                "2605.14749"
+            ]
+        },
+        {
+            "topic_id": "memory_systems",
+            "topic_label": "Memory Structures and Agent Memory Systems",
+            "paper_ids": [
+                "2605.15156",
+                "2601.01972",
+                "2605.14177",
+                "2605.14175",
+                "2605.13941"
+            ]
+        },
+        {
+            "topic_id": "world_models_open_ended_rl",
+            "topic_label": "World Models, Exploration, and Open-Ended Reinforcement Learning",
+            "paper_ids": [
+                "2605.14211",
+                "2605.14297",
+                "2605.14723",
+                "2605.14599"
+            ]
+        }
+    ]
+}

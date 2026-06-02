@@ -38,7 +38,9 @@ At this point, your bot should run daily and publish a static website. The resul
 
 6. Copy `configs/templates/authors.template.txt` to `configs/authors.txt` and list the authors you actually want to follow. The numbers behind the author are important. They are semantic scholar author IDs which you can find by looking up the authors on semantic scholar and taking the numbers at the end of the URL.
 7. Take a look at `configs/config.ini` to tweak how things are filtered.
-8. Get and set up a `X_BEARER_TOKEN` as a GitHub secret, you can get one from X [Developer Console](https://console.x.com). This is for the hotspot pipeline to grab daily tweets.
+8. Set up an X/Twitter source for the hotspot pipeline (to grab daily tweets). Choose one:
+   - **Recommended — `TWITTERAPI_IO_KEY`**: a managed provider ([twitterapi.io](https://twitterapi.io)), ~$0.15/1k tweets, no X developer account required, works for new accounts. Set it as a GitHub secret.
+   - **Legacy — `X_BEARER_TOKEN`**: the official X API v2 from the [Developer Console](https://console.x.com) (Basic tier ~$200/mo; new developers may be unable to subscribe). Used automatically only if `TWITTERAPI_IO_KEY` is not set.
 9. Get and set up a semantic scholar API key (`S2_KEY`) as a GitHub secret. Otherwise the author search step will be very slow. (For now the keys are tight, so you may not be able to get one.)
 10. Set up a [slack bot](https://api.slack.com/start/quickstart), get the OAuth key, set it to `SLACK_KEY` as a GitHub secret.
 11. Make a channel for the bot (and invite it to the channel), get its [Slack Channel ID](https://stackoverflow.com/questions/40940327/what-is-the-simplest-way-to-find-a-slack-team-id-and-a-channel-id), set it as `SLACK_CHANNEL_ID` in a GitHub secret.

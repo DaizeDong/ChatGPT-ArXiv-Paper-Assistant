@@ -1,5 +1,9 @@
 # Changelog
 
+### 2026-06-02
+
+- X/Twitter hotspot source now supports **twitterapi.io** as a managed provider, selected automatically when `TWITTERAPI_IO_KEY` is set. Far cheaper than the official X API v2 (~$0.15/1k tweets vs ~$200/mo Basic), needs no X developer account, and works for new accounts. The official `X_BEARER_TOKEN` path remains as an automatic fallback — no config change required, fully backward compatible. Only the two network calls in `hotspot_x_official.py` were swapped behind a provider switch; all filtering/scoring logic is unchanged. No new dependency (reuses `requests`).
+
 ### 2026-04-04
 
 - Fixed date semantics for HF Papers and GitHub sources: introduced `fetched_at` metadata to distinguish trending date from original publish date, ensuring correct freshness evaluation.

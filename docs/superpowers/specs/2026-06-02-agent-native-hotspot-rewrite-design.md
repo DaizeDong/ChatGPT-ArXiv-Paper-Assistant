@@ -23,17 +23,20 @@ related:
 - **时效性（老论文混入）** ← 根因是信任 source 自报日（**HF `publishedAt` 是平台元数据，≠ arXiv v1 真首发日**）；注意 `get_freshness_date` 的 `fetched_at` 通道在现版本已基本堵上。
 - **X 覆盖 ≈ 0** ← 瓶颈在**数据通道**（x_official 需 Pro $5000/月、x_paperpulse 已死），过滤器误杀已部分修复；出路是 twitterapi.io。
 
-## ⚠ 需要你拍板的 4 个开放问题（收敛评审标记为"留待用户决策"）
-1. **老论文热度复燃通道**：§D.3 收窄后，一篇 v1 日期 >14d 但被多家竞品同日 re-feature 的论文会被恒定丢弃。是否需要开一个显式 resurgence 例外通道（如出现新 arXiv 版本，或多竞品同日聚集度超阈值时，允许以"观测到的复燃日"而非 v1 日入门）？当前 spec 未开此口。
-2. **arXiv 版本计数轮询配额**：对滚动窗口(14d)内所有带 arxiv_id 的活跃 story 每 run 重读 `/abs`，story 多时是 N 次轻量 HTTP。是否要批量/限频/当日 TTL 以控成本与 API 礼貌？
-3. **gate_date 跨时区边界**：UTC 23:30 首发、另一机核为次日 00:10 的事件，两机 gate_date 差一天（§G.4 承认的残余发散）。是否值得加更稳的锚（arXiv 官方公布日 / Crossref 注册日作 tie-breaker）来进一步收敛？
-4. **竞品上游污染告警**：`intentionally_dropped_stale_competitor` 当前是纯 journal 记录不告警。是否要二阶监控（dropped 比例突增 → 告警）以区分"正常策展老项"与"竞品自身被污染"？
+## ✅ 4 个开放问题 — 已由用户拍板（v1.3 决策，已整合入正文）
+1. **老论文热度复燃通道** → **开启**，且作为**专门通道**呈现。见新增 **§C.4 Resurgence 复燃通道**：触发 = arXiv 版本跃升 OR 多竞品同日聚集超阈值；入门日用**我方观测到的复燃 run-date**（非源自报日，结构上抗污染），独立"复燃"版块呈现，**不污染主 NEW 流的新鲜度保证**。
+2. **arXiv 版本计数轮询配额** → **以最高筛选质量为准（CC 定）**：每 run 对窗口内每个 arxiv_id 轮询一次（run 内按 id 去重，不跳过多日 TTL，以最大化版本跃升检出质量），用 arXiv API `id_list` **批量**（每调用 ≤100 id）+ 礼貌限频。见 **§B.4.1 轮询节奏**。
+3. **gate_date 跨时区 tie-breaker** → **采纳**。见新增 **§B.3.1 权威整日锚**：存在 arXiv 官方 announced 日 / Crossref 注册日时，`gate_date` 直接取该官方**整日**（本就日粒度、机器无关），覆盖 WebSearch 推导的亚日值，把更多项推入确定性机器无关路径。
+4. **竞品上游污染二阶告警** → **采纳**。见 **§E 监控**新增：单一竞品源 `intentionally_dropped_stale_competitor` 比例相对滚动基线突增 → 告警，区分"正常策展老项"与"竞品自身被污染"。
 
-> 这 4 个问题不阻塞方案主体，但会影响实现细节。请在 review 时一并答复，我据此定稿后再进入 writing-plans 阶段。
+## ✅ 论文筛选管线 — 已由用户拍板（v1.3 新增 §H）
+**不重写**论文筛选管线；而是**引入 agent 作为一种新的筛选模态**——把 Claude Code agent 作为与"作者规则 / API 打分"并列的可插拔筛选策略，使筛选不再仅限单次 API 调用，而能做多步推理 + 工具使用（读全文 PDF、查引用、对照近期文献）。见 **§H 论文筛选的 Agent 模态**。
 
 ---
 
-# AI 热点管线 — 全 Agent 原生重写统一设计方案 (v1.2, spec-only)
+# AI 热点管线 — 全 Agent 原生重写统一设计方案 (v1.3, spec-only)
+
+> **v1.3 增量（用户拍板 5 项决策后整合，均为加法，不回退 v1.2 已稳定部分）**：§B.3.1 权威整日锚（gate_date tie-breaker）、§B.4.1 轮询节奏（质量优先+批量）、§C.4 Resurgence 复燃专门通道（观测日入门、抗污染、独立栏）、§E 二阶污染告警、§H 论文筛选 Agent 模态（可插拔策略接口 + 级联路由，不重写现状）。
 
 > 状态：设计冻结草案，本轮**不写生产代码**。
 > 骨架：单写者确定性 Kernel + 单编排 Agent + 无状态短生命周期 subagent 群。
@@ -145,6 +148,13 @@ related:
 ### B.3 判定规则：earliest-credible-date-wins（锁定）
 污染几乎总是**向前 backdate 以显新**，故取**最早可信日**击败它。`verified_first_date = min(可信日集合)`；若 claimed_date 明显晚于 Wayback/最早提及 → 标 `stale_date_pollution=true` 用更早日；多源一致→high；无法核实→保守 `min(claimed, fetched)` + low confidence（降权置于折叠线下，不丢弃、不崩溃）。**边界判定做成确定性**（不交给 agent confidence 阈值），避免日间翻转。
 
+### B.3.1 权威整日锚（gate_date tie-breaker，v1.3 决策3）
+跨时区边界发散（§G.4 的残余）来自对**亚日时刻**的依赖。修复：当存在**权威机构指派的整日**时，直接以它作 `gate_date`，绕过 WebSearch 推导的亚日值——
+- **arXiv announced date**：arXiv 对每篇论文指派一个稳定的 UTC 公布日（与 v1 submission 同源，机器无关、本就日粒度）。带 `arxiv_id` 的项 `gate_date := arXiv announced day`（仍服从 §B.3 的 earliest-min：与其它可信日取最早）。
+- **Crossref / DataCite 注册日**：带 DOI 的项 `gate_date := 注册日（整日）`。
+- **优先级**：`gate_date := floor_to_utc_day( min( 权威整日锚 ∪ 其它可信日 ) )`；权威整日锚一旦存在即为该项提供**机器无关**的整日下界，把绝大多数学术/官方项推入确定性路径。
+- **残余**：仅对**既无 arXiv/DOI 权威锚、又只能靠 WebSearch 定日**的纯网页项，跨机整日发散仍可能存在——这是 §G.4 诚实契约承认且被 `[真首发日, claimed]` 单调界约束的少数情形，不再扩大承诺。
+
 ### B.4 成本控制 = 永久缓存（也是 determinism lock）
 核验结果按 `content_hash`(url/doi/arxiv_id) **永久存** Store `date_verdicts` 表。**首发日永不改变 → 一条一生只核验一次**；跨天命中缓存零成本零漂移。`date_verdicts` 表是文本快照的**必含部分**（§E），随快照旅行到任何重建机，使重建继承冻结判定。
 
@@ -158,6 +168,7 @@ related:
 - **关键不变式**：`arxiv_versions[id]` **只能单调不减**（`new := max(old, fetched_count)`）；版本计数轮询**永不触碰** `date_verdicts`、**永不改写** `verified_first_date`。
 - 因此 §G.4 的"freeze"措辞精确化为：**冻结的是 first_date，不是版本计数**。版本计数的每 run 刷新是确定性的（同一天读同一 arXiv 状态得同一计数），不引入漂移，且让 T2 的版本跃升分支**真正可被观测**。
 - 退化处理：arXiv `/abs` 读失败 → 沿用 `arxiv_versions` 旧值（不降级、不阻塞），记 `run_journal` partial。
+- **轮询节奏（v1.3 决策2，以最高筛选质量为准）**：每个 run 对滚动窗口内每个 `arxiv_id` 轮询**恰一次**（run 内按 id 去重，避免同 id 重复读）；**不设跨多日 TTL 跳过**——因为我们就是要尽早检出版本跃升来驱动 §C.3.1 T2 与 §C.4 复燃，质量优先于省调用。礼貌性靠**批量**实现：用 arXiv API `id_list` 一次查询多个 id（每调用 ≤100 id），调用间隔遵守 arXiv 限频（~1 req/3s）。窗口内 story 即便数百，也仅数次批量 HTTP，成本可忽略。
 
 ### B.5 下游消费
 gravity + freshness gate 一律用 `verified_first_date`；`max_age` 硬闸（默认 14d，per-source-family 可配）在入 Store 前丢弃过期项（github_trend 例外）。彻底替代旧 fetched_at 补丁与 HF publishedAt 信任。
@@ -241,6 +252,44 @@ resurface(S) := T1 OR T2 OR T3
 - **替换**（非叠加）现有 `apply_cross_day_penalty`，消除双抑制无优先级问题。
 - Store schema 须新增以支撑此谓词（默认值向后兼容）：`Story.last_surfaced`(date)、`Story.surfaced_verified_max`(**日粒度** date)、`Story.surfaced_entity_names`(set)、`Story.surfaced_max_tier`(int)、`Story.arxiv_versions`(dict[arxiv_id,int])、`Story.surfaced_arxiv_versions`(dict[arxiv_id,int]，上次 surface 时的版本计数快照)；evidence ledger 每条带 `added_at`(run date) 以支撑 `*_since(last)`。
 
+### C.4 Resurgence 复燃通道（v1.3 决策1：专门通道，抗污染）
+
+**动机**：§B.5/§D.3 的 max_age 硬闸（默认 14d）正确地把"被竞品重新策展的合法老论文"挡在**主 NEW 流**外（verification 优先于 recall）。但确有"真热度复燃"的老论文（出了重磅新版、或一夜间被全行业重提）值得呈现。用户裁决：**开一条专门通道**，而非放松主流闸门。
+
+**抗污染的关键设计——入门日用"我方观测日"而非"源自报日"**：复燃通道**不信任**任何源声称的"新日期"（那正是污染向量）；它只信任**我方自己观测到复燃事件的 run-date**（`Story.resurged_at`）。这是我方一手观测、**无法被上游 backdate**，因此复燃通道在结构上与 §B 的抗污染第一原则同构，且因独立成栏**不削弱主 NEW 流的新鲜度保证**。
+
+**确定性触发谓词（零 LLM，仅读 Store 结构化事实）**：
+
+```
+仅对 gate_date(S) 超出 max_age 的 story（即"老"项）评估复燃：
+
+resurge(S) := R1 OR R2
+
+  R1 (版本跃升复燃，严格 gate against 上次复燃快照):
+     EXISTS arxiv_id in S such that
+        S.arxiv_versions[arxiv_id] > S.surfaced_arxiv_versions[arxiv_id]
+     # 由 §B.4.1 独立 Tier-0 轮询喂入；老论文出新版 = 作者主动更新 = 真信号。
+     # 因比较 against surfaced_arxiv_versions 快照（surface 时更新），每个新版本仅触发一次。
+
+  R2 (跨竞品同日聚集复燃，冷却闸编入谓词 —— v1.3 修订，闭合 INV4):
+     count_distinct_competitor_sources( S.evidence_added_today
+                                        where provenance ∈ 复用层竞品源 )
+        >= RESURGE_MIN_COMPETITORS                                  # 默认 3，可配
+     AND ( S.surfaced_resurged_at IS None
+           OR run_date - S.surfaced_resurged_at >= RESURGE_COOLDOWN_DAYS )   # 默认 7，可配
+     # ≥3 个相互独立的竞品聚合器同一 run 同时重提 = 真复燃；冷却闸消费 surfaced_resurged_at
+     # 快照，使"同一组竞品连续多日重提同一老项"在冷却期内只触发一次，构造性关闭每日重复
+     # （与 §C.3.1 T-谓词同纪律：去抖由对 surface 快照的闭式比较决定，不靠散文约定）。
+```
+
+**呈现与去抖**：
+- **两个不同的快照字段，职责分离**：`Story.resurged_at` = **首次**触发复燃的 run-date（一旦置定，永不覆盖，用于 gravity 计时起点）；`Story.surfaced_resurged_at` = **每次**在复燃栏 surface 时置为当次 run-date（用于 R2 冷却闸比较）。两者初值均 None。
+- 复燃通道的 gravity 从 `resurged_at` 计时（用 §B.5.1 的日粒度 `gate_date(resurged_at)`），同样 6 天后自然沉底。
+- 在独立的 **"复燃 / Resurgence"** 版块呈现，每条**同时标注**原始 v1 首发日（诚实）+ 复燃原因（`vN 新版` 或 `N 家聚合器同日重提`）。
+- **每次复燃栏 surface 时，Kernel 确定性地更新快照**：`surfaced_resurged_at := run_date` 且 `surfaced_arxiv_versions := arxiv_versions`（与 §C.3.1 的 `record_surface` 同机制）。这使 R1 的版本比较与 R2 的冷却比较都 gate against 已更新的快照——**再复燃只在出现更新版本（R1）或冷却期满后又一次 ≥3 竞品聚集（R2）时发生**；URL churn、亚日抖动、同源重复、以及"同一组竞品连续每日重提"均不触发，构造性关闭复燃栏的每日重复退化路径（INV4 在 R2 上闭合）。
+- **与 R2 抗"竞品共有污染"的关系**：§D.4 指出多竞品**共同**污染时多数表决会失效——但 R2 的产出**不进主 NEW 流、不参与 featured 新鲜度承诺**，只进显式标注"复燃"的隔离栏，且每条都带原始 v1 老日期可见；即便偶有共有污染混入，影响被限制在一个诚实标注的次级栏内，不损害主流可信度。
+- Store schema 新增：`Story.resurged_at`(date|None)、`Story.surfaced_resurged_at`(date|None，上次在复燃栏 surface 的快照)。
+
 ---
 
 ## D. 复用子系统（下限 = 市面并集，可验证契约）
@@ -298,6 +347,7 @@ dropped_stale_competitor_items  := competitor_items \ eligible_competitor_items
   - **跨机复现的精确边界（v1.2 精确化，回应 issue#3）**：跨机决定性由**随文本快照旅行的 `date_verdicts` 缓存**保证（必含部分）。重建机继承所有已冻结首发日判定。仅**从未进缓存的首见项**触发一次新鲜（含 Tier-1/2 实时 WebSearch，可能机器相关）核验；该首核被两道确定性收敛夹住：(1) **earliest-credible 单调 min**（污染只能更早，发散夹在 `[真首发日, claimed]`）；(2) **§B.5.1 的日粒度 `gate_date` 取整**——驱动 featured/RESURFACE 门的只是 UTC 整日值，亚日 WebSearch 抖动**无法翻转门**。因此：**"一生只核验一次"是 per-Store 的；跨独立首核不保证逐 bit 相同，但 (a) 快照随迁使新机几乎总命中缓存不触发首核，(b) 即便触发，门只吃日粒度值，亚日抖动被吸收，仅"两机核出不同 UTC 整日"这一罕见情形才可能在边界翻转，且仍被 `[真首发日, claimed]` 单调界约束**。推快照到审计分支**务必包含 `date_verdicts` 表**，否则重建退化为全量重新首核。
   - 版本计数 `arxiv_versions` **不进 `date_verdicts`**（它是单调可变量，每 run 由 Tier-0 轻读重建），故不需随快照冻结；新机重建时按当时 arXiv 状态重读即可，单调不减性质保证不回退。
 - **监控**：每 run 写 `run_journal`(JSON：每源条数、核验队列大小、去重归并数、agent token/延迟、stage 计时、`intentionally_dropped_stale_competitor` 列表)。异常(X 产出=0、核验失败率高、GapFill `⊇`(收窄后) 断言失败)推送告警(Feishu/PushNotification 可选)。
+- **二阶污染告警（v1.3 决策4）**：对每个复用层竞品源，按 run 统计其 `intentionally_dropped_stale_competitor` 占该源当日条数的比例，与该源**滚动基线**(trailing N-run 中位数，默认 N=14)比较；当某单一源的 stale-drop 比例相对基线**突增**(默认 ≥2× 基线且绝对占比 ≥30%)→ 推送**专项告警**："竞品源 X 疑似上游被污染"。这把"正常策展老项"(各源平稳的小比例 drop)与"某竞品突然大量重提老内容"(单源比例突刺)在确定性阈值上区分开；阈值/基线窗口可配，纯读 `run_journal` 聚合，零额外抓取。
 - **VPS 单点缓解**：幂等可补跑 + 保留 Actions 降级路径（关 agent 跑确定性精简版）+ run 失败告警。
 
 ---
@@ -352,3 +402,44 @@ dropped_stale_competitor_items  := competitor_items \ eligible_competitor_items
 - **Replay / 缓存命中**：重跑过去某天 **bit 级可复现**——所有判定（首发日、dedup、resurface、score、render）命中冻结缓存或纯确定性计算。
 - **前向 run**：仅在**世界真的变了**（新 verified evidence 满足闭式 `resurface(S)`，或版本计数单调增）时改变离散门结论；亚日抖动与 URL churn 被构造性排除。
 - **从未见过的新项首核（诚实契约，非掩盖）**：在一台**全新机器**上对某新项首核时，Tier-1/2 实时 WebSearch 是非确定的——但 (a) 门只吃 `gate_date`（UTC 整日），亚日抖动无法翻转；(b) 残余发散仅限"两机核出不同 UTC **整日**"这一情形，且被 `[真首发日, claimed]` 单调界夹住。**故契约逐字为**：*"replay/缓存命中跨机 bit 可复现；从未见过的新项首核是 `[真首发日, claimed]` 内、日粒度上的有界发散，不保证跨机 bit 一致；这是契约本身，而非完全前向确定性的暗含承诺。"* 因 `date_verdicts` 快照随迁，生产实践中新机重建几乎总命中缓存、不触发首核，发散在稳态下不可见。
+
+---
+
+## H. 论文筛选管线：Agent 作为一种筛选模态（v1.3 决策5，不重写）
+
+**裁决**：**保留**现有论文筛选管线（作者规则 + h-index 门 + LLM-API 标题/摘要打分 + 阈值）不动；**新增** agent 作为一种**可插拔筛选策略**，使筛选不再仅限单次无状态 API 调用，而能做**多步推理 + 工具使用**（读全文 PDF、查引用、对照近期文献、核验是否真匹配细腻的兴趣描述）。这与热点管线"在判断点把 agent 当工具"的哲学同构。
+
+### H.1 统一筛选策略接口（最小改动的关键）
+把"如何判断一篇论文该不该留"抽象成一个**策略接口**，现有逻辑与新 agent 各实现之，管线只依赖接口：
+
+```
+PaperFilter.judge(paper, criteria) -> {
+    keep: bool,
+    relevance: float,      # 与现有打分同量纲，复用现排序/阈值
+    novelty: float,
+    rationale: str,        # 简短理由（可入站点展示）
+    evidence: list[url],   # agent 模态可附其查证的引用/对照来源
+}
+```
+
+- **`ApiScoreFilter`（现状）**：把现有 `prompts/paper/` + 单次 LLM 调用打分包成该接口的一个实现——**零行为变化**，是默认实现。
+- **`RuleFilter`（现状）**：作者白名单 + h-index 门，同样包成接口实现（前置硬过滤）。
+- **`AgentFilter`（新增）**：在 VPS 的 Claude Code 环境派生一个**无状态短命 subagent**，输入 `(paper 元数据/abstract, 可选全文 PDF, criteria 文本)`，允许其调用工具（WebFetch 全文、Semantic Scholar/OpenAlex 查引用与近期相关工作、arXiv 查版本），输出同一 typed 结构。温度0 + 强制结构化输出 + 后接确定性 verifier（schema 校验 + evidence URL 真实性校验），完全复用 §G 第 3/6 条抗不确定性纪律。
+
+### H.2 编排：级联路由（复用 confidence-aware 思想，控成本）
+不要对每篇论文都跑昂贵的 agent。沿用热点管线已验证的 confidence-aware 路由：
+
+```
+RuleFilter 硬过滤
+  → ApiScoreFilter 廉价打分
+      → 高分确信留 / 低分确信弃：直接定（绝大多数）
+      → 仅"阈值边界的模糊带" → AgentFilter 深判（读全文+查引用）
+```
+
+config 可选三种模式：`api_only`(现状默认) / `agent_only`(全 agent，质量最高成本最高) / `cascade`(推荐，边界带才上 agent)。
+
+### H.3 边界、复用与一致性
+- **模块边界**：`AgentFilter` 是 §F.1 模块表外的**独立可插拔模块**，接口 = `judge()`，依赖 = Claude Code subagent + 检索工具；可用 record/replay 缓存响应做确定性单测。
+- **复用一等源**：判断"该不该留"时，AgentFilter 可顺带消费 §D 的复用信号（HF 投票、Scholar Inbox 命中、Altmetric 热度）作为佐证，使论文管线也享受"下限=市面并集"。
+- **与热点管线共栈**：两条管线共用同一 VPS Claude Code 运行环境、同一抗不确定性宪法（§G）、同一 record/replay 测试范式；论文管线的渲染/归档/双语层**不动**。
+- **迁移**：作为独立阶段（在 §F.2 迁移路线图之后或并行）——先抽 `PaperFilter` 接口包住现状（零行为变化、加测试网），再加 `AgentFilter` 并默认 `cascade`，灰度对比 agent 模态与纯 API 的留存差异后再调阈值。

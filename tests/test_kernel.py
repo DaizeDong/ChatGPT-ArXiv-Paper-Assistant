@@ -278,3 +278,74 @@ class TestStoryStages(unittest.TestCase):
         self.assertIn("featured", payload)
         self.assertIn("watchlist", payload)
         self.assertIsInstance(payload["featured"], list)
+
+
+FIXT = Path(__file__).resolve().parent / "fixtures" / "agent"
+
+
+class TestSynthesizeVerifier(unittest.TestCase):
+    def _topic(self) -> dict:
+        return {
+            "TOPIC_ID": "t1", "title": "Old title",
+            "WHY_IT_MATTERS": "", "KEY_TAKEAWAYS": [],
+            "EVIDENCE_URLS": ["https://x/a", "https://x/b"],
+            "items": [
+                {"title": "Subitem about coding performance gains", "summary": "Research shows significant improvements in multi-step coding benchmarks."},
+                {"title": "Benchmark results released for agentic tasks", "summary": "New evaluation suite reveals state-of-the-art results across diverse coding problems."},
+            ],
+        }
+
+    def test_schema_check_rejects_missing_zh(self) -> None:
+        row = {"TOPIC_ID": "t1", "headline_en": "h", "summary_en": "s",
+               "headline_zh": "", "summary_zh": "", "evidence": ["https://x/a"]}
+        self.assertFalse(kernel._synthesis_row_valid(row, {"https://x/a"}))
+
+    def test_evidence_url_must_exist_in_story(self) -> None:
+        row = {"TOPIC_ID": "t1", "headline_en": "h", "headline_zh": "标题",
+               "summary_en": "s", "summary_zh": "摘要", "evidence": ["https://evil/x"]}
+        self.assertFalse(kernel._synthesis_row_valid(row, {"https://x/a"}))
+
+    def test_valid_row_passes(self) -> None:
+        row = {"TOPIC_ID": "t1", "headline_en": "h", "headline_zh": "标题",
+               "summary_en": "s", "summary_zh": "摘要", "evidence": ["https://x/a"]}
+        self.assertTrue(kernel._synthesis_row_valid(row, {"https://x/a"}))
+
+    def test_stage_applies_good_agent_output(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            td = datetime(2026, 5, 20, tzinfo=timezone.utc)
+            kernel._write_checkpoint(root, td, "score",
+                                     {"featured": [self._topic()], "watchlist": [], "all_topics": []})
+            cfg = configparser.ConfigParser()
+            cfg["HOTSPOTS"] = {"enabled": "true", "mode": "openai",
+                               "model_synthesize": "pinned-model-v1"}
+            ctx = kernel.KernelContext(output_root=root, target_date=td, config=cfg,
+                                       store=None, journal=[])
+            replay = json.loads((FIXT / "synthesize_ok.json").read_text(encoding="utf-8"))
+            with unittest.mock.patch.object(kernel, "_call_synthesize_agent", return_value=replay):
+                payload = kernel._stage_synthesize(ctx)
+        topic = payload["featured"][0]
+        self.assertEqual(topic["HEADLINE"], "Frontier lab ships agentic coding model")
+        self.assertEqual(topic["HEADLINE_ZH"], "前沿实验室发布智能体编码模型")
+        self.assertEqual(payload["manifest"]["synthesize_model"], "pinned-model-v1")
+        self.assertEqual(payload["manifest"]["synthesize_temperature"], 0)
+
+    def test_stage_rejects_hallucinated_url_and_falls_back(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            td = datetime(2026, 5, 20, tzinfo=timezone.utc)
+            topic = self._topic()
+            kernel._write_checkpoint(root, td, "score",
+                                     {"featured": [topic], "watchlist": [], "all_topics": []})
+            cfg = configparser.ConfigParser()
+            cfg["HOTSPOTS"] = {"enabled": "true", "mode": "openai",
+                               "model_synthesize": "pinned-model-v1"}
+            ctx = kernel.KernelContext(output_root=root, target_date=td, config=cfg,
+                                       store=None, journal=[])
+            replay = json.loads((FIXT / "synthesize_halluc.json").read_text(encoding="utf-8"))
+            with unittest.mock.patch.object(kernel, "_call_synthesize_agent", return_value=replay):
+                payload = kernel._stage_synthesize(ctx)
+        out = payload["featured"][0]
+        self.assertEqual(out["HEADLINE"], "Old title")          # original title kept
+        self.assertTrue(out["KEY_TAKEAWAYS"])                    # heuristic fallback filled
+        self.assertIn("t1", payload["manifest"]["synthesize_rejected"])

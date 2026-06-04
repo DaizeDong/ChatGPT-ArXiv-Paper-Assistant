@@ -10,6 +10,7 @@ from typing import Any, Callable
 
 from arxiv_assistant.hotspots.pipeline import (
     _apply_freshness_gates,
+    _heuristic_takeaways,
     _serialize_items,
     _story_to_topic_dict,
     date_string,
@@ -245,6 +246,88 @@ def _stage_score(ctx: KernelContext) -> dict[str, Any]:
 
 
 # ---------------------------------------------------------------------------
+# Stage 6: Synthesize — temp-0 agent + deterministic schema/evidence-URL verifier
+# (spec §G.3 / INV6)
+# ---------------------------------------------------------------------------
+_SYNTH_REQUIRED = ("headline_en", "headline_zh", "summary_en", "summary_zh")
+
+
+def _story_evidence_urls(topic: dict[str, Any]) -> set[str]:
+    urls: set[str] = set()
+    for key in ("EVIDENCE_URLS", "evidence_urls", "SOURCE_URLS"):
+        for u in topic.get(key, []) or []:
+            if u:
+                urls.add(str(u))
+    if topic.get("URL"):
+        urls.add(str(topic["URL"]))
+    return urls
+
+
+def _synthesis_row_valid(row: dict[str, Any], story_urls: set[str]) -> bool:
+    # (a) schema: all required bilingual fields present & non-empty
+    for key in _SYNTH_REQUIRED:
+        if not str(row.get(key, "")).strip():
+            return False
+    # (b) every cited evidence URL must really exist in the story (anti-hallucination)
+    cited = [str(u) for u in row.get("evidence", []) or []]
+    if not cited:
+        return False
+    return all(u in story_urls for u in cited)
+
+
+def _call_synthesize_agent(topics: list[dict[str, Any]], model: str) -> dict[str, Any]:
+    """Dispatch the stateless bilingual Synthesize subagent at temperature 0 with a
+    forced JSON schema. Real impl shells `claude -p` headless; tests replay a fixture.
+    Pinned `model` is recorded by the caller into the manifest (spec §G.6)."""
+    from arxiv_assistant.hotspots.synthesize import synthesize_bilingual  # stage-deferred impl
+    return synthesize_bilingual(topics, model=model, temperature=0)
+
+
+def _stage_synthesize(ctx: KernelContext) -> dict[str, Any]:
+    score = ctx.read("score")
+    featured = [dict(t) for t in score.get("featured", [])]
+    cfg = ctx.config["HOTSPOTS"]
+    model = cfg.get("model_synthesize", cfg.get("model_summarize", cfg.get("model_screen", "")))
+
+    rejected: list[str] = []
+    if cfg.get("mode", "heuristic") == "openai" and featured:
+        payload = _with_retry(
+            lambda: _call_synthesize_agent(featured, model),
+            attempts=2, base_delay=0.0, fallback=lambda: {"topics": []},
+        )
+        by_id = {str(r.get("TOPIC_ID")): r for r in payload.get("topics", [])}
+        for topic in featured:
+            tid = str(topic.get("TOPIC_ID"))
+            row = by_id.get(tid)
+            if row is not None and _synthesis_row_valid(row, _story_evidence_urls(topic)):
+                topic["HEADLINE"] = row["headline_en"]
+                topic["HEADLINE_ZH"] = row["headline_zh"]
+                topic["WHY_IT_MATTERS"] = row["summary_en"]
+                topic["WHY_IT_MATTERS_ZH"] = row["summary_zh"]
+            else:
+                rejected.append(tid)
+                topic["HEADLINE"] = topic.get("title", topic.get("HEADLINE", ""))
+                if not topic.get("KEY_TAKEAWAYS"):
+                    topic["KEY_TAKEAWAYS"] = _heuristic_takeaways(topic)
+    else:
+        for topic in featured:  # heuristic mode: deterministic fallback only
+            topic["HEADLINE"] = topic.get("title", topic.get("HEADLINE", ""))
+            if not topic.get("KEY_TAKEAWAYS"):
+                topic["KEY_TAKEAWAYS"] = _heuristic_takeaways(topic)
+
+    return {
+        "featured": featured,
+        "watchlist": score.get("watchlist", []),
+        "all_topics": score.get("all_topics", []),
+        "manifest": {
+            "synthesize_model": model,
+            "synthesize_temperature": 0,
+            "synthesize_rejected": rejected,
+        },
+    }
+
+
+# ---------------------------------------------------------------------------
 # Topology is hardcoded here (spec §G.2): never produced by an LLM.
 # Real stage bodies are bound in Tasks 4-7; tests patch _STAGE_FNS.
 # ---------------------------------------------------------------------------
@@ -257,6 +340,7 @@ _STAGE_FNS: dict[str, Callable[["KernelContext"], dict[str, Any]]] = {
     "storystore_match": _stage_storystore_match,
     "gapfill": _stage_gapfill,
     "score": _stage_score,
+    "synthesize": _stage_synthesize,
 }
 
 

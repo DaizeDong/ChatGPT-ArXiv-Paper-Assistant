@@ -37,3 +37,44 @@ class TestCheckpointIO(unittest.TestCase):
             kernel._clear_checkpoints(root, td)
             self.assertFalse(kernel._checkpoint_done(root, td, "harvest"))
             self.assertFalse(kernel._checkpoint_done(root, td, "score"))
+
+
+import configparser
+
+
+class TestContextAndRetry(unittest.TestCase):
+    def _config(self) -> configparser.ConfigParser:
+        cfg = configparser.ConfigParser()
+        cfg["HOTSPOTS"] = {"enabled": "true"}
+        return cfg
+
+    def test_context_run_date_is_target_utc_day(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            ctx = kernel.KernelContext(
+                output_root=Path(tmp),
+                target_date=datetime(2026, 5, 20, 13, 30, tzinfo=timezone.utc),
+                config=self._config(),
+                store=None,
+                journal=[],
+            )
+            self.assertEqual(ctx.run_date, "2026-05-20")
+
+    def test_retry_succeeds_after_transient_failures(self) -> None:
+        calls = {"n": 0}
+
+        def flaky() -> str:
+            calls["n"] += 1
+            if calls["n"] < 3:
+                raise RuntimeError("transient")
+            return "ok"
+
+        out = kernel._with_retry(flaky, attempts=3, base_delay=0.0)
+        self.assertEqual(out, "ok")
+        self.assertEqual(calls["n"], 3)
+
+    def test_retry_degrades_to_fallback_after_exhaustion(self) -> None:
+        def always_fail() -> str:
+            raise RuntimeError("boom")
+
+        out = kernel._with_retry(always_fail, attempts=3, base_delay=0.0, fallback=lambda: "degraded")
+        self.assertEqual(out, "degraded")

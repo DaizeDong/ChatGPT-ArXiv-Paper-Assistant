@@ -898,3 +898,28 @@ class TestStrangler(unittest.TestCase):
         # ...and the RESOLVED value (not the literal "auto") is what the kernel sees.
         self.assertEqual(captured["mode"], "openai")
         self.assertEqual(cfg["HOTSPOTS"]["mode"], "openai")
+
+
+# ---------------------------------------------------------------------------
+# Task 12: TestSourceFailureDegrade — single-source failure degrades gracefully
+# ---------------------------------------------------------------------------
+
+class TestSourceFailureDegrade(unittest.TestCase):
+    def _config(self) -> configparser.ConfigParser:
+        cfg = configparser.ConfigParser()
+        cfg["HOTSPOTS"] = {"enabled": "true", "mode": "heuristic", "max_raw_items": "120",
+                           "max_item_age_days": "14", "target_topics": "5",
+                           "target_watchlist_topics": "3", "max_topics_per_category": "4"}
+        return cfg
+
+    def test_run_completes_when_one_source_payload_partial(self) -> None:
+        ok = [_item("Live story", "https://x/a", "2026-05-20T00:00:00Z")]
+        # Simulate fetch_source_payloads having already swallowed a failing adapter:
+        # returns only the surviving items + a partial source_stats row of 0.
+        with tempfile.TemporaryDirectory() as tmp, \
+                unittest.mock.patch.object(
+                    kernel, "_fetch_source_payloads",
+                    return_value=(ok, {"hf_papers": 1, "reddit": 0}, {})):
+            manifest = kernel.run(Path(tmp), datetime(2026, 5, 20, tzinfo=timezone.utc),
+                                  self._config())
+        self.assertEqual(manifest["stages_run"], kernel.STAGES)  # no crash, all stages done

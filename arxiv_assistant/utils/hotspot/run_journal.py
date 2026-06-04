@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+from collections import defaultdict
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
@@ -65,3 +66,54 @@ class RunJournal:
         with self.journal_path.open("a", encoding="utf-8") as fh:
             fh.write(line + "\n")
         return self.journal_path
+
+
+# ---------------------------------------------------------------------------
+# Module-level builder (spec §D.3 / §E, stage 4 Task 8)
+# ---------------------------------------------------------------------------
+
+def record_dropped_stale_competitor(
+    run_date: str,
+    eligible: list,
+    dropped: list,
+    competitor_items: list,
+) -> dict:
+    """Build the intentionally_dropped_stale_competitor journal record (spec §D.3/§E).
+
+    Per competitor source: total seen + dropped count + the dropped item details.
+    Returns the record (caller appends via run_journal.append).
+    """
+
+    def _prov(i) -> str:
+        return getattr(i, "provenance", "") or "unknown"
+
+    total: dict[str, int] = defaultdict(int)
+    drop_count: dict[str, int] = defaultdict(int)
+    details: list[dict] = []
+    for i in competitor_items:
+        total[_prov(i)] += 1
+    for i in dropped:
+        src = _prov(i)
+        drop_count[src] += 1
+        details.append({
+            "provenance": src,
+            "canonical_url": getattr(i, "canonical_url", "") or getattr(i, "url", ""),
+            "gate_date": getattr(i, "verified_first_date", None),
+            "reason": "stale_beyond_max_age_or_unverified",
+        })
+    per_source = {
+        src: {
+            "seen": total[src],
+            "dropped": drop_count.get(src, 0),
+            "drop_ratio": round(drop_count.get(src, 0) / total[src], 4) if total[src] else 0.0,
+        }
+        for src in total
+    }
+    return {
+        "channel": "intentionally_dropped_stale_competitor",
+        "run_date": run_date,
+        "eligible_count": len(eligible),
+        "dropped_count": len(dropped),
+        "per_source": per_source,
+        "dropped_items": details,
+    }

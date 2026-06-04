@@ -698,3 +698,43 @@ class TestResurgenceMarkdown(unittest.TestCase):
         self.assertIn("FooNet resurfaces with v3", md)
         self.assertIn("2023-01-02", md)            # original first date shown honestly
         self.assertIn("arxiv_version_bump", md)
+
+
+# ---------------------------------------------------------------------------
+# Task 10: TestStrangler — generate_daily_hotspot_report delegates to kernel.run
+# ---------------------------------------------------------------------------
+
+from arxiv_assistant.hotspots import pipeline as hp
+
+
+class TestStrangler(unittest.TestCase):
+    def test_generate_delegates_to_kernel_and_returns_report(self) -> None:
+        cfg = configparser.ConfigParser()
+        cfg["HOTSPOTS"] = {"enabled": "true", "mode": "heuristic"}
+        captured = {}
+
+        def fake_run(output_root, target_date, config, *, stage=None, force=False):
+            captured["called"] = True
+            report_dir = Path(output_root) / "hot" / "reports"
+            report_dir.mkdir(parents=True, exist_ok=True)
+            (report_dir / "2026-05-20.json").write_text(
+                json.dumps({"date": "2026-05-20", "resurgence": []}), encoding="utf-8")
+            return {"date": "2026-05-20", "stages_run": kernel.STAGES}
+
+        with tempfile.TemporaryDirectory() as tmp, \
+                unittest.mock.patch.object(hp, "kernel_run", fake_run):
+            report = hp.generate_daily_hotspot_report(
+                output_root=tmp,
+                target_date=datetime(2026, 5, 20, tzinfo=timezone.utc),
+                config=cfg, mode_override="heuristic", force=False)
+        self.assertTrue(captured["called"])
+        self.assertEqual(report["date"], "2026-05-20")
+
+    def test_generate_returns_none_when_disabled(self) -> None:
+        cfg = configparser.ConfigParser()
+        cfg["HOTSPOTS"] = {"enabled": "false"}
+        with tempfile.TemporaryDirectory() as tmp:
+            out = hp.generate_daily_hotspot_report(
+                output_root=tmp, target_date=datetime(2026, 5, 20, tzinfo=timezone.utc),
+                config=cfg)
+        self.assertIsNone(out)

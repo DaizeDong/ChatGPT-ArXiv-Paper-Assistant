@@ -38,6 +38,15 @@ from arxiv_assistant.hotspots.date_verify import verify as date_verify
 from arxiv_assistant.hotspots.store import _open_story_store
 from arxiv_assistant.utils.hotspot.gate_date import gate_date
 
+
+# Deferred import alias so tests can patch hp.kernel_run and to avoid a
+# circular import at module load (kernel.py imports many names FROM pipeline
+# at its module top, so pipeline must NOT import kernel at top level).
+def kernel_run(*args, **kwargs):
+    from arxiv_assistant.hotspots.kernel import run as _run
+    return _run(*args, **kwargs)
+
+
 ROLE_PRIORITY = {
     "research_backbone": 0,
     "paper_trending": 1,
@@ -1686,240 +1695,30 @@ def _story_to_topic_dict(story: Story, *, keep: bool = False, watchlist: bool = 
     }
 
 
-def generate_daily_hotspot_report(output_root: str | Path, target_date: datetime, config: configparser.ConfigParser, mode_override: str = "auto", force: bool = False) -> dict[str, Any] | None:
+def generate_daily_hotspot_report(
+    output_root: str | Path,
+    target_date: datetime,
+    config: configparser.ConfigParser,
+    mode_override: str = "auto",
+    force: bool = False,
+    stage: str | None = None,
+) -> dict[str, Any] | None:
+    """Thin strangle-pattern delegation to kernel.run (spec §F.2).
+
+    Preserves the public return contract: the report dict on success, or None
+    when hotspots are disabled or the kernel did not produce a report file.
+    """
     if not config["HOTSPOTS"].getboolean("enabled", fallback=False):
         return None
 
     output_root = Path(output_root)
-    effective_mode = _decide_mode(mode_override or config["HOTSPOTS"].get("mode", "auto"))
+    # mode_override is honoured by writing it into the live config the kernel reads.
+    if mode_override and mode_override != "auto":
+        config["HOTSPOTS"]["mode"] = _decide_mode(mode_override)
 
-    raw_items, source_stats, api_usage = fetch_source_payloads(target_date, output_root, config, force)
-    raw_items = raw_items[: config["HOTSPOTS"].getint("max_raw_items", fallback=120)]
+    kernel_run(output_root, target_date, config, stage=stage, force=force)
 
-    # Filter items with mismatched URLs (title-URL inconsistency)
-    from arxiv_assistant.utils.hotspot.hotspot_sources import url_title_consistent
-    pre_filter_count = len(raw_items)
-    raw_items = [item for item in raw_items if url_title_consistent(item.title, item.url)]
-    if len(raw_items) < pre_filter_count:
-        print(f"URL-title filter: removed {pre_filter_count - len(raw_items)} items with mismatched URLs")
-
-    # Skip items without a publication date — can't verify freshness.
-    pre_date = len(raw_items)
-    raw_items = [item for item in raw_items if item.published_at]
-    if len(raw_items) < pre_date:
-        print(f"Date filter: removed {pre_date - len(raw_items)} items without published_at ({len(raw_items)} remaining)")
-
-    # DateVerify (Tier-0, zero agents) → set verified_first_date for the gates.
-    store = _open_story_store(output_root)  # opens out/hot/state/story_store.sqlite  # TODO(stage3): close/context-manage the Store when looping callers (backfill) arrive
-    for item in raw_items:
-        verdict = date_verify(item, store)
-        item.verified_first_date = verdict.get("verified_first_date")
-
-    # Freshness + max-age hard gate on day-granular gate_date (§B.5/§B.5.1).
-    max_item_age_days = config["HOTSPOTS"].getint("max_item_age_days", fallback=14)
-    pre_gate = len(raw_items)
-    raw_items = _apply_freshness_gates(
-        raw_items, target_date,
-        max_item_age_days=max_item_age_days,
-    )
-    if len(raw_items) < pre_gate:
-        print(f"Freshness/max-age gate: removed {pre_gate - len(raw_items)} stale items ({len(raw_items)} remaining)")
-
-    # Cross-day dedup: exclude URLs already featured in recent reports
-    recent_urls, recent_headlines = _load_recent_featured_urls(output_root, target_date)
-    if recent_urls:
-        pre_cross = len(raw_items)
-        raw_items = [
-            item for item in raw_items
-            if (item.canonical_url or "") not in recent_urls
-            and (item.url or "") not in recent_urls
-        ]
-        if len(raw_items) < pre_cross:
-            print(f"Cross-day URL dedup: removed {pre_cross - len(raw_items)} previously featured items ({len(raw_items)} remaining)")
-
-    # --- Story-centric pipeline ---
-    hotspot_config = config["HOTSPOTS"]
-    model_enrich = hotspot_config.get("model_enrich", hotspot_config.get("model_screen"))
-    enrich_batch_size = hotspot_config.getint("enrich_batch_size", fallback=20)
-    retry_count = hotspot_config.getint("retry", fallback=3)
-
-    # Stage 3: Enrich
-    if effective_mode == "openai":
-        enriched_items = enrich_items_batch(raw_items, model_enrich, enrich_batch_size, retry_count)
-    else:
-        enriched_items = enrich_items_heuristic(raw_items)
-
-    # Stage 4-5: intra-day dedup (L0/L1) → cross-day persistent match (L2) → score
-    crossday_threshold = hotspot_config.getfloat("cross_day_cosine_threshold", fallback=0.90)
-    cross_day_window = hotspot_config.getint("cross_day_window_days", fallback=14)
-    as_of = target_date.date() if hasattr(target_date, "date") else _date.today()
-
-    intraday_stories = cluster_intraday(enriched_items)
-
-    if store is not None:
-        matched = match_crossday(
-            intraday_stories,
-            store,
-            cosine_threshold=crossday_threshold,
-            window_days=cross_day_window,
-            as_of=as_of,
-        )
-        for s in matched:
-            s.cross_day_status = classify_cross_day(s)
-        # Stage 2 cross-day suppression: ONGOING (non-resurfacing) stories are
-        # excluded from the featured candidate pool so they cannot appear in featured
-        # output.  Stories with cross_day_status == "NEW", "RESURFACE", or None
-        # (legacy/degraded) remain featured-eligible.
-        # record_surface is called below (after selection) to persist surface snapshots
-        # so the next run's classify_cross_day/resurface compares against them.
-        # T3 (new named entity in story.entity_names \ surfaced_entity_names) is the
-        # active resurface signal for Stage 2; T1/T2a (evidence ledger tier/gate) and
-        # T2b (arxiv version counts) fire in Stage 6 when upsert_evidence +
-        # version polling are persisted (TODO stage6).
-        featured_eligible = [s for s in matched if s.cross_day_status != "ONGOING"]
-        suppressed_count = len(matched) - len(featured_eligible)
-        if suppressed_count:
-            print(f"Cross-day suppression: excluded {suppressed_count} ONGOING stories from featured candidates")
-        stories = score_stories(matched)
-        featured_eligible_scored = [s for s in stories if s.cross_day_status != "ONGOING"]
-    else:
-        # Degraded fallback (store=None, e.g. first run pre-backfill): retain the
-        # legacy behavior so the pipeline still produces a report.
-        stories = score_stories(intraday_stories)
-        if recent_headlines:
-            stories = apply_cross_day_penalty(stories, recent_headlines)
-        featured_eligible_scored = stories
-
-    # Stage 5b: Filter low-quality / meta-discussion stories
-    pre_quality = len(stories)
-    stories = [s for s in stories if not _is_low_quality_story(s)]
-    if len(stories) < pre_quality:
-        print(f"Story quality filter: removed {pre_quality - len(stories)} low-quality stories ({len(stories)} remaining)")
-    # Apply same quality filter to the featured-eligible subset
-    featured_eligible_scored = [s for s in featured_eligible_scored if not _is_low_quality_story(s)]
-
-    # Stage 6: Select & categorize
-    # select_and_categorize receives only featured_eligible_scored so ONGOING stories
-    # cannot be selected as featured; all stories (incl. ONGOING) go to display_candidates.
-    target_topics = hotspot_config.getint("target_topics", fallback=5)
-    target_watchlist_topics = hotspot_config.getint("target_watchlist_topics", fallback=3)
-    featured_stories, watchlist_stories, _ = select_and_categorize(
-        featured_eligible_scored,
-        target_featured=target_topics,
-        target_watchlist=target_watchlist_topics,
-        max_per_category=hotspot_config.getint("max_topics_per_category", fallback=4),
-    )
-
-    # Persist surface snapshots for every story that is surfaced this run so that
-    # the next run's resurface predicate (T3 and future T1/T2) compares against them.
-    # This fixes the T3-always-true trap: once surfaced_entity_names is recorded,
-    # T3 fires ONLY when genuinely new entities appear the following day.
-    if store is not None:
-        run_date_iso = date_string(target_date)
-        for s in featured_stories:
-            store.record_surface(s, run_date_iso, lane="featured")
-
-    # Bridge: Story → topic dict
-    featured_topics = [_story_to_topic_dict(s, keep=True) for s in featured_stories]
-    watchlist = [_story_to_topic_dict(s, watchlist=True) for s in watchlist_stories]
-    display_candidates = [_story_to_topic_dict(s) for s in stories]
-
-    # Category and long-tail sections (reuse existing builders)
-    watchlist_cutoff = hotspot_config.getfloat("watchlist_score_cutoff", fallback=4.9)
-    category_sections = _build_category_sections(
-        display_candidates,
-        featured_topics,
-        target_total_topics=hotspot_config.getint("target_category_topics", fallback=12),
-        max_per_category=hotspot_config.getint("max_topics_per_category", fallback=4),
-        min_display_score=hotspot_config.getfloat("category_display_score_cutoff", fallback=max(2.8, watchlist_cutoff - 0.5)),
-    )
-    long_tail_sections = _build_long_tail_sections(
-        display_candidates,
-        featured_topics,
-        category_sections,
-        target_total_topics=hotspot_config.getint("target_long_tail_topics", fallback=18),
-        max_per_category=hotspot_config.getint("max_long_tail_per_category", fallback=8),
-        min_display_score=hotspot_config.getfloat("long_tail_display_score_cutoff", fallback=1.6),
-    )
-
-    # Stage 7: Digest synthesis
-    system_prompt = read_prompt("hotspot.system_prompt")
-    digest_prompt = read_prompt("hotspot.digest_writer")
-    prompt_cost = 0.0
-    completion_cost = 0.0
-    llm_prompt_tokens = 0
-    llm_completion_tokens = 0
-    llm_requests = 0
-    summary, digest_prompt_cost, digest_completion_cost, digest_prompt_tokens, digest_completion_tokens, digest_requests = apply_digest_synthesis(
-        featured_topics,
-        watchlist,
-        system_prompt,
-        digest_prompt,
-        config,
-        effective_mode,
-    )
-    prompt_cost += digest_prompt_cost
-    completion_cost += digest_completion_cost
-    llm_prompt_tokens += digest_prompt_tokens
-    llm_completion_tokens += digest_completion_tokens
-    llm_requests += digest_requests
-
-    # Waterfall dedup safety net
-    claimed_ids: set[str] = {t["TOPIC_ID"] for t in featured_topics}
-    for section in category_sections:
-        claimed_ids.update(t["TOPIC_ID"] for t in section.get("topics", []))
-    for section in long_tail_sections:
-        claimed_ids.update(t["TOPIC_ID"] for t in section.get("topics", []))
-    watchlist = [t for t in watchlist if t["TOPIC_ID"] not in claimed_ids]
-
-    x_buzz = _build_market_signal_items(raw_items, featured_topics, watchlist)
-    paper_spotlight = _build_paper_spotlight(
-        raw_items,
-        max_daily_hot=hotspot_config.getint("paper_spotlight_max_daily_hot", fallback=6),
-        max_new_frontier=hotspot_config.getint("paper_spotlight_max_new_frontier", fallback=4),
-    )
-    usage = _build_usage_payload(
-        config,
-        effective_mode,
-        prompt_cost,
-        completion_cost,
-        llm_prompt_tokens,
-        llm_completion_tokens,
-        llm_requests,
-        api_usage,
-    )
-
-    report = {
-        "date": date_string(target_date),
-        "generated_at": datetime.now(UTC).isoformat(),
-        "mode": effective_mode,
-        "summary": summary,
-        "source_stats": source_stats,
-        "totals": {
-            "raw_items": len(raw_items),
-            "enriched_items": len(enriched_items),
-            "stories": len(stories),
-            "featured": len(featured_topics),
-            "watchlist": len(watchlist),
-            "category_topics": sum(len(s.get("topics", [])) for s in category_sections),
-            "long_tail_topics": sum(len(s.get("topics", [])) for s in long_tail_sections),
-            "paper_spotlight_items": sum(len(section.get("items", [])) for section in paper_spotlight),
-        },
-        "costs": {"prompt": round(prompt_cost, 6), "completion": round(completion_cost, 6), "total": round(prompt_cost + completion_cost, 6)},
-        "usage": usage,
-        "top_topics": featured_topics,
-        "featured_topics": featured_topics,
-        "category_sections": category_sections,
-        "long_tail_sections": long_tail_sections,
-        "paper_spotlight": paper_spotlight,
-        "x_buzz": x_buzz,
-        "watchlist": watchlist,
-    }
-
-    paths = build_hotspot_paths(output_root, target_date.date())
-    ensure_parent_dirs(paths)
-    write_json(paths.normalized_path, _serialize_items(raw_items))
-    write_json(paths.report_path, report)
-    write_hotspot_web_data(output_root, report, raw_items)
-    paths.markdown_path.write_text(render_hot_daily_md(report), encoding="utf-8")
-    return report
+    report_path = output_root / "hot" / "reports" / f"{date_string(target_date)}.json"
+    if not report_path.exists():
+        return None
+    return json.loads(report_path.read_text(encoding="utf-8"))

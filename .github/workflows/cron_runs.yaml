@@ -44,6 +44,14 @@ jobs:
           python -m pip install --upgrade pip
           if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
 
+      - name: Detect hotspot runtime mode
+        id: runtime
+        shell: bash
+        run: |
+          MODE=$(python -c "import configparser; c = configparser.ConfigParser(); c.read('configs/config.ini'); print(c.get('HOTSPOT_RUNTIME', 'runtime', fallback='local'))")
+          echo "mode=$MODE" >> "$GITHUB_OUTPUT"
+          echo "Hotspot runtime mode: $MODE"
+
       - name: Refresh model pricing cache
         run: |
           python scripts/refresh_model_pricing.py --max-age-hours 24
@@ -57,14 +65,19 @@ jobs:
         run: |
           python main.py
 
-      - name: Generate daily hotspots
+      - name: Generate daily hotspots (deterministic Actions fallback)
+        if: ${{ steps.runtime.outputs.mode == 'actions' }}
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
           OPENAI_BASE_URL: ${{ secrets.OPENAI_BASE_URL }}
-          X_BEARER_TOKEN: ${{ secrets.X_BEARER_TOKEN }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          python scripts/generate_daily_hotspots.py --output-root out --mode auto --force
+          # Deterministic degraded path: heuristic mode, agents off, no twitterapi secret.
+          python scripts/generate_daily_hotspots.py --output-root out --mode heuristic --force
+
+      - name: Skip hotspot generation (VPS owns it)
+        if: ${{ steps.runtime.outputs.mode != 'actions' }}
+        run: echo "runtime=local — hotspot generation runs on VPS; Actions is Publisher-only."
 
       - name: Upload results
         uses: actions/upload-artifact@v7

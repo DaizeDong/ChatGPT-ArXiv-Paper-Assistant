@@ -20,6 +20,7 @@ import re
 from datetime import datetime, timezone
 from xml.etree import ElementTree
 
+from arxiv_assistant.utils.agent_runner import AgentError, run_agent
 from arxiv_assistant.utils.hotspot.hotspot_sources import fetch_json, fetch_text, parse_datetime
 
 # ---------------------------------------------------------------------------
@@ -42,6 +43,9 @@ _GITHUB_TREND_SOURCE = "github_trend"
 _CONFIDENCE_HIGH = 0.95
 # Conservative Stage-1 fallback confidence when no authoritative anchor exists.
 _CONFIDENCE_LOW = 0.3
+
+# source families whose claimed dates are untrustworthy -> Tier-1 residual (§B.2)
+_TIER1_FAMILIES = {"news", "blog", "x", "tweet", "roundup", "analysis"}
 
 
 # ---------------------------------------------------------------------------
@@ -113,15 +117,18 @@ def _clamp_verdict(
 
     agent_floored = _floor_day_iso((agent_out or {}).get("verified_first_date"))
     agent_agreed = bool(agent_floored is not None and agent_floored == earliest)
+    agent_overridden = bool(agent_floored is not None and agent_floored > earliest)
 
-    if has_external_signal or agent_agreed:
+    if agent_overridden:
+        # Agent proposed a date LATER than the earliest credible date (overridden by
+        # min()).  Cap to LOW REGARDLESS of external signal — a wrong-direction agent
+        # must not lend high confidence even when Wayback/page rescued the date.
+        # The date is still correct (min wins); only the trust is capped (INV6).
+        confidence = _CONFIDENCE_LOW
+    elif has_external_signal or agent_agreed:
         # Real external proof, or agent's date agreed with the earliest credible
         # date — carry the (clamped-to-[0,1]) agent confidence.
         confidence = max(0.0, min(1.0, float((agent_out or {}).get("confidence", 0.7))))
-    elif agent_floored is not None and agent_floored > earliest:
-        # Agent proposed a date LATER than what min() picked (agent was overridden,
-        # possibly hallucinating a future date).  Cap to LOW — do not trust it.
-        confidence = _CONFIDENCE_LOW
     else:
         # No external signal and no usable agent agreement -> conservative low.
         confidence = _CONFIDENCE_LOW
@@ -134,6 +141,48 @@ def _clamp_verdict(
         "evidence": evidence,
         "stale_date_pollution": stale,
     }
+
+
+# ---------------------------------------------------------------------------
+# Stage 3: Tier-1 subagent transport (§B.2, §2.11)
+# ---------------------------------------------------------------------------
+
+_DATEVERIFY_PROMPT = (
+    "You are a stateless date-verification worker. Read the JSON object on stdin "
+    "(schema dateverify.in.v1). Cross at least two independent signals to find the "
+    "EARLIEST credible first-publication date: the provided Wayback earliest snapshot, "
+    "the page article:published_time / JSON-LD datePublished, and an earliest credible "
+    "report search for the title. Pollution backdates content to look new, so prefer the "
+    "earliest credible date. Emit ONLY a JSON object of schema dateverify.out.v1 with keys "
+    "verified_first_date (ISO8601), confidence (0..1), evidence (list of strings), "
+    "stale_date_pollution (bool). No prose."
+)
+
+# Minimal JSON Schema for the dateverify.out.v1 output (used by run_agent validator).
+_DATEVERIFY_OUT_SCHEMA = {
+    "required": ["verified_first_date", "confidence", "evidence"],
+    "properties": {
+        "verified_first_date": {"type": "string"},
+        "confidence": {"type": "number"},
+        "evidence": {"type": "array"},
+    },
+}
+
+
+def _run_dateverify_subagent(payload: dict) -> dict | None:
+    """Dispatch the stateless Tier-1/2 DateVerify subagent via ``claude -p`` headless.
+
+    Returns the parsed typed output (dateverify.out.v1) or None on any failure
+    (caller falls back deterministically; spec §E).  Patched in tests (record/replay).
+
+    Raises AgentError when run_agent raises (propagated to caller for explicit catch).
+    """
+    prompt = _DATEVERIFY_PROMPT + "\n\nInput:\n" + json.dumps(payload)
+    return run_agent(
+        prompt,
+        schema=_DATEVERIFY_OUT_SCHEMA,
+        model=DATEVERIFY_MODEL_ID,
+    )
 
 
 # ---------------------------------------------------------------------------
@@ -226,6 +275,39 @@ def _page_published_time(url: str) -> str | None:
             if isinstance(obj, dict) and obj.get("datePublished"):
                 return str(obj["datePublished"]).strip()
     return None
+
+
+# ---------------------------------------------------------------------------
+# Stage 3: Tier-1 residual verification helper (§B.2 Tier-1, §B.4)
+# ---------------------------------------------------------------------------
+
+
+def _verify_subagent_residual(item, *, tier: int) -> dict:
+    """Tier-1 path: deterministic anti-pollution reads → stateless agent → clamp (INV6).
+
+    Fetches Wayback earliest snapshot + page published_time deterministically,
+    dispatches the DateVerify subagent, then clamps the result via _clamp_verdict
+    (earliest-credible-date-wins, day-granular, INV6).  On AgentError the caller
+    catches and degrades to conservative min(claimed, fetched) + LOW confidence.
+    """
+    wayback = _wayback_earliest_snapshot(item.url)
+    page_time = _page_published_time(item.url)
+    payload = {
+        "schema": "dateverify.in.v1",
+        "url": item.url,
+        "title": item.title,
+        "claimed_date": item.published_at,
+        "tier": tier,
+        "wayback_earliest": wayback,
+        "page_published_time": page_time,
+    }
+    agent_out = _run_dateverify_subagent(payload)
+    return _clamp_verdict(
+        claimed_iso=item.published_at,
+        agent_out=agent_out,
+        wayback_earliest=wayback,
+        page_published_time=page_time,
+    )
 
 
 # ---------------------------------------------------------------------------
@@ -407,24 +489,35 @@ def verify(item, store, *, will_be_featured: bool = False) -> dict:
             "evidence": evidence,
         }
     else:
-        # --- 4. Stage-1 conservative fallback (§B.3 "无法核实→保守 min(claimed,fetched)") ---
-        # Tier-1/2 subagent dispatch is NOT implemented until Stage 3.
-        # This is the explicitly-specified legal Stage-1 behaviour: return the
-        # earliest of source-claimed and metadata fetched_at, mark confidence LOW
-        # so downstream gates fold it below the authoritative-anchor path.
-        # stage3: Tier-1/2 subagent extends here — replace this else-branch with
-        #         a run_agent(Wayback/published_time) call; keep the conservative
-        #         path as the network-failure/timeout degrade.
-        verified = _earliest(claimed, fetched) or claimed or fetched
-        verdict = {
-            "verified_first_date": verified,
-            "confidence": _CONFIDENCE_LOW,
-            "evidence": ["fallback:min(claimed,fetched)"],
-        }
+        # --- 4. Stage-3 Tier-1 dispatch for residual items (§B.2 Tier-1) ---
+        # Residual news/blog/X items get the Tier-1 subagent (Wayback CDX +
+        # published_time + earliest-mention).  AgentError degrades conservatively
+        # to min(claimed,fetched)+LOW (spec §E — never crash).  Non-residual items
+        # fall through to the conservative Stage-1 fallback immediately.
+        family = (item.source_type or "").lower()
+        if family in _TIER1_FAMILIES:
+            try:
+                verdict = _verify_subagent_residual(item, tier=1)
+            except AgentError:
+                # Deterministic degrade: conservative min(claimed,fetched)+LOW (§E)
+                verified = _earliest(claimed, fetched) or claimed or fetched
+                verdict = {
+                    "verified_first_date": verified,
+                    "confidence": _CONFIDENCE_LOW,
+                    "evidence": ["fallback:min(claimed,fetched);agent_error"],
+                }
+        else:
+            # Non-residual, no Tier-0 anchor: conservative Stage-1 fallback (§B.3)
+            verified = _earliest(claimed, fetched) or claimed or fetched
+            verdict = {
+                "verified_first_date": verified,
+                "confidence": _CONFIDENCE_LOW,
+                "evidence": ["fallback:min(claimed,fetched)"],
+            }
 
     # --- 5. Persist (write-once; no-op if already frozen) ---
     store.put_verdict(content_hash, verdict)
-    return verdict
+    return store.get_verdict(content_hash)  # return the frozen copy (stable across calls)
 
 
 # ---------------------------------------------------------------------------

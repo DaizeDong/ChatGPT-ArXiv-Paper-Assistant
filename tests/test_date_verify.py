@@ -1,7 +1,9 @@
 from __future__ import annotations
 
+import json as _json
 import unittest
 from datetime import date
+from pathlib import Path
 from unittest.mock import patch
 
 from arxiv_assistant.hotspots.date_verify import (
@@ -12,9 +14,12 @@ from arxiv_assistant.hotspots.date_verify import (
     verify,
 )
 from arxiv_assistant.hotspots.story import _freshness_weight
+from arxiv_assistant.utils.agent_runner import AgentError
 from arxiv_assistant.utils.hotspot.gate_date import floor_to_utc_day, gate_date
 from arxiv_assistant.utils.hotspot.hotspot_schema import HotspotItem
 from arxiv_assistant.utils.hotspot.hotspot_sources import get_freshness_date
+
+FIXTURES = Path(__file__).parent / "fixtures" / "agent"
 
 _ARXIV_ATOM = """<?xml version="1.0" encoding="UTF-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
@@ -484,8 +489,10 @@ class TestClampVerdictINV6AntiHallucination(unittest.TestCase):
         self.assertLessEqual(clamped["confidence"], _CONFIDENCE_LOW)
 
     def test_clamp_hallucinated_future_agent_wayback_proves_earlier(self):
-        """Agent claims 2099 but Wayback shows 2023: min picks 2023, stale=True, confidence
-        should reflect the external Wayback signal (agent was overridden but Wayback is real)."""
+        """Agent claims 2099 but Wayback shows 2023: min picks 2023 (date correct), stale=True.
+        The agent was OVERRIDDEN (its date > earliest), so confidence is capped to LOW even
+        though Wayback is a real external signal — a wrong-direction agent must not lend trust
+        (INV6 anti-hallucination)."""
         from arxiv_assistant.hotspots.date_verify import _clamp_verdict, _CONFIDENCE_LOW
         claimed = "2026-06-02T09:00:00Z"
         clamped = _clamp_verdict(
@@ -502,10 +509,9 @@ class TestClampVerdictINV6AntiHallucination(unittest.TestCase):
         self.assertEqual(clamped["verified_first_date"], "2023-11-14T00:00:00Z")
         # claimed (2026) > earliest (2023) → stale_date_pollution
         self.assertTrue(clamped["stale_date_pollution"])
-        # Wayback IS a real external signal, so confidence is carried (not hard-capped to LOW)
-        # but it is a valid clamped-to-[0,1] value
-        self.assertGreaterEqual(clamped["confidence"], 0.0)
-        self.assertLessEqual(clamped["confidence"], 1.0)
+        # Agent was overridden (2099 > 2023) → confidence capped to LOW even though Wayback
+        # is real. The agent's 0.95 must NOT leak through (INV6 anti-hallucination).
+        self.assertEqual(clamped["confidence"], _CONFIDENCE_LOW)
 
 
 class TestGateDateAuthoritativeAnchor(unittest.TestCase):
@@ -548,6 +554,130 @@ class TestGateDateAuthoritativeAnchor(unittest.TestCase):
         )
         item.verified_first_date = None
         self.assertEqual(gate_date(item), date(2024, 2, 1))
+
+
+class _NewsStore:
+    """Minimal StoryStore stand-in honouring write-once put_verdict (INV3)."""
+
+    def __init__(self):
+        self._verdicts = {}
+        self.put_calls = 0
+
+    def get_verdict(self, content_hash):
+        return self._verdicts.get(content_hash)
+
+    def put_verdict(self, content_hash, verdict):
+        self.put_calls += 1
+        if content_hash in self._verdicts:
+            return  # write-once: no-op if exists
+        self._verdicts[content_hash] = dict(verdict)
+
+
+def _news_item(url, claimed):
+    return HotspotItem(
+        source_id="ainews",
+        source_name="AINews",
+        source_role="roundup",
+        source_type="news",
+        title="Agent breakthrough",
+        summary="",
+        url=url,
+        canonical_url=url,
+        published_at=claimed,
+    )
+
+
+class TestTier1Verify(unittest.TestCase):
+    def test_tier1_replay_uses_earlier_wayback_date_and_flags_pollution(self):
+        from arxiv_assistant.hotspots import date_verify
+        replay = _json.loads((FIXTURES / "dateverify_tier1_stale_pollution.json").read_text(encoding="utf-8"))
+        store = _NewsStore()
+        item = _news_item("https://example.com/blog/x", "2026-06-02T09:00:00Z")
+        with patch.object(date_verify, "_wayback_earliest_snapshot", return_value="2023-11-14T00:00:00Z"), \
+             patch.object(date_verify, "_page_published_time", return_value="2023-11-14T08:30:00Z"), \
+             patch.object(date_verify, "_run_dateverify_subagent", return_value=replay):
+            verdict = date_verify.verify(item, store)
+        # claimed 2026 but Wayback proves 2023 -> earlier date wins, flagged stale
+        self.assertEqual(verdict["verified_first_date"], "2023-11-14T00:00:00Z")
+        self.assertTrue(verdict.get("stale_date_pollution"))
+
+    def test_verdict_frozen_once_and_stable_across_calls(self):
+        from arxiv_assistant.hotspots import date_verify
+        replay = _json.loads((FIXTURES / "dateverify_tier1_stale_pollution.json").read_text(encoding="utf-8"))
+        store = _NewsStore()
+        item = _news_item("https://example.com/blog/x", "2026-06-02T09:00:00Z")
+        with patch.object(date_verify, "_wayback_earliest_snapshot", return_value="2023-11-14T00:00:00Z"), \
+             patch.object(date_verify, "_page_published_time", return_value="2023-11-14T08:30:00Z"), \
+             patch.object(date_verify, "_run_dateverify_subagent", return_value=replay) as agent:
+            first = date_verify.verify(item, store)
+            # second call must hit the frozen cache: agent NOT called again, identical verdict
+            agent.reset_mock()
+            second = date_verify.verify(item, store)
+        self.assertEqual(first["verified_first_date"], second["verified_first_date"])
+        agent.assert_not_called()
+        self.assertEqual(len(store._verdicts), 1)
+
+    def test_inv1_gate_never_uses_source_claimed_date(self):
+        # INV1: the verdict that drives gates is the verified date, not item.published_at
+        from arxiv_assistant.hotspots import date_verify
+        replay = _json.loads((FIXTURES / "dateverify_tier1_stale_pollution.json").read_text(encoding="utf-8"))
+        store = _NewsStore()
+        item = _news_item("https://example.com/blog/x", "2026-06-02T09:00:00Z")
+        with patch.object(date_verify, "_wayback_earliest_snapshot", return_value="2023-11-14T00:00:00Z"), \
+             patch.object(date_verify, "_page_published_time", return_value="2023-11-14T08:30:00Z"), \
+             patch.object(date_verify, "_run_dateverify_subagent", return_value=replay):
+            verdict = date_verify.verify(item, store)
+        self.assertNotEqual(verdict["verified_first_date"], item.published_at)
+
+    def test_inv2_subday_jitter_does_not_change_gate_day(self):
+        # INV2: two agent runs differing only in sub-day H:M:S yield the same day verdict
+        from arxiv_assistant.hotspots import date_verify
+        store_a, store_b = _NewsStore(), _NewsStore()
+        item_a = _news_item("https://example.com/a", "2026-06-02T09:00:00Z")
+        item_b = _news_item("https://example.com/b", "2026-06-02T09:00:00Z")
+        jitter_a = {"verified_first_date": "2026-06-02T06:00:00Z", "confidence": 0.8, "evidence": [], "stale_date_pollution": False}
+        jitter_b = {"verified_first_date": "2026-06-02T23:59:00Z", "confidence": 0.8, "evidence": [], "stale_date_pollution": False}
+        with patch.object(date_verify, "_wayback_earliest_snapshot", return_value=None), \
+             patch.object(date_verify, "_page_published_time", return_value=None):
+            with patch.object(date_verify, "_run_dateverify_subagent", return_value=jitter_a):
+                va = date_verify.verify(item_a, store_a)
+            with patch.object(date_verify, "_run_dateverify_subagent", return_value=jitter_b):
+                vb = date_verify.verify(item_b, store_b)
+        self.assertEqual(va["verified_first_date"], vb["verified_first_date"])  # both floored to 2026-06-02 day
+
+    def test_agent_error_degrades_to_conservative_fallback(self):
+        # AgentError: _run_dateverify_subagent raises -> degrade to min(claimed,fetched)+LOW, no crash
+        from arxiv_assistant.hotspots import date_verify
+        store = _NewsStore()
+        item = _news_item("https://example.com/blog/err", "2026-06-02T09:00:00Z")
+        with patch.object(date_verify, "_wayback_earliest_snapshot", return_value=None), \
+             patch.object(date_verify, "_page_published_time", return_value=None), \
+             patch.object(date_verify, "_run_dateverify_subagent", side_effect=AgentError("simulated failure")):
+            verdict = date_verify.verify(item, store)
+        # No crash; verdict is the conservative fallback
+        self.assertIsNotNone(verdict)
+        self.assertIn("verified_first_date", verdict)
+        self.assertLessEqual(verdict["confidence"], 0.5)
+
+    def test_inv6_agent_proposing_later_date_is_clamped_to_earlier_real(self):
+        # INV6: agent proposes a date LATER than Wayback evidence; clamp must pick the earlier Wayback date
+        from arxiv_assistant.hotspots import date_verify
+        store = _NewsStore()
+        item = _news_item("https://example.com/blog/inv6", "2026-06-02T09:00:00Z")
+        # agent proposes 2026 (same as claimed), but Wayback shows 2023
+        later_agent_out = {
+            "verified_first_date": "2026-06-02T00:00:00Z",
+            "confidence": 0.95,
+            "evidence": [],
+            "stale_date_pollution": False,
+        }
+        with patch.object(date_verify, "_wayback_earliest_snapshot", return_value="2023-11-14T00:00:00Z"), \
+             patch.object(date_verify, "_page_published_time", return_value=None), \
+             patch.object(date_verify, "_run_dateverify_subagent", return_value=later_agent_out):
+            verdict = date_verify.verify(item, store)
+        # Wayback 2023 must beat both the agent's 2026 and the claimed 2026
+        self.assertEqual(verdict["verified_first_date"], "2023-11-14T00:00:00Z")
+        self.assertTrue(verdict.get("stale_date_pollution"))
 
 
 if __name__ == "__main__":

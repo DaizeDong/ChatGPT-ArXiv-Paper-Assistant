@@ -18,5 +18,19 @@ class TestHotspotConfig(unittest.TestCase):
         self.assertTrue(config["HOTSPOTS"].getboolean("enabled"))
 
 
+    def test_stage2_dedup_keys_present_with_defaults(self) -> None:
+        import configparser
+        from pathlib import Path
+
+        cfg = configparser.ConfigParser()
+        cfg.read(Path(__file__).resolve().parents[1] / "configs" / "config.ini")
+        hot = cfg["HOTSPOTS"]
+        self.assertEqual(hot.getint("cross_day_window_days"), 14)
+        self.assertAlmostEqual(hot.getfloat("crossday_cosine_threshold"), 0.90)
+        self.assertEqual(hot.getint("resurge_min_competitors"), 3)
+        self.assertEqual(hot.getint("resurge_cooldown_days"), 7)
+        self.assertTrue(hot.get("embed_model_id", fallback="").strip())
+
+
 if __name__ == "__main__":
     unittest.main()

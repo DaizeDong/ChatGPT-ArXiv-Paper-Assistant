@@ -282,6 +282,79 @@ class TestStoryStages(unittest.TestCase):
 
 FIXT = Path(__file__).resolve().parent / "fixtures" / "agent"
 
+# ---------------------------------------------------------------------------
+# Task 7: TestRenderStage
+# ---------------------------------------------------------------------------
+
+
+class TestRenderStage(unittest.TestCase):
+    def _config(self) -> configparser.ConfigParser:
+        cfg = configparser.ConfigParser()
+        cfg["HOTSPOTS"] = {
+            "enabled": "true", "mode": "heuristic", "max_item_age_days": "14",
+            "resurge_min_competitors": "3", "resurge_cooldown_days": "7",
+        }
+        return cfg
+
+    def test_render_writes_report_with_resurgence_key(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            td = datetime(2026, 5, 20, tzinfo=timezone.utc)
+            kernel._write_checkpoint(root, td, "harvest",
+                                     {"items": [], "source_stats": {}, "api_usage": {}})
+            kernel._write_checkpoint(root, td, "synthesize",
+                                     {"featured": [], "watchlist": [], "all_topics": [],
+                                      "manifest": {"synthesize_model": "m", "synthesize_temperature": 0,
+                                                   "synthesize_rejected": []}})
+            ctx = kernel.KernelContext(output_root=root, target_date=td,
+                                       config=self._config(), store=None, journal=[])
+            payload = kernel._stage_render(ctx)
+            report_path = root / "hot" / "reports" / "2026-05-20.json"
+            self.assertTrue(report_path.exists())
+            report = json.loads(report_path.read_text(encoding="utf-8"))
+            self.assertIn("resurgence", report)
+            self.assertEqual(report["resurgence"], [])
+            self.assertEqual(payload["report_path"], str(report_path))
+
+    def test_resurgence_lane_built_from_store(self) -> None:
+        class FakeStory:
+            story_id = "s9"
+            resurged_at = "2026-05-20"
+            arxiv_versions = {"2301.00001": 3}
+            surfaced_arxiv_versions = {"2301.00001": 2}
+            verified_first_date = "2023-01-02T00:00:00Z"
+            entity_names = {"FooNet"}
+
+        class FakeStore:
+            def __init__(self) -> None:
+                self.surfaced: list = []
+
+            def active_stories(self, window_days, as_of):
+                return [FakeStory()]
+
+            def record_surface(self, story, run_date, *, lane="featured"):
+                self.surfaced.append((story.story_id, run_date, lane))
+
+        store = FakeStore()
+        with tempfile.TemporaryDirectory() as tmp, \
+                unittest.mock.patch.object(kernel, "_resurge", return_value=True):
+            root = Path(tmp)
+            td = datetime(2026, 5, 20, tzinfo=timezone.utc)
+            kernel._write_checkpoint(root, td, "harvest",
+                                     {"items": [], "source_stats": {}, "api_usage": {}})
+            kernel._write_checkpoint(root, td, "synthesize",
+                                     {"featured": [], "watchlist": [], "all_topics": [],
+                                      "manifest": {}})
+            ctx = kernel.KernelContext(output_root=root, target_date=td,
+                                       config=self._config(), store=store, journal=[])
+            kernel._stage_render(ctx)
+            report = json.loads((root / "hot" / "reports" / "2026-05-20.json").read_text(encoding="utf-8"))
+        self.assertEqual(len(report["resurgence"]), 1)
+        entry = report["resurgence"][0]
+        self.assertEqual(entry["original_first_date"], "2023-01-02T00:00:00Z")
+        self.assertEqual(entry["reason"], "arxiv_version_bump")
+        self.assertIn(("s9", "2026-05-20", "resurgence"), store.surfaced)
+
 
 class TestSynthesizeVerifier(unittest.TestCase):
     def _topic(self) -> dict:

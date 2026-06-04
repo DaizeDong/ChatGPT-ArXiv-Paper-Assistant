@@ -4,22 +4,32 @@ import json
 import shutil
 import time
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import UTC, datetime, timezone
 from pathlib import Path
 from typing import Any, Callable
 
 from arxiv_assistant.hotspots.pipeline import (
     _apply_freshness_gates,
+    _build_category_sections,
+    _build_long_tail_sections,
+    _build_market_signal_items,
+    _build_paper_spotlight,
+    _fallback_digest_summary,
     _heuristic_takeaways,
     _serialize_items,
     _story_to_topic_dict,
+    build_hotspot_paths,
     date_string,
     enrich_items_batch,
     enrich_items_heuristic,
+    ensure_parent_dirs,
     fetch_source_payloads as _fetch_source_payloads,
     group_into_stories,
+    render_hot_daily_md,
     score_stories,
     select_and_categorize,
+    write_hotspot_web_data,
+    write_json,
 )
 from arxiv_assistant.utils.hotspot.hotspot_schema import HotspotItem
 
@@ -328,6 +338,110 @@ def _stage_synthesize(ctx: KernelContext) -> dict[str, Any]:
 
 
 # ---------------------------------------------------------------------------
+# Stage 7: Render — assemble report dict + Resurgence lane + single-writer
+# record_surface (spec §G.4 / Task 7)
+# ---------------------------------------------------------------------------
+
+def _resurge(story, *, max_age_days, run_date, min_competitors, cooldown_days):
+    """Thin wrapper over stage-2 novelty.resurge; degrades to False if absent."""
+    try:
+        from arxiv_assistant.hotspots.novelty import resurge  # type: ignore[import]
+        return resurge(story, max_age_days=max_age_days, run_date=run_date,
+                       min_competitors=min_competitors, cooldown_days=cooldown_days)
+    except Exception:
+        return False
+
+
+def _resurge_reason(story) -> str:
+    versions = getattr(story, "arxiv_versions", {}) or {}
+    prior = getattr(story, "surfaced_arxiv_versions", {}) or {}
+    for aid, count in versions.items():
+        if count > prior.get(aid, 0):
+            return "arxiv_version_bump"
+    return "competitor_cluster"
+
+
+def _build_resurgence_lane(ctx: KernelContext) -> list[dict[str, Any]]:
+    store = ctx.store
+    if store is None:
+        return []
+    cfg = ctx.config["HOTSPOTS"]
+    max_age = cfg.getint("max_item_age_days", fallback=14)
+    min_comp = cfg.getint("resurge_min_competitors", fallback=3)
+    cooldown = cfg.getint("resurge_cooldown_days", fallback=7)
+    as_of = ctx.target_date.astimezone(timezone.utc).date()
+    window = cfg.getint("cross_day_window_days", fallback=14)
+    lane: list[dict[str, Any]] = []
+    for story in store.active_stories(window, as_of):
+        if not _resurge(story, max_age_days=max_age, run_date=as_of,
+                        min_competitors=min_comp, cooldown_days=cooldown):
+            continue
+        lane.append({
+            "story_id": getattr(story, "story_id", ""),
+            "original_first_date": getattr(story, "verified_first_date", None),
+            "resurged_at": getattr(story, "resurged_at", None),
+            "reason": _resurge_reason(story),
+            "entities": sorted(getattr(story, "entity_names", set()) or set()),
+        })
+        store.record_surface(story, ctx.run_date, lane="resurgence")  # single writer
+    return lane
+
+
+def _stage_render(ctx: KernelContext) -> dict[str, Any]:
+    harvest = ctx.read("harvest")
+    synth = ctx.read("synthesize")
+    cfg = ctx.config["HOTSPOTS"]
+    raw_items = [_deserialize_item(r) for r in harvest.get("items", [])]
+    featured = synth.get("featured", [])
+    watchlist = synth.get("watchlist", [])
+    all_topics = synth.get("all_topics", [])
+
+    category_sections = _build_category_sections(
+        all_topics, featured,
+        target_total_topics=cfg.getint("target_category_topics", fallback=12),
+        max_per_category=cfg.getint("max_topics_per_category", fallback=4),
+        min_display_score=cfg.getfloat("category_display_score_cutoff", fallback=2.8),
+    )
+    long_tail_sections = _build_long_tail_sections(
+        all_topics, featured, category_sections,
+        target_total_topics=cfg.getint("target_long_tail_topics", fallback=18),
+        max_per_category=cfg.getint("max_long_tail_per_category", fallback=8),
+        min_display_score=cfg.getfloat("long_tail_display_score_cutoff", fallback=1.6),
+    )
+    x_buzz = _build_market_signal_items(raw_items, featured, watchlist)
+    paper_spotlight = _build_paper_spotlight(
+        raw_items,
+        max_daily_hot=cfg.getint("paper_spotlight_max_daily_hot", fallback=6),
+        max_new_frontier=cfg.getint("paper_spotlight_max_new_frontier", fallback=4),
+    )
+    resurgence = _build_resurgence_lane(ctx)
+
+    report = {
+        "date": ctx.run_date,
+        "generated_at": datetime.now(UTC).isoformat(),
+        "mode": cfg.get("mode", "heuristic"),
+        "summary": _fallback_digest_summary(featured),
+        "source_stats": harvest.get("source_stats", {}),
+        "manifest": synth.get("manifest", {}),
+        "top_topics": featured,
+        "featured_topics": featured,
+        "category_sections": category_sections,
+        "long_tail_sections": long_tail_sections,
+        "paper_spotlight": paper_spotlight,
+        "x_buzz": x_buzz,
+        "watchlist": watchlist,
+        "resurgence": resurgence,
+    }
+
+    paths = build_hotspot_paths(ctx.output_root, ctx.target_date.date())
+    ensure_parent_dirs(paths)
+    write_json(paths.report_path, report)
+    write_hotspot_web_data(ctx.output_root, report, raw_items)
+    paths.markdown_path.write_text(render_hot_daily_md(report), encoding="utf-8")
+    return {"report_path": str(paths.report_path), "resurgence_count": len(resurgence)}
+
+
+# ---------------------------------------------------------------------------
 # Topology is hardcoded here (spec §G.2): never produced by an LLM.
 # Real stage bodies are bound in Tasks 4-7; tests patch _STAGE_FNS.
 # ---------------------------------------------------------------------------
@@ -341,6 +455,7 @@ _STAGE_FNS: dict[str, Callable[["KernelContext"], dict[str, Any]]] = {
     "gapfill": _stage_gapfill,
     "score": _stage_score,
     "synthesize": _stage_synthesize,
+    "render": _stage_render,
 }
 
 

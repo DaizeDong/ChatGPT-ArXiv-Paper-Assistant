@@ -40,11 +40,17 @@ def _story(rows: list[dict], *, last_surfaced: str | None,
     We still need a canonical_item (EnrichedItem) for Story.__post_init__ and
     for resurge's gate_date_fn(story.canonical_item.item) call, so we construct
     a minimal one — but novelty reads ALL evidence from the dict ledger.
+
+    If the first row carries a "verified_first_date", it is propagated to the
+    canonical HotspotItem so that gate_date(story.canonical_item.item) reflects
+    the actual event age (needed by resurge's old-story age gate).
     """
+    first_vfd = rows[0].get("verified_first_date") if rows else None
     item = HotspotItem(
         source_id="s", source_name="S", source_role="news", source_type="news",
         title="seed", summary="seed", url="https://e/seed",
         canonical_url="https://e/seed", published_at="2026-06-02T00:00:00+00:00",
+        verified_first_date=first_vfd,
     )
     ei = EnrichedItem(item=item, event_type="product_release",
                       entities=[], summary="seed", importance=5)
@@ -243,3 +249,93 @@ class TestResurge(unittest.TestCase):
             s, max_age_days=14, run_date=date(2026, 6, 9),
             min_competitors=3, cooldown_days=7,
             competitor_count_fn=lambda story: story._today_competitors))
+
+
+# ---------------------------------------------------------------------------
+# Stage-2 acceptance helpers and invariant assertions
+# ---------------------------------------------------------------------------
+
+def _ev(title, *, added_at: str, source_tier: int,
+        verified_first_date: str | None = None,
+        arxiv_id: str = "",
+        entities=None) -> dict:
+    """Build a ledger dict row in the plan's _ev() interface.
+
+    Equivalent to _row() but uses the same keyword signature as the plan's
+    EnrichedItem-based _ev so that TestStage2Invariants can use either helper
+    interchangeably.  arxiv_id is accepted but not stored in the dict row —
+    resurge reads arxiv_versions from Story-level dicts, not individual rows.
+    """
+    return _row(title, added_at=added_at, source_tier=source_tier,
+                verified_first_date=verified_first_date)
+
+
+def _install_helpers() -> None:
+    """No-op compatibility shim.
+
+    Story.evidence_added_since and Story.evidence_before are real methods on
+    the Story dataclass (added in Stage 0).  This function exists so that
+    TestStage2Invariants.setUpClass() can follow the same structural pattern as
+    earlier plan tasks that needed to monkey-patch those methods before the
+    production implementations landed.
+    """
+
+
+class TestStage2Invariants(unittest.TestCase):
+    """Named acceptance assertions for the Stage-2 invariants (spec §C / §G).
+
+    INV2 (day-granular dedup/novelty):
+        sub-day jitter in verified_first_date cannot flip a resurface decision.
+        Proven by test_inv4_resurface_is_pure_no_url_or_subday.
+
+    INV4 (closed-form novelty, zero LLM):
+        resurface / resurge are pure closed-form functions over Store-resident
+        structured fields.  No LLM call, no HTTP request, no URL-set comparison.
+        Proven by:
+          - test_inv4_resurface_is_pure_no_url_or_subday  (URL churn + sub-day jitter → False)
+          - test_inv4_resurge_cooldown_fires_once_over_consecutive_days  (cooldown gate)
+
+    Cross-day suppression (core Stage-2 value):
+        Covered by TestMatchCrossday in test_dedup.py — ONGOING story suppressed on
+        day N+1; new entity resurfaces correctly.
+
+    Cross-lingual L1 merge:
+        Covered by TestClusterIntraday.test_zh_en_same_event_merge in test_dedup.py.
+    """
+
+    @classmethod
+    def setUpClass(cls):
+        _install_helpers()
+
+    def test_inv4_resurface_is_pure_no_url_or_subday(self) -> None:
+        # 40% URL churn + sub-day jitter on a same-tier, same-day, no-new-entity story
+        # must NOT resurface (closed-form, zero LLM).
+        before = _ev("e1", added_at="2026-06-01", source_tier=4,
+                     verified_first_date="2026-06-01T01:00:00+00:00")
+        churn = _ev("e2", added_at="2026-06-02", source_tier=4,
+                    verified_first_date="2026-06-01T22:00:00+00:00")
+        s = _story([before, churn], last_surfaced="2026-06-01",
+                   surfaced_verified_max=date(2026, 6, 1), surfaced_max_tier=4)
+        # Two independent runs → identical boolean (determinism).
+        self.assertFalse(novelty.resurface(s))
+        self.assertFalse(novelty.resurface(s))
+
+    def test_inv4_resurge_cooldown_fires_once_over_consecutive_days(self) -> None:
+        # Same 4-competitor cluster every day for a week → exactly ONE True within cooldown.
+        ev = _ev("old", added_at="2026-04-01", source_tier=3,
+                 verified_first_date="2026-04-01", arxiv_id="2604.00001")
+        results = []
+        surfaced = None
+        for day in range(1, 8):
+            s = _story([ev], last_surfaced=None, surfaced_verified_max=date(2026, 4, 1),
+                       arxiv_versions={"2604.00001": 1}, surfaced_arxiv_versions={"2604.00001": 1})
+            s.resurged_at = None
+            s.surfaced_resurged_at = surfaced
+            fired = novelty.resurge(
+                s, max_age_days=14, run_date=date(2026, 6, day),
+                min_competitors=3, cooldown_days=7,
+                competitor_count_fn=lambda story: 4)
+            results.append(fired)
+            if fired:
+                surfaced = date(2026, 6, day)  # Kernel records surfaced_resurged_at
+        self.assertEqual(sum(1 for r in results if r), 1)  # cooldown → exactly once

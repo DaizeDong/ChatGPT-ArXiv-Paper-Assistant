@@ -6,7 +6,9 @@ from datetime import UTC, date, datetime
 from pathlib import Path
 
 from arxiv_assistant.hotspots.pipeline import _apply_freshness_gates
+from arxiv_assistant.utils.hotspot.gate_date import gate_date
 from arxiv_assistant.utils.hotspot.hotspot_schema import HotspotItem
+from arxiv_assistant.utils.hotspot.hotspot_sources import get_freshness_date
 
 
 def _paper(arxiv_id: str, published_at: str, verified: str | None) -> HotspotItem:
@@ -67,6 +69,32 @@ class TestConfigMaxItemAge(unittest.TestCase):
     def test_template_documents_max_item_age_days(self) -> None:
         text = Path("configs/templates/config.template.ini").read_text(encoding="utf-8")
         self.assertIn("max_item_age_days", text)
+
+
+class TestInvariants(unittest.TestCase):
+    def test_inv1_gates_use_verified_not_claimed(self) -> None:
+        # INV1: a 2023-verified paper claiming 2026 must gate as 2023 everywhere.
+        item = _paper("2301.00001", "2026-04-04T00:00:00Z", "2023-01-02T00:00:00Z")
+        self.assertEqual(gate_date(item), date(2023, 1, 2))
+        self.assertEqual(get_freshness_date(item), "2023-01-02T00:00:00Z")
+
+    def test_inv2_subday_jitter_cannot_flip_gate(self) -> None:
+        # INV2: two sub-day-jittered verified dates on the same UTC day → identical
+        # gate decision (both kept or both dropped), never split.
+        target = datetime(2026, 4, 18, tzinfo=UTC)  # 14 days after 2026-04-04
+        a = _paper("2604.0000a", "2026-04-04T00:00:01Z", "2026-04-04T00:00:01Z")
+        b = _paper("2604.0000b", "2026-04-04T23:59:59Z", "2026-04-04T23:59:59Z")
+        kept = _apply_freshness_gates([a, b], target, max_item_age_days=14)
+        # Both have gate_date 2026-04-04, exactly 14 days old → both kept together.
+        self.assertEqual(len(kept), 2)
+
+    def test_inv2_boundary_is_day_not_instant(self) -> None:
+        target = datetime(2026, 4, 19, tzinfo=UTC)  # 15 days after 2026-04-04
+        a = _paper("2604.0000a", "2026-04-04T00:00:01Z", "2026-04-04T00:00:01Z")
+        b = _paper("2604.0000b", "2026-04-04T23:59:59Z", "2026-04-04T23:59:59Z")
+        kept = _apply_freshness_gates([a, b], target, max_item_age_days=14)
+        # Both gate_date 2026-04-04, now 15 days old → both dropped together.
+        self.assertEqual(len(kept), 0)
 
 
 if __name__ == "__main__":

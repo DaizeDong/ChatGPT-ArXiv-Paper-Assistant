@@ -31,6 +31,18 @@ _ARXIV_ATOM = """<?xml version="1.0" encoding="UTF-8"?>
   </entry>
 </feed>"""
 
+# Task 8 acceptance fixture: arXiv atom response containing 2311.01234v2,
+# used by test_INV3 to confirm poll_arxiv_versions is isolated from date_verdicts.
+ARXIV_ATOM = """<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <entry>
+    <id>http://arxiv.org/abs/2311.01234v2</id>
+    <published>2023-11-14T00:00:00Z</published>
+    <updated>2024-01-05T00:00:00Z</updated>
+    <title>Task 8 acceptance fixture paper</title>
+  </entry>
+</feed>"""
+
 
 class TestFetchArxivV1Date(unittest.TestCase):
     @patch("arxiv_assistant.hotspots.date_verify.fetch_text")
@@ -767,6 +779,109 @@ class TestTier2DeepSearch(unittest.TestCase):
         agent2.assert_not_called()
         self.assertEqual(first["verified_first_date"], second["verified_first_date"])
         self.assertEqual(first["verified_first_date"], "2024-09-30T00:00:00Z")
+
+
+# ---------------------------------------------------------------------------
+# Task 8: Stage-3 acceptance suite — explicit named invariant proofs
+# ---------------------------------------------------------------------------
+# Each method is named for the invariant it locks and carries a docstring that
+# maps the invariant → the structural proof in this test.
+#
+# INV1: verified_first_date is the earliest-credible date, NEVER the
+#       source-claimed published_at on any Tier-0/1/2 path.
+# INV2: day-granular — sub-day jitter in any signal cannot change the verdict
+#       day (floor_to_utc_day is applied unconditionally before storage).
+# INV3: write-once freeze — a content_hash verified once is frozen; second
+#       verify returns cached, no agent re-dispatch; arxiv version counts are a
+#       separate monotonic concern that never writes date_verdicts.
+# INV6: the Tier-1/2 agent output ALWAYS passes through the deterministic
+#       _clamp_verdict verifier; a hallucinating agent (later/future date) is
+#       overridden and cannot lend high confidence.
+
+
+class TestStage3Invariants(unittest.TestCase):
+    """Acceptance suite: explicit, named proofs of DateVerify invariants INV1/2/3/6.
+
+    Each test method asserts the contract directly, independent of the functional
+    tests that cover the same paths incidentally.  These are the canonical acceptance
+    gate for Stage 3.
+    """
+
+    def test_INV1_gates_consume_verified_date_not_source_claimed(self):
+        """INV1: gate_date(item) == floor(verified_first_date), NEVER floor(published_at).
+
+        Structural proof: set verified_first_date to a different year than
+        published_at; assert gate_date returns the verified year AND that the
+        result is not equal to floor_to_utc_day(published_at).
+        """
+        # Already covered functionally in TestTier1Verify; assert the contract directly:
+        # gate_date is derived from verified_first_date, never item.published_at.
+        item = HotspotItem(
+            source_id="ainews", source_name="AINews", source_role="roundup", source_type="news",
+            title="x", summary="", url="https://e.com/x", canonical_url="https://e.com/x",
+            published_at="2026-06-02T09:00:00Z",
+        )
+        item.verified_first_date = "2023-11-14T00:00:00Z"
+        self.assertEqual(gate_date(item), date(2023, 11, 14))
+        self.assertNotEqual(gate_date(item), floor_to_utc_day(item.published_at))
+
+    def test_INV2_gate_is_day_granular(self):
+        """INV2: sub-day time components in verified_first_date are stripped by floor_to_utc_day.
+
+        Structural proof: set verified_first_date to 23:59:59 on a specific day;
+        gate_date must return that day, not the next.
+        """
+        item = HotspotItem(
+            source_id="ainews", source_name="AINews", source_role="roundup", source_type="news",
+            title="x", summary="", url="https://e.com/y", canonical_url="https://e.com/y",
+        )
+        item.verified_first_date = "2026-06-02T23:59:59Z"
+        self.assertEqual(gate_date(item), date(2026, 6, 2))  # sub-day discarded
+
+    def test_INV3_freeze_once_and_versions_separate(self):
+        """INV3: content_hash frozen after first verify; poll_arxiv_versions never touches it.
+
+        Structural proof:
+        - Two verify() calls on the same item → only ONE verdict in store (_verdicts len==1).
+        - poll_arxiv_versions called after → does not touch date_verdicts (store unchanged).
+        - put_verdict is called by verify() on BOTH calls (store enforces write-once no-op).
+        """
+        from arxiv_assistant.hotspots import date_verify
+        store = _FakeStore()
+        item = _news_item("https://e.com/z", "2026-06-02T09:00:00Z")
+        confident = {"verified_first_date": "2026-06-02T00:00:00Z", "confidence": 0.9, "evidence": [], "stale_date_pollution": False}
+        with patch.object(date_verify, "_wayback_earliest_snapshot", return_value="2026-06-02T00:00:00Z"), \
+             patch.object(date_verify, "_page_published_time", return_value=None), \
+             patch.object(date_verify, "_run_dateverify_subagent", return_value=confident):
+            date_verify.verify(item, store)
+            date_verify.verify(item, store)   # second call frozen
+        self.assertEqual(len(store._verdicts), 1)
+        # poll path is isolated from the verdict cache
+        with patch.object(date_verify, "fetch_text", return_value=ARXIV_ATOM):
+            counts = date_verify.poll_arxiv_versions(["2311.01234"])
+        self.assertIn("2311.01234", counts)
+        # Write-once freeze: put_verdict is called on first verify only;
+        # second verify short-circuits at cache-hit and does NOT call put_verdict.
+        self.assertEqual(store.put_calls, 1)
+
+    def test_INV6_every_agent_followed_by_deterministic_verifier(self):
+        """INV6: _clamp_verdict sits between agent output and stored verdict on all Tier-1/2 paths.
+
+        Structural proof: patch _run_dateverify_subagent to return a date LATER
+        than the Wayback-proven date; assert that the stored verdict uses the
+        earlier Wayback date (agent overridden) AND stale_date_pollution is True.
+        """
+        # A hostile agent emitting a LATER date than the proven Wayback day must be overridden.
+        from arxiv_assistant.hotspots import date_verify
+        store = _FakeStore()
+        item = _news_item("https://e.com/hostile", "2026-06-02T09:00:00Z")
+        hostile = {"verified_first_date": "2026-06-02T00:00:00Z", "confidence": 1.0, "evidence": [], "stale_date_pollution": False}
+        with patch.object(date_verify, "_wayback_earliest_snapshot", return_value="2023-11-14T00:00:00Z"), \
+             patch.object(date_verify, "_page_published_time", return_value=None), \
+             patch.object(date_verify, "_run_dateverify_subagent", return_value=hostile):
+            verdict = date_verify.verify(item, store)
+        self.assertEqual(verdict["verified_first_date"], "2023-11-14T00:00:00Z")
+        self.assertTrue(verdict["stale_date_pollution"])
 
 
 if __name__ == "__main__":

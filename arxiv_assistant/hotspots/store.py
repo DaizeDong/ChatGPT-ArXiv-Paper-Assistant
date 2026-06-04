@@ -34,14 +34,15 @@ CREATE TABLE IF NOT EXISTS stories (
 );
 
 CREATE TABLE IF NOT EXISTS evidence (
-    story_id        TEXT NOT NULL,
-    canonical_url   TEXT NOT NULL,
-    title           TEXT NOT NULL DEFAULT '',
-    source_id       TEXT NOT NULL DEFAULT '',
-    source_role     TEXT NOT NULL DEFAULT '',
-    provenance      TEXT NOT NULL DEFAULT '',
-    source_tier     INTEGER NOT NULL DEFAULT 0,   -- §6 item 1: tier int from source_tiers.json
-    added_at        TEXT NOT NULL DEFAULT '',
+    story_id              TEXT NOT NULL,
+    canonical_url         TEXT NOT NULL,
+    title                 TEXT NOT NULL DEFAULT '',
+    source_id             TEXT NOT NULL DEFAULT '',
+    source_role           TEXT NOT NULL DEFAULT '',
+    provenance            TEXT NOT NULL DEFAULT '',
+    source_tier           INTEGER NOT NULL DEFAULT 0,   -- §6 item 1: tier int from source_tiers.json
+    added_at              TEXT NOT NULL DEFAULT '',
+    verified_first_date   TEXT,                         -- day-granular gate date for T2 novelty
     PRIMARY KEY (story_id, canonical_url)
 );
 
@@ -135,12 +136,12 @@ class StoryStore:
         """Load evidence rows for a story, shaped for Story.evidence_ledger.
 
         Contract §6 item 2: rows have keys canonical_url, source_id, source_role,
-        provenance, source_tier (int), added_at (str).
+        provenance, source_tier (int), added_at (str), verified_first_date (str|None).
         """
         rows = self._conn.execute(
             """
             SELECT canonical_url, source_id, source_role, provenance,
-                   source_tier, added_at
+                   source_tier, added_at, verified_first_date
             FROM evidence
             WHERE story_id = ?
             """,
@@ -154,6 +155,7 @@ class StoryStore:
                 "provenance": r["provenance"],
                 "source_tier": int(r["source_tier"]),
                 "added_at": r["added_at"],
+                "verified_first_date": r["verified_first_date"],
             }
             for r in rows
         ]
@@ -313,19 +315,21 @@ class StoryStore:
             item = ei.item
             # TODO(stage4): populate source_tier via source_tiers.json mapping
             source_tier = 0
+            verified_first_date = getattr(item, "verified_first_date", None)
             self._conn.execute(
                 """
                 INSERT INTO evidence (
                     story_id, canonical_url, title, source_id, source_role,
-                    provenance, source_tier, added_at
+                    provenance, source_tier, added_at, verified_first_date
                 )
-                VALUES (?,?,?,?,?,?,?,?)
+                VALUES (?,?,?,?,?,?,?,?,?)
                 ON CONFLICT(story_id, canonical_url) DO UPDATE SET
                     title=excluded.title,
                     source_id=excluded.source_id,
                     source_role=excluded.source_role,
                     provenance=excluded.provenance,
-                    source_tier=excluded.source_tier
+                    source_tier=excluded.source_tier,
+                    verified_first_date=excluded.verified_first_date
                 """,
                 (
                     story_id,
@@ -336,6 +340,7 @@ class StoryStore:
                     getattr(item, "provenance", ""),
                     source_tier,
                     added_at,
+                    verified_first_date,
                 ),
             )
         self._conn.commit()

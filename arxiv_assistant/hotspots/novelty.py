@@ -2,15 +2,20 @@ from __future__ import annotations
 
 from datetime import date
 
-from arxiv_assistant.utils.hotspot.gate_date import gate_date
+from arxiv_assistant.utils.hotspot.gate_date import floor_to_utc_day, gate_date
 
 
 def _max_tier(evidence: list) -> int:
-    return max((int(getattr(e, "source_tier", 0)) for e in evidence), default=0)
+    return max((int(e.get("source_tier", 0)) for e in evidence), default=0)
 
 
-def _max_gate_date(evidence: list, gate_date_fn) -> date | None:
-    days = [gate_date_fn(e.item) for e in evidence]
+def _max_gate_date(evidence: list) -> date | None:
+    """Return the maximum day-granular gate date across ledger dict rows.
+
+    Uses floor_to_utc_day(e["verified_first_date"]) — the same floor applied
+    during ingestion (INV2: sub-day jitter cannot flip a discrete gate).
+    """
+    days = [floor_to_utc_day(e.get("verified_first_date")) for e in evidence]
     days = [d for d in days if d is not None]
     return max(days) if days else None
 
@@ -21,6 +26,10 @@ def resurface(story, *, gate_date_fn=gate_date) -> bool:
     Reads ONLY Store-resident structured facts (source_tier ints, day-granular
     gate_date, arxiv version counts, entity_names). URL-set churn, sub-day jitter,
     same-tier evidence, and any free-text judgment are constructively excluded.
+
+    Evidence rows are DICT rows from Story.evidence_ledger (§6 item 1 contract).
+    gate_date_fn is only used for story.canonical_item.item (an EnrichedItem) in resurge;
+    here, T2a reads verified_first_date directly from each ledger dict row.
     """
     last = story.last_surfaced
     added = story.evidence_added_since(last)
@@ -33,7 +42,7 @@ def resurface(story, *, gate_date_fn=gate_date) -> bool:
             return True
 
         # T2a: a strictly later day-granular gate_date among newly-added evidence.
-        new_gate = _max_gate_date(added, gate_date_fn)
+        new_gate = _max_gate_date(added)
         if new_gate is not None and story.surfaced_verified_max is not None:
             if new_gate > story.surfaced_verified_max:
                 return True
@@ -58,13 +67,17 @@ def resurface(story, *, gate_date_fn=gate_date) -> bool:
 def _today_competitor_count(story) -> int:
     """Default: count distinct competitor (reuse-layer) sources among today's evidence.
 
-    Reads the Stage-0 ledger fields: an evidence item added today whose provenance is
-    a reuse-layer competitor source. Kernel may inject a precise fn; this default is a
-    safe fallback for unit/offline use.
+    Reads the Stage-0 ledger dict rows: an evidence row added today whose provenance
+    starts with "reuse:" is a competitor source. Distinct provenances are counted.
+    Kernel may inject a precise fn via competitor_count_fn; this default is a safe
+    fallback for unit/offline use.
     """
     seen: set[str] = set()
-    for e in getattr(story, "_today_evidence", []):
-        prov = getattr(e.item, "provenance", "") or ""
+    run_date_iso = getattr(story, "_run_date_iso", None)
+    for e in story.evidence_ledger:
+        if run_date_iso is not None and e.get("added_at") != run_date_iso:
+            continue
+        prov = e.get("provenance", "") or ""
         if prov.startswith("reuse:"):
             seen.add(prov)
     return len(seen)

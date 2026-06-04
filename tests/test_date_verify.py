@@ -353,6 +353,56 @@ class TestGetFreshnessDate(unittest.TestCase):
         self.assertEqual(get_freshness_date(item), "2026-04-04T00:00:00Z")
 
 
+class TestClampVerdict(unittest.TestCase):
+    def test_clamp_picks_earliest_credible_and_floors_to_day(self):
+        from arxiv_assistant.hotspots.date_verify import _clamp_verdict
+        clamped = _clamp_verdict(
+            claimed_iso="2026-06-02T09:00:00Z",
+            agent_out={
+                "verified_first_date": "2023-11-14T08:30:00Z",
+                "confidence": 0.9,
+                "evidence": ["wayback_cdx:20231114083012"],
+                "stale_date_pollution": True,
+            },
+            wayback_earliest="2023-11-14T00:00:00Z",
+            page_published_time="2023-11-14T08:30:00Z",
+        )
+        # earliest-credible-date-wins -> the 2023 day, not the claimed 2026 day
+        self.assertEqual(clamped["verified_first_date"], "2023-11-14T00:00:00Z")
+        self.assertTrue(clamped["stale_date_pollution"])
+        self.assertGreaterEqual(clamped["confidence"], 0.0)
+
+    def test_clamp_ignores_agent_date_later_than_evidence(self):
+        from arxiv_assistant.hotspots.date_verify import _clamp_verdict
+        # agent hallucinates a LATER date than Wayback proves -> verifier overrides with the earlier
+        clamped = _clamp_verdict(
+            claimed_iso="2026-06-02T09:00:00Z",
+            agent_out={
+                "verified_first_date": "2026-06-02T00:00:00Z",
+                "confidence": 0.95,
+                "evidence": [],
+                "stale_date_pollution": False,
+            },
+            wayback_earliest="2023-11-14T00:00:00Z",
+            page_published_time=None,
+        )
+        self.assertEqual(clamped["verified_first_date"], "2023-11-14T00:00:00Z")
+        self.assertTrue(clamped["stale_date_pollution"])
+
+    def test_clamp_falls_back_to_min_claimed_fetched_when_no_signals(self):
+        from arxiv_assistant.hotspots.date_verify import _clamp_verdict
+        clamped = _clamp_verdict(
+            claimed_iso="2026-06-02T09:00:00Z",
+            agent_out=None,            # agent failed / unparseable
+            wayback_earliest=None,
+            page_published_time=None,
+        )
+        # no credible earlier signal -> conservative claimed day, low confidence, not flagged
+        self.assertEqual(clamped["verified_first_date"], "2026-06-02T00:00:00Z")
+        self.assertLess(clamped["confidence"], 0.5)
+        self.assertFalse(clamped["stale_date_pollution"])
+
+
 class TestGateDateAuthoritativeAnchor(unittest.TestCase):
     def _item(self, *, published_at, metadata=None):
         return HotspotItem(

@@ -16,6 +16,7 @@ Spec §2.5 verify() signature:
 from __future__ import annotations
 
 import re
+from datetime import datetime, timezone
 from xml.etree import ElementTree
 
 from arxiv_assistant.utils.hotspot.hotspot_sources import fetch_json, fetch_text, parse_datetime
@@ -40,6 +41,87 @@ _GITHUB_TREND_SOURCE = "github_trend"
 _CONFIDENCE_HIGH = 0.95
 # Conservative Stage-1 fallback confidence when no authoritative anchor exists.
 _CONFIDENCE_LOW = 0.3
+
+
+# ---------------------------------------------------------------------------
+# Stage 3: deterministic verdict helpers (INV6, §B.3)
+# ---------------------------------------------------------------------------
+
+DATEVERIFY_MODEL_ID = "claude-opus-4-8"
+
+
+def _parse_iso(value: str | None) -> datetime | None:
+    if not value:
+        return None
+    try:
+        return datetime.fromisoformat(str(value).replace("Z", "+00:00"))
+    except ValueError:
+        return None
+
+
+def _floor_day_iso(value: str | None) -> str | None:
+    """Truncate any ISO timestamp to UTC start-of-day ISO (INV2)."""
+    dt = _parse_iso(value)
+    if dt is None:
+        return None
+    dt = dt.astimezone(timezone.utc)
+    return dt.replace(hour=0, minute=0, second=0, microsecond=0).isoformat().replace("+00:00", "Z")
+
+
+def _clamp_verdict(
+    *,
+    claimed_iso: str | None,
+    agent_out: dict | None,
+    wayback_earliest: str | None,
+    page_published_time: str | None,
+) -> dict:
+    """Deterministic verifier behind the Tier-1/2 agent (INV6).
+
+    earliest-credible-date-wins: verified_first_date := min over all credible
+    signals (agent date, Wayback earliest snapshot, page published_time, claimed),
+    floored to UTC day. stale_date_pollution is derived from facts: claimed day
+    strictly later than the earliest credible day.
+    """
+    credible: list[str] = []
+    for raw in (
+        (agent_out or {}).get("verified_first_date"),
+        wayback_earliest,
+        page_published_time,
+        claimed_iso,
+    ):
+        floored = _floor_day_iso(raw)
+        if floored is not None:
+            credible.append(floored)
+
+    if not credible:
+        # nothing parseable at all -> degrade, never crash (spec §E)
+        return {"verified_first_date": None, "confidence": 0.2, "evidence": [], "stale_date_pollution": False}
+
+    earliest = min(credible)  # ISO day strings sort chronologically
+    claimed_day = _floor_day_iso(claimed_iso)
+
+    has_external_signal = bool(
+        _floor_day_iso((agent_out or {}).get("verified_first_date"))
+        or _floor_day_iso(wayback_earliest)
+        or _floor_day_iso(page_published_time)
+    )
+    stale = bool(claimed_day is not None and earliest < claimed_day)
+
+    if has_external_signal:
+        # trust the agent's confidence but never below floor; cap to [0,1]
+        confidence = max(0.0, min(1.0, float((agent_out or {}).get("confidence", 0.7))))
+    else:
+        # no credible earlier signal -> conservative min(claimed, fetched) low confidence
+        confidence = 0.3
+
+    evidence = list((agent_out or {}).get("evidence", []))
+    evidence.append(f"verifier:earliest_min;model={DATEVERIFY_MODEL_ID}")
+    return {
+        "verified_first_date": earliest,
+        "confidence": confidence,
+        "evidence": evidence,
+        "stale_date_pollution": stale,
+    }
 
 
 # ---------------------------------------------------------------------------

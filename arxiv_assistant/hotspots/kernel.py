@@ -8,7 +8,13 @@ from datetime import datetime
 from pathlib import Path
 from typing import Any, Callable
 
-from arxiv_assistant.hotspots.pipeline import date_string
+from arxiv_assistant.hotspots.pipeline import (
+    _apply_freshness_gates,
+    _serialize_items,
+    date_string,
+    fetch_source_payloads as _fetch_source_payloads,
+)
+from arxiv_assistant.utils.hotspot.hotspot_schema import HotspotItem
 
 STAGES: list[str] = [
     "harvest", "date_verify", "gravity_gate", "embed", "cluster",
@@ -91,9 +97,97 @@ def _with_retry(
     raise last_exc if last_exc else RuntimeError("retry failed")
 
 
+# ---------------------------------------------------------------------------
+# Serialisation helpers (Task 4)
+# ---------------------------------------------------------------------------
+
+def _serialize_item(item: HotspotItem) -> dict[str, Any]:
+    return _serialize_items([item])[0]
+
+
+def _deserialize_item(row: dict[str, Any]) -> HotspotItem:
+    # FIX 1: preserve verified_first_date + provenance so the date_verify →
+    # gravity_gate handoff retains the verified date (INV1 round-trip integrity).
+    return HotspotItem(
+        source_id=row.get("source_id", ""),
+        source_name=row.get("source_name", ""),
+        source_role=row.get("source_role", ""),
+        source_type=row.get("source_type", ""),
+        title=row.get("title", ""),
+        summary=row.get("summary", ""),
+        url=row.get("url", ""),
+        canonical_url=row.get("canonical_url", ""),
+        published_at=row.get("published_at"),
+        tags=row.get("tags", []) or [],
+        authors=row.get("authors", []) or [],
+        metadata=row.get("metadata", {}) or {},
+        verified_first_date=row.get("verified_first_date"),
+        provenance=row.get("provenance", "") or "",
+    )
+
+
+# ---------------------------------------------------------------------------
+# Stage bodies — Task 4: harvest → date_verify → gravity_gate
+# ---------------------------------------------------------------------------
+
+def _stage_harvest(ctx: KernelContext) -> dict[str, Any]:
+    items, source_stats, api_usage = _fetch_source_payloads(
+        ctx.target_date, ctx.output_root, ctx.config, force=False
+    )
+    cap = ctx.config["HOTSPOTS"].getint("max_raw_items", fallback=120)
+    items = items[:cap]
+    return {
+        "items": [_serialize_item(it) for it in items],
+        "source_stats": source_stats,
+        "api_usage": api_usage,
+    }
+
+
+def _stage_date_verify(ctx: KernelContext) -> dict[str, Any]:
+    rows = ctx.read("harvest")["items"]
+    items = [_deserialize_item(r) for r in rows]
+    try:
+        from arxiv_assistant.hotspots.date_verify import verify  # type: ignore[import]
+        for it in items:
+            verdict = _with_retry(
+                lambda it=it: verify(it, ctx.store),
+                attempts=3,
+                base_delay=0.0,
+                fallback=lambda it=it: {
+                    "verified_first_date": it.published_at,
+                    "confidence": 0.3,
+                    "evidence": [],
+                },
+            )
+            it.verified_first_date = verdict.get("verified_first_date") or it.published_at
+    except Exception:
+        for it in items:  # degraded: trust published_at as low-confidence fallback
+            it.verified_first_date = it.published_at
+    return {"items": [_serialize_item(it) for it in items]}
+
+
+def _stage_gravity_gate(ctx: KernelContext) -> dict[str, Any]:
+    # FIX 2: delegate to canonical _apply_freshness_gates (DRY, consistent with
+    # prod Stage 1). Removes hand-rolled duplicate logic and preserves the
+    # canonical None=keep policy (cannot-verify → do not drop).
+    rows = ctx.read("date_verify")["items"]
+    items = [_deserialize_item(r) for r in rows]
+    max_age = ctx.config["HOTSPOTS"].getint("max_item_age_days", fallback=14)
+    kept = _apply_freshness_gates(items, ctx.target_date, max_item_age_days=max_age)
+    dropped = len(items) - len(kept)
+    ctx.journal.append({"stage": "gravity_gate", "dropped_stale": dropped, "kept": len(kept)})
+    return {"items": [_serialize_item(it) for it in kept]}
+
+
+# ---------------------------------------------------------------------------
 # Topology is hardcoded here (spec §G.2): never produced by an LLM.
 # Real stage bodies are bound in Tasks 4-7; tests patch _STAGE_FNS.
-_STAGE_FNS: dict[str, Callable[["KernelContext"], dict[str, Any]]] = {}
+# ---------------------------------------------------------------------------
+_STAGE_FNS: dict[str, Callable[["KernelContext"], dict[str, Any]]] = {
+    "harvest": _stage_harvest,
+    "date_verify": _stage_date_verify,
+    "gravity_gate": _stage_gravity_gate,
+}
 
 
 def _open_store(output_root: Path, config: Any):

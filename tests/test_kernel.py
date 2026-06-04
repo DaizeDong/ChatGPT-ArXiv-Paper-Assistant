@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import configparser
 import json
 import tempfile
 import unittest
@@ -8,6 +9,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 from arxiv_assistant.hotspots import kernel
+from arxiv_assistant.utils.hotspot.hotspot_schema import HotspotItem
 
 
 class TestCheckpointIO(unittest.TestCase):
@@ -37,9 +39,6 @@ class TestCheckpointIO(unittest.TestCase):
             kernel._clear_checkpoints(root, td)
             self.assertFalse(kernel._checkpoint_done(root, td, "harvest"))
             self.assertFalse(kernel._checkpoint_done(root, td, "score"))
-
-
-import configparser
 
 
 class TestContextAndRetry(unittest.TestCase):
@@ -153,3 +152,91 @@ class TestDagDriver(unittest.TestCase):
             order.clear()
             kernel.run(root, td, self._config(), force=True)
         self.assertEqual(order, kernel.STAGES)  # all re-run after force
+
+    def test_unknown_stage_raises_value_error(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            td = datetime(2026, 5, 20, tzinfo=timezone.utc)
+            with self.assertRaises(ValueError):
+                kernel.run(root, td, self._config(), stage="nonexistent")
+
+
+# ---------------------------------------------------------------------------
+# Task 4: TestHarvestStages
+# ---------------------------------------------------------------------------
+
+def _item(title: str, url: str, published_at: str) -> HotspotItem:
+    return HotspotItem(
+        source_id="hf_papers", source_name="HF", source_role="papers",
+        source_type="papers", title=title, summary="s", url=url,
+        canonical_url=url, published_at=published_at, tags=[], authors=[], metadata={},
+    )
+
+
+class TestHarvestStages(unittest.TestCase):
+    def _config(self) -> configparser.ConfigParser:
+        cfg = configparser.ConfigParser()
+        cfg["HOTSPOTS"] = {"enabled": "true", "max_raw_items": "120", "max_item_age_days": "14"}
+        return cfg
+
+    def test_harvest_stage_serializes_items(self) -> None:
+        items = [_item("A", "https://x/a", "2026-05-20T00:00:00Z")]
+        with tempfile.TemporaryDirectory() as tmp, \
+                unittest.mock.patch.object(
+                    kernel, "_fetch_source_payloads",
+                    return_value=(items, {"hf_papers": 1}, {})):
+            ctx = kernel.KernelContext(
+                output_root=Path(tmp),
+                target_date=datetime(2026, 5, 20, tzinfo=timezone.utc),
+                config=self._config(), store=None, journal=[],
+            )
+            payload = kernel._stage_harvest(ctx)
+        self.assertEqual(payload["source_stats"], {"hf_papers": 1})
+        self.assertEqual(len(payload["items"]), 1)
+        self.assertEqual(payload["items"][0]["title"], "A")
+
+    def test_deserialize_preserves_verified_first_date(self) -> None:
+        # FIX 1 round-trip test: verified_first_date must survive serialize→deserialize
+        original = _item("X", "https://x/x", "2026-01-01T00:00:00Z")
+        original.verified_first_date = "2024-01-02T00:00:00Z"
+        row = kernel._serialize_item(original)
+        restored = kernel._deserialize_item(row)
+        self.assertEqual(restored.verified_first_date, "2024-01-02T00:00:00Z")
+
+    def test_gravity_gate_drops_items_older_than_max_age(self) -> None:
+        # FIX 2: items here have verified_first_date set as date_verify stage would do,
+        # reflecting the actual kernel flow. gate_date() uses verified_first_date as
+        # the credible date anchor, so this tests the real anti-staleness mechanism.
+        fresh = _item("fresh", "https://x/fresh", "2026-05-20T00:00:00Z")
+        fresh.verified_first_date = "2026-05-19T00:00:00Z"  # recent
+        stale = _item("stale", "https://x/stale", "2026-04-01T00:00:00Z")
+        stale.verified_first_date = "2026-04-01T00:00:00Z"  # older than 14 days from target
+
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            td = datetime(2026, 5, 20, tzinfo=timezone.utc)
+            kernel._write_checkpoint(root, td, "date_verify", {
+                "items": [kernel._serialize_item(fresh), kernel._serialize_item(stale)],
+            })
+            ctx = kernel.KernelContext(output_root=root, target_date=td,
+                                       config=self._config(), store=None, journal=[])
+            payload = kernel._stage_gravity_gate(ctx)
+        titles = {it["title"] for it in payload["items"]}
+        self.assertIn("fresh", titles)
+        self.assertNotIn("stale", titles)
+
+    def test_gravity_gate_keeps_item_without_credible_date(self) -> None:
+        # Canonical None=keep policy: item without verified_first_date and no metadata
+        # anchors → gate_date returns None → do not drop.
+        unknown = _item("unknown-date", "https://x/u", "2020-01-01T00:00:00Z")
+        # no verified_first_date, no metadata anchors → gate_date returns None
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            td = datetime(2026, 5, 20, tzinfo=timezone.utc)
+            kernel._write_checkpoint(root, td, "date_verify", {
+                "items": [kernel._serialize_item(unknown)],
+            })
+            ctx = kernel.KernelContext(output_root=root, target_date=td,
+                                       config=self._config(), store=None, journal=[])
+            payload = kernel._stage_gravity_gate(ctx)
+        self.assertEqual(len(payload["items"]), 1)

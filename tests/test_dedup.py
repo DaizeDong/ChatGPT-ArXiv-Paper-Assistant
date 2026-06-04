@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import math
 import unittest
+from datetime import date
 from unittest.mock import patch
 
 from arxiv_assistant.hotspots import dedup, embed
@@ -229,6 +230,112 @@ class TestClusterIntraday(unittest.TestCase):
             f"Expected 2 separate stories for GPT-5/Sora-2 pair "
             f"(cosine={cosine_val:.4f}), got {len(stories)}",
         )
+
+
+class _FakeStore:
+    """Minimal StoryStore stand-in for match_crossday unit tests.
+
+    Mimics centroid-primary match_or_create: assigns a persistent id, returns
+    (story, is_new). Stories already in `_active` are existing; cosine >= threshold
+    against an existing centroid → ONGOING reusing that id; else NEW with a minted id.
+    """
+
+    def __init__(self, active):
+        self._active = list(active)         # list[Story] with .story_id, .centroid, .first_seen
+        self._counter = 0
+        self.created = []
+
+    def active_stories(self, window_days, as_of):
+        return list(self._active)
+
+    def match_or_create(self, cluster_centroid, cluster, cosine_threshold, window_days, as_of):
+        from arxiv_assistant.hotspots.embed import cosine
+        best = None
+        best_sim = -2.0
+        for ex in self._active:
+            if not ex.centroid:
+                continue
+            sim = cosine(cluster_centroid, ex.centroid)
+            if sim >= cosine_threshold and sim > best_sim:
+                best, best_sim = ex, sim
+        if best is not None:
+            cluster.story_id = best.story_id
+            cluster.first_seen = best.first_seen
+            cluster.status = "ONGOING"
+            return cluster, False
+        self._counter += 1
+        cluster.story_id = f"new{self._counter}"
+        cluster.first_seen = as_of.isoformat()
+        cluster.status = "NEW"
+        self._active.append(cluster)
+        self.created.append(cluster.story_id)
+        return cluster, True
+
+
+class TestMatchCrossday(unittest.TestCase):
+    def _story(self, story_id, centroid, first_seen=None):
+        from arxiv_assistant.hotspots.story import Story
+        s = Story(
+            story_id=story_id,
+            canonical_item=_enriched("seed", f"https://seed/{story_id}"),
+            items=[_enriched("seed", f"https://seed/{story_id}")],
+            event_type="product_release",
+        )
+        s.centroid = list(centroid)
+        s.centroid_model_id = dedup.EMBED_MODEL_ID
+        s.first_seen = first_seen
+        return s
+
+    def test_centroid_match_marks_ongoing_reuses_id(self) -> None:
+        existing = self._story("persist1", [1.0, 0.0, 0.0], first_seen="2026-05-30")
+        store = _FakeStore([existing])
+        today = self._story("tmp", [0.999, 0.04, 0.0])  # cosine ~0.999 > 0.90
+        out = dedup.match_crossday(
+            [today], store, cosine_threshold=0.90, window_days=14, as_of=date(2026, 6, 2)
+        )
+        self.assertEqual(len(out), 1)
+        self.assertEqual(out[0].story_id, "persist1")
+        self.assertEqual(out[0].status, "ONGOING")
+        self.assertEqual(out[0].first_seen, "2026-05-30")
+
+    def test_low_cosine_creates_new(self) -> None:
+        existing = self._story("persist1", [1.0, 0.0, 0.0], first_seen="2026-05-30")
+        store = _FakeStore([existing])
+        today = self._story("tmp", [0.0, 1.0, 0.0])  # orthogonal
+        out = dedup.match_crossday(
+            [today], store, cosine_threshold=0.90, window_days=14, as_of=date(2026, 6, 2)
+        )
+        self.assertEqual(out[0].status, "NEW")
+        self.assertNotEqual(out[0].story_id, "persist1")
+
+    def test_centroid_primary_not_AND_with_url(self) -> None:
+        # Same event, DISJOINT url sets → must still merge on centroid alone (NOT AND).
+        existing = self._story("persist1", [1.0, 0.0, 0.0], first_seen="2026-05-30")
+        store = _FakeStore([existing])
+        today = self._story("tmp", [0.99, 0.05, 0.0])
+        # disjoint urls
+        existing.items[0].item.canonical_url = "https://old.com/a"
+        today.items[0].item.canonical_url = "https://new.com/b"
+        out = dedup.match_crossday(
+            [today], store, cosine_threshold=0.90, window_days=14, as_of=date(2026, 6, 2)
+        )
+        self.assertEqual(out[0].story_id, "persist1")  # merged despite zero URL overlap
+
+    def test_intraday_anticonvergence_single_existing_id(self) -> None:
+        # One real event split into 2 today-clusters; both match the SAME existing story.
+        # Anti-convergence: they must collapse to ONE story pointing at the existing id,
+        # NOT accrete two duplicate ONGOING stories.
+        existing = self._story("persist1", [1.0, 0.0, 0.0], first_seen="2026-05-30")
+        store = _FakeStore([existing])
+        c1 = self._story("t1", [0.99, 0.04, 0.0])
+        c2 = self._story("t2", [0.98, 0.06, 0.0])
+        out = dedup.match_crossday(
+            [c1, c2], store, cosine_threshold=0.90, window_days=14, as_of=date(2026, 6, 2)
+        )
+        persist_stories = [s for s in out if s.story_id == "persist1"]
+        self.assertEqual(len(persist_stories), 1)          # collapsed to one
+        self.assertEqual(len(out), 1)
+        self.assertEqual(store.created, [])                 # no spurious NEW minted
 
 
 if __name__ == "__main__":

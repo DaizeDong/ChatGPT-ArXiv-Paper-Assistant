@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import math
+from datetime import date
 
 from arxiv_assistant.hotspots.embed import EMBED_MODEL_ID, cosine, embed_text
 from arxiv_assistant.hotspots.enrich import EnrichedItem
@@ -110,3 +111,91 @@ def cluster_intraday(
         merged.append(story)
 
     return merged
+
+
+def _merge_today_clusters(a: Story, b: Story) -> Story:
+    """Pool two today-clusters into one (anti-convergence; §C.2 rule 2).
+
+    Re-uses the clusters' existing centroids (already set by cluster_intraday)
+    to compute the merged centroid.  This avoids a redundant re-embed pass and
+    keeps the centroid in the same vector space that the clusters were matched
+    with, which is necessary for the FakeStore unit test and semantically
+    equivalent (centroid-of-centroids ≈ centroid of all member items when
+    sub-groups have roughly equal size).
+    """
+    a.items.extend(b.items)
+    a.entity_names |= b.entity_names
+    # Average the two sub-cluster centroids (already unit-normalized by cluster_intraday).
+    vecs = [v for v in [a.centroid, b.centroid] if v]
+    a.centroid = _centroid(vecs) if vecs else a.centroid
+    a.centroid_model_id = EMBED_MODEL_ID
+    return a
+
+
+def match_crossday(
+    today: list[Story],
+    store,
+    *,
+    cosine_threshold: float,
+    window_days: int,
+    as_of: date,
+) -> list[Story]:
+    """L2 cross-day persistent match (spec §C.2).
+
+    Centroid is PRIMARY: a today-cluster merges into an existing active story when
+    centroid cosine >= threshold. URL-Jaccard is NEVER a necessary condition (the
+    Store's match_or_create may use it only as additive confirmation).
+
+    Intra-day anti-convergence: if two today-clusters both match the SAME existing
+    story, they are first pooled into one cluster pointing at that one persistent id
+    (so the centroid store never accretes a duplicate story for one real event),
+    THEN NEW/ONGOING is decided.
+
+    Returns the today stories with persistent `story_id`, `first_seen`, and
+    `status` ("NEW"|"ONGOING") assigned. Pure dispatch — the single Store writer
+    (Kernel) owns `match_or_create`.
+    """
+    if not today:
+        return []
+
+    active = store.active_stories(window_days, as_of)
+
+    # Phase 1: anti-convergence. Pre-bind each today-cluster to its best existing match
+    # (centroid-primary), then pool today-clusters that share an existing target.
+    def best_existing_id(cluster: Story) -> str | None:
+        best_id = None
+        best_sim = cosine_threshold  # strict >= threshold to count
+        for ex in active:
+            if not ex.centroid or not cluster.centroid:
+                continue
+            sim = cosine(cluster.centroid, ex.centroid)
+            if sim >= best_sim:
+                best_sim = sim
+                best_id = ex.story_id
+        return best_id
+
+    pooled_by_target: dict[str, Story] = {}
+    unmatched: list[Story] = []
+    for cluster in today:
+        target = best_existing_id(cluster)
+        if target is None:
+            unmatched.append(cluster)
+        elif target in pooled_by_target:
+            _merge_today_clusters(pooled_by_target[target], cluster)
+        else:
+            pooled_by_target[target] = cluster
+
+    # Phase 2: assign persistent ids via the Store. Order is deterministic:
+    # pooled-existing first (sorted by target id), then unmatched (input order).
+    result: list[Story] = []
+    for _target, cluster in sorted(pooled_by_target.items(), key=lambda kv: kv[0]):
+        story, _is_new = store.match_or_create(
+            cluster.centroid, cluster, cosine_threshold, window_days, as_of
+        )
+        result.append(story)
+    for cluster in unmatched:
+        story, _is_new = store.match_or_create(
+            cluster.centroid, cluster, cosine_threshold, window_days, as_of
+        )
+        result.append(story)
+    return result

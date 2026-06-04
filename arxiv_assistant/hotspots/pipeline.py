@@ -23,6 +23,7 @@ from arxiv_assistant.apis.hotspot.hotspot_roundups import fetch_hotspot_items as
 from arxiv_assistant.apis.hotspot.hotspot_x_ainews import fetch_hotspot_items as fetch_x_ainews_items
 from arxiv_assistant.apis.hotspot.hotspot_x_official import fetch_hotspot_items as fetch_x_official_items
 from arxiv_assistant.apis.hotspot.hotspot_x_paperpulse import fetch_hotspot_items as fetch_x_paperpulse_items
+from arxiv_assistant.apis.hotspot.hotspot_twitterapi import fetch_hotspot_items as fetch_x_twitterapi_items
 from arxiv_assistant.filters.filter_hotspots import synthesize_digest_with_openai
 from arxiv_assistant.hotspots.enrich import enrich_items_batch, enrich_items_heuristic
 from arxiv_assistant.hotspots.dedup import classify_cross_day, cluster_intraday, match_crossday
@@ -188,6 +189,7 @@ SOURCE_USAGE_META = {
     "analysis_feeds": {"provider": "Analysis RSS feeds", "billing_model": "free"},
     "reddit": {"provider": "Reddit JSON API", "billing_model": "free"},
     "x_ainews_twitter": {"provider": "AINews Twitter recap", "billing_model": "free"},
+    "x_twitterapi": {"provider": "twitterapi.io", "billing_model": "metered"},
     "x_paperpulse": {"provider": "PaperPulse", "billing_model": "free"},
     "x_official": {"provider": "X API", "billing_model": "quota"},
     "github_trend": {"provider": "GitHub API", "billing_model": "free"},
@@ -975,7 +977,21 @@ def fetch_source_payloads(
         specs.append(("reddit", lambda: fetch_reddit_items(target_date, freshness_hours)))
     if hotspot_sources.getboolean("use_x_ainews_twitter", fallback=True):
         specs.append(("x_ainews_twitter", lambda: fetch_x_ainews_items(target_date, freshness_hours)))
-    if hotspot_sources.getboolean("use_x_paperpulse", fallback=True):
+    if hotspot_sources.getboolean("use_twitterapi", fallback=True):
+        specs.append(
+            (
+                "x_twitterapi",
+                lambda: fetch_x_twitterapi_items(
+                    target_date,
+                    freshness_hours,
+                    x_seed_path,
+                    result_limit=int(x_config.get("list_result_limit", 80)),
+                    snapshot_path=x_registry_snapshot_path,
+                    max_age_hours=x_registry_max_age_hours,
+                ),
+            )
+        )
+    if hotspot_sources.getboolean("use_x_paperpulse", fallback=False):  # superseded by use_twitterapi (Stage 5)
         specs.append(
             (
                 "x_paperpulse",
@@ -986,7 +1002,7 @@ def fetch_source_payloads(
                 ),
             )
         )
-    if hotspot_sources.getboolean("use_x_official", fallback=False):
+    if hotspot_sources.getboolean("use_x_official", fallback=False):  # superseded by use_twitterapi (Stage 5)
         specs.append(
             (
                 "x_official",

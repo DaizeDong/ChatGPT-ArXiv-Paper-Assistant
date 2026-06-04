@@ -1750,32 +1750,58 @@ def generate_daily_hotspot_report(output_root: str | Path, target_date: datetime
         )
         for s in matched:
             s.cross_day_status = classify_cross_day(s)
-        # ONGOING (non-resurfacing) stories are demoted out of the featured stream;
-        # gravity-from-first_seen (Stage 1) already discounts them, so keep NEW +
-        # RESURFACE as featured-eligible and let scoring/selection rank the rest.
+        # Stage 2 cross-day suppression: ONGOING (non-resurfacing) stories are
+        # excluded from the featured candidate pool so they cannot appear in featured
+        # output.  Stories with cross_day_status == "NEW", "RESURFACE", or None
+        # (legacy/degraded) remain featured-eligible.
+        # record_surface is called below (after selection) to persist surface snapshots
+        # so the next run's classify_cross_day/resurface compares against them.
+        # T3 (new named entity in story.entity_names \ surfaced_entity_names) is the
+        # active resurface signal for Stage 2; T1/T2a (evidence ledger tier/gate) and
+        # T2b (arxiv version counts) fire in Stage 6 when upsert_evidence +
+        # version polling are persisted (TODO stage6).
+        featured_eligible = [s for s in matched if s.cross_day_status != "ONGOING"]
+        suppressed_count = len(matched) - len(featured_eligible)
+        if suppressed_count:
+            print(f"Cross-day suppression: excluded {suppressed_count} ONGOING stories from featured candidates")
         stories = score_stories(matched)
+        featured_eligible_scored = [s for s in stories if s.cross_day_status != "ONGOING"]
     else:
-        # Degraded fallback (no Store yet, e.g. first run pre-backfill): retain the
+        # Degraded fallback (store=None, e.g. first run pre-backfill): retain the
         # legacy behavior so the pipeline still produces a report.
         stories = score_stories(intraday_stories)
         if recent_headlines:
             stories = apply_cross_day_penalty(stories, recent_headlines)
+        featured_eligible_scored = stories
 
     # Stage 5b: Filter low-quality / meta-discussion stories
     pre_quality = len(stories)
     stories = [s for s in stories if not _is_low_quality_story(s)]
     if len(stories) < pre_quality:
         print(f"Story quality filter: removed {pre_quality - len(stories)} low-quality stories ({len(stories)} remaining)")
+    # Apply same quality filter to the featured-eligible subset
+    featured_eligible_scored = [s for s in featured_eligible_scored if not _is_low_quality_story(s)]
 
     # Stage 6: Select & categorize
+    # select_and_categorize receives only featured_eligible_scored so ONGOING stories
+    # cannot be selected as featured; all stories (incl. ONGOING) go to display_candidates.
     target_topics = hotspot_config.getint("target_topics", fallback=5)
     target_watchlist_topics = hotspot_config.getint("target_watchlist_topics", fallback=3)
     featured_stories, watchlist_stories, _ = select_and_categorize(
-        stories,
+        featured_eligible_scored,
         target_featured=target_topics,
         target_watchlist=target_watchlist_topics,
         max_per_category=hotspot_config.getint("max_topics_per_category", fallback=4),
     )
+
+    # Persist surface snapshots for every story that is surfaced this run so that
+    # the next run's resurface predicate (T3 and future T1/T2) compares against them.
+    # This fixes the T3-always-true trap: once surfaced_entity_names is recorded,
+    # T3 fires ONLY when genuinely new entities appear the following day.
+    if store is not None:
+        run_date_iso = date_string(target_date)
+        for s in featured_stories:
+            store.record_surface(s, run_date_iso, lane="featured")
 
     # Bridge: Story → topic dict
     featured_topics = [_story_to_topic_dict(s, keep=True) for s in featured_stories]

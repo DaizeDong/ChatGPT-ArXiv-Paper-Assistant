@@ -294,6 +294,12 @@ class StoryStore:
         if best is not None:
             best.status = "ONGOING"
             best.entity_names = best.entity_names | cluster.entity_names
+            # Carry today's enriched items into the persistent-identity shell so that
+            # downstream score_stories (which reads story.items) does not see an empty list.
+            # Persistent identity fields (story_id, first_seen, centroid, surfaced_*) are
+            # preserved from the store; canonical_item and items come from today's cluster.
+            best.items = cluster.items
+            best.canonical_item = cluster.canonical_item
             self._persist_story(best)
             return best, False
 

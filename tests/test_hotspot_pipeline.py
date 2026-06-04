@@ -4,7 +4,7 @@ import configparser
 import json
 import tempfile
 import unittest
-from datetime import UTC, datetime
+from datetime import UTC, date as _date, datetime
 from pathlib import Path
 from unittest.mock import patch
 
@@ -14,6 +14,10 @@ from arxiv_assistant.apis.hotspot.hotspot_hn import fetch_hotspot_items as fetch
 from arxiv_assistant.apis.hotspot.hotspot_local_papers import _resolve_best_source_path, fetch_hotspot_items as fetch_local_hotspot_items
 from arxiv_assistant.apis.hotspot.hotspot_official_blogs import _extract_anthropic_rows
 from arxiv_assistant.filters.filter_hotspots import _cluster_signal_scores, _digest_prompt_payload
+from arxiv_assistant.hotspots.dedup import classify_cross_day, match_crossday
+from arxiv_assistant.hotspots.enrich import EnrichedItem
+from arxiv_assistant.hotspots.story import Story, score_stories, select_and_categorize
+from arxiv_assistant.hotspots.store import StoryStore
 from arxiv_assistant.renderers.hotspot.render_hot_daily import render_hot_daily_md
 from arxiv_assistant.utils.hotspot.hotspot_cluster import build_hotspot_clusters
 from arxiv_assistant.utils.hotspot.hotspot_schema import HotspotCluster, HotspotItem
@@ -1004,6 +1008,354 @@ class TestHotspotPipeline(unittest.TestCase):
         self.assertIn("### Tooling (1 shown / 2 candidates)", rendered)
         self.assertIn("### Industry Update (1 shown / 1 candidates)", rendered)
         self.assertIn("Open-source agent runtime", rendered)
+
+
+class TestCrossDay_E2E_Suppression(unittest.TestCase):
+    """End-to-end suppression tests using a real StoryStore on a tempfile root.
+
+    No network I/O: stories are constructed directly with pre-set centroids and
+    verified_first_date, so DateVerify/embed are bypassed entirely.  We exercise
+    the selection seam: ONGOING stories must NOT appear in featured output; NEW and
+    RESURFACE (new entity) stories must appear.
+    """
+
+    # ------------------------------------------------------------------
+    # helpers
+    # ------------------------------------------------------------------
+
+    @staticmethod
+    def _make_hotspot_item(
+        title: str,
+        url: str,
+        *,
+        published_at: str = "2026-04-10T12:00:00+00:00",
+        verified_first_date: str | None = "2026-04-10T00:00:00+00:00",
+    ) -> HotspotItem:
+        item = HotspotItem(
+            source_id="official_news",
+            source_name="TestSource",
+            source_role="official_news",
+            source_type="official_blog",
+            title=title,
+            summary=f"Summary of {title}.",
+            url=url,
+            canonical_url=url,
+            published_at=published_at,
+            metadata={"is_official": True},
+        )
+        item.verified_first_date = verified_first_date
+        return item
+
+    @staticmethod
+    def _make_enriched(item: HotspotItem, entities: list[dict] | None = None) -> EnrichedItem:
+        return EnrichedItem(
+            item=item,
+            event_type="product_release",
+            entities=entities or [{"name": "TestCo"}],
+            summary=item.summary,
+            importance=8,
+        )
+
+    @staticmethod
+    def _make_story(
+        story_id: str,
+        title: str,
+        url: str,
+        *,
+        centroid: list[float] | None = None,
+        entity_names: set[str] | None = None,
+        status: str = "NEW",
+        first_seen: str = "2026-04-10",
+        cross_day_status: str | None = None,
+        score: float = 7.0,
+    ) -> Story:
+        """Construct a Story with pre-set centroid (bypasses embed network)."""
+        item = HotspotItem(
+            source_id="official_news",
+            source_name="TestSource",
+            source_role="official_news",
+            source_type="official_blog",
+            title=title,
+            summary=f"Summary of {title}.",
+            url=url,
+            canonical_url=url,
+            published_at="2026-04-10T12:00:00+00:00",
+            metadata={"is_official": True},
+        )
+        item.verified_first_date = "2026-04-10T00:00:00+00:00"
+        ei = EnrichedItem(
+            item=item,
+            event_type="product_release",
+            entities=[{"name": e} for e in (entity_names or {"TestCo"})],
+            summary=item.summary,
+            importance=8,
+        )
+        story = Story(
+            story_id=story_id,
+            canonical_item=ei,
+            items=[ei],
+            event_type="product_release",
+            entity_names=entity_names or {"testco"},
+            score=score,
+        )
+        story.centroid = centroid or [1.0, 0.0, 0.0]
+        story.centroid_model_id = "test-model"
+        story.status = status
+        story.first_seen = first_seen
+        story.cross_day_status = cross_day_status
+        story.headline = title
+        story.summary = item.summary
+        return story
+
+    @staticmethod
+    def _open_store(tmp_dir: str) -> StoryStore:
+        db_path = Path(tmp_dir) / "hot" / "state" / "story_store.sqlite"
+        return StoryStore(db_path)
+
+    # ------------------------------------------------------------------
+    # Test 1: ONGOING story is suppressed from featured (day N+1)
+    # ------------------------------------------------------------------
+
+    def test_ongoing_story_is_suppressed_from_featured(self) -> None:
+        """A story featured on day N appears as ONGOING on day N+1 and is NOT featured."""
+        with tempfile.TemporaryDirectory() as tmp:
+            store = self._open_store(tmp)
+            try:
+                day_n = _date(2026, 4, 10)
+                day_n1 = _date(2026, 4, 11)
+
+                # Day N: persist the story as featured (simulates a previous run's record_surface)
+                story_n = self._make_story(
+                    "story-abc",
+                    "OpenAI Launches GPT-Next",
+                    "https://openai.com/gpt-next",
+                    centroid=[1.0, 0.0, 0.0],
+                    entity_names={"openai"},
+                    status="NEW",
+                    first_seen=day_n.isoformat(),
+                )
+                # match_or_create to persist
+                persisted, is_new = store.match_or_create(
+                    story_n.centroid, story_n, cosine_threshold=0.85, window_days=14, as_of=day_n
+                )
+                self.assertTrue(is_new)
+                # record_surface so surfaced_entity_names is set (mimics pipeline record_surface)
+                store.record_surface(persisted, day_n.isoformat(), lane="featured")
+
+                # Day N+1: same story comes back, same entity set (no new entity → ONGOING not RESURFACE)
+                story_n1 = self._make_story(
+                    "story-xyz",  # different in-memory id; will be merged by centroid match
+                    "OpenAI Launches GPT-Next",
+                    "https://openai.com/gpt-next",
+                    centroid=[1.0, 0.0, 0.0],
+                    entity_names={"openai"},  # same as day N → T3 does not fire
+                    status="NEW",
+                    first_seen=day_n1.isoformat(),
+                )
+                today_stories = [story_n1]
+                matched = match_crossday(
+                    today_stories, store,
+                    cosine_threshold=0.85, window_days=14, as_of=day_n1,
+                )
+                for s in matched:
+                    s.cross_day_status = classify_cross_day(s)
+
+                # Verify that the story is classified ONGOING (not RESURFACE)
+                self.assertEqual(len(matched), 1)
+                self.assertEqual(matched[0].cross_day_status, "ONGOING",
+                                 f"Expected ONGOING but got {matched[0].cross_day_status}")
+
+                # Apply the pipeline's suppression pre-filter
+                featured_eligible = [s for s in matched if s.cross_day_status != "ONGOING"]
+
+                # ONGOING must be excluded from featured candidates
+                self.assertEqual(len(featured_eligible), 0,
+                                 "ONGOING story must be excluded from featured candidates")
+
+                # select_and_categorize on the filtered list must NOT feature the ONGOING story.
+                # We feed `matched` (which has items) to score_stories so there's no division-by-zero
+                # from shell-story rows returned by the Store.  The eligible filter is applied after.
+                scored = score_stories(matched)
+                eligible_scored = [s for s in scored if s.cross_day_status != "ONGOING"]
+                featured, watchlist, _ = select_and_categorize(
+                    eligible_scored, target_featured=5, target_watchlist=3
+                )
+                featured_ids = {s.story_id for s in featured}
+                ongoing_ids = {s.story_id for s in matched if s.cross_day_status == "ONGOING"}
+                self.assertTrue(ongoing_ids.isdisjoint(featured_ids),
+                                "ONGOING story must NOT appear in featured output")
+            finally:
+                store.close()
+
+    # ------------------------------------------------------------------
+    # Test 2: RESURFACE via new entity (T3) IS featured
+    # ------------------------------------------------------------------
+
+    def test_resurface_via_new_entity_is_featured(self) -> None:
+        """Day N story featured → day N+1 same story WITH new entity → RESURFACE → IS featured."""
+        with tempfile.TemporaryDirectory() as tmp:
+            store = self._open_store(tmp)
+            try:
+                day_n = _date(2026, 4, 10)
+                day_n1 = _date(2026, 4, 11)
+
+                # Day N: persist the story, record surface (surfaced_entity_names = {"openai"})
+                story_n = self._make_story(
+                    "story-resurface",
+                    "OpenAI Launches GPT-Resurface",
+                    "https://openai.com/gpt-resurface",
+                    centroid=[0.0, 1.0, 0.0],
+                    entity_names={"openai"},
+                    status="NEW",
+                    first_seen=day_n.isoformat(),
+                )
+                persisted, _ = store.match_or_create(
+                    story_n.centroid, story_n, cosine_threshold=0.85, window_days=14, as_of=day_n
+                )
+                store.record_surface(persisted, day_n.isoformat(), lane="featured")
+
+                # Day N+1: same story but with a NEW named entity "anthropic"
+                story_n1 = self._make_story(
+                    "story-resurface-new",
+                    "OpenAI Launches GPT-Resurface",
+                    "https://openai.com/gpt-resurface",
+                    centroid=[0.0, 1.0, 0.0],
+                    entity_names={"openai", "anthropic"},  # "anthropic" is new → T3 fires
+                    status="NEW",
+                    first_seen=day_n1.isoformat(),
+                )
+                today_stories = [story_n1]
+                matched = match_crossday(
+                    today_stories, store,
+                    cosine_threshold=0.85, window_days=14, as_of=day_n1,
+                )
+                for s in matched:
+                    s.cross_day_status = classify_cross_day(s)
+
+                # Verify RESURFACE classification
+                self.assertEqual(len(matched), 1)
+                self.assertEqual(matched[0].cross_day_status, "RESURFACE",
+                                 f"Expected RESURFACE (new entity 'anthropic') but got {matched[0].cross_day_status}")
+
+                # Suppression filter keeps RESURFACE stories
+                featured_eligible = [s for s in matched if s.cross_day_status != "ONGOING"]
+                self.assertEqual(len(featured_eligible), 1,
+                                 "RESURFACE story must remain in featured candidates")
+
+                # select_and_categorize must feature it
+                scored = score_stories(matched)
+                eligible_scored = [s for s in scored if s.cross_day_status != "ONGOING"]
+                featured, _, _ = select_and_categorize(
+                    eligible_scored, target_featured=5, target_watchlist=3
+                )
+                featured_ids = {s.story_id for s in featured}
+                resurface_id = matched[0].story_id
+                self.assertIn(resurface_id, featured_ids,
+                              "RESURFACE story must appear in featured output")
+            finally:
+                store.close()
+
+    # ------------------------------------------------------------------
+    # Test 3: NEW story always surfaces
+    # ------------------------------------------------------------------
+
+    def test_new_story_always_surfaces(self) -> None:
+        """A brand-new story on day N+1 (no cross-day match) is featured."""
+        with tempfile.TemporaryDirectory() as tmp:
+            store = self._open_store(tmp)
+            try:
+                day_n1 = _date(2026, 4, 11)
+
+                # No prior run — store is empty.
+                brand_new = self._make_story(
+                    "story-new",
+                    "New Model Release Today",
+                    "https://newco.ai/release",
+                    centroid=[0.0, 0.0, 1.0],
+                    entity_names={"newco"},
+                    status="NEW",
+                    first_seen=day_n1.isoformat(),
+                )
+                today_stories = [brand_new]
+                matched = match_crossday(
+                    today_stories, store,
+                    cosine_threshold=0.85, window_days=14, as_of=day_n1,
+                )
+                for s in matched:
+                    s.cross_day_status = classify_cross_day(s)
+
+                self.assertEqual(len(matched), 1)
+                self.assertEqual(matched[0].cross_day_status, "NEW",
+                                 f"Expected NEW but got {matched[0].cross_day_status}")
+
+                featured_eligible = [s for s in matched if s.cross_day_status != "ONGOING"]
+                self.assertEqual(len(featured_eligible), 1)
+
+                scored = score_stories(matched)
+                eligible_scored = [s for s in scored if s.cross_day_status != "ONGOING"]
+                featured, _, _ = select_and_categorize(
+                    eligible_scored, target_featured=5, target_watchlist=3
+                )
+                self.assertGreater(len(featured), 0, "NEW story must appear in featured output")
+                self.assertEqual(featured[0].story_id, matched[0].story_id)
+            finally:
+                store.close()
+
+    # ------------------------------------------------------------------
+    # Test 4: record_surface actually persists surfaced_entity_names
+    #          so T3-always-true is fixed on subsequent runs
+    # ------------------------------------------------------------------
+
+    def test_record_surface_persists_entity_snapshot_fixing_t3_trap(self) -> None:
+        """record_surface persists surfaced_entity_names so T3 does not fire on next run
+        unless genuinely new entities appear."""
+        from arxiv_assistant.hotspots.novelty import resurface
+        with tempfile.TemporaryDirectory() as tmp:
+            store = self._open_store(tmp)
+            try:
+                day_n = _date(2026, 4, 10)
+
+                story = self._make_story(
+                    "story-t3",
+                    "Anthropic Releases Claude 5",
+                    "https://anthropic.com/claude-5",
+                    centroid=[0.5, 0.5, 0.0],
+                    entity_names={"anthropic", "claude"},
+                    status="NEW",
+                    first_seen=day_n.isoformat(),
+                )
+                persisted, _ = store.match_or_create(
+                    story.centroid, story, cosine_threshold=0.85, window_days=14, as_of=day_n
+                )
+                # Before record_surface: surfaced_entity_names is empty → T3 would fire
+                self.assertEqual(persisted.surfaced_entity_names, set())
+
+                store.record_surface(persisted, day_n.isoformat(), lane="featured")
+
+                # After record_surface: surfaced_entity_names == entity_names at surface time
+                self.assertEqual(persisted.surfaced_entity_names, {"anthropic", "claude"})
+                self.assertEqual(persisted.last_surfaced, day_n.isoformat())
+
+                # Reload from DB — snapshot must survive a round-trip
+                reloaded = store.active_stories(14, day_n)
+                self.assertEqual(len(reloaded), 1)
+                self.assertEqual(reloaded[0].surfaced_entity_names, {"anthropic", "claude"})
+
+                # Now simulate next-day same story with same entities → T3 must NOT fire
+                reloaded[0].entity_names = {"anthropic", "claude"}  # no new entity
+                self.assertFalse(
+                    resurface(reloaded[0]),
+                    "resurface must be False when no new entities appear (T3-always-true is fixed)",
+                )
+
+                # Same story with a new entity → T3 fires
+                reloaded[0].entity_names = {"anthropic", "claude", "openai"}
+                self.assertTrue(
+                    resurface(reloaded[0]),
+                    "resurface must be True when a new entity appears (T3 signal)",
+                )
+            finally:
+                store.close()
 
 
 if __name__ == "__main__":

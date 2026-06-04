@@ -422,3 +422,26 @@ class TestSynthesizeVerifier(unittest.TestCase):
         self.assertEqual(out["HEADLINE"], "Old title")          # original title kept
         self.assertTrue(out["KEY_TAKEAWAYS"])                    # heuristic fallback filled
         self.assertIn("t1", payload["manifest"]["synthesize_rejected"])
+
+
+from arxiv_assistant.utils.hotspot.hotspot_web_data import build_daily_hotspot_web_payload
+
+
+class TestResurgenceWebData(unittest.TestCase):
+    def test_payload_carries_resurgence_section(self) -> None:
+        report = {
+            "date": "2026-05-20", "generated_at": "2026-05-20T00:00:00Z", "mode": "heuristic",
+            "summary": "", "featured_topics": [], "category_sections": [],
+            "long_tail_sections": [], "watchlist": [], "x_buzz": [], "paper_spotlight": [],
+            "source_stats": {},
+            "resurgence": [
+                {"story_id": "s9", "original_first_date": "2023-01-02T00:00:00Z",
+                 "resurged_at": "2026-05-20", "reason": "arxiv_version_bump",
+                 "headline": "FooNet resurfaces with v3", "entities": ["FooNet"]},
+            ],
+        }
+        payload = build_daily_hotspot_web_payload(report, [])
+        self.assertEqual(len(payload["resurgence"]), 1)
+        self.assertEqual(payload["resurgence"][0]["reason"], "arxiv_version_bump")
+        self.assertEqual(payload["resurgence"][0]["original_first_date"], "2023-01-02T00:00:00Z")
+        self.assertEqual(payload["meta"]["counts"]["resurgence"], 1)

@@ -959,6 +959,17 @@ def build_daily_hotspot_web_payload(
         for topic in report.get("watchlist") or []
         if not any(p.search((topic.get("HEADLINE") or topic.get("title") or "").strip()) for p in _LOW_QUALITY_TITLE_PATTERNS)
     ]
+    resurgence_entries = [
+        {
+            "story_id": str(entry.get("story_id", "")),
+            "headline": str(entry.get("headline", "") or entry.get("HEADLINE", "")),
+            "original_first_date": entry.get("original_first_date"),
+            "resurged_at": entry.get("resurged_at"),
+            "reason": str(entry.get("reason", "")),
+            "entities": list(entry.get("entities", []) or []),
+        }
+        for entry in report.get("resurgence") or []
+    ]
     topic_summary = _build_topic_summary(all_topics)
     section_counts = {section["slug"]: section["count"] for section in source_sections}
     payload = {
@@ -982,6 +993,7 @@ def build_daily_hotspot_web_payload(
                 "x_buzz": len(report.get("x_buzz") or []),
                 "watchlist": len(watchlist_topics),
                 "source_items": sum(section["count"] for section in source_sections),
+                "resurgence": len(resurgence_entries),
             },
         },
         "totals": dict(report.get("totals") or {}),
@@ -997,6 +1009,7 @@ def build_daily_hotspot_web_payload(
         "long_tail_sections": long_tail_sections,
         "watchlist": watchlist_topics,
         "x_buzz": list(report.get("x_buzz") or []),
+        "resurgence": resurgence_entries,
     }
 
     # Filter out stale topics that lack date metadata

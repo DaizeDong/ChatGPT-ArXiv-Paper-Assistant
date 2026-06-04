@@ -75,6 +75,25 @@ class Story:
     summary: str = ""
     why_it_matters: str = ""
     key_takeaways: list[str] = field(default_factory=list)
+    # --- stage 0: persistent identity / centroid / status (contract §2.2) ---
+    first_seen: str | None = None              # ISO date, immutable once set
+    centroid: list[float] | None = None        # embedding; model_id-bound
+    centroid_model_id: str = ""
+    status: str = "NEW"                         # "NEW" | "ONGOING"
+    arxiv_versions: dict[str, int] = field(default_factory=dict)   # id -> version count (monotonic)
+    # --- surface snapshots (recorded by StoryStore.record_surface) ---
+    last_surfaced: str | None = None
+    surfaced_verified_max: str | None = None   # DAY-granular gate_date
+    surfaced_entity_names: set[str] = field(default_factory=set)
+    surfaced_max_tier: int = 0
+    surfaced_arxiv_versions: dict[str, int] = field(default_factory=dict)
+    # --- resurgence (§C.4) ---
+    resurged_at: str | None = None             # first-ever resurge run-date (immutable)
+    surfaced_resurged_at: str | None = None    # last resurgence-lane surface run-date
+    # --- evidence ledger (populated by StoryStore.active_stories; used by NoveltyGate §C.3.1) ---
+    evidence_ledger: list[dict] = field(default_factory=list)
+    # each row dict has keys: canonical_url, source_id, source_role, provenance,
+    # source_tier(int), added_at(str ISO date)
 
     def __post_init__(self):
         if not self.category:
@@ -83,6 +102,26 @@ class Story:
             self.headline = self.canonical_item.item.title
         if not self.summary:
             self.summary = self.canonical_item.summary
+
+    def evidence_added_since(self, snapshot_date: str | None) -> list[dict]:
+        """Return ledger rows whose added_at > snapshot_date.
+
+        If snapshot_date is None, return all rows.
+        ISO date strings are compared lexicographically (zero-padded ISO == chronological).
+        """
+        if snapshot_date is None:
+            return list(self.evidence_ledger)
+        return [row for row in self.evidence_ledger if row["added_at"] > snapshot_date]
+
+    def evidence_before(self, snapshot_date: str | None) -> list[dict]:
+        """Return ledger rows whose added_at <= snapshot_date.
+
+        If snapshot_date is None, return [].
+        ISO date strings are compared lexicographically (zero-padded ISO == chronological).
+        """
+        if snapshot_date is None:
+            return []
+        return [row for row in self.evidence_ledger if row["added_at"] <= snapshot_date]
 
 
 def _story_id(items: list[EnrichedItem]) -> str:

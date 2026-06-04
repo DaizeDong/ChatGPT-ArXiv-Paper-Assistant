@@ -31,7 +31,7 @@ def _load_model():
                 return [float(x) for x in vec]
 
         return _FastEmbedAdapter()
-    except Exception:
+    except (ImportError, ModuleNotFoundError):
         pass
 
     try:
@@ -46,15 +46,15 @@ def _load_model():
                 return [float(x) for x in vec]
 
         return _SbertAdapter()
-    except Exception as exc:  # pragma: no cover - environment-dependent
+    except (ImportError, ModuleNotFoundError):  # pragma: no cover - environment-dependent
         raise RuntimeError(
             "Stage-2 embedding requires `fastembed` or `sentence-transformers`. "
             "Install one: `pip install fastembed` (preferred) or "
             "`pip install sentence-transformers`."
-        ) from exc
+        )
 
 
-def embed_text(text: str) -> list[float]:
+def embed_text(text: str | None) -> list[float]:
     """Embed `title + lede` text into the pinned multilingual space."""
     global _MODEL
     if _MODEL is None:

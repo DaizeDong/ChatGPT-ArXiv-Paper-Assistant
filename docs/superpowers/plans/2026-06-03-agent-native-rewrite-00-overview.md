@@ -222,7 +222,7 @@ Add under `[HOTSPOTS]` (all with defaults; document in `configs/templates/config
 ```ini
 max_item_age_days = 14                  # B.5 hard gate (per-source-family override allowed)
 cross_day_window_days = 14              # C.1 L2 rolling window
-crossday_cosine_threshold = 0.90        # C.1/C.2 merge threshold
+cross_day_cosine_threshold = 0.90       # C.1/C.2 merge threshold
 resurge_min_competitors = 3             # C.4 R2 default
 resurge_cooldown_days = 7               # C.4 R2 cooldown
 embed_model_id = <pinned id>            # G.7 centroid binding

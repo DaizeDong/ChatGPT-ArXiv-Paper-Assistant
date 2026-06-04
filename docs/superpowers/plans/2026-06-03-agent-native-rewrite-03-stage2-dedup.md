@@ -62,7 +62,7 @@ Append this method to the existing `TestHotspotConfig` class (mirror its style; 
         cfg.read(Path(__file__).resolve().parents[1] / "configs" / "config.ini")
         hot = cfg["HOTSPOTS"]
         self.assertEqual(hot.getint("cross_day_window_days"), 14)
-        self.assertAlmostEqual(hot.getfloat("crossday_cosine_threshold"), 0.90)
+        self.assertAlmostEqual(hot.getfloat("cross_day_cosine_threshold"), 0.90)
         self.assertEqual(hot.getint("resurge_min_competitors"), 3)
         self.assertEqual(hot.getint("resurge_cooldown_days"), 7)
         self.assertTrue(hot.get("embed_model_id", fallback="").strip())
@@ -75,7 +75,7 @@ Run `pytest tests/test_hotspot_config.py -v` → **fails** (keys absent).
 ```ini
 # --- Stage 2: persistent dedup & novelty gate (spec §C.1–C.4) ---
 cross_day_window_days = 14            ; L2 rolling window (§C.1)
-crossday_cosine_threshold = 0.90      ; centroid merge threshold (§C.1/C.2)
+cross_day_cosine_threshold = 0.90      ; centroid merge threshold (§C.1/C.2)
 resurge_min_competitors = 3           ; §C.4 R2 default
 resurge_cooldown_days = 7             ; §C.4 R2 cooldown
 embed_model_id = sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2  ; §G.7 centroid binding
@@ -1093,7 +1093,7 @@ with (centroid-persistent dedup REPLACES the penalty — they are not stacked):
         match_crossday,
     )
 
-    crossday_threshold = hotspot_config.getfloat("crossday_cosine_threshold", fallback=0.90)
+    crossday_threshold = hotspot_config.getfloat("cross_day_cosine_threshold", fallback=0.90)
     cross_day_window = hotspot_config.getint("cross_day_window_days", fallback=14)
     as_of = target_date.date() if hasattr(target_date, "date") else _date.today()
 
@@ -1372,7 +1372,7 @@ pytest tests/test_dedup.py::TestMatchCrossday::test_centroid_primary_not_AND_wit
 - [ ] `novelty.resurge`: R1 version jump ∨ R2 ≥min_competitors with cooldown; old-only; consecutive-day same cluster fires exactly once per cooldown (INV4).
 - [ ] `pipeline.py`: `apply_cross_day_penalty` REPLACED by `cluster_intraday`+`match_crossday`+`classify_cross_day`; `test_hotspot_pipeline.py` still green via fallback.
 - [ ] `scripts/backfill_story_store.py`: `dedup_history` collapses a 6-day duplicate to ONE earliest `first_seen` (no 6 polluted anchors); two distinct events → two seeds.
-- [ ] config: `cross_day_window_days`, `crossday_cosine_threshold`, `resurge_min_competitors`, `resurge_cooldown_days`, `embed_model_id` present with defaults in `configs/config.ini` and template.
+- [ ] config: `cross_day_window_days`, `cross_day_cosine_threshold`, `resurge_min_competitors`, `resurge_cooldown_days`, `embed_model_id` present with defaults in `configs/config.ini` and template.
 - [ ] Full suite: `pytest tests/test_dedup.py tests/test_novelty.py tests/test_hotspot_config.py tests/test_hotspot_pipeline.py -v` green.
 
 **Hand-off to Stage 6:** the Kernel becomes the single Store writer (calls `record_surface` to populate `surfaced_*` snapshots after rendering, sets `surfaced_resurged_at`/`resurged_at` on resurgence-lane surface), wires `_open_story_store`, consumes `Story.cross_day_status`, and renders the Resurgence section. This stage leaves those as the documented integration seam (fallback branch + helper stubs) so the dedup/novelty logic ships and is fully unit-tested independently.

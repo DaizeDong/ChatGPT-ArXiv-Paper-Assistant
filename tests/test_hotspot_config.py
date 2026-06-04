@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import configparser
 import unittest
 from pathlib import Path
 
@@ -19,14 +20,11 @@ class TestHotspotConfig(unittest.TestCase):
 
 
     def test_stage2_dedup_keys_present_with_defaults(self) -> None:
-        import configparser
-        from pathlib import Path
-
         cfg = configparser.ConfigParser()
         cfg.read(Path(__file__).resolve().parents[1] / "configs" / "config.ini")
         hot = cfg["HOTSPOTS"]
         self.assertEqual(hot.getint("cross_day_window_days"), 14)
-        self.assertAlmostEqual(hot.getfloat("crossday_cosine_threshold"), 0.90)
+        self.assertAlmostEqual(hot.getfloat("cross_day_cosine_threshold"), 0.90)
         self.assertEqual(hot.getint("resurge_min_competitors"), 3)
         self.assertEqual(hot.getint("resurge_cooldown_days"), 7)
         self.assertTrue(hot.get("embed_model_id", fallback="").strip())

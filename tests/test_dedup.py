@@ -34,22 +34,17 @@ class TestEmbed(unittest.TestCase):
         self.assertAlmostEqual(got, 1.0 / math.sqrt(2.0), places=6)
 
     def test_embed_text_uses_lazy_singleton(self) -> None:
-        calls = {"n": 0}
-
         class _StubModel:
             def encode(self, text):  # noqa: D401
-                calls["n"] += 1
                 return [float(len(text)), 1.0, 2.0]
 
-        with patch.object(embed, "_load_model", return_value=_StubModel()):
-            embed._MODEL = None  # reset singleton
-            a = embed.embed_text("hello")
-            b = embed.embed_text("hello world")
-        self.assertEqual(len(a), 3)
-        self.assertEqual(a[0], 5.0)
-        self.assertEqual(b[0], 11.0)
-        # _load_model called once → singleton reused
-        embed._MODEL = None
+        import arxiv_assistant.hotspots.embed as embed_mod
+        embed_mod._MODEL = None
+        with patch.object(embed_mod, "_load_model", return_value=_StubModel()) as mock_loader:
+            embed_mod.embed_text("hello")
+            embed_mod.embed_text("hello world")
+            mock_loader.assert_called_once()
+        embed_mod._MODEL = None  # reset global so we don't leak the stub to other tests
 
 
 if __name__ == "__main__":

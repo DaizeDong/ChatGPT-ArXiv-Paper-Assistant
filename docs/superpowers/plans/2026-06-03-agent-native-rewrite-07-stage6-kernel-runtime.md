@@ -693,7 +693,7 @@ class TestStoryStages(unittest.TestCase):
         cfg["HOTSPOTS"] = {
             "enabled": "true", "mode": "heuristic", "target_topics": "5",
             "target_watchlist_topics": "3", "max_topics_per_category": "4",
-            "cross_day_window_days": "14", "crossday_cosine_threshold": "0.90",
+            "cross_day_window_days": "14", "cross_day_cosine_threshold": "0.90",
         }
         return cfg
 

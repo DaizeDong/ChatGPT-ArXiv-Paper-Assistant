@@ -6,7 +6,7 @@ from typing import Sequence
 # §G.7 / overview §2.7: pinned multilingual Matryoshka model id, stored on every centroid.
 # Multilingual so that an English item and its `_zh` translation embed into the SAME space
 # (§C.1 L1 cross-language merge). Keep in sync with configs `embed_model_id`.
-EMBED_MODEL_ID = "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2"
+EMBED_MODEL_ID = "sentence-transformers/paraphrase-multilingual-mpnet-base-v2"
 
 # Lazy module-level singleton: importing this module must never download a model.
 _MODEL = None

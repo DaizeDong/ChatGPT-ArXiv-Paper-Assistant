@@ -8,8 +8,10 @@ from arxiv_assistant.hotspots.story import Story, group_into_stories
 
 # §C.1: cosine > L1_SEMANTIC_THRESHOLD auto-merges intra-day near-duplicates
 # (incl. an English item and its `_zh` translation in the shared multilingual space).
-# Default from configs/config.ini `cross_day_cosine_threshold = 0.90`.
-L1_SEMANTIC_THRESHOLD = 0.90
+# Default from configs/config.ini `cross_day_cosine_threshold = 0.72`.
+# Empirically calibrated 2026-06: mpnet-base-v2 @ 0.72 cleanly separates same-event
+# zh/en pairs (>=0.84) from related-but-different pairs (<=0.54).
+L1_SEMANTIC_THRESHOLD = 0.72
 
 
 def _embed_story_text(item) -> str:
@@ -50,10 +52,10 @@ def cluster_intraday(
     for L0/title evidence, then runs an L1 semantic merge pass on the resulting stories.
     Each returned Story carries a model-id-bound L2-normalized `centroid`.
 
-    The `threshold` defaults to `L1_SEMANTIC_THRESHOLD` (0.90, from
+    The `threshold` defaults to `L1_SEMANTIC_THRESHOLD` (0.72, from
     config key `cross_day_cosine_threshold`).  A caller that has loaded the
     config section should pass
-        threshold=hotspot_config.getfloat("cross_day_cosine_threshold", fallback=0.90)
+        threshold=hotspot_config.getfloat("cross_day_cosine_threshold", fallback=0.72)
     """
     if not items:
         return []

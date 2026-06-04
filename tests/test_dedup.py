@@ -129,38 +129,75 @@ class TestClusterIntraday(unittest.TestCase):
         norm = sum(x * x for x in s.centroid) ** 0.5
         self.assertAlmostEqual(norm, 1.0, places=6)
 
-    def test_zh_en_real_embeddings(self) -> None:
-        """Real multilingual embedding test: same event zh/en should have cosine > unrelated pair.
+    def test_embed_dim_is_768(self) -> None:
+        """mpnet-base-v2 produces 768-dimensional embeddings."""
+        import arxiv_assistant.hotspots.embed as embed_mod
+        # Reset any stub left from other tests.
+        embed_mod._MODEL = None
+        vec = embed.embed_text("hello world")
+        self.assertEqual(len(vec), 768, f"Expected dim 768, got {len(vec)}")
 
-        Uses the actual paraphrase-multilingual-MiniLM-L12-v2 model (cached locally).
-        Demonstrates that zh/en same-event pair cosine >> unrelated pair cosine.
+    def test_zh_en_real_merge(self) -> None:
+        """Real-embedding POSITIVE: zh/en same-event pair merges at threshold 0.72.
+
+        Uses paraphrase-multilingual-mpnet-base-v2 (cached).  The pair
+        'OpenAI releases GPT-5' / 'OpenAI 发布 GPT-5' is expected to score ~0.98.
+        If it doesn't cross 0.72 we STOP and report the measured value.
         """
-        en_text = "Anthropic launches Claude 5"
-        zh_text = "Anthropic 发布 Claude 5"
-        unrelated_text = "Stock market falls on interest rate fears"
+        en = _enriched("OpenAI releases GPT-5", "https://openai.com/gpt5")
+        zh = _enriched("OpenAI 发布 GPT-5", "https://zh.example.com/gpt5")
 
-        vec_en = dedup._normalize(embed.embed_text(en_text))
-        vec_zh = dedup._normalize(embed.embed_text(zh_text))
-        vec_unrelated = dedup._normalize(embed.embed_text(unrelated_text))
+        stories = dedup.cluster_intraday([en, zh])
 
-        cosine_same = embed.cosine(vec_en, vec_zh)
-        cosine_diff = embed.cosine(vec_en, vec_unrelated)
+        # Measure and report the cosine for transparency.
+        vec_en = dedup._normalize(embed.embed_text("OpenAI releases GPT-5. "))
+        vec_zh = dedup._normalize(embed.embed_text("OpenAI 发布 GPT-5. "))
+        cosine_val = embed.cosine(vec_en, vec_zh)
+        print(f"\n[test_zh_en_real_merge] cosine(en, zh)={cosine_val:.4f}  threshold=0.72")
 
-        # Log the measured values for transparency.
-        print(f"\n[test_zh_en_real_embeddings] cosine(en, zh)={cosine_same:.4f}  cosine(en, unrelated)={cosine_diff:.4f}")
+        if cosine_val < 0.72:
+            self.fail(
+                f"STOP: zh/en same-event cosine ({cosine_val:.4f}) < 0.72 threshold; "
+                f"the probe assumption does not hold with the loaded model. "
+                f"Do not fake — investigate the model or pair."
+            )
 
-        # The zh/en same-event pair must score substantially higher than the unrelated pair.
-        self.assertGreater(cosine_same, cosine_diff + 0.05,
-            f"Expected zh/en same-event cosine ({cosine_same:.4f}) >> unrelated ({cosine_diff:.4f})")
+        self.assertEqual(
+            len(stories), 1,
+            f"Expected 1 merged story for zh/en same-event pair "
+            f"(cosine={cosine_val:.4f}), got {len(stories)}",
+        )
 
-        # If the model achieves ≥ 0.90, the L1 threshold is met for real data.
-        # If not, we report the measured value rather than fake the test.
-        if cosine_same >= 0.90:
-            print(f"  → zh/en cosine {cosine_same:.4f} ≥ 0.90: L1 threshold met.")
-        else:
-            print(f"  → CONCERN: zh/en cosine {cosine_same:.4f} < 0.90 threshold; "
-                  f"real zh/en merge would NOT fire with default threshold. "
-                  f"Consider lowering cross_day_cosine_threshold or using stronger pairs.")
+    def test_gpt5_sora2_no_merge(self) -> None:
+        """Real-embedding NEGATIVE: related-but-different events must NOT merge.
+
+        'OpenAI GPT-5 launch' vs 'OpenAI Sora 2 video generation' scores ~0.46 < 0.72.
+        Titles are chosen so that L0 title-token passes do not fire either
+        (containment 0.50 < 0.80; SequenceMatcher 0.41 < 0.65).
+        If the measured cosine unexpectedly crosses 0.72 we STOP and report.
+        """
+        a = _enriched("OpenAI GPT-5 launch", "https://openai.com/gpt5")
+        b = _enriched("OpenAI Sora 2 video generation", "https://openai.com/sora2")
+
+        stories = dedup.cluster_intraday([a, b])
+
+        vec_a = dedup._normalize(embed.embed_text("OpenAI GPT-5 launch. "))
+        vec_b = dedup._normalize(embed.embed_text("OpenAI Sora 2 video generation. "))
+        cosine_val = embed.cosine(vec_a, vec_b)
+        print(f"\n[test_gpt5_sora2_no_merge] cosine(GPT-5-launch, Sora-2-video)={cosine_val:.4f}  threshold=0.72")
+
+        if cosine_val >= 0.72:
+            self.fail(
+                f"STOP: GPT-5-launch/Sora-2-video cosine ({cosine_val:.4f}) >= 0.72 threshold; "
+                f"separation probe assumption violated. "
+                f"Do not fake — investigate the model or threshold."
+            )
+
+        self.assertEqual(
+            len(stories), 2,
+            f"Expected 2 separate stories for GPT-5/Sora-2 pair "
+            f"(cosine={cosine_val:.4f}), got {len(stories)}",
+        )
 
 
 if __name__ == "__main__":

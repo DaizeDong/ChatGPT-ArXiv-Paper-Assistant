@@ -24,7 +24,6 @@ from arxiv_assistant.apis.hotspot.hotspot_x_ainews import fetch_hotspot_items as
 from arxiv_assistant.apis.hotspot.hotspot_x_official import fetch_hotspot_items as fetch_x_official_items
 from arxiv_assistant.apis.hotspot.hotspot_x_paperpulse import fetch_hotspot_items as fetch_x_paperpulse_items
 from arxiv_assistant.apis.hotspot.hotspot_twitterapi import fetch_hotspot_items as fetch_x_twitterapi_items
-from arxiv_assistant.filters.filter_hotspots import synthesize_digest_with_openai
 from arxiv_assistant.hotspots.enrich import enrich_items_batch, enrich_items_heuristic
 from arxiv_assistant.hotspots.dedup import classify_cross_day, cluster_intraday, match_crossday
 from arxiv_assistant.hotspots.story import Story, apply_cross_day_penalty, group_into_stories, score_stories, select_and_categorize
@@ -1095,76 +1094,6 @@ def fetch_source_payloads(
     return _dedupe_items(all_items), source_stats, api_usage
 
 
-def deterministic_trim(clusters: list[HotspotCluster], max_clusters: int) -> list[HotspotCluster]:
-    def cluster_priority(cluster: HotspotCluster) -> tuple[float, int, int]:
-        source_count = len(cluster.source_ids)
-        source_type_count = len(cluster.source_types)
-        roles = set(cluster.source_roles)
-        boost = 0.0
-        if "official_news" in roles:
-            boost += 7.0
-        if roles & {"community_heat", "headline_consensus", "editorial_depth"}:
-            boost += 3.5
-        if source_count > 1:
-            boost += 2.2 * min(source_count - 1, 3)
-        if source_type_count > 1:
-            boost += 1.2 * min(source_type_count - 1, 2)
-        if roles.issubset({"github_trend"}) and source_count == 1:
-            boost -= 4.0
-        if roles.issubset({"research_backbone", "paper_trending"}) and source_count == 1:
-            boost -= 2.0
-        if roles.issubset({"headline_consensus"}) and source_count == 1:
-            boost -= 5.5
-        if roles.issubset({"hn_discussion"}) and source_count == 1:
-            boost -= 5.0
-        if roles.issubset({"builder_momentum"}) and source_count == 1:
-            boost -= 3.2
-        if roles.issubset({"community_heat"}) and source_count == 1:
-            boost -= 1.8
-        return (cluster.deterministic_score + boost, source_count, source_type_count)
-
-    ranked = sorted(clusters, key=cluster_priority, reverse=True)
-    role_budgets = {
-        "official_news": 6,
-        "editorial_depth": 4,
-        "research_backbone": 3,
-        "paper_trending": 4,
-        "github_trend": 1,
-        "builder_momentum": 1,
-        "community_heat": 2,
-        "headline_consensus": 1,
-        "hn_discussion": 1,
-    }
-    selected: list[HotspotCluster] = []
-    selected_ids: set[str] = set()
-
-    for role, budget in role_budgets.items():
-        kept = 0
-        for cluster in ranked:
-            if cluster.cluster_id in selected_ids:
-                continue
-            if role not in cluster.source_roles:
-                continue
-            selected.append(cluster)
-            selected_ids.add(cluster.cluster_id)
-            kept += 1
-            if kept >= budget or len(selected) >= max_clusters:
-                break
-        if len(selected) >= max_clusters:
-            break
-
-    if len(selected) < max_clusters:
-        for cluster in ranked:
-            if cluster.cluster_id in selected_ids:
-                continue
-            selected.append(cluster)
-            selected_ids.add(cluster.cluster_id)
-            if len(selected) >= max_clusters:
-                break
-
-    return selected[:max_clusters]
-
-
 def _fallback_digest_summary(top_topics: list[dict[str, Any]]) -> str:
     if not top_topics:
         return "No strong AI hotspots cleared the selection threshold today."
@@ -1235,111 +1164,6 @@ def _heuristic_takeaways(topic: dict[str, Any], max_takeaways: int = 3) -> list[
                 break
 
     return takeaways
-
-
-def apply_digest_synthesis(
-    top_topics: list[dict[str, Any]],
-    watchlist: list[dict[str, Any]],
-    system_prompt: str,
-    digest_prompt: str,
-    config: configparser.ConfigParser,
-    mode: str,
- ) -> tuple[str, float, float, int, int, int]:
-    for topic in top_topics:
-        topic["HEADLINE"] = topic.get("title", "")
-        if not topic.get("KEY_TAKEAWAYS"):
-            topic["KEY_TAKEAWAYS"] = _heuristic_takeaways(topic)
-
-    if mode != "openai" or not top_topics:
-        return _fallback_digest_summary(top_topics), 0.0, 0.0, 0, 0, 0
-
-    try:
-        payload, prompt_cost, completion_cost, prompt_tokens, completion_tokens, request_count = synthesize_digest_with_openai(
-            top_topics=top_topics,
-            watchlist=watchlist,
-            system_prompt=system_prompt,
-            digest_prompt=digest_prompt,
-            model=config["HOTSPOTS"].get("model_summarize", config["HOTSPOTS"].get("model_screen")),
-            retry_count=config["HOTSPOTS"].getint("retry", fallback=3),
-        )
-    except Exception as ex:
-        print(f"Warning: hotspot digest synthesis failed, falling back to heuristic: {ex}")
-        return _fallback_digest_summary(top_topics), 0.0, 0.0, 0, 0, 0
-
-    by_id = {topic["TOPIC_ID"]: topic for topic in top_topics}
-    for row in payload.get("top_topics", []):
-        topic_id = row.get("TOPIC_ID")
-        if topic_id not in by_id:
-            continue
-        by_id[topic_id]["HEADLINE"] = row.get("HEADLINE") or by_id[topic_id]["HEADLINE"]
-        by_id[topic_id]["WHY_IT_MATTERS"] = row.get("WHY_IT_MATTERS") or by_id[topic_id]["WHY_IT_MATTERS"]
-        by_id[topic_id]["KEY_TAKEAWAYS"] = [point for point in row.get("KEY_TAKEAWAYS", []) if point]
-
-    return (
-        payload.get("summary", "").strip() or _fallback_digest_summary(top_topics),
-        prompt_cost,
-        completion_cost,
-        prompt_tokens,
-        completion_tokens,
-        request_count,
-    )
-
-
-def _build_usage_payload(
-    config: configparser.ConfigParser,
-    effective_mode: str,
-    prompt_cost: float,
-    completion_cost: float,
-    llm_prompt_tokens: int,
-    llm_completion_tokens: int,
-    llm_requests: int,
-    api_usage: dict[str, dict[str, Any]],
-) -> dict[str, Any]:
-    llm_total_cost = round(prompt_cost + completion_cost, 6)
-    llm_row = {
-        "provider": "OpenAI",
-        "billing_model": "quota" if effective_mode == "openai" else "disabled",
-        "screen_model": config["HOTSPOTS"].get("model_screen"),
-        "summary_model": config["HOTSPOTS"].get("model_summarize", config["HOTSPOTS"].get("model_screen")),
-        "requests": int(llm_requests),
-        "prompt_tokens": int(llm_prompt_tokens),
-        "completion_tokens": int(llm_completion_tokens),
-        "total_tokens": int(llm_prompt_tokens + llm_completion_tokens),
-        "prompt_cost": round(prompt_cost, 6),
-        "completion_cost": round(completion_cost, 6),
-        "total_cost": llm_total_cost,
-    }
-
-    external_rows: dict[str, dict[str, Any]] = {}
-    external_request_total = 0
-    x_request_total = 0
-    estimated_external_cost = 0.0
-    for source_id, row in api_usage.items():
-        requests_count = int(row.get("requests", 0) or 0)
-        estimated_cost = round(float(row.get("estimated_cost", 0.0) or 0.0), 6)
-        normalized = {
-            "provider": str(row.get("provider", source_id)),
-            "billing_model": str(row.get("billing_model", "unknown")),
-            "requests": requests_count,
-            "items": int(row.get("items", 0) or 0),
-            "estimated_cost": estimated_cost,
-            "cache_hit": bool(row.get("cache_hit", False)),
-        }
-        external_rows[source_id] = normalized
-        external_request_total += requests_count
-        estimated_external_cost += estimated_cost
-        if source_id.startswith("x_"):
-            x_request_total += requests_count
-
-    return {
-        "llm": llm_row,
-        "external": external_rows,
-        "summary": {
-            "external_requests": external_request_total,
-            "x_requests": x_request_total,
-            "estimated_external_cost": round(estimated_external_cost, 6),
-        },
-    }
 
 
 def _decide_mode(requested_mode: str) -> str:

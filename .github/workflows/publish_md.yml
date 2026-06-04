@@ -101,6 +101,11 @@ jobs:
         run: |
           python -X utf8 scripts/translate_hotspot_web_data.py
 
+      - name: Validate _zh translation assets
+        shell: bash
+        run: |
+          python scripts/validate_zh_assets.py
+
       - name: Build multipage site
         run: |
           python -m arxiv_assistant.renderers.build_multipage_site

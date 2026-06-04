@@ -4,7 +4,7 @@ import configparser
 import json
 import os
 import re
-from datetime import UTC, datetime, timedelta
+from datetime import UTC, date as _date, datetime, timedelta
 from pathlib import Path
 from typing import Any
 from zoneinfo import ZoneInfo
@@ -25,6 +25,7 @@ from arxiv_assistant.apis.hotspot.hotspot_x_official import fetch_hotspot_items 
 from arxiv_assistant.apis.hotspot.hotspot_x_paperpulse import fetch_hotspot_items as fetch_x_paperpulse_items
 from arxiv_assistant.filters.filter_hotspots import synthesize_digest_with_openai
 from arxiv_assistant.hotspots.enrich import enrich_items_batch, enrich_items_heuristic
+from arxiv_assistant.hotspots.dedup import classify_cross_day, cluster_intraday, match_crossday
 from arxiv_assistant.hotspots.story import Story, apply_cross_day_penalty, group_into_stories, score_stories, select_and_categorize
 from arxiv_assistant.renderers.hotspot.render_hot_daily import render_hot_daily_md
 from arxiv_assistant.utils.hotspot.hotspot_config import build_hotspot_paths, ensure_parent_dirs
@@ -1732,12 +1733,33 @@ def generate_daily_hotspot_report(output_root: str | Path, target_date: datetime
     else:
         enriched_items = enrich_items_heuristic(raw_items)
 
-    # Stage 4-5: Group into stories → Score
-    stories = score_stories(group_into_stories(enriched_items))
+    # Stage 4-5: intra-day dedup (L0/L1) → cross-day persistent match (L2) → score
+    crossday_threshold = hotspot_config.getfloat("cross_day_cosine_threshold", fallback=0.90)
+    cross_day_window = hotspot_config.getint("cross_day_window_days", fallback=14)
+    as_of = target_date.date() if hasattr(target_date, "date") else _date.today()
 
-    # Cross-day headline penalty
-    if recent_headlines:
-        stories = apply_cross_day_penalty(stories, recent_headlines)
+    intraday_stories = cluster_intraday(enriched_items)
+
+    if store is not None:
+        matched = match_crossday(
+            intraday_stories,
+            store,
+            cosine_threshold=crossday_threshold,
+            window_days=cross_day_window,
+            as_of=as_of,
+        )
+        for s in matched:
+            s.cross_day_status = classify_cross_day(s)
+        # ONGOING (non-resurfacing) stories are demoted out of the featured stream;
+        # gravity-from-first_seen (Stage 1) already discounts them, so keep NEW +
+        # RESURFACE as featured-eligible and let scoring/selection rank the rest.
+        stories = score_stories(matched)
+    else:
+        # Degraded fallback (no Store yet, e.g. first run pre-backfill): retain the
+        # legacy behavior so the pipeline still produces a report.
+        stories = score_stories(intraday_stories)
+        if recent_headlines:
+            stories = apply_cross_day_penalty(stories, recent_headlines)
 
     # Stage 5b: Filter low-quality / meta-discussion stories
     pre_quality = len(stories)

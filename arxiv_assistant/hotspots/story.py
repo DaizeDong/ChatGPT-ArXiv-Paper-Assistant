@@ -89,6 +89,8 @@ class Story:
     # --- resurgence (§C.4) ---
     resurged_at: str | None = None             # first-ever resurge run-date (immutable)
     surfaced_resurged_at: str | None = None    # last resurgence-lane surface run-date
+    # --- cross-day disposition (set by pipeline after classify_cross_day; spec §C.3) ---
+    cross_day_status: str | None = None          # "NEW" | "ONGOING" | "RESURFACE" | None (legacy)
     # --- evidence ledger (populated by StoryStore.active_stories; used by NoveltyGate §C.3.1) ---
     evidence_ledger: list[dict] = field(default_factory=list)
     # each row dict has keys: canonical_url, source_id, source_role, provenance,

@@ -338,5 +338,31 @@ class TestMatchCrossday(unittest.TestCase):
         self.assertEqual(store.created, [])                 # no spurious NEW minted
 
 
+class TestClassifyCrossDay(unittest.TestCase):
+    def _story(self, story_id, status, *, last_surfaced=None):
+        from arxiv_assistant.hotspots.story import Story
+        s = Story(
+            story_id=story_id,
+            canonical_item=_enriched("seed", f"https://seed/{story_id}"),
+            items=[_enriched("seed", f"https://seed/{story_id}")],
+            event_type="product_release",
+        )
+        s.status = status
+        s.last_surfaced = last_surfaced
+        return s
+
+    def test_new_story_is_NEW(self) -> None:
+        s = self._story("a", "NEW")
+        self.assertEqual(dedup.classify_cross_day(s, resurface_fn=lambda x: False), "NEW")
+
+    def test_ongoing_without_resurface_is_ONGOING(self) -> None:
+        s = self._story("a", "ONGOING", last_surfaced="2026-06-01")
+        self.assertEqual(dedup.classify_cross_day(s, resurface_fn=lambda x: False), "ONGOING")
+
+    def test_ongoing_with_resurface_is_RESURFACE(self) -> None:
+        s = self._story("a", "ONGOING", last_surfaced="2026-06-01")
+        self.assertEqual(dedup.classify_cross_day(s, resurface_fn=lambda x: True), "RESURFACE")
+
+
 if __name__ == "__main__":
     unittest.main()

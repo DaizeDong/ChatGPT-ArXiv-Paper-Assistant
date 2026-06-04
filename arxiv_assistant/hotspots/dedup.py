@@ -5,6 +5,7 @@ from datetime import date
 
 from arxiv_assistant.hotspots.embed import EMBED_MODEL_ID, cosine, embed_text
 from arxiv_assistant.hotspots.enrich import EnrichedItem
+from arxiv_assistant.hotspots.novelty import resurface as _resurface
 from arxiv_assistant.hotspots.story import Story, group_into_stories
 
 # §C.1: cosine > L1_SEMANTIC_THRESHOLD auto-merges intra-day near-duplicates
@@ -199,3 +200,17 @@ def match_crossday(
         )
         result.append(story)
     return result
+
+
+def classify_cross_day(story: Story, *, resurface_fn=_resurface) -> str:
+    """Map a post-match story to its cross-day disposition (spec §C.3).
+
+    NEW       — first-seen this run.
+    ONGOING   — merged into an existing story; gravity from first_seen demotes it.
+    RESURFACE — ONGOING but the closed-form resurface predicate fired (re-feature).
+    """
+    if story.status == "NEW":
+        return "NEW"
+    if resurface_fn(story):
+        return "RESURFACE"
+    return "ONGOING"

@@ -467,5 +467,52 @@ class TestOpenStoryStoreHelper(unittest.TestCase):
             store.close()
 
 
+# ---------------------------------------------------------------------------
+# Task 6 — record_surface: featured + resurgence lane snapshot invariants
+# ---------------------------------------------------------------------------
+
+
+class TestRecordSurface(unittest.TestCase):
+    def _store(self, tmp: str) -> StoryStore:
+        return StoryStore(Path(tmp) / "state" / "story_store.sqlite")
+
+    def test_featured_surface_snapshots_entities_and_versions(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            store = self._store(tmp)
+            story = _make_story("s-surf")
+            store.match_or_create([1.0, 0.0, 0.0], story, 0.90, 14, _date(2026, 6, 1))
+            story.entity_names = {"openai", "anthropic"}
+            story.arxiv_versions = {"2606.00001": 2}
+            store.record_surface(story, run_date="2026-06-01", lane="featured")
+
+            reloaded = store.active_stories(14, _date(2026, 6, 1))[0]
+            self.assertEqual(reloaded.last_surfaced, "2026-06-01")
+            self.assertEqual(reloaded.surfaced_entity_names, {"openai", "anthropic"})
+            self.assertEqual(reloaded.surfaced_arxiv_versions, {"2606.00001": 2})
+            self.assertIsNone(reloaded.resurged_at)
+            self.assertIsNone(reloaded.surfaced_resurged_at)
+            store.close()
+
+    def test_resurgence_lane_sets_resurged_at_once_and_surfaced_each_time(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            store = self._store(tmp)
+            story = _make_story("s-res")
+            store.match_or_create([1.0, 0.0, 0.0], story, 0.90, 14, _date(2026, 5, 1))
+
+            store.record_surface(story, run_date="2026-06-01", lane="resurgence")
+            self.assertEqual(story.resurged_at, "2026-06-01")
+            self.assertEqual(story.surfaced_resurged_at, "2026-06-01")
+
+            # second resurgence surface: resurged_at frozen, surfaced_resurged_at advances
+            store.record_surface(story, run_date="2026-06-08", lane="resurgence")
+            self.assertEqual(story.resurged_at, "2026-06-01")          # immutable
+            self.assertEqual(story.surfaced_resurged_at, "2026-06-08")  # advanced
+
+            reloaded = [s for s in store.active_stories(60, _date(2026, 6, 8)) if s.story_id == "s-res"][0]
+            self.assertEqual(reloaded.resurged_at, "2026-06-01")
+            self.assertEqual(reloaded.surfaced_resurged_at, "2026-06-08")
+            store.close()
+
+
 if __name__ == "__main__":
     unittest.main()

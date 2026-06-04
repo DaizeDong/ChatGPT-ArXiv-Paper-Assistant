@@ -240,3 +240,41 @@ class TestHarvestStages(unittest.TestCase):
                                        config=self._config(), store=None, journal=[])
             payload = kernel._stage_gravity_gate(ctx)
         self.assertEqual(len(payload["items"]), 1)
+
+
+# ---------------------------------------------------------------------------
+# Task 5: TestStoryStages
+# ---------------------------------------------------------------------------
+
+class TestStoryStages(unittest.TestCase):
+    def _config(self) -> configparser.ConfigParser:
+        cfg = configparser.ConfigParser()
+        cfg["HOTSPOTS"] = {
+            "enabled": "true", "mode": "heuristic", "target_topics": "5",
+            "target_watchlist_topics": "3", "max_topics_per_category": "4",
+            "cross_day_window_days": "14", "cross_day_cosine_threshold": "0.90",
+        }
+        return cfg
+
+    def test_score_stage_emits_featured_and_watchlist(self) -> None:
+        items = [
+            _item("Big Model release", "https://x/a", "2026-05-20T00:00:00Z"),
+            _item("Big Model release", "https://x/b", "2026-05-20T00:00:00Z"),
+            _item("Other thing", "https://x/c", "2026-05-20T00:00:00Z"),
+        ]
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            td = datetime(2026, 5, 20, tzinfo=timezone.utc)
+            kernel._write_checkpoint(root, td, "gravity_gate",
+                                     {"items": [kernel._serialize_item(i) for i in items]})
+            ctx = kernel.KernelContext(output_root=root, target_date=td,
+                                       config=self._config(), store=None, journal=[])
+            # embed/cluster/storystore_match/gapfill pass-through in degraded mode
+            kernel._write_checkpoint(root, td, "embed", kernel._stage_embed(ctx))
+            kernel._write_checkpoint(root, td, "cluster", kernel._stage_cluster(ctx))
+            kernel._write_checkpoint(root, td, "storystore_match", kernel._stage_storystore_match(ctx))
+            kernel._write_checkpoint(root, td, "gapfill", kernel._stage_gapfill(ctx))
+            payload = kernel._stage_score(ctx)
+        self.assertIn("featured", payload)
+        self.assertIn("watchlist", payload)
+        self.assertIsInstance(payload["featured"], list)

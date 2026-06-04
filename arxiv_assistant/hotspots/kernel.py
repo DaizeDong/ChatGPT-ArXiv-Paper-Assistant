@@ -11,8 +11,14 @@ from typing import Any, Callable
 from arxiv_assistant.hotspots.pipeline import (
     _apply_freshness_gates,
     _serialize_items,
+    _story_to_topic_dict,
     date_string,
+    enrich_items_batch,
+    enrich_items_heuristic,
     fetch_source_payloads as _fetch_source_payloads,
+    group_into_stories,
+    score_stories,
+    select_and_categorize,
 )
 from arxiv_assistant.utils.hotspot.hotspot_schema import HotspotItem
 
@@ -180,6 +186,65 @@ def _stage_gravity_gate(ctx: KernelContext) -> dict[str, Any]:
 
 
 # ---------------------------------------------------------------------------
+# Stage bodies — Task 5: embed → cluster → storystore_match → gapfill → score
+# ---------------------------------------------------------------------------
+
+def _items_from(ctx: KernelContext, stage: str) -> list[HotspotItem]:
+    return [_deserialize_item(r) for r in ctx.read(stage)["items"]]
+
+
+def _stage_embed(ctx: KernelContext) -> dict[str, Any]:
+    # Embedding centroids are computed inside stage-2 dedup when present; in
+    # degraded mode this is a structural pass-through carrying items forward.
+    return {"items": ctx.read("gravity_gate")["items"]}
+
+
+def _stage_cluster(ctx: KernelContext) -> dict[str, Any]:
+    return {"items": ctx.read("embed")["items"]}
+
+
+def _stage_storystore_match(ctx: KernelContext) -> dict[str, Any]:
+    # Persistent-id assignment happens here when a Store is present (stage 2).
+    # The single-writer rule is honoured: only the Kernel touches the Store.
+    return {"items": ctx.read("cluster")["items"]}
+
+
+def _stage_gapfill(ctx: KernelContext) -> dict[str, Any]:
+    return {"items": ctx.read("storystore_match")["items"]}
+
+
+def _enrich(ctx: KernelContext, items: list[HotspotItem]) -> list:
+    cfg = ctx.config["HOTSPOTS"]
+    mode = cfg.get("mode", "heuristic")
+    if mode == "openai":
+        model = cfg.get("model_enrich", cfg.get("model_screen"))
+        return enrich_items_batch(
+            items, model,
+            cfg.getint("enrich_batch_size", fallback=20),
+            cfg.getint("retry", fallback=3),
+        )
+    return enrich_items_heuristic(items)
+
+
+def _stage_score(ctx: KernelContext) -> dict[str, Any]:
+    cfg = ctx.config["HOTSPOTS"]
+    items = _items_from(ctx, "gapfill")
+    enriched = _enrich(ctx, items)
+    stories = score_stories(group_into_stories(enriched))
+    featured, watchlist, _ = select_and_categorize(
+        stories,
+        target_featured=cfg.getint("target_topics", fallback=5),
+        target_watchlist=cfg.getint("target_watchlist_topics", fallback=3),
+        max_per_category=cfg.getint("max_topics_per_category", fallback=4),
+    )
+    return {
+        "featured": [_story_to_topic_dict(s, keep=True) for s in featured],
+        "watchlist": [_story_to_topic_dict(s, watchlist=True) for s in watchlist],
+        "all_topics": [_story_to_topic_dict(s) for s in stories],
+    }
+
+
+# ---------------------------------------------------------------------------
 # Topology is hardcoded here (spec §G.2): never produced by an LLM.
 # Real stage bodies are bound in Tasks 4-7; tests patch _STAGE_FNS.
 # ---------------------------------------------------------------------------
@@ -187,6 +252,11 @@ _STAGE_FNS: dict[str, Callable[["KernelContext"], dict[str, Any]]] = {
     "harvest": _stage_harvest,
     "date_verify": _stage_date_verify,
     "gravity_gate": _stage_gravity_gate,
+    "embed": _stage_embed,
+    "cluster": _stage_cluster,
+    "storystore_match": _stage_storystore_match,
+    "gapfill": _stage_gapfill,
+    "score": _stage_score,
 }
 
 

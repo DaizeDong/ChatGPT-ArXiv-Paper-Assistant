@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import unittest
+from datetime import date
 from unittest.mock import patch
 
 from arxiv_assistant.hotspots.date_verify import (
@@ -10,7 +11,10 @@ from arxiv_assistant.hotspots.date_verify import (
     poll_arxiv_versions,
     verify,
 )
+from arxiv_assistant.hotspots.story import _freshness_weight
+from arxiv_assistant.utils.hotspot.gate_date import floor_to_utc_day
 from arxiv_assistant.utils.hotspot.hotspot_schema import HotspotItem
+from arxiv_assistant.utils.hotspot.hotspot_sources import get_freshness_date
 
 _ARXIV_ATOM = """<?xml version="1.0" encoding="UTF-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
@@ -302,7 +306,31 @@ class TestPollArxivVersions(unittest.TestCase):
         self.assertEqual(result, {"2301.00001": 3, "2302.00002": 1})
 
 
-from arxiv_assistant.utils.hotspot.hotspot_sources import get_freshness_date
+class TestFreshnessWeight(unittest.TestCase):
+    def test_same_day_full_weight(self) -> None:
+        run = date(2026, 4, 4)
+        w = _freshness_weight(date(2026, 4, 4), run_date=run)
+        self.assertAlmostEqual(w, 1.0, places=6)
+
+    def test_decays_with_age(self) -> None:
+        run = date(2026, 4, 10)
+        fresh = _freshness_weight(date(2026, 4, 10), run_date=run)
+        old = _freshness_weight(date(2026, 4, 4), run_date=run)  # 6 days → sinks
+        self.assertLess(old, fresh)
+        self.assertLess(old, 0.2)  # 6-day-old story folds below the line
+
+    def test_none_gate_date_neutral(self) -> None:
+        # Unverifiable date → neutral 0.6 (matches legacy unknown-date behavior).
+        self.assertAlmostEqual(_freshness_weight(None, run_date=date(2026, 4, 4)), 0.6, places=6)
+
+    def test_subday_jitter_floors_to_same_weight(self) -> None:
+        # Two timestamps on the SAME UTC day but different times floor to the same
+        # gate_day, so the gravity weight is identical — sub-day jitter cannot flip
+        # the discrete freshness outcome (INV2). Exercises floor + weight together.
+        run = date(2026, 4, 6)
+        early = _freshness_weight(floor_to_utc_day("2026-04-04T00:00:01Z"), run_date=run)
+        late = _freshness_weight(floor_to_utc_day("2026-04-04T23:59:59Z"), run_date=run)
+        self.assertEqual(early, late)
 
 
 class TestGetFreshnessDate(unittest.TestCase):

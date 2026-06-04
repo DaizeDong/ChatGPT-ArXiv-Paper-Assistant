@@ -3,17 +3,17 @@ from __future__ import annotations
 import hashlib
 from collections import defaultdict
 from dataclasses import dataclass, field
-from datetime import datetime, timezone
+from datetime import UTC, date, datetime
+from difflib import SequenceMatcher
 
 from arxiv_assistant.hotspots.enrich import EnrichedItem, EVENT_TYPE_TO_CATEGORY
+from arxiv_assistant.utils.hotspot.gate_date import gate_date
 from arxiv_assistant.utils.hotspot.hotspot_cluster import (
     GENERIC_OVERLAP_TOKENS,
     SOURCE_ROLE_WEIGHTS,
     canonicalize_url,
     significant_title_tokens,
 )
-from arxiv_assistant.utils.hotspot.hotspot_sources import get_freshness_date, parse_datetime
-from difflib import SequenceMatcher
 
 EVENT_TYPE_WEIGHTS = {
     "product_release": 2.0,
@@ -44,22 +44,21 @@ KEY_FIGURES = {
 }
 
 
-def _freshness_weight(published_at: str | None) -> float:
-    if not published_at:
+def _freshness_weight(gate_day: date | None, *, run_date: date) -> float:
+    """HN-style gravity from the day-granular gate_date (spec §B.5.1/§C.3).
+
+    T = hours since gate_day (day boundary); decay = 1/(T+2)^1.8 normalized so a
+    same-day story scores 1.0. Sub-day jitter cannot affect this because the input
+    is already floored to a UTC day (INV2). Unknown date → neutral 0.6.
+    """
+    if gate_day is None:
         return 0.6
-    dt = parse_datetime(published_at)
-    if dt is None:
-        return 0.6
-    hours = (datetime.now(timezone.utc) - dt).total_seconds() / 3600
-    if hours < 8:
-        return 1.0
-    if hours < 16:
-        return 0.85
-    if hours < 24:
-        return 0.65
-    if hours < 36:
-        return 0.4
-    return 0.2
+    age_days = (run_date - gate_day).days
+    if age_days < 0:
+        age_days = 0
+    t_hours = age_days * 24.0
+    # Normalized HN gravity: weight(T)/weight(0), weight(T) = 1/(T+2)^1.8.
+    return (2.0 ** 1.8) / ((t_hours + 2.0) ** 1.8)
 
 
 @dataclass
@@ -314,10 +313,14 @@ def score_stories(stories: list[Story]) -> list[Story]:
         if story.event_type == "opinion" and story.entity_names & KEY_FIGURES:
             event_weight = 1.2
 
-        # Use fetched_at for freshness when available (trending date > creation date)
-        freshness_dates = [get_freshness_date(ei.item) for ei in story.items]
-        freshness_dates = [d for d in freshness_dates if d]
-        freshness = _freshness_weight(max(freshness_dates) if freshness_dates else None)
+        # Gravity from the day-granular gate_date (verified first date), not now().
+        run_day = datetime.now(UTC).date()
+        gate_days = [gate_date(ei.item) for ei in story.items]
+        gate_days = [d for d in gate_days if d is not None]
+        # min = earliest credible date = most pessimistic (anti-manipulation); a story
+        # cannot look fresh just because one late-dated item joined it.
+        earliest_gate = min(gate_days) if gate_days else None
+        freshness = _freshness_weight(earliest_gate, run_date=run_day)
 
         raw = (source_weight_sum + evidence_breadth + avg_importance) * event_weight * freshness
         raw_scores.append(raw)

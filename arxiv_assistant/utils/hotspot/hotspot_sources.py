@@ -157,9 +157,8 @@ def get_freshness_date(item: "HotspotItem") -> str | None:
         fetched_at = (item.metadata or {}).get("fetched_at")
         if fetched_at:
             return fetched_at
-    verified = getattr(item, "verified_first_date", None)
-    if verified:
-        return verified
+    if item.verified_first_date:
+        return item.verified_first_date
     return item.published_at
 
 

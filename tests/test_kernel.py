@@ -701,6 +701,133 @@ class TestResurgenceMarkdown(unittest.TestCase):
 
 
 # ---------------------------------------------------------------------------
+# FIX A/B/C: TestRenderFixes — normalized file, totals/usage/costs, watchlist dedup
+# ---------------------------------------------------------------------------
+
+def _make_synth_checkpoint(
+    featured: list | None = None,
+    watchlist: list | None = None,
+    all_topics: list | None = None,
+) -> dict:
+    return {
+        "featured": featured or [],
+        "watchlist": watchlist or [],
+        "all_topics": all_topics or [],
+        "manifest": {"synthesize_model": "m", "synthesize_temperature": 0, "synthesize_rejected": []},
+    }
+
+
+class TestRenderFixes(unittest.TestCase):
+    def _config(self) -> configparser.ConfigParser:
+        cfg = configparser.ConfigParser()
+        cfg["HOTSPOTS"] = {
+            "enabled": "true", "mode": "heuristic", "max_item_age_days": "14",
+            "resurge_min_competitors": "3", "resurge_cooldown_days": "7",
+        }
+        return cfg
+
+    def _write_harvest(self, root: Path, td: datetime, items: list, api_usage: dict | None = None) -> None:
+        kernel._write_checkpoint(root, td, "harvest", {
+            "items": [kernel._serialize_item(i) for i in items],
+            "source_stats": {},
+            "api_usage": api_usage or {},
+        })
+
+    # FIX A test
+    def test_render_writes_normalized_items_file(self) -> None:
+        """_stage_render must write out/hot/normalized/<date>.json as a list of serialized items."""
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            td = datetime(2026, 5, 20, tzinfo=timezone.utc)
+            items = [_item("A", "https://x/a", "2026-05-20T00:00:00Z"),
+                     _item("B", "https://x/b", "2026-05-20T00:00:00Z")]
+            self._write_harvest(root, td, items)
+            kernel._write_checkpoint(root, td, "synthesize", _make_synth_checkpoint())
+            ctx = kernel.KernelContext(output_root=root, target_date=td,
+                                       config=self._config(), store=None, journal=[])
+            kernel._stage_render(ctx)
+
+            normalized_path = root / "hot" / "normalized" / "2026-05-20.json"
+            self.assertTrue(normalized_path.exists(),
+                            "out/hot/normalized/2026-05-20.json must exist after _stage_render")
+            data = json.loads(normalized_path.read_text(encoding="utf-8"))
+            self.assertIsInstance(data, list, "normalized file must be a JSON list")
+            self.assertEqual(len(data), 2, "normalized list must have one entry per raw item")
+
+    # FIX B test
+    def test_render_report_carries_totals_usage_costs(self) -> None:
+        """Report written by _stage_render must carry totals/usage/costs with correct raw_items."""
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            td = datetime(2026, 5, 20, tzinfo=timezone.utc)
+            items = [_item("A", "https://x/a", "2026-05-20T00:00:00Z"),
+                     _item("B", "https://x/b", "2026-05-20T00:00:00Z"),
+                     _item("C", "https://x/c", "2026-05-20T00:00:00Z")]
+            self._write_harvest(root, td, items, api_usage={
+                "x_twitterapi": {"provider": "twitterapi.io", "billing_model": "metered",
+                                  "requests": 5, "items": 20, "estimated_cost": 0.01, "cache_hit": False},
+            })
+            kernel._write_checkpoint(root, td, "synthesize", _make_synth_checkpoint())
+            ctx = kernel.KernelContext(output_root=root, target_date=td,
+                                       config=self._config(), store=None, journal=[])
+            kernel._stage_render(ctx)
+
+            report = json.loads((root / "hot" / "reports" / "2026-05-20.json").read_text(encoding="utf-8"))
+            # totals
+            self.assertIn("totals", report, "report must carry 'totals' key")
+            self.assertEqual(report["totals"]["raw_items"], 3,
+                             "totals.raw_items must equal len(raw_items)")
+            # usage
+            self.assertIn("usage", report, "report must carry 'usage' key")
+            self.assertIn("llm", report["usage"])
+            self.assertIn("external", report["usage"])
+            self.assertIn("x_twitterapi", report["usage"]["external"],
+                          "external usage must propagate harvest api_usage")
+            self.assertEqual(report["usage"]["external"]["x_twitterapi"]["requests"], 5)
+            # costs
+            self.assertIn("costs", report, "report must carry 'costs' key")
+            self.assertIn("total", report["costs"])
+
+    # FIX C test
+    def test_render_watchlist_excludes_featured_topic_ids(self) -> None:
+        """Watchlist must not contain any TOPIC_ID already present in featured_topics."""
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            td = datetime(2026, 5, 20, tzinfo=timezone.utc)
+            self._write_harvest(root, td, [])
+
+            # topic-1 appears in both featured and watchlist — after render it must
+            # be stripped from watchlist (waterfall dedup / FIX C).
+            shared_topic = {
+                "TOPIC_ID": "topic-1", "title": "Shared", "HEADLINE": "Shared",
+                "PRIMARY_CATEGORY": "Research", "score": 9.0,
+                "source_roles": [], "items": [], "EVIDENCE_URLS": [],
+            }
+            watchlist_only = {
+                "TOPIC_ID": "topic-2", "title": "WL only", "HEADLINE": "WL only",
+                "PRIMARY_CATEGORY": "Research", "score": 5.0,
+                "source_roles": [], "items": [], "EVIDENCE_URLS": [],
+            }
+            kernel._write_checkpoint(root, td, "synthesize", _make_synth_checkpoint(
+                featured=[shared_topic],
+                watchlist=[shared_topic, watchlist_only],
+                all_topics=[shared_topic, watchlist_only],
+            ))
+            ctx = kernel.KernelContext(output_root=root, target_date=td,
+                                       config=self._config(), store=None, journal=[])
+            kernel._stage_render(ctx)
+
+            report = json.loads((root / "hot" / "reports" / "2026-05-20.json").read_text(encoding="utf-8"))
+            watchlist_ids = {t["TOPIC_ID"] for t in report["watchlist"]}
+            featured_ids = {t["TOPIC_ID"] for t in report["featured_topics"]}
+            self.assertNotIn("topic-1", watchlist_ids,
+                             "topic-1 appears in featured_topics → must be removed from watchlist")
+            self.assertIn("topic-2", watchlist_ids,
+                          "topic-2 is watchlist-only → must remain in watchlist")
+            self.assertIn("topic-1", featured_ids, "topic-1 must still be in featured_topics")
+
+
+# ---------------------------------------------------------------------------
 # Task 10: TestStrangler — generate_daily_hotspot_report delegates to kernel.run
 # ---------------------------------------------------------------------------
 

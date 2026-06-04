@@ -529,7 +529,7 @@ def _stage_render(ctx: KernelContext) -> dict[str, Any]:
     cfg = ctx.config["HOTSPOTS"]
     raw_items = [_deserialize_item(r) for r in harvest.get("items", [])]
     featured = synth.get("featured", [])
-    watchlist = synth.get("watchlist", [])
+    watchlist = list(synth.get("watchlist", []))  # mutable copy for FIX C
     all_topics = synth.get("all_topics", [])
 
     category_sections = _build_category_sections(
@@ -544,6 +544,19 @@ def _stage_render(ctx: KernelContext) -> dict[str, Any]:
         max_per_category=cfg.getint("max_long_tail_per_category", fallback=8),
         min_display_score=cfg.getfloat("long_tail_display_score_cutoff", fallback=1.6),
     )
+
+    # FIX C: Waterfall watchlist dedup (legacy pipeline.py:1868-1873).
+    # Collect all TOPIC_IDs already claimed by featured + category + long-tail
+    # sections, then filter watchlist to drop any entry whose TOPIC_ID is
+    # already present in that set (a topic can't appear in both featured and
+    # watchlist).
+    claimed_ids: set[str] = {t["TOPIC_ID"] for t in featured}
+    for section in category_sections:
+        claimed_ids.update(t["TOPIC_ID"] for t in section.get("topics", []))
+    for section in long_tail_sections:
+        claimed_ids.update(t["TOPIC_ID"] for t in section.get("topics", []))
+    watchlist = [t for t in watchlist if t["TOPIC_ID"] not in claimed_ids]
+
     x_buzz = _build_market_signal_items(raw_items, featured, watchlist)
     paper_spotlight = _build_paper_spotlight(
         raw_items,
@@ -552,13 +565,80 @@ def _stage_render(ctx: KernelContext) -> dict[str, Any]:
     )
     resurgence = _build_resurgence_lane(ctx)
 
+    # FIX B: Assemble totals / usage / costs (legacy pipeline.py:1885-1921).
+    # totals: real counts from available kernel data; sub-counts not available
+    # from the render stage (enriched_items, stories) are omitted / set to 0
+    # as they are not tracked across checkpoints.
+    totals = {
+        "raw_items": len(raw_items),
+        "enriched_items": 0,   # not tracked across checkpoints; consumers use raw_items
+        "stories": 0,           # not tracked; use all_topics count as proxy
+        "featured": len(featured),
+        "watchlist": len(watchlist),
+        "category_topics": sum(len(s.get("topics", [])) for s in category_sections),
+        "long_tail_topics": sum(len(s.get("topics", [])) for s in long_tail_sections),
+        "paper_spotlight_items": sum(len(s.get("items", [])) for s in paper_spotlight),
+    }
+    # costs: zero because LLM token/cost tracking is not threaded through kernel
+    # checkpoints (do NOT fabricate values).
+    costs = {"prompt": 0.0, "completion": 0.0, "total": 0.0}
+    # usage: replicate legacy _build_usage_payload structure (pipeline.py:1279-1330).
+    # LLM sub-dict uses real mode; all token/cost fields are zero (not tracked).
+    # External sub-dict is built from harvest's api_usage (the real source data).
+    api_usage: dict[str, Any] = harvest.get("api_usage") or {}
+    mode = cfg.get("mode", "heuristic")
+    llm_row: dict[str, Any] = {
+        "provider": "OpenAI",
+        "billing_model": "quota" if mode == "openai" else "disabled",
+        "screen_model": cfg.get("model_screen", None),
+        "summary_model": cfg.get("model_summarize", cfg.get("model_screen", None)),
+        "requests": 0,
+        "prompt_tokens": 0,
+        "completion_tokens": 0,
+        "total_tokens": 0,
+        "prompt_cost": 0.0,
+        "completion_cost": 0.0,
+        "total_cost": 0.0,
+    }
+    external_rows: dict[str, Any] = {}
+    external_request_total = 0
+    x_request_total = 0
+    estimated_external_cost = 0.0
+    for source_id, row in api_usage.items():
+        requests_count = int(row.get("requests", 0) or 0)
+        estimated_cost = round(float(row.get("estimated_cost", 0.0) or 0.0), 6)
+        external_rows[source_id] = {
+            "provider": str(row.get("provider", source_id)),
+            "billing_model": str(row.get("billing_model", "unknown")),
+            "requests": requests_count,
+            "items": int(row.get("items", 0) or 0),
+            "estimated_cost": estimated_cost,
+            "cache_hit": bool(row.get("cache_hit", False)),
+        }
+        external_request_total += requests_count
+        estimated_external_cost += estimated_cost
+        if source_id.startswith("x_"):
+            x_request_total += requests_count
+    usage: dict[str, Any] = {
+        "llm": llm_row,
+        "external": external_rows,
+        "summary": {
+            "external_requests": external_request_total,
+            "x_requests": x_request_total,
+            "estimated_external_cost": round(estimated_external_cost, 6),
+        },
+    }
+
     report = {
         "date": ctx.run_date,
         "generated_at": datetime.now(UTC).isoformat(),
-        "mode": cfg.get("mode", "heuristic"),
+        "mode": mode,
         "summary": _fallback_digest_summary(featured),
         "source_stats": harvest.get("source_stats", {}),
         "manifest": synth.get("manifest", {}),
+        "totals": totals,    # FIX B
+        "costs": costs,      # FIX B
+        "usage": usage,      # FIX B
         "top_topics": featured,
         "featured_topics": featured,
         "category_sections": category_sections,
@@ -571,6 +651,9 @@ def _stage_render(ctx: KernelContext) -> dict[str, Any]:
 
     paths = build_hotspot_paths(ctx.output_root, ctx.target_date.date())
     ensure_parent_dirs(paths)
+    # FIX A: write normalized items file (legacy pipeline.py:1917).
+    # scripts/rebuild_hotspot_web_data.py:120-123 requires out/hot/normalized/<date>.json.
+    write_json(paths.normalized_path, _serialize_items(raw_items))
     write_json(paths.report_path, report)
     write_hotspot_web_data(ctx.output_root, report, raw_items)
     paths.markdown_path.write_text(render_hot_daily_md(report), encoding="utf-8")

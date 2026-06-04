@@ -923,3 +923,26 @@ class TestSourceFailureDegrade(unittest.TestCase):
             manifest = kernel.run(Path(tmp), datetime(2026, 5, 20, tzinfo=timezone.utc),
                                   self._config())
         self.assertEqual(manifest["stages_run"], kernel.STAGES)  # no crash, all stages done
+
+
+# ---------------------------------------------------------------------------
+# Task 17: TestInvariantsAcceptance — INV6 acceptance test
+# Synthesize touchpoint must pin temperature=0 and record the pinned model id
+# in the manifest (anti-nondeterminism constitution, spec §G).
+# ---------------------------------------------------------------------------
+
+class TestInvariantsAcceptance(unittest.TestCase):
+    def test_inv6_synthesize_pins_temp0_and_records_model(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            td = datetime(2026, 5, 20, tzinfo=timezone.utc)
+            kernel._write_checkpoint(root, td, "score",
+                                     {"featured": [], "watchlist": [], "all_topics": []})
+            cfg = configparser.ConfigParser()
+            cfg["HOTSPOTS"] = {"enabled": "true", "mode": "openai",
+                               "model_synthesize": "pinned-model-v1"}
+            ctx = kernel.KernelContext(output_root=root, target_date=td, config=cfg,
+                                       store=None, journal=[])
+            payload = kernel._stage_synthesize(ctx)
+        self.assertEqual(payload["manifest"]["synthesize_temperature"], 0)
+        self.assertEqual(payload["manifest"]["synthesize_model"], "pinned-model-v1")

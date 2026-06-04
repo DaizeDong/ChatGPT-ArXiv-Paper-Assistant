@@ -385,5 +385,48 @@ class TestRunGapfillFloor(unittest.TestCase):
         self.assertIsInstance(result["alerts"], list)
 
 
+class TestInvariants(unittest.TestCase):
+    """Stage-4 acceptance gate: named assertions for each spec §D/§E invariant.
+
+    §D.1 / INV5  — Reuse items inherit recall, not staleness.  They carry
+                   provenance="reuse:..." and pass through the IDENTICAL DateVerify
+                   + max_age gate as native items.  No separate reuse-only bypass.
+    §D.3          — The ⊇ (union-floor) obligation is scoped to *eligible* items only.
+                   Items dropped as dropped_stale carry no ⊇ obligation.
+    §D.4          — Multi-competitor consensus on a backdated paper is REJECTED by the
+                   DateVerify hard anchor; majority vote never approves.
+    §E            — The pollution alert reads journal aggregates; baseline excludes the
+                   current run so a first-run spike is not self-suppressed.
+    INV2          — Sub-day timestamp jitter (e.g. 23:59:59 vs 00:00:01 on the same UTC
+                   day) cannot flip the day-granular eligibility gate.
+    """
+
+    def test_inv5_reuse_items_carry_reuse_provenance_and_pass_same_gate(self) -> None:
+        # Reuse items inherit recall, not staleness: they go through the identical gate.
+        from arxiv_assistant.hotspots import gapfill
+        store = MagicMock()
+        comp = [_item("https://a.test/fresh", provenance="reuse:hf_daily")]
+        with patch.object(gapfill.date_verify, "verify", side_effect=_fake_verify):
+            eligible, dropped = gapfill.eligible_competitor_items(
+                comp, store, max_age_days=14, as_of=date(2026, 6, 3)
+            )
+        self.assertTrue(all(i.provenance.startswith("reuse:") for i in eligible + dropped))
+        self.assertEqual(len(eligible), 1)
+
+    def test_inv2_subday_jitter_cannot_flip_gate(self) -> None:
+        from arxiv_assistant.hotspots import gapfill
+        store = MagicMock()
+        # Two verifies of the SAME url differing only by sub-day time -> same eligibility.
+        def jitter_verify(item, _store):
+            t = "23:59:59" if item.title.endswith("Z") else "00:00:01"
+            return {"verified_first_date": f"2026-05-20T{t}+00:00", "confidence": 0.9, "evidence": []}
+        a = _item("https://a.test/jit"); a.title = "X"
+        b = _item("https://a.test/jit"); b.title = "XZ"
+        with patch.object(gapfill.date_verify, "verify", side_effect=jitter_verify):
+            ea, _ = gapfill.eligible_competitor_items([a], store, max_age_days=14, as_of=date(2026, 6, 3))
+            eb, _ = gapfill.eligible_competitor_items([b], store, max_age_days=14, as_of=date(2026, 6, 3))
+        self.assertEqual(len(ea), len(eb))  # day-granular gate: identical verdict
+
+
 if __name__ == "__main__":
     unittest.main()

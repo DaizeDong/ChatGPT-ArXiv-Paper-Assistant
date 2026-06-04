@@ -187,6 +187,10 @@ def collect_and_translate(data: dict, model: str) -> dict:
             for f in EVIDENCE_FIELDS:
                 register(ev, f)
 
+    # resurgence
+    for entry in data.get("resurgence", []):
+        register(entry, "headline")
+
     # source_sections + paper_spotlight
     for section_list_key in ("source_sections", "paper_spotlight"):
         for sec in data.get(section_list_key, []):

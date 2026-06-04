@@ -53,3 +53,59 @@ def resurface(story, *, gate_date_fn=gate_date) -> bool:
         return True
 
     return False
+
+
+def _today_competitor_count(story) -> int:
+    """Default: count distinct competitor (reuse-layer) sources among today's evidence.
+
+    Reads the Stage-0 ledger fields: an evidence item added today whose provenance is
+    a reuse-layer competitor source. Kernel may inject a precise fn; this default is a
+    safe fallback for unit/offline use.
+    """
+    seen: set[str] = set()
+    for e in getattr(story, "_today_evidence", []):
+        prov = getattr(e.item, "provenance", "") or ""
+        if prov.startswith("reuse:"):
+            seen.add(prov)
+    return len(seen)
+
+
+def resurge(
+    story,
+    *,
+    max_age_days: int,
+    run_date: date,
+    min_competitors: int,
+    cooldown_days: int,
+    gate_date_fn=gate_date,
+    competitor_count_fn=_today_competitor_count,
+) -> bool:
+    """§C.4 resurgence predicate: R1 ∨ R2, evaluated ONLY for OLD stories. Zero LLM.
+
+    Old := gate_date(story.canonical_item) is older than max_age_days vs run_date.
+    R1: an arXiv version count strictly exceeds the last resurge-surface snapshot
+        (each new version fires at most once).
+    R2: >= min_competitors distinct competitor sources re-raise the item today AND
+        the cooldown gate is open (surfaced_resurged_at is None or run_date is at
+        least cooldown_days past it) — so the same competitor cluster re-raising the
+        same old item day-after-day fires at most once per cooldown.
+    """
+    gd = gate_date_fn(story.canonical_item.item)
+    if gd is None:
+        return False
+    if (run_date - gd).days <= max_age_days:
+        return False  # not old → not a resurge candidate
+
+    # R1: version jump strictly above the last resurge-surface snapshot.
+    for arxiv_id, count in (story.arxiv_versions or {}).items():
+        prev = (story.surfaced_arxiv_versions or {}).get(arxiv_id, 0)
+        if count > prev:
+            return True
+
+    # R2: cross-competitor same-day cluster + cooldown gate.
+    if competitor_count_fn(story) >= min_competitors:
+        last_resurge = story.surfaced_resurged_at
+        if last_resurge is None or (run_date - last_resurge).days >= cooldown_days:
+            return True
+
+    return False

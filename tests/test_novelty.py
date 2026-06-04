@@ -126,3 +126,70 @@ class TestResurface(unittest.TestCase):
                    entity_names={"openai", "nvidia"},
                    surfaced_entity_names={"openai"})
         self.assertTrue(novelty.resurface(s))
+
+
+class TestResurge(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        _install_helpers()
+
+    def _old_story(self, **kw):
+        # gate_date 60 days old → "old" item (exceeds max_age).
+        ev = _ev("old", added_at="2026-04-01", source_tier=3,
+                 verified_first_date="2026-04-01", arxiv_id="2604.00001")
+        s = _story([ev], last_surfaced=None,
+                   surfaced_verified_max=date(2026, 4, 1), surfaced_max_tier=3,
+                   arxiv_versions=kw.get("arxiv_versions", {"2604.00001": 1}),
+                   surfaced_arxiv_versions=kw.get("surfaced_arxiv_versions", {"2604.00001": 1}))
+        s.resurged_at = kw.get("resurged_at")
+        s.surfaced_resurged_at = kw.get("surfaced_resurged_at")
+        s._today_competitors = kw.get("today_competitors", 0)
+        return s
+
+    def test_not_old_returns_false(self) -> None:
+        # Fresh story (gate_date within max_age) is never a resurge candidate.
+        ev = _ev("fresh", added_at="2026-06-02", source_tier=3, verified_first_date="2026-06-02")
+        s = _story([ev], last_surfaced=None, surfaced_verified_max=date(2026, 6, 2))
+        s.resurged_at = None
+        s.surfaced_resurged_at = None
+        s._today_competitors = 9
+        self.assertFalse(novelty.resurge(
+            s, max_age_days=14, run_date=date(2026, 6, 3),
+            min_competitors=3, cooldown_days=7,
+            competitor_count_fn=lambda story: story._today_competitors))
+
+    def test_r1_version_jump_is_true(self) -> None:
+        s = self._old_story(arxiv_versions={"2604.00001": 4},
+                            surfaced_arxiv_versions={"2604.00001": 3})
+        self.assertTrue(novelty.resurge(
+            s, max_age_days=14, run_date=date(2026, 6, 3),
+            min_competitors=3, cooldown_days=7,
+            competitor_count_fn=lambda story: 0))
+
+    def test_r2_competitors_fresh_cooldown_is_true(self) -> None:
+        s = self._old_story(surfaced_resurged_at=None, today_competitors=3)
+        self.assertTrue(novelty.resurge(
+            s, max_age_days=14, run_date=date(2026, 6, 3),
+            min_competitors=3, cooldown_days=7,
+            competitor_count_fn=lambda story: story._today_competitors))
+
+    def test_r2_below_min_competitors_is_false(self) -> None:
+        s = self._old_story(surfaced_resurged_at=None, today_competitors=2)
+        self.assertFalse(novelty.resurge(
+            s, max_age_days=14, run_date=date(2026, 6, 3),
+            min_competitors=3, cooldown_days=7,
+            competitor_count_fn=lambda story: story._today_competitors))
+
+    def test_r2_within_cooldown_is_false_then_true_after(self) -> None:
+        # Same group of competitors re-surfaces day after day → cooldown fires ONCE.
+        s = self._old_story(surfaced_resurged_at=date(2026, 6, 1), today_competitors=4)
+        # 2 days later, cooldown_days=7 → still within cooldown → False
+        self.assertFalse(novelty.resurge(
+            s, max_age_days=14, run_date=date(2026, 6, 3),
+            min_competitors=3, cooldown_days=7,
+            competitor_count_fn=lambda story: story._today_competitors))
+        # 8 days later → cooldown elapsed → True
+        self.assertTrue(novelty.resurge(
+            s, max_age_days=14, run_date=date(2026, 6, 9),
+            min_competitors=3, cooldown_days=7,
+            competitor_count_fn=lambda story: story._today_competitors))

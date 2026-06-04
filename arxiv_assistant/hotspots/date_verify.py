@@ -29,6 +29,11 @@ _ARXIV_API = "http://export.arxiv.org/api/query?id_list={id}&max_results=1"
 _CROSSREF_API = "https://api.crossref.org/works/{doi}"
 _VERSION_SUFFIX = re.compile(r"v\d+$")
 
+# Task 6: batched version-count read (§B.4.1)
+_ARXIV_BATCH_API = "http://export.arxiv.org/api/query?id_list={ids}&max_results={n}"
+_ABS_ID = re.compile(r"abs/(?P<id>\d{4}\.\d{4,5})v(?P<ver>\d+)")
+_BATCH_SIZE = 100
+
 _GITHUB_TREND_SOURCE = "github_trend"
 
 # Tier-0 confidence when at least one authoritative anchor was found.
@@ -234,3 +239,39 @@ def verify(item, store, *, will_be_featured: bool = False) -> dict:
     # --- 5. Persist (write-once; no-op if already frozen) ---
     store.put_verdict(content_hash, verdict)
     return verdict
+
+
+# ---------------------------------------------------------------------------
+# Task 6: poll_arxiv_versions — batched version-count read (§B.4.1 / §2.5)
+# ---------------------------------------------------------------------------
+
+
+def poll_arxiv_versions(arxiv_ids: list[str]) -> dict[str, int]:
+    """Return {bare_arxiv_id: latest_version_count} via batched id_list reads (§B.4.1).
+
+    Cheap deterministic Tier-0 read; <=100 ids/call. NEVER writes date_verdicts and
+    NEVER changes verified_first_date (INV3). The monotonic max-merge into
+    Story.arxiv_versions is Stage 3. Network/parse failures yield {} (caller keeps
+    old counts), per the degrade-not-block policy (§B.4.1).
+    """
+    bare_ids = list(dict.fromkeys(s for i in arxiv_ids if (s := _strip_version(i))))
+    if not bare_ids:
+        return {}
+
+    counts: dict[str, int] = {}
+    for start in range(0, len(bare_ids), _BATCH_SIZE):
+        batch = bare_ids[start:start + _BATCH_SIZE]
+        url = _ARXIV_BATCH_API.format(ids=",".join(batch), n=len(batch))
+        try:
+            xml = fetch_text(url)
+            root = ElementTree.fromstring(xml)
+        except Exception:
+            continue
+        for entry in root.findall(f"{_ATOM_NS}entry"):
+            id_el = entry.find(f"{_ATOM_NS}id")
+            if id_el is None or not id_el.text:
+                continue
+            match = _ABS_ID.search(id_el.text)
+            if match:
+                counts[match.group("id")] = int(match.group("ver"))
+    return counts

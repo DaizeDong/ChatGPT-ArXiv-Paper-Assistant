@@ -7,6 +7,7 @@ from arxiv_assistant.hotspots.date_verify import (
     _content_hash,
     _fetch_arxiv_v1_date,
     _fetch_crossref_date,
+    poll_arxiv_versions,
     verify,
 )
 from arxiv_assistant.utils.hotspot.hotspot_schema import HotspotItem
@@ -239,6 +240,66 @@ class TestVerify(unittest.TestCase):
         cached = store.get_verdict("arxiv:2301.00001")
         self.assertIsNotNone(cached)
         self.assertEqual(cached["verified_first_date"], "2023-01-02T18:00:00Z")
+
+
+# ---------------------------------------------------------------------------
+# Task 6: poll_arxiv_versions — batched version-count read (INV3 decoupled)
+# ---------------------------------------------------------------------------
+
+_VERSIONS_ATOM = """<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <entry><id>http://arxiv.org/abs/2301.00001v3</id></entry>
+  <entry><id>http://arxiv.org/abs/2302.00002v1</id></entry>
+</feed>"""
+
+
+class TestPollArxivVersions(unittest.TestCase):
+    @patch("arxiv_assistant.hotspots.date_verify.fetch_text")
+    def test_parses_version_counts(self, mock_fetch) -> None:
+        mock_fetch.return_value = _VERSIONS_ATOM
+        result = poll_arxiv_versions(["2301.00001", "2302.00002"])
+        self.assertEqual(result, {"2301.00001": 3, "2302.00002": 1})
+
+    @patch("arxiv_assistant.hotspots.date_verify.fetch_text")
+    def test_empty_input_no_fetch(self, mock_fetch) -> None:
+        self.assertEqual(poll_arxiv_versions([]), {})
+        mock_fetch.assert_not_called()
+
+    @patch("arxiv_assistant.hotspots.date_verify.fetch_text", side_effect=RuntimeError("net"))
+    def test_network_error_returns_empty(self, _m) -> None:
+        self.assertEqual(poll_arxiv_versions(["2301.00001"]), {})
+
+    @patch("arxiv_assistant.hotspots.date_verify.fetch_text")
+    def test_dedups_ids_in_query(self, mock_fetch) -> None:
+        mock_fetch.return_value = _VERSIONS_ATOM
+        poll_arxiv_versions(["2301.00001v2", "2301.00001"])  # same bare id twice
+        called_url = mock_fetch.call_args[0][0]
+        self.assertEqual(called_url.split("id_list=")[-1].split("&")[0], "2301.00001")
+
+    @patch("arxiv_assistant.hotspots.date_verify.fetch_text")
+    def test_batching_splits_large_input(self, mock_fetch) -> None:
+        """More than 100 ids must produce multiple fetch_text calls (<=100 per batch)."""
+        mock_fetch.return_value = _VERSIONS_ATOM
+        ids = [f"23{i:02d}.{j:05d}" for i in range(10) for j in range(11)]  # 110 ids
+        poll_arxiv_versions(ids)
+        self.assertEqual(mock_fetch.call_count, 2)  # batch 1: 100, batch 2: 10
+
+    @patch("arxiv_assistant.hotspots.date_verify.fetch_text")
+    def test_inv3_no_verdict_write(self, mock_fetch) -> None:
+        """poll_arxiv_versions must NEVER touch date_verdicts or put_verdict (INV3).
+
+        The structural guarantee is that the function has no `store` parameter and so
+        cannot write a verdict. We assert the signature directly (guards against a future
+        refactor accidentally threading a store in), plus that it returns plain counts.
+        """
+        import inspect
+
+        params = inspect.signature(poll_arxiv_versions).parameters
+        self.assertEqual(list(params), ["arxiv_ids"])  # no `store` param → cannot freeze
+
+        mock_fetch.return_value = _VERSIONS_ATOM
+        result = poll_arxiv_versions(["2301.00001", "2302.00002"])
+        self.assertEqual(result, {"2301.00001": 3, "2302.00002": 1})
 
 
 if __name__ == "__main__":

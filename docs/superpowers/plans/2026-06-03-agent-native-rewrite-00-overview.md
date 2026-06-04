@@ -163,7 +163,7 @@ EMBED_MODEL_ID = "..."                                   # pinned, stored on eac
 def embed_text(text: str) -> list[float]: ...
 def cosine(a: list[float], b: list[float]) -> float: ...
 # dedup.py
-def cluster_intraday(items: list[EnrichedItem]) -> list[Story]: ...     # L0 exact + L1 semantic (cosine>0.90)
+def cluster_intraday(items: list[EnrichedItem]) -> list[Story]: ...     # L0 exact + L1 semantic (cosine>0.72)
 def match_crossday(today: list[Story], store: StoryStore, *, cosine_threshold: float,
                    window_days: int, as_of: date) -> list[Story]: ...    # L2: assigns persistent ids, NEW/ONGOING
 ```

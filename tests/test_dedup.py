@@ -137,23 +137,48 @@ class TestClusterIntraday(unittest.TestCase):
         vec = embed.embed_text("hello world")
         self.assertEqual(len(vec), 768, f"Expected dim 768, got {len(vec)}")
 
-    def test_zh_en_real_merge(self) -> None:
-        """Real-embedding POSITIVE: zh/en same-event pair merges at threshold 0.72.
+    def test_l1_crosslingual_merge_beyond_l0(self) -> None:
+        """Real-embedding POSITIVE: L1 semantic merge isolates cross-lingual zh/en same-event.
 
-        Uses paraphrase-multilingual-mpnet-base-v2 (cached).  The pair
-        'OpenAI releases GPT-5' / 'OpenAI 发布 GPT-5' is expected to score ~0.98.
-        If it doesn't cross 0.72 we STOP and report the measured value.
+        Pair: 'Google unveils Gemini 3' / '谷歌发布 Gemini 3'.
+        Empirically verified 2026-06: group_into_stories returns 2 separate stories
+        (L0 SequenceMatcher does NOT fire — no shared Latin tokens beyond 'Gemini 3'
+        which is only a 2-token proper noun and Jaccard/containment thresholds not met),
+        while mpnet cosine ~0.979 >> 0.72 threshold so L1 merges them.
+
+        The fixture uses EMPTY entities so Pass 3 entity-merge cannot fire,
+        and distinct canonical_urls with no shared arxiv_id so Pass 2 cannot fire.
+        Asserts BOTH:
+          (a) group_into_stories([en, zh]) == 2  (L0 keeps them apart)
+          (b) cluster_intraday([en, zh]) == 1    (L1 merges them)
+        This proves the merge is done by L1, not L0.
+
+        Uses paraphrase-multilingual-mpnet-base-v2 (cached). If cosine unexpectedly
+        drops below 0.72, or L0 unexpectedly fires, we STOP and report.
         """
-        en = _enriched("OpenAI releases GPT-5", "https://openai.com/gpt5")
-        zh = _enriched("OpenAI 发布 GPT-5", "https://zh.example.com/gpt5")
+        en = _enriched(
+            "Google unveils Gemini 3", "https://google.com/gemini3",
+            entities=[],  # empty — disable Pass 3 entity-merge
+        )
+        zh = _enriched(
+            "谷歌发布 Gemini 3", "https://zh.example.com/gemini3",
+            entities=[],  # empty — disable Pass 3 entity-merge
+        )
 
-        stories = dedup.cluster_intraday([en, zh])
+        # (a) Verify L0 keeps them apart.
+        from arxiv_assistant.hotspots.story import group_into_stories as _l0
+        l0_count = len(_l0([en, zh]))
+        if l0_count != 2:
+            self.fail(
+                f"STOP: group_into_stories merged the Gemini-3 zh/en pair at L0 "
+                f"(got {l0_count} stories). L0 fired unexpectedly; pick a different pair."
+            )
 
-        # Measure and report the cosine for transparency.
-        vec_en = dedup._normalize(embed.embed_text("OpenAI releases GPT-5. "))
-        vec_zh = dedup._normalize(embed.embed_text("OpenAI 发布 GPT-5. "))
+        # Measure cosine for transparency.
+        vec_en = dedup._normalize(embed.embed_text("Google unveils Gemini 3. "))
+        vec_zh = dedup._normalize(embed.embed_text("谷歌发布 Gemini 3. "))
         cosine_val = embed.cosine(vec_en, vec_zh)
-        print(f"\n[test_zh_en_real_merge] cosine(en, zh)={cosine_val:.4f}  threshold=0.72")
+        print(f"\n[test_l1_crosslingual_merge_beyond_l0] cosine(en, zh)={cosine_val:.4f}  threshold=0.72")
 
         if cosine_val < 0.72:
             self.fail(
@@ -162,10 +187,16 @@ class TestClusterIntraday(unittest.TestCase):
                 f"Do not fake — investigate the model or pair."
             )
 
+        # (b) Verify L1 merges them.
+        stories = dedup.cluster_intraday([en, zh])
+        self.assertEqual(
+            l0_count, 2,
+            "L0 must keep the pair separate (this is the isolation guarantee).",
+        )
         self.assertEqual(
             len(stories), 1,
-            f"Expected 1 merged story for zh/en same-event pair "
-            f"(cosine={cosine_val:.4f}), got {len(stories)}",
+            f"Expected 1 merged story: L1 semantic (cosine={cosine_val:.4f} > 0.72) "
+            f"should merge what L0 kept apart; got {len(stories)}.",
         )
 
     def test_gpt5_sora2_no_merge(self) -> None:

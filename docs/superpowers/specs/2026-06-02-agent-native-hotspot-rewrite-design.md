@@ -198,12 +198,12 @@ gate_date(item) := floor_to_utc_day( min( credible_dates(item) ) )
 ### C.1 三层去重
 
 - **L0 intra-day exact（确定性，零成本）**：`canonicalize_url` 归一 + MinHash/Jaccard(标题) 合并近重复（复用现有逻辑）。
-- **L1 semantic + 跨语言（确定性 + 嵌入）**：多语言 Matryoshka 句向量(title+lede)。cosine **>0.90 自动合并**（empirically calibrated 2026-06: mpnet-base-v2 @ 0.72; the 0.90 figure was pre-measurement）；中英 `_zh` 同空间编码，同事件中英对 cosine 仍 >0.9 → 合并为一 story。
+- **L1 semantic + 跨语言（确定性 + 嵌入）**：多语言 Matryoshka 句向量(title+lede)。cosine **>0.72 自动合并**（calibrated 2026-06, mpnet-base-v2; was 0.90 pre-measurement）；中英 `_zh` 同空间编码，同事件中英对 cosine 仍 >0.72 → 合并为一 story。
 - **L2 cross-day 持久匹配（治本）**：当日每个存活簇 vs 滚动窗口(14d)内活跃 story 质心做匹配。
 
 ### C.2 跨天匹配的两处必须钉死的细节
 
-1. **匹配条件用"质心为主，URL-Jaccard 为辅/加权"，绝不用 AND**。规则：`cosine>=0.90` 即归并；URL-Jaccard 高只作**加分确认**，不作必要条件。
+1. **匹配条件用"质心为主，URL-Jaccard 为辅/加权"，绝不用 AND**。规则：`cosine>=0.72` 即归并；URL-Jaccard 高只作**加分确认**，不作必要条件。
 2. **intra-day→story 反收敛**：单一真实事件当日可能裂成 2-3 个簇。必须先把当日簇内部对同一既有 story 的多个匹配**合并指向同一 story_id**，再决定 NEW/ONGOING，否则质心库会为一个事件 accrete 出重复 story。
 
 ### C.3 跨天呈现：确定性 Novelty Gate

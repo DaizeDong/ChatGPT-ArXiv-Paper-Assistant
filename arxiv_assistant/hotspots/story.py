@@ -292,10 +292,22 @@ def group_into_stories(enriched_items: list[EnrichedItem]) -> list[Story]:
     return stories
 
 
-def score_stories(stories: list[Story]) -> list[Story]:
-    """Score stories using 5-factor formula with dynamic normalization."""
+def score_stories(stories: list[Story], *, run_date: date | None = None) -> list[Story]:
+    """Score stories using 5-factor formula with dynamic normalization.
+
+    Determinism (spec §G.9 / INV2): the freshness/gravity term is computed against
+    ``run_date`` (the deterministic run day). When ``run_date`` is None it falls
+    back to ``datetime.now(UTC).date()`` for backward compatibility with legacy
+    callers, but that path is NOT bit-stable across wall-clock day boundaries. The
+    Kernel always passes the target run date so two replays of the same frozen raw
+    input produce byte-identical scores (replay-diff bit-stability gate).
+    """
     if not stories:
         return stories
+
+    # Deterministic run day: prefer the caller-supplied run_date (the frozen
+    # target date) over wall-clock now() so replays are bit-stable (§G.9).
+    run_day = run_date if run_date is not None else datetime.now(UTC).date()
 
     # First pass: compute raw scores
     raw_scores: list[float] = []
@@ -315,8 +327,8 @@ def score_stories(stories: list[Story]) -> list[Story]:
         if story.event_type == "opinion" and story.entity_names & KEY_FIGURES:
             event_weight = 1.2
 
-        # Gravity from the day-granular gate_date (verified first date), not now().
-        run_day = datetime.now(UTC).date()
+        # Gravity from the day-granular gate_date (verified first date), measured
+        # against the deterministic run_day computed above (not a fresh now()).
         gate_days = [gate_date(ei.item) for ei in story.items]
         gate_days = [d for d in gate_days if d is not None]
         # min = earliest credible date = most pessimistic (anti-manipulation); a story

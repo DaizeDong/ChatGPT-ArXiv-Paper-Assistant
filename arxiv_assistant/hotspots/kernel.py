@@ -294,6 +294,13 @@ def _stage_score(ctx: KernelContext) -> dict[str, Any]:
     cfg = ctx.config["HOTSPOTS"]
     items = _items_from(ctx, "gapfill")
 
+    # Deterministic run day (spec §G.9 / INV2): score_stories' freshness/gravity
+    # term must be measured against the frozen target date, NOT wall-clock now().
+    # Otherwise two replays of the same raw input that straddle a UTC day boundary
+    # produce different scores → different select_and_categorize output → the
+    # replay-diff bit-stability gate flakes. Thread the target run day through.
+    run_day = ctx.target_date.astimezone(timezone.utc).date()
+
     try:
         from arxiv_assistant.hotspots.dedup import (  # type: ignore[import]
             classify_cross_day,
@@ -308,7 +315,7 @@ def _stage_score(ctx: KernelContext) -> dict[str, Any]:
     except ImportError:
         # Naive fallback ONLY when the dedup stack is unavailable (FIX 3).
         enriched = _enrich(ctx, items)
-        stories = score_stories(group_into_stories(enriched))
+        stories = score_stories(group_into_stories(enriched), run_date=run_day)
         featured_stories, watchlist_stories, _ = select_and_categorize(
             stories,
             target_featured=cfg.getint("target_topics", fallback=5),
@@ -355,11 +362,11 @@ def _stage_score(ctx: KernelContext) -> dict[str, Any]:
         )
         for s in matched:
             s.cross_day_status = classify_cross_day(s)
-        stories = score_stories(matched)
+        stories = score_stories(matched, run_date=run_day)
         featured_eligible_scored = [s for s in stories if s.cross_day_status != "ONGOING"]
     else:
         # Step 4 (degraded, store=None): headline penalty fallback
-        stories = score_stories(intraday)
+        stories = score_stories(intraday, run_date=run_day)
         if recent_headlines:
             stories = apply_cross_day_penalty(stories, recent_headlines)
         featured_eligible_scored = stories

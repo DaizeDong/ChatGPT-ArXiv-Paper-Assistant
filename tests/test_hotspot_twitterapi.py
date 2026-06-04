@@ -225,7 +225,9 @@ class TestHotspotTwitterapiSource(unittest.TestCase):
         # target_date at noon so the 10:00Z tweet falls inside window [target-24h, target+6h].
         with tempfile.TemporaryDirectory() as tmp_dir, \
                 patch.dict(os.environ, {"TWITTERAPI_IO_KEY": "test-key"}, clear=True), \
-                patch.object(mod, "_twitterapi_get", side_effect=self._fake_twitterapi_get):
+                patch.object(mod, "_twitterapi_get", side_effect=self._fake_twitterapi_get), \
+                patch("arxiv_assistant.utils.hotspot.x_authority_registry.fetch_text", return_value=""), \
+                patch("arxiv_assistant.utils.hotspot.x_authority_registry.fetch_json", return_value={}):
             seed_path = self._seed_file(tmp_dir)
             items = mod.fetch_hotspot_items(
                 datetime(2026, 3, 21, 12, 0, tzinfo=UTC),
@@ -263,7 +265,9 @@ class TestHotspotTwitterapiSource(unittest.TestCase):
 
         with tempfile.TemporaryDirectory() as tmp_dir, \
                 patch.dict(os.environ, {"TWITTERAPI_IO_KEY": "test-key"}, clear=True), \
-                patch.object(mod, "_twitterapi_get", side_effect=_stale_get):
+                patch.object(mod, "_twitterapi_get", side_effect=_stale_get), \
+                patch("arxiv_assistant.utils.hotspot.x_authority_registry.fetch_text", return_value=""), \
+                patch("arxiv_assistant.utils.hotspot.x_authority_registry.fetch_json", return_value={}):
             seed_path = self._seed_file(tmp_dir)
             items = mod.fetch_hotspot_items(
                 datetime(2026, 3, 21, 12, 0, tzinfo=UTC),
@@ -278,7 +282,9 @@ class TestHotspotTwitterapiSource(unittest.TestCase):
 
         with tempfile.TemporaryDirectory() as tmp_dir, \
                 patch.dict(os.environ, {"TWITTERAPI_IO_KEY": "test-key"}, clear=True), \
-                patch.object(mod, "_twitterapi_get", return_value={"tweets": []}):
+                patch.object(mod, "_twitterapi_get", return_value={"tweets": []}), \
+                patch("arxiv_assistant.utils.hotspot.x_authority_registry.fetch_text", return_value=""), \
+                patch("arxiv_assistant.utils.hotspot.x_authority_registry.fetch_json", return_value={}):
             seed_path = self._seed_file(tmp_dir)
             items = mod.fetch_hotspot_items(
                 datetime(2026, 3, 21, 12, 0, tzinfo=UTC),
@@ -367,7 +373,9 @@ class TestHotspotTwitterapiSource(unittest.TestCase):
 
         with tempfile.TemporaryDirectory() as tmp_dir, \
                 patch.dict(os.environ, {"TWITTERAPI_IO_KEY": "test-key"}, clear=True), \
-                patch.object(mod, "_twitterapi_get", side_effect=self._fake_three_account_get):
+                patch.object(mod, "_twitterapi_get", side_effect=self._fake_three_account_get), \
+                patch("arxiv_assistant.utils.hotspot.x_authority_registry.fetch_text", return_value=""), \
+                patch("arxiv_assistant.utils.hotspot.x_authority_registry.fetch_json", return_value={}):
             seed_path = self._seed_file_three_accounts(tmp_dir)
             items = mod.fetch_hotspot_items(
                 datetime(2026, 3, 21, 12, 0, tzinfo=UTC),
@@ -401,7 +409,9 @@ class TestHotspotTwitterapiSource(unittest.TestCase):
 
         with tempfile.TemporaryDirectory() as tmp_dir, \
                 patch.dict(os.environ, {"TWITTERAPI_IO_KEY": "test-key"}, clear=True), \
-                patch.object(mod, "_twitterapi_get", side_effect=_fault_tolerant_get):
+                patch.object(mod, "_twitterapi_get", side_effect=_fault_tolerant_get), \
+                patch("arxiv_assistant.utils.hotspot.x_authority_registry.fetch_text", return_value=""), \
+                patch("arxiv_assistant.utils.hotspot.x_authority_registry.fetch_json", return_value={}):
             seed_path = self._seed_file_three_accounts(tmp_dir)
             items = mod.fetch_hotspot_items(
                 datetime(2026, 3, 21, 12, 0, tzinfo=UTC),
@@ -445,7 +455,9 @@ class TestHotspotTwitterapiSource(unittest.TestCase):
 
         with tempfile.TemporaryDirectory() as tmp_dir, \
                 patch.dict(os.environ, {"TWITTERAPI_IO_KEY": "test-key"}, clear=True), \
-                patch.object(mod, "_twitterapi_get", side_effect=_dedup_get):
+                patch.object(mod, "_twitterapi_get", side_effect=_dedup_get), \
+                patch("arxiv_assistant.utils.hotspot.x_authority_registry.fetch_text", return_value=""), \
+                patch("arxiv_assistant.utils.hotspot.x_authority_registry.fetch_json", return_value={}):
             seed_path = Path(tmp_dir) / "x_seeds_dedup.json"
             seed_path.write_text(
                 json.dumps(
@@ -477,7 +489,9 @@ class TestHotspotTwitterapiSource(unittest.TestCase):
 
         with tempfile.TemporaryDirectory() as tmp_dir, \
                 patch.dict(os.environ, {"TWITTERAPI_IO_KEY": "test-key"}, clear=True), \
-                patch.object(mod, "_twitterapi_get", side_effect=self._fake_three_account_get):
+                patch.object(mod, "_twitterapi_get", side_effect=self._fake_three_account_get), \
+                patch("arxiv_assistant.utils.hotspot.x_authority_registry.fetch_text", return_value=""), \
+                patch("arxiv_assistant.utils.hotspot.x_authority_registry.fetch_json", return_value={}):
             seed_path = self._seed_file_three_accounts(tmp_dir)
             items = mod.fetch_hotspot_items(
                 datetime(2026, 3, 21, 12, 0, tzinfo=UTC),

@@ -450,6 +450,212 @@ class TestResurgenceWebData(unittest.TestCase):
 from arxiv_assistant.renderers.hotspot.render_hot_daily import render_hot_daily_md
 
 
+# ---------------------------------------------------------------------------
+# Stage 6 Batch F0: TestKernelCrossDayParity
+# E2E regression guard: _stage_score must suppress ONGOING stories, just like
+# the legacy generate_daily_hotspot_report (pipeline.py:1769-1784).
+# ---------------------------------------------------------------------------
+
+class TestKernelCrossDayParity(unittest.TestCase):
+    """Verify that kernel._stage_score suppresses ONGOING cross-day stories.
+
+    Design note: cluster_intraday is mocked to return a Story with a
+    pre-set centroid matching the store-seeded story. This bypasses the
+    mpnet model load (which would make the test slow and require network
+    access) while still exercising the REAL match_crossday → classify_cross_day
+    → ONGOING suppression path inside _stage_score. The mock is applied at the
+    dedup module level (where kernel imports from) so _stage_score's import
+    resolves to the mock. record_surface must NOT be called for the ONGOING
+    story (it is filtered before featured_stories is built).
+    """
+
+    def _config(self) -> configparser.ConfigParser:
+        cfg = configparser.ConfigParser()
+        cfg["HOTSPOTS"] = {
+            "enabled": "true",
+            "mode": "heuristic",
+            "target_topics": "5",
+            "target_watchlist_topics": "3",
+            "max_topics_per_category": "4",
+            "cross_day_cosine_threshold": "0.85",
+            "cross_day_window_days": "14",
+        }
+        return cfg
+
+    @staticmethod
+    def _open_store(tmp_dir: str):
+        from arxiv_assistant.hotspots.store import StoryStore
+        from pathlib import Path
+        db_path = Path(tmp_dir) / "hot" / "state" / "story_store.sqlite"
+        return StoryStore(db_path)
+
+    @staticmethod
+    def _make_story_with_centroid(
+        story_id: str,
+        title: str,
+        url: str,
+        centroid: list,
+        entity_names: set,
+        status: str = "NEW",
+        first_seen: str = "2026-04-10",
+    ):
+        """Build a Story with a pre-set centroid (bypasses mpnet embedding)."""
+        from arxiv_assistant.hotspots.enrich import EnrichedItem
+        from arxiv_assistant.hotspots.story import Story
+
+        item = HotspotItem(
+            source_id="official_news",
+            source_name="TestSource",
+            source_role="official_news",
+            source_type="official_blog",
+            title=title,
+            summary=f"Summary of {title}.",
+            url=url,
+            canonical_url=url,
+            published_at="2026-04-10T12:00:00+00:00",
+            metadata={},
+        )
+        item.verified_first_date = "2026-04-10T00:00:00+00:00"
+        ei = EnrichedItem(
+            item=item,
+            event_type="product_release",
+            entities=[{"name": e} for e in entity_names],
+            summary=item.summary,
+            importance=8,
+        )
+        story = Story(
+            story_id=story_id,
+            canonical_item=ei,
+            items=[ei],
+            event_type="product_release",
+            entity_names=set(entity_names),
+            score=7.0,
+        )
+        story.centroid = list(centroid)
+        story.centroid_model_id = "test-model"
+        story.status = status
+        story.first_seen = first_seen
+        story.headline = title
+        story.summary = item.summary
+        return story
+
+    def test_ongoing_story_suppressed_through_kernel_stage_score(self) -> None:
+        """Day N story featured → day N+1 kernel._stage_score excludes ONGOING from featured.
+
+        The test mocks cluster_intraday to avoid loading the mpnet model while
+        still exercising the real match_crossday + classify_cross_day +
+        record_surface suppression path inside _stage_score.
+        """
+        from datetime import date as _date
+        from arxiv_assistant.hotspots.dedup import match_crossday, classify_cross_day
+
+        with tempfile.TemporaryDirectory() as tmp:
+            store = self._open_store(tmp)
+            try:
+                day_n = _date(2026, 4, 10)
+                day_n1 = _date(2026, 4, 11)
+
+                # Day N: seed the story as featured in the store.
+                centroid = [1.0, 0.0, 0.0]
+                story_n = self._make_story_with_centroid(
+                    "story-abc",
+                    "OpenAI Launches GPT-Next",
+                    "https://openai.com/gpt-next",
+                    centroid=centroid,
+                    entity_names={"openai"},
+                    status="NEW",
+                    first_seen=day_n.isoformat(),
+                )
+                persisted, is_new = store.match_or_create(
+                    story_n.centroid, story_n,
+                    cosine_threshold=0.85, window_days=14, as_of=day_n,
+                )
+                self.assertTrue(is_new)
+                store.record_surface(persisted, day_n.isoformat(), lane="featured")
+
+                # Day N+1: write a gapfill checkpoint with the same-URL item.
+                # cluster_intraday is mocked to return a story with the exact
+                # same centroid so match_crossday can do a deterministic L2 match
+                # without loading mpnet.
+                root = Path(tmp)
+                td = datetime(2026, 4, 11, tzinfo=timezone.utc)
+                item_n1 = HotspotItem(
+                    source_id="official_news",
+                    source_name="TestSource",
+                    source_role="official_news",
+                    source_type="official_blog",
+                    title="OpenAI Launches GPT-Next",
+                    summary="Same story, second day.",
+                    url="https://openai.com/gpt-next",
+                    canonical_url="https://openai.com/gpt-next",
+                    published_at="2026-04-11T12:00:00+00:00",
+                    metadata={},
+                )
+                kernel._write_checkpoint(root, td, "gapfill", {
+                    "items": [kernel._serialize_item(item_n1)],
+                })
+
+                # The story returned by cluster_intraday carries the same
+                # centroid as the seeded story; same entity_names (no new entity
+                # → T3 will NOT fire → ONGOING, not RESURFACE).
+                story_n1 = self._make_story_with_centroid(
+                    "story-xyz",
+                    "OpenAI Launches GPT-Next",
+                    "https://openai.com/gpt-next",
+                    centroid=centroid,
+                    entity_names={"openai"},
+                    status="NEW",
+                    first_seen=day_n1.isoformat(),
+                )
+
+                # Track record_surface calls; wrap the real implementation.
+                surfaced_lanes: list[str] = []
+                original_record_surface = store.record_surface
+
+                def tracking_record_surface(story, run_date, *, lane="featured"):
+                    surfaced_lanes.append(lane)
+                    return original_record_surface(story, run_date, lane=lane)
+
+                store.record_surface = tracking_record_surface
+
+                cfg = self._config()
+                ctx = kernel.KernelContext(
+                    output_root=root,
+                    target_date=td,
+                    config=cfg,
+                    store=store,
+                    journal=[],
+                )
+
+                # Mock cluster_intraday (in dedup module) to bypass mpnet; the
+                # rest of the Stage-2 path (match_crossday, classify_cross_day,
+                # record_surface suppression) runs for real.
+                import arxiv_assistant.hotspots.dedup as _dedup_mod
+                with unittest.mock.patch.object(
+                    _dedup_mod, "cluster_intraday", return_value=[story_n1]
+                ):
+                    payload = kernel._stage_score(ctx)
+
+                featured_ids = {t.get("TOPIC_ID") for t in payload["featured"]}
+
+                # The ONGOING story must NOT appear in featured output.
+                self.assertNotIn(
+                    persisted.story_id,
+                    featured_ids,
+                    "ONGOING story must be suppressed from kernel._stage_score featured output",
+                )
+
+                # record_surface must NOT have been called with lane="featured"
+                # for the ONGOING story (it is filtered before selection).
+                self.assertEqual(
+                    surfaced_lanes.count("featured"), 0,
+                    "record_surface(lane='featured') must NOT be called for an ONGOING story",
+                )
+
+            finally:
+                store.close()
+
+
 class TestResurgenceMarkdown(unittest.TestCase):
     def _base_report(self) -> dict:
         return {

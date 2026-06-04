@@ -288,6 +288,207 @@ class TestHotspotTwitterapiSource(unittest.TestCase):
             )
         self.assertEqual(items, [])
 
+    # -----------------------------------------------------------------------
+    # Task 4 additional: multi-account iteration, fault tolerance, dedup, limit
+    # -----------------------------------------------------------------------
+
+    def _seed_file_three_accounts(self, tmp_dir: str) -> Path:
+        """Seed with 3 official accounts so we can test multi-account paths."""
+        seed_path = Path(tmp_dir) / "x_seeds_3.json"
+        seed_path.write_text(
+            json.dumps(
+                {
+                    "accounts": [
+                        {"handle": "openai", "name": "OpenAI", "kind": "official", "tier": 3, "active": True},
+                        {"handle": "anthropicai", "name": "Anthropic", "kind": "official", "tier": 3, "active": True},
+                        {"handle": "googledeepmind", "name": "Google DeepMind", "kind": "official", "tier": 3, "active": True},
+                    ]
+                }
+            ),
+            encoding="utf-8",
+        )
+        return seed_path
+
+    _ANTHROPIC_PAYLOAD = {
+        "tweets": [
+            {
+                "id": "2035012260009000001",
+                "text": "Claude 4 is now available in the API. Introducing our most capable model yet. https://t.co/anthropic1",
+                "createdAt": "Sat Mar 21 11:00:00 +0000 2026",
+                "lang": "en",
+                "inReplyToUserId": None,
+                "retweeted_tweet": None,
+                "entities": {"urls": [{"expanded_url": "https://anthropic.com/claude-4"}]},
+                "likeCount": 900,
+                "replyCount": 70,
+                "retweetCount": 120,
+                "quoteCount": 30,
+                "viewCount": 400000,
+                "bookmarkCount": 80,
+                "author": {"id": "2", "name": "Anthropic", "userName": "AnthropicAI", "isBlueVerified": True},
+            }
+        ]
+    }
+
+    _DEEPMIND_PAYLOAD = {
+        "tweets": [
+            {
+                "id": "2035012260009000002",
+                "text": "Gemini 3.0 launches today with breakthrough reasoning capabilities. https://t.co/deepmind1",
+                "createdAt": "Sat Mar 21 11:30:00 +0000 2026",
+                "lang": "en",
+                "inReplyToUserId": None,
+                "retweeted_tweet": None,
+                "entities": {"urls": [{"expanded_url": "https://deepmind.google/gemini3"}]},
+                "likeCount": 800,
+                "replyCount": 60,
+                "retweetCount": 100,
+                "quoteCount": 25,
+                "viewCount": 350000,
+                "bookmarkCount": 60,
+                "author": {"id": "4", "name": "Google DeepMind", "userName": "GoogleDeepMind", "isBlueVerified": True},
+            }
+        ]
+    }
+
+    def _fake_three_account_get(self, params, *, api_key):
+        handle = (params.get("userName") or "").lower()
+        if handle == "openai":
+            return self._OPENAI_PAYLOAD
+        if handle == "anthropicai":
+            return self._ANTHROPIC_PAYLOAD
+        if handle == "googledeepmind":
+            return self._DEEPMIND_PAYLOAD
+        return {"tweets": []}
+
+    def test_fetch_hotspot_items_multi_account_yields_items_from_each(self) -> None:
+        """Multi-account iteration: items from 3 distinct official accounts all appear."""
+        from arxiv_assistant.apis.hotspot import hotspot_twitterapi as mod
+
+        with tempfile.TemporaryDirectory() as tmp_dir, \
+                patch.dict(os.environ, {"TWITTERAPI_IO_KEY": "test-key"}, clear=True), \
+                patch.object(mod, "_twitterapi_get", side_effect=self._fake_three_account_get):
+            seed_path = self._seed_file_three_accounts(tmp_dir)
+            items = mod.fetch_hotspot_items(
+                datetime(2026, 3, 21, 12, 0, tzinfo=UTC),
+                24,
+                seed_path,
+                result_limit=80,
+                snapshot_path=Path(tmp_dir) / "x_authority_inventory.json",
+            )
+
+        urls = {item.url for item in items}
+        self.assertIn("https://x.com/openai/status/2035012260008272007", urls)
+        self.assertIn("https://x.com/anthropicai/status/2035012260009000001", urls)
+        self.assertIn("https://x.com/googledeepmind/status/2035012260009000002", urls)
+        self.assertGreaterEqual(len(items), 3)
+
+    def test_fetch_hotspot_items_per_account_fault_tolerance(self) -> None:
+        """One account raising an exception does not crash the run; other accounts still yield."""
+        from arxiv_assistant.apis.hotspot import hotspot_twitterapi as mod
+
+        call_count = {"n": 0}
+
+        def _fault_tolerant_get(params, *, api_key):
+            handle = (params.get("userName") or "").lower()
+            if handle == "anthropicai":
+                raise RuntimeError("simulated network error for anthropicai")
+            if handle == "openai":
+                return self._OPENAI_PAYLOAD
+            if handle == "googledeepmind":
+                return self._DEEPMIND_PAYLOAD
+            return {"tweets": []}
+
+        with tempfile.TemporaryDirectory() as tmp_dir, \
+                patch.dict(os.environ, {"TWITTERAPI_IO_KEY": "test-key"}, clear=True), \
+                patch.object(mod, "_twitterapi_get", side_effect=_fault_tolerant_get):
+            seed_path = self._seed_file_three_accounts(tmp_dir)
+            items = mod.fetch_hotspot_items(
+                datetime(2026, 3, 21, 12, 0, tzinfo=UTC),
+                24,
+                seed_path,
+                result_limit=80,
+                snapshot_path=Path(tmp_dir) / "x_authority_inventory.json",
+            )
+
+        urls = {item.url for item in items}
+        # openai and googledeepmind tweets must still appear despite anthropicai failing
+        self.assertIn("https://x.com/openai/status/2035012260008272007", urls)
+        self.assertIn("https://x.com/googledeepmind/status/2035012260009000002", urls)
+        # anthropicai tweet must not appear (its fetch errored)
+        self.assertNotIn("https://x.com/anthropicai/status/2035012260009000001", urls)
+
+    def test_fetch_hotspot_items_dedup_same_tweet_from_two_accounts(self) -> None:
+        """The same tweet URL returned via two different account fetches must appear exactly once.
+
+        Scenario: both openai and anthropicai fetches return the OpenAI tweet
+        (same tweet_id, same author='openai'), simulating the real-world case where a
+        tweet appears in multiple accounts' timelines (e.g. via quote-tweet or API quirk).
+        The seen_urls dedup set in _collect_timelines must prevent the duplicate.
+        """
+        from arxiv_assistant.apis.hotspot import hotspot_twitterapi as mod
+
+        # anthropicai's response also returns the OpenAI tweet (same id, same author userName=OpenAI)
+        openai_tweet_via_anthropicai = {
+            "tweets": [
+                dict(self._OPENAI_PAYLOAD["tweets"][0])  # identical tweet, including author=OpenAI
+            ]
+        }
+
+        def _dedup_get(params, *, api_key):
+            handle = (params.get("userName") or "").lower()
+            if handle == "openai":
+                return self._OPENAI_PAYLOAD
+            if handle == "anthropicai":
+                return openai_tweet_via_anthropicai  # same openai tweet surfaced via anthropicai fetch
+            return {"tweets": []}
+
+        with tempfile.TemporaryDirectory() as tmp_dir, \
+                patch.dict(os.environ, {"TWITTERAPI_IO_KEY": "test-key"}, clear=True), \
+                patch.object(mod, "_twitterapi_get", side_effect=_dedup_get):
+            seed_path = Path(tmp_dir) / "x_seeds_dedup.json"
+            seed_path.write_text(
+                json.dumps(
+                    {
+                        "accounts": [
+                            {"handle": "openai", "name": "OpenAI", "kind": "official", "tier": 3, "active": True},
+                            {"handle": "anthropicai", "name": "Anthropic", "kind": "official", "tier": 3, "active": True},
+                        ]
+                    }
+                ),
+                encoding="utf-8",
+            )
+            items = mod.fetch_hotspot_items(
+                datetime(2026, 3, 21, 12, 0, tzinfo=UTC),
+                24,
+                seed_path,
+                result_limit=80,
+                snapshot_path=Path(tmp_dir) / "x_authority_inventory.json",
+            )
+
+        # The URL https://x.com/openai/status/2035012260008272007 must appear exactly once
+        target_url = "https://x.com/openai/status/2035012260008272007"
+        matching = [item for item in items if item.url == target_url]
+        self.assertEqual(len(matching), 1, "Same tweet URL must be deduplicated to one item")
+
+    def test_fetch_hotspot_items_result_limit_is_honored(self) -> None:
+        """result_limit=1 must cap output at 1 item even when 3 accounts each have a tweet."""
+        from arxiv_assistant.apis.hotspot import hotspot_twitterapi as mod
+
+        with tempfile.TemporaryDirectory() as tmp_dir, \
+                patch.dict(os.environ, {"TWITTERAPI_IO_KEY": "test-key"}, clear=True), \
+                patch.object(mod, "_twitterapi_get", side_effect=self._fake_three_account_get):
+            seed_path = self._seed_file_three_accounts(tmp_dir)
+            items = mod.fetch_hotspot_items(
+                datetime(2026, 3, 21, 12, 0, tzinfo=UTC),
+                24,
+                seed_path,
+                result_limit=1,
+                snapshot_path=Path(tmp_dir) / "x_authority_inventory.json",
+            )
+
+        self.assertLessEqual(len(items), 1)
+
 
 if __name__ == "__main__":
     unittest.main()

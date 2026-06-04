@@ -74,15 +74,57 @@ if __name__ == "__main__":
 
     # filter papers by GPT
     if CONFIG["SELECTION"].getboolean("run_openai"):
-        selected_results, filtered_results, total_prompt_cost, total_completion_cost, total_prompt_tokens, total_completion_tokens = filter_by_gpt(
-            paper_list,
-            SYSTEM_PROMPT,
-            TOPIC_PROMPT,
-            SCORE_PROMPT,
-            POSTFIX_PROMPT_TITLE,
-            POSTFIX_PROMPT_ABSTRACT,
-            CONFIG,
-        )
+        paper_filter_mode = CONFIG["PAPER_FILTER"]["mode"].strip().lower() if CONFIG.has_section("PAPER_FILTER") else "api_only"
+
+        if paper_filter_mode == "api_only":
+            # Historical path, unchanged: single-call GPT scoring over the batch.
+            selected_results, filtered_results, total_prompt_cost, total_completion_cost, total_prompt_tokens, total_completion_tokens = filter_by_gpt(
+                paper_list,
+                SYSTEM_PROMPT,
+                TOPIC_PROMPT,
+                SCORE_PROMPT,
+                POSTFIX_PROMPT_TITLE,
+                POSTFIX_PROMPT_ABSTRACT,
+                CONFIG,
+            )
+        else:
+            from arxiv_assistant.filters.paper_filter import ApiScoreFilter, AgentFilter, cascade_filter
+            from arxiv_assistant.apis.claude_agent import judge_paper_with_agent  # subagent transport (added in this stage)
+
+            api_filter = ApiScoreFilter(
+                prompts=(SYSTEM_PROMPT, TOPIC_PROMPT, SCORE_PROMPT, POSTFIX_PROMPT_TITLE, POSTFIX_PROMPT_ABSTRACT),
+                config=CONFIG,
+            )
+            agent_filter = AgentFilter(config=CONFIG, agent_fn=judge_paper_with_agent)
+            verdicts = cascade_filter(
+                paper_list, TOPIC_PROMPT, CONFIG,
+                rule_filter=None,          # h-index pre-filter already ran above (main.py:62-71)
+                api_filter=api_filter,
+                agent_filter=agent_filter,
+            )
+            # Project verdicts back into the historical selected/filtered mappings so all
+            # downstream rendering/archival/bilingual code is untouched.
+            import dataclasses as _dc
+            from arxiv_assistant.paper_topics import ensure_topic_fields as _ensure
+            id_to_paper = {p.arxiv_id: p for p in paper_list}
+            selected_results, filtered_results = {}, {}
+            for paper, v in zip(paper_list, verdicts):
+                entry = _ensure({
+                    "ARXIVID": paper.arxiv_id,
+                    "COMMENT": v.rationale,
+                    "RELEVANCE": int(round(v.relevance)),
+                    "NOVELTY": int(round(v.novelty)),
+                    "SCORE": int(round(v.relevance)) + int(round(v.novelty)),
+                    "FILTER_EVIDENCE": v.evidence,
+                    **_dc.asdict(id_to_paper[paper.arxiv_id]),
+                }, arxiv_id=paper.arxiv_id)
+                if v.keep:
+                    selected_results[paper.arxiv_id] = entry
+                else:
+                    filtered_results[paper.arxiv_id] = entry
+            # Costs: agent runs on the subscription quota (not per-call billed), so report API costs only.
+            total_prompt_cost, total_completion_cost, total_prompt_tokens, total_completion_tokens = api_filter.last_costs[0], api_filter.last_costs[1], api_filter.last_costs[2], api_filter.last_costs[3]
+
         selected_paper_dict.update(selected_results)
         filtered_paper_dict.update(filtered_results)
 

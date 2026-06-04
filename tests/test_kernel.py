@@ -865,3 +865,36 @@ class TestStrangler(unittest.TestCase):
                 output_root=tmp, target_date=datetime(2026, 5, 20, tzinfo=timezone.utc),
                 config=cfg)
         self.assertIsNone(out)
+
+    def test_auto_mode_resolved_via_decide_mode_before_delegating(self) -> None:
+        """Regression guard: mode_override="auto" must NOT be handed to the kernel
+        literally. It must be resolved through _decide_mode (which maps "auto" →
+        "openai"/"heuristic" by OPENAI_API_KEY presence) and persisted into the
+        config the kernel reads. Otherwise _stage_synthesize/_enrich silently fall
+        through to heuristic even when an API key is present (silent quality regression)."""
+        cfg = configparser.ConfigParser()
+        cfg["HOTSPOTS"] = {"enabled": "true", "mode": "auto"}
+        captured = {}
+
+        def fake_run(output_root, target_date, config, *, stage=None, force=False):
+            # Capture the mode the kernel actually receives.
+            captured["mode"] = config["HOTSPOTS"]["mode"]
+            report_dir = Path(output_root) / "hot" / "reports"
+            report_dir.mkdir(parents=True, exist_ok=True)
+            (report_dir / "2026-05-20.json").write_text(
+                json.dumps({"date": "2026-05-20"}), encoding="utf-8")
+            return {"date": "2026-05-20"}
+
+        with tempfile.TemporaryDirectory() as tmp, \
+                unittest.mock.patch.object(hp, "kernel_run", fake_run), \
+                unittest.mock.patch.object(hp, "_decide_mode", return_value="openai") as decided:
+            hp.generate_daily_hotspot_report(
+                output_root=tmp,
+                target_date=datetime(2026, 5, 20, tzinfo=timezone.utc),
+                config=cfg, mode_override="auto", force=False)
+
+        # _decide_mode was consulted to resolve "auto"...
+        decided.assert_called_once_with("auto")
+        # ...and the RESOLVED value (not the literal "auto") is what the kernel sees.
+        self.assertEqual(captured["mode"], "openai")
+        self.assertEqual(cfg["HOTSPOTS"]["mode"], "openai")

@@ -1712,9 +1712,11 @@ def generate_daily_hotspot_report(
         return None
 
     output_root = Path(output_root)
-    # mode_override is honoured by writing it into the live config the kernel reads.
-    if mode_override and mode_override != "auto":
-        config["HOTSPOTS"]["mode"] = _decide_mode(mode_override)
+    # Resolve mode for ALL cases (including "auto") and persist it into the live
+    # config the kernel reads, so _stage_synthesize/_enrich see the resolved
+    # "openai"/"heuristic" value rather than the literal "auto" (which they treat
+    # as not-openai). Matches legacy effective_mode resolution exactly.
+    config["HOTSPOTS"]["mode"] = _decide_mode(mode_override or config["HOTSPOTS"].get("mode", "auto"))
 
     kernel_run(output_root, target_date, config, stage=stage, force=force)
 

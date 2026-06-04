@@ -285,12 +285,14 @@ def _stage_score(ctx: KernelContext) -> dict[str, Any]:
     across checkpoints (the embed/cluster/storystore_match/gapfill stages
     remain structural pass-throughs carrying HotspotItem dicts only).
 
-    Degrade-safe: if arxiv_assistant.hotspots.dedup is unavailable, falls
-    back to the naive group_into_stories + score_stories path.
+    Degrade boundary is NARROW (FIX 3): the naive group_into_stories +
+    score_stories fallback fires ONLY when the dedup stack cannot be imported
+    (ImportError). A genuine bug inside match_crossday/classify/etc. PROPAGATES
+    rather than silently degrading cross-day dedup to naive — the very
+    regression this stage exists to prevent must never become invisible.
     """
     cfg = ctx.config["HOTSPOTS"]
     items = _items_from(ctx, "gapfill")
-    enriched = _enrich(ctx, items)
 
     try:
         from arxiv_assistant.hotspots.dedup import (  # type: ignore[import]
@@ -302,81 +304,84 @@ def _stage_score(ctx: KernelContext) -> dict[str, Any]:
             _is_low_quality_story,
             _load_recent_featured_urls,
         )
-
-        # Step 1: Cross-day URL dedup (pipeline 1728-1738)
-        recent_urls, recent_headlines = _load_recent_featured_urls(
-            ctx.output_root, ctx.target_date
+        from arxiv_assistant.hotspots.story import apply_cross_day_penalty
+    except ImportError:
+        # Naive fallback ONLY when the dedup stack is unavailable (FIX 3).
+        enriched = _enrich(ctx, items)
+        stories = score_stories(group_into_stories(enriched))
+        featured_stories, watchlist_stories, _ = select_and_categorize(
+            stories,
+            target_featured=cfg.getint("target_topics", fallback=5),
+            target_watchlist=cfg.getint("target_watchlist_topics", fallback=3),
+            max_per_category=cfg.getint("max_topics_per_category", fallback=4),
         )
-        if recent_urls:
-            items_pre = len(items)
-            items = [
-                it for it in items
-                if (it.canonical_url or "") not in recent_urls
-                and (it.url or "") not in recent_urls
-            ]
-            # re-enrich after URL dedup
-            if len(items) < items_pre:
-                enriched = _enrich(ctx, items)
+        return {
+            "featured": [_story_to_topic_dict(s, keep=True) for s in featured_stories],
+            "watchlist": [_story_to_topic_dict(s, watchlist=True) for s in watchlist_stories],
+            "all_topics": [_story_to_topic_dict(s) for s in stories],
+        }
 
-        # Step 2 (already done above): enrich → enriched
+    # --- Real Stage-2 path (errors here PROPAGATE; no silent degrade) ---
 
-        # Step 3: Intraday cluster
-        l1_threshold = cfg.getfloat("cross_day_cosine_threshold", fallback=0.72)
-        intraday = cluster_intraday(enriched, threshold=l1_threshold)
-
-        store = ctx.store
-        if store is not None:
-            # Step 4 (store present): cross-day match + classify + suppress
-            crossday_threshold = cfg.getfloat("cross_day_cosine_threshold", fallback=0.90)
-            cross_day_window = cfg.getint("cross_day_window_days", fallback=14)
-            as_of = ctx.target_date.astimezone(timezone.utc).date()
-            matched = match_crossday(
-                intraday, store,
-                cosine_threshold=crossday_threshold,
-                window_days=cross_day_window,
-                as_of=as_of,
-            )
-            for s in matched:
-                s.cross_day_status = classify_cross_day(s)
-            stories = score_stories(matched)
-            featured_eligible_scored = [s for s in stories if s.cross_day_status != "ONGOING"]
-        else:
-            # Step 4 (degraded, store=None): headline penalty fallback
-            from arxiv_assistant.hotspots.story import apply_cross_day_penalty
-            stories = score_stories(intraday)
-            if recent_headlines:
-                stories = apply_cross_day_penalty(stories, recent_headlines)
-            featured_eligible_scored = stories
-
-        # Step 5: Quality filter (pipeline 1794-1799)
-        stories = [s for s in stories if not _is_low_quality_story(s)]
-        featured_eligible_scored = [
-            s for s in featured_eligible_scored if not _is_low_quality_story(s)
+    # Step 1: Cross-day URL dedup (pipeline 1728-1738)
+    recent_urls, recent_headlines = _load_recent_featured_urls(
+        ctx.output_root, ctx.target_date
+    )
+    if recent_urls:
+        items = [
+            it for it in items
+            if (it.canonical_url or "") not in recent_urls
+            and (it.url or "") not in recent_urls
         ]
 
-        # Step 6: Select & categorize (pipeline 1806-1811)
-        featured_stories, watchlist_stories, _ = select_and_categorize(
-            featured_eligible_scored,
-            target_featured=cfg.getint("target_topics", fallback=5),
-            target_watchlist=cfg.getint("target_watchlist_topics", fallback=3),
-            max_per_category=cfg.getint("max_topics_per_category", fallback=4),
+    # Step 2: Enrich — SINGLE enrich, post-dedup (FIX 2; pipeline 1746-1750)
+    enriched = _enrich(ctx, items)
+
+    # Step 3: Intraday cluster
+    l1_threshold = cfg.getfloat("cross_day_cosine_threshold", fallback=0.72)
+    intraday = cluster_intraday(enriched, threshold=l1_threshold)
+
+    store = ctx.store
+    if store is not None:
+        # Step 4 (store present): cross-day match + classify + suppress
+        crossday_threshold = cfg.getfloat("cross_day_cosine_threshold", fallback=0.90)
+        cross_day_window = cfg.getint("cross_day_window_days", fallback=14)
+        as_of = ctx.target_date.astimezone(timezone.utc).date()
+        matched = match_crossday(
+            intraday, store,
+            cosine_threshold=crossday_threshold,
+            window_days=cross_day_window,
+            as_of=as_of,
         )
-
-        # Step 7: record_surface — SINGLE-WRITER (pipeline 1817-1820)
-        if store is not None:
-            for s in featured_stories:
-                store.record_surface(s, ctx.run_date, lane="featured")
-
-    except Exception:
-        # Degrade-safe fallback: naive group_into_stories + score_stories
-        stories = score_stories(group_into_stories(enriched))
+        for s in matched:
+            s.cross_day_status = classify_cross_day(s)
+        stories = score_stories(matched)
+        featured_eligible_scored = [s for s in stories if s.cross_day_status != "ONGOING"]
+    else:
+        # Step 4 (degraded, store=None): headline penalty fallback
+        stories = score_stories(intraday)
+        if recent_headlines:
+            stories = apply_cross_day_penalty(stories, recent_headlines)
         featured_eligible_scored = stories
-        featured_stories, watchlist_stories, _ = select_and_categorize(
-            featured_eligible_scored,
-            target_featured=cfg.getint("target_topics", fallback=5),
-            target_watchlist=cfg.getint("target_watchlist_topics", fallback=3),
-            max_per_category=cfg.getint("max_topics_per_category", fallback=4),
-        )
+
+    # Step 5: Quality filter (pipeline 1794-1799)
+    stories = [s for s in stories if not _is_low_quality_story(s)]
+    featured_eligible_scored = [
+        s for s in featured_eligible_scored if not _is_low_quality_story(s)
+    ]
+
+    # Step 6: Select & categorize (pipeline 1806-1811)
+    featured_stories, watchlist_stories, _ = select_and_categorize(
+        featured_eligible_scored,
+        target_featured=cfg.getint("target_topics", fallback=5),
+        target_watchlist=cfg.getint("target_watchlist_topics", fallback=3),
+        max_per_category=cfg.getint("max_topics_per_category", fallback=4),
+    )
+
+    # Step 7: record_surface — SINGLE-WRITER (pipeline 1817-1820)
+    if store is not None:
+        for s in featured_stories:
+            store.record_surface(s, ctx.run_date, lane="featured")
 
     # Step 8: Return topic dicts
     return {

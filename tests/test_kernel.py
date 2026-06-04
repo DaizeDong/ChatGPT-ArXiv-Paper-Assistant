@@ -638,6 +638,25 @@ class TestKernelCrossDayParity(unittest.TestCase):
 
                 featured_ids = {t.get("TOPIC_ID") for t in payload["featured"]}
 
+                # NON-VACUOUS guard (FIX 1): the test seeds exactly ONE story,
+                # which is ONGOING on day N+1. The REAL Stage-2 path suppresses
+                # it → featured must be EMPTY. A naive group_into_stories revert
+                # would keep the day-N+1 story (never matched to the store's
+                # persistent id, never classified ONGOING) and feature it →
+                # len(featured) == 1, FAILING this assertion. This is the line
+                # that actually guards the cross-day-dedup regression.
+                self.assertEqual(
+                    len(payload["featured"]), 0,
+                    "The sole ONGOING story must be suppressed → featured must be "
+                    "empty (fails on naive group_into_stories revert)",
+                )
+
+                # Title/headline of the suppressed story must be absent too.
+                featured_headlines = {
+                    t.get("HEADLINE", t.get("title", "")) for t in payload["featured"]
+                }
+                self.assertNotIn("OpenAI Launches GPT-Next", featured_headlines)
+
                 # The ONGOING story must NOT appear in featured output.
                 self.assertNotIn(
                     persisted.story_id,

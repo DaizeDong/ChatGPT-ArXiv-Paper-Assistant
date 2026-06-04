@@ -445,3 +445,31 @@ class TestResurgenceWebData(unittest.TestCase):
         self.assertEqual(payload["resurgence"][0]["reason"], "arxiv_version_bump")
         self.assertEqual(payload["resurgence"][0]["original_first_date"], "2023-01-02T00:00:00Z")
         self.assertEqual(payload["meta"]["counts"]["resurgence"], 1)
+
+
+from arxiv_assistant.renderers.hotspot.render_hot_daily import render_hot_daily_md
+
+
+class TestResurgenceMarkdown(unittest.TestCase):
+    def _base_report(self) -> dict:
+        return {
+            "date": "2026-05-20", "summary": "", "source_stats": {},
+            "featured_topics": [], "category_sections": [], "long_tail_sections": [],
+            "watchlist": [], "x_buzz": [], "paper_spotlight": [],
+        }
+
+    def test_no_resurgence_section_when_empty(self) -> None:
+        md = render_hot_daily_md({**self._base_report(), "resurgence": []})
+        self.assertNotIn("## Resurgence", md)
+
+    def test_resurgence_section_renders_origin_and_reason(self) -> None:
+        report = {**self._base_report(), "resurgence": [
+            {"headline": "FooNet resurfaces with v3",
+             "original_first_date": "2023-01-02T00:00:00Z",
+             "reason": "arxiv_version_bump", "entities": ["FooNet"]},
+        ]}
+        md = render_hot_daily_md(report)
+        self.assertIn("## Resurgence", md)
+        self.assertIn("FooNet resurfaces with v3", md)
+        self.assertIn("2023-01-02", md)            # original first date shown honestly
+        self.assertIn("arxiv_version_bump", md)

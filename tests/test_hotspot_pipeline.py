@@ -286,29 +286,36 @@ class TestHotspotPipeline(unittest.TestCase):
 
     @patch("arxiv_assistant.apis.hotspot_hn.fetch_json")
     def test_hn_adapter_filters_to_ai_relevant_story(self, mock_fetch_json) -> None:
-        mock_fetch_json.side_effect = [
-            [101, 102],
-            {
-                "id": 101,
-                "type": "story",
-                "title": "OpenAI launches a new agent benchmark",
-                "score": 120,
-                "descendants": 60,
-                "time": int(datetime(2026, 3, 21, 12, tzinfo=UTC).timestamp()),
-                "url": "https://openai.com/index/new-agent-benchmark",
-                "by": "alice",
-            },
-            {
-                "id": 102,
-                "type": "story",
-                "title": "Interesting startup discussion",
-                "score": 25,
-                "descendants": 3,
-                "time": int(datetime(2026, 3, 21, 12, tzinfo=UTC).timestamp()),
-                "url": "https://example.com/startup",
-                "by": "bob",
-            },
-        ]
+        # The production code uses the Algolia search API: one fetch_json call per query in
+        # ai_queries (6 queries total), each returning {"hits": [{...story...}, ...]}.
+        # Using return_value (same dict for every call) means both hits appear on the first
+        # call; on the remaining 5 calls, objectID dedup discards them.  After dedup the
+        # filter loop sees both hits:
+        #   - "101" (score=120, comments=60, openai.com URL) → passes all filters → KEPT
+        #   - "102" (score=25 < score_cutoff=30)             → dropped by score check
+        # Result: exactly 1 item, matching all assertions below.
+        mock_fetch_json.return_value = {
+            "hits": [
+                {
+                    "objectID": "101",
+                    "title": "OpenAI launches a new agent benchmark",
+                    "points": 120,
+                    "num_comments": 60,
+                    "created_at": "2026-03-20T12:00:00.000Z",
+                    "url": "https://openai.com/index/new-agent-benchmark",
+                    "author": "alice",
+                },
+                {
+                    "objectID": "102",
+                    "title": "Interesting startup discussion",
+                    "points": 25,
+                    "num_comments": 3,
+                    "created_at": "2026-03-20T12:00:00.000Z",
+                    "url": "https://example.com/startup",
+                    "author": "bob",
+                },
+            ]
+        }
 
         items = fetch_hn_hotspot_items(
             target_date=datetime(2026, 3, 21, tzinfo=UTC),

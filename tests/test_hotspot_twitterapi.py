@@ -138,5 +138,156 @@ class TestHotspotTwitterapiSource(unittest.TestCase):
         self.assertEqual(rows[0]["id"], "2035012260008272007")
 
 
+    # -----------------------------------------------------------------------
+    # Task 3: tweet → HotspotItem normalization (provenance, source_id, fields)
+    # -----------------------------------------------------------------------
+
+    def test_tweet_to_item_sets_provenance_and_canonical_fields(self) -> None:
+        from arxiv_assistant.apis.hotspot import hotspot_twitterapi as mod
+
+        row = mod._map_twitterapi_tweet(self._OPENAI_PAYLOAD["tweets"][0], handle="openai", user_id="1")
+        authority = {"handle": "openai", "name": "OpenAI", "kind": "official", "tier": 3, "organization": "OpenAI"}
+        item = mod._tweet_to_item(row, authority=authority)
+
+        self.assertIsNotNone(item)
+        self.assertEqual(item.source_id, "x_twitterapi")
+        self.assertEqual(item.source_role, "official_news")
+        self.assertEqual(item.source_type, "tweet")
+        # URL uses authority handle (lowercase) + tweet id
+        self.assertEqual(item.url, "https://x.com/openai/status/2035012260008272007")
+        self.assertEqual(item.published_at, "2026-03-21T10:00:00Z")
+        self.assertEqual(item.metadata["provenance"], "native:x_twitterapi")
+        self.assertEqual(item.metadata["source_id"], "x_twitterapi")
+        self.assertEqual(item.metadata["authority_kind"], "official")
+        self.assertEqual(item.metadata["author_handle"], "openai")
+        self.assertGreater(item.metadata["activity"], 500)
+
+    def test_tweet_to_item_drops_replies_and_retweets(self) -> None:
+        from arxiv_assistant.apis.hotspot import hotspot_twitterapi as mod
+
+        reply = {**self._OPENAI_PAYLOAD["tweets"][0], "in_reply_to_user_id": "42"}
+        authority = {"handle": "openai", "name": "OpenAI", "kind": "official", "tier": 3}
+        # _map already ran on the raw payload above; here pass an already-canonical reply dict.
+        canonical_reply = mod._map_twitterapi_tweet(reply, handle="openai", user_id="1")
+        canonical_reply["in_reply_to_user_id"] = "42"
+        self.assertIsNone(mod._tweet_to_item(canonical_reply, authority=authority))
+
+    def test_tweet_to_item_official_release_survives_is_newsworthy_filter(self) -> None:
+        """Official 'We released GPT-5' tweets must NOT be killed by SELF_WORK_PATTERNS —
+        the official-account exemption in is_newsworthy_x_text must pass them through.
+        This is the X≈0 root-cause fix: channel (twitterapi.io) + filter-is-not-the-blocker."""
+        from arxiv_assistant.apis.hotspot import hotspot_twitterapi as mod
+
+        row = mod._map_twitterapi_tweet(self._OPENAI_PAYLOAD["tweets"][0], handle="openai", user_id="1")
+        authority = {"handle": "openai", "name": "OpenAI", "kind": "official", "tier": 3}
+        item = mod._tweet_to_item(row, authority=authority)
+        self.assertIsNotNone(item, "Official 'We released ...' tweet must survive is_newsworthy_x_text")
+        self.assertEqual(item.source_id, "x_twitterapi")
+        self.assertEqual(item.provenance, "native:x_twitterapi")
+        self.assertEqual(item.metadata["provenance"], "native:x_twitterapi")
+
+    # -----------------------------------------------------------------------
+    # End-to-end: full fetch_hotspot_items path
+    # -----------------------------------------------------------------------
+
+    _RESEARCHER_PAYLOAD = {
+        "tweets": [
+            {
+                "id": "2035012260008272010",
+                "text": "Strong new results on agent benchmarks and reasoning evals. https://t.co/paper",
+                "createdAt": "Sat Mar 21 10:05:00 +0000 2026",
+                "lang": "en",
+                "inReplyToUserId": None,
+                "retweeted_tweet": None,
+                "entities": {"urls": [{"expanded_url": "https://arxiv.org/abs/2603.12345"}]},
+                "likeCount": 400,
+                "replyCount": 40,
+                "retweetCount": 80,
+                "quoteCount": 8,
+                "viewCount": 90000,
+                "bookmarkCount": 20,
+                "author": {"id": "3", "name": "Demis Hassabis", "userName": "demishassabis", "isBlueVerified": True},
+            }
+        ]
+    }
+
+    def _fake_twitterapi_get(self, params, *, api_key):
+        handle = (params.get("userName") or "").lower()
+        if handle == "openai" or params.get("userId") == "openai":
+            return self._OPENAI_PAYLOAD
+        if handle == "demishassabis":
+            return self._RESEARCHER_PAYLOAD
+        return {"tweets": []}
+
+    def test_fetch_hotspot_items_official_release_survives_filter(self) -> None:
+        from arxiv_assistant.apis.hotspot import hotspot_twitterapi as mod
+
+        # target_date at noon so the 10:00Z tweet falls inside window [target-24h, target+6h].
+        with tempfile.TemporaryDirectory() as tmp_dir, \
+                patch.dict(os.environ, {"TWITTERAPI_IO_KEY": "test-key"}, clear=True), \
+                patch.object(mod, "_twitterapi_get", side_effect=self._fake_twitterapi_get):
+            seed_path = self._seed_file(tmp_dir)
+            items = mod.fetch_hotspot_items(
+                datetime(2026, 3, 21, 12, 0, tzinfo=UTC),
+                24,
+                seed_path,
+                result_limit=80,
+                snapshot_path=Path(tmp_dir) / "x_authority_inventory.json",
+            )
+
+        # The official "We released GPT-5.4 mini today" tweet must NOT be killed by SELF_WORK_PATTERNS.
+        self.assertGreaterEqual(len(items), 1)
+        urls = {item.url for item in items}
+        self.assertIn("https://x.com/openai/status/2035012260008272007", urls)
+        official = next(i for i in items if i.url.endswith("2035012260008272007"))
+        self.assertEqual(official.source_id, "x_twitterapi")
+        self.assertEqual(official.metadata["provenance"], "native:x_twitterapi")
+        self.assertEqual(official.source_role, "official_news")
+
+    def test_fetch_hotspot_items_drops_out_of_window_tweets(self) -> None:
+        from arxiv_assistant.apis.hotspot import hotspot_twitterapi as mod
+
+        stale_payload = {
+            "tweets": [
+                {
+                    **self._OPENAI_PAYLOAD["tweets"][0],
+                    "createdAt": "Mon Jan 05 10:00:00 +0000 2026",  # ~11 weeks old
+                }
+            ]
+        }
+
+        def _stale_get(params, *, api_key):
+            if (params.get("userName") or "").lower() == "openai":
+                return stale_payload
+            return {"tweets": []}
+
+        with tempfile.TemporaryDirectory() as tmp_dir, \
+                patch.dict(os.environ, {"TWITTERAPI_IO_KEY": "test-key"}, clear=True), \
+                patch.object(mod, "_twitterapi_get", side_effect=_stale_get):
+            seed_path = self._seed_file(tmp_dir)
+            items = mod.fetch_hotspot_items(
+                datetime(2026, 3, 21, 12, 0, tzinfo=UTC),
+                24,
+                seed_path,
+                snapshot_path=Path(tmp_dir) / "x_authority_inventory.json",
+            )
+        self.assertEqual(items, [])
+
+    def test_fetch_hotspot_items_empty_response_degrades_cleanly(self) -> None:
+        from arxiv_assistant.apis.hotspot import hotspot_twitterapi as mod
+
+        with tempfile.TemporaryDirectory() as tmp_dir, \
+                patch.dict(os.environ, {"TWITTERAPI_IO_KEY": "test-key"}, clear=True), \
+                patch.object(mod, "_twitterapi_get", return_value={"tweets": []}):
+            seed_path = self._seed_file(tmp_dir)
+            items = mod.fetch_hotspot_items(
+                datetime(2026, 3, 21, 12, 0, tzinfo=UTC),
+                24,
+                seed_path,
+                snapshot_path=Path(tmp_dir) / "x_authority_inventory.json",
+            )
+        self.assertEqual(items, [])
+
+
 if __name__ == "__main__":
     unittest.main()

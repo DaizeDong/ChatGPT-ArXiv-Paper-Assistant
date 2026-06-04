@@ -137,6 +137,174 @@ def _fetch_last_tweets_rest(
     return rows
 
 
+def _derive_title(text: str) -> str:
+    text = clean_text(text)
+    if len(text) <= 180:
+        return text
+    for marker in (". ", "; ", ": "):
+        if marker in text[:180]:
+            return clean_text(text.split(marker, 1)[0])
+    return clip_text(text, 180)
+
+
+def _compute_activity(metrics: dict[str, Any] | None) -> int:
+    metrics = metrics or {}
+    likes = int(metrics.get("like_count", 0) or 0)
+    replies = int(metrics.get("reply_count", 0) or 0)
+    reposts = int(metrics.get("retweet_count", 0) or 0)
+    quotes = int(metrics.get("quote_count", 0) or 0)
+    impressions = int(metrics.get("impression_count", 0) or 0)
+    bookmarks = int(metrics.get("bookmark_count", 0) or 0)
+    return likes + bookmarks + replies * 3 + reposts * 2 + quotes * 4 + impressions // 1000
+
+
+def _is_reply_or_retweet(tweet: dict[str, Any]) -> bool:
+    text = clean_text(tweet.get("text")).lower()
+    if text.startswith("rt @") or text.startswith("@"):
+        return True
+    if tweet.get("in_reply_to_user_id"):
+        return True
+    for ref in tweet.get("referenced_tweets", []) or []:
+        if ref.get("type") in {"retweeted", "replied_to"}:
+            return True
+    return False
+
+
+def _expanded_urls(tweet: dict[str, Any]) -> list[str]:
+    urls: list[str] = []
+    entities = tweet.get("entities", {}) or {}
+    for row in entities.get("urls", []) or []:
+        candidate = clean_text(row.get("expanded_url") or row.get("unwound_url") or row.get("url"))
+        if candidate:
+            urls.append(candidate)
+    return urls
+
+
+def _authority_source_role(record: dict[str, Any]) -> str:
+    if str(record.get("kind")) in {"official", "company"}:
+        return "official_news"
+    return "community_heat"
+
+
+def _authority_source_quality(record: dict[str, Any]) -> float:
+    tier = int(record.get("tier") or 1)
+    kind = str(record.get("kind") or "researcher")
+    base = 1.05 if kind == "researcher" else 1.2
+    return round(base + tier * 0.12, 2)
+
+
+def _set_provenance(item: HotspotItem) -> HotspotItem:
+    """Set the Stage-0 `provenance` field if the dataclass exposes it, and ALWAYS mirror
+    provenance + source_id into metadata so downstream works whether or not Stage 0 landed."""
+    if hasattr(item, "provenance"):
+        item.provenance = PROVENANCE
+    item.metadata.setdefault("provenance", PROVENANCE)
+    item.metadata.setdefault("source_id", SOURCE_ID)
+    return item
+
+
+def _tweet_to_item(row: dict[str, Any], *, authority: dict[str, Any]) -> HotspotItem | None:
+    if _is_reply_or_retweet(row):
+        return None
+
+    author = row.get("author", {}) or {}
+    author_handle = clean_text(authority.get("handle") or author.get("username"))
+    text = clean_text(row.get("text"))
+    tweet_id = clean_text(row.get("id"))
+    if not author_handle or not text or not tweet_id:
+        return None
+
+    metrics = row.get("public_metrics", {}) or {}
+    activity = _compute_activity(metrics)
+    expanded_urls = _expanded_urls(row)
+    if not is_newsworthy_x_text(
+        text,
+        authority_kind=str(authority.get("kind") or "official"),
+        expanded_urls=expanded_urls,
+        activity=activity,
+    ):
+        return None
+
+    url = f"https://x.com/{author_handle}/status/{tweet_id}"
+    non_x_urls = [entry for entry in expanded_urls if urlsplit(entry).netloc.lower() not in X_HOSTS]
+    created_at = row.get("created_at")
+
+    item = HotspotItem(
+        source_id=SOURCE_ID,
+        source_name=clean_text(authority.get("name") or author.get("name") or author_handle),
+        source_role=_authority_source_role(authority),
+        source_type="tweet",
+        title=_derive_title(text),
+        summary=clip_text(text, 420),
+        url=url,
+        canonical_url=url,
+        published_at=created_at,
+        tags=["x-twitterapi", str(authority.get("kind") or "official")],
+        authors=[author_handle],
+        metadata={
+            "tweet_id": tweet_id,
+            "author_handle": author_handle,
+            "author_name": clean_text(author.get("name")),
+            "verified": bool(author.get("verified")),
+            "public_metrics": metrics,
+            "activity": activity,
+            "source_quality": _authority_source_quality(authority),
+            "signal_tier": "x_twitterapi_timeline",
+            "authority_kind": str(authority.get("kind") or "official"),
+            "authority_tier": int(authority.get("tier") or 1),
+            "organization": clean_text(authority.get("organization")),
+            "expanded_urls": expanded_urls,
+            "non_x_urls": non_x_urls,
+            "has_external_link": bool(non_x_urls),
+            "host": "x.com",
+        },
+    )
+    return _set_provenance(item)
+
+
+def _collect_timelines(
+    accounts: list[dict[str, Any]],
+    *,
+    api_key: str,
+    since: datetime,
+    tweets_per_user: int,
+    result_limit: int,
+    registry: dict[str, Any],
+    seen_urls: set[str],
+) -> list[HotspotItem]:
+    items: list[HotspotItem] = []
+    for account in accounts:
+        if len(items) >= result_limit:
+            break
+        handle = clean_text(account.get("handle"))
+        if not handle:
+            continue
+        user_id = clean_text(account.get("x_user_id")) or None
+        rows = _fetch_last_tweets_rest(
+            user_id=user_id,
+            handle=handle,
+            api_key=api_key,
+            since=since,
+            max_results=tweets_per_user,
+        )
+        for row in rows:
+            author = row.get("author", {}) or {}
+            author_handle = clean_text(author.get("username")) or handle
+            if not is_authoritative_x_identity(author_handle, registry=registry):
+                continue
+            authority = get_authority_record(author_handle, registry=registry) or account
+            item = _tweet_to_item(row, authority=authority)
+            if item is None:
+                continue
+            if item.url in seen_urls:
+                continue
+            seen_urls.add(item.url)
+            items.append(item)
+            if len(items) >= result_limit:
+                break
+    return items
+
+
 def fetch_hotspot_items(
     target_date: datetime,
     freshness_hours: int,
@@ -156,4 +324,46 @@ def fetch_hotspot_items(
             f"{TWITTERAPI_IO_ENV_KEYS} to enable the x_twitterapi source. Skipping."
         )
         return []
-    return []
+
+    if target_date.tzinfo is None:
+        since = target_date.replace(tzinfo=UTC) - timedelta(hours=freshness_hours)
+    else:
+        since = target_date - timedelta(hours=freshness_hours)
+
+    registry = load_x_authority_registry(
+        seed_path=seed_path, snapshot_path=snapshot_path, max_age_hours=max_age_hours
+    )
+    official_accounts = iter_active_authority_accounts(registry, kinds={"official", "company"}, min_tier=2)
+    researcher_accounts = iter_active_authority_accounts(registry, kinds={"researcher"}, min_tier=2)
+    official_accounts = official_accounts[:official_account_limit]
+    researcher_accounts = researcher_accounts[:researcher_account_limit]
+
+    seen_urls: set[str] = set()
+    items = _collect_timelines(
+        official_accounts,
+        api_key=api_key,
+        since=since,
+        tweets_per_user=tweets_per_user,
+        result_limit=result_limit,
+        registry=registry,
+        seen_urls=seen_urls,
+    )
+    items.extend(
+        _collect_timelines(
+            researcher_accounts,
+            api_key=api_key,
+            since=since,
+            tweets_per_user=tweets_per_user,
+            result_limit=max(0, result_limit // 3),
+            registry=registry,
+            seen_urls=seen_urls,
+        )
+    )
+
+    # Server-side window is approximate; enforce the canonical is_fresh() gate too.
+    fresh_items = [
+        item
+        for item in items
+        if item.published_at is None or is_fresh(item.published_at, target_date, freshness_hours)
+    ]
+    return fresh_items[:result_limit]

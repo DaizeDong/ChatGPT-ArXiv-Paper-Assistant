@@ -680,5 +680,94 @@ class TestTier1Verify(unittest.TestCase):
         self.assertTrue(verdict.get("stale_date_pollution"))
 
 
+class TestTier2DeepSearch(unittest.TestCase):
+    def test_tier2_only_escalates_when_uncertain_and_featured(self):
+        from arxiv_assistant.hotspots import date_verify
+        deep = _json.loads((FIXTURES / "dateverify_tier2_deep.json").read_text(encoding="utf-8"))
+        store = _NewsStore()
+        item = _news_item("https://example.com/blog/y", "2026-06-02T09:00:00Z")
+        low_conf = {"verified_first_date": "2026-06-02T00:00:00Z", "confidence": 0.4, "evidence": [], "stale_date_pollution": False}
+        with patch.object(date_verify, "_wayback_earliest_snapshot", return_value=None), \
+             patch.object(date_verify, "_page_published_time", return_value=None), \
+             patch.object(date_verify, "_run_dateverify_subagent", side_effect=[low_conf, deep]) as agent:
+            verdict = date_verify.verify(item, store, will_be_featured=True)
+        # escalated: agent called twice (tier1 then tier2); deep search found an earlier date
+        self.assertEqual(agent.call_count, 2)
+        self.assertEqual(verdict["verified_first_date"], "2024-09-30T00:00:00Z")
+        self.assertTrue(verdict["stale_date_pollution"])
+
+    def test_tier2_not_triggered_when_confident(self):
+        from arxiv_assistant.hotspots import date_verify
+        store = _NewsStore()
+        item = _news_item("https://example.com/blog/z", "2026-06-02T09:00:00Z")
+        confident = {"verified_first_date": "2026-06-02T00:00:00Z", "confidence": 0.9, "evidence": [], "stale_date_pollution": False}
+        with patch.object(date_verify, "_wayback_earliest_snapshot", return_value="2026-06-02T00:00:00Z"), \
+             patch.object(date_verify, "_page_published_time", return_value=None), \
+             patch.object(date_verify, "_run_dateverify_subagent", side_effect=[confident]) as agent:
+            date_verify.verify(item, store, will_be_featured=True)
+        self.assertEqual(agent.call_count, 1)  # no escalation
+
+    def test_tier2_not_triggered_when_not_featured(self):
+        from arxiv_assistant.hotspots import date_verify
+        store = _NewsStore()
+        item = _news_item("https://example.com/blog/q", "2026-06-02T09:00:00Z")
+        low_conf = {"verified_first_date": "2026-06-02T00:00:00Z", "confidence": 0.4, "evidence": [], "stale_date_pollution": False}
+        with patch.object(date_verify, "_wayback_earliest_snapshot", return_value=None), \
+             patch.object(date_verify, "_page_published_time", return_value=None), \
+             patch.object(date_verify, "_run_dateverify_subagent", side_effect=[low_conf]) as agent:
+            date_verify.verify(item, store, will_be_featured=False)
+        self.assertEqual(agent.call_count, 1)  # low conf but not featured -> no Tier-2
+
+    def test_tier2_agent_error_keeps_tier1_result(self):
+        """AgentError in Tier-2 must degrade silently to the Tier-1 result (no crash, INV3)."""
+        from arxiv_assistant.hotspots import date_verify
+        store = _NewsStore()
+        item = _news_item("https://example.com/blog/t2err", "2026-06-02T09:00:00Z")
+        low_conf = {"verified_first_date": "2026-06-02T00:00:00Z", "confidence": 0.4, "evidence": ["tier1:evidence"], "stale_date_pollution": False}
+        with patch.object(date_verify, "_wayback_earliest_snapshot", return_value=None), \
+             patch.object(date_verify, "_page_published_time", return_value=None), \
+             patch.object(date_verify, "_run_dateverify_subagent", side_effect=[low_conf, AgentError("tier2 boom")]) as agent:
+            verdict = date_verify.verify(item, store, will_be_featured=True)
+        # Both calls attempted; Tier-2 AgentError -> keeps Tier-1 clamped result
+        self.assertEqual(agent.call_count, 2)
+        self.assertIsNotNone(verdict)
+        self.assertIn("verified_first_date", verdict)
+        # confidence should still be low (Tier-1 fallback path)
+        self.assertLessEqual(verdict["confidence"], 0.5)
+
+    def test_tier2_clamp_inv6_later_date_overridden(self):
+        """INV6: Tier-2 agent proposes a date LATER than Tier-1; cross-tier min must pick the earlier."""
+        from arxiv_assistant.hotspots import date_verify
+        store = _NewsStore()
+        item = _news_item("https://example.com/blog/inv6t2", "2026-06-02T09:00:00Z")
+        low_conf = {"verified_first_date": "2024-09-30T00:00:00Z", "confidence": 0.4, "evidence": [], "stale_date_pollution": True}
+        # Tier-2 agent proposes a LATER date than Tier-1 — must be overridden by min()
+        later_deep = {"verified_first_date": "2026-01-01T00:00:00Z", "confidence": 0.9, "evidence": [], "stale_date_pollution": False}
+        with patch.object(date_verify, "_wayback_earliest_snapshot", return_value=None), \
+             patch.object(date_verify, "_page_published_time", return_value=None), \
+             patch.object(date_verify, "_run_dateverify_subagent", side_effect=[low_conf, later_deep]):
+            verdict = date_verify.verify(item, store, will_be_featured=True)
+        # Tier-1 date (2024) beats Tier-2 date (2026) — INV6 clamp via min()
+        self.assertEqual(verdict["verified_first_date"], "2024-09-30T00:00:00Z")
+
+    def test_tier2_write_once_freeze(self):
+        """After Tier-2 escalation the verdict is frozen; a second call returns the cached result."""
+        from arxiv_assistant.hotspots import date_verify
+        deep = _json.loads((FIXTURES / "dateverify_tier2_deep.json").read_text(encoding="utf-8"))
+        store = _NewsStore()
+        item = _news_item("https://example.com/blog/freeze2", "2026-06-02T09:00:00Z")
+        low_conf = {"verified_first_date": "2026-06-02T00:00:00Z", "confidence": 0.4, "evidence": [], "stale_date_pollution": False}
+        with patch.object(date_verify, "_wayback_earliest_snapshot", return_value=None), \
+             patch.object(date_verify, "_page_published_time", return_value=None), \
+             patch.object(date_verify, "_run_dateverify_subagent", side_effect=[low_conf, deep]) as agent:
+            first = date_verify.verify(item, store, will_be_featured=True)
+        # Now a second call must return the cached/frozen verdict without calling the agent again
+        with patch.object(date_verify, "_run_dateverify_subagent") as agent2:
+            second = date_verify.verify(item, store, will_be_featured=True)
+        agent2.assert_not_called()
+        self.assertEqual(first["verified_first_date"], second["verified_first_date"])
+        self.assertEqual(first["verified_first_date"], "2024-09-30T00:00:00Z")
+
+
 if __name__ == "__main__":
     unittest.main()

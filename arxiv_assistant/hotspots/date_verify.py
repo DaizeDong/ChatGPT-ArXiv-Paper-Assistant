@@ -47,6 +47,9 @@ _CONFIDENCE_LOW = 0.3
 # source families whose claimed dates are untrustworthy -> Tier-1 residual (§B.2)
 _TIER1_FAMILIES = {"news", "blog", "x", "tweet", "roundup", "analysis"}
 
+# Tier-2 deep-search escalation threshold: below this confidence AND will_be_featured -> escalate (§B.2)
+_TIER2_CONFIDENCE_FLOOR = 0.6
+
 
 # ---------------------------------------------------------------------------
 # Stage 3: deterministic verdict helpers (INV6, §B.3)
@@ -506,6 +509,29 @@ def verify(item, store, *, will_be_featured: bool = False) -> dict:
                     "confidence": _CONFIDENCE_LOW,
                     "evidence": ["fallback:min(claimed,fetched);agent_error"],
                 }
+            # Tier-2 deep-search escalation: rare, cost-controlled (§B.2).
+            # Only when Tier-1 confidence is low AND item will be featured.
+            if will_be_featured and verdict["confidence"] < _TIER2_CONFIDENCE_FLOOR:
+                try:
+                    deep = _verify_subagent_residual(item, tier=2)
+                    # Cross-tier merge: earliest-credible-date-wins (INV6) over both tiers.
+                    # Re-run _clamp_verdict with the merged agent_out so INV2/INV6 still hold.
+                    verdict = _clamp_verdict(
+                        claimed_iso=item.published_at,
+                        agent_out={
+                            "verified_first_date": min(
+                                (d for d in (verdict["verified_first_date"], deep["verified_first_date"]) if d),
+                                default=None,  # both None -> let _clamp_verdict degrade (no ValueError)
+                            ),
+                            "confidence": max(verdict["confidence"], deep["confidence"]),
+                            "evidence": list(verdict.get("evidence", [])) + list(deep.get("evidence", [])),
+                        },
+                        wayback_earliest=None,
+                        page_published_time=None,
+                    )
+                except AgentError:
+                    # Degrade silently: keep Tier-1 result, no crash (§E)
+                    pass
         else:
             # Non-residual, no Tier-0 anchor: conservative Stage-1 fallback (§B.3)
             verified = _earliest(claimed, fetched) or claimed or fetched

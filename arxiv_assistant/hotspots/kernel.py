@@ -125,14 +125,18 @@ def run(output_root: Path, target_date: datetime, config, *, stage: str | None =
 
     stages_run: list[str] = []
     stages_skipped: list[str] = []
-    for name in target_stages:
-        if stage is None and _checkpoint_done(output_root, target_date, name):
-            stages_skipped.append(name)
-            continue
-        fn = _STAGE_FNS[name]
-        payload = fn(ctx)
-        _write_checkpoint(output_root, target_date, name, payload)
-        stages_run.append(name)
+    try:
+        for name in target_stages:
+            if stage is None and _checkpoint_done(output_root, target_date, name):
+                stages_skipped.append(name)
+                continue
+            fn = _STAGE_FNS[name]
+            payload = fn(ctx)
+            _write_checkpoint(output_root, target_date, name, payload)
+            stages_run.append(name)
+    finally:
+        if store is not None and hasattr(store, "close"):
+            store.close()
 
     return {
         "date": ctx.run_date,

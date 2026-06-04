@@ -417,16 +417,24 @@ class GrayCompareTests(unittest.TestCase):
     def test_cascade_differs_from_api_only_only_on_borderline(self) -> None:
         # Confident keep/drop must be identical between api_only and cascade; only the borderline
         # band may differ (because the agent re-judged it).
+        #
+        # Use relevance_cutoff=6 so that borderline papers (rel 6-7) PASS the api_only filter
+        # (they are above the cutoff), letting the agent override them in cascade mode.
+        # The borderline band [6.0, 8.0) overlaps with api_only-kept papers when cutoff=6.
         scores = {
-            "2501.ck": (10, 10, "ck"),   # confident keep
-            "2501.cd": (3, 3, "cd"),     # confident drop
-            "2501.b1": (7, 9, "b1"),     # borderline (rel 7 in [6,8))
-            "2501.b2": (6, 9, "b2"),     # borderline (rel 6 in [6,8))
+            "2501.ck": (10, 10, "ck"),   # confident keep (well above band)
+            "2501.cd": (3, 3, "cd"),     # confident drop (below cutoff=6)
+            "2501.b1": (7, 9, "b1"),     # borderline (rel 7 in [6,8)) AND above cutoff=6 -> api_only keeps
+            "2501.b2": (6, 9, "b2"),     # borderline (rel 6 in [6,8)) AND at cutoff=6 -> api_only keeps
         }
         papers = [_paper(i) for i in scores]
+        # low cutoffs so borderline papers pass the API filter (proving that cascade can diverge)
+        low_cutoff_cfg = _config(FILTERING={"h_cutoff": "10", "relevance_cutoff": "6", "novelty_cutoff": "6"})
 
-        api = ApiScoreFilter(prompts=("s", "t", "sc", "pt", "pa"), config=_config(), gpt_fn=_fake_gpt_factory(scores))
-        api_only = cascade_filter(papers, "topic", _config(PAPER_FILTER={"mode": "api_only"}),
+        api = ApiScoreFilter(prompts=("s", "t", "sc", "pt", "pa"), config=low_cutoff_cfg, gpt_fn=_fake_gpt_factory(scores))
+        api_only = cascade_filter(papers, "topic",
+                                  _config(PAPER_FILTER={"mode": "api_only"},
+                                          FILTERING={"h_cutoff": "10", "relevance_cutoff": "6", "novelty_cutoff": "6"}),
                                   rule_filter=None, api_filter=api, agent_filter=None)
 
         # Agent flips both borderline papers to drop (a plausible "deeper read says off-topic").
@@ -435,9 +443,10 @@ class GrayCompareTests(unittest.TestCase):
                 return FilterVerdict(keep=False, relevance=5.0, novelty=5.0,
                                      rationale="agent: borderline -> drop after full-text", evidence=[])
 
-        api2 = ApiScoreFilter(prompts=("s", "t", "sc", "pt", "pa"), config=_config(), gpt_fn=_fake_gpt_factory(scores))
+        api2 = ApiScoreFilter(prompts=("s", "t", "sc", "pt", "pa"), config=low_cutoff_cfg, gpt_fn=_fake_gpt_factory(scores))
         cascade = cascade_filter(papers, "topic",
-                                 _config(PAPER_FILTER={"mode": "cascade", "agent_borderline_low": "6.0", "agent_borderline_high": "8.0"}),
+                                 _config(PAPER_FILTER={"mode": "cascade", "agent_borderline_low": "6.0", "agent_borderline_high": "8.0"},
+                                         FILTERING={"h_cutoff": "10", "relevance_cutoff": "6", "novelty_cutoff": "6"}),
                                  rule_filter=None, api_filter=api2, agent_filter=FlipAgent())
 
         api_keep = {p.arxiv_id: v.keep for p, v in zip(papers, api_only)}
@@ -445,6 +454,6 @@ class GrayCompareTests(unittest.TestCase):
         # confident bands identical
         self.assertEqual(api_keep["2501.ck"], casc_keep["2501.ck"])
         self.assertEqual(api_keep["2501.cd"], casc_keep["2501.cd"])
-        # borderline band changed (agent overrode)
+        # borderline band changed (agent overrode api_only keep -> cascade drop)
         self.assertNotEqual(api_keep["2501.b1"], casc_keep["2501.b1"])
         self.assertNotEqual(api_keep["2501.b2"], casc_keep["2501.b2"])

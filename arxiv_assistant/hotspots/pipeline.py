@@ -32,9 +32,9 @@ from arxiv_assistant.utils.hotspot.hotspot_schema import HotspotItem
 from arxiv_assistant.utils.hotspot.hotspot_sources import api_usage_scope, reset_api_usage, snapshot_api_usage
 from arxiv_assistant.utils.prompt_loader import read_prompt
 from arxiv_assistant.utils.hotspot.hotspot_web_data import write_hotspot_web_data
-from arxiv_assistant.hotspots.date_verify import verify as _date_verify
+from arxiv_assistant.hotspots.date_verify import verify as date_verify
 from arxiv_assistant.hotspots.store import _open_story_store
-from arxiv_assistant.utils.hotspot.gate_date import gate_date as _gate_date_fn
+from arxiv_assistant.utils.hotspot.gate_date import gate_date
 
 ROLE_PRIORITY = {
     "research_backbone": 0,
@@ -118,38 +118,34 @@ def _apply_freshness_gates(
     target_date: datetime,
     *,
     max_item_age_days: int,
-    freshness_hours: int,
 ) -> list:
-    """Freshness + max-age hard gate on the day-granular gate_date (spec §B.5/§B.5.1).
+    """Day-granular max-age hard gate on gate_date (spec §B.5/§B.5.1).
 
     Uses gate_date(item) (verified_first_date floored to UTC day) so sub-day jitter
     cannot flip the discrete gate (INV2). github_trend is exempt from max-age (it
     legitimately trends long after creation). Items with no credible date are kept
     (cannot-verify → do not drop), matching the legacy policy.
-    """
-    from datetime import timezone as _tz
 
-    target_utc = target_date.replace(tzinfo=_tz.utc) if target_date.tzinfo is None else target_date
+    Per-source adapters handle freshness at fetch time; gravity decay (_freshness_weight)
+    ranks down older items; the 14-day hard cap here is the inclusion ceiling.
+    """
+    target_utc = target_date.replace(tzinfo=UTC) if target_date.tzinfo is None else target_date
     run_day = target_utc.date()
-    max_age = max_item_age_days
-    fresh_days = freshness_hours / 24.0
 
     kept = []
     for item in items:
         if item.source_id in {"github_trend"}:
             kept.append(item)
             continue
-        gday = _gate_date_fn(item)
+        gday = gate_date(item)
         if gday is None:
             kept.append(item)  # cannot verify → do not drop
             continue
         age_days = (run_day - gday).days
-        if age_days > max_age:
+        if age_days > max_item_age_days:
             continue  # too old (hard gate)
         if age_days < -1:
             continue  # future-dated artifact (allow +1 day for tz slack)
-        if age_days > fresh_days and age_days > max_age:
-            continue  # redundant safety; max_age already dominates
         kept.append(item)
     return kept
 
@@ -1697,18 +1693,17 @@ def generate_daily_hotspot_report(output_root: str | Path, target_date: datetime
         print(f"Date filter: removed {pre_date - len(raw_items)} items without published_at ({len(raw_items)} remaining)")
 
     # DateVerify (Tier-0, zero agents) → set verified_first_date for the gates.
-    store = _open_story_store(output_root)  # opens out/hot/state/story_store.sqlite
+    store = _open_story_store(output_root)  # opens out/hot/state/story_store.sqlite  # TODO(stage3): close/context-manage the Store when looping callers (backfill) arrive
     for item in raw_items:
-        verdict = _date_verify(item, store)
+        verdict = date_verify(item, store)
         item.verified_first_date = verdict.get("verified_first_date")
 
     # Freshness + max-age hard gate on day-granular gate_date (§B.5/§B.5.1).
     max_item_age_days = config["HOTSPOTS"].getint("max_item_age_days", fallback=14)
-    freshness_hours = config["HOTSPOTS"].getint("freshness_hours", fallback=24)
     pre_gate = len(raw_items)
     raw_items = _apply_freshness_gates(
         raw_items, target_date,
-        max_item_age_days=max_item_age_days, freshness_hours=freshness_hours,
+        max_item_age_days=max_item_age_days,
     )
     if len(raw_items) < pre_gate:
         print(f"Freshness/max-age gate: removed {pre_gate - len(raw_items)} stale items ({len(raw_items)} remaining)")

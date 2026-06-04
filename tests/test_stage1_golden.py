@@ -4,7 +4,6 @@ import configparser
 import unittest
 from datetime import UTC, date, datetime
 from pathlib import Path
-from unittest.mock import patch
 
 from arxiv_assistant.hotspots.pipeline import _apply_freshness_gates
 from arxiv_assistant.utils.hotspot.hotspot_schema import HotspotItem
@@ -28,8 +27,7 @@ class TestStage1FreshnessGate(unittest.TestCase):
         # Source claims today's date, but verified v1 is 2023 → must be dropped.
         stale = _paper("2301.00001", "2026-04-04T00:00:00Z", "2023-01-02T00:00:00Z")
         fresh = _paper("2604.00002", "2026-04-04T00:00:00Z", "2026-04-04T00:00:00Z")
-        kept = _apply_freshness_gates([stale, fresh], target, max_item_age_days=14,
-                                      freshness_hours=24)
+        kept = _apply_freshness_gates([stale, fresh], target, max_item_age_days=14)
         kept_ids = {i.metadata["arxiv_id"] for i in kept}
         self.assertIn("2604.00002", kept_ids)
         self.assertNotIn("2301.00001", kept_ids)
@@ -43,8 +41,7 @@ class TestStage1FreshnessGate(unittest.TestCase):
             published_at="2020-01-01T00:00:00Z",
             metadata={"fetched_at": "2026-04-04T00:00:00Z"},
         )
-        kept = _apply_freshness_gates([trend], target, max_item_age_days=14,
-                                      freshness_hours=24)
+        kept = _apply_freshness_gates([trend], target, max_item_age_days=14)
         self.assertEqual(len(kept), 1)  # exempt → kept despite 2020 published_at
 
     def test_golden_eight_of_fortyone_sink_without_agents(self) -> None:
@@ -57,8 +54,7 @@ class TestStage1FreshnessGate(unittest.TestCase):
         for n in range(8):
             items.append(_paper(f"2301.0{n:04d}", "2026-04-04T00:00:00Z",
                                  "2023-01-02T00:00:00Z"))
-        kept = _apply_freshness_gates(items, target, max_item_age_days=14,
-                                      freshness_hours=24)
+        kept = _apply_freshness_gates(items, target, max_item_age_days=14)
         self.assertEqual(len(kept), 33)  # exactly the 8 stale ones sank, zero agents
 
 

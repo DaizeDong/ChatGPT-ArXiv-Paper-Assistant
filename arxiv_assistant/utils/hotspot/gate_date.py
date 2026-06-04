@@ -24,7 +24,36 @@ def floor_to_utc_day(iso_ts: str | None) -> date | None:
     return dt.astimezone(UTC).date()
 
 
-_ANCHOR_KEYS = ("arxiv_announced_date", "crossref_registered_date")
+# Stage 1 anchor keys (whole-day authoritative stamps; spec §2.4 / §B.3.1).
+# The "_date" variants were established in Stage 1; the "_day" variants are the
+# kernel-stamped keys added in Stage 3 (§B.3.1 addendum).  Both are accepted so
+# the gate is forward-compatible without a data migration.
+_ANCHOR_KEYS = (
+    "arxiv_announced_date",    # Stage 1
+    "arxiv_announced_day",     # Stage 3 kernel-stamped
+    "crossref_registered_date",  # Stage 1
+    "crossref_registered_day",   # Stage 3 kernel-stamped
+)
+
+
+def credible_dates(item: HotspotItem) -> list[str]:
+    """All machine-independent credible dates for an item, as ISO strings.
+
+    §B.3.1: authoritative whole-day anchors (arXiv announced day / Crossref
+    registration day) join {verified_first_date}. Anchors are kernel-stamped
+    into item.metadata during Tier-0 so this function performs no network I/O.
+    """
+    dates: list[str] = []
+    verified = getattr(item, "verified_first_date", None)
+    if verified:
+        dates.append(verified)
+    meta = item.metadata or {}
+    for key in _ANCHOR_KEYS:
+        val = meta.get(key)
+        if val:
+            # Whole-day anchor: normalise to start-of-day ISO so floor_to_utc_day is a no-op.
+            dates.append(f"{val}T00:00:00Z" if "T" not in str(val) else val)
+    return dates
 
 
 def gate_date(item: HotspotItem) -> date | None:
@@ -37,21 +66,11 @@ def gate_date(item: HotspotItem) -> date | None:
     credible date exists (gate treats None as cannot-verify → do not drop).
 
     Metadata anchor keys (spec §2.4 / §B.3.1):
-      - "arxiv_announced_date"   — arXiv announced day (whole-day, authoritative)
-      - "crossref_registered_date" — Crossref registration day (whole-day, authoritative)
+      - "arxiv_announced_date" / "arxiv_announced_day"     — arXiv announced day
+      - "crossref_registered_date" / "crossref_registered_day" — Crossref registration day
     """
-    credible: list[date] = []
-
-    floored = floor_to_utc_day(item.verified_first_date)
-    if floored is not None:
-        credible.append(floored)
-
-    metadata = item.metadata or {}
-    for key in _ANCHOR_KEYS:
-        anchor = floor_to_utc_day(metadata.get(key))
-        if anchor is not None:
-            credible.append(anchor)
-
-    if not credible:
+    candidates = [floor_to_utc_day(d) for d in credible_dates(item)]
+    candidates = [d for d in candidates if d is not None]
+    if not candidates:
         return None
-    return min(credible)
+    return min(candidates)

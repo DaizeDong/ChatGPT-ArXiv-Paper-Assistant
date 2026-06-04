@@ -12,7 +12,7 @@ from arxiv_assistant.hotspots.date_verify import (
     verify,
 )
 from arxiv_assistant.hotspots.story import _freshness_weight
-from arxiv_assistant.utils.hotspot.gate_date import floor_to_utc_day
+from arxiv_assistant.utils.hotspot.gate_date import floor_to_utc_day, gate_date
 from arxiv_assistant.utils.hotspot.hotspot_schema import HotspotItem
 from arxiv_assistant.utils.hotspot.hotspot_sources import get_freshness_date
 
@@ -351,6 +351,48 @@ class TestGetFreshnessDate(unittest.TestCase):
                         metadata={"fetched_at": "2026-04-04T00:00:00Z"})
         item.verified_first_date = None
         self.assertEqual(get_freshness_date(item), "2026-04-04T00:00:00Z")
+
+
+class TestGateDateAuthoritativeAnchor(unittest.TestCase):
+    def _item(self, *, published_at, metadata=None):
+        return HotspotItem(
+            source_id="hf_papers",
+            source_name="HF",
+            source_role="paper_trending",
+            source_type="paper",
+            title="Old paper resurfaced as new",
+            summary="",
+            url="https://huggingface.co/papers/2311.01234",
+            canonical_url="https://arxiv.org/abs/2311.01234",
+            published_at=published_at,
+            metadata=metadata or {},
+        )
+
+    def test_arxiv_announced_day_pulls_gate_earlier_than_claimed(self):
+        # claimed (HF publishedAt) is today; arXiv announced day is 2023 -> gate must use the 2023 day
+        item = self._item(
+            published_at="2026-06-02T09:00:00Z",
+            metadata={"arxiv_id": "2311.01234", "arxiv_announced_day": "2023-11-14"},
+        )
+        item.verified_first_date = "2023-11-14T00:00:00Z"
+        self.assertEqual(gate_date(item), date(2023, 11, 14))
+
+    def test_anchor_never_pulls_gate_later(self):
+        # verified_first_date earlier than the anchor -> earliest-min keeps the earlier verified date
+        item = self._item(
+            published_at="2026-06-02T09:00:00Z",
+            metadata={"arxiv_id": "2311.01234", "arxiv_announced_day": "2023-11-20"},
+        )
+        item.verified_first_date = "2023-11-14T00:00:00Z"
+        self.assertEqual(gate_date(item), date(2023, 11, 14))
+
+    def test_crossref_registration_day_used_when_doi_present(self):
+        item = self._item(
+            published_at="2026-06-02T09:00:00Z",
+            metadata={"doi": "10.1234/x", "crossref_registered_day": "2024-02-01"},
+        )
+        item.verified_first_date = None
+        self.assertEqual(gate_date(item), date(2024, 2, 1))
 
 
 if __name__ == "__main__":

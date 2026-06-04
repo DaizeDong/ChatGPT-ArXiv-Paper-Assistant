@@ -117,3 +117,41 @@ def record_dropped_stale_competitor(
         "per_source": per_source,
         "dropped_items": details,
     }
+
+
+# ---------------------------------------------------------------------------
+# Module-level journal I/O helpers (spec §E, stage 4 Task 11)
+# ---------------------------------------------------------------------------
+
+def append(run_date: str, record: dict, *, journal_path: Path | None = None) -> None:
+    """Append one journal record as a JSONL line (module-level convenience for seams).
+
+    Writes to `journal_path` if supplied, otherwise DEFAULT_JOURNAL_PATH.
+    Callers (e.g. run_gapfill_floor) use this instead of constructing a RunJournal
+    when they already have the pre-built record dict from record_dropped_stale_competitor.
+    """
+    path = Path(journal_path) if journal_path is not None else DEFAULT_JOURNAL_PATH
+    path.parent.mkdir(parents=True, exist_ok=True)
+    line = json.dumps(record, ensure_ascii=False)
+    with path.open("a", encoding="utf-8") as fh:
+        fh.write(line + "\n")
+
+
+def read_runs(*, journal_path: Path | None = None) -> list[dict]:
+    """Return all journal records from the JSONL file as a list of dicts.
+
+    Returns [] if the file does not exist (first run). Used by second_order_pollution_alerts
+    to compute the trailing-14-run baseline.
+    """
+    path = Path(journal_path) if journal_path is not None else DEFAULT_JOURNAL_PATH
+    if not path.exists():
+        return []
+    records: list[dict] = []
+    for line in path.read_text(encoding="utf-8").splitlines():
+        line = line.strip()
+        if line:
+            try:
+                records.append(json.loads(line))
+            except json.JSONDecodeError:
+                pass
+    return records

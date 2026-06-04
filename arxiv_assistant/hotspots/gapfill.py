@@ -20,10 +20,12 @@ Design notes
 """
 from __future__ import annotations
 
+import importlib
 import statistics
-from datetime import date
+from datetime import date, datetime
 
 from arxiv_assistant.hotspots import date_verify
+from arxiv_assistant.utils.hotspot import run_journal
 from arxiv_assistant.utils.hotspot.gate_date import gate_date
 from arxiv_assistant.utils.hotspot.hotspot_schema import HotspotItem
 
@@ -150,3 +152,75 @@ def second_order_pollution_alerts(
                 ),
             })
     return alerts
+
+
+# ---------------------------------------------------------------------------
+# Stage-4 integration seams (Task 11) — callable by Stage-6 Kernel, NOT wired
+# into pipeline.py / kernel.py here.
+# ---------------------------------------------------------------------------
+
+REUSE_ADAPTERS: dict[str, str] = {
+    "hf_daily": "arxiv_assistant.apis.hotspot.reuse_hf_daily",
+    "ainews": "arxiv_assistant.apis.hotspot.reuse_ainews",
+    "agents_radar": "arxiv_assistant.apis.hotspot.reuse_agents_radar",
+    "horizon": "arxiv_assistant.apis.hotspot.reuse_horizon",
+    "scholar_inbox": "arxiv_assistant.apis.hotspot.reuse_scholar_inbox",
+}
+
+
+def harvest_reuse_layer(
+    reuse_sources: list[str],
+    target_date: datetime,
+    freshness_hours: int,
+) -> list[HotspotItem]:
+    """Fan out enabled reuse adapters -> competitor_items (one schema, stamped provenance).
+
+    Config-driven dispatch: only sources present in `reuse_sources` are harvested.
+    Per-source fault-tolerant: one failing adapter degrades to [] without killing others (spec §E).
+    """
+    out: list[HotspotItem] = []
+    for name in reuse_sources:
+        mod_path = REUSE_ADAPTERS.get(name)
+        if not mod_path:
+            continue
+        try:
+            mod = importlib.import_module(mod_path)
+            out.extend(mod.fetch_hotspot_items(target_date, freshness_hours))
+        except Exception as ex:  # degrade per source (spec §E)
+            print(f"Warning: reuse adapter {name} failed: {ex}")
+    return out
+
+
+def run_gapfill_floor(
+    our_coverage: set,
+    competitor_items: list[HotspotItem],
+    store,
+    *,
+    max_age_days: int,
+    as_of: date,
+    run_date: str,
+    journal_path=None,
+) -> dict:
+    """End-to-end Stage-4 seam: verify -> split -> gapfill -> assert floor -> journal -> alerts.
+
+    competitor_items must be the FULL set (eligible + dropped) so per-source
+    seen/dropped ratios in the journal record are correct (binding contract).
+
+    Returns {"new_items", "eligible", "dropped", "alerts"}.
+    The floor is asserted on (our_coverage ∪ gapfilled keys) so it is satisfied by
+    exactly the directed fetch we are about to ingest.
+    """
+    eligible, dropped = eligible_competitor_items(
+        competitor_items, store, max_age_days=max_age_days, as_of=as_of
+    )
+    new_items = gapfill(our_coverage, eligible)
+    covered = set(our_coverage) | {_key(i) for i in new_items}
+    assert_union_floor(covered, eligible)
+
+    record = run_journal.record_dropped_stale_competitor(run_date, eligible, dropped, competitor_items)
+    # Read PRIOR runs for the baseline BEFORE appending today's record — otherwise today's
+    # drop_ratio enters its own baseline median and self-suppresses the spike alert.
+    prior_history = run_journal.read_runs(journal_path=journal_path)
+    alerts = second_order_pollution_alerts(record, prior_history)
+    run_journal.append(run_date, record, journal_path=journal_path)
+    return {"new_items": new_items, "eligible": eligible, "dropped": dropped, "alerts": alerts}

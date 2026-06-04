@@ -101,19 +101,30 @@ def _clamp_verdict(
     earliest = min(credible)  # ISO day strings sort chronologically
     claimed_day = _floor_day_iso(claimed_iso)
 
+    # has_external_signal is ONLY from non-agent external signals (Wayback / page
+    # meta).  The agent's own date must NOT count here — an agent that hallucinated
+    # a future date and was overridden by min() would otherwise still leak its
+    # high confidence (INV6 anti-hallucination hardening).
     has_external_signal = bool(
-        _floor_day_iso((agent_out or {}).get("verified_first_date"))
-        or _floor_day_iso(wayback_earliest)
+        _floor_day_iso(wayback_earliest)
         or _floor_day_iso(page_published_time)
     )
     stale = bool(claimed_day is not None and earliest < claimed_day)
 
-    if has_external_signal:
-        # trust the agent's confidence but never below floor; cap to [0,1]
+    agent_floored = _floor_day_iso((agent_out or {}).get("verified_first_date"))
+    agent_agreed = bool(agent_floored is not None and agent_floored == earliest)
+
+    if has_external_signal or agent_agreed:
+        # Real external proof, or agent's date agreed with the earliest credible
+        # date — carry the (clamped-to-[0,1]) agent confidence.
         confidence = max(0.0, min(1.0, float((agent_out or {}).get("confidence", 0.7))))
+    elif agent_floored is not None and agent_floored > earliest:
+        # Agent proposed a date LATER than what min() picked (agent was overridden,
+        # possibly hallucinating a future date).  Cap to LOW — do not trust it.
+        confidence = _CONFIDENCE_LOW
     else:
-        # no credible earlier signal -> conservative min(claimed, fetched) low confidence
-        confidence = 0.3
+        # No external signal and no usable agent agreement -> conservative low.
+        confidence = _CONFIDENCE_LOW
 
     evidence = list((agent_out or {}).get("evidence", []))
     evidence.append(f"verifier:earliest_min;model={DATEVERIFY_MODEL_ID}")
@@ -130,8 +141,15 @@ def _clamp_verdict(
 # ---------------------------------------------------------------------------
 
 _WAYBACK_CDX = "http://web.archive.org/cdx/search/cdx"
-_META_PUBLISHED = re.compile(
+# Two patterns to handle both attribute orders:
+#   1. property/name first, content second: <meta property="article:published_time" content="...">
+#   2. content first, property/name second: <meta content="..." property="article:published_time">
+_META_PUBLISHED_PROP_FIRST = re.compile(
     r'<meta[^>]+(?:property|name)=["\']article:published_time["\'][^>]+content=["\']([^"\']+)["\']',
+    re.IGNORECASE,
+)
+_META_PUBLISHED_CONTENT_FIRST = re.compile(
+    r'<meta[^>]+content=["\']([^"\']+)["\'][^>]+(?:property|name)=["\']article:published_time["\']',
     re.IGNORECASE,
 )
 _JSONLD = re.compile(
@@ -168,21 +186,43 @@ def _wayback_earliest_snapshot(url: str) -> str | None:
 
 
 def _page_published_time(url: str) -> str | None:
-    """article:published_time meta or JSON-LD datePublished from the live page (§B.2 Tier-1 (b))."""
+    """article:published_time meta or JSON-LD datePublished from the live page (§B.2 Tier-1 (b)).
+
+    Meta-tag parsing handles both attribute orders:
+      - property/name first: <meta property="article:published_time" content="...">
+      - content first:       <meta content="..." property="article:published_time">
+
+    JSON-LD parsing handles both a bare object/list and a @graph-wrapped structure
+    (e.g. {"@graph": [{"datePublished": "..."}]}).
+    """
     try:
         html = fetch_text(url)
     except Exception:
         return None
-    m = _META_PUBLISHED.search(html)
-    if m:
-        return m.group(1).strip()
+    # Try both meta attribute orders.
+    for pattern in (_META_PUBLISHED_PROP_FIRST, _META_PUBLISHED_CONTENT_FIRST):
+        m = pattern.search(html)
+        if m:
+            return m.group(1).strip()
     for block in _JSONLD.findall(html):
         try:
             data = json.loads(block)
         except (ValueError, TypeError):
             continue
-        candidates = data if isinstance(data, list) else [data]
+        # Normalise to a flat list of candidate objects.
+        candidates: list = data if isinstance(data, list) else [data]
+        # Also expand one level of @graph if present.
+        expanded: list = []
         for obj in candidates:
+            if isinstance(obj, dict):
+                graph = obj.get("@graph")
+                if isinstance(graph, list):
+                    expanded.extend(graph)
+                else:
+                    expanded.append(obj)
+            else:
+                expanded.append(obj)
+        for obj in expanded:
             if isinstance(obj, dict) and obj.get("datePublished"):
                 return str(obj["datePublished"]).strip()
     return None

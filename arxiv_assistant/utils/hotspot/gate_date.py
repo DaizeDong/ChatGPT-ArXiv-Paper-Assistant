@@ -24,15 +24,13 @@ def floor_to_utc_day(iso_ts: str | None) -> date | None:
     return dt.astimezone(UTC).date()
 
 
-# Stage 1 anchor keys (whole-day authoritative stamps; spec §2.4 / §B.3.1).
-# The "_date" variants were established in Stage 1; the "_day" variants are the
-# kernel-stamped keys added in Stage 3 (§B.3.1 addendum).  Both are accepted so
-# the gate is forward-compatible without a data migration.
+# Anchor keys (whole-day authoritative stamps; spec §2.4 / §B.3.1).
+# Standardized to the Stage-3 kernel-stamped "_day" variants only.
+# The "_date" variants (Stage 1) have been removed — no migration cost because
+# the upstream stamping code is not yet written.
 _ANCHOR_KEYS = (
-    "arxiv_announced_date",    # Stage 1
-    "arxiv_announced_day",     # Stage 3 kernel-stamped
-    "crossref_registered_date",  # Stage 1
-    "crossref_registered_day",   # Stage 3 kernel-stamped
+    "arxiv_announced_day",      # arXiv announced day (kernel-stamped, Stage 3)
+    "crossref_registered_day",  # Crossref registration day (kernel-stamped, Stage 3)
 )
 
 
@@ -40,8 +38,8 @@ def credible_dates(item: HotspotItem) -> list[str]:
     """All machine-independent credible dates for an item, as ISO strings.
 
     §B.3.1: authoritative whole-day anchors (arXiv announced day / Crossref
-    registration day) join {verified_first_date}. Anchors are kernel-stamped
-    into item.metadata during Tier-0 so this function performs no network I/O.
+    registration day) join {verified_first_date}. Anchor keys are the Stage-3
+    kernel-stamped "_day" variants; this function performs no network I/O.
     """
     dates: list[str] = []
     verified = getattr(item, "verified_first_date", None)
@@ -66,8 +64,8 @@ def gate_date(item: HotspotItem) -> date | None:
     credible date exists (gate treats None as cannot-verify → do not drop).
 
     Metadata anchor keys (spec §2.4 / §B.3.1):
-      - "arxiv_announced_date" / "arxiv_announced_day"     — arXiv announced day
-      - "crossref_registered_date" / "crossref_registered_day" — Crossref registration day
+      - "arxiv_announced_day"      — arXiv announced day (kernel-stamped)
+      - "crossref_registered_day"  — Crossref registration day (kernel-stamped)
     """
     candidates = [floor_to_utc_day(d) for d in credible_dates(item)]
     candidates = [d for d in candidates if d is not None]

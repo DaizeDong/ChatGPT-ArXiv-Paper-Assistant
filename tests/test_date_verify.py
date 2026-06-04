@@ -388,6 +388,25 @@ class TestAntiPollutionReads(unittest.TestCase):
         with patch.object(date_verify, "fetch_text", return_value=html):
             self.assertEqual(date_verify._page_published_time("https://example.com/x"), "2024-02-01T00:00:00Z")
 
+    def test_page_published_time_reversed_meta_attribute_order(self):
+        """Fix 3: content attr before property attr must still be parsed."""
+        from arxiv_assistant.hotspots import date_verify
+        # reversed order: content first, property second
+        html = '<html><head><meta content="2025-03-15T10:00:00Z" property="article:published_time"></head></html>'
+        with patch.object(date_verify, "fetch_text", return_value=html):
+            self.assertEqual(date_verify._page_published_time("https://example.com/x"), "2025-03-15T10:00:00Z")
+
+    def test_page_published_time_jsonld_graph_wrapped(self):
+        """Fix 3: @graph-wrapped JSON-LD must yield datePublished from nested objects."""
+        from arxiv_assistant.hotspots import date_verify
+        html = (
+            '<html><head><script type="application/ld+json">'
+            '{"@context":"https://schema.org","@graph":[{"@type":"Article","datePublished":"2024-05-20T00:00:00Z"}]}'
+            '</script></head></html>'
+        )
+        with patch.object(date_verify, "fetch_text", return_value=html):
+            self.assertEqual(date_verify._page_published_time("https://example.com/x"), "2024-05-20T00:00:00Z")
+
 
 class TestClampVerdict(unittest.TestCase):
     def test_clamp_picks_earliest_credible_and_floors_to_day(self):
@@ -437,6 +456,56 @@ class TestClampVerdict(unittest.TestCase):
         self.assertEqual(clamped["verified_first_date"], "2026-06-02T00:00:00Z")
         self.assertLess(clamped["confidence"], 0.5)
         self.assertFalse(clamped["stale_date_pollution"])
+
+
+class TestClampVerdictINV6AntiHallucination(unittest.TestCase):
+    """Fix 4: INV6 — agent proposes a future date with no external signal → confidence capped LOW."""
+
+    def test_clamp_rejects_hallucinated_future_agent_date_no_external_signal(self):
+        """Agent claims 2099 with no Wayback/page signal: min picks the claimed date,
+        confidence must be LOW (not the agent's high 0.95)."""
+        from arxiv_assistant.hotspots.date_verify import _clamp_verdict, _CONFIDENCE_LOW
+        claimed = "2023-11-14T00:00:00Z"
+        clamped = _clamp_verdict(
+            claimed_iso=claimed,
+            agent_out={
+                "verified_first_date": "2099-01-01T00:00:00Z",  # hallucinated future
+                "confidence": 0.95,
+                "evidence": [],
+            },
+            wayback_earliest=None,
+            page_published_time=None,
+        )
+        # min picks the claimed date (2023), not the hallucinated 2099
+        self.assertEqual(clamped["verified_first_date"], "2023-11-14T00:00:00Z")
+        # stale_date_pollution must be False: claimed IS the earliest, not stale
+        self.assertFalse(clamped["stale_date_pollution"])
+        # confidence must be capped to LOW — agent's 0.95 must not leak through
+        self.assertLessEqual(clamped["confidence"], _CONFIDENCE_LOW)
+
+    def test_clamp_hallucinated_future_agent_wayback_proves_earlier(self):
+        """Agent claims 2099 but Wayback shows 2023: min picks 2023, stale=True, confidence
+        should reflect the external Wayback signal (agent was overridden but Wayback is real)."""
+        from arxiv_assistant.hotspots.date_verify import _clamp_verdict, _CONFIDENCE_LOW
+        claimed = "2026-06-02T09:00:00Z"
+        clamped = _clamp_verdict(
+            claimed_iso=claimed,
+            agent_out={
+                "verified_first_date": "2099-01-01T00:00:00Z",  # hallucinated future
+                "confidence": 0.95,
+                "evidence": [],
+            },
+            wayback_earliest="2023-11-14T00:00:00Z",
+            page_published_time=None,
+        )
+        # Wayback 2023 is the earliest credible signal
+        self.assertEqual(clamped["verified_first_date"], "2023-11-14T00:00:00Z")
+        # claimed (2026) > earliest (2023) → stale_date_pollution
+        self.assertTrue(clamped["stale_date_pollution"])
+        # Wayback IS a real external signal, so confidence is carried (not hard-capped to LOW)
+        # but it is a valid clamped-to-[0,1] value
+        self.assertGreaterEqual(clamped["confidence"], 0.0)
+        self.assertLessEqual(clamped["confidence"], 1.0)
 
 
 class TestGateDateAuthoritativeAnchor(unittest.TestCase):

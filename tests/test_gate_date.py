@@ -93,19 +93,19 @@ class TestGateDate(unittest.TestCase):
     def test_arxiv_announced_anchor_min_wins(self) -> None:
         # Authoritative whole-day anchor earlier than verified → min wins (§B.3.1).
         item = _item(verified_first_date="2023-01-05T00:00:00Z",
-                     metadata={"arxiv_announced_date": "2023-01-02"})
+                     metadata={"arxiv_announced_day": "2023-01-02"})
         self.assertEqual(gate_date(item), date(2023, 1, 2))
 
     def test_crossref_anchor_min_wins(self) -> None:
         item = _item(verified_first_date="2024-06-10T00:00:00Z",
-                     metadata={"crossref_registered_date": "2024-06-09"})
+                     metadata={"crossref_registered_day": "2024-06-09"})
         self.assertEqual(gate_date(item), date(2024, 6, 9))
 
     def test_min_is_monotone_earliest_wins(self) -> None:
         # All three credible dates present; earliest (anchor) wins regardless of order.
         item = _item(verified_first_date="2025-03-03T00:00:00Z",
-                     metadata={"arxiv_announced_date": "2025-03-01",
-                               "crossref_registered_date": "2025-03-02"})
+                     metadata={"arxiv_announced_day": "2025-03-01",
+                               "crossref_registered_day": "2025-03-02"})
         self.assertEqual(gate_date(item), date(2025, 3, 1))
 
     def test_subday_jitter_absorbed_by_floor(self) -> None:
@@ -116,7 +116,7 @@ class TestGateDate(unittest.TestCase):
         self.assertEqual(a, date(2026, 4, 4))
 
     def test_anchor_only_no_verified(self) -> None:
-        item = _item(metadata={"arxiv_announced_date": "2023-01-02"})
+        item = _item(metadata={"arxiv_announced_day": "2023-01-02"})
         item.verified_first_date = None
         self.assertEqual(gate_date(item), date(2023, 1, 2))
 

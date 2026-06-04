@@ -424,6 +424,105 @@ class TestSynthesizeVerifier(unittest.TestCase):
         self.assertIn("t1", payload["manifest"]["synthesize_rejected"])
 
 
+class TestSynthesizeTransport(unittest.TestCase):
+    """Item A: synthesize_bilingual wires claude -p (run_agent) into Stage 6.
+
+    Every test @patches arxiv_assistant.hotspots.synthesize.run_agent — NEVER
+    spawns a real claude -p subprocess. The kernel verifier (_synthesis_row_valid)
+    is exercised end-to-end and is never bypassed.
+    """
+
+    def _topic(self) -> dict:
+        return {
+            "TOPIC_ID": "t1", "title": "Old title", "HEADLINE": "Old title",
+            "WHY_IT_MATTERS": "Some prior reason.", "KEY_TAKEAWAYS": [],
+            "EVIDENCE_URLS": ["https://x/a", "https://x/b"],
+            "items": [
+                {"title": "Subitem about coding performance gains",
+                 "summary": "Research shows significant improvements in multi-step coding benchmarks."},
+            ],
+        }
+
+    def _ctx(self, root, td, topic):
+        kernel._write_checkpoint(root, td, "score",
+                                 {"featured": [topic], "watchlist": [], "all_topics": []})
+        cfg = configparser.ConfigParser()
+        cfg["HOTSPOTS"] = {"enabled": "true", "mode": "openai",
+                           "model_synthesize": "pinned-model-v1"}
+        return kernel.KernelContext(output_root=root, target_date=td, config=cfg,
+                                    store=None, journal=[])
+
+    def test_valid_run_agent_dict_applies_bilingual_fields_through_verifier(self) -> None:
+        """A valid run_agent dict whose evidence matches the topic flows through
+        _synthesis_row_valid and the bilingual fields are applied end-to-end."""
+        from arxiv_assistant.hotspots import synthesize as synth
+        agent_out = {"topics": [{
+            "TOPIC_ID": "t1",
+            "headline_en": "Frontier lab ships agentic coding model",
+            "headline_zh": "前沿实验室发布智能体编码模型",
+            "summary_en": "A new release improves long-horizon coding tasks.",
+            "summary_zh": "新版本提升了长程编码任务表现。",
+            "evidence": ["https://x/a"],
+        }]}
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            td = datetime(2026, 5, 20, tzinfo=timezone.utc)
+            ctx = self._ctx(root, td, self._topic())
+            with unittest.mock.patch.object(synth, "run_agent", return_value=agent_out) as ra:
+                payload = kernel._stage_synthesize(ctx)
+            self.assertTrue(ra.called)  # real transport invoked, not the stub
+        topic = payload["featured"][0]
+        self.assertEqual(topic["HEADLINE"], "Frontier lab ships agentic coding model")
+        self.assertEqual(topic["HEADLINE_ZH"], "前沿实验室发布智能体编码模型")
+        self.assertEqual(topic["WHY_IT_MATTERS"], "A new release improves long-horizon coding tasks.")
+        self.assertEqual(topic["WHY_IT_MATTERS_ZH"], "新版本提升了长程编码任务表现。")
+        self.assertEqual(payload["manifest"]["synthesize_rejected"], [])
+
+    def test_agent_error_returns_empty_topics_and_degrades_to_heuristic(self) -> None:
+        """run_agent raising AgentError -> synthesize_bilingual returns
+        {"topics": []} -> _stage_synthesize degrades all topics to heuristic
+        (no crash, original title kept, takeaways filled)."""
+        from arxiv_assistant.hotspots import synthesize as synth
+        from arxiv_assistant.utils.agent_runner import AgentError
+
+        # Unit-level contract: AgentError -> {"topics": []}
+        with unittest.mock.patch.object(synth, "run_agent", side_effect=AgentError("boom")):
+            out = synth.synthesize_bilingual([self._topic()], model="m", temperature=0)
+        self.assertEqual(out, {"topics": []})
+
+        # End-to-end: kernel degrades without raising.
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            td = datetime(2026, 5, 20, tzinfo=timezone.utc)
+            ctx = self._ctx(root, td, self._topic())
+            with unittest.mock.patch.object(synth, "run_agent", side_effect=AgentError("boom")):
+                payload = kernel._stage_synthesize(ctx)
+        out = payload["featured"][0]
+        self.assertEqual(out["HEADLINE"], "Old title")
+        self.assertTrue(out["KEY_TAKEAWAYS"])
+        self.assertIn("t1", payload["manifest"]["synthesize_rejected"])
+
+    def test_placeholder_model_resolves_to_real_default(self) -> None:
+        """An empty/placeholder model is resolved to the real default model id
+        before being passed to run_agent."""
+        from arxiv_assistant.hotspots import synthesize as synth
+        agent_out = {"topics": []}
+        for placeholder in ("", "claude-code-subagent"):
+            with unittest.mock.patch.object(synth, "run_agent", return_value=agent_out) as ra:
+                synth.synthesize_bilingual([self._topic()], model=placeholder, temperature=0)
+            self.assertEqual(ra.call_args.kwargs["model"], "claude-sonnet-4-6")
+            # timeout pinned to 180s; deterministic (no temperature kwarg).
+            self.assertEqual(ra.call_args.kwargs["timeout_s"], 180)
+            self.assertNotIn("temperature", ra.call_args.kwargs)
+
+    def test_real_model_passed_through_unchanged(self) -> None:
+        """A real (non-placeholder) model id is forwarded verbatim to run_agent."""
+        from arxiv_assistant.hotspots import synthesize as synth
+        with unittest.mock.patch.object(synth, "run_agent", return_value={"topics": []}) as ra:
+            synth.synthesize_bilingual([self._topic()], model="pinned-model-v1", temperature=0)
+        self.assertEqual(ra.call_args.kwargs["model"], "pinned-model-v1")
+
+
 from arxiv_assistant.utils.hotspot.hotspot_web_data import build_daily_hotspot_web_payload
 
 

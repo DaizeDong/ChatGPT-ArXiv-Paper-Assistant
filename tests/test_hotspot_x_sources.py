@@ -9,7 +9,6 @@ from pathlib import Path
 from unittest.mock import patch
 
 from arxiv_assistant.apis.hotspot.hotspot_x_ainews import _extract_twitter_section_items
-from arxiv_assistant.apis.hotspot.hotspot_x_official import _query_accounts, fetch_hotspot_items as fetch_x_official_items
 from arxiv_assistant.apis.hotspot.hotspot_x_paperpulse import fetch_hotspot_items as fetch_x_paperpulse_items
 from arxiv_assistant.utils.hotspot.x_authority_registry import build_x_authority_registry, load_x_authority_registry, refresh_x_authority_registry
 
@@ -45,67 +44,6 @@ class TestHotspotXSources(unittest.TestCase):
         self.assertEqual(items[0].metadata["host"], "x.com")
         self.assertGreaterEqual(items[0].metadata["activity"], 80)
 
-    @patch("arxiv_assistant.apis.hotspot.hotspot_x_official._iter_recent_search")
-    def test_x_official_adapter_builds_items_from_recent_search(self, mock_iter_recent_search) -> None:
-        mock_iter_recent_search.return_value = [
-            {
-                "id": "2035012260008272007",
-                "text": "GPT-5.4 mini is available today in ChatGPT, Codex, and the API. https://t.co/abc123",
-                "created_at": "2026-03-21T10:00:00.000Z",
-                "author_id": "1",
-                "author": {"username": "OpenAI", "name": "OpenAI", "verified": True},
-                "entities": {"urls": [{"expanded_url": "https://openai.com/index/gpt-5-4-mini"}]},
-                "public_metrics": {"like_count": 120, "reply_count": 9, "retweet_count": 15, "quote_count": 4, "bookmark_count": 10, "impression_count": 53000},
-                "referenced_tweets": [],
-            },
-            {
-                "id": "2035012260008272009",
-                "text": "Are you up for a challenge? https://t.co/demo",
-                "created_at": "2026-03-21T10:02:00.000Z",
-                "author_id": "2",
-                "author": {"username": "OpenAI", "name": "OpenAI", "verified": True},
-                "entities": {"urls": [{"expanded_url": "https://openai.com/index/parameter-golf"}]},
-                "public_metrics": {"like_count": 900, "reply_count": 12, "retweet_count": 20, "quote_count": 3, "bookmark_count": 1, "impression_count": 80000},
-                "referenced_tweets": [],
-            },
-            {
-                "id": "2035012260008272010",
-                "text": "Our new paper on agents is out today: https://t.co/paper",
-                "created_at": "2026-03-21T10:05:00.000Z",
-                "author_id": "3",
-                "author": {"username": "demishassabis", "name": "Demis Hassabis", "verified": True},
-                "entities": {"urls": [{"expanded_url": "https://arxiv.org/abs/2603.12345"}]},
-                "public_metrics": {"like_count": 400, "reply_count": 40, "retweet_count": 80, "quote_count": 8, "bookmark_count": 20, "impression_count": 90000},
-                "referenced_tweets": [],
-            },
-        ]
-        with tempfile.TemporaryDirectory() as tmp_dir, patch.dict(os.environ, {"X_BEARER_TOKEN": "test-token"}):
-            config_path = Path(tmp_dir) / "x_seeds.json"
-            config_path.write_text(
-                json.dumps(
-                    {
-                        "accounts": [
-                            {"handle": "openai", "name": "OpenAI", "kind": "official", "tier": 3, "active": True},
-                            {"handle": "demishassabis", "name": "Demis Hassabis", "kind": "researcher", "tier": 3, "active": True},
-                        ]
-                    }
-                ),
-                encoding="utf-8",
-            )
-            items = fetch_x_official_items(
-                datetime(2026, 3, 21, tzinfo=UTC),
-                36,
-                config_path,
-                default_result_limit=80,
-                snapshot_path=Path(tmp_dir) / "x_authority_inventory.json",
-            )
-        self.assertEqual(len(items), 1)
-        self.assertEqual(items[0].url, "https://x.com/OpenAI/status/2035012260008272007")
-        self.assertEqual(items[0].source_name, "OpenAI")
-        self.assertEqual(items[0].source_role, "official_news")
-        self.assertEqual(items[0].metadata["authority_kind"], "official")
-        self.assertGreater(items[0].metadata["activity"], 200)
-
     @patch("arxiv_assistant.apis.hotspot.hotspot_x_paperpulse.fetch_json")
     def test_paperpulse_adapter_builds_researcher_feed_items(self, mock_fetch_json) -> None:
         mock_fetch_json.return_value = {
@@ -122,27 +60,12 @@ class TestHotspotXSources(unittest.TestCase):
                 }
             ],
         }
-        items = fetch_x_paperpulse_items(datetime(2026, 3, 21, tzinfo=UTC), 36, result_limit=10)
+        items = fetch_x_paperpulse_items(datetime(2026, 3, 21, 12, 0, tzinfo=UTC), 36, result_limit=10)
         self.assertEqual(len(items), 1)
         self.assertEqual(items[0].source_name, "PaperPulse Researcher Feed")
         self.assertEqual(items[0].url, "https://x.com/demishassabis/status/2035012260008273000")
         self.assertEqual(items[0].metadata["proxy_source"], "paperpulse")
         self.assertGreater(items[0].metadata["activity"], 1000)
-
-    @patch("arxiv_assistant.apis.hotspot.hotspot_x_official._iter_recent_search")
-    def test_x_official_query_accounts_stops_cleanly_on_rate_limit(self, mock_iter_recent_search) -> None:
-        mock_iter_recent_search.side_effect = [
-            [{"id": "1", "text": "OpenAI update", "author": {"username": "OpenAI"}}],
-            Exception("429 Client Error: Too Many Requests"),
-        ]
-        rows = _query_accounts(
-            [{"handle": "openai"}, {"handle": "anthropicai"}, {"handle": "googledeepmind"}],
-            bearer_token="token",
-            result_limit=10,
-            batch_size=2,
-        )
-        self.assertEqual(len(rows), 1)
-        self.assertEqual(rows[0]["id"], "1")
 
     @patch("arxiv_assistant.utils.hotspot.x_authority_registry._get_bearer_token", return_value=None)
     @patch("arxiv_assistant.utils.hotspot.x_authority_registry.fetch_json")

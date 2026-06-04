@@ -302,5 +302,28 @@ class TestPollArxivVersions(unittest.TestCase):
         self.assertEqual(result, {"2301.00001": 3, "2302.00002": 1})
 
 
+from arxiv_assistant.utils.hotspot.hotspot_sources import get_freshness_date
+
+
+class TestGetFreshnessDate(unittest.TestCase):
+    def test_prefers_verified_first_date(self) -> None:
+        item = _hf_item(published_at="2026-04-04T12:00:00Z")
+        item.verified_first_date = "2023-01-02T18:00:00Z"
+        # INV1: verified date wins over source-claimed published_at.
+        self.assertEqual(get_freshness_date(item), "2023-01-02T18:00:00Z")
+
+    def test_falls_back_to_published_at_when_unverified(self) -> None:
+        item = _hf_item(published_at="2026-04-04T12:00:00Z")
+        item.verified_first_date = None
+        self.assertEqual(get_freshness_date(item), "2026-04-04T12:00:00Z")
+
+    def test_github_trend_still_uses_fetched_at(self) -> None:
+        item = _hf_item(source_id="github_trend",
+                        published_at="2026-04-01T00:00:00Z",
+                        metadata={"fetched_at": "2026-04-04T00:00:00Z"})
+        item.verified_first_date = None
+        self.assertEqual(get_freshness_date(item), "2026-04-04T00:00:00Z")
+
+
 if __name__ == "__main__":
     unittest.main()

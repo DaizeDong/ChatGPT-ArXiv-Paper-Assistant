@@ -148,14 +148,18 @@ _FETCHED_AT_VALID_SOURCES = {"github_trend"}
 def get_freshness_date(item: "HotspotItem") -> str | None:
     """Return the most appropriate date for freshness evaluation.
 
-    Only github_trend sources may use fetched_at to override published_at,
-    since GitHub repos can trend long after creation. All other sources
-    use published_at directly.
+    Priority (spec §2.1/§B.5):
+      1. github_trend: fetched_at (repos trend long after creation).
+      2. verified_first_date (set by DateVerify) — the only trusted first date.
+      3. published_at — backward-compat fallback for pre-DateVerify items.
     """
     if item.source_id in _FETCHED_AT_VALID_SOURCES:
         fetched_at = (item.metadata or {}).get("fetched_at")
         if fetched_at:
             return fetched_at
+    verified = getattr(item, "verified_first_date", None)
+    if verified:
+        return verified
     return item.published_at
 
 

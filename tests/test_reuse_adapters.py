@@ -1,4 +1,5 @@
-"""Tests for reuse_hf_daily and reuse_ainews adapters.
+"""Tests for reuse_hf_daily, reuse_ainews, reuse_agents_radar, reuse_horizon,
+and reuse_scholar_inbox adapters.
 
 Key contract assertions per spec §D.1/§D.2:
   - provenance="reuse:<name>"  (stamped by build_reuse_item)
@@ -15,7 +16,13 @@ import unittest
 from datetime import datetime, timezone
 from unittest.mock import patch
 
-from arxiv_assistant.apis.hotspot import reuse_ainews, reuse_hf_daily
+from arxiv_assistant.apis.hotspot import (
+    reuse_agents_radar,
+    reuse_ainews,
+    reuse_hf_daily,
+    reuse_horizon,
+    reuse_scholar_inbox,
+)
 from arxiv_assistant.utils.hotspot.hotspot_schema import HotspotItem
 
 # ---------------------------------------------------------------------------
@@ -411,6 +418,369 @@ class TestReuseAinewsFetch(unittest.TestCase):
         entry = {"description": "<p>Description value</p>"}
         result = reuse_ainews._summary(entry)
         self.assertIn("Description value", result)
+
+
+# ---------------------------------------------------------------------------
+# Shared sample RSS for agents_radar / horizon / scholar_inbox
+# ---------------------------------------------------------------------------
+
+_AGENTS_RADAR_RSS = textwrap.dedent("""\
+    <?xml version="1.0" encoding="UTF-8"?>
+    <feed xmlns="http://www.w3.org/2005/Atom">
+      <title>Agents Radar</title>
+      <link href="https://www.agents-radar.com/"/>
+      <entry>
+        <title>AutoGen v3 Released</title>
+        <link href="https://www.agents-radar.com/posts/autogen-v3"/>
+        <summary>AutoGen v3 ships with multi-modal tool use.</summary>
+        <updated>2026-06-02T10:00:00Z</updated>
+      </entry>
+      <entry>
+        <title>Agent Benchmark Deep Dive</title>
+        <link href="https://www.agents-radar.com/posts/agent-bench"/>
+        <summary>A thorough look at agent evaluation benchmarks.</summary>
+        <updated>2026-06-02T08:00:00Z</updated>
+      </entry>
+      <entry>
+        <title>Old Agents Post From 2020</title>
+        <link href="https://www.agents-radar.com/posts/old-2020"/>
+        <summary>Stale content.</summary>
+        <updated>2020-01-01T00:00:00Z</updated>
+      </entry>
+    </feed>
+""")
+
+_HORIZON_RSS = textwrap.dedent("""\
+    <?xml version="1.0" encoding="UTF-8"?>
+    <rss version="2.0">
+      <channel>
+        <title>The Batch | DeepLearning.AI</title>
+        <link>https://www.deeplearning.ai/the-batch</link>
+        <description>Weekly AI roundup</description>
+        <item>
+          <title>The Batch: Issue 250 — The Year of Agents</title>
+          <link>https://www.deeplearning.ai/the-batch/issue-250</link>
+          <description>This week: agent frameworks proliferate and LLMs hit new benchmarks.</description>
+          <pubDate>Wed, 28 May 2026 12:00:00 +0000</pubDate>
+        </item>
+        <item>
+          <title>The Batch: Issue 249 — Foundation Models Update</title>
+          <link>https://www.deeplearning.ai/the-batch/issue-249</link>
+          <description>Foundation model updates from last week.</description>
+          <pubDate>Wed, 21 May 2026 12:00:00 +0000</pubDate>
+        </item>
+        <item>
+          <title>The Batch: Very Old Issue</title>
+          <link>https://www.deeplearning.ai/the-batch/issue-1</link>
+          <description>Ancient history.</description>
+          <pubDate>Wed, 01 Jan 2020 12:00:00 +0000</pubDate>
+        </item>
+      </channel>
+    </rss>
+""")
+
+_SCHOLAR_INBOX_RSS = textwrap.dedent("""\
+    <?xml version="1.0" encoding="UTF-8"?>
+    <rss version="2.0">
+      <channel>
+        <title>Scholar Inbox Digest</title>
+        <link>https://www.scholar-inbox.com</link>
+        <description>Personalized paper recommendations</description>
+        <item>
+          <title>Scaling Laws for LLM Agents</title>
+          <link>https://arxiv.org/abs/2406.11111</link>
+          <description>Empirical study of scaling laws for agentic LLM systems.</description>
+          <pubDate>Mon, 02 Jun 2026 09:00:00 +0000</pubDate>
+        </item>
+        <item>
+          <title>Multimodal Reasoning in VLMs</title>
+          <link>https://arxiv.org/abs/2406.22222</link>
+          <description>New insights into visual-language model reasoning.</description>
+          <pubDate>Mon, 02 Jun 2026 07:00:00 +0000</pubDate>
+        </item>
+        <item>
+          <title>Old Survey From 2019</title>
+          <link>https://arxiv.org/abs/1901.00001</link>
+          <description>A 2019 NLP survey.</description>
+          <pubDate>Tue, 01 Jan 2019 00:00:00 +0000</pubDate>
+        </item>
+      </channel>
+    </rss>
+""")
+
+# Patch target: harvest_rss_reuse calls fetch_text from reuse_common
+_REUSE_COMMON_FETCH_PATCH = "arxiv_assistant.apis.hotspot.reuse_common.fetch_text"
+
+
+# ===========================================================================
+# Tests for reuse_agents_radar
+# ===========================================================================
+
+class TestReuseAgentsRadarModule(unittest.TestCase):
+    """Module-level sanity checks."""
+
+    def test_module_has_fetch_hotspot_items(self) -> None:
+        self.assertTrue(hasattr(reuse_agents_radar, "fetch_hotspot_items"))
+
+    def test_reuse_name_constant(self) -> None:
+        self.assertEqual(reuse_agents_radar.REUSE_NAME, "agents_radar")
+
+    def test_feed_url_constant_set(self) -> None:
+        self.assertEqual(reuse_agents_radar.FEED_URL, "https://www.agents-radar.com/feed.xml")
+
+
+class TestReuseAgentsRadarFetch(unittest.TestCase):
+    """fetch_hotspot_items behaviour — all HTTP mocked."""
+
+    @patch(_REUSE_COMMON_FETCH_PATCH, return_value=_AGENTS_RADAR_RSS)
+    def test_returns_list_of_hotspot_items(self, _mock) -> None:
+        items = reuse_agents_radar.fetch_hotspot_items(_TARGET_DATE, _FRESHNESS_HOURS)
+        self.assertIsInstance(items, list)
+        for item in items:
+            self.assertIsInstance(item, HotspotItem)
+
+    @patch(_REUSE_COMMON_FETCH_PATCH, return_value=_AGENTS_RADAR_RSS)
+    def test_provenance_is_reuse_agents_radar(self, _mock) -> None:
+        items = reuse_agents_radar.fetch_hotspot_items(_TARGET_DATE, _FRESHNESS_HOURS)
+        self.assertGreater(len(items), 0)
+        for item in items:
+            self.assertEqual(item.provenance, "reuse:agents_radar")
+
+    @patch(_REUSE_COMMON_FETCH_PATCH, return_value=_AGENTS_RADAR_RSS)
+    def test_verified_first_date_is_none(self, _mock) -> None:
+        """DateVerify is downstream; reuse adapter must NOT set verified_first_date."""
+        items = reuse_agents_radar.fetch_hotspot_items(_TARGET_DATE, _FRESHNESS_HOURS)
+        self.assertGreater(len(items), 0)
+        for item in items:
+            self.assertIsNone(item.verified_first_date)
+
+    @patch(_REUSE_COMMON_FETCH_PATCH, return_value=_AGENTS_RADAR_RSS)
+    def test_fresh_items_returned_stale_filtered(self, _mock) -> None:
+        items = reuse_agents_radar.fetch_hotspot_items(_TARGET_DATE, _FRESHNESS_HOURS)
+        urls = [item.url for item in items]
+        self.assertNotIn("https://www.agents-radar.com/posts/old-2020", urls)
+        self.assertTrue(
+            any("autogen-v3" in u or "agent-bench" in u for u in urls),
+            msg="Fresh 2026 agents-radar posts should be returned",
+        )
+
+    @patch(_REUSE_COMMON_FETCH_PATCH, return_value=_AGENTS_RADAR_RSS)
+    def test_source_id_is_reuse_agents_radar(self, _mock) -> None:
+        items = reuse_agents_radar.fetch_hotspot_items(_TARGET_DATE, _FRESHNESS_HOURS)
+        for item in items:
+            self.assertEqual(item.source_id, "reuse_agents_radar")
+
+    @patch(_REUSE_COMMON_FETCH_PATCH, return_value=_AGENTS_RADAR_RSS)
+    def test_source_type_is_reuse(self, _mock) -> None:
+        items = reuse_agents_radar.fetch_hotspot_items(_TARGET_DATE, _FRESHNESS_HOURS)
+        for item in items:
+            self.assertEqual(item.source_type, "reuse")
+
+    @patch(_REUSE_COMMON_FETCH_PATCH, return_value=_AGENTS_RADAR_RSS)
+    def test_source_role_is_builder_ecosystem(self, _mock) -> None:
+        items = reuse_agents_radar.fetch_hotspot_items(_TARGET_DATE, _FRESHNESS_HOURS)
+        for item in items:
+            self.assertEqual(item.source_role, "builder_ecosystem")
+
+    @patch(_REUSE_COMMON_FETCH_PATCH, return_value=_AGENTS_RADAR_RSS)
+    def test_result_limit_honoured(self, _mock) -> None:
+        items = reuse_agents_radar.fetch_hotspot_items(_TARGET_DATE, _FRESHNESS_HOURS, result_limit=1)
+        self.assertLessEqual(len(items), 1)
+
+    @patch(_REUSE_COMMON_FETCH_PATCH, side_effect=Exception("network error"))
+    def test_fetch_failure_returns_empty_list(self, _mock) -> None:
+        """Fetch failure must degrade to [] without crashing (spec §E)."""
+        items = reuse_agents_radar.fetch_hotspot_items(_TARGET_DATE, _FRESHNESS_HOURS)
+        self.assertEqual(items, [])
+
+    @patch(_REUSE_COMMON_FETCH_PATCH, return_value="not valid xml <<<>>>")
+    def test_malformed_feed_returns_empty_list(self, _mock) -> None:
+        items = reuse_agents_radar.fetch_hotspot_items(_TARGET_DATE, _FRESHNESS_HOURS)
+        self.assertEqual(items, [])
+
+
+# ===========================================================================
+# Tests for reuse_horizon
+# ===========================================================================
+
+class TestReuseHorizonModule(unittest.TestCase):
+    """Module-level sanity checks."""
+
+    def test_module_has_fetch_hotspot_items(self) -> None:
+        self.assertTrue(hasattr(reuse_horizon, "fetch_hotspot_items"))
+
+    def test_reuse_name_constant(self) -> None:
+        self.assertEqual(reuse_horizon.REUSE_NAME, "horizon")
+
+    def test_feed_url_constant_set(self) -> None:
+        self.assertEqual(reuse_horizon.FEED_URL, "https://www.deeplearning.ai/the-batch/rss.xml")
+
+
+class TestReuseHorizonFetch(unittest.TestCase):
+    """fetch_hotspot_items behaviour — all HTTP mocked."""
+
+    @patch(_REUSE_COMMON_FETCH_PATCH, return_value=_HORIZON_RSS)
+    def test_returns_list_of_hotspot_items(self, _mock) -> None:
+        items = reuse_horizon.fetch_hotspot_items(_TARGET_DATE, _FRESHNESS_HOURS)
+        self.assertIsInstance(items, list)
+        for item in items:
+            self.assertIsInstance(item, HotspotItem)
+
+    @patch(_REUSE_COMMON_FETCH_PATCH, return_value=_HORIZON_RSS)
+    def test_provenance_is_reuse_horizon(self, _mock) -> None:
+        items = reuse_horizon.fetch_hotspot_items(_TARGET_DATE, _FRESHNESS_HOURS)
+        self.assertGreater(len(items), 0)
+        for item in items:
+            self.assertEqual(item.provenance, "reuse:horizon")
+
+    @patch(_REUSE_COMMON_FETCH_PATCH, return_value=_HORIZON_RSS)
+    def test_verified_first_date_is_none(self, _mock) -> None:
+        """DateVerify is downstream; reuse adapter must NOT set verified_first_date."""
+        items = reuse_horizon.fetch_hotspot_items(_TARGET_DATE, _FRESHNESS_HOURS)
+        self.assertGreater(len(items), 0)
+        for item in items:
+            self.assertIsNone(item.verified_first_date)
+
+    @patch(_REUSE_COMMON_FETCH_PATCH, return_value=_HORIZON_RSS)
+    def test_weekly_window_widened_to_8_days(self, _mock) -> None:
+        """Horizon is weekly; effective freshness must be at least 8*24=192h.
+
+        Issue 250 is published 2026-05-28, which is 5 days before target_date 2026-06-02.
+        With default freshness_hours=30 that would be stale; widen to 192h keeps it.
+        """
+        # freshness_hours=1 — effective must become 192 so the 5-day-old item passes
+        items = reuse_horizon.fetch_hotspot_items(_TARGET_DATE, freshness_hours=1)
+        urls = [item.url for item in items]
+        self.assertIn("https://www.deeplearning.ai/the-batch/issue-250", urls,
+                      msg="Weekly issue (5 days old) must be in range after window widening to 192h")
+
+    @patch(_REUSE_COMMON_FETCH_PATCH, return_value=_HORIZON_RSS)
+    def test_very_old_issue_still_filtered(self, _mock) -> None:
+        """The 2020 issue must not appear even with widened window."""
+        items = reuse_horizon.fetch_hotspot_items(_TARGET_DATE, _FRESHNESS_HOURS)
+        urls = [item.url for item in items]
+        self.assertNotIn("https://www.deeplearning.ai/the-batch/issue-1", urls)
+
+    @patch(_REUSE_COMMON_FETCH_PATCH, return_value=_HORIZON_RSS)
+    def test_source_id_is_reuse_horizon(self, _mock) -> None:
+        items = reuse_horizon.fetch_hotspot_items(_TARGET_DATE, _FRESHNESS_HOURS)
+        for item in items:
+            self.assertEqual(item.source_id, "reuse_horizon")
+
+    @patch(_REUSE_COMMON_FETCH_PATCH, return_value=_HORIZON_RSS)
+    def test_source_type_is_reuse(self, _mock) -> None:
+        items = reuse_horizon.fetch_hotspot_items(_TARGET_DATE, _FRESHNESS_HOURS)
+        for item in items:
+            self.assertEqual(item.source_type, "reuse")
+
+    @patch(_REUSE_COMMON_FETCH_PATCH, return_value=_HORIZON_RSS)
+    def test_source_role_is_trusted_analysis(self, _mock) -> None:
+        items = reuse_horizon.fetch_hotspot_items(_TARGET_DATE, _FRESHNESS_HOURS)
+        for item in items:
+            self.assertEqual(item.source_role, "trusted_analysis")
+
+    @patch(_REUSE_COMMON_FETCH_PATCH, return_value=_HORIZON_RSS)
+    def test_result_limit_honoured(self, _mock) -> None:
+        items = reuse_horizon.fetch_hotspot_items(_TARGET_DATE, _FRESHNESS_HOURS, result_limit=1)
+        self.assertLessEqual(len(items), 1)
+
+    @patch(_REUSE_COMMON_FETCH_PATCH, side_effect=Exception("network error"))
+    def test_fetch_failure_returns_empty_list(self, _mock) -> None:
+        """Fetch failure must degrade to [] without crashing (spec §E)."""
+        items = reuse_horizon.fetch_hotspot_items(_TARGET_DATE, _FRESHNESS_HOURS)
+        self.assertEqual(items, [])
+
+    @patch(_REUSE_COMMON_FETCH_PATCH, return_value="not valid xml <<<>>>")
+    def test_malformed_feed_returns_empty_list(self, _mock) -> None:
+        items = reuse_horizon.fetch_hotspot_items(_TARGET_DATE, _FRESHNESS_HOURS)
+        self.assertEqual(items, [])
+
+
+# ===========================================================================
+# Tests for reuse_scholar_inbox
+# ===========================================================================
+
+class TestReuseScholarInboxModule(unittest.TestCase):
+    """Module-level sanity checks."""
+
+    def test_module_has_fetch_hotspot_items(self) -> None:
+        self.assertTrue(hasattr(reuse_scholar_inbox, "fetch_hotspot_items"))
+
+    def test_reuse_name_constant(self) -> None:
+        self.assertEqual(reuse_scholar_inbox.REUSE_NAME, "scholar_inbox")
+
+    def test_feed_url_constant_set(self) -> None:
+        self.assertEqual(reuse_scholar_inbox.FEED_URL, "https://www.scholar-inbox.com/digest.rss")
+
+
+class TestReuseScholarInboxFetch(unittest.TestCase):
+    """fetch_hotspot_items behaviour — all HTTP mocked."""
+
+    @patch(_REUSE_COMMON_FETCH_PATCH, return_value=_SCHOLAR_INBOX_RSS)
+    def test_returns_list_of_hotspot_items(self, _mock) -> None:
+        items = reuse_scholar_inbox.fetch_hotspot_items(_TARGET_DATE, _FRESHNESS_HOURS)
+        self.assertIsInstance(items, list)
+        for item in items:
+            self.assertIsInstance(item, HotspotItem)
+
+    @patch(_REUSE_COMMON_FETCH_PATCH, return_value=_SCHOLAR_INBOX_RSS)
+    def test_provenance_is_reuse_scholar_inbox(self, _mock) -> None:
+        items = reuse_scholar_inbox.fetch_hotspot_items(_TARGET_DATE, _FRESHNESS_HOURS)
+        self.assertGreater(len(items), 0)
+        for item in items:
+            self.assertEqual(item.provenance, "reuse:scholar_inbox")
+
+    @patch(_REUSE_COMMON_FETCH_PATCH, return_value=_SCHOLAR_INBOX_RSS)
+    def test_verified_first_date_is_none(self, _mock) -> None:
+        """DateVerify is downstream; reuse adapter must NOT set verified_first_date."""
+        items = reuse_scholar_inbox.fetch_hotspot_items(_TARGET_DATE, _FRESHNESS_HOURS)
+        self.assertGreater(len(items), 0)
+        for item in items:
+            self.assertIsNone(item.verified_first_date)
+
+    @patch(_REUSE_COMMON_FETCH_PATCH, return_value=_SCHOLAR_INBOX_RSS)
+    def test_fresh_items_returned_stale_filtered(self, _mock) -> None:
+        items = reuse_scholar_inbox.fetch_hotspot_items(_TARGET_DATE, _FRESHNESS_HOURS)
+        urls = [item.url for item in items]
+        self.assertNotIn("https://arxiv.org/abs/1901.00001", urls)
+        self.assertTrue(
+            any("2406.11111" in u or "2406.22222" in u for u in urls),
+            msg="Fresh 2026 Scholar Inbox papers should be returned",
+        )
+
+    @patch(_REUSE_COMMON_FETCH_PATCH, return_value=_SCHOLAR_INBOX_RSS)
+    def test_source_id_is_reuse_scholar_inbox(self, _mock) -> None:
+        items = reuse_scholar_inbox.fetch_hotspot_items(_TARGET_DATE, _FRESHNESS_HOURS)
+        for item in items:
+            self.assertEqual(item.source_id, "reuse_scholar_inbox")
+
+    @patch(_REUSE_COMMON_FETCH_PATCH, return_value=_SCHOLAR_INBOX_RSS)
+    def test_source_type_is_reuse(self, _mock) -> None:
+        items = reuse_scholar_inbox.fetch_hotspot_items(_TARGET_DATE, _FRESHNESS_HOURS)
+        for item in items:
+            self.assertEqual(item.source_type, "reuse")
+
+    @patch(_REUSE_COMMON_FETCH_PATCH, return_value=_SCHOLAR_INBOX_RSS)
+    def test_source_role_is_trusted_research(self, _mock) -> None:
+        items = reuse_scholar_inbox.fetch_hotspot_items(_TARGET_DATE, _FRESHNESS_HOURS)
+        for item in items:
+            self.assertEqual(item.source_role, "trusted_research")
+
+    @patch(_REUSE_COMMON_FETCH_PATCH, return_value=_SCHOLAR_INBOX_RSS)
+    def test_result_limit_honoured(self, _mock) -> None:
+        items = reuse_scholar_inbox.fetch_hotspot_items(_TARGET_DATE, _FRESHNESS_HOURS, result_limit=1)
+        self.assertLessEqual(len(items), 1)
+
+    @patch(_REUSE_COMMON_FETCH_PATCH, side_effect=Exception("network error"))
+    def test_fetch_failure_returns_empty_list(self, _mock) -> None:
+        """Fetch failure must degrade to [] without crashing (spec §E)."""
+        items = reuse_scholar_inbox.fetch_hotspot_items(_TARGET_DATE, _FRESHNESS_HOURS)
+        self.assertEqual(items, [])
+
+    @patch(_REUSE_COMMON_FETCH_PATCH, return_value="not valid xml <<<>>>")
+    def test_malformed_feed_returns_empty_list(self, _mock) -> None:
+        items = reuse_scholar_inbox.fetch_hotspot_items(_TARGET_DATE, _FRESHNESS_HOURS)
+        self.assertEqual(items, [])
 
 
 if __name__ == "__main__":

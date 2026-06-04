@@ -103,5 +103,45 @@ class TestDateVerifyHardAnchorNotMajorityVote(unittest.TestCase):
         gapfill.assert_union_floor(set(), eligible)
 
 
+class TestSecondOrderPollutionAlert(unittest.TestCase):
+    """Spec §E: single-source dropped-ratio spike vs trailing-14-run median baseline."""
+
+    def _run(self, ratio: float, src: str = "reuse:ainews") -> dict:
+        seen, dropped = 100, int(round(ratio * 100))
+        return {
+            "channel": "intentionally_dropped_stale_competitor",
+            "per_source": {src: {"seen": seen, "dropped": dropped, "drop_ratio": ratio}},
+        }
+
+    def test_spike_triggers_alert(self) -> None:
+        from arxiv_assistant.hotspots import gapfill
+        history = [self._run(0.05) for _ in range(14)]          # stable 5% baseline
+        today = self._run(0.40)                                  # spike: 8x baseline AND >=30%
+        alerts = gapfill.second_order_pollution_alerts(today, history, multiplier=2.0, abs_floor=0.30)
+        self.assertEqual([a["source"] for a in alerts], ["reuse:ainews"])
+
+    def test_stable_does_not_trigger(self) -> None:
+        from arxiv_assistant.hotspots import gapfill
+        history = [self._run(0.20) for _ in range(14)]          # baseline 20%
+        today = self._run(0.25)                                  # below 2x AND not a big jump
+        alerts = gapfill.second_order_pollution_alerts(today, history, multiplier=2.0, abs_floor=0.30)
+        self.assertEqual(alerts, [])
+
+    def test_high_abs_but_below_2x_baseline_does_not_trigger(self) -> None:
+        from arxiv_assistant.hotspots import gapfill
+        # Source legitimately curates many old items every day: 35% steady baseline.
+        history = [self._run(0.35) for _ in range(14)]
+        today = self._run(0.40)                                  # >=30% abs but only 1.14x baseline
+        alerts = gapfill.second_order_pollution_alerts(today, history, multiplier=2.0, abs_floor=0.30)
+        self.assertEqual(alerts, [])
+
+    def test_zero_baseline_uses_abs_floor_guard(self) -> None:
+        from arxiv_assistant.hotspots import gapfill
+        history = [self._run(0.0) for _ in range(14)]            # never dropped before
+        today = self._run(0.40)                                  # first big drop
+        alerts = gapfill.second_order_pollution_alerts(today, history, multiplier=2.0, abs_floor=0.30)
+        self.assertEqual([a["source"] for a in alerts], ["reuse:ainews"])
+
+
 if __name__ == "__main__":
     unittest.main()

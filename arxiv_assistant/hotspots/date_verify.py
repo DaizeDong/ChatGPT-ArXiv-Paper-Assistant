@@ -15,6 +15,7 @@ Spec §2.5 verify() signature:
 """
 from __future__ import annotations
 
+import json
 import re
 from datetime import datetime, timezone
 from xml.etree import ElementTree
@@ -122,6 +123,69 @@ def _clamp_verdict(
         "evidence": evidence,
         "stale_date_pollution": stale,
     }
+
+
+# ---------------------------------------------------------------------------
+# Stage 3: anti-pollution deterministic reads (§B.2 Tier-1)
+# ---------------------------------------------------------------------------
+
+_WAYBACK_CDX = "http://web.archive.org/cdx/search/cdx"
+_META_PUBLISHED = re.compile(
+    r'<meta[^>]+(?:property|name)=["\']article:published_time["\'][^>]+content=["\']([^"\']+)["\']',
+    re.IGNORECASE,
+)
+_JSONLD = re.compile(
+    r'<script[^>]+type=["\']application/ld\+json["\'][^>]*>(.*?)</script>',
+    re.IGNORECASE | re.DOTALL,
+)
+
+
+def _cdx_ts_to_iso(ts: str) -> str | None:
+    if not ts or len(ts) < 14 or not ts.isdigit():
+        return None
+    return f"{ts[0:4]}-{ts[4:6]}-{ts[6:8]}T{ts[8:10]}:{ts[10:12]}:{ts[12:14]}Z"
+
+
+def _wayback_earliest_snapshot(url: str) -> str | None:
+    """Earliest Wayback CDX capture timestamp for url, ISO8601, or None.
+
+    Anti-pollution main signal (§B.2 Tier-1 (a)): a backdated 'new' page that
+    was actually archived years ago betrays itself via its earliest capture.
+    """
+    try:
+        rows = fetch_json(
+            _WAYBACK_CDX,
+            params={"url": url, "output": "json", "fl": "timestamp", "limit": "5", "from": "19960101"},
+        )
+    except Exception:
+        return None
+    if not isinstance(rows, list) or len(rows) < 2:
+        return None
+    timestamps = [r[0] for r in rows[1:] if r and isinstance(r[0], str)]
+    iso = [_cdx_ts_to_iso(ts) for ts in timestamps]
+    iso = [v for v in iso if v]
+    return min(iso) if iso else None
+
+
+def _page_published_time(url: str) -> str | None:
+    """article:published_time meta or JSON-LD datePublished from the live page (§B.2 Tier-1 (b))."""
+    try:
+        html = fetch_text(url)
+    except Exception:
+        return None
+    m = _META_PUBLISHED.search(html)
+    if m:
+        return m.group(1).strip()
+    for block in _JSONLD.findall(html):
+        try:
+            data = json.loads(block)
+        except (ValueError, TypeError):
+            continue
+        candidates = data if isinstance(data, list) else [data]
+        for obj in candidates:
+            if isinstance(obj, dict) and obj.get("datePublished"):
+                return str(obj["datePublished"]).strip()
+    return None
 
 
 # ---------------------------------------------------------------------------

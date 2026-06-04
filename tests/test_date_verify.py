@@ -353,6 +353,42 @@ class TestGetFreshnessDate(unittest.TestCase):
         self.assertEqual(get_freshness_date(item), "2026-04-04T00:00:00Z")
 
 
+class TestAntiPollutionReads(unittest.TestCase):
+    def test_wayback_earliest_snapshot_parses_first_timestamp(self):
+        from arxiv_assistant.hotspots import date_verify
+        # CDX returns rows [["timestamp"], ["20231114083012"], ["20240101000000"]]
+        cdx_rows = [["timestamp"], ["20231114083012"], ["20240101000000"]]
+        with patch.object(date_verify, "fetch_json", return_value=cdx_rows):
+            earliest = date_verify._wayback_earliest_snapshot("https://example.com/x")
+        self.assertEqual(earliest, "2023-11-14T08:30:12Z")
+
+    def test_wayback_earliest_snapshot_returns_none_on_empty(self):
+        from arxiv_assistant.hotspots import date_verify
+        with patch.object(date_verify, "fetch_json", return_value=[["timestamp"]]):
+            self.assertIsNone(date_verify._wayback_earliest_snapshot("https://example.com/x"))
+
+    def test_wayback_earliest_snapshot_returns_none_on_network_error(self):
+        from arxiv_assistant.hotspots import date_verify
+        with patch.object(date_verify, "fetch_json", side_effect=RuntimeError("boom")):
+            self.assertIsNone(date_verify._wayback_earliest_snapshot("https://example.com/x"))
+
+    def test_page_published_time_reads_meta_property(self):
+        from arxiv_assistant.hotspots import date_verify
+        html = '<html><head><meta property="article:published_time" content="2023-11-14T08:30:00Z"></head></html>'
+        with patch.object(date_verify, "fetch_text", return_value=html):
+            self.assertEqual(date_verify._page_published_time("https://example.com/x"), "2023-11-14T08:30:00Z")
+
+    def test_page_published_time_reads_jsonld_datepublished(self):
+        from arxiv_assistant.hotspots import date_verify
+        html = (
+            '<html><head><script type="application/ld+json">'
+            '{"@type":"Article","datePublished":"2024-02-01T00:00:00Z"}'
+            '</script></head></html>'
+        )
+        with patch.object(date_verify, "fetch_text", return_value=html):
+            self.assertEqual(date_verify._page_published_time("https://example.com/x"), "2024-02-01T00:00:00Z")
+
+
 class TestClampVerdict(unittest.TestCase):
     def test_clamp_picks_earliest_credible_and_floors_to_day(self):
         from arxiv_assistant.hotspots.date_verify import _clamp_verdict

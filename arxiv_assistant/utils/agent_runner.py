@@ -22,6 +22,7 @@ fixtures — zero real subprocess in the test suite.
 from __future__ import annotations
 
 import json
+import re
 import subprocess
 from typing import Optional
 
@@ -113,6 +114,47 @@ def _validate_schema(data: dict, schema: dict) -> None:
 
 
 # ---------------------------------------------------------------------------
+# JSON extraction from fenced / prose-wrapped result text
+# ---------------------------------------------------------------------------
+
+# Matches the FIRST fenced code block, optionally tagged ```json (or any tag),
+# capturing the block's inner content. DOTALL so the body can span newlines.
+_FENCE_RE = re.compile(r"```[^\n`]*\n(.*?)```", re.DOTALL)
+
+
+def _extract_json_object(text: str) -> Optional[str]:
+    """Best-effort extraction of a JSON-object candidate from result *text*.
+
+    Agentic tasks frequently narrate before/after the structured payload, e.g.::
+
+        Here are the results:
+
+        ```json
+        {"items": [...]}
+        ```
+
+    Strategy (returns the first candidate found, NOT yet parsed):
+    1. If the text contains a fenced block ``` ```json ... ``` ``` or
+       ``` ``` ... ``` ```, return the content of the FIRST such fence.
+    2. Else, return the substring from the FIRST ``{`` to the LAST ``}``
+       (inclusive).
+    3. Else return ``None`` (no plausible JSON object present).
+
+    The caller is responsible for ``json.loads`` on the returned candidate.
+    """
+    fence = _FENCE_RE.search(text)
+    if fence is not None:
+        return fence.group(1).strip()
+
+    start = text.find("{")
+    end = text.rfind("}")
+    if start != -1 and end != -1 and end > start:
+        return text[start:end + 1].strip()
+
+    return None
+
+
+# ---------------------------------------------------------------------------
 # Envelope parser
 # ---------------------------------------------------------------------------
 
@@ -162,12 +204,22 @@ def _parse_envelope(raw_stdout: str) -> dict:
         if not inner_raw:
             raise AgentError("Agent envelope 'result' field is an empty string.")
         try:
+            # Fast path: pure-JSON result (unchanged behavior for structured agents).
             inner = json.loads(inner_raw)
         except (ValueError, TypeError) as exc:
-            raise AgentError(
-                f"Agent 'result' field is not valid JSON: {exc}. "
-                f"result={inner_raw[:200]!r}"
-            ) from exc
+            # Agentic tasks often narrate before/after the JSON (prose + a fenced
+            # code block). Try to extract a JSON-object candidate before giving up.
+            candidate = _extract_json_object(inner_raw)
+            if candidate is not None:
+                try:
+                    inner = json.loads(candidate)
+                except (ValueError, TypeError):
+                    candidate = None
+            if candidate is None:
+                raise AgentError(
+                    f"Agent 'result' field is not valid JSON: {exc}. "
+                    f"result={inner_raw[:200]!r}"
+                ) from exc
     elif isinstance(inner_raw, dict):
         inner = inner_raw
     else:

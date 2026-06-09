@@ -363,6 +363,80 @@ class TestRunAgentSchemaValidation(unittest.TestCase):
 
 
 # ---------------------------------------------------------------------------
+# Fenced / prose-wrapped result text (agentic tasks narrate before the JSON)
+# ---------------------------------------------------------------------------
+
+
+class TestRunAgentProseWrappedResult(unittest.TestCase):
+    """Agentic tasks (scout / date-verify / synthesize) often return the model's
+    final message as prose + a fenced ```json block, not a bare JSON string.
+
+    ``_parse_envelope`` must extract the JSON object from such result text
+    rather than failing strict ``json.loads`` and degrading to nothing.
+    """
+
+    @staticmethod
+    def _envelope_with_result(result_text: str) -> str:
+        return _json.dumps({
+            "type": "result",
+            "subtype": "success",
+            "is_error": False,
+            "result": result_text,
+        })
+
+    def test_pure_json_object_fast_path_unchanged(self) -> None:
+        """A bare JSON object string still parses via the fast path."""
+        envelope = self._envelope_with_result('{"items":[1]}')
+        with patch("arxiv_assistant.utils.agent_runner.subprocess.run",
+                   return_value=_FakeProc(stdout=envelope)):
+            out = run_agent("prompt", schema=_ANY_SCHEMA, model="claude-opus-4-8")
+        self.assertEqual(out, {"items": [1]})
+
+    def test_fenced_json_block_is_extracted(self) -> None:
+        """A ```json fenced block (no prose) is extracted and parsed."""
+        envelope = self._envelope_with_result('```json\n{"items":[1]}\n```')
+        with patch("arxiv_assistant.utils.agent_runner.subprocess.run",
+                   return_value=_FakeProc(stdout=envelope)):
+            out = run_agent("prompt", schema=_ANY_SCHEMA, model="claude-opus-4-8")
+        self.assertEqual(out, {"items": [1]})
+
+    def test_prose_plus_fenced_block_is_extracted(self) -> None:
+        """Prose before and after a ```json fence: extract the fenced object."""
+        result = "Here are results:\n\n```json\n{\"items\":[{\"x\":1}]}\n```\nDone."
+        envelope = self._envelope_with_result(result)
+        with patch("arxiv_assistant.utils.agent_runner.subprocess.run",
+                   return_value=_FakeProc(stdout=envelope)):
+            out = run_agent("prompt", schema=_ANY_SCHEMA, model="claude-opus-4-8")
+        self.assertEqual(out, {"items": [{"x": 1}]})
+
+    def test_prose_plus_bare_object_no_fence_is_extracted(self) -> None:
+        """Prose around a bare object (no fence): take first { to last }."""
+        envelope = self._envelope_with_result('Sure! {"items":[]} that is all.')
+        with patch("arxiv_assistant.utils.agent_runner.subprocess.run",
+                   return_value=_FakeProc(stdout=envelope)):
+            out = run_agent("prompt", schema=_ANY_SCHEMA, model="claude-opus-4-8")
+        self.assertEqual(out, {"items": []})
+
+    def test_genuinely_non_json_still_raises_agent_error(self) -> None:
+        """Text with no extractable JSON object still raises AgentError with the
+        existing 'not valid JSON' message."""
+        envelope = self._envelope_with_result("I could not complete the task.")
+        with patch("arxiv_assistant.utils.agent_runner.subprocess.run",
+                   return_value=_FakeProc(stdout=envelope)):
+            with self.assertRaises(AgentError) as ctx:
+                run_agent("prompt", schema=_ANY_SCHEMA, model="claude-opus-4-8")
+        self.assertIn("not valid JSON", str(ctx.exception))
+
+    def test_plain_fenced_block_without_json_language_tag(self) -> None:
+        """A bare ``` fence (no 'json' tag) around an object is also extracted."""
+        envelope = self._envelope_with_result('```\n{"ok":true}\n```')
+        with patch("arxiv_assistant.utils.agent_runner.subprocess.run",
+                   return_value=_FakeProc(stdout=envelope)):
+            out = run_agent("prompt", schema=_ANY_SCHEMA, model="claude-opus-4-8")
+        self.assertEqual(out, {"ok": True})
+
+
+# ---------------------------------------------------------------------------
 # Signature contract test (§2.11 binding)
 # ---------------------------------------------------------------------------
 

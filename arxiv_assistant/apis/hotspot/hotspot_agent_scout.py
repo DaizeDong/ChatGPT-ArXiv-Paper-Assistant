@@ -64,6 +64,11 @@ def _build_prompt(target_date: datetime, freshness_hours: int, result_limit: int
     Scopes the search to the last ``freshness_hours`` window as of ``target_date``
     and to AI/ML topicality, and demands the CANONICAL source URL (not a
     search-results link) so the deterministic verifier has a real target.
+
+    Borrows the ``market-intel`` skill's research discipline: search the right
+    primary venues across SEVERAL angled queries (not one), prefer primary/
+    official (L1) and independent (L2) sources over L4 aggregators/UGC/rumor,
+    and cross-check significance instead of amplifying virality.
     """
     as_of = target_date.strftime("%Y-%m-%d")
     return (
@@ -72,18 +77,38 @@ def _build_prompt(target_date: datetime, freshness_hours: int, result_limit: int
         "new research papers, model/product releases, significant X/Twitter or other social "
         "discussion, and breaking news. Cover only ARTIFICIAL-INTELLIGENCE / MACHINE-LEARNING "
         "topics; ignore unrelated tech or general news.\n\n"
+        "SEARCH THE RIGHT VENUES (multi-angle -- run SEVERAL distinct searches, not one). "
+        "Check the primary AI venues directly:\n"
+        "  - arXiv recent listings (cs.AI / cs.LG / cs.CL / cs.CV).\n"
+        "  - Hugging Face Daily Papers and trending models.\n"
+        "  - Official AI-lab blogs (OpenAI, Anthropic, Google DeepMind, Meta AI, Mistral, "
+        "Qwen, DeepSeek).\n"
+        "  - GitHub trending AI repos and release pages.\n"
+        "  - Papers with Code (new SOTA).\n"
+        "  - Major AI newsletters / roundups (AINews, The Batch, Import AI).\n"
+        "  - For X/Twitter or social breaking buzz: X is login-walled, so search the OPEN WEB "
+        "for the discussion and find the CANONICAL source the buzz points to (the paper, "
+        "release, or blog post), not the tweet alone.\n\n"
+        "SOURCE-TIER PREFERENCE: prefer PRIMARY / OFFICIAL sources (L1: the lab's own blog "
+        "post, the arXiv abstract page, the GitHub release) and independent L2 reporting over "
+        "L4 aggregators, UGC, or rumor. If only a rumor/aggregator exists, find the primary "
+        "source it cites -- if you cannot, OMIT the item.\n\n"
+        "CROSS-CHECK SIGNIFICANCE, DON'T AMPLIFY HYPE: prefer items corroborated by a SECOND "
+        "independent signal (a citation, a SOTA entry, a lab blog post, or multiple outlets). "
+        "Judge significance by SUBSTANCE -- a new SOTA, a new model/release, a methodological "
+        "advance -- not by virality alone.\n\n"
         "For EACH development return an object with keys:\n"
         '  - "title": a concise headline.\n'
         '  - "url": the CANONICAL source URL (the arXiv abstract page, the official blog post, '
-        "the GitHub repo, or the exact tweet permalink). Do NOT return a Google/Bing/DuckDuckGo "
-        "search-results link, an aggregator landing page, or a made-up URL -- only a real, "
-        "directly-reachable source page you actually found.\n"
+        "the GitHub repo/release, or the exact tweet permalink). Do NOT return a "
+        "Google/Bing/DuckDuckGo search-results link, an aggregator landing page, or a made-up "
+        "URL -- only a real, directly-reachable source page you actually found.\n"
         '  - "summary": one sentence on why it matters.\n'
         '  - "source_kind": one of "paper" | "release" | "social" | "news".\n'
         '  - "published_at": the publication date/time if known (ISO 8601), else omit.\n\n'
         "Return STRICT JSON ONLY of the form "
-        '{{"items": [ {{...}}, {{...}} ]}} with at most {limit} items. '
-        "If you are unsure a URL is real and reachable, omit that item."
+        '{{"items": [ {{...}}, {{...}} ]}} with at most {limit} items, each published within '
+        "the last {hours} hours. If you are unsure a URL is real and reachable, OMIT that item."
     ).format(hours=int(freshness_hours), as_of=as_of, limit=int(result_limit))
 
 

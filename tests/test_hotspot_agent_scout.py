@@ -80,6 +80,14 @@ class TestHotspotAgentScout(unittest.TestCase):
         # Confirm the transport contract: web tools were requested.
         self.assertEqual(self._last_call["tools"], ["WebSearch", "WebFetch"])
         self.assertEqual(self._last_call["schema"]["required"], ["items"])
+        # Loose regression guard: the prompt should carry the market-intel-style
+        # research discipline (name a couple of the key primary venues + source
+        # tiering). Case-insensitive substring checks only -- do NOT over-couple
+        # to exact wording.
+        prompt_lc = self._last_call["prompt"].lower()
+        self.assertIn("arxiv", prompt_lc)
+        self.assertIn("hugging face", prompt_lc)
+        self.assertIn("lab blog", prompt_lc)
 
     # ---------------------------------------------------------------------
     # Anti-hallucination: url_check_fn returns False -> item dropped.

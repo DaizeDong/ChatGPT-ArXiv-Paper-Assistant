@@ -92,8 +92,11 @@ cp configs/profiles/agent-native.ini configs/config.ini
 
 This profile needs only the `claude` CLI (logged in) plus a git push token. With it:
 
-- **Papers** are filtered by a Claude subagent (`[PAPER_FILTER] mode = agent_only`), so no
-  OpenAI key is used by the digest (`python main.py`).
+- **Papers** are filtered by a Claude subagent (`[PAPER_FILTER] mode = agent_only`). Note the
+  profile keeps `[SELECTION] run_openai = true`: that flag is the outer gate that *enables* the
+  paper-filter step in `main.py`; `mode = agent_only` then routes it to the subagent (claude -p)
+  instead of OpenAI. The `agent_only` path never calls the API scorer, so no OpenAI key is used
+  by the digest (`python main.py`).
 - **X/social + breadth** come from the **agent scout** (`[HOTSPOT_SOURCES] use_agent_scout = true`,
   `use_twitterapi = false`), which uses Claude's `WebSearch`/`WebFetch` instead of the metered
   twitterapi.io key.

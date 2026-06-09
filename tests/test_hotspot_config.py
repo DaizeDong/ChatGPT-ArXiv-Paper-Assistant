@@ -62,6 +62,10 @@ class TestHotspotConfig(unittest.TestCase):
         cfg = configparser.ConfigParser()
         cfg.read(profile)
         # agent_only papers (no OpenAI key); agent scout on; twitterapi off (no key).
+        # run_openai MUST stay true: it is the outer gate in main.py around the whole
+        # [PAPER_FILTER] dispatch. If false, main.py skips filtering entirely and papers
+        # pass through UNFILTERED (mode = agent_only would never be read).
+        self.assertTrue(cfg.getboolean("SELECTION", "run_openai"))
         self.assertEqual(cfg["PAPER_FILTER"]["mode"], "agent_only")
         self.assertTrue(cfg.getboolean("HOTSPOT_SOURCES", "use_agent_scout"))
         self.assertFalse(cfg.getboolean("HOTSPOT_SOURCES", "use_twitterapi"))

@@ -122,10 +122,47 @@ def _validate_schema(data: dict, schema: dict) -> None:
 _FENCE_RE = re.compile(r"```[^\n`]*\n(.*?)```", re.DOTALL)
 
 
+def _iter_balanced_objects(text: str):
+    """Yield each top-level brace-balanced ``{...}`` substring, in order.
+
+    String-aware: braces inside double-quoted JSON strings (honouring ``\\``
+    escapes) are ignored, so prose or string *values* containing ``{``/``}`` do
+    not corrupt the depth count.  Each yielded span is the OUTERMOST object at a
+    top-level position (nested objects are contained within their parent's span).
+    """
+    depth = 0
+    start = -1
+    in_str = False
+    esc = False
+    for i, ch in enumerate(text):
+        if in_str:
+            if esc:
+                esc = False
+            elif ch == "\\":
+                esc = True
+            elif ch == '"':
+                in_str = False
+            continue
+        if ch == '"':
+            in_str = True
+        elif ch == "{":
+            if depth == 0:
+                start = i
+            depth += 1
+        elif ch == "}":
+            if depth > 0:
+                depth -= 1
+                if depth == 0 and start != -1:
+                    yield text[start:i + 1]
+                    start = -1
+
+
 def _extract_json_object(text: str) -> Optional[str]:
     """Best-effort extraction of a JSON-object candidate from result *text*.
 
-    Agentic tasks frequently narrate before/after the structured payload, e.g.::
+    Agentic tasks frequently narrate before/after the structured payload and may
+    wrap it in one or more markdown code fences (sometimes a non-JSON example
+    fence first), e.g.::
 
         Here are the results:
 
@@ -133,24 +170,35 @@ def _extract_json_object(text: str) -> Optional[str]:
         {"items": [...]}
         ```
 
-    Strategy (returns the first candidate found, NOT yet parsed):
-    1. If the text contains a fenced block ``` ```json ... ``` ``` or
-       ``` ``` ... ``` ```, return the content of the FIRST such fence.
-    2. Else, return the substring from the FIRST ``{`` to the LAST ``}``
-       (inclusive).
-    3. Else return ``None`` (no plausible JSON object present).
+    Strategy — returns the FIRST candidate that actually ``json.loads`` (so the
+    caller's re-parse is guaranteed to succeed):
 
-    The caller is responsible for ``json.loads`` on the returned candidate.
+    1. Try EVERY fenced ``` ```...``` ``` block in order; return the first whose
+       inner content parses (handles a ```python example fence before the
+       ```json answer, a bare ``` fence, multiple fences, etc.).
+    2. Else scan for each top-level brace-balanced ``{...}`` object (string-aware)
+       and return the first that parses.  Robust to prose with its own ``{}``
+       braces before/after the real object and to a trailing prose paragraph
+       (no greedy first-``{``-to-last-``}``).
+    3. Else return ``None`` (no complete JSON object present).
+
+    Only COMPLETE objects are returned — truncated JSON is never "repaired"
+    (that would risk silent corruption); it falls through to ``None`` and the
+    caller degrades deterministically.
     """
-    fence = _FENCE_RE.search(text)
-    if fence is not None:
-        return fence.group(1).strip()
-
-    start = text.find("{")
-    end = text.rfind("}")
-    if start != -1 and end != -1 and end > start:
-        return text[start:end + 1].strip()
-
+    for fence in _FENCE_RE.finditer(text):
+        candidate = fence.group(1).strip()
+        try:
+            json.loads(candidate)
+            return candidate
+        except (ValueError, TypeError):
+            continue
+    for candidate in _iter_balanced_objects(text):
+        try:
+            json.loads(candidate)
+            return candidate
+        except (ValueError, TypeError):
+            continue
     return None
 
 

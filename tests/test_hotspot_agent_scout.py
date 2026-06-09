@@ -234,6 +234,19 @@ class TestScoutMarketIntelReuse(unittest.TestCase):
         self.assertIn("arXiv recent listings", prompt)  # built-in venue list
         self.assertNotIn("CURATED MATRIX", prompt)
 
+    def test_build_prompt_has_json_only_output_contract(self) -> None:
+        """The prompt must forcefully demand raw JSON ONLY (no fence, no prose)
+        and English -- the fix for the heavy-narration 0-items regression.
+        Holds both with and without the (larger) market-intel matrix injected."""
+        for guidance in (None, "CURATED MATRIX XYZ"):
+            prompt = scout._build_prompt(self.target_date, 24, 40, source_guidance=guidance)
+            low = prompt.lower()
+            self.assertIn("output contract", low)
+            self.assertIn("only a single raw json object", low)
+            self.assertIn("```", prompt)            # forbids the markdown code fence
+            self.assertIn("no ```", low)
+            self.assertIn("english", low)
+
     def test_fetch_uses_bridge_guidance_in_agent_prompt(self) -> None:
         seen = {}
 

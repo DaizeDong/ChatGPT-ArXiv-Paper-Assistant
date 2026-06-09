@@ -146,7 +146,17 @@ def _build_prompt(
         '{{"items": [ {{...}}, {{...}} ]}} with at most {limit} items, each published within '
         "the last {hours} hours. If you are unsure a URL is real and reachable, OMIT that item."
     ).format(limit=int(result_limit), hours=int(freshness_hours))
-    return header + _venues_block(source_guidance) + tail
+    # Concatenated raw (NOT .format()ed) so its literal braces/backticks pass through.
+    output_contract = (
+        "\n\nWrite all titles and summaries in ENGLISH (the downstream pipeline handles any "
+        "Chinese translation separately) -- do not narrate or reason in another language.\n\n"
+        "OUTPUT CONTRACT (critical): Respond with ONLY a single raw JSON object, starting with "
+        "'{' and ending with '}'. Do NOT wrap it in a markdown code fence (no ```), and do NOT "
+        "write any prose, preamble, reasoning, thinking, or commentary before or after the JSON. "
+        "Keep each summary to ONE short sentence so the whole response stays compact and parses "
+        "cleanly. Use the venues/matrix above to search BROADLY, but emit ONLY the terse JSON."
+    )
+    return header + _venues_block(source_guidance) + tail + output_contract
 
 
 def _is_arxiv_or_doi(host: str, url: str) -> bool:

@@ -435,6 +435,44 @@ class TestRunAgentProseWrappedResult(unittest.TestCase):
             out = run_agent("prompt", schema=_ANY_SCHEMA, model="claude-opus-4-8")
         self.assertEqual(out, {"ok": True})
 
+    def test_first_fence_not_json_second_fence_json(self) -> None:
+        """A non-JSON fence (e.g. a ```python example) before the ```json answer:
+        every fence is tried and the JSON one is returned (not the first fence)."""
+        result = (
+            "Example:\n\n```python\nprint('hi')\n```\n\n"
+            "Answer:\n\n```json\n{\"items\":[{\"y\":2}]}\n```"
+        )
+        envelope = self._envelope_with_result(result)
+        with patch("arxiv_assistant.utils.agent_runner.subprocess.run",
+                   return_value=_FakeProc(stdout=envelope)):
+            out = run_agent("prompt", schema=_ANY_SCHEMA, model="claude-opus-4-8")
+        self.assertEqual(out, {"items": [{"y": 2}]})
+
+    def test_prose_with_own_braces_before_object_is_brace_balanced(self) -> None:
+        """Prose containing its own {} braces before the real bare object: the
+        string-aware brace-balanced scan returns the real object, not a greedy
+        first-{-to-last-} span (which the previous extractor got wrong)."""
+        envelope = self._envelope_with_result('Note: use {x} carefully. {"items":[1]}')
+        with patch("arxiv_assistant.utils.agent_runner.subprocess.run",
+                   return_value=_FakeProc(stdout=envelope)):
+            out = run_agent("prompt", schema=_ANY_SCHEMA, model="claude-opus-4-8")
+        self.assertEqual(out, {"items": [1]})
+
+    def test_heavy_narration_then_fenced_json_real_scout_case(self) -> None:
+        """The real A/B-smoke failure: heavy narration, then a ```json fence whose
+        object contains string values with their own punctuation/braces."""
+        result = (
+            "I have searched arXiv, Hugging Face and lab blogs. Here is the JSON:\n\n"
+            "```json\n{\"items\":[{\"title\":\"A {new} model\","
+            "\"url\":\"https://arxiv.org/abs/1\"}]}\n```\nThat is all."
+        )
+        envelope = self._envelope_with_result(result)
+        with patch("arxiv_assistant.utils.agent_runner.subprocess.run",
+                   return_value=_FakeProc(stdout=envelope)):
+            out = run_agent("prompt", schema=_ANY_SCHEMA, model="claude-opus-4-8")
+        self.assertEqual(out["items"][0]["title"], "A {new} model")
+        self.assertEqual(out["items"][0]["url"], "https://arxiv.org/abs/1")
+
 
 # ---------------------------------------------------------------------------
 # Signature contract test (§2.11 binding)

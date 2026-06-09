@@ -81,3 +81,23 @@ Config files are pure ASCII and all readers use UTF-8.
 - A set of `tests/test_hotspot_web_data.py` assertions about a richer `source_section_totals`
   web-payload contract are **pre-existing known debt** (a separate web-UI concern), left red
   by deliberate decision.
+
+## Zero-key (fully agent-native) deployment
+
+For a VPS deploy that needs **no API keys at all**, copy the ready-made profile over your config:
+
+```bash
+cp configs/profiles/agent-native.ini configs/config.ini
+```
+
+This profile needs only the `claude` CLI (logged in) plus a git push token. With it:
+
+- **Papers** are filtered by a Claude subagent (`[PAPER_FILTER] mode = agent_only`), so no
+  OpenAI key is used by the digest (`python main.py`).
+- **X/social + breadth** come from the **agent scout** (`[HOTSPOT_SOURCES] use_agent_scout = true`,
+  `use_twitterapi = false`), which uses Claude's `WebSearch`/`WebFetch` instead of the metered
+  twitterapi.io key.
+- **Bilingual headlines** come from the Synthesize agent (hotspots run in `mode = heuristic`,
+  so no OpenAI screening/enrichment is invoked).
+
+No OpenAI or twitterapi keys are required. Everything runs on the Claude subscription.

@@ -56,6 +56,21 @@ class TestHotspotConfig(unittest.TestCase):
         _, sources = load_reuse_config(cfg)
         self.assertEqual(sources, ["hf_daily", "ainews", "agents_radar"])
 
+    def test_agent_native_profile_resolves_zero_key_flags(self) -> None:
+        profile = Path(__file__).resolve().parents[1] / "configs" / "profiles" / "agent-native.ini"
+        self.assertTrue(profile.exists(), "agent-native profile is missing")
+        cfg = configparser.ConfigParser()
+        cfg.read(profile)
+        # agent_only papers (no OpenAI key); agent scout on; twitterapi off (no key).
+        self.assertEqual(cfg["PAPER_FILTER"]["mode"], "agent_only")
+        self.assertTrue(cfg.getboolean("HOTSPOT_SOURCES", "use_agent_scout"))
+        self.assertFalse(cfg.getboolean("HOTSPOT_SOURCES", "use_twitterapi"))
+        self.assertEqual(cfg["HOTSPOTS"]["mode"], "heuristic")
+        self.assertEqual(cfg["HOTSPOT_RUNTIME"]["runtime"], "local")
+        # Agent-scout tuning keys carried over so the registration can read them.
+        self.assertEqual(cfg.getint("HOTSPOTS", "agent_scout_result_limit"), 40)
+        self.assertEqual(cfg.getint("HOTSPOTS", "agent_scout_timeout_s"), 300)
+
 
 if __name__ == "__main__":
     unittest.main()

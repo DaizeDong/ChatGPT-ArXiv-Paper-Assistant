@@ -8,9 +8,12 @@ from datetime import UTC, datetime
 from pathlib import Path
 from unittest.mock import patch
 
+import configparser
+
 from arxiv_assistant.apis.hotspot.hotspot_x_ainews import _extract_twitter_section_items
 from arxiv_assistant.apis.hotspot.hotspot_x_paperpulse import fetch_hotspot_items as fetch_x_paperpulse_items
 from arxiv_assistant.utils.hotspot.x_authority_registry import build_x_authority_registry, load_x_authority_registry, refresh_x_authority_registry
+from arxiv_assistant.hotspots import pipeline as hp
 
 
 class TestHotspotXSources(unittest.TestCase):
@@ -295,6 +298,71 @@ class TestHotspotXSources(unittest.TestCase):
         self.assertEqual(payload["generated_at"], "2026-03-23T00:00:00+00:00")
         self.assertEqual(persisted["generated_at"], "2026-03-23T00:00:00+00:00")
         self.assertEqual(persisted["graph_expansion"]["selected_candidates"], 510)
+
+
+class TestAgentScoutRegistration(unittest.TestCase):
+    """Assert agent_scout is registered as a kernel source iff use_agent_scout is on.
+
+    The scout's agent_fn is NEVER called here: every adapter fetch function is
+    patched to return [] so the unit test touches no network and no claude CLI.
+    We only assert which source ids the pipeline registers under the flag.
+    """
+
+    def _make_config(self, *, use_agent_scout: bool) -> configparser.ConfigParser:
+        cfg = configparser.ConfigParser()
+        cfg.read_dict(
+            {
+                "HOTSPOTS": {
+                    "freshness_hours": "30",
+                    "agent_scout_result_limit": "40",
+                    "agent_scout_timeout_s": "300",
+                    "source_registry_path": "configs/hotspot/roundup_sites.json",
+                },
+                "HOTSPOT_SOURCES": {
+                    "use_local_papers": "false",
+                    "use_hf_papers": "false",
+                    "use_ainews": "false",
+                    "use_official_blogs": "false",
+                    "use_roundup_sites": "false",
+                    "use_analysis_feeds": "false",
+                    "use_reddit": "false",
+                    "use_x_ainews_twitter": "false",
+                    "use_twitterapi": "false",
+                    "use_x_paperpulse": "false",
+                    "use_x_official": "false",
+                    "use_github": "false",
+                    "use_hn": "false",
+                    "use_agent_scout": "true" if use_agent_scout else "false",
+                    "reuse_cached_raw": "false",
+                },
+                "HOTSPOT_X": {},
+                "HOTSPOT_GITHUB": {},
+                "HOTSPOT_HN": {},
+            }
+        )
+        return cfg
+
+    def _registered_source_ids(self, *, use_agent_scout: bool) -> set[str]:
+        cfg = self._make_config(use_agent_scout=use_agent_scout)
+        with tempfile.TemporaryDirectory() as tmp_dir, \
+                patch.object(hp, "fetch_agent_scout_items", return_value=[]) as mock_scout:
+            _items, source_stats, _usage = hp.fetch_source_payloads(
+                datetime(2026, 6, 8, tzinfo=UTC),
+                Path(tmp_dir),
+                cfg,
+                force=True,
+            )
+            # The scout agent_fn is never invoked in this unit test; if the flag
+            # is off, the adapter is not even registered/called.
+            if not use_agent_scout:
+                mock_scout.assert_not_called()
+        return set(source_stats.keys())
+
+    def test_agent_scout_registered_when_flag_on(self) -> None:
+        self.assertIn("agent_scout", self._registered_source_ids(use_agent_scout=True))
+
+    def test_agent_scout_absent_when_flag_off(self) -> None:
+        self.assertNotIn("agent_scout", self._registered_source_ids(use_agent_scout=False))
 
 
 if __name__ == "__main__":

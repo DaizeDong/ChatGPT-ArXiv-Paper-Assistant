@@ -24,6 +24,7 @@ from arxiv_assistant.apis.hotspot.hotspot_x_ainews import fetch_hotspot_items as
 from arxiv_assistant.apis.hotspot.hotspot_x_official import fetch_hotspot_items as fetch_x_official_items
 from arxiv_assistant.apis.hotspot.hotspot_x_paperpulse import fetch_hotspot_items as fetch_x_paperpulse_items
 from arxiv_assistant.apis.hotspot.hotspot_twitterapi import fetch_hotspot_items as fetch_x_twitterapi_items
+from arxiv_assistant.apis.hotspot.hotspot_agent_scout import fetch_hotspot_items as fetch_agent_scout_items
 from arxiv_assistant.hotspots.enrich import enrich_items_batch, enrich_items_heuristic
 from arxiv_assistant.hotspots.dedup import classify_cross_day, cluster_intraday, match_crossday
 from arxiv_assistant.hotspots.story import Story, apply_cross_day_penalty, group_into_stories, score_stories, select_and_categorize
@@ -202,6 +203,7 @@ SOURCE_USAGE_META = {
     "x_official": {"provider": "X API", "billing_model": "quota"},
     "github_trend": {"provider": "GitHub API", "billing_model": "free"},
     "hn_discussion": {"provider": "Hacker News API", "billing_model": "free"},
+    "agent_scout": {"provider": "claude-code", "billing_model": "subscription"},
 }
 
 
@@ -996,6 +998,18 @@ def fetch_source_payloads(
                     result_limit=int(x_config.get("list_result_limit", 80)),
                     snapshot_path=x_registry_snapshot_path,
                     max_age_hours=x_registry_max_age_hours,
+                ),
+            )
+        )
+    if hotspot_sources.getboolean("use_agent_scout", fallback=False):
+        specs.append(
+            (
+                "agent_scout",
+                lambda: fetch_agent_scout_items(
+                    target_date,
+                    freshness_hours,
+                    result_limit=int(hotspot_config.getint("agent_scout_result_limit", 40)),
+                    timeout_s=int(hotspot_config.getint("agent_scout_timeout_s", 300)),
                 ),
             )
         )

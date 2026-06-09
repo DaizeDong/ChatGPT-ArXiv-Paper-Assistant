@@ -37,6 +37,7 @@ class TestHotspotAgentScout(unittest.TestCase):
             self.target_date,
             self.freshness_hours,
             result_limit=result_limit,
+            use_market_intel=False,  # hermetic: built-in venues, no on-disk skill dependency
             agent_fn=fake_agent,
             url_check_fn=url_check_fn,
         )
@@ -212,6 +213,70 @@ class TestHotspotAgentScout(unittest.TestCase):
             side_effect=RuntimeError("network down"),
         ):
             self.assertFalse(scout._default_url_alive("https://blog.host.com/post"))
+
+
+class TestScoutMarketIntelReuse(unittest.TestCase):
+    """The scout reuses the market-intel curated source matrix when available,
+    and falls back to the built-in venue list otherwise."""
+
+    def setUp(self) -> None:
+        self.target_date = datetime(2026, 6, 8, tzinfo=UTC)
+
+    def test_build_prompt_injects_curated_matrix(self) -> None:
+        prompt = scout._build_prompt(
+            self.target_date, 24, 40, source_guidance="CURATED MATRIX XYZ"
+        )
+        self.assertIn("CURATED MATRIX XYZ", prompt)
+        self.assertIn("market-intel skill", prompt)
+
+    def test_build_prompt_falls_back_to_builtin_when_no_guidance(self) -> None:
+        prompt = scout._build_prompt(self.target_date, 24, 40, source_guidance=None)
+        self.assertIn("arXiv recent listings", prompt)  # built-in venue list
+        self.assertNotIn("CURATED MATRIX", prompt)
+
+    def test_fetch_uses_bridge_guidance_in_agent_prompt(self) -> None:
+        seen = {}
+
+        def fake_agent(prompt, *, schema, model, tools, timeout_s):
+            seen["prompt"] = prompt
+            return {"items": []}
+
+        with patch.object(
+            scout.market_intel_bridge, "load_source_guidance", return_value="REUSED-MATRIX-42"
+        ) as mock_load:
+            scout.fetch_hotspot_items(
+                self.target_date, 24, use_market_intel=True,
+                agent_fn=fake_agent, url_check_fn=_always_alive,
+            )
+        mock_load.assert_called_once()
+        self.assertIn("REUSED-MATRIX-42", seen["prompt"])
+
+    def test_fetch_skips_bridge_when_disabled(self) -> None:
+        def fake_agent(prompt, *, schema, model, tools, timeout_s):
+            return {"items": []}
+
+        with patch.object(scout.market_intel_bridge, "load_source_guidance") as mock_load:
+            scout.fetch_hotspot_items(
+                self.target_date, 24, use_market_intel=False,
+                agent_fn=fake_agent, url_check_fn=_always_alive,
+            )
+        mock_load.assert_not_called()
+
+    def test_fetch_degrades_to_builtin_when_bridge_returns_none(self) -> None:
+        seen = {}
+
+        def fake_agent(prompt, *, schema, model, tools, timeout_s):
+            seen["prompt"] = prompt
+            return {"items": []}
+
+        with patch.object(
+            scout.market_intel_bridge, "load_source_guidance", return_value=None
+        ):
+            scout.fetch_hotspot_items(
+                self.target_date, 24, use_market_intel=True,
+                agent_fn=fake_agent, url_check_fn=_always_alive,
+            )
+        self.assertIn("arXiv recent listings", seen["prompt"])  # built-in fallback
 
 
 if __name__ == "__main__":

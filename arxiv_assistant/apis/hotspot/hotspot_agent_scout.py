@@ -22,6 +22,7 @@ from urllib.parse import urlsplit
 
 import requests
 
+from arxiv_assistant.utils import market_intel_bridge
 from arxiv_assistant.utils.agent_runner import AgentError, run_agent
 from arxiv_assistant.utils.hotspot.hotspot_schema import HotspotItem, clean_text
 from arxiv_assistant.utils.hotspot.hotspot_sources import clip_text
@@ -58,7 +59,50 @@ _BLOCKLISTED_HOSTS = frozenset(
 _SCHEMA: dict[str, Any] = {"required": ["items"], "properties": {"items": {"type": "array"}}}
 
 
-def _build_prompt(target_date: datetime, freshness_hours: int, result_limit: int) -> str:
+# Built-in venue list used when the market-intel skill is not available.
+_BUILTIN_VENUES = (
+    "SEARCH THE RIGHT VENUES (multi-angle -- run SEVERAL distinct searches, not one). "
+    "Check the primary AI venues directly:\n"
+    "  - arXiv recent listings (cs.AI / cs.LG / cs.CL / cs.CV).\n"
+    "  - Hugging Face Daily Papers and trending models.\n"
+    "  - Official AI-lab blogs (OpenAI, Anthropic, Google DeepMind, Meta AI, Mistral, "
+    "Qwen, DeepSeek).\n"
+    "  - GitHub trending AI repos and release pages.\n"
+    "  - Papers with Code (new SOTA).\n"
+    "  - Major AI newsletters / roundups (AINews, The Batch, Import AI).\n"
+    "  - For X/Twitter or social breaking buzz: X is login-walled, so search the OPEN WEB "
+    "for the discussion and find the CANONICAL source the buzz points to (the paper, "
+    "release, or blog post), not the tweet alone.\n\n"
+)
+
+
+def _venues_block(source_guidance: str | None) -> str:
+    """The 'where to look' section: the market-intel curated matrix when
+    available (reused verbatim from the skill shards), else the built-in list."""
+    if not source_guidance or not source_guidance.strip():
+        return _BUILTIN_VENUES
+    # NOTE: source_guidance is concatenated raw -- it is NEVER passed through
+    # ``str.format`` so stray ``{``/``}`` in the shard text cannot break templating.
+    return (
+        "SEARCH THE RIGHT VENUES (multi-angle -- run SEVERAL distinct searches, not one), "
+        "using this CURATED SOURCE MATRIX reused from the market-intel skill. Each table "
+        "row is 'source | route | capability | how-to-detect | note'; the route marks how "
+        "to reach it (1=official API, 2=resale API, 3=self-host, 4=browser). Work down the "
+        "matrix; prefer the primary venues it lists:\n\n"
+        + source_guidance.strip()
+        + "\n\nFor X/Twitter or social breaking buzz: X is login-walled, so search the OPEN "
+        "WEB for the discussion and find the CANONICAL source the buzz points to (the paper, "
+        "release, or blog post), not the tweet alone.\n\n"
+    )
+
+
+def _build_prompt(
+    target_date: datetime,
+    freshness_hours: int,
+    result_limit: int,
+    *,
+    source_guidance: str | None = None,
+) -> str:
     """Build the web-research prompt for the scout agent.
 
     Scopes the search to the last ``freshness_hours`` window as of ``target_date``
@@ -68,27 +112,19 @@ def _build_prompt(target_date: datetime, freshness_hours: int, result_limit: int
     Borrows the ``market-intel`` skill's research discipline: search the right
     primary venues across SEVERAL angled queries (not one), prefer primary/
     official (L1) and independent (L2) sources over L4 aggregators/UGC/rumor,
-    and cross-check significance instead of amplifying virality.
+    and cross-check significance instead of amplifying virality. When
+    ``source_guidance`` is provided (the market-intel curated source matrix,
+    reused at runtime), it REPLACES the built-in venue list.
     """
     as_of = target_date.strftime("%Y-%m-%d")
-    return (
+    header = (
         "You are an AI/ML news scout. Using web search and fetch, find the most notable "
         "AI/ML developments from the LAST {hours} HOURS as of {as_of} (UTC). Include: "
         "new research papers, model/product releases, significant X/Twitter or other social "
         "discussion, and breaking news. Cover only ARTIFICIAL-INTELLIGENCE / MACHINE-LEARNING "
         "topics; ignore unrelated tech or general news.\n\n"
-        "SEARCH THE RIGHT VENUES (multi-angle -- run SEVERAL distinct searches, not one). "
-        "Check the primary AI venues directly:\n"
-        "  - arXiv recent listings (cs.AI / cs.LG / cs.CL / cs.CV).\n"
-        "  - Hugging Face Daily Papers and trending models.\n"
-        "  - Official AI-lab blogs (OpenAI, Anthropic, Google DeepMind, Meta AI, Mistral, "
-        "Qwen, DeepSeek).\n"
-        "  - GitHub trending AI repos and release pages.\n"
-        "  - Papers with Code (new SOTA).\n"
-        "  - Major AI newsletters / roundups (AINews, The Batch, Import AI).\n"
-        "  - For X/Twitter or social breaking buzz: X is login-walled, so search the OPEN WEB "
-        "for the discussion and find the CANONICAL source the buzz points to (the paper, "
-        "release, or blog post), not the tweet alone.\n\n"
+    ).format(hours=int(freshness_hours), as_of=as_of)
+    tail = (
         "SOURCE-TIER PREFERENCE: prefer PRIMARY / OFFICIAL sources (L1: the lab's own blog "
         "post, the arXiv abstract page, the GitHub release) and independent L2 reporting over "
         "L4 aggregators, UGC, or rumor. If only a rumor/aggregator exists, find the primary "
@@ -109,7 +145,8 @@ def _build_prompt(target_date: datetime, freshness_hours: int, result_limit: int
         "Return STRICT JSON ONLY of the form "
         '{{"items": [ {{...}}, {{...}} ]}} with at most {limit} items, each published within '
         "the last {hours} hours. If you are unsure a URL is real and reachable, OMIT that item."
-    ).format(hours=int(freshness_hours), as_of=as_of, limit=int(result_limit))
+    ).format(limit=int(result_limit), hours=int(freshness_hours))
+    return header + _venues_block(source_guidance) + tail
 
 
 def _is_arxiv_or_doi(host: str, url: str) -> bool:
@@ -210,6 +247,8 @@ def fetch_hotspot_items(
     result_limit: int = 40,
     model: str = "claude-sonnet-4-6",
     timeout_s: int = 300,
+    use_market_intel: bool = True,
+    market_intel_dir: Optional[str] = None,
     agent_fn: Callable[..., dict[str, Any]] = run_agent,
     url_check_fn: Optional[Callable[[str], bool]] = None,
 ) -> list[HotspotItem]:
@@ -235,7 +274,17 @@ def fetch_hotspot_items(
     if url_check_fn is None:
         url_check_fn = _default_url_alive
 
-    prompt = _build_prompt(target_date, freshness_hours, result_limit)
+    # Reuse the market-intel skill's curated source matrix when available so the
+    # scout's discovery breadth tracks the skill (refresh -> scout auto-benefits);
+    # falls back transparently to the built-in venue list when absent.
+    source_guidance = (
+        market_intel_bridge.load_source_guidance(explicit_dir=market_intel_dir)
+        if use_market_intel
+        else None
+    )
+    prompt = _build_prompt(
+        target_date, freshness_hours, result_limit, source_guidance=source_guidance
+    )
 
     try:
         payload = agent_fn(

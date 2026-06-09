@@ -1010,6 +1010,8 @@ def fetch_source_payloads(
                     freshness_hours,
                     result_limit=int(hotspot_config.getint("agent_scout_result_limit", 40)),
                     timeout_s=int(hotspot_config.getint("agent_scout_timeout_s", 300)),
+                    use_market_intel=hotspot_sources.getboolean("use_market_intel_sources", fallback=True),
+                    market_intel_dir=(hotspot_config.get("market_intel_skill_dir", fallback="") or None),
                 ),
             )
         )

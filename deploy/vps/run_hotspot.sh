@@ -7,6 +7,19 @@ cd "$REPO"
 TODAY="$(date -u +%F)"
 OUT="$REPO/out"
 
+# No-key agent-native flow (when configs/config.ini is the agent-native profile):
+#   - Papers: `python main.py` filters via [PAPER_FILTER] mode = agent_only -> claude -p,
+#     so NO OpenAI key is needed for the digest.
+#   - Hotspots: the Kernel runs with use_agent_scout = true (WebSearch/WebFetch) and
+#     use_twitterapi = false, so NO twitterapi.io key is needed either.
+#   Both stages run on the Claude subscription. The only secret this unit needs is the
+#   git push token. (If you run a key-based profile instead, main.py uses OpenAI as usual.)
+
+# 0. Agent-native paper digest. With the agent-native profile this filters papers through
+#    claude -p (no OpenAI). It must NOT abort the whole run if it fails -- the hotspot
+#    generation below is independent and should still proceed.
+python main.py || echo "paper digest failed; continuing"
+
 # 1. Drive the fixed-DAG Kernel headlessly. Claude Code subagents (DateVerify/Synthesize)
 #    are dispatched from inside the Kernel; this single invocation is idempotent and
 #    resumes from the last incomplete (date,stage) checkpoint.

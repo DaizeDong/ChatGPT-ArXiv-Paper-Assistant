@@ -13,7 +13,7 @@ working, but two behaviors changed by default and are worth knowing before you u
 | Paper filtering | `[PAPER_FILTER] mode = api_only` = **byte-identical** to before | none |
 | Hotspot in-process call (`generate_daily_hotspot_report`) | still returns a report dict | none |
 | **CI hotspot generation** | `[HOTSPOT_RUNTIME] runtime = local` -> GitHub **Actions no longer generates** hotspots (a VPS owns it) | **Actions-only users: set `runtime = actions`** (see below) |
-| Hotspot Synthesize headlines | claude -p subagent in `openai` mode, heuristic otherwise | optional: set `model_synthesize` |
+| Hotspot Synthesize headlines | claude -p subagent when `use_synthesize_agent` (default: on in openai mode and in the zero-key profile), else heuristic | optional: set `model_synthesize` |
 
 ## 1. Runtime ownership moved to a VPS (the one behavior change to know)
 
@@ -56,10 +56,10 @@ Every subagent is followed by a deterministic verifier; no agent output is used 
 
 - **DateVerify** — per-item first-publication date (arXiv v1 / Crossref / Wayback,
   earliest-credible-wins), clamped by a deterministic verifier. Fixes stale-item leakage.
-- **Synthesize** — bilingual (en/zh) headline + summary per featured topic, in `openai`
-  mode, via `claude -p`; the verifier rejects any row missing a bilingual field or citing
-  evidence not already in the story (anti-hallucination). In `heuristic` mode (or on agent
-  failure) it degrades to deterministic heuristic headlines. Set `[HOTSPOTS] model_synthesize`
+- **Synthesize** — bilingual (en/zh) headline + summary per featured topic, via `claude -p` (gated by
+  `use_synthesize_agent`; default on in openai mode and in the zero-key profile); the verifier rejects any row missing a bilingual field or citing
+  evidence not already in the story (anti-hallucination). When the agent is off, or on agent
+  failure, it degrades to deterministic heuristic headlines. Set `[HOTSPOTS] model_synthesize`
   to pin the model.
 - **Paper AgentFilter** — see section 2.
 
@@ -111,11 +111,11 @@ This profile needs only the `claude` CLI (logged in) plus a git push token. With
   twitterapi.io key.
 - **Protected/JS sources** (Reddit, the xAI blog, the Chinese-lab SPA blogs) come from the
   **browser subagent** (`use_subagent_routes = true`); see section 5.
-- **Headlines** are deterministic-heuristic in this profile. The hotspots run in `mode = heuristic`,
-  so neither the OpenAI screening/enrichment nor the bilingual **Synthesize agent** runs (the
-  Synthesize agent is gated on `mode = openai`). To get agent bilingual headlines you would set
-  `mode = openai`, which then also needs an OpenAI key for enrichment -- so the zero-key profile
-  deliberately uses heuristic headlines.
+- **Bilingual headlines** come from the **Synthesize agent** (`claude -p`, NO OpenAI key). The
+  Synthesize agent is decoupled from the enrich `mode` via `[HOTSPOTS] use_synthesize_agent`, which
+  this profile sets to `true` -- so even though hotspots run in `mode = heuristic` (no OpenAI
+  enrichment), the bilingual Synthesize agent still runs and its evidence-grounding verifier still
+  gates every row (degrading to heuristic headlines only on agent failure).
 
 No OpenAI or twitterapi keys are required. Everything runs on the Claude subscription.
 

@@ -444,7 +444,14 @@ def _stage_synthesize(ctx: KernelContext) -> dict[str, Any]:
     model = cfg.get("model_synthesize", cfg.get("model_summarize", cfg.get("model_screen", "")))
 
     rejected: list[str] = []
-    if cfg.get("mode", "heuristic") == "openai" and featured:
+    # The Synthesize agent is DECOUPLED from the OpenAI enrich `mode`: it runs via
+    # claude -p (`_call_synthesize_agent`) and needs NO OpenAI key. The default
+    # preserves prior behavior exactly (on in openai mode, off in heuristic) so the
+    # committed config is byte-compatible; the zero-key agent-native profile sets
+    # `use_synthesize_agent = true` to get agent-synthesized bilingual headlines.
+    _default_use_synth = cfg.get("mode", "heuristic").strip().lower() == "openai"
+    use_synth_agent = cfg.getboolean("use_synthesize_agent", fallback=_default_use_synth)
+    if use_synth_agent and featured:
         payload = _with_retry(
             lambda: _call_synthesize_agent(featured, model),
             attempts=2, base_delay=0.0, fallback=lambda: {"topics": []},

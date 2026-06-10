@@ -1045,3 +1045,57 @@ class TestInvariantsAcceptance(unittest.TestCase):
             payload = kernel._stage_synthesize(ctx)
         self.assertEqual(payload["manifest"]["synthesize_temperature"], 0)
         self.assertEqual(payload["manifest"]["synthesize_model"], "pinned-model-v1")
+
+
+class TestSynthesizeAgentGate(unittest.TestCase):
+    """use_synthesize_agent decouples the claude -p Synthesize agent from enrich mode."""
+
+    def _topic(self) -> dict:
+        return {
+            "TOPIC_ID": "t1", "title": "Old title",
+            "WHY_IT_MATTERS": "", "KEY_TAKEAWAYS": [],
+            "EVIDENCE_URLS": ["https://x/a", "https://x/b"],
+            "items": [
+                {"title": "Subitem about coding gains", "summary": "Multi-step coding benchmark improvements."},
+            ],
+        }
+
+    def _run(self, hotspots_cfg: dict):
+        replay = json.loads((FIXT / "synthesize_ok.json").read_text(encoding="utf-8"))
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            td = datetime(2026, 5, 20, tzinfo=timezone.utc)
+            kernel._write_checkpoint(root, td, "score",
+                                     {"featured": [self._topic()], "watchlist": [], "all_topics": []})
+            cfg = configparser.ConfigParser()
+            cfg["HOTSPOTS"] = {"enabled": "true", "model_synthesize": "pinned-model-v1", **hotspots_cfg}
+            ctx = kernel.KernelContext(output_root=root, target_date=td, config=cfg,
+                                       store=None, journal=[])
+            m = unittest.mock.MagicMock(return_value=replay)
+            with unittest.mock.patch.object(kernel, "_call_synthesize_agent", m):
+                payload = kernel._stage_synthesize(ctx)
+        return payload, m
+
+    def test_flag_on_heuristic_mode_runs_agent_zero_key(self) -> None:
+        # NEW capability: zero-key agent synthesis in heuristic mode.
+        payload, m = self._run({"mode": "heuristic", "use_synthesize_agent": "true"})
+        self.assertTrue(m.called)
+        self.assertEqual(payload["featured"][0]["HEADLINE"], "Frontier lab ships agentic coding model")
+        self.assertEqual(payload["featured"][0]["HEADLINE_ZH"], "前沿实验室发布智能体编码模型")
+
+    def test_flag_unset_heuristic_mode_no_agent(self) -> None:
+        # Backward-compat: heuristic default keeps the agent off.
+        payload, m = self._run({"mode": "heuristic"})
+        m.assert_not_called()
+        self.assertEqual(payload["featured"][0]["HEADLINE"], "Old title")
+
+    def test_flag_unset_openai_mode_runs_agent(self) -> None:
+        # Backward-compat: openai default keeps the agent on.
+        _payload, m = self._run({"mode": "openai"})
+        self.assertTrue(m.called)
+
+    def test_flag_off_openai_mode_no_agent(self) -> None:
+        # Explicit off overrides the openai default.
+        payload, m = self._run({"mode": "openai", "use_synthesize_agent": "false"})
+        m.assert_not_called()
+        self.assertEqual(payload["featured"][0]["HEADLINE"], "Old title")

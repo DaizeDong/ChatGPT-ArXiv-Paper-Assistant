@@ -2,9 +2,10 @@ from __future__ import annotations
 
 import configparser
 import json
+import math
 import os
 import re
-from datetime import UTC, datetime, timedelta
+from datetime import UTC, date as _date, datetime, timedelta
 from pathlib import Path
 from typing import Any
 from zoneinfo import ZoneInfo
@@ -21,10 +22,10 @@ from arxiv_assistant.apis.hotspot.hotspot_official_blogs import fetch_hotspot_it
 from arxiv_assistant.apis.hotspot.hotspot_reddit import fetch_hotspot_items as fetch_reddit_items
 from arxiv_assistant.apis.hotspot.hotspot_roundups import fetch_hotspot_items as fetch_roundup_items
 from arxiv_assistant.apis.hotspot.hotspot_x_ainews import fetch_hotspot_items as fetch_x_ainews_items
-from arxiv_assistant.apis.hotspot.hotspot_x_official import fetch_hotspot_items as fetch_x_official_items
-from arxiv_assistant.apis.hotspot.hotspot_x_paperpulse import fetch_hotspot_items as fetch_x_paperpulse_items
-from arxiv_assistant.filters.filter_hotspots import synthesize_digest_with_openai
+from arxiv_assistant.apis.hotspot.hotspot_twitterapi import fetch_hotspot_items as fetch_x_twitterapi_items
+from arxiv_assistant.apis.hotspot.hotspot_agent_scout import fetch_hotspot_items as fetch_agent_scout_items
 from arxiv_assistant.hotspots.enrich import enrich_items_batch, enrich_items_heuristic
+from arxiv_assistant.hotspots.dedup import classify_cross_day, cluster_intraday, match_crossday
 from arxiv_assistant.hotspots.story import Story, apply_cross_day_penalty, group_into_stories, score_stories, select_and_categorize
 from arxiv_assistant.renderers.hotspot.render_hot_daily import render_hot_daily_md
 from arxiv_assistant.utils.hotspot.hotspot_config import build_hotspot_paths, ensure_parent_dirs
@@ -32,6 +33,18 @@ from arxiv_assistant.utils.hotspot.hotspot_schema import HotspotItem
 from arxiv_assistant.utils.hotspot.hotspot_sources import api_usage_scope, reset_api_usage, snapshot_api_usage
 from arxiv_assistant.utils.prompt_loader import read_prompt
 from arxiv_assistant.utils.hotspot.hotspot_web_data import write_hotspot_web_data
+from arxiv_assistant.hotspots.date_verify import verify as date_verify
+from arxiv_assistant.hotspots.store import _open_story_store
+from arxiv_assistant.utils.hotspot.gate_date import gate_date
+
+
+# Deferred import alias so tests can patch hp.kernel_run and to avoid a
+# circular import at module load (kernel.py imports many names FROM pipeline
+# at its module top, so pipeline must NOT import kernel at top level).
+def kernel_run(*args, **kwargs):
+    from arxiv_assistant.hotspots.kernel import run as _run
+    return _run(*args, **kwargs)
+
 
 ROLE_PRIORITY = {
     "research_backbone": 0,
@@ -108,6 +121,45 @@ def _is_low_quality_display_title(title: str) -> bool:
     if len(title) < 8:
         return True
     return any(p.search(title) for p in _LOW_QUALITY_DISPLAY_RE)
+
+
+def _apply_freshness_gates(
+    items: list,
+    target_date: datetime,
+    *,
+    max_item_age_days: int,
+) -> list:
+    """Day-granular max-age hard gate on gate_date (spec §B.5/§B.5.1).
+
+    Uses gate_date(item) (verified_first_date floored to UTC day) so sub-day jitter
+    cannot flip the discrete gate (INV2). github_trend is exempt from max-age (it
+    legitimately trends long after creation). Items with no credible date are kept
+    (cannot-verify → do not drop), matching the legacy policy.
+
+    Per-source adapters handle freshness at fetch time; gravity decay (_freshness_weight)
+    ranks down older items; the 14-day hard cap here is the inclusion ceiling.
+    """
+    target_utc = target_date.replace(tzinfo=UTC) if target_date.tzinfo is None else target_date
+    run_day = target_utc.date()
+
+    kept = []
+    for item in items:
+        if item.source_id in {"github_trend"}:
+            kept.append(item)
+            continue
+        gday = gate_date(item)
+        if gday is None:
+            kept.append(item)  # cannot verify → do not drop
+            continue
+        age_days = (run_day - gday).days
+        if age_days > max_item_age_days:
+            continue  # too old (hard gate)
+        if age_days < -1:
+            continue  # future-dated artifact (allow +1 day for tz slack)
+        kept.append(item)
+    return kept
+
+
 AI_RELEVANCE_TERMS = {
     "ai",
     "llm",
@@ -145,10 +197,10 @@ SOURCE_USAGE_META = {
     "analysis_feeds": {"provider": "Analysis RSS feeds", "billing_model": "free"},
     "reddit": {"provider": "Reddit JSON API", "billing_model": "free"},
     "x_ainews_twitter": {"provider": "AINews Twitter recap", "billing_model": "free"},
-    "x_paperpulse": {"provider": "PaperPulse", "billing_model": "free"},
-    "x_official": {"provider": "X API", "billing_model": "quota"},
+    "x_twitterapi": {"provider": "twitterapi.io", "billing_model": "metered"},
     "github_trend": {"provider": "GitHub API", "billing_model": "free"},
     "hn_discussion": {"provider": "Hacker News API", "billing_model": "free"},
+    "agent_scout": {"provider": "claude-code", "billing_model": "subscription"},
 }
 
 
@@ -364,7 +416,31 @@ def _build_market_signal_items(
     return selected[:target_count]
 
 
-def _paper_spotlight_item_score(item: HotspotItem) -> float:
+# Semantic Scholar citation-significance bonus is bounded so it can never dominate the
+# existing daily/relevance/novelty score (it only breaks ties toward genuinely-cited work).
+_S2_BONUS_CAP = 2.5
+
+
+def _s2_significance_bonus(cites: dict | None) -> float:
+    """Bounded ranking bonus from Semantic Scholar citation counts.
+
+    Primary signal is ``influentialCitationCount`` (S2's curated "actually built upon"
+    citations); total ``citationCount`` is a weaker secondary. log1p keeps it sub-linear
+    and the result is capped at ``_S2_BONUS_CAP``.
+
+    HONEST NOTE: brand-new papers have ~0 citations (too recent to be cited), so this is
+    near-zero for the daily-NEW stream and harmless there; its value is differentiating
+    older / resurfaced / already-cited papers from upvote-only ones.
+    """
+    if not cites:
+        return 0.0
+    influential = max(0, int(cites.get("influentialCitationCount") or 0))
+    total = max(0, int(cites.get("citationCount") or 0))
+    bonus = math.log1p(influential) * 1.2 + math.log1p(total) * 0.4
+    return round(min(_S2_BONUS_CAP, bonus), 3)
+
+
+def _paper_spotlight_item_score(item: HotspotItem, *, s2_bonus: float = 0.0) -> float:
     metadata = item.metadata or {}
     score = 0.0
     score += float(metadata.get("daily_score", 0) or 0) * 0.8
@@ -372,6 +448,7 @@ def _paper_spotlight_item_score(item: HotspotItem) -> float:
     score += float(metadata.get("novelty", 0) or 0) * 0.35
     if metadata.get("spotlight_primary_kind") == "new_frontier":
         score += 1.0
+    score += float(s2_bonus or 0.0)  # free Semantic Scholar citation-significance signal
     return round(score, 3)
 
 
@@ -380,9 +457,28 @@ def _build_paper_spotlight(
     *,
     max_daily_hot: int,
     max_new_frontier: int,
+    use_s2_signal: bool = False,
+    s2_api_key: str | None = None,
+    citations_fn=None,
 ) -> list[dict[str, Any]]:
     grouped: dict[str, list[tuple[float, dict[str, Any]]]] = {"new_frontier": [], "daily_hot": []}
     seen_ids: set[tuple[str, str]] = set()
+
+    # Batch-fetch citation counts ONCE for all candidate arXiv ids (one request, degrade-safe).
+    # When use_s2_signal is False OR S2 is unavailable, `citations` stays {} -> every bonus is
+    # 0.0 -> ranking is IDENTICAL to the no-S2 baseline (zero behavior change).
+    citations: dict[str, dict] = {}
+    if use_s2_signal:
+        fn = citations_fn
+        if fn is None:
+            from arxiv_assistant.apis.semantic_scholar import get_paper_citations as fn
+        arxiv_ids = sorted({
+            str((it.metadata or {}).get("arxiv_id", "") or "").strip()
+            for it in raw_items
+            if str((it.metadata or {}).get("arxiv_id", "") or "").strip()
+        })
+        if arxiv_ids:
+            citations = fn(arxiv_ids, api_key=s2_api_key) or {}
 
     for item in raw_items:
         metadata = item.metadata or {}
@@ -413,7 +509,11 @@ def _build_paper_spotlight(
             "relevance": int(metadata.get("relevance", 0) or 0),
             "novelty": int(metadata.get("novelty", 0) or 0),
         }
-        grouped[spotlight_kind].append((_paper_spotlight_item_score(item), payload))
+        cites = citations.get(arxiv_id) or {}
+        s2_bonus = _s2_significance_bonus(cites)
+        payload["s2_influential_citations"] = int(cites.get("influentialCitationCount") or 0)
+        payload["s2_citations"] = int(cites.get("citationCount") or 0)
+        grouped[spotlight_kind].append((_paper_spotlight_item_score(item, s2_bonus=s2_bonus), payload))
 
     sections: list[dict[str, Any]] = []
     for kind, limit in (("new_frontier", max_new_frontier), ("daily_hot", max_daily_hot)):
@@ -907,6 +1007,17 @@ def fetch_source_payloads(
     hn_keywords = [keyword.strip().lower() for keyword in hn_config.get("keyword_filter", "").split(",") if keyword.strip()]
 
     specs = []
+    # Static subagent routing: when on, KNOWN-FAIL sources (reddit bot-wall, JS sites)
+    # are served by the playwright/agent subagent instead of their failing direct scraper.
+    # Default OFF (committed config unchanged); the agent-native profile turns it on.
+    use_subagent_routes = hotspot_sources.getboolean("use_subagent_routes", fallback=False)
+    _subagent_browser_routes: list[tuple[str, dict[str, str]]] = []
+    reddit_via_subagent = False
+    if use_subagent_routes:
+        from arxiv_assistant.utils.hotspot.source_routes import iter_subagent_sources
+        _subagent_browser_routes = [(n, s) for n, s in iter_subagent_sources() if s.get("route") == "browser"]
+        # reddit is covered by its browser routes, so skip the (403-ing) direct scraper below.
+        reddit_via_subagent = any(n.startswith("reddit") for n, _ in _subagent_browser_routes)
     if hotspot_sources.getboolean("use_local_papers", fallback=True):
         specs.append(("local_papers", lambda: fetch_local_paper_items(target_date, output_root, max_staleness_days=local_papers_max_staleness_days)))
     hf_daily_hot_score_cutoff = hotspot_config.getint("paper_spotlight_daily_hot_score_cutoff", fallback=15)
@@ -928,32 +1039,35 @@ def fetch_source_payloads(
     analysis_feeds_registry = REPO_ROOT / "configs" / "hotspot" / "analysis_feeds.json"
     if hotspot_sources.getboolean("use_analysis_feeds", fallback=True) and analysis_feeds_registry.exists():
         specs.append(("analysis_feeds", lambda: fetch_analysis_feed_items(target_date, freshness_hours, analysis_feeds_registry)))
-    if hotspot_sources.getboolean("use_reddit", fallback=True):
+    if hotspot_sources.getboolean("use_reddit", fallback=True) and not reddit_via_subagent:
         specs.append(("reddit", lambda: fetch_reddit_items(target_date, freshness_hours)))
     if hotspot_sources.getboolean("use_x_ainews_twitter", fallback=True):
         specs.append(("x_ainews_twitter", lambda: fetch_x_ainews_items(target_date, freshness_hours)))
-    if hotspot_sources.getboolean("use_x_paperpulse", fallback=True):
+    if hotspot_sources.getboolean("use_twitterapi", fallback=True):
         specs.append(
             (
-                "x_paperpulse",
-                lambda: fetch_x_paperpulse_items(
-                    target_date,
-                    freshness_hours,
-                    result_limit=int(x_config.get("paperpulse_result_limit", 20)),
-                ),
-            )
-        )
-    if hotspot_sources.getboolean("use_x_official", fallback=False):
-        specs.append(
-            (
-                "x_official",
-                lambda: fetch_x_official_items(
+                "x_twitterapi",
+                lambda: fetch_x_twitterapi_items(
                     target_date,
                     freshness_hours,
                     x_seed_path,
-                    default_result_limit=int(x_config.get("list_result_limit", 80)),
+                    result_limit=int(x_config.get("list_result_limit", 80)),
                     snapshot_path=x_registry_snapshot_path,
                     max_age_hours=x_registry_max_age_hours,
+                ),
+            )
+        )
+    if hotspot_sources.getboolean("use_agent_scout", fallback=False):
+        specs.append(
+            (
+                "agent_scout",
+                lambda: fetch_agent_scout_items(
+                    target_date,
+                    freshness_hours,
+                    result_limit=int(hotspot_config.getint("agent_scout_result_limit", 40)),
+                    timeout_s=int(hotspot_config.getint("agent_scout_timeout_s", 300)),
+                    use_market_intel=hotspot_sources.getboolean("use_market_intel_sources", fallback=True),
+                    market_intel_dir=(hotspot_config.get("market_intel_skill_dir", fallback="") or None),
                 ),
             )
         )
@@ -984,6 +1098,24 @@ def fetch_source_payloads(
                 ),
             )
         )
+    if _subagent_browser_routes:
+        # KNOWN-FAIL sources served by the playwright browser subagent (proven to rescue reddit).
+        from arxiv_assistant.apis.hotspot.browser_source_fetch import fetch_source_via_browser
+        sub_limit = int(hotspot_config.getint("subagent_source_result_limit", 10))
+        sub_timeout = int(hotspot_config.getint("subagent_source_timeout_s", 300))
+        for _route_name, _route_spec in _subagent_browser_routes:
+            SOURCE_USAGE_META.setdefault(
+                _route_name, {"provider": "claude-code+playwright", "billing_model": "subscription"}
+            )
+            specs.append(
+                (
+                    _route_name,
+                    lambda rn=_route_name, rs=_route_spec: fetch_source_via_browser(
+                        rn, rs["url"], rs["kind"], target_date, freshness_hours,
+                        result_limit=sub_limit, timeout_s=sub_timeout,
+                    ),
+                )
+            )
 
     all_items: list[HotspotItem] = []
     source_stats: dict[str, int] = {}
@@ -1025,76 +1157,6 @@ def fetch_source_payloads(
         all_items.extend(items)
 
     return _dedupe_items(all_items), source_stats, api_usage
-
-
-def deterministic_trim(clusters: list[HotspotCluster], max_clusters: int) -> list[HotspotCluster]:
-    def cluster_priority(cluster: HotspotCluster) -> tuple[float, int, int]:
-        source_count = len(cluster.source_ids)
-        source_type_count = len(cluster.source_types)
-        roles = set(cluster.source_roles)
-        boost = 0.0
-        if "official_news" in roles:
-            boost += 7.0
-        if roles & {"community_heat", "headline_consensus", "editorial_depth"}:
-            boost += 3.5
-        if source_count > 1:
-            boost += 2.2 * min(source_count - 1, 3)
-        if source_type_count > 1:
-            boost += 1.2 * min(source_type_count - 1, 2)
-        if roles.issubset({"github_trend"}) and source_count == 1:
-            boost -= 4.0
-        if roles.issubset({"research_backbone", "paper_trending"}) and source_count == 1:
-            boost -= 2.0
-        if roles.issubset({"headline_consensus"}) and source_count == 1:
-            boost -= 5.5
-        if roles.issubset({"hn_discussion"}) and source_count == 1:
-            boost -= 5.0
-        if roles.issubset({"builder_momentum"}) and source_count == 1:
-            boost -= 3.2
-        if roles.issubset({"community_heat"}) and source_count == 1:
-            boost -= 1.8
-        return (cluster.deterministic_score + boost, source_count, source_type_count)
-
-    ranked = sorted(clusters, key=cluster_priority, reverse=True)
-    role_budgets = {
-        "official_news": 6,
-        "editorial_depth": 4,
-        "research_backbone": 3,
-        "paper_trending": 4,
-        "github_trend": 1,
-        "builder_momentum": 1,
-        "community_heat": 2,
-        "headline_consensus": 1,
-        "hn_discussion": 1,
-    }
-    selected: list[HotspotCluster] = []
-    selected_ids: set[str] = set()
-
-    for role, budget in role_budgets.items():
-        kept = 0
-        for cluster in ranked:
-            if cluster.cluster_id in selected_ids:
-                continue
-            if role not in cluster.source_roles:
-                continue
-            selected.append(cluster)
-            selected_ids.add(cluster.cluster_id)
-            kept += 1
-            if kept >= budget or len(selected) >= max_clusters:
-                break
-        if len(selected) >= max_clusters:
-            break
-
-    if len(selected) < max_clusters:
-        for cluster in ranked:
-            if cluster.cluster_id in selected_ids:
-                continue
-            selected.append(cluster)
-            selected_ids.add(cluster.cluster_id)
-            if len(selected) >= max_clusters:
-                break
-
-    return selected[:max_clusters]
 
 
 def _fallback_digest_summary(top_topics: list[dict[str, Any]]) -> str:
@@ -1167,111 +1229,6 @@ def _heuristic_takeaways(topic: dict[str, Any], max_takeaways: int = 3) -> list[
                 break
 
     return takeaways
-
-
-def apply_digest_synthesis(
-    top_topics: list[dict[str, Any]],
-    watchlist: list[dict[str, Any]],
-    system_prompt: str,
-    digest_prompt: str,
-    config: configparser.ConfigParser,
-    mode: str,
- ) -> tuple[str, float, float, int, int, int]:
-    for topic in top_topics:
-        topic["HEADLINE"] = topic.get("title", "")
-        if not topic.get("KEY_TAKEAWAYS"):
-            topic["KEY_TAKEAWAYS"] = _heuristic_takeaways(topic)
-
-    if mode != "openai" or not top_topics:
-        return _fallback_digest_summary(top_topics), 0.0, 0.0, 0, 0, 0
-
-    try:
-        payload, prompt_cost, completion_cost, prompt_tokens, completion_tokens, request_count = synthesize_digest_with_openai(
-            top_topics=top_topics,
-            watchlist=watchlist,
-            system_prompt=system_prompt,
-            digest_prompt=digest_prompt,
-            model=config["HOTSPOTS"].get("model_summarize", config["HOTSPOTS"].get("model_screen")),
-            retry_count=config["HOTSPOTS"].getint("retry", fallback=3),
-        )
-    except Exception as ex:
-        print(f"Warning: hotspot digest synthesis failed, falling back to heuristic: {ex}")
-        return _fallback_digest_summary(top_topics), 0.0, 0.0, 0, 0, 0
-
-    by_id = {topic["TOPIC_ID"]: topic for topic in top_topics}
-    for row in payload.get("top_topics", []):
-        topic_id = row.get("TOPIC_ID")
-        if topic_id not in by_id:
-            continue
-        by_id[topic_id]["HEADLINE"] = row.get("HEADLINE") or by_id[topic_id]["HEADLINE"]
-        by_id[topic_id]["WHY_IT_MATTERS"] = row.get("WHY_IT_MATTERS") or by_id[topic_id]["WHY_IT_MATTERS"]
-        by_id[topic_id]["KEY_TAKEAWAYS"] = [point for point in row.get("KEY_TAKEAWAYS", []) if point]
-
-    return (
-        payload.get("summary", "").strip() or _fallback_digest_summary(top_topics),
-        prompt_cost,
-        completion_cost,
-        prompt_tokens,
-        completion_tokens,
-        request_count,
-    )
-
-
-def _build_usage_payload(
-    config: configparser.ConfigParser,
-    effective_mode: str,
-    prompt_cost: float,
-    completion_cost: float,
-    llm_prompt_tokens: int,
-    llm_completion_tokens: int,
-    llm_requests: int,
-    api_usage: dict[str, dict[str, Any]],
-) -> dict[str, Any]:
-    llm_total_cost = round(prompt_cost + completion_cost, 6)
-    llm_row = {
-        "provider": "OpenAI",
-        "billing_model": "quota" if effective_mode == "openai" else "disabled",
-        "screen_model": config["HOTSPOTS"].get("model_screen"),
-        "summary_model": config["HOTSPOTS"].get("model_summarize", config["HOTSPOTS"].get("model_screen")),
-        "requests": int(llm_requests),
-        "prompt_tokens": int(llm_prompt_tokens),
-        "completion_tokens": int(llm_completion_tokens),
-        "total_tokens": int(llm_prompt_tokens + llm_completion_tokens),
-        "prompt_cost": round(prompt_cost, 6),
-        "completion_cost": round(completion_cost, 6),
-        "total_cost": llm_total_cost,
-    }
-
-    external_rows: dict[str, dict[str, Any]] = {}
-    external_request_total = 0
-    x_request_total = 0
-    estimated_external_cost = 0.0
-    for source_id, row in api_usage.items():
-        requests_count = int(row.get("requests", 0) or 0)
-        estimated_cost = round(float(row.get("estimated_cost", 0.0) or 0.0), 6)
-        normalized = {
-            "provider": str(row.get("provider", source_id)),
-            "billing_model": str(row.get("billing_model", "unknown")),
-            "requests": requests_count,
-            "items": int(row.get("items", 0) or 0),
-            "estimated_cost": estimated_cost,
-            "cache_hit": bool(row.get("cache_hit", False)),
-        }
-        external_rows[source_id] = normalized
-        external_request_total += requests_count
-        estimated_external_cost += estimated_cost
-        if source_id.startswith("x_"):
-            x_request_total += requests_count
-
-    return {
-        "llm": llm_row,
-        "external": external_rows,
-        "summary": {
-            "external_requests": external_request_total,
-            "x_requests": x_request_total,
-            "estimated_external_cost": round(estimated_external_cost, 6),
-        },
-    }
 
 
 def _decide_mode(requested_mode: str) -> str:
@@ -1627,213 +1584,32 @@ def _story_to_topic_dict(story: Story, *, keep: bool = False, watchlist: bool = 
     }
 
 
-def generate_daily_hotspot_report(output_root: str | Path, target_date: datetime, config: configparser.ConfigParser, mode_override: str = "auto", force: bool = False) -> dict[str, Any] | None:
+def generate_daily_hotspot_report(
+    output_root: str | Path,
+    target_date: datetime,
+    config: configparser.ConfigParser,
+    mode_override: str = "auto",
+    force: bool = False,
+    stage: str | None = None,
+) -> dict[str, Any] | None:
+    """Thin strangle-pattern delegation to kernel.run (spec §F.2).
+
+    Preserves the public return contract: the report dict on success, or None
+    when hotspots are disabled or the kernel did not produce a report file.
+    """
     if not config["HOTSPOTS"].getboolean("enabled", fallback=False):
         return None
 
     output_root = Path(output_root)
-    effective_mode = _decide_mode(mode_override or config["HOTSPOTS"].get("mode", "auto"))
+    # Resolve mode for ALL cases (including "auto") and persist it into the live
+    # config the kernel reads, so _stage_synthesize/_enrich see the resolved
+    # "openai"/"heuristic" value rather than the literal "auto" (which they treat
+    # as not-openai). Matches legacy effective_mode resolution exactly.
+    config["HOTSPOTS"]["mode"] = _decide_mode(mode_override or config["HOTSPOTS"].get("mode", "auto"))
 
-    raw_items, source_stats, api_usage = fetch_source_payloads(target_date, output_root, config, force)
-    raw_items = raw_items[: config["HOTSPOTS"].getint("max_raw_items", fallback=120)]
+    kernel_run(output_root, target_date, config, stage=stage, force=force)
 
-    # Filter items with mismatched URLs (title-URL inconsistency)
-    from arxiv_assistant.utils.hotspot.hotspot_sources import url_title_consistent
-    pre_filter_count = len(raw_items)
-    raw_items = [item for item in raw_items if url_title_consistent(item.title, item.url)]
-    if len(raw_items) < pre_filter_count:
-        print(f"URL-title filter: removed {pre_filter_count - len(raw_items)} items with mismatched URLs")
-
-    # Skip items without a publication date — can't verify freshness.
-    pre_date = len(raw_items)
-    raw_items = [item for item in raw_items if item.published_at]
-    if len(raw_items) < pre_date:
-        print(f"Date filter: removed {pre_date - len(raw_items)} items without published_at ({len(raw_items)} remaining)")
-
-    # Freshness gate: only keep items published within 1 day of target date.
-    from arxiv_assistant.utils.hotspot.hotspot_sources import get_freshness_date, parse_datetime
-    from datetime import timedelta, timezone as tz
-    target_utc = target_date.replace(tzinfo=tz.utc) if target_date.tzinfo is None else target_date
-    freshness_hours = config["HOTSPOTS"].getint("freshness_hours", fallback=24)
-    freshness_cutoff = target_utc - timedelta(hours=freshness_hours)
-    pre_fresh = len(raw_items)
-    fresh_items = []
-    for item in raw_items:
-        dt = parse_datetime(get_freshness_date(item))
-        if dt is None or dt >= freshness_cutoff:
-            fresh_items.append(item)
-    raw_items = fresh_items
-    if len(raw_items) < pre_fresh:
-        print(f"Freshness gate: removed {pre_fresh - len(raw_items)} items older than {freshness_hours}h ({len(raw_items)} remaining)")
-
-    # Hard cap on published_at: reject items published more than 14 days ago
-    # regardless of fetched_at. This prevents stale content from any source.
-    MAX_ITEM_AGE_DAYS = 14
-    published_at_cutoff = target_utc - timedelta(days=MAX_ITEM_AGE_DAYS)
-    future_cutoff = target_utc + timedelta(hours=30)  # end-of-day + 6h
-    pre_hard = len(raw_items)
-    hard_fresh = []
-    for item in raw_items:
-        if item.published_at:
-            pub_dt = parse_datetime(item.published_at)
-            if pub_dt is not None:
-                if pub_dt < published_at_cutoff:
-                    continue  # too old
-                if pub_dt > future_cutoff:
-                    continue  # future-dated (e.g. backfill cache artifact)
-        hard_fresh.append(item)
-    raw_items = hard_fresh
-    if len(raw_items) < pre_hard:
-        print(f"Published-at bounds: removed {pre_hard - len(raw_items)} items outside [{MAX_ITEM_AGE_DAYS}d ago, +30h] ({len(raw_items)} remaining)")
-
-    # Cross-day dedup: exclude URLs already featured in recent reports
-    recent_urls, recent_headlines = _load_recent_featured_urls(output_root, target_date)
-    if recent_urls:
-        pre_cross = len(raw_items)
-        raw_items = [
-            item for item in raw_items
-            if (item.canonical_url or "") not in recent_urls
-            and (item.url or "") not in recent_urls
-        ]
-        if len(raw_items) < pre_cross:
-            print(f"Cross-day URL dedup: removed {pre_cross - len(raw_items)} previously featured items ({len(raw_items)} remaining)")
-
-    # --- Story-centric pipeline ---
-    hotspot_config = config["HOTSPOTS"]
-    model_enrich = hotspot_config.get("model_enrich", hotspot_config.get("model_screen"))
-    enrich_batch_size = hotspot_config.getint("enrich_batch_size", fallback=20)
-    retry_count = hotspot_config.getint("retry", fallback=3)
-
-    # Stage 3: Enrich
-    if effective_mode == "openai":
-        enriched_items = enrich_items_batch(raw_items, model_enrich, enrich_batch_size, retry_count)
-    else:
-        enriched_items = enrich_items_heuristic(raw_items)
-
-    # Stage 4-5: Group into stories → Score
-    stories = score_stories(group_into_stories(enriched_items))
-
-    # Cross-day headline penalty
-    if recent_headlines:
-        stories = apply_cross_day_penalty(stories, recent_headlines)
-
-    # Stage 5b: Filter low-quality / meta-discussion stories
-    pre_quality = len(stories)
-    stories = [s for s in stories if not _is_low_quality_story(s)]
-    if len(stories) < pre_quality:
-        print(f"Story quality filter: removed {pre_quality - len(stories)} low-quality stories ({len(stories)} remaining)")
-
-    # Stage 6: Select & categorize
-    target_topics = hotspot_config.getint("target_topics", fallback=5)
-    target_watchlist_topics = hotspot_config.getint("target_watchlist_topics", fallback=3)
-    featured_stories, watchlist_stories, _ = select_and_categorize(
-        stories,
-        target_featured=target_topics,
-        target_watchlist=target_watchlist_topics,
-        max_per_category=hotspot_config.getint("max_topics_per_category", fallback=4),
-    )
-
-    # Bridge: Story → topic dict
-    featured_topics = [_story_to_topic_dict(s, keep=True) for s in featured_stories]
-    watchlist = [_story_to_topic_dict(s, watchlist=True) for s in watchlist_stories]
-    display_candidates = [_story_to_topic_dict(s) for s in stories]
-
-    # Category and long-tail sections (reuse existing builders)
-    watchlist_cutoff = hotspot_config.getfloat("watchlist_score_cutoff", fallback=4.9)
-    category_sections = _build_category_sections(
-        display_candidates,
-        featured_topics,
-        target_total_topics=hotspot_config.getint("target_category_topics", fallback=12),
-        max_per_category=hotspot_config.getint("max_topics_per_category", fallback=4),
-        min_display_score=hotspot_config.getfloat("category_display_score_cutoff", fallback=max(2.8, watchlist_cutoff - 0.5)),
-    )
-    long_tail_sections = _build_long_tail_sections(
-        display_candidates,
-        featured_topics,
-        category_sections,
-        target_total_topics=hotspot_config.getint("target_long_tail_topics", fallback=18),
-        max_per_category=hotspot_config.getint("max_long_tail_per_category", fallback=8),
-        min_display_score=hotspot_config.getfloat("long_tail_display_score_cutoff", fallback=1.6),
-    )
-
-    # Stage 7: Digest synthesis
-    system_prompt = read_prompt("hotspot.system_prompt")
-    digest_prompt = read_prompt("hotspot.digest_writer")
-    prompt_cost = 0.0
-    completion_cost = 0.0
-    llm_prompt_tokens = 0
-    llm_completion_tokens = 0
-    llm_requests = 0
-    summary, digest_prompt_cost, digest_completion_cost, digest_prompt_tokens, digest_completion_tokens, digest_requests = apply_digest_synthesis(
-        featured_topics,
-        watchlist,
-        system_prompt,
-        digest_prompt,
-        config,
-        effective_mode,
-    )
-    prompt_cost += digest_prompt_cost
-    completion_cost += digest_completion_cost
-    llm_prompt_tokens += digest_prompt_tokens
-    llm_completion_tokens += digest_completion_tokens
-    llm_requests += digest_requests
-
-    # Waterfall dedup safety net
-    claimed_ids: set[str] = {t["TOPIC_ID"] for t in featured_topics}
-    for section in category_sections:
-        claimed_ids.update(t["TOPIC_ID"] for t in section.get("topics", []))
-    for section in long_tail_sections:
-        claimed_ids.update(t["TOPIC_ID"] for t in section.get("topics", []))
-    watchlist = [t for t in watchlist if t["TOPIC_ID"] not in claimed_ids]
-
-    x_buzz = _build_market_signal_items(raw_items, featured_topics, watchlist)
-    paper_spotlight = _build_paper_spotlight(
-        raw_items,
-        max_daily_hot=hotspot_config.getint("paper_spotlight_max_daily_hot", fallback=6),
-        max_new_frontier=hotspot_config.getint("paper_spotlight_max_new_frontier", fallback=4),
-    )
-    usage = _build_usage_payload(
-        config,
-        effective_mode,
-        prompt_cost,
-        completion_cost,
-        llm_prompt_tokens,
-        llm_completion_tokens,
-        llm_requests,
-        api_usage,
-    )
-
-    report = {
-        "date": date_string(target_date),
-        "generated_at": datetime.now(UTC).isoformat(),
-        "mode": effective_mode,
-        "summary": summary,
-        "source_stats": source_stats,
-        "totals": {
-            "raw_items": len(raw_items),
-            "enriched_items": len(enriched_items),
-            "stories": len(stories),
-            "featured": len(featured_topics),
-            "watchlist": len(watchlist),
-            "category_topics": sum(len(s.get("topics", [])) for s in category_sections),
-            "long_tail_topics": sum(len(s.get("topics", [])) for s in long_tail_sections),
-            "paper_spotlight_items": sum(len(section.get("items", [])) for section in paper_spotlight),
-        },
-        "costs": {"prompt": round(prompt_cost, 6), "completion": round(completion_cost, 6), "total": round(prompt_cost + completion_cost, 6)},
-        "usage": usage,
-        "top_topics": featured_topics,
-        "featured_topics": featured_topics,
-        "category_sections": category_sections,
-        "long_tail_sections": long_tail_sections,
-        "paper_spotlight": paper_spotlight,
-        "x_buzz": x_buzz,
-        "watchlist": watchlist,
-    }
-
-    paths = build_hotspot_paths(output_root, target_date.date())
-    ensure_parent_dirs(paths)
-    write_json(paths.normalized_path, _serialize_items(raw_items))
-    write_json(paths.report_path, report)
-    write_hotspot_web_data(output_root, report, raw_items)
-    paths.markdown_path.write_text(render_hot_daily_md(report), encoding="utf-8")
-    return report
+    report_path = output_root / "hot" / "reports" / f"{date_string(target_date)}.json"
+    if not report_path.exists():
+        return None
+    return json.loads(report_path.read_text(encoding="utf-8"))

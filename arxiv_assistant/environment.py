@@ -28,7 +28,7 @@ def parse_authors(lines):
 
 # load config.ini
 CONFIG = configparser.ConfigParser()
-CONFIG.read("configs/config.ini")
+CONFIG.read("configs/config.ini", encoding="utf-8")
 
 # load authors.txt
 with open("configs/authors.txt", "r", encoding="utf-8") as fopen:

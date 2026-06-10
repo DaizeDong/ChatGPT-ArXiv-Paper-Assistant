@@ -1,5 +1,5 @@
 from . import arxiv, semantic_scholar
-from .hotspot import hotspot_github, hotspot_hn, hotspot_x_ainews, hotspot_x_official, hotspot_x_paperpulse
+from .hotspot import hotspot_github, hotspot_hn, hotspot_x_ainews
 
 __all__ = [
     "arxiv",
@@ -7,6 +7,4 @@ __all__ = [
     "hotspot_github",
     "hotspot_hn",
     "hotspot_x_ainews",
-    "hotspot_x_official",
-    "hotspot_x_paperpulse",
 ]

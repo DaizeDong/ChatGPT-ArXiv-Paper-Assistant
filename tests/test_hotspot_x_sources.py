@@ -8,10 +8,11 @@ from datetime import UTC, datetime
 from pathlib import Path
 from unittest.mock import patch
 
+import configparser
+
 from arxiv_assistant.apis.hotspot.hotspot_x_ainews import _extract_twitter_section_items
-from arxiv_assistant.apis.hotspot.hotspot_x_official import _query_accounts, fetch_hotspot_items as fetch_x_official_items
-from arxiv_assistant.apis.hotspot.hotspot_x_paperpulse import fetch_hotspot_items as fetch_x_paperpulse_items
 from arxiv_assistant.utils.hotspot.x_authority_registry import build_x_authority_registry, load_x_authority_registry, refresh_x_authority_registry
+from arxiv_assistant.hotspots import pipeline as hp
 
 
 class TestHotspotXSources(unittest.TestCase):
@@ -44,105 +45,6 @@ class TestHotspotXSources(unittest.TestCase):
         self.assertEqual(items[0].url, "https://x.com/OpenAI/status/2035012260008272007")
         self.assertEqual(items[0].metadata["host"], "x.com")
         self.assertGreaterEqual(items[0].metadata["activity"], 80)
-
-    @patch("arxiv_assistant.apis.hotspot.hotspot_x_official._iter_recent_search")
-    def test_x_official_adapter_builds_items_from_recent_search(self, mock_iter_recent_search) -> None:
-        mock_iter_recent_search.return_value = [
-            {
-                "id": "2035012260008272007",
-                "text": "GPT-5.4 mini is available today in ChatGPT, Codex, and the API. https://t.co/abc123",
-                "created_at": "2026-03-21T10:00:00.000Z",
-                "author_id": "1",
-                "author": {"username": "OpenAI", "name": "OpenAI", "verified": True},
-                "entities": {"urls": [{"expanded_url": "https://openai.com/index/gpt-5-4-mini"}]},
-                "public_metrics": {"like_count": 120, "reply_count": 9, "retweet_count": 15, "quote_count": 4, "bookmark_count": 10, "impression_count": 53000},
-                "referenced_tweets": [],
-            },
-            {
-                "id": "2035012260008272009",
-                "text": "Are you up for a challenge? https://t.co/demo",
-                "created_at": "2026-03-21T10:02:00.000Z",
-                "author_id": "2",
-                "author": {"username": "OpenAI", "name": "OpenAI", "verified": True},
-                "entities": {"urls": [{"expanded_url": "https://openai.com/index/parameter-golf"}]},
-                "public_metrics": {"like_count": 900, "reply_count": 12, "retweet_count": 20, "quote_count": 3, "bookmark_count": 1, "impression_count": 80000},
-                "referenced_tweets": [],
-            },
-            {
-                "id": "2035012260008272010",
-                "text": "Our new paper on agents is out today: https://t.co/paper",
-                "created_at": "2026-03-21T10:05:00.000Z",
-                "author_id": "3",
-                "author": {"username": "demishassabis", "name": "Demis Hassabis", "verified": True},
-                "entities": {"urls": [{"expanded_url": "https://arxiv.org/abs/2603.12345"}]},
-                "public_metrics": {"like_count": 400, "reply_count": 40, "retweet_count": 80, "quote_count": 8, "bookmark_count": 20, "impression_count": 90000},
-                "referenced_tweets": [],
-            },
-        ]
-        with tempfile.TemporaryDirectory() as tmp_dir, patch.dict(os.environ, {"X_BEARER_TOKEN": "test-token"}):
-            config_path = Path(tmp_dir) / "x_seeds.json"
-            config_path.write_text(
-                json.dumps(
-                    {
-                        "accounts": [
-                            {"handle": "openai", "name": "OpenAI", "kind": "official", "tier": 3, "active": True},
-                            {"handle": "demishassabis", "name": "Demis Hassabis", "kind": "researcher", "tier": 3, "active": True},
-                        ]
-                    }
-                ),
-                encoding="utf-8",
-            )
-            items = fetch_x_official_items(
-                datetime(2026, 3, 21, tzinfo=UTC),
-                36,
-                config_path,
-                default_result_limit=80,
-                snapshot_path=Path(tmp_dir) / "x_authority_inventory.json",
-            )
-        self.assertEqual(len(items), 1)
-        self.assertEqual(items[0].url, "https://x.com/OpenAI/status/2035012260008272007")
-        self.assertEqual(items[0].source_name, "OpenAI")
-        self.assertEqual(items[0].source_role, "official_news")
-        self.assertEqual(items[0].metadata["authority_kind"], "official")
-        self.assertGreater(items[0].metadata["activity"], 200)
-
-    @patch("arxiv_assistant.apis.hotspot.hotspot_x_paperpulse.fetch_json")
-    def test_paperpulse_adapter_builds_researcher_feed_items(self, mock_fetch_json) -> None:
-        mock_fetch_json.return_value = {
-            "count": 1,
-            "tweets": [
-                {
-                    "tweet_id": "2035012260008273000",
-                    "text": "A useful benchmark roundup on reasoning models is worth reading https://example.com/report",
-                    "created_at": "2026-03-21T09:30:00+00:00",
-                    "author_handle": "demishassabis",
-                    "author_name": "Demis Hassabis",
-                    "public_metrics": {"like_count": 900, "reply_count": 45, "retweet_count": 110, "quote_count": 18, "bookmark_count": 120, "impression_count": 240000},
-                    "referenced_tweets": [],
-                }
-            ],
-        }
-        items = fetch_x_paperpulse_items(datetime(2026, 3, 21, tzinfo=UTC), 36, result_limit=10)
-        self.assertEqual(len(items), 1)
-        self.assertEqual(items[0].source_name, "PaperPulse Researcher Feed")
-        self.assertEqual(items[0].url, "https://x.com/demishassabis/status/2035012260008273000")
-        self.assertEqual(items[0].metadata["proxy_source"], "paperpulse")
-        self.assertGreater(items[0].metadata["activity"], 1000)
-
-    @patch("arxiv_assistant.apis.hotspot.hotspot_x_official._iter_recent_search")
-    def test_x_official_query_accounts_stops_cleanly_on_rate_limit(self, mock_iter_recent_search) -> None:
-        mock_iter_recent_search.side_effect = [
-            [{"id": "1", "text": "OpenAI update", "author": {"username": "OpenAI"}}],
-            Exception("429 Client Error: Too Many Requests"),
-        ]
-        rows = _query_accounts(
-            [{"handle": "openai"}, {"handle": "anthropicai"}, {"handle": "googledeepmind"}],
-            bearer_token="token",
-            result_limit=10,
-            batch_size=2,
-        )
-        self.assertEqual(len(rows), 1)
-        self.assertEqual(rows[0]["id"], "1")
 
     @patch("arxiv_assistant.utils.hotspot.x_authority_registry._get_bearer_token", return_value=None)
     @patch("arxiv_assistant.utils.hotspot.x_authority_registry.fetch_json")
@@ -372,6 +274,136 @@ class TestHotspotXSources(unittest.TestCase):
         self.assertEqual(payload["generated_at"], "2026-03-23T00:00:00+00:00")
         self.assertEqual(persisted["generated_at"], "2026-03-23T00:00:00+00:00")
         self.assertEqual(persisted["graph_expansion"]["selected_candidates"], 510)
+
+
+class TestAgentScoutRegistration(unittest.TestCase):
+    """Assert agent_scout is registered as a kernel source iff use_agent_scout is on.
+
+    The scout's agent_fn is NEVER called here: every adapter fetch function is
+    patched to return [] so the unit test touches no network and no claude CLI.
+    We only assert which source ids the pipeline registers under the flag.
+    """
+
+    def _make_config(self, *, use_agent_scout: bool) -> configparser.ConfigParser:
+        cfg = configparser.ConfigParser()
+        cfg.read_dict(
+            {
+                "HOTSPOTS": {
+                    "freshness_hours": "30",
+                    "agent_scout_result_limit": "40",
+                    "agent_scout_timeout_s": "300",
+                    "source_registry_path": "configs/hotspot/roundup_sites.json",
+                },
+                "HOTSPOT_SOURCES": {
+                    "use_local_papers": "false",
+                    "use_hf_papers": "false",
+                    "use_ainews": "false",
+                    "use_official_blogs": "false",
+                    "use_roundup_sites": "false",
+                    "use_analysis_feeds": "false",
+                    "use_reddit": "false",
+                    "use_x_ainews_twitter": "false",
+                    "use_twitterapi": "false",
+                    "use_github": "false",
+                    "use_hn": "false",
+                    "use_agent_scout": "true" if use_agent_scout else "false",
+                    "reuse_cached_raw": "false",
+                },
+                "HOTSPOT_X": {},
+                "HOTSPOT_GITHUB": {},
+                "HOTSPOT_HN": {},
+            }
+        )
+        return cfg
+
+    def _registered_source_ids(self, *, use_agent_scout: bool) -> set[str]:
+        cfg = self._make_config(use_agent_scout=use_agent_scout)
+        with tempfile.TemporaryDirectory() as tmp_dir, \
+                patch.object(hp, "fetch_agent_scout_items", return_value=[]) as mock_scout:
+            _items, source_stats, _usage = hp.fetch_source_payloads(
+                datetime(2026, 6, 8, tzinfo=UTC),
+                Path(tmp_dir),
+                cfg,
+                force=True,
+            )
+            # The scout agent_fn is never invoked in this unit test; if the flag
+            # is off, the adapter is not even registered/called.
+            if not use_agent_scout:
+                mock_scout.assert_not_called()
+        return set(source_stats.keys())
+
+    def test_agent_scout_registered_when_flag_on(self) -> None:
+        self.assertIn("agent_scout", self._registered_source_ids(use_agent_scout=True))
+
+    def test_agent_scout_absent_when_flag_off(self) -> None:
+        self.assertNotIn("agent_scout", self._registered_source_ids(use_agent_scout=False))
+
+
+class TestSubagentRouteRegistration(unittest.TestCase):
+    """use_subagent_routes: reddit served by the browser subagent (not the 403 scraper).
+
+    The browser fetcher + the direct reddit fetcher are patched to [] -> no network,
+    no claude/playwright. We only assert which source ids the pipeline registers and
+    that the direct reddit scraper is suppressed when the subagent route is on.
+    """
+
+    def _make_config(self, *, use_subagent_routes: bool) -> configparser.ConfigParser:
+        cfg = configparser.ConfigParser()
+        cfg.read_dict(
+            {
+                "HOTSPOTS": {
+                    "freshness_hours": "30",
+                    "source_registry_path": "configs/hotspot/roundup_sites.json",
+                },
+                "HOTSPOT_SOURCES": {
+                    "use_local_papers": "false", "use_hf_papers": "false", "use_ainews": "false",
+                    "use_official_blogs": "false", "use_roundup_sites": "false", "use_analysis_feeds": "false",
+                    "use_reddit": "true",  # direct reddit ON; subagent route should supersede it
+                    "use_x_ainews_twitter": "false", "use_twitterapi": "false",
+                    "use_github": "false", "use_hn": "false", "use_agent_scout": "false",
+                    "use_subagent_routes": "true" if use_subagent_routes else "false",
+                    "reuse_cached_raw": "false",
+                },
+                "HOTSPOT_X": {}, "HOTSPOT_GITHUB": {}, "HOTSPOT_HN": {},
+            }
+        )
+        return cfg
+
+    def _run(self, *, use_subagent_routes: bool):
+        cfg = self._make_config(use_subagent_routes=use_subagent_routes)
+        with tempfile.TemporaryDirectory() as tmp_dir, \
+                patch("arxiv_assistant.apis.hotspot.browser_source_fetch.fetch_source_via_browser",
+                      return_value=[]) as mock_browser, \
+                patch.object(hp, "fetch_reddit_items", return_value=[]) as mock_reddit:
+            _items, source_stats, _usage = hp.fetch_source_payloads(
+                datetime(2026, 6, 8, tzinfo=UTC), Path(tmp_dir), cfg, force=True,
+            )
+        return set(source_stats.keys()), mock_browser, mock_reddit
+
+    def test_reddit_via_browser_subagent_when_on(self) -> None:
+        ids, mock_browser, mock_reddit = self._run(use_subagent_routes=True)
+        # reddit served by the browser-route source(s); the direct reddit scraper is suppressed.
+        self.assertIn("reddit_localllama", ids)
+        self.assertNotIn("reddit", ids)
+        mock_reddit.assert_not_called()
+        self.assertTrue(mock_browser.called)
+
+    def test_direct_reddit_when_off(self) -> None:
+        ids, mock_browser, mock_reddit = self._run(use_subagent_routes=False)
+        # default: direct reddit scraper registered, browser fetcher never imported/called.
+        self.assertIn("reddit", ids)
+        self.assertNotIn("reddit_localllama", ids)
+        mock_browser.assert_not_called()
+
+    def test_config_flag_and_stepfun_url(self) -> None:
+        root = Path(__file__).resolve().parents[1]
+        c = configparser.ConfigParser(); c.read(root / "configs" / "config.ini", encoding="utf-8")
+        self.assertFalse(c.getboolean("HOTSPOT_SOURCES", "use_subagent_routes"))
+        p = configparser.ConfigParser(); p.read(root / "configs" / "profiles" / "agent-native.ini", encoding="utf-8")
+        self.assertTrue(p.getboolean("HOTSPOT_SOURCES", "use_subagent_routes"))
+        blogs = json.loads((root / "configs" / "hotspot" / "official_blogs.json").read_text(encoding="utf-8"))
+        stepfun = next(b for b in blogs if b.get("source_id") == "stepfun_blog")
+        self.assertEqual(stepfun["url"], "https://www.stepfun.com/")
 
 
 if __name__ == "__main__":

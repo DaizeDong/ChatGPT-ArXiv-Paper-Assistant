@@ -551,124 +551,6 @@ def _fetch_playwright_source(source: dict[str, Any], target_date: datetime, fres
     return items[:8]
 
 
-_LLM_EXTRACT_PROMPT = """\
-You are extracting product announcements and news from an AI company's website.
-The company is: {company_name}
-The page URL is: {page_url}
-
-Below is the visible text from the rendered page. Extract ALL product releases, \
-model announcements, partnerships, funding events, and other newsworthy items.
-
-Rules:
-- Only extract items that represent real product/company NEWS (model launches, API releases, partnerships, funding)
-- Do NOT extract: navigation items, login/download prompts, footer text, legal notices, \
-app download links, pricing plans, platform descriptions, or UI elements
-- Each item must be a specific named product, model, or event — not a generic description
-- For each item, provide a concise English title and a 1-2 sentence English summary
-- If a link URL is visible in the text context, include it; otherwise use the page URL
-- Return ONLY a JSON array. No markdown, no explanation.
-
-Output format:
-[{{"title": "...", "summary": "...", "url": "..."}}]
-
-If there are no newsworthy items, return: []
-
----
-PAGE TEXT:
-{page_text}
-"""
-
-
-def _extract_with_llm(page_text: str, source: dict[str, Any]) -> list[dict[str, Any]]:
-    """Use LLM to extract structured news items from raw page text."""
-    import json as _json
-    import os
-
-    import requests
-
-    from arxiv_assistant.utils.local_env import load_local_env
-
-    if len(page_text.strip()) < 50:
-        return []
-
-    load_local_env()
-
-    prompt = _LLM_EXTRACT_PROMPT.format(
-        company_name=source.get("source_name", "Unknown"),
-        page_url=source.get("url", ""),
-        page_text=page_text[:4000],
-    )
-
-    api_key = os.environ.get("OPENAI_API_KEY")
-    base_url = os.environ.get("OPENAI_BASE_URL", "https://api.openai.com/v1")
-    model = source.get("llm_model", "gpt-5.4")
-
-    try:
-        resp = requests.post(
-            f"{base_url}/chat/completions",
-            headers={"Authorization": f"Bearer {api_key}", "Content-Type": "application/json"},
-            json={"model": model, "temperature": 0.1, "messages": [{"role": "user", "content": prompt}]},
-            timeout=60,
-        )
-        resp.raise_for_status()
-        data = resp.json()
-        raw = data["choices"][0]["message"]["content"] or "[]"
-        raw = raw.strip()
-        if raw.startswith("```"):
-            raw = raw.split("\n", 1)[-1].rsplit("```", 1)[0].strip()
-        items = _json.loads(raw)
-        return items if isinstance(items, list) else []
-    except Exception as ex:
-        print(f"Warning: LLM extraction failed for {source.get('source_id')}: {ex}")
-        return []
-
-
-def _fetch_playwright_llm_source(source: dict[str, Any], target_date: datetime, freshness_hours: int) -> list[HotspotItem]:
-    """Fetch from SPA sites using Playwright + LLM extraction for non-standard pages."""
-    page_html = _render_with_playwright(source["url"])
-
-    # First try standard extraction
-    rows = _extract_generic_blog_rows(page_html, source["url"])
-    if len(rows) >= 2:
-        # Standard extraction worked; use it.
-        # Don't assign target_date to dateless items here — generic HTML
-        # extraction may return old blog posts mixed with current ones.
-        items: list[HotspotItem] = []
-        for row in rows:
-            published_at = row.get("published_at")
-            if published_at and not is_fresh(published_at, target_date, freshness_hours):
-                continue
-            if not published_at and source.get("require_date", True):
-                continue
-            items.append(_build_item(source, row["title"], row.get("summary", ""), row["url"], published_at))
-        return items[:8]
-
-    # Fallback: LLM extraction from rendered text
-    soup = BeautifulSoup(page_html, "html.parser")
-    page_text = clean_text(soup.get_text(" ", strip=True))
-    llm_items = _extract_with_llm(page_text, source)
-
-    # Post-filter patterns for LLM-extracted noise
-    _llm_noise_re = re.compile(
-        r"(?:mac|windows|android|ios|iphone|ipad)\s+(?:适用|下载|download|available)",
-        re.IGNORECASE,
-    )
-
-    items = []
-    for item in llm_items:
-        title = clean_text(item.get("title", ""))
-        if not title or len(title) < 10:
-            continue
-        if _NAV_CTA_RE.match(title.strip()):
-            continue
-        if _llm_noise_re.search(title):
-            continue
-        summary = clean_text(item.get("summary", ""))
-        url = item.get("url", source["url"])
-        items.append(_build_item(source, title, summary, url, published_at=target_date.isoformat()))
-    return items[:8]
-
-
 def _fetch_html_source(source: dict[str, str], target_date: datetime, freshness_hours: int) -> list[HotspotItem]:
     page_html = fetch_text(source["url"])
     if source["mode"] == "anthropic_html":
@@ -713,8 +595,6 @@ def fetch_hotspot_items(target_date: datetime, freshness_hours: int, registry_pa
                 items.extend(_fetch_sitemap_source(source, target_date, freshness_hours))
             elif source["mode"] == "playwright":
                 items.extend(_fetch_playwright_source(source, target_date, freshness_hours))
-            elif source["mode"] == "playwright_llm":
-                items.extend(_fetch_playwright_llm_source(source, target_date, freshness_hours))
             else:
                 items.extend(_fetch_html_source(source, target_date, freshness_hours))
         except Exception as ex:

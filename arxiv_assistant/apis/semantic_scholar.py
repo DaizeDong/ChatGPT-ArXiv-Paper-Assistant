@@ -56,39 +56,6 @@ def get_paper_citations(
     return out
 
 
-def get_author_batch(
-    session: Session,
-    ids: List[str],
-    S2_API_KEY: str,
-    fields: str = "name,hIndex,citationCount",
-    **kwargs,
-) -> List[Dict]:
-    # TODO: seems not used in the codebase. remove if not needed
-    # gets a batch of authors. analogous to author batch
-    params = {
-        "fields": fields,
-        **kwargs,
-    }
-    if S2_API_KEY is None:
-        headers = {}
-    else:
-        headers = {
-            "X-API-KEY": S2_API_KEY,
-        }
-    body = {
-        "ids": ids,
-    }
-
-    with session.post(
-        "https://api.semanticscholar.org/graph/v1/author/batch",
-        params=params,
-        headers=headers,
-        json=body,
-    ) as response:
-        response.raise_for_status()
-        return response.json()
-
-
 @retry(tries=10, delay=5.0)
 def get_one_author(session, author: str, S2_API_KEY: str) -> str:
     # query the right endpoint https://api.semanticscholar.org/graph/v1/author/search?query=adam+smith

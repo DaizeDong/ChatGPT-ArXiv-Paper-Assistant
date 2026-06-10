@@ -67,10 +67,12 @@ Every subagent is followed by a deterministic verifier; no agent output is used 
 
 All new keys exist in both `configs/config.ini` and `configs/templates/config.template.ini`
 with defaults that preserve current behavior: `[HOTSPOTS]` (date/dedup/resurge keys incl.
-`cross_day_cosine_threshold`, `embed_model_id`, `max_item_age_days`, `resurge_*`),
-`[HOTSPOT_SOURCES]` (`use_twitterapi` — the managed X channel that replaces the dead
-`use_x_official`/`use_x_paperpulse`), `[HOTSPOT_REUSE]`, `[HOTSPOT_RUNTIME]`, `[PAPER_FILTER]`.
-Config files are pure ASCII and all readers use UTF-8.
+`cross_day_cosine_threshold`, `embed_model_id`, `max_item_age_days`, `resurge_*`, plus
+`use_semantic_scholar_signal`, `agent_scout_*`, `subagent_source_*`), `[HOTSPOT_SOURCES]`
+(`use_twitterapi` -- the managed X channel; `use_agent_scout`, `use_market_intel_sources`,
+`use_subagent_routes`), `[HOTSPOT_REUSE]`, `[HOTSPOT_RUNTIME]`, `[PAPER_FILTER]`. The retired
+`use_x_official`/`use_x_paperpulse` keys were **removed** (see section 7). Config files are pure
+ASCII and all readers use UTF-8.
 
 ## Known limitations (conscious, documented)
 
@@ -80,7 +82,14 @@ Config files are pure ASCII and all readers use UTF-8.
   translator, but no front-end component renders it yet (i18n-ready; UI pending).
 - A set of `tests/test_hotspot_web_data.py` assertions about a richer `source_section_totals`
   web-payload contract are **pre-existing known debt** (a separate web-UI concern), left red
-  by deliberate decision.
+  by deliberate decision (5 failing tests).
+- The Semantic Scholar citation signal is **~0 for brand-new papers** (too recent to be cited);
+  it differentiates older/resurfaced/already-cited papers, and is harmless (0 bonus) otherwise.
+- The browser subagent needs the **playwright MCP** exposed to `claude -p` (verified available
+  when spawned from a Claude context; confirm it on the headless VPS cron). **Hard-login** sites
+  need a pre-seeded cookie profile; the prompt only handles soft walls / consent banners.
+- **Bright Data** is connected at the CLI but its tools are **not exposed to a `claude -p`
+  subagent**, so the browser route uses playwright (not Bright Data) for protected sources.
 
 ## Zero-key (fully agent-native) deployment
 
@@ -100,7 +109,56 @@ This profile needs only the `claude` CLI (logged in) plus a git push token. With
 - **X/social + breadth** come from the **agent scout** (`[HOTSPOT_SOURCES] use_agent_scout = true`,
   `use_twitterapi = false`), which uses Claude's `WebSearch`/`WebFetch` instead of the metered
   twitterapi.io key.
-- **Bilingual headlines** come from the Synthesize agent (hotspots run in `mode = heuristic`,
-  so no OpenAI screening/enrichment is invoked).
+- **Protected/JS sources** (Reddit, the xAI blog, the Chinese-lab SPA blogs) come from the
+  **browser subagent** (`use_subagent_routes = true`); see section 5.
+- **Headlines** are deterministic-heuristic in this profile. The hotspots run in `mode = heuristic`,
+  so neither the OpenAI screening/enrichment nor the bilingual **Synthesize agent** runs (the
+  Synthesize agent is gated on `mode = openai`). To get agent bilingual headlines you would set
+  `mode = openai`, which then also needs an OpenAI key for enrichment -- so the zero-key profile
+  deliberately uses heuristic headlines.
 
 No OpenAI or twitterapi keys are required. Everything runs on the Claude subscription.
+
+## 5. Tiered source gathering (most sources free; protected ones via subagent)
+
+Gathering is statically routed by reliability -- there is no per-source "try direct then fall back"
+machinery; each source is assigned its best tool once:
+
+- **Direct scrapers (free, default):** arXiv/HF papers, lab-blog RSS, analysis feeds, roundups,
+  GitHub trending, Hacker News, AINews, local papers.
+- **Browser subagent** (`apis/hotspot/browser_source_fetch.py`, playwright `claude -p`, zero-key):
+  the known-fail sources listed in `arxiv_assistant/utils/hotspot/source_routes.py`
+  (`SUBAGENT_ROUTES`) -- Reddit (bot-wall 403), the Cloudflare-walled xAI blog, and the
+  Chinese-lab SPA blogs (Zhipu / ByteDance Seed / Baichuan / 01.AI / StepFun / jiqizhixin).
+  Gated by `[HOTSPOT_SOURCES] use_subagent_routes` (default `false`; `true` in the agent-native
+  profile). When on, Reddit comes only from the browser subagent (the direct scraper is
+  suppressed -- no double-fetch). The browser prompt renders JS, scrolls, and dismisses
+  cookie/consent and soft login-walls; the same URL-liveness verifier drops fabricated links.
+- **X:** `twitterapi.io` (metered, default) or the zero-key agent scout.
+- **market-intel reuse:** `arxiv_assistant/utils/market_intel_bridge.py` injects the `market-intel`
+  skill's curated `frontier-research` + `x-twitter` source matrix into the scout prompt at runtime
+  (skill refresh auto-broadens the scout; falls back to a built-in venue list if the skill is absent).
+
+The `WebFetch` agent fetcher `apis/hotspot/agent_source_fetch.py` exists as a building block for
+standard-but-brittle sources; plain `WebFetch` cannot bypass bot-walls/JS, so protected sources use
+the browser route.
+
+## 6. Free quality signal: Semantic Scholar citations in paper spotlight
+
+`[HOTSPOTS] use_semantic_scholar_signal = true` (default) adds a free, no-key Semantic Scholar
+citation-significance signal (`influentialCitationCount` / `citationCount`, one batched `paper/batch`
+request) to the paper-spotlight ranking, distinguishing genuinely-cited work from upvote-only items.
+Degrade-safe: when S2 is unavailable the bonus is 0 for all papers and ranking is identical to the
+baseline. An optional `semantic_scholar_api_key` (or `S2_API_KEY` env) lifts the rate limit.
+
+## 7. Deprecations removed in this branch
+
+- **`x_official` and `x_paperpulse` sources** -- removed entirely (modules, registrations, config
+  keys); superseded by `use_twitterapi` (the official-X path needed X API Pro ~$5k/mo; the
+  PaperPulse upstream feed is dead).
+- **The OpenAI `playwright_llm` blog-extraction mode** -- removed; the Chinese-lab SPA blogs that
+  used it now route to the zero-key browser subagent, so **hotspot gathering no longer needs an
+  OpenAI key** at all.
+- **`source_escalation.py`** (a dynamic detect-and-escalate framework) -- dropped in favor of the
+  simpler static `source_routes.py`.
+- **`semantic_scholar.get_author_batch`** -- removed (unused).

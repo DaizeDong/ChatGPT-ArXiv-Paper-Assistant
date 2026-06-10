@@ -11,7 +11,6 @@ from unittest.mock import patch
 import configparser
 
 from arxiv_assistant.apis.hotspot.hotspot_x_ainews import _extract_twitter_section_items
-from arxiv_assistant.apis.hotspot.hotspot_x_paperpulse import fetch_hotspot_items as fetch_x_paperpulse_items
 from arxiv_assistant.utils.hotspot.x_authority_registry import build_x_authority_registry, load_x_authority_registry, refresh_x_authority_registry
 from arxiv_assistant.hotspots import pipeline as hp
 
@@ -46,29 +45,6 @@ class TestHotspotXSources(unittest.TestCase):
         self.assertEqual(items[0].url, "https://x.com/OpenAI/status/2035012260008272007")
         self.assertEqual(items[0].metadata["host"], "x.com")
         self.assertGreaterEqual(items[0].metadata["activity"], 80)
-
-    @patch("arxiv_assistant.apis.hotspot.hotspot_x_paperpulse.fetch_json")
-    def test_paperpulse_adapter_builds_researcher_feed_items(self, mock_fetch_json) -> None:
-        mock_fetch_json.return_value = {
-            "count": 1,
-            "tweets": [
-                {
-                    "tweet_id": "2035012260008273000",
-                    "text": "A useful benchmark roundup on reasoning models is worth reading https://example.com/report",
-                    "created_at": "2026-03-21T09:30:00+00:00",
-                    "author_handle": "demishassabis",
-                    "author_name": "Demis Hassabis",
-                    "public_metrics": {"like_count": 900, "reply_count": 45, "retweet_count": 110, "quote_count": 18, "bookmark_count": 120, "impression_count": 240000},
-                    "referenced_tweets": [],
-                }
-            ],
-        }
-        items = fetch_x_paperpulse_items(datetime(2026, 3, 21, 12, 0, tzinfo=UTC), 36, result_limit=10)
-        self.assertEqual(len(items), 1)
-        self.assertEqual(items[0].source_name, "PaperPulse Researcher Feed")
-        self.assertEqual(items[0].url, "https://x.com/demishassabis/status/2035012260008273000")
-        self.assertEqual(items[0].metadata["proxy_source"], "paperpulse")
-        self.assertGreater(items[0].metadata["activity"], 1000)
 
     @patch("arxiv_assistant.utils.hotspot.x_authority_registry._get_bearer_token", return_value=None)
     @patch("arxiv_assistant.utils.hotspot.x_authority_registry.fetch_json")
@@ -328,8 +304,6 @@ class TestAgentScoutRegistration(unittest.TestCase):
                     "use_reddit": "false",
                     "use_x_ainews_twitter": "false",
                     "use_twitterapi": "false",
-                    "use_x_paperpulse": "false",
-                    "use_x_official": "false",
                     "use_github": "false",
                     "use_hn": "false",
                     "use_agent_scout": "true" if use_agent_scout else "false",
@@ -386,7 +360,6 @@ class TestSubagentRouteRegistration(unittest.TestCase):
                     "use_official_blogs": "false", "use_roundup_sites": "false", "use_analysis_feeds": "false",
                     "use_reddit": "true",  # direct reddit ON; subagent route should supersede it
                     "use_x_ainews_twitter": "false", "use_twitterapi": "false",
-                    "use_x_paperpulse": "false", "use_x_official": "false",
                     "use_github": "false", "use_hn": "false", "use_agent_scout": "false",
                     "use_subagent_routes": "true" if use_subagent_routes else "false",
                     "reuse_cached_raw": "false",

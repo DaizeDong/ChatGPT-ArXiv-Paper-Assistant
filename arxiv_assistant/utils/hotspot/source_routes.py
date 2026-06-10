@@ -46,17 +46,40 @@ SUBAGENT_ROUTES: dict[str, dict[str, str]] = {
         "route": "browser",
         "reason": "JS-heavy render + LLM-extract 401; plain fetch returns an empty shell",
     },
+    # CN AI-lab blogs: JS SPAs whose in-repo `playwright_llm` mode 401s on the
+    # OpenAI extraction step. Routed to the browser subagent (claude renders +
+    # extracts, ZERO key) and DISABLED in configs/hotspot/official_blogs.json so
+    # they are not double-fetched. The browser also handles the soft login/consent
+    # walls these CN sites often show. URLs mirror official_blogs.json source_ids.
     "zhipu_blog": {
-        "url": "https://www.zhipuai.cn/news",
+        "url": "https://www.zhipuai.cn/",
         "kind": "news",
-        "route": "agent",
-        "reason": "LLM-extract 401 only; page is plain-fetchable via the agent (verify url)",
+        "route": "browser",
+        "reason": "JS SPA + playwright_llm 401; zero-key browser render+extract",
     },
     "bytedance_seed_blog": {
         "url": "https://seed.bytedance.com/en/blog",
         "kind": "news",
-        "route": "agent",
-        "reason": "LLM-extract 401 only; agent WebFetch reads it without a key (verify url)",
+        "route": "browser",
+        "reason": "JS SPA + playwright_llm 401; zero-key browser render+extract",
+    },
+    "baichuan_blog": {
+        "url": "https://www.baichuan-ai.com/home",
+        "kind": "news",
+        "route": "browser",
+        "reason": "JS SPA + playwright_llm 401; zero-key browser render+extract",
+    },
+    "01ai_blog": {
+        "url": "https://www.01.ai/",
+        "kind": "news",
+        "route": "browser",
+        "reason": "JS SPA + playwright_llm 401; zero-key browser render+extract",
+    },
+    "stepfun_blog": {
+        "url": "https://www.stepfun.com/",
+        "kind": "news",
+        "route": "browser",
+        "reason": "JS SPA + playwright_llm 401; zero-key browser render+extract (root URL)",
     },
 }
 

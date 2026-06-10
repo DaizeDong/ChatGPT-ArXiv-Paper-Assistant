@@ -69,6 +69,10 @@ class TestBrowserSourceFetch(unittest.TestCase):
         prompt = agent.last["prompt"].lower()
         self.assertIn("browser", prompt)
         self.assertIn("navigate", prompt)
+        # SPA-render + login/consent awareness.
+        self.assertIn("render", prompt)
+        self.assertIn("scroll", prompt)
+        self.assertTrue("login" in prompt or "consent" in prompt)
         self.assertIn(INDEX, agent.last["prompt"])
         # JSON-only output contract present.
         self.assertIn("only", prompt)

@@ -14,7 +14,9 @@ and be an item PERMALINK (not the index page itself). Degrades to ``[]`` on any
 agent/parse/mapping failure -- never raises out of ``fetch_source_via_browser``.
 
 Note: real headless playwright-MCP availability is an environment dependency
-validated separately; the unit tests fully mock the transport.
+validated separately; the unit tests fully mock the transport. For sources behind
+a HARD login, point the playwright MCP at a persistent browser profile pre-seeded
+with logged-in cookies at deploy time (no credentials are handled in this code).
 """
 from __future__ import annotations
 
@@ -50,7 +52,10 @@ def _build_prompt(name: str, url: str, kind: str, target_date: datetime, freshne
         "for the feed/list to finish rendering, take a snapshot or evaluate the DOM, and scroll if "
         "the items load lazily:\n"
         "    {url}\n"
-        "It is the '{name}' source (a {kind} page). Act like a human browsing it. From the "
+        "It is the '{name}' source (a {kind} page). Act like a human browsing it. If a cookie/"
+        "consent banner or a soft login/sign-in wall blocks the content, dismiss the banner (click "
+        "accept/close) and, if a logged-in browser session is available, use it; then read the "
+        "publicly visible recent items. From the "
         "rendered page, extract the AI/ML items POSTED in the LAST {hours} HOURS as of {as_of} "
         "(UTC). Cover only ARTIFICIAL-INTELLIGENCE / MACHINE-LEARNING items; ignore unrelated "
         "entries.\n\n"

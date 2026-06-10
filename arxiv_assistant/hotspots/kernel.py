@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+import os as _os
 import shutil
 import time
 from dataclasses import dataclass, field
@@ -569,6 +570,8 @@ def _stage_render(ctx: KernelContext) -> dict[str, Any]:
         raw_items,
         max_daily_hot=cfg.getint("paper_spotlight_max_daily_hot", fallback=6),
         max_new_frontier=cfg.getint("paper_spotlight_max_new_frontier", fallback=4),
+        use_s2_signal=cfg.getboolean("use_semantic_scholar_signal", fallback=True),
+        s2_api_key=(cfg.get("semantic_scholar_api_key", fallback="") or _os.getenv("S2_API_KEY") or None),
     )
     resurgence = _build_resurgence_lane(ctx)
 

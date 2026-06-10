@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import configparser
 import json
+import math
 import os
 import re
 from datetime import UTC, date as _date, datetime, timedelta
@@ -419,7 +420,31 @@ def _build_market_signal_items(
     return selected[:target_count]
 
 
-def _paper_spotlight_item_score(item: HotspotItem) -> float:
+# Semantic Scholar citation-significance bonus is bounded so it can never dominate the
+# existing daily/relevance/novelty score (it only breaks ties toward genuinely-cited work).
+_S2_BONUS_CAP = 2.5
+
+
+def _s2_significance_bonus(cites: dict | None) -> float:
+    """Bounded ranking bonus from Semantic Scholar citation counts.
+
+    Primary signal is ``influentialCitationCount`` (S2's curated "actually built upon"
+    citations); total ``citationCount`` is a weaker secondary. log1p keeps it sub-linear
+    and the result is capped at ``_S2_BONUS_CAP``.
+
+    HONEST NOTE: brand-new papers have ~0 citations (too recent to be cited), so this is
+    near-zero for the daily-NEW stream and harmless there; its value is differentiating
+    older / resurfaced / already-cited papers from upvote-only ones.
+    """
+    if not cites:
+        return 0.0
+    influential = max(0, int(cites.get("influentialCitationCount") or 0))
+    total = max(0, int(cites.get("citationCount") or 0))
+    bonus = math.log1p(influential) * 1.2 + math.log1p(total) * 0.4
+    return round(min(_S2_BONUS_CAP, bonus), 3)
+
+
+def _paper_spotlight_item_score(item: HotspotItem, *, s2_bonus: float = 0.0) -> float:
     metadata = item.metadata or {}
     score = 0.0
     score += float(metadata.get("daily_score", 0) or 0) * 0.8
@@ -427,6 +452,7 @@ def _paper_spotlight_item_score(item: HotspotItem) -> float:
     score += float(metadata.get("novelty", 0) or 0) * 0.35
     if metadata.get("spotlight_primary_kind") == "new_frontier":
         score += 1.0
+    score += float(s2_bonus or 0.0)  # free Semantic Scholar citation-significance signal
     return round(score, 3)
 
 
@@ -435,9 +461,28 @@ def _build_paper_spotlight(
     *,
     max_daily_hot: int,
     max_new_frontier: int,
+    use_s2_signal: bool = False,
+    s2_api_key: str | None = None,
+    citations_fn=None,
 ) -> list[dict[str, Any]]:
     grouped: dict[str, list[tuple[float, dict[str, Any]]]] = {"new_frontier": [], "daily_hot": []}
     seen_ids: set[tuple[str, str]] = set()
+
+    # Batch-fetch citation counts ONCE for all candidate arXiv ids (one request, degrade-safe).
+    # When use_s2_signal is False OR S2 is unavailable, `citations` stays {} -> every bonus is
+    # 0.0 -> ranking is IDENTICAL to the no-S2 baseline (zero behavior change).
+    citations: dict[str, dict] = {}
+    if use_s2_signal:
+        fn = citations_fn
+        if fn is None:
+            from arxiv_assistant.apis.semantic_scholar import get_paper_citations as fn
+        arxiv_ids = sorted({
+            str((it.metadata or {}).get("arxiv_id", "") or "").strip()
+            for it in raw_items
+            if str((it.metadata or {}).get("arxiv_id", "") or "").strip()
+        })
+        if arxiv_ids:
+            citations = fn(arxiv_ids, api_key=s2_api_key) or {}
 
     for item in raw_items:
         metadata = item.metadata or {}
@@ -468,7 +513,11 @@ def _build_paper_spotlight(
             "relevance": int(metadata.get("relevance", 0) or 0),
             "novelty": int(metadata.get("novelty", 0) or 0),
         }
-        grouped[spotlight_kind].append((_paper_spotlight_item_score(item), payload))
+        cites = citations.get(arxiv_id) or {}
+        s2_bonus = _s2_significance_bonus(cites)
+        payload["s2_influential_citations"] = int(cites.get("influentialCitationCount") or 0)
+        payload["s2_citations"] = int(cites.get("citationCount") or 0)
+        grouped[spotlight_kind].append((_paper_spotlight_item_score(item, s2_bonus=s2_bonus), payload))
 
     sections: list[dict[str, Any]] = []
     for kind, limit in (("new_frontier", max_new_frontier), ("daily_hot", max_daily_hot)):

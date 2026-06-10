@@ -365,5 +365,73 @@ class TestAgentScoutRegistration(unittest.TestCase):
         self.assertNotIn("agent_scout", self._registered_source_ids(use_agent_scout=False))
 
 
+class TestSubagentRouteRegistration(unittest.TestCase):
+    """use_subagent_routes: reddit served by the browser subagent (not the 403 scraper).
+
+    The browser fetcher + the direct reddit fetcher are patched to [] -> no network,
+    no claude/playwright. We only assert which source ids the pipeline registers and
+    that the direct reddit scraper is suppressed when the subagent route is on.
+    """
+
+    def _make_config(self, *, use_subagent_routes: bool) -> configparser.ConfigParser:
+        cfg = configparser.ConfigParser()
+        cfg.read_dict(
+            {
+                "HOTSPOTS": {
+                    "freshness_hours": "30",
+                    "source_registry_path": "configs/hotspot/roundup_sites.json",
+                },
+                "HOTSPOT_SOURCES": {
+                    "use_local_papers": "false", "use_hf_papers": "false", "use_ainews": "false",
+                    "use_official_blogs": "false", "use_roundup_sites": "false", "use_analysis_feeds": "false",
+                    "use_reddit": "true",  # direct reddit ON; subagent route should supersede it
+                    "use_x_ainews_twitter": "false", "use_twitterapi": "false",
+                    "use_x_paperpulse": "false", "use_x_official": "false",
+                    "use_github": "false", "use_hn": "false", "use_agent_scout": "false",
+                    "use_subagent_routes": "true" if use_subagent_routes else "false",
+                    "reuse_cached_raw": "false",
+                },
+                "HOTSPOT_X": {}, "HOTSPOT_GITHUB": {}, "HOTSPOT_HN": {},
+            }
+        )
+        return cfg
+
+    def _run(self, *, use_subagent_routes: bool):
+        cfg = self._make_config(use_subagent_routes=use_subagent_routes)
+        with tempfile.TemporaryDirectory() as tmp_dir, \
+                patch("arxiv_assistant.apis.hotspot.browser_source_fetch.fetch_source_via_browser",
+                      return_value=[]) as mock_browser, \
+                patch.object(hp, "fetch_reddit_items", return_value=[]) as mock_reddit:
+            _items, source_stats, _usage = hp.fetch_source_payloads(
+                datetime(2026, 6, 8, tzinfo=UTC), Path(tmp_dir), cfg, force=True,
+            )
+        return set(source_stats.keys()), mock_browser, mock_reddit
+
+    def test_reddit_via_browser_subagent_when_on(self) -> None:
+        ids, mock_browser, mock_reddit = self._run(use_subagent_routes=True)
+        # reddit served by the browser-route source(s); the direct reddit scraper is suppressed.
+        self.assertIn("reddit_localllama", ids)
+        self.assertNotIn("reddit", ids)
+        mock_reddit.assert_not_called()
+        self.assertTrue(mock_browser.called)
+
+    def test_direct_reddit_when_off(self) -> None:
+        ids, mock_browser, mock_reddit = self._run(use_subagent_routes=False)
+        # default: direct reddit scraper registered, browser fetcher never imported/called.
+        self.assertIn("reddit", ids)
+        self.assertNotIn("reddit_localllama", ids)
+        mock_browser.assert_not_called()
+
+    def test_config_flag_and_stepfun_url(self) -> None:
+        root = Path(__file__).resolve().parents[1]
+        c = configparser.ConfigParser(); c.read(root / "configs" / "config.ini", encoding="utf-8")
+        self.assertFalse(c.getboolean("HOTSPOT_SOURCES", "use_subagent_routes"))
+        p = configparser.ConfigParser(); p.read(root / "configs" / "profiles" / "agent-native.ini", encoding="utf-8")
+        self.assertTrue(p.getboolean("HOTSPOT_SOURCES", "use_subagent_routes"))
+        blogs = json.loads((root / "configs" / "hotspot" / "official_blogs.json").read_text(encoding="utf-8"))
+        stepfun = next(b for b in blogs if b.get("source_id") == "stepfun_blog")
+        self.assertEqual(stepfun["url"], "https://www.stepfun.com/")
+
+
 if __name__ == "__main__":
     unittest.main()

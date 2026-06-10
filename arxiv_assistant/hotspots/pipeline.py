@@ -962,6 +962,17 @@ def fetch_source_payloads(
     hn_keywords = [keyword.strip().lower() for keyword in hn_config.get("keyword_filter", "").split(",") if keyword.strip()]
 
     specs = []
+    # Static subagent routing: when on, KNOWN-FAIL sources (reddit bot-wall, JS sites)
+    # are served by the playwright/agent subagent instead of their failing direct scraper.
+    # Default OFF (committed config unchanged); the agent-native profile turns it on.
+    use_subagent_routes = hotspot_sources.getboolean("use_subagent_routes", fallback=False)
+    _subagent_browser_routes: list[tuple[str, dict[str, str]]] = []
+    reddit_via_subagent = False
+    if use_subagent_routes:
+        from arxiv_assistant.utils.hotspot.source_routes import iter_subagent_sources
+        _subagent_browser_routes = [(n, s) for n, s in iter_subagent_sources() if s.get("route") == "browser"]
+        # reddit is covered by its browser routes, so skip the (403-ing) direct scraper below.
+        reddit_via_subagent = any(n.startswith("reddit") for n, _ in _subagent_browser_routes)
     if hotspot_sources.getboolean("use_local_papers", fallback=True):
         specs.append(("local_papers", lambda: fetch_local_paper_items(target_date, output_root, max_staleness_days=local_papers_max_staleness_days)))
     hf_daily_hot_score_cutoff = hotspot_config.getint("paper_spotlight_daily_hot_score_cutoff", fallback=15)
@@ -983,7 +994,7 @@ def fetch_source_payloads(
     analysis_feeds_registry = REPO_ROOT / "configs" / "hotspot" / "analysis_feeds.json"
     if hotspot_sources.getboolean("use_analysis_feeds", fallback=True) and analysis_feeds_registry.exists():
         specs.append(("analysis_feeds", lambda: fetch_analysis_feed_items(target_date, freshness_hours, analysis_feeds_registry)))
-    if hotspot_sources.getboolean("use_reddit", fallback=True):
+    if hotspot_sources.getboolean("use_reddit", fallback=True) and not reddit_via_subagent:
         specs.append(("reddit", lambda: fetch_reddit_items(target_date, freshness_hours)))
     if hotspot_sources.getboolean("use_x_ainews_twitter", fallback=True):
         specs.append(("x_ainews_twitter", lambda: fetch_x_ainews_items(target_date, freshness_hours)))
@@ -1067,6 +1078,24 @@ def fetch_source_payloads(
                 ),
             )
         )
+    if _subagent_browser_routes:
+        # KNOWN-FAIL sources served by the playwright browser subagent (proven to rescue reddit).
+        from arxiv_assistant.apis.hotspot.browser_source_fetch import fetch_source_via_browser
+        sub_limit = int(hotspot_config.getint("subagent_source_result_limit", 10))
+        sub_timeout = int(hotspot_config.getint("subagent_source_timeout_s", 300))
+        for _route_name, _route_spec in _subagent_browser_routes:
+            SOURCE_USAGE_META.setdefault(
+                _route_name, {"provider": "claude-code+playwright", "billing_model": "subscription"}
+            )
+            specs.append(
+                (
+                    _route_name,
+                    lambda rn=_route_name, rs=_route_spec: fetch_source_via_browser(
+                        rn, rs["url"], rs["kind"], target_date, freshness_hours,
+                        result_limit=sub_limit, timeout_s=sub_timeout,
+                    ),
+                )
+            )
 
     all_items: list[HotspotItem] = []
     source_stats: dict[str, int] = {}

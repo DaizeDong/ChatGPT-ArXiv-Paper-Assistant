@@ -81,6 +81,24 @@ python -m arxiv_assistant.renderers.build_multipage_site
 
 `generate_daily_hotspots.py` also accepts `--stage <name>` to run a single kernel stage (resume helper) and `--date YYYY-MM-DD`.
 
+## Backfilling missed days
+
+`scripts/remedy_missed_dates.py` rebuilds any past day. It pulls that day's papers from the arXiv **API** with an explicit date window (the RSS feed only carries the current announcement), so a day is reproducible long after the fact, and it writes the same `out/json` and `out/md` artifacts a live run would.
+
+```bash
+# what would run, no API calls
+python scripts/remedy_missed_dates.py --dates 2026-09-02,2026-09-03 --output-root ../archive/out --print-plan
+
+# rebuild, six dates at a time
+python scripts/remedy_missed_dates.py --dates "$(cat dates.txt)" --output-root ../archive/out --jobs 6
+```
+
+Point `--output-root` at a checkout of `auto_update`: that is where the archive lives, and the plan infers each day's search window from the days already recorded there.
+
+`--jobs N` runs N dates concurrently in separate processes. Separate processes rather than threads because the pipeline keeps module-level state (the config singleton, the gateway's call ledger, the filter's rate-limit counters) that is not safe to share; each child is handed an explicit window so it never re-infers one from a tree its siblings are writing into. Children also skip the root `out/output.md` refresh, which is a "most recent run" convenience that means nothing for a backfill and would otherwise be a race.
+
+**A backfill is where a silent failure costs the most**: it writes an authoritative-looking archive for a day nobody will look at again, once per date, unattended. So each date resets the call ledger, stamps `filter_health` and the providers that actually answered into its bundle, and marks itself `remedied`. The run ends with one list of the dates whose scoring never ran, and exits non-zero if there were any. An empty day in the archive should always be checkable against that record rather than assumed to mean nothing was relevant.
+
 ## Weekly digest / reader model
 
 The daily pipelines still run daily and still write the full archive. What changed is what gets *read*: a weekly digest that keeps only material which would **change your mind**, not material that is merely on topic.

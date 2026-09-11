@@ -147,10 +147,80 @@ def parse_args() -> argparse.Namespace:
             "backfill finish in hours instead of days. Separate PROCESSES rather "
             "than threads because the pipeline keeps module-level state (the "
             "config singleton, the call ledger, the filter's rate-limit counters) "
-            "that is not safe to share."
+            "that is not safe to share. The usable number depends on what else is "
+            "running on the machine, not on the machine's size: this is clamped "
+            "at startup against actually-free memory (see MB_PER_JOB)."
         ),
     )
     return parser.parse_args()
+
+
+#: Rough resident cost of one remedy job: a python process plus the model
+#: subprocess it spawns. Measured, not guessed -- a backfill was killed at
+#: --jobs 6 and again at --jobs 3 on a 31 GB machine that had only ~5 GB actually
+#: free, because an IDE and a browser held the rest.
+MB_PER_JOB = 1400
+#: Never plan to consume the last of the machine.
+MB_HEADROOM = 2000
+
+
+def free_memory_mb() -> int | None:
+    """Actually-free physical memory, or None when it cannot be determined.
+
+    Returns None rather than a guess: clamping against a fabricated number would
+    be worse than not clamping, because it would look like a considered decision.
+    """
+    try:
+        if sys.platform == "win32":
+            import ctypes
+
+            class _Status(ctypes.Structure):
+                _fields_ = [
+                    ("dwLength", ctypes.c_ulong), ("dwMemoryLoad", ctypes.c_ulong),
+                    ("ullTotalPhys", ctypes.c_ulonglong), ("ullAvailPhys", ctypes.c_ulonglong),
+                    ("ullTotalPageFile", ctypes.c_ulonglong), ("ullAvailPageFile", ctypes.c_ulonglong),
+                    ("ullTotalVirtual", ctypes.c_ulonglong), ("ullAvailVirtual", ctypes.c_ulonglong),
+                    ("ullAvailExtendedVirtual", ctypes.c_ulonglong),
+                ]
+
+            status = _Status()
+            status.dwLength = ctypes.sizeof(_Status)
+            if not ctypes.windll.kernel32.GlobalMemoryStatusEx(ctypes.byref(status)):
+                return None
+            return int(status.ullAvailPhys // (1024 * 1024))
+        with open("/proc/meminfo", encoding="utf-8") as handle:
+            for line in handle:
+                if line.startswith("MemAvailable:"):
+                    return int(line.split()[1]) // 1024
+    except Exception:
+        return None
+    return None
+
+
+def clamp_jobs_to_memory(requested: int) -> int:
+    """Reduce --jobs to what free memory can actually hold.
+
+    A backfill killed halfway is worse than a slow one: it leaves an archive in
+    a state nobody has counted, and the operator finds out from a task
+    notification rather than from the tool. So the clamp happens up front and
+    says what it did.
+    """
+    free_mb = free_memory_mb()
+    if free_mb is None:
+        print("Could not read free memory; leaving --jobs as requested.", flush=True)
+        return requested
+    affordable = max(1, (free_mb - MB_HEADROOM) // MB_PER_JOB)
+    if affordable >= requested:
+        print(f"Free memory {free_mb} MB; running {requested} job(s).", flush=True)
+        return requested
+    print(
+        f"Free memory is {free_mb} MB. At ~{MB_PER_JOB} MB per job with "
+        f"{MB_HEADROOM} MB headroom that affords {affordable}, not {requested}. "
+        f"Clamping to {affordable}. Close memory-heavy apps, or pass --jobs "
+        f"anyway on a quieter machine, to go faster.",
+        flush=True,
+    )
+    return affordable
 
 
 def already_remedied(output_root: str, remedy_date: DateTuple) -> bool:
@@ -186,13 +256,8 @@ def run_plan_in_parallel(plan: RemedyPlan, args: argparse.Namespace) -> int:
     import subprocess
 
     items = sorted(plan.items())
-    print(f"Remedying {len(items)} dates with {args.jobs} concurrent jobs", flush=True)
-    print(
-        "NOTE: each job holds a python process plus its model subprocess. On a "
-        "31 GB machine 6 jobs exhausted memory and the run was killed at 26/112; "
-        "3 is the tested ceiling.",
-        flush=True,
-    )
+    jobs = clamp_jobs_to_memory(max(1, args.jobs))
+    print(f"Remedying {len(items)} dates with {jobs} concurrent job(s)", flush=True)
 
     def run_one(item) -> tuple[str, int, str]:
         remedy_date, (begin_date, end_date) = item
@@ -215,7 +280,7 @@ def run_plan_in_parallel(plan: RemedyPlan, args: argparse.Namespace) -> int:
 
     failures: list[str] = []
     completed = 0
-    with concurrent.futures.ThreadPoolExecutor(max_workers=max(1, args.jobs)) as pool:
+    with concurrent.futures.ThreadPoolExecutor(max_workers=jobs) as pool:
         futures = [pool.submit(run_one, item) for item in items]
         # as_completed, NOT map: map yields in submission order, so a slow first
         # date hides every date that finished behind it and the log reads as if

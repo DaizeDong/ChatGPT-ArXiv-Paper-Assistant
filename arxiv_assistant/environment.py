@@ -49,8 +49,23 @@ OPENAI_BASE_URL = os.environ.get("OPENAI_BASE_URL", "https://api.openai.com/v1")
 SLACK_KEY = os.environ.get("SLACK_KEY")
 SLACK_CHANNEL_ID = os.environ.get("SLACK_CHANNEL_ID")
 
-if OPENAI_API_KEY is None:
-    raise ValueError("OpenAI key is not set - please set OPENAI_API_KEY to your OpenAI key")
+# An OpenAI key is NO LONGER REQUIRED to import this module. Every model call now
+# goes through arxiv_assistant.utils.llm_gateway, whose default backend is the
+# keyless llmcall chain with a `claude -p` fallback; OpenAI is a legacy opt-in
+# selected by [LLM] backend = openai.
+#
+# This used to `raise ValueError` here, which meant main.py could not even START
+# without a key -- so retiring the key would have turned the whole daily paper
+# pipeline into an import error. The check is kept, inverted: it fires only when
+# the legacy backend was deliberately requested and the key it needs is missing,
+# which is a real configuration fault and should still be loud.
+from arxiv_assistant.utils.llm_gateway import legacy_openai_key_missing
+
+if legacy_openai_key_missing(OPENAI_API_KEY, CONFIG):
+    raise ValueError(
+        "[LLM] backend = openai but OPENAI_API_KEY is not set. Either export the key "
+        "or switch [LLM] backend back to auto (the keyless llmcall / claude -p path)."
+    )
 
 # now time
 try:

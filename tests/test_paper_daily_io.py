@@ -58,7 +58,15 @@ class PaperDailyIOTests(unittest.TestCase):
 
             self.assertIn("PRIMARY_TOPIC_ID", output_payload["2501.00001"])
             self.assertEqual(bundle_payload["diagnostics"]["total_papers"], 1)
-            self.assertEqual(bundle["diagnostics"]["topic_counts"][3]["paper_count"], 1)
+            # A RETIRED topic id must still be counted under its own topic:
+            # archived papers keep their original assignment. Look the row up by
+            # id rather than by position, so the assertion survives registry
+            # reordering.
+            counts = {
+                row["topic_id"]: row["paper_count"]
+                for row in bundle["diagnostics"]["topic_counts"]
+            }
+            self.assertEqual(counts["memory_systems"], 1)
 
 
 if __name__ == "__main__":

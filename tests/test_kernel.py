@@ -89,8 +89,24 @@ class TestDagDriver(unittest.TestCase):
         self.assertEqual(
             kernel.STAGES,
             ["harvest", "date_verify", "gravity_gate", "embed", "cluster",
-             "storystore_match", "gapfill", "score", "synthesize", "render"],
+             "storystore_match", "gapfill", "score", "synthesize", "render", "delta"],
         )
+
+    def test_every_stage_has_a_function(self) -> None:
+        # STAGES and _STAGE_FNS are two independent literals and run() looks the
+        # function up with a bare _STAGE_FNS[name]. A name in one and not the
+        # other raises KeyError mid-run, AFTER earlier checkpoints are written,
+        # so the next invocation resumes straight back into the same crash.
+        self.assertEqual(sorted(kernel.STAGES), sorted(kernel._STAGE_FNS))
+
+    def test_delta_runs_last_so_it_cannot_alter_the_report(self) -> None:
+        # The delta stage is annotate-only by design: _stage_score has already
+        # called store.record_surface() for every featured story, so a delta gate
+        # that filtered `featured` upstream would mark stories as surfaced,
+        # get them classified ONGOING tomorrow, and burn them out of future
+        # selection. Keeping it last is what makes that impossible.
+        self.assertEqual(kernel.STAGES[-1], "delta")
+        self.assertLess(kernel.STAGES.index("render"), kernel.STAGES.index("delta"))
 
     def test_run_executes_stages_in_order_and_records_each(self) -> None:
         order: list[str] = []

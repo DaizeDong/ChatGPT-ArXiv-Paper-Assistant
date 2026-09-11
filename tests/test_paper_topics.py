@@ -14,15 +14,34 @@ class PaperTopicsTests(unittest.TestCase):
     def test_topic_registry_uses_expected_order(self):
         registry = get_topic_registry()
         self.assertEqual(
-            list(registry.topic_ids),
-            [
-                "architecture_training",
-                "efficiency_scaling",
-                "representation_structure",
-                "memory_systems",
-                "world_models_open_ended_rl",
-            ],
+            list(registry.active_topic_ids),
+            ["moe_training", "training_systems"],
         )
+        self.assertEqual(registry.default_topic_id, "moe_training")
+
+    def test_retired_topics_stay_resolvable_for_archived_entries(self):
+        # Retired topics are dropped from the prompt and from heuristic
+        # assignment of NEW papers, but MUST keep resolving so historical
+        # archive entries still render under their original label.
+        registry = get_topic_registry()
+        for retired_id in (
+            "architecture_training",
+            "efficiency_scaling",
+            "representation_structure",
+            "memory_systems",
+            "world_models_open_ended_rl",
+        ):
+            self.assertIn(retired_id, registry.topic_ids)
+            self.assertNotIn(retired_id, registry.active_topic_ids)
+            self.assertEqual(registry.normalize(retired_id), retired_id)
+
+    def test_retired_topics_are_absent_from_the_prompt_block(self):
+        from arxiv_assistant.paper_topics import build_topic_registry_prompt_block
+
+        block = build_topic_registry_prompt_block()
+        self.assertIn("moe_training", block)
+        self.assertNotIn("memory_systems", block)
+        self.assertNotIn("world_models_open_ended_rl", block)
 
     def test_ensure_topic_fields_normalizes_old_category_labels(self):
         entry = ensure_topic_fields(

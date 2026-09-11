@@ -21,7 +21,6 @@ from arxiv_assistant.hotspots.pipeline import (
     _story_to_topic_dict,
     build_hotspot_paths,
     date_string,
-    enrich_items_batch,
     enrich_items_heuristic,
     ensure_parent_dirs,
     fetch_source_payloads as _fetch_source_payloads,
@@ -32,11 +31,16 @@ from arxiv_assistant.hotspots.pipeline import (
     write_hotspot_web_data,
     write_json,
 )
+from arxiv_assistant.hotspots.enrich import (
+    enrich_items_batch_with_status,
+    heuristic_status,
+)
 from arxiv_assistant.utils.hotspot.hotspot_schema import HotspotItem
+from arxiv_assistant.utils.llm_client import resolve_agent_model, resolve_llm_model
 
 STAGES: list[str] = [
     "harvest", "date_verify", "gravity_gate", "embed", "cluster",
-    "storystore_match", "gapfill", "score", "synthesize", "render",
+    "storystore_match", "gapfill", "score", "synthesize", "render", "delta",
 ]
 
 
@@ -261,17 +265,57 @@ def _stage_gapfill(ctx: KernelContext) -> dict[str, Any]:
     return {"items": ctx.read("storystore_match")["items"]}
 
 
-def _enrich(ctx: KernelContext, items: list[HotspotItem]) -> list:
+#: Config values that mean "enrich with a language model".
+#:
+#: "openai" is kept as a LITERAL ALIAS, not because OpenAI is still involved
+#: (nothing in this repo calls it any more) but because it is DATA: it sits in
+#: committed configs and, more importantly, inside 173 archived hotspot reports
+#: as ``"mode": "openai"``. Renaming it would make those archives unreadable by
+#: their own reader. Read it as "LLM-enriched". "llm" is the name to use in new
+#: configs and means exactly the same thing.
+LLM_ENRICH_MODES = frozenset({"llm", "openai"})
+
+
+def _normalize_mode(raw: str | None) -> str:
+    return (raw or "heuristic").strip().lower()
+
+
+def _is_llm_mode(raw: str | None) -> bool:
+    return _normalize_mode(raw) in LLM_ENRICH_MODES
+
+
+def _enrich(ctx: KernelContext, items: list[HotspotItem]) -> tuple[list, dict[str, Any]]:
+    """Enrich items and report WHICH path did it.
+
+    Returns ``(enriched, status)``. The status travels into the score checkpoint
+    and out into the report, so a run in which every model call failed is
+    distinguishable from a run in which the model ran and found little: both
+    yield heuristic-looking rows, and only this record tells them apart.
+    """
     cfg = ctx.config["HOTSPOTS"]
-    mode = cfg.get("mode", "heuristic")
-    if mode == "openai":
-        model = cfg.get("model_enrich", cfg.get("model_screen"))
-        return enrich_items_batch(
+    mode = _normalize_mode(cfg.get("mode", "heuristic"))
+    if _is_llm_mode(mode):
+        model = resolve_llm_model(ctx.config, override=cfg.get("model_enrich") or cfg.get("model_screen"))
+        enriched, status = enrich_items_batch_with_status(
             items, model,
             cfg.getint("enrich_batch_size", fallback=20),
             cfg.getint("retry", fallback=3),
+            config=ctx.config,
         )
-    return enrich_items_heuristic(items)
+        status.mode_requested = mode
+        payload = status.to_dict()
+        if items and not status.llm_ok:
+            print(
+                "ERROR: hotspot enrichment requested mode="
+                f"{mode} but NO model call succeeded ({status.batches_failed}/"
+                f"{status.batches} batches failed); output is heuristic. "
+                f"First error: {(status.errors or ['(none recorded)'])[0]}"
+            )
+        return enriched, payload
+    enriched = enrich_items_heuristic(items)
+    status = heuristic_status(enriched)
+    status.mode_requested = mode
+    return enriched, status.to_dict()
 
 
 def _stage_score(ctx: KernelContext) -> dict[str, Any]:
@@ -315,7 +359,7 @@ def _stage_score(ctx: KernelContext) -> dict[str, Any]:
         from arxiv_assistant.hotspots.story import apply_cross_day_penalty
     except ImportError:
         # Naive fallback ONLY when the dedup stack is unavailable (FIX 3).
-        enriched = _enrich(ctx, items)
+        enriched, enrichment = _enrich(ctx, items)
         stories = score_stories(group_into_stories(enriched), run_date=run_day)
         featured_stories, watchlist_stories, _ = select_and_categorize(
             stories,
@@ -327,6 +371,7 @@ def _stage_score(ctx: KernelContext) -> dict[str, Any]:
             "featured": [_story_to_topic_dict(s, keep=True) for s in featured_stories],
             "watchlist": [_story_to_topic_dict(s, watchlist=True) for s in watchlist_stories],
             "all_topics": [_story_to_topic_dict(s) for s in stories],
+            "enrichment": enrichment,
         }
 
     # --- Real Stage-2 path (errors here PROPAGATE; no silent degrade) ---
@@ -343,7 +388,7 @@ def _stage_score(ctx: KernelContext) -> dict[str, Any]:
         ]
 
     # Step 2: Enrich — SINGLE enrich, post-dedup (FIX 2; pipeline 1746-1750)
-    enriched = _enrich(ctx, items)
+    enriched, enrichment = _enrich(ctx, items)
 
     # Step 3: Intraday cluster
     l1_threshold = cfg.getfloat("cross_day_cosine_threshold", fallback=0.72)
@@ -396,6 +441,9 @@ def _stage_score(ctx: KernelContext) -> dict[str, Any]:
         "featured": [_story_to_topic_dict(s, keep=True) for s in featured_stories],
         "watchlist": [_story_to_topic_dict(s, watchlist=True) for s in watchlist_stories],
         "all_topics": [_story_to_topic_dict(s) for s in stories],
+        # Which path produced the enrichment. Carried forward by synthesize and
+        # written into the report so a silent LLM outage is legible after the fact.
+        "enrichment": enrichment,
     }
 
 
@@ -441,15 +489,16 @@ def _stage_synthesize(ctx: KernelContext) -> dict[str, Any]:
     score = ctx.read("score")
     featured = [dict(t) for t in score.get("featured", [])]
     cfg = ctx.config["HOTSPOTS"]
-    model = cfg.get("model_synthesize", cfg.get("model_summarize", cfg.get("model_screen", "")))
+    model = resolve_agent_model(ctx.config, override=cfg.get("model_synthesize"))
 
     rejected: list[str] = []
-    # The Synthesize agent is DECOUPLED from the OpenAI enrich `mode`: it runs via
-    # claude -p (`_call_synthesize_agent`) and needs NO OpenAI key. The default
-    # preserves prior behavior exactly (on in openai mode, off in heuristic) so the
-    # committed config is byte-compatible; the zero-key agent-native profile sets
-    # `use_synthesize_agent = true` to get agent-synthesized bilingual headlines.
-    _default_use_synth = cfg.get("mode", "heuristic").strip().lower() == "openai"
+    # The Synthesize agent is DECOUPLED from the enrich `mode`: it runs via
+    # claude -p (`_call_synthesize_agent`) and needs no API key of any kind. The
+    # default preserves prior behavior exactly (on in LLM-enrich mode, off in
+    # heuristic) so the committed config is byte-compatible; the zero-key
+    # agent-native profile sets `use_synthesize_agent = true` to get
+    # agent-synthesized bilingual headlines.
+    _default_use_synth = _is_llm_mode(cfg.get("mode", "heuristic"))
     use_synth_agent = cfg.getboolean("use_synthesize_agent", fallback=_default_use_synth)
     if use_synth_agent and featured:
         payload = _with_retry(
@@ -480,6 +529,11 @@ def _stage_synthesize(ctx: KernelContext) -> dict[str, Any]:
         "featured": featured,
         "watchlist": score.get("watchlist", []),
         "all_topics": score.get("all_topics", []),
+        # Pass-through, NOT a recomputation: this stage does no enrichment. It is
+        # forwarded only because the checkpoint chain is the one path from
+        # _enrich to the published report, and dropping it here is how the
+        # outage record silently stopped existing once before.
+        "enrichment": score.get("enrichment", {}),
         "manifest": {
             "synthesize_model": model,
             "synthesize_temperature": 0,
@@ -604,9 +658,24 @@ def _stage_render(ctx: KernelContext) -> dict[str, Any]:
     # External sub-dict is built from harvest's api_usage (the real source data).
     api_usage: dict[str, Any] = harvest.get("api_usage") or {}
     mode = cfg.get("mode", "heuristic")
+    # Which path actually produced the enrichment, forwarded from _enrich through
+    # score -> synthesize. A dict, never None: an absent key here would be the
+    # same silence the whole record exists to remove.
+    enrichment: dict[str, Any] = dict(synth.get("enrichment") or {})
+    # provider is what ANSWERED, not what we used to bill. The gateway reports it
+    # ("cc", "codex", "claude", ...); "none" means nothing answered, which is the
+    # statement an outage needs to make. Hardcoding "OpenAI" here would have kept
+    # printing a vendor name no call in this repo can reach any more.
+    llm_provider = str(enrichment.get("provider") or "") or (
+        "unknown" if enrichment.get("llm_ok") else "none"
+    )
     llm_row: dict[str, Any] = {
-        "provider": "OpenAI",
-        "billing_model": "quota" if mode == "openai" else "disabled",
+        "provider": llm_provider,
+        "backend": str(enrichment.get("backend") or ""),
+        # "quota" means a CLI transport answered. It is keyed off
+        # whether a model ACTUALLY answered, not off the configured mode: a run
+        # that asked for LLM enrichment and got nothing is not billing anything.
+        "billing_model": "quota" if enrichment.get("llm_ok") else "disabled",
         "screen_model": cfg.get("model_screen", None),
         "summary_model": cfg.get("model_summarize", cfg.get("model_screen", None)),
         "requests": 0,
@@ -650,6 +719,12 @@ def _stage_render(ctx: KernelContext) -> dict[str, Any]:
         "date": ctx.run_date,
         "generated_at": datetime.now(UTC).isoformat(),
         "mode": mode,
+        # Top-level, not buried in usage: a later reader asking "did the model run
+        # on this day?" must not have to know that the answer lives under a
+        # billing sub-dict. The 173 archived reports predating this key have no
+        # "enrichment" at all, and a reader must treat that absence as UNKNOWN,
+        # never as "no model ran" -- they were written before anyone was counting.
+        "enrichment": enrichment,
         "summary": _fallback_digest_summary(featured),
         "source_stats": harvest.get("source_stats", {}),
         "manifest": synth.get("manifest", {}),
@@ -681,6 +756,121 @@ def _stage_render(ctx: KernelContext) -> dict[str, Any]:
 # Topology is hardcoded here (spec §G.2): never produced by an LLM.
 # Real stage bodies are bound in Tasks 4-7; tests patch _STAGE_FNS.
 # ---------------------------------------------------------------------------
+def _stage_delta(ctx: "KernelContext") -> dict[str, Any]:
+    """Annotate the day's SELECT survivors with a reader-model delta score.
+
+    DELIBERATELY THE LAST STAGE, AND DELIBERATELY ANNOTATE-ONLY.
+
+    Placing a filtering delta gate between `score` and `synthesize` would be a
+    trap: `_stage_score` has already called ``store.record_surface(...)`` for every
+    featured story, so a story dropped here would still be marked as surfaced,
+    come back tomorrow classified ONGOING, and be excluded from re-selection --
+    silently burned out of the candidate pool by a gate it merely failed once.
+    So this stage changes nothing upstream: the report, the archive pages and the
+    cross-day story state are byte-identical whether it runs or not.
+
+    The cutoff and the digest caps live in scripts/generate_weekly_digest.py,
+    which reads the sidecar this stage writes (or rescores from the archive when
+    the sidecar is absent).
+
+    Degrades rather than fails: a disabled section, an empty reader model, or an
+    unreachable agent all produce a sidecar whose verdicts carry an explicit
+    status, never a silently empty one.
+    """
+    from arxiv_assistant.reader.delta import (
+        candidates_from_hotspot_report,
+        dumps_verdicts,
+        resolve_reader_settings,
+        score_candidates,
+    )
+    from arxiv_assistant.reader.questions import ReaderQuestionError, load_questions
+    from arxiv_assistant.utils import llm_gateway
+    from arxiv_assistant.utils.hotspot.hotspot_config import repo_root
+
+    settings = resolve_reader_settings(ctx.config)
+    sidecar = Path(ctx.output_root) / "hot" / "delta" / f"{ctx.run_date}.json"
+
+    def _emit(payload: dict[str, Any]) -> dict[str, Any]:
+        write_json(sidecar, payload)  # creates the parent dir itself
+        return payload
+
+    if not settings.enabled or not settings.annotate_in_daily_run:
+        return _emit({
+            "date": ctx.run_date,
+            "status": "skipped",
+            "reason": "[READER] enabled/annotate_in_daily_run is false",
+            "verdicts": {},
+        })
+
+    # Read the post-synthesize view when it exists so headlines match the report.
+    try:
+        upstream = ctx.read("synthesize")
+    except Exception:  # noqa: BLE001 - synthesize may not have run for this date
+        upstream = ctx.read("score")
+
+    report_like = {
+        "date": ctx.run_date,
+        "featured_topics": upstream.get("featured", []),
+        "watchlist": upstream.get("watchlist", []),
+    }
+    candidates = candidates_from_hotspot_report(report_like)
+    if not candidates:
+        return _emit({
+            "date": ctx.run_date,
+            "status": "no_candidates",
+            "reason": "SELECT produced no featured or watchlist topics for this date",
+            "verdicts": {},
+        })
+
+    try:
+        questions = load_questions(
+            Path(repo_root()) / settings.questions_dir
+            if not Path(settings.questions_dir).is_absolute()
+            else Path(settings.questions_dir)
+        )
+    except ReaderQuestionError as exc:
+        return _emit({
+            "date": ctx.run_date,
+            "status": "unavailable",
+            "reason": str(exc),
+            "verdicts": {},
+        })
+
+    # Per-stage, not per-process: the sidecar's ledger has to describe THIS
+    # stage's calls, or a second run in the same interpreter would inherit the
+    # first one's successes and hide its own outage.
+    llm_gateway.LEDGER.reset()
+    backend = llm_gateway.resolve_backend(ctx.config)
+    # Only the agent transport takes a model id from [LLM_AGENT]; the llmcall
+    # chain resolves its own provider and would be mis-pinned by one.
+    model = (
+        resolve_agent_model(ctx.config, override=settings.model or None)
+        if backend == llm_gateway.BACKEND_AGENT
+        else (settings.model or "")
+    )
+    verdicts = score_candidates(
+        candidates,
+        questions,
+        model=model,
+        timeout_s=settings.timeout_s,
+        config=ctx.config,
+        backend=backend,
+    )
+    payload = {
+        "date": ctx.run_date,
+        "status": "scored",
+        "candidate_count": len(candidates),
+        "questions_populated": sum(1 for q in questions if q.is_populated),
+        # Which model answered, and whether any did. Without this a sidecar full
+        # of `unavailable` verdicts cannot say whether the chain was down or the
+        # reader model was empty, and a later reader has no way to find out.
+        "llm_backend": llm_gateway.describe_backend(ctx.config),
+        "llm_ledger": llm_gateway.LEDGER.to_dict(),
+        "verdicts": json.loads(dumps_verdicts(verdicts)),
+    }
+    return _emit(payload)
+
+
 _STAGE_FNS: dict[str, Callable[["KernelContext"], dict[str, Any]]] = {
     "harvest": _stage_harvest,
     "date_verify": _stage_date_verify,
@@ -692,6 +882,7 @@ _STAGE_FNS: dict[str, Callable[["KernelContext"], dict[str, Any]]] = {
     "score": _stage_score,
     "synthesize": _stage_synthesize,
     "render": _stage_render,
+    "delta": _stage_delta,
 }
 
 

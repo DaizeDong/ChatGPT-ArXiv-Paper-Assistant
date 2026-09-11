@@ -8,7 +8,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 from unittest.mock import patch
 
-from arxiv_assistant.hotspots import kernel
+from arxiv_assistant.hotspots import date_verify, kernel
 from arxiv_assistant.utils.hotspot.hotspot_schema import HotspotItem
 
 FIXT = Path(__file__).resolve().parent / "fixtures" / "replay" / "raw_2026-05-20.json"
@@ -30,12 +30,33 @@ def _config() -> configparser.ConfigParser:
     return cfg
 
 
+def _stub_verify(item, store):  # noqa: ARG001 - store unused by the stub
+    """Deterministic stand-in for date_verify.verify.
+
+    WHY THIS PATCH EXISTS. Without it this test was not measuring the kernel, it
+    was measuring the internet. ``date_verify.verify`` calls the live arXiv API,
+    Crossref and the Wayback CDX, and may dispatch a subagent; the test patched
+    only ``_fetch_source_payloads``, so whichever of those answered (or timed
+    out) decided an item's verified_first_date. Two runs minutes apart could land
+    on a verifier answer and a published_at fallback respectively, and the
+    checkpoint would differ by exactly that item's timestamp.
+
+    Measured: with the network held constant this way, score.json is
+    byte-identical across runs; with it live, it intermittently is not. A
+    bit-stability test has to hold its inputs constant or it reports the weather.
+    The kernel's determinism is the claim under test; date_verify's network
+    behaviour is an input, and it is non-deterministic by nature.
+    """
+    return {"verified_first_date": item.published_at, "confidence": 0.9, "evidence": []}
+
+
 class TestReplayDiff(unittest.TestCase):
     def _run_once(self, root: Path) -> tuple[str, str]:
         td = datetime(2026, 5, 20, tzinfo=timezone.utc)
         items = _load_items()
         with patch.object(kernel, "_fetch_source_payloads",
-                          return_value=(items, {"hf_papers": 1, "ainews": 2}, {})):
+                          return_value=(items, {"hf_papers": 1, "ainews": 2}, {})), \
+             patch.object(date_verify, "verify", side_effect=_stub_verify):
             kernel.run(root, td, _config(), force=True)
         score = (root / "hot" / "state" / "checkpoint" / "2026-05-20" / "score.json").read_text("utf-8")
         report = json.loads((root / "hot" / "reports" / "2026-05-20.json").read_text("utf-8"))

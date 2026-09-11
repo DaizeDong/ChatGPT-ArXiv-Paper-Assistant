@@ -3,17 +3,48 @@
 This branch rewrites the hotspot pipeline around a thin deterministic **Kernel** (fixed
 10-stage DAG with per-`(date, stage)` checkpoints) plus short-lived, verifier-gated
 **Claude Code subagents** at the judgment points, and adds an agent filtering modality to
-the paper pipeline. It is designed so an existing user with an **unmodified config** keeps
-working, but two behaviors changed by default and are worth knowing before you upgrade.
+the paper pipeline, and retires the OpenAI API key as a requirement anywhere. It is designed so
+an existing user with an **unmodified config** keeps working, but a few behaviors changed by
+default and are worth knowing before you upgrade.
 
 ## TL;DR for existing users
 
 | Area | Default after upgrade | Action needed |
 |---|---|---|
-| Paper filtering | `[PAPER_FILTER] mode = api_only` = **byte-identical** to before | none |
+| Model transport | `[LLM] backend = auto` -> keyless `llmcall` chain (`codexg -> codex -> cc -> claude`), else this repo's `claude -p` | none; **drop your `OPENAI_API_KEY` secret** |
+| Paper filtering | `[PAPER_FILTER] mode = api_only` = same prompts, batching and scores as before, carried by the gateway instead of an OpenAI key | none |
 | Hotspot in-process call (`generate_daily_hotspot_report`) | still returns a report dict | none |
 | **CI hotspot generation** | `[HOTSPOT_RUNTIME] runtime = local` -> GitHub **Actions no longer generates** hotspots (a VPS owns it) | **Actions-only users: set `runtime = actions`** (see below) |
 | Hotspot Synthesize headlines | claude -p subagent when `use_synthesize_agent` (default: on in openai mode and in the zero-key profile), else heuristic | optional: set `model_synthesize` |
+
+## 0. The OpenAI key is retired; one gateway carries every model call
+
+`arxiv_assistant/utils/llm_gateway.py` is now the only place this repo talks to a model. Three
+backends, selected by `[LLM] backend` (or the `ARXIV_ASSISTANT_LLM_BACKEND` env override, which
+wins over the config):
+
+- `llmcall` -- a standalone unified call primitive, chain `codexg -> codex -> cc -> claude`. No API
+  key: the chain runs through locally installed CLIs. Detected by a **guarded import**, so a
+  clone without it degrades instead of failing, and `requirements.txt` gains no git dependency.
+- `agent` -- this repo's own `claude -p` transport (`utils/agent_runner`). The self-sufficiency
+  floor: a bare clone with the `claude` CLI logged in works with nothing else installed.
+- `openai` -- the historical HTTP path, now **legacy opt-in only**. Reachable when `[LLM] backend`
+  (or the env override) explicitly names it and `OPENAI_API_KEY` is set.
+
+`backend = auto` (the default) resolves to `llmcall` when it imports and to `agent` otherwise. It
+**never** resolves to `openai`, even when a key is present -- that rule has a negative-control test
+(`tests/test_llm_gateway.py::TestResolveBackend::test_auto_never_resolves_to_openai`), because the
+failure it prevents is exactly how this repo published an empty `{}` archive every day for three
+months: an expired key, every call raising into a bare `except`, every run exiting 0.
+
+**Health is measured from a call ledger, not from tokens.** The gateway records every call
+(attempted / succeeded / by backend / by provider / a capped error list) in a per-process
+`LEDGER`, and `main.py` passes it to `utils/pipeline_health.assess_paper_filter_health`, where it
+is authoritative when supplied. The keyless backends report no OpenAI tokens, so a token-based
+outage detector would have fired on every healthy run forever; `attempted > 0 and succeeded == 0`
+is the statement that holds on every backend. Set `[LLM] effort` (default `max`) and
+`[LLM] timeout_s` (default 180) to tune the chain; `[LLM] model` is blank by default, meaning each
+backend picks its own.
 
 ## 1. Runtime ownership moved to a VPS (the one behavior change to know)
 
@@ -39,7 +70,9 @@ The paper pipeline (`main.py`) is unaffected by this key and continues to run in
 
 `[PAPER_FILTER] mode` selects how surviving papers are scored:
 
-- `api_only` (default): the historical `filter_by_gpt` path, unchanged.
+- `api_only` (default): the historical `filter_by_gpt` batching path. Prompts, batch sizes and
+  score parsing are unchanged; only the transport moved (see section 0), so it no longer needs
+  an OpenAI key.
 - `cascade`: cheap Rule (h-index) -> Api scoring -> escalate only the **borderline** band
   `[agent_borderline_low, agent_borderline_high)` to a Claude Code subagent.
 - `agent_only`: every survivor judged by the subagent.
@@ -70,14 +103,17 @@ with defaults that preserve current behavior: `[HOTSPOTS]` (date/dedup/resurge k
 `cross_day_cosine_threshold`, `embed_model_id`, `max_item_age_days`, `resurge_*`, plus
 `use_semantic_scholar_signal`, `agent_scout_*`, `subagent_source_*`), `[HOTSPOT_SOURCES]`
 (`use_twitterapi` -- the managed X channel; `use_agent_scout`, `use_market_intel_sources`,
-`use_subagent_routes`), `[HOTSPOT_REUSE]`, `[HOTSPOT_RUNTIME]`, `[PAPER_FILTER]`. The retired
+`use_subagent_routes`), `[HOTSPOT_REUSE]`, `[HOTSPOT_RUNTIME]`, `[PAPER_FILTER]`, and `[LLM]`
+(`backend`/`effort`/`model`/`timeout_s`, see section 0). The retired
 `use_x_official`/`use_x_paperpulse` keys were **removed** (see section 7). Config files are pure
 ASCII and all readers use UTF-8.
 
 ## Known limitations (conscious, documented)
 
 - The kernel report's `usage`/`costs` LLM **token/cost are zero** (not threaded through the
-  per-stage checkpoints); the **external** API usage (twitterapi.io etc.) is real.
+  per-stage checkpoints), and on the keyless backends they are structurally zero because no
+  provider reports tokens. Never read those fields as a liveness signal -- use the gateway
+  ledger (section 0). The **external** API usage (twitterapi.io etc.) is real.
 - The **Resurgence** section is carried through the web payload, markdown, and `_zh`
   translator, but no front-end component renders it yet (i18n-ready; UI pending).
 - A set of `tests/test_hotspot_web_data.py` assertions about a richer `source_section_totals`
@@ -104,8 +140,9 @@ This profile needs only the `claude` CLI (logged in) plus a git push token. With
 - **Papers** are filtered by a Claude subagent (`[PAPER_FILTER] mode = agent_only`). Note the
   profile keeps `[SELECTION] run_openai = true`: that flag is the outer gate that *enables* the
   paper-filter step in `main.py`; `mode = agent_only` then routes it to the subagent (claude -p)
-  instead of OpenAI. The `agent_only` path never calls the API scorer, so no OpenAI key is used
-  by the digest (`python main.py`).
+  instead of a batch scorer. Since the gateway retired the key path, `api_only` needs no key
+  either; the difference is now per-paper agent verdicts versus batched scoring, not keyed
+  versus keyless.
 - **X/social + breadth** come from the **agent scout** (`[HOTSPOT_SOURCES] use_agent_scout = true`,
   `use_twitterapi = false`), which uses Claude's `WebSearch`/`WebFetch` instead of the metered
   twitterapi.io key.
@@ -117,7 +154,7 @@ This profile needs only the `claude` CLI (logged in) plus a git push token. With
   enrichment), the bilingual Synthesize agent still runs and its evidence-grounding verifier still
   gates every row (degrading to heuristic headlines only on agent failure).
 
-No OpenAI or twitterapi keys are required. Everything runs on the Claude subscription.
+No OpenAI or twitterapi keys are required. Everything uses the local claude CLI.
 
 ## 5. Tiered source gathering (most sources free; protected ones via subagent)
 
@@ -153,6 +190,9 @@ baseline. An optional `semantic_scholar_api_key` (or `S2_API_KEY` env) lifts the
 
 ## 7. Deprecations removed in this branch
 
+- **The OpenAI API key as a requirement** -- the key path still exists behind
+  `[LLM] backend = openai`, but nothing selects it automatically and no documented mode needs
+  it. Drop the `OPENAI_API_KEY` GitHub secret unless you deliberately opt back in.
 - **`x_official` and `x_paperpulse` sources** -- removed entirely (modules, registrations, config
   keys); superseded by `use_twitterapi` (the official-X path needed X API Pro ~$5k/mo; the
   PaperPulse upstream feed is dead).

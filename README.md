@@ -3,7 +3,7 @@
 > *Last update: 2026-06-09*
 > An enhanced version of the [GPT paper assistant](https://github.com/tatsu-lab/gpt_paper_assistant).
 > Two daily pipelines -- a personalized arXiv paper digest and an AI-hotspots digest -- published as a multi-page static site.
-> Now **agent-native**: a thin deterministic kernel orchestrates verifier-gated Claude Code subagents, and the whole system can run with **zero API keys** on the Claude subscription.
+> Now **agent-native**: a thin deterministic kernel orchestrates verifier-gated Claude Code subagents, and the whole system runs with **zero model API keys** through the local claude CLI.
 
 See the [changelog](CHANGELOG.md) and the [upgrade notes](docs/UPGRADE-agent-native-hotspot.md) for the agent-native architecture and how to deploy it.
 
@@ -21,19 +21,22 @@ Generated results are pushed to the `auto_update` branch; `main` stays code-only
 - **Thin deterministic Kernel** drives a fixed 10-stage DAG (`harvest -> date_verify -> gravity_gate -> embed -> cluster -> storystore_match -> gapfill -> score -> synthesize -> render`) with per-`(date, stage)` JSON checkpoints (resumable, bit-stable), a single-writer story store, and clustering for cross-day de-duplication. Topology is in code -- never produced by an LLM.
 - **Verifier-gated Claude Code subagents** sit only at judgment points; every agent is followed by a deterministic verifier so no agent output is trusted unverified (transport: `claude -p` via `arxiv_assistant/utils/agent_runner.run_agent`):
   - **DateVerify** -- per-item first-publication date (arXiv v1 / Crossref / Wayback, earliest-credible-wins), clamped by a verifier (fixes stale-item leakage).
-  - **Synthesize** -- bilingual (en/zh) headline + summary per featured topic; the verifier rejects any row missing a bilingual field or citing evidence not in the story. (Runs only when `[HOTSPOTS] mode = openai`; otherwise headlines are heuristic.)
+  - **Synthesize** -- bilingual (en/zh) headline + summary per featured topic; the verifier rejects any row missing a bilingual field or citing evidence not in the story. (Gated by `[HOTSPOTS] use_synthesize_agent`, which defaults on only when `[HOTSPOTS] mode` is an LLM-enrich mode -- `llm`, or its archival alias `openai`; the agent itself runs on `claude -p` and needs no key either way. Otherwise headlines are heuristic.)
   - **Paper AgentFilter** -- relevance/novelty judged by a subagent; the verifier requires the evidence URL to reference the paper's own arXiv id.
   - **Gathering subagents** (see source routing) -- the URL-liveness verifier drops any fabricated/dead link.
 - **Tiered, mostly-free source gathering**: most sources use cheap direct scrapers; the few protected/JS/login-walled ones are served by a Claude Code subagent (Web or browser) -- no per-source scraper rot.
 
 ## Run modes
 
+**No model API key is needed in any mode.** Every model call in this repo goes through one gateway (`arxiv_assistant/utils/llm_gateway.py`) whose `[LLM] backend = auto` default prefers the keyless [`llmcall`](https://github.com/DaizeDong/llmcall) primitive (chain `codexg -> codex -> cc -> claude`) and falls back to this repo's own `claude -p` transport on a bare clone. OpenAI is a **legacy opt-in**, never automatic.
+
 | Mode | Config | Keys needed | What runs |
 |---|---|---|---|
-| **Default** (unchanged from before) | `configs/config.ini` | OpenAI (paper filter + hotspot LLM screening), twitterapi.io (X), optional S2/Slack | `api_only` paper filtering; twitterapi X; direct scrapers |
-| **Zero-key agent-native** | `cp configs/profiles/agent-native.ini configs/config.ini` | **only the `claude` CLI (logged in) + a git push token** | `agent_only` paper filtering (claude -p, no OpenAI); agent scout for X/breadth; subagent source routes (playwright) for reddit/CN-lab blogs; heuristic hotspot headlines |
+| **Default** | `configs/config.ini` | **no model key**: `llmcall` if installed, else the `claude` CLI (logged in). Optional: twitterapi.io (X), S2/Slack | `api_only` paper filtering (batched relevance/novelty scoring, now carried by the gateway); twitterapi X; direct scrapers |
+| **Zero-key agent-native** | `cp configs/profiles/agent-native.ini configs/config.ini` | **only the `claude` CLI (logged in) + a git push token** | `agent_only` paper filtering (per-paper `claude -p` verdicts); agent scout for X/breadth; subagent source routes (playwright) for reddit/CN-lab blogs; heuristic hotspot headlines |
+| **Legacy OpenAI** (opt-in) | set `[LLM] backend = openai` and export `OPENAI_API_KEY` | OpenAI | the historical HTTP path. `auto` will never select this, by design: a dead key has to surface as an outage instead of quietly becoming the default again |
 
-The committed default is **byte-compatible with the previous behavior** -- existing users are unaffected. See [docs/UPGRADE-agent-native-hotspot.md](docs/UPGRADE-agent-native-hotspot.md) for the full agent-native story and deployment notes.
+See [docs/UPGRADE-agent-native-hotspot.md](docs/UPGRADE-agent-native-hotspot.md) for the full agent-native story and deployment notes.
 
 ## Quickstart
 
@@ -42,7 +45,7 @@ The committed default is **byte-compatible with the previous behavior** -- exist
 1. Fork/copy this repo and [enable scheduled workflows](https://docs.github.com/en/actions/using-workflows/disabling-and-enabling-a-workflow).
 2. Edit the paper prompts under `prompts/paper/` (especially `prompts/paper/paper_topics.txt`) to match what you want to follow.
 3. Copy `configs/templates/config.template.ini` to `configs/config.ini` and set your arXiv categories (`arxiv_category`).
-4. Set `OPENAI_API_KEY` (+ `OPENAI_BASE_URL` if needed) as [GitHub Secrets](https://docs.github.com/en/actions/security-guides/using-secrets-in-github-actions). See [GUIDE_GITHUB_API.md](GUIDE_GITHUB_API.md) for a free option.
+4. No model API key to set. The default `[LLM] backend = auto` uses `llmcall` when it imports on the runner, otherwise the `claude` CLI, so there is no `OPENAI_API_KEY` secret to create. Only if you deliberately opt back into the legacy path (`[LLM] backend = openai`) do you need `OPENAI_API_KEY` (+ `OPENAI_BASE_URL`) as [GitHub Secrets](https://docs.github.com/en/actions/security-guides/using-secrets-in-github-actions); see [GUIDE_GITHUB_API.md](GUIDE_GITHUB_API.md) for a free option.
 5. Set GitHub Pages build source to [GitHub Actions](https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site#publishing-with-a-custom-github-actions-workflow).
 6. Copy `configs/templates/authors.template.txt` to `configs/authors.txt` and list authors (with their Semantic Scholar IDs).
 7. **X/Twitter source** for hotspots (optional -- skip it for the zero-key mode): set `TWITTERAPI_IO_KEY` ([twitterapi.io](https://twitterapi.io), ~$0.15/1k tweets, no X dev account). Legacy `X_BEARER_TOKEN` is no longer used (the official-X and PaperPulse sources were retired).
@@ -53,7 +56,7 @@ The committed default is **byte-compatible with the previous behavior** -- exist
 
 ### Run on a VPS (zero-key agent-native)
 
-For a no-API-key daily run on the Claude subscription:
+For a no-API-key daily run through the local claude CLI:
 
 ```bash
 cp configs/profiles/agent-native.ini configs/config.ini   # agent_only papers + agent scout + subagent routes
@@ -78,15 +81,36 @@ python -m arxiv_assistant.renderers.build_multipage_site
 
 `generate_daily_hotspots.py` also accepts `--stage <name>` to run a single kernel stage (resume helper) and `--date YYYY-MM-DD`.
 
+## Weekly digest / reader model
+
+The daily pipelines still run daily and still write the full archive. What changed is what gets *read*: a weekly digest that keeps only material which would **change your mind**, not material that is merely on topic.
+
+- **Reader model** -- `configs/reader/questions/q1..q5.md`, one open research question each, five fixed sections (`当前看法` / `支持证据` / `反对证据` / `什么会让我改看法` / `想做的实验`). These are edited **by hand only**; no agent and no pipeline stage ever writes to them, and a test enforces that.
+- **Delta score** -- `prompts/reader/delta_scoring.txt` asks one question per item: would this edit one of those five fields? Not "is it relevant". Verdicts pass a deterministic verifier (known question id, known field, integer 0..10, a reason that names something specific) before they are trusted.
+- **Cadence** -- `scripts/generate_weekly_digest.py` reads the last 7 days of `out/`, scores, keeps `delta_score >= [READER] delta_score_cutoff`, and writes `out/weekly/<YYYY-MM>/<date>-weekly.{md,json}`. `.github/workflows/weekly_digest.yaml` runs it Monday 08:00 America/New_York (two crons plus a timezone guard, because GitHub cron is UTC-only and DST makes one expression wrong for half the year). Daily Slack stays off; the weekly has its own `[OUTPUT] push_weekly_to_slack`.
+- **Fixed length** -- at most 5 deep-read and 15 skim, ranked by delta score then by the pipeline's own score. No source table and no category expansion; those stay on the daily archive pages.
+- **The archive is on another branch.** `out/` is gitignored on code branches, so pass `--archive-root` pointing at an `auto_update` checkout. Locally: `git worktree add ../archive auto_update`.
+
+```bash
+python scripts/generate_weekly_digest.py --archive-root ../archive --end-date 2026-09-09
+python scripts/query_archive.py "MoE routing stability" --since 2026-08-01 --archive-root ../archive
+```
+
+**An empty digest always says why.** It prints the single line `本周没有改变看法的内容` in exactly one case: scoring ran, over a real window, against a populated reader model, and nothing cleared the bar. An empty reader model, an unreachable scorer, a window with no archive days, or an upstream filter that scanned papers while burning zero tokens each render a loud block naming the cause instead. This is not decoration: between 2026-06-05 and 2026-09-09 the paper pipeline published an empty `{}` archive every single day because an expired API key made every call raise into a bare `except`, and every run still exited 0. A digest that renders that as a quiet week is worse than no digest.
+
+`scripts/query_archive.py` searches both archive trees (BM25, no new dependency, CJK bigrams so Chinese queries work), then cites a link for every conclusion and drops any URL the model invented. `--no-llm` gives ranked hits with no model access at all.
+
 ## How paper filtering works
 
 `[PAPER_FILTER] mode` selects how surviving papers are scored (after the arXiv fetch + author h-index gate):
 
-- `api_only` (default): the historical OpenAI `filter_by_gpt` relevance/novelty scoring -- byte-identical to before.
+- `api_only` (default): the historical batched `filter_by_gpt` relevance/novelty scoring. The prompts, batching and score parsing are unchanged; what changed is the transport underneath -- `call_chatgpt` now dispatches through `utils/llm_gateway`, so the same batches run keyless over `llmcall` (or `claude -p`) instead of over an OpenAI key.
 - `cascade`: cheap rule (h-index) -> API scoring -> escalate only the borderline band `[agent_borderline_low, agent_borderline_high)` to a Claude Code subagent.
-- `agent_only`: every surviving paper judged by the subagent (`claude -p`, no OpenAI). Used by the zero-key profile.
+- `agent_only`: every surviving paper judged one at a time by the subagent (`claude -p`), with the per-paper evidence verifier. Used by the zero-key profile.
 
 Agent verdicts pass a deterministic verifier (schema + evidence must reference the paper's own arXiv id) before they are trusted. Paper-spotlight ranking can add a **free Semantic Scholar citation-significance** signal (`[HOTSPOTS] use_semantic_scholar_signal = true`, degrade-safe -- no behavior change when S2 is unavailable; note that brand-new papers have ~0 citations).
+
+Whichever mode is active, **every model call is recorded in a per-process call ledger** (`llm_gateway.LEDGER`: attempted / succeeded / by backend / by provider / errors), and `main.py` feeds `LEDGER.attempted` and `LEDGER.succeeded` to `utils/pipeline_health`. When the ledger is populated it is authoritative and token counts are ignored -- the keyless backends report no OpenAI tokens, so the old token-based detector would have called every healthy run an outage. "We attempted N calls and none succeeded" is the backend-agnostic statement of an outage, and it is what makes "nothing matched" and "the model never ran" print differently.
 
 ## How hotspots gather sources
 

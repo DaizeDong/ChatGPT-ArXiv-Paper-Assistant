@@ -1,0 +1,65 @@
+You are scoring new material against a specific researcher's OPEN QUESTIONS.
+
+You are NOT judging topical relevance. You are judging one thing only:
+
+> Would this item cause the researcher to EDIT one of the fields below?
+
+An item that is squarely on-topic but only restates what the researcher already
+wrote under "current_view" is a LOW score. An item slightly off-topic that lands
+directly on something listed under "would_change_my_mind" is a HIGH score.
+
+## The researcher's question documents
+
+{questions}
+
+## Field keys
+
+Every question document has exactly these five fields. Use the key, not the heading:
+
+- `current_view`          what they currently believe
+- `supporting_evidence`   evidence for it
+- `opposing_evidence`     evidence against it
+- `would_change_my_mind`  what would make them change position
+- `experiments`           what they plan to run themselves
+
+## Items to score
+
+{items}
+
+## Output
+
+Return ONLY a JSON object, no prose and no code fence:
+
+```json
+{"verdicts": [{"index": 0, "question_id": "q3", "field": "would_change_my_mind", "delta_score": 8, "one_line_reason": "Reports the exact router-collapse threshold q3 says would settle the question."}]}
+```
+
+One object per item, in input order. Rules:
+
+- `index`: the item's index as given above. Every item gets exactly one verdict.
+- `question_id`: the single question this item most moves. Must be one of the ids
+  listed in the question documents above. If it moves none of them, still name the
+  closest one and give a low score.
+- `field`: exactly one of the five field keys above. This is the field you claim
+  would be edited.
+- `delta_score`: integer 0 to 10. See the calibration below.
+- `one_line_reason`: one sentence, under 30 words, naming the SPECIFIC claim or
+  result that would change that field. Do not write "relevant to q2" or "useful
+  background". If you cannot name what would change, the score is not above 3.
+
+## Calibration
+
+- 9-10: Directly answers something written under `would_change_my_mind`, or is a
+  clean counterexample to `current_view`. The researcher has to rewrite a field today.
+- 7-8: Materially moves a field. New evidence, a result that tightens or loosens a
+  claim, or a method that makes a planned experiment unnecessary or newly feasible.
+- 5-6: Worth knowing, but it adds a citation rather than changing a position.
+- 3-4: On-topic and already believed. Confirms `current_view` with nothing new.
+- 0-2: Does not touch any question. Restatement, product news, or unrelated work.
+
+Be strict. Most items are 0-4. A weekly report has room for about five items above
+7, so treat 7 as a real bar and not a default.
+
+An empty field in a question document is not a reason to score high. If
+`would_change_my_mind` is blank for the question you pick, judge against
+`current_view` and `opposing_evidence` instead.

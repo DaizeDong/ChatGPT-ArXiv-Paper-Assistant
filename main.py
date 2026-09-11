@@ -1,5 +1,6 @@
 import json
 import os
+import sys
 
 from arxiv_assistant.apis.arxiv import get_papers_from_arxiv
 from arxiv_assistant.apis.semantic_scholar import get_authors
@@ -10,6 +11,8 @@ from arxiv_assistant.paper_topics import build_daily_topic_bundle, build_hotspot
 from arxiv_assistant.push_to_slack import push_to_slack
 from arxiv_assistant.renderers.paper.render_daily import render_daily_md, render_summary_table
 from arxiv_assistant.utils.io import copy_file_or_dir, delete_file_or_dir
+from arxiv_assistant.utils.llm_gateway import BACKEND_OPENAI, LEDGER, describe_backend, resolve_backend
+from arxiv_assistant.utils.pipeline_health import assess_paper_filter_health, format_banner
 from arxiv_assistant.utils.utils import EnhancedJSONEncoder
 
 if __name__ == "__main__":
@@ -166,18 +169,56 @@ if __name__ == "__main__":
 
     selected_paper_dict = sort_paper_mapping_for_daily_display(selected_paper_dict)
     filtered_paper_dict = ensure_topic_fields_for_mapping(filtered_paper_dict)
+
+    # An empty archive must never be indistinguishable from a working one. If the
+    # filter was supposed to call a model and burned zero tokens, say so here and
+    # stamp it into the bundle so the weekly digest and any CI check can see it.
+    total_scanned_papers = sum(len(area_papers) for area_papers in arxiv_paper_dict.values())
+    filter_health = assess_paper_filter_health(
+        scanned_papers=total_scanned_papers,
+        selected_papers=len(selected_paper_dict),
+        prompt_tokens=total_prompt_tokens,
+        completion_tokens=total_completion_tokens,
+        llm_filtering_enabled=(
+            CONFIG["SELECTION"].getboolean("run_openai")
+            and (
+                CONFIG["SELECTION"].getboolean("run_title_filter")
+                or CONFIG["SELECTION"].getboolean("run_abstract_filter")
+            )
+        ),
+        # The authoritative signal. Token counts mean nothing on the llmcall
+        # chain, which reports none; "we tried N calls and M worked" is the
+        # statement that holds on every backend.
+        llm_calls_attempted=LEDGER.attempted,
+        llm_calls_succeeded=LEDGER.succeeded,
+    )
+    if filter_health.is_outage:
+        print(format_banner(filter_health), file=sys.stderr, flush=True)
+
     daily_topic_bundle = build_daily_topic_bundle(
         (NOW_YEAR, NOW_MONTH, NOW_DAY),
         selected_paper_dict,
         usage={
-            "model": CONFIG["SELECTION"]["model"],
+            # NOT [SELECTION] model. That key names an OpenAI catalogue entry and
+            # is vestigial on every backend except the legacy one: this run
+            # archived "gpt-5.4" while the work was actually done by the llmcall
+            # chain. An archive that names a model nobody called is the same
+            # class of lie as an empty result that claims nothing was relevant,
+            # so report the providers that actually answered.
+            "model": (
+                CONFIG["SELECTION"]["model"]
+                if resolve_backend(CONFIG) == BACKEND_OPENAI
+                else f"{resolve_backend(CONFIG)}:{'+'.join(LEDGER.answering_providers()) or 'none'}"
+            ),
             "prompt_tokens": total_prompt_tokens,
             "completion_tokens": total_completion_tokens,
             "prompt_cost": total_prompt_cost,
             "completion_cost": total_completion_cost,
             "total_arxiv_papers": len(all_entries),
-            "total_scanned_papers": sum(len(area_papers) for area_papers in arxiv_paper_dict.values()),
+            "total_scanned_papers": total_scanned_papers,
             "total_relevant_papers": len(selected_paper_dict),
+            "filter_health": filter_health.to_dict(),
+            "llm": {"backend": describe_backend(CONFIG), **LEDGER.to_dict()},
         },
     )
 

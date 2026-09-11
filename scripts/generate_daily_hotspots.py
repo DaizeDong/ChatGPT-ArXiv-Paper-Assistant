@@ -24,7 +24,12 @@ def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Generate daily AI hotspots from multiple signals.")
     parser.add_argument("--output-root", default="out", help="Output root directory.")
     parser.add_argument("--target-date", "--date", dest="target_date", default=None, help="Target date in YYYY-MM-DD format.")
-    parser.add_argument("--mode", choices=["auto", "openai", "heuristic"], default="auto", help="Override hotspot mode.")
+    parser.add_argument(
+        "--mode", choices=["auto", "llm", "openai", "heuristic"], default="auto",
+        help="Override hotspot mode. 'llm' enriches through the LLM gateway; "
+             "'openai' is its archival alias (no OpenAI call is made); "
+             "'heuristic' calls no model at all.",
+    )
     parser.add_argument("--force", action="store_true", help="Regenerate even when cached raw items exist.")
     parser.add_argument("--stage", default=None, help="Run only this single kernel stage (resume helper).")
     return parser.parse_args()

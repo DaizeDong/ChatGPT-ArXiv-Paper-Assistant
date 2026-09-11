@@ -1,31 +1,23 @@
 ## Relevant Topics
 
-Focus on specialized foundational research that remains worth reading even when it is not a daily hotspot.
+Keep papers whose CORE CONTRIBUTION is Mixture-of-Experts training, or the large-scale training systems and efficiency work that MoE training directly sits on. This is a narrow, specialist feed: precision matters far more than recall.
 
-Do not keep papers only because they are broadly frontier-relevant, widely discussed, or part of a major launch cycle. Broad daily frontier movement belongs in the hotspot digest unless the core contribution strongly matches the specialized topics below.
+Broad frontier movement, model or product launches, and anything whose main contribution is downstream application belong in the hotspot digest, not here. When a paper merely uses MoE or distributed training as an off-the-shelf component, filter it.
 
-1. Architecture and Training Dynamics
-- Keep: work that introduces or analyzes core architectural or computational mechanisms such as MoE routing, attention variants, normalization or residual design, recurrent or state-space sequence modeling, dynamic or modular computation, or training-stability mechanisms.
-- Filter: papers that mainly apply an existing architecture to a new task or benchmark without new mechanistic insight.
+1. MoE Training (primary)
+- Keep: expert routing and gating mechanisms; load balancing and auxiliary losses; expert granularity, fine-grained and shared experts; MoE training stability (loss spikes, router collapse, z-loss and related fixes); expert and hybrid parallelism for MoE; all-to-all dispatch/combine and the communication schedules MoE needs; MoE kernels and grouped-GEMM style implementations; expert capacity, token dropping, and upcycling dense checkpoints into MoE.
+- Filter: papers that train a MoE model to show a downstream result without a new routing, balancing, stability, parallelism, or kernel contribution; MoE used only as a baseline; "mixture of experts" in the classical ensemble or recommender sense.
 
-2. Efficiency, Compression, and Large-Scale Training
-- Keep: quantization, sparsity, pruning, low-rank adaptation, KV-cache or cache design, memory-efficient inference or training, distributed training algorithms, communication or optimizer improvements, and training-system designs that materially change large-model training cost or behavior.
-- Filter: routine infrastructure optimization, deployment work, or straightforward tuning of standard efficiency methods without a clear new algorithmic or systems idea.
+2. Large-Scale Training Systems and Efficiency (adjacent)
+- Keep: distributed training algorithms (data, tensor, pipeline, sequence, and expert parallelism, FSDP and ZeRO-style sharding); optimizers and preconditioners for large-scale pretraining; communication algorithms, overlap, and collective design; training-stability and throughput/MFU work that materially changes what a large training run costs or whether it converges; scaling-law work that directly informs how such runs are configured.
+- Filter: inference-only serving, deployment, or latency work; quantization, pruning, and compression aimed at inference; routine infrastructure tuning without a new algorithmic or systems idea.
 
-3. Representation Learning Theory and Structure
-- Keep: work on feature formation, sparse or dictionary learning, contrastive or self-supervised representation structure, training dynamics, identifiability, or other mechanistic understanding of learned representations.
-- Filter: papers that use representation-learning methods as standard components in downstream applications without new theoretical or methodological content.
-
-4. Memory Structures and Agent Memory Systems
-- Keep: internal or external memory mechanisms, differentiable memory, recurrent or latent memory, long-context memory organization, memory compression or eviction, retrieval as a learned memory mechanism, episodic or semantic memory for agents, memory consolidation, forgetting, and agent memory systems whose core contribution is a new principle for storing, updating, recalling, or reasoning over memory.
-- Filter: standard RAG pipelines, vector-database plumbing, context stuffing, chat-history management, or agent products that add memory without a new memory mechanism, learning principle, or analysis.
-
-5. World Models, Exploration, and Open-Ended Reinforcement Learning
-- Keep: model-based RL, action-conditioned world models, imagination or planning-based agents, open-ended exploration, automatic curriculum or environment generation, continual RL, reward-free skill discovery, and RL methods aimed at learning new behaviors or transferable knowledge through interaction. Also keep foundational work on pre-training agents or world models, foundation world models, generative interactive environments, or theoretical arguments about why world models or exploration are necessary for general-purpose agents.
-- Filter: RLHF, DPO, GRPO, RFT, instruction-following or alignment fine-tuning for LLMs; papers where RL is mainly a post-training optimizer for language models, reasoning traces, or tool-use agents without a new world-model, exploration, or generalization contribution; routine benchmark gains on a fixed environment without a new learning principle.
-
-Usually leave these to the hotspot digest unless the core contribution is clearly foundational:
+Leave these to the hotspot digest unless the core contribution clearly falls in one of the two topics above:
 - major model or product releases
-- broadly trendy agent or tooling launches
+- agent, tooling, and RAG launches
 - benchmark, leaderboard, or evaluation-only papers
+- representation-learning theory, interpretability, and feature-formation analysis
+- memory mechanisms and agent memory systems
+- world models, exploration, and reinforcement learning
+- alignment and post-training (RLHF, DPO, GRPO, RFT, instruction tuning)
 - downstream applications in medical imaging, segmentation, 3D vision, video understanding, information retrieval, summarization, recommendation, machine translation, speech recognition, time series, knowledge graphs, and similar domains

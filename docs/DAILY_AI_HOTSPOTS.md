@@ -129,11 +129,15 @@ class EnrichedItem:
 
 ### 5.2 LLM 批量标注
 
-在 `openai` 模式下，`enrich_items_batch()` 将条目按批次（默认 20 条/批）提交给 LLM，每批提供 index、标题、摘要前 200 字符、来源名称和来源角色。LLM 返回 JSON 数组，包含每个条目的 `event_type`、`entities`、`summary`、`importance` 和 `same_event_as`。
+在 LLM 富化模式（配置写 `llm`，老配置和归档报告里写的 `openai` 是同一件事的别名）下，`enrich_items_batch()` 将条目按批次（默认 20 条/批）提交给模型，每批提供 index、标题、摘要前 200 字符、来源名称和来源角色。模型返回 JSON 数组，包含每个条目的 `event_type`、`entities`、`summary`、`importance` 和 `same_event_as`。
+
+调用不再走 OpenAI HTTP 接口，而是统一经过 `arxiv_assistant/utils/llm_gateway.py`（llmcall 链，失败再退到本仓自带的 `claude -p`），全程不需要 API key。`_chat_completion()` 的返回结构保持 OpenAI chat 的形状，所以上游调用方一行没改。
 
 `same_event_as` 字段是 LLM 标注的核心增值：它允许模型在同一批次内识别"这两条报道说的是同一件事"，为后续 Story 合并提供第一层证据。
 
 单个条目的 LLM 标注失败时，系统 fallback 到启发式标注，确保管线不因个别解析错误中断。LLM 提取的实体与启发式提取的实体会被合并，以提高召回率。
+
+降级是诚实的，但必须看得见：每个条目带 `enrich_source`（`llm` / `heuristic_row_missing` / `heuristic_batch_failed`），整轮的统计写进 score 检查点并一路带到报告的 `enrichment` 字段（`path`、`llm_ok`、批次与条目计数、backend/provider、错误摘要）。`usage.llm` 的 `provider` 和 `billing_model` 也跟着 `llm_ok` 走：没人应答就是 `none` + `disabled`，不再硬写 `OpenAI`。报告顶层的 `mode` 仍沿用历史取值，因为归档报告把它当数据存着；要判断"模型到底跑没跑"，看 `enrichment.path`。归档里 173 份旧报告没有这个字段，读到缺失要当"不知道"，不能当"没跑模型"。
 
 ### 5.3 启发式回退
 
@@ -259,7 +263,7 @@ other            → Other
 - **why_it_matters**：为什么值得关注
 - **key_takeaways**：3-5 个要点
 
-在 `openai` 模式下由 LLM 生成，`heuristic` 模式下从代表性条目的标题和摘要中提取。
+在 LLM 富化模式（`llm`，别名 `openai`）下由模型生成，`heuristic` 模式下从代表性条目的标题和摘要中提取。
 
 ## 10. Web Data 构建与展示
 
@@ -390,7 +394,7 @@ X 是最容易引入噪声的来源，系统对其采用比其他来源更严格
 ## 附录 B：运行命令
 
 ```bash
-# 生成当日热点报告（自动选择 openai/heuristic 模式）
+# 生成当日热点报告（自动选择 LLM 富化 / heuristic 模式）
 python -X utf8 scripts/generate_daily_hotspots.py --mode auto --force
 
 # 从已有 report 重建 web data

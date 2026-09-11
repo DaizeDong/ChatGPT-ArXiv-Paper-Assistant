@@ -155,11 +155,16 @@ def parse_args() -> argparse.Namespace:
     return parser.parse_args()
 
 
-#: Rough resident cost of one remedy job: a python process plus the model
-#: subprocess it spawns. Measured, not guessed -- a backfill was killed at
-#: --jobs 6 and again at --jobs 3 on a 31 GB machine that had only ~5 GB actually
-#: free, because an IDE and a browser held the rest.
-MB_PER_JOB = 1400
+#: Peak resident cost of one remedy job. MEASURED on a running backfill rather
+#: than estimated: the worker python itself holds ~148 MB steady, and the cost
+#: that matters is the model subprocess it spawns per batch, ~400 MB, which is
+#: TRANSIENT. Sampling the steady state alone gives ~150 and would let far too
+#: many jobs start; sampling only during a call gives ~550. This is the peak plus
+#: margin, because the thing that kills a run is the peak, not the average.
+#:
+#: The first estimate here was 1400, guessed rather than measured, and it
+#: throttled the tool to a third of what the machine could carry.
+MB_PER_JOB = 700
 #: Never plan to consume the last of the machine.
 MB_HEADROOM = 2000
 

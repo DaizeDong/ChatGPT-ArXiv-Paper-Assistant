@@ -118,6 +118,17 @@ def parse_args() -> argparse.Namespace:
         help="Print the inferred remedy plan and exit without running any API calls.",
     )
     parser.add_argument(
+        "--skip-done",
+        action="store_true",
+        help=(
+            "Skip dates already rebuilt by a previous remedy run. A day counts as "
+            "done only when its bundle carries a filter_health record, which is "
+            "what a remedied day writes and what a legacy or empty day does not, "
+            "so this resumes a killed run without redoing finished work and "
+            "without mistaking an old empty archive for a completed one."
+        ),
+    )
+    parser.add_argument(
         "--skip-latest-copy",
         action="store_true",
         help=(
@@ -142,6 +153,28 @@ def parse_args() -> argparse.Namespace:
     return parser.parse_args()
 
 
+def already_remedied(output_root: str, remedy_date: DateTuple) -> bool:
+    """True when this date's bundle already carries a remedy health record.
+
+    Presence of `filter_health` is the signal because it is written only by a run
+    that went through the outage gate. File existence alone would be wrong: the
+    80-odd days this backfill exists to repair all HAVE a file, and it is two
+    bytes of nothing.
+    """
+    label = f"{remedy_date[0]:04d}-{remedy_date[1]:02d}-{remedy_date[2]:02d}"
+    path = (
+        Path(output_root) / "json" / f"{remedy_date[0]:04d}-{remedy_date[1]:02d}"
+        / f"{label}-daily-papers.json"
+    )
+    if not path.is_file():
+        return False
+    try:
+        payload = json.loads(path.read_text(encoding="utf-8"))
+    except (json.JSONDecodeError, OSError):
+        return False
+    return bool(payload.get("meta", {}).get("usage", {}).get("filter_health"))
+
+
 def run_plan_in_parallel(plan: RemedyPlan, args: argparse.Namespace) -> int:
     """Fan the plan out over `args.jobs` child processes, one date each.
 
@@ -154,6 +187,12 @@ def run_plan_in_parallel(plan: RemedyPlan, args: argparse.Namespace) -> int:
 
     items = sorted(plan.items())
     print(f"Remedying {len(items)} dates with {args.jobs} concurrent jobs", flush=True)
+    print(
+        "NOTE: each job holds a python process plus its model subprocess. On a "
+        "31 GB machine 6 jobs exhausted memory and the run was killed at 26/112; "
+        "3 is the tested ceiling.",
+        flush=True,
+    )
 
     def run_one(item) -> tuple[str, int, str]:
         remedy_date, (begin_date, end_date) = item
@@ -175,10 +214,17 @@ def run_plan_in_parallel(plan: RemedyPlan, args: argparse.Namespace) -> int:
         return label, proc.returncode, " | ".join(t.strip() for t in tail)
 
     failures: list[str] = []
+    completed = 0
     with concurrent.futures.ThreadPoolExecutor(max_workers=max(1, args.jobs)) as pool:
-        for label, code, tail in pool.map(run_one, items):
+        futures = [pool.submit(run_one, item) for item in items]
+        # as_completed, NOT map: map yields in submission order, so a slow first
+        # date hides every date that finished behind it and the log reads as if
+        # nothing is happening for half an hour.
+        for future in concurrent.futures.as_completed(futures):
+            label, code, tail = future.result()
+            completed += 1
             status = "ok " if code == 0 else "FAIL"
-            print(f"  [{status}] {label}  rc={code}  {tail}", flush=True)
+            print(f"  [{status}] {label}  ({completed}/{len(items)})  rc={code}  {tail}", flush=True)
             if code != 0:
                 failures.append(label)
 
@@ -549,6 +595,17 @@ if __name__ == "__main__":
     parsed_args = parse_args()
     remedy_plan = load_remedy_plan(parsed_args)
     print_plan(remedy_plan)
+
+    if parsed_args.skip_done:
+        before = len(remedy_plan)
+        remedy_plan = {
+            d: w for d, w in remedy_plan.items()
+            if not already_remedied(parsed_args.output_root, d)
+        }
+        print(f"--skip-done: {before - len(remedy_plan)} already remedied, {len(remedy_plan)} to go")
+        if not remedy_plan:
+            print("Nothing left to remedy.")
+            raise SystemExit(0)
 
     if parsed_args.print_plan:
         raise SystemExit(0)

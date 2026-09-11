@@ -442,19 +442,54 @@ class ReaderConfigIsDeclaredEverywhere(unittest.TestCase):
                 self.assertFalse(parser["OUTPUT"].getboolean("push_to_slack"))
                 self.assertIn("push_weekly_to_slack", parser["OUTPUT"])
 
-    def test_narrowed_thresholds_are_applied_everywhere(self):
+    def test_thresholds_agree_across_all_three_configs(self):
+        """The invariant is AGREEMENT, not any particular number.
+
+        These cutoffs get retuned as the topic set changes, so pinning literals
+        here would mean editing this test on every calibration and would pin
+        nothing worth pinning. What actually breaks production is DRIFT: the
+        zero-key profile is copied over config.ini on the deploy host, so a value
+        changed in one file and not the others means the machine that publishes
+        is filtering on numbers nobody chose.
+        """
+        import configparser
+
+        keys = [
+            ("FILTERING", "relevance_cutoff"),
+            ("FILTERING", "novelty_cutoff"),
+            ("HOTSPOTS", "target_topics"),
+            ("HOTSPOTS", "target_watchlist_topics"),
+            ("READER", "delta_score_cutoff"),
+            ("READER", "max_deep_read"),
+            ("READER", "max_skim"),
+            ("LLM", "timeout_s"),
+        ]
+        parsers = {}
+        for rel in self.INI_FILES:
+            parser = configparser.ConfigParser()
+            self.assertTrue(parser.read(REPO_ROOT / rel, encoding="utf-8"), rel)
+            parsers[rel] = parser
+
+        for section, key in keys:
+            values = {rel: p[section].getint(key) for rel, p in parsers.items()}
+            with self.subTest(key=f"[{section}] {key}"):
+                self.assertEqual(
+                    len(set(values.values())), 1,
+                    f"[{section}] {key} drifted across configs: {values}",
+                )
+
+    def test_cutoffs_stay_inside_the_scoring_scale(self):
+        """A cutoff above 10 silently selects nothing, forever, with no error."""
         import configparser
 
         for rel in self.INI_FILES:
             with self.subTest(config=rel):
                 parser = configparser.ConfigParser()
                 parser.read(REPO_ROOT / rel, encoding="utf-8")
-                self.assertEqual(parser["FILTERING"].getint("relevance_cutoff"), 8)
-                self.assertEqual(parser["FILTERING"].getint("novelty_cutoff"), 7)
-                self.assertEqual(parser["HOTSPOTS"].getint("target_topics"), 3)
-                self.assertEqual(
-                    parser["HOTSPOTS"].getint("target_watchlist_topics"), 2
-                )
+                for key in ("relevance_cutoff", "novelty_cutoff"):
+                    value = parser["FILTERING"].getint(key)
+                    self.assertGreaterEqual(value, 1, f"{rel}:{key}")
+                    self.assertLessEqual(value, 10, f"{rel}:{key}")
 
 
 class WeeklyOutputStaysOutOfTheSiteBuilder(unittest.TestCase):

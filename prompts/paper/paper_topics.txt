@@ -1,18 +1,26 @@
 ## Relevant Topics
 
-Keep papers whose CORE CONTRIBUTION is Mixture-of-Experts training, or the large-scale training systems and efficiency work that MoE training directly sits on. This is a narrow, specialist feed: precision matters far more than recall.
+This is a training-side feed. The centre of gravity is Mixture-of-Experts training and the large-scale training systems it sits on; architecture and efficiency work is kept when it bears on how a large model is trained or what it costs to train.
 
-Broad frontier movement, model or product launches, and anything whose main contribution is downstream application belong in the hotspot digest, not here. When a paper merely uses MoE or distributed training as an off-the-shelf component, filter it.
+Keep a paper when its CORE CONTRIBUTION falls in one of the four topics below. Filter it when the topic is merely the setting for a downstream application, a benchmark, or a product result.
 
 1. MoE Training (primary)
-- Keep: expert routing and gating mechanisms; load balancing and auxiliary losses; expert granularity, fine-grained and shared experts; MoE training stability (loss spikes, router collapse, z-loss and related fixes); expert and hybrid parallelism for MoE; all-to-all dispatch/combine and the communication schedules MoE needs; MoE kernels and grouped-GEMM style implementations; expert capacity, token dropping, and upcycling dense checkpoints into MoE.
-- Filter: papers that train a MoE model to show a downstream result without a new routing, balancing, stability, parallelism, or kernel contribution; MoE used only as a baseline; "mixture of experts" in the classical ensemble or recommender sense.
+- Keep: expert routing and gating mechanisms; load balancing, with or without auxiliary losses; expert granularity, fine-grained and shared experts; MoE training stability (loss spikes, router collapse, z-loss and related fixes); expert and hybrid parallelism; all-to-all dispatch/combine and the communication schedules MoE needs; MoE kernels and grouped-GEMM style implementations; expert capacity, token dropping, and upcycling dense checkpoints into MoE.
+- Filter: papers that merely train on top of a MoE model without a new routing, balancing, stability, parallelism, or kernel contribution; "mixture of experts" in the classical ensemble or recommender sense.
 
-2. Large-Scale Training Systems and Efficiency (adjacent)
-- Keep: distributed training algorithms (data, tensor, pipeline, sequence, and expert parallelism, FSDP and ZeRO-style sharding); optimizers and preconditioners for large-scale pretraining; communication algorithms, overlap, and collective design; training-stability and throughput/MFU work that materially changes what a large training run costs or whether it converges; scaling-law work that directly informs how such runs are configured.
-- Filter: inference-only serving, deployment, or latency work; quantization, pruning, and compression aimed at inference; routine infrastructure tuning without a new algorithmic or systems idea.
+2. Large-Scale Training Systems
+- Keep: distributed training algorithms (data, tensor, pipeline, sequence, and expert parallelism, FSDP and ZeRO-style sharding); optimizers and preconditioners for large-scale pretraining; communication algorithms, overlap, and collective design; throughput and MFU work that materially changes what a training run costs or whether it converges; scaling-law work that informs how such runs are configured.
+- Filter: routine infrastructure tuning with no new algorithmic or systems idea.
 
-Leave these to the hotspot digest unless the core contribution clearly falls in one of the two topics above:
+3. Architecture and Training Dynamics
+- Keep: new or analysed architectural mechanisms (attention variants, normalization and residual design, state-space and recurrent sequence modelling, dynamic or modular computation); optimisation and training-dynamics analysis that explains why large models train the way they do.
+- Filter: applying an existing architecture to a new task or benchmark with no mechanistic insight.
+
+4. Efficiency and Compression
+- Keep: quantization, sparsity, pruning, low-rank adaptation, KV-cache and memory-efficient designs, and other work that materially changes the cost of running or training a large model, especially when the mechanism is new rather than a tuned variant.
+- Filter: straightforward application of standard efficiency methods, and deployment or serving engineering with no new idea.
+
+Leave these to the hotspot digest unless the core contribution clearly falls in one of the four topics above:
 - major model or product releases
 - agent, tooling, and RAG launches
 - benchmark, leaderboard, or evaluation-only papers

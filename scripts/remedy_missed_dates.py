@@ -117,7 +117,80 @@ def parse_args() -> argparse.Namespace:
         action="store_true",
         help="Print the inferred remedy plan and exit without running any API calls.",
     )
+    parser.add_argument(
+        "--skip-latest-copy",
+        action="store_true",
+        help=(
+            "Do not refresh the root out/output.md. Set automatically for the "
+            "children of --jobs, where that shared path is a race between "
+            "concurrent dates and means nothing for a historical backfill."
+        ),
+    )
+    parser.add_argument(
+        "--jobs",
+        type=int,
+        default=1,
+        help=(
+            "Remedy this many dates concurrently, each in its own process. Dates "
+            "are independent, so this is the only lever that makes a hundred-day "
+            "backfill finish in hours instead of days. Separate PROCESSES rather "
+            "than threads because the pipeline keeps module-level state (the "
+            "config singleton, the call ledger, the filter's rate-limit counters) "
+            "that is not safe to share."
+        ),
+    )
     return parser.parse_args()
+
+
+def run_plan_in_parallel(plan: RemedyPlan, args: argparse.Namespace) -> int:
+    """Fan the plan out over `args.jobs` child processes, one date each.
+
+    Each child is this same script with --jobs 1 and a single explicit window, so
+    a child never re-infers a window from an output tree its siblings are writing
+    into at the same time.
+    """
+    import concurrent.futures
+    import subprocess
+
+    items = sorted(plan.items())
+    print(f"Remedying {len(items)} dates with {args.jobs} concurrent jobs", flush=True)
+
+    def run_one(item) -> tuple[str, int, str]:
+        remedy_date, (begin_date, end_date) = item
+        label = f"{remedy_date[0]:04d}-{remedy_date[1]:02d}-{remedy_date[2]:02d}"
+        cmd = [
+            sys.executable, "-X", "utf8", str(Path(__file__).resolve()),
+            "--date", label,
+            "--begin-date", f"{begin_date[0]:04d}-{begin_date[1]:02d}-{begin_date[2]:02d}",
+            "--end-date", f"{end_date[0]:04d}-{end_date[1]:02d}-{end_date[2]:02d}",
+            "--output-root", args.output_root,
+            "--jobs", "1",
+            "--skip-latest-copy",
+        ]
+        proc = subprocess.run(
+            cmd, capture_output=True, text=True, encoding="utf-8", errors="replace",
+            env={**os.environ, "PYTHONIOENCODING": "utf-8"},
+        )
+        tail = (proc.stdout or "").strip().splitlines()[-3:]
+        return label, proc.returncode, " | ".join(t.strip() for t in tail)
+
+    failures: list[str] = []
+    with concurrent.futures.ThreadPoolExecutor(max_workers=max(1, args.jobs)) as pool:
+        for label, code, tail in pool.map(run_one, items):
+            status = "ok " if code == 0 else "FAIL"
+            print(f"  [{status}] {label}  rc={code}  {tail}", flush=True)
+            if code != 0:
+                failures.append(label)
+
+    if failures:
+        print(
+            f"\n{len(failures)} of {len(items)} dates FAILED and must be redone:\n  "
+            + ", ".join(failures),
+            file=sys.stderr, flush=True,
+        )
+        return 1
+    print(f"\nAll {len(items)} dates remedied.", flush=True)
+    return 0
 
 
 def load_remedy_plan(args: argparse.Namespace) -> RemedyPlan:
@@ -152,7 +225,7 @@ def print_plan(plan: RemedyPlan) -> None:
         )
 
 
-def run_remedy_plan(plan: RemedyPlan, output_root: str, build_site: bool) -> None:
+def run_remedy_plan(plan: RemedyPlan, output_root: str, build_site: bool, skip_latest_copy: bool = False) -> int:
     from arxiv_assistant.apis.arxiv import get_papers_from_arxiv
     from arxiv_assistant.apis.semantic_scholar import get_authors
     from arxiv_assistant.environment import (
@@ -176,14 +249,30 @@ def run_remedy_plan(plan: RemedyPlan, output_root: str, build_site: bool) -> Non
     from arxiv_assistant.renderers.build_multipage_site import build_multipage_site
     from arxiv_assistant.renderers.paper.render_daily import render_daily_md
     from arxiv_assistant.utils.io import copy_file_or_dir, create_dir, delete_file_or_dir
+    from arxiv_assistant.utils.llm_gateway import (
+        BACKEND_OPENAI,
+        LEDGER,
+        describe_backend,
+        resolve_backend,
+    )
+    from arxiv_assistant.utils.pipeline_health import assess_paper_filter_health, format_banner
     from arxiv_assistant.utils.utils import EnhancedJSONEncoder
 
     CONFIG["OUTPUT"]["output_path"] = output_root
+    print(describe_backend(CONFIG), flush=True)
+
+    # Days whose scoring never actually ran. Collected rather than merely printed:
+    # over a hundred-day backfill a per-day banner scrolls past, and the operator
+    # needs one list at the end saying which days must be redone.
+    outage_dates: list[str] = []
 
     for remedy_date, (begin_date, end_date) in sorted(plan.items()):
         print("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@")
         print(f"Start remedying for date: {remedy_date}")
         print(f"Searching date range: {begin_date} - {end_date}")
+        # Per-day ledger: the archive each day writes must describe that day's
+        # calls, not the running total since the process started.
+        LEDGER.reset()
 
         remedy_year, remedy_month, remedy_day = remedy_date
 
@@ -319,18 +408,49 @@ def run_remedy_plan(plan: RemedyPlan, output_root: str, build_site: bool) -> Non
 
         selected_paper_dict = sort_paper_mapping_for_daily_display(selected_paper_dict)
         filtered_paper_dict = ensure_topic_fields_for_mapping(filtered_paper_dict)
+        # Same outage gate main.py carries. A backfill is exactly where a silent
+        # failure is most expensive: it writes an authoritative-looking archive
+        # for a day that can no longer be distinguished from a real one, and it
+        # does so for a hundred days in a row without anyone watching.
+        total_scanned_papers = sum(len(area_papers) for area_papers in arxiv_paper_dict.values())
+        filter_health = assess_paper_filter_health(
+            scanned_papers=total_scanned_papers,
+            selected_papers=len(selected_paper_dict),
+            prompt_tokens=total_prompt_tokens,
+            completion_tokens=total_completion_tokens,
+            llm_filtering_enabled=(
+                CONFIG["SELECTION"].getboolean("run_openai")
+                and (
+                    CONFIG["SELECTION"].getboolean("run_title_filter")
+                    or CONFIG["SELECTION"].getboolean("run_abstract_filter")
+                )
+            ),
+            llm_calls_attempted=LEDGER.attempted,
+            llm_calls_succeeded=LEDGER.succeeded,
+        )
+        if filter_health.is_outage:
+            print(format_banner(filter_health), file=sys.stderr, flush=True)
+            outage_dates.append(f"{remedy_year}-{remedy_month:02d}-{remedy_day:02d}")
+
         daily_topic_bundle = build_daily_topic_bundle(
             remedy_date,
             selected_paper_dict,
             usage={
-                "model": CONFIG["SELECTION"]["model"],
+                "model": (
+                    CONFIG["SELECTION"]["model"]
+                    if resolve_backend(CONFIG) == BACKEND_OPENAI
+                    else f"{resolve_backend(CONFIG)}:{'+'.join(LEDGER.answering_providers()) or 'none'}"
+                ),
                 "prompt_tokens": total_prompt_tokens,
                 "completion_tokens": total_completion_tokens,
                 "prompt_cost": total_prompt_cost,
                 "completion_cost": total_completion_cost,
                 "total_arxiv_papers": len(all_entries),
-                "total_scanned_papers": sum(len(area_papers) for area_papers in arxiv_paper_dict.values()),
+                "total_scanned_papers": total_scanned_papers,
                 "total_relevant_papers": len(selected_paper_dict),
+                "filter_health": filter_health.to_dict(),
+                "llm": {"backend": describe_backend(CONFIG), **LEDGER.to_dict()},
+                "remedied": True,
             },
         )
 
@@ -390,11 +510,30 @@ def run_remedy_plan(plan: RemedyPlan, output_root: str, build_site: bool) -> Non
             else:
                 push_to_slack(selected_paper_dict)
 
-        copy_file_or_dir(output_md_file_format.format("output.md"), CONFIG["OUTPUT"]["output_path"], print_info=True)
-        delete_file_or_dir(os.path.join(CONFIG["OUTPUT"]["output_path"], "output.md"))
-        os.rename(
-            os.path.join(CONFIG["OUTPUT"]["output_path"], os.path.basename(output_md_file_format.format("output.md"))),
-            os.path.join(CONFIG["OUTPUT"]["output_path"], "output.md"),
+        # The root out/output.md is a "most recent run" convenience copy. Under
+        # --jobs it is a RACE: every child copies, deletes and renames the same
+        # path, so one child can delete the file another is about to rename and
+        # fail a date that actually scored fine. It is also meaningless for a
+        # backfill, where "most recent" would just be whichever historical date
+        # happened to finish last. The per-date file under md/ is the real
+        # artifact and is written either way.
+        if skip_latest_copy:
+            print("Skipping the root output.md copy (parallel backfill)")
+        else:
+            copy_file_or_dir(output_md_file_format.format("output.md"), CONFIG["OUTPUT"]["output_path"], print_info=True)
+            delete_file_or_dir(os.path.join(CONFIG["OUTPUT"]["output_path"], "output.md"))
+            os.rename(
+                os.path.join(CONFIG["OUTPUT"]["output_path"], os.path.basename(output_md_file_format.format("output.md"))),
+                os.path.join(CONFIG["OUTPUT"]["output_path"], "output.md"),
+            )
+
+    if outage_dates:
+        print("", file=sys.stderr)
+        print(
+            f"REMEDY INCOMPLETE: scoring never ran for {len(outage_dates)} of "
+            f"{len(plan)} dates. These archives were written EMPTY and are not "
+            f"evidence that nothing was relevant:\n  " + ", ".join(outage_dates),
+            file=sys.stderr, flush=True,
         )
 
     if build_site:
@@ -402,11 +541,24 @@ def run_remedy_plan(plan: RemedyPlan, output_root: str, build_site: bool) -> Non
         if site_root is not None:
             print(f"Built multipage site at {site_root}")
 
+    # Non-zero when any day failed, so a batch driver and CI can both see it.
+    return 1 if outage_dates else 0
+
 
 if __name__ == "__main__":
     parsed_args = parse_args()
     remedy_plan = load_remedy_plan(parsed_args)
     print_plan(remedy_plan)
 
-    if not parsed_args.print_plan:
-        run_remedy_plan(remedy_plan, parsed_args.output_root, parsed_args.build_site)
+    if parsed_args.print_plan:
+        raise SystemExit(0)
+    if parsed_args.jobs > 1 and len(remedy_plan) > 1:
+        raise SystemExit(run_plan_in_parallel(remedy_plan, parsed_args))
+    raise SystemExit(
+        run_remedy_plan(
+            remedy_plan,
+            parsed_args.output_root,
+            parsed_args.build_site,
+            skip_latest_copy=parsed_args.skip_latest_copy,
+        ) or 0
+    )

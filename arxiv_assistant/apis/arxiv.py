@@ -6,10 +6,74 @@ from xml.etree import ElementTree
 
 import feedparser
 import requests
+import threading
+import time
 import retry
 
 from arxiv_assistant.environment import OUTPUT_DEBUG_FILE_FORMAT
 from arxiv_assistant.utils.utils import Paper, normalize_whitespace
+
+
+#: Read timeout for arXiv API/RSS calls, in seconds.
+#:
+#: This was 10. The API query asks for max_results=10000, and a response that
+#: size routinely takes longer than ten seconds -- more so when several backfill
+#: workers query concurrently. MEASURED: during a parallel backfill twelve
+#: consecutive dates died with requests.exceptions.ReadTimeout after exhausting
+#: all three retries, losing the whole day each time, because the timeout was
+#: shorter than a normal response rather than because anything was wrong.
+#: arXiv asks callers to be patient rather than aggressive; 120s is patient.
+ARXIV_READ_TIMEOUT_S = 120
+
+
+
+#: arXiv asks API callers for roughly one request every three seconds. A parallel
+#: backfill blows straight through that: each date queries once per category, so
+#: N workers produce a burst of 2N. Being throttled is not a transient blip --
+#: once 429s start, every worker keeps earning more of them, and the plain
+#: retry decorator's fixed delay just re-offends on schedule.
+ARXIV_MIN_INTERVAL_S = 3.0
+_arxiv_last_call = 0.0
+_arxiv_lock = threading.Lock()
+
+
+def _arxiv_get(url: str):
+    """GET an arXiv URL, paced and 429-aware.
+
+    Two behaviours the bare requests.get did not have:
+
+    * A process-wide minimum interval between calls, so concurrent workers in
+      one process queue rather than burst. (Separate PROCESSES still burst past
+      each other; concurrency there has to stay low, which is why the backfill
+      driver clamps it.)
+    * 429 handling with a long, escalating wait that honours Retry-After when
+      the server sends it. A 429 answered by an immediate retry is worse than
+      no retry: it extends the penalty instead of clearing it.
+    """
+    global _arxiv_last_call
+    for attempt in range(4):
+        with _arxiv_lock:
+            wait = ARXIV_MIN_INTERVAL_S - (time.monotonic() - _arxiv_last_call)
+            if wait > 0:
+                time.sleep(wait)
+            _arxiv_last_call = time.monotonic()
+
+        response = requests.get(url, timeout=ARXIV_READ_TIMEOUT_S)
+        if response.status_code != 429:
+            response.raise_for_status()
+            return response
+
+        retry_after = response.headers.get("Retry-After")
+        try:
+            delay = float(retry_after) if retry_after else 0.0
+        except (TypeError, ValueError):
+            delay = 0.0
+        delay = max(delay, 30.0 * (2 ** attempt))
+        print(f"arXiv returned 429; backing off {delay:.0f}s (attempt {attempt + 1}/4)")
+        time.sleep(delay)
+
+    response.raise_for_status()  # out of attempts: surface the 429 rather than hide it
+    return response
 
 
 @retry.retry(tries=3, delay=30.0)
@@ -40,8 +104,7 @@ def get_papers_from_arxiv_api(
 
     url = f"{base_url}?search_query={area_query}+AND+{date_query}&start=0&max_results=10000"
     print(f"Getting papers from {url}")
-    response = requests.get(url, timeout=10)
-    response.raise_for_status()
+    response = _arxiv_get(url)
     if dump_debug_file:
         with open(OUTPUT_DEBUG_FILE_FORMAT.format(f"raw_content_{area}.xml"), "w", encoding="utf-8") as outfile:
             outfile.write(response.text)
@@ -100,8 +163,7 @@ def get_papers_from_arxiv_rss(
     # get the list of entries
     url = f"https://export.arxiv.org/rss/{area}"
     print(f"Getting papers from {url}")
-    response = requests.get(url, timeout=10)
-    response.raise_for_status()
+    response = _arxiv_get(url)
     feed = feedparser.parse(response.text)
     if dump_debug_file:
         with open(OUTPUT_DEBUG_FILE_FORMAT.format(f"raw_content_{area}.rss"), "w", encoding="utf-8") as outfile:

@@ -155,16 +155,17 @@ def parse_args() -> argparse.Namespace:
     return parser.parse_args()
 
 
-#: Peak resident cost of one remedy job. MEASURED on a running backfill rather
-#: than estimated: the worker python itself holds ~148 MB steady, and the cost
-#: that matters is the model subprocess it spawns per batch, ~400 MB, which is
-#: TRANSIENT. Sampling the steady state alone gives ~150 and would let far too
-#: many jobs start; sampling only during a call gives ~550. This is the peak plus
-#: margin, because the thing that kills a run is the peak, not the average.
+#: Peak resident cost of one remedy job, MEASURED against a running backfill by
+#: sampling the whole process subtree (worker python + the model subprocess it
+#: spawns per batch) every 4s and keeping the maximum: 1124 MB across 3 jobs,
+#: so ~375. Set to 400 with margin.
 #:
-#: The first estimate here was 1400, guessed rather than measured, and it
-#: throttled the tool to a third of what the machine could carry.
-MB_PER_JOB = 700
+#: Two earlier values here were wrong in opposite directions and both were
+#: guesses. 1400 throttled the tool to a third of what the machine could carry;
+#: 700 was still nearly double. Sampling the STEADY state alone gives ~113 and
+#: would let far too many jobs start, because what kills a run is the moment
+#: every worker happens to hold a model subprocess at once.
+MB_PER_JOB = 400
 #: Never plan to consume the last of the machine.
 MB_HEADROOM = 2000
 
@@ -280,7 +281,17 @@ def run_plan_in_parallel(plan: RemedyPlan, args: argparse.Namespace) -> int:
             cmd, capture_output=True, text=True, encoding="utf-8", errors="replace",
             env={**os.environ, "PYTHONIOENCODING": "utf-8"},
         )
-        tail = (proc.stdout or "").strip().splitlines()[-3:]
+        # On success the last few stdout lines are enough. On FAILURE they are
+        # actively misleading: the traceback goes to stderr, so keeping only
+        # stdout reports the last thing that WORKED and hides the reason. A
+        # twelve-date failure run was undiagnosable for exactly this reason --
+        # every line said "Getting papers from ..." and the ReadTimeout that
+        # actually killed them was discarded here.
+        if proc.returncode == 0:
+            tail = (proc.stdout or "").strip().splitlines()[-3:]
+        else:
+            err = (proc.stderr or "").strip().splitlines()
+            tail = err[-4:] if err else (proc.stdout or "").strip().splitlines()[-3:]
         return label, proc.returncode, " | ".join(t.strip() for t in tail)
 
     failures: list[str] = []

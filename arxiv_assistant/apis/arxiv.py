@@ -50,6 +50,20 @@ _arxiv_last_call = 0.0
 _arxiv_lock = threading.Lock()
 
 
+def pace_arxiv_request() -> None:
+    """Block until this process is allowed to make another arXiv request.
+
+    Public because the OAI-PMH harvester talks to the same host and must share
+    one interval with the Atom API rather than keep a second, independent clock.
+    """
+    global _arxiv_last_call
+    with _arxiv_lock:
+        wait = ARXIV_MIN_INTERVAL_S - (time.monotonic() - _arxiv_last_call)
+        if wait > 0:
+            time.sleep(wait)
+        _arxiv_last_call = time.monotonic()
+
+
 def _arxiv_get(url: str):
     """GET an arXiv URL, paced and 429-aware.
 
@@ -63,13 +77,8 @@ def _arxiv_get(url: str):
       the server sends it. A 429 answered by an immediate retry is worse than
       no retry: it extends the penalty instead of clearing it.
     """
-    global _arxiv_last_call
     for attempt in range(4):
-        with _arxiv_lock:
-            wait = ARXIV_MIN_INTERVAL_S - (time.monotonic() - _arxiv_last_call)
-            if wait > 0:
-                time.sleep(wait)
-            _arxiv_last_call = time.monotonic()
+        pace_arxiv_request()
 
         response = requests.get(url, timeout=ARXIV_READ_TIMEOUT_S)
         if response.status_code != 429:
@@ -292,6 +301,45 @@ def get_papers_from_arxiv(
                 end_date,
                 force_primary,
                 debug_messages,
+            )
+            all_entries.extend(entries)
+            arxiv_paper_dict[area] = papers
+
+    elif source == "corpus":
+        # A locally harvested corpus, indexed by SUBMISSION date. The only
+        # source that is complete for an old date: see arxiv_assistant/apis/corpus.py.
+        from arxiv_assistant.apis.corpus import get_papers_from_corpus
+
+        print(f"Using the local arXiv corpus to get papers...")
+        if begin_date is None or end_date is None:
+            raise ValueError(f"Both `begin_date` and `end_date` arguments are required for \"corpus\" source")
+        for area in area_list:
+            entries, papers = get_papers_from_corpus(
+                area,
+                begin_date,
+                end_date,
+                force_primary,
+                debug_messages,
+            )
+            all_entries.extend(entries)
+            arxiv_paper_dict[area] = papers
+
+    elif source == "oai":
+        # arXiv's bulk/date-ranged harvesting interface. Same shape as "api",
+        # separate rate limit, and the one the manual points a backfill at.
+        from arxiv_assistant.apis.arxiv_oai import get_papers_from_arxiv_oai
+
+        print(f"Using arXiv OAI-PMH to get papers...")
+        if begin_date is None or end_date is None:
+            raise ValueError(f"Both `begin_date` and `end_date` arguments are required for \"oai\" source")
+        for area in area_list:
+            entries, papers = get_papers_from_arxiv_oai(
+                area,
+                begin_date,
+                end_date,
+                force_primary,
+                debug_messages,
+                dump_debug_file,
             )
             all_entries.extend(entries)
             arxiv_paper_dict[area] = papers

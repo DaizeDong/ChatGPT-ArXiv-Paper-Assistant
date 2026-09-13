@@ -152,6 +152,21 @@ def parse_args() -> argparse.Namespace:
             "at startup against actually-free memory (see MB_PER_JOB)."
         ),
     )
+    parser.add_argument(
+        "--source",
+        choices=("corpus", "oai", "api"),
+        default="corpus",
+        help=(
+            "Where to get the window's papers. Default \"corpus\" reads a "
+            "locally harvested corpus indexed by SUBMISSION date, which is the "
+            "only source that stays complete for an old date: both network "
+            "sources lose papers that were revised after the date being rebuilt "
+            "(measured), and the search endpoint additionally rate limited this "
+            "host for hours mid-backfill. \"oai\" harvests over the network, "
+            "\"api\" is the interactive Atom search endpoint; use either only to "
+            "reproduce an old run or when no corpus has been built."
+        ),
+    )
     return parser.parse_args()
 
 
@@ -276,6 +291,10 @@ def run_plan_in_parallel(plan: RemedyPlan, args: argparse.Namespace) -> int:
             "--output-root", args.output_root,
             "--jobs", "1",
             "--skip-latest-copy",
+            # The child re-parses its own args, so a source chosen on the parent
+            # is NOT inherited: without this the fan-out would quietly fall back
+            # to the default while the parent reported the source it was told.
+            "--source", getattr(args, "source", "corpus"),
         ]
         proc = subprocess.run(
             cmd, capture_output=True, text=True, encoding="utf-8", errors="replace",
@@ -428,7 +447,7 @@ def run_remedy_plan(plan: RemedyPlan, output_root: str, build_site: bool, skip_l
 
         all_entries, arxiv_paper_dict = get_papers_from_arxiv(
             CONFIG,
-            source="api",
+            source=getattr(args, "source", "corpus"),
             begin_date=begin_date,
             end_date=end_date,
         )

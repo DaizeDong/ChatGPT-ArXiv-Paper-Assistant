@@ -156,8 +156,14 @@ def get_papers_from_arxiv_oai(
     oai_set = area.split(".")[0]
     begin_string = _date_string(begin_date)
     end_string = _date_string(end_date)
+    # Clamped to today: arXiv answers `badArgument: until date too late` for a
+    # future datestamp, so the lag window would break the source outright on
+    # any recent date -- the exact case a daily run would hit.
     harvest_until = _date_string(
-        date_to_tuple(tuple_to_date(end_date) + timedelta(days=OAI_DATESTAMP_LAG_DAYS))
+        date_to_tuple(min(
+            tuple_to_date(end_date) + timedelta(days=OAI_DATESTAMP_LAG_DAYS),
+            date.today(),
+        ))
     )
 
     params = {

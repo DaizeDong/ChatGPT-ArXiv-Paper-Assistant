@@ -33,6 +33,19 @@ ARXIV_READ_TIMEOUT_S = 120
 #: once 429s start, every worker keeps earning more of them, and the plain
 #: retry decorator's fixed delay just re-offends on schedule.
 ARXIV_MIN_INTERVAL_S = 3.0
+
+#: How many results to ask for in ONE API call.
+#:
+#: arXiv's API user manual asks callers to page through large result sets "in
+#: slices of 2000" rather than demand the whole set at once. This module asked
+#: for max_results=10000 -- five times that slice -- and a backfill issues one
+#: such call per category per date. MEASURED 2026-09-12: after such a run the
+#: API endpoint answered 429 to this host for hours, including to a
+#: max_results=1 probe, while the RSS endpoint on the same host kept answering
+#: 200. The penalty was earned by how the API was being asked, not by the
+#: machine being blocked outright, so the fix is to ask the way the manual says.
+ARXIV_PAGE_SIZE = 2000
+
 _arxiv_last_call = 0.0
 _arxiv_lock = threading.Lock()
 
@@ -102,17 +115,31 @@ def get_papers_from_arxiv_api(
     date_query = f"submittedDate:[{begin_date_string}0000+TO+{end_date_string}2359]"
     area_query = f"cat:{area}"
 
-    url = f"{base_url}?search_query={area_query}+AND+{date_query}&start=0&max_results=10000"
-    print(f"Getting papers from {url}")
-    response = _arxiv_get(url)
-    if dump_debug_file:
-        with open(OUTPUT_DEBUG_FILE_FORMAT.format(f"raw_content_{area}.xml"), "w", encoding="utf-8") as outfile:
-            outfile.write(response.text)
+    # Page through the result set in ARXIV_PAGE_SIZE slices. _arxiv_get already
+    # keeps the required interval between calls, so paging costs wall clock, not
+    # politeness. A day of one category is normally well under one page, which
+    # makes the loop a single request in the common case.
+    entries = []
+    start = 0
+    while True:
+        url = f"{base_url}?search_query={area_query}+AND+{date_query}&start={start}&max_results={ARXIV_PAGE_SIZE}"
+        print(f"Getting papers from {url}")
+        response = _arxiv_get(url)
+        if dump_debug_file:
+            with open(OUTPUT_DEBUG_FILE_FORMAT.format(f"raw_content_{area}_{start}.xml"), "w", encoding="utf-8") as outfile:
+                outfile.write(response.text)
 
-    # Parse the XML response
-    root = ElementTree.fromstring(response.text)
+        # Parse the XML response
+        root = ElementTree.fromstring(response.text)
+        page = root.findall("{http://www.w3.org/2005/Atom}entry")
+        entries.extend(page)
 
-    entries = root.findall("{http://www.w3.org/2005/Atom}entry")
+        # A short page is the last page. Paging until an EMPTY page instead
+        # would spend one extra request per area on every single run.
+        if len(page) < ARXIV_PAGE_SIZE:
+            break
+        start += ARXIV_PAGE_SIZE
+
     if len(entries) == 0:
         print(f"No entries found for {area}")
         return [], []

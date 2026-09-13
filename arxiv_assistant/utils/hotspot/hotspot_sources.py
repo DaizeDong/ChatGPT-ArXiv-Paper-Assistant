@@ -4,10 +4,13 @@ import json
 from contextlib import contextmanager
 from datetime import UTC, datetime, timedelta
 from pathlib import Path
-from typing import Any
+from typing import TYPE_CHECKING, Any
 from urllib.parse import urljoin, urlsplit, urlunsplit
 
 import requests
+
+if TYPE_CHECKING:  # imported for annotations only; keeps the module import-cycle free
+    from arxiv_assistant.utils.hotspot.hotspot_schema import HotspotItem
 
 
 USER_AGENT = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36"

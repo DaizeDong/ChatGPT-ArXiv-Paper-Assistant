@@ -371,7 +371,7 @@ def print_plan(plan: RemedyPlan) -> None:
         )
 
 
-def run_remedy_plan(plan: RemedyPlan, output_root: str, build_site: bool, skip_latest_copy: bool = False) -> int:
+def run_remedy_plan(plan: RemedyPlan, output_root: str, build_site: bool, skip_latest_copy: bool = False, source: str = "corpus") -> int:
     from arxiv_assistant.apis.arxiv import get_papers_from_arxiv
     from arxiv_assistant.apis.semantic_scholar import get_authors
     from arxiv_assistant.environment import (
@@ -447,7 +447,7 @@ def run_remedy_plan(plan: RemedyPlan, output_root: str, build_site: bool, skip_l
 
         all_entries, arxiv_paper_dict = get_papers_from_arxiv(
             CONFIG,
-            source=getattr(args, "source", "corpus"),
+            source=source,
             begin_date=begin_date,
             end_date=end_date,
         )
@@ -717,5 +717,6 @@ if __name__ == "__main__":
             parsed_args.output_root,
             parsed_args.build_site,
             skip_latest_copy=parsed_args.skip_latest_copy,
+            source=parsed_args.source,
         ) or 0
     )

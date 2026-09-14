@@ -28,6 +28,18 @@ def render_summary_table(
     total_tokens = prompt_tokens + completion_tokens
     total_cost = prompt_cost + completion_cost
 
+    # A CLI-backed provider returns an answer and no accounting. Printing "0"
+    # and "$0.00" for that is not a cheap run, it is an UNMEASURED one, and the
+    # two must not look alike: 112 rebuilt days published "$0.00" as though the
+    # work had been free. When nothing was reported, say nothing was reported.
+    measured = prompt_tokens > 0 or completion_tokens > 0
+    if measured:
+        token_cells = [str(prompt_tokens), str(completion_tokens), str(total_tokens)]
+        cost_cells = [f"${prompt_cost:.2f}", f"${completion_cost:.2f}", f"${total_cost:.2f}"]
+    else:
+        token_cells = ["not reported"] * 3
+        cost_cells = ["not reported"] * 3
+
     return "\n".join(
         [
             "<table>",
@@ -51,18 +63,18 @@ def render_summary_table(
             "        <tr>",
             f"            <td rowspan=\"2\" align=\"center\"><code>{escape(model)}</code></td>",
             "            <td align=\"center\"><strong>Tokens</strong></td>",
-            f"            <td align=\"center\">{prompt_tokens}</td>",
-            f"            <td align=\"center\">{completion_tokens}</td>",
-            f"            <td align=\"center\">{total_tokens}</td>",
+            f"            <td align=\"center\">{token_cells[0]}</td>",
+            f"            <td align=\"center\">{token_cells[1]}</td>",
+            f"            <td align=\"center\">{token_cells[2]}</td>",
             f"            <td rowspan=\"2\" align=\"center\">{total_arxiv_papers}</td>",
             f"            <td rowspan=\"2\" align=\"center\">{total_scanned_papers}</td>",
             f"            <td rowspan=\"2\" align=\"center\">{total_relevant_papers}</td>",
             "        </tr>",
             "        <tr>",
             "            <td align=\"center\"><strong>Cost</strong></td>",
-            f"            <td align=\"center\">${prompt_cost:.2f}</td>",
-            f"            <td align=\"center\">${completion_cost:.2f}</td>",
-            f"            <td align=\"center\">${total_cost:.2f}</td>",
+            f"            <td align=\"center\">{cost_cells[0]}</td>",
+            f"            <td align=\"center\">{cost_cells[1]}</td>",
+            f"            <td align=\"center\">{cost_cells[2]}</td>",
             "        </tr>",
             "    </tbody>",
             "</table>",

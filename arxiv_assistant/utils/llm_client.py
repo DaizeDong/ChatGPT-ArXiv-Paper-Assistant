@@ -17,7 +17,7 @@ from typing import Any
 
 _DEFAULT_BASE_URL = "https://api.openai.com/v1"
 _DEFAULT_LLM_MODEL = "gpt-5.4"
-_DEFAULT_AGENT_MODEL = "claude-sonnet-4-6"
+_DEFAULT_AGENT_MODEL = "claude-sonnet-5"
 
 
 def resolve_openai_config(*, api_key: str | None = None, base_url: str | None = None) -> tuple[str, str]:

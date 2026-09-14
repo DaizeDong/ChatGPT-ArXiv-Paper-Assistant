@@ -255,7 +255,7 @@ def fetch_hotspot_items(
     freshness_hours: int,
     *,
     result_limit: int = 40,
-    model: str = "claude-sonnet-4-6",
+    model: str = "claude-sonnet-5",
     timeout_s: int = 300,
     use_market_intel: bool = True,
     market_intel_dir: Optional[str] = None,

@@ -122,7 +122,7 @@ def fetch_source_via_browser(
     freshness_hours: int,
     *,
     result_limit: int = 15,
-    model: str = "claude-sonnet-4-6",
+    model: str = "claude-sonnet-5",
     timeout_s: int = 300,
     agent_fn: Callable[..., dict[str, Any]] = run_agent,
     url_check_fn: Optional[Callable[[str], bool]] = None,

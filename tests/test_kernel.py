@@ -526,7 +526,8 @@ class TestSynthesizeTransport(unittest.TestCase):
         for placeholder in ("", "claude-code-subagent"):
             with unittest.mock.patch.object(synth, "run_agent", return_value=agent_out) as ra:
                 synth.synthesize_bilingual([self._topic()], model=placeholder, temperature=0)
-            self.assertEqual(ra.call_args.kwargs["model"], "claude-sonnet-4-6")
+            from arxiv_assistant.utils.models import DEFAULT_AGENT_MODEL
+            self.assertEqual(ra.call_args.kwargs["model"], DEFAULT_AGENT_MODEL)
             # timeout pinned to 180s; deterministic (no temperature kwarg).
             self.assertEqual(ra.call_args.kwargs["timeout_s"], 180)
             self.assertNotIn("temperature", ra.call_args.kwargs)

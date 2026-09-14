@@ -244,7 +244,15 @@ if __name__ == "__main__":
     if CONFIG["OUTPUT"].getboolean("dump_md"):
         head_table = {
             "html": render_summary_table(
-                model=CONFIG["SELECTION"]["model"],
+                # What ANSWERED, not what the config nominates. The config key
+                # still names an OpenAI catalogue model that this pipeline no
+                # longer calls, so printing it credited every digest to a model
+                # that never ran. Same string the bundle records in usage.model.
+                model=(
+                    CONFIG["SELECTION"]["model"]
+                    if resolve_backend(CONFIG) == BACKEND_OPENAI
+                    else f"{resolve_backend(CONFIG)}:{'+'.join(LEDGER.answering_providers()) or 'none'}"
+                ),
                 prompt_tokens=total_prompt_tokens,
                 completion_tokens=total_completion_tokens,
                 prompt_cost=total_prompt_cost,

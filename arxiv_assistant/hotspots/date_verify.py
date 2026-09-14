@@ -55,7 +55,7 @@ _TIER2_CONFIDENCE_FLOOR = 0.6
 # Stage 3: deterministic verdict helpers (INV6, §B.3)
 # ---------------------------------------------------------------------------
 
-DATEVERIFY_MODEL_ID = "claude-opus-4-8"
+DATEVERIFY_MODEL_ID = "claude-opus-5"
 
 
 def _parse_iso(value: str | None) -> datetime | None:

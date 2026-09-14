@@ -311,7 +311,7 @@ def run_agent(
         prompt:    The full prompt string passed to ``claude -p``.
         schema:    Minimal JSON-Schema-like dict used by ``_validate_schema``
                    to check the returned dict (required keys + property types).
-        model:     Model identifier string (e.g. ``"claude-opus-4-8"``).
+        model:     Model identifier string (e.g. ``"claude-opus-5"``).
                    Pinned per-consumer so a single config field controls it.
         tools:     Optional list of tool names passed via ``--allowedTools``.
                    When *None* or empty, the flag is omitted.

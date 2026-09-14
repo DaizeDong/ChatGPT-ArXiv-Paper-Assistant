@@ -213,15 +213,23 @@ class TestModelPlaceholderResolution(unittest.TestCase):
 
         self.assertEqual(captured_kwargs["model"], "claude-opus-4-8")
 
-    def test_default_real_model_is_sonnet(self) -> None:
-        """Without config override, the placeholder resolves to claude-sonnet-4-6."""
+    def test_default_real_model_is_the_shared_default(self) -> None:
+        """Without config override, the placeholder resolves to the shared default.
+
+        Asserted against arxiv_assistant.utils.models rather than a literal:
+        pinning the literal here is what made a model generation turnover a
+        nine-file edit plus a test edit. The retired names are asserted absent
+        so this cannot pass by both sides drifting together.
+        """
         from arxiv_assistant.apis.claude_agent import _resolve_model, _DEFAULT_REAL_MODEL
-        self.assertEqual(_DEFAULT_REAL_MODEL, "claude-sonnet-4-6")
+        from arxiv_assistant.utils.models import DEFAULT_AGENT_MODEL
+        self.assertEqual(_DEFAULT_REAL_MODEL, DEFAULT_AGENT_MODEL)
+        self.assertNotIn(DEFAULT_AGENT_MODEL, {"claude-sonnet-4-6", "claude-opus-4-8"})
 
         # Patch the environment import to simulate missing config.
         with patch.dict("sys.modules", {"arxiv_assistant.environment": None}):
             resolved = _resolve_model("claude-code-subagent")
-        self.assertEqual(resolved, "claude-sonnet-4-6")
+        self.assertEqual(resolved, DEFAULT_AGENT_MODEL)
 
 
 if __name__ == "__main__":

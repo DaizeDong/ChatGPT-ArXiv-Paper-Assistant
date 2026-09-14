@@ -393,7 +393,7 @@ def run_remedy_plan(plan: RemedyPlan, output_root: str, build_site: bool, skip_l
     from arxiv_assistant.paper_topics import build_daily_topic_bundle, build_hotspot_paper_bundle, ensure_topic_fields_for_mapping, sort_paper_mapping_for_daily_display
     from arxiv_assistant.push_to_slack import push_to_slack
     from arxiv_assistant.renderers.build_multipage_site import build_multipage_site
-    from arxiv_assistant.renderers.paper.render_daily import render_daily_md
+    from arxiv_assistant.renderers.paper.render_daily import render_daily_md, render_summary_table
     from arxiv_assistant.utils.io import copy_file_or_dir, create_dir, delete_file_or_dir
     from arxiv_assistant.utils.llm_gateway import (
         BACKEND_OPENAI,
@@ -619,17 +619,26 @@ def run_remedy_plan(plan: RemedyPlan, output_root: str, build_site: bool, skip_l
                 json.dump(hotspot_paper_bundle, outfile, indent=4)
 
         if CONFIG["OUTPUT"].getboolean("dump_md"):
+            # The SAME table main.py renders, from the same helper. These were
+            # two hand-rolled tables with different columns and different
+            # truths: the remedial one dropped the paper counts and credited
+            # every run to the config's nominal model. A rebuilt day and an
+            # ordinary day describe the same pipeline and must render alike.
             head_table = {
-                "headers": [f"*[{CONFIG['SELECTION']['model']}]*", "Prompt", "Completion", "Total"],
-                "data": [
-                    ["**Token**", total_prompt_tokens, total_completion_tokens, total_prompt_tokens + total_completion_tokens],
-                    [
-                        "**Cost**",
-                        f"${round(total_prompt_cost, 2)}",
-                        f"${round(total_completion_cost, 2)}",
-                        f"${round(total_prompt_cost + total_completion_cost, 2)}",
-                    ],
-                ],
+                "html": render_summary_table(
+                    model=(
+                        CONFIG["SELECTION"]["model"]
+                        if resolve_backend(CONFIG) == BACKEND_OPENAI
+                        else f"{resolve_backend(CONFIG)}:{'+'.join(LEDGER.answering_providers()) or 'none'}"
+                    ),
+                    prompt_tokens=total_prompt_tokens,
+                    completion_tokens=total_completion_tokens,
+                    prompt_cost=total_prompt_cost,
+                    completion_cost=total_completion_cost,
+                    total_arxiv_papers=len(all_entries),
+                    total_scanned_papers=sum(len(area_papers) for area_papers in arxiv_paper_dict.values()),
+                    total_relevant_papers=len(selected_paper_dict),
+                )
             }
             with open(output_md_file_format.format("output.md"), "w", encoding="utf-8") as output_file:
                 output_file.write(

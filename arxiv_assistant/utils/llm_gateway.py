@@ -307,7 +307,7 @@ def _call_agent(prompt, *, schema, config, model, timeout_s, tools, agent_fn):
     runner = agent_fn or run_agent
     resolved = model or resolve_agent_model(config) if config is not None else (model or "")
     if not resolved:
-        resolved = model or "claude-sonnet-4-6"
+        resolved = model or "claude-sonnet-5"
 
     # run_agent always validates against a schema; give it a permissive one when
     # the caller wants raw text back.

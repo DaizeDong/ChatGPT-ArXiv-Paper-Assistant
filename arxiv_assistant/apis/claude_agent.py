@@ -42,7 +42,7 @@ _VERDICT_SCHEMA = {
 # Placeholder model id used by AgentFilter (recorded in provenance); the adapter
 # maps it to a real model id before passing to run_agent.
 _PLACEHOLDER_MODEL = "claude-code-subagent"
-_DEFAULT_REAL_MODEL = "claude-sonnet-4-6"
+_DEFAULT_REAL_MODEL = "claude-sonnet-5"
 
 
 def _resolve_model(model: str) -> str:
@@ -50,7 +50,7 @@ def _resolve_model(model: str) -> str:
 
     If *model* is the placeholder sentinel ``"claude-code-subagent"``, resolve
     it to the configured ``agent_model`` (read from the pipeline CONFIG if
-    importable), falling back to ``"claude-sonnet-4-6"`` when the config is
+    importable), falling back to ``"claude-sonnet-5"`` when the config is
     absent or the key is not present.  Any other value (a real model id) is
     returned unchanged.
     """

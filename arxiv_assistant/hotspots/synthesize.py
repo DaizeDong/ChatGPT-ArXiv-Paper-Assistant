@@ -25,7 +25,7 @@ from typing import Any
 from arxiv_assistant.utils.agent_runner import AgentError, run_agent
 
 # Default real model id when the caller passes a falsy / placeholder value.
-_DEFAULT_REAL_MODEL = "claude-sonnet-4-6"
+_DEFAULT_REAL_MODEL = "claude-sonnet-5"
 _PLACEHOLDER_MODELS = {"", "claude-code-subagent"}
 
 # JSON-Schema-like structural contract validated by run_agent's _validate_schema.
@@ -113,7 +113,7 @@ def synthesize_bilingual(topics: list[dict[str, Any]], *, model: str, temperatur
         topics:      Featured topic dicts (each carrying TOPIC_ID, English
                      headline / why-it-matters, and real evidence URLs).
         model:       Pinned model id; falsy / placeholder defaults to the real
-                     ``claude-sonnet-4-6``.  Recorded into the manifest by the
+                     ``claude-sonnet-5``.  Recorded into the manifest by the
                      caller (``_stage_synthesize``).
         temperature: Accepted for call-site compatibility and recorded in the
                      manifest; ``claude -p`` is deterministic so it is NOT

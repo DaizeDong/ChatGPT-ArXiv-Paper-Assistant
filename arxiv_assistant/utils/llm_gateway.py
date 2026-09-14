@@ -72,7 +72,7 @@ class CallLedger:
     trace: List[str] = field(default_factory=list)
     #: Wall-clock seconds spent inside model calls. This transport is not billed
     #: per token and reports none, so "what did this run cost" is answered in
-    #: calls and seconds in calls and seconds, not in dollars.
+    #: calls and seconds, not in dollars.
     #: Reporting a fabricated $0.00 would be worse than reporting nothing.
     seconds: float = 0.0
     _lock: threading.Lock = field(default_factory=threading.Lock, repr=False)

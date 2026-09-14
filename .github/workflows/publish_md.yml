@@ -43,7 +43,7 @@ env:
 jobs:
   build:
     if: ${{ github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success' }}
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
 
     steps:
       - name: Checkout site code branch
@@ -85,11 +85,13 @@ jobs:
           cache-dependency-path: web/package-lock.json
 
       - name: Install dependencies
+        shell: bash
         run: |
           python -m pip install --upgrade pip
           if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
 
       - name: Rebuild hotspot web data
+        shell: bash
         run: |
           python scripts/rebuild_hotspot_web_data.py --output-root out
 
@@ -98,6 +100,7 @@ jobs:
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
           OPENAI_BASE_URL: ${{ secrets.OPENAI_BASE_URL }}
+        shell: bash
         run: |
           python -X utf8 scripts/translate_hotspot_web_data.py
 
@@ -107,15 +110,18 @@ jobs:
           python scripts/validate_zh_assets.py
 
       - name: Build multipage site
+        shell: bash
         run: |
           python -m arxiv_assistant.renderers.build_multipage_site
 
       - name: Render static site
+        shell: bash
         run: |
           python -m arxiv_assistant.renderers.render_static_site --site-root out/site --dist-root dist --css-source site.css
 
       - name: Install hotspot web dependencies
         working-directory: web
+        shell: bash
         run: |
           npm ci
 
@@ -123,10 +129,12 @@ jobs:
         working-directory: web
         env:
           VITE_BASE_PATH: /${{ github.event.repository.name }}/
+        shell: bash
         run: |
           npm run build
 
       - name: Merge hotspot web app into dist
+        shell: bash
         run: |
           python scripts/merge_hotspot_web_dist.py --web-dist web/dist --site-dist dist
 
@@ -169,7 +177,7 @@ jobs:
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
 
     steps:
       - name: Deploy to GitHub Pages

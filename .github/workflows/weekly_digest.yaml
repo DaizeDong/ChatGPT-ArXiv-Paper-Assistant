@@ -35,10 +35,11 @@ concurrency:
 
 jobs:
   weekly-digest:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     steps:
       - name: Decide whether this is really 08:00 in New York
         id: when
+        shell: bash
         run: |
           python - <<'PY' >> "$GITHUB_OUTPUT"
           import datetime, os, zoneinfo
@@ -55,6 +56,7 @@ jobs:
 
       - name: Report a skipped duplicate cron
         if: steps.when.outputs.should_run != 'true'
+        shell: bash
         run: |
           echo "Local time is ${{ steps.when.outputs.local_time }}, not 08:00 America/New_York."
           echo "This is the other half of the DST cron pair. Nothing to do."
@@ -79,6 +81,7 @@ jobs:
 
       - name: Fail if the archive checkout is empty
         if: steps.when.outputs.should_run == 'true'
+        shell: bash
         run: |
           if [ ! -d auto_update_data/out ] || [ -z "$(ls -A auto_update_data/out)" ]; then
             echo "auto_update_data/out is missing or empty -- refusing to publish an empty digest."
@@ -94,6 +97,7 @@ jobs:
 
       - name: Install dependencies
         if: steps.when.outputs.should_run == 'true'
+        shell: bash
         run: |
           python -m pip install --upgrade pip
           if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
@@ -106,6 +110,7 @@ jobs:
           OPENAI_BASE_URL: ${{ secrets.OPENAI_BASE_URL }}
           SLACK_KEY: ${{ secrets.SLACK_KEY }}
           SLACK_CHANNEL_ID: ${{ secrets.SLACK_CHANNEL_ID }}
+        shell: bash
         run: |
           python scripts/generate_weekly_digest.py \
             --archive-root auto_update_data \
@@ -120,6 +125,7 @@ jobs:
       # the one outcome that must go red.
       - name: Verify the digest is honest about being empty
         if: steps.when.outputs.should_run == 'true'
+        shell: bash
         run: |
           python - <<'PY'
           import glob, json, sys
@@ -155,6 +161,7 @@ jobs:
       - name: Commit the digest to auto_update
         if: steps.when.outputs.should_run == 'true'
         working-directory: auto_update_data
+        shell: bash
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"

@@ -12,7 +12,7 @@ permissions:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
 
     steps:
       - uses: actions/checkout@v6
@@ -40,6 +40,7 @@ jobs:
           python-version: "3.12"
 
       - name: Install dependencies
+        shell: bash
         run: |
           python -m pip install --upgrade pip
           if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
@@ -53,6 +54,7 @@ jobs:
           echo "Hotspot runtime mode: $MODE"
 
       - name: Refresh model pricing cache
+        shell: bash
         run: |
           python scripts/refresh_model_pricing.py --max-age-hours 24
 
@@ -62,6 +64,7 @@ jobs:
           OPENAI_BASE_URL: ${{ secrets.OPENAI_BASE_URL }}
           SLACK_KEY: ${{ secrets.SLACK_KEY }}
           SLACK_CHANNEL_ID: ${{ secrets.SLACK_CHANNEL_ID }}
+        shell: bash
         run: |
           python main.py
 
@@ -71,12 +74,14 @@ jobs:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
           OPENAI_BASE_URL: ${{ secrets.OPENAI_BASE_URL }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        shell: bash
         run: |
           # Deterministic degraded path: heuristic mode, agents off, no twitterapi secret.
           python scripts/generate_daily_hotspots.py --output-root out --mode heuristic --force
 
       - name: Skip hotspot generation (VPS owns it)
         if: ${{ steps.runtime.outputs.mode != 'actions' }}
+        shell: bash
         run: echo "runtime=local — hotspot generation runs on VPS; Actions is Publisher-only."
 
       - name: Upload results

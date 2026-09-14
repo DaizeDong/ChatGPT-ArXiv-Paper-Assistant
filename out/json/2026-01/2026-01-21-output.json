@@ -1,0 +1,177 @@
+{
+    "2601.13563": {
+        "ARXIVID": "2601.13563",
+        "COMMENT": "Replaces independent expert matrices with learned butterfly rotations of a shared ternary prototype, cutting per-expert memory from O(d^2) to O(d log d) and stabilizing extreme low-bit expert training.",
+        "RELEVANCE": 9,
+        "NOVELTY": 7,
+        "PRIMARY_TOPIC_ID": "moe_training",
+        "MATCHED_TOPIC_IDS": [
+            "moe_training",
+            "efficiency_scaling"
+        ],
+        "TOPIC_MATCH_COMMENT": "Directly reparameterizes MoE expert weights and addresses quantized-expert training stability.",
+        "HOTSPOT_PAPER_TAGS": [],
+        "HOTSPOT_PAPER_COMMENT": "",
+        "SCORE": 16,
+        "authors": [
+            "Aryan Karmore"
+        ],
+        "title": "ButterflyMoE: Compression-Scalable Ternary Experts via Structured Butterfly Orbits",
+        "abstract": "In current Mixture of Experts (MoE) architectures, linear memory scaling is present, the memory grows as the number of experts increases. $N$ independent expert weight matrices require $\\mathcal{O}(N \\cdot d^2)$ memory which exceeds the memory budget of edge devices. Current compression methods like quantization, pruning, and low-rank factorization reduce constant factors, but the scaling bottleneck is still unresolved. We introduce ButterflyMoE, a method which treats experts not as independent matrices but as geometric reorientations of a shared quantized substrate. Diversity amongst the experts arises from viewing different angles of the shared capacity and not from redundant storage. Learned rotations are applied to a shared ternary prototype. With this, each expert yields $\\mathcal{O}(d^2 + N \\cdot d \\log d)$ memory-reducing per-expert cost from $\\mathcal{O}(d^2)$ to $\\mathcal{O}(d \\log d)$. The key insight is that training these rotations with quantization reduces activation outliers and stabilizes extreme low-bit training where other static methods collapse. Across language modeling benchmarks, ButterflyMoE achieves 80$\\times$ memory reduction at 8 experts with a highly favorable memory-accuracy tradeoff.At this 80x compression ButterflyMoE outperforms an equal memory dense baseline, showing that orbital parameterization extracts fundamentally more utility per byte. When scaled up to 256 experts, ButterflyMoE asymptotically compresses the memory by 150 $\\times$. ButterflyMoE reduces the constant factor of linear scaling with compression ratio growing with the expert count.",
+        "arxiv_id": "2601.13563",
+        "PRIMARY_TOPIC_LABEL": "MoE Training",
+        "MATCHED_TOPIC_LABELS": [
+            "MoE Training",
+            "Efficiency, Compression, and Large-Scale Training"
+        ],
+        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+        "HOTSPOT_PAPER_LABELS": [],
+        "HOTSPOT_PAPER_PRIMARY_KIND": null,
+        "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+    },
+    "2601.14522": {
+        "ARXIVID": "2601.14522",
+        "COMMENT": "Formalizes misalignment between direct attention paths and indirect 'runway' paths under causal masking, and rewires attention using a runway summary with zero added parameters.",
+        "RELEVANCE": 8,
+        "NOVELTY": 7,
+        "PRIMARY_TOPIC_ID": "architecture_training",
+        "MATCHED_TOPIC_IDS": [
+            "architecture_training"
+        ],
+        "TOPIC_MATCH_COMMENT": "A mechanistic account of information propagation in causal transformers plus a drop-in attention modification.",
+        "HOTSPOT_PAPER_TAGS": [],
+        "HOTSPOT_PAPER_COMMENT": "",
+        "SCORE": 15,
+        "authors": [
+            "Hunjae Lee",
+            "Corey Clark"
+        ],
+        "title": "On the Runway Cascade of Transformers for Language Modeling",
+        "abstract": "In decoder-only (causal) transformers, the computation graph created by causal masking routes information through both direct-path attention and indirect paths formed by intermediate tokens. We denote these indirect paths between token pairs as their runways. We argue that certain failure modes of causal transformers as observed by a growing body of recent works are likely exacerbated by a misalignment between these two information propagation modes. We formalize runway cascade as a phenomenon whereby this misalignment results in redundancies and irrelevant information cascading to token representations despite adequately learned attention patterns. As a solution, we propose runway-aware rewiring as a more explicit way of incorporating runway context directly into each token's direct-path attention. This mechanism re-wires the attention pattern for each token based on a summary of its runway landscape, enabling awareness of accumulating representational influences and allowing for more balanced information propagation. Our proposed methodology introduces no additional parameters and can seamlessly be integrated into standard attention mechanism. Empirically, our rewired transformer results in steady improvements in general language modeling as well as noticeably stronger information retrieval and extrapolation abilities compared to standard transformers.",
+        "arxiv_id": "2601.14522",
+        "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+        "MATCHED_TOPIC_LABELS": [
+            "Architecture and Training Dynamics"
+        ],
+        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+        "HOTSPOT_PAPER_LABELS": [],
+        "HOTSPOT_PAPER_PRIMARY_KIND": null,
+        "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+    },
+    "2601.13684": {
+        "ARXIVID": "2601.13684",
+        "COMMENT": "KV-cache compression with per-head budget allocation by attention temporal stability plus hierarchical storage that hides retrieval I/O; a new memory-efficiency mechanism, not a tuned variant.",
+        "RELEVANCE": 8,
+        "NOVELTY": 6,
+        "PRIMARY_TOPIC_ID": "efficiency_scaling",
+        "MATCHED_TOPIC_IDS": [
+            "efficiency_scaling"
+        ],
+        "TOPIC_MATCH_COMMENT": "Core contribution is KV-cache memory efficiency that materially changes long-context inference cost.",
+        "HOTSPOT_PAPER_TAGS": [],
+        "HOTSPOT_PAPER_COMMENT": "",
+        "SCORE": 14,
+        "authors": [
+            "Zhiyuan Shi",
+            "Qibo Qiu",
+            "Feng Xue",
+            "Zhonglin Jiang",
+            "Li Yu",
+            "Jian Jiang",
+            "Xiaofei He",
+            "Wenxiao Wang"
+        ],
+        "title": "HeteroCache: A Dynamic Retrieval Approach to Heterogeneous KV Cache Compression for Long-Context LLM Inference",
+        "abstract": "The linear memory growth of the KV cache poses a significant bottleneck for LLM inference in long-context tasks. Existing static compression methods often fail to preserve globally important information. Although recent dynamic retrieval approaches attempt to address this issue, they typically suffer from coarse-grained caching strategies and incur high I/O overhead. To overcome these limitations, we propose HeteroCache, a training-free dynamic compression framework. Our method is built on two key insights: attention heads exhibit diverse temporal heterogeneity, and there is significant spatial redundancy among heads within the same layer. Guided by these insights, HeteroCache categorizes heads based on stability and similarity, applying a fine-grained weighting strategy that allocates larger cache budgets to heads with rapidly shifting attention to capture context changes. Furthermore, it features a hierarchical storage mechanism where representative heads monitor attention drift to trigger asynchronous, on-demand context retrieval, thereby hiding I/O latency. Experiments demonstrate that HeteroCache achieves state-of-the-art performance on long-context benchmarks and accelerates decoding by up to $3\\times$ compared to the original model with a 224K context. Our code is available at https://github.com/ponytaill/HeteroCache.",
+        "arxiv_id": "2601.13684",
+        "PRIMARY_TOPIC_LABEL": "Efficiency, Compression, and Large-Scale Training",
+        "MATCHED_TOPIC_LABELS": [
+            "Efficiency, Compression, and Large-Scale Training"
+        ],
+        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+        "HOTSPOT_PAPER_LABELS": [],
+        "HOTSPOT_PAPER_PRIMARY_KIND": null,
+        "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+    },
+    "2601.14243": {
+        "ARXIVID": "2601.14243",
+        "COMMENT": "Unified FP8 precision flow across training and rollout, with an analysis of why BF16-train/FP8-rollout mismatch destabilizes optimization; a low-precision large-scale training systems contribution.",
+        "RELEVANCE": 7,
+        "NOVELTY": 7,
+        "PRIMARY_TOPIC_ID": "efficiency_scaling",
+        "MATCHED_TOPIC_IDS": [
+            "training_systems",
+            "efficiency_scaling"
+        ],
+        "TOPIC_MATCH_COMMENT": "Core contribution is numerical-precision design that changes training cost and stability, not the RL objective itself.",
+        "HOTSPOT_PAPER_TAGS": [
+            "daily_hot"
+        ],
+        "HOTSPOT_PAPER_COMMENT": "First systematic study of end-to-end FP8 RL training with a concrete instability diagnosis; broadly relevant to anyone running large-scale low-precision pipelines.",
+        "SCORE": 14,
+        "authors": [
+            "Haocheng Xi",
+            "Charlie Ruan",
+            "Peiyuan Liao",
+            "Yujun Lin",
+            "Han Cai",
+            "Yilong Zhao",
+            "Shuo Yang",
+            "Kurt Keutzer",
+            "Song Han",
+            "Ligeng Zhu"
+        ],
+        "title": "Jet-RL: Enabling On-Policy FP8 Reinforcement Learning with Unified Training and Rollout Precision Flow",
+        "abstract": "Reinforcement learning (RL) is essential for enhancing the complex reasoning capabilities of large language models (LLMs). However, existing RL training pipelines are computationally inefficient and resource-intensive, with the rollout phase accounting for over 70% of total training time. Quantized RL training, particularly using FP8 precision, offers a promising approach to mitigating this bottleneck. A commonly adopted strategy applies FP8 precision during rollout while retaining BF16 precision for training. In this work, we present the first comprehensive study of FP8 RL training and demonstrate that the widely used BF16-training + FP8-rollout strategy suffers from severe training instability and catastrophic accuracy collapse under long-horizon rollouts and challenging tasks. Our analysis shows that these failures stem from the off-policy nature of the approach, which introduces substantial numerical mismatch between training and inference. Motivated by these observations, we propose Jet-RL, an FP8 RL training framework that enables robust and stable RL optimization. The key idea is to adopt a unified FP8 precision flow for both training and rollout, thereby minimizing numerical discrepancies and eliminating the need for inefficient inter-step calibration. Extensive experiments validate the effectiveness of Jet-RL: our method achieves up to 33% speedup in the rollout phase, up to 41% speedup in the training phase, and a 16% end-to-end speedup over BF16 training, while maintaining stable convergence across all settings and incurring negligible accuracy degradation.",
+        "arxiv_id": "2601.14243",
+        "PRIMARY_TOPIC_LABEL": "Efficiency, Compression, and Large-Scale Training",
+        "MATCHED_TOPIC_LABELS": [
+            "Large-Scale Training Systems and Efficiency",
+            "Efficiency, Compression, and Large-Scale Training"
+        ],
+        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+        "HOTSPOT_PAPER_LABELS": [
+            "Daily Hot Papers"
+        ],
+        "HOTSPOT_PAPER_PRIMARY_KIND": "daily_hot",
+        "HOTSPOT_PAPER_PRIMARY_LABEL": "Daily Hot Papers",
+        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "llm_exact"
+    },
+    "2601.17042": {
+        "ARXIVID": "2601.17042",
+        "COMMENT": "Derives a sparse linear attention operator by decoupling membership and subspace matrices in the MCR2 objective via unrolled gradient descent.",
+        "RELEVANCE": 7,
+        "NOVELTY": 6,
+        "PRIMARY_TOPIC_ID": "architecture_training",
+        "MATCHED_TOPIC_IDS": [
+            "architecture_training",
+            "efficiency_scaling"
+        ],
+        "TOPIC_MATCH_COMMENT": "A new attention mechanism with a derivation-level justification, the core of the architecture topic.",
+        "HOTSPOT_PAPER_TAGS": [],
+        "HOTSPOT_PAPER_COMMENT": "",
+        "SCORE": 13,
+        "authors": [
+            "Tianyuan Liu",
+            "Libin Hou",
+            "Linyuan Wang",
+            "Bin Yan"
+        ],
+        "title": "Interpretable and Sparse Linear Attention with Decoupled Membership-Subspace Modeling via MCR2 Objective",
+        "abstract": "Maximal Coding Rate Reduction (MCR2)-driven white-box transformer, grounded in structured representation learning, unifies interpretability and efficiency, providing a reliable white-box solution for visual modeling. However, in existing designs, tight coupling between \"membership matrix\" and \"subspace matrix U\" in MCR2 causes redundant coding under incorrect token projection. To this end, we decouple the functional relationship between the \"membership matrix\" and \"subspaces U\" in the MCR2 objective and derive an interpretable sparse linear attention operator from unrolled gradient descent of the optimized objective. Specifically, we propose to directly learn the membership matrix from inputs and subsequently derive sparse subspaces from the fullspace S. Consequently, gradient unrolling of the optimized MCR2 objective yields an interpretable sparse linear attention operator: Decoupled Membership-Subspace Attention (DMSA). Experimental results on visual tasks show that simply replacing the attention module in Token Statistics Transformer (ToST) with DMSA (we refer to as DMST) not only achieves a faster coding reduction rate but also outperforms ToST by 1.08%-1.45% in top-1 accuracy on the ImageNet-1K dataset. Compared with vanilla Transformer architectures, DMST exhibits significantly higher computational efficiency and interpretability.",
+        "arxiv_id": "2601.17042",
+        "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+        "MATCHED_TOPIC_LABELS": [
+            "Architecture and Training Dynamics",
+            "Efficiency, Compression, and Large-Scale Training"
+        ],
+        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+        "HOTSPOT_PAPER_LABELS": [],
+        "HOTSPOT_PAPER_PRIMARY_KIND": null,
+        "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+    }
+}

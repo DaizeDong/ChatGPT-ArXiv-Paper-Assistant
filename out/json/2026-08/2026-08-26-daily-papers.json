@@ -6,20 +6,73 @@
             "score",
             "relevance"
         ],
-        "topic_schema_version": 1,
-        "total_papers": 0,
+        "topic_schema_version": 2,
+        "total_papers": 40,
         "usage": {
-            "model": "gpt-5.4",
+            "model": "llmcall:codexg+cc",
             "prompt_tokens": 0,
             "completion_tokens": 0,
             "prompt_cost": 0.0,
             "completion_cost": 0.0,
-            "total_arxiv_papers": 629,
-            "total_scanned_papers": 383,
-            "total_relevant_papers": 0
+            "total_arxiv_papers": 550,
+            "total_scanned_papers": 550,
+            "total_relevant_papers": 40,
+            "filter_health": {
+                "status": "ok",
+                "scanned_papers": 550,
+                "selected_papers": 40,
+                "llm_tokens": 0,
+                "message": "Scored 550 papers with 24/24 successful model calls; 40 selected."
+            },
+            "llm": {
+                "backend": "LLM backend: llmcall chain=codexg->codex->cc->claude",
+                "attempted": 24,
+                "succeeded": 24,
+                "failed": 0,
+                "by_backend": {
+                    "llmcall": 24
+                },
+                "by_provider": {
+                    "codexg": 23,
+                    "cc": 1
+                },
+                "errors": [],
+                "seconds": 4201.1,
+                "trace": [
+                    "codexg: answered in 99.8s of 543.7s",
+                    "codexg: answered in 236.8s of 543.7s",
+                    "codexg: answered in 137.8s of 543.7s",
+                    "codexg: answered in 210.9s of 543.7s",
+                    "codexg: answered in 200.0s of 543.7s",
+                    "codexg: unavailable after 484.0s of 543.7s (codexg: retry budget 600s exceeds what the client will wait for (~542s, measured); using 480s so the request ends with a real status instead of being killed mid-flight",
+                    "codex: unavailable after 3.7s of 78.5s (OpenAI Codex v0.154.0",
+                    "cc: answered in 10.7s of 93.6s",
+                    "codexg: answered in 137.4s of 543.7s",
+                    "codexg: answered in 221.9s of 543.7s",
+                    "codexg: answered in 57.5s of 543.7s",
+                    "codexg: answered in 193.7s of 543.7s",
+                    "codexg: answered in 85.1s of 543.7s",
+                    "codexg: answered in 55.7s of 543.7s",
+                    "codexg: answered in 66.0s of 543.7s",
+                    "codexg: answered in 105.1s of 543.7s",
+                    "codexg: answered in 59.6s of 543.7s",
+                    "codexg: answered in 185.8s of 543.7s",
+                    "codexg: answered in 276.6s of 543.7s",
+                    "codexg: answered in 233.1s of 543.7s",
+                    "codexg: answered in 239.0s of 543.7s",
+                    "codexg: answered in 181.0s of 543.7s",
+                    "codexg: answered in 192.5s of 543.7s",
+                    "codexg: answered in 162.2s of 543.7s",
+                    "codexg: answered in 198.7s of 543.7s",
+                    "codexg: answered in 166.5s of 543.7s"
+                ]
+            },
+            "remedied": true
         }
     },
     "topic_order": [
+        "moe_training",
+        "training_systems",
         "architecture_training",
         "efficiency_scaling",
         "representation_structure",
@@ -27,17 +80,27 @@
         "world_models_open_ended_rl"
     ],
     "diagnostics": {
-        "total_papers": 0,
+        "total_papers": 40,
         "topic_counts": [
+            {
+                "topic_id": "moe_training",
+                "topic_label": "MoE Training",
+                "paper_count": 1
+            },
+            {
+                "topic_id": "training_systems",
+                "topic_label": "Large-Scale Training Systems and Efficiency",
+                "paper_count": 6
+            },
             {
                 "topic_id": "architecture_training",
                 "topic_label": "Architecture and Training Dynamics",
-                "paper_count": 0
+                "paper_count": 20
             },
             {
                 "topic_id": "efficiency_scaling",
                 "topic_label": "Efficiency, Compression, and Large-Scale Training",
-                "paper_count": 0
+                "paper_count": 13
             },
             {
                 "topic_id": "representation_structure",
@@ -55,18 +118,1393 @@
                 "paper_count": 0
             }
         ],
-        "assignment_source_counts": {},
-        "llm_assignment_count": 0,
+        "assignment_source_counts": {
+            "llm_exact": 40
+        },
+        "llm_assignment_count": 40,
         "heuristic_assignment_count": 0,
         "default_assignment_count": 0,
         "invalid_primary_topic_fallback_count": 0,
         "missing_primary_topic_fallback_count": 0,
         "hotspot_paper_kind_counts": {
             "new_frontier": 0,
-            "daily_hot": 0
+            "daily_hot": 3
         },
-        "hotspot_paper_assignment_source_counts": {}
+        "hotspot_paper_assignment_source_counts": {
+            "heuristic": 1,
+            "default": 37,
+            "llm_exact": 2
+        }
     },
-    "papers": {},
-    "topic_sections": []
+    "papers": {
+        "2601.16905": {
+            "ARXIVID": "2601.16905",
+            "COMMENT": "Null-space projection constrains MoE router updates, preserving routing stability while directing unlearning pressure into expert parameters.",
+            "RELEVANCE": 9,
+            "NOVELTY": 8,
+            "PRIMARY_TOPIC_ID": "moe_training",
+            "MATCHED_TOPIC_IDS": [
+                "moe_training"
+            ],
+            "TOPIC_MATCH_COMMENT": "The core method introduces geometric constraints on MoE router optimization, directly addressing routing instability despite its specialized unlearning setting.",
+            "HOTSPOT_PAPER_TAGS": [
+                "daily_hot"
+            ],
+            "HOTSPOT_PAPER_COMMENT": "Broadly important today: Null-space projection constrains MoE router updates, preserving routing stability while directing unlearning pressure into expert parameters.",
+            "SCORE": 17,
+            "authors": [
+                "Andy Zhu",
+                "Rongzhe Wei",
+                "Yupu Gu",
+                "Pan Li"
+            ],
+            "title": "GRIP: Algorithm-Agnostic Machine Unlearning for Mixture-of-Experts via Geometric Router Constraints",
+            "abstract": "Machine unlearning in Mixture-of-Experts (MoE) large language models presents a critical yet under-explored challenge. Current unlearning methods applied to MoE architectures often exploit dynamic routing as an optimization shortcut: rather than genuinely erasing knowledge from expert parameters, they manipulate routers to redirect queries away from the originally assigned experts. This not only causes severe utility degradation but also leaves hazardous knowledge intact. Consequently, adversaries can bypass the router to recover sensitive information directly from dormant experts. In this study, we propose Geometric Routing Invariance Preservation (GRIP), an algorithm-agnostic framework that resolves these failure modes by enforcing hard geometric constraints on router updates. By projecting router gradient updates into the null space of the retain set's routing matrix, GRIP suppresses routing manipulation without freezing the router entirely, thereby directing the unlearning pressure into the expert parameters themselves across all relevant experts. GRIP offers two complementary variants: training-time stochastic projection and a post-training closed-form analytical correction. Extensive experiments on two MoE models across hazardous knowledge removal and copyright unlearning benchmarks demonstrate that GRIP restores routing stability from 0.21 to >0.94, improves retain accuracy by up to 89%, and reduces white-box adversarial knowledge recovery from 11% to just 3% while in line with dense-architecture unlearning under black-box prompt attack, establishing geometric constraints as a principled solution for genuine unlearning in sparse MoE architectures.",
+            "arxiv_id": "2601.16905",
+            "PRIMARY_TOPIC_LABEL": "MoE Training",
+            "MATCHED_TOPIC_LABELS": [
+                "MoE Training"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [
+                "Daily Hot Papers"
+            ],
+            "HOTSPOT_PAPER_PRIMARY_KIND": "daily_hot",
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "Daily Hot Papers",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "heuristic"
+        },
+        "2602.13940": {
+            "ARXIVID": "2602.13940",
+            "COMMENT": "Score-function gradients learn discrete token boundaries jointly with model training.",
+            "RELEVANCE": 9,
+            "NOVELTY": 7,
+            "PRIMARY_TOPIC_ID": "architecture_training",
+            "MATCHED_TOPIC_IDS": [
+                "architecture_training"
+            ],
+            "TOPIC_MATCH_COMMENT": "End-to-end tokenization changes the trainable sequence-processing architecture; reinforcement learning supplies its gradient estimator.",
+            "HOTSPOT_PAPER_TAGS": [],
+            "HOTSPOT_PAPER_COMMENT": "",
+            "SCORE": 16,
+            "authors": [
+                "Sam Dauncey",
+                "Roger Wattenhofer"
+            ],
+            "title": "You Can Learn Tokenization End-to-End with Reinforcement Learning",
+            "abstract": "Tokenization is a hardcoded compression step which remains in the training pipeline of Large Language Models (LLMs), despite a general trend towards architectures becoming increasingly end-to-end. Prior work has shown promising results at scale in bringing this compression step inside the LLMs' architecture with heuristics to draw token boundaries, and also attempts to learn these token boundaries with straight-through estimates, which treat the problem of drawing discrete token boundaries as a continuous one. We show that these token boundaries can instead be learned using score function estimates, which have tighter theoretical guarantees due to directly optimizing the problem of drawing discrete token boundaries to minimize loss. We observe that techniques from reinforcement learning, such as time discounting, are necessary to reduce the variance of this score function sufficiently to make it practicable. We demonstrate that the resultant method outperforms prior proposed straight-through estimates, both qualitatively and quantitatively at the $100$ million parameter scale.",
+            "arxiv_id": "2602.13940",
+            "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+            "MATCHED_TOPIC_LABELS": [
+                "Architecture and Training Dynamics"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [],
+            "HOTSPOT_PAPER_PRIMARY_KIND": null,
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+        },
+        "2608.25188": {
+            "ARXIVID": "2608.25188",
+            "COMMENT": "Format-aware quantization theory explains when transforms should flatten energy within shared-scale groups.",
+            "RELEVANCE": 9,
+            "NOVELTY": 7,
+            "PRIMARY_TOPIC_ID": "efficiency_scaling",
+            "MATCHED_TOPIC_IDS": [
+                "efficiency_scaling"
+            ],
+            "TOPIC_MATCH_COMMENT": "It directly addresses the transform stage of low-bit LLM compression through distortion analysis and quantization-format co-design.",
+            "HOTSPOT_PAPER_TAGS": [],
+            "HOTSPOT_PAPER_COMMENT": "",
+            "SCORE": 16,
+            "authors": [
+                "Ehsan Jokar"
+            ],
+            "title": "Transforms for LLM Quantization: The Great Inversion and Format Co-Design",
+            "abstract": "Most competitive 4-bit LLM research pipelines now open the same way: apply a linear, function-preserving transform (rotation, scaling, permutation, non-orthogonal affine) so the outlier mass sits more favorably against the group scales, and only then round. Yet we are aware of no survey dedicated to this transform stage, and its literature is quietly re-deriving an older theory. We identify and formalize the principle that organizes it, the Great Inversion: allocation-flexible coding rewards energy concentration, whereas the grouped shared-scale quantization a deployed matrix instruction performs rewards within-group flattening. Classical transform coding (1963: decorrelate, allocate bits, quantize) spends different bits per coordinate at a fixed total rate; for a Gaussian source at high rate the Karhunen-Loeve transform's concentration minimizes distortion. A deployed operand tile instead carries one absolute-maximum scale per group and equal bits everywhere, with no allocation; on a uniform grid that objective rewards flattening, approached by Hadamard incoherence. We prove that opposition under within-group majorization: the prescriptions point in opposite directions, each backed by a proof against its own objective, and for a generic spectrum no optimality guarantee transfers. A second axis is the number format: the non-uniform FP4 grid makes flattening buy less, MXFP4's power-of-two block scale still rewards a rotation confined to that block, and NVFP4's mantissa-carrying scale largely removes that pull, so the target pole depends jointly on allocation regime and format. We survey 200 works to a June 2026 cutoff; classify 43 transform methods by structure, data-awareness, searched-versus-constructed, and runtime cost; record, where reported, how they compose with GPTQ rounding; distill a first-choice guide by deployment regime; and close with the open problems it exposes.",
+            "arxiv_id": "2608.25188",
+            "PRIMARY_TOPIC_LABEL": "Efficiency, Compression, and Large-Scale Training",
+            "MATCHED_TOPIC_LABELS": [
+                "Efficiency, Compression, and Large-Scale Training"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [],
+            "HOTSPOT_PAPER_PRIMARY_KIND": null,
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+        },
+        "2608.15299": {
+            "ARXIVID": "2608.15299",
+            "COMMENT": "Sensitivity-guided allocation redistributes routed-expert budgets across layers to reduce active MoE compute without retraining.",
+            "RELEVANCE": 9,
+            "NOVELTY": 7,
+            "PRIMARY_TOPIC_ID": "efficiency_scaling",
+            "MATCHED_TOPIC_IDS": [
+                "efficiency_scaling"
+            ],
+            "TOPIC_MATCH_COMMENT": "The analytical expert-budget allocator introduces a substantive MoE efficiency mechanism, with its demonstrated benefits centered on pretrained-model inference.",
+            "HOTSPOT_PAPER_TAGS": [],
+            "HOTSPOT_PAPER_COMMENT": "",
+            "SCORE": 16,
+            "authors": [
+                "Lie Li",
+                "Wen Li",
+                "Junxiao Shen",
+                "Guosheng Hu"
+            ],
+            "title": "MAPLE: MoE Adaptive Plug-and-play Layer-wise Expert allocation",
+            "abstract": "Sparsely-activated Mixture-of-Experts (MoE) Transformers universally fix the same number of routed experts across all layers, a convention that ignores the well-documented heterogeneity in layer-wise redundancy. We demonstrate that this uniformity is systematically suboptimal and propose MAPLE, a plug-and-play framework that reallocates the routed-expert budget heterogeneously across layers of any pretrained MoE LLM, without modifying weights or requiring retraining. Our core contribution is a closed-form sensitivity-guided allocation: we probe each layer's response to variation in expert count, quantify sensitivity using three measures, and derive an analytically optimal budget assignment that directs capacity towards sensitive layers and absorbs reductions in redundant layers. This closed-form solution is further refined by a sensitivity-constrained genetic search that uses layer-wise sensitivity as a prior to guide exploration, yielding faster convergence and superior allocation quality. On four MoE models spanning different scales and architectures, MAPLE outperforms uniform and pruning-based baselines under a 75% routed-expert budget. Notably, on DeepSeek-MoE-16B, MAPLE uses only 75% of the experts yet surpasses the original 100% expert-uniform baseline on ARC-E, ARC-C, and BoolQ, improving accuracy from 65.09 to 71.40, 48.49 to 51.50, and 80.03 to 82.38, respectively. These accuracy gains translate into measured deployment efficiency: implementing MAPLE in SGLang reduces single-GPU end-to-end serving latency by 32.2% and improves throughput by 47.4%. These results show that well-designed heterogeneous allocation can be more effective than simply activating more experts, establishing it as a principled and practical axis for improving MoE efficiency.",
+            "arxiv_id": "2608.15299",
+            "PRIMARY_TOPIC_LABEL": "Efficiency, Compression, and Large-Scale Training",
+            "MATCHED_TOPIC_LABELS": [
+                "Efficiency, Compression, and Large-Scale Training"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [],
+            "HOTSPOT_PAPER_PRIMARY_KIND": null,
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+        },
+        "2608.22129": {
+            "ARXIVID": "2608.22129",
+            "COMMENT": "Introduces safeguarded blockwise cubic optimization using true Hessian blocks and matrix-free Lanczos subspace solves.",
+            "RELEVANCE": 8,
+            "NOVELTY": 8,
+            "PRIMARY_TOPIC_ID": "training_systems",
+            "MATCHED_TOPIC_IDS": [
+                "training_systems"
+            ],
+            "TOPIC_MATCH_COMMENT": "The core contribution is a scalable second-order optimizer with convergence guarantees; its main empirical evidence concerns INR fitting rather than large-scale pretraining.",
+            "HOTSPOT_PAPER_TAGS": [],
+            "HOTSPOT_PAPER_COMMENT": "",
+            "SCORE": 16,
+            "authors": [
+                "Rodion Podorozhny"
+            ],
+            "title": "Blockwise Stabilized Adaptive Cubic Regularization with Subsolvers via Recurrence",
+            "abstract": "Cubic regularized Newton methods have the optimal $\\mathcal{O}(Îµ^{-3/2})$ global rate, but a dense subproblem solve limits the feasible block size. Scalable Cubic Newton variants replace the true block curvature with a diagonal, low-rank, Kronecker-factored, or sketched surrogate and, most often, give up the exact cubic step. We introduce a blockwise optimizer that minimizes an independent cubic model per parameter tensor over the true block Hessian, under a per-block adaptive cubic constant and a monotone guard on the full loss. Arbitrarily large tensors are handled matrix-free in a Lanczos-built Krylov subspace, where we prove that the step minimizes the cubic model. The theory also supplies the $\\mathcal{O}(Îµ^{-3/2})$ iteration complexity bound, a second-order guarantee, and monotone per-block descent. Four variants of this outer scheme are evaluated against the original adaptive regularization with cubics (ARC) optimizer, some other recent cubic Newton variants, Adam, SOAP, and L-BFGS. On a 91.4M-parameter implicit neural representation (INR), the variants introduced in this work are the only evaluated here cubic Newton methods whose steps stay exact on every block. Run to full convergence on FINER 2D image fitting, one of the ARC variants introduced here, ARC-$Ï_1$, reaches 133.5 dB peak signal-to-noise ratio, while tuned Adam plateaus at 78.2 dB after about 70 minutes. In that time ARC-$Ï_1$ reaches 95.6 dB.",
+            "arxiv_id": "2608.22129",
+            "PRIMARY_TOPIC_LABEL": "Large-Scale Training Systems and Efficiency",
+            "MATCHED_TOPIC_LABELS": [
+                "Large-Scale Training Systems and Efficiency"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [],
+            "HOTSPOT_PAPER_PRIMARY_KIND": null,
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+        },
+        "2606.01765": {
+            "ARXIVID": "2606.01765",
+            "COMMENT": "An algebraic framework explains how arithmetic choices change recurrent and diagonal state-space models' computational expressivity.",
+            "RELEVANCE": 8,
+            "NOVELTY": 8,
+            "PRIMARY_TOPIC_ID": "architecture_training",
+            "MATCHED_TOPIC_IDS": [
+                "architecture_training"
+            ],
+            "TOPIC_MATCH_COMMENT": "The central contribution analyzes recurrent architectural mechanisms and their precision-dependent computational capacity.",
+            "HOTSPOT_PAPER_TAGS": [],
+            "HOTSPOT_PAPER_COMMENT": "",
+            "SCORE": 16,
+            "authors": [
+                "Franz Nowak",
+                "Ryan Cotterell",
+                "Reda Boumasmoud"
+            ],
+            "title": "An Algebraic View of the Expressivity of Recurrent Language Models",
+            "abstract": "What formal languages can a recurrent neural language model recognize? Formal results in the literature conflict: some authors report Turing-completeness, while others show equivalence to regular languages. The reason for this discrepancy is that the underlying arithmetic model differs. The paper develops a unified algebraic account of the expressivity of recurrent neural networks, starting with a formal account of various arithmetic models. This account reduces expressivity to an algebraic question, e.g., whether a network's syntactic monoid divides a certain wreath product. As a case study, the paper revisits diagonal state-space models: the same architecture cannot implement an even-modulus counter once floating-point recurrences are enforced, yet realizes every even-modulus counter under unsigned-integer quantization.",
+            "arxiv_id": "2606.01765",
+            "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+            "MATCHED_TOPIC_LABELS": [
+                "Architecture and Training Dynamics"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [],
+            "HOTSPOT_PAPER_PRIMARY_KIND": null,
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+        },
+        "2608.24411": {
+            "ARXIVID": "2608.24411",
+            "COMMENT": "Reshapes proposal distributions during verification to reduce speculative rejection while preserving exact output sampling.",
+            "RELEVANCE": 8,
+            "NOVELTY": 8,
+            "PRIMARY_TOPIC_ID": "efficiency_scaling",
+            "MATCHED_TOPIC_IDS": [
+                "efficiency_scaling"
+            ],
+            "TOPIC_MATCH_COMMENT": "The core contribution is a new inference-efficiency algorithm addressing residual drift, with reported speedups up to 1.92x over multi-candidate baselines.",
+            "HOTSPOT_PAPER_TAGS": [],
+            "HOTSPOT_PAPER_COMMENT": "",
+            "SCORE": 16,
+            "authors": [
+                "Zhi-Kai Chen",
+                "Jun-Jie Tao",
+                "Wei-Xiang Mao",
+                "De-Chuan Zhan",
+                "Han-Jia Ye"
+            ],
+            "title": "ResiSpec: Enhancing Multi-Candidate Speculative Sampling via Residual Distribution Shaping",
+            "abstract": "The efficiency of Large Language Model (LLM) serving is fundamentally limited by the sequential nature of autoregressive decoding. Speculative Decoding (SD) mitigates this by using a lightweight draft model to speculate future tokens, which are then validated by the LLM in a single parallel forward pass. To further boost efficiency, multi-candidate schemes propose diverse candidate sets to increase the likelihood of token acceptance. However, we show that these schemes are bottlenecked by Residual Drift: a phenomenon where the rejection of initial candidates causes the residual target distribution to diverge from the draft model's predictions. This shift renders subsequent candidates ineffective and forces the system into expensive resampling. To resolve this, we propose ResiSpec, a framework that strategically reforms the proposal distribution during verification to anchor the residual target mass within the draft model's high-confidence regions. By mathematically re-aligning the verification process without compromising output exactness, ResiSpec prevents candidate obsolescence and achieves up to 1.92$\\times$ speedup over state-of-the-art multi-candidate methods. Code is available at https://github.com/Czzzk/Resispec.",
+            "arxiv_id": "2608.24411",
+            "PRIMARY_TOPIC_LABEL": "Efficiency, Compression, and Large-Scale Training",
+            "MATCHED_TOPIC_LABELS": [
+                "Efficiency, Compression, and Large-Scale Training"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [],
+            "HOTSPOT_PAPER_PRIMARY_KIND": null,
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+        },
+        "2608.23938": {
+            "ARXIVID": "2608.23938",
+            "COMMENT": "Derives exact gradient-flow trajectories separating generalization, interpolation, and memorization during diffusion training.",
+            "RELEVANCE": 8,
+            "NOVELTY": 8,
+            "PRIMARY_TOPIC_ID": "architecture_training",
+            "MATCHED_TOPIC_IDS": [
+                "architecture_training"
+            ],
+            "TOPIC_MATCH_COMMENT": "Directly explains diffusion training dynamics and implicit regularization, with conclusions established in a stylized kernel-based lazy-training regime.",
+            "HOTSPOT_PAPER_TAGS": [],
+            "HOTSPOT_PAPER_COMMENT": "",
+            "SCORE": 16,
+            "authors": [
+                "Hugo Latourelle-Vigeant",
+                "Sinho Chewi",
+                "Aram-Alexandre Pooladian",
+                "John Sous",
+                "Theodor Misiakiewicz"
+            ],
+            "title": "Generalization, memorization, and overfitting for diffusion models trained in the lazy high-dimensional regime",
+            "abstract": "Modern score-based generative models have achieved remarkable empirical success in high-dimensional tasks such as image, audio, and video synthesis. These models reduce distribution learning to a sequence of regression problems that, if solved exactly on finite data, would ultimately reproduce the training samples. Their ability to generalize must therefore arise from the implicit or explicit regularization during training. In this work, we develop a generative counterpart to the theory of benign overfitting and algorithmic regularization for overparameterized neural networks in the supervised lazy-training regime. We study denoising score matching in a vector-valued reproducing kernel Hilbert space with an inner-product kernel. In the proportional high-dimensional regime $n\\asymp d$, we derive exact risk trajectories under gradient flow training. These trajectories exhibit three phases governed by qualitatively distinct estimators: a spectral estimator that generalizes, a pure-noise score with localized peaks that interpolate the training objective, and an empirical Bayes estimator that memorizes the data. We then analyze how these estimators combine along the reverse-time SDE and characterize the distribution of the resulting samples. The analysis reveals familiar mechanisms from supervised learning, including kernel linearization and self-induced regularization from the nonlinear part of the kernel, but also reveals a distinct phenomenology specific to generative modeling.",
+            "arxiv_id": "2608.23938",
+            "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+            "MATCHED_TOPIC_LABELS": [
+                "Architecture and Training Dynamics"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [],
+            "HOTSPOT_PAPER_PRIMARY_KIND": null,
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+        },
+        "2608.24973": {
+            "ARXIVID": "2608.24973",
+            "COMMENT": "LoRA-gradient importance estimates enable iterative weight pruning without computing full gradients.",
+            "RELEVANCE": 9,
+            "NOVELTY": 6,
+            "PRIMARY_TOPIC_ID": "efficiency_scaling",
+            "MATCHED_TOPIC_IDS": [
+                "efficiency_scaling"
+            ],
+            "TOPIC_MATCH_COMMENT": "The core contribution reduces pruning and finetuning costs through low-rank importance estimation and lightweight updates.",
+            "HOTSPOT_PAPER_TAGS": [],
+            "HOTSPOT_PAPER_COMMENT": "",
+            "SCORE": 15,
+            "authors": [
+                "Peng Liu",
+                "Huibing Zeng",
+                "Yiqun Zhang",
+                "Yang Yi",
+                "Jigang Wu"
+            ],
+            "title": "Resource-Efficient Pruning for Transformer via Low-Rank Importance Estimation",
+            "abstract": "With the rapid development of large-scale pre-trained language models based on Transformer architectures, their high computational and memory costs have become a major obstacle to deployment, especially in resource-constrained environments. Traditional pruning methods typically depend on full gradient-based importance estimation, and they necessitate prior finetuning of the model to achieve satisfactory performance. This process often results in intolerable resource consumption. This paper proposes REP-LIE, a new approach to enable resource-efficient pruning during the process of finetuning. REP-LIE leverages the gradients of LoRA low-rank matrices to estimate the importance of weights without requiring full gradient computation. To address the inherent randomness in importance estimation, a stability score is introduced, serving as the basis for iterative pruning of unimportant model parameters. The pruned model is further finetuned through lightweight updates, eliminating the need for full-parameter optimization in the process of finetuning. Extensive experiments on both medium-scale encoder models and large-scale generative models (LLaMA-7B and Mistral-7B) demonstrate that REP-LIE still achieves competitive performance compared to existing approaches.",
+            "arxiv_id": "2608.24973",
+            "PRIMARY_TOPIC_LABEL": "Efficiency, Compression, and Large-Scale Training",
+            "MATCHED_TOPIC_LABELS": [
+                "Efficiency, Compression, and Large-Scale Training"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [],
+            "HOTSPOT_PAPER_PRIMARY_KIND": null,
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+        },
+        "2512.14237": {
+            "ARXIVID": "2512.14237",
+            "COMMENT": "Side-network fine-tuning avoids backbone backward passes, reducing peak memory by 50% versus QLoRA.",
+            "RELEVANCE": 9,
+            "NOVELTY": 6,
+            "PRIMARY_TOPIC_ID": "efficiency_scaling",
+            "MATCHED_TOPIC_IDS": [
+                "architecture_training",
+                "efficiency_scaling"
+            ],
+            "TOPIC_MATCH_COMMENT": "Memory-efficient parameter adaptation is central; xLadder adds a secondary architectural contribution through cross-connected side-network depth.",
+            "HOTSPOT_PAPER_TAGS": [],
+            "HOTSPOT_PAPER_COMMENT": "",
+            "SCORE": 15,
+            "authors": [
+                "Estelle Zheng",
+                "Nathan Cerisara",
+                "SÃ©bastien Warichet",
+                "Emmanuel Helbert",
+                "Christophe Cerisara"
+            ],
+            "title": "Ladder Up, Memory Down: Low-Cost Fine-Tuning With Side Nets",
+            "abstract": "Fine-tuning large language models (LLMs) is often limited by the memory available on commodity GPUs. Parameter-efficient fine-tuning (PEFT) methods such as QLoRA reduce the number of trainable parameters, yet still incur high memory usage induced by the backward pass in the full model. We revisit Ladder Side Tuning (LST), a rarely explored PEFT technique that adds a lightweight side network, and show that it matches QLoRA's compute scaling slope while cutting peak memory by 50\\%. Across different downstream benchmarks spanning natural language understanding, mathematical and LLM-critic tasks, LST has competitive performance with QLoRA's accuracy on average while being much more memory-efficient. This efficiency enables fine-tuning of 7B-parameter models on a single 12 GB consumer GPU with 2k-token contexts, requiring no gradient checkpointing\\textemdash conditions under which QLoRA exhausts memory. Beyond memory efficiency, we also establish scaling laws showing that LST scales similarly to QLoRA. We exploit Ladder's architectural flexibility by introducing xLadder, a depth-extended variant that increases effective depth via cross-connections and shortens chain-of-thought (CoT) at fixed parameter count. Ladder is strong when memory is the bottleneck; xLadder builds on this by enabling deeper reasoning without additional memory overhead.",
+            "arxiv_id": "2512.14237",
+            "PRIMARY_TOPIC_LABEL": "Efficiency, Compression, and Large-Scale Training",
+            "MATCHED_TOPIC_LABELS": [
+                "Architecture and Training Dynamics",
+                "Efficiency, Compression, and Large-Scale Training"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [],
+            "HOTSPOT_PAPER_PRIMARY_KIND": null,
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+        },
+        "2402.11215": {
+            "ARXIVID": "2402.11215",
+            "COMMENT": "Couples adaptive batch-size growth with AdaGrad updates and nonconvex convergence guarantees.",
+            "RELEVANCE": 8,
+            "NOVELTY": 7,
+            "PRIMARY_TOPIC_ID": "training_systems",
+            "MATCHED_TOPIC_IDS": [
+                "training_systems"
+            ],
+            "TOPIC_MATCH_COMMENT": "The core contribution is an optimizer and batch-allocation algorithm relevant to training efficiency, although validation is limited to image classification.",
+            "HOTSPOT_PAPER_TAGS": [],
+            "HOTSPOT_PAPER_COMMENT": "",
+            "SCORE": 15,
+            "authors": [
+                "Tim Tsz-Kit Lau",
+                "Han Liu",
+                "Mladen Kolar"
+            ],
+            "title": "AdAdaGrad: Adaptive Batch Size Schemes for Adaptive Gradient Methods",
+            "abstract": "The choice of batch size in minibatch stochastic gradient optimization is critical for both optimization and generalization performance in large-scale model training. Although large-batch training is arguably the dominant paradigm in large-scale deep learning because of hardware advances, model generalization often deteriorates relative to small-batch training, leading to the so-called \"generalization gap.\" To mitigate this issue, we investigate adaptive batch size strategies derived from adaptive sampling methods, which were originally developed for stochastic gradient descent. Given the strong interplay between learning rates and batch sizes, together with the prevalence of adaptive gradient methods in deep learning, we emphasize the need for adaptive batch size strategies in these settings. We introduce AdAdaGrad and its scalar variant AdAdaGradNorm, which progressively increase batch sizes during training while performing updates with AdaGrad and AdaGradNorm, respectively. We prove that AdAdaGradNorm converges with high probability at a rate of $\\mathscr{O}(1/K)$ to a first-order stationary point of a smooth nonconvex function within $K$ iterations. AdAdaGrad also exhibits similar convergence properties when combined with a novel coordinate-wise variant of our adaptive batch size strategy. We corroborate our theoretical claims with image-classification experiments that highlight the merits of the proposed schemes in terms of both training efficiency and model generalization. Our work highlights the potential of adaptive batch size strategies for adaptive gradient optimizers in large-scale model training.",
+            "arxiv_id": "2402.11215",
+            "PRIMARY_TOPIC_LABEL": "Large-Scale Training Systems and Efficiency",
+            "MATCHED_TOPIC_LABELS": [
+                "Large-Scale Training Systems and Efficiency"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [],
+            "HOTSPOT_PAPER_PRIMARY_KIND": null,
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+        },
+        "2608.25088": {
+            "ARXIVID": "2608.25088",
+            "COMMENT": "Low-rank instruction banks synthesize token-specific feed-forward operators.",
+            "RELEVANCE": 8,
+            "NOVELTY": 7,
+            "PRIMARY_TOPIC_ID": "architecture_training",
+            "MATCHED_TOPIC_IDS": [
+                "architecture_training"
+            ],
+            "TOPIC_MATCH_COMMENT": "The core contribution is dynamic operator construction, with evidence limited to neural decoding and small language models.",
+            "HOTSPOT_PAPER_TAGS": [],
+            "HOTSPOT_PAPER_COMMENT": "",
+            "SCORE": 15,
+            "authors": [
+                "Morteza Sarafyazd"
+            ],
+            "title": "The Von-Neumann State-Space Transformer for neural decoding",
+            "abstract": "Cortical computation is strikingly low-dimensional: a handful of latent variables, carried in a neural population's activity, steer the higher-dimensional responses of individual neurons. Our aim is sample efficiency-models that decode well from limited data and at small parameter budgets. In a standard Transformer layer, the feed-forward block applies the same operator to every token. We suggest a von-Neumann inspired hypothesis of efficient computation as an alternative for neural decoding: a controller decodes an instruction and then executes a token-specific operator; the usual realization-a soft mixture of experts-only blends their outputs, not operators. We introduce a von-Neumann State-Space Transformer (VN-SST), a memory-augmented Transformer whose feed-forward block is a low-rank instruction bank: a shared base operator plus a small set of learned low-rank instructions, from which a per-token code synthesizes the weight matrix actually used at that token. The code is read from a low- dimensional projection of a carried state-space memory, so a slow latent trajectory acts as an instruction pointer-mirroring how low-dimensional dynamics may route cortical computation. On three motor-cortex neural-decoding benchmarks, VN-SST is far more data-efficient than a modern Transformer, each jointly predicting spikes and decoding behavior. This model wins by a wide margin on the scarcest benchmark, leads on the other two, and turns longer context into rising rather than falling accuracy. We evaluated that the network compresses a large instruction bank to a few bits per token, so program capacity acts as a control channel, not an accuracy lever. The same model is also more parameter-efficient on two small text benchmarks used for language modeling (LLMs), suggesting a generic mechanism.",
+            "arxiv_id": "2608.25088",
+            "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+            "MATCHED_TOPIC_LABELS": [
+                "Architecture and Training Dynamics"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [],
+            "HOTSPOT_PAPER_PRIMARY_KIND": null,
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+        },
+        "2608.25062": {
+            "ARXIVID": "2608.25062",
+            "COMMENT": "Dynamic flash-read coalescing and pipelining address weight-fetch bottlenecks in capacity-limited LLM inference.",
+            "RELEVANCE": 8,
+            "NOVELTY": 7,
+            "PRIMARY_TOPIC_ID": "efficiency_scaling",
+            "MATCHED_TOPIC_IDS": [
+                "efficiency_scaling"
+            ],
+            "TOPIC_MATCH_COMMENT": "New flash-memory control mechanisms directly improve the feasibility and efficiency of a larger LLM weight-memory tier.",
+            "HOTSPOT_PAPER_TAGS": [],
+            "HOTSPOT_PAPER_COMMENT": "",
+            "SCORE": 15,
+            "authors": [
+                "Geraldo F. Oliveira",
+                "Arash Tavakkol",
+                "Xiangyu Zhu",
+                "Ahmet Caner YÃ¼zÃ¼gÃ¼ler",
+                "Vamanan Arulchelvan",
+                "Lukas Cavigelli",
+                "Renzo Andri",
+                "Mohammad Sadrosadati",
+                "Jia Xinglei",
+                "Onur Mutlu",
+                "Zhou Ke",
+                "Shai Bergman",
+                "Ji Zhang"
+            ],
+            "title": "FLINT: Efficiently Leveraging High Bandwidth Flash for Capacity-Scalable LLM Inference Acceleration",
+            "abstract": "LLM inference is increasingly constrained by accelerator memory capacity rather than compute throughput. This constraint is especially acute in single-accelerator and small-node inference systems, where limited on-package memory capacity restricts the size of deployable models. HBF is an emerging 3D-stacked NAND flash technology that provides multi-terabyte near-accelerator capacity, making it a promising capacity tier for storing LLM weights. However, existing HBF-based proposals face three adoption challenges: they (1) rely on coarse-grained static prefetching for LLM weights aiming to hide the microsecond-level read latency of the NAND flash device while maximizing HBF's read throughput, (2) expose NAND flash management tasks (e.g., refresh operations) to the accelerator-visible critical inference path, and (3) miss optimization opportunities to specialize and optimize the flash-management mechanisms to the workload behavior. Our goal is to design an efficient HBF substrate that integrates HBF as a memory-capacity tier alongside HBM while addressing these three challenges. To this end, we propose FLINT, a workload-driven HBF substrate for capacity-scalable LLM inference. FLINT introduces three mechanisms: (1) a hardware burst-buffer controller that dynamically coalesces and pipelines HBF reads aiming to utilize existing NAND flash buffers while sustaining high HBF bandwidth, (2) a phantom-plane refresh mechanism, which removes refresh from the critical inference path by moving refresh-related NAND flash operations outside the read foreground back via low-cost resource duplication, and (3) a read-only FTL, which replaces SSD-class support for arbitrary writes with a compact table that translates logical weight bursts to physical HBF locations.",
+            "arxiv_id": "2608.25062",
+            "PRIMARY_TOPIC_LABEL": "Efficiency, Compression, and Large-Scale Training",
+            "MATCHED_TOPIC_LABELS": [
+                "Efficiency, Compression, and Large-Scale Training"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [],
+            "HOTSPOT_PAPER_PRIMARY_KIND": null,
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+        },
+        "2608.24593": {
+            "ARXIVID": "2608.24593",
+            "COMMENT": "AdamW moment-state transport changes which short-horizon data-mixture schedules improve subsequent loss.",
+            "RELEVANCE": 8,
+            "NOVELTY": 7,
+            "PRIMARY_TOPIC_ID": "architecture_training",
+            "MATCHED_TOPIC_IDS": [
+                "architecture_training"
+            ],
+            "TOPIC_MATCH_COMMENT": "Directly analyzes optimizer-state training dynamics, with evidence limited to tiny models and short, committed minibatch trajectories.",
+            "HOTSPOT_PAPER_TAGS": [],
+            "HOTSPOT_PAPER_COMMENT": "",
+            "SCORE": 15,
+            "authors": [
+                "Jinhui Guo"
+            ],
+            "title": "Delayed Optimizer-State Transport Shapes Short-Horizon Training Decisions",
+            "abstract": "Adaptive optimizers retain gradient history in moment variables, allowing a local change in loss weighting to alter later updates. We examine whether this delayed transport is large enough to change prospective short-horizon decisions. On committed future-minibatch sequences, we differentiate eight-step AdamW trajectories through the complete model--optimizer state and select exposure-matched Math--Code loss schedules before independent evaluation. Across 12 unused 0.3M Transformer histories, full transport lowers token-disjoint loss relative to an optimizer-aware immediate derivative in 10/12 histories (mean benefit $4.71\\times10^{-4}$; exact one-sided sign test, $p=0.0193$). The two controllers act equally often but select different schedules in 60/96 windows. Crossed checkpoint--future-path tests attribute this reordering to the interaction between optimizer state and near-future data, while an independent Ising--CNN experiment shows that deleting moment-state transport destroys accurate response prediction. Full-transport scores also concentrate exact-rollout winners in larger candidate libraries, focusing finite-amplitude evaluation on a shortlist. On these committed short paths, optimizer memory and near-future data order are therefore actionable components of the training state, providing a mechanism-based criterion for when finite-horizon rather than one-step intervention is required.",
+            "arxiv_id": "2608.24593",
+            "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+            "MATCHED_TOPIC_LABELS": [
+                "Architecture and Training Dynamics"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [],
+            "HOTSPOT_PAPER_PRIMARY_KIND": null,
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+        },
+        "2608.22354": {
+            "ARXIVID": "2608.22354",
+            "COMMENT": "Localized recurrent-state norm explosions motivate adaptive compression that preserves chunk-parallel Delta-Rule updates.",
+            "RELEVANCE": 8,
+            "NOVELTY": 7,
+            "PRIMARY_TOPIC_ID": "architecture_training",
+            "MATCHED_TOPIC_IDS": [
+                "architecture_training"
+            ],
+            "TOPIC_MATCH_COMMENT": "It diagnoses and modifies recurrent-state dynamics, directly addressing stability of a core sequence-model mechanism during context extrapolation.",
+            "HOTSPOT_PAPER_TAGS": [],
+            "HOTSPOT_PAPER_COMMENT": "",
+            "SCORE": 15,
+            "authors": [
+                "Qingwen Lin",
+                "Boyan Xu",
+                "Xiao Liu",
+                "Zhifeng Hao",
+                "Ruichu Cai"
+            ],
+            "title": "SANE: State Anomaly Neutralization for Stable Extreme-Context Delta-Rule Models",
+            "abstract": "Delta-Rule recurrent models maintain a fixed-size state, enabling $O(1)$ inference memory but potentially becoming unstable under extreme-context extrapolation. By tracking RWKV-7 over sequences of up to 100M tokens, we empirically identify a distinct failure pattern: \\textbf{localized norm explosion atop a relatively sparse substrate}, rather than global state saturation. Analysis of the recurrent update suggests that persistent decay keeps weakly updated entries small, whereas uneven injections allow a few channels to accumulate extreme values. Motivated by this diagnosis, we propose \\textbf{State Anomaly Neutralization (SANE)}, which applies adaptive $\\tanh$ compression at chunk boundaries while preserving the intra-chunk parallel structure. Within a safe threshold range ($3 \\le Î±\\le 5$), SANE matches the baseline on 11 short-context reasoning benchmarks with no statistically significant degradation. After a 100M-token prefix, which exceeds the training length by over $24{,}000\\times$, SANE retains functional reasoning ($33.46$--$35.56$) while the baseline encounters numerical overflow. In contrast, overly permissive thresholds ($Î±\\ge 8$) remain numerically stable but lose reasoning capability entirely, showing that numerical stabilization alone does not guarantee functional reasoning and revealing a capacity--stability trade-off in state compression.",
+            "arxiv_id": "2608.22354",
+            "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+            "MATCHED_TOPIC_LABELS": [
+                "Architecture and Training Dynamics"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [],
+            "HOTSPOT_PAPER_PRIMARY_KIND": null,
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+        },
+        "2608.24462": {
+            "ARXIVID": "2608.24462",
+            "COMMENT": "Mahalanobis-kernel attention introduces tree-distance correction and cross-head kernel collaboration.",
+            "RELEVANCE": 8,
+            "NOVELTY": 7,
+            "PRIMARY_TOPIC_ID": "architecture_training",
+            "MATCHED_TOPIC_IDS": [
+                "architecture_training"
+            ],
+            "TOPIC_MATCH_COMMENT": "The attention mechanism itself is the core contribution, although validation is limited to small models on structured state-tracking tasks.",
+            "HOTSPOT_PAPER_TAGS": [],
+            "HOTSPOT_PAPER_COMMENT": "",
+            "SCORE": 15,
+            "authors": [
+                "Xiaohe Li"
+            ],
+            "title": "Mahalanobis-Based Multi-Head Attention for Complex State Propagation",
+            "abstract": "In this paper, we propose \\textbf{Mahalanobis-Based Multi-Head Attention} (MHA-CSP), a novel attention mechanism that replaces the standard dot-product with a \\textbf{Mahalanobis distance-based RBF kernel}, which effectively computes attention in an infinite-dimensional feature space without increasing the parameter count. Crucially, the positive definiteness of the Mahalanobis distance enables a \\textbf{direct construction of Tree Attention}: attention scores are built directly from accumulated distances, with a LogSumExp correction that rectifies the raw distance by subtracting the log-sum of edge exponentials. Moreover, the multi-head Mahalanobis distance matrices are themselves repurposed to construct an \\textbf{attention meshing mechanism}, enabling cross-head kernel collaboration that simultaneously boosts accuracy and training efficiency. Extensive experiments demonstrate that MHA-CSP, with only 119K parameters and \\textbf{teacher forcing applied exclusively at the final hidden state}, consistently outperforms Transformer and GCN baselines trained from scratch under identical conditions on long-sequence state tracking tasks. While these baselines rely on dense attention or graph propagation, MHA-CSP achieves robust structured reasoning via synthetic distance rectification---powered by Mahalanobis-based attention---and efficient information bypass inherited from the CSP backbone. This result highlights the effectiveness of complex-valued state propagation with collaborative multi-head rectification in capturing symbolic structures, establishing a new efficiency-performance trade-off for structured reasoning.",
+            "arxiv_id": "2608.24462",
+            "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+            "MATCHED_TOPIC_LABELS": [
+                "Architecture and Training Dynamics"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [],
+            "HOTSPOT_PAPER_PRIMARY_KIND": null,
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+        },
+        "2608.24971": {
+            "ARXIVID": "2608.24971",
+            "COMMENT": "Hyperbolic guarding provides deterministic attention-distortion bounds under finite precision, with a reported 6.1x storage reduction.",
+            "RELEVANCE": 7,
+            "NOVELTY": 8,
+            "PRIMARY_TOPIC_ID": "efficiency_scaling",
+            "MATCHED_TOPIC_IDS": [
+                "efficiency_scaling"
+            ],
+            "TOPIC_MATCH_COMMENT": "The core contribution connects reduced attention-retrieval storage to certified error bounds; its relevance is narrower because the mechanism is specialized to hyperbolic representations.",
+            "HOTSPOT_PAPER_TAGS": [],
+            "HOTSPOT_PAPER_COMMENT": "",
+            "SCORE": 15,
+            "authors": [
+                "Liangchen Ge"
+            ],
+            "title": "HCC+: Hyperbolic Guarding for Certified Attention Retrieval",
+            "abstract": "We study the Lipschitz stability of attention retrieval in hyperbolic spaces. Existing methods lack deterministic guarantees on attention-weight preservation under finite-precision representations. We introduce HCC+, a theoretical framework exploiting three properties of the PoincarÃ© ball: exponential volume growth enabling query-independent boundary truncation; logarithmic covering radius of hyperbolic 1-centers enabling dimension-independent critical-key identification; and a packing bound with constants independent of the embedding dimension. We prove two deterministic guarantees: for exact retrieval, the per-layer attention deviation is bounded by 10\\% of its ideal value; for soft attention, the total variation distance decays as $O(1/\\sqrt{n})$, the rate of finite-sample variance. As a consequence of the guarding mechanism, the framework achieves a storage reduction factor of $6.1\\times$ relative to FP16. We provide the first deterministic, query-independent retrieval certificate in non-Euclidean geometry.",
+            "arxiv_id": "2608.24971",
+            "PRIMARY_TOPIC_LABEL": "Efficiency, Compression, and Large-Scale Training",
+            "MATCHED_TOPIC_LABELS": [
+                "Efficiency, Compression, and Large-Scale Training"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [],
+            "HOTSPOT_PAPER_PRIMARY_KIND": null,
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+        },
+        "2607.29221": {
+            "ARXIVID": "2607.29221",
+            "COMMENT": "Approximate matrix-multiplication masking reduces trusted-client computation, with Hadamard-based control of accumulated transformer errors.",
+            "RELEVANCE": 7,
+            "NOVELTY": 8,
+            "PRIMARY_TOPIC_ID": "efficiency_scaling",
+            "MATCHED_TOPIC_IDS": [
+                "efficiency_scaling"
+            ],
+            "TOPIC_MATCH_COMMENT": "Introduces an algorithmic efficiency mechanism for large-model execution, specialized to confidential inference.",
+            "HOTSPOT_PAPER_TAGS": [
+                "daily_hot"
+            ],
+            "HOTSPOT_PAPER_COMMENT": "Efficient private computation outsourcing demonstrated on 70B transformers could materially expand confidential AI infrastructure.",
+            "SCORE": 15,
+            "authors": [
+                "James Hsin-yu Chiang",
+                "Sheila Zingg",
+                "Kari Kostiainen",
+                "Srdjan Capkun"
+            ],
+            "title": "MOSAIC: Masked Outsourcing of Secure AI Computations",
+            "abstract": "We address the challenge of securely and efficiently outsourcing AI computations from a trusted but computationally weak client to an untrusted but powerful server, in the setting where the client holds both the input and the model, and the server must learn neither. We present MOSAIC, whose core is a novel matrix-multiplication masking protocol that scales to far larger matrices than prior work, enabling the safe outsourcing of modern workloads such as large transformer inference. By introducing small amounts of noise to the multiplication result and thereby relaxing correctness, MOSAIC achieves optimal asymptotic client overhead and concrete runtimes orders of magnitude faster than prior work. Its security reduces to the decisional LWE and LPN assumptions. Because this noise accumulates across the many layers of a transformer, a key technical challenge is bounding error growth; MOSAIC addresses this with an error-scaling mechanism based on random Hadamard rotations. On large 70B transformer models, MOSAIC's perplexity is comparable to popular quantization approaches and even matches full-precision BF16 inference on HumanEval. Finally, we present an end-to-end implementation showing how ideas like MOSAIC can promise a path towards large-scale confidential AI in modern data centers. Non-confidential inference is already distributed across phase (prefill/decode), layer, and time to maximize utilization of heterogeneous hardware, using RDMA-like networking to move activations, cached KV values, and weights across nodes. MOSAIC enables scaling of confidential compute by keeping the trusted computing base (TCB) small and outsourcing the bulk of the AI computation to untrusted accelerators.",
+            "arxiv_id": "2607.29221",
+            "PRIMARY_TOPIC_LABEL": "Efficiency, Compression, and Large-Scale Training",
+            "MATCHED_TOPIC_LABELS": [
+                "Efficiency, Compression, and Large-Scale Training"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [
+                "Daily Hot Papers"
+            ],
+            "HOTSPOT_PAPER_PRIMARY_KIND": "daily_hot",
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "Daily Hot Papers",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "llm_exact"
+        },
+        "2507.18405": {
+            "ARXIVID": "2507.18405",
+            "COMMENT": "Interleaved-window attention coupled with depthwise convolution removes positional embeddings and enables cross-resolution fine-tuning.",
+            "RELEVANCE": 8,
+            "NOVELTY": 6,
+            "PRIMARY_TOPIC_ID": "architecture_training",
+            "MATCHED_TOPIC_IDS": [
+                "architecture_training",
+                "efficiency_scaling"
+            ],
+            "TOPIC_MATCH_COMMENT": "The core contribution is an attention-block design that changes positional encoding, resolution transfer, and attention cost; vision tasks validate the mechanism.",
+            "HOTSPOT_PAPER_TAGS": [],
+            "HOTSPOT_PAPER_COMMENT": "",
+            "SCORE": 14,
+            "authors": [
+                "Simin Huo",
+                "Ning Li"
+            ],
+            "title": "Iwin Transformer: Hierarchical Vision Transformer using Interleaved Windows",
+            "abstract": "Vision Transformers (ViTs) face two limitations: the rigid resolution dependency of positional embeddings, which complicates cross-resolution fine-tuning, and the quadratic complexity of attention. While Swin Transformer alleviates the latter through window attention, it suffers from fine-tuning. Following the philosophy \"no token is an island,\" we present Iwin Transformer, a position-embedding-free hierarchical vision transformer that couples interleaved window attention with depthwise convolution inside a single block. Attention captures long-range dependencies, while convolution links local neighbors and implicitly encodes spatial position. This design not only reduces the quadratic complexity of attention but also enables two types of scalability: fine-tuning from low to high resolution and weight transfer from 2D to 3D. With window-size adjustment alone, direct $224^2{\\rightarrow}384^2$ fine-tuning lifts Iwin-L from 86.4\\% to 87.4\\% top-1 accuracy on ImageNet-1K. Transferring an ImageNet-pretrained Iwin-T to video achieves 79.1\\% on Kinetics-400, outperforming Swin-T (78.8\\%) with 15.9\\% fewer FLOPs. Iwin also remains competitive on ADE20K segmentation and class-conditional image generation (FlashDiT). Overall, Iwin offers an effective approach to simultaneously tackling the complexity and scalability challenges in ViTs. Code and models are at https://github.com/cominder/Iwin-Transformer.",
+            "arxiv_id": "2507.18405",
+            "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+            "MATCHED_TOPIC_LABELS": [
+                "Architecture and Training Dynamics",
+                "Efficiency, Compression, and Large-Scale Training"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [],
+            "HOTSPOT_PAPER_PRIMARY_KIND": null,
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+        },
+        "2608.24063": {
+            "ARXIVID": "2608.24063",
+            "COMMENT": "Layer-dependent KV budgets and asymmetric key pruning with value fusion reduce visual-cache memory and inference cost.",
+            "RELEVANCE": 8,
+            "NOVELTY": 6,
+            "PRIMARY_TOPIC_ID": "efficiency_scaling",
+            "MATCHED_TOPIC_IDS": [
+                "efficiency_scaling"
+            ],
+            "TOPIC_MATCH_COMMENT": "KV-cache compression is the core algorithmic contribution; visual inputs define its specialization rather than a downstream prediction objective.",
+            "HOTSPOT_PAPER_TAGS": [],
+            "HOTSPOT_PAPER_COMMENT": "",
+            "SCORE": 14,
+            "authors": [
+                "Lyuke Wang",
+                "Zhuo Li",
+                "Guangxu Zhu"
+            ],
+            "title": "VisCache: Visual KV Cache Pruning for Efficient Vision Large Language Model Inference",
+            "abstract": "While Vision Large Language Models (VLLMs) have achieved remarkable success in multimodal reasoning, their long-context inference remains prohibitively expensive due to the massive computation and memory overhead of visual Key-Value (KV) caches. Existing KV compression methods often apply uniform pruning across visual tokens and layers, leading to substantial information loss and degraded performance.To address this challenge, we propose \\textbf{VisCache}, a plug-and-play framework for coarse-to-fine \\textbf{Vis}ual KV \\textbf{Cache} pruning without training, which consists of two synergistic stages. First, a lightweight VLM filters temporal redundancy by selectively forwarding semantically informative keyframes. Second, we introduce {PruneKV}, a surgical KV compression algorithm tailored to the attention dynamics of VLLMs. Unlike rigid pruning strategies, PruneKV adopts a parabolic layer-wise budget allocation together with an asymmetric update mechanism that selectively prunes keys while fusing values, thereby preserving critical contextual information. Extensive experiments demonstrate that VisCache substantially improves inference efficiency, achieving up to {2.35$\\times$ speedup} and significant memory reduction while maintaining competitive performance with only {19--28\\%} KV cache retention. VisCache consistently outperforms existing baselines, establishing a new Pareto frontier between efficiency and performance for long-context VLLM inference. Code is available at https://github.com/Wlklk/VisCache",
+            "arxiv_id": "2608.24063",
+            "PRIMARY_TOPIC_LABEL": "Efficiency, Compression, and Large-Scale Training",
+            "MATCHED_TOPIC_LABELS": [
+                "Efficiency, Compression, and Large-Scale Training"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [],
+            "HOTSPOT_PAPER_PRIMARY_KIND": null,
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+        },
+        "2608.24568": {
+            "ARXIVID": "2608.24568",
+            "COMMENT": "Progressive parameter-subspace expansion biases optimization toward flatter basins through constraint-relaxation geometry.",
+            "RELEVANCE": 7,
+            "NOVELTY": 7,
+            "PRIMARY_TOPIC_ID": "architecture_training",
+            "MATCHED_TOPIC_IDS": [
+                "architecture_training"
+            ],
+            "TOPIC_MATCH_COMMENT": "The core contribution explains how parameter-growth schedules alter optimization and basin selection, with validation limited to toy landscapes and ResNet-scale training.",
+            "HOTSPOT_PAPER_TAGS": [],
+            "HOTSPOT_PAPER_COMMENT": "",
+            "SCORE": 14,
+            "authors": [
+                "Paul Caillon",
+                "Christophe Cerisara",
+                "Alexandre Allauzen"
+            ],
+            "title": "Across the Loss Landscape with Progressive Growth",
+            "abstract": "Deep neural networks generalize well despite their highly nonconvex, overparameterized loss landscapes, a phenomenon often associated with the geometry of the minima found by stochastic optimization. We study how incremental grow-and-optimize strategies bias training toward flatter regions by viewing growth as progressive constraint relaxation. Starting from a low-dimensional submodel, we iteratively expand the trainable parameters by unlocking nested random subspaces while freezing the orthogonal complement at the network initialization, re-optimizing after each expansion until the full architecture is reached. Under standard local regularity conditions around non-degenerate minima, we prove that local sublevel sets are well approximated by ellipsoids and that basin accessibility under frozen constraints can be characterized by an explicit effective curvature in the frozen directions. This leads to an explanation of the bias: progressive growth increases the relative weight of wide basins and suppresses sharp ones through a volume effect induced by the frozen constraints. We empirically validate these predictions in controlled toy landscapes and in a realistic ResNet/CIFAR-100 setting and confirm that although progressive subspace growth reliably produces flatter solutions, curvature reductions do not universally translate into improved test performance, highlighting subtleties in the flatness-generalization connection. The code is available at https://github.com/p0lcAi/Across-the-Loss-Landscape.",
+            "arxiv_id": "2608.24568",
+            "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+            "MATCHED_TOPIC_LABELS": [
+                "Architecture and Training Dynamics"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [],
+            "HOTSPOT_PAPER_PRIMARY_KIND": null,
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+        },
+        "2608.24664": {
+            "ARXIVID": "2608.24664",
+            "COMMENT": "Software-programmed dataflow engines explicitly orchestrate specialized memories and data movement to improve AI execution efficiency.",
+            "RELEVANCE": 7,
+            "NOVELTY": 7,
+            "PRIMARY_TOPIC_ID": "efficiency_scaling",
+            "MATCHED_TOPIC_IDS": [
+                "efficiency_scaling"
+            ],
+            "TOPIC_MATCH_COMMENT": "The substantive match is accelerator memory and data-movement design that changes execution cost; the reported workload focus is inference.",
+            "HOTSPOT_PAPER_TAGS": [
+                "daily_hot"
+            ],
+            "HOTSPOT_PAPER_COMMENT": "A major AI accelerator architecture with explicit dataflow programming and substantial claimed compute and bandwidth capabilities has broad infrastructure significance.",
+            "SCORE": 14,
+            "authors": [
+                "Sherry Xu",
+                "Marco Heddes",
+                "Jackson Peng",
+                "Tom Savell",
+                "Monica Tang",
+                "Prashant Ranjan",
+                "Jesse Benson",
+                "Ofer Dekel",
+                "Saurabh Dighe",
+                "Anupama Kurpad",
+                "Artour Levin",
+                "Matthew Mattina",
+                "George Petre",
+                "Cheng Tang",
+                "Yuan Yu",
+                "Li Zhang",
+                "Torsten Hoefler"
+            ],
+            "title": "Maia 200: A Software Defined Dataflow System for Large-scale AI Acceleration",
+            "abstract": "We introduce Maia 200, an advanced AI accelerator delivering high performance-10 145 Tflop/s FP4 and 5072 Tflop/s FP8 within a 750W TDP and 7 TB/s HBM bandwidth. Maia exemplifies a new class of Software Defined Locally Accessed Dataflow Architectures (SDLA), which explicitly program dataflow engines to orchestrate highly specialized memories and data movement engines. This approach shifts the focus from today's thread-centric to data-movement-centric architecture, improving efficiency and scalability. Our taxonomy of data management, inspired by Flynn's classification, highlights how SDLA addresses challenges in modern AI computing. Maia 200 achieves significant cost and energy savings while supporting massive parallelism for AI inference workloads, making it a compelling solution for next-generation high-performance computing systems.",
+            "arxiv_id": "2608.24664",
+            "PRIMARY_TOPIC_LABEL": "Efficiency, Compression, and Large-Scale Training",
+            "MATCHED_TOPIC_LABELS": [
+                "Efficiency, Compression, and Large-Scale Training"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [
+                "Daily Hot Papers"
+            ],
+            "HOTSPOT_PAPER_PRIMARY_KIND": "daily_hot",
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "Daily Hot Papers",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "llm_exact"
+        },
+        "2608.24338": {
+            "ARXIVID": "2608.24338",
+            "COMMENT": "Preserves promising trajectory prefixes and regenerates degraded suffixes to reduce generated-token cost.",
+            "RELEVANCE": 7,
+            "NOVELTY": 7,
+            "PRIMARY_TOPIC_ID": "efficiency_scaling",
+            "MATCHED_TOPIC_IDS": [
+                "efficiency_scaling"
+            ],
+            "TOPIC_MATCH_COMMENT": "The core contribution is a decoding algorithm that reduces LLM computation through partial trajectory reuse, making it a direct efficiency match despite its inference focus.",
+            "HOTSPOT_PAPER_TAGS": [],
+            "HOTSPOT_PAPER_COMMENT": "",
+            "SCORE": 14,
+            "authors": [
+                "Sophia Xiao Pu",
+                "Yumo Xu",
+                "Sailik Sengupta",
+                "Millennium Bismay",
+                "Ruixue Lian",
+                "James Gung",
+                "Yi-an Lai",
+                "Arshit Gupta"
+            ],
+            "title": "Selective Regenerative Decoding: Trajectory-Level Intervention for Inference-Time Reasoning",
+            "abstract": "Inference-time decoding methods improve LLM reasoning by exploring multiple candidate trajectories, yet treat each trajectory as atomic: either retaining it whole or discarding it irreversibly. This wastes computation on partially promising candidates whose high-quality prefixes are abandoned alongside degraded suffixes. We introduce Selective Regenerative Decoding (SRD), which routes each candidate to discard, keep, or refine only the degraded portion of the suffix while preserving the useful prefix of borderline candidates, without requiring a larger target model. Under mild assumptions, SRD achieves a provable 1.28-to-1.36-fold gain in sample efficiency over rejection sampling with strictly higher expected trajectory quality, with the gain growing as the candidate pool grows. Across MATH500, GPQA Diamond, HotpotQA, and AlpacaEval with multiple generation-reward model pairs, SRD matches Best-of-N accuracy with substantially fewer generated tokens and outperforms speculative rejection in low-compute regimes. By enabling segment-level intervention rather than whole-trajectory selection, SRD opens a previously underexplored region of the accuracy-compute tradeoff for inference-time reasoning.",
+            "arxiv_id": "2608.24338",
+            "PRIMARY_TOPIC_LABEL": "Efficiency, Compression, and Large-Scale Training",
+            "MATCHED_TOPIC_LABELS": [
+                "Efficiency, Compression, and Large-Scale Training"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [],
+            "HOTSPOT_PAPER_PRIMARY_KIND": null,
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+        },
+        "2608.22462": {
+            "ARXIVID": "2608.22462",
+            "COMMENT": "Causally links compatibility with preserved behavior to whether newly acquired learning persists.",
+            "RELEVANCE": 7,
+            "NOVELTY": 7,
+            "PRIMARY_TOPIC_ID": "architecture_training",
+            "MATCHED_TOPIC_IDS": [
+                "architecture_training"
+            ],
+            "TOPIC_MATCH_COMMENT": "Controlled interventions across transformer and convolutional models provide a mechanistic training-dynamics account of stability-plasticity, although implications for pretraining at scale remain untested.",
+            "HOTSPOT_PAPER_TAGS": [],
+            "HOTSPOT_PAPER_COMMENT": "",
+            "SCORE": 14,
+            "authors": [
+                "Hossein Javidnia"
+            ],
+            "title": "Functional compatibility as a determinant of persistent neural learning",
+            "abstract": "Neural networks can acquire new capabilities while damaging existing ones, but what determines whether new learning persists remains unclear. We identify functional compatibility, the extent to which incoming learning can coexist with behaviour that must be preserved, as an experimentally manipulable causal determinant of persistence. From identical neural states, we vary compatibility while matching unrestricted learning opportunity and imposing a common retention requirement. Persistent learning increases with compatibility across independent directions, convolutional and transformer architectures, vision and text, and a ten-seed replication. Learning rules and retention constraints determine how much compatible opportunity is retained, whereas nonlinear geometry limits the matched intervention at larger update norms. Functional compatibility therefore reframes stability-plasticity from preventing forgetting to determining which new learning can coexist with existing function and persist.",
+            "arxiv_id": "2608.22462",
+            "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+            "MATCHED_TOPIC_LABELS": [
+                "Architecture and Training Dynamics"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [],
+            "HOTSPOT_PAPER_PRIMARY_KIND": null,
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+        },
+        "2608.25231": {
+            "ARXIVID": "2608.25231",
+            "COMMENT": "Identifies attenuation during expert-output aggregation as an architectural cause of perturbation sensitivity.",
+            "RELEVANCE": 7,
+            "NOVELTY": 7,
+            "PRIMARY_TOPIC_ID": "architecture_training",
+            "MATCHED_TOPIC_IDS": [
+                "architecture_training"
+            ],
+            "TOPIC_MATCH_COMMENT": "Expert aggregation and residual-stream signal scaling provide a concrete architectural mechanism, although the evidence is narrowly based on moral-content representations rather than MoE training improvements.",
+            "HOTSPOT_PAPER_TAGS": [],
+            "HOTSPOT_PAPER_COMMENT": "",
+            "SCORE": 14,
+            "authors": [
+                "Orion Reblitz-Richardson"
+            ],
+            "title": "Output Dilution: Redundant but Fragile Representations in MoE Models",
+            "abstract": "Mixture-of-Experts (MoE) models appear to encode moral content as robustly as dense models, yet prove far more fragile in their encoding. In OLMoE-1B-7B, linear probes recover moral valence from nearly every expert-layer combination, with mean peak-layer accuracy above 90%. But these representations collapse under levels of activation noise that a dense model of matched size easily tolerates, with a 4.2-fold difference in robustness. We trace this to output dilution. Because the MoE block averages across active experts before contributing to the residual stream, the feedforward signal reaching downstream layers is nearly two orders of magnitude smaller than in a dense MLP. Moral information, our interest, survives aggregation intact but at a scale trivially overwhelmed by perturbation. Routing itself remains stable under noise while the vulnerability originates entirely in the diluted aggregate. Checkpoint trajectories confirm this is architectural, not learned. Experts never specialize and accuracy saturates within the first few thousand steps. In sparse architectures, redundant encoding does not imply robust encoding.",
+            "arxiv_id": "2608.25231",
+            "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+            "MATCHED_TOPIC_LABELS": [
+                "Architecture and Training Dynamics"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [],
+            "HOTSPOT_PAPER_PRIMARY_KIND": null,
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+        },
+        "2510.07922": {
+            "ARXIVID": "2510.07922",
+            "COMMENT": "Commit-then-sketch screening reduces communication in decentralized training while preventing adaptive null-space attacks.",
+            "RELEVANCE": 7,
+            "NOVELTY": 7,
+            "PRIMARY_TOPIC_ID": "training_systems",
+            "MATCHED_TOPIC_IDS": [
+                "training_systems"
+            ],
+            "TOPIC_MATCH_COMMENT": "Introduces a communication protocol with convergence guarantees for distributed training, although its setting is Byzantine-robust federated learning.",
+            "HOTSPOT_PAPER_TAGS": [],
+            "HOTSPOT_PAPER_COMMENT": "",
+            "SCORE": 14,
+            "authors": [
+                "Murtaza Rangwala",
+                "Farag Azzedin",
+                "Richard O. Sinnott",
+                "Rajkumar Buyya"
+            ],
+            "title": "SketchGuard: Scaling Byzantine-Robust Decentralized Federated Learning via Sketch-Based Screening",
+            "abstract": "Byzantine-robust decentralized federated learning (DFL) protects peer-to-peer training from malicious clients. The dominant defenses rely on similarity-based filtering, in which each client exchanges full model vectors with every neighbor before any filtering decision; this communication grows with the model dimension and scales poorly as models grow. We propose SketchGuard, which decouples screening from aggregation: clients screen neighbors in a compact Count Sketch domain and fetch full models only from those that pass the screen. We show this idea is insecure when implemented naively. Because the sketch is a fixed, publicly known linear map, an adaptive adversary can hide an arbitrarily large perturbation in its null space, so the poisoned model passes both the sketch-domain filter and the re-sketch verification. We prove this vulnerability and close it with commit-then-sketch, a one-message protocol that draws the sketch seed only after models are committed, restoring the oblivious setting in which Count Sketch provably preserves screening decisions. We then establish convergence in strongly convex and non-convex settings, with explicit dependence on network connectivity and data heterogeneity. Empirically, secured SketchGuard matches state-of-the-art full-precision robustness, up to a small threshold inflation, across six attacks including the adaptive null-space attack, a range of network topologies and heterogeneity settings, and a decentralized fine-tuning task on an 11-million-parameter language model, while reducing per-neighbor screening communication to a size independent of the model dimension.",
+            "arxiv_id": "2510.07922",
+            "PRIMARY_TOPIC_LABEL": "Large-Scale Training Systems and Efficiency",
+            "MATCHED_TOPIC_LABELS": [
+                "Large-Scale Training Systems and Efficiency"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [],
+            "HOTSPOT_PAPER_PRIMARY_KIND": null,
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+        },
+        "2608.24136": {
+            "ARXIVID": "2608.24136",
+            "COMMENT": "Readout-derived coupling forces feed intermediate predictions back into recurrent latent-state updates.",
+            "RELEVANCE": 7,
+            "NOVELTY": 7,
+            "PRIMARY_TOPIC_ID": "architecture_training",
+            "MATCHED_TOPIC_IDS": [
+                "architecture_training"
+            ],
+            "TOPIC_MATCH_COMMENT": "Introduces a closed-loop recurrent computation mechanism, with evidence currently limited to inference-time puzzle reasoning.",
+            "HOTSPOT_PAPER_TAGS": [],
+            "HOTSPOT_PAPER_COMMENT": "",
+            "SCORE": 14,
+            "authors": [
+                "Shunsuke Kamiya",
+                "Masanori Koyama",
+                "Seongcheol Jeong",
+                "Fumiya Uchiyama",
+                "Kenji Kubo",
+                "Kohei Hayashi",
+                "Masahiro Suzuki",
+                "Yutaka Matsuo"
+            ],
+            "title": "Steering Recurrent Reasoners at Inference Time with Readout Feedback",
+            "abstract": "Recurrent models, which repeatedly update latent states with shared computation blocks, have emerged as powerful architectures for solving complex reasoning tasks. Existing inference-time methods scale computation by running more steps or sampling more trajectories, but ignore information revealed within each trajectory. Here we show that recurrent models can be improved at inference time by using their own readout probabilities to steer latent dynamics without retraining. We introduce Readout Feedback (RoFB), a test-time intervention that converts intermediate predictions into token-wise pairwise coupling forces injected into the latent dynamics. Across three recurrent models (AKOrN, ItrSA++, TRM) on Sudoku and Maze, RoFB yields clear gains in four of six model-task pairs, achieving performance unattainable by merely running more steps or selecting from multiple trajectories, at comparable or lower computational cost. These results suggest that closed-loop steering of latent dynamics can serve as a complementary inference-time control mechanism for recurrent reasoning models.",
+            "arxiv_id": "2608.24136",
+            "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+            "MATCHED_TOPIC_LABELS": [
+                "Architecture and Training Dynamics"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [],
+            "HOTSPOT_PAPER_PRIMARY_KIND": null,
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+        },
+        "2608.24051": {
+            "ARXIVID": "2608.24051",
+            "COMMENT": "Stable complex-pole banks introduce a linear-time sequence architecture with a characterized spectral readout.",
+            "RELEVANCE": 7,
+            "NOVELTY": 7,
+            "PRIMARY_TOPIC_ID": "architecture_training",
+            "MATCHED_TOPIC_IDS": [
+                "architecture_training"
+            ],
+            "TOPIC_MATCH_COMMENT": "The modal-state computation and analysis constitute a new sequence-model mechanism, with evidence currently confined to compact models.",
+            "HOTSPOT_PAPER_TAGS": [],
+            "HOTSPOT_PAPER_COMMENT": "",
+            "SCORE": 14,
+            "authors": [
+                "Daehwa Ko",
+                "JaeHyeon Kim",
+                "Oh Seong Kwon",
+                "Jay Hoon Jung"
+            ],
+            "title": "ALPHABET: A Laplace-Pole History Aggregator with Banked Exponential Transport",
+            "abstract": "Can a sequence model remain competitive with only a few thousand parameters and an explicitly auditable prediction interface? We introduce ALPHABET, a compact linear-time model that compresses temporal history into stable complex pole modes: a direct bank synthesizes its modal states back into the feature trajectory, an independent cascaded bank analyzes the transformed trajectory without resynthesis, and an affine head reads only modal energies and lag moments from both banks. We characterize the temporal information this descriptor retains: for a stationary, fully observed feature process, each mode energy is a frequency-localized measurement of the second-order spectrum, the continuum of such measurements identifies the spectrum, and almost every mode separates any fixed finite set of spectrally distinct classes. On a Gaussian control with matched low-lag statistics, the learned descriptor approaches the Bayes oracle where raw autocovariances remain at chance. Across the fixed 82-task registry, ALPHABET attains mean rank 3.97 in the complete ten-family comparison. At the common-width D=64 runtime anchor, its 6,437 parameters deliver 5.02 times faster inference and 3.93 times faster complete training steps than the nine baselines on average.",
+            "arxiv_id": "2608.24051",
+            "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+            "MATCHED_TOPIC_LABELS": [
+                "Architecture and Training Dynamics"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [],
+            "HOTSPOT_PAPER_PRIMARY_KIND": null,
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+        },
+        "2608.24697": {
+            "ARXIVID": "2608.24697",
+            "COMMENT": "Coupled generative and encoding networks enable layer updates without sequential error propagation.",
+            "RELEVANCE": 7,
+            "NOVELTY": 6,
+            "PRIMARY_TOPIC_ID": "architecture_training",
+            "MATCHED_TOPIC_IDS": [
+                "architecture_training"
+            ],
+            "TOPIC_MATCH_COMMENT": "The core contribution changes the predictive-coding learning mechanism, although validation is confined to time-series networks.",
+            "HOTSPOT_PAPER_TAGS": [],
+            "HOTSPOT_PAPER_COMMENT": "",
+            "SCORE": 13,
+            "authors": [
+                "Matteo Cardoni",
+                "Sam Leroux"
+            ],
+            "title": "Single State Update Predictive Coding training for Time Series Forecasting and Anomaly Detection",
+            "abstract": "Predictive Coding (PC) is a neural learning paradigm that enables parallelizable neural network layer updates. However, the main bottleneck of PC Networks (PCN) is the sequential backwards error propagation. To tackle this, we introduce a training technique that pairs a Generative PCN with a support Encoding PCN. The two PCNs are trained in parallel to match their neural activations, without sequential propagation. We apply this to time series anomaly detection and show that our approach results in more stable, continuous, online learning.",
+            "arxiv_id": "2608.24697",
+            "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+            "MATCHED_TOPIC_LABELS": [
+                "Architecture and Training Dynamics"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [],
+            "HOTSPOT_PAPER_PRIMARY_KIND": null,
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+        },
+        "2404.11754": {
+            "ARXIVID": "2404.11754",
+            "COMMENT": "FedALS reduces training communication by assigning different aggregation frequencies to representation layers and prediction heads.",
+            "RELEVANCE": 7,
+            "NOVELTY": 6,
+            "PRIMARY_TOPIC_ID": "training_systems",
+            "MATCHED_TOPIC_IDS": [
+                "training_systems"
+            ],
+            "TOPIC_MATCH_COMMENT": "The central contribution is a distributed aggregation algorithm informed by generalization bounds, with a narrower focus on heterogeneous federated training.",
+            "HOTSPOT_PAPER_TAGS": [],
+            "HOTSPOT_PAPER_COMMENT": "",
+            "SCORE": 13,
+            "authors": [
+                "Peyman Gholami",
+                "Hulya Seferoglu"
+            ],
+            "title": "Differentiated Aggregation to Improve Generalization in Federated Learning",
+            "abstract": "This paper focuses on reducing the communication cost of federated learning by exploring generalization bounds and representation learning. We first characterize a tighter generalization bound for one-round federated learning based on local clients' generalizations and heterogeneity of data distribution (non-iid scenario). We also characterize a generalization bound in R-round federated learning and its relation to the number of local updates (local stochastic gradient descents (SGDs)). Then, based on our generalization bound analysis and its interpretation through representation learning, we infer that less frequent aggregations for the representation extractor (typically corresponds to initial layers) compared to the head (usually the final layers) leads to the creation of more generalizable models, particularly in non-iid scenarios. We design a novel Federated Learning with Adaptive Local Steps (FedALS) algorithm based on our generalization bound and representation learning analysis. FedALS employs varying aggregation frequencies for different parts of the model, so reduces the communication cost. The paper is followed with experimental results showing the effectiveness of FedALS. Our codes are available at for reproducibility.",
+            "arxiv_id": "2404.11754",
+            "PRIMARY_TOPIC_LABEL": "Large-Scale Training Systems and Efficiency",
+            "MATCHED_TOPIC_LABELS": [
+                "Large-Scale Training Systems and Efficiency"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [],
+            "HOTSPOT_PAPER_PRIMARY_KIND": null,
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+        },
+        "2608.24319": {
+            "ARXIVID": "2608.24319",
+            "COMMENT": "A graph-PDE controller governs adaptive transformer computation with an exact runtime integrator-stability check.",
+            "RELEVANCE": 7,
+            "NOVELTY": 6,
+            "PRIMARY_TOPIC_ID": "architecture_training",
+            "MATCHED_TOPIC_IDS": [
+                "architecture_training"
+            ],
+            "TOPIC_MATCH_COMMENT": "Dynamic compute control supplies the architectural match; the stability guarantee covers the controller integrator.",
+            "HOTSPOT_PAPER_TAGS": [],
+            "HOTSPOT_PAPER_COMMENT": "",
+            "SCORE": 13,
+            "authors": [
+                "Francisco M. Arrabal-Campos",
+                "Ignacio Fernandez",
+                "Francisco G. Montoya",
+                "Alfredo Alcayde"
+            ],
+            "title": "Can a Dynamic Internal Field Govern a Transformer's Cognition? Certifiability, not Superiority, in Homeostatic Compute Control",
+            "abstract": "An intelligent system does not merely reason: it governs its own reasoning - how much to compute, when to stop, which module to activate. Can that role be played by a dynamic internal field - a low-dimensional homeostatic state with explicit physics and certified stability - that modulates cognition without performing it? Ours is a field on the module graph governed by a family of PDEs on the graph Laplacian, advancing with an adaptive-depth reasoner. We certify the stability of the integrator of the whole family - an integrator certificate, not a closed-loop one. New, and proved here: a discrete Schur-Cohn criterion for Verlet with velocity coupling, necessary and sufficient per latent root, with no commutation hypothesis. The answer is threefold: substance no, structure only in part, certifiability yes. The type of the field's physics is irrelevant for accuracy: wave, diffusion, gated mixtures and a 2D Navier-Stokes substrate tie. A twenty-seed preregistered deconfounding campaign bounds the structural claim: at equalized caps the second-order effect is strong in one family (+0.087 [+0.042, +0.132], t=4.0) but is not detected in the other (+0.014 [-0.013, +0.040], n.s.), so part of the original contrast was capacity, not order; and a matched-interface GRU is indistinguishable in the first and nominally exceeds the field in the second (-0.035 [-0.067, -0.002]). What distinguishes the field is not capability but that its one-step operator admits an exact runtime stability check - a difference of kind, not of existence: learned recurrences carry certificates too, sufficient and conservative ones. A kill-gate with a positive control finds no evidence for the field as evidence accumulator (Delta AUC +0.0007 [-0.0065, +0.0079] vs a 0.03 threshold). A dynamic internal field is a viable, certifiable compute governor, but not an enhancer of cognition: it modulates, it does not think.",
+            "arxiv_id": "2608.24319",
+            "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+            "MATCHED_TOPIC_LABELS": [
+                "Architecture and Training Dynamics"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [],
+            "HOTSPOT_PAPER_PRIMARY_KIND": null,
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+        },
+        "2512.13979": {
+            "ARXIVID": "2512.13979",
+            "COMMENT": "Step-boundary activation steering suppresses redundant reflection, reducing reasoning tokens by up to 43.2% while preserving accuracy.",
+            "RELEVANCE": 7,
+            "NOVELTY": 6,
+            "PRIMARY_TOPIC_ID": "efficiency_scaling",
+            "MATCHED_TOPIC_IDS": [
+                "efficiency_scaling"
+            ],
+            "TOPIC_MATCH_COMMENT": "The actionable mechanism directly controls inference computation by changing reflection frequency, making efficiency its strongest fit.",
+            "HOTSPOT_PAPER_TAGS": [],
+            "HOTSPOT_PAPER_COMMENT": "",
+            "SCORE": 13,
+            "authors": [
+                "Ge Yan",
+                "Chung-En Sun",
+                "Linbo Liu",
+                "Tsui-Wei Weng"
+            ],
+            "title": "ReflCtrl: Controlling LLM Reflection Efficiently via Representation Engineering",
+            "abstract": "Large reasoning models achieve strong performance on diverse tasks by producing extended chains of thought. Self-reflection, the ability to review and revise prior reasoning steps, is widely regarded as a key contributor to this performance. However, self-reflection also incurs substantial inference cost, and its governing mechanism remains underexplored. In this work, we study self-reflection through the lens of representation engineering. First, we identify a reflection direction in the model's latent space that separates reflection steps from non-reflection steps, and show that activation along this direction is strongly predictive of answer correctness, suggesting that self-reflection is regulated by the model's internal uncertainty. Next, building on this insight, we propose ReflCtrl, a framework that controls self-reflection via a stepwise steering method: interventions are applied only at the start of each new reasoning step, enabling fine-grained control over reflection frequency without degrading generation quality. Experiments across math and general reasoning benchmarks show that reflection is often redundant, especially in stronger models: ReflCtrl reduces total reasoning tokens by up to 43.2% while preserving accuracy, and substantially outperforms the conventional approach that steers at every token, at matched token budgets.",
+            "arxiv_id": "2512.13979",
+            "PRIMARY_TOPIC_LABEL": "Efficiency, Compression, and Large-Scale Training",
+            "MATCHED_TOPIC_LABELS": [
+                "Efficiency, Compression, and Large-Scale Training"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [],
+            "HOTSPOT_PAPER_PRIMARY_KIND": null,
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+        },
+        "2607.23377": {
+            "ARXIVID": "2607.23377",
+            "COMMENT": "Joint model-and-data scaling laws forecast losses at over 100x training compute using fits from smaller runs.",
+            "RELEVANCE": 7,
+            "NOVELTY": 6,
+            "PRIMARY_TOPIC_ID": "training_systems",
+            "MATCHED_TOPIC_IDS": [
+                "training_systems"
+            ],
+            "TOPIC_MATCH_COMMENT": "Forecasting training outcomes from compute budgets directly supports run planning, although validation is limited to particle-physics transformers.",
+            "HOTSPOT_PAPER_TAGS": [],
+            "HOTSPOT_PAPER_COMMENT": "",
+            "SCORE": 13,
+            "authors": [
+                "Jan-Lucas Uslu",
+                "Benjamin Nachman",
+                "Christopher Re"
+            ],
+            "title": "Predict before you train: Scaling Laws for particle physics foundation models",
+            "abstract": "The largest machine learning models in particle physics are also the most expensive to train, yet the return on scaling a given architecture cannot be estimated before that compute is spent. Scaling laws have been fit for jets, but none has yet been shown to predict the performance of models it was not fit on. We show that, for a generic transformer pretrained on collider jets, it can be forecast. Fitting a joint model-and-data scaling law on small models alone, spanning three orders of magnitude of training compute, we predict the loss of models trained afterward with more than one hundred times more compute to within one percent. We then connect the forecast to downstream physics performance: across two standard tagging benchmarks, lower pretraining loss yields systematically lower fine-tuning loss and higher background rejection after fine-tuning. Within this model family and these tasks, a compute budget can therefore be translated into expected physics performance before any large model is trained. The final frontier model is consistent with the published numbers for current state-of-the-art physics-aware foundation models trained on the same corpus, on accuracy, AUC, and quark/gluon rejection, with a residual edge for the physics-aware model only in the high-purity tail of top tagging. We release five pretrained models spanning multiple sizes, together with the complete training recipe and code.",
+            "arxiv_id": "2607.23377",
+            "PRIMARY_TOPIC_LABEL": "Large-Scale Training Systems and Efficiency",
+            "MATCHED_TOPIC_LABELS": [
+                "Large-Scale Training Systems and Efficiency"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [],
+            "HOTSPOT_PAPER_PRIMARY_KIND": null,
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+        },
+        "2606.23198": {
+            "ARXIVID": "2606.23198",
+            "COMMENT": "Characterizes near-boundary mirror-flow trajectories as optimization over time-dependent hypothesis sets.",
+            "RELEVANCE": 6,
+            "NOVELTY": 7,
+            "PRIMARY_TOPIC_ID": "architecture_training",
+            "MATCHED_TOPIC_IDS": [
+                "architecture_training"
+            ],
+            "TOPIC_MATCH_COMMENT": "Optimizer trajectories are directly adjacent to training dynamics, but the abstract establishes a convex-quadratic incremental-learning result without connecting it to large-model training.",
+            "HOTSPOT_PAPER_TAGS": [],
+            "HOTSPOT_PAPER_COMMENT": "",
+            "SCORE": 13,
+            "authors": [
+                "RaphaÃ«l Berthier",
+                "Loucas Pillaud-Vivien"
+            ],
+            "title": "Incremental Learning in Mirror Flows",
+            "abstract": "We study mirror flows generated by a convex quadratic loss and a general convex lower semicontinuous mirror potential. We show that, when initialized near the boundary of the domain of the mirror potential, their rescaled trajectories converge to a limiting mirror flow whose potential is the indicator function of the domain. In this limit, the primal variable minimizes the loss over a time-dependent hypothesis set: the subdifferential of the support function of the domain, evaluated at the dual variable. This characterization provides a general mechanism for incremental learning in mirror flows.",
+            "arxiv_id": "2606.23198",
+            "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+            "MATCHED_TOPIC_LABELS": [
+                "Architecture and Training Dynamics"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [],
+            "HOTSPOT_PAPER_PRIMARY_KIND": null,
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+        },
+        "2512.21852": {
+            "ARXIVID": "2512.21852",
+            "COMMENT": "KL-estimator gradient bias explains instability in LLM reinforcement-learning updates.",
+            "RELEVANCE": 6,
+            "NOVELTY": 7,
+            "PRIMARY_TOPIC_ID": "architecture_training",
+            "MATCHED_TOPIC_IDS": [
+                "architecture_training"
+            ],
+            "TOPIC_MATCH_COMMENT": "Gradient-bias analysis connects to training dynamics, but the central contribution remains specific to KL regularization in RL post-training.",
+            "HOTSPOT_PAPER_TAGS": [],
+            "HOTSPOT_PAPER_COMMENT": "",
+            "SCORE": 13,
+            "authors": [
+                "Vedant Shah",
+                "Johan Obando-Ceron",
+                "Vineet Jain",
+                "Brian Bartoldson",
+                "Bhavya Kailkhura",
+                "Sarthak Mittal",
+                "Glen Berseth",
+                "Pablo Samuel Castro",
+                "Yoshua Bengio",
+                "Esmeralda S. Whitammer",
+                "Moksh Jain",
+                "Siddarth Venkatraman",
+                "Aaron Courville"
+            ],
+            "title": "A Comedy of Estimators: On KL Regularization in RL Training of LLMs",
+            "abstract": "The reasoning performance of large language models (LLMs) can be substantially improved by training them with reinforcement learning (RL). The RL objective for LLM training involves a regularization term, which is the reverse Kullback-Leibler (KL) divergence between the trained policy and the reference policy. Since computing the KL divergence exactly is intractable, various estimators are used in practice to estimate it from on-policy samples. Despite its wide adoption, including in several open-source libraries, there is no systematic study analyzing the numerous ways of incorporating KL estimators in the objective and their effect on the downstream performance of RL-trained models. Recent works show that prevailing practices for incorporating KL regularization do not provide correct gradients for stated objectives, creating a discrepancy between the objective and its implementation. In this paper, we further analyze these practices and study the gradients of several estimators configurations, revealing how design choices shape gradient bias. We substantiate these findings with empirical observations by RL fine-tuning \\texttt{Qwen2.5-7B}, \\texttt{Llama-3.1-8B-Instruct} and \\texttt{Qwen3-4B-Instruct-2507} with different configurations and evaluating their performance on both in- and out-of-distribution tasks. Through our analysis, we observe that, in on-policy settings: (1) estimator configurations with biased gradients can result in training instabilities; and (2) using estimator configurations resulting in unbiased gradients leads to better performance on in-domain as well as out-of-domain tasks. We also investigate the performance resulting from different KL configurations in off-policy settings and observe that KL regularization can help stabilize off-policy RL training resulting from asynchronous setups.",
+            "arxiv_id": "2512.21852",
+            "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+            "MATCHED_TOPIC_LABELS": [
+                "Architecture and Training Dynamics"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [],
+            "HOTSPOT_PAPER_PRIMARY_KIND": null,
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+        },
+        "2608.22876": {
+            "ARXIVID": "2608.22876",
+            "COMMENT": "Graph-level prefix-invariance tests localize causal leakage in state-space and hybrid sequence computations.",
+            "RELEVANCE": 6,
+            "NOVELTY": 6,
+            "PRIMARY_TOPIC_ID": "architecture_training",
+            "MATCHED_TOPIC_IDS": [
+                "architecture_training"
+            ],
+            "TOPIC_MATCH_COMMENT": "Architectural causality is the closest fit, but the core deliverable is a correctness audit and implementation-defect diagnosis.",
+            "HOTSPOT_PAPER_TAGS": [],
+            "HOTSPOT_PAPER_COMMENT": "",
+            "SCORE": 12,
+            "authors": [
+                "Taebong Kim",
+                "Youngsik Hong",
+                "Minsik Kim",
+                "Sunyoung Choi",
+                "Jaewon Jang",
+                "Minseo Kim"
+            ],
+            "title": "The Mask Is Not the Model: Auditing Prefix Invariance in Attention, State-Space, and Hybrid Sequence Models",
+            "abstract": "Hybrid sequence models must satisfy prefix invariance: representations at position t must not depend on future inputs, yet this is rarely verified. We formalize prefix invariance and give a lightweight audit, two forward passes, no training or gradients, yielding a per-layer score localizing where causality breaks. Attention-mask inspection, the field's default check, is incomplete: causality is a graph-level property, and leaks can occur via scans, aggregations, or normalization despite correct masks. Across 192 injected-fault trials on eight checkpoints, mask inspection detected none, while our audit localized all 192/192 to the exact layer. Static/dynamic analysis of chunked-scan code in transformers found the same defect in Zamba2 and Nemotron-H, an inter-chunk axis error fixed via the reference implementation. The method fits on one page and runs in seconds.",
+            "arxiv_id": "2608.22876",
+            "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+            "MATCHED_TOPIC_LABELS": [
+                "Architecture and Training Dynamics"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [],
+            "HOTSPOT_PAPER_PRIMARY_KIND": null,
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+        },
+        "2608.20054": {
+            "ARXIVID": "2608.20054",
+            "COMMENT": "Slot-selective attention masks alter learned communication and compositional behavior in shared-weight modular language models.",
+            "RELEVANCE": 6,
+            "NOVELTY": 6,
+            "PRIMARY_TOPIC_ID": "architecture_training",
+            "MATCHED_TOPIC_IDS": [
+                "architecture_training"
+            ],
+            "TOPIC_MATCH_COMMENT": "Evidence visibility is a modular computation intervention, though the findings center on compositional representations in one synthetic task and retain attribution confounds.",
+            "HOTSPOT_PAPER_TAGS": [],
+            "HOTSPOT_PAPER_COMMENT": "",
+            "SCORE": 12,
+            "authors": [
+                "Narcis Marincat"
+            ],
+            "title": "What You Can't See Is What You Learn: Slot-Selective Evidence Masking Favors Compositional Generalization in Shared-Genome Language-Model Societies",
+            "abstract": "Multi-module neural systems often expose every module to the full input. We test whether a slot-selective evidence-masking regime -- restricting each module to its own evidence span -- changes which solutions gradient-based training discovers. Four-cell societies share one frozen pretrained language model and one low-rank adapter, communicating only through two model-width continuous vectors in a fixed relay. On a prospectively sealed natural-language function-composition task, we train ten matched restricted/global pairs identical except for the attention mask. Restricted-visibility societies outperform their globally visible twins by at least 20 percentage points at both depths in 9 of 10 pairs, with median paired advantages of 0.7648 and 0.6050. Cutting communication reduces every restricted society to chance, and in a post hoc collision-stratified analysis the depth-three advantage remains 0.558 on programs whose complete affine map never appeared in training. In six post hoc-selected restricted societies, packet interventions on correctly answered held-out episodes are consistent with approximately value-indexed relay states; the sole high-performing global model also requires communication, but its same-value packets are not interchangeable across episodes. Thus restricted visibility is not necessary for composition. Under the tested seeds, streams, task world, and training budget, the masking regime strongly shifted which solutions training discovered: a post hoc mask crossover finds both arms mask-native. Because the restricted mask both blocks foreign evidence and implicitly identifies each cell's assigned slot, attribution to evidence visibility alone awaits a role-marked control. The preregistered battery nevertheless formally fails because restricted-arm median depth-three accuracy is 0.6988, below the 0.70 floor; an earlier qualification cohort yielded 0/10 complete passes.",
+            "arxiv_id": "2608.20054",
+            "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+            "MATCHED_TOPIC_LABELS": [
+                "Architecture and Training Dynamics"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [],
+            "HOTSPOT_PAPER_PRIMARY_KIND": null,
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+        },
+        "2608.23286": {
+            "ARXIVID": "2608.23286",
+            "COMMENT": "Quantifies how federated averaging attenuates update-masking regularization through cohort size and gradient diversity.",
+            "RELEVANCE": 6,
+            "NOVELTY": 6,
+            "PRIMARY_TOPIC_ID": "architecture_training",
+            "MATCHED_TOPIC_IDS": [
+                "architecture_training"
+            ],
+            "TOPIC_MATCH_COMMENT": "The contribution explains an optimizer-aggregation interaction, but its scope and evidence remain confined to small federated models.",
+            "HOTSPOT_PAPER_TAGS": [],
+            "HOTSPOT_PAPER_COMMENT": "",
+            "SCORE": 12,
+            "authors": [
+                "Wenhao Yan",
+                "Fu Kuroda",
+                "Yucheng Jin",
+                "Zhenke Chen"
+            ],
+            "title": "How Much Regularization Survives Averaging? Update Masking in Federated Learning",
+            "abstract": "Federated learning on non-IID data seeks flat minima to generalize across clients, and existing methods borrow sharpness-aware minimization from centralized training. There is a second way to reach flat minima, in which the regularization comes for free from noise added to the parameter updates, and it has never been carried over to the federated setting as an implicit regularizer. We show the reason. Masking charges the optimizer for moving in sharp directions. We prove that when each client draws its own mask, federated averaging weakens that charge by exactly the cohort size, and that giving every client the same mask brings it back by a factor equal to the inverse gradient diversity of the cohort. In our experiment setting on CIFAR-10, that factor is 1.19 out of a possible 10. Turning off minibatch sampling raises it to 8.96, while changing data heterogeneity a thousandfold leaves it between 1.17 and 1.50. The configurations keeping the regularization train far too poorly to use.",
+            "arxiv_id": "2608.23286",
+            "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+            "MATCHED_TOPIC_LABELS": [
+                "Architecture and Training Dynamics"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [],
+            "HOTSPOT_PAPER_PRIMARY_KIND": null,
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+        },
+        "2609.00363": {
+            "ARXIVID": "2609.00363",
+            "COMMENT": "Requantizing weights with power-of-two INT8 scales enables observed bitwise agreement across CUTLASS and Triton kernels.",
+            "RELEVANCE": 6,
+            "NOVELTY": 6,
+            "PRIMARY_TOPIC_ID": "efficiency_scaling",
+            "MATCHED_TOPIC_IDS": [
+                "efficiency_scaling"
+            ],
+            "TOPIC_MATCH_COMMENT": "Low-bit arithmetic provides a partial efficiency match; the demonstrated advance is numerical reproducibility, with no established cost reduction.",
+            "HOTSPOT_PAPER_TAGS": [],
+            "HOTSPOT_PAPER_COMMENT": "",
+            "SCORE": 12,
+            "authors": [
+                "Teng-Ruei Chen"
+            ],
+            "title": "Deterministic LLM Inference Across GPU Kernels: Power-of-Two INT8 Quantization Scales and the Limits of Tolerance-Based Conformance",
+            "abstract": "Conformance suites for quantized GEMM kernels ask whether two implementations agree within a tolerance. We measure what such a suite can detect. Injecting nine faults into a reference INT8 pipeline over 8,232 layer--fault--regime cells of Qwen3-1.7B, we find that every one of five epilogue faults -- scale precision, double rounding, multiplication order, output truncation, fused ordering -- moves the output by at most a single bfloat16 spacing, and by exactly one whenever it moves it at all, across 5,880 cells. A tolerance of one spacing is therefore blind to the entire class by construction: four of the five faults are detected by no check in the suite, and the fifth only under power-of-two scales. Faults that violate the accumulator's exactness preconditions, or that break operand sharing, are detected without exception, and a null fault never fires. What a tolerance-based suite of this shape establishes is therefore narrower than interchangeability: that the preconditions hold, that operands are shared, and that differences stay within one spacing. The power-of-two constraint that exposes the one detected fault is also deployable. Requantizing every weight scale to its nearest power of two makes CUTLASS and Triton agree bitwise at every linear layer (196/196 and 252/252, against 8/196 and 10/252 under the checkpoints' own scales) and yields byte-identical generated token sequences at 1.7B, 8B and 14B (8/8 prompts, against 0/8 at all three). Observed perplexity point estimates are +0.32%, -0.28% and +0.48%; the 90% intervals cover zero at the two smaller sizes but not at 14B, reaching +0.71% and +0.76%. A previously reported +157% perplexity for this intervention was an artifact of a probe that rewrote scales without requantizing the weights; separating the effects attributes 99.8% of it to the resulting weight--scale mismatch rather than to the power-of-two constraint itself.",
+            "arxiv_id": "2609.00363",
+            "PRIMARY_TOPIC_LABEL": "Efficiency, Compression, and Large-Scale Training",
+            "MATCHED_TOPIC_LABELS": [
+                "Efficiency, Compression, and Large-Scale Training"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [],
+            "HOTSPOT_PAPER_PRIMARY_KIND": null,
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+        },
+        "2608.24987": {
+            "ARXIVID": "2608.24987",
+            "COMMENT": "Reverse-KL-guided domain resampling allocates distillation compute according to remaining headroom and improvement rate.",
+            "RELEVANCE": 6,
+            "NOVELTY": 6,
+            "PRIMARY_TOPIC_ID": "training_systems",
+            "MATCHED_TOPIC_IDS": [
+                "training_systems"
+            ],
+            "TOPIC_MATCH_COMMENT": "Adaptive training-compute allocation is the closest fit, but the scheduler primarily advances multi-teacher on-policy post-training rather than foundational training systems.",
+            "HOTSPOT_PAPER_TAGS": [],
+            "HOTSPOT_PAPER_COMMENT": "",
+            "SCORE": 12,
+            "authors": [
+                "Zechen Sun",
+                "Zhiwei Zhang",
+                "Fei Zhao",
+                "Juntao Li",
+                "Mu Chuan",
+                "Huayu Deng",
+                "Guojian Zhan",
+                "Wenliang Chen",
+                "Yao Hu",
+                "Min Zhang"
+            ],
+            "title": "D$^3$-MOPD: Adaptive Dynamic Domain ScheDuling for Efficient Multi-Teacher Distillation",
+            "abstract": "Multi-teacher on-policy distillation (MOPD) distills several domain-expert teachers into a single student by minimizing per-domain reverse-KL divergence on the student's own rollouts. Existing approaches typically fix the per-domain data mixture before training, overlooking the fact that different domains converge at substantially different rates: some plateau early while others continue to improve throughout the training budget. A fixed mixture therefore wastes compute on fast-converging domains and undertrains slower-converging ones. To address this, we propose D$^3$-MOPD (Dynamic Domain ScheDuling for MOPD), a zero-overhead scheduler that repurposes the per-domain reverse-KL signal already produced during training to adapt the domain mixture online. Running asynchronously outside the training process, an off-process watcher periodically tracks each domain's KL trajectory, estimates remaining headroom and current improvement rate, and accordingly adjusts the domain sampling ratios without altering the core training loop. Our D$^3$-MOPD scales naturally to arbitrary numbers of domains, and the expected benefit grows as more domains introduce more diverse convergence patterns for the scheduler to exploit. On a Qwen3.6-35B-A3B student distilled from four domain-expert teachers, D$^3$-MOPD closes 97% of the average student-to-teacher performance gap, compared with 63% for vanilla MOPD, reaches the same peak performance with an approximately 3$\\times$ reduction in rollout steps, and surpasses the specialist teachers on three of seven benchmarks.",
+            "arxiv_id": "2608.24987",
+            "PRIMARY_TOPIC_LABEL": "Large-Scale Training Systems and Efficiency",
+            "MATCHED_TOPIC_LABELS": [
+                "Large-Scale Training Systems and Efficiency"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [],
+            "HOTSPOT_PAPER_PRIMARY_KIND": null,
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+        }
+    },
+    "topic_sections": [
+        {
+            "topic_id": "moe_training",
+            "topic_label": "MoE Training",
+            "paper_ids": [
+                "2601.16905"
+            ]
+        },
+        {
+            "topic_id": "training_systems",
+            "topic_label": "Large-Scale Training Systems and Efficiency",
+            "paper_ids": [
+                "2608.22129",
+                "2402.11215",
+                "2510.07922",
+                "2404.11754",
+                "2607.23377",
+                "2608.24987"
+            ]
+        },
+        {
+            "topic_id": "architecture_training",
+            "topic_label": "Architecture and Training Dynamics",
+            "paper_ids": [
+                "2602.13940",
+                "2606.01765",
+                "2608.23938",
+                "2608.25088",
+                "2608.24593",
+                "2608.22354",
+                "2608.24462",
+                "2507.18405",
+                "2608.24568",
+                "2608.22462",
+                "2608.25231",
+                "2608.24136",
+                "2608.24051",
+                "2608.24697",
+                "2608.24319",
+                "2606.23198",
+                "2512.21852",
+                "2608.22876",
+                "2608.20054",
+                "2608.23286"
+            ]
+        },
+        {
+            "topic_id": "efficiency_scaling",
+            "topic_label": "Efficiency, Compression, and Large-Scale Training",
+            "paper_ids": [
+                "2608.25188",
+                "2608.15299",
+                "2608.24411",
+                "2608.24973",
+                "2512.14237",
+                "2608.25062",
+                "2608.24971",
+                "2607.29221",
+                "2608.24063",
+                "2608.24664",
+                "2608.24338",
+                "2512.13979",
+                "2609.00363"
+            ]
+        }
+    ]
 }

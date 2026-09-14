@@ -2,8 +2,8 @@
     "schema_version": 1,
     "meta": {
         "date": "2026-07-02",
-        "total_candidates": 0,
-        "total_spotlight_papers": 0,
+        "total_candidates": 108,
+        "total_spotlight_papers": 8,
         "thresholds": {
             "daily_hot_score_cutoff": 15,
             "daily_hot_relevance_cutoff": 7,
@@ -17,11 +17,346 @@
     },
     "diagnostics": {
         "candidate_count_by_kind": {
-            "new_frontier": 0,
-            "daily_hot": 0
+            "new_frontier": 2,
+            "daily_hot": 7
         },
-        "selected_count_by_kind": {}
+        "selected_count_by_kind": {
+            "new_frontier": 2,
+            "daily_hot": 6
+        }
     },
-    "papers": {},
-    "sections": []
+    "papers": {
+        "2607.01218": {
+            "ARXIVID": "2607.01218",
+            "COMMENT": "Separates state storage from next-token prediction into two computation streams, changing pretraining gradient flow.",
+            "RELEVANCE": 10,
+            "NOVELTY": 8,
+            "PRIMARY_TOPIC_ID": "architecture_training",
+            "MATCHED_TOPIC_IDS": [
+                "architecture_training"
+            ],
+            "TOPIC_MATCH_COMMENT": "The core contribution is a Transformer computation design supported by pretraining experiments and gradient analysis.",
+            "HOTSPOT_PAPER_TAGS": [
+                "new_frontier"
+            ],
+            "HOTSPOT_PAPER_COMMENT": "Separating persistent state construction from immediate prediction proposes a distinct organizing principle for Transformer pretraining.",
+            "SCORE": 18,
+            "authors": [
+                "Giovanni Monea",
+                "Nathan Godey",
+                "Kiant\u00e9 Brantley",
+                "Yoav Artzi"
+            ],
+            "title": "The State-Prediction Separation Hypothesis",
+            "abstract": "Transformers use the same forward computation stream to both predict the next token and store useful state for future token predictions. We formulate the \\emph{state-prediction separation hypothesis}: disentangling the two roles yields better language modeling performance. We design a Transformer variant that uses two computation streams to separate the two functions, and conduct pretraining experiments across various scales. Our experiments show that state-prediction separation consistently offers better data and compute efficiencies, improving validation loss and outperforming standard Transformers by 2--3 percentage points on average on downstream tasks. We also conduct extensive empirical analysis that rules out potential confounders and demonstrates the fundamental difference in the gradients our design entails.",
+            "arxiv_id": "2607.01218",
+            "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+            "MATCHED_TOPIC_LABELS": [
+                "Architecture and Training Dynamics"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [
+                "New Frontier Papers"
+            ],
+            "HOTSPOT_PAPER_PRIMARY_KIND": "new_frontier",
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "New Frontier Papers",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "llm_exact"
+        },
+        "2607.01077": {
+            "ARXIVID": "2607.01077",
+            "COMMENT": "Communicating reasoning threads share partial results and preempt unpromising work, reducing redundant context processing.",
+            "RELEVANCE": 7,
+            "NOVELTY": 8,
+            "PRIMARY_TOPIC_ID": "efficiency_scaling",
+            "MATCHED_TOPIC_IDS": [
+                "architecture_training",
+                "efficiency_scaling"
+            ],
+            "TOPIC_MATCH_COMMENT": "The core protocol changes inference computation and context costs, making it an efficiency match with peripheral relevance to the training-centered feed.",
+            "HOTSPOT_PAPER_TAGS": [
+                "new_frontier"
+            ],
+            "HOTSPOT_PAPER_COMMENT": "Persistent model threads with direct communication and preemption suggest an alternative execution model for parallel language-model reasoning.",
+            "SCORE": 15,
+            "authors": [
+                "Xuecheng Liu",
+                "Daman Arora",
+                "Gokul Swamy",
+                "Andrea Zanette"
+            ],
+            "title": "Message Passing Enables Efficient Reasoning",
+            "abstract": "While inference-time scaling has improved the reasoning abilities of large language models (LLMs), the need to generate long chains-of-thought (CoTs) is a computational bottleneck. Thus, in contrast to sequential scaling methods like CoT, recent parallel scaling techniques instead use fork and join (FJ) primitives to divide work across multiple LLM threads. However, in the fork-join paradigm, threads are typically transient and do not communicate pointwise with one another which limits scalability. To tackle this, we introduce Message Passing Language Models (MPLMs), a framework for LLM reasoning in which threads communicate directly via lightweight send and receive primitives. MPLMs enable efficient scaling through two key mechanisms: (1) reduced communication costs, achieved by avoiding redundant context sharing, and (2) preemption, which allows threads to terminate early based on partial information from their peers. We demonstrate the promise of MPLMs on 3 classes of tasks. First, on Sudoku puzzles, we show that MPLMs require an asymptotically smaller context than both serial CoT and parallel FJ. We then fine-tune a single model to solve 25 x 25 puzzles that remain challenging for standard CoT and FJ approaches, as well as frontier reasoning models without tools. Second, on 3-SAT puzzles, the capability of preemption allows termination of unpromising branches, which results in improved efficiency. Finally, we show that appropriately prompted large pre-trained models follow the MPLM protocol, achieving competitive results on long-context question answering relative to popular fork-join approaches.",
+            "arxiv_id": "2607.01077",
+            "PRIMARY_TOPIC_LABEL": "Efficiency, Compression, and Large-Scale Training",
+            "MATCHED_TOPIC_LABELS": [
+                "Architecture and Training Dynamics",
+                "Efficiency, Compression, and Large-Scale Training"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [
+                "New Frontier Papers"
+            ],
+            "HOTSPOT_PAPER_PRIMARY_KIND": "new_frontier",
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "New Frontier Papers",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "llm_exact"
+        },
+        "2607.01455": {
+            "ARXIVID": "2607.01455",
+            "COMMENT": "Ember reduces embedding and LM-head optimizer state to O(V + D), with distributed ZeRO/FSDP integration.",
+            "RELEVANCE": 10,
+            "NOVELTY": 8,
+            "PRIMARY_TOPIC_ID": "training_systems",
+            "MATCHED_TOPIC_IDS": [
+                "training_systems",
+                "architecture_training",
+                "efficiency_scaling"
+            ],
+            "TOPIC_MATCH_COMMENT": "A geometry-informed optimizer directly changes training-state memory requirements, supported by analysis of token-parameter optimization trajectories.",
+            "HOTSPOT_PAPER_TAGS": [
+                "daily_hot"
+            ],
+            "HOTSPOT_PAPER_COMMENT": "Broadly important today: Ember reduces embedding and LM-head optimizer state to O(V + D), with distributed ZeRO/FSDP integration.",
+            "SCORE": 18,
+            "authors": [
+                "Kathan Shah"
+            ],
+            "title": "Token Geometry",
+            "abstract": "Language models learn continuous programs over discrete symbols, with the embedding table and LM-head acting as the read/write interface between them. We show that this interface has gradient geometry distinct from dense hidden weights which can be exploited to improve the Pareto frontier across supervised finetuning, RL, and pretraining, while only utilizing kilobytes of optimizer state. We introduce Ember, a lightweight optimizer for embedding and LM-head matrices that utilizes O(V + D) VRAM, instead of Adam's O(2VD), and forgoes the need to shard both token table optimizer states. We provide empirical evidence that Ember scales effectively across batch size and parameter count. We show that the optimization trajectory of tokens can be well described by a simple 1D ray, counter to the popular belief that neural net parameters navigate a heavily nonconvex landscape. We provide a principled view on the surprisingly narrow space of optimizers that suffice for Transformer training. Finally, we open-source our distributed Ember implementation that merges cleanly with existing ZeRO/FSDP setups to support further research at https://github.com/katop1234/ember",
+            "arxiv_id": "2607.01455",
+            "PRIMARY_TOPIC_LABEL": "Large-Scale Training Systems and Efficiency",
+            "MATCHED_TOPIC_LABELS": [
+                "Large-Scale Training Systems and Efficiency",
+                "Architecture and Training Dynamics",
+                "Efficiency, Compression, and Large-Scale Training"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [
+                "Daily Hot Papers"
+            ],
+            "HOTSPOT_PAPER_PRIMARY_KIND": "daily_hot",
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "Daily Hot Papers",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "heuristic"
+        },
+        "2607.01487": {
+            "ARXIVID": "2607.01487",
+            "COMMENT": "Separating training steps from batch size yields scaling laws that predict optimal batch allocation with fewer calibration runs.",
+            "RELEVANCE": 10,
+            "NOVELTY": 7,
+            "PRIMARY_TOPIC_ID": "training_systems",
+            "MATCHED_TOPIC_IDS": [
+                "training_systems"
+            ],
+            "TOPIC_MATCH_COMMENT": "The scaling law directly informs batch-size and step-count choices when configuring large pretraining runs.",
+            "HOTSPOT_PAPER_TAGS": [
+                "daily_hot"
+            ],
+            "HOTSPOT_PAPER_COMMENT": "Broadly important today: Separating training steps from batch size yields scaling laws that predict optimal batch allocation with fewer calibration runs.",
+            "SCORE": 17,
+            "authors": [
+                "Fabian Schaipp"
+            ],
+            "title": "How to Allocate Your Tokens? Scaling Laws with Training Steps and Batch Size",
+            "abstract": "We propose a scaling law that takes into account model size and training data while explicitly splitting the latter into training steps and batch size (called three-term law). Fitting the proposed law on a large set of training runs, we find that it correctly recovers the scaling of the optimal batch size. Moreover, because it makes use of training runs with suboptimal batch size, our proposed law can be robustly fit with a significantly smaller amount of training runs. We further show that the three-term law can be used to derive scaling laws for suboptimal batch sizes, and that it matches previous empirical findings related to the critical batch size.",
+            "arxiv_id": "2607.01487",
+            "PRIMARY_TOPIC_LABEL": "Large-Scale Training Systems and Efficiency",
+            "MATCHED_TOPIC_LABELS": [
+                "Large-Scale Training Systems and Efficiency"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [
+                "Daily Hot Papers"
+            ],
+            "HOTSPOT_PAPER_PRIMARY_KIND": "daily_hot",
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "Daily Hot Papers",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "heuristic"
+        },
+        "2607.01520": {
+            "ARXIVID": "2607.01520",
+            "COMMENT": "Derives minimax-optimal causal KV-cache compression from the cache's intrinsic compressibility.",
+            "RELEVANCE": 9,
+            "NOVELTY": 8,
+            "PRIMARY_TOPIC_ID": "efficiency_scaling",
+            "MATCHED_TOPIC_IDS": [
+                "efficiency_scaling"
+            ],
+            "TOPIC_MATCH_COMMENT": "The central contribution combines compression theory with an implementable mechanism for reducing transformer KV-cache costs.",
+            "HOTSPOT_PAPER_TAGS": [
+                "daily_hot"
+            ],
+            "HOTSPOT_PAPER_COMMENT": "Broadly important today: Derives minimax-optimal causal KV-cache compression from the cache's intrinsic compressibility.",
+            "SCORE": 17,
+            "authors": [
+                "Lukas Haverbeck",
+                "Carmen Amo Alonso",
+                "Andres Felipe Posada-Moreno",
+                "Sebastian Trimpe",
+                "Marco Pavone"
+            ],
+            "title": "The risk of KV cache compression",
+            "abstract": "Transformer inference on long sequences is expensive because softmax attention repeatedly reads from a large KV cache. The prevalent approach to this bottleneck is KV cache compression, which replaces the full cache with a compact summary. Despite its practical importance, the design of such summaries is largely driven by empirical experimentation. On the theoretical side, existing results show that KV cache compression can be impossible in the worst case, but offer little systematic guidance for designing algorithms in regimes where accurate compression is possible. We bridge this gap by characterizing the minimax risk of KV cache compression in terms of the intrinsic compressibility of a cache, revealing when and how accurate compression is possible. These results yield novel design principles for KV cache compression under causal masking that map efficiently to prefill and autoregressive decoding while achieving minimax-optimal risk. We instantiate these principles in a practical algorithm and report promising performance on LongBench in targeted experiments. Overall, our results provide a principled avenue for practical KV cache compression with theoretical guarantees.",
+            "arxiv_id": "2607.01520",
+            "PRIMARY_TOPIC_LABEL": "Efficiency, Compression, and Large-Scale Training",
+            "MATCHED_TOPIC_LABELS": [
+                "Efficiency, Compression, and Large-Scale Training"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [
+                "Daily Hot Papers"
+            ],
+            "HOTSPOT_PAPER_PRIMARY_KIND": "daily_hot",
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "Daily Hot Papers",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "heuristic"
+        },
+        "2607.00714": {
+            "ARXIVID": "2607.00714",
+            "COMMENT": "Explains self-conditioning as fixed-point iteration and distills those iterations jointly with the flow process.",
+            "RELEVANCE": 9,
+            "NOVELTY": 8,
+            "PRIMARY_TOPIC_ID": "architecture_training",
+            "MATCHED_TOPIC_IDS": [
+                "architecture_training",
+                "efficiency_scaling"
+            ],
+            "TOPIC_MATCH_COMMENT": "Provides a mechanistic account of self-conditioning and uses it to construct language generators requiring fewer generation steps.",
+            "HOTSPOT_PAPER_TAGS": [
+                "daily_hot"
+            ],
+            "HOTSPOT_PAPER_COMMENT": "Broadly important today: Explains self-conditioning as fixed-point iteration and distills those iterations jointly with the flow process.",
+            "SCORE": 17,
+            "authors": [
+                "Jaehoon Yoo",
+                "Wonjung Kim",
+                "Floor Eijkelboom",
+                "Chanhyuk Lee",
+                "Nicholas M. Boffi",
+                "Seunghoon Hong",
+                "Jinwoo Kim"
+            ],
+            "title": "Self-conditioned Flow Map Language Models via Fixed-point Flows",
+            "abstract": "Self-conditioning is a core technique that enhances continuous flow-based language models, where the model learns to denoise generated text by conditioning on its own denoising estimate. While empirically successful, its performance improvements are poorly understood. Moreover, there is growing interest in the use of few-step generators based on flow maps, for which how to leverage self-conditioning is unclear. Here, we show that flow language models with self-conditioning solve a fixed-point iteration that bootstraps the performance of the learned denoiser. We use this viewpoint to formulate fixed-point flows, a two-dimensional class of self-conditioned flows, where the first dimension represents the flow process and the second represents the fixed-point iteration. We show that fixed-point flows define valid flow maps, and show that they can be distilled from self-conditioned flow models by compressing both fixed-point iterations and the flow process, the former with fixed-point distillation and the latter with flow map distillation. Our resulting flow map language model, FMLM$^\\star$, outperforms state-of-the-art self-conditioned models and few-step models in one- and few-step generation on OpenWebText. Code is available at https://github.com/Ugness/self-conditioned-fmlm.",
+            "arxiv_id": "2607.00714",
+            "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+            "MATCHED_TOPIC_LABELS": [
+                "Architecture and Training Dynamics",
+                "Efficiency, Compression, and Large-Scale Training"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [
+                "Daily Hot Papers"
+            ],
+            "HOTSPOT_PAPER_PRIMARY_KIND": "daily_hot",
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "Daily Hot Papers",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "heuristic"
+        },
+        "2607.19378": {
+            "ARXIVID": "2607.19378",
+            "COMMENT": "Introduces native multidimensional, input-dependent long convolutions with a fused FFT implementation and O(L log L) scaling.",
+            "RELEVANCE": 9,
+            "NOVELTY": 8,
+            "PRIMARY_TOPIC_ID": "architecture_training",
+            "MATCHED_TOPIC_IDS": [
+                "architecture_training",
+                "efficiency_scaling"
+            ],
+            "TOPIC_MATCH_COMMENT": "The primary contribution is a general attention-alternative operator; its subquadratic complexity and CUDA implementation provide a substantial efficiency match.",
+            "HOTSPOT_PAPER_TAGS": [
+                "daily_hot"
+            ],
+            "HOTSPOT_PAPER_COMMENT": "Broadly important today: Introduces native multidimensional, input-dependent long convolutions with a fused FFT implementation and O(L log L) scaling.",
+            "SCORE": 17,
+            "authors": [
+                "David R. Wessels",
+                "Farhad Ramezanghorbani",
+                "Alireza Moradzadeh",
+                "David W. Romero",
+                "Olivia Viessmann",
+                "Maksim Zhdanov",
+                "John St. John",
+                "Ken Janik",
+                "David M Knigge",
+                "Yucheng Tang",
+                "Erik J Bekkers",
+                "Saee Gopal Paliwal"
+            ],
+            "title": "Native Multi-Dimensional Subquadratic Operators via Input Dependent Long Convolutions",
+            "abstract": "Subquadratic alternatives to attention require compromises when applied to multi-dimensional data: standard convolutions lack global receptive fields and input dependency, while recurrent models require rasterizing data such as images, volumes, and partial differential equation (PDE) into an ad-hoc $1\\rm D$ scan order that violates their spatial structure. We introduce \\textit{HyenaND}, a subquadratic, global, input-dependent operator that acts directly on the native geometry of multidimensional data through convolutions with implicitly parametrized global, input-dependent multi-dimensional convolutional kernels. Our CUDA implementation, \\texttt{nSubQ}, fuses the FFT-convolution path to turn HyenaND's $\\mathcal{O}(L \\log L)$ scaling into wall-clock speedups. Across long-context genomics, computer vision, medical imaging, and PDE modeling, pure HyenaND stacks match the accuracy of strong attention baselines, while hybrid configurations that interleave HyenaND and attention layers outperform both pure attention and strong recurrence-based hybrids.",
+            "arxiv_id": "2607.19378",
+            "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+            "MATCHED_TOPIC_LABELS": [
+                "Architecture and Training Dynamics",
+                "Efficiency, Compression, and Large-Scale Training"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [
+                "Daily Hot Papers"
+            ],
+            "HOTSPOT_PAPER_PRIMARY_KIND": "daily_hot",
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "Daily Hot Papers",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "heuristic"
+        },
+        "2607.00341": {
+            "ARXIVID": "2607.00341",
+            "COMMENT": "Adds discrete embedding and continuous hidden-state channels to Transformer recurrence to fix cross-loop representational misalignment.",
+            "RELEVANCE": 9,
+            "NOVELTY": 8,
+            "PRIMARY_TOPIC_ID": "architecture_training",
+            "MATCHED_TOPIC_IDS": [
+                "architecture_training"
+            ],
+            "TOPIC_MATCH_COMMENT": "A diagnosed recurrent-computation bottleneck motivates a new architecture, with benefits extending to practical pretraining.",
+            "HOTSPOT_PAPER_TAGS": [
+                "daily_hot"
+            ],
+            "HOTSPOT_PAPER_COMMENT": "Broadly important today: Adds discrete embedding and continuous hidden-state channels to Transformer recurrence to fix cross-loop representational misalignment.",
+            "SCORE": 17,
+            "authors": [
+                "Hengyu Fu",
+                "Tianyu Guo",
+                "Zixuan Wang",
+                "Hanlin Zhu",
+                "Jason D. Lee",
+                "Jiantao Jiao",
+                "Stuart Russell",
+                "Song Mei"
+            ],
+            "title": "DiscoLoop: Looping Discrete Embeddings and Continuous Hidden States for Multi-hop Reasoning",
+            "abstract": "Large language models achieve strong performance on many reasoning tasks when allowed to externalize intermediate steps as Chain-of-Thought (CoT). However, many questions require the model to internalize the multi-step reasoning within a single forward pass before generating the answer. We study this challenge through two-hop reasoning, a representative task where the model must compose multiple pieces of parametric knowledge within a single forward pass. Standard non-recurrent Transformers suffer from a depth-local storage problem: facts learned in earlier layers are unavailable where second-hop retrieval happens. We found that Looped Transformers mitigate this issue by reusing the same memory, but still generalize imperfectly. We show that the remaining bottleneck is representational. In the two-hop reasoning task, the first loop often makes the correct bridge entity nearly perfectly decodable, yet the corresponding hidden state remains poorly aligned with the bridge token embedding. Surprisingly, an easy training-free realignment intervention nearly closes the generalization gap. Building upon this insight, we propose DiscoLoop, a looping architecture whose recurrence carries both a discrete embedding channel and a continuous hidden-state channel. DiscoLoop achieves near-perfect accuracy with substantially fewer training steps across symbolic and synthetic-language multi-hop reasoning tasks. When applied to real-world pretraining, DiscoLoop attains lower training loss and stronger benchmark performance than looped-transformer baselines, suggesting that the mixed-channel design transfers to practical language modeling.",
+            "arxiv_id": "2607.00341",
+            "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+            "MATCHED_TOPIC_LABELS": [
+                "Architecture and Training Dynamics"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [
+                "Daily Hot Papers"
+            ],
+            "HOTSPOT_PAPER_PRIMARY_KIND": "daily_hot",
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "Daily Hot Papers",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "heuristic"
+        }
+    },
+    "sections": [
+        {
+            "kind": "new_frontier",
+            "label": "New Frontier Papers",
+            "description": "Papers that appear to open a genuinely new direction, paradigm, or field.",
+            "paper_ids": [
+                "2607.01218",
+                "2607.01077"
+            ]
+        },
+        {
+            "kind": "daily_hot",
+            "label": "Daily Hot Papers",
+            "description": "Papers that feel broadly important to the day and belong in the hotspot paper feed.",
+            "paper_ids": [
+                "2607.01455",
+                "2607.01487",
+                "2607.01520",
+                "2607.00714",
+                "2607.19378",
+                "2607.00341"
+            ]
+        }
+    ]
 }

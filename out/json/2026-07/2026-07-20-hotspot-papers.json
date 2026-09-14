@@ -2,8 +2,8 @@
     "schema_version": 1,
     "meta": {
         "date": "2026-07-20",
-        "total_candidates": 0,
-        "total_spotlight_papers": 0,
+        "total_candidates": 57,
+        "total_spotlight_papers": 4,
         "thresholds": {
             "daily_hot_score_cutoff": 15,
             "daily_hot_relevance_cutoff": 7,
@@ -17,11 +17,176 @@
     },
     "diagnostics": {
         "candidate_count_by_kind": {
-            "new_frontier": 0,
-            "daily_hot": 0
+            "new_frontier": 3,
+            "daily_hot": 2
         },
-        "selected_count_by_kind": {}
+        "selected_count_by_kind": {
+            "new_frontier": 3,
+            "daily_hot": 1
+        }
     },
-    "papers": {},
-    "sections": []
+    "papers": {
+        "2607.17419": {
+            "ARXIVID": "2607.17419",
+            "COMMENT": "Introduces cone-derived linear-attention features that improve associative capacity and recall.",
+            "RELEVANCE": 9,
+            "NOVELTY": 8,
+            "PRIMARY_TOPIC_ID": "architecture_training",
+            "MATCHED_TOPIC_IDS": [
+                "architecture_training",
+                "efficiency_scaling"
+            ],
+            "TOPIC_MATCH_COMMENT": "The primary advance is a new linear-attention mechanism, complemented by fused kernels, linear-state execution, and reduced cache requirements.",
+            "HOTSPOT_PAPER_TAGS": [
+                "new_frontier",
+                "daily_hot"
+            ],
+            "HOTSPOT_PAPER_COMMENT": "It combines a first-principles attention construction, capacity analysis, strong long-context results, and unusually fast implementations, suggesting a consequential new linear-attention direction.",
+            "SCORE": 17,
+            "authors": [
+                "Ayoub Ghriss",
+                "Sourav Chakraborty"
+            ],
+            "title": "Kernelized Linear Attention: Breaking the Capacity Wall with Symmetric Cones",
+            "abstract": "Linear attention promises constant-time recurrent inference but degrades sharply on associative recall. We formulate attention recall as a spherical-packing problem and introduce Kernelized Linear Attention Activations (KATA), a framework whose feature maps are derived from first principles by certifying nonnegative attention weights through a self-dual homogeneous cone. Building on this observation, we show that rank-one positive semi-definite (PSD) features offer a favorable capacity--interference tradeoff. KATA recovers a parameter-free convex output gate and characterizes associative capacity through the Welch interference floor. For tolerances above this floor, KATA enlarges the state without adding parameters and admits spherical codes with exponentially many keys in the projection dimension. We implement KATA as fused Triton kernels at two operating points: a flash-attention-style forward up to ${\\sim}1.6\\times$ FlashAttention-2 throughput, and an exact $O(T)$ chunked-state form that reaches ${\\sim}11\\times$ FlashAttention-2 forward throughput at $131$k tokens. An associative scan of the first-order feature lowers the inter-chunk recurrence depth to $O(\\log(T/C))$ for chunk size $C$ and averages ${\\sim}2.4\\times$ the throughput of a matched sequential linear-attention baseline. On long-range MQAR and repeated-key overwrite, several KATA variants outperform Gated DeltaNet, with parameter counts and state sizes reported alongside accuracy. Induction preserves near-perfect recall, while kernel benchmarks show that the maps can be implemented efficiently. KATA retains $0.985$ MQAR at a $16\\times$ out-of-distribution length, approaching the softmax with roughly one quarter of the KV-cache entries. Experiments on 340M-parameter LLMs reveal a feature-dependent fluency trade-off and clarify how positional embeddings, delta rules, and decay gates interact with feature geometry.",
+            "arxiv_id": "2607.17419",
+            "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+            "MATCHED_TOPIC_LABELS": [
+                "Architecture and Training Dynamics",
+                "Efficiency, Compression, and Large-Scale Training"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [
+                "New Frontier Papers",
+                "Daily Hot Papers"
+            ],
+            "HOTSPOT_PAPER_PRIMARY_KIND": "new_frontier",
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "New Frontier Papers",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "llm_exact"
+        },
+        "2607.16568": {
+            "ARXIVID": "2607.16568",
+            "COMMENT": "Exact insertion of trainable residual blocks preserves a live network's function while enabling immediate gradient-driven growth.",
+            "RELEVANCE": 8,
+            "NOVELTY": 8,
+            "PRIMARY_TOPIC_ID": "architecture_training",
+            "MATCHED_TOPIC_IDS": [
+                "architecture_training"
+            ],
+            "TOPIC_MATCH_COMMENT": "It introduces a dynamic architectural-growth mechanism and analyzes the gradient conditions governing post-insertion training.",
+            "HOTSPOT_PAPER_TAGS": [
+                "new_frontier"
+            ],
+            "HOTSPOT_PAPER_COMMENT": "Function-preserving mutation of live training graphs suggests a genuinely new approach to dynamically growing model capacity.",
+            "SCORE": 16,
+            "authors": [
+                "Abdallah Khemais"
+            ],
+            "title": "Exact Network Surgery: Functional Invariance and Gradient Plasticity in Reactive Computational Graphs",
+            "abstract": "Function-preserving network growth techniques such as Net2Net and progressive stacking expand a model's capacity without destroying its learned function, but existing formulations either tolerate numerical perturbations or require a full rebuild of the training program. We formalize Exact Network Surgery: the in-place insertion of a residual block into a live computational graph such that (i) the network function is preserved -- bit-exactly under explicit floating-point hypotheses -- and (ii) inserted parameters remain trainable immediately after insertion. We prove an identity-morphism theorem for gated residual blocks, a structural-locality theorem showing that a reactive invalidation engine recomputes exactly the downstream cone of the insertion point, leaving every other node's value and optimizer state untouched, and an escape-from-initialization proposition showing that the Gradient Shadowing gate alpha, initialized at zero over a randomly initialized branch, receives a generically non-zero gradient at insertion time. We identify a degenerate configuration -- zero-initialized output projections combined with a zero gate -- that is an exact saddle point gradient descent cannot escape. Every claim is validated on the reference implementation in NeuroDSL, a reactive graph engine in Julia: grafting is bit-exact on every logit tested (0 mismatches out of 1600); the gate escapes zero at the first optimizer step and unlocks branch gradients at the second, exactly as predicted; the degenerate configuration exhibits gradients identically zero for the entire 600-step run; surgery cost tracks downstream cone size with r = 0.9992 while graft-plus-invalidation bookkeeping is constant (about 0.75 ms) across insertion depths; and training resumes bit-identically across a real process restart. A flagged preliminary appendix reports first single-seed observations on post-insertion gate dynamics.",
+            "arxiv_id": "2607.16568",
+            "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+            "MATCHED_TOPIC_LABELS": [
+                "Architecture and Training Dynamics"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [
+                "New Frontier Papers"
+            ],
+            "HOTSPOT_PAPER_PRIMARY_KIND": "new_frontier",
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "New Frontier Papers",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "llm_exact"
+        },
+        "2607.17146": {
+            "ARXIVID": "2607.17146",
+            "COMMENT": "A continuous geometric formulation connects Transformer operators and SGD dynamics to quantitative stability and context-limit predictions.",
+            "RELEVANCE": 7,
+            "NOVELTY": 8,
+            "PRIMARY_TOPIC_ID": "architecture_training",
+            "MATCHED_TOPIC_IDS": [
+                "architecture_training"
+            ],
+            "TOPIC_MATCH_COMMENT": "Its main contribution is a mechanistic framework for Transformer architecture, optimization dynamics, and stability limits.",
+            "HOTSPOT_PAPER_TAGS": [
+                "new_frontier"
+            ],
+            "HOTSPOT_PAPER_COMMENT": "The unified integro-differential treatment of Transformer computation and optimization could establish a new theoretical analysis direction.",
+            "SCORE": 15,
+            "authors": [
+                "Zhihua Liang"
+            ],
+            "title": "The Geometry of Semantic Space: A Continuous Geometric Framework for the Transformer Architecture",
+            "abstract": "We present a continuous geometric framework that models the discrete algebraic operations of the Transformer architecture as an integro-differential equation (IDE) on a semantic fiber bundle $\\calE = \\calM \\times \\R^d$. Beginning from a single geometric axiom -- that the token sequence forms a discrete $1$-manifold equipped with a canonical measure lattice -- we translate every core component of the modern Transformer (RMSNorm, RoPE, Softmax Attention, FFN, Residual Stream, SGD, Weight Decay) into a cohesive vocabulary of differential geometry, measure theory, and stochastic calculus. The resulting framework yields quantitative predictions spanning entropic optimal transport (Attention as a Schr\u00f6dinger bridge) and non-equilibrium thermodynamics (SGD as It\u00f4 diffusion violating detailed balance). We conduct a six-part experimental campaign across five architectures (Qwen3, LLaMA\\nobreakdash-3.1, Gemma\\nobreakdash-3, GPT-2, Mistral) spanning $124$M to $8$B parameters. The empirical observables are quantitatively consistent with the geometric predictions: the $\u03b5^{-1/2}$ Lipschitz scaling calibration at machine precision ($R^2 = 1.000$), the Lie--Trotter operator-splitting torsion, the symmetric ablation instability confirming the Dual-Law of Topological Stability, the $\\calO(1/\\sqrt{k})$ thermodynamic suppression of Poincar\u00e9 recurrence on the RoPE torus, the thermodynamic context-limit phase transition, and the Non-Equilibrium Steady State parameter vortex -- verified across two optimizers (AdamW and Pure SGD) to exclude momentum artifacts. The results demonstrate that analyzing Transformers through the lens of continuous stochastic differential geometry provides a predictive descriptive vocabulary for the stability limits, context bounds, and optimization dynamics of Large Language Models.",
+            "arxiv_id": "2607.17146",
+            "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+            "MATCHED_TOPIC_LABELS": [
+                "Architecture and Training Dynamics"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [
+                "New Frontier Papers"
+            ],
+            "HOTSPOT_PAPER_PRIMARY_KIND": "new_frontier",
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "New Frontier Papers",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "llm_exact"
+        },
+        "2607.17299": {
+            "ARXIVID": "2607.17299",
+            "COMMENT": "Combines suffix-reuse speculative decoding with cache-aware rollout scheduling across training replicas.",
+            "RELEVANCE": 8,
+            "NOVELTY": 7,
+            "PRIMARY_TOPIC_ID": "training_systems",
+            "MATCHED_TOPIC_IDS": [
+                "training_systems",
+                "efficiency_scaling"
+            ],
+            "TOPIC_MATCH_COMMENT": "It directly removes a distributed rollout bottleneck that limits synchronous long-context agent training throughput.",
+            "HOTSPOT_PAPER_TAGS": [
+                "daily_hot"
+            ],
+            "HOTSPOT_PAPER_COMMENT": "Agentic-RL rollout generation is a prominent scaling bottleneck, and the reported gains span both lightly and heavily loaded regimes.",
+            "SCORE": 15,
+            "authors": [
+                "Ryan Xu",
+                "Atlas Zhao",
+                "David Bao",
+                "Frank Du"
+            ],
+            "title": "WAR: Workload-Aware Rollouts for Synchronous Agentic Reinforcement Learning",
+            "abstract": "Long-horizon rollout generation has become the dominant systems bottleneck in agentic reinforcement learning (RL). As agents interact with environments over many turns, trajectories rapidly grow to tens of thousands of tokens, making synchronous RL training increasingly constrained by rollout. We propose WAR, a workload-aware rollout system that substantially accelerates synchronous agentic RL by jointly optimizing decoding and scheduling. WAR is built on a key observation: the optimal rollout optimization strategy depends on runtime load: (1) Under low load, WAR enables model-free speculative decoding with SuffixDecoding, which reuses suffix patterns from previously completed trajectories as speculative drafts for future rollouts. Unlike model-based drafters, SuffixDecoding introduces no additional draft model and avoids GPU contention with rollout generation. (2) Under high load, where saturated batched decoding leaves limited room for speculative speedup, WAR shifts the optimization focus to cache-aware scheduling. A global scheduler places requests across rollout replicas based on cache locality, trajectory progress and server load, reducing redundant KV-cache recomputation and mitigating load imbalance. By combining decoding-level suffix reuse with system-level rollout scheduling, WAR delivers robust throughput improvements across workload regimes without changing the underlying RL algorithm. WAR improves long-context agentic rollout throughput by 1.4x under low load and up to 1.6x under high load. These results show that WAR removes a major rollout bottleneck in synchronous agentic RL and provides a practical path toward scalable long-context agent training.",
+            "arxiv_id": "2607.17299",
+            "PRIMARY_TOPIC_LABEL": "Large-Scale Training Systems and Efficiency",
+            "MATCHED_TOPIC_LABELS": [
+                "Large-Scale Training Systems and Efficiency",
+                "Efficiency, Compression, and Large-Scale Training"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [
+                "Daily Hot Papers"
+            ],
+            "HOTSPOT_PAPER_PRIMARY_KIND": "daily_hot",
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "Daily Hot Papers",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "llm_exact"
+        }
+    },
+    "sections": [
+        {
+            "kind": "new_frontier",
+            "label": "New Frontier Papers",
+            "description": "Papers that appear to open a genuinely new direction, paradigm, or field.",
+            "paper_ids": [
+                "2607.17419",
+                "2607.16568",
+                "2607.17146"
+            ]
+        },
+        {
+            "kind": "daily_hot",
+            "label": "Daily Hot Papers",
+            "description": "Papers that feel broadly important to the day and belong in the hotspot paper feed.",
+            "paper_ids": [
+                "2607.17299"
+            ]
+        }
+    ]
 }

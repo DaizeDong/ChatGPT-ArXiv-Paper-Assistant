@@ -1,0 +1,314 @@
+{
+    "schema_version": 1,
+    "meta": {
+        "date": "2026-02-04",
+        "total_candidates": 100,
+        "total_spotlight_papers": 7,
+        "thresholds": {
+            "daily_hot_score_cutoff": 15,
+            "daily_hot_relevance_cutoff": 7,
+            "new_frontier_score_cutoff": 15,
+            "new_frontier_novelty_cutoff": 8
+        },
+        "caps": {
+            "max_daily_hot": 6,
+            "max_new_frontier": 4
+        }
+    },
+    "diagnostics": {
+        "candidate_count_by_kind": {
+            "new_frontier": 1,
+            "daily_hot": 7
+        },
+        "selected_count_by_kind": {
+            "new_frontier": 1,
+            "daily_hot": 6
+        }
+    },
+    "papers": {
+        "2602.03204": {
+            "ARXIVID": "2602.03204",
+            "COMMENT": "Shows Top-k routing is algebraically isomorphic to the k-th elementary symmetric tropical polynomial, partitioning input space into the normal fan of a hypersimplex, and derives from this both asymptotic limits on optimal expert granularity and an argument that shared experts are geometrically necessary to prevent routing collapse.",
+            "RELEVANCE": 9,
+            "NOVELTY": 8,
+            "PRIMARY_TOPIC_ID": "moe_training",
+            "MATCHED_TOPIC_IDS": [
+                "moe_training",
+                "architecture_training"
+            ],
+            "TOPIC_MATCH_COMMENT": "The object of study is the routing mechanism itself, with conclusions about expert granularity, shared experts, and router collapse.",
+            "HOTSPOT_PAPER_TAGS": [
+                "new_frontier"
+            ],
+            "HOTSPOT_PAPER_COMMENT": "Opens a tropical-geometry lens on MoE expressivity, giving sparse routing a combinatorial-capacity account that existing heuristic efficiency arguments do not provide.",
+            "SCORE": 17,
+            "authors": [
+                "Ye Su",
+                "Huayi Tang",
+                "Zixuan Gong",
+                "Yong Liu"
+            ],
+            "title": "Sparsity is Combinatorial Depth: Quantifying MoE Expressivity via Tropical Geometry",
+            "abstract": "While Mixture-of-Experts (MoE) architectures define the state-of-the-art, their theoretical success is often attributed to heuristic efficiency rather than geometric expressivity. In this work, we present the first analysis of MoE through the lens of tropical geometry, establishing that the Top-$k$ routing mechanism is algebraically isomorphic to the $k$-th elementary symmetric tropical polynomial. This isomorphism partitions the input space into the Normal Fan of a Hypersimplex, revealing that \\textbf{sparsity is combinatorial depth} which scales geometric capacity by the binomial coefficient $\\binom{N}{k}$. Moving beyond ambient bounds, we introduce the concept of \\textit{Effective Capacity} under the Manifold Hypothesis. We prove that while dense networks suffer from capacity collapse on low-dimensional data, MoE architectures exhibit \\textit{Combinatorial Resilience}, maintaining high expressivity via the transversality of routing cones. Translating these theoretical bounds into architectural principles, we derive asymptotic capacity limits for optimal expert granularity and prove that shared experts are geometrically necessary to prevent routing collapse.",
+            "arxiv_id": "2602.03204",
+            "PRIMARY_TOPIC_LABEL": "MoE Training",
+            "MATCHED_TOPIC_LABELS": [
+                "MoE Training",
+                "Architecture and Training Dynamics"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [
+                "New Frontier Papers"
+            ],
+            "HOTSPOT_PAPER_PRIMARY_KIND": "new_frontier",
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "New Frontier Papers",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "llm_exact"
+        },
+        "2602.03515": {
+            "ARXIVID": "2602.03515",
+            "COMMENT": "Traces asynchronous pipeline-parallel gradient staleness to misalignment between the Hessian eigenbasis and the coordinate basis of adaptive optimizers, proves basis misalignment amplifies the delay penalty, and rotates the optimizer basis to keep delayed updates usable at 3B scale.",
+            "RELEVANCE": 10,
+            "NOVELTY": 8,
+            "PRIMARY_TOPIC_ID": "training_systems",
+            "MATCHED_TOPIC_IDS": [
+                "training_systems",
+                "architecture_training"
+            ],
+            "TOPIC_MATCH_COMMENT": "Directly about pipeline parallelism and the optimizer behaviour that determines whether asynchronous large-scale runs converge.",
+            "HOTSPOT_PAPER_TAGS": [
+                "daily_hot"
+            ],
+            "HOTSPOT_PAPER_COMMENT": "Broadly important today: Traces asynchronous pipeline-parallel gradient staleness to misalignment between the Hessian eigenbasis and the coordinate basis of adaptive optimizers, proves basis misalignment amplifies the delay penalty, and rotates the optimizer basis to keep delayed updates usable at 3B scale.",
+            "SCORE": 18,
+            "authors": [
+                "Hyunji Jung",
+                "Sungbin Shin",
+                "Namhoon Lee"
+            ],
+            "title": "Mitigating Staleness in Asynchronous Pipeline Parallelism via Basis Rotation",
+            "abstract": "Asynchronous pipeline parallelism maximizes hardware utilization by eliminating the pipeline bubbles inherent in synchronous execution, offering a path toward efficient large-scale distributed training. However, this efficiency gain can be compromised by gradient staleness, where the immediate model updates with delayed gradients introduce noise into the optimization process. Crucially, we identify a critical, yet often overlooked, pathology: this delay scales linearly with pipeline depth, fundamentally undermining the very scalability that the method originally intends to provide. We trace this pathology to a specific property of the optimization landscape: the misalignment between the Hessian eigenbasis and the standard coordinate basis, which triggers oscillations in the update trajectories of coordinate-wise adaptive optimizers. We identify that these oscillations cause delayed updates to diverge from their true counterparts, invalidating their use for current iterations. This insight is formalized through theoretical analysis, including a convergence bound showing that basis misalignment amplifies the delay penalty, and substantiated with empirical evaluation. To address this, we propose basis rotation, a framework that rotates the optimizer's coordinate system to align with the Hessian eigenbasis, keeping delayed updates useful. We theoretically demonstrate that basis rotation minimizes basis misalignment, thereby counteracting the conditions that amplify delay penalties. Empirically, in training up to a 3B-parameter LLM, basis rotation reduces the required iterations by 81.7\\% compared to the best-performing asynchronous baseline.",
+            "arxiv_id": "2602.03515",
+            "PRIMARY_TOPIC_LABEL": "Large-Scale Training Systems and Efficiency",
+            "MATCHED_TOPIC_LABELS": [
+                "Large-Scale Training Systems and Efficiency",
+                "Architecture and Training Dynamics"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [
+                "Daily Hot Papers"
+            ],
+            "HOTSPOT_PAPER_PRIMARY_KIND": "daily_hot",
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "Daily Hot Papers",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "heuristic"
+        },
+        "2602.03685": {
+            "ARXIVID": "2602.03685",
+            "COMMENT": "Argues the slow power-law loss decay in LLM training arises intrinsically from softmax plus cross-entropy on peaked next-token distributions, yielding vanishing gradients and a universal 1/3 time exponent independent of microscopic details.",
+            "RELEVANCE": 9,
+            "NOVELTY": 8,
+            "PRIMARY_TOPIC_ID": "architecture_training",
+            "MATCHED_TOPIC_IDS": [
+                "training_systems",
+                "architecture_training"
+            ],
+            "TOPIC_MATCH_COMMENT": "A mechanistic explanation of why large models train the way they do, locating the optimization bottleneck in the loss-and-output-layer design itself.",
+            "HOTSPOT_PAPER_TAGS": [
+                "daily_hot"
+            ],
+            "HOTSPOT_PAPER_COMMENT": "Offers a concrete mechanistic origin for observed neural scaling behaviour, which is of broad interest well beyond the training-systems audience.",
+            "SCORE": 17,
+            "authors": [
+                "Yizhou Liu",
+                "Ziming Liu",
+                "Cengiz Pehlevan",
+                "Jeff Gore"
+            ],
+            "title": "Universal One-third Time Scaling in Learning Peaked Distributions",
+            "abstract": "Training large language models (LLMs) is computationally expensive, partly because the loss exhibits slow power-law convergence whose origin remains debatable. Through systematic analysis of toy models and empirical evaluation of LLMs, we show that this behavior can arise intrinsically from the use of softmax and cross-entropy. When learning peaked probability distributions, e.g., next-token distributions, these components generically yield power-law vanishing losses and gradients, regardless of many microscopic details, creating a fundamental optimization bottleneck. This ultimately leads to power-law time scaling of the loss with a universal exponent of $1/3$. Our results provide a mechanistic explanation for observed neural scaling and suggest new directions for improving LLM training efficiency.",
+            "arxiv_id": "2602.03685",
+            "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+            "MATCHED_TOPIC_LABELS": [
+                "Large-Scale Training Systems and Efficiency",
+                "Architecture and Training Dynamics"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [
+                "Daily Hot Papers"
+            ],
+            "HOTSPOT_PAPER_PRIMARY_KIND": "daily_hot",
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "Daily Hot Papers",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "llm_exact"
+        },
+        "2602.03839": {
+            "ARXIVID": "2602.03839",
+            "COMMENT": "Shows ~99% of per-step Adam updates fall below the BF16 rounding threshold and turns this into compute-visible sparsification: bit-identical sparse weight patches (100x less sync traffic) and sparsified DiLoCo pseudo-gradients with error feedback (17x less trainer-to-trainer traffic).",
+            "RELEVANCE": 9,
+            "NOVELTY": 8,
+            "PRIMARY_TOPIC_ID": "training_systems",
+            "MATCHED_TOPIC_IDS": [
+                "training_systems",
+                "efficiency_scaling"
+            ],
+            "TOPIC_MATCH_COMMENT": "Core contribution is a communication algorithm for distributed training, grounded in an optimizer-precision observation rather than infrastructure tuning.",
+            "HOTSPOT_PAPER_TAGS": [
+                "daily_hot"
+            ],
+            "HOTSPOT_PAPER_COMMENT": "Broadly important today: Shows ~99% of per-step Adam updates fall below the BF16 rounding threshold and turns this into compute-visible sparsification: bit-identical sparse weight patches (100x less sync traffic) and sparsified DiLoCo pseudo-gradients with error feedback (17x less trainer-to-trainer traffic).",
+            "SCORE": 17,
+            "authors": [
+                "Erfan Miahi",
+                "Eugene Belilovsky"
+            ],
+            "title": "Understanding and Exploiting Weight Update Sparsity for Communication-Efficient Distributed RL",
+            "abstract": "Bandwidth-constrained distributed reinforcement learning (RL) post-training of large language models is bottlenecked by two channels: weight synchronization from trainers to inference workers, and gradient or pseudo-gradient synchronization across trainers. We find that approximately 99% of per-step weight updates are invisible after the BF16 cast used by standard training and inference forward passes. We explain this sparsity by showing that, at typical RL post-training learning rates, Adam updates often fall below the local BF16 rounding threshold. We turn this observation into an algorithmic principle called compute-visible sparsification: transmit only updates that would change the next forward pass. PULSE (Precision-gated Updates for Low-precision Sparse Exchange) turns this principle into two communication algorithms: PULSESync sends lossless sparse BF16 weight patches from trainers to inference workers, and PULSELoCo sparsifies DiLoCo-style FP32 pseudo-gradient synchronization with error feedback. Over bandwidth-constrained commodity networks, PULSESync cuts weight-synchronization communication by over 100x while reconstructing trainer weights bit-identically. PULSELoCo matches DiLoCo across four models while reducing trainer-to-trainer communication by over 17x versus DiLoCo and over 100x versus DDP in the largest evaluated setting.",
+            "arxiv_id": "2602.03839",
+            "PRIMARY_TOPIC_LABEL": "Large-Scale Training Systems and Efficiency",
+            "MATCHED_TOPIC_LABELS": [
+                "Large-Scale Training Systems and Efficiency",
+                "Efficiency, Compression, and Large-Scale Training"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [
+                "Daily Hot Papers"
+            ],
+            "HOTSPOT_PAPER_PRIMARY_KIND": "daily_hot",
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "Daily Hot Papers",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "heuristic"
+        },
+        "2602.03769": {
+            "ARXIVID": "2602.03769",
+            "COMMENT": "Identifies undecoded latent-token prediction as a lookahead mechanism and transfers it to autoregressive models through auxiliary multi-token training.",
+            "RELEVANCE": 9,
+            "NOVELTY": 8,
+            "PRIMARY_TOPIC_ID": "architecture_training",
+            "MATCHED_TOPIC_IDS": [
+                "architecture_training",
+                "efficiency_scaling"
+            ],
+            "TOPIC_MATCH_COMMENT": "The central contribution explains a computational mechanism and introduces a corresponding training objective; controlling latent-token count also enables speed-quality tradeoffs.",
+            "HOTSPOT_PAPER_TAGS": [
+                "daily_hot"
+            ],
+            "HOTSPOT_PAPER_COMMENT": "Broadly important today: Identifies undecoded latent-token prediction as a lookahead mechanism and transfers it to autoregressive models through auxiliary multi-token training.",
+            "SCORE": 17,
+            "authors": [
+                "Andre He",
+                "Sean Welleck",
+                "Daniel Fried"
+            ],
+            "title": "Reasoning with Latent Tokens in Diffusion Language Models",
+            "abstract": "Discrete diffusion models have recently become competitive with autoregressive models for language modeling, even outperforming them on reasoning tasks requiring planning and global coherence, but they require more computation at inference time. We trace this trade-off to a key mechanism: diffusion models are trained to jointly predict a distribution over all unknown tokens, including those that will not actually be decoded in the current step. Ablating this joint prediction yields faster inference but degrades performance, revealing that accurate prediction at the decoded position relies on joint reasoning about the distribution of undecoded tokens. We interpret these as latent tokens and introduce a method for modulating their number, demonstrating empirically that this enables a smooth tradeoff between inference speed and sample quality. Furthermore, we demonstrate that latent tokens can be introduced into autoregressive models through an auxiliary multi-token prediction objective, yielding substantial improvements on the same reasoning tasks where they have traditionally struggled. Our results suggest that latent tokens, while arising naturally in diffusion, represent a general mechanism for improving performance on tasks requiring global coherence or lookahead.",
+            "arxiv_id": "2602.03769",
+            "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+            "MATCHED_TOPIC_LABELS": [
+                "Architecture and Training Dynamics",
+                "Efficiency, Compression, and Large-Scale Training"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [
+                "Daily Hot Papers"
+            ],
+            "HOTSPOT_PAPER_PRIMARY_KIND": "daily_hot",
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "Daily Hot Papers",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "heuristic"
+        },
+        "2602.03295": {
+            "ARXIVID": "2602.03295",
+            "COMMENT": "Prefill-only depth pruning uses independent KV projections to preserve full-depth decoding.",
+            "RELEVANCE": 9,
+            "NOVELTY": 8,
+            "PRIMARY_TOPIC_ID": "efficiency_scaling",
+            "MATCHED_TOPIC_IDS": [
+                "architecture_training",
+                "efficiency_scaling"
+            ],
+            "TOPIC_MATCH_COMMENT": "Stage-specific layer skipping reduces inference cost and reveals different computational roles for depth during prefill and decoding.",
+            "HOTSPOT_PAPER_TAGS": [
+                "daily_hot"
+            ],
+            "HOTSPOT_PAPER_COMMENT": "Broadly important today: Prefill-only depth pruning uses independent KV projections to preserve full-depth decoding.",
+            "SCORE": 17,
+            "authors": [
+                "Junhui He",
+                "Zhihui Fu",
+                "Jun Wang",
+                "Qingan Li"
+            ],
+            "title": "POP: Prefill-Only Pruning for Efficient Large Model Inference",
+            "abstract": "Large Language Models (LLMs) and Vision-Language Models (VLMs) have demonstrated remarkable capabilities. However, their deployment is hindered by significant computational costs. Existing structured pruning methods, while hardware-efficient, often suffer from significant accuracy degradation. In this paper, we argue that this failure stems from a stage-agnostic pruning approach that overlooks the asymmetric roles between the prefill and decode stages. By introducing a virtual gate mechanism, our importance analysis reveals that deep layers are critical for next-token prediction (decode) but largely redundant for context encoding (prefill). Leveraging this insight, we propose Prefill-Only Pruning (POP), a stage-aware inference strategy that safely omits deep layers during the computationally intensive prefill stage while retaining the full model for the sensitive decode stage. To enable the transition between stages, we introduce independent Key-Value (KV) projections to maintain cache integrity, and a boundary handling strategy to ensure the accuracy of the first generated token. Extensive experiments on Llama-3.1, Qwen3-VL, and Gemma-3 across diverse modalities demonstrate that POP achieves up to 1.37$\\times$ speedup in prefill latency with minimal performance loss, effectively overcoming the accuracy-efficiency trade-off limitations of existing structured pruning methods.",
+            "arxiv_id": "2602.03295",
+            "PRIMARY_TOPIC_LABEL": "Efficiency, Compression, and Large-Scale Training",
+            "MATCHED_TOPIC_LABELS": [
+                "Architecture and Training Dynamics",
+                "Efficiency, Compression, and Large-Scale Training"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [
+                "Daily Hot Papers"
+            ],
+            "HOTSPOT_PAPER_PRIMARY_KIND": "daily_hot",
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "Daily Hot Papers",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "heuristic"
+        },
+        "2602.03922": {
+            "ARXIVID": "2602.03922",
+            "COMMENT": "Introduces an attention mechanism with sparse vector-quantized state updates, linear compute, and memory independent of sequence length.",
+            "RELEVANCE": 9,
+            "NOVELTY": 8,
+            "PRIMARY_TOPIC_ID": "architecture_training",
+            "MATCHED_TOPIC_IDS": [
+                "architecture_training",
+                "efficiency_scaling"
+            ],
+            "TOPIC_MATCH_COMMENT": "The core contribution is a new sequence-mixing architecture; its reduced compute and memory requirements also directly match efficiency.",
+            "HOTSPOT_PAPER_TAGS": [
+                "daily_hot"
+            ],
+            "HOTSPOT_PAPER_COMMENT": "Broadly important today: Introduces an attention mechanism with sparse vector-quantized state updates, linear compute, and memory independent of sequence length.",
+            "SCORE": 17,
+            "authors": [
+                "Nick Alonso",
+                "Tomas Figliolia",
+                "Beren Millidge"
+            ],
+            "title": "Online Vector Quantized Attention",
+            "abstract": "Standard sequence mixing layers used in language models struggle to balance efficiency and performance. Self-attention performs well on long context tasks but has expensive quadratic compute and linear memory costs, while linear attention and SSMs use only linear compute and constant memory but struggle with long context processing. In this paper, we develop a sequence mixing layer that aims to find a better compromise between memory-compute costs and long-context processing, which we call online vector-quantized (OVQ) attention. OVQ-attention requires linear compute costs and constant memory, but, unlike linear attention and SSMs, it uses a sparse memory update that allows it to greatly increase the size of its memory state and, consequently, memory capacity. We develop a theoretical basis for OVQ-attention based on Gaussian mixture regression, and we test it on a variety of synthetic long context tasks and on long context language modeling. OVQ-attention shows significant improvements over linear attention baselines and the original VQ-attention, on which OVQ-attention was inspired. It demonstrates competitive, and sometimes identical, performance to strong self-attention baselines up 64k sequence length, despite using a small fraction of the memory of full self-attention.",
+            "arxiv_id": "2602.03922",
+            "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+            "MATCHED_TOPIC_LABELS": [
+                "Architecture and Training Dynamics",
+                "Efficiency, Compression, and Large-Scale Training"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [
+                "Daily Hot Papers"
+            ],
+            "HOTSPOT_PAPER_PRIMARY_KIND": "daily_hot",
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "Daily Hot Papers",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "heuristic"
+        }
+    },
+    "sections": [
+        {
+            "kind": "new_frontier",
+            "label": "New Frontier Papers",
+            "description": "Papers that appear to open a genuinely new direction, paradigm, or field.",
+            "paper_ids": [
+                "2602.03204"
+            ]
+        },
+        {
+            "kind": "daily_hot",
+            "label": "Daily Hot Papers",
+            "description": "Papers that feel broadly important to the day and belong in the hotspot paper feed.",
+            "paper_ids": [
+                "2602.03515",
+                "2602.03685",
+                "2602.03839",
+                "2602.03769",
+                "2602.03295",
+                "2602.03922"
+            ]
+        }
+    ]
+}

@@ -2,8 +2,8 @@
     "schema_version": 1,
     "meta": {
         "date": "2026-08-27",
-        "total_candidates": 0,
-        "total_spotlight_papers": 0,
+        "total_candidates": 114,
+        "total_spotlight_papers": 6,
         "thresholds": {
             "daily_hot_score_cutoff": 15,
             "daily_hot_relevance_cutoff": 7,
@@ -18,10 +18,274 @@
     "diagnostics": {
         "candidate_count_by_kind": {
             "new_frontier": 0,
-            "daily_hot": 0
+            "daily_hot": 9
         },
-        "selected_count_by_kind": {}
+        "selected_count_by_kind": {
+            "daily_hot": 6
+        }
     },
-    "papers": {},
-    "sections": []
+    "papers": {
+        "2608.25990": {
+            "ARXIVID": "2608.25990",
+            "COMMENT": "Spectral-aware momentum updates amplify tolerant singular directions to improve pretraining token efficiency over Muon.",
+            "RELEVANCE": 10,
+            "NOVELTY": 8,
+            "PRIMARY_TOPIC_ID": "training_systems",
+            "MATCHED_TOPIC_IDS": [
+                "training_systems",
+                "architecture_training"
+            ],
+            "TOPIC_MATCH_COMMENT": "The primary contribution is a pretraining optimizer, supported by loss-landscape analysis explaining spectral step-size allocation and stability.",
+            "HOTSPOT_PAPER_TAGS": [
+                "daily_hot"
+            ],
+            "HOTSPOT_PAPER_COMMENT": "Broadly important today: Spectral-aware momentum updates amplify tolerant singular directions to improve pretraining token efficiency over Muon.",
+            "SCORE": 18,
+            "authors": [
+                "Xiaodong Wu",
+                "Wenyi Yu",
+                "Chao Zhang",
+                "Philip Woodland"
+            ],
+            "title": "Spectral Allocation: Why Muon Outperforms Adam, and How to Improve Muon",
+            "abstract": "Orthogonal optimisers such as Muon can substantially accelerate large language model pretraining relative to Adam, yet the mechanism remains incompletely understood. We investigate this through an out-of-sample spectral probing analysis of Transformer loss landscapes. At checkpoints along real training trajectories, we decompose each momentum buffer into its singular directions and estimate the loss-optimal step size along each direction on held-out data. The resulting spectral profile is anisotropic yet stable across batches and training stages, and consistent across the optimisers and model scales: a volatile head operating at the Edge-of-Stability supports a much smaller step size than the tolerant bulk, which permits substantially larger steps. This profile provides a unified spectral allocation account of why Muon outperforms Adam, which outperforms SGD. It also exposes a limitation of Muon's uniform scaling: it still underutilises the bulk. Guided by this finding, we introduce Spectral-Aware Muon (SAMuon), which holds the head at the Muon scale and amplifies the bulk using a static spectral prior. We provide two variants: the complete SAMuon follows the measured profile using a low-rank randomised SVD and the simplified SAMuon-lite uses a two-level approximation via rank-one power iteration. Neither method adds persistent optimiser state or notable extra FLOPs beyond Muon at scale, and the idealised exact-whitening versions of both retain Muon's asymptotic convergence rate under standard assumptions. Across \"modded-nanogpt\" models from 124M to 1B parameters, both variants outperform tuned AdamW and Muon (Scion implementation) baselines in all evaluated model-scale and batch-size configurations. SAMuon requires 13.3% to 24.0% fewer training tokens to reach the same validation loss as Muon, while SAMuon-lite retains most of this gain with near-zero wall-clock overhead.",
+            "arxiv_id": "2608.25990",
+            "PRIMARY_TOPIC_LABEL": "Large-Scale Training Systems and Efficiency",
+            "MATCHED_TOPIC_LABELS": [
+                "Large-Scale Training Systems and Efficiency",
+                "Architecture and Training Dynamics"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [
+                "Daily Hot Papers"
+            ],
+            "HOTSPOT_PAPER_PRIMARY_KIND": "daily_hot",
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "Daily Hot Papers",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "heuristic"
+        },
+        "2608.21308": {
+            "ARXIVID": "2608.21308",
+            "COMMENT": "Under chunk-start gradient evaluation, derives exact chunk-end fast-weight and momentum updates that enable parallel training.",
+            "RELEVANCE": 10,
+            "NOVELTY": 8,
+            "PRIMARY_TOPIC_ID": "architecture_training",
+            "MATCHED_TOPIC_IDS": [
+                "architecture_training",
+                "efficiency_scaling"
+            ],
+            "TOPIC_MATCH_COMMENT": "The core contribution changes a recurrent sequence layer's update mechanism while preserving efficient chunk-level training.",
+            "HOTSPOT_PAPER_TAGS": [
+                "daily_hot"
+            ],
+            "HOTSPOT_PAPER_COMMENT": "Broadly important today: Under chunk-start gradient evaluation, derives exact chunk-end fast-weight and momentum updates that enable parallel training.",
+            "SCORE": 18,
+            "authors": [
+                "Zeyun Zhong",
+                "Joya Chen",
+                "Manuel Martin",
+                "Frederik Diederichs",
+                "Juergen Gall",
+                "Juergen Beyerer"
+            ],
+            "title": "Rethinking Expressivity and Efficiency in Test-Time Training",
+            "abstract": "Test-Time Training (TTT) enables long-context processing via continuous weight updates during inference, but current methods struggle to balance the expressivity of per-token update dynamics with the hardware efficiency of chunk-wise approximations. We propose E$^2$-TTT (Expressive and Efficient TTT) to bridge this gap. Under the standard approximation of taking gradients at the chunk-start weights, we derive a closed-form state transition that exactly reproduces the chunk-end fast-weight and momentum states of the per-token recurrence. This enables fully parallelized chunk-level training while preserving the temporal structure of the update rule that prior chunk-wise methods discard. We validate E$^2$-TTT by training models up to 1.3B parameters from scratch. It performs on par with previous TTT and hybrid attention baselines in language modeling while outperforming them on in-context retrieval. Its advantage is most pronounced in length extrapolation: on the standard ``Needle in a Haystack'' passkey test, it retains over 90% accuracy at $8\\times$ the training context length. Meanwhile, E$^2$-TTT can match the training throughput of efficient chunk-wise methods, demonstrating that it effectively reconciles expressivity with efficiency. The code is available at https://github.com/zeyun-zhong/E2-TTT.",
+            "arxiv_id": "2608.21308",
+            "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+            "MATCHED_TOPIC_LABELS": [
+                "Architecture and Training Dynamics",
+                "Efficiency, Compression, and Large-Scale Training"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [
+                "Daily Hot Papers"
+            ],
+            "HOTSPOT_PAPER_PRIMARY_KIND": "daily_hot",
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "Daily Hot Papers",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "heuristic"
+        },
+        "2608.26288": {
+            "ARXIVID": "2608.26288",
+            "COMMENT": "Shows how finite Newton-Schulz smoothing can enable Muon convergence where exact polar updates may fail.",
+            "RELEVANCE": 10,
+            "NOVELTY": 8,
+            "PRIMARY_TOPIC_ID": "training_systems",
+            "MATCHED_TOPIC_IDS": [
+                "training_systems",
+                "architecture_training"
+            ],
+            "TOPIC_MATCH_COMMENT": "Directly analyzes an optimizer used in large-scale pretraining and explains how its practical orthogonalization procedure affects convergence.",
+            "HOTSPOT_PAPER_TAGS": [
+                "daily_hot"
+            ],
+            "HOTSPOT_PAPER_COMMENT": "Broadly important today: Shows how finite Newton-Schulz smoothing can enable Muon convergence where exact polar updates may fail.",
+            "SCORE": 18,
+            "authors": [
+                "Mingyi Li",
+                "Taira Tsuchiya"
+            ],
+            "title": "Muon with Finite Newton-Schulz: The Smoothing Benefit in Nonsmooth Nonconvex Optimization",
+            "abstract": "Muon has emerged as a strong optimizer for the matrix-valued parameters in large language model pretraining, approximately orthogonalizing its momentum with a few Newton-Schulz iterations. Existing theory either replaces this iteration with the exact polar factor it approximates, or treats its finite depth as an approximation error, and thus the iteration Muon actually runs can only hurt the guarantees. We show that finite Newton-Schulz can instead be beneficial for nonsmooth nonconvex optimization. To this end, we analyze Muon through the online-to-nonconvex conversion, which views the update rule as an online learner and converts its regret bound into a stationarity guarantee. The finite Newton-Schulz iteration smooths the discontinuous polar map into a Lipschitz map of the singular values, and Muon with finite Newton-Schulz can be regarded as an online learner with a smoothed spectral potential. This smoothing is exactly what the conversion needs: we prove that a Newton-Schulz depth growing only logarithmically in the target accuracy suffices for convergence to stationary points in nonsmooth nonconvex optimization, whereas Muon with the exact-polar update may fail to converge. The resulting sample complexity bounds match the best-known guarantees for nonsmooth nonconvex optimization and are optimal for smooth nonconvex optimization up to problem-dependent factors. The argument extends beyond Newton-Schulz to general spectral maps with the same smoothing property.",
+            "arxiv_id": "2608.26288",
+            "PRIMARY_TOPIC_LABEL": "Large-Scale Training Systems and Efficiency",
+            "MATCHED_TOPIC_LABELS": [
+                "Large-Scale Training Systems and Efficiency",
+                "Architecture and Training Dynamics"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [
+                "Daily Hot Papers"
+            ],
+            "HOTSPOT_PAPER_PRIMARY_KIND": "daily_hot",
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "Daily Hot Papers",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "heuristic"
+        },
+        "2605.06501": {
+            "ARXIVID": "2605.06501",
+            "COMMENT": "Replaces attention's token aggregation with a kernel-ridge-regression mixer incorporating a kernel-matrix inverse.",
+            "RELEVANCE": 10,
+            "NOVELTY": 8,
+            "PRIMARY_TOPIC_ID": "architecture_training",
+            "MATCHED_TOPIC_IDS": [
+                "architecture_training"
+            ],
+            "TOPIC_MATCH_COMMENT": "The core contribution is a new token-mixing mechanism, accompanied by a dedicated rescaling rule for training stability.",
+            "HOTSPOT_PAPER_TAGS": [
+                "daily_hot"
+            ],
+            "HOTSPOT_PAPER_COMMENT": "Broadly important today: Replaces attention's token aggregation with a kernel-ridge-regression mixer incorporating a kernel-matrix inverse.",
+            "SCORE": 18,
+            "authors": [
+                "Chuanyang Zheng",
+                "Jiankai Sun",
+                "Yihang Gao",
+                "Yuehao Wang",
+                "Liangchen Tan",
+                "Mac Schwager",
+                "Anderson Schneider",
+                "Yuriy Nevmyvaka",
+                "Xiaodong Liu"
+            ],
+            "title": "Cubit: Token Mixer with Kernel Ridge Regression",
+            "abstract": "Since its introduction in 2017, the Transformer has become one of the most widely adopted architectures in modern deep learning. Despite extensive efforts to improve positional encoding, attention mechanisms, and feed-forward networks, the core token-mixing mechanism in Transformers remains attention. In this work, we show that the attention module in Transformers can be interpreted as performing Nadaraya-Watson regression, where it computes similarities between tokens and aggregates the corresponding values accordingly. Motivated by this perspective, we propose Cubit, a potential next-generation architecture that leverages Kernel Ridge Regression (KRR), while the vanilla Transformer relies on Nadaraya-Watson regression. Specifically, Cubit modifies the classical attention computation by incorporating the closed-form solution of KRR, combining value aggregation through kernel similarities with normalization via the inverse of the kernel matrix. To improve the training stability, we further propose the Limited-Range Rescale (LRR), which rescales the value layer within a controlled range. We argue that Cubit, as a KRR-based architecture, provides a stronger mathematical foundation than the vanilla Transformer, whose attention mechanism corresponds to Nadaraya-Watson regression. We validate this claim through comprehensive experiments. The experimental results suggest that Cubit may exhibit stronger long-sequence modeling capability. In particular, its performance gain over the Transformer appears to increase as the training sequence length grows.",
+            "arxiv_id": "2605.06501",
+            "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+            "MATCHED_TOPIC_LABELS": [
+                "Architecture and Training Dynamics"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [
+                "Daily Hot Papers"
+            ],
+            "HOTSPOT_PAPER_PRIMARY_KIND": "daily_hot",
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "Daily Hot Papers",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "heuristic"
+        },
+        "2608.20818": {
+            "ARXIVID": "2608.20818",
+            "COMMENT": "Periodic spectral refreshes and sharded row-wise momentum updates reduce optimizer computation and communication during large-DiT training.",
+            "RELEVANCE": 10,
+            "NOVELTY": 7,
+            "PRIMARY_TOPIC_ID": "training_systems",
+            "MATCHED_TOPIC_IDS": [
+                "training_systems",
+                "efficiency_scaling"
+            ],
+            "TOPIC_MATCH_COMMENT": "Optimizer and distributed-implementation co-design directly reduces training cost through cheaper updates, sharded state, and communication overlap.",
+            "HOTSPOT_PAPER_TAGS": [
+                "daily_hot"
+            ],
+            "HOTSPOT_PAPER_COMMENT": "Broadly important today: Periodic spectral refreshes and sharded row-wise momentum updates reduce optimizer computation and communication during large-DiT training.",
+            "SCORE": 17,
+            "authors": [
+                "Chenghao Li",
+                "Xiao Han",
+                "Xinxin Huang",
+                "Wei Liu",
+                "Boyang Li",
+                "Bing Xiao",
+                "Heran Zhang",
+                "Juanma Perez Rua",
+                "Ke Xu",
+                "Kangning Liu",
+                "Linjun Kuang",
+                "Na Li",
+                "Tan Wang",
+                "Tian Xie",
+                "Wei Peng",
+                "Yang Pei",
+                "Yifan Xu",
+                "Yuanhao Zhai",
+                "Yuwei Lin",
+                "Zhe Wang",
+                "Zihao He",
+                "Daniel Li",
+                "Junbiao Tang",
+                "Ziyang Jiang",
+                "Dake Chen"
+            ],
+            "title": "Scaling Muon for Diffusion Transformers",
+            "abstract": "The matrix-aware optimizer Muon improves large model training by balancing updates across singular directions, yet its scaling behavior and end-to-end efficiency on large Diffusion Transformers (DiTs) remain unclear. We first establish Muon's scaling behavior on DiTs from 1.3B to 15B parameters, showing that its optimization and generative quality advantages over AdamW persist across model scales. However, at scale, the 5-step Newton--Schulz iteration (NS5) performed at every optimization step, together with full-momentum materialization, introduces substantial computation and communication overhead that can offset Muon's step-efficiency advantage. We introduce \\emph{Periodic Row-wise Muon}, which performs a full NS5 spectral update once every \\(K\\) steps and applies a low compute and communication cost row-wise constrained update based on the current momentum at the remaining steps. We further co-design a distributed implementation that operates directly on sharded momentum during non-refresh steps and accelerates spectral refreshes through bucketed all-gather and communication--computation overlap. Across all scales, Muon improves the best observed generative quality over AdamW by 12.9--19.1\\%. Compared with vanilla Muon, Periodic Row-wise Muon remains within 0.5\\% in best generative quality on the 1.3B--4B models and improves it by 4.5\\% at 9B. It reduces optimizer time by 46.9--54.3\\%, end-to-end step time by 15.7--24.3\\%, and logical communication volume by 66.7\\%, while reaching its respective best generative quality with 33.7--64.8\\% less active training time. These results show that Periodic Row-wise Muon preserves Muon's generative quality advantage while translating it into end-to-end training efficiency for large DiTs.",
+            "arxiv_id": "2608.20818",
+            "PRIMARY_TOPIC_LABEL": "Large-Scale Training Systems and Efficiency",
+            "MATCHED_TOPIC_LABELS": [
+                "Large-Scale Training Systems and Efficiency",
+                "Efficiency, Compression, and Large-Scale Training"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [
+                "Daily Hot Papers"
+            ],
+            "HOTSPOT_PAPER_PRIMARY_KIND": "daily_hot",
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "Daily Hot Papers",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "heuristic"
+        },
+        "2608.26052": {
+            "ARXIVID": "2608.26052",
+            "COMMENT": "Task-dependent rank-error bounds provide a principled basis for selecting LoRA rank.",
+            "RELEVANCE": 9,
+            "NOVELTY": 8,
+            "PRIMARY_TOPIC_ID": "efficiency_scaling",
+            "MATCHED_TOPIC_IDS": [
+                "efficiency_scaling"
+            ],
+            "TOPIC_MATCH_COMMENT": "The core contribution characterizes the capacity-cost trade-off of low-rank adaptation, including how softmax saturation changes rank requirements.",
+            "HOTSPOT_PAPER_TAGS": [
+                "daily_hot"
+            ],
+            "HOTSPOT_PAPER_COMMENT": "Broadly important today: Task-dependent rank-error bounds provide a principled basis for selecting LoRA rank.",
+            "SCORE": 17,
+            "authors": [
+                "Gerard Conangla Planes"
+            ],
+            "title": "How Much Rank Does LoRA Need? Rank-Error Bounds for Transformer Attention",
+            "abstract": "Choosing the rank of a low-rank adaptation (LoRA) update is usually an empirical task. In this paper, we provide a task-dependent theory of the approximation error achievable at each LoRA rank for Transformer attention. We fix a pretrained attention head, a target attention function, and a distribution over inputs from the downstream task, and bound the smallest expected Kullback--Leibler (KL) error achievable by a rank-$r$ query LoRA update. When target attention probabilities are bounded away from zero, we prove a lower bound of the error proportional to $\u00cf\u0088(\\|d\\|_2)$, where $d$ is the difference between candidate and target attention scores and $\u00cf\u0088(t)=\\min\\{t^2,t\\}$. We also prove an unconditional upper bound $\\min\\{\\|d\\|_2^2/4,\\sqrt2\\|d\\|_2\\}$. Under explicit realizability, geometry, and moment conditions, we then bound the best rank-$r$ error between an explicit multiple of $\u00cf\u0088(\\sqrt{T_r})$ and $\\min\\{T_r/4,\\sqrt{2T_r}\\}$, where $T_r$ is the downstream-weighted tail energy of the target update. We also provide target-Fisher bounds when candidate scores remain within a fixed range of the target scores, and an unrestricted lower bound when a subset of tokens carries most of the probability mass. These spectral bounds describe finite-score approximation. We then construct explicit families in which softmax saturation makes the rank required to match the attention function strictly smaller than the rank required to match the finite logits. Finally, we extend the analysis to fused multi-head LoRA and joint query/key updates, exposing the effects of rank sharing and query/key factorization constraints.",
+            "arxiv_id": "2608.26052",
+            "PRIMARY_TOPIC_LABEL": "Efficiency, Compression, and Large-Scale Training",
+            "MATCHED_TOPIC_LABELS": [
+                "Efficiency, Compression, and Large-Scale Training"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [
+                "Daily Hot Papers"
+            ],
+            "HOTSPOT_PAPER_PRIMARY_KIND": "daily_hot",
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "Daily Hot Papers",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "heuristic"
+        }
+    },
+    "sections": [
+        {
+            "kind": "daily_hot",
+            "label": "Daily Hot Papers",
+            "description": "Papers that feel broadly important to the day and belong in the hotspot paper feed.",
+            "paper_ids": [
+                "2608.25990",
+                "2608.21308",
+                "2608.26288",
+                "2605.06501",
+                "2608.20818",
+                "2608.26052"
+            ]
+        }
+    ]
 }

@@ -1,0 +1,266 @@
+{
+    "2506.16500": {
+        "ARXIVID": "2506.16500",
+        "COMMENT": "Training-free SVD sparsity estimator selects a weight subset per context for loss and gradient computation, so fine-tuning FLOPs actually drop rather than just parameter count.",
+        "RELEVANCE": 8,
+        "NOVELTY": 7,
+        "PRIMARY_TOPIC_ID": "efficiency_scaling",
+        "MATCHED_TOPIC_IDS": [
+            "training_systems",
+            "efficiency_scaling"
+        ],
+        "TOPIC_MATCH_COMMENT": "Contextual sparsity applied to the backward pass changes real training cost, with measured speedup rather than a paper-FLOP claim.",
+        "HOTSPOT_PAPER_TAGS": [],
+        "HOTSPOT_PAPER_COMMENT": "",
+        "SCORE": 15,
+        "authors": [
+            "Samir Khaki",
+            "Xiuyu Li",
+            "Junxian Guo",
+            "Ligeng Zhu",
+            "Chenfeng Xu",
+            "Konstantinos N. Plataniotis",
+            "Amir Yazdanbakhsh",
+            "Kurt Keutzer",
+            "Song Han",
+            "Zhijian Liu"
+        ],
+        "title": "SparseLoRA: Accelerating LLM Fine-Tuning with Contextual Sparsity",
+        "abstract": "Fine-tuning LLMs is both computationally and memory-intensive. While parameter-efficient fine-tuning methods, such as QLoRA and DoRA, reduce the number of trainable parameters and lower memory usage, they do not decrease computational cost. In some cases, they may even slow down fine-tuning. In this paper, we introduce SparseLoRA, a method that accelerates LLM fine-tuning through contextual sparsity. We propose a lightweight, training-free SVD sparsity estimator that dynamically selects a sparse subset of weights for loss and gradient computation. Also, we systematically analyze and address sensitivity across layers, tokens, and training steps. Our experimental results show that SparseLoRA reduces computational cost by up to 2.2 times and a measured speedup of up to 1.6 times while maintaining accuracy across various downstream tasks, including commonsense and arithmetic reasoning, code generation, and instruction following.",
+        "arxiv_id": "2506.16500",
+        "PRIMARY_TOPIC_LABEL": "Efficiency, Compression, and Large-Scale Training",
+        "MATCHED_TOPIC_LABELS": [
+            "Large-Scale Training Systems and Efficiency",
+            "Efficiency, Compression, and Large-Scale Training"
+        ],
+        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+        "HOTSPOT_PAPER_LABELS": [],
+        "HOTSPOT_PAPER_PRIMARY_KIND": null,
+        "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+    },
+    "2506.16640": {
+        "ARXIVID": "2506.16640",
+        "COMMENT": "Learnable-temperature alpha-entmax lets attention interpolate between exact-zero sparse and softmax-dense regimes, avoiding probability-mass dispersion and giving up to 1000x length extrapolation.",
+        "RELEVANCE": 8,
+        "NOVELTY": 7,
+        "PRIMARY_TOPIC_ID": "architecture_training",
+        "MATCHED_TOPIC_IDS": [
+            "architecture_training",
+            "efficiency_scaling"
+        ],
+        "TOPIC_MATCH_COMMENT": "A new attention normalization mechanism with a mechanistic account of why dense softmax collapses at length, validated on language modeling.",
+        "HOTSPOT_PAPER_TAGS": [],
+        "HOTSPOT_PAPER_COMMENT": "",
+        "SCORE": 15,
+        "authors": [
+            "Pavlo Vasylenko",
+            "Hugo Pitorro",
+            "Andr\u00e9 F. T. Martins",
+            "Marcos Treviso"
+        ],
+        "title": "Long-Context Generalization with Sparse Attention",
+        "abstract": "Transformer-based architectures traditionally employ softmax to compute attention weights, which produces dense distributions over all tokens in a sequence. While effective in many settings, this density has been shown to be detrimental for tasks that demand precise focus on fixed-size patterns: as sequence length increases, non-informative tokens accumulate attention probability mass, leading to dispersion and representational collapse. We show in this paper that dynamically sparse attention mechanisms using $\u03b1$-entmax can avoid these issues, due to their ability to assign exact zeros to irrelevant tokens. Furthermore, we introduce Adaptive-Scalable Entmax (ASEntmax), which endows $\u03b1$-entmax with a learnable temperature parameter, allowing the attention distribution to interpolate between sparse (pattern-focused) and dense (softmax-like) regimes. Our empirical evaluation on synthetic tasks and language modeling demonstrates that ASEntmax substantially outperforms softmax, scalable softmax, and fixed-temperature $\u03b1$-entmax baselines, achieving up to 1000$\\times$ length extrapolation on synthetic benchmarks and superior long-context generalization on language modeling while preserving short-context performance, including better perplexity trends and higher retrieval accuracies at 8$\\times$ training length.",
+        "arxiv_id": "2506.16640",
+        "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+        "MATCHED_TOPIC_LABELS": [
+            "Architecture and Training Dynamics",
+            "Efficiency, Compression, and Large-Scale Training"
+        ],
+        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+        "HOTSPOT_PAPER_LABELS": [],
+        "HOTSPOT_PAPER_PRIMARY_KIND": null,
+        "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+    },
+    "2506.16406": {
+        "ARXIVID": "2506.16406",
+        "COMMENT": "Hypernetwork that maps unlabeled prompts directly to LoRA weights, replacing per-task gradient adaptation entirely.",
+        "RELEVANCE": 6,
+        "NOVELTY": 8,
+        "PRIMARY_TOPIC_ID": "efficiency_scaling",
+        "MATCHED_TOPIC_IDS": [
+            "architecture_training",
+            "efficiency_scaling"
+        ],
+        "TOPIC_MATCH_COMMENT": "Adaptation-cost mechanism in the low-rank/parameter-efficient family, with a genuinely new generation-instead-of-optimization mechanism.",
+        "HOTSPOT_PAPER_TAGS": [
+            "new_frontier",
+            "daily_hot"
+        ],
+        "HOTSPOT_PAPER_COMMENT": "Prompt-conditioned weight generation as an alternative to gradient-based specialization is a widely discussed and potentially direction-setting result.",
+        "SCORE": 14,
+        "authors": [
+            "Zhiyuan Liang",
+            "Dongwen Tang",
+            "Yuhao Zhou",
+            "Xuanlei Zhao",
+            "Mingjia Shi",
+            "Wangbo Zhao",
+            "Zekai Li",
+            "Peihao Wang",
+            "Konstantin Sch\u00fcrholt",
+            "Damian Borth",
+            "Michael M. Bronstein",
+            "Yang You",
+            "Zhangyang Wang",
+            "Kai Wang"
+        ],
+        "title": "Drag-and-Drop LLMs: Zero-Shot Prompt-to-Weights",
+        "abstract": "Modern Parameter-Efficient Fine-Tuning (PEFT) methods such as low-rank adaptation (LoRA) reduce the cost of customizing large language models (LLMs), yet still require a separate optimization run for every downstream dataset. We introduce \\textbf{Drag-and-Drop LLMs (\\textit{DnD})}, a prompt-conditioned parameter generator that eliminates per-task training by mapping a handful of unlabeled task prompts directly to LoRA weight updates. A lightweight text encoder distills each prompt batch into condition embeddings, which are then transformed by a cascaded hyper-convolutional decoder into the full set of LoRA matrices. Once trained in a diverse collection of prompt-checkpoint pairs, DnD produces task-specific parameters in seconds, yielding i) up to \\textbf{12,000$\\times$} lower overhead than full fine-tuning, ii) average gains up to \\textbf{30\\%} in performance over the strongest training LoRAs on unseen common-sense reasoning, math, coding, and multimodal benchmarks, and iii) robust cross-domain generalization despite never seeing the target data or labels. Our results demonstrate that prompt-conditioned parameter generation is a viable alternative to gradient-based adaptation for rapidly specializing LLMs. Our project is available at \\href{https://jerryliang24.github.io/DnD}{https://jerryliang24.github.io/DnD}.",
+        "arxiv_id": "2506.16406",
+        "PRIMARY_TOPIC_LABEL": "Efficiency, Compression, and Large-Scale Training",
+        "MATCHED_TOPIC_LABELS": [
+            "Architecture and Training Dynamics",
+            "Efficiency, Compression, and Large-Scale Training"
+        ],
+        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+        "HOTSPOT_PAPER_LABELS": [
+            "New Frontier Papers",
+            "Daily Hot Papers"
+        ],
+        "HOTSPOT_PAPER_PRIMARY_KIND": "new_frontier",
+        "HOTSPOT_PAPER_PRIMARY_LABEL": "New Frontier Papers",
+        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "llm_exact"
+    },
+    "2506.15969": {
+        "ARXIVID": "2506.15969",
+        "COMMENT": "Token Importance Recurrence observation drives a lagged, observation-window KV eviction policy, cutting cache 50-70% on long reasoning traces.",
+        "RELEVANCE": 7,
+        "NOVELTY": 6,
+        "PRIMARY_TOPIC_ID": "efficiency_scaling",
+        "MATCHED_TOPIC_IDS": [
+            "efficiency_scaling"
+        ],
+        "TOPIC_MATCH_COMMENT": "Core contribution is a KV-cache memory-efficiency mechanism with a new eviction criterion rather than a tuned variant.",
+        "HOTSPOT_PAPER_TAGS": [],
+        "HOTSPOT_PAPER_COMMENT": "",
+        "SCORE": 13,
+        "authors": [
+            "Haoyue Zhang",
+            "Hualei Zhang",
+            "Xiaosong Ma",
+            "Jie Zhang",
+            "Song Guo"
+        ],
+        "title": "LazyEviction: Lagged KV Eviction with Attention Pattern Observation for Efficient Long Reasoning",
+        "abstract": "Large Language Models (LLMs) exhibit enhanced capabilities by Chain-of-Thought reasoning. However, the extended reasoning sequences introduce significant GPU memory overhead due to increased key-value (KV) cache. Existing KV cache compression methods mitigate memory bottlenecks but struggle in long reasoning tasks. In this paper, we analyze attention patterns in reasoning tasks and reveal a Token Importance Recurrence phenomenon: a large proportion of tokens regain high attention after multiple decoding steps, which is failed to capture by existing works and may lead to unpredictable eviction on such periodically critical tokens. To address this, we propose LazyEviction, an observation window-based lagged eviction framework retaining latent recurring tokens by prioritized eviction based on tokens' recurrence patterns. Extensive experiments demonstrate that LazyEviction reduces KV cache by 50%~70% while maintaining comparable accuracy, outperforming existing KV cache compression baselines. Our implementation code can be found at https://github.com/Halo-949/LazyEviction.",
+        "arxiv_id": "2506.15969",
+        "PRIMARY_TOPIC_LABEL": "Efficiency, Compression, and Large-Scale Training",
+        "MATCHED_TOPIC_LABELS": [
+            "Efficiency, Compression, and Large-Scale Training"
+        ],
+        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+        "HOTSPOT_PAPER_LABELS": [],
+        "HOTSPOT_PAPER_PRIMARY_KIND": null,
+        "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+    },
+    "2506.16029": {
+        "ARXIVID": "2506.16029",
+        "COMMENT": "Over 100 LMs at 1B and 4B trained from scratch to isolate how pre-training, continued pre-training, SFT, and RL budgets interact, including diminishing returns and forgetting during domain CPT.",
+        "RELEVANCE": 7,
+        "NOVELTY": 6,
+        "PRIMARY_TOPIC_ID": "architecture_training",
+        "MATCHED_TOPIC_IDS": [
+            "training_systems",
+            "architecture_training"
+        ],
+        "TOPIC_MATCH_COMMENT": "The contribution is empirical training-dynamics analysis across stages that informs how real pretraining runs are budgeted, not a post-training method.",
+        "HOTSPOT_PAPER_TAGS": [
+            "daily_hot"
+        ],
+        "HOTSPOT_PAPER_COMMENT": "A fully open suite of 100+ from-scratch models plus data and pipeline is a broadly useful artifact for anyone reasoning about training-stage budgets.",
+        "SCORE": 13,
+        "authors": [
+            "Zhenting Qi",
+            "Fan Nie",
+            "Alexandre Alahi",
+            "James Zou",
+            "Himabindu Lakkaraju",
+            "Yilun Du",
+            "Eric Xing",
+            "Sham Kakade",
+            "Hanlin Zhang"
+        ],
+        "title": "EvoLM: In Search of Lost Language Model Training Dynamics",
+        "abstract": "Modern language model (LM) training has been divided into multiple stages, making it difficult for downstream developers to evaluate the impact of design choices made at each stage. We present EvoLM, a model suite that enables systematic and transparent analysis of LMs' training dynamics across pre-training, continued pre-training, supervised fine-tuning, and reinforcement learning. We train over 100 LMs with 1B and 4B parameters from scratch, and evaluate both upstream (language modeling) and downstream (problem-solving) capabilities, including considerations of both in-domain and out-of-domain generalization. Key insights highlight the diminishing returns from excessive pre-training and post-training, the importance and practices of mitigating forgetting during domain-specific continued pre-training, the crucial role of continued pre-training in bridging pre-training and post-training phases, and various intricate trade-offs when configuring supervised fine-tuning and reinforcement learning. To facilitate open research and reproducibility, we release all pre-trained and post-trained models, training datasets for all stages, and our entire training and evaluation pipeline.",
+        "arxiv_id": "2506.16029",
+        "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+        "MATCHED_TOPIC_LABELS": [
+            "Large-Scale Training Systems and Efficiency",
+            "Architecture and Training Dynamics"
+        ],
+        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+        "HOTSPOT_PAPER_LABELS": [
+            "Daily Hot Papers"
+        ],
+        "HOTSPOT_PAPER_PRIMARY_KIND": "daily_hot",
+        "HOTSPOT_PAPER_PRIMARY_LABEL": "Daily Hot Papers",
+        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "llm_exact"
+    },
+    "2506.16456": {
+        "ARXIVID": "2506.16456",
+        "COMMENT": "Joint tensor-train parameterization that generates both LoRA factors from one TT structure, with NTK-based justification of the optimisation dynamics.",
+        "RELEVANCE": 7,
+        "NOVELTY": 6,
+        "PRIMARY_TOPIC_ID": "efficiency_scaling",
+        "MATCHED_TOPIC_IDS": [
+            "architecture_training",
+            "efficiency_scaling"
+        ],
+        "TOPIC_MATCH_COMMENT": "Core contribution is a new low-rank adaptation parameterization, squarely in the efficiency/compression topic.",
+        "HOTSPOT_PAPER_TAGS": [],
+        "HOTSPOT_PAPER_COMMENT": "",
+        "SCORE": 13,
+        "authors": [
+            "Jun Qi",
+            "Chen-Yu Liu",
+            "Sabato Marco Siniscalchi",
+            "Chao-Han Huck Yang",
+            "Min-Hsiu Hsieh"
+        ],
+        "title": "Joint Tensor-Train Parameterization for Efficient and Expressive Low-Rank Adaptation",
+        "abstract": "Low-Rank Adaptation (LoRA) is widely recognized for its parameter-efficient fine-tuning of large-scale neural models. However, standard LoRA independently optimizes low-rank matrices, which inherently limits its expressivity and generalization capabilities. While classical tensor-train (TT) decomposition can be separately employed on individual LoRA matrices, this work demonstrates that the classical TT-based approach neither significantly improves parameter efficiency nor achieves substantial performance gains. This paper proposes TensorGuide, a novel tensor-train-guided adaptation framework to overcome these limitations. TensorGuide generates two correlated low-rank LoRA matrices through a unified TT structure driven by controlled Gaussian noise. The resulting joint TT representation inherently provides structured, low-rank adaptations, significantly enhancing expressivity, generalization, and parameter efficiency without increasing the number of trainable parameters. Theoretically, we justify these improvements through neural tangent kernel analyses, demonstrating superior optimization dynamics and enhanced generalization. Extensive experiments on quantum dot classification and GPT-2 fine-tuning benchmarks demonstrate that TensorGuide-based LoRA consistently outperforms standard LoRA and TT-LoRA, achieving improved accuracy and scalability with fewer parameters.",
+        "arxiv_id": "2506.16456",
+        "PRIMARY_TOPIC_LABEL": "Efficiency, Compression, and Large-Scale Training",
+        "MATCHED_TOPIC_LABELS": [
+            "Architecture and Training Dynamics",
+            "Efficiency, Compression, and Large-Scale Training"
+        ],
+        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+        "HOTSPOT_PAPER_LABELS": [],
+        "HOTSPOT_PAPER_PRIMARY_KIND": null,
+        "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+    },
+    "2506.16550": {
+        "ARXIVID": "2506.16550",
+        "COMMENT": "Operator-theoretic reading of attention as non-commutative convolution, giving a spectral account of representation propagation through depth.",
+        "RELEVANCE": 6,
+        "NOVELTY": 6,
+        "PRIMARY_TOPIC_ID": "architecture_training",
+        "MATCHED_TOPIC_IDS": [
+            "architecture_training"
+        ],
+        "TOPIC_MATCH_COMMENT": "It analyses the attention mechanism itself and depthwise spectral dynamics, though it stays purely theoretical with no training-run consequence.",
+        "HOTSPOT_PAPER_TAGS": [],
+        "HOTSPOT_PAPER_COMMENT": "",
+        "SCORE": 12,
+        "authors": [
+            "Swagatam Das"
+        ],
+        "title": "A Free Probabilistic Framework for Analyzing the Transformer-based Language Models",
+        "abstract": "We present a formal operator-theoretic framework for analyzing Transformer-based language models using free probability theory. By modeling token embeddings and attention mechanisms as self-adjoint operators in a tracial \\( W^* \\)-probability space, we reinterpret attention as non-commutative convolution and describe representation propagation via free additive convolution. This leads to a spectral dynamic system interpretation of deep Transformers. We derive entropy-based generalization bounds under freeness assumptions and provide insight into positional encoding, spectral evolution, and representational complexity. This work offers a principled, though theoretical, perspective on structural dynamics in large language models.",
+        "arxiv_id": "2506.16550",
+        "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+        "MATCHED_TOPIC_LABELS": [
+            "Architecture and Training Dynamics"
+        ],
+        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+        "HOTSPOT_PAPER_LABELS": [],
+        "HOTSPOT_PAPER_PRIMARY_KIND": null,
+        "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+    }
+}

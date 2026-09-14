@@ -1,0 +1,158 @@
+{
+    "schema_version": 1,
+    "meta": {
+        "date": "2026-03-10",
+        "total_candidates": 48,
+        "total_spotlight_papers": 3,
+        "thresholds": {
+            "daily_hot_score_cutoff": 15,
+            "daily_hot_relevance_cutoff": 7,
+            "new_frontier_score_cutoff": 15,
+            "new_frontier_novelty_cutoff": 8
+        },
+        "caps": {
+            "max_daily_hot": 6,
+            "max_new_frontier": 4
+        }
+    },
+    "diagnostics": {
+        "candidate_count_by_kind": {
+            "new_frontier": 0,
+            "daily_hot": 3
+        },
+        "selected_count_by_kind": {
+            "daily_hot": 3
+        }
+    },
+    "papers": {
+        "2603.13364": {
+            "ARXIVID": "2603.13364",
+            "COMMENT": "Extends fine-grained MoE expert granularity to the output dimension with a bi-level sparse forward pass, a matching routing mechanism, and a generalized upcycling recipe from dense/MoE checkpoints.",
+            "RELEVANCE": 10,
+            "NOVELTY": 8,
+            "PRIMARY_TOPIC_ID": "moe_training",
+            "MATCHED_TOPIC_IDS": [
+                "moe_training",
+                "architecture_training"
+            ],
+            "TOPIC_MATCH_COMMENT": "Core contribution is expert granularity, routing, and upcycling \u2014 the center of MoE training.",
+            "HOTSPOT_PAPER_TAGS": [
+                "daily_hot"
+            ],
+            "HOTSPOT_PAPER_COMMENT": "Broadly important today: Extends fine-grained MoE expert granularity to the output dimension with a bi-level sparse forward pass, a matching routing mechanism, and a generalized upcycling recipe from dense/MoE checkpoints.",
+            "SCORE": 18,
+            "authors": [
+                "Ning Liao",
+                "Xiaoxing Wang",
+                "Xiaohan Qin",
+                "Junchi Yan"
+            ],
+            "title": "FineRMoE: Dimension Expansion for Finer-Grained Expert with Its Upcycling Approach",
+            "abstract": "As revealed by the scaling law of fine-grained MoE, model performance ceases to be improved once the granularity of the intermediate dimension exceeds the optimal threshold, limiting further gains from single-dimension fine-grained design. To address this bottleneck, we propose FineRMoE (FineR-Grained MoE), an architecture that extends fine-grained expert design to both intermediate and output dimensions, aiming to enhance expert specialization beyond the single-dimension limit. We further introduce a bi-level sparse forward computation paradigm and a specialized routing mechanism to govern the activation. In addition, to obviate the prohibitive cost of training FineRMoE from scratch, we devise a generalized upcycling method to build FineRMoE in a cost-effective manner. Extensive experiments demonstrate the superior performance achieved by FineRMoE across ten standard benchmarks. Compared with the strongest baseline, FineRMoE achieves 6 times higher parameter efficiency, 281 times lower prefill latency, and 136 timese higher decoding throughput during inference.",
+            "arxiv_id": "2603.13364",
+            "PRIMARY_TOPIC_LABEL": "MoE Training",
+            "MATCHED_TOPIC_LABELS": [
+                "MoE Training",
+                "Architecture and Training Dynamics"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [
+                "Daily Hot Papers"
+            ],
+            "HOTSPOT_PAPER_PRIMARY_KIND": "daily_hot",
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "Daily Hot Papers",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "heuristic"
+        },
+        "2603.08960": {
+            "ARXIVID": "2603.08960",
+            "COMMENT": "Formalizes reuse fragmentation \u2014 routing splintering microbatches plus resident expert pools crowding out KV cache \u2014 into a qs criterion predicting when a quality-matched dense model beats MoE at long context.",
+            "RELEVANCE": 8,
+            "NOVELTY": 7,
+            "PRIMARY_TOPIC_ID": "moe_training",
+            "MATCHED_TOPIC_IDS": [
+                "moe_training",
+                "efficiency_scaling"
+            ],
+            "TOPIC_MATCH_COMMENT": "An analytical account of how expert routing and expert-pool memory interact, directly informing whether MoE is the right training-time choice.",
+            "HOTSPOT_PAPER_TAGS": [
+                "daily_hot"
+            ],
+            "HOTSPOT_PAPER_COMMENT": "The claim that MoE is best viewed as a training-time-only optimization, with a 4.5x dense advantage at 128k context, cuts against prevailing architecture assumptions and will be widely argued over.",
+            "SCORE": 15,
+            "authors": [
+                "Vignesh Adhinarayanan",
+                "Nuwan Jayasena"
+            ],
+            "title": "The $qs$ Inequality: Quantifying the Double Penalty of Mixture-of-Experts at Inference",
+            "abstract": "Mixture-of-Experts (MoE) models deliver high quality at low training FLOPs, but this efficiency often vanishes at inference. We identify a double penalty that structurally disadvantages MoE architectures during decoding: first, expert routing fragments microbatches and reduces weight reuse; second, massive resident expert pools reduce high-bandwidth memory (HBM) headroom for the KV cache. This phenomenon, formalized as reuse fragmentation, pushes feed-forward networks (FFNs) into a bandwidth-bound regime, especially at long context lengths. We introduce the $qs$ inequality, a predictive criterion that identifies when MoE is structurally disadvantaged relative to a quality-matched dense model. This criterion unifies sparsity ($s$), the fraction of parameters activated per token, and the quality-equivalence factor ($q$), the size multiplier required for a dense model to match MoE performance. Our evaluation across frontier models including DeepSeek-V3, Qwen3-235B, Grok-1, and Switch-C demonstrates that this fragmentation is a general architectural phenomenon. For DeepSeek-V3 at 128k context, this results in a 4.5x throughput advantage for a quality-matched dense baseline. Crucially, massive architectures like Switch-C can become infeasible on cluster sizes where a quality-matched dense model remains viable. Our results suggest that training-time FLOP efficiency is an incomplete proxy for inference-time performance in long-context serving. They also indicate that MoE may be best viewed as a training-time optimization, with distillation into dense models as a possible path toward inference-efficient deployment.",
+            "arxiv_id": "2603.08960",
+            "PRIMARY_TOPIC_LABEL": "MoE Training",
+            "MATCHED_TOPIC_LABELS": [
+                "MoE Training",
+                "Efficiency, Compression, and Large-Scale Training"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [
+                "Daily Hot Papers"
+            ],
+            "HOTSPOT_PAPER_PRIMARY_KIND": "daily_hot",
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "Daily Hot Papers",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "llm_exact"
+        },
+        "2603.08163": {
+            "ARXIVID": "2603.08163",
+            "COMMENT": "Largest permissionless globally distributed pretraining run to date: a 72B model on 1.1T tokens with the SparseLoCo communication-efficient optimizer under dynamic peer churn.",
+            "RELEVANCE": 8,
+            "NOVELTY": 7,
+            "PRIMARY_TOPIC_ID": "training_systems",
+            "MATCHED_TOPIC_IDS": [
+                "training_systems",
+                "efficiency_scaling"
+            ],
+            "TOPIC_MATCH_COMMENT": "Communication-efficient distributed optimization at a scale that materially changes what a pretraining run requires.",
+            "HOTSPOT_PAPER_TAGS": [
+                "daily_hot"
+            ],
+            "HOTSPOT_PAPER_COMMENT": "A 72B model pretrained over open internet peers is a landmark result for decentralized training and will draw broad attention beyond this feed.",
+            "SCORE": 15,
+            "authors": [
+                "Joel Lidin",
+                "Amir Sarfi",
+                "Erfan Miahi",
+                "Quentin Anthony",
+                "Shivam Chauhan",
+                "Evangelos Pappas",
+                "Benjamin Th\u00e9rien",
+                "Eugene Belilovsky",
+                "Samuel Dare"
+            ],
+            "title": "Covenant-72B: Pre-Training a 72B LLM with Trustless Peers Over-the-Internet",
+            "abstract": "Recently, there has been increased interest in globally distributed training, which has the promise to both reduce training costs and democratize participation in building large-scale foundation models. However, existing models trained in a globally distributed manner are relatively small in scale and have only been trained with whitelisted participants. Therefore, they do not yet realize the full promise of democratized participation. In this report, we describe Covenant-72B, an LLM produced by the largest collaborative globally distributed pre-training run (in terms of both compute and model scale), which simultaneously allowed open, permissionless participation supported by a live blockchain protocol. We utilized a state-of-the-art communication-efficient optimizer, SparseLoCo, supporting dynamic participation with peers joining and leaving freely. Our model, pre-trained on approximately 1.1T tokens, performs competitively with fully centralized models pre-trained on similar or higher compute budgets, demonstrating that fully democratized, non-whitelisted participation is not only feasible, but can be achieved at unprecedented scale for a globally distributed pre-training run.",
+            "arxiv_id": "2603.08163",
+            "PRIMARY_TOPIC_LABEL": "Large-Scale Training Systems and Efficiency",
+            "MATCHED_TOPIC_LABELS": [
+                "Large-Scale Training Systems and Efficiency",
+                "Efficiency, Compression, and Large-Scale Training"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [
+                "Daily Hot Papers"
+            ],
+            "HOTSPOT_PAPER_PRIMARY_KIND": "daily_hot",
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "Daily Hot Papers",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "llm_exact"
+        }
+    },
+    "sections": [
+        {
+            "kind": "daily_hot",
+            "label": "Daily Hot Papers",
+            "description": "Papers that feel broadly important to the day and belong in the hotspot paper feed.",
+            "paper_ids": [
+                "2603.13364",
+                "2603.08960",
+                "2603.08163"
+            ]
+        }
+    ]
+}

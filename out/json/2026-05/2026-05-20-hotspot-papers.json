@@ -2,8 +2,8 @@
     "schema_version": 1,
     "meta": {
         "date": "2026-05-20",
-        "total_candidates": 0,
-        "total_spotlight_papers": 0,
+        "total_candidates": 63,
+        "total_spotlight_papers": 3,
         "thresholds": {
             "daily_hot_score_cutoff": 15,
             "daily_hot_relevance_cutoff": 7,
@@ -17,11 +17,150 @@
     },
     "diagnostics": {
         "candidate_count_by_kind": {
-            "new_frontier": 0,
-            "daily_hot": 0
+            "new_frontier": 2,
+            "daily_hot": 1
         },
-        "selected_count_by_kind": {}
+        "selected_count_by_kind": {
+            "new_frontier": 2,
+            "daily_hot": 1
+        }
     },
-    "papers": {},
-    "sections": []
+    "papers": {
+        "2605.19781": {
+            "ARXIVID": "2605.19781",
+            "COMMENT": "Data-driven closed-form criterion for selecting per-layer LMO geometry, interpolating SGD to Muon and recovering Adam/MuAdam at ~3% runtime overhead.",
+            "RELEVANCE": 9,
+            "NOVELTY": 8,
+            "PRIMARY_TOPIC_ID": "training_systems",
+            "MATCHED_TOPIC_IDS": [
+                "training_systems"
+            ],
+            "TOPIC_MATCH_COMMENT": "A general optimizer-design contribution for large-scale training, unifying matrix-aware update geometries under a runtime-adaptive criterion.",
+            "HOTSPOT_PAPER_TAGS": [
+                "new_frontier"
+            ],
+            "HOTSPOT_PAPER_COMMENT": "Adapting LMO geometry from runtime statistics opens a design axis beyond the current fixed-geometry optimizer family.",
+            "SCORE": 17,
+            "authors": [
+                "Thomas Massena",
+                "Corentin Friedrich",
+                "Mathieu Serrurier"
+            ],
+            "title": "From SGD to Muon: Adaptive Optimization via Schatten-p Norms",
+            "abstract": "Modern optimizers, like Muon, impose matrix-wise geometry constraints on their updates. These matrix-wise constraints can be unified under Linear Minimization Oracle (LMO) theory. However, all current methods impose fixed LMO geometries for the update rules, chosen by-design or empirically, which are not necessarily optimal according to the problem's geometry. We introduce a novel efficient datadriven criterion for dynamically choosing proxy-optimal update LMO geometries on individual Deep Neural Network layers. Derived in closed form from gradient and activation statistics using a single-step random feature regression surrogate model, our criterion navigates a design space interpolating from SGD to Muon updates. Moreover, integrating parameter-wise preconditioning allows our framework to recover SGD, Muon, Adam, and MuAdam as specific extrema. To make this adaptive approach scalable, we pair it with efficient computational strategies, achieving only a $\\sim$ 3% runtime overhead on highly optimized baselines. As a proof of concept, we show that this data-driven optimizer beats or remains competitive with the performance of the best performing optimizer between Muon and AdamW across three different training scenarios. Ultimately, this work provides evidence that LMO geometry can be successfully and efficiently adapted from runtime data, opening a new pathway for optimizer design beyond static geometries.",
+            "arxiv_id": "2605.19781",
+            "PRIMARY_TOPIC_LABEL": "Large-Scale Training Systems and Efficiency",
+            "MATCHED_TOPIC_LABELS": [
+                "Large-Scale Training Systems and Efficiency"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [
+                "New Frontier Papers"
+            ],
+            "HOTSPOT_PAPER_PRIMARY_KIND": "new_frontier",
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "New Frontier Papers",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "llm_exact"
+        },
+        "2605.19269": {
+            "ARXIVID": "2605.19269",
+            "COMMENT": "GEMM-plus-epilogue kernel abstraction that fuses memory-bound Transformer operators into the GEMM mainloop, cutting data movement in the forward and backward pass of training.",
+            "RELEVANCE": 9,
+            "NOVELTY": 8,
+            "PRIMARY_TOPIC_ID": "training_systems",
+            "MATCHED_TOPIC_IDS": [
+                "training_systems",
+                "efficiency_scaling"
+            ],
+            "TOPIC_MATCH_COMMENT": "Core contribution is a GPU kernel abstraction that materially changes Transformer training throughput, squarely a large-scale training systems contribution.",
+            "HOTSPOT_PAPER_TAGS": [
+                "new_frontier"
+            ],
+            "HOTSPOT_PAPER_COMMENT": "Proposes GEMM-epilogue programming as a general path for kernel authoring, including LLM-authored kernels, which could reshape how training stacks are written.",
+            "SCORE": 17,
+            "authors": [
+                "Han Guo",
+                "Jack Zhang",
+                "Arjun Menon",
+                "Driss Guessous",
+                "Vijay Thakkar",
+                "Yoon Kim",
+                "Tri Dao"
+            ],
+            "title": "CODA: Rewriting Transformer Blocks as GEMM-Epilogue Programs",
+            "abstract": "Transformer training systems are built around dense linear algebra, yet a nontrivial fraction of end-to-end time is spent on surrounding memory-bound operators. Normalization, activations, residual updates, reductions, and related computations repeatedly move large intermediate tensors through global memory while performing little arithmetic, making data movement an increasingly important bottleneck in otherwise highly optimized training stacks. We introduce CODA, a GPU kernel abstraction that expresses these computations as GEMM-plus-epilogue programs. CODA is based on the observation that many Transformer operators exposed as separate framework kernels can be algebraically reparameterized to execute while a GEMM output tile remains on chip, before it is written to memory. The abstraction fixes the GEMM mainloop and exposes a small set of composable epilogue primitives for scaling, reductions, pairwise transformations, and accumulation. This constrained interface preserves the performance structure of expert-written GEMMs while remaining expressive enough to cover nearly all non-attention computation in the forward and backward pass of a standard Transformer block. Across representative Transformer workloads, both human- and LLM-authored CODA kernels achieve high performance, suggesting that GEMM-plus-epilogue programming offers a practical path toward combining framework-level productivity with hardware-level efficiency.",
+            "arxiv_id": "2605.19269",
+            "PRIMARY_TOPIC_LABEL": "Large-Scale Training Systems and Efficiency",
+            "MATCHED_TOPIC_LABELS": [
+                "Large-Scale Training Systems and Efficiency",
+                "Efficiency, Compression, and Large-Scale Training"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [
+                "New Frontier Papers"
+            ],
+            "HOTSPOT_PAPER_PRIMARY_KIND": "new_frontier",
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "New Frontier Papers",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "llm_exact"
+        },
+        "2605.19811": {
+            "ARXIVID": "2605.19811",
+            "COMMENT": "Alternates Muon spectral updates with Lion sign updates using shared momentum to reduce training compute and optimizer-state memory.",
+            "RELEVANCE": 10,
+            "NOVELTY": 7,
+            "PRIMARY_TOPIC_ID": "training_systems",
+            "MATCHED_TOPIC_IDS": [
+                "training_systems",
+                "efficiency_scaling"
+            ],
+            "TOPIC_MATCH_COMMENT": "The core contribution is an efficient pretraining optimizer, supported by convergence bounds that inform the compute-optimal update schedule.",
+            "HOTSPOT_PAPER_TAGS": [
+                "daily_hot"
+            ],
+            "HOTSPOT_PAPER_COMMENT": "Broadly important today: Alternates Muon spectral updates with Lion sign updates using shared momentum to reduce training compute and optimizer-state memory.",
+            "SCORE": 17,
+            "authors": [
+                "Arman Bolatov",
+                "Artem Riabinin",
+                "Nikita Kornilov",
+                "Andrey Veprikov",
+                "Samuel Horv\u00e1th",
+                "Martin Tak\u00e1\u010d",
+                "Aleksandr Beznosikov"
+            ],
+            "title": "LionMuon: Alternating Spectral and Sign Descent for Efficient Training",
+            "abstract": "In large-scale optimization, the cheapness and effectiveness of update steps are the most crucial factors for a successful optimizer. Sign-based optimizers like Lion or Signum produce cheap per-step updates, whereas Muon's spectral matrix-sign update gives a much stronger direction at a substantially higher per-step cost. In this work, we propose LionMuon, which retains the effectiveness of Muon steps while considerably cutting the averaged iteration cost, similar to sign-based methods. It alternates between Lion's and Muon's updates on a fixed period P, sharing a single dual-EMA momentum buffer between them. The optimizer state memory therefore matches Lion and is exactly half of AdamW's. A simpler single-EMA variant, SignMuon, by itself already outperforms pure Muon. At P = 2, LionMuon Pareto-dominates Muon, Lion, Signum, and AdamW on every dataset and architecture we tested at 124M model size, reaching lower validation loss at lower compute, and the same advantage persists at 355M and 720M scale. On the theory side, we prove sharp complexity bounds under heavy-tailed noise which are governed by period-averaged smoothness and noise that interpolate between Muon's and Lion's constants. These bounds predict the compute-optimal period and the conditions under which LionMuon outruns Muon and Lion. Code: https://github.com/brain-lab-research/lion-muon",
+            "arxiv_id": "2605.19811",
+            "PRIMARY_TOPIC_LABEL": "Large-Scale Training Systems and Efficiency",
+            "MATCHED_TOPIC_LABELS": [
+                "Large-Scale Training Systems and Efficiency",
+                "Efficiency, Compression, and Large-Scale Training"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [
+                "Daily Hot Papers"
+            ],
+            "HOTSPOT_PAPER_PRIMARY_KIND": "daily_hot",
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "Daily Hot Papers",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "heuristic"
+        }
+    },
+    "sections": [
+        {
+            "kind": "new_frontier",
+            "label": "New Frontier Papers",
+            "description": "Papers that appear to open a genuinely new direction, paradigm, or field.",
+            "paper_ids": [
+                "2605.19781",
+                "2605.19269"
+            ]
+        },
+        {
+            "kind": "daily_hot",
+            "label": "Daily Hot Papers",
+            "description": "Papers that feel broadly important to the day and belong in the hotspot paper feed.",
+            "paper_ids": [
+                "2605.19811"
+            ]
+        }
+    ]
 }

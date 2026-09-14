@@ -2,8 +2,8 @@
     "schema_version": 1,
     "meta": {
         "date": "2026-08-21",
-        "total_candidates": 0,
-        "total_spotlight_papers": 0,
+        "total_candidates": 91,
+        "total_spotlight_papers": 1,
         "thresholds": {
             "daily_hot_score_cutoff": 15,
             "daily_hot_relevance_cutoff": 7,
@@ -18,10 +18,61 @@
     "diagnostics": {
         "candidate_count_by_kind": {
             "new_frontier": 0,
-            "daily_hot": 0
+            "daily_hot": 1
         },
-        "selected_count_by_kind": {}
+        "selected_count_by_kind": {
+            "daily_hot": 1
+        }
     },
-    "papers": {},
-    "sections": []
+    "papers": {
+        "2608.20061": {
+            "ARXIVID": "2608.20061",
+            "COMMENT": "Adapts muP for MoE models with MLA and Muon to transfer learning rates across widths and trillion-token training horizons.",
+            "RELEVANCE": 10,
+            "NOVELTY": 8,
+            "PRIMARY_TOPIC_ID": "moe_training",
+            "MATCHED_TOPIC_IDS": [
+                "moe_training",
+                "training_systems"
+            ],
+            "TOPIC_MATCH_COMMENT": "The central contribution is compute-efficient hyperparameter selection for MoE pretraining, validated on a 155B-total, 17B-active model; its scaling law also informs training-run configuration.",
+            "HOTSPOT_PAPER_TAGS": [
+                "daily_hot"
+            ],
+            "HOTSPOT_PAPER_COMMENT": "Broadly important today: Adapts muP for MoE models with MLA and Muon to transfer learning rates across widths and trillion-token training horizons.",
+            "SCORE": 18,
+            "authors": [
+                "Nayeon Kim",
+                "Hojin Lee",
+                "Yunju Bak",
+                "Jaesun Park",
+                "Boseop Kim"
+            ],
+            "title": "Let's Scale Step by Step: Compute-Efficient Hyperparameter Transfer for Large-Scale Mixture-of-Experts",
+            "abstract": "Mixture-of-Experts (MoE) architectures significantly expand model capacity without a proportional increase in computational cost. However, optimizing their hyperparameters---particularly the learning rate---at extreme scales of both model size and token budget via sweeping remains computationally prohibitive. In this paper, we propose a compute-efficient, two-step hyperparameter transfer framework that estimates optimal learning rates for training large MoE models by transferring them across scaling model widths, and subsequently extrapolating to trillion-token horizons. First, we formulate a Maximal Update Parameterization ($\u00ce\u00bc$P) adaptation for MoE architectures utilizing Multi-head Latent Attention (MLA) and the Muon optimizer, demonstrating that optimal learning rates transfer consistently across width-scaled models. Second, we extend this transferability along the token dimension by establishing a predictive scaling law. By applying linear regression to the optimal values derived from small proxy models on limited budgets, we successfully extrapolate the ideal learning rate to massive training horizons (e.g., 10 trillion tokens) with high fidelity ($R^2=0.95$). Consequently, this indicates that proxy training on small models is sufficient to determine the optimal learning rate for the extensive training of large-scale MoEs. We apply the proposed methodology to pretrain our foundation model (155B total, 17B active parameters) from scratch, and the stable training and evaluation results validate that optimal configurations for full-scale target models can be accurately predicted with minimal ablation costs.",
+            "arxiv_id": "2608.20061",
+            "PRIMARY_TOPIC_LABEL": "MoE Training",
+            "MATCHED_TOPIC_LABELS": [
+                "MoE Training",
+                "Large-Scale Training Systems and Efficiency"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [
+                "Daily Hot Papers"
+            ],
+            "HOTSPOT_PAPER_PRIMARY_KIND": "daily_hot",
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "Daily Hot Papers",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "heuristic"
+        }
+    },
+    "sections": [
+        {
+            "kind": "daily_hot",
+            "label": "Daily Hot Papers",
+            "description": "Papers that feel broadly important to the day and belong in the hotspot paper feed.",
+            "paper_ids": [
+                "2608.20061"
+            ]
+        }
+    ]
 }

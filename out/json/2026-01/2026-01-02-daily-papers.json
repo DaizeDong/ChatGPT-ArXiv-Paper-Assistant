@@ -1,0 +1,254 @@
+{
+    "schema_version": 2,
+    "meta": {
+        "date": "2026-01-02",
+        "sort": [
+            "score",
+            "relevance"
+        ],
+        "topic_schema_version": 2,
+        "total_papers": 3,
+        "usage": {
+            "model": "llmcall:cc",
+            "prompt_tokens": 0,
+            "completion_tokens": 0,
+            "prompt_cost": 0.0,
+            "completion_cost": 0.0,
+            "total_arxiv_papers": 126,
+            "total_scanned_papers": 126,
+            "total_relevant_papers": 3,
+            "filter_health": {
+                "status": "ok",
+                "scanned_papers": 126,
+                "selected_papers": 3,
+                "llm_tokens": 0,
+                "message": "Scored 126 papers with 4/4 successful model calls; 3 selected."
+            },
+            "llm": {
+                "backend": "LLM backend: llmcall chain=codexg->codex->cc->claude",
+                "attempted": 4,
+                "succeeded": 4,
+                "failed": 0,
+                "by_backend": {
+                    "llmcall": 4
+                },
+                "by_provider": {
+                    "cc": 4
+                },
+                "errors": [],
+                "seconds": 148.9,
+                "trace": [
+                    "codexg: unavailable after 7.3s of 543.7s (OpenAI Codex v0.154.0",
+                    "codex: unavailable after 5.5s of 555.2s (OpenAI Codex v0.154.0",
+                    "cc: answered in 28.1s of 568.5s",
+                    "codexg: unavailable after 7.4s of 543.7s (2026-09-11T04:28:47.267078Z ERROR codex_models_manager::manager: failed to refresh available models: stream disconnected before completion: failed to decode models response: missing field `models` at )",
+                    "codex: unavailable after 5.3s of 555.1s (OpenAI Codex v0.154.0",
+                    "cc: answered in 13.5s of 568.6s",
+                    "codexg: unavailable after 4.1s of 543.7s (OpenAI Codex v0.154.0",
+                    "codex: unavailable after 5.0s of 558.4s (OpenAI Codex v0.154.0",
+                    "cc: answered in 55.8s of 572.1s",
+                    "codexg: unavailable after 4.0s of 543.7s (OpenAI Codex v0.154.0",
+                    "codex: unavailable after 3.3s of 558.5s (OpenAI Codex v0.154.0",
+                    "cc: answered in 9.6s of 574.0s"
+                ]
+            },
+            "remedied": true
+        }
+    },
+    "topic_order": [
+        "moe_training",
+        "training_systems",
+        "architecture_training",
+        "efficiency_scaling",
+        "representation_structure",
+        "memory_systems",
+        "world_models_open_ended_rl"
+    ],
+    "diagnostics": {
+        "total_papers": 3,
+        "topic_counts": [
+            {
+                "topic_id": "moe_training",
+                "topic_label": "MoE Training",
+                "paper_count": 0
+            },
+            {
+                "topic_id": "training_systems",
+                "topic_label": "Large-Scale Training Systems and Efficiency",
+                "paper_count": 1
+            },
+            {
+                "topic_id": "architecture_training",
+                "topic_label": "Architecture and Training Dynamics",
+                "paper_count": 1
+            },
+            {
+                "topic_id": "efficiency_scaling",
+                "topic_label": "Efficiency, Compression, and Large-Scale Training",
+                "paper_count": 1
+            },
+            {
+                "topic_id": "representation_structure",
+                "topic_label": "Representation Learning Theory and Structure",
+                "paper_count": 0
+            },
+            {
+                "topic_id": "memory_systems",
+                "topic_label": "Memory Structures and Agent Memory Systems",
+                "paper_count": 0
+            },
+            {
+                "topic_id": "world_models_open_ended_rl",
+                "topic_label": "World Models, Exploration, and Open-Ended Reinforcement Learning",
+                "paper_count": 0
+            }
+        ],
+        "assignment_source_counts": {
+            "llm_exact": 3
+        },
+        "llm_assignment_count": 3,
+        "heuristic_assignment_count": 0,
+        "default_assignment_count": 0,
+        "invalid_primary_topic_fallback_count": 0,
+        "missing_primary_topic_fallback_count": 0,
+        "hotspot_paper_kind_counts": {
+            "new_frontier": 0,
+            "daily_hot": 0
+        },
+        "hotspot_paper_assignment_source_counts": {
+            "default": 3
+        }
+    },
+    "papers": {
+        "2601.00919": {
+            "ARXIVID": "2601.00919",
+            "COMMENT": "Traces representational collapse and attention sink to a single attention-allocation failure and fixes both with positional discrimination across heads and dimensions plus an Elastic-Softmax that drops the normalization constraint.",
+            "RELEVANCE": 9,
+            "NOVELTY": 7,
+            "PRIMARY_TOPIC_ID": "architecture_training",
+            "MATCHED_TOPIC_IDS": [
+                "architecture_training",
+                "efficiency_scaling"
+            ],
+            "TOPIC_MATCH_COMMENT": "A new attention normalization mechanism with mechanistic analysis, verified by pretraining on FineWeb-Edu.",
+            "HOTSPOT_PAPER_TAGS": [],
+            "HOTSPOT_PAPER_COMMENT": "",
+            "SCORE": 16,
+            "authors": [
+                "Zichuan Fu",
+                "Wentao Song",
+                "Guojing Li",
+                "Yejing Wang",
+                "Xian Wu",
+                "Yimin Deng",
+                "Hanyu Yan",
+                "Yefeng Zheng",
+                "Xiangyu Zhao"
+            ],
+            "title": "Attention Needs to Focus: A Unified Perspective on Attention Allocation",
+            "abstract": "The Transformer architecture, a cornerstone of modern Large Language Models (LLMs), has achieved extraordinary success in sequence modeling, primarily due to its attention mechanism. However, despite its power, the standard attention mechanism is plagued by well-documented issues: representational collapse and attention sink. Although prior work has proposed approaches for these issues, they are often studied in isolation, obscuring their deeper connection. In this paper, we present a unified perspective, arguing that both can be traced to a common root -- improper attention allocation. We identify two failure modes: 1) Attention Overload, where tokens receive comparable high weights, blurring semantic features that lead to representational collapse; 2) Attention Underload, where no token is semantically relevant, yet attention is still forced to distribute, resulting in spurious focus such as attention sink. Building on this insight, we introduce Lazy Attention, a novel mechanism designed for a more focused attention distribution. To mitigate overload, it employs positional discrimination across both heads and dimensions to sharpen token distinctions. To counteract underload, it incorporates Elastic-Softmax, a modified normalization function that relaxes the standard softmax constraint to suppress attention on irrelevant tokens. Experiments on the FineWeb-Edu corpus, evaluated across nine diverse benchmarks, demonstrate that Lazy Attention successfully mitigates attention sink and achieves competitive performance compared to both standard attention and modern architectures, while reaching up to 59.58% attention sparsity.",
+            "arxiv_id": "2601.00919",
+            "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+            "MATCHED_TOPIC_LABELS": [
+                "Architecture and Training Dynamics",
+                "Efficiency, Compression, and Large-Scale Training"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [],
+            "HOTSPOT_PAPER_PRIMARY_KIND": null,
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+        },
+        "2601.00231": {
+            "ARXIVID": "2601.00231",
+            "COMMENT": "Curvature-aware LoRA: K-FAC natural-gradient preconditioning in rank space plus Fisher-eigendirection reprojection and spectrum-driven dynamic rank.",
+            "RELEVANCE": 7,
+            "NOVELTY": 6,
+            "PRIMARY_TOPIC_ID": "efficiency_scaling",
+            "MATCHED_TOPIC_IDS": [
+                "training_systems",
+                "efficiency_scaling"
+            ],
+            "TOPIC_MATCH_COMMENT": "Low-rank adaptation mechanism that changes trainable-parameter cost, with a second-order optimizer angle.",
+            "HOTSPOT_PAPER_TAGS": [],
+            "HOTSPOT_PAPER_COMMENT": "",
+            "SCORE": 13,
+            "authors": [
+                "Pritish Saha",
+                "Chandrav Rajbangshi",
+                "Rudra Goyal",
+                "Mohit Goyal",
+                "Anurag Deo",
+                "Biswajit Roy",
+                "Ningthoujam Dhanachandra Singh",
+                "Raxit Goswami",
+                "Amitava Das"
+            ],
+            "title": "GRIT -- Geometry-Aware PEFT with K-FACPreconditioning, Fisher-Guided Reprojection, andDynamic Rank Adaptation",
+            "abstract": "Parameter-efficient fine-tuning (PEFT) is the default way to adapt LLMs, but widely used LoRA and QLoRA are largely geometry-agnostic: they optimize in fixed, randomly oriented low-rank subspaces with first-order descent, mostly ignoring local loss curvature. This can inflate the effective update budget and amplify drift along weakly constrained directions. We introduce GRIT, a dynamic, curvature-aware LoRA procedure that preserves the LoRA parameterization but: (1) preconditions gradients in rank space using K-FAC as a natural-gradient proxy; (2) periodically reprojects the low-rank basis onto dominant Fisher eigendirections to suppress drift; and (3) adapts the effective rank from the spectrum so capacity concentrates where signal resides. Across instruction-following, comprehension, and reasoning benchmarks on LLaMA backbones, GRIT matches or surpasses LoRA and QLoRA while reducing trainable parameters by 46% on average (25--80% across tasks), without practical quality loss across prompt styles and data mixes. To model forgetting, we fit a curvature-modulated power law. Empirically, GRIT yields lower drift and a better updates-vs-retention frontier than strong PEFT-optimizer baselines (Orthogonal-LoRA, IA3, DoRA, Eff-FT, Shampoo).",
+            "arxiv_id": "2601.00231",
+            "PRIMARY_TOPIC_LABEL": "Efficiency, Compression, and Large-Scale Training",
+            "MATCHED_TOPIC_LABELS": [
+                "Large-Scale Training Systems and Efficiency",
+                "Efficiency, Compression, and Large-Scale Training"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [],
+            "HOTSPOT_PAPER_PRIMARY_KIND": null,
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+        },
+        "2601.06096": {
+            "ARXIVID": "2601.06096",
+            "COMMENT": "Exact Hessian-inverse-vector products for deep nets in time and memory linear in depth, at roughly Pearlmutter Hessian-vector cost, avoiding cubic-in-depth solves.",
+            "RELEVANCE": 6,
+            "NOVELTY": 7,
+            "PRIMARY_TOPIC_ID": "training_systems",
+            "MATCHED_TOPIC_IDS": [
+                "training_systems"
+            ],
+            "TOPIC_MATCH_COMMENT": "A second-order primitive that underlies preconditioners for large-scale training, though the paper stops short of a pretraining optimizer.",
+            "HOTSPOT_PAPER_TAGS": [],
+            "HOTSPOT_PAPER_COMMENT": "",
+            "SCORE": 13,
+            "authors": [
+                "Ali Rahimi"
+            ],
+            "title": "The Hessian of tall-skinny networks is easy to invert",
+            "abstract": "We describe an exact algorithm to solve linear systems of the form $Hx=b$ where $H$ is the Hessian of a deep net. The method computes Hessian-inverse-vector products without storing the Hessian or its inverse. It requires time and storage that scale linearly in the number of layers. This is in contrast to the naive approach of first computing the Hessian, then solving the linear system, which takes storage and time that are respectively quadratic and cubic in the number of layers. The Hessian-inverse-vector product method scales roughly like Pearlmutter's algorithm for computing Hessian-vector products.",
+            "arxiv_id": "2601.06096",
+            "PRIMARY_TOPIC_LABEL": "Large-Scale Training Systems and Efficiency",
+            "MATCHED_TOPIC_LABELS": [
+                "Large-Scale Training Systems and Efficiency"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [],
+            "HOTSPOT_PAPER_PRIMARY_KIND": null,
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+        }
+    },
+    "topic_sections": [
+        {
+            "topic_id": "training_systems",
+            "topic_label": "Large-Scale Training Systems and Efficiency",
+            "paper_ids": [
+                "2601.06096"
+            ]
+        },
+        {
+            "topic_id": "architecture_training",
+            "topic_label": "Architecture and Training Dynamics",
+            "paper_ids": [
+                "2601.00919"
+            ]
+        },
+        {
+            "topic_id": "efficiency_scaling",
+            "topic_label": "Efficiency, Compression, and Large-Scale Training",
+            "paper_ids": [
+                "2601.00231"
+            ]
+        }
+    ]
+}

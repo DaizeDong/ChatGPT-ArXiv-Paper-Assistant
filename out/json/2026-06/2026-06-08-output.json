@@ -1,1 +1,573 @@
-{}
+{
+    "2606.08388": {
+        "ARXIVID": "2606.08388",
+        "COMMENT": "Proves the polar update is the one-step entropy-maximizing bounded update on the gradient's singular directions, derives exact singular-value dynamics showing spectrum flattening, and rules out the low-rank reading of Muon.",
+        "RELEVANCE": 9,
+        "NOVELTY": 7,
+        "PRIMARY_TOPIC_ID": "training_systems",
+        "MATCHED_TOPIC_IDS": [
+            "training_systems",
+            "architecture_training"
+        ],
+        "TOPIC_MATCH_COMMENT": "Core contribution explains the optimization bias of a pretraining optimizer and when that bias helps, directly informing how large runs are configured.",
+        "HOTSPOT_PAPER_TAGS": [],
+        "HOTSPOT_PAPER_COMMENT": "",
+        "SCORE": 16,
+        "authors": [
+            "Pierfrancesco Beneventano",
+            "Mahmoud Abdelmoneum",
+            "Tomaso Poggio"
+        ],
+        "title": "The Spectral Dynamics and Noise Geometry of Muon",
+        "abstract": "Muon replaces a matrix gradient $G=U\u03a3V^\\top$ by its polar factor $UV^\\top$. This keeps the singular directions selected by the gradient, but makes the update spectrum flat. We study the optimization bias created by this operation. Under explicit alignment assumptions, we prove that the polar update is the one-step entropy-maximizing choice among bounded updates that use the gradient singular directions and do not adapt to the current weight spectrum. In an underdetermined regression model, we derive exact singular-value dynamics for continuous-time Muon and identify a measurement-dependent condition under which the normalized spectrum moves toward equal nonzero singular values. This geometry also rules out a common low-rank interpretation: at fixed Frobenius norm, Muon's distinguished state has a flat spectrum, whereas nuclear-norm minimization favors spectral concentration. Controlled matrix-sensing experiments separate the effect from simple gradient rescaling, show that norm-matched gradient descent does not reproduce Muon, and recover the predicted flattening trend across broad ablations. In small NanoGPT pretraining, Muon preserves stable rank, has a broad learning-rate plateau, and improves validation loss relative to AdamW; in a matched small-ViT control, the ranking reverses. The resulting picture is regime-dependent: Muon is not universally superior, but its flat-spectrum bias can help when many spectral directions need to remain active.",
+        "arxiv_id": "2606.08388",
+        "PRIMARY_TOPIC_LABEL": "Large-Scale Training Systems and Efficiency",
+        "MATCHED_TOPIC_LABELS": [
+            "Large-Scale Training Systems and Efficiency",
+            "Architecture and Training Dynamics"
+        ],
+        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+        "HOTSPOT_PAPER_LABELS": [],
+        "HOTSPOT_PAPER_PRIMARY_KIND": null,
+        "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+    },
+    "2606.08804": {
+        "ARXIVID": "2606.08804",
+        "COMMENT": "Breaks the key-value associative convention by folding mixed key-query prediction errors into linear-attention state evolution, with stability guarantees and a chunkwise-parallel Triton kernel.",
+        "RELEVANCE": 9,
+        "NOVELTY": 7,
+        "PRIMARY_TOPIC_ID": "architecture_training",
+        "MATCHED_TOPIC_IDS": [
+            "architecture_training",
+            "efficiency_scaling"
+        ],
+        "TOPIC_MATCH_COMMENT": "Core contribution is a new recurrent state-update rule for linear attention plus its hardware-efficient formulation, the center of architecture-mechanism work.",
+        "HOTSPOT_PAPER_TAGS": [],
+        "HOTSPOT_PAPER_COMMENT": "",
+        "SCORE": 16,
+        "authors": [
+            "Sumin Park",
+            "Seojin Kim",
+            "Noseong Park"
+        ],
+        "title": "Q-Delta: Beyond Key-Value Associative State Evolution",
+        "abstract": "Linear attention reformulates sequence modeling as recurrent state evolution, enabling efficient linear-time inference. Under the key-value associative paradigm, existing approaches restrict the role of the query to the readout operation, decoupling it from state evolution. We show that query-conditioned state readout induces a structured value prediction over accumulated memory that complements key-based retrieval. Based on this insight, we propose Q-Delta, a query-aware delta rule that integrates mixed key-query prediction errors into state evolution, enabling jointly corrective dynamics while preserving delta-rule efficiency. We establish stability guarantees for the resulting dynamics and derive a hardware-efficient chunkwise-parallel formulation with a custom Triton implementation. Empirical results demonstrate stable optimization, competitive throughput, and consistent improvements over strong baselines on language modeling and long-context retrieval tasks.",
+        "arxiv_id": "2606.08804",
+        "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+        "MATCHED_TOPIC_LABELS": [
+            "Architecture and Training Dynamics",
+            "Efficiency, Compression, and Large-Scale Training"
+        ],
+        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+        "HOTSPOT_PAPER_LABELS": [],
+        "HOTSPOT_PAPER_PRIMARY_KIND": null,
+        "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+    },
+    "2607.22577": {
+        "ARXIVID": "2607.22577",
+        "COMMENT": "Reformulates MoE-style mixture layers as variable-kernel dynamic convolutions, with each expert a 1x1 kernel and routing as input-conditioned kernel aggregation, then routes over end-to-end streams instead of only the FFN.",
+        "RELEVANCE": 9,
+        "NOVELTY": 7,
+        "PRIMARY_TOPIC_ID": "moe_training",
+        "MATCHED_TOPIC_IDS": [
+            "moe_training",
+            "training_systems",
+            "architecture_training"
+        ],
+        "TOPIC_MATCH_COMMENT": "Core contribution is a routing mechanism and its scaling behavior, addressing homogenized routing and gradient collapse in prior stream-mixture designs.",
+        "HOTSPOT_PAPER_TAGS": [
+            "new_frontier"
+        ],
+        "HOTSPOT_PAPER_COMMENT": "Pushing MoE-style conditional capacity beyond the FFN to whole-pipeline streams, backed by a convolution equivalence and horizontal scaling laws, sketches a distinct axis for scaling capacity apart from width and depth.",
+        "SCORE": 16,
+        "authors": [
+            "Xin Yang",
+            "Yemin Wang",
+            "Mingda Liu",
+            "Letian Li",
+            "Shuaishuai Cao",
+            "Zhengxiao He",
+            "Ryan Dong"
+        ],
+        "title": "cMoLLM at Scale: Horizontal Scaling Laws for Mixture-of-LLMs",
+        "abstract": "Scaling large language models (LLMs) has driven their success, yet dense Transformers couple capacity and computation: every parameter is activated for every token, making training and inference costs grow linearly with model size-a critical bottleneck as models approach trillion-parameter regimes. We aim to scale capacity through MoE-style mixture throughout the LLM pipeline rather than only the FFN. Prior pipeline-level approaches include ParaScale, which introduces virtual tokens and parallel streams but incurs substantial overhead and suffers from homogenized routing and gradient collapse, and AltUp, which uses an auxiliary prediction branch but offers limited adaptivity and slow convergence. We establish that MoE-style mixture layers can be reformulated as variable-kernel dynamic convolutions, where each expert corresponds to a $1{\\times}1$ convolutional kernel and routing implements input-conditioned kernel aggregation. Building on this equivalence, we introduce cMoLLM: a convolutionally gated mixture-of-LLMs that routes over end-to-end streams through fully differentiable dynamic convolution. In GPT-2-style models trained on FineWeb, cMoLLM improves language modeling perplexity and downstream GLUE and SQuAD accuracy under matched compute, with better stream utilization, more stable optimization, and favorable scaling compared to ParaScale- and AltUp-style baselines.",
+        "arxiv_id": "2607.22577",
+        "PRIMARY_TOPIC_LABEL": "MoE Training",
+        "MATCHED_TOPIC_LABELS": [
+            "MoE Training",
+            "Large-Scale Training Systems and Efficiency",
+            "Architecture and Training Dynamics"
+        ],
+        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+        "HOTSPOT_PAPER_LABELS": [
+            "New Frontier Papers"
+        ],
+        "HOTSPOT_PAPER_PRIMARY_KIND": "new_frontier",
+        "HOTSPOT_PAPER_PRIMARY_LABEL": "New Frontier Papers",
+        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "llm_exact"
+    },
+    "2606.08327": {
+        "ARXIVID": "2606.08327",
+        "COMMENT": "Routes tokens between spectral mixing and attention, reporting 35-40% fewer FLOPs with a 3.93-point perplexity penalty.",
+        "RELEVANCE": 9,
+        "NOVELTY": 7,
+        "PRIMARY_TOPIC_ID": "architecture_training",
+        "MATCHED_TOPIC_IDS": [
+            "architecture_training",
+            "efficiency_scaling"
+        ],
+        "TOPIC_MATCH_COMMENT": "Conditional operator selection directly changes the architecture, with compute reduction providing a secondary efficiency match.",
+        "HOTSPOT_PAPER_TAGS": [],
+        "HOTSPOT_PAPER_COMMENT": "",
+        "SCORE": 16,
+        "authors": [
+            "Prateek Kumar Sikdar"
+        ],
+        "title": "Chiaroscuro Attention: Spending Compute in the Dark",
+        "abstract": "We introduce CHIAR-Former (CHIAroscuro Attention-based tRansFormer), an efficient transformer that routes each token to either DCT spectral mixing (O(d log d), sub-quadratic) or full self-attention (O(n^2 d), quadratic in sequence length n) based on per-token spectral entropy H(x) in [0,1], which measures the frequency-domain complexity of each token embedding x. We make three contributions: (1) we discover routing collapse -- a three-operator system collapses to DCT+Attention, revealing the optimal operator subset; (2) we propose a learned task-level MetaRouter g = sigma(Linear(x-bar)) in [0,1], where x-bar is the batch-mean embedding and g soft-blends spectral and identity paths end-to-end; and (3) we demonstrate 35-40% FLOP reduction at 400M parameters with a 3.93 PPL cost on WikiText-103 (Test PPL 27.51 vs. 23.58). Under mixed-dataset training, CHIAR-Former dramatically outperforms full attention on small corpora, confirming the regularisation value of spectral mixing. The MetaRouter stabilises at g ~ 0.22, indicating that at scale the model reaches a robust compute-quality equilibrium: attention layers absorb representational complexity while spectral preprocessing efficiently anchors low-frequency structure.",
+        "arxiv_id": "2606.08327",
+        "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+        "MATCHED_TOPIC_LABELS": [
+            "Architecture and Training Dynamics",
+            "Efficiency, Compression, and Large-Scale Training"
+        ],
+        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+        "HOTSPOT_PAPER_LABELS": [],
+        "HOTSPOT_PAPER_PRIMARY_KIND": null,
+        "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+    },
+    "2606.09916": {
+        "ARXIVID": "2606.09916",
+        "COMMENT": "Learned cross-turn KV pruning uses prefix-cache-compatible slot mappings to reduce retained context and KV reads.",
+        "RELEVANCE": 9,
+        "NOVELTY": 7,
+        "PRIMARY_TOPIC_ID": "efficiency_scaling",
+        "MATCHED_TOPIC_IDS": [
+            "efficiency_scaling"
+        ],
+        "TOPIC_MATCH_COMMENT": "KV-cache pruning and bandwidth reduction are the core mechanisms, with agent trajectories supplying the evaluation setting.",
+        "HOTSPOT_PAPER_TAGS": [],
+        "HOTSPOT_PAPER_COMMENT": "",
+        "SCORE": 16,
+        "authors": [
+            "Junjie Li",
+            "Jiong Lou",
+            "Jie Li"
+        ],
+        "title": "IntentKV: Cross-Turn Intent-Aware KV Cache Pruning for Agent Inference",
+        "abstract": "Multi-turn LLM agents fan short queries into long trajectories of tool calls, search results, and intermediate reasoning. Both KV memory and KV read bandwidth grow by orders of magnitude across a single trajectory, making the key-value (KV) cache, not parameter compute, the dominant serving bottleneck for long-horizon agents. We introduce IntentKV, learned KV pruning that keeps the base LLM frozen. IntentKV maintains a session-level QueryMemory of cross-turn intent, scores live history tokens with a memory-attention rule, and adds a zero-initialized residual head with cross-attention over current-query K-vectors. To stay composable with prefix caches, eviction is a slot-map redirection: dropped positions route to a sentinel dead slot while surviving K/V rows, RoPE phases, and slot identities stay in place. IntentKV matches the no-pruning full-cache baseline with almost no accuracy drop under tight KV budgets: at an 8k KV budget, mean peak request tokens drop 23.9% on Qwen3-8B and 30.7% on Qwen2.5-14B. On the 100 longest BCP queries that all methods complete on Qwen2.5-14B, IntentKV-8k further cuts worst-case peak request tokens from 92.3k to 20.5k, a 77.8% reduction, and worst-case raw KV reads from 411M to 31M, a 92.6% reduction.",
+        "arxiv_id": "2606.09916",
+        "PRIMARY_TOPIC_LABEL": "Efficiency, Compression, and Large-Scale Training",
+        "MATCHED_TOPIC_LABELS": [
+            "Efficiency, Compression, and Large-Scale Training"
+        ],
+        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+        "HOTSPOT_PAPER_LABELS": [],
+        "HOTSPOT_PAPER_PRIMARY_KIND": null,
+        "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+    },
+    "2606.08672": {
+        "ARXIVID": "2606.08672",
+        "COMMENT": "A learned spatial residual escapes scalar solver updates' linear span, improving few-step sampling without additional backbone evaluations.",
+        "RELEVANCE": 8,
+        "NOVELTY": 8,
+        "PRIMARY_TOPIC_ID": "efficiency_scaling",
+        "MATCHED_TOPIC_IDS": [
+            "efficiency_scaling"
+        ],
+        "TOPIC_MATCH_COMMENT": "The core advance is a transferable solver mechanism that improves generative sampling efficiency while preserving the pretrained backbone.",
+        "HOTSPOT_PAPER_TAGS": [],
+        "HOTSPOT_PAPER_COMMENT": "",
+        "SCORE": 16,
+        "authors": [
+            "Sihyeon Kim",
+            "Seunghun Lee",
+            "Vikas Singh",
+            "Hyunwoo J. Kim"
+        ],
+        "title": "Learning to Solve Generative ODEs Beyond the Linear Span",
+        "abstract": "Diffusion and flow generative models sample by integrating a learned ODE, but high quality still requires many sequential model evaluations. Solver learning reduces this cost by adapting scalar coefficients, timesteps, or both, while keeping the backbone model fixed. In this work, we identify a structural bottleneck in this update family: each step remains span-limited. Since the scalar-coefficient update lies in the span of buffered velocity evaluations, it can fit only the in-span component while leaving any out-of-span residual unreachable by scalar recombination alone. We propose SpanLift, a lightweight neural solver that augments scalar-coefficient updates with a spatial residual operator. SpanLift keeps a fixed base solver as an in-span prior and learns a spatial residual operator over the state and velocity buffer. The operator is trained by endpoint teacher matching, preserves the pretrained backbone, and adds no model NFEs. Empirically, the learned correction transfers across base solvers and is predominantly out-of-span. Across pixel-space diffusion, latent flow matching, and precipitation nowcasting, SpanLift achieves state-of-the-art few-step sampling. With only 3 NFE, it improves CIFAR-10 FID from 8.16 to 5.69 and ImageNet FID from 17.37 to 11.83.",
+        "arxiv_id": "2606.08672",
+        "PRIMARY_TOPIC_LABEL": "Efficiency, Compression, and Large-Scale Training",
+        "MATCHED_TOPIC_LABELS": [
+            "Efficiency, Compression, and Large-Scale Training"
+        ],
+        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+        "HOTSPOT_PAPER_LABELS": [],
+        "HOTSPOT_PAPER_PRIMARY_KIND": null,
+        "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+    },
+    "2606.08761": {
+        "ARXIVID": "2606.08761",
+        "COMMENT": "Identifies the Tensor-Core/CUDA-Core throughput ratio as the hardware variable governing W4A4 viability, then co-designs pure INT4 GEMM kernels with rho-aware dequantization granularity.",
+        "RELEVANCE": 8,
+        "NOVELTY": 7,
+        "PRIMARY_TOPIC_ID": "efficiency_scaling",
+        "MATCHED_TOPIC_IDS": [
+            "efficiency_scaling"
+        ],
+        "TOPIC_MATCH_COMMENT": "Core contribution is a new quantization-kernel mechanism tied to an explicit hardware balance model, materially changing the cost of running a large model.",
+        "HOTSPOT_PAPER_TAGS": [],
+        "HOTSPOT_PAPER_COMMENT": "",
+        "SCORE": 15,
+        "authors": [
+            "Hong Guo",
+            "Nianhui Guo",
+            "Weixing Wang",
+            "Jona Otholt",
+            "Christoph Meinel",
+            "Haojin Yang"
+        ],
+        "title": "APEX4: Efficient Pure W4A4 LLM Inference via Intra-SM Compute Rebalancing",
+        "abstract": "W4A4 quantization promises full utilization of INT4 Tensor Cores, yet group dequantization overhead on CUDA Cores has driven existing systems to mixed-precision fallbacks. We present the first systematic study of how intra-SM compute balance governs this bottleneck. Through controlled benchmarks across four GPUs from Ampere and Ada architectures, we identify the Tensor Cores to CUDA Cores throughput ratio ($\u03c1$) as the primary hardware indicator: the W4A4-g128 kernel yields $2.0$--$2.5\\times$ speedup on RTX~3090 ($\u03c1=16$) yet degrades to $0.43$--$0.47\\times$ on A100 ($\u03c1=64$) in compute-bond scenarios, establishing W4A4 viability as platform-dependent rather than universally infeasible. Guided by this finding, we build \\textbf{APEX4}, which co-designs pure INT4 GEMM kernels with $\u03c1$-aware granularity adaptation to mitigate the CUDA Cores dequantization bottleneck. APEX4 achieves perplexity within 0.63 of FP16 on LLaMA-2-70B and outperforms W4Ax Atom-g128 by 4.0\\%--4.4\\% in zero-shot accuracy. Deployed as a drop-in replacement in unmodified vLLM, it delivers up to $1.66\\times$ end-to-end speedup on L40S ($\u03c1=8$), and $1.78\\times$ on RTX~3090 ($\u03c1=16$), $2.09\\times$ on A40 ($\u03c1=16$), while recovering A100 ($\u03c1=64$) to $1.20$--$1.40\\times$ via the mixed-granularity mode. Our code is available at https://github.com/APEX4-W4A4/APEX4-W4A4.",
+        "arxiv_id": "2606.08761",
+        "PRIMARY_TOPIC_LABEL": "Efficiency, Compression, and Large-Scale Training",
+        "MATCHED_TOPIC_LABELS": [
+            "Efficiency, Compression, and Large-Scale Training"
+        ],
+        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+        "HOTSPOT_PAPER_LABELS": [],
+        "HOTSPOT_PAPER_PRIMARY_KIND": null,
+        "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+    },
+    "2606.08783": {
+        "ARXIVID": "2606.08783",
+        "COMMENT": "Replaces Muon's open-loop magnitude rule with a trajectory-dependent AdaGrad-Norm coefficient, proving noise-adaptive rates that collapse to the optimal deterministic rate at zero noise without retuning.",
+        "RELEVANCE": 8,
+        "NOVELTY": 7,
+        "PRIMARY_TOPIC_ID": "training_systems",
+        "MATCHED_TOPIC_IDS": [
+            "training_systems",
+            "architecture_training"
+        ],
+        "TOPIC_MATCH_COMMENT": "Core contribution is an optimizer for large-scale pretraining, with step-size adaptation removing Lipschitz-dependent hyperparameters.",
+        "HOTSPOT_PAPER_TAGS": [],
+        "HOTSPOT_PAPER_COMMENT": "",
+        "SCORE": 15,
+        "authors": [
+            "Ganzhao Yuan"
+        ],
+        "title": "OptMuon: Closed-Loop Orthogonalized Momentum Methods for Stochastic Optimization with Zero-Noise Optimality",
+        "abstract": "Orthogonalized momentum updates, as used in Muon-style optimizers, have recently shown strong empirical stability in large-scale deep learning. However, most current orthogonalized methods are still paired with fixed, externally scheduled, or otherwise open-loop magnitude rules, so their scale is not directly calibrated from the realized optimization trajectory. Motivated by the closed-loop perspective behind Lipschitz-free and noise-adaptive methods, we propose OptMuon, a family of adaptive momentum orthogonalization methods for stochastic nonconvex optimization. OptMuon combines Muon-style polar-factor directions with a trajectory-dependent AdaGrad-Norm-type coefficient schedule, so that the update magnitude is determined by the observed gradient and momentum history rather than by a prescribed Lipschitz-dependent rule. The schedule does not use the smoothness constant, the variance level, or the bounded-gradient constant in parameter selection, and its running-maximum correction prevents isolated gradient spikes from causing excessive coefficient collapse. Under lower-boundedness, unbiased stochastic gradients with bounded variance, smoothness, and an almost-sure bounded stochastic-gradient condition, we prove two complementary expected-stationarity guarantees. OptMuon-A achieves the noise-adaptive rate \\(\\tilde{\\mathcal O}(T^{-1/2}+\u03c3^{1/2}T^{-1/4})\\) under average smoothness, while OptMuon-I achieves \\(\\tilde{\\mathcal O}(T^{-1/2}+\u03c3^{1/3}T^{-1/3})\\) under individual smoothness. In the zero-noise regime, both bounds automatically reduce to a nearly optimal deterministic first-order rate \\(\\tilde{\\mathcal O}(T^{-1/2})\\) without manual hyperparameter retuning. These results show that closed-loop scalar adaptation can be combined with Muon-style momentum orthogonalization while retaining noise adaptivity and zero-noise optimality up to logarithmic factors.",
+        "arxiv_id": "2606.08783",
+        "PRIMARY_TOPIC_LABEL": "Large-Scale Training Systems and Efficiency",
+        "MATCHED_TOPIC_LABELS": [
+            "Large-Scale Training Systems and Efficiency",
+            "Architecture and Training Dynamics"
+        ],
+        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+        "HOTSPOT_PAPER_LABELS": [],
+        "HOTSPOT_PAPER_PRIMARY_KIND": null,
+        "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+    },
+    "2606.09926": {
+        "ARXIVID": "2606.09926",
+        "COMMENT": "Entropy-localized MCMC proposals reduce the compute required to sample from a sharpened language-model distribution.",
+        "RELEVANCE": 8,
+        "NOVELTY": 7,
+        "PRIMARY_TOPIC_ID": "efficiency_scaling",
+        "MATCHED_TOPIC_IDS": [
+            "efficiency_scaling"
+        ],
+        "TOPIC_MATCH_COMMENT": "The core contribution is a new inference-efficiency mechanism; reported speedups are relative to conventional MH sampling.",
+        "HOTSPOT_PAPER_TAGS": [],
+        "HOTSPOT_PAPER_COMMENT": "",
+        "SCORE": 15,
+        "authors": [
+            "Hong Guo",
+            "Nianhui Guo",
+            "Christoph Meinel",
+            "Haojin Yang"
+        ],
+        "title": "Sample Where You Struggle: Sharpening Base Model Reasoning via Entropy-Guided Power Sampling",
+        "abstract": "Sampling from the sequence-level power distribution $p^\u03b1$ elicits RL-level reasoning from base language models without any parameter updates, but the standard Metropolis--Hastings (MH), a Markov Chain Monte Carlo (MCMC) sampler, is both expensive and slow-mixing. We trace both to a structural mismatch: $p^\u03b1$ mainly departs from $p$ at a sparse, spatially clustered set of high-entropy decision points, yet MH proposes resampling positions uniformly along the prefix -- wasting compute on near-degenerate conditionals while under-mixing precisely where modes diverge. We propose Entropy-Guided Power Sampling (EGPS), a training-free and verifier-free sampler that re-derives its proposal from token-level entropy already in the forward pass. EGPS skips deterministic blocks, localizes each MCMC move to a high-entropy neighborhood, and applies Multiple-Try Metropolis at decision points -- making sampling cost scale with \\emph{entropy mass rather than sequence length}. On Qwen2.5-Math-7B, EGPS reaches best or tied-best accuracy on all three benchmarks (MATH500 $75.8\\%$, HumanEval $62.2\\%$, GPQA $42.4\\%$) at up to a $12.6\\times$ wall-clock speedup over the MH baseline.",
+        "arxiv_id": "2606.09926",
+        "PRIMARY_TOPIC_LABEL": "Efficiency, Compression, and Large-Scale Training",
+        "MATCHED_TOPIC_LABELS": [
+            "Efficiency, Compression, and Large-Scale Training"
+        ],
+        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+        "HOTSPOT_PAPER_LABELS": [],
+        "HOTSPOT_PAPER_PRIMARY_KIND": null,
+        "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+    },
+    "2606.08382": {
+        "ARXIVID": "2606.08382",
+        "COMMENT": "Differentiable soft thresholding selects per-head and per-block ranks for KV low-rank projection, paired with key/value-specific factorizations and low-rank-aware mixed-precision quantization plus Triton kernels.",
+        "RELEVANCE": 8,
+        "NOVELTY": 6,
+        "PRIMARY_TOPIC_ID": "efficiency_scaling",
+        "MATCHED_TOPIC_IDS": [
+            "efficiency_scaling"
+        ],
+        "TOPIC_MATCH_COMMENT": "Core contribution is a learned adaptive-rank KV-cache compression mechanism with realized kernel speedups, replacing heuristic rank selection.",
+        "HOTSPOT_PAPER_TAGS": [],
+        "HOTSPOT_PAPER_COMMENT": "",
+        "SCORE": 14,
+        "authors": [
+            "Priyansh Bhatnagar",
+            "Ashkan Moradifirouzabadi",
+            "Se-Hyun Yang",
+            "SeungJae Lee",
+            "Jungwook Choi",
+            "Mingu Kang"
+        ],
+        "title": "STAR-KV: Low-Rank KV Cache Compression via Soft Thresholding for Adaptive Rank Control",
+        "abstract": "Low-rank projection has emerged as a promising approach for compressing the KV cache by exploiting hidden-dimension redundancy. However, prior methods rely on fixed or heuristic rank selection and struggle to achieve aggressive compression with minimal accuracy degradation. We propose STAR-KV, an adaptive low-rank KV cache compression framework with fine-grained rank control. STAR-KV encompasses 1) a differentiable thresholding mechanism that enables optimal rank selection at both attention-head and block levels, 2) a hybrid decomposition strategy that applies different low-rank factorizations according to the sensitivity of key and value projections, and 3) a low-rank-aware mixed precision quantization that leverages data statistics for near lossless low-bit quantization. Evaluated across multiple LLMs and benchmarks, STAR-KV achieves up to 75% KV cache compression and up to 20x overall KV cache reduction when combined with quantization. Enabled by custom Triton-based GPU kernels, STAR-KV delivers up to 6.9x speedup for the attention module and 3.1x end-to-end generation throughput. Our code is publicly available at: https://github.com/PriyanshBhatnagar/STAR-KV.",
+        "arxiv_id": "2606.08382",
+        "PRIMARY_TOPIC_LABEL": "Efficiency, Compression, and Large-Scale Training",
+        "MATCHED_TOPIC_LABELS": [
+            "Efficiency, Compression, and Large-Scale Training"
+        ],
+        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+        "HOTSPOT_PAPER_LABELS": [],
+        "HOTSPOT_PAPER_PRIMARY_KIND": null,
+        "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+    },
+    "2606.08167": {
+        "ARXIVID": "2606.08167",
+        "COMMENT": "Explains data-mixing scaling laws through capacity competition and noise reduction, fitting the loss landscape with fewer parameters and extrapolating optimal mixtures to unseen scales.",
+        "RELEVANCE": 7,
+        "NOVELTY": 7,
+        "PRIMARY_TOPIC_ID": "training_systems",
+        "MATCHED_TOPIC_IDS": [
+            "training_systems"
+        ],
+        "TOPIC_MATCH_COMMENT": "Scaling-law theory that directly informs how a pretraining run's data mixture is configured, which the topic explicitly keeps.",
+        "HOTSPOT_PAPER_TAGS": [],
+        "HOTSPOT_PAPER_COMMENT": "",
+        "SCORE": 14,
+        "authors": [
+            "Rui Dai",
+            "Shuran Zheng"
+        ],
+        "title": "Explaining Data Mixing Scaling Laws",
+        "abstract": "Recent research has established empirical scaling laws to predict model performance on multi-domain data mixtures. However, a theoretical understanding of these model loss behaviors remains absent. In this work, we propose a unified framework to explain the underlying mechanics of data mixing. Our approach extends theoretical perspectives originally developed for standard neural scaling laws (e.g., Kaplan and Chinchilla) to the multi-domain setting. Based on the distributional assumption that domains overlap on fundamental skills while diverging on specialized skills, we identify two key factors that govern the domain losses of models trained on different data mixtures: \\textit{Capacity Competition}, where the allocation of finite model capacity couples domain losses globally, and \\textit{Noise Reduction}, where optimal weights shift toward harder-to-learn domains to minimize overall noise. Empirical evaluations show that our framework outperforms existing baselines by fitting the loss landscape with a lower Mean Relative Error and identifying higher-performing training mixtures. Most importantly, our model successfully extrapolates across scales, predicting highly effective mixtures for large, unseen scales using parameters fitted on smaller ones. In addition, our model achieves these results using significantly fewer parameters compared to previous empirical laws. Our code is available at https://github.com/meiqwq/Explaining-Data-Mixing-Scaling-Laws.",
+        "arxiv_id": "2606.08167",
+        "PRIMARY_TOPIC_LABEL": "Large-Scale Training Systems and Efficiency",
+        "MATCHED_TOPIC_LABELS": [
+            "Large-Scale Training Systems and Efficiency"
+        ],
+        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+        "HOTSPOT_PAPER_LABELS": [],
+        "HOTSPOT_PAPER_PRIMARY_KIND": null,
+        "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+    },
+    "2606.07954": {
+        "ARXIVID": "2606.07954",
+        "COMMENT": "Partition-matroid gradient matching couples domain budgets to select minibatches with more compatible training updates.",
+        "RELEVANCE": 7,
+        "NOVELTY": 7,
+        "PRIMARY_TOPIC_ID": "training_systems",
+        "MATCHED_TOPIC_IDS": [
+            "training_systems"
+        ],
+        "TOPIC_MATCH_COMMENT": "Cross-domain minibatch selection is a training optimization algorithm, with validation currently limited to fine-tuning rather than large-scale pretraining.",
+        "HOTSPOT_PAPER_TAGS": [],
+        "HOTSPOT_PAPER_COMMENT": "",
+        "SCORE": 14,
+        "authors": [
+            "Prayas Agrawal",
+            "Prateek Chanda",
+            "Ishita Khatri",
+            "Ganesh Ramakrishnan",
+            "Bamdev Mishra",
+            "Pratik Jawanpuria"
+        ],
+        "title": "Minibatch Selection for Language Models via Partition Matroid Constrained Gradient Matching",
+        "abstract": "Training large language models (LLMs) on heterogeneous data requires selecting minibatches that balance convergence speed with coverage across domains. Existing methods either select samples independently within each domain or rely on computationally expensive proxy models to learn continuous domain weights. We propose PartitionSel, a cross-domain minibatch selection approach that maximizes a validation-guided gradient-matching utility under per-domain budgets encoded as a partition-matroid constraint. By coupling the per-domain budgets through a single utility, PartitionSel is designed to reduce redundancy in selections across domains. The proposed objective is weakly submodular and admits an orthogonal matching pursuit algorithm with provable approximation guarantees. Empirically, we evaluate PartitionSel for minibatch selection during the fine-tuning of Qwen2.5 and Llama-3 on MetaMathQA and Mol-Instructions. PartitionSel achieves robust gains over per-domain and domain-agnostic baselines on both benchmarks. It also reduces the number of conflicting gradient pairs within each batch, indicating that the cross-domain coupling translates into more compatible training updates.",
+        "arxiv_id": "2606.07954",
+        "PRIMARY_TOPIC_LABEL": "Large-Scale Training Systems and Efficiency",
+        "MATCHED_TOPIC_LABELS": [
+            "Large-Scale Training Systems and Efficiency"
+        ],
+        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+        "HOTSPOT_PAPER_LABELS": [],
+        "HOTSPOT_PAPER_PRIMARY_KIND": null,
+        "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+    },
+    "2606.08347": {
+        "ARXIVID": "2606.08347",
+        "COMMENT": "Represents n-gram memory embeddings as a shared CP tensor factorization with order-absorption vectors, removing per-order hash tables and letting nested n-grams share latent structure.",
+        "RELEVANCE": 7,
+        "NOVELTY": 6,
+        "PRIMARY_TOPIC_ID": "architecture_training",
+        "MATCHED_TOPIC_IDS": [
+            "architecture_training",
+            "efficiency_scaling"
+        ],
+        "TOPIC_MATCH_COMMENT": "Core contribution is a parameter-sharing input-representation module inside the LM architecture, with compression as a consequence.",
+        "HOTSPOT_PAPER_TAGS": [],
+        "HOTSPOT_PAPER_COMMENT": "",
+        "SCORE": 13,
+        "authors": [
+            "Wuyang Zhou",
+            "Yuxuan Gu",
+            "Giorgos Iacovides",
+            "Yuning Qiu",
+            "Qibin Zhao",
+            "Danilo Mandic"
+        ],
+        "title": "Tensorizing Engram: Sharing Latents Across N-Gram Embeddings is Beneficial in LLMs",
+        "abstract": "Modern language models represent text using discrete token-level embeddings, which forces recurring multi-token patterns to be learned implicitly across Transformer layers. Both Over-tokenized Transformers and Engram attempt to address this limitation by explicitly incorporating multi-token (n-gram) memories. However, they rely on separate hash tables for each n-gram order, which introduces hash collisions and prevents nested n-grams from sharing the underlying latent structures. To address these issues, we propose Tensorized Engram (TN-gram), a compact memory module that represents tensorized n-gram embeddings through shared factors in the Canonical Polyadic (CP) form. TN-gram learns shared token-position factors together with order-absorption vectors to encode the embeddings of different n-gram order. Comprehensive experiments demonstrate that TN-gram matches or even outperforms Engram-style n-gram modules while requiring much fewer parameters.",
+        "arxiv_id": "2606.08347",
+        "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+        "MATCHED_TOPIC_LABELS": [
+            "Architecture and Training Dynamics",
+            "Efficiency, Compression, and Large-Scale Training"
+        ],
+        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+        "HOTSPOT_PAPER_LABELS": [],
+        "HOTSPOT_PAPER_PRIMARY_KIND": null,
+        "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+    },
+    "2606.09928": {
+        "ARXIVID": "2606.09928",
+        "COMMENT": "Learnable channel-to-class assignments replace fixed partitions in local Forward-Forward training.",
+        "RELEVANCE": 7,
+        "NOVELTY": 6,
+        "PRIMARY_TOPIC_ID": "architecture_training",
+        "MATCHED_TOPIC_IDS": [
+            "architecture_training"
+        ],
+        "TOPIC_MATCH_COMMENT": "Adaptive channel specialization changes the local learning mechanism itself, with evidence currently coming from CNN classification experiments.",
+        "HOTSPOT_PAPER_TAGS": [],
+        "HOTSPOT_PAPER_COMMENT": "",
+        "SCORE": 13,
+        "authors": [
+            "Mohammadnavid Ghader",
+            "Saeed Reza Kheradpisheh",
+            "Bahar Farahani",
+            "Mahmood Fazlali"
+        ],
+        "title": "Forward-Only Convolutional Neural Networks with Learnable Channel-Class Assignment",
+        "abstract": "The Forward-Forward (FF) algorithm offers a biologically inspired alternative to backpropagation by replacing gradient-based credit assignment with local, forward-only objectives. While recent extensions have adapted FF to convolutional neural networks (CNNs), existing formulations rely on static channel-class partitions and struggle to perform effectively in complex tasks. In this work, we introduce a learnable channel-class assignment mechanism that enables adaptive, data-driven specialization of convolutional channels, supported by entropy and orthogonality regularization to promote learning performance. We further propose a loss-aware layer contribution strategy that adaptively weights intermediate-layer predictions based on their validation performance, enhancing the effectiveness of forward-only inference. Integrated into residual CNNs, the proposed method achieves consistently superior performance across CIFAR-10, CIFAR-100, and Tiny-ImageNet compared to existing similar forward-only methods. Notably, it establishes new state-of-the-art performance among FF-based models, substantially narrowing the gap with backpropagation. These findings demonstrate that introducing learnable channel specialization and layer contribution weighting significantly enhances the representational capacity of forward-only learning in deep CNNs.",
+        "arxiv_id": "2606.09928",
+        "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+        "MATCHED_TOPIC_LABELS": [
+            "Architecture and Training Dynamics"
+        ],
+        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+        "HOTSPOT_PAPER_LABELS": [],
+        "HOTSPOT_PAPER_PRIMARY_KIND": null,
+        "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+    },
+    "2606.08446": {
+        "ARXIVID": "2606.08446",
+        "COMMENT": "Shows sparse-rollout collapse is governed by the lower tail of per-token actor-policy mismatch, and schedules attention sparsity dynamically to hold that tail statistic constant.",
+        "RELEVANCE": 6,
+        "NOVELTY": 7,
+        "PRIMARY_TOPIC_ID": "efficiency_scaling",
+        "MATCHED_TOPIC_IDS": [
+            "training_systems",
+            "efficiency_scaling"
+        ],
+        "TOPIC_MATCH_COMMENT": "The mechanism is a sparse-attention schedule with a cost model and a stability criterion, which changes training cost; the RL setting is the application around it.",
+        "HOTSPOT_PAPER_TAGS": [],
+        "HOTSPOT_PAPER_COMMENT": "",
+        "SCORE": 13,
+        "authors": [
+            "Yang Zhou",
+            "Ranajoy Sadhukhan",
+            "Zhaofeng Sun",
+            "Zhuoming Chen",
+            "Souvik Kundu",
+            "Saket Dingliwal",
+            "Sai Muralidhar Jayanthi",
+            "Aram Galstyan",
+            "Haizhong Zheng",
+            "Beidi Chen"
+        ],
+        "title": "Sparrow: Sparse Rollout for Stable and Efficient Long-context RL of Large Language Models",
+        "abstract": "Despite being powerful, reinforcement learning with verifiable rewards (RLVR) induces extremely long COT, making it computationally expensive. Since RLVR per-step cost is dominated by long-context rollout generation, sparse attention offers a promising way to accelerate dense rollout. However, sparse rollouts require a delicate stability-efficiency tradeoff: overly aggressive sparsity causes collapse, while overly lenient sparsity gives insufficient speedup. In this work, we study this tradeoff through sparse-to-dense actor-policy mismatch. We first observe that sparse rollout collapse is not driven by uniform degradation across tokens: most sparse tokens align perfectly with dense even under aggressive sparsity. Motivated by this, we hypothesize that sparse rollout training remains stable if the lower tail of per-token actor-policy mismatch stays above a critical threshold throughout the trajectory. We introduce a dynamic sparsity schedule that keeps this tail statistic constant during generation and validate our hypothesis. Across Qwen3 thinking-family models, keeping the tail mismatch statistic near a consistent threshold generally enables stable training. We then use a cost model to find the sparsity schedule for maximum speedup under this mismatch threshold, achieving 2.2x, 2.4x, and 2.0x rollout speedups when training Qwen3-1.7B, Qwen3-4B, and Qwen3-8B. Empirically, we show the thresholds generalize to a larger model (Qwen3-14B) and another RL domain (coding). Finally, our analysis naturally motivates DistillSparse: lightweight LoRA-based distillation on sparse rollout lets more aggressive sparsity reach the same sparse-to-dense mismatch threshold, yielding higher speedup.",
+        "arxiv_id": "2606.08446",
+        "PRIMARY_TOPIC_LABEL": "Efficiency, Compression, and Large-Scale Training",
+        "MATCHED_TOPIC_LABELS": [
+            "Large-Scale Training Systems and Efficiency",
+            "Efficiency, Compression, and Large-Scale Training"
+        ],
+        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+        "HOTSPOT_PAPER_LABELS": [],
+        "HOTSPOT_PAPER_PRIMARY_KIND": null,
+        "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+    },
+    "2606.08768": {
+        "ARXIVID": "2606.08768",
+        "COMMENT": "Shifts from average sensitivity to the full sensitivity profile and proves randomly initialized transformers almost surely compute functions with low-sensitivity strings, making sensitive functions unlearnable despite being expressible.",
+        "RELEVANCE": 6,
+        "NOVELTY": 7,
+        "PRIMARY_TOPIC_ID": "architecture_training",
+        "MATCHED_TOPIC_IDS": [
+            "architecture_training"
+        ],
+        "TOPIC_MATCH_COMMENT": "Parameter-space geometry at initialization explaining what transformers can actually be trained to learn, which is training-dynamics analysis rather than expressivity alone.",
+        "HOTSPOT_PAPER_TAGS": [],
+        "HOTSPOT_PAPER_COMMENT": "",
+        "SCORE": 13,
+        "authors": [
+            "Blanka K\u00f6ver",
+            "Alexandra Butoi",
+            "Anej Svete",
+            "Michael Hahn",
+            "Ryan Cotterell"
+        ],
+        "title": "Understanding the Parameter Space Geometry of Transformers Encoding Boolean Functions",
+        "abstract": "Transformers consistently fail to learn certain simple functions that are provably expressible with specific parameter settings. This gap between learnability and expressivity is particularly prominent for sensitive functions -- functions whose output is likely to change if a single bit of the input is flipped -- for example, PARITY. While prior work has established that transformers exhibit a bias toward functions with low average sensitivity, the precise mechanism underlying this bias remains poorly understood. To shed light on this phenomenon, we study the geometry of transformers' parameter space. We show that sensitive functions -- even when representable -- occupy a vanishingly small region that random initialization is very likely to miss. Specifically, we shift the focus from average sensitivity to the full sensitivity profile -- the distribution of sensitivity values across all inputs -- and prove that randomly initialized transformers almost surely compute functions which have low-sensitivity strings. Consequently, any function that lacks such strings is provably unlearnable.",
+        "arxiv_id": "2606.08768",
+        "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+        "MATCHED_TOPIC_LABELS": [
+            "Architecture and Training Dynamics"
+        ],
+        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+        "HOTSPOT_PAPER_LABELS": [],
+        "HOTSPOT_PAPER_PRIMARY_KIND": null,
+        "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+    },
+    "2606.09924": {
+        "ARXIVID": "2606.09924",
+        "COMMENT": "Restructures a pretrained dense network into a routed binary tree via activation-based spherical k-means, so inference executes one root-to-leaf path and cuts active parameters by about 60%.",
+        "RELEVANCE": 6,
+        "NOVELTY": 6,
+        "PRIMARY_TOPIC_ID": "architecture_training",
+        "MATCHED_TOPIC_IDS": [
+            "architecture_training",
+            "efficiency_scaling"
+        ],
+        "TOPIC_MATCH_COMMENT": "Conditional-computation routing derived from a dense checkpoint is dynamic/modular computation, closely echoing dense-to-sparse upcycling though applied to edge CNNs.",
+        "HOTSPOT_PAPER_TAGS": [],
+        "HOTSPOT_PAPER_COMMENT": "",
+        "SCORE": 12,
+        "authors": [
+            "Kohga Tanaka",
+            "Hiroaki Nishi"
+        ],
+        "title": "Sigma-Branch: Hierarchical Single-Path Network Reconstruction for Dynamic Inference with Reduced Active Parameters",
+        "abstract": "Deploying deep neural networks on memory-constrained edge accelerators is bottlenecked by per-inference off-chip weight transfer rather than computation: the dense network cannot be retained on-chip, and every parameter must be loaded for every input. Existing model compression reduces this transfer only at the cost of permanent capacity loss. We propose Sigma-Branch (SigmaB), a framework that restructures a pretrained dense network into a hierarchical binary tree composed of a shared backbone, hierarchical routers, and specialized leaves. Pretrained weights are distributed across the tree via activation-based spherical k-means clustering, which jointly initializes router weights and per-branch channel allocations; soft-routing fine-tuning then aligns each leaf with its routed input subset. At inference, the resulting network executes only a single root-to-leaf path, reducing the active-parameter footprint while storing the complete dense parameter set in memory. Across CIFAR-100 / ResNet-50, ImageNet-1K / ResNet-50, and ModelNet40 / PointNet++, SigmaB-Net reduces per-inference active parameters by 58-60% while remaining within 1.72 percentage points (pp) of the dense baseline Top-1. At comparable ImageNet-1K Top-1, the active-parameter reduction exceeds static structured pruning (FPGM, HRank) by 14-23 pp. The cross-modal evaluation, spanning 2D vision and 3D point-cloud backbones, substantiates a framework-level claim that decouples per-inference memory traffic from the total parameter count.",
+        "arxiv_id": "2606.09924",
+        "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+        "MATCHED_TOPIC_LABELS": [
+            "Architecture and Training Dynamics",
+            "Efficiency, Compression, and Large-Scale Training"
+        ],
+        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+        "HOTSPOT_PAPER_LABELS": [],
+        "HOTSPOT_PAPER_PRIMARY_KIND": null,
+        "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+    }
+}

@@ -2,8 +2,8 @@
     "schema_version": 1,
     "meta": {
         "date": "2026-08-25",
-        "total_candidates": 0,
-        "total_spotlight_papers": 0,
+        "total_candidates": 121,
+        "total_spotlight_papers": 7,
         "thresholds": {
             "daily_hot_score_cutoff": 15,
             "daily_hot_relevance_cutoff": 7,
@@ -17,11 +17,293 @@
     },
     "diagnostics": {
         "candidate_count_by_kind": {
-            "new_frontier": 0,
-            "daily_hot": 0
+            "new_frontier": 1,
+            "daily_hot": 6
         },
-        "selected_count_by_kind": {}
+        "selected_count_by_kind": {
+            "new_frontier": 1,
+            "daily_hot": 6
+        }
     },
-    "papers": {},
-    "sections": []
+    "papers": {
+        "2608.23696": {
+            "ARXIVID": "2608.23696",
+            "COMMENT": "RG-guided probability paths recover long-range structure through local computation with nearly linear spatial cost.",
+            "RELEVANCE": 8,
+            "NOVELTY": 8,
+            "PRIMARY_TOPIC_ID": "efficiency_scaling",
+            "MATCHED_TOPIC_IDS": [
+                "architecture_training",
+                "efficiency_scaling"
+            ],
+            "TOPIC_MATCH_COMMENT": "The locality guarantee directly improves generative computation scaling, supported by a new multiscale probability-flow mechanism.",
+            "HOTSPOT_PAPER_TAGS": [
+                "new_frontier"
+            ],
+            "HOTSPOT_PAPER_COMMENT": "Exact renormalization-group probability paths suggest a new direction for globally coherent generation using provably local computation.",
+            "SCORE": 16,
+            "authors": [
+                "Kanta Masuki",
+                "Yuto Ashida"
+            ],
+            "title": "Renormalization Group Flow Matching for Scalable Local Generative Modeling",
+            "abstract": "Despite their remarkable success in modeling complex data, generative models face a fundamental tradeoff. Global approaches can capture full structural coherence but suffer from high computational costs, while local models are efficient but often fail to reproduce long-range correlations and global coherence. The renormalization group (RG) bridges this gap by seamlessly connecting spatial structures across different length scales, retaining quasi-local descriptions at each step while preserving long-range correlations. We introduce renormalization group flow matching (RGFM), a generative framework that systematically structures data generation across different spatial scales. By using an exact RG flow as the probability path, RGFM progressively generates data from long- to short-wavelength structures. To reconcile scalability with global structure, we exploit two key properties of the RG: quasi-locality and scale separation. We rigorously show that the RGFM probability flow can be accurately approximated by local velocity fields acting over a spatial range $O(\u00ce\u009b^{-1}[\\ln L+\\ln(1/\\varepsilon)])$ for RG wavenumber scale $\u00ce\u009b$, linear system size $L$, and prescribed error tolerance $\\varepsilon$. This property enables local generative modeling with patches of size $O(\\ln L)$ and a computational cost that scales nearly linearly with the system volume. We numerically demonstrate that local RGFM reproduces long-range correlations far beyond its receptive field in representative one-dimensional distributions, while conventional local flow matching exhibits substantial errors at long distances. On FFHQ images, RGFM yields far more coherent and higher-quality samples than local flow matching at 64x64 and 256x256. Our results establish RG-guided probability flows as a promising route toward scalable generative modeling that captures long-range structure using only local computation.",
+            "arxiv_id": "2608.23696",
+            "PRIMARY_TOPIC_LABEL": "Efficiency, Compression, and Large-Scale Training",
+            "MATCHED_TOPIC_LABELS": [
+                "Architecture and Training Dynamics",
+                "Efficiency, Compression, and Large-Scale Training"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [
+                "New Frontier Papers"
+            ],
+            "HOTSPOT_PAPER_PRIMARY_KIND": "new_frontier",
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "New Frontier Papers",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "llm_exact"
+        },
+        "2608.23725": {
+            "ARXIVID": "2608.23725",
+            "COMMENT": "Selectively regularizes near-singular adjoint modes to stabilize gradients through equilibrium layers.",
+            "RELEVANCE": 9,
+            "NOVELTY": 8,
+            "PRIMARY_TOPIC_ID": "architecture_training",
+            "MATCHED_TOPIC_IDS": [
+                "architecture_training"
+            ],
+            "TOPIC_MATCH_COMMENT": "The central contribution is a backward-pass mechanism that controls implicit-model gradient instability while preserving well-conditioned sensitivities.",
+            "HOTSPOT_PAPER_TAGS": [
+                "daily_hot"
+            ],
+            "HOTSPOT_PAPER_COMMENT": "Broadly important today: Selectively regularizes near-singular adjoint modes to stabilize gradients through equilibrium layers.",
+            "SCORE": 17,
+            "authors": [
+                "Jose Luis Lima de Jesus Silva"
+            ],
+            "title": "Response Renormalization for Critical Deep Equilibrium Models",
+            "abstract": "Deep Equilibrium Models (DEQs) compute predictions from a hidden representation unchanged by the model update. Training through this equilibrium uses implicit differentiation and requires solving an adjoint system built from the residual Jacobian. If this Jacobian is nearly singular along loss-sensitive directions, small perturbations can be strongly amplified in the adjoint response, producing large, highly sensitive gradients that can make optimization unreliable. We introduce Response Renormalization, a backward-pass framework that lifts selected near-pole denominators while leaving unlifted response channels unchanged. Collective Mode Response Renormalization (CMR) applies this correction in a low-dimensional critical subspace, while Phi-adaptive CMR computes a bounded response mass from a positive susceptibility rule. We derive dense and matrix-free collective formulations, distinguish exact gradients of a modified frozen-anchor residual from backward-response surrogates, and extend the construction to Structured Implicit Layers and Vector Attractors (SILVA). Across 23 multiphysics families spanning partial differential equations, three-dimensional fields, operator maps, complex geometries, and particle systems, CMR and Phi-CMR yield test errors no more than five percent higher than those from models trained with exact implicit differentiation in more than 98% of static and 95% of transient family-seed comparisons. Solver-index experiments show convergence toward the static adjoint, while physical-time rollouts retain predictive fidelity under the evaluated conditions. These results demonstrate that selective response renormalization can control near-critical adjoint amplification without globally damping well-conditioned sensitivity. Therefore, the method can make parameter updates more reliable while preserving the useful gradient information needed for learning.",
+            "arxiv_id": "2608.23725",
+            "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+            "MATCHED_TOPIC_LABELS": [
+                "Architecture and Training Dynamics"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [
+                "Daily Hot Papers"
+            ],
+            "HOTSPOT_PAPER_PRIMARY_KIND": "daily_hot",
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "Daily Hot Papers",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "heuristic"
+        },
+        "2607.24555": {
+            "ARXIVID": "2607.24555",
+            "COMMENT": "Page-specific low-rank key summaries select attention pages without scanning candidate keys or values.",
+            "RELEVANCE": 9,
+            "NOVELTY": 8,
+            "PRIMARY_TOPIC_ID": "efficiency_scaling",
+            "MATCHED_TOPIC_IDS": [
+                "efficiency_scaling"
+            ],
+            "TOPIC_MATCH_COMMENT": "Its central mechanism reduces long-context KV bandwidth through locally adapted spectral summaries, with measured decode acceleration.",
+            "HOTSPOT_PAPER_TAGS": [
+                "daily_hot"
+            ],
+            "HOTSPOT_PAPER_COMMENT": "Broadly important today: Page-specific low-rank key summaries select attention pages without scanning candidate keys or values.",
+            "SCORE": 17,
+            "authors": [
+                "Junsung Hwang"
+            ],
+            "title": "LOCKS: Page-Local Compact Key Summaries for Efficient Long-Context Decoding",
+            "abstract": "Serving large language models at long context is bottlenecked by the key-value (KV) cache, which is read in full at every decode step. Attention keys are locally low-rank though globally high-rank: a fixed low-rank sketch shared across pages is provably blind to page-specific directions, while at the same summary size a page's own basis ranks pages and keeps carriers far better. LOCKS gives every page its own rank-$r$ spectral summary (resident, a tenth of the cache at $r{=}8$ and a twenty-fifth at $r{=}2$), reconstructs within-page logits, estimates each page's attention mass by log-sum-exp, and attends only the top pages; selection itself reads no candidate keys or values. Selecting on this summary alone stays within about a point of the full cache on long-document QA (LongBench-v1; Llama-3.1-8B), tracks the read-every-key exact-LSE oracle on retrieval-dense RULER down to the smallest budgets, and holds quality furthest into the small-budget regime on long-form reasoning (AIME26, MATH-500; Qwen3-4B), where selectors and eviction-based reasoning compressors both fall away. At a $2048$-token budget LOCKS matches FullKV aggregate quality at $100$K$+$ context (GLM-4-9B-Chat-1M) while attending about $2\\%$ of the tokens; since the summary is scanned in full each step, the per-step KV read falls by about $10$--$25\\times$ across that rank range, and this halves per-token decode latency ($2.0\\times$ at $1$M tokens on one H200 NVL, measured at $r{=}8$) against dense attention. LOCKS ships as a drop-in plugin for unmodified vLLM, with batched decode running in full CUDA graphs.",
+            "arxiv_id": "2607.24555",
+            "PRIMARY_TOPIC_LABEL": "Efficiency, Compression, and Large-Scale Training",
+            "MATCHED_TOPIC_LABELS": [
+                "Efficiency, Compression, and Large-Scale Training"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [
+                "Daily Hot Papers"
+            ],
+            "HOTSPOT_PAPER_PRIMARY_KIND": "daily_hot",
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "Daily Hot Papers",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "heuristic"
+        },
+        "2605.25698": {
+            "ARXIVID": "2605.25698",
+            "COMMENT": "Quality-aware scaling laws derive joint data-quality and batch-size schedules for large-model training.",
+            "RELEVANCE": 9,
+            "NOVELTY": 8,
+            "PRIMARY_TOPIC_ID": "training_systems",
+            "MATCHED_TOPIC_IDS": [
+                "training_systems",
+                "architecture_training"
+            ],
+            "TOPIC_MATCH_COMMENT": "The central contribution configures large-scale training through scaling laws, supported by analysis of signal accumulation and optimization noise.",
+            "HOTSPOT_PAPER_TAGS": [
+                "daily_hot"
+            ],
+            "HOTSPOT_PAPER_COMMENT": "Broadly important today: Quality-aware scaling laws derive joint data-quality and batch-size schedules for large-model training.",
+            "SCORE": 17,
+            "authors": [
+                "Zhitao Zhu",
+                "Xili Wang",
+                "Shizhe Wu",
+                "Jiawei Fu",
+                "Xiaoqing Liu"
+            ],
+            "title": "How Should LLMs Consume High-Quality Data? Optimal Data Scheduling via Quality-Aware Functional Scaling Laws",
+            "abstract": "High-quality data is scarce in large language model (LLM) training, yet how to schedule its use with optimization dynamics lacks theoretical guidance. We extend functional scaling laws with time-varying data quality and derive asymptotically optimal joint data-quality and batch-size schedules within a feature-space regression model. The solution reveals two regimes and dual uses of high-quality data: in the noise-limited regime, a smaller batch converts cleaner data into more signal at comparable noise; in the signal-limited regime, late placement suppresses terminal noise without sacrificing signal accumulation. This explains why conventional decay schedules can conflict with curriculum-style pipelines. Motivated by the theoretical structure, we propose Drop-Stable-Rampup for LLM midtraining: drop the batch size at the quality transition, keep it low to accumulate signal, then ramp up to suppress noise. On a 15B MoE model midtrained on 108B tokens of general-domain proprietary data, Drop-Stable-Rampup improves average accuracy over Warmup-Stable-Decay by +1.70 and Cosine-decay by +2.98, including +4.23 on GSM8K and +2.80 on MATH. On a public math-and-code mixture, it leads all reported STEM, mathematics, and code benchmarks, improving the overall mean over the strongest baseline by +3.27 on a 600M dense model and +5.25 on the same MoE architecture.",
+            "arxiv_id": "2605.25698",
+            "PRIMARY_TOPIC_LABEL": "Large-Scale Training Systems and Efficiency",
+            "MATCHED_TOPIC_LABELS": [
+                "Large-Scale Training Systems and Efficiency",
+                "Architecture and Training Dynamics"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [
+                "Daily Hot Papers"
+            ],
+            "HOTSPOT_PAPER_PRIMARY_KIND": "daily_hot",
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "Daily Hot Papers",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "heuristic"
+        },
+        "2608.24938": {
+            "ARXIVID": "2608.24938",
+            "COMMENT": "Calibrated scalar projectors fold skipped experts' contributions into retained experts for cheaper MoE inference.",
+            "RELEVANCE": 9,
+            "NOVELTY": 8,
+            "PRIMARY_TOPIC_ID": "efficiency_scaling",
+            "MATCHED_TOPIC_IDS": [
+                "efficiency_scaling"
+            ],
+            "TOPIC_MATCH_COMMENT": "Budgeted expert approximation is a direct compression mechanism that reduces computation and expert-memory traffic across prefill and decode.",
+            "HOTSPOT_PAPER_TAGS": [
+                "daily_hot"
+            ],
+            "HOTSPOT_PAPER_COMMENT": "Broadly important today: Calibrated scalar projectors fold skipped experts' contributions into retained experts for cheaper MoE inference.",
+            "SCORE": 17,
+            "authors": [
+                "Juntong Wu",
+                "Yifei Liu",
+                "Junyi Chen",
+                "Siqi Fan",
+                "Chaoran Feng",
+                "Minghao Li",
+                "Liujie Zhang",
+                "Weihang Chen",
+                "Li Yuan"
+            ],
+            "title": "ExFold: Unified Expert Folding for Training-Free MoE Prefill-Decode Acceleration",
+            "abstract": "Mixture-of-Experts (MoE) models scale capacity for strong quality while keeping per-token compute bounded through sparse expert activation. Yet low-latency MoE serving is increasingly challenging, because it spans two inference phases with fundamentally different bottlenecks: prefill is dominated by token-wise expert computation, whereas decode is constrained by memory traffic from the batch-wise activated expert set. However, existing training-free acceleration methods optimize only a single resource proxy, either the experts each token executes or the experts a batch activates, and either discard the excluded experts' contribution or leave it only implicitly approximated. In this paper, we propose ExFold, a unified training-free expert-folding framework for jointly accelerating MoE prefill and decode. ExFold casts both prefill and decode as one budgeted output-approximation problem: execute only a phase-specific constrained expert set while projecting the contribution of budget-excluded experts onto retained experts using calibrated scalar projectors. Motivated by the observation that many expert outputs are directionally aligned but differ in magnitude, ExFold calibrates a pairwise scalar-projector matrix on unlabeled data and uses it at inference time to fold excluded expert contributions into retained experts. Under this view, prefill acceleration becomes token-level Top-K folding, and decode acceleration becomes batch-level expert-pool folding. The two phases differ only in how retained experts are selected, while excluded contributions are recovered by one shared folding mechanism. We implement ExFold as a plug-and-play plugin in vLLM, with a lightweight expert-folding CUDA kernel, delivering up to 1.41x TTFT and 2.45x TPOT speedups while retaining about 99% of the original average quality.",
+            "arxiv_id": "2608.24938",
+            "PRIMARY_TOPIC_LABEL": "Efficiency, Compression, and Large-Scale Training",
+            "MATCHED_TOPIC_LABELS": [
+                "Efficiency, Compression, and Large-Scale Training"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [
+                "Daily Hot Papers"
+            ],
+            "HOTSPOT_PAPER_PRIMARY_KIND": "daily_hot",
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "Daily Hot Papers",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "heuristic"
+        },
+        "2608.23551": {
+            "ARXIVID": "2608.23551",
+            "COMMENT": "Constrains the flow predictor to the token-embedding convex hull, enabling MSE-only training with provable convergence to token embeddings.",
+            "RELEVANCE": 9,
+            "NOVELTY": 8,
+            "PRIMARY_TOPIC_ID": "architecture_training",
+            "MATCHED_TOPIC_IDS": [
+                "architecture_training"
+            ],
+            "TOPIC_MATCH_COMMENT": "Directly changes the model parameterization and training objective, with convergence guarantees under regularity conditions that eliminate the need for a cross-entropy-supervised decoder.",
+            "HOTSPOT_PAPER_TAGS": [
+                "daily_hot"
+            ],
+            "HOTSPOT_PAPER_COMMENT": "Broadly important today: Constrains the flow predictor to the token-embedding convex hull, enabling MSE-only training with provable convergence to token embeddings.",
+            "SCORE": 17,
+            "authors": [
+                "Na Li",
+                "Yuchen Jiao",
+                "Changxiao Cai",
+                "Gen Li"
+            ],
+            "title": "ConvergeFlow: Language Flow with Provable Convergence to Token Embeddings",
+            "abstract": "Recent advances in continuous diffusion and flow-based language models (LMs) have achieved performance competitive with discrete LMs. However, existing continuous frameworks still rely on decoders supervised with cross entropy (CE) because the flow trajectories are not guaranteed to terminate at valid token embeddings. Motivated by this limitation, we introduce \\textbf{ConvergeFlow}, an embedding-space flow-based LM, which constrains the data predictor to the convex hull of token embeddings and trains it solely with the mean squared error objective induced by flow matching. Under suitable regularity conditions, we prove that the resulting flow converges to valid token embeddings despite errors in the data predictor, enabling direct token prediction without a CE-supervised decoder. We further develop three sampling mechanisms for controlling the trade-off between the generative perplexity and entropy. Experiments on OpenWebText demonstrate that ConvergeFlow achieves performance competitive with existing continuous and discrete diffusion LMs. These findings demonstrate the potential of the flow-based paradigm for language modeling. Our code is available at https://github.com/Na-Li66/ConvergeFlow.",
+            "arxiv_id": "2608.23551",
+            "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+            "MATCHED_TOPIC_LABELS": [
+                "Architecture and Training Dynamics"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [
+                "Daily Hot Papers"
+            ],
+            "HOTSPOT_PAPER_PRIMARY_KIND": "daily_hot",
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "Daily Hot Papers",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "heuristic"
+        },
+        "2608.22994": {
+            "ARXIVID": "2608.22994",
+            "COMMENT": "Physical response-and-memory theory explaining Muon's semi-orthogonalized update, yielding a two-timescale memory kernel (Bi-Maxwell) that reaches target loss in fewer steps.",
+            "RELEVANCE": 9,
+            "NOVELTY": 8,
+            "PRIMARY_TOPIC_ID": "training_systems",
+            "MATCHED_TOPIC_IDS": [
+                "training_systems",
+                "architecture_training"
+            ],
+            "TOPIC_MATCH_COMMENT": "Core contribution is an optimizer for large-scale pretraining plus a theory of why its update direction works, the center of the large-scale training systems topic.",
+            "HOTSPOT_PAPER_TAGS": [
+                "daily_hot"
+            ],
+            "HOTSPOT_PAPER_COMMENT": "Muon is the most watched new optimizer in LLM pretraining, and a physical account of why its update direction works plus a falsifiable prediction about memory length is broadly interesting.",
+            "SCORE": 17,
+            "authors": [
+                "Yinze Hu",
+                "Hongjun Xiang",
+                "Xingao Gong",
+                "Hongyu Yu"
+            ],
+            "title": "A Physical Response-and-Memory Model for Muon Optimization",
+            "abstract": "Training large language models is costly. How low a loss the same compute can ultimately reach depends on how each step's gradient is converted into a weight update; the rule that performs this conversion is the optimizer. From SGD and AdamW to the recent Muon, effective update rules have mostly been shaped by engineering intuition and then selected on benchmarks. Muon semi-orthogonalizes the momentum matrix before applying the update and has kept breaking records on public training benchmarks; yet why the semi-orthogonalized direction works, and over how long a history the momentum should average, are two questions at present answered mainly by experience. Here we treat the weight matrix during training as a responsive medium with memory and build a physical model for it, in which both questions find answers: the semi-orthogonalized direction is the maximally dissipative response under an output-side safety budget, which explains why it works; momentum is the internal stress accumulated by the medium; how long it should average is set by the relaxation of this stress, and a real medium relaxes on more than one timescale, the simplest form being one fast and one slow. On this basis we propose the Bi-Maxwell optimizer. The framework further yields a testable consequence: gradient directions change fast early in training and more slowly later, so the optimal memory length should grow with training stage; step-by-step measurements of a proxy for it by a read-only probe across 8 independent training trajectories are consistent with this consequence. Replacing the memory kernel alone, from a single timescale to two, brings training to the target loss in noticeably fewer steps on a public large-language-model optimizer benchmark.",
+            "arxiv_id": "2608.22994",
+            "PRIMARY_TOPIC_LABEL": "Large-Scale Training Systems and Efficiency",
+            "MATCHED_TOPIC_LABELS": [
+                "Large-Scale Training Systems and Efficiency",
+                "Architecture and Training Dynamics"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [
+                "Daily Hot Papers"
+            ],
+            "HOTSPOT_PAPER_PRIMARY_KIND": "daily_hot",
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "Daily Hot Papers",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "llm_exact"
+        }
+    },
+    "sections": [
+        {
+            "kind": "new_frontier",
+            "label": "New Frontier Papers",
+            "description": "Papers that appear to open a genuinely new direction, paradigm, or field.",
+            "paper_ids": [
+                "2608.23696"
+            ]
+        },
+        {
+            "kind": "daily_hot",
+            "label": "Daily Hot Papers",
+            "description": "Papers that feel broadly important to the day and belong in the hotspot paper feed.",
+            "paper_ids": [
+                "2608.23725",
+                "2607.24555",
+                "2605.25698",
+                "2608.24938",
+                "2608.23551",
+                "2608.22994"
+            ]
+        }
+    ]
 }

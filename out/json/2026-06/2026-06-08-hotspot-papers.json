@@ -2,8 +2,8 @@
     "schema_version": 1,
     "meta": {
         "date": "2026-06-08",
-        "total_candidates": 0,
-        "total_spotlight_papers": 0,
+        "total_candidates": 73,
+        "total_spotlight_papers": 3,
         "thresholds": {
             "daily_hot_score_cutoff": 15,
             "daily_hot_relevance_cutoff": 7,
@@ -18,10 +18,137 @@
     "diagnostics": {
         "candidate_count_by_kind": {
             "new_frontier": 0,
-            "daily_hot": 0
+            "daily_hot": 3
         },
-        "selected_count_by_kind": {}
+        "selected_count_by_kind": {
+            "daily_hot": 3
+        }
     },
-    "papers": {},
-    "sections": []
+    "papers": {
+        "2606.08814": {
+            "ARXIVID": "2606.08814",
+            "COMMENT": "Augments MoE routing with an online principal subspace learned through GHA to stabilize expert specialization.",
+            "RELEVANCE": 10,
+            "NOVELTY": 8,
+            "PRIMARY_TOPIC_ID": "moe_training",
+            "MATCHED_TOPIC_IDS": [
+                "moe_training"
+            ],
+            "TOPIC_MATCH_COMMENT": "Structure-aware expert routing and routing stability are the central contributions, directly matching the primary MoE training interests.",
+            "HOTSPOT_PAPER_TAGS": [
+                "daily_hot"
+            ],
+            "HOTSPOT_PAPER_COMMENT": "Broadly important today: Augments MoE routing with an online principal subspace learned through GHA to stabilize expert specialization.",
+            "SCORE": 18,
+            "authors": [
+                "Sumin Park",
+                "Noseong Park"
+            ],
+            "title": "STAR: Rethinking MoE Routing as Structure-Aware Subspace Learning",
+            "abstract": "Mixture-of-Experts (MoE) scales model capacity efficiently by selectively routing inputs to a specialized subset of experts. However, input-expert specialization, the core motivation of MoE, critically depends on whether the router is actually aware of input structure. In practice, MoE routing is typically implemented as a shallow linear projection with limited awareness of input representation, which often leads to unstable routing. We propose STAR, a Structure Aware Routing that rethinks MoE routing as a subspace learning problem by augmenting standard learnable routing with an evolving principal subspace that tracks dominant input structure via Generalized Hebbian Algorithm (GHA). By aligning routing decisions directly with input structure, STAR enables stable expert specialization. We evaluate STAR on controlled synthetic setup and large-scale language and vision tasks, where it consistently improves routing quality and downstream performance over strong MoE baselines. Moreover, optional test-time subspace updates further enhance routing robustness and generalization under input distribution shifts.",
+            "arxiv_id": "2606.08814",
+            "PRIMARY_TOPIC_LABEL": "MoE Training",
+            "MATCHED_TOPIC_LABELS": [
+                "MoE Training"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [
+                "Daily Hot Papers"
+            ],
+            "HOTSPOT_PAPER_PRIMARY_KIND": "daily_hot",
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "Daily Hot Papers",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "heuristic"
+        },
+        "2606.08476": {
+            "ARXIVID": "2606.08476",
+            "COMMENT": "Sharding-aware KV communication and document-aware sequence partitioning reduce context-parallel training communication while balancing workloads.",
+            "RELEVANCE": 10,
+            "NOVELTY": 8,
+            "PRIMARY_TOPIC_ID": "training_systems",
+            "MATCHED_TOPIC_IDS": [
+                "training_systems",
+                "efficiency_scaling"
+            ],
+            "TOPIC_MATCH_COMMENT": "Context-parallel sharding and communication algorithms directly target distributed long-context training, with measured training speedups.",
+            "HOTSPOT_PAPER_TAGS": [
+                "daily_hot"
+            ],
+            "HOTSPOT_PAPER_COMMENT": "Broadly important today: Sharding-aware KV communication and document-aware sequence partitioning reduce context-parallel training communication while balancing workloads.",
+            "SCORE": 18,
+            "authors": [
+                "Zheng Wang",
+                "Eric Liu",
+                "Linan Jiang",
+                "Zhongkai Yu",
+                "Zaifeng Pan",
+                "Yue Guan",
+                "Yuke Wang",
+                "Yufei Ding"
+            ],
+            "title": "FlashCP: Load-Balanced Communication-Efficient Context Parallelism for LLM Training",
+            "abstract": "Context parallelism (CP) is essential for training large-scale, long-context language models, as it partitions sequences to reduce memory overhead. However, existing CP methods suffer from workload imbalance, inefficient kernels, and redundant communication due to static sequence sharding and key-value (KV) tensor communication. We present FlashCP, a load-balanced and communication-efficient framework for CP training. FlashCP introduces a sharding-aware communication mechanism to eliminate redundant KV communication and proposes a novel Whole-Doc sharding strategy that maximizes communication savings while maintaining balanced workloads. To efficiently combine Whole-Doc and Per-Doc sharding, FlashCP further designs a heuristic algorithm to search for near-optimal sharding plans. Extensive experiments show that FlashCP achieves up to 1.63x speedup over state-of-the-art CP frameworks across diverse datasets.",
+            "arxiv_id": "2606.08476",
+            "PRIMARY_TOPIC_LABEL": "Large-Scale Training Systems and Efficiency",
+            "MATCHED_TOPIC_LABELS": [
+                "Large-Scale Training Systems and Efficiency",
+                "Efficiency, Compression, and Large-Scale Training"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [
+                "Daily Hot Papers"
+            ],
+            "HOTSPOT_PAPER_PRIMARY_KIND": "daily_hot",
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "Daily Hot Papers",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "heuristic"
+        },
+        "2606.08105": {
+            "ARXIVID": "2606.08105",
+            "COMMENT": "Separates visually identical attention sinks into adaptive-nop and broadcast mechanisms with distinct signatures (negligible value norms vs low-rank outputs), showing gating and registers each implicitly assume one and are complementary.",
+            "RELEVANCE": 8,
+            "NOVELTY": 7,
+            "PRIMARY_TOPIC_ID": "architecture_training",
+            "MATCHED_TOPIC_IDS": [
+                "architecture_training"
+            ],
+            "TOPIC_MATCH_COMMENT": "Mechanistic analysis of an attention mechanism that yields diagnostics and a concrete architectural intervention, squarely in analysed architectural mechanisms.",
+            "HOTSPOT_PAPER_TAGS": [
+                "daily_hot"
+            ],
+            "HOTSPOT_PAPER_COMMENT": "Attention sinks, gating, and register tokens are widely discussed design choices, and a unifying account that says when each fix applies has broad relevance beyond this feed.",
+            "SCORE": 15,
+            "authors": [
+                "Lukas Fesser",
+                "Mozes Jacobs",
+                "Thomas Fel",
+                "Andy Keller",
+                "Sham Kakade"
+            ],
+            "title": "A Unifying View of Attention Sinks: Two Algorithms, Two Solutions",
+            "abstract": "When attention concentrates on a single token, a sink, what is the model actually computing? Attention sinks are ubiquitous in softmax transformers, yet this shared visual signature can hide fundamentally different algorithms. We show that visually similar sink patterns can reflect two distinct mechanisms: {i} adaptive nop, where a head suppresses its update by routing to a null token, and {ii} broadcast, where a sink aggregates and redistributes global information. In that case, sinks serve an analogous role: a safe destination when there is nothing useful to compute. Proposed interventions like gating or registers work because they implicitly target one or the other, revealing a duality between method and assumed mechanism: gating implicitly assumes nop; registers implicitly assume broadcast. Each mechanism leaves distinct traces (nop sinks exhibit negligible value norms; broadcast sinks induce low-rank outputs) which we formalize on synthetic tasks and use to derive practical diagnostics. Applied to pretrained vision transformers, these diagnostics reveal that both mechanisms exist at scale: sinks transition from CLS in early layers to patches in deeper layers, and concentrate in specialized heads. Strikingly, register tokens, designed for broadcast, are repurposed to also serve nop, confirming that neither intervention alone suffices. Combining gating with registers yields complementary gains in stability and performance. Overall, we find that the same attention pattern can reflect two very different computations and effective intervention requires first asking what the model is actually computing.",
+            "arxiv_id": "2606.08105",
+            "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+            "MATCHED_TOPIC_LABELS": [
+                "Architecture and Training Dynamics"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [
+                "Daily Hot Papers"
+            ],
+            "HOTSPOT_PAPER_PRIMARY_KIND": "daily_hot",
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "Daily Hot Papers",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "llm_exact"
+        }
+    },
+    "sections": [
+        {
+            "kind": "daily_hot",
+            "label": "Daily Hot Papers",
+            "description": "Papers that feel broadly important to the day and belong in the hotspot paper feed.",
+            "paper_ids": [
+                "2606.08814",
+                "2606.08476",
+                "2606.08105"
+            ]
+        }
+    ]
 }

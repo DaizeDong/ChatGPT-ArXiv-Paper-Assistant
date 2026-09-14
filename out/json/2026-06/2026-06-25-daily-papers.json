@@ -6,20 +6,57 @@
             "score",
             "relevance"
         ],
-        "topic_schema_version": 1,
-        "total_papers": 0,
+        "topic_schema_version": 2,
+        "total_papers": 9,
         "usage": {
-            "model": "gpt-5.4",
+            "model": "llmcall:cc+codexg",
             "prompt_tokens": 0,
             "completion_tokens": 0,
             "prompt_cost": 0.0,
             "completion_cost": 0.0,
-            "total_arxiv_papers": 599,
-            "total_scanned_papers": 384,
-            "total_relevant_papers": 0
+            "total_arxiv_papers": 333,
+            "total_scanned_papers": 333,
+            "total_relevant_papers": 9,
+            "filter_health": {
+                "status": "ok",
+                "scanned_papers": 333,
+                "selected_papers": 9,
+                "llm_tokens": 0,
+                "message": "Scored 333 papers with 4/4 successful model calls; 9 selected."
+            },
+            "llm": {
+                "backend": "LLM backend: llmcall chain=codexg->codex->cc->claude",
+                "attempted": 4,
+                "succeeded": 4,
+                "failed": 0,
+                "by_backend": {
+                    "llmcall": 4
+                },
+                "by_provider": {
+                    "cc": 3,
+                    "codexg": 1
+                },
+                "errors": [],
+                "seconds": 1056.3,
+                "trace": [
+                    "codexg: unavailable after 249.5s of 543.7s (OpenAI Codex v0.154.0",
+                    "codex: unavailable after 3.5s of 313.0s (OpenAI Codex v0.154.0",
+                    "cc: answered in 12.5s of 328.3s",
+                    "codexg: unavailable after 55.6s of 543.7s (OpenAI Codex v0.154.0",
+                    "codex: unavailable after 3.7s of 506.9s (OpenAI Codex v0.154.0",
+                    "cc: answered in 10.5s of 522.0s",
+                    "codexg: unavailable after 167.6s of 543.7s (OpenAI Codex v0.154.0",
+                    "codex: unavailable after 5.3s of 394.9s (OpenAI Codex v0.154.0",
+                    "cc: answered in 248.8s of 408.3s",
+                    "codexg: answered in 299.3s of 543.7s"
+                ]
+            },
+            "remedied": true
         }
     },
     "topic_order": [
+        "moe_training",
+        "training_systems",
         "architecture_training",
         "efficiency_scaling",
         "representation_structure",
@@ -27,17 +64,27 @@
         "world_models_open_ended_rl"
     ],
     "diagnostics": {
-        "total_papers": 0,
+        "total_papers": 9,
         "topic_counts": [
+            {
+                "topic_id": "moe_training",
+                "topic_label": "MoE Training",
+                "paper_count": 0
+            },
+            {
+                "topic_id": "training_systems",
+                "topic_label": "Large-Scale Training Systems and Efficiency",
+                "paper_count": 3
+            },
             {
                 "topic_id": "architecture_training",
                 "topic_label": "Architecture and Training Dynamics",
-                "paper_count": 0
+                "paper_count": 2
             },
             {
                 "topic_id": "efficiency_scaling",
                 "topic_label": "Efficiency, Compression, and Large-Scale Training",
-                "paper_count": 0
+                "paper_count": 4
             },
             {
                 "topic_id": "representation_structure",
@@ -55,8 +102,10 @@
                 "paper_count": 0
             }
         ],
-        "assignment_source_counts": {},
-        "llm_assignment_count": 0,
+        "assignment_source_counts": {
+            "llm_exact": 9
+        },
+        "llm_assignment_count": 9,
         "heuristic_assignment_count": 0,
         "default_assignment_count": 0,
         "invalid_primary_topic_fallback_count": 0,
@@ -65,8 +114,342 @@
             "new_frontier": 0,
             "daily_hot": 0
         },
-        "hotspot_paper_assignment_source_counts": {}
+        "hotspot_paper_assignment_source_counts": {
+            "default": 9
+        }
     },
-    "papers": {},
-    "topic_sections": []
+    "papers": {
+        "2606.25285": {
+            "ARXIVID": "2606.25285",
+            "COMMENT": "A single optimization produces an elastic LLM supporting multiple pruning levels through hierarchical adaptation and feature mixing.",
+            "RELEVANCE": 9,
+            "NOVELTY": 6,
+            "PRIMARY_TOPIC_ID": "efficiency_scaling",
+            "MATCHED_TOPIC_IDS": [
+                "efficiency_scaling"
+            ],
+            "TOPIC_MATCH_COMMENT": "Reusable optimization across sparsity budgets is directly centered on LLM compression and reduces repeated compression work.",
+            "HOTSPOT_PAPER_TAGS": [],
+            "HOTSPOT_PAPER_COMMENT": "",
+            "SCORE": 15,
+            "authors": [
+                "Ke Xu",
+                "Jiaqi Wan",
+                "Wenhao Hu",
+                "Han Pu",
+                "Xiaoyun Wang"
+            ],
+            "title": "EPTS: Elastic Post-Training Sparsity for Efficient Large Language Model Compression",
+            "abstract": "Post-Training Sparsity (PTS) has emerged as a crucial paradigm for compressing Large Language Models to facilitate efficient deployment on resource-constrained devices. However, existing PTS methodologies are typically confined to Single-Sparsity optimization, necessitating a separate, time-consuming optimization session for each specific sparsity level. This rigid paradigm significantly hinders flexible deployment across diverse hardware scenarios, as adapting to a new sparsity requirement mandates a complete re-optimization process. To address these limitations, we propose Elastic Post-Training Sparsity (EPTS), a unified Multi-Sparsity framework that produces a single elastic model capable of maintaining robust performance across diverse sparsity configurations through a one-shot optimization process. Specifically, we design a Multi-Sparsity Hierarchy LoRA (MS-HiLoRA) mechanism that facilitates knowledge inheritance from low- to high-sparsity groups, effectively mitigating the competition for parameter reconstruction. Furthermore, we introduce a Multi-Sparsity Feature Mixer (MSFM), which significantly enhances the model's adaptability to pruning perturbations by dynamically fusing feature representations of varying sparsity granularities. Extensive experiments on LLaMA and OPT families demonstrate that EPTS achieves competitive performance compared to state-of-the-art methods like SparseGPT and Wanda, while offering significant efficiency gains by enabling multi-scenario deployment from a single optimization. our source code is available at https://github.com/xuke225/EPTS.",
+            "arxiv_id": "2606.25285",
+            "PRIMARY_TOPIC_LABEL": "Efficiency, Compression, and Large-Scale Training",
+            "MATCHED_TOPIC_LABELS": [
+                "Efficiency, Compression, and Large-Scale Training"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [],
+            "HOTSPOT_PAPER_PRIMARY_KIND": null,
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+        },
+        "2606.25975": {
+            "ARXIVID": "2606.25975",
+            "COMMENT": "Extends Muon's spectral-norm steepest descent from matrices to tensors via a tractable LMO over a tensor norm ball that reduces to adaptively chosen unfoldings, recovering Muon exactly at order 2.",
+            "RELEVANCE": 8,
+            "NOVELTY": 7,
+            "PRIMARY_TOPIC_ID": "training_systems",
+            "MATCHED_TOPIC_IDS": [
+                "training_systems",
+                "architecture_training"
+            ],
+            "TOPIC_MATCH_COMMENT": "It is squarely an optimizer/preconditioner contribution in the Muon line that governs large-scale pretraining updates.",
+            "HOTSPOT_PAPER_TAGS": [],
+            "HOTSPOT_PAPER_COMMENT": "",
+            "SCORE": 15,
+            "authors": [
+                "Vladimir Bogachev",
+                "Vladimir Aletov",
+                "Alexander Molozhavenko",
+                "Sergei Kudriashov",
+                "Maxim Rakhuba"
+            ],
+            "title": "Tensorion: A Tensor-Aware Generalization of the Muon Optimizer",
+            "abstract": "Common first-order optimizers, such as Adam, implicitly treat each parameter block as an unstructured vector, which disregards the multilinear weight structure present in many modern machine learning models. Recent work has shown that exploiting matrix structure can improve optimization dynamics. A notable example is Muon, which performs steepest descent under the spectral norm constraint. We take the next step and introduce Tensorion, a tensor-aware optimizer that extends Muon's constrained optimization perspective from matrices to higher-order tensors. Tensorion is built around a linear minimization oracle (LMO) over a tensor norm ball. The norm is carefully chosen to balance two objectives: tightly bounding the tensor spectral norm, while still keeping the LMO tractable. This LMO becomes computable because it reduces to operations on adaptively selected unfolding matrices. Notably, when restricted to order-2 tensors (i.e., matrices), Tensorion recovers Muon exactly. Experiments on tensor-based computer vision problems suggest that Tensorion can offer improved convergence behavior and more stable gradient updates compared with Adam-based and existing tensor-aware baselines in the evaluated settings.",
+            "arxiv_id": "2606.25975",
+            "PRIMARY_TOPIC_LABEL": "Large-Scale Training Systems and Efficiency",
+            "MATCHED_TOPIC_LABELS": [
+                "Large-Scale Training Systems and Efficiency",
+                "Architecture and Training Dynamics"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [],
+            "HOTSPOT_PAPER_PRIMARY_KIND": null,
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+        },
+        "2606.25519": {
+            "ARXIVID": "2606.25519",
+            "COMMENT": "Low-bit quantization can inflate reasoning length enough to offset expected per-token speedups.",
+            "RELEVANCE": 8,
+            "NOVELTY": 7,
+            "PRIMARY_TOPIC_ID": "efficiency_scaling",
+            "MATCHED_TOPIC_IDS": [
+                "efficiency_scaling"
+            ],
+            "TOPIC_MATCH_COMMENT": "The central finding concerns compression's effect on total inference compute, providing a substantive efficiency insight despite being primarily empirical.",
+            "HOTSPOT_PAPER_TAGS": [],
+            "HOTSPOT_PAPER_COMMENT": "",
+            "SCORE": 15,
+            "authors": [
+                "Xinyu Lian",
+                "Walid Krichene",
+                "Beichen Huang",
+                "Masahiro Tanaka",
+                "Olatunji Ruwase",
+                "Li Zhang",
+                "Minjia Zhang"
+            ],
+            "title": "Quantization Inflates Reasoning: Token Inflation as a Hidden Cost of Low-Bit Reasoning Models",
+            "abstract": "Quantization is widely used to reduce the inference cost of large language models, but its effect on reasoning models is not fully captured by final-answer accuracy or per-token latency. We show that low-bit post-training quantization can introduce a hidden test-time compute cost: quantized reasoning models often generate longer chains of thought even when they still answer correctly. Across mathematical reasoning, code generation, scientific question answering, and agentic tool-use benchmarks, we find that INT4/INT3 quantization can preserve accuracy but increase reasoning-token usage, offsetting the expected per-token speedup. To measure this effect, we introduce the CoT Token Inflation Ratio, which compares reasoning length between quantized and full-precision models averaged across all evaluation benchmarks. We further show that token inflation is accompanied by behavioral changes in the reasoning trace, including more intermediate steps and greater semantic repetition. These changes translate into measurable end-to-end real-world serving penalties. Finally, we evaluate mitigation strategies and find that prompting and decoding-time sampling offer inconsistent accuracy-length trade-offs, while quantization-aware training shows more promise in reducing both accuracy degradation and token inflation. Our results suggest that reasoning-token usage should be reported alongside accuracy when evaluating quantized reasoning models.",
+            "arxiv_id": "2606.25519",
+            "PRIMARY_TOPIC_LABEL": "Efficiency, Compression, and Large-Scale Training",
+            "MATCHED_TOPIC_LABELS": [
+                "Efficiency, Compression, and Large-Scale Training"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [],
+            "HOTSPOT_PAPER_PRIMARY_KIND": null,
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+        },
+        "2608.00013": {
+            "ARXIVID": "2608.00013",
+            "COMMENT": "Capability-based scaling laws predict VLM training trajectories and guide backbone selection before expensive training sweeps.",
+            "RELEVANCE": 8,
+            "NOVELTY": 7,
+            "PRIMARY_TOPIC_ID": "training_systems",
+            "MATCHED_TOPIC_IDS": [
+                "training_systems"
+            ],
+            "TOPIC_MATCH_COMMENT": "The core contribution is a predictive scaling framework that informs backbone choice and data scaling when configuring training runs.",
+            "HOTSPOT_PAPER_TAGS": [],
+            "HOTSPOT_PAPER_COMMENT": "",
+            "SCORE": 15,
+            "authors": [
+                "Ziran Li",
+                "Qiang Wang",
+                "Zhengyu Chen",
+                "Shanglin Lei",
+                "Borun Chen",
+                "Jingang Wang",
+                "Xunliang Cai"
+            ],
+            "title": "What Transfers from Text to Vision? Capability Scaling Laws and Transfer Dynamics for VLMs",
+            "abstract": "Choosing the right large language model (LLM) backbone is the most consequential decision when building a vision-language model (VLM), yet it remains fundamentally unprincipled: compute-based scaling laws fail to generalize across model families, and no framework exists for directly predicting VLM performance before training begins. We propose the Capability-Driven Multimodal Scaling Law, the first cross-family framework that predicts VLM benchmark accuracy from directly observable textual capability. Given a low-dimensional capability score $S$ extracted from LLM textual benchmarks via PCA, we model VLM performance as a function of $S$, with a per-backbone transfer rate and an absorption rate that quantifies data-scaling efficiency. To fit and validate the framework, we train over 150 VLMs on 34 LLMs spanning 7 model families under a strictly controlled recipe. Evaluations on more than 200 textual and 50 multimodal benchmarks show that the law accurately extrapolates transfer rate from models up to 8B parameters to 72B-scale backbones, predicts full VLM training trajectories with high fidelity, and generalizes to entirely held-out model families. Beyond the scaling law, our analysis surfaces actionable insights: certain textual benchmarks negatively correlate with multimodal performance, exposing latent benchmark-gaming behavior; base LLMs outperform instruction-tuned counterparts as VLM backbones due to higher absorption rates and lower data-scaling decay; and different model families occupy distinct positions in the transfer--absorption space. The framework turns backbone selection from costly empirical sweeps into a principled, quantitative decision. Code and data are available at https://github.com/wangq-dev/CDMScaling.",
+            "arxiv_id": "2608.00013",
+            "PRIMARY_TOPIC_LABEL": "Large-Scale Training Systems and Efficiency",
+            "MATCHED_TOPIC_LABELS": [
+                "Large-Scale Training Systems and Efficiency"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [],
+            "HOTSPOT_PAPER_PRIMARY_KIND": null,
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+        },
+        "2606.26290": {
+            "ARXIVID": "2606.26290",
+            "COMMENT": "Hankel-initialized state-space adapters introduce parallelizable recurrent computation into transformer fine-tuning.",
+            "RELEVANCE": 8,
+            "NOVELTY": 7,
+            "PRIMARY_TOPIC_ID": "architecture_training",
+            "MATCHED_TOPIC_IDS": [
+                "architecture_training",
+                "efficiency_scaling"
+            ],
+            "TOPIC_MATCH_COMMENT": "The new recurrent adapter and analysis of insertion sites are architectural contributions; parameter efficiency and FFT-based execution provide a secondary efficiency match.",
+            "HOTSPOT_PAPER_TAGS": [],
+            "HOTSPOT_PAPER_COMMENT": "",
+            "SCORE": 15,
+            "authors": [
+                "Omanshu Thapliyal"
+            ],
+            "title": "SSM Adapters via Hankel Reduced-order Modeling: Injection Site Determines Task Suitability in Long-Context Fine-Tuning",
+            "abstract": "While parameter-efficient fine-tuning (PEFT) typically targets attention projectors, its efficacy for tasks requiring sequential state accumulation remains under-explored. We examine if PEFT for such tasks can benefit from state space model (SSMs) adapters, and if MLP blocks are better injection sites. We introduce Hankel Reduced order Model (HRM) adapter, an SSM-based residual module initialized via Balanced Truncation of empirical Hankel Grammians. By leveraging the time-invariance of the system matrix $\\bar{A}$, HRM enables an exact FFT-based parallel scan, achieving computational parity with LoRA across all context lengths. In iso-parametric evaluations on Mistral-7B (8.4M trainable parameters), HRM outperforms LoRA variants on LongBench tasks, including QuALITY (+34.8\\% relative accuracy) and QMSum (+71.6\\% relative ROUGE-1). HRM further demonstrates consistent superiority across 18 configurations of synthetic state-tracking (DFA, Parity) and character-level language modeling (enwik8). Gate analysis reveals that HRM adapters effectively learn to modulate recurrence, providing a robust architectural alternative to low-rank adaptation for long-context sequence modeling.",
+            "arxiv_id": "2606.26290",
+            "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+            "MATCHED_TOPIC_LABELS": [
+                "Architecture and Training Dynamics",
+                "Efficiency, Compression, and Large-Scale Training"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [],
+            "HOTSPOT_PAPER_PRIMARY_KIND": null,
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+        },
+        "2607.24787": {
+            "ARXIVID": "2607.24787",
+            "COMMENT": "Separates expert-transfer prediction from execution routing to hide offloading latency while preserving model outputs.",
+            "RELEVANCE": 8,
+            "NOVELTY": 6,
+            "PRIMARY_TOPIC_ID": "efficiency_scaling",
+            "MATCHED_TOPIC_IDS": [
+                "efficiency_scaling"
+            ],
+            "TOPIC_MATCH_COMMENT": "Its core mechanism improves memory-constrained MoE inference through learned prefetching and transfer scheduling; it does not modify MoE training.",
+            "HOTSPOT_PAPER_TAGS": [],
+            "HOTSPOT_PAPER_COMMENT": "",
+            "SCORE": 14,
+            "authors": [
+                "Jinwei Kong",
+                "Runqi Meng",
+                "Fanyi Wang",
+                "Wentao Qiu",
+                "Haotian Hu",
+                "Yongjian Zhou",
+                "Zhenhua Ge"
+            ],
+            "title": "SpecPrefetch: Parameter-Efficient Expert Prefetching for Sparse MoE Foundation Models",
+            "abstract": "Sparse Mixture-of-Experts (MoE) models expand foundation model capacity through conditional expert activation, but their full expert pools remain difficult to deploy under limited accelerator memory. Although expert offloading alleviates memory pressure by moving inactive experts to host memory or storage, it introduces a routing-dependent transfer bottleneck: required experts are known only after native top-\\(K\\) routing, which serializes routing, expert loading, and expert execution during inference. To address this bottleneck, we propose SpecPrefetch, a parameter-efficient prefetching framework for offloaded MoE inference. SpecPrefetch uses a shared lightweight adapter to predict next-layer expert candidates only for asynchronous transfer, while the frozen native router still determines the final executed experts. By separating transfer prediction from execution routing, SpecPrefetch reduces exposed expert-loading latency without changing pretrained routing semantics, so prediction errors affect transfer efficiency rather than model outputs. In addition, a window-aware scheduler prioritizes feasible transfers under cache and bandwidth constraints. Across Qwen3-VL-30B-A3B and DeepSeek-VL2-Tiny, SpecPrefetch achieves the best average expert recall in 9 out of 10 model-benchmark settings with substantially fewer trainable parameters than learned predictor baselines. On a Snapdragon 8 Elite device, SpecPrefetch further improves decoding throughput by up to \\(20\\%\\) over a compute-optimized offloading runtime, demonstrating practical benefits for storage-constrained MoE deployment. The code and model weights are available at https://github.com/wei390/SpecPrefetch.",
+            "arxiv_id": "2607.24787",
+            "PRIMARY_TOPIC_LABEL": "Efficiency, Compression, and Large-Scale Training",
+            "MATCHED_TOPIC_LABELS": [
+                "Efficiency, Compression, and Large-Scale Training"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [],
+            "HOTSPOT_PAPER_PRIMARY_KIND": null,
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+        },
+        "2607.02544": {
+            "ARXIVID": "2607.02544",
+            "COMMENT": "Schedules DiLoCo synchronization using learner progress and forecast fleet pressure, with matched-random deferral controls.",
+            "RELEVANCE": 8,
+            "NOVELTY": 6,
+            "PRIMARY_TOPIC_ID": "training_systems",
+            "MATCHED_TOPIC_IDS": [
+                "training_systems"
+            ],
+            "TOPIC_MATCH_COMMENT": "The contribution concerns when distributed learners synchronize, with a narrower focus on protecting serving SLOs in shared training infrastructure.",
+            "HOTSPOT_PAPER_TAGS": [],
+            "HOTSPOT_PAPER_COMMENT": "",
+            "SCORE": 14,
+            "authors": [
+                "Maxwell Twelftree",
+                "David Lemphers",
+                "An-chi He",
+                "Yue Yang"
+            ],
+            "title": "Not Every Sync Is Safe: Calibrated DiLoCo Scheduling for Shared AI Infrastructure",
+            "abstract": "DiLoCo-style training reduces communication by letting learner islands train locally before occasional outer synchronization, making it attractive for fragmented industrial AI fleets where training shares hardware with latency-sensitive serving. The question for such fleets is when an outer merge is worth its system cost, and whether choosing \\emph{which} windows to defer matters at all. Existing scheduling studies evaluate workload-aware policies against fixed-period baselines, but most omit the control that isolates timing from budget: matched random deferral, which inherits the controller's synchronization budget but is not itself deployable. This omission is consequential: across controlled stress tests and real vLLM sidecar replays, matched random ties or beats every forecast-free policy we test, so gains reported against weaker baselines cannot be attributed to window choice. We fill this gap with Workload-Aware DiLoCo (WA-DiLoCo), a score-based controller that weighs learner progress against fleet pressure, and a calibration protocol that determines when matched random can be beaten, then demonstrate that it can. In the bursty regime where calibration exposes request-overlap structure, adding a one-step EWMA burst forecast to the online controller beats matched random in real vLLM sidecar replay, reducing SLO violations from 6.54\\% to 5.09\\% (8 of 10 seeds, $p=0.021$); offline Calibrated-WA, a non-deployable bound, shows the remaining headroom at 4.45\\% versus 6.26\\%. The deployable lesson remains the protocol: report real-sidecar effect-size transfer, a no-sync load match, and a matched-random envelope before claiming serving-SLO improvement.",
+            "arxiv_id": "2607.02544",
+            "PRIMARY_TOPIC_LABEL": "Large-Scale Training Systems and Efficiency",
+            "MATCHED_TOPIC_LABELS": [
+                "Large-Scale Training Systems and Efficiency"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [],
+            "HOTSPOT_PAPER_PRIMARY_KIND": null,
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+        },
+        "2606.26453": {
+            "ARXIVID": "2606.26453",
+            "COMMENT": "Micro-profiler-guided CUDA synthesis improves kernel throughput, including a reported 1.23x gain on MoE training kernels.",
+            "RELEVANCE": 7,
+            "NOVELTY": 7,
+            "PRIMARY_TOPIC_ID": "efficiency_scaling",
+            "MATCHED_TOPIC_IDS": [
+                "efficiency_scaling"
+            ],
+            "TOPIC_MATCH_COMMENT": "Automated kernel optimization directly targets compute efficiency; its connection to training is demonstrated through a MoE kernel case study.",
+            "HOTSPOT_PAPER_TAGS": [],
+            "HOTSPOT_PAPER_COMMENT": "",
+            "SCORE": 14,
+            "authors": [
+                "Jiading Gai",
+                "Shuai Zhang",
+                "Kaj Bostrom",
+                "Jin Huang",
+                "Vihang Patil",
+                "Haoyang Fang",
+                "Bernie Wang",
+                "Huzefa Rangwala",
+                "George Karypis"
+            ],
+            "title": "Optimizing CUDA like a Human: Micro-Profiling Tools as Expert Surrogates for LLM-Based GPU Kernel Optimization",
+            "abstract": "We present KernelPro, a closed-loop multi-agent system that automatically generates, profiles, and iteratively optimizes GPU kernel code by integrating large language model (LLM) code generation with hardware profiler feedback and pluggable bottleneck detection tools. KernelPro introduces four contributions: (1) a semantic feedback operator that encodes expert heuristics as pluggable micro-profiling tools, transforming raw hardware metrics into actionable natural language guidance; (2) a two-stage tool invocation architecture where roofline-based bottleneck classification filters which specialized analysis tools execute, combining kernel-level (ncu), instruction-level (SASS), and system-level (nsys) profiling; (3) a domain-adapted MCTS with progressive widening, asymmetric branching, log-reward calibration, dead-end pruning, and search memory for cross-iteration learning; and (4) direct CuTe source-level code generation via autonomous code search over the CUTLASS/CuTe codebase. On KernelBench, KernelPro achieves geometric mean speedups of 2.42x/4.69x/5.30x on Levels 1/2/3, establishing state-of-the-art performance across all difficulty levels. On VeOmni's expert-optimized MoE training kernels, KernelPro achieves 1.23x over hand-tuned Triton by generating a from-scratch raw-CUDA+CuTe Hopper WGMMA kernel. Ablation studies demonstrate that each design component independently and significantly improves optimization quality: micro-profiling tools (p < 0.0001 vs raw metrics), MCTS search (26% higher geometric mean vs greedy, p = 0.004), and proactive tool orchestration (23% improvement, p = 0.035). Finally, KernelPro is the first CUDA kernel coding agent to optimize energy efficiency beyond the speed-only focus of prior systems, demonstrating an 11.6% measured energy reduction at matched speed.",
+            "arxiv_id": "2606.26453",
+            "PRIMARY_TOPIC_LABEL": "Efficiency, Compression, and Large-Scale Training",
+            "MATCHED_TOPIC_LABELS": [
+                "Efficiency, Compression, and Large-Scale Training"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [],
+            "HOTSPOT_PAPER_PRIMARY_KIND": null,
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+        },
+        "2606.26050": {
+            "ARXIVID": "2606.26050",
+            "COMMENT": "Corpus interventions link within-run rule collapse to support frequency and competition between predictive patterns.",
+            "RELEVANCE": 7,
+            "NOVELTY": 7,
+            "PRIMARY_TOPIC_ID": "architecture_training",
+            "MATCHED_TOPIC_IDS": [
+                "architecture_training"
+            ],
+            "TOPIC_MATCH_COMMENT": "The core is causal analysis of acquisition and forgetting during pretraining, although the evidence centers on narrow behavioral rules and mostly small models.",
+            "HOTSPOT_PAPER_TAGS": [],
+            "HOTSPOT_PAPER_COMMENT": "",
+            "SCORE": 14,
+            "authors": [
+                "Juliana Li",
+                "Diya Sreedhar"
+            ],
+            "title": "Natural Ungrokking: Asymmetric Control of Which Rules Survive Pretraining",
+            "abstract": "Midway through an ordinary pretraining run, a small language model learns the pronoun-gender rule: cued with a girl's name (\"Sue cried because\"), it resolves the next pronoun to she, generalizing to held-out probes (0.94 by step 925). By step 3,500 the same model scores near zero on the same probes, although the rule's evidence is still in the training data. We call this within-run reversal natural ungrokking: the corpus decides, with no trace in the loss curve, which learned rules a model keeps. Which rules survive is predictable from one corpus statistic: how often the training stream shows the rule winning. Across un-intervened runs (two corpora, three budgets, three seeds), support frequency decides a rule's fate; the data-to-parameter ratio only modulates how deeply a doomed rule falls. The same emerge-then-collapse dynamics appear in public Pythia checkpoints, collapse depth ordered by model scale as predicted. The forgetting is a displacement: a competing surface pattern out-competes the rule, and the log-probability margin between them crosses zero within 100 training steps of the behavioral collapse. Control over this fate is asymmetric: the same edit that destroys a rule on demand cannot restore it. Flipping support to counter-evidence in place kills the rule with monotone dose-response in two unrelated rules; but injecting support back, even to 450 times the level that naturally sustains it, buys no recovery. Every confirmatory threshold and prediction was pre-registered before the data it governed was read.",
+            "arxiv_id": "2606.26050",
+            "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+            "MATCHED_TOPIC_LABELS": [
+                "Architecture and Training Dynamics"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [],
+            "HOTSPOT_PAPER_PRIMARY_KIND": null,
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+        }
+    },
+    "topic_sections": [
+        {
+            "topic_id": "training_systems",
+            "topic_label": "Large-Scale Training Systems and Efficiency",
+            "paper_ids": [
+                "2606.25975",
+                "2608.00013",
+                "2607.02544"
+            ]
+        },
+        {
+            "topic_id": "architecture_training",
+            "topic_label": "Architecture and Training Dynamics",
+            "paper_ids": [
+                "2606.26290",
+                "2606.26050"
+            ]
+        },
+        {
+            "topic_id": "efficiency_scaling",
+            "topic_label": "Efficiency, Compression, and Large-Scale Training",
+            "paper_ids": [
+                "2606.25285",
+                "2606.25519",
+                "2607.24787",
+                "2606.26453"
+            ]
+        }
+    ]
 }

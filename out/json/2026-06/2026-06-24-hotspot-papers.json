@@ -2,8 +2,8 @@
     "schema_version": 1,
     "meta": {
         "date": "2026-06-24",
-        "total_candidates": 0,
-        "total_spotlight_papers": 0,
+        "total_candidates": 93,
+        "total_spotlight_papers": 2,
         "thresholds": {
             "daily_hot_score_cutoff": 15,
             "daily_hot_relevance_cutoff": 7,
@@ -18,10 +18,100 @@
     "diagnostics": {
         "candidate_count_by_kind": {
             "new_frontier": 0,
-            "daily_hot": 0
+            "daily_hot": 2
         },
-        "selected_count_by_kind": {}
+        "selected_count_by_kind": {
+            "daily_hot": 2
+        }
     },
-    "papers": {},
-    "sections": []
+    "papers": {
+        "2606.25008": {
+            "ARXIVID": "2606.25008",
+            "COMMENT": "Argues scaling-law exponents are pinned by generic mechanisms (Softmax nonlinearity, superposition, layer ensembling) so coefficients determine optimal model shape and the compute-optimal frontier.",
+            "RELEVANCE": 8,
+            "NOVELTY": 7,
+            "PRIMARY_TOPIC_ID": "training_systems",
+            "MATCHED_TOPIC_IDS": [
+                "training_systems",
+                "architecture_training"
+            ],
+            "TOPIC_MATCH_COMMENT": "Scaling-law reasoning that directly informs how a large pretraining run should be shaped and budgeted.",
+            "HOTSPOT_PAPER_TAGS": [
+                "daily_hot"
+            ],
+            "HOTSPOT_PAPER_COMMENT": "A position paper reframing what in scaling laws is actually tunable, of broad interest to anyone planning pretraining runs.",
+            "SCORE": 15,
+            "authors": [
+                "Yizhou Liu",
+                "Jeff Gore"
+            ],
+            "title": "Neural Scaling Universality: If Exponents Are Fixed, Time to Understand Coefficients",
+            "abstract": "Neural scaling laws describe how pre-training loss decays as power laws with training time, model size, and compute. This position paper argues that the exponents of these power laws are fixed by generic mechanisms: a one-third time scaling due to the strong nonlinearity of Softmax, an inverse width scaling due to representational superposition, and an inverse depth scaling due to ensemble averaging of Transformer layers. These mechanisms are robust to a wide range of data structures and architectural details, placing current large language models in a universality class with fixed exponents. The coefficients, however, are expected to be sensitive to data and architecture details, and directly determine practical quantities such as the optimal model shape and the compute-optimal frontier. We therefore argue that understanding the coefficients is the key to near-term performance improvements, and that a closer examination of the current universality class may reveal pathways to better universality classes.",
+            "arxiv_id": "2606.25008",
+            "PRIMARY_TOPIC_LABEL": "Large-Scale Training Systems and Efficiency",
+            "MATCHED_TOPIC_LABELS": [
+                "Large-Scale Training Systems and Efficiency",
+                "Architecture and Training Dynamics"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [
+                "Daily Hot Papers"
+            ],
+            "HOTSPOT_PAPER_PRIMARY_KIND": "daily_hot",
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "Daily Hot Papers",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "llm_exact"
+        },
+        "2606.24998": {
+            "ARXIVID": "2606.24998",
+            "COMMENT": "Quantifies pretraining data repetition in compute-equivalent terms and finds eval loss peaks at an intermediate repeat count whose location follows a power law in model size.",
+            "RELEVANCE": 8,
+            "NOVELTY": 7,
+            "PRIMARY_TOPIC_ID": "training_systems",
+            "MATCHED_TOPIC_IDS": [
+                "training_systems"
+            ],
+            "TOPIC_MATCH_COMMENT": "Scaling-law work that directly changes how a pretraining corpus and compute budget should be configured, with an analytic model explaining the peak.",
+            "HOTSPOT_PAPER_TAGS": [
+                "daily_hot"
+            ],
+            "HOTSPOT_PAPER_COMMENT": "Data-repetition cost in the Chinchilla era is a live concern for everyone running out of clean pretraining tokens.",
+            "SCORE": 15,
+            "authors": [
+                "Jessica Chudnovsky",
+                "Joshua Kazdan",
+                "Noam Levi",
+                "Rylan Schaeffer",
+                "Yegor Denisov-Blanch",
+                "Bo He",
+                "Mehmet Donmez",
+                "Sanmi Koyejo",
+                "David Donoho"
+            ],
+            "title": "Internal Data Repetition Destroys Language Models",
+            "abstract": "Language models are running out of high-quality training data, and even aggressively deduplicated corpora retain some amount of repetition. Earlier controlled studies predated Chinchilla-style scaling laws and could only measure the cost of repetition indirectly. We revisit repetition in the Chinchilla era, using a fitted no-repetition scaling law to report Compute-Equivalent Gain and Compute-Equivalent Loss. We show that under this modernized paradigm, repetition damage is systematic in three ways. First, holding compute allocated to repeated data constant, eval loss peaks at an intermediate repeat count $\\Rep$; repeating a moderately sized subset a moderate number of times damages performance more than repeating a large subset a few times or a small subset many times. Second, the location of this peak is well-fit by a power law in model size; this scaling law reveals that the most damaging number of repeated data grows more quickly than compute. Finally, when repeated documents consume 10\\% of the FLOPs budget in a controlled exact-document repetition setting, the compute-equivalent loss can be large: on FineWeb-Edu-Dedup, the most damaging repeat count for a Qwen3-style 344M-parameter model at $\\OT=1$ matches the loss of a no-repetition run using 67% of the FLOPs. We demonstrate that these phenomena are not language-model-specific, and can be analytically understood in a simple statistical model: a misspecified linear regression with verbatim duplicates reproduces the same qualitative loss peak, quantifying how such peaks can arise from a statistical tradeoff between memorization and generalization. Our findings add precision to the study of duplication in language models, allowing practitioners to quantify the wasted compute incurred by the presence and repeat structure of duplicates in pretraining corpora.",
+            "arxiv_id": "2606.24998",
+            "PRIMARY_TOPIC_LABEL": "Large-Scale Training Systems and Efficiency",
+            "MATCHED_TOPIC_LABELS": [
+                "Large-Scale Training Systems and Efficiency"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [
+                "Daily Hot Papers"
+            ],
+            "HOTSPOT_PAPER_PRIMARY_KIND": "daily_hot",
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "Daily Hot Papers",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "llm_exact"
+        }
+    },
+    "sections": [
+        {
+            "kind": "daily_hot",
+            "label": "Daily Hot Papers",
+            "description": "Papers that feel broadly important to the day and belong in the hotspot paper feed.",
+            "paper_ids": [
+                "2606.25008",
+                "2606.24998"
+            ]
+        }
+    ]
 }

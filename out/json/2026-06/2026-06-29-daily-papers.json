@@ -6,20 +6,76 @@
             "score",
             "relevance"
         ],
-        "topic_schema_version": 1,
-        "total_papers": 0,
+        "topic_schema_version": 2,
+        "total_papers": 26,
         "usage": {
-            "model": "gpt-5.4",
+            "model": "llmcall:cc+codexg",
             "prompt_tokens": 0,
             "completion_tokens": 0,
             "prompt_cost": 0.0,
             "completion_cost": 0.0,
-            "total_arxiv_papers": 465,
-            "total_scanned_papers": 265,
-            "total_relevant_papers": 0
+            "total_arxiv_papers": 716,
+            "total_scanned_papers": 716,
+            "total_relevant_papers": 26,
+            "filter_health": {
+                "status": "ok",
+                "scanned_papers": 716,
+                "selected_papers": 26,
+                "llm_tokens": 0,
+                "message": "Scored 716 papers with 8/10 successful model calls; 26 selected."
+            },
+            "llm": {
+                "backend": "LLM backend: llmcall chain=codexg->codex->cc->claude",
+                "attempted": 10,
+                "succeeded": 8,
+                "failed": 2,
+                "by_backend": {
+                    "llmcall": 10
+                },
+                "by_provider": {
+                    "codexg": 3,
+                    "cc": 5
+                },
+                "errors": [
+                    "timeout after 18s",
+                    "timeout after 18s"
+                ],
+                "seconds": 3482.6,
+                "trace": [
+                    "codexg: answered in 531.8s of 543.7s",
+                    "codexg: unavailable after 294.9s of 543.7s (OpenAI Codex v0.154.0",
+                    "codex: unavailable after 4.4s of 267.6s (OpenAI Codex v0.154.0",
+                    "cc: answered in 65.7s of 282.0s",
+                    "codexg: unavailable after 383.2s of 543.7s (OpenAI Codex v0.154.0",
+                    "codex: unavailable after 3.5s of 179.3s (OpenAI Codex v0.154.0",
+                    "cc: answered in 14.2s of 194.5s",
+                    "codexg: answered in 18.2s of 543.7s",
+                    "codexg: unavailable after 187.7s of 543.7s (OpenAI Codex v0.154.0",
+                    "codex: unavailable after 4.6s of 374.8s (OpenAI Codex v0.154.0",
+                    "cc: answered in 235.3s of 389.0s",
+                    "codexg: unavailable after 429.0s of 543.7s (OpenAI Codex v0.154.0",
+                    "codex: unavailable after 3.7s of 133.5s (OpenAI Codex v0.154.0",
+                    "cc: unavailable after 149.2s of 148.5s (timeout after 149s)",
+                    "claude: unavailable after 18.8s of 18.1s (timeout after 18s)",
+                    "codexg: unavailable after 344.4s of 543.7s (OpenAI Codex v0.154.0",
+                    "codex: unavailable after 3.8s of 218.1s (OpenAI Codex v0.154.0",
+                    "cc: unavailable after 233.4s of 233.0s (timeout after 233s)",
+                    "claude: unavailable after 19.0s of 18.4s (timeout after 18s)",
+                    "codexg: unavailable after 290.4s of 543.7s (OpenAI Codex v0.154.0",
+                    "codex: unavailable after 3.3s of 272.1s (OpenAI Codex v0.154.0",
+                    "cc: answered in 170.4s of 287.6s",
+                    "codexg: answered in 49.6s of 543.7s",
+                    "codexg: unavailable after 9.7s of 543.7s (OpenAI Codex v0.154.0",
+                    "codex: unavailable after 3.8s of 552.8s (OpenAI Codex v0.154.0",
+                    "cc: answered in 10.7s of 567.8s"
+                ]
+            },
+            "remedied": true
         }
     },
     "topic_order": [
+        "moe_training",
+        "training_systems",
         "architecture_training",
         "efficiency_scaling",
         "representation_structure",
@@ -27,17 +83,27 @@
         "world_models_open_ended_rl"
     ],
     "diagnostics": {
-        "total_papers": 0,
+        "total_papers": 26,
         "topic_counts": [
+            {
+                "topic_id": "moe_training",
+                "topic_label": "MoE Training",
+                "paper_count": 1
+            },
+            {
+                "topic_id": "training_systems",
+                "topic_label": "Large-Scale Training Systems and Efficiency",
+                "paper_count": 5
+            },
             {
                 "topic_id": "architecture_training",
                 "topic_label": "Architecture and Training Dynamics",
-                "paper_count": 0
+                "paper_count": 13
             },
             {
                 "topic_id": "efficiency_scaling",
                 "topic_label": "Efficiency, Compression, and Large-Scale Training",
-                "paper_count": 0
+                "paper_count": 7
             },
             {
                 "topic_id": "representation_structure",
@@ -55,8 +121,10 @@
                 "paper_count": 0
             }
         ],
-        "assignment_source_counts": {},
-        "llm_assignment_count": 0,
+        "assignment_source_counts": {
+            "llm_exact": 26
+        },
+        "llm_assignment_count": 26,
         "heuristic_assignment_count": 0,
         "default_assignment_count": 0,
         "invalid_primary_topic_fallback_count": 0,
@@ -65,8 +133,944 @@
             "new_frontier": 0,
             "daily_hot": 0
         },
-        "hotspot_paper_assignment_source_counts": {}
+        "hotspot_paper_assignment_source_counts": {
+            "default": 26
+        }
     },
-    "papers": {},
-    "topic_sections": []
+    "papers": {
+        "2606.27715": {
+            "ARXIVID": "2606.27715",
+            "COMMENT": "Identifies arbitrarily non-uniform row norms in Muon updates on tall matrices as a self-reinforcing dead-neuron loop, and enforces row uniformity while preserving the polar-factor geometry.",
+            "RELEVANCE": 9,
+            "NOVELTY": 7,
+            "PRIMARY_TOPIC_ID": "training_systems",
+            "MATCHED_TOPIC_IDS": [
+                "training_systems",
+                "architecture_training"
+            ],
+            "TOPIC_MATCH_COMMENT": "A spectral optimizer for large-scale pretraining whose gains grow with MLP expansion factor; squarely in the optimizer topic.",
+            "HOTSPOT_PAPER_TAGS": [],
+            "HOTSPOT_PAPER_COMMENT": "",
+            "SCORE": 16,
+            "authors": [
+                "Alec Dewulf",
+                "Dhruv Pai",
+                "Li Yang",
+                "Ashley Zhang",
+                "Ben Keigwin"
+            ],
+            "title": "Aurora: A Leverage-Aware Spectral Optimizer",
+            "abstract": "We show that for tall matrix parameters, like projection matrices in the MLP layers, the Muon update can have row norms that are arbitrarily non-uniform. This can lead to a self-reinforcing feedback loop whereby neurons receive persistently small updates and eventually do not contribute meaningfully to network outputs. This problem is effectively mitigated by an additional row normalization step, but current methods do this in a way that moves the Muon update geometry away from the polar factor of the momentum matrix, which we find is undesirable. We propose Aurora, an optimizer that enforces row-uniformity of matrix parameter updates while respecting Muon's polar factor geometry. Aurora outperforms Muon in our pre-training experiments and, when combined with existing methods, achieves state-of-the-art performance among spectral optimizers on the optimizer track of the modded-nanoGPT speedrun. Additionally, we find that Aurora's empirical gains over Muon scale with the MLP expansion factor, suggesting that Aurora may allow for effective training of very wide MLP layers.",
+            "arxiv_id": "2606.27715",
+            "PRIMARY_TOPIC_LABEL": "Large-Scale Training Systems and Efficiency",
+            "MATCHED_TOPIC_LABELS": [
+                "Large-Scale Training Systems and Efficiency",
+                "Architecture and Training Dynamics"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [],
+            "HOTSPOT_PAPER_PRIMARY_KIND": null,
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+        },
+        "2606.29158": {
+            "ARXIVID": "2606.29158",
+            "COMMENT": "Shows the optimal-LR log-linear scaling law develops upward curvature at scale, and that the curvature vanishes under effective learning rate in normalized weight space with data-side extrapolation.",
+            "RELEVANCE": 9,
+            "NOVELTY": 7,
+            "PRIMARY_TOPIC_ID": "training_systems",
+            "MATCHED_TOPIC_IDS": [
+                "training_systems",
+                "architecture_training"
+            ],
+            "TOPIC_MATCH_COMMENT": "Directly about how large pretraining runs are configured, correcting a scaling law practitioners use to set learning rates.",
+            "HOTSPOT_PAPER_TAGS": [],
+            "HOTSPOT_PAPER_COMMENT": "",
+            "SCORE": 16,
+            "authors": [
+                "Zaiwen Yang",
+                "Huaqing Zhang",
+                "Jing Xu",
+                "Jingzhao Zhang"
+            ],
+            "title": "On the Nonlinearity of Learning Rate Scaling for LLM Training",
+            "abstract": "Learning-rate transfer can reduce the cost of training large language models: instead of sweeping learning rates at target scale, practitioners extrapolate from smaller runs. Existing approaches often assume that the optimal learning rate follows a log-linear scaling law in data scale and model size. We carefully examine and evaluate this scaling law. In our empirical study of GPT-2--style models from 22M to 707M parameters trained on 5B to 100B tokens, the optimal learning rate develops upward curvature at larger scales, leading to inaccurate extrapolation. We find that this curvature largely disappears when learning rates are replaced by effective learning rate (the step size in normalized weight space), and when data $D$ extrapolation is used instead of model size $N$ extrapolation. Next, we explain nonlinearity in scaling: weight-norm converges to equilibrium slower when optimal learning is small, requiring a larger step size to reduce the transient phase. Experiments with AdamH, which directly controls the effective learning rate, further support this explanation.",
+            "arxiv_id": "2606.29158",
+            "PRIMARY_TOPIC_LABEL": "Large-Scale Training Systems and Efficiency",
+            "MATCHED_TOPIC_LABELS": [
+                "Large-Scale Training Systems and Efficiency",
+                "Architecture and Training Dynamics"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [],
+            "HOTSPOT_PAPER_PRIMARY_KIND": null,
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+        },
+        "2606.27866": {
+            "ARXIVID": "2606.27866",
+            "COMMENT": "Ranks expert FFN channels then learns per-expert discrete pruning actions under rising cost pressure, exporting a nested family of MoE subnetworks with one mid-budget recovery fine-tune and runtime budget switching.",
+            "RELEVANCE": 8,
+            "NOVELTY": 7,
+            "PRIMARY_TOPIC_ID": "moe_training",
+            "MATCHED_TOPIC_IDS": [
+                "moe_training",
+                "efficiency_scaling"
+            ],
+            "TOPIC_MATCH_COMMENT": "Intra-expert granularity and MoE compression with kernel-level co-design, centered on MoE structure itself.",
+            "HOTSPOT_PAPER_TAGS": [],
+            "HOTSPOT_PAPER_COMMENT": "",
+            "SCORE": 15,
+            "authors": [
+                "Fan Mo",
+                "Yuxuan Han",
+                "Geng Zhang",
+                "Wangbo Zhao",
+                "Yang You"
+            ],
+            "title": "FlexMoE: One-for-All Nested Intra-Expert Pruning for MoE Language Models",
+            "abstract": "Mixture-of-Experts (MoE) language models scale model ability with sparsely activated experts, making this architecture a standard recipe for modern large models. However, sparse activation does not remove the deployment burden of storing and serving all experts, and the available deployment budget can vary substantially across devices, users, and workloads. Existing MoE compression methods are still largely fixed-budget, typically optimizing one compressed endpoint at each chosen target budget. We study a different setting: converting a large pretrained MoE LLM into a nested family of deployable subnetworks across budgets. Our method first ranks expert FFN channels by their importance, then lets each expert learn a discrete action to prune its channels. By gradually increasing cost pressure, a single action-training run exports a series of action masks from high to low budgets, each of which identifies a reliable smaller subnetwork nested in the ranked base model. Moreover, we use a single recovery fine-tune at a mid pruning budget (40%) to recover degraded model quality and transfer the recovered model to other unseen budgets. Overall, our framework surpasses recent MoE compression baselines. Specifically, on Qwen2-57B-A14B, our method retains ~99.8% of base performance while pruning 50% of routed expert parameters even without fine-tuning. For deployment, our pruned subnetworks deliver real memory reduction and throughput gains, and further support realtime online budget switching with kernel-level co-design.",
+            "arxiv_id": "2606.27866",
+            "PRIMARY_TOPIC_LABEL": "MoE Training",
+            "MATCHED_TOPIC_LABELS": [
+                "MoE Training",
+                "Efficiency, Compression, and Large-Scale Training"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [],
+            "HOTSPOT_PAPER_PRIMARY_KIND": null,
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+        },
+        "2606.28932": {
+            "ARXIVID": "2606.28932",
+            "COMMENT": "A parameter-free structured residual that replicates latent coordinates during low-rank pretraining and folds exactly into the up-projection afterwards, closing part of the gap to full-rank training at zero deployment cost.",
+            "RELEVANCE": 8,
+            "NOVELTY": 6,
+            "PRIMARY_TOPIC_ID": "efficiency_scaling",
+            "MATCHED_TOPIC_IDS": [
+                "training_systems",
+                "efficiency_scaling"
+            ],
+            "TOPIC_MATCH_COMMENT": "Directly attacks the cost of pretraining large models via a low-rank mechanism, validated from 60M to 7B.",
+            "HOTSPOT_PAPER_TAGS": [],
+            "HOTSPOT_PAPER_COMMENT": "",
+            "SCORE": 14,
+            "authors": [
+                "Dong Wang",
+                "Wenwu Tang",
+                "Yun Cheng",
+                "Olga Saukh"
+            ],
+            "title": "DLR: Zero-Inference-Cost Latent Residuals for Low-Rank Pre-Training",
+            "abstract": "Large language models have driven recent progress in language and multimodal AI, yet pre-training them at scale is prohibitively expensive. Low-rank pre-training, which factorizes each weight matrix into a rank-r product to reduce both parameters and FLOPs, is a promising response but typically lags full-rank training in quality. We propose Duplicated Latent Residual (DLR), a training-only, parameter-free, foldable plug-in for low-rank pre-training. DLR augments the standard low-rank output Bz with a fixed structured residual alpha/sqrt(K) * Expand_K(z) that replicates each latent coordinate K = ceil(d_out/r) times across the output. With alpha fixed, DLR adds zero learnable parameters per layer; after training, it is absorbed into the up-projection in closed form, B* = B + alpha/sqrt(K) R^T, so deployment parameter count, FLOPs and memory match the underlying low-rank backbone exactly. Across LLaMA models from 60M to 7B parameters, DLR strengthens low-rank pre-training on C4 validation perplexity in most settings, with the clearest gains at 130M and above; folded checkpoints transfer cleanly to supervised fine-tuning on standard benchmarks.",
+            "arxiv_id": "2606.28932",
+            "PRIMARY_TOPIC_LABEL": "Efficiency, Compression, and Large-Scale Training",
+            "MATCHED_TOPIC_LABELS": [
+                "Large-Scale Training Systems and Efficiency",
+                "Efficiency, Compression, and Large-Scale Training"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [],
+            "HOTSPOT_PAPER_PRIMARY_KIND": null,
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+        },
+        "2606.28560": {
+            "ARXIVID": "2606.28560",
+            "COMMENT": "Matched-recipe study across 21 trained LMs showing a static per-layer stagger of Fibonacci-spaced sparse attention beats learned dilation, and that fixed-offset attention extrapolates to 4x training length where dense collapses.",
+            "RELEVANCE": 8,
+            "NOVELTY": 6,
+            "PRIMARY_TOPIC_ID": "architecture_training",
+            "MATCHED_TOPIC_IDS": [
+                "architecture_training",
+                "efficiency_scaling"
+            ],
+            "TOPIC_MATCH_COMMENT": "A sparse attention mechanism analysed with a controlled training sweep, including honest negatives on in-length perplexity.",
+            "HOTSPOT_PAPER_TAGS": [],
+            "HOTSPOT_PAPER_COMMENT": "",
+            "SCORE": 14,
+            "authors": [
+                "Chad A. Capps"
+            ],
+            "title": "Depth-Staggered Fibonacci Spacing for Sparse Attention: Static Schedules Beat Learned Dilation and Extrapolate Where Dense Attention Fails",
+            "abstract": "We study sparse self-attention in which each query attends to a dense local window plus a set of Fibonacci-spaced offsets, with a per-layer scalar alpha that compresses or expands the spacing. Across 21 language models trained under one matched recipe (60M parameters, 512 hidden, 16 layers, 426M tokens), we compare four ways of setting alpha across depth: fixed, per-layer learned, a static linear stagger, and a coprime (anti-gridding) reassignment of that stagger, together with a reach-matched power-of-2 control. Three results stand out. First, a static per-layer stagger improves perplexity over both fixed and learned alpha, and the gain is base-agnostic: applying the same stagger to a power-of-2 base lifts it above fixed Fibonacci and to parity with learned Fibonacci attention. Second, learning per layer is inert: it does not beat the static schedule and costs roughly five times the inference latency. Third, and most consequential, all sparse variants extrapolate to four times their training length with little or no degradation, whereas a recipe-matched dense baseline collapses (perplexity rises by 201% at 4x length); we attribute this to fixed-offset attention only ever querying relative positions seen during training. We also report two honest negatives: at training length the best sparse model has about 26% higher perplexity than the dense baseline, and the staggering gain is uniform across context positions rather than concentrated at long range.",
+            "arxiv_id": "2606.28560",
+            "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+            "MATCHED_TOPIC_LABELS": [
+                "Architecture and Training Dynamics",
+                "Efficiency, Compression, and Large-Scale Training"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [],
+            "HOTSPOT_PAPER_PRIMARY_KIND": null,
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+        },
+        "2606.27748": {
+            "ARXIVID": "2606.27748",
+            "COMMENT": "Makes random Fourier spectral frequencies trainable so linear attention learns its own kernel family, with a strictly more expressive nonstationary variant and distillation from pretrained softmax transformers.",
+            "RELEVANCE": 8,
+            "NOVELTY": 6,
+            "PRIMARY_TOPIC_ID": "architecture_training",
+            "MATCHED_TOPIC_IDS": [
+                "architecture_training",
+                "efficiency_scaling"
+            ],
+            "TOPIC_MATCH_COMMENT": "A new attention mechanism that changes subquadratic sequence-modelling expressiveness, not a task application.",
+            "HOTSPOT_PAPER_TAGS": [],
+            "HOTSPOT_PAPER_COMMENT": "",
+            "SCORE": 14,
+            "authors": [
+                "Haoran Zhang",
+                "Feng Zhou"
+            ],
+            "title": "Flexformer: Flexible Linear Transformer with Learnable Attention Kernel",
+            "abstract": "Transformer models rely on attention mechanism to capture long-range dependencies but suffer from quadratic complexity, limiting their scalability to long sequences. Kernel-based linear attention reduces this complexity but typically relies on fixed or weakly learnable kernels, restricting expressiveness and performance. In this work, we propose Flexformer, a flexible linear Transformer that learns attention kernels in a fully data-driven manner. Flexformer builds on random Fourier feature-based linear attention and treats spectral frequencies as trainable parameters, enabling the model to learn a broad family of attention kernels. We develop both stationary and nonstationary variants, with the latter offering strictly greater expressiveness. Extensive experiments on language modeling and sequence classification demonstrate that Flexformer consistently outperforms baselines. Moreover, Flexformer can be effectively distilled from pretrained Transformers to recover softmax attention and exhibits strong kernel transferability across domains, achieving both high efficiency and competitive performance on long-sequence tasks.",
+            "arxiv_id": "2606.27748",
+            "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+            "MATCHED_TOPIC_LABELS": [
+                "Architecture and Training Dynamics",
+                "Efficiency, Compression, and Large-Scale Training"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [],
+            "HOTSPOT_PAPER_PRIMARY_KIND": null,
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+        },
+        "2607.16248": {
+            "ARXIVID": "2607.16248",
+            "COMMENT": "Diagnoses 1-bit KV-cache failure as structured top-K misranking rather than logit error, and restores only the at-risk local distribution.",
+            "RELEVANCE": 7,
+            "NOVELTY": 7,
+            "PRIMARY_TOPIC_ID": "efficiency_scaling",
+            "MATCHED_TOPIC_IDS": [
+                "efficiency_scaling"
+            ],
+            "TOPIC_MATCH_COMMENT": "New mechanism for low-bit KV-cache quantization, squarely in memory-efficiency work.",
+            "HOTSPOT_PAPER_TAGS": [],
+            "HOTSPOT_PAPER_COMMENT": "",
+            "SCORE": 14,
+            "authors": [
+                "Gradwell Dzikanyanga",
+                "Yanqi Pan",
+                "Weihao Yang",
+                "Donglei Wu",
+                "Wen Xia",
+                "Hao Huang"
+            ],
+            "title": "High-accuracy Low-Bit KV-Cache Quantization via Local Distribution Restoration",
+            "abstract": "Long-context large language model inference relies on the KV cache to avoid redundant attention computation, but incurs high memory and bandwidth overheads. Low-bit KV-cache quantization reduces this cost, yet it severely degrade quality; particularly, one-bit quantization reduces accuracy from 84.2% to 47.8% on Llama-3.1-8B under RULER. Rather than common beliefs that absolute error of logits, we find that the root cause is structured local misranking, where the distribution of logits in top-K region is drifted. We thereby propose local distribution restoration, a new technique that detects steps with high local distribution risk from quantized-logit features and restores only the selected top-K candidate distribution before token selection. We implement DGAP to achieve local distribution restoration, with efficient risk detcetors and correctors. Expeirments show that on Llama-3.1-8B, DGAP recovers K1V1 RULER accuracy from 47.8% to 83.2% and reduces distribution drift from 0.38 to 0.14; across Llama, Mistral, and Qwen models, it preserves the persistent low-bit KV-cache footprint with modest decode overhead.",
+            "arxiv_id": "2607.16248",
+            "PRIMARY_TOPIC_LABEL": "Efficiency, Compression, and Large-Scale Training",
+            "MATCHED_TOPIC_LABELS": [
+                "Efficiency, Compression, and Large-Scale Training"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [],
+            "HOTSPOT_PAPER_PRIMARY_KIND": null,
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+        },
+        "2606.28486": {
+            "ARXIVID": "2606.28486",
+            "COMMENT": "Casts SGD training as stochastic evolution of a random matrix ensemble, deriving a BBP eigenvalue-detachment transition and a trainability phase diagram in learning rate and init variance.",
+            "RELEVANCE": 7,
+            "NOVELTY": 7,
+            "PRIMARY_TOPIC_ID": "architecture_training",
+            "MATCHED_TOPIC_IDS": [
+                "training_systems",
+                "architecture_training"
+            ],
+            "TOPIC_MATCH_COMMENT": "Training-dynamics analysis connecting optimization hyperparameters to trainability.",
+            "HOTSPOT_PAPER_TAGS": [],
+            "HOTSPOT_PAPER_COMMENT": "",
+            "SCORE": 14,
+            "authors": [
+                "Chanju Park",
+                "Dario Bocchi",
+                "Francesco D'Amico",
+                "Biagio Lucini",
+                "Gert Aarts"
+            ],
+            "title": "Spectral phase transitions and trainability in neural network learning dynamics",
+            "abstract": "The emergence of low-dimensional structures in the spectra of neural network weight matrices is a common empirical feature of trained models, but the dynamical origin of this phenomenon during learning remains an open problem. We formulate neural network training as the stochastic evolution of an initially random matrix ensemble, driven by stochastic gradient descent (SGD) updates that reshape the spectral bulk while amplifying signal strength. This induces a Baik-Ben Arous-Péché (BBP) transition during training, where isolated eigenvalues detach from the random bulk distribution, providing a dynamical framework for representation formation in high-dimensional learning dynamics. We demonstrate this in a solvable linear teacher-student model, where spectral evolution is analytically tractable and a phase diagram of trainability governed by the step size (or learning rate) and initial weight variance is obtained, and subsequently extend our formalism beyond the linear regime to nonlinear and stochastic settings. Numerical simulations in realistic settings support this picture, showing robust emergence of spectral alignment during training. Our results suggest that spectral analysis may provide a unified perspective of stochastic learning dynamics, linking trainability, optimisation hyperparameters, spectral phase transitions, and representation learning in neural networks.",
+            "arxiv_id": "2606.28486",
+            "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+            "MATCHED_TOPIC_LABELS": [
+                "Large-Scale Training Systems and Efficiency",
+                "Architecture and Training Dynamics"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [],
+            "HOTSPOT_PAPER_PRIMARY_KIND": null,
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+        },
+        "2606.28057": {
+            "ARXIVID": "2606.28057",
+            "COMMENT": "Replaces the vocabulary-linear embedding matrix with multi-hash signatures plus hash encoder/decoder, enabling causal LM under collisions and constant-footprint vocabulary expansion.",
+            "RELEVANCE": 7,
+            "NOVELTY": 7,
+            "PRIMARY_TOPIC_ID": "architecture_training",
+            "MATCHED_TOPIC_IDS": [
+                "architecture_training",
+                "efficiency_scaling"
+            ],
+            "TOPIC_MATCH_COMMENT": "A new architectural mechanism for token representation, validated in pretraining at up to 3B.",
+            "HOTSPOT_PAPER_TAGS": [],
+            "HOTSPOT_PAPER_COMMENT": "",
+            "SCORE": 14,
+            "authors": [
+                "Huiyin Xue",
+                "Atsuki Yamaguchi",
+                "Nikolaos Aletras"
+            ],
+            "title": "MultiHashFormer: Hash-based Generative Language Models",
+            "abstract": "Language models (LMs) represent tokens using embedding matrices that scale linearly with the vocabulary size. To constrain the parameter footprint, prior work proposes hashing many tokens into a single vector within encoder-only models. While this offers parameter efficiency, many-to-one collisions prevent its use in causal LMs. In this paper, we propose MultiHashFormer, a new framework that allows hash-based autoregression. Each token is represented as a unique hash signature, a short sequence of discrete hash IDs, generated by multiple independent hash functions. A Hash Encoder compresses this signature into a single latent vector for processing by a Transformer decoder. Then, a Hash Decoder generates the hash signature of the next token, which is then mapped back to text. We evaluate our approach at the 100M, 1B and 3B parameter scales, demonstrating that MultiHashFormer consistently outperforms standard Transformer LMs across multiple benchmarks. Furthermore, we show that our model handles multilingual vocabulary expansion with a constant parameter footprint without any modifications.",
+            "arxiv_id": "2606.28057",
+            "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+            "MATCHED_TOPIC_LABELS": [
+                "Architecture and Training Dynamics",
+                "Efficiency, Compression, and Large-Scale Training"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [],
+            "HOTSPOT_PAPER_PRIMARY_KIND": null,
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+        },
+        "2606.27732": {
+            "ARXIVID": "2606.27732",
+            "COMMENT": "Resolves the bidirectional-attention versus KV-cache dilemma in diffusion LMs by pairing causal attention with a lightweight reverse Mamba sidecar for compressed right context, validated on 60B-token continued pretraining.",
+            "RELEVANCE": 7,
+            "NOVELTY": 7,
+            "PRIMARY_TOPIC_ID": "architecture_training",
+            "MATCHED_TOPIC_IDS": [
+                "architecture_training",
+                "efficiency_scaling"
+            ],
+            "TOPIC_MATCH_COMMENT": "A new architectural mechanism combining attention and state-space modelling, trained at meaningful scale.",
+            "HOTSPOT_PAPER_TAGS": [],
+            "HOTSPOT_PAPER_COMMENT": "",
+            "SCORE": 14,
+            "authors": [
+                "Yuhang Chen",
+                "Xianfeng Wu",
+                "Jinhao Duan",
+                "Mingfu Liang",
+                "Xiaohan Wei",
+                "Yunchen Pu",
+                "Fei Tian",
+                "Chonglin Sun",
+                "Parish Aggarwal",
+                "Frank Shyu",
+                "Luke Simon",
+                "Sandeep Pandey",
+                "Xi Liu",
+                "Tianlong Chen"
+            ],
+            "title": "Bifocal Diffusion Language Models: Asymmetric Bidirectional Context for Parallel Generation",
+            "abstract": "Discrete diffusion language models (dLLMs) recover masked tokens in parallel, offering significant speedups over autoregressive (AR) generation. However, such promising frameworks face a fundamental architectural design dilemma: \\ding{182} Adopting bidirectional attention achieves strong generation quality by allowing each position to access the full context, but is inherently incompatible with KV caching, limiting inference throughput in batch-serving scenarios; \\ding{183} Conversely, causal attention enables efficient cached inference but loses all right-side context, substantially degrading generation quality. This paper introduces Bifocal dLLMs, a new paradigm that resolves this dilemma through \\emph{asymmetric bidirectional context}. Analogous to bifocal lenses, we instantiate the paradigm as \\textbf{R2LM} (Right-to-Left Mamba), which combines two complementary mechanisms: $a$) standard causal attention providing precise left-context with full KV cache compatibility, while $b$) a lightweight reverse Mamba SSM sidecar supplying compressed right-side context without breaking cacheability. Comprehensive experiments on continued pretraining of Qwen3-1.7B with 60B tokens demonstrate that R2LM achieves $2.4\\times$ to $12.9\\times$ higher throughput than bidirectional dLLMs and $1.9\\times$ to $2.9\\times$ speedup over AR baselines in batch serving through parallel decoding with KV caching, while exceeding the causal baseline on most benchmarks and surpassing the bidirectional dLLM on average.",
+            "arxiv_id": "2606.27732",
+            "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+            "MATCHED_TOPIC_LABELS": [
+                "Architecture and Training Dynamics",
+                "Efficiency, Compression, and Large-Scale Training"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [],
+            "HOTSPOT_PAPER_PRIMARY_KIND": null,
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+        },
+        "2606.29519": {
+            "ARXIVID": "2606.29519",
+            "COMMENT": "Derives a threshold at which heavy-tailed learning-dynamics fluctuations sustain power-law rather than exponential forgetting, with one spectral exponent governing both time-scale spread and memory decay.",
+            "RELEVANCE": 7,
+            "NOVELTY": 7,
+            "PRIMARY_TOPIC_ID": "architecture_training",
+            "MATCHED_TOPIC_IDS": [
+                "training_systems",
+                "architecture_training"
+            ],
+            "TOPIC_MATCH_COMMENT": "Training-dynamics theory explaining when recurrent sequence models can learn long-range dependence at all.",
+            "HOTSPOT_PAPER_TAGS": [],
+            "HOTSPOT_PAPER_COMMENT": "",
+            "SCORE": 14,
+            "authors": [
+                "Lorenzo Livi"
+            ],
+            "title": "Anti-Collapse Dynamics and the Emergence of Multi-Time-Scale Learning in Recurrent Neural Networks",
+            "abstract": "Long-range learning is hard for recurrent networks trained with stochastic gradient descent, because the influence of a past input fades with the lag $\\ell$, and if it fades too fast the dependence cannot be learned from finite data. This fade is captured by an envelope $f(\\ell)$. An exponential fade makes the data needed to learn a lag-$\\ell$ dependence grow exponentially, putting long horizons out of reach; a power-law fade keeps the cost polynomial. We show that the asymptotic decay behavior of $f(\\ell)$ is not fixed by the architecture. Instead, it emerges from the coupling between the state dynamics and parameter dynamics, settling into either a collapsed regime (fast, exponential forgetting) or an extended, anti-collapsed regime (slow, power-law forgetting). The intuition is a competition within these coupled dynamics. Training drives the network's effective time scales toward short ones, while rare, heavy-tailed fluctuations of the learning dynamics push a few of them to very long values. Along the route studied here, the extended regime survives only when these heavy-tailed pushes are strong enough to balance the pull. We make this mathematically precise with a coarse-grained stochastic process and derive an explicit threshold at which this route to the extended regime becomes available. A single exponent, the spectral exponent~$β$, then governs both the spread of time scales and how slowly the network forgets. Realizing the regime in practice needs one more ingredient: the joint action of the architecture and the optimizer must be able to hold such a broad spread. A network whose capacity to generate broad time-scale spectra is severely constrained still collapses, even when supplied with strong heavy-tailed forcing. Heavy-tailed fluctuations thus act not as noise to be suppressed, but as the mechanism that sustains long-range learning.",
+            "arxiv_id": "2606.29519",
+            "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+            "MATCHED_TOPIC_LABELS": [
+                "Large-Scale Training Systems and Efficiency",
+                "Architecture and Training Dynamics"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [],
+            "HOTSPOT_PAPER_PRIMARY_KIND": null,
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+        },
+        "2606.29554": {
+            "ARXIVID": "2606.29554",
+            "COMMENT": "Shows fixed-clock optimizer state makes equal-multiset shuffle order an O(eta) rather than O(eta^2) effect, with measured order-variance slopes of 1.83 for AdamW versus 4.00 for SGD.",
+            "RELEVANCE": 7,
+            "NOVELTY": 7,
+            "PRIMARY_TOPIC_ID": "training_systems",
+            "MATCHED_TOPIC_IDS": [
+                "training_systems",
+                "architecture_training"
+            ],
+            "TOPIC_MATCH_COMMENT": "Optimizer-dynamics analysis with direct consequences for how training comparisons are run and seeded.",
+            "HOTSPOT_PAPER_TAGS": [],
+            "HOTSPOT_PAPER_COMMENT": "",
+            "SCORE": 14,
+            "authors": [
+                "John Sweeney"
+            ],
+            "title": "Optimizer Memory Makes Shuffle Order a First-Order Source of Fine-Tuning Noise",
+            "abstract": "Shuffle order can be a larger source of fine-tuning noise than a memoryless analysis predicts: fixed-clock optimizer memory makes local equal-multiset contrasts first order in the learning rate rather than second order, and the resulting order channel can be large enough for a single seed to flip a close A/B comparison. We isolate this mechanism and derive a fit-free way to size the noise it produces. For a memoryless optimizer, reordering an equal multiset has no first-order endpoint term; the leading local contrast is the $O(η^2)$ gradient bracket. Fixed-clock optimizers such as AdamW are different. Their moment buffers, preconditioner state, and de-biasing counters advance with the step index rather than with the learning-rate-scaled time $τ=ηk$, so the same gradient can receive a position-dependent endpoint weight. For any fixed finite measurement window, a lifted-state expansion gives an $O(η)$ equal-multiset contrast whenever the first-order replay coefficient is nonzero, while regular and clock-matched controls remain $O(η^2)$; a bare fixed-$β$ momentum buffer is already enough. A bitwise-deterministic replay from one warmed optimizer state isolates the mechanism, giving order-variance slopes 1.83 for AdamW, 2.00 for fixed-$β$ momentum, and 4.00 for SGD; matching the memory clock to $τ$ restores the regular exponent. For AdamW with a frozen preconditioner, the same impulse-weight kernel gives a closed-form asymptotic order-variance floor after the local potentials are measured, with no fitted coefficients. The result is local to the measurement window (independent reshuffling can average the channel across windows), but it yields order-noise error bars, positional attribution weights, and a seed-budget criterion for fine-tuning comparisons.",
+            "arxiv_id": "2606.29554",
+            "PRIMARY_TOPIC_LABEL": "Large-Scale Training Systems and Efficiency",
+            "MATCHED_TOPIC_LABELS": [
+                "Large-Scale Training Systems and Efficiency",
+                "Architecture and Training Dynamics"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [],
+            "HOTSPOT_PAPER_PRIMARY_KIND": null,
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+        },
+        "2606.27759": {
+            "ARXIVID": "2606.27759",
+            "COMMENT": "Replaces STE with layerwise progressive binarization and traces depth collapse to activation-induced gradient blockades, showing progression order is decisive.",
+            "RELEVANCE": 7,
+            "NOVELTY": 7,
+            "PRIMARY_TOPIC_ID": "efficiency_scaling",
+            "MATCHED_TOPIC_IDS": [
+                "architecture_training",
+                "efficiency_scaling"
+            ],
+            "TOPIC_MATCH_COMMENT": "A new quantization-training mechanism with a mechanistic account of why deep binary nets fail to train.",
+            "HOTSPOT_PAPER_TAGS": [],
+            "HOTSPOT_PAPER_COMMENT": "",
+            "SCORE": 14,
+            "authors": [
+                "Evan Gibson Smith",
+                "Bashima Islam"
+            ],
+            "title": "Layerwise Progressive Freezing: A Training Scaffold for Depth-Scalable Binary Networks",
+            "abstract": "Training binary neural networks (BNNs) from scratch is dominated by the straight-through estimator (STE), whose forward/backward mismatch produces severe accuracy degradation as networks deepen. We study an orthogonal axis: when and where binarization is enforced during training. We introduce StoMPP (Stochastic Masked Partial Progressive Binarization), which gradually replaces clipped weights and activations with their hard binary counterparts layer by layer from input to output, using stochastic partial masks with soft refresh. StoMPP delivers two complementary benefits. As a standalone training rule, it provides a fully STE-free procedure that improves over vanilla STE with gains that grow with depth (ResNet-50 BNN: +18.0/+13.5/+3.8 on CIFAR-10/100/ImageNet), and the pattern holds across ResNet-18/34/50, MobileNetV2, and BERT fine-tuning. Composed with surrogate gradients by applying STE only to frozen entries, it reaches +27.1/+19.8/+17.7 over vanilla STE on the same setting. Underlying both regimes is a single mechanistic finding: progression order is decisive. Forward layerwise progression prevents depth collapse, reverse progression collapses to near-chance, and binary-weight networks (without binary activations) are insensitive to order. We trace this asymmetry to activation-induced gradient blockades: a committed binary activation severs gradient flow upstream, and ordering controls when these blockades form. To isolate the progression's contribution from any benefit conferred by STE, we conduct all ablations in the STE-free regime; the resulting characterization (schedule, refresh, ordering, dynamics) thus reflects the progression itself rather than its interaction with surrogate gradients.",
+            "arxiv_id": "2606.27759",
+            "PRIMARY_TOPIC_LABEL": "Efficiency, Compression, and Large-Scale Training",
+            "MATCHED_TOPIC_LABELS": [
+                "Architecture and Training Dynamics",
+                "Efficiency, Compression, and Large-Scale Training"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [],
+            "HOTSPOT_PAPER_PRIMARY_KIND": null,
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+        },
+        "2607.16261": {
+            "ARXIVID": "2607.16261",
+            "COMMENT": "Reformulates the parameter update to explicitly minimize per-sample loss increases, made tractable by reducing to batch dimensionality on the last linear layer, with overhead that shrinks as models grow.",
+            "RELEVANCE": 7,
+            "NOVELTY": 6,
+            "PRIMARY_TOPIC_ID": "training_systems",
+            "MATCHED_TOPIC_IDS": [
+                "training_systems",
+                "architecture_training"
+            ],
+            "TOPIC_MATCH_COMMENT": "An optimizer-level modification that drops into SGD and AdamW, with favourable scaling behaviour.",
+            "HOTSPOT_PAPER_TAGS": [],
+            "HOTSPOT_PAPER_COMMENT": "",
+            "SCORE": 13,
+            "authors": [
+                "Apostolos Avranas"
+            ],
+            "title": "Reducing Per-Sample Interference in Stochastic Optimization",
+            "abstract": "Modern optimizers combine gradients from the current mini-batch with historical optimization state, such as momentum or adaptive moments. While effective, this standard practice can produce parameter updates that actively increase the loss of individual samples. We term this phenomenon per-sample interference and propose redefining the parameter update as an optimization problem that explicitly minimizes it. Because the exact formulation of the problem is computationally prohibitive, we introduce a highly efficient surrogate. By reducing the problem's dimensionality to the batch size and restricting the optimization to the last linear layer, we overcome memory and speed bottlenecks. This strategy hinges on our unexpected finding that this layer alone can reliably capture core second-order statistics of the full network. The resulting surrogate problem integrates readily into standard optimizers like SGD and AdamW, and can be solved using a small number of GPU-friendly iterations. Crucially, the method exhibits favorable scaling properties, as the relative computational overhead shrinks as the model size or input grows. Experiments on image classification benchmarks confirm reduced per-sample interference and improved generalization.",
+            "arxiv_id": "2607.16261",
+            "PRIMARY_TOPIC_LABEL": "Large-Scale Training Systems and Efficiency",
+            "MATCHED_TOPIC_LABELS": [
+                "Large-Scale Training Systems and Efficiency",
+                "Architecture and Training Dynamics"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [],
+            "HOTSPOT_PAPER_PRIMARY_KIND": null,
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+        },
+        "2608.23573": {
+            "ARXIVID": "2608.23573",
+            "COMMENT": "Training-free bigram-entropy statistic predicts Weibull weight-scale growth across learning rates, a forward predictor of training dynamics.",
+            "RELEVANCE": 7,
+            "NOVELTY": 6,
+            "PRIMARY_TOPIC_ID": "architecture_training",
+            "MATCHED_TOPIC_IDS": [
+                "training_systems",
+                "architecture_training"
+            ],
+            "TOPIC_MATCH_COMMENT": "Core contribution is an empirical law linking data statistics to weight-norm evolution during transformer training.",
+            "HOTSPOT_PAPER_TAGS": [],
+            "HOTSPOT_PAPER_COMMENT": "",
+            "SCORE": 13,
+            "authors": [
+                "Tiexin Ding"
+            ],
+            "title": "Data Predictability Shapes Weibull Weight-Scale Growth in Transformer Training",
+            "abstract": "A trained transformer's weight magnitudes can be summarized by a two-parameter Weibull distribution whose shape $k \\approx 1.2$ is stable across layers and models, so the scale $λ$ carries most training-induced movement. What corpus property sets how much $λ$ grows? Using the bigram conditional entropy $D = H(\\text{next} \\mid \\text{prev})$, a training-free statistic computed before training, we find across controlled corruption families a learning-rate-conditioned law, $λ^2 - λ_0^2 = C_0(η) + C_1(η)(H_r - D)^{0.59}$, where $H_r$ is a matched-budget shuffle baseline. The convex exponent is inherited from an independently measured data-side saturation relation rather than fitted directly to the growth curve. After removing the two per-$η$ coefficients, 23 runs spanning an order of magnitude in learning rate collapse onto $(H_r - D)^{0.59}$ with unit slope ($R^2 = 0.941$; direct per-$η$ fits are weaker, $R^2 \\approx 0.82$). Because $D$ is computed before training, the law is a forward predictor: an end-to-end self-validation recovers held-out within-family weight growth with 5.7% relative error. The readout holds at model and per-layer resolutions and across two tested architectures, with the functional form preserved and only the coefficients changing. It also marks its boundary: cross-corpus prediction over-predicts code, implicating redundancy as a second axis of a broader $Φ(D,R,A,H)$ data-to-weight framework.",
+            "arxiv_id": "2608.23573",
+            "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+            "MATCHED_TOPIC_LABELS": [
+                "Large-Scale Training Systems and Efficiency",
+                "Architecture and Training Dynamics"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [],
+            "HOTSPOT_PAPER_PRIMARY_KIND": null,
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+        },
+        "2607.24788": {
+            "ARXIVID": "2607.24788",
+            "COMMENT": "Exploits layer-wise heterogeneity in softmax sensitivity to give each layer a variable-size sliding window plus linear recurrence, non-uniformly compressing the KV footprint.",
+            "RELEVANCE": 7,
+            "NOVELTY": 6,
+            "PRIMARY_TOPIC_ID": "architecture_training",
+            "MATCHED_TOPIC_IDS": [
+                "architecture_training",
+                "efficiency_scaling"
+            ],
+            "TOPIC_MATCH_COMMENT": "A hybrid attention/recurrence architectural mechanism whose payoff is KV-cache efficiency.",
+            "HOTSPOT_PAPER_TAGS": [],
+            "HOTSPOT_PAPER_COMMENT": "",
+            "SCORE": 13,
+            "authors": [
+                "Vimal William",
+                "Ravi Tandon",
+                "Jyotikrishna Dass"
+            ],
+            "title": "GLIDE: Guided Layerwise Hybrid Attention for Efficient LLM Inference",
+            "abstract": "As Large Language Models scale to increasingly long contexts, the memory I/O and computational overhead of the Key-Value (KV) cache during decoding emerges as the primary throughput bottleneck. To address this, we propose GLIDE, a Guided Layerwise Hybrid Attention that strategically integrates sliding-window softmax attention with linear recurrent aggregation. GLIDE is motivated by layer-wise heterogeneity: early layers exhibit high sensitivity to softmax removal, while deeper layers demonstrate redundancy and tolerate aggressive replacement by linear alternatives. Leveraging this insight, GLIDE introduces a layer-wise adaptive mechanism wherein each layer balances an efficient linear recurrence with a variable-sized softmax window. Unlike uniform hybrid approaches, GLIDE non-uniformly compresses the softmax footprint across the model, reducing aggregate KV cache I/O while preserving expressive power where most vital. Empirical evaluations demonstrate the GLIDE achieves superior performance-efficiency tradeoffs, reducing end-to-end latency for long-context generation without compromising quality.",
+            "arxiv_id": "2607.24788",
+            "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+            "MATCHED_TOPIC_LABELS": [
+                "Architecture and Training Dynamics",
+                "Efficiency, Compression, and Large-Scale Training"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [],
+            "HOTSPOT_PAPER_PRIMARY_KIND": null,
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+        },
+        "2606.29563": {
+            "ARXIVID": "2606.29563",
+            "COMMENT": "Links eviction-induced degradation to lost unique-token coverage and bounds it via mutual information, then retains tokens across heads and layers accordingly.",
+            "RELEVANCE": 7,
+            "NOVELTY": 6,
+            "PRIMARY_TOPIC_ID": "efficiency_scaling",
+            "MATCHED_TOPIC_IDS": [
+                "efficiency_scaling"
+            ],
+            "TOPIC_MATCH_COMMENT": "KV-cache memory efficiency with a new coverage criterion replacing attention-sparsity heuristics.",
+            "HOTSPOT_PAPER_TAGS": [],
+            "HOTSPOT_PAPER_COMMENT": "",
+            "SCORE": 13,
+            "authors": [
+                "Shuvendu Roy",
+                "Mengyao Zhai",
+                "Hossein Hajimirsadeghi",
+                "Golnoosh Samei"
+            ],
+            "title": "Coverage-Driven KV Cache Eviction for Efficient and Improved Inference of LLM",
+            "abstract": "Large language models (LLMs) excel at complex tasks like question answering and summarization, thanks to their ability to handle long-context inputs. However, deploying LLMs is costly, not only due to the high computational demands of quadratic complexity of self-attention and auto-regressive generation, but also because of the significant memory overhead required for storing the key-value (KV) cache during inference. To reduce the memory cost, existing KV-cache eviction strategies leverage the sparsity in attention to selectively store a subset of tokens. While reducing the memory footprint, such approaches show a considerable drop in performance, especially in tasks that require long-context reasoning. We identify that the drop in performance is linked to a reduction in the coverage of unique tokens. Additionally, we theoretically show that reduced coverage limits the mutual information between inputs and outputs, thereby impairing predictive accuracy. To this end, we introduce K-VEC, a novel coverage-aware KV-cache eviction strategy that prioritizes token coverage while evicting tokens in the cache. K-VEC introduces a cross-head and a cross-layer coverage module to enhance token retention across attention heads and model layers, mitigating performance degradation caused by low coverage. Evaluated on 16 LongBench subsets, K-VEC exhibit up to 10.35 points improvement over the existing methods under the same eviction rate and memory constraint. Comprehensive evaluations validate the effectiveness of our approach and demonstrate its potential for efficient LLM deployment in resource-constrained settings.",
+            "arxiv_id": "2606.29563",
+            "PRIMARY_TOPIC_LABEL": "Efficiency, Compression, and Large-Scale Training",
+            "MATCHED_TOPIC_LABELS": [
+                "Efficiency, Compression, and Large-Scale Training"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [],
+            "HOTSPOT_PAPER_PRIMARY_KIND": null,
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+        },
+        "2606.27743": {
+            "ARXIVID": "2606.27743",
+            "COMMENT": "Budget-conditioned gates trained end-to-end so one model traces the whole compute-accuracy frontier via layer skipping, head pruning, and reasoning-token reduction.",
+            "RELEVANCE": 7,
+            "NOVELTY": 6,
+            "PRIMARY_TOPIC_ID": "efficiency_scaling",
+            "MATCHED_TOPIC_IDS": [
+                "architecture_training",
+                "efficiency_scaling"
+            ],
+            "TOPIC_MATCH_COMMENT": "Dynamic computation conditioned on runtime budget, a sparsity mechanism rather than deployment tuning.",
+            "HOTSPOT_PAPER_TAGS": [],
+            "HOTSPOT_PAPER_COMMENT": "",
+            "SCORE": 13,
+            "authors": [
+                "Yuhang Chen",
+                "Jinhao Duan",
+                "Ruichen Zhang",
+                "Mingfu Liang",
+                "Xiaohan Wei",
+                "Yunchen Pu",
+                "Fei Tian",
+                "Chonglin Sun",
+                "Parish Aggarwal",
+                "Frank Shyu",
+                "Luke Simon",
+                "Sandeep Pandey",
+                "Tianlong Chen",
+                "Xi Liu"
+            ],
+            "title": "End-to-End Dynamic Sparsity for Resource-Adaptive LLM Inference",
+            "abstract": "Large Language Models (LLMs) inference is typically deployed under a static resource assumption, where models execute a fixed computational graph regardless of the runtime environment. However, real-world cloud infrastructure is inherently dynamic, characterized by fluctuating availability (e.g., spot instance preemption) and tiered Quality-of-Service requirements. In such volatile settings, static models are inflexible: they either crash under resource constraints or waste compute on redundant operations. To bridge this gap, we propose Learning to Allocate (L2A), an end-to-end framework for resource-adaptive inference. Unlike prior methods that condition only on input difficulty, we formulate inference as a constrained allocation problem conditioned on both the input and the runtime resource budget itself. We introduce lightweight, budget-conditioned and input-aware gating networks integrated into the LLM. These gates are trained via a unified objective that jointly optimizes task performance, logical consistency, and resource costs along three axes matching how real-world dynamics manifest: layer skipping for memory and depth pressure, head pruning for throughput contention, and reasoning-token reduction for latency tightening. This lets the model learn a budget-aware policy beyond input difficulty alone: it adaptively configures its computational footprint with respect to real-time resource dynamics, maximizing reasoning depth when resources permit while enforcing strict frugality when budgets tighten. A single L2A model traces the entire compute-accuracy Pareto frontier on Llama-3-8B and Qwen-3-4B: at up to 34% realized layer sparsity, it stays within 0.6% of the dense baseline on GSM8K, with the same gap holding zero-shot on out-of-distribution tasks, while every static or heuristic baseline requires a separately tuned model and still drops by 5-10% at comparable inference time.",
+            "arxiv_id": "2606.27743",
+            "PRIMARY_TOPIC_LABEL": "Efficiency, Compression, and Large-Scale Training",
+            "MATCHED_TOPIC_LABELS": [
+                "Architecture and Training Dynamics",
+                "Efficiency, Compression, and Large-Scale Training"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [],
+            "HOTSPOT_PAPER_PRIMARY_KIND": null,
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+        },
+        "2608.26139": {
+            "ARXIVID": "2608.26139",
+            "COMMENT": "Identifies gradient starvation suppressing sparse semantic-dependency signals early in optimization, explaining the phase-transition emergence of structural reasoning and why CoT bypasses it.",
+            "RELEVANCE": 7,
+            "NOVELTY": 6,
+            "PRIMARY_TOPIC_ID": "architecture_training",
+            "MATCHED_TOPIC_IDS": [
+                "architecture_training"
+            ],
+            "TOPIC_MATCH_COMMENT": "Optimization-dynamics account of what transformers learn when, validated from toy models to 7-8B production models.",
+            "HOTSPOT_PAPER_TAGS": [],
+            "HOTSPOT_PAPER_COMMENT": "",
+            "SCORE": 13,
+            "authors": [
+                "Jiangrui Zhao",
+                "Xiaoting Du"
+            ],
+            "title": "Syntax vs. Semantics: How Transformers Learn Deep Dependencies",
+            "abstract": "Large Language Models demonstrate remarkable syntactic fluency, yet the optimization dynamics governing their acquisition of deep semantic dependencies remain poorly understood. We propose a mechanistic framework that models this learning process as a competition between Surface Statistics and Deep Semantics. Our theoretical analysis identifies a ``Gradient Starvation\" phenomenon where the error signals for sparse semantic dependencies are actively suppressed during early optimization. This suppression impedes the learning of structural reasoning and causes its emergence to manifest as a sudden phase transition. Furthermore, this framework offers a mechanistic basis for the effectiveness of Chain-of-Thought (CoT) strategies. By externalizing intermediate reasoning steps into concrete tokens, CoT effectively bypasses the suppression regime inherent to implicit reasoning. We validate these findings across scales ranging from toy transformers to production models (Llama-3.1-8B, Qwen2.5-Coder-7B). Finally, guided by this theory, we propose a topology-aligned contrastive objective that explicitly rectifies the gradient geometry. Experiments on variable binding tasks demonstrate that our method achieves an improvement that is over 2x larger than that obtained via standard cross-entropy fine-tuning.",
+            "arxiv_id": "2608.26139",
+            "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+            "MATCHED_TOPIC_LABELS": [
+                "Architecture and Training Dynamics"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [],
+            "HOTSPOT_PAPER_PRIMARY_KIND": null,
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+        },
+        "2606.27696": {
+            "ARXIVID": "2606.27696",
+            "COMMENT": "Class-frequency-dependent noise schedules address rare-class score-estimation errors in diffusion training.",
+            "RELEVANCE": 7,
+            "NOVELTY": 6,
+            "PRIMARY_TOPIC_ID": "architecture_training",
+            "MATCHED_TOPIC_IDS": [
+                "architecture_training"
+            ],
+            "TOPIC_MATCH_COMMENT": "The core contribution connects class imbalance to diffusion training dynamics and changes noise scheduling accordingly, giving a focused training-mechanism contribution.",
+            "HOTSPOT_PAPER_TAGS": [],
+            "HOTSPOT_PAPER_COMMENT": "",
+            "SCORE": 13,
+            "authors": [
+                "Jiequan Cui",
+                "Beier Zhu",
+                "Qingshan Xu",
+                "Xiaojuan Qi",
+                "Bei Yu",
+                "Hanwang Zhang"
+            ],
+            "title": "Class-frequency Guided Noise Schedule for Diffusion Models",
+            "abstract": "In this paper, we are the first to examine the correlations between class frequency and the multi-scale noise schedule within diffusion models. For score-based generative models, low-density regions often lead to inaccurately estimated scores, thereby compromising the generation quality. Although the multi-scale noise schedule can alleviate this issue during the diffusion process, low-frequency classes still face the challenge of large low-density regions, resulting in more inaccurate estimated scores than high-frequency classes. Furthermore, high-frequency classes tend to dominate the score space, causing a convergence of most data points towards generating samples from these classes. Consequently, samples generated within low-frequency classes exhibit suboptimal quality and limited diversity. To address this challenge, we propose the \\textit{Class-frequency Guided (CFRG)} noise schedule, leveraging the insight that low-frequency classes should be endowed with larger-scale noises. To illustrate the effectiveness of our method, we conduct experiments on various tasks, including image generation, image classification, and text-to-image generation, using imbalanced datasets, \\textit{i.e.}, CIFAR-100-LT, and ImageNet-LT. By employing the CFRG noise schedule, we achieve substantial improvements over baselines, manifesting the crucial role of frequency statistics in noise schedule design.",
+            "arxiv_id": "2606.27696",
+            "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+            "MATCHED_TOPIC_LABELS": [
+                "Architecture and Training Dynamics"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [],
+            "HOTSPOT_PAPER_PRIMARY_KIND": null,
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+        },
+        "2606.29275": {
+            "ARXIVID": "2606.29275",
+            "COMMENT": "Trains diffusion LMs over a distribution of prefix-window configurations to remove the fixed-block train/inference mismatch, with a support-coverage argument for generalization across decoding policies.",
+            "RELEVANCE": 6,
+            "NOVELTY": 6,
+            "PRIMARY_TOPIC_ID": "architecture_training",
+            "MATCHED_TOPIC_IDS": [
+                "architecture_training"
+            ],
+            "TOPIC_MATCH_COMMENT": "Core contribution is a training-objective/dynamics change in a sequence-modelling architecture, requiring no architectural edit.",
+            "HOTSPOT_PAPER_TAGS": [],
+            "HOTSPOT_PAPER_COMMENT": "",
+            "SCORE": 12,
+            "authors": [
+                "Gagan Jain"
+            ],
+            "title": "Adaptive Block Diffusion: Resolving Training-Inference Mismatch in Diffusion Language Models",
+            "abstract": "Diffusion Language Models (DLMs) are typically trained under fixed context structures, restricting denoising to predetermined token subsets. This creates a mismatch between training and inference, where models must operate over arbitrary configurations, leading to degradation off the training grid. We propose Adaptive Block Diffusion (ABD), which resolves this mismatch by optimizing denoising risk over a distribution of prefix-window configurations. By treating the configuration as a stochastic variable, ABD trains a single model over the full configuration space without architectural changes. We show that generalization across decoding strategies is governed by the support of the training distribution, and that ABD guarantees denoising optimality for any inference policy whose configurations are covered during training. Empirically, ABD exhibits structural invariance across decoding scales, avoiding off-grid collapse and recovering a monotonic relationship between block size and perplexity, while matching or outperforming fixed-block specialists at their target scales.",
+            "arxiv_id": "2606.29275",
+            "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+            "MATCHED_TOPIC_LABELS": [
+                "Architecture and Training Dynamics"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [],
+            "HOTSPOT_PAPER_PRIMARY_KIND": null,
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+        },
+        "2606.29215": {
+            "ARXIVID": "2606.29215",
+            "COMMENT": "Multi-block teacher forcing post-trains block diffusion LMs on bounded noise-groups matching multi-block inference states, with a block buffer that keeps shapes static and prefix caches reusable.",
+            "RELEVANCE": 6,
+            "NOVELTY": 6,
+            "PRIMARY_TOPIC_ID": "architecture_training",
+            "MATCHED_TOPIC_IDS": [
+                "architecture_training",
+                "efficiency_scaling"
+            ],
+            "TOPIC_MATCH_COMMENT": "A training-objective fix paired with a decoding schedule, translating parallelism into measured wall-clock gains.",
+            "HOTSPOT_PAPER_TAGS": [],
+            "HOTSPOT_PAPER_COMMENT": "",
+            "SCORE": 12,
+            "authors": [
+                "Yijie Jin",
+                "Jiajun Xu",
+                "Yuxuan Liu",
+                "Chenkai Xu",
+                "Yi Tu",
+                "Jiajun Li",
+                "Dandan Tu",
+                "Xiaohui Yan",
+                "Kai Yu",
+                "Pengfei Liu",
+                "Zhijie Deng"
+            ],
+            "title": "Multi-Block Diffusion Language Models",
+            "abstract": "Block Diffusion Language Models (BD-LMs) improve diffusion-based text generation with KV caching and flexible-length generation. A natural next step is to extend them from Single-Block Diffusion (SingleBD) to Multi-Block Diffusion (MultiBD), where a running-set of consecutive blocks is decoded concurrently for inter-block parallelism. However, existing BD-LMs are mostly trained under teacher forcing, where the model observes only one noisy block conditioned on a clean prefix. While the recent diffusion forcing strategy introduces visibility among multiple noisy blocks, its training states still differ from MultiBD inference, where decoding operates on a bounded running-set with heterogeneous slot-wise noise patterns. To bridge this gap, we propose Multi-Block Diffusion Language Models (MBD-LMs), obtained by post-training BD-LMs with Multi-block Teacher Forcing (MultiTF). MultiTF integrates teacher forcing and diffusion forcing by training on bounded noise-groups conditioned on clean prefixes, with randomized noise-schedulers that better match MultiBD inference states. To make MultiBD practically executable, we further introduce an optimized decoding algorithm based on the Block Buffer mechanism that preserves prefix-cache reuse, keeps input shapes static, and translates increased decoding parallelism into wall-clock acceleration. Empirically, MBD-LLaDA2-Mini increases average Tokens Per Forward pass (TPF) from 3.47 to 6.19 and improves average accuracy from 79.95% to 81.03%; when combined with DMax, MBD-LLaDA2-Mini-DMax reaches an average TPF of 9.34 with only a 1.02% accuracy drop on math and code benchmarks.",
+            "arxiv_id": "2606.29215",
+            "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+            "MATCHED_TOPIC_LABELS": [
+                "Architecture and Training Dynamics",
+                "Efficiency, Compression, and Large-Scale Training"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [],
+            "HOTSPOT_PAPER_PRIMARY_KIND": null,
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+        },
+        "2606.29223": {
+            "ARXIVID": "2606.29223",
+            "COMMENT": "Replaces single early-exit depth selection with parallel exploration over candidate depths, committing only final-depth tokens and collapsing the lattice to keep decoding losslessly equivalent.",
+            "RELEVANCE": 6,
+            "NOVELTY": 6,
+            "PRIMARY_TOPIC_ID": "efficiency_scaling",
+            "MATCHED_TOPIC_IDS": [
+                "architecture_training",
+                "efficiency_scaling"
+            ],
+            "TOPIC_MATCH_COMMENT": "Exploits the depth axis as a dynamic-computation mechanism, though the payoff is decoding throughput rather than training cost.",
+            "HOTSPOT_PAPER_TAGS": [],
+            "HOTSPOT_PAPER_COMMENT": "",
+            "SCORE": 12,
+            "authors": [
+                "Weisi Yang",
+                "Zipeng Sun",
+                "Stephen Xia"
+            ],
+            "title": "Depth Exploration for LLM Decoding",
+            "abstract": "Autoregressive LLM decoding evaluates every generated token through the full layer stack, even though many tokens become predictable at intermediate depths. Existing lossless depth-adaptive methods exploit this redundancy by choosing a single non-final exit depth and verifying its prediction with the final-depth model. However, our measurements show that this selection-based strategy leaves substantial headroom: choosing an exit too late wastes computation, while choosing one too early triggers fallback and discards dependent drafts. We propose Depth Exploration Decoding (DEX), a lossless decoding algorithm that replaces single-depth selection with parallel exploration over multiple candidate depths. At each commit position, DEX validates candidates against the final-depth reference, commits exactly the final-depth token, and collapses the exploration lattice to retain only reusable branch states. This expand--commit--collapse procedure preserves equivalence to standard autoregressive decoding while reducing the cost of committing each token. Across early-exit-trained and standard LLMs, DEX outperforms representative depth-selection baselines and achieves competitive end-to-end throughput against speculative and distributed decoding methods. Moreover, DEX improves as the explored depths become finer, showing that parallel depth exploration provides a scalable way to exploit the underused depth axis of LLM decoding.",
+            "arxiv_id": "2606.29223",
+            "PRIMARY_TOPIC_LABEL": "Efficiency, Compression, and Large-Scale Training",
+            "MATCHED_TOPIC_LABELS": [
+                "Architecture and Training Dynamics",
+                "Efficiency, Compression, and Large-Scale Training"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [],
+            "HOTSPOT_PAPER_PRIMARY_KIND": null,
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+        },
+        "2606.28879": {
+            "ARXIVID": "2606.28879",
+            "COMMENT": "Adam convergence theory dropping i.i.d. and time-invariant-parameter assumptions, via a Lyapunov function blending both moment recursions.",
+            "RELEVANCE": 6,
+            "NOVELTY": 6,
+            "PRIMARY_TOPIC_ID": "training_systems",
+            "MATCHED_TOPIC_IDS": [
+                "training_systems",
+                "architecture_training"
+            ],
+            "TOPIC_MATCH_COMMENT": "Optimizer analysis yielding hyperparameter guidance, though the setting is stochastic dynamic systems rather than pretraining.",
+            "HOTSPOT_PAPER_TAGS": [],
+            "HOTSPOT_PAPER_COMMENT": "",
+            "SCORE": 12,
+            "authors": [
+                "Xin Zheng",
+                "Yifei Jin",
+                "Lei Guo"
+            ],
+            "title": "Analysis of Adam Algorithms for Stochastic Dynamic Systems",
+            "abstract": "The adaptive moment estimation algorithm, known as Adam, is widely used in modern machine learning, owing to its low per-iteration complexity and strong empirical performance. Despite its prevalent use, the theoretical foundation of Adam remains largely unexplored for time-varying and nonstationary systems. In fact, the existing theoretical analyses of Adam-type algorithms are primarily concerned with time-invariant model parameters and explicitly or implicitly rely on independent and identically distributed (i.i.d.) data assumptions, under which the learning taskcan be formulated as minimizing a fixed expected objective with a static minimizer. However, such assumptions are often violated in time-varying and nonstationary systems, thereby calling for a theoretical investigation beyond the conventional yet idealized i.i.d. setting. The main objective of this paper is to solve this challenging problem by establishing a general theory of Adam for time-varying and nonstationary stochastic systems. We will introduce some new techniques for analyzing the products of nonstationary and dependent random matrices induced by Adam's coupled first- and second-moment recursions, and will construct a new stochastic Lyapunov function that blends these two moment dynamics. Under a stochastic excitation condition that allows nonstationary and dependent data, we will derive both parameter tracking and output prediction error bounds explicitly, quantifying the effects of stepsize, first- and second-momentum parameters, gradient noise and parameter drift. These bounds not only provide guarantees for Adam performance, but also provide guidelines for hyperparameter selection. Experiments on both synthetic and real-world data validate our theory and design guidelines.",
+            "arxiv_id": "2606.28879",
+            "PRIMARY_TOPIC_LABEL": "Large-Scale Training Systems and Efficiency",
+            "MATCHED_TOPIC_LABELS": [
+                "Large-Scale Training Systems and Efficiency",
+                "Architecture and Training Dynamics"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [],
+            "HOTSPOT_PAPER_PRIMARY_KIND": null,
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+        },
+        "2606.28242": {
+            "ARXIVID": "2606.28242",
+            "COMMENT": "Exact characterization of generalization error jointly in width, samples, and regularization for a feature-learning quadratic network, yielding a phase diagram of scaling regimes.",
+            "RELEVANCE": 6,
+            "NOVELTY": 6,
+            "PRIMARY_TOPIC_ID": "architecture_training",
+            "MATCHED_TOPIC_IDS": [
+                "training_systems",
+                "architecture_training"
+            ],
+            "TOPIC_MATCH_COMMENT": "Scaling-law theory beyond fixed-feature and infinite-width regimes, though in a two-layer toy model.",
+            "HOTSPOT_PAPER_TAGS": [],
+            "HOTSPOT_PAPER_COMMENT": "",
+            "SCORE": 12,
+            "authors": [
+                "Julius Girardin",
+                "Emanuele Troiani",
+                "Yizhou Xu",
+                "Vittorio Erba",
+                "Florent Krzakala",
+                "Lenka Zdeborová"
+            ],
+            "title": "How Width and Data Shape Generalization Scaling Laws in Quadratic Neural Networks",
+            "abstract": "Understanding how performance scales jointly with model size and data is a central problem in modern machine learning. Existing theoretical works on scaling laws typically describe generalization as a function of data or compute, often in fixed-feature or infinite-width regimes and for online SGD. Here, we instead study how generalization scales with the number of trainable parameters and the number of samples in a feature-learning model. We analyze $\\ell_2$-regularized empirical test error minimization in a quadratic two-layer network in a finite-sample setting with structured data. This setting allows for an explicit characterization of the generalization error as a function of the number of samples, model width, and regularization. Our results reveal a phase diagram with distinct scaling regimes as the number of parameters varies. In particular, the generalization error follows data-dependent power laws controlled by the spectral structure of the target. We further characterize the transitions between regimes, including the onset of interpolation, and their impact on generalization.",
+            "arxiv_id": "2606.28242",
+            "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+            "MATCHED_TOPIC_LABELS": [
+                "Large-Scale Training Systems and Efficiency",
+                "Architecture and Training Dynamics"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [],
+            "HOTSPOT_PAPER_PRIMARY_KIND": null,
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+        },
+        "2606.29184": {
+            "ARXIVID": "2606.29184",
+            "COMMENT": "Bayesian gating over disentangled latent factors gives instance-wise effective rank, with a generalization bound depending on joint effective rank rather than max rank.",
+            "RELEVANCE": 6,
+            "NOVELTY": 6,
+            "PRIMARY_TOPIC_ID": "efficiency_scaling",
+            "MATCHED_TOPIC_IDS": [
+                "efficiency_scaling"
+            ],
+            "TOPIC_MATCH_COMMENT": "Adaptive-rank low-rank adaptation with a supporting complexity analysis.",
+            "HOTSPOT_PAPER_TAGS": [],
+            "HOTSPOT_PAPER_COMMENT": "",
+            "SCORE": 12,
+            "authors": [
+                "Zhibin Duan",
+                "Yuhong Wang",
+                "Jiahong Fu",
+                "Zongsheng Yue",
+                "Bo Chen",
+                "Zongben Xu"
+            ],
+            "title": "BaRA: Bayesian Adaptive Rank Allocation for Parameter-Efficient Fine-Tuning",
+            "abstract": "While Low-rank adaptation (LoRA) enables highly efficient fine-tuning by constraining task-specific updates to fixed low-rank subspaces, this rigid design limits representational flexibility and often results in overconfident predictions and miscalibrated uncertainty, especially in low-data regimes. Recent Bayesian LoRA variants improve uncertainty estimation by modeling posterior distributions over adaptation parameters. However, these approaches typically rely on fixed or heuristically determined ranks, overlooking the inherently context-dependent nature of adaptation capacity. In this paper, we propose BaRA, a Bayesian Adaptive Rank Allocation framework for parameter-efficient fine-tuning. Drawing inspiration from probabilistic topic models, BaRA dynamically allocates adaptation capacity by activating a sparse, context-dependent subset of disentangled latent factors, enabling instance-wise variation in effective rank. This Bayesian formulation provides principled, data-driven capacity control, mitigating over-parameterization while preserving expressiveness. Beyond the modeling contribution, we provide a complexity-theoretic generalization analysis showing that the generalization gap of BaRA depends on the learned joint effective rank $\\bar{s}_{Φ,θ}$ induced by the global-local gate, rather than the maximum rank $r$. This result explains why sparse adaptive rank allocation can reduce the effective hypothesis complexity while preserving input-dependent expressiveness. Extensive experiments on diverse natural language benchmarks demonstrate that BaRA consistently improves predictive performance, robustness, and uncertainty calibration compared to standard LoRA and existing Bayesian LoRA variants.",
+            "arxiv_id": "2606.29184",
+            "PRIMARY_TOPIC_LABEL": "Efficiency, Compression, and Large-Scale Training",
+            "MATCHED_TOPIC_LABELS": [
+                "Efficiency, Compression, and Large-Scale Training"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [],
+            "HOTSPOT_PAPER_PRIMARY_KIND": null,
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+        }
+    },
+    "topic_sections": [
+        {
+            "topic_id": "moe_training",
+            "topic_label": "MoE Training",
+            "paper_ids": [
+                "2606.27866"
+            ]
+        },
+        {
+            "topic_id": "training_systems",
+            "topic_label": "Large-Scale Training Systems and Efficiency",
+            "paper_ids": [
+                "2606.27715",
+                "2606.29158",
+                "2606.29554",
+                "2607.16261",
+                "2606.28879"
+            ]
+        },
+        {
+            "topic_id": "architecture_training",
+            "topic_label": "Architecture and Training Dynamics",
+            "paper_ids": [
+                "2606.28560",
+                "2606.27748",
+                "2606.28486",
+                "2606.28057",
+                "2606.27732",
+                "2606.29519",
+                "2608.23573",
+                "2607.24788",
+                "2608.26139",
+                "2606.27696",
+                "2606.29275",
+                "2606.29215",
+                "2606.28242"
+            ]
+        },
+        {
+            "topic_id": "efficiency_scaling",
+            "topic_label": "Efficiency, Compression, and Large-Scale Training",
+            "paper_ids": [
+                "2606.28932",
+                "2607.16248",
+                "2606.27759",
+                "2606.29563",
+                "2606.27743",
+                "2606.29223",
+                "2606.29184"
+            ]
+        }
+    ]
 }

@@ -2,8 +2,8 @@
     "schema_version": 1,
     "meta": {
         "date": "2026-06-11",
-        "total_candidates": 0,
-        "total_spotlight_papers": 0,
+        "total_candidates": 78,
+        "total_spotlight_papers": 2,
         "thresholds": {
             "daily_hot_score_cutoff": 15,
             "daily_hot_relevance_cutoff": 7,
@@ -18,10 +18,112 @@
     "diagnostics": {
         "candidate_count_by_kind": {
             "new_frontier": 0,
-            "daily_hot": 0
+            "daily_hot": 2
         },
-        "selected_count_by_kind": {}
+        "selected_count_by_kind": {
+            "daily_hot": 2
+        }
     },
-    "papers": {},
-    "sections": []
+    "papers": {
+        "2606.12397": {
+            "ARXIVID": "2606.12397",
+            "COMMENT": "Aligns each router row with the principal singular direction of its expert via a Power-then-Retract iteration with a norm constraint, with a convergence argument and MoE pretraining from 1B to 11B.",
+            "RELEVANCE": 10,
+            "NOVELTY": 8,
+            "PRIMARY_TOPIC_ID": "moe_training",
+            "MATCHED_TOPIC_IDS": [
+                "moe_training",
+                "architecture_training"
+            ],
+            "TOPIC_MATCH_COMMENT": "A design principle for the MoE router itself \u2014 how token-expert affinity should be encoded \u2014 validated by pretraining rather than bolted onto an existing MoE.",
+            "HOTSPOT_PAPER_TAGS": [
+                "daily_hot"
+            ],
+            "HOTSPOT_PAPER_COMMENT": "Broadly important today: Aligns each router row with the principal singular direction of its expert via a Power-then-Retract iteration with a norm constraint, with a convergence argument and MoE pretraining from 1B to 11B.",
+            "SCORE": 18,
+            "authors": [
+                "Songhao Wu",
+                "Ang Lv",
+                "Ruobing Xie",
+                "Yankai Lin"
+            ],
+            "title": "Redesign Mixture-of-Experts Routers with Manifold Power Iteration",
+            "abstract": "Router is the cornerstone component to the Mixture-of-Experts models. Serving as expert proxies, the rows of the router matrix compute their similarity to the MoE inputs to determine which subset of experts is activated. Ideally, each router row is designed to encode the expert matrix into this representative vector, such that its dot-product with token can better reflect token-expert affinity. However, there exists no design principles to enforce this condensation. In this paper, we propose to align each router row with the principal singular direction of the associated expert, as this direction provides the most expressive mathematical description of a matrix. Based on this principle, we propose a router redesign with Manifold Power Iteration (MPI). Specifically, it introduces a \"Power-then-Retract\" paradigm, where a power iteration step is performed on the router weights, followed by a retraction to impose a norm constraint to ensure both efficiency and stability. Theoretically, we show that MPI drives router rows to converge toward the principal singular directions of associated experts. Empirically, we pretrain MoE model across scales from 1B to 11B parameters to confirm that this alignment facilitates more effective MoE models.",
+            "arxiv_id": "2606.12397",
+            "PRIMARY_TOPIC_LABEL": "MoE Training",
+            "MATCHED_TOPIC_LABELS": [
+                "MoE Training",
+                "Architecture and Training Dynamics"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [
+                "Daily Hot Papers"
+            ],
+            "HOTSPOT_PAPER_PRIMARY_KIND": "daily_hot",
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "Daily Hot Papers",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "heuristic"
+        },
+        "2606.12370": {
+            "ARXIVID": "2606.12370",
+            "COMMENT": "Ties MTP acceptance rate to model-entropy fluctuation during RL, then fixes it with probabilistic rejection sampling and an end-to-end TV loss that directly optimizes multi-step acceptance.",
+            "RELEVANCE": 8,
+            "NOVELTY": 7,
+            "PRIMARY_TOPIC_ID": "training_systems",
+            "MATCHED_TOPIC_IDS": [
+                "training_systems",
+                "efficiency_scaling"
+            ],
+            "TOPIC_MATCH_COMMENT": "Attacks the rollout bottleneck of large-scale RL pipelines with a new training objective, giving up to 1.8x end-to-end acceleration on production-scale runs.",
+            "HOTSPOT_PAPER_TAGS": [
+                "daily_hot"
+            ],
+            "HOTSPOT_PAPER_COMMENT": "A Qwen-team recipe that makes speculative decoding survive RL training, with a clean entropy-acceptance law and large reported end-to-end speedups.",
+            "SCORE": 15,
+            "authors": [
+                "Yucheng Li",
+                "Huiqiang Jiang",
+                "Yang Xu",
+                "Jianxin Yang",
+                "Yi Zhang",
+                "Yizhong Cao",
+                "Yuhao Shen",
+                "Fan Zhou",
+                "Rui Men",
+                "Jianwei Zhang",
+                "An Yang",
+                "Bowen Yu",
+                "Bo Zheng",
+                "Fei Huang",
+                "Junyang Lin",
+                "Dayiheng Liu",
+                "Jingren Zhou"
+            ],
+            "title": "Breaking Entropy Bounds: Accelerating RL Training via MTP with Rejection Sampling",
+            "abstract": "Reinforcement learning (RL) has become a key component in modern large language models, yet the rollout stage remains the key bottleneck in RL training pipelines. Although Multi-Token Prediction (MTP) offers a natural solution to accelerate rollouts through speculative decoding, many studies have observed that MTP acceptance rates degrade significantly during RL training, leading to limited speedup performance. To address this bottleneck, we present Bebop, a systematic study of MTP in LLM post-training, and offer practical recipes to integrate MTP into large-scale RL pipelines. First, we reveal that the MTP acceptance rate is fundamentally bounded by the fluctuation of model entropy, which demonstrates a clear negative linear relationship with the rise of entropy in the RL stage. Second, we show that probabilistic rejection sampling largely alleviates the disturbance introduced by entropy in RL compared to greedy draft sampling. We further identify that the conventional MTP training objectives (cross-entropy or KL) are suboptimal in such settings, and therefore we propose a novel end-to-end TV loss that directly optimizes multi-step rejection sampling acceptance rate, yielding ~10% acceptance rate improvements, achieving up to 95% acceptance rates and up to 25% extra inference throughput gains across mathematical reasoning, code generation, and agentic tasks. Third, we test various online MTP training strategies during RL and show that pre-RL MTP training with e2e TV loss and rejection sampling achieves a consistent acceptance rate and speedup throughout the entire RL, eliminating the need for costly online MTP updating. We provide extensive experiments and analysis that validate our findings. Experimental results show our method achieves up to 1.8x end-to-end acceleration in async RL training of Qwen3.5, Qwen3.6, and Qwen3.7 models.",
+            "arxiv_id": "2606.12370",
+            "PRIMARY_TOPIC_LABEL": "Large-Scale Training Systems and Efficiency",
+            "MATCHED_TOPIC_LABELS": [
+                "Large-Scale Training Systems and Efficiency",
+                "Efficiency, Compression, and Large-Scale Training"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [
+                "Daily Hot Papers"
+            ],
+            "HOTSPOT_PAPER_PRIMARY_KIND": "daily_hot",
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "Daily Hot Papers",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "llm_exact"
+        }
+    },
+    "sections": [
+        {
+            "kind": "daily_hot",
+            "label": "Daily Hot Papers",
+            "description": "Papers that feel broadly important to the day and belong in the hotspot paper feed.",
+            "paper_ids": [
+                "2606.12397",
+                "2606.12370"
+            ]
+        }
+    ]
 }

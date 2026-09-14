@@ -2,8 +2,8 @@
     "schema_version": 1,
     "meta": {
         "date": "2026-08-04",
-        "total_candidates": 0,
-        "total_spotlight_papers": 0,
+        "total_candidates": 146,
+        "total_spotlight_papers": 7,
         "thresholds": {
             "daily_hot_score_cutoff": 15,
             "daily_hot_relevance_cutoff": 7,
@@ -17,11 +17,315 @@
     },
     "diagnostics": {
         "candidate_count_by_kind": {
-            "new_frontier": 0,
-            "daily_hot": 0
+            "new_frontier": 1,
+            "daily_hot": 9
         },
-        "selected_count_by_kind": {}
+        "selected_count_by_kind": {
+            "new_frontier": 1,
+            "daily_hot": 6
+        }
     },
-    "papers": {},
-    "sections": []
+    "papers": {
+        "2608.01672": {
+            "ARXIVID": "2608.01672",
+            "COMMENT": "Trains in-place fast weights with long-window teacher states so limited test-time memory retains context useful for future predictions.",
+            "RELEVANCE": 8,
+            "NOVELTY": 8,
+            "PRIMARY_TOPIC_ID": "architecture_training",
+            "MATCHED_TOPIC_IDS": [
+                "architecture_training"
+            ],
+            "TOPIC_MATCH_COMMENT": "The central contribution is an online parameter-update mechanism for long-context architectural computation.",
+            "HOTSPOT_PAPER_TAGS": [
+                "new_frontier"
+            ],
+            "HOTSPOT_PAPER_COMMENT": "Context distillation into continually updated fast weights suggests a distinctive direction for architectural continual learning.",
+            "SCORE": 16,
+            "authors": [
+                "Zixuan Wang",
+                "Xingyu Dang",
+                "Rui-Jie Zhu",
+                "Zixin Wen",
+                "Hengyu Fu",
+                "Wenhao Chai",
+                "Jason D. Lee"
+            ],
+            "title": "Learning What to Remember: Test-Time Training via Context Distillation",
+            "abstract": "Effective long-context modeling is not merely about retaining more of the past, but about preserving the information that may prove relevant later. Test-time training (TTT) is an appealing approach that performs online parameter updates for long-context modeling, yet existing TTT methods only optimize either reconstruction or online adaptation objectives without considering the future utility of retained information. In this work, we propose \\textbf{T}est-\\textbf{T}ime \\textbf{C}ontext \\textbf{D}istillation (TTCD), a TTT framework that introduces a self-supervised objective for allocating limited memory capacity for future use. Specifically, TTCD uses a long-window teacher to supervise the fast weights of a short-window student, where the hidden-state discrepancy between them offers a dense, self-supervised signal guiding the model to memorize the contextual information crucial for future token predictions. We focus on an in-place variant: In-Place TTCD (IP-TTCD), which uses the existing MLP parameters as the fast weights. Experiments on long-context language modeling tasks show IP-TTCD consistently outperforms DeltaNet, Gated DeltaNet, sliding-window attention, and TTT when pre-trained from scratch. Furthermore, IP-TTCD allows pre-trained transformer models to adapt their parameters during inference through continual pre-training, gaining long-context capabilities with only a lightweight architectural augmentation. Our results position TTCD as a step toward architectural continual learning.",
+            "arxiv_id": "2608.01672",
+            "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+            "MATCHED_TOPIC_LABELS": [
+                "Architecture and Training Dynamics"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [
+                "New Frontier Papers"
+            ],
+            "HOTSPOT_PAPER_PRIMARY_KIND": "new_frontier",
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "New Frontier Papers",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "llm_exact"
+        },
+        "2608.02091": {
+            "ARXIVID": "2608.02091",
+            "COMMENT": "Causal interventions identify QK spectral runaway as a shared channel for distinct low-precision training failures.",
+            "RELEVANCE": 10,
+            "NOVELTY": 8,
+            "PRIMARY_TOPIC_ID": "architecture_training",
+            "MATCHED_TOPIC_IDS": [
+                "architecture_training",
+                "efficiency_scaling"
+            ],
+            "TOPIC_MATCH_COMMENT": "It directly explains and repairs abrupt Transformer training collapse caused by low-precision computation.",
+            "HOTSPOT_PAPER_TAGS": [
+                "daily_hot"
+            ],
+            "HOTSPOT_PAPER_COMMENT": "A shared causal account and targeted repair for low-precision training collapse could affect many large-model training stacks.",
+            "SCORE": 18,
+            "authors": [
+                "Shuxiao Xie",
+                "Shuyang Xie",
+                "Yuan Cao",
+                "Dezhi Ran",
+                "Wei Yang",
+                "Tao Xie"
+            ],
+            "title": "One QK Channel, Many Sources: Guarding Low-Precision Attention Collapse",
+            "abstract": "A bfloat16 transformer can train normally for many steps and then collapse abruptly. Distinct low-precision errors can trigger the same failure, leaving unclear whether each source needs its own repair or one shared route can be blocked. We isolate a reproduced GPT-2-class collapse to the streaming-softmax accumulator, where fp32 accumulation repairs it, and use the fault as an assay for moving controlled errors across sources. Errors placed outside attention still drive the same query-key (QK) spectral runaway, while correcting only QK keeps training stable with the source fault active. This source-channel dissociation shows that fault source is not failure channel. It holds across the tested architectures and scales and reproduces on a second GPU architecture. A causal probe projects each update off the current QK weights' leading three singular directions: the query projection's largest singular value stays at 11.1, whereas removing equal energy elsewhere leaves it at 237. The QK channel therefore drives the early runaway rather than merely tracking it. Entry depends on temporal sign-coherence across steps, not aggregate deviation. QK-Guard closes the channel with a dormant controller that switches on parameter-free QK normalization when attention-logit saturation begins. It contains every tested runaway and matches always-on QK normalization over 60k steps, while non-QK actions at the same trigger fail. The results support intervention at the shared QK locus rather than separate repair at each fault source.",
+            "arxiv_id": "2608.02091",
+            "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+            "MATCHED_TOPIC_LABELS": [
+                "Architecture and Training Dynamics",
+                "Efficiency, Compression, and Large-Scale Training"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [
+                "Daily Hot Papers"
+            ],
+            "HOTSPOT_PAPER_PRIMARY_KIND": "daily_hot",
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "Daily Hot Papers",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "llm_exact"
+        },
+        "2604.01622": {
+            "ARXIVID": "2604.01622",
+            "COMMENT": "Expert-choice routing guarantees balanced loads and enables denoising-step-dependent expert capacity during DLM training.",
+            "RELEVANCE": 10,
+            "NOVELTY": 8,
+            "PRIMARY_TOPIC_ID": "moe_training",
+            "MATCHED_TOPIC_IDS": [
+                "moe_training",
+                "architecture_training",
+                "efficiency_scaling"
+            ],
+            "TOPIC_MATCH_COMMENT": "Directly advances MoE routing, load balance, adaptive capacity allocation, and conversion of pretrained token-choice models.",
+            "HOTSPOT_PAPER_TAGS": [
+                "daily_hot"
+            ],
+            "HOTSPOT_PAPER_COMMENT": "Broadly important today: Expert-choice routing guarantees balanced loads and enables denoising-step-dependent expert capacity during DLM training.",
+            "SCORE": 18,
+            "authors": [
+                "Shuibai Zhang",
+                "Caspian Zhuang",
+                "Chihan Cui",
+                "Zhihan Yang",
+                "Fred Zhangzhi Peng",
+                "Yanxin Zhang",
+                "Haoyue Bai",
+                "Zack Jia",
+                "Yang Zhou",
+                "Guanhua Chen",
+                "Ming Liu"
+            ],
+            "title": "Expert-Choice Routing Enables Adaptive Computation in Diffusion Language Models",
+            "abstract": "Diffusion language models (DLMs) enable parallel, non-autoregressive text generation, yet existing DLM mixture-of-experts (MoE) models inherit token-choice (TC) routing from autoregressive systems, leading to load imbalance and rigid computation allocation. We show that expert-choice (EC) routing is a better fit for DLMs: it provides deterministic load balancing by design, yielding higher throughput and faster convergence than TC. Building on the property that EC capacity is externally controllable, we introduce timestep-dependent expert capacity, which varies expert allocation according to the denoising step. We find that allocating more capacity to low-mask-ratio steps consistently achieves the best performance under matched FLOPs, and provide a mechanistic explanation: tokens in low-mask-ratio contexts exhibit an order-of-magnitude higher learning efficiency, so concentrating compute on these steps yields the largest marginal return. Finally, we show that existing pretrained TC DLMs can be retrofitted to EC by replacing only the router, achieving faster convergence and improved accuracy across diverse downstream tasks. Together, these results establish EC routing as a superior paradigm for DLM MoE models and demonstrate that computation in DLMs can be treated as an adaptive policy rather than a fixed architectural constant. Code is available at https://github.com/zhangshuibai/EC-DLM.",
+            "arxiv_id": "2604.01622",
+            "PRIMARY_TOPIC_LABEL": "MoE Training",
+            "MATCHED_TOPIC_LABELS": [
+                "MoE Training",
+                "Architecture and Training Dynamics",
+                "Efficiency, Compression, and Large-Scale Training"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [
+                "Daily Hot Papers"
+            ],
+            "HOTSPOT_PAPER_PRIMARY_KIND": "daily_hot",
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "Daily Hot Papers",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "heuristic"
+        },
+        "2608.02947": {
+            "ARXIVID": "2608.02947",
+            "COMMENT": "Prunes RoPE frequency-pair interactions beyond wavelength-dependent distances while retaining every key through low-frequency components.",
+            "RELEVANCE": 10,
+            "NOVELTY": 8,
+            "PRIMARY_TOPIC_ID": "efficiency_scaling",
+            "MATCHED_TOPIC_IDS": [
+                "architecture_training",
+                "efficiency_scaling"
+            ],
+            "TOPIC_MATCH_COMMENT": "It directly redesigns attention computation and kernels to reduce long-context memory and arithmetic cost.",
+            "HOTSPOT_PAPER_TAGS": [
+                "daily_hot"
+            ],
+            "HOTSPOT_PAPER_COMMENT": "Its analytically structured pruning rule, FlashAttention integration, and million-token speedups make it broadly notable.",
+            "SCORE": 18,
+            "authors": [
+                "Shun-ichiro Hayashi",
+                "Daichi Mukunoki",
+                "Tetsuya Hoshino",
+                "Takahiro Katagiri"
+            ],
+            "title": "ATFlash: Per-RoPE-Wavelength Attention Windows for Compute/Memory-Efficient LLM Inference",
+            "abstract": "The attention score with rotary position embeddings (RoPE) decomposes exactly into a sum over its 2D-rotation frequency pairs, and each pair's wavelength limits how far it can discriminate position. Aligned with this structure, we propose the per-RoPE-wavelength distance window: it prunes the query--key inner-product terms beyond a wavelength-proportional distance. Unlike a sliding window, every key remains reachable, at least through the low-frequency pairs. The reduction rate is input-independent, with a closed form logarithmic in the sequence length $N$, in contrast to dynamic-sparse methods like MInference. Such token-level selection is orthogonal to our frequency-level pruning. The window can therefore be applied on top of those methods. On Qwen2.5-0.5B and Llama-3.2-3B, the window prunes 37--48\\% of the query--key inner-product terms within each model's native context length. Relative to full attention, the top-1 match rate stays at 96--98\\% and the mean output-distribution KL at the $10^{-3}$-nat level on LongBench-v2 contexts. We examine absolute scores on long-context benchmarks such as RULER, OpenAI-MRCR, LongCodeQA, and $\\infty$Bench: they are broadly preserved. We implement the window as a slice of the query--key contraction axis, leaving the online-softmax recurrences untouched, and port it with minimal diffs into the released FlashAttention-4 prefill and FlashInfer decode. On RTX PRO 6000 with Llama, both ports outpace stock with gains growing with context length, up to $1.29\\times$ at 128K. End to end on Qwen2.5-7B-1M, with 57\\% of the inner-product terms pruned, the speedup reaches $1.31\\times$ at a 1M-token context.",
+            "arxiv_id": "2608.02947",
+            "PRIMARY_TOPIC_LABEL": "Efficiency, Compression, and Large-Scale Training",
+            "MATCHED_TOPIC_LABELS": [
+                "Architecture and Training Dynamics",
+                "Efficiency, Compression, and Large-Scale Training"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [
+                "Daily Hot Papers"
+            ],
+            "HOTSPOT_PAPER_PRIMARY_KIND": "daily_hot",
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "Daily Hot Papers",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "llm_exact"
+        },
+        "2608.02901": {
+            "ARXIVID": "2608.02901",
+            "COMMENT": "Compresses every KV-cache token through exact anchors and selective residual refinement, reporting 20-fold compression without eviction.",
+            "RELEVANCE": 10,
+            "NOVELTY": 8,
+            "PRIMARY_TOPIC_ID": "efficiency_scaling",
+            "MATCHED_TOPIC_IDS": [
+                "efficiency_scaling"
+            ],
+            "TOPIC_MATCH_COMMENT": "It directly introduces a high-ratio, accuracy-preserving KV-cache compression mechanism for long-context LLMs.",
+            "HOTSPOT_PAPER_TAGS": [
+                "daily_hot"
+            ],
+            "HOTSPOT_PAPER_COMMENT": "Twenty-fold cache compression while retaining all tokens and near-full accuracy at 70B scale has broad practical significance.",
+            "SCORE": 18,
+            "authors": [
+                "Malik Khalaf",
+                "Yara Shamshoum",
+                "Nitzan Hodos",
+                "Yuval Sieradzki",
+                "Assaf Schuster"
+            ],
+            "title": "AnchorKV: Anchor-Residual KV Cache Compression",
+            "abstract": "The key-value (KV) cache is the primary memory bottleneck in long-context LLM inference. Existing approaches attack it from opposite ends: eviction methods permanently discard tokens, degrading performance whenever a discarded token later proves essential, while quantization methods retain all tokens at low precision but offer limited compression. We propose AnchorKV, a compression scheme that shrinks the cache by $20\\times$ without discarding a single token. AnchorKV represents the cache using a small set of anchors stored exactly, expresses every other token through its most similar anchor, and refines only those whose approximation most affects the model's output. AnchorKV consistently preserves accuracy across models and datasets, retaining 99% of the full-cache score at the 70B scale, while keeping the entire context at a fraction of its cost.",
+            "arxiv_id": "2608.02901",
+            "PRIMARY_TOPIC_LABEL": "Efficiency, Compression, and Large-Scale Training",
+            "MATCHED_TOPIC_LABELS": [
+                "Efficiency, Compression, and Large-Scale Training"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [
+                "Daily Hot Papers"
+            ],
+            "HOTSPOT_PAPER_PRIMARY_KIND": "daily_hot",
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "Daily Hot Papers",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "llm_exact"
+        },
+        "2603.06591": {
+            "ARXIVID": "2603.06591",
+            "COMMENT": "Identifies a two-block circuit that creates position-zero attention sinks and shows that accelerating sink formation improves pretraining.",
+            "RELEVANCE": 9,
+            "NOVELTY": 8,
+            "PRIMARY_TOPIC_ID": "architecture_training",
+            "MATCHED_TOPIC_IDS": [
+                "architecture_training"
+            ],
+            "TOPIC_MATCH_COMMENT": "It directly links a causal-attention mechanism to pretraining dynamics and downstream model quality.",
+            "HOTSPOT_PAPER_TAGS": [
+                "daily_hot"
+            ],
+            "HOTSPOT_PAPER_COMMENT": "Broadly important today: Identifies a two-block circuit that creates position-zero attention sinks and shows that accelerating sink formation improves pretraining.",
+            "SCORE": 17,
+            "authors": [
+                "Runyu Peng",
+                "Ruixiao Li",
+                "Mingshu Chen",
+                "Yunhua Zhou",
+                "Qipeng Guo",
+                "Xipeng Qiu",
+                "Yucheng Lu",
+                "Chen Zhao"
+            ],
+            "title": "What Makes Position Zero Special? A Mechanistic Study of Position Zero Attention Sinks in LLMs",
+            "abstract": "Transformers frequently allocate disproportionate attention to specific tokens, a phenomenon known as attention sinks. Causal large language models reliably form one at position zero, though its role remains debated. We approach this question from a mechanistic perspective, tracing how the position-zero sink arises from the model's internal computation. We identify a two-block subnetwork responsible for this behavior, which we term the P0-Sink Circuit, and show it arises purely from the structural properties of causal attention, requiring no semantic content. We further validate through from-scratch pre-training experiments that two proposed parameter-free methods effectively accelerate P0 sink formation, and find that earlier sink formation benefits pre-training and improves downstream performance. Both methods outperform the Transformer baseline and achieve performance comparable to Gated Attention across comprehensive settings. Code is available now at https://github.com/Pryest/flash-linear-attention.",
+            "arxiv_id": "2603.06591",
+            "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+            "MATCHED_TOPIC_LABELS": [
+                "Architecture and Training Dynamics"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [
+                "Daily Hot Papers"
+            ],
+            "HOTSPOT_PAPER_PRIMARY_KIND": "daily_hot",
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "Daily Hot Papers",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "heuristic"
+        },
+        "2605.09877": {
+            "ARXIVID": "2605.09877",
+            "COMMENT": "Expandable block-recurrent attention trades cache growth against prefill complexity while retaining chunk-parallel training.",
+            "RELEVANCE": 9,
+            "NOVELTY": 8,
+            "PRIMARY_TOPIC_ID": "architecture_training",
+            "MATCHED_TOPIC_IDS": [
+                "architecture_training",
+                "efficiency_scaling"
+            ],
+            "TOPIC_MATCH_COMMENT": "Introduces a trainable attention-recurrence mechanism with configurable compute and KV-state growth.",
+            "HOTSPOT_PAPER_TAGS": [
+                "daily_hot"
+            ],
+            "HOTSPOT_PAPER_COMMENT": "Broadly important today: Expandable block-recurrent attention trades cache growth against prefill complexity while retaining chunk-parallel training.",
+            "SCORE": 17,
+            "authors": [
+                "Daniel Goldstein",
+                "Navneel Singhal",
+                "Eugene Cheah"
+            ],
+            "title": "Key-Value Means: Transformers with Expandable Block-Recurrent Compressed Memory",
+            "abstract": "Recall presents a difficult choice: transformers have a linearly growing memory that slows each successive token, while linear RNNs typically have fixed costs but limited recall. We present Key-Value Means (\"KVM\"), a novel block-recurrence for attention that can accommodate either fixed-size or growing state. Equipping a strong transformer baseline with fixed-size KVM attention layers yields a strong $O(N)$ chunked RNN, while adding only an insignificant number of new parameters. We train a transformer with a growable KVM cache and show it performs competitively on long-context tests with only subquadratic prefill time and sublinear state growth. KVM is implementable with standard operations and without custom kernels, and supports chunk-wise parallelizable training and prefill. It provides many of the benefits of both traditional transformers (expandable context memory, chunk-wise parallelizable training and prefill) and RNNs in a single unified package. It can be used on every layer, saving KV-cache memory, and allowing a continuous range of choices of prefill time complexity between $O(N)$ and $O(N^2)$. We release our code at https://github.com/featherless-ai/KVM-paper and trained models at https://huggingface.co/collections/featherless-ai/kvm-paper under the Apache 2.0 license.",
+            "arxiv_id": "2605.09877",
+            "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+            "MATCHED_TOPIC_LABELS": [
+                "Architecture and Training Dynamics",
+                "Efficiency, Compression, and Large-Scale Training"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [
+                "Daily Hot Papers"
+            ],
+            "HOTSPOT_PAPER_PRIMARY_KIND": "daily_hot",
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "Daily Hot Papers",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "heuristic"
+        }
+    },
+    "sections": [
+        {
+            "kind": "new_frontier",
+            "label": "New Frontier Papers",
+            "description": "Papers that appear to open a genuinely new direction, paradigm, or field.",
+            "paper_ids": [
+                "2608.01672"
+            ]
+        },
+        {
+            "kind": "daily_hot",
+            "label": "Daily Hot Papers",
+            "description": "Papers that feel broadly important to the day and belong in the hotspot paper feed.",
+            "paper_ids": [
+                "2608.02091",
+                "2604.01622",
+                "2608.02947",
+                "2608.02901",
+                "2603.06591",
+                "2605.09877"
+            ]
+        }
+    ]
 }

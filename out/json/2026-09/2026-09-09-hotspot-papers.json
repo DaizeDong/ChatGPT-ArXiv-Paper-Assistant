@@ -1,0 +1,276 @@
+{
+    "schema_version": 1,
+    "meta": {
+        "date": "2026-09-09",
+        "total_candidates": 151,
+        "total_spotlight_papers": 6,
+        "thresholds": {
+            "daily_hot_score_cutoff": 15,
+            "daily_hot_relevance_cutoff": 7,
+            "new_frontier_score_cutoff": 15,
+            "new_frontier_novelty_cutoff": 8
+        },
+        "caps": {
+            "max_daily_hot": 6,
+            "max_new_frontier": 4
+        }
+    },
+    "diagnostics": {
+        "candidate_count_by_kind": {
+            "new_frontier": 0,
+            "daily_hot": 9
+        },
+        "selected_count_by_kind": {
+            "daily_hot": 6
+        }
+    },
+    "papers": {
+        "2609.09116": {
+            "ARXIVID": "2609.09116",
+            "COMMENT": "Derives an exact law coupling normalization, learning-rate schedules, and weight decay to predict training-stability boundaries.",
+            "RELEVANCE": 10,
+            "NOVELTY": 8,
+            "PRIMARY_TOPIC_ID": "architecture_training",
+            "MATCHED_TOPIC_IDS": [
+                "architecture_training"
+            ],
+            "TOPIC_MATCH_COMMENT": "The central contribution explains normalization-induced optimization dynamics and differences in stabilization across optimizer families, directly informing training schedules.",
+            "HOTSPOT_PAPER_TAGS": [
+                "daily_hot"
+            ],
+            "HOTSPOT_PAPER_COMMENT": "Broadly important today: Derives an exact law coupling normalization, learning-rate schedules, and weight decay to predict training-stability boundaries.",
+            "SCORE": 18,
+            "authors": [
+                "Hasan Amin",
+                "Wei-Kai Chang",
+                "Rajiv Khanna"
+            ],
+            "title": "When Does Scale-Invariant Optimization Become Unstable? An Exact Schedule Law with Weight Decay",
+            "abstract": "Normalization renders large parts of neural networks effectively scale invariant, inducing a hidden feedback loop in which learning-rate schedules and weight decay interact through the parameter norm to control the effective step taken by the optimizer. We show that this interaction is governed by an exact discrete-time law: a single scalar quantity captures all schedule and decay forcing, while norm growth induces an opposing geometric self-quenching effect. This yields a sharp boundary that cleanly separates contraction- and expansion-dominated effective learning rate regimes. To understand the underlying mechanism, we provide exact analysis of a fully solved normalized regression model where the dynamics reduce to two dimensions and show that the balance point is intrinsically unstable, implying that constant learning rate with weight decay cannot stably maintain an interior equilibrium and instead produces recurrent behavior driven by discrete-time Jacobian structure. We further extend this perspective across optimizers through unified homogeneous-optimizer framework that reveals a structural dichotomy in self-quenching strength, providing a first-principles explanation for why adaptive methods exhibit systematically weaker stabilization under normalization. Across dynamical systems and neural networks (MLP, CNN, GPT2 / MNIST, CIFAR, wikiText, OpenWebText), the predicted law holds with high precision and enables direct control of training via the identified scalar, with performance peaking sharply at the predicted boundary. Together, these results isolate a single governing quantity for scale-invariant optimization, providing a precise and actionable lens on training dynamics, optimizer behavior, and schedule design in modern deep learning. Code is available in https://github.com/shasanamin/normalized-optimization-dynamics.",
+            "arxiv_id": "2609.09116",
+            "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+            "MATCHED_TOPIC_LABELS": [
+                "Architecture and Training Dynamics"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [
+                "Daily Hot Papers"
+            ],
+            "HOTSPOT_PAPER_PRIMARY_KIND": "daily_hot",
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "Daily Hot Papers",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "heuristic"
+        },
+        "2609.08115": {
+            "ARXIVID": "2609.08115",
+            "COMMENT": "Softly anchors trainable MoE routers to pretrained routing priors during post-training.",
+            "RELEVANCE": 10,
+            "NOVELTY": 8,
+            "PRIMARY_TOPIC_ID": "moe_training",
+            "MATCHED_TOPIC_IDS": [
+                "moe_training"
+            ],
+            "TOPIC_MATCH_COMMENT": "The core contribution changes MoE router regularization and directly compares inherited routing preservation with uniform load balancing and hard assignments.",
+            "HOTSPOT_PAPER_TAGS": [
+                "daily_hot"
+            ],
+            "HOTSPOT_PAPER_COMMENT": "Broadly important today: Softly anchors trainable MoE routers to pretrained routing priors during post-training.",
+            "SCORE": 18,
+            "authors": [
+                "Jaedeok Lee",
+                "Keonwoo Kim",
+                "Dongyoon Han",
+                "Sangdoo Yun",
+                "Yera Choi",
+                "Haanju Yoo"
+            ],
+            "title": "Router Prior Bias: Preserving Base Routing Structure in MoE Post-Training",
+            "abstract": "Mixture-of-Experts (MoE) pretraining relies on an auxiliary load-balancing loss (LBL) to drive per-expert utilization toward uniformity. Post-training inherits a different situation: the base router already encodes non-uniform expert co-activation structure, which a re-imposed uniformity objective flattens away. We show that downstream performance depends instead on holding this inherited routing softly, a principle we term soft router anchoring, and instantiate it as Router Prior Bias (RPB), a training-time bias that pulls the router logits toward a prior read off the frozen base router while leaving the router itself trainable. On math post-training of Moonlight-16B-A3B, RPB attains 45.77 in-domain accuracy against 31.91 under re-applied LBL and 29.44 under unanchored fine-tuning, and retains more out-of-domain capability than either. The ordering against LBL reproduces on a second model family (Qwen3-30B-A3B-Base), and the advantage over LBL is resolvable on an independently sourced corpus. Anchors defined on the router weights, on its logits, or on its output distribution perform comparably with no consistent ordering, which places the effect in the softness of the constraint rather than in the particular prior RPB supplies. Retained community structure in the expert co-activation graph tracks these gains wherever the base router is non-uniform enough for communities to form, yet enforcing the same prior as a hard assignment preserves that structure while performance falls sharply. Community structure is therefore a footprint of soft anchoring rather than its source, and the practical lesson is that inherited routing should be held softly during post-training, since both flattening it toward uniformity and enforcing it absolutely carry a downstream cost. Our code will be released at https://github.com/naver-ai/rpb.",
+            "arxiv_id": "2609.08115",
+            "PRIMARY_TOPIC_LABEL": "MoE Training",
+            "MATCHED_TOPIC_LABELS": [
+                "MoE Training"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [
+                "Daily Hot Papers"
+            ],
+            "HOTSPOT_PAPER_PRIMARY_KIND": "daily_hot",
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "Daily Hot Papers",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "heuristic"
+        },
+        "2506.10911": {
+            "ARXIVID": "2506.10911",
+            "COMMENT": "Avoids global synchronization through momentum-based weight averaging in random worker subgroups, reducing distributed pretraining communication.",
+            "RELEVANCE": 10,
+            "NOVELTY": 8,
+            "PRIMARY_TOPIC_ID": "training_systems",
+            "MATCHED_TOPIC_IDS": [
+                "training_systems",
+                "efficiency_scaling"
+            ],
+            "TOPIC_MATCH_COMMENT": "The optimizer and communication scheme directly address distributed large-model training, reducing bandwidth requirements and blocking time with reported wall-clock improvements.",
+            "HOTSPOT_PAPER_TAGS": [
+                "daily_hot"
+            ],
+            "HOTSPOT_PAPER_COMMENT": "Broadly important today: Avoids global synchronization through momentum-based weight averaging in random worker subgroups, reducing distributed pretraining communication.",
+            "SCORE": 18,
+            "authors": [
+                "Jari Kolehmainen",
+                "Nikolay Blagoev",
+                "Semih Kara",
+                "John Donaghy",
+                "Christopher Nies",
+                "O\u00c4\u009fuzhan Ersoy"
+            ],
+            "title": "NoLoCo: No-all-reduce Low Communication Training Method for Large Models",
+            "abstract": "Training large language models is generally done on clusters containing thousands of accelerators, communicating over a high-bandwidth interconnect. Scaling up these clusters is expensive and can become impractical, imposing limits on the size of models that can be trained. Several recent studies have proposed training methods that are less communication intensive, avoiding the need for compute clusters with extremely high interconnect speeds. These low communication training methods still employ a global synchronization step for model parameters, which can be too costly with a high number of participants, as the communication cost scales quadratically with group size. In this work, we propose a novel optimization method, NoLoCo, that does not explicitly synchronize all model parameters during training and does not require any collective communication. NoLoCo implicitly synchronizes model weights via a novel variant of the Nesterov momentum optimizer by partially averaging model weights within randomly selected subgroups. We provide both a theoretical convergence analysis of our optimizer and empirical results from language model training. Our method requires significantly less communication than fully sharded data parallel training and DiLoCo, a widely used low-communication baseline. Moreover, our method avoids global blocking communication, thereby reducing accelerator idle time. Our experiments show that NoLoCo is more communication-efficient than DiLoCo, improving final perplexity by up to $4\\%$ and converging up to $4\\times$ faster in wall-clock time across a range of worker counts, model sizes, and communication bandwidths.",
+            "arxiv_id": "2506.10911",
+            "PRIMARY_TOPIC_LABEL": "Large-Scale Training Systems and Efficiency",
+            "MATCHED_TOPIC_LABELS": [
+                "Large-Scale Training Systems and Efficiency",
+                "Efficiency, Compression, and Large-Scale Training"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [
+                "Daily Hot Papers"
+            ],
+            "HOTSPOT_PAPER_PRIMARY_KIND": "daily_hot",
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "Daily Hot Papers",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "heuristic"
+        },
+        "2609.08690": {
+            "ARXIVID": "2609.08690",
+            "COMMENT": "Activation-ratio-aware scaling laws transfer optimal learning rates and batch sizes across MoE sparsity levels.",
+            "RELEVANCE": 10,
+            "NOVELTY": 8,
+            "PRIMARY_TOPIC_ID": "moe_training",
+            "MATCHED_TOPIC_IDS": [
+                "moe_training",
+                "training_systems"
+            ],
+            "TOPIC_MATCH_COMMENT": "The central contribution directly addresses MoE pretraining hyperparameters across sparsity and expert granularity; its scaling laws also guide training-run configuration.",
+            "HOTSPOT_PAPER_TAGS": [
+                "daily_hot"
+            ],
+            "HOTSPOT_PAPER_COMMENT": "Broadly important today: Activation-ratio-aware scaling laws transfer optimal learning rates and batch sizes across MoE sparsity levels.",
+            "SCORE": 18,
+            "authors": [
+                "Changxin Tian",
+                "Kunlong Chen",
+                "Jia Liu",
+                "Ziqi Liu",
+                "Zhiqiang Zhang",
+                "Jun Zhou"
+            ],
+            "title": "Hyperparameter Scaling Laws Across MoE Sparsity",
+            "abstract": "Mixture-of-Experts (MoE) models expand model capacity without a proportional increase in training compute, but increasing sparsity makes reliable hyperparameter transfer challenging. In this work, we show that conventional hyperparameter scaling laws are insufficient for ultra-sparse MoEs: the optimal learning rate and batch size vary with activation ratio, and these shifts cannot be explained by either total or activated parameter count alone. To characterize this dependence, we conduct 1,800 pre-training runs spanning six activated-parameter scales and models with up to 6B total non-embedding parameters, processing approximately 20 trillion tokens at a cost of 200,000 equivalent H800 GPU-hours. Our results reconcile conflicting findings in prior work by revealing two scaling regimes. At fixed sparsity, the optimal batch size follows a power-law relationship with training tokens $D$, whereas the optimal learning rate scales with training compute $C$ and remains robust to the allocation between model size and data. Across sparsity levels, the activation ratio $A$ enters both relationships as an additional multiplicative power-law factor. These observations lead to unified hyperparameter scaling laws that transfer across MoE sparsity levels. Large-scale evaluation shows that the scaling form outperforms alternative functional forms. On a held-out ultra-sparse MoE with 12B total parameters and only 1/64 of its experts activated, the predicted hyperparameters remain close to the observed optima, supporting joint extrapolation across model scale and sparsity. Further experiments demonstrate transfer across expert granularities and isolate the effect of activation ratio from that of total expert count.",
+            "arxiv_id": "2609.08690",
+            "PRIMARY_TOPIC_LABEL": "MoE Training",
+            "MATCHED_TOPIC_LABELS": [
+                "MoE Training",
+                "Large-Scale Training Systems and Efficiency"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [
+                "Daily Hot Papers"
+            ],
+            "HOTSPOT_PAPER_PRIMARY_KIND": "daily_hot",
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "Daily Hot Papers",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "heuristic"
+        },
+        "2608.20172": {
+            "ARXIVID": "2608.20172",
+            "COMMENT": "Separates token-relation formation from information-flow allocation, reporting 4.5-7.3% fewer tokens to reach matched attention-baseline training loss.",
+            "RELEVANCE": 10,
+            "NOVELTY": 8,
+            "PRIMARY_TOPIC_ID": "architecture_training",
+            "MATCHED_TOPIC_IDS": [
+                "architecture_training",
+                "efficiency_scaling"
+            ],
+            "TOPIC_MATCH_COMMENT": "The core contribution is an alternative token-mixing mechanism; its linear variants and optimized exact implementation also address computational efficiency.",
+            "HOTSPOT_PAPER_TAGS": [
+                "daily_hot"
+            ],
+            "HOTSPOT_PAPER_COMMENT": "Broadly important today: Separates token-relation formation from information-flow allocation, reporting 4.5-7.3% fewer tokens to reach matched attention-baseline training loss.",
+            "SCORE": 18,
+            "authors": [
+                "Yuting Ge",
+                "Pengju Yang",
+                "Mingkai Nie"
+            ],
+            "title": "Ask Self, Ask Others: Relation Is All You Need",
+            "abstract": "Attention dominates token mixing, but it collapses relation formation and flow allocation into a single score-to-flow step. We introduce Relation, which separates them by first organizing pairwise evidence into explicit Self and Exchange relations and deriving information flow afterward. Relation first decides whether a token should rely on itself or draw from its history, and if it draws from history, where to look. This relational organization gives rise to Full Relation, FlashRelation, Linear Relation, and Hybrid Relation. Across matched decoder-only models, Full Relation achieves lower mean final-validation NLL than MHA and reaches the paired MHA final training loss with 4.5-7.3% fewer tokens. Structural diagnostics further show that Relation learns a distinct depth organization: the first layer acts as a current-token anchor and a high-rank router, while later layers shift strongly toward history. In a fixed-context reference benchmark, FlashRelation is 4.17-5.28x faster than the materialized Full Relation implementation. Across scale-matched production workloads, it reaches 89.7-92.9% of PyTorch FlashAttention throughput while executing the exact Full Relation operator. Hybrid Relation demonstrates that Full and Linear Relation layers can be composed within a single decoder. These results support a relation-first view of token mixing: ask Self, ask Others, then let Flow follow Relation.",
+            "arxiv_id": "2608.20172",
+            "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+            "MATCHED_TOPIC_LABELS": [
+                "Architecture and Training Dynamics",
+                "Efficiency, Compression, and Large-Scale Training"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [
+                "Daily Hot Papers"
+            ],
+            "HOTSPOT_PAPER_PRIMARY_KIND": "daily_hot",
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "Daily Hot Papers",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "heuristic"
+        },
+        "2609.03807": {
+            "ARXIVID": "2609.03807",
+            "COMMENT": "Makes state\u2013prediction separation cheaper through a KV-free prediction stream and shared FFN computation.",
+            "RELEVANCE": 10,
+            "NOVELTY": 8,
+            "PRIMARY_TOPIC_ID": "architecture_training",
+            "MATCHED_TOPIC_IDS": [
+                "architecture_training",
+                "efficiency_scaling"
+            ],
+            "TOPIC_MATCH_COMMENT": "The architectural separation of context-state updates from token prediction directly changes pretraining computation, with reported wall-time overhead reduced to 1.09\u20131.33x.",
+            "HOTSPOT_PAPER_TAGS": [
+                "daily_hot"
+            ],
+            "HOTSPOT_PAPER_COMMENT": "Broadly important today: Makes state\u2013prediction separation cheaper through a KV-free prediction stream and shared FFN computation.",
+            "SCORE": 18,
+            "authors": [
+                "John Langford",
+                "Nathan Godey",
+                "Giovanni Monea",
+                "Yoav Artzi",
+                "Harry Dong",
+                "Ying Fan",
+                "Gustavo de Rosa",
+                "Zheng Zhan"
+            ],
+            "title": "Almost Free State Prediction Separation",
+            "abstract": "State--prediction separation (SPS) relieves a language model's hidden state of two competing burdens---summarizing the context and predicting the next token---by splitting the forward pass into a state stream and a prediction stream. The separation works, but it is expensive: the prediction stream is a second pass over the whole backbone, costing $\\sim$1.9$\\times$ the pretraining FLOPs, and even more in terms of wall-clock time when using a flexible attention mask. This paper makes state--prediction separation almost free. We take the separation to its limit with a free pause token: a prediction stream that writes no keys or values at all and so rides the sequence's existing positions. It improves next-token prediction of a standard Transformer by 2-3 centinats in practice on a 1B parameter model, and because it adds no position it costs nothing at inference---no added context length, no KV cache, no decode steps, and essentially no latency, with the growth in inference flops typically irrelevant as it is not the active bottleneck on throughput. The cost is therefore entirely in training where we use four mechanisms to drive it down: a two-pass split that keeps FlashAttention kernels viable, the $w{=}0$ prediction window, a shared gated FFN that evaluates one FFN per position rather than one per stream, and phasing the separation onto the tail of the run. Together these bring the overhead versus an optimized pretraining pipeline to $1.33\\times$ wall-clock while recovering ~94% of the gain compared to SPS, and to as low as $1.09\\times$ along a graceful quality/compute tradeoff. Furthermore, the FFN optimization reduces the raw flops required at inference time. The result is an isoflop, isoparameter, and isotoken improvement over standard next token trained transformers.",
+            "arxiv_id": "2609.03807",
+            "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+            "MATCHED_TOPIC_LABELS": [
+                "Architecture and Training Dynamics",
+                "Efficiency, Compression, and Large-Scale Training"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [
+                "Daily Hot Papers"
+            ],
+            "HOTSPOT_PAPER_PRIMARY_KIND": "daily_hot",
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "Daily Hot Papers",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "heuristic"
+        }
+    },
+    "sections": [
+        {
+            "kind": "daily_hot",
+            "label": "Daily Hot Papers",
+            "description": "Papers that feel broadly important to the day and belong in the hotspot paper feed.",
+            "paper_ids": [
+                "2609.09116",
+                "2609.08115",
+                "2506.10911",
+                "2609.08690",
+                "2608.20172",
+                "2609.03807"
+            ]
+        }
+    ]
+}

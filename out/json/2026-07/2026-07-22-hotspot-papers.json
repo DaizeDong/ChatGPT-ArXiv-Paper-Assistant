@@ -2,8 +2,8 @@
     "schema_version": 1,
     "meta": {
         "date": "2026-07-22",
-        "total_candidates": 0,
-        "total_spotlight_papers": 0,
+        "total_candidates": 87,
+        "total_spotlight_papers": 10,
         "thresholds": {
             "daily_hot_score_cutoff": 15,
             "daily_hot_relevance_cutoff": 7,
@@ -17,11 +17,404 @@
     },
     "diagnostics": {
         "candidate_count_by_kind": {
-            "new_frontier": 0,
-            "daily_hot": 0
+            "new_frontier": 4,
+            "daily_hot": 7
         },
-        "selected_count_by_kind": {}
+        "selected_count_by_kind": {
+            "new_frontier": 4,
+            "daily_hot": 6
+        }
     },
-    "papers": {},
-    "sections": []
+    "papers": {
+        "2510.02345": {
+            "ARXIVID": "2510.02345",
+            "COMMENT": "Dynamically clusters MoE experts during training and combines hierarchical routing with shared low-rank expert structure.",
+            "RELEVANCE": 10,
+            "NOVELTY": 9,
+            "PRIMARY_TOPIC_ID": "moe_training",
+            "MATCHED_TOPIC_IDS": [
+                "moe_training",
+                "training_systems",
+                "efficiency_scaling"
+            ],
+            "TOPIC_MATCH_COMMENT": "Dynamic expert organization, routing balance, all-to-all reduction, and expert compression make this a direct MoE-training contribution.",
+            "HOTSPOT_PAPER_TAGS": [
+                "new_frontier",
+                "daily_hot"
+            ],
+            "HOTSPOT_PAPER_COMMENT": "Online architectural reconfiguration of experts suggests a potentially important new direction for scalable MoE training.",
+            "SCORE": 19,
+            "authors": [
+                "Peijun Zhu",
+                "Ning Yang",
+                "Baoliang Tian",
+                "Jiayu Wei",
+                "Weihao Zhang",
+                "Haijun Zhang",
+                "Pin Lv"
+            ],
+            "title": "Breaking the MoE LLM Trilemma: Dynamic Expert Clustering with Structured Compression",
+            "abstract": "Mixture-of-Experts (MoE) Large Language Models (LLMs) face a trilemma of load imbalance, parameter redundancy, and communication overhead. We introduce a unified framework based on dynamic expert clustering and structured compression to address these issues cohesively. Our method employs an online clustering procedure that periodically regroups experts using a fused metric of parameter and activation similarity, which stabilizes expert utilization. To our knowledge, this is one of the first frameworks to leverage the semantic embedding capability of the router to dynamically reconfigure the model's architecture during training for substantial efficiency gains. Within each cluster, we decompose expert weights into a shared base matrix and extremely low-rank residual adapters, achieving up to fivefold parameter reduction per group while preserving specialization. This structure enables a two-stage hierarchical routing strategy: tokens are first assigned to a cluster, then to specific experts within it, drastically reducing the routing search space and the volume of all-to-all communication. Furthermore, a heterogeneous precision scheme, which stores shared bases in FP16 and residual factors in INT4, coupled with dynamic offloading of inactive clusters, reduces peak memory consumption to levels comparable to dense models. Evaluated on GLUE and WikiText-103, our framework matches the quality of standard MoE models while reducing total parameters by approximately 80%, improving throughput by 10% to 20%, and lowering expert load variance by a factor of over three. Our work demonstrates that structural reorganization is a principled path toward scalable, efficient, and memory-effective MoE LLMs. Code is available at https://github.com/szdtzpj/Breaking_the_moe_trilemma",
+            "arxiv_id": "2510.02345",
+            "PRIMARY_TOPIC_LABEL": "MoE Training",
+            "MATCHED_TOPIC_LABELS": [
+                "MoE Training",
+                "Large-Scale Training Systems and Efficiency",
+                "Efficiency, Compression, and Large-Scale Training"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [
+                "New Frontier Papers",
+                "Daily Hot Papers"
+            ],
+            "HOTSPOT_PAPER_PRIMARY_KIND": "new_frontier",
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "New Frontier Papers",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "llm_exact"
+        },
+        "2607.18829": {
+            "ARXIVID": "2607.18829",
+            "COMMENT": "Introduces a renal-inspired iterative sequence operator with analytically bounded fixed-point dynamics.",
+            "RELEVANCE": 8,
+            "NOVELTY": 9,
+            "PRIMARY_TOPIC_ID": "architecture_training",
+            "MATCHED_TOPIC_IDS": [
+                "architecture_training"
+            ],
+            "TOPIC_MATCH_COMMENT": "A new sequence-computation primitive with stability guarantees is directly within architectural mechanisms.",
+            "HOTSPOT_PAPER_TAGS": [
+                "new_frontier"
+            ],
+            "HOTSPOT_PAPER_COMMENT": "Translating countercurrent multiplication into a bounded neural sequence operator could open an unusual new architectural direction.",
+            "SCORE": 17,
+            "authors": [
+                "Snigdha Chandan Khilar"
+            ],
+            "title": "Countercurrent Multiplier Networks: A Renal-Inspired Iterative Operator with Provably Bounded Fixed-Point Dynamics",
+            "abstract": "The mammalian kidney concentrates urine using a mechanism with no analogue in current neural architectures: the countercurrent multiplier. Two anti-parallel flows joined at a hairpin recirculate a weak magnitude-bounded local pump into a large axial gradient achieving a four-fold concentration increase from a single-effect gradient that never exceeds 200 mOsm at any point. We formalize this mechanism as a differentiable sequence operator the Countercurrent Multiplier (CCM) layer and study it as an alternative to residual iterative refinement.",
+            "arxiv_id": "2607.18829",
+            "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+            "MATCHED_TOPIC_LABELS": [
+                "Architecture and Training Dynamics"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [
+                "New Frontier Papers"
+            ],
+            "HOTSPOT_PAPER_PRIMARY_KIND": "new_frontier",
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "New Frontier Papers",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "llm_exact"
+        },
+        "2604.14727": {
+            "ARXIVID": "2604.14727",
+            "COMMENT": "Derives tight transformer linear-region bounds by representing attention routing through tropical geometry.",
+            "RELEVANCE": 8,
+            "NOVELTY": 8,
+            "PRIMARY_TOPIC_ID": "architecture_training",
+            "MATCHED_TOPIC_IDS": [
+                "architecture_training"
+            ],
+            "TOPIC_MATCH_COMMENT": "The work provides a foundational analysis of attention routing and transformer representational capacity.",
+            "HOTSPOT_PAPER_TAGS": [
+                "new_frontier"
+            ],
+            "HOTSPOT_PAPER_COMMENT": "Tropical geometry offers a distinctive new toolkit for analyzing attention routing and depth-dependent transformer capacity.",
+            "SCORE": 16,
+            "authors": [
+                "Ye Su",
+                "Yong Liu"
+            ],
+            "title": "Geometric Capacity of Transformers: A Tropical Geometry Perspective",
+            "abstract": "To quantify the geometric capacity of transformers, we develop a tropical-geometric framework for analyzing the spatial partitions induced by conditioned self-attention. In the zero-temperature limit, we show that fixed-key top-$1$ routing is exactly represented by a power diagram in query space, while an auxiliary log-lifted value parameterization yields a vector-valued tropical rational representation. For Multi-Head Self-Attention (MHSA) with sequence length $N$ and $H$ attention heads, the joint routing geometry is encoded by Minkowski sums of headwise Newton polytopes, giving an $\\mathcal{O}(N^H)$ universal bound that sharpens to $\\mathcal{O}((HN)^{d_{\\mathrm{model}}-1})$ once the number of heads reaches the intrinsic dimension $d_{\\mathrm{model}}$. Extending this analysis across depth $L$, we derive the first tight asymptotic bounds on the number of linear regions in transformers ($\u00ce\u0098\\!\\left(N^{\\min\\{H,d_{\\mathrm{model}}-1\\}L}\\right)$). We further show that finite-temperature softmax preserves the top-$1$ routing structure and admits exponentially decaying local approximation and differential bounds away from routing boundaries.",
+            "arxiv_id": "2604.14727",
+            "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+            "MATCHED_TOPIC_LABELS": [
+                "Architecture and Training Dynamics"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [
+                "New Frontier Papers"
+            ],
+            "HOTSPOT_PAPER_PRIMARY_KIND": "new_frontier",
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "New Frontier Papers",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "llm_exact"
+        },
+        "2607.19573": {
+            "ARXIVID": "2607.19573",
+            "COMMENT": "Derives a computational-complexity barrier to learned structural generalization in pure Transformers.",
+            "RELEVANCE": 7,
+            "NOVELTY": 8,
+            "PRIMARY_TOPIC_ID": "architecture_training",
+            "MATCHED_TOPIC_IDS": [
+                "architecture_training"
+            ],
+            "TOPIC_MATCH_COMMENT": "It directly analyzes the computational limits of the Transformer architecture.",
+            "HOTSPOT_PAPER_TAGS": [
+                "new_frontier"
+            ],
+            "HOTSPOT_PAPER_COMMENT": "A formal definition and claimed complexity separation could redirect work on structural generalization.",
+            "SCORE": 15,
+            "authors": [
+                "Zichao Wei"
+            ],
+            "title": "On the Computational Complexity of Structural Generalization",
+            "abstract": "Structural generalization has been measured repeatedly by several benchmarks, yet it has never been formally defined. We give a definition that translates the two premises (compositional structure and unbounded generalization) into mathematical language. The definition itself is neutral: a compiler that hard-codes the rules satisfies it just as well. But structural generalization becomes a scientific question only insofar as the capacity can autonomously emerge from finite data. This question pits the computational lower bound $\\mathrm{NC}^1$ against the learnable ceiling $\\mathrm{TC}^0$ of pure Transformers. Under a Montagovian instantiation, each compositional rule splits into two projections: a syntactic face ($F_\u00ce\u00b3$) and a semantic face ($G_\u00ce\u00b3$). Tree evaluation on the $G_\u00ce\u00b3$ side is an instantiation of BFVP, which is $\\mathrm{NC}^1$-complete (Buss, 1987). A pure Transformer must learn both faces at once, but Kraus et al. (2026) prove that its learnable class $\\subseteq \\mathrm{TC}^0$. Under the standard assumption $\\mathrm{TC}^0 \\neq \\mathrm{NC}^1$, a pure Transformer cannot learn structural generalization. Neuro-symbolic systems achieve the best benchmark scores precisely because they inject $G_\u00ce\u00b3$, sidestepping the genuinely hard half. Benchmark scores cannot distinguish \"learned\" from \"given.\" This is what this paper sets out to make clear.",
+            "arxiv_id": "2607.19573",
+            "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+            "MATCHED_TOPIC_LABELS": [
+                "Architecture and Training Dynamics"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [
+                "New Frontier Papers"
+            ],
+            "HOTSPOT_PAPER_PRIMARY_KIND": "new_frontier",
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "New Frontier Papers",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "llm_exact"
+        },
+        "2607.19539": {
+            "ARXIVID": "2607.19539",
+            "COMMENT": "Overlaps MoE expert computation with return all-to-all traffic using tile-level signaling and persistent kernels.",
+            "RELEVANCE": 10,
+            "NOVELTY": 8,
+            "PRIMARY_TOPIC_ID": "moe_training",
+            "MATCHED_TOPIC_IDS": [
+                "moe_training",
+                "training_systems"
+            ],
+            "TOPIC_MATCH_COMMENT": "MoE dispatch/combine communication and kernel scheduling are the paper's central contribution, with broader distributed-systems implications.",
+            "HOTSPOT_PAPER_TAGS": [
+                "daily_hot"
+            ],
+            "HOTSPOT_PAPER_COMMENT": "Broadly important today: Overlaps MoE expert computation with return all-to-all traffic using tile-level signaling and persistent kernels.",
+            "SCORE": 18,
+            "authors": [
+                "Minyu Cui",
+                "Anna Wingkvist",
+                "Morgan Ericsson"
+            ],
+            "title": "Fine-grained Computation-Communication Overlap via Tile-level Signaling and Scheduling for Mixture-of-Experts",
+            "abstract": "Mixture-of-Experts (MoE) architectures increase model capacity without proportionally increasing computation cost and have become a key building block for scaling large language models (LLMs) to trillion-parameter regimes. Efficient deployment of these MoE models relies on distributed execution across multiple GPUs, where each MoE layer involves two all-to-all communications: dispatching tokens to expert ranks and returning the expert outputs to their source ranks. Conventional MoE implementations launch this return all-to-all after expert compute completes, exposing communication latency on the critical path and reducing GPU utilization. We present a fine-grained approach that overlaps expert compute with the second all-to-all via tile-level signaling and scheduling. Our producer-consumer co-design combines: (1) a persistent per-rank computation kernel (producer) that covers all local experts on the rank to eliminate repeated kernel launch overhead and prioritizes remote-critical tiles, and (2) a persistent communication kernel (consumer) on a small dedicated partition of streaming multiprocessors (SMs) that issues segment-granular transfers as tiles become ready. Our co-design avoids intrusive changes to the underlying computation operators or communication primitives, making it practical for improving distributed MoE execution efficiency on multi-GPU systems. On a 4-A100 GPU platform, evaluated on three MoE models against four state-of-the-art MoE systems, our approach achieves up to 2.64x end-to-end speedup and 2.74x MoE-layer speedup. Compared with a conventional non-overlap baseline, our approach consistently improves both operator- and MoE-layer-level performance across varying GEMM shapes, router modes, and a broad range of producer/consumer SM partitions, while preserving correctness.",
+            "arxiv_id": "2607.19539",
+            "PRIMARY_TOPIC_LABEL": "MoE Training",
+            "MATCHED_TOPIC_LABELS": [
+                "MoE Training",
+                "Large-Scale Training Systems and Efficiency"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [
+                "Daily Hot Papers"
+            ],
+            "HOTSPOT_PAPER_PRIMARY_KIND": "daily_hot",
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "Daily Hot Papers",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "heuristic"
+        },
+        "2510.14812": {
+            "ARXIVID": "2510.14812",
+            "COMMENT": "Learns permutations that recover unstructured-sparsity accuracy while retaining structured sparse acceleration.",
+            "RELEVANCE": 9,
+            "NOVELTY": 8,
+            "PRIMARY_TOPIC_ID": "efficiency_scaling",
+            "MATCHED_TOPIC_IDS": [
+                "efficiency_scaling"
+            ],
+            "TOPIC_MATCH_COMMENT": "The paper directly advances structured sparsity for accelerated training, inference, and LLM pruning.",
+            "HOTSPOT_PAPER_TAGS": [
+                "daily_hot"
+            ],
+            "HOTSPOT_PAPER_COMMENT": "Broadly important today: Learns permutations that recover unstructured-sparsity accuracy while retaining structured sparse acceleration.",
+            "SCORE": 17,
+            "authors": [
+                "Abhishek Tyagi",
+                "Arjun Iyer",
+                "Liam Young",
+                "William H Renninger",
+                "Christopher Kanan",
+                "Yuhao Zhu"
+            ],
+            "title": "SHUFFLESPARSE: Learned Shuffles for Structured Sparse Networks",
+            "abstract": "Structured weight sparsity accelerates training and inference on modern GPUs, but it trails unstructured dynamic sparse training (DST) in accuracy especially at extreme sparsity. We pinpoint the reason for this difference in performance to a lack of expressivity: a dense layer can implement any pattern of non-zero weights, whereas structured patterns are restricted to only a small set of weight configurations. We introduce SHUFFLESPARSE, a single permutation primitive that applies uniformly across DST-from-scratch and one-shot pruning, and across N:M, block etc. We close most of this gap by learning a single permutation matrix jointly with the structured weight matrix. When used on three different types of structures (block, N:M, and diagonal), SHUFFLESPARSE is able to reduce the structured-vs-unstructured accuracy gap on ViT-B16 (ImageNet-1K) and GPT-2 (WikiText-103) at 90-95% sparsity, while adding minimal inference overhead (< 8.7% inference overhead) and preserving any training acceleration the host structure provides. The same permutation formulation transfers to one-shot 2:4 pruning of pretrained LLMs, where it improves zero-shot accuracy by 4.6 points on LLaMA-2 7B. Together, these results establish learned permutations as a general tool for recovering unstructured-level accuracy from structured sparsity patterns.",
+            "arxiv_id": "2510.14812",
+            "PRIMARY_TOPIC_LABEL": "Efficiency, Compression, and Large-Scale Training",
+            "MATCHED_TOPIC_LABELS": [
+                "Efficiency, Compression, and Large-Scale Training"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [
+                "Daily Hot Papers"
+            ],
+            "HOTSPOT_PAPER_PRIMARY_KIND": "daily_hot",
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "Daily Hot Papers",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "heuristic"
+        },
+        "2607.18759": {
+            "ARXIVID": "2607.18759",
+            "COMMENT": "Explains attention length generalization through the optimization-induced implicit bias of relative versus absolute positions.",
+            "RELEVANCE": 9,
+            "NOVELTY": 8,
+            "PRIMARY_TOPIC_ID": "architecture_training",
+            "MATCHED_TOPIC_IDS": [
+                "architecture_training"
+            ],
+            "TOPIC_MATCH_COMMENT": "The central contribution is a mechanistic training-dynamics account of positional attention behavior.",
+            "HOTSPOT_PAPER_TAGS": [
+                "daily_hot"
+            ],
+            "HOTSPOT_PAPER_COMMENT": "Broadly important today: Explains attention length generalization through the optimization-induced implicit bias of relative versus absolute positions.",
+            "SCORE": 17,
+            "authors": [
+                "Subham Singh",
+                "Ashutosh Mishra",
+                "Subha Raut"
+            ],
+            "title": "Relative Positions Generalize, Absolute Positions Memorize: An Implicit-Bias Account of Length Generalization in Attention",
+            "abstract": "Transformers with relative positional encodings often extrapolate to sequences longer than those seen during training, whereas transformers with learned absolute encodings typically do not. This is a robust empirical regularity, and the explanations offered for it so far are chiefly about expressivity, that is, about whether a length-generalizing solution exists. We give an optimization explanation. On a minimal fixed-offset retrieval task that isolates positional selection, the gap is governed by the implicit bias of the trained attention head: among the many solutions that fit short sequences, which one gradient descent actually selects. We prove that rotary encodings make the attention logit a function of relative offset alone, an exact equivariance, so whatever selection rule is learned at training lengths is reproduced verbatim at every longer length. Learned absolute encodings instead leave out-of-range positions unconstrained, and the trained head pins to a fixed absolute position inside the training range. We characterize the learned rotary rule as a low-rank ``carrier'' kernel aligned with the target offset, and we derive the resulting graceful accuracy decay as an attention-dilution law; both predictions are confirmed across seeds and offsets. A linear-attention control shows the mechanism is specific to softmax: without normalization, training selects a min-norm interpolant that does not extrapolate. The phenomenon, the equivariance, and the carrier all transfer to a multi-layer, multi-head transformer trained on a full-sequence length-generalization task. The account connects the implicit bias of attention, implicit bias for extrapolation in recurrent models, and the learning side of the RASP-L conjecture.",
+            "arxiv_id": "2607.18759",
+            "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+            "MATCHED_TOPIC_LABELS": [
+                "Architecture and Training Dynamics"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [
+                "Daily Hot Papers"
+            ],
+            "HOTSPOT_PAPER_PRIMARY_KIND": "daily_hot",
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "Daily Hot Papers",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "heuristic"
+        },
+        "2605.15250": {
+            "ARXIVID": "2605.15250",
+            "COMMENT": "Modifies latent attention to expose hardware-selectable MQA and GQA decode paths with compressed KV state.",
+            "RELEVANCE": 9,
+            "NOVELTY": 8,
+            "PRIMARY_TOPIC_ID": "efficiency_scaling",
+            "MATCHED_TOPIC_IDS": [
+                "architecture_training",
+                "efficiency_scaling"
+            ],
+            "TOPIC_MATCH_COMMENT": "KV compression and hardware-adaptive decoding are the primary gains, enabled by a new attention parameterization.",
+            "HOTSPOT_PAPER_TAGS": [
+                "daily_hot"
+            ],
+            "HOTSPOT_PAPER_COMMENT": "Broadly important today: Modifies latent attention to expose hardware-selectable MQA and GQA decode paths with compressed KV state.",
+            "SCORE": 17,
+            "authors": [
+                "Fanxu Meng"
+            ],
+            "title": "GQLA: Group-Query Latent Attention for Hardware-Adaptive Large Language Model Decoding",
+            "abstract": "Multi-head Latent Attention (MLA), the attention used in DeepSeek-V2/V3, jointly compresses keys and values into a low-rank latent and matches the H100 roofline almost perfectly. Its trained weights, however, expose only one decoding path - an absorbed MQA form - which ties efficient inference to H100-class compute-bandwidth ratios, forfeits tensor parallelism along the head axis, and yields no Multi-Token Prediction (MTP) gain on commodity inference GPUs such as the export-restricted H20. We propose Group-Query Latent Attention (GQLA), a minimal modification of MLA whose trained weights expose two algebraically equivalent decoding paths over the same parameters: an MQA-absorb path identical to MLA's, and a GQA path with a per-group expanded cache. The runtime picks the path that matches the target hardware - no retraining, no custom kernels - so a single set of GQLA weights pins the rooflines of both H100 (MQA-absorb, s_q=1) and H20 (GQA + MTP, s_q=2), while supporting up to 8-way zero-redundancy tensor parallelism on the GQA path. To avoid pretraining from scratch we extend TransMLA into TransGQLA, which converts a pretrained GQA checkpoint into a GQLA model; on LLaMA-3-8B it compresses the per-token KV cache to 28.125% of the GQA baseline on the MQA-absorb path while structurally preserving GQA-level traffic on the per-group path.",
+            "arxiv_id": "2605.15250",
+            "PRIMARY_TOPIC_LABEL": "Efficiency, Compression, and Large-Scale Training",
+            "MATCHED_TOPIC_LABELS": [
+                "Architecture and Training Dynamics",
+                "Efficiency, Compression, and Large-Scale Training"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [
+                "Daily Hot Papers"
+            ],
+            "HOTSPOT_PAPER_PRIMARY_KIND": "daily_hot",
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "Daily Hot Papers",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "heuristic"
+        },
+        "2602.08686": {
+            "ARXIVID": "2602.08686",
+            "COMMENT": "Compiles transferable KV-retention priors offline, enabling constant-time online correction and aggressive long-context compression.",
+            "RELEVANCE": 9,
+            "NOVELTY": 8,
+            "PRIMARY_TOPIC_ID": "efficiency_scaling",
+            "MATCHED_TOPIC_IDS": [
+                "efficiency_scaling"
+            ],
+            "TOPIC_MATCH_COMMENT": "The core contribution directly reduces KV-cache memory and long-context inference cost.",
+            "HOTSPOT_PAPER_TAGS": [
+                "daily_hot"
+            ],
+            "HOTSPOT_PAPER_COMMENT": "Broadly important today: Compiles transferable KV-retention priors offline, enabling constant-time online correction and aggressive long-context compression.",
+            "SCORE": 17,
+            "authors": [
+                "Ning Yang",
+                "Chengzhi Wang",
+                "Yibo Liu",
+                "Baoliang Tian",
+                "Haijun Zhang"
+            ],
+            "title": "CompilerKV: Risk-Adaptive KV Compression via Offline Experience Compilation",
+            "abstract": "Prefill-only KV compression freezes a token subset at the end of prefill and decodes from it without further eviction. The retention decision is therefore irreversible, yet existing methods estimate the corrective signals it relies on, per-head reliability and prompt-level compression sensitivity, online from a single noisy prompt. We argue this is the wrong statistical unit: these signals exhibit far higher cross-prompt regularity than within-prompt signal-to-noise. We introduce \\textsc{CompilerKV}, a KV-retention policy whose corrective tables are compiled offline from a calibration corpus, reducing online correction after the standard observation-window scan to $O(1)$ lookups plus a budget clamp. We find that compiled retention tables behave as portable architectural priors: rankings transfer across disjoint corpora on four backbones (mean Spearman $\\bar\u00cf\u0081{=}0.90$), and direct model-to-model table transfer costs only $0.4$--$0.8$ LongBench points on average. At a 512-token budget, \\textsc{CompilerKV} attains compressed-SOTA on all four backbones, improving over the strongest prefill-only baseline by $+1.67$ points on average (task-bootstrap 95\\% CI $[+1.08,+2.37]$). Pressure regimes amplify the gap: under a fixed $512/32k$ cache ratio, CompilerKV remains the strongest compressed method through 128k RULER ($\\sim\\!73$ vs.\\ FullKV $\\sim\\!79$, SnapKV $\\sim\\!38$); on 32k NIAH it reaches $0.89$ vs.\\ SnapKV $0.42$; and at 32k input, retaining only $1.56\\%$ of the prefill KV, batch-16 serving remains feasible where FullKV is OOM.",
+            "arxiv_id": "2602.08686",
+            "PRIMARY_TOPIC_LABEL": "Efficiency, Compression, and Large-Scale Training",
+            "MATCHED_TOPIC_LABELS": [
+                "Efficiency, Compression, and Large-Scale Training"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [
+                "Daily Hot Papers"
+            ],
+            "HOTSPOT_PAPER_PRIMARY_KIND": "daily_hot",
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "Daily Hot Papers",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "heuristic"
+        },
+        "2608.02625": {
+            "ARXIVID": "2608.02625",
+            "COMMENT": "Introduces training-free draft-then-refine decoding that improves the quality-latency frontier of diffusion language models.",
+            "RELEVANCE": 8,
+            "NOVELTY": 8,
+            "PRIMARY_TOPIC_ID": "efficiency_scaling",
+            "MATCHED_TOPIC_IDS": [
+                "architecture_training",
+                "efficiency_scaling"
+            ],
+            "TOPIC_MATCH_COMMENT": "The primary gain is efficient decoding, supported by a new bidirectional refinement computation pattern.",
+            "HOTSPOT_PAPER_TAGS": [
+                "daily_hot"
+            ],
+            "HOTSPOT_PAPER_COMMENT": "Fast refinement-based decoding could materially affect the emerging diffusion-language-model design space.",
+            "SCORE": 16,
+            "authors": [
+                "Brian K Chen",
+                "Chong Wu",
+                "Kenji Kawaguchi"
+            ],
+            "title": "Speculative Correction: Draft-then-Refine Decoding for Diffusion Language Models",
+            "abstract": "Diffusion language models (DLMs) can revise tokens bidirectionally, but standard decoding procedures often adapt them to left-to-right generation by producing text block by block. We study a simple plug-and-play inference pattern: first generate a complete draft, then refine the full response using bidirectional diffusion. Using LLaDA2.1-Flash and LLaDA2.1-Mini, we evaluate two configurations. In Flash-Flash, the same Flash model serves as both drafter and refiner, testing whether an existing model can improve its own block-autoregressive output through global refinement. In Mini-Flash, inspired by speculative decoding, we introduce speculative correction: Mini drafts a full response, and Flash revises it as an editable initialization. Flash-Flash improves GSM8K-384 accuracy from 0.848 to 0.899 while running 1.20 times faster than the selected Flash block-autoregressive baseline, and improves MBPP-384 from 0.545 to 0.693. Latency-window-matched Flash-only controls indicate that these gains persist after targeted tuning of block-autoregressive decoding. Causal ablations indicate that completed drafts provide useful initializations: refinement from a fully masked span performs poorly, full global refinement provides a clear additional gain on GSM8K, and local refinement captures much of the gain on MBPP and MATH. Mini-Flash provides useful quality-latency trade-offs, including MATH-384 performance of 0.294 versus 0.300 for Flash while running 2.17 times faster. These results support a Pareto-frontier interpretation rather than the claim that the heterogeneous cascade uniformly matches Flash quality. Overall, same-model draft-and-refine provides evidence that bidirectional refinement is a useful decoding primitive for DLMs, while speculative correction demonstrates a training-free route to fast DLM generation.",
+            "arxiv_id": "2608.02625",
+            "PRIMARY_TOPIC_LABEL": "Efficiency, Compression, and Large-Scale Training",
+            "MATCHED_TOPIC_LABELS": [
+                "Architecture and Training Dynamics",
+                "Efficiency, Compression, and Large-Scale Training"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [
+                "Daily Hot Papers"
+            ],
+            "HOTSPOT_PAPER_PRIMARY_KIND": "daily_hot",
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "Daily Hot Papers",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "llm_exact"
+        }
+    },
+    "sections": [
+        {
+            "kind": "new_frontier",
+            "label": "New Frontier Papers",
+            "description": "Papers that appear to open a genuinely new direction, paradigm, or field.",
+            "paper_ids": [
+                "2510.02345",
+                "2607.18829",
+                "2604.14727",
+                "2607.19573"
+            ]
+        },
+        {
+            "kind": "daily_hot",
+            "label": "Daily Hot Papers",
+            "description": "Papers that feel broadly important to the day and belong in the hotspot paper feed.",
+            "paper_ids": [
+                "2607.19539",
+                "2510.14812",
+                "2607.18759",
+                "2605.15250",
+                "2602.08686",
+                "2608.02625"
+            ]
+        }
+    ]
 }

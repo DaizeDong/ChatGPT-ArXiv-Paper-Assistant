@@ -2,8 +2,8 @@
     "schema_version": 1,
     "meta": {
         "date": "2026-09-10",
-        "total_candidates": 0,
-        "total_spotlight_papers": 0,
+        "total_candidates": 110,
+        "total_spotlight_papers": 4,
         "thresholds": {
             "daily_hot_score_cutoff": 15,
             "daily_hot_relevance_cutoff": 7,
@@ -17,11 +17,181 @@
     },
     "diagnostics": {
         "candidate_count_by_kind": {
-            "new_frontier": 0,
-            "daily_hot": 0
+            "new_frontier": 1,
+            "daily_hot": 3
         },
-        "selected_count_by_kind": {}
+        "selected_count_by_kind": {
+            "new_frontier": 1,
+            "daily_hot": 3
+        }
     },
-    "papers": {},
-    "sections": []
+    "papers": {
+        "2606.12059": {
+            "ARXIVID": "2606.12059",
+            "COMMENT": "Implements attention through oscillator equilibration, with a unique fixed point attracting almost every initialization.",
+            "RELEVANCE": 8,
+            "NOVELTY": 8,
+            "PRIMARY_TOPIC_ID": "architecture_training",
+            "MATCHED_TOPIC_IDS": [
+                "architecture_training"
+            ],
+            "TOPIC_MATCH_COMMENT": "A mathematically analyzed attention operator is the core contribution, although its intended use is physical hardware and its experiments remain small-scale.",
+            "HOTSPOT_PAPER_TAGS": [
+                "new_frontier"
+            ],
+            "HOTSPOT_PAPER_COMMENT": "Proposes an early direction for implementing transformer attention through physical synchronization across several oscillator substrates.",
+            "SCORE": 16,
+            "authors": [
+                "Fabio Pasqualetti",
+                "Taosha Guo"
+            ],
+            "title": "Attention by Synchronization in Coupled Oscillator Networks",
+            "abstract": "We address transformer attention on energy-constrained physical substrates. Softmax attention requires exponentiation and global reduction, operations with high energy cost on von Neumann hardware and no natural physical analog. We show that Kuramoto synchronization dynamics (which arise in electrical, mechanical, superconducting, and charge-density-wave oscillator arrays, among other physical systems) implement a well-defined attention operation. The resulting mechanism, \\emph{fixed-query oscillator attention}, replaces softmax's arithmetic with the equilibration of a gradient flow on the sphere: queries are learned anchors fixed on the sphere, and free oscillators evolve under Kuramoto--Lohe dynamics until they settle at positions encoding attention weights via cosine similarity. Because the computation is equilibration, no global exponential normalization is needed. The fixed point is provably unique and globally attractive from almost every initial condition, a guarantee that holds across every physical realization. Empirically, at the minimal hardware configuration (oscillator dimension $d_{\\mathrm{osc}} = 2$), oscillator attention matches softmax on keyword spotting, and on subject-verb agreement it trains more reliably while reaching softmax's accuracy. Softmax retains an advantage on causal language modeling, but the gap decays as a power law in $d_{\\mathrm{osc}}$. The main objective of this work is not to replace softmax in software but to provide a mathematically grounded blueprint for accurate attention on physical substrates.",
+            "arxiv_id": "2606.12059",
+            "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+            "MATCHED_TOPIC_LABELS": [
+                "Architecture and Training Dynamics"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [
+                "New Frontier Papers"
+            ],
+            "HOTSPOT_PAPER_PRIMARY_KIND": "new_frontier",
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "New Frontier Papers",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "llm_exact"
+        },
+        "2602.06471": {
+            "ARXIVID": "2602.06471",
+            "COMMENT": "Redesigns Transformer depth and width using hourglass FFNs and attention, reporting an 8.7% training compute efficiency improvement at matched accuracy.",
+            "RELEVANCE": 10,
+            "NOVELTY": 8,
+            "PRIMARY_TOPIC_ID": "architecture_training",
+            "MATCHED_TOPIC_IDS": [
+                "architecture_training",
+                "efficiency_scaling"
+            ],
+            "TOPIC_MATCH_COMMENT": "The core contribution is an FFN and attention architecture redesign validated through 8B parameters; measured training compute and KV-cache savings establish the secondary efficiency match.",
+            "HOTSPOT_PAPER_TAGS": [
+                "daily_hot"
+            ],
+            "HOTSPOT_PAPER_COMMENT": "Broadly important today: Redesigns Transformer depth and width using hourglass FFNs and attention, reporting an 8.7% training compute efficiency improvement at matched accuracy.",
+            "SCORE": 18,
+            "authors": [
+                "Feng-Ting Liao",
+                "Guan-Ting Yi",
+                "Tzu-Quan Lin",
+                "Meng-Hsi Chen",
+                "Da-shan Shiu"
+            ],
+            "title": "Revisiting the Shape Convention of Transformer Language Models",
+            "abstract": "The architectural shape of dense Transformers has remained remarkably stable: narrow-wide-narrow feed-forward networks (FFNs) consume most non-embedding parameters. Motivated by theoretical and empirical evidences that residual wide-narrow-wide (hourglass) MLPs remain expressive despite bottlenecks, we revisit whether this architectural convention is necessary for dense language models. We study Hourglass Transformers, which replace the conventional FFN with residual stacks of hourglass sub-MLPs and use hourglass attention to decouple residual-stream width from attention width. This exposes a practical depth-width trade-off: compressing the FFN intermediate dimension allows wider hidden states and fewer layers at matched parameter budgets. Across model scales from 113M to 8B parameters, Hourglass Transformers achieve language-modeling and downstream performance comparable to conventional Transformers, while improving training compute efficiency by $8.7\\%$ at matched average downstream accuracy across the 906M, 3B, and 8B scales. After long-context extension, the 8B Hourglass model also outperforms its matched conventional baseline across 4k-64k context lengths. At 64k context, the reduced attention layer count lowers both computation and KV-cache requirements, yielding up to $1.93\\times$ faster token decoding and $50\\%$ lower KV-cache memory at the 1B scale. These results identify hourglass structures as a practical architecture-efficiency alternative for compute- and latency-conscious Transformer design.",
+            "arxiv_id": "2602.06471",
+            "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+            "MATCHED_TOPIC_LABELS": [
+                "Architecture and Training Dynamics",
+                "Efficiency, Compression, and Large-Scale Training"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [
+                "Daily Hot Papers"
+            ],
+            "HOTSPOT_PAPER_PRIMARY_KIND": "daily_hot",
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "Daily Hot Papers",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "heuristic"
+        },
+        "2609.03949": {
+            "ARXIVID": "2609.03949",
+            "COMMENT": "Uses a NoPE-MLA salience branch to select sparse attention reads, reducing bandwidth while retaining the full cache on GPU.",
+            "RELEVANCE": 9,
+            "NOVELTY": 8,
+            "PRIMARY_TOPIC_ID": "efficiency_scaling",
+            "MATCHED_TOPIC_IDS": [
+                "architecture_training",
+                "efficiency_scaling"
+            ],
+            "TOPIC_MATCH_COMMENT": "Sparse attention directly reduces large-model inference cost; analysis of the NoPE-specific mechanism also connects the efficiency gains to architectural design.",
+            "HOTSPOT_PAPER_TAGS": [
+                "daily_hot"
+            ],
+            "HOTSPOT_PAPER_COMMENT": "Broadly important today: Uses a NoPE-MLA salience branch to select sparse attention reads, reducing bandwidth while retaining the full cache on GPU.",
+            "SCORE": 17,
+            "authors": [
+                "WenJie Fan"
+            ],
+            "title": "VestigeKV: The NoPE-MLA KV Cache Carries Its Own Sparse-Attention Signal in a Vestigial Branch",
+            "abstract": "A long-lived KV cache must be compressed before the queries that will read it exist. Selection by observed attention collapses there: on a NoPE-MLA model, H2O and SnapKV retrieve 0.00 and 0.33 of needles at 8x compression, because a token's importance has not yet been observed. VestigeKV instead derives a sparse attention pattern from a signal the cache already carries, occupying the sparse-attention literature's one unoccupied quadrant: training-free and query-independent. In NoPE-MLA the 64-dimensional decoupled branch is a vestige of RoPE that training repurposes into a salience channel; reading 11% of each row, it partitions the cache into an attended tier and a GPU-resident archive that no row ever leaves, reachable each step by a certified, query-adaptive trigger. Nothing is trained and cache rows are never quantized, so every quality effect attributes to selection and scheduling. On Kimi Linear 48B, retrieval holds at 1.00 under 8x and 0.96 under 32x from 8k to 65k context, with zero gap to full-row selection, and the recall tier holds 128x at 1.00 (8k). Both tiers stay on the GPU, so the win is speed, not memory: the per-step scan reads ~26% of the bytes dense attention would, and on a two-node sglang deployment the crossover sits at ~40k context, reaching 1.18x at 256k and 1.39x at 496k. The mechanism is exclusive to NoPE: the identical operator on a RoPE MLA collapses to 0.08, query-independent salience exists only without rotation, and query-universal exact merging is provably impossible under RoPE. All thresholds were frozen before their data; 20 archived verdicts and 8 closed routes accompany the paper.",
+            "arxiv_id": "2609.03949",
+            "PRIMARY_TOPIC_LABEL": "Efficiency, Compression, and Large-Scale Training",
+            "MATCHED_TOPIC_LABELS": [
+                "Architecture and Training Dynamics",
+                "Efficiency, Compression, and Large-Scale Training"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [
+                "Daily Hot Papers"
+            ],
+            "HOTSPOT_PAPER_PRIMARY_KIND": "daily_hot",
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "Daily Hot Papers",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "heuristic"
+        },
+        "2608.22253": {
+            "ARXIVID": "2608.22253",
+            "COMMENT": "Derives softmax-invariant LM-head update geometry and an O(Vd) RowNorm optimizer with a provable descent approximation guarantee.",
+            "RELEVANCE": 9,
+            "NOVELTY": 8,
+            "PRIMARY_TOPIC_ID": "training_systems",
+            "MATCHED_TOPIC_IDS": [
+                "training_systems",
+                "architecture_training"
+            ],
+            "TOPIC_MATCH_COMMENT": "Optimizer design for pretraining is the main contribution; the analysis of functional update size also fits optimization dynamics.",
+            "HOTSPOT_PAPER_TAGS": [
+                "daily_hot"
+            ],
+            "HOTSPOT_PAPER_COMMENT": "Broadly important today: Derives softmax-invariant LM-head update geometry and an O(Vd) RowNorm optimizer with a provable descent approximation guarantee.",
+            "SCORE": 17,
+            "authors": [
+                "Aditya Somasundaram",
+                "Charles Guille-Escuret",
+                "Alexander Moreno",
+                "Zhengzhong Liu",
+                "Eric Xing"
+            ],
+            "title": "Toward a First-Principles Update Geometry for the Language-Model Head",
+            "abstract": "Muon motivates designing optimizer geometry around the function of each parameter block and uses the spectral norm for hidden linear layers. For the language-model head, the spectral norm is not a faithful measure of functional change. Softmax removes shared logit shifts, whereas the spectral norm can assign arbitrarily large size to updates that change no output probability. We therefore treat the LM head and softmax as one module and derive an update geometry for their composition. Hilbert's projective distance respects this invariance as it measures the largest change in pairwise log odds. For an update $S$ with token rows $s_i^\\top$, we show that the largest Hilbert distance over $\\left\\lVert h\\right\\rVert_2\\leq H$ is exactly $H D(S)$, where $D(S)=\\max_{i<j}\\left\\lVert s_i - s_j\\right\\rVert_2$ is the Euclidean row diameter. This diameter replaces the spectral norm in the resulting Muon-style steepest descent problem. An exact solution is possible, but its direct formulation contains one $d$-dimensional vector variable for every token pair. For a vocabulary size of approximately $50$k, this means more than one billion token pairs, making the calculation impractical at every training step. We instead impose a stronger common-ball constraint and derive projected RowNorm as an $O(Vd)$ solution. For the exact RowNorm oracle, we prove that its first-order decrease is at least $1/\\sqrt{2}$ of the exact diameter-constrained optimum. With Muon on the backbone, experiments across three seeds at 190M, 380M, and 640M parameters show that RowNorm reduces mean final step diameters and empirical Hilbert RMS perturbations by factors of $45$--$60$ and $12$--$15$, respectively, with only a $0.0057$--$0.0153$ increase in mean final validation loss.",
+            "arxiv_id": "2608.22253",
+            "PRIMARY_TOPIC_LABEL": "Large-Scale Training Systems and Efficiency",
+            "MATCHED_TOPIC_LABELS": [
+                "Large-Scale Training Systems and Efficiency",
+                "Architecture and Training Dynamics"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [
+                "Daily Hot Papers"
+            ],
+            "HOTSPOT_PAPER_PRIMARY_KIND": "daily_hot",
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "Daily Hot Papers",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "heuristic"
+        }
+    },
+    "sections": [
+        {
+            "kind": "new_frontier",
+            "label": "New Frontier Papers",
+            "description": "Papers that appear to open a genuinely new direction, paradigm, or field.",
+            "paper_ids": [
+                "2606.12059"
+            ]
+        },
+        {
+            "kind": "daily_hot",
+            "label": "Daily Hot Papers",
+            "description": "Papers that feel broadly important to the day and belong in the hotspot paper feed.",
+            "paper_ids": [
+                "2602.06471",
+                "2609.03949",
+                "2608.22253"
+            ]
+        }
+    ]
 }

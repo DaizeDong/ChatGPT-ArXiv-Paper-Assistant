@@ -2,8 +2,8 @@
     "schema_version": 1,
     "meta": {
         "date": "2026-08-26",
-        "total_candidates": 0,
-        "total_spotlight_papers": 0,
+        "total_candidates": 141,
+        "total_spotlight_papers": 6,
         "thresholds": {
             "daily_hot_score_cutoff": 15,
             "daily_hot_relevance_cutoff": 7,
@@ -18,10 +18,257 @@
     "diagnostics": {
         "candidate_count_by_kind": {
             "new_frontier": 0,
-            "daily_hot": 0
+            "daily_hot": 8
         },
-        "selected_count_by_kind": {}
+        "selected_count_by_kind": {
+            "daily_hot": 6
+        }
     },
-    "papers": {},
-    "sections": []
+    "papers": {
+        "2604.15416": {
+            "ARXIVID": "2604.15416",
+            "COMMENT": "Unbiased stochastic sign updates stabilize low-precision LLM pretraining, including FP4.",
+            "RELEVANCE": 10,
+            "NOVELTY": 8,
+            "PRIMARY_TOPIC_ID": "training_systems",
+            "MATCHED_TOPIC_IDS": [
+                "training_systems",
+                "efficiency_scaling"
+            ],
+            "TOPIC_MATCH_COMMENT": "A new optimization mechanism addresses non-smooth convergence and low-precision training stability; MoE is a motivating setting rather than the methodological contribution.",
+            "HOTSPOT_PAPER_TAGS": [
+                "daily_hot"
+            ],
+            "HOTSPOT_PAPER_COMMENT": "Reported FP4 stability where AdamW fails and 1.44-2.14x FP8 speedups make this broadly consequential for training efficiency, although the reported pretraining models are sub-billion scale.",
+            "SCORE": 18,
+            "authors": [
+                "Dingzhi Yu",
+                "Rui Pan",
+                "Yuxing Liu",
+                "Difan Zou",
+                "Tong Zhang"
+            ],
+            "title": "StoSignSGD: Unbiased Structural Stochasticity Fixes SignSGD for Training Large Language Models",
+            "abstract": "Sign-based optimization algorithms, such as SignSGD, have garnered attention for their performance in distributed learning and training large foundation models. Despite their empirical superiority, SignSGD is known to diverge on non-smooth objectives, which are ubiquitous due to ReLUs, max-pools, and mixture-of-experts. To overcome this limitation, we propose StoSignSGD, an algorithm that injects structural stochasticity into the sign operator while maintaining an unbiased update step. In the regime of (online) convex optimization, StoSignSGD rigorously resolves the non-convergence issues of SignSGD, achieving a sharp convergence rate matching the lower bound. For the more challenging non-convex non-smooth optimization, we introduce generalized stationary measures that encompass prior definitions, proving that StoSignSGD improves upon the best-known complexity bounds by dimensional factors. Empirically, StoSignSGD is stable and efficient across diverse large language model (LLM) training regimes. In aggressive low-precision pretraining, which spans both FP8 and the far more demanding FP4 regime where AdamW fails catastrophically, StoSignSGD stays stable and consistently performs the best. It attains a 1.44x to 2.14x speedup over established baselines under FP8. Under 4-bit precision, it improves downstream accuracy on the largest OLMo2-370M model by 1.13 points over the strongest stable baseline, and this advantage grows as both the model size and the data scale up. When fine-tuning 7B LLMs on mathematical reasoning tasks, StoSignSGD also delivers clear gains over both AdamW and SignSGD. Finally, to explain why it works, we develop a sign conversion framework that turns any general optimizer into its unbiased, sign-based counterpart. Using this framework, we decompose the core components of StoSignSGD and run a comprehensive ablation study to validate our design choices.",
+            "arxiv_id": "2604.15416",
+            "PRIMARY_TOPIC_LABEL": "Large-Scale Training Systems and Efficiency",
+            "MATCHED_TOPIC_LABELS": [
+                "Large-Scale Training Systems and Efficiency",
+                "Efficiency, Compression, and Large-Scale Training"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [
+                "Daily Hot Papers"
+            ],
+            "HOTSPOT_PAPER_PRIMARY_KIND": "daily_hot",
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "Daily Hot Papers",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "llm_exact"
+        },
+        "2501.07237": {
+            "ARXIVID": "2501.07237",
+            "COMMENT": "Haar-transform coefficients compress adaptive-optimizer moment states while retaining the complete current gradient.",
+            "RELEVANCE": 10,
+            "NOVELTY": 8,
+            "PRIMARY_TOPIC_ID": "training_systems",
+            "MATCHED_TOPIC_IDS": [
+                "training_systems",
+                "efficiency_scaling"
+            ],
+            "TOPIC_MATCH_COMMENT": "Directly redesigns optimizer-state storage and updates for LLM pretraining, with substantial reported memory and throughput improvements.",
+            "HOTSPOT_PAPER_TAGS": [
+                "daily_hot"
+            ],
+            "HOTSPOT_PAPER_COMMENT": "Broadly important today: Haar-transform coefficients compress adaptive-optimizer moment states while retaining the complete current gradient.",
+            "SCORE": 18,
+            "authors": [
+                "Ziqing Wen",
+                "Ping Luo",
+                "Jiahuan Wang",
+                "Junlin Zeng",
+                "Kun Yuan",
+                "Dongsheng Li",
+                "Tao Sun"
+            ],
+            "title": "GWT: Scalable Optimizer State Compression for Large Language Model Training",
+            "abstract": "Training large language models (LLMs) requires substantial memory, a significant fraction of which is consumed by the moment states maintained by adaptive optimizers such as Adam. Existing memory-efficient approaches commonly compress parameters or gradients through low-rank projections, which may discard information outside the selected subspace or incur additional costs from subspace construction and singular value decomposition (SVD). We introduce \\textbf{Gradient Wavelet Transform (GWT)}, an SVD-free framework that applies a multilevel Haar transform to matrix gradients. GWT maintains first- and second-moment states only for the compact approximation coefficients, while retaining all detail coefficients transiently in each update. We show that the orthogonal transform preserves the complete current gradient and establish gradient alignment and a stationary-point guarantee for smooth objectives under bounded preconditioning and a directly verifiable coarse-momentum coherence condition. Experiments on language-model pre-training and downstream fine-tuning show that GWT reduces estimated model-and-optimizer-state memory by up to 52\\% while maintaining competitive or improved model quality. On LLaMA-3B pre-training, GWT achieves $1.9\\times$ the throughput of 8-bit Adam and is compatible with multiple optimizer families, including Adam, Adam-mini, and Muon.",
+            "arxiv_id": "2501.07237",
+            "PRIMARY_TOPIC_LABEL": "Large-Scale Training Systems and Efficiency",
+            "MATCHED_TOPIC_LABELS": [
+                "Large-Scale Training Systems and Efficiency",
+                "Efficiency, Compression, and Large-Scale Training"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [
+                "Daily Hot Papers"
+            ],
+            "HOTSPOT_PAPER_PRIMARY_KIND": "daily_hot",
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "Daily Hot Papers",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "heuristic"
+        },
+        "2608.24814": {
+            "ARXIVID": "2608.24814",
+            "COMMENT": "Identifies the learning-rate-to-parameter-norm ratio as a common control variable for pretraining loss trajectories.",
+            "RELEVANCE": 10,
+            "NOVELTY": 8,
+            "PRIMARY_TOPIC_ID": "architecture_training",
+            "MATCHED_TOPIC_IDS": [
+                "training_systems",
+                "architecture_training"
+            ],
+            "TOPIC_MATCH_COMMENT": "Directly explains pretraining dynamics through effective learning rate, connecting normalization and norm control to transferable scheduling and scaling-law predictions.",
+            "HOTSPOT_PAPER_TAGS": [
+                "daily_hot"
+            ],
+            "HOTSPOT_PAPER_COMMENT": "Broadly important today: Identifies the learning-rate-to-parameter-norm ratio as a common control variable for pretraining loss trajectories.",
+            "SCORE": 18,
+            "authors": [
+                "Zihan Liu",
+                "Ruiheng Zheng",
+                "Shaobo Zhang",
+                "Changxin Tian",
+                "Kunlong Chen",
+                "Zhiqiang Zhang",
+                "Lei Wu"
+            ],
+            "title": "Effective Learning Rate Governs Loss Dynamics in Language Model Pretraining",
+            "abstract": "We uncover ELR collapse in language model pretraining: learning rate (LR) and parameter norm govern loss dynamics primarily through their ratio, the effective learning rate (ELR). When ELR is matched across runs, their loss trajectories collapse throughout training despite substantially different LRs and parameter norms. Across optimizers, architectures, datasets, and model scales, mean collapse errors are typically a few x 10^-3, below the seed-to-seed variation measured in a representative configuration. Systematic ablations identify normalization design and the timescale of LR-norm variation as key determinants of collapse precision. Controlled interventions further show that weight decay and Hyperball shape loss dynamics primarily through the ELR schedules they induce. Replacing LR with ELR enables a fitted functional scaling law (FSL) to transfer across norm-control methods. The resulting ELR-based FSL also explains delayed acceleration, a recurring effect of norm control. Together, these results establish ELR as a common coordinate linking LR scheduling, norm control, and loss dynamics.",
+            "arxiv_id": "2608.24814",
+            "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+            "MATCHED_TOPIC_LABELS": [
+                "Large-Scale Training Systems and Efficiency",
+                "Architecture and Training Dynamics"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [
+                "Daily Hot Papers"
+            ],
+            "HOTSPOT_PAPER_PRIMARY_KIND": "daily_hot",
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "Daily Hot Papers",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "heuristic"
+        },
+        "2608.24070": {
+            "ARXIVID": "2608.24070",
+            "COMMENT": "Joint sparsity, quantization, and low-rank recovery reduce compression error and training cost, including sparse backpropagation and curvature estimation.",
+            "RELEVANCE": 10,
+            "NOVELTY": 7,
+            "PRIMARY_TOPIC_ID": "efficiency_scaling",
+            "MATCHED_TOPIC_IDS": [
+                "training_systems",
+                "efficiency_scaling"
+            ],
+            "TOPIC_MATCH_COMMENT": "Compression mechanisms unify the thesis; its curvature optimizer and sparse backward pass also directly address pretraining efficiency.",
+            "HOTSPOT_PAPER_TAGS": [
+                "daily_hot"
+            ],
+            "HOTSPOT_PAPER_COMMENT": "Broadly important today: Joint sparsity, quantization, and low-rank recovery reduce compression error and training cost, including sparse backpropagation and curvature estimation.",
+            "SCORE": 17,
+            "authors": [
+                "Mohammad Mozaffari"
+            ],
+            "title": "Compression Trinity: Exploring Sparsity, Quantization, and Low-Rank Approximations for LLM Compression",
+            "abstract": "Prohibitive computational and environmental costs impede the scalable deployment of Large Language Models (LLMs). Traditional compression techniques (sparsity, quantization, low-rank approximations) are typically applied in isolation, and each hits an accuracy-efficiency wall. This thesis proposes the \"Compression Trinity,\" a unified framework that applies the three pillars jointly: sparsity to reduce computation, quantization to minimize memory bandwidth, and low-rank approximations to recover accuracy. To accelerate pretraining, we apply the Trinity to the optimizer and model architecture. MKOR approximates curvature via block-diagonal sparsity and low-rank inversion, maintaining numerical stability for quantized states; it reduces curvature update complexity from $O(d^3)$ to $O(d^2)$ and accelerates convergence by up to 1.85x over KFAC. SLoPe accelerates training by up to 1.25x via a double-pruned backward pass for N:M sparsity, using low-rank \"lazy\" adapters in the final 1% of training to recover accuracy. For post-training compression, OPTIMA stabilizes static masks in a zero-training regime by formulating weight reconstruction as globally optimal column-wise quadratic programs, improving zero-shot accuracy by up to 3.97%. Given a fine-tuning budget, PATCH breaks the ceiling of static masks by learning a dynamic hybrid sparsity ratio between 0% and 50%, yielding up to 1.38x speedups. Finally, SLiM realizes the full Compression Trinity in one shot, using mathematically derived low-rank adapters to recover information lost to quantization and sparsity, improving accuracy by up to 5.66% over state-of-the-art methods and outperforming uncompressed dense models at equal parameter budgets by 0.6%. Together, these results show that jointly applying the Compression Trinity is essential for efficient, scalable, high-performance LLMs.",
+            "arxiv_id": "2608.24070",
+            "PRIMARY_TOPIC_LABEL": "Efficiency, Compression, and Large-Scale Training",
+            "MATCHED_TOPIC_LABELS": [
+                "Large-Scale Training Systems and Efficiency",
+                "Efficiency, Compression, and Large-Scale Training"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [
+                "Daily Hot Papers"
+            ],
+            "HOTSPOT_PAPER_PRIMARY_KIND": "daily_hot",
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "Daily Hot Papers",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "heuristic"
+        },
+        "2602.03702": {
+            "ARXIVID": "2602.03702",
+            "COMMENT": "Combines horizon-free learning-rate schedules with weight averaging for open-ended LLM pretraining.",
+            "RELEVANCE": 10,
+            "NOVELTY": 7,
+            "PRIMARY_TOPIC_ID": "training_systems",
+            "MATCHED_TOPIC_IDS": [
+                "training_systems",
+                "architecture_training"
+            ],
+            "TOPIC_MATCH_COMMENT": "Directly changes pretraining schedule design when the compute horizon is unknown, supported by convergence analysis and language-model experiments.",
+            "HOTSPOT_PAPER_TAGS": [
+                "daily_hot"
+            ],
+            "HOTSPOT_PAPER_COMMENT": "Broadly important today: Combines horizon-free learning-rate schedules with weight averaging for open-ended LLM pretraining.",
+            "SCORE": 17,
+            "authors": [
+                "Alexandru Meterez",
+                "Pranav Ajit Nair",
+                "Depen Morwani",
+                "Cengiz Pehlevan",
+                "Sham Kakade"
+            ],
+            "title": "Anytime Pretraining: Horizon-Free Learning-Rate Schedules with Weight Averaging",
+            "abstract": "Large language models are increasingly trained in continual or open-ended settings, where the total training horizon is not known in advance. Despite this, most existing pretraining recipes are not anytime: they rely on horizon-dependent learning rate schedules and extensive tuning under a fixed compute budget. In this work, we provide a theoretical analysis demonstrating the existence of anytime learning schedules for overparameterized linear regression, and we highlight the central role of weight averaging - also known as model merging - in achieving the minimax convergence rates of stochastic gradient descent. We show that these anytime schedules polynomially decay with time, with the decay rate determined by the source and capacity conditions of the problem. Empirically, we evaluate 150M and 300M parameter language models trained for up to 32x Chinchilla scale, comparing constant and $1/\\sqrt{t}$ schedules with weight averaging against a well-tuned cosine schedule. Across the full training range, the anytime schedules achieve comparable final loss to cosine decay. Taken together, our results suggest that weight averaging combined with simple, horizon-free step sizes offers a practical and effective anytime alternative to cosine learning rate schedules for large language model pretraining.",
+            "arxiv_id": "2602.03702",
+            "PRIMARY_TOPIC_LABEL": "Large-Scale Training Systems and Efficiency",
+            "MATCHED_TOPIC_LABELS": [
+                "Large-Scale Training Systems and Efficiency",
+                "Architecture and Training Dynamics"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [
+                "Daily Hot Papers"
+            ],
+            "HOTSPOT_PAPER_PRIMARY_KIND": "daily_hot",
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "Daily Hot Papers",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "heuristic"
+        },
+        "2608.24469": {
+            "ARXIVID": "2608.24469",
+            "COMMENT": "Low-rank Kronecker factors represent ternary weight updates that merge directly without dequantization.",
+            "RELEVANCE": 9,
+            "NOVELTY": 8,
+            "PRIMARY_TOPIC_ID": "efficiency_scaling",
+            "MATCHED_TOPIC_IDS": [
+                "efficiency_scaling"
+            ],
+            "TOPIC_MATCH_COMMENT": "The core contribution is a parameter-efficient adaptation mechanism that preserves ternary weights after merging.",
+            "HOTSPOT_PAPER_TAGS": [
+                "daily_hot"
+            ],
+            "HOTSPOT_PAPER_COMMENT": "Broadly important today: Low-rank Kronecker factors represent ternary weight updates that merge directly without dequantization.",
+            "SCORE": 17,
+            "authors": [
+                "Alexandru-Dragos Manolache",
+                "Yunqiang Li",
+                "Jan van Gemert"
+            ],
+            "title": "Low-Rank Ternary Adaptation for Fine-Tuning Transformers",
+            "abstract": "Ternary transformers offer extreme memory and compute efficiency, but existing low-bit LoRA-based methods cannot directly fine-tune ternary weights. Current approaches either require dequantization, restoring low-bit base weights to higher precision to merge with adaptation weight, or update only quantization parameters, preventing a merged model that remains ternary. We propose ternary multiplicative adaptation, which represents discrete updates of ternary weights such as sign flips or zeroing through a low-rank Kronecker factorization into two small ternary matrices applied element-wise to ternary weights. This design is parameter-efficient and expressive, preserves the ternary domain, and supports direct merging without dequantization. Experiments on six models across language and vision, including ternarized LLaMA-3 1B and 3B and a ternary ViT-B/16, demonstrate that our method recovers much of the performance lost to quantization and outperforms strong low-bit and ternary baselines. Code is available at https://github.com/alexmanoo/ternary_adaptation.",
+            "arxiv_id": "2608.24469",
+            "PRIMARY_TOPIC_LABEL": "Efficiency, Compression, and Large-Scale Training",
+            "MATCHED_TOPIC_LABELS": [
+                "Efficiency, Compression, and Large-Scale Training"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [
+                "Daily Hot Papers"
+            ],
+            "HOTSPOT_PAPER_PRIMARY_KIND": "daily_hot",
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "Daily Hot Papers",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "heuristic"
+        }
+    },
+    "sections": [
+        {
+            "kind": "daily_hot",
+            "label": "Daily Hot Papers",
+            "description": "Papers that feel broadly important to the day and belong in the hotspot paper feed.",
+            "paper_ids": [
+                "2604.15416",
+                "2501.07237",
+                "2608.24814",
+                "2608.24070",
+                "2602.03702",
+                "2608.24469"
+            ]
+        }
+    ]
 }

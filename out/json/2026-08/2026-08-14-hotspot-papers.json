@@ -2,8 +2,8 @@
     "schema_version": 1,
     "meta": {
         "date": "2026-08-14",
-        "total_candidates": 0,
-        "total_spotlight_papers": 0,
+        "total_candidates": 35,
+        "total_spotlight_papers": 2,
         "thresholds": {
             "daily_hot_score_cutoff": 15,
             "daily_hot_relevance_cutoff": 7,
@@ -18,10 +18,95 @@
     "diagnostics": {
         "candidate_count_by_kind": {
             "new_frontier": 0,
-            "daily_hot": 0
+            "daily_hot": 2
         },
-        "selected_count_by_kind": {}
+        "selected_count_by_kind": {
+            "daily_hot": 2
+        }
     },
-    "papers": {},
-    "sections": []
+    "papers": {
+        "2607.19058": {
+            "ARXIVID": "2607.19058",
+            "COMMENT": "Allocates different optimizer states to the MoE backbone, experts, and router, reducing state memory to 2.6% of AdamW's.",
+            "RELEVANCE": 10,
+            "NOVELTY": 7,
+            "PRIMARY_TOPIC_ID": "moe_training",
+            "MATCHED_TOPIC_IDS": [
+                "moe_training",
+                "training_systems",
+                "efficiency_scaling"
+            ],
+            "TOPIC_MATCH_COMMENT": "The optimizer explicitly exploits MoE parameter populations, making MoE training the primary fit; convergence evidence is limited to an 82M-token comparison.",
+            "HOTSPOT_PAPER_TAGS": [
+                "daily_hot"
+            ],
+            "HOTSPOT_PAPER_COMMENT": "Broadly important today: Allocates different optimizer states to the MoE backbone, experts, and router, reducing state memory to 2.6% of AdamW's.",
+            "SCORE": 17,
+            "authors": [
+                "Nuemaan Malik"
+            ],
+            "title": "Where Should Optimizer State Live? Tiered State Allocation for Memory-Efficient Mixture-of-Experts Training",
+            "abstract": "Optimizer state is the largest single line item in the memory budget of mixture-of-experts (MoE) training. On a 6.78B-parameter MoE language model AdamW keeps 50.6 GB of first and second moments to update 12.6 GB of bfloat16 weights. We study SkewAdam, an optimizer built on the observation that the three parameter populations of an MoE differ enough in size and gradient statistics that they should not receive the same state. Those populations are the dense backbone, the experts and the router. SkewAdam keeps float32 momentum plus a factored second moment for the backbone (5% of parameters), a factored second moment alone for the experts (95%) and an exact second moment for the router (<0.01%). The resulting state occupies 1.29 GB or 2.6% of AdamW's and peak training memory falls from 81.4 GB to 31.3 GB, within the budget of a 40 GB accelerator. In a controlled comparison from identical initializations over 82M tokens, SkewAdam reaches validation perplexity 108.4, ahead of AdamW (126.8), Muon (120.2) and Lion (393.7), and settles router load balance to within 1% of its uniform floor. The allocation is not what earns that perplexity. A tier ablation reaches the same value while carrying twenty times the state, so the tiers buy memory rather than accuracy. Same-platform runs separate what does earn it. Removing momentum costs 31 perplexity points (tuned Adafactor, 139.7) and replacing the factored second moment and its update clipping with a full second moment costs 10 (tuned AdamW, 118.5), so neither tuned baseline reaches the untuned tiered policy. Where optimizer state lives, these results suggest, matters at least as much as how much of it there is.",
+            "arxiv_id": "2607.19058",
+            "PRIMARY_TOPIC_LABEL": "MoE Training",
+            "MATCHED_TOPIC_LABELS": [
+                "MoE Training",
+                "Large-Scale Training Systems and Efficiency",
+                "Efficiency, Compression, and Large-Scale Training"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [
+                "Daily Hot Papers"
+            ],
+            "HOTSPOT_PAPER_PRIMARY_KIND": "daily_hot",
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "Daily Hot Papers",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "heuristic"
+        },
+        "2608.12218": {
+            "ARXIVID": "2608.12218",
+            "COMMENT": "Connects longer training contexts to a shift in gradient pressure from feed-forward layers toward attention, weakening parametric knowledge acquisition.",
+            "RELEVANCE": 9,
+            "NOVELTY": 8,
+            "PRIMARY_TOPIC_ID": "architecture_training",
+            "MATCHED_TOPIC_IDS": [
+                "architecture_training"
+            ],
+            "TOPIC_MATCH_COMMENT": "Controlled pretraining experiments and causal interventions explain how context length changes learning dynamics and inform training configuration.",
+            "HOTSPOT_PAPER_TAGS": [
+                "daily_hot"
+            ],
+            "HOTSPOT_PAPER_COMMENT": "Challenges the assumption that longer training contexts consistently improve models, with broad implications for pretraining and long-context reliability.",
+            "SCORE": 17,
+            "authors": [
+                "Arda Uzunoglu",
+                "Benjamin Van Durme",
+                "Daniel Khashabi"
+            ],
+            "title": "Information Abundance Paradox: Long-Context Training Undermines Parametric Knowledge",
+            "abstract": "Large language models are increasingly trained and deployed with long contexts that span documents, code repositories, and interaction histories. This scaling reflects the implicit assumption that training on longer contexts will only help the model by exposing it to richer evidence. We challenge this view by studying how the context window shapes a model's mode of learning, shifting it between parametric internalization and contextualization. We propose the Information Abundance Paradox, which hypothesizes that abundant relevant information in the training context can reduce the incentive to encode that information parametrically, thereby increasing reliance on context. In pretraining with long documents, increasing the context window improves language modeling, natural language understanding, and closed-book MCQA only up to an intermediate optimum, after which performance consistently declines. In supervised fine-tuning, more task-relevant train-time context improves performance with supporting context, but reduces robustness when context is absent or misleading at test time. Our analysis suggests that this behavior arises when longer context provides a lower complexity solution. Mechanistically, training with informative context shifts gradient pressure from feed-forward networks, often linked to parametric knowledge, toward attention modules, and causal interventions show that this shift increases reliance on context during inference. Overall, these findings support the Information Abundance Paradox and suggest that scaling toward near-infinite context is not simply a matter of supplying more data, even when high-quality long-context data is abundant.",
+            "arxiv_id": "2608.12218",
+            "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+            "MATCHED_TOPIC_LABELS": [
+                "Architecture and Training Dynamics"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [
+                "Daily Hot Papers"
+            ],
+            "HOTSPOT_PAPER_PRIMARY_KIND": "daily_hot",
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "Daily Hot Papers",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "llm_exact"
+        }
+    },
+    "sections": [
+        {
+            "kind": "daily_hot",
+            "label": "Daily Hot Papers",
+            "description": "Papers that feel broadly important to the day and belong in the hotspot paper feed.",
+            "paper_ids": [
+                "2607.19058",
+                "2608.12218"
+            ]
+        }
+    ]
 }

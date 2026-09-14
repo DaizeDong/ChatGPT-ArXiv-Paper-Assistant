@@ -6,20 +6,80 @@
             "score",
             "relevance"
         ],
-        "topic_schema_version": 1,
-        "total_papers": 0,
+        "topic_schema_version": 2,
+        "total_papers": 21,
         "usage": {
-            "model": "gpt-5.4",
+            "model": "llmcall:codexg+codex",
             "prompt_tokens": 0,
             "completion_tokens": 0,
             "prompt_cost": 0.0,
             "completion_cost": 0.0,
-            "total_arxiv_papers": 500,
-            "total_scanned_papers": 355,
-            "total_relevant_papers": 0
+            "total_arxiv_papers": 382,
+            "total_scanned_papers": 382,
+            "total_relevant_papers": 21,
+            "filter_health": {
+                "status": "ok",
+                "scanned_papers": 382,
+                "selected_papers": 21,
+                "llm_tokens": 0,
+                "message": "Scored 382 papers with 16/19 successful model calls; 21 selected."
+            },
+            "llm": {
+                "backend": "LLM backend: llmcall chain=codexg->codex->cc->claude",
+                "attempted": 19,
+                "succeeded": 16,
+                "failed": 3,
+                "by_backend": {
+                    "llmcall": 19
+                },
+                "by_provider": {
+                    "codexg": 15,
+                    "codex": 1
+                },
+                "errors": [
+                    "timeout after 18s",
+                    "timeout after 18s",
+                    "timeout after 18s"
+                ],
+                "seconds": 6069.5,
+                "trace": [
+                    "codexg: answered in 188.5s of 543.7s",
+                    "codexg: answered in 506.9s of 543.7s",
+                    "codexg: answered in 75.6s of 543.7s",
+                    "codexg: answered in 179.0s of 543.7s",
+                    "codexg: answered in 539.2s of 543.7s",
+                    "codexg: answered in 100.6s of 543.7s",
+                    "codexg: answered in 143.3s of 543.7s",
+                    "codexg: unavailable after 484.2s of 543.7s (codexg: retry budget 600s exceeds what the client will wait for (~542s, measured); using 480s so the request ends with a real status instead of being killed mid-flight",
+                    "codex: answered in 27.9s of 78.3s",
+                    "codexg: answered in 193.5s of 543.7s",
+                    "codexg: answered in 305.5s of 543.7s",
+                    "codexg: answered in 255.6s of 543.7s",
+                    "codexg: unavailable after 483.1s of 543.7s (codexg: retry budget 600s exceeds what the client will wait for (~542s, measured); using 480s so the request ends with a real status instead of being killed mid-flight",
+                    "codex: unavailable after 80.2s of 79.4s (timeout after 79s)",
+                    "cc: unavailable after 18.9s of 17.9s (timeout after 18s)",
+                    "claude: unavailable after 18.7s of 17.8s (timeout after 18s)",
+                    "codexg: answered in 188.2s of 543.7s",
+                    "codexg: answered in 185.3s of 543.7s",
+                    "codexg: answered in 467.9s of 543.7s",
+                    "codexg: unavailable after 544.7s of 543.7s (timeout after 544s)",
+                    "codex: unavailable after 18.6s of 17.8s (timeout after 18s)",
+                    "cc: unavailable after 18.7s of 18.0s (timeout after 18s)",
+                    "claude: unavailable after 18.8s of 18.0s (timeout after 18s)",
+                    "codexg: answered in 241.0s of 543.7s",
+                    "codexg: unavailable after 544.6s of 543.7s (timeout after 544s)",
+                    "codex: unavailable after 18.6s of 17.9s (timeout after 18s)",
+                    "cc: unavailable after 18.7s of 18.0s (timeout after 18s)",
+                    "claude: unavailable after 19.0s of 18.0s (timeout after 18s)",
+                    "codexg: answered in 184.6s of 543.7s"
+                ]
+            },
+            "remedied": true
         }
     },
     "topic_order": [
+        "moe_training",
+        "training_systems",
         "architecture_training",
         "efficiency_scaling",
         "representation_structure",
@@ -27,17 +87,27 @@
         "world_models_open_ended_rl"
     ],
     "diagnostics": {
-        "total_papers": 0,
+        "total_papers": 21,
         "topic_counts": [
+            {
+                "topic_id": "moe_training",
+                "topic_label": "MoE Training",
+                "paper_count": 0
+            },
+            {
+                "topic_id": "training_systems",
+                "topic_label": "Large-Scale Training Systems and Efficiency",
+                "paper_count": 5
+            },
             {
                 "topic_id": "architecture_training",
                 "topic_label": "Architecture and Training Dynamics",
-                "paper_count": 0
+                "paper_count": 11
             },
             {
                 "topic_id": "efficiency_scaling",
                 "topic_label": "Efficiency, Compression, and Large-Scale Training",
-                "paper_count": 0
+                "paper_count": 5
             },
             {
                 "topic_id": "representation_structure",
@@ -55,18 +125,783 @@
                 "paper_count": 0
             }
         ],
-        "assignment_source_counts": {},
-        "llm_assignment_count": 0,
+        "assignment_source_counts": {
+            "llm_exact": 21
+        },
+        "llm_assignment_count": 21,
         "heuristic_assignment_count": 0,
         "default_assignment_count": 0,
         "invalid_primary_topic_fallback_count": 0,
         "missing_primary_topic_fallback_count": 0,
         "hotspot_paper_kind_counts": {
             "new_frontier": 0,
-            "daily_hot": 0
+            "daily_hot": 1
         },
-        "hotspot_paper_assignment_source_counts": {}
+        "hotspot_paper_assignment_source_counts": {
+            "default": 20,
+            "llm_exact": 1
+        }
     },
-    "papers": {},
-    "topic_sections": []
+    "papers": {
+        "2608.06834": {
+            "ARXIVID": "2608.06834",
+            "COMMENT": "Introduces edge-modulated attention and address referral for dynamically revising relational graphs across layers.",
+            "RELEVANCE": 8,
+            "NOVELTY": 8,
+            "PRIMARY_TOPIC_ID": "architecture_training",
+            "MATCHED_TOPIC_IDS": [
+                "architecture_training"
+            ],
+            "TOPIC_MATCH_COMMENT": "The contribution is a new computational architecture supported by ablations and mechanistic analysis, although validation is limited to Sudoku.",
+            "HOTSPOT_PAPER_TAGS": [],
+            "HOTSPOT_PAPER_COMMENT": "",
+            "SCORE": 16,
+            "authors": [
+                "Lintai Hou"
+            ],
+            "title": "Graph Machine: Exploring Edge Mechanisms as an Inductive Bias",
+            "abstract": "Transformers provide a powerful architecture for global content-based matching, but reasoning problems may benefit from a stronger inductive bias toward iterative traversal of latent relations. We introduce Graph Machine, an architecture with two explicit edge-based mechanisms: Edge-augmented attention, in which edges modulate attention between nodes, and edge-centric referral, in which nodes exchange addresses to update their edges. Conceptually, this enables the model to dynamically and differentiably construct and revise relational graphs across layers. We study this inductive bias using Sudoku under controlled settings and find that Graph Machine outperforms Transformer baselines, with ablation studies and mechanistic analysis attributing the gains to the edge mechanisms. Surprisingly, we found that the model discovers a compact edge-based construction for Sudoku geometry. Our results support explicit edge mechanisms as a promising architectural design, motivating broader evaluation.",
+            "arxiv_id": "2608.06834",
+            "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+            "MATCHED_TOPIC_LABELS": [
+                "Architecture and Training Dynamics"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [],
+            "HOTSPOT_PAPER_PRIMARY_KIND": null,
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+        },
+        "2606.07559": {
+            "ARXIVID": "2606.07559",
+            "COMMENT": "Decomposes falling-loss, unchanged-ranking failures into correct-token commitment and embedding-induced drag.",
+            "RELEVANCE": 8,
+            "NOVELTY": 7,
+            "PRIMARY_TOPIC_ID": "architecture_training",
+            "MATCHED_TOPIC_IDS": [
+                "architecture_training"
+            ],
+            "TOPIC_MATCH_COMMENT": "The core contribution is mechanistic optimization analysis linking loss, token ranking, and learning-rate sensitivity, with evidence limited to near-synonym fine-tuning.",
+            "HOTSPOT_PAPER_TAGS": [],
+            "HOTSPOT_PAPER_COMMENT": "",
+            "SCORE": 15,
+            "authors": [
+                "Vaibhav Prakash",
+                "Jayasri Dontabhaktuni"
+            ],
+            "title": "Phantom Transitions in Language Model Fine-Tuning: A Density-Matrix Analysis",
+            "abstract": "Language models fine-tuned where the correct completion must outrank a near-synonym competitor often fail silently. The cross-entropy loss falls monotonically while the correct token never overtakes the competitor in the model's ranking. We study this across five transformer architectures from two families spanning a sixfold parameter range, on ten contexts whose correct and competing completions share substantial embedding overlap. We build an order parameter combining the predicted distribution with embedding overlap, as a density matrix because that distribution lives over a non-orthogonal basis. It decomposes additively into a signal term tracking commitment to the correct token and a drag term set by how the embedding bulk leaks probability into the score. This isolates two failure modes. In kinematic failure the signal stays too small and the model never commits. In structural failure the drag worsens during fine-tuning, so the model degrades geometrically as its loss falls. The order parameter also shows sharp jumps resembling phase transitions. We test the spontaneous-symmetry-breaking reading by tracking it after every gradient step, and rule it out. The jumps persist under LoRA even though the token embedding matrix never changes. No geometric phase transition is possible when that geometry cannot move, so the discontinuity lies entirely in the softmax readout. A few dimensionless quantities organize the trajectory across architectures. One is consistent across all five models under full fine-tuning. A second sorts architectures into two classes by their bulk embedding distribution and predicts whether LoRA alone can make a sentence commit. As a blind test, the framework predicts a held-out architecture's critical learning rate to within 2.1% of a later sweep. These results characterize this near-synonym mechanism and need recalibration before extrapolation.",
+            "arxiv_id": "2606.07559",
+            "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+            "MATCHED_TOPIC_LABELS": [
+                "Architecture and Training Dynamics"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [],
+            "HOTSPOT_PAPER_PRIMARY_KIND": null,
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+        },
+        "2608.15018": {
+            "ARXIVID": "2608.15018",
+            "COMMENT": "Routing-aware self-speculation improves expert reuse and reduces verification cost in MoE decoding.",
+            "RELEVANCE": 8,
+            "NOVELTY": 7,
+            "PRIMARY_TOPIC_ID": "efficiency_scaling",
+            "MATCHED_TOPIC_IDS": [
+                "efficiency_scaling"
+            ],
+            "TOPIC_MATCH_COMMENT": "The core contribution is a decoding-efficiency mechanism for memory-constrained MoE execution; the routing changes serve inference.",
+            "HOTSPOT_PAPER_TAGS": [],
+            "HOTSPOT_PAPER_COMMENT": "",
+            "SCORE": 15,
+            "authors": [
+                "Haochen Huang",
+                "Shengxuan Qiu",
+                "Meng Li"
+            ],
+            "title": "S2-MoE: Enabling Efficient Self-Speculative Decoding for Mixture-of-Experts on Edge Devices",
+            "abstract": "Deploying large language models (LLMs) for inference on edge devices is challenging due to severe memory and bandwidth constraints. While speculative decoding and Mixture-of-Experts (MoE) have been proposed to improve inference efficiency, naively combining them often incurs excessive verification overhead and poor expert reuse, limiting their effectiveness in memory-bound edge settings. In this work, we propose S2-MoE, an efficient self-speculative decoding framework for MoE inference on edge devices. S2-MoE reduces redundant verification through routing-aware adaptive speculative expansion, improves verification efficiency with reuse-aware expert gating, and aligns draft and target execution via shared context. Implemented in llama$.$cpp, S2-MoE achieves up to $5.3\\times$ speedup (about $2.0\\times$ on average) over standard autoregressive decoding across diverse MoE models and datasets on edge devices. Code is available at https://github.com/angerybob/S2-MoE.",
+            "arxiv_id": "2608.15018",
+            "PRIMARY_TOPIC_LABEL": "Efficiency, Compression, and Large-Scale Training",
+            "MATCHED_TOPIC_LABELS": [
+                "Efficiency, Compression, and Large-Scale Training"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [],
+            "HOTSPOT_PAPER_PRIMARY_KIND": null,
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+        },
+        "2608.18576": {
+            "ARXIVID": "2608.18576",
+            "COMMENT": "Sequence-pooled normalization creates a global context path that bypasses the convolutional receptive field.",
+            "RELEVANCE": 8,
+            "NOVELTY": 7,
+            "PRIMARY_TOPIC_ID": "architecture_training",
+            "MATCHED_TOPIC_IDS": [
+                "architecture_training"
+            ],
+            "TOPIC_MATCH_COMMENT": "The Jacobian exposes sequence-wide coupling through normalization statistics, directly matching analysis of an architectural mechanism.",
+            "HOTSPOT_PAPER_TAGS": [],
+            "HOTSPOT_PAPER_COMMENT": "",
+            "SCORE": 15,
+            "authors": [
+                "Qing Tian"
+            ],
+            "title": "Beyond receptive fields: sequence-pooled normalization can supply most of a sequence labeler's context",
+            "abstract": "A convolutional sequence labeler's receptive field is routinely treated as the extent of the model's usable context: it sets dilation schedules, bounds streaming horizons, and underwrites locality claims. However, we show that this can be false: when a normalization layer computes statistics from the current input along the sequence at inference, those statistics open a sequence-spanning path that bypasses the convolutional receptive field to provide global context. We derive this from the layer's Jacobian (the criterion needs no experiment), and what the path carries has a closed form. On a synthetic labeling process with computable optima, the global summary that a sequence-spanning normalization encodes already supplies almost all of what a larger receptive field would buy where labels come in long runs: a network reaching 9 positions comes within 0.009 of the whole-sequence optimum, against a near-chance bound for its reach. Closing the path, by taking the same statistics per position, multiplies what enlarging the receptive field is worth by up to an order of magnitude on simulated genomes at every difficulty level tested and on real 1000 Genomes haplotypes. The same path also confounds attribution: ablating a trained network's receptive-field-enlarging blocks severs part of the path, overstating their contribution 8.3-16.1-fold relative to retraining from scratch. The substitution of normalization for receptive field fades as labels switch more often. Where labels run long, neither the receptive-field justification nor the ablation is wrong about its numbers, but both credit the wrong component.",
+            "arxiv_id": "2608.18576",
+            "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+            "MATCHED_TOPIC_LABELS": [
+                "Architecture and Training Dynamics"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [],
+            "HOTSPOT_PAPER_PRIMARY_KIND": null,
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+        },
+        "2608.18410": {
+            "ARXIVID": "2608.18410",
+            "COMMENT": "Role-conditioned routing compresses value subspaces within retained tokens, substantially reducing KV memory.",
+            "RELEVANCE": 8,
+            "NOVELTY": 7,
+            "PRIMARY_TOPIC_ID": "efficiency_scaling",
+            "MATCHED_TOPIC_IDS": [
+                "efficiency_scaling"
+            ],
+            "TOPIC_MATCH_COMMENT": "The core contribution is a learned KV-compression mechanism demonstrated on a 7B model; its VLA-specific formulation narrows its applicability.",
+            "HOTSPOT_PAPER_TAGS": [],
+            "HOTSPOT_PAPER_COMMENT": "",
+            "SCORE": 15,
+            "authors": [
+                "Wei Jiang",
+                "Wei Wang"
+            ],
+            "title": "Role-Conditioned Sub-Token Routing for Efficient Vision-Language-Action Policies",
+            "abstract": "Vision-Language-Action (VLA) models process long multimodal token sequences, making inference expensive in both memory and computation. Existing efficiency methods mainly reduce visual tokens, but aggressive token pruning becomes fragile because removing a token discards its entire representation. Sub-token compression provides a complementary alternative by retaining more tokens while reducing their value width. However, directly applying sub-token compression to VLA policies is less effective because information important for perception, language understanding, and control is distributed differently across the multimodal representation. We introduce Role-Conditioned Sub-Token Routing (RoleSub), which learns how to compress the value representations of retained tokens. After visual token reduction, RoleSub partitions each retained value representation into groups in an orthogonal space and uses a lightweight router to determine which groups should be preserved. The routing decision is conditioned on the token representation, a learned latent role representation, and language context. The same mechanism can also be applied to language values, allowing visual and language representations to be compressed without removing additional tokens. We evaluate RoleSub on OpenVLA-OFT-7B across the four LIBERO suites. At matched visual-KV budgets, RoleSub outperforms a trained token-only control in 33 of 36 settings, with the largest gains under aggressive compression. Combining visual and language compression reduces total KV to 9.2--11.3% of the original while retaining strong control performance on most tasks. These results show that reducing the representation within retained tokens provides an effective complement to token pruning for aggressive VLA compression.",
+            "arxiv_id": "2608.18410",
+            "PRIMARY_TOPIC_LABEL": "Efficiency, Compression, and Large-Scale Training",
+            "MATCHED_TOPIC_LABELS": [
+                "Efficiency, Compression, and Large-Scale Training"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [],
+            "HOTSPOT_PAPER_PRIMARY_KIND": null,
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+        },
+        "2604.09560": {
+            "ARXIVID": "2604.09560",
+            "COMMENT": "Decomposes softmax attention into geometric, potential and circulation components, then tests their functional importance through ablations.",
+            "RELEVANCE": 8,
+            "NOVELTY": 7,
+            "PRIMARY_TOPIC_ID": "architecture_training",
+            "MATCHED_TOPIC_IDS": [
+                "architecture_training"
+            ],
+            "TOPIC_MATCH_COMMENT": "The analysis targets the attention operator itself, using structural interventions in language models and diffusion transformers to support the decomposition.",
+            "HOTSPOT_PAPER_TAGS": [],
+            "HOTSPOT_PAPER_COMMENT": "",
+            "SCORE": 15,
+            "authors": [
+                "Julio Candanedo"
+            ],
+            "title": "The Diffusion-Attention Connection",
+            "abstract": "Softmax attention is the row-normalized operator of a diffusion map: both normalize a learned score into a Markov operator, and differ only in what the score is allowed to contain. Decomposing that score reveals three geometric sectors: a metric core with Witten-Laplacian continuum limit, an exact node-potential sector corresponding to a Markov--Witten change of measure, and a circulating sector realized as irreversible Markov--Girsanov transport or as a magnetic $U(1)$ phase. Attention thereby becomes auditable in familiar mathematics: every trained head carries measurable geometry, potential, and flux, while standard mechanisms acquire geometric addresses---Coifman--Lafon normalization as an exact density correction, rotary embeddings as pure gauge, and AdaLN as a Cauchy--Green deformation combined with an Witten deformation. Experiments on pretrained diffusion transformers and language models test this decomposition: enforcing positive-semi-definite geometry is nearly free, consistent with the identification, whereas removing circulation incurs a substantial cost, sharpest on induction.",
+            "arxiv_id": "2604.09560",
+            "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+            "MATCHED_TOPIC_LABELS": [
+                "Architecture and Training Dynamics"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [],
+            "HOTSPOT_PAPER_PRIMARY_KIND": null,
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+        },
+        "2608.18469": {
+            "ARXIVID": "2608.18469",
+            "COMMENT": "Detachment with local objectives enables blockwise backward passes to overlap subsequent forward computation on separate CUDA streams.",
+            "RELEVANCE": 8,
+            "NOVELTY": 7,
+            "PRIMARY_TOPIC_ID": "training_systems",
+            "MATCHED_TOPIC_IDS": [
+                "training_systems"
+            ],
+            "TOPIC_MATCH_COMMENT": "The core contribution is a training execution schedule that changes gradient dependencies to expose concurrency; recommendation supplies the main validation workload.",
+            "HOTSPOT_PAPER_TAGS": [],
+            "HOTSPOT_PAPER_COMMENT": "",
+            "SCORE": 15,
+            "authors": [
+                "Ergan Shang",
+                "Flavio Sales Truzzi"
+            ],
+            "title": "ERASE: EaRly bAckpropagation SchEdule for Faster Training of Modern Recommendation Systems",
+            "abstract": "Lightweight proxy models enable rapid experimentation without repeatedly training frontier-scale systems, but their small kernels often leave modern accelerators underutilized. Conventional training compounds this inefficiency by scheduling the forward and backward passes as disjoint phases, so spare capacity in one cannot be filled by work from the other. We reinterpret the detachment mechanism of Forward-Forward (FF) as a scheduling primitive: given a local objective, detaching a block's output removes downstream gradient dependencies, making its backward pass ready when its forward pass finishes. ERASE launches each detached subgraph's backward pass early on a separate CUDA stream, overlapping it with subsequent forward work. Execution trace on a lightweight transformer demonstrates this overlap and its limit: a kernel that saturates the device leaves no capacity for concurrency. On a large-scale click-through-rate model, detaching six dense subarchitectures improves training throughput by up to $9.51\\%$ while keeping normalized entropy close to the baseline.",
+            "arxiv_id": "2608.18469",
+            "PRIMARY_TOPIC_LABEL": "Large-Scale Training Systems and Efficiency",
+            "MATCHED_TOPIC_LABELS": [
+                "Large-Scale Training Systems and Efficiency"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [],
+            "HOTSPOT_PAPER_PRIMARY_KIND": null,
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+        },
+        "2608.19171": {
+            "ARXIVID": "2608.19171",
+            "COMMENT": "Introduces a Poisson-integral attention operator with exact uncertainty statistics available from a single deterministic pass.",
+            "RELEVANCE": 7,
+            "NOVELTY": 8,
+            "PRIMARY_TOPIC_ID": "architecture_training",
+            "MATCHED_TOPIC_IDS": [
+                "architecture_training"
+            ],
+            "TOPIC_MATCH_COMMENT": "The new attention operator and its variance identity are core architectural contributions, while validation remains specific to irregular time series.",
+            "HOTSPOT_PAPER_TAGS": [],
+            "HOTSPOT_PAPER_COMMENT": "",
+            "SCORE": 15,
+            "authors": [
+                "Sotirios P. Chatzis",
+                "Loukas Papadoulas"
+            ],
+            "title": "LÃ©vy Attention: Single-Pass Predictive Uncertainty for Continuous-Time Attention",
+            "abstract": "Deep models for irregularly-sampled time series answer queries at arbitrary continuous timestamps, yet report nothing about how far each answer should be trusted. We show the attention layer itself can close that gap: with the right stochastic formulation, the pass that makes each prediction also reports, in closed form and at no extra cost, how far it should be trusted. We introduce LÃ©vy Attention, a cross-attention operator whose output is a stochastic integral against an inhomogeneous Poisson random measure: query-key compatibilities assemble an intensity over a continuous (time x channel) index space, the measure scatters atoms under it, and the output averages an interpolated value field at those atoms. In expectation it reduces to a mollified cosine-kernel attention, so it replaces a softmax layer and trains with exact gradients. What softmax discards, the Poisson construction preserves in closed form: the evidence $Î_q$ (total compatibility mass) and the disagreement $\\mathrm{tr}\\,Î£_V(q)$ (value spread). An exact variance identity makes their combination $\\hatÏ(q)=\\sqrt{\\mathrm{tr}\\,Î£_V(q)\\,Ï(Î_q)}$ the root-mean-square deviation of the sampled operator, emitted by the deterministic pass with no trained head. Empirically, disagreement carries the signal, while the evidence factor swings from uninformative on dense data to strongly informative on sparse. On t-PatchGNN the operator swap costs at most 5.6% accuracy against a matched control and nothing on the sparsest dataset. The free disagreement signal improves on 20-pass MC dropout across matched five-seed suites, and $\\hatÏ$ scales a calibrated Gaussian whose zero-sample CRPS beats a fifty-draw sampler; a split-conformal wrapper reaches nominal coverage at every level, and one pass ranks 3,383 unseen patients by trust in 1.4 seconds.",
+            "arxiv_id": "2608.19171",
+            "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+            "MATCHED_TOPIC_LABELS": [
+                "Architecture and Training Dynamics"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [],
+            "HOTSPOT_PAPER_PRIMARY_KIND": null,
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+        },
+        "2608.19285": {
+            "ARXIVID": "2608.19285",
+            "COMMENT": "Combines attention-weighted token clustering with residual shrinkage for training-free visual-token pruning.",
+            "RELEVANCE": 8,
+            "NOVELTY": 6,
+            "PRIMARY_TOPIC_ID": "efficiency_scaling",
+            "MATCHED_TOPIC_IDS": [
+                "efficiency_scaling"
+            ],
+            "TOPIC_MATCH_COMMENT": "The core contribution is a reusable VLM token-reduction mechanism, with a narrower focus on inference efficiency and robustness under image noise.",
+            "HOTSPOT_PAPER_TAGS": [],
+            "HOTSPOT_PAPER_COMMENT": "",
+            "SCORE": 14,
+            "authors": [
+                "Baptiste Rossigneux",
+                "Inna Kucher",
+                "Vincent Lorrain",
+                "Emmanuel Casseau"
+            ],
+            "title": "Clustering and Token Denoising for Faster and More Robust VLMs",
+            "abstract": "Recent Visual-Language Models (VLMs) have enhanced the capabilities of pre-trained LLMs by adding vision tokens alongside text, with approaches like LLaVA showing impressive results. However, the computational burden of processing up to 576 or 729 visual tokens makes edge deployment challenging. While various token pruning techniques require retraining, some are training-free and thus can easily adapt to architecture changes. We introduce ClustRS, a two-part, training-free algorithm for robust token pruning. Its first component is an attention-weighted, clustering algorithm that selects representative tokens from each semantic cluster. The second component, Residual Shrinkage, is a one-pass denoising step on the selected tokens. These training-free lightweight steps make LLaVA ready for real-world data, improving robustness to a wide range of image-noise types and intensities. Experimental results on the ScienceQA-IMG and MM-VET benchmarks show our method outperforms attention- and diversity-based methods by up to 20\\% under extreme noise and token conditions (reducing tokens by 97\\%, down to 16 tokens) on LLaVA 1.5 7b and achieves exceptional results on LLaVA-OneVision, where we match baseline performance with fewer than one-third of their tokens under mild noise conditions. Our study demonstrates a simple yet powerful alternative to both score-only and diversity-only pruning rules, paving the way for compute-efficient and noise-resilient VLM deployment.",
+            "arxiv_id": "2608.19285",
+            "PRIMARY_TOPIC_LABEL": "Efficiency, Compression, and Large-Scale Training",
+            "MATCHED_TOPIC_LABELS": [
+                "Efficiency, Compression, and Large-Scale Training"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [],
+            "HOTSPOT_PAPER_PRIMARY_KIND": null,
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+        },
+        "2607.20145": {
+            "ARXIVID": "2607.20145",
+            "COMMENT": "Hierarchical parallelism, communication orchestration and kernel optimization achieve a reported 34.22% MFU for trillion-scale full-parameter training.",
+            "RELEVANCE": 8,
+            "NOVELTY": 6,
+            "PRIMARY_TOPIC_ID": "training_systems",
+            "MATCHED_TOPIC_IDS": [
+                "training_systems"
+            ],
+            "TOPIC_MATCH_COMMENT": "Large-scale training execution and utilization are substantial contributions, although the paper also emphasizes domain post-training and provides limited algorithmic detail.",
+            "HOTSPOT_PAPER_TAGS": [
+                "daily_hot"
+            ],
+            "HOTSPOT_PAPER_COMMENT": "The reported utilization gains for trillion-scale MoE post-training on Ascend have broad implications for frontier training infrastructure.",
+            "SCORE": 14,
+            "authors": [
+                "Dongfang Li",
+                "Xiaodong Luo",
+                "Ruoyu Sun",
+                "Xuhui Chen",
+                "Linyuan Qiu",
+                "Jian Meng",
+                "Zhengxuan Lu",
+                "Yiting Wang",
+                "Yucheng Xie",
+                "Tao Guo",
+                "Tianxiang Fang",
+                "Jing Li",
+                "Sihang Chen",
+                "Shihao Hong",
+                "Chang Liu",
+                "Weihua Dai",
+                "Zirong Zeng",
+                "Ziwei Zhu",
+                "Zhuohan Wang",
+                "Zhengjun Yue",
+                "Igor Vasilyev",
+                "Min Liu",
+                "Weijian Sun",
+                "Xin Chen",
+                "Yingmeng Gao",
+                "Jinhua Zhou",
+                "Taolue Chen",
+                "Chenwei Wu",
+                "Dong Zhang",
+                "Wenlong Jin",
+                "Jinmin Xiang",
+                "Barkova Maria",
+                "Ushakov Anton",
+                "Xianfei Jin",
+                "Tian Ding",
+                "Zhihang Lin",
+                "Qian Chen",
+                "Linxin Yang",
+                "Mingzhe Yang",
+                "Bingwei Zhang",
+                "Hongzhang Yang",
+                "Fangxue Zhang",
+                "Shijun Qin",
+                "Jie Yu",
+                "Cuihua Hu",
+                "Tolstykh Vasiliy",
+                "Nosov Ivan",
+                "Abdullin Amir",
+                "Zhicheng Zhou",
+                "Xin Zhang",
+                "Zhixiong Ning",
+                "Xutong Zhao",
+                "Junjie Huang",
+                "Jiajun Liu",
+                "Weiyan Kong",
+                "Zheng Zhang",
+                "Wenhan Luo",
+                "Lin Hu",
+                "Yangbo Guo",
+                "Li Zeng",
+                "Shihao Zhang",
+                "Baotian Hu",
+                "Min Zhang",
+                "Haizhou Li",
+                "Zhiquan Luo"
+            ],
+            "title": "SLAI T-Rex: Full-Parameter Post-training of the DeepSeek-V4 Family on Ascend SuperPOD",
+            "abstract": "Full-parameter post-training of trillion-parameter-scale MoE models introduces substantial system-level challenges for large-scale distributed training, including severe memory pressure, non-overlapped communication overhead, and inefficient kernel execution. While most large-scale LLM training systems are built around GPU-based clusters, this report presents an end-to-end optimization practice on the Ascend NPU SuperPOD. Using the DeepSeek-V4 model family as the target workload, we develop a hierarchical optimization framework spanning model-level parallelism, computation-communication orchestration, and low-level kernel execution. The resulting system achieves 34.22% Model FLOPs Utilization (MFU) with a 2.93x improvement over the open-source baseline recipe while maintaining training stability. Building on this optimized infrastructure, we further establish a CPT and SFT workflow for complex Operations Research (OR) tasks. We refer to the integrated framework as SLAI T-Rex. Using DeepSeek-V4-Flash, we develop OR-oriented CPT and SFT data pipelines that combine collected domain resources with solver-verified synthetic optimization documents. The resulting dataset contains 10K high-quality SFT samples spanning four task categories and three problem representations. The specialized model achieves the highest average zero-shot Pass@1 score among the evaluated models, reaching 71.81% and outperforming GPT-5.4-Mini and the base DeepSeek-V4-Flash model by 3.98 and 11.27 percentage points, respectively. Overall, this work demonstrates a full-stack pathway from efficient trillion-parameter model post-training on Ascend infra to domain-specialized Flash models for solver-grounded mathematical modeling, advancing frontier-model systems for complex reasoning.",
+            "arxiv_id": "2607.20145",
+            "PRIMARY_TOPIC_LABEL": "Large-Scale Training Systems and Efficiency",
+            "MATCHED_TOPIC_LABELS": [
+                "Large-Scale Training Systems and Efficiency"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [
+                "Daily Hot Papers"
+            ],
+            "HOTSPOT_PAPER_PRIMARY_KIND": "daily_hot",
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "Daily Hot Papers",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "llm_exact"
+        },
+        "2608.18656": {
+            "ARXIVID": "2608.18656",
+            "COMMENT": "Inter-head packing and blocked attention adapt FlashAttention to scalable vector lengths, improving register utilization and memory locality.",
+            "RELEVANCE": 8,
+            "NOVELTY": 6,
+            "PRIMARY_TOPIC_ID": "efficiency_scaling",
+            "MATCHED_TOPIC_IDS": [
+                "efficiency_scaling"
+            ],
+            "TOPIC_MATCH_COMMENT": "The vector-aware attention kernel directly reduces model execution cost, with a narrower emphasis on CPU inference and simulation-based scaling evidence.",
+            "HOTSPOT_PAPER_TAGS": [],
+            "HOTSPOT_PAPER_COMMENT": "",
+            "SCORE": 14,
+            "authors": [
+                "Sonia Rani Gupta",
+                "Nikela Papadopoulou",
+                "Miquel PericÃ s"
+            ],
+            "title": "FlashAttention for Scalable Vector Architectures",
+            "abstract": "Inference with transformer models on CPUs is increasingly important, especially for Small Language Models (SLMs), where vector architectures are emerging as a promising execution substrate. The attention module is a major bottleneck due to high memory bandwidth requirements; FlashAttention mitigates this by fusing operations to improve data locality and reduce intermediate memory traffic. In this paper, we present FlashAttention-V, a blocked FlashAttention for scalable vector architectures that adapts efficiently from short to very long vectors by exploiting parallelism across attention heads, inter-head packing to enable efficient utilization of vector lengths beyond the head dimension, and improving vector register utilization and memory access locality. We integrate FlashAttention-V into ggml within llama.cpp and evaluate it on TinyLlama, Llama 3.2, Qwen2.5, and Pythia-410M using gem5 and a Banana Pi BPI-F3. On the Banana Pi BPI-F3, we confirm that loop reordering and loop unrolling across attention heads are effective optimization principles, scaling performance gains with larger models and most pronounced with short contexts and during decoding. Simulation-based analysis shows that FlashAttention-V achieves 22x-42x speedup over scalar FlashAttention at 512-bit VL in prefill, with an additional 2x-2.5x gain scaling to 64 lanes and 4096-bit VL. During decode, FlashAttention-V achieves 8x-11x speedup using 512-bit vector lengths over scalar FlashAttention, with performance showing diminishing sensitivity to vector width and lane count due to single-token, memory-bound execution. We further identify structural bottlenecks in Q8_0 quantized linear layers that limit arithmetic amortization under long-vector execution, consistent across RVV and Arm SVE, indicating that current quantization formats pose a fundamental challenge to long-vector scalability.",
+            "arxiv_id": "2608.18656",
+            "PRIMARY_TOPIC_LABEL": "Efficiency, Compression, and Large-Scale Training",
+            "MATCHED_TOPIC_LABELS": [
+                "Efficiency, Compression, and Large-Scale Training"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [],
+            "HOTSPOT_PAPER_PRIMARY_KIND": null,
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+        },
+        "2608.18803": {
+            "ARXIVID": "2608.18803",
+            "COMMENT": "Isolates data co-observation as a cause of sequential-training deficits after controlling for forgetting and plasticity.",
+            "RELEVANCE": 7,
+            "NOVELTY": 7,
+            "PRIMARY_TOPIC_ID": "architecture_training",
+            "MATCHED_TOPIC_IDS": [
+                "architecture_training"
+            ],
+            "TOPIC_MATCH_COMMENT": "The core insight explains how training-data access schedules affect learning beyond retention and plasticity; implications for large-model pretraining remain indirect.",
+            "HOTSPOT_PAPER_TAGS": [],
+            "HOTSPOT_PAPER_COMMENT": "",
+            "SCORE": 14,
+            "authors": [
+                "Timm Hess",
+                "Abhishek Jha",
+                "Gido M. van de Ven",
+                "Tinne Tuytelaars"
+            ],
+            "title": "Forgetting, plasticity, and co-observation: a third facet of continual learning",
+            "abstract": "Efficient continual learning remains a fundamental challenge for deep neural networks. While catastrophic forgetting and loss of plasticity are widely considered the primary obstacles to overcome, we show that these two issues cannot fully explain the performance gap between naive sequential training and offline joint training. In this paper, we highlight data co-observation as a distinct factor influencing continual learning performance. By decoupling the constraints of separate data access from stability and plasticity, we systematically investigate the representational benefits gained by observing training data together. Empirically, we demonstrate a consistent performance difference between joint and separate training across both supervised and self-supervised paradigms in generic data-incremental \"chunking\" scenarios, whilst mitigating forgetting and controlling for plasticity. Our findings indicate that simultaneous observation of training data (co-observation) yields benefits to the learner's generalization that extend well beyond mere knowledge retention, and that this effect does not require a specific continual distribution shift. Furthermore, we contextualize prominent continual learning mechanisms through this lens: while distillation-based approaches act only as effective knowledge retention mechanisms, our results suggest that the empirical success of memory replay goes beyond the mitigation of forgetting, actively reintroducing the benefits of data co-observation into the learning process.",
+            "arxiv_id": "2608.18803",
+            "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+            "MATCHED_TOPIC_LABELS": [
+                "Architecture and Training Dynamics"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [],
+            "HOTSPOT_PAPER_PRIMARY_KIND": null,
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+        },
+        "2603.09355": {
+            "ARXIVID": "2603.09355",
+            "COMMENT": "Adds damping-corrected stochastic acceleration to improve stability under multiplicative gradient noise.",
+            "RELEVANCE": 7,
+            "NOVELTY": 7,
+            "PRIMARY_TOPIC_ID": "training_systems",
+            "MATCHED_TOPIC_IDS": [
+                "training_systems",
+                "architecture_training"
+            ],
+            "TOPIC_MATCH_COMMENT": "A new stochastic optimizer is the main contribution, with supporting noise-stability analysis; large-scale pretraining benefits remain unestablished.",
+            "HOTSPOT_PAPER_TAGS": [],
+            "HOTSPOT_PAPER_COMMENT": "",
+            "SCORE": 14,
+            "authors": [
+                "Yaxin Yu",
+                "Long Chen",
+                "Minfu Feng"
+            ],
+            "title": "SHANG++: Robust Stochastic Acceleration under Multiplicative Noise",
+            "abstract": "Under the multiplicative noise scaling (MNS) condition, original Nesterov acceleration is provably sensitive to noise and may diverge when gradient noise overwhelms the signal. In this paper, we develop two accelerated stochastic gradient descent methods by discretizing the Hessian-driven Nesterov accelerated gradient flow. We first derive SHANG, a direct semi-implicit discretization that already improves stability under MNS. We then introduce SHANG++, which adds a damping correction and achieves faster convergence with greater noise robustness. We establish convergence guarantees for both convex and strongly convex objectives under MNS, together with explicit parameter choices. In our experiments, SHANG++ performs consistently well across convex problems and applications in deep learning. In a dedicated noise experiment on ResNet-34, a single hyperparameter configuration maintains accuracy within one percentage point of the noise-free setting. Across all experiments, SHANG++ outperforms existing accelerated methods in robustness and efficiency, with minimal parameter sensitivity.",
+            "arxiv_id": "2603.09355",
+            "PRIMARY_TOPIC_LABEL": "Large-Scale Training Systems and Efficiency",
+            "MATCHED_TOPIC_LABELS": [
+                "Large-Scale Training Systems and Efficiency",
+                "Architecture and Training Dynamics"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [],
+            "HOTSPOT_PAPER_PRIMARY_KIND": null,
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+        },
+        "2608.19395": {
+            "ARXIVID": "2608.19395",
+            "COMMENT": "Joint chiplet and runtime-policy search uses a Markov performance estimator to improve hybrid-LLM serving throughput.",
+            "RELEVANCE": 7,
+            "NOVELTY": 6,
+            "PRIMARY_TOPIC_ID": "efficiency_scaling",
+            "MATCHED_TOPIC_IDS": [
+                "efficiency_scaling"
+            ],
+            "TOPIC_MATCH_COMMENT": "Communication-aware hardware/runtime co-design introduces a substantive efficiency framework for running large hybrid models, with scope limited to inference.",
+            "HOTSPOT_PAPER_TAGS": [],
+            "HOTSPOT_PAPER_COMMENT": "",
+            "SCORE": 13,
+            "authors": [
+                "Jiahao Lin",
+                "Alish Kanani",
+                "Sangwan Lee",
+                "Jaehyun Park",
+                "Umit Ogras"
+            ],
+            "title": "HYDRA: A Heterogeneous Chiplet DSE Framework for Serving Dynamic Hybrid LLM Workloads",
+            "abstract": "Hybrid Transformer-Mamba large language models (LLMs) enhance long-context efficiency, but their heterogeneous computation and communication patterns complicate efficient hardware acceleration. Chiplet-based architectures offer a scalable solution by integrating specialized compute and memory units. However, the design space spanning static architectural configurations and dynamic runtime policies is prohibitively large to explore exhaustively. To address this challenge, we present HYDRA, a comprehensive design space exploration framework for hybrid LLM serving on heterogeneous chiplet systems. HYDRA jointly explores chiplet composition, placement, inter-chiplet bandwidth provisioning, dynamic batching, and runtime scheduling. It integrates communication-aware placement, dynamic batching, elastic task scheduling, and a fast Markov-based performance estimator that captures multi-tenant runtime dynamics for efficient and accurate exploration. Across all workloads, HYDRA delivers 1.55x the throughput and 43.7 percent lower time-to-first-token on average, with throughput gains reaching up to 2.3x compared to state-of-the-art baselines. These results highlight that co-designing architecture and runtime policies is critical for efficient large-scale LLM serving on heterogeneous chiplet systems.",
+            "arxiv_id": "2608.19395",
+            "PRIMARY_TOPIC_LABEL": "Efficiency, Compression, and Large-Scale Training",
+            "MATCHED_TOPIC_LABELS": [
+                "Efficiency, Compression, and Large-Scale Training"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [],
+            "HOTSPOT_PAPER_PRIMARY_KIND": null,
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+        },
+        "2608.17641": {
+            "ARXIVID": "2608.17641",
+            "COMMENT": "Unifies seven credit-assignment estimators into fused associative-scan GPU kernels that reduce intermediate memory traffic.",
+            "RELEVANCE": 7,
+            "NOVELTY": 6,
+            "PRIMARY_TOPIC_ID": "training_systems",
+            "MATCHED_TOPIC_IDS": [
+                "training_systems"
+            ],
+            "TOPIC_MATCH_COMMENT": "The core contribution is training-kernel computation and memory-traffic reduction, with applicability demonstrated specifically for RL credit assignment.",
+            "HOTSPOT_PAPER_TAGS": [],
+            "HOTSPOT_PAPER_COMMENT": "",
+            "SCORE": 13,
+            "authors": [
+                "Lars Simon Zehnder"
+            ],
+            "title": "rl-triton: High-Performance Triton GPU Kernels for Reinforcement Learning Credit Assignment",
+            "abstract": "We present rl-triton, an open-source library of high-performance GPU kernels for reinforcement learning credit assignment, implemented in Triton. The core contribution is a unified associative scan framework that recasts seven distinct RL estimation algorithms - Generalized Advantage Estimation (GAE), V-Trace, Retrace($Î»$), TD($Î»$) returns, discounted returns, eligibility traces, and episodic prefix sums - as instances of a single first-order linear recurrence solved in $O(\\log T)$ parallel steps. All algorithms share the same associative scan operator, with algorithm-specific fused Triton kernels constructing their recurrence coefficients on-chip. We verify the associative operator algebraically and define the treatment of terminated and truncated episodes explicitly. Benchmarks show a 1.6-5.70$\\times$ full-call speedup over a vectorized torch-compile baseline in the massively parallel simulation regime (thousands of environments, short rollouts). The reported range covers all seven algorithms on both GPUs, both with and without per-step truncation handling. For most algorithms, speedups increase at longer sequence lengths, as the baseline requires more scan stages as $\\log T$ grows, each adding an intermediate HBM round-trip. The library is available at https://github.com/simonsays1980/rl-triton.",
+            "arxiv_id": "2608.17641",
+            "PRIMARY_TOPIC_LABEL": "Large-Scale Training Systems and Efficiency",
+            "MATCHED_TOPIC_LABELS": [
+                "Large-Scale Training Systems and Efficiency"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [],
+            "HOTSPOT_PAPER_PRIMARY_KIND": null,
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+        },
+        "2608.18808": {
+            "ARXIVID": "2608.18808",
+            "COMMENT": "Separates reusable condition encodings from the operator that generates the flow field.",
+            "RELEVANCE": 7,
+            "NOVELTY": 6,
+            "PRIMARY_TOPIC_ID": "architecture_training",
+            "MATCHED_TOPIC_IDS": [
+                "architecture_training",
+                "efficiency_scaling"
+            ],
+            "TOPIC_MATCH_COMMENT": "Modular conditioning and operator composition are architectural mechanisms; reusing condition representations adds an amortized inference-efficiency benefit.",
+            "HOTSPOT_PAPER_TAGS": [],
+            "HOTSPOT_PAPER_COMMENT": "",
+            "SCORE": 13,
+            "authors": [
+                "Alexander Strunk",
+                "Roland Assam"
+            ],
+            "title": "Tensor Field Models",
+            "abstract": "This paper introduces Tensor Field Models (TFMs), realization-level Mathematical Structures in which a learned Operator maps a product of admissible component-section families to a prescribed family of time-dependent tangent sections on a Generative State Manifold. Analytic and dynamical restrictions are encoded through the choice of admissible families rather than imposed by the root definition. Constructed, component-separable, and Tensor Bundle TFMs provide structured refinements of this common object. In the conditional realizations considered here, a structured condition $c=(c_1,\\ldots,c_n)$ is mapped componentwise to a reusable collection $\\mathbf H_c=(H_{c_1}^{(1)},\\ldots,H_{c_n}^{(n)})$. In the architectures evaluated here, the component representations remain distinct and are combined only by the Field Operator to produce the generated Vector Field. All learned models are trained using Flow Matching. Experiments show that TFMs can improve performance and that amortized sampling enabled by reusable condition representations can accelerate generation.",
+            "arxiv_id": "2608.18808",
+            "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+            "MATCHED_TOPIC_LABELS": [
+                "Architecture and Training Dynamics",
+                "Efficiency, Compression, and Large-Scale Training"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [],
+            "HOTSPOT_PAPER_PRIMARY_KIND": null,
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+        },
+        "2608.19098": {
+            "ARXIVID": "2608.19098",
+            "COMMENT": "Identifies token-level optimization-budget imbalance as the bottleneck in multi-teacher capability integration.",
+            "RELEVANCE": 6,
+            "NOVELTY": 7,
+            "PRIMARY_TOPIC_ID": "architecture_training",
+            "MATCHED_TOPIC_IDS": [
+                "architecture_training"
+            ],
+            "TOPIC_MATCH_COMMENT": "Optimization-budget diagnosis provides a substantial training-dynamics connection, but the proposed recipe centers on multi-teacher on-policy post-training.",
+            "HOTSPOT_PAPER_TAGS": [],
+            "HOTSPOT_PAPER_COMMENT": "",
+            "SCORE": 13,
+            "authors": [
+                "Huan-ang Gao",
+                "Haohan Chi",
+                "Yong Yan",
+                "Shiyuan Feng",
+                "Hanlin Wu",
+                "Zheng Jiang",
+                "Bingxiang He",
+                "Wei-Ying Ma",
+                "Ya-Qin Zhang",
+                "Hao Zhou"
+            ],
+            "title": "Open-MOPD: Diagnosing and Fixing Capability Imbalance in Multi-Teacher On-Policy Distillation",
+            "abstract": "Multi-teacher on-policy distillation (M-OPD) has emerged as a promising paradigm for consolidating domain-specialized reinforcement learning (RL) experts into a single generalist student via dense, token-level reward supervision. Despite its practical success, the optimization dynamics governing multi-teacher capability integration remain poorly understood, and open, rigorously reproducible recipes are conspicuously lacking. In this work, we establish a controlled M-OPD benchmark on SmolLM3-3B-Base with oracle routing, isolating capability integration from routing ambiguity. Our investigation reveals a pronounced capability integration gap: standard M-OPD captures only 35.6% of the available headroom relative to a domain-routed oracle ensemble, with concise tasks such as instruction following suffering severe degradation and premature stagnation. Crucially, we show that this failure stems not from gradient conflict, but from a severe misallocation of the token-level optimization budget. This pathology is driven by three orthogonal factors: structural sequence-length disparities across domains, dynamic convergence drift due to non-uniform learning rates, and multi-step reward staleness from asynchronous policy updates. To resolve these imbalances, we introduce Open-MOPD, a principled framework incorporating token-share balancing, gap-aware dynamic budget allocation, and student reward refresh. Together, these mechanisms systematically restore cross-domain balance, elevating headroom recovery from 35.6% to 83.4% in a single deployable student. We fully open-source our end-to-end post-training recipe, training trajectories, and evaluation suites on an academically accessible hardware budget.",
+            "arxiv_id": "2608.19098",
+            "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+            "MATCHED_TOPIC_LABELS": [
+                "Architecture and Training Dynamics"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [],
+            "HOTSPOT_PAPER_PRIMARY_KIND": null,
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+        },
+        "2604.01499": {
+            "ARXIVID": "2604.01499",
+            "COMMENT": "Explains how evolution strategies accumulate off-task parameter drift while achieving accuracy comparable to gradient-based updates.",
+            "RELEVANCE": 6,
+            "NOVELTY": 7,
+            "PRIMARY_TOPIC_ID": "architecture_training",
+            "MATCHED_TOPIC_IDS": [
+                "architecture_training"
+            ],
+            "TOPIC_MATCH_COMMENT": "The optimizer-geometry theory overlaps training dynamics, although its scope is confined to ES/GRPO post-training and forgetting.",
+            "HOTSPOT_PAPER_TAGS": [],
+            "HOTSPOT_PAPER_COMMENT": "",
+            "SCORE": 13,
+            "authors": [
+                "William Hoy",
+                "Binxu Wang",
+                "Xu Pan"
+            ],
+            "title": "Matching Accuracy, Different Geometry: Evolution Strategies vs GRPO in LLM Post-Training",
+            "abstract": "Evolution Strategies (ES) have emerged as a scalable gradient-free alternative to reinforcement learning based LLM fine-tuning, but it remains unclear whether comparable task performance implies comparable solutions in parameter space. We compare ES and Group Relative Policy Optimization (GRPO) across four tasks in both single-task and sequential continual-learning settings. ES matches or exceeds GRPO in single-task accuracy and remains competitive sequentially when its iteration budget is controlled. Despite this similarity in task performance, the two methods produce markedly different model updates: ES makes much larger changes and induces broader off-task KL drift, whereas GRPO makes smaller, more localized updates. Strikingly, the ES and GRPO solutions are linearly connected with no loss barrier, even though their update directions are nearly orthogonal. We develop an analytical theory of ES that explains all these phenomena within a unified framework, showing how ES can accumulate large off-task movement on weakly informative directions while still making enough progress on the task to match gradient-based RL in downstream accuracy. These results show that gradient-free and gradient-based fine-tuning can reach similarly accurate yet geometrically distinct solutions, with important consequences for forgetting and knowledge preservation. The source code is publicly available: https://github.com/Bhoy1/ESvsGRPO.",
+            "arxiv_id": "2604.01499",
+            "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+            "MATCHED_TOPIC_LABELS": [
+                "Architecture and Training Dynamics"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [],
+            "HOTSPOT_PAPER_PRIMARY_KIND": null,
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+        },
+        "2608.18810": {
+            "ARXIVID": "2608.18810",
+            "COMMENT": "Uses short optimizer scouts within one evolving training run to reduce optimizer-selection compute.",
+            "RELEVANCE": 6,
+            "NOVELTY": 6,
+            "PRIMARY_TOPIC_ID": "training_systems",
+            "MATCHED_TOPIC_IDS": [
+                "training_systems"
+            ],
+            "TOPIC_MATCH_COMMENT": "Adaptive optimizer selection addresses training cost, although the evidence is confined to small classification and insurance models.",
+            "HOTSPOT_PAPER_TAGS": [],
+            "HOTSPOT_PAPER_COMMENT": "",
+            "SCORE": 12,
+            "authors": [
+                "Ronald Richman",
+                "Mario V. WÃ¼thrich"
+            ],
+            "title": "Many Optimizers But Only One Training Path: Repeated Resampling for Adaptive Optimizer Selection",
+            "abstract": "An optimizer is usually chosen before training a deep neural network and then kept fixed. Treating optimizer choice as a hyperparameter could boost performance, but it requires several complete training runs and discards all but the winner. Repeated Optimizer Resampling (ROR) instead searches during one evolving run. Every $b$ epochs, each candidate optimizer scouts from the current model weights for $s$ epochs. The best scout continues for the remaining $b-s$ epochs, and that completed segment becomes the new incumbent if it improves the validation objective. This design allows the preferred optimizer to change as training progresses. We compare two variants of ROR on MNIST, Fashion-MNIST, and two motor insurance claim-count models. Nine fixed optimizers and both ROR variants are evaluated with the same ten seeds. One-epoch ROR uses 24\\% to 35\\% of the aggregate training needed to identify the best fixed optimizer exhaustively and remains close to that optimizer on all four tasks. These results support short scouting as a practical way to search over optimizers without completing every candidate run.",
+            "arxiv_id": "2608.18810",
+            "PRIMARY_TOPIC_LABEL": "Large-Scale Training Systems and Efficiency",
+            "MATCHED_TOPIC_LABELS": [
+                "Large-Scale Training Systems and Efficiency"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [],
+            "HOTSPOT_PAPER_PRIMARY_KIND": null,
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+        },
+        "2608.18592": {
+            "ARXIVID": "2608.18592",
+            "COMMENT": "Analyzes how state-space selectivity and full-block transformations produce long-timescale spectra comparable to Transformer blocks.",
+            "RELEVANCE": 6,
+            "NOVELTY": 6,
+            "PRIMARY_TOPIC_ID": "architecture_training",
+            "MATCHED_TOPIC_IDS": [
+                "architecture_training"
+            ],
+            "TOPIC_MATCH_COMMENT": "Block-level sequence dynamics overlaps architectural mechanism analysis, but the findings concern emergent memory spectra with indirect implications for training.",
+            "HOTSPOT_PAPER_TAGS": [],
+            "HOTSPOT_PAPER_COMMENT": "",
+            "SCORE": 12,
+            "authors": [
+                "Byung Gyu Chae"
+            ],
+            "title": "Infrared Universality of Collective Dynamics across Transformer and State-Space Architectures",
+            "abstract": "Whether distinct neural architectures develop common collective dynamics remains an open question. Recent analysis of Transformer language models revealed a nearly flat, weakly infrared-enhanced time-scale density of states (TDOS) associated with near-marginal long-memory dynamics. Here we test whether a closely related organization emerges in Mamba, whose selective state-space dynamics provides a fundamentally different microscopic mechanism. Mamba allows relaxation dynamics to be resolved at three levels: the intrinsic spectrum of the learned state-space generator, its input-conditioned selective rescaling, and the collective TDOS of the complete block measured from its Jacobian. These spectra are not identical: selective dynamics and the remaining block transformations substantially reorganize the microscopic relaxation hierarchy. Nevertheless, the full block develops a reproducible slow-mode continuum whose infrared sector becomes progressively better resolved with increasing sequence length. Cumulative analysis yields $Ï(Î»)\\simÎ»^Î²$, with the long-sequence Mamba exponent stabilizing near $Î²_{\\rm M}\\simeq-0.17$. The corresponding memory dynamics follows $K(t)\\sim t^{-(1+Î²)}$, close to the marginal $1/t$ regime. Despite fundamentally different microscopic dynamics, Transformer full-block spectra exhibit closely related infrared organization, with representative exponents of order $Î²_{\\rm Tr}\\sim-0.1$. These results separate explicit state-space memory from collective infrared organization and show that distinct sequence architectures can develop closely related near-marginal slow-mode dynamics. They extend infrared collective organization beyond Transformers and provide an independent test of the dynamical structure described by Cognitive Field Theory.",
+            "arxiv_id": "2608.18592",
+            "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+            "MATCHED_TOPIC_LABELS": [
+                "Architecture and Training Dynamics"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [],
+            "HOTSPOT_PAPER_PRIMARY_KIND": null,
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+        },
+        "2602.02060": {
+            "ARXIVID": "2602.02060",
+            "COMMENT": "Uses instruction-conditioned gating over feature-aligned low-rank adaptation modules.",
+            "RELEVANCE": 6,
+            "NOVELTY": 6,
+            "PRIMARY_TOPIC_ID": "architecture_training",
+            "MATCHED_TOPIC_IDS": [
+                "architecture_training"
+            ],
+            "TOPIC_MATCH_COMMENT": "Modular gating is the closest architectural fit, but the central contribution is feature-reliance control rather than foundational training behavior or reduced training cost.",
+            "HOTSPOT_PAPER_TAGS": [],
+            "HOTSPOT_PAPER_COMMENT": "",
+            "SCORE": 12,
+            "authors": [
+                "Hyunsuk Chung",
+                "Soyeon Caren Han",
+                "Seungyeon Ji",
+                "Jinwoo Kim",
+                "Eun-Jung Holden",
+                "Kyungreem Han"
+            ],
+            "title": "FiLoRA: Focus-and-Ignore LoRA for Controllable Feature Reliance",
+            "abstract": "Multimodal foundation models integrate heterogeneous signals across modalities, yet it remains unclear whether their predictions can be controlled by explicitly modulating reliance on different internal feature pathways. Existing approaches to shortcut and spurious behavior primarily rely on post hoc analysis or data-level interventions, offering limited ability to directly intervene on how models use information. We introduce FiLoRA (Focus-and-Ignore LoRA), an instruction-conditioned, parameter-efficient adaptation framework that enables controllable modulation of feature reliance while keeping the task and predictive objective fixed. FiLoRA decomposes adaptation into feature-aligned low-rank modules and applies instruction-conditioned gating, allowing natural language instructions to act as computation-level control signals over internal representations. We evaluate FiLoRA across both controlled classification settings and generative multimodal tasks, and under a range of instruction types, including natural and compositional instructions. Results show that FiLoRA induces consistent and interpretable shifts in feature reliance, selectively amplifying or suppressing different feature groups in accordance with the instruction, without altering task semantics. Our findings suggest that instruction-conditioned parameter adaptation can serve as a practical mechanism for intervening on internal model behavior, providing a new perspective on controllability and analysis of multimodal systems beyond output-level prompting or post hoc interpretation.",
+            "arxiv_id": "2602.02060",
+            "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+            "MATCHED_TOPIC_LABELS": [
+                "Architecture and Training Dynamics"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [],
+            "HOTSPOT_PAPER_PRIMARY_KIND": null,
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+        }
+    },
+    "topic_sections": [
+        {
+            "topic_id": "training_systems",
+            "topic_label": "Large-Scale Training Systems and Efficiency",
+            "paper_ids": [
+                "2608.18469",
+                "2607.20145",
+                "2603.09355",
+                "2608.17641",
+                "2608.18810"
+            ]
+        },
+        {
+            "topic_id": "architecture_training",
+            "topic_label": "Architecture and Training Dynamics",
+            "paper_ids": [
+                "2608.06834",
+                "2606.07559",
+                "2608.18576",
+                "2604.09560",
+                "2608.19171",
+                "2608.18803",
+                "2608.18808",
+                "2608.19098",
+                "2604.01499",
+                "2608.18592",
+                "2602.02060"
+            ]
+        },
+        {
+            "topic_id": "efficiency_scaling",
+            "topic_label": "Efficiency, Compression, and Large-Scale Training",
+            "paper_ids": [
+                "2608.15018",
+                "2608.18410",
+                "2608.19285",
+                "2608.18656",
+                "2608.19395"
+            ]
+        }
+    ]
 }

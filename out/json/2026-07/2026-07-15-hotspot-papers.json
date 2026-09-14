@@ -2,8 +2,8 @@
     "schema_version": 1,
     "meta": {
         "date": "2026-07-15",
-        "total_candidates": 0,
-        "total_spotlight_papers": 0,
+        "total_candidates": 59,
+        "total_spotlight_papers": 7,
         "thresholds": {
             "daily_hot_score_cutoff": 15,
             "daily_hot_relevance_cutoff": 7,
@@ -17,11 +17,300 @@
     },
     "diagnostics": {
         "candidate_count_by_kind": {
-            "new_frontier": 0,
-            "daily_hot": 0
+            "new_frontier": 1,
+            "daily_hot": 6
         },
-        "selected_count_by_kind": {}
+        "selected_count_by_kind": {
+            "new_frontier": 1,
+            "daily_hot": 6
+        }
     },
-    "papers": {},
-    "sections": []
+    "papers": {
+        "2607.14144": {
+            "ARXIVID": "2607.14144",
+            "COMMENT": "Argues that capability requires hybrid access to both compressed state and scalable verbatim retrieval.",
+            "RELEVANCE": 8,
+            "NOVELTY": 8,
+            "PRIMARY_TOPIC_ID": "architecture_training",
+            "MATCHED_TOPIC_IDS": [
+                "architecture_training",
+                "efficiency_scaling"
+            ],
+            "TOPIC_MATCH_COMMENT": "The central claim concerns architectural access structure under fixed computational budgets.",
+            "HOTSPOT_PAPER_TAGS": [
+                "new_frontier"
+            ],
+            "HOTSPOT_PAPER_COMMENT": "The access-complete hybrid hypothesis offers a potentially new architecture-level account of capability scaling.",
+            "SCORE": 16,
+            "authors": [
+                "Wenhui Chen",
+                "Jianlin Chen",
+                "Ziyao Lin",
+                "Chi Man Vong"
+            ],
+            "title": "The Capability Convergence Hypothesis: Capability from Access Structure, Not Scale",
+            "abstract": "The Platonic Representation Hypothesis (PRH) holds that as models scale, representations of heterogeneous networks converge toward a shared model of reality. We propose its sequel and boundary, the Capability Convergence Hypothesis (CCH): under a fixed per-token inference budget, representational convergence does not entail capability convergence. Capability instead converges toward a class, the access-complete hybrid: any architecture holding both a compressive O(1)-state channel and a scalable verbatim-index channel. We anchor it on a witness task, the Newton's-apple problem in an infinite stream, and name three resource walls: a Shannon wall barring any o(Nb)-state architecture, a horizon wall barring any fixed window, and a circuit wall barring fixed-depth attention-only composition (conditional on TC0 != NC1). Under an explicit separability assumption a hybrid crosses all three by paying each wall's price, so capability is strictly super-additive under composition. We separate what we prove from what we conjecture: the access-completeness principle rests on information-theoretic lower bounds and pre-registered experiments, while the field-level convergence trend is an economics-motivated conjecture. We report the first pre-registered small-scale tests under criteria frozen before the data: the predicted scissors gap is measured (exact-retrieval error 0.994 vs. 0.000 once a 64-scalar state gains one global-attention layer), the state-tracking bifurcation lands at the registered boundary, and a conjunction witness shows an irreducibly two-channel solution; one prediction failed with its direction reversed and is reported as such. Representational convergence is given freely by scale; capability convergence must be purchased by access structure.",
+            "arxiv_id": "2607.14144",
+            "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+            "MATCHED_TOPIC_LABELS": [
+                "Architecture and Training Dynamics",
+                "Efficiency, Compression, and Large-Scale Training"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [
+                "New Frontier Papers"
+            ],
+            "HOTSPOT_PAPER_PRIMARY_KIND": "new_frontier",
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "New Frontier Papers",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "llm_exact"
+        },
+        "2607.13332": {
+            "ARXIVID": "2607.13332",
+            "COMMENT": "Communication-efficient, fault-tolerant pipeline parallelism enables pretraining across heterogeneous and preemptible internet-connected GPUs.",
+            "RELEVANCE": 10,
+            "NOVELTY": 8,
+            "PRIMARY_TOPIC_ID": "training_systems",
+            "MATCHED_TOPIC_IDS": [
+                "training_systems",
+                "efficiency_scaling"
+            ],
+            "TOPIC_MATCH_COMMENT": "Distributed pretraining is the central contribution, with communication and fault-tolerance mechanisms materially improving usable training capacity.",
+            "HOTSPOT_PAPER_TAGS": [
+                "daily_hot"
+            ],
+            "HOTSPOT_PAPER_COMMENT": "Reports an 8.6B-model pretraining run on 500B tokens across 330 participating nodes at 63% of centralized H100 efficiency, a broadly significant decentralized-training demonstration.",
+            "SCORE": 18,
+            "authors": [
+                "Gil Avraham",
+                "Violetta Shevchenko",
+                "Hadi Mohaghegh Dolatabadi",
+                "Karol Pajak",
+                "James Snewin",
+                "Harry Xi",
+                "Rodney O'Donnell",
+                "Thalaiyasingam Ajanthan",
+                "Sameera Ramasinghe",
+                "Chamin Hewa Koneputugodage",
+                "Shamane Siriwardhana",
+                "Alexander Long"
+            ],
+            "title": "Agora: Collective and Permissionless Internet-Scale Pretraining of Large Language Models",
+            "abstract": "Training large language models at the multi-billion to trillion parameter scale is confined to datacenters, where data-parallel (DP) and model-parallel (MP) techniques presume homogeneous accelerators, high-speed interconnects, and a single orchestrating entity. Frontier model development is thereby concentrated among the few groups able to assemble such clusters. Meanwhile, an enormous pool of compute remains unusable for training: consumer and professional GPUs that are heterogeneous, preemptible, individually owned, and connected only by the internet. We present Agora, a system that makes efficient use of this compute. Agora combines bandwidth-efficient pipeline-parallel model sharding over internet-grade links with multi-party, fault-tolerant collective operations. Each participant holds only one stage of the model, and no single party ever possesses the full weights. We term this setup Protocol Learning: it enables collectively trained, collectively owned models, opening a path to open-source frontier training with economic sustainability. This report presents the outcome of a research effort spanning communication-efficient parallelism, asynchronous optimization, and fault-tolerant systems design. It culminates in the first demonstration of its kind: Pluralis-8B, an open, permissionless pretraining run of an 8.6B-parameter model on 500B tokens of FineWeb-Edu. The model was trained over 40 days by 330 contributor nodes, predominantly consumer GPUs on internet connections, joining and leaving throughout. The run sustained ~170k tokens/s and 4.2 tokens per TFLOP of pooled compute, 63% of the efficiency of a centralized H100 baseline, and converged to within a small margin of a centralized reference run.",
+            "arxiv_id": "2607.13332",
+            "PRIMARY_TOPIC_LABEL": "Large-Scale Training Systems and Efficiency",
+            "MATCHED_TOPIC_LABELS": [
+                "Large-Scale Training Systems and Efficiency",
+                "Efficiency, Compression, and Large-Scale Training"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [
+                "Daily Hot Papers"
+            ],
+            "HOTSPOT_PAPER_PRIMARY_KIND": "daily_hot",
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "Daily Hot Papers",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "llm_exact"
+        },
+        "2607.12266": {
+            "ARXIVID": "2607.12266",
+            "COMMENT": "Models mixed-precision quantization loss with additive and saturating per-layer effects and certified allocation error.",
+            "RELEVANCE": 9,
+            "NOVELTY": 8,
+            "PRIMARY_TOPIC_ID": "efficiency_scaling",
+            "MATCHED_TOPIC_IDS": [
+                "efficiency_scaling"
+            ],
+            "TOPIC_MATCH_COMMENT": "The central result directly improves quantization allocation for models up to 355B parameters.",
+            "HOTSPOT_PAPER_TAGS": [
+                "daily_hot"
+            ],
+            "HOTSPOT_PAPER_COMMENT": "Broadly important today: Models mixed-precision quantization loss with additive and saturating per-layer effects and certified allocation error.",
+            "SCORE": 17,
+            "authors": [
+                "Joshua Hill"
+            ],
+            "title": "Saturation Makes Quantization Error Additive: A Coverage Model with a Certificate",
+            "abstract": "Mixed-precision quantization must decide which parts of a model to keep at higher precision. A common premise, shared by sensitivity-based methods such as HAWQ and CoopQ, is that the loss from quantizing a set of layers can be reconstructed from per-layer or pairwise sensitivities measured in isolation. We test this premise at the 4-bit weight-and-activation precisions now being deployed, treating the change in loss $f(S)$ from quantizing a layer set $S$ as a set function on the Boolean cube and analyzing it through two classical changes of basis. This analysis yields two findings. First, across configurations drawn from the deployment distribution, 85--93\\% of the variance of $f$ is explained by per-layer effects alone. Second, a monotone transform of a sum of per-layer terms reproduces $f$'s ranking of configurations, misordering at most 2\\% of pairs. We propose the coverage model $f(S)=c\\bigl(1-\\prod_{i\\in S}(1-a_i)\\bigr)$, which reproduces the measured variance profile of $f$ to within a few percent from its $L$ fitted break-rates. This structure supports two predictors of a configuration's loss, each with $L+1$ parameters. The additive model is the optimal first-order predictor. By Parseval's identity its mean-squared error equals the variance of $f$ left unexplained by per-layer effects, which we measure on full lattices, estimate out of sample at full-network scale, and report with every result as a certificate of how well any additive model can do. The coverage model itself is the second predictor. As allocators at matched memory, they attain the lowest KL divergence among the compared allocators on models from 30B to 355B parameters. Below four bits, the resulting allocations continue to solve code and reasoning tasks at budgets where allocations from gradient sensitivities no longer produce terminating generations.",
+            "arxiv_id": "2607.12266",
+            "PRIMARY_TOPIC_LABEL": "Efficiency, Compression, and Large-Scale Training",
+            "MATCHED_TOPIC_LABELS": [
+                "Efficiency, Compression, and Large-Scale Training"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [
+                "Daily Hot Papers"
+            ],
+            "HOTSPOT_PAPER_PRIMARY_KIND": "daily_hot",
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "Daily Hot Papers",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "heuristic"
+        },
+        "2607.12360": {
+            "ARXIVID": "2607.12360",
+            "COMMENT": "Shows that gradient-noise structure and update normalization jointly determine whether learning-rate cooldown helps.",
+            "RELEVANCE": 9,
+            "NOVELTY": 8,
+            "PRIMARY_TOPIC_ID": "architecture_training",
+            "MATCHED_TOPIC_IDS": [
+                "training_systems",
+                "architecture_training"
+            ],
+            "TOPIC_MATCH_COMMENT": "Its main contribution explains a large-model training dynamic, with direct implications for optimizer scheduling.",
+            "HOTSPOT_PAPER_TAGS": [
+                "daily_hot"
+            ],
+            "HOTSPOT_PAPER_COMMENT": "Broadly important today: Shows that gradient-noise structure and update normalization jointly determine whether learning-rate cooldown helps.",
+            "SCORE": 17,
+            "authors": [
+                "Subham Singh",
+                "Ashutosh Mishra",
+                "Subha Raut"
+            ],
+            "title": "Same Loss, Same Noise, Opposite Schedules: Noise Structure and Optimizer Normalization Jointly Determine Whether Learning-Rate Cooldown Helps",
+            "abstract": "The cooldown phase of a warmup-stable-decay (WSD) learning-rate schedule, now a default in large-model pretraining, lowers the final training loss in some settings and does nothing in others. We give a provable account of which case obtains, and it turns on two properties together: the structure of the gradient noise and whether the optimizer normalizes its update. On a strongly convex objective with multiplicative (gradient-proportional) noise, stochastic gradient descent contracts geometrically at a constant learning rate, so cooldown has nothing to improve. Under the same objective and noise, sign-based and normalized methods, the standard surrogates for adaptive optimizers, settle on a noise floor of order $\u03b7^2$ and reach the minimizer only as the learning rate is driven to zero; any additive noise then reinstates a floor for every method. The mechanism is elementary: an SGD step shrinks in proportion to the gradient and so anneals itself, whereas a normalized step keeps unit scale and cannot. We solve the signSGD stationary law on the quadratic exactly and obtain the floor constant in closed form, prove a local form of the dissociation under $(L_0,L_1)$-smoothness, extend the floor to normalized SGD in dimension d>1 by a scale-invariance argument, and establish robustness to momentum and heavy-tailed noise. Simulation confirms every prediction, and we demonstrate the resulting noise-regime diagnostic on a real classification task with directly measured gradient noise. The mechanism explains whether cooldown helps; the interior cooldown fraction used at scale lies outside stationary landscape-and-noise geometry.",
+            "arxiv_id": "2607.12360",
+            "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+            "MATCHED_TOPIC_LABELS": [
+                "Large-Scale Training Systems and Efficiency",
+                "Architecture and Training Dynamics"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [
+                "Daily Hot Papers"
+            ],
+            "HOTSPOT_PAPER_PRIMARY_KIND": "daily_hot",
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "Daily Hot Papers",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "heuristic"
+        },
+        "2607.12789": {
+            "ARXIVID": "2607.12789",
+            "COMMENT": "Attention-guided hierarchical codeword refinement improves the accuracy-cost trade-off of O(MN) vector-quantized attention.",
+            "RELEVANCE": 9,
+            "NOVELTY": 8,
+            "PRIMARY_TOPIC_ID": "architecture_training",
+            "MATCHED_TOPIC_IDS": [
+                "architecture_training",
+                "efficiency_scaling"
+            ],
+            "TOPIC_MATCH_COMMENT": "Adaptive attention computation is the core mechanism; quantization and tiled Triton kernels supply complementary efficiency contributions.",
+            "HOTSPOT_PAPER_TAGS": [
+                "daily_hot"
+            ],
+            "HOTSPOT_PAPER_COMMENT": "Broadly important today: Attention-guided hierarchical codeword refinement improves the accuracy-cost trade-off of O(MN) vector-quantized attention.",
+            "SCORE": 17,
+            "authors": [
+                "Winfried van den dool",
+                "Patrick Forr\u00e9",
+                "Amir Habibian",
+                "Yuki M. Asano",
+                "Max Welling"
+            ],
+            "title": "AVQ-Attention: Adaptive Vector-Quantized Attention",
+            "abstract": "The $\\mathcal{O}(N^2)$ complexity of attention over $N$ tokens remains a computational bottleneck in transformer models. Vector-Quantized (VQ) attention reduces this to $\\mathcal{O}(MN)$ by representing keys with $M$ codewords, but applies uniform codebook capacity regardless of where attention mass concentrates: high-attention regions of key space may be coarsely approximated while low-attention regions waste representational capacity. We propose Adaptive Vector-Quantized (AVQ) Attention, which adaptively allocates codebook capacity based on attention importance. Starting from a small set of codewords, our method identifies the most important codes during the forward pass and refines them with pre-learned child codewords, achieving fine-grained quantization where it matters most while maintaining coarse quantization elsewhere. We develop an implementation using custom Triton kernels that enables the full adaptive refinement process, including importance scoring, child codeword insertion, and parent contribution replacement, to be carried out within the tiled computation paradigm of Flash Attention with minimal overhead. Our approach maintains $\\mathcal{O}(MN)$ complexity while achieving improved accuracy-efficiency trade-offs compared to fixed-codebook VQ-attention.",
+            "arxiv_id": "2607.12789",
+            "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+            "MATCHED_TOPIC_LABELS": [
+                "Architecture and Training Dynamics",
+                "Efficiency, Compression, and Large-Scale Training"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [
+                "Daily Hot Papers"
+            ],
+            "HOTSPOT_PAPER_PRIMARY_KIND": "daily_hot",
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "Daily Hot Papers",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "heuristic"
+        },
+        "2607.12550": {
+            "ARXIVID": "2607.12550",
+            "COMMENT": "Jointly allocates Tucker ranks and rotated residual bit widths to compress KV caches by 2-3x near-losslessly.",
+            "RELEVANCE": 9,
+            "NOVELTY": 8,
+            "PRIMARY_TOPIC_ID": "efficiency_scaling",
+            "MATCHED_TOPIC_IDS": [
+                "efficiency_scaling"
+            ],
+            "TOPIC_MATCH_COMMENT": "This is a direct new mechanism for reducing the dominant long-context inference memory cost.",
+            "HOTSPOT_PAPER_TAGS": [
+                "daily_hot"
+            ],
+            "HOTSPOT_PAPER_COMMENT": "Broadly important today: Jointly allocates Tucker ranks and rotated residual bit widths to compress KV caches by 2-3x near-losslessly.",
+            "SCORE": 17,
+            "authors": [
+                "Rahul Krishnan",
+                "Volker Schulz"
+            ],
+            "title": "A JoLT for the KV cache: Near-lossless KV cache compression via joint Lagrangian allocation of Tucker ranks and a rotated residual for llms",
+            "abstract": "The key-value (KV) cache has become the dominant memory cost of transformer inference: it grows with batch size, context length, and depth, and at long context it, rather than the model weights, sets the throughput ceiling. Existing reductions fall into two families. Low-rank methods factor two-dimensional slices of the cache, either per-head matrices or cross-layer feature blocks, and quantization methods lower the bit-width of every entry. Neither exploits the fact that the cache at a layer is naturally a third-order tensor whose three axes, the heads, the tokens, and the features, carry very different amounts of redundancy. We take this tensor view directly. Our method, JoLT (Joint Lagrangian Tucker), applies a partial Tucker decomposition that compresses only the token and feature axes while leaving the head and layer axes intact, then restores the energy that truncation discards with a rotated low-bit residual: a random orthogonal rotation followed by low-bit quantization. A single Lagrangian dual allocates the Tucker ranks and the residual bit-widths together, per layer group and separately for keys and values, under one byte budget. The result is a near-lossless 2-3x compression. Perplexity stays near-lossless on both a grouped-query-attention model (Mistral-7B-v0.3) and a multi-head-attention model (LLaMA-2-13B), and GSM8K accuracy and needle-in-a-haystack retrieval hold at the uncompressed baseline at 2x on both architectures and through 3x on the GQA model. At 2x, JoLT reconstructs the cache to relative Frobenius error 0.009 (K) and 0.006 (V) on both architectures. A randomized-SVD variant, FlashJoLT, delivers a 5-13x compression-time speedup at 1024-token context and matched quality.",
+            "arxiv_id": "2607.12550",
+            "PRIMARY_TOPIC_LABEL": "Efficiency, Compression, and Large-Scale Training",
+            "MATCHED_TOPIC_LABELS": [
+                "Efficiency, Compression, and Large-Scale Training"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [
+                "Daily Hot Papers"
+            ],
+            "HOTSPOT_PAPER_PRIMARY_KIND": "daily_hot",
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "Daily Hot Papers",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "heuristic"
+        },
+        "2607.13031": {
+            "ARXIVID": "2607.13031",
+            "COMMENT": "Identifies a serial-computation limit in video diffusion and proves that extra denoising steps cannot overcome backbone depth.",
+            "RELEVANCE": 8,
+            "NOVELTY": 8,
+            "PRIMARY_TOPIC_ID": "architecture_training",
+            "MATCHED_TOPIC_IDS": [
+                "architecture_training"
+            ],
+            "TOPIC_MATCH_COMMENT": "The core contribution is a mechanistic and theoretical limitation of diffusion architecture computation.",
+            "HOTSPOT_PAPER_TAGS": [
+                "daily_hot"
+            ],
+            "HOTSPOT_PAPER_COMMENT": "The structural seriality limit could materially change how diffusion-based video and world-model architectures are evaluated.",
+            "SCORE": 16,
+            "authors": [
+                "Jorge Diaz Chao",
+                "Konpat Preechakul",
+                "Yuxi Liu",
+                "Yutong Bai"
+            ],
+            "title": "The Seriality Gap in Video Diffusion Models",
+            "abstract": "When one ball strikes another, then another, video models should predict the consequences of each bounce. In controlled experiments on multi-ball hard-sphere dynamics, we find that the performance of standard bidirectional video diffusion degrades as the causal chain lengthens, even when provided more denoising steps. In a length-matched single-ball control, where ball-ball interactions are absent, the degradation largely disappears, isolating dependent-event structure rather than video length as the cause. Across intervention studies, methods that increase effective serial computation improve performance disproportionately, including autoregressive/blockwise generation and architectural depth. We identify this pattern as the seriality gap: a mismatch between tasks requiring growing serial computation and video diffusion models whose denoising loop does not provide scalable serial compute. We then prove that, for deterministic video prediction, denoising steps do not add serial computation beyond the backbone, indicating a structural obstacle for video diffusion on serial reasoning and simulation tasks.",
+            "arxiv_id": "2607.13031",
+            "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+            "MATCHED_TOPIC_LABELS": [
+                "Architecture and Training Dynamics"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [
+                "Daily Hot Papers"
+            ],
+            "HOTSPOT_PAPER_PRIMARY_KIND": "daily_hot",
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "Daily Hot Papers",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "llm_exact"
+        }
+    },
+    "sections": [
+        {
+            "kind": "new_frontier",
+            "label": "New Frontier Papers",
+            "description": "Papers that appear to open a genuinely new direction, paradigm, or field.",
+            "paper_ids": [
+                "2607.14144"
+            ]
+        },
+        {
+            "kind": "daily_hot",
+            "label": "Daily Hot Papers",
+            "description": "Papers that feel broadly important to the day and belong in the hotspot paper feed.",
+            "paper_ids": [
+                "2607.13332",
+                "2607.12266",
+                "2607.12360",
+                "2607.12789",
+                "2607.12550",
+                "2607.13031"
+            ]
+        }
+    ]
 }

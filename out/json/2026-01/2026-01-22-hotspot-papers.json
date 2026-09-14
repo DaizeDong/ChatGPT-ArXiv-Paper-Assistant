@@ -1,0 +1,121 @@
+{
+    "schema_version": 1,
+    "meta": {
+        "date": "2026-01-22",
+        "total_candidates": 36,
+        "total_spotlight_papers": 2,
+        "thresholds": {
+            "daily_hot_score_cutoff": 15,
+            "daily_hot_relevance_cutoff": 7,
+            "new_frontier_score_cutoff": 15,
+            "new_frontier_novelty_cutoff": 8
+        },
+        "caps": {
+            "max_daily_hot": 6,
+            "max_new_frontier": 4
+        }
+    },
+    "diagnostics": {
+        "candidate_count_by_kind": {
+            "new_frontier": 1,
+            "daily_hot": 1
+        },
+        "selected_count_by_kind": {
+            "new_frontier": 1,
+            "daily_hot": 1
+        }
+    },
+    "papers": {
+        "2601.15380": {
+            "ARXIVID": "2601.15380",
+            "COMMENT": "Recasts attention as entropic optimal transport and replaces the implicit uniform prior with a learnable one, giving a FlashAttention-compatible mechanism plus an account of attention sinks.",
+            "RELEVANCE": 9,
+            "NOVELTY": 8,
+            "PRIMARY_TOPIC_ID": "architecture_training",
+            "MATCHED_TOPIC_IDS": [
+                "architecture_training"
+            ],
+            "TOPIC_MATCH_COMMENT": "Core contribution is a new attention mechanism with mechanistic explanation of sinks and length generalization.",
+            "HOTSPOT_PAPER_TAGS": [
+                "new_frontier"
+            ],
+            "HOTSPOT_PAPER_COMMENT": "An OT-based reformulation of attention that also explains attention sinks could seed a line of principled attention redesign.",
+            "SCORE": 17,
+            "authors": [
+                "Elon Litman",
+                "Gabe Guo"
+            ],
+            "title": "You Need Better Attention Priors",
+            "abstract": "We generalize the attention mechanism by viewing it through the lens of Entropic Optimal Transport, revealing that standard attention corresponds to a transport problem regularized by an implicit uniform prior. We introduce Generalized Optimal transport Attention with Trainable priors (GOAT), a new attention mechanism that replaces this naive assumption with a learnable, continuous prior. This prior maintains full compatibility with optimized kernels such as FlashAttention. GOAT also provides an EOT-based explanation of attention sinks and materializes a solution for them, avoiding the representational trade-offs of standard attention. Finally, by absorbing spatial information into the core attention computation, GOAT learns an extrapolatable prior that combines the flexibility of learned positional embeddings with the length generalization of fixed encodings.",
+            "arxiv_id": "2601.15380",
+            "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+            "MATCHED_TOPIC_LABELS": [
+                "Architecture and Training Dynamics"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [
+                "New Frontier Papers"
+            ],
+            "HOTSPOT_PAPER_PRIMARY_KIND": "new_frontier",
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "New Frontier Papers",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "llm_exact"
+        },
+        "2601.15370": {
+            "ARXIVID": "2601.15370",
+            "COMMENT": "Recovers expert-choice-style data sparsity inside causal token-choice MoE by putting zero-compute null experts in the routing pool, so load balancing itself induces per-token compute allocation without breaking causality.",
+            "RELEVANCE": 10,
+            "NOVELTY": 8,
+            "PRIMARY_TOPIC_ID": "moe_training",
+            "MATCHED_TOPIC_IDS": [
+                "moe_training",
+                "efficiency_scaling"
+            ],
+            "TOPIC_MATCH_COMMENT": "Directly a routing and load-balancing contribution that reshapes the MoE compute frontier.",
+            "HOTSPOT_PAPER_TAGS": [
+                "daily_hot"
+            ],
+            "HOTSPOT_PAPER_COMMENT": "Broadly important today: Recovers expert-choice-style data sparsity inside causal token-choice MoE by putting zero-compute null experts in the routing pool, so load balancing itself induces per-token compute allocation without breaking causality.",
+            "SCORE": 18,
+            "authors": [
+                "Maciej Kilian",
+                "Oleg Mkrtchyan",
+                "Luke Zettlemoyer",
+                "Akshat Shrivastava",
+                "Armen Aghajanyan"
+            ],
+            "title": "Improving MoE Compute Efficiency by Composing Weight and Data Sparsity",
+            "abstract": "Mixture-of-Experts layers achieve compute efficiency through weight sparsity: each token activates only a subset of experts. Data sparsity, where each expert processes only a subset of tokens, offers a complementary axis. Expert-choice routing implements data sparsity directly but violates causality in autoregressive models, creating train-inference mismatch. We recover data sparsity within causal token-choice MoE by leveraging zero-compute (null) experts within the routing pool. When a token routes to null experts, those slots consume no compute. The standard load balancing objective trains the model to uniformly use all experts (real and null) therefore creating data sparsity in expectation without the causality violations. We evaluate on vision-language model training, where data heterogeneity is pronounced: vision encoders produce many low-information tokens while text tokens are denser. At matched expected FLOPs, composing weight and data sparsity yields a more compute-efficient frontier than weight sparsity alone, with gains in training loss and downstream performance. The model learns implicit modality-aware allocation, routing vision tokens to null experts more aggressively than text, without explicit modality routing.",
+            "arxiv_id": "2601.15370",
+            "PRIMARY_TOPIC_LABEL": "MoE Training",
+            "MATCHED_TOPIC_LABELS": [
+                "MoE Training",
+                "Efficiency, Compression, and Large-Scale Training"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [
+                "Daily Hot Papers"
+            ],
+            "HOTSPOT_PAPER_PRIMARY_KIND": "daily_hot",
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "Daily Hot Papers",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "heuristic"
+        }
+    },
+    "sections": [
+        {
+            "kind": "new_frontier",
+            "label": "New Frontier Papers",
+            "description": "Papers that appear to open a genuinely new direction, paradigm, or field.",
+            "paper_ids": [
+                "2601.15380"
+            ]
+        },
+        {
+            "kind": "daily_hot",
+            "label": "Daily Hot Papers",
+            "description": "Papers that feel broadly important to the day and belong in the hotspot paper feed.",
+            "paper_ids": [
+                "2601.15370"
+            ]
+        }
+    ]
+}

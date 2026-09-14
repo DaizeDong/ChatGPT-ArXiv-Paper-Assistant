@@ -1,0 +1,424 @@
+{
+    "schema_version": 2,
+    "meta": {
+        "date": "2025-07-07",
+        "sort": [
+            "score",
+            "relevance"
+        ],
+        "topic_schema_version": 2,
+        "total_papers": 8,
+        "usage": {
+            "model": "llmcall:cc",
+            "prompt_tokens": 0,
+            "completion_tokens": 0,
+            "prompt_cost": 0.0,
+            "completion_cost": 0.0,
+            "total_arxiv_papers": 435,
+            "total_scanned_papers": 435,
+            "total_relevant_papers": 8,
+            "filter_health": {
+                "status": "ok",
+                "scanned_papers": 435,
+                "selected_papers": 8,
+                "llm_tokens": 0,
+                "message": "Scored 435 papers with 5/5 successful model calls; 8 selected."
+            },
+            "llm": {
+                "backend": "LLM backend: llmcall chain=codexg->codex->cc->claude",
+                "attempted": 5,
+                "succeeded": 5,
+                "failed": 0,
+                "by_backend": {
+                    "llmcall": 5
+                },
+                "by_provider": {
+                    "cc": 5
+                },
+                "errors": [],
+                "seconds": 318.2,
+                "trace": [
+                    "codexg: unavailable after 4.8s of 543.7s (2026-09-11T04:22:35.875173Z ERROR codex_models_manager::manager: failed to refresh available models: stream disconnected before completion: failed to decode models response: missing field `models` at )",
+                    "codex: unavailable after 4.1s of 557.7s (OpenAI Codex v0.154.0",
+                    "cc: answered in 15.2s of 572.4s",
+                    "codexg: unavailable after 3.7s of 543.7s (OpenAI Codex v0.154.0",
+                    "codex: unavailable after 4.3s of 558.8s (OpenAI Codex v0.154.0",
+                    "cc: answered in 24.0s of 573.3s",
+                    "codexg: unavailable after 5.0s of 543.7s (OpenAI Codex v0.154.0",
+                    "codex: unavailable after 3.5s of 557.5s (OpenAI Codex v0.154.0",
+                    "cc: answered in 7.4s of 572.7s",
+                    "codexg: unavailable after 83.0s of 543.7s (OpenAI Codex v0.154.0",
+                    "codex: unavailable after 6.8s of 479.5s (OpenAI Codex v0.154.0",
+                    "cc: answered in 99.3s of 491.5s",
+                    "codexg: unavailable after 4.2s of 543.7s (OpenAI Codex v0.154.0",
+                    "codex: unavailable after 4.5s of 558.3s (OpenAI Codex v0.154.0",
+                    "cc: answered in 48.3s of 572.5s"
+                ]
+            },
+            "remedied": true
+        }
+    },
+    "topic_order": [
+        "moe_training",
+        "training_systems",
+        "architecture_training",
+        "efficiency_scaling",
+        "representation_structure",
+        "memory_systems",
+        "world_models_open_ended_rl"
+    ],
+    "diagnostics": {
+        "total_papers": 8,
+        "topic_counts": [
+            {
+                "topic_id": "moe_training",
+                "topic_label": "MoE Training",
+                "paper_count": 0
+            },
+            {
+                "topic_id": "training_systems",
+                "topic_label": "Large-Scale Training Systems and Efficiency",
+                "paper_count": 2
+            },
+            {
+                "topic_id": "architecture_training",
+                "topic_label": "Architecture and Training Dynamics",
+                "paper_count": 2
+            },
+            {
+                "topic_id": "efficiency_scaling",
+                "topic_label": "Efficiency, Compression, and Large-Scale Training",
+                "paper_count": 4
+            },
+            {
+                "topic_id": "representation_structure",
+                "topic_label": "Representation Learning Theory and Structure",
+                "paper_count": 0
+            },
+            {
+                "topic_id": "memory_systems",
+                "topic_label": "Memory Structures and Agent Memory Systems",
+                "paper_count": 0
+            },
+            {
+                "topic_id": "world_models_open_ended_rl",
+                "topic_label": "World Models, Exploration, and Open-Ended Reinforcement Learning",
+                "paper_count": 0
+            }
+        ],
+        "assignment_source_counts": {
+            "llm_exact": 8
+        },
+        "llm_assignment_count": 8,
+        "heuristic_assignment_count": 0,
+        "default_assignment_count": 0,
+        "invalid_primary_topic_fallback_count": 0,
+        "missing_primary_topic_fallback_count": 0,
+        "hotspot_paper_kind_counts": {
+            "new_frontier": 0,
+            "daily_hot": 0
+        },
+        "hotspot_paper_assignment_source_counts": {
+            "default": 8
+        }
+    },
+    "papers": {
+        "2507.03526": {
+            "ARXIVID": "2507.03526",
+            "COMMENT": "Per-component relative learning rate schedules that speed up MoE pretraining by up to 23%, with hyperparameters transferable across a 27x model-size gap.",
+            "RELEVANCE": 9,
+            "NOVELTY": 7,
+            "PRIMARY_TOPIC_ID": "training_systems",
+            "MATCHED_TOPIC_IDS": [
+                "moe_training",
+                "training_systems",
+                "architecture_training"
+            ],
+            "TOPIC_MATCH_COMMENT": "Core contribution is an optimizer/LR-schedule change for large-scale pretraining, with MoE as the main beneficiary.",
+            "HOTSPOT_PAPER_TAGS": [],
+            "HOTSPOT_PAPER_COMMENT": "",
+            "SCORE": 16,
+            "authors": [
+                "Jan Ludziejewski",
+                "Jan Małaśnicki",
+                "Maciej Pióro",
+                "Michał Krutul",
+                "Kamil Ciebiera",
+                "Maciej Stefaniak",
+                "Jakub Krajewski",
+                "Piotr Sankowski",
+                "Marek Cygan",
+                "Kamil Adamczewski",
+                "Sebastian Jaszczur"
+            ],
+            "title": "Decoupled Relative Learning Rate Schedules",
+            "abstract": "In this work, we introduce a novel approach for optimizing LLM training by adjusting learning rates across weights of different components in Transformer models. Traditional methods often apply a uniform learning rate across all network layers, potentially overlooking the unique dynamics of each part. Remarkably, our introduced relative learning rates, RLRS, method accelerates the training process by up to $23\\%$, particularly in complex models such as Mixture of Experts (MoE). Hyperparameters of RLRS can be efficiently tuned on smaller models and then effectively reused on models up to $27\\times$ larger. This simple and effective method results in a substantial reduction in training time and computational resources, offering a practical and scalable solution for optimizing large-scale neural networks.",
+            "arxiv_id": "2507.03526",
+            "PRIMARY_TOPIC_LABEL": "Large-Scale Training Systems and Efficiency",
+            "MATCHED_TOPIC_LABELS": [
+                "MoE Training",
+                "Large-Scale Training Systems and Efficiency",
+                "Architecture and Training Dynamics"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [],
+            "HOTSPOT_PAPER_PRIMARY_KIND": null,
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+        },
+        "2507.04206": {
+            "ARXIVID": "2507.04206",
+            "COMMENT": "Valley-river landscape analysis giving a mechanistic account of warm-up and an optimal plateau LR (\"strong Mpemba point\") for WSD schedules.",
+            "RELEVANCE": 8,
+            "NOVELTY": 6,
+            "PRIMARY_TOPIC_ID": "architecture_training",
+            "MATCHED_TOPIC_IDS": [
+                "training_systems",
+                "architecture_training"
+            ],
+            "TOPIC_MATCH_COMMENT": "Optimization/training-dynamics analysis explaining why a widely used LLM LR schedule works.",
+            "HOTSPOT_PAPER_TAGS": [],
+            "HOTSPOT_PAPER_COMMENT": "",
+            "SCORE": 14,
+            "authors": [
+                "Sibei Liu",
+                "Zhijian Hu"
+            ],
+            "title": "Mpemba Effect in Large-Language Model Training Dynamics: A Minimal Analysis of the Valley-River model",
+            "abstract": "Learning rate (LR) schedules in large language model (LLM) training often follow empirical templates: warm-up, constant plateau/stable phase, and decay (WSD). However, the mechanistic explanation for this strategy remains underexplored, and the choice of plateau height and decay schedule is largely heuristic. In this paper, we connect training dynamics to a thermodynamic analogy via the Mpemba effect - a phenomenon in which a hotter system cools faster than a colder one when quenched into the same bath. We analyze a class of \"valley-river\" loss landscapes, where sharp (valley) directions equilibrate quickly, while flatter (river) directions govern global descent. The Mpemba effect provides an explanation for the necessity of the warm-up phase and motivates a high plateau - rather than a low one - for accelerating loss decrease during decay. We show that for certain loss landscapes, there exists an optimal plateau learning rate - the \"strong Mpemba point\" - at which the slowest mode vanishes, resulting in faster convergence during the decay phase. We derive analytical conditions for its existence and estimate decay dynamics required to preserve the Mpemba advantage. Our minimal model and analysis offer a principled justification for plateau-based schedulers and provide guidance for tuning LR in LLMs with minimal hyperparameter sweep.",
+            "arxiv_id": "2507.04206",
+            "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+            "MATCHED_TOPIC_LABELS": [
+                "Large-Scale Training Systems and Efficiency",
+                "Architecture and Training Dynamics"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [],
+            "HOTSPOT_PAPER_PRIMARY_KIND": null,
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+        },
+        "2507.04517": {
+            "ARXIVID": "2507.04517",
+            "COMMENT": "Width reduction as discrete optimal transport: neurons are merged and re-projected with entropic regularization instead of discarded by importance.",
+            "RELEVANCE": 7,
+            "NOVELTY": 7,
+            "PRIMARY_TOPIC_ID": "efficiency_scaling",
+            "MATCHED_TOPIC_IDS": [
+                "efficiency_scaling"
+            ],
+            "TOPIC_MATCH_COMMENT": "A genuinely different structured-compression mechanism that retains signal from pruned structures rather than dropping them.",
+            "HOTSPOT_PAPER_TAGS": [],
+            "HOTSPOT_PAPER_COMMENT": "",
+            "SCORE": 14,
+            "authors": [
+                "Neha Verma",
+                "Kenton Murray",
+                "Kevin Duh"
+            ],
+            "title": "DOTResize: Reducing LLM Width via Discrete Optimal Transport-based Neuron Merging",
+            "abstract": "Structured pruning methods designed for Large Language Models (LLMs) generally focus on identifying and removing the least important components to optimize model size. However, in this work, we question this prevalent approach by instead exploring how to recombine information from structures designated for pruning back into the reduced model. We specifically focus on neuron width reduction, and frame this problem as a Discrete Optimal Transport problem, and propose DOTResize, a novel Transformer compression method that uses optimal transport theory to transform and compress model width. To ensure applicability within the Transformer architecture, we motivate and incorporate necessary entropic regularization and matrix factorization techniques into the transportation maps produced by our method. Unlike pruning-based approaches which discard neurons based on importance measures, DOTResize re-projects the entire neuron width, allowing the retention and redistribution of useful signal across the reduced layer. Empirical results show that compared to simple or state-of-the-art neuron width-pruning techniques, DOTResize serves as a useful add-on to pruning, while achieving measurable reductions in real-world computational cost.",
+            "arxiv_id": "2507.04517",
+            "PRIMARY_TOPIC_LABEL": "Efficiency, Compression, and Large-Scale Training",
+            "MATCHED_TOPIC_LABELS": [
+                "Efficiency, Compression, and Large-Scale Training"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [],
+            "HOTSPOT_PAPER_PRIMARY_KIND": null,
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+        },
+        "2507.03828": {
+            "ARXIVID": "2507.03828",
+            "COMMENT": "Low-rank compression recast as importance-weighted activation reconstruction with a closed-form basis from a gradient-weighted activation covariance.",
+            "RELEVANCE": 7,
+            "NOVELTY": 6,
+            "PRIMARY_TOPIC_ID": "efficiency_scaling",
+            "MATCHED_TOPIC_IDS": [
+                "efficiency_scaling"
+            ],
+            "TOPIC_MATCH_COMMENT": "New mechanism for low-rank LLM compression rather than a tuned variant of an existing one.",
+            "HOTSPOT_PAPER_TAGS": [],
+            "HOTSPOT_PAPER_COMMENT": "",
+            "SCORE": 13,
+            "authors": [
+                "Md Mokarram Chowdhury",
+                "Daniel Agyei Asante",
+                "Ernie Chang",
+                "Yang Li"
+            ],
+            "title": "IMPACT: Importance-Aware Activation Space Reconstruction",
+            "abstract": "Large language models (LLMs) achieve strong performance across diverse domains but remain difficult to deploy in resource-constrained environments due to their size. Low-rank compression is a common remedy, typically minimizing weight reconstruction error under the assumption that weights are low-rank. However, this assumption often does not hold in LLMs. In contrast, LLM activations exhibit a more pronounced low-rank structure, motivating approaches that minimize activation reconstruction error. This shift alone, however, is not sufficient: different activation dimensions contribute unequally to model performance, and treating them uniformly can lead to accuracy loss. We introduce IMPACT, an importance-aware activation reconstruction framework that links compression to its effect on model performance. IMPACT formulates compression as an optimization problem that integrates activation structure with gradient-based importance, deriving a closed-form solution where reconstruction bases arise from an importance-weighted activation covariance matrix. This yields low-rank compression explicitly optimized for accuracy preservation. Experiments across multiple models and tasks demonstrate that IMPACT achieves up to 55.4% greater model size reduction while maintaining accuracy comparable to or better than state-of-the-art baselines.",
+            "arxiv_id": "2507.03828",
+            "PRIMARY_TOPIC_LABEL": "Efficiency, Compression, and Large-Scale Training",
+            "MATCHED_TOPIC_LABELS": [
+                "Efficiency, Compression, and Large-Scale Training"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [],
+            "HOTSPOT_PAPER_PRIMARY_KIND": null,
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+        },
+        "2507.03545": {
+            "ARXIVID": "2507.03545",
+            "COMMENT": "First-order online estimate of the gradient-covariance nuisance subspace, removable without hurting optimization and useful for gradient compression.",
+            "RELEVANCE": 7,
+            "NOVELTY": 6,
+            "PRIMARY_TOPIC_ID": "training_systems",
+            "MATCHED_TOPIC_IDS": [
+                "training_systems",
+                "architecture_training"
+            ],
+            "TOPIC_MATCH_COMMENT": "Targets gradient SNR and compression, which bear directly on distributed training communication cost.",
+            "HOTSPOT_PAPER_TAGS": [],
+            "HOTSPOT_PAPER_COMMENT": "",
+            "SCORE": 13,
+            "authors": [
+                "Julien Nicolas",
+                "Mohamed Maouche",
+                "Sonia Ben Mokhtar",
+                "Mark Coates"
+            ],
+            "title": "DOME: Improving Signal-to-Noise in Stochastic Gradient Descent via Sharp-Direction Subspace Filtering",
+            "abstract": "Stochastic gradients for deep neural networks exhibit strong correlations along the optimization trajectory, and are often aligned with a small set of Hessian eigenvectors associated with outlier eigenvalues. Recent work shows that projecting gradients away from this Hessian outlier subspace has little impact on optimization, despite capturing a large fraction of gradient variability. Since computing the Hessian is intractable in practice, we introduce a principled first-order characterization of the nuisance subspace based on the covariance of stochastic gradients, and propose an efficient method to estimate it online. We show that removing this subspace also has little impact on optimization, and yields practical benefits for applications sensitive to gradient signal-to-noise ratio such as gradient compression.",
+            "arxiv_id": "2507.03545",
+            "PRIMARY_TOPIC_LABEL": "Large-Scale Training Systems and Efficiency",
+            "MATCHED_TOPIC_LABELS": [
+                "Large-Scale Training Systems and Efficiency",
+                "Architecture and Training Dynamics"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [],
+            "HOTSPOT_PAPER_PRIMARY_KIND": null,
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+        },
+        "2507.03340": {
+            "ARXIVID": "2507.03340",
+            "COMMENT": "Statistical degrees of freedom set the per-layer feature dimension for linear attention, with an approximation-error bound and layerwise feature training.",
+            "RELEVANCE": 7,
+            "NOVELTY": 6,
+            "PRIMARY_TOPIC_ID": "architecture_training",
+            "MATCHED_TOPIC_IDS": [
+                "architecture_training",
+                "efficiency_scaling"
+            ],
+            "TOPIC_MATCH_COMMENT": "An analysed attention variant with a principled capacity rule and evidence on how attention complexity varies across layers.",
+            "HOTSPOT_PAPER_TAGS": [],
+            "HOTSPOT_PAPER_COMMENT": "",
+            "SCORE": 13,
+            "authors": [
+                "Naoki Nishikawa",
+                "Rei Higuchi",
+                "Taiji Suzuki"
+            ],
+            "title": "Degrees of Freedom for Linear Attention: Distilling Softmax Attention with Optimal Feature Efficiency",
+            "abstract": "Linear attention has attracted interest as a computationally efficient approximation to softmax attention, especially for long sequences. Recent studies have explored distilling softmax attention in pre-trained Transformers into linear attention. However, a critical challenge remains: how to choose the feature dimension that governs the approximation quality. Existing methods fix this dimension uniformly across all attention layers, overlooking the diverse roles and complexities of them. In this paper, we propose a principled method to automatically determine the feature dimension in linear attention using the concept of statistical degrees of freedom, which represent the effective dimensionality of the inputs. We provide a theoretical bound on the approximation error and show that the dimension chosen by our method achieves smaller error under a fixed computational budget. Furthermore, we introduce an efficient layerwise training strategy to learn nonlinear features tailored to each layer. Experiments on multiple pre-trained transformers demonstrate that our method improves the performance of distilled models compared to baselines without increasing the inference cost. Our findings also provide insight into how the complexity of the attention mechanism evolves across layers.",
+            "arxiv_id": "2507.03340",
+            "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+            "MATCHED_TOPIC_LABELS": [
+                "Architecture and Training Dynamics",
+                "Efficiency, Compression, and Large-Scale Training"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [],
+            "HOTSPOT_PAPER_PRIMARY_KIND": null,
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+        },
+        "2507.03865": {
+            "ARXIVID": "2507.03865",
+            "COMMENT": "Token importance defined by orthogonality to the attention-sink direction in hidden space, driving dynamic token selection at sparsity parity with layer pruning.",
+            "RELEVANCE": 6,
+            "NOVELTY": 6,
+            "PRIMARY_TOPIC_ID": "efficiency_scaling",
+            "MATCHED_TOPIC_IDS": [
+                "architecture_training",
+                "efficiency_scaling"
+            ],
+            "TOPIC_MATCH_COMMENT": "Dynamic sparsity mechanism for inference cost, grounded in a new observation about sink-token geometry.",
+            "HOTSPOT_PAPER_TAGS": [],
+            "HOTSPOT_PAPER_COMMENT": "",
+            "SCORE": 12,
+            "authors": [
+                "Seungjun Shin",
+                "Jaehoon Oh",
+                "Dokwan Oh"
+            ],
+            "title": "OrthoRank: Token Selection via Sink Token Orthogonality for Efficient LLM inference",
+            "abstract": "Attention mechanisms are central to the success of large language models (LLMs), enabling them to capture intricate token dependencies and implicitly assign importance to each token. Recent studies have revealed the sink token, which receives disproportionately high attention despite their limited semantic role. In this paper, we first expand the relationship between the sink token and other tokens, moving beyond attention to explore their similarity in hidden states, considering the layer depth. We observe that as the layers get deeper, the cosine similarity between the normalized hidden states of the sink token and those of other tokens increases, and that the normalized hidden states of the sink token exhibit negligible changes. These imply that other tokens consistently are directed toward the sink token throughout the layers. Next, we propose a dynamic token selection method, called OrthoRank, using these findings to select important tokens. Specifically, in a certain layer, we define token importance by the speed at which the token moves toward the sink token. This is converted into orthogonality with the sink token, meaning that tokens that are more orthogonal to the sink token are assigned greater importance. Finally, through extensive experiments, we demonstrated that our method results in lower perplexity and higher zero-shot accuracy compared to layer pruning methods at the same sparsity ratio with comparable throughput, while also achieving superior performance on LongBench.",
+            "arxiv_id": "2507.03865",
+            "PRIMARY_TOPIC_LABEL": "Efficiency, Compression, and Large-Scale Training",
+            "MATCHED_TOPIC_LABELS": [
+                "Architecture and Training Dynamics",
+                "Efficiency, Compression, and Large-Scale Training"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [],
+            "HOTSPOT_PAPER_PRIMARY_KIND": null,
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+        },
+        "2507.04487": {
+            "ARXIVID": "2507.04487",
+            "COMMENT": "Gradient-sparsity subnet localization gives high-rank adaptation without LoRA's extra matrix multiplications, cutting training latency ~27%.",
+            "RELEVANCE": 6,
+            "NOVELTY": 6,
+            "PRIMARY_TOPIC_ID": "efficiency_scaling",
+            "MATCHED_TOPIC_IDS": [
+                "efficiency_scaling"
+            ],
+            "TOPIC_MATCH_COMMENT": "A new parameter-efficient adaptation mechanism that changes fine-tuning compute, fitting the efficiency topic; scope is fine-tuning rather than pretraining.",
+            "HOTSPOT_PAPER_TAGS": [],
+            "HOTSPOT_PAPER_COMMENT": "",
+            "SCORE": 12,
+            "authors": [
+                "Xujia Wang",
+                "Yunjia Qi",
+                "Bin Xu"
+            ],
+            "title": "LoSiA: Efficient High-Rank Fine-Tuning via Subnet Localization and Optimization",
+            "abstract": "Parameter-Efficient Fine-Tuning (PEFT) methods, such as LoRA, significantly reduce the number of trainable parameters by introducing low-rank decomposition matrices. However, existing methods perform extensive matrix multiplications in domain specialization tasks, resulting in computational inefficiency and sub-optimal fine-tuning performance. Hence, we propose LoSiA(Low-Resources Subnet Integration Adaptation), an innovative method that dynamically localizes and optimizes critical parameters during the training process. Specifically, it identifies a sub-network using gradient sparsity analysis and optimizes it as the trainable target. This design enables effective high-rank adaptation by updating only the sub-network parameters, reducing the additional matrix multiplication. We also present LoSiA-Pro, a faster implementation of LoSiA, which reduces the training latency by about $27\\%$ compared to LoRA. Extensive evaluations show that our method achieves minimal performance drop compared to full fine-tuning, while requiring the least training time across domain specialization and common-sense reasoning tasks. Further analysis shows that LoSiA also reduces forgetting during continued training. The source code is available at https://github.com/KlozeWang/LoSiA.",
+            "arxiv_id": "2507.04487",
+            "PRIMARY_TOPIC_LABEL": "Efficiency, Compression, and Large-Scale Training",
+            "MATCHED_TOPIC_LABELS": [
+                "Efficiency, Compression, and Large-Scale Training"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [],
+            "HOTSPOT_PAPER_PRIMARY_KIND": null,
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+        }
+    },
+    "topic_sections": [
+        {
+            "topic_id": "training_systems",
+            "topic_label": "Large-Scale Training Systems and Efficiency",
+            "paper_ids": [
+                "2507.03526",
+                "2507.03545"
+            ]
+        },
+        {
+            "topic_id": "architecture_training",
+            "topic_label": "Architecture and Training Dynamics",
+            "paper_ids": [
+                "2507.04206",
+                "2507.03340"
+            ]
+        },
+        {
+            "topic_id": "efficiency_scaling",
+            "topic_label": "Efficiency, Compression, and Large-Scale Training",
+            "paper_ids": [
+                "2507.04517",
+                "2507.03828",
+                "2507.03865",
+                "2507.04487"
+            ]
+        }
+    ]
+}

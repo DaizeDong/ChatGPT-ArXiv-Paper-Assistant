@@ -1,0 +1,278 @@
+{
+    "2603.03583": {
+        "ARXIVID": "2603.03583",
+        "COMMENT": "Compression-driven byte segmentation from latent coding rate, with Top-K selection keeping the computation graph static despite adaptive chunk boundaries \u2014 a dynamic-computation mechanism replacing the fixed tokenizer.",
+        "RELEVANCE": 8,
+        "NOVELTY": 8,
+        "PRIMARY_TOPIC_ID": "architecture_training",
+        "MATCHED_TOPIC_IDS": [
+            "architecture_training"
+        ],
+        "TOPIC_MATCH_COMMENT": "Core contribution is a new hierarchical architectural mechanism (learned adaptive granularity under a static graph), not an application of an existing backbone.",
+        "HOTSPOT_PAPER_TAGS": [],
+        "HOTSPOT_PAPER_COMMENT": "",
+        "SCORE": 16,
+        "authors": [
+            "Chunyuan Deng",
+            "Sanket Lokegaonkar",
+            "Colin Lockard",
+            "Besnik Fetahu",
+            "Nasser Zalmout",
+            "Xian Li"
+        ],
+        "title": "ByteFlow: Language Modeling through Adaptive Byte Compression without a Tokenizer",
+        "abstract": "Modern language models still rely on fixed, pre-defined subword tokenizations. Once a tokenizer is trained, the LM can only operate at this fixed level of granularity, which often leads to brittle and counterintuitive behaviors even in otherwise strong reasoning models. We introduce \\textbf{ByteFlow Net}, a new hierarchical architecture that removes tokenizers entirely and instead enables models to learn their own segmentation of raw byte streams into semantically meaningful units. ByteFlow Net performs compression-driven segmentation based on the coding rate of latent representations, yielding adaptive boundaries \\emph{while preserving a static computation graph via Top-$K$ selection}. Unlike prior self-tokenizing methods that depend on brittle heuristics with human-designed inductive biases, ByteFlow Net adapts its internal representation granularity to the input itself. Experiments demonstrate that this compression-based chunking strategy yields substantial performance gains, with ByteFlow Net outperforming both BPE-based Transformers and previous byte-level architectures. These results suggest that end-to-end, tokenizer-free modeling is not only feasible but also more effective, opening a path toward more adaptive and information-grounded language models.",
+        "arxiv_id": "2603.03583",
+        "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+        "MATCHED_TOPIC_LABELS": [
+            "Architecture and Training Dynamics"
+        ],
+        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+        "HOTSPOT_PAPER_LABELS": [],
+        "HOTSPOT_PAPER_PRIMARY_KIND": null,
+        "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+    },
+    "2603.03592": {
+        "ARXIVID": "2603.03592",
+        "COMMENT": "Byzantine-style integrity verification for pipeline-parallel training, monitoring inter-stage activation and gradient transmission with EMAs instead of duplicating compute, with convergence guarantees at 176 workers.",
+        "RELEVANCE": 8,
+        "NOVELTY": 7,
+        "PRIMARY_TOPIC_ID": "training_systems",
+        "MATCHED_TOPIC_IDS": [
+            "training_systems"
+        ],
+        "TOPIC_MATCH_COMMENT": "Directly addresses pipeline parallelism mechanics and the activation/gradient communication path in decentralized large-model training.",
+        "HOTSPOT_PAPER_TAGS": [],
+        "HOTSPOT_PAPER_COMMENT": "",
+        "SCORE": 15,
+        "authors": [
+            "Hadi Mohaghegh Dolatabadi",
+            "Thalaiyasingam Ajanthan",
+            "Sameera Ramasinghe",
+            "Chamin P Hewa Koneputugodage",
+            "Gil Avraham",
+            "Yan Zuo",
+            "Violetta Shevchenko",
+            "Alexander Long"
+        ],
+        "title": "SENTINEL: Stagewise Integrity Verification for Pipeline Parallel Decentralized Training",
+        "abstract": "Decentralized training introduces critical security risks when executed across untrusted, geographically distributed nodes. While existing Byzantine-tolerant literature addresses data parallel (DP) training through robust aggregation methods, pipeline parallelism (PP) presents fundamentally distinct challenges. In PP, model layers are distributed across workers where the activations and their gradients flow between stages rather than being aggregated, making traditional DP approaches inapplicable. We propose SENTINEL, a verification mechanism for PP training without computation duplication. SENTINEL employs lightweight momentum-based monitoring using exponential moving averages (EMAs) to detect corrupted inter-stage communication. Unlike existing Byzantine-tolerant approaches for DP that aggregate parameter gradients across replicas, our approach verifies sequential activation/gradient transmission between layers. We provide theoretical convergence guarantees for this new setting that recovers classical convergence rates when relaxed to standard training. Experiments demonstrate successful training of up to 4B-parameter LLMs across untrusted distributed environments with up to 176 workers while maintaining model convergence and performance.",
+        "arxiv_id": "2603.03592",
+        "PRIMARY_TOPIC_LABEL": "Large-Scale Training Systems and Efficiency",
+        "MATCHED_TOPIC_LABELS": [
+            "Large-Scale Training Systems and Efficiency"
+        ],
+        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+        "HOTSPOT_PAPER_LABELS": [],
+        "HOTSPOT_PAPER_PRIMARY_KIND": null,
+        "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+    },
+    "2603.20219": {
+        "ARXIVID": "2603.20219",
+        "COMMENT": "Training objective that recursively feeds hidden states back into context for tau latent steps before committing to a token, supervising those latent predictions against future ground-truth tokens.",
+        "RELEVANCE": 7,
+        "NOVELTY": 7,
+        "PRIMARY_TOPIC_ID": "architecture_training",
+        "MATCHED_TOPIC_IDS": [
+            "architecture_training",
+            "efficiency_scaling"
+        ],
+        "TOPIC_MATCH_COMMENT": "A new pretraining-objective and dynamic-compute-allocation mechanism altering how per-token compute is spent during training.",
+        "HOTSPOT_PAPER_TAGS": [
+            "new_frontier"
+        ],
+        "HOTSPOT_PAPER_COMMENT": "Latent-space lookahead as a next-token-prediction replacement is an early but genuinely new training-objective direction.",
+        "SCORE": 14,
+        "authors": [
+            "Lorenzo Noci",
+            "Gregor Bachmann",
+            "Seyed-Mohsen Moosavi-Dezfooli",
+            "Moin Nabi"
+        ],
+        "title": "Thinking into the Future: Latent Lookahead Training for Transformers",
+        "abstract": "Autoregressive language models trained with next-token prediction generate text by sampling one discrete token at a time. Although very scalable, this objective forces the model to commit at every step, preventing it from exploring or reflecting upon multiple plausible continuations. Furthermore, the compute allocation across tokens is uniform; every token is formed based on a single forward-pass, potentially limiting the model's expressiveness in cases where difficult tokens require inherently more compute. Towards addressing these limitations, we introduce latent lookahead, a training strategy that enables models to \"think\" before generating: at selected positions in the sequence, before committing to the next token, the model performs a multi-step lookahead in latent space. More precisely, instead of sampling future tokens, we leverage the network's latent space by recursively feeding its hidden states back into the context for $\u03c4$ steps, investing more compute on predicting that token. This produces $\u03c4$ latent predictions that are supervised against the next $\u03c4$ ground-truth tokens, encouraging the model to \"lookahead\" and refine its prediction. We show that latent lookahead substantially outperforms both autoregressive and non-autoregressive baselines on planning tasks such as maze solving, Sudoku, and ProsQA, where foresight is essential.",
+        "arxiv_id": "2603.20219",
+        "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+        "MATCHED_TOPIC_LABELS": [
+            "Architecture and Training Dynamics",
+            "Efficiency, Compression, and Large-Scale Training"
+        ],
+        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+        "HOTSPOT_PAPER_LABELS": [
+            "New Frontier Papers"
+        ],
+        "HOTSPOT_PAPER_PRIMARY_KIND": "new_frontier",
+        "HOTSPOT_PAPER_PRIMARY_LABEL": "New Frontier Papers",
+        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "llm_exact"
+    },
+    "2603.03099": {
+        "ARXIVID": "2603.03099",
+        "COMMENT": "First high-probability separation between Adam and SGD, attributing it to second-moment normalization sharpening the tail dependence on the confidence parameter from delta^-1 to delta^-1/2.",
+        "RELEVANCE": 7,
+        "NOVELTY": 7,
+        "PRIMARY_TOPIC_ID": "architecture_training",
+        "MATCHED_TOPIC_IDS": [
+            "training_systems",
+            "architecture_training"
+        ],
+        "TOPIC_MATCH_COMMENT": "Optimisation-dynamics analysis explaining why the dominant pretraining optimizer behaves as it does; also touches optimizer theory for large-scale training.",
+        "HOTSPOT_PAPER_TAGS": [],
+        "HOTSPOT_PAPER_COMMENT": "",
+        "SCORE": 14,
+        "authors": [
+            "Ruinan Jin",
+            "Yingbin Liang",
+            "Shaofeng Zou"
+        ],
+        "title": "Why Adam Can Beat SGD: Second-Moment Normalization Yields Sharper Tails",
+        "abstract": "Despite Adam demonstrating faster empirical convergence than SGD in many applications, much of the existing theory yields guarantees essentially comparable to those of SGD, leaving the empirical performance gap insufficiently explained. In this paper, we uncover a key second-moment normalization in Adam and develop a stopping-time/martingale analysis that provably distinguishes Adam from SGD under the classical bounded variance model (a second moment assumption). In particular, we establish the first theoretical separation between the high-probability convergence behaviors of the two methods: Adam achieves a $\u03b4^{-1/2}$ dependence on the confidence parameter $\u03b4$, whereas corresponding high-probability guarantee for SGD necessarily incurs at least a $\u03b4^{-1}$ dependence.",
+        "arxiv_id": "2603.03099",
+        "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+        "MATCHED_TOPIC_LABELS": [
+            "Large-Scale Training Systems and Efficiency",
+            "Architecture and Training Dynamics"
+        ],
+        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+        "HOTSPOT_PAPER_LABELS": [],
+        "HOTSPOT_PAPER_PRIMARY_KIND": null,
+        "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+    },
+    "2603.02649": {
+        "ARXIVID": "2603.02649",
+        "COMMENT": "Stability-based generalization analysis of Adam/AdamW plus a variant that periodically falls back to momentum SGD, proving an O(1/N) bound versus Adam's O(1/sqrt(N)).",
+        "RELEVANCE": 7,
+        "NOVELTY": 6,
+        "PRIMARY_TOPIC_ID": "training_systems",
+        "MATCHED_TOPIC_IDS": [
+            "training_systems",
+            "architecture_training"
+        ],
+        "TOPIC_MATCH_COMMENT": "Optimizer design and theory for the default optimizers of large-scale pretraining.",
+        "HOTSPOT_PAPER_TAGS": [],
+        "HOTSPOT_PAPER_COMMENT": "",
+        "SCORE": 13,
+        "authors": [
+            "Feihu Huang",
+            "Guanyi Zhang",
+            "Songcan Chen"
+        ],
+        "title": "HomeAdam: Adam and AdamW Algorithms Sometimes Go Home to Obtain Better Provable Generalization",
+        "abstract": "Adam and AdamW are a class of default optimizers for training deep learning models in machine learning. These adaptive algorithms converge faster but generalize worse compared to SGD. In fact, their proved generalization error $O(\\frac{1}{\\sqrt{N}})$ also is larger than $O(\\frac{1}{N})$ of SGD, where $N$ denotes training sample size. Recently, although some variants of Adam have been proposed to improve its generalization, their improved generalizations are still unexplored in theory. To fill this gap, in the paper, we restudy generalization of Adam and AdamW via algorithmic stability, and first prove that Adam and AdamW without square-root (i.e., Adam(W)-srf) have a generalization error $O(\\frac{\\hat\u03c1^{-2T}}{N})$, where $T$ denotes iteration number and $\\hat\u03c1>0$ denotes the smallest element of second-order momentum plus a small positive number. To improve generalization, we propose a class of efficient clever Adam (i.e., HomeAdam(W)) algorithms via sometimes returning momentum-based SGD. Moreover, we prove that our HomeAdam(W) have a smaller generalization error $O(\\frac{1}{N})$ than $O(\\frac{\\hat\u03c1^{-2T}}{N})$ of Adam(W)-srf, since $\\hat\u03c1$ is generally very small. In particular, it is also smaller than the existing $O(\\frac{1}{\\sqrt{N}})$ of Adam(W). Meanwhile, we prove our HomeAdam(W) have a faster convergence rate of $O(\\frac{1}{T^{1/4}})$ than $O(\\frac{\\breve\u03c1^{-1}}{T^{1/4}})$ of the Adam(W)-srf, where $\\breve\u03c1\\leq\\hat\u03c1$ also is very small. Extensive numerical experiments demonstrate efficiency of our HomeAdam(W) algorithms.",
+        "arxiv_id": "2603.02649",
+        "PRIMARY_TOPIC_LABEL": "Large-Scale Training Systems and Efficiency",
+        "MATCHED_TOPIC_LABELS": [
+            "Large-Scale Training Systems and Efficiency",
+            "Architecture and Training Dynamics"
+        ],
+        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+        "HOTSPOT_PAPER_LABELS": [],
+        "HOTSPOT_PAPER_PRIMARY_KIND": null,
+        "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+    },
+    "2603.03459": {
+        "ARXIVID": "2603.03459",
+        "COMMENT": "A d+1-parameter gate routes tokens between the full MLP and a linear surrogate, showing most MLP computation is near-linear and that linearizing selected layers can improve perplexity.",
+        "RELEVANCE": 7,
+        "NOVELTY": 6,
+        "PRIMARY_TOPIC_ID": "architecture_training",
+        "MATCHED_TOPIC_IDS": [
+            "architecture_training",
+            "efficiency_scaling"
+        ],
+        "TOPIC_MATCH_COMMENT": "Conditional routing over MLP compute plus a measurement of where nonlinearity is actually needed \u2014 a dynamic-computation mechanism with direct training-budget consequences.",
+        "HOTSPOT_PAPER_TAGS": [],
+        "HOTSPOT_PAPER_COMMENT": "",
+        "SCORE": 13,
+        "authors": [
+            "Peter Balogh"
+        ],
+        "title": "Half the Nonlinearity Is Wasted: Measuring and Reallocating the Transformer's MLP Budget",
+        "abstract": "We investigate when transformer MLP nonlinearity is actually necessary. A gate with $d+1$ parameters decides when to replace the full MLP with a linear surrogate. Through systematic investigation across six models (162M-2.8B parameters), two architectures, and three corpora, we establish that nonlinearity need cannot be predicted from token identity: cross-corpus correlation is zero ($r < 0.05$). The routing decision is fully contextual. Despite weak per-instance predictability, the gate exploits a heavily skewed distribution where most MLP computations are near-linear, achieving 25-56% linear routing at <1% perplexity cost in GPT-2. In GPT-2 Large, 11 of 36 layers beat baseline with gating and no layer exceeds 3.7% all-linear cost. This success is architecture-dependent: Pythia models show higher costs, though Pythia-2.8B's full 32-layer sweep reveals one layer that narrowly beats baseline. As a proof of concept, we progressively replace middle-layer MLPs with frozen linear matrices: 5 of 24 layers linearize at zero cost. With a full training budget, 4 linearized layers yield a 10.2% perplexity improvement -- and a two-phase gated approach pushes this to 17.3%, beating a vanilla fine-tuning control and confirming that the nonlinear MLPs at these layers were actively harmful.",
+        "arxiv_id": "2603.03459",
+        "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+        "MATCHED_TOPIC_LABELS": [
+            "Architecture and Training Dynamics",
+            "Efficiency, Compression, and Large-Scale Training"
+        ],
+        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+        "HOTSPOT_PAPER_LABELS": [],
+        "HOTSPOT_PAPER_PRIMARY_KIND": null,
+        "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+    },
+    "2603.02633": {
+        "ARXIVID": "2603.02633",
+        "COMMENT": "Identifies noise-sensitive experts by maximum neuron norm and keeps only those (plus dense attention) on digital hardware, giving retraining-free analog in-memory MoE execution with generalization guarantees.",
+        "RELEVANCE": 7,
+        "NOVELTY": 6,
+        "PRIMARY_TOPIC_ID": "efficiency_scaling",
+        "MATCHED_TOPIC_IDS": [
+            "moe_training",
+            "efficiency_scaling"
+        ],
+        "TOPIC_MATCH_COMMENT": "Primary axis is cutting the memory/energy cost of running a large MoE, with the expert-level partitioning criterion as the new mechanism.",
+        "HOTSPOT_PAPER_TAGS": [],
+        "HOTSPOT_PAPER_COMMENT": "",
+        "SCORE": 13,
+        "authors": [
+            "Mohammed Nowaz Rabbani Chowdhury",
+            "Hsinyu Tsai",
+            "Geoffrey W. Burr",
+            "Kaoutar El Maghraoui",
+            "Liu Liu",
+            "Meng Wang"
+        ],
+        "title": "Robust Heterogeneous Analog-Digital Computing for Mixture-of-Experts Models with Theoretical Generalization Guarantees",
+        "abstract": "Sparse Mixture-of-Experts (MoE) models enable efficient scalability by activating only a small sub-set of experts per input, yet their massive parameter counts lead to substantial memory and energy inefficiency during inference. Analog in-memory computing (AIMC) offers a promising solution by eliminating frequent data movement between memory and compute units. However, mitigating hardware nonidealities of AIMC typically requires noise-aware retraining, which is infeasible for large MoE models. In this paper, we propose a retraining-free heterogeneous computation framework in which noise-sensitive experts, which are provably identifiable by their maximum neuron norm, are computed digitally while the majority of the experts are executed on AIMC hardware. We further assign densely activated modules, such as attention layers, to digital computation due to their high noise sensitivity despite comprising a small fraction of parameters. Extensive experiments on large MoE language models, including DeepSeekMoE and OLMoE, across multiple benchmark tasks validate the robustness of our approach in maintaining accuracy under analog nonidealities.",
+        "arxiv_id": "2603.02633",
+        "PRIMARY_TOPIC_LABEL": "Efficiency, Compression, and Large-Scale Training",
+        "MATCHED_TOPIC_LABELS": [
+            "MoE Training",
+            "Efficiency, Compression, and Large-Scale Training"
+        ],
+        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+        "HOTSPOT_PAPER_LABELS": [],
+        "HOTSPOT_PAPER_PRIMARY_KIND": null,
+        "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+    },
+    "2603.03251": {
+        "ARXIVID": "2603.03251",
+        "COMMENT": "Breaks the sequential dependence between speculation and verification by having the draft model pre-emptively speculate on predicted verification outcomes during the target forward pass.",
+        "RELEVANCE": 6,
+        "NOVELTY": 7,
+        "PRIMARY_TOPIC_ID": "efficiency_scaling",
+        "MATCHED_TOPIC_IDS": [
+            "efficiency_scaling"
+        ],
+        "TOPIC_MATCH_COMMENT": "A genuinely new mechanism that changes the cost of running large models, though entirely on the decoding side rather than training.",
+        "HOTSPOT_PAPER_TAGS": [
+            "daily_hot"
+        ],
+        "HOTSPOT_PAPER_COMMENT": "A structural extension of speculative decoding with a 30% gain over tuned baselines, from authors whose inference work tends to land broadly.",
+        "SCORE": 13,
+        "authors": [
+            "Tanishq Kumar",
+            "Tri Dao",
+            "Avner May"
+        ],
+        "title": "Speculative Speculative Decoding",
+        "abstract": "Autoregressive decoding is bottlenecked by its sequential nature. Speculative decoding has become a standard way to accelerate inference by using a fast draft model to predict upcoming tokens from a slower target model, and then verifying them in parallel with a single target model forward pass. However, speculative decoding itself relies on a sequential dependence between speculation and verification. We introduce speculative speculative decoding (SSD) to parallelize these operations. While a verification is ongoing, the draft model predicts likely verification outcomes and prepares speculations pre-emptively for them. If the actual verification outcome is then in the predicted set, a speculation can be returned immediately, eliminating drafting overhead entirely. We identify three key challenges presented by speculative speculative decoding, and suggest principled methods to solve each. The result is Saguaro, an optimized SSD algorithm. Our implementation is on average 30% faster than optimized speculative decoding baselines and up to 5x faster than autoregressive decoding with open source inference engines.",
+        "arxiv_id": "2603.03251",
+        "PRIMARY_TOPIC_LABEL": "Efficiency, Compression, and Large-Scale Training",
+        "MATCHED_TOPIC_LABELS": [
+            "Efficiency, Compression, and Large-Scale Training"
+        ],
+        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+        "HOTSPOT_PAPER_LABELS": [
+            "Daily Hot Papers"
+        ],
+        "HOTSPOT_PAPER_PRIMARY_KIND": "daily_hot",
+        "HOTSPOT_PAPER_PRIMARY_LABEL": "Daily Hot Papers",
+        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "llm_exact"
+    }
+}

@@ -2,8 +2,8 @@
     "schema_version": 1,
     "meta": {
         "date": "2026-07-17",
-        "total_candidates": 0,
-        "total_spotlight_papers": 0,
+        "total_candidates": 67,
+        "total_spotlight_papers": 8,
         "thresholds": {
             "daily_hot_score_cutoff": 15,
             "daily_hot_relevance_cutoff": 7,
@@ -17,11 +17,363 @@
     },
     "diagnostics": {
         "candidate_count_by_kind": {
-            "new_frontier": 0,
-            "daily_hot": 0
+            "new_frontier": 4,
+            "daily_hot": 5
         },
-        "selected_count_by_kind": {}
+        "selected_count_by_kind": {
+            "new_frontier": 4,
+            "daily_hot": 4
+        }
     },
-    "papers": {},
-    "sections": []
+    "papers": {
+        "2607.14576": {
+            "ARXIVID": "2607.14576",
+            "COMMENT": "A sharp input-growth threshold gives necessary and sufficient conditions for stable residual blocks.",
+            "RELEVANCE": 10,
+            "NOVELTY": 9,
+            "PRIMARY_TOPIC_ID": "architecture_training",
+            "MATCHED_TOPIC_IDS": [
+                "architecture_training"
+            ],
+            "TOPIC_MATCH_COMMENT": "The work directly connects residual architecture design to provable training and inference stability.",
+            "HOTSPOT_PAPER_TAGS": [
+                "new_frontier"
+            ],
+            "HOTSPOT_PAPER_COMMENT": "A compositional, certifiable stability criterion could establish a new way to design residual architectures before scale-up.",
+            "SCORE": 19,
+            "authors": [
+                "Hyemin Gu",
+                "Michael Tyrrell",
+                "Tuhin Sahai",
+                "Markos A. Katsoulakis"
+            ],
+            "title": "Sharp Stability Threshold and Certification for Designing Stable Residual Architectures",
+            "abstract": "We propose \\emph{the sublinear-growth principle} for deep residual architectures -- a sharp stability threshold on the input-magnitude exponent of every residual block's velocity field: $$\\|v(x, t)\\| \\leq c\\,\\|x\\|^q + b, \\qquad q \\in [0, 1].$$ The threshold $q = 1$ is established via two independent arguments. Classical ODE theory gives a global forward flow on $[0, T]$ at $q \\le 1$ and exhibits divergent velocity fields at any $q > 1$. The optimal-control analysis, via the Hamilton-Jacobi-Bellman equation, sharpens this to a selection statement: the training optimum is bang-bang on the boundary of the admissible class, so the optimum at $q > 1$ blows up while the optimum at $q \\le 1$ is safe by construction. The exponent criterion $q \\le 1$ is thereby a necessary and sufficient condition for stable training. It clarifies architectural placements that ensure the stability of training and inference, explaining, for instance, the stabilizing role of layer normalization. The sublinear-growth velocity fields form \\emph{the right function space} on which forward dynamics, adjoint sensitivity, and architectural composition are all well-controlled. An arithmetic of input-magnitude exponents under the five operations that build residual blocks enables efficient certification of $q_k \\le 1$ at the level of architectural primitives, in place of ad hoc trial and error in the search for stable neural architectural designs. A parameter-free modification reduces the supercritical Mamba block from $q = 5$ to $q = 1$ without layer normalization, demonstrating this point. Experiments on Mamba and PatchTST confirm that the $q \\le 1$ variants train stably: the criterion is the input-magnitude exponent, not the presence of a normalization layer.",
+            "arxiv_id": "2607.14576",
+            "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+            "MATCHED_TOPIC_LABELS": [
+                "Architecture and Training Dynamics"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [
+                "New Frontier Papers"
+            ],
+            "HOTSPOT_PAPER_PRIMARY_KIND": "new_frontier",
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "New Frontier Papers",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "llm_exact"
+        },
+        "2607.15217": {
+            "ARXIVID": "2607.15217",
+            "COMMENT": "Asynchronous shared-neuron paths enable delay-dependent interactions and per-sample computation depth.",
+            "RELEVANCE": 8,
+            "NOVELTY": 8,
+            "PRIMARY_TOPIC_ID": "architecture_training",
+            "MATCHED_TOPIC_IDS": [
+                "architecture_training"
+            ],
+            "TOPIC_MATCH_COMMENT": "It proposes a fundamentally different dynamic neural architecture and non-backpropagation training process.",
+            "HOTSPOT_PAPER_TAGS": [
+                "new_frontier"
+            ],
+            "HOTSPOT_PAPER_COMMENT": "Asynchronous, delay-mediated shared neurons suggest a genuinely different computation paradigm, albeit demonstrated only at small scale.",
+            "SCORE": 16,
+            "authors": [
+                "Subodh Kalia"
+            ],
+            "title": "NeuronSoup: Evolving Asynchronous, Shared-Neuron Temporal Graphs without Backpropagation",
+            "abstract": "We present NeuronSoup, a neural computation architecture that replaces synchronous layer-by-layer processing with asynchronous, delay-mediated signal propagation through a pool of shared neurons. Each path in the network routes a continuous-valued signal from one input neuron to one output neuron through a variable number of intermediate hidden neurons. Hidden neurons are physically shared across paths: when two paths pass through the same neuron, the second arrival encounters the accumulated state left by the first, producing constructive or destructive interference that depends on signal polarity and arrival timing. The entire architecture -- topology, weights, delays, and connectivity -- is co-evolved by a genetic algorithm operating on a flat real-valued genome of 14,602 genes. On 10-class MNIST digit classification using frozen ResNet18 features as input, the system evolves a network of 204 active paths through 266 hidden neurons (156 shared across multiple paths, with one neuron participating in 11 distinct paths) and achieves 85.9\\% test accuracy after 10,000 generations. The trained model occupies 115 KB. We argue that this architecture addresses fundamental limitations of current deep learning: it requires no differentiable computation graph, adapts its computation depth per-sample, and discovers lateral interactions between processing pathways that current architectures must engineer explicitly. We discuss why genetic algorithms are the correct optimization tool for this problem class, why CMA-ES fails at this scale, and how the architecture generalizes to arbitrary domains by substituting the encoder and output structure.",
+            "arxiv_id": "2607.15217",
+            "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+            "MATCHED_TOPIC_LABELS": [
+                "Architecture and Training Dynamics"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [
+                "New Frontier Papers"
+            ],
+            "HOTSPOT_PAPER_PRIMARY_KIND": "new_frontier",
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "New Frontier Papers",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "llm_exact"
+        },
+        "2607.15328": {
+            "ARXIVID": "2607.15328",
+            "COMMENT": "MSB-first arithmetic enables sound online precision adaptation with decision-boundary guarantees.",
+            "RELEVANCE": 8,
+            "NOVELTY": 8,
+            "PRIMARY_TOPIC_ID": "efficiency_scaling",
+            "MATCHED_TOPIC_IDS": [
+                "efficiency_scaling"
+            ],
+            "TOPIC_MATCH_COMMENT": "The core contribution is a novel adaptive quantization mechanism and supporting compute architecture.",
+            "HOTSPOT_PAPER_TAGS": [
+                "new_frontier"
+            ],
+            "HOTSPOT_PAPER_COMMENT": "Sound online precision control with dedicated systolic support suggests a new verified-compute direction.",
+            "SCORE": 16,
+            "authors": [
+                "Taisa Kushner",
+                "Ryan McCleeary",
+                "Martin Brain"
+            ],
+            "title": "Lazy Arithmetic using Systolic Arrays for Closing the Verification Gap on Embedded Systems",
+            "abstract": "Complex algorithms such as deep neural networks are increasingly being deployed on embedded, resource constrained platforms. However, existing hardware and software schemes for implementing these models on the edge fall short, particularly for safety-critical applications such as medical devices. First, hardware such as GPUs, NPUs and TPUs are designed for throughput rather than correctness of computation of security, and are as such susceptible to fault injection attacks. Second, software schemes designed for porting algorithms onto edge devices -- such as quantization schemes -- are either static and sound (non-optimal power consumption), or dynamic yet unsound (non-optimal for safety-critical applications). To address both these needs we propose a both wholly new approach to real-time, dynamic and sound quantization, as well as the hardware to support it. First we developed a sound, real-time adaptive-precision quantization approach utilizing left-to-right arithmetic to pass the most significant bits (MSB) first, and dynamically adjust precision online while performing sensitivity analysis to quantify and manage the risk of decision-boundary crossings. Next, we propose a novel hardware approach utilizing systolic arrays to perform left-to-right arithmetic to generate the MSB first. Together this provides a wholly novel scheme for enabling not only resource-efficient neural networks and artificial intelligence at the edge, but broadly sound and resource-efficient high-precision mathematics on hardware that ensures resilience to bit flip attacks on the most critical bits. This is presented herein as work-in-progress, with software implementations completed and hardware in-progress.",
+            "arxiv_id": "2607.15328",
+            "PRIMARY_TOPIC_LABEL": "Efficiency, Compression, and Large-Scale Training",
+            "MATCHED_TOPIC_LABELS": [
+                "Efficiency, Compression, and Large-Scale Training"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [
+                "New Frontier Papers"
+            ],
+            "HOTSPOT_PAPER_PRIMARY_KIND": "new_frontier",
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "New Frontier Papers",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "llm_exact"
+        },
+        "2607.15275": {
+            "ARXIVID": "2607.15275",
+            "COMMENT": "Fast-weight recurrent state with truncated backpropagation scales policy context to 8K timesteps without latency growth.",
+            "RELEVANCE": 7,
+            "NOVELTY": 8,
+            "PRIMARY_TOPIC_ID": "architecture_training",
+            "MATCHED_TOPIC_IDS": [
+                "architecture_training"
+            ],
+            "TOPIC_MATCH_COMMENT": "The foundational contribution is a dynamic sequence architecture and training recipe for extreme context compression.",
+            "HOTSPOT_PAPER_TAGS": [
+                "new_frontier",
+                "daily_hot"
+            ],
+            "HOTSPOT_PAPER_COMMENT": "Fast-weight context compression at 8K robot timesteps establishes a notable new scaling direction for embodied models.",
+            "SCORE": 15,
+            "authors": [
+                "Yunfan Jiang",
+                "Yevgen Chebotar",
+                "Ruijie Zheng",
+                "Fengyuan Hu",
+                "Yunhao Ge",
+                "Jimmy Wu",
+                "Tianyuan Dai",
+                "Scott Reed",
+                "Li Fei-Fei",
+                "Yuke Zhu",
+                "Linxi \"Jim\" Fan"
+            ],
+            "title": "RoboTTT: Context Scaling for Robot Policies",
+            "abstract": "Recent robot foundation models operate with single-step or short-history visuomotor context. We introduce Test-Time-Training Robot Policies (RoboTTT), a robot model and training recipe that scale visuomotor context to 8K timesteps, three orders of magnitude beyond state-of-the-art policies, without growing inference latency. At this context length, we unlock new robot capabilities: one-shot in-context imitation from human video demonstrations, on-the-fly policy improvement, robustness to perturbations, and stronger performance on multi-stage, long-horizon tasks. We also observe, for the first time, steady gains in closed-loop performance as pretraining context length scales. At its core, RoboTTT integrates Test-Time Training into robot foundation models such as Vision-Language-Action policies, yielding a sequence model whose recurrent state consists of fast weights, parameters updated by gradient descent during both training and inference, compressing histories into weight space and retrieving contextual information for long-context conditioning. To scale training context length, the recipe combines sequence action forcing with truncated backpropagation through time. On challenging real-robot manipulation tasks, RoboTTT improves overall performance by 87% over the single-step context baseline and fully completes a five-minute, ten-stage assembly task, which no baseline ever does. RoboTTT trained with 8K-timestep context outperforms the same model pretrained with 1K timesteps by 62%, suggesting context length as a new scaling axis for robot foundation models. Videos are available at https://research.nvidia.com/labs/gear/robottt/",
+            "arxiv_id": "2607.15275",
+            "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+            "MATCHED_TOPIC_LABELS": [
+                "Architecture and Training Dynamics"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [
+                "New Frontier Papers",
+                "Daily Hot Papers"
+            ],
+            "HOTSPOT_PAPER_PRIMARY_KIND": "new_frontier",
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "New Frontier Papers",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "llm_exact"
+        },
+        "2607.14530": {
+            "ARXIVID": "2607.14530",
+            "COMMENT": "Sparse residual-stream updates make 16-stream hyper-connections practical for large MoE pretraining.",
+            "RELEVANCE": 10,
+            "NOVELTY": 8,
+            "PRIMARY_TOPIC_ID": "architecture_training",
+            "MATCHED_TOPIC_IDS": [
+                "architecture_training",
+                "efficiency_scaling"
+            ],
+            "TOPIC_MATCH_COMMENT": "The main advance is a new residual architecture, complemented by a memory-traffic-efficient fused implementation.",
+            "HOTSPOT_PAPER_TAGS": [
+                "daily_hot"
+            ],
+            "HOTSPOT_PAPER_COMMENT": "A practical residual-stream scaling axis demonstrated on 18B and 28B MoE pretraining is broadly notable.",
+            "SCORE": 18,
+            "authors": [
+                "Xiangdong Zhang",
+                "Xiaohan Qin",
+                "Sunan Zou",
+                "Tuo Dai",
+                "Xiaoming Shi",
+                "Huaijin Wu",
+                "Yebin Yang",
+                "Zhuo Xia",
+                "Shaofeng Zhang",
+                "Lin Yao",
+                "Yuliang Liu",
+                "Yu Cheng",
+                "Junchi Yan"
+            ],
+            "title": "xHC: Expanded Hyper-Connections",
+            "abstract": "Hyper-Connections (HC) expand the residual stream of Transformers into $N$ parallel streams, providing a form of memory scaling beyond model width and depth. Manifold-Constrained HC (mHC) stabilizes this formulation at scale. The large gains from $N{=}1$ to $N{=}4$ suggest residual-stream expansion as a promising scaling axis. However, existing HC-family methods typically stop at $N{=}4$. Our experiments reveal why: scaling mHC beyond this point yields diminishing performance gains and rapidly increasing training cost. We attribute this limitation to two bottlenecks: insufficient write-back information for an expanding number of streams and residual-mixing generation whose cost scales cubically with $N$. To address both bottlenecks, we propose xHC (Expanded Hyper-Connections), the first HC-family method to achieve meaningful expansion beyond $N{=}4$. xHC combines temporal feature augmentation for richer write-back with a sparse residual-stream architecture that updates only $k=4$ of the $N=16$ streams while retaining dense access to the full residual state. Across 18B and 28B MoE models, xHC delivers strong and consistent downstream improvements. On an 18B MoE model, xHC improves the average downstream score by 4.0 points over mHC, while adding only modest training FLOPs over the vanilla baseline. Scaling-law experiments show that the vanilla and mHC require $1.50\\times$ and $1.19\\times$ the compute of xHC, respectively, to reach the same loss. Practical large-$N$ training also requires controlling memory traffic from the expanded residual state. We therefore introduce xHC-Flash, which reduces the per-sublayer memory traffic from $73.5C$ to $40C$, comparable to the $34C$ required by mHC at $N{=}4$, while retaining the gains of full xHC. Together, xHC and xHC-Flash make large-$N$ residual-stream expansion effective and practical for LLM pre-training.",
+            "arxiv_id": "2607.14530",
+            "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+            "MATCHED_TOPIC_LABELS": [
+                "Architecture and Training Dynamics",
+                "Efficiency, Compression, and Large-Scale Training"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [
+                "Daily Hot Papers"
+            ],
+            "HOTSPOT_PAPER_PRIMARY_KIND": "daily_hot",
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "Daily Hot Papers",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "llm_exact"
+        },
+        "2607.14952": {
+            "ARXIVID": "2607.14952",
+            "COMMENT": "Resident-state virtualization and response replay bound the live graph while reusing multi-million-token prompts across GRPO groups.",
+            "RELEVANCE": 10,
+            "NOVELTY": 8,
+            "PRIMARY_TOPIC_ID": "training_systems",
+            "MATCHED_TOPIC_IDS": [
+                "moe_training",
+                "training_systems",
+                "efficiency_scaling"
+            ],
+            "TOPIC_MATCH_COMMENT": "The primary contribution is a distributed training schedule, with explicit expert-parallel MoE dispatch and memory virtualization as major components.",
+            "HOTSPOT_PAPER_TAGS": [
+                "daily_hot"
+            ],
+            "HOTSPOT_PAPER_COMMENT": "Training beyond two million tokens under a fixed GPU budget is a notable systems milestone spanning recurrent, attention, and MoE architectures.",
+            "SCORE": 18,
+            "authors": [
+                "Changhai Zhou",
+                "Kieran Liu",
+                "Yuhua Zhou",
+                "Qian Qiao",
+                "Jun Gao",
+                "Harry Zhang",
+                "Irvine Lu",
+                "Nolan Ho",
+                "Lucian Li",
+                "Andrew Lei",
+                "Cleon Cheng",
+                "Steven Chiang",
+                "Yihang Zeng",
+                "Di Zhang",
+                "Rio Yang",
+                "Kaijie Chen",
+                "Andrew Chen",
+                "Pony Ma",
+                "Weizhong Zhang",
+                "Cheng Jin"
+            ],
+            "title": "LongStraw: Long-Context RL Beyond 2M Tokens under a Fixed GPU Budget",
+            "abstract": "Long-context RL post-training is constrained by the lifetime of state and gradients, not attention cost alone. In GRPO, one multi-million-token prompt must serve old-policy and reference scoring plus multiple policy responses, while conventional autograd keeps the prompt graph and all response graphs live alongside model weights, caches, and distributed communication buffers. We present LongStraw, an objective-aware, architecture-aware system for resident-state virtualization, response replay, and distributed-gradient execution. Its transaction captures the shared prompt without autograd, retains only the architecture-required state on explicitly owned pages, restores that state for each group member, scores old/reference branches without a graph, replays one policy response at a time with autograd, and accumulates the resulting gradients before one distributed finalization and optimizer step. This schedule bounds the live training graph by the response suffix while reusing the expensive prompt computation across the complete GRPO group. We instantiate this design for two incompatible model structures. Qwen3.6-27B combines 48 recurrent GDN layers with 16 full-attention layers; LongStraw keeps the compact recurrent state and physically CP8-sharded KV pages, composes global attention through cross-rank LSE/output merging, and performs blockwise response replay. GLM-5.2 combines a 78-layer MLA/DSA attention stack with a 256-expert, top-8 MoE tail. Its implementation keeps CP-sharded MLA latent pages and DSA indexer-key pages in CPU memory, stages one layer at a time, reconstructs IndexShare-aware global sparse selection over CP32, and dispatches routed response tokens over EP32. The two paths share one transaction contract while specializing the retained state, replay operator, and collective communication to the architecture...",
+            "arxiv_id": "2607.14952",
+            "PRIMARY_TOPIC_LABEL": "Large-Scale Training Systems and Efficiency",
+            "MATCHED_TOPIC_LABELS": [
+                "MoE Training",
+                "Large-Scale Training Systems and Efficiency",
+                "Efficiency, Compression, and Large-Scale Training"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [
+                "Daily Hot Papers"
+            ],
+            "HOTSPOT_PAPER_PRIMARY_KIND": "daily_hot",
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "Daily Hot Papers",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "llm_exact"
+        },
+        "2607.14618": {
+            "ARXIVID": "2607.14618",
+            "COMMENT": "Compiler-regularized channel-wise bit allocation makes fractional-bit CPU quantization practical.",
+            "RELEVANCE": 9,
+            "NOVELTY": 8,
+            "PRIMARY_TOPIC_ID": "efficiency_scaling",
+            "MATCHED_TOPIC_IDS": [
+                "efficiency_scaling"
+            ],
+            "TOPIC_MATCH_COMMENT": "The paper directly co-designs quantization and kernels to reduce LLM latency and energy under precise bit budgets.",
+            "HOTSPOT_PAPER_TAGS": [
+                "daily_hot"
+            ],
+            "HOTSPOT_PAPER_COMMENT": "Broadly important today: Compiler-regularized channel-wise bit allocation makes fractional-bit CPU quantization practical.",
+            "SCORE": 17,
+            "authors": [
+                "Hyunwoo Oh",
+                "Suyeon Jang",
+                "Hanning Chen",
+                "KyungIn Nam",
+                "Sanggeon Yun",
+                "Ryozo Masukawa",
+                "Mohsen Imani"
+            ],
+            "title": "PolyQ: Codesigning End-to-End Quantization Framework for Scalable Edge CPU LLM Inference",
+            "abstract": "CPUs are the most universal target for on-device LLM inference, but existing low-bit quantization methods offer either coarse operating points or fine-grained mixed precision that is difficult to execute efficiently on CPUs. We present PolyQ, a CPU-oriented compiler/quantization co-design for activation-aware channel-wise bit allocation under a user-specified average-bit budget. PolyQ assigns per-channel bit-widths from $\\{2,3,4,8,16\\}$, then uses a compile-time model compiler to permute and cluster channels into bit-homogeneous blocks, generate SIMD- and LUT-compatible kernels, and merge compatible permutations across operators to keep layout regularization off the runtime path. This turns fine-grained budget fitting into a practical fractional-bit deployment method for CPU-only inference. Across Falcon-H1-3B, Llama2-13B, and Qwen3-32B on WikiText-2, PolyQ provides stable quality scaling from 3--6\\,b and improves perplexity by 2.4--32.1\\% over prior methods at a 3\\,b target. End-to-end measurements on three representative CPUs -- workstation, laptop, and mobile -- show that compiler layout regularization reduces activation reorder traffic by up to 70.8\\%, prefill latency and decode throughput scale nearly proportionally with the configured bit budget, and energy/token overhead stays below 2\\% relative to an optimized LUT-based back-end. These results show that fractional-bit CPU deployment is practical, predictable, and energy-efficient across diverse edge targets.",
+            "arxiv_id": "2607.14618",
+            "PRIMARY_TOPIC_LABEL": "Efficiency, Compression, and Large-Scale Training",
+            "MATCHED_TOPIC_LABELS": [
+                "Efficiency, Compression, and Large-Scale Training"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [
+                "Daily Hot Papers"
+            ],
+            "HOTSPOT_PAPER_PRIMARY_KIND": "daily_hot",
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "Daily Hot Papers",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "heuristic"
+        },
+        "2607.15456": {
+            "ARXIVID": "2607.15456",
+            "COMMENT": "Compresses loop-indexed KV states into low-rank latents that reconstruct recurrence-specific attention inputs.",
+            "RELEVANCE": 9,
+            "NOVELTY": 8,
+            "PRIMARY_TOPIC_ID": "efficiency_scaling",
+            "MATCHED_TOPIC_IDS": [
+                "efficiency_scaling"
+            ],
+            "TOPIC_MATCH_COMMENT": "Cross-loop KV compression directly reduces large-model decoding memory and increases supported batch capacity.",
+            "HOTSPOT_PAPER_TAGS": [
+                "daily_hot"
+            ],
+            "HOTSPOT_PAPER_COMMENT": "Broadly important today: Compresses loop-indexed KV states into low-rank latents that reconstruct recurrence-specific attention inputs.",
+            "SCORE": 17,
+            "authors": [
+                "James O' Neill",
+                "Fergal Reid"
+            ],
+            "title": "Looped Latent Attention: Cross-Loop KV Compression for Looped Transformers",
+            "abstract": "Looped, weight-tied Transformers reduce parameters by reusing a single block, but decoding still stores a separate K/V cache for every recurrence step. We show that this loop-indexed cache is highly structured. For a fixed token, layer and head, K/V vectors trace a short low-rank trajectory across loops, while the head and layer axes remain much flatter. We introduce Looped Latent Attention (\\lla{}), a post-training cache codec that stores compact K and V latents and reconstructs loop-specific K/V vectors only when attention reads them. The default per-head codec compresses recurrence, while \\lla{}-2D also folds heads into one latent for the extreme-compression regime. The codec is initialized from the SVD of teacher activations and refined with logit and attention-output distillation. At matched cache budget, per-head \\lla{} outperforms head-axis MLA, cross-layer sharing, KV quantization and final-loop reuse, showing that the recurrent cache is low-rank but not safely collapsible to a single state. The same axis advantage holds on Ouro-2.6B-Thinking and transfers to Huginn-3.5B, where an SVD codec remains near-lossless to $32\\times$ compression in decoder-independent evaluation. The cache reduction is exact. On one H200, the latent-store path increases measured Ouro-1.4B batch capacity at 4k context from 32 to 768 sequences at $21.3\\times$ compression. Lastly, for long reasoning rollouts such as in MATH-500, on-policy refinement on student-generated prefixes raises accuracy at $4\\times$ compression from 0.43 to 0.66 and reduces no-answer generations when compared to token-level off-policy distillation.",
+            "arxiv_id": "2607.15456",
+            "PRIMARY_TOPIC_LABEL": "Efficiency, Compression, and Large-Scale Training",
+            "MATCHED_TOPIC_LABELS": [
+                "Efficiency, Compression, and Large-Scale Training"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [
+                "Daily Hot Papers"
+            ],
+            "HOTSPOT_PAPER_PRIMARY_KIND": "daily_hot",
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "Daily Hot Papers",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "heuristic"
+        }
+    },
+    "sections": [
+        {
+            "kind": "new_frontier",
+            "label": "New Frontier Papers",
+            "description": "Papers that appear to open a genuinely new direction, paradigm, or field.",
+            "paper_ids": [
+                "2607.14576",
+                "2607.15217",
+                "2607.15328",
+                "2607.15275"
+            ]
+        },
+        {
+            "kind": "daily_hot",
+            "label": "Daily Hot Papers",
+            "description": "Papers that feel broadly important to the day and belong in the hotspot paper feed.",
+            "paper_ids": [
+                "2607.14530",
+                "2607.14952",
+                "2607.14618",
+                "2607.15456"
+            ]
+        }
+    ]
 }

@@ -2,8 +2,8 @@
     "schema_version": 1,
     "meta": {
         "date": "2026-06-03",
-        "total_candidates": 0,
-        "total_spotlight_papers": 0,
+        "total_candidates": 113,
+        "total_spotlight_papers": 5,
         "thresholds": {
             "daily_hot_score_cutoff": 15,
             "daily_hot_relevance_cutoff": 7,
@@ -18,10 +18,219 @@
     "diagnostics": {
         "candidate_count_by_kind": {
             "new_frontier": 0,
-            "daily_hot": 0
+            "daily_hot": 5
         },
-        "selected_count_by_kind": {}
+        "selected_count_by_kind": {
+            "daily_hot": 5
+        }
     },
-    "papers": {},
-    "sections": []
+    "papers": {
+        "2606.04101": {
+            "ARXIVID": "2606.04101",
+            "COMMENT": "Per-microbatch planning and expert replication rebalance MoE loads through low-overhead expert-state transfers.",
+            "RELEVANCE": 10,
+            "NOVELTY": 8,
+            "PRIMARY_TOPIC_ID": "moe_training",
+            "MATCHED_TOPIC_IDS": [
+                "moe_training",
+                "training_systems"
+            ],
+            "TOPIC_MATCH_COMMENT": "Expert load balancing is the core contribution, with communication mechanisms co-designed for large-scale expert-parallel training.",
+            "HOTSPOT_PAPER_TAGS": [
+                "daily_hot"
+            ],
+            "HOTSPOT_PAPER_COMMENT": "Reports near-ideal MoE throughput across training and prefill serving, evaluated on up to 256 GPUs with models reaching 671B parameters.",
+            "SCORE": 18,
+            "authors": [
+                "Xinming Wei",
+                "Chao Jin",
+                "Tuo Dai",
+                "Yinmin Zhong",
+                "Shan Yu",
+                "Chengxu Yang",
+                "Bingyang Wu",
+                "Zili Zhang",
+                "Jing Mai",
+                "Qianchao Zhu",
+                "Zhouyang Li",
+                "Yuliang Liu",
+                "Guojie Luo"
+            ],
+            "title": "UltraEP: Unleash MoE Training and Inference on Rack-Scale Nodes with Near-Optimal Load Balancing",
+            "abstract": "Large-scale expert parallelism (EP) is becoming pivotal for training and serving frontier MoE models, but it also amplifies device-level expert load imbalance into compute stragglers, token all-to-all bottlenecks, and activation-memory spikes. Existing balancers redistribute experts periodically based on historical load, which becomes unreliable for production deployments with non-stationary load patterns. We present UltraEP, the first exact-load, real-time balancer for large-EP MoE training and serving prefill on rack-scale nodes (RSNs). Leveraging the extended scale-up connectivity among dozens of GPUs within RSNs, UltraEP rebalances every microbatch and layer on critical paths, which requires nontrivial co-design of plan solving and expert replication communication to minimize exposed overhead. To this end, UltraEP eagerly reacts to post-gating load with an efficient quota-driven planner, and executes the resulting irregular expert-state transfers with RSN-native persistent tile streaming and relay-based fan-out mitigation. We evaluate UltraEP in a multi-RSN deployment of up to 256 GPUs, using cutting-edge MoE models from 106B to 671B parameters. Averaged across training and serving, UltraEP achieves 94.3% of the force-balanced ideal throughput, delivering 1.49$\\times$ improvement over no-balancing, while reducing the final inter-rank imbalance from 1.30$-$4.01 to 1.01$-$1.04.",
+            "arxiv_id": "2606.04101",
+            "PRIMARY_TOPIC_LABEL": "MoE Training",
+            "MATCHED_TOPIC_LABELS": [
+                "MoE Training",
+                "Large-Scale Training Systems and Efficiency"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [
+                "Daily Hot Papers"
+            ],
+            "HOTSPOT_PAPER_PRIMARY_KIND": "daily_hot",
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "Daily Hot Papers",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "llm_exact"
+        },
+        "2606.03899": {
+            "ARXIVID": "2606.03899",
+            "COMMENT": "Momentum before orthogonalization filters gradient noise and stabilizes Muon's singular subspaces.",
+            "RELEVANCE": 10,
+            "NOVELTY": 8,
+            "PRIMARY_TOPIC_ID": "training_systems",
+            "MATCHED_TOPIC_IDS": [
+                "training_systems",
+                "architecture_training"
+            ],
+            "TOPIC_MATCH_COMMENT": "Explains an optimizer mechanism used in LLM pretraining, with theoretical guarantees and experiments connecting operation order to update stability.",
+            "HOTSPOT_PAPER_TAGS": [
+                "daily_hot"
+            ],
+            "HOTSPOT_PAPER_COMMENT": "Broadly important today: Momentum before orthogonalization filters gradient noise and stabilizes Muon's singular subspaces.",
+            "SCORE": 18,
+            "authors": [
+                "Xianliang Li",
+                "Zihan Zhang",
+                "Weiyang Liu",
+                "Han Bao"
+            ],
+            "title": "Denoise First, Orthogonalize Later: Understanding Momentum in Muon via Spectral Filtering",
+            "abstract": "Muon has recently demonstrated strong empirical performance in large language model training, but the theoretical role of momentum in Muon remains unclear. Existing analyses of Muon either remove momentum to study spectral updates in isolation, or retain momentum without explaining why it improves empirical performance. Our work bridges this gap by showing momentum in Muon acts as a spectral filter. Under a structured signal-plus-perturbation gradient model, we prove that momentum suppresses perturbations while preserving the dominant signal, thereby enlarging the spectral gap between them. This enlarged gap stabilizes the singular subspaces of the matrix passed to Muon's orthogonalization step, making the resulting update more reliable. We further show that applying momentum before orthogonalization achieves provably stronger alignment with the signal component of the gradient than either reversing this order or simply removing momentum. Experiments across diverse tasks, including LLM pretraining, support our theoretical analysis. More broadly, our theory offers a starting point for understanding the benefits of momentum in other matrix-based optimizers.",
+            "arxiv_id": "2606.03899",
+            "PRIMARY_TOPIC_LABEL": "Large-Scale Training Systems and Efficiency",
+            "MATCHED_TOPIC_LABELS": [
+                "Large-Scale Training Systems and Efficiency",
+                "Architecture and Training Dynamics"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [
+                "Daily Hot Papers"
+            ],
+            "HOTSPOT_PAPER_PRIMARY_KIND": "daily_hot",
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "Daily Hot Papers",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "heuristic"
+        },
+        "2606.04048": {
+            "ARXIVID": "2606.04048",
+            "COMMENT": "Derives width-dependent parameterization rules that transfer learning rates across Gated Delta Network sizes.",
+            "RELEVANCE": 9,
+            "NOVELTY": 8,
+            "PRIMARY_TOPIC_ID": "architecture_training",
+            "MATCHED_TOPIC_IDS": [
+                "training_systems",
+                "architecture_training"
+            ],
+            "TOPIC_MATCH_COMMENT": "The central result analyzes scaling through gates and recurrent states; transferable hyperparameters also inform pretraining configuration.",
+            "HOTSPOT_PAPER_TAGS": [
+                "daily_hot"
+            ],
+            "HOTSPOT_PAPER_COMMENT": "Broadly important today: Derives width-dependent parameterization rules that transfer learning rates across Gated Delta Network sizes.",
+            "SCORE": 17,
+            "authors": [
+                "Yifeng Liu",
+                "Quanquan Gu"
+            ],
+            "title": "Unlocking Feature Learning in Gated Delta Networks at Scale",
+            "abstract": "Training and scaling Large Language Models demand enormous computational resources, motivating both efficient sub-quadratic architectures and principled hyperparameter tuning methods. While the Maximal Update Parametrization ($\u03bc$P) has enabled zero-shot hyperparameter transfer for standard Transformers, its extension to linear models, particularly those with structured state transitions and complicated architectures, remains largely unexplored. By rigorously propagating coordinate-size estimates through the forward pass, gating mechanisms, and recurrent state dynamics, we derive the scaling rules for Gated Delta Network. Experiments on language-model pre-training confirm that our configurations enable stable learning-rate transfer across model widths under both AdamW and SGD, whereas standard parametrization fails to transfer, validating the correctness and practical utility of our analysis.",
+            "arxiv_id": "2606.04048",
+            "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+            "MATCHED_TOPIC_LABELS": [
+                "Large-Scale Training Systems and Efficiency",
+                "Architecture and Training Dynamics"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [
+                "Daily Hot Papers"
+            ],
+            "HOTSPOT_PAPER_PRIMARY_KIND": "daily_hot",
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "Daily Hot Papers",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "heuristic"
+        },
+        "2606.03825": {
+            "ARXIVID": "2606.03825",
+            "COMMENT": "Introduces input-dependent short convolutions on key/query/value as a new Transformer primitive, with fitted scaling laws showing a 1.33-1.60x compute advantage and Triton kernels that keep training practical; also tested on linear RNNs and MoE.",
+            "RELEVANCE": 9,
+            "NOVELTY": 8,
+            "PRIMARY_TOPIC_ID": "architecture_training",
+            "MATCHED_TOPIC_IDS": [
+                "architecture_training",
+                "efficiency_scaling"
+            ],
+            "TOPIC_MATCH_COMMENT": "A new architectural mechanism validated by compute-matched scaling laws from 150M to 2B, which is exactly the architecture-and-training-dynamics core.",
+            "HOTSPOT_PAPER_TAGS": [
+                "daily_hot"
+            ],
+            "HOTSPOT_PAPER_COMMENT": "Broadly important today: Introduces input-dependent short convolutions on key/query/value as a new Transformer primitive, with fitted scaling laws showing a 1.33-1.60x compute advantage and Triton kernels that keep training practical; also tested on linear RNNs and MoE.",
+            "SCORE": 17,
+            "authors": [
+                "Oliver Sieberling",
+                "Bharat Runwal",
+                "Rameswar Panda",
+                "Yoon Kim"
+            ],
+            "title": "Dynamic Short Convolutions Improve Transformers",
+            "abstract": "Transformers have become the dominant architecture for large language models, largely due to the scalability and flexibility of attention, feed-forward layers, residual connections, and normalization. This paper introduces dynamic short convolutions as an additional neural network primitive for improving Transformers. Unlike static short convolutions, dynamic convolutions use input-dependent filters, which preserves the locality bias of convolution while increasing expressivity. Motivating experiments show that applying dynamic short convolutions to key, query, and value representations improves performance on challenging associative recall tasks compared with static convolutional variants. Across language-modeling experiments ranging from 150M to 2B parameters, dynamic convolutions consistently outperform standard Transformers and Transformers augmented with static short convolutions. Fitting scaling laws indicates a 1.33$\\times$ compute advantage over compute-matched Transformers when dynamic convolutions are applied to the key, query, and value vectors, and a 1.60$\\times$ advantage when adding dynamic convolutions after every linear layer. Dynamic convolutions also offer improvements on linear RNNs (Mamba-2/Gated DeltaNet) and mixture-of-experts architectures. We make these gains practical with custom Triton kernels that enable efficient training with a manageable end-to-end slowdown. These results suggest that dynamic short convolutions are a scalable, hardware-efficient, and expressive primitive for advancing Transformer-based language models.",
+            "arxiv_id": "2606.03825",
+            "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+            "MATCHED_TOPIC_LABELS": [
+                "Architecture and Training Dynamics",
+                "Efficiency, Compression, and Large-Scale Training"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [
+                "Daily Hot Papers"
+            ],
+            "HOTSPOT_PAPER_PRIMARY_KIND": "daily_hot",
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "Daily Hot Papers",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "heuristic"
+        },
+        "2606.03498": {
+            "ARXIVID": "2606.03498",
+            "COMMENT": "First nonconvex convergence guarantee for a PipeDream-style pipeline-parallel method, plus a proved S^2 staleness growth and Theta(S^4/K) scaling diagnosis versus LocalSGD.",
+            "RELEVANCE": 9,
+            "NOVELTY": 8,
+            "PRIMARY_TOPIC_ID": "training_systems",
+            "MATCHED_TOPIC_IDS": [
+                "training_systems"
+            ],
+            "TOPIC_MATCH_COMMENT": "Core contribution is theory for a distributed model-parallel training algorithm (pipeline parallelism) and its convergence-vs-stage-count scaling.",
+            "HOTSPOT_PAPER_TAGS": [
+                "daily_hot"
+            ],
+            "HOTSPOT_PAPER_COMMENT": "Broadly important today: First nonconvex convergence guarantee for a PipeDream-style pipeline-parallel method, plus a proved S^2 staleness growth and Theta(S^4/K) scaling diagnosis versus LocalSGD.",
+            "SCORE": 17,
+            "authors": [
+                "Ivan Ilin",
+                "Peter Richt\u00e1rik"
+            ],
+            "title": "Demystifying Pipeline Parallelism: First Theory for PipeDream",
+            "abstract": "Training modern machine learning models increasingly requires computation to be distributed across many accelerators. Data parallelism remains the default choice and is often paired with tensor-parallel sharding, but model parallelism becomes unavoidable once parameters, activations, or optimizer states no longer fit on a single device. This paper studies pipeline model parallelism through the lens of PipeDream (PD) (Harlap et al., 2018). Our first contribution is theoretical: we introduce Randomized PipeDream (RPD), a stale block-SGD abstraction that yields, to our knowledge, the first clean nonconvex convergence guarantee for a PD-style method. Our second contribution is a scaling diagnosis: we prove that the delay induced by steady-state PD grows as $S^2 - S/2 + O(1)$ for $S$ stages, so the stale-read contribution in the convergence theorem scales as $\u0398(\u03b3^2 S^4)$, equivalently as $\u0398(S^4/K)$ in the tuned-rate form. Our third contribution is a comparison with LocalSGD, whose periodic model averaging trades weight staleness for synchronization bubbles. In our reported simulated-time experiments, the better-performing method depends on the objective: PD performs better on the quadratic objective and on a small language-modeling training-loss task, while for logistic regression LocalSGD becomes superior as the number of stages increases.",
+            "arxiv_id": "2606.03498",
+            "PRIMARY_TOPIC_LABEL": "Large-Scale Training Systems and Efficiency",
+            "MATCHED_TOPIC_LABELS": [
+                "Large-Scale Training Systems and Efficiency"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [
+                "Daily Hot Papers"
+            ],
+            "HOTSPOT_PAPER_PRIMARY_KIND": "daily_hot",
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "Daily Hot Papers",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "heuristic"
+        }
+    },
+    "sections": [
+        {
+            "kind": "daily_hot",
+            "label": "Daily Hot Papers",
+            "description": "Papers that feel broadly important to the day and belong in the hotspot paper feed.",
+            "paper_ids": [
+                "2606.04101",
+                "2606.03899",
+                "2606.04048",
+                "2606.03825",
+                "2606.03498"
+            ]
+        }
+    ]
 }

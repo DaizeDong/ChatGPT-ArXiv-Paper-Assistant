@@ -2,8 +2,8 @@
     "schema_version": 1,
     "meta": {
         "date": "2026-08-19",
-        "total_candidates": 0,
-        "total_spotlight_papers": 0,
+        "total_candidates": 77,
+        "total_spotlight_papers": 4,
         "thresholds": {
             "daily_hot_score_cutoff": 15,
             "daily_hot_relevance_cutoff": 7,
@@ -17,11 +17,180 @@
     },
     "diagnostics": {
         "candidate_count_by_kind": {
-            "new_frontier": 0,
-            "daily_hot": 0
+            "new_frontier": 1,
+            "daily_hot": 3
         },
-        "selected_count_by_kind": {}
+        "selected_count_by_kind": {
+            "new_frontier": 1,
+            "daily_hot": 3
+        }
     },
-    "papers": {},
-    "sections": []
+    "papers": {
+        "2605.31163": {
+            "ARXIVID": "2605.31163",
+            "COMMENT": "A Bayesian recurrent layer derives subquadratic sequence computation from explicit probabilistic memory assumptions.",
+            "RELEVANCE": 9,
+            "NOVELTY": 9,
+            "PRIMARY_TOPIC_ID": "architecture_training",
+            "MATCHED_TOPIC_IDS": [
+                "architecture_training"
+            ],
+            "TOPIC_MATCH_COMMENT": "The main contribution is a new recurrent sequence-layer mechanism with a unified account of several efficient architectures.",
+            "HOTSPOT_PAPER_TAGS": [
+                "new_frontier"
+            ],
+            "HOTSPOT_PAPER_COMMENT": "It proposes a potentially general probabilistic design principle for constructing and understanding subquadratic sequence layers.",
+            "SCORE": 18,
+            "authors": [
+                "Matthew Dowling",
+                "Hyungju Jeon",
+                "Cristina Savin",
+                "Il Memming Park"
+            ],
+            "title": "Memory by Design: Probabilistic Sequence Layers",
+            "abstract": "We introduce the \\emph{design-model framework}: a way to derive efficient recurrent sequence maps from explicit assumptions about memory. A design model writes evidence into memory by exact Bayesian filtering; a query- dependent readout produces a predictive distribution whose mean is the layer output. In our linear-Gaussian instantiation, the \\emph{Bayesian Layer} propagates both a mean and a covariance: the covariance tracks uncertainty over stored associations, steering writes toward uncertain directions, attenuating gains as evidence accumulates, and preserving confident memories. The same framework unifies several sub-quadratic recurrences: linear attention, GLA, and Mamba-2/SSD are exact filters under a latent-input design model, whereas DeltaNet and related Delta-rule models are covariance-reset reductions of the Bayesian Layer's design model. Restoring covariance propagation yields closed-form predictions for retrieval dynamics, which we verify empirically, and improves robustness beyond the training regime in controlled collision studies, learned associative recall, and the Zoology MQAR benchmark. Training from scratch on WikiText-103 under matched state budgets lowers perplexity on associative-recall hits. Distilling Bayesian Layers into a pretrained 340M Gated DeltaNet improves RULER long-context retrieval over a matched-compute control, at a 2.5--2.7\\% held-out perplexity cost.",
+            "arxiv_id": "2605.31163",
+            "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+            "MATCHED_TOPIC_LABELS": [
+                "Architecture and Training Dynamics"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [
+                "New Frontier Papers"
+            ],
+            "HOTSPOT_PAPER_PRIMARY_KIND": "new_frontier",
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "New Frontier Papers",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "llm_exact"
+        },
+        "2608.18261": {
+            "ARXIVID": "2608.18261",
+            "COMMENT": "Auxiliary router losses directly trade MoE expert locality and cache misses against perplexity.",
+            "RELEVANCE": 10,
+            "NOVELTY": 8,
+            "PRIMARY_TOPIC_ID": "moe_training",
+            "MATCHED_TOPIC_IDS": [
+                "moe_training",
+                "efficiency_scaling"
+            ],
+            "TOPIC_MATCH_COMMENT": "The core experiment modifies MoE router training, while the resulting expert locality directly affects memory and serving cost.",
+            "HOTSPOT_PAPER_TAGS": [
+                "daily_hot"
+            ],
+            "HOTSPOT_PAPER_COMMENT": "It rigorously tests whether giant MoEs can be made edge-cacheable and reports a preregistered negative result with actionable systems measurements.",
+            "SCORE": 18,
+            "authors": [
+                "Shriniwas Ramesh Suram"
+            ],
+            "title": "Cacheable by Design? Training Mixture-of-Experts Routers for Locality Against the Edge Memory-Bandwidth Wall: A Pre-Registered Negative Result with a Systems Measurement Study",
+            "abstract": "Serving a 235B-parameter Mixture-of-Experts (MoE) model on a single 8 GB GPU is bottlenecked not by compute but by memory bandwidth: decode must stream each token's active experts from whichever tier holds them, and on consumer hardware most experts sit on an SSD far slower than RAM. We quantify this bandwidth wall on Qwen3-235B (Q4_K_M, 134 GB): measured decode is 0.44 tok/s warm, matching a bytes-per-token / bandwidth model, while a batching scheme that should amortize one disk sweep instead collapses at batch 32 from paging thrash. We build llama-moe-trace, a zero-surgery router-telemetry tool, and measure routing on Qwen3-30B: adjacent-token expert reuse is 2.0x chance, 95% of traffic uses 52.5% of experts, and an LRU cache of 13.4% of experts serves 66% of requests. We then ask whether cacheability is trainable: we pre-register training of 137M MoE language models with auxiliary locality and domain router losses, under joint criteria on cache-miss reduction and perplexity. The mechanism works (misses down up to 60%; a 99% static-pin hit rate) but every configuration fails the pre-registered <=1% perplexity gate -- miss reduction and quality are tightly coupled. Concurrent StickyMoE reports the same loss as near-free on single-domain sub-25M models; on multi-domain 137M we find the tax real. Our contribution is this pre-registered, stricter-criterion, multi-domain evaluation plus edge-serving measurements. A 340M rung shows the tax does not shrink with scale (it rises slightly). We further show training-free cache-aware rerouting stacks with trained locality -- together ~80% miss reduction at <=3.4% perplexity at both sizes, far cheaper than either alone -- while domain-primed prefetching does not help. All code, traces, and the pre-registration are released.",
+            "arxiv_id": "2608.18261",
+            "PRIMARY_TOPIC_LABEL": "MoE Training",
+            "MATCHED_TOPIC_LABELS": [
+                "MoE Training",
+                "Efficiency, Compression, and Large-Scale Training"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [
+                "Daily Hot Papers"
+            ],
+            "HOTSPOT_PAPER_PRIMARY_KIND": "daily_hot",
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "Daily Hot Papers",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "llm_exact"
+        },
+        "2606.29519": {
+            "ARXIVID": "2606.29519",
+            "COMMENT": "Derives a heavy-tail threshold for sustaining power-law temporal dependence against collapse toward exponential forgetting.",
+            "RELEVANCE": 9,
+            "NOVELTY": 8,
+            "PRIMARY_TOPIC_ID": "architecture_training",
+            "MATCHED_TOPIC_IDS": [
+                "architecture_training"
+            ],
+            "TOPIC_MATCH_COMMENT": "The core is a mechanistic theory of coupled recurrent-state and parameter dynamics, explaining how architecture and optimization jointly sustain long-range learning.",
+            "HOTSPOT_PAPER_TAGS": [
+                "daily_hot"
+            ],
+            "HOTSPOT_PAPER_COMMENT": "Broadly important today: Derives a heavy-tail threshold for sustaining power-law temporal dependence against collapse toward exponential forgetting.",
+            "SCORE": 17,
+            "authors": [
+                "Lorenzo Livi"
+            ],
+            "title": "Anti-Collapse Dynamics and the Emergence of Multi-Time-Scale Learning in Recurrent Neural Networks",
+            "abstract": "Long-range learning is hard for recurrent networks trained with stochastic gradient descent, because the influence of a past input fades with the lag $\\ell$, and if it fades too fast the dependence cannot be learned from finite data. This fade is captured by an envelope $f(\\ell)$. An exponential fade makes the data needed to learn a lag-$\\ell$ dependence grow exponentially, putting long horizons out of reach; a power-law fade keeps the cost polynomial. We show that the asymptotic decay behavior of $f(\\ell)$ is not fixed by the architecture. Instead, it emerges from the coupling between the state dynamics and parameter dynamics, settling into either a collapsed regime (fast, exponential forgetting) or an extended, anti-collapsed regime (slow, power-law forgetting). The intuition is a competition within these coupled dynamics. Training drives the network's effective time scales toward short ones, while rare, heavy-tailed fluctuations of the learning dynamics push a few of them to very long values. Along the route studied here, the extended regime survives only when these heavy-tailed pushes are strong enough to balance the pull. We make this mathematically precise with a coarse-grained stochastic process and derive an explicit threshold at which this route to the extended regime becomes available. A single exponent, the spectral exponent~$\u00ce\u00b2$, then governs both the spread of time scales and how slowly the network forgets. Realizing the regime in practice needs one more ingredient: the joint action of the architecture and the optimizer must be able to hold such a broad spread. A network whose capacity to generate broad time-scale spectra is severely constrained still collapses, even when supplied with strong heavy-tailed forcing. Heavy-tailed fluctuations thus act not as noise to be suppressed, but as the mechanism that sustains long-range learning.",
+            "arxiv_id": "2606.29519",
+            "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+            "MATCHED_TOPIC_LABELS": [
+                "Architecture and Training Dynamics"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [
+                "Daily Hot Papers"
+            ],
+            "HOTSPOT_PAPER_PRIMARY_KIND": "daily_hot",
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "Daily Hot Papers",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "heuristic"
+        },
+        "2608.17286": {
+            "ARXIVID": "2608.17286",
+            "COMMENT": "Compute-optimal scaling laws quantify model-data allocation for diffusion pretraining.",
+            "RELEVANCE": 9,
+            "NOVELTY": 8,
+            "PRIMARY_TOPIC_ID": "training_systems",
+            "MATCHED_TOPIC_IDS": [
+                "training_systems",
+                "efficiency_scaling"
+            ],
+            "TOPIC_MATCH_COMMENT": "The study directly informs how large diffusion training runs should allocate compute between parameters and data.",
+            "HOTSPOT_PAPER_TAGS": [
+                "daily_hot"
+            ],
+            "HOTSPOT_PAPER_COMMENT": "Its unusually large controlled scaling study provides broadly useful prescriptions for frontier diffusion training.",
+            "SCORE": 17,
+            "authors": [
+                "Kyle Chickering",
+                "Wei-An Lin",
+                "Swayam Bhanded",
+                "Dan Saunders",
+                "Akshat Tripathi",
+                "Jiaming Song",
+                "Shyamal Buch",
+                "Xinchen Yan"
+            ],
+            "title": "Abra: Scaling Diffusion Image Training",
+            "abstract": "Compute-optimal scaling laws guide the training of frontier language models yet remain largely unexplored for visual generation. We present a systematic scaling law study for text-to-image diffusion models using Abra, a controlled family of flow-matching transformers trained across three orders of magnitude worth of compute ($10^{19}$ to $10^{22}$ FLOPs), reaching significantly larger compute budgets than previous works. We demonstrate that diffusion models scale just as predictably as language models but require far more data to train optimally: compute optimality occurs at approximately $200$ image tokens per parameter, ten times the Chinchilla compute-optimal prescription for LLMs. We show that unlike language models, diffusion models are robust to overtraining and that practitioners should err on the side of more data rather than a larger model. Finally, we show that this predictability extends beyond training loss to generative quality metrics, optimal CFG settings, representation quality, and even the shape of the training curves, which collapse onto a universal form.",
+            "arxiv_id": "2608.17286",
+            "PRIMARY_TOPIC_LABEL": "Large-Scale Training Systems and Efficiency",
+            "MATCHED_TOPIC_LABELS": [
+                "Large-Scale Training Systems and Efficiency",
+                "Efficiency, Compression, and Large-Scale Training"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [
+                "Daily Hot Papers"
+            ],
+            "HOTSPOT_PAPER_PRIMARY_KIND": "daily_hot",
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "Daily Hot Papers",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "llm_exact"
+        }
+    },
+    "sections": [
+        {
+            "kind": "new_frontier",
+            "label": "New Frontier Papers",
+            "description": "Papers that appear to open a genuinely new direction, paradigm, or field.",
+            "paper_ids": [
+                "2605.31163"
+            ]
+        },
+        {
+            "kind": "daily_hot",
+            "label": "Daily Hot Papers",
+            "description": "Papers that feel broadly important to the day and belong in the hotspot paper feed.",
+            "paper_ids": [
+                "2608.18261",
+                "2606.29519",
+                "2608.17286"
+            ]
+        }
+    ]
 }

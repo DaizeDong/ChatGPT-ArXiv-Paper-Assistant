@@ -1,0 +1,176 @@
+{
+    "2503.19353": {
+        "ARXIVID": "2503.19353",
+        "COMMENT": "Offline SVD-derived orthogonal transform shifts activation outliers into a small full-precision subspace so the remainder quantizes to W4A4, with the outlier weights doubling as PEFT parameters.",
+        "RELEVANCE": 8,
+        "NOVELTY": 7,
+        "PRIMARY_TOPIC_ID": "efficiency_scaling",
+        "MATCHED_TOPIC_IDS": [
+            "efficiency_scaling"
+        ],
+        "TOPIC_MATCH_COMMENT": "A new quantization mechanism for the activation-outlier problem, the core of the compression topic.",
+        "HOTSPOT_PAPER_TAGS": [],
+        "HOTSPOT_PAPER_COMMENT": "",
+        "SCORE": 15,
+        "authors": [
+            "Yuxuan Hu",
+            "Xiaodong Chen",
+            "Cuiping Li",
+            "Hong Chen",
+            "Jing Zhang"
+        ],
+        "title": "QUAD: Quantization and Parameter-Efficient Tuning of LLM with Activation Decomposition",
+        "abstract": "Large Language Models (LLMs) excel in diverse applications but suffer inefficiency due to massive scale. While quantization reduces computational costs, existing methods degrade accuracy in medium-sized LLMs (e.g., Llama-3-8B) due to activation outliers. To address this, we propose QUAD (Quantization with Activation Decomposition), a framework leveraging Singular Value Decomposition (SVD) to suppress activation outliers for effective 4-bit quantization. QUAD estimates activation singular vectors offline using calibration data to construct an orthogonal transformation matrix P, shifting outliers to additional dimensions in full precision while quantizing rest components to 4-bit. Additionally, QUAD enables parameter-efficient fine-tuning via adaptable full-precision outlier weights, narrowing the accuracy gap between quantized and full-precision models. Experiments demonstrate that QUAD achieves 94% ~ 96% accuracy under W4A4 quantization and 98% accuracy with W4A4/A8 and parameter-efficient fine-tuning for Llama-3 and Qwen-2.5 models. Our code is available at \\href{https://github.com/hyx1999/Quad}{repository}.",
+        "arxiv_id": "2503.19353",
+        "PRIMARY_TOPIC_LABEL": "Efficiency, Compression, and Large-Scale Training",
+        "MATCHED_TOPIC_LABELS": [
+            "Efficiency, Compression, and Large-Scale Training"
+        ],
+        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+        "HOTSPOT_PAPER_LABELS": [],
+        "HOTSPOT_PAPER_PRIMARY_KIND": null,
+        "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+    },
+    "2503.19950": {
+        "ARXIVID": "2503.19950",
+        "COMMENT": "Log-distributed selection of which KV positions stay high-precision, replacing recency heuristics and attention-based importance prediction at 2-bit.",
+        "RELEVANCE": 8,
+        "NOVELTY": 6,
+        "PRIMARY_TOPIC_ID": "efficiency_scaling",
+        "MATCHED_TOPIC_IDS": [
+            "efficiency_scaling"
+        ],
+        "TOPIC_MATCH_COMMENT": "KV-cache quantization with a new retention rule, directly in the memory-efficiency topic.",
+        "HOTSPOT_PAPER_TAGS": [],
+        "HOTSPOT_PAPER_COMMENT": "",
+        "SCORE": 14,
+        "authors": [
+            "Han Chen",
+            "Zicong Jiang",
+            "Zining Zhang",
+            "Bingsheng He",
+            "Pingyi Luo",
+            "Mian Lu",
+            "Yuqiang Chen"
+        ],
+        "title": "LogQuant: Log-Distributed 2-Bit Quantization of KV Cache with Superior Accuracy Preservation",
+        "abstract": "We introduce LogQuant, a groundbreaking 2-bit quantization technique for KV Cache in large language model (LLM) inference, delivering substantial memory savings while preserving superior performance. Previous methods either assume that later tokens are more important or attempt to predict important tokens based on earlier attention patterns. Both approaches, however, can result in performance bottlenecks or frequent mispredictions. LogQuant takes a different approach. By applying a log-based filtering mechanism, it selectively compresses the KV Cache across the entire context, achieving better performance with the same or even reduced memory footprint compared to existing methods. In benchmark tests, it enhances throughput by 25% and boosts batch size by 60% without increasing memory consumption. For challenging tasks such as Math and Code Completion, LogQuant improves accuracy by 40% to 200% at the same compression ratio, outperforming comparable techniques.LogQuant integrates effortlessly with popular inference frameworks like Python's transformers library. Implementation can be available in https://github.com/Concyclics/LogQuantKV.",
+        "arxiv_id": "2503.19950",
+        "PRIMARY_TOPIC_LABEL": "Efficiency, Compression, and Large-Scale Training",
+        "MATCHED_TOPIC_LABELS": [
+            "Efficiency, Compression, and Large-Scale Training"
+        ],
+        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+        "HOTSPOT_PAPER_LABELS": [],
+        "HOTSPOT_PAPER_PRIMARY_KIND": null,
+        "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+    },
+    "2503.19779": {
+        "ARXIVID": "2503.19779",
+        "COMMENT": "Compiler support that auto-transforms models for CUDA Graph capture, removes kernel parameter-copy overhead, and gates deployment by cost-benefit, attacking CPU launch latency in ML workloads.",
+        "RELEVANCE": 7,
+        "NOVELTY": 6,
+        "PRIMARY_TOPIC_ID": "training_systems",
+        "MATCHED_TOPIC_IDS": [
+            "training_systems",
+            "efficiency_scaling"
+        ],
+        "TOPIC_MATCH_COMMENT": "A systems-level throughput contribution in the execution stack that changes what an iteration costs.",
+        "HOTSPOT_PAPER_TAGS": [],
+        "HOTSPOT_PAPER_COMMENT": "",
+        "SCORE": 13,
+        "authors": [
+            "Abhishek Ghosh",
+            "Ajay Nayak",
+            "Ashish Panwar",
+            "Arkaprava Basu"
+        ],
+        "title": "PyGraph: Robust Compiler Support for CUDA Graphs in PyTorch",
+        "abstract": "Machine learning (ML) workloads launch hundreds to thousands of short-running GPU kernels per iteration. With GPU compute throughput growing rapidly, CPU-side launch latency of kernels is emerging as a bottleneck. CUDA Graphs promise to address this by replaying a set of kernels with a single dispatch of the graph, removing per-kernel launch costs. However, CUDA Graphs remain surprisingly difficult to deploy correctly and efficiently. We present PyGraph - a compiler framework to maximize the coverage and benefits of CUDA Graphs for ML workloads. It introduces three novel optimizations: it applies automatic code transformations to make ML applications amenable to CUDA Graphs; it eliminates the parameter copy overheads for kernels executing in CUDA Graphs, and it selectively deploys CUDA Graphs guided by a cost-benefit analysis. For 25 ML workloads from TorchBench, HuggingFace, and TIMM, PyGraph more than doubles the benefit from deploying CUDA Graph compared to the most popular and widely used ML compiler, PyTorch2. PyGraph is built atop PyTorch2's compilation framework and requires no programmer intervention.",
+        "arxiv_id": "2503.19779",
+        "PRIMARY_TOPIC_LABEL": "Large-Scale Training Systems and Efficiency",
+        "MATCHED_TOPIC_LABELS": [
+            "Large-Scale Training Systems and Efficiency",
+            "Efficiency, Compression, and Large-Scale Training"
+        ],
+        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+        "HOTSPOT_PAPER_LABELS": [],
+        "HOTSPOT_PAPER_PRIMARY_KIND": null,
+        "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+    },
+    "2503.19551": {
+        "ARXIVID": "2503.19551",
+        "COMMENT": "Scaling-law study of synthetic pretraining data: rectified scaling law fits, a ~300B-token plateau, and model-size-dependent optimal token counts \u2014 directly informs how a pretraining run is configured and budgeted.",
+        "RELEVANCE": 7,
+        "NOVELTY": 6,
+        "PRIMARY_TOPIC_ID": "training_systems",
+        "MATCHED_TOPIC_IDS": [
+            "training_systems"
+        ],
+        "TOPIC_MATCH_COMMENT": "Scaling-law work that informs pretraining-run configuration falls under large-scale training systems; the data-generation pipeline is the vehicle, the scaling behaviour is the claim.",
+        "HOTSPOT_PAPER_TAGS": [],
+        "HOTSPOT_PAPER_COMMENT": "",
+        "SCORE": 13,
+        "authors": [
+            "Zeyu Qin",
+            "Qingxiu Dong",
+            "Xingxing Zhang",
+            "Li Dong",
+            "Xiaolong Huang",
+            "Ziyi Yang",
+            "Mahmoud Khademi",
+            "Dongdong Zhang",
+            "Hany Hassan Awadalla",
+            "Yi R. Fung",
+            "Weizhu Chen",
+            "Minhao Cheng",
+            "Furu Wei"
+        ],
+        "title": "Scaling Laws of Synthetic Data for Language Models",
+        "abstract": "Large language models (LLMs) achieve strong performance across diverse tasks, largely driven by high-quality web data used in pre-training. However, recent studies indicate this data source is rapidly depleting. Synthetic data emerges as a promising alternative, but it remains unclear whether synthetic datasets exhibit predictable scalability comparable to raw pre-training data. In this work, we systematically investigate the scaling laws of synthetic data by introducing SynthLLM, a scalable framework that transforms pre-training corpora into diverse, high-quality synthetic datasets. Our approach achieves this by automatically extracting and recombining high-level concepts across multiple documents using a graph algorithm. Key findings from our extensive mathematical experiments on SynthLLM include: (1) SynthLLM generates synthetic data that reliably adheres to the rectified scaling law across various model sizes; (2) Performance improvements plateau near 300B tokens; and (3) Larger models approach optimal performance with fewer training tokens. For instance, an 8B model peaks at 1T tokens, while a 3B model requires 4T. Moreover, comparisons with existing synthetic data generation and augmentation methods demonstrate that SynthLLM achieves superior performance and scalability. Our findings highlight synthetic data as a scalable and reliable alternative to organic pre-training corpora, offering a viable path toward continued improvement in model performance.",
+        "arxiv_id": "2503.19551",
+        "PRIMARY_TOPIC_LABEL": "Large-Scale Training Systems and Efficiency",
+        "MATCHED_TOPIC_LABELS": [
+            "Large-Scale Training Systems and Efficiency"
+        ],
+        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+        "HOTSPOT_PAPER_LABELS": [],
+        "HOTSPOT_PAPER_PRIMARY_KIND": null,
+        "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+    },
+    "2503.19530": {
+        "ARXIVID": "2503.19530",
+        "COMMENT": "PEFT that adapts the pretrained weight's own singular vectors and biases rather than adding fresh low-rank factors, yielding high-rank updates at 9x fewer trainable parameters.",
+        "RELEVANCE": 6,
+        "NOVELTY": 6,
+        "PRIMARY_TOPIC_ID": "efficiency_scaling",
+        "MATCHED_TOPIC_IDS": [
+            "efficiency_scaling"
+        ],
+        "TOPIC_MATCH_COMMENT": "A new low-rank-adaptation parameterization, squarely the compression/adaptation topic.",
+        "HOTSPOT_PAPER_TAGS": [],
+        "HOTSPOT_PAPER_COMMENT": "",
+        "SCORE": 12,
+        "authors": [
+            "Suhas G Hegde",
+            "Shilpy Kaur",
+            "Aruna Tiwari"
+        ],
+        "title": "VectorFit : Adaptive Singular & Bias Vector Fine-Tuning of Pre-trained Foundation Models",
+        "abstract": "Popular PEFT methods reduce trainable parameter count for fine-tuning by parameterizing new low-rank or sparse trainable weights in parallel to the frozen pre-trained weights $W$. However, these weights are trained from scratch, and there exists a performance gap between these methods and full fine-tuning, especially in low-budget settings. We introduce VectorFit, a new way of parameterization that efficiently utilizes the existing knowledge embedded in $W$ by adaptively training their singular vectors and biases. We show that utilizing the structural and transformational properties of $W$ in this way can lead to high-rank incremental weight matrices $\u0394W$, comparable to that of full fine-tuning. VectorFit delivers superior results with 9$\\boldsymbol\\times$ fewer trainable parameters than the leading PEFT methods. Through comprehensive experiments across 19 datasets covering a wide range of language and vision tasks such as natural language understanding and generation, question answering, image classification, and image generation, we demonstrate that VectorFit surpasses baselines in terms of performance as a function of parameter-efficiency.",
+        "arxiv_id": "2503.19530",
+        "PRIMARY_TOPIC_LABEL": "Efficiency, Compression, and Large-Scale Training",
+        "MATCHED_TOPIC_LABELS": [
+            "Efficiency, Compression, and Large-Scale Training"
+        ],
+        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+        "HOTSPOT_PAPER_LABELS": [],
+        "HOTSPOT_PAPER_PRIMARY_KIND": null,
+        "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+    }
+}

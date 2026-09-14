@@ -2,8 +2,8 @@
     "schema_version": 1,
     "meta": {
         "date": "2026-08-17",
-        "total_candidates": 0,
-        "total_spotlight_papers": 0,
+        "total_candidates": 101,
+        "total_spotlight_papers": 6,
         "thresholds": {
             "daily_hot_score_cutoff": 15,
             "daily_hot_relevance_cutoff": 7,
@@ -17,11 +17,255 @@
     },
     "diagnostics": {
         "candidate_count_by_kind": {
-            "new_frontier": 0,
-            "daily_hot": 0
+            "new_frontier": 1,
+            "daily_hot": 5
         },
-        "selected_count_by_kind": {}
+        "selected_count_by_kind": {
+            "new_frontier": 1,
+            "daily_hot": 5
+        }
     },
-    "papers": {},
-    "sections": []
+    "papers": {
+        "2608.08003": {
+            "ARXIVID": "2608.08003",
+            "COMMENT": "Introduces an eigenvalue-based neuron whose learned matrices provide nonlinear expressivity with explicit shape constraints.",
+            "RELEVANCE": 7,
+            "NOVELTY": 8,
+            "PRIMARY_TOPIC_ID": "architecture_training",
+            "MATCHED_TOPIC_IDS": [
+                "architecture_training"
+            ],
+            "TOPIC_MATCH_COMMENT": "Its core contribution is a new computational primitive and neural model family.",
+            "HOTSPOT_PAPER_TAGS": [
+                "new_frontier"
+            ],
+            "HOTSPOT_PAPER_COMMENT": "Eigenvalue-defined neurons with controllable convexity and monotonicity could open a distinct architecture-design direction.",
+            "SCORE": 15,
+            "authors": [
+                "Alex Shtoff"
+            ],
+            "title": "The Spectral Neuron",
+            "abstract": "As machine learned models increase in complexity and expressive power, features of simpler models, such as intrinsic coefficient transparency and control over the shape of the modeled function are lost. On the one edge of the spectrum we have simple linear models that possess coefficient transparency, but have a limited expressive power. On the other edge we have neural networks, that have expressive power that improves with scaling, but are mostly opaque. In this work we develop the \\emph{spectral neuron} concept: a scalar model given by $f(x)=\u00ce\u00bb_k (A_0 + A_1 x + ... + A_n x_n)$, with learned real symmetric matrices $A_0, ..., A_n$. The input enters the model through an affine matrix function, but the prediction is obtained by reading one of its eigenvalues. Thus, the model is nonlinear, but the source of nonlinearity is still mathematically explicit. This gives us a useful middle ground: the model can become more expressive as the matrix dimension grows, while retaining coefficient transparency through the learned matrices. For example, extremal eigenvalues yield convex or concave functions, semidefinite constraints on the coefficient matrices impose monotonicity, and the associated eigenspaces characterize local feature influence. We study coefficient transparency, feature-influence bounds, and shape-control properties of this model family, and then test whether it can be learned and scaled in practice. We develop a systematic study of this model family, bringing together spectral results from several mathematical literatures to characterize its expressivity, coefficient transparency, feature influence, and shape-control properties. Code available at https://github.com/alexshtf/spectral_neuron_paper.",
+            "arxiv_id": "2608.08003",
+            "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+            "MATCHED_TOPIC_LABELS": [
+                "Architecture and Training Dynamics"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [
+                "New Frontier Papers"
+            ],
+            "HOTSPOT_PAPER_PRIMARY_KIND": "new_frontier",
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "New Frontier Papers",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "llm_exact"
+        },
+        "2608.15567": {
+            "ARXIVID": "2608.15567",
+            "COMMENT": "Schur-complement elimination enables groupwise discrete quantization with adaptive scales and zero points, substantially improving 2-bit LLM accuracy.",
+            "RELEVANCE": 10,
+            "NOVELTY": 8,
+            "PRIMARY_TOPIC_ID": "efficiency_scaling",
+            "MATCHED_TOPIC_IDS": [
+                "efficiency_scaling"
+            ],
+            "TOPIC_MATCH_COMMENT": "The core contribution directly improves extreme low-bit LLM weight compression through a new quantization optimization mechanism.",
+            "HOTSPOT_PAPER_TAGS": [
+                "daily_hot"
+            ],
+            "HOTSPOT_PAPER_COMMENT": "Broadly important today: Schur-complement elimination enables groupwise discrete quantization with adaptive scales and zero points, substantially improving 2-bit LLM accuracy.",
+            "SCORE": 18,
+            "authors": [
+                "Gunjun Lee",
+                "Sehwan Son",
+                "Younjoo Lee",
+                "Byungjun Kim",
+                "Jung Ho Ahn"
+            ],
+            "title": "SchurQuant: Groupwise Discrete Optimization for Layer-Wise LLM Quantization",
+            "abstract": "Weight-only post-training quantization (PTQ) enables the deployment of large language models under tight memory budgets, but accuracy often collapses at 2-3 bits. Existing backpropagation-free PTQ optimizers have two limitations: group decisions ignore the correction that the remaining continuous suffix can absorb, and discrete refinements typically keep the affine quantization grid fixed. We introduce SCHUROPT, which analytically eliminates the suffix's optimal continuous response, yielding an exact groupwise quadratic with Schur-complement curvature. It then alternates closed-form row-wise scale/zero-point refitting with coordinate descent over integer codes. With the GPTQ objective fixed, SCHUROPT improves mean zero-shot accuracy on 2-bit Qwen3-4B by 11.88 percentage points (pp). At higher precision, however, tighter reconstruction does not consistently improve end-model metrics. SCHURQUANT therefore combines SCHUROPT with quantized-prefix teacher reconstruction, reference-weight regularization, residual-add targets, and teacher-decision token weighting. Across eight Llama and Qwen models, SCHURQUANT achieves the highest mean zero-shot accuracy among the evaluated backpropagation free PTQ baselines, outperforming the strongest baseline by 9.65 pp at 2 bits.",
+            "arxiv_id": "2608.15567",
+            "PRIMARY_TOPIC_LABEL": "Efficiency, Compression, and Large-Scale Training",
+            "MATCHED_TOPIC_LABELS": [
+                "Efficiency, Compression, and Large-Scale Training"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [
+                "Daily Hot Papers"
+            ],
+            "HOTSPOT_PAPER_PRIMARY_KIND": "daily_hot",
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "Daily Hot Papers",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "heuristic"
+        },
+        "2607.28699": {
+            "ARXIVID": "2607.28699",
+            "COMMENT": "Quantization-error certificates drive adaptive KV-cache gating to preserve quality while increasing memory capacity.",
+            "RELEVANCE": 9,
+            "NOVELTY": 8,
+            "PRIMARY_TOPIC_ID": "efficiency_scaling",
+            "MATCHED_TOPIC_IDS": [
+                "efficiency_scaling"
+            ],
+            "TOPIC_MATCH_COMMENT": "Certified error bounds and corrective gating directly address the quality-capacity trade-off in KV-cache compression.",
+            "HOTSPOT_PAPER_TAGS": [
+                "daily_hot"
+            ],
+            "HOTSPOT_PAPER_COMMENT": "Broadly important today: Quantization-error certificates drive adaptive KV-cache gating to preserve quality while increasing memory capacity.",
+            "SCORE": 17,
+            "authors": [
+                "Fanzhe Wei",
+                "Li Liu",
+                "Ziyang Wang",
+                "Chenyu Wang"
+            ],
+            "title": "WitCert: Sound Runtime Risk Observability and Gating for KV-Cache Quantization",
+            "abstract": "KV-cache quantization is validated today by offline benchmark averages; a deployed system cannot tell whether compression is damaging the request it is serving right now. We give it a provably sound runtime meter -- a \"DTrace for KV quantization\": a per-(layer, head, step) upper bound on the total variation between exact and compressed attention. The meter has two tiers: a deterministic band-norm-witness bound, sound for any cache-preserving black-box quantizer and for any query (adaptive-safe, worst-case Cauchy--Schwarz plus RoPE band-unitarity), and a tighter probabilistic certificate for a controlled subtractively-dithered INT8 quantizer under an explicit request-level failure budget (stated for non-adaptive queries; core theorems machine-checked in Lean 4). Three results. Observability: the meter enters SGLang through an env-guarded patch, and any scheme registered as one tensor function is measured in live serving. Repair: meter-driven gating -- risk-ranked where the witness is saturated, certified where it is informative -- empirically restores the quality floor at benchmark scale, e.g. raw-cast fp8 from 22.8 back to 79.7 on hard RULER tasks with the difference from uncompressed bounded at $[+0.0,+0.8]$ by a paired test. Analysis: aggressive schemes survive on cross-layer error cancellation, not per-step fidelity -- in a 28-layer sweep, no single layer's pollution alone loses anything (0/28) -- and the certified int8 cache serves $1.88\\times$ more KV tokens at the same memory in SGLang. All artifacts, guards, and the Lean development are released at https://github.com/metask-ai/witcert-kv-certificates; every number regenerates from the shipped artifacts by one command.",
+            "arxiv_id": "2607.28699",
+            "PRIMARY_TOPIC_LABEL": "Efficiency, Compression, and Large-Scale Training",
+            "MATCHED_TOPIC_LABELS": [
+                "Efficiency, Compression, and Large-Scale Training"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [
+                "Daily Hot Papers"
+            ],
+            "HOTSPOT_PAPER_PRIMARY_KIND": "daily_hot",
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "Daily Hot Papers",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "heuristic"
+        },
+        "2608.15448": {
+            "ARXIVID": "2608.15448",
+            "COMMENT": "Derives how next-token ambiguity increases capacity requirements, fitting time, and sensitivity to sampling noise.",
+            "RELEVANCE": 9,
+            "NOVELTY": 8,
+            "PRIMARY_TOPIC_ID": "architecture_training",
+            "MATCHED_TOPIC_IDS": [
+                "architecture_training"
+            ],
+            "TOPIC_MATCH_COMMENT": "Directly explains how architectural capacity and optimization dynamics constrain learning token distributions, with theoretical and empirical support.",
+            "HOTSPOT_PAPER_TAGS": [
+                "daily_hot"
+            ],
+            "HOTSPOT_PAPER_COMMENT": "Broadly important today: Derives how next-token ambiguity increases capacity requirements, fitting time, and sensitivity to sampling noise.",
+            "SCORE": 17,
+            "authors": [
+                "Nicolas Zucchet",
+                "Hyun Dong Lee",
+                "Scott Linderman"
+            ],
+            "title": "Language models suffer from a curse of ambiguity",
+            "abstract": "Large language models increasingly rely on sampling as a driver of their own improvement, making the fidelity of their learned distributions more critical than ever. Yet, not all distributions are equally easy to learn. In this work, we identify a curse of ambiguity: in large language models, and more broadly in all neural networks that produce discrete probability distributions, the more ambiguous a next-token distribution is, the harder it is to learn accurately. Through an extensive theoretical analysis, we trace this curse to architectural and learning roots. More ambiguous distributions require more capacity to be stored, larger embeddings to be represented, more steps to be fitted, and amplify token-sampling noise. We validate these findings on synthetic tasks with controlled ground truth and observe the same signatures in language models trained on real data. Our results provide a new perspective on the statistical capabilities of large language models and a practical framework for when to trust their output distribution.",
+            "arxiv_id": "2608.15448",
+            "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+            "MATCHED_TOPIC_LABELS": [
+                "Architecture and Training Dynamics"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [
+                "Daily Hot Papers"
+            ],
+            "HOTSPOT_PAPER_PRIMARY_KIND": "daily_hot",
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "Daily Hot Papers",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "heuristic"
+        },
+        "2608.15602": {
+            "ARXIVID": "2608.15602",
+            "COMMENT": "Binary decomposition and fused lookup-table kernels enable efficient ultra-low-bit LLM execution.",
+            "RELEVANCE": 9,
+            "NOVELTY": 8,
+            "PRIMARY_TOPIC_ID": "efficiency_scaling",
+            "MATCHED_TOPIC_IDS": [
+                "efficiency_scaling"
+            ],
+            "TOPIC_MATCH_COMMENT": "Quantization representation and CUDA execution are jointly redesigned to turn compression into practical memory, compute, and energy savings.",
+            "HOTSPOT_PAPER_TAGS": [
+                "daily_hot"
+            ],
+            "HOTSPOT_PAPER_COMMENT": "Broadly important today: Binary decomposition and fused lookup-table kernels enable efficient ultra-low-bit LLM execution.",
+            "SCORE": 17,
+            "authors": [
+                "Qingyao Yang",
+                "Runming Yang",
+                "He Xiao",
+                "Wendong Xu",
+                "Junyu Chen",
+                "Haobo Liu",
+                "Chenchen Ding",
+                "Ruihan Hu",
+                "Yik-Chung Wu",
+                "Ngai Wong"
+            ],
+            "title": "FluxBin: Flexible LUT-based Ultra-low-bit LLM Inference by Algorithm-Kernel Synergy",
+            "abstract": "While binary quantization theoretically promises extreme compression and acceleration for Large Language Models (LLMs), existing research often overlooks the necessity of specialized hardware kernels, thus failing to unleash the full acceleration potential due to persistent reliance on expensive floating-point arithmetic or runtime dequantization overheads. To bridge this gap, we propose FluxBin (\\textbf{F}lexible \\textbf{L}UT-based \\textbf{U}ltra-low-bit e\\textbf{X}ecution with \\textbf{Bin}ary bases), an algorithm-kernel co-design that synergizes post-training quantization with a highly optimized CUDA kernel. Algorithmically, we introduce Decoupled Row-Column Binary Decomposition to enhance representational capacity while maintaining hardware efficiency, complemented by a Hessian-guided saliency-aware hybrid bases that preserve critical information. At the kernel level, we implement a Lookup Table Building Approach with Scale Fusion to reduce floating-point arithmetic, featuring a Virtual Columnar Mapping that transforms irregular, sparse, and salient matrices into dense execution. Extensive evaluations demonstrate FluxBin achieves up to $5.92\\times$ speedup and $10.19\\times$ energy savings across diverse model architectures, delivering comparable accuracy to heavily fine-tuned methods. This effectively enables the deployment of 70B-scale models on one single A100 GPU with a $4\\times$ memory reduction. Code is available at https://github.com/nicyyyy/FluxBin.",
+            "arxiv_id": "2608.15602",
+            "PRIMARY_TOPIC_LABEL": "Efficiency, Compression, and Large-Scale Training",
+            "MATCHED_TOPIC_LABELS": [
+                "Efficiency, Compression, and Large-Scale Training"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [
+                "Daily Hot Papers"
+            ],
+            "HOTSPOT_PAPER_PRIMARY_KIND": "daily_hot",
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "Daily Hot Papers",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "heuristic"
+        },
+        "2602.10204": {
+            "ARXIVID": "2602.10204",
+            "COMMENT": "Applies momentum after variance normalization to reduce conditional update variance and bound responses to gradient spikes.",
+            "RELEVANCE": 9,
+            "NOVELTY": 8,
+            "PRIMARY_TOPIC_ID": "training_systems",
+            "MATCHED_TOPIC_IDS": [
+                "training_systems",
+                "architecture_training"
+            ],
+            "TOPIC_MATCH_COMMENT": "It is directly an optimizer contribution for stable large-model training, supported by update-dynamics analysis.",
+            "HOTSPOT_PAPER_TAGS": [
+                "daily_hot"
+            ],
+            "HOTSPOT_PAPER_COMMENT": "Broadly important today: Applies momentum after variance normalization to reduce conditional update variance and bound responses to gradient spikes.",
+            "SCORE": 17,
+            "authors": [
+                "Francisco Patitucci",
+                "Aryan Mokhtari"
+            ],
+            "title": "Adaptive Optimization via Momentum on Variance-Normalized Gradients",
+            "abstract": "We introduce MVN-Grad (Momentum on Variance-Normalized Gradients), an Adam-style optimizer that improves stability and performance by combining two complementary ideas: variance-based normalization and momentum applied after normalization. MVN-Grad scales each coordinate by an exponential moving average of gradient uncertainty and applies momentum to the resulting normalized gradients, removing the cross-time coupling between stale momentum and a stochastic normalizer present in standard Adam-type updates. We prove that this decoupling yields smaller one-step conditional update variance than momentum-then-normalize variance methods, and that MVN-Grad has a uniformly bounded response to isolated gradient spikes. In low-variance regimes, we further show that variance normalization avoids sign-type collapse of second-moment scaling and can yield accelerated convergence. Beyond these comparisons, we prove a general nonconvex convergence guarantee for MVN-Grad under bounded-gradient stochastic assumptions. On CIFAR-100 and GPT-style language modeling, MVN-Grad matches or improves on Adam, AdaBelief, and LaProp, delivering smoother training and better generalization at the cost of one additional state tensor.",
+            "arxiv_id": "2602.10204",
+            "PRIMARY_TOPIC_LABEL": "Large-Scale Training Systems and Efficiency",
+            "MATCHED_TOPIC_LABELS": [
+                "Large-Scale Training Systems and Efficiency",
+                "Architecture and Training Dynamics"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [
+                "Daily Hot Papers"
+            ],
+            "HOTSPOT_PAPER_PRIMARY_KIND": "daily_hot",
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "Daily Hot Papers",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "heuristic"
+        }
+    },
+    "sections": [
+        {
+            "kind": "new_frontier",
+            "label": "New Frontier Papers",
+            "description": "Papers that appear to open a genuinely new direction, paradigm, or field.",
+            "paper_ids": [
+                "2608.08003"
+            ]
+        },
+        {
+            "kind": "daily_hot",
+            "label": "Daily Hot Papers",
+            "description": "Papers that feel broadly important to the day and belong in the hotspot paper feed.",
+            "paper_ids": [
+                "2608.15567",
+                "2607.28699",
+                "2608.15448",
+                "2608.15602",
+                "2602.10204"
+            ]
+        }
+    ]
 }

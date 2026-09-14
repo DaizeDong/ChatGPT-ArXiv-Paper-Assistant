@@ -1,1 +1,721 @@
-{}
+{
+    "2607.19223": {
+        "ARXIVID": "2607.19223",
+        "COMMENT": "Combines on-policy diffusion-drafter distillation with adaptive speculative lengths.",
+        "RELEVANCE": 9,
+        "NOVELTY": 7,
+        "PRIMARY_TOPIC_ID": "efficiency_scaling",
+        "MATCHED_TOPIC_IDS": [
+            "efficiency_scaling"
+        ],
+        "TOPIC_MATCH_COMMENT": "The central contribution is a new mechanism for materially increasing LLM decoding throughput.",
+        "HOTSPOT_PAPER_TAGS": [],
+        "HOTSPOT_PAPER_COMMENT": "",
+        "SCORE": 16,
+        "authors": [
+            "Yu-Yang Qian",
+            "Hao-Cong Wu",
+            "Chen Chen",
+            "Jiacheng Sun",
+            "Zhenhua Dong",
+            "Peng Zhao",
+            "Zhi-Hua Zhou"
+        ],
+        "title": "AdaFlash: Adaptive Speculative Decoding via On-Policy Distilled Diffusion Drafters",
+        "abstract": "Speculative decoding, in which a lightweight draft model first generates a draft sequence that is then verified in parallel by the target model, has become a prevalent paradigm for accelerating large language model inference. Recent work such as DFlash further boosts drafting efficiency by leveraging diffusion drafters, whose parallel denoising mechanism enables draft generation in a single forward pass. In this work, we uncover a central pitfall of diffusion drafters: bidirectional attention is a double-edged sword. On one hand, it endows the model with parallel generation and global contextual modeling capabilities; on the other hand, this inherent global dependency introduces high variance at both the domain-level and the token-level: acceptance rates fluctuate substantially across different domains, and draft token quality also varies heterogeneously at different token positions. To tackle this issue, we propose AdaFlash framework, comprising two components: (i) an on-policy distillation (OPD) algorithm with reverse-KL divergence tailored for diffusion drafters, bringing stable convergence and effectively reducing domain-level variance; and (ii) an adaptive length head that dynamically adjusts the candidate sequence length on the fly, substantially lowering the verification cost of the target model and handling token-level variance. Experiments demonstrate that AdaFlash consistently improves speedup rate during deployment, with especially significant gains in high-concurrency scenarios, achieving up to approximately 66% higher throughput than previous state-of-the-art methods.",
+        "arxiv_id": "2607.19223",
+        "PRIMARY_TOPIC_LABEL": "Efficiency, Compression, and Large-Scale Training",
+        "MATCHED_TOPIC_LABELS": [
+            "Efficiency, Compression, and Large-Scale Training"
+        ],
+        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+        "HOTSPOT_PAPER_LABELS": [],
+        "HOTSPOT_PAPER_PRIMARY_KIND": null,
+        "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+    },
+    "2602.18948": {
+        "ARXIVID": "2602.18948",
+        "COMMENT": "Reformulates transformer representations, attention, and optimization using symmetry-invariant relational quantities.",
+        "RELEVANCE": 8,
+        "NOVELTY": 8,
+        "PRIMARY_TOPIC_ID": "architecture_training",
+        "MATCHED_TOPIC_IDS": [
+            "architecture_training"
+        ],
+        "TOPIC_MATCH_COMMENT": "It proposes a foundational transformer architecture and optimization framework based on symmetry reduction.",
+        "HOTSPOT_PAPER_TAGS": [],
+        "HOTSPOT_PAPER_COMMENT": "",
+        "SCORE": 16,
+        "authors": [
+            "J. Fran\u00c3\u00a7ois",
+            "L. Ravera"
+        ],
+        "title": "Toward Manifest Relationality in Transformers via Symmetry Reduction",
+        "abstract": "Transformer models contain substantial internal redundancy arising from coordinate-dependent representations and continuous symmetries, in model space and in head space, respectively. While recent approaches address this by explicitly breaking symmetry, we propose a complementary framework based on symmetry reduction. We reformulate representations, attention mechanisms, and optimization dynamics in terms of invariant relational quantities, eliminating redundant degrees of freedom by construction. This perspective yields architectures that operate directly on relational structures, providing a principled geometric framework for reducing parameter redundancy and analyzing optimization.",
+        "arxiv_id": "2602.18948",
+        "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+        "MATCHED_TOPIC_LABELS": [
+            "Architecture and Training Dynamics"
+        ],
+        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+        "HOTSPOT_PAPER_LABELS": [],
+        "HOTSPOT_PAPER_PRIMARY_KIND": null,
+        "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+    },
+    "2607.18745": {
+        "ARXIVID": "2607.18745",
+        "COMMENT": "Optimizes product-preserving transforms before quantization using exact error accounting and certified diagonal-gauge selection.",
+        "RELEVANCE": 8,
+        "NOVELTY": 8,
+        "PRIMARY_TOPIC_ID": "efficiency_scaling",
+        "MATCHED_TOPIC_IDS": [
+            "efficiency_scaling"
+        ],
+        "TOPIC_MATCH_COMMENT": "It introduces a principled quantization preconditioner that directly reduces low-precision matrix-product error.",
+        "HOTSPOT_PAPER_TAGS": [],
+        "HOTSPOT_PAPER_COMMENT": "",
+        "SCORE": 16,
+        "authors": [
+            "Piyush Sao",
+            "Narasinga Miniskar",
+            "Pedro Valero-Lara",
+            "Keita Teranishi",
+            "Sudip Seal"
+        ],
+        "title": "Contraction-Gauge Preconditioning for Quantized Matrix Multiplication",
+        "abstract": "We study low-precision computation of C=AB with both factors quantized. We derive an exact finite-dimensional identity for the expected squared product error under independent, zero-mean entrywise errors with known variance fields; it holds exactly for non-overloading subtractive dither and for independent stochastic rounding, and we empirically assess deterministic round-to-nearest (RTN). Using the product-preserving equivalence AB=(AT)(T^{-1}B), we formulate contraction-gauge preconditioning: jointly choosing a factor representation and its sharing pattern before quantization. Preconditioning can reduce product error but may require extra transformed, quantized copies of the opposite operand: a shared transform needs one copy, a block-specific transform up to one per block. Within the bounded family of positive diagonal gauges (folds), a geometric program computes a globally optimal shared fold and a linear program decides whether the identity fold is already optimal. For other families we derive computable selection statistics -- tail index for scaling, profile spread for partitioning, coherence and weighted-Gram energy for rotations, slice-energy covariance for hierarchy depth -- with upper bounds for ranking heuristic candidates. Across twelve linear products from a trained three-block image classifier, median within-product rank correlations between dither-model predictions and deterministic-RTN errors are 0.937 at 8 bits and 0.918 at 4 bits. The GP fold cuts held-out product error over the identity fold by 18.0% (8-bit) and 20.5% (4-bit) in geometric mean, beats a SmoothQuant-style grid baseline at both precisions and on ten of twelve products, and lowers composed logit MSE by 15.4% and 26.4%. We thus provide exact stochastic product-error accounting, certified selection within the diagonal family, and a common objective for evaluating reusable transform candidates under RTN.",
+        "arxiv_id": "2607.18745",
+        "PRIMARY_TOPIC_LABEL": "Efficiency, Compression, and Large-Scale Training",
+        "MATCHED_TOPIC_LABELS": [
+            "Efficiency, Compression, and Large-Scale Training"
+        ],
+        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+        "HOTSPOT_PAPER_LABELS": [],
+        "HOTSPOT_PAPER_PRIMARY_KIND": null,
+        "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+    },
+    "2607.19604": {
+        "ARXIVID": "2607.19604",
+        "COMMENT": "Establishes scaling laws for hypernetworks that generate factual-knowledge LoRA adapters.",
+        "RELEVANCE": 8,
+        "NOVELTY": 8,
+        "PRIMARY_TOPIC_ID": "architecture_training",
+        "MATCHED_TOPIC_IDS": [
+            "architecture_training",
+            "efficiency_scaling"
+        ],
+        "TOPIC_MATCH_COMMENT": "Hypernetwork scaling is the core architectural result, with generated LoRA adapters adding an efficiency dimension.",
+        "HOTSPOT_PAPER_TAGS": [],
+        "HOTSPOT_PAPER_COMMENT": "",
+        "SCORE": 16,
+        "authors": [
+            "Nischay Dhankhar",
+            "Dos Baha",
+            "Abulhair Saparov"
+        ],
+        "title": "Scaling Laws for Hypernetwork-Based Knowledge Injection in Large Language Models",
+        "abstract": "Injecting factual knowledge into large language models (LLMs) reliably and at scale remains an open challenge. Hypernetworks provide a promising solution to large-scale knowledge injection. Although hypernetworks are typically applied for test-time adaptation, we explore their use in train-time knowledge injection, where, given a large corpus of facts, we train a hypernetwork to generate a fixed LoRA adapter that, when inserted into the target model, enable the model to answer questions about those facts. In this work, we investigate whether hypernetworks can be used to perform train-time knowledge injection and how this ability varies with scale. The scaling behavior of hypernetworks remains largely unstudied. Our design decouples the hypernetwork's injection capacity from the target model's general capability, enabling, for the first time, a rigorous study of scaling laws for hypernetwork architectures. We characterize how loss, reasoning accuracy, and out-of-distribution (OOD) generalization vary with hypernetwork depth, width, and target network size. We construct a large-scale dataset, called MegaWikiQA, containing tens of millions of multi-hop question-answer examples across 39 domains constructed from examples in Wikidata5M. Our results reveal: (i) hypernetwork-based injection exhibits broadly predictive power law scaling along all architecture axes; and (ii) hypernetworks are capable of reliable OOD generalization at increasing scales, suggesting that hypernetwork provides a promising alternative to other train-time adaptation methods such as LoRA finetuning and full fine-tuning, exhibiting steeper scaling exponents in all OOD evaluations. Together, these results establish hypernetworks as a principled and scalable substrate for train-time adaptation, and provide the first empirically grounded scaling laws to guide hypernetworks for factual reasoning in large language models.",
+        "arxiv_id": "2607.19604",
+        "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+        "MATCHED_TOPIC_LABELS": [
+            "Architecture and Training Dynamics",
+            "Efficiency, Compression, and Large-Scale Training"
+        ],
+        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+        "HOTSPOT_PAPER_LABELS": [],
+        "HOTSPOT_PAPER_PRIMARY_KIND": null,
+        "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+    },
+    "2607.19456": {
+        "ARXIVID": "2607.19456",
+        "COMMENT": "Derives memory-optimal decode attention, incremental KV accumulation, and coalesced GPU kernels from array algebra.",
+        "RELEVANCE": 8,
+        "NOVELTY": 7,
+        "PRIMARY_TOPIC_ID": "efficiency_scaling",
+        "MATCHED_TOPIC_IDS": [
+            "efficiency_scaling"
+        ],
+        "TOPIC_MATCH_COMMENT": "KV traffic reduction and memory-optimal attention kernels directly target inference efficiency.",
+        "HOTSPOT_PAPER_TAGS": [],
+        "HOTSPOT_PAPER_COMMENT": "",
+        "SCORE": 15,
+        "authors": [
+            "Lenore Mulin",
+            "Gaetan Hains"
+        ],
+        "title": "MoA-Structured Decode Attention DNF Derivation, KV-Cache Accumulation, GQA/MQA, and OpenACC Kernel",
+        "abstract": "We derive four memory-optimal inference artifacts for transformer attention using the Mathematics of Arrays (MoA), each following directly from the forward-pass Denotational Normal Form (DNF) of with the query-row index fixed to the current decode step. The artifacts are: (1)~a single-query decode DNF in which the $\u00cf\u0088$-reduction eliminates the $K^\\top$ buffer algebraically, achieving $(d_k + nd_k+ nd_v+ d_v)\\times4\\,{B}$ Dynamic Random Access Memory (DRAM) traffic result numerically verified to $\\|{err}\\|_\\leq2\\times10^{-7}$; (2)~a C/OpenACC Graphics Processing Unit (GPU) kernel with Operational Normal Form (ONF) stride arithmetic and hardware-coalesced memory access, verified to $\\|\\mathrm{err}\\|_\\infty=0$ (exact IEEE-754 floating-point arithmetic); (3)~a multi-step KV-cache with $O(d_k+d_v)$ per-step append via MoA concatenation $\\#$; and (4)~Grouped-Query Attention (GQA) and Multi-Query Attention (MQA) derived via $\u00cf\u0088$-selection, achieving a proven $\\frac {h_q} { h_{kv} }$ reduction in KV traffic. All programs are verified against PyTorch scaled_dot_product_attention.",
+        "arxiv_id": "2607.19456",
+        "PRIMARY_TOPIC_LABEL": "Efficiency, Compression, and Large-Scale Training",
+        "MATCHED_TOPIC_LABELS": [
+            "Efficiency, Compression, and Large-Scale Training"
+        ],
+        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+        "HOTSPOT_PAPER_LABELS": [],
+        "HOTSPOT_PAPER_PRIMARY_KIND": null,
+        "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+    },
+    "2605.28613": {
+        "ARXIVID": "2605.28613",
+        "COMMENT": "Characterizes when gradient descent maintains a stable low-rank phase in perturbed deep matrix factorization.",
+        "RELEVANCE": 7,
+        "NOVELTY": 7,
+        "PRIMARY_TOPIC_ID": "architecture_training",
+        "MATCHED_TOPIC_IDS": [
+            "architecture_training"
+        ],
+        "TOPIC_MATCH_COMMENT": "The paper directly analyzes optimization trajectories and implicit low-rank regularization.",
+        "HOTSPOT_PAPER_TAGS": [],
+        "HOTSPOT_PAPER_COMMENT": "",
+        "SCORE": 14,
+        "authors": [
+            "Jingzhe Wang",
+            "Hung-Hsu Chou"
+        ],
+        "title": "Stability of Low-Rank Implicit Regularization in Perturbed Deep Matrix Factorization",
+        "abstract": "This paper studies the stability of low-rank implicit regularization in deep matrix factorization, a tractable model for understanding how gradient-based training can favor low-complexity structure. We first revisit the noiseless setting and derive sufficient spectral conditions under which gradient descent exhibits a nonempty low-rank interval. These conditions clarify how the target spectrum, initialization, and step size jointly determine when a low-rank phase is observable along the optimization trajectory. We then analyze the perturbed problem, where the target matrix is subject to an additive perturbation. By studying the perturbed gradient descent dynamics at the eigenvalue level, we prove convergence guarantees and quantify how the perturbation size affects iteration complexity and eigenvalue recovery. Finally, we establish stability of the low-rank phase under perturbation: the effective rank of the iterates remains close to that of the rank-L approximation of the noiseless target over a perturbed low-rank interval, with explicit dependence on the perturbation size. Numerical illustrations support the theoretical predictions and illustrate the role of spectral structure in determining when this stability is observed.",
+        "arxiv_id": "2605.28613",
+        "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+        "MATCHED_TOPIC_LABELS": [
+            "Architecture and Training Dynamics"
+        ],
+        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+        "HOTSPOT_PAPER_LABELS": [],
+        "HOTSPOT_PAPER_PRIMARY_KIND": null,
+        "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+    },
+    "2607.21645": {
+        "ARXIVID": "2607.21645",
+        "COMMENT": "Measures how multi-horizon consistency losses alter contraction and prediction dynamics in learned latent transitions.",
+        "RELEVANCE": 7,
+        "NOVELTY": 7,
+        "PRIMARY_TOPIC_ID": "architecture_training",
+        "MATCHED_TOPIC_IDS": [
+            "architecture_training"
+        ],
+        "TOPIC_MATCH_COMMENT": "Despite the world-model setting, the core contribution is a mechanistic study of loss-induced training dynamics.",
+        "HOTSPOT_PAPER_TAGS": [],
+        "HOTSPOT_PAPER_COMMENT": "",
+        "SCORE": 14,
+        "authors": [
+            "Kavya Bhand",
+            "Aadi Joshi"
+        ],
+        "title": "Multi-Horizon Consistency as Geometry: When Latent Dynamics Contract, and When They Do Not",
+        "abstract": "Multi-horizon latent consistency is a common training knob in video predictors and world models, but practitioners rarely know what it does to transition geometry. We treat lambda, the weight on multi-step latent agreement, as a diagnostic control and measure an empirical expansion proxy L20,q95 together with horizon-20 prediction error E20. On Moving-MNIST (n=6 seeds at the critical pair), raising lambda from 0 to 0.8 cuts L20 from 4.96 +/- 2.01 to 1.01 +/- 0.06 (paired t p=0.005, Wilcoxon p=0.031) and halves E20 (0.365 to 0.177, paired t p=1.1e-13). Four of six seeds cross L<1 at lambda=0.8. The same loss does not produce population L<1 on action-conditioned Pendulum-v1 or CartPole-v1, nor on KTH Actions video, even when E20 improves. An associational mediation analysis on MMNIST gives r-hat=0.94 (95% CI [0.88, 1.00], n=27, B=2000); lambda was not randomized. Defensive checks (architectural baselines, exogenous stress, WorldTest, MPC, scaling) mostly support a narrow claim: soft consistency can push passive video toward a near-contractive band, and that band is domain-limited. A stochastic-forcing law L20 ~ 1.23 + 1.82 eta at lambda=0.8 (bootstrap slope CI [1.73, 1.92], R^2=0.96) unifies control domains on the same curve via calibrated eta_eff. Complete joint slices at lambda in {0.4, 1.2} (30/30 cells, 5 eta x 3 seeds) show comparable linear L20(eta) slopes (~1.69 and ~2.00); we do not fit a continuous (lambda, eta) surface. We do not report DreamerV3 or TD-MPC2 returns.",
+        "arxiv_id": "2607.21645",
+        "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+        "MATCHED_TOPIC_LABELS": [
+            "Architecture and Training Dynamics"
+        ],
+        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+        "HOTSPOT_PAPER_LABELS": [],
+        "HOTSPOT_PAPER_PRIMARY_KIND": null,
+        "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+    },
+    "2605.22350": {
+        "ARXIVID": "2605.22350",
+        "COMMENT": "Interpolates between ensembles and weight aggregation by selectively merging neurons through partial optimal transport.",
+        "RELEVANCE": 7,
+        "NOVELTY": 7,
+        "PRIMARY_TOPIC_ID": "efficiency_scaling",
+        "MATCHED_TOPIC_IDS": [
+            "efficiency_scaling"
+        ],
+        "TOPIC_MATCH_COMMENT": "Partial network fusion is a new structured compression mechanism trading computation against ensemble quality.",
+        "HOTSPOT_PAPER_TAGS": [],
+        "HOTSPOT_PAPER_COMMENT": "",
+        "SCORE": 14,
+        "authors": [
+            "Fabian Morelli",
+            "Stephan Eckstein"
+        ],
+        "title": "Partial Fusion of Neural Networks: Efficient Tradeoffs Between Ensembles and Weight Aggregation",
+        "abstract": "Ensembles of neural networks typically outperform individual networks but incur large computational costs, whereas weight aggregation produces less costly, yet also less accurate, aggregate models. We introduce partial fusion of networks, which interpolates between ensembles and weight aggregation and thus allows for a flexible tradeoff between computational cost and performance. A direct way to achieve this is to extend existing weight aggregation methods based on neuron-level similarity between different networks, where partial fusion then only aggregates weights of neurons which are most similar. We showcase one particular method to jointly identify which neurons are most similar and match them via partial optimal transport. Further, we consider the more general perspective of weight aggregation and partial fusion as generalized pruning of ensemble models, where neurons cannot just be deleted, but also linearly combined. Finally, we show that generalized pruning applied to a single network yields similar benefits as partial fusion by allowing for a tradeoff between isolating, deleting, and linearly combining neurons based on similarity. Our code is available at https://github.com/Fabian-Mor/partial_fusion_nn.",
+        "arxiv_id": "2605.22350",
+        "PRIMARY_TOPIC_LABEL": "Efficiency, Compression, and Large-Scale Training",
+        "MATCHED_TOPIC_LABELS": [
+            "Efficiency, Compression, and Large-Scale Training"
+        ],
+        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+        "HOTSPOT_PAPER_LABELS": [],
+        "HOTSPOT_PAPER_PRIMARY_KIND": null,
+        "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+    },
+    "2607.17377": {
+        "ARXIVID": "2607.17377",
+        "COMMENT": "Represents weight adaptations through superposed Chebyshev-polynomial manifolds to reduce trainable parameters.",
+        "RELEVANCE": 7,
+        "NOVELTY": 7,
+        "PRIMARY_TOPIC_ID": "efficiency_scaling",
+        "MATCHED_TOPIC_IDS": [
+            "architecture_training",
+            "efficiency_scaling"
+        ],
+        "TOPIC_MATCH_COMMENT": "Parameter-efficient adaptation is the primary contribution, with a secondary architectural change to linear projections.",
+        "HOTSPOT_PAPER_TAGS": [],
+        "HOTSPOT_PAPER_COMMENT": "",
+        "SCORE": 14,
+        "authors": [
+            "Jiawen Li"
+        ],
+        "title": "Chebyshev Manifold Adaptation",
+        "abstract": "The paper presents a new parameter-efficient adaptation method called ChebyMA (Chebyshev Manifold Adaptation). ChebyMA adopts weight matrices through a multi-surface superposition of Chebyshev polynomial bases evaluated on learnable coordinates and combined via trainable coefficient matrices, replacing standard linear projections with highly expressive continuous function approximation. Theoretically, we establish an Approximation Expressivity Theorem, proving from the perspective of function approximation theory that single-manifold ChebyMA guarantees convergence in Frobenius norm error of reconstruction. Besides, drawing on Kolmogorov $n$-width intuition, we demonstrate the expressive advantages of multi-manifold superposition ($S > 1$) in decoupling high-dimensional complex features. Experimental results on Computer Vision CIFAR datasets(CIFAR-10, CIFAR-100)\\cite{CIFAR} and Natural Language Processing (AG News, SST-2) datasets demonstrate that ChebyMA consistently achieves a superior parameter-accuracy Pareto front compared to standard full-parameter fine-tuning, LoRA\\cite{LoRA}, TLoRA\\cite{TLoRA}, and StelLA\\cite{StelLA}. ChebyMA significantly outperforms other tested methods in tested datasets, validating its solid theoretical foundation for generality with purely vectorized computations.",
+        "arxiv_id": "2607.17377",
+        "PRIMARY_TOPIC_LABEL": "Efficiency, Compression, and Large-Scale Training",
+        "MATCHED_TOPIC_LABELS": [
+            "Architecture and Training Dynamics",
+            "Efficiency, Compression, and Large-Scale Training"
+        ],
+        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+        "HOTSPOT_PAPER_LABELS": [],
+        "HOTSPOT_PAPER_PRIMARY_KIND": null,
+        "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+    },
+    "2607.18910": {
+        "ARXIVID": "2607.18910",
+        "COMMENT": "Conditions attention projections on a learned utility state so reward history directly changes retrieval.",
+        "RELEVANCE": 7,
+        "NOVELTY": 7,
+        "PRIMARY_TOPIC_ID": "architecture_training",
+        "MATCHED_TOPIC_IDS": [
+            "architecture_training"
+        ],
+        "TOPIC_MATCH_COMMENT": "Although evaluated on sequential decision tasks, the core contribution is a new feedback-conditioned attention mechanism with expressivity analysis.",
+        "HOTSPOT_PAPER_TAGS": [],
+        "HOTSPOT_PAPER_COMMENT": "",
+        "SCORE": 14,
+        "authors": [
+            "Yuyang Shen",
+            "Shan Dai",
+            "Daimin Chen"
+        ],
+        "title": "Breaking Feedback-Blindness: Utility-Augmented Transformer for Sequential Decision Making",
+        "abstract": "Sequential decision making in non-stationary and partially observable environments requires rapid adaptation to latent regime changes. However, existing Transformer decision models face a structural bottleneck in the retrieval mechanism: even when reward is used for training or exposed as an input token, attention retrieval remains primarily driven by observation-derived similarity. We formalize this limitation as feedback-blind retrieval, and formally show that, on feedback-informative tasks, observation-equivalent histories with different action-reward outcomes cannot be distinguished by any observation-only attention, resulting in suboptimal choice. To address this mismatch, we propose the Utility-Augmented Transformer (UAT), a new feedback-conditioned retrieval attention architecture in which a compact utility state modulates the query, key, and value projections, allowing action-reward history to directly alter context retrieval during the forward pass. UAT also enjoys an exact zero-gate degradation property that recovers the Vanilla Transformer when feedback is uninformative. Under finite-horizon compactness and Lipschitz assumptions, we prove that UAT strictly enlarges the observation-only Transformer class and can uniformly approximate feedback-dependent decision maps. Across four non-stationary benchmarks: synthetic navigation with hidden goal shifts, non-stationary sepsis treatment, cross-market portfolio allocation, and delayed-feedback recommendation, UAT consistently improves performance over observation-only, test-time adaptation, and input-level feedback baselines, with particularly large gains in noisier regimes that require stronger adaptation.",
+        "arxiv_id": "2607.18910",
+        "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+        "MATCHED_TOPIC_LABELS": [
+            "Architecture and Training Dynamics"
+        ],
+        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+        "HOTSPOT_PAPER_LABELS": [],
+        "HOTSPOT_PAPER_PRIMARY_KIND": null,
+        "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+    },
+    "2607.08783": {
+        "ARXIVID": "2607.08783",
+        "COMMENT": "Generalizes batch normalization across Lie groups with controlled manifold mean and variance.",
+        "RELEVANCE": 7,
+        "NOVELTY": 7,
+        "PRIMARY_TOPIC_ID": "architecture_training",
+        "MATCHED_TOPIC_IDS": [
+            "architecture_training"
+        ],
+        "TOPIC_MATCH_COMMENT": "It contributes a new normalization mechanism with accompanying theoretical guarantees.",
+        "HOTSPOT_PAPER_TAGS": [],
+        "HOTSPOT_PAPER_COMMENT": "",
+        "SCORE": 14,
+        "authors": [
+            "Ziheng Chen",
+            "Yue Song",
+            "Rui Wang",
+            "Xiao-Jun Wu",
+            "Nicu Sebe"
+        ],
+        "title": "LieBN: Batch Normalization over Lie Groups",
+        "abstract": "Manifold-valued measurements are prevalent in various machine learning tasks. Recent advances have extended Deep Neural Networks (DNNs) to operate on manifolds. These extensions have been accompanied by normalization techniques tailored to different geometries, collectively referred to as Riemannian normalization. However, most existing Riemannian normalization methods are either designed for specific manifolds or fail to effectively normalize manifold-valued sample distributions. To address these limitations, we propose LieBN, a framework for Riemannian Batch Normalization (RBN) over Lie groups. Our approach leverages the theoretically convenient left- and right-invariant metrics, which naturally exist in every Lie group, and provides theoretical guarantees for controlling the Riemannian mean and variance. We instantiate LieBN across nine distinct geometries: four on the Symmetric Positive Definite (SPD) manifold, one on the group of rotation matrices, and four on the manifold of full-rank correlation matrices. Notably, among the SPD metrics, we introduce a novel right-invariant metric and extend three existing Lie group structures via matrix power deformation. Experiments on different manifolds validate the effectiveness of our framework. The code is available at https://github.com/GitZH-Chen/LieBN.git.",
+        "arxiv_id": "2607.08783",
+        "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+        "MATCHED_TOPIC_LABELS": [
+            "Architecture and Training Dynamics"
+        ],
+        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+        "HOTSPOT_PAPER_LABELS": [],
+        "HOTSPOT_PAPER_PRIMARY_KIND": null,
+        "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+    },
+    "2607.19544": {
+        "ARXIVID": "2607.19544",
+        "COMMENT": "Stabilizes superlinear stochastic-gradient Langevin updates with localized adaptive taming.",
+        "RELEVANCE": 7,
+        "NOVELTY": 7,
+        "PRIMARY_TOPIC_ID": "training_systems",
+        "MATCHED_TOPIC_IDS": [
+            "training_systems",
+            "architecture_training"
+        ],
+        "TOPIC_MATCH_COMMENT": "A new stochastic optimizer is primary, with stability analysis also matching training dynamics.",
+        "HOTSPOT_PAPER_TAGS": [],
+        "HOTSPOT_PAPER_COMMENT": "",
+        "SCORE": 14,
+        "authors": [
+            "Yiwei Zhou",
+            "Ziheng Chen"
+        ],
+        "title": "RELTA-SGLD: Relative-Growth Localized Taming for Nonconvex Stochastic-Gradient Langevin Learning",
+        "abstract": "We introduce RELTA-SGLD, a taming scheme that stabilizes superlinear stochastic-gradient updates while reducing unnecessary suppression of the original learning drift. A threshold determines where the taming turns on, while a relative-growth principle derived from the one-step Lyapunov stability condition determines the required taming strength. Together, they produce a lighter $\u00ce\u00bb$-scale denominator and preserve a nonvanishing far-tail return. As a consequence, we prove polynomial moment stability and first-order stationary accuracy in both $W_1$ and $W_2$ for nonconvex SGLD with superlinearly growing stochastic-gradient oracles, improving the corresponding half-order and quarter-order bounds for comparable stochastic-gradient tamed schemes. On Fashion-MNIST under active stabilization pressure, RELTA improves the mean learning metrics over both untamed SGLD and TUSLA and remains competitive with a tuned AdamW reference. In an ordinary-training regime, its lighter localized denominator reduces unnecessary perturbation of the original update and maintains nearly untamed learning dynamics.",
+        "arxiv_id": "2607.19544",
+        "PRIMARY_TOPIC_LABEL": "Large-Scale Training Systems and Efficiency",
+        "MATCHED_TOPIC_LABELS": [
+            "Large-Scale Training Systems and Efficiency",
+            "Architecture and Training Dynamics"
+        ],
+        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+        "HOTSPOT_PAPER_LABELS": [],
+        "HOTSPOT_PAPER_PRIMARY_KIND": null,
+        "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+    },
+    "2607.19042": {
+        "ARXIVID": "2607.19042",
+        "COMMENT": "Analyzes higher-order neural architectures that use spectral weight sharing.",
+        "RELEVANCE": 7,
+        "NOVELTY": 6,
+        "PRIMARY_TOPIC_ID": "architecture_training",
+        "MATCHED_TOPIC_IDS": [
+            "architecture_training",
+            "efficiency_scaling"
+        ],
+        "TOPIC_MATCH_COMMENT": "Expressivity of the spectral architecture is primary, with parameter sharing providing compression.",
+        "HOTSPOT_PAPER_TAGS": [],
+        "HOTSPOT_PAPER_COMMENT": "",
+        "SCORE": 13,
+        "authors": [
+            "Gianluca Peri",
+            "Diego Febbe",
+            "Duccio Fanelli"
+        ],
+        "title": "Spectral Higher-Order Neural Networks Have Sharp Expressivity Bounds",
+        "abstract": "Neural hypergraphs are a natural generalization of neural networks, the reference models in modern machine learning. Yet, their deployment has proven demanding: the number of weighted hyperedges required leads to an intractable parameter explosion. However, a novel parametrization that leverages spectral attributes for neural hypergraphs has been recently proposed, that enables to recycle parameters via a weight sharing scheme and consequently yields a significant reduction of the associated computational cost. Preliminary tests carried out on spectral higher-order architectures pointed to meaningful improvements in both performance and interpretability. Building on these results, we advance the benchmarking efforts by evaluating the spectral higher order framework on N-bit parity tasks, a well-established testbed known to be particularly challenging. As we will convincingly argue, Spectral Higher-Order Neural Networks (SHONNs) possess a versatile and highly tunable hypothesis space.",
+        "arxiv_id": "2607.19042",
+        "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+        "MATCHED_TOPIC_LABELS": [
+            "Architecture and Training Dynamics",
+            "Efficiency, Compression, and Large-Scale Training"
+        ],
+        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+        "HOTSPOT_PAPER_LABELS": [],
+        "HOTSPOT_PAPER_PRIMARY_KIND": null,
+        "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+    },
+    "2607.22716": {
+        "ARXIVID": "2607.22716",
+        "COMMENT": "Uses language-space distance to iteratively prune misaligned visual tokens, reducing token computation.",
+        "RELEVANCE": 6,
+        "NOVELTY": 7,
+        "PRIMARY_TOPIC_ID": "efficiency_scaling",
+        "MATCHED_TOPIC_IDS": [
+            "efficiency_scaling"
+        ],
+        "TOPIC_MATCH_COMMENT": "Visual-token pruning is a direct compression mechanism, although robustness rather than efficiency is the main objective.",
+        "HOTSPOT_PAPER_TAGS": [],
+        "HOTSPOT_PAPER_COMMENT": "",
+        "SCORE": 13,
+        "authors": [
+            "Shishen Gu",
+            "Jiequan Cui",
+            "Wenbo Hu",
+            "Zenglin Shi",
+            "Zhenzhen Hu",
+            "Richang Hong"
+        ],
+        "title": "Visual Token Compression Enhances Robustness of MLLMs",
+        "abstract": "In this paper, we show for the first time that visual token pruning enhances the robustness of Multimodal Large Language Models (MLLMs), mitigating vulnerabilities such as jailbreak attacks and hallucinations. Given that vision and language modalities cannot be perfectly aligned, the misaligned visual tokens might act as out-of-distribution (OOD) inputs, leading to unpredictable outputs and introducing potential vulnerabilities. Building on this insight, we aim to enhance model robustness against jailbreaks and hallucinations by reducing OOD visual tokens at robust-pruning layers, while also reducing inference cost as a side benefit. Specifically, we measure the distance between each visual token and the language feature space. Then, visual tokens with large distances are identified as OOD tokens, which can be iteratively pruned. To demonstrate the effectiveness of our method, we evaluate it on seven diverse popular benchmarks. Notably, our method yields an average improvement of 13.29\\% in defending jailbreak attacks, consistently achieves competitive performance in mitigating hallucinations, and maintains strong results on general datasets like MME.",
+        "arxiv_id": "2607.22716",
+        "PRIMARY_TOPIC_LABEL": "Efficiency, Compression, and Large-Scale Training",
+        "MATCHED_TOPIC_LABELS": [
+            "Efficiency, Compression, and Large-Scale Training"
+        ],
+        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+        "HOTSPOT_PAPER_LABELS": [],
+        "HOTSPOT_PAPER_PRIMARY_KIND": null,
+        "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+    },
+    "2411.16073": {
+        "ARXIVID": "2411.16073",
+        "COMMENT": "Adapts frozen transformers using task-specific multiplicative masks with bounded parameter drift and unchanged backbone inference cost.",
+        "RELEVANCE": 6,
+        "NOVELTY": 7,
+        "PRIMARY_TOPIC_ID": "efficiency_scaling",
+        "MATCHED_TOPIC_IDS": [
+            "efficiency_scaling"
+        ],
+        "TOPIC_MATCH_COMMENT": "The strongest fit is a new parameter-efficient adaptation mechanism, although it targets continual learning.",
+        "HOTSPOT_PAPER_TAGS": [],
+        "HOTSPOT_PAPER_COMMENT": "",
+        "SCORE": 13,
+        "authors": [
+            "Haeyong Kang",
+            "Chang D. Yoo"
+        ],
+        "title": "Soft-TransFormers for Continual Learning",
+        "abstract": "Inspired by the Well-initialized Lottery Ticket Hypothesis (WLTH), we introduce Soft-TransFormers (Soft-TF), a continual learning framework that adapts a frozen pre-trained Transformer through task-specific soft subnetworks: real-valued multiplicative masks over the query, key, value, and output projections of selected self-attention layers. The masks are initialized at one, so optimization starts exactly at the pre-trained solution, and mask-space gradient descent is intrinsically biased toward modulating the backbone's dominant pathways; we prove that, under standard convex-Lipschitz assumptions, both the convergence rate and the parameter drift of mask-only fine-tuning are controlled by the distance from the pre-trained weights to a task-optimal configuration. This bounded drift yields two properties. Since the backbone and per-task masks are never overwritten, forgetting is structurally eliminated. And since every task subnetwork stays near the shared pre-trained solution, a wrong mask still evaluates a near-generalist function, so task-inference errors are largely harmless and class-incremental accuracy is decoupled from task-inference reliability. As a plug-in, Soft-TF couples with L2P, DualPrompt, HiDe-Prompt, and NoRGa, selecting masks by task-key matching, an entropy-gradient criterion, or a learned task-identity classifier. Across class-incremental learning benchmarks -- Split-CIFAR100, Split-ImageNet-R, CUB-200, and 5-Datasets -- Soft-TF consistently outperforms prompt-based, adapter-based, and LoRA-style baselines at comparable trainable-parameter budgets, while keeping inference cost identical to the unmodified backbone.",
+        "arxiv_id": "2411.16073",
+        "PRIMARY_TOPIC_LABEL": "Efficiency, Compression, and Large-Scale Training",
+        "MATCHED_TOPIC_LABELS": [
+            "Efficiency, Compression, and Large-Scale Training"
+        ],
+        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+        "HOTSPOT_PAPER_LABELS": [],
+        "HOTSPOT_PAPER_PRIMARY_KIND": null,
+        "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+    },
+    "2602.20293": {
+        "ARXIVID": "2602.20293",
+        "COMMENT": "Parameterizes discrete reverse diffusion with sample-efficient single-site conditional estimators rather than score analogues.",
+        "RELEVANCE": 6,
+        "NOVELTY": 7,
+        "PRIMARY_TOPIC_ID": "architecture_training",
+        "MATCHED_TOPIC_IDS": [
+            "architecture_training"
+        ],
+        "TOPIC_MATCH_COMMENT": "The paper proposes a new core computational formulation for discrete generative models.",
+        "HOTSPOT_PAPER_TAGS": [],
+        "HOTSPOT_PAPER_COMMENT": "",
+        "SCORE": 13,
+        "authors": [
+            "Karthik Elamvazhuthi",
+            "Abhijith Jayakumar",
+            "Andrey Y. Lokhov"
+        ],
+        "title": "Discrete Diffusion with Sample-Efficient Estimators for Conditionals",
+        "abstract": "We study a discrete denoising diffusion framework that integrates a sample-efficient estimator of single-site conditionals with round-robin noising and denoising dynamics for generative modeling over discrete state spaces. Rather than approximating a discrete analog of a score function, our formulation treats single-site conditional probabilities as the fundamental objects that parameterize the reverse diffusion process. We employ a sample-efficient method known as Neural Interaction Screening Estimator (NeurISE) to estimate these conditionals in the diffusion dynamics. Controlled experiments on synthetic Ising models, MNIST, and scientific data sets produced by a D-Wave quantum annealer, synthetic Potts model and one dimensional quantum systems demonstrate the proposed approach. On the binary data sets, these experiments demonstrate that the proposed approach outperforms popular existing methods including ratio-based approaches, achieving improved performance in total variation, cross-correlations, and kernel density estimation metrics.",
+        "arxiv_id": "2602.20293",
+        "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+        "MATCHED_TOPIC_LABELS": [
+            "Architecture and Training Dynamics"
+        ],
+        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+        "HOTSPOT_PAPER_LABELS": [],
+        "HOTSPOT_PAPER_PRIMARY_KIND": null,
+        "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+    },
+    "2510.25306": {
+        "ARXIVID": "2510.25306",
+        "COMMENT": "Embeds compositional physical structure into a hierarchical Fourier neural operator.",
+        "RELEVANCE": 6,
+        "NOVELTY": 7,
+        "PRIMARY_TOPIC_ID": "architecture_training",
+        "MATCHED_TOPIC_IDS": [
+            "architecture_training",
+            "efficiency_scaling"
+        ],
+        "TOPIC_MATCH_COMMENT": "The hierarchical operator design is primary, with a secondary parameter-complexity benefit.",
+        "HOTSPOT_PAPER_TAGS": [],
+        "HOTSPOT_PAPER_COMMENT": "",
+        "SCORE": 13,
+        "authors": [
+            "Xizhe Wang",
+            "Xiaobin Song",
+            "Hongbo Zhao",
+            "Qingshan Jia",
+            "Qianchuan Zhao",
+            "Hao Sun",
+            "Benben Jiang"
+        ],
+        "title": "Hierarchical Physics-Embedded Learning for Partially Known Spatiotemporal Dynamics",
+        "abstract": "Partial physical knowledge--governing structures known, constitutive relations or their combinations not--pervades spatiotemporal systems. Existing scientific machine learning paradigms learn evolution largely from data, impose equations as soft constraints, or hard-code physical terms into network updates; none exploits knowledge of this form. Here we introduce the hierarchical physics-embedded adaptive Fourier neural operator, encoding such knowledge as computational architecture rather than penalizing or appending it: a first level learns or embeds fundamental physical expressions as intermediate representations, and a second level learns or embeds their governing combination, with adaptive Fourier layers capturing nonlocal, high-order couplings at each level. We prove a hierarchical error decomposition--embedding known components removes or shrinks their terms, and a parameter-complexity advantage: when the hierarchy aligns with the compositional structure of the dynamics, the number of learnable Fourier parameters sufficient for a prescribed accuracy grows strictly more slowly than for a single-level operator. Across canonical phase-field systems and experimental hydrofoil wake data, our method reduces long horizon extrapolation errors by up to ~70% relative to state-of-the-art physics encoded and neural operator baselines, while preserving physically meaningful morphology, energetic consistency, and spectral structure, and maintaining robust performance under sparse and noisy observations. The separated intermediate representations further enable symbolic recovery of unknown constitutive relations in partially specified PDEs. These results establish hierarchical physics embedding as a theoretically grounded route to prediction and discovery when governing laws are neither fully known nor absent, but partially known and compositionally organized.",
+        "arxiv_id": "2510.25306",
+        "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+        "MATCHED_TOPIC_LABELS": [
+            "Architecture and Training Dynamics",
+            "Efficiency, Compression, and Large-Scale Training"
+        ],
+        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+        "HOTSPOT_PAPER_LABELS": [],
+        "HOTSPOT_PAPER_PRIMARY_KIND": null,
+        "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+    },
+    "2607.19191": {
+        "ARXIVID": "2607.19191",
+        "COMMENT": "Introduces LongForcing to reduce autoregressive drift during long world-model rollouts.",
+        "RELEVANCE": 6,
+        "NOVELTY": 7,
+        "PRIMARY_TOPIC_ID": "architecture_training",
+        "MATCHED_TOPIC_IDS": [
+            "architecture_training",
+            "efficiency_scaling"
+        ],
+        "TOPIC_MATCH_COMMENT": "Long-horizon teacher-student training is the strongest match, complemented by low-bit inference design.",
+        "HOTSPOT_PAPER_TAGS": [
+            "daily_hot"
+        ],
+        "HOTSPOT_PAPER_COMMENT": "Real-time 720p interactive world generation on one desktop GPU makes this a significant model release.",
+        "SCORE": 13,
+        "authors": [
+            "Fan Jiang",
+            "Zhaoxu Sun",
+            "Mengchao Wang",
+            "Ziyu Zhu",
+            "Chiyu Wang",
+            "Yunpeng Zhang",
+            "Wenlin Liu",
+            "Yun Wang",
+            "Xue Zheng",
+            "Rui Sun",
+            "Junfeng Ni",
+            "Hongyu Pan",
+            "Zhongxu Sun",
+            "Fei Yu",
+            "Zengye Ge",
+            "Mengmeng Du",
+            "Nianfei Fan",
+            "Mingchao Sun",
+            "Yu Liu",
+            "Yongchang",
+            "Yanqing Zhu",
+            "Jiahang Wang",
+            "Ning Ying",
+            "Yuze Xuan",
+            "Di Yang",
+            "Zhicheng Liu",
+            "Zhe Gao",
+            "Tingbing Xu",
+            "Jiacheng Sui",
+            "Wenjin Yang",
+            "Junnan Lai",
+            "Shufeng Liu",
+            "Yuan Liu",
+            "Zheng Zhou",
+            "Yingliang Peng",
+            "Dawei Cao",
+            "Kaifeng Sheng",
+            "Yuxiang Cai",
+            "Fei Lu",
+            "Mu Xu",
+            "Ning Guo"
+        ],
+        "title": "ABot-World-0: Infinite Interactive World Rollout on a Single Desktop GPU",
+        "abstract": "We present ABot-World-0, an action-conditioned video world model for real-time, long-horizon closed-loop interaction, supported by a multi-source data infrastructure spanning AAA games, simulation engines, and internet videos to learn controllable world dynamics. WorldExplorer performs agent-driven collection guided by training feedback, while a unified pipeline applies 14 deterministic quality checks, VLM-based assessment, and synchronized action and text annotation. We progressively distill a bidirectional action-conditioned teacher into a causal student through teacher forcing and ODE distillation, and introduce LongForcing to align long student self-rollouts with an extended-horizon teacher, mitigating accumulated distribution shift and autoregressive drift. Raw keyboard actions provide a unified control interface for scene roaming and third-person character interaction, while reference-character memory provides persistent appearance cues for identity consistency during third-person rollouts. For deployment, we co-design a streaming inference stack with a lightweight VAE decoder, efficient attention, memory-aware scheduling, and low-bit DiT inference. Across optimized low-bit configurations, ABot-World-0 streams 720P video at up to 16 FPS on a single NVIDIA RTX 5090 desktop GPU, with 1.2s action-to-first-frame latency and approximately 19GiB peak VRAM. Experiments on WorldRoamBench and extended interactive rollouts demonstrate competitive controllability and coherent long-horizon world evolution.",
+        "arxiv_id": "2607.19191",
+        "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+        "MATCHED_TOPIC_LABELS": [
+            "Architecture and Training Dynamics",
+            "Efficiency, Compression, and Large-Scale Training"
+        ],
+        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+        "HOTSPOT_PAPER_LABELS": [
+            "Daily Hot Papers"
+        ],
+        "HOTSPOT_PAPER_PRIMARY_KIND": "daily_hot",
+        "HOTSPOT_PAPER_PRIMARY_LABEL": "Daily Hot Papers",
+        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "llm_exact"
+    },
+    "2607.18883": {
+        "ARXIVID": "2607.18883",
+        "COMMENT": "Learns nonlinear amortized message passing for latent-variable models.",
+        "RELEVANCE": 6,
+        "NOVELTY": 7,
+        "PRIMARY_TOPIC_ID": "architecture_training",
+        "MATCHED_TOPIC_IDS": [
+            "architecture_training"
+        ],
+        "TOPIC_MATCH_COMMENT": "The learned message-passing computation is a substantive architectural mechanism.",
+        "HOTSPOT_PAPER_TAGS": [],
+        "HOTSPOT_PAPER_COMMENT": "",
+        "SCORE": 13,
+        "authors": [
+            "Lior Fox",
+            "Kai Biegun",
+            "James Heald",
+            "Samo Hromadka",
+            "Arielle Rosinski",
+            "Maneesh Sahani"
+        ],
+        "title": "RAMP: Recognition parametrisation by Amortised Message Passing",
+        "abstract": "A central aim of unsupervised learning is to uncover latent factors that explain dependencies among observations. Probabilistic models typically achieve this by introducing multiple latent variables linked through a graph of conditional relationships, with distributional parameters and their dependence learnt from data. Learning relies either on distributional choices that allow tractable belief propagation, or on approximations that scale poorly with model size and complexity. We build on the recently developed recognition-parametrised modelling paradigm to propose an alternative approach: RAMP, a method that implicitly defines latent structure by learning a flexible, nonlinear, amortised message-passing framework. We show that RAMP enables efficient likelihood-based recovery of latent-variable distributions within expressive nonlinear models acting on complex high-dimensional data.",
+        "arxiv_id": "2607.18883",
+        "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+        "MATCHED_TOPIC_LABELS": [
+            "Architecture and Training Dynamics"
+        ],
+        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+        "HOTSPOT_PAPER_LABELS": [],
+        "HOTSPOT_PAPER_PRIMARY_KIND": null,
+        "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+    },
+    "2607.18802": {
+        "ARXIVID": "2607.18802",
+        "COMMENT": "Adaptively schedules zeroth-order gradient samples for memory-constrained INT8 training on embedded NPUs.",
+        "RELEVANCE": 6,
+        "NOVELTY": 6,
+        "PRIMARY_TOPIC_ID": "efficiency_scaling",
+        "MATCHED_TOPIC_IDS": [
+            "efficiency_scaling"
+        ],
+        "TOPIC_MATCH_COMMENT": "It materially reduces the tuning and memory burden of low-precision on-device training, albeit at small scale.",
+        "HOTSPOT_PAPER_TAGS": [],
+        "HOTSPOT_PAPER_COMMENT": "",
+        "SCORE": 12,
+        "authors": [
+            "Victor Felipe Domingues Do Amaral",
+            "Pierre Demaj",
+            "Erwan Libessart",
+            "Laurent Folliot",
+            "Anthony Kolar",
+            "Philippe B\u00c3\u00a9nab\u00c3\u00a8s"
+        ],
+        "title": "QScheduler: Adaptive Gradient Sampling for Zeroth-Order On-Device Training on INT8 NPUs",
+        "abstract": "Zeroth-Order (ZO) optimization enables On-Device Learning (ODL) on NPU-equipped microcontrollers by estimating gradients through forward passes alone, bypassing the need for backpropagation primitives and reducing memory requirements. The number of gradient samples q critically affects training: insufficient samples produce noisy gradients that plateau early, while excessive samples consume more computational resources. However, finding an optimal q typically requires costly hyperparameter searches. This work introduces QScheduler, an adaptive algorithm that adjusts q based on training progress, and provides the first proof-of-concept of INT8 quantized on-device training on the STM32N6's Neural-ART NPU. Experiments on EuroSAT and STL-10 show that QScheduler matches well-tuned fixed-q configurations for both ResNet18 and MobileNetV2, without requiring prior q hyperparameter optimization.",
+        "arxiv_id": "2607.18802",
+        "PRIMARY_TOPIC_LABEL": "Efficiency, Compression, and Large-Scale Training",
+        "MATCHED_TOPIC_LABELS": [
+            "Efficiency, Compression, and Large-Scale Training"
+        ],
+        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+        "HOTSPOT_PAPER_LABELS": [],
+        "HOTSPOT_PAPER_PRIMARY_KIND": null,
+        "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+    },
+    "2509.12484": {
+        "ARXIVID": "2509.12484",
+        "COMMENT": "Imposes graph-guided fixed sparsity to reduce trainable network parameters.",
+        "RELEVANCE": 6,
+        "NOVELTY": 6,
+        "PRIMARY_TOPIC_ID": "architecture_training",
+        "MATCHED_TOPIC_IDS": [
+            "architecture_training",
+            "efficiency_scaling"
+        ],
+        "TOPIC_MATCH_COMMENT": "A new sparse neural architecture is primary, while parameter reduction supplies an efficiency match.",
+        "HOTSPOT_PAPER_TAGS": [],
+        "HOTSPOT_PAPER_COMMENT": "",
+        "SCORE": 12,
+        "authors": [
+            "Ruimeng Hu",
+            "Jihao Long",
+            "Haosheng Zhou"
+        ],
+        "title": "Finite-Agent Stochastic Differential Games on Large Graphs: II. Graph-Based Architectures",
+        "abstract": "We propose a novel neural network architecture, called Non-Trainable Modification (NTM), for computing Nash equilibria in stochastic differential games (SDGs) on graphs. These games model a broad class of graph-structured multi-agent systems arising in finance, robotics, energy, and social dynamics, where agents interact locally under uncertainty. The NTM architecture imposes a graph-guided sparsification on feedforward neural networks, embedding fixed, non-trainable components aligned with the underlying graph topology. This design enhances interpretability and stability, while significantly reducing the number of trainable parameters in large-scale, sparse settings. We theoretically establish a universal approximation property for NTM in static games on graphs and numerically validate its expressivity and robustness through supervised learning tasks. Building on this foundation, we incorporate NTM into two state-of-the-art game solvers, Direct Parameterization and Deep BSDE (backward stochastic differential equation), yielding their sparse variants (NTM-DP and NTM-DBSDE). Numerical experiments on three SDGs across various graph structures demonstrate that NTM-based methods achieve performance comparable to their fully trainable counterparts, while offering improved computational efficiency.",
+        "arxiv_id": "2509.12484",
+        "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+        "MATCHED_TOPIC_LABELS": [
+            "Architecture and Training Dynamics",
+            "Efficiency, Compression, and Large-Scale Training"
+        ],
+        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+        "HOTSPOT_PAPER_LABELS": [],
+        "HOTSPOT_PAPER_PRIMARY_KIND": null,
+        "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+    }
+}

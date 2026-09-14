@@ -1,0 +1,277 @@
+{
+    "schema_version": 2,
+    "meta": {
+        "date": "2026-01-23",
+        "sort": [
+            "score",
+            "relevance"
+        ],
+        "topic_schema_version": 2,
+        "total_papers": 4,
+        "usage": {
+            "model": "llmcall:cc+codexg",
+            "prompt_tokens": 0,
+            "completion_tokens": 0,
+            "prompt_cost": 0.0,
+            "completion_cost": 0.0,
+            "total_arxiv_papers": 222,
+            "total_scanned_papers": 222,
+            "total_relevant_papers": 4,
+            "filter_health": {
+                "status": "ok",
+                "scanned_papers": 222,
+                "selected_papers": 4,
+                "llm_tokens": 0,
+                "message": "Scored 222 papers with 4/4 successful model calls; 4 selected."
+            },
+            "llm": {
+                "backend": "LLM backend: llmcall chain=codexg->codex->cc->claude",
+                "attempted": 4,
+                "succeeded": 4,
+                "failed": 0,
+                "by_backend": {
+                    "llmcall": 4
+                },
+                "by_provider": {
+                    "cc": 3,
+                    "codexg": 1
+                },
+                "errors": [],
+                "seconds": 365.3,
+                "trace": [
+                    "codexg: unavailable after 13.2s of 543.7s (OpenAI Codex v0.154.0",
+                    "codex: unavailable after 5.2s of 549.3s (OpenAI Codex v0.154.0",
+                    "cc: answered in 15.8s of 562.8s",
+                    "codexg: unavailable after 6.8s of 543.7s (2026-09-11T04:32:58.767773Z ERROR codex_models_manager::manager: failed to refresh available models: stream disconnected before completion: failed to decode models response: missing field `models` at )",
+                    "codex: unavailable after 4.9s of 555.7s (OpenAI Codex v0.154.0",
+                    "cc: answered in 16.0s of 569.5s",
+                    "codexg: unavailable after 5.4s of 543.7s (OpenAI Codex v0.154.0",
+                    "codex: unavailable after 4.6s of 557.1s (OpenAI Codex v0.154.0",
+                    "cc: answered in 148.5s of 571.2s",
+                    "codexg: answered in 144.8s of 543.7s"
+                ]
+            },
+            "remedied": true
+        }
+    },
+    "topic_order": [
+        "moe_training",
+        "training_systems",
+        "architecture_training",
+        "efficiency_scaling",
+        "representation_structure",
+        "memory_systems",
+        "world_models_open_ended_rl"
+    ],
+    "diagnostics": {
+        "total_papers": 4,
+        "topic_counts": [
+            {
+                "topic_id": "moe_training",
+                "topic_label": "MoE Training",
+                "paper_count": 0
+            },
+            {
+                "topic_id": "training_systems",
+                "topic_label": "Large-Scale Training Systems and Efficiency",
+                "paper_count": 1
+            },
+            {
+                "topic_id": "architecture_training",
+                "topic_label": "Architecture and Training Dynamics",
+                "paper_count": 1
+            },
+            {
+                "topic_id": "efficiency_scaling",
+                "topic_label": "Efficiency, Compression, and Large-Scale Training",
+                "paper_count": 2
+            },
+            {
+                "topic_id": "representation_structure",
+                "topic_label": "Representation Learning Theory and Structure",
+                "paper_count": 0
+            },
+            {
+                "topic_id": "memory_systems",
+                "topic_label": "Memory Structures and Agent Memory Systems",
+                "paper_count": 0
+            },
+            {
+                "topic_id": "world_models_open_ended_rl",
+                "topic_label": "World Models, Exploration, and Open-Ended Reinforcement Learning",
+                "paper_count": 0
+            }
+        ],
+        "assignment_source_counts": {
+            "llm_exact": 4
+        },
+        "llm_assignment_count": 4,
+        "heuristic_assignment_count": 0,
+        "default_assignment_count": 0,
+        "invalid_primary_topic_fallback_count": 0,
+        "missing_primary_topic_fallback_count": 0,
+        "hotspot_paper_kind_counts": {
+            "new_frontier": 0,
+            "daily_hot": 0
+        },
+        "hotspot_paper_assignment_source_counts": {
+            "default": 4
+        }
+    },
+    "papers": {
+        "2601.16294": {
+            "ARXIVID": "2601.16294",
+            "COMMENT": "Space-filling-curve partitioning produces communication-avoiding GEMM kernels with provably minimal data movement.",
+            "RELEVANCE": 8,
+            "NOVELTY": 7,
+            "PRIMARY_TOPIC_ID": "efficiency_scaling",
+            "MATCHED_TOPIC_IDS": [
+                "training_systems",
+                "efficiency_scaling"
+            ],
+            "TOPIC_MATCH_COMMENT": "The core mechanism improves GEMM memory locality and compute efficiency; distributed matrix-multiplication benefits also connect to training systems.",
+            "HOTSPOT_PAPER_TAGS": [],
+            "HOTSPOT_PAPER_COMMENT": "",
+            "SCORE": 15,
+            "authors": [
+                "Evangelos Georganas",
+                "Alexander Heinecke",
+                "Pradeep Dubey"
+            ],
+            "title": "Space Filling Curves is All You Need: Communication-Avoiding Matrix Multiplication Made Simple",
+            "abstract": "General Matrix Multiplication (GEMM) is the cornerstone of HPC workloads and Deep Learning. State-of-the-art vendor libraries tune tensor layouts, parallelization schemes, and cache blocking to minimize data movement across the memory hierarchy and maximize throughput. Optimal settings for these parameters depend on the target platform and matrix shapes, making exhaustive tuning infeasible. We revisit Space Filling Curves (SFC) to alleviate this cumbersome tuning. We partition the Matrix Multiplication using advancements in SFC, and obtain platform-oblivious and shape-oblivious Matrix Multiplication schemes with high degree of data locality. We extend the SFC-based work partitioning to implement Communication-Avoiding (CA) algorithms that provably minimize data movement. The integration of CA-algorithms is seamless with compact code, achieving state-of-the-art results on multiple CPU platforms, outperforming vendor libraries up to 5.5x for a range of GEMM-shapes (1.8x Weighted Harmonic Mean speedup). We show the impact of our work on two real-world applications by leveraging our GEMM as compute backend: i) prefill of LLM inference with speedups up to 1.85x over State-Of-The-Art, and ii) distributed-memory Matrix Multiplication with speedups up to 2.2x.",
+            "arxiv_id": "2601.16294",
+            "PRIMARY_TOPIC_LABEL": "Efficiency, Compression, and Large-Scale Training",
+            "MATCHED_TOPIC_LABELS": [
+                "Large-Scale Training Systems and Efficiency",
+                "Efficiency, Compression, and Large-Scale Training"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [],
+            "HOTSPOT_PAPER_PRIMARY_KIND": null,
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+        },
+        "2602.13215": {
+            "ARXIVID": "2602.13215",
+            "COMMENT": "Entropy-gated, gradient-free dynamic computation: attention blocks fire only when output entropy exceeds a running-median threshold, so a recurrent backbone invokes attention on ~22% of tokens.",
+            "RELEVANCE": 8,
+            "NOVELTY": 6,
+            "PRIMARY_TOPIC_ID": "architecture_training",
+            "MATCHED_TOPIC_IDS": [
+                "architecture_training",
+                "efficiency_scaling"
+            ],
+            "TOPIC_MATCH_COMMENT": "The contribution is an architectural mechanism for conditional computation inside recurrent-attention hybrids (Mamba2, Gated DeltaNet), which is squarely architecture and dynamic computation.",
+            "HOTSPOT_PAPER_TAGS": [],
+            "HOTSPOT_PAPER_COMMENT": "",
+            "SCORE": 14,
+            "authors": [
+                "Haoran Zheng",
+                "Chen Shani"
+            ],
+            "title": "When to Think Fast and Slow? AMOR: Adaptive Entropy Gate for Hybrid Models",
+            "abstract": "Recurrent-attention hybrids aim to combine the efficiency of recurrence with the expressivity of attention, but existing approaches typically apply attention uniformly across all positions, even when the recurrent state alone is sufficient for accurate prediction. We introduce AMOR (Adaptive Metacognitive Output Router), a post-hoc hybrid architecture that selectively invokes attention based on predictive uncertainty. A recurrent backbone is augmented with entropy-gated attention blocks that activate only when the model's output entropy exceeds a dynamic threshold derived from a running batch median and scaled standard deviation. This yields a simple, gradient-free routing mechanism inspired by uncertainty-driven computation and the System 1 / System 2 distinction. Across Mamba2 and Gated DeltaNet backbones (180M-1.5B), AMOR consistently matches or outperforms both pure recurrent models and fixed-schedule hybrid baselines while invoking attention on only ~22% of tokens. It achieves strong performance on common-sense reasoning benchmarks and maintains stable long-context performance on LongBench, where prior hybrid models degrade under distribution shift. These results suggest that when attention is applied matters as much as how much: selectively allocating attention based on predictive uncertainty improves both efficiency and robustness, offering a simple alternative to uniform or fixed routing strategies and pointing toward adaptive hybrid architectures that dynamically match computation to input difficulty.",
+            "arxiv_id": "2602.13215",
+            "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+            "MATCHED_TOPIC_LABELS": [
+                "Architecture and Training Dynamics",
+                "Efficiency, Compression, and Large-Scale Training"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [],
+            "HOTSPOT_PAPER_PRIMARY_KIND": null,
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+        },
+        "2601.16032": {
+            "ARXIVID": "2601.16032",
+            "COMMENT": "Pinpoints the L2 miss source in CuTile FlashAttention on GB10 and reorders tile wavefronts in a sawtooth pattern, cutting L2 misses by >=50% and lifting attention throughput up to 60%.",
+            "RELEVANCE": 7,
+            "NOVELTY": 6,
+            "PRIMARY_TOPIC_ID": "training_systems",
+            "MATCHED_TOPIC_IDS": [
+                "training_systems",
+                "efficiency_scaling"
+            ],
+            "TOPIC_MATCH_COMMENT": "A concrete attention-kernel scheduling technique grounded in measured cache behaviour, which is the kernel and throughput layer of large-scale training systems.",
+            "HOTSPOT_PAPER_TAGS": [],
+            "HOTSPOT_PAPER_COMMENT": "",
+            "SCORE": 13,
+            "authors": [
+                "Yifan Zhu",
+                "Yekai Pan",
+                "Chen Ding"
+            ],
+            "title": "Sawtooth Wavefront Reordering: Enhanced CuTile FlashAttention on NVIDIA GB10",
+            "abstract": "High-performance attention kernels are essential for Large Language Models. This paper presents analysis of CuTile-based Flash Attention memory behavior and a technique to improve its cache performance. In particular, our analysis on the NVIDIA GB10 (Grace Blackwell) identifies the main cause of L2 cache miss. Leveraging this insight, we introduce a new programming technique called Sawtooth Wavefront Reordering that reduces L2 misses. We validate it in both CUDA and CuTile, observing 50\\% or greater reduction in L2 misses and up to 60\\% increase in throughput on GB10.",
+            "arxiv_id": "2601.16032",
+            "PRIMARY_TOPIC_LABEL": "Large-Scale Training Systems and Efficiency",
+            "MATCHED_TOPIC_LABELS": [
+                "Large-Scale Training Systems and Efficiency",
+                "Efficiency, Compression, and Large-Scale Training"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [],
+            "HOTSPOT_PAPER_PRIMARY_KIND": null,
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+        },
+        "2601.16366": {
+            "ARXIVID": "2601.16366",
+            "COMMENT": "Pruning criterion from Ollivier-Ricci curvature over the activation-induced network graph, ranking edges by bottleneck structure instead of information-theoretic saliency.",
+            "RELEVANCE": 6,
+            "NOVELTY": 6,
+            "PRIMARY_TOPIC_ID": "efficiency_scaling",
+            "MATCHED_TOPIC_IDS": [
+                "efficiency_scaling"
+            ],
+            "TOPIC_MATCH_COMMENT": "Core contribution is a new sparsity/pruning importance measure, which is efficiency and compression; validation is limited to small and medium image models.",
+            "HOTSPOT_PAPER_TAGS": [],
+            "HOTSPOT_PAPER_COMMENT": "",
+            "SCORE": 12,
+            "authors": [
+                "Shuhang Tan",
+                "Jayson Sia",
+                "Paul Bogdan",
+                "Radoslav Ivanov"
+            ],
+            "title": "Post-Training Neural Network Pruning using Graph Curvature",
+            "abstract": "This paper provides a fresh view of the neural network (NN) pruning problem through the lens of graph theory. To achieve effective pruning, we aim to identify the main NN data flows and the corresponding NN connections that are most and least important for the performance of the full model. Unlike the standard approach to NN data flow analysis, which is based on information theory, we employ the notion of graph curvature, specifically Ollivier-Ricci curvature (ORC). ORC has been successfully used to identify important graph edges in various domains such as road traffic analysis, biological networks, and social networks. In particular, edges with negative ORC are considered bottlenecks and are therefore critical to the graph's overall connectivity, whereas positive-ORC edges are less essential. We use this intuition for NNs to (1) construct a graph induced by the NN structure and introduce the notion of neural curvature (NC) based on ORC; (2) calculate curvatures based on activation patterns for a set of input examples; and (3) demonstrate that NC can be used to rank edges according to their importance for overall NN functionality. We evaluate our method through pruning experiments on a variety of small and medium size models trained on three image datasets: MNIST, CIFAR-10, and CIFAR-100. The results indicate that our method can identify a larger number of unimportant edges compared to existing pruning methods.",
+            "arxiv_id": "2601.16366",
+            "PRIMARY_TOPIC_LABEL": "Efficiency, Compression, and Large-Scale Training",
+            "MATCHED_TOPIC_LABELS": [
+                "Efficiency, Compression, and Large-Scale Training"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [],
+            "HOTSPOT_PAPER_PRIMARY_KIND": null,
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+        }
+    },
+    "topic_sections": [
+        {
+            "topic_id": "training_systems",
+            "topic_label": "Large-Scale Training Systems and Efficiency",
+            "paper_ids": [
+                "2601.16032"
+            ]
+        },
+        {
+            "topic_id": "architecture_training",
+            "topic_label": "Architecture and Training Dynamics",
+            "paper_ids": [
+                "2602.13215"
+            ]
+        },
+        {
+            "topic_id": "efficiency_scaling",
+            "topic_label": "Efficiency, Compression, and Large-Scale Training",
+            "paper_ids": [
+                "2601.16294",
+                "2601.16366"
+            ]
+        }
+    ]
+}

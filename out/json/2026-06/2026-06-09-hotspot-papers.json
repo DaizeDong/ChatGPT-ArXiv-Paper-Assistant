@@ -2,8 +2,8 @@
     "schema_version": 1,
     "meta": {
         "date": "2026-06-09",
-        "total_candidates": 0,
-        "total_spotlight_papers": 0,
+        "total_candidates": 73,
+        "total_spotlight_papers": 2,
         "thresholds": {
             "daily_hot_score_cutoff": 15,
             "daily_hot_relevance_cutoff": 7,
@@ -18,10 +18,119 @@
     "diagnostics": {
         "candidate_count_by_kind": {
             "new_frontier": 0,
-            "daily_hot": 0
+            "daily_hot": 2
         },
-        "selected_count_by_kind": {}
+        "selected_count_by_kind": {
+            "daily_hot": 2
+        }
     },
-    "papers": {},
-    "sections": []
+    "papers": {
+        "2606.09079": {
+            "ARXIVID": "2606.09079",
+            "COMMENT": "Lookahead KV-chunk selection reduces cache residency using an indexer trained independently of the backbone.",
+            "RELEVANCE": 9,
+            "NOVELTY": 8,
+            "PRIMARY_TOPIC_ID": "efficiency_scaling",
+            "MATCHED_TOPIC_IDS": [
+                "efficiency_scaling"
+            ],
+            "TOPIC_MATCH_COMMENT": "Learned sparse attention directly reduces long-context KV memory and decoding compute.",
+            "HOTSPOT_PAPER_TAGS": [
+                "daily_hot"
+            ],
+            "HOTSPOT_PAPER_COMMENT": "Broadly important today: Lookahead KV-chunk selection reduces cache residency using an indexer trained independently of the backbone.",
+            "SCORE": 17,
+            "authors": [
+                "Yan Wang",
+                "Qifan Zhang",
+                "Jiachen Yu",
+                "Tian Liang",
+                "Dongyang Ma",
+                "Xiang Hu",
+                "Zibo Lin",
+                "Chunyang Li",
+                "Zhichao Wang",
+                "Miao Peng",
+                "Nuo Chen",
+                "Jia Li",
+                "Yujiu Yang",
+                "Haitao Mi",
+                "Dong Yu"
+            ],
+            "title": "FlashMemory-DeepSeek-V4: Lightning Index Ultra-Long Context via Lookahead Sparse Attention",
+            "abstract": "Conventional LLMs keep the full KV cache loaded during decoding, causing a severe GPU memory bottleneck for ultra-long context serving. In this report, we propose \\textbf{Lookahead Sparse Attention (LSA)}, a novel inference paradigm powered by a Neural Memory Indexer built upon the DeepSeek-V4 architecture. Rather than passively attending to all historical tokens, LSA proactively predicts future context demands and preserves only the query-critical KV chunks in the GPU memory. Crucially, we instantiate this architecture via a \\textbf{backbone-free decoupled training} strategy. By formulating the indexer as a standard dual-encoder architecture, we train it independently using standard retrieval training frameworks without ever loading the massive backbone model into GPU memory. We demonstrate that this ``less is more'' paradigm significantly maximizes serving efficiency while acting as an effective attention denoiser in tasks that rely on long-term global memory. Across primary long-context evaluation suites (e.g., LongBench-v2, LongMemEval, and RULER), \\texttt{FM-DS-V4} compresses the average physical KV cache footprint down to merely 13.5\\% of the full-context baseline, while consistently preserving or slightly elevating downstream accuracy (+0.6\\% absolute margin on average). At 1M context, per-decode-token compute drops to 0.30$\\times$ of the baseline and GPU KV cache shrinks by 90\\% (3.73$\\to$0.37 GB), translating into \\textbf{2.8$\\times$ aggregate throughput and 2.7$\\times$ concurrency gains} in PD-disaggregated serving on 8$\\times$H20 GPUs.",
+            "arxiv_id": "2606.09079",
+            "PRIMARY_TOPIC_LABEL": "Efficiency, Compression, and Large-Scale Training",
+            "MATCHED_TOPIC_LABELS": [
+                "Efficiency, Compression, and Large-Scale Training"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [
+                "Daily Hot Papers"
+            ],
+            "HOTSPOT_PAPER_PRIMARY_KIND": "daily_hot",
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "Daily Hot Papers",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "heuristic"
+        },
+        "2606.09659": {
+            "ARXIVID": "2606.09659",
+            "COMMENT": "End-to-end pretrained encoder-decoder compression replaces long token contexts with compact latent sequences.",
+            "RELEVANCE": 9,
+            "NOVELTY": 7,
+            "PRIMARY_TOPIC_ID": "efficiency_scaling",
+            "MATCHED_TOPIC_IDS": [
+                "architecture_training",
+                "efficiency_scaling"
+            ],
+            "TOPIC_MATCH_COMMENT": "Learned context compression directly reduces memory costs, supported by compressor architecture search and large-scale pretraining.",
+            "HOTSPOT_PAPER_TAGS": [
+                "daily_hot"
+            ],
+            "HOTSPOT_PAPER_COMMENT": "A family of compressors trained on over 350B tokens each improves the long-context accuracy, compression-speed, and memory frontier.",
+            "SCORE": 16,
+            "authors": [
+                "Ang Li",
+                "Sean McLeish",
+                "Haozhe Chen",
+                "Nimit Kalra",
+                "Zaiqian Chen",
+                "Artem Gazizov",
+                "Venkata Anoop Suhas Kumar Morisetty",
+                "Bhavya Kailkhura",
+                "Harshitha Menon",
+                "Zhuang Liu",
+                "Brian R. Bartoldson",
+                "Tom Goldstein",
+                "Sanae Lotfi",
+                "Micah Goldblum",
+                "Pavel Izmailov"
+            ],
+            "title": "End-to-End Context Compression at Scale",
+            "abstract": "Long-context language model inference is bottlenecked by memory, as the KV cache grows with context length. Recent techniques to compress the KV cache fall short: they either degrade model quality substantially or require considerable time and compute to compress a single long prompt. Furthermore, many methods require the input to fit within the target model's context window, and are generally incompatible with modern production inference engines. Encoder-decoder compressors, which map a long token sequence to a shorter sequence of latent embeddings consumed by a decoder, are an appealing alternative in principle. However, existing approaches are not competitive with KV cache compression on the accuracy-efficiency frontier. In this work, we revisit encoder-decoder compression and close this gap. We first perform an architecture search, pre-training many variants from scratch to determine how best to design and train encoder-decoder compressors. Guided by our findings, we continually pre-train a family of 0.6B-encoder, 4B-decoder models on over 350B tokens each, at compression ratios of 1:4, 1:8, and 1:16. We introduce Latent Context Language Models (LCLMs), a family of compressors that improve the Pareto frontier across general-task performance, compression speed, and peak memory usage. We demonstrate that LCLMs serve as efficient backbones for long-horizon agents, letting the agent skim through a compressed long context and adaptively expand relevant segments on demand.",
+            "arxiv_id": "2606.09659",
+            "PRIMARY_TOPIC_LABEL": "Efficiency, Compression, and Large-Scale Training",
+            "MATCHED_TOPIC_LABELS": [
+                "Architecture and Training Dynamics",
+                "Efficiency, Compression, and Large-Scale Training"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [
+                "Daily Hot Papers"
+            ],
+            "HOTSPOT_PAPER_PRIMARY_KIND": "daily_hot",
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "Daily Hot Papers",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "llm_exact"
+        }
+    },
+    "sections": [
+        {
+            "kind": "daily_hot",
+            "label": "Daily Hot Papers",
+            "description": "Papers that feel broadly important to the day and belong in the hotspot paper feed.",
+            "paper_ids": [
+                "2606.09079",
+                "2606.09659"
+            ]
+        }
+    ]
 }

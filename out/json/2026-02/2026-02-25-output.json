@@ -1,0 +1,382 @@
+{
+    "2603.18017": {
+        "ARXIVID": "2603.18017",
+        "COMMENT": "Geometric account of RoPE length failure via key/query cluster separation and attention-sink suppression, plus a high-frequency channel-subset fix.",
+        "RELEVANCE": 8,
+        "NOVELTY": 7,
+        "PRIMARY_TOPIC_ID": "architecture_training",
+        "MATCHED_TOPIC_IDS": [
+            "architecture_training"
+        ],
+        "TOPIC_MATCH_COMMENT": "Mechanistic analysis of a core attention component that directly yields a positional-encoding design change.",
+        "HOTSPOT_PAPER_TAGS": [],
+        "HOTSPOT_PAPER_COMMENT": "",
+        "SCORE": 15,
+        "authors": [
+            "Davis Wertheimer",
+            "Aozhong Zhang",
+            "Derrick Liu",
+            "Penghang Yin",
+            "Naigang Wang"
+        ],
+        "title": "Frayed RoPE and Long Inputs: A Geometric Perspective",
+        "abstract": "Rotary Positional Embedding (RoPE) is a widely adopted technique for encoding position in language models, which, while effective, causes performance breakdown when input length exceeds training length. Prior analyses assert (rightly) that long inputs cause channels to rotate ``out of distribution,'' but it is not clear how extra rotation relates to or causes pathological behavior. Through empirical and theoretical analysis we advance a unified geometric understanding of attention behavior with RoPE. We find that attention induces tight clustering of separated key and query latent point clouds, allowing for creation of sink tokens: placeholders that allow attention heads to avoid token mixing when not required. RoPE applied to longer inputs damages this key/query cluster separation, producing pathological behavior by inhibiting sink token functionality. From this geometric perspective, we propose RoPE-ID (In Distribution), a straightforward modification that allows attention layers to generalize to longer inputs out of the box: apply RoPE with high frequency to a subset of channels. We demonstrate the effectiveness of RoPE-ID for extended inputs using 1B and 3B parameter Transformers on the LongBench and RULER information retrieval benchmarks.",
+        "arxiv_id": "2603.18017",
+        "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+        "MATCHED_TOPIC_LABELS": [
+            "Architecture and Training Dynamics"
+        ],
+        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+        "HOTSPOT_PAPER_LABELS": [],
+        "HOTSPOT_PAPER_PRIMARY_KIND": null,
+        "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+    },
+    "2602.21144": {
+        "ARXIVID": "2602.21144",
+        "COMMENT": "Tensor-parallel partitioning of the selective-SSM mixer that keeps recurrent state updates local, plus quantized AllReduce to cut synchronization bandwidth.",
+        "RELEVANCE": 8,
+        "NOVELTY": 6,
+        "PRIMARY_TOPIC_ID": "training_systems",
+        "MATCHED_TOPIC_IDS": [
+            "training_systems",
+            "architecture_training",
+            "efficiency_scaling"
+        ],
+        "TOPIC_MATCH_COMMENT": "Tensor parallelism and collective design for a sequence-model architecture is squarely a distributed-systems contribution.",
+        "HOTSPOT_PAPER_TAGS": [],
+        "HOTSPOT_PAPER_COMMENT": "",
+        "SCORE": 14,
+        "authors": [
+            "Anurag Dutt",
+            "Nimit Shah",
+            "Hazem Masarani",
+            "Anshul Gandhi"
+        ],
+        "title": "Scaling State-Space Models on Multiple GPUs with Tensor Parallelism",
+        "abstract": "Selective state space models (SSMs) have rapidly become a compelling backbone for large language models, especially for long-context workloads. Yet in deployment, their inference performance is often bounded by the memory capacity, bandwidth, and latency limits of a single GPU, making multi-GPU execution increasingly necessary. Although tensor parallelism (TP) is widely used to scale Transformer inference, applying it to selective SSM blocks is non-trivial because the SSM mixer couples large projections with a sequence-wise recurrent state update and local mixing whose efficiency depends on preserving locality and avoiding synchronization in the critical path. This paper presents a communication-efficient TP design for selective SSM inference that addresses three practical engineering challenges: enabling TTFT improvements via an SSM state cache across prefill and decode, partitioning the mixer's packed parameter tensor so that recurrent updates remain local while minimizing communication, and reducing TP aggregation overhead with quantized AllReduce. We evaluate on three representative SSM-based LLMs spanning pure-SSM and hybrid architectures - Mamba, Falcon-Mamba, and Zamba - on NVIDIA A6000 and A100 clusters. Our experiments show substantial throughput gains from tensor-parallel SSM inference, improving batch-request throughput by ~1.6-2.1x on 2 GPUs and ~2.6-4.0x on 4 GPUs for Mamba, with the largest benefits at long context lengths, and achieving a further ~10-18% throughput improvement from quantized all-reduce by lowering synchronization bandwidth overhead.",
+        "arxiv_id": "2602.21144",
+        "PRIMARY_TOPIC_LABEL": "Large-Scale Training Systems and Efficiency",
+        "MATCHED_TOPIC_LABELS": [
+            "Large-Scale Training Systems and Efficiency",
+            "Architecture and Training Dynamics",
+            "Efficiency, Compression, and Large-Scale Training"
+        ],
+        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+        "HOTSPOT_PAPER_LABELS": [],
+        "HOTSPOT_PAPER_PRIMARY_KIND": null,
+        "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+    },
+    "2603.10026": {
+        "ARXIVID": "2603.10026",
+        "COMMENT": "Formal theory for fusing cascaded reductions (safe-softmax followed by GEMM) into a single incremental loop, with automatic kernel generation reaching hand-written FlashAttention-class performance.",
+        "RELEVANCE": 7,
+        "NOVELTY": 6,
+        "PRIMARY_TOPIC_ID": "efficiency_scaling",
+        "MATCHED_TOPIC_IDS": [
+            "training_systems",
+            "efficiency_scaling"
+        ],
+        "TOPIC_MATCH_COMMENT": "New kernel-fusion mechanism that materially changes attention compute cost on accelerators.",
+        "HOTSPOT_PAPER_TAGS": [],
+        "HOTSPOT_PAPER_COMMENT": "",
+        "SCORE": 13,
+        "authors": [
+            "Xinsheng Tang",
+            "Yangcheng Li",
+            "Nan Wang",
+            "Zhiyi Shu",
+            "Xingyu Ling",
+            "Junna Xing",
+            "Peng Zhou",
+            "Qiang Liu"
+        ],
+        "title": "RedFuser: An Automatic Operator Fusion Framework for Cascaded Reductions on AI Accelerators",
+        "abstract": "Operator fusion, as a key performance optimization technique in the deployment of AI models, significantly improves execution efficiency and has been widely adopted in modern AI compilers. However, for cascaded reduction operations involving multiple loops with inter-loop data dependencies, such as the safe softmax followed by GEMM within attention mechanisms, existing compilers lack effective automated fusion and kernel generation capabilities. Although some works have addressed specific instances through hand-crafted fusion strategies, their solutions are limited in generality and difficult to extend to other similar structures. Given the prevalence of such computational patterns in deep learning models, there remains significant untapped potential in achieving general and automated fusion optimization. In this paper, we present a formal theoretical methodology for analyzing cascaded reductions which can fuse them into a single loop and introduce an incremental computation form. Based on this methodology, we design Reduction Fuser (RedFuser), a framework that automatically identifies supported cascaded reduction patterns and generates optimized fused kernels. Experiments show that RedFuser successfully fuses diverse workloads, achieving up to 2$\\times$ to 5$\\times$ speedup over state-of-the-art AI compilers and matching the performance of highly optimized hand-written kernels. The code is available at https://github.com/alibaba/redfuser",
+        "arxiv_id": "2603.10026",
+        "PRIMARY_TOPIC_LABEL": "Efficiency, Compression, and Large-Scale Training",
+        "MATCHED_TOPIC_LABELS": [
+            "Large-Scale Training Systems and Efficiency",
+            "Efficiency, Compression, and Large-Scale Training"
+        ],
+        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+        "HOTSPOT_PAPER_LABELS": [],
+        "HOTSPOT_PAPER_PRIMARY_KIND": null,
+        "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+    },
+    "2602.21340": {
+        "ARXIVID": "2602.21340",
+        "COMMENT": "Five explicit extensions of HiPPO polynomial memory giving adaptive memory allocation and associative recall with streaming-efficient updates, making SSM history representation explicit rather than implicit.",
+        "RELEVANCE": 7,
+        "NOVELTY": 6,
+        "PRIMARY_TOPIC_ID": "architecture_training",
+        "MATCHED_TOPIC_IDS": [
+            "architecture_training"
+        ],
+        "TOPIC_MATCH_COMMENT": "State-space sequence-modelling mechanism with mechanistic insight into how SSMs prioritize history.",
+        "HOTSPOT_PAPER_TAGS": [],
+        "HOTSPOT_PAPER_COMMENT": "",
+        "SCORE": 13,
+        "authors": [
+            "Jack Goffinet",
+            "Casey Hanks",
+            "David E. Carlson"
+        ],
+        "title": "HiPPO Zoo: Explicit Memory Mechanisms for Interpretable State Space Models",
+        "abstract": "Representing the past in a compressed, efficient, and informative manner is a central problem for systems trained on sequential data. The HiPPO framework, originally proposed by Gu & Dao et al., provides a principled approach to sequential compression by projecting signals onto orthogonal polynomial (OP) bases via structured linear ordinary differential equations. Subsequent works have embedded these dynamics in state space models (SSMs), where HiPPO structure serves as an initialization. Nonlinear successors of these SSM methods such as Mamba are state-of-the-art for many tasks with long-range dependencies, but the mechanisms by which they represent and prioritize history remain largely implicit. In this work, we revisit the HiPPO framework with the goal of making these mechanisms explicit. We show how polynomial representations of history can be extended to support capabilities of modern SSMs such as adaptive memory allocation and associative memory, while retaining direct interpretability in the OP basis. We introduce a unified framework comprising five such extensions, which we collectively refer to as a \"HiPPO zoo.\" Each extension exposes a specific modeling capability through an explicit, interpretable modification of the HiPPO framework. The resulting models adapt their memory online and train in streaming settings with efficient updates. We illustrate the behaviors and modeling advantages of these extensions through a range of synthetic sequence modeling tasks, demonstrating that capabilities typically associated with modern SSMs can be realized through explicit, interpretable polynomial memory structures.",
+        "arxiv_id": "2602.21340",
+        "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+        "MATCHED_TOPIC_LABELS": [
+            "Architecture and Training Dynamics"
+        ],
+        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+        "HOTSPOT_PAPER_LABELS": [],
+        "HOTSPOT_PAPER_PRIMARY_KIND": null,
+        "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+    },
+    "2602.20732": {
+        "ARXIVID": "2602.20732",
+        "COMMENT": "Algorithm-system co-designed KV-cache management with coarse-granularity hierarchical selection that avoids irregular gathers, matching Full-KV quality at 1% cache and 4.56x throughput.",
+        "RELEVANCE": 7,
+        "NOVELTY": 6,
+        "PRIMARY_TOPIC_ID": "efficiency_scaling",
+        "MATCHED_TOPIC_IDS": [
+            "efficiency_scaling"
+        ],
+        "TOPIC_MATCH_COMMENT": "KV-cache sparsity mechanism where the selection granularity, not just the policy, is the contribution.",
+        "HOTSPOT_PAPER_TAGS": [],
+        "HOTSPOT_PAPER_COMMENT": "",
+        "SCORE": 13,
+        "authors": [
+            "Chao Fei",
+            "Guozhong Li",
+            "Chenxi Liu",
+            "Panos Kalnis"
+        ],
+        "title": "CHESS: Context-aware Hierarchical Efficient Semantic Selection for Long-Context LLM Inference",
+        "abstract": "Long-context LLMs demand accurate inference at low latency, yet decoding becomes primarily constrained by KV cache as context grows. Prior pruning methods are largely context-agnostic: their token selection ignores step-wise relevance and local semantics, which undermines quality. Moreover, their irregular accesses and selection overheads yield only limited wall-clock speedups. To address this, we propose \\textbf{CHESS}, an \\textit{algorithm-system co-design} KV-cache management system. Algorithmically, CHESS introduces a context-aware, hierarchical selection policy that dynamically reconstructs a coherent context for the current decoding. System-wise, coarse granularity selection eliminates expensive data movement, fully realizing practical acceleration from theoretical sparsity. Extensive evaluations demonstrate that CHESS surpasses Full-KV quality using only \\textbf{1\\%} of the KV cache, delivers low-latency stable inference with up to \\textbf{4.56$\\times$} higher throughput, and consistently outperforms other strong baselines. Code is available at \\href{https://anonymous.4open.science/r/CHESS-9958/}{https://anonymous.4open.science/r/CHESS/}.",
+        "arxiv_id": "2602.20732",
+        "PRIMARY_TOPIC_LABEL": "Efficiency, Compression, and Large-Scale Training",
+        "MATCHED_TOPIC_LABELS": [
+            "Efficiency, Compression, and Large-Scale Training"
+        ],
+        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+        "HOTSPOT_PAPER_LABELS": [],
+        "HOTSPOT_PAPER_PRIMARY_KIND": null,
+        "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+    },
+    "2602.20646": {
+        "ARXIVID": "2602.20646",
+        "COMMENT": "Characterizes how forward- and backward-pass perturbations cascade and amplify geometrically across N operators, giving convergence conditions and a theoretical account of gradient spiking.",
+        "RELEVANCE": 7,
+        "NOVELTY": 6,
+        "PRIMARY_TOPIC_ID": "training_systems",
+        "MATCHED_TOPIC_IDS": [
+            "training_systems",
+            "architecture_training"
+        ],
+        "TOPIC_MATCH_COMMENT": "Optimization analysis that predicts when training recovers from loss/gradient spikes versus diverges.",
+        "HOTSPOT_PAPER_TAGS": [],
+        "HOTSPOT_PAPER_COMMENT": "",
+        "SCORE": 13,
+        "authors": [
+            "Boao Kong",
+            "Hengrui Zhang",
+            "Kun Yuan"
+        ],
+        "title": "On the Convergence of Stochastic Gradient Descent with Perturbed Forward-Backward Passes",
+        "abstract": "We study stochastic gradient descent (SGD) for composite optimization problems with $N$ sequential operators subject to perturbations in both the forward and backward passes. Unlike classical analyses that treat gradient noise as additive and localized, perturbations to intermediate outputs and gradients cascade through the computational graph, compounding geometrically with the number of operators. We present the first comprehensive theoretical analysis of this setting. Specifically, we characterize how forward and backward perturbations propagate and amplify within a single gradient step, derive convergence guarantees for both general non-convex objectives and functions satisfying the Polyak--\u0141ojasiewicz condition, and identify conditions under which perturbations do not deteriorate the asymptotic convergence order. As a byproduct, our analysis furnishes a theoretical explanation for the gradient spiking phenomenon widely observed in deep learning, precisely characterizing the conditions under which training recovers from spikes or diverges. Experiments on logistic regression with convex and non-convex regularization validate our theories, illustrating the predicted spike behavior and the asymmetric sensitivity to forward versus backward perturbations.",
+        "arxiv_id": "2602.20646",
+        "PRIMARY_TOPIC_LABEL": "Large-Scale Training Systems and Efficiency",
+        "MATCHED_TOPIC_LABELS": [
+            "Large-Scale Training Systems and Efficiency",
+            "Architecture and Training Dynamics"
+        ],
+        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+        "HOTSPOT_PAPER_LABELS": [],
+        "HOTSPOT_PAPER_PRIMARY_KIND": null,
+        "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+    },
+    "2602.20528": {
+        "ARXIVID": "2602.20528",
+        "COMMENT": "Interleaves a latent-diffusion 'thinking' phase into autoregressive decoding, planning in continuous semantic space before committing tokens.",
+        "RELEVANCE": 6,
+        "NOVELTY": 7,
+        "PRIMARY_TOPIC_ID": "architecture_training",
+        "MATCHED_TOPIC_IDS": [
+            "architecture_training"
+        ],
+        "TOPIC_MATCH_COMMENT": "A new hybrid generation mechanism combining diffusion planning with dynamic per-step computation.",
+        "HOTSPOT_PAPER_TAGS": [
+            "new_frontier"
+        ],
+        "HOTSPOT_PAPER_COMMENT": "Hybrid latent-diffusion-plus-autoregressive decoding is an early but genuinely distinct direction for language model architecture.",
+        "SCORE": 13,
+        "authors": [
+            "Justin Lovelace",
+            "Christian Belardi",
+            "Sofian Zalouk",
+            "Adhitya Polavaram",
+            "Srivatsa Kundurthy",
+            "Kilian Q. Weinberger"
+        ],
+        "title": "Stop-Think-AutoRegress: Language Modeling with Latent Diffusion Planning",
+        "abstract": "The Stop-Think-AutoRegress Language Diffusion Model (STAR-LDM) integrates latent diffusion planning with autoregressive generation. Unlike conventional autoregressive language models limited to token-by-token decisions, STAR-LDM incorporates a \"thinking\" phase that pauses generation to refine a semantic plan through diffusion before continuing. This enables global planning in continuous space prior to committing to discrete tokens. Evaluations show STAR-LDM significantly outperforms similar-sized models on language understanding benchmarks and achieves $>70\\%$ win rates in LLM-as-judge comparisons for narrative coherence and commonsense reasoning. The architecture also allows straightforward control through lightweight classifiers, enabling fine-grained steering of attributes without model retraining while maintaining better fluency-control trade-offs than specialized approaches.",
+        "arxiv_id": "2602.20528",
+        "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+        "MATCHED_TOPIC_LABELS": [
+            "Architecture and Training Dynamics"
+        ],
+        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+        "HOTSPOT_PAPER_LABELS": [
+            "New Frontier Papers"
+        ],
+        "HOTSPOT_PAPER_PRIMARY_KIND": "new_frontier",
+        "HOTSPOT_PAPER_PRIMARY_LABEL": "New Frontier Papers",
+        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "llm_exact"
+    },
+    "2602.21341": {
+        "ARXIVID": "2602.21341",
+        "COMMENT": "Compute-optimal scaling laws for view-synthesis transformers, showing encoder-decoder can beat decoder-only at matched training compute.",
+        "RELEVANCE": 6,
+        "NOVELTY": 6,
+        "PRIMARY_TOPIC_ID": "training_systems",
+        "MATCHED_TOPIC_IDS": [
+            "training_systems",
+            "architecture_training"
+        ],
+        "TOPIC_MATCH_COMMENT": "Scaling-law work that informs how training runs are configured, though the domain is novel view synthesis.",
+        "HOTSPOT_PAPER_TAGS": [],
+        "HOTSPOT_PAPER_COMMENT": "",
+        "SCORE": 12,
+        "authors": [
+            "Evan Kim",
+            "Hyunwoo Ryu",
+            "Thomas W. Mitchel",
+            "Vincent Sitzmann"
+        ],
+        "title": "Scaling View Synthesis Transformers",
+        "abstract": "Geometry-free view synthesis transformers have recently achieved state-of-the-art performance in Novel View Synthesis (NVS), outperforming traditional approaches that rely on explicit geometry modeling. Yet the factors governing their scaling with compute remain unclear. We present a systematic study of scaling laws for view synthesis transformers and derive design principles for training compute-optimal NVS models. Contrary to prior findings, we show that encoder-decoder architectures can be compute-optimal; we trace earlier negative results to suboptimal architectural choices and comparisons across unequal training compute budgets. Across several compute levels, we demonstrate that our encoder-decoder architecture, which we call the Scalable View Synthesis Model (SVSM), scales as effectively as decoder-only models, achieves a superior performance-compute Pareto frontier, and surpasses the previous state-of-the-art on real-world NVS benchmarks with substantially reduced training compute.",
+        "arxiv_id": "2602.21341",
+        "PRIMARY_TOPIC_LABEL": "Large-Scale Training Systems and Efficiency",
+        "MATCHED_TOPIC_LABELS": [
+            "Large-Scale Training Systems and Efficiency",
+            "Architecture and Training Dynamics"
+        ],
+        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+        "HOTSPOT_PAPER_LABELS": [],
+        "HOTSPOT_PAPER_PRIMARY_KIND": null,
+        "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+    },
+    "2602.20567": {
+        "ARXIVID": "2602.20567",
+        "COMMENT": "Uniform-stability and generalization analysis of Stochastic Gradient Push over directed graphs, coupling spectral gap and stationary-distribution imbalance.",
+        "RELEVANCE": 6,
+        "NOVELTY": 6,
+        "PRIMARY_TOPIC_ID": "training_systems",
+        "MATCHED_TOPIC_IDS": [
+            "training_systems"
+        ],
+        "TOPIC_MATCH_COMMENT": "Decentralized optimization theory that quantifies how communication topology shapes achievable training performance.",
+        "HOTSPOT_PAPER_TAGS": [],
+        "HOTSPOT_PAPER_COMMENT": "",
+        "SCORE": 12,
+        "authors": [
+            "Yifei Liang",
+            "Yan Sun",
+            "Xiaochun Cao",
+            "Li Shen"
+        ],
+        "title": "Stability and Generalization of Push-Sum Based Decentralized Optimization over Directed Graphs",
+        "abstract": "Push-Sum-based decentralized learning enables optimization over directed communication networks, where information exchange may be asymmetric. While convergence properties of such methods are well understood, their finite-iteration stability and generalization behavior remain unclear due to structural bias induced by column-stochastic mixing and asymmetric error propagation. In this work, we develop a unified uniform-stability framework for the Stochastic Gradient Push (SGP) algorithm that captures the effect of directed topology. A key technical ingredient is an imbalance-aware consistency bound for Push-Sum, which controls consensus deviation through two quantities: the stationary distribution imbalance parameter $\u03b4$ and the spectral gap $(1-\u03bb)$ governing mixing speed. This decomposition enables us to disentangle statistical effects from topology-induced bias. We establish finite-iteration stability and optimization guarantees for both convex objectives and non-convex objectives satisfying the Polyak--\u0141ojasiewicz condition. For convex problems, SGP attains excess generalization error of order $\\tilde{\\mathcal{O}}\\!\\left(\\frac{1}{\\sqrt{mn}}+\\frac\u03b3{\u03b4(1-\u03bb)}+\u03b3\\right)$ under step-size schedules, and we characterize the corresponding optimal early stopping time that minimizes this bound. For P\u0141 objectives, we obtain convex-like optimization and generalization rates with dominant dependence proportional to $\u03ba\\!\\left(1+\\frac{1}{\u03b4(1-\u03bb)}\\right)$, revealing a multiplicative coupling between problem conditioning and directed communication topology. Our analysis clarifies when Push-Sum correction is necessary compared with standard decentralized SGD and quantifies how imbalance and mixing jointly shape the best attainable learning performance.",
+        "arxiv_id": "2602.20567",
+        "PRIMARY_TOPIC_LABEL": "Large-Scale Training Systems and Efficiency",
+        "MATCHED_TOPIC_LABELS": [
+            "Large-Scale Training Systems and Efficiency"
+        ],
+        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+        "HOTSPOT_PAPER_LABELS": [],
+        "HOTSPOT_PAPER_PRIMARY_KIND": null,
+        "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+    },
+    "2602.20461": {
+        "ARXIVID": "2602.20461",
+        "COMMENT": "Recasts attention-learner training as functional gradient descent in nonparametric teaching, yielding example selection that cuts LLM training time 13% without accuracy loss.",
+        "RELEVANCE": 6,
+        "NOVELTY": 6,
+        "PRIMARY_TOPIC_ID": "architecture_training",
+        "MATCHED_TOPIC_IDS": [
+            "architecture_training",
+            "efficiency_scaling"
+        ],
+        "TOPIC_MATCH_COMMENT": "Training-dynamics analysis of how attention shapes parameter-gradient evolution, turned into a convergence-acceleration method.",
+        "HOTSPOT_PAPER_TAGS": [],
+        "HOTSPOT_PAPER_COMMENT": "",
+        "SCORE": 12,
+        "authors": [
+            "Chen Zhang",
+            "Jianghui Wang",
+            "Bingyang Cheng",
+            "Zhongtao Chen",
+            "Wendong XU",
+            "Cong Wang",
+            "Marco Canini",
+            "Francesco Orabona",
+            "Yik Chung WU",
+            "Ngai Wong"
+        ],
+        "title": "Nonparametric Teaching of Attention Learners",
+        "abstract": "Attention learners, neural networks built on the attention mechanism, e.g., transformers, excel at learning the implicit relationships that relate sequences to their corresponding properties, e.g., mapping a given sequence of tokens to the probability of the next token. However, the learning process tends to be costly. To address this, we present a novel paradigm named Attention Neural Teaching (AtteNT) that reinterprets the learning process through a nonparametric teaching perspective. Specifically, the latter provides a theoretical framework for teaching mappings that are implicitly defined (i.e., nonparametric) via example selection. Such an implicit mapping is embodied through a dense set of sequence-property pairs, with the AtteNT teacher selecting a subset to accelerate convergence in attention learner training. By analytically investigating the role of attention on parameter-based gradient descent during training, and recasting the evolution of attention learners, shaped by parameter updates, through functional gradient descent in nonparametric teaching, we show for the first time that teaching attention learners is consistent with teaching importance-adaptive nonparametric learners. These new findings readily commit AtteNT to enhancing learning efficiency of attention learners. Specifically, we observe training time reductions of 13.01% for LLMs and 20.58% for ViTs, spanning both fine-tuning and training-from-scratch regimes. Crucially, these gains are achieved without compromising accuracy; in fact, performance is consistently preserved and often enhanced across a diverse set of downstream tasks.",
+        "arxiv_id": "2602.20461",
+        "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+        "MATCHED_TOPIC_LABELS": [
+            "Architecture and Training Dynamics",
+            "Efficiency, Compression, and Large-Scale Training"
+        ],
+        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+        "HOTSPOT_PAPER_LABELS": [],
+        "HOTSPOT_PAPER_PRIMARY_KIND": null,
+        "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+    },
+    "2602.20816": {
+        "ARXIVID": "2602.20816",
+        "COMMENT": "Tail-aware divergence that decouples the teacher's top-K mass from the tail, reweighting the distillation signal at the same cost profile as KL.",
+        "RELEVANCE": 6,
+        "NOVELTY": 6,
+        "PRIMARY_TOPIC_ID": "efficiency_scaling",
+        "MATCHED_TOPIC_IDS": [
+            "training_systems",
+            "efficiency_scaling"
+        ],
+        "TOPIC_MATCH_COMMENT": "A new distillation objective that changes what a compressed model learns during pretraining-scale distillation.",
+        "HOTSPOT_PAPER_TAGS": [],
+        "HOTSPOT_PAPER_COMMENT": "",
+        "SCORE": 12,
+        "authors": [
+            "Sayantan Dasgupta",
+            "Trevor Cohn",
+            "Timothy Baldwin"
+        ],
+        "title": "Don't Ignore the Tail: Decoupling top-K Probabilities for Efficient Language Model Distillation",
+        "abstract": "The core learning signal used in language model distillation is the standard Kullback-Leibler (KL) divergence between the student and teacher distributions. Traditional KL divergence tends to be dominated by the next tokens with the highest probabilities, i.e., the teacher's modes, thereby diminishing the influence of less probable yet potentially informative components of the output distribution. We propose a new tail-aware divergence that decouples the contribution of the teacher model's top-K predicted probabilities from that of lower-probability predictions, while maintaining the same computational profile as the KL Divergence. Our decoupled approach reduces the impact of the teacher modes and, consequently, increases the contribution of the tail of the distribution. Experimental results demonstrate that our modified distillation method yields competitive performance in both pre-training and supervised distillation of decoder models across various datasets. Furthermore, the distillation process is efficient and can be performed with a modest academic budget for large datasets, eliminating the need for industry-scale computing.",
+        "arxiv_id": "2602.20816",
+        "PRIMARY_TOPIC_LABEL": "Efficiency, Compression, and Large-Scale Training",
+        "MATCHED_TOPIC_LABELS": [
+            "Large-Scale Training Systems and Efficiency",
+            "Efficiency, Compression, and Large-Scale Training"
+        ],
+        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+        "HOTSPOT_PAPER_LABELS": [],
+        "HOTSPOT_PAPER_PRIMARY_KIND": null,
+        "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+    }
+}

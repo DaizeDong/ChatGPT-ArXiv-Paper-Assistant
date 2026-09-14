@@ -1,0 +1,74 @@
+{
+    "schema_version": 1,
+    "meta": {
+        "date": "2026-06-22",
+        "total_candidates": 67,
+        "total_spotlight_papers": 1,
+        "thresholds": {
+            "daily_hot_score_cutoff": 15,
+            "daily_hot_relevance_cutoff": 7,
+            "new_frontier_score_cutoff": 15,
+            "new_frontier_novelty_cutoff": 8
+        },
+        "caps": {
+            "max_daily_hot": 6,
+            "max_new_frontier": 4
+        }
+    },
+    "diagnostics": {
+        "candidate_count_by_kind": {
+            "new_frontier": 1,
+            "daily_hot": 0
+        },
+        "selected_count_by_kind": {
+            "new_frontier": 1
+        }
+    },
+    "papers": {
+        "2606.22325": {
+            "ARXIVID": "2606.22325",
+            "COMMENT": "Shows attention sinks and representation collapse are generic consequences of content-based routing under a norm-blind similarity metric, and reproduces the same signature in graph attention, a selective SSM, a recurrent mixer, and depth routers.",
+            "RELEVANCE": 9,
+            "NOVELTY": 8,
+            "PRIMARY_TOPIC_ID": "architecture_training",
+            "MATCHED_TOPIC_IDS": [
+                "moe_training",
+                "architecture_training"
+            ],
+            "TOPIC_MATCH_COMMENT": "It gives a mechanistic account of routing and collapse spanning attention, SSMs, and residual routers, which is core architectural-mechanism analysis and directly informs router-collapse thinking in MoE.",
+            "HOTSPOT_PAPER_TAGS": [
+                "new_frontier"
+            ],
+            "HOTSPOT_PAPER_COMMENT": "A unifying claim that sinks and collapse belong to routing rather than attention reframes a widely studied transformer pathology and could redirect how routers of all kinds are designed.",
+            "SCORE": 17,
+            "authors": [
+                "K. R. Balasubramanian"
+            ],
+            "title": "All Routes Lead to Collapse",
+            "abstract": "Attention sinks, representation collapse, and norm stratification are treated as transformer-specific pathologies. We show they are not specific to attention: they are what content-based routing does under a fixed similarity metric. We give a reframing identity: softmax attention is Boltzmann-weighted aggregation over Euclidean distances with constant key norms, so its score omits a $-\\|k\\|^2$ term and is blind to key magnitude. This predicts that any router whose metric is ill-matched to its representations should compensate, by concentrating its routing and collapsing the routed representations. We test it on routers that score and aggregate over different axes: softmax attention over tokens (nine pretrained transformers), graph attention over nodes, a selective state-space model and a recurrent mixer over time, and learned residuals over depth. All develop the same signature, and two within-model ablations show it is caused by the routing mechanism rather than by incidental dynamics. The form is contingent, set by the strength of the positional brake each router carries alongside its content score; we sweep that brake and move the onset across its whole range. The mechanism is not contingent, and it does not require norm stratification: a router with norm-normalized keys concentrates just the same. We do not claim these models implement Riemannian geometry; the geometric view is a diagnostic that names the inadequacy of the flat, norm-blind metric.",
+            "arxiv_id": "2606.22325",
+            "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+            "MATCHED_TOPIC_LABELS": [
+                "MoE Training",
+                "Architecture and Training Dynamics"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [
+                "New Frontier Papers"
+            ],
+            "HOTSPOT_PAPER_PRIMARY_KIND": "new_frontier",
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "New Frontier Papers",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "llm_exact"
+        }
+    },
+    "sections": [
+        {
+            "kind": "new_frontier",
+            "label": "New Frontier Papers",
+            "description": "Papers that appear to open a genuinely new direction, paradigm, or field.",
+            "paper_ids": [
+                "2606.22325"
+            ]
+        }
+    ]
+}

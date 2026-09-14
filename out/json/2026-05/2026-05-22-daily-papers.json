@@ -6,20 +6,66 @@
             "score",
             "relevance"
         ],
-        "topic_schema_version": 1,
-        "total_papers": 0,
+        "topic_schema_version": 2,
+        "total_papers": 11,
         "usage": {
-            "model": "gpt-5.4",
+            "model": "llmcall:cc+codexg",
             "prompt_tokens": 0,
             "completion_tokens": 0,
             "prompt_cost": 0.0,
             "completion_cost": 0.0,
-            "total_arxiv_papers": 808,
-            "total_scanned_papers": 503,
-            "total_relevant_papers": 0
+            "total_arxiv_papers": 498,
+            "total_scanned_papers": 498,
+            "total_relevant_papers": 11,
+            "filter_health": {
+                "status": "ok",
+                "scanned_papers": 498,
+                "selected_papers": 11,
+                "llm_tokens": 0,
+                "message": "Scored 498 papers with 5/6 successful model calls; 11 selected."
+            },
+            "llm": {
+                "backend": "LLM backend: llmcall chain=codexg->codex->cc->claude",
+                "attempted": 6,
+                "succeeded": 5,
+                "failed": 1,
+                "by_backend": {
+                    "llmcall": 6
+                },
+                "by_provider": {
+                    "cc": 4,
+                    "codexg": 1
+                },
+                "errors": [
+                    "timeout after 18s"
+                ],
+                "seconds": 2738.2,
+                "trace": [
+                    "codexg: unavailable after 281.1s of 543.7s (OpenAI Codex v0.154.0",
+                    "codex: unavailable after 3.7s of 281.4s (OpenAI Codex v0.154.0",
+                    "cc: answered in 13.2s of 296.5s",
+                    "codexg: answered in 521.8s of 543.7s",
+                    "codexg: unavailable after 169.2s of 543.7s (OpenAI Codex v0.154.0",
+                    "codex: unavailable after 4.3s of 393.3s (OpenAI Codex v0.154.0",
+                    "cc: answered in 173.2s of 407.8s",
+                    "codexg: unavailable after 544.3s of 543.7s (timeout after 544s)",
+                    "codex: unavailable after 3.6s of 18.2s (OpenAI Codex v0.154.0",
+                    "cc: unavailable after 33.9s of 33.3s (timeout after 33s)",
+                    "claude: unavailable after 18.7s of 18.2s (timeout after 18s)",
+                    "codexg: unavailable after 293.3s of 543.7s (2026-09-11T20:45:51.137752Z ERROR codex_models_manager::manager: failed to refresh available models: unexpected status 503 Service Unavailable: <html><body><h1>503 Service Unavailable</h1>",
+                    "codex: unavailable after 3.6s of 269.2s (OpenAI Codex v0.154.0",
+                    "cc: answered in 124.4s of 284.3s",
+                    "codexg: unavailable after 294.6s of 543.7s (OpenAI Codex v0.154.0",
+                    "codex: unavailable after 4.5s of 267.9s (OpenAI Codex v0.154.0",
+                    "cc: answered in 250.8s of 282.2s"
+                ]
+            },
+            "remedied": true
         }
     },
     "topic_order": [
+        "moe_training",
+        "training_systems",
         "architecture_training",
         "efficiency_scaling",
         "representation_structure",
@@ -27,17 +73,27 @@
         "world_models_open_ended_rl"
     ],
     "diagnostics": {
-        "total_papers": 0,
+        "total_papers": 11,
         "topic_counts": [
+            {
+                "topic_id": "moe_training",
+                "topic_label": "MoE Training",
+                "paper_count": 1
+            },
+            {
+                "topic_id": "training_systems",
+                "topic_label": "Large-Scale Training Systems and Efficiency",
+                "paper_count": 2
+            },
             {
                 "topic_id": "architecture_training",
                 "topic_label": "Architecture and Training Dynamics",
-                "paper_count": 0
+                "paper_count": 3
             },
             {
                 "topic_id": "efficiency_scaling",
                 "topic_label": "Efficiency, Compression, and Large-Scale Training",
-                "paper_count": 0
+                "paper_count": 5
             },
             {
                 "topic_id": "representation_structure",
@@ -55,8 +111,10 @@
                 "paper_count": 0
             }
         ],
-        "assignment_source_counts": {},
-        "llm_assignment_count": 0,
+        "assignment_source_counts": {
+            "llm_exact": 11
+        },
+        "llm_assignment_count": 11,
         "heuristic_assignment_count": 0,
         "default_assignment_count": 0,
         "invalid_primary_topic_fallback_count": 0,
@@ -65,8 +123,423 @@
             "new_frontier": 0,
             "daily_hot": 0
         },
-        "hotspot_paper_assignment_source_counts": {}
+        "hotspot_paper_assignment_source_counts": {
+            "default": 11
+        }
     },
-    "papers": {},
-    "topic_sections": []
+    "papers": {
+        "2605.23078": {
+            "ARXIVID": "2605.23078",
+            "COMMENT": "Global linear-programming formulation of expert-level bit allocation for MoE plus router fine-tuning to correct quantization-induced routing shift.",
+            "RELEVANCE": 9,
+            "NOVELTY": 7,
+            "PRIMARY_TOPIC_ID": "moe_training",
+            "MATCHED_TOPIC_IDS": [
+                "moe_training",
+                "efficiency_scaling"
+            ],
+            "TOPIC_MATCH_COMMENT": "The router-shift correction and expert-importance modelling are genuinely MoE-specific, not generic quantization.",
+            "HOTSPOT_PAPER_TAGS": [],
+            "HOTSPOT_PAPER_COMMENT": "",
+            "SCORE": 16,
+            "authors": [
+                "Jianing Deng",
+                "Song Wang",
+                "Dongwei Wang",
+                "Zijie Liu",
+                "Tianlong Chen",
+                "Huanrui Yang",
+                "Jingtong Hu"
+            ],
+            "title": "GEMQ: Global Expert-Level Mixed-Precision Quantization for MoE LLMs",
+            "abstract": "Mixture-of-Experts Large Language Models (MoE-LLMs) achieve strong performance but incur substantial memory overhead due to massive expert parameters. Mixed-precision quantization mitigates this cost by allocating expert-wise bit-widths based on their importance, approaching the accuracy-memory Pareto frontier and enabling extreme low-bit quantization. However, existing methods rely on layer-wise importance estimation and overlook router shifts induced by quantization, resulting in suboptimal allocation and routing. In this work, we propose Global Expert-level Mixed-precision Quantization (GEMQ) to overcome these limitations via (1) a global linear-programming formulation that captures model-wide expert importance based on quantization error analysis, and (2) efficient router fine-tuning to adapt routing to quantized experts. These components are integrated into a progressive quantization framework that iteratively refines importance estimation and allocation. Experiments demonstrate that GEMQ significantly reduces memory and accelerates inference with minimal accuracy degradation. Source code is available at https://github.com/jndeng/GEMQ .",
+            "arxiv_id": "2605.23078",
+            "PRIMARY_TOPIC_LABEL": "MoE Training",
+            "MATCHED_TOPIC_LABELS": [
+                "MoE Training",
+                "Efficiency, Compression, and Large-Scale Training"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [],
+            "HOTSPOT_PAPER_PRIMARY_KIND": null,
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+        },
+        "2605.22297": {
+            "ARXIVID": "2605.22297",
+            "COMMENT": "Assigns per-layer learning rates from the heavy-tailedness of each layer's empirical spectral density, giving up to 1.5x speedup up to 3B/100B tokens with AdamW and Muon.",
+            "RELEVANCE": 9,
+            "NOVELTY": 7,
+            "PRIMARY_TOPIC_ID": "training_systems",
+            "MATCHED_TOPIC_IDS": [
+                "training_systems",
+                "architecture_training"
+            ],
+            "TOPIC_MATCH_COMMENT": "A learning-rate allocation scheme for large-scale pretraining that transfers from uniform-LR tuning, directly changing run configuration.",
+            "HOTSPOT_PAPER_TAGS": [],
+            "HOTSPOT_PAPER_COMMENT": "",
+            "SCORE": 16,
+            "authors": [
+                "Di He",
+                "Songjun Tu",
+                "Keyu Wang",
+                "Lu Yin",
+                "Shiwei Liu"
+            ],
+            "title": "One LR Doesn't Fit All: Heavy-Tail Guided Layerwise Learning Rates for LLMs",
+            "abstract": "Learning rate configuration is a fundamental aspect of modern deep learning. The prevailing practice of applying a uniform learning rate across all layers overlooks the structural heterogeneity of Transformers, potentially limiting their effectiveness as the backbone of Large Language Models (LLMs). In this paper, we introduce Layerwise Learning Rate (LLR), an adaptive scheme that assigns distinct learning rates to individual Transformer layers. Our method is grounded in Heavy-Tailed Self-Regularization (HT-SR) theory, which characterizes the empirical spectral density (ESD) of weight correlation matrices to quantify heavy-tailedness. Layers with weaker heavy-tailedness are assigned larger learning rates to accelerate training, while layers with stronger heavy-tailedness receive smaller learning rates. By tailoring learning rates in this manner, LLR promotes more balanced training across layers, leading to faster convergence and improved generalization. Extensive experiments across architectures ranging from LLaMA to GPT-nano, optimizers including AdamW and Muon, and model scales from 60M to 3B parameters with up to 100B training tokens demonstrate the effectiveness of LLR. LLR achieves up to 1.5x training speedup and consistently outperforms uniform-learning-rate baselines. In particular, it improves the average zero-shot accuracy of 1B models from 47.09% to 49.02%, and that of 3B models from 48.58% to 50.61%. A key advantage of LLR is its low tuning overhead: it can transfer nearly optimal learning-rate settings directly from the uniform baseline. Code is available at https://github.com/hed-ucas/Layer-wise-Learning-Rate.",
+            "arxiv_id": "2605.22297",
+            "PRIMARY_TOPIC_LABEL": "Large-Scale Training Systems and Efficiency",
+            "MATCHED_TOPIC_LABELS": [
+                "Large-Scale Training Systems and Efficiency",
+                "Architecture and Training Dynamics"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [],
+            "HOTSPOT_PAPER_PRIMARY_KIND": null,
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+        },
+        "2605.22432": {
+            "ARXIVID": "2605.22432",
+            "COMMENT": "Reads Muon through the river-valley landscape, showing orthogonalization speeds bulk-subspace progress while amplifying dominant-direction noise, then interpolates gradient evaluation from the fast Muon iterate toward the Schedule-Free average to suppress the resulting oscillation, removing learning-rate schedules and enabling anytime stopping in LLM pretraining.",
+            "RELEVANCE": 9,
+            "NOVELTY": 7,
+            "PRIMARY_TOPIC_ID": "training_systems",
+            "MATCHED_TOPIC_IDS": [
+                "training_systems",
+                "architecture_training"
+            ],
+            "TOPIC_MATCH_COMMENT": "An optimizer for large-scale pretraining: it changes the update geometry and the schedule requirement, with a landscape-level explanation of why Muon needs stabilizing.",
+            "HOTSPOT_PAPER_TAGS": [],
+            "HOTSPOT_PAPER_COMMENT": "",
+            "SCORE": 16,
+            "authors": [
+                "Jueun Kim",
+                "Baekrok Shin",
+                "Jihun Yun",
+                "Beomhan Baek",
+                "Minhak Song",
+                "Chulhee Yun"
+            ],
+            "title": "AMUSE: Anytime Muon with Stable Gradient Evaluation",
+            "abstract": "Modern deep learning commonly relies on AdamW with prescribed learning rate schedules, but recent works challenge both components: Schedule-Free optimization removes explicit schedules via iterate averaging, and Muon improves the update geometry by orthogonalizing momentum for matrix parameters. Despite Muon's strong empirical performance, its underlying mechanism remains partially understood. We study Muon through the river-valley loss landscape, where useful training progress occurs along a flat, low-curvature bulk subspace (the river), while high-curvature dominant directions form steep valley walls that induce oscillations. We empirically show that while Muon's orthogonalization accelerates river progress by increasing the bulk component, it also amplifies dominant-direction noise, causing oscillatory trajectories. Building on this, we propose Anytime MUon with Stable gradient Evaluation (AMUSE), which integrates Muon's rapid bulk progress with the stabilizing effect of Schedule-Free averaging. AMUSE uses a time-varying interpolation coefficient that initially evaluates gradients near the fast Muon sequence for rapid adaptation, then gradually shifts toward the stable averaged sequence to suppress valley-wall oscillations. As a result, AMUSE requires no learning rate schedules and supports anytime training. Across vision tasks and large language model pretraining, AMUSE consistently improves the performance-iteration Pareto frontier over (Schedule-Free) AdamW and Muon.",
+            "arxiv_id": "2605.22432",
+            "PRIMARY_TOPIC_LABEL": "Large-Scale Training Systems and Efficiency",
+            "MATCHED_TOPIC_LABELS": [
+                "Large-Scale Training Systems and Efficiency",
+                "Architecture and Training Dynamics"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [],
+            "HOTSPOT_PAPER_PRIMARY_KIND": null,
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+        },
+        "2605.23081": {
+            "ARXIVID": "2605.23081",
+            "COMMENT": "Selective mixed-precision attention that keeps ~5% of query-key blocks in FP16 and merges FP4/FP16 paths through online softmax.",
+            "RELEVANCE": 8,
+            "NOVELTY": 7,
+            "PRIMARY_TOPIC_ID": "efficiency_scaling",
+            "MATCHED_TOPIC_IDS": [
+                "architecture_training",
+                "efficiency_scaling"
+            ],
+            "TOPIC_MATCH_COMMENT": "A low-bit attention kernel with a non-uniform quantization-error argument, materially changing long-context cost.",
+            "HOTSPOT_PAPER_TAGS": [],
+            "HOTSPOT_PAPER_COMMENT": "",
+            "SCORE": 15,
+            "authors": [
+                "Joe Sharratt"
+            ],
+            "title": "ThriftAttention: Selective Mixed Precision for Long-Context FP4 Attention",
+            "abstract": "Efficient attention algorithms are critical to mitigate the quadratic cost of attention in long-context workloads. Prior work utilises block-scaled quantisation techniques on Blackwell GPUs to move attention computation to 4-bit precision to accelerate inference. However, these techniques result in significant quality degradation in long-context settings. We show that the output impact of quantisation error is highly non-uniform and increases with the importance of each query-key interaction, concentrating functionally relevant error in a small number of attention blocks that contain the most important tokens. We propose ThriftAttention, a low-bit attention variant that delivers near-FP16 long-context quality at FP4 inference efficiency. This approach proceeds in two stages. First, a heuristic rapidly selects a small number of important query-key block pairs for FP16 precision. Second, the selected blocks are computed in FP16 and the remaining blocks in FP4, with both paths merged via online softmax into a single output. We demonstrate across long-context benchmarks and model families that by computing only 5% of query-key blocks in FP16, ThriftAttention recovers on average 89.1% of the FP4-to-FP16 performance gap. We show ThriftAttention's advantage grows with sequence length, mitigating the systematic FP4 quality degradation observed at longer contexts. The code is available at https://github.com/joesharratt1229/ThriftAttention.",
+            "arxiv_id": "2605.23081",
+            "PRIMARY_TOPIC_LABEL": "Efficiency, Compression, and Large-Scale Training",
+            "MATCHED_TOPIC_LABELS": [
+                "Architecture and Training Dynamics",
+                "Efficiency, Compression, and Large-Scale Training"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [],
+            "HOTSPOT_PAPER_PRIMARY_KIND": null,
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+        },
+        "2605.22884": {
+            "ARXIVID": "2605.22884",
+            "COMMENT": "Two-level cache pairing exact sliding-window attention with a fixed-size outer-product fast-weight memory fed exclusively by window evictions, read through the linear-attention identity, plus the observation that the usual chunked-mean write shortcut injects C^2-C spurious cross-token outer products and a weighted-sum scan that removes them.",
+            "RELEVANCE": 8,
+            "NOVELTY": 7,
+            "PRIMARY_TOPIC_ID": "efficiency_scaling",
+            "MATCHED_TOPIC_IDS": [
+                "architecture_training",
+                "efficiency_scaling"
+            ],
+            "TOPIC_MATCH_COMMENT": "Primarily a bounded-memory KV mechanism that moves the memory/quality frontier, and the diagnosed chunked-mean training artifact is a concrete correctness fix for how such memories are trained.",
+            "HOTSPOT_PAPER_TAGS": [],
+            "HOTSPOT_PAPER_COMMENT": "",
+            "SCORE": 15,
+            "authors": [
+                "Kabir Swain",
+                "Sijie Han",
+                "Daniel Karl I. Weidele",
+                "Mauro Martino",
+                "Antonio Torralba"
+            ],
+            "title": "Tensor Cache: Eviction-conditioned Associative Memory for Transformers",
+            "abstract": "Autoregressive Transformer KV caches grow linearly with context length; sliding-window caching bounds memory but discards evicted tokens entirely, so relevant evidence outside the window becomes inaccessible. We introduce \\emph{Tensor Cache}, a two-level cache that pairs sliding-window softmax attention as a first-level cache (L1) with a fixed-size outer-product fast-weight memory as a second-level cache (L2) fed by KV pairs evicted from the window. Recent tokens remain in exact local attention; evicted pairs are compressed into a per-layer matrix $A$ and read by future queries through a single matrix multiplication, exploiting the linear-attention identity $q_t(k_i \\otimes v_i)=\\langle q_t,k_i\\rangle v_i$. A learned scalar gate fuses the L1 and L2 outputs, and per-head decay and write-rate parameters are trained end-to-end. The outer-product memory and the read identity are well-known; our contribution is their use as an L2 cache fed exclusively by sliding-window evictions, plus identifying that the common chunked-mean training shortcut $A\\!\\leftarrow\\!λA\\!+\\!η(\\bar k\\!\\otimes\\!\\bar v)$ silently introduces $C^2{-}C$ spurious cross-token outer products per chunk, and closing the gap with a parallel weighted-sum scan equivalent to per-token writes within float32 epsilon. Across systems scaling, controlled associative recall, long-context language modeling, and memory-capacity diagnostics, Tensor Cache improves the memory--quality frontier over bounded-state baselines.",
+            "arxiv_id": "2605.22884",
+            "PRIMARY_TOPIC_LABEL": "Efficiency, Compression, and Large-Scale Training",
+            "MATCHED_TOPIC_LABELS": [
+                "Architecture and Training Dynamics",
+                "Efficiency, Compression, and Large-Scale Training"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [],
+            "HOTSPOT_PAPER_PRIMARY_KIND": null,
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+        },
+        "2605.22337": {
+            "ARXIVID": "2605.22337",
+            "COMMENT": "KV-cache compression that synthesizes prompt-conditioned soft-token probes from a learnable orthogonal meta-library via Gumbel-Softmax, and redistributes evicted tokens attention mass into retained ones instead of discarding it.",
+            "RELEVANCE": 8,
+            "NOVELTY": 6,
+            "PRIMARY_TOPIC_ID": "efficiency_scaling",
+            "MATCHED_TOPIC_IDS": [
+                "efficiency_scaling"
+            ],
+            "TOPIC_MATCH_COMMENT": "Squarely a KV-cache memory-efficiency mechanism, and the dynamic probe synthesis plus attention-flow reintegration are new rather than a tuned eviction heuristic.",
+            "HOTSPOT_PAPER_TAGS": [],
+            "HOTSPOT_PAPER_COMMENT": "",
+            "SCORE": 14,
+            "authors": [
+                "Wei Luo",
+                "Yi Huang",
+                "Songchen Ma",
+                "Huanyu Qu",
+                "Jiang Cai",
+                "Mingkun Xu"
+            ],
+            "title": "Meta-Soft: Leveraging Composable Meta-Tokens for Context-Preserving KV Cache Compression",
+            "abstract": "The KV cache used in large language models has linearly growing time complexity, so LLMs face memory blow-up and reduced decoding efficiency when they process long contexts. Current KV Cache eviction has become an important research direction; however, existing methods based on fixed Soft Tokens (e.g., Judge Q) rely on a static parameter set as the query to evaluate the importance of KV pairs, so they cannot adapt dynamically to different input prompts, and they cannot precisely capture complex and changing task relevance. Also, evicted KV pairs are discarded permanently, so this causes irreversible information loss and context breaks. To address this problem, we propose Meta-Soft, a dynamic compression framework based on probe-driven context integration. Specifically, we build a meta-library with a learnable orthogonal basis matrix $\\mathcal{L}$, and we use a selector network with Gumbel-Softmax to produce differentiable sparse combination weights, so we dynamically synthesize the most targeted $k$ Soft Tokens from the input prompt features. We append these Soft Tokens to the end of the input sequence to probe key information. We also introduce an attention-flow based integration mechanism, which redistributes the semantic information of removed tokens into retained tokens, and this keeps the dropped context information effectively. Experiments on multiple datasets show that our method outperforms existing state-of-the-art eviction methods and provides a new solution for KV Cache compression.",
+            "arxiv_id": "2605.22337",
+            "PRIMARY_TOPIC_LABEL": "Efficiency, Compression, and Large-Scale Training",
+            "MATCHED_TOPIC_LABELS": [
+                "Efficiency, Compression, and Large-Scale Training"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [],
+            "HOTSPOT_PAPER_PRIMARY_KIND": null,
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+        },
+        "2605.22644": {
+            "ARXIVID": "2605.22644",
+            "COMMENT": "Rejects the Langevin/Brownian picture of minibatch noise, deriving from the discrete update a master equation and a Fokker-Planck form that departs from Langevin at order eta^2, and predicting that nearly-flat Hessian directions admit no stationary distribution but diffuse along valleys with learning-rate-proportional coefficient.",
+            "RELEVANCE": 7,
+            "NOVELTY": 7,
+            "PRIMARY_TOPIC_ID": "architecture_training",
+            "MATCHED_TOPIC_IDS": [
+                "training_systems",
+                "architecture_training"
+            ],
+            "TOPIC_MATCH_COMMENT": "Training-dynamics analysis of the optimizer itself, with a confined-versus-diffusive separation checked on real vision and language models rather than only toy losses.",
+            "HOTSPOT_PAPER_TAGS": [],
+            "HOTSPOT_PAPER_COMMENT": "",
+            "SCORE": 14,
+            "authors": [
+                "Igor Ignashin",
+                "Anna Radovskaya",
+                "Andrew Semenov",
+                "Egor Lopatin",
+                "Stanislav Potapov",
+                "Aleksandr Kovalenko",
+                "Andrey Veprikov",
+                "Aleksandr Shestakov",
+                "Andrey Leonidov",
+                "Aleksandr Beznosikov"
+            ],
+            "title": "Why SGD is not Brownian Motion: A New Perspective on Stochastic Dynamics",
+            "abstract": "Stochastic Gradient Descent (SGD) is commonly modeled as a Langevin process, assuming that minibatch noise acts as Brownian motion. However, this approximation relies on a continuous-time limit and a sqrt(eta) noise scaling that does not match the discrete SGD update at finite learning rate. In this work, we propose an alternative formulation of SGD as deterministic dynamics in a fluctuating loss landscape induced by minibatch sampling. Starting directly from the discrete update, we derive a master equation for the parameter distribution and obtain a discrete Fokker--Planck equation that differs from the standard Langevin form at order eta^2. Using this framework, we analyze SGD dynamics near critical points of the loss. We show that the behavior decomposes along the eigenbasis of the mean Hessian into qualitatively distinct regimes. In particular, nearly-flat directions do not admit a stationary distribution: the variance grows over time, corresponding to effective diffusion along valleys with a coefficient proportional to the learning rate. We provide empirical evidence supporting these predictions on neural network models in computer vision and natural language processing, observing a clear qualitative separation between confined and diffusive modes.",
+            "arxiv_id": "2605.22644",
+            "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+            "MATCHED_TOPIC_LABELS": [
+                "Large-Scale Training Systems and Efficiency",
+                "Architecture and Training Dynamics"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [],
+            "HOTSPOT_PAPER_PRIMARY_KIND": null,
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+        },
+        "2605.23087": {
+            "ARXIVID": "2605.23087",
+            "COMMENT": "Shows depth induces an implicit low-rank bias in unregularized deep UFMs, with singular-value repulsion driving the early dynamics.",
+            "RELEVANCE": 6,
+            "NOVELTY": 7,
+            "PRIMARY_TOPIC_ID": "architecture_training",
+            "MATCHED_TOPIC_IDS": [
+                "architecture_training"
+            ],
+            "TOPIC_MATCH_COMMENT": "Optimisation-dynamics analysis of how depth shapes learned geometry, though it targets neural collapse rather than large-model pretraining.",
+            "HOTSPOT_PAPER_TAGS": [],
+            "HOTSPOT_PAPER_COMMENT": "",
+            "SCORE": 13,
+            "authors": [
+                "Connall Garrod",
+                "Jonathan P. Keating",
+                "Christos Thrampoulidis"
+            ],
+            "title": "The Implicit Bias of Depth: From Neural Collapse to Softmax Codes",
+            "abstract": "Neural collapse (NC) describes the structured geometry that emerges in the features and weights of trained classifiers. Recent theory suggests NC can be suboptimal in deep architectures, attributing this to an explicit low-rank bias from L2 regularization. We study the deep unconstrained feature model (UFM)-equivalent to a deep linear network with orthogonal inputs-trained without regularization, to isolate how gradient descent and depth alone shape NC. We show that depth induces an implicit low-rank bias: low-rank matrices propagate norm more efficiently through successive multiplications, promoting low-rank alternatives to NC. These alternatives, we argue, correspond to softmax codes: max-margin solutions previously found in width-bottlenecked networks. Analyzing training dynamics under spectral initialization, we identify an early-time repulsion among singular values that drives low-rank emergence, and characterize how depth shrinks NC's basin of attraction. Finally, we show that some effects act in the opposite direction: for randomly initialized networks, increasing width biases training toward higher-rank solutions. Our results provide the first asymptotic and dynamic characterization of implicit bias in deep UFMs trained with unregularized multiclass cross-entropy.",
+            "arxiv_id": "2605.23087",
+            "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+            "MATCHED_TOPIC_LABELS": [
+                "Architecture and Training Dynamics"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [],
+            "HOTSPOT_PAPER_PRIMARY_KIND": null,
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+        },
+        "2605.22341": {
+            "ARXIVID": "2605.22341",
+            "COMMENT": "Derives an asymptotic mechanism for power-law learning curves from the smooth-surrogate/hard-label mismatch: once only O(1/D)-wide boundary layers stay active, fixed-learning-rate online SGD noise pins the error to alpha^-1/3, and schedules lift it to alpha^-1/2.",
+            "RELEVANCE": 6,
+            "NOVELTY": 7,
+            "PRIMARY_TOPIC_ID": "architecture_training",
+            "MATCHED_TOPIC_IDS": [
+                "training_systems",
+                "architecture_training"
+            ],
+            "TOPIC_MATCH_COMMENT": "Training-dynamics analysis that explains a scaling exponent and predicts what a learning-rate schedule buys, positioned as complementary to spectral scaling-law accounts.",
+            "HOTSPOT_PAPER_TAGS": [],
+            "HOTSPOT_PAPER_COMMENT": "",
+            "SCORE": 13,
+            "authors": [
+                "Marcel Kühn",
+                "Yoon Thelge",
+                "Bernd Rosenow"
+            ],
+            "title": "A Boundary-Layer Mechanism for One-Third Scaling in Online Softmax Classification",
+            "abstract": "Hard-label classification is usually trained with smooth surrogate losses, most prominently softmax cross-entropy. We isolate an asymptotic mechanism by which this mismatch between smooth surrogate and discrete labels produces power-law learning curves in an online teacher-student model. After subtracting the mean logit, the thermodynamic-limit dynamics close in centered variables: a growing centered student-teacher alignment $D$ and the residual student variance $Δ$. At late times, examples away from teacher decision boundaries are already classified confidently and contribute exponentially little. Only boundary layers of width $O(D^{-1})$ remain active, while the noise of fixed-learning-rate online gradient descent maintains a nonzero $Δ$. As a function of the training time $α$ the late-time solution yields a $α^{-1/3}$ power law not only for the test loss but also for the generalization error $ε_g$, i.e., one minus test accuracy. This is much slower than the $α^{-1}$ Bayes-optimal reference for the same model. We further show that learning-rate schedules can improve the generalization error towards a $ε_g \\sim α^{-1/2}$ power law. Simulations support the predicted order parameter dynamics and learning curves. Controlled experiments with correlated Gaussian inputs and whitened pretrained features show that data structure can dominate transients. Therefore, our result is an asymptotic, complementary mechanism rather than an alternative to spectral explanations of neural scaling laws.",
+            "arxiv_id": "2605.22341",
+            "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+            "MATCHED_TOPIC_LABELS": [
+                "Large-Scale Training Systems and Efficiency",
+                "Architecture and Training Dynamics"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [],
+            "HOTSPOT_PAPER_PRIMARY_KIND": null,
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+        },
+        "2605.22350": {
+            "ARXIVID": "2605.22350",
+            "COMMENT": "Partial fusion interpolates between full ensembles and weight aggregation by merging only the most similar neurons via partial optimal transport, and recasts both as generalized pruning where neurons can be linearly combined rather than only deleted.",
+            "RELEVANCE": 6,
+            "NOVELTY": 6,
+            "PRIMARY_TOPIC_ID": "efficiency_scaling",
+            "MATCHED_TOPIC_IDS": [
+                "efficiency_scaling"
+            ],
+            "TOPIC_MATCH_COMMENT": "The contribution is a cost/quality knob for model compression, with the pruning-as-linear-combination view being the new part; scale is small, which caps relevance.",
+            "HOTSPOT_PAPER_TAGS": [],
+            "HOTSPOT_PAPER_COMMENT": "",
+            "SCORE": 12,
+            "authors": [
+                "Fabian Morelli",
+                "Stephan Eckstein"
+            ],
+            "title": "Partial Fusion of Neural Networks: Efficient Tradeoffs Between Ensembles and Weight Aggregation",
+            "abstract": "Ensembles of neural networks typically outperform individual networks but incur large computational costs, whereas weight aggregation produces less costly, yet also less accurate, aggregate models. We introduce partial fusion of networks, which interpolates between ensembles and weight aggregation and thus allows for a flexible tradeoff between computational cost and performance. A direct way to achieve this is to extend existing weight aggregation methods based on neuron-level similarity between different networks, where partial fusion then only aggregates weights of neurons which are most similar. We showcase one particular method to jointly identify which neurons are most similar and match them via partial optimal transport. Further, we consider the more general perspective of weight aggregation and partial fusion as generalized pruning of ensemble models, where neurons cannot just be deleted, but also linearly combined. Finally, we show that generalized pruning applied to a single network yields similar benefits as partial fusion by allowing for a tradeoff between isolating, deleting, and linearly combining neurons based on similarity. Our code is available at https://github.com/Fabian-Mor/partial_fusion_nn.",
+            "arxiv_id": "2605.22350",
+            "PRIMARY_TOPIC_LABEL": "Efficiency, Compression, and Large-Scale Training",
+            "MATCHED_TOPIC_LABELS": [
+                "Efficiency, Compression, and Large-Scale Training"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [],
+            "HOTSPOT_PAPER_PRIMARY_KIND": null,
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+        },
+        "2605.22106": {
+            "ARXIVID": "2605.22106",
+            "COMMENT": "Structure-aware KV eviction for tree search: a value estimator plus tree-aware budget allocation keeps the active branch and ancestors resident while inactive subtrees are evicted token-extractively and lazily rehydrated for backtracking, cutting peak KV memory about 4x.",
+            "RELEVANCE": 6,
+            "NOVELTY": 6,
+            "PRIMARY_TOPIC_ID": "efficiency_scaling",
+            "MATCHED_TOPIC_IDS": [
+                "efficiency_scaling"
+            ],
+            "TOPIC_MATCH_COMMENT": "A KV-memory mechanism whose eviction policy is driven by search structure, which is a new angle, though it changes inference cost rather than training cost.",
+            "HOTSPOT_PAPER_TAGS": [],
+            "HOTSPOT_PAPER_COMMENT": "",
+            "SCORE": 12,
+            "authors": [
+                "Yeqiu Chen",
+                "Ziyan Liu",
+                "Zhenxin Huang",
+                "Runquan Gui",
+                "Hong Wang",
+                "Lei Liu"
+            ],
+            "title": "ArborKV: Structure-Aware KV Cache Management for Scaling Tree-based LLM Reasoning",
+            "abstract": "Recent progress in LLM reasoning has increasingly shifted from single-pass generation to explicit search over intermediate reasoning states. Tree-of-Thoughts (ToT) organizes inference to tree-structured search with branching and backtracking, but it substantially amplifies the Key--Value (KV) cache: retaining KV states for a frontier of partial trajectories quickly becomes a memory bottleneck that limits throughput and constrains search depth and width under fixed hardware budgets. We address this challenge by observing that KV reuse in ToT-style inference is governed by search dynamics: near-term decoding depends primarily on the active branch and its ancestors, whereas inactive subtrees have low short-term reuse probability yet must remain recoverable for backtracking. Motivated by this, we propose ArborKV, a structure-aware eviction framework that couples a lightweight value estimator with a tree-aware allocation policy, and performs purely token-extractive eviction with lazy rehydration to support revisits. Experiments on ToT-style reasoning benchmarks show that ArborKV achieves up to ~4x peak KV-memory reduction while preserving near-full-retention accuracy, enabling larger search configurations under fixed device budgets that would otherwise run out of memory.",
+            "arxiv_id": "2605.22106",
+            "PRIMARY_TOPIC_LABEL": "Efficiency, Compression, and Large-Scale Training",
+            "MATCHED_TOPIC_LABELS": [
+                "Efficiency, Compression, and Large-Scale Training"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [],
+            "HOTSPOT_PAPER_PRIMARY_KIND": null,
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+        }
+    },
+    "topic_sections": [
+        {
+            "topic_id": "moe_training",
+            "topic_label": "MoE Training",
+            "paper_ids": [
+                "2605.23078"
+            ]
+        },
+        {
+            "topic_id": "training_systems",
+            "topic_label": "Large-Scale Training Systems and Efficiency",
+            "paper_ids": [
+                "2605.22297",
+                "2605.22432"
+            ]
+        },
+        {
+            "topic_id": "architecture_training",
+            "topic_label": "Architecture and Training Dynamics",
+            "paper_ids": [
+                "2605.22644",
+                "2605.23087",
+                "2605.22341"
+            ]
+        },
+        {
+            "topic_id": "efficiency_scaling",
+            "topic_label": "Efficiency, Compression, and Large-Scale Training",
+            "paper_ids": [
+                "2605.23081",
+                "2605.22884",
+                "2605.22337",
+                "2605.22350",
+                "2605.22106"
+            ]
+        }
+    ]
 }

@@ -1,0 +1,1216 @@
+{
+    "schema_version": 2,
+    "meta": {
+        "date": "2026-02-04",
+        "sort": [
+            "score",
+            "relevance"
+        ],
+        "topic_schema_version": 2,
+        "total_papers": 30,
+        "usage": {
+            "model": "llmcall:cc+codexg",
+            "prompt_tokens": 0,
+            "completion_tokens": 0,
+            "prompt_cost": 0.0,
+            "completion_cost": 0.0,
+            "total_arxiv_papers": 531,
+            "total_scanned_papers": 531,
+            "total_relevant_papers": 30,
+            "filter_health": {
+                "status": "ok",
+                "scanned_papers": 531,
+                "selected_papers": 30,
+                "llm_tokens": 0,
+                "message": "Scored 531 papers with 7/7 successful model calls; 30 selected."
+            },
+            "llm": {
+                "backend": "LLM backend: llmcall chain=codexg->codex->cc->claude",
+                "attempted": 7,
+                "succeeded": 7,
+                "failed": 0,
+                "by_backend": {
+                    "llmcall": 7
+                },
+                "by_provider": {
+                    "cc": 4,
+                    "codexg": 3
+                },
+                "errors": [],
+                "seconds": 1081.9,
+                "trace": [
+                    "codexg: unavailable after 5.1s of 543.7s (OpenAI Codex v0.154.0",
+                    "codex: unavailable after 5.0s of 557.4s (OpenAI Codex v0.154.0",
+                    "cc: answered in 106.0s of 571.2s",
+                    "codexg: unavailable after 8.3s of 543.7s (2026-09-11T04:36:00.192436Z ERROR codex_models_manager::manager: failed to refresh available models: stream disconnected before completion: failed to decode models response: missing field `models` at )",
+                    "codex: unavailable after 4.2s of 554.2s (OpenAI Codex v0.154.0",
+                    "cc: answered in 14.9s of 568.7s",
+                    "codexg: unavailable after 7.6s of 543.7s (OpenAI Codex v0.154.0",
+                    "codex: unavailable after 5.3s of 554.9s (OpenAI Codex v0.154.0",
+                    "cc: answered in 39.0s of 568.3s",
+                    "codexg: answered in 453.9s of 543.7s",
+                    "codexg: unavailable after 4.5s of 543.7s (OpenAI Codex v0.154.0",
+                    "codex: unavailable after 3.7s of 558.0s (OpenAI Codex v0.154.0",
+                    "cc: answered in 223.5s of 573.1s",
+                    "codexg: answered in 128.7s of 543.7s",
+                    "codexg: answered in 72.2s of 543.7s"
+                ]
+            },
+            "remedied": true
+        }
+    },
+    "topic_order": [
+        "moe_training",
+        "training_systems",
+        "architecture_training",
+        "efficiency_scaling",
+        "representation_structure",
+        "memory_systems",
+        "world_models_open_ended_rl"
+    ],
+    "diagnostics": {
+        "total_papers": 30,
+        "topic_counts": [
+            {
+                "topic_id": "moe_training",
+                "topic_label": "MoE Training",
+                "paper_count": 1
+            },
+            {
+                "topic_id": "training_systems",
+                "topic_label": "Large-Scale Training Systems and Efficiency",
+                "paper_count": 5
+            },
+            {
+                "topic_id": "architecture_training",
+                "topic_label": "Architecture and Training Dynamics",
+                "paper_count": 6
+            },
+            {
+                "topic_id": "efficiency_scaling",
+                "topic_label": "Efficiency, Compression, and Large-Scale Training",
+                "paper_count": 18
+            },
+            {
+                "topic_id": "representation_structure",
+                "topic_label": "Representation Learning Theory and Structure",
+                "paper_count": 0
+            },
+            {
+                "topic_id": "memory_systems",
+                "topic_label": "Memory Structures and Agent Memory Systems",
+                "paper_count": 0
+            },
+            {
+                "topic_id": "world_models_open_ended_rl",
+                "topic_label": "World Models, Exploration, and Open-Ended Reinforcement Learning",
+                "paper_count": 0
+            }
+        ],
+        "assignment_source_counts": {
+            "llm_exact": 30
+        },
+        "llm_assignment_count": 30,
+        "heuristic_assignment_count": 0,
+        "default_assignment_count": 0,
+        "invalid_primary_topic_fallback_count": 0,
+        "missing_primary_topic_fallback_count": 0,
+        "hotspot_paper_kind_counts": {
+            "new_frontier": 0,
+            "daily_hot": 1
+        },
+        "hotspot_paper_assignment_source_counts": {
+            "heuristic": 1,
+            "default": 29
+        }
+    },
+    "papers": {
+        "2602.03537": {
+            "ARXIVID": "2602.03537",
+            "COMMENT": "One-shot multi-precision quantization combines bit slicing with cross-bit error compensation.",
+            "RELEVANCE": 9,
+            "NOVELTY": 8,
+            "PRIMARY_TOPIC_ID": "efficiency_scaling",
+            "MATCHED_TOPIC_IDS": [
+                "efficiency_scaling"
+            ],
+            "TOPIC_MATCH_COMMENT": "The central contribution is an LLM compression algorithm producing one checkpoint usable at multiple precisions.",
+            "HOTSPOT_PAPER_TAGS": [
+                "daily_hot"
+            ],
+            "HOTSPOT_PAPER_COMMENT": "Broadly important today: One-shot multi-precision quantization combines bit slicing with cross-bit error compensation.",
+            "SCORE": 17,
+            "authors": [
+                "Maximilian Kleinegger",
+                "Elvir Crnčević",
+                "Dan Alistarh"
+            ],
+            "title": "MatGPTQ: Accurate and Efficient Post-Training Matryoshka Quantization",
+            "abstract": "Matryoshka Quantization (MatQuant) is a recent quantization approach showing that a single integer-quantized model can be served across multiple precisions, by slicing the most significant bits (MSB) at inference time. This enables a single checkpoint to cover a wide range of memory and latency budgets, but renders quantization much more challenging. In particular, the initial MatQuant relies on expensive quantization-aware training (QAT) variants, rather than fast one-shot post training quantization (PTQ), and lacks open-source and kernel support. We address all of these limitations by introducing Post-Training Matryoshka Quantization (MatGPTQ), a new PTQ pipeline that produces a single parent model jointly optimized for multiple target precisions in one-shot, based on a small calibration set. MatGPTQ casts Matryoshka quantization as a multi-precision objective with bit-slicing and cross-bit error compensation, resulting in an algorithm that produces a multi-bit-width, \"sliceable\" model in a single pass. We also incorporate a new budget-aware search for heterogeneous per-layer bit-witdhs and provide efficient kernels that implement slicing and mixed-precision execution. Across standard LLMs and benchmarks, MatGPTQ preserves high-bit accuracy while substantially improving performance at low-bit-witdh settings. Overall, we establish a new state of the art for Matryoshka-style post-training quantization and make single-checkpoint, multi-precision deployment open and practical. Code is available at https://github.com/IST-DASLab/MatGPTQ.",
+            "arxiv_id": "2602.03537",
+            "PRIMARY_TOPIC_LABEL": "Efficiency, Compression, and Large-Scale Training",
+            "MATCHED_TOPIC_LABELS": [
+                "Efficiency, Compression, and Large-Scale Training"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [
+                "Daily Hot Papers"
+            ],
+            "HOTSPOT_PAPER_PRIMARY_KIND": "daily_hot",
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "Daily Hot Papers",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "heuristic"
+        },
+        "2603.04411": {
+            "ARXIVID": "2603.04411",
+            "COMMENT": "Token-wise adaptive low-rank KV compression allocates compression rates according to token semantics.",
+            "RELEVANCE": 9,
+            "NOVELTY": 7,
+            "PRIMARY_TOPIC_ID": "efficiency_scaling",
+            "MATCHED_TOPIC_IDS": [
+                "efficiency_scaling"
+            ],
+            "TOPIC_MATCH_COMMENT": "A new KV-cache compression mechanism directly reduces long-context inference memory.",
+            "HOTSPOT_PAPER_TAGS": [],
+            "HOTSPOT_PAPER_COMMENT": "",
+            "SCORE": 16,
+            "authors": [
+                "Liming Lu",
+                "Kaixi Qiu",
+                "Jiayu Zhou",
+                "Jushi Kai",
+                "Haoyan Zhang",
+                "Huanyu Wang",
+                "Jingwen Leng",
+                "Ziwei He",
+                "Zhouhan Lin"
+            ],
+            "title": "One Size Does Not Fit All: Token-Wise Adaptive Compression for KV Cache",
+            "abstract": "Despite the remarkable progress of Large Language Models (LLMs), the escalating memory footprint of the Key-Value (KV) cache remains a critical bottleneck for efficient inference. While dimensionality reduction offers a promising compression avenue, existing approaches typically either necessitate prohibitively expensive pre-training from scratch or suffer from severe performance deterioration under high compression regimes. In this work, we propose DynaKV, a novel post-training framework for low-rank KV cache compression. To the best of our knowledge, DynaKV is the first method to dynamically allocate compression rates to individual tokens according to their semantic meaning, which allows it to achieve better fidelity at aggressive compression ratios. Extensive experiments demonstrate that our method consistently outperforms existing state-of-the-art compression techniques, achieving significant memory reduction while maintaining competitive generation quality. Furthermore, our approach is orthogonal to sequence-level pruning methods. When integrated with SnapKV, DynaKV retains only 6% of the KV cache while maintaining 94% of the baseline performance on the LongBench benchmark.",
+            "arxiv_id": "2603.04411",
+            "PRIMARY_TOPIC_LABEL": "Efficiency, Compression, and Large-Scale Training",
+            "MATCHED_TOPIC_LABELS": [
+                "Efficiency, Compression, and Large-Scale Training"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [],
+            "HOTSPOT_PAPER_PRIMARY_KIND": null,
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+        },
+        "2602.03815": {
+            "ARXIVID": "2602.03815",
+            "COMMENT": "Fast pruned-token training and full-token self-distillation resolve pruning-induced training-inference mismatch.",
+            "RELEVANCE": 9,
+            "NOVELTY": 7,
+            "PRIMARY_TOPIC_ID": "efficiency_scaling",
+            "MATCHED_TOPIC_IDS": [
+                "efficiency_scaling"
+            ],
+            "TOPIC_MATCH_COMMENT": "The new training schedule directly reduces MLLM training cost while preserving full-token inference performance.",
+            "HOTSPOT_PAPER_TAGS": [],
+            "HOTSPOT_PAPER_COMMENT": "",
+            "SCORE": 16,
+            "authors": [
+                "Dingkun Zhang",
+                "Shuhan Qi",
+                "Yulin Wu",
+                "Xinyu Xiao",
+                "Xuan Wang",
+                "Long Chen"
+            ],
+            "title": "Fast-Slow Efficient Training for Multimodal Large Language Models via Visual Token Pruning",
+            "abstract": "Multimodal Large Language Models (MLLMs) suffer from severe training inefficiency issue, which is associated with their massive model sizes and visual token numbers. Existing efforts in efficient training focus on reducing model sizes or trainable parameters. Inspired by the success of Visual Token Pruning (VTP) in improving inference efficiency, we are exploring another substantial research direction for efficient training by reducing visual tokens. However, applying VTP at the training stage results in a training-inference mismatch: pruning-trained models perform poorly when inferring on non-pruned full visual token sequences. To close this gap, we propose DualSpeed, a fast-slow framework for efficient training of MLLMs. The fast-mode is the primary mode, which incorporates existing VTP methods as plugins to reduce visual tokens, along with a mode isolator to isolate the model's behaviors. The slow-mode is the auxiliary mode, where the model is trained on full visual sequences to retain training-inference consistency. To boost its training, it further leverages self-distillation to learn from the sufficiently trained fast-mode. Together, DualSpeed can achieve both training efficiency and non-degraded performance. Experiments show DualSpeed accelerates the training of LLaVA-1.5 by 2.1$\\times$ and LLaVA-NeXT by 4.0$\\times$, retaining over 99% performance. Code: https://github.com/dingkun-zhang/DualSpeed",
+            "arxiv_id": "2602.03815",
+            "PRIMARY_TOPIC_LABEL": "Efficiency, Compression, and Large-Scale Training",
+            "MATCHED_TOPIC_LABELS": [
+                "Efficiency, Compression, and Large-Scale Training"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [],
+            "HOTSPOT_PAPER_PRIMARY_KIND": null,
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+        },
+        "2602.03096": {
+            "ARXIVID": "2602.03096",
+            "COMMENT": "Muon-style spectral updates gain low-rank curvature-aware preconditioning without additional optimizer memory.",
+            "RELEVANCE": 9,
+            "NOVELTY": 7,
+            "PRIMARY_TOPIC_ID": "training_systems",
+            "MATCHED_TOPIC_IDS": [
+                "training_systems"
+            ],
+            "TOPIC_MATCH_COMMENT": "Spectral preconditioning directly fits optimizer design for efficient model training.",
+            "HOTSPOT_PAPER_TAGS": [],
+            "HOTSPOT_PAPER_COMMENT": "",
+            "SCORE": 16,
+            "authors": [
+                "Yujie Yang"
+            ],
+            "title": "PRISM: Structured Optimization via Anisotropic Spectral Shaping",
+            "abstract": "We propose PRISM, an optimizer that enhances first-order spectral descent methods like Muon with partial second-order information. It constructs an efficient, low-rank quasi-second-order preconditioner via innovation-augmented polar decomposition. This mechanism enables PRISM to perform anisotropic spectral shaping, which adaptively suppresses updates in high-variance subspaces while preserving update strength in signal-dominated directions. Crucially, this is achieved with minimal computational overhead and zero additional memory compared to first-order baselines. PRISM demonstrates a practical strategy for integrating curvature-adaptive properties into the spectral optimization paradigm.",
+            "arxiv_id": "2602.03096",
+            "PRIMARY_TOPIC_LABEL": "Large-Scale Training Systems and Efficiency",
+            "MATCHED_TOPIC_LABELS": [
+                "Large-Scale Training Systems and Efficiency"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [],
+            "HOTSPOT_PAPER_PRIMARY_KIND": null,
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+        },
+        "2602.03184": {
+            "ARXIVID": "2602.03184",
+            "COMMENT": "Dynamic semantic KV segmentation and uniform block mapping combine cache compression with efficient execution.",
+            "RELEVANCE": 9,
+            "NOVELTY": 7,
+            "PRIMARY_TOPIC_ID": "efficiency_scaling",
+            "MATCHED_TOPIC_IDS": [
+                "efficiency_scaling"
+            ],
+            "TOPIC_MATCH_COMMENT": "The core is a KV-cache compression algorithm coupling semantic boundaries to an efficient block representation.",
+            "HOTSPOT_PAPER_TAGS": [],
+            "HOTSPOT_PAPER_COMMENT": "",
+            "SCORE": 16,
+            "authors": [
+                "Jiancai Ye",
+                "Jun Liu",
+                "Qingchen Li",
+                "Tianlang Zhao",
+                "Hanbin Zhang",
+                "Jiayi Pan",
+                "Ningyi Xu",
+                "Guohao Dai"
+            ],
+            "title": "DynSplit-KV: Dynamic Semantic Splitting for KVCache Compression in Efficient Long-Context LLM Inference",
+            "abstract": "Although Key-Value (KV) Cache is essential for efficient large language models (LLMs) inference, its growing memory footprint in long-context scenarios poses a significant bottleneck, making KVCache compression crucial. Current compression methods rely on rigid splitting strategies, such as fixed intervals or pre-defined delimiters. We observe that rigid splitting suffers from significant accuracy degradation (ranging from 5.5% to 55.1%) across different scenarios, owing to the scenario-dependent nature of the semantic boundaries. This highlights the necessity of dynamic semantic splitting to match semantics. To achieve this, we face two challenges. (1) Improper delimiter selection misaligns semantics with the KVCache, resulting in 28.6% accuracy loss. (2) Variable-length blocks after splitting introduce over 73.1% additional inference overhead. To address the above challenges, we propose DynSplit-KV, a KVCache compression method that dynamically identifies delimiters for splitting. We propose: (1) a dynamic importance-aware delimiter selection strategy, improving accuracy by 49.9%. (2) A uniform mapping strategy that transforms variable-length semantic blocks into a fixed-length format, reducing inference overhead by 4.9x. Experiments show that DynSplit-KV achieves the highest accuracy, 2.2x speedup compared with FlashAttention and 2.6x peak memory reduction in long-context scenarios.",
+            "arxiv_id": "2602.03184",
+            "PRIMARY_TOPIC_LABEL": "Efficiency, Compression, and Large-Scale Training",
+            "MATCHED_TOPIC_LABELS": [
+                "Efficiency, Compression, and Large-Scale Training"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [],
+            "HOTSPOT_PAPER_PRIMARY_KIND": null,
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+        },
+        "2602.03001": {
+            "ARXIVID": "2602.03001",
+            "COMMENT": "Derives gradient noise scales in the dual norms natural to signSGD/Signum and spectral descent/Muon rather than assuming SGD's Euclidean geometry, and estimates them cheaply from per-rank local mini-batch gradients in DDP to drive adaptive batch-size schedules.",
+            "RELEVANCE": 9,
+            "NOVELTY": 7,
+            "PRIMARY_TOPIC_ID": "training_systems",
+            "MATCHED_TOPIC_IDS": [
+                "training_systems"
+            ],
+            "TOPIC_MATCH_COMMENT": "Directly about optimizers for large-scale pretraining and how batch-size schedules should be configured under data-parallel execution.",
+            "HOTSPOT_PAPER_TAGS": [],
+            "HOTSPOT_PAPER_COMMENT": "",
+            "SCORE": 16,
+            "authors": [
+                "Hiroki Naganuma",
+                "Shagun Gupta",
+                "Youssef Briki",
+                "Ioannis Mitliagkas",
+                "Irina Rish",
+                "Parameswaran Raman",
+                "Hao-Jun Michael Shi"
+            ],
+            "title": "Adaptive Batch Sizes Using Non-Euclidean Gradient Noise Scales for Stochastic Sign and Spectral Descent",
+            "abstract": "To maximize hardware utilization, modern machine learning systems typically employ large constant or manually tuned batch size schedules, relying on heuristics that are brittle and costly to tune. Existing adaptive strategies based on gradient noise scale (GNS) offer a principled alternative. However, their assumption of SGD's Euclidean geometry creates a fundamental mismatch with popular optimizers based on generalized norms, such as signSGD / Signum ($\\ell_\\infty$) and stochastic spectral descent (specSGD) / Muon ($\\mathcal{S}_\\infty$). In this work, we derive gradient noise scales for signSGD and specSGD that naturally emerge from the geometry of their respective dual norms. To practically estimate these non-Euclidean metrics, we propose an efficient variance estimation procedure that leverages the local mini-batch gradients on different ranks in distributed data-parallel systems. Our experiments demonstrate that adaptive batch size strategies using non-Euclidean GNS enable us to match the validation loss of constant-batch baselines while reducing training steps by up to 66\\% for Signum and Muon on a 160 million parameter Llama model.",
+            "arxiv_id": "2602.03001",
+            "PRIMARY_TOPIC_LABEL": "Large-Scale Training Systems and Efficiency",
+            "MATCHED_TOPIC_LABELS": [
+                "Large-Scale Training Systems and Efficiency"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [],
+            "HOTSPOT_PAPER_PRIMARY_KIND": null,
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+        },
+        "2602.03702": {
+            "ARXIVID": "2602.03702",
+            "COMMENT": "Shows horizon-free learning-rate schedules exist for overparameterized linear regression, with weight averaging supplying the minimax SGD rate, and verifies that constant or 1/sqrt(t) steps plus averaging match a tuned cosine schedule at 150M-300M up to 32x Chinchilla.",
+            "RELEVANCE": 9,
+            "NOVELTY": 7,
+            "PRIMARY_TOPIC_ID": "training_systems",
+            "MATCHED_TOPIC_IDS": [
+                "training_systems",
+                "architecture_training"
+            ],
+            "TOPIC_MATCH_COMMENT": "Directly about how pretraining runs are configured, removing the horizon dependence that makes schedules require a fixed compute budget.",
+            "HOTSPOT_PAPER_TAGS": [],
+            "HOTSPOT_PAPER_COMMENT": "",
+            "SCORE": 16,
+            "authors": [
+                "Alexandru Meterez",
+                "Pranav Ajit Nair",
+                "Depen Morwani",
+                "Cengiz Pehlevan",
+                "Sham Kakade"
+            ],
+            "title": "Anytime Pretraining: Horizon-Free Learning-Rate Schedules with Weight Averaging",
+            "abstract": "Large language models are increasingly trained in continual or open-ended settings, where the total training horizon is not known in advance. Despite this, most existing pretraining recipes are not anytime: they rely on horizon-dependent learning rate schedules and extensive tuning under a fixed compute budget. In this work, we provide a theoretical analysis demonstrating the existence of anytime learning schedules for overparameterized linear regression, and we highlight the central role of weight averaging - also known as model merging - in achieving the minimax convergence rates of stochastic gradient descent. We show that these anytime schedules polynomially decay with time, with the decay rate determined by the source and capacity conditions of the problem. Empirically, we evaluate 150M and 300M parameter language models trained for up to 32x Chinchilla scale, comparing constant and $1/\\sqrt{t}$ schedules with weight averaging against a well-tuned cosine schedule. Across the full training range, the anytime schedules achieve comparable final loss to cosine decay. Taken together, our results suggest that weight averaging combined with simple, horizon-free step sizes offers a practical and effective anytime alternative to cosine learning rate schedules for large language model pretraining.",
+            "arxiv_id": "2602.03702",
+            "PRIMARY_TOPIC_LABEL": "Large-Scale Training Systems and Efficiency",
+            "MATCHED_TOPIC_LABELS": [
+                "Large-Scale Training Systems and Efficiency",
+                "Architecture and Training Dynamics"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [],
+            "HOTSPOT_PAPER_PRIMARY_KIND": null,
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+        },
+        "2602.03921": {
+            "ARXIVID": "2602.03921",
+            "COMMENT": "Least-Stale expert-cache eviction exploits predictable MoE access patterns to reduce misses and inference latency.",
+            "RELEVANCE": 8,
+            "NOVELTY": 7,
+            "PRIMARY_TOPIC_ID": "efficiency_scaling",
+            "MATCHED_TOPIC_IDS": [
+                "efficiency_scaling"
+            ],
+            "TOPIC_MATCH_COMMENT": "The new eviction policy makes this an inference memory-efficiency contribution beyond its benchmarking framework.",
+            "HOTSPOT_PAPER_TAGS": [],
+            "HOTSPOT_PAPER_COMMENT": "",
+            "SCORE": 15,
+            "authors": [
+                "Duc Hoang",
+                "Ajay Jaiswal",
+                "Mohammad Samragh",
+                "Minsik Cho"
+            ],
+            "title": "SpecMD: A Comprehensive Study On Speculative Expert Prefetching",
+            "abstract": "Mixture-of-Experts (MoE) models enable sparse expert activation, meaning that only a subset of the model's parameters is used during each inference. However, to translate this sparsity into practical performance, an expert caching mechanism is required. Previous works have proposed hardware-centric caching policies, but how these various caching policies interact with each other and different hardware specification remains poorly understood. To address this gap, we develop \\textbf{SpecMD}, a standardized framework for benchmarking ad-hoc cache policies on various hardware configurations. Using SpecMD, we perform an exhaustive benchmarking of several MoE caching strategies, reproducing and extending prior approaches in controlled settings with realistic constraints. Our experiments reveal that MoE expert access is not consistent with temporal locality assumptions (e.g LRU, LFU). Motivated by this observation, we propose \\textbf{Least-Stale}, a novel eviction policy that exploits MoE's predictable expert access patterns to reduce collision misses by up to $85\\times$ over LRU. With such gains, we achieve over $88\\%$ hit rates with up to $34.7\\%$ Time-to-first-token (TTFT) reduction on OLMoE at only $5\\%$ or $0.6GB$ of VRAM cache capacity.",
+            "arxiv_id": "2602.03921",
+            "PRIMARY_TOPIC_LABEL": "Efficiency, Compression, and Large-Scale Training",
+            "MATCHED_TOPIC_LABELS": [
+                "Efficiency, Compression, and Large-Scale Training"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [],
+            "HOTSPOT_PAPER_PRIMARY_KIND": null,
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+        },
+        "2602.03473": {
+            "ARXIVID": "2602.03473",
+            "COMMENT": "Bi-level routing first selects task-specific routers and then activates and aggregates experts within network layers.",
+            "RELEVANCE": 8,
+            "NOVELTY": 7,
+            "PRIMARY_TOPIC_ID": "moe_training",
+            "MATCHED_TOPIC_IDS": [
+                "moe_training"
+            ],
+            "TOPIC_MATCH_COMMENT": "The core mechanism changes expert routing, with continual class learning providing a narrower application setting.",
+            "HOTSPOT_PAPER_TAGS": [],
+            "HOTSPOT_PAPER_COMMENT": "",
+            "SCORE": 15,
+            "authors": [
+                "Meng Lou",
+                "Yunxiang Fu",
+                "Yizhou Yu"
+            ],
+            "title": "Scaling Continual Learning to 300+ Tasks with Bi-Level Routing Mixture-of-Experts",
+            "abstract": "Continual learning, especially class-incremental learning (CIL), on the basis of a pre-trained model (PTM) has garnered substantial research interest in recent years. However, how to effectively learn both discriminative and comprehensive feature representations while maintaining stability and plasticity over very long task sequences remains an open problem. We propose CaRE, a scalable {C}ontinual Le{a}rner with efficient Bi-Level {R}outing Mixture-of-{E}xperts (BR-MoE). The core idea of BR-MoE is a bi-level routing mechanism: a router selection stage that dynamically activates relevant task-specific routers, followed by an expert routing phase that dynamically activates and aggregates experts, aiming to inject discriminative and comprehensive representations into every intermediate network layer. On the other hand, we introduce a challenging dataset, OmniBenchmark-1K, for CIL performance evaluation on very long task sequences with hundreds of tasks. Extensive experiments show that CaRE demonstrates leading performance across a variety of datasets and task settings, including commonly used CIL datasets with classical CIL settings (e.g., 5-20 tasks). To the best of our knowledge, CaRE is the first continual learner that scales to very long task sequences (ranging from 100 to over 300 non-overlapping tasks), while outperforming all baselines by a large margin on such task sequences. We hope that this work will inspire further research into continual learning over extremely long task sequences. Code and dataset are publicly released at https://github.com/LMMMEng/CaRE.",
+            "arxiv_id": "2602.03473",
+            "PRIMARY_TOPIC_LABEL": "MoE Training",
+            "MATCHED_TOPIC_LABELS": [
+                "MoE Training"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [],
+            "HOTSPOT_PAPER_PRIMARY_KIND": null,
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+        },
+        "2602.03134": {
+            "ARXIVID": "2602.03134",
+            "COMMENT": "Visual-token bypass preserves skipped tokens for renewed selection at deeper transformer layers.",
+            "RELEVANCE": 8,
+            "NOVELTY": 7,
+            "PRIMARY_TOPIC_ID": "efficiency_scaling",
+            "MATCHED_TOPIC_IDS": [
+                "architecture_training",
+                "efficiency_scaling"
+            ],
+            "TOPIC_MATCH_COMMENT": "Selective token computation reduces inference cost through a mechanism informed by changing token importance across layers.",
+            "HOTSPOT_PAPER_TAGS": [],
+            "HOTSPOT_PAPER_COMMENT": "",
+            "SCORE": 15,
+            "authors": [
+                "Chen Qian",
+                "Xinran Yu",
+                "Danyang Li",
+                "Guoxuan Chi",
+                "Zheng Yang",
+                "Qiang Ma",
+                "Xin Miao"
+            ],
+            "title": "SwiftVLM: Efficient Vision-Language Model Inference via Cross-Layer Token Bypass",
+            "abstract": "Visual token pruning is a promising approach for reducing the computational cost of vision-language models (VLMs), and existing methods often rely on early pruning decisions to improve efficiency. While effective on coarse-grained reasoning tasks, they suffer from significant performance degradation on tasks requiring fine-grained visual details. Through layer-wise analysis, we reveal substantial discrepancies in visual token importance across layers, showing that tokens deemed unimportant at shallow layers can later become highly relevant for text-conditioned reasoning. To avoid irreversible critical information loss caused by premature pruning, we introduce a new pruning paradigm, termed bypass, which preserves unselected visual tokens and forwards them to subsequent pruning stages for re-evaluation. Building on this paradigm, we propose SwiftVLM, a simple and training-free method that performs pruning at model-specific layers with strong visual token selection capability, while enabling independent pruning decisions across layers. Experiments across multiple VLMs and benchmarks demonstrate that SwiftVLM consistently outperforms existing pruning strategies, achieving superior accuracy-efficiency trade-offs and more faithful visual token selection behavior.",
+            "arxiv_id": "2602.03134",
+            "PRIMARY_TOPIC_LABEL": "Efficiency, Compression, and Large-Scale Training",
+            "MATCHED_TOPIC_LABELS": [
+                "Architecture and Training Dynamics",
+                "Efficiency, Compression, and Large-Scale Training"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [],
+            "HOTSPOT_PAPER_PRIMARY_KIND": null,
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+        },
+        "2602.03681": {
+            "ARXIVID": "2602.03681",
+            "COMMENT": "Token-level hybrid attention that routes each token to either Gated DeltaNet or softmax attention within the same layer, learning which tokens are short-term enough to be folded into a fixed-size state.",
+            "RELEVANCE": 8,
+            "NOVELTY": 7,
+            "PRIMARY_TOPIC_ID": "architecture_training",
+            "MATCHED_TOPIC_IDS": [
+                "architecture_training",
+                "efficiency_scaling"
+            ],
+            "TOPIC_MATCH_COMMENT": "A new sequence-mixing mechanism: intra-layer per-token selection between linear and softmax attention, not a tuned variant of layer interleaving.",
+            "HOTSPOT_PAPER_TAGS": [],
+            "HOTSPOT_PAPER_COMMENT": "",
+            "SCORE": 15,
+            "authors": [
+                "Difan Deng",
+                "Andreas Bentzen Winje",
+                "Lukas Fehring",
+                "Marius Lindauer"
+            ],
+            "title": "Neural Attention Search Linear: Towards Adaptive Token-Level Hybrid Attention Models",
+            "abstract": "The quadratic computational complexity of softmax transformers has become a bottleneck in long-context scenarios. In contrast, linear attention model families provide a promising direction towards a more efficient sequential model. These linear attention models compress past KV values into a single hidden state, thereby efficiently reducing complexity during both training and inference. However, their expressivity remains limited by the size of their hidden state. Previous work proposed interleaving softmax and linear attention layers to reduce computational complexity while preserving expressivity. Nevertheless, the efficiency of these models remains bottlenecked by their softmax attention layers. In this paper, we propose Neural Attention Search Linear (NAtS-L), a framework that applies both linear attention and softmax attention operations within the same layer on different tokens. NAtS-L automatically determines whether a token can be handled by a linear attention model, i.e., tokens that have only short-term impact and can be encoded into fixed-size hidden states, or require softmax attention, i.e., tokens that contain information related to long-term retrieval and need to be preserved for future queries. By searching for optimal Gated DeltaNet and softmax attention combinations across tokens, we show that NAtS-L provides a strong yet efficient token-level hybrid architecture.",
+            "arxiv_id": "2602.03681",
+            "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+            "MATCHED_TOPIC_LABELS": [
+                "Architecture and Training Dynamics",
+                "Efficiency, Compression, and Large-Scale Training"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [],
+            "HOTSPOT_PAPER_PRIMARY_KIND": null,
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+        },
+        "2602.03802": {
+            "ARXIVID": "2602.03802",
+            "COMMENT": "Proves synchronous SGD and an m-robust variant are time-optimal up to log factors under random compute times and adversarial partial participation, pushing back on the case for asynchrony.",
+            "RELEVANCE": 8,
+            "NOVELTY": 7,
+            "PRIMARY_TOPIC_ID": "training_systems",
+            "MATCHED_TOPIC_IDS": [
+                "training_systems"
+            ],
+            "TOPIC_MATCH_COMMENT": "Time-complexity analysis of distributed optimization under heterogeneous workers, which informs how large training runs should be synchronized.",
+            "HOTSPOT_PAPER_TAGS": [],
+            "HOTSPOT_PAPER_COMMENT": "",
+            "SCORE": 15,
+            "authors": [
+                "Grigory Begunov",
+                "Alexander Tyurin"
+            ],
+            "title": "Do We Need Asynchronous SGD? On the Near-Optimality of Synchronous Methods",
+            "abstract": "Modern distributed optimization methods mostly rely on traditional synchronous approaches, despite substantial recent progress in asynchronous optimization. We revisit Synchronous SGD and its robust variant, called $m$-Synchronous SGD, and theoretically show that they are nearly optimal in many heterogeneous computation scenarios, which is somewhat unexpected. We analyze the synchronous methods under random computation times and adversarial partial participation of workers, and prove that their time complexities are optimal in many practical regimes, up to logarithmic factors. While synchronous methods are not universal solutions and there exist tasks where asynchronous methods may be necessary, we show that they are sufficient for many modern heterogeneous computation scenarios.",
+            "arxiv_id": "2602.03802",
+            "PRIMARY_TOPIC_LABEL": "Large-Scale Training Systems and Efficiency",
+            "MATCHED_TOPIC_LABELS": [
+                "Large-Scale Training Systems and Efficiency"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [],
+            "HOTSPOT_PAPER_PRIMARY_KIND": null,
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+        },
+        "2602.03560": {
+            "ARXIVID": "2602.03560",
+            "COMMENT": "Interleaves each full attention layer with several sparse layers that take both their token selection and their KV cache directly from the preceding full layer, removing the need for an importance proxy and cutting KV storage ~10x on an 80B MoE with only 5 of 49 layers full.",
+            "RELEVANCE": 8,
+            "NOVELTY": 7,
+            "PRIMARY_TOPIC_ID": "architecture_training",
+            "MATCHED_TOPIC_IDS": [
+                "architecture_training",
+                "efficiency_scaling"
+            ],
+            "TOPIC_MATCH_COMMENT": "A hybrid attention architecture trained and evaluated as such, where the oracle-selection and cache-sharing mechanism is the contribution.",
+            "HOTSPOT_PAPER_TAGS": [],
+            "HOTSPOT_PAPER_COMMENT": "",
+            "SCORE": 15,
+            "authors": [
+                "Yizhao Gao",
+                "Jianyu Wei",
+                "Qihao Zhang",
+                "Yu Cheng",
+                "Shimao Chen",
+                "Zhengju Tang",
+                "Zihan Jiang",
+                "Yifan Song",
+                "Hailin Zhang",
+                "Liang Zhao",
+                "Bo Yang",
+                "Gang Wang",
+                "Shijie Cao",
+                "Fuli Luo"
+            ],
+            "title": "HySparse: A Hybrid Sparse Attention Architecture with Oracle Token Selection and KV Cache Sharing",
+            "abstract": "This work introduces Hybrid Sparse Attention (HySparse), a new architecture that interleaves each full attention layer with several sparse attention layers. While conceptually simple, HySparse strategically derives each sparse layer's token selection and KV caches directly from the preceding full attention layer. This architecture resolves two fundamental limitations of prior sparse attention methods. First, conventional approaches typically rely on additional proxies to predict token importance, introducing extra complexity and potentially suboptimal performance. In contrast, HySparse uses the full attention layer as a precise oracle to identify important tokens. Second, existing sparse attention designs often reduce computation without saving KV cache. HySparse enables sparse attention layers to reuse the full attention KV cache, thereby reducing both computation and memory. We evaluate HySparse on both 7B dense and 80B MoE models. Across all settings, HySparse consistently outperforms both full attention and hybrid SWA baselines. Notably, in the 80B MoE model with 49 total layers, only 5 layers employ full attention, yet HySparse achieves substantial performance gains while reducing KV cache storage by nearly 10x.",
+            "arxiv_id": "2602.03560",
+            "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+            "MATCHED_TOPIC_LABELS": [
+                "Architecture and Training Dynamics",
+                "Efficiency, Compression, and Large-Scale Training"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [],
+            "HOTSPOT_PAPER_PRIMARY_KIND": null,
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+        },
+        "2602.02928": {
+            "ARXIVID": "2602.02928",
+            "COMMENT": "Closer-target losses resolve conflicting supervision in time-unconditional denoising fields.",
+            "RELEVANCE": 7,
+            "NOVELTY": 8,
+            "PRIMARY_TOPIC_ID": "architecture_training",
+            "MATCHED_TOPIC_IDS": [
+                "architecture_training",
+                "efficiency_scaling"
+            ],
+            "TOPIC_MATCH_COMMENT": "Changes the generative training objective and sampling mechanism, with fewer sampling steps as an efficiency benefit.",
+            "HOTSPOT_PAPER_TAGS": [],
+            "HOTSPOT_PAPER_COMMENT": "",
+            "SCORE": 15,
+            "authors": [
+                "Zimo Wang",
+                "Ishit Mehta",
+                "Haolin Lu",
+                "Chung-En Sun",
+                "Ge Yan",
+                "Tsui-Wei Weng",
+                "Tzu-Mao Li"
+            ],
+            "title": "Distance Marching for Generative Modeling",
+            "abstract": "Time-unconditional generative models learn time-independent denoising vector fields. But without time conditioning, the same noisy input may correspond to multiple noise levels and different denoising directions, which interferes with the supervision signal. Inspired by distance field modeling, we propose Distance Marching, a new time-unconditional approach with two principled inference methods. Crucially, we design losses that focus on closer targets. This yields denoising directions better directed toward the data manifold. Across architectures, Distance Marching consistently improves FID by 13.5% on CIFAR-10 and ImageNet over recent time-unconditional baselines. For class-conditional ImageNet generation, despite removing time input, Distance Marching surpasses flow matching using our losses and inference methods. It achieves lower FID than flow matching's final performance using 60% of the sampling steps and 13.6% lower FID on average across backbone sizes. Moreover, our distance prediction is also helpful for early stopping during sampling and for OOD detection. We hope distance field modeling can serve as a principled lens for generative modeling.",
+            "arxiv_id": "2602.02928",
+            "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+            "MATCHED_TOPIC_LABELS": [
+                "Architecture and Training Dynamics",
+                "Efficiency, Compression, and Large-Scale Training"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [],
+            "HOTSPOT_PAPER_PRIMARY_KIND": null,
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+        },
+        "2602.03211": {
+            "ARXIVID": "2602.03211",
+            "COMMENT": "Marginal-sample reward guidance eliminates neural backpropagation and reduces diffusion sampling cost.",
+            "RELEVANCE": 7,
+            "NOVELTY": 8,
+            "PRIMARY_TOPIC_ID": "efficiency_scaling",
+            "MATCHED_TOPIC_IDS": [
+                "efficiency_scaling"
+            ],
+            "TOPIC_MATCH_COMMENT": "The analytical guidance and lookahead solver provide a substantive inference-compute reduction for diffusion models.",
+            "HOTSPOT_PAPER_TAGS": [],
+            "HOTSPOT_PAPER_COMMENT": "",
+            "SCORE": 15,
+            "authors": [
+                "Yeongmin Kim",
+                "Donghyeok Shin",
+                "Byeonghu Na",
+                "Minsang Park",
+                "Richard Lee Kim",
+                "Il-Chul Moon"
+            ],
+            "title": "Lookahead Sample Reward Guidance for Test-Time Scaling of Diffusion Models",
+            "abstract": "Diffusion models have demonstrated strong generative performance; however, generated samples often fail to fully align with human intent. This paper studies an efficient test-time scaling method for sampling from regions with higher human-aligned reward values. Existing methods for computing the expected future reward (EFR) face important limitations: backward rollout incurs prohibitively high sampling costs, while Tweedie-based approaches, including Sequential Monte Carlo and gradient guidance, suffer from bias and inherent sampling issues. We show that the EFR at any $\\mathbf{x}_t$ can be computed using only marginal samples from a pre-trained diffusion model, enabling closed-form reward guidance without neural backpropagation. To further improve efficiency, we introduce a few-step lookahead sampling and an accurate solver that guides particles toward high-reward lookahead samples. We refer to this sampling scheme as LiDAR sampling. LiDAR achieves the same GenEval performance as the latest gradient guidance method for SDXL with a 9.5x speedup. We release the code at https://github.com/aailab-kaist/Diffusion-LiDAR-Sampling.",
+            "arxiv_id": "2602.03211",
+            "PRIMARY_TOPIC_LABEL": "Efficiency, Compression, and Large-Scale Training",
+            "MATCHED_TOPIC_LABELS": [
+                "Efficiency, Compression, and Large-Scale Training"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [],
+            "HOTSPOT_PAPER_PRIMARY_KIND": null,
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+        },
+        "2602.03772": {
+            "ARXIVID": "2602.03772",
+            "COMMENT": "Proxy-free geometric data mixing and selection report twice the pretraining data efficiency of random selection.",
+            "RELEVANCE": 7,
+            "NOVELTY": 7,
+            "PRIMARY_TOPIC_ID": "efficiency_scaling",
+            "MATCHED_TOPIC_IDS": [
+                "efficiency_scaling"
+            ],
+            "TOPIC_MATCH_COMMENT": "The fit is efficient pretraining data allocation; MoE models provide validation for the curation method.",
+            "HOTSPOT_PAPER_TAGS": [],
+            "HOTSPOT_PAPER_COMMENT": "",
+            "SCORE": 14,
+            "authors": [
+                "Changhao Wang",
+                "Yunfei Yu",
+                "Xinhao Yao",
+                "Jiaolong Yang",
+                "Riccardo Cantoro",
+                "Chaobo Li",
+                "Qing Cui",
+                "Jun Zhou"
+            ],
+            "title": "UniGeM: Unifying Data Mixing and Selection via Geometric Exploration and Mining",
+            "abstract": "The scaling of Large Language Models (LLMs) is increasingly limited by data quality. Most methods handle data mixing and sample selection separately, which can break the structure in code corpora. We introduce \\textbf{UniGeM}, a framework that unifies mixing and selection by treating data curation as a \\textit{manifold approximation} problem without training proxy models or relying on external reference datasets. UniGeM operates hierarchically: \\textbf{Macro-Exploration} learns mixing weights with stability-based clustering; \\textbf{Micro-Mining} filters high-quality instances by their geometric distribution to ensure logical consistency. Validated by training 8B and 16B MoE models on 100B tokens, UniGeM achieves \\textbf{2.0$\\times$ data efficiency} over a random baseline and further improves overall performance compared to SOTA methods in reasoning-heavy evaluations and multilingual generalization.",
+            "arxiv_id": "2602.03772",
+            "PRIMARY_TOPIC_LABEL": "Efficiency, Compression, and Large-Scale Training",
+            "MATCHED_TOPIC_LABELS": [
+                "Efficiency, Compression, and Large-Scale Training"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [],
+            "HOTSPOT_PAPER_PRIMARY_KIND": null,
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+        },
+        "2602.03357": {
+            "ARXIVID": "2602.03357",
+            "COMMENT": "Normal-map updates and local corrections establish linear speedup in both client count and local updates.",
+            "RELEVANCE": 7,
+            "NOVELTY": 7,
+            "PRIMARY_TOPIC_ID": "training_systems",
+            "MATCHED_TOPIC_IDS": [
+                "training_systems"
+            ],
+            "TOPIC_MATCH_COMMENT": "A distributed optimization algorithm with scaling guarantees, specialized to nonconvex composite federated learning.",
+            "HOTSPOT_PAPER_TAGS": [],
+            "HOTSPOT_PAPER_COMMENT": "",
+            "SCORE": 14,
+            "authors": [
+                "Kun Huang",
+                "Shi Pu",
+                "Karl Henrik Johansson"
+            ],
+            "title": "Achieving Linear Speedup for Composite Federated Learning",
+            "abstract": "This paper proposes FedNMap, a normal map-based method for composite federated learning, where the objective consists of a smooth loss and a possibly nonsmooth regularizer. FedNMap leverages a normal map-based update scheme to handle the nonsmooth term and incorporates a local correction strategy to mitigate the impact of data heterogeneity across clients. Under standard assumptions, including smooth local losses, weak convexity of the regularizer, and bounded stochastic gradient variance, FedNMap achieves linear speedup with respect to both the number of clients and the number of local updates for nonconvex losses, both with and without the Polyak-Łojasiewicz condition. To the best of our knowledge, this is the first algorithm establishing linear speedup for nonconvex composite federated learning. Numerical experiments corroborate our theoretical findings and demonstrate the linear speedup of FedNMap.",
+            "arxiv_id": "2602.03357",
+            "PRIMARY_TOPIC_LABEL": "Large-Scale Training Systems and Efficiency",
+            "MATCHED_TOPIC_LABELS": [
+                "Large-Scale Training Systems and Efficiency"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [],
+            "HOTSPOT_PAPER_PRIMARY_KIND": null,
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+        },
+        "2602.03249": {
+            "ARXIVID": "2602.03249",
+            "COMMENT": "Learned step summaries replace earlier reasoning tokens to reduce retained context and KV-cache growth.",
+            "RELEVANCE": 7,
+            "NOVELTY": 7,
+            "PRIMARY_TOPIC_ID": "efficiency_scaling",
+            "MATCHED_TOPIC_IDS": [
+                "efficiency_scaling"
+            ],
+            "TOPIC_MATCH_COMMENT": "The core efficiency mechanism is learned reasoning-context compression, with a reported throughput benefit.",
+            "HOTSPOT_PAPER_TAGS": [],
+            "HOTSPOT_PAPER_COMMENT": "",
+            "SCORE": 14,
+            "authors": [
+                "Zhicheng Yang",
+                "Zhijiang Guo",
+                "Yinya Huang",
+                "Yongxin Wang",
+                "Wenlei Shi",
+                "Yiwei Wang",
+                "Xiaodan Liang",
+                "Jing Tang"
+            ],
+            "title": "Accordion-Thinking: Self-Regulated Step Summaries for Efficient and Readable LLM Reasoning",
+            "abstract": "Scaling test-time compute via long Chain-of-Thought unlocks remarkable gains in reasoning capabilities, yet it faces practical limits due to the linear growth of KV cache and quadratic attention complexity. In this paper, we introduce Accordion-Thinking, an end-to-end framework where LLMs learn to self-regulate the granularity of the reasoning steps through dynamic summarization. This mechanism enables a Fold inference mode, where the model periodically summarizes its thought process and discards former thoughts to reduce dependency on historical tokens. We apply reinforcement learning to incentivize this capability further, uncovering a critical insight: the accuracy gap between the highly efficient Fold mode and the exhaustive Unfold mode progressively narrows and eventually vanishes over the course of training. This phenomenon demonstrates that the model learns to encode essential reasoning information into compact summaries, achieving effective compression of the reasoning context. Our Accordion-Thinking demonstrates that with learned self-compression, LLMs can tackle complex reasoning tasks with minimal dependency token overhead without compromising solution quality, and it achieves a three times throughput while maintaining accuracy on a 48GB GPU memory configuration, while the structured step summaries provide a human-readable account of the reasoning process.",
+            "arxiv_id": "2602.03249",
+            "PRIMARY_TOPIC_LABEL": "Efficiency, Compression, and Large-Scale Training",
+            "MATCHED_TOPIC_LABELS": [
+                "Efficiency, Compression, and Large-Scale Training"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [],
+            "HOTSPOT_PAPER_PRIMARY_KIND": null,
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+        },
+        "2602.03655": {
+            "ARXIVID": "2602.03655",
+            "COMMENT": "Training-dynamics analysis: proves two-layer nets learn a group-composition task one irreducible representation at a time under vanishing init, with width exponential in sequence length, and shows depth/recurrence reduces this to k or log k composition steps.",
+            "RELEVANCE": 7,
+            "NOVELTY": 7,
+            "PRIMARY_TOPIC_ID": "architecture_training",
+            "MATCHED_TOPIC_IDS": [
+                "architecture_training"
+            ],
+            "TOPIC_MATCH_COMMENT": "Core contribution is a mechanistic account of learning order and depth-vs-width scaling, i.e. optimisation/training dynamics rather than a downstream task.",
+            "HOTSPOT_PAPER_TAGS": [],
+            "HOTSPOT_PAPER_COMMENT": "",
+            "SCORE": 14,
+            "authors": [
+                "Giovanni Luca Marchetti",
+                "Daniel Kunin",
+                "Adele Myers",
+                "Francisco Acosta",
+                "Nina Miolane"
+            ],
+            "title": "Sequential Group Composition: A Window into the Mechanics of Deep Learning",
+            "abstract": "How do neural networks trained over sequences acquire the ability to perform structured operations, such as arithmetic, geometric, and algorithmic computation? To gain insight into this question, we introduce the sequential group composition task. In this task, networks receive a sequence of elements from a finite group encoded in a real vector space and must predict their cumulative product. This task can be order-sensitive and cannot be solved by a linear model. Our analysis isolates the roles of the group structure, encoding statistics, and sequence length in shaping learning. We prove that two-layer networks from vanishing initialization learn this task one irreducible representation of the group at a time in an order determined by the Fourier statistics of the encoding. To perfectly learn the task, these networks require a hidden width exponential in the sequence length $k$. In contrast, we construct deeper architectures that exploit associativity to dramatically improve this scaling: recurrent neural networks can compose elements sequentially in $k$ steps, while multilayer networks can compose adjacent pairs in parallel in $\\log k$ layers. Overall, the sequential group composition task offers a tractable window into the mechanics of deep learning.",
+            "arxiv_id": "2602.03655",
+            "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+            "MATCHED_TOPIC_LABELS": [
+                "Architecture and Training Dynamics"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [],
+            "HOTSPOT_PAPER_PRIMARY_KIND": null,
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+        },
+        "2602.03120": {
+            "ARXIVID": "2602.03120",
+            "COMMENT": "Full-parameter fine-tuning performed directly in the discrete quantized space via evolution strategies, using accumulated error feedback to keep sub-threshold update signals and stateless seed replay to hold memory at inference-level precision.",
+            "RELEVANCE": 7,
+            "NOVELTY": 7,
+            "PRIMARY_TOPIC_ID": "efficiency_scaling",
+            "MATCHED_TOPIC_IDS": [
+                "training_systems",
+                "efficiency_scaling"
+            ],
+            "TOPIC_MATCH_COMMENT": "Makes quantized weights trainable without backpropagation, a genuinely new mechanism at the quantization-plus-optimization boundary.",
+            "HOTSPOT_PAPER_TAGS": [],
+            "HOTSPOT_PAPER_COMMENT": "",
+            "SCORE": 14,
+            "authors": [
+                "Yinggan Xu",
+                "Kajetan Schweighofer",
+                "Risto Miikkulainen",
+                "Xin Qiu"
+            ],
+            "title": "Quantized Evolution Strategies: High-precision Fine-tuning of Quantized LLMs at Low-precision Cost",
+            "abstract": "Post-Training Quantization (PTQ) is essential for deploying Large Language Models (LLMs) on memory-constrained devices, yet it renders models static and difficult to fine-tune. Standard fine-tuning paradigms, including Reinforcement Learning (RL), fundamentally rely on backpropagation and continuous weights to compute gradients. Thus they cannot be used on quantized models, where the parameter space is discrete and non-differentiable. While Evolution Strategies (ES) offer a backpropagation-free alternative, optimization of the quantized parameters can still fail due to vanishing or inaccurate gradient estimation. This paper introduces Quantized Evolution Strategies (QES), an optimization paradigm that performs full-parameter fine-tuning directly in the quantized space. QES is based on two innovations: (1) it integrates accumulated error feedback to preserve high-precision weight updating signals, and (2) it utilizes a stateless seed replay to reduce memory usage to low-precision inference levels. QES significantly outperforms the state-of-the-art zeroth-order fine-tuning methods on a variety of tasks, making direct fine-tuning for quantized models possible. It therefore opens up the possibility for scaling up LLMs entirely in the quantized space. The source code is available at https://github.com/dibbla/Quantized-Evolution-Strategies .",
+            "arxiv_id": "2602.03120",
+            "PRIMARY_TOPIC_LABEL": "Efficiency, Compression, and Large-Scale Training",
+            "MATCHED_TOPIC_LABELS": [
+                "Large-Scale Training Systems and Efficiency",
+                "Efficiency, Compression, and Large-Scale Training"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [],
+            "HOTSPOT_PAPER_PRIMARY_KIND": null,
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+        },
+        "2602.02951": {
+            "ARXIVID": "2602.02951",
+            "COMMENT": "Spatial-anchor-preserving token aggregation maintains positional structure during VLM pruning.",
+            "RELEVANCE": 7,
+            "NOVELTY": 6,
+            "PRIMARY_TOPIC_ID": "efficiency_scaling",
+            "MATCHED_TOPIC_IDS": [
+                "efficiency_scaling"
+            ],
+            "TOPIC_MATCH_COMMENT": "The pruning mechanism addresses spatial information loss caused by visual-token compression.",
+            "HOTSPOT_PAPER_TAGS": [],
+            "HOTSPOT_PAPER_COMMENT": "",
+            "SCORE": 13,
+            "authors": [
+                "Yihong Huang",
+                "Fei Ma",
+                "Yihua Shao",
+                "Jingcai Guo",
+                "Zitong Yu",
+                "Laizhong Cui",
+                "Qi Tian"
+            ],
+            "title": "Nüwa: Mending the Spatial Integrity Torn by VLM Token Pruning",
+            "abstract": "Vision token pruning has proven to be an effective acceleration technique for the efficient Vision Language Model (VLM). However, existing pruning methods demonstrate excellent performance preservation in visual question answering (VQA) and suffer substantial degradation on visual grounding (VG) tasks. Our analysis of the VLM's processing pipeline reveals that strategies utilizing global semantic similarity and attention scores lose the global spatial reference frame, which is derived from the interactions of tokens' positional information. Motivated by these findings, we propose $\\text{Nüwa}$, a two-stage token pruning framework that enables efficient feature aggregation while maintaining spatial integrity. In the first stage, after the vision encoder, we apply three operations, namely separation, alignment, and aggregation, which are inspired by swarm intelligence algorithms to retain information-rich global spatial anchors. In the second stage, within the LLM, we perform text-guided pruning to retain task-relevant visual tokens. Extensive experiments demonstrate that $\\text{Nüwa}$ achieves SOTA performance on multiple VQA benchmarks (from 94% to 95%) and yields substantial improvements on visual grounding tasks (from 7% to 47%).",
+            "arxiv_id": "2602.02951",
+            "PRIMARY_TOPIC_LABEL": "Efficiency, Compression, and Large-Scale Training",
+            "MATCHED_TOPIC_LABELS": [
+                "Efficiency, Compression, and Large-Scale Training"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [],
+            "HOTSPOT_PAPER_PRIMARY_KIND": null,
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+        },
+        "2602.03226": {
+            "ARXIVID": "2602.03226",
+            "COMMENT": "Task-conditioned selective encoding adjusts compression rates according to relevant-context length.",
+            "RELEVANCE": 7,
+            "NOVELTY": 6,
+            "PRIMARY_TOPIC_ID": "efficiency_scaling",
+            "MATCHED_TOPIC_IDS": [
+                "efficiency_scaling"
+            ],
+            "TOPIC_MATCH_COMMENT": "Adaptive context compression targets long-input processing cost, with evidence limited to QA workloads.",
+            "HOTSPOT_PAPER_TAGS": [],
+            "HOTSPOT_PAPER_COMMENT": "",
+            "SCORE": 13,
+            "authors": [
+                "Xuancheng Li",
+                "Haitao Li",
+                "Yujia Zhou",
+                "Qingyao Ai",
+                "Yiqun Liu"
+            ],
+            "title": "ATACompressor: Adaptive Task-Aware Compression for Efficient Long-Context Processing in LLMs",
+            "abstract": "Long-context inputs in large language models (LLMs) often suffer from the \"lost in the middle\" problem, where critical information becomes diluted or ignored due to excessive length. Context compression methods aim to address this by reducing input size, but existing approaches struggle with balancing information preservation and compression efficiency. We propose Adaptive Task-Aware Compressor (ATACompressor), which dynamically adjusts compression based on the specific requirements of the task. ATACompressor employs a selective encoder that compresses only the task-relevant portions of long contexts, ensuring that essential information is preserved while reducing unnecessary content. Its adaptive allocation controller perceives the length of relevant content and adjusts the compression rate accordingly, optimizing resource utilization. We evaluate ATACompressor on three QA datasets: HotpotQA, MSMARCO, and SQUAD-showing that it outperforms existing methods in terms of both compression efficiency and task performance. Our approach provides a scalable solution for long-context processing in LLMs. Furthermore, we perform a range of ablation studies and analysis experiments to gain deeper insights into the key components of ATACompressor.",
+            "arxiv_id": "2602.03226",
+            "PRIMARY_TOPIC_LABEL": "Efficiency, Compression, and Large-Scale Training",
+            "MATCHED_TOPIC_LABELS": [
+                "Efficiency, Compression, and Large-Scale Training"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [],
+            "HOTSPOT_PAPER_PRIMARY_KIND": null,
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+        },
+        "2602.03493": {
+            "ARXIVID": "2602.03493",
+            "COMMENT": "Initializing LoRA from intermediate principal components improves the performance-forgetting balance and learning-rate robustness.",
+            "RELEVANCE": 7,
+            "NOVELTY": 6,
+            "PRIMARY_TOPIC_ID": "efficiency_scaling",
+            "MATCHED_TOPIC_IDS": [
+                "architecture_training",
+                "efficiency_scaling"
+            ],
+            "TOPIC_MATCH_COMMENT": "The contribution refines low-rank adaptation and analyzes how subspace selection affects optimization stability.",
+            "HOTSPOT_PAPER_TAGS": [],
+            "HOTSPOT_PAPER_COMMENT": "",
+            "SCORE": 13,
+            "authors": [
+                "Alessio Quercia",
+                "Arya Bangun",
+                "Ira Assent",
+                "Hanno Scharr"
+            ],
+            "title": "Least but not Last: Fine-tuning Intermediate Principal Components for Better Performance-Forgetting Trade-Offs",
+            "abstract": "Low-Rank Adaptation (LoRA) methods have emerged as crucial techniques for adapting large pre-trained models to downstream tasks under computational and memory constraints. However, they face a fundamental challenge in balancing task-specific performance gains against catastrophic forgetting of pre-trained knowledge, where existing methods provide inconsistent recommendations. This paper presents a comprehensive analysis of the performance-forgetting trade-offs inherent in low-rank adaptation using principal components of weight matrices as initialization. Our investigation reveals that fine-tuning intermediate components leads to better balance and robustness to high learning rates than first (PiSSA) and last (MiLoRA) components in existing work. Building on these findings, we provide practical guidelines for initialization of LoRA methods to balance the performance-forgetting trade-off. In a thorough empirical study on a variety of computer vision and NLP tasks we confirm that these guidelines achieve high accuracy and reduced forgetting.",
+            "arxiv_id": "2602.03493",
+            "PRIMARY_TOPIC_LABEL": "Efficiency, Compression, and Large-Scale Training",
+            "MATCHED_TOPIC_LABELS": [
+                "Architecture and Training Dynamics",
+                "Efficiency, Compression, and Large-Scale Training"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [],
+            "HOTSPOT_PAPER_PRIMARY_KIND": null,
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+        },
+        "2602.03216": {
+            "ARXIVID": "2602.03216",
+            "COMMENT": "Per-head compression of Q/K/V to a reduced token set inside attention followed by decompression back to the full sequence, making token selection reversible across layers and composable with FlashAttention kernels.",
+            "RELEVANCE": 7,
+            "NOVELTY": 6,
+            "PRIMARY_TOPIC_ID": "efficiency_scaling",
+            "MATCHED_TOPIC_IDS": [
+                "architecture_training",
+                "efficiency_scaling"
+            ],
+            "TOPIC_MATCH_COMMENT": "The mechanism is a new sparsity design point for attention cost, evaluated at 128K context, squarely in efficiency rather than serving engineering.",
+            "HOTSPOT_PAPER_TAGS": [],
+            "HOTSPOT_PAPER_COMMENT": "",
+            "SCORE": 13,
+            "authors": [
+                "Dongwon Jo",
+                "Beomseok Kang",
+                "Jiwon Song",
+                "Jae-Joon Kim"
+            ],
+            "title": "Token Sparse Attention: Efficient Long-Context Inference with Interleaved Token Selection",
+            "abstract": "The quadratic complexity of attention remains the central bottleneck in long-context inference for large language models. Prior acceleration methods either sparsify the attention map with structured patterns or permanently evict tokens at specific layers, which can retain irrelevant tokens or rely on irreversible early decisions despite the layer-/head-wise dynamics of token importance. In this paper, we propose Token Sparse Attention, a lightweight and dynamic token-level sparsification mechanism that compresses per-head $Q$, $K$, $V$ to a reduced token set during attention and then decompresses the output back to the original sequence, enabling token information to be reconsidered in subsequent layers. Furthermore, Token Sparse Attention exposes a new design point at the intersection of token selection and sparse attention. Our approach is fully compatible with dense attention implementations, including Flash Attention, and can be seamlessly composed with existing sparse attention kernels. Experimental results show that Token Sparse Attention consistently improves accuracy-latency trade-off, achieving up to $\\times$3.23 attention speedup at 128K context with less than 1% accuracy degradation. These results demonstrate that dynamic and interleaved token-level sparsification is a complementary and effective strategy for scalable long-context inference.",
+            "arxiv_id": "2602.03216",
+            "PRIMARY_TOPIC_LABEL": "Efficiency, Compression, and Large-Scale Training",
+            "MATCHED_TOPIC_LABELS": [
+                "Architecture and Training Dynamics",
+                "Efficiency, Compression, and Large-Scale Training"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [],
+            "HOTSPOT_PAPER_PRIMARY_KIND": null,
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+        },
+        "2602.03535": {
+            "ARXIVID": "2602.03535",
+            "COMMENT": "Dynamic sparse training built on linearized Bregman/mirror descent that alternates static and dynamic mask-update periods, with multilevel-optimization convergence guarantees and FLOPs down to 6% of dense SGD.",
+            "RELEVANCE": 7,
+            "NOVELTY": 6,
+            "PRIMARY_TOPIC_ID": "efficiency_scaling",
+            "MATCHED_TOPIC_IDS": [
+                "training_systems",
+                "efficiency_scaling"
+            ],
+            "TOPIC_MATCH_COMMENT": "Sparsity that reduces training cost with a new optimizer-side mechanism, though demonstrated only on standard vision-scale benchmarks.",
+            "HOTSPOT_PAPER_TAGS": [],
+            "HOTSPOT_PAPER_COMMENT": "",
+            "SCORE": 13,
+            "authors": [
+                "Yannick Lunk",
+                "Sebastian J. Scott",
+                "Leon Bungert"
+            ],
+            "title": "Sparse Training of Neural Networks based on Multilevel Mirror Descent",
+            "abstract": "We introduce a dynamic sparse training algorithm based on linearized Bregman iterations / mirror descent that exploits the naturally incurred sparsity by alternating between periods of static and dynamic sparsity pattern updates. The key idea is to combine sparsity-inducing Bregman iterations with adaptive freezing of the network structure to enable efficient exploration of the sparse parameter space while maintaining sparsity. We provide convergence guaranties by embedding our method in a multilevel optimization framework. Furthermore, we empirically show that our algorithm can produce highly sparse and accurate models on standard benchmarks. We also show that the theoretical number of FLOPs compared to SGD training can be reduced from 38% for standard Bregman iterations to 6% for our method while maintaining test accuracy.We additionally show a training time reduction by about 50%, when using a sparsity-aware CPU implementation of our method.",
+            "arxiv_id": "2602.03535",
+            "PRIMARY_TOPIC_LABEL": "Efficiency, Compression, and Large-Scale Training",
+            "MATCHED_TOPIC_LABELS": [
+                "Large-Scale Training Systems and Efficiency",
+                "Efficiency, Compression, and Large-Scale Training"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [],
+            "HOTSPOT_PAPER_PRIMARY_KIND": null,
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+        },
+        "2602.03082": {
+            "ARXIVID": "2602.03082",
+            "COMMENT": "Approximation guarantees compare projection-based and augmented neural architectures on constrained manifolds.",
+            "RELEVANCE": 6,
+            "NOVELTY": 7,
+            "PRIMARY_TOPIC_ID": "architecture_training",
+            "MATCHED_TOPIC_IDS": [
+                "architecture_training"
+            ],
+            "TOPIC_MATCH_COMMENT": "Constraint enforcement is an architectural mechanism, with a narrow focus on geometric feasibility and approximation.",
+            "HOTSPOT_PAPER_TAGS": [],
+            "HOTSPOT_PAPER_COMMENT": "",
+            "SCORE": 13,
+            "authors": [
+                "Karthik Elamvazhuthi",
+                "Shiba Biswal",
+                "Kian Rosenblum",
+                "Arushi Katyal",
+                "Tianli Qu",
+                "Grady Ma",
+                "Rishi Sonthalia"
+            ],
+            "title": "Geometry-Preserving Neural Architectures on Manifolds with Boundary",
+            "abstract": "A growing number of neural architectures have been proposed to enforce geometric constraints, including projection-based networks, exponential-map updates, constrained output layers, and manifold neural ODEs. We provide a unified framework for these geometry-preserving architectures by organizing them according to where and how constraints are enforced, either throughout the intermediate layers or only at the final output. This perspective reveals several gaps in the existing theory. To address these gaps, we prove high-level approximation theorems for projected neural ODEs, intermediate augmented architectures, and final augmented architectures on prox-regular constraint sets, including smooth manifolds with boundary. Numerical experiments on synthetic dynamics over S^2, the disk, SO(3), together with real-world protein backbone data on SE(3), demonstrate exact feasibility for analytic updates and show that the final augmentation have simpler architecture and outperform in most tasks considered. When the constraint set is unknown, we learn projections via small-time heat-kernel limits, showing diffusion/flow-matching can be used as data-based projections. Moreover, we also the demonstrate the usefulness of the architectures that enforce non-convex constraints for path planning on manifolds with boundary.",
+            "arxiv_id": "2602.03082",
+            "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+            "MATCHED_TOPIC_LABELS": [
+                "Architecture and Training Dynamics"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [],
+            "HOTSPOT_PAPER_PRIMARY_KIND": null,
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+        },
+        "2602.03067": {
+            "ARXIVID": "2602.03067",
+            "COMMENT": "Fused SRAM-tiled Sinkhorn reductions cut HBM traffic while preserving linear-memory transport operations.",
+            "RELEVANCE": 6,
+            "NOVELTY": 7,
+            "PRIMARY_TOPIC_ID": "efficiency_scaling",
+            "MATCHED_TOPIC_IDS": [
+                "efficiency_scaling"
+            ],
+            "TOPIC_MATCH_COMMENT": "IO-aware kernel design fits memory efficiency, with direct evidence centered on optimal-transport workloads.",
+            "HOTSPOT_PAPER_TAGS": [],
+            "HOTSPOT_PAPER_COMMENT": "",
+            "SCORE": 13,
+            "authors": [
+                "Felix X. -F. Ye",
+                "Xingjie Li",
+                "An Yu",
+                "Ming-Ching Chang",
+                "Linsong Chu",
+                "Davis Wertheimer"
+            ],
+            "title": "FlashSinkhorn: IO-Aware Entropic Optimal Transport on GPU",
+            "abstract": "Entropic optimal transport (EOT) via Sinkhorn iterations is widely used in modern machine learning, yet GPU solvers remain inefficient at scale. Tensorized implementations suffer quadratic HBM traffic from dense $n\\times m$ interactions, while existing online backends avoid storing dense matrices but still rely on generic tiled map-reduce reduction kernels with limited fusion. We present \\textbf{FlashSinkhorn}, an IO-aware EOT solver for squared Euclidean cost that rewrites stabilized log-domain Sinkhorn updates as row-wise LogSumExp reductions of biased dot-product scores, the same normalization as transformer attention. This enables FlashAttention-style fusion and tiling: fused Triton kernels stream tiles through on-chip SRAM and update dual potentials in a single pass, substantially reducing HBM IO per iteration while retaining linear-memory operations. We further provide streaming kernels for transport application, enabling scalable first- and second-order optimization. On A100 GPUs, FlashSinkhorn achieves up to $32\\times$ forward-pass and $161\\times$ end-to-end speedups over state-of-the-art online baselines on point-cloud OT, improves scalability on OT-based downstream tasks. For reproducibility, we release an open-source implementation at https://github.com/ot-triton-lab/flash-sinkhorn .",
+            "arxiv_id": "2602.03067",
+            "PRIMARY_TOPIC_LABEL": "Efficiency, Compression, and Large-Scale Training",
+            "MATCHED_TOPIC_LABELS": [
+                "Efficiency, Compression, and Large-Scale Training"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [],
+            "HOTSPOT_PAPER_PRIMARY_KIND": null,
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+        },
+        "2602.03043": {
+            "ARXIVID": "2602.03043",
+            "COMMENT": "Conformal stopping thresholds add selective-risk guarantees to distilled early-exit networks.",
+            "RELEVANCE": 6,
+            "NOVELTY": 6,
+            "PRIMARY_TOPIC_ID": "efficiency_scaling",
+            "MATCHED_TOPIC_IDS": [
+                "efficiency_scaling"
+            ],
+            "TOPIC_MATCH_COMMENT": "Early-exit compute allocation fits inference efficiency, using established distillation and calibration methods for vision backbones.",
+            "HOTSPOT_PAPER_TAGS": [],
+            "HOTSPOT_PAPER_COMMENT": "",
+            "SCORE": 12,
+            "authors": [
+                "Salim Khazem"
+            ],
+            "title": "SAFE-KD: Risk-Controlled Early-Exit Distillation for Vision Backbones",
+            "abstract": "Early-exit networks reduce inference cost by allowing ``easy'' inputs to stop early, but practical deployment hinges on knowing \\emph{when} early exit is safe. We introduce SAFE-KD, a universal multi-exit wrapper for modern vision backbones that couples hierarchical distillation with \\emph{conformal risk control}. SAFE-KD attaches lightweight exit heads at intermediate depths, distills a strong teacher into all exits via Decoupled Knowledge Distillation (DKD), and enforces deep-to-shallow consistency between exits. At inference, we calibrate per-exit stopping thresholds on a held-out set using conformal risk control (CRC) to guarantee a user-specified \\emph{selective} misclassification risk (among the samples that exit early) under exchangeability. Across multiple datasets and architectures, SAFE-KD yields improved accuracy compute trade-offs, stronger calibration, and robust performance under corruption while providing finite-sample risk guarantees.",
+            "arxiv_id": "2602.03043",
+            "PRIMARY_TOPIC_LABEL": "Efficiency, Compression, and Large-Scale Training",
+            "MATCHED_TOPIC_LABELS": [
+                "Efficiency, Compression, and Large-Scale Training"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [],
+            "HOTSPOT_PAPER_PRIMARY_KIND": null,
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+        },
+        "2602.03359": {
+            "ARXIVID": "2602.03359",
+            "COMMENT": "Adds token-level memory experts to each Transformer layer and folds the training-time parameter matrices into a static lookup table via re-parameterization, scaling capacity through storage instead of FLOPs with no added inference latency.",
+            "RELEVANCE": 6,
+            "NOVELTY": 6,
+            "PRIMARY_TOPIC_ID": "architecture_training",
+            "MATCHED_TOPIC_IDS": [
+                "moe_training",
+                "architecture_training",
+                "efficiency_scaling"
+            ],
+            "TOPIC_MATCH_COMMENT": "A modular-computation mechanism in the memory-layer family; it decouples capacity from compute but does not contribute routing or balancing to MoE proper.",
+            "HOTSPOT_PAPER_TAGS": [],
+            "HOTSPOT_PAPER_COMMENT": "",
+            "SCORE": 12,
+            "authors": [
+                "Ning Ding",
+                "Fangcheng Liu",
+                "Kyungrae Kim",
+                "Linji Hao",
+                "Kyeng-Hun Lee",
+                "Hyeonmok Ko",
+                "Yehui Tang"
+            ],
+            "title": "MeKi: Memory-based Expert Knowledge Injection for Efficient LLM Scaling",
+            "abstract": "Scaling Large Language Models (LLMs) typically relies on increasing the number of parameters or test-time computations to boost performance. However, these strategies are impractical for edge device deployment due to limited RAM and NPU resources. Despite hardware constraints, deploying performant LLM on edge devices such as smartphone remains crucial for user experience. To address this, we propose MeKi (Memory-based Expert Knowledge Injection), a novel system that scales LLM capacity via storage space rather than FLOPs. MeKi equips each Transformer layer with token-level memory experts that injects pre-stored semantic knowledge into the generation process. To bridge the gap between training capacity and inference efficiency, we employ a re-parameterization strategy to fold parameter matrices used during training into a compact static lookup table. By offloading the knowledge to ROM, MeKi decouples model capacity from computational cost, introducing zero inference latency overhead. Extensive experiments demonstrate that MeKi significantly outperforms dense LLM baselines with identical inference speed, validating the effectiveness of memory-based scaling paradigm for on-device LLMs. Project homepage is at https://github.com/ningding-o/MeKi.",
+            "arxiv_id": "2602.03359",
+            "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+            "MATCHED_TOPIC_LABELS": [
+                "MoE Training",
+                "Architecture and Training Dynamics",
+                "Efficiency, Compression, and Large-Scale Training"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [],
+            "HOTSPOT_PAPER_PRIMARY_KIND": null,
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+        },
+        "2602.03203": {
+            "ARXIVID": "2602.03203",
+            "COMMENT": "Learns KV eviction rather than scoring it heuristically: a Golden Eviction oracle built from future attention scores supplies traces distilled with a pairwise ranking loss, then eviction is cast as an MDP and refined with GRPO to protect low-entropy tokens.",
+            "RELEVANCE": 6,
+            "NOVELTY": 6,
+            "PRIMARY_TOPIC_ID": "efficiency_scaling",
+            "MATCHED_TOPIC_IDS": [
+                "efficiency_scaling"
+            ],
+            "TOPIC_MATCH_COMMENT": "KV-cache memory reduction with a new learned-policy mechanism, though scoped to long reasoning traces at inference.",
+            "HOTSPOT_PAPER_TAGS": [],
+            "HOTSPOT_PAPER_COMMENT": "",
+            "SCORE": 12,
+            "authors": [
+                "Zican Dong",
+                "Peiyu Liu",
+                "Junyi Li",
+                "Zhipeng Chen",
+                "Han Peng",
+                "Shuo Wang",
+                "Wayne Xin Zhao"
+            ],
+            "title": "ForesightKV: Optimizing KV Cache Eviction for Reasoning Models by Learning Long-Term Contribution",
+            "abstract": "Recently, large language models (LLMs) have shown remarkable reasoning abilities by producing long reasoning traces. However, as the sequence length grows, the key-value (KV) cache expands linearly, incurring significant memory and computation costs. Existing KV cache eviction methods mitigate this issue by discarding less important KV pairs, but often fail to capture complex KV dependencies, resulting in performance degradation. To better balance efficiency and performance, we introduce ForesightKV, a training-based KV cache eviction framework that learns to predict which KV pairs to evict during long-text generations. We first design the Golden Eviction algorithm, which identifies the optimal eviction KV pairs at each step using future attention scores. These traces and the scores at each step are then distilled via supervised training with a Pairwise Ranking Loss. Furthermore, we formulate cache eviction as a Markov Decision Process and apply the GRPO algorithm to mitigate the significant language modeling loss increase on low-entropy tokens. Experiments on AIME2024 and AIME2025 benchmarks of three reasoning models demonstrate that ForesightKV consistently outperforms prior methods under only half the cache budget, while benefiting synergistically from both supervised and reinforcement learning approaches. Code is available at https://github.com/RUCAIBox/ForesightKV.",
+            "arxiv_id": "2602.03203",
+            "PRIMARY_TOPIC_LABEL": "Efficiency, Compression, and Large-Scale Training",
+            "MATCHED_TOPIC_LABELS": [
+                "Efficiency, Compression, and Large-Scale Training"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [],
+            "HOTSPOT_PAPER_PRIMARY_KIND": null,
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+        }
+    },
+    "topic_sections": [
+        {
+            "topic_id": "moe_training",
+            "topic_label": "MoE Training",
+            "paper_ids": [
+                "2602.03473"
+            ]
+        },
+        {
+            "topic_id": "training_systems",
+            "topic_label": "Large-Scale Training Systems and Efficiency",
+            "paper_ids": [
+                "2602.03096",
+                "2602.03001",
+                "2602.03702",
+                "2602.03802",
+                "2602.03357"
+            ]
+        },
+        {
+            "topic_id": "architecture_training",
+            "topic_label": "Architecture and Training Dynamics",
+            "paper_ids": [
+                "2602.03681",
+                "2602.03560",
+                "2602.02928",
+                "2602.03655",
+                "2602.03082",
+                "2602.03359"
+            ]
+        },
+        {
+            "topic_id": "efficiency_scaling",
+            "topic_label": "Efficiency, Compression, and Large-Scale Training",
+            "paper_ids": [
+                "2602.03537",
+                "2603.04411",
+                "2602.03815",
+                "2602.03184",
+                "2602.03921",
+                "2602.03134",
+                "2602.03211",
+                "2602.03772",
+                "2602.03249",
+                "2602.03120",
+                "2602.02951",
+                "2602.03226",
+                "2602.03493",
+                "2602.03216",
+                "2602.03535",
+                "2602.03067",
+                "2602.03043",
+                "2602.03203"
+            ]
+        }
+    ]
+}

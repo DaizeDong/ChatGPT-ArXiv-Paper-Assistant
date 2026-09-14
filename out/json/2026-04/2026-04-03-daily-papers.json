@@ -1,0 +1,475 @@
+{
+    "schema_version": 2,
+    "meta": {
+        "date": "2026-04-03",
+        "sort": [
+            "score",
+            "relevance"
+        ],
+        "topic_schema_version": 2,
+        "total_papers": 10,
+        "usage": {
+            "model": "llmcall:cc+codexg",
+            "prompt_tokens": 0,
+            "completion_tokens": 0,
+            "prompt_cost": 0.0,
+            "completion_cost": 0.0,
+            "total_arxiv_papers": 352,
+            "total_scanned_papers": 352,
+            "total_relevant_papers": 10,
+            "filter_health": {
+                "status": "ok",
+                "scanned_papers": 352,
+                "selected_papers": 10,
+                "llm_tokens": 0,
+                "message": "Scored 352 papers with 4/5 successful model calls; 10 selected."
+            },
+            "llm": {
+                "backend": "LLM backend: llmcall chain=codexg->codex->cc->claude",
+                "attempted": 5,
+                "succeeded": 4,
+                "failed": 1,
+                "by_backend": {
+                    "llmcall": 5
+                },
+                "by_provider": {
+                    "cc": 3,
+                    "codexg": 1
+                },
+                "errors": [
+                    "timeout after 18s"
+                ],
+                "seconds": 1531.4,
+                "trace": [
+                    "codexg: unavailable after 285.3s of 543.7s (OpenAI Codex v0.154.0",
+                    "codex: unavailable after 4.5s of 277.2s (OpenAI Codex v0.154.0",
+                    "cc: answered in 17.1s of 291.4s",
+                    "codexg: answered in 431.6s of 543.7s",
+                    "codexg: unavailable after 6.2s of 543.7s (OpenAI Codex v0.154.0",
+                    "codex: unavailable after 4.7s of 556.3s (OpenAI Codex v0.154.0",
+                    "cc: answered in 97.1s of 570.4s",
+                    "codexg: unavailable after 168.8s of 543.7s (OpenAI Codex v0.154.0",
+                    "codex: unavailable after 4.9s of 393.7s (OpenAI Codex v0.154.0",
+                    "cc: unavailable after 408.7s of 407.5s (timeout after 408s)",
+                    "claude: unavailable after 18.8s of 17.6s (timeout after 18s)",
+                    "codexg: unavailable after 3.7s of 543.7s (OpenAI Codex v0.154.0",
+                    "codex: unavailable after 4.0s of 558.8s (OpenAI Codex v0.154.0",
+                    "cc: answered in 76.0s of 573.5s"
+                ]
+            },
+            "remedied": true
+        }
+    },
+    "topic_order": [
+        "moe_training",
+        "training_systems",
+        "architecture_training",
+        "efficiency_scaling",
+        "representation_structure",
+        "memory_systems",
+        "world_models_open_ended_rl"
+    ],
+    "diagnostics": {
+        "total_papers": 10,
+        "topic_counts": [
+            {
+                "topic_id": "moe_training",
+                "topic_label": "MoE Training",
+                "paper_count": 1
+            },
+            {
+                "topic_id": "training_systems",
+                "topic_label": "Large-Scale Training Systems and Efficiency",
+                "paper_count": 1
+            },
+            {
+                "topic_id": "architecture_training",
+                "topic_label": "Architecture and Training Dynamics",
+                "paper_count": 6
+            },
+            {
+                "topic_id": "efficiency_scaling",
+                "topic_label": "Efficiency, Compression, and Large-Scale Training",
+                "paper_count": 2
+            },
+            {
+                "topic_id": "representation_structure",
+                "topic_label": "Representation Learning Theory and Structure",
+                "paper_count": 0
+            },
+            {
+                "topic_id": "memory_systems",
+                "topic_label": "Memory Structures and Agent Memory Systems",
+                "paper_count": 0
+            },
+            {
+                "topic_id": "world_models_open_ended_rl",
+                "topic_label": "World Models, Exploration, and Open-Ended Reinforcement Learning",
+                "paper_count": 0
+            }
+        ],
+        "assignment_source_counts": {
+            "llm_exact": 10
+        },
+        "llm_assignment_count": 10,
+        "heuristic_assignment_count": 0,
+        "default_assignment_count": 0,
+        "invalid_primary_topic_fallback_count": 0,
+        "missing_primary_topic_fallback_count": 0,
+        "hotspot_paper_kind_counts": {
+            "new_frontier": 0,
+            "daily_hot": 0
+        },
+        "hotspot_paper_assignment_source_counts": {
+            "default": 10
+        }
+    },
+    "papers": {
+        "2604.01563": {
+            "ARXIVID": "2604.01563",
+            "COMMENT": "Factorial 1B-scale study showing normalizer and optimizer are not independent choices: Derf's gap to RMSNorm triples under Muon, traced to erf saturation and scale blindness under faster spectral-norm growth, with an EMA-blend and alpha fix each recovering most of the penalty.",
+            "RELEVANCE": 9,
+            "NOVELTY": 6,
+            "PRIMARY_TOPIC_ID": "architecture_training",
+            "MATCHED_TOPIC_IDS": [
+                "training_systems",
+                "architecture_training"
+            ],
+            "TOPIC_MATCH_COMMENT": "Normalization design interacting with a large-scale pretraining optimizer, i.e. training-dynamics analysis that changes configuration decisions.",
+            "HOTSPOT_PAPER_TAGS": [],
+            "HOTSPOT_PAPER_COMMENT": "",
+            "SCORE": 15,
+            "authors": [
+                "Abdelrahman Abouzeid"
+            ],
+            "title": "Does Your Optimizer Care How You Normalize? Normalization-Optimizer Coupling in LLM Training",
+            "abstract": "In LLM training, normalization layers and optimizers are typically treated as independent design choices. In a 3x2 factorial at 1B parameters and 1000 training steps, we show this assumption can fail: Dynamic Erf (Derf; Chen & Liu, 2025) suffers a large negative interaction with Muon (Jordan, 2024), with its gap to RMSNorm growing from +0.31 nats under AdamW to +0.97 under Muon, approximately three times larger. Dynamic Tanh (DyT; Zhu et al., 2025), included as a bounded-normalizer control, shows no such penalty. Our evidence points to two failure modes of erf under Muon's faster spectral-norm growth: saturation (lossy compression) and scale blindness (discarding activation magnitude). An EMA-blend that reintroduces running scale estimates recovers ~84% of the gap. Separately, reducing Derf's alpha from its published default (0.5 to 0.3) recovers ~80% by keeping erf in its near-linear regime, where it approximately preserves relative scale; this setting is not the published default of Chen & Liu (2025). Using Derf's published default alpha with Muon incurs a 0.66-nat interaction penalty without producing NaNs or divergence, making the failure easy to miss in short pilot runs.",
+            "arxiv_id": "2604.01563",
+            "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+            "MATCHED_TOPIC_LABELS": [
+                "Large-Scale Training Systems and Efficiency",
+                "Architecture and Training Dynamics"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [],
+            "HOTSPOT_PAPER_PRIMARY_KIND": null,
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+        },
+        "2604.02309": {
+            "ARXIVID": "2604.02309",
+            "COMMENT": "Exact O(d^3) parameterization of doubly stochastic residual-stream mixing via generalized orthostochastic matrices, replacing factorially-scaling exact methods and expressivity-limited Kronecker factorizations, making the number of residual streams a scalable capacity dimension.",
+            "RELEVANCE": 8,
+            "NOVELTY": 7,
+            "PRIMARY_TOPIC_ID": "architecture_training",
+            "MATCHED_TOPIC_IDS": [
+                "architecture_training"
+            ],
+            "TOPIC_MATCH_COMMENT": "Residual and layer-connectivity design mechanism, validated so far only at 30M scale.",
+            "HOTSPOT_PAPER_TAGS": [],
+            "HOTSPOT_PAPER_COMMENT": "",
+            "SCORE": 15,
+            "authors": [
+                "Torque Dandachi",
+                "Sophia Diggs-Galligan"
+            ],
+            "title": "go-$m$HC: Direct Parameterization of Manifold-Constrained Hyper-Connections via Generalized Orthostochastic Matrices",
+            "abstract": "Doubly stochastic matrices enable learned mixing across residual streams, but parameterizing the set of doubly stochastic matrices (the Birkhoff polytope) exactly and efficiently remains an open challenge. Existing exact methods scale factorially with the number of streams ($d$), while Kronecker-factorized approaches are efficient but expressivity-limited. We introduce a novel exact parameterization grounded in the theory of generalized orthostochastic matrices, which scales as $\\mathcal{O}(d^3)$ and exposes a single hyperparameter $s$ which continuously interpolates between a computationally efficient boundary and the fully expressive Birkhoff polytope. Building on Manifold-Constrained Hyper-Connections ($m$HC), a framework for learned dynamic layer connectivity, we instantiate this parameterization in go-$m$HC. Our method composes naturally with Kronecker-factorized methods, substantially recovering expressivity at similar FLOP costs. Spectral analysis indicates that go-$m$HC fills the Birkhoff polytope far more completely than Kronecker-factorized baselines. On synthetic stream-mixing tasks, go-$m$HC achieves the minimum theoretical loss while converging up to $10\\times$ faster. We validate our approach in a 30M parameter GPT-style language model. The expressivity, efficiency, and exactness of go-$m$HC offer a practical avenue for scaling $d$ as a new dimension of model capacity.",
+            "arxiv_id": "2604.02309",
+            "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+            "MATCHED_TOPIC_LABELS": [
+                "Architecture and Training Dynamics"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [],
+            "HOTSPOT_PAPER_PRIMARY_KIND": null,
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+        },
+        "2604.01978": {
+            "ARXIVID": "2604.01978",
+            "COMMENT": "Proves a homogenized depth-scaling limit for multi-head attention residual streams, yielding quantitative conditions on depth, step size, head count and temperature under which token clustering/representation collapse is mitigated.",
+            "RELEVANCE": 7,
+            "NOVELTY": 8,
+            "PRIMARY_TOPIC_ID": "architecture_training",
+            "MATCHED_TOPIC_IDS": [
+                "architecture_training"
+            ],
+            "TOPIC_MATCH_COMMENT": "Mechanistic theory of the attention/residual architecture at initialization scaling, i.e. training-dynamics analysis rather than an application.",
+            "HOTSPOT_PAPER_TAGS": [],
+            "HOTSPOT_PAPER_COMMENT": "",
+            "SCORE": 15,
+            "authors": [
+                "Hugo Koubbi",
+                "Borjan Geshkovski",
+                "Philippe Rigollet"
+            ],
+            "title": "Homogenized Transformers",
+            "abstract": "We study a random model of deep multi-head self-attention in which the weights are resampled independently across layers and heads, as at initialization of training. Viewing depth as a time variable, the residual stream defines a discrete-time interacting particle system on the unit sphere. We prove that, under suitable joint scalings of the depth, the residual step size, and the number of heads, this dynamics admits a nontrivial homogenized limit. Depending on the scaling, the limit is either deterministic or stochastic with common noise; in the mean-field regime, the latter leads to a stochastic nonlinear Fokker--Planck equation for the conditional law of a representative token. In the Gaussian setting, the limiting drift vanishes, making the homogenized dynamics explicit enough to study representation collapse. This yields quantitative trade-offs between dimension, context length, and temperature, and identifies regimes in which clustering can be mitigated.",
+            "arxiv_id": "2604.01978",
+            "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+            "MATCHED_TOPIC_LABELS": [
+                "Architecture and Training Dynamics"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [],
+            "HOTSPOT_PAPER_PRIMARY_KIND": null,
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+        },
+        "2604.01683": {
+            "ARXIVID": "2604.01683",
+            "COMMENT": "Attention variant that evolves queries and keys through shared learned dynamics before scoring, with an ablation isolating coupling itself as the active ingredient and an honest compute-matched analysis showing it is a sample-efficiency mechanism that narrows by 350M.",
+            "RELEVANCE": 8,
+            "NOVELTY": 6,
+            "PRIMARY_TOPIC_ID": "architecture_training",
+            "MATCHED_TOPIC_IDS": [
+                "architecture_training"
+            ],
+            "TOPIC_MATCH_COMMENT": "New attention mechanism analysed for perplexity, training stability and scaling behaviour.",
+            "HOTSPOT_PAPER_TAGS": [],
+            "HOTSPOT_PAPER_COMMENT": "",
+            "SCORE": 14,
+            "authors": [
+                "Barak Gahtan",
+                "Alex M. Bronstein"
+            ],
+            "title": "Coupled Query-Key Dynamics for Attention",
+            "abstract": "Standard scaled dot-product attention computes scores from static, independent projections of the input. We show that evolving queries and keys \\emph{jointly} through shared learned dynamics before scoring - which we call \\textbf{coupled QK dynamics} - improves language modeling perplexity and training stability. On WikiText-103 at 60M parameters, coupled dynamics achieves 22.55--22.62 perplexity vs.\\ 24.22 for standard attention ($-$6.6--6.9\\%), with only 0.11\\% additional parameters (shared across both instantiations). A structural ablation isolates coupling as the active ingredient: a symplectic (Hamiltonian) and a non-symplectic (Euler) integrator perform identically when both couple Q and K, while an uncoupled MLP baseline of matched capacity reaches only 23.81 with 8$\\times$ higher seed variance. The integration step count (1--7) is similarly irrelevant - a single coupled step suffices. A compute-matched comparison reveals that coupling is a \\emph{sample-efficiency} mechanism: standard attention trained for 2.4$\\times$ longer (matching wall-clock) reaches the same perplexity, but requires 2.4$\\times$ more tokens. The advantage scales to 150M ($-$6.7\\%) but narrows at 350M ($-$1.0\\%), where Differential Attention (18.93) overtakes coupled dynamics (19.35). The benefit is corpus-dependent: coupling helps on domain-coherent text (WikiText-103 $-$6.6\\%, PubMed $-$4.5\\%) but degrades on heterogeneous web text ($+$10.3\\%) and shows no benefit on GLUE. We characterize when coupling helps and when it does not, providing practical guidelines.",
+            "arxiv_id": "2604.01683",
+            "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+            "MATCHED_TOPIC_LABELS": [
+                "Architecture and Training Dynamics"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [],
+            "HOTSPOT_PAPER_PRIMARY_KIND": null,
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+        },
+        "2604.02505": {
+            "ARXIVID": "2604.02505",
+            "COMMENT": "Proves stability of Leon's preconditioner, removing a tuned hyperparameter and yielding the first projection-free accelerated One-sided Shampoo variant.",
+            "RELEVANCE": 7,
+            "NOVELTY": 7,
+            "PRIMARY_TOPIC_ID": "training_systems",
+            "MATCHED_TOPIC_IDS": [
+                "training_systems"
+            ],
+            "TOPIC_MATCH_COMMENT": "Matrix preconditioner design in the Shampoo lineage is squarely optimizer work for large-scale training.",
+            "HOTSPOT_PAPER_TAGS": [],
+            "HOTSPOT_PAPER_COMMENT": "",
+            "SCORE": 14,
+            "authors": [
+                "Dmitry Kovalev"
+            ],
+            "title": "Optimal Projection-Free Adaptive SGD for Matrix Optimization",
+            "abstract": "Recently, Jiang et al. [2026] developed Leon, a practical variant of One-sided Shampoo [Xie et al., 2025a, An et al., 2025] algorithm for online convex optimization, which does not require computing a costly quadratic projection at each iteration. Unfortunately, according to the existing analysis, Leon requires tuning an additional hyperparameter in its preconditioner and cannot achieve dimension-independent convergence guarantees for convex optimization problems beyond the bounded gradients assumption. In this paper, we resolve this issue by proving certain stability properties of Leon's preconditioner. Using our improved analysis, we show that tuning the extra hyperparameter can be avoided and, more importantly, develop the first practical variant of One-sided Shampoo with Nesterov acceleration, which does not require computing projections at each iteration. As a side contribution, we obtain improved dimension-independent rates in the non-smooth non-convex setting and develop a unified analysis of the proposed algorithm, which yields accelerated projection-free adaptive SGD with (block-)diagonal preconditioners.",
+            "arxiv_id": "2604.02505",
+            "PRIMARY_TOPIC_LABEL": "Large-Scale Training Systems and Efficiency",
+            "MATCHED_TOPIC_LABELS": [
+                "Large-Scale Training Systems and Efficiency"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [],
+            "HOTSPOT_PAPER_PRIMARY_KIND": null,
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+        },
+        "2604.02119": {
+            "ARXIVID": "2604.02119",
+            "COMMENT": "Low-rank factorization that anchors each compressed layer to original outputs while modeling upstream-induced input distribution shift, with block-level end-to-end refinement.",
+            "RELEVANCE": 7,
+            "NOVELTY": 6,
+            "PRIMARY_TOPIC_ID": "efficiency_scaling",
+            "MATCHED_TOPIC_IDS": [
+                "efficiency_scaling"
+            ],
+            "TOPIC_MATCH_COMMENT": "Retraining-free low-rank compression of billion-parameter models is core compression work.",
+            "HOTSPOT_PAPER_TAGS": [],
+            "HOTSPOT_PAPER_COMMENT": "",
+            "SCORE": 13,
+            "authors": [
+                "Atul Kumar Sinha",
+                "François Fleuret"
+            ],
+            "title": "AA-SVD : Anchored and Adaptive SVD for Large Language Model Compression",
+            "abstract": "We introduce a fast low-rank factorization-based framework for compressing large language models that enables rapid compression of billion-parameter models without retraining. Unlike existing factorization-based approaches that optimize only on the original inputs, ignoring distribution shifts from upstream compression and thus propagating errors forward, or those that rely only on shifted inputs and risk drifting away from the original outputs, our approach accounts for both. Beyond individual layer compression, we further refine each transformer block end-to-end, minimizing block-level output distortion and allowing compressed layers to jointly compensate for accumulated errors. By anchoring each compressed layer to the original outputs while explicitly modeling input distribution shifts, our method finds a low-rank approximation that maintains functional equivalence with the original model. Experiments on large language models show that our method consistently outperforms existing SVD-based baselines across compression ratios, with the advantage becoming increasingly pronounced at aggressive compression budgets, where competing methods degrade substantially or collapse entirely, offering a practical solution for efficient, large-scale model deployment.",
+            "arxiv_id": "2604.02119",
+            "PRIMARY_TOPIC_LABEL": "Efficiency, Compression, and Large-Scale Training",
+            "MATCHED_TOPIC_LABELS": [
+                "Efficiency, Compression, and Large-Scale Training"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [],
+            "HOTSPOT_PAPER_PRIMARY_KIND": null,
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+        },
+        "2604.02201": {
+            "ARXIVID": "2604.02201",
+            "COMMENT": "Formal result that depth increases RNN memory capacity efficiently per parameter, and that multiplicative interactions in 2RNNs cannot be replaced by layerwise nonlinearities.",
+            "RELEVANCE": 7,
+            "NOVELTY": 6,
+            "PRIMARY_TOPIC_ID": "architecture_training",
+            "MATCHED_TOPIC_IDS": [
+                "architecture_training"
+            ],
+            "TOPIC_MATCH_COMMENT": "Mechanistic expressivity analysis of recurrent sequence modelling, exactly the analysed-architecture case.",
+            "HOTSPOT_PAPER_TAGS": [],
+            "HOTSPOT_PAPER_COMMENT": "",
+            "SCORE": 13,
+            "authors": [
+                "Maude Lizaire",
+                "Michael Rizvi-Martel",
+                "Éric Dupuis",
+                "Guillaume Rabusseau"
+            ],
+            "title": "On the Role of Depth in the Expressivity of RNNs",
+            "abstract": "The benefits of depth in feedforward neural networks are well known: composing multiple layers of linear transformations with nonlinear activations enables complex computations. While similar effects are expected in recurrent neural networks (RNNs), it remains unclear how depth interacts with recurrence to shape expressive power. Here, we formally show that depth increases RNNs' memory capacity efficiently with respect to the number of parameters, thus enhancing expressivity both by enabling more complex input transformations and improving the retention of past information. We broaden our analysis to 2RNNs, a generalization of RNNs with multiplicative interactions between inputs and hidden states. Unlike RNNs, which remain linear without nonlinear activations, 2RNNs perform polynomial transformations whose maximal degree grows with depth. We further show that multiplicative interactions cannot, in general, be replaced by layerwise nonlinearities. Finally, we validate these insights empirically on synthetic and real-world tasks.",
+            "arxiv_id": "2604.02201",
+            "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+            "MATCHED_TOPIC_LABELS": [
+                "Architecture and Training Dynamics"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [],
+            "HOTSPOT_PAPER_PRIMARY_KIND": null,
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+        },
+        "2604.01694": {
+            "ARXIVID": "2604.01694",
+            "COMMENT": "Constrains adaptation to minor singular directions instead of dominant subspaces, claiming much better knowledge acquisition than LoRA at a smaller parameter footprint.",
+            "RELEVANCE": 7,
+            "NOVELTY": 6,
+            "PRIMARY_TOPIC_ID": "efficiency_scaling",
+            "MATCHED_TOPIC_IDS": [
+                "efficiency_scaling"
+            ],
+            "TOPIC_MATCH_COMMENT": "Low-rank adaptation with a genuinely inverted subspace choice, which is a new mechanism rather than a tuned LoRA variant.",
+            "HOTSPOT_PAPER_TAGS": [],
+            "HOTSPOT_PAPER_COMMENT": "",
+            "SCORE": 13,
+            "authors": [
+                "Sten Rüdiger",
+                "Sebastian Raschka"
+            ],
+            "title": "MiCA Learns More Knowledge Than LoRA and Full Fine-Tuning",
+            "abstract": "Minor Component Adaptation (MiCA) is a novel parameter-efficient fine-tuning method for large language models that focuses on adapting underutilized subspaces of model representations. Unlike conventional methods such as Low-Rank Adaptation (LoRA), which target dominant subspaces, MiCA leverages Singular Value Decomposition to identify subspaces related to minor singular vectors associated with the least significant singular values and constrains the update of parameters during fine-tuning to those directions. This strategy leads to up to 5.9x improvement in knowledge acquisition under optimized training hyperparameters and a minimal parameter footprint of 6-60% compared to LoRA. These results suggest that constraining adaptation to minor singular directions provides a more efficient and stable mechanism for integrating new knowledge into pre-trained language models.",
+            "arxiv_id": "2604.01694",
+            "PRIMARY_TOPIC_LABEL": "Efficiency, Compression, and Large-Scale Training",
+            "MATCHED_TOPIC_LABELS": [
+                "Efficiency, Compression, and Large-Scale Training"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [],
+            "HOTSPOT_PAPER_PRIMARY_KIND": null,
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+        },
+        "2604.01762": {
+            "ARXIVID": "2604.01762",
+            "COMMENT": "MoE routing in the spectral domain: a frequency-adaptive router dispatches tokens to experts holding conjugate-symmetric Fourier coefficients that reconstruct losslessly into real weights, cutting expert parameter overhead in multi-task adaptation.",
+            "RELEVANCE": 7,
+            "NOVELTY": 6,
+            "PRIMARY_TOPIC_ID": "moe_training",
+            "MATCHED_TOPIC_IDS": [
+                "moe_training",
+                "efficiency_scaling"
+            ],
+            "TOPIC_MATCH_COMMENT": "The core contribution is a new router and expert parameterization, though it lives in PEFT rather than pretraining.",
+            "HOTSPOT_PAPER_TAGS": [],
+            "HOTSPOT_PAPER_COMMENT": "",
+            "SCORE": 13,
+            "authors": [
+                "Juyong Jiang",
+                "Fan Wang",
+                "Hong Qi",
+                "Sunghun Kim",
+                "Jing Tang"
+            ],
+            "title": "FourierMoE: Fourier Mixture-of-Experts Adaptation of Large Language Models",
+            "abstract": "Parameter-efficient fine-tuning (PEFT) has emerged as a crucial paradigm for adapting large language models (LLMs) under constrained computational budgets. However, standard PEFT methods often struggle in multi-task fine-tuning settings, where diverse optimization objectives induce task interference and limited parameter budgets lead to representational deficiency. While recent approaches incorporate mixture-of-experts (MoE) to alleviate these issues, they predominantly operate in the spatial domain, which may introduce structural redundancy and parameter overhead. To overcome these limitations, we reformulate adaptation in the spectral domain. Our spectral analysis reveals that different tasks exhibit distinct frequency energy distributions, and that LLM layers display heterogeneous frequency sensitivities. Motivated by these insights, we propose FourierMoE, which integrates the MoE architecture with the inverse discrete Fourier transform (IDFT) for frequency-aware adaptation. Specifically, FourierMoE employs a frequency-adaptive router to dispatch tokens to experts specialized in distinct frequency bands. Each expert learns a set of conjugate-symmetric complex coefficients, preserving complete phase and amplitude information while theoretically guaranteeing lossless IDFT reconstruction into real-valued spatial weights. Extensive evaluations across 28 benchmarks, multiple model architectures, and scales demonstrate that FourierMoE consistently outperforms competitive baselines in both single-task and multi-task settings while using significantly fewer trainable parameters. These results highlight the promise of spectral-domain expert adaptation as an effective and parameter-efficient paradigm for LLM fine-tuning.",
+            "arxiv_id": "2604.01762",
+            "PRIMARY_TOPIC_LABEL": "MoE Training",
+            "MATCHED_TOPIC_LABELS": [
+                "MoE Training",
+                "Efficiency, Compression, and Large-Scale Training"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [],
+            "HOTSPOT_PAPER_PRIMARY_KIND": null,
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+        },
+        "2604.02051": {
+            "ARXIVID": "2604.02051",
+            "COMMENT": "Makes each step of a weight-shared recursive transformer input-dependent through a controller hypernetwork that modulates frozen SVD-initialized LoRA bases, plus gated recurrence that the ablation shows is required for depth reuse to help at all.",
+            "RELEVANCE": 7,
+            "NOVELTY": 6,
+            "PRIMARY_TOPIC_ID": "architecture_training",
+            "MATCHED_TOPIC_IDS": [
+                "architecture_training",
+                "efficiency_scaling"
+            ],
+            "TOPIC_MATCH_COMMENT": "Dynamic computation over shared depth: a parameter-for-compute mechanism, though gains so far are on the training distribution only.",
+            "HOTSPOT_PAPER_TAGS": [],
+            "HOTSPOT_PAPER_COMMENT": "",
+            "SCORE": 13,
+            "authors": [
+                "Jaber Jaber",
+                "Osama Jaber"
+            ],
+            "title": "Ouroboros: Dynamic Weight Generation for Recursive Transformers via Input-Conditioned LoRA Modulation",
+            "abstract": "Recursive transformers reuse a shared weight block across multiple depth steps, trading parameters for compute. A core limitation: every step applies the same transformation, preventing the model from composing distinct operations across depth. We present Ouroboros, a system that attaches a compact Controller hypernetwork to a recursive transformer block. The Controller observes the current hidden state, produces a per-step diagonal modulation vector, and applies it to frozen SVD-initialized LoRA bases, making each recurrence step input-dependent. We combine this with gated recurrence (bias-initialized to 88% retention) and per-step LayerNorm for stable deep iteration. On Qwen2.5-3B split into a Prelude/Recurrent/Coda architecture (17 of 36 layers retained), Ouroboros reduces training loss by 43.4% over the unmodified 17-layer baseline, recovering 51.3% of the performance gap caused by layer removal. The full system adds only 9.2M trainable parameters (Controller, gate, and per-step norms) yet outperforms equivalently-sized static per-step LoRA by 1.44 loss points at depth 1 and remains ahead across all tested depths (1, 4, 8, 16) and ranks (8, 32, 64). We also find that gated recurrence is essential: without it, recursive layer application makes the model strictly worse. These gains are measured on the training distribution; on held-out text, the Controller does not yet improve over the baseline, a limitation we attribute to frozen downstream layers and discuss in detail. Code: https://github.com/RightNow-AI/ouroboros",
+            "arxiv_id": "2604.02051",
+            "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+            "MATCHED_TOPIC_LABELS": [
+                "Architecture and Training Dynamics",
+                "Efficiency, Compression, and Large-Scale Training"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [],
+            "HOTSPOT_PAPER_PRIMARY_KIND": null,
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+        }
+    },
+    "topic_sections": [
+        {
+            "topic_id": "moe_training",
+            "topic_label": "MoE Training",
+            "paper_ids": [
+                "2604.01762"
+            ]
+        },
+        {
+            "topic_id": "training_systems",
+            "topic_label": "Large-Scale Training Systems and Efficiency",
+            "paper_ids": [
+                "2604.02505"
+            ]
+        },
+        {
+            "topic_id": "architecture_training",
+            "topic_label": "Architecture and Training Dynamics",
+            "paper_ids": [
+                "2604.01563",
+                "2604.02309",
+                "2604.01978",
+                "2604.01683",
+                "2604.02201",
+                "2604.02051"
+            ]
+        },
+        {
+            "topic_id": "efficiency_scaling",
+            "topic_label": "Efficiency, Compression, and Large-Scale Training",
+            "paper_ids": [
+                "2604.02119",
+                "2604.01694"
+            ]
+        }
+    ]
+}

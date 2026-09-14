@@ -2,8 +2,8 @@
     "schema_version": 1,
     "meta": {
         "date": "2026-07-30",
-        "total_candidates": 0,
-        "total_spotlight_papers": 0,
+        "total_candidates": 116,
+        "total_spotlight_papers": 6,
         "thresholds": {
             "daily_hot_score_cutoff": 15,
             "daily_hot_relevance_cutoff": 7,
@@ -17,11 +17,263 @@
     },
     "diagnostics": {
         "candidate_count_by_kind": {
-            "new_frontier": 0,
-            "daily_hot": 0
+            "new_frontier": 3,
+            "daily_hot": 6
         },
-        "selected_count_by_kind": {}
+        "selected_count_by_kind": {
+            "new_frontier": 3,
+            "daily_hot": 3
+        }
     },
-    "papers": {},
-    "sections": []
+    "papers": {
+        "2607.27281": {
+            "ARXIVID": "2607.27281",
+            "COMMENT": "A driven-nucleation rate law connects rare circuit alignment to capability emergence, plasticity loss, and targeted recovery.",
+            "RELEVANCE": 10,
+            "NOVELTY": 9,
+            "PRIMARY_TOPIC_ID": "architecture_training",
+            "MATCHED_TOPIC_IDS": [
+                "architecture_training"
+            ],
+            "TOPIC_MATCH_COMMENT": "The paper directly analyzes and experimentally controls language-model training dynamics.",
+            "HOTSPOT_PAPER_TAGS": [
+                "new_frontier",
+                "daily_hot"
+            ],
+            "HOTSPOT_PAPER_COMMENT": "Its predictive theory of capability emergence and circuit-level plasticity control could open a major training-dynamics direction.",
+            "SCORE": 19,
+            "authors": [
+                "Lei Dong"
+            ],
+            "title": "The Kinetics of Training: A Driven-Nucleation Rate Law for Emergence, Plasticity Loss, and Circuit Control in Language Models",
+            "abstract": "A capability appears in a language model when the last parts of its circuit align in one stochastic attempt, and getting all but one right is worth nothing. We show this no-partial-credit joint alignment is the rate-limiting step of capability formation. Two fingerprints: in a shortcut-free apparatus a five-part circuit missing three waits as long as a three-part circuit missing three (1.19-1.37), so the wait counts missing parts, not size; and on Pythia across seven capabilities and three scales, ablating one part leaves a median 17% of the capability in 32 of 32 discriminating cells, where partial credit predicts 50-83% (p = 2e-10), while a random non-part head leaves 100%. One rare event whose barrier grows with missing parts yields a rate equation -- sites x attempts x drive x exp(-beta*K), minus destruction -- read three ways, each preregistered with frozen constants. Forward: a capability flat at baseline ignites at a step of our choosing once the mix passes a concentration floor (10/10 above, 0/12 below), and while still flat its arrival is datable from its precursor to 5% median error on six held-out models. Backward: the delay to learn a withheld capability grows with waiting until, past a critical step, it never ignites -- yet validation loss falls smoothly throughout, so standard monitors are blind to it. We locate the damage (heads commit to the base data) and isolate the cure: re-initializing only the query-key slices restores learnability (6/6) while the value slices do nothing (0/6). We prove the mechanism in a controlled gated-attention model: occupation forces a deadline whose consequences need no mixing assumption. Completed: SGD's noise fails the fluctuation-dissipation test, so we install one and anneal, melt and pin circuits on schedule. Scope: conjunction circuits in transformers to 1.4B.",
+            "arxiv_id": "2607.27281",
+            "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+            "MATCHED_TOPIC_LABELS": [
+                "Architecture and Training Dynamics"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [
+                "New Frontier Papers",
+                "Daily Hot Papers"
+            ],
+            "HOTSPOT_PAPER_PRIMARY_KIND": "new_frontier",
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "New Frontier Papers",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "llm_exact"
+        },
+        "2607.27529": {
+            "ARXIVID": "2607.27529",
+            "COMMENT": "A shared latent mixture introduces correlated token transitions natively within each few-step discrete flow update.",
+            "RELEVANCE": 9,
+            "NOVELTY": 9,
+            "PRIMARY_TOPIC_ID": "architecture_training",
+            "MATCHED_TOPIC_IDS": [
+                "architecture_training",
+                "efficiency_scaling"
+            ],
+            "TOPIC_MATCH_COMMENT": "The paper introduces a new discrete generative architecture whose correlated updates enable efficient few-step sampling.",
+            "HOTSPOT_PAPER_TAGS": [
+                "new_frontier",
+                "daily_hot"
+            ],
+            "HOTSPOT_PAPER_COMMENT": "Native correlated discrete generation without teacher distillation is a potentially important new generative-model direction.",
+            "SCORE": 18,
+            "authors": [
+                "Mansoor Ahmed",
+                "Yue-Tsz Fan",
+                "Hemanth Venkateswara",
+                "Murray Patterson"
+            ],
+            "title": "Latent-Kernel Discrete Flow Maps for Few-Step Generation",
+            "abstract": "Discrete diffusion and flow-matching models denoise a sequence over many steps, but to keep each step cheap, they factorize the transition across positions and decide every token independently. This makes few-step generation challenging for text when the target couples two positions, such as a subject and a verb that must agree. An independent update commits to them separately, and many function evaluations are spent repairing the mismatch. Existing few-step methods buy back the lost correlation by distilling or rectifying a slow teacher, and so inherit the teacher's quality ceiling. We ask instead whether a model can express correlated steps natively, and answer with Latent-Kernel Discrete Flow Maps (LKF), a from-scratch flow-map kernel that is a mixture of M factorized components tied by a single shared latent. Conditioned on the latent, each component is cheap, and the mixture is summed over the latent in closed form for small M. We show that a single step places mass on correlated completions with the same sampling time complexity as a factorized model, since one latent is drawn per sequence and reused across the entire denoising trajectory. We also show that the Masked Diffusion Language Model (MDLM) is a special case of our LKF model at M=1. The experiments for unconditional text generation on the One-Billion-Word (LM1B) and WikiText-103 benchmarks show that our LKF model learns strongly heterogeneous components and improves generative perplexity by 2.1x to 3.3x over the likelihood baselines without losing diversity. The gain grows with M, and at M=8, it surpasses distilled and rectified few-step samplers. The source code is available at: https://github.com/mansoor181/lkf.git",
+            "arxiv_id": "2607.27529",
+            "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+            "MATCHED_TOPIC_LABELS": [
+                "Architecture and Training Dynamics",
+                "Efficiency, Compression, and Large-Scale Training"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [
+                "New Frontier Papers",
+                "Daily Hot Papers"
+            ],
+            "HOTSPOT_PAPER_PRIMARY_KIND": "new_frontier",
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "New Frontier Papers",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "llm_exact"
+        },
+        "2607.27372": {
+            "ARXIVID": "2607.27372",
+            "COMMENT": "Factors the training loop over multiple candidate matches, establishing exploration as a scalable pretraining axis.",
+            "RELEVANCE": 9,
+            "NOVELTY": 9,
+            "PRIMARY_TOPIC_ID": "architecture_training",
+            "MATCHED_TOPIC_IDS": [
+                "architecture_training",
+                "efficiency_scaling"
+            ],
+            "TOPIC_MATCH_COMMENT": "Its core contribution is a new generative-model training paradigm with strong compute, data, and parameter scaling behavior.",
+            "HOTSPOT_PAPER_TAGS": [
+                "new_frontier",
+                "daily_hot"
+            ],
+            "HOTSPOT_PAPER_COMMENT": "A proposed third pretraining axis with broad cross-modal results and large efficiency gains could open a consequential new scaling direction.",
+            "SCORE": 18,
+            "authors": [
+                "Alexi Gladstone",
+                "Heng Ji",
+                "Yilun Du"
+            ],
+            "title": "Explorative Modeling: Unlocking a Third Pretraining Axis and End-to-End Generation",
+            "abstract": "The deep learning revolution, kicked off by AlexNet, taught us that end-to-end training beats decomposing a problem into hand-designed stages. Generative modeling, however, has remained the exception-despite generative models being remarkably capable, they are still not trained end-to-end. This is because, at its core, generative modeling is about handling distributions with many modes, and existing scalable approaches handle this the same way, by factoring the generation procedure, which prevents end-to-end generation. In this work, we introduce Explorative Modeling, a new paradigm that instead factors the training loop, exploring K candidate matches between model generations and data, and training on the best, so predictions commit to modes rather than blurring them. We find Explorative Models (XMs) useful in two settings. First, increasing exploration adds a third pretraining axis beyond parameters and data for existing generative models-where scaling exploration monotonically improves performance across both continuous and discrete domains (images, video, and language). Notably, gains from exploration increase with scale, climbing from 7% to 36% as data scales and from 13% to 23% as models grow, with efficiency gains more than doubling at 3x the compute. Concretely, exploration improves FLOP efficiency by 4.1x, sample efficiency by 6.2x, parameter efficiency by 47%, lifts the strongest of image-generation recipes to a near-state-of-the-art 1.43 FID on ImageNet without guidance, enables scaling how end-to-end existing models are, and unlocks scaling generalization. Second, XMs enable end-to-end reconstructive generative modeling, matching diffusion on control tasks with 16-256x fewer inference steps. Together, these results establish XMs as both a new pretraining axis for existing generative models and a standalone end-to-end generative modeling paradigm.",
+            "arxiv_id": "2607.27372",
+            "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+            "MATCHED_TOPIC_LABELS": [
+                "Architecture and Training Dynamics",
+                "Efficiency, Compression, and Large-Scale Training"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [
+                "New Frontier Papers",
+                "Daily Hot Papers"
+            ],
+            "HOTSPOT_PAPER_PRIMARY_KIND": "new_frontier",
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "New Frontier Papers",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "llm_exact"
+        },
+        "2607.26515": {
+            "ARXIVID": "2607.26515",
+            "COMMENT": "Sparse residual correction mitigates activation underflow in end-to-end FP4 RL training.",
+            "RELEVANCE": 9,
+            "NOVELTY": 8,
+            "PRIMARY_TOPIC_ID": "efficiency_scaling",
+            "MATCHED_TOPIC_IDS": [
+                "efficiency_scaling"
+            ],
+            "TOPIC_MATCH_COMMENT": "Four-bit arithmetic and its corrective quantization mechanism are the core contribution; RL supplies the training setting.",
+            "HOTSPOT_PAPER_TAGS": [
+                "daily_hot"
+            ],
+            "HOTSPOT_PAPER_COMMENT": "Reported four-bit rollout and backward passes approach BF16 accuracy on the tested models, making this broadly relevant to post-training compute costs.",
+            "SCORE": 17,
+            "authors": [
+                "Hei Yi Mak",
+                "Shadan Golestan",
+                "Hoang Le",
+                "Mehran Taghian Jazi",
+                "Yunke Peng",
+                "Yaoyuan Wang",
+                "Yao Wang",
+                "Junsong Wang",
+                "Tianchi Hu",
+                "Fengchen He",
+                "Guipeng Hu",
+                "Tanzila Rahman",
+                "Anandharaju Durai Raju"
+            ],
+            "title": "HiFloat4 Format for End-To-End Reinforcement Learning Post-Training of Large Language Models",
+            "abstract": "We present, to our knowledge, the first end-to-end FP4 RL post-training, in which both the rollout and training policies, including their forward and backward passes, operate at 4-bit precision. A systematic study reveals that the dominant source of degradation in FP4 RL is not training-side quantization error but rollout activation quantization: outliers stretch the dynamic range so far that a large number of activation values underflow to zero under FP4. Counterintuitively, restoring the training policy to higher precision while keeping the rollout in FP4 makes accuracy worse than full FP4 baseline, exposing rollout-training mismatch as the principal failure mode and ruling out standard pretraining-style fixes. We address this with Rollout Residual Quantization (Rollout-ResQ): a single residual correction term constrained to a hardware-friendly sparsity pattern, added only to the FP4 rollout matmul -- a lightweight correction that recovers most of the precision lost to outlier-driven underflow without inflating the rollout's compute footprint. On Qwen2.5-3B and Qwen2.5-Math-7B, Rollout-ResQ paired with the HiFloat4 (HiF4) format -- whose three-level hierarchical scaling preserves resolution under FP4's tight 4-bit budget -- closes the accuracy gap to BF16 from 4.9% to 1.1%, bringing fully quantized FP4 RL within striking distance of full precision. Applied to the open-standard MXFP4, the same recipe narrows the gap from 13.6% to 5.3%, revealing that FP4 format choice is a key factor that determines the ceiling on recoverable accuracy. Together, these results establish HiF4 as the enabling format for end-to-end FP4 RL post-training, and Rollout-ResQ as the activation-side mechanism that makes the gap to BF16 closable.",
+            "arxiv_id": "2607.26515",
+            "PRIMARY_TOPIC_LABEL": "Efficiency, Compression, and Large-Scale Training",
+            "MATCHED_TOPIC_LABELS": [
+                "Efficiency, Compression, and Large-Scale Training"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [
+                "Daily Hot Papers"
+            ],
+            "HOTSPOT_PAPER_PRIMARY_KIND": "daily_hot",
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "Daily Hot Papers",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "llm_exact"
+        },
+        "2607.27042": {
+            "ARXIVID": "2607.27042",
+            "COMMENT": "Kronecker structure reduces exact two-sided adaptive rounding from quartic to cubic time.",
+            "RELEVANCE": 9,
+            "NOVELTY": 8,
+            "PRIMARY_TOPIC_ID": "efficiency_scaling",
+            "MATCHED_TOPIC_IDS": [
+                "efficiency_scaling"
+            ],
+            "TOPIC_MATCH_COMMENT": "The core contribution is a faster matrix-quantization algorithm that preserves the original rounded output.",
+            "HOTSPOT_PAPER_TAGS": [
+                "daily_hot"
+            ],
+            "HOTSPOT_PAPER_COMMENT": "Broadly important today: Kronecker structure reduces exact two-sided adaptive rounding from quartic to cubic time.",
+            "SCORE": 17,
+            "authors": [
+                "Jiale Chen",
+                "Torsten Hoefler",
+                "Dan Alistarh"
+            ],
+            "title": "GPTQ-2D: Cubic-Time Two-Sided Adaptive Rounding",
+            "abstract": "Adaptive rounding methods such as GPTQ, or equivalently Babai's nearest plane algorithm, round a real matrix to integers under a quadratic metric. They process the entries in a fixed order, one at a time, propagating each rounding error to the entries not yet processed through a triangular feedback matrix. We study the two-sided version of this task, in which fixed nonsingular basis matrices act on both the left and the right of the residual; the familiar one-sided case is the special case of an identity right basis. Vectorizing the matrix turns the two-sided objective into a quadratic metric whose Gram matrix is a Kronecker product, so the one-dimensional algorithm applies verbatim, but takes quartic time in the matrix dimension. We present GPTQ-2D, which produces the identical rounded matrix in cubic time. It rounds the entries anti-diagonal by anti-diagonal; entries on the same anti-diagonal are independent and are rounded in parallel.",
+            "arxiv_id": "2607.27042",
+            "PRIMARY_TOPIC_LABEL": "Efficiency, Compression, and Large-Scale Training",
+            "MATCHED_TOPIC_LABELS": [
+                "Efficiency, Compression, and Large-Scale Training"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [
+                "Daily Hot Papers"
+            ],
+            "HOTSPOT_PAPER_PRIMARY_KIND": "daily_hot",
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "Daily Hot Papers",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "heuristic"
+        },
+        "2603.17019": {
+            "ARXIVID": "2603.17019",
+            "COMMENT": "Shows mechanistically that gradient-trained transformers can recover and exactly implement an unseen XOR rule.",
+            "RELEVANCE": 8,
+            "NOVELTY": 8,
+            "PRIMARY_TOPIC_ID": "architecture_training",
+            "MATCHED_TOPIC_IDS": [
+                "architecture_training"
+            ],
+            "TOPIC_MATCH_COMMENT": "The proofs, circuit extraction, and gradient-path ablations directly illuminate transformer computation and training dynamics.",
+            "HOTSPOT_PAPER_TAGS": [
+                "daily_hot"
+            ],
+            "HOTSPOT_PAPER_COMMENT": "Its controlled evidence against the strongest interpolation-only account addresses a broad and prominent question about transformer capabilities.",
+            "SCORE": 16,
+            "authors": [
+                "Andy Gray"
+            ],
+            "title": "Transformers Can Learn Rules They've Never Seen: Proof of Computation Beyond Interpolation",
+            "abstract": "A central question in the debate over large language models is whether transformers can learn rules they have never seen, or whether they can only interpolate: predict new cases from their similarity to training examples. We test this in a controlled setting where interpolation provably fails, so success can only come from computation beyond interpolation. We train small transformers to predict the rollout of a cellular automaton whose update rule is pure XOR, and remove one entry of the rule's truth table from all direct supervision. The missing entry's output is never shown to the model; its only trace is indirect, as wrong values corrupt visible predictions at later timesteps. Because XOR parity flips whenever one input bit is changed, every one-bit neighbour of the missing entry carries the opposite label, and we prove that similarity-based predictors, including nearest-neighbour, kernel, and Gaussian-process methods, are forced to the wrong answer. A two-layer transformer can nevertheless recover the missing entry, and circuit extraction confirms it computes XOR exactly. Ablations show the recovery depends on gradient signal propagating through multi-step prediction, and a second, structurally unrelated benchmark on symbolic operator chains exhibits the same capacity under ordinary autoregressive training. Together with a constructive proof that a standard transformer block can implement exact local Boolean rules, these results provide an existence proof that transformers can learn rule structure not directly observed in training and express it explicitly. This rules out the strongest architectural form of the interpolation-only account, the claim that transformers cannot in principle discover and communicate unseen rules, while leaving open when such behaviour arises in large-scale language training.",
+            "arxiv_id": "2603.17019",
+            "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+            "MATCHED_TOPIC_LABELS": [
+                "Architecture and Training Dynamics"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [
+                "Daily Hot Papers"
+            ],
+            "HOTSPOT_PAPER_PRIMARY_KIND": "daily_hot",
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "Daily Hot Papers",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "llm_exact"
+        }
+    },
+    "sections": [
+        {
+            "kind": "new_frontier",
+            "label": "New Frontier Papers",
+            "description": "Papers that appear to open a genuinely new direction, paradigm, or field.",
+            "paper_ids": [
+                "2607.27281",
+                "2607.27529",
+                "2607.27372"
+            ]
+        },
+        {
+            "kind": "daily_hot",
+            "label": "Daily Hot Papers",
+            "description": "Papers that feel broadly important to the day and belong in the hotspot paper feed.",
+            "paper_ids": [
+                "2607.26515",
+                "2607.27042",
+                "2603.17019"
+            ]
+        }
+    ]
 }

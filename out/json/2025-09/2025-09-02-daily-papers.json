@@ -1,0 +1,274 @@
+{
+    "schema_version": 2,
+    "meta": {
+        "date": "2025-09-02",
+        "sort": [
+            "score",
+            "relevance"
+        ],
+        "topic_schema_version": 2,
+        "total_papers": 4,
+        "usage": {
+            "model": "llmcall:cc+codexg",
+            "prompt_tokens": 0,
+            "completion_tokens": 0,
+            "prompt_cost": 0.0,
+            "completion_cost": 0.0,
+            "total_arxiv_papers": 250,
+            "total_scanned_papers": 250,
+            "total_relevant_papers": 4,
+            "filter_health": {
+                "status": "ok",
+                "scanned_papers": 250,
+                "selected_papers": 4,
+                "llm_tokens": 0,
+                "message": "Scored 250 papers with 4/4 successful model calls; 4 selected."
+            },
+            "llm": {
+                "backend": "LLM backend: llmcall chain=codexg->codex->cc->claude",
+                "attempted": 4,
+                "succeeded": 4,
+                "failed": 0,
+                "by_backend": {
+                    "llmcall": 4
+                },
+                "by_provider": {
+                    "cc": 3,
+                    "codexg": 1
+                },
+                "errors": [],
+                "seconds": 365.0,
+                "trace": [
+                    "codexg: unavailable after 6.6s of 543.7s (OpenAI Codex v0.154.0",
+                    "codex: unavailable after 5.0s of 555.9s (OpenAI Codex v0.154.0",
+                    "cc: answered in 15.9s of 569.7s",
+                    "codexg: answered in 195.3s of 543.7s",
+                    "codexg: unavailable after 7.4s of 543.7s (2026-09-11T04:31:36.268204Z ERROR codex_models_manager::manager: failed to refresh available models: stream disconnected before completion: failed to decode models response: missing field `models` at )",
+                    "codex: unavailable after 4.1s of 555.1s (OpenAI Codex v0.154.0",
+                    "cc: answered in 92.1s of 569.8s",
+                    "codexg: unavailable after 8.4s of 543.7s (OpenAI Codex v0.154.0",
+                    "codex: unavailable after 4.5s of 554.1s (OpenAI Codex v0.154.0",
+                    "cc: answered in 25.9s of 568.4s"
+                ]
+            },
+            "remedied": true
+        }
+    },
+    "topic_order": [
+        "moe_training",
+        "training_systems",
+        "architecture_training",
+        "efficiency_scaling",
+        "representation_structure",
+        "memory_systems",
+        "world_models_open_ended_rl"
+    ],
+    "diagnostics": {
+        "total_papers": 4,
+        "topic_counts": [
+            {
+                "topic_id": "moe_training",
+                "topic_label": "MoE Training",
+                "paper_count": 0
+            },
+            {
+                "topic_id": "training_systems",
+                "topic_label": "Large-Scale Training Systems and Efficiency",
+                "paper_count": 0
+            },
+            {
+                "topic_id": "architecture_training",
+                "topic_label": "Architecture and Training Dynamics",
+                "paper_count": 2
+            },
+            {
+                "topic_id": "efficiency_scaling",
+                "topic_label": "Efficiency, Compression, and Large-Scale Training",
+                "paper_count": 2
+            },
+            {
+                "topic_id": "representation_structure",
+                "topic_label": "Representation Learning Theory and Structure",
+                "paper_count": 0
+            },
+            {
+                "topic_id": "memory_systems",
+                "topic_label": "Memory Structures and Agent Memory Systems",
+                "paper_count": 0
+            },
+            {
+                "topic_id": "world_models_open_ended_rl",
+                "topic_label": "World Models, Exploration, and Open-Ended Reinforcement Learning",
+                "paper_count": 0
+            }
+        ],
+        "assignment_source_counts": {
+            "llm_exact": 4
+        },
+        "llm_assignment_count": 4,
+        "heuristic_assignment_count": 0,
+        "default_assignment_count": 0,
+        "invalid_primary_topic_fallback_count": 0,
+        "missing_primary_topic_fallback_count": 0,
+        "hotspot_paper_kind_counts": {
+            "new_frontier": 0,
+            "daily_hot": 0
+        },
+        "hotspot_paper_assignment_source_counts": {
+            "default": 4
+        }
+    },
+    "papers": {
+        "2509.01229": {
+            "ARXIVID": "2509.01229",
+            "COMMENT": "W4A8 GEMM kernel with two-instruction overflow-safe dequant and an implicit warp-group pipeline overlapping weight load, dequant and MMA.",
+            "RELEVANCE": 7,
+            "NOVELTY": 7,
+            "PRIMARY_TOPIC_ID": "efficiency_scaling",
+            "MATCHED_TOPIC_IDS": [
+                "efficiency_scaling"
+            ],
+            "TOPIC_MATCH_COMMENT": "New quantization-kernel mechanism that materially changes low-precision GEMM cost, though targeted at serving rather than training.",
+            "HOTSPOT_PAPER_TAGS": [],
+            "HOTSPOT_PAPER_COMMENT": "",
+            "SCORE": 14,
+            "authors": [
+                "Huanqi Hu",
+                "Bowen Xiao",
+                "Shixuan Sun",
+                "Jianian Yin",
+                "Zhexi Zhang",
+                "Xiang Luo",
+                "Chengquan Jiang",
+                "Weiqi Xu",
+                "Xiaoying Jia",
+                "Xin Liu",
+                "Minyi Guo"
+            ],
+            "title": "LiquidGEMM: Hardware-Efficient W4A8 GEMM Kernel for High-Performance LLM Serving",
+            "abstract": "Quantization is a critical technique for accelerating LLM inference by reducing memory footprint and improving computational efficiency. Among various schemes, 4-bit weight and 8-bit activation quantization (W4A8) offers a strong balance between accuracy and performance. However, existing W4A8 GEMM kernels fall short in practice due to inefficient dequantization on CUDA Cores, which cannot keep pace with the high throughput of Tensor Cores. In this paper, we present LiquidGEMM, a hardware-efficient W4A8 GEMM kernel for efficient LLM serving. LiquidGEMM designs two key techniques: LiquidQuant, a hardware-efficient quantization method that enables fast, overflow-safe dequantization using just two arithmetic instructions per four elements; and an implicit fine-grained pipeline that fully overlaps weight loading, dequantization, and MMA across warp groups without software synchronization or redundant memory traffic. Experimental results show that LiquidGEMM achieves up to 2.90x speedup over state-of-the-art W4A8 kernels and up to 4.94x end-to-end system-level speedup. Compared to various quantized GEMM kernels in NVIDIA TensorRT-LLM, LiquidGEMM delivers 1.12-1.63x performance gains, and achieves up to 1.63x system-level speedup.",
+            "arxiv_id": "2509.01229",
+            "PRIMARY_TOPIC_LABEL": "Efficiency, Compression, and Large-Scale Training",
+            "MATCHED_TOPIC_LABELS": [
+                "Efficiency, Compression, and Large-Scale Training"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [],
+            "HOTSPOT_PAPER_PRIMARY_KIND": null,
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+        },
+        "2509.01649": {
+            "ARXIVID": "2509.01649",
+            "COMMENT": "Analyses how distillation-based pretraining reshapes training dynamics: better test-time scaling but degraded induction-head formation, isolated in a bigram sandbox, yielding concrete pretraining design guidance.",
+            "RELEVANCE": 7,
+            "NOVELTY": 7,
+            "PRIMARY_TOPIC_ID": "architecture_training",
+            "MATCHED_TOPIC_IDS": [
+                "architecture_training"
+            ],
+            "TOPIC_MATCH_COMMENT": "Core contribution is a mechanistic account of pretraining dynamics under distillation, not a downstream application or benchmark.",
+            "HOTSPOT_PAPER_TAGS": [],
+            "HOTSPOT_PAPER_COMMENT": "",
+            "SCORE": 14,
+            "authors": [
+                "Sachin Goyal",
+                "David Lopez-Paz",
+                "Kartik Ahuja"
+            ],
+            "title": "Distilled Pretraining: A modern lens of Data, In-Context Learning and Test-Time Scaling",
+            "abstract": "In the past year, distillation has seen a renewed prominence in large language model (LLM) pretraining, exemplified by the Llama-3.2 and Gemma model families. While distillation has historically been shown to improve statistical modeling, its effects on new paradigms that are key to modern LLMs, such as test-time scaling and in-context learning, remain underexplored. In this work, we make three main contributions. First, we show that pretraining with distillation yields models that exhibit remarkably better test-time scaling. Second, we observe that this benefit comes with a trade-off: distillation impairs in-context learning capabilities, particularly the one modeled via induction heads. Third, to demystify these findings, we study distilled pretraining in a sandbox of a bigram model, which helps us isolate the common principal factor behind our observations. Finally, using these insights, we shed light on various design choices for pretraining that should help practitioners going forward.",
+            "arxiv_id": "2509.01649",
+            "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+            "MATCHED_TOPIC_LABELS": [
+                "Architecture and Training Dynamics"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [],
+            "HOTSPOT_PAPER_PRIMARY_KIND": null,
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+        },
+        "2509.01349": {
+            "ARXIVID": "2509.01349",
+            "COMMENT": "Maps SGD into a disordered-system phase diagram where learning-rate/batch-size ratio acts as temperature, classifying three regimes of weight-matrix singular-value dynamics.",
+            "RELEVANCE": 7,
+            "NOVELTY": 6,
+            "PRIMARY_TOPIC_ID": "architecture_training",
+            "MATCHED_TOPIC_IDS": [
+                "training_systems",
+                "architecture_training"
+            ],
+            "TOPIC_MATCH_COMMENT": "Optimisation-dynamics analysis that explains and guides hyperparameter choice via spectral behaviour of weights.",
+            "HOTSPOT_PAPER_TAGS": [],
+            "HOTSPOT_PAPER_COMMENT": "",
+            "SCORE": 13,
+            "authors": [
+                "Chanju Park",
+                "Biagio Lucini",
+                "Gert Aarts"
+            ],
+            "title": "Phase diagram and eigenvalue dynamics of stochastic gradient descent in multilayer neural networks",
+            "abstract": "Hyperparameter tuning is one of the essential steps to guarantee the convergence of machine learning models. We argue that intuition about the optimal choice of hyperparameters for stochastic gradient descent can be obtained by studying a neural network's phase diagram, in which each phase is characterised by distinctive dynamics of the singular values of weight matrices. Taking inspiration from disordered systems, we start from the observation that the loss landscape of a multilayer neural network with mean squared error can be interpreted as a disordered system in feature space, where the learnt features are mapped to soft spin degrees of freedom, the initial variance of the weight matrices is interpreted as the strength of the disorder, and temperature is given by the ratio of the learning rate and the batch size. As the model is trained, three phases can be identified, in which the dynamics of weight matrices is qualitatively different. Employing a Langevin equation for stochastic gradient descent, previously derived using Dyson Brownian motion, we demonstrate that the three dynamical regimes can be classified effectively, providing practical guidance for the choice of hyperparameters of the optimiser.",
+            "arxiv_id": "2509.01349",
+            "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+            "MATCHED_TOPIC_LABELS": [
+                "Large-Scale Training Systems and Efficiency",
+                "Architecture and Training Dynamics"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [],
+            "HOTSPOT_PAPER_PRIMARY_KIND": null,
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+        },
+        "2509.01624": {
+            "ARXIVID": "2509.01624",
+            "COMMENT": "Post-training quantization that adjusts the few-step sampler schedule instead of weights, learning quantization-aware pre-conditioning coefficients reference-free.",
+            "RELEVANCE": 6,
+            "NOVELTY": 7,
+            "PRIMARY_TOPIC_ID": "efficiency_scaling",
+            "MATCHED_TOPIC_IDS": [
+                "efficiency_scaling"
+            ],
+            "TOPIC_MATCH_COMMENT": "A genuinely new PTQ mechanism (schedule-side rather than weight-side), though demonstrated on diffusion backbones.",
+            "HOTSPOT_PAPER_TAGS": [],
+            "HOTSPOT_PAPER_COMMENT": "",
+            "SCORE": 13,
+            "authors": [
+                "Natalia Frumkin",
+                "Diana Marculescu"
+            ],
+            "title": "Q-Sched: Pushing the Boundaries of Few-Step Diffusion Models with Quantization-Aware Scheduling",
+            "abstract": "Text-to-image diffusion models are computationally intensive, often requiring dozens of forward passes through large transformer backbones. For instance, Stable Diffusion XL generates high-quality images with 50 evaluations of a 2.6B-parameter model, an expensive process even for a single batch. Few-step diffusion models reduce this cost to 2-8 denoising steps but still depend on large, uncompressed U-Net or diffusion transformer backbones, which are often too costly for full-precision inference without datacenter GPUs. These requirements also limit existing post-training quantization methods that rely on full-precision calibration. We introduce Q-Sched, a new paradigm for post-training quantization that modifies the diffusion model scheduler rather than model weights. By adjusting the few-step sampling trajectory, Q-Sched achieves full-precision accuracy with a 4x reduction in model size. To learn quantization-aware pre-conditioning coefficients, we propose the JAQ loss, which combines text-image compatibility with an image quality metric for fine-grained optimization. JAQ is reference-free and requires only a handful of calibration prompts, avoiding full-precision inference during calibration. Q-Sched delivers substantial gains: a 15.5% FID improvement over the FP16 4-step Latent Consistency Model and a 16.6% improvement over the FP16 8-step Phased Consistency Model, showing that quantization and few-step distillation are complementary for high-fidelity generation. A large-scale user study with more than 80,000 annotations further confirms Q-Sched's effectiveness on both FLUX.1[schnell] and SDXL-Turbo.",
+            "arxiv_id": "2509.01624",
+            "PRIMARY_TOPIC_LABEL": "Efficiency, Compression, and Large-Scale Training",
+            "MATCHED_TOPIC_LABELS": [
+                "Efficiency, Compression, and Large-Scale Training"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [],
+            "HOTSPOT_PAPER_PRIMARY_KIND": null,
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+        }
+    },
+    "topic_sections": [
+        {
+            "topic_id": "architecture_training",
+            "topic_label": "Architecture and Training Dynamics",
+            "paper_ids": [
+                "2509.01649",
+                "2509.01349"
+            ]
+        },
+        {
+            "topic_id": "efficiency_scaling",
+            "topic_label": "Efficiency, Compression, and Large-Scale Training",
+            "paper_ids": [
+                "2509.01229",
+                "2509.01624"
+            ]
+        }
+    ]
+}

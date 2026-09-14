@@ -6,20 +6,53 @@
             "score",
             "relevance"
         ],
-        "topic_schema_version": 1,
-        "total_papers": 0,
+        "topic_schema_version": 2,
+        "total_papers": 11,
         "usage": {
-            "model": "gpt-5.4",
+            "model": "llmcall:codexg+cc",
             "prompt_tokens": 0,
             "completion_tokens": 0,
             "prompt_cost": 0.0,
             "completion_cost": 0.0,
-            "total_arxiv_papers": 312,
-            "total_scanned_papers": 220,
-            "total_relevant_papers": 0
+            "total_arxiv_papers": 279,
+            "total_scanned_papers": 279,
+            "total_relevant_papers": 11,
+            "filter_health": {
+                "status": "ok",
+                "scanned_papers": 279,
+                "selected_papers": 11,
+                "llm_tokens": 0,
+                "message": "Scored 279 papers with 4/4 successful model calls; 11 selected."
+            },
+            "llm": {
+                "backend": "LLM backend: llmcall chain=codexg->codex->cc->claude",
+                "attempted": 4,
+                "succeeded": 4,
+                "failed": 0,
+                "by_backend": {
+                    "llmcall": 4
+                },
+                "by_provider": {
+                    "codexg": 3,
+                    "cc": 1
+                },
+                "errors": [],
+                "seconds": 1227.3,
+                "trace": [
+                    "codexg: answered in 338.2s of 543.7s",
+                    "codexg: unavailable after 216.3s of 543.7s (OpenAI Codex v0.154.0",
+                    "codex: unavailable after 5.4s of 346.2s (OpenAI Codex v0.154.0",
+                    "cc: answered in 99.7s of 359.5s",
+                    "codexg: answered in 279.8s of 543.7s",
+                    "codexg: answered in 287.8s of 543.7s"
+                ]
+            },
+            "remedied": true
         }
     },
     "topic_order": [
+        "moe_training",
+        "training_systems",
         "architecture_training",
         "efficiency_scaling",
         "representation_structure",
@@ -27,17 +60,27 @@
         "world_models_open_ended_rl"
     ],
     "diagnostics": {
-        "total_papers": 0,
+        "total_papers": 11,
         "topic_counts": [
+            {
+                "topic_id": "moe_training",
+                "topic_label": "MoE Training",
+                "paper_count": 1
+            },
+            {
+                "topic_id": "training_systems",
+                "topic_label": "Large-Scale Training Systems and Efficiency",
+                "paper_count": 0
+            },
             {
                 "topic_id": "architecture_training",
                 "topic_label": "Architecture and Training Dynamics",
-                "paper_count": 0
+                "paper_count": 7
             },
             {
                 "topic_id": "efficiency_scaling",
                 "topic_label": "Efficiency, Compression, and Large-Scale Training",
-                "paper_count": 0
+                "paper_count": 3
             },
             {
                 "topic_id": "representation_structure",
@@ -55,8 +98,10 @@
                 "paper_count": 0
             }
         ],
-        "assignment_source_counts": {},
-        "llm_assignment_count": 0,
+        "assignment_source_counts": {
+            "llm_exact": 11
+        },
+        "llm_assignment_count": 11,
         "heuristic_assignment_count": 0,
         "default_assignment_count": 0,
         "invalid_primary_topic_fallback_count": 0,
@@ -65,8 +110,405 @@
             "new_frontier": 0,
             "daily_hot": 0
         },
-        "hotspot_paper_assignment_source_counts": {}
+        "hotspot_paper_assignment_source_counts": {
+            "default": 11
+        }
     },
-    "papers": {},
-    "topic_sections": []
+    "papers": {
+        "2606.21712": {
+            "ARXIVID": "2606.21712",
+            "COMMENT": "Sequence-coroutine scheduling dynamically reorganizes inference work to improve GPU utilization.",
+            "RELEVANCE": 8,
+            "NOVELTY": 8,
+            "PRIMARY_TOPIC_ID": "efficiency_scaling",
+            "MATCHED_TOPIC_IDS": [
+                "efficiency_scaling"
+            ],
+            "TOPIC_MATCH_COMMENT": "A new execution abstraction materially reduces large-model inference cost through dynamic batching and workload redistribution.",
+            "HOTSPOT_PAPER_TAGS": [],
+            "HOTSPOT_PAPER_COMMENT": "",
+            "SCORE": 16,
+            "authors": [
+                "Tairan Xu",
+                "Leyang Xue",
+                "Zhan Lu",
+                "Jinfu Deng",
+                "Hongyang Xiao",
+                "Yinsicheng Jiang",
+                "Congjie He",
+                "Matej Sandor",
+                "Le Xu",
+                "Luo Mai"
+            ],
+            "title": "BatchGen: An Architecture for Scalable and Efficient Batch Inference",
+            "abstract": "Batch inference has become a central mode of AI computation, yet existing inference engines still rely on execution models designed for interactive serving. When scaled to millions of sequences, batch workloads reveal two fundamental requirements: the ability to handle extreme inter- and intra-sequence load variation that emerges only at runtime, and the ability to sustain high utilization across large fleets of GPUs. Existing systems fail to meet these requirements, losing substantial fractions of achievable throughput. We introduce a new architectural foundation for batch inference: the sequence coroutine compute model, which represents each sequence as a fine-grained, event-driven coroutine. This model exposes expressive primitives that allow the runtime to reorganize work dynamically, enabling larger expert-level batches, mitigating stragglers, reallocating work across devices, and maintaining utilization even on cost-effective or memory-constrained GPUs. Building on this abstraction, we implement BatchGen, a production-ready system that uses the coroutine model at cluster scale. On a 128-GPU cluster, BatchGen reduces batch completion time by up to $2.3\\times$, and on memory-constrained accelerators it outperforms the strongest offloading baseline by up to $9.6\\times$. We will open-source BatchGen at https://github.com/batchgen-project/batchgen",
+            "arxiv_id": "2606.21712",
+            "PRIMARY_TOPIC_LABEL": "Efficiency, Compression, and Large-Scale Training",
+            "MATCHED_TOPIC_LABELS": [
+                "Efficiency, Compression, and Large-Scale Training"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [],
+            "HOTSPOT_PAPER_PRIMARY_KIND": null,
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+        },
+        "2607.09694": {
+            "ARXIVID": "2607.09694",
+            "COMMENT": "Low-dimensional depth-routing keys decouple residual selection from full-width residual values.",
+            "RELEVANCE": 9,
+            "NOVELTY": 6,
+            "PRIMARY_TOPIC_ID": "architecture_training",
+            "MATCHED_TOPIC_IDS": [
+                "architecture_training",
+                "efficiency_scaling"
+            ],
+            "TOPIC_MATCH_COMMENT": "The central contribution changes residual architecture; low-rank routing also reduces residual-side computation.",
+            "HOTSPOT_PAPER_TAGS": [],
+            "HOTSPOT_PAPER_COMMENT": "",
+            "SCORE": 15,
+            "authors": [
+                "Jonathan Su"
+            ],
+            "title": "Low-Rank Attention Residuals",
+            "abstract": "Attention Residuals replace the fixed residual sum with depthwise attention over previous sub-layer outputs in large language models (LLMs), but use each output as both a full-dimensional key and value. This couples routing with representation and makes depth-routing scores scale with the hidden width $d$. We propose Low-Rank Attention Residuals (LR-AttnRes), which keep full-dimensional residual values while using $r$-dimensional keys, with $r \\ll d$, for routing. Projected LR-AttnRes emits learned low-rank keys from existing output projections, decoupling routing from residual content and achieving the best validation loss among the variants tested. Sliced LR-AttnRes uses the last $r$ dimensions of each value as the routing key, removing the auxiliary key-projection path and reducing residual-side FLOPs while still improving performance. Comprehensive sweeps show that depthwise routing can be effective with far fewer dimensions than the model width. We release code and models to facilitate future research.",
+            "arxiv_id": "2607.09694",
+            "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+            "MATCHED_TOPIC_LABELS": [
+                "Architecture and Training Dynamics",
+                "Efficiency, Compression, and Large-Scale Training"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [],
+            "HOTSPOT_PAPER_PRIMARY_KIND": null,
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+        },
+        "2606.21023": {
+            "ARXIVID": "2606.21023",
+            "COMMENT": "Algebraic error compensation approximates FP32 matrix multiplication using high-throughput 16-bit Tensor Cores.",
+            "RELEVANCE": 8,
+            "NOVELTY": 7,
+            "PRIMARY_TOPIC_ID": "efficiency_scaling",
+            "MATCHED_TOPIC_IDS": [
+                "efficiency_scaling"
+            ],
+            "TOPIC_MATCH_COMMENT": "Precision compensation and INT16 KV-cache storage introduce concrete mechanisms for reducing the cost of numerically reproducible inference.",
+            "HOTSPOT_PAPER_TAGS": [],
+            "HOTSPOT_PAPER_COMMENT": "",
+            "SCORE": 15,
+            "authors": [
+                "Zhenting Zhu",
+                "Lucas Thai",
+                "Shan Yu",
+                "Yicheng Liu",
+                "Yifan Qiao",
+                "Chenxi Wang",
+                "Harry Xu",
+                "Junyi Shu"
+            ],
+            "title": "Demystifying Numerical Instability in LLM Inference: Achieving Reproducible Inference for Mission-Critical Tasks with HEAL",
+            "abstract": "As Large Language Models (LLMs) deploy into mission-critical domains (e.g., finance, medicine, and law), output reproducibility has become a strict system requirement. While practitioners use greedy decoding to eliminate algorithmic stochasticity, empirical deployments with 16-bit precisions still exhibit catastrophic output divergence across heterogeneous GPUs. Through SASS-level profiling, we reveal that this inconsistency is fundamentally driven by truncation errors introduced during downcasting at kernel boundaries. However, achieving reproducibility via a global FP32 pipeline incurs prohibitive system penalties: bypassing 16-bit hardware accelerators hurts compute efficiency, while upcasting the KV cache doubles memory overhead. To bridge this gap, we propose Hybrid Error ALleviation (HEAL), a targeted intervention that approximates FP32 precision while resolving hardware constraints through two targeted mechanisms. First, recognizing that floating-point formats underutilize their bit-width for Q, K, V tensors, HEAL applies INT16 quantization that preserves numerical stability without expanding the KV cache footprint. Second, HEAL synthesizes high-precision matrix multiplications via an algebraic error compensation strategy, executing entirely on high-throughput 16-bit Tensor Cores. To evaluate our approach practically, we introduce MCR-Bench, a benchmark targeting reproducibility in mission-critical tasks. HEAL achieves the same level of reproducibility on downstream tasks as the FP32 baseline while reducing the performance overhead by up to 7.1x.",
+            "arxiv_id": "2606.21023",
+            "PRIMARY_TOPIC_LABEL": "Efficiency, Compression, and Large-Scale Training",
+            "MATCHED_TOPIC_LABELS": [
+                "Efficiency, Compression, and Large-Scale Training"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [],
+            "HOTSPOT_PAPER_PRIMARY_KIND": null,
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+        },
+        "2606.21295": {
+            "ARXIVID": "2606.21295",
+            "COMMENT": "Defines recurrent computation through graph-coupled, neuron-local dynamics.",
+            "RELEVANCE": 8,
+            "NOVELTY": 7,
+            "PRIMARY_TOPIC_ID": "architecture_training",
+            "MATCHED_TOPIC_IDS": [
+                "architecture_training"
+            ],
+            "TOPIC_MATCH_COMMENT": "The core contribution is a general sequence-computation mechanism, although validation is limited to a Pong behavior-cloning task.",
+            "HOTSPOT_PAPER_TAGS": [],
+            "HOTSPOT_PAPER_COMMENT": "",
+            "SCORE": 15,
+            "authors": [
+                "Borui Cai",
+                "Yao Zhao"
+            ],
+            "title": "Topological Neural Dynamics: A Neuron-wise Framework for Sequence Modeling",
+            "abstract": "Existing sequence models, including RNNs, LSTMs, continuous-time networks, and Transformers, share a common structural principle: layer-wise dynamics, where all neurons in the same layer co-evolve through a shared parameterized operator, leaving individual neurons no freedom to evolve independently. Yet in many complex dynamical systems, rich global behavior emerges precisely from locally evolving units interacting through structured connectivity. Inspired by this principle, we introduce Topological Neural Dynamics (TND), a sequence modeling framework that shifts computation from layer-wise to neuron-wise dynamics. TND represents a neural system as a directed neuron graph, an interaction operator, and a local dynamics function, where each neuron evolves independently and collective computation emerges from interactions through the explicit graph topology. We instantiate TND as a discrete-time graph-coupled dynamical system and evaluate it as a case study on a behavior cloning task in single-player Pong. Compared with Vanilla RNN, Sparse RNN, LSTM, Closed-form continuous-time neural network (CfC), and Transformer baselines, TND achieves the best catch rate and a mean of 17.47 consecutive catches per round, more than three times that of the strongest baseline. These results suggest that shifting from layer-wise to neuron-wise dynamics provides an effective inductive bias for sequence modeling.",
+            "arxiv_id": "2606.21295",
+            "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+            "MATCHED_TOPIC_LABELS": [
+                "Architecture and Training Dynamics"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [],
+            "HOTSPOT_PAPER_PRIMARY_KIND": null,
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+        },
+        "2606.21633": {
+            "ARXIVID": "2606.21633",
+            "COMMENT": "Block-level KV selection amortizes CPU-GPU cache transfers across diffusion denoising steps.",
+            "RELEVANCE": 8,
+            "NOVELTY": 7,
+            "PRIMARY_TOPIC_ID": "efficiency_scaling",
+            "MATCHED_TOPIC_IDS": [
+                "efficiency_scaling"
+            ],
+            "TOPIC_MATCH_COMMENT": "The core contribution is a cache-offloading and overlap mechanism that exploits block diffusion to reduce inference bottlenecks.",
+            "HOTSPOT_PAPER_TAGS": [],
+            "HOTSPOT_PAPER_COMMENT": "",
+            "SCORE": 15,
+            "authors": [
+                "Omin Kwon",
+                "Doyeon Kim",
+                "Jongseok Park",
+                "Seung Yul Lee",
+                "Ion Stoica",
+                "Jae W. Lee"
+            ],
+            "title": "HERALD: High-Throughput Block Diffusion LLM Serving via CPU-GPU Cooperative KV Cache Retrieval",
+            "abstract": "The KV cache dominates GPU memory in long-context LLM serving, crowding out batch capacity and leaving GPU compute idle. Offloading the cache to CPU DRAM restores capacity, but the limited PCIe bandwidth forces state-of-the-art offloading systems to pair it with sparse attention, fetching only a small critical subset of the cache to the GPU. These systems, however, follow the KV access pattern of autoregressive decoding, in which the critical set changes at every token: selection and fetching recur at every decoding step, and throughput remains capped by PCIe bandwidth rather than by either processor. Block diffusion LLMs(block dLLMs), which decode a block of B tokens over T denoising steps, exhibit a different KV access pattern that opens a new opportunity for offloading. Recent sparse block dLLM methods have shown that sparse inference separates into a selection phase that scans the full KV cache once per block and a denoising phase that reuses the selected small subset T times. This asymmetry aligns with the compute and memory asymmetry of a CPU-GPU system, making it advantageous to run selection on the CPU and denoising on the GPU: the critical KV cache then crosses PCIe only once per block, removing the interconnect as the bottleneck. We present HERALD, to our knowledge the first KV offloading system designed for block dLLMs. HERALD resolves the two obstacles of this mapping, the serialized dependency between the phases and the compute-bound B-query selection on the CPU, by overlapping the phases with a draft block, reducing the selection cost with a single [MASK] query, and executing both as a dual-stream pipeline over double-buffered sparse KV pools. On two production block dLLMs, HERALD sustains near-lossless accuracy at a 5% KV budget and reaches up to 2.28x the decode throughput of GPU-only serving, with gains that widen with context length.",
+            "arxiv_id": "2606.21633",
+            "PRIMARY_TOPIC_LABEL": "Efficiency, Compression, and Large-Scale Training",
+            "MATCHED_TOPIC_LABELS": [
+                "Efficiency, Compression, and Large-Scale Training"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [],
+            "HOTSPOT_PAPER_PRIMARY_KIND": null,
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+        },
+        "2606.21433": {
+            "ARXIVID": "2606.21433",
+            "COMMENT": "Derives the asymptotic convergence rate and limiting covariance of averaged Adam near an attracting zero.",
+            "RELEVANCE": 7,
+            "NOVELTY": 6,
+            "PRIMARY_TOPIC_ID": "architecture_training",
+            "MATCHED_TOPIC_IDS": [
+                "architecture_training"
+            ],
+            "TOPIC_MATCH_COMMENT": "The central result characterizes optimizer dynamics, with indirect implications for understanding large-model training.",
+            "HOTSPOT_PAPER_TAGS": [],
+            "HOTSPOT_PAPER_COMMENT": "",
+            "SCORE": 13,
+            "authors": [
+                "Steffen Dereich",
+                "Arnulf Jentzen"
+            ],
+            "title": "Central limit theorem for the averaged Adam optimizer",
+            "abstract": "In this article, we analyse convergence of the averaged Adam optimizer to an attracting zero of the Adam vector field. We provide a central limit theorem that, in particular, quantifies exactly the speed of convergence. The order of convergence is $n^{-1/2}$ in the number of steps of the algorithm which coincides with the order observed for classical stochastic approximation algorithms. The covariance in the central limit theorem is given in terms of properties of the Adam algorithm in the state of the attractor.",
+            "arxiv_id": "2606.21433",
+            "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+            "MATCHED_TOPIC_LABELS": [
+                "Architecture and Training Dynamics"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [],
+            "HOTSPOT_PAPER_PRIMARY_KIND": null,
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+        },
+        "2606.21307": {
+            "ARXIVID": "2606.21307",
+            "COMMENT": "Jointly expands modular skill capacity and learns task-conditioned routing for continual learning.",
+            "RELEVANCE": 7,
+            "NOVELTY": 6,
+            "PRIMARY_TOPIC_ID": "architecture_training",
+            "MATCHED_TOPIC_IDS": [
+                "architecture_training"
+            ],
+            "TOPIC_MATCH_COMMENT": "Adaptive module allocation and activation directly fit dynamic modular computation, with a narrower focus on continual learning.",
+            "HOTSPOT_PAPER_TAGS": [],
+            "HOTSPOT_PAPER_COMMENT": "",
+            "SCORE": 13,
+            "authors": [
+                "Jiacheng Wang",
+                "Xinjia He",
+                "Qi Ding",
+                "Yutao Yang",
+                "Jie Zhou",
+                "Liyang Yu",
+                "Liang Dou",
+                "Qin Chen"
+            ],
+            "title": "Task-Differentiated Atomic Skill Expansion and Routing for Continual Learning Across Highly Heterogeneous Tasks",
+            "abstract": "Continual learning (CL) is commonly studied under the assumption that sequential tasks are semantically related or structurally similar. However, in highly heterogeneous settings, where tasks differ substantially in reasoning patterns and input-output formats, existing methods often suffer from catastrophic forgetting and inefficient capacity allocation. To address this challenge, we propose Task-differentiated Atomic Skill Expansion and Routing (\\texttt{TASER}), a CL framework that jointly determines how many new atomic skills to introduce for each task and which skills to activate. The framework first uses atomic skill incremental learning to dynamically expand capacity based on task divergence and model uncertainty. It then applies orthogonality-enhanced skill detection to ensure these skills remain semantically distinct and independently reusable. Finally, a skill dynamic routing mechanism composes task-relevant skills through lightweight task-conditioned gating. We further introduce \\texttt{HeteroCLBench}, a highly heterogeneous benchmark for CL, comprising 19 diverse tasks across 9 cognitive dimensions under a standardized sequential protocol. Experiments on \\texttt{HeteroCLBench} show that \\texttt{TASER} consistently outperforms strong baselines by improving plasticity and reducing catastrophic forgetting.",
+            "arxiv_id": "2606.21307",
+            "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+            "MATCHED_TOPIC_LABELS": [
+                "Architecture and Training Dynamics"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [],
+            "HOTSPOT_PAPER_PRIMARY_KIND": null,
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+        },
+        "2606.21036": {
+            "ARXIVID": "2606.21036",
+            "COMMENT": "Replaces Gaussian latent transitions with diffusion models and enables joint sequential autoencoder-diffusion training.",
+            "RELEVANCE": 7,
+            "NOVELTY": 6,
+            "PRIMARY_TOPIC_ID": "architecture_training",
+            "MATCHED_TOPIC_IDS": [
+                "architecture_training"
+            ],
+            "TOPIC_MATCH_COMMENT": "The contribution changes the latent-transition and training mechanism of state-space models, although evidence is limited to simulated time series.",
+            "HOTSPOT_PAPER_TAGS": [],
+            "HOTSPOT_PAPER_COMMENT": "",
+            "SCORE": 13,
+            "authors": [
+                "Jack Ruder",
+                "Michael Wojnowicz"
+            ],
+            "title": "Diffusion-Driven State Space Models",
+            "abstract": "In many domains, practitioners seek models that produce accurate forecasts while faithfully capturing latent system dynamics. Existing approaches typically sacrifice one of these goals: deep state space models often assume Gaussian latent transitions, limiting fit and forecasting, while diffusion models are highly expressive but lack principled inference for the underlying dynamics. To combine the strengths of both, we introduce the Diffusion-Driven State Space Model (DDSSM), which replaces the conventional Gaussian transition distribution with a diffusion model. Our DDSSM resolves the open problem of how to jointly train an autoencoder and a diffusion model on sequential data, thereby extending the literature on latent diffusion models for time series. Moreover, we find that the DDSSM empirically outperforms a state-of-the-art deep SSM at fitting and forecasting a simulated time series with multimodal transitions.",
+            "arxiv_id": "2606.21036",
+            "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+            "MATCHED_TOPIC_LABELS": [
+                "Architecture and Training Dynamics"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [],
+            "HOTSPOT_PAPER_PRIMARY_KIND": null,
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+        },
+        "2606.21562": {
+            "ARXIVID": "2606.21562",
+            "COMMENT": "Bottleneck-supervised distillation trains fixed-memory recurrent transformers from full-history teachers.",
+            "RELEVANCE": 7,
+            "NOVELTY": 6,
+            "PRIMARY_TOPIC_ID": "architecture_training",
+            "MATCHED_TOPIC_IDS": [
+                "architecture_training",
+                "efficiency_scaling"
+            ],
+            "TOPIC_MATCH_COMMENT": "The method directly changes recurrent-transformer training and enables bounded-memory sequence processing, with evidence limited to streaming vision and robotics.",
+            "HOTSPOT_PAPER_TAGS": [],
+            "HOTSPOT_PAPER_COMMENT": "",
+            "SCORE": 13,
+            "authors": [
+                "Philippe Weinzaepfel",
+                "Christian Wolf",
+                "Bülent Mert Sariyildiz",
+                "Guillaume Bono",
+                "Gianluca Monaci"
+            ],
+            "title": "Compressing Observation History into Agent Memory: Distilling Transformers into Recurrent Transformers",
+            "abstract": "Transformers are AI's workhorse with strong performance in modeling sequential data, but their computational cost becomes prohibitive when processing long sequences. We target long-horizon streaming vision and robotics applications like map-free pose estimation, where it is particularly impractical to store and maintain a history of observations. Recurrent Transformers address this limitation by maintaining fixed-size memory but their performance lags behind that of transformers operating over the full observation history. We argue that this gap does not stem from architectural limitations, but from differences in how these models learn to compress past information. Without access to an observation history, recurrent models must explicitly decide what to retain in memory at each step, a significantly harder learning problem. In this work, we propose a distillation approach that transfers the compression strategy of a classical full-history transformer to a recurrent variant. We enable this by designing a teacher model that explicitly compresses its observation history into a fixed-size bottleneck representation. By directly supervising the student's memory with this bottleneck representation, we align the two compression mechanisms. We show that this approach allows to train a recurrent latent robotic memory with linear-time complexity while substantially narrowing the performance gap to full-history transformers.",
+            "arxiv_id": "2606.21562",
+            "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+            "MATCHED_TOPIC_LABELS": [
+                "Architecture and Training Dynamics",
+                "Efficiency, Compression, and Large-Scale Training"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [],
+            "HOTSPOT_PAPER_PRIMARY_KIND": null,
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+        },
+        "2606.21033": {
+            "ARXIVID": "2606.21033",
+            "COMMENT": "Spatial total-variation regularization encourages coherent expert-choice routing assignments.",
+            "RELEVANCE": 7,
+            "NOVELTY": 6,
+            "PRIMARY_TOPIC_ID": "moe_training",
+            "MATCHED_TOPIC_IDS": [
+                "moe_training"
+            ],
+            "TOPIC_MATCH_COMMENT": "It modifies the MoE routing objective itself, providing a direct training contribution whose scope is specialized to image codecs.",
+            "HOTSPOT_PAPER_TAGS": [],
+            "HOTSPOT_PAPER_COMMENT": "",
+            "SCORE": 13,
+            "authors": [
+                "Jiancheng Zhao",
+                "Xiang Ji",
+                "Yifan Zhan",
+                "Zunian Wan",
+                "Yinqiang Zheng"
+            ],
+            "title": "MoECodec: Image Compression for joint human and machine perception via Mixture-of-Experts",
+            "abstract": "Image compression for machines calls for a unified codec that serves multiple downstream vision tasks. Existing approaches either adopt task-specific end-to-end designs, raising parameter and deployment overhead, or rely on transfer-based adaptations that remain externally attached and heuristic task design. A key limitation shared by both lines of work is their largely static computation pattern, which applies similar transformations across tokens despite the fact that different image regions exhibit markedly different semantic importance and complexity for machine perception. We propose MoECodec, a token-aware image compression framework that supports multiple downstream tasks within a single model. MoECodec replaces the FFN layers in transformer-based compression model token-wise Mixture-of-Experts (MoE), enabling dynamic, token-level computation conditioned on the input content and task objective. To make MoE effective in compression model, we introduce a stable routing strategy that combines expert-choice routing with spatial total variation regularization to encourage spatially coherent assignments, and we propose a lightweight expert architecture, Group Shuffle MLP (GShMLP), to control parameter growth. Extensive experiments show consistent improvement against baselines on both conventional image reconstruction and machine tasks.",
+            "arxiv_id": "2606.21033",
+            "PRIMARY_TOPIC_LABEL": "MoE Training",
+            "MATCHED_TOPIC_LABELS": [
+                "MoE Training"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [],
+            "HOTSPOT_PAPER_PRIMARY_KIND": null,
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+        },
+        "2606.21126": {
+            "ARXIVID": "2606.21126",
+            "COMMENT": "Links residual scale growth to the collapse of LayerNorm reference gradients used to assess credit assignment.",
+            "RELEVANCE": 6,
+            "NOVELTY": 6,
+            "PRIMARY_TOPIC_ID": "architecture_training",
+            "MATCHED_TOPIC_IDS": [
+                "architecture_training"
+            ],
+            "TOPIC_MATCH_COMMENT": "Gradient pathologies connect to training dynamics, but the primary contribution is a diagnostic evaluation protocol for feedback alignment.",
+            "HOTSPOT_PAPER_TAGS": [],
+            "HOTSPOT_PAPER_COMMENT": "",
+            "SCORE": 12,
+            "authors": [
+                "Yuren Hao",
+                "Xiang Wan",
+                "ChengXiang Zhai"
+            ],
+            "title": "What Accuracy and Gradient Cosine Miss: Evaluating Feedback Alignment via Scale Stability, Reference Validity, and Depth Utility",
+            "abstract": "Despite the success of deep learning, training deep networks in biologically plausible and hardware-efficient ways remains an open challenge. Feedback alignment (FA) methods address this by replacing backpropagation's symmetric backward weights with fixed random matrices, but their effectiveness depends critically on whether they can be accurately evaluated. The standard evaluation relies on two quantities: task accuracy and cosine similarity between the method's credit signal and the backpropagation gradient. We show that this reporting pair is insufficient by identifying two independent failure modes, both silent under current reporting: (1) measurement degeneracy, where the BP reference gradient collapses to the numerical floor in terminal-LayerNorm residual architectures, rendering cosine uninterpretable; and (2) aggregation collapse, where the aggregate cosine masks layerwise heterogeneity that concentrates credit at one end of the network. To address these limitations, we propose a diagnostic evaluation protocol based on three checks -- scale stability, reference validity, and depth utility -- together with per-layer rather than aggregate cosine reporting. Across multiple architectures and methods, the standard reporting pair gives no signal of failure in any audited case, while our protocol identifies all failures with wide calibration margins. The two failure modes are causally independent: a per-block scale penalty alleviates Mode 1 (residual scale explosion driving reference collapse) without affecting Mode 2 (cosine ranking that contradicts every functional metric we measured). Identifying these silent failures prevents researchers from building on non-functional credit assignment and provides actionable guidance for developing FA methods that genuinely train deep layers.",
+            "arxiv_id": "2606.21126",
+            "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+            "MATCHED_TOPIC_LABELS": [
+                "Architecture and Training Dynamics"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [],
+            "HOTSPOT_PAPER_PRIMARY_KIND": null,
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+        }
+    },
+    "topic_sections": [
+        {
+            "topic_id": "moe_training",
+            "topic_label": "MoE Training",
+            "paper_ids": [
+                "2606.21033"
+            ]
+        },
+        {
+            "topic_id": "architecture_training",
+            "topic_label": "Architecture and Training Dynamics",
+            "paper_ids": [
+                "2607.09694",
+                "2606.21295",
+                "2606.21433",
+                "2606.21307",
+                "2606.21036",
+                "2606.21562",
+                "2606.21126"
+            ]
+        },
+        {
+            "topic_id": "efficiency_scaling",
+            "topic_label": "Efficiency, Compression, and Large-Scale Training",
+            "paper_ids": [
+                "2606.21712",
+                "2606.21023",
+                "2606.21633"
+            ]
+        }
+    ]
 }

@@ -1,0 +1,243 @@
+{
+    "schema_version": 2,
+    "meta": {
+        "date": "2025-06-19",
+        "sort": [
+            "score",
+            "relevance"
+        ],
+        "topic_schema_version": 2,
+        "total_papers": 3,
+        "usage": {
+            "model": "llmcall:cc",
+            "prompt_tokens": 0,
+            "completion_tokens": 0,
+            "prompt_cost": 0.0,
+            "completion_cost": 0.0,
+            "total_arxiv_papers": 261,
+            "total_scanned_papers": 261,
+            "total_relevant_papers": 3,
+            "filter_health": {
+                "status": "ok",
+                "scanned_papers": 261,
+                "selected_papers": 3,
+                "llm_tokens": 0,
+                "message": "Scored 261 papers with 4/4 successful model calls; 3 selected."
+            },
+            "llm": {
+                "backend": "LLM backend: llmcall chain=codexg->codex->cc->claude",
+                "attempted": 4,
+                "succeeded": 4,
+                "failed": 0,
+                "by_backend": {
+                    "llmcall": 4
+                },
+                "by_provider": {
+                    "cc": 4
+                },
+                "errors": [],
+                "seconds": 337.0,
+                "trace": [
+                    "codexg: unavailable after 4.8s of 543.7s (OpenAI Codex v0.154.0",
+                    "codex: unavailable after 3.8s of 557.7s (OpenAI Codex v0.154.0",
+                    "cc: answered in 18.0s of 572.7s",
+                    "codexg: unavailable after 3.8s of 543.7s (OpenAI Codex v0.154.0",
+                    "codex: unavailable after 4.8s of 558.7s (OpenAI Codex v0.154.0",
+                    "cc: answered in 13.0s of 572.7s",
+                    "codexg: unavailable after 44.0s of 543.7s (OpenAI Codex v0.154.0",
+                    "codex: unavailable after 3.9s of 518.5s (OpenAI Codex v0.154.0",
+                    "cc: answered in 175.6s of 533.3s",
+                    "codexg: unavailable after 5.2s of 543.7s (2026-09-11T04:27:07.771500Z ERROR codex_models_manager::manager: failed to refresh available models: stream disconnected before completion: failed to decode models response: missing field `models` at )",
+                    "codex: unavailable after 6.1s of 557.3s (OpenAI Codex v0.154.0",
+                    "cc: answered in 53.8s of 569.9s"
+                ]
+            },
+            "remedied": true
+        }
+    },
+    "topic_order": [
+        "moe_training",
+        "training_systems",
+        "architecture_training",
+        "efficiency_scaling",
+        "representation_structure",
+        "memory_systems",
+        "world_models_open_ended_rl"
+    ],
+    "diagnostics": {
+        "total_papers": 3,
+        "topic_counts": [
+            {
+                "topic_id": "moe_training",
+                "topic_label": "MoE Training",
+                "paper_count": 0
+            },
+            {
+                "topic_id": "training_systems",
+                "topic_label": "Large-Scale Training Systems and Efficiency",
+                "paper_count": 1
+            },
+            {
+                "topic_id": "architecture_training",
+                "topic_label": "Architecture and Training Dynamics",
+                "paper_count": 0
+            },
+            {
+                "topic_id": "efficiency_scaling",
+                "topic_label": "Efficiency, Compression, and Large-Scale Training",
+                "paper_count": 2
+            },
+            {
+                "topic_id": "representation_structure",
+                "topic_label": "Representation Learning Theory and Structure",
+                "paper_count": 0
+            },
+            {
+                "topic_id": "memory_systems",
+                "topic_label": "Memory Structures and Agent Memory Systems",
+                "paper_count": 0
+            },
+            {
+                "topic_id": "world_models_open_ended_rl",
+                "topic_label": "World Models, Exploration, and Open-Ended Reinforcement Learning",
+                "paper_count": 0
+            }
+        ],
+        "assignment_source_counts": {
+            "llm_exact": 3
+        },
+        "llm_assignment_count": 3,
+        "heuristic_assignment_count": 0,
+        "default_assignment_count": 0,
+        "invalid_primary_topic_fallback_count": 0,
+        "missing_primary_topic_fallback_count": 0,
+        "hotspot_paper_kind_counts": {
+            "new_frontier": 0,
+            "daily_hot": 0
+        },
+        "hotspot_paper_assignment_source_counts": {
+            "default": 3
+        }
+    },
+    "papers": {
+        "2506.15461": {
+            "ARXIVID": "2506.15461",
+            "COMMENT": "Checkpoint-free pipeline-parallel fault recovery: a crashed stage is reconstructed by weighted averaging of neighboring stages, with out-of-order pipeline execution extending this to first/last stages.",
+            "RELEVANCE": 8,
+            "NOVELTY": 7,
+            "PRIMARY_TOPIC_ID": "training_systems",
+            "MATCHED_TOPIC_IDS": [
+                "training_systems"
+            ],
+            "TOPIC_MATCH_COMMENT": "A distributed-training systems contribution that changes pipeline-parallel fault tolerance and convergence wall-clock with zero storage or redundant-compute overhead.",
+            "HOTSPOT_PAPER_TAGS": [],
+            "HOTSPOT_PAPER_COMMENT": "",
+            "SCORE": 15,
+            "authors": [
+                "Nikolay Blagoev",
+                "Oğuzhan Ersoy",
+                "Lydia Yiyu Chen"
+            ],
+            "title": "All is Not Lost: LLM Recovery without Checkpoints",
+            "abstract": "Training LLMs on decentralized nodes or on-spot instances, lowers the training cost and enables model democratization. The inevitable challenge here is the transient churns of nodes due to failures and the operator's scheduling policies, leading to losing parts of the model (some layers). The conventional approaches to recover from failures is to either use checkpointing, where periodically a copy of the entire model is sent to an additional storage, or redundant computation. These approaches yield significant communication and/or computation overhead even in non-failure cases and scale poorly in settings with large models. In this paper we propose CheckFree, an efficient recovery method where a failing stage is substituted by weighted averaging of the closest neighboring stages. In contrast to the state of the art, CheckFree requires no additional computation or storage. However, because of the nature of averaging neighbouring stages, it can only recover failures of intermediate stages. We further extend our method to CheckFree+ with out-of-order pipeline execution to tolerate crashes of the first and last stages. Thanks to out-of-order pipelining, behaviour of the first and last stages are mimicked by their neighboring ones, which allows CheckFree+ to recover them by copying the neighboring stages. To recover the (de-)embedding layers, CheckFree+ copies those layers in the neighboring stages, which requires relatively small storage overhead. We extensively evaluate our method on LLaMa models of model sizes from 124M to 1.5B with varying failure frequencies. In the case of low and medium failure rates (5-10%), CheckFree and CheckFree+ outperform both checkpointing and redundant computation in terms of convergence wall-clock time, achieving up to 12% improvement over redundant computation. Both of our proposals can be ran via our code available at: https://github.com/gensyn-ai/CheckFree",
+            "arxiv_id": "2506.15461",
+            "PRIMARY_TOPIC_LABEL": "Large-Scale Training Systems and Efficiency",
+            "MATCHED_TOPIC_LABELS": [
+                "Large-Scale Training Systems and Efficiency"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [],
+            "HOTSPOT_PAPER_PRIMARY_KIND": null,
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+        },
+        "2507.01027": {
+            "ARXIVID": "2507.01027",
+            "COMMENT": "Learnable transformation reshaping single-bell weight distributions into dual-bell form to make near-1-bit binarization tractable, with the inverse transform absorbing activation outliers for 6-bit activations.",
+            "RELEVANCE": 8,
+            "NOVELTY": 7,
+            "PRIMARY_TOPIC_ID": "efficiency_scaling",
+            "MATCHED_TOPIC_IDS": [
+                "efficiency_scaling"
+            ],
+            "TOPIC_MATCH_COMMENT": "A new quantization mechanism rather than a tuned variant: it changes the weight distribution itself to be binarization-friendly, materially shifting the cost of running a large model.",
+            "HOTSPOT_PAPER_TAGS": [],
+            "HOTSPOT_PAPER_COMMENT": "",
+            "SCORE": 15,
+            "authors": [
+                "Zijian Ye",
+                "Wei Huang",
+                "Yifei Yu",
+                "Tianhe Ren",
+                "Zhongrui Wang",
+                "Xiaojuan Qi"
+            ],
+            "title": "DBellQuant: Breaking the Bell with Double-Bell Transformation for LLMs Post Training Binarization",
+            "abstract": "Large language models (LLMs) demonstrate remarkable performance but face substantial computational and memory challenges that limit their practical deployment. Quantization has emerged as a promising solution; however, its effectiveness is often limited by quantization errors arising from weight distributions that are not quantization-friendly and the presence of activation outliers. To address these challenges, we introduce DBellQuant, an innovative post-training quantization (PTQ) framework that achieves nearly 1-bit weight compression and 6-bit activation quantization with minimal performance degradation. DBellQuant uses Learnable Transformation for Dual-Bell (LTDB) algorithm, which transforms single-bell weight distributions into dual-bell forms to reduce binarization errors and applies inverse transformations to smooth activations. DBellQuant sets a new state-of-the-art by preserving superior model performance under aggressive weight and activation quantization. For example, on the Wikitext2 dataset, DBellQuant achieves a perplexity of 14.39 on LLaMA2-13B with 6-bit activation quantization, significantly outperforming BiLLM's 21.35 without activation quantization, underscoring its potential in compressing LLMs for real-world applications.",
+            "arxiv_id": "2507.01027",
+            "PRIMARY_TOPIC_LABEL": "Efficiency, Compression, and Large-Scale Training",
+            "MATCHED_TOPIC_LABELS": [
+                "Efficiency, Compression, and Large-Scale Training"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [],
+            "HOTSPOT_PAPER_PRIMARY_KIND": null,
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+        },
+        "2506.15588": {
+            "ARXIVID": "2506.15588",
+            "COMMENT": "Shows privatization flattens the gradient singular-value spectrum, so random Gaussian projections replace GaLore-style SVD subspaces, cutting DP training memory by 63-70% and scaling to 6.7B.",
+            "RELEVANCE": 6,
+            "NOVELTY": 6,
+            "PRIMARY_TOPIC_ID": "efficiency_scaling",
+            "MATCHED_TOPIC_IDS": [
+                "training_systems",
+                "efficiency_scaling"
+            ],
+            "TOPIC_MATCH_COMMENT": "The contribution is a memory-efficient gradient-projection training method, with the spectral finding as its mechanism.",
+            "HOTSPOT_PAPER_TAGS": [],
+            "HOTSPOT_PAPER_COMMENT": "",
+            "SCORE": 12,
+            "authors": [
+                "Alex Mulrooney",
+                "Devansh Gupta",
+                "James Flemings",
+                "Huanyu Zhang",
+                "Murali Annavaram",
+                "Meisam Razaviyayn",
+                "Xinwei Zhang"
+            ],
+            "title": "Memory-Efficient Differentially Private Training with Gradient Random Projection",
+            "abstract": "Differential privacy (DP) protects sensitive data during neural network training, but standard methods like DP-Adam suffer from high memory overhead due to per-sample gradient clipping, limiting scalability. We introduce DP-GRAPE (Gradient RAndom ProjEction), a DP training method that significantly reduces memory usage while maintaining utility on par with first-order DP approaches. DP-GRAPE is motivated by our finding that privatization flattens the gradient singular value spectrum, making SVD-based projections (as in GaLore (Zhao et al., 2024)) unnecessary. Consequently, DP-GRAPE employs three key components: (1) random Gaussian matrices replace SVD-based subspaces, (2) gradients are privatized after projection, and (3) projection is applied during backpropagation. These contributions eliminate the need for costly SVD computations, enable substantial memory savings, and lead to improved utility. Despite operating in lower-dimensional subspaces, our theoretical analysis shows that DP-GRAPE achieves a privacy-utility tradeoff comparable to DP-SGD. Our extensive empirical experiments show that DP-GRAPE can significantly reduce the memory footprint of DP training without sacrificing accuracy or training time. In particular, DP-GRAPE reduces memory usage by over 63% when pre-training Vision Transformers and over 70% when fine-tuning RoBERTa-Large as compared to DP-Adam, while achieving similar performance. We further demonstrate that DP-GRAPE scales to fine-tuning large models such as OPT with up to 6.7 billion parameters, a scale at which DP-Adam fails due to memory constraints. Our code is available at https://github.com/alexmul1114/DP_GRAPE.",
+            "arxiv_id": "2506.15588",
+            "PRIMARY_TOPIC_LABEL": "Efficiency, Compression, and Large-Scale Training",
+            "MATCHED_TOPIC_LABELS": [
+                "Large-Scale Training Systems and Efficiency",
+                "Efficiency, Compression, and Large-Scale Training"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [],
+            "HOTSPOT_PAPER_PRIMARY_KIND": null,
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+        }
+    },
+    "topic_sections": [
+        {
+            "topic_id": "training_systems",
+            "topic_label": "Large-Scale Training Systems and Efficiency",
+            "paper_ids": [
+                "2506.15461"
+            ]
+        },
+        {
+            "topic_id": "efficiency_scaling",
+            "topic_label": "Efficiency, Compression, and Large-Scale Training",
+            "paper_ids": [
+                "2507.01027",
+                "2506.15588"
+            ]
+        }
+    ]
+}

@@ -1,0 +1,167 @@
+{
+    "schema_version": 1,
+    "meta": {
+        "date": "2026-02-26",
+        "total_candidates": 49,
+        "total_spotlight_papers": 3,
+        "thresholds": {
+            "daily_hot_score_cutoff": 15,
+            "daily_hot_relevance_cutoff": 7,
+            "new_frontier_score_cutoff": 15,
+            "new_frontier_novelty_cutoff": 8
+        },
+        "caps": {
+            "max_daily_hot": 6,
+            "max_new_frontier": 4
+        }
+    },
+    "diagnostics": {
+        "candidate_count_by_kind": {
+            "new_frontier": 0,
+            "daily_hot": 3
+        },
+        "selected_count_by_kind": {
+            "daily_hot": 3
+        }
+    },
+    "papers": {
+        "2602.22437": {
+            "ARXIVID": "2602.22437",
+            "COMMENT": "RaggedShard sharding format plus structure-aware planning gives zero-copy FSDP communication and native support for block-wise quantization and non-element-wise optimizers like Shampoo and Muon at tens of thousands of GPUs.",
+            "RELEVANCE": 10,
+            "NOVELTY": 8,
+            "PRIMARY_TOPIC_ID": "training_systems",
+            "MATCHED_TOPIC_IDS": [
+                "training_systems",
+                "efficiency_scaling"
+            ],
+            "TOPIC_MATCH_COMMENT": "A new ZeRO/FSDP sharding and communication design that changes throughput and memory at extreme scale.",
+            "HOTSPOT_PAPER_TAGS": [
+                "daily_hot"
+            ],
+            "HOTSPOT_PAPER_COMMENT": "Broadly important today: RaggedShard sharding format plus structure-aware planning gives zero-copy FSDP communication and native support for block-wise quantization and non-element-wise optimizers like Shampoo and Muon at tens of thousands of GPUs.",
+            "SCORE": 18,
+            "authors": [
+                "Zezhou Wang",
+                "Youjie Li",
+                "Zhiqi Lin",
+                "Jiacheng Yang",
+                "Cong Xie",
+                "Guanyu Feng",
+                "Zheng Zhong",
+                "Ziyue Huang",
+                "Hongyu Zhu",
+                "Zhi Zhang",
+                "Yanghua Peng",
+                "Xin Liu"
+            ],
+            "title": "veScale-FSDP: Flexible and High-Performance FSDP at Scale",
+            "abstract": "Fully Sharded Data Parallel (FSDP), also known as Zero Redundancy Optimizer (ZeRO), is widely used for large-scale model training, because of its memory efficiency and minimal intrusion on model code. However, existing FSDP systems rely on fixed element-wise or row-wise sharding formats that conflict with block-structured computations. As a result, they struggle to support modern structure-aware training methods, including block-wise quantization and non-element-wise optimizers such as Shampoo and Muon. In addition, today's implementations incur communication and memory overheads that degrade efficiency at the scale of tens of thousands of GPUs. We introduce veScale-FSDP, a novel FSDP system that combines RaggedShard, a flexible sharding format, with a structure-aware planning algorithm to deliver both flexibility and performance. veScale-FSDP enables zero-copy FSDP communications and natively supports block-wise quantization and non-element-wise optimizers, achieving 5% to 66% higher throughput and 16% to 30% lower memory usage than existing FSDP systems, while scaling efficiently to tens of thousands of GPUs.",
+            "arxiv_id": "2602.22437",
+            "PRIMARY_TOPIC_LABEL": "Large-Scale Training Systems and Efficiency",
+            "MATCHED_TOPIC_LABELS": [
+                "Large-Scale Training Systems and Efficiency",
+                "Efficiency, Compression, and Large-Scale Training"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [
+                "Daily Hot Papers"
+            ],
+            "HOTSPOT_PAPER_PRIMARY_KIND": "daily_hot",
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "Daily Hot Papers",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "heuristic"
+        },
+        "2602.21545": {
+            "ARXIVID": "2602.21545",
+            "COMMENT": "Identifies post-polar row/column norm imbalance in Muon's Newton-Schulz updates, proves it weakens the blockwise descent guarantee, and fixes it with one extra state-free normalization; validated from 60M to 7B pretraining.",
+            "RELEVANCE": 10,
+            "NOVELTY": 7,
+            "PRIMARY_TOPIC_ID": "training_systems",
+            "MATCHED_TOPIC_IDS": [
+                "training_systems",
+                "architecture_training"
+            ],
+            "TOPIC_MATCH_COMMENT": "A large-scale pretraining optimizer contribution with both analysis and measured speedup.",
+            "HOTSPOT_PAPER_TAGS": [
+                "daily_hot"
+            ],
+            "HOTSPOT_PAPER_COMMENT": "Broadly important today: Identifies post-polar row/column norm imbalance in Muon's Newton-Schulz updates, proves it weakens the blockwise descent guarantee, and fixes it with one extra state-free normalization; validated from 60M to 7B pretraining.",
+            "SCORE": 17,
+            "authors": [
+                "Ruijie Zhang",
+                "Yequan Zhao",
+                "Ziyue Liu",
+                "Zhengyang Wang",
+                "Yupeng Su",
+                "Liyan Tan",
+                "Zheng Zhang"
+            ],
+            "title": "MUON+: Towards More Effective Muon via One Additional Normalization Step for LLM Pre-training",
+            "abstract": "Muon has recently emerged as a strong optimizer for large language model pre-training, orthogonalizing the momentum matrix via Newton--Schulz polar iterations. A natural intuition is that polar iterations, by flattening the singular spectrum to all ones, should also eliminate column- and row-wise norm imbalance in the update. We show that this is not true in practice: practical polar steps can substantially amplify the imbalance. We term this the post-polar imbalanced update problem, and prove that such imbalance tightens the second-order term in a blockwise descent analysis, weakening Muon's per-step descent guarantee. Motivated by this analysis, we propose Muon+, a one-line fix that inserts a single normalization step after polar orthogonalization. Muon+ adds no optimizer state. Across pre-training experiments on GPT and LLaMA models from 60M to 7B parameters, spanning both compute-optimal budgets and extended token-to-parameter ratios up to approximately 200, Muon+ consistently outperforms Muon in terms of training and validation perplexity, leading to significant overall pre-training speedup.",
+            "arxiv_id": "2602.21545",
+            "PRIMARY_TOPIC_LABEL": "Large-Scale Training Systems and Efficiency",
+            "MATCHED_TOPIC_LABELS": [
+                "Large-Scale Training Systems and Efficiency",
+                "Architecture and Training Dynamics"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [
+                "Daily Hot Papers"
+            ],
+            "HOTSPOT_PAPER_PRIMARY_KIND": "daily_hot",
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "Daily Hot Papers",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "heuristic"
+        },
+        "2602.21788": {
+            "ARXIVID": "2602.21788",
+            "COMMENT": "Adaptively reconfigures context-parallel communication groups and non-power-of-two CP degrees per batch with a polynomial-time planner, removing load imbalance and redundant communication under heterogeneous sequence lengths.",
+            "RELEVANCE": 10,
+            "NOVELTY": 7,
+            "PRIMARY_TOPIC_ID": "training_systems",
+            "MATCHED_TOPIC_IDS": [
+                "training_systems",
+                "efficiency_scaling"
+            ],
+            "TOPIC_MATCH_COMMENT": "A sequence-parallelism and communication-scheduling algorithm that materially changes large-run throughput versus Megatron-LM and DeepSpeed.",
+            "HOTSPOT_PAPER_TAGS": [
+                "daily_hot"
+            ],
+            "HOTSPOT_PAPER_COMMENT": "Broadly important today: Adaptively reconfigures context-parallel communication groups and non-power-of-two CP degrees per batch with a polynomial-time planner, removing load imbalance and redundant communication under heterogeneous sequence lengths.",
+            "SCORE": 17,
+            "authors": [
+                "Yifan Niu",
+                "Han Xiao",
+                "Dongyi Liu",
+                "Wei Zhou",
+                "Jia Li"
+            ],
+            "title": "Efficient Scaling of LLM Training with Flexible Context Parallelism",
+            "abstract": "Scaling long-context capabilities is crucial for Large Language Models (LLMs). However, real-world data contain a large number of sequences with heterogeneous lengths. Existing training libraries for LLMs rely on static parallelism strategies, which suffer from severe load imbalance, redundant communication, and suboptimal hardware utilization under data heterogeneity. In this work, we propose Flexible Context Parallelism (FCP), an efficient parallelism strategy that adaptively reconfigures communication groups and context parallelism degrees during LLM training. We generalize more flexible non-power-of-two parallelism degrees and develop a polynomial-time algorithm to generate near-optimal parallelism strategies with only millisecond-level overhead per training batch. FCP is able to maintain high hardware efficiency even under extreme data heterogeneity. Experimental results demonstrate that FCP significantly outperforms Megatron-LM and DeepSpeed in both LLM and MLLM training, achieving up to 1.46x speedup in average throughput while maintaining near-linear scaling efficiency across large-scale clusters. For extremely unbalanced batches, FCP even achieves 2.24x speedup.",
+            "arxiv_id": "2602.21788",
+            "PRIMARY_TOPIC_LABEL": "Large-Scale Training Systems and Efficiency",
+            "MATCHED_TOPIC_LABELS": [
+                "Large-Scale Training Systems and Efficiency",
+                "Efficiency, Compression, and Large-Scale Training"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [
+                "Daily Hot Papers"
+            ],
+            "HOTSPOT_PAPER_PRIMARY_KIND": "daily_hot",
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "Daily Hot Papers",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "heuristic"
+        }
+    },
+    "sections": [
+        {
+            "kind": "daily_hot",
+            "label": "Daily Hot Papers",
+            "description": "Papers that feel broadly important to the day and belong in the hotspot paper feed.",
+            "paper_ids": [
+                "2602.22437",
+                "2602.21545",
+                "2602.21788"
+            ]
+        }
+    ]
+}

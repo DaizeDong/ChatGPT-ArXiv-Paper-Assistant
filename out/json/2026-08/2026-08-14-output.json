@@ -1,1 +1,359 @@
-{}
+{
+    "2608.13263": {
+        "ARXIVID": "2608.13263",
+        "COMMENT": "Token-table indirection and asynchronous repacking reclaim KV-cache memory stranded by token eviction.",
+        "RELEVANCE": 9,
+        "NOVELTY": 7,
+        "PRIMARY_TOPIC_ID": "efficiency_scaling",
+        "MATCHED_TOPIC_IDS": [
+            "efficiency_scaling"
+        ],
+        "TOPIC_MATCH_COMMENT": "The central contribution is a new cache-memory reclamation mechanism with measured improvements in LLM concurrency and throughput.",
+        "HOTSPOT_PAPER_TAGS": [],
+        "HOTSPOT_PAPER_COMMENT": "",
+        "SCORE": 16,
+        "authors": [
+            "Yuanhang Gao",
+            "Xiangrui Yang",
+            "Yuanfeng Chen",
+            "Hongjia Chen",
+            "Qianru Lv",
+            "Wenfei Wu",
+            "Dongsheng Li"
+        ],
+        "title": "vToken: Token-Level Virtualization for Reclaimable KV Caches",
+        "abstract": "Large language model serving faces a critical memory bottleneck: the KV cache grows with sequence length and batch size. PagedAttention uses fixed-size memory blocks to reduce allocator-level fragmentation, but recent KV eviction algorithms operate at a token granularity finer than block-level management. This mismatch causes intra-block fragmentation, leaving a large fraction of allocated KV memory unreclaimable. We present vToken, a lightweight token-level virtualization layer that decouples logical token liveness from physical block placement. vToken maintains a stable logical token view through token-table indirection and realizes physical reclamation by repacking live tokens asynchronously. The design preserves PagedAttention kernels and CUDA Graph compatibility. We implement vToken in vLLM and evaluate it with H2O, Random, and Scissorhands across models. Compared with a paired Naive-Evict baseline, vToken reduces retained KV blocks per request by 27.2\\%--72.3\\% and improves SLA-constrained throughput by up to 1.37$\\times$. Under a constrained active-KV budget, it extends the maximum feasible concurrency by up to 2$\\times$, while reducing the per-policy integration footprint from 500+ lines to under 50.",
+        "arxiv_id": "2608.13263",
+        "PRIMARY_TOPIC_LABEL": "Efficiency, Compression, and Large-Scale Training",
+        "MATCHED_TOPIC_LABELS": [
+            "Efficiency, Compression, and Large-Scale Training"
+        ],
+        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+        "HOTSPOT_PAPER_LABELS": [],
+        "HOTSPOT_PAPER_PRIMARY_KIND": null,
+        "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+    },
+    "2505.12532": {
+        "ARXIVID": "2505.12532",
+        "COMMENT": "Sparse wavelet-domain updates enable high-rank adaptation with finer parameter budgets than LoRA.",
+        "RELEVANCE": 9,
+        "NOVELTY": 7,
+        "PRIMARY_TOPIC_ID": "efficiency_scaling",
+        "MATCHED_TOPIC_IDS": [
+            "efficiency_scaling"
+        ],
+        "TOPIC_MATCH_COMMENT": "A new sparse-update parameterization directly targets parameter-efficient adaptation, supported by analysis of update rank and gradient coverage.",
+        "HOTSPOT_PAPER_TAGS": [],
+        "HOTSPOT_PAPER_COMMENT": "",
+        "SCORE": 16,
+        "authors": [
+            "Ahmet Bilican",
+            "M. Ak\u00c4\u00b1n Y\u00c4\u00b1lmaz",
+            "A. Murat Tekalp",
+            "R. G\u00c3\u00b6kberk Cinbi\u00c5\u009f"
+        ],
+        "title": "Exploring Sparsity for Parameter Efficient Fine Tuning Using Wavelets for Vision",
+        "abstract": "Efficiently adapting large pretrained models is critical under tight compute and memory budgets. While Parameter-Efficient Fine-Tuning (PEFT) methods like LoRA achieve efficiency through low-rank updates, their discrete rank constraint limits fine-grained parameter control and confines adaptations to low-dimensional subspaces. We propose Wavelet Fine-Tuning (WaveFT), which learns sparse updates in the wavelet domain of weight matrices, enabling fine-grained control over trainable parameters well below LoRA's minimum rank. Wavelet bases provide semi-local receptive fields that aggregate spatially coherent gradients, offering better coverage than direct weight sparsity (SHiRA) without the destructive interference of global Fourier bases (FourierFT). We provide theoretical analysis showing: (i) sparse methods achieve high-rank updates, avoiding LoRA's subspace bottleneck and enabling higher representational capacity, and (ii) a gradient coverage framework explaining when WaveFT is preferable. We perform experiments across text-to-image generation, image classification, and language understanding. WaveFT demonstrates state-of-the-art results among PEFT methods for vision tasks, where wavelets effectively capture sparse gradient structure through improved coverage, while performing comparably on NLP tasks. WaveFT has officially been included in the Hugging Face PEFT library (huggingface.co/docs/peft/en/package_reference/waveft).",
+        "arxiv_id": "2505.12532",
+        "PRIMARY_TOPIC_LABEL": "Efficiency, Compression, and Large-Scale Training",
+        "MATCHED_TOPIC_LABELS": [
+            "Efficiency, Compression, and Large-Scale Training"
+        ],
+        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+        "HOTSPOT_PAPER_LABELS": [],
+        "HOTSPOT_PAPER_PRIMARY_KIND": null,
+        "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+    },
+    "2402.09589": {
+        "ARXIVID": "2402.09589",
+        "COMMENT": "Congestion control interleaves distributed-training communication with other jobs' compute phases to reduce network contention.",
+        "RELEVANCE": 9,
+        "NOVELTY": 7,
+        "PRIMARY_TOPIC_ID": "training_systems",
+        "MATCHED_TOPIC_IDS": [
+            "training_systems"
+        ],
+        "TOPIC_MATCH_COMMENT": "The core contribution is a distributed communication-control algorithm that improves training throughput in shared GPU clusters.",
+        "HOTSPOT_PAPER_TAGS": [],
+        "HOTSPOT_PAPER_COMMENT": "",
+        "SCORE": 16,
+        "authors": [
+            "Anton A. Zabreyko",
+            "Sanjoli Narang",
+            "Sudarsanan Rajasekaran",
+            "Manya Ghobadi"
+        ],
+        "title": "MLCC: A Congestion Control Technique to Accelerate ML Training",
+        "abstract": "We present MLCC, a novel technique to augment today's congestion control algorithms to accelerate DNN training jobs in shared GPU clusters in a fully distributed manner. At the heart of MLCC lies a straightforward principle: DNN training flows should scale their sending rate to shift other flows' communication into their compute periods, achieving interleaving. We show that integrating this principle into today's congestion control protocols is simple (requiring less than 60 lines of code for a given protocol) and enables DNN jobs to interleave within a few training iterations, thereby reducing network contention and improving job completion times. Our testbed demonstrates that MLCC accelerates the average and 99th percentile training iteration times by up to 1.9x and 2.7x respectively. Through extensive packet-level simulations, we observe a 1.35x improvement in training throughput on a 36-node, 288 GPU fat-tree topology.",
+        "arxiv_id": "2402.09589",
+        "PRIMARY_TOPIC_LABEL": "Large-Scale Training Systems and Efficiency",
+        "MATCHED_TOPIC_LABELS": [
+            "Large-Scale Training Systems and Efficiency"
+        ],
+        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+        "HOTSPOT_PAPER_LABELS": [],
+        "HOTSPOT_PAPER_PRIMARY_KIND": null,
+        "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+    },
+    "2608.13365": {
+        "ARXIVID": "2608.13365",
+        "COMMENT": "Explains why variance-optimal RoPE-compatible rotations can worsen 4-bit quantization through limited mixing and mismatch with tokenwise range scaling.",
+        "RELEVANCE": 9,
+        "NOVELTY": 7,
+        "PRIMARY_TOPIC_ID": "efficiency_scaling",
+        "MATCHED_TOPIC_IDS": [
+            "efficiency_scaling"
+        ],
+        "TOPIC_MATCH_COMMENT": "The core contribution is a mechanistic analysis of rotation-based attention quantization, including evidence explaining a negative result.",
+        "HOTSPOT_PAPER_TAGS": [],
+        "HOTSPOT_PAPER_COMMENT": "",
+        "SCORE": 16,
+        "authors": [
+            "Shuhan Wang",
+            "Yilin Luo",
+            "Nan Xu",
+            "Chi Wang Cheung"
+        ],
+        "title": "When Local Variance Optimality Is Not Enough: RoPE-Aligned Q/K Rotations for Dynamic 4-Bit Quantisation",
+        "abstract": "Rotation-based post-training quantisation commonly applies an orthogonal transform across an entire attention head to reduce outlier-induced error. RoPE instead partitions each head into two-dimensional frequency pairs, raising the question of whether a transform respecting this decomposition can improve on full-head mixing. Prior work has established the per-pair rotations that commute with RoPE. We state the converse result that, for distinct frequencies, no other single-head orthogonal map commutes with RoPE. For the head-shared parameterisation used in our experiments, we then derive the rotation angle that minimises the larger channel variance under a pooled-covariance, position-averaged surrogate and verify that the implementation attains its analytic minimum. The evaluated head-shared pairwise configuration does not improve accuracy in the tested dynamic W4A4KV4 setting. Across four checkpoints, replacing the full-head Hadamard with this configuration increases perplexity at both short and long context lengths. Composing the pairwise rotation with the Hadamard satisfies the selected $\\pm0.05$-PPL interval criterion under the default estimator. Estimating the shared angle from K alone improves pairwise-only on every checkpoint but does not close its gap to full-head mixing. The analytic objective controls a position-averaged second moment of a pooled calibration covariance, whereas the dynamic quantiser sets its step from a tokenwise group range. The pairwise transform also has only two-channel mixing support. Along a controlled interpolation from two-channel to full-head mixing, K range, relative quantisation error, and perplexity degradation decrease as support increases. These results show that optimality for a structured surrogate need not reduce quantisation error when the surrogate and mixing support are misaligned with the quantiser's scale-setting statistic.",
+        "arxiv_id": "2608.13365",
+        "PRIMARY_TOPIC_LABEL": "Efficiency, Compression, and Large-Scale Training",
+        "MATCHED_TOPIC_LABELS": [
+            "Efficiency, Compression, and Large-Scale Training"
+        ],
+        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+        "HOTSPOT_PAPER_LABELS": [],
+        "HOTSPOT_PAPER_PRIMARY_KIND": null,
+        "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+    },
+    "2608.13668": {
+        "ARXIVID": "2608.13668",
+        "COMMENT": "Adds a query-derived erase direction orthogonal to the key to address interference unreachable by key-only delta updates.",
+        "RELEVANCE": 9,
+        "NOVELTY": 7,
+        "PRIMARY_TOPIC_ID": "architecture_training",
+        "MATCHED_TOPIC_IDS": [
+            "architecture_training"
+        ],
+        "TOPIC_MATCH_COMMENT": "It introduces and explains a new linear-attention state-update mechanism that improves retrieval beyond the training context window.",
+        "HOTSPOT_PAPER_TAGS": [],
+        "HOTSPOT_PAPER_COMMENT": "",
+        "SCORE": 16,
+        "authors": [
+            "Dhruman Gupta",
+            "Aritra Das",
+            "Debayan Gupta"
+        ],
+        "title": "The Query Knows What to Forget: A Second Erase Direction for Linear Attention",
+        "abstract": "Linear attention keeps a state of fixed size. At long context, many stored items share this state, and interference between them degrades retrieval. Gated DeltaNet-2 (GDN-2), like every delta-rule model before it, derives its erase vector from the key of the current token. However, the interference in its reads is measured through the query, and the erase step cannot reach it. We introduce the Query-derived Erase Direction (QED). QED adds a second erase direction derived from the query and orthogonal to the key. In the fast-weight view, a key-directed delta edit cannot change the key-orthogonal part of a read. It uses the editable part to cancel old-state content measured along the query. It also improves retrieval at every length past the training window, and it about doubles the usable context length on S-NIAH-1.",
+        "arxiv_id": "2608.13668",
+        "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+        "MATCHED_TOPIC_LABELS": [
+            "Architecture and Training Dynamics"
+        ],
+        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+        "HOTSPOT_PAPER_LABELS": [],
+        "HOTSPOT_PAPER_PRIMARY_KIND": null,
+        "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+    },
+    "2608.13226": {
+        "ARXIVID": "2608.13226",
+        "COMMENT": "Optimal-transport coverage objectives guide visual-token pruning while preserving spatial evidence.",
+        "RELEVANCE": 8,
+        "NOVELTY": 7,
+        "PRIMARY_TOPIC_ID": "efficiency_scaling",
+        "MATCHED_TOPIC_IDS": [
+            "efficiency_scaling"
+        ],
+        "TOPIC_MATCH_COMMENT": "The core contribution is a new pruning objective and efficient selection algorithm, with transport costs specialized to 3D vision-language models.",
+        "HOTSPOT_PAPER_TAGS": [],
+        "HOTSPOT_PAPER_COMMENT": "",
+        "SCORE": 15,
+        "authors": [
+            "Peng Ling",
+            "Yingda Yin",
+            "Lingting Zhu",
+            "Weikai Chen",
+            "Shengju Qian",
+            "Zeyu Hu",
+            "Xin Wang",
+            "Wenming Yang"
+        ],
+        "title": "CoverPrune: Coverage-Driven Token Pruning for 3D VLMs via Optimal Transport",
+        "abstract": "While 3D Vision-Language Models (3D VLMs) have demonstrated remarkable spatial reasoning capabilities, they suffer from massive visual token counts that create severe computational bottlenecks during inference. Existing token pruning methods primarily rely on diversity-based selection, discarding similar tokens to maximize dispersion. However, in 3D environments, this approach frequently drops representative prototype tokens in favor of outliers, breaking the multi-view consistencies and geometric structures essential for spatial reasoning. In this paper, we propose a paradigm shift for 3D VLM token pruning: from maximizing diversity to preserving visual evidence coverage. We introduce CoverPrune, a training-free framework that formulates inference-time token pruning as an Optimal Transport (OT) problem. To overcome the intractable combinatorial subset selection inherent in this formulation, we design the Feature-Spatial-Temporal (FST) transport cost and target capacity, along with an efficient Spatial-Guided Greedy Selection (SGS) algorithm to approximate the OT objective. Furthermore, we propose CoverPrune-Lite, an accelerated variant utilizing spatially structured local matching for minimal overhead. Extensive experiments across multiple 3D visual-spatial reasoning benchmarks demonstrate that our methods achieve state-of-the-art token efficiency, maintaining robust reasoning performance even under highly aggressive pruning budgets. Visit our project website at https://github.com/Brucess/CoverPrune.",
+        "arxiv_id": "2608.13226",
+        "PRIMARY_TOPIC_LABEL": "Efficiency, Compression, and Large-Scale Training",
+        "MATCHED_TOPIC_LABELS": [
+            "Efficiency, Compression, and Large-Scale Training"
+        ],
+        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+        "HOTSPOT_PAPER_LABELS": [],
+        "HOTSPOT_PAPER_PRIMARY_KIND": null,
+        "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+    },
+    "2608.10805": {
+        "ARXIVID": "2608.10805",
+        "COMMENT": "Algebraic reformulation and kernel fusion reduce WTConv memory traffic, delivering up to 4.35x faster training.",
+        "RELEVANCE": 8,
+        "NOVELTY": 7,
+        "PRIMARY_TOPIC_ID": "efficiency_scaling",
+        "MATCHED_TOPIC_IDS": [
+            "training_systems",
+            "efficiency_scaling"
+        ],
+        "TOPIC_MATCH_COMMENT": "Reducing HBM traffic and peak memory through new computational reformulations is the primary advance, with direct training-throughput benefits.",
+        "HOTSPOT_PAPER_TAGS": [],
+        "HOTSPOT_PAPER_COMMENT": "",
+        "SCORE": 15,
+        "authors": [
+            "Amit Aflalo",
+            "Shahaf E. Finder",
+            "Roy Amoyal",
+            "Eran Treister",
+            "Oren Freifeld"
+        ],
+        "title": "Fast and Memory-Efficient Wavelet Convolutions via I/O-Aware Reformulation",
+        "abstract": "Wavelet convolution (WTConv) has emerged as an increasingly popular drop-in replacement for standard convolutions, expanding a network's receptive field exponentially with the number of decomposition levels while keeping the parameter count linear. However, its reference implementation is severely memory-bound due to excessive data movement through high-bandwidth memory (HBM). We develop an I/O model of WTConv to characterize this bottleneck and use it to guide three algebraic reformulations: (1) recomputing the inexpensive Haar analysis butterfly on chip, (2) collapsing the multi-level synthesis cascade into a single closed-form pass indexed by output-coordinate bits, and (3) folding learned per-channel scales into the convolution weights. Together, these reformulations enable an I/O-aware fused implementation that substantially reduces HBM traffic. We evaluate the WTConvNeXt configuration across decomposition levels and a broad range of tensor shapes. Despite performing comparable arithmetic, the reference WTConv is substantially slower than the depthwise convolution it replaces. Our reformulation reduces modeled HBM traffic by approximately $2.55\\times$, yielding up to a $4.35\\times$ training speedup over the reference while roughly halving peak memory usage. Thus, our reformulation preserves the benefits of WTConv while substantially reducing its execution time and memory footprint, removing the systems overhead that previously limited its practical efficiency.",
+        "arxiv_id": "2608.10805",
+        "PRIMARY_TOPIC_LABEL": "Efficiency, Compression, and Large-Scale Training",
+        "MATCHED_TOPIC_LABELS": [
+            "Large-Scale Training Systems and Efficiency",
+            "Efficiency, Compression, and Large-Scale Training"
+        ],
+        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+        "HOTSPOT_PAPER_LABELS": [],
+        "HOTSPOT_PAPER_PRIMARY_KIND": null,
+        "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+    },
+    "2607.28166": {
+        "ARXIVID": "2607.28166",
+        "COMMENT": "Coordinates token commitment and sequence-level early exit to remove 64\u201395% of diffusion-language-model decoding steps.",
+        "RELEVANCE": 8,
+        "NOVELTY": 6,
+        "PRIMARY_TOPIC_ID": "efficiency_scaling",
+        "MATCHED_TOPIC_IDS": [
+            "efficiency_scaling"
+        ],
+        "TOPIC_MATCH_COMMENT": "The core contribution is a decoding policy that reduces large-model computation through coordinated local and global stopping decisions.",
+        "HOTSPOT_PAPER_TAGS": [],
+        "HOTSPOT_PAPER_COMMENT": "",
+        "SCORE": 14,
+        "authors": [
+            "Chia-Ming Lee",
+            "Shao-Kai Liu",
+            "Ming-Ching Chang",
+            "Xin Li",
+            "Yu-Lun Liu",
+            "Chih-Chung Hsu"
+        ],
+        "title": "Commit Locally, Exit Globally: Coordinating Adaptive Sampling and Early Exit in Diffusion Language Models",
+        "abstract": "Diffusion language models expose a provisional prediction at every denoising step, and on many tasks the candidate answer inside it stabilizes before the step schedule is exhausted. This creates two acceleration opportunities, leaving a block early and stopping the sequence early, but the two require different criteria because block acceleration is local whereas sequence termination is global and freezes the graded answer. Existing methods usually optimize only one axis, and existing exit gates rely on fixed-region confidence or schedule-dependent rules rather than the candidate answer itself. We present $\\textbf{C}^4$, which coordinates the two axes by giving each decision its own gate. $\\textbf{C}$onfidence-Verified Early Exit (CVEE) decides when the sequence may stop, requiring confidence and sustained argmax stability over a candidate span re-extracted at every step. $\\textbf{C}$ommit-$\\textbf{C}$ore-Then-$\\textbf{C}$onfirm (CCTC) decides which token positions a step may commit by borrowing an autoregressive freezing order inside each block: it commits a boundary-anchored core and confirms deferred positions one step later, so the answer block can be accelerated without allowing local commits inside the answer span to determine sequence-level termination. On 12 zero-shot tasks with LLaDA and Dream, one frozen configuration removes 64--95% of decoding steps and delivers measured end-to-end speedups of 2.6 to 8.6 over full decoding. Code is available at https://github.com/ming053l/C4-dLLM.",
+        "arxiv_id": "2607.28166",
+        "PRIMARY_TOPIC_LABEL": "Efficiency, Compression, and Large-Scale Training",
+        "MATCHED_TOPIC_LABELS": [
+            "Efficiency, Compression, and Large-Scale Training"
+        ],
+        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+        "HOTSPOT_PAPER_LABELS": [],
+        "HOTSPOT_PAPER_PRIMARY_KIND": null,
+        "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+    },
+    "2607.08104": {
+        "ARXIVID": "2607.08104",
+        "COMMENT": "Convergence bounds expose momentum SGD's limitations under heavy-tailed gradient noise.",
+        "RELEVANCE": 7,
+        "NOVELTY": 7,
+        "PRIMARY_TOPIC_ID": "architecture_training",
+        "MATCHED_TOPIC_IDS": [
+            "architecture_training"
+        ],
+        "TOPIC_MATCH_COMMENT": "Directly analyzes optimization dynamics and the role of gradient-control mechanisms, although validation is limited to synthetic objectives.",
+        "HOTSPOT_PAPER_TAGS": [],
+        "HOTSPOT_PAPER_COMMENT": "",
+        "SCORE": 14,
+        "authors": [
+            "Ryusei Yamada",
+            "Naoki Sato",
+            "Hideaki Iiduka"
+        ],
+        "title": "Vanilla SGD with Momentum Survives Heavy-Tailed Noise: Convergence Analysis without Gradient Clipping or Normalization",
+        "abstract": "Stochastic gradient descent (SGD) is a cornerstone of modern optimization. While its performance under heavy-tailed noise is often addressed through specialized modifications such as gradient clipping or normalization, we investigate a more fundamental question: how does vanilla SGD, particularly with momentum, perform in the presence of heavy-tailed noise? In this paper, we refine existing convergence results for vanilla SGD and, more importantly, provide the first comprehensive convergence analysis of vanilla SGD with momentum for strongly convex, convex, and nonconvex objectives, without employing any gradient control mechanisms. Our results demonstrate that the obtained convergence rates are inferior to the optimal rates achieved by clipped or normalized variants of SGD, thereby revealing inherent limitations of vanilla methods under heavy-tailed noise. The theoretical findings are supported by experiments on synthetic functions.",
+        "arxiv_id": "2607.08104",
+        "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+        "MATCHED_TOPIC_LABELS": [
+            "Architecture and Training Dynamics"
+        ],
+        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+        "HOTSPOT_PAPER_LABELS": [],
+        "HOTSPOT_PAPER_PRIMARY_KIND": null,
+        "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+    },
+    "2604.24196": {
+        "ARXIVID": "2604.24196",
+        "COMMENT": "Proves identifiability and residual-error stability bounds for kernel-driven generative-training equilibria.",
+        "RELEVANCE": 6,
+        "NOVELTY": 7,
+        "PRIMARY_TOPIC_ID": "architecture_training",
+        "MATCHED_TOPIC_IDS": [
+            "architecture_training"
+        ],
+        "TOPIC_MATCH_COMMENT": "Equilibrium guarantees bear on training dynamics, although the analysis addresses distribution-level kernel fields rather than large neural-network optimization.",
+        "HOTSPOT_PAPER_TAGS": [],
+        "HOTSPOT_PAPER_COMMENT": "",
+        "SCORE": 13,
+        "authors": [
+            "HakGeun Lee",
+            "Hyonho Chun"
+        ],
+        "title": "Identifiability and Stability of Generative Drifting in the Companion-Elliptic Kernel Family",
+        "abstract": "A drifting model is a one-step generator trained by moving each sample along a field of kernel-weighted attraction toward data samples and repulsion between model samples; training halts once this field vanishes. The soundness of this scheme rests on two questions: whether a zero-field equilibrium guarantees agreement with the data distribution, and how the error is controlled when the field is small. We answer both questions. We introduce the companion-elliptic kernel class, which contains the Laplace kernel, and prove that a vanishing field identifies arbitrary Borel probability measures within this class and its blockwise product extension. The scalar companion-elliptic kernels are exactly the Gaussian and Mat\u00c3\u00a9rn families, and deconvolution, the recovery of a measure from its kernel-smoothed density, is possible precisely when the zero set of the kernel's Fourier transform has empty interior. At approximate equilibria, a mass-escape counterexample shows that field information on a bounded region cannot control the global error. We therefore prove an explicit stability inequality bounding the error by the field residual on the observation region plus the convolution mass outside it. In this inequality the Gaussian kernel requires only field values but amplifies high-frequency errors exponentially, whereas the Mat\u00c3\u00a9rn kernel requires one additional order of derivative information in exchange for polynomial amplification. Since this gap widens exponentially with frequency, the balance favors the Mat\u00c3\u00a9rn family and hence the Laplace kernel.",
+        "arxiv_id": "2604.24196",
+        "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+        "MATCHED_TOPIC_LABELS": [
+            "Architecture and Training Dynamics"
+        ],
+        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+        "HOTSPOT_PAPER_LABELS": [],
+        "HOTSPOT_PAPER_PRIMARY_KIND": null,
+        "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+    },
+    "2602.17596": {
+        "ARXIVID": "2602.17596",
+        "COMMENT": "Derives width-dependent loss-barrier bounds connecting approximation rates to regularized ReLU optimization geometry.",
+        "RELEVANCE": 6,
+        "NOVELTY": 6,
+        "PRIMARY_TOPIC_ID": "architecture_training",
+        "MATCHED_TOPIC_IDS": [
+            "architecture_training"
+        ],
+        "TOPIC_MATCH_COMMENT": "Optimization geometry is the best fit, although the guarantees concern constrained shallow networks and have limited direct applicability to large-model training.",
+        "HOTSPOT_PAPER_TAGS": [],
+        "HOTSPOT_PAPER_COMMENT": "",
+        "SCORE": 12,
+        "authors": [
+            "Saveliy Baturin"
+        ],
+        "title": "From Approximation Rates to Loss-Landscape Barrier Decay in Shallow ReLU Networks",
+        "abstract": "We study pathwise connectivity of sublevel sets for one-hidden-layer ReLU networks with constrained first-layer weights and an $\\ell_1$ penalty on the output layer. The data term is assumed convex and globally Lipschitz in the scalar logit. We first give a finite-width construction that connects any two points of a common sublevel through a path controlled by a loss-consistent compression functional and a first-order perturbation term. The proof replaces the quadratic perturbation estimate in the Freeman--Bruna mechanism by a direct Lipschitz bound. Positive homogeneity is then used in a direction that is compatible with the penalty: every active atom is moved monotonically from the unit ball to the unit sphere while its output coefficient is reduced. Sphere covering and cluster merging consequently give $O(m^{-1/(n-1)})$ fixed-level thickening for $n\\ge2$, while the one-dimensional two-ray dictionary gives exact connectivity for every $m\\ge4$. We also prove internally that the regularized approximation values satisfy $e(l)-e_\\infty=O(l^{-1/2})$. More generally, a rate $O(l^{-s})$ transfers to a near-optimal barrier rate $O(m^{-s/((n-1)s+1)})$; under the standing assumptions, this yields the explicit rate $O(m^{-1/(n+1)})$. A theorem-aligned finite-distribution experiment complements the analysis. The primary Huber run yields a maximal best certified upper gap $1.66\\times10^{-5}$ over 720 recorded pairs at widths $m\\ge16$; a matched binary-cross-entropy rerun and a 720-endpoint dense-representation stress test probe loss robustness and the active cluster-merging mechanism.",
+        "arxiv_id": "2602.17596",
+        "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+        "MATCHED_TOPIC_LABELS": [
+            "Architecture and Training Dynamics"
+        ],
+        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+        "HOTSPOT_PAPER_LABELS": [],
+        "HOTSPOT_PAPER_PRIMARY_KIND": null,
+        "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+    }
+}

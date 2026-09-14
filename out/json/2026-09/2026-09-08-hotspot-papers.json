@@ -1,0 +1,269 @@
+{
+    "schema_version": 1,
+    "meta": {
+        "date": "2026-09-08",
+        "total_candidates": 131,
+        "total_spotlight_papers": 6,
+        "thresholds": {
+            "daily_hot_score_cutoff": 15,
+            "daily_hot_relevance_cutoff": 7,
+            "new_frontier_score_cutoff": 15,
+            "new_frontier_novelty_cutoff": 8
+        },
+        "caps": {
+            "max_daily_hot": 6,
+            "max_new_frontier": 4
+        }
+    },
+    "diagnostics": {
+        "candidate_count_by_kind": {
+            "new_frontier": 0,
+            "daily_hot": 9
+        },
+        "selected_count_by_kind": {
+            "daily_hot": 6
+        }
+    },
+    "papers": {
+        "2609.01343": {
+            "ARXIVID": "2609.01343",
+            "COMMENT": "Compute-matched middle-layer looping improves the compute-optimal pretraining frontier, saving a reported 6.8\u201318.0% of training FLOPs.",
+            "RELEVANCE": 10,
+            "NOVELTY": 8,
+            "PRIMARY_TOPIC_ID": "architecture_training",
+            "MATCHED_TOPIC_IDS": [
+                "training_systems",
+                "architecture_training",
+                "efficiency_scaling"
+            ],
+            "TOPIC_MATCH_COMMENT": "Depth reuse is the core architectural mechanism; architecture-specific scaling laws quantify training-compute savings. MoE provides the backbone rather than a new routing or expert-training mechanism.",
+            "HOTSPOT_PAPER_TAGS": [
+                "daily_hot"
+            ],
+            "HOTSPOT_PAPER_COMMENT": "Broadly important today: Compute-matched middle-layer looping improves the compute-optimal pretraining frontier, saving a reported 6.8\u201318.0% of training FLOPs.",
+            "SCORE": 18,
+            "authors": [
+                "Shaowen Wang",
+                "Ge Zhang",
+                "Kairong Luo",
+                "Yuhao Wu",
+                "Shaofan Liu",
+                "Jiaheng Liu",
+                "Wenhao Huang",
+                "Shen Yan",
+                "Jian Li"
+            ],
+            "title": "SMELT: Scaling Laws for Compute-Matched MoE Looped Transformers",
+            "abstract": "Looped Transformers increase effective depth by iterating a shared block of layers, but most evaluations compare at fixed model size, conflating architectural advantage with extra FLOPs. We study looping on Mixture-of-Experts Transformers while closely matching per-token FLOPs, total non-embedding parameters, and KV cache. Through a series of ablations, we arrive at a recipe we call SMELT (Sparse MoE Transformer, middle layers Loop Twice), which loops the middle half of layers twice while matching the unlooped Baseline on all three budgets. We scale SMELT across four sizes up to 54B non-embedding parameters and fit a separate Chinchilla-style scaling law for each architecture. SMELT's loss drops faster with compute, saving 6.8--18.0\\% of training FLOPs on the compute-optimal frontier. The advantage transfers to downstream benchmarks beyond what validation loss predicts, is largest on Code, and grows with sample length and the number of in-context examples. Mechanistic analysis shows that the second visit reduces the attention sink and redirects mass toward content-relevant tokens, an inductive bias that may underlie the observed performance gains. These results show that looping can improve Transformers even under budget matching, offering a practical recipe that turns depth reuse into measurable gains.",
+            "arxiv_id": "2609.01343",
+            "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+            "MATCHED_TOPIC_LABELS": [
+                "Large-Scale Training Systems and Efficiency",
+                "Architecture and Training Dynamics",
+                "Efficiency, Compression, and Large-Scale Training"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [
+                "Daily Hot Papers"
+            ],
+            "HOTSPOT_PAPER_PRIMARY_KIND": "daily_hot",
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "Daily Hot Papers",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "heuristic"
+        },
+        "2609.07236": {
+            "ARXIVID": "2609.07236",
+            "COMMENT": "Online switching of parallelism and batch configurations uses throughput and gradient statistics to minimize time-to-target perplexity.",
+            "RELEVANCE": 10,
+            "NOVELTY": 8,
+            "PRIMARY_TOPIC_ID": "training_systems",
+            "MATCHED_TOPIC_IDS": [
+                "training_systems"
+            ],
+            "TOPIC_MATCH_COMMENT": "The core contribution directly couples distributed parallelism selection with convergence, improving the cost of reaching a training objective.",
+            "HOTSPOT_PAPER_TAGS": [
+                "daily_hot"
+            ],
+            "HOTSPOT_PAPER_COMMENT": "Broadly important today: Online switching of parallelism and batch configurations uses throughput and gradient statistics to minimize time-to-target perplexity.",
+            "SCORE": 18,
+            "authors": [
+                "Minchul Kang",
+                "Changyong Shin",
+                "Younghun Go",
+                "Hyunho Lee",
+                "Jinwoo Jeong",
+                "Chuck Yoo",
+                "Gyeongsik Yang"
+            ],
+            "title": "Parallelism Strategy Chaining for Fast Training Convergence",
+            "abstract": "Selecting a parallelism strategy - the configuration of data, tensor, and pipeline parallelism degrees together with micro- and global-batch sizes - largely determines the training efficiency of large language models. State-of-the-art methods search for a parallelism strategy offline and select the single strategy that minimizes per-iteration time. But we find that they neglect the target validation perplexity and time-to-perplexity (TTP). In particular, our analysis reveals that the best strategy yielding the fastest perplexity improvement changes multiple times during training. As a result, state-of-the-art methods are 1.8-11.4x slower in TTP than the strategy sequence that selects the best strategy at each iteration. This paper proposes CONA, a new training method that introduces online strategy chaining. Instead of a single strategy selected offline, CONA ranks candidate strategies during training using a surrogate metric built from compute throughput and gradient statistics, and switches the current strategy to a new strategy with a higher metric. In our evaluation with GPT-3 1.3B, BERT-Large, and Llama-3.2-1B, CONA reaches the target validation perplexity 1.4-9.6x faster than state-of-the-art methods. Moreover, CONA closely tracks the perplexity achieved by the sequence that selects the best strategy at each iteration, within 2.6%.",
+            "arxiv_id": "2609.07236",
+            "PRIMARY_TOPIC_LABEL": "Large-Scale Training Systems and Efficiency",
+            "MATCHED_TOPIC_LABELS": [
+                "Large-Scale Training Systems and Efficiency"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [
+                "Daily Hot Papers"
+            ],
+            "HOTSPOT_PAPER_PRIMARY_KIND": "daily_hot",
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "Daily Hot Papers",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "heuristic"
+        },
+        "2609.07816": {
+            "ARXIVID": "2609.07816",
+            "COMMENT": "Uncertainty-aware delta-rule attention tracks predictive confidence through recurrences compatible with associative scans.",
+            "RELEVANCE": 10,
+            "NOVELTY": 8,
+            "PRIMARY_TOPIC_ID": "architecture_training",
+            "MATCHED_TOPIC_IDS": [
+                "architecture_training",
+                "efficiency_scaling"
+            ],
+            "TOPIC_MATCH_COMMENT": "The memory update is a foundational linear-attention mechanism, with efficient parallel scans and controlled 750M/1.3B pretraining evidence.",
+            "HOTSPOT_PAPER_TAGS": [
+                "daily_hot"
+            ],
+            "HOTSPOT_PAPER_COMMENT": "Broadly important today: Uncertainty-aware delta-rule attention tracks predictive confidence through recurrences compatible with associative scans.",
+            "SCORE": 18,
+            "authors": [
+                "Ngoc Bui",
+                "Tinglin Huang",
+                "Rex Ying"
+            ],
+            "title": "Kalman Delta Networks: Uncertainty-aware Associative Memory",
+            "abstract": "Linear attention is increasingly used in frontier language models for efficient long-context inference and constant-memory decoding. Its fixed-size recurrent memory, however, requires an online decision at each token: what to write and how strongly to overwrite existing associations before knowing which information future queries will require. Delta-rule models learn this strength from the current token embedding but do not track confidence in the memory estimate, preventing each write from adapting to accumulated evidence. To represent this uncertainty explicitly, we reformulate recurrent associative memory as a linear--Gaussian state-space model, for which the Kalman filter is the optimal recursive estimator, and introduce a new family of models, Kalman Delta Networks (KDNs). Within KDNs, the transition propagates both the memory state and its uncertainty, allowing the Kalman gain to weight each residual write by accumulated evidence and observation reliability. Under this formulation, Delta-style updates emerge as a special case that substitutes a token-wise isotropic surrogate for predictive covariance and omits covariance tracking. Exact tracking, however, entails a dense, state-dependent Riccati recursion that is poorly suited to GPU-parallel linear-attention scans. To address this issue, we introduce two scan-compatible KDN approximations. Diagonal KDN projects each one-step posterior onto the diagonal Gaussian family through online mean-field variational inference, whereas Isotropic KDN uses an isotropic approximation with a single uncertainty scalar per head. Their uncertainty recurrences are Mobius maps, enabling associative scans with logarithmic parallel depth. Across controlled pretraining at 750M and 1.3B parameters, KDN variants consistently improve perplexity and mean downstream accuracy over state-of-the-art linear-attention models.",
+            "arxiv_id": "2609.07816",
+            "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+            "MATCHED_TOPIC_LABELS": [
+                "Architecture and Training Dynamics",
+                "Efficiency, Compression, and Large-Scale Training"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [
+                "Daily Hot Papers"
+            ],
+            "HOTSPOT_PAPER_PRIMARY_KIND": "daily_hot",
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "Daily Hot Papers",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "heuristic"
+        },
+        "2609.07597": {
+            "ARXIVID": "2609.07597",
+            "COMMENT": "Adds curvature to Muon's spectral-norm-constrained updates, reporting up to 8.49% less GPT pretraining time at matched validation loss.",
+            "RELEVANCE": 10,
+            "NOVELTY": 8,
+            "PRIMARY_TOPIC_ID": "training_systems",
+            "MATCHED_TOPIC_IDS": [
+                "training_systems",
+                "architecture_training"
+            ],
+            "TOPIC_MATCH_COMMENT": "Primarily a pretraining optimizer with a practical constrained solver, supported by analysis of curvature-dependent update directions and magnitudes.",
+            "HOTSPOT_PAPER_TAGS": [
+                "daily_hot"
+            ],
+            "HOTSPOT_PAPER_COMMENT": "Broadly important today: Adds curvature to Muon's spectral-norm-constrained updates, reporting up to 8.49% less GPT pretraining time at matched validation loss.",
+            "SCORE": 18,
+            "authors": [
+                "Qiaozhe Zhang",
+                "Jun Sun",
+                "Yingzhuang Liu"
+            ],
+            "title": "Beyond the Matrix Sign: Quadratic Spectral Descent",
+            "abstract": "Muon can be interpreted as optimizing a linear local objective over a spectral-norm ball. This gives a matrix-sign update that preserves the singular directions of the gradient and assigns the same magnitude to all active singular modes. We ask whether these two properties remain optimal when local curvature is taken into account. To answer this question, we keep Muon's spectral-norm constraint unchanged and replace the linear local model with a quadratic one. We call the resulting method \\emph{Quadratic Spectral Descent} (QSD). We show that curvature can change both the singular values and the singular directions of the optimal update. To make QSD practical, we approximate curvature with Kronecker-factored statistics and solve the constrained quadratic with a small number of Frank--Wolfe steps, each of which has a closed-form matrix-sign subproblem. We further provide an optimality certificate, a comparison with Muon under the same quadratic surrogate, and an $O(1/K)$ convergence rate for the inner solver. Experiments on GPT pre-training show that QSD consistently improves validation loss over Muon and recent Muon variants, and reduces wall-clock training time by up to $8.49\\%$ at matched validation loss.",
+            "arxiv_id": "2609.07597",
+            "PRIMARY_TOPIC_LABEL": "Large-Scale Training Systems and Efficiency",
+            "MATCHED_TOPIC_LABELS": [
+                "Large-Scale Training Systems and Efficiency",
+                "Architecture and Training Dynamics"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [
+                "Daily Hot Papers"
+            ],
+            "HOTSPOT_PAPER_PRIMARY_KIND": "daily_hot",
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "Daily Hot Papers",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "heuristic"
+        },
+        "2609.07086": {
+            "ARXIVID": "2609.07086",
+            "COMMENT": "Initializes attention weights to improve Jacobian conditioning, targeting more stable optimization and faster convergence.",
+            "RELEVANCE": 10,
+            "NOVELTY": 7,
+            "PRIMARY_TOPIC_ID": "architecture_training",
+            "MATCHED_TOPIC_IDS": [
+                "architecture_training"
+            ],
+            "TOPIC_MATCH_COMMENT": "Attention initialization directly addresses Transformer optimization and training stability, supported by spectral analysis and convergence experiments.",
+            "HOTSPOT_PAPER_TAGS": [
+                "daily_hot"
+            ],
+            "HOTSPOT_PAPER_COMMENT": "Broadly important today: Initializes attention weights to improve Jacobian conditioning, targeting more stable optimization and faster convergence.",
+            "SCORE": 17,
+            "authors": [
+                "Hemanth Saratchandran",
+                "Simon Lucey"
+            ],
+            "title": "Conditioned Initialization for Attention",
+            "abstract": "Transformers are a dominant architecture in modern machine learning, powering applications across vision, language, and beyond. At the core of their success lies the attention layer, where the query, key, and value matrices determine how token dependencies are captured. While considerable work has focused on scaling and optimizing Transformers, comparatively little attention has been paid to how the weights of the queries, keys and values are initialized. Common practice relies on random initialization or alternatives such as mimetic initialization, which imitates weight patterns from converged models, and weight selection, which transfers weights from a teacher model. In this paper, we argue that initialization can introduce an optimization bias that fundamentally shapes training dynamics. We propose conditioned initialization, a principled scheme that initializes attention weights to improve the spectral properties of the attention layer. Theoretically, we show that conditioned initialization can potentially reduce the condition number of the attention Jacobian, leading to more stable optimization. Empirically, it accelerates convergence and improves generalization across diverse applications, highlighting conditioning as a critical yet underexplored area for advancing Transformer performance. Importantly, conditioned initialization is simple to apply and integrates seamlessly into a wide range of Transformer architectures.",
+            "arxiv_id": "2609.07086",
+            "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+            "MATCHED_TOPIC_LABELS": [
+                "Architecture and Training Dynamics"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [
+                "Daily Hot Papers"
+            ],
+            "HOTSPOT_PAPER_PRIMARY_KIND": "daily_hot",
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "Daily Hot Papers",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "heuristic"
+        },
+        "2605.11007": {
+            "ARXIVID": "2605.11007",
+            "COMMENT": "Derives attention, normalization, and residual updates from polar state estimation, yielding a Transformer variant that retains geometric corrections.",
+            "RELEVANCE": 9,
+            "NOVELTY": 8,
+            "PRIMARY_TOPIC_ID": "architecture_training",
+            "MATCHED_TOPIC_IDS": [
+                "architecture_training"
+            ],
+            "TOPIC_MATCH_COMMENT": "The central contribution directly explains and modifies the computational mechanisms of the Transformer block.",
+            "HOTSPOT_PAPER_TAGS": [
+                "daily_hot"
+            ],
+            "HOTSPOT_PAPER_COMMENT": "Broadly important today: Derives attention, normalization, and residual updates from polar state estimation, yielding a Transformer variant that retains geometric corrections.",
+            "SCORE": 17,
+            "authors": [
+                "Peter Racioppo"
+            ],
+            "title": "The Transformer as a Polar State Estimator",
+            "abstract": "We show that the core components of the Transformer---attention, residual connections, and normalization---arise naturally from a single geometric state estimation problem. Modeling the latent state in polar coordinates naturally separates radial and hyperspherical dynamics, yielding a precision-weighted filtering procedure in which normalization enforces the hyperspherical constraint, attention aggregates directional evidence, and the residual connection implements an incremental state update. The standard Transformer block with rotary positional encodings is recovered by discarding the geometric correction terms of the resulting state estimator, showing that its architecture follows from the underlying estimation problem rather than from independent design choices. The proposed \\textit{Polar Transformer} retains these geometric corrections.",
+            "arxiv_id": "2605.11007",
+            "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+            "MATCHED_TOPIC_LABELS": [
+                "Architecture and Training Dynamics"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [
+                "Daily Hot Papers"
+            ],
+            "HOTSPOT_PAPER_PRIMARY_KIND": "daily_hot",
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "Daily Hot Papers",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "heuristic"
+        }
+    },
+    "sections": [
+        {
+            "kind": "daily_hot",
+            "label": "Daily Hot Papers",
+            "description": "Papers that feel broadly important to the day and belong in the hotspot paper feed.",
+            "paper_ids": [
+                "2609.01343",
+                "2609.07236",
+                "2609.07816",
+                "2609.07597",
+                "2609.07086",
+                "2605.11007"
+            ]
+        }
+    ]
+}

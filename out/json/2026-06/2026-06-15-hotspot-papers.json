@@ -2,8 +2,8 @@
     "schema_version": 1,
     "meta": {
         "date": "2026-06-15",
-        "total_candidates": 0,
-        "total_spotlight_papers": 0,
+        "total_candidates": 133,
+        "total_spotlight_papers": 4,
         "thresholds": {
             "daily_hot_score_cutoff": 15,
             "daily_hot_relevance_cutoff": 7,
@@ -17,11 +17,183 @@
     },
     "diagnostics": {
         "candidate_count_by_kind": {
-            "new_frontier": 0,
-            "daily_hot": 0
+            "new_frontier": 1,
+            "daily_hot": 3
         },
-        "selected_count_by_kind": {}
+        "selected_count_by_kind": {
+            "new_frontier": 1,
+            "daily_hot": 3
+        }
     },
-    "papers": {},
-    "sections": []
+    "papers": {
+        "2606.17107": {
+            "ARXIVID": "2606.17107",
+            "COMMENT": "Shows prefill KV cache is editable and position-portable, enabling RoPE-repositioned splicing of precompiled skill caches at O(L) instead of O(L^2) TTFT.",
+            "RELEVANCE": 8,
+            "NOVELTY": 8,
+            "PRIMARY_TOPIC_ID": "efficiency_scaling",
+            "MATCHED_TOPIC_IDS": [
+                "efficiency_scaling"
+            ],
+            "TOPIC_MATCH_COMMENT": "Core contribution is a new mechanism for KV-cache reuse and memory/compute efficiency, validated across quantization and MoE caches.",
+            "HOTSPOT_PAPER_TAGS": [
+                "new_frontier"
+            ],
+            "HOTSPOT_PAPER_COMMENT": "Reframes the KV cache as an editable, composable memo store, a direction that could change how context is assembled.",
+            "SCORE": 16,
+            "authors": [
+                "Bojie Li"
+            ],
+            "title": "Models Take Notes at Prefill: KV Cache Can Be Editable and Composable",
+            "abstract": "Prefix caching reuses prefill only across an exactly shared prefix, so one changed field invalidates the entire downstream cache. Yet overwriting the field's own key/value vectors and reusing the rest leaves the model acting on the old value. The reason, established causally across four model families: at prefill the model has already written the field-conditioned conclusion onto downstream notes; the field's own key/value drives under 1% of the decision. Read as a notebook of memoized conclusions, two capabilities follow. (1) It is editable. A salient erratum amends the notes; and with chain-of-thought, editing the field alone recovers the decision (1.00 at 8B, ~1% compute), while without CoT it is ignored. (2) It is composable. The notes are position-portable, so a precompiled skill can be RoPE-repositioned and spliced into any context, indistinguishable from full recompute (logit cosine 0.90-0.999, twelve models) at O(L) rather than O(L^2) time-to-first-token. A unified edit+compose agent stays decision-identical to recompute at up to 14.9x lower latency. The approach applies to any per-token attention KV cache, validated across scale, quantization, Mixture-of-Experts, and multimodal caches, and extends to several attention variants through small adapters. Because the erratum is append-only, it composes with production prefix caching: in an online vLLM benchmark it keeps the prefix cache-aligned (98.5% hit-rate), cutting p90 time-to-first-token by 53-398x.",
+            "arxiv_id": "2606.17107",
+            "PRIMARY_TOPIC_LABEL": "Efficiency, Compression, and Large-Scale Training",
+            "MATCHED_TOPIC_LABELS": [
+                "Efficiency, Compression, and Large-Scale Training"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [
+                "New Frontier Papers"
+            ],
+            "HOTSPOT_PAPER_PRIMARY_KIND": "new_frontier",
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "New Frontier Papers",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "llm_exact"
+        },
+        "2606.14187": {
+            "ARXIVID": "2606.14187",
+            "COMMENT": "Coordinate whitening conditions momentum before spectral orthogonalization to improve matrix-optimizer convergence.",
+            "RELEVANCE": 10,
+            "NOVELTY": 8,
+            "PRIMARY_TOPIC_ID": "training_systems",
+            "MATCHED_TOPIC_IDS": [
+                "training_systems",
+                "architecture_training"
+            ],
+            "TOPIC_MATCH_COMMENT": "The core contribution is preconditioning for large-scale training, supported by analysis of optimizer conditioning and Transformer experiments.",
+            "HOTSPOT_PAPER_TAGS": [
+                "daily_hot"
+            ],
+            "HOTSPOT_PAPER_COMMENT": "Broadly important today: Coordinate whitening conditions momentum before spectral orthogonalization to improve matrix-optimizer convergence.",
+            "SCORE": 18,
+            "authors": [
+                "Kaiwen Chen",
+                "Shuhai Zhang",
+                "Zimo Liu",
+                "Linxiao Li",
+                "Ying Sun",
+                "Yuchen Li",
+                "Yifan Zhang",
+                "Bo Han",
+                "Mingkui Tan",
+                "Qiuwu Chen"
+            ],
+            "title": "Zeta: Dual Whitening for Matrix Optimization via Coordinate-Adaptive Preconditioning",
+            "abstract": "Large-scale neural network training increasingly relies on matrix-aware optimizers that exploit the structure of weight parameters beyond element-wise adaptation. However, existing matrix-aware methods such as Muon have an underappreciated vulnerability: their core operation, Newton-Schulz iteration, depends critically on input conditioning, yet the raw momentum matrices exhibit severe coordinate-wise scale heterogeneity. In this paper, we first verify this scale heterogeneity through a chi-square uniformity test, showing that intra-matrix scale imbalance is prevalent across Transformer layers and that coordinate whitening effectively corrects it. Motivated by this finding, we propose Zeta, a dual whitening optimizer that applies coordinate whitening and spectral whitening in a strictly ordered pipeline. The ordering is not a tunable choice but follows from a mathematical dependency: coordinate whitening establishes the statistical isotropy that spectral whitening requires to function reliably. We further prove that this dual pipeline strictly reduces orthogonalization error relative to pure spectral methods by improving the condition number of the input. Empirically, Zeta matches or surpasses strong baselines across language modeling (0.6B to 8B parameters), mixture-of-experts architectures, and vision tasks, demonstrating that resolving scale imbalance before orthogonalization leads to faster convergence and better generalization. Code is available at https://github.com/AIGCodeOS/aigcode_zeta_optimizer.",
+            "arxiv_id": "2606.14187",
+            "PRIMARY_TOPIC_LABEL": "Large-Scale Training Systems and Efficiency",
+            "MATCHED_TOPIC_LABELS": [
+                "Large-Scale Training Systems and Efficiency",
+                "Architecture and Training Dynamics"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [
+                "Daily Hot Papers"
+            ],
+            "HOTSPOT_PAPER_PRIMARY_KIND": "daily_hot",
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "Daily Hot Papers",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "heuristic"
+        },
+        "2606.15268": {
+            "ARXIVID": "2606.15268",
+            "COMMENT": "Shows the optimal Schatten-p geometry is regime dependent, with a noise-robust acceleration result explaining why Muon-like methods skip warmup and favor large batches, plus a batch-size scaling rule.",
+            "RELEVANCE": 9,
+            "NOVELTY": 8,
+            "PRIMARY_TOPIC_ID": "training_systems",
+            "MATCHED_TOPIC_IDS": [
+                "training_systems",
+                "architecture_training"
+            ],
+            "TOPIC_MATCH_COMMENT": "Directly informs optimizer choice and batch-size configuration for Chinchilla-scale pretraining runs.",
+            "HOTSPOT_PAPER_TAGS": [
+                "daily_hot"
+            ],
+            "HOTSPOT_PAPER_COMMENT": "Broadly important today: Shows the optimal Schatten-p geometry is regime dependent, with a noise-robust acceleration result explaining why Muon-like methods skip warmup and favor large batches, plus a batch-size scaling rule.",
+            "SCORE": 17,
+            "authors": [
+                "Thomas Pethick"
+            ],
+            "title": "When to use what Schatten-$p$ norm in deep learning?",
+            "abstract": "Schatten-$\\infty$ based optimizers such as Muon have shown promising empirical performance, but there remains seemingly conflicting observations regarding whether they are beneficial. We resolve this conflict by showing that the conclusion is regime dependent. Even when the objective is smooth in the Schatten-$\\infty$ geometry, smaller Schatten-$p$ geometries can be optimal, specifically in the low-dimensional regime, which we show includes Chinchilla scaling. This conclusion follows from a new noise-robust acceleration result for the SODA framework for $p>2$. The same analysis explains why Muon-like methods do not require warmup, why they naturally favor large batches, and yields a batch size scaling rule for arbitrary $p$.",
+            "arxiv_id": "2606.15268",
+            "PRIMARY_TOPIC_LABEL": "Large-Scale Training Systems and Efficiency",
+            "MATCHED_TOPIC_LABELS": [
+                "Large-Scale Training Systems and Efficiency",
+                "Architecture and Training Dynamics"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [
+                "Daily Hot Papers"
+            ],
+            "HOTSPOT_PAPER_PRIMARY_KIND": "daily_hot",
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "Daily Hot Papers",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "heuristic"
+        },
+        "2606.14560": {
+            "ARXIVID": "2606.14560",
+            "COMMENT": "Proves Muon attains optimal sample complexity under heavy-tailed gradient noise in nuclear-norm stationarity without the dimension penalty Euclidean methods pay, with a matching lower bound.",
+            "RELEVANCE": 9,
+            "NOVELTY": 8,
+            "PRIMARY_TOPIC_ID": "training_systems",
+            "MATCHED_TOPIC_IDS": [
+                "training_systems",
+                "architecture_training"
+            ],
+            "TOPIC_MATCH_COMMENT": "Theory for a matrix-geometry optimizer actually used in large transformer pretraining.",
+            "HOTSPOT_PAPER_TAGS": [
+                "daily_hot"
+            ],
+            "HOTSPOT_PAPER_COMMENT": "Broadly important today: Proves Muon attains optimal sample complexity under heavy-tailed gradient noise in nuclear-norm stationarity without the dimension penalty Euclidean methods pay, with a matching lower bound.",
+            "SCORE": 17,
+            "authors": [
+                "Florian H\u00fcbler",
+                "Thomas Pethick",
+                "Suvrit Sra"
+            ],
+            "title": "Free Heavy-Tailed Lunch for Muon: A Theoretical Justification of Empirical Success",
+            "abstract": "Non-Euclidean optimisation methods with matrix-valued updates, such as Muon and Scion, have recently shown strong empirical performance for training Transformer models, yet their theoretical advantages over Euclidean methods remain poorly understood. We address this gap in the heavy-tailed non-convex regime, where stochastic gradients have bounded $p$-th central moments, $p \\in (1,2]$. We show that certain non-Euclidean methods achieve optimal sample complexity under stronger stationarity measures, while Euclidean methods incur additional dimension-dependent costs. As a consequence, for $m \\times n$ matrices, Muon finds an $\\varepsilon$-stationary point in nuclear norm within $\\mathcal{O}\\left(\\min\\{m, n\\} \\frac{\u0394_1 L}{\\varepsilon^2} \\left(\\frac \u03c3\\varepsilon \\right)^{\\frac p {p-1}}\\right)$ samples, absorbing heavy-tailed noise without extra dimension dependence, unlike Euclidean methods. We further prove this sample complexity, including its dimension dependence, is optimal for all first-order methods under nuclear-norm stationarity. Experiments on large language models support our theory. Surprisingly, our results suggest that other Schatten geometries beyond the spectral geometry of Muon can perform competitively in certain settings.",
+            "arxiv_id": "2606.14560",
+            "PRIMARY_TOPIC_LABEL": "Large-Scale Training Systems and Efficiency",
+            "MATCHED_TOPIC_LABELS": [
+                "Large-Scale Training Systems and Efficiency",
+                "Architecture and Training Dynamics"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [
+                "Daily Hot Papers"
+            ],
+            "HOTSPOT_PAPER_PRIMARY_KIND": "daily_hot",
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "Daily Hot Papers",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "heuristic"
+        }
+    },
+    "sections": [
+        {
+            "kind": "new_frontier",
+            "label": "New Frontier Papers",
+            "description": "Papers that appear to open a genuinely new direction, paradigm, or field.",
+            "paper_ids": [
+                "2606.17107"
+            ]
+        },
+        {
+            "kind": "daily_hot",
+            "label": "Daily Hot Papers",
+            "description": "Papers that feel broadly important to the day and belong in the hotspot paper feed.",
+            "paper_ids": [
+                "2606.14187",
+                "2606.15268",
+                "2606.14560"
+            ]
+        }
+    ]
 }

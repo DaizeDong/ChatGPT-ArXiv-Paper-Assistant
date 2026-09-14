@@ -1,1 +1,309 @@
-{}
+{
+    "2606.12487": {
+        "ARXIVID": "2606.12487",
+        "COMMENT": "Shows massive activations appear and vanish phase-wise across depth, and assigns 8-bit activations only to layers flagged by residual-stream Jump Ratio and historical-feature SNR.",
+        "RELEVANCE": 8,
+        "NOVELTY": 6,
+        "PRIMARY_TOPIC_ID": "efficiency_scaling",
+        "MATCHED_TOPIC_IDS": [
+            "architecture_training",
+            "efficiency_scaling"
+        ],
+        "TOPIC_MATCH_COMMENT": "Low-bit activation quantization with a new cross-layer diagnostic, squarely in the compression topic.",
+        "HOTSPOT_PAPER_TAGS": [],
+        "HOTSPOT_PAPER_COMMENT": "",
+        "SCORE": 14,
+        "authors": [
+            "Zimo Zhao",
+            "Maolin Wang",
+            "Bowen Yu",
+            "Bowen Liu",
+            "Xiao Han",
+            "Xiangyu Zhao"
+        ],
+        "title": "DynamicPTQ: Mitigating Activation Quantization Collapse via Residual-Stream Dynamics",
+        "abstract": "Post-training quantization (PTQ) is essential for efficient large language model inference, but reliably quantizing activations remains challenging when weights, activations, and KV caches are all quantized to 4-bit precision. A key difficulty lies in massive activations, whose extreme values dominate the activation range and amplify quantization errors. State-of-the-art methods mainly mitigate massive activations through transformation-based smoothing, such as orthogonal rotations and affine scaling, but overlook the cross-layer dynamics of the residual stream. In this paper, we show that massive activations emerge and disappear in a phase-wise pattern across network depth, triggering large residual changes. These changes cause newly injected layer-wise updates to dominate the 4-bit quantization scale and weaken historical residual information. To characterize this behavior, we introduce Jump Ratio and Historical Feature SNR. This suggests that static transformation-based smoothing cannot fully resolve dynamic quantization instability caused by cross-layer residual changes. Based on this analysis, we propose DynamicPTQ, a Dynamic Post-Training Quantization policy for phase-aware mixed-precision activation quantization. DynamicPTQ identifies quantization-sensitive layers from residual-stream dynamics and assigns 8-bit activation precision only to these layers, while keeping weights, KV caches, and other activations in 4-bit precision. It can be directly integrated with strong PTQ baselines such as QuaRot, SpinQuant, and FlatQuant. Experiments on LLaMA-2 and LLaMA-3 show that DynamicPTQ consistently improves perplexity and zero-shot QA performance under W4A4KV4 quantization, while achieving 1.05 to 1.07 times throughput improvement with modest memory overhead. These results demonstrate a practical path toward robust low-bit LLM inference.",
+        "arxiv_id": "2606.12487",
+        "PRIMARY_TOPIC_LABEL": "Efficiency, Compression, and Large-Scale Training",
+        "MATCHED_TOPIC_LABELS": [
+            "Architecture and Training Dynamics",
+            "Efficiency, Compression, and Large-Scale Training"
+        ],
+        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+        "HOTSPOT_PAPER_LABELS": [],
+        "HOTSPOT_PAPER_PRIMARY_KIND": null,
+        "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+    },
+    "2606.12364": {
+        "ARXIVID": "2606.12364",
+        "COMMENT": "Unified formulation of xLSTM, Mamba-2, and Gated DeltaNet, attributing xLSTM's pretraining advantage to gating that permits more flexible memory correction and state tracking, corroborated on controlled length-generalization tasks.",
+        "RELEVANCE": 8,
+        "NOVELTY": 6,
+        "PRIMARY_TOPIC_ID": "architecture_training",
+        "MATCHED_TOPIC_IDS": [
+            "architecture_training",
+            "efficiency_scaling"
+        ],
+        "TOPIC_MATCH_COMMENT": "Mechanistic comparison of recurrent sequence-modelling designs under pretraining, not an application of one of them to a new task.",
+        "HOTSPOT_PAPER_TAGS": [],
+        "HOTSPOT_PAPER_COMMENT": "",
+        "SCORE": 14,
+        "authors": [
+            "Anamaria-Roberta Hartl",
+            "Levente Z\u00f3lyomi",
+            "David Stap",
+            "Pieter-Jan Hoedt",
+            "Niklas Schmidinger",
+            "Lukas Hauzenberger",
+            "Sebastian B\u00f6ck",
+            "G\u00fcnter Klambauer",
+            "Sepp Hochreiter"
+        ],
+        "title": "On Subquadratic Architectures: From Applications to Principles",
+        "abstract": "Transformers dominate modern sequence modeling, but their quadratic attention incurs substantial computational cost. Subquadratic architectures offer a scalable alternative. However, it remains unclear which designs yield the most effective sequence models. We compare three leading approaches: xLSTM, Mamba-2, and Gated DeltaNet. We evaluate these models on tasks with complex dependencies: (1) code-model pre-training, (2) distillation of code models from large language models, and (3) pre-training of time-series foundation models. Across these settings, xLSTM delivers the strongest overall performance. To explain xLSTM's advantage, we present a unified formulation and analyze the underlying architectural mechanisms, focusing on state tracking and memory dynamics. Our results show that xLSTM enables more flexible and stable memory correction via its gating scheme. We corroborate these findings on controlled synthetic length-generalization tasks. Overall, our findings indicate that xLSTM's gains on complex tasks stem from robust state tracking and accumulation.",
+        "arxiv_id": "2606.12364",
+        "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+        "MATCHED_TOPIC_LABELS": [
+            "Architecture and Training Dynamics",
+            "Efficiency, Compression, and Large-Scale Training"
+        ],
+        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+        "HOTSPOT_PAPER_LABELS": [],
+        "HOTSPOT_PAPER_PRIMARY_KIND": null,
+        "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+    },
+    "2606.11585": {
+        "ARXIVID": "2606.11585",
+        "COMMENT": "Replaces the attention value update with a Kuramoto synchronization step on a torus of phase oscillators, with attention weights acting as the adaptive coupling graph; parameter-matched pretraining against RoPE/SwiGLU baselines.",
+        "RELEVANCE": 7,
+        "NOVELTY": 7,
+        "PRIMARY_TOPIC_ID": "architecture_training",
+        "MATCHED_TOPIC_IDS": [
+            "architecture_training"
+        ],
+        "TOPIC_MATCH_COMMENT": "A genuinely new attention variant whose computation is re-derived as oscillator dynamics, with ablations and phase diagnostics on the mechanism itself.",
+        "HOTSPOT_PAPER_TAGS": [],
+        "HOTSPOT_PAPER_COMMENT": "",
+        "SCORE": 14,
+        "authors": [
+            "Joshua Nunley"
+        ],
+        "title": "Kuramoto Attention: Synchronizing Self-Attention on the Torus",
+        "abstract": "Transformer models are increasingly used as computational models of cognition and neural representation, so the mechanism implemented by self-attention is of interest beyond engineering performance. A complementary tradition in cognitive science models coordination, binding, and memory through dynamical interactions such as oscillator synchrony; we bring this mechanism into self-attention by introducing the Kuramoto Attention layer, whose value update is a synchronization step. Each token carries a bank of phase oscillators, so its hidden state lives on a high-dimensional torus. The attention weights form an adaptive coupling graph, and using the raw phase states as values makes the value update exactly the Kuramoto coupling direction for fixed attention weights. The softmax selects which oscillators couple, while the value path moves each token toward the attention-weighted circular mean of the tokens it selects. We train Kuramoto Attention on enwiki8 and CodeParrot against parameter-matched RoPE and SwiGLU transformers. At 5M parameters on CodeParrot, it improves on the transformer by both median and mean, with mean gaps of 0.012 validation and 0.010 test bits per byte. At 5M on enwiki8, all six runs have lower validation/test medians than the transformer and all-seed means within 0.01 BPC; five of six also form a tight lower-mean cluster. At 1M, it trails by about 0.02 BPC on enwiki8 and by 0.013-0.015 bits per byte on CodeParrot. Ablations and phase diagnostics show how the layer's synchronization and geometry-motivated components shape model performance. The result is a self-attention mechanism whose learned computation can be read directly as adaptive synchronization on phase states.",
+        "arxiv_id": "2606.11585",
+        "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+        "MATCHED_TOPIC_LABELS": [
+            "Architecture and Training Dynamics"
+        ],
+        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+        "HOTSPOT_PAPER_LABELS": [],
+        "HOTSPOT_PAPER_PRIMARY_KIND": null,
+        "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+    },
+    "2606.12058": {
+        "ARXIVID": "2606.12058",
+        "COMMENT": "Closed-form posterior over the attention matrix reduced to a low-dimensional order parameter space, yielding a first-order phase transition in data for softmax attention versus a second-order transition then crossover for linear attention.",
+        "RELEVANCE": 7,
+        "NOVELTY": 7,
+        "PRIMARY_TOPIC_ID": "architecture_training",
+        "MATCHED_TOPIC_IDS": [
+            "architecture_training"
+        ],
+        "TOPIC_MATCH_COMMENT": "First-principles training-dynamics account of why an attention subcircuit emerges abruptly, verified against Adam training, not just a post-hoc circuit description.",
+        "HOTSPOT_PAPER_TAGS": [],
+        "HOTSPOT_PAPER_COMMENT": "",
+        "SCORE": 14,
+        "authors": [
+            "Itay Lavie",
+            "Kirsten Fischer",
+            "Andrey Lekov",
+            "Frederic Van Maele",
+            "Zohar Ringel",
+            "Moritz Helias"
+        ],
+        "title": "Phase Transitions in Attention: A Bayesian Theory of Copy Head Emergence",
+        "abstract": "Attention is the key mechanism underlying in-context learning in transformers, and attention patterns have been observed empirically to emerge abruptly during training. We present a Bayesian theory of feature learning in attention; we then focus on how the copy subcircuit in the first layer of an induction head is learned by analyzing a single-layer softmax attention network trained on a copy task. We derive a closed-form posterior over the attention matrix and reduce it to a low-dimensional order parameter space. This reduction reveals a phase transition in the amount of training data, which we verify using both Bayesian sampling and standard training with Adam. We contrast our results with linear attention and find that softmax attention exhibits a \\emph{first-order phase transition} while in linear attention an initial \\emph{second-order phase transition} is followed by a smooth, continuous evolution toward the structured attention pattern (\\emph{crossover}). Our work provides a first-principles theoretical account of the abrupt emergence of the copy subcircuit, reminiscent of the one observed in training large language models.",
+        "arxiv_id": "2606.12058",
+        "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+        "MATCHED_TOPIC_LABELS": [
+            "Architecture and Training Dynamics"
+        ],
+        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+        "HOTSPOT_PAPER_LABELS": [],
+        "HOTSPOT_PAPER_PRIMARY_KIND": null,
+        "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+    },
+    "2606.12146": {
+        "ARXIVID": "2606.12146",
+        "COMMENT": "Decomposition-free generalization of RoPE derived from a translation-invariant Hilbert-space formulation, with a spectral isotropy condition that forces positions and frequencies to be coupled n-dimensional vectors instead of per-axis rotations.",
+        "RELEVANCE": 7,
+        "NOVELTY": 6,
+        "PRIMARY_TOPIC_ID": "architecture_training",
+        "MATCHED_TOPIC_IDS": [
+            "architecture_training"
+        ],
+        "TOPIC_MATCH_COMMENT": "Position embedding is a core attention mechanism, and the multi-scale regular-simplex wave-vector design follows from the derived isotropy condition rather than being tuned empirically.",
+        "HOTSPOT_PAPER_TAGS": [],
+        "HOTSPOT_PAPER_COMMENT": "",
+        "SCORE": 13,
+        "authors": [
+            "Boyang Li",
+            "Yulin Wu",
+            "Sizhe Xu",
+            "Nuoxian Huang",
+            "Zhonghang Yuan",
+            "Shangyi Guo",
+            "Shu Yang",
+            "Takahiro Yabe"
+        ],
+        "title": "nD-RoPE: A Generalized RoPE for n-Dimensional Position Embedding",
+        "abstract": "Rotary Position Embedding (RoPE) is widely adopted in Transformer models, yet its extension to high-dimensional domains lacks a unified theoretical formulation. Most existing approaches either apply rotations independently along each axis or empirically mix frequencies, which limits cross-dimensional interactions and yields direction-dependent representations. To address these limitations, we propose nD-RoPE, a decomposition-free generalization of RoPE to arbitrary dimensions. From a translation-invariant formulation in continuous Hilbert space, we derive a spectral condition for isotropy that requires treating positions and frequencies as coupled \\(n\\)-dimensional vectors. We instantiate this formulation with a multi-scale regular-simplex wave-vector design, which provides non-degenerate spatial coverage and a symmetric, directionally balanced second-order response. Experiments across images, videos, and point clouds demonstrate consistent performance gains and improved generalization in high-dimensional settings.",
+        "arxiv_id": "2606.12146",
+        "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+        "MATCHED_TOPIC_LABELS": [
+            "Architecture and Training Dynamics"
+        ],
+        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+        "HOTSPOT_PAPER_LABELS": [],
+        "HOTSPOT_PAPER_PRIMARY_KIND": null,
+        "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+    },
+    "2606.12478": {
+        "ARXIVID": "2606.12478",
+        "COMMENT": "Augments the data-dependent local fields of attention with learnable pairwise Ising couplings, so inter-position correlations are parameterized rather than left to softmax competition; a four-way ablation isolates the couplings as the source of the gain.",
+        "RELEVANCE": 7,
+        "NOVELTY": 6,
+        "PRIMARY_TOPIC_ID": "architecture_training",
+        "MATCHED_TOPIC_IDS": [
+            "architecture_training"
+        ],
+        "TOPIC_MATCH_COMMENT": "An energy-based generalization of the attention operation itself, with the advantage growing in sequence length inside a standard Transformer.",
+        "HOTSPOT_PAPER_TAGS": [],
+        "HOTSPOT_PAPER_COMMENT": "",
+        "SCORE": 13,
+        "authors": [
+            "Gilhan Kim",
+            "Daniel K. Park"
+        ],
+        "title": "Boltzmann Attention: Learnable Ising Couplings for Cooperative Attention",
+        "abstract": "Attention mechanisms are central to modern sequence models, yet standard attention computes relevance primarily through individual query--key similarities. Although softmax normalization introduces competition among positions, a standard attention layer does not explicitly parameterize learnable interactions between attention decisions. This limits its ability to directly model cooperative or antagonistic co-attention structure within the attention mechanism itself. We propose Boltzmann attention, an energy-based generalization in which attention patterns are governed by an interacting Ising model. The method augments the usual data-dependent local fields with learnable pairwise couplings, allowing the model to represent inter-position correlations beyond those captured by softmax or sigmoid attention. Experiments on character-level language modeling and synthetic bracket matching show that Boltzmann attention consistently improves over standard softmax attention within a standard Transformer architecture, with the advantage becoming more pronounced as sequence length increases. A four-way ablation confirms that the improvement arises from the learnable pairwise couplings. These results suggest that explicit inter-position interactions provide a principled enhancement for attention-based sequence modeling. Moreover, the Ising formulation opens a natural path toward quantum-computing-based sampling strategies: we demonstrate that diabatic quantum annealing provides a practical training method while maintaining competitive performance with exact Boltzmann computation.",
+        "arxiv_id": "2606.12478",
+        "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+        "MATCHED_TOPIC_LABELS": [
+            "Architecture and Training Dynamics"
+        ],
+        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+        "HOTSPOT_PAPER_LABELS": [],
+        "HOTSPOT_PAPER_PRIMARY_KIND": null,
+        "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+    },
+    "2606.12059": {
+        "ARXIVID": "2606.12059",
+        "COMMENT": "Replaces softmax's exponentiation and global reduction with equilibration of Kuramoto-Lohe gradient flow on the sphere, with a provably unique globally attractive fixed point and a power-law gap to softmax in oscillator dimension.",
+        "RELEVANCE": 6,
+        "NOVELTY": 7,
+        "PRIMARY_TOPIC_ID": "architecture_training",
+        "MATCHED_TOPIC_IDS": [
+            "architecture_training",
+            "efficiency_scaling"
+        ],
+        "TOPIC_MATCH_COMMENT": "Reformulates the attention operation itself so that normalization is physical equilibration, with convergence guarantees that hold independent of the substrate.",
+        "HOTSPOT_PAPER_TAGS": [
+            "new_frontier"
+        ],
+        "HOTSPOT_PAPER_COMMENT": "Gives a mathematically grounded blueprint for running attention on analog oscillator hardware, opening an energy path that does not depend on von Neumann arithmetic.",
+        "SCORE": 13,
+        "authors": [
+            "Fabio Pasqualetti",
+            "Taosha Guo"
+        ],
+        "title": "Attention by Synchronization in Coupled Oscillator Networks",
+        "abstract": "We address transformer attention on energy-constrained physical substrates. Softmax attention requires exponentiation and global reduction, operations with high energy cost on von Neumann hardware and no natural physical analog. We show that Kuramoto synchronization dynamics (which arise in electrical, mechanical, superconducting, and charge-density-wave oscillator arrays, among other physical systems) implement a well-defined attention operation. The resulting mechanism, \\emph{fixed-query oscillator attention}, replaces softmax's arithmetic with the equilibration of a gradient flow on the sphere: queries are learned anchors fixed on the sphere, and free oscillators evolve under Kuramoto--Lohe dynamics until they settle at positions encoding attention weights via cosine similarity. Because the computation is equilibration, no global exponential normalization is needed. The fixed point is provably unique and globally attractive from almost every initial condition, a guarantee that holds across every physical realization. Empirically, at the minimal hardware configuration (oscillator dimension $d_{\\mathrm{osc}} = 2$), oscillator attention matches softmax on keyword spotting, and on subject-verb agreement it trains more reliably while reaching softmax's accuracy. Softmax retains an advantage on causal language modeling, but the gap decays as a power law in $d_{\\mathrm{osc}}$. The main objective of this work is not to replace softmax in software but to provide a mathematically grounded blueprint for accurate attention on physical substrates.",
+        "arxiv_id": "2606.12059",
+        "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+        "MATCHED_TOPIC_LABELS": [
+            "Architecture and Training Dynamics",
+            "Efficiency, Compression, and Large-Scale Training"
+        ],
+        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+        "HOTSPOT_PAPER_LABELS": [
+            "New Frontier Papers"
+        ],
+        "HOTSPOT_PAPER_PRIMARY_KIND": "new_frontier",
+        "HOTSPOT_PAPER_PRIMARY_LABEL": "New Frontier Papers",
+        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "llm_exact"
+    },
+    "2606.12243": {
+        "ARXIVID": "2606.12243",
+        "COMMENT": "Intra-model routing carves a slim verifier out of the full model, turning speculative decoding's binary accept/recompute into a multi-tier decision.",
+        "RELEVANCE": 6,
+        "NOVELTY": 6,
+        "PRIMARY_TOPIC_ID": "efficiency_scaling",
+        "MATCHED_TOPIC_IDS": [
+            "architecture_training",
+            "efficiency_scaling"
+        ],
+        "TOPIC_MATCH_COMMENT": "A dynamic-computation mechanism that materially changes inference cost, with routing internal to one model.",
+        "HOTSPOT_PAPER_TAGS": [],
+        "HOTSPOT_PAPER_COMMENT": "",
+        "SCORE": 12,
+        "authors": [
+            "Yuchen Xian",
+            "Yang He",
+            "Yunqiu Xu",
+            "Yi Yang"
+        ],
+        "title": "VIA-SD: Verification via Intra-Model Routing for Speculative Decoding",
+        "abstract": "Speculative decoding (SD) addresses the high inference costs of LLMs by having lightweight drafters generate candidates for large verifiers to validate in parallel. Existing draft-verify methods use binary decisions: accept or fully recompute. Yet we find that many rejected tokens can be verified correctly by a slim submodel derived from the full verifier via intra-model routing, instead of the full verifier. This motivates our slim-verifier to handle tokens requiring moderate verification resources, reducing expensive large-model calls. We propose Verification via Intra-Model Routing for Speculative Decoding (VIA-SD), a multi-tier framework using a routed slim-verifier. Draft tokens are processed hierarchically: direct acceptance for high-confidence cases, slim-verifier regeneration for medium-confidence cases, and full-model verification for uncertain cases. Across four representative tasks and multiple model families, VIA-SD reduces rejection rates by 0.10-0.22 and delivers 10-20% speedups over strong SD baselines, while achieving 2.5-3x acceleration over non-drafting decoding. Moreover, VIA-SD is compatible with existing SD frameworks without modifying their training procedures. Our results suggest multi-tier SD as a general paradigm for scalable and efficient LLM inference. Project page: https://zju-xyc.github.io/VIA-SD-Project-Page/",
+        "arxiv_id": "2606.12243",
+        "PRIMARY_TOPIC_LABEL": "Efficiency, Compression, and Large-Scale Training",
+        "MATCHED_TOPIC_LABELS": [
+            "Architecture and Training Dynamics",
+            "Efficiency, Compression, and Large-Scale Training"
+        ],
+        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+        "HOTSPOT_PAPER_LABELS": [],
+        "HOTSPOT_PAPER_PRIMARY_KIND": null,
+        "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+    },
+    "2606.11552": {
+        "ARXIVID": "2606.11552",
+        "COMMENT": "Three composable training-time losses for block-diffusion drafters \u2014 positional weighting, first-error focal loss, and a differentiable accepted-length surrogate \u2014 that close the gap between bidirectional drafting and left-to-right verification.",
+        "RELEVANCE": 6,
+        "NOVELTY": 6,
+        "PRIMARY_TOPIC_ID": "efficiency_scaling",
+        "MATCHED_TOPIC_IDS": [
+            "architecture_training",
+            "efficiency_scaling"
+        ],
+        "TOPIC_MATCH_COMMENT": "Changes what a draft model is trained to optimize and raises accepted length 21-76% without extra forward passes, so the mechanism sits in decoding cost rather than a serving tweak.",
+        "HOTSPOT_PAPER_TAGS": [],
+        "HOTSPOT_PAPER_COMMENT": "",
+        "SCORE": 12,
+        "authors": [
+            "Lexington Whalen",
+            "Yuki Ito",
+            "Ryo Sakamoto"
+        ],
+        "title": "Teaching Diffusion to Speculate Left-to-Right",
+        "abstract": "Large language models (LLMs) achieve remarkable performance across a wide range of tasks, but their autoregressive decoding process incurs substantial inference costs due to inherently sequential token generation. Speculative decoding addresses this bottleneck by employing a lightweight draft model to propose multiple future tokens that are subsequently verified in parallel by a larger target model. Recent work has demonstrated that diffusion language models are well suited for this setting, as they can generate entire blocks of draft tokens in parallel and thereby alleviate the sequential constraints of autoregressive drafting. A subtlety of this regime is that block-diffusion drafters generate tokens bidirectionally within a block, whereas verification is performed by an autoregressive target model that evaluates tokens in a strictly left-to-right manner, leaving a gap between the symmetric training-time objective and the asymmetric verification-time reward. In this work, we offer an empirical analysis of three training-time interventions that narrow this gap: token positional weighting, a first-error focal loss that targets the position that breaks the accepted prefix within each block, and a chain loss term that substitutes a differentiable surrogate for the expected accepted length. The three interventions act along orthogonal axes (position, block-conditional first error, joint prefix) and compose additively; they are likewise orthogonal to test-time alignment mechanisms such as multi-draft self-selection, with which they can in principle be combined. Across four target models and six reasoning, code, and dialogue benchmarks, the three interventions raise accepted draft length by 21-76% per benchmark over a position-uniform baseline, without adding additional forward passes and without changing the inference pipeline or the rejection-sampling exactness contract.",
+        "arxiv_id": "2606.11552",
+        "PRIMARY_TOPIC_LABEL": "Efficiency, Compression, and Large-Scale Training",
+        "MATCHED_TOPIC_LABELS": [
+            "Architecture and Training Dynamics",
+            "Efficiency, Compression, and Large-Scale Training"
+        ],
+        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+        "HOTSPOT_PAPER_LABELS": [],
+        "HOTSPOT_PAPER_PRIMARY_KIND": null,
+        "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+    }
+}

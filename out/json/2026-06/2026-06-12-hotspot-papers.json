@@ -2,8 +2,8 @@
     "schema_version": 1,
     "meta": {
         "date": "2026-06-12",
-        "total_candidates": 0,
-        "total_spotlight_papers": 0,
+        "total_candidates": 82,
+        "total_spotlight_papers": 2,
         "thresholds": {
             "daily_hot_score_cutoff": 15,
             "daily_hot_relevance_cutoff": 7,
@@ -18,10 +18,110 @@
     "diagnostics": {
         "candidate_count_by_kind": {
             "new_frontier": 0,
-            "daily_hot": 0
+            "daily_hot": 2
         },
-        "selected_count_by_kind": {}
+        "selected_count_by_kind": {
+            "daily_hot": 2
+        }
     },
-    "papers": {},
-    "sections": []
+    "papers": {
+        "2606.13867": {
+            "ARXIVID": "2606.13867",
+            "COMMENT": "Fractional spectral-power optimizer updates preserve gradient-spectrum information using matrix-multiplication-only bivariate recurrences.",
+            "RELEVANCE": 9,
+            "NOVELTY": 8,
+            "PRIMARY_TOPIC_ID": "training_systems",
+            "MATCHED_TOPIC_IDS": [
+                "training_systems",
+                "architecture_training"
+            ],
+            "TOPIC_MATCH_COMMENT": "The core is a scalable optimizer with a Schatten-norm interpretation and spectral-geometry analysis; empirical emphasis is finetuning.",
+            "HOTSPOT_PAPER_TAGS": [
+                "daily_hot"
+            ],
+            "HOTSPOT_PAPER_COMMENT": "Broadly important today: Fractional spectral-power optimizer updates preserve gradient-spectrum information using matrix-multiplication-only bivariate recurrences.",
+            "SCORE": 17,
+            "authors": [
+                "Yihe Dong",
+                "Will Sawin"
+            ],
+            "title": "Muon$^p$: Muon with Fractional Spectral Powers",
+            "abstract": "Muon is an increasingly widely used optimizer that replaces a gradient $G=USV^\\top$ with its polar factor $UV^\\top$, thereby flattening the singular spectrum. However, full flattening discards singular-value information that may matter for adaptation. We introduce Muon$^p$, a Muon-style optimizer that instead uses fractional spectral-power updates $US^pV^\\top$ for rational $p\\in(0,1)$, interpolating between Muon and gradient descent. To make it practical, we prove that fractional spectral powers cannot be computed by any fixed univariate polynomial iteration, and furthermore derive low-degree odd bivariate recurrences that approximate $US^pV^\\top$ using only matrix multiplications, preserving Muon's matrix-multiplication-only structure and compute complexity. We show that Muon$^p$ maximizes the linear improvement in loss under the Schatten $q$-norm for $q=1+\\frac{1}{p}$. Empirically, Muon$^p$ is especially effective for finetuning: on billion-scale models, Muon$^p$ improves validation perplexity and downstream task performance. We further analyze when Muon$^p$ is less suitable, through the lens of spectral geometry. Our results reveal important insights on when preserving the singular spectrum can bring significant gains, and introduce a principled way to achieve them.",
+            "arxiv_id": "2606.13867",
+            "PRIMARY_TOPIC_LABEL": "Large-Scale Training Systems and Efficiency",
+            "MATCHED_TOPIC_LABELS": [
+                "Large-Scale Training Systems and Efficiency",
+                "Architecture and Training Dynamics"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [
+                "Daily Hot Papers"
+            ],
+            "HOTSPOT_PAPER_PRIMARY_KIND": "daily_hot",
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "Daily Hot Papers",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "heuristic"
+        },
+        "2606.13392": {
+            "ARXIVID": "2606.13392",
+            "COMMENT": "Blockwise sparse attention with a per-GQA-group index branch and exp-free top-k kernel, cutting per-token attention compute 28.4x at 1M context on a natively trained 109B model.",
+            "RELEVANCE": 9,
+            "NOVELTY": 8,
+            "PRIMARY_TOPIC_ID": "architecture_training",
+            "MATCHED_TOPIC_IDS": [
+                "architecture_training",
+                "efficiency_scaling"
+            ],
+            "TOPIC_MATCH_COMMENT": "The core contribution is a new attention mechanism co-designed with its GPU execution path and trained natively at scale, which is architectural first and efficiency second.",
+            "HOTSPOT_PAPER_TAGS": [
+                "daily_hot"
+            ],
+            "HOTSPOT_PAPER_COMMENT": "Frontier-lab sparse attention shipped with an open kernel and a released 109B multimodal model, so it carries broad day-level significance beyond the specialized feed.",
+            "SCORE": 17,
+            "authors": [
+                "Xunhao Lai",
+                "Weiqi Xu",
+                "Yufeng Yang",
+                "Qiaorui Chen",
+                "Yang Xu",
+                "Lunbin Zeng",
+                "Xiaolong Li",
+                "Haohai Sun",
+                "Haichao Zhu",
+                "Vito Zhang",
+                "Jinkai Hu",
+                "Jiayao Li",
+                "Rui Gao",
+                "Zekun Li",
+                "Songquan Zhu",
+                "Jingkai Zhou",
+                "Pengyu Zhao"
+            ],
+            "title": "MiniMax Sparse Attention",
+            "abstract": "Ultra-long-context capability is becoming indispensable for frontier LLMs: agentic workflows, repository-scale code reasoning, and persistent memory all require the model to jointly attend over hundreds of thousands to millions of tokens, yet the quadratic cost of softmax attention makes this untenable at deployment scale. We introduce MiniMax Sparse Attention (MSA), a blockwise sparse attention built upon Grouped Query Attention (GQA). A lightweight Index Branch scores key-value blocks and independently selects a Top-k subset for each GQA group, enabling group-specific sparse retrieval while maintaining efficient block-level execution; the Main Branch then performs exact block-sparse attention over only the selected blocks. Designed around a principle of simplicity and scalability, MSA is deliberately streamlined, making it straightforward to deploy efficiently across a broad range of GPUs. To translate sparsity into practical speedups, we co-design MSA with a GPU execution path that uses exp-free Top-k selection and KV-outer sparse attention to improve tensor-core utilization under block-granular access. On a 109B-parameter model with native multimodal training, MSA performs on par with GQA while reducing per-token attention compute by 28.4x at 1M context. Paired with our co-designed kernel, MSA achieves 14.2x prefill and 7.6x decoding wall-clock speedups on H800. Our inference kernel is available at: https://github.com/MiniMax-AI/MSA. A production-grade natively multimodal model powered by MSA has been publicly released at: https://huggingface.co/MiniMaxAI/MiniMax-M3.",
+            "arxiv_id": "2606.13392",
+            "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+            "MATCHED_TOPIC_LABELS": [
+                "Architecture and Training Dynamics",
+                "Efficiency, Compression, and Large-Scale Training"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [
+                "Daily Hot Papers"
+            ],
+            "HOTSPOT_PAPER_PRIMARY_KIND": "daily_hot",
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "Daily Hot Papers",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "llm_exact"
+        }
+    },
+    "sections": [
+        {
+            "kind": "daily_hot",
+            "label": "Daily Hot Papers",
+            "description": "Papers that feel broadly important to the day and belong in the hotspot paper feed.",
+            "paper_ids": [
+                "2606.13867",
+                "2606.13392"
+            ]
+        }
+    ]
 }

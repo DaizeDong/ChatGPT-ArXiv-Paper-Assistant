@@ -2,8 +2,8 @@
     "schema_version": 1,
     "meta": {
         "date": "2026-08-15",
-        "total_candidates": 0,
-        "total_spotlight_papers": 0,
+        "total_candidates": 24,
+        "total_spotlight_papers": 2,
         "thresholds": {
             "daily_hot_score_cutoff": 15,
             "daily_hot_relevance_cutoff": 7,
@@ -17,11 +17,105 @@
     },
     "diagnostics": {
         "candidate_count_by_kind": {
-            "new_frontier": 0,
-            "daily_hot": 0
+            "new_frontier": 1,
+            "daily_hot": 1
         },
-        "selected_count_by_kind": {}
+        "selected_count_by_kind": {
+            "new_frontier": 1,
+            "daily_hot": 1
+        }
     },
-    "papers": {},
-    "sections": []
+    "papers": {
+        "2608.14019": {
+            "ARXIVID": "2608.14019",
+            "COMMENT": "Introduces trainable open-ended computational substrates whose behavior emerges from iterated local dynamics.",
+            "RELEVANCE": 7,
+            "NOVELTY": 9,
+            "PRIMARY_TOPIC_ID": "architecture_training",
+            "MATCHED_TOPIC_IDS": [
+                "architecture_training"
+            ],
+            "TOPIC_MATCH_COMMENT": "It proposes a fundamentally different architectural and computational paradigm, though current demonstrations are small-scale.",
+            "HOTSPOT_PAPER_TAGS": [
+                "new_frontier"
+            ],
+            "HOTSPOT_PAPER_COMMENT": "The latent-universal substrate framework appears to open a genuinely new model-design direction despite its early experimental stage.",
+            "SCORE": 16,
+            "authors": [
+                "Giacomo Bocchese",
+                "Nicola Giacobbo",
+                "Etienne Guichard",
+                "James Wiles",
+                "Akshaj Devireddy"
+            ],
+            "title": "Emergent Models: Intelligence from Tiny Substrates",
+            "abstract": "Emergent Models (EMs) are a machine learning paradigm based on simple yet open-ended substrates, such as cellular automata, in which modeling is treated not as the learning of a closed-form input-output map but as the emergence, within simple dynamical systems, of computational behaviors that solve external tasks. Such substrates typically iterate a fixed local rule over a latent space for an adaptive number of steps, with an interface linking the latent state to external input/output signals. Training proceeds by evolutionary search. We hypothesize that some instances of this framework are biased toward global generalization: capturing the rule generating the data over its full domain, and therefore extrapolating beyond the training range. Theoretically, we prove that some EMs are latent-universal: with the update rule and interface held fixed, they can realize any partial computable function by varying only the initial condition of the latent state. Empirically, we study a zoo of minimal EM instantiations across discrete and continuous substrates, showing that local-recursive computation at a tiny scale (tens to hundreds of parameters) can extrapolate exactly on simple arithmetic functions, can support control behaviour and online adaptation, while still exposing several limitations. This work is foundational: it does not propose a competitive architecture, but a framework meant to widen the design space of machine learning beyond differentiable feed-forward maps.",
+            "arxiv_id": "2608.14019",
+            "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+            "MATCHED_TOPIC_LABELS": [
+                "Architecture and Training Dynamics"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [
+                "New Frontier Papers"
+            ],
+            "HOTSPOT_PAPER_PRIMARY_KIND": "new_frontier",
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "New Frontier Papers",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "llm_exact"
+        },
+        "2608.13966": {
+            "ARXIVID": "2608.13966",
+            "COMMENT": "Introduces loss-aware weight reconstruction inside quantization-aware training, supported by a convergence analysis.",
+            "RELEVANCE": 9,
+            "NOVELTY": 8,
+            "PRIMARY_TOPIC_ID": "efficiency_scaling",
+            "MATCHED_TOPIC_IDS": [
+                "efficiency_scaling"
+            ],
+            "TOPIC_MATCH_COMMENT": "It directly advances low-bit model compression through a new QAT optimization mechanism.",
+            "HOTSPOT_PAPER_TAGS": [
+                "daily_hot"
+            ],
+            "HOTSPOT_PAPER_COMMENT": "Broadly important today: Introduces loss-aware weight reconstruction inside quantization-aware training, supported by a convergence analysis.",
+            "SCORE": 17,
+            "authors": [
+                "Vincent Counathe",
+                "Ben Athiwaratkun",
+                "Christopher De Sa",
+                "Tianyi Zhang"
+            ],
+            "title": "QUASAR: Lowering the Loss Floor of Quantization-Aware Training with Loss-Aware Reconstruction",
+            "abstract": "As large language model inference shifts toward lower precision, post-training quantization (PTQ) becomes increasingly brittle, making quantization-aware training (QAT) essential for preserving model quality. However, QAT computes the loss and surrogate gradients using a lossy reconstruction of latent full-precision weights, while applying updates to the latent weights themselves. This mismatch can lead to suboptimal training trajectories and a higher loss floor. Second-order PTQ methods mitigate a similar gap by minimizing loss-aware reconstruction error, but doing it once for a frozen model can take hours; repeating this process throughout QAT as the weights evolve is impractical. We introduce QUASAR, a QAT method that continuously performs lightweight, loss-aware reconstruction in the training loop to lower the loss floor and improve the resulting low-bit model. At each training step, QUASAR uses the exponential moving average of squared gradients as online saliency estimates, searches over a small set of clipping ranges, and fits affine dequantizers via saliency-weighted least squares. Our analysis shows that the loss-aware reconstruction error is the only reconstruction-dependent term in the QAT convergence bound and controls the loss of the final quantized model, establishing QUASAR's objective as a principled optimization target. QUASAR modifies only the training procedure and supports standard deployment formats, including integer quantization and NVFP4, with no inference-time changes or overhead. Across Qwen3 and Llama-3.1, QUASAR achieves the lowest held-out KL divergence among competitive QAT methods at 2, 3, and 4 bits, reducing KL by at least 10% at 3 and 4 bits and by 29% at 2 bits. At 2 bits, it improves average accuracy across eight tasks by 3.5-4.3 percentage points over strong QAT and PTQ baselines.",
+            "arxiv_id": "2608.13966",
+            "PRIMARY_TOPIC_LABEL": "Efficiency, Compression, and Large-Scale Training",
+            "MATCHED_TOPIC_LABELS": [
+                "Efficiency, Compression, and Large-Scale Training"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [
+                "Daily Hot Papers"
+            ],
+            "HOTSPOT_PAPER_PRIMARY_KIND": "daily_hot",
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "Daily Hot Papers",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "heuristic"
+        }
+    },
+    "sections": [
+        {
+            "kind": "new_frontier",
+            "label": "New Frontier Papers",
+            "description": "Papers that appear to open a genuinely new direction, paradigm, or field.",
+            "paper_ids": [
+                "2608.14019"
+            ]
+        },
+        {
+            "kind": "daily_hot",
+            "label": "Daily Hot Papers",
+            "description": "Papers that feel broadly important to the day and belong in the hotspot paper feed.",
+            "paper_ids": [
+                "2608.13966"
+            ]
+        }
+    ]
 }

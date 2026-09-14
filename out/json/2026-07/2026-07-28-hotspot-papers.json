@@ -2,8 +2,8 @@
     "schema_version": 1,
     "meta": {
         "date": "2026-07-28",
-        "total_candidates": 0,
-        "total_spotlight_papers": 0,
+        "total_candidates": 106,
+        "total_spotlight_papers": 8,
         "thresholds": {
             "daily_hot_score_cutoff": 15,
             "daily_hot_relevance_cutoff": 7,
@@ -17,11 +17,379 @@
     },
     "diagnostics": {
         "candidate_count_by_kind": {
-            "new_frontier": 0,
-            "daily_hot": 0
+            "new_frontier": 2,
+            "daily_hot": 9
         },
-        "selected_count_by_kind": {}
+        "selected_count_by_kind": {
+            "new_frontier": 2,
+            "daily_hot": 6
+        }
     },
-    "papers": {},
-    "sections": []
+    "papers": {
+        "2607.14952": {
+            "ARXIVID": "2607.14952",
+            "COMMENT": "Virtualizes resident state and replays responses to train beyond two million tokens within a fixed GPU budget.",
+            "RELEVANCE": 10,
+            "NOVELTY": 9,
+            "PRIMARY_TOPIC_ID": "training_systems",
+            "MATCHED_TOPIC_IDS": [
+                "moe_training",
+                "training_systems",
+                "efficiency_scaling"
+            ],
+            "TOPIC_MATCH_COMMENT": "Its central contribution is a distributed training schedule spanning state paging, context parallelism, and gradient execution.",
+            "HOTSPOT_PAPER_TAGS": [
+                "new_frontier",
+                "daily_hot"
+            ],
+            "HOTSPOT_PAPER_COMMENT": "Training beyond two million tokens under a fixed GPU budget materially expands feasible long-context post-training.",
+            "SCORE": 19,
+            "authors": [
+                "Changhai Zhou",
+                "Kieran Liu",
+                "Yuhua Zhou",
+                "Qian Qiao",
+                "Jun Gao",
+                "Harry Zhang",
+                "Irvine Lu",
+                "Nolan Ho",
+                "Lucian Li",
+                "Andrew Lei",
+                "Cleon Cheng",
+                "Steven Chiang",
+                "Yihang Zeng",
+                "Di Zhang",
+                "Rio Yang",
+                "Kaijie Chen",
+                "Andrew Chen",
+                "Pony Ma",
+                "Weizhong Zhang",
+                "Cheng Jin"
+            ],
+            "title": "LongStraw: Long-Context RL Beyond 2M Tokens under a Fixed GPU Budget",
+            "abstract": "Long-context RL post-training is constrained by the lifetime of state and gradients, not attention cost alone. In GRPO, one multi-million-token prompt must serve old-policy and reference scoring plus multiple policy responses, while conventional autograd keeps the prompt graph and all response graphs live alongside model weights, caches, and distributed communication buffers. We present LongStraw, an objective-aware, architecture-aware system for resident-state virtualization, response replay, and distributed-gradient execution. Its transaction captures the shared prompt without autograd, retains only the architecture-required state on explicitly owned pages, restores that state for each group member, scores old/reference branches without a graph, replays one policy response at a time with autograd, and accumulates the resulting gradients before one distributed finalization and optimizer step. This schedule bounds the live training graph by the response suffix while reusing the expensive prompt computation across the complete GRPO group. We instantiate this design for two incompatible model structures. Qwen3.6-27B combines 48 recurrent GDN layers with 16 full-attention layers; LongStraw keeps the compact recurrent state and physically CP8-sharded KV pages, composes global attention through cross-rank LSE/output merging, and performs blockwise response replay. GLM-5.2 combines a 78-layer MLA/DSA attention stack with a 256-expert, top-8 MoE tail. Its implementation keeps CP-sharded MLA latent pages and DSA indexer-key pages in CPU memory, stages one layer at a time, reconstructs IndexShare-aware global sparse selection over CP32, and dispatches routed response tokens over EP32. The two paths share one transaction contract while specializing the retained state, replay operator, and collective communication to the architecture...",
+            "arxiv_id": "2607.14952",
+            "PRIMARY_TOPIC_LABEL": "Large-Scale Training Systems and Efficiency",
+            "MATCHED_TOPIC_LABELS": [
+                "MoE Training",
+                "Large-Scale Training Systems and Efficiency",
+                "Efficiency, Compression, and Large-Scale Training"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [
+                "New Frontier Papers",
+                "Daily Hot Papers"
+            ],
+            "HOTSPOT_PAPER_PRIMARY_KIND": "new_frontier",
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "New Frontier Papers",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "llm_exact"
+        },
+        "2607.19691": {
+            "ARXIVID": "2607.19691",
+            "COMMENT": "Enables outcome-reward optimization of variable-horizon latent reasoning through a surrogate transition policy.",
+            "RELEVANCE": 7,
+            "NOVELTY": 8,
+            "PRIMARY_TOPIC_ID": "architecture_training",
+            "MATCHED_TOPIC_IDS": [
+                "architecture_training",
+                "efficiency_scaling"
+            ],
+            "TOPIC_MATCH_COMMENT": "Variable-horizon latent computation is the main architectural contribution, with shorter reasoning traces providing an efficiency connection.",
+            "HOTSPOT_PAPER_TAGS": [
+                "new_frontier"
+            ],
+            "HOTSPOT_PAPER_COMMENT": "Outcome-reward optimization for adaptive latent reasoning opens a distinct alternative to token-by-token test-time scaling.",
+            "SCORE": 15,
+            "authors": [
+                "Runyang You",
+                "Zhiyuan Liu",
+                "Yongqi Li",
+                "Wenjie Li"
+            ],
+            "title": "SLPO: Scaling Latent Reasoning via a Surrogate Policy",
+            "abstract": "Reinforcement learning with verifiable rewards has become the predominant recipe for eliciting test-time scaling in explicit Chain-of-Thought reasoners. Yet this scaling path remains computationally costly, since every intermediate step must be decoded as a language token. Latent reasoning instead carries intermediate computation as continuous vectors and already matches or surpasses explicit CoT at far shorter horizons. Despite this promise, latent reasoners remain largely imitation-bound, while explicit CoT has already moved past imitation via outcome-reward RL. Latent trajectories lack a tractable per-step likelihood and an adaptive stopping interface under fixed thinking budgets, so outcome rewards cannot elicit latent test-time scaling. We introduce Surrogate Latent Policy Optimization (SLPO) to bring outcome-reward RL to autoregressive latent reasoners: an empirical surrogate policy density over latent transitions for trajectory-level credit assignment, and a correctness-supervised stopping head that outcome-reward optimization refines into a variable-horizon policy. Across continuous and soft thinking settings, SLPO improves Pass@$k$ under parallel sampling and allocates longer latent computation to harder instances with higher deterministic accuracy.",
+            "arxiv_id": "2607.19691",
+            "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+            "MATCHED_TOPIC_LABELS": [
+                "Architecture and Training Dynamics",
+                "Efficiency, Compression, and Large-Scale Training"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [
+                "New Frontier Papers"
+            ],
+            "HOTSPOT_PAPER_PRIMARY_KIND": "new_frontier",
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "New Frontier Papers",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "llm_exact"
+        },
+        "2607.24953": {
+            "ARXIVID": "2607.24953",
+            "COMMENT": "Stabilizes end-to-end FP4 training through transposition-invariant two-dimensional block scaling.",
+            "RELEVANCE": 10,
+            "NOVELTY": 8,
+            "PRIMARY_TOPIC_ID": "efficiency_scaling",
+            "MATCHED_TOPIC_IDS": [
+                "architecture_training",
+                "efficiency_scaling"
+            ],
+            "TOPIC_MATCH_COMMENT": "Low-precision training is the main contribution, with scaling consistency providing the stability mechanism.",
+            "HOTSPOT_PAPER_TAGS": [
+                "daily_hot"
+            ],
+            "HOTSPOT_PAPER_COMMENT": "Stable FP4 training through 30B MoE scale could materially change the economics of large-model pretraining.",
+            "SCORE": 18,
+            "authors": [
+                "Mehdi Rahimifar",
+                "Amin Darabi",
+                "Mehran Taghian Jazi",
+                "Xing Huang",
+                "Yao Wang",
+                "Zhijun Tu",
+                "Yufei Cui",
+                "Yunke Peng",
+                "Hongliang Li"
+            ],
+            "title": "Stable FP4 Training via Transposition-Invariant Block Quantization",
+            "abstract": "Reducing training precision is a key lever for improving the e ciency of large language model (LLM) training, but pushing beyond FP8 to 4-bit oating point (FP4) remains challenging due to instability during optimization. We identify a fundamental source of this instability in existing microscaling approaches: scale inconsistency induced by tensor transposition. In conventional 1D block quantization, forward and backward passes assign di erent scaling factors to the same values after transposition, leading to biased and unstable gradient updates. To address this issue, we propose a low-precision training framework based on 2D block FP4 quantization, which enforces transposition-invariant scaling and preserves consistency between forward and backward computations. We further combine this with truncation-free scaling and stochastic rounding to control quantization error and maintain unbiased gradients. To handle the sensitivity of attention mechanisms, we adopt MXFP8 quantization for query and key projections, yielding a practical mixed-precision design. We evaluate our method on dense LLMs up to 7B parameters and a 30B Mixture-of-Experts model, trained on up to 100B tokens. Across all settings, our approach achieves stable end-to-end FP4 training and closely matches BF16 performance, with less than 1.3% degradation in perplexity and downstream accuracy. These results demonstrate that enforcing forwardbackward scaling consistency is su cient to enable practical FP4 training at scale, providing a simple and e ective pathway toward more e cient LLM training.",
+            "arxiv_id": "2607.24953",
+            "PRIMARY_TOPIC_LABEL": "Efficiency, Compression, and Large-Scale Training",
+            "MATCHED_TOPIC_LABELS": [
+                "Architecture and Training Dynamics",
+                "Efficiency, Compression, and Large-Scale Training"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [
+                "Daily Hot Papers"
+            ],
+            "HOTSPOT_PAPER_PRIMARY_KIND": "daily_hot",
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "Daily Hot Papers",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "llm_exact"
+        },
+        "2510.14717": {
+            "ARXIVID": "2510.14717",
+            "COMMENT": "Couples batch doubling with a 1/sqrt(2) learning-rate reduction to preserve loss dynamics and shorten pretraining.",
+            "RELEVANCE": 10,
+            "NOVELTY": 8,
+            "PRIMARY_TOPIC_ID": "training_systems",
+            "MATCHED_TOPIC_IDS": [
+                "training_systems",
+                "architecture_training"
+            ],
+            "TOPIC_MATCH_COMMENT": "A principled optimizer-aware batch scheduler directly reduces pretraining wall-clock cost, supported by equivalence analysis and matched-FLOP experiments.",
+            "HOTSPOT_PAPER_TAGS": [
+                "daily_hot"
+            ],
+            "HOTSPOT_PAPER_COMMENT": "Broadly important today: Couples batch doubling with a 1/sqrt(2) learning-rate reduction to preserve loss dynamics and shorten pretraining.",
+            "SCORE": 18,
+            "authors": [
+                "Alexandru Meterez",
+                "Depen Morwani",
+                "Jingfeng Wu",
+                "Costin-Andrei Oncescu",
+                "Cengiz Pehlevan",
+                "Sham Kakade"
+            ],
+            "title": "Seesaw: Accelerating Training by Balancing Learning Rate and Batch Size Scheduling",
+            "abstract": "Increasing the batch size during training -- a ''batch ramp'' -- is a promising strategy to accelerate large language model pretraining. While for SGD, doubling the batch size can be equivalent to halving the learning rate, the optimal strategy for adaptive optimizers like Adam is less clear. As a result, any batch-ramp scheduling, if used at all, is typically tuned heuristically. This work develops a principled framework for batch-size scheduling and introduces Seesaw: whenever a standard scheduler would halve the learning rate, Seesaw instead multiplies it by $1/\\sqrt{2}$ and doubles the batch size, preserving loss dynamics while reducing serial steps. Theoretically, we provide, to our knowledge, the first finite-sample proof of equivalence between learning-rate decay and batch-size ramp-up for SGD on noisy linear regression, and we extend this equivalence to normalized SGD, a tractable proxy for Adam, under a variance-dominated regime observed in practice. Empirically, on 150M/300M/600M-parameter models trained at Chinchilla scale using a constant (critical) batch size, Seesaw matches cosine decay at equal FLOPs while reducing wall-clock time by $\\approx 36\\%$, approaching the theoretical limit implied by our analysis.",
+            "arxiv_id": "2510.14717",
+            "PRIMARY_TOPIC_LABEL": "Large-Scale Training Systems and Efficiency",
+            "MATCHED_TOPIC_LABELS": [
+                "Large-Scale Training Systems and Efficiency",
+                "Architecture and Training Dynamics"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [
+                "Daily Hot Papers"
+            ],
+            "HOTSPOT_PAPER_PRIMARY_KIND": "daily_hot",
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "Daily Hot Papers",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "heuristic"
+        },
+        "2607.24377": {
+            "ARXIVID": "2607.24377",
+            "COMMENT": "Introduces data-free optimal scaling and normalization-preserving MXFP4 attention quantization.",
+            "RELEVANCE": 9,
+            "NOVELTY": 8,
+            "PRIMARY_TOPIC_ID": "efficiency_scaling",
+            "MATCHED_TOPIC_IDS": [
+                "efficiency_scaling"
+            ],
+            "TOPIC_MATCH_COMMENT": "The paper's core contribution is a new low-bit attention quantization mechanism.",
+            "HOTSPOT_PAPER_TAGS": [
+                "daily_hot"
+            ],
+            "HOTSPOT_PAPER_COMMENT": "Broadly important today: Introduces data-free optimal scaling and normalization-preserving MXFP4 attention quantization.",
+            "SCORE": 17,
+            "authors": [
+                "Jianlin Yu",
+                "Jing Lin",
+                "Linghui Kong",
+                "Aiyue Chen",
+                "Weiyi Sun",
+                "Chenyu Zeng",
+                "Wangli Lan",
+                "Jinxi Li",
+                "Zhuo Zheng",
+                "Ziyang Yue",
+                "Danning Ke",
+                "Fei Yi",
+                "Tianchi Hu",
+                "Yuan Ding",
+                "Yiwu Yao",
+                "Junsong Wang"
+            ],
+            "title": "MXAttention: Data-Free Optimal Scaling and Pre-Normalization Quantization for MXFP4 Attention",
+            "abstract": "The quadratic cost of attention is a major bottleneck in diffusion-based video generation models. MXFP4 attention provides a promising path toward efficient inference, but direct MXFP4 quantization often degrades generation quality due to two numerical issues: the clipping-underflow trade-off from power-of-two scaling and the row-wise normalization error introduced in the softmax loop. We propose MXAttention, a data-free post-training quantization framework for MXFP4 attention. MXAttention introduces two components: Universal Optimal Scaling (UOS), which exploits the periodic structure of power-of-two microscaling to derive a distribution-independent optimal scaling boundary Qmax=7.25 without calibration or search, and Pre-Normalization Quantization (PNQ), which quantizes unnormalized softmax exponentials before row-wise summation to preserve normalization by construction. Experiments on Wan2.2 and HunyuanVideo show that MXAttention closes at least 95% of the VBench Imaging Quality gap between OCP MXFP4 and FP16, substantially improves frame-level similarity, and preserves FP16-level generation quality with less than 0.01 absolute degradation on all reported VBench metrics. MXAttention also achieves performance competitive with strong NVFP4-based baselines with negligible overhead when fused into the attention pipeline. The implementation is publicly available in MindIE-SD.",
+            "arxiv_id": "2607.24377",
+            "PRIMARY_TOPIC_LABEL": "Efficiency, Compression, and Large-Scale Training",
+            "MATCHED_TOPIC_LABELS": [
+                "Efficiency, Compression, and Large-Scale Training"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [
+                "Daily Hot Papers"
+            ],
+            "HOTSPOT_PAPER_PRIMARY_KIND": "daily_hot",
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "Daily Hot Papers",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "heuristic"
+        },
+        "2607.24887": {
+            "ARXIVID": "2607.24887",
+            "COMMENT": "Derives a finite-sample gradient-alignment certificate for when function-preserving residual widening improves held-out loss.",
+            "RELEVANCE": 9,
+            "NOVELTY": 8,
+            "PRIMARY_TOPIC_ID": "architecture_training",
+            "MATCHED_TOPIC_IDS": [
+                "architecture_training"
+            ],
+            "TOPIC_MATCH_COMMENT": "Directly explains width-dependent gradient alignment and residual-expansion behavior, supported by interventions in LLaMA-style Transformers and Pythia.",
+            "HOTSPOT_PAPER_TAGS": [
+                "daily_hot"
+            ],
+            "HOTSPOT_PAPER_COMMENT": "Broadly important today: Derives a finite-sample gradient-alignment certificate for when function-preserving residual widening improves held-out loss.",
+            "SCORE": 17,
+            "authors": [
+                "Jinhao Zhang",
+                "Zeyu Liu",
+                "Zicheng Yan",
+                "Yunquan Zhang",
+                "Guangming Tan",
+                "Fangming Liu",
+                "Daning Cheng"
+            ],
+            "title": "Mechanisms of Width Scaling in Normalized Residual Networks: The Effective Alignment Dimension",
+            "abstract": "Existing theories of neural-network width characterize asymptotic limits, but provide limited guidance on whether an expansion direction identified from finite training data remains beneficial on unseen data. We study this problem for function-preserving residual expansion and introduce the effective alignment dimension, a measurable quantity describing the signal-noise geometry of activation gradients. By deriving the exact mean and variance of the inner product between independently estimated training and test gradients, we obtain a finite-sample upper bound on misalignment probability. The bound depends only on the effective alignment dimension and an effective sample size, requiring finite second moments and a nonzero population gradient, without covariance spectral assumptions or prescribed width-growth rates. We integrate this certificate into the train-test residual-expansion framework, yielding a high-probability condition for test-risk improvement. Experiments across width-controlled LLaMA-style Transformers, Pythia, and ResNet-20 show that wider models exhibit larger effective alignment dimensions and lower empirical misalignment. Direct residual interventions confirm that the alignment statistic predicts the sign and magnitude of held-out loss changes.",
+            "arxiv_id": "2607.24887",
+            "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+            "MATCHED_TOPIC_LABELS": [
+                "Architecture and Training Dynamics"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [
+                "Daily Hot Papers"
+            ],
+            "HOTSPOT_PAPER_PRIMARY_KIND": "daily_hot",
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "Daily Hot Papers",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "heuristic"
+        },
+        "2605.26092": {
+            "ARXIVID": "2605.26092",
+            "COMMENT": "Uses orthogonal residual projections to enable multiplier-free ultra-low-bit Transformer quantization.",
+            "RELEVANCE": 9,
+            "NOVELTY": 8,
+            "PRIMARY_TOPIC_ID": "efficiency_scaling",
+            "MATCHED_TOPIC_IDS": [
+                "efficiency_scaling"
+            ],
+            "TOPIC_MATCH_COMMENT": "The core contribution is a new low-bit quantization mechanism and matching hardware design.",
+            "HOTSPOT_PAPER_TAGS": [
+                "daily_hot"
+            ],
+            "HOTSPOT_PAPER_COMMENT": "Broadly important today: Uses orthogonal residual projections to enable multiplier-free ultra-low-bit Transformer quantization.",
+            "SCORE": 17,
+            "authors": [
+                "Maoyang Xiang",
+                "Tao Luo",
+                "Bo Wang"
+            ],
+            "title": "GoQuant: Geometric Orthogonal Residual Projection for Multiplier-Free Power-of-Two Transformer Quantization",
+            "abstract": "The deployment of Large Language Models (LLMs) and Vision Transformers (ViTs) on edge devices is significantly constrained by memory capacity and the critical timing bottlenecks introduced by dense Multiply--Accumulate (MAC) arrays. In the ultra-low-bit regime, logarithmic Power-of-Two (PoT) quantization provides a hardware-efficient alternative by replacing general multiplications in the dominant dot-product computation with bit-shift operations. However, its non-uniform exponential lattice inherently suffers from a \\textbf{Low Angular Resolution Regime}, a structural limitation that becomes particularly pronounced below 4-bit precision and can substantially degrade the representation of high-dimensional feature manifolds. To address this geometric limitation, we propose Geometric Orthogonal Residual Projection Quantization (GoQuant), an algorithm--hardware co-design framework for multiplier-reduced low-bit inference. By formulating quantization as a dual-basis geometric projection, GoQuant constructs a higher-resolution residual lattice while retaining a shift-and-add inner-product structure. Its analytical solver further avoids computationally intensive gradient-based or iterative search procedures. The data-free Geometric-Only (GEO) mode quantizes LLaMA-2-7B in only 0.47 minutes, while the Activation-Refined (REF) mode completes full-model quantization in approximately \\textbf{4.4 minutes}.",
+            "arxiv_id": "2605.26092",
+            "PRIMARY_TOPIC_LABEL": "Efficiency, Compression, and Large-Scale Training",
+            "MATCHED_TOPIC_LABELS": [
+                "Efficiency, Compression, and Large-Scale Training"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [
+                "Daily Hot Papers"
+            ],
+            "HOTSPOT_PAPER_PRIMARY_KIND": "daily_hot",
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "Daily Hot Papers",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "heuristic"
+        },
+        "2607.00341": {
+            "ARXIVID": "2607.00341",
+            "COMMENT": "Discrete-embedding and continuous-state recurrence addresses bridge-entity misalignment in looped Transformers.",
+            "RELEVANCE": 9,
+            "NOVELTY": 8,
+            "PRIMARY_TOPIC_ID": "architecture_training",
+            "MATCHED_TOPIC_IDS": [
+                "architecture_training"
+            ],
+            "TOPIC_MATCH_COMMENT": "A mechanistically motivated recurrent architecture is tested on both controlled reasoning tasks and language-model pretraining.",
+            "HOTSPOT_PAPER_TAGS": [
+                "daily_hot"
+            ],
+            "HOTSPOT_PAPER_COMMENT": "Broadly important today: Discrete-embedding and continuous-state recurrence addresses bridge-entity misalignment in looped Transformers.",
+            "SCORE": 17,
+            "authors": [
+                "Hengyu Fu",
+                "Tianyu Guo",
+                "Zixuan Wang",
+                "Hanlin Zhu",
+                "Jason D. Lee",
+                "Jiantao Jiao",
+                "Stuart Russell",
+                "Song Mei"
+            ],
+            "title": "DiscoLoop: Looping Discrete Embeddings and Continuous Hidden States for Multi-hop Reasoning",
+            "abstract": "Large language models achieve strong performance on many reasoning tasks when allowed to externalize intermediate steps as Chain-of-Thought (CoT). However, many questions require the model to internalize the multi-step reasoning within a single forward pass before generating the answer. We study this challenge through two-hop reasoning, a representative task where the model must compose multiple pieces of parametric knowledge within a single forward pass. Standard non-recurrent Transformers suffer from a depth-local storage problem: facts learned in earlier layers are unavailable where second-hop retrieval happens. We found that Looped Transformers mitigate this issue by reusing the same memory, but still generalize imperfectly. We show that the remaining bottleneck is representational. In the two-hop reasoning task, the first loop often makes the correct bridge entity nearly perfectly decodable, yet the corresponding hidden state remains poorly aligned with the bridge token embedding. Surprisingly, an easy training-free realignment intervention nearly closes the generalization gap. Building upon this insight, we propose DiscoLoop, a looping architecture whose recurrence carries both a discrete embedding channel and a continuous hidden-state channel. DiscoLoop achieves near-perfect accuracy with substantially fewer training steps across symbolic and synthetic-language multi-hop reasoning tasks. When applied to real-world pretraining, DiscoLoop attains lower training loss and stronger benchmark performance than looped-transformer baselines, suggesting that the mixed-channel design transfers to practical language modeling.",
+            "arxiv_id": "2607.00341",
+            "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+            "MATCHED_TOPIC_LABELS": [
+                "Architecture and Training Dynamics"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [
+                "Daily Hot Papers"
+            ],
+            "HOTSPOT_PAPER_PRIMARY_KIND": "daily_hot",
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "Daily Hot Papers",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "heuristic"
+        }
+    },
+    "sections": [
+        {
+            "kind": "new_frontier",
+            "label": "New Frontier Papers",
+            "description": "Papers that appear to open a genuinely new direction, paradigm, or field.",
+            "paper_ids": [
+                "2607.14952",
+                "2607.19691"
+            ]
+        },
+        {
+            "kind": "daily_hot",
+            "label": "Daily Hot Papers",
+            "description": "Papers that feel broadly important to the day and belong in the hotspot paper feed.",
+            "paper_ids": [
+                "2607.24953",
+                "2510.14717",
+                "2607.24377",
+                "2607.24887",
+                "2605.26092",
+                "2607.00341"
+            ]
+        }
+    ]
 }

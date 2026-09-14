@@ -1,0 +1,81 @@
+{
+    "schema_version": 1,
+    "meta": {
+        "date": "2026-03-04",
+        "total_candidates": 49,
+        "total_spotlight_papers": 1,
+        "thresholds": {
+            "daily_hot_score_cutoff": 15,
+            "daily_hot_relevance_cutoff": 7,
+            "new_frontier_score_cutoff": 15,
+            "new_frontier_novelty_cutoff": 8
+        },
+        "caps": {
+            "max_daily_hot": 6,
+            "max_new_frontier": 4
+        }
+    },
+    "diagnostics": {
+        "candidate_count_by_kind": {
+            "new_frontier": 0,
+            "daily_hot": 1
+        },
+        "selected_count_by_kind": {
+            "daily_hot": 1
+        }
+    },
+    "papers": {
+        "2603.02731": {
+            "ARXIVID": "2603.02731",
+            "COMMENT": "Direct FP8-to-FP4 quantization plus scaling-aware row-to-column conversion puts MXFP4 activations and expert-parallel all-to-all traffic on Hopper without native FP4 tensor cores, cutting 671B-scale activation memory 14.8% and lifting throughput 12.5%.",
+            "RELEVANCE": 10,
+            "NOVELTY": 8,
+            "PRIMARY_TOPIC_ID": "moe_training",
+            "MATCHED_TOPIC_IDS": [
+                "moe_training",
+                "training_systems",
+                "efficiency_scaling"
+            ],
+            "TOPIC_MATCH_COMMENT": "The contribution targets exactly the two MoE training bottlenecks \u2014 activation memory and expert-parallel communication \u2014 and is validated end-to-end at 671B.",
+            "HOTSPOT_PAPER_TAGS": [
+                "daily_hot"
+            ],
+            "HOTSPOT_PAPER_COMMENT": "A working FP4 recipe for frontier-scale MoE pretraining on hardware that lacks FP4 tensor cores is broadly consequential for anyone budgeting a large training run.",
+            "SCORE": 18,
+            "authors": [
+                "Wuyue Zhang",
+                "Chongdong Huang",
+                "Chunbo You",
+                "Cheng Gu",
+                "Fengjuan Wang",
+                "Mou Sun"
+            ],
+            "title": "Practical FP4 Training for Large-Scale MoE Models on Hopper GPUs",
+            "abstract": "Training large-scale Mixture-of-Experts (MoE) models is bottlenecked by activation memory and expert-parallel communication, yet FP4 training remains impractical on Hopper-class GPUs without native MXFP4 or NVFP4 support. In this work, we present a training recipe that enables MXFP4 efficiency for MoE models on Hopper architectures without native 4-bit computation support. A central challenge is to integrate FP4 into an existing BF16/FP8 hybrid training pipeline without incurring costly precision round-trips (e.g., FP4 $\\leftrightarrow$ BF16 $\\leftrightarrow$ FP8). We address this challenge by introducing direct FP8-to-FP4 quantization and de-quantization, together with scaling-aware FP4 row-wise to column-wise conversion, enabling FP4 activations and expert-parallel communication with minimal overhead. Core MoE computations are executed in FP8, while activations and expert-parallel communication are compressed using MXFP4, achieving substantial memory and bandwidth savings without degrading convergence. At the 671B parameter scale, our method achieves end-to-end training performance comparable to strong FP8 baselines, while reducing peak activation memory by 14.8\\% (11.8 GB) and improving training throughput by 12.5\\%, from 1157 to 1302 tokens per GPU per second. These results show that FP4 efficiency can be practically realized for large-scale MoE training through careful software-hardware co-design, even without native FP4 Tensor Core support.",
+            "arxiv_id": "2603.02731",
+            "PRIMARY_TOPIC_LABEL": "MoE Training",
+            "MATCHED_TOPIC_LABELS": [
+                "MoE Training",
+                "Large-Scale Training Systems and Efficiency",
+                "Efficiency, Compression, and Large-Scale Training"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [
+                "Daily Hot Papers"
+            ],
+            "HOTSPOT_PAPER_PRIMARY_KIND": "daily_hot",
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "Daily Hot Papers",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "llm_exact"
+        }
+    },
+    "sections": [
+        {
+            "kind": "daily_hot",
+            "label": "Daily Hot Papers",
+            "description": "Papers that feel broadly important to the day and belong in the hotspot paper feed.",
+            "paper_ids": [
+                "2603.02731"
+            ]
+        }
+    ]
+}

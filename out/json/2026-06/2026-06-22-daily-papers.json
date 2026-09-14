@@ -1,0 +1,448 @@
+{
+    "schema_version": 2,
+    "meta": {
+        "date": "2026-06-22",
+        "sort": [
+            "score",
+            "relevance"
+        ],
+        "topic_schema_version": 2,
+        "total_papers": 9,
+        "usage": {
+            "model": "llmcall:cc+codexg",
+            "prompt_tokens": 0,
+            "completion_tokens": 0,
+            "prompt_cost": 0.0,
+            "completion_cost": 0.0,
+            "total_arxiv_papers": 337,
+            "total_scanned_papers": 337,
+            "total_relevant_papers": 9,
+            "filter_health": {
+                "status": "ok",
+                "scanned_papers": 337,
+                "selected_papers": 9,
+                "llm_tokens": 0,
+                "message": "Scored 337 papers with 4/4 successful model calls; 9 selected."
+            },
+            "llm": {
+                "backend": "LLM backend: llmcall chain=codexg->codex->cc->claude",
+                "attempted": 4,
+                "succeeded": 4,
+                "failed": 0,
+                "by_backend": {
+                    "llmcall": 4
+                },
+                "by_provider": {
+                    "codexg": 1,
+                    "cc": 3
+                },
+                "errors": [],
+                "seconds": 1467.9,
+                "trace": [
+                    "codexg: answered in 311.9s of 543.7s",
+                    "codexg: unavailable after 185.9s of 543.7s (OpenAI Codex v0.154.0",
+                    "codex: unavailable after 4.3s of 376.6s (OpenAI Codex v0.154.0",
+                    "cc: answered in 89.1s of 391.0s",
+                    "codexg: unavailable after 407.9s of 543.7s (OpenAI Codex v0.154.0",
+                    "codex: unavailable after 3.8s of 154.6s (OpenAI Codex v0.154.0",
+                    "cc: answered in 145.0s of 169.5s",
+                    "codexg: unavailable after 45.8s of 543.7s (OpenAI Codex v0.154.0",
+                    "codex: unavailable after 4.9s of 516.7s (OpenAI Codex v0.154.0",
+                    "cc: answered in 269.2s of 530.5s"
+                ]
+            },
+            "remedied": true
+        }
+    },
+    "topic_order": [
+        "moe_training",
+        "training_systems",
+        "architecture_training",
+        "efficiency_scaling",
+        "representation_structure",
+        "memory_systems",
+        "world_models_open_ended_rl"
+    ],
+    "diagnostics": {
+        "total_papers": 9,
+        "topic_counts": [
+            {
+                "topic_id": "moe_training",
+                "topic_label": "MoE Training",
+                "paper_count": 1
+            },
+            {
+                "topic_id": "training_systems",
+                "topic_label": "Large-Scale Training Systems and Efficiency",
+                "paper_count": 1
+            },
+            {
+                "topic_id": "architecture_training",
+                "topic_label": "Architecture and Training Dynamics",
+                "paper_count": 3
+            },
+            {
+                "topic_id": "efficiency_scaling",
+                "topic_label": "Efficiency, Compression, and Large-Scale Training",
+                "paper_count": 4
+            },
+            {
+                "topic_id": "representation_structure",
+                "topic_label": "Representation Learning Theory and Structure",
+                "paper_count": 0
+            },
+            {
+                "topic_id": "memory_systems",
+                "topic_label": "Memory Structures and Agent Memory Systems",
+                "paper_count": 0
+            },
+            {
+                "topic_id": "world_models_open_ended_rl",
+                "topic_label": "World Models, Exploration, and Open-Ended Reinforcement Learning",
+                "paper_count": 0
+            }
+        ],
+        "assignment_source_counts": {
+            "llm_exact": 9
+        },
+        "llm_assignment_count": 9,
+        "heuristic_assignment_count": 0,
+        "default_assignment_count": 0,
+        "invalid_primary_topic_fallback_count": 0,
+        "missing_primary_topic_fallback_count": 0,
+        "hotspot_paper_kind_counts": {
+            "new_frontier": 0,
+            "daily_hot": 0
+        },
+        "hotspot_paper_assignment_source_counts": {
+            "default": 9
+        }
+    },
+    "papers": {
+        "2606.21848": {
+            "ARXIVID": "2606.21848",
+            "COMMENT": "Removes key projections entirely, replacing them with a value-space routing projection so only a value cache is kept, halving KV memory at comparable perplexity including in pretraining.",
+            "RELEVANCE": 9,
+            "NOVELTY": 7,
+            "PRIMARY_TOPIC_ID": "architecture_training",
+            "MATCHED_TOPIC_IDS": [
+                "architecture_training",
+                "efficiency_scaling"
+            ],
+            "TOPIC_MATCH_COMMENT": "This changes the attention mechanism itself rather than compressing an existing cache, so the architectural-mechanism topic is the better primary fit.",
+            "HOTSPOT_PAPER_TAGS": [],
+            "HOTSPOT_PAPER_COMMENT": "",
+            "SCORE": 16,
+            "authors": [
+                "Xin Gao",
+                "Xingming Xu"
+            ],
+            "title": "Keyless Attention: Value-Space Routing and Value-Only Caching for Efficient Transformers",
+            "abstract": "Transformer architectures form the foundation of modern natural language processing, yet the Key-Value (KV) cache introduces substantial memory and bandwidth overhead during long-context generation, increasingly bottlenecking large-scale deployment. We propose Keyless Attention, a novel attention mechanism that replaces the conventional key projection with a dedicated value-space routing projection, eliminating key representations from the attention computation entirely and yielding a Value-Only Cache that reduces KV-cache memory by 50% while improving decode throughput. Experiments across multiple models and architectures demonstrate that Keyless Attention achieves comparable perplexity and downstream task performance to standard QKV attention, while consistently reducing KV-cache memory by 50%. Furthermore, Keyless Attention exhibits slower validation loss degradation after the best epoch, indicating improved robustness against overfitting. Ablation studies confirm that the dedicated value-space routing projection is critical, with Keyless Attention outperforming KV-sharing methods that eliminate the key cache without replacing its routing role. Experiments in the pretraining regime further confirm the viability of Keyless Attention in industrial settings.",
+            "arxiv_id": "2606.21848",
+            "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+            "MATCHED_TOPIC_LABELS": [
+                "Architecture and Training Dynamics",
+                "Efficiency, Compression, and Large-Scale Training"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [],
+            "HOTSPOT_PAPER_PRIMARY_KIND": null,
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+        },
+        "2606.22326": {
+            "ARXIVID": "2606.22326",
+            "COMMENT": "First finite-time convergence proof for Adam in its exact deployed form (bias correction, no clipping) under nonsmooth nonconvex objectives and heavy-tailed noise, with beta1=beta2 matching practice.",
+            "RELEVANCE": 8,
+            "NOVELTY": 8,
+            "PRIMARY_TOPIC_ID": "training_systems",
+            "MATCHED_TOPIC_IDS": [
+                "training_systems",
+                "architecture_training"
+            ],
+            "TOPIC_MATCH_COMMENT": "Optimizer theory for the optimizer that actually runs large pretraining jobs sits squarely in the large-scale training algorithms topic.",
+            "HOTSPOT_PAPER_TAGS": [],
+            "HOTSPOT_PAPER_COMMENT": "",
+            "SCORE": 16,
+            "authors": [
+                "Zijian Liu"
+            ],
+            "title": "Adam Converges in Nonsmooth Nonconvex Optimization",
+            "abstract": "Adam is one of the most widely implemented and influential modern optimizers. Why is it effective across different optimization problems in practice? This question arguably lies at the center of the optimization community over the last decade and has motivated a substantial body of work aimed at understanding its convergence behavior. However, existing studies have mainly focused on the convergence rate of Adam in smooth nonconvex optimization, which unfortunately does not adequately capture practical settings, since many real-world problems are nonsmooth, such as those arising in training neural networks. Thus, these studies cannot fully explain the popularity and empirical success of Adam. Recently, an insightful and powerful framework called Online-to-Nonconvex Conversion has opened a new way to analyze Adam for nonsmooth nonconvex optimization. Unfortunately, prior works along this line share two common limitations. First, all of them ignore the important bias-correction term in the original Adam algorithm. Second and more importantly, many of them require extra operations that are not used in Adam, such as a clipping step. Therefore, the convergence guarantee for the original Adam method still remains unclear. In this work, we present the first finite-time analysis for the classical form of Adam, i.e., with the bias-correction step and without further algorithmic modifications, and prove that a randomly scaled learning rate ensures a convergence rate of $1/T^{\\frac{2}{13}}$ for nonsmooth nonconvex optimization. Moreover, our result provably applies to the modern heavy-tailed noise regime, which is closer to practice. Interestingly, our theory is established under the parameter choice $β_1=β_2$, aligning with the recent empirical studies.",
+            "arxiv_id": "2606.22326",
+            "PRIMARY_TOPIC_LABEL": "Large-Scale Training Systems and Efficiency",
+            "MATCHED_TOPIC_LABELS": [
+                "Large-Scale Training Systems and Efficiency",
+                "Architecture and Training Dynamics"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [],
+            "HOTSPOT_PAPER_PRIMARY_KIND": null,
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+        },
+        "2606.22249": {
+            "ARXIVID": "2606.22249",
+            "COMMENT": "Establishes universal approximation above and expressive collapse below roughly 1.58 bits, plus a polynomial degradation rate in bit width, giving weight quantization a theoretical floor.",
+            "RELEVANCE": 8,
+            "NOVELTY": 7,
+            "PRIMARY_TOPIC_ID": "efficiency_scaling",
+            "MATCHED_TOPIC_IDS": [
+                "efficiency_scaling"
+            ],
+            "TOPIC_MATCH_COMMENT": "It is foundational theory for quantization, explaining why low-bit models retain or lose capacity as precision drops.",
+            "HOTSPOT_PAPER_TAGS": [],
+            "HOTSPOT_PAPER_COMMENT": "",
+            "SCORE": 15,
+            "authors": [
+                "Shao-Qun Zhang"
+            ],
+            "title": "On the Expressive Power of Weight Quantization in Large Language Models",
+            "abstract": "In recent years, weight quantization that encodes the learnable parameters of large language models in an $n$-bit format has garnered significant attention due to its potential for model compression and inference acceleration. Many practical techniques have been developed; however, the theoretical understanding of many aspects, especially the approximation and degradation of expressive power as the number of quantization bits decreases, remains unclear. In this paper, we provide a theoretical investigation into the expressive capability of large language models relative to the number of quantization bits. We argue that 1.58-bit is the limiting precision for weight quantization by establishing the universal approximation and expressive collapse properties of weight-quantized models with respect to the number of quantization bits. Additionally, we confirm that weight quantization leads to expressive degradation, in which the expressive capacity of weight-quantized models degrades polynomially as the number of quantization bits decreases. These theoretical findings provide a solid foundation for advancing weight quantization in the context of scaling laws and shed insights for future research in model compression and inference acceleration.",
+            "arxiv_id": "2606.22249",
+            "PRIMARY_TOPIC_LABEL": "Efficiency, Compression, and Large-Scale Training",
+            "MATCHED_TOPIC_LABELS": [
+                "Efficiency, Compression, and Large-Scale Training"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [],
+            "HOTSPOT_PAPER_PRIMARY_KIND": null,
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+        },
+        "2606.21847": {
+            "ARXIVID": "2606.21847",
+            "COMMENT": "Global rank allocation for low-rank LLM compression scored by local singular energy plus input-output cosine similarity, with rank-preserving LoRA tuning that avoids re-truncation loss.",
+            "RELEVANCE": 8,
+            "NOVELTY": 6,
+            "PRIMARY_TOPIC_ID": "efficiency_scaling",
+            "MATCHED_TOPIC_IDS": [
+                "efficiency_scaling"
+            ],
+            "TOPIC_MATCH_COMMENT": "Low-rank decomposition and rank budgeting for LLMs is directly the compression topic, with a new allocation criterion rather than a tuned baseline.",
+            "HOTSPOT_PAPER_TAGS": [],
+            "HOTSPOT_PAPER_COMMENT": "",
+            "SCORE": 14,
+            "authors": [
+                "Chao Han",
+                "Haozhe Hu",
+                "Fei Ma",
+                "Wei Zhang",
+                "Xiaoyu Shen"
+            ],
+            "title": "UniRank: Unified Rank Allocation for Low-Rank LLM Compression",
+            "abstract": "Low-rank decomposition serves as a promising compression paradigm for large language models, however, rank allocation remains challenging: manual rules lack generalizability, and learning-based approaches incur heavy computational overhead. To address these issues, we formulate global low-rank allocation as a sorting-and-truncation pipeline, and score each singular component via dual criteria: \\textbf{Local} singular energy ratio that quantifies the intrinsic importance within the decomposed parameter matrix and \\textbf{Global} functional importance (measured by input-output cosine similarity) that evaluates the functional significance of decomposed modules. We verify the strong correlation between high input-output cosine similarity and low effective rank through geometric interpretation and experimental validation. Furthermore, we propose rank-preserving fine-tuning, which performs direct LoRA tuning on decomposed weights and avoids extra information loss caused by re-truncation in conventional merging pipelines. Empirical results confirm that our method delivers sustained performance enhancements when combined with models featuring distinct decomposition schemes, model sizes and architectural designs, e.g. in one-shot compression without further fine-tuning, our method reduces perplexity by up to 50\\% compared with uniform and heuristic allocation baselines. Code will be available at https://github.com/EIT-NLP/LLM-Pruning.",
+            "arxiv_id": "2606.21847",
+            "PRIMARY_TOPIC_LABEL": "Efficiency, Compression, and Large-Scale Training",
+            "MATCHED_TOPIC_LABELS": [
+                "Efficiency, Compression, and Large-Scale Training"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [],
+            "HOTSPOT_PAPER_PRIMARY_KIND": null,
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+        },
+        "2606.22172": {
+            "ARXIVID": "2606.22172",
+            "COMMENT": "Recasts the gated MLP as a rank-1 bilinear attention whose nonlinearity placement breaks exchange and inverse-scaling symmetry, a mechanistic account of why gating works in transformer blocks.",
+            "RELEVANCE": 8,
+            "NOVELTY": 6,
+            "PRIMARY_TOPIC_ID": "architecture_training",
+            "MATCHED_TOPIC_IDS": [
+                "architecture_training"
+            ],
+            "TOPIC_MATCH_COMMENT": "It reinterprets a core transformer component and identifies symmetry properties that bear directly on architecture design.",
+            "HOTSPOT_PAPER_TAGS": [],
+            "HOTSPOT_PAPER_COMMENT": "",
+            "SCORE": 14,
+            "authors": [
+                "Nathan Breslow"
+            ],
+            "title": "Gated MLPs as Symmetry-Broken Rank-1 Bilinear Attention",
+            "abstract": "We show that the conventional gated MLP can be viewed as a rank-1 approximation to a bilinear attention mechanism with two distinct factors corresponding to the query and the key. We further show that moving the nonlinearity onto one factor breaks the exchange symmetry between the two factors and, for non-homogeneous activations, the inverse-scaling symmetry as well. This perspective may help explain why gated MLPs are effective in practice and inform the design of future architectures.",
+            "arxiv_id": "2606.22172",
+            "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+            "MATCHED_TOPIC_LABELS": [
+                "Architecture and Training Dynamics"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [],
+            "HOTSPOT_PAPER_PRIMARY_KIND": null,
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+        },
+        "2606.21868": {
+            "ARXIVID": "2606.21868",
+            "COMMENT": "Reframes low-VRAM MoE as a working-set problem, pages routed experts by routing signal, and shows prefetching cannot help because PCIe bandwidth rather than prediction is the bottleneck; MV-WSA then splits VRAM between resident experts and KV cache by marginal latency per byte.",
+            "RELEVANCE": 7,
+            "NOVELTY": 6,
+            "PRIMARY_TOPIC_ID": "moe_training",
+            "MATCHED_TOPIC_IDS": [
+                "moe_training",
+                "efficiency_scaling"
+            ],
+            "TOPIC_MATCH_COMMENT": "The contribution turns on MoE expert routing behavior and expert residency specifically, though it lands on the serving side rather than in training.",
+            "HOTSPOT_PAPER_TAGS": [],
+            "HOTSPOT_PAPER_COMMENT": "",
+            "SCORE": 13,
+            "authors": [
+                "Jiamu Zhang",
+                "Liang Wu",
+                "Mayank Darbari",
+                "Liangjie Hong"
+            ],
+            "title": "WiSP: A Working-Set View of Mixture-of-Experts Serving on Extremely Low-Resource Hardware",
+            "abstract": "Modern local and agentic workloads often need large-model capacity at low concurrency, but run on GPUs that cannot keep a frontier-scale model resident. Mixture-of-Experts (MoE) models are a natural fit because they activate only a small subset of experts per token, but their sparsity saves computation, not residency: the full expert pool still has to be stored, and any expert used by a layer must be in GPU memory when that layer runs. Static layer-level CPU offload makes such models fit, but transfers the expert layer in bulk on every forward pass, losing much of the sparsity advantage. We view low-resource MoE serving as a working-set problem on the GPU. Routed expert weights and the KV cache are two memory-demand streams competing for the same limited VRAM. We implement this view in WiSP (Working-Set Paging), a routing-aware expert pager that plugs into an unmodified serving engine and preserves byte-identical outputs. On a real 24 GiB RTX 3090, WiSP achieves up to 2.0x the decode throughput of static offload at the same memory budget when the model does not fit. A natural next step is to predict future experts and prefetch them. We find that this does not help in single-stream decode: the bottleneck is PCIe bandwidth, not prediction quality, so speculative transfers compete with demand transfers instead of hiding them. This shifts the design question from prefetching to allocation: how should one VRAM budget be divided between resident experts and the KV cache? We answer with MV-WSA (Marginal-Value Working-Set Allocation), which splits memory by marginal latency benefit per byte while enforcing a KV-admission floor. As a startup configurator, MV-WSA is the only policy we test that stays near-best on both prefill and decode; as a live controller, it resizes both pools while serving and reduces end-to-end time by up to 1.19x over a fixed offline split, without changing model outputs.",
+            "arxiv_id": "2606.21868",
+            "PRIMARY_TOPIC_LABEL": "MoE Training",
+            "MATCHED_TOPIC_LABELS": [
+                "MoE Training",
+                "Efficiency, Compression, and Large-Scale Training"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [],
+            "HOTSPOT_PAPER_PRIMARY_KIND": null,
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+        },
+        "2606.22406": {
+            "ARXIVID": "2606.22406",
+            "COMMENT": "Proves the query vector in a stylized softmax-attention model converges almost surely to the informative signal subspace under SGD, via the limiting ODE of the population objective.",
+            "RELEVANCE": 7,
+            "NOVELTY": 6,
+            "PRIMARY_TOPIC_ID": "architecture_training",
+            "MATCHED_TOPIC_IDS": [
+                "architecture_training"
+            ],
+            "TOPIC_MATCH_COMMENT": "This is optimization-dynamics analysis of the attention mechanism itself, explaining what gradient training drives attention to learn.",
+            "HOTSPOT_PAPER_TAGS": [],
+            "HOTSPOT_PAPER_COMMENT": "",
+            "SCORE": 13,
+            "authors": [
+                "Lan V. Truong"
+            ],
+            "title": "Asymptotic Signal Subspace Recovery in Softmax Attention Models",
+            "abstract": "Attention mechanisms have demonstrated remarkable empirical success in identifying relevant information from large collections of tokens, yet the theoretical principles underlying this behavior remain poorly understood. We study a stylized softmax-attention model in which a query vector is learned by stochastic gradient ascent from a collection of informative and nuisance tokens. Exploiting the symmetry of the model, we derive a population objective and characterize the limiting ordinary differential equation governing the learning dynamics. Using tools from stochastic approximation and dynamical systems theory, we establish a rigorous connection between the stochastic learning algorithm and its deterministic limit. Our main result shows that, under suitable high-dimensional scaling assumptions and standard step-size conditions, the learned query converges almost surely to the one-dimensional signal subspace spanned by the latent informative direction. Equivalently, the query asymptotically recovers the latent signal up to the intrinsic sign ambiguity. These results provide a rigorous theoretical foundation for understanding attention mechanisms as signal extraction procedures in high-dimensional noisy environments and offer a dynamical-systems perspective on how attention discovers relevant information in the presence of substantial noise.",
+            "arxiv_id": "2606.22406",
+            "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+            "MATCHED_TOPIC_LABELS": [
+                "Architecture and Training Dynamics"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [],
+            "HOTSPOT_PAPER_PRIMARY_KIND": null,
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+        },
+        "2606.21947": {
+            "ARXIVID": "2606.21947",
+            "COMMENT": "Exploits a correlation between shallow activation ranges and deep-layer optimal scales to predict all quantization scales at once via polynomial projection, replacing static per-model PTQ scales with instance-aware ones.",
+            "RELEVANCE": 7,
+            "NOVELTY": 6,
+            "PRIMARY_TOPIC_ID": "efficiency_scaling",
+            "MATCHED_TOPIC_IDS": [
+                "efficiency_scaling"
+            ],
+            "TOPIC_MATCH_COMMENT": "The contribution is a new quantization mechanism rather than a tuned variant, which is squarely the compression topic.",
+            "HOTSPOT_PAPER_TAGS": [],
+            "HOTSPOT_PAPER_COMMENT": "",
+            "SCORE": 13,
+            "authors": [
+                "Changjun Li",
+                "Runqing Jiang",
+                "Lian Xu",
+                "Ye Zhang",
+                "Qingyong Hu",
+                "Yulan Guo"
+            ],
+            "title": "ScalePredictor: Instance-aware Scale Learning for Accurate Quantization of Vision Transformers",
+            "abstract": "Vision Transformers have achieved remarkable success in many fields, yet their deployment on edge devices remains challenging due to their substantial computational demands. Post-Training Quantization (PTQ) offers an attractive solution by compressing models using a small calibration set with minimal training overhead. However, most existing PTQ works adopt a static quantization paradigm that is uniformly applied to all instances. Given the substantial diversity of natural images, the activation distributions vary significantly across samples, making these methods inherently suboptimal. In this paper, we propose ScalePredictor, a dynamic quantization framework for accurate and efficient quantization scale learning of ViTs. We first reveal a hidden correlation between the distribution range of shallow-layer activations and the optimal scales of deeper layers. Based on this, we develop a scale learning mechanism that integrates an efficient range extraction approach to capture robust range statistics at the shallow stage, which are then fed into a Taylor-motivated polynomial scale projection module to generate all quantization scales simultaneously. With the efficiency of polynomial approximation, ScalePredictor introduces insignificant computational overhead while avoiding costly just-in-time calibration. Extensive experiments on ImageNet demonstrate that ScalePredictor consistently outperforms prior PTQ methods, achieving a more favorable accuracy-efficiency trade-off. Code and additional results are shown in the supplementary materials.",
+            "arxiv_id": "2606.21947",
+            "PRIMARY_TOPIC_LABEL": "Efficiency, Compression, and Large-Scale Training",
+            "MATCHED_TOPIC_LABELS": [
+                "Efficiency, Compression, and Large-Scale Training"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [],
+            "HOTSPOT_PAPER_PRIMARY_KIND": null,
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+        },
+        "2607.22634": {
+            "ARXIVID": "2607.22634",
+            "COMMENT": "Extends tree drafting to diffusion drafters by fixing the mismatch between prefix-blind diffusion marginals and prefix-based autoregressive verification, with priority search over candidate paths.",
+            "RELEVANCE": 6,
+            "NOVELTY": 7,
+            "PRIMARY_TOPIC_ID": "efficiency_scaling",
+            "MATCHED_TOPIC_IDS": [
+                "efficiency_scaling"
+            ],
+            "TOPIC_MATCH_COMMENT": "Speculative decoding materially changes inference cost and the prefix-alignment insight is new, though the work is decode-side rather than training-side.",
+            "HOTSPOT_PAPER_TAGS": [],
+            "HOTSPOT_PAPER_COMMENT": "",
+            "SCORE": 13,
+            "authors": [
+                "Zheng Wang",
+                "Zhifan Ye",
+                "Qi Cheng",
+                "Yonggan Fu",
+                "Ziyan Wang",
+                "Feng Zhu",
+                "Haozhe Zhao",
+                "Jan Kautz",
+                "Pavlo Molchanov",
+                "Humphrey Shi",
+                "Minjia Zhang"
+            ],
+            "title": "PRESTO: Prefix-Aligned Tree Drafting for Diffusion Speculative Decoding",
+            "abstract": "Diffusion Large Language Models (dLLMs) have emerged as a promising alternative to autoregressive (AR) LLMs, generating tokens in parallel. This makes them effective draft models for speculative decoding (SD), producing an entire block of draft tokens in a single forward pass. Yet existing diffusion-based drafting methods rely on linear drafting, even though dLLMs emit multiple candidate tokens across positions, inducing a large combinatorial space of decoding paths. Consequently, they limit acceptance length and decoding efficiency. To exploit this multi-candidate structure, we apply tree-based drafting to diffusion drafters, enabling exploration of diverse candidate paths. However, we find that naive tree drafting is suboptimal: diffusion marginals are prefix-blind, mismatching the prefix-based AR verification and yielding unreliable path ranking. We propose PRESTO, a principled framework that extends tree-based drafting to diffusion drafters while resolving the fundamental mismatch between diffusion draft confidence and prefix-based AR verification through PREfix-aligned Scoring and priority-based Tree search for diffusion speculative decOding. The key principles behind PRESTO are that (1) candidate ranking should align with the prefix-based nature of AR verification, and (2) tree construction should prioritize candidate paths with high verification potential to maximize acceptance length. Extensive experiments show that PRESTO achieves up to an average of $1.5\\times$ end-to-end throughput speedup on the state-of-the-art dedicated diffusion drafter SD and an average of $1.12\\times$ on self-speculative diffusion LLMs across diverse benchmarks.",
+            "arxiv_id": "2607.22634",
+            "PRIMARY_TOPIC_LABEL": "Efficiency, Compression, and Large-Scale Training",
+            "MATCHED_TOPIC_LABELS": [
+                "Efficiency, Compression, and Large-Scale Training"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [],
+            "HOTSPOT_PAPER_PRIMARY_KIND": null,
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+        }
+    },
+    "topic_sections": [
+        {
+            "topic_id": "moe_training",
+            "topic_label": "MoE Training",
+            "paper_ids": [
+                "2606.21868"
+            ]
+        },
+        {
+            "topic_id": "training_systems",
+            "topic_label": "Large-Scale Training Systems and Efficiency",
+            "paper_ids": [
+                "2606.22326"
+            ]
+        },
+        {
+            "topic_id": "architecture_training",
+            "topic_label": "Architecture and Training Dynamics",
+            "paper_ids": [
+                "2606.21848",
+                "2606.22172",
+                "2606.22406"
+            ]
+        },
+        {
+            "topic_id": "efficiency_scaling",
+            "topic_label": "Efficiency, Compression, and Large-Scale Training",
+            "paper_ids": [
+                "2606.22249",
+                "2606.21847",
+                "2606.21947",
+                "2607.22634"
+            ]
+        }
+    ]
+}

@@ -2,8 +2,8 @@
     "schema_version": 1,
     "meta": {
         "date": "2026-08-31",
-        "total_candidates": 0,
-        "total_spotlight_papers": 0,
+        "total_candidates": 148,
+        "total_spotlight_papers": 6,
         "thresholds": {
             "daily_hot_score_cutoff": 15,
             "daily_hot_relevance_cutoff": 7,
@@ -18,10 +18,250 @@
     "diagnostics": {
         "candidate_count_by_kind": {
             "new_frontier": 0,
-            "daily_hot": 0
+            "daily_hot": 7
         },
-        "selected_count_by_kind": {}
+        "selected_count_by_kind": {
+            "daily_hot": 6
+        }
     },
-    "papers": {},
-    "sections": []
+    "papers": {
+        "2608.29539": {
+            "ARXIVID": "2608.29539",
+            "COMMENT": "Learns which tokens receive global attention while providing local attention to every token.",
+            "RELEVANCE": 10,
+            "NOVELTY": 8,
+            "PRIMARY_TOPIC_ID": "architecture_training",
+            "MATCHED_TOPIC_IDS": [
+                "architecture_training",
+                "efficiency_scaling"
+            ],
+            "TOPIC_MATCH_COMMENT": "The core advance is dynamic attention allocation, supported by a training stabilization schedule and sparse kernels that realize computational savings.",
+            "HOTSPOT_PAPER_TAGS": [
+                "daily_hot"
+            ],
+            "HOTSPOT_PAPER_COMMENT": "Broadly important today: Learns which tokens receive global attention while providing local attention to every token.",
+            "SCORE": 18,
+            "authors": [
+                "Yuqi Pan",
+                "Zheng Li",
+                "Bohao Tang",
+                "Zhen Qin",
+                "Guoqi Li"
+            ],
+            "title": "LoGo: Token-Level Dynamic Local-Global Attention",
+            "abstract": "As context lengths scale, attention increasingly becomes a primary computational bottleneck in large language models. Standard Transformers remain powerful but computationally inefficient, as they allocate the same attention budget to every token regardless of its contextual demand. Existing local-global hybrids provide a more efficient alternative by mixing restricted- and full-context attention, but they typically allocate span statically across layers or heads. To address these limitations, we propose LoGo, a token-level dynamic local-global attention mechanism that uses attention span as a direct proxy for attention budget allocation. Each LoGo layer contains coupled local and global branches: all tokens receive efficient local attention over a restricted context window, while a learned gate activates global attention with full-context access only for tokens requiring long-range information. A threshold-based budget controller maintains a target global ratio without auxiliary losses, and a progressive masking schedule stabilizes training before sparse routing takes effect. We further implement query-sparse Triton kernels that convert reduced global-attention computation into practical speedups. Extensive experiments validate LoGo's effectiveness, showing that it preserves the scaling behavior of full-attention Transformers across model sizes. In controlled comparisons, LoGo improves over the full-attention Transformer and matched-budget static local-global hybrids, with clear gains on long-range retrieval. Analysis further shows that LoGo learns interpretable span allocation patterns. These results suggest that learned token-level span allocation is an effective and scalable way to improve the long-context performance-compute trade-off.",
+            "arxiv_id": "2608.29539",
+            "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+            "MATCHED_TOPIC_LABELS": [
+                "Architecture and Training Dynamics",
+                "Efficiency, Compression, and Large-Scale Training"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [
+                "Daily Hot Papers"
+            ],
+            "HOTSPOT_PAPER_PRIMARY_KIND": "daily_hot",
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "Daily Hot Papers",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "heuristic"
+        },
+        "2605.07815": {
+            "ARXIVID": "2605.07815",
+            "COMMENT": "Dynamically scales Muon's orthogonalized pretraining updates using calibrated per-layer trust ratios.",
+            "RELEVANCE": 10,
+            "NOVELTY": 7,
+            "PRIMARY_TOPIC_ID": "training_systems",
+            "MATCHED_TOPIC_IDS": [
+                "training_systems",
+                "architecture_training"
+            ],
+            "TOPIC_MATCH_COMMENT": "The core contribution is a pretraining optimizer improving convergence at comparable wall-clock cost, with analysis connecting gains to architectural heterogeneity.",
+            "HOTSPOT_PAPER_TAGS": [
+                "daily_hot"
+            ],
+            "HOTSPOT_PAPER_COMMENT": "Broadly important today: Dynamically scales Muon's orthogonalized pretraining updates using calibrated per-layer trust ratios.",
+            "SCORE": 17,
+            "authors": [
+                "Yuxuan Lou",
+                "Yang You"
+            ],
+            "title": "OrScale: Orthogonalised Optimization with Layer-Wise Trust-Ratio Scaling",
+            "abstract": "Muon fixes the \\emph{direction} of every matrix-valued update at the polar factor of its momentum, while each layer's step \\emph{magnitude} is addressed only by a static shape correction. We derive a dynamic per-layer scalar by adapting the LARS/LAMB trust-ratio principle to the orthogonalized setting, where the standard denominator candidates---the raw momentum norm or the polar-factor norm---either live in the wrong unit space or carry no update-scale information. The resulting method, \\emph{OrScale}, uses the norm of the parameter-space direction actually applied and anchors each layer's ratio at one via a per-layer calibration, so that the Moonlight recipe (tuned for AdamW, shared with Muon via RMS matching) transfers with \\emph{no additional sweep}; a component ablation confirms each design choice is individually load-bearing. Theoretically, OrScale retains a nuclear-norm $O(1/\\sqrt{T})$ convergence rate for any clipped multiplier and achieves a strict layer-adaptive descent gain $\u00ce\u00ba_{\\mathrm{eff}}>1$ under two conditions estimable from standard training diagnostics---a bound that predicts the gain should \\emph{grow with architectural heterogeneity}. Experiments confirm the prediction: with every hyperparameter inherited verbatim from the Moonlight recipe, OrScale matches or beats Muon+Moonlight across dense 125M--1.1B FineWeb-Edu pre-training, and on a 16B-A3B mixture-of-experts model---where the logged trust ratios separate cleanly by layer class---the gap widens by an order of magnitude to $0.130$ nats ($3.8\\%$ relative) at parity wall-clock cost.",
+            "arxiv_id": "2605.07815",
+            "PRIMARY_TOPIC_LABEL": "Large-Scale Training Systems and Efficiency",
+            "MATCHED_TOPIC_LABELS": [
+                "Large-Scale Training Systems and Efficiency",
+                "Architecture and Training Dynamics"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [
+                "Daily Hot Papers"
+            ],
+            "HOTSPOT_PAPER_PRIMARY_KIND": "daily_hot",
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "Daily Hot Papers",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "heuristic"
+        },
+        "2608.12925": {
+            "ARXIVID": "2608.12925",
+            "COMMENT": "Derives momentum as residual-driven multiplier correction and develops RADAR with adaptive update geometry and a stochastic convergence analysis.",
+            "RELEVANCE": 9,
+            "NOVELTY": 8,
+            "PRIMARY_TOPIC_ID": "training_systems",
+            "MATCHED_TOPIC_IDS": [
+                "training_systems",
+                "architecture_training"
+            ],
+            "TOPIC_MATCH_COMMENT": "Optimizer design is central, while the separation of update geometry and acceleration also explains training dynamics; large-scale pretraining validation is unspecified.",
+            "HOTSPOT_PAPER_TAGS": [
+                "daily_hot"
+            ],
+            "HOTSPOT_PAPER_COMMENT": "Broadly important today: Derives momentum as residual-driven multiplier correction and develops RADAR with adaptive update geometry and a stochastic convergence analysis.",
+            "SCORE": 17,
+            "authors": [
+                "Zhixin Ren",
+                "Yao Lyu",
+                "Congrong Li",
+                "Liping Zhang",
+                "Shengbo Eben Li"
+            ],
+            "title": "Momentum as Residual-Driven Multiplier Correction for Deep Learning Optimization",
+            "abstract": "Momentum-based optimizers are widely used in modern deep learning, yet the relations among momentum recursion, update geometry, and acceleration remain only partially understood. We develop an $\\textbf{A}$DMM-$\\textbf{I}$nspired $\\textbf{M}$omentum (AIM) framework based on residual-penalty variable splitting, which interprets momentum as a multiplier-like correction driven by the splitting residual. AIM recovers the exponential moving average of gradients from an ADMM-style multiplier update and separates two mechanisms that are usually intertwined in practical optimizers: the residual penalty determines the update geometry, whereas the approximation of the objective-related subproblem determines the acceleration form. Building on AIM, we propose $\\textbf{R}$elativistic $\\textbf{A}$daptive gradient $\\textbf{D}$escent with $\\textbf{A}$ccelerated $\\textbf{R}$esidual (RADAR), which combines relativistic adaptive geometry, decoupled residual correction, and second-order momentum filtering to improve the update direction and momentum estimation. We establish stochastic convergence through a variance-perturbed Lyapunov drift analysis. Experiments on supervised vision learning, language modeling, and reinforcement learning show that RADAR achieves consistent improvements over strong adaptive optimizer baselines.",
+            "arxiv_id": "2608.12925",
+            "PRIMARY_TOPIC_LABEL": "Large-Scale Training Systems and Efficiency",
+            "MATCHED_TOPIC_LABELS": [
+                "Large-Scale Training Systems and Efficiency",
+                "Architecture and Training Dynamics"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [
+                "Daily Hot Papers"
+            ],
+            "HOTSPOT_PAPER_PRIMARY_KIND": "daily_hot",
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "Daily Hot Papers",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "heuristic"
+        },
+        "2512.17452": {
+            "ARXIVID": "2512.17452",
+            "COMMENT": "A learned write gate rejects low-utility KV states before cache admission, reducing memory and attention work.",
+            "RELEVANCE": 9,
+            "NOVELTY": 8,
+            "PRIMARY_TOPIC_ID": "efficiency_scaling",
+            "MATCHED_TOPIC_IDS": [
+                "efficiency_scaling"
+            ],
+            "TOPIC_MATCH_COMMENT": "Selective KV admission directly introduces a memory-efficiency mechanism for long-context LLMs, targeting both prefill and decoding costs.",
+            "HOTSPOT_PAPER_TAGS": [
+                "daily_hot"
+            ],
+            "HOTSPOT_PAPER_COMMENT": "Broadly important today: A learned write gate rejects low-utility KV states before cache admission, reducing memory and attention work.",
+            "SCORE": 17,
+            "authors": [
+                "Yen-Chieh Huang",
+                "Pi-Cheng Hsiu",
+                "Rui Fang",
+                "Ming-Syan Chen"
+            ],
+            "title": "KV Admission: Learning What to Write for Efficient Long-Context LLM Inference",
+            "abstract": "Long-context LLM inference is bottlenecked by the quadratic attention complexity and linear Key-Value (KV) cache growth. Prior approaches mitigate this via post-hoc selection or eviction but overlook the root inefficiency: indiscriminate token admission. In this paper, we formalize KV management as a causal system of three primitives: KV Admission, Selection, and Eviction. We instantiate KV Admission via Write-Gated KV (WG-KV), a lightweight mechanism that learns to predict token utility before cache entry. By filtering out redundant states early to maintain a compact global cache alongside a sliding local cache, WG-KV significantly reduces memory usage and accelerates both prefill and decode phases. Our results demonstrate that learning what to write is a principled and practical recipe for efficient long-context inference. Code is available at https://github.com/EMCLab-Sinica/WG-KV.",
+            "arxiv_id": "2512.17452",
+            "PRIMARY_TOPIC_LABEL": "Efficiency, Compression, and Large-Scale Training",
+            "MATCHED_TOPIC_LABELS": [
+                "Efficiency, Compression, and Large-Scale Training"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [
+                "Daily Hot Papers"
+            ],
+            "HOTSPOT_PAPER_PRIMARY_KIND": "daily_hot",
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "Daily Hot Papers",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "heuristic"
+        },
+        "2606.02857": {
+            "ARXIVID": "2606.02857",
+            "COMMENT": "Per-example perturbations and group-relative normalization reduce zeroth-order gradient variance without additional forward cost.",
+            "RELEVANCE": 9,
+            "NOVELTY": 8,
+            "PRIMARY_TOPIC_ID": "training_systems",
+            "MATCHED_TOPIC_IDS": [
+                "training_systems",
+                "efficiency_scaling"
+            ],
+            "TOPIC_MATCH_COMMENT": "The core contribution is a lower-variance LLM optimizer; preserving inference-level memory also directly improves training efficiency.",
+            "HOTSPOT_PAPER_TAGS": [
+                "daily_hot"
+            ],
+            "HOTSPOT_PAPER_COMMENT": "Broadly important today: Per-example perturbations and group-relative normalization reduce zeroth-order gradient variance without additional forward cost.",
+            "SCORE": 17,
+            "authors": [
+                "Liyan Tan",
+                "Yequan Zhao",
+                "Yifan Yang",
+                "Ruijie Zhang",
+                "Xinling Yu",
+                "Zheng Zhang"
+            ],
+            "title": "GRZO: Group-Relative Zeroth-Order Optimization for Large Language Model Fine-Tuning",
+            "abstract": "Zeroth-order (ZO) optimization is a memory-efficient alternative to backpropagation for fine-tuning large language models, but its deployment is limited by the high variance of gradient estimation. We propose GRZO, a Group-Relative Zeroth-Order optimizer that draws one pseudo-independent perturbation per mini-batch example and aggregates the per-example losses through group-relative normalization, raising the effective gradient-direction count from one to the batch size at no additional forward cost while preserving inference-level memory. We prove that GRZO is directionally unbiased with variance shrinking proportionally to the batch size, yielding a tighter nonconvex convergence bound than MeZO. Across RoBERTa-large, Llama3-8B, and OPT-13B over multiple tasks, GRZO improves average accuracy on Llama3-8B by $+3.0$ over MeZO at $23\\%$ lower peak GPU memory; as a drop-in replacement for the MeZO core, it lifts sparse, low-rank, and quantized ZO variants by $+6.0$ on average.",
+            "arxiv_id": "2606.02857",
+            "PRIMARY_TOPIC_LABEL": "Large-Scale Training Systems and Efficiency",
+            "MATCHED_TOPIC_LABELS": [
+                "Large-Scale Training Systems and Efficiency",
+                "Efficiency, Compression, and Large-Scale Training"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [
+                "Daily Hot Papers"
+            ],
+            "HOTSPOT_PAPER_PRIMARY_KIND": "daily_hot",
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "Daily Hot Papers",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "heuristic"
+        },
+        "2607.21475": {
+            "ARXIVID": "2607.21475",
+            "COMMENT": "Randomized KV-cache eviction enables attention-error certificates that guide selective recomputation.",
+            "RELEVANCE": 9,
+            "NOVELTY": 8,
+            "PRIMARY_TOPIC_ID": "efficiency_scaling",
+            "MATCHED_TOPIC_IDS": [
+                "efficiency_scaling"
+            ],
+            "TOPIC_MATCH_COMMENT": "Introduces a substantive cache-compression mechanism with computable error estimates and adaptive recovery under restricted memory.",
+            "HOTSPOT_PAPER_TAGS": [
+                "daily_hot"
+            ],
+            "HOTSPOT_PAPER_COMMENT": "Broadly important today: Randomized KV-cache eviction enables attention-error certificates that guide selective recomputation.",
+            "SCORE": 17,
+            "authors": [
+                "Peng Xie Amr Alanwar"
+            ],
+            "title": "Error Certificates for KV-Cache Eviction via Randomized Design",
+            "abstract": "Deterministic KV-cache eviction keeps the top-$k$ tokens under an importance score and deletes the rest, and after the deletion the serving system cannot know what the eviction cost it on the current query. We replace the deterministic tail with Poisson sampling at known inclusion probabilities, which makes the eviction error identifiable and turns a survey-sampling variance estimator over the retained set into a per-step error certificate at one extra scalar per retained token. On a thirty-turn assistant compressed to a 10\\% cache budget, the certificate-gated system answers 0.97 of recall questions against 0.09 for top-$k$, and for facts stated 26 to 30 turns earlier it recalls 97\\% against 2\\%. We prove that no estimator computable from the information a deterministic scheme retains is consistent for its own eviction error: evicted values can be altered so that everything retained is unchanged while the true attention-output error grows without bound. Under the Poisson design the certificate covers the realized attention error in 96.9--97.7\\% of 12{,}096 replay cells and in 98.1--99.7\\% on twelve further architectures. Randomization buys attribution, not prediction: a pre-registered study on LongBench at 6k and 16k tokens (about 74{,}000 generations) finds question-aware eviction at 25--50\\% budgets nearly free and output log-probability the better failure predictor, while the certificate answers the question confidence cannot, separating eviction-induced from inherent failures at AUC 0.65--0.75 against 0.47--0.54, and schedules recomputation at 1.7--1.8 times the gain of random gating. On real long-term conversations the gated system returns the full-cache score inside the heavy-damage regime, and the rule that triggers it is the same across five model families.",
+            "arxiv_id": "2607.21475",
+            "PRIMARY_TOPIC_LABEL": "Efficiency, Compression, and Large-Scale Training",
+            "MATCHED_TOPIC_LABELS": [
+                "Efficiency, Compression, and Large-Scale Training"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [
+                "Daily Hot Papers"
+            ],
+            "HOTSPOT_PAPER_PRIMARY_KIND": "daily_hot",
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "Daily Hot Papers",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "heuristic"
+        }
+    },
+    "sections": [
+        {
+            "kind": "daily_hot",
+            "label": "Daily Hot Papers",
+            "description": "Papers that feel broadly important to the day and belong in the hotspot paper feed.",
+            "paper_ids": [
+                "2608.29539",
+                "2605.07815",
+                "2608.12925",
+                "2512.17452",
+                "2606.02857",
+                "2607.21475"
+            ]
+        }
+    ]
 }

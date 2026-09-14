@@ -2,8 +2,8 @@
     "schema_version": 1,
     "meta": {
         "date": "2026-05-29",
-        "total_candidates": 0,
-        "total_spotlight_papers": 0,
+        "total_candidates": 126,
+        "total_spotlight_papers": 2,
         "thresholds": {
             "daily_hot_score_cutoff": 15,
             "daily_hot_relevance_cutoff": 7,
@@ -17,11 +17,108 @@
     },
     "diagnostics": {
         "candidate_count_by_kind": {
-            "new_frontier": 0,
-            "daily_hot": 0
+            "new_frontier": 1,
+            "daily_hot": 1
         },
-        "selected_count_by_kind": {}
+        "selected_count_by_kind": {
+            "new_frontier": 1,
+            "daily_hot": 1
+        }
     },
-    "papers": {},
-    "sections": []
+    "papers": {
+        "2606.06510": {
+            "ARXIVID": "2606.06510",
+            "COMMENT": "Argues the FP8 tensor-core op composed through CRT-based Ozaki Scheme II can replace native FP64 as the matrix substrate, with a Tensor-Memory Equilibrium roofline extension pricing deconstruction and reconstruction overheads.",
+            "RELEVANCE": 7,
+            "NOVELTY": 8,
+            "PRIMARY_TOPIC_ID": "training_systems",
+            "MATCHED_TOPIC_IDS": [
+                "training_systems",
+                "efficiency_scaling"
+            ],
+            "TOPIC_MATCH_COMMENT": "A low-precision arithmetic substrate plus an analytical performance model for accelerator matrix work, directly about what the hardware under large runs can deliver.",
+            "HOTSPOT_PAPER_TAGS": [
+                "new_frontier"
+            ],
+            "HOTSPOT_PAPER_COMMENT": "Recasting hardware FP64 as a derived accuracy guarantee over FP8 tensor cores would reshape how accelerators for both HPC and AI are specified.",
+            "SCORE": 15,
+            "authors": [
+                "Satoshi Matsuoka"
+            ],
+            "title": "FP8 is All You Need (Part 1): Debunking Hardware FP64 as the HPC Holy Grail (Sep 3rd version)",
+            "abstract": "We argue that on AI-optimised GPUs of the NVIDIA B300 generation and beyond, the FP8 tensor-core matrix operation, composed through CRT-based Ozaki Scheme II, can serve as the dominant matrix-work substrate for the surveyed matrix-dominated FP64 kernel classes at FP64-grade accuracy, with native FP64 recast from a hardware requirement into a derived accuracy guarantee. The claim is conditional: the FP8 op is the candidate dominant multiplication substrate, with a bounded auxiliary set of integer deconstruction/reconstruction work, FP32/Kulisch reductions, data movement and a native-FP64 fallback, organised as a hierarchy from the FP8 op through Ozaki II and the Berkeley dwarfs to applications. The instrument is the Tensor-Memory Equilibrium (TME) model, a Roofline extension with four parameters (compute multiplier $\u03b1=3r+1$, bandwidth multiplier $\u03b2$, reconstruction cost $\u03b3$, and the per-input deconstruction cost $c_q$ identified in an NVIDIA review) under which, at its upper bound, the reduction to FP8 costs no performance against an ideal native-FP64 machine of equal bandwidth. On-chip tile fusion drives $\u03b2\\to 1$; the deconstruction term sets a threshold intensity below which emulation is conversion-bound. At the fused, engineered-$c_q$ bound every surveyed class reaches the memory roof, with two priced exceptions: large dense-square DGEMM sits at a deconstruction floor near 0.50 of the FP8 arithmetic roof (about 235 of 473 TFLOPS on the NVIDIA Rubin GPU), a liftable co-design coordinate, and the 3-D FFT is walled by a per-output integer epilogue at $4.9$-$6.7\\times$ its roof in software, recoverable with minor hardware and one moderate ask. Ozaki II lifts the emulated FP64 ceiling from $\\approx 1.3$ to $\\approx 135$ TFLOPS on B300 and $\\approx 473$ on Rubin; three deconstruction-path hardware options are given; constants are engine-checked.",
+            "arxiv_id": "2606.06510",
+            "PRIMARY_TOPIC_LABEL": "Large-Scale Training Systems and Efficiency",
+            "MATCHED_TOPIC_LABELS": [
+                "Large-Scale Training Systems and Efficiency",
+                "Efficiency, Compression, and Large-Scale Training"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [
+                "New Frontier Papers"
+            ],
+            "HOTSPOT_PAPER_PRIMARY_KIND": "new_frontier",
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "New Frontier Papers",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "llm_exact"
+        },
+        "2605.29548": {
+            "ARXIVID": "2605.29548",
+            "COMMENT": "Explains model-scale gains through reduced gradient interference and improved rare-task retention during pretraining.",
+            "RELEVANCE": 9,
+            "NOVELTY": 8,
+            "PRIMARY_TOPIC_ID": "architecture_training",
+            "MATCHED_TOPIC_IDS": [
+                "architecture_training"
+            ],
+            "TOPIC_MATCH_COMMENT": "The central contribution explains how capacity changes optimization dynamics and task acquisition, supported by pretraining experiments from 4M to 4B parameters.",
+            "HOTSPOT_PAPER_TAGS": [
+                "daily_hot"
+            ],
+            "HOTSPOT_PAPER_COMMENT": "Broadly important today: Explains model-scale gains through reduced gradient interference and improved rare-task retention during pretraining.",
+            "SCORE": 17,
+            "authors": [
+                "Jing Huang",
+                "Daniel Wurgaft",
+                "Rachit Bansal",
+                "Laura Ruis",
+                "Naomi Saphra",
+                "David Alvarez-Melis",
+                "Andrew Kyle Lampinen",
+                "Christopher Potts",
+                "Ekdeep Singh Lubana"
+            ],
+            "title": "Why Larger Models Learn More: Effects of Capacity, Interference, and Rare-Task Retention",
+            "abstract": "Larger models learn tasks smaller models do not. What drives this phenomenon? We develop a simple phenomenological argument that power-law scaling already suggests that a larger model will be able to learn a part of the data distribution that a smaller model fails to learn, even with infinite training data. To validate this claim and identify its causes, we study the effects of model scaling on a synthetic setup consisting of a mixture of tasks that show monotonic scaling curves. The results point to a data-induced competition over resources (neurons). Specifically, smaller models allocate their neurons to high frequency or low complexity tasks, and so they learn solutions that perform poorly on rare and complex tasks. Moreover, this happens even when solutions capable of expressing the desired task exist. We then assess how a larger model circumvents this data-centric bottleneck, finding that it traces to a reduced interference mechanism: larger models can allocate enough resources to common tasks that the gradient updates for those tasks become weak, which means that they do not overwrite rare-task features as they slowly accumulate. Finally, to further validate these claims, we pretrain OLMo models (4M to 4B parameters) on novel tasks of varying frequency and complexity. The results mirror those from our synthetic data experiments: only the larger OLMo models learn the infrequent and complex tasks, and these larger models embed more task features in their representations and show less gradient interference between tasks. Overall, we offer a data-centric account of why larger models learn tasks that smaller models fail to. This helps explain why larger models are better in practice, and it can inform practical questions concerning model sizing and training data mixtures.",
+            "arxiv_id": "2605.29548",
+            "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+            "MATCHED_TOPIC_LABELS": [
+                "Architecture and Training Dynamics"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [
+                "Daily Hot Papers"
+            ],
+            "HOTSPOT_PAPER_PRIMARY_KIND": "daily_hot",
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "Daily Hot Papers",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "heuristic"
+        }
+    },
+    "sections": [
+        {
+            "kind": "new_frontier",
+            "label": "New Frontier Papers",
+            "description": "Papers that appear to open a genuinely new direction, paradigm, or field.",
+            "paper_ids": [
+                "2606.06510"
+            ]
+        },
+        {
+            "kind": "daily_hot",
+            "label": "Daily Hot Papers",
+            "description": "Papers that feel broadly important to the day and belong in the hotspot paper feed.",
+            "paper_ids": [
+                "2605.29548"
+            ]
+        }
+    ]
 }

@@ -1,0 +1,338 @@
+{
+    "schema_version": 2,
+    "meta": {
+        "date": "2025-01-20",
+        "sort": [
+            "score",
+            "relevance"
+        ],
+        "topic_schema_version": 2,
+        "total_papers": 5,
+        "usage": {
+            "model": "llmcall:cc",
+            "prompt_tokens": 0,
+            "completion_tokens": 0,
+            "prompt_cost": 0.0,
+            "completion_cost": 0.0,
+            "total_arxiv_papers": 354,
+            "total_scanned_papers": 354,
+            "total_relevant_papers": 5,
+            "filter_health": {
+                "status": "ok",
+                "scanned_papers": 354,
+                "selected_papers": 5,
+                "llm_tokens": 0,
+                "message": "Scored 354 papers with 4/4 successful model calls; 5 selected."
+            },
+            "llm": {
+                "backend": "LLM backend: llmcall chain=codexg->codex->cc->claude",
+                "attempted": 4,
+                "succeeded": 4,
+                "failed": 0,
+                "by_backend": {
+                    "llmcall": 4
+                },
+                "by_provider": {
+                    "cc": 4
+                },
+                "errors": [],
+                "seconds": 359.3,
+                "trace": [
+                    "codexg: unavailable after 47.5s of 543.7s (2026-09-11T04:23:21.092982Z ERROR codex_models_manager::manager: failed to refresh available models: stream disconnected before completion: failed to decode models response: missing field `models` at )",
+                    "codex: unavailable after 3.9s of 515.0s (OpenAI Codex v0.154.0",
+                    "cc: answered in 177.9s of 529.9s",
+                    "codexg: unavailable after 5.8s of 543.7s (2026-09-11T04:27:10.033318Z ERROR codex_models_manager::manager: failed to refresh available models: stream disconnected before completion: failed to decode models response: missing field `models` at )",
+                    "codex: unavailable after 5.5s of 556.7s (OpenAI Codex v0.154.0",
+                    "cc: answered in 14.4s of 569.9s",
+                    "codexg: unavailable after 4.7s of 543.7s (OpenAI Codex v0.154.0",
+                    "codex: unavailable after 4.9s of 557.8s (OpenAI Codex v0.154.0",
+                    "cc: answered in 54.5s of 571.6s",
+                    "codexg: unavailable after 5.9s of 543.7s (2026-09-11T04:28:39.752917Z ERROR codex_models_manager::manager: failed to refresh available models: stream disconnected before completion: failed to decode models response: missing field `models` at )",
+                    "codex: unavailable after 5.7s of 556.6s (OpenAI Codex v0.154.0",
+                    "cc: answered in 28.6s of 569.7s"
+                ]
+            },
+            "remedied": true
+        }
+    },
+    "topic_order": [
+        "moe_training",
+        "training_systems",
+        "architecture_training",
+        "efficiency_scaling",
+        "representation_structure",
+        "memory_systems",
+        "world_models_open_ended_rl"
+    ],
+    "diagnostics": {
+        "total_papers": 5,
+        "topic_counts": [
+            {
+                "topic_id": "moe_training",
+                "topic_label": "MoE Training",
+                "paper_count": 1
+            },
+            {
+                "topic_id": "training_systems",
+                "topic_label": "Large-Scale Training Systems and Efficiency",
+                "paper_count": 1
+            },
+            {
+                "topic_id": "architecture_training",
+                "topic_label": "Architecture and Training Dynamics",
+                "paper_count": 1
+            },
+            {
+                "topic_id": "efficiency_scaling",
+                "topic_label": "Efficiency, Compression, and Large-Scale Training",
+                "paper_count": 2
+            },
+            {
+                "topic_id": "representation_structure",
+                "topic_label": "Representation Learning Theory and Structure",
+                "paper_count": 0
+            },
+            {
+                "topic_id": "memory_systems",
+                "topic_label": "Memory Structures and Agent Memory Systems",
+                "paper_count": 0
+            },
+            {
+                "topic_id": "world_models_open_ended_rl",
+                "topic_label": "World Models, Exploration, and Open-Ended Reinforcement Learning",
+                "paper_count": 0
+            }
+        ],
+        "assignment_source_counts": {
+            "llm_exact": 5
+        },
+        "llm_assignment_count": 5,
+        "heuristic_assignment_count": 0,
+        "default_assignment_count": 0,
+        "invalid_primary_topic_fallback_count": 0,
+        "missing_primary_topic_fallback_count": 0,
+        "hotspot_paper_kind_counts": {
+            "new_frontier": 1,
+            "daily_hot": 0
+        },
+        "hotspot_paper_assignment_source_counts": {
+            "default": 4,
+            "llm_exact": 1
+        }
+    },
+    "papers": {
+        "2501.10322": {
+            "ARXIVID": "2501.10322",
+            "COMMENT": "Hierarchical byte/word autoregressive architecture: a light character encoder produces word embeddings for a word-level backbone plus a character decoder, removing the fixed subword vocabulary while keeping sequence compression, validated to 7B with ~2x faster continued pretraining on a new language.",
+            "RELEVANCE": 8,
+            "NOVELTY": 7,
+            "PRIMARY_TOPIC_ID": "architecture_training",
+            "MATCHED_TOPIC_IDS": [
+                "architecture_training",
+                "efficiency_scaling"
+            ],
+            "TOPIC_MATCH_COMMENT": "The core contribution is a new architectural mechanism for sequence input representation, studied at pretraining scale with measured training-speed effects.",
+            "HOTSPOT_PAPER_TAGS": [],
+            "HOTSPOT_PAPER_COMMENT": "",
+            "SCORE": 15,
+            "authors": [
+                "Pit Neitemeier",
+                "Björn Deiseroth",
+                "Constantin Eichenberg",
+                "Lukas Balles"
+            ],
+            "title": "Hierarchical Autoregressive Transformers: Combining Byte- and Word-Level Processing for Robust, Adaptable Language Models",
+            "abstract": "Tokenization is a fundamental step in natural language processing, breaking text into units that computational models can process. While learned subword tokenizers have become the de-facto standard, they present challenges such as large vocabularies, limited adaptability to new domains or languages, and sensitivity to spelling errors and variations. To overcome these limitations, we investigate a hierarchical architecture for autoregressive language modelling that combines character-level and word-level processing. It employs a lightweight character-level encoder to convert character sequences into word embeddings, which are then processed by a word-level backbone model and decoded back into characters via a compact character-level decoder. This method retains the sequence compression benefits of word-level tokenization without relying on a rigid, predefined vocabulary. We demonstrate, at scales up to 7 billion parameters, that hierarchical transformers match the downstream task performance of subword-tokenizer-based models while exhibiting significantly greater robustness to input perturbations. Additionally, during continued pretraining on an out-of-domain language, our model trains almost twice as fast, achieves superior performance on the target language, and retains more of its previously learned knowledge. Hierarchical transformers pave the way for NLP systems that are more robust, flexible, and generalizable across languages and domains.",
+            "arxiv_id": "2501.10322",
+            "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+            "MATCHED_TOPIC_LABELS": [
+                "Architecture and Training Dynamics",
+                "Efficiency, Compression, and Large-Scale Training"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [],
+            "HOTSPOT_PAPER_PRIMARY_KIND": null,
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+        },
+        "2501.10054": {
+            "ARXIVID": "2501.10054",
+            "COMMENT": "Constant-folding-style FFN compression: piecewise-linear approximation of GELU over frequent input ranges with an online outlier predictor falling back to exact compute.",
+            "RELEVANCE": 7,
+            "NOVELTY": 7,
+            "PRIMARY_TOPIC_ID": "efficiency_scaling",
+            "MATCHED_TOPIC_IDS": [
+                "efficiency_scaling"
+            ],
+            "TOPIC_MATCH_COMMENT": "A genuinely new compression mechanism for FFN parameters rather than a tuned pruning variant, though inference-only.",
+            "HOTSPOT_PAPER_TAGS": [],
+            "HOTSPOT_PAPER_COMMENT": "",
+            "SCORE": 14,
+            "authors": [
+                "Gansen Hu",
+                "Zhaoguo Wang",
+                "Jinglin Wei",
+                "Wei Huang",
+                "Haibo Chen"
+            ],
+            "title": "Accelerating Large Language Models through Partially Linear Feed-Forward Network",
+            "abstract": "Large language models (LLMs) demonstrate remarkable capabilities but face deployment challenges due to their massive parameter counts. While existing compression techniques like pruning can reduce model size, it leads to significant accuracy degradation under high compression ratios. We present a novel perspective inspired by constant folding in compiler optimization. Our approach enables parameter reduction by treating activation functions in LLMs as linear functions. However, recent LLMs use complex non-linear activations like GELU that prevent direct application of this technique. We propose TARDIS, which enables optimization of LLMs with non-linear activations by partially approximating them with linear functions in frequently occurring input ranges. For outlier inputs, TARDIS employs an online predictor to dynamically fall back to original computations. Our experiments demonstrate that TARDIS achieves 80% parameter reduction in feed-forward networks, while significantly outperforming state-of-the-art pruning methods Wanda and RIA with up to 65% higher accuracy. In practical deployments for a 7B model, TARDIS achieves 1.6x end-to-end inference speedup when integrated with the vLLM serving system, and 1.4x speedup with the widely adopted HuggingFace implementation, while incurring only a 10.9% accuracy trade-off.",
+            "arxiv_id": "2501.10054",
+            "PRIMARY_TOPIC_LABEL": "Efficiency, Compression, and Large-Scale Training",
+            "MATCHED_TOPIC_LABELS": [
+                "Efficiency, Compression, and Large-Scale Training"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [],
+            "HOTSPOT_PAPER_PRIMARY_KIND": null,
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+        },
+        "2501.10062": {
+            "ARXIVID": "2501.10062",
+            "COMMENT": "Diagnoses expert representational collapse in MoE-LoRA and imposes Gram-Schmidt/Stiefel orthogonality on experts to enforce diversity with fewer experts.",
+            "RELEVANCE": 7,
+            "NOVELTY": 6,
+            "PRIMARY_TOPIC_ID": "moe_training",
+            "MATCHED_TOPIC_IDS": [
+                "moe_training",
+                "efficiency_scaling"
+            ],
+            "TOPIC_MATCH_COMMENT": "Core contribution is an expert-diversity mechanism inside a MoE layer, though scoped to PEFT rather than pretraining-scale MoE.",
+            "HOTSPOT_PAPER_TAGS": [],
+            "HOTSPOT_PAPER_COMMENT": "",
+            "SCORE": 13,
+            "authors": [
+                "Jinyuan Feng",
+                "Zhiqiang Pu",
+                "Tianyi Hu",
+                "Dongmin Li",
+                "Xiaolin Ai",
+                "Huimu Wang"
+            ],
+            "title": "OMoE: Diversifying Mixture of Low-Rank Adaptation by Orthogonal Finetuning",
+            "abstract": "Building mixture-of-experts (MoE) architecture for Low-rank adaptation (LoRA) is emerging as a potential direction in parameter-efficient fine-tuning (PEFT) for its modular design and remarkable performance. However, simply stacking the number of experts cannot guarantee significant improvement. In this work, we first conduct qualitative analysis to indicate that experts collapse to similar representations in vanilla MoE, limiting the capacity of modular design and computational efficiency. Ulteriorly, Our analysis reveals that the performance of previous MoE variants maybe limited by a lack of diversity among experts. Motivated by these findings, we propose Orthogonal Mixture-of-Experts (OMoE), a resource-efficient MoE variant that trains experts in an orthogonal manner to promote diversity. In OMoE, a Gram-Schmidt process is leveraged to enforce that the experts' representations lie within the Stiefel manifold. By applying orthogonal constraints directly to the architecture, OMoE keeps the learning objective unchanged, without compromising optimality. Our method is simple and alleviates memory bottlenecks, as it incurs minimal experts compared to vanilla MoE models. Experiments on diverse commonsense reasoning benchmarks demonstrate that OMoE can consistently achieve stable and efficient performance improvement when compared with the state-of-the-art methods while significantly reducing the number of required experts.",
+            "arxiv_id": "2501.10062",
+            "PRIMARY_TOPIC_LABEL": "MoE Training",
+            "MATCHED_TOPIC_LABELS": [
+                "MoE Training",
+                "Efficiency, Compression, and Large-Scale Training"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [],
+            "HOTSPOT_PAPER_PRIMARY_KIND": null,
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+        },
+        "2501.10658": {
+            "ARXIVID": "2501.10658",
+            "COMMENT": "Vector quantization turned into lookup tables with a multistage LUTBoost training path, pushing below the 1-bit floor of scalar quantization on custom accelerator hardware.",
+            "RELEVANCE": 6,
+            "NOVELTY": 6,
+            "PRIMARY_TOPIC_ID": "efficiency_scaling",
+            "MATCHED_TOPIC_IDS": [
+                "efficiency_scaling"
+            ],
+            "TOPIC_MATCH_COMMENT": "Extreme low-bit quantization with a genuinely different numerical representation, though the payoff is hardware accelerator area/power rather than training cost.",
+            "HOTSPOT_PAPER_TAGS": [],
+            "HOTSPOT_PAPER_COMMENT": "",
+            "SCORE": 12,
+            "authors": [
+                "Guoyu Li",
+                "Shengyu Ye",
+                "Chunyun Chen",
+                "Yang Wang",
+                "Fan Yang",
+                "Ting Cao",
+                "Cheng Liu",
+                "Mohamed M. Sabry",
+                "Mao Yang"
+            ],
+            "title": "LUT-DLA: Lookup Table as Efficient Extreme Low-Bit Deep Learning Accelerator",
+            "abstract": "The emergence of neural network capabilities invariably leads to a significant surge in computational demands due to expanding model sizes and increased computational complexity. To reduce model size and lower inference costs, recent research has focused on simplifying models and designing hardware accelerators using low-bit quantization. However, due to numerical representation limits, scalar quantization cannot reduce bit width lower than 1-bit, diminishing its benefits. To break through these limitations, we introduce LUT-DLA, a Look-Up Table (LUT) Deep Learning Accelerator Framework that utilizes vector quantization to convert neural network models into LUTs, achieving extreme low-bit quantization. The LUT-DLA framework facilitates efficient and cost-effective hardware accelerator designs and supports the LUTBoost algorithm, which helps to transform various DNN models into LUT-based models via multistage training, drastically cutting both computational and hardware overhead. Additionally, through co-design space exploration, LUT-DLA assesses the impact of various model and hardware parameters to fine-tune hardware configurations for different application scenarios, optimizing performance and efficiency. Our comprehensive experiments show that LUT-DLA achieves improvements in power efficiency and area efficiency with gains of $1.4$~$7.0\\times$ and $1.5$~$146.1\\times$, respectively, while maintaining only a modest accuracy drop. For CNNs, accuracy decreases by $0.1\\%$~$3.1\\%$ using the $L_2$ distance similarity, $0.1\\%$~$3.4\\%$ with the $L_1$ distance similarity, and $0.1\\%$~$3.8\\%$ when employing the Chebyshev distance similarity. For transformer-based models, the accuracy drop ranges from $1.4\\%$ to $3.0\\%$.",
+            "arxiv_id": "2501.10658",
+            "PRIMARY_TOPIC_LABEL": "Efficiency, Compression, and Large-Scale Training",
+            "MATCHED_TOPIC_LABELS": [
+                "Efficiency, Compression, and Large-Scale Training"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [],
+            "HOTSPOT_PAPER_PRIMARY_KIND": null,
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+        },
+        "2501.10187": {
+            "ARXIVID": "2501.10187",
+            "COMMENT": "Position paper arguing AI clusters should be built from many small-die Lite-GPUs connected by co-packaged optics, with analysis of the resulting resource, memory, and network management problems for distributed workloads.",
+            "RELEVANCE": 6,
+            "NOVELTY": 6,
+            "PRIMARY_TOPIC_ID": "training_systems",
+            "MATCHED_TOPIC_IDS": [
+                "training_systems",
+                "efficiency_scaling"
+            ],
+            "TOPIC_MATCH_COMMENT": "It reasons about cluster-scale communication and partitioning that determine what a training run costs, though it is a vision paper without a concrete distributed-training algorithm.",
+            "HOTSPOT_PAPER_TAGS": [
+                "new_frontier"
+            ],
+            "HOTSPOT_PAPER_COMMENT": "Proposes inverting the prevailing scale-up-the-die trajectory for AI clusters, an early but genuinely different direction for accelerator and interconnect design.",
+            "SCORE": 12,
+            "authors": [
+                "Burcu Canakci",
+                "Junyi Liu",
+                "Xingbo Wu",
+                "Nathanaël Cheriere",
+                "Paolo Costa",
+                "Sergey Legtchenko",
+                "Dushyanth Narayanan",
+                "Ant Rowstron"
+            ],
+            "title": "Good things come in small packages: Should we build AI clusters with Lite-GPUs?",
+            "abstract": "To match the blooming demand of generative AI workloads, GPU designers have so far been trying to pack more and more compute and memory into single complex and expensive packages. However, there is growing uncertainty about the scalability of individual GPUs and thus AI clusters, as state-of-the-art GPUs are already displaying packaging, yield, and cooling limitations. We propose to rethink the design and scaling of AI clusters through efficiently-connected large clusters of Lite-GPUs, GPUs with single, small dies and a fraction of the capabilities of larger GPUs. We think recent advances in co-packaged optics can enable distributing AI workloads onto many Lite-GPUs through high bandwidth and efficient communication. In this paper, we present the key benefits of Lite-GPUs on manufacturing cost, blast radius, yield, and power efficiency; and discuss systems opportunities and challenges around resource, workload, memory, and network management.",
+            "arxiv_id": "2501.10187",
+            "PRIMARY_TOPIC_LABEL": "Large-Scale Training Systems and Efficiency",
+            "MATCHED_TOPIC_LABELS": [
+                "Large-Scale Training Systems and Efficiency",
+                "Efficiency, Compression, and Large-Scale Training"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [
+                "New Frontier Papers"
+            ],
+            "HOTSPOT_PAPER_PRIMARY_KIND": "new_frontier",
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "New Frontier Papers",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "llm_exact"
+        }
+    },
+    "topic_sections": [
+        {
+            "topic_id": "moe_training",
+            "topic_label": "MoE Training",
+            "paper_ids": [
+                "2501.10062"
+            ]
+        },
+        {
+            "topic_id": "training_systems",
+            "topic_label": "Large-Scale Training Systems and Efficiency",
+            "paper_ids": [
+                "2501.10187"
+            ]
+        },
+        {
+            "topic_id": "architecture_training",
+            "topic_label": "Architecture and Training Dynamics",
+            "paper_ids": [
+                "2501.10322"
+            ]
+        },
+        {
+            "topic_id": "efficiency_scaling",
+            "topic_label": "Efficiency, Compression, and Large-Scale Training",
+            "paper_ids": [
+                "2501.10054",
+                "2501.10658"
+            ]
+        }
+    ]
+}

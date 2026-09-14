@@ -2,8 +2,8 @@
     "schema_version": 1,
     "meta": {
         "date": "2026-08-28",
-        "total_candidates": 0,
-        "total_spotlight_papers": 0,
+        "total_candidates": 125,
+        "total_spotlight_papers": 7,
         "thresholds": {
             "daily_hot_score_cutoff": 15,
             "daily_hot_relevance_cutoff": 7,
@@ -17,11 +17,305 @@
     },
     "diagnostics": {
         "candidate_count_by_kind": {
-            "new_frontier": 0,
-            "daily_hot": 0
+            "new_frontier": 1,
+            "daily_hot": 6
         },
-        "selected_count_by_kind": {}
+        "selected_count_by_kind": {
+            "new_frontier": 1,
+            "daily_hot": 6
+        }
     },
-    "papers": {},
-    "sections": []
+    "papers": {
+        "2601.21766": {
+            "ARXIVID": "2601.21766",
+            "COMMENT": "Introduces continued-fraction components that replace attention and feed-forward blocks, supported by custom gradient formulations.",
+            "RELEVANCE": 10,
+            "NOVELTY": 8,
+            "PRIMARY_TOPIC_ID": "architecture_training",
+            "MATCHED_TOPIC_IDS": [
+                "architecture_training",
+                "efficiency_scaling"
+            ],
+            "TOPIC_MATCH_COMMENT": "Replacement computational blocks are the central contribution; billion-parameter pretraining experiments also report fewer parameters and shorter training time.",
+            "HOTSPOT_PAPER_TAGS": [
+                "new_frontier"
+            ],
+            "HOTSPOT_PAPER_COMMENT": "Explores continued fractions as an alternative family of generative-model components, with initial validation at billion-parameter scale.",
+            "SCORE": 18,
+            "authors": [
+                "Amit Dhurandhar",
+                "Vijil Chenthamarakshan",
+                "Dennis Wei",
+                "Tejaswini Pedapati",
+                "Karthikeyan Natesan Ramamurthy",
+                "Rahul Nair"
+            ],
+            "title": "CoFrGeNet: Continued Fraction Architectures for Language Generation",
+            "abstract": "Transformers are arguably the preferred architecture for language generation. In this paper, inspired by continued fractions, we introduce a new function class for generative modeling. The architecture family implementing this function class is named CoFrGeNets - Continued Fraction Generative Networks. We design novel architectural components based on this function class that can replace Multi-head Attention and Feed-Forward Networks in Transformer blocks while requiring much fewer parameters. We derive custom gradient formulations to optimize the proposed components more accurately and efficiently than using standard PyTorch-based gradients. Our components are a plug-in replacement requiring little change in training or inference procedures that have already been put in place for Transformer-based models thus making our approach easy to incorporate in large industrial workflows. We experiment on two very different transformer architectures GPT2-xl (1.5B) and Llama3 (3.2B), where the former we pre-train on OpenWebText and GneissWeb, while the latter we pre-train on the docling data mix which consists of nine different datasets. Results show that the performance on downstream classification, Q\\& A, reasoning and text understanding tasks of our models is competitive and sometimes even superior to the original models with $\\frac{2}{3}$ to $\\frac{1}{2}$ the parameters and shorter pre-training time. We believe that future implementations customized to hardware will further bring out the true potential of our architectures.",
+            "arxiv_id": "2601.21766",
+            "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+            "MATCHED_TOPIC_LABELS": [
+                "Architecture and Training Dynamics",
+                "Efficiency, Compression, and Large-Scale Training"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [
+                "New Frontier Papers"
+            ],
+            "HOTSPOT_PAPER_PRIMARY_KIND": "new_frontier",
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "New Frontier Papers",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "llm_exact"
+        },
+        "2606.04438": {
+            "ARXIVID": "2606.04438",
+            "COMMENT": "Iteration- and token-conditioned normalization enables weight-shared sparse computation under matched parameter and FLOP budgets.",
+            "RELEVANCE": 10,
+            "NOVELTY": 8,
+            "PRIMARY_TOPIC_ID": "architecture_training",
+            "MATCHED_TOPIC_IDS": [
+                "moe_training",
+                "architecture_training"
+            ],
+            "TOPIC_MATCH_COMMENT": "The central advance is iterative architectural design for MoE: loop-aware modulation and attention-to-FFN capacity allocation.",
+            "HOTSPOT_PAPER_TAGS": [
+                "daily_hot"
+            ],
+            "HOTSPOT_PAPER_COMMENT": "Broadly important today: Iteration- and token-conditioned normalization enables weight-shared sparse computation under matched parameter and FLOP budgets.",
+            "SCORE": 18,
+            "authors": [
+                "Wenkai Chen",
+                "Tianshu Li",
+                "Wenyong Huang",
+                "Yichun Yin",
+                "Lifeng Shang",
+                "Chengwei Qin"
+            ],
+            "title": "LoopMoE: Unifying Iterative Computation with Mixture-of-Experts for Language Modeling",
+            "abstract": "Mixture-of-Experts (MoE) and looped architectures scale models along two orthogonal axes, namely parameter capacity and effective depth. However, mainstream looped architectures rely on dense backbones that couple parameter count with per-token FLOPs, which makes it impossible to isolate the effect of iterative computation under matched budgets. To this end, we present LoopMoE, a looped MoE language model that integrates sparse routing with iterative weight-shared computation through two designs. The first is IterAdaLN, which resolves weight-sharing symmetry via a modulation signal jointly conditioned on the iteration index and the per-token hidden state. The second is a capacity-balancing strategy that recovers the attention-to-FFN active parameter ratio of well-tuned non-looped references. Together, these designs enable the first strictly controlled, head-to-head evaluation of a looped MoE against a Vanilla MoE under identical total parameters, per-token FLOPs, and active sublayer ratios. Across nine downstream benchmarks, LoopMoE's average improvement over its matched vanilla MoE increases from over 1 point at the 3B scale to approximately 3 points at the 9B scale. These results provide initial evidence that the benefits of iterative sparse computation may strengthen with scale, positioning LoopMoE as a promising architecture for scalable looped language models.",
+            "arxiv_id": "2606.04438",
+            "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+            "MATCHED_TOPIC_LABELS": [
+                "MoE Training",
+                "Architecture and Training Dynamics"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [
+                "Daily Hot Papers"
+            ],
+            "HOTSPOT_PAPER_PRIMARY_KIND": "daily_hot",
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "Daily Hot Papers",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "heuristic"
+        },
+        "2608.27763": {
+            "ARXIVID": "2608.27763",
+            "COMMENT": "Derives prefix-aligned, normalized fast-weight update rules with recurrent, masked-parallel, and chunk-parallel forms.",
+            "RELEVANCE": 10,
+            "NOVELTY": 8,
+            "PRIMARY_TOPIC_ID": "architecture_training",
+            "MATCHED_TOPIC_IDS": [
+                "architecture_training"
+            ],
+            "TOPIC_MATCH_COMMENT": "The contribution directly specifies and analyzes learning rules, temporal alignment, and numerical stability inside recurrent sequence architectures.",
+            "HOTSPOT_PAPER_TAGS": [
+                "daily_hot"
+            ],
+            "HOTSPOT_PAPER_COMMENT": "Broadly important today: Derives prefix-aligned, normalized fast-weight update rules with recurrent, masked-parallel, and chunk-parallel forms.",
+            "SCORE": 18,
+            "authors": [
+                "Yifan Zhang",
+                "Steve Ta",
+                "Jasper Zhang",
+                "Jichen Feng",
+                "Shuzhen Li",
+                "Yongxin Zhang",
+                "Yifeng Liu",
+                "Huizhuo Yuan",
+                "Mengdi Wang",
+                "Quanquan Gu",
+                "Andrew Chi-Chih Yao"
+            ],
+            "title": "Fast Weight Attention for Continual Learning",
+            "abstract": "Recurrent fast-weight memories and selective state-space models compress an expanding context into a fixed-size recurrent state, making the state transition an online learning rule. We study this rule under read-after-write autoregressive semantics. For the prefix-prediction objective considered here, the local fast-memory example revealed at step $t$ is the prefix-aligned pair $(\\mathbf{x}_t,\\mathbf{y}_t)=(\u00cf\u0095(\\mathbf{k}_{t-1}),\\mathbf{v}_t)$. The common same-step association $(\u00cf\u0095(\\mathbf{k}_t),\\mathbf{v}_t)$ remains causal, but optimizes a different internal objective. We derive normalized first-order updates for squared-error regression and negative inner-product objectives. The regression family comprises Falcon-1 (a scalar NLMS update), Falcon-2 (its per-column extension), and Falcon-3 (a sliding-window mini-batch update); Falcon-1A/Falcon-2A/Falcon-3A are the corresponding inner-product variants. We provide recurrent, masked-parallel, and chunk-parallel forms, together with numerically stable positive-decay renormalization. Representative variants remain competitive in language modeling and improve length extrapolation on variable-digit addition. This framework separates temporal alignment, plasticity, forgetting, and bounded rehearsal in recurrent sequence models.",
+            "arxiv_id": "2608.27763",
+            "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+            "MATCHED_TOPIC_LABELS": [
+                "Architecture and Training Dynamics"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [
+                "Daily Hot Papers"
+            ],
+            "HOTSPOT_PAPER_PRIMARY_KIND": "daily_hot",
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "Daily Hot Papers",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "heuristic"
+        },
+        "2608.27514": {
+            "ARXIVID": "2608.27514",
+            "COMMENT": "Trajectory-level speculative verification reduces diffusion decoding work, with a reported 1.3x speedup over Fast-dLLM.",
+            "RELEVANCE": 9,
+            "NOVELTY": 8,
+            "PRIMARY_TOPIC_ID": "efficiency_scaling",
+            "MATCHED_TOPIC_IDS": [
+                "efficiency_scaling"
+            ],
+            "TOPIC_MATCH_COMMENT": "Draft denoising trajectories and parallel verification introduce a substantive algorithm for reducing large-model generation cost.",
+            "HOTSPOT_PAPER_TAGS": [
+                "daily_hot"
+            ],
+            "HOTSPOT_PAPER_COMMENT": "Broadly important today: Trajectory-level speculative verification reduces diffusion decoding work, with a reported 1.3x speedup over Fast-dLLM.",
+            "SCORE": 17,
+            "authors": [
+                "Tianxiang Pan",
+                "Baitao Gong",
+                "Mo Guang",
+                "Hongwei Yong",
+                "Tianpeng Jiang",
+                "Yaqian Li",
+                "Zheng Cao",
+                "Kaiwen Long"
+            ],
+            "title": "Trajectory-Level Speculative Decoding for Diffusion Language Models",
+            "abstract": "Diffusion-based language models (dLLMs) enable parallel token generation through iterative denoising, but existing decoding strategies collapse to single-token generation under low confidence, severely limiting throughput. Unlike autoregressive models where speculative decoding operates on token sequences in a fixed left-to-right order, dLLMs require speculating over denoising trajectories-sequences of multi-token updates with explicit positions and unmasking orders. We develop a trajectory-level speculative framework that constructs draft denoising trajectories via confidence-stratified tree exploration and verifies them through blockwise parallel evaluation with bidirectional attention masking. Our method further introduces inter-block speculation, exploiting diffusion models' bidirectional structure to perform cross-block lookahead. We formally characterize when this approach is exact and identify trajectory drift as the fundamental cost of increased parallelism. Building on Fast-dLLM's dual-cache infrastructure, our framework reduces denoising iterations by 30-40% and increases tokens-per-step from 2.6 to 4.3, achieving 7-14x speedup over vanilla dLLMs and 1.3x over Fast-dLLM with less than 1% accuracy change across reasoning and code benchmarks.",
+            "arxiv_id": "2608.27514",
+            "PRIMARY_TOPIC_LABEL": "Efficiency, Compression, and Large-Scale Training",
+            "MATCHED_TOPIC_LABELS": [
+                "Efficiency, Compression, and Large-Scale Training"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [
+                "Daily Hot Papers"
+            ],
+            "HOTSPOT_PAPER_PRIMARY_KIND": "daily_hot",
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "Daily Hot Papers",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "heuristic"
+        },
+        "2608.26556": {
+            "ARXIVID": "2608.26556",
+            "COMMENT": "Initialization-selected dynamical phases determine looped-Transformer compute scaling through distinct bifurcation mechanisms.",
+            "RELEVANCE": 9,
+            "NOVELTY": 8,
+            "PRIMARY_TOPIC_ID": "architecture_training",
+            "MATCHED_TOPIC_IDS": [
+                "architecture_training"
+            ],
+            "TOPIC_MATCH_COMMENT": "The central result explains how training selects recurrent dynamics that govern convergence rates and test-time compute.",
+            "HOTSPOT_PAPER_TAGS": [
+                "daily_hot"
+            ],
+            "HOTSPOT_PAPER_COMMENT": "Broadly important today: Initialization-selected dynamical phases determine looped-Transformer compute scaling through distinct bifurcation mechanisms.",
+            "SCORE": 17,
+            "authors": [
+                "Gunn Kim"
+            ],
+            "title": "Dynamical phase selection controls compute scaling in looped transformers",
+            "abstract": "A looped transformer performs inference by iterating a weight-tied map, making its computation a dynamical process whose cost is set by the resulting inference dynamics. Here we show that networks with identical architecture and objective, trained to identical accuracy, nevertheless realize distinct dynamical phases depending strongly on initialization, and that the bifurcation defining each phase determines how test-time compute scales. The phases are distinguished by their bifurcation mechanisms, including a saddle-node fold and a Neimark-Sacker-type transition to bounded nonstationary motion. In the fold phase, a one-dimensional normal-form reduction predicts both the relaxation-time and spectral-gap amplitudes from local derivatives of the trained map, yielding the parameter-free relation $\u00cf\u0084(\\varepsilon)[1-\u00ce\u00bb_{\\max}(-\\varepsilon)]\\to\u00cf\u0080$. Composed with a regular distribution of problem difficulty, the same critical slowing down produces the workload-level tail $P(\u00cf\u0084>N)\\sim N^{-2}$. In the Neimark--Sacker phase, the fold scaling law disappears rather than merely changing its prefactor. Thus, test-time compute is not determined by architecture alone. It is governed by the dynamical phase of the solution found by training.",
+            "arxiv_id": "2608.26556",
+            "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+            "MATCHED_TOPIC_LABELS": [
+                "Architecture and Training Dynamics"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [
+                "Daily Hot Papers"
+            ],
+            "HOTSPOT_PAPER_PRIMARY_KIND": "daily_hot",
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "Daily Hot Papers",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "heuristic"
+        },
+        "2608.26965": {
+            "ARXIVID": "2608.26965",
+            "COMMENT": "GPU-friendly clustered sparse attention uses centroid compensation to reduce computation while controlling approximation error.",
+            "RELEVANCE": 9,
+            "NOVELTY": 8,
+            "PRIMARY_TOPIC_ID": "efficiency_scaling",
+            "MATCHED_TOPIC_IDS": [
+                "architecture_training",
+                "efficiency_scaling"
+            ],
+            "TOPIC_MATCH_COMMENT": "A general attention-acceleration mechanism is the core contribution; geometry-adaptive clustering and error analysis also provide a substantial architectural connection.",
+            "HOTSPOT_PAPER_TAGS": [
+                "daily_hot"
+            ],
+            "HOTSPOT_PAPER_COMMENT": "Broadly important today: GPU-friendly clustered sparse attention uses centroid compensation to reduce computation while controlling approximation error.",
+            "SCORE": 17,
+            "authors": [
+                "Kasper Nordenram",
+                "Amelie Dittmann"
+            ],
+            "title": "ClusterAttention: A training-free speedup of bidirectional attention",
+            "abstract": "This paper introduces ClusterAttention, a general training-free speedup of bidirectional attention layers. Existing sparse attention methods either rely on structure in the input, such as order in language or spatial proximity in images, or use slow clustering processes amortized over several forward passes. ClusterAttention instead uses a fast recursive clustering method that adapts to the geometry of the keys and queries in each attention head to produce useful clusters. This method allows setting the size of the clusters arbitrarily. We utilize this by setting all clusters to be a fixed size that is a power of two, allowing the block-sparse attention to run at the same latency per query-key interaction as dense attention on GPUs. We also derive an expression for the output error in sparse attention, that explains the counterintuitive experimental finding that tight clusters can lead to larger errors than random clusters. We then derive the error when excluded clusters are compensated through their centroids, and show that this error shrinks with tighter clusters. We integrate this compensation into the method. On large-scale tabular data ClusterAttention speeds up TabPFN-3 arXiv:2605.13986 by two to six times, while retaining at least 99% of the dense accuracy. To our knowledge, it is the first training-free method that can be successfully applied in the setting of unstructured input and a single forward pass. For video generation with Wan 2.1-14B T2V arXiv:2503.20314 , ClusterAttention achieves output closer to dense attention and a larger speedup (1.8x versus 1.4x) compared to SVOO arXiv:2603.18636 , a leading method developed specifically for this domain, both run without offline calibration.",
+            "arxiv_id": "2608.26965",
+            "PRIMARY_TOPIC_LABEL": "Efficiency, Compression, and Large-Scale Training",
+            "MATCHED_TOPIC_LABELS": [
+                "Architecture and Training Dynamics",
+                "Efficiency, Compression, and Large-Scale Training"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [
+                "Daily Hot Papers"
+            ],
+            "HOTSPOT_PAPER_PRIMARY_KIND": "daily_hot",
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "Daily Hot Papers",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "heuristic"
+        },
+        "2604.17423": {
+            "ARXIVID": "2604.17423",
+            "COMMENT": "Unifies stochastic convergence analysis for adaptive preconditioners, including an adaptive Muon variant, without bounded-gradient or small-step-size assumptions.",
+            "RELEVANCE": 9,
+            "NOVELTY": 8,
+            "PRIMARY_TOPIC_ID": "training_systems",
+            "MATCHED_TOPIC_IDS": [
+                "training_systems",
+                "architecture_training"
+            ],
+            "TOPIC_MATCH_COMMENT": "Adaptive optimizers and preconditioners directly match training systems; convergence guarantees also contribute to understanding training dynamics.",
+            "HOTSPOT_PAPER_TAGS": [
+                "daily_hot"
+            ],
+            "HOTSPOT_PAPER_COMMENT": "Broadly important today: Unifies stochastic convergence analysis for adaptive preconditioners, including an adaptive Muon variant, without bounded-gradient or small-step-size assumptions.",
+            "SCORE": 17,
+            "authors": [
+                "S. Gratton",
+                "Ph. L. Toint"
+            ],
+            "title": "A unified convergence theory for adaptive first-order methods in the nonconvex case, including AdaNorm, full and diagonal AdaGrad and Muon",
+            "abstract": "A unified framework for first-order optimization algorithms fornonconvex unconstrained optimization is proposed that uses adaptivelypreconditioned gradients and includes popular methods such as full anddiagonal AdaGrad, AdaNorm, as well as an adpative variant of Muon. This framework also allows combining heterogeneous geometries across different groups of variables while preserving a unified convergence analysis. A fully stochastic global rate-of-convergence analysis is conducted for all methods in the framework, with andwithout two types of momentum, using reasonable assumptions on the variance of the gradient oracle and without assuming bounded stochastic gradients or small enough stepsize.",
+            "arxiv_id": "2604.17423",
+            "PRIMARY_TOPIC_LABEL": "Large-Scale Training Systems and Efficiency",
+            "MATCHED_TOPIC_LABELS": [
+                "Large-Scale Training Systems and Efficiency",
+                "Architecture and Training Dynamics"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [
+                "Daily Hot Papers"
+            ],
+            "HOTSPOT_PAPER_PRIMARY_KIND": "daily_hot",
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "Daily Hot Papers",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "heuristic"
+        }
+    },
+    "sections": [
+        {
+            "kind": "new_frontier",
+            "label": "New Frontier Papers",
+            "description": "Papers that appear to open a genuinely new direction, paradigm, or field.",
+            "paper_ids": [
+                "2601.21766"
+            ]
+        },
+        {
+            "kind": "daily_hot",
+            "label": "Daily Hot Papers",
+            "description": "Papers that feel broadly important to the day and belong in the hotspot paper feed.",
+            "paper_ids": [
+                "2606.04438",
+                "2608.27763",
+                "2608.27514",
+                "2608.26556",
+                "2608.26965",
+                "2604.17423"
+            ]
+        }
+    ]
 }

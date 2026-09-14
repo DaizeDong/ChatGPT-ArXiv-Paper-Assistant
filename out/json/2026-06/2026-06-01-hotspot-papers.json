@@ -2,7 +2,7 @@
     "schema_version": 1,
     "meta": {
         "date": "2026-06-01",
-        "total_candidates": 58,
+        "total_candidates": 219,
         "total_spotlight_papers": 6,
         "thresholds": {
             "daily_hot_score_cutoff": 15,
@@ -17,76 +17,53 @@
     },
     "diagnostics": {
         "candidate_count_by_kind": {
-            "new_frontier": 4,
+            "new_frontier": 3,
             "daily_hot": 3
         },
         "selected_count_by_kind": {
-            "new_frontier": 4,
-            "daily_hot": 2
+            "new_frontier": 3,
+            "daily_hot": 3
         }
     },
     "papers": {
-        "2605.31423": {
-            "ARXIVID": "2605.31423",
-            "COMMENT": "Shows fixed transformers can be universal simulators of transformer classes via suitable input embeddings, including generic universality of random transformers.",
-            "RELEVANCE": 9,
-            "NOVELTY": 9,
-            "PRIMARY_TOPIC_ID": "architecture_training",
+        "2606.01062": {
+            "ARXIVID": "2606.01062",
+            "COMMENT": "Replaces weighted-sum expert aggregation with a learned DAG structure, expanding the expert-combination space without touching router or experts.",
+            "RELEVANCE": 10,
+            "NOVELTY": 8,
+            "PRIMARY_TOPIC_ID": "moe_training",
             "MATCHED_TOPIC_IDS": [
+                "moe_training",
                 "architecture_training"
             ],
-            "TOPIC_MATCH_COMMENT": "This is directly about core architectural expressivity and computation in transformers, making architecture and training dynamics the clear best fit.",
+            "TOPIC_MATCH_COMMENT": "A new MoE layer mechanism on the aggregation axis, complementary to fine-grained experts and routing overhead.",
             "HOTSPOT_PAPER_TAGS": [
-                "new_frontier",
-                "daily_hot"
+                "new_frontier"
             ],
-            "HOTSPOT_PAPER_COMMENT": "A fixed-weights universal-transformer view is both architecturally foundational and unusually paradigm-shifting, making it broadly important beyond a niche reading list.",
+            "HOTSPOT_PAPER_COMMENT": "Opens aggregation structure as a third scaling axis for MoE alongside expert count and granularity.",
             "SCORE": 18,
             "authors": [
-                "Jingwen Liu",
-                "Alexandr Andoni",
-                "Daniel Hsu"
+                "Jiarui Feng",
+                "Hanqing Zeng",
+                "Karish Grover",
+                "Ruizhong Qiu",
+                "Yinglong Xia",
+                "Qiang Zhang",
+                "Qifan Wang",
+                "Ren Chen",
+                "Dongqi Fu",
+                "Jiayi Liu",
+                "Zhoukai Zhao",
+                "Xiangjun Fan",
+                "Benyu Zhang",
+                "Yixin Chen"
             ],
-            "title": "Fixed Universal Transformers",
-            "abstract": "We introduce \\emph{universal transformers}: fixed transformers that can simulate any transformer in a given class via a suitable input embedding. Analogous to a universal Turing machine, the input embedding encodes a description of the target model while all internal parameters remain fixed. We provide explicit sparse constructions achieving universality when the embedding dimension is sufficiently large, and further show that universality is generic: randomly initialized transformers are universal almost surely, which aligns with recent empirical results of Zhong and Andreas (2024). We empirically validate our theory on the algorithmic tasks of parenthesis balancing and multi-hop reasoning. Our results suggest that much of a transformer's expressive power may reside in its input representation rather than its learned weights.",
-            "arxiv_id": "2605.31423",
-            "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+            "title": "DAG-MoE: From Simple Mixture to Structural Aggregation in Mixture-of-Experts",
+            "abstract": "Mixture-of-Experts (MoE) models have become a leading approach for decoupling parameter count from computational cost in large language models, yet effectively scaling MoE performance remains a challenge. Prior work shows that fine-grained experts enlarge the space of expert combinations and improve flexibility, but they also impose substantial routing overhead, creating a new scalability bottleneck. In this paper, we explore a complementary axis for scaling -- how expert outputs are aggregated. We theoretically show that replacing the standard weighted-summation aggregation with structural aggregation expands the expert-combination space without altering the experts or router, and enables possible multi-step reasoning within a single MoE layer. To this end, we propose DAG-MoE, a sparse MoE framework that employs a lightweight module to automatically learn the optimal aggregation structure among the selected experts. Extensive experiments under standard language modeling settings show that DAG-MoE consistently improves performance in both pretraining and fine-tuning, surpassing traditional MoE baselines.",
+            "arxiv_id": "2606.01062",
+            "PRIMARY_TOPIC_LABEL": "MoE Training",
             "MATCHED_TOPIC_LABELS": [
-                "Architecture and Training Dynamics"
-            ],
-            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
-            "HOTSPOT_PAPER_LABELS": [
-                "New Frontier Papers",
-                "Daily Hot Papers"
-            ],
-            "HOTSPOT_PAPER_PRIMARY_KIND": "new_frontier",
-            "HOTSPOT_PAPER_PRIMARY_LABEL": "New Frontier Papers",
-            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "llm_exact"
-        },
-        "2605.31022": {
-            "ARXIVID": "2605.31022",
-            "COMMENT": "Adds layer-local Lagrange multipliers to predictive coding so local updates converge to backprop-equivalent gradients in linear networks.",
-            "RELEVANCE": 9,
-            "NOVELTY": 8,
-            "PRIMARY_TOPIC_ID": "architecture_training",
-            "MATCHED_TOPIC_IDS": [
-                "architecture_training"
-            ],
-            "TOPIC_MATCH_COMMENT": "This is directly about training dynamics and credit propagation in deep networks, with a new local-learning mechanism linked to backprop.",
-            "HOTSPOT_PAPER_TAGS": [
-                "new_frontier"
-            ],
-            "HOTSPOT_PAPER_COMMENT": "The paper opens a potentially important direction for BP-like learning via purely local dynamics, with implications for alternative training mechanisms and theory.",
-            "SCORE": 17,
-            "authors": [
-                "Jeffrey Seely",
-                "Julian Gould"
-            ],
-            "title": "Augmented Lagrangian Predictive Coding",
-            "abstract": "Predictive coding (PC) is a local-learning alternative to backpropagation (BP), training deep networks via local energy-minimization dynamics rather than a global backward pass. We introduce Augmented Lagrangian Predictive Coding (PC-ALM), which maintains PC's inference budget but aligns each weight update toward BP by accumulating per-layer constraint errors into a layer-local Lagrange multiplier. In linear PC networks, PC-ALM converges to an equilibrium with exact BP gradients distributed across the network via only layer-local updates. We analyze PC-ALM in nonlinear PC networks up to depth 128 and show that it matches BP performance across all width-depth regimes, notably in deep narrow networks where PC underperforms. PC-ALM introduces recurrent dynamics in each layer's activations. Compared to PC's heat flow on a scalar energy, PC-ALM dynamics are driven by dual ascent on the augmented Lagrangian. We observe \"ballistic\" credit propagation across very deep networks, with credit signals evenly distributed across layers, compared to PC's slow, diffusive credit propagation. Beyond the algorithm itself, the augmented Lagrangian framework offers a generalization of PC, and may yield insights into how distributed systems could compute and propagate BP-like credit signals through purely local dynamics.",
-            "arxiv_id": "2605.31022",
-            "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
-            "MATCHED_TOPIC_LABELS": [
+                "MoE Training",
                 "Architecture and Training Dynamics"
             ],
             "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
@@ -97,141 +74,106 @@
             "HOTSPOT_PAPER_PRIMARY_LABEL": "New Frontier Papers",
             "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "llm_exact"
         },
-        "2605.31421": {
-            "ARXIVID": "2605.31421",
-            "COMMENT": "Injects the CYK parsing algorithm directly into a recurrent neural architecture via trainable matrix-vector operations.",
+        "2605.31163": {
+            "ARXIVID": "2605.31163",
+            "COMMENT": "Derives recurrent sequence layers as exact Bayesian filters, showing linear attention, GLA and Mamba-2/SSD are one design model and DeltaNet is its covariance-reset reduction.",
             "RELEVANCE": 8,
             "NOVELTY": 8,
             "PRIMARY_TOPIC_ID": "architecture_training",
-            "MATCHED_TOPIC_IDS": [
-                "architecture_training"
-            ],
-            "TOPIC_MATCH_COMMENT": "The central contribution is an architectural mechanism encoding algorithmic structure inside the network, squarely matching architecture and computational mechanism research.",
-            "HOTSPOT_PAPER_TAGS": [
-                "new_frontier"
-            ],
-            "HOTSPOT_PAPER_COMMENT": "It points toward a new architectural paradigm of directly embedding classical algorithms into trainable neural dynamics rather than only learning them implicitly.",
-            "SCORE": 16,
-            "authors": [
-                "Fabio Massimo Zanzotto",
-                "Federico Ranaldi",
-                "Giorgio Satta"
-            ],
-            "title": "Neuro-symbolic Syntactic Parsing: Shaping a Neural Network with the CYK Algorithm",
-            "abstract": "In this paper, we show the possibility of a direct injection of algorithms into neural network architecture. We focus on a complex algorithm, that is, Cocke-Youger-Kasami (CYK) for parsing context-free grammars in Chomsky Normal Form and we propose CYKNN, a simple recurrent neural network architecture for encoding the CYK algorithm in trainable matrix-vector multiplications.We experimented with a very simple grammar with 4 variations showing that our approach outperforms existing LLMs with more than 20B parameters with an in-context learning setting and smaller LLMs of the Qwen family fine-tuned with LoRA. Our attempt paves the way to a different approach to neuro-symbolic methodologies.",
-            "arxiv_id": "2605.31421",
-            "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
-            "MATCHED_TOPIC_LABELS": [
-                "Architecture and Training Dynamics"
-            ],
-            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
-            "HOTSPOT_PAPER_LABELS": [
-                "New Frontier Papers"
-            ],
-            "HOTSPOT_PAPER_PRIMARY_KIND": "new_frontier",
-            "HOTSPOT_PAPER_PRIMARY_LABEL": "New Frontier Papers",
-            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "llm_exact"
-        },
-        "2605.30596": {
-            "ARXIVID": "2605.30596",
-            "COMMENT": "Improves relative representations for cross-model communication via learned semantic anchors and whitened geometry-aware similarity.",
-            "RELEVANCE": 8,
-            "NOVELTY": 8,
-            "PRIMARY_TOPIC_ID": "representation_structure",
-            "MATCHED_TOPIC_IDS": [
-                "representation_structure"
-            ],
-            "TOPIC_MATCH_COMMENT": "The paper is centrally about the structure of learned latent spaces and how to align representations across independently trained models.",
-            "HOTSPOT_PAPER_TAGS": [
-                "new_frontier"
-            ],
-            "HOTSPOT_PAPER_COMMENT": "The work suggests a potentially new direction for modular cross-model communication through shared relative latent geometry rather than direct parameter or token-level alignment.",
-            "SCORE": 16,
-            "authors": [
-                "Oscar Thorsted Svendsen",
-                "Nikolaj Holst Jakobsen",
-                "Fabian Mager",
-                "Hiba Nassar"
-            ],
-            "title": "Improving Relative Representations with Learned Anchors and Whitened Inner Products",
-            "abstract": "Independently trained neural models typically converge to incompatible latent representations, creating a fundamental barrier to highly modular AI systems. While Relative Representations (RR) address this by mapping absolute coordinates to a shared space defined by similarities to common anchor points, traditional implementations rely on randomly sampled anchors and cosine similarity, which frequently fail to capture the anisotropic geometries of modern architectures like Transformers. In this work, we propose a robust framework for cross-model communication based on two improvements. We learn anchors as robust semantic prototypes and utilize a geometry-aware similarity metric which preserves discriminative magnitude information and is invariant to affine shifts. Our approach demonstrates significant gains in performance and consistency across vision and language tasks. Notably, it enables nearly lossless information transfer and stable zero-shot communication even between highly heterogeneous architectures, such as small language models of varying scales.",
-            "arxiv_id": "2605.30596",
-            "PRIMARY_TOPIC_LABEL": "Representation Learning Theory and Structure",
-            "MATCHED_TOPIC_LABELS": [
-                "Representation Learning Theory and Structure"
-            ],
-            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
-            "HOTSPOT_PAPER_LABELS": [
-                "New Frontier Papers"
-            ],
-            "HOTSPOT_PAPER_PRIMARY_KIND": "new_frontier",
-            "HOTSPOT_PAPER_PRIMARY_LABEL": "New Frontier Papers",
-            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "llm_exact"
-        },
-        "2605.31289": {
-            "ARXIVID": "2605.31289",
-            "COMMENT": "Introduces the terminal representation, a lower-dimensional reward-weighted RL representation that recovers DR-like structure without eigendecomposition.",
-            "RELEVANCE": 9,
-            "NOVELTY": 8,
-            "PRIMARY_TOPIC_ID": "representation_structure",
-            "MATCHED_TOPIC_IDS": [
-                "representation_structure",
-                "world_models_open_ended_rl"
-            ],
-            "TOPIC_MATCH_COMMENT": "Its core is a new theoretical representation for reinforcement learning states and trajectories, making representation structure the best primary fit.",
-            "HOTSPOT_PAPER_TAGS": [
-                "daily_hot"
-            ],
-            "HOTSPOT_PAPER_COMMENT": "Broadly important today: Introduces the terminal representation, a lower-dimensional reward-weighted RL representation that recovers DR-like structure without eigendecomposition.",
-            "SCORE": 17,
-            "authors": [
-                "Amir Esterhuysen",
-                "Anders Jonsson"
-            ],
-            "title": "The Terminal Representation in Reinforcement Learning",
-            "abstract": "Representation learning is a powerful tool for spatio-temporal abstraction within reinforcement learning (RL). Two well established approaches are through the successor representation (SR) and the default representation (DR). The SR encodes states by the future trajectories they induce, capturing information flow decoupled from reward. The DR builds on this by weighting trajectories with reward, integrating credit-assignment structure into the representation. Eigenvectors of both representations have been used to support a range of downstream tasks -- including option discovery, reward shaping, transfer learning, and exploration. We introduce a structurally distinct formulation: the terminal representation (TR). The TR encodes reward-weighted trajectories similarly to the DR, but can be learned as a lower-dimensionality object, and can be used directly for the mentioned applications without eigenvector computations. Eigendecomposition also imposes the assumption of symmetric transition dynamics, which the TR can bypass. In this work we develop the theoretical foundations of the TR: its derivation, convergence of two learning algorithms, its use for zero-shot compositionality, and equivalences between alternative reward formulations. We further show the TR is embedded in the top DR eigenvector, allowing it to capture the same underlying knowledge without eigendecomposition. Additionally, we provide empirical evidence of the TR as a viable alternative to existing representations in subsidiary applications, while requiring less computational overhead to learn, store, and use.",
-            "arxiv_id": "2605.31289",
-            "PRIMARY_TOPIC_LABEL": "Representation Learning Theory and Structure",
-            "MATCHED_TOPIC_LABELS": [
-                "Representation Learning Theory and Structure",
-                "World Models, Exploration, and Open-Ended Reinforcement Learning"
-            ],
-            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
-            "HOTSPOT_PAPER_LABELS": [
-                "Daily Hot Papers"
-            ],
-            "HOTSPOT_PAPER_PRIMARY_KIND": "daily_hot",
-            "HOTSPOT_PAPER_PRIMARY_LABEL": "Daily Hot Papers",
-            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "heuristic"
-        },
-        "2605.31518": {
-            "ARXIVID": "2605.31518",
-            "COMMENT": "Identifies activation-mean outliers as the cause of SAE feature death and shows mean-centering eliminates the problem across many model families.",
-            "RELEVANCE": 9,
-            "NOVELTY": 8,
-            "PRIMARY_TOPIC_ID": "representation_structure",
             "MATCHED_TOPIC_IDS": [
                 "architecture_training",
-                "representation_structure"
+                "efficiency_scaling"
             ],
-            "TOPIC_MATCH_COMMENT": "The contribution is about how interpretable features form or fail to form in learned dictionaries, so representation structure is the strongest match.",
+            "TOPIC_MATCH_COMMENT": "A unifying derivation of sub-quadratic recurrent architectures that also yields a new layer with covariance propagation.",
+            "HOTSPOT_PAPER_TAGS": [
+                "new_frontier"
+            ],
+            "HOTSPOT_PAPER_COMMENT": "Recasting the whole family of modern linear-attention and SSM layers as exact Bayesian filters is a framework-level reframing others will build on.",
+            "SCORE": 16,
+            "authors": [
+                "Matthew Dowling",
+                "Hyungju Jeon",
+                "Cristina Savin",
+                "Il Memming Park"
+            ],
+            "title": "Memory by Design: Probabilistic Sequence Layers",
+            "abstract": "We introduce the \\emph{design-model framework}: a way to derive efficient recurrent sequence maps from explicit assumptions about memory. A design model writes evidence into memory by exact Bayesian filtering; a query- dependent readout produces a predictive distribution whose mean is the layer output. In our linear-Gaussian instantiation, the \\emph{Bayesian Layer} propagates both a mean and a covariance: the covariance tracks uncertainty over stored associations, steering writes toward uncertain directions, attenuating gains as evidence accumulates, and preserving confident memories. The same framework unifies several sub-quadratic recurrences: linear attention, GLA, and Mamba-2/SSD are exact filters under a latent-input design model, whereas DeltaNet and related Delta-rule models are covariance-reset reductions of the Bayesian Layer's design model. Restoring covariance propagation yields closed-form predictions for retrieval dynamics, which we verify empirically, and improves robustness beyond the training regime in controlled collision studies, learned associative recall, and the Zoology MQAR benchmark. Training from scratch on WikiText-103 under matched state budgets lowers perplexity on associative-recall hits. Distilling Bayesian Layers into a pretrained 340M Gated DeltaNet improves RULER long-context retrieval over a matched-compute control, at a 2.5--2.7\\% held-out perplexity cost.",
+            "arxiv_id": "2605.31163",
+            "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+            "MATCHED_TOPIC_LABELS": [
+                "Architecture and Training Dynamics",
+                "Efficiency, Compression, and Large-Scale Training"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [
+                "New Frontier Papers"
+            ],
+            "HOTSPOT_PAPER_PRIMARY_KIND": "new_frontier",
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "New Frontier Papers",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "llm_exact"
+        },
+        "2606.00703": {
+            "ARXIVID": "2606.00703",
+            "COMMENT": "Exact reduction from strongly convex quadratic optimization under a B-bit gradient oracle to interactively compressed Gaussian mean estimation, yielding an unconditional product-form lower bound in which bits rather than dimension limit recoverable information.",
+            "RELEVANCE": 8,
+            "NOVELTY": 8,
+            "PRIMARY_TOPIC_ID": "training_systems",
+            "MATCHED_TOPIC_IDS": [
+                "training_systems",
+                "efficiency_scaling"
+            ],
+            "TOPIC_MATCH_COMMENT": "Gives the missing converse side for low-precision and gradient-compressed training, the regime FP8 and FP4 pretraining now occupies.",
+            "HOTSPOT_PAPER_TAGS": [
+                "new_frontier"
+            ],
+            "HOTSPOT_PAPER_COMMENT": "Supplies an information-theoretic floor for a practice that has so far been justified only by empirical scaling laws.",
+            "HOTSPOT_PAPER_TAGS_NOTE": "",
+            "SCORE": 16,
+            "authors": [
+                "Munsik Kim"
+            ],
+            "title": "Information-Theoretic Lower Bounds for Bit-Constrained Stochastic Optimization via a Reduction to Compressed Gaussian Mean Estimation",
+            "abstract": "Low-precision pretraining (FP8, MXFP4, NVFP4) is now standard for frontier language models, yet the literature is almost entirely achievability -- algorithms and empirical scaling laws -- with no matching characterization of what is information-theoretically possible. We study a B-bit quantized stochastic first-order oracle: an optimizer interacts for T rounds and receives, each round, a B-bit adaptive public-coin description of its stochastic gradient. Our main contribution is an exact reduction from optimizing a strongly convex quadratic family to interactively compressed Gaussian mean estimation -- under the B-bit oracle the query carries no information, so optimization collapses exactly onto a sequential distributed-estimation problem. This yields two unconditional lower bounds, a communication bound TB = Omega(d) and a statistical bound T = Omega(sigma^2 d / eps^2), and the sharp product-form bound T = Omega((sigma^2 d / eps^2) max{1, d/B}). The product form is also unconditional: a B-bit transcript carries at most O(TB / sigma^2) of Fisher trace about the mean, so bits rather than dimension limit the recoverable information, and combined with the multivariate van Trees inequality this gives the bound directly, without bounded-likelihood-ratio truncation. We give a near-matching achievability result with exact per-round bit accounting under a bounded-dynamic-range oracle, tight up to a logarithmic factor; the lower bound is for truly Gaussian (unbounded) gradients, and closing this oracle gap is left open. A sequential rate-distortion perspective extends the reduction to correlated and drifting oracles and corrects an earlier conjecture: positive noise correlation raises the bound by (1+rho)/(1-rho) rather than relaxing it. The bounds give an information-theoretic baseline for any low-bit gradient path, not an optimality claim about deployed FP4 systems.",
+            "arxiv_id": "2606.00703",
+            "PRIMARY_TOPIC_LABEL": "Large-Scale Training Systems and Efficiency",
+            "MATCHED_TOPIC_LABELS": [
+                "Large-Scale Training Systems and Efficiency",
+                "Efficiency, Compression, and Large-Scale Training"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [
+                "New Frontier Papers"
+            ],
+            "HOTSPOT_PAPER_PRIMARY_KIND": "new_frontier",
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "New Frontier Papers",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "llm_exact"
+        },
+        "2605.30992": {
+            "ARXIVID": "2605.30992",
+            "COMMENT": "Training-free router built from SVD eigenvectors of expert weight matrices to fix SMoE expert collapse in already-pretrained models.",
+            "RELEVANCE": 10,
+            "NOVELTY": 7,
+            "PRIMARY_TOPIC_ID": "moe_training",
+            "MATCHED_TOPIC_IDS": [
+                "moe_training"
+            ],
+            "TOPIC_MATCH_COMMENT": "Core contribution is an SMoE routing mechanism targeting router/expert collapse, the central MoE-training concern.",
             "HOTSPOT_PAPER_TAGS": [
                 "daily_hot"
             ],
-            "HOTSPOT_PAPER_COMMENT": "Broadly important today: Identifies activation-mean outliers as the cause of SAE feature death and shows mean-centering eliminates the problem across many model families.",
+            "HOTSPOT_PAPER_COMMENT": "Broadly important today: Training-free router built from SVD eigenvectors of expert weight matrices to fix SMoE expert collapse in already-pretrained models.",
             "SCORE": 17,
             "authors": [
-                "Elana Simon",
-                "Etowah Adams",
-                "James Zou"
+                "Giang Do",
+                "Hung Le",
+                "Truyen Tran"
             ],
-            "title": "On the Relationship Between Activation Outliers and Feature Death in Sparse Autoencoders",
-            "abstract": "Sparse autoencoders (SAEs) decompose neural network activations into interpretable features, but many learned features never activate, a problem called feature death that wastes dictionary capacity and can reintroduce superposition. Death rates vary dramatically between models: near-zero on GPT-2, over 70% on AlphaFold3 with identical configurations. We find that dimension-level activation outliers (dimensions whose mean magnitude is large relative to per-token variation) cause this by shifting pre-activations at initialization based on each feature's alignment with the activation mean. Features anti-aligned with the mean receive permanently negative pre-activations and never fire. We formalize outlier severity as $\\gamma = \\|\\mu\\|/\\|\\sigma\\|$; it predicts initial death rates (Spearman $\\rho = 0.89$ for dead-by-TopK, $0.82$ for dead-by-ReLU) across 454 model-layer combinations spanning language, vision, protein, and genomic models. Dead features can revive during training, but recovery requires the SAE bias to learn the activation mean, a process that is prohibitively slow at high $\\gamma$. Mean-centering (subtracting the activation mean) sidesteps this and eliminates outlier-induced death across all tested models, confirming the mechanism and providing a principled basis for when and why this preprocessing step is necessary.",
-            "arxiv_id": "2605.31518",
-            "PRIMARY_TOPIC_LABEL": "Representation Learning Theory and Structure",
+            "title": "Eigenvectors of Experts are Training-free Non-collapsing Routers",
+            "abstract": "Sparse Mixture of Experts (SMoE) architectures improve the training efficiency of Large Language Models (LLMs) by routing input tokens to a selected subset of specialized experts. Despite their remarkable success, both training and inference in SMoE models suffer from the expert collapse issue (Chi et al., 2022), which degrades model performance. Prior studies primarily focus on improving the router; however, such methods rely on training from scratch or fine-tuning, which requires high computational and data-processing costs. Furthermore, we demonstrate that, despite these efforts, the issue persists when advancing well-pretrained SMoE models, as evidenced by both theoretical and empirical results. To fill that gap, we analyze the advanced SMoE models and observe that the eigenvectors of expert weight matrices encode rich semantic information, pointing to an effective alternative to conventional routing strategies. Building on this insight, we propose Singular Value Decomposition SMoE (SSMoE), a novel and training-free framework that leverages spectral properties of the expert weights to address the collapse issue and enhance model performance. Extensive experiments across diverse language and vision tasks, under both clean and corrupt data settings, demonstrate the strong generalization and robustness of SSMoE. Our findings highlight how a deeper understanding of model internals can guide the development of more effective SMoE architectures. Our implementation is publicly available at https://github.com/giangdip2410/SSMoE.",
+            "arxiv_id": "2605.30992",
+            "PRIMARY_TOPIC_LABEL": "MoE Training",
             "MATCHED_TOPIC_LABELS": [
-                "Architecture and Training Dynamics",
-                "Representation Learning Theory and Structure"
+                "MoE Training"
             ],
             "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
             "HOTSPOT_PAPER_LABELS": [
@@ -240,6 +182,80 @@
             "HOTSPOT_PAPER_PRIMARY_KIND": "daily_hot",
             "HOTSPOT_PAPER_PRIMARY_LABEL": "Daily Hot Papers",
             "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "heuristic"
+        },
+        "2605.31367": {
+            "ARXIVID": "2605.31367",
+            "COMMENT": "Unified framework for token mixing that separates direct input-output influence from recurrent propagation, generalizing attention and SSM recurrences to multi-past-state dependence with provable complexity/expressivity trade-offs.",
+            "RELEVANCE": 9,
+            "NOVELTY": 8,
+            "PRIMARY_TOPIC_ID": "architecture_training",
+            "MATCHED_TOPIC_IDS": [
+                "architecture_training",
+                "efficiency_scaling"
+            ],
+            "TOPIC_MATCH_COMMENT": "Core contribution is a new architectural mechanism for sequence mixing with theoretical expressivity analysis, squarely in architecture and training dynamics; the cache/decoding cost angle also touches efficiency.",
+            "HOTSPOT_PAPER_TAGS": [
+                "daily_hot"
+            ],
+            "HOTSPOT_PAPER_COMMENT": "Broadly important today: Unified framework for token mixing that separates direct input-output influence from recurrent propagation, generalizing attention and SSM recurrences to multi-past-state dependence with provable complexity/expressivity trade-offs.",
+            "SCORE": 17,
+            "authors": [
+                "Erwan Fagnou",
+                "Paul Caillon",
+                "Blaise Delattre",
+                "Alexandre Allauzen"
+            ],
+            "title": "Trading Complexity for Expressivity Through Structured Generalized Linear Token Mixing",
+            "abstract": "Token mixing layers play a key role in how language models can learn and generate long-range dependencies. Their efficiency relies on the necessary trade-off between decoding speed and the memory requirements, along with the cache size. Considering causal generation, this paper explores new trade-offs thanks to a unified framework which separates two crucial features: (i) the direct influence of inputs on outputs in one generation step; (ii) the recurrent propagation of information through past outputs. This framework encompasses major architectures such as attention and state-space models, but also generalizes the recurrence equations by allowing each state to depend on multiple past states rather than only the immediate predecessor. By introducing structure, we design new recurrence patterns that provably achieve the desired complexity, while providing theoretical insights on their expressivity -- trading runtime for expressivity in a principled way. Empirical validation is performed on synthetic tasks, along with language modeling. Together, these results provide a unified toolkit for the understanding and design of efficient and expressive token mixers across model families.",
+            "arxiv_id": "2605.31367",
+            "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+            "MATCHED_TOPIC_LABELS": [
+                "Architecture and Training Dynamics",
+                "Efficiency, Compression, and Large-Scale Training"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [
+                "Daily Hot Papers"
+            ],
+            "HOTSPOT_PAPER_PRIMARY_KIND": "daily_hot",
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "Daily Hot Papers",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "heuristic"
+        },
+        "2606.00371": {
+            "ARXIVID": "2606.00371",
+            "COMMENT": "Shows Muon's training quality is not monotone in polar-decomposition accuracy: a five-step cubic Newton-Schulz schedule with ten matmuls instead of fifteen matches the quintic update and an exact FP32 SVD polar factor, including on 1B to 4B hybrid MoE and Mamba runs.",
+            "RELEVANCE": 9,
+            "NOVELTY": 6,
+            "PRIMARY_TOPIC_ID": "training_systems",
+            "MATCHED_TOPIC_IDS": [
+                "training_systems",
+                "efficiency_scaling"
+            ],
+            "TOPIC_MATCH_COMMENT": "Directly about the optimizer used for large-scale pretraining and the per-step cost of its orthogonalization.",
+            "HOTSPOT_PAPER_TAGS": [
+                "daily_hot"
+            ],
+            "HOTSPOT_PAPER_COMMENT": "Muon is in wide use for frontier pretraining, and the finding that polar accuracy can be traded away for a third fewer matmuls is immediately actionable.",
+            "HOTSPOT_PAPER_TAGS_NOTE": "",
+            "SCORE": 15,
+            "authors": [
+                "Hua Huang"
+            ],
+            "title": "How Much Orthogonalization Does Muon Need?",
+            "abstract": "Muon optimizers improve neural-network training by replacing ill-conditioned momentum updates with approximately semi-orthogonal updates. This motivates a practical question: how much orthogonalization does Muon actually require? We study this question using a relaxed cubic Newton--Schulz schedule derived directly for Muon's low precision singular value band. The resulting five-step cubic construction uses ten dominant matrix multiplications, compared with fifteen for five quintic Newton--Schulz iterations. The cubic schedule is not intended as a more accurate polar solver; instead, it is a principled low-cost variant that lets us probe the relation between polar accuracy, spectral shaping, and training quality. Across synthetic diagnostics, NanoGPT ablations, and training experiments on hybrid MoE/Mamba models, we find that training quality is not governed monotonically by polar-decomposition accuracy: truncated Polar Express, Muon-Jordan, cubic Newton--Schulz, and an explicit FP32 SVD polar factor can reach nearly indistinguishable final loss on GPT-2 Small, and cubic5 matches the Muon-Jordan quintic update within about $10^{-3}$ validation loss on hybrid MoE/Mamba models with one billion to four billion parameters. These results support cubic5 as a practical low-cost Muon orthogonalization variant, with empirical evidence of training-quality parity in the settings tested.",
+            "arxiv_id": "2606.00371",
+            "PRIMARY_TOPIC_LABEL": "Large-Scale Training Systems and Efficiency",
+            "MATCHED_TOPIC_LABELS": [
+                "Large-Scale Training Systems and Efficiency",
+                "Efficiency, Compression, and Large-Scale Training"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [
+                "Daily Hot Papers"
+            ],
+            "HOTSPOT_PAPER_PRIMARY_KIND": "daily_hot",
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "Daily Hot Papers",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "llm_exact"
         }
     },
     "sections": [
@@ -248,10 +264,9 @@
             "label": "New Frontier Papers",
             "description": "Papers that appear to open a genuinely new direction, paradigm, or field.",
             "paper_ids": [
-                "2605.31423",
-                "2605.31022",
-                "2605.31421",
-                "2605.30596"
+                "2606.01062",
+                "2605.31163",
+                "2606.00703"
             ]
         },
         {
@@ -259,8 +274,9 @@
             "label": "Daily Hot Papers",
             "description": "Papers that feel broadly important to the day and belong in the hotspot paper feed.",
             "paper_ids": [
-                "2605.31289",
-                "2605.31518"
+                "2605.30992",
+                "2605.31367",
+                "2606.00371"
             ]
         }
     ]

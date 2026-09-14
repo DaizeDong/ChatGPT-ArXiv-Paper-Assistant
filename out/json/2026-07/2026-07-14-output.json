@@ -1,1 +1,767 @@
-{}
+{
+    "2607.11089": {
+        "ARXIVID": "2607.11089",
+        "COMMENT": "Learns an optimal stopping policy that removes 20-60 percent of reasoning tokens with little accuracy loss.",
+        "RELEVANCE": 8,
+        "NOVELTY": 7,
+        "PRIMARY_TOPIC_ID": "efficiency_scaling",
+        "MATCHED_TOPIC_IDS": [
+            "architecture_training",
+            "efficiency_scaling"
+        ],
+        "TOPIC_MATCH_COMMENT": "Its primary contribution materially reduces inference compute through input-adaptive termination of reasoning.",
+        "HOTSPOT_PAPER_TAGS": [],
+        "HOTSPOT_PAPER_COMMENT": "",
+        "SCORE": 15,
+        "authors": [
+            "Mohammed Ehab",
+            "Aymane El Gadarri",
+            "Vivek F. Farias",
+            "Adam Jozefiak",
+            "Ciamac C. Moallemi"
+        ],
+        "title": "OS-Pruner: Pruning Chains-of-Thought of Reasoning Models via Optimal Stopping",
+        "abstract": "Large Language Models (LLMs) have achieved remarkable success in complex reasoning tasks through Chain-of-Thought (CoT) prompting. However, these models often exhibit \"computational overthinking,\" generating redundant reasoning steps that increase latency and cost without improving accuracy. Recent studies suggest that CoT trajectories can be significantly pruned, yet existing methods often rely on forcing a static thinking budget, heuristic filtering, sub-optimal early exit via classification, or expensive re-training. In this paper, we introduce OS-Pruner, a lightweight plug-in framework that formulates chain-of-thought pruning as an optimal stopping problem. Given a reasoning prefix, OS-Pruner learns whether further reasoning is worth its token cost by optimizing an explicit utility that trades off final-answer accuracy against generated length. Our novel formulation enables the model to dynamically assess the sufficient point of termination for a reasoning chain. OS-Pruner is designed to be lightweight during both training and inference, and to provide users with fine-grained control over the reasoning-effort vs. accuracy trade-off. On diverse reasoning benchmarks and base models, OS-Pruner achieves 20-60\\% reduction in generation length with minimal accuracy sacrifice.",
+        "arxiv_id": "2607.11089",
+        "PRIMARY_TOPIC_LABEL": "Efficiency, Compression, and Large-Scale Training",
+        "MATCHED_TOPIC_LABELS": [
+            "Architecture and Training Dynamics",
+            "Efficiency, Compression, and Large-Scale Training"
+        ],
+        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+        "HOTSPOT_PAPER_LABELS": [],
+        "HOTSPOT_PAPER_PRIMARY_KIND": null,
+        "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+    },
+    "2607.11614": {
+        "ARXIVID": "2607.11614",
+        "COMMENT": "Adds selectively placed associative recurrent memory that extends context with constant memory scaling and lower FLOPs.",
+        "RELEVANCE": 8,
+        "NOVELTY": 7,
+        "PRIMARY_TOPIC_ID": "architecture_training",
+        "MATCHED_TOPIC_IDS": [
+            "architecture_training",
+            "efficiency_scaling"
+        ],
+        "TOPIC_MATCH_COMMENT": "The central contribution is a recurrent long-context architecture, with memory and compute savings as a strong secondary match.",
+        "HOTSPOT_PAPER_TAGS": [],
+        "HOTSPOT_PAPER_COMMENT": "",
+        "SCORE": 15,
+        "authors": [
+            "Gleb Kuzmin",
+            "Ivan Rodkin",
+            "Aydar Bulatov",
+            "Yuri Kuratov",
+            "Lyudmila Rvanova",
+            "Mikhail Katkov",
+            "Ilia Sochenkov",
+            "Misha Tsodyks",
+            "Timothy Baldwin",
+            "Mikhail Burtsev",
+            "Artem Shelmanov"
+        ],
+        "title": "Extending LLM Context via Associative Recurrent Memory",
+        "abstract": "Extending the context length of large language models (LLMs) is critical for many real-world applications, yet standard transformers remain constrained by quadratic compute and linear memory scaling. In this work, we investigate the Associative Recurrent Memory Transformer (ARMT) as a practical approach for enabling long-context processing in LLMs, constant memory scaling, and better efficiency. We make three main contributions. First, we construct two domain-specific long-context datasets designed to evaluate realistic workloads, focusing on narrow-domain fine-tuning scenarios. Second, we propose a comprehensive training recipe for ARMT-based context extension, combining continued pre-training, synthetic long-context data generation, curriculum learning, and selective integration of associative memory into chosen model layers. Third, we present an extensive experimental study demonstrating that ARMT-augmented models: (i) process inputs well beyond their original context limits without degrading performance relative to in-limit baselines; (ii) generalize more effectively to out-of-distribution context lengths; and (iii) need 30% less FLOPs while preserving baseline performance within the original context window.",
+        "arxiv_id": "2607.11614",
+        "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+        "MATCHED_TOPIC_LABELS": [
+            "Architecture and Training Dynamics",
+            "Efficiency, Compression, and Large-Scale Training"
+        ],
+        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+        "HOTSPOT_PAPER_LABELS": [],
+        "HOTSPOT_PAPER_PRIMARY_KIND": null,
+        "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+    },
+    "2607.11976": {
+        "ARXIVID": "2607.11976",
+        "COMMENT": "Fuses score computation with exact top-k selection using sampled score ranges and low-traffic candidate binning.",
+        "RELEVANCE": 8,
+        "NOVELTY": 7,
+        "PRIMARY_TOPIC_ID": "efficiency_scaling",
+        "MATCHED_TOPIC_IDS": [
+            "efficiency_scaling"
+        ],
+        "TOPIC_MATCH_COMMENT": "The work introduces a sparse-attention kernel that reduces memory traffic and materially accelerates long-context prefill.",
+        "HOTSPOT_PAPER_TAGS": [],
+        "HOTSPOT_PAPER_COMMENT": "",
+        "SCORE": 15,
+        "authors": [
+            "Ziqi Yin",
+            "Jianyang Gao",
+            "Peiqi Yin",
+            "Jiangneng Li",
+            "Gao Cong"
+        ],
+        "title": "LiteTopK: Exploiting the Curse of Dimensionality for a Fused Indexer-TopK Kernel in Long-Context Sparse Attention",
+        "abstract": "Indexer-TopK, the operation to compute the scores and select the top-k candidates, is widely used by sparse attention algorithms in large language models and vector retrieval in recommendation systems and vector databases. However, existing GPU-based Indexer-TopK kernels like DeepSeek Sparse Attention (DSA) remain inefficient due to excessive global memory traffic, costly synchronization, and prohibitive memory overhead. In this study, inspired by the curse of dimensionality phenomenon, we first observe that sparse attention scores exhibit a score concentration phenomenon, where scores tend to fall within a narrow range. Based on this observation, we propose LITETOPK, an efficient fused Indexer-TopK kernel. LITETOPK first samples a small subset of data to estimate query-data score ranges, then partitions candidates into bins accordingly. This organization allows the LITETOPK kernel to maintain a tight approximate threshold online, write back only promising candidates, reduce unnecessary I/O and memory overhead while preserving exact Top-k correctness. Building on LITETOPK, we further propose LITEDSA, which exploits the similarity of top-k candidate sets among neighboring tokens. LITEDSA packs neighboring tokens' candidates for joint computation and masks out extra scores for each query, thereby reducing memory traffic while preserving correctness. Experimental results in a real-world deployment environ ment with eight B200 GPUs show that LITETOPK+LITEDSA accelerates the prefill stage of GLM 5.2 by 1.35x, with no performance loss and lower memory overhead.",
+        "arxiv_id": "2607.11976",
+        "PRIMARY_TOPIC_LABEL": "Efficiency, Compression, and Large-Scale Training",
+        "MATCHED_TOPIC_LABELS": [
+            "Efficiency, Compression, and Large-Scale Training"
+        ],
+        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+        "HOTSPOT_PAPER_LABELS": [],
+        "HOTSPOT_PAPER_PRIMARY_KIND": null,
+        "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+    },
+    "2607.12171": {
+        "ARXIVID": "2607.12171",
+        "COMMENT": "Joint velocity and endpoint prediction uses consistency regularization to stabilize rectified-flow training.",
+        "RELEVANCE": 8,
+        "NOVELTY": 7,
+        "PRIMARY_TOPIC_ID": "architecture_training",
+        "MATCHED_TOPIC_IDS": [
+            "architecture_training"
+        ],
+        "TOPIC_MATCH_COMMENT": "The core analyzes how prediction parameterizations affect optimization and introduces a general training mechanism addressing their complementary weaknesses.",
+        "HOTSPOT_PAPER_TAGS": [],
+        "HOTSPOT_PAPER_COMMENT": "",
+        "SCORE": 15,
+        "authors": [
+            "Xu Han",
+            "Jiajing Hu",
+            "Li-Ping Liu"
+        ],
+        "title": "Self-Consistent Flow: Unifying Velocity and Endpoint Prediction for Rectified Flow Models",
+        "abstract": "In rectified-flow-based generative models, the neural network can be trained to predict two different targets, such as the instantaneous velocity or the data endpoint, to perform denoising. Although prior work shows that these parameterizations lead to different empirical behaviors, the mechanisms underlying their respective advantages remain to be underexplored, and how to combine them effectively is still unclear. In this work, we analyze how learning errors from different parameterizations affect the generation performance. We show that predicting the data endpoint has a clear training signal that stabilizes training, whereas predicting the velocity maintains stable sampling dynamics near the data manifold. Motivated by these insights, we propose Self-Consistent Flow (SC-Flow), a new method that unifies the benefits of both parameterizations. By employing a lightweight consistency loss, SC-Flow jointly trains a single network to predict both the local velocity and the data endpoint, and the consistency between the two predictions improves the model's performance. The method requires no major architectural changes and adds minimal computational overhead. Extensive experiments on image generation tasks demonstrate that SC-Flow substantially stabilizes optimization and improves the straightness of generation paths, leading to significant gains in generation quality over standard rectified-flow baselines.",
+        "arxiv_id": "2607.12171",
+        "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+        "MATCHED_TOPIC_LABELS": [
+            "Architecture and Training Dynamics"
+        ],
+        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+        "HOTSPOT_PAPER_LABELS": [],
+        "HOTSPOT_PAPER_PRIMARY_KIND": null,
+        "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+    },
+    "2607.12121": {
+        "ARXIVID": "2607.12121",
+        "COMMENT": "Skips diffusion updates for stabilized latent regions using attention-based partitioning and runtime activity estimates.",
+        "RELEVANCE": 8,
+        "NOVELTY": 7,
+        "PRIMARY_TOPIC_ID": "efficiency_scaling",
+        "MATCHED_TOPIC_IDS": [
+            "efficiency_scaling"
+        ],
+        "TOPIC_MATCH_COMMENT": "Selective regional execution introduces a substantive computation-saving mechanism, with scheduling converting the saved work into serving throughput.",
+        "HOTSPOT_PAPER_TAGS": [],
+        "HOTSPOT_PAPER_COMMENT": "",
+        "SCORE": 15,
+        "authors": [
+            "Yaqi Qiao",
+            "Ping He",
+            "Songrun Xie",
+            "Ayush Barik",
+            "Chensong Zhang",
+            "Zhengzhong Tu",
+            "Fan Lai"
+        ],
+        "title": "FlashDiff: Efficient Regional Execution and Scheduling for Diffusion Model Serving",
+        "abstract": "Diffusion models have become the central backbone for modern image, video, and audio generation, but their efficient service remains a challenge. Unlike autoregressive decoding, diffusion inference repeatedly updates high-dimensional spatial or temporal latents over many denoising steps. This all-region execution pattern makes generation latency high and limits serving throughput. Existing multi-GPU parallelization methods can reduce per-step computation, but often introduce substantial activation exchange overhead, causing communication to offset or even outweigh the benefits of parallel execution. This paper presents FlashDiff, a diffusion serving system that improves inference efficiency through adaptive regional execution and scheduling. FlashDiff is based on the observation that diffusion refinement is not uniform across latent regions or denoising steps: different regions often stabilize at different rates, while neighboring steps exhibit strong temporal correlation. FlashDiff leverages these properties to selectively execute only regions that require further refinement and to reallocate the resulting compute slack across concurrent serving requests. FlashDiff consists of three mechanisms. First, it decomposes the latent representation into coherent execution regions using early-stage attention signals, preserving semantic structure while exposing fine-grained parallelism. Second, it uses a lightweight runtime controller to estimate region activity and bypass low-impact updates when further refinement is unlikely to affect output quality. Third, it applies an affinity-aware online scheduler that co-locates dependent regions, balances residual load across GPUs, and reuses reclaimed compute capacity to improve serving efficiency. Across real-world image, video, and audio workloads, FlashDiff reduces end-to-end serving latency by 30-97% and improves throughput by 1.2-2.2x.",
+        "arxiv_id": "2607.12121",
+        "PRIMARY_TOPIC_LABEL": "Efficiency, Compression, and Large-Scale Training",
+        "MATCHED_TOPIC_LABELS": [
+            "Efficiency, Compression, and Large-Scale Training"
+        ],
+        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+        "HOTSPOT_PAPER_LABELS": [],
+        "HOTSPOT_PAPER_PRIMARY_KIND": null,
+        "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+    },
+    "2607.11875": {
+        "ARXIVID": "2607.11875",
+        "COMMENT": "Proves that attention-training trajectories can remain on low-dimensional invariant manifolds.",
+        "RELEVANCE": 7,
+        "NOVELTY": 8,
+        "PRIMARY_TOPIC_ID": "architecture_training",
+        "MATCHED_TOPIC_IDS": [
+            "architecture_training"
+        ],
+        "TOPIC_MATCH_COMMENT": "The mathematical reduction directly characterizes training dynamics and initialization effects, although its synthetic inductive-task setting limits large-model conclusions.",
+        "HOTSPOT_PAPER_TAGS": [],
+        "HOTSPOT_PAPER_COMMENT": "",
+        "SCORE": 15,
+        "authors": [
+            "Tiberiu Musat",
+            "Tiago Pimentel",
+            "Nicolas Zucchet",
+            "Thomas Hofmann"
+        ],
+        "title": "Invariant Learning Dynamics of Transformers in Inductive Reasoning Tasks",
+        "abstract": "We present a theoretical framework to explain the emergence of inductive reasoning abilities in Transformer language models. While previous works on Transformer learning dynamics have so far been mostly tied to specific tasks, we study a generalized class of inductive tasks that unifies several synthetic tasks known in the literature, including in-context n-grams and multi-hop reasoning. In this class, we theoretically prove that the training dynamics of attention models can be confined to a highly interpretable, low-dimensional invariant manifold. On this manifold, the learning dynamics are captured by a handful of interpretable coordinates rather than millions of parameters, making both theoretical and empirical analysis more tractable. Using this framework, we characterize how data statistics govern the competition between in-context and in-weights learning, we study how random initializations determine the `winning' circuit when multiple solutions are possible, and we demonstrate that the coordinate frame associated with the manifold can be used to automatically detect which circuits have been learned in trained models. By casting circuit formation as a low-dimensional dynamical phenomenon, we take a step toward a predictive theory of how Transformers learn.",
+        "arxiv_id": "2607.11875",
+        "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+        "MATCHED_TOPIC_LABELS": [
+            "Architecture and Training Dynamics"
+        ],
+        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+        "HOTSPOT_PAPER_LABELS": [],
+        "HOTSPOT_PAPER_PRIMARY_KIND": null,
+        "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+    },
+    "2607.11436": {
+        "ARXIVID": "2607.11436",
+        "COMMENT": "Identifies a depth-localized visual relay phase and actively controls it during VLM inference.",
+        "RELEVANCE": 7,
+        "NOVELTY": 7,
+        "PRIMARY_TOPIC_ID": "architecture_training",
+        "MATCHED_TOPIC_IDS": [
+            "architecture_training"
+        ],
+        "TOPIC_MATCH_COMMENT": "The paper centers on multimodal attention dynamics across network depth and a mechanism derived from that analysis.",
+        "HOTSPOT_PAPER_TAGS": [],
+        "HOTSPOT_PAPER_COMMENT": "",
+        "SCORE": 14,
+        "authors": [
+            "Wencheng Ye",
+            "Yi Bin",
+            "Yujuan Ding",
+            "Hongye Fang",
+            "Zheng Wang",
+            "Xing Xu",
+            "Jingkuan Song",
+            "Yun Zhang",
+            "Sirui Da",
+            "Heng Tao Shen"
+        ],
+        "title": "The Ebb and Flow of Multimodal Focus: Scheduling Visual Relay Windows for Grounded VLM Reasoning",
+        "abstract": "Vision-language models increasingly succeed on multimodal reasoning benchmarks, yet their visual evidence often becomes unstable once it enters the language stack, weakening evidence-grounded reasoning. To understand this fragility, we examine the internal dynamics of VLMs through a mechanistic lens and uncover a stable three-stage redistribution of multimodal attention focus across depth: an early question-conditioned organization, a critical middle visual-dominant relay, and a late return to answer formation. We operationalize the middle phase as the Visual Relay Window (VRW), and show that its geometry varies with task demand, is causally tied to grounded generation, and distinguishes unsupported answers from stronger reasoning trajectories. Guided by this internal rhythm, we propose TRACE, a task-adaptive inference-time control framework with lightweight trained modules. It reshapes relay allocation during prefill and preserves assembled visual support after handoff during decoding. Across four open-weight VLM backbones and seven benchmarks, TRACE delivers large gains on grounding-sensitive settings, improving them by 4.33 points on average and by up to 6.6 points, while also improving reasoning-heavy tasks. These results show that explicitly controlling multimodal focus across depth offers a unified and effective mechanism for strengthening evidence-grounded multimodal reasoning.",
+        "arxiv_id": "2607.11436",
+        "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+        "MATCHED_TOPIC_LABELS": [
+            "Architecture and Training Dynamics"
+        ],
+        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+        "HOTSPOT_PAPER_LABELS": [],
+        "HOTSPOT_PAPER_PRIMARY_KIND": null,
+        "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+    },
+    "2607.11116": {
+        "ARXIVID": "2607.11116",
+        "COMMENT": "Traces unused deep-equilibrium solver computation to gradient starvation and initialization collapse.",
+        "RELEVANCE": 7,
+        "NOVELTY": 7,
+        "PRIMARY_TOPIC_ID": "architecture_training",
+        "MATCHED_TOPIC_IDS": [
+            "architecture_training"
+        ],
+        "TOPIC_MATCH_COMMENT": "Mechanistic diagnosis of implicit-model training failure fits architecture and training dynamics, with conclusions bounded by the particular DEQ setup studied.",
+        "HOTSPOT_PAPER_TAGS": [],
+        "HOTSPOT_PAPER_COMMENT": "",
+        "SCORE": 14,
+        "authors": [
+            "Joyjeet Singh"
+        ],
+        "title": "The Equilibrium Is the Initialization: Lazy Identity Collapse in Physics-Structured Deep Equilibrium Reasoning",
+        "abstract": "Deep equilibrium models promise input-adaptive implicit computation: harder problems should demand more solver iterations, and the solved equilibrium should encode the result of genuine iterative inference. We report a cautionary study of a port-Hamiltonian DEQ with a learned initialization on two reasoning tasks -- ProofWriter entailment over frozen DeBERTa embeddings and a BFS-verified graph-reachability benchmark -- in which the implicit computation is a silent no-op. Across tasks, seeds, and controlled ablation arms, the solved equilibrium equals the solver's start point to numerical precision, and bypassing the solver entirely changes test accuracy by +0.00 percentage points in 18 of 19 training runs. Controlled interventions falsify the tempting explanation: removing the anchoring term reproduces every result, and retraining with noise-decoupled starts yields a solver that converges to the noisy start while the decoder learns to ignore it. The single escaping run diverges instead ($\\|h^{*}-z_0\\|=171$), producing a co-adapted noise channel whose removal improves accuracy. Iteration counts are uncorrelated with ground-truth difficulty ($r=0.009$), and the full apparatus never outperforms a two-layer MLP on either task. We trace the mechanism to gradient starvation along two distinct routes, show that the standard zeroing ablation is confounded and gives wildly seed-dependent answers where the correct substitution test gives a stable zero, and distill a four-test diagnostic protocol for auditing claimed implicit computation. All experiments run on a single free Colab GPU; code, raw logs, and analysis scripts are released.",
+        "arxiv_id": "2607.11116",
+        "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+        "MATCHED_TOPIC_LABELS": [
+            "Architecture and Training Dynamics"
+        ],
+        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+        "HOTSPOT_PAPER_LABELS": [],
+        "HOTSPOT_PAPER_PRIMARY_KIND": null,
+        "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+    },
+    "2607.12172": {
+        "ARXIVID": "2607.12172",
+        "COMMENT": "Derives communication-computation budget bounds and stagewise stepsizes for decentralized gradient descent.",
+        "RELEVANCE": 7,
+        "NOVELTY": 7,
+        "PRIMARY_TOPIC_ID": "training_systems",
+        "MATCHED_TOPIC_IDS": [
+            "training_systems"
+        ],
+        "TOPIC_MATCH_COMMENT": "Resource-aware convergence analysis directly connects distributed optimization choices to communication and compute budgets, though large-model validation is absent.",
+        "HOTSPOT_PAPER_TAGS": [],
+        "HOTSPOT_PAPER_COMMENT": "",
+        "SCORE": 14,
+        "authors": [
+            "Nicol\u00f2 Michelusi"
+        ],
+        "title": "Decentralized Gradient Descent: Bottleneck Regimes and Budget Complexity",
+        "abstract": "Decentralized gradient descent (DGD) is widely used for solving distributed optimization problems over networks of agents. While its convergence properties are well understood, less is known about the communication and computation resources required to attain a prescribed accuracy. In this paper, we study DGD from a resource-aware perspective and characterize the communication-computation budget required to attain a target error level. We develop a bottleneck-centric framework in which different factors dominate the optimization dynamics at different error scales. Specifically, we identify operating regimes governed by initialization, objective heterogeneity and network connectivity, gradient noise, and communication noise. To capture these effects, we introduce two fundamental quantities: the gradient-Diversity-to-Network-connectivity Ratio (DNR) and the Gradient-to-Communication-noise Ratio (GCR). We show that these quantities determine the sequence of bottlenecks encountered during optimization and the corresponding budget-optimal operating strategy. Using a multi-stage analysis, we derive optimal stepsize selections and explicit budget-complexity bounds that quantify the budget resources required to attain a prescribed accuracy. The resulting expressions reveal how the overall budget decomposes into contributions associated with successive bottlenecks and provide insight into the fundamental tradeoffs among objective heterogeneity, network connectivity, gradient noise, and communication noise.",
+        "arxiv_id": "2607.12172",
+        "PRIMARY_TOPIC_LABEL": "Large-Scale Training Systems and Efficiency",
+        "MATCHED_TOPIC_LABELS": [
+            "Large-Scale Training Systems and Efficiency"
+        ],
+        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+        "HOTSPOT_PAPER_LABELS": [],
+        "HOTSPOT_PAPER_PRIMARY_KIND": null,
+        "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+    },
+    "2607.16295": {
+        "ARXIVID": "2607.16295",
+        "COMMENT": "Introduces a local forward-forward training rule that produces hierarchical monosemantic neurons through routing constraints.",
+        "RELEVANCE": 6,
+        "NOVELTY": 8,
+        "PRIMARY_TOPIC_ID": "architecture_training",
+        "MATCHED_TOPIC_IDS": [
+            "architecture_training"
+        ],
+        "TOPIC_MATCH_COMMENT": "Its principal technical contribution is an alternative layer-wise training algorithm coupled to architectural routing.",
+        "HOTSPOT_PAPER_TAGS": [
+            "new_frontier"
+        ],
+        "HOTSPOT_PAPER_COMMENT": "It proposes a distinct route to monosemantic representations based on local learning rather than sparse dictionary decomposition.",
+        "SCORE": 14,
+        "authors": [
+            "Yiming Tang",
+            "Qinglin Qi",
+            "Zhaoqian Yao",
+            "Harshvardhan Saini",
+            "Dianbo Liu"
+        ],
+        "title": "Emergent Hierarchical Monosemantic Neurons from the Group-Contrastive Forward-Forward Algorithm",
+        "abstract": "Mechanistic interpretability has made significant strides in understanding neural network representations, with sparse dictionary learning (SDL) methods, most prominently sparse autoencoders, as a central paradigm. However, recent work has reported several limitations of this paradigm: SDL objectives are non-identifiable; SDL methods rely heavily on the Linear Representation Hypothesis; and a growing body of evidence points to concepts that are encoded non-linearly and are therefore not expressible as any single direction. We hypothesise that a different route to monosemanticity is available. Biological visual systems exhibit highly selective neurons organised into hierarchies of increasing abstraction, and this organisation emerges from local, layer-wise learning rules rather than from a global error signal; we therefore ask whether a biologically plausible learning algorithm will likewise yield monosemantic neurons. To test this, we propose Group-Contrastive Forward-Forward (GCFF), a forward-forward training algorithm that combines class-specific routing with within-class contrastive objectives, reaching monosemanticity through architectural constraints rather than sparsity. Because GCFF attaches multiple non-linear layers to the representation under study, its neurons can therefore capture the non-linear concepts. On CLIP representations, a single trained GCFF module recovers monosemantic neurons whose abstraction increases progressively with depth, reaching environmental properties that hold independently of an image's foreground, without any sparsity constraint or supervision of abstraction level. We further demonstrate that GCFF can train networks from scratch, achieving state-of-the-art performance among forward-forward algorithms on various image classification benchmarks.",
+        "arxiv_id": "2607.16295",
+        "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+        "MATCHED_TOPIC_LABELS": [
+            "Architecture and Training Dynamics"
+        ],
+        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+        "HOTSPOT_PAPER_LABELS": [
+            "New Frontier Papers"
+        ],
+        "HOTSPOT_PAPER_PRIMARY_KIND": "new_frontier",
+        "HOTSPOT_PAPER_PRIMARY_LABEL": "New Frontier Papers",
+        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "llm_exact"
+    },
+    "2607.11696": {
+        "ARXIVID": "2607.11696",
+        "COMMENT": "Enforces context isolation between reasoning stages so only a compressed symbolic state crosses module boundaries.",
+        "RELEVANCE": 6,
+        "NOVELTY": 8,
+        "PRIMARY_TOPIC_ID": "architecture_training",
+        "MATCHED_TOPIC_IDS": [
+            "architecture_training"
+        ],
+        "TOPIC_MATCH_COMMENT": "The core mechanism is a modular computation architecture that constrains information flow through a frozen model's reasoning process.",
+        "HOTSPOT_PAPER_TAGS": [],
+        "HOTSPOT_PAPER_COMMENT": "",
+        "SCORE": 14,
+        "authors": [
+            "Huan Zhu"
+        ],
+        "title": "Think Through a Bottleneck: Hourglass Reasoning for Rigorous Induction",
+        "abstract": "Self-refinement often fails to strengthen few-shot inductive reasoning in large language models. Prompting a model to explicitly state its inferred rule does little on its own. What actually matters is a structurally enforced isolation between reasoning stages, so that information can only pass between them as a compressed symbolic state. We introduce \\textbf{Hourglass reasoning}, which enforces strict context isolation between reasoning stages. The frozen LLM acts as a meta-constructor, building for each task a symbolic encoder--decoder: an Induction module compresses the support examples into a schema $\u03c6$ (encoder) and a transient scaffold $z$; a Deduction module derives rule $T$ (decoder) from these and discards $z$; an Implementer compiles $(\u03c6, T)$ into artifacts; an error-driven Refiner revises $(\u03c6, T)$ and regenerates artifacts from scratch. Only $(\u03c6, T)$ crosses stage boundaries, so all refinement stays anchored to the rule. We evaluate Hourglass across three benchmarks spanning visual abstraction, hardware synthesis, and textual rule induction, using GPT-5.5 and Gemini 3.1 Pro. On ARC-AGI-2, it raises best-of-5 accuracy by up to 14 points over an iterative-refinement baseline. On ChipBench, it nearly doubles Verilog synthesis accuracy with GPT-5.5, from 31\\% to 58\\%. BBEH-Linguini draws on puzzles from the International Linguistics Olympiad, a setting where prior work has shown that explicit verbalization can hurt performance. Hourglass mitigates this tendency, and on Gemini 3.1 Pro, it reverses the effect entirely. Ablations confirm that these gains come from the isolation between stages and the quality of the initial induction, not from prompt wording or the particular symbolic form used. It is how information flows through the reasoning process, rather than the language used to express it, that drives inductive reasoning in frozen LLMs.",
+        "arxiv_id": "2607.11696",
+        "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+        "MATCHED_TOPIC_LABELS": [
+            "Architecture and Training Dynamics"
+        ],
+        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+        "HOTSPOT_PAPER_LABELS": [],
+        "HOTSPOT_PAPER_PRIMARY_KIND": null,
+        "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+    },
+    "2607.11796": {
+        "ARXIVID": "2607.11796",
+        "COMMENT": "Exactly measures state-mode pruning error and attributes input-dependent mode usage primarily to the write map.",
+        "RELEVANCE": 6,
+        "NOVELTY": 8,
+        "PRIMARY_TOPIC_ID": "architecture_training",
+        "MATCHED_TOPIC_IDS": [
+            "architecture_training"
+        ],
+        "TOPIC_MATCH_COMMENT": "State-space mechanism analysis is the nearest fit, but the core is a usage-measurement instrument; two-pass pruning demonstrates headroom without deployed compute or memory savings.",
+        "HOTSPOT_PAPER_TAGS": [],
+        "HOTSPOT_PAPER_COMMENT": "",
+        "SCORE": 14,
+        "authors": [
+            "Raktim Bhattacharya"
+        ],
+        "title": "An Exact Instrument for State Usage in Selective State-Space Models, and the Input-Driven Migration It Reveals",
+        "abstract": "Selective state-space models such as Mamba route information through a bank of first-order modes whose input coupling is set by a learned selection mechanism. We give an exact instrument for measuring how a trained model uses these modes. Because the state matrix is diagonal, each channel's output decomposes exactly into per-mode contributions, and a per-(layer, channel, window) Gram tensor yields the exact output error of dropping any subset of modes, offline, at any budget. Validated against the reference implementation to a relative error of $2.3\\times10^{-7}$ on the Mamba-1 family where it is exact, the instrument predicts a layer's deployed pruning error to a median relative deviation of $5\\times10^{-7}$ over $4{,}464$ configurations, its floor set by the reconstruction. Applying the instrument across the Mamba-1 family (130M--2.8B), the deployed 7B Falcon-Mamba, and Mamba-2, we find that trained models re-allocate their state space with the input: which modes carry the signal migrates across contexts, and at the most affected layers a per-input oracle roughly halves the output error of a fixed mode set. Frozen-signal counterfactuals attribute the migration primarily to the input-dependent write map $B_t$; the timestep usually identified with selectivity carries almost none of it. Input-scheduled mode pruning on this measurement outperforms static, Hankel-based, and layer-adaptive rankings at every scale from 130M to the deployed 7B Falcon-Mamba, and at half the state budget it matches the unpruned model. Because the scheduler reads each window's mode usage from a first pass, this demonstrates realizable headroom; we claim no deployed compute or memory saving.",
+        "arxiv_id": "2607.11796",
+        "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+        "MATCHED_TOPIC_LABELS": [
+            "Architecture and Training Dynamics"
+        ],
+        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+        "HOTSPOT_PAPER_LABELS": [],
+        "HOTSPOT_PAPER_PRIMARY_KIND": null,
+        "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+    },
+    "2607.11289": {
+        "ARXIVID": "2607.11289",
+        "COMMENT": "Recasts backpropagation as an exactly terminating nilpotent linear system and derives residual gradient highways from it.",
+        "RELEVANCE": 7,
+        "NOVELTY": 6,
+        "PRIMARY_TOPIC_ID": "architecture_training",
+        "MATCHED_TOPIC_IDS": [
+            "architecture_training"
+        ],
+        "TOPIC_MATCH_COMMENT": "The operator formulation provides mechanistic analysis of gradient propagation through feedforward and residual architectures.",
+        "HOTSPOT_PAPER_TAGS": [],
+        "HOTSPOT_PAPER_COMMENT": "",
+        "SCORE": 13,
+        "authors": [
+            "Ahmed Boughammoura"
+        ],
+        "title": "Backpropagation as a Nilpotent Linear System",
+        "abstract": "Backpropagation is the computational engine of deep learning, yet its mathematical structure is typically treated as a procedural traversal of computational graphs. We present a global operator theory of the \\emph{F-adjoint} framework, which reformulates the layerwise backward recursion of an $L$-depth feedforward network into a single linear system $(I-\\cB)\\Xs=\\bG$, where $\\bG$ is a source vector. We prove that the global backward operator $\\cB$ is strictly block upper-triangular and nilpotent of index at most $L$. This nilpotency guarantees the exact termination of the Neumann series solution after at most $L$ terms, revealing classical backpropagation to be mathematically equivalent to block back-substitution on an upper bidiagonal system. We formalise \\emph{F-symmetry} -- the condition in which the backward pass perfectly mirrors the forward pass -- identifying orthogonal weight matrices as canonical examples. Through worked numerical examples, we demonstrate how this operator perspective exposes the single-path collapse of strictly feedforward networks and its breakdown in residual architectures. Finally, we leverage this compositional structure to rigorously derive the mechanics of residual networks (gradient highways) and transfer learning (gradient truncation). This framework elevates backpropagation from an algorithmic recipe to a global nilpotent-operator formulation.",
+        "arxiv_id": "2607.11289",
+        "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+        "MATCHED_TOPIC_LABELS": [
+            "Architecture and Training Dynamics"
+        ],
+        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+        "HOTSPOT_PAPER_LABELS": [],
+        "HOTSPOT_PAPER_PRIMARY_KIND": null,
+        "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+    },
+    "2607.11272": {
+        "ARXIVID": "2607.11272",
+        "COMMENT": "Builds polynomially decaying long-range dependence into recurrent reservoirs and proves the resulting memory behavior.",
+        "RELEVANCE": 6,
+        "NOVELTY": 7,
+        "PRIMARY_TOPIC_ID": "architecture_training",
+        "MATCHED_TOPIC_IDS": [
+            "architecture_training"
+        ],
+        "TOPIC_MATCH_COMMENT": "Its strongest foundational contribution is a new recurrent sequence-modeling mechanism with theoretical dynamics guarantees.",
+        "HOTSPOT_PAPER_TAGS": [],
+        "HOTSPOT_PAPER_COMMENT": "",
+        "SCORE": 13,
+        "authors": [
+            "Rahul Goswami",
+            "Shinjini Paul",
+            "Palash Ghosh",
+            "Tanujit Chakraborty"
+        ],
+        "title": "Long-Memory Reservoir Computing for Data-Scarce Dengue Forecasting",
+        "abstract": "Accurate dengue forecasting is crucial for public health planning, but remains challenging because incidence series are often short, noisy, non-stationary, nonlinear, and often affected by long-range temporal dependence. Fractional differencing in Autoregressive Fractionally Integrated Moving Average (ARFIMA) helps balance non-stationarity and persistence, but its linear structure limits its ability to capture nonlinear dynamics. Deep neural networks can model nonlinear patterns, but usually require large training samples and do not explicitly encode statistical long memory. Echo State Networks (ESNs), a widely used reservoir computing framework, are attractive in this setting because they retain nonlinear recurrent dynamics while training only a simple readout, making them suitable for data-scarce scenarios. However, standard ESNs lack long-term memory from a time-series perspective. This study proposes a long-memory reservoir computing framework that integrates dedicated long-memory and short-memory ESN reservoirs with a ridge-regression readout. We introduce two variants: Fractional ESN (fESN), which incorporates fractional-differencing dynamics into the reservoir to encode long-range dependence directly, and Wavelet ESN (wESN), which extracts stable low-frequency components through wavelet smoothing before modeling them with a memory-aware reservoir. We establish theoretical guarantees for closed-loop reservoir dynamics, showing that standard ESNs induce short-memory processes under mild conditions, whereas the proposed long-memory reservoirs generate polynomially decaying dependence consistent with statistical long memory. Across multiple dengue datasets and forecasting horizons, fESN and wESN outperform statistical and deep learning baselines. Combining conformal prediction with fESN and wESN provides distribution-free calibrated uncertainty intervals.",
+        "arxiv_id": "2607.11272",
+        "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+        "MATCHED_TOPIC_LABELS": [
+            "Architecture and Training Dynamics"
+        ],
+        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+        "HOTSPOT_PAPER_LABELS": [],
+        "HOTSPOT_PAPER_PRIMARY_KIND": null,
+        "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+    },
+    "2607.11758": {
+        "ARXIVID": "2607.11758",
+        "COMMENT": "Routes individual spatial factors to specialized diffusion experts instead of assigning one mixture to an entire sample.",
+        "RELEVANCE": 6,
+        "NOVELTY": 7,
+        "PRIMARY_TOPIC_ID": "architecture_training",
+        "MATCHED_TOPIC_IDS": [
+            "architecture_training"
+        ],
+        "TOPIC_MATCH_COMMENT": "The paper introduces factor-level dynamic computation for composing pretrained diffusion models, rather than MoE training machinery.",
+        "HOTSPOT_PAPER_TAGS": [],
+        "HOTSPOT_PAPER_COMMENT": "",
+        "SCORE": 13,
+        "authors": [
+            "Haozhe Huang",
+            "Yudong Xu",
+            "Abhijoy Mandal",
+            "Al\u00e1n Aspuru-Guzik"
+        ],
+        "title": "From Global to Factor-Wise Expert Composition in Discrete Diffusion Models",
+        "abstract": "Discrete diffusion models offer a powerful framework for solving complex reasoning tasks, particularly through compositional generation, which combines multiple pre-trained experts to generalize beyond their individual training data. Recent theoretical corrections introduce time-dependent mixing weights to better align composed diffusion dynamics with the intended target. However, these methods are fundamentally limited by working on a per-sample basis, treating each generated state monolithically and ignoring the potential spatial or functional specializations of different experts. In this work, we address this limitation by proposing FactorDiff - a factor-wise composition framework for diffusion models. We posit that samples can be further decomposed into smaller factors, and propose a sampling process that dynamically routes each factor to the most relevant expert. We instantiate this framework with spatial/pixel-level compositions and validate it on the ARC-AGI benchmark, demonstrating that simple factor-specific routing consistently outperforms complex global scalar weighting schemes on tasks that require logical consistency and spatial disentanglement.",
+        "arxiv_id": "2607.11758",
+        "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+        "MATCHED_TOPIC_LABELS": [
+            "Architecture and Training Dynamics"
+        ],
+        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+        "HOTSPOT_PAPER_LABELS": [],
+        "HOTSPOT_PAPER_PRIMARY_KIND": null,
+        "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+    },
+    "2607.11997": {
+        "ARXIVID": "2607.11997",
+        "COMMENT": "Shows that expert training duration and merging method jointly determine merged-model quality.",
+        "RELEVANCE": 6,
+        "NOVELTY": 7,
+        "PRIMARY_TOPIC_ID": "architecture_training",
+        "MATCHED_TOPIC_IDS": [
+            "architecture_training"
+        ],
+        "TOPIC_MATCH_COMMENT": "Training-duration analysis is the closest fit, but the contribution centers on merging separately fine-tuned models.",
+        "HOTSPOT_PAPER_TAGS": [],
+        "HOTSPOT_PAPER_COMMENT": "",
+        "SCORE": 13,
+        "authors": [
+            "Nikita Kozodoi",
+            "Zainab Afolabi",
+            "Jack Butler"
+        ],
+        "title": "Are we Merging the Right Models? Impact of Expert Training Duration on Model Merging for LLMs",
+        "abstract": "Multi-task model merging combines separately trained expert models into a single model that handles all tasks without co-training. Standard practice merges experts at their optimal validation loss. We challenge this convention by systematically studying how training duration of domain experts affects the quality of the merged model. We fine-tune experts on five domains (Math, Code, Instruction Following, Multilingual, and Safety) across three model sizes (Qwen 3.5 0.8B, 2B, and 4B), saving checkpoints from 25% to 500% of the optimal training steps and evaluating five merging methods at each duration. Our findings reveal a striking method-dependent pattern: simple averaging degrades sharply with overfitting, while sparsification-based methods achieve their best performance well past the validation optimum. We formalize this through bias-variance decomposition analysis, drawing a parallel to random forests where averaging benefits from high-variance individual learners. These results suggest that training duration and merging method should be chosen jointly rather than independently.",
+        "arxiv_id": "2607.11997",
+        "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+        "MATCHED_TOPIC_LABELS": [
+            "Architecture and Training Dynamics"
+        ],
+        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+        "HOTSPOT_PAPER_LABELS": [],
+        "HOTSPOT_PAPER_PRIMARY_KIND": null,
+        "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+    },
+    "2607.11990": {
+        "ARXIVID": "2607.11990",
+        "COMMENT": "Neuron-specific masks reveal sparse inter-layer FFN dependencies while approximately preserving perplexity.",
+        "RELEVANCE": 6,
+        "NOVELTY": 7,
+        "PRIMARY_TOPIC_ID": "architecture_training",
+        "MATCHED_TOPIC_IDS": [
+            "architecture_training"
+        ],
+        "TOPIC_MATCH_COMMENT": "FFN dependency analysis is the nearest architectural fit; the core is attribution and circuit interpretation, with execution savings still prospective.",
+        "HOTSPOT_PAPER_TAGS": [],
+        "HOTSPOT_PAPER_COMMENT": "",
+        "SCORE": 13,
+        "authors": [
+            "Johannes Knittel",
+            "Hanspeter Pfister"
+        ],
+        "title": "Sparse Inter-Layer Dependencies of Transformer FFN Neurons",
+        "abstract": "Feedforward network (FFN) blocks account for a large fraction of the parameters and computation in Transformer architectures, yet their internal structure remains difficult to interpret due to the additive superposition induced by the residual stream. We examine whether the activation of an FFN neuron can be explained by a sparse set of preceding neuron activations and attention outputs. We introduce a training-free attribution method that estimates the relative influence of upstream neurons and attention outputs on a target neuron's activation. Empirically, across models and layers, we find that small subsets of preceding activations and attention outputs suffice to preserve neuron activations with high fidelity when all remaining inputs are masked with their average values. Effective sparsity is even greater when accounting for the inherent activation sparsity of upstream layers. Moreover, applying the neuron-specific masks in all layers simultaneously, such that the induced deviations propagate through the network, leaves model perplexity largely unchanged at moderate sparsity levels. These results demonstrate that, despite dense parameterization, FFNs exhibit sparse and structured inter-layer dependencies at the neuron level. Our method provides a practical, scalable tool for circuit-level interpretability and identifies candidate sparse pathways with potential implications for efficient inference.",
+        "arxiv_id": "2607.11990",
+        "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+        "MATCHED_TOPIC_LABELS": [
+            "Architecture and Training Dynamics"
+        ],
+        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+        "HOTSPOT_PAPER_LABELS": [],
+        "HOTSPOT_PAPER_PRIMARY_KIND": null,
+        "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+    },
+    "2607.10970": {
+        "ARXIVID": "2607.10970",
+        "COMMENT": "Truncated-quadratic gradient aggregation reduces heterogeneity-induced bias under Byzantine clients.",
+        "RELEVANCE": 6,
+        "NOVELTY": 7,
+        "PRIMARY_TOPIC_ID": "training_systems",
+        "MATCHED_TOPIC_IDS": [
+            "training_systems"
+        ],
+        "TOPIC_MATCH_COMMENT": "Distributed aggregation theory is the nearest fit, but the focus is federated adversarial robustness with small-model validation.",
+        "HOTSPOT_PAPER_TAGS": [],
+        "HOTSPOT_PAPER_COMMENT": "",
+        "SCORE": 13,
+        "authors": [
+            "Zhi-Yong Wang",
+            "Hao Nan Sheng",
+            "Werner Stefan",
+            "Hing Cheung So",
+            "Linqi Song",
+            "Weitao Xu"
+        ],
+        "title": "Enhanced Byzantine-Robust Federated Learning Via Truncated-Quadratic Loss for Heterogeneous Data",
+        "abstract": "Federated learning distributes data among $n$ clients, making it vulnerable to malicious attacks and data heterogeneity, which together pose challenges for robust learning. To tackle this issue, centered clipping and Huber aggregators have been exploited for Byzantine robustness. In this paper, we first demonstrate their equivalence via convex conjugate theory, and show that they can yield biased solutions in the presence of outliers, leading to failure under high data heterogeneity and a substantial fraction of outliers. Next, we propose a new robust aggregation rule that utilizes the truncated-quadratic (TQ) loss, effectively mitigating the biases of existing methods, such as centered clipping and Huber aggregators. We show that our aggregator achieves order-optimal Byzantine-robust learning under nonconvex loss functions and heterogeneous data, ultimately enhancing the reliability of federated learning systems. Additionally, we provide a robust deviation estimation strategy for TQ, demonstrating its effectiveness. Furthermore, we show that TQ maintains robustness even when only an estimate of the number of Byzantine clients is available. Finally, experimental results on MNIST, Fashion-MNIST, and CIFAR-10, indicate that our aggregator provides better robustness performance than the competing techniques.",
+        "arxiv_id": "2607.10970",
+        "PRIMARY_TOPIC_LABEL": "Large-Scale Training Systems and Efficiency",
+        "MATCHED_TOPIC_LABELS": [
+            "Large-Scale Training Systems and Efficiency"
+        ],
+        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+        "HOTSPOT_PAPER_LABELS": [],
+        "HOTSPOT_PAPER_PRIMARY_KIND": null,
+        "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+    },
+    "2607.16294": {
+        "ARXIVID": "2607.16294",
+        "COMMENT": "Adds alignment-score conditioning to bridge matching so weakly aligned pairs provide more reliable training signals.",
+        "RELEVANCE": 6,
+        "NOVELTY": 6,
+        "PRIMARY_TOPIC_ID": "architecture_training",
+        "MATCHED_TOPIC_IDS": [
+            "architecture_training"
+        ],
+        "TOPIC_MATCH_COMMENT": "Its main contribution is a modified generative-model training mechanism for imperfectly paired data.",
+        "HOTSPOT_PAPER_TAGS": [],
+        "HOTSPOT_PAPER_COMMENT": "",
+        "SCORE": 12,
+        "authors": [
+            "Aimi Okabayashi",
+            "Georges Le Bellier",
+            "Nicolas Audebert",
+            "Charlotte Pelletier",
+            "Thomas Corpetti",
+            "Nicolas Courty"
+        ],
+        "title": "A${}^2$BM: Alignment-Aware Bridge Matching for Image-to-Image Translation",
+        "abstract": "Paired image-to-image translation underpins a wide range of computer vision tasks, including image editing, sensor translation, and domain adaptation. Bridge matching and flow matching have recently emerged as powerful frameworks, extending diffusion models to arbitrary source and target distributions. However, their standard formulations assume perfectly aligned training pairs, treating all source-target correspondences as equally reliable. In practice, real-world applications often involve weakly aligned pairs due to changes of acquisition conditions, including e.g. asynchronous captures, different illuminations, or misregistration. In this work, we introduce Alignment-Aware Bridge Matching (A${}^2$BM), a bridge matching method that leverages image pairs alignment during training. By incorporating alignment scores, the model learns to disentangle true semantic correspondences from misalignment artifacts. At inference time, we use the alignment score as a control variable over translation fidelity, with strongly aligned outputs obtained when prompting the model with the highest alignment score. We validate A${}^2$BM on both controlled synthetic experiments and on challenging real-world tasks, including cross-sensor super-resolution and pixel-space unsupervised domain adaptation. In all settings, A${}^2$BM consistently improves translation fidelity over strong GAN-, diffusion-, and Schr{\u00f6}dinger bridge-based baselines, establishing alignment conditioning as a principled solution for image translation models with weakly aligned data.",
+        "arxiv_id": "2607.16294",
+        "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+        "MATCHED_TOPIC_LABELS": [
+            "Architecture and Training Dynamics"
+        ],
+        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+        "HOTSPOT_PAPER_LABELS": [],
+        "HOTSPOT_PAPER_PRIMARY_KIND": null,
+        "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+    },
+    "2607.11586": {
+        "ARXIVID": "2607.11586",
+        "COMMENT": "Dynamically places and reuses hot-expert replicas across chiplet memory tiers to reduce MoE inference latency.",
+        "RELEVANCE": 6,
+        "NOVELTY": 6,
+        "PRIMARY_TOPIC_ID": "efficiency_scaling",
+        "MATCHED_TOPIC_IDS": [
+            "efficiency_scaling"
+        ],
+        "TOPIC_MATCH_COMMENT": "The core contribution is a new memory, communication, and queue-aware inference-efficiency mechanism rather than MoE training.",
+        "HOTSPOT_PAPER_TAGS": [],
+        "HOTSPOT_PAPER_COMMENT": "",
+        "SCORE": 12,
+        "authors": [
+            "Yongqin Zhang"
+        ],
+        "title": "HCRMap: Pressure-Aware Hot-Expert Residency Mapping for 3.5D MoE Chiplet Inference",
+        "abstract": "Mixture-of-Experts (MoE) large language models (LLM) activate only a small number of experts during inference, but token routing introduces persistent expert hotness skew: a small set of hot experts continuously receives most tokens, while the remaining experts are lightly loaded. On 3.5D multi-chiplet systems, this skew not only causes compute imbalance but also amplifies pressure on communication, memory bandwidth, I/O, and execution queues. Therefore, the core problem is not simply to reduce token movement, but to dynamically place and reuse hot expert replicas across different memory tiers. This paper proposes HCRMap, a hot expert residency mapping framework for pressure-aware expert replica management in 3.5D MoE inference. Based on expert hotness, weight loading cost, migration overhead, and runtime resource pressure, HCRMap dynamically determines which experts should be promoted, retained, demoted, or evicted. It then maps routed token groups to suitable resident replicas, thereby jointly mitigating communication, memory, and queue bottlenecks. Experimental results show that HCRMap reduces end-to-end latency by 43.6% and 43.0% over Hydra in the prefill and decode stages, respectively; by 34.5% and 33.1% over MoEntwine; and by 46.7% and 46.0% over PIMoE.",
+        "arxiv_id": "2607.11586",
+        "PRIMARY_TOPIC_LABEL": "Efficiency, Compression, and Large-Scale Training",
+        "MATCHED_TOPIC_LABELS": [
+            "Efficiency, Compression, and Large-Scale Training"
+        ],
+        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+        "HOTSPOT_PAPER_LABELS": [],
+        "HOTSPOT_PAPER_PRIMARY_KIND": null,
+        "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+    },
+    "2607.11986": {
+        "ARXIVID": "2607.11986",
+        "COMMENT": "Combines spike activation sparsity with firing-rate-based window pruning in a hardware-aware attention architecture.",
+        "RELEVANCE": 6,
+        "NOVELTY": 6,
+        "PRIMARY_TOPIC_ID": "efficiency_scaling",
+        "MATCHED_TOPIC_IDS": [
+            "architecture_training",
+            "efficiency_scaling"
+        ],
+        "TOPIC_MATCH_COMMENT": "Its principal contribution is a new dual-sparsity mechanism that reduces computation and energy while altering attention structure.",
+        "HOTSPOT_PAPER_TAGS": [],
+        "HOTSPOT_PAPER_COMMENT": "",
+        "SCORE": 12,
+        "authors": [
+            "Induk Um",
+            "Youngung Han",
+            "Kyeonghun Kim",
+            "Yului Jeong",
+            "Jina Jeong",
+            "Hyunsu Go",
+            "Dohyun Kweon",
+            "Sungha Park",
+            "Junga Kim",
+            "Anna Jung",
+            "Suah Park",
+            "Hyuk-Jae Lee",
+            "Pa Hong",
+            "Woo Kyoung Jeong",
+            "Won Jae Lee",
+            "Ken Ying-Kai Liao",
+            "Nam-Joon Kim"
+        ],
+        "title": "SpikeDS: Dual Sparsity Spikformer for Perineural Invasion Prediction in 3D MRI",
+        "abstract": "Perineural invasion (PNI) is associated with poor prognosis in cholangiocarcinoma (CCA). However, its detection from 3D MRI remains challenging due to the subtle and spatially heterogeneous imaging signatures at the tumor periphery. Capturing such spatially sparse cues necessitates volumetric analysis of 3D MRI, but existing deep learning approaches incur prohibitive computational costs on volumetric medical images, limiting their clinical deployment. We propose Dual Sparsity Spikformer (SpikeDS), a spiking neural network architecture that jointly exploits activation sparsity from binary spike communication and spatial sparsity from window pruning based on firing rates. SpikeDS introduces Dual Sparsity Spiking Attention (DSSA), which combines two complementary mechanisms. The first is Window-based Expert Mixture Spiking Attention (W-EMSA), which selectively applies attention only to salient windows identified by their firing rates. The second is Cross-Window Spiking Self-Attention (CW-SSA), which enables global context exchange through an asymmetric scheme in which pruned windows still contribute as key-value sources. Evaluated on a clinical cohort of 139 CCA patients via 5-fold cross-validation, SpikeDS achieves an AUC of 0.753 while consuming only 14.4 mJ, surpassing the best baseline in both AUC and energy efficiency. These results suggest that dual sparsity provides an effective hardware-aware strategy for improving the efficiency of 3D spiking transformers without compromising diagnostic performance.",
+        "arxiv_id": "2607.11986",
+        "PRIMARY_TOPIC_LABEL": "Efficiency, Compression, and Large-Scale Training",
+        "MATCHED_TOPIC_LABELS": [
+            "Architecture and Training Dynamics",
+            "Efficiency, Compression, and Large-Scale Training"
+        ],
+        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+        "HOTSPOT_PAPER_LABELS": [],
+        "HOTSPOT_PAPER_PRIMARY_KIND": null,
+        "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+    },
+    "2607.20545": {
+        "ARXIVID": "2607.20545",
+        "COMMENT": "Uses spectral-band activity to adapt denoising strides and reduce diffusion function evaluations.",
+        "RELEVANCE": 6,
+        "NOVELTY": 6,
+        "PRIMARY_TOPIC_ID": "efficiency_scaling",
+        "MATCHED_TOPIC_IDS": [
+            "efficiency_scaling"
+        ],
+        "TOPIC_MATCH_COMMENT": "Sampling efficiency is the closest fit, but the mechanism and validation are specialized to time-series diffusion, with large-model applicability unestablished.",
+        "HOTSPOT_PAPER_TAGS": [],
+        "HOTSPOT_PAPER_COMMENT": "",
+        "SCORE": 12,
+        "authors": [
+            "Du Yin",
+            "Estrid He",
+            "Juli\u00e1n Jer\u00f3nimo Ba\u00f1uelos",
+            "Yang Yang",
+            "Feng Hu",
+            "Yuchen Luo",
+            "Hao Xue",
+            "Stephan Sigg",
+            "Flora Salim"
+        ],
+        "title": "StrideDiffusion: Accelerating Diffusion Models for Time-series Generation",
+        "abstract": "Diffusion models have become competitive generators for time series, but their practical use is limited by the large number of sequential denoising steps required at inference time. Existing fast samplers typically use fixed or generic timestep schedules, overlooking a distinctive property of time-series diffusion: different spectral bands evolve at different rates during the reverse process. We introduce StrideDiffusion, a training-free spectral-aware sampler that adaptively selects the denoising stride from band-level activity. At each step, StrideDiffusion monitors relative band energy, log-power drift, and phase velocity to identify whether high- frequency dynamics remain active or whether the trajectory is dominated by stable low-frequency structure. It then takes fine steps when rapidly varying bands are active and larger jumps once only coarse components remain. A bandwise stability analysis shows that inactive frequency bands change only linearly with the jump size under deterministic affine reverse updates, providing a local justification for spectral activity as a step-size indicator. Across six unconditional time-series generation benchmarks, StrideDiffusion uses only 14-66 function evaluations instead of 500/1000 denoising steps, achieving up to 18.9x wall-clock speedup while preserving or improving generation quality. On conditional imputation and forecasting, it further delivers 5-14x average acceleration with comparable predictive accuracy. These results show that spectral evolution provides a practical and principled signal for fast time-series diffusion sampling. Our code is available at https://anonymous.4open.science/r/stridediff-ts.",
+        "arxiv_id": "2607.20545",
+        "PRIMARY_TOPIC_LABEL": "Efficiency, Compression, and Large-Scale Training",
+        "MATCHED_TOPIC_LABELS": [
+            "Efficiency, Compression, and Large-Scale Training"
+        ],
+        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+        "HOTSPOT_PAPER_LABELS": [],
+        "HOTSPOT_PAPER_PRIMARY_KIND": null,
+        "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+    },
+    "2607.11760": {
+        "ARXIVID": "2607.11760",
+        "COMMENT": "Derives preliminary sample-complexity bounds for learning C-RASP constructions with Transformers.",
+        "RELEVANCE": 6,
+        "NOVELTY": 6,
+        "PRIMARY_TOPIC_ID": "architecture_training",
+        "MATCHED_TOPIC_IDS": [
+            "architecture_training"
+        ],
+        "TOPIC_MATCH_COMMENT": "Learnability theory is closest to training dynamics, but the restricted construction-based bounds do not yet establish broader large-model training behavior.",
+        "HOTSPOT_PAPER_TAGS": [],
+        "HOTSPOT_PAPER_COMMENT": "",
+        "SCORE": 12,
+        "authors": [
+            "Michael Rizvi-Martel",
+            "Satwik Bhattamishra",
+            "Guillaume Rabusseau",
+            "Michael Hahn"
+        ],
+        "title": "From Expressivity to Sample Complexity: Narrow Teachers for Transformers via C-RASP",
+        "abstract": "A theoretical understanding of Transformers is crucial to better understand the capacities and limitations of large language models (LLMs). There is much work analyzing the expressivity of attention-based models. By proposing handcrafted weights or using computational complexity arguments, a large amount of past theoretical works have sought to characterize which tasks are and which are not in the hypothesis class of Transformer models. However, little work investigates the learnability of such solutions. In this work, we make progress towards this goal. Inspired by recent loss landscape analysis work, we propose preliminary sample complexity bounds for learning C-RASP constructions with Transformers.",
+        "arxiv_id": "2607.11760",
+        "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+        "MATCHED_TOPIC_LABELS": [
+            "Architecture and Training Dynamics"
+        ],
+        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+        "HOTSPOT_PAPER_LABELS": [],
+        "HOTSPOT_PAPER_PRIMARY_KIND": null,
+        "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+    }
+}

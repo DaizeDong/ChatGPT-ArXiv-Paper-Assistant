@@ -1,0 +1,281 @@
+{
+    "schema_version": 1,
+    "meta": {
+        "date": "2026-04-02",
+        "total_candidates": 77,
+        "total_spotlight_papers": 6,
+        "thresholds": {
+            "daily_hot_score_cutoff": 15,
+            "daily_hot_relevance_cutoff": 7,
+            "new_frontier_score_cutoff": 15,
+            "new_frontier_novelty_cutoff": 8
+        },
+        "caps": {
+            "max_daily_hot": 6,
+            "max_new_frontier": 4
+        }
+    },
+    "diagnostics": {
+        "candidate_count_by_kind": {
+            "new_frontier": 1,
+            "daily_hot": 5
+        },
+        "selected_count_by_kind": {
+            "new_frontier": 1,
+            "daily_hot": 5
+        }
+    },
+    "papers": {
+        "2604.01178": {
+            "ARXIVID": "2604.01178",
+            "COMMENT": "Replaces softmax's relative competition with bounded query-key similarity plus an explicit rejection threshold, reporting ~30% fewer parameters at equal loss, stability at much larger learning rates, and flat long-context behavior.",
+            "RELEVANCE": 9,
+            "NOVELTY": 8,
+            "PRIMARY_TOPIC_ID": "architecture_training",
+            "MATCHED_TOPIC_IDS": [
+                "architecture_training",
+                "efficiency_scaling"
+            ],
+            "TOPIC_MATCH_COMMENT": "A new core attention mechanism with direct consequences for training stability and parameter efficiency.",
+            "HOTSPOT_PAPER_TAGS": [
+                "new_frontier"
+            ],
+            "HOTSPOT_PAPER_COMMENT": "Absolute rather than competitive query-key relevance is a different primitive from softmax attention and could open a line of follow-up work if it holds at scale.",
+            "SCORE": 17,
+            "authors": [
+                "Ken M. Nakanishi"
+            ],
+            "title": "Screening Is Enough",
+            "abstract": "A core limitation of standard softmax attention is that it does not provide an independently interpretable measure of query--key relevance: attention scores are unbounded, while attention weights are defined only relative to competing keys. Consequently, irrelevant keys cannot be explicitly rejected, and some attention mass is assigned even when no key is genuinely relevant. We introduce Multiscreen, a language-model architecture built around a mechanism we call screening, which enables absolute query--key relevance. Instead of redistributing attention across all keys, screening computes bounded query--key similarities and applies an explicit threshold, discarding irrelevant keys and aggregating the remaining keys without global competition. Across experiments, Multiscreen achieves comparable validation loss with roughly 30\\% fewer parameters than a Transformer baseline and remains stable at substantially larger learning rates. It maintains stable long-context perplexity beyond the training context and shows little degradation in retrieval performance as context length increases. Finally, Multiscreen achieves lower full-context forward-pass latency at long context lengths.",
+            "arxiv_id": "2604.01178",
+            "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+            "MATCHED_TOPIC_LABELS": [
+                "Architecture and Training Dynamics",
+                "Efficiency, Compression, and Large-Scale Training"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [
+                "New Frontier Papers"
+            ],
+            "HOTSPOT_PAPER_PRIMARY_KIND": "new_frontier",
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "New Frontier Papers",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "llm_exact"
+        },
+        "2604.00421": {
+            "ARXIVID": "2604.00421",
+            "COMMENT": "Removes the learned router entirely by using a designated hidden-state subspace as expert logits, and reports higher routing entropy with no load-balancing loss.",
+            "RELEVANCE": 10,
+            "NOVELTY": 7,
+            "PRIMARY_TOPIC_ID": "moe_training",
+            "MATCHED_TOPIC_IDS": [
+                "moe_training"
+            ],
+            "TOPIC_MATCH_COMMENT": "Core contribution is a new MoE routing mechanism and its effect on expert load balance.",
+            "HOTSPOT_PAPER_TAGS": [
+                "daily_hot"
+            ],
+            "HOTSPOT_PAPER_COMMENT": "Broadly important today: Removes the learned router entirely by using a designated hidden-state subspace as expert logits, and reports higher routing entropy with no load-balancing loss.",
+            "SCORE": 17,
+            "authors": [
+                "Jama Hussein Mohamud",
+                "Drew Wagner",
+                "Mirco Ravanelli"
+            ],
+            "title": "Self-Routing: Parameter-Free Expert Routing from Hidden States",
+            "abstract": "Mixture-of-Experts (MoE) layers increase model capacity by activating only a small subset of experts per token, and typically rely on a learned router to map hidden states to expert assignments. In this work, we ask whether a dedicated learned router is strictly necessary for MoE routing. We propose Self-Routing, a parameter-free routing mechanism that uses a designated subspace of the token hidden state directly as expert logits, eliminating the router projection entirely while leaving the rest of the MoE layer unchanged. We evaluate Self-Routing on language modeling across different expert counts and model scales, and on ImageNet-1K classification by comparing it against a standard learned router, random-routing baselines, and dense non-MoE baselines. Our results show that Self-Routing remains competitive with the learned-router baseline while removing all dedicated routing parameters, and yields more balanced expert utilization, with about 17\\% higher average normalized routing entropy and no explicit load-balancing loss. On ImageNet-1K with DeiT-S/16, Self-Routing also slightly improves over the corresponding learned-router MoE. These findings suggest that effective MoE routing can emerge from the hidden representation itself without requiring a separate learned router module.",
+            "arxiv_id": "2604.00421",
+            "PRIMARY_TOPIC_LABEL": "MoE Training",
+            "MATCHED_TOPIC_LABELS": [
+                "MoE Training"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [
+                "Daily Hot Papers"
+            ],
+            "HOTSPOT_PAPER_PRIMARY_KIND": "daily_hot",
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "Daily Hot Papers",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "heuristic"
+        },
+        "2604.00785": {
+            "ARXIVID": "2604.00785",
+            "COMMENT": "Pretrains MoE models up to 220B-A10B on 12,288 Aurora GPU tiles at ~90% scaling efficiency, with custom expert-computation kernels and a novel EP-aware sharded optimizer giving up to 1.71x speedup.",
+            "RELEVANCE": 10,
+            "NOVELTY": 7,
+            "PRIMARY_TOPIC_ID": "moe_training",
+            "MATCHED_TOPIC_IDS": [
+                "moe_training",
+                "training_systems",
+                "efficiency_scaling"
+            ],
+            "TOPIC_MATCH_COMMENT": "MoE kernels, expert-parallel-aware optimizer sharding, and exascale scaling efficiency hit topics 1 and 2 simultaneously.",
+            "HOTSPOT_PAPER_TAGS": [
+                "daily_hot"
+            ],
+            "HOTSPOT_PAPER_COMMENT": "Broadly important today: Pretrains MoE models up to 220B-A10B on 12,288 Aurora GPU tiles at ~90% scaling efficiency, with custom expert-computation kernels and a novel EP-aware sharded optimizer giving up to 1.71x speedup.",
+            "SCORE": 17,
+            "authors": [
+                "Dharma Teja Vooturi",
+                "Dhiraj Kalamkar",
+                "Dipankar Das",
+                "Bharat Kaul"
+            ],
+            "title": "Scalable Pretraining of Large Mixture of Experts Language Models on Aurora Super Computer",
+            "abstract": "Pretraining Large Language Models (LLMs) from scratch requires massive amount of compute. Aurora super computer is an ExaScale machine with 127,488 Intel PVC (Ponte Vechio) GPU tiles. In this work, we showcase LLM pretraining on Aurora at the scale of 1000s of GPU tiles. Towards this effort, we developed Optimus, an inhouse training library with support for standard large model training techniques. Using Optimus, we first pretrained Mula-1B, a 1 Billion dense model and Mula-7B-A1B, a 7 Billion Mixture of Experts (MoE) model from scratch on 3072 GPU tiles for the full 4 trillion tokens of the OLMoE-mix-0924 dataset. We then demonstrated model scaling by pretraining three large MoE models Mula-20B-A2B, Mula-100B-A7B, and Mula-220B-A10B till 100 Billion tokens on the same dataset. On our largest model Mula-220B-A10B, we pushed the compute scaling from 384 to 12288 GPU tiles and observed scaling efficiency of around 90% at 12288 GPU tiles. We significantly improved the runtime performance of MoE models using custom GPU kernels for expert computation, and a novel EP-Aware sharded optimizer resulting in training speedups up to 1.71x. As part of the Optimus library, we also developed a robust set of reliability and fault tolerant features to improve training stability and continuity at scale.",
+            "arxiv_id": "2604.00785",
+            "PRIMARY_TOPIC_LABEL": "MoE Training",
+            "MATCHED_TOPIC_LABELS": [
+                "MoE Training",
+                "Large-Scale Training Systems and Efficiency",
+                "Efficiency, Compression, and Large-Scale Training"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [
+                "Daily Hot Papers"
+            ],
+            "HOTSPOT_PAPER_PRIMARY_KIND": "daily_hot",
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "Daily Hot Papers",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "heuristic"
+        },
+        "2604.00801": {
+            "ARXIVID": "2604.00801",
+            "COMMENT": "Removes the external router, Softmax, Top-K and load-balancing loss, letting each expert self-activate under continuous gradient flow, with a unified interpolation between expert- and token-balancing objectives.",
+            "RELEVANCE": 10,
+            "NOVELTY": 7,
+            "PRIMARY_TOPIC_ID": "moe_training",
+            "MATCHED_TOPIC_IDS": [
+                "moe_training",
+                "architecture_training"
+            ],
+            "TOPIC_MATCH_COMMENT": "Directly rethinks MoE routing and load balancing, the centre of the MoE training topic.",
+            "HOTSPOT_PAPER_TAGS": [
+                "daily_hot"
+            ],
+            "HOTSPOT_PAPER_COMMENT": "Broadly important today: Removes the external router, Softmax, Top-K and load-balancing loss, letting each expert self-activate under continuous gradient flow, with a unified interpolation between expert- and token-balancing objectives.",
+            "SCORE": 17,
+            "authors": [
+                "Yilun Liu",
+                "Jinru Han",
+                "Sikuan Yan",
+                "Volker Tresp",
+                "Yunpu Ma"
+            ],
+            "title": "Routing-Free Mixture-of-Experts",
+            "abstract": "Standard Mixture-of-Experts (MoE) models rely on centralized routing mechanisms that introduce rigid inductive biases. We propose Routing-Free MoE which eliminates any hard-coded centralized designs including external routers, Softmax, Top-K and load balancing, instead encapsulating all activation functionalities within individual experts and directly optimized through continuous gradient flow, enabling each expert to determine its activation entirely on its own. We introduce a unified adaptive load-balancing framework to simultaneously optimize both expert-balancing and token-balancing objectives through a configurable interpolation, allowing flexible and customizable resource allocation. Extensive experiments show that Routing-Free MoE can consistently outperform baselines with better scalability and robustness. We analyze its behavior in detail and offer insights that may facilitate future MoE design ad optimization.",
+            "arxiv_id": "2604.00801",
+            "PRIMARY_TOPIC_LABEL": "MoE Training",
+            "MATCHED_TOPIC_LABELS": [
+                "MoE Training",
+                "Architecture and Training Dynamics"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [
+                "Daily Hot Papers"
+            ],
+            "HOTSPOT_PAPER_PRIMARY_KIND": "daily_hot",
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "Daily Hot Papers",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "heuristic"
+        },
+        "2604.01472": {
+            "ARXIVID": "2604.01472",
+            "COMMENT": "Derives Muon from a quadratic surrogate in (G, H, Z), showing standard Muon omits the right preconditioning by the input second moment, and yields msgn(G(ZZ^T)^-1) reaching target loss in 6% fewer steps on a GPT-2 speedrun.",
+            "RELEVANCE": 9,
+            "NOVELTY": 8,
+            "PRIMARY_TOPIC_ID": "training_systems",
+            "MATCHED_TOPIC_IDS": [
+                "training_systems",
+                "architecture_training"
+            ],
+            "TOPIC_MATCH_COMMENT": "Optimizer theory plus a concrete new preconditioned update rule for LLM pretraining, the center of topic 2.",
+            "HOTSPOT_PAPER_TAGS": [
+                "daily_hot"
+            ],
+            "HOTSPOT_PAPER_COMMENT": "Gives the first principled derivation of what Muon's orthogonalization approximates and a drop-in successor, which matters broadly given how widely Muon is now used for pretraining.",
+            "SCORE": 17,
+            "authors": [
+                "Zhehang Du",
+                "Weijie Su"
+            ],
+            "title": "The Newton-Muon Optimizer",
+            "abstract": "The Muon optimizer has received considerable attention for its strong performance in training large language models, yet the design principle behind its matrix-gradient orthogonalization remains largely elusive. In this paper, we introduce a surrogate model that not only sheds new light on the design of Muon, but more importantly leads to a new optimizer. In the same spirit as the derivation of Newton's method, the surrogate approximates the loss as a quadratic function of the perturbation to a weight matrix $W$ using only three matrices: the gradient $G$, an output-space curvature matrix $H$, and the data matrix $Z$ that stacks the layer inputs. By minimizing this surrogate in one step and adopting a certain isotropic assumption on the weights, we obtain the closed-form update rule (up to momentum and weight decay) $W \\leftarrow W - \u03b7\\cdot \\mathrm{msgn}(G(ZZ^\\top)^{-1})$, where $\u03b7$ is the learning rate and $\\mathrm{msgn}(X)=UV^\\top$ if $X=USV^\\top$ is a compact singular value decomposition. This new optimization method, which we refer to as Newton-Muon, shows that standard Muon can be interpreted as an implicit Newton-type method that neglects the right preconditioning induced by the input second moment. Empirically, on a reproduction of the earliest publicly released Modded-NanoGPT speedrun configuration using Muon for GPT-2 pretraining, Newton-Muon reaches the target validation loss in 6\\% fewer iteration steps and reduces wall-clock training time by about 4\\%.",
+            "arxiv_id": "2604.01472",
+            "PRIMARY_TOPIC_LABEL": "Large-Scale Training Systems and Efficiency",
+            "MATCHED_TOPIC_LABELS": [
+                "Large-Scale Training Systems and Efficiency",
+                "Architecture and Training Dynamics"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [
+                "Daily Hot Papers"
+            ],
+            "HOTSPOT_PAPER_PRIMARY_KIND": "daily_hot",
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "Daily Hot Papers",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "llm_exact"
+        },
+        "2604.01411": {
+            "ARXIVID": "2604.01411",
+            "COMMENT": "Joint scaling law over model size, training tokens, and sample count that shifts compute-optimal pretraining far into the overtraining regime, validated by actually pretraining in the forecast region.",
+            "RELEVANCE": 8,
+            "NOVELTY": 7,
+            "PRIMARY_TOPIC_ID": "training_systems",
+            "MATCHED_TOPIC_IDS": [
+                "training_systems",
+                "efficiency_scaling"
+            ],
+            "TOPIC_MATCH_COMMENT": "Scaling-law work that directly changes how a pretraining run should be configured under a fixed end-to-end budget.",
+            "HOTSPOT_PAPER_TAGS": [
+                "daily_hot"
+            ],
+            "HOTSPOT_PAPER_COMMENT": "Revises Chinchilla-style budget allocation once inference sampling is priced in, which matters broadly to anyone planning a pretraining run.",
+            "SCORE": 15,
+            "authors": [
+                "Nicholas Roberts",
+                "Sungjun Cho",
+                "Zhiqi Gao",
+                "Tzu-Heng Huang",
+                "Albert Wu",
+                "Gabriel Orlanski",
+                "Avi Trost",
+                "Kelly Buchanan",
+                "Aws Albarghouthi",
+                "Frederic Sala"
+            ],
+            "title": "Test-Time Scaling Makes Overtraining Compute-Optimal",
+            "abstract": "Modern LLMs scale at test-time, e.g. via repeated sampling, where inference cost grows with model size and the number of samples. This creates a trade-off that pretraining scaling laws, such as Chinchilla, do not address. We present Train-to-Test ($T^2$) scaling laws that jointly optimize model size, training tokens, and number of inference samples under fixed end-to-end budgets. $T^2$ modernizes pretraining scaling laws with pass@$k$ modeling used for test-time scaling, then jointly optimizes pretraining and test-time decisions. Forecasts from $T^2$ are robust over distinct modeling approaches: measuring joint scaling effect on the task loss and modeling impact on task accuracy. Across eight downstream tasks, we find that when accounting for inference cost, optimal pretraining decisions shift radically into the overtraining regime, well-outside of the range of standard pretraining scaling suites. We validate our results by pretraining heavily overtrained models in the optimal region that $T^2$ scaling forecasts, confirming their substantially stronger performance compared to pretraining scaling alone. Finally, as frontier LLMs are post-trained, we show that our findings survive the post-training stage, making $T^2$ scaling meaningful in modern deployments.",
+            "arxiv_id": "2604.01411",
+            "PRIMARY_TOPIC_LABEL": "Large-Scale Training Systems and Efficiency",
+            "MATCHED_TOPIC_LABELS": [
+                "Large-Scale Training Systems and Efficiency",
+                "Efficiency, Compression, and Large-Scale Training"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [
+                "Daily Hot Papers"
+            ],
+            "HOTSPOT_PAPER_PRIMARY_KIND": "daily_hot",
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "Daily Hot Papers",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "llm_exact"
+        }
+    },
+    "sections": [
+        {
+            "kind": "new_frontier",
+            "label": "New Frontier Papers",
+            "description": "Papers that appear to open a genuinely new direction, paradigm, or field.",
+            "paper_ids": [
+                "2604.01178"
+            ]
+        },
+        {
+            "kind": "daily_hot",
+            "label": "Daily Hot Papers",
+            "description": "Papers that feel broadly important to the day and belong in the hotspot paper feed.",
+            "paper_ids": [
+                "2604.00421",
+                "2604.00785",
+                "2604.00801",
+                "2604.01472",
+                "2604.01411"
+            ]
+        }
+    ]
+}

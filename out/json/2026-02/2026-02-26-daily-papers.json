@@ -1,0 +1,414 @@
+{
+    "schema_version": 2,
+    "meta": {
+        "date": "2026-02-26",
+        "sort": [
+            "score",
+            "relevance"
+        ],
+        "topic_schema_version": 2,
+        "total_papers": 7,
+        "usage": {
+            "model": "llmcall:cc+codexg",
+            "prompt_tokens": 0,
+            "completion_tokens": 0,
+            "prompt_cost": 0.0,
+            "completion_cost": 0.0,
+            "total_arxiv_papers": 318,
+            "total_scanned_papers": 318,
+            "total_relevant_papers": 7,
+            "filter_health": {
+                "status": "ok",
+                "scanned_papers": 318,
+                "selected_papers": 7,
+                "llm_tokens": 0,
+                "message": "Scored 318 papers with 4/5 successful model calls; 7 selected."
+            },
+            "llm": {
+                "backend": "LLM backend: llmcall chain=codexg->codex->cc->claude",
+                "attempted": 5,
+                "succeeded": 4,
+                "failed": 1,
+                "by_backend": {
+                    "llmcall": 5
+                },
+                "by_provider": {
+                    "cc": 3,
+                    "codexg": 1
+                },
+                "errors": [
+                    "timeout after 18s"
+                ],
+                "seconds": 1513.3,
+                "trace": [
+                    "codexg: unavailable after 424.0s of 543.7s (OpenAI Codex v0.154.0",
+                    "codex: unavailable after 5.5s of 138.5s (OpenAI Codex v0.154.0",
+                    "cc: answered in 86.4s of 151.7s",
+                    "codexg: answered in 228.8s of 543.7s",
+                    "codexg: unavailable after 339.3s of 543.7s (OpenAI Codex v0.154.0",
+                    "codex: unavailable after 4.7s of 223.2s (OpenAI Codex v0.154.0",
+                    "cc: unavailable after 238.2s of 237.2s (timeout after 237s)",
+                    "claude: unavailable after 18.8s of 17.7s (timeout after 18s)",
+                    "codexg: unavailable after 3.9s of 543.7s (OpenAI Codex v0.154.0",
+                    "codex: unavailable after 4.6s of 558.6s (OpenAI Codex v0.154.0",
+                    "cc: answered in 92.8s of 572.7s",
+                    "codexg: unavailable after 3.4s of 543.7s (OpenAI Codex v0.154.0",
+                    "codex: unavailable after 3.4s of 559.1s (OpenAI Codex v0.154.0",
+                    "cc: answered in 59.4s of 574.4s"
+                ]
+            },
+            "remedied": true
+        }
+    },
+    "topic_order": [
+        "moe_training",
+        "training_systems",
+        "architecture_training",
+        "efficiency_scaling",
+        "representation_structure",
+        "memory_systems",
+        "world_models_open_ended_rl"
+    ],
+    "diagnostics": {
+        "total_papers": 7,
+        "topic_counts": [
+            {
+                "topic_id": "moe_training",
+                "topic_label": "MoE Training",
+                "paper_count": 1
+            },
+            {
+                "topic_id": "training_systems",
+                "topic_label": "Large-Scale Training Systems and Efficiency",
+                "paper_count": 2
+            },
+            {
+                "topic_id": "architecture_training",
+                "topic_label": "Architecture and Training Dynamics",
+                "paper_count": 3
+            },
+            {
+                "topic_id": "efficiency_scaling",
+                "topic_label": "Efficiency, Compression, and Large-Scale Training",
+                "paper_count": 1
+            },
+            {
+                "topic_id": "representation_structure",
+                "topic_label": "Representation Learning Theory and Structure",
+                "paper_count": 0
+            },
+            {
+                "topic_id": "memory_systems",
+                "topic_label": "Memory Structures and Agent Memory Systems",
+                "paper_count": 0
+            },
+            {
+                "topic_id": "world_models_open_ended_rl",
+                "topic_label": "World Models, Exploration, and Open-Ended Reinforcement Learning",
+                "paper_count": 0
+            }
+        ],
+        "assignment_source_counts": {
+            "llm_exact": 7
+        },
+        "llm_assignment_count": 7,
+        "heuristic_assignment_count": 0,
+        "default_assignment_count": 0,
+        "invalid_primary_topic_fallback_count": 0,
+        "missing_primary_topic_fallback_count": 0,
+        "hotspot_paper_kind_counts": {
+            "new_frontier": 0,
+            "daily_hot": 1
+        },
+        "hotspot_paper_assignment_source_counts": {
+            "default": 6,
+            "llm_exact": 1
+        }
+    },
+    "papers": {
+        "2602.21798": {
+            "ARXIVID": "2602.21798",
+            "COMMENT": "Optimizer that modulates updates by batch-level expert utilization to sharpen routing specialization and rescue MoEs from router/path collapse; stateless and directly targets MoE training stability.",
+            "RELEVANCE": 9,
+            "NOVELTY": 7,
+            "PRIMARY_TOPIC_ID": "moe_training",
+            "MATCHED_TOPIC_IDS": [
+                "moe_training",
+                "training_systems"
+            ],
+            "TOPIC_MATCH_COMMENT": "Core contribution is an MoE-specific update rule addressing expert utilization, specialization and training stability.",
+            "HOTSPOT_PAPER_TAGS": [],
+            "HOTSPOT_PAPER_COMMENT": "",
+            "SCORE": 16,
+            "authors": [
+                "Sagi Shaier"
+            ],
+            "title": "Excitation: Momentum For Experts",
+            "abstract": "We propose Excitation, a novel optimization framework designed to accelerate learning in sparse architectures such as Mixture-of-Experts (MoEs). Unlike traditional optimizers that treat all parameters uniformly, Excitation dynamically modulates updates using batch-level expert utilization. It introduces a competitive update dynamic that amplifies updates to highly-utilized experts and can selectively suppress low-utilization ones, effectively sharpening routing specialization. Notably, we identify a phenomenon of \"structural confusion\" in deep MoEs, where standard optimizers fail to establish functional signal paths; Excitation acts as a specialization catalyst, \"rescuing\" these models and enabling stable training where baselines remain trapped. Excitation is optimizer-, domain-, and model-agnostic, requires minimal integration effort, and introduces neither additional per-parameter optimizer state nor learnable parameters, making it highly viable for memory-constrained settings. Across language and vision tasks, Excitation consistently improves convergence speed and final performance in MoE models, indicating that active update modulation is a key mechanism for effective conditional computation.",
+            "arxiv_id": "2602.21798",
+            "PRIMARY_TOPIC_LABEL": "MoE Training",
+            "MATCHED_TOPIC_LABELS": [
+                "MoE Training",
+                "Large-Scale Training Systems and Efficiency"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [],
+            "HOTSPOT_PAPER_PRIMARY_KIND": null,
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+        },
+        "2602.22271": {
+            "ARXIVID": "2602.22271",
+            "COMMENT": "Probabilistic reformulation of causal self-attention yielding a barrier constraint and stability-margin geometry, cashed out as a log-barrier term added to the standard LM training objective.",
+            "RELEVANCE": 8,
+            "NOVELTY": 7,
+            "PRIMARY_TOPIC_ID": "architecture_training",
+            "MATCHED_TOPIC_IDS": [
+                "architecture_training"
+            ],
+            "TOPIC_MATCH_COMMENT": "Core contribution is a mechanistic account of the attention map's conditioning plus a matching training objective — architecture and training dynamics.",
+            "HOTSPOT_PAPER_TAGS": [],
+            "HOTSPOT_PAPER_COMMENT": "",
+            "SCORE": 15,
+            "authors": [
+                "Deepak Agarwal",
+                "Dhyey Dharmendrakumar Mavani",
+                "Suyash Gupta",
+                "Karthik Sethuraman",
+                "Tejas Dharamsi"
+            ],
+            "title": "Support Tokens, Stability Margins, and a New Foundation for Robust LLMs",
+            "abstract": "Self-attention is usually described as a flexible, content-adaptive way to mix a token with information from its past. We reinterpret causal self-attention transformers, the backbone of modern foundation models, within a probabilistic framework, much as classical PCA is extended to probabilistic PCA. This reformulation reveals a key structural consequence of the underlying change of variables: a barrier constraint emerges on the parameters of self-attention. The resulting geometry exposes a degeneracy boundary where the attention-induced mapping becomes locally ill-conditioned, yielding a stability-margin interpretation analogous to the margin in support vector machines. This, in turn, naturally gives rise to the concept of support tokens. We further show that causal transformers define a consistent stochastic process over infinite token sequences, providing a rigorous probabilistic foundation for sequence modeling. Building on this view, we derive a Bayesian MAP training objective that requires only a minimal modification to standard LLM training: adding a smooth log-barrier penalty to the usual cross-entropy loss. Empirically, the resulting training objective improves robustness to input perturbations and sharpens the margin geometry of the learned representations without sacrificing out-of-sample accuracy.",
+            "arxiv_id": "2602.22271",
+            "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+            "MATCHED_TOPIC_LABELS": [
+                "Architecture and Training Dynamics"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [],
+            "HOTSPOT_PAPER_PRIMARY_KIND": null,
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+        },
+        "2602.21652": {
+            "ARXIVID": "2602.21652",
+            "COMMENT": "Makes weights sparsity-friendly before pruning via absorbable equivalent scaling transformations plus a spectral-norm loss for low-rank feature sparsity, rather than pruning the dense matrix directly.",
+            "RELEVANCE": 8,
+            "NOVELTY": 6,
+            "PRIMARY_TOPIC_ID": "efficiency_scaling",
+            "MATCHED_TOPIC_IDS": [
+                "efficiency_scaling"
+            ],
+            "TOPIC_MATCH_COMMENT": "A new post-training sparsity mechanism for LLMs with zero inference-time overhead.",
+            "HOTSPOT_PAPER_TAGS": [],
+            "HOTSPOT_PAPER_COMMENT": "",
+            "SCORE": 14,
+            "authors": [
+                "Minhao Jiang",
+                "Zhikai Li",
+                "Xuewen Liu",
+                "Jing Zhang",
+                "Mengjuan Chen",
+                "Qingyi Gu"
+            ],
+            "title": "Sparsity Induction for Accurate Post-Training Pruning of Large Language Models",
+            "abstract": "Large language models have demonstrated capabilities in text generation, while their increasing parameter scales present challenges in computational and memory efficiency. Post-training sparsity (PTS), which reduces model cost by removing weights from dense networks, is an effective approach. However, native dense matrices lack high sparsity, making existing approaches that directly remove weights disrupt model states, resulting in unsatisfactory performance recovery even with post-tuning. We propose Sparsity Induction, which promotes models toward higher sparsity at both distribution and feature levels before pruning, to push the limits of PTS. At the distribution level, we enhance distributional sparsity through mathematically equivalent scaling transformations, which are fully absorbable and incur no extra parameters or inference-time overhead. At the feature level, we introduce Spectral Norm Loss to promote feature sparsity from a low-rank perspective. Experiments across diverse model architectures and tasks demonstrate that our method further enhances sparsity-friendliness, achieving superior pruning performance over existing approaches.",
+            "arxiv_id": "2602.21652",
+            "PRIMARY_TOPIC_LABEL": "Efficiency, Compression, and Large-Scale Training",
+            "MATCHED_TOPIC_LABELS": [
+                "Efficiency, Compression, and Large-Scale Training"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [],
+            "HOTSPOT_PAPER_PRIMARY_KIND": null,
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+        },
+        "2602.21472": {
+            "ARXIVID": "2602.21472",
+            "COMMENT": "SDE-based batch-size reparameterization that decouples physical from logical batch size and removes optimal-batch-size tuning, alongside multimodal scaling laws and noise schedules for a 3B/6.4T-token pretraining run.",
+            "RELEVANCE": 7,
+            "NOVELTY": 7,
+            "PRIMARY_TOPIC_ID": "training_systems",
+            "MATCHED_TOPIC_IDS": [
+                "training_systems",
+                "architecture_training"
+            ],
+            "TOPIC_MATCH_COMMENT": "The transferable contribution is scaling-law and batch-size/optimization configuration for large pretraining runs.",
+            "HOTSPOT_PAPER_TAGS": [
+                "daily_hot"
+            ],
+            "HOTSPOT_PAPER_COMMENT": "Largest open systematic study of multimodal discrete diffusion pretraining to date, with a from-scratch tri-modal 3B model.",
+            "SCORE": 14,
+            "authors": [
+                "Louis Bethune",
+                "Victor Turrisi",
+                "Bruno Kacper Mlodozeniec",
+                "Pau Rodriguez Lopez",
+                "Lokesh Boominathan",
+                "Nikhil Bhendawade",
+                "Amitis Shidani",
+                "Joris Pelemans",
+                "Theo X. Olausson",
+                "Devon Hjelm",
+                "Paul Dixon",
+                "Joao Monteiro",
+                "Pierre Ablin",
+                "Vishnu Banna",
+                "Arno Blaas",
+                "Nick Henderson",
+                "Kari Noriy",
+                "Dan Busbridge",
+                "Josh Susskind",
+                "Marco Cuturi",
+                "Irina Belousova",
+                "Luca Zappella",
+                "Russ Webb",
+                "Jason Ramapuram"
+            ],
+            "title": "The Design Space of Tri-Modal Masked Diffusion Models",
+            "abstract": "Discrete diffusion models have emerged as strong alternatives to autoregressive language models, with recent work initializing and fine-tuning a base unimodal model for bimodal generation. Diverging from previous approaches, we introduce the first tri-modal masked diffusion model pretrained from scratch on text, image-text, and audio-text data. We systematically analyze multimodal scaling laws, modality mixing ratios, noise schedules, and batch-size effects, and we provide optimized inference sampling defaults. Our batch-size analysis yields a novel stochastic differential equation (SDE)-based reparameterization that eliminates the need for tuning the optimal batch size as reported in recent work. This reparameterization decouples the physical batch size, often chosen based on compute constraints (GPU saturation, FLOP efficiency, wall-clock time), from the logical batch size, chosen to balance gradient variance during stochastic optimization. Finally, we pretrain a preliminary 3B-parameter tri-modal model on 6.4T tokens, demonstrating the capabilities of a unified design and achieving strong results in text generation, text-to-image tasks, and text-to-speech tasks. Our work represents the largest-scale systematic open study of multimodal discrete diffusion models conducted to date, providing insights into scaling behaviors across multiple modalities.",
+            "arxiv_id": "2602.21472",
+            "PRIMARY_TOPIC_LABEL": "Large-Scale Training Systems and Efficiency",
+            "MATCHED_TOPIC_LABELS": [
+                "Large-Scale Training Systems and Efficiency",
+                "Architecture and Training Dynamics"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [
+                "Daily Hot Papers"
+            ],
+            "HOTSPOT_PAPER_PRIMARY_KIND": "daily_hot",
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "Daily Hot Papers",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "llm_exact"
+        },
+        "2602.22266": {
+            "ARXIVID": "2602.22266",
+            "COMMENT": "Constructs HiPPO-style state-space operators over wavelet frames so the projection basis has localized temporal support instead of global polynomial support.",
+            "RELEVANCE": 7,
+            "NOVELTY": 6,
+            "PRIMARY_TOPIC_ID": "architecture_training",
+            "MATCHED_TOPIC_IDS": [
+                "architecture_training"
+            ],
+            "TOPIC_MATCH_COMMENT": "A new basis for state-space sequence modelling, a core architectural mechanism.",
+            "HOTSPOT_PAPER_TAGS": [],
+            "HOTSPOT_PAPER_COMMENT": "",
+            "SCORE": 13,
+            "authors": [
+                "Ruben Solozabal",
+                "Velibor Bojkovic",
+                "Hilal Alquabeh",
+                "Klea Ziu",
+                "Kentaro Inui",
+                "Martin Takac"
+            ],
+            "title": "WaveSSM: Multiscale State-Space Models for Non-stationary Signal Attention",
+            "abstract": "State-space models (SSMs) have emerged as a powerful foundation for long-range sequence modeling, with the HiPPO framework showing that continuous-time projection operators can be used to derive stable, memory-efficient dynamical systems that encode the past history of the input signal. However, existing projection-based SSMs often rely on polynomial bases with global temporal support, whose inductive biases are poorly matched to signals exhibiting localized or transient structure. In this work, we introduce \\emph{WaveSSM}, a collection of SSMs constructed over wavelet frames. Our key observation is that wavelet frames yield a localized support on the temporal dimension, useful for tasks requiring precise localization. Empirically, we show that on equal conditions, \\textit{WaveSSM} outperforms orthogonal counterparts as S4 on real-world datasets with transient dynamics, including physiological signals on the PTB-XL dataset and raw audio on Speech Commands.",
+            "arxiv_id": "2602.22266",
+            "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+            "MATCHED_TOPIC_LABELS": [
+                "Architecture and Training Dynamics"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [],
+            "HOTSPOT_PAPER_PRIMARY_KIND": null,
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+        },
+        "2602.22259": {
+            "ARXIVID": "2602.22259",
+            "COMMENT": "Low-rank orthogonal node-perturbation weight updates that cut gradient-estimate variance and train 10+ layer networks without backpropagation at O(1) parallel update time.",
+            "RELEVANCE": 6,
+            "NOVELTY": 6,
+            "PRIMARY_TOPIC_ID": "training_systems",
+            "MATCHED_TOPIC_IDS": [
+                "training_systems",
+                "architecture_training"
+            ],
+            "TOPIC_MATCH_COMMENT": "A learning-rule and convergence-efficiency contribution, though aimed at neuromorphic rather than large-model pretraining.",
+            "HOTSPOT_PAPER_TAGS": [],
+            "HOTSPOT_PAPER_COMMENT": "",
+            "SCORE": 12,
+            "authors": [
+                "Guoqing Ma",
+                "Shan Yu"
+            ],
+            "title": "Orthogonal Weight Modification Enhances Learning Scalability and Convergence Efficiency without Gradient Backpropagation",
+            "abstract": "Recognizing the substantial computational cost of backpropagation (BP), non-BP methods have emerged as attractive alternatives for efficient learning on emerging neuromorphic systems. However, existing non-BP approaches still face critical challenges in efficiency and scalability. Inspired by neural representations and dynamic mechanisms in the brain, we propose a perturbation-based approach called LOw-rank Cluster Orthogonal (LOCO) weight modification. We find that low-rank is an inherent property of perturbation-based algorithms. Under this condition, the orthogonality constraint limits the variance of the node perturbation (NP) gradient estimates and enhances the convergence efficiency. Through extensive evaluations on multiple datasets, LOCO demonstrates the capability to locally train the deepest spiking neural networks to date (more than 10 layers), while exhibiting strong continual learning ability, improved convergence efficiency, and better task performance compared to other brain-inspired non-BP algorithms. Notably, LOCO requires only O(1) parallel time complexity for weight updates, which is significantly lower than that of BP methods. This offers a promising direction for achieving high-performance, real-time, and lifelong learning on neuromorphic systems.",
+            "arxiv_id": "2602.22259",
+            "PRIMARY_TOPIC_LABEL": "Large-Scale Training Systems and Efficiency",
+            "MATCHED_TOPIC_LABELS": [
+                "Large-Scale Training Systems and Efficiency",
+                "Architecture and Training Dynamics"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [],
+            "HOTSPOT_PAPER_PRIMARY_KIND": null,
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+        },
+        "2602.22479": {
+            "ARXIVID": "2602.22479",
+            "COMMENT": "Decoder backbone built from stacked columns with a thalamic routing pathway for selective inter-column communication plus surprise-gated memory writes — a modular dynamic-computation architecture benchmarked against MoE and Mamba.",
+            "RELEVANCE": 6,
+            "NOVELTY": 6,
+            "PRIMARY_TOPIC_ID": "architecture_training",
+            "MATCHED_TOPIC_IDS": [
+                "architecture_training"
+            ],
+            "TOPIC_MATCH_COMMENT": "The contribution is a new routing-and-modularity mechanism in the backbone itself, which is architecture work; the memory/continual-learning framing is the motivation, not the mechanism.",
+            "HOTSPOT_PAPER_TAGS": [],
+            "HOTSPOT_PAPER_COMMENT": "",
+            "SCORE": 12,
+            "authors": [
+                "Afshin Khadangi"
+            ],
+            "title": "Efficient Continual Learning in Language Models via Thalamically Routed Cortical Columns",
+            "abstract": "Large language models deployed in the wild must adapt to evolving data, user behavior, and task mixtures without erasing previously acquired capabilities. In practice, this remains difficult: sequential updates induce catastrophic forgetting, while many stabilization methods rely on external procedures that are costly, brittle, or difficult to scale. We present TRC$^{2}$ (Thalamically Routed Cortical Columns), a decoder-only architecture that makes continual learning a property of the backbone itself. TRC$^{2}$ combines stacked cortical columns with a thalamic modulatory pathway for selective inter-column communication and a hippocampal pathway for event selective retrieval, delayed surprise-based writing, and replay-driven consolidation. This design localizes fast plasticity while preserving a slower stable computation pathway. We further introduce a causal memory-update scheme and an online replay controller that adjusts consolidation strength from measured forgetting. Across a task-sequential language-modeling stream over C4, WikiText-103, and GSM8K, TRC$^{2}$ consistently improves task-boundary modeling quality and substantially reduces cumulative forgetting relative to Transformer, Mamba, MoE, DeepSeek and continual learning baselines trained under the same pipeline. Ablations show that the thalamic and hippocampal components are central to the retention gains, while the full model remains competitive in throughput and training cost.",
+            "arxiv_id": "2602.22479",
+            "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+            "MATCHED_TOPIC_LABELS": [
+                "Architecture and Training Dynamics"
+            ],
+            "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+            "HOTSPOT_PAPER_LABELS": [],
+            "HOTSPOT_PAPER_PRIMARY_KIND": null,
+            "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+            "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+        }
+    },
+    "topic_sections": [
+        {
+            "topic_id": "moe_training",
+            "topic_label": "MoE Training",
+            "paper_ids": [
+                "2602.21798"
+            ]
+        },
+        {
+            "topic_id": "training_systems",
+            "topic_label": "Large-Scale Training Systems and Efficiency",
+            "paper_ids": [
+                "2602.21472",
+                "2602.22259"
+            ]
+        },
+        {
+            "topic_id": "architecture_training",
+            "topic_label": "Architecture and Training Dynamics",
+            "paper_ids": [
+                "2602.22271",
+                "2602.22266",
+                "2602.22479"
+            ]
+        },
+        {
+            "topic_id": "efficiency_scaling",
+            "topic_label": "Efficiency, Compression, and Large-Scale Training",
+            "paper_ids": [
+                "2602.21652"
+            ]
+        }
+    ]
+}

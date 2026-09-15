@@ -157,7 +157,18 @@ class _ShimCompletion:
     provider: str = ""
 
 
-@retry.retry(tries=3, delay=30.0)
+# One extra attempt, not two, and a short pause rather than 30s.
+#
+# This wrapper predates the gateway, when a "call" was one HTTP request to one
+# provider and retrying was the only recovery. A gateway call is now a whole
+# chain: four providers are already tried inside it. Retrying three times on top
+# multiplied that by three, and the recursive re-ask below multiplied it again,
+# so one doomed batch could occupy half an hour.
+#
+# Measured over 112 rebuilt days: 1348 failed legs burned 49.2 hours, 43.5 of
+# them codexg running out its full slice. A failure the chain could not overcome
+# is a slow failure, and repeating it at 30s intervals buys almost nothing.
+@retry.retry(tries=2, delay=5.0)
 def call_chatgpt(system_prompt, user_prompt, openai_client, model, limit_per_minute=-1, config=None):
     """Send one batch to the configured backend."""
     from arxiv_assistant.utils import llm_gateway

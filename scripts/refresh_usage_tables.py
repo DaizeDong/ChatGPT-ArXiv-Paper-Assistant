@@ -26,6 +26,7 @@ if str(REPO_ROOT) not in sys.path:
     sys.path.insert(0, str(REPO_ROOT))
 
 from arxiv_assistant.renderers.paper.render_daily import render_summary_table  # noqa: E402
+from arxiv_assistant.utils.llm_gateway import public_model_label  # noqa: E402
 
 #: The remedial writer's hand-rolled pipe table: a header naming the model, a
 #: separator row, then Token and Cost rows.
@@ -48,7 +49,7 @@ def _usage_of(bundle_path: Path) -> dict:
 def build_table(usage: dict) -> str:
     llm = usage.get("llm") or {}
     return render_summary_table(
-        model=str(usage.get("model") or "unknown"),
+        model=public_model_label(usage.get("model")),
         prompt_tokens=int(usage.get("prompt_tokens") or 0),
         completion_tokens=int(usage.get("completion_tokens") or 0),
         prompt_cost=float(usage.get("prompt_cost") or 0.0),

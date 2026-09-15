@@ -11,7 +11,7 @@ from arxiv_assistant.paper_topics import build_daily_topic_bundle, build_hotspot
 from arxiv_assistant.push_to_slack import push_to_slack
 from arxiv_assistant.renderers.paper.render_daily import render_daily_md, render_summary_table
 from arxiv_assistant.utils.io import copy_file_or_dir, delete_file_or_dir
-from arxiv_assistant.utils.llm_gateway import BACKEND_OPENAI, LEDGER, describe_backend, resolve_backend
+from arxiv_assistant.utils.llm_gateway import BACKEND_OPENAI, LEDGER, describe_backend, public_model_label, resolve_backend
 from arxiv_assistant.utils.pipeline_health import assess_paper_filter_health, format_banner
 from arxiv_assistant.utils.utils import EnhancedJSONEncoder
 
@@ -248,7 +248,7 @@ if __name__ == "__main__":
                 # still names an OpenAI catalogue model that this pipeline no
                 # longer calls, so printing it credited every digest to a model
                 # that never ran. Same string the bundle records in usage.model.
-                model=(
+                model=public_model_label(
                     CONFIG["SELECTION"]["model"]
                     if resolve_backend(CONFIG) == BACKEND_OPENAI
                     else f"{resolve_backend(CONFIG)}:{'+'.join(LEDGER.answering_providers()) or 'none'}"

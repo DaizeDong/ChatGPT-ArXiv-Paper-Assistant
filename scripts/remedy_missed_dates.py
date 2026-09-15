@@ -399,6 +399,7 @@ def run_remedy_plan(plan: RemedyPlan, output_root: str, build_site: bool, skip_l
         BACKEND_OPENAI,
         LEDGER,
         describe_backend,
+        public_model_label,
         resolve_backend,
     )
     from arxiv_assistant.utils.pipeline_health import assess_paper_filter_health, format_banner
@@ -626,7 +627,7 @@ def run_remedy_plan(plan: RemedyPlan, output_root: str, build_site: bool, skip_l
             # ordinary day describe the same pipeline and must render alike.
             head_table = {
                 "html": render_summary_table(
-                    model=(
+                    model=public_model_label(
                         CONFIG["SELECTION"]["model"]
                         if resolve_backend(CONFIG) == BACKEND_OPENAI
                         else f"{resolve_backend(CONFIG)}:{'+'.join(LEDGER.answering_providers()) or 'none'}"

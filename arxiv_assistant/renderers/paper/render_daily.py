@@ -51,7 +51,7 @@ def render_summary_table(
     footnote = ""
     if not measured and calls_attempted:
         footnote = (
-            "\n<sub>Usage is not token-metered on this transport. "
+            "\n<sub>Token counts are not reported for this run. "
             f"{calls_succeeded} of {calls_attempted} model calls succeeded, "
             f"{seconds:,.0f}s of model wall clock.</sub>"
         )

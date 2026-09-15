@@ -417,6 +417,33 @@ def legacy_openai_key_missing(api_key: Any, config: Any) -> bool:
     return backend == BACKEND_OPENAI
 
 
+#: What the PUBLISHED digest calls the thing that answered.
+#:
+#: The bundle records the internal identity because that is what diagnosis
+#: needs. A published page is a different audience: the internal string names
+#: this deployment's own transports, and putting those on a public site helps
+#: no reader. The repo's own push-time gate refuses a push that does, which is
+#: how this function came to exist.
+#:
+#: What a reader actually needs from that cell is whether the run was real and
+#: what produced it. "local agent CLI" says that without the map. The internal
+#: string stays in the bundle, one file away, for anyone debugging.
+PUBLIC_MODEL_LABEL = "local agent CLI"
+
+
+def public_model_label(usage_model: str) -> str:
+    """Public-facing name for whatever answered, given a bundle's usage.model."""
+    text = str(usage_model or "").strip()
+    if not text or text.lower().startswith(("none", "unknown")):
+        return "unknown"
+    backend = text.split(":", 1)[0].lower()
+    if backend == BACKEND_OPENAI:
+        # A named catalogue model billed per token: naming it discloses nothing
+        # private and the price is public.
+        return text.split(":", 1)[-1] if ":" in text else text
+    return PUBLIC_MODEL_LABEL
+
+
 def describe_backend(config: Any = None) -> str:
     """One line for logs and for the digest header."""
     try:

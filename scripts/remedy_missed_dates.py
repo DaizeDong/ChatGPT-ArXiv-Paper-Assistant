@@ -117,7 +117,226 @@ def parse_args() -> argparse.Namespace:
         action="store_true",
         help="Print the inferred remedy plan and exit without running any API calls.",
     )
+    parser.add_argument(
+        "--skip-done",
+        action="store_true",
+        help=(
+            "Skip dates already rebuilt by a previous remedy run. A day counts as "
+            "done only when its bundle carries a filter_health record, which is "
+            "what a remedied day writes and what a legacy or empty day does not, "
+            "so this resumes a killed run without redoing finished work and "
+            "without mistaking an old empty archive for a completed one."
+        ),
+    )
+    parser.add_argument(
+        "--skip-latest-copy",
+        action="store_true",
+        help=(
+            "Do not refresh the root out/output.md. Set automatically for the "
+            "children of --jobs, where that shared path is a race between "
+            "concurrent dates and means nothing for a historical backfill."
+        ),
+    )
+    parser.add_argument(
+        "--jobs",
+        type=int,
+        default=1,
+        help=(
+            "Remedy this many dates concurrently, each in its own process. Dates "
+            "are independent, so this is the only lever that makes a hundred-day "
+            "backfill finish in hours instead of days. Separate PROCESSES rather "
+            "than threads because the pipeline keeps module-level state (the "
+            "config singleton, the call ledger, the filter's rate-limit counters) "
+            "that is not safe to share. The usable number depends on what else is "
+            "running on the machine, not on the machine's size: this is clamped "
+            "at startup against actually-free memory (see MB_PER_JOB)."
+        ),
+    )
+    parser.add_argument(
+        "--source",
+        choices=("corpus", "oai", "api"),
+        default="corpus",
+        help=(
+            "Where to get the window's papers. Default \"corpus\" reads a "
+            "locally harvested corpus indexed by SUBMISSION date, which is the "
+            "only source that stays complete for an old date: both network "
+            "sources lose papers that were revised after the date being rebuilt "
+            "(measured), and the search endpoint additionally rate limited this "
+            "host for hours mid-backfill. \"oai\" harvests over the network, "
+            "\"api\" is the interactive Atom search endpoint; use either only to "
+            "reproduce an old run or when no corpus has been built."
+        ),
+    )
     return parser.parse_args()
+
+
+#: Peak resident cost of one remedy job, MEASURED against a running backfill by
+#: sampling the whole process subtree (worker python + the model subprocess it
+#: spawns per batch) every 4s and keeping the maximum: 1124 MB across 3 jobs,
+#: so ~375. Set to 400 with margin.
+#:
+#: Two earlier values here were wrong in opposite directions and both were
+#: guesses. 1400 throttled the tool to a third of what the machine could carry;
+#: 700 was still nearly double. Sampling the STEADY state alone gives ~113 and
+#: would let far too many jobs start, because what kills a run is the moment
+#: every worker happens to hold a model subprocess at once.
+MB_PER_JOB = 400
+#: Never plan to consume the last of the machine.
+MB_HEADROOM = 2000
+
+
+def free_memory_mb() -> int | None:
+    """Actually-free physical memory, or None when it cannot be determined.
+
+    Returns None rather than a guess: clamping against a fabricated number would
+    be worse than not clamping, because it would look like a considered decision.
+    """
+    try:
+        if sys.platform == "win32":
+            import ctypes
+
+            class _Status(ctypes.Structure):
+                _fields_ = [
+                    ("dwLength", ctypes.c_ulong), ("dwMemoryLoad", ctypes.c_ulong),
+                    ("ullTotalPhys", ctypes.c_ulonglong), ("ullAvailPhys", ctypes.c_ulonglong),
+                    ("ullTotalPageFile", ctypes.c_ulonglong), ("ullAvailPageFile", ctypes.c_ulonglong),
+                    ("ullTotalVirtual", ctypes.c_ulonglong), ("ullAvailVirtual", ctypes.c_ulonglong),
+                    ("ullAvailExtendedVirtual", ctypes.c_ulonglong),
+                ]
+
+            status = _Status()
+            status.dwLength = ctypes.sizeof(_Status)
+            if not ctypes.windll.kernel32.GlobalMemoryStatusEx(ctypes.byref(status)):
+                return None
+            return int(status.ullAvailPhys // (1024 * 1024))
+        with open("/proc/meminfo", encoding="utf-8") as handle:
+            for line in handle:
+                if line.startswith("MemAvailable:"):
+                    return int(line.split()[1]) // 1024
+    except Exception:
+        return None
+    return None
+
+
+def clamp_jobs_to_memory(requested: int) -> int:
+    """Reduce --jobs to what free memory can actually hold.
+
+    A backfill killed halfway is worse than a slow one: it leaves an archive in
+    a state nobody has counted, and the operator finds out from a task
+    notification rather than from the tool. So the clamp happens up front and
+    says what it did.
+    """
+    free_mb = free_memory_mb()
+    if free_mb is None:
+        print("Could not read free memory; leaving --jobs as requested.", flush=True)
+        return requested
+    affordable = max(1, (free_mb - MB_HEADROOM) // MB_PER_JOB)
+    if affordable >= requested:
+        print(f"Free memory {free_mb} MB; running {requested} job(s).", flush=True)
+        return requested
+    print(
+        f"Free memory is {free_mb} MB. At ~{MB_PER_JOB} MB per job with "
+        f"{MB_HEADROOM} MB headroom that affords {affordable}, not {requested}. "
+        f"Clamping to {affordable}. Close memory-heavy apps, or pass --jobs "
+        f"anyway on a quieter machine, to go faster.",
+        flush=True,
+    )
+    return affordable
+
+
+def already_remedied(output_root: str, remedy_date: DateTuple) -> bool:
+    """True when this date's bundle already carries a remedy health record.
+
+    Presence of `filter_health` is the signal because it is written only by a run
+    that went through the outage gate. File existence alone would be wrong: the
+    80-odd days this backfill exists to repair all HAVE a file, and it is two
+    bytes of nothing.
+    """
+    label = f"{remedy_date[0]:04d}-{remedy_date[1]:02d}-{remedy_date[2]:02d}"
+    path = (
+        Path(output_root) / "json" / f"{remedy_date[0]:04d}-{remedy_date[1]:02d}"
+        / f"{label}-daily-papers.json"
+    )
+    if not path.is_file():
+        return False
+    try:
+        payload = json.loads(path.read_text(encoding="utf-8"))
+    except (json.JSONDecodeError, OSError):
+        return False
+    return bool(payload.get("meta", {}).get("usage", {}).get("filter_health"))
+
+
+def run_plan_in_parallel(plan: RemedyPlan, args: argparse.Namespace) -> int:
+    """Fan the plan out over `args.jobs` child processes, one date each.
+
+    Each child is this same script with --jobs 1 and a single explicit window, so
+    a child never re-infers a window from an output tree its siblings are writing
+    into at the same time.
+    """
+    import concurrent.futures
+    import subprocess
+
+    items = sorted(plan.items())
+    jobs = clamp_jobs_to_memory(max(1, args.jobs))
+    print(f"Remedying {len(items)} dates with {jobs} concurrent job(s)", flush=True)
+
+    def run_one(item) -> tuple[str, int, str]:
+        remedy_date, (begin_date, end_date) = item
+        label = f"{remedy_date[0]:04d}-{remedy_date[1]:02d}-{remedy_date[2]:02d}"
+        cmd = [
+            sys.executable, "-X", "utf8", str(Path(__file__).resolve()),
+            "--date", label,
+            "--begin-date", f"{begin_date[0]:04d}-{begin_date[1]:02d}-{begin_date[2]:02d}",
+            "--end-date", f"{end_date[0]:04d}-{end_date[1]:02d}-{end_date[2]:02d}",
+            "--output-root", args.output_root,
+            "--jobs", "1",
+            "--skip-latest-copy",
+            # The child re-parses its own args, so a source chosen on the parent
+            # is NOT inherited: without this the fan-out would quietly fall back
+            # to the default while the parent reported the source it was told.
+            "--source", getattr(args, "source", "corpus"),
+        ]
+        proc = subprocess.run(
+            cmd, capture_output=True, text=True, encoding="utf-8", errors="replace",
+            env={**os.environ, "PYTHONIOENCODING": "utf-8"},
+        )
+        # On success the last few stdout lines are enough. On FAILURE they are
+        # actively misleading: the traceback goes to stderr, so keeping only
+        # stdout reports the last thing that WORKED and hides the reason. A
+        # twelve-date failure run was undiagnosable for exactly this reason --
+        # every line said "Getting papers from ..." and the ReadTimeout that
+        # actually killed them was discarded here.
+        if proc.returncode == 0:
+            tail = (proc.stdout or "").strip().splitlines()[-3:]
+        else:
+            err = (proc.stderr or "").strip().splitlines()
+            tail = err[-4:] if err else (proc.stdout or "").strip().splitlines()[-3:]
+        return label, proc.returncode, " | ".join(t.strip() for t in tail)
+
+    failures: list[str] = []
+    completed = 0
+    with concurrent.futures.ThreadPoolExecutor(max_workers=jobs) as pool:
+        futures = [pool.submit(run_one, item) for item in items]
+        # as_completed, NOT map: map yields in submission order, so a slow first
+        # date hides every date that finished behind it and the log reads as if
+        # nothing is happening for half an hour.
+        for future in concurrent.futures.as_completed(futures):
+            label, code, tail = future.result()
+            completed += 1
+            status = "ok " if code == 0 else "FAIL"
+            print(f"  [{status}] {label}  ({completed}/{len(items)})  rc={code}  {tail}", flush=True)
+            if code != 0:
+                failures.append(label)
+
+    if failures:
+        print(
+            f"\n{len(failures)} of {len(items)} dates FAILED and must be redone:\n  "
+            + ", ".join(failures),
+            file=sys.stderr, flush=True,
+        )
+        return 1
+    print(f"\nAll {len(items)} dates remedied.", flush=True)
+    return 0
 
 
 def load_remedy_plan(args: argparse.Namespace) -> RemedyPlan:
@@ -152,7 +371,7 @@ def print_plan(plan: RemedyPlan) -> None:
         )
 
 
-def run_remedy_plan(plan: RemedyPlan, output_root: str, build_site: bool) -> None:
+def run_remedy_plan(plan: RemedyPlan, output_root: str, build_site: bool, skip_latest_copy: bool = False, source: str = "corpus") -> int:
     from arxiv_assistant.apis.arxiv import get_papers_from_arxiv
     from arxiv_assistant.apis.semantic_scholar import get_authors
     from arxiv_assistant.environment import (
@@ -174,16 +393,33 @@ def run_remedy_plan(plan: RemedyPlan, output_root: str, build_site: bool) -> Non
     from arxiv_assistant.paper_topics import build_daily_topic_bundle, build_hotspot_paper_bundle, ensure_topic_fields_for_mapping, sort_paper_mapping_for_daily_display
     from arxiv_assistant.push_to_slack import push_to_slack
     from arxiv_assistant.renderers.build_multipage_site import build_multipage_site
-    from arxiv_assistant.renderers.paper.render_daily import render_daily_md
+    from arxiv_assistant.renderers.paper.render_daily import render_daily_md, render_summary_table
     from arxiv_assistant.utils.io import copy_file_or_dir, create_dir, delete_file_or_dir
+    from arxiv_assistant.utils.llm_gateway import (
+        BACKEND_OPENAI,
+        LEDGER,
+        describe_backend,
+        public_model_label,
+        resolve_backend,
+    )
+    from arxiv_assistant.utils.pipeline_health import assess_paper_filter_health, format_banner
     from arxiv_assistant.utils.utils import EnhancedJSONEncoder
 
     CONFIG["OUTPUT"]["output_path"] = output_root
+    print(describe_backend(CONFIG), flush=True)
+
+    # Days whose scoring never actually ran. Collected rather than merely printed:
+    # over a hundred-day backfill a per-day banner scrolls past, and the operator
+    # needs one list at the end saying which days must be redone.
+    outage_dates: list[str] = []
 
     for remedy_date, (begin_date, end_date) in sorted(plan.items()):
         print("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@")
         print(f"Start remedying for date: {remedy_date}")
         print(f"Searching date range: {begin_date} - {end_date}")
+        # Per-day ledger: the archive each day writes must describe that day's
+        # calls, not the running total since the process started.
+        LEDGER.reset()
 
         remedy_year, remedy_month, remedy_day = remedy_date
 
@@ -212,7 +448,7 @@ def run_remedy_plan(plan: RemedyPlan, output_root: str, build_site: bool) -> Non
 
         all_entries, arxiv_paper_dict = get_papers_from_arxiv(
             CONFIG,
-            source="api",
+            source=source,
             begin_date=begin_date,
             end_date=end_date,
         )
@@ -319,18 +555,49 @@ def run_remedy_plan(plan: RemedyPlan, output_root: str, build_site: bool) -> Non
 
         selected_paper_dict = sort_paper_mapping_for_daily_display(selected_paper_dict)
         filtered_paper_dict = ensure_topic_fields_for_mapping(filtered_paper_dict)
+        # Same outage gate main.py carries. A backfill is exactly where a silent
+        # failure is most expensive: it writes an authoritative-looking archive
+        # for a day that can no longer be distinguished from a real one, and it
+        # does so for a hundred days in a row without anyone watching.
+        total_scanned_papers = sum(len(area_papers) for area_papers in arxiv_paper_dict.values())
+        filter_health = assess_paper_filter_health(
+            scanned_papers=total_scanned_papers,
+            selected_papers=len(selected_paper_dict),
+            prompt_tokens=total_prompt_tokens,
+            completion_tokens=total_completion_tokens,
+            llm_filtering_enabled=(
+                CONFIG["SELECTION"].getboolean("run_openai")
+                and (
+                    CONFIG["SELECTION"].getboolean("run_title_filter")
+                    or CONFIG["SELECTION"].getboolean("run_abstract_filter")
+                )
+            ),
+            llm_calls_attempted=LEDGER.attempted,
+            llm_calls_succeeded=LEDGER.succeeded,
+        )
+        if filter_health.is_outage:
+            print(format_banner(filter_health), file=sys.stderr, flush=True)
+            outage_dates.append(f"{remedy_year}-{remedy_month:02d}-{remedy_day:02d}")
+
         daily_topic_bundle = build_daily_topic_bundle(
             remedy_date,
             selected_paper_dict,
             usage={
-                "model": CONFIG["SELECTION"]["model"],
+                "model": (
+                    CONFIG["SELECTION"]["model"]
+                    if resolve_backend(CONFIG) == BACKEND_OPENAI
+                    else f"{resolve_backend(CONFIG)}:{'+'.join(LEDGER.answering_providers()) or 'none'}"
+                ),
                 "prompt_tokens": total_prompt_tokens,
                 "completion_tokens": total_completion_tokens,
                 "prompt_cost": total_prompt_cost,
                 "completion_cost": total_completion_cost,
                 "total_arxiv_papers": len(all_entries),
-                "total_scanned_papers": sum(len(area_papers) for area_papers in arxiv_paper_dict.values()),
+                "total_scanned_papers": total_scanned_papers,
                 "total_relevant_papers": len(selected_paper_dict),
+                "filter_health": filter_health.to_dict(),
+                "llm": {"backend": describe_backend(CONFIG), **LEDGER.to_dict()},
+                "remedied": True,
             },
         )
 
@@ -353,17 +620,26 @@ def run_remedy_plan(plan: RemedyPlan, output_root: str, build_site: bool) -> Non
                 json.dump(hotspot_paper_bundle, outfile, indent=4)
 
         if CONFIG["OUTPUT"].getboolean("dump_md"):
+            # The SAME table main.py renders, from the same helper. These were
+            # two hand-rolled tables with different columns and different
+            # truths: the remedial one dropped the paper counts and credited
+            # every run to the config's nominal model. A rebuilt day and an
+            # ordinary day describe the same pipeline and must render alike.
             head_table = {
-                "headers": [f"*[{CONFIG['SELECTION']['model']}]*", "Prompt", "Completion", "Total"],
-                "data": [
-                    ["**Token**", total_prompt_tokens, total_completion_tokens, total_prompt_tokens + total_completion_tokens],
-                    [
-                        "**Cost**",
-                        f"${round(total_prompt_cost, 2)}",
-                        f"${round(total_completion_cost, 2)}",
-                        f"${round(total_prompt_cost + total_completion_cost, 2)}",
-                    ],
-                ],
+                "html": render_summary_table(
+                    model=public_model_label(
+                        CONFIG["SELECTION"]["model"]
+                        if resolve_backend(CONFIG) == BACKEND_OPENAI
+                        else f"{resolve_backend(CONFIG)}:{'+'.join(LEDGER.answering_providers()) or 'none'}"
+                    ),
+                    prompt_tokens=total_prompt_tokens,
+                    completion_tokens=total_completion_tokens,
+                    prompt_cost=total_prompt_cost,
+                    completion_cost=total_completion_cost,
+                    total_arxiv_papers=len(all_entries),
+                    total_scanned_papers=sum(len(area_papers) for area_papers in arxiv_paper_dict.values()),
+                    total_relevant_papers=len(selected_paper_dict),
+                )
             }
             with open(output_md_file_format.format("output.md"), "w", encoding="utf-8") as output_file:
                 output_file.write(
@@ -390,11 +666,30 @@ def run_remedy_plan(plan: RemedyPlan, output_root: str, build_site: bool) -> Non
             else:
                 push_to_slack(selected_paper_dict)
 
-        copy_file_or_dir(output_md_file_format.format("output.md"), CONFIG["OUTPUT"]["output_path"], print_info=True)
-        delete_file_or_dir(os.path.join(CONFIG["OUTPUT"]["output_path"], "output.md"))
-        os.rename(
-            os.path.join(CONFIG["OUTPUT"]["output_path"], os.path.basename(output_md_file_format.format("output.md"))),
-            os.path.join(CONFIG["OUTPUT"]["output_path"], "output.md"),
+        # The root out/output.md is a "most recent run" convenience copy. Under
+        # --jobs it is a RACE: every child copies, deletes and renames the same
+        # path, so one child can delete the file another is about to rename and
+        # fail a date that actually scored fine. It is also meaningless for a
+        # backfill, where "most recent" would just be whichever historical date
+        # happened to finish last. The per-date file under md/ is the real
+        # artifact and is written either way.
+        if skip_latest_copy:
+            print("Skipping the root output.md copy (parallel backfill)")
+        else:
+            copy_file_or_dir(output_md_file_format.format("output.md"), CONFIG["OUTPUT"]["output_path"], print_info=True)
+            delete_file_or_dir(os.path.join(CONFIG["OUTPUT"]["output_path"], "output.md"))
+            os.rename(
+                os.path.join(CONFIG["OUTPUT"]["output_path"], os.path.basename(output_md_file_format.format("output.md"))),
+                os.path.join(CONFIG["OUTPUT"]["output_path"], "output.md"),
+            )
+
+    if outage_dates:
+        print("", file=sys.stderr)
+        print(
+            f"REMEDY INCOMPLETE: scoring never ran for {len(outage_dates)} of "
+            f"{len(plan)} dates. These archives were written EMPTY and are not "
+            f"evidence that nothing was relevant:\n  " + ", ".join(outage_dates),
+            file=sys.stderr, flush=True,
         )
 
     if build_site:
@@ -402,11 +697,36 @@ def run_remedy_plan(plan: RemedyPlan, output_root: str, build_site: bool) -> Non
         if site_root is not None:
             print(f"Built multipage site at {site_root}")
 
+    # Non-zero when any day failed, so a batch driver and CI can both see it.
+    return 1 if outage_dates else 0
+
 
 if __name__ == "__main__":
     parsed_args = parse_args()
     remedy_plan = load_remedy_plan(parsed_args)
     print_plan(remedy_plan)
 
-    if not parsed_args.print_plan:
-        run_remedy_plan(remedy_plan, parsed_args.output_root, parsed_args.build_site)
+    if parsed_args.skip_done:
+        before = len(remedy_plan)
+        remedy_plan = {
+            d: w for d, w in remedy_plan.items()
+            if not already_remedied(parsed_args.output_root, d)
+        }
+        print(f"--skip-done: {before - len(remedy_plan)} already remedied, {len(remedy_plan)} to go")
+        if not remedy_plan:
+            print("Nothing left to remedy.")
+            raise SystemExit(0)
+
+    if parsed_args.print_plan:
+        raise SystemExit(0)
+    if parsed_args.jobs > 1 and len(remedy_plan) > 1:
+        raise SystemExit(run_plan_in_parallel(remedy_plan, parsed_args))
+    raise SystemExit(
+        run_remedy_plan(
+            remedy_plan,
+            parsed_args.output_root,
+            parsed_args.build_site,
+            skip_latest_copy=parsed_args.skip_latest_copy,
+            source=parsed_args.source,
+        ) or 0
+    )

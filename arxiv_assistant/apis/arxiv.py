@@ -6,10 +6,96 @@ from xml.etree import ElementTree
 
 import feedparser
 import requests
+import threading
+import time
 import retry
 
 from arxiv_assistant.environment import OUTPUT_DEBUG_FILE_FORMAT
 from arxiv_assistant.utils.utils import Paper, normalize_whitespace
+
+
+#: Read timeout for arXiv API/RSS calls, in seconds.
+#:
+#: This was 10. The API query asks for max_results=10000, and a response that
+#: size routinely takes longer than ten seconds -- more so when several backfill
+#: workers query concurrently. MEASURED: during a parallel backfill twelve
+#: consecutive dates died with requests.exceptions.ReadTimeout after exhausting
+#: all three retries, losing the whole day each time, because the timeout was
+#: shorter than a normal response rather than because anything was wrong.
+#: arXiv asks callers to be patient rather than aggressive; 120s is patient.
+ARXIV_READ_TIMEOUT_S = 120
+
+
+
+#: arXiv asks API callers for roughly one request every three seconds. A parallel
+#: backfill blows straight through that: each date queries once per category, so
+#: N workers produce a burst of 2N. Being throttled is not a transient blip --
+#: once 429s start, every worker keeps earning more of them, and the plain
+#: retry decorator's fixed delay just re-offends on schedule.
+ARXIV_MIN_INTERVAL_S = 3.0
+
+#: How many results to ask for in ONE API call.
+#:
+#: arXiv's API user manual asks callers to page through large result sets "in
+#: slices of 2000" rather than demand the whole set at once. This module asked
+#: for max_results=10000 -- five times that slice -- and a backfill issues one
+#: such call per category per date. MEASURED 2026-09-12: after such a run the
+#: API endpoint answered 429 to this host for hours, including to a
+#: max_results=1 probe, while the RSS endpoint on the same host kept answering
+#: 200. The penalty was earned by how the API was being asked, not by the
+#: machine being blocked outright, so the fix is to ask the way the manual says.
+ARXIV_PAGE_SIZE = 2000
+
+_arxiv_last_call = 0.0
+_arxiv_lock = threading.Lock()
+
+
+def pace_arxiv_request() -> None:
+    """Block until this process is allowed to make another arXiv request.
+
+    Public because the OAI-PMH harvester talks to the same host and must share
+    one interval with the Atom API rather than keep a second, independent clock.
+    """
+    global _arxiv_last_call
+    with _arxiv_lock:
+        wait = ARXIV_MIN_INTERVAL_S - (time.monotonic() - _arxiv_last_call)
+        if wait > 0:
+            time.sleep(wait)
+        _arxiv_last_call = time.monotonic()
+
+
+def _arxiv_get(url: str):
+    """GET an arXiv URL, paced and 429-aware.
+
+    Two behaviours the bare requests.get did not have:
+
+    * A process-wide minimum interval between calls, so concurrent workers in
+      one process queue rather than burst. (Separate PROCESSES still burst past
+      each other; concurrency there has to stay low, which is why the backfill
+      driver clamps it.)
+    * 429 handling with a long, escalating wait that honours Retry-After when
+      the server sends it. A 429 answered by an immediate retry is worse than
+      no retry: it extends the penalty instead of clearing it.
+    """
+    for attempt in range(4):
+        pace_arxiv_request()
+
+        response = requests.get(url, timeout=ARXIV_READ_TIMEOUT_S)
+        if response.status_code != 429:
+            response.raise_for_status()
+            return response
+
+        retry_after = response.headers.get("Retry-After")
+        try:
+            delay = float(retry_after) if retry_after else 0.0
+        except (TypeError, ValueError):
+            delay = 0.0
+        delay = max(delay, 30.0 * (2 ** attempt))
+        print(f"arXiv returned 429; backing off {delay:.0f}s (attempt {attempt + 1}/4)")
+        time.sleep(delay)
+
+    response.raise_for_status()  # out of attempts: surface the 429 rather than hide it
+    return response
 
 
 @retry.retry(tries=3, delay=30.0)
@@ -38,18 +124,31 @@ def get_papers_from_arxiv_api(
     date_query = f"submittedDate:[{begin_date_string}0000+TO+{end_date_string}2359]"
     area_query = f"cat:{area}"
 
-    url = f"{base_url}?search_query={area_query}+AND+{date_query}&start=0&max_results=10000"
-    print(f"Getting papers from {url}")
-    response = requests.get(url, timeout=10)
-    response.raise_for_status()
-    if dump_debug_file:
-        with open(OUTPUT_DEBUG_FILE_FORMAT.format(f"raw_content_{area}.xml"), "w", encoding="utf-8") as outfile:
-            outfile.write(response.text)
+    # Page through the result set in ARXIV_PAGE_SIZE slices. _arxiv_get already
+    # keeps the required interval between calls, so paging costs wall clock, not
+    # politeness. A day of one category is normally well under one page, which
+    # makes the loop a single request in the common case.
+    entries = []
+    start = 0
+    while True:
+        url = f"{base_url}?search_query={area_query}+AND+{date_query}&start={start}&max_results={ARXIV_PAGE_SIZE}"
+        print(f"Getting papers from {url}")
+        response = _arxiv_get(url)
+        if dump_debug_file:
+            with open(OUTPUT_DEBUG_FILE_FORMAT.format(f"raw_content_{area}_{start}.xml"), "w", encoding="utf-8") as outfile:
+                outfile.write(response.text)
 
-    # Parse the XML response
-    root = ElementTree.fromstring(response.text)
+        # Parse the XML response
+        root = ElementTree.fromstring(response.text)
+        page = root.findall("{http://www.w3.org/2005/Atom}entry")
+        entries.extend(page)
 
-    entries = root.findall("{http://www.w3.org/2005/Atom}entry")
+        # A short page is the last page. Paging until an EMPTY page instead
+        # would spend one extra request per area on every single run.
+        if len(page) < ARXIV_PAGE_SIZE:
+            break
+        start += ARXIV_PAGE_SIZE
+
     if len(entries) == 0:
         print(f"No entries found for {area}")
         return [], []
@@ -100,8 +199,7 @@ def get_papers_from_arxiv_rss(
     # get the list of entries
     url = f"https://export.arxiv.org/rss/{area}"
     print(f"Getting papers from {url}")
-    response = requests.get(url, timeout=10)
-    response.raise_for_status()
+    response = _arxiv_get(url)
     feed = feedparser.parse(response.text)
     if dump_debug_file:
         with open(OUTPUT_DEBUG_FILE_FORMAT.format(f"raw_content_{area}.rss"), "w", encoding="utf-8") as outfile:
@@ -203,6 +301,45 @@ def get_papers_from_arxiv(
                 end_date,
                 force_primary,
                 debug_messages,
+            )
+            all_entries.extend(entries)
+            arxiv_paper_dict[area] = papers
+
+    elif source == "corpus":
+        # A locally harvested corpus, indexed by SUBMISSION date. The only
+        # source that is complete for an old date: see arxiv_assistant/apis/corpus.py.
+        from arxiv_assistant.apis.corpus import get_papers_from_corpus
+
+        print(f"Using the local arXiv corpus to get papers...")
+        if begin_date is None or end_date is None:
+            raise ValueError(f"Both `begin_date` and `end_date` arguments are required for \"corpus\" source")
+        for area in area_list:
+            entries, papers = get_papers_from_corpus(
+                area,
+                begin_date,
+                end_date,
+                force_primary,
+                debug_messages,
+            )
+            all_entries.extend(entries)
+            arxiv_paper_dict[area] = papers
+
+    elif source == "oai":
+        # arXiv's bulk/date-ranged harvesting interface. Same shape as "api",
+        # separate rate limit, and the one the manual points a backfill at.
+        from arxiv_assistant.apis.arxiv_oai import get_papers_from_arxiv_oai
+
+        print(f"Using arXiv OAI-PMH to get papers...")
+        if begin_date is None or end_date is None:
+            raise ValueError(f"Both `begin_date` and `end_date` arguments are required for \"oai\" source")
+        for area in area_list:
+            entries, papers = get_papers_from_arxiv_oai(
+                area,
+                begin_date,
+                end_date,
+                force_primary,
+                debug_messages,
+                dump_debug_file,
             )
             all_entries.extend(entries)
             arxiv_paper_dict[area] = papers

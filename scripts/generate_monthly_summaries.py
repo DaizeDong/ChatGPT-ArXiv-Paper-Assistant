@@ -272,14 +272,28 @@ def classify_month_with_openai(
     model: str,
     batch_size: int,
     retry_count: int,
+    config: configparser.ConfigParser | None = None,
 ) -> Tuple[List[Dict], float, float]:
-    openai_api_key = __import__("os").environ.get("OPENAI_API_KEY")
-    openai_base_url = __import__("os").environ.get("OPENAI_BASE_URL", "https://api.openai.com/v1")
-    if not openai_api_key:
-        raise ValueError("OPENAI_API_KEY is required for monthly summary generation in openai mode")
+    # Monthly summaries go through the same gateway as everything else, so they
+    # run keyless on the llmcall chain. An OpenAI client is built only when the
+    # legacy backend is explicitly selected; the key check moved with it, because
+    # demanding a key for a path that no longer uses one would block the whole
+    # monthly job for no reason.
+    from arxiv_assistant.utils import llm_gateway
 
+    backend = llm_gateway.resolve_backend(config)
     topic_registry = get_topic_registry()
-    client = OpenAI(api_key=openai_api_key, base_url=openai_base_url)
+    client = None
+    if backend == llm_gateway.BACKEND_OPENAI:
+        openai_api_key = __import__("os").environ.get("OPENAI_API_KEY")
+        openai_base_url = __import__("os").environ.get("OPENAI_BASE_URL", "https://api.openai.com/v1")
+        if not openai_api_key:
+            raise ValueError(
+                "[LLM] backend = openai but OPENAI_API_KEY is not set; monthly summaries cannot run."
+            )
+        client = OpenAI(api_key=openai_api_key, base_url=openai_base_url)
+    else:
+        print(llm_gateway.describe_backend(config))
     classified: Dict[str, Dict] = {}
     total_prompt_cost = 0.0
     total_completion_cost = 0.0
@@ -291,18 +305,29 @@ def classify_month_with_openai(
         for _ in range(max(retry_count, 1)):
             user_prompt = build_openai_batch_prompt(criteria_prompt, postfix_prompt, remaining)
             try:
-                completion = client.chat.completions.create(
-                    model=model,
-                    seed=0,
-                    messages=[
-                        {"role": "system", "content": system_prompt},
-                        {"role": "user", "content": user_prompt},
-                    ],
-                )
-                prompt_cost, completion_cost = calc_price(model, completion.usage)
+                if client is not None:
+                    completion = client.chat.completions.create(
+                        model=model,
+                        seed=0,
+                        messages=[
+                            {"role": "system", "content": system_prompt},
+                            {"role": "user", "content": user_prompt},
+                        ],
+                    )
+                    raw_text = completion.choices[0].message.content
+                    prompt_cost, completion_cost = calc_price(model, completion.usage)
+                else:
+                    raw_text = llm_gateway.call(
+                        f"{system_prompt}\n\n---\n\n{user_prompt}",
+                        config=config,
+                        backend=backend,
+                        timeout_s=300,
+                    ).text
+                    # Chain backends report no tokens and are not billed per token here.
+                    prompt_cost, completion_cost = 0.0, 0.0
                 total_prompt_cost += prompt_cost
                 total_completion_cost += completion_cost
-                parsed_rows = parse_jsonl_response(completion.choices[0].message.content)
+                parsed_rows = parse_jsonl_response(raw_text)
             except Exception as ex:
                 last_error = ex
                 continue
@@ -541,6 +566,7 @@ def main() -> None:
                 model=config["MONTHLY_SUMMARY"]["model"],
                 batch_size=int(config["MONTHLY_SUMMARY"]["batch_size"]),
                 retry_count=int(config["MONTHLY_SUMMARY"]["retry"]),
+                config=config,
             )
             model_name = config["MONTHLY_SUMMARY"]["model"]
         else:

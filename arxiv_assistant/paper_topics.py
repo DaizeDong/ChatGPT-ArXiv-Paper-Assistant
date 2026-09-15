@@ -46,6 +46,10 @@ class PaperTopic:
     aliases: tuple[str, ...]
     keywords: tuple[str, ...]
     negative_keywords: tuple[str, ...]
+    # Retired topics stay in the registry so historical archive entries still
+    # resolve to their original label; they are excluded from the prompt block
+    # and from heuristic assignment of NEW papers.
+    active: bool = True
 
 
 class TopicRegistry:
@@ -55,6 +59,8 @@ class TopicRegistry:
         self.topics = tuple(sorted(topics, key=lambda topic: topic.order))
         self.topics_by_id = {topic.id: topic for topic in self.topics}
         self.topic_ids = tuple(topic.id for topic in self.topics)
+        self.active_topics = tuple(topic for topic in self.topics if topic.active)
+        self.active_topic_ids = tuple(topic.id for topic in self.active_topics)
         self.labels_by_id = {topic.id: topic.label for topic in self.topics}
         self.alias_to_id = self._build_alias_index()
 
@@ -110,6 +116,7 @@ def get_topic_registry() -> TopicRegistry:
             aliases=tuple(topic.get("aliases", [])),
             keywords=tuple(topic.get("keywords", [])),
             negative_keywords=tuple(topic.get("negative_keywords", [])),
+            active=bool(topic.get("active", True)),
         )
         for topic in payload["topics"]
     ]
@@ -132,7 +139,7 @@ def build_topic_registry_prompt_block() -> str:
         "## Topic Registry",
         "Use exactly one PRIMARY_TOPIC_ID chosen from the stable topic IDs below.",
     ]
-    for topic in registry.topics:
+    for topic in registry.active_topics:
         lines.append(f"- {topic.id}: {topic.label}")
         lines.append(f"  - {topic.description}")
     return "\n".join(lines)
@@ -205,7 +212,7 @@ def heuristic_topic_assignment(paper_entry: Mapping[str, object]) -> TopicAssign
     abstract_text = _field_text(paper_entry, "abstract")
 
     topic_scores: Dict[str, int] = {}
-    for topic in registry.topics:
+    for topic in registry.active_topics:
         score = 0
         for keyword in topic.keywords:
             if keyword in title_text:

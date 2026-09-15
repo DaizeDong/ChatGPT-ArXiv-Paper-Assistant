@@ -1,5 +1,6 @@
 import json
 import os
+import sys
 
 from arxiv_assistant.apis.arxiv import get_papers_from_arxiv
 from arxiv_assistant.apis.semantic_scholar import get_authors
@@ -10,6 +11,8 @@ from arxiv_assistant.paper_topics import build_daily_topic_bundle, build_hotspot
 from arxiv_assistant.push_to_slack import push_to_slack
 from arxiv_assistant.renderers.paper.render_daily import render_daily_md, render_summary_table
 from arxiv_assistant.utils.io import copy_file_or_dir, delete_file_or_dir
+from arxiv_assistant.utils.llm_gateway import BACKEND_OPENAI, LEDGER, describe_backend, public_model_label, resolve_backend
+from arxiv_assistant.utils.pipeline_health import assess_paper_filter_health, format_banner
 from arxiv_assistant.utils.utils import EnhancedJSONEncoder
 
 if __name__ == "__main__":
@@ -74,15 +77,57 @@ if __name__ == "__main__":
 
     # filter papers by GPT
     if CONFIG["SELECTION"].getboolean("run_openai"):
-        selected_results, filtered_results, total_prompt_cost, total_completion_cost, total_prompt_tokens, total_completion_tokens = filter_by_gpt(
-            paper_list,
-            SYSTEM_PROMPT,
-            TOPIC_PROMPT,
-            SCORE_PROMPT,
-            POSTFIX_PROMPT_TITLE,
-            POSTFIX_PROMPT_ABSTRACT,
-            CONFIG,
-        )
+        paper_filter_mode = CONFIG["PAPER_FILTER"]["mode"].strip().lower() if CONFIG.has_section("PAPER_FILTER") else "api_only"
+
+        if paper_filter_mode == "api_only":
+            # Historical path, unchanged: single-call GPT scoring over the batch.
+            selected_results, filtered_results, total_prompt_cost, total_completion_cost, total_prompt_tokens, total_completion_tokens = filter_by_gpt(
+                paper_list,
+                SYSTEM_PROMPT,
+                TOPIC_PROMPT,
+                SCORE_PROMPT,
+                POSTFIX_PROMPT_TITLE,
+                POSTFIX_PROMPT_ABSTRACT,
+                CONFIG,
+            )
+        else:
+            from arxiv_assistant.filters.paper_filter import ApiScoreFilter, AgentFilter, cascade_filter
+            from arxiv_assistant.apis.claude_agent import judge_paper_with_agent  # subagent transport (added in this stage)
+
+            api_filter = ApiScoreFilter(
+                prompts=(SYSTEM_PROMPT, TOPIC_PROMPT, SCORE_PROMPT, POSTFIX_PROMPT_TITLE, POSTFIX_PROMPT_ABSTRACT),
+                config=CONFIG,
+            )
+            agent_filter = AgentFilter(config=CONFIG, agent_fn=judge_paper_with_agent)
+            verdicts = cascade_filter(
+                paper_list, TOPIC_PROMPT, CONFIG,
+                rule_filter=None,          # h-index pre-filter already ran above (main.py:62-71)
+                api_filter=api_filter,
+                agent_filter=agent_filter,
+            )
+            # Project verdicts back into the historical selected/filtered mappings so all
+            # downstream rendering/archival/bilingual code is untouched.
+            import dataclasses as _dc
+            from arxiv_assistant.paper_topics import ensure_topic_fields as _ensure
+            id_to_paper = {p.arxiv_id: p for p in paper_list}
+            selected_results, filtered_results = {}, {}
+            for paper, v in zip(paper_list, verdicts):
+                entry = _ensure({
+                    "ARXIVID": paper.arxiv_id,
+                    "COMMENT": v.rationale,
+                    "RELEVANCE": int(round(v.relevance)),
+                    "NOVELTY": int(round(v.novelty)),
+                    "SCORE": int(round(v.relevance)) + int(round(v.novelty)),
+                    "FILTER_EVIDENCE": v.evidence,
+                    **_dc.asdict(id_to_paper[paper.arxiv_id]),
+                }, arxiv_id=paper.arxiv_id)
+                if v.keep:
+                    selected_results[paper.arxiv_id] = entry
+                else:
+                    filtered_results[paper.arxiv_id] = entry
+            # Costs: agent runs on the subscription quota (not per-call billed), so report API costs only.
+            total_prompt_cost, total_completion_cost, total_prompt_tokens, total_completion_tokens = api_filter.last_costs[0], api_filter.last_costs[1], api_filter.last_costs[2], api_filter.last_costs[3]
+
         selected_paper_dict.update(selected_results)
         filtered_paper_dict.update(filtered_results)
 
@@ -124,18 +169,56 @@ if __name__ == "__main__":
 
     selected_paper_dict = sort_paper_mapping_for_daily_display(selected_paper_dict)
     filtered_paper_dict = ensure_topic_fields_for_mapping(filtered_paper_dict)
+
+    # An empty archive must never be indistinguishable from a working one. If the
+    # filter was supposed to call a model and burned zero tokens, say so here and
+    # stamp it into the bundle so the weekly digest and any CI check can see it.
+    total_scanned_papers = sum(len(area_papers) for area_papers in arxiv_paper_dict.values())
+    filter_health = assess_paper_filter_health(
+        scanned_papers=total_scanned_papers,
+        selected_papers=len(selected_paper_dict),
+        prompt_tokens=total_prompt_tokens,
+        completion_tokens=total_completion_tokens,
+        llm_filtering_enabled=(
+            CONFIG["SELECTION"].getboolean("run_openai")
+            and (
+                CONFIG["SELECTION"].getboolean("run_title_filter")
+                or CONFIG["SELECTION"].getboolean("run_abstract_filter")
+            )
+        ),
+        # The authoritative signal. Token counts mean nothing on the llmcall
+        # chain, which reports none; "we tried N calls and M worked" is the
+        # statement that holds on every backend.
+        llm_calls_attempted=LEDGER.attempted,
+        llm_calls_succeeded=LEDGER.succeeded,
+    )
+    if filter_health.is_outage:
+        print(format_banner(filter_health), file=sys.stderr, flush=True)
+
     daily_topic_bundle = build_daily_topic_bundle(
         (NOW_YEAR, NOW_MONTH, NOW_DAY),
         selected_paper_dict,
         usage={
-            "model": CONFIG["SELECTION"]["model"],
+            # NOT [SELECTION] model. That key names an OpenAI catalogue entry and
+            # is vestigial on every backend except the legacy one: this run
+            # archived "gpt-5.4" while the work was actually done by the llmcall
+            # chain. An archive that names a model nobody called is the same
+            # class of lie as an empty result that claims nothing was relevant,
+            # so report the providers that actually answered.
+            "model": (
+                CONFIG["SELECTION"]["model"]
+                if resolve_backend(CONFIG) == BACKEND_OPENAI
+                else f"{resolve_backend(CONFIG)}:{'+'.join(LEDGER.answering_providers()) or 'none'}"
+            ),
             "prompt_tokens": total_prompt_tokens,
             "completion_tokens": total_completion_tokens,
             "prompt_cost": total_prompt_cost,
             "completion_cost": total_completion_cost,
             "total_arxiv_papers": len(all_entries),
-            "total_scanned_papers": sum(len(area_papers) for area_papers in arxiv_paper_dict.values()),
+            "total_scanned_papers": total_scanned_papers,
             "total_relevant_papers": len(selected_paper_dict),
+            "filter_health": filter_health.to_dict(),
+            "llm": {"backend": describe_backend(CONFIG), **LEDGER.to_dict()},
         },
     )
 
@@ -161,7 +244,15 @@ if __name__ == "__main__":
     if CONFIG["OUTPUT"].getboolean("dump_md"):
         head_table = {
             "html": render_summary_table(
-                model=CONFIG["SELECTION"]["model"],
+                # What ANSWERED, not what the config nominates. The config key
+                # still names an OpenAI catalogue model that this pipeline no
+                # longer calls, so printing it credited every digest to a model
+                # that never ran. Same string the bundle records in usage.model.
+                model=public_model_label(
+                    CONFIG["SELECTION"]["model"]
+                    if resolve_backend(CONFIG) == BACKEND_OPENAI
+                    else f"{resolve_backend(CONFIG)}:{'+'.join(LEDGER.answering_providers()) or 'none'}"
+                ),
                 prompt_tokens=total_prompt_tokens,
                 completion_tokens=total_completion_tokens,
                 prompt_cost=total_prompt_cost,

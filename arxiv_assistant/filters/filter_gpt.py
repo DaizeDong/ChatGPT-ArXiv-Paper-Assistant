@@ -7,10 +7,10 @@ import time
 from typing import Dict, List, Tuple
 
 import retry
-from openai import OpenAI
 from tqdm import tqdm
 
-from arxiv_assistant.environment import OPENAI_API_KEY, OPENAI_BASE_URL, OUTPUT_DEBUG_FILE_FORMAT
+from arxiv_assistant.environment import OUTPUT_DEBUG_FILE_FORMAT
+from arxiv_assistant.utils.llm_client import get_openai_client, resolve_llm_model
 from arxiv_assistant.paper_topics import build_topic_registry_prompt_block, ensure_topic_fields
 from arxiv_assistant.utils.pricing_loader import get_model_pricing
 from arxiv_assistant.utils.utils import EnhancedJSONEncoder, Paper, batched
@@ -26,6 +26,14 @@ def _coerce_int(value, default=0):
 
 
 def calc_price(model, usage):
+    # A token-less backend (the llmcall chain, the claude -p transport) reports no
+    # usage at all, and it is not billed per token here. Return silently rather
+    # than printing a "model not in pricing table" line for every batch: that
+    # noise would be the only visible difference between a healthy run and a
+    # broken one, and it says nothing useful about either.
+    if not getattr(usage, "prompt_tokens", 0) and not getattr(usage, "completion_tokens", 0):
+        return 0, 0
+
     model_pricing = get_model_pricing()
 
     if model not in model_pricing:
@@ -120,16 +128,87 @@ start_query_time = None
 query_cnt = 0
 
 
+@dataclasses.dataclass
+class _ShimUsage:
+    """Duck-types ``openai.types.CompletionUsage`` for token-less backends."""
+
+    prompt_tokens: int = 0
+    completion_tokens: int = 0
+    model_extra: dict = dataclasses.field(default_factory=dict)
+
+
+@dataclasses.dataclass
+class _ShimMessage:
+    content: str
+
+
+@dataclasses.dataclass
+class _ShimChoice:
+    message: _ShimMessage
+
+
+@dataclasses.dataclass
+class _ShimCompletion:
+    """What call_chatgpt returns when the backend is not OpenAI.
+
+    The batch filters read exactly four things off a completion:
+    ``.choices[0].message.content``, ``.usage.prompt_tokens``,
+    ``.usage.completion_tokens`` and ``.usage.model_extra``. Matching that shape
+    keeps both filter functions, their retry loops and their cost accounting
+    untouched, so swapping the transport is provably not a behaviour change to
+    the filtering logic itself.
+    """
+
+    choices: list
+    usage: _ShimUsage
+    backend: str = ""
+    provider: str = ""
+
+
 @retry.retry(tries=3, delay=30.0)
-def call_chatgpt(system_prompt, user_prompt, openai_client, model, limit_per_minute=-1):
+def call_chatgpt(system_prompt, user_prompt, openai_client, model, limit_per_minute=-1, config=None):
+    """Send one batch to the configured backend.
+
+    Historically this was a bare OpenAI chat completion. It now dispatches through
+    arxiv_assistant.utils.llm_gateway, which prefers the keyless llmcall chain
+    (codexg -> codex -> cc -> claude) and falls back to this repo's own claude -p
+    transport. The OpenAI path survives only when [LLM] backend explicitly selects
+    it; ``auto`` never chooses it, because a dead key must surface as an outage
+    rather than quietly become the default again.
+    """
+    from arxiv_assistant.utils import llm_gateway
+
+    backend = llm_gateway.resolve_backend(config)
+
     def call():
-        return openai_client.chat.completions.create(
-            model=model,
-            messages=[
-                {"role": "system", "content": system_prompt},
-                {"role": "user", "content": user_prompt},
-            ],
-            seed=0,
+        if backend == llm_gateway.BACKEND_OPENAI:
+            return openai_client.chat.completions.create(
+                model=model,
+                messages=[
+                    {"role": "system", "content": system_prompt},
+                    {"role": "user", "content": user_prompt},
+                ],
+                seed=0,
+            )
+
+        # One prompt string for the chain backends. The system/user split is kept
+        # as an explicit section header so the instruction semantics survive.
+        prompt = f"{system_prompt}\n\n---\n\n{user_prompt}"
+        result = llm_gateway.call(
+            prompt,
+            config=config,
+            backend=backend,
+            timeout_s=float(
+                config["LLM"].getint("timeout_s", fallback=180)
+                if config is not None and config.has_section("LLM")
+                else 180
+            ),
+        )
+        return _ShimCompletion(
+            choices=[_ShimChoice(message=_ShimMessage(content=result.text))],
+            usage=_ShimUsage(),
+            backend=result.backend,
+            provider=result.provider,
         )
 
     if limit_per_minute <= 0:  # no limit
@@ -176,9 +255,9 @@ def filter_papers_by_title(
         # prepare input
         papers_string = [paper_to_titles(paper) for paper in batch]
         user_prompt = get_user_prompt_for_title_filtering(topic_prompt, postfix_prompt, papers_string)
-        model = config["SELECTION"]["model"]
+        model = resolve_llm_model(config, override=config["SELECTION"].get("model"))
         try:
-            completion = call_chatgpt(system_prompt, user_prompt, openai_client, model)
+            completion = call_chatgpt(system_prompt, user_prompt, openai_client, model, config=config)
         except Exception as ex:
             # if config["OUTPUT"].getboolean("debug_messages"):
             print(f"Exception happened: Failed to call GPT with batch size {len(batch)} ({ex.args})")
@@ -305,9 +384,9 @@ def filter_papers_by_abstract(
         # prepare input
         batch_str = [paper_to_string(paper) for paper in batch]
         user_prompt = get_user_prompt_for_abstract_filtering(topic_prompt, score_prompt, postfix_prompt, batch_str)
-        model = config["SELECTION"]["model"]
+        model = resolve_llm_model(config, override=config["SELECTION"].get("model"))
         try:
-            completion = call_chatgpt(system_prompt, user_prompt, openai_client, model, limit_per_minute=limit_per_minute)
+            completion = call_chatgpt(system_prompt, user_prompt, openai_client, model, limit_per_minute=limit_per_minute, config=config)
         except Exception as ex:
             # if config["OUTPUT"].getboolean("debug_messages"):
             print(f"Exception happened: Failed to call GPT with batch size {len(batch)} ({ex.args})")
@@ -412,7 +491,17 @@ def filter_by_gpt(
     total_prompt_tokens = 0
     total_completion_tokens = 0
 
-    openai_client = OpenAI(api_key=OPENAI_API_KEY, base_url=OPENAI_BASE_URL)
+    # Only construct an OpenAI client when that backend is actually selected.
+    # Building one unconditionally would hand every batch a client holding an
+    # empty key, and the resulting 401 would look like a model failure rather
+    # than a configuration one.
+    from arxiv_assistant.utils import llm_gateway
+
+    if llm_gateway.resolve_backend(config) == llm_gateway.BACKEND_OPENAI:
+        openai_client = get_openai_client()
+    else:
+        openai_client = None
+        print(llm_gateway.describe_backend(config))
     id_paper_mapping: Dict[str, Paper] = {paper.arxiv_id: paper for paper in paper_list}
 
     # filter papers by titles
@@ -478,7 +567,7 @@ def filter_by_gpt(
     return selected_results, total_filtered_results, total_prompt_cost, total_completion_cost, total_prompt_tokens, total_completion_tokens
 
 # if __name__ == "__main__":
-#     openai_client = OpenAI(api_key=OPENAI_API_KEY, base_url=OPENAI_BASE_URL)
+#     openai_client = get_openai_client()
 #
 #     # loads papers from 'in/debug_papers.json' and filters them
 #     with open("../../in/debug_papers.json", "r") as f:

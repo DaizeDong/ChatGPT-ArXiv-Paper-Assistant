@@ -3,17 +3,17 @@ from __future__ import annotations
 import hashlib
 from collections import defaultdict
 from dataclasses import dataclass, field
-from datetime import datetime, timezone
+from datetime import UTC, date, datetime
+from difflib import SequenceMatcher
 
 from arxiv_assistant.hotspots.enrich import EnrichedItem, EVENT_TYPE_TO_CATEGORY
+from arxiv_assistant.utils.hotspot.gate_date import gate_date
 from arxiv_assistant.utils.hotspot.hotspot_cluster import (
     GENERIC_OVERLAP_TOKENS,
     SOURCE_ROLE_WEIGHTS,
     canonicalize_url,
     significant_title_tokens,
 )
-from arxiv_assistant.utils.hotspot.hotspot_sources import get_freshness_date, parse_datetime
-from difflib import SequenceMatcher
 
 EVENT_TYPE_WEIGHTS = {
     "product_release": 2.0,
@@ -44,22 +44,21 @@ KEY_FIGURES = {
 }
 
 
-def _freshness_weight(published_at: str | None) -> float:
-    if not published_at:
+def _freshness_weight(gate_day: date | None, *, run_date: date) -> float:
+    """HN-style gravity from the day-granular gate_date (spec §B.5.1/§C.3).
+
+    T = hours since gate_day (day boundary); decay = 1/(T+2)^1.8 normalized so a
+    same-day story scores 1.0. Sub-day jitter cannot affect this because the input
+    is already floored to a UTC day (INV2). Unknown date → neutral 0.6.
+    """
+    if gate_day is None:
         return 0.6
-    dt = parse_datetime(published_at)
-    if dt is None:
-        return 0.6
-    hours = (datetime.now(timezone.utc) - dt).total_seconds() / 3600
-    if hours < 8:
-        return 1.0
-    if hours < 16:
-        return 0.85
-    if hours < 24:
-        return 0.65
-    if hours < 36:
-        return 0.4
-    return 0.2
+    age_days = (run_date - gate_day).days
+    if age_days < 0:
+        age_days = 0
+    t_hours = age_days * 24.0
+    # Normalized HN gravity: weight(T)/weight(0), weight(T) = 1/(T+2)^1.8.
+    return (2.0 ** 1.8) / ((t_hours + 2.0) ** 1.8)
 
 
 @dataclass
@@ -75,6 +74,27 @@ class Story:
     summary: str = ""
     why_it_matters: str = ""
     key_takeaways: list[str] = field(default_factory=list)
+    # --- stage 0: persistent identity / centroid / status (contract §2.2) ---
+    first_seen: str | None = None              # ISO date, immutable once set
+    centroid: list[float] | None = None        # embedding; model_id-bound
+    centroid_model_id: str = ""
+    status: str = "NEW"                         # "NEW" | "ONGOING"
+    arxiv_versions: dict[str, int] = field(default_factory=dict)   # id -> version count (monotonic)
+    # --- surface snapshots (recorded by StoryStore.record_surface) ---
+    last_surfaced: str | None = None
+    surfaced_verified_max: str | None = None   # DAY-granular gate_date
+    surfaced_entity_names: set[str] = field(default_factory=set)
+    surfaced_max_tier: int = 0
+    surfaced_arxiv_versions: dict[str, int] = field(default_factory=dict)
+    # --- resurgence (§C.4) ---
+    resurged_at: str | None = None             # first-ever resurge run-date (immutable)
+    surfaced_resurged_at: str | None = None    # last resurgence-lane surface run-date
+    # --- cross-day disposition (set by pipeline after classify_cross_day; spec §C.3) ---
+    cross_day_status: str | None = None          # "NEW" | "ONGOING" | "RESURFACE" | None (legacy)
+    # --- evidence ledger (populated by StoryStore.active_stories; used by NoveltyGate §C.3.1) ---
+    evidence_ledger: list[dict] = field(default_factory=list)
+    # each row dict has keys: canonical_url, source_id, source_role, provenance,
+    # source_tier(int), added_at(str ISO date)
 
     def __post_init__(self):
         if not self.category:
@@ -83,6 +103,26 @@ class Story:
             self.headline = self.canonical_item.item.title
         if not self.summary:
             self.summary = self.canonical_item.summary
+
+    def evidence_added_since(self, snapshot_date: str | None) -> list[dict]:
+        """Return ledger rows whose added_at > snapshot_date.
+
+        If snapshot_date is None, return all rows.
+        ISO date strings are compared lexicographically (zero-padded ISO == chronological).
+        """
+        if snapshot_date is None:
+            return list(self.evidence_ledger)
+        return [row for row in self.evidence_ledger if row["added_at"] > snapshot_date]
+
+    def evidence_before(self, snapshot_date: str | None) -> list[dict]:
+        """Return ledger rows whose added_at <= snapshot_date.
+
+        If snapshot_date is None, return [].
+        ISO date strings are compared lexicographically (zero-padded ISO == chronological).
+        """
+        if snapshot_date is None:
+            return []
+        return [row for row in self.evidence_ledger if row["added_at"] <= snapshot_date]
 
 
 def _story_id(items: list[EnrichedItem]) -> str:
@@ -252,10 +292,22 @@ def group_into_stories(enriched_items: list[EnrichedItem]) -> list[Story]:
     return stories
 
 
-def score_stories(stories: list[Story]) -> list[Story]:
-    """Score stories using 5-factor formula with dynamic normalization."""
+def score_stories(stories: list[Story], *, run_date: date | None = None) -> list[Story]:
+    """Score stories using 5-factor formula with dynamic normalization.
+
+    Determinism (spec §G.9 / INV2): the freshness/gravity term is computed against
+    ``run_date`` (the deterministic run day). When ``run_date`` is None it falls
+    back to ``datetime.now(UTC).date()`` for backward compatibility with legacy
+    callers, but that path is NOT bit-stable across wall-clock day boundaries. The
+    Kernel always passes the target run date so two replays of the same frozen raw
+    input produce byte-identical scores (replay-diff bit-stability gate).
+    """
     if not stories:
         return stories
+
+    # Deterministic run day: prefer the caller-supplied run_date (the frozen
+    # target date) over wall-clock now() so replays are bit-stable (§G.9).
+    run_day = run_date if run_date is not None else datetime.now(UTC).date()
 
     # First pass: compute raw scores
     raw_scores: list[float] = []
@@ -275,10 +327,14 @@ def score_stories(stories: list[Story]) -> list[Story]:
         if story.event_type == "opinion" and story.entity_names & KEY_FIGURES:
             event_weight = 1.2
 
-        # Use fetched_at for freshness when available (trending date > creation date)
-        freshness_dates = [get_freshness_date(ei.item) for ei in story.items]
-        freshness_dates = [d for d in freshness_dates if d]
-        freshness = _freshness_weight(max(freshness_dates) if freshness_dates else None)
+        # Gravity from the day-granular gate_date (verified first date), measured
+        # against the deterministic run_day computed above (not a fresh now()).
+        gate_days = [gate_date(ei.item) for ei in story.items]
+        gate_days = [d for d in gate_days if d is not None]
+        # min = earliest credible date = most pessimistic (anti-manipulation); a story
+        # cannot look fresh just because one late-dated item joined it.
+        earliest_gate = min(gate_days) if gate_days else None
+        freshness = _freshness_weight(earliest_gate, run_date=run_day)
 
         raw = (source_weight_sum + evidence_breadth + avg_importance) * event_weight * freshness
         raw_scores.append(raw)

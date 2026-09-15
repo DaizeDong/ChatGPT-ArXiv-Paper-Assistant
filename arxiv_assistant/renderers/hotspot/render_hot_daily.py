@@ -260,4 +260,21 @@ def render_hot_daily_md(report: dict[str, Any]) -> str:
             )
         lines.append("")
 
+    resurgence = report.get("resurgence") or []
+    if resurgence:
+        lines.extend([
+            "", "## Resurgence", "",
+            "Older stories re-surfacing on observed signal (version bump or multi-competitor cluster). "
+            "Original first-publication date shown for honesty; not part of the fresh NEW stream.", "",
+        ])
+        for entry in resurgence:
+            headline = str(entry.get("headline", "") or "").strip() or "(untitled)"
+            origin = str(entry.get("original_first_date", "") or "")[:10]
+            reason = str(entry.get("reason", "") or "")
+            entities = ", ".join(entry.get("entities", []) or [])
+            lines.append(f"- **{headline}** — original first date: {origin or 'unknown'}; reason: {reason}")
+            if entities:
+                lines.append(f"  - entities: {entities}")
+        lines.append("")
+
     return "\n".join(lines).strip() + "\n"

@@ -765,19 +765,32 @@ def _normalize_screening_row(cluster: HotspotCluster, row: dict[str, Any], score
     return topic
 
 
-def _chat_completion(model: str, messages: list[dict[str, str]], temperature: float = 0.1) -> dict[str, Any]:
-    """Call the chat completions API using requests.post (compatible with API proxy)."""
+def _chat_completion(model: str, messages: list[dict[str, str]], temperature: float = 0.1, config: Any = None) -> dict[str, Any]:
+    """Screen one batch through the gateway, in OpenAI response shape.
+
+    This used to POST straight at /chat/completions with OPENAI_API_KEY. It now
+    goes through arxiv_assistant.utils.llm_gateway like every other model call in
+    the repo, so it runs keyless on the llmcall chain and its successes and
+    failures land in the same ledger the outage detector reads.
+
+    The return value keeps the OpenAI envelope shape because callers index
+    ``["choices"][0]["message"]["content"]`` and ``["usage"]``. Usage comes back
+    zeroed: the chain backends do not report tokens and are not billed per token
+    here, and calc_price already treats zero usage as "nothing to price".
+    """
+    from arxiv_assistant.utils import llm_gateway
+
     load_local_env()
-    api_key = os.environ.get("OPENAI_API_KEY", "")
-    base_url = os.environ.get("OPENAI_BASE_URL", "https://api.openai.com/v1").rstrip("/")
-    resp = requests.post(
-        f"{base_url}/chat/completions",
-        headers={"Authorization": f"Bearer {api_key}", "Content-Type": "application/json"},
-        json={"model": model, "temperature": temperature, "messages": messages},
-        timeout=120,
+    prompt = "\n\n---\n\n".join(
+        str(message.get("content", "")) for message in messages if message.get("content")
     )
-    resp.raise_for_status()
-    return resp.json()
+    result = llm_gateway.call(prompt, config=config, timeout_s=120)
+    return {
+        "choices": [{"message": {"content": result.text}}],
+        "usage": {"prompt_tokens": 0, "completion_tokens": 0, "total_tokens": 0},
+        "backend": result.backend,
+        "provider": result.provider,
+    }
 
 
 def screen_clusters_with_openai(

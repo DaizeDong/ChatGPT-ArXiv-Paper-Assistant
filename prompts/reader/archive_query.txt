@@ -1,0 +1,35 @@
+You are answering a question from a RETRIEVED SLICE of a research archive. The slice
+below is everything you get. You have no other sources and no browsing.
+
+## The question
+
+{question}
+
+## Retrieved documents
+
+Each document has an id, a date, and a url. The url is the ONLY citable link for that
+document. There are no other valid links.
+
+{documents}
+
+## Output
+
+Return ONLY a JSON object, no prose and no code fence:
+
+```json
+{"conclusions": [{"text": "One specific claim, in one or two sentences.", "citations": ["https://arxiv.org/abs/2508.01234"]}], "note": "optional one line on what the slice could not answer"}
+```
+
+Rules:
+
+- Every conclusion MUST carry at least one citation, and every citation MUST be a url
+  copied CHARACTER FOR CHARACTER from a document above. A url that does not appear
+  above will be deleted by a deterministic verifier that runs after you, and any
+  conclusion left without a surviving citation is deleted with it. Inventing a
+  plausible link therefore does not smuggle a claim through; it deletes the claim.
+- State what the documents say, not what you know. If the slice only supports a
+  narrow or partial answer, give the narrow answer and say what is missing in `note`.
+- If the slice does not answer the question at all, return an empty `conclusions`
+  list and explain why in `note`. That is a valid, useful answer. Do not pad.
+- Order conclusions most-relevant first. Prefer four sharp conclusions to ten vague
+  ones. Do not restate the question.

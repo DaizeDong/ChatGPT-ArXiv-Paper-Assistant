@@ -57,6 +57,12 @@ PROMPT_PATHS = {
         REPO_ROOT / "prompts" / "monthly" / "postfix_prompt.txt",
         REPO_ROOT / "prompts" / "postfix_prompt_monthly_summary.txt",
     ],
+    "reader.delta_scoring": [
+        REPO_ROOT / "prompts" / "reader" / "delta_scoring.txt",
+    ],
+    "reader.archive_query": [
+        REPO_ROOT / "prompts" / "reader" / "archive_query.txt",
+    ],
 }
 
 

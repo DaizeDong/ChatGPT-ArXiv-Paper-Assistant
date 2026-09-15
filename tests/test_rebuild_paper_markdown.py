@@ -20,10 +20,10 @@ class RebuildPaperMarkdownTests(unittest.TestCase):
             source_payload = {
                 "2501.00001": {
                     "arxiv_id": "2501.00001",
-                    "title": "World model planning",
+                    "title": "Expert routing and load balancing for sparse MoE training",
                     "authors": ["A"],
-                    "abstract": "world model for exploration",
-                    "COMMENT": "Model-based RL with imagination.",
+                    "abstract": "A mixture of experts router with a new load balancing auxiliary loss.",
+                    "COMMENT": "New MoE routing and load balancing mechanism.",
                     "SCORE": 18,
                     "RELEVANCE": 9,
                     "NOVELTY": 9,
@@ -44,7 +44,10 @@ class RebuildPaperMarkdownTests(unittest.TestCase):
 
             self.assertIn("PRIMARY_TOPIC_ID", enriched_payload["2501.00001"])
             self.assertEqual(bundle_payload["meta"]["date"], "2026-03-31")
-            self.assertIn("World Models, Exploration, and Open-Ended Reinforcement Learning", daily_md)
+            self.assertIn("MoE Training", daily_md)
+            self.assertEqual(
+                enriched_payload["2501.00001"]["PRIMARY_TOPIC_ID"], "moe_training"
+            )
             self.assertEqual(daily_md, latest_md)
 
 

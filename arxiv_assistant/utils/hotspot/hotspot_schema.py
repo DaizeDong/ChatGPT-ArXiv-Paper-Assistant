@@ -52,6 +52,8 @@ class HotspotItem:
     tags: list[str] = field(default_factory=list)
     authors: list[str] = field(default_factory=list)
     metadata: dict[str, Any] = field(default_factory=dict)
+    verified_first_date: str | None = None  # ISO8601; set by DateVerify. NEVER source-claimed.
+    provenance: str = ""                     # e.g. "native:hf_papers" | "reuse:agents-radar"
 
     def __post_init__(self) -> None:
         self.title = clean_text(self.title)

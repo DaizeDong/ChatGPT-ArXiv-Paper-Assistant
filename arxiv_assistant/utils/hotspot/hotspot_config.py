@@ -41,3 +41,14 @@ def ensure_parent_dirs(paths: HotspotPaths):
     paths.clusters_path.parent.mkdir(parents=True, exist_ok=True)
     paths.report_path.parent.mkdir(parents=True, exist_ok=True)
     paths.markdown_path.parent.mkdir(parents=True, exist_ok=True)
+
+
+def load_reuse_config(config) -> tuple[bool, list[str]]:
+    """Return (use_reuse_layer, reuse_sources) from the [HOTSPOT_REUSE] section."""
+    if not config.has_section("HOTSPOT_REUSE"):
+        return True, ["hf_daily", "ainews", "agents_radar", "horizon", "scholar_inbox"]
+    use = config.getboolean("HOTSPOT_REUSE", "use_reuse_layer", fallback=True)
+    raw = config.get("HOTSPOT_REUSE", "reuse_sources",
+                     fallback="hf_daily,ainews,agents_radar,horizon,scholar_inbox")
+    sources = [s.strip() for s in raw.split(",") if s.strip()]
+    return use, sources

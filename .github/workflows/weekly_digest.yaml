@@ -1,0 +1,195 @@
+name: Weekly Delta Digest
+
+# Monday 08:00 America/New_York. GitHub cron is UTC-only and has no timezone
+# field, so 08:00 local is 12:00 UTC under EDT and 13:00 UTC under EST. A single
+# expression cannot hold both. We declare BOTH and let a guard step drop the run
+# that is not actually 08:00 local, rather than silently drifting an hour for
+# half the year.
+on:
+  schedule:
+    - cron: '0 12 * * 1'   # 08:00 America/New_York while EDT
+    - cron: '0 13 * * 1'   # 08:00 America/New_York while EST
+  workflow_dispatch:
+    inputs:
+      end_date:
+        description: 'Last day of the window (YYYY-MM-DD). Blank = today.'
+        required: false
+      days:
+        description: 'Window length in days.'
+        required: false
+        default: '7'
+      force:
+        description: 'Rewrite the digest if it already exists.'
+        required: false
+        default: 'false'
+
+permissions:
+  contents: write
+
+# Four independent writers already push to auto_update and none of them
+# coordinates. Serialising this workflow against itself is not enough, so the
+# push step below rebases and retries; this only stops overlapping weekly runs.
+concurrency:
+  group: weekly-delta-digest
+  cancel-in-progress: false
+
+jobs:
+  weekly-digest:
+    runs-on: self-hosted
+    steps:
+      - name: Decide whether this is really 08:00 in New York
+        id: when
+        shell: bash
+        run: |
+          python - <<'PY' >> "$GITHUB_OUTPUT"
+          import datetime, os, zoneinfo
+          now = datetime.datetime.now(zoneinfo.ZoneInfo("America/New_York"))
+          manual = os.environ["EVENT"] == "workflow_dispatch"
+          # GitHub's scheduler is best effort and routinely fires late, so accept
+          # the whole 08:00 hour rather than the exact minute.
+          ok = manual or now.hour == 8
+          print(f"should_run={'true' if ok else 'false'}")
+          print(f"local_time={now.isoformat()}")
+          PY
+        env:
+          EVENT: ${{ github.event_name }}
+
+      - name: Report a skipped duplicate cron
+        if: steps.when.outputs.should_run != 'true'
+        shell: bash
+        run: |
+          echo "Local time is ${{ steps.when.outputs.local_time }}, not 08:00 America/New_York."
+          echo "This is the other half of the DST cron pair. Nothing to do."
+
+      - name: Checkout code
+        if: steps.when.outputs.should_run == 'true'
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+
+      # The archive does not exist on a code branch: out/ is gitignored and every
+      # publisher writes it with `git add -f` onto auto_update. Read it from a
+      # SECOND checkout rather than from the daily artifact, whose retention is 5
+      # days and would silently give this 7-day job a 5-day window.
+      - name: Checkout archive (auto_update)
+        if: steps.when.outputs.should_run == 'true'
+        uses: actions/checkout@v6
+        with:
+          ref: auto_update
+          path: auto_update_data
+          fetch-depth: 0
+
+      - name: Fail if the archive checkout is empty
+        if: steps.when.outputs.should_run == 'true'
+        shell: bash
+        run: |
+          if [ ! -d auto_update_data/out ] || [ -z "$(ls -A auto_update_data/out)" ]; then
+            echo "auto_update_data/out is missing or empty -- refusing to publish an empty digest."
+            exit 1
+          fi
+          echo "archive days (hotspot reports): $(ls auto_update_data/out/hot/reports | wc -l)"
+
+      - name: Set up Python
+        if: steps.when.outputs.should_run == 'true'
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        if: steps.when.outputs.should_run == 'true'
+        shell: bash
+        run: |
+          python -m pip install --upgrade pip
+          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+
+      - name: Generate the weekly digest
+        if: steps.when.outputs.should_run == 'true'
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          OPENAI_BASE_URL: ${{ secrets.OPENAI_BASE_URL }}
+          SLACK_KEY: ${{ secrets.SLACK_KEY }}
+          SLACK_CHANNEL_ID: ${{ secrets.SLACK_CHANNEL_ID }}
+        shell: bash
+        run: |
+          python scripts/generate_weekly_digest.py \
+            --archive-root auto_update_data \
+            --output-root auto_update_data/out \
+            --days "${{ github.event.inputs.days || '7' }}" \
+            ${{ github.event.inputs.end_date && format('--end-date {0}', github.event.inputs.end_date) || '' }} \
+            ${{ github.event.inputs.force == 'true' && '--force' || '' }}
+
+      # A step that only checks the exit code would call a silently empty digest a
+      # success. Assert the artifact says something: either it kept items, or it
+      # states WHY it did not. "Ran and produced nothing, for no stated reason" is
+      # the one outcome that must go red.
+      - name: Verify the digest is honest about being empty
+        if: steps.when.outputs.should_run == 'true'
+        shell: bash
+        run: |
+          python - <<'PY'
+          import glob, json, sys
+          paths = sorted(glob.glob("auto_update_data/out/weekly/*/*-weekly.json"))
+          if not paths:
+              sys.exit("No weekly JSON was produced at all.")
+          payload = json.loads(open(paths[-1], encoding="utf-8").read())
+          diag = payload.get("diagnostics", {})
+          kept = len(payload.get("deep_read", [])) + len(payload.get("skim", []))
+          statuses = diag.get("verdict_status_counts", {}) or {}
+          reasons = []
+          if diag.get("reader_questions_populated", -1) == 0:
+              reasons.append("reader model is empty")
+          if statuses.get("unavailable", 0) > 0:
+              reasons.append("delta scoring was unavailable for some items")
+          if diag.get("days_found", -1) == 0:
+              reasons.append("no archive days in the window")
+          if diag.get("paper_scanned_seen", 0) > 0 and diag.get("paper_llm_tokens_seen", -1) == 0:
+              reasons.append("paper filter consumed zero tokens while scanning papers")
+          print(f"kept={kept} statuses={statuses} reasons={reasons}")
+          print(json.dumps(diag, indent=2, ensure_ascii=False))
+          if kept == 0 and not reasons:
+              # A genuinely quiet week is legal, but it must be provably quiet:
+              # scoring ran and rejected everything on the merits.
+              if statuses.get("scored", 0) == 0:
+                  sys.exit(
+                      "Digest is empty, nothing was scored, and no cause was recorded. "
+                      "This is the silent-empty failure mode, not a quiet week."
+                  )
+              print("Quiet week: scoring ran and nothing cleared the cutoff.")
+          PY
+
+      - name: Commit the digest to auto_update
+        if: steps.when.outputs.should_run == 'true'
+        working-directory: auto_update_data
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          # out/ is gitignored on every branch, hence -f. Stage ONLY the weekly
+          # artifacts: staging out/ wholesale would sweep in the restored history.
+          git add -f out/weekly/
+          if git diff --cached --quiet; then
+            echo "No weekly changes to publish."
+            exit 0
+          fi
+          git commit -m "[skip ci] Weekly delta digest: $(date -u +%Y-%m-%d)"
+          # Four writers push to this branch and none of them coordinates, so a
+          # delayed daily run can land between our fetch and our push.
+          for attempt in 1 2 3; do
+            if git pull --rebase origin auto_update && git push origin HEAD:auto_update; then
+              echo "pushed on attempt $attempt"
+              exit 0
+            fi
+            echo "push attempt $attempt lost the race; retrying"
+            sleep 5
+          done
+          echo "Could not push after 3 attempts."
+          exit 1
+
+      - name: Upload the digest as an artifact
+        if: steps.when.outputs.should_run == 'true'
+        uses: actions/upload-artifact@v4
+        with:
+          name: weekly-delta-digest
+          path: auto_update_data/out/weekly/
+          retention-days: 30

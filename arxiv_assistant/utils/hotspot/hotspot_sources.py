@@ -4,10 +4,13 @@ import json
 from contextlib import contextmanager
 from datetime import UTC, datetime, timedelta
 from pathlib import Path
-from typing import Any
+from typing import TYPE_CHECKING, Any
 from urllib.parse import urljoin, urlsplit, urlunsplit
 
 import requests
+
+if TYPE_CHECKING:  # imported for annotations only; keeps the module import-cycle free
+    from arxiv_assistant.utils.hotspot.hotspot_schema import HotspotItem
 
 
 USER_AGENT = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36"
@@ -148,14 +151,17 @@ _FETCHED_AT_VALID_SOURCES = {"github_trend"}
 def get_freshness_date(item: "HotspotItem") -> str | None:
     """Return the most appropriate date for freshness evaluation.
 
-    Only github_trend sources may use fetched_at to override published_at,
-    since GitHub repos can trend long after creation. All other sources
-    use published_at directly.
+    Priority (spec §2.1/§B.5):
+      1. github_trend: fetched_at (repos trend long after creation).
+      2. verified_first_date (set by DateVerify) — the only trusted first date.
+      3. published_at — backward-compat fallback for pre-DateVerify items.
     """
     if item.source_id in _FETCHED_AT_VALID_SOURCES:
         fetched_at = (item.metadata or {}).get("fetched_at")
         if fetched_at:
             return fetched_at
+    if item.verified_first_date:
+        return item.verified_first_date
     return item.published_at
 
 

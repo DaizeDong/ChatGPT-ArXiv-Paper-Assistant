@@ -28,19 +28,14 @@ from arxiv_assistant.utils.local_env import load_local_env
 # ---------------------------------------------------------------------------
 
 def _chat(model: str, messages: list[dict], temperature: float = 0.1) -> str:
-    import requests
+    """Translate one batch through the gateway (keyless llmcall chain by default)."""
+    from arxiv_assistant.utils import llm_gateway
 
     load_local_env()
-    api_key = os.environ.get("OPENAI_API_KEY", "")
-    base_url = os.environ.get("OPENAI_BASE_URL", "https://api.openai.com/v1").rstrip("/")
-    resp = requests.post(
-        f"{base_url}/chat/completions",
-        headers={"Authorization": f"Bearer {api_key}", "Content-Type": "application/json"},
-        json={"model": model, "temperature": temperature, "messages": messages},
-        timeout=180,
+    prompt = "\n\n---\n\n".join(
+        str(message.get("content", "")) for message in messages if message.get("content")
     )
-    resp.raise_for_status()
-    return resp.json()["choices"][0]["message"]["content"]
+    return llm_gateway.call(prompt, timeout_s=180).text
 
 
 # ---------------------------------------------------------------------------
@@ -186,6 +181,10 @@ def collect_and_translate(data: dict, model: str) -> dict:
         for ev in topic.get("evidence", []):
             for f in EVIDENCE_FIELDS:
                 register(ev, f)
+
+    # resurgence
+    for entry in data.get("resurgence", []):
+        register(entry, "headline")
 
     # source_sections + paper_spotlight
     for section_list_key in ("source_sections", "paper_spotlight"):

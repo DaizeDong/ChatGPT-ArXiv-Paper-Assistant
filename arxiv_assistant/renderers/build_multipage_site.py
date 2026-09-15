@@ -37,7 +37,24 @@ from arxiv_assistant.utils.hotspot.hotspot_dates import is_supported_hotspot_dat
 DAY_FILE_PATTERN = re.compile(r"(?P<year>\d{4})-(?P<month>\d{2})-(?P<day>\d{2})-(?P<suffix>[^/\\\\]+)\.md$")
 HOT_DAY_FILE_PATTERN = re.compile(r"(?P<year>\d{4})-(?P<month>\d{2})-(?P<day>\d{2})-hotspots\.md$")
 HOT_REPORT_PATTERN = re.compile(r"(?P<year>\d{4})-(?P<month>\d{2})-(?P<day>\d{2})\.json$")
-SUFFIX_PRIORITY = {"latest": 0, "output": 1}
+#: Which markdown file wins when a date has more than one.
+#:
+#: A daily run writes only `<date>-latest.md`. A remedial re-run writes
+#: `<date>-output.md`, deliberately leaving the original in place. So a date
+#: carrying BOTH is a date whose first run was rebuilt -- and the rebuild is the
+#: one a reader should see.
+#:
+#: This used to prefer "latest", which meant the rebuild was published only on
+#: dates that had no original at all. MEASURED 2026-09-14 against the live
+#: archive through discover_daily_markdown itself: of 112 rebuilt dates, 81
+#: published the ORIGINAL file, and 67 of those pages carried zero papers while
+#: the rebuilt bundle beside them held 11 to 47. Months of rebuilt digests were
+#: sitting on disk behind a page that said nothing was selected.
+#:
+#: The JSON side (paper_daily_io.JSON_SUFFIX_PRIORITY) already preferred
+#: "output", which is why the monthly summaries were right while the day pages
+#: were wrong. The two must not disagree: keep them in the same order.
+SUFFIX_PRIORITY = {"output": 0, "latest": 1}
 
 
 def _candidate_priority(path: Path) -> Tuple[int, str]:

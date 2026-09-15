@@ -21,13 +21,7 @@ def _table(**over):
 
 
 class UsageTableHonestyTest(unittest.TestCase):
-    """An unmeasured run must not render as a free one.
-
-    WHY THIS EXISTS. CLI-backed providers answer without reporting tokens, so
-    the counters stay at zero. The table printed "0" and "$0.00", which reads as
-    "this cost nothing" rather than "nobody counted". 112 rebuilt days were
-    published that way, each also crediting a model that never ran.
-    """
+    """An unmeasured run must not render as a free one."""
 
     def test_unreported_usage_is_labelled_not_priced_at_zero(self):
         html = _table()

@@ -34,15 +34,7 @@ Total relevant papers: 2
 
 
 class RemedialRenderWinsTest(unittest.TestCase):
-    """A rebuilt day must be the one that gets published.
-
-    WHY THIS EXISTS. The site builder preferred `<date>-latest.md`, which a
-    daily run writes, over `<date>-output.md`, which a remedial re-run writes.
-    A date that had failed and then been rebuilt has BOTH, so the published
-    page was the failed one. Measured against the live archive: 81 of 112
-    rebuilt dates published the original, 67 of them showing zero papers while
-    the rebuilt bundle beside them held 11 to 47.
-    """
+    """A rebuilt day must be the one that gets published."""
 
     def _day_dir(self, *names: str) -> Path:
         tmp = tempfile.TemporaryDirectory()

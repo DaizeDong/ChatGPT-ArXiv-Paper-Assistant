@@ -1,22 +1,4 @@
-"""Tests for ``arxiv_assistant.reader.questions``.
-
-Two things here are load-bearing beyond ordinary parser coverage:
-
-1. THE UNTOUCHED-TEMPLATE GUARD. The shipped ``configs/reader/questions/q*.md``
-   are instructional scaffolding: HTML comments and ``<placeholder>`` lines. If
-   ``_strip_template_noise`` ever stops stripping either form, every untouched
-   template starts reporting ``is_populated == True``, the weekly digest happily
-   scores against five empty documents, and the model invents a rationale for
-   whichever question id it saw first. That failure is silent in production, so
-   it has to be loud here.
-
-2. THE HUMAN-ONLY INVARIANT. The question documents are the only human input to
-   this system. No pipeline stage may write to them, and the cheapest durable way
-   to keep that true is to assert that the reader package contains no file-writing
-   call at all. The detector is itself checked against positive controls, because
-   a scanner that can no longer recognise a writer prints the same green as a
-   package that has none.
-"""
+"""Tests for ``arxiv_assistant.reader.questions``."""
 from __future__ import annotations
 
 import re
@@ -137,13 +119,7 @@ class ParseQuestionDocumentTest(unittest.TestCase):
         self.assertFalse(question.is_populated)
 
     def test_multiline_html_comment_only_field_is_not_content(self) -> None:
-        """Only comment-stripping can handle this one.
-
-        A single-line ``<!-- ... -->`` is also caught by the placeholder-line
-        filter, so it cannot tell the two mechanisms apart. A comment spanning
-        several lines has continuation lines that do not start with ``<``, so this
-        case goes red the moment HTML-comment stripping is removed.
-        """
+        """Only comment-stripping can handle this one."""
         question = parse_question_document(
             "# Q1: t\n## 当前看法\n<!-- write your belief here,\n"
             "     as a falsifiable statement,\n     not a question -->\n",

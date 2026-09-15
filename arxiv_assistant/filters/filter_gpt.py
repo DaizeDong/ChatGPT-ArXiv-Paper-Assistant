@@ -149,15 +149,7 @@ class _ShimChoice:
 
 @dataclasses.dataclass
 class _ShimCompletion:
-    """What call_chatgpt returns when the backend is not OpenAI.
-
-    The batch filters read exactly four things off a completion:
-    ``.choices[0].message.content``, ``.usage.prompt_tokens``,
-    ``.usage.completion_tokens`` and ``.usage.model_extra``. Matching that shape
-    keeps both filter functions, their retry loops and their cost accounting
-    untouched, so swapping the transport is provably not a behaviour change to
-    the filtering logic itself.
-    """
+    """What call_chatgpt returns when the backend is not OpenAI."""
 
     choices: list
     usage: _ShimUsage
@@ -167,15 +159,7 @@ class _ShimCompletion:
 
 @retry.retry(tries=3, delay=30.0)
 def call_chatgpt(system_prompt, user_prompt, openai_client, model, limit_per_minute=-1, config=None):
-    """Send one batch to the configured backend.
-
-    Historically this was a bare OpenAI chat completion. It now dispatches through
-    arxiv_assistant.utils.llm_gateway, which prefers the keyless llmcall chain
-    (codexg -> codex -> cc -> claude) and falls back to this repo's own claude -p
-    transport. The OpenAI path survives only when [LLM] backend explicitly selects
-    it; ``auto`` never chooses it, because a dead key must surface as an outage
-    rather than quietly become the default again.
-    """
+    """Send one batch to the configured backend."""
     from arxiv_assistant.utils import llm_gateway
 
     backend = llm_gateway.resolve_backend(config)

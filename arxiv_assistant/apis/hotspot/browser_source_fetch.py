@@ -1,28 +1,12 @@
 """Browser-capable subagent source fetcher -- for sources that DEFINITELY fail
 with plain scrapers / WebFetch (reddit/X bot-walls, JS-heavy sites).
-
-Plain ``WebFetch`` (see ``agent_source_fetch``) times out or returns nothing on
-bot-walled / JavaScript-rendered pages. Those sources are STATICALLY routed (see
-``utils.hotspot.source_routes``) to this tool, which drives a ``claude -p``
-subagent that uses the **playwright MCP** to act like a human browser: navigate
-to the page, wait for the feed to render, snapshot/evaluate the DOM, scroll, and
-extract the recent AI/ML item permalinks.
-
-Anti-hallucination reuses the scout's DETERMINISTIC URL verifier (INV6): every
-emitted item must have a syntactically valid, non-blocklisted, live http(s) URL,
-and be an item PERMALINK (not the index page itself). Degrades to ``[]`` on any
-agent/parse/mapping failure -- never raises out of ``fetch_source_via_browser``.
-
-Note: real headless playwright-MCP availability is an environment dependency
-validated separately; the unit tests fully mock the transport. For sources behind
-a HARD login, point the playwright MCP at a persistent browser profile pre-seeded
-with logged-in cookies at deploy time (no credentials are handled in this code).
 """
 from __future__ import annotations
 
 from datetime import datetime
 from typing import Any, Callable, Optional
 
+from arxiv_assistant.utils.models import DEFAULT_AGENT_MODEL
 from arxiv_assistant.apis.hotspot.hotspot_agent_scout import (
     _SCHEMA,
     _default_url_alive,
@@ -122,29 +106,13 @@ def fetch_source_via_browser(
     freshness_hours: int,
     *,
     result_limit: int = 15,
-    model: str = "claude-sonnet-5",
+    model: str = DEFAULT_AGENT_MODEL,
     timeout_s: int = 300,
     agent_fn: Callable[..., dict[str, Any]] = run_agent,
     url_check_fn: Optional[Callable[[str], bool]] = None,
     tools: Optional[list[str]] = None,
 ) -> list[HotspotItem]:
-    """Browse one bot-walled/JS source via a playwright subagent; return item permalinks.
-
-    Args:
-        name:            Short source name (e.g. ``"reddit_localllama"``); ids/provenance derive from it.
-        url:             The source INDEX/feed page the agent browses.
-        kind:            Item kind for ``source_type`` (e.g. ``"social"``/``"news"``).
-        target_date:     "As of" date the freshness window anchors to.
-        freshness_hours: Look-back window (hours).
-        result_limit:    Max items to request AND max survivors to emit.
-        agent_fn:        Injectable transport (defaults to ``run_agent``); tests pass a mock.
-        url_check_fn:    Injectable liveness check (defaults to ``_default_url_alive``).
-        tools:           Allowed tools for the subagent (defaults to ``PLAYWRIGHT_TOOLS``).
-
-    Returns:
-        Up to ``result_limit`` HotspotItems, each a verifier-passed item PERMALINK
-        (never the index ``url``), deduped by canonical_url. ``[]`` on any failure.
-    """
+    """Browse one bot-walled/JS source via a playwright subagent; return item permalinks."""
     if url_check_fn is None:
         url_check_fn = _default_url_alive
     if tools is None:

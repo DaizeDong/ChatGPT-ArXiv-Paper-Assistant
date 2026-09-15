@@ -129,16 +129,7 @@ def _apply_freshness_gates(
     *,
     max_item_age_days: int,
 ) -> list:
-    """Day-granular max-age hard gate on gate_date (spec §B.5/§B.5.1).
-
-    Uses gate_date(item) (verified_first_date floored to UTC day) so sub-day jitter
-    cannot flip the discrete gate (INV2). github_trend is exempt from max-age (it
-    legitimately trends long after creation). Items with no credible date are kept
-    (cannot-verify → do not drop), matching the legacy policy.
-
-    Per-source adapters handle freshness at fetch time; gravity decay (_freshness_weight)
-    ranks down older items; the 14-day hard cap here is the inclusion ceiling.
-    """
+    """Day-granular max-age hard gate on gate_date (spec §B.5/§B.5.1)."""
     target_utc = target_date.replace(tzinfo=UTC) if target_date.tzinfo is None else target_date
     run_day = target_utc.date()
 
@@ -422,16 +413,7 @@ _S2_BONUS_CAP = 2.5
 
 
 def _s2_significance_bonus(cites: dict | None) -> float:
-    """Bounded ranking bonus from Semantic Scholar citation counts.
-
-    Primary signal is ``influentialCitationCount`` (S2's curated "actually built upon"
-    citations); total ``citationCount`` is a weaker secondary. log1p keeps it sub-linear
-    and the result is capped at ``_S2_BONUS_CAP``.
-
-    HONEST NOTE: brand-new papers have ~0 citations (too recent to be cited), so this is
-    near-zero for the daily-NEW stream and harmless there; its value is differentiating
-    older / resurfaced / already-cited papers from upvote-only ones.
-    """
+    """Bounded ranking bonus from Semantic Scholar citation counts."""
     if not cites:
         return 0.0
     influential = max(0, int(cites.get("influentialCitationCount") or 0))
@@ -1232,26 +1214,7 @@ def _heuristic_takeaways(topic: dict[str, Any], max_takeaways: int = 3) -> list[
 
 
 def _decide_mode(requested_mode: str) -> str:
-    """Resolve the requested hotspot mode against what can actually run.
-
-    The gate used to be ``OPENAI_API_KEY``. It no longer is: enrichment goes
-    through ``utils.llm_gateway``, whose backends (llmcall, then this repo's own
-    ``claude -p`` transport) use no API key at all. Keying the decision on a dead
-    variable would pin every run to heuristic forever while still printing a
-    green exit code -- the exact shape of failure this pipeline already suffered.
-
-    The RETURN VOCABULARY IS UNCHANGED: "openai" still means "enrich with a
-    language model" and is what the archived reports and committed configs say.
-    "llm" is accepted as an input synonym and normalises to it.
-
-    "auto" resolves to the LLM path unconditionally, and deliberately does NOT
-    probe for a backend first. The repo-local ``claude -p`` transport is the
-    self-sufficiency floor and is always nominally present, so any probe here
-    would be a gate that can never fire -- and a gate that never fires reads
-    exactly like a gate that passed. If the chain is genuinely down, the run
-    still degrades to heuristic output, but now says so in the report's
-    ``enrichment`` block instead of quietly choosing heuristic up front.
-    """
+    """Resolve the requested hotspot mode against what can actually run."""
     from arxiv_assistant.utils.local_env import load_local_env
     load_local_env()
 

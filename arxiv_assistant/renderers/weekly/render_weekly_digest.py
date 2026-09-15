@@ -1,42 +1,7 @@
 """Render the weekly delta digest to markdown.
 
-WHY THIS IS NOT A DAILY RENDERER
---------------------------------
-The daily pages answer "what happened". They are source-first (``## Source
-Stats``) and category-first (``## Topic Radar By Category``, ``## Long-tail
-Signals``, the paper side's topic-coverage table and per-topic table of
-contents), because an archive page has to be browsable by anyone, on any axis,
-forever. This file answers a different question -- "what should I read, and why
-does it move *my* open questions" -- so it carries none of those blocks. It is
-two ranked flat lists and nothing else. The daily renderers are untouched by
-this module; it does not import them and does not share their helpers, so their
-output stays byte-identical.
-
-WHY THE EMPTY CASE IS MOST OF THIS FILE
----------------------------------------
-An empty digest has six possible causes and only ONE of them is good news:
-
-1. the researcher has not written any question document yet;
-2. delta scoring could not run (no transport / agent error) -- ``DeltaStatus.UNAVAILABLE``;
-3. no archive day in the window exists at all (wrong ``--archive-root``, or a dead pipeline);
-4. the paper pipeline scanned papers but emitted zero of them with zero LLM
-   tokens spent -- the live three-month outage this repo actually suffered, where
-   every OpenAI call raised into a bare ``except``, every run exited 0, and every
-   day's archive was the literal two bytes ``{}``;
-5. every model call failed -- the gateway ledger says N attempted, 0 succeeded,
-   which is the backend-agnostic replacement for the token-count test in case 4
-   (the llmcall chain reports no OpenAI tokens at all, so that test alone would
-   go blind the moment the backend changed);
-6. scoring genuinely ran against a real reader model and nothing cleared the cutoff.
-
-Only case 6 may print the calm one-liner :data:`QUIET_WEEK_LINE`. Cases 1 to 5
-print what is wrong, loudly, at the top of the page. A digest that renders a
-tidy "nothing to report" while the machinery underneath is dead is the exact
-failure mode this whole feature was built to make impossible.
-
-The states are NOT re-derived here. The script hands them over in
-``digest["diagnostics"]``; this renderer only reads and reports them, so there is
-one place where "why is it empty" is computed and one place where it is shown.
+Two ranked flat lists, fixed length, no source or category tables: the daily
+pages answer "what happened", this one answers "what moves my open questions".
 """
 from __future__ import annotations
 
@@ -124,13 +89,7 @@ def _section(heading: str, items: Sequence[Mapping[str, Any]]) -> List[str]:
 
 
 def _outage_block(diagnostics: Mapping[str, Any]) -> List[str] | None:
-    """Return the loud block explaining an empty digest, or None if it is honest.
-
-    Order matters and is from most upstream to least: a missing reader model
-    makes every downstream count meaningless, and an unreachable agent makes the
-    archive counts meaningless in turn. Reporting the first cause in that chain
-    is the one that is actually actionable.
-    """
+    """Return the loud block explaining an empty digest, or None if it is honest."""
     populated = _int(diagnostics.get("reader_questions_populated"), default=-1)
     statuses = _status_counts(diagnostics)
     days_found = _int(diagnostics.get("days_found"), default=-1)
@@ -242,29 +201,7 @@ def _header_lines(digest: Mapping[str, Any], diagnostics: Mapping[str, Any]) -> 
 
 
 def render_weekly_digest_md(digest: Dict[str, Any]) -> str:
-    """Render one weekly digest dict (see ``scripts/generate_weekly_digest.py``).
-
-    Expected shape::
-
-        {
-          "week_start": "YYYY-MM-DD", "week_end": "YYYY-MM-DD",
-          "deep_read": [ {candidate_id, kind, title, url, date, delta_score,
-                          question_id, field, one_line_reason, tiebreak}, ... ],
-          "skim":      [ ...same... ],
-          "diagnostics": { days_requested, days_found, days_missing,
-                           paper_days_empty, paper_llm_tokens_seen,
-                           paper_scanned_seen, paper_papers_seen,
-                           candidates_scored, verdict_status_counts,
-                           reader_questions_populated,
-                           delta_score_cutoff, max_deep_read, max_skim,
-                           llm_backend, llm_ledger }
-        }
-
-    Missing sub-dicts degrade to "unknown", never to a confident zero: a
-    diagnostics block that lost ``reader_questions_populated`` renders the loud
-    empty-reader-model message rather than the calm one-liner, because a digest
-    that cannot prove it ran must not claim it ran.
-    """
+    """Render one weekly digest dict (see ``scripts/generate_weekly_digest.py``)."""
     diagnostics = _diagnostics(digest)
     deep_read = [item for item in (digest.get("deep_read") or []) if isinstance(item, Mapping)]
     skim = [item for item in (digest.get("skim") or []) if isinstance(item, Mapping)]

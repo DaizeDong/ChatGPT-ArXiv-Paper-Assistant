@@ -1,19 +1,4 @@
-"""Reader-model question documents: load and parse ``configs/reader/questions/*.md``.
-
-These documents are the ONLY human input to the weekly digest. Nothing in this
-package, and no pipeline stage, ever writes to them (``tests/test_reader_questions.py``
-guards that this module exposes no writer).
-
-Each document has a fixed five-field shape. The headings are Chinese; the stable
-machine keys are the ones in :data:`FIELD_KEYS`, and those are what the scoring
-prompt and the verifier speak.
-
-An EMPTY reader model is a first-class, reportable state -- not silently "nothing
-matched". :func:`load_questions` records ``is_populated`` per question so callers
-can tell "the researcher has no open questions written down" apart from "nothing
-this week moved them". Conflating those two is the failure this whole package
-exists to avoid.
-"""
+"""Reader-model question documents: load and parse ``configs/reader/questions/*.md``."""
 from __future__ import annotations
 
 import re
@@ -72,13 +57,7 @@ class ReaderQuestion:
 
 
 def _strip_template_noise(text: str) -> str:
-    """Drop HTML comments and placeholder angle-bracket lines.
-
-    The shipped templates carry instructional ``<!-- ... -->`` comments and
-    ``<在这里写...>`` placeholders. Counting those as content would make an
-    untouched template look populated, which is exactly the confusion this
-    module refuses to allow.
-    """
+    """Drop HTML comments and placeholder angle-bracket lines."""
     text = _HTML_COMMENT_RE.sub("", text)
     kept = [
         line

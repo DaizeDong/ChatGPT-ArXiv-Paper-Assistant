@@ -1,37 +1,4 @@
-"""Okapi BM25 over the archive, implemented in-repo.
-
-WHY IN-REPO: the archive is a few hundred days of JSON on local disk. A dependency
-(rank_bm25) or an embedding index would add install surface, a model download, or a
-network call to answer a question about files we already have open. BM25 is ~80 lines
-and is exactly the right tool for "which of these few thousand short documents mention
-what I asked about".
-
-CJK HANDLING (read this before changing the tokenizer)
-------------------------------------------------------
-The corpus is mixed English and Chinese: hotspot reports carry Chinese headlines and
-summaries alongside English ones. A naive ``re.findall(r"\\w+", text)`` is a trap here,
-because Python's ``\\w`` is Unicode-aware and swallows an entire Chinese sentence into
-ONE token. That token can only ever match a query that repeats the sentence verbatim,
-so Chinese queries silently retrieve nothing -- a green run with an empty answer, which
-is the failure mode this repo exists to stop.
-
-So the tokenizer splits the text into two kinds of run and treats them differently:
-
-* Non-CJK runs  -> case-folded word tokens (``\\w+`` minus underscore minus CJK).
-* CJK runs      -> character BIGRAMS: "多智能体" yields "多智", "智能", "能体".
-  A run of a single CJK character yields that character as a unigram, otherwise a
-  one-character query term would be unmatchable.
-
-Bigrams are the standard cheap substitute for a Chinese word segmenter: they need no
-dictionary, they survive segmentation ambiguity, and because BOTH the document and the
-query go through the same function, a query bigram matches a document bigram wherever
-the same two adjacent characters occur. The cost is some over-matching across word
-boundaries, which BM25's IDF term largely prices in (a bigram that spans a boundary is
-common, so it is worth little).
-
-Both documents and queries MUST be tokenized with :func:`tokenize`. Do not tokenize a
-query any other way.
-"""
+"""Okapi BM25 over the archive, implemented in-repo."""
 from __future__ import annotations
 
 import math
@@ -70,13 +37,7 @@ def tokenize(text: str) -> List[str]:
 
 @dataclass(frozen=True)
 class Document:
-    """One retrievable unit of the archive.
-
-    ``doc_id`` is stable and human-readable (``paper:2508.01234`` / ``hotspot:<TOPIC_ID>``)
-    so a caller can dedupe or cite it. ``url`` is what the synthesis verifier checks
-    citations against; it may be empty when the source carried no link, and an empty
-    url simply means the document cannot be cited.
-    """
+    """One retrievable unit of the archive."""
 
     doc_id: str
     kind: str  # "paper" | "hotspot"
@@ -100,13 +61,7 @@ class ScoredDocument:
 
 @dataclass
 class BM25Index:
-    """Okapi BM25 with the standard ``ln(1 + (N - df + 0.5) / (df + 0.5))`` IDF.
-
-    That IDF variant is used rather than the textbook ``ln((N - df + 0.5) / (df + 0.5))``
-    because the textbook form goes NEGATIVE for terms present in more than half the
-    corpus, which on a small archive can make a document score below zero for containing
-    the query term. Non-negative IDF keeps "scored 0" meaning "matched nothing".
-    """
+    """Okapi BM25 with the standard ``ln(1 + (N - df + 0.5) / (df + 0.5))`` IDF."""
 
     documents: Sequence[Document]
     k1: float = DEFAULT_K1

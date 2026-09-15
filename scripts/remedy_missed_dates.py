@@ -219,13 +219,7 @@ def free_memory_mb() -> int | None:
 
 
 def clamp_jobs_to_memory(requested: int) -> int:
-    """Reduce --jobs to what free memory can actually hold.
-
-    A backfill killed halfway is worse than a slow one: it leaves an archive in
-    a state nobody has counted, and the operator finds out from a task
-    notification rather than from the tool. So the clamp happens up front and
-    says what it did.
-    """
+    """Reduce --jobs to what free memory can actually hold."""
     free_mb = free_memory_mb()
     if free_mb is None:
         print("Could not read free memory; leaving --jobs as requested.", flush=True)
@@ -245,13 +239,7 @@ def clamp_jobs_to_memory(requested: int) -> int:
 
 
 def already_remedied(output_root: str, remedy_date: DateTuple) -> bool:
-    """True when this date's bundle already carries a remedy health record.
-
-    Presence of `filter_health` is the signal because it is written only by a run
-    that went through the outage gate. File existence alone would be wrong: the
-    80-odd days this backfill exists to repair all HAVE a file, and it is two
-    bytes of nothing.
-    """
+    """True when this date's bundle already carries a remedy health record."""
     label = f"{remedy_date[0]:04d}-{remedy_date[1]:02d}-{remedy_date[2]:02d}"
     path = (
         Path(output_root) / "json" / f"{remedy_date[0]:04d}-{remedy_date[1]:02d}"

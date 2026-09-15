@@ -221,47 +221,22 @@ def _items_from(ctx: KernelContext, stage: str) -> list[HotspotItem]:
 
 
 def _stage_embed(ctx: KernelContext) -> dict[str, Any]:
-    """Structural item-carrying stage (pass-through).
-
-    The real Stage-2 cluster/match/gapfill work is consolidated in _stage_score
-    (Stories held in-memory there to avoid Story JSON serialization across
-    checkpoints); this stage remains a structural item-carrying stage that
-    forwards gravity-gated HotspotItem dicts to the cluster stage.
-    """
+    """Structural item-carrying stage (pass-through)."""
     return {"items": ctx.read("gravity_gate")["items"]}
 
 
 def _stage_cluster(ctx: KernelContext) -> dict[str, Any]:
-    """Structural item-carrying stage (pass-through).
-
-    The real Stage-2 cluster/match/gapfill work is consolidated in _stage_score
-    (Stories held in-memory there to avoid Story JSON serialization across
-    checkpoints); this stage remains a structural item-carrying stage that
-    forwards HotspotItem dicts to the storystore_match stage.
-    """
+    """Structural item-carrying stage (pass-through)."""
     return {"items": ctx.read("embed")["items"]}
 
 
 def _stage_storystore_match(ctx: KernelContext) -> dict[str, Any]:
-    """Structural item-carrying stage (pass-through).
-
-    The real Stage-2 cluster/match/gapfill work is consolidated in _stage_score
-    (Stories held in-memory there to avoid Story JSON serialization across
-    checkpoints); persistent-id assignment and cross-day matching happen inside
-    _stage_score where Story objects are kept in-memory. The single-writer rule
-    is honoured: only the Kernel touches the Store (inside _stage_score).
-    """
+    """Structural item-carrying stage (pass-through)."""
     return {"items": ctx.read("cluster")["items"]}
 
 
 def _stage_gapfill(ctx: KernelContext) -> dict[str, Any]:
-    """Structural item-carrying stage (pass-through).
-
-    The real Stage-2 cluster/match/gapfill work is consolidated in _stage_score
-    (Stories held in-memory there to avoid Story JSON serialization across
-    checkpoints); this stage carries gravity-gated HotspotItem dicts forward
-    unchanged so _stage_score can read them from the gapfill checkpoint.
-    """
+    """Structural item-carrying stage (pass-through)."""
     return {"items": ctx.read("storystore_match")["items"]}
 
 
@@ -285,13 +260,7 @@ def _is_llm_mode(raw: str | None) -> bool:
 
 
 def _enrich(ctx: KernelContext, items: list[HotspotItem]) -> tuple[list, dict[str, Any]]:
-    """Enrich items and report WHICH path did it.
-
-    Returns ``(enriched, status)``. The status travels into the score checkpoint
-    and out into the report, so a run in which every model call failed is
-    distinguishable from a run in which the model ran and found little: both
-    yield heuristic-looking rows, and only this record tells them apart.
-    """
+    """Enrich items and report WHICH path did it."""
     cfg = ctx.config["HOTSPOTS"]
     mode = _normalize_mode(cfg.get("mode", "heuristic"))
     if _is_llm_mode(mode):
@@ -319,23 +288,7 @@ def _enrich(ctx: KernelContext, items: list[HotspotItem]) -> tuple[list, dict[st
 
 
 def _stage_score(ctx: KernelContext) -> dict[str, Any]:
-    """Real Stage-2 cross-day dedup path (port of pipeline.py:1728-1825).
-
-    Reads gravity-gated HotspotItems from the gapfill checkpoint, runs the
-    full cross-day dedup pipeline (intraday cluster → cross-day match →
-    ONGOING suppression → quality filter → select), and writes
-    record_surface for featured stories (single-writer rule).
-
-    Story objects are held in-memory here to avoid Story JSON serialization
-    across checkpoints (the embed/cluster/storystore_match/gapfill stages
-    remain structural pass-throughs carrying HotspotItem dicts only).
-
-    Degrade boundary is NARROW (FIX 3): the naive group_into_stories +
-    score_stories fallback fires ONLY when the dedup stack cannot be imported
-    (ImportError). A genuine bug inside match_crossday/classify/etc. PROPAGATES
-    rather than silently degrading cross-day dedup to naive — the very
-    regression this stage exists to prevent must never become invisible.
-    """
+    """Real Stage-2 cross-day dedup path (port of pipeline.py:1728-1825)."""
     cfg = ctx.config["HOTSPOTS"]
     items = _items_from(ctx, "gapfill")
 
@@ -757,26 +710,7 @@ def _stage_render(ctx: KernelContext) -> dict[str, Any]:
 # Real stage bodies are bound in Tasks 4-7; tests patch _STAGE_FNS.
 # ---------------------------------------------------------------------------
 def _stage_delta(ctx: "KernelContext") -> dict[str, Any]:
-    """Annotate the day's SELECT survivors with a reader-model delta score.
-
-    DELIBERATELY THE LAST STAGE, AND DELIBERATELY ANNOTATE-ONLY.
-
-    Placing a filtering delta gate between `score` and `synthesize` would be a
-    trap: `_stage_score` has already called ``store.record_surface(...)`` for every
-    featured story, so a story dropped here would still be marked as surfaced,
-    come back tomorrow classified ONGOING, and be excluded from re-selection --
-    silently burned out of the candidate pool by a gate it merely failed once.
-    So this stage changes nothing upstream: the report, the archive pages and the
-    cross-day story state are byte-identical whether it runs or not.
-
-    The cutoff and the digest caps live in scripts/generate_weekly_digest.py,
-    which reads the sidecar this stage writes (or rescores from the archive when
-    the sidecar is absent).
-
-    Degrades rather than fails: a disabled section, an empty reader model, or an
-    unreachable agent all produce a sidecar whose verdicts carry an explicit
-    status, never a silently empty one.
-    """
+    """Annotate the day's SELECT survivors with a reader-model delta score."""
     from arxiv_assistant.reader.delta import (
         candidates_from_hotspot_report,
         dumps_verdicts,

@@ -1,19 +1,4 @@
-"""Rewrite the usage table at the top of already-rendered daily markdown.
-
-WHY THIS IS SURGERY AND NOT A RE-RENDER. The papers, comments and anchors in
-these files are the output of model calls that have already been paid for in
-wall clock; re-running the renderer to fix a header would risk changing content
-that is correct, for a table that is not. So this replaces exactly the table
-block and leaves every other byte alone.
-
-What was wrong with the old block: it named `[SELECTION] model` -- an OpenAI
-catalogue name the pipeline had stopped calling -- and printed 0 tokens and
-$0.00, which reads as "this run was free" rather than "this transport does not
-report tokens". The truth for each day is in its own bundle: which providers
-answered, how many calls were made, how long they took.
-
-    python scripts/refresh_usage_tables.py --output-root <archive>/out [--dry-run]
-"""
+"""Rewrite the usage table at the top of already-rendered daily markdown."""
 
 import argparse
 import json

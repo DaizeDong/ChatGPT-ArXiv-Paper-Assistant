@@ -1,46 +1,4 @@
-"""Build the weekly delta digest from N days of archive.
-
-WHAT THIS DOES
---------------
-Walks the N days ending at ``--end-date``, pulls both pipelines' archives for
-each day, turns them into :class:`DeltaCandidate` objects, scores them against
-the researcher's question documents, keeps whatever clears
-``[READER] delta_score_cutoff``, ranks it, and writes a markdown page plus a JSON
-sidecar under ``<output-root>/weekly/<YYYY-MM>/<end-date>-weekly.{md,json}``.
-
-WHY IT COUNTS EVERYTHING IT SKIPS
----------------------------------
-Missing days are normal (weekends have no paper files at all; a 7-day window
-straddles month directories on the paper side). Skipping them quietly is not:
-"no day had anything" and "no day existed" produce the same empty list and must
-not produce the same page. So every skip lands in the ``diagnostics`` block, and
-the renderer branches on that block instead of on ``len(items) == 0``.
-
-The diagnostics also carry the paper side's LLM token total on purpose. This
-repo shipped three months of two-byte ``{}`` archives while every run exited 0,
-because each OpenAI call raised into a bare ``except`` that printed and
-continued. The signature of that outage is: papers scanned > 0, papers produced
-== 0, tokens spent == 0. Scanning hundreds of abstracts without spending a
-single token is arithmetically impossible unless every call failed, so the
-digest can detect it after the fact and say so.
-
-WHY NOT ``out/md/``
--------------------
-``build_multipage_site.py`` globs ``out/md/`` with a date-shaped pattern. A file
-named ``<date>-weekly.md`` there would either hijack that day's page or be
-silently dropped, and either way we would be debugging the site builder instead
-of reading the digest. ``out/weekly/`` is invisible to it. The frontend is out
-of scope for this script by design.
-
-Usage::
-
-    python scripts/generate_weekly_digest.py --end-date 2026-09-09 --days 7 \
-        --archive-root /path/to/archive-checkout
-
-``--archive-root`` exists because the archive lives on a different branch than
-the code: on a code branch ``out/`` is gitignored and empty, so reading and
-writing have to be allowed to point at different trees.
-"""
+"""Build the weekly delta digest from N days of archive."""
 from __future__ import annotations
 
 import argparse
@@ -82,14 +40,7 @@ REPO_ROOT = repo_root()
 
 
 def resolve_archive_dir(archive_root: Path) -> Path:
-    """Return the directory that directly contains ``json/`` and ``hot/``.
-
-    ``--archive-root`` is accepted both as the ``out/`` directory itself (which
-    is what it defaults to, since it defaults to ``--output-root``) and as a
-    checkout root that *contains* ``out/``. Guessing wrong here would produce a
-    zero-day window, which is indistinguishable from a dead pipeline at a
-    glance, so the resolved directory is echoed by the caller.
-    """
+    """Return the directory that directly contains ``json/`` and ``hot/``."""
     archive_root = Path(archive_root)
     if (archive_root / "json").is_dir() or (archive_root / "hot").is_dir():
         return archive_root
@@ -359,19 +310,7 @@ def _score_histogram(verdicts: Mapping[str, DeltaVerdict]) -> Dict[str, int]:
 
 
 def push_digest_to_slack(digest: Mapping[str, Any], markdown: str) -> None:
-    """Post the digest to Slack, gated on the NEW ``[OUTPUT] push_weekly_to_slack``.
-
-    NOT reusing ``arxiv_assistant.push_to_slack.push_to_slack``: it takes a dict
-    of paper entries and calls ``.values()`` on it, then renders arXiv-specific
-    fields (authors, RELEVANCE, NOVELTY) that a hotspot candidate simply does not
-    have. Handing it our list would raise ``AttributeError``, and reshaping the
-    digest into fake paper entries to satisfy it would be worse than the twenty
-    lines below. So this builds its own message with ``slack_sdk`` directly.
-
-    Both imports are lazy: ``arxiv_assistant.environment`` raises at import time
-    when ``OPENAI_API_KEY`` is unset, makes a live arXiv RSS request, and mkdirs
-    dated output directories. None of that may happen on a run with Slack off.
-    """
+    """Post the digest to Slack, gated on the NEW ``[OUTPUT] push_weekly_to_slack``."""
     from arxiv_assistant.environment import SLACK_CHANNEL_ID, SLACK_KEY
     from slack_sdk import WebClient
     from slack_sdk.errors import SlackApiError

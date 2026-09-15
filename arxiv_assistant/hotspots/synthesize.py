@@ -1,31 +1,15 @@
-"""Stage 6 (Synthesize) Claude Code headless transport (spec §G.3 / INV6).
-
-Wires the bilingual Synthesize agent to ``agent_runner.run_agent`` (``claude -p``
-headless, deterministic / temperature 0).  For each input topic the agent is
-asked to produce a bilingual (en + zh) headline + summary and to echo back ONLY
-that topic's own real evidence URLs — those URLs are fed INTO the prompt so the
-downstream verifier ``kernel._synthesis_row_valid`` (anti-hallucination, INV6)
-accepts the row.
-
-The verifier is NEVER bypassed: this transport merely produces candidate rows;
-``_stage_synthesize`` re-checks every returned row's bilingual fields and cited
-evidence against the topic's real evidence-URL set before applying it, and
-degrades any rejected topic to the deterministic heuristic fallback.
-
-On any ``AgentError`` this returns ``{"topics": []}`` so ``_stage_synthesize``
-rejects all rows and falls back to heuristic — degrade-not-crash, identical to
-today's behaviour.  No import side-effects beyond ``json`` + ``agent_runner``.
-"""
+"""Stage 6 (Synthesize) Claude Code headless transport (spec §G.3 / INV6)."""
 
 from __future__ import annotations
 
 import json
 from typing import Any
 
+from arxiv_assistant.utils.models import DEFAULT_AGENT_MODEL
 from arxiv_assistant.utils.agent_runner import AgentError, run_agent
 
 # Default real model id when the caller passes a falsy / placeholder value.
-_DEFAULT_REAL_MODEL = "claude-sonnet-5"
+_DEFAULT_REAL_MODEL = DEFAULT_AGENT_MODEL
 _PLACEHOLDER_MODELS = {"", "claude-code-subagent"}
 
 # JSON-Schema-like structural contract validated by run_agent's _validate_schema.
@@ -107,24 +91,7 @@ def _build_prompt(topics: list[dict[str, Any]]) -> str:
 
 
 def synthesize_bilingual(topics: list[dict[str, Any]], *, model: str, temperature: float) -> dict[str, Any]:
-    """Run the bilingual Synthesize subagent via ``claude -p`` and return its rows.
-
-    Args:
-        topics:      Featured topic dicts (each carrying TOPIC_ID, English
-                     headline / why-it-matters, and real evidence URLs).
-        model:       Pinned model id; falsy / placeholder defaults to the real
-                     ``claude-sonnet-5``.  Recorded into the manifest by the
-                     caller (``_stage_synthesize``).
-        temperature: Accepted for call-site compatibility and recorded in the
-                     manifest; ``claude -p`` is deterministic so it is NOT
-                     passed to ``run_agent``.
-
-    Returns:
-        ``{"topics": [{TOPIC_ID, headline_en, headline_zh, summary_en,
-        summary_zh, evidence}, ...]}`` — already a dict, gated downstream by
-        ``kernel._synthesis_row_valid``.  On ``AgentError`` returns
-        ``{"topics": []}`` so the caller degrades every topic to heuristic.
-    """
+    """Run the bilingual Synthesize subagent via ``claude -p`` and return its rows."""
     real_model = _resolve_model(model)
     prompt = _build_prompt(topics)
     try:

@@ -1,10 +1,4 @@
-"""Tests for the BM25 retriever and the archive query tool.
-
-No network, no `claude` subprocess: the agent transport is injected as ``agent_fn``.
-The tests that matter most are the ones proving the tool can tell "nothing crossed the
-threshold" apart from "the search never ran" -- see ``EmptyWindowTest`` and
-``SynthesisFailureTest``.
-"""
+"""Tests for the BM25 retriever and the archive query tool."""
 from __future__ import annotations
 
 import json

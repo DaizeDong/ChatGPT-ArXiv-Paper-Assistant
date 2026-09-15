@@ -13,17 +13,7 @@ def _workflow_files():
 
 
 class WorkflowPortabilityTest(unittest.TestCase):
-    """The workflows must run on whichever self-hosted runner is registered.
-
-    WHY THIS EXISTS. The keyless model chain is four locally authenticated
-    CLIs, which a GitHub-hosted runner does not have and cannot be given
-    without handing personal subscription credentials to a third party. So the
-    pipeline runs on a self-hosted runner -- and a self-hosted runner may be
-    Windows, where `run:` defaults to PowerShell rather than bash. Every script
-    in these files is bash: `if [ -f ... ]`, `$GITHUB_OUTPUT`, `$(...)`. A step
-    that omits `shell:` is correct on one OS and broken on the other, and which
-    one you get depends on what someone registered months ago.
-    """
+    """The workflows must run on whichever self-hosted runner is registered."""
 
     def test_there_are_workflows_to_check(self):
         # Guards the whole file: a glob that silently matches nothing would

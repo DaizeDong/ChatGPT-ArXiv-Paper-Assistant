@@ -1,19 +1,4 @@
-"""Tests for arxiv_assistant/apis/claude_agent.py — judge_paper_with_agent.
-
-Three test cases (TDD, strict offline):
-
-1. Valid run_agent result → adapter returns a JSON string that, when fed
-   through AgentFilter (with this adapter as agent_fn), yields the expected
-   keep=True verdict. Proves the adapter↔verifier handshake works end-to-end.
-
-2. run_agent raises AgentError → adapter returns conservative fallback JSON
-   string → AgentFilter.judge returns keep=False (degrade-not-crash).
-
-3. The model placeholder "claude-code-subagent" is remapped to the real
-   default ("claude-sonnet-4-6") before run_agent is called.
-
-All tests @patch agent_runner.run_agent — zero real subprocesses.
-"""
+"""Tests for arxiv_assistant/apis/claude_agent.py — judge_paper_with_agent."""
 
 from __future__ import annotations
 
@@ -214,13 +199,7 @@ class TestModelPlaceholderResolution(unittest.TestCase):
         self.assertEqual(captured_kwargs["model"], "claude-opus-4-8")
 
     def test_default_real_model_is_the_shared_default(self) -> None:
-        """Without config override, the placeholder resolves to the shared default.
-
-        Asserted against arxiv_assistant.utils.models rather than a literal:
-        pinning the literal here is what made a model generation turnover a
-        nine-file edit plus a test edit. The retired names are asserted absent
-        so this cannot pass by both sides drifting together.
-        """
+        """Without config override, the placeholder resolves to the shared default."""
         from arxiv_assistant.apis.claude_agent import _resolve_model, _DEFAULT_REAL_MODEL
         from arxiv_assistant.utils.models import DEFAULT_AGENT_MODEL
         self.assertEqual(_DEFAULT_REAL_MODEL, DEFAULT_AGENT_MODEL)

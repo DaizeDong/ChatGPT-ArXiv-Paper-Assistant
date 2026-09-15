@@ -1,37 +1,4 @@
-"""Ask a question of the archive: BM25 retrieval over papers + hotspots, then a cited answer.
-
-    python scripts/query_archive.py "what changed in agent memory" --since 2026-08-01
-    python scripts/query_archive.py "智能体记忆" --since 2026-08-01 --no-llm --top-k 5
-
-WHY THIS EXISTS: the archive holds two independent trees that nothing reads together --
-scored papers under ``out/json/`` and daily hotspot reports under ``out/hot/reports/``.
-The weekly digest only ever sees the few topics that survived selection; this tool sees
-the FULL day, including the long tail and the watchlist, which is where "did anyone
-mention X back in August" actually lives.
-
-THE INVARIANT THIS FILE IS BUILT AROUND
----------------------------------------
-"nothing crossed the threshold" and "the search never ran" must never render the same.
-The paper pipeline in this repo emitted an empty ``{}`` archive every day for three
-months while exiting 0, because a bare except swallowed every failure. So this tool
-reports five mutually exclusive answer statuses and exits non-zero on three of them:
-
-  ``answered``     the agent answered and the verifier kept at least one conclusion.
-  ``no_hits``      the corpus was real and non-empty, BM25 matched nothing. exit 0.
-  ``no_data``      the window contained no usable documents at all -- every day was
-                   missing, or present-but-empty. NOT an answer. exit 2.
-  ``unavailable``  synthesis never ran or the transport failed. exit 2.
-  ``rejected``     the agent answered and the verifier deleted everything it said
-                   (every citation fabricated). exit 2.
-  ``skipped``      --no-llm; retrieval only, by request. exit 0.
-
-Coverage counts ride along with every one of them. An "empty day" is deliberately
-counted apart from a "missing day": ``2026-08-*-output.json`` files all EXIST and all
-contain the literal two bytes ``{}``, which is the fingerprint of that three-month
-outage. A tool that lumped them in with weekends would report a quiet month.
-
-Callable entry point for a local agent: :func:`query_archive`.
-"""
+"""Ask a question of the archive: BM25 retrieval over papers + hotspots, then a cited answer."""
 from __future__ import annotations
 
 import argparse
@@ -227,13 +194,7 @@ def _hotspot_documents(report: Mapping[str, Any], day: str) -> List[Document]:
 
 
 def load_corpus(archive_root: Path, since: date, until: date) -> tuple[List[Document], Coverage]:
-    """Walk every calendar day in [since, until] across BOTH archive trees.
-
-    Missing days are normal (weekends have no paper file, the hotspot tree is flat and
-    starts in March) and are skipped -- but counted. Present-but-empty paper days are
-    counted separately; see the module docstring for why that distinction is the whole
-    point of this function.
-    """
+    """Walk every calendar day in [since, until] across BOTH archive trees."""
     coverage = Coverage(since=since.isoformat(), until=until.isoformat())
     documents: List[Document] = []
     json_root = archive_root / "out" / "json"
@@ -309,20 +270,7 @@ def build_prompt(question: str, hits: Sequence[ScoredDocument]) -> str:
 def _verify_agent_answer(
     payload: Any, hits: Sequence[ScoredDocument]
 ) -> Optional[List[Dict[str, Any]]]:
-    """Deterministic verifier (INV6), same shape as ``paper_filter._verify_agent_response``.
-
-    Rules:
-      - payload must be a dict with a list under ``conclusions``.
-      - a conclusion needs non-empty ``text``; ``citations`` must be a list of strings.
-      - every citation url is dropped unless it appears VERBATIM (modulo case and a
-        trailing slash) in the retrieved set. A fabricated link never survives.
-      - a conclusion whose citations were all dropped is itself dropped: an unsourced
-        claim is exactly the thing we refuse to print.
-      - returns None (reject) when the payload is malformed, or when the agent made
-        claims and NOT ONE survived -- that is a hallucinating model, not an empty
-        archive, and the caller reports it as ``rejected`` rather than as "no answer".
-        An agent that legitimately returns zero conclusions yields [] , not None.
-    """
+    """Deterministic verifier (INV6), same shape as ``paper_filter._verify_agent_response``."""
     if not isinstance(payload, Mapping):
         return None
     raw_conclusions = payload.get("conclusions")
@@ -393,17 +341,7 @@ def synthesize(
     llmcall_fn: Optional[Callable[..., Any]] = None,
     call_fn: Optional[Callable[..., Any]] = None,
 ) -> Dict[str, Any]:
-    """Run the model over the retrieved slice and verify what comes back.
-
-    Never raises on transport failure: a dead transport comes back as status
-    ``unavailable`` with the error text attached, so the CLI can say why it is empty.
-
-    The call goes through :mod:`arxiv_assistant.utils.llm_gateway`, so which
-    backend answered is reported alongside the answer (``backend`` / ``provider``)
-    rather than being invisible. Passing ``agent_fn`` PINS the agent backend: a
-    test that injects a fake transport must not have it bypassed because the host
-    machine happens to have llmcall installed.
-    """
+    """Run the model over the retrieved slice and verify what comes back."""
     if not hits:
         return {"status": AnswerStatus.NO_HITS, "conclusions": [], "note": "retrieval returned no hits"}
 
@@ -484,17 +422,7 @@ def query_archive(
     llmcall_fn: Optional[Callable[..., Any]] = None,
     call_fn: Optional[Callable[..., Any]] = None,
 ) -> Dict[str, Any]:
-    """Answer *question* from the archive at *archive_root*. Never raises for missing days.
-
-    Returns a dict with ``question``, ``coverage``, ``hits`` and ``answer``; the answer's
-    ``status`` is one of :class:`AnswerStatus` and MUST be branched on before anything is
-    rendered to a human. ``use_llm=False`` gives retrieval only (status ``skipped``).
-
-    Raises ValueError only for operator error: an unparseable date, an inverted window,
-    or an archive root with no ``out/`` in it. Those are worth failing on immediately --
-    silently returning zero documents because the path was wrong is exactly the bug class
-    this tool is supposed to expose.
-    """
+    """Answer *question* from the archive at *archive_root*. Never raises for missing days."""
     since_date = _parse_date(since, "--since")
     until_date = _parse_date(until, "--until") if until else date.today()
     if until_date < since_date:

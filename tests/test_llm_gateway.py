@@ -1,22 +1,5 @@
 """Tests for arxiv_assistant/utils/llm_gateway.py -- the ONE place this repo
 talks to a model.
-
-No network, no subprocess, no llmcall import: every test either injects
-``llmcall_fn=``/``agent_fn=`` or patches the detection helpers. The backend
-env var is cleared with ``patch.dict`` in every test that resolves a backend,
-because a developer machine may legitimately have it exported.
-
-What these tests exist to protect
----------------------------------
-1. ``auto`` must NEVER resolve to ``openai``, even when a key is present. That
-   rule is the reason a dead key cannot quietly become the default again, so it
-   gets an explicit negative control (``test_auto_never_resolves_to_openai``).
-2. The ledger must count exactly. Health detection was moved off OpenAI token
-   counts onto ledger attempts, so a lost update under concurrency would
-   understate an outage -- hence the ThreadPool test asserting an exact total.
-3. A failed call must raise AND leave a trace. "nothing matched" and "the model
-   never ran" have to stay different outputs; every failure path below asserts
-   that ``succeeded`` did not move and an error string was recorded.
 """
 from __future__ import annotations
 

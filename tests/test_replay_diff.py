@@ -31,22 +31,7 @@ def _config() -> configparser.ConfigParser:
 
 
 def _stub_verify(item, store):  # noqa: ARG001 - store unused by the stub
-    """Deterministic stand-in for date_verify.verify.
-
-    WHY THIS PATCH EXISTS. Without it this test was not measuring the kernel, it
-    was measuring the internet. ``date_verify.verify`` calls the live arXiv API,
-    Crossref and the Wayback CDX, and may dispatch a subagent; the test patched
-    only ``_fetch_source_payloads``, so whichever of those answered (or timed
-    out) decided an item's verified_first_date. Two runs minutes apart could land
-    on a verifier answer and a published_at fallback respectively, and the
-    checkpoint would differ by exactly that item's timestamp.
-
-    Measured: with the network held constant this way, score.json is
-    byte-identical across runs; with it live, it intermittently is not. A
-    bit-stability test has to hold its inputs constant or it reports the weather.
-    The kernel's determinism is the claim under test; date_verify's network
-    behaviour is an input, and it is non-deterministic by nature.
-    """
+    """Deterministic stand-in for date_verify.verify."""
     return {"verified_first_date": item.published_at, "confidence": 0.9, "evidence": []}
 
 

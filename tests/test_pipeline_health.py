@@ -1,14 +1,4 @@
-"""The outage detector is tested against REAL rows from the published archive.
-
-Both fixtures below are copied verbatim from ``meta.usage`` on the ``auto_update``
-branch, not invented:
-
-  2026-06-04  a healthy day   scanned=443 selected=16 prompt=173454 completion=25482
-  2026-09-07  the live outage scanned=342 selected=0  prompt=0      completion=0
-
-A gate tested only on hand-made input passes while the gate it is guarding fails
-in production, so the positive case here IS the production signature.
-"""
+"""The outage detector is tested against REAL rows from the published archive."""
 import unittest
 
 from arxiv_assistant.utils.pipeline_health import (
@@ -129,13 +119,7 @@ class CallLedgerSignalTests(unittest.TestCase):
         self.assertIn("ZERO model", health.message)
 
     def test_successful_calls_with_zero_tokens_is_HEALTHY(self):
-        """THE REGRESSION THIS EXISTS FOR.
-
-        This is the shape of every normal llmcall run: real work done, real
-        successes, and zero OpenAI tokens because the backend does not report
-        any. If this ever goes red, the outage banner is firing on healthy runs
-        and will be ignored within a week.
-        """
+        """THE REGRESSION THIS EXISTS FOR."""
         health = assess_paper_filter_health(
             scanned_papers=443,
             selected_papers=16,

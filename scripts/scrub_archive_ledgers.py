@@ -1,17 +1,4 @@
-"""Re-scrub ledger strings already written into archive bundles.
-
-The gateway now reduces every provider message to one path-free line, but
-bundles written before that fix still carry the raw CLI banners, and those
-banners name the working directory -- which on a personal machine contains the
-account name. The archive is published, so the stored copies have to be fixed
-too, not just the writer.
-
-Uses llm_gateway._scrub itself rather than a second regex: a cleanup that
-disagrees with the thing it is cleaning up after is how a leak survives one of
-the two.
-
-    python scripts/scrub_archive_ledgers.py --output-root <archive>/out [--dry-run]
-"""
+"""Re-scrub ledger strings already written into archive bundles."""
 
 import argparse
 import json

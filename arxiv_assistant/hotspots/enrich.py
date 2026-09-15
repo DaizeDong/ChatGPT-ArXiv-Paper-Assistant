@@ -211,26 +211,7 @@ def _chat_completion(
     config: Any = None,
     gateway_call: Callable[..., Any] | None = None,
 ) -> dict[str, Any]:
-    """One model call, routed through :mod:`arxiv_assistant.utils.llm_gateway`.
-
-    The RETURN CONTRACT IS UNCHANGED: an OpenAI-chat-shaped dict, so
-    ``enrich_items_batch`` (and anything else reading
-    ``data["choices"][0]["message"]["content"]``) needs no edit. What changed is
-    everything behind it -- there is no HTTP request and no API key.
-
-    ``model`` is accepted for signature compatibility and echoed back in the
-    response, but it is deliberately NOT forwarded to the gateway: the value in
-    the hotspot config is an OpenAI catalogue name (``gpt-4o-mini`` and friends)
-    which means nothing to the llmcall chain or to the ``claude`` CLI, and
-    forwarding it would ask those backends for a model that does not exist. The
-    backend picks its own model from the ``[LLM]`` section.
-
-    ``temperature`` is likewise accepted and ignored: the gateway runs llmcall in
-    ``judge`` mode, which is already deterministic.
-
-    Raises ``AgentError`` when the whole backend chain fails. It is NOT swallowed
-    here; the caller decides whether to retry and records the failure.
-    """
+    """One model call, routed through :mod:`arxiv_assistant.utils.llm_gateway`."""
     caller = gateway_call or llm_gateway.call
     result = caller(
         messages_to_prompt(messages),

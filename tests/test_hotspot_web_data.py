@@ -107,6 +107,7 @@ class TestHotspotWebData(unittest.TestCase):
         }
         raw_items = [
             HotspotItem(
+                published_at="2026-03-21",
                 source_id="ainews",
                 source_name="AINews",
                 source_role="community_heat",
@@ -118,6 +119,7 @@ class TestHotspotWebData(unittest.TestCase):
                 metadata={"activity": 900},
             ),
             HotspotItem(
+                published_at="2026-03-21",
                 source_id="hf_papers",
                 source_name="Hugging Face Trending Papers",
                 source_role="paper_trending",
@@ -129,6 +131,7 @@ class TestHotspotWebData(unittest.TestCase):
                 metadata={"arxiv_id": "2603.00001", "upvotes": 120},
             ),
             HotspotItem(
+                published_at="2026-03-21",
                 source_id="openai_news",
                 source_name="OpenAI News",
                 source_role="official_news",
@@ -242,6 +245,7 @@ class TestHotspotWebData(unittest.TestCase):
         }
         raw_items = [
             HotspotItem(
+                published_at="2026-03-21",
                 source_id="ainews",
                 source_name="AINews",
                 source_role="community_heat",
@@ -253,6 +257,7 @@ class TestHotspotWebData(unittest.TestCase):
                 metadata={"activity": 900},
             ),
             HotspotItem(
+                published_at="2026-03-21",
                 source_id="openai_news",
                 source_name="OpenAI News",
                 source_role="official_news",
@@ -264,6 +269,7 @@ class TestHotspotWebData(unittest.TestCase):
                 metadata={"is_official": True},
             ),
             HotspotItem(
+                published_at="2026-03-21",
                 source_id="github_trend",
                 source_name="GitHub Trending Repos",
                 source_role="github_trend",
@@ -275,6 +281,7 @@ class TestHotspotWebData(unittest.TestCase):
                 metadata={"stars": 4200},
             ),
             HotspotItem(
+                published_at="2026-03-21",
                 source_id="hf_papers",
                 source_name="Hugging Face Trending Papers",
                 source_role="paper_trending",
@@ -309,6 +316,7 @@ class TestHotspotWebData(unittest.TestCase):
         }
         raw_items = [
             HotspotItem(
+                published_at="2026-04-01",
                 source_id="local_hotspot_papers",
                 source_name="Daily Hotspot Papers",
                 source_role="paper_trending",
@@ -345,8 +353,12 @@ class TestHotspotWebData(unittest.TestCase):
             (output_root / "md" / "2026-03").mkdir(parents=True, exist_ok=True)
             (output_root / "md" / "2026-03" / "2026-03-20-output.md").write_text("# Paper day", encoding="utf-8")
             (output_root / "md" / "2026-03" / "2026-03-21-output.md").write_text("# Paper day", encoding="utf-8")
-            raw_items = [
-                HotspotItem(
+            # published_at is filled per day inside the loop below: the payload
+            # drops an item whose date is not the page's date, so one fixed date
+            # would silently empty one of the two days being indexed.
+            def social_item(day):
+                return HotspotItem(
+                    published_at=day,
                     source_id="ainews",
                     source_name="AINews",
                     source_role="community_heat",
@@ -357,7 +369,6 @@ class TestHotspotWebData(unittest.TestCase):
                     canonical_url="https://www.reddit.com/r/LocalLLaMA/comments/aaa",
                     metadata={"activity": 300},
                 )
-            ]
 
             for date in ("2026-03-20", "2026-03-21"):
                 report = {
@@ -392,7 +403,7 @@ class TestHotspotWebData(unittest.TestCase):
                     "watchlist": [],
                     "x_buzz": [],
                 }
-                write_hotspot_web_data(output_root, report, raw_items)
+                write_hotspot_web_data(output_root, report, [social_item(date)])
 
             root_index = json.loads((output_root / "web_data" / "hot" / "index.json").read_text(encoding="utf-8"))
             month_index = json.loads((output_root / "web_data" / "hot" / "2026-03" / "index.json").read_text(encoding="utf-8"))
@@ -453,6 +464,7 @@ class TestHotspotWebData(unittest.TestCase):
         }
         raw_items = [
             HotspotItem(
+                published_at="2026-03-21",
                 source_id="the_rundown_ai",
                 source_name="The Rundown AI",
                 source_role="headline_consensus",
@@ -464,6 +476,7 @@ class TestHotspotWebData(unittest.TestCase):
                 metadata={"score": 12},
             ),
             HotspotItem(
+                published_at="2026-03-21",
                 source_id="superhuman_ai",
                 source_name="Superhuman AI",
                 source_role="headline_consensus",
@@ -535,6 +548,7 @@ class TestHotspotWebData(unittest.TestCase):
         }
         raw_items = [
             HotspotItem(
+                published_at="2026-03-21",
                 source_id="hf_papers",
                 source_name="Hugging Face Trending Papers",
                 source_role="paper_trending",
@@ -546,6 +560,7 @@ class TestHotspotWebData(unittest.TestCase):
                 metadata={"upvotes": 140},
             ),
             HotspotItem(
+                published_at="2026-03-21",
                 source_id="the_rundown_ai",
                 source_name="The Rundown AI",
                 source_role="headline_consensus",

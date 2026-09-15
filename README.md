@@ -38,6 +38,21 @@ Generated results are pushed to the `auto_update` branch; `main` stays code-only
 
 See [docs/UPGRADE-agent-native-hotspot.md](docs/UPGRADE-agent-native-hotspot.md) for the full agent-native story and deployment notes.
 
+## Repository layout
+
+| Path | What lives there |
+|---|---|
+| `main.py` | The daily paper run: fetch, filter, render, publish. |
+| `arxiv_assistant/` | The package. `apis/` fetch sources, `filters/` score papers, `hotspots/` run the hotspot kernel, `reader/` hold the weekly delta model, `renderers/` write markdown and the site, `utils/` carry the LLM gateway, health and pricing. |
+| `scripts/` | Everything you run by hand: backfills, the weekly digest, the archive query tool, the corpus harvest, pricing refresh, site build. |
+| `configs/` | `config.ini` is the live config; `templates/` is the annotated copy to start from, `profiles/` are whole-config presets, `reader/questions/` is the hand-written reader model, `hotspot/` holds the source registries. |
+| `prompts/` | The paper and hotspot prompts. Closer to the behaviour of the filter than the code is. |
+| `tests/` | One file per module, named after it. |
+| `web/`, `site.css` | The published site's templates and styling. |
+| `deploy/vps/` | systemd unit and timer for running the hotspot pipeline off a VPS. |
+| `docs/` | Longer pieces; see [docs/README.md](docs/README.md) for what is current and what is history. |
+| `out/` | Generated archive. Not tracked on this branch; it lives on `auto_update`. |
+
 ## Quickstart
 
 ### Run on GitHub Actions (default mode)

@@ -31,6 +31,7 @@ utils/pipeline_health reads.
 from __future__ import annotations
 
 import os
+import re
 import threading
 import time
 from dataclasses import dataclass, field
@@ -49,6 +50,33 @@ DEFAULT_TIMEOUT_S = 180.0
 #: Judgment tasks get the strongest reasoning tier. Relevance, novelty and delta
 #: scoring are judgments, not formatting, so they are never downgraded for cost.
 DEFAULT_EFFORT = "max"
+
+
+#: Absolute paths that would carry a local account name into a public archive.
+_HOME_PATTERNS = (
+    re.compile(r"[A-Za-z]:\\+Users\\+[^\\\s\"]+", re.IGNORECASE),   # C:\Users\<name>
+    re.compile(r"/(?:home|Users)/[^/\s\"]+"),                        # /home/<name>
+)
+
+
+def _scrub(message: Any) -> str:
+    """Reduce a provider's message to one path-free line.
+
+    WHY. A failing CLI answers with its whole startup banner -- version, model,
+    provider, sandbox, and `workdir: <absolute path>` -- and the ledger stored
+    that verbatim. The bundles are published, so every failed call was about to
+    put a local account name into a public archive; the repo's own pii_guard
+    stopped the commit that would have done it, across 112 rebuilt days.
+
+    The useful part of such a message is its first line (which provider, how
+    long, why). The rest is banner. So: first line only, home-style paths
+    replaced, and still capped.
+    """
+    text = str(message).strip().splitlines()
+    text = text[0] if text else ""
+    for pattern in _HOME_PATTERNS:
+        text = pattern.sub("<path>", text)
+    return text[:300]
 
 
 @dataclass
@@ -98,13 +126,13 @@ class CallLedger:
     def record_error(self, message: str) -> None:
         with self._lock:
             if len(self.errors) < self.MAX_ERRORS:
-                self.errors.append(str(message)[:300])
+                self.errors.append(_scrub(message))
 
     def record_trace(self, message: str) -> None:
         """One line from the backend's own per-attempt log."""
         with self._lock:
             if len(self.trace) < self.MAX_TRACE:
-                self.trace.append(str(message)[:300])
+                self.trace.append(_scrub(message))
 
     def answering_providers(self) -> List[str]:
         """Providers that actually produced an answer, most used first."""

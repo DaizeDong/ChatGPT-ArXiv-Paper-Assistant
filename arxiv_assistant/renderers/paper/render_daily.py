@@ -24,6 +24,9 @@ def render_summary_table(
     total_arxiv_papers: int,
     total_scanned_papers: int,
     total_relevant_papers: int,
+    calls_attempted: int = 0,
+    calls_succeeded: int = 0,
+    seconds: float = 0.0,
 ) -> str:
     total_tokens = prompt_tokens + completion_tokens
     total_cost = prompt_cost + completion_cost
@@ -39,6 +42,19 @@ def render_summary_table(
     else:
         token_cells = ["not reported"] * 3
         cost_cells = ["not reported"] * 3
+
+    # "Not reported" is honest but it is not an answer to "what did this run
+    # take". The ledger knows what the token counters cannot: how many calls the
+    # run made, how many came back, and how long it spent waiting. That is the
+    # accounting this transport actually has, so print it rather than leaving
+    # the reader with three blanks.
+    footnote = ""
+    if not measured and calls_attempted:
+        footnote = (
+            "\n<sub>Usage is not token-metered on this transport. "
+            f"{calls_succeeded} of {calls_attempted} model calls succeeded, "
+            f"{seconds:,.0f}s of model wall clock.</sub>"
+        )
 
     return "\n".join(
         [
@@ -79,7 +95,7 @@ def render_summary_table(
             "    </tbody>",
             "</table>",
         ]
-    )
+    ) + footnote
 
 
 def render_title_and_author(paper_entry: Dict, idx: int) -> str:

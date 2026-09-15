@@ -14,36 +14,18 @@ from arxiv_assistant.environment import OUTPUT_DEBUG_FILE_FORMAT
 from arxiv_assistant.utils.utils import Paper, normalize_whitespace
 
 
-#: Read timeout for arXiv API/RSS calls, in seconds.
-#:
-#: This was 10. The API query asks for max_results=10000, and a response that
-#: size routinely takes longer than ten seconds -- more so when several backfill
-#: workers query concurrently. MEASURED: during a parallel backfill twelve
-#: consecutive dates died with requests.exceptions.ReadTimeout after exhausting
-#: all three retries, losing the whole day each time, because the timeout was
-#: shorter than a normal response rather than because anything was wrong.
-#: arXiv asks callers to be patient rather than aggressive; 120s is patient.
+# Was 10, which is shorter than a normal large response: twelve consecutive
+# backfill dates died on ReadTimeout because of it.
 ARXIV_READ_TIMEOUT_S = 120
 
 
 
-#: arXiv asks API callers for roughly one request every three seconds. A parallel
-#: backfill blows straight through that: each date queries once per category, so
-#: N workers produce a burst of 2N. Being throttled is not a transient blip --
-#: once 429s start, every worker keeps earning more of them, and the plain
-#: retry decorator's fixed delay just re-offends on schedule.
+# arXiv asks for roughly one request every three seconds. Once 429s start every
+# worker keeps earning more, so pacing beats retrying.
 ARXIV_MIN_INTERVAL_S = 3.0
 
-#: How many results to ask for in ONE API call.
-#:
-#: arXiv's API user manual asks callers to page through large result sets "in
-#: slices of 2000" rather than demand the whole set at once. This module asked
-#: for max_results=10000 -- five times that slice -- and a backfill issues one
-#: such call per category per date. MEASURED 2026-09-12: after such a run the
-#: API endpoint answered 429 to this host for hours, including to a
-#: max_results=1 probe, while the RSS endpoint on the same host kept answering
-#: 200. The penalty was earned by how the API was being asked, not by the
-#: machine being blocked outright, so the fix is to ask the way the manual says.
+# The manual asks for slices of 2000. Asking for 10000 earned this host a 429
+# that outlived the run by hours, while RSS on the same host kept answering.
 ARXIV_PAGE_SIZE = 2000
 
 _arxiv_last_call = 0.0
@@ -51,10 +33,9 @@ _arxiv_lock = threading.Lock()
 
 
 def pace_arxiv_request() -> None:
-    """Block until this process is allowed to make another arXiv request.
+    """Block until this process may make another arXiv request.
 
-    Public because the OAI-PMH harvester talks to the same host and must share
-    one interval with the Atom API rather than keep a second, independent clock.
+    Public so the OAI harvester shares one clock with the Atom API.
     """
     global _arxiv_last_call
     with _arxiv_lock:
@@ -67,15 +48,9 @@ def pace_arxiv_request() -> None:
 def _arxiv_get(url: str):
     """GET an arXiv URL, paced and 429-aware.
 
-    Two behaviours the bare requests.get did not have:
-
-    * A process-wide minimum interval between calls, so concurrent workers in
-      one process queue rather than burst. (Separate PROCESSES still burst past
-      each other; concurrency there has to stay low, which is why the backfill
-      driver clamps it.)
-    * 429 handling with a long, escalating wait that honours Retry-After when
-      the server sends it. A 429 answered by an immediate retry is worse than
-      no retry: it extends the penalty instead of clearing it.
+    Concurrent workers in one process queue on the interval; separate processes
+    do not, which is why the backfill driver clamps its job count. A 429 is
+    waited out with an escalating delay, honouring Retry-After when sent.
     """
     for attempt in range(4):
         pace_arxiv_request()
@@ -124,10 +99,8 @@ def get_papers_from_arxiv_api(
     date_query = f"submittedDate:[{begin_date_string}0000+TO+{end_date_string}2359]"
     area_query = f"cat:{area}"
 
-    # Page through the result set in ARXIV_PAGE_SIZE slices. _arxiv_get already
-    # keeps the required interval between calls, so paging costs wall clock, not
-    # politeness. A day of one category is normally well under one page, which
-    # makes the loop a single request in the common case.
+    # A day of one category is normally under one page, so this is usually one
+    # request; _arxiv_get keeps the interval between any extra ones.
     entries = []
     start = 0
     while True:
@@ -143,8 +116,7 @@ def get_papers_from_arxiv_api(
         page = root.findall("{http://www.w3.org/2005/Atom}entry")
         entries.extend(page)
 
-        # A short page is the last page. Paging until an EMPTY page instead
-        # would spend one extra request per area on every single run.
+        # A short page is the last page; waiting for an empty one costs a request.
         if len(page) < ARXIV_PAGE_SIZE:
             break
         start += ARXIV_PAGE_SIZE

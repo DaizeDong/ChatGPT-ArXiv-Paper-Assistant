@@ -1,33 +1,8 @@
-"""The ONE place this repo talks to a language model.
-
-Backends, in resolution order:
-
-``llmcall``  a standalone unified call primitive (chain: codexg -> codex -> cc ->
-             claude). Used when the package imports. No API key: the chain runs
-             through locally installed CLIs.
-``agent``    this repo's own ``claude -p`` transport (utils/agent_runner). The
-             self-sufficiency floor: a bare clone with the ``claude`` CLI works
-             with nothing else installed.
-``openai``   the historical HTTP path. Only reachable when explicitly selected
-             AND a key is present. It is no longer a default anywhere.
-
-WHY DETECTION IS AN IMPORT, NOT AN ENV VAR OR A VENDORED COPY. A guarded import
-asks the question at the moment it matters and answers it from the interpreter
-that will actually make the call. An environment variable answers it from
-whatever the process happened to inherit, which is not reliable under schedulers
-and service managers; a vendored copy answers it from a snapshot that starts
-drifting the day it is taken. A clone without llmcall degrades to ``agent`` and
-still runs; nothing in the repo imports llmcall at module scope, and
-requirements.txt gains no dependency.
-
-THE CALL LEDGER IS THE POINT, NOT A SIDE FEATURE. Health used to be inferred from
-OpenAI token counts, which silently stops working the moment the backend stops
-reporting tokens -- an outage detector that reads zero tokens as "the model never
-ran" would fire on every single llmcall run forever. So every call, on every
-backend, is recorded here as attempted/succeeded. "We tried N and none worked" is
-the provider-agnostic statement of an outage, and it is what
-utils/pipeline_health reads.
-"""
+# The one place this repo talks to a language model. Backends in resolution
+# order: llmcall (chain of local CLIs, no API key), agent (this repo's own
+# claude -p transport, the floor a bare clone still runs on), openai (legacy,
+# never automatic). Every call is recorded in LEDGER, because health used to be
+# inferred from token counts and the keyless backends report none.
 from __future__ import annotations
 
 import os
@@ -37,22 +12,22 @@ import time
 from dataclasses import dataclass, field
 from typing import Any, Callable, Dict, List, Optional
 
+from arxiv_assistant.utils.models import DEFAULT_AGENT_MODEL
 from arxiv_assistant.utils.agent_runner import AgentError, run_agent
 
 BACKEND_LLMCALL = "llmcall"
 BACKEND_AGENT = "agent"
 BACKEND_OPENAI = "openai"
 
-#: Env override, mainly for tests and for pinning a backend on a deploy host.
+# Env override, for tests and for pinning a backend on a deploy host.
 BACKEND_ENV = "ARXIV_ASSISTANT_LLM_BACKEND"
 
 DEFAULT_TIMEOUT_S = 180.0
-#: Judgment tasks get the strongest reasoning tier. Relevance, novelty and delta
-#: scoring are judgments, not formatting, so they are never downgraded for cost.
+# Judgement tasks are never downgraded for cost.
 DEFAULT_EFFORT = "max"
 
 
-#: Absolute paths that would carry a local account name into a public archive.
+# Absolute paths would carry a local account name into the published archive.
 _HOME_PATTERNS = (
     re.compile(r"[A-Za-z]:\\+Users\\+[^\\\s\"]+", re.IGNORECASE),   # C:\Users\<name>
     re.compile(r"/(?:home|Users)/[^/\s\"]+"),                        # /home/<name>
@@ -60,18 +35,8 @@ _HOME_PATTERNS = (
 
 
 def _scrub(message: Any) -> str:
-    """Reduce a provider's message to one path-free line.
-
-    WHY. A failing CLI answers with its whole startup banner -- version, model,
-    provider, sandbox, and `workdir: <absolute path>` -- and the ledger stored
-    that verbatim. The bundles are published, so every failed call was about to
-    put a local account name into a public archive; the repo's own pii_guard
-    stopped the commit that would have done it, across 112 rebuilt days.
-
-    The useful part of such a message is its first line (which provider, how
-    long, why). The rest is banner. So: first line only, home-style paths
-    replaced, and still capped.
-    """
+    """One path-free line: a failing CLI answers with its whole startup banner,
+    including the working directory, and these bundles are published."""
     text = str(message).strip().splitlines()
     text = text[0] if text else ""
     for pattern in _HOME_PATTERNS:
@@ -254,13 +219,8 @@ def call(
 ) -> GatewayResult:
     """Send one prompt through the resolved backend.
 
-    Raises :class:`AgentError` on failure, which is the exception every existing
-    caller in this repo already catches and degrades on. Reusing it means the
-    gateway can be dropped under those callers without changing their error
-    handling.
-
-    ``schema`` is the same minimal JSON-Schema shape ``agent_runner`` validates:
-    ``{"required": [...], "properties": {...}}``. Both backends enforce it.
+    Raises AgentError, which every caller here already catches, so the gateway
+    drops under them unchanged. `schema` is agent_runner's minimal JSON-Schema.
     """
     chosen = backend or resolve_backend(config)
     LEDGER.record_attempt(chosen)
@@ -280,9 +240,8 @@ def call(
             return _call_openai(prompt, config=config, model=model, timeout_s=timeout_s)
         raise AgentError(f"Unknown LLM backend: {chosen!r}")
     finally:
-        # Recorded for failures too: a chain that burns three minutes before
-        # giving up costs real wall clock, and a cost report that only counts
-        # successes would hide exactly the runs worth noticing.
+        # Failures too: a chain that burns three minutes before giving up is
+        # exactly the run worth noticing.
         LEDGER.record_seconds(time.monotonic() - started)
 
 
@@ -296,14 +255,9 @@ def _call_llmcall(prompt, *, schema, config, model, timeout_s, llmcall_fn):
     kwargs: Dict[str, Any] = {
         "mode": "judge",       # read-only, MCP off, deterministic
         "timeout": float(timeout_s),
-        # Effort is a cross-provider policy and is passed EVERY time rather than
-        # left to each provider's own config, which drifts. Judgment tasks take
-        # the top tier; see DEFAULT_EFFORT.
+        # Passed every time rather than left to each provider's config, which drifts.
         "effort": _effort(config),
-        # llmcall reports each leg of the chain through this hook: which provider
-        # was rung, whether the gateway substituted its strongest model, how long
-        # each attempt took. That is the only place "which model actually ran" is
-        # observable, so it goes into the ledger instead of the void.
+        # The only place "which provider actually answered" is observable.
         "log": LEDGER.record_trace,
     }
     if schema is not None:
@@ -335,7 +289,7 @@ def _call_agent(prompt, *, schema, config, model, timeout_s, tools, agent_fn):
     runner = agent_fn or run_agent
     resolved = model or resolve_agent_model(config) if config is not None else (model or "")
     if not resolved:
-        resolved = model or "claude-sonnet-5"
+        resolved = model or DEFAULT_AGENT_MODEL
 
     # run_agent always validates against a schema; give it a permissive one when
     # the caller wants raw text back.
@@ -386,16 +340,8 @@ def _call_openai(prompt, *, config, model, timeout_s):
 def legacy_openai_key_missing(api_key: Any, config: Any) -> bool:
     """True when the legacy OpenAI backend was requested and its key is unusable.
 
-    Lives here rather than in ``environment`` because it is a question about the
-    backend policy, and because ``environment`` cannot be imported in a test: it
-    reads config by relative path, fetches a live RSS feed and creates dated
-    output directories, all at import time.
-
-    An EMPTY string counts as missing. ``is None`` alone would treat
-    ``OPENAI_API_KEY=`` -- the shape an unset CI secret expands to -- as a
-    present key and defer the failure to a 401 on the first batch. That
-    misattribution, a configuration fault surfacing as a model error, is how the
-    last outage stayed invisible for three months.
+    An empty string counts as missing: `OPENAI_API_KEY=` is what an unset CI
+    secret expands to, and treating it as present defers the fault to a 401.
     """
     if str(api_key or "").strip():
         return False
@@ -405,29 +351,15 @@ def legacy_openai_key_missing(api_key: Any, config: Any) -> bool:
             if config.has_section("LLM")
             else "auto"
         )
-    except Exception:  # noqa: BLE001 - see below; failing open is correct HERE
-        # Deliberately broad, and deliberately failing open. This predicate only
-        # decides whether to BLOCK STARTUP. If the config cannot be read we let
-        # the process start: the call ledger still records that every model call
-        # failed, so a genuinely misconfigured legacy backend surfaces as an
-        # outage a few seconds later, through the mechanism built for it. Failing
-        # closed here would instead turn an unreadable config into an import
-        # error with no diagnosis at all.
+    except Exception:  # noqa: BLE001 - failing open is correct here
+        # This only decides whether to block startup. An unreadable config should
+        # not become an import error: the ledger will report the outage anyway.
         backend = "auto"
     return backend == BACKEND_OPENAI
 
 
-#: What the PUBLISHED digest calls the thing that answered.
-#:
-#: The bundle records the internal identity because that is what diagnosis
-#: needs. A published page is a different audience: the internal string names
-#: this deployment's own transports, and putting those on a public site helps
-#: no reader. The repo's own push-time gate refuses a push that does, which is
-#: how this function came to exist.
-#:
-#: What a reader actually needs from that cell is whether the run was real and
-#: what produced it. "local agent CLI" says that without the map. The internal
-#: string stays in the bundle, one file away, for anyone debugging.
+# What the published digest calls the thing that answered. The bundle keeps the
+# internal identity for diagnosis; a public page has no use for it.
 PUBLIC_MODEL_LABEL = "local agent CLI"
 
 

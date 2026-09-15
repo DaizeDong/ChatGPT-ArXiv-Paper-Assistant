@@ -1,12 +1,4 @@
-"""Translate hotspot web data JSON files to Chinese using LLM.
-
-Reads each daily_hotspot.json, collects all English text fields,
-batch-translates them via the configured OpenAI-compatible API,
-and writes *_zh fields alongside the originals.
-
-Usage:
-    python -X utf8 scripts/translate_hotspot_web_data.py [--date 2026-04-03]
-"""
+"""Translate hotspot web data JSON files to Chinese using LLM."""
 
 from __future__ import annotations
 

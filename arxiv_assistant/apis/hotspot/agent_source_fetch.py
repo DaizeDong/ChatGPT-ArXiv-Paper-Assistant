@@ -1,21 +1,10 @@
-"""Per-source agent fetcher -- agent-only gathering proof-of-concept.
-
-Instead of a brittle Python scraper per source, point a ``claude -p`` agent at the
-SAME curated source URL (a lab blog index, an RSS/listing page, a subreddit, the
-HF papers page, a GitHub releases page, ...) and have it WebFetch the page and
-extract the recent AI/ML item permalinks. Same coverage as the deterministic
-scraper, no source-specific parsing code, resilient to site redesigns.
-
-Anti-hallucination reuses the scout's DETERMINISTIC URL verifier (INV6): every
-emitted item must have a syntactically valid, non-blocklisted, live http(s) URL,
-and must be an item PERMALINK (not the index page itself). Degrades to ``[]`` on
-any agent/parse/mapping failure -- it never raises out of ``fetch_source_via_agent``.
-"""
+"""Per-source agent fetcher -- agent-only gathering proof-of-concept."""
 from __future__ import annotations
 
 from datetime import datetime
 from typing import Any, Callable, Optional
 
+from arxiv_assistant.utils.models import DEFAULT_AGENT_MODEL
 from arxiv_assistant.apis.hotspot.hotspot_agent_scout import (
     _SCHEMA,
     _default_url_alive,
@@ -100,27 +89,12 @@ def fetch_source_via_agent(
     freshness_hours: int,
     *,
     result_limit: int = 20,
-    model: str = "claude-sonnet-5",
+    model: str = DEFAULT_AGENT_MODEL,
     timeout_s: int = 240,
     agent_fn: Callable[..., dict[str, Any]] = run_agent,
     url_check_fn: Optional[Callable[[str], bool]] = None,
 ) -> list[HotspotItem]:
-    """Fetch one source page via an agent and return verifier-passed item permalinks.
-
-    Args:
-        name:            Short source name (e.g. ``"openai_blog"``); ids/provenance derive from it.
-        url:             The source INDEX/listing page the agent fetches.
-        kind:            Item kind for ``source_type`` (e.g. ``"blog"``/``"papers"``/``"news"``).
-        target_date:     "As of" date the freshness window anchors to.
-        freshness_hours: Look-back window (hours).
-        result_limit:    Max items to request AND max survivors to emit.
-        agent_fn:        Injectable transport (defaults to ``run_agent``); tests pass a mock.
-        url_check_fn:    Injectable liveness check (defaults to ``_default_url_alive``).
-
-    Returns:
-        Up to ``result_limit`` HotspotItems, each a verifier-passed item PERMALINK
-        (never the index ``url``), deduped by canonical_url. ``[]`` on any failure.
-    """
+    """Fetch one source page via an agent and return verifier-passed item permalinks."""
     if url_check_fn is None:
         url_check_fn = _default_url_alive
 

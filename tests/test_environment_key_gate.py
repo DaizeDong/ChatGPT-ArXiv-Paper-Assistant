@@ -1,16 +1,4 @@
-"""Importing the paper pipeline must not require an OpenAI key any more.
-
-This gate used to be an unconditional ``raise ValueError`` at
-``arxiv_assistant/environment.py`` import time. Retiring the key without moving
-it would have turned the entire daily paper pipeline into an ImportError: main.py
-imports environment on its first line, long before it decides which backend to
-use.
-
-So the check is inverted, and these tests pin both halves of the inversion. The
-predicate lives in llm_gateway precisely so it can be tested at all -- importing
-environment reads config by a relative path, performs a live arXiv RSS fetch and
-creates dated output directories, none of which belongs in a unit test.
-"""
+"""Importing the paper pipeline must not require an OpenAI key any more."""
 import configparser
 import unittest
 

@@ -1,24 +1,4 @@
-"""Shared Claude Code headless subagent transport (spec §2.11 / §4 INV6).
-
-Single pin-point for:
-- Model id and temperature-0 invocation (callers pass the model string).
-- ``claude -p`` envelope parsing: the real ``--output-format json`` result has
-  shape ``{"type":"result","subtype":"success","result":"<text>"}`` where
-  ``result`` holds the model's final message (a JSON string for structured
-  agents).
-- Minimal schema validation: required top-level keys are checked; callers run
-  their own deterministic verifier on top (INV6).
-- ``AgentError`` on every failure mode; callers degrade deterministically and
-  NEVER let ``AgentError`` propagate to end-users uncaught.
-
-Used by:
-- Stage 3 (DateVerify Tier-1/2 wired in task 5).
-- Stage 6 (Synthesize).
-- Stage 8 (AgentFilter).
-
-Tests ``@patch("arxiv_assistant.utils.agent_runner.subprocess.run")`` to replay
-fixtures — zero real subprocess in the test suite.
-"""
+"""Shared Claude Code headless subagent transport (spec §2.11 / §4 INV6)."""
 from __future__ import annotations
 
 import json
@@ -33,16 +13,7 @@ from typing import Optional
 
 
 class AgentError(Exception):
-    """Raised by run_agent on any failure mode.
-
-    Callers MUST catch this and degrade deterministically (spec §E / §4 INV6).
-    Subcases:
-    - Non-zero subprocess exit code.
-    - subprocess.TimeoutExpired.
-    - Unparseable JSON envelope or empty stdout.
-    - Malformed inner payload (not a dict / missing required schema keys).
-    - Schema-validation failure (returned dict does not satisfy ``schema``).
-    """
+    """Raised by run_agent on any failure mode."""
 
 
 # ---------------------------------------------------------------------------
@@ -51,23 +22,7 @@ class AgentError(Exception):
 
 
 def _validate_schema(data: dict, schema: dict) -> None:
-    """Minimal structural validator — checks required keys and their types.
-
-    ``schema`` format (subset of JSON Schema, sufficient for our structured
-    agent outputs):
-
-    .. code-block:: python
-
-        {
-          "required": ["key1", "key2"],          # optional list
-          "properties": {                         # optional dict
-            "key1": {"type": "string"},           # "string" | "number" | "boolean" | "array" | "object"
-            "key2": {"type": "number"},
-          }
-        }
-
-    Raises ``AgentError`` on the first violation found.
-    """
+    """Minimal structural validator — checks required keys and their types."""
     # 1. Required-key check.
     required = schema.get("required", [])
     for key in required:
@@ -123,13 +78,7 @@ _FENCE_RE = re.compile(r"```[^\n`]*\n(.*?)```", re.DOTALL)
 
 
 def _iter_balanced_objects(text: str):
-    """Yield each top-level brace-balanced ``{...}`` substring, in order.
-
-    String-aware: braces inside double-quoted JSON strings (honouring ``\\``
-    escapes) are ignored, so prose or string *values* containing ``{``/``}`` do
-    not corrupt the depth count.  Each yielded span is the OUTERMOST object at a
-    top-level position (nested objects are contained within their parent's span).
-    """
+    """Yield each top-level brace-balanced ``{...}`` substring, in order."""
     depth = 0
     start = -1
     in_str = False
@@ -158,34 +107,7 @@ def _iter_balanced_objects(text: str):
 
 
 def _extract_json_object(text: str) -> Optional[str]:
-    """Best-effort extraction of a JSON-object candidate from result *text*.
-
-    Agentic tasks frequently narrate before/after the structured payload and may
-    wrap it in one or more markdown code fences (sometimes a non-JSON example
-    fence first), e.g.::
-
-        Here are the results:
-
-        ```json
-        {"items": [...]}
-        ```
-
-    Strategy — returns the FIRST candidate that actually ``json.loads`` (so the
-    caller's re-parse is guaranteed to succeed):
-
-    1. Try EVERY fenced ``` ```...``` ``` block in order; return the first whose
-       inner content parses (handles a ```python example fence before the
-       ```json answer, a bare ``` fence, multiple fences, etc.).
-    2. Else scan for each top-level brace-balanced ``{...}`` object (string-aware)
-       and return the first that parses.  Robust to prose with its own ``{}``
-       braces before/after the real object and to a trailing prose paragraph
-       (no greedy first-``{``-to-last-``}``).
-    3. Else return ``None`` (no complete JSON object present).
-
-    Only COMPLETE objects are returned — truncated JSON is never "repaired"
-    (that would risk silent corruption); it falls through to ``None`` and the
-    caller degrades deterministically.
-    """
+    """Best-effort extraction of a JSON-object candidate from result *text*."""
     for fence in _FENCE_RE.finditer(text):
         candidate = fence.group(1).strip()
         try:
@@ -210,15 +132,6 @@ def _extract_json_object(text: str) -> Optional[str]:
 def _parse_envelope(raw_stdout: str) -> dict:
     """Parse the ``claude -p --output-format json`` envelope and return the
     inner structured dict.
-
-    The real envelope shape is::
-
-        {"type": "result", "subtype": "success", "result": "<text>", ...}
-
-    where ``result`` is the model's final message text.  For structured agents
-    the text is itself a JSON object string.
-
-    Raises ``AgentError`` for any parse failure.
     """
     raw = (raw_stdout or "").strip()
     if not raw:
@@ -297,35 +210,7 @@ def run_agent(
     tools: Optional[list[str]] = None,
     timeout_s: int = 120,
 ) -> dict:
-    """Dispatch a stateless Claude Code headless subagent and return its output.
-
-    Invokes ``claude -p <prompt> --output-format json --model <model>``
-    (plus optional ``--allowedTools`` when *tools* is given) via subprocess.
-    Parses the JSON envelope, validates the inner dict against *schema*, and
-    returns the dict.
-
-    Temperature is always 0 (Claude Code CLI default for ``-p`` / headless
-    mode; no flag needed).
-
-    Args:
-        prompt:    The full prompt string passed to ``claude -p``.
-        schema:    Minimal JSON-Schema-like dict used by ``_validate_schema``
-                   to check the returned dict (required keys + property types).
-        model:     Model identifier string (e.g. ``"claude-opus-5"``).
-                   Pinned per-consumer so a single config field controls it.
-        tools:     Optional list of tool names passed via ``--allowedTools``.
-                   When *None* or empty, the flag is omitted.
-        timeout_s: Subprocess timeout in seconds (default 120).
-
-    Returns:
-        The inner structured dict extracted from the ``claude -p`` JSON
-        envelope, validated against *schema*.
-
-    Raises:
-        AgentError: On non-zero exit code, subprocess.TimeoutExpired,
-                    unparseable envelope, malformed inner payload, or
-                    schema-validation failure.
-    """
+    """Dispatch a stateless Claude Code headless subagent and return its output."""
     cmd: list[str] = ["claude", "-p", prompt, "--output-format", "json", "--model", model]
     if tools:
         cmd += ["--allowedTools"] + list(tools)

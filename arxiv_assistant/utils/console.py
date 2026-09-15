@@ -1,16 +1,4 @@
-"""Make stdout survive the content this repo actually prints.
-
-On a zh-CN Windows console Python defaults stdout to GBK (cp936). The archive is
-full of Chinese headlines and the occasional euro sign, so printing a retrieval
-hit or a digest line raises ``UnicodeEncodeError`` and takes the whole command
-down at the LAST step, after all the work is done. The same bug bit llmcall
-(a model answer beginning with an emoji killed the call) and was fixed the same
-way there.
-
-Callers used to work around it by exporting ``PYTHONIOENCODING=utf-8``, which
-only helps the person who remembers. Scripts call :func:`force_utf8_stdio` in
-``main()`` instead, so the fix travels with the code.
-"""
+"""Make stdout survive the content this repo actually prints."""
 from __future__ import annotations
 
 import sys

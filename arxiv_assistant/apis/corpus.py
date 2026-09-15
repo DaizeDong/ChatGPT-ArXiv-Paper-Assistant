@@ -1,14 +1,8 @@
-"""Read papers for a date window out of a locally harvested arXiv corpus.
+"""Read papers for a date window from a locally harvested arXiv corpus.
 
-The corpus is produced by scripts/harvest_arxiv_corpus.py. Its whole reason for
-existing is that arXiv's OAI-PMH selects on `datestamp` (last modified) while a
-daily digest wants `created` (submitted): a paper revised after the target date
-is invisible to any date-ranged harvest of that date, and that loss grows with
-how old the date is. Harvesting the full datestamp range once and indexing by
-`created` removes the hole rather than narrowing it.
-
-Nothing here touches the network, so a backfill reading the corpus cannot be
-rate limited and cannot half-finish a date because a fetch failed.
+Built by scripts/harvest_arxiv_corpus.py and indexed by submission date, because
+OAI-PMH selects on last-modified: a paper revised after the target date vanishes
+from any date-ranged query of that date. Touches no network.
 """
 
 import json

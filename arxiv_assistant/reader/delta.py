@@ -1,24 +1,7 @@
-"""Delta scoring: does this item CHANGE one of the researcher's question documents?
+"""Score candidates against the reader's questions: how much would this change my mind.
 
-This is the reader model's judgment point, and it follows the repo's INV6 shape:
-an LLM proposes, a deterministic verifier disposes. Nothing an agent returns is
-trusted unverified.
-
-THREE OUTCOMES, DELIBERATELY DISTINCT (see :class:`DeltaStatus`):
-
-* ``scored``      the model returned a row and the verifier accepted it.
-* ``rejected``    the model returned a row and the verifier threw it out.
-* ``unavailable`` scoring never ran (no transport, no questions, agent error).
-
-Collapsing ``unavailable`` into "score 0" is the specific bug this module refuses
-to have. A weekly digest that prints "nothing changed my mind" because the model
-was unreachable looks exactly like a quiet week, and the paper pipeline in this
-repo silently produced empty output for three months for precisely that reason.
-Callers MUST branch on status before rendering an empty digest.
-
-The daily pipelines only ANNOTATE with these verdicts; they never drop an item.
-Filtering to the ``delta_score_cutoff`` happens in the weekly digest alone, so a
-story that fails the gate today is not burned out of tomorrow's candidate pool.
+Never raises on transport failure -- a day the scorer could not be reached is
+recorded as UNAVAILABLE, which is not the same answer as REJECTED.
 """
 from __future__ import annotations
 
@@ -142,16 +125,7 @@ def verify_verdict_row(
     valid_question_ids: Sequence[str],
     candidates: Sequence[DeltaCandidate],
 ) -> DeltaVerdict | None:
-    """Return a clean verdict, or None when the row must be thrown out.
-
-    Rejection rules, all deterministic:
-      - row is not a dict, or `index` is not an in-range int
-      - `question_id` is not one of the loaded documents
-      - `field` is not one of the five canonical field keys
-      - `delta_score` is not an int in 0..10 (bools are not ints here)
-      - `one_line_reason` is empty, or is longer than MAX_REASON_WORDS
-      - a high score with a reason that names nothing specific
-    """
+    """Return a clean verdict, or None when the row must be thrown out."""
     if not isinstance(row, dict):
         return None
 
@@ -260,15 +234,7 @@ def _truncate(text: str, limit: int) -> str:
 
 
 def _verdict_rows(result: Any) -> List[Any] | None:
-    """Pull the ``verdicts`` array out of a gateway result, or None.
-
-    The two backends hand back the payload differently: the agent transport
-    returns the parsed dict as ``.data``, while llmcall may put a JSON string in
-    ``.text`` when its own schema pass did not populate ``.data``. Both shapes
-    have to reach the same verifier, and anything else has to come back as None
-    so the caller can say "scoring produced nothing usable" rather than
-    "nothing scored".
-    """
+    """Pull the ``verdicts`` array out of a gateway result, or None."""
     data = result.data if isinstance(result.data, Mapping) else None
     if data is None:
         text = str(getattr(result, "text", "") or "").strip()
@@ -298,26 +264,7 @@ def score_candidates(
     llmcall_fn: Callable[..., Any] | None = None,
     call_fn: Callable[..., Any] | None = None,
 ) -> Dict[str, DeltaVerdict]:
-    """Score every candidate. Returns candidate_id -> verdict, one per candidate.
-
-    Never raises for a transport failure: the affected candidates come back with
-    status ``unavailable`` so the caller can say so out loud.
-
-    THE TRANSPORT SEAM. Calls go through :func:`arxiv_assistant.utils.llm_gateway.call`,
-    which resolves the backend (llmcall chain, or this repo's ``claude -p``
-    runner) and records every attempt in the module-level ledger. Three injection
-    points survive for tests, and they are NOT interchangeable:
-
-    ``agent_fn``   a stand-in for the repo's agent runner. Passing it PINS the
-                   backend to ``agent``, because a test that hands over a fake
-                   transport must not have its fake bypassed by whatever the host
-                   machine happens to have installed. A suite that silently
-                   resolved to llmcall would hit the network.
-    ``llmcall_fn`` the same, for the llmcall side.
-    ``call_fn``    replaces the gateway entrypoint wholesale.
-
-    Production passes none of them and lets ``[LLM] backend`` decide.
-    """
+    """Score every candidate. Returns candidate_id -> verdict, one per candidate."""
     if not candidates:
         return {}
 

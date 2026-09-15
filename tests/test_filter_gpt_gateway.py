@@ -1,19 +1,4 @@
-"""The batch paper filter dispatches through the gateway, not through OpenAI.
-
-Two things are pinned here, and the second one exists because I broke it:
-
-1. The completion SHIM. Both filter functions read exactly four attributes off
-   whatever call_chatgpt returns. If the shim stops matching that shape the
-   filters break in a way that looks like a model problem.
-
-2. THE RETRY DECORATOR IS STILL ON call_chatgpt. While inserting the shim
-   dataclasses above the function I put them between ``@retry.retry(...)`` and
-   ``def call_chatgpt``, so the decorator silently landed on a dataclass instead.
-   The module still imported, every test still passed, and the only visible
-   symptom would have been batches no longer retrying on a transient failure.
-   Syntactically valid, semantically wrong, invisible: exactly the shape of
-   failure this repo keeps getting bitten by.
-"""
+"""The batch paper filter dispatches through the gateway, not through OpenAI."""
 import os
 import unittest
 from unittest.mock import patch

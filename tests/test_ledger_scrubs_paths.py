@@ -31,14 +31,7 @@ POSIX_BANNER = "cc: unavailable after 115.4s (workdir: " + POSIX_PATH + ")"
 
 
 class LedgerScrubsPathsTest(unittest.TestCase):
-    """Nothing the ledger keeps may carry a local account name.
-
-    WHY THIS EXISTS. The bundles this ledger is stamped into are published. The
-    trace stored provider messages verbatim, and a failing CLI's message is its
-    startup banner including the working directory. The repo's own pii_guard
-    blocked the commit that would have published that across 112 rebuilt days --
-    the guard did its job, and this is the fix behind it.
-    """
+    """Nothing the ledger keeps may carry a local account name."""
 
     def test_a_windows_home_path_does_not_survive(self):
         out = _scrub(CODEX_BANNER)

@@ -1,15 +1,4 @@
-"""Hotspot enrichment now goes through utils.llm_gateway, not raw HTTP.
-
-NOTHING HERE TOUCHES THE NETWORK. Every test injects a fake gateway callable
-(``gateway_call=``) or patches ``enrich.llm_gateway.call``.
-
-The invariant under test is the one that cost this repo three months of empty
-archives: "the model produced this" and "the model never answered" must be
-different observable outputs. The enriched rows themselves are deliberately
-IDENTICAL in both cases (heuristic fallback is the honest degrade), so the
-difference has to live somewhere a later reader can find it -- which is what
-EnrichmentStatus is for.
-"""
+"""Hotspot enrichment now goes through utils.llm_gateway, not raw HTTP."""
 from __future__ import annotations
 
 import configparser
@@ -273,15 +262,7 @@ class TestKernelEnrichMode(unittest.TestCase):
 
 
 class TestEnrichmentStatusReachesTheReport(unittest.TestCase):
-    """The record has to SURVIVE the checkpoint chain, not merely be created.
-
-    _enrich already returned an honest status and the score checkpoint already
-    stored it -- but synthesize dropped it and render never wrote it, so the
-    published report, the only artifact a later reader actually opens, said
-    nothing about whether a model ran. A record living in a checkpoint nobody
-    reads is indistinguishable from no record at all, which is the exact failure
-    mode this whole mechanism was built to end.
-    """
+    """The record has to SURVIVE the checkpoint chain, not merely be created."""
 
     def _config(self) -> configparser.ConfigParser:
         cfg = configparser.ConfigParser()

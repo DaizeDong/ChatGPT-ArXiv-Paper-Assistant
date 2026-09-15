@@ -1,16 +1,4 @@
-"""The weekly digest must never dress an outage up as a quiet week.
-
-There is exactly ONE state in which the page may print the tidy line
-"本周没有改变看法的内容": scoring really ran, over a real window, against a
-reader model that really has content, and nothing cleared the cutoff on the
-merits. Every other empty page has a cause, and the cause has to be on the page.
-
-This file is the guard for that. It is deliberately a table test: each row is a
-state, and the expectation is a boolean about the tidy line. Without it, nothing
-in CI stops someone from simplifying the loud branch away, and the resulting
-report would look correct every single week while the pipeline was dead -- which
-is precisely what happened to the paper pipeline here for three months.
-"""
+"""The weekly digest must never dress an outage up as a quiet week."""
 import json
 import unittest
 from pathlib import Path
@@ -396,14 +384,7 @@ class DailyRenderersUntouched(unittest.TestCase):
 
 
 class ReaderConfigIsDeclaredEverywhere(unittest.TestCase):
-    """All three ini files must carry [READER] and the weekly Slack key.
-
-    Asserted through ConfigParser, not by substring: a key that appears only
-    inside a comment would satisfy an `assertIn` on the raw text while being
-    invisible to every reader at runtime. configs/profiles/agent-native.ini
-    matters most -- README.md documents copying it OVER config.ini, so a section
-    present only in config.ini does not exist on the zero-key deployment.
-    """
+    """All three ini files must carry [READER] and the weekly Slack key."""
 
     INI_FILES = (
         "configs/config.ini",
@@ -443,15 +424,7 @@ class ReaderConfigIsDeclaredEverywhere(unittest.TestCase):
                 self.assertIn("push_weekly_to_slack", parser["OUTPUT"])
 
     def test_thresholds_agree_across_all_three_configs(self):
-        """The invariant is AGREEMENT, not any particular number.
-
-        These cutoffs get retuned as the topic set changes, so pinning literals
-        here would mean editing this test on every calibration and would pin
-        nothing worth pinning. What actually breaks production is DRIFT: the
-        zero-key profile is copied over config.ini on the deploy host, so a value
-        changed in one file and not the others means the machine that publishes
-        is filtering on numbers nobody chose.
-        """
+        """The invariant is AGREEMENT, not any particular number."""
         import configparser
 
         keys = [
@@ -493,13 +466,7 @@ class ReaderConfigIsDeclaredEverywhere(unittest.TestCase):
 
 
 class WeeklyOutputStaysOutOfTheSiteBuilder(unittest.TestCase):
-    """out/weekly/ must not collide with the day-page discovery in the site build.
-
-    build_multipage_site's DAY_FILE_PATTERN matches `<date>-<anything>.md` under
-    out/md/, so a weekly page written there would either hijack a day with no
-    daily markdown or be silently dropped on a day that has one. The frontend is
-    out of scope for this change, so the weekly writer must stay out of out/md/.
-    """
+    """out/weekly/ must not collide with the day-page discovery in the site build."""
 
     def test_script_never_writes_under_out_md(self):
         source = (REPO_ROOT / "scripts" / "generate_weekly_digest.py").read_text(

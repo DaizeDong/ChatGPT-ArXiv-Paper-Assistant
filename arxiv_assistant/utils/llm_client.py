@@ -1,23 +1,13 @@
-"""Shared LLM + agent backend resolution for BOTH pipelines (paper digest + hotspots).
-
-Single source of truth for:
-  - the OpenAI client / api-key / base-url (``get_openai_client`` / ``resolve_openai_config``)
-  - the OpenAI model id (``resolve_llm_model`` -> ``[LLM] model``)
-  - the Claude Code (``claude -p``) agent model id (``resolve_agent_model`` -> ``[AGENT] model``)
-
-Back-compatibility is intentional: the legacy per-section keys (``[SELECTION] model``,
-``[HOTSPOTS] model_enrich/model_screen``, ``[PAPER_FILTER] agent_model``) still WIN when present
-(callers pass them as ``override=``), so an existing config produces byte-identical behaviour.
-The new ``[LLM]`` / ``[AGENT]`` sections only supply the shared *fallback*.
-"""
+"""Shared LLM + agent backend resolution for BOTH pipelines (paper digest + hotspots)."""
 from __future__ import annotations
+from arxiv_assistant.utils.models import DEFAULT_AGENT_MODEL
 
 import os
 from typing import Any
 
 _DEFAULT_BASE_URL = "https://api.openai.com/v1"
 _DEFAULT_LLM_MODEL = "gpt-5.4"
-_DEFAULT_AGENT_MODEL = "claude-sonnet-5"
+_DEFAULT_AGENT_MODEL = DEFAULT_AGENT_MODEL
 
 
 def resolve_openai_config(*, api_key: str | None = None, base_url: str | None = None) -> tuple[str, str]:

@@ -1,27 +1,10 @@
-"""Claude Code subagent transport for the paper Agent-filter modality (spec §H).
-
-Provides ``judge_paper_with_agent``, a plug-in adapter that satisfies the
-``agent_fn`` contract expected by ``AgentFilter``:
-
-    agent_fn(paper, criteria, *, reuse_signals, temperature, model) -> str
-
-The function builds a concise verdict prompt, dispatches a headless
-``claude -p`` subagent via ``agent_runner.run_agent``, and returns the raw
-JSON string so that ``AgentFilter._verify_agent_response`` (INV6) validates
-it deterministically before accepting it.
-
-On any transport failure (``AgentError``) the function degrades gracefully:
-it returns a conservative ``keep=False`` JSON string and never propagates the
-error to the pipeline.
-
-No import side-effects: this module is imported lazily by main.py on the
-non-default (cascade / agent_only) code paths only.
-"""
+"""Claude Code subagent transport for the paper Agent-filter modality (spec §H)."""
 
 from __future__ import annotations
 
 import json
 
+from arxiv_assistant.utils.models import DEFAULT_AGENT_MODEL
 from arxiv_assistant.utils.agent_runner import AgentError, run_agent
 
 # ---------------------------------------------------------------------------
@@ -42,18 +25,11 @@ _VERDICT_SCHEMA = {
 # Placeholder model id used by AgentFilter (recorded in provenance); the adapter
 # maps it to a real model id before passing to run_agent.
 _PLACEHOLDER_MODEL = "claude-code-subagent"
-_DEFAULT_REAL_MODEL = "claude-sonnet-5"
+_DEFAULT_REAL_MODEL = DEFAULT_AGENT_MODEL
 
 
 def _resolve_model(model: str) -> str:
-    """Map the AgentFilter placeholder to a real model id.
-
-    If *model* is the placeholder sentinel ``"claude-code-subagent"``, resolve
-    it to the configured ``agent_model`` (read from the pipeline CONFIG if
-    importable), falling back to ``"claude-sonnet-5"`` when the config is
-    absent or the key is not present.  Any other value (a real model id) is
-    returned unchanged.
-    """
+    """Map the AgentFilter placeholder to a real model id."""
     if model != _PLACEHOLDER_MODEL:
         return model
 
@@ -104,27 +80,7 @@ def judge_paper_with_agent(
     temperature: float = 0.0,  # noqa: ARG001 — recorded in provenance; run_agent runs temp-0 by design
     model: str = _PLACEHOLDER_MODEL,
 ) -> str:
-    """Adapter satisfying AgentFilter's agent_fn contract.
-
-    Calls ``run_agent`` with a structured verdict prompt and returns the result
-    as a JSON string for ``_verify_agent_response`` (INV6) to validate.
-
-    On ``AgentError``: returns a conservative ``keep=False`` fallback JSON
-    string so the pipeline degrades safely without crashing.
-
-    Args:
-        paper:          The ``Paper`` dataclass instance to judge.
-        criteria:       Topic/relevance criteria string from the pipeline config.
-        reuse_signals:  Optional list of pre-verified corroborating URLs; these
-                        are added to the prompt and will pass the evidence verifier.
-        temperature:    Ignored — ``claude -p`` subagents run deterministically.
-                        Accepted for call-site compatibility with AgentFilter.
-        model:          Model id string.  The placeholder ``"claude-code-subagent"``
-                        is resolved to the configured real model before dispatch.
-
-    Returns:
-        A JSON string whose shape satisfies ``_verify_agent_response``.
-    """
+    """Adapter satisfying AgentFilter's agent_fn contract."""
     real_model = _resolve_model(model)
     prompt = _build_prompt(paper, criteria, reuse_signals or [])
 

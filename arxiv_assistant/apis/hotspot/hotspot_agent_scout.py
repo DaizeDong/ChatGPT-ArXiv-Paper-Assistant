@@ -1,19 +1,4 @@
-"""Agent Scout source (spec section A / plan Task 1).
-
-A kernel harvest source (peer of ``hotspot_twitterapi`` and the RSS feeds) that
-runs a single ``claude -p`` web-research call to discover recent notable AI/ML
-developments the deterministic feeds miss -- especially X/social buzz (replacing
-the metered ``twitterapi.io`` key) and breaking releases/news.
-
-Anti-hallucination is enforced by a DETERMINISTIC verifier (spec INV6): every
-scout item is dropped unless its ``url`` is (a) a syntactically valid http(s)
-URL on a non-blocklisted host AND (b) survives a lightweight liveness check
-(``url_check_fn``). A fabricated/dead link therefore cannot enter the report.
-
-The source degrades to ``[]`` on agent failure/timeout/empty/malformed output and
-on any per-item mapping failure -- it NEVER raises out of ``fetch_hotspot_items``,
-so the free deterministic feeds remain the coverage floor.
-"""
+"""Agent Scout source (spec section A / plan Task 1)."""
 from __future__ import annotations
 
 from datetime import datetime
@@ -22,6 +7,7 @@ from urllib.parse import urlsplit
 
 import requests
 
+from arxiv_assistant.utils.models import DEFAULT_AGENT_MODEL
 from arxiv_assistant.utils import market_intel_bridge
 from arxiv_assistant.utils.agent_runner import AgentError, run_agent
 from arxiv_assistant.utils.hotspot.hotspot_schema import HotspotItem, clean_text
@@ -103,19 +89,7 @@ def _build_prompt(
     *,
     source_guidance: str | None = None,
 ) -> str:
-    """Build the web-research prompt for the scout agent.
-
-    Scopes the search to the last ``freshness_hours`` window as of ``target_date``
-    and to AI/ML topicality, and demands the CANONICAL source URL (not a
-    search-results link) so the deterministic verifier has a real target.
-
-    Borrows the ``market-intel`` skill's research discipline: search the right
-    primary venues across SEVERAL angled queries (not one), prefer primary/
-    official (L1) and independent (L2) sources over L4 aggregators/UGC/rumor,
-    and cross-check significance instead of amplifying virality. When
-    ``source_guidance`` is provided (the market-intel curated source matrix,
-    reused at runtime), it REPLACES the built-in venue list.
-    """
+    """Build the web-research prompt for the scout agent."""
     as_of = target_date.strftime("%Y-%m-%d")
     header = (
         "You are an AI/ML news scout. Using web search and fetch, find the most notable "
@@ -255,32 +229,14 @@ def fetch_hotspot_items(
     freshness_hours: int,
     *,
     result_limit: int = 40,
-    model: str = "claude-sonnet-5",
+    model: str = DEFAULT_AGENT_MODEL,
     timeout_s: int = 300,
     use_market_intel: bool = True,
     market_intel_dir: Optional[str] = None,
     agent_fn: Callable[..., dict[str, Any]] = run_agent,
     url_check_fn: Optional[Callable[[str], bool]] = None,
 ) -> list[HotspotItem]:
-    """Run the scout agent and return verifier-passed HotspotItems.
-
-    Args:
-        target_date:     "As of" date the freshness window is anchored to.
-        freshness_hours: Look-back window (hours) the agent is asked to cover.
-        result_limit:    Max items to request AND max survivors to emit.
-        model:           Model id passed to ``agent_fn``.
-        timeout_s:       Agent subprocess timeout (seconds).
-        agent_fn:        Injectable transport (defaults to ``run_agent``); tests
-                         pass a mock so the suite never spawns ``claude``.
-        url_check_fn:    Injectable liveness check (defaults to
-                         ``_default_url_alive``); tests pass a fake so the suite
-                         never hits the network.
-
-    Returns:
-        Up to ``result_limit`` HotspotItems, each with a verifier-passed,
-        resolvable, non-blocklisted http(s) URL, deduped by canonical_url.
-        ``[]`` on any agent/parse/mapping failure (degrade, never raise).
-    """
+    """Run the scout agent and return verifier-passed HotspotItems."""
     if url_check_fn is None:
         url_check_fn = _default_url_alive
 

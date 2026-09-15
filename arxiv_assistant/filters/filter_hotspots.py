@@ -766,18 +766,7 @@ def _normalize_screening_row(cluster: HotspotCluster, row: dict[str, Any], score
 
 
 def _chat_completion(model: str, messages: list[dict[str, str]], temperature: float = 0.1, config: Any = None) -> dict[str, Any]:
-    """Screen one batch through the gateway, in OpenAI response shape.
-
-    This used to POST straight at /chat/completions with OPENAI_API_KEY. It now
-    goes through arxiv_assistant.utils.llm_gateway like every other model call in
-    the repo, so it runs keyless on the llmcall chain and its successes and
-    failures land in the same ledger the outage detector reads.
-
-    The return value keeps the OpenAI envelope shape because callers index
-    ``["choices"][0]["message"]["content"]`` and ``["usage"]``. Usage comes back
-    zeroed: the chain backends do not report tokens and are not billed per token
-    here, and calc_price already treats zero usage as "nothing to price".
-    """
+    """Screen one batch through the gateway, in OpenAI response shape."""
     from arxiv_assistant.utils import llm_gateway
 
     load_local_env()

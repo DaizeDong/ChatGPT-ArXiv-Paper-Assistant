@@ -1,22 +1,4 @@
-"""Tests for ``arxiv_assistant.reader.delta``.
-
-The invariant under test, and the reason this file is long: "nothing crossed the
-threshold" and "scoring never ran" must be DIFFERENT outputs. This repo's paper
-pipeline emitted an empty ``{}`` archive every day for three months because every
-model call raised, was swallowed, and left behind something that looked exactly
-like a quiet day. So every failure path below asserts ``DeltaStatus.UNAVAILABLE``
-with a note that says WHY, and explicitly asserts it is not a score of zero.
-
-No network, no subprocess: ``score_candidates`` takes ``agent_fn``, and the fakes
-here are the only transport.
-
-Archive fixtures live in ``tests/fixtures/reader/`` and are trimmed excerpts of
-real files from the data branch (``out/json/2026-06/2026-06-04-output.json`` and
-``out/hot/reports/2026-09-08.json``). They are copied in rather than read from a
-sibling worktree so the suite runs on a bare clone; ``ArchiveWorktreeTest`` below
-re-runs the same assertions against the full files when that worktree happens to
-be present.
-"""
+"""Tests for ``arxiv_assistant.reader.delta``."""
 from __future__ import annotations
 
 import json
@@ -405,13 +387,7 @@ class _FakeLlmcallResult:
 
 
 class GatewayRoutingTest(unittest.TestCase):
-    """score_candidates now calls through utils.llm_gateway.
-
-    These tests exist because the routing change is invisible to every test
-    above: a gateway that ignored its backend argument and always used the agent
-    transport would pass all of them. So each one asserts something only true of
-    the gateway -- which backend ran, and what the ledger recorded.
-    """
+    """score_candidates now calls through utils.llm_gateway."""
 
     def setUp(self) -> None:
         llm_gateway.LEDGER.reset()

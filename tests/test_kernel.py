@@ -573,17 +573,7 @@ from arxiv_assistant.renderers.hotspot.render_hot_daily import render_hot_daily_
 # ---------------------------------------------------------------------------
 
 class TestKernelCrossDayParity(unittest.TestCase):
-    """Verify that kernel._stage_score suppresses ONGOING cross-day stories.
-
-    Design note: cluster_intraday is mocked to return a Story with a
-    pre-set centroid matching the store-seeded story. This bypasses the
-    mpnet model load (which would make the test slow and require network
-    access) while still exercising the REAL match_crossday → classify_cross_day
-    → ONGOING suppression path inside _stage_score. The mock is applied at the
-    dedup module level (where kernel imports from) so _stage_score's import
-    resolves to the mock. record_surface must NOT be called for the ONGOING
-    story (it is filtered before featured_stories is built).
-    """
+    """Verify that kernel._stage_score suppresses ONGOING cross-day stories."""
 
     def _config(self) -> configparser.ConfigParser:
         cfg = configparser.ConfigParser()

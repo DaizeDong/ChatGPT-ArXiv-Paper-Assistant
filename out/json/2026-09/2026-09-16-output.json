@@ -1,0 +1,723 @@
+{
+    "2609.17483": {
+        "ARXIVID": "2609.17483",
+        "COMMENT": "Lower bounds and new convergence guarantees characterize when heterogeneous asynchronous training can match homogeneous worker-time scaling.",
+        "RELEVANCE": 9,
+        "NOVELTY": 8,
+        "PRIMARY_TOPIC_ID": "training_systems",
+        "MATCHED_TOPIC_IDS": [
+            "training_systems"
+        ],
+        "TOPIC_MATCH_COMMENT": "Directly studies distributed stochastic optimization, identifying assumptions that determine training-time complexity across heterogeneous workers.",
+        "HOTSPOT_PAPER_TAGS": [
+            "daily_hot"
+        ],
+        "HOTSPOT_PAPER_COMMENT": "Broadly important today: Lower bounds and new convergence guarantees characterize when heterogeneous asynchronous training can match homogeneous worker-time scaling.",
+        "SCORE": 17,
+        "authors": [
+            "Alexander Tyurin"
+        ],
+        "title": "Bridging the Gap Between Homogeneous and Heterogeneous Asynchronous Optimization Is Surprisingly Difficult",
+        "abstract": "Modern large-scale machine learning tasks often require multiple workers, devices, CPUs, or GPUs to compute stochastic gradients in parallel and asynchronously to train model weights. Theoretical results typically distinguish between two settings: (i) the homogeneous setting, where all workers have access to the same data distribution, and (ii) the heterogeneous setting, where each worker operates on different data distributions. Known optimal time complexities in these settings reveal a significant gap, with far more pessimistic guarantees in the heterogeneous case. In this work, we investigate whether these pessimistic optimal time complexities can be overcome under different assumptions. Surprisingly, we show that improvement is provably impossible under widely used first- and second-order similarity assumptions for any randomized algorithm. We then turn to the interpolation regime and demonstrate that the weak interpolation assumption alone is also insufficient. Finally, we introduce a minimal combination of irreducible assumptions, strong interpolation and the local Polyak-Lojasiewicz condition, to derive a new time complexity bound that matches the dependence on worker computation times in the best-known result in the homogeneous setting, without requiring identical data distributions.",
+        "arxiv_id": "2609.17483",
+        "PRIMARY_TOPIC_LABEL": "Large-Scale Training Systems and Efficiency",
+        "MATCHED_TOPIC_LABELS": [
+            "Large-Scale Training Systems and Efficiency"
+        ],
+        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+        "HOTSPOT_PAPER_LABELS": [
+            "Daily Hot Papers"
+        ],
+        "HOTSPOT_PAPER_PRIMARY_KIND": "daily_hot",
+        "HOTSPOT_PAPER_PRIMARY_LABEL": "Daily Hot Papers",
+        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "heuristic"
+    },
+    "2609.16222": {
+        "ARXIVID": "2609.16222",
+        "COMMENT": "Characterizes stationary points and convergence of stop-gradient objectives through a general regression principle.",
+        "RELEVANCE": 9,
+        "NOVELTY": 8,
+        "PRIMARY_TOPIC_ID": "architecture_training",
+        "MATCHED_TOPIC_IDS": [
+            "architecture_training",
+            "efficiency_scaling"
+        ],
+        "TOPIC_MATCH_COMMENT": "The main result explains optimization dynamics under stop-gradient; revised stop-gradient placements additionally halve flow-map training memory.",
+        "HOTSPOT_PAPER_TAGS": [
+            "daily_hot"
+        ],
+        "HOTSPOT_PAPER_COMMENT": "Broadly important today: Characterizes stationary points and convergence of stop-gradient objectives through a general regression principle.",
+        "SCORE": 17,
+        "authors": [
+            "Max W. Shen",
+            "Mark Goldstein",
+            "Zichu Wang",
+            "Aahlad Puli",
+            "Rajesh Ranganath"
+        ],
+        "title": "How I learned to stop worrying and love StopGrads: Stationarity, Convergence, and a case study on Flow Map Learning",
+        "abstract": "Stopgrads are widely used in training machine learning models, but stopgrads can alter the gradient, stationary points and convergence guarantees of the original objective, which can make stopgrad training theoretically ungrounded. We introduce a stopgrad regression principle, which identifies a general template for stopgrad objectives with a closed-form characterization of stationary points and their uniqueness, unifying stopgrad objectives for flow maps, reinforcement learning, and diffusion samplers. We provide theoretical grounding for optimizing stopgrad flow map objectives by showing their unique stationary point is the true flow map, and showing positive convergence results for Eulerian and Lagrangian objectives, including MeanFlow and improved MeanFlow. Remarkably, we show that under functional semi-gradient flow, the learned flow map has a closed-form expression composing the initial flow map and the true flow map. We additionally use our stopgrad regression principle to propose modified stopgrad placements for flow map objectives which reduce training memory by 2x.",
+        "arxiv_id": "2609.16222",
+        "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+        "MATCHED_TOPIC_LABELS": [
+            "Architecture and Training Dynamics",
+            "Efficiency, Compression, and Large-Scale Training"
+        ],
+        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+        "HOTSPOT_PAPER_LABELS": [
+            "Daily Hot Papers"
+        ],
+        "HOTSPOT_PAPER_PRIMARY_KIND": "daily_hot",
+        "HOTSPOT_PAPER_PRIMARY_LABEL": "Daily Hot Papers",
+        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "heuristic"
+    },
+    "2609.16183": {
+        "ARXIVID": "2609.16183",
+        "COMMENT": "Controlled recurrence ablations identify how convolution and curriculum determine associative-recall training success.",
+        "RELEVANCE": 9,
+        "NOVELTY": 7,
+        "PRIMARY_TOPIC_ID": "architecture_training",
+        "MATCHED_TOPIC_IDS": [
+            "architecture_training"
+        ],
+        "TOPIC_MATCH_COMMENT": "Directly explains recurrent sequence-model behavior through architectural ablations and curriculum-dependent convergence.",
+        "HOTSPOT_PAPER_TAGS": [],
+        "HOTSPOT_PAPER_COMMENT": "",
+        "SCORE": 16,
+        "authors": [
+            "Julian Boesch",
+            "Andrew Wee"
+        ],
+        "title": "Anatomy of Associative Recall in Fixed-State Recurrences: A Matched-State Decomposition, an Interference Wall, and a Curriculum That Breaks It",
+        "abstract": "Fixed-state recurrences--linear attention and state-space models--are reported to lag behind attention on associative recall, but whole-architecture comparisons cannot say which ingredient is responsible. We decompose masked multi-query recall at a fixed state budget along three single-knob axes: a short causal convolution, the transition structure (rank-1 delta rule vs. diagonal), and decay. The convolution dominates (~+0.5 recall in both families under matched training): comparisons that pit convolution-free cells against a convolution-equipped Mamba measure the missing convolution, not the recurrence. The rank-1 transition beats its diagonal ablation by +0.19/+0.32 at 16/32 pairs, but the margin shrinks to +0.03 once both cells carry the convolution, and a state-matched Mamba-2 ties the unarmed rank-1 cell: no class claim survives. Cells that solve 32-pair recall degrade gracefully with load yet fall to chance retrieving 4 pairs from a distractor haystack--flat across lengths and transitions. Interference under sparse supervision, not capacity: a distance curriculum takes the unchanged architecture from 0.021 to 1.000. Training is a lock-in lottery--a seed either locks in or does not--and the curriculum is the lever. Lock-in rises from 1/10 to 7/10 (p=0.02); dense supervision adds nothing; at L=256 a shaped ramp reopens a boundary the uniform curriculum cannot (4/5 vs. 0/9); and at L=512, where the ramp collapses (0/6), gating it on measured accuracy locks in 6/6 (p=0.001). Bidirectional denoiser cells, reading the query before the haystack, show no measurable advantage over causal training (ten seeds), and collision-key retrieval needs two layers. Arming for recall is free on an S_5 state-tracking guardrail--the armed cell is significantly better at every depth (p<=0.0044). These replace \"recurrent models are bad at recall\" with a measured decomposition and two cheap interventions.",
+        "arxiv_id": "2609.16183",
+        "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+        "MATCHED_TOPIC_LABELS": [
+            "Architecture and Training Dynamics"
+        ],
+        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+        "HOTSPOT_PAPER_LABELS": [],
+        "HOTSPOT_PAPER_PRIMARY_KIND": null,
+        "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+    },
+    "2609.16665": {
+        "ARXIVID": "2609.16665",
+        "COMMENT": "Curvature analysis separates useful update directions from harmful step sizes in shared-layer Transformers.",
+        "RELEVANCE": 9,
+        "NOVELTY": 7,
+        "PRIMARY_TOPIC_ID": "architecture_training",
+        "MATCHED_TOPIC_IDS": [
+            "architecture_training"
+        ],
+        "TOPIC_MATCH_COMMENT": "Provides a mechanistic explanation of failed iterative computation in looped Transformers through update geometry and displacement scale.",
+        "HOTSPOT_PAPER_TAGS": [],
+        "HOTSPOT_PAPER_COMMENT": "",
+        "SCORE": 16,
+        "authors": [
+            "Zhihao Guo",
+            "Zonghan Wu",
+            "Haizhou Du",
+            "Huan Huo",
+            "Yilei Shao",
+            "Athanasios V. Vasilakos",
+            "Qingsong Wen"
+        ],
+        "title": "Right Direction, Wrong Step: Geometric Analysis of Finite-Step Failure in Looped Transformers",
+        "abstract": "Looped Transformers offer a parameter-efficient route to test-time scaling by reusing shared layers for iterative latent reasoning. However, additional iterations can reduce support for a reference answer, leaving unclear whether an update's direction is locally unhelpful or its full displacement moves too far. We study this distinction by analysing reference utility, which measures this support, along the model's own update direction, varying the fraction of the proposed displacement supplied to the readout. This reveals finite-step failures in which a locally improving direction produces a harmful full update. A pathwise curvature decomposition characterises how initial progress is lost, while a local quadratic model predicts full-step gains and useful step scales. Bounds based on accumulated curvature variation characterise the approximation error of these predictions. Experiments across two model families reveal this separation on mathematical and commonsense tasks. A fixed quarter step produces positive gains in reference utility for 72.2--83.2% of selected failures across four settings. These findings identify a mismatch between update direction and step scale as a mechanism of lost progress, explaining how some harmful updates retain useful computation.",
+        "arxiv_id": "2609.16665",
+        "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+        "MATCHED_TOPIC_LABELS": [
+            "Architecture and Training Dynamics"
+        ],
+        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+        "HOTSPOT_PAPER_LABELS": [],
+        "HOTSPOT_PAPER_PRIMARY_KIND": null,
+        "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+    },
+    "2609.16450": {
+        "ARXIVID": "2609.16450",
+        "COMMENT": "Learns variable token blocks and position-aware parallel unmasking to reduce diffusion-LLM decoding steps.",
+        "RELEVANCE": 9,
+        "NOVELTY": 7,
+        "PRIMARY_TOPIC_ID": "efficiency_scaling",
+        "MATCHED_TOPIC_IDS": [
+            "efficiency_scaling"
+        ],
+        "TOPIC_MATCH_COMMENT": "The core contribution is an adaptive decoding algorithm that materially improves large-model throughput while retaining pretrained model weights.",
+        "HOTSPOT_PAPER_TAGS": [],
+        "HOTSPOT_PAPER_COMMENT": "",
+        "SCORE": 16,
+        "authors": [
+            "Lixuan Wei",
+            "Wei Zhou",
+            "Jianwen Wu",
+            "Yipeng Shen",
+            "Meiling Wang",
+            "Haoran You"
+        ],
+        "title": "Early-Bird Decoding: Accelerating Diffusion LLMs with Learnable Block Sizes and Parallel Sampling",
+        "abstract": "Diffusion large language models (dLLMs) offer a promising parallel decoding paradigm as an alternative to autoregressive generation through iterative unmasking. However, dLLMs typically require many steps before token confidence reaches the decoding threshold, resulting in inefficient inference even with block-wise KV caching. To accelerate dLLM inference, we for the first time propose an \"early-bird (EB)\" decoding framework, motivated by the observation that tokens with similarly low entropy tend to cluster and can be jointly decoded earlier, before reaching the confidence threshold. In particular, our EB-Decode framework integrates two key enablers: (1) a learnable network that adaptively groups tokens with similar uncertainty into variable-length blocks, rather than relying on fixed block sizes; (2) a position-aware sampler that learns to unmask tokens in parallel using fewer decoding steps within predicted variable-length blocks. Both components are developed without modifying pretrained dLLM weights and can therefore be directly deployed as plug-ins during serving, with negligible training and inference overhead. Extensive experiments across three models and four benchmarks consistently validate our observation and the effectiveness of EB-Decode, achieving 3.53-18.76$\\times$ higher throughput than the vanilla decoding method and up to 1.58$\\times$ higher throughput over the strongest baseline, Fast-dLLM, with comparable accuracy.",
+        "arxiv_id": "2609.16450",
+        "PRIMARY_TOPIC_LABEL": "Efficiency, Compression, and Large-Scale Training",
+        "MATCHED_TOPIC_LABELS": [
+            "Efficiency, Compression, and Large-Scale Training"
+        ],
+        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+        "HOTSPOT_PAPER_LABELS": [],
+        "HOTSPOT_PAPER_PRIMARY_KIND": null,
+        "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+    },
+    "2609.16485": {
+        "ARXIVID": "2609.16485",
+        "COMMENT": "Output-preserving rank-one channel repairs enable certified training of deep equilibrium networks.",
+        "RELEVANCE": 8,
+        "NOVELTY": 8,
+        "PRIMARY_TOPIC_ID": "architecture_training",
+        "MATCHED_TOPIC_IDS": [
+            "architecture_training"
+        ],
+        "TOPIC_MATCH_COMMENT": "Introduces a training mechanism and continuation framework for implicit recurrent networks, with complexity guarantees restricted to a certified promise class.",
+        "HOTSPOT_PAPER_TAGS": [],
+        "HOTSPOT_PAPER_COMMENT": "",
+        "SCORE": 16,
+        "authors": [
+            "Alex Borisevich"
+        ],
+        "title": "Certified Inference and Training for Deep Equilibrium Networks: A Continuation Framework with Polynomial Complexity Guarantees",
+        "abstract": "We develop a certified continuation framework for equilibrium computation and for training deep equilibrium networks (DEQs), with training formulated as interpolation to accuracy $2^{-b}$. For inference, compact input homotopy selects a unique branch from a supplied start root, and a rounded Newton tracker follows it under certified boundary, conditioning, derivative, and tube-radius bounds. For training, we augment local-plus-low-rank recurrence with programmable dormant bilinear rank-one channels. Loaded Tikhonov solves diagnose a failed interpolation pass without spectral decomposition; an output-preserving repair aligned with the pass residual supplies the required direction. Training requires certified gate realization and column stability on each pass region, well-posed inference, and finite-update error budgets. With polynomial geometric, encoding, precision, and complete backend budgets, both certified inference and training have bit cost $O(\\operatorname{poly}(L+b))$, where $L$ is the encoded instance length. The trainer uses $O(b+\\ell)$ passes and reserve channels from an initial residual bounded by $2^\\ell$. These guarantees concern a certified promise class. Lean 4 verifies the quantitative core and concrete inference backend; numerical comparisons illustrate the loaded mechanism.",
+        "arxiv_id": "2609.16485",
+        "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+        "MATCHED_TOPIC_LABELS": [
+            "Architecture and Training Dynamics"
+        ],
+        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+        "HOTSPOT_PAPER_LABELS": [],
+        "HOTSPOT_PAPER_PRIMARY_KIND": null,
+        "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+    },
+    "2609.17287": {
+        "ARXIVID": "2609.17287",
+        "COMMENT": "Shows that objective-preserving flow paths can change stochastic-gradient variance and SGD convergence rates.",
+        "RELEVANCE": 8,
+        "NOVELTY": 8,
+        "PRIMARY_TOPIC_ID": "architecture_training",
+        "MATCHED_TOPIC_IDS": [
+            "architecture_training"
+        ],
+        "TOPIC_MATCH_COMMENT": "The central contribution explains training dynamics through path-dependent gradient noise and derives constrained variance-minimizing paths.",
+        "HOTSPOT_PAPER_TAGS": [],
+        "HOTSPOT_PAPER_COMMENT": "",
+        "SCORE": 16,
+        "authors": [
+            "Alexander Tyurin"
+        ],
+        "title": "Same Flow, Different Paths: Variance Reduction in Flow Matching",
+        "abstract": "In flow matching (FM), a velocity model $v_{\\theta}$ is trained using a predefined path $g_t$ that connects data and noise samples (e.g., $g_t(x_0, x_1) = (1 - t) x_0 + t x_1$). In this work, we study the choice of this path from an optimization perspective by analyzing the variance of stochastic gradients. We consider the class $G(p_t,v^\\star_t)$ of paths that induce the same marginal distributions $p_t$ and marginal velocity field $v^\\star_t$, and therefore the same FM objective. Our main finding is that the choice of path $g_t$ can fundamentally change the convergence rate of SGD, even when the FM objective remains exactly the same. (i) For a linear velocity model and one-dimensional Gaussian data, we derive a tight bound on the SGD iteration complexity up to logarithmic factors and find an analytically optimal path that minimizes this bound among linear paths inducing the same FM problem. (ii) We then extend the variance analysis to general FM problems and formulate path selection at a fixed $\\theta$ as the variance-minimization problem PathOpt$_\\theta$, constrained to $g_t\\in G(p_t,v^\\star_t)$. We show that this constraint is essential: reducing variance without it can lead to slower convergence. (iii) Since the constraint $g_t \\in G(p_t,v^\\star_t)$ cannot generally be verified directly, we derive an equivalent formulation with constraints that can be estimated from samples, allowing paths to be found numerically. Our theoretical results are supported by experiments with Gaussian data, Gaussian mixture models, and real datasets.",
+        "arxiv_id": "2609.17287",
+        "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+        "MATCHED_TOPIC_LABELS": [
+            "Architecture and Training Dynamics"
+        ],
+        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+        "HOTSPOT_PAPER_LABELS": [],
+        "HOTSPOT_PAPER_PRIMARY_KIND": null,
+        "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+    },
+    "2609.16338": {
+        "ARXIVID": "2609.16338",
+        "COMMENT": "Zero-aware bitmap and sign packing reduces ternary LLM weight storage and accelerates matrix-vector kernels.",
+        "RELEVANCE": 9,
+        "NOVELTY": 6,
+        "PRIMARY_TOPIC_ID": "efficiency_scaling",
+        "MATCHED_TOPIC_IDS": [
+            "efficiency_scaling"
+        ],
+        "TOPIC_MATCH_COMMENT": "Distribution-adaptive weight encoding and efficient unpacking directly reduce large-model storage and inference cost.",
+        "HOTSPOT_PAPER_TAGS": [],
+        "HOTSPOT_PAPER_COMMENT": "",
+        "SCORE": 15,
+        "authors": [
+            "Evangelos Georganas",
+            "Alexander Heinecke",
+            "Pradeep Dubey"
+        ],
+        "title": "Breaking the 1.58-bit Barrier for Ternary LLMs",
+        "abstract": "Ternary Large Language Models (LLM) store every weight as one of three symbols $\\{-1,0,+1\\}$, so the cost of a ternary model is conventionally referenced to the information-theoretic $\\log_2 3 \\approx 1.585$ bits per weight. The prevailing deployment format packs five ternary weights into one byte (five-trit packing), and due to the power-of-two group sizes used in practice this rounds up to $1.625$ bits per weight. This effective storage bit-width treats the three symbols $\\{-1,0,+1\\}$ as equiprobable. We measure the actual symbol distribution of 29 ternary LLM models and find that zeros account for up to $51.5\\%$ of all weights. Motivated by this finding, we introduce BITCOS, a simple distribution-adaptive layout comprised of a dense presence bitmap plus a compacted sign vector, and costs $2 - z$ bits per weight element given a zero density $z$ in the model's weights. BITCOS stores weights more compactly than the five-trit packing in 26 of the 29 tested models, and reaches $1.485$ bits per weight on the sparsest of them. BITCOS is amenable to efficient unpacking on modern processors and GPUs, and we present optimized unpacking sequences for AVX-512, AVX2 and Intel Xe2 GPUs. Measured against production state-of-the-art ternary matrix-vector multiplication kernels, at the zero densities real-world ternary models exhibit, the realized gain with our proposed layout is up to $1.28\\times$. Finally, we illustrate end-to-end LLM inference results on 5 different platforms (client and server CPUs, integrated and discrete Xe2 GPUs) where decode throughput improves by up to $1.18\\times$ on CPUs and $1.27\\times$ on GPUs.",
+        "arxiv_id": "2609.16338",
+        "PRIMARY_TOPIC_LABEL": "Efficiency, Compression, and Large-Scale Training",
+        "MATCHED_TOPIC_LABELS": [
+            "Efficiency, Compression, and Large-Scale Training"
+        ],
+        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+        "HOTSPOT_PAPER_LABELS": [],
+        "HOTSPOT_PAPER_PRIMARY_KIND": null,
+        "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+    },
+    "2609.17475": {
+        "ARXIVID": "2609.17475",
+        "COMMENT": "Compressed KV execution with fused reconstruction and coordinated state lifetimes materially expands long-context LLM memory capacity.",
+        "RELEVANCE": 9,
+        "NOVELTY": 6,
+        "PRIMARY_TOPIC_ID": "efficiency_scaling",
+        "MATCHED_TOPIC_IDS": [
+            "efficiency_scaling"
+        ],
+        "TOPIC_MATCH_COMMENT": "KV-cache execution and just-in-time state residency are the core mechanisms, directly matching memory-efficient large-model execution despite the inference-focused evaluation.",
+        "HOTSPOT_PAPER_TAGS": [
+            "daily_hot"
+        ],
+        "HOTSPOT_PAPER_COMMENT": "Reported execution of a 27B model with approximately 213K total tokens on a 24 GiB laptop has broad practical significance for local long-context LLM use.",
+        "SCORE": 15,
+        "authors": [
+            "Yuhua Chen"
+        ],
+        "title": "JustFit: 200K-Token LLM Serving on a 24 GiB Laptop with Just-in-Time State Management",
+        "abstract": "Capable open-weight models make local coding and reasoning attractive, but their context and execution state strain laptop memory. We present JustFit, an MLX-based inference runtime that combines KVExec for compressed KV execution, PhaseSwap for component residency, and StateTrans for state-preserving serving transitions. These mechanisms fuse reconstruction and coordinate just-in-time materialization and release, independently of model-weight quantization. In full-execution capacity tests on a 24 GiB M4 Pro MacBook running Qwen3.8-27B MXFP4, three independent runs complete 196,608 input and 16,384 output tokens, increasing completed single-request context from the mlx-vlm baseline's 30,720 positions to 212,992 (6.93x); a separate two-request run retains 229,376 positions in aggregate. In separate performance tests, a 32K-input, 64-output probe reaches 19.11 tokens/s, and a repeated 32K+6K workload has a median peak process footprint of 16,374 MiB. The integrated runtime answers 29 of 30 AIME 2026 problems correctly, showing how compact state and lifetime-aware execution expand local serving capacity while supporting extended generated reasoning.",
+        "arxiv_id": "2609.17475",
+        "PRIMARY_TOPIC_LABEL": "Efficiency, Compression, and Large-Scale Training",
+        "MATCHED_TOPIC_LABELS": [
+            "Efficiency, Compression, and Large-Scale Training"
+        ],
+        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+        "HOTSPOT_PAPER_LABELS": [
+            "Daily Hot Papers"
+        ],
+        "HOTSPOT_PAPER_PRIMARY_KIND": "daily_hot",
+        "HOTSPOT_PAPER_PRIMARY_LABEL": "Daily Hot Papers",
+        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "llm_exact"
+    },
+    "2609.16129": {
+        "ARXIVID": "2609.16129",
+        "COMMENT": "Derives pruning criteria from Fisher-metric geodesic distances to parameter-zero subspaces.",
+        "RELEVANCE": 8,
+        "NOVELTY": 7,
+        "PRIMARY_TOPIC_ID": "efficiency_scaling",
+        "MATCHED_TOPIC_IDS": [
+            "efficiency_scaling"
+        ],
+        "TOPIC_MATCH_COMMENT": "The core contribution is a principled pruning mechanism with computationally cheaper approximations, although validation is limited to small-scale vision settings.",
+        "HOTSPOT_PAPER_TAGS": [],
+        "HOTSPOT_PAPER_COMMENT": "",
+        "SCORE": 15,
+        "authors": [
+            "David S. Berman",
+            "Yen-Yu Fu",
+            "Edward Hirst",
+            "Thelma Chiwete Obirai"
+        ],
+        "title": "Optimal Pruning for Neural Architectures using Fisher Information Distances",
+        "abstract": "A new scheme for parameter pruning is introduced, derived from the differential-geometric distance in model space. Pruning a parameter sets its value to zero, representing a displacement of the model to the hypersurface on which that parameter vanishes. The minimal distance from the unpruned model to this hypersurface is naturally computed via the geodesic distance in the model space as determined by the Fisher information metric. This distance determines the true change in the model, and its performance, under pruning. By analysing progressively more faithful approximations of this geodesic distance a natural hierarchy of optimality for pruning methods is determined. This starts with the traditional magnitude pruning, then develops into new more sophisticated and effective pruning schemes. The method is demonstrated for both fully-connected networks and vision transformers, on MNIST and CIFAR-10, over the complete $0$-$100\\%$ pruning range and across five random seeds. It outperforms pruning by parameter magnitude and by the local Fisher information alone in every architecture and dataset combination considered, on both accuracy and the Matthews correlation coefficient. Additionally, analysis of different levels of geodesic approximation produces intermediate pruning schemes that are computationally efficient and maintain near-optimal performance. This geometric picture supplies not only a state-of-the-art pruning methodology for AI models, but also a verified and mathematically-motivated justification for pruning schemes.",
+        "arxiv_id": "2609.16129",
+        "PRIMARY_TOPIC_LABEL": "Efficiency, Compression, and Large-Scale Training",
+        "MATCHED_TOPIC_LABELS": [
+            "Efficiency, Compression, and Large-Scale Training"
+        ],
+        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+        "HOTSPOT_PAPER_LABELS": [],
+        "HOTSPOT_PAPER_PRIMARY_KIND": null,
+        "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+    },
+    "2609.16648": {
+        "ARXIVID": "2609.16648",
+        "COMMENT": "Learns speculative draft heads directly from rollout verification signals, eliminating separate head pretraining.",
+        "RELEVANCE": 8,
+        "NOVELTY": 7,
+        "PRIMARY_TOPIC_ID": "efficiency_scaling",
+        "MATCHED_TOPIC_IDS": [
+            "training_systems",
+            "efficiency_scaling"
+        ],
+        "TOPIC_MATCH_COMMENT": "The core contribution is online speculative-head learning that reduces training-run computation; RL provides the operating setting and supervision.",
+        "HOTSPOT_PAPER_TAGS": [],
+        "HOTSPOT_PAPER_COMMENT": "",
+        "SCORE": 15,
+        "authors": [
+            "Minghua He",
+            "Lingzhe Zhang",
+            "Yuan Liu",
+            "Xiao Zhou",
+            "Aiwei Liu"
+        ],
+        "title": "GrowMTP: Can RL Grow Its Own Draft Head?",
+        "abstract": "Reinforcement learning (RL) post-training drives the frontier capabilities of large language models, with its wall-clock dominated by autoregressive rollout generation. Speculative decoding is an established remedy for this bottleneck, but existing draft heads must be pretrained or warmed up before RL, introducing substantial training cost outside the RL run to be accelerated. We observe that RL training itself provides both conditions required for online draft-head training: its rollout distribution is far narrower than that of pretraining, and its verification step continuously produces supervision signals aligned with this distribution. Building on these observations, we propose GrowMTP, which uses this supervision to train a draft head from scratch entirely within the RL loop, with all head updates detached from the policy backbone. On Qwen3-4B (no draft head), MiMo-7B-SFT (weak head), and Qwen3.5-4B-Base (strong head), GrowMTP achieves rollout speedups of 2.13x, 1.93x, and 1.36x, and end-to-end speedups of 1.60x, 1.41x, and 1.20x, respectively. GrowMTP therefore serves existing RL training frameworks as a modular component, particularly offering a from-scratch acceleration path for models without pretrained draft heads.",
+        "arxiv_id": "2609.16648",
+        "PRIMARY_TOPIC_LABEL": "Efficiency, Compression, and Large-Scale Training",
+        "MATCHED_TOPIC_LABELS": [
+            "Large-Scale Training Systems and Efficiency",
+            "Efficiency, Compression, and Large-Scale Training"
+        ],
+        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+        "HOTSPOT_PAPER_LABELS": [],
+        "HOTSPOT_PAPER_PRIMARY_KIND": null,
+        "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+    },
+    "2609.16722": {
+        "ARXIVID": "2609.16722",
+        "COMMENT": "Uses low-resolution semantic filtering to select high-resolution video tokens for detailed reasoning.",
+        "RELEVANCE": 8,
+        "NOVELTY": 7,
+        "PRIMARY_TOPIC_ID": "efficiency_scaling",
+        "MATCHED_TOPIC_IDS": [
+            "efficiency_scaling"
+        ],
+        "TOPIC_MATCH_COMMENT": "The core contribution is a two-resolution token-reduction mechanism that directly lowers video MLLM inference cost.",
+        "HOTSPOT_PAPER_TAGS": [],
+        "HOTSPOT_PAPER_COMMENT": "",
+        "SCORE": 15,
+        "authors": [
+            "Haoyu Guo",
+            "Yuan Feng",
+            "Junlin Lv",
+            "Mingjun Xiao",
+            "S Kevin Zhou",
+            "Xike Xie"
+        ],
+        "title": "VideoMM: Adaptive Macro-Micro Inference for Efficient Video MLLMs",
+        "abstract": "Scaling Multimodal Large Language Models (MLLMs) to long-form video understanding is bottlenecked by the explosion of visual tokens, which saturates context windows and incurs prohibitive costs. Current solutions predominantly rely on auxiliary models for token reduction but face a fundamental dilemma: lightweight encoder-driven approaches often overlook critical semantic information, whereas heavyweight MLLM-driven reduction negates the efficiency gains. {In this work, we identify a more fundamental inefficiency underlying this dilemma: while fine-grained visual details are essential for detailed understanding, they are largely redundant for the preliminary task of selecting semantically relevant regions. } Motivated by this, we introduce \\textbf{VideoMM}, which marks a paradigm shift from model-centric downsizing to adaptive perceptual granularity. Specifically, our framework {decouples selection from reasoning} by executing semantic filtering on a cost-effective \\textit{Macro Proxy} (derived from downscaled frames), and projecting the selected regions onto high-fidelity \\textit{Micro Tokens} for detailed understanding only when necessary. Extensive evaluations show that VideoMM significantly outperforms existing solutions. It achieves a 6.13$\\times$ speedup and a 7.4\\% accuracy gain over full-context baselines on LongVideoBench, and further accelerates inference by 2.73$\\times$ over current leading methods, establishing a highly scalable paradigm for long-video understanding. Our code is available at: https://github.com/adfh917k/VideoMM.",
+        "arxiv_id": "2609.16722",
+        "PRIMARY_TOPIC_LABEL": "Efficiency, Compression, and Large-Scale Training",
+        "MATCHED_TOPIC_LABELS": [
+            "Efficiency, Compression, and Large-Scale Training"
+        ],
+        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+        "HOTSPOT_PAPER_LABELS": [],
+        "HOTSPOT_PAPER_PRIMARY_KIND": null,
+        "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+    },
+    "2609.17008": {
+        "ARXIVID": "2609.17008",
+        "COMMENT": "Self-speculative early exits use dynamic hidden-state management to preserve KV-cache correctness.",
+        "RELEVANCE": 8,
+        "NOVELTY": 6,
+        "PRIMARY_TOPIC_ID": "efficiency_scaling",
+        "MATCHED_TOPIC_IDS": [
+            "architecture_training",
+            "efficiency_scaling"
+        ],
+        "TOPIC_MATCH_COMMENT": "The core mechanism reduces executed layers and weight transfers while maintaining compatible cache state, directly addressing LLM compute and memory costs.",
+        "HOTSPOT_PAPER_TAGS": [],
+        "HOTSPOT_PAPER_COMMENT": "",
+        "SCORE": 14,
+        "authors": [
+            "Qihu Xie",
+            "Ziwei Li",
+            "Yi Kang"
+        ],
+        "title": "FlexEE: Self-Speculative and KV-Compatible Early Exiting for Offloading-Aware LLM Inference",
+        "abstract": "Large language model (LLM) inference is often constrained by both computation and memory, especially in offloading-based deployments where model weights are transferred across memory hierarchies during autoregressive decoding. In this setting, reducing the number of executed layers can lower per-token latency while also avoiding costly weight movement. Motivated by this observation, we present FlexEE, an early exiting framework for resource-constrained and offloading-based LLM inference. FlexEE makes early exiting practical for LLM decoding through layer-wise exit supervision for reliable intermediate-layer prediction, self-speculative decoding over a Top-K local vocabulary for low-cost exit decisions, and dynamic hidden state management for KV-cache-correct and memory-aware execution. Across generative and downstream tasks, FlexEE enables efficient early exit with minimal accuracy degradation, delivering up to 1.27$\\times$/3.16$\\times$ and 1.25$\\times$/2.83$\\times$ end-to-end speedups on Llama2-7B and Llama3-8B under 0\\%/50\\% weight offloading, respectively.",
+        "arxiv_id": "2609.17008",
+        "PRIMARY_TOPIC_LABEL": "Efficiency, Compression, and Large-Scale Training",
+        "MATCHED_TOPIC_LABELS": [
+            "Architecture and Training Dynamics",
+            "Efficiency, Compression, and Large-Scale Training"
+        ],
+        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+        "HOTSPOT_PAPER_LABELS": [],
+        "HOTSPOT_PAPER_PRIMARY_KIND": null,
+        "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+    },
+    "2609.16262": {
+        "ARXIVID": "2609.16262",
+        "COMMENT": "Derives compute-optimal pretraining versus fine-tuning allocations from prediction-relevant spectral dynamics.",
+        "RELEVANCE": 7,
+        "NOVELTY": 7,
+        "PRIMARY_TOPIC_ID": "training_systems",
+        "MATCHED_TOPIC_IDS": [
+            "training_systems",
+            "architecture_training"
+        ],
+        "TOPIC_MATCH_COMMENT": "Training-budget allocation is the central result, supported by optimization-dynamics analysis; applicability to large-model runs remains unestablished beyond ridge regression.",
+        "HOTSPOT_PAPER_TAGS": [],
+        "HOTSPOT_PAPER_COMMENT": "",
+        "SCORE": 14,
+        "authors": [
+            "Alex Buna",
+            "Fanghui Liu",
+            "Patrick Rebeschini"
+        ],
+        "title": "Compute-Optimal Pretrain--Fine-tune in Ridge Gradient Descent",
+        "abstract": "Pretraining followed by fine-tuning introduces a compute-allocation problem: under a fixed training budget, compute spent improving the upstream objective reduces the compute available for downstream adaptation. Despite its practical importance, this trade-off is not yet well understood theoretically, even in simple models. In this paper, we cast this allocation as a compute-split problem under a two-stage pretrain--fine-tune procedure with fixed total optimisation budget, using regularised least squares trained by gradient descent as a tractable setting. We characterise the optimal split under data-dependent evaluation geometries induced by the fine-tuning problem. Our results show that the allocation depends on how pretraining directions affect fine-tuning predictions and how fine-tuning shifts are seen through downstream data geometry. In particular, the relevant quantities are determined by prediction-relevant spectral components of the pretraining and fine-tuning empirical covariances. Technically, the analysis relies on a basis-invariant, eigenspace-level spectral decomposition, together with perturbative control of the non-commuting pretraining and fine-tuning dynamics.",
+        "arxiv_id": "2609.16262",
+        "PRIMARY_TOPIC_LABEL": "Large-Scale Training Systems and Efficiency",
+        "MATCHED_TOPIC_LABELS": [
+            "Large-Scale Training Systems and Efficiency",
+            "Architecture and Training Dynamics"
+        ],
+        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+        "HOTSPOT_PAPER_LABELS": [],
+        "HOTSPOT_PAPER_PRIMARY_KIND": null,
+        "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+    },
+    "2609.16827": {
+        "ARXIVID": "2609.16827",
+        "COMMENT": "Derives how gradient descent and Hessian curvature dynamically equilibrate at the edge of stability.",
+        "RELEVANCE": 7,
+        "NOVELTY": 7,
+        "PRIMARY_TOPIC_ID": "architecture_training",
+        "MATCHED_TOPIC_IDS": [
+            "architecture_training"
+        ],
+        "TOPIC_MATCH_COMMENT": "The core contribution explains optimization stability mechanistically, although the analysis is limited to kernel Hopfield networks.",
+        "HOTSPOT_PAPER_TAGS": [],
+        "HOTSPOT_PAPER_COMMENT": "",
+        "SCORE": 14,
+        "authors": [
+            "Akira Tamamori"
+        ],
+        "title": "Information Geometric Self-Organization at the Edge of Stability in High-Capacity Kernel Associative Memories",
+        "abstract": "High-capacity associative memories based on Kernel Logistic Regression (KLR) exhibit exceptional storage capabilities and robustness. Previous empirical studies identified a hyperparameter regime, the \"Ridge of Optimization,\" where attractor stability is maximized. However, the geometric nature of this regime and the optimization dynamics required to reach it have remained unclear. In this paper, we investigate the static geometry of the parameter space and the learning trajectory of Gradient Descent (GD) in KLR-trained Hopfield networks. Using the eigenvalue spectrum of the Hessian, we reveal that the Ridge corresponds to a phase boundary located adjacent to a rank-1 spectral collapse, acting as a geometric singularity where the principal curvature is massively amplified. Furthermore, we demonstrate that the learning dynamics exhibit a transient self-stabilizing behavior driven by the Edge of Stability (EoS) phenomenon. Rather than seeking flat regions, the network parameters are driven toward a state where the local curvature dynamically equilibrates near the stability limit dictated by the learning rate, allowing the optimization to survive the initial instability. We provide analytical derivations for both the rank-1 asymptotic collapse and the dynamic feedback loop governing this equilibration. These findings suggest that optimal, high-capacity memory representations are not formed in flat minima, but are dynamically sculpted at the highly curved boundaries of geometric singularities.",
+        "arxiv_id": "2609.16827",
+        "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+        "MATCHED_TOPIC_LABELS": [
+            "Architecture and Training Dynamics"
+        ],
+        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+        "HOTSPOT_PAPER_LABELS": [],
+        "HOTSPOT_PAPER_PRIMARY_KIND": null,
+        "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+    },
+    "2609.16617": {
+        "ARXIVID": "2609.16617",
+        "COMMENT": "Derives a KV-eviction error decomposition separating first divergence from subsequent mismatch exposure.",
+        "RELEVANCE": 7,
+        "NOVELTY": 7,
+        "PRIMARY_TOPIC_ID": "efficiency_scaling",
+        "MATCHED_TOPIC_IDS": [
+            "efficiency_scaling"
+        ],
+        "TOPIC_MATCH_COMMENT": "Provides theoretical risk characterization and improved estimators for the quality effects of KV-cache compression, a narrower efficiency-analysis contribution.",
+        "HOTSPOT_PAPER_TAGS": [],
+        "HOTSPOT_PAPER_COMMENT": "",
+        "SCORE": 14,
+        "authors": [
+            "Xinyue Luo",
+            "Fei Yu"
+        ],
+        "title": "Divergence Timing and Cumulative Disagreement under KV-Cache Eviction",
+        "abstract": "KV-cache eviction perturbs the conditional token distributions governing autoregressive generation. We investigate how first-divergence timing and subsequent token mismatch determine cumulative disagreement. We derive an exact decomposition under a specified stepwise maximal coupling: the expected mismatch fraction equals a first-mismatch contribution plus post-divergence exposure multiplied by its mismatch rate. An explicit construction over unrestricted autoregressive kernel pairs realizes the sharp interval of risks compatible with a finite divergence-aligned observation window. Residual-branch conditional Monte Carlo provides unbiased joint estimates of occurrence, occupation, and window/tail contributions, with per-replicate variance dominance for total token loss. Complete trajectories from Meta-Llama-3.1-8B-Instruct and Qwen2.5-7B-Instruct show that SnapKV at 50% retention enters divergence later and less often than SnapKV-512 or recent-token retention with the same 50% prompt-cache budget, while post-divergence total variation (TV) remains high. In an exploratory analysis of 288 documents, post-divergence exposure accounts for 85-90% of four aggregate mismatch gaps. On 288 independent documents at 90% retention, prespecified comparisons show higher branch-aligned TV in the late than in the early window in both models.",
+        "arxiv_id": "2609.16617",
+        "PRIMARY_TOPIC_LABEL": "Efficiency, Compression, and Large-Scale Training",
+        "MATCHED_TOPIC_LABELS": [
+            "Efficiency, Compression, and Large-Scale Training"
+        ],
+        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+        "HOTSPOT_PAPER_LABELS": [],
+        "HOTSPOT_PAPER_PRIMARY_KIND": null,
+        "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+    },
+    "2609.16055": {
+        "ARXIVID": "2609.16055",
+        "COMMENT": "A compact internal-state controller dynamically selects historical reasoning support and reduces generation cost.",
+        "RELEVANCE": 6,
+        "NOVELTY": 8,
+        "PRIMARY_TOPIC_ID": "architecture_training",
+        "MATCHED_TOPIC_IDS": [
+            "architecture_training"
+        ],
+        "TOPIC_MATCH_COMMENT": "State-conditioned computation is the closest connection; the core contribution concerns test-time reasoning support on frozen models.",
+        "HOTSPOT_PAPER_TAGS": [
+            "new_frontier"
+        ],
+        "HOTSPOT_PAPER_COMMENT": "Explores internal-state-governed reasoning as an early direction for adaptive test-time computation across language and vision-language models.",
+        "SCORE": 14,
+        "authors": [
+            "Zhiren Gong",
+            "Yikun Hou",
+            "Zihao Zeng",
+            "Ming Xiao",
+            "Chau Yuen",
+            "Wei Yang Bryan Lim"
+        ],
+        "title": "State of Thought Enables Endogenous Reasoning",
+        "abstract": "Test-time compute has emerged as a major approach to improving the capabilities of Large Language Models (LLMs). However, existing test-time reasoning paradigms rely heavily on externally imposed control, either through fixed reasoning programs or through costly expansion in constrained search spaces, limiting both generalization and efficiency. We propose State of Thought (SoT), a new reasoning paradigm that enables endogenous reasoning in LLMs, with the model's internal reasoning state governing how reasoning unfolds. Concretely, SoT extracts a compact dynamics-geometric state from the model's internal information transfer and uses a 582-parameter controller on frozen backbones to selectively activate historical reasoning support useful under the current reasoning state, framing reasoning as a state-conditioned process over evidence rather than an externally prescribed token chain. Across quantitative (1.34x), general (1.62x), symbolic-and-code (1.76x), and long-context (2.51x) reasoning on 3 LLMs and 16 datasets, SoT consistently improves mean-baseline accuracy while reducing generated tokens by 62.6% and end-to-end latency by 44.6%. Across 2 VLM scales and 3 reasoning tasks, it improves mean accuracy by 3.8 points over reasoning baselines, with 74.9% fewer completion tokens and 73.5% lower latency than search-based methods. Under constrained access, SoT retains 38.2%/36.5% mean accuracy gains in training-free/embedding-only settings, while trajectory-only judging reaches 84.1% agreement across 3 API models. Together, endogenous state-driven reasoning provides a generalizable and efficient alternative.",
+        "arxiv_id": "2609.16055",
+        "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+        "MATCHED_TOPIC_LABELS": [
+            "Architecture and Training Dynamics"
+        ],
+        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+        "HOTSPOT_PAPER_LABELS": [
+            "New Frontier Papers"
+        ],
+        "HOTSPOT_PAPER_PRIMARY_KIND": "new_frontier",
+        "HOTSPOT_PAPER_PRIMARY_LABEL": "New Frontier Papers",
+        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "llm_exact"
+    },
+    "2609.16350": {
+        "ARXIVID": "2609.16350",
+        "COMMENT": "First-order variance-reduced federated bilevel optimization removes second-order derivative computations through a single-timescale update scheme.",
+        "RELEVANCE": 7,
+        "NOVELTY": 6,
+        "PRIMARY_TOPIC_ID": "training_systems",
+        "MATCHED_TOPIC_IDS": [
+            "training_systems"
+        ],
+        "TOPIC_MATCH_COMMENT": "Contributes a distributed optimization algorithm with reduced derivative cost and convergence analysis, although specialized to federated bilevel learning.",
+        "HOTSPOT_PAPER_TAGS": [],
+        "HOTSPOT_PAPER_COMMENT": "",
+        "SCORE": 13,
+        "authors": [
+            "Yihan Zhang",
+            "Rohit Dhaipule",
+            "Chiu C Tan",
+            "Haibin Ling",
+            "Hongchang Gao"
+        ],
+        "title": "Federated stochastic bilevel optimization with fully first-order gradients",
+        "abstract": "Federated stochastic bilevel optimization has been actively studied in recent years due to its widespread applications in machine learning. However, most existing federated stochastic bilevel optimization algorithms require the computation of second-order Hessian and Jacobian matrices, which leads to longer running times in practice. To address these challenges, we propose a novel federated stochastic variance-reduced bilevel gradient descent algorithm that relies solely on first-order oracles. Specifically, our approach does not require the computation of second-order Hessian and Jacobian matrices, significantly reducing running time. Furthermore, we introduce a novel learning rate mechanism, i.e., a constant single-timescale learning rate, to coordinate the update of different variables. We also present a new strategy to establish the convergence rate of our algorithm. Finally, the extensive experimental results confirm the efficacy of our proposed algorithm.",
+        "arxiv_id": "2609.16350",
+        "PRIMARY_TOPIC_LABEL": "Large-Scale Training Systems and Efficiency",
+        "MATCHED_TOPIC_LABELS": [
+            "Large-Scale Training Systems and Efficiency"
+        ],
+        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+        "HOTSPOT_PAPER_LABELS": [],
+        "HOTSPOT_PAPER_PRIMARY_KIND": null,
+        "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+    },
+    "2609.16061": {
+        "ARXIVID": "2609.16061",
+        "COMMENT": "Position-constrained span masking introduces dependencies between masked spans in the pretraining learning signal.",
+        "RELEVANCE": 7,
+        "NOVELTY": 6,
+        "PRIMARY_TOPIC_ID": "architecture_training",
+        "MATCHED_TOPIC_IDS": [
+            "architecture_training"
+        ],
+        "TOPIC_MATCH_COMMENT": "The core contribution changes a pretraining mechanism and theoretically analyzes its effect, fitting the training side of this topic.",
+        "HOTSPOT_PAPER_TAGS": [],
+        "HOTSPOT_PAPER_COMMENT": "",
+        "SCORE": 13,
+        "authors": [
+            "Zhenyu Zhang",
+            "Lei Shen",
+            "Yuming Zhao",
+            "Meng Chen",
+            "Xiaodong He"
+        ],
+        "title": "POSPAN: Position-Constrained Span Masking for Language Model Pre-training",
+        "abstract": "Span-level masked language modeling (MLM) has shown to be advantageous to pre-trained language models over the original single-token MLM, as entities/phrases and their dependencies are critical to language understanding. Previous works only consider span length with some discrete distributions, while the dependencies among spans are ignored, i.e., assuming that the positions of masked spans are uniformly distributed. In this paper, we present POSPAN, a general framework to allow diverse position-constrained span masking strategies via the combination of span length distribution and position constraint distribution, which unifies all existing span-level masking methods. To verify the effectiveness of POSPAN in pre-training, we evaluate it on the datasets from several NLU benchmarks. Experimental results indicate that the position constraint is capable of enhancing span-level masking broadly, and our best POSPAN setting consistently outperforms its span-length-only counterparts and vanilla MLM. We also conduct theoretical analysis for the position constraint in masked language models to shed light on the reason why POSPAN works well, demonstrating the rationality and necessity of POSPAN.",
+        "arxiv_id": "2609.16061",
+        "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+        "MATCHED_TOPIC_LABELS": [
+            "Architecture and Training Dynamics"
+        ],
+        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+        "HOTSPOT_PAPER_LABELS": [],
+        "HOTSPOT_PAPER_PRIMARY_KIND": null,
+        "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+    },
+    "2609.16841": {
+        "ARXIVID": "2609.16841",
+        "COMMENT": "Adapts relevance-versus-coverage token selection using token budgets and query-vision affinity entropy.",
+        "RELEVANCE": 7,
+        "NOVELTY": 6,
+        "PRIMARY_TOPIC_ID": "efficiency_scaling",
+        "MATCHED_TOPIC_IDS": [
+            "efficiency_scaling"
+        ],
+        "TOPIC_MATCH_COMMENT": "Its core is a budget-adaptive visual-token reduction algorithm for VLM inference, with a relatively narrow refinement of existing selection methods.",
+        "HOTSPOT_PAPER_TAGS": [],
+        "HOTSPOT_PAPER_COMMENT": "",
+        "SCORE": 13,
+        "authors": [
+            "Zhenbin Wang",
+            "Lei Zhang",
+            "Lituan Wang",
+            "Wei Huang",
+            "Yan Wang",
+            "Zhenwei Zhang"
+        ],
+        "title": "StackTok: Accelerating VLMs Inference with Budget-Adaptive Visual Token Selection",
+        "abstract": "Increasing image resolution produces ever-longer visual-token sequences in vision-language models (VLMs), substantially raising their inference cost. To reduce this overhead without retraining, existing methods select compact token subsets that prioritize query relevance, visual coverage, or a fixed trade-off between them. The appropriate balance, however, varies across queries and token budgets: localized questions favor relevance, whereas holistic questions demand broader visual coverage. We introduce StackTok, a training-free selector that treats query relevance as the objective and visual coverage as budget-calibrated support. StackTok builds a size-indexed coverage reference from a coverage-only greedy sequence and adjusts its support target using query--vision affinity entropy. A reference-gated interleaved selection policy then switches between relevance- and coverage-oriented additions according to the current subset's support deficit. For high-resolution inputs, StackTok allocates one shared token budget across crops according to the combined marginal gain of locally nominated tokens. Evaluated with five VLMs over ten distinct image-understanding benchmarks, StackTok ranks first among training-free selectors in every tested model--budget setting. On high-resolution LLaVA-NeXT-7B, it retains 95.26% of full-token performance with only 160 of 2{,}880 (5.6%) visual tokens.",
+        "arxiv_id": "2609.16841",
+        "PRIMARY_TOPIC_LABEL": "Efficiency, Compression, and Large-Scale Training",
+        "MATCHED_TOPIC_LABELS": [
+            "Efficiency, Compression, and Large-Scale Training"
+        ],
+        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+        "HOTSPOT_PAPER_LABELS": [],
+        "HOTSPOT_PAPER_PRIMARY_KIND": null,
+        "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+    },
+    "2609.16537": {
+        "ARXIVID": "2609.16537",
+        "COMMENT": "Depth-wise alignment of layer necessity and plasticity distinguishes Transformer and Mamba adaptation behavior.",
+        "RELEVANCE": 6,
+        "NOVELTY": 7,
+        "PRIMARY_TOPIC_ID": "architecture_training",
+        "MATCHED_TOPIC_IDS": [
+            "architecture_training"
+        ],
+        "TOPIC_MATCH_COMMENT": "Architecture-dependent adaptation dynamics are relevant, but the core contribution is an empirical layer-importance analysis focused on interpretability and fine-tuning behavior.",
+        "HOTSPOT_PAPER_TAGS": [],
+        "HOTSPOT_PAPER_COMMENT": "",
+        "SCORE": 13,
+        "authors": [
+            "Istabrak Abbes",
+            "Nizar Islah",
+            "Irina Rish",
+            "Sarath Chandar"
+        ],
+        "title": "What Does Layer-Importance Reveal About Transformers and State-Space Models?",
+        "abstract": "Transformers and state-space models (SSMs) are the two dominant families of sequence models, and a central open question is how far the analytical knowledge built for transformers transfers to SSMs. We address this through the lens of layer importance which underpins compression, selective fine-tuning, and interpretability across both families. We decompose layer importance into two distinct notions. \\emph{Necessity} captures how much the pretrained model depends on a layer's existing contribution, measured by the loss increase from bypassing it. \\emph{Plasticity} captures where the model absorbs new information during fine-tuning, measured by the magnitude of task-specific weight updates. Our analysis reveals that the two families behave fundamentally differently: in every evaluated residual transformer up to $14$B parameters, Necessity and Plasticity anti-align across depth, whereas in the evaluated Mamba-style SSMs they point to overlapping regions. The sign of this alignment also predicts downstream adaptation behavior. In the evaluated transformers, concentrating updates in the most plastic layers increases catastrophic forgetting, while this tier-dependent effect disappears in the evaluated Mamba-style SSMs.",
+        "arxiv_id": "2609.16537",
+        "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+        "MATCHED_TOPIC_LABELS": [
+            "Architecture and Training Dynamics"
+        ],
+        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+        "HOTSPOT_PAPER_LABELS": [],
+        "HOTSPOT_PAPER_PRIMARY_KIND": null,
+        "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+    },
+    "2609.16637": {
+        "ARXIVID": "2609.16637",
+        "COMMENT": "Learnable block-wise parent-child mixing embeds knowledge transfer directly in the forward computation.",
+        "RELEVANCE": 6,
+        "NOVELTY": 6,
+        "PRIMARY_TOPIC_ID": "architecture_training",
+        "MATCHED_TOPIC_IDS": [
+            "architecture_training"
+        ],
+        "TOPIC_MATCH_COMMENT": "The jointly optimized transfer interface is a concrete architectural training mechanism, although evidence is limited to compact vision networks.",
+        "HOTSPOT_PAPER_TAGS": [],
+        "HOTSPOT_PAPER_COMMENT": "",
+        "SCORE": 12,
+        "authors": [
+            "Yanick C. Tchenko",
+            "Felix Mohr",
+            "Hicham Hadj-Abdelkader",
+            "Hedi Tabia"
+        ],
+        "title": "Can Knowledge Transfer Parameters Be Learned? LePoKet for Efficient Robotic Vision",
+        "abstract": "Efficient perception is central to robotic systems operating under constrained computation, memory, and latency budgets. Knowledge transfer from larger pretrained models offers a practical route to stronger compact perception networks, but existing approaches commonly rely on fixed distillation objectives or manually designed interaction mechanisms. Building on Hereditary Knowledge Transfer (HKT), we propose LePoKet (Learnable Parameter Optimization for Knowledge Transfer), a structural transfer framework that embeds knowledge inheritance directly into the forward computation. LePoKet introduces a block-wise Extract-Transform-Mix interface whose interaction parameters are optimized jointly with the child network through a Learnable Genetic Attention (LGA) operator, without auxiliary distillation losses or temperature scaling. We first characterize the mechanism on CIFAR-10 and CIFAR-100 using ResNet parent-child pairs, obtaining relative error reductions of 24.57% and 25.1%, respectively, over standard child training. We then evaluate LePoKet for dense motion estimation by integrating it into a compact RAFT-based optical-flow model trained only on FlyingChairs and FlyingThings3D. LePoKet improves the compact RAFT baseline from 2.21 to 1.92 EPE on Sintel Clean, from 3.35 to 3.01 on Sintel Final, and from 7.51 to 6.39 on KITTI. A direct comparison with HKT further shows that LePoKet improves CIFAR-10 accuracy from 92.40% to 93.40% while achieving the best Sintel Final and KITTI errors among the evaluated compact transfer variants, with comparable performance on Sintel Clean. These results demonstrate that learnable structural transfer generalizes across recognition and motion perception tasks and provides a promising approach for efficient robotic vision.",
+        "arxiv_id": "2609.16637",
+        "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+        "MATCHED_TOPIC_LABELS": [
+            "Architecture and Training Dynamics"
+        ],
+        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+        "HOTSPOT_PAPER_LABELS": [],
+        "HOTSPOT_PAPER_PRIMARY_KIND": null,
+        "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
+    }
+}

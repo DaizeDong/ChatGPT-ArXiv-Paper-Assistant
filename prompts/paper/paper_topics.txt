@@ -1,31 +1,92 @@
 ## Relevant Topics
 
-This is a training-side feed. The centre of gravity is Mixture-of-Experts training and the large-scale training systems it sits on; architecture and efficiency work is kept when it bears on how a large model is trained or what it costs to train.
+This is a training-side feed for someone who builds and modifies model internals. The centre of
+gravity is what a frontier model is made of and how it is trained: architecture, training
+dynamics, and the decisions a lab actually made. MoE is still in scope, but only when the
+contribution changes the design space, not when it tunes an existing MoE.
 
-Keep a paper when its CORE CONTRIBUTION falls in one of the four topics below. Filter it when the topic is merely the setting for a downstream application, a benchmark, or a product result.
+Keep a paper when its CORE CONTRIBUTION falls in one of the five topics below. Filter it when the
+topic is merely the setting for a downstream application, a benchmark, or a product result.
 
-1. MoE Training (primary)
-- Keep: expert routing and gating mechanisms; load balancing, with or without auxiliary losses; expert granularity, fine-grained and shared experts; MoE training stability (loss spikes, router collapse, z-loss and related fixes); expert and hybrid parallelism; all-to-all dispatch/combine and the communication schedules MoE needs; MoE kernels and grouped-GEMM style implementations; expert capacity, token dropping, and upcycling dense checkpoints into MoE.
-- Filter: papers that merely train on top of a MoE model without a new routing, balancing, stability, parallelism, or kernel contribution; "mixture of experts" in the classical ensemble or recommender sense.
+THE ONE QUESTION THAT DECIDES A HIGH SCORE, asked before the topic list:
 
-2. Large-Scale Training Systems
-- Keep: distributed training algorithms (data, tensor, pipeline, sequence, and expert parallelism, FSDP and ZeRO-style sharding); optimizers and preconditioners for large-scale pretraining; communication algorithms, overlap, and collective design; throughput and MFU work that materially changes what a training run costs or whether it converges; scaling-law work that informs how such runs are configured.
-- Filter: routine infrastructure tuning with no new algorithmic or systems idea.
+> Does this paper REMOVE or REPLACE a component that everyone downstream inherits without
+> thinking, or DECOUPLE two quantities the field currently conflates -- and does it say which
+> end is held fixed while the other moves?
 
-3. Architecture and Training Dynamics
-- Keep: new or analysed architectural mechanisms (attention variants, normalization and residual design, state-space and recurrent sequence modelling, dynamic or modular computation); optimisation and training-dynamics analysis that explains why large models train the way they do.
-- Filter: applying an existing architecture to a new task or benchmark with no mechanistic insight.
+A paper that ADDS a mechanism on top of existing primitives is ordinary work, however good the
+numbers. A paper that takes one away, or splits one knob into two, is the reason this feed
+exists. Papers whose gains are CONDITIONAL (only above some batch size, only in one budget
+regime, only with an extra training stage) are ordinary work too, even when the mechanism is
+new: a conditional win is a new knob, not a removed one.
 
-4. Efficiency and Compression
-- Keep: quantization, sparsity, pruning, low-rank adaptation, KV-cache and memory-efficient designs, and other work that materially changes the cost of running or training a large model, especially when the mechanism is new rather than a tuned variant.
-- Filter: straightforward application of standard efficiency methods, and deployment or serving engineering with no new idea.
+1. Frontier Model Releases and Technical Reports (primary)
+- Keep: model and technical reports that DISCLOSE architecture or training decisions -- layer
+  and attention design, normalization and residual choices, hybrid attention/state-space stacks,
+  sparsity and expert layout, tokenizer and vocabulary decisions, data mixture and curriculum,
+  optimizer and schedule, precision and numerics, stability fixes and what broke; open-weight
+  releases whose report explains a choice rather than only reporting it.
+- Filter: releases that are a scorecard -- benchmark tables, a capability announcement, a product
+  or API launch, or a report that names its recipe without saying why it was chosen. A frontier
+  name in the title earns nothing on its own.
 
-Leave these to the hotspot digest unless the core contribution clearly falls in one of the four topics above:
-- major model or product releases
-- agent, tooling, and RAG launches
-- benchmark, leaderboard, or evaluation-only papers
-- representation-learning theory, interpretability, and feature-formation analysis
+2. Architecture and Training Dynamics (primary)
+- Keep: new or analysed architectural mechanisms (attention variants, normalization and residual
+  design, state-space and recurrent sequence modelling, positional schemes, dynamic or modular
+  computation, tokenizer-free and byte-level or learned-chunking stacks, non-autoregressive and
+  discrete-diffusion generation); optimizers, preconditioners, and parameterisations, especially
+  hyperparameter transfer across scale; training-dynamics and stability analysis that explains
+  why large models train the way they do; work that removes a standard component (normalization,
+  weight decay, positional encoding, the tokenizer, left-to-right decoding) and shows the model
+  still trains.
+- Filter: applying an existing architecture to a new task or benchmark with no mechanistic
+  insight; an architectural tweak evaluated only at toy scale with no account of what it costs.
+
+3. Large-Scale Training Systems
+- Keep: distributed training ALGORITHMS that change what is possible, not only what is fast --
+  asynchronous, low-communication and decentralised optimisation, sharding and parallelism
+  schemes with a new invariant, numerics and low-precision training (FP8, FP4, ternary and 1-bit)
+  when the claim is about training stability rather than a kernel; scaling-law work that informs
+  how a run is configured, including data-constrained and repeated-data regimes and critical
+  batch size.
+- Filter: kernel engineering, communication scheduling, overlap, caching, serving and inference
+  throughput. This is a real exclusion, not a soft one: work whose contribution is "the same
+  model, faster" belongs to someone else's feed even when it is excellent and even when it is
+  about MoE.
+
+4. MoE Where It Changes the Design Space
+- Keep: routing that is newly differentiable or newly stable; the training/inference router gap;
+  expert collapse and what actually prevents it; expert granularity, shared experts and layout
+  when a new axis is opened rather than tuned; dense-to-MoE conversion; MoE scaling laws that fix
+  one quantity and vary another; analyses that carry a criterion which could have failed (a
+  random-guess baseline, an ablation with a predicted sign) rather than similarity heatmaps.
+- Filter: MoE systems and inference work (expert parallelism, all-to-all schedules, grouped GEMM,
+  offload, capacity and scheduling tricks); MoE surveys; papers that train on top of a MoE
+  without a routing, balancing, stability, or structural contribution; "mixture of experts" in
+  the classical ensemble or recommender sense. Routine MoE detail work is now explicitly OUT even
+  though it matches the keywords.
+
+5. Efficiency and Compression When the Mechanism Is New
+- Keep: quantization, sparsity, pruning and low-rank work whose mechanism is new and whose gain
+  is unconditional; compression that changes what can be trained, not only what can be served;
+  attribution of a model's behaviour to its data.
+- Filter: tuned variants of standard efficiency methods; deployment and serving engineering;
+  anything whose headline is a compression ratio with no account of what was given up.
+
+Also keep, even though they read like evaluation work, because the field has no one checking them:
+- benchmark validity itself: contamination, saturation, LLM-as-judge reliability, whether a
+  benchmark measures what it claims. A paper AUDITING a benchmark is in scope; a paper PROPOSING
+  one is not.
+
+Leave these to the hotspot digest unless the core contribution clearly falls in one of the five
+topics above:
+- agent, tooling, and RAG launches, and agent framework papers
+- new benchmarks, leaderboards, and evaluation-only papers
+- interpretability and feature-formation analysis that yields no component you could build with
 - memory mechanisms and agent memory systems
 - world models, exploration, and reinforcement learning
-- alignment and post-training (RLHF, DPO, GRPO, RFT, instruction tuning)
-- downstream applications in medical imaging, segmentation, 3D vision, video understanding, information retrieval, summarization, recommendation, machine translation, speech recognition, time series, knowledge graphs, and similar domains
+- alignment and post-training (RLHF, DPO, GRPO, RFT, instruction tuning), EXCEPT where the
+  subject is how post-training destabilises the architecture itself
+- downstream applications in medical imaging, segmentation, 3D vision, video understanding,
+  information retrieval, summarization, recommendation, machine translation, speech recognition,
+  time series, knowledge graphs, and similar domains

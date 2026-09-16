@@ -6,6 +6,7 @@ from pathlib import Path
 
 os.environ.setdefault("OPENAI_API_KEY", "test-key")
 
+from arxiv_assistant.paper_topics import get_topic_registry
 from scripts.rebuild_paper_markdown import rebuild_paper_markdown
 
 
@@ -44,7 +45,10 @@ class RebuildPaperMarkdownTests(unittest.TestCase):
 
             self.assertIn("PRIMARY_TOPIC_ID", enriched_payload["2501.00001"])
             self.assertEqual(bundle_payload["meta"]["date"], "2026-03-31")
-            self.assertIn("MoE Training", daily_md)
+            # Ask the registry for the label rather than pinning it: topic labels
+            # are reworded whenever the feed is retuned, and a literal here fails
+            # for a rename that the renderer handled correctly.
+            self.assertIn(get_topic_registry().get("moe_training").label, daily_md)
             self.assertEqual(
                 enriched_payload["2501.00001"]["PRIMARY_TOPIC_ID"], "moe_training"
             )

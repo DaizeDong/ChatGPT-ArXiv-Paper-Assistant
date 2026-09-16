@@ -14,11 +14,13 @@ class PaperTopicsTests(unittest.TestCase):
     def test_topic_registry_uses_expected_order(self):
         registry = get_topic_registry()
         # The ACTIVE set is tuned as the feed is widened or narrowed, so what is
-        # pinned here is the shape, not the membership: MoE training leads, the
-        # three topics the spec removed stay out, and the default is a live topic.
+        # pinned here is the shape, not the membership: frontier releases lead
+        # and architecture is the default (MoE detail work was demoted when it
+        # stopped being the day job), the three topics the spec removed stay
+        # out, and the default is a live topic.
         active = list(registry.active_topic_ids)
-        self.assertEqual(active[0], "moe_training")
-        self.assertEqual(registry.default_topic_id, "moe_training")
+        self.assertEqual(active[0], "frontier_models")
+        self.assertEqual(registry.default_topic_id, "architecture_training")
         self.assertIn(registry.default_topic_id, active)
         for removed in ("representation_structure", "memory_systems", "world_models_open_ended_rl"):
             self.assertNotIn(removed, active)

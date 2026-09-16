@@ -102,6 +102,26 @@ jobs:
           python -m pip install --upgrade pip
           if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
 
+      - name: Make llmcall available to the job's Python
+        shell: bash
+        continue-on-error: true
+        run: |
+          # setup-python is isolated from the machine's interpreters. Ask each
+          # candidate where llmcall lives and install that path here, so the
+          # gateway gets the chain instead of the single-provider fallback.
+          SRC=""
+          for CAND in py -3 python3 python; do
+            SRC=$($CAND -c "import llmcall, os; print(os.path.dirname(os.path.dirname(llmcall.__file__)))" 2>/dev/null) && [ -n "$SRC" ] && break
+            SRC=""
+          done
+          if [ -z "$SRC" ]; then
+            echo "No interpreter on this machine has llmcall; the agent transport will be used."
+            exit 0
+          fi
+          echo "Installing llmcall from $SRC"
+          python -m pip install --quiet "$SRC"
+          python -c "import llmcall; print('llmcall available to the job')"
+
       - name: Generate the weekly digest
         if: steps.when.outputs.should_run == 'true'
         env:

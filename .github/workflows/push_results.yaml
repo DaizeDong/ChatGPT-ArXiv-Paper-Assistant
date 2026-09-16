@@ -76,11 +76,13 @@ jobs:
           git fetch origin
           if ! git show-ref --verify --quiet refs/remotes/origin/auto_update; then
             echo "auto_update branch does not exist. Creating it from main."
-            git checkout -b auto_update origin/main
+            # -B, not -b: a self-hosted runner keeps its workspace between runs,
+            # so the local branch survives and -b fails with "already exists".
+            git checkout -B auto_update origin/main
             git push origin auto_update
           else
             echo "auto_update branch exists. Checking out to it."
-            git checkout -b auto_update origin/auto_update
+            git checkout -B auto_update origin/auto_update
           fi
 
       - name: Merge processed artifact contents into tracked /out

@@ -38,7 +38,10 @@ AUTHOR_ID_SET = set(author_ids)
 # load prompts
 SYSTEM_PROMPT = read_prompt("paper.system_prompt")
 TOPIC_PROMPT = read_prompt("paper.topics")
-SCORE_PROMPT = read_prompt("paper.score_criteria")
+# The scoring prompt is the criteria plus the reader's current centre of work:
+# Proximity has nothing to measure against without the second half, and keeping
+# them in separate files means the half that changes often is edited alone.
+SCORE_PROMPT = read_prompt("paper.score_criteria") + "\n\n" + read_prompt("paper.active_lines")
 POSTFIX_PROMPT_TITLE = read_prompt("paper.postfix_title")
 POSTFIX_PROMPT_ABSTRACT = read_prompt("paper.postfix_abstract")
 

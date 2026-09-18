@@ -18,6 +18,9 @@ PROMPT_PATHS = {
         REPO_ROOT / "prompts" / "paper" / "score_criteria.txt",
         REPO_ROOT / "prompts" / "score_criteria.txt",
     ],
+    "paper.active_lines": [
+        REPO_ROOT / "prompts" / "paper" / "active_lines.txt",
+    ],
     "paper.postfix_title": [
         REPO_ROOT / "prompts" / "paper" / "postfix_prompt_title.txt",
         REPO_ROOT / "prompts" / "postfix_prompt_title.txt",

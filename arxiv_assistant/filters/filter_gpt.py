@@ -55,6 +55,25 @@ def calc_price(model, usage):
     return cache_cost + prompt_cost, completion_cost
 
 
+def read_score(jdict, relevance):
+    """What to order the day's papers by.
+
+    Not relevance + novelty. Measured against 274 papers the owner had already
+    tiered by hand, ordering by relevance + novelty put 60% of his must-reads in
+    the top 50; relevance + proximity + evidence, with load subtracted, puts 76%
+    there. Novelty is left out because it does not separate his middle tiers
+    (means of 6.1 to 6.5 across three of them) and is HIGHEST on the tier he
+    labels too complicated to act on -- including it pulls up what he skips.
+
+    SCORE stays relevance + novelty: the hotspot spotlight cutoffs are calibrated
+    against that scale and moving it would shift those gates silently.
+    """
+    proximity = _coerce_int(jdict.get("PROXIMITY"), 5)
+    evidence = _coerce_int(jdict.get("EVIDENCE"), 5)
+    load = _coerce_int(jdict.get("LOAD"), 5)
+    return round(relevance + proximity + evidence - 0.5 * load, 1)
+
+
 def paper_to_titles(paper_entry: Paper) -> str:
     return (
         "ArXiv ID: "
@@ -411,6 +430,7 @@ def filter_papers_by_abstract(
             result = ensure_topic_fields({
                 **jdict,
                 "SCORE": relevance + novelty,
+                "READ_SCORE": read_score(jdict, relevance),
                 "RELEVANCE": relevance,
                 "NOVELTY": novelty,
                 **dataclasses.asdict(id_paper_mapping[jdict["ARXIVID"]]),

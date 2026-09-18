@@ -375,10 +375,16 @@ def ensure_topic_fields_for_mapping(paper_mapping: Mapping[str, Mapping[str, obj
     }
 
 
-def daily_sort_key(paper_entry: Mapping[str, object]) -> tuple[int, int]:
+def daily_sort_key(paper_entry: Mapping[str, object]) -> tuple[float, int, int]:
+    # READ_SCORE orders the day; SCORE is the fallback for archived entries
+    # written before that field existed, so old days keep their original order.
+    read_score = paper_entry.get("READ_SCORE")
+    if read_score is None:
+        read_score = paper_entry.get("SCORE", 0)
     return (
-        int(paper_entry.get("SCORE", 0)),
-        int(paper_entry.get("RELEVANCE", 0)),
+        float(read_score or 0),
+        int(paper_entry.get("SCORE", 0) or 0),
+        int(paper_entry.get("RELEVANCE", 0) or 0),
     )
 
 

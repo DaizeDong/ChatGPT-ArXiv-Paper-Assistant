@@ -1,6 +1,20 @@
 ## Scoring Criteria
 
-Relevance and Novelty are independent axes. Score both from 1 to 10.
+Score five independent axes from 1 to 10: Relevance, Novelty, Evidence, Load, Proximity.
+
+They answer different questions and must not be collapsed. Relevance: is this the kind of work
+this feed is for. Evidence: did the paper earn its claim. Load: what does it cost to get the
+usable result out. Proximity: how close is it to what the reader is working on right now (see
+Active Lines below).
+
+Novelty is scored for continuity with the archive and for the hotspot spotlight cutoffs, and it
+does NOT order the feed. Measured against 274 hand-tiered papers it carried no signal at all:
+papers scoring 8 or more were his must-reads exactly as often as papers scoring 5 or less, both
+at the pool's base rate. Every abstract claims novelty, so the axis measures the claiming rather
+than the work. Score it honestly and do not let it influence the other four.
+
+A strong claim with thin evidence is a worse read than a modest claim that holds. Score each axis
+on its own; do not let a high one pull up a low one.
 
 ### Relevance Scoring
 
@@ -16,20 +30,29 @@ Daily buzz, a frontier lab's name, or a large headline number is not enough for 
 score. A model release scores high only when the report explains an architecture or training
 decision; a release that only reports results is hotspot material, not this feed.
 
-Work whose contribution is "the same model, but faster" -- kernels, communication schedules,
+Work whose contribution is "the same model, faster" -- kernels, communication schedules,
 overlap, caching, serving -- caps at Relevance 5 even when it is excellent and even when it is
 about MoE. Making a known design run faster is a different job from changing the design.
 
+That cap is about SPEED, not about size. Compression that is lossless, or that changes what can
+be trained or held in memory at all rather than how quickly it runs, is not capped: it changes
+what is possible, which is the thing this feed is for.
+
+Analysis of how a trained model's computation is actually organised -- what a circuit computes,
+what drives expert selection, how representations reorganise over training -- IS in scope and
+scores like any other work on mechanism. Only interpretability that stops at describing features,
+with nothing said about the mechanism that produced them, drops out of the feed.
+
 ### Novelty Scoring
 
-Novelty here means a change to the design space, not a change to a number. Score against this
-ladder, in order:
+Novelty means a change to the design space, not a change to a number. Score against this ladder:
 
 - 9-10: removes or replaces a component the whole field inherits without thinking (normalization,
   weight decay, the tokenizer, positional encoding, left-to-right decoding, the standard
   optimizer, a numerical format), or decouples two quantities everyone conflates -- AND states
   which end is held fixed while the other moves. The claim is unconditional: it does not require
-  a particular scale, budget regime, or extra stage.
+  a particular scale, budget regime, or extra stage. An ANALYSIS paper reaches this band when it
+  settles a mechanism-level question with a criterion that could have come out the other way.
 - 7-8: a substantial new mechanism, or a decoupling whose gain is real but CONDITIONAL (holds
   above some batch size, in one budget band, or with an added training phase). A conditional win
   is a new knob, not a removed one, and belongs here rather than above.
@@ -39,19 +62,67 @@ ladder, in order:
   however thorough.
 - 1-2: little originality; mainly standard application of existing methods.
 
-Apply these adjustments after placing the paper on the ladder:
+Score the claim as the paper states it here. Whether the paper supports that claim is Evidence,
+and it is scored separately -- do not discount Novelty for weak experiments, and do not raise it
+because the framing is confident. Phrases like "we remove", "without X", "holding Y fixed" are
+what the paper SAYS; they earn a high Novelty only if the thing named really is a component the
+field inherits by default, not a component this paper introduced two sentences earlier.
 
-- Subtract 1 to 2 when the method's cost grows in the number of components it adds (one loss per
-  pair of experts, one module per domain, one head per task) and the paper does not account for
-  that growth. Redundancy is a defect, not a detail.
-- Subtract 1 to 2 when the central claim rests only on similarity plots, heatmaps, or
-  visualisations -- evidence that could not have come out the other way. Add 1 when the paper
-  carries a criterion that could have failed: a random-guess or shuffled baseline, an ablation
-  with a predicted sign, a bound that is checked rather than asserted.
-- Subtract 1 when a mechanism is claimed but no code is released and the described procedure is
-  not reproducible from the paper alone.
-- Add 1 when the paper states its own limitation precisely enough that a reader could design the
-  experiment that breaks it. Vague "future work" does not count.
-- Theory scores on this same ladder. A proof that yields a component someone could build with
-  scores as a mechanism; a proof that only characterises an existing method caps at 6, however
-  deep.
+### Evidence Scoring
+
+Does the demonstration reach as far as the claim?
+
+- 9-10: shown at the scale and breadth the claim asserts -- language-model pretraining at
+  billion-parameter or hundred-billion-token scale, or across several model families, sizes, or
+  domains -- with ablations that isolate the named mechanism and could have failed.
+- 7-8: one credible setting that matches the claim's stated scope, with the baselines a skeptic
+  would ask for.
+- 5-6: a single small setting, or a claim stated more broadly than the demonstration reaches.
+- 3-4: the claim is about transformers or language models in general, but the demonstration lives
+  in one narrow domain or one small benchmark -- image classification alone, a single toy task,
+  one dataset; or the comparisons a reader needs in order to believe it are missing.
+- 1-2: the central claim is asserted, illustrated, or supported only by plots that could not have
+  come out the other way.
+
+A structural claim demonstrated only outside the setting it claims is capped at 4, however
+striking the claim. "We removed a component everyone uses" shown only on small vision models is a
+result about small vision models.
+
+When the abstract names no scale, no dataset, and no baseline at all, score exactly 5. Do not
+infer rigor from confident writing. Unstated is not the same as strong, and two thirds of
+abstracts say nothing here: guessing on those was measured to make this axis worse.
+
+Adjustments: subtract 1 when no code is released and the procedure is not reproducible from the
+paper alone; subtract 1 when the method's cost grows in the number of components it adds (one
+loss per pair of experts, one module per domain) and the paper does not account for that growth;
+add 1 when the paper states its own limitation precisely enough that a reader could design the
+experiment that breaks it.
+
+### Load Scoring
+
+What does it cost to get the usable result out? This is about the reader's effort, not quality.
+
+- 9-10: the result cannot be taken without following the derivation -- a new theoretical
+  framework, unfamiliar mathematical machinery, or a proof that IS the contribution.
+- 7-8: substantial theory or an involved formalism, but the operational result is stated plainly
+  somewhere.
+- 4-6: ordinary methods paper; the recipe is legible from the paper's own description.
+- 1-3: the takeaway is a single decision or number a reader can act on immediately.
+
+A high Load is not a criticism. It only says the paper is a project rather than a read.
+
+### Proximity Scoring
+
+How close is this to the Active Lines stated below? This axis is about the reader, not the paper,
+and a paper can be excellent and distant at the same time.
+
+- 9-10: squarely on a centre line -- the paper's core contribution is the thing the reader is
+  working on, and a result here changes what they would do next.
+- 7-8: on a centre line but from a direction they are not working from, or on an adjacent line
+  where the result carries over directly.
+- 5-6: adjacent: same stack, different layer; they would want to know it happened.
+- 3-4: far: recognisable as the same field, but nothing here reaches their work.
+- 1-2: another area entirely.
+
+Judge distance from the reader's stated centre, NOT from whatever is currently prominent in the
+field. A paper everyone is discussing is not thereby close.

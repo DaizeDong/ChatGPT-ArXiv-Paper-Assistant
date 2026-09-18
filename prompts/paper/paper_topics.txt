@@ -8,6 +8,12 @@ contribution changes the design space, not when it tunes an existing MoE.
 Keep a paper when its CORE CONTRIBUTION falls in one of the five topics below. Filter it when the
 topic is merely the setting for a downstream application, a benchmark, or a product result.
 
+THE SUBJECT IS LANGUAGE-MODEL TRAINING. Every topic below is scoped to it. A technique named in
+one of them -- decentralised or asynchronous training, discrete diffusion, byte-level modelling,
+1-bit weights, mixture-of-experts -- earns nothing when the model being trained is an image
+generator, a recommender, a scientific surrogate, or a vision classifier. Match on what is being
+trained, not on the vocabulary in the abstract.
+
 THE ONE QUESTION THAT DECIDES A HIGH SCORE, asked before the topic list:
 
 > Does this paper REMOVE or REPLACE a component that everyone downstream inherits without
@@ -60,11 +66,14 @@ new: a conditional win is a new knob, not a removed one.
   when a new axis is opened rather than tuned; dense-to-MoE conversion; MoE scaling laws that fix
   one quantity and vary another; analyses that carry a criterion which could have failed (a
   random-guess baseline, an ablation with a predicted sign) rather than similarity heatmaps.
-- Filter: MoE systems and inference work (expert parallelism, all-to-all schedules, grouped GEMM,
-  offload, capacity and scheduling tricks); MoE surveys; papers that train on top of a MoE
-  without a routing, balancing, stability, or structural contribution; "mixture of experts" in
-  the classical ensemble or recommender sense. Routine MoE detail work is now explicitly OUT even
-  though it matches the keywords.
+- Filter: MoE SYSTEMS and inference work (expert parallelism, all-to-all schedules, grouped GEMM,
+  offload, prefetching, capacity and scheduling tricks, compression for serving); MoE surveys;
+  papers that train on top of a MoE without a routing, balancing, stability, or structural
+  contribution; "mixture of experts" in the classical ensemble or recommender sense.
+- The exclusion above is about MAKING MoE RUN FASTER, and it does not reach routing and expert
+  design. A paper on how tokens are assigned to experts, how experts specialise, how balance is
+  enforced, or how a dense model becomes sparse stays fully in scope and scores on its merits,
+  even when the mechanism is a small one.
 
 5. Efficiency and Compression When the Mechanism Is New
 - Keep: quantization, sparsity, pruning and low-rank work whose mechanism is new and whose gain
@@ -78,11 +87,44 @@ Also keep, even though they read like evaluation work, because the field has no 
   benchmark measures what it claims. A paper AUDITING a benchmark is in scope; a paper PROPOSING
   one is not.
 
+## Subjects He Has Never Once Kept
+
+Measured, not guessed. Over nine months where he was actively curating, 4953 papers passed this
+filter and 274 made his list -- a keep rate of 5.2%. Each subject below appeared in the rejected
+pile the number of times shown and appeared ZERO times in his entire 508-entry list.
+
+Filter a paper whose CORE SUBJECT is one of these. The count is the evidence; where a paper only
+mentions the term in passing while contributing somewhere in the five topics above, keep it.
+
+  variational methods and inference (52)   unlearning (41)
+  long-context methods (40)                neural operators (35)
+  time series (35)                         vision transformers (35)
+  parameter-efficient fine-tuning (28)     stochastic gradient analysis (21)
+  LLM safety (20)                          LLM reasoning as a subject (20)
+  hallucination (20)                       sequence modelling as a subject (19)
+  differential equations (19)              spiking neural networks (17)
+  post-training quantization (16)          mechanistic interpretability as a framing (15)
+  test-time scaling (13)
+
+Two more he kept exactly once each, so suppress rather than drop: graph neural networks (1 of 42),
+knowledge distillation (1 of 39).
+
+Do NOT extend this list by analogy. Four subjects that look like they belong here were checked and
+do not: diffusion models (8.1% kept), prompting (10.0%), benchmarks (9.1%) and neural architecture
+search (13.3%) all sit ABOVE his 5.2% base rate.
+
+Note the one distinction that matters: he rejects papers FRAMED as interpretability, while
+analysis of how a trained model's computation is organised is among his highest-rated work. The
+subject is the framing, not the act of analysing.
+
 Leave these to the hotspot digest unless the core contribution clearly falls in one of the five
 topics above:
 - agent, tooling, and RAG launches, and agent framework papers
 - new benchmarks, leaderboards, and evaluation-only papers
-- interpretability and feature-formation analysis that yields no component you could build with
+- interpretability that stops at cataloguing features, with nothing said about the mechanism that
+  produced them. Analysis of how a trained model's computation is organised -- what drives expert
+  selection, what a circuit computes, how representations reorganise across training -- is IN
+  scope, not here.
 - memory mechanisms and agent memory systems
 - world models, exploration, and reinforcement learning
 - alignment and post-training (RLHF, DPO, GRPO, RFT, instruction tuning), EXCEPT where the

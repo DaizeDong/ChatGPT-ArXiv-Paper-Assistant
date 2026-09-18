@@ -1,5 +1,7 @@
 <div style="display: flex; align-items: flex-start; justify-content: space-between; width: 100%;"><div style="width: 33.33%; text-align: left;"><a href="../12"><img src="../../../assets/nav/day/2025-12-15-prev.svg" alt="Previous Day 2025-12-12"></a></div><div style="width: 33.33%; text-align: center;"><a href=".."><img src="../../../assets/nav/day/2025-12-15-center.svg" alt="Monthly Overview 2025-12"></a></div><div style="width: 33.33%; text-align: right;"><a href="../16"><img src="../../../assets/nav/day/2025-12-15-next.svg" alt="Next Day 2025-12-16"></a></div></div>
 
+<div align="center" class="site-jump-links"><a href="../../../hot/2026-09-14">Daily AI Hotspots</a></div>
+
 # Personalized Daily ArXiv Papers 2025-12-15
 
 | *[gpt-5]*   | Prompt   | Completion   | Total   |

@@ -1,57 +1,205 @@
-<div style="display: flex; align-items: flex-start; justify-content: space-between; width: 100%;"><div style="width: 33.33%; text-align: left;"><a href="../2026-03-19"><img src="../../assets/nav/hot/day/2026-03-20-prev.svg" alt="Previous Hotspot Day 2026-03-19"></a></div><div style="width: 33.33%; text-align: center;"><a href="../2026-03"><img src="../../assets/nav/hot/day/2026-03-20-center.svg" alt="Monthly Hotspots 2026-03"></a></div><div style="width: 33.33%; text-align: right;"><a href="../2026-03-21"><img src="../../assets/nav/hot/day/2026-03-20-next.svg" alt="Next Hotspot Day 2026-03-21"></a></div></div>
+<div style="display: flex; align-items: flex-start; justify-content: space-between; width: 100%;"><div style="width: 33.33%; text-align: left;"><a href="../2026-03-18"><img src="../../assets/nav/hot/day/2026-03-20-prev.svg" alt="Previous Hotspot Day 2026-03-18"></a></div><div style="width: 33.33%; text-align: center;"><a href="../2026-03"><img src="../../assets/nav/hot/day/2026-03-20-center.svg" alt="Monthly Hotspots 2026-03"></a></div><div style="width: 33.33%; text-align: right;"><a href="../2026-03-21"><img src="../../assets/nav/hot/day/2026-03-20-next.svg" alt="Next Hotspot Day 2026-03-21"></a></div></div>
 
 <div align="center" class="site-jump-links"><a href="../../archive/2026-03/20">Personalized Daily Arxiv Paper</a></div>
 
 # Daily AI Hotspots 2026-03-20
 
-Today's AI discussion centered on OpenAI to acquire Astral, MiroThinker: Pushing the Performance Boundaries of Open-Source Research Agents via Model, Context, and Interactive Scaling, and MetaClaw: Just Talk -- An Agent That Meta-Learns and Evolves in the Wild.
+• [Product Release] AWS and Cerebras Collaboration Sets a New Standard for AI Inference Speed and Performance in the Cloud > — This product release surfaced across 1 independent source(s).
+• [Product Release] Why the AI Race Shifted to Speed — This product release surfaced across 1 independent source(s).
+• [Product Release] Zhipu AI and Intel deepen AI PC partnership — This product release surfaced across 1 independent source(s).
+• [Product Release] How we monitor internal coding agents for misalignment — This product release surfaced across 1 independent source(s).
+• [Market Signal] OpenAI to acquire Astral — This acquisition surfaced across 1 independent source(s).
+
+## Coverage Snapshot
+
+- Featured topics: 5
+- Category radar topics: 10
+- Long-tail signals: 8
+- Paper spotlight items: 6
+- Watchlist topics: 1
+- Active sources: 8/12
+- Raw items scanned: 58
+
+*Inactive sources: ainews, x_ainews_twitter, x_official, x_paperpulse*
 
 ## Source Stats
 
-- `ainews`: 16
-- `hf_papers`: 24
-- `local_papers`: 0
-- `official_blogs`: 2
-- `roundup_sites`: 28
+- `ainews`: 0 (inactive)
+- `analysis_feeds`: 6
+- `github_trend`: 15
+- `hf_papers`: 12
+- `hn_discussion`: 9
+- `local_papers`: 23
+- `official_blogs`: 62
+- `reddit`: 15
+- `roundup_sites`: 13
+- `x_ainews_twitter`: 0 (inactive)
+- `x_official`: 0 (inactive)
+- `x_paperpulse`: 0 (inactive)
 
-## Top Topics
+## Paper Spotlight
 
-### 1. OpenAI to acquire Astral
+### Daily Hot Papers (6)
 
-- Category: `Product Release`
-- Scores: `quality=4` `heat=2` `importance=5` `final=3.752`
-- Why it matters: This looks like a meaningful model or product release with credible supporting evidence.
+Papers that feel broadly important to the day and belong in the hotspot paper feed.
 
-Key takeaways:
-- This looks like a meaningful model or product release with credible supporting evidence.
+- [Generation Models Know Space: Unleashing Implicit 3D Priors for Scene Understanding](https://huggingface.co/papers/2603.19235)
+  - arXiv 2603.19235
+  - While Multimodal Large Language Models demonstrate impressive semantic capabilities, they often suffer from spatial blindness, struggling with fine-grained geometric reasoning and physical dynamics. Existing solutions typically rely on explicit 3D modalities or complex geometric scaffolding, whic...
+- [SAMA: Factorized Semantic Anchoring and Motion Alignment for Instruction-Guided Video Editing](https://huggingface.co/papers/2603.19228)
+  - arXiv 2603.19228
+  - Current instruction-guided video editing models struggle to simultaneously balance precise semantic modifications with faithful motion preservation. While existing approaches rely on injecting explicit external priors (e.g., VLM features or structural conditions) to mitigate these issues, this re...
+- [Nemotron-Cascade 2: Post-Training LLMs with Cascade RL and Multi-Domain On-Policy Distillation](https://huggingface.co/papers/2603.19220)
+  - arXiv 2603.19220
+  - We introduce Nemotron-Cascade 2, an open 30B MoE model with 3B activated parameters that delivers best-in-class reasoning and strong agentic capabilities. Despite its compact size, its mathematical and coding reasoning performance approaches that of frontier open models. It is the second open-wei...
+- [3DreamBooth: High-Fidelity 3D Subject-Driven Video Generation Model](https://huggingface.co/papers/2603.18524)
+  - arXiv 2603.18524
+  - Creating dynamic, view-consistent videos of customized subjects is highly sought after for a wide range of emerging applications, including immersive VR/AR, virtual production, and next-generation e-commerce. However, despite rapid progress in subject-driven video generation, existing methods pre...
+- [FASTER: Rethinking Real-Time Flow VLAs](https://huggingface.co/papers/2603.19199)
+  - arXiv 2603.19199
+  - Real-time execution is crucial for deploying Vision-Language-Action (VLA) models in the physical world. Existing asynchronous inference methods primarily optimize trajectory smoothness, but neglect the critical latency in reacting to environmental changes. By rethinking the notion of reaction in...
+- [Memento-Skills: Let Agents Design Agents](https://huggingface.co/papers/2603.18743)
+  - arXiv 2603.18743
+  - We introduce Memento-Skills, a generalist, continually-learnable LLM agent system that functions as an agent-designing agent: it autonomously constructs, adapts, and improves task-specific agents through experience. The system is built on a memory-based reinforcement learning framework with state...
 
-Evidence:
+
+## Featured Topics
+
+### 1. AWS and Cerebras Collaboration Sets a New Standard for AI Inference Speed and Performance in the Cloud >  [Official]
+
+- Category: Product Release
+- Sources: Cerebras Blog
+
+This product release surfaced across 1 independent source(s).
+
+**Sources:**
+- [AWS and Cerebras Collaboration Sets a New Standard for AI Inference Speed and Performance in the Cloud >](https://www.cerebras.ai/blog/openai-codexspark) (Cerebras Blog [Primary])
+
+### 2. Why the AI Race Shifted to Speed  [Official]
+
+- Category: Product Release
+- Sources: Cerebras Blog
+
+This product release surfaced across 1 independent source(s).
+
+**Sources:**
+- [Why the AI Race Shifted to Speed](https://www.cerebras.ai/blog/why-the-ai-race-shifted-to-speed) (Cerebras Blog [Primary])
+
+### 3. Zhipu AI and Intel deepen AI PC partnership  [Official]
+
+- Category: Product Release
+- Sources: Zhipu AI
+
+This product release surfaced across 1 independent source(s).
+
+**Key takeaways:**
+- Zhipu AI announced an expanded partnership with Intel to deploy on-device versions of Zhipu Qingyan and the CodeGeeX AI coding assistant for AI PCs, showcasing joint innovation based on an integrat...
+
+**Sources:**
+- [Zhipu AI and Intel deepen AI PC partnership](https://www.zhipuai.cn) (Zhipu AI [Primary])
+
+### 4. How we monitor internal coding agents for misalignment  [Official]
+
+- Category: Product Release
+- Sources: OpenAI News
+
+This product release surfaced across 1 independent source(s).
+
+**Key takeaways:**
+- How OpenAI uses chain-of-thought monitoring to study misalignment in internal coding agents—analyzing real-world deployments to detect risks and strengthen AI safety safeguards.
+
+**Sources:**
+- [How we monitor internal coding agents for misalignment](https://openai.com/index/how-we-monitor-internal-coding-agents-misalignment) (OpenAI News [Primary])
+
+### 5. OpenAI to acquire Astral  [Official]
+
+- Category: Market Signal
+- Sources: OpenAI News
+
+This acquisition surfaced across 1 independent source(s).
+
+**Key takeaways:**
+- Accelerates Codex growth to power the next generation of Python developer tools
+
+**Sources:**
+- [OpenAI to acquire Astral](https://openai.com/index/openai-to-acquire-astral) (OpenAI News [Primary])
+
+## Topic Radar By Category
+
+Broader same-day coverage beyond the featured list.
+
+### Industry Update (5 shown / 15 candidates) — Policy, partnerships, and ecosystem shifts
+
+- **GPT-5.4 Makes A Splash, AI’s Growth on Mobile, Data Centers Go Off-Grid, Apple’s Diffusion Research** [Analysis]
+  - GPT-5.4 Makes A Splash, AI’s Growth on Mobile, Data Centers Go Off-Grid, Apple’s Diffusion Research
+  - Evidence: [GPT-5.4 Makes A Splash, AI’s Growth on Mobile, Data Centers Go Off-Grid, Apple’s Diffusion Research](https://www.deeplearning.ai/the-batch/tag/mar-13-2026)
+- **Import AI 452: Scaling laws for cyberwar; rising tides of AI automation; and a puzzle over gDP forecasting** [Analysis]
+  - Import AI 452: Scaling laws for cyberwar; rising tides of AI automation; and a puzzle over gDP forecasting
+  - Evidence: [Import AI 452: Scaling laws for cyberwar; rising tides of AI automation; and a puzzle over gDP forecasting](https://jack-clark.net/2026/04/06/import-ai-452-scaling-laws-for-cyberwar-rising-tides-of-ai-automation-and-a-puzzle-over-gdp-forecasting)
+- **Mapping AI into Production: A Field Experiment on Firm Performance (SSRN)** [Analysis]
+  - Mapping AI into Production: A Field Experiment on Firm Performance (SSRN)
+  - Evidence: [Mapping AI into Production: A Field Experiment on Firm Performance (SSRN)](https://papers.ssrn.com/sol3/papers.cfm)
+- **更高权限的 AI Agent 需要怎样的 AI Infra？** [Analysis]
+  - 更高权限的 AI Agent 需要怎样的 AI Infra？
+  - Evidence: [更高权限的 AI Agent 需要怎样的 AI Infra？](https://pro.jiqizhixin.com/reference/e2d2143f-d160-4756-88b1-966801a41a4b)
+- **走出网页和 App 后，消费级 AI 应用的实力该如何衡量？** [Analysis]
+  - 走出网页和 App 后，消费级 AI 应用的实力该如何衡量？
+  - Evidence: [走出网页和 App 后，消费级 AI 应用的实力该如何衡量？](https://pro.jiqizhixin.com/reference/3cde4428-1102-4eaf-8860-cd9e65f6b1b7)
+
+### Research (5 shown / 34 candidates) — Fresh papers with frontier impact
+
+- **Nemotron-Cascade 2: Post-Training LLMs with Cascade RL and Multi-Domain On-Policy Distillation** [2 Sources] [Research]
+  - We introduce Nemotron-Cascade 2, an open 30B MoE model with 3B activated parameters that delivers best-in-class reasoning and strong agentic capabilities. De...
+  - Evidence: [Nemotron-Cascade 2: Post-Training LLMs with Cascade RL and Multi-Domain On-Policy Distillation](https://arxiv.org/abs/2603.19220)
+- **AIMER: Calibration-Free Task-Agnostic MoE Pruning** [Research]
+  - Mixture-of-Experts (MoE) language models increase parameter capacity without proportional per-token compute, but the deployment still requires storing all ex...
+  - Evidence: [AIMER: Calibration-Free Task-Agnostic MoE Pruning](https://arxiv.org/abs/2603.18492)
+- **An SO(3)-equivariant reciprocal-space neural potential for long-range interactions** [Research]
+  - Long-range electrostatic and polarization interactions play a central role in molecular and condensed-phase systems, yet remain fundamentally incompatible wi...
+  - Evidence: [An SO(3)-equivariant reciprocal-space neural potential for long-range interactions](https://arxiv.org/abs/2603.18389)
+- **AS2 -- Attention-Based Soft Answer Sets: An End-to-End Differentiable Neuro-Soft-Symbolic Reasoning Architecture** [Research]
+  - Neuro-symbolic artificial intelligence (AI) systems typically couple a neural perception module to a discrete symbolic solver through a non-differentiable bo...
+  - Evidence: [AS2 -- Attention-Based Soft Answer Sets: An End-to-End Differentiable Neuro-Soft-Symbolic Reasoning Architecture](https://arxiv.org/abs/2603.18436)
+- **Computational and Statistical Hardness of Calibration Distance** [Research]
+  - The distance from calibration, introduced by Błasiok, Gopalan, Hu, and Nakkiran (STOC 2023), has recently emerged as a central measure of miscalibration for...
+  - Evidence: [Computational and Statistical Hardness of Calibration Distance](https://arxiv.org/abs/2603.18391)
+
+## Long-tail Signals
+
+Lower-priority same-day candidates worth tracking.
+
+### Industry Update (8 shown / 10 candidates)
+
+- **A better method for identifying overconfident large language models** [Analysis]
+- **Generative AI improves a wireless vision system that sees through obstructions** [Analysis]
+- **What 81,000 people want from AI** (1 sources)
+- **2% of ICML papers desk rejected because the authors used LLM in their reviews** (1 sources)
+- **Show HN: Three new Kitten TTS models – smallest less than 25MB** (1 sources)
+- **Scaling Karpathy's Autoresearch: What Happens When the Agent Gets a GPU Cluster** (1 sources)
+- **A rogue AI led to a serious security incident at Meta** (1 sources)
+- **EsoLang-Bench: Evaluating Genuine Reasoning in LLMs via Esoteric Languages** (1 sources)
+
+## X Buzz
+
+Proxy social signal collected from roundup and community sources.
+
+- [AWS and Cerebras Collaboration Sets a New Standard for AI Inference Speed and Performance in the Cloud >](https://www.cerebras.ai/blog/openai-codexspark) (Cerebras Blog)
+  - Linked topic: AWS and Cerebras Collaboration Sets a New Standard for AI Inference Speed and Performance in the Cloud >
+  - AWS and Cerebras Collaboration Sets a New Standard for AI Inference Speed and Performance in the Cloud >
+- [Why the AI Race Shifted to Speed](https://www.cerebras.ai/blog/why-the-ai-race-shifted-to-speed) (Cerebras Blog)
+  - Linked topic: Why the AI Race Shifted to Speed
+  - March 20, 2026
+- [Zhipu AI and Intel deepen AI PC partnership](https://www.zhipuai.cn) (Zhipu AI)
+  - Linked topic: Zhipu AI and Intel deepen AI PC partnership
+  - Zhipu AI announced an expanded partnership with Intel to deploy on-device versions of Zhipu Qingyan and the CodeGeeX AI coding assistant for AI PCs, showcasing joint innovation based on an integrated cloud-edge model product lineup.
 - [OpenAI to acquire Astral](https://openai.com/index/openai-to-acquire-astral) (OpenAI News)
-
-### 2. MiroThinker: Pushing the Performance Boundaries of Open-Source Research Agents via Model, Context, and Interactive Scaling
-
-- Category: `Research`
-- Scores: `quality=6` `heat=3` `importance=5` `final=4.788`
-- Why it matters: This topic combines substantive research signal with visible attention across Hugging Face Trending Papers.
-
-Key takeaways:
-- This topic combines substantive research signal with visible attention across Hugging Face Trending Papers.
-
-Evidence:
-- [MiroThinker: Pushing the Performance Boundaries of Open-Source Research Agents via Model, Context, and Interactive Scaling](https://huggingface.co/papers/2511.11793) (Hugging Face Trending Papers)
-
-### 3. MetaClaw: Just Talk -- An Agent That Meta-Learns and Evolves in the Wild
-
-- Category: `Research`
-- Scores: `quality=6` `heat=3` `importance=5` `final=4.788`
-- Why it matters: This topic combines substantive research signal with visible attention across Hugging Face Trending Papers.
-
-Key takeaways:
-- This topic combines substantive research signal with visible attention across Hugging Face Trending Papers.
-
-Evidence:
-- [MetaClaw: Just Talk -- An Agent That Meta-Learns and Evolves in the Wild](https://huggingface.co/papers/2603.17187) (Hugging Face Trending Papers)
+  - Linked topic: OpenAI to acquire Astral
+  - Accelerates Codex growth to power the next generation of Python developer tools
+- [How we monitor internal coding agents for misalignment](https://openai.com/index/how-we-monitor-internal-coding-agents-misalignment) (OpenAI News)
+  - Linked topic: How we monitor internal coding agents for misalignment
+  - How OpenAI uses chain-of-thought monitoring to study misalignment in internal coding agents—analyzing real-world deployments to detect risks and strengthen AI safety safeguards.
 
 ## Watchlist
 
-- **Attention Residuals**: This topic combines substantive research signal with visible attention across Hugging Face Trending Papers.
+- **rohitg00/ai-engineering-from-scratch** [GitHub]
+  - Learn it. Build it. Ship it for others.

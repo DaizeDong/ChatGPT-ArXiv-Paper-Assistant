@@ -1,258 +1,286 @@
 {
-    "2604.00821": {
-        "ARXIVID": "2604.00821",
-        "COMMENT": "Derives a closed-form loss-aware low-rank decomposition via Kronecker-factored Hessian, yielding bi-directional whitening that uses both input and output information instead of activation whitening alone.",
-        "RELEVANCE": 8,
-        "NOVELTY": 7,
-        "PRIMARY_TOPIC_ID": "efficiency_scaling",
-        "MATCHED_TOPIC_IDS": [
-            "efficiency_scaling"
-        ],
-        "TOPIC_MATCH_COMMENT": "A new second-order mechanism for LLM low-rank compression, not a tuned variant of SVD baselines.",
-        "HOTSPOT_PAPER_TAGS": [],
-        "HOTSPOT_PAPER_COMMENT": "",
-        "SCORE": 15,
-        "authors": [
-            "Yuhang Li",
-            "Donghyun Lee",
-            "Ruokai Yin",
-            "Priyadarshini Panda"
-        ],
-        "title": "Optimal Brain Decomposition for Accurate LLM Low-Rank Approximation",
-        "abstract": "Low-rank decomposition has emerged as an important problem in Large Language Model (LLM) fine-tuning and inference. Through Singular Value Decomposition (SVD), the weight matrix can be factorized into low-rank spaces optimally. Previously, a common practice was to decompose the weight in the activation-whitened space, and then achieve satisfying results. In this work, we propose Optimal Brain Decomposition LLM (OBD-LLM), which studies the decomposition problem in the model space by utilizing second-order Hessian information. Through a rigorous Kronecker-factorization of the Hessian, we show that the decomposition needs to consider both input and output information of the layer, and achieves much better decomposition results compared to input only method. Our loss-aware decomposition method involves a bi-directional whitening on the weight matrix. As a result, OBD-LLM is a closed-form solution for the optimal decomposition of weights in the language model. Remarkably, we achieve ~20-40\\% better results than previous state-of-the-art decomposition methods, the SVD-LLM.",
-        "arxiv_id": "2604.00821",
-        "PRIMARY_TOPIC_LABEL": "Efficiency, Compression, and Large-Scale Training",
-        "MATCHED_TOPIC_LABELS": [
-            "Efficiency, Compression, and Large-Scale Training"
-        ],
-        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
-        "HOTSPOT_PAPER_LABELS": [],
-        "HOTSPOT_PAPER_PRIMARY_KIND": null,
-        "HOTSPOT_PAPER_PRIMARY_LABEL": "",
-        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
-    },
-    "2604.00754": {
-        "ARXIVID": "2604.00754",
-        "COMMENT": "Random permutation before sliding-window attention turns a fixed local window into a stochastic global one at the same O(nw) budget, with receptive field reaching full coverage in O(log_w n) layers; validated both in from-scratch pretraining and training-free on Qwen3-30B-A3B.",
-        "RELEVANCE": 8,
-        "NOVELTY": 7,
-        "PRIMARY_TOPIC_ID": "architecture_training",
-        "MATCHED_TOPIC_IDS": [
-            "architecture_training",
-            "efficiency_scaling"
-        ],
-        "TOPIC_MATCH_COMMENT": "A new sparse-attention routing primitive with an analysed receptive-field argument and direct compute-budget consequences.",
-        "HOTSPOT_PAPER_TAGS": [],
-        "HOTSPOT_PAPER_COMMENT": "",
-        "SCORE": 15,
-        "authors": [
-            "Zehao Jin",
-            "Yanan Sui"
-        ],
-        "title": "Stochastic Attention: Connectome-Inspired Randomized Routing for Expressive Linear-Time Attention",
-        "abstract": "The whole-brain connectome of a fruit fly comprises over 130K neurons connected with a probability of merely 0.02%, yet achieves an average shortest path of only 4.4 hops. Despite being highly structured at the circuit level, the network's long-range connections are broadly distributed across brain regions, functioning as stochastic shortcuts that enable efficient global communication. Inspired by this observation, we propose Stochastic Attention (SA), a drop-in enhancement for sliding-window attention (SWA) that applies a random permutation to the token sequence before windowed attention and restores the original order afterward. This transforms the fixed local window into a stochastic global one within the same $O(nw)$ per-layer budget. Through depth, independently sampled permutations yield exponentially growing receptive fields, achieving full sequence coverage in $O(\\log_w n)$ layers versus $O(n/w)$ for SWA. We validate SA in two settings: pre-training language models from scratch, where a gated SA + SWA combination achieves the best average zero-shot accuracy, and training-free inference on Qwen3-8B and Qwen3-30B-A3B, where SA consistently outperforms SWA and matches or exceeds Mixture of Block Attention at comparable compute budgets. These results suggest that connectome-inspired stochastic routing is a practical primitive for improving the expressivity of efficient attention, complementary to existing linear and sparse approaches.",
-        "arxiv_id": "2604.00754",
-        "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
-        "MATCHED_TOPIC_LABELS": [
-            "Architecture and Training Dynamics",
-            "Efficiency, Compression, and Large-Scale Training"
-        ],
-        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
-        "HOTSPOT_PAPER_LABELS": [],
-        "HOTSPOT_PAPER_PRIMARY_KIND": null,
-        "HOTSPOT_PAPER_PRIMARY_LABEL": "",
-        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
-    },
-    "2604.00733": {
-        "ARXIVID": "2604.00733",
-        "COMMENT": "Trains with permanently factorized W = U diag(s) V^T, never materializing the dense matrix, retracting U and V to the Stiefel manifold by QR after each step; up to 199x per-MLP-layer memory reduction and 46% lower GPU memory.",
-        "RELEVANCE": 8,
-        "NOVELTY": 6,
-        "PRIMARY_TOPIC_ID": "efficiency_scaling",
-        "MATCHED_TOPIC_IDS": [
-            "training_systems",
-            "efficiency_scaling"
-        ],
-        "TOPIC_MATCH_COMMENT": "Low-rank factorized pretraining that directly attacks the memory wall of a training run, though all ranks converge to the same loss floor and the headline hardware claim is a single-step demonstration.",
-        "HOTSPOT_PAPER_TAGS": [],
-        "HOTSPOT_PAPER_COMMENT": "",
-        "SCORE": 14,
-        "authors": [
-            "Bj\u00f6rn Roman Kohlberger"
-        ],
-        "title": "Spectral Compact Training: Pre-Training Large Language Models via Permanent Truncated SVD and Stiefel QR Retraction",
-        "abstract": "The memory wall remains the primary bottleneck for training large language models on consumer hardware. We introduce Spectral Compact Training (SCT), a method that replaces dense weight matrices with permanent truncated SVD factors W = U diag(s) V^T, where the full dense matrix is never materialized during training or inference. Gradients flow through the compact spectral factors via standard backpropagation, and U, V are retracted to the Stiefel manifold via QR decomposition after each optimizer step. SCT achieves up to 199x memory reduction per MLP layer at rank 32, enabling full training steps of 70B-parameter architectures on a Steam Deck handheld (7.2 GB peak memory vs. 1,245 GB for dense FP32 training with Adam). Rank-sweep experiments on SmolLM2-1.7B (ranks 32-256, 2000 steps, NVIDIA A100) show that all tested ranks converge to the same loss floor (~4.2-4.5), identifying the learning rate schedule -- not MLP rank -- as the primary bottleneck. Rank 128 emerges as the efficiency sweet spot at 11.7x MLP compression with the lowest perplexity. GPU memory drops 46% at rank 32 while training throughput doubles.",
-        "arxiv_id": "2604.00733",
-        "PRIMARY_TOPIC_LABEL": "Efficiency, Compression, and Large-Scale Training",
-        "MATCHED_TOPIC_LABELS": [
-            "Large-Scale Training Systems and Efficiency",
-            "Efficiency, Compression, and Large-Scale Training"
-        ],
-        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
-        "HOTSPOT_PAPER_LABELS": [],
-        "HOTSPOT_PAPER_PRIMARY_KIND": null,
-        "HOTSPOT_PAPER_PRIMARY_LABEL": "",
-        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
-    },
-    "2604.14191": {
-        "ARXIVID": "2604.14191",
-        "COMMENT": "Two-stage cross-architecture distillation with a kernel-trick linearized-attention intermediate that supplies a principled Mamba initialization, removing the need for hybrid attention blocks.",
-        "RELEVANCE": 7,
-        "NOVELTY": 6,
-        "PRIMARY_TOPIC_ID": "architecture_training",
-        "MATCHED_TOPIC_IDS": [
-            "architecture_training",
-            "efficiency_scaling"
-        ],
-        "TOPIC_MATCH_COMMENT": "The contribution is about how a state-space sequence mixer must be initialized to be trainable from an attention teacher.",
-        "HOTSPOT_PAPER_TAGS": [],
-        "HOTSPOT_PAPER_COMMENT": "",
-        "SCORE": 13,
-        "authors": [
-            "Abhinav Moudgil",
-            "Ningyuan Huang",
-            "Eeshan Gunesh Dhekane",
-            "Pau Rodr\u00edguez",
-            "Luca Zappella",
-            "Federico Danieli"
-        ],
-        "title": "Attention to Mamba: A Recipe for Cross-Architecture Distillation",
-        "abstract": "State Space Models (SSMs) such as Mamba have become a popular alternative to Transformer models, due to their reduced memory consumption and higher throughput at generation compared to their Attention-based counterparts. On the other hand, the community has built up a considerable body of knowledge on how to train Transformers, and many pretrained Transformer models are readily available. To facilitate the adoption of SSMs while leveraging existing pretrained Transformers, we aim to identify an effective recipe to distill an Attention-based model into a Mamba-like architecture. In prior work on cross-architecture distillation, however, it has been shown that a na\u00efve distillation procedure from Transformers to Mamba fails to preserve the original teacher performance, a limitation often overcome with hybrid solutions combining Attention and SSM blocks. The key argument from our work is that, by equipping Mamba with a principled initialization, we can recover an overall better recipe for cross-architectural distillation. To this end, we propose a principled two-stage approach: first, we distill knowledge from a traditional Transformer into a linearized version of Attention, using an adaptation of the kernel trick. Then, we distill the linearized version into an adapted Mamba model that does not use any Attention block. Overall, the distilled Mamba model is able to preserve the original Pythia-1B Transformer performance in downstream tasks, maintaining a perplexity of 14.11 close to the teacher's 13.86. To show the efficacy of our recipe, we conduct thorough ablations at 1B scale with 10B tokens varying sequence mixer architecture, scaling analysis on model sizes and total distillation tokens, and a sensitivity analysis on tokens allocation between stages.",
-        "arxiv_id": "2604.14191",
-        "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
-        "MATCHED_TOPIC_LABELS": [
-            "Architecture and Training Dynamics",
-            "Efficiency, Compression, and Large-Scale Training"
-        ],
-        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
-        "HOTSPOT_PAPER_LABELS": [],
-        "HOTSPOT_PAPER_PRIMARY_KIND": null,
-        "HOTSPOT_PAPER_PRIMARY_LABEL": "",
-        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
-    },
-    "2604.00529": {
-        "ARXIVID": "2604.00529",
-        "COMMENT": "Multi-format QAT plus a Slice-and-Scale conversion that derives lower MXINT/MXFP formats from one anchor checkpoint without retraining, giving runtime-selectable precision from a single trained model.",
-        "RELEVANCE": 7,
-        "NOVELTY": 6,
-        "PRIMARY_TOPIC_ID": "efficiency_scaling",
-        "MATCHED_TOPIC_IDS": [
-            "efficiency_scaling"
-        ],
-        "TOPIC_MATCH_COMMENT": "Quantization-aware training and a new format-conversion mechanism are core topic 4 compression work.",
-        "HOTSPOT_PAPER_TAGS": [],
-        "HOTSPOT_PAPER_COMMENT": "",
-        "SCORE": 13,
-        "authors": [
-            "Zifei Xu",
-            "Sayeh Sharify",
-            "Hesham Mostafa"
-        ],
-        "title": "MF-QAT: Multi-Format Quantization-Aware Training for Elastic Inference",
-        "abstract": "Quantization-aware training (QAT) is typically performed for a single target numeric format, while practical deployments often need to choose numerical precision at inference time based on hardware support or runtime constraints. We study multi-format QAT, where a single model is trained to be robust across multiple quantization formats. We find that multi-format QAT can match single-format QAT at each target precision, yielding one model that performs well overall across different formats, even formats that were not seen during training. To enable practical deployment, we propose the Slice-and-Scale conversion procedure for both MXINT and MXFP that converts a high-precision representation into lower-precision formats without re-training. Building on this, we introduce a pipeline that (i) trains a model with multi-format QAT, (ii) stores a single anchor format checkpoint (MXINT8/MXFP8), and (iii) allows on-the-fly conversion to lower MXINT or MXFP formats at runtime with negligible-or no-additional accuracy degradation. Together, these components provide a practical path to elastic precision scaling and allow selecting the runtime format at inference time across diverse deployment targets.",
-        "arxiv_id": "2604.00529",
-        "PRIMARY_TOPIC_LABEL": "Efficiency, Compression, and Large-Scale Training",
-        "MATCHED_TOPIC_LABELS": [
-            "Efficiency, Compression, and Large-Scale Training"
-        ],
-        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
-        "HOTSPOT_PAPER_LABELS": [],
-        "HOTSPOT_PAPER_PRIMARY_KIND": null,
-        "HOTSPOT_PAPER_PRIMARY_LABEL": "",
-        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
-    },
-    "2604.00726": {
-        "ARXIVID": "2604.00726",
-        "COMMENT": "Injects faults at the GPU matmul instruction level to characterize which bit positions and execution stages cause loss spikes, gradient-norm spikes, and persistent divergence, then detects and recomputes the corrupted step.",
-        "RELEVANCE": 7,
-        "NOVELTY": 6,
-        "PRIMARY_TOPIC_ID": "training_systems",
-        "MATCHED_TOPIC_IDS": [
-            "training_systems"
-        ],
-        "TOPIC_MATCH_COMMENT": "Silent data corruption is a reliability failure mode specific to long large-scale pretraining runs, and the detection rule affects whether such a run converges.",
-        "HOTSPOT_PAPER_TAGS": [],
-        "HOTSPOT_PAPER_COMMENT": "",
-        "SCORE": 13,
-        "authors": [
-            "Anton Altenbernd",
-            "Philipp Wiesner",
-            "Odej Kao"
-        ],
-        "title": "Exploring Silent Data Corruption as a Reliability Challenge in LLM Training",
-        "abstract": "As Large Language Models (LLMs) scale in size and complexity, the consequences of failures during training become increasingly severe. A major challenge arises from Silent Data Corruption (SDC): hardware-induced faults that bypass system-level detection mechanisms. SDC may behave like benign numerical noise, but can also cause harmful gradient corruption that leads to loss spikes, divergence, or stalled progress. This work provides a controlled study of how intermittent SDC affects LLM pretraining. Using targeted fault injection at the level of GPU matrix-multiply instructions, we characterize the sensitivity of different bit positions, kernel functions, and execution stages. Our analysis shows that locally originating faults can produce impactful corruption, including NaN propagation, short-lived spikes in loss, gradient norm, and attention logits, as well as persistent parameter divergence. Building on the observed corruption signatures, we propose a lightweight detection method that identifies potentially harmful parameter updates. Experiments on LLaMA models with 60M, 350M, and 1.3B parameters demonstrate that recomputing the most recent training step upon detection can effectively mitigate the impact of these events.",
-        "arxiv_id": "2604.00726",
-        "PRIMARY_TOPIC_LABEL": "Large-Scale Training Systems and Efficiency",
-        "MATCHED_TOPIC_LABELS": [
-            "Large-Scale Training Systems and Efficiency"
-        ],
-        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
-        "HOTSPOT_PAPER_LABELS": [],
-        "HOTSPOT_PAPER_PRIMARY_KIND": null,
-        "HOTSPOT_PAPER_PRIMARY_LABEL": "",
-        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
-    },
-    "2604.01279": {
-        "ARXIVID": "2604.01279",
-        "COMMENT": "New optimizer that minimizes per-sample residuals via a truncated-SVD pseudoinverse of the loss Jacobian, giving natural-gradient behavior at O(k) rather than O(params^2) overhead.",
-        "RELEVANCE": 6,
-        "NOVELTY": 7,
-        "PRIMARY_TOPIC_ID": "training_systems",
-        "MATCHED_TOPIC_IDS": [
-            "training_systems"
-        ],
-        "TOPIC_MATCH_COMMENT": "Optimizer and preconditioner design is squarely topic 2, though validation is on small regression tasks rather than large-scale pretraining.",
-        "HOTSPOT_PAPER_TAGS": [],
-        "HOTSPOT_PAPER_COMMENT": "",
-        "SCORE": 13,
-        "authors": [
-            "Samuel Bright-Thonney",
-            "Thomas R. Harvey",
-            "Andre Lukas",
-            "Jesse Thaler"
-        ],
-        "title": "Sven: Singular Value Descent as a Computationally Efficient Natural Gradient Method",
-        "abstract": "We introduce Sven (Singular Value dEsceNt), a new optimization algorithm for neural networks that exploits the natural decomposition of loss functions into a sum over individual data points, rather than reducing the full loss to a single scalar before computing a parameter update. Sven treats each data point's residual as a separate condition to be satisfied simultaneously, using the Moore-Penrose pseudoinverse of the loss Jacobian to find the minimum-norm parameter update that best satisfies all conditions at once. In practice, this pseudoinverse is approximated via a truncated singular value decomposition, retaining only the $k$ most significant directions and incurring a computational overhead of only a factor of $k$ relative to stochastic gradient descent. This is in comparison to traditional natural gradient methods, which scale as the square of the number of parameters. We show that Sven can be understood as a natural gradient method generalized to the over-parametrized regime, recovering natural gradient descent in the under-parametrized limit. On regression tasks, Sven significantly outperforms standard first-order methods including Adam, converging faster and to a lower final loss, while remaining competitive with LBFGS at a fraction of the wall-time cost. We discuss the primary challenge to scaling, namely memory overhead, and propose mitigation strategies. Beyond standard machine learning benchmarks, we anticipate that Sven will find natural application in scientific computing settings where custom loss functions decompose into several conditions.",
-        "arxiv_id": "2604.01279",
-        "PRIMARY_TOPIC_LABEL": "Large-Scale Training Systems and Efficiency",
-        "MATCHED_TOPIC_LABELS": [
-            "Large-Scale Training Systems and Efficiency"
-        ],
-        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
-        "HOTSPOT_PAPER_LABELS": [],
-        "HOTSPOT_PAPER_PRIMARY_KIND": null,
-        "HOTSPOT_PAPER_PRIMARY_LABEL": "",
-        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
-    },
-    "2604.01168": {
-        "ARXIVID": "2604.01168",
-        "COMMENT": "Tunes a per-layer initial recurrent state as a zero-inference-overhead PEFT surface for Mamba/GatedDeltaNet hybrids; the adaptation surface itself is a new mechanism tied to recurrent state design.",
-        "RELEVANCE": 6,
-        "NOVELTY": 6,
-        "PRIMARY_TOPIC_ID": "efficiency_scaling",
-        "MATCHED_TOPIC_IDS": [
-            "architecture_training",
-            "efficiency_scaling"
-        ],
-        "TOPIC_MATCH_COMMENT": "A parameter-efficient adaptation mechanism with zero added inference cost, exploiting the recurrent state of hybrid architectures.",
-        "HOTSPOT_PAPER_TAGS": [],
-        "HOTSPOT_PAPER_COMMENT": "",
-        "SCORE": 12,
-        "authors": [
-            "Jack Young"
-        ],
-        "title": "S0 Tuning: Zero-Overhead Adaptation of Hybrid Recurrent-Attention Models",
-        "abstract": "Using roughly 48 execution-verified HumanEval training solutions, tuning a single initial state matrix per recurrent layer, with zero inference overhead, outperforms LoRA by +10.8 pp (p < 0.001) on HumanEval. The method, which we call S0 tuning, optimizes one state matrix per recurrent layer while freezing all model weights. On Qwen3.5-4B (GatedDeltaNet hybrid), S0 tuning improves greedy pass@1 by +23.6 +/- 1.7 pp (10 seeds). On FalconH1-7B (Mamba-2 hybrid), S0 reaches 71.8% +/- 1.3 and LoRA reaches 71.4% +/- 2.4 (3 seeds), statistically indistinguishable at this sample size while requiring no weight merging. Cross-domain transfer is significant on MATH-500 (+4.8 pp, p = 0.00002, 8 seeds) and GSM8K (+2.8 pp, p = 0.0003, 10 seeds); a text-to-SQL benchmark (Spider) shows no transfer, consistent with the trajectory-steering mechanism. A prefix-tuning control on a pure Transformer (Qwen2.5-3B) degrades performance by -13.9 pp under all nine configurations tested. On Qwen3.5, a per-step state-offset variant reaches +27.1 pp, above both S0 and LoRA but with per-step inference cost. Taken together, the results show that recurrent state initialization is a strong zero-inference-overhead PEFT surface for hybrid language models when verified supervision is scarce. The tuned state is a ~48 MB file; task switching requires no weight merging or model reload. Code and library: https://github.com/jackyoung27/s0-tuning.",
-        "arxiv_id": "2604.01168",
-        "PRIMARY_TOPIC_LABEL": "Efficiency, Compression, and Large-Scale Training",
-        "MATCHED_TOPIC_LABELS": [
-            "Architecture and Training Dynamics",
-            "Efficiency, Compression, and Large-Scale Training"
-        ],
-        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
-        "HOTSPOT_PAPER_LABELS": [],
-        "HOTSPOT_PAPER_PRIMARY_KIND": null,
-        "HOTSPOT_PAPER_PRIMARY_LABEL": "",
-        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
-    }
+  "2604.00821": {
+    "ARXIVID": "2604.00821",
+    "COMMENT": "Derives loss-aware low-rank factors using both input and output information through bidirectional whitening.",
+    "RELEVANCE": 6,
+    "NOVELTY": 6,
+    "PRIMARY_TOPIC_ID": "efficiency_scaling",
+    "MATCHED_TOPIC_IDS": [
+      "efficiency_scaling"
+    ],
+    "TOPIC_MATCH_COMMENT": "Closest to low-rank compression; it extends whitening-based decomposition without establishing an unconditional gain or a new training capability.",
+    "HOTSPOT_PAPER_TAGS": [],
+    "HOTSPOT_PAPER_COMMENT": "",
+    "SCORE": 12,
+    "authors": [
+      "Yuhang Li",
+      "Donghyun Lee",
+      "Ruokai Yin",
+      "Priyadarshini Panda"
+    ],
+    "title": "Optimal Brain Decomposition for Accurate LLM Low-Rank Approximation",
+    "abstract": "Low-rank decomposition has emerged as an important problem in Large Language Model (LLM) fine-tuning and inference. Through Singular Value Decomposition (SVD), the weight matrix can be factorized into low-rank spaces optimally. Previously, a common practice was to decompose the weight in the activation-whitened space, and then achieve satisfying results. In this work, we propose Optimal Brain Decomposition LLM (OBD-LLM), which studies the decomposition problem in the model space by utilizing second-order Hessian information. Through a rigorous Kronecker-factorization of the Hessian, we show that the decomposition needs to consider both input and output information of the layer, and achieves much better decomposition results compared to input only method. Our loss-aware decomposition method involves a bi-directional whitening on the weight matrix. As a result, OBD-LLM is a closed-form solution for the optimal decomposition of weights in the language model. Remarkably, we achieve ~20-40\\% better results than previous state-of-the-art decomposition methods, the SVD-LLM.",
+    "arxiv_id": "2604.00821",
+    "PRIMARY_TOPIC_LABEL": "Efficiency, Compression, and Large-Scale Training",
+    "MATCHED_TOPIC_LABELS": [
+      "Efficiency, Compression, and Large-Scale Training"
+    ],
+    "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+    "HOTSPOT_PAPER_LABELS": [],
+    "HOTSPOT_PAPER_PRIMARY_KIND": null,
+    "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+    "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default",
+    "EVIDENCE": 5,
+    "LOAD": 7,
+    "PROXIMITY": 5,
+    "READ_SCORE": 12.5
+  },
+  "2604.00754": {
+    "ARXIVID": "2604.00754",
+    "COMMENT": "Changes attention connectivity through random permutations while holding the per-layer sliding-window compute budget fixed.",
+    "RELEVANCE": 9,
+    "NOVELTY": 7,
+    "PRIMARY_TOPIC_ID": "architecture_training",
+    "MATCHED_TOPIC_IDS": [
+      "architecture_training"
+    ],
+    "TOPIC_MATCH_COMMENT": "The contribution changes attention's receptive-field growth at fixed window cost and includes language-model pretraining experiments.",
+    "HOTSPOT_PAPER_TAGS": [],
+    "HOTSPOT_PAPER_COMMENT": "",
+    "SCORE": 16,
+    "authors": [
+      "Zehao Jin",
+      "Yanan Sui"
+    ],
+    "title": "Stochastic Attention: Connectome-Inspired Randomized Routing for Expressive Linear-Time Attention",
+    "abstract": "The whole-brain connectome of a fruit fly comprises over 130K neurons connected with a probability of merely 0.02%, yet achieves an average shortest path of only 4.4 hops. Despite being highly structured at the circuit level, the network's long-range connections are broadly distributed across brain regions, functioning as stochastic shortcuts that enable efficient global communication. Inspired by this observation, we propose Stochastic Attention (SA), a drop-in enhancement for sliding-window attention (SWA) that applies a random permutation to the token sequence before windowed attention and restores the original order afterward. This transforms the fixed local window into a stochastic global one within the same $O(nw)$ per-layer budget. Through depth, independently sampled permutations yield exponentially growing receptive fields, achieving full sequence coverage in $O(\\log_w n)$ layers versus $O(n/w)$ for SWA. We validate SA in two settings: pre-training language models from scratch, where a gated SA + SWA combination achieves the best average zero-shot accuracy, and training-free inference on Qwen3-8B and Qwen3-30B-A3B, where SA consistently outperforms SWA and matches or exceeds Mixture of Block Attention at comparable compute budgets. These results suggest that connectome-inspired stochastic routing is a practical primitive for improving the expressivity of efficient attention, complementary to existing linear and sparse approaches.",
+    "arxiv_id": "2604.00754",
+    "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+    "MATCHED_TOPIC_LABELS": [
+      "Architecture and Training Dynamics"
+    ],
+    "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+    "HOTSPOT_PAPER_LABELS": [],
+    "HOTSPOT_PAPER_PRIMARY_KIND": null,
+    "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+    "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default",
+    "EVIDENCE": 7,
+    "LOAD": 5,
+    "PROXIMITY": 9,
+    "READ_SCORE": 22.5
+  },
+  "2604.00733": {
+    "ARXIVID": "2604.00733",
+    "COMMENT": "Keeps weights permanently factorized so dense MLP matrices never need to be materialized during training.",
+    "RELEVANCE": 9,
+    "NOVELTY": 7,
+    "PRIMARY_TOPIC_ID": "efficiency_scaling",
+    "MATCHED_TOPIC_IDS": [
+      "architecture_training",
+      "efficiency_scaling"
+    ],
+    "TOPIC_MATCH_COMMENT": "Permanent low-rank parameterization changes training memory requirements; short runs and isolated training steps leave capacity and convergence claims unresolved.",
+    "HOTSPOT_PAPER_TAGS": [],
+    "HOTSPOT_PAPER_COMMENT": "",
+    "SCORE": 16,
+    "authors": [
+      "Björn Roman Kohlberger"
+    ],
+    "title": "Spectral Compact Training: Pre-Training Large Language Models via Permanent Truncated SVD and Stiefel QR Retraction",
+    "abstract": "The memory wall remains the primary bottleneck for training large language models on consumer hardware. We introduce Spectral Compact Training (SCT), a method that replaces dense weight matrices with permanent truncated SVD factors W = U diag(s) V^T, where the full dense matrix is never materialized during training or inference. Gradients flow through the compact spectral factors via standard backpropagation, and U, V are retracted to the Stiefel manifold via QR decomposition after each optimizer step. SCT achieves up to 199x memory reduction per MLP layer at rank 32, enabling full training steps of 70B-parameter architectures on a Steam Deck handheld (7.2 GB peak memory vs. 1,245 GB for dense FP32 training with Adam). Rank-sweep experiments on SmolLM2-1.7B (ranks 32-256, 2000 steps, NVIDIA A100) show that all tested ranks converge to the same loss floor (~4.2-4.5), identifying the learning rate schedule -- not MLP rank -- as the primary bottleneck. Rank 128 emerges as the efficiency sweet spot at 11.7x MLP compression with the lowest perplexity. GPU memory drops 46% at rank 32 while training throughput doubles.",
+    "arxiv_id": "2604.00733",
+    "PRIMARY_TOPIC_LABEL": "Efficiency, Compression, and Large-Scale Training",
+    "MATCHED_TOPIC_LABELS": [
+      "Architecture and Training Dynamics",
+      "Efficiency, Compression, and Large-Scale Training"
+    ],
+    "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+    "HOTSPOT_PAPER_LABELS": [],
+    "HOTSPOT_PAPER_PRIMARY_KIND": null,
+    "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+    "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default",
+    "EVIDENCE": 4,
+    "LOAD": 6,
+    "PROXIMITY": 8,
+    "READ_SCORE": 18.0
+  },
+  "2604.14191": {
+    "ARXIVID": "2604.14191",
+    "COMMENT": "Principled initialization enables complete replacement of attention blocks during Transformer-to-Mamba distillation.",
+    "RELEVANCE": 8,
+    "NOVELTY": 8,
+    "PRIMARY_TOPIC_ID": "architecture_training",
+    "MATCHED_TOPIC_IDS": [
+      "architecture_training"
+    ],
+    "TOPIC_MATCH_COMMENT": "Attention-free architectural conversion is supported by initialization and mixer ablations at 1B scale; the recipe requires two distillation stages.",
+    "HOTSPOT_PAPER_TAGS": [],
+    "HOTSPOT_PAPER_COMMENT": "",
+    "SCORE": 16,
+    "authors": [
+      "Abhinav Moudgil",
+      "Ningyuan Huang",
+      "Eeshan Gunesh Dhekane",
+      "Pau Rodríguez",
+      "Luca Zappella",
+      "Federico Danieli"
+    ],
+    "title": "Attention to Mamba: A Recipe for Cross-Architecture Distillation",
+    "abstract": "State Space Models (SSMs) such as Mamba have become a popular alternative to Transformer models, due to their reduced memory consumption and higher throughput at generation compared to their Attention-based counterparts. On the other hand, the community has built up a considerable body of knowledge on how to train Transformers, and many pretrained Transformer models are readily available. To facilitate the adoption of SSMs while leveraging existing pretrained Transformers, we aim to identify an effective recipe to distill an Attention-based model into a Mamba-like architecture. In prior work on cross-architecture distillation, however, it has been shown that a naïve distillation procedure from Transformers to Mamba fails to preserve the original teacher performance, a limitation often overcome with hybrid solutions combining Attention and SSM blocks. The key argument from our work is that, by equipping Mamba with a principled initialization, we can recover an overall better recipe for cross-architectural distillation. To this end, we propose a principled two-stage approach: first, we distill knowledge from a traditional Transformer into a linearized version of Attention, using an adaptation of the kernel trick. Then, we distill the linearized version into an adapted Mamba model that does not use any Attention block. Overall, the distilled Mamba model is able to preserve the original Pythia-1B Transformer performance in downstream tasks, maintaining a perplexity of 14.11 close to the teacher's 13.86. To show the efficacy of our recipe, we conduct thorough ablations at 1B scale with 10B tokens varying sequence mixer architecture, scaling analysis on model sizes and total distillation tokens, and a sensitivity analysis on tokens allocation between stages.",
+    "arxiv_id": "2604.14191",
+    "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+    "MATCHED_TOPIC_LABELS": [
+      "Architecture and Training Dynamics"
+    ],
+    "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+    "HOTSPOT_PAPER_LABELS": [],
+    "HOTSPOT_PAPER_PRIMARY_KIND": null,
+    "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+    "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default",
+    "EVIDENCE": 9,
+    "LOAD": 6,
+    "PROXIMITY": 7,
+    "READ_SCORE": 21.0
+  },
+  "2604.00529": {
+    "ARXIVID": "2604.00529",
+    "COMMENT": "Decouples a fixed trained checkpoint from its deployment precision, including formats absent from training.",
+    "RELEVANCE": 5,
+    "NOVELTY": 9,
+    "PRIMARY_TOPIC_ID": "efficiency_scaling",
+    "MATCHED_TOPIC_IDS": [
+      "efficiency_scaling"
+    ],
+    "TOPIC_MATCH_COMMENT": "Closest to quantization-aware compression, but the abstract does not identify language-model experiments or establish pretraining-stability benefits.",
+    "HOTSPOT_PAPER_TAGS": [],
+    "HOTSPOT_PAPER_COMMENT": "",
+    "SCORE": 14,
+    "authors": [
+      "Zifei Xu",
+      "Sayeh Sharify",
+      "Hesham Mostafa"
+    ],
+    "title": "MF-QAT: Multi-Format Quantization-Aware Training for Elastic Inference",
+    "abstract": "Quantization-aware training (QAT) is typically performed for a single target numeric format, while practical deployments often need to choose numerical precision at inference time based on hardware support or runtime constraints. We study multi-format QAT, where a single model is trained to be robust across multiple quantization formats. We find that multi-format QAT can match single-format QAT at each target precision, yielding one model that performs well overall across different formats, even formats that were not seen during training. To enable practical deployment, we propose the Slice-and-Scale conversion procedure for both MXINT and MXFP that converts a high-precision representation into lower-precision formats without re-training. Building on this, we introduce a pipeline that (i) trains a model with multi-format QAT, (ii) stores a single anchor format checkpoint (MXINT8/MXFP8), and (iii) allows on-the-fly conversion to lower MXINT or MXFP formats at runtime with negligible-or no-additional accuracy degradation. Together, these components provide a practical path to elastic precision scaling and allow selecting the runtime format at inference time across diverse deployment targets.",
+    "arxiv_id": "2604.00529",
+    "PRIMARY_TOPIC_LABEL": "Efficiency, Compression, and Large-Scale Training",
+    "MATCHED_TOPIC_LABELS": [
+      "Efficiency, Compression, and Large-Scale Training"
+    ],
+    "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+    "HOTSPOT_PAPER_LABELS": [],
+    "HOTSPOT_PAPER_PRIMARY_KIND": null,
+    "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+    "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default",
+    "EVIDENCE": 5,
+    "LOAD": 5,
+    "PROXIMITY": 5,
+    "READ_SCORE": 12.5
+  },
+  "2604.00726": {
+    "ARXIVID": "2604.00726",
+    "COMMENT": "Maps hardware bit faults to unstable pretraining updates and tests one-step recomputation as a recovery mechanism.",
+    "RELEVANCE": 8,
+    "NOVELTY": 7,
+    "PRIMARY_TOPIC_ID": "training_systems",
+    "MATCHED_TOPIC_IDS": [
+      "architecture_training",
+      "training_systems"
+    ],
+    "TOPIC_MATCH_COMMENT": "Controlled fault injection and recovery address numerical reliability in language-model pretraining, with direct analysis of training instability.",
+    "HOTSPOT_PAPER_TAGS": [],
+    "HOTSPOT_PAPER_COMMENT": "",
+    "SCORE": 15,
+    "authors": [
+      "Anton Altenbernd",
+      "Philipp Wiesner",
+      "Odej Kao"
+    ],
+    "title": "Exploring Silent Data Corruption as a Reliability Challenge in LLM Training",
+    "abstract": "As Large Language Models (LLMs) scale in size and complexity, the consequences of failures during training become increasingly severe. A major challenge arises from Silent Data Corruption (SDC): hardware-induced faults that bypass system-level detection mechanisms. SDC may behave like benign numerical noise, but can also cause harmful gradient corruption that leads to loss spikes, divergence, or stalled progress. This work provides a controlled study of how intermittent SDC affects LLM pretraining. Using targeted fault injection at the level of GPU matrix-multiply instructions, we characterize the sensitivity of different bit positions, kernel functions, and execution stages. Our analysis shows that locally originating faults can produce impactful corruption, including NaN propagation, short-lived spikes in loss, gradient norm, and attention logits, as well as persistent parameter divergence. Building on the observed corruption signatures, we propose a lightweight detection method that identifies potentially harmful parameter updates. Experiments on LLaMA models with 60M, 350M, and 1.3B parameters demonstrate that recomputing the most recent training step upon detection can effectively mitigate the impact of these events.",
+    "arxiv_id": "2604.00726",
+    "PRIMARY_TOPIC_LABEL": "Training Algorithms That Change What Is Possible",
+    "MATCHED_TOPIC_LABELS": [
+      "Architecture and Training Dynamics",
+      "Training Algorithms That Change What Is Possible"
+    ],
+    "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+    "HOTSPOT_PAPER_LABELS": [],
+    "HOTSPOT_PAPER_PRIMARY_KIND": null,
+    "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+    "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default",
+    "EVIDENCE": 8,
+    "LOAD": 4,
+    "PROXIMITY": 7,
+    "READ_SCORE": 21.0
+  },
+  "2604.01279": {
+    "ARXIVID": "2604.01279",
+    "COMMENT": "Computes updates from a truncated pseudoinverse of per-example loss conditions before scalar aggregation.",
+    "RELEVANCE": 2,
+    "NOVELTY": 7,
+    "PRIMARY_TOPIC_ID": "architecture_training",
+    "MATCHED_TOPIC_IDS": [
+      "architecture_training"
+    ],
+    "TOPIC_MATCH_COMMENT": "Closest to optimizer and preconditioner design; the demonstrations concern regression rather than language-model training.",
+    "HOTSPOT_PAPER_TAGS": [],
+    "HOTSPOT_PAPER_COMMENT": "",
+    "SCORE": 9,
+    "authors": [
+      "Samuel Bright-Thonney",
+      "Thomas R. Harvey",
+      "Andre Lukas",
+      "Jesse Thaler"
+    ],
+    "title": "Sven: Singular Value Descent as a Computationally Efficient Natural Gradient Method",
+    "abstract": "We introduce Sven (Singular Value dEsceNt), a new optimization algorithm for neural networks that exploits the natural decomposition of loss functions into a sum over individual data points, rather than reducing the full loss to a single scalar before computing a parameter update. Sven treats each data point's residual as a separate condition to be satisfied simultaneously, using the Moore-Penrose pseudoinverse of the loss Jacobian to find the minimum-norm parameter update that best satisfies all conditions at once. In practice, this pseudoinverse is approximated via a truncated singular value decomposition, retaining only the $k$ most significant directions and incurring a computational overhead of only a factor of $k$ relative to stochastic gradient descent. This is in comparison to traditional natural gradient methods, which scale as the square of the number of parameters. We show that Sven can be understood as a natural gradient method generalized to the over-parametrized regime, recovering natural gradient descent in the under-parametrized limit. On regression tasks, Sven significantly outperforms standard first-order methods including Adam, converging faster and to a lower final loss, while remaining competitive with LBFGS at a fraction of the wall-time cost. We discuss the primary challenge to scaling, namely memory overhead, and propose mitigation strategies. Beyond standard machine learning benchmarks, we anticipate that Sven will find natural application in scientific computing settings where custom loss functions decompose into several conditions.",
+    "arxiv_id": "2604.01279",
+    "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+    "MATCHED_TOPIC_LABELS": [
+      "Architecture and Training Dynamics"
+    ],
+    "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+    "HOTSPOT_PAPER_LABELS": [],
+    "HOTSPOT_PAPER_PRIMARY_KIND": null,
+    "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+    "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default",
+    "EVIDENCE": 5,
+    "LOAD": 8,
+    "PROXIMITY": 2,
+    "READ_SCORE": 5.0
+  },
+  "2604.01168": {
+    "ARXIVID": "2604.01168",
+    "COMMENT": "Exposes recurrent initial states as trainable adaptation parameters while freezing model weights.",
+    "RELEVANCE": 4,
+    "NOVELTY": 7,
+    "PRIMARY_TOPIC_ID": "architecture_training",
+    "MATCHED_TOPIC_IDS": [
+      "architecture_training"
+    ],
+    "TOPIC_MATCH_COMMENT": "Recurrent state initialization connects to architecture, but the core subject is parameter-efficient task adaptation under scarce supervision.",
+    "HOTSPOT_PAPER_TAGS": [],
+    "HOTSPOT_PAPER_COMMENT": "",
+    "SCORE": 11,
+    "authors": [
+      "Jack Young"
+    ],
+    "title": "S0 Tuning: Zero-Overhead Adaptation of Hybrid Recurrent-Attention Models",
+    "abstract": "Using roughly 48 execution-verified HumanEval training solutions, tuning a single initial state matrix per recurrent layer, with zero inference overhead, outperforms LoRA by +10.8 pp (p < 0.001) on HumanEval. The method, which we call S0 tuning, optimizes one state matrix per recurrent layer while freezing all model weights. On Qwen3.5-4B (GatedDeltaNet hybrid), S0 tuning improves greedy pass@1 by +23.6 +/- 1.7 pp (10 seeds). On FalconH1-7B (Mamba-2 hybrid), S0 reaches 71.8% +/- 1.3 and LoRA reaches 71.4% +/- 2.4 (3 seeds), statistically indistinguishable at this sample size while requiring no weight merging. Cross-domain transfer is significant on MATH-500 (+4.8 pp, p = 0.00002, 8 seeds) and GSM8K (+2.8 pp, p = 0.0003, 10 seeds); a text-to-SQL benchmark (Spider) shows no transfer, consistent with the trajectory-steering mechanism. A prefix-tuning control on a pure Transformer (Qwen2.5-3B) degrades performance by -13.9 pp under all nine configurations tested. On Qwen3.5, a per-step state-offset variant reaches +27.1 pp, above both S0 and LoRA but with per-step inference cost. Taken together, the results show that recurrent state initialization is a strong zero-inference-overhead PEFT surface for hybrid language models when verified supervision is scarce. The tuned state is a ~48 MB file; task switching requires no weight merging or model reload. Code and library: https://github.com/jackyoung27/s0-tuning.",
+    "arxiv_id": "2604.01168",
+    "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+    "MATCHED_TOPIC_LABELS": [
+      "Architecture and Training Dynamics"
+    ],
+    "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+    "HOTSPOT_PAPER_LABELS": [],
+    "HOTSPOT_PAPER_PRIMARY_KIND": null,
+    "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+    "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default",
+    "EVIDENCE": 8,
+    "LOAD": 3,
+    "PROXIMITY": 4,
+    "READ_SCORE": 14.5
+  }
 }

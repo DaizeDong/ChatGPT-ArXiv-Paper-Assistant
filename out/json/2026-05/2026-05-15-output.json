@@ -1,416 +1,442 @@
 {
-    "2605.14438": {
-        "ARXIVID": "2605.14438",
-        "COMMENT": "Replaces fixed Top-K with trainable binary expert-activation masks learned end-to-end via straight-through estimation, plus a custom CUDA kernel; cuts MoE layer FLOPs up to 85%.",
-        "RELEVANCE": 9,
-        "NOVELTY": 7,
-        "PRIMARY_TOPIC_ID": "moe_training",
-        "MATCHED_TOPIC_IDS": [
-            "moe_training",
-            "efficiency_scaling"
-        ],
-        "TOPIC_MATCH_COMMENT": "A new token-adaptive routing mechanism with an accompanying MoE kernel \u2014 the core of the MoE topic.",
-        "HOTSPOT_PAPER_TAGS": [],
-        "HOTSPOT_PAPER_COMMENT": "",
-        "SCORE": 16,
-        "authors": [
-            "Juntong Wu",
-            "Jialiang Cheng",
-            "Qishen Yin",
-            "Yue Dai",
-            "Yuliang Yan",
-            "Fuyu Lv",
-            "Ou Dan",
-            "Li Yuan"
-        ],
-        "title": "BEAM: Binary Expert Activation Masking for Dynamic Routing in MoE",
-        "abstract": "Mixture-of-Experts (MoE) architectures enhance the efficiency of large language models by activating only a subset of experts per token. However, standard MoE employs a fixed Top-K routing strategy, leading to redundant computation and suboptimal inference latency. Existing acceleration methods either require costly retraining with architectural changes or suffer from severe performance drop at high sparsity due to train-inference mismatch. To address these limitations, we propose BEAM (Binary Expert Activation Masking), a novel method that learns token-adaptive expert selection via trainable binary masks. With a straight-through estimator and an auxiliary regularization loss, BEAM induces dynamic expert sparsity through end-to-end training while maintaining model capability. We further implement an efficient custom CUDA kernel for BEAM, ensuring seamless integration with the vLLM inference framework. Experiments show that BEAM retains over 98\\% of the original model's performance while reducing MoE layer FLOPs by up to 85\\%, achieving up to 2.5$\\times$ faster decoding and 1.4$\\times$ higher throughput, demonstrating its effectiveness as a practical, plug-and-play solution for efficient MoE inference.",
-        "arxiv_id": "2605.14438",
-        "PRIMARY_TOPIC_LABEL": "MoE Training",
-        "MATCHED_TOPIC_LABELS": [
-            "MoE Training",
-            "Efficiency, Compression, and Large-Scale Training"
-        ],
-        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
-        "HOTSPOT_PAPER_LABELS": [],
-        "HOTSPOT_PAPER_PRIMARY_KIND": null,
-        "HOTSPOT_PAPER_PRIMARY_LABEL": "",
-        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
-    },
-    "2605.15422": {
-        "ARXIVID": "2605.15422",
-        "COMMENT": "Fused forward/backward FlashAttention kernel that eliminates shared-prompt replication, with a repacking data pipeline lifting MFU from 36% to 76% and 3.8x speedup at 30B MoE scale.",
-        "RELEVANCE": 8,
-        "NOVELTY": 8,
-        "PRIMARY_TOPIC_ID": "training_systems",
-        "MATCHED_TOPIC_IDS": [
-            "training_systems",
-            "efficiency_scaling"
-        ],
-        "TOPIC_MATCH_COMMENT": "Exact-equivalent kernel plus micro-batch repacking that materially changes training throughput and memory; a systems contribution despite the RL setting.",
-        "HOTSPOT_PAPER_TAGS": [],
-        "HOTSPOT_PAPER_COMMENT": "",
-        "SCORE": 16,
-        "authors": [
-            "Jiading Gai",
-            "Shuai Zhang",
-            "Xiang Song",
-            "Bernie Wang",
-            "George Karypis"
-        ],
-        "title": "DualKV: Shared-Prompt Flash Attention for Efficient RL Training with Large Rollouts and Long Contexts",
-        "abstract": "Modern RL post-training methods such as GRPO and DAPO train on N response sequences of R tokens sampled from a shared prompt of P tokens, but standard FlashAttention replicates all P prompt tokens N times across both forward and backward passes -- duplicating compute and memory on identical hidden states. In large-rollout, long-context RL training (N>=16, P>=8K), this redundancy dominates the policy update cost. We observe that in decoder-only models, causal masking makes prompt representations invariant across sequences at every layer, so all per-token operations (norms, projections, MLP) and attention can process the prompt once -- a property not yet exploited at the kernel level for training. We propose DualKV, the first FlashAttention kernel variant that eliminates shared-prompt replication during RL training, via (1) fused CUDA forward and backward kernels that iterate over two disjoint KV regions -- shared context and per-sequence response -- in a single kernel launch, and (2) a data-pipeline redesign in veRL that repacks N(P+R) tokens into P+NR tokens per micro-batch, extending the token reduction from attention to the entire model by a factor rho = N(P+R)/(P+NR). DualKV is mathematically equivalent to standard attention and introduces no approximation. On Qwen3-8B GRPO training with 8xH100 GPUs (N=32, 8K-context), DualKV achieves 1.63--2.09x policy-update speedup, enables 2x larger micro-batches, and raises MFU from 36% to 76%. Similar gains hold for DAPO (2.47x speedup, 77% MFU). At 30B MoE scale on 16xH100, DualKV achieves 3.82x policy-update and 3.38x end-to-end step speedup over FlashAttention (which requires 4-way Ulysses sequence parallelism to avoid OOM). DualKV also extends to hybrid sliding/global attention with head dimension 512 (which FA2 does not support) and integrates with Ulysses sequence parallelism, demonstrated on Gemma-4-31B GRPO at 64K context.",
-        "arxiv_id": "2605.15422",
-        "PRIMARY_TOPIC_LABEL": "Large-Scale Training Systems and Efficiency",
-        "MATCHED_TOPIC_LABELS": [
-            "Large-Scale Training Systems and Efficiency",
-            "Efficiency, Compression, and Large-Scale Training"
-        ],
-        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
-        "HOTSPOT_PAPER_LABELS": [],
-        "HOTSPOT_PAPER_PRIMARY_KIND": null,
-        "HOTSPOT_PAPER_PRIMARY_LABEL": "",
-        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
-    },
-    "2605.15250": {
-        "ARXIVID": "2605.15250",
-        "COMMENT": "MLA variant exposing two algebraically equivalent decode paths (MQA-absorb and GQA) from one weight set, plus a conversion recipe from pretrained GQA checkpoints; core attention-mechanism and KV-cache design.",
-        "RELEVANCE": 8,
-        "NOVELTY": 7,
-        "PRIMARY_TOPIC_ID": "architecture_training",
-        "MATCHED_TOPIC_IDS": [
-            "architecture_training",
-            "efficiency_scaling"
-        ],
-        "TOPIC_MATCH_COMMENT": "The contribution is a new attention parameterization; KV-cache cost reduction is the consequence, not the mechanism.",
-        "HOTSPOT_PAPER_TAGS": [],
-        "HOTSPOT_PAPER_COMMENT": "",
-        "SCORE": 15,
-        "authors": [
-            "Fanxu Meng"
-        ],
-        "title": "GQLA: Group-Query Latent Attention for Hardware-Adaptive Large Language Model Decoding",
-        "abstract": "Multi-head Latent Attention (MLA), the attention used in DeepSeek-V2/V3, jointly compresses keys and values into a low-rank latent and matches the H100 roofline almost perfectly. Its trained weights, however, expose only one decoding path - an absorbed MQA form - which ties efficient inference to H100-class compute-bandwidth ratios, forfeits tensor parallelism along the head axis, and yields no Multi-Token Prediction (MTP) gain on commodity inference GPUs such as the export-restricted H20. We propose Group-Query Latent Attention (GQLA), a minimal modification of MLA whose trained weights expose two algebraically equivalent decoding paths over the same parameters: an MQA-absorb path identical to MLA's, and a GQA path with a per-group expanded cache. The runtime picks the path that matches the target hardware - no retraining, no custom kernels - so a single set of GQLA weights pins the rooflines of both H100 (MQA-absorb, s_q=1) and H20 (GQA + MTP, s_q=2), while supporting up to 8-way zero-redundancy tensor parallelism on the GQA path. To avoid pretraining from scratch we extend TransMLA into TransGQLA, which converts a pretrained GQA checkpoint into a GQLA model; on LLaMA-3-8B it compresses the per-token KV cache to 28.125% of the GQA baseline on the MQA-absorb path while structurally preserving GQA-level traffic on the per-group path.",
-        "arxiv_id": "2605.15250",
-        "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
-        "MATCHED_TOPIC_LABELS": [
-            "Architecture and Training Dynamics",
-            "Efficiency, Compression, and Large-Scale Training"
-        ],
-        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
-        "HOTSPOT_PAPER_LABELS": [],
-        "HOTSPOT_PAPER_PRIMARY_KIND": null,
-        "HOTSPOT_PAPER_PRIMARY_LABEL": "",
-        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
-    },
-    "2605.14521": {
-        "ARXIVID": "2605.14521",
-        "COMMENT": "Folds LayerNorm's centering into upstream linear layers via a column-centered weight constraint, giving a graph-detectable criterion for exactly converting LN to RMSNorm with unchanged predictions and 2-12% end-to-end speedup.",
-        "RELEVANCE": 8,
-        "NOVELTY": 7,
-        "PRIMARY_TOPIC_ID": "architecture_training",
-        "MATCHED_TOPIC_IDS": [
-            "architecture_training",
-            "efficiency_scaling"
-        ],
-        "TOPIC_MATCH_COMMENT": "Normalization design is the core mechanism, with the efficiency gain following from the exact-equivalence analysis.",
-        "HOTSPOT_PAPER_TAGS": [],
-        "HOTSPOT_PAPER_COMMENT": "",
-        "SCORE": 15,
-        "authors": [
-            "Yuxin Guo",
-            "Yihao Yue",
-            "Yunhao Ni",
-            "Yizhou Ruan",
-            "Jie Luo",
-            "Wenjun Wu",
-            "Lei Huang"
-        ],
-        "title": "Enjoy Your Layer Normalization with the Computational Efficiency of RMSNorm",
-        "abstract": "Layer normalization (LN) is a fundamental component in modern deep learning, but its per-sample centering and scaling introduce non-negligible inference overhead. RMSNorm improves efficiency by removing the centering operation, yet this may discard benefits associated with centering. This paper propose a framework to determine whether an LN in an arbitrary DNN can be replaced by RMSNorm without changing the model function. The key idea is to fold LN's centering operation into upstream general linear layers by enforcing zero-mean outputs through the column-centered constraint (CCC) and column-based weight centering (CBWC). We extend the analysis to arbitrary DNNs, define such LNs as foldable LNs, and develop a graph-based detection algorithm. Our analysis shows that many LNs in widely used architectures are foldable, enabling exact inference-time conversion and end-to-end acceleration of 2% to 12% without changing model predictions. Experiments across multiple task families further show that, when exact equivalence is partially broken in practical training settings, our method remains competitive with vanilla LN while improving efficiency.",
-        "arxiv_id": "2605.14521",
-        "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
-        "MATCHED_TOPIC_LABELS": [
-            "Architecture and Training Dynamics",
-            "Efficiency, Compression, and Large-Scale Training"
-        ],
-        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
-        "HOTSPOT_PAPER_LABELS": [],
-        "HOTSPOT_PAPER_PRIMARY_KIND": null,
-        "HOTSPOT_PAPER_PRIMARY_LABEL": "",
-        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
-    },
-    "2605.14929": {
-        "ARXIVID": "2605.14929",
-        "COMMENT": "Per-layer post-training quantization combining fixed and LUT-hosted dynamic codebook pairs with a per-block selection bit, signed block scales, and knapsack promotion of sensitive layers, beating FP8 reconstruction error at 6.5 bpw.",
-        "RELEVANCE": 8,
-        "NOVELTY": 6,
-        "PRIMARY_TOPIC_ID": "efficiency_scaling",
-        "MATCHED_TOPIC_IDS": [
-            "efficiency_scaling"
-        ],
-        "TOPIC_MATCH_COMMENT": "Weight quantization with a hardware-aware decode format is squarely a compression-mechanism contribution.",
-        "HOTSPOT_PAPER_TAGS": [],
-        "HOTSPOT_PAPER_COMMENT": "",
-        "SCORE": 14,
-        "authors": [
-            "Earl Killian"
-        ],
-        "title": "A Hardware-Aware, Per-Layer Methodology for Post-Training Quantization of Large Language Models",
-        "abstract": "Scaled Outer Product (SOP) is a post-training quantization methodology for large language model weights, designed to deliver near-lossless fidelity at 4.5--6 bits per weight on hardware with per-layer LUT decode. The methodology combines per-layer search of fixed and dynamic codebook pairs selected by a per-block selection bit, signed per-block scales, activation-weighted cosine selection, and multiple-choice knapsack promotion of sensitive layers with outlier and sparse-residual correction. Fixed codebooks include NF4, BOF4, Split87, and SH4; per-layer optimized codebooks (DD4) are hosted in LUT SRAM. A new hardware-efficient LUT output format (HIF) is proposed to improve performance, energy, and cost. Across six open model families, the recommended FP6 operating point (E2M3sUE4M4, 6.5 bpw) achieves lower weight reconstruction error than the conventional per-layer-POT FP8 baseline (E4M3, 8.0 bpw) at 1.5 bpw lower storage cost, demonstrating that block-scaled small atoms with carefully chosen scale precision can replace conventionally-deployed FP8. Full evaluation across the 4.5--6 bpw range, including layer promotion and sparse residual correction, is reported in a companion paper.",
-        "arxiv_id": "2605.14929",
-        "PRIMARY_TOPIC_LABEL": "Efficiency, Compression, and Large-Scale Training",
-        "MATCHED_TOPIC_LABELS": [
-            "Efficiency, Compression, and Large-Scale Training"
-        ],
-        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
-        "HOTSPOT_PAPER_LABELS": [],
-        "HOTSPOT_PAPER_PRIMARY_KIND": null,
-        "HOTSPOT_PAPER_PRIMARY_LABEL": "",
-        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
-    },
-    "2605.14841": {
-        "ARXIVID": "2605.14841",
-        "COMMENT": "Removes LoRA's bilinear low-rank bottleneck entirely, mapping a d-dim vector into full weight space through a single isometric partition matrix with d+1 storage.",
-        "RELEVANCE": 7,
-        "NOVELTY": 6,
-        "PRIMARY_TOPIC_ID": "efficiency_scaling",
-        "MATCHED_TOPIC_IDS": [
-            "efficiency_scaling"
-        ],
-        "TOPIC_MATCH_COMMENT": "Parameter-efficient adaptation mechanism, squarely in the low-rank/compression topic.",
-        "HOTSPOT_PAPER_TAGS": [],
-        "HOTSPOT_PAPER_COMMENT": "",
-        "SCORE": 13,
-        "authors": [
-            "Paolo Mandica",
-            "Micha\u0142 Brzozowski",
-            "Zuzanna Dubanowska",
-            "Neo Christopher Chung"
-        ],
-        "title": "GPart: End-to-End Isometric Fine-Tuning via Global Parameter Partitioning",
-        "abstract": "Low-rank adaptation (LoRA) has become the dominant paradigm for parameter-efficient fine-tuning (PEFT) of large language models (LLMs). However, its bilinear structure introduces a critical limitation: the mapping from trainable parameters to weight updates is not distance-preserving, distorting the optimization landscape. Methods that project a low-dimensional vector into LoRA's parameter space, such as Uni-LoRA, improve parameter efficiency, but the subsequent bilinear LoRA map breaks end-to-end isometry, leaving the core distance-preservation problem unresolved. We propose GPart (Global Partition fine-tuning), a highly parameter-efficient fine-tuning method which removes the low-rank bottleneck entirely. Our method uses a single isometric partition matrix to map a $d$-dimensional trainable vector directly into the full weight space of the model. The result is an extremely minimal fine-tuning pipeline: one random projection, end-to-end isometric, with a single clean hyperparameter ($d$) and storage cost of $d+1$ values (the trainable vector plus a random seed). GPart builds on the theoretical premise that effective fine-tuning can emerge from random low-dimensional subspaces of the full weight space, without imposing low-rank matrix structure. We empirically demonstrate the superior or comparable performance of GPart to existing PEFT methods on natural language understanding, computer vision tasks, and mathematical reasoning. Overall, GPart achieves state-of-the-art efficiency and performance by removing structural constraints, offering a straightforward and elegant path to PEFT.",
-        "arxiv_id": "2605.14841",
-        "PRIMARY_TOPIC_LABEL": "Efficiency, Compression, and Large-Scale Training",
-        "MATCHED_TOPIC_LABELS": [
-            "Efficiency, Compression, and Large-Scale Training"
-        ],
-        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
-        "HOTSPOT_PAPER_LABELS": [],
-        "HOTSPOT_PAPER_PRIMARY_KIND": null,
-        "HOTSPOT_PAPER_PRIMARY_LABEL": "",
-        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
-    },
-    "2605.14844": {
-        "ARXIVID": "2605.14844",
-        "COMMENT": "Calibration-free adaptive codebook quantizer driven by per-channel cosine-similarity floors, with separate strict/lazy targets for attention versus routed experts and sparse outlier separation.",
-        "RELEVANCE": 7,
-        "NOVELTY": 6,
-        "PRIMARY_TOPIC_ID": "efficiency_scaling",
-        "MATCHED_TOPIC_IDS": [
-            "moe_training",
-            "efficiency_scaling"
-        ],
-        "TOPIC_MATCH_COMMENT": "Weight quantization mechanism with an MoE-aware quality budget; new inversion of the usual bit-width workflow.",
-        "HOTSPOT_PAPER_TAGS": [],
-        "HOTSPOT_PAPER_COMMENT": "",
-        "SCORE": 13,
-        "authors": [
-            "Thomas Witt"
-        ],
-        "title": "XFP: Quality-Targeted Adaptive Codebook Quantization with Sparse Outlier Separation for LLM Inference",
-        "abstract": "We introduce XFP, a dynamic weight quantizer for LLM inference that inverts the conventional workflow: the operator specifies reconstruction quality floors on per-channel cosine similarity (one strict floor for attention and shared experts, one lazy floor for routed-expert MoE); XFP determines codebook size, outlier budget, and packing per layer automatically -- no Hessian, no calibration data, no manual bit-width selection. Each weight matrix is decomposed into a sparse fp16 outlier residual and a dense sub-byte index tensor into a per-group learned codebook. Two storage modes share one auto-select frontend and one fused decode kernel: V2 (per-channel Lloyd) and V2a (shared library of L=32 codebooks per layer). On Qwen3.5-122B-A10B under V2, XFP reaches 138 tok/s single-stream decode on workstation hardware (RTX PRO 6000 Blackwell, TP=2) at 94.49% GSM8K strict-match (3 seeds, n=3957), and is 49% faster than Marlin INT4 at TP=1. For models that do not fit in the target memory envelope, we present the H-Process: a quality-driven iteration over the two cosine thresholds that finds the operating point at which the model just fits while still producing sensible output. Three constraints define its search space: the operator-set thresholds, an OOM boundary at quantize-on-load, and a garbage boundary in generation (cosine similarity steers; benches verify). On Qwen3.5-397B-A17B (512 routed experts/layer), the H-Process fits the full expert population into 2x96 GB at ~3.4 effective bits and delivers 100.9 tok/s long-output decode at 66.72% GSM8K strict-match on the full 1319-problem set (single seed at submission; multi-seed evaluation in progress), exceeding INT4 with routed-expert pruning on memory, throughput, and accuracy simultaneously.",
-        "arxiv_id": "2605.14844",
-        "PRIMARY_TOPIC_LABEL": "Efficiency, Compression, and Large-Scale Training",
-        "MATCHED_TOPIC_LABELS": [
-            "MoE Training",
-            "Efficiency, Compression, and Large-Scale Training"
-        ],
-        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
-        "HOTSPOT_PAPER_LABELS": [],
-        "HOTSPOT_PAPER_PRIMARY_KIND": null,
-        "HOTSPOT_PAPER_PRIMARY_LABEL": "",
-        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
-    },
-    "2605.14567": {
-        "ARXIVID": "2605.14567",
-        "COMMENT": "Derives power-law error decay from sequential recovery of hierarchical latent features, with sharp per-feature thresholds proved via resolvent perturbation.",
-        "RELEVANCE": 6,
-        "NOVELTY": 7,
-        "PRIMARY_TOPIC_ID": "architecture_training",
-        "MATCHED_TOPIC_IDS": [
-            "training_systems",
-            "architecture_training"
-        ],
-        "TOPIC_MATCH_COMMENT": "Scaling-law mechanism grounded in feature-learning dynamics rather than empirical fitting.",
-        "HOTSPOT_PAPER_TAGS": [],
-        "HOTSPOT_PAPER_COMMENT": "",
-        "SCORE": 13,
-        "authors": [
-            "Arie Wortsman-Zurich",
-            "Hugo Tabanelli",
-            "Yatin Dandi",
-            "Florent Krzakala",
-            "Bruno Loureiro"
-        ],
-        "title": "Scaling Laws from Sequential Feature Recovery: A Solvable Hierarchical Model",
-        "abstract": "We propose a simple mechanism by which scaling laws emerge from feature learning in multi-layer networks. We study a high-dimensional hierarchical target that is a globally high-degree function, but that can be represented by a combination of latent compositional features whose weights decrease as a power law. We show that a layer-wise spectral algorithm adapted to this compositional structure achieves improved scaling relative to shallow, non-adaptive methods, and recovers the latent directions sequentially: strong features become detectable at small sample sizes, while weaker features require more data. We prove sharp feature-wise recovery thresholds and show that aggregating these transitions yields an explicit power-law decay of the prediction error. Technically, the analysis relies on random matrix methods and a resolvent-based perturbation argument, which gives matching upper and lower bounds for individual eigenvector recovery beyond what standard gap-based perturbation bounds provide. Numerical experiments confirm the predicted sequential recovery, finite-size smoothing of the thresholds, and separation from non-hierarchical kernel baselines. Together, these results show how smooth scaling laws can emerge from a cascade of sharp feature-learning transitions.",
-        "arxiv_id": "2605.14567",
-        "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
-        "MATCHED_TOPIC_LABELS": [
-            "Large-Scale Training Systems and Efficiency",
-            "Architecture and Training Dynamics"
-        ],
-        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
-        "HOTSPOT_PAPER_LABELS": [],
-        "HOTSPOT_PAPER_PRIMARY_KIND": null,
-        "HOTSPOT_PAPER_PRIMARY_LABEL": "",
-        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
-    },
-    "2605.14220": {
-        "ARXIVID": "2605.14220",
-        "COMMENT": "Isolates training-inference mismatch in a zero-mismatch diagnostic setting and shows token-level numerical disagreement between rollout and optimization engines can independently cause training collapse by changing the effective objective.",
-        "RELEVANCE": 6,
-        "NOVELTY": 7,
-        "PRIMARY_TOPIC_ID": "training_systems",
-        "MATCHED_TOPIC_IDS": [
-            "training_systems"
-        ],
-        "TOPIC_MATCH_COMMENT": "The contribution is a systems-level diagnosis of numerical consistency across a distributed training stack that determines whether a run converges.",
-        "HOTSPOT_PAPER_TAGS": [
-            "daily_hot"
-        ],
-        "HOTSPOT_PAPER_COMMENT": "Training-inference mismatch is an actively debated failure mode across current RL training stacks, and this isolates it as a first-order cause of collapse rather than benign noise.",
-        "SCORE": 13,
-        "authors": [
-            "Tianle Zhong",
-            "Neiwen Ling",
-            "Yifan Pi",
-            "Zijun Wei",
-            "Tianshu Yu",
-            "Geoffrey Fox",
-            "Peng Wu",
-            "Xiao Yu"
-        ],
-        "title": "Diagnosing Training Inference Mismatch in LLM Reinforcement Learning",
-        "abstract": "Modern LLM RL systems separate rollout generation from policy optimization. These two stages are expected to produce token probabilities that match exactly. However, implementation differences can make them assign different values to the same sequence under the same model weights, inducing Training-Inference Mismatch (TIM). TIM is difficult to inspect because it is entangled with off-policy drift and common stabilization mechanisms. In this work, we isolate TIM in a zero-mismatch diagnostic setting (VeXact), and show that small token-level numerical disagreements can independently cause training collapse. We further show that TIM changes the effective optimization problem, and identify a set of remedies that could mitigate TIM. Our results suggest that TIM is not benign numerical noise, but a systems-level perturbation that should be treated as a first-order factor in analyzing LLM RL stability.",
-        "arxiv_id": "2605.14220",
-        "PRIMARY_TOPIC_LABEL": "Large-Scale Training Systems and Efficiency",
-        "MATCHED_TOPIC_LABELS": [
-            "Large-Scale Training Systems and Efficiency"
-        ],
-        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
-        "HOTSPOT_PAPER_LABELS": [
-            "Daily Hot Papers"
-        ],
-        "HOTSPOT_PAPER_PRIMARY_KIND": "daily_hot",
-        "HOTSPOT_PAPER_PRIMARY_LABEL": "Daily Hot Papers",
-        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "llm_exact"
-    },
-    "2607.20457": {
-        "ARXIVID": "2607.20457",
-        "COMMENT": "Replaces Star Attention's static anchor block with attention sinks plus content-aware cross-block summaries, cutting per-GPU FLOPs in distributed blockwise long-context attention.",
-        "RELEVANCE": 6,
-        "NOVELTY": 6,
-        "PRIMARY_TOPIC_ID": "efficiency_scaling",
-        "MATCHED_TOPIC_IDS": [
-            "architecture_training",
-            "efficiency_scaling"
-        ],
-        "TOPIC_MATCH_COMMENT": "Memory- and compute-efficient sharded attention design; inference-side, so efficiency rather than training systems.",
-        "HOTSPOT_PAPER_TAGS": [],
-        "HOTSPOT_PAPER_COMMENT": "",
-        "SCORE": 12,
-        "authors": [
-            "Aryan Sood",
-            "Shantanu Acharya",
-            "Gaurav Kumar Nayak"
-        ],
-        "title": "Dropping the Anchor: Statistical Context Summarization for Distributed Systems via Pulsar Attention",
-        "abstract": "Inference with large language models (LLMs) on long sequences is computationally expensive due to the quadratic complexity of self-attention. Distributed blockwise methods such as Star Attention reduce this cost by sharding context across hosts, but rely on prepending a static, content-blind copy of the first block to every host. We propose Pulsar Attention, which replaces the static anchor with two lightweight, content-aware components: a small attention-sink prefix that stabilizes softmax, and compact cross-block summaries built via a Max-IDF heuristic that selects chunks containing globally rare tokens. This reduces the Phase 1 per-GPU FLOPs by up to 3.3x over Star Attention while retaining an identical KV cache footprint. On RULER with Llama-3.1-8B-Instruct, Pulsar Attention outperforms Star Attention at sequence lengths up to 128K tokens and remains competitive with dense attention across most tasks, with task-dependent absolute gains of up to 4.7% over the dense baseline.",
-        "arxiv_id": "2607.20457",
-        "PRIMARY_TOPIC_LABEL": "Efficiency, Compression, and Large-Scale Training",
-        "MATCHED_TOPIC_LABELS": [
-            "Architecture and Training Dynamics",
-            "Efficiency, Compression, and Large-Scale Training"
-        ],
-        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
-        "HOTSPOT_PAPER_LABELS": [],
-        "HOTSPOT_PAPER_PRIMARY_KIND": null,
-        "HOTSPOT_PAPER_PRIMARY_LABEL": "",
-        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
-    },
-    "2605.14249": {
-        "ARXIVID": "2605.14249",
-        "COMMENT": "Analytical energy model covering tensor/expert parallelism, MoE load imbalance, and Megatron-style compute-communication overlap across multi-GPU configurations.",
-        "RELEVANCE": 6,
-        "NOVELTY": 6,
-        "PRIMARY_TOPIC_ID": "training_systems",
-        "MATCHED_TOPIC_IDS": [
-            "training_systems",
-            "efficiency_scaling"
-        ],
-        "TOPIC_MATCH_COMMENT": "Parallelism and collective-communication cost modelling is a systems contribution, though applied to inference.",
-        "HOTSPOT_PAPER_TAGS": [],
-        "HOTSPOT_PAPER_COMMENT": "",
-        "SCORE": 12,
-        "authors": [
-            "Zhiye Song",
-            "Kyungmi Lee",
-            "Eun Kyung Lee",
-            "Xin Zhang",
-            "Tamar Eilam",
-            "Anantha P. Chandrakasan"
-        ],
-        "title": "EnergyLens: Predictive Energy-Aware Exploration for Multi-GPU LLM Inference Optimization",
-        "abstract": "We present EnergyLens, an end-to-end framework for energy-aware large language model (LLM) inference optimization. As LLMs scale, predicting and reducing their energy footprint has become critical for sustainability and datacenter operations, yet existing approaches either require production-level code and expensive profiling or fail to accurately capture multi-GPU energy behavior. As a result, practitioners lack tools for deciding which optimizations to prioritize and for selecting among existing deployment configurations when exhaustive profiling is impractical. EnergyLens addresses this gap with an intuitive einsum-based interface that captures LLM specifications including fusion, parallelism, and compute-communication overlap, combined with load-imbalance-aware MoE modeling and an empirically driven communication energy model for multi-GPU settings. We validate EnergyLens on Llama3 and Qwen3-MoE across tensor-parallel and expert-parallel configurations, achieving mean absolute percentage errors (MAPEs) between 9.25% and 13.19% for multi-GPU prefill and decode energy, and 12.97% across SM allocations for Megatron-style overlap. Our energy-driven exploration reveals up to 1.47x and 52.9x energy variation across configurations in prefill and decode efficiency and motivates distributed serving. We further show that compute-communication overlap is difficult to optimize with intuition alone, but EnergyLens correctly identifies Pareto-optimal overlap configurations.",
-        "arxiv_id": "2605.14249",
-        "PRIMARY_TOPIC_LABEL": "Large-Scale Training Systems and Efficiency",
-        "MATCHED_TOPIC_LABELS": [
-            "Large-Scale Training Systems and Efficiency",
-            "Efficiency, Compression, and Large-Scale Training"
-        ],
-        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
-        "HOTSPOT_PAPER_LABELS": [],
-        "HOTSPOT_PAPER_PRIMARY_KIND": null,
-        "HOTSPOT_PAPER_PRIMARY_LABEL": "",
-        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
-    },
-    "2605.14773": {
-        "ARXIVID": "2605.14773",
-        "COMMENT": "Reframes data selection as implicit regularization modulated by the instantaneous selection ratio, and schedules the selected data volume over training instead of holding it fixed; halves ImageNet-1k cost and doubles instruction-tuning speed.",
-        "RELEVANCE": 6,
-        "NOVELTY": 6,
-        "PRIMARY_TOPIC_ID": "training_systems",
-        "MATCHED_TOPIC_IDS": [
-            "training_systems",
-            "efficiency_scaling"
-        ],
-        "TOPIC_MATCH_COMMENT": "The contribution is a training-schedule mechanism with an optimization-side justification that materially changes run cost.",
-        "HOTSPOT_PAPER_TAGS": [],
-        "HOTSPOT_PAPER_COMMENT": "",
-        "SCORE": 12,
-        "authors": [
-            "Suorong Yang",
-            "Hanqi Zhu",
-            "Hai Gan",
-            "Fangjian Su",
-            "Guang Li",
-            "Furao Shen",
-            "Soujanya Poria"
-        ],
-        "title": "Beyond What to Select: A Plug-and-play Oscillatory Data-Volume Scheduling for Efficient Model Training",
-        "abstract": "Data selection accelerates training by identifying representative training data while preserving model performance. However, existing methods mainly focus on designing sample-importance criteria, i.e., deciding what to select, while typically fixing the selected data volume as the target ratio throughout training. Thus, they are often dynamic in sample identity but static in data volume. In this work, we revisit data selection from an optimization perspective and show that selected-data training induces an implicit regularization effect modulated by the instantaneous selection ratio. This reveals a key trade-off: lower ratios amplify selection-induced regularization, whereas higher ratios preserve data coverage and optimization fidelity. Motivated by this insight, we propose PODS, a Plug-and-play Oscillatory Data-volume Scheduling framework. Rather than introducing another sample-scoring metric, PODS serves as a lightweight module that dynamically schedules how much data to select over training. Under the target selection ratio, PODS alternates between low-ratio regularization phases and high-ratio recovery phases to exploit selection-induced regularization without sacrificing optimization stability. With its lightweight, ratio-level, and task-agnostic design, PODS is compatible with existing static and dynamic selection methods and broadly applicable across training paradigms. Experiments across various datasets, architectures, and tasks show that PODS consistently improves the efficiency-generalization trade-off, e.g., reducing ImageNet-1k training cost by 50% with improved accuracy and accelerating LLM instruction tuning by over 2x without performance degradation.",
-        "arxiv_id": "2605.14773",
-        "PRIMARY_TOPIC_LABEL": "Large-Scale Training Systems and Efficiency",
-        "MATCHED_TOPIC_LABELS": [
-            "Large-Scale Training Systems and Efficiency",
-            "Efficiency, Compression, and Large-Scale Training"
-        ],
-        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
-        "HOTSPOT_PAPER_LABELS": [],
-        "HOTSPOT_PAPER_PRIMARY_KIND": null,
-        "HOTSPOT_PAPER_PRIMARY_LABEL": "",
-        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
-    }
+  "2605.14438": {
+    "ARXIVID": "2605.14438",
+    "COMMENT": "Replaces fixed Top-K routing with end-to-end trained, token-adaptive binary expert masks.",
+    "RELEVANCE": 8,
+    "NOVELTY": 6,
+    "PRIMARY_TOPIC_ID": "moe_training",
+    "MATCHED_TOPIC_IDS": [
+      "moe_training"
+    ],
+    "TOPIC_MATCH_COMMENT": "The core mechanism changes token-to-expert assignment and addresses training/inference routing mismatch, keeping it within MoE design.",
+    "HOTSPOT_PAPER_TAGS": [],
+    "HOTSPOT_PAPER_COMMENT": "",
+    "SCORE": 14,
+    "authors": [
+      "Juntong Wu",
+      "Jialiang Cheng",
+      "Qishen Yin",
+      "Yue Dai",
+      "Yuliang Yan",
+      "Fuyu Lv",
+      "Ou Dan",
+      "Li Yuan"
+    ],
+    "title": "BEAM: Binary Expert Activation Masking for Dynamic Routing in MoE",
+    "abstract": "Mixture-of-Experts (MoE) architectures enhance the efficiency of large language models by activating only a subset of experts per token. However, standard MoE employs a fixed Top-K routing strategy, leading to redundant computation and suboptimal inference latency. Existing acceleration methods either require costly retraining with architectural changes or suffer from severe performance drop at high sparsity due to train-inference mismatch. To address these limitations, we propose BEAM (Binary Expert Activation Masking), a novel method that learns token-adaptive expert selection via trainable binary masks. With a straight-through estimator and an auxiliary regularization loss, BEAM induces dynamic expert sparsity through end-to-end training while maintaining model capability. We further implement an efficient custom CUDA kernel for BEAM, ensuring seamless integration with the vLLM inference framework. Experiments show that BEAM retains over 98\\% of the original model's performance while reducing MoE layer FLOPs by up to 85\\%, achieving up to 2.5$\\times$ faster decoding and 1.4$\\times$ higher throughput, demonstrating its effectiveness as a practical, plug-and-play solution for efficient MoE inference.",
+    "arxiv_id": "2605.14438",
+    "PRIMARY_TOPIC_LABEL": "MoE Where It Changes the Design Space",
+    "MATCHED_TOPIC_LABELS": [
+      "MoE Where It Changes the Design Space"
+    ],
+    "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+    "HOTSPOT_PAPER_LABELS": [],
+    "HOTSPOT_PAPER_PRIMARY_KIND": null,
+    "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+    "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default",
+    "EVIDENCE": 6,
+    "LOAD": 5,
+    "PROXIMITY": 7,
+    "READ_SCORE": 18.5
+  },
+  "2605.15422": {
+    "ARXIVID": "2605.15422",
+    "COMMENT": "Uses causal prompt invariance to share prompt computation across RL rollouts without approximation.",
+    "RELEVANCE": 5,
+    "NOVELTY": 5,
+    "PRIMARY_TOPIC_ID": "training_systems",
+    "MATCHED_TOPIC_IDS": [
+      "training_systems"
+    ],
+    "TOPIC_MATCH_COMMENT": "Training systems is the closest category; the contribution primarily accelerates an unchanged RL policy update through kernels and token repacking.",
+    "HOTSPOT_PAPER_TAGS": [],
+    "HOTSPOT_PAPER_COMMENT": "",
+    "SCORE": 10,
+    "authors": [
+      "Jiading Gai",
+      "Shuai Zhang",
+      "Xiang Song",
+      "Bernie Wang",
+      "George Karypis"
+    ],
+    "title": "DualKV: Shared-Prompt Flash Attention for Efficient RL Training with Large Rollouts and Long Contexts",
+    "abstract": "Modern RL post-training methods such as GRPO and DAPO train on N response sequences of R tokens sampled from a shared prompt of P tokens, but standard FlashAttention replicates all P prompt tokens N times across both forward and backward passes -- duplicating compute and memory on identical hidden states. In large-rollout, long-context RL training (N>=16, P>=8K), this redundancy dominates the policy update cost. We observe that in decoder-only models, causal masking makes prompt representations invariant across sequences at every layer, so all per-token operations (norms, projections, MLP) and attention can process the prompt once -- a property not yet exploited at the kernel level for training. We propose DualKV, the first FlashAttention kernel variant that eliminates shared-prompt replication during RL training, via (1) fused CUDA forward and backward kernels that iterate over two disjoint KV regions -- shared context and per-sequence response -- in a single kernel launch, and (2) a data-pipeline redesign in veRL that repacks N(P+R) tokens into P+NR tokens per micro-batch, extending the token reduction from attention to the entire model by a factor rho = N(P+R)/(P+NR). DualKV is mathematically equivalent to standard attention and introduces no approximation. On Qwen3-8B GRPO training with 8xH100 GPUs (N=32, 8K-context), DualKV achieves 1.63--2.09x policy-update speedup, enables 2x larger micro-batches, and raises MFU from 36% to 76%. Similar gains hold for DAPO (2.47x speedup, 77% MFU). At 30B MoE scale on 16xH100, DualKV achieves 3.82x policy-update and 3.38x end-to-end step speedup over FlashAttention (which requires 4-way Ulysses sequence parallelism to avoid OOM). DualKV also extends to hybrid sliding/global attention with head dimension 512 (which FA2 does not support) and integrates with Ulysses sequence parallelism, demonstrated on Gemma-4-31B GRPO at 64K context.",
+    "arxiv_id": "2605.15422",
+    "PRIMARY_TOPIC_LABEL": "Training Algorithms That Change What Is Possible",
+    "MATCHED_TOPIC_LABELS": [
+      "Training Algorithms That Change What Is Possible"
+    ],
+    "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+    "HOTSPOT_PAPER_LABELS": [],
+    "HOTSPOT_PAPER_PRIMARY_KIND": null,
+    "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+    "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default",
+    "EVIDENCE": 9,
+    "LOAD": 5,
+    "PROXIMITY": 3,
+    "READ_SCORE": 14.5
+  },
+  "2605.15250": {
+    "ARXIVID": "2605.15250",
+    "COMMENT": "Supports algebraically equivalent absorbed-MQA and expanded-GQA decoding paths while holding trained parameters fixed.",
+    "RELEVANCE": 5,
+    "NOVELTY": 8,
+    "PRIMARY_TOPIC_ID": "efficiency_scaling",
+    "MATCHED_TOPIC_IDS": [
+      "efficiency_scaling"
+    ],
+    "TOPIC_MATCH_COMMENT": "Cache efficiency is the best fit, but the core payoff is hardware-dependent decoding throughput; quality-preserving compression relative to the source model is not established.",
+    "HOTSPOT_PAPER_TAGS": [],
+    "HOTSPOT_PAPER_COMMENT": "",
+    "SCORE": 13,
+    "authors": [
+      "Fanxu Meng"
+    ],
+    "title": "GQLA: Group-Query Latent Attention for Hardware-Adaptive Large Language Model Decoding",
+    "abstract": "Multi-head Latent Attention (MLA), the attention used in DeepSeek-V2/V3, jointly compresses keys and values into a low-rank latent and matches the H100 roofline almost perfectly. Its trained weights, however, expose only one decoding path - an absorbed MQA form - which ties efficient inference to H100-class compute-bandwidth ratios, forfeits tensor parallelism along the head axis, and yields no Multi-Token Prediction (MTP) gain on commodity inference GPUs such as the export-restricted H20. We propose Group-Query Latent Attention (GQLA), a minimal modification of MLA whose trained weights expose two algebraically equivalent decoding paths over the same parameters: an MQA-absorb path identical to MLA's, and a GQA path with a per-group expanded cache. The runtime picks the path that matches the target hardware - no retraining, no custom kernels - so a single set of GQLA weights pins the rooflines of both H100 (MQA-absorb, s_q=1) and H20 (GQA + MTP, s_q=2), while supporting up to 8-way zero-redundancy tensor parallelism on the GQA path. To avoid pretraining from scratch we extend TransMLA into TransGQLA, which converts a pretrained GQA checkpoint into a GQLA model; on LLaMA-3-8B it compresses the per-token KV cache to 28.125% of the GQA baseline on the MQA-absorb path while structurally preserving GQA-level traffic on the per-group path.",
+    "arxiv_id": "2605.15250",
+    "PRIMARY_TOPIC_LABEL": "Efficiency, Compression, and Large-Scale Training",
+    "MATCHED_TOPIC_LABELS": [
+      "Efficiency, Compression, and Large-Scale Training"
+    ],
+    "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+    "HOTSPOT_PAPER_LABELS": [],
+    "HOTSPOT_PAPER_PRIMARY_KIND": null,
+    "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+    "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default",
+    "EVIDENCE": 5,
+    "LOAD": 6,
+    "PROXIMITY": 4,
+    "READ_SCORE": 11.0
+  },
+  "2605.14521": {
+    "ARXIVID": "2605.14521",
+    "COMMENT": "Folds LayerNorm centering into upstream weights under an explicit zero-mean constraint.",
+    "RELEVANCE": 5,
+    "NOVELTY": 8,
+    "PRIMARY_TOPIC_ID": "architecture_training",
+    "MATCHED_TOPIC_IDS": [
+      "architecture_training"
+    ],
+    "TOPIC_MATCH_COMMENT": "Normalization algebra is closest to architecture training; the central result is function-preserving inference conversion in generic DNNs.",
+    "HOTSPOT_PAPER_TAGS": [],
+    "HOTSPOT_PAPER_COMMENT": "",
+    "SCORE": 13,
+    "authors": [
+      "Yuxin Guo",
+      "Yihao Yue",
+      "Yunhao Ni",
+      "Yizhou Ruan",
+      "Jie Luo",
+      "Wenjun Wu",
+      "Lei Huang"
+    ],
+    "title": "Enjoy Your Layer Normalization with the Computational Efficiency of RMSNorm",
+    "abstract": "Layer normalization (LN) is a fundamental component in modern deep learning, but its per-sample centering and scaling introduce non-negligible inference overhead. RMSNorm improves efficiency by removing the centering operation, yet this may discard benefits associated with centering. This paper propose a framework to determine whether an LN in an arbitrary DNN can be replaced by RMSNorm without changing the model function. The key idea is to fold LN's centering operation into upstream general linear layers by enforcing zero-mean outputs through the column-centered constraint (CCC) and column-based weight centering (CBWC). We extend the analysis to arbitrary DNNs, define such LNs as foldable LNs, and develop a graph-based detection algorithm. Our analysis shows that many LNs in widely used architectures are foldable, enabling exact inference-time conversion and end-to-end acceleration of 2% to 12% without changing model predictions. Experiments across multiple task families further show that, when exact equivalence is partially broken in practical training settings, our method remains competitive with vanilla LN while improving efficiency.",
+    "arxiv_id": "2605.14521",
+    "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+    "MATCHED_TOPIC_LABELS": [
+      "Architecture and Training Dynamics"
+    ],
+    "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+    "HOTSPOT_PAPER_LABELS": [],
+    "HOTSPOT_PAPER_PRIMARY_KIND": null,
+    "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+    "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default",
+    "EVIDENCE": 5,
+    "LOAD": 6,
+    "PROXIMITY": 5,
+    "READ_SCORE": 12.0
+  },
+  "2605.14929": {
+    "ARXIVID": "2605.14929",
+    "COMMENT": "Allocates codebooks and precision per layer to reduce weight-reconstruction error at lower storage cost.",
+    "RELEVANCE": 3,
+    "NOVELTY": 5,
+    "PRIMARY_TOPIC_ID": "efficiency_scaling",
+    "MATCHED_TOPIC_IDS": [
+      "efficiency_scaling"
+    ],
+    "TOPIC_MATCH_COMMENT": "Weight compression is the closest category; the method is explicitly post-training quantization.",
+    "HOTSPOT_PAPER_TAGS": [],
+    "HOTSPOT_PAPER_COMMENT": "",
+    "SCORE": 8,
+    "authors": [
+      "Earl Killian"
+    ],
+    "title": "A Hardware-Aware, Per-Layer Methodology for Post-Training Quantization of Large Language Models",
+    "abstract": "Scaled Outer Product (SOP) is a post-training quantization methodology for large language model weights, designed to deliver near-lossless fidelity at 4.5--6 bits per weight on hardware with per-layer LUT decode. The methodology combines per-layer search of fixed and dynamic codebook pairs selected by a per-block selection bit, signed per-block scales, activation-weighted cosine selection, and multiple-choice knapsack promotion of sensitive layers with outlier and sparse-residual correction. Fixed codebooks include NF4, BOF4, Split87, and SH4; per-layer optimized codebooks (DD4) are hosted in LUT SRAM. A new hardware-efficient LUT output format (HIF) is proposed to improve performance, energy, and cost. Across six open model families, the recommended FP6 operating point (E2M3sUE4M4, 6.5 bpw) achieves lower weight reconstruction error than the conventional per-layer-POT FP8 baseline (E4M3, 8.0 bpw) at 1.5 bpw lower storage cost, demonstrating that block-scaled small atoms with carefully chosen scale precision can replace conventionally-deployed FP8. Full evaluation across the 4.5--6 bpw range, including layer promotion and sparse residual correction, is reported in a companion paper.",
+    "arxiv_id": "2605.14929",
+    "PRIMARY_TOPIC_LABEL": "Efficiency, Compression, and Large-Scale Training",
+    "MATCHED_TOPIC_LABELS": [
+      "Efficiency, Compression, and Large-Scale Training"
+    ],
+    "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+    "HOTSPOT_PAPER_LABELS": [],
+    "HOTSPOT_PAPER_PRIMARY_KIND": null,
+    "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+    "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default",
+    "EVIDENCE": 5,
+    "LOAD": 6,
+    "PROXIMITY": 2,
+    "READ_SCORE": 7.0
+  },
+  "2605.14841": {
+    "ARXIVID": "2605.14841",
+    "COMMENT": "Bypasses LoRA's bilinear factorization with a direct, distance-preserving map into full weight space.",
+    "RELEVANCE": 4,
+    "NOVELTY": 8,
+    "PRIMARY_TOPIC_ID": "efficiency_scaling",
+    "MATCHED_TOPIC_IDS": [
+      "efficiency_scaling"
+    ],
+    "TOPIC_MATCH_COMMENT": "Low-dimensional trainable parameterization is closest to efficiency_scaling; its core subject is parameter-efficient fine-tuning.",
+    "HOTSPOT_PAPER_TAGS": [],
+    "HOTSPOT_PAPER_COMMENT": "",
+    "SCORE": 12,
+    "authors": [
+      "Paolo Mandica",
+      "Michał Brzozowski",
+      "Zuzanna Dubanowska",
+      "Neo Christopher Chung"
+    ],
+    "title": "GPart: End-to-End Isometric Fine-Tuning via Global Parameter Partitioning",
+    "abstract": "Low-rank adaptation (LoRA) has become the dominant paradigm for parameter-efficient fine-tuning (PEFT) of large language models (LLMs). However, its bilinear structure introduces a critical limitation: the mapping from trainable parameters to weight updates is not distance-preserving, distorting the optimization landscape. Methods that project a low-dimensional vector into LoRA's parameter space, such as Uni-LoRA, improve parameter efficiency, but the subsequent bilinear LoRA map breaks end-to-end isometry, leaving the core distance-preservation problem unresolved. We propose GPart (Global Partition fine-tuning), a highly parameter-efficient fine-tuning method which removes the low-rank bottleneck entirely. Our method uses a single isometric partition matrix to map a $d$-dimensional trainable vector directly into the full weight space of the model. The result is an extremely minimal fine-tuning pipeline: one random projection, end-to-end isometric, with a single clean hyperparameter ($d$) and storage cost of $d+1$ values (the trainable vector plus a random seed). GPart builds on the theoretical premise that effective fine-tuning can emerge from random low-dimensional subspaces of the full weight space, without imposing low-rank matrix structure. We empirically demonstrate the superior or comparable performance of GPart to existing PEFT methods on natural language understanding, computer vision tasks, and mathematical reasoning. Overall, GPart achieves state-of-the-art efficiency and performance by removing structural constraints, offering a straightforward and elegant path to PEFT.",
+    "arxiv_id": "2605.14841",
+    "PRIMARY_TOPIC_LABEL": "Efficiency, Compression, and Large-Scale Training",
+    "MATCHED_TOPIC_LABELS": [
+      "Efficiency, Compression, and Large-Scale Training"
+    ],
+    "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+    "HOTSPOT_PAPER_LABELS": [],
+    "HOTSPOT_PAPER_PRIMARY_KIND": null,
+    "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+    "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default",
+    "EVIDENCE": 5,
+    "LOAD": 5,
+    "PROXIMITY": 3,
+    "READ_SCORE": 9.5
+  },
+  "2605.14844": {
+    "ARXIVID": "2605.14844",
+    "COMMENT": "Selects codebook size and outlier storage automatically from operator-set reconstruction-quality thresholds.",
+    "RELEVANCE": 3,
+    "NOVELTY": 6,
+    "PRIMARY_TOPIC_ID": "efficiency_scaling",
+    "MATCHED_TOPIC_IDS": [
+      "efficiency_scaling"
+    ],
+    "TOPIC_MATCH_COMMENT": "Adaptive weight compression is the closest fit; the method targets post-training quantization and fitting inference models into memory.",
+    "HOTSPOT_PAPER_TAGS": [],
+    "HOTSPOT_PAPER_COMMENT": "",
+    "SCORE": 9,
+    "authors": [
+      "Thomas Witt"
+    ],
+    "title": "XFP: Quality-Targeted Adaptive Codebook Quantization with Sparse Outlier Separation for LLM Inference",
+    "abstract": "We introduce XFP, a dynamic weight quantizer for LLM inference that inverts the conventional workflow: the operator specifies reconstruction quality floors on per-channel cosine similarity (one strict floor for attention and shared experts, one lazy floor for routed-expert MoE); XFP determines codebook size, outlier budget, and packing per layer automatically -- no Hessian, no calibration data, no manual bit-width selection. Each weight matrix is decomposed into a sparse fp16 outlier residual and a dense sub-byte index tensor into a per-group learned codebook. Two storage modes share one auto-select frontend and one fused decode kernel: V2 (per-channel Lloyd) and V2a (shared library of L=32 codebooks per layer). On Qwen3.5-122B-A10B under V2, XFP reaches 138 tok/s single-stream decode on workstation hardware (RTX PRO 6000 Blackwell, TP=2) at 94.49% GSM8K strict-match (3 seeds, n=3957), and is 49% faster than Marlin INT4 at TP=1. For models that do not fit in the target memory envelope, we present the H-Process: a quality-driven iteration over the two cosine thresholds that finds the operating point at which the model just fits while still producing sensible output. Three constraints define its search space: the operator-set thresholds, an OOM boundary at quantize-on-load, and a garbage boundary in generation (cosine similarity steers; benches verify). On Qwen3.5-397B-A17B (512 routed experts/layer), the H-Process fits the full expert population into 2x96 GB at ~3.4 effective bits and delivers 100.9 tok/s long-output decode at 66.72% GSM8K strict-match on the full 1319-problem set (single seed at submission; multi-seed evaluation in progress), exceeding INT4 with routed-expert pruning on memory, throughput, and accuracy simultaneously.",
+    "arxiv_id": "2605.14844",
+    "PRIMARY_TOPIC_LABEL": "Efficiency, Compression, and Large-Scale Training",
+    "MATCHED_TOPIC_LABELS": [
+      "Efficiency, Compression, and Large-Scale Training"
+    ],
+    "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+    "HOTSPOT_PAPER_LABELS": [],
+    "HOTSPOT_PAPER_PRIMARY_KIND": null,
+    "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+    "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default",
+    "EVIDENCE": 7,
+    "LOAD": 5,
+    "PROXIMITY": 2,
+    "READ_SCORE": 9.5
+  },
+  "2605.14567": {
+    "ARXIVID": "2605.14567",
+    "COMMENT": "Derives power-law error scaling from sequential recovery of hierarchical features.",
+    "RELEVANCE": 4,
+    "NOVELTY": 7,
+    "PRIMARY_TOPIC_ID": "training_systems",
+    "MATCHED_TOPIC_IDS": [
+      "training_systems"
+    ],
+    "TOPIC_MATCH_COMMENT": "Scaling-law mechanisms are the nearest topic; the demonstrated result concerns a solvable hierarchical model without an established connection to configuring LM runs.",
+    "HOTSPOT_PAPER_TAGS": [],
+    "HOTSPOT_PAPER_COMMENT": "",
+    "SCORE": 11,
+    "authors": [
+      "Arie Wortsman-Zurich",
+      "Hugo Tabanelli",
+      "Yatin Dandi",
+      "Florent Krzakala",
+      "Bruno Loureiro"
+    ],
+    "title": "Scaling Laws from Sequential Feature Recovery: A Solvable Hierarchical Model",
+    "abstract": "We propose a simple mechanism by which scaling laws emerge from feature learning in multi-layer networks. We study a high-dimensional hierarchical target that is a globally high-degree function, but that can be represented by a combination of latent compositional features whose weights decrease as a power law. We show that a layer-wise spectral algorithm adapted to this compositional structure achieves improved scaling relative to shallow, non-adaptive methods, and recovers the latent directions sequentially: strong features become detectable at small sample sizes, while weaker features require more data. We prove sharp feature-wise recovery thresholds and show that aggregating these transitions yields an explicit power-law decay of the prediction error. Technically, the analysis relies on random matrix methods and a resolvent-based perturbation argument, which gives matching upper and lower bounds for individual eigenvector recovery beyond what standard gap-based perturbation bounds provide. Numerical experiments confirm the predicted sequential recovery, finite-size smoothing of the thresholds, and separation from non-hierarchical kernel baselines. Together, these results show how smooth scaling laws can emerge from a cascade of sharp feature-learning transitions.",
+    "arxiv_id": "2605.14567",
+    "PRIMARY_TOPIC_LABEL": "Training Algorithms That Change What Is Possible",
+    "MATCHED_TOPIC_LABELS": [
+      "Training Algorithms That Change What Is Possible"
+    ],
+    "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+    "HOTSPOT_PAPER_LABELS": [],
+    "HOTSPOT_PAPER_PRIMARY_KIND": null,
+    "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+    "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default",
+    "EVIDENCE": 8,
+    "LOAD": 10,
+    "PROXIMITY": 3,
+    "READ_SCORE": 10.0
+  },
+  "2605.14220": {
+    "ARXIVID": "2605.14220",
+    "COMMENT": "Isolates numerical rollout/update disagreement as a cause of training collapse at fixed policy weights.",
+    "RELEVANCE": 5,
+    "NOVELTY": 9,
+    "PRIMARY_TOPIC_ID": "training_systems",
+    "MATCHED_TOPIC_IDS": [
+      "training_systems"
+    ],
+    "TOPIC_MATCH_COMMENT": "Numerical consistency is closest to training systems; the core issue is RL post-training optimization, without a demonstrated architectural destabilization mechanism.",
+    "HOTSPOT_PAPER_TAGS": [],
+    "HOTSPOT_PAPER_COMMENT": "",
+    "SCORE": 14,
+    "authors": [
+      "Tianle Zhong",
+      "Neiwen Ling",
+      "Yifan Pi",
+      "Zijun Wei",
+      "Tianshu Yu",
+      "Geoffrey Fox",
+      "Peng Wu",
+      "Xiao Yu"
+    ],
+    "title": "Diagnosing Training Inference Mismatch in LLM Reinforcement Learning",
+    "abstract": "Modern LLM RL systems separate rollout generation from policy optimization. These two stages are expected to produce token probabilities that match exactly. However, implementation differences can make them assign different values to the same sequence under the same model weights, inducing Training-Inference Mismatch (TIM). TIM is difficult to inspect because it is entangled with off-policy drift and common stabilization mechanisms. In this work, we isolate TIM in a zero-mismatch diagnostic setting (VeXact), and show that small token-level numerical disagreements can independently cause training collapse. We further show that TIM changes the effective optimization problem, and identify a set of remedies that could mitigate TIM. Our results suggest that TIM is not benign numerical noise, but a systems-level perturbation that should be treated as a first-order factor in analyzing LLM RL stability.",
+    "arxiv_id": "2605.14220",
+    "PRIMARY_TOPIC_LABEL": "Training Algorithms That Change What Is Possible",
+    "MATCHED_TOPIC_LABELS": [
+      "Training Algorithms That Change What Is Possible"
+    ],
+    "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+    "HOTSPOT_PAPER_LABELS": [],
+    "HOTSPOT_PAPER_PRIMARY_KIND": null,
+    "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+    "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default",
+    "EVIDENCE": 5,
+    "LOAD": 6,
+    "PROXIMITY": 4,
+    "READ_SCORE": 11.0
+  },
+  "2607.20457": {
+    "ARXIVID": "2607.20457",
+    "COMMENT": "Replaces replicated Star Attention anchors with attention sinks and rare-token block summaries.",
+    "RELEVANCE": 4,
+    "NOVELTY": 5,
+    "PRIMARY_TOPIC_ID": "efficiency_scaling",
+    "MATCHED_TOPIC_IDS": [
+      "efficiency_scaling"
+    ],
+    "TOPIC_MATCH_COMMENT": "The replacement targets a particular long-context inference scheme and reduces its prefill computation.",
+    "HOTSPOT_PAPER_TAGS": [],
+    "HOTSPOT_PAPER_COMMENT": "",
+    "SCORE": 9,
+    "authors": [
+      "Aryan Sood",
+      "Shantanu Acharya",
+      "Gaurav Kumar Nayak"
+    ],
+    "title": "Dropping the Anchor: Statistical Context Summarization for Distributed Systems via Pulsar Attention",
+    "abstract": "Inference with large language models (LLMs) on long sequences is computationally expensive due to the quadratic complexity of self-attention. Distributed blockwise methods such as Star Attention reduce this cost by sharding context across hosts, but rely on prepending a static, content-blind copy of the first block to every host. We propose Pulsar Attention, which replaces the static anchor with two lightweight, content-aware components: a small attention-sink prefix that stabilizes softmax, and compact cross-block summaries built via a Max-IDF heuristic that selects chunks containing globally rare tokens. This reduces the Phase 1 per-GPU FLOPs by up to 3.3x over Star Attention while retaining an identical KV cache footprint. On RULER with Llama-3.1-8B-Instruct, Pulsar Attention outperforms Star Attention at sequence lengths up to 128K tokens and remains competitive with dense attention across most tasks, with task-dependent absolute gains of up to 4.7% over the dense baseline.",
+    "arxiv_id": "2607.20457",
+    "PRIMARY_TOPIC_LABEL": "Efficiency, Compression, and Large-Scale Training",
+    "MATCHED_TOPIC_LABELS": [
+      "Efficiency, Compression, and Large-Scale Training"
+    ],
+    "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+    "HOTSPOT_PAPER_LABELS": [],
+    "HOTSPOT_PAPER_PRIMARY_KIND": null,
+    "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+    "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default",
+    "EVIDENCE": 7,
+    "LOAD": 4,
+    "PROXIMITY": 3,
+    "READ_SCORE": 12.0
+  },
+  "2605.14249": {
+    "ARXIVID": "2605.14249",
+    "COMMENT": "Predicts multi-GPU energy costs across parallelism and compute-communication overlap configurations.",
+    "RELEVANCE": 2,
+    "NOVELTY": 5,
+    "PRIMARY_TOPIC_ID": "efficiency_scaling",
+    "MATCHED_TOPIC_IDS": [
+      "efficiency_scaling"
+    ],
+    "TOPIC_MATCH_COMMENT": "Resource-efficiency modeling is the closest fit; the framework selects inference deployment configurations.",
+    "HOTSPOT_PAPER_TAGS": [],
+    "HOTSPOT_PAPER_COMMENT": "",
+    "SCORE": 7,
+    "authors": [
+      "Zhiye Song",
+      "Kyungmi Lee",
+      "Eun Kyung Lee",
+      "Xin Zhang",
+      "Tamar Eilam",
+      "Anantha P. Chandrakasan"
+    ],
+    "title": "EnergyLens: Predictive Energy-Aware Exploration for Multi-GPU LLM Inference Optimization",
+    "abstract": "We present EnergyLens, an end-to-end framework for energy-aware large language model (LLM) inference optimization. As LLMs scale, predicting and reducing their energy footprint has become critical for sustainability and datacenter operations, yet existing approaches either require production-level code and expensive profiling or fail to accurately capture multi-GPU energy behavior. As a result, practitioners lack tools for deciding which optimizations to prioritize and for selecting among existing deployment configurations when exhaustive profiling is impractical. EnergyLens addresses this gap with an intuitive einsum-based interface that captures LLM specifications including fusion, parallelism, and compute-communication overlap, combined with load-imbalance-aware MoE modeling and an empirically driven communication energy model for multi-GPU settings. We validate EnergyLens on Llama3 and Qwen3-MoE across tensor-parallel and expert-parallel configurations, achieving mean absolute percentage errors (MAPEs) between 9.25% and 13.19% for multi-GPU prefill and decode energy, and 12.97% across SM allocations for Megatron-style overlap. Our energy-driven exploration reveals up to 1.47x and 52.9x energy variation across configurations in prefill and decode efficiency and motivates distributed serving. We further show that compute-communication overlap is difficult to optimize with intuition alone, but EnergyLens correctly identifies Pareto-optimal overlap configurations.",
+    "arxiv_id": "2605.14249",
+    "PRIMARY_TOPIC_LABEL": "Efficiency, Compression, and Large-Scale Training",
+    "MATCHED_TOPIC_LABELS": [
+      "Efficiency, Compression, and Large-Scale Training"
+    ],
+    "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+    "HOTSPOT_PAPER_LABELS": [],
+    "HOTSPOT_PAPER_PRIMARY_KIND": null,
+    "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+    "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default",
+    "EVIDENCE": 7,
+    "LOAD": 4,
+    "PROXIMITY": 2,
+    "READ_SCORE": 9.0
+  },
+  "2605.14773": {
+    "ARXIVID": "2605.14773",
+    "COMMENT": "Varies the selected-data fraction over training to control selection-induced regularization.",
+    "RELEVANCE": 4,
+    "NOVELTY": 6,
+    "PRIMARY_TOPIC_ID": "architecture_training",
+    "MATCHED_TOPIC_IDS": [
+      "architecture_training"
+    ],
+    "TOPIC_MATCH_COMMENT": "Data-volume scheduling addresses training dynamics; the concrete demonstrations concern vision training and LLM instruction tuning.",
+    "HOTSPOT_PAPER_TAGS": [],
+    "HOTSPOT_PAPER_COMMENT": "",
+    "SCORE": 10,
+    "authors": [
+      "Suorong Yang",
+      "Hanqi Zhu",
+      "Hai Gan",
+      "Fangjian Su",
+      "Guang Li",
+      "Furao Shen",
+      "Soujanya Poria"
+    ],
+    "title": "Beyond What to Select: A Plug-and-play Oscillatory Data-Volume Scheduling for Efficient Model Training",
+    "abstract": "Data selection accelerates training by identifying representative training data while preserving model performance. However, existing methods mainly focus on designing sample-importance criteria, i.e., deciding what to select, while typically fixing the selected data volume as the target ratio throughout training. Thus, they are often dynamic in sample identity but static in data volume. In this work, we revisit data selection from an optimization perspective and show that selected-data training induces an implicit regularization effect modulated by the instantaneous selection ratio. This reveals a key trade-off: lower ratios amplify selection-induced regularization, whereas higher ratios preserve data coverage and optimization fidelity. Motivated by this insight, we propose PODS, a Plug-and-play Oscillatory Data-volume Scheduling framework. Rather than introducing another sample-scoring metric, PODS serves as a lightweight module that dynamically schedules how much data to select over training. Under the target selection ratio, PODS alternates between low-ratio regularization phases and high-ratio recovery phases to exploit selection-induced regularization without sacrificing optimization stability. With its lightweight, ratio-level, and task-agnostic design, PODS is compatible with existing static and dynamic selection methods and broadly applicable across training paradigms. Experiments across various datasets, architectures, and tasks show that PODS consistently improves the efficiency-generalization trade-off, e.g., reducing ImageNet-1k training cost by 50% with improved accuracy and accelerating LLM instruction tuning by over 2x without performance degradation.",
+    "arxiv_id": "2605.14773",
+    "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+    "MATCHED_TOPIC_LABELS": [
+      "Architecture and Training Dynamics"
+    ],
+    "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+    "HOTSPOT_PAPER_LABELS": [],
+    "HOTSPOT_PAPER_PRIMARY_KIND": null,
+    "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+    "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default",
+    "EVIDENCE": 6,
+    "LOAD": 5,
+    "PROXIMITY": 4,
+    "READ_SCORE": 11.5
+  }
 }

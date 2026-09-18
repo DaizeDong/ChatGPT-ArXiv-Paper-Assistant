@@ -1,621 +1,683 @@
 {
-    "2607.16184": {
-        "ARXIVID": "2607.16184",
-        "COMMENT": "Dynamically quantizes MoE expert weights to trade weight precision against KV-cache capacity at runtime.",
-        "RELEVANCE": 8,
-        "NOVELTY": 7,
-        "PRIMARY_TOPIC_ID": "efficiency_scaling",
-        "MATCHED_TOPIC_IDS": [
-            "efficiency_scaling"
-        ],
-        "TOPIC_MATCH_COMMENT": "Its core contribution is a new weight-quantization and memory-management mechanism that materially reduces MoE serving cost.",
-        "HOTSPOT_PAPER_TAGS": [],
-        "HOTSPOT_PAPER_COMMENT": "",
-        "SCORE": 15,
-        "authors": [
-            "Yuchen Yang",
-            "Yifan Zhao",
-            "Anisha Dasgupta",
-            "Sasa Misailovic"
-        ],
-        "title": "PagedWeight: Efficient MoE LLM Serving with Dynamic Quality-Aware Weight Quantization",
-        "abstract": "Mixture-of-Experts (MoE) is a popular class of large language models (LLMs), offering high efficiency and accuracy. However, in KV-cache-intensive serving scenarios, MoEs often exhibit a tension between the GPU memory requirements of the model weights and the growing KV cache. We propose PagedWeight, a novel management method for MoE LLM serving that dynamically quantizes MoE model's weights at runtime and balances expert-weight precision with the KV cache sizes. PagedWeight exposes and effectively navigates the complex tradeoff between the model's task accuracy, memory consumption, and throughput/latency. Across several memory-sensitive MoE serving scenarios, PagedWeight improves the quality-memory tradeoff over several existing quantization baselines. PagedWeight achieves FP16-equivalent accuracy with up to 72.0% GPU memory savings and 1.94$\\times$ throughput improvement, and improves quality over quantization methods by up to 39.3% at a similar memory budget with at most 4.1% throughput loss.",
-        "arxiv_id": "2607.16184",
-        "PRIMARY_TOPIC_LABEL": "Efficiency, Compression, and Large-Scale Training",
-        "MATCHED_TOPIC_LABELS": [
-            "Efficiency, Compression, and Large-Scale Training"
-        ],
-        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
-        "HOTSPOT_PAPER_LABELS": [],
-        "HOTSPOT_PAPER_PRIMARY_KIND": null,
-        "HOTSPOT_PAPER_PRIMARY_LABEL": "",
-        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
-    },
-    "2607.15655": {
-        "ARXIVID": "2607.15655",
-        "COMMENT": "Adaptively deepens and branches lookahead only when candidate uncertainty justifies additional diffusion-decoding computation.",
-        "RELEVANCE": 8,
-        "NOVELTY": 7,
-        "PRIMARY_TOPIC_ID": "efficiency_scaling",
-        "MATCHED_TOPIC_IDS": [
-            "architecture_training",
-            "efficiency_scaling"
-        ],
-        "TOPIC_MATCH_COMMENT": "Its main contribution improves the accuracy-versus-decoding-cost trade-off through dynamic computation.",
-        "HOTSPOT_PAPER_TAGS": [],
-        "HOTSPOT_PAPER_COMMENT": "",
-        "SCORE": 15,
-        "authors": [
-            "Yingqian Cui",
-            "Wei Deng",
-            "Lantao Mei",
-            "Hang Li",
-            "Charu C. Aggarwal",
-            "Hui Liu",
-            "Yue Xing"
-        ],
-        "title": "Adaptive Multi-Step Lookahead Decoding for Diffusion Language Models",
-        "abstract": "Masked diffusion language models (DLMs) enable parallel text generation by iteratively refining masked tokens, offering a promising alternative to autoregressive decoding. Recent lookahead-based decoding methods improve the accuracy--efficiency trade-off by exploring future decoding states before committing token updates. However, existing approaches mainly rely on shallow one-step lookahead, which optimizes immediate information gain but can be suboptimal for longer-horizon decoding trajectories. Meanwhile, we find that a naive extension for deeper lookahead is also ineffective, as fixed-depth rollout introduces additional computation and cannot adapt to heterogeneous intermediate decoding states. Thus, in this work, we propose AdaLook, an adaptive lookahead framework for DLM decoding. AdaLook dynamically determines whether to continue rollout based on candidate-score variance and further enables branch expansion when intermediate rollout states require additional exploration. This design avoids unnecessary deep rollout while allowing the decoder to re-trigger lookahead from informative intermediate states. Experiments on various benchmarks and models demonstrate that AdaLook achieves a better accuracy--decoding steps trade-off than existing one-step lookahead decoding methods.",
-        "arxiv_id": "2607.15655",
-        "PRIMARY_TOPIC_LABEL": "Efficiency, Compression, and Large-Scale Training",
-        "MATCHED_TOPIC_LABELS": [
-            "Architecture and Training Dynamics",
-            "Efficiency, Compression, and Large-Scale Training"
-        ],
-        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
-        "HOTSPOT_PAPER_LABELS": [],
-        "HOTSPOT_PAPER_PRIMARY_KIND": null,
-        "HOTSPOT_PAPER_PRIMARY_LABEL": "",
-        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
-    },
-    "2607.16384": {
-        "ARXIVID": "2607.16384",
-        "COMMENT": "Characterizes constant-stepsize SGD near flat minima through contraction rates and non-Gaussian scaling limits.",
-        "RELEVANCE": 7,
-        "NOVELTY": 8,
-        "PRIMARY_TOPIC_ID": "architecture_training",
-        "MATCHED_TOPIC_IDS": [
-            "architecture_training"
-        ],
-        "TOPIC_MATCH_COMMENT": "The paper provides mechanistic optimization theory for long-run SGD behavior.",
-        "HOTSPOT_PAPER_TAGS": [],
-        "HOTSPOT_PAPER_COMMENT": "",
-        "SCORE": 15,
-        "authors": [
-            "Jingyi Zhang",
-            "Cheng Mao",
-            "Debankur Mukherjee"
-        ],
-        "title": "Scaling Limits of Constant-Stepsize SGD at Flat Minima",
-        "abstract": "For stochastic gradient descent (SGD) with a constant stepsize $\u03b1$, the invariant law of the iterates, centered at a minimizer, describes the behavior of the algorithm over long time horizons. In the strongly convex case, this invariant law has the familiar $\\sqrt\u03b1$ scaling and a Gaussian limit as $\u03b1\\downarrow 0$. We show that this behavior changes fundamentally for convex objectives $H$ with flat minima and (sub)quadratic tails. More specifically, we study SGD with Markovian noise generated by a contractive driving chain. For every sufficiently small constant stepsize $\u03b1$, we prove existence, uniqueness, and geometric convergence to an augmented invariant law in a Wasserstein distance induced by an $\u03b1$-dependent metric. When the minimizer $x_\\star$ has local flatness exponent $m\\ge2$, meaning that $\\nabla^2 H(x)\\asymp \\lVert x-x_\\star\\rVert^{m-2} I_d$ as $x\\to x_\\star$, we obtain a contraction bound with factor $1-c\u03b1^{m-1}$, where $c>0$ is a constant. This recovers the factor $1-c\u03b1$ in the quadratic case $m=2$. We then analyze the small-stepsize scaling limit. We show that the invariant law concentrates on the scale $\u03b1^{1/m}$ and that the rescaled iterates converge weakly to the stationary distribution of the stochastic differential equation $$ dY_t=-h_0(Y_t)\\,dt+\u03a3^{1/2}\\,dB_t , $$ where $h_0$ is the limiting drift at the minimizer and $\u03a3$ denotes the asymptotic covariance. This recovers the Gaussian limit when $m=2$ and gives generally non-Gaussian stationary limits in the flat case $m>2$. Finally, we give corresponding results for coordinate-separable objectives with unequal flatness exponents.",
-        "arxiv_id": "2607.16384",
-        "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
-        "MATCHED_TOPIC_LABELS": [
-            "Architecture and Training Dynamics"
-        ],
-        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
-        "HOTSPOT_PAPER_LABELS": [],
-        "HOTSPOT_PAPER_PRIMARY_KIND": null,
-        "HOTSPOT_PAPER_PRIMARY_LABEL": "",
-        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
-    },
-    "2607.15623": {
-        "ARXIVID": "2607.15623",
-        "COMMENT": "Proves that regularized repeated training converges toward model-independent stable signals under performative feedback.",
-        "RELEVANCE": 7,
-        "NOVELTY": 8,
-        "PRIMARY_TOPIC_ID": "architecture_training",
-        "MATCHED_TOPIC_IDS": [
-            "architecture_training"
-        ],
-        "TOPIC_MATCH_COMMENT": "The stable-signal principle is a theoretical account of retraining dynamics and convergence.",
-        "HOTSPOT_PAPER_TAGS": [],
-        "HOTSPOT_PAPER_COMMENT": "",
-        "SCORE": 15,
-        "authors": [
-            "Moritz Hardt"
-        ],
-        "title": "Retraining Seeks Stable Signals",
-        "abstract": "Predictive models deployed at scale influence future data, a phenomenon called performativity. And there is always one way to cope: Train the model on new data, deploy it again, and repeat. This process, called retraining or repeated risk minimization, creates a feedback loop between model and data that real-world learning systems can't avoid. Results on performative prediction shed light on this dynamic: If the model's influence on the data is small, retraining reaches a fixed point. What remains open is why fixed points should naturally exist, and what governs retraining when the model's influence is strong. In this work we develop a new perspective on retraining -- the stable signal principle -- that addresses these questions. We start from the assumption that the prediction target has at least some small model-independent component, a stable signal, such as the intrinsic quality of an item. We prove that when a nonzero stable signal exists, repeated risk minimization, suitably regularized, converges geometrically to the direction of this stable signal. This is true even if the model's influence on the target is arbitrarily large relative to the stable signal. Regularization emerges naturally as a force to control performativity, rather than to promote generalization, revealing a new facet of an old concept. We extend the analysis to a broad family of affine retraining operators under arbitrary model-induced feature changes, heterogeneous time-varying effects, and nonlinear responses. The stable signal perspective also applies to data feedback loops in language modeling, providing new explanations for the stability of language model training from model-generated data.",
-        "arxiv_id": "2607.15623",
-        "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
-        "MATCHED_TOPIC_LABELS": [
-            "Architecture and Training Dynamics"
-        ],
-        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
-        "HOTSPOT_PAPER_LABELS": [],
-        "HOTSPOT_PAPER_PRIMARY_KIND": null,
-        "HOTSPOT_PAPER_PRIMARY_LABEL": "",
-        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
-    },
-    "2607.15525": {
-        "ARXIVID": "2607.15525",
-        "COMMENT": "Evaluates learned edge-function networks as replacements for Transformer feed-forward layers and audits their pruning behavior.",
-        "RELEVANCE": 8,
-        "NOVELTY": 6,
-        "PRIMARY_TOPIC_ID": "architecture_training",
-        "MATCHED_TOPIC_IDS": [
-            "architecture_training",
-            "efficiency_scaling"
-        ],
-        "TOPIC_MATCH_COMMENT": "The core question concerns an alternative language-model feed-forward architecture, with compression as a secondary contribution.",
-        "HOTSPOT_PAPER_TAGS": [],
-        "HOTSPOT_PAPER_COMMENT": "",
-        "SCORE": 14,
-        "authors": [
-            "Felippe Alves",
-            "Renato Vicente"
-        ],
-        "title": "Kolmogorov--Arnold Networks for Small Language Models",
-        "abstract": "Kolmogorov--Arnold Networks (KANs) replace fixed node activations with learned one-dimensional edge functions, offering an explicit interface for interpretation and a possible alternative to transformer feed-forward networks. We test these claims separately. In a six-layer, 10M-parameter B-spline KAN, we reconstruct all 884,736 feed-forward edges: 87.8\\% exceed (NLS>0.1) and 0.4\\% are inactive. Pruning the lowest-activity 20--25\\% causes negligible loss increase, although structured MLP neuron pruning tolerates comparable sparsity. The audit replicates on BabyLM, but grid-size sweeps show that near-total fPCA compression and high closed-form-fit coverage are properties of the low-capacity grid-2 basis, not universal KAN behavior. For replacement, we evaluate MLP, SwiGLU, grouped Chebyshev, and rational GR-KAN networks on BabyLM. The KAN-family and gated variants improve validation loss over the GELU MLP, but this ordering does not transfer to standardized benchmarks: across ten seeds and 59,875 BLiMP pairs, accuracies span 62.4--63.1\\%, EWoK remains at chance, and a (+0.7)-point GR-KAN effect on BLiMP reverses on the supplement. Larger tests are also cautionary: parameter-matched MLPEdge underperforms the MLP on Wikitext-103, and 286M-parameter GR-KAN remains below a SwiGLU ClimbMix baseline after stabilization. Thus, small-basis KANs provide a practical, corpus-transferable interface for auditing learned scalar transformations, but the tested replacements show no consistent benchmark, quality, or latency advantage over strong MLP baselines.",
-        "arxiv_id": "2607.15525",
-        "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
-        "MATCHED_TOPIC_LABELS": [
-            "Architecture and Training Dynamics",
-            "Efficiency, Compression, and Large-Scale Training"
-        ],
-        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
-        "HOTSPOT_PAPER_LABELS": [],
-        "HOTSPOT_PAPER_PRIMARY_KIND": null,
-        "HOTSPOT_PAPER_PRIMARY_LABEL": "",
-        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
-    },
-    "2607.15893": {
-        "ARXIVID": "2607.15893",
-        "COMMENT": "Identifies bidirectional induction circuits and an implicit masking-timestep computation in diffusion language models.",
-        "RELEVANCE": 7,
-        "NOVELTY": 7,
-        "PRIMARY_TOPIC_ID": "architecture_training",
-        "MATCHED_TOPIC_IDS": [
-            "architecture_training"
-        ],
-        "TOPIC_MATCH_COMMENT": "The paper directly analyzes computational mechanisms distinctive to diffusion-language-model architectures.",
-        "HOTSPOT_PAPER_TAGS": [
-            "daily_hot"
-        ],
-        "HOTSPOT_PAPER_COMMENT": "Mechanistic evidence about how emerging diffusion language models perform in-context learning is broadly timely.",
-        "SCORE": 14,
-        "authors": [
-            "Andy Catruna",
-            "Emilian Radoi"
-        ],
-        "title": "Induction in Both Directions: A Mechanistic Analysis of In-Context Learning in Masked Diffusion Language Models",
-        "abstract": "While the internal mechanisms of autoregressive (AR) transformers have been studied extensively, much less is known about diffusion language models (DLMs), an emerging alternative that generates text by iterative denoising. In this work, we study how DLMs implement induction, a mechanism behind in-context learning in which the model finds a repeated context and copies the token that followed it. Our analysis compares attention-only AR models and absorbing-mask DLMs with matched architectures. We find that DLMs learn a bidirectional induction circuit, where previous-token and next-token heads write local context into the residual stream and later induction heads use it to find and copy the answer from the matching source position. The circuit is direction-symmetric, working whether the source appears in the past or in the future. When only left context is visible, matching what an AR model sees, the DLM does not outperform its AR counterpart in induction capabilities. However, we observe it has stronger induction when both sides of the masked token are visible, pointing to bidirectional context access rather than a stronger one-sided mechanism. Beyond induction, we provide causal evidence that DLMs compute the global fraction of masked tokens and use it as an implicit timestep, even though they are given no explicit timestep embedding.",
-        "arxiv_id": "2607.15893",
-        "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
-        "MATCHED_TOPIC_LABELS": [
-            "Architecture and Training Dynamics"
-        ],
-        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
-        "HOTSPOT_PAPER_LABELS": [
-            "Daily Hot Papers"
-        ],
-        "HOTSPOT_PAPER_PRIMARY_KIND": "daily_hot",
-        "HOTSPOT_PAPER_PRIMARY_LABEL": "Daily Hot Papers",
-        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "llm_exact"
-    },
-    "2607.18302": {
-        "ARXIVID": "2607.18302",
-        "COMMENT": "Adds a tiny domain-specific offset at early positions to alter frozen-model state without an active adapter path.",
-        "RELEVANCE": 7,
-        "NOVELTY": 7,
-        "PRIMARY_TOPIC_ID": "efficiency_scaling",
-        "MATCHED_TOPIC_IDS": [
-            "architecture_training",
-            "efficiency_scaling"
-        ],
-        "TOPIC_MATCH_COMMENT": "It is primarily an extremely lightweight adaptation mechanism, with a secondary insight into early-sequence state formation.",
-        "HOTSPOT_PAPER_TAGS": [],
-        "HOTSPOT_PAPER_COMMENT": "",
-        "SCORE": 14,
-        "authors": [
-            "Ye Qiao"
-        ],
-        "title": "A Better Start for Language Models: Domain-Conditional Position Offsets",
-        "abstract": "Autoregressive language models are least accurate at the beginning of a sequence, where little context forces reliance on a generic pretraining prior. We show that this cold-start penalty is domain dependent and reduce it with a domain-conditional position offset: a single learned vector added to the embedding activation at the first sequence positions while all model weights remain frozen. The offset trains in minutes on roughly one hundred documents, switches between domains without added sequence state, and has no measurable latency overhead. Across eight Mamba, GPT-NeoX, and Llama models spanning 410M to 8B parameters, it reduces held-out in-domain perplexity by up to 27%; the effect persists at 70B, and one position captures most of the benefit. A matched, converged direct logit-bias correction reaches at most only 7.9% and leaves later-token loss unchanged, showing that the offset propagates through model state rather than merely recalibrating the output prior. A tuned LoRA reaches lower perplexity but uses two to three orders of magnitude more parameters and an active low-rank weight path, while soft prompts add sequence positions. With wrong-domain controls, offsets improve retrieval reranking and domain classification when decisions depend on early in-domain tokens, For the few-shot reasoning whose signal occurs later, the results maintains unchanged. Position-aware prefill application also help generation tasks, whereas naive application at every cached decoding step causes repetition. The offset is therefore not the strongest adapter, but a lightweight, hot switchable tool for short in-domain scoring and calibration.",
-        "arxiv_id": "2607.18302",
-        "PRIMARY_TOPIC_LABEL": "Efficiency, Compression, and Large-Scale Training",
-        "MATCHED_TOPIC_LABELS": [
-            "Architecture and Training Dynamics",
-            "Efficiency, Compression, and Large-Scale Training"
-        ],
-        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
-        "HOTSPOT_PAPER_LABELS": [],
-        "HOTSPOT_PAPER_PRIMARY_KIND": null,
-        "HOTSPOT_PAPER_PRIMARY_LABEL": "",
-        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
-    },
-    "2607.15516": {
-        "ARXIVID": "2607.15516",
-        "COMMENT": "Co-designs query-agnostic prompt compression with cache-tier constraints to preserve reusable prefixes and minimize API cost.",
-        "RELEVANCE": 7,
-        "NOVELTY": 7,
-        "PRIMARY_TOPIC_ID": "efficiency_scaling",
-        "MATCHED_TOPIC_IDS": [
-            "efficiency_scaling"
-        ],
-        "TOPIC_MATCH_COMMENT": "The paper introduces a cost-aware compression mechanism that materially changes inference expense under prefix caching.",
-        "HOTSPOT_PAPER_TAGS": [],
-        "HOTSPOT_PAPER_COMMENT": "",
-        "SCORE": 14,
-        "authors": [
-            "Yan Song"
-        ],
-        "title": "Cache-Aware Prompt Compression:A Two-Tier Cost Model for LLM API Caching",
-        "abstract": "Production LLM deployments combine two cost-reduction primitives: prompt caching (a discounted rate for re-used token prefixes) and prompt compression (fewer tokens sent). The compression literature has standardized on query-aware methods that produce a different compressed prefix per query, mechanically invalidating the prefix-strict cache on every call. We characterize this cost empirically on Anthropic's Sonnet 4.6 API and find caching is far from the rho=1.0 ideal the literature assumes: Sonnet's cache has a two-tier architecture with a sharp threshold near 3,500 tokens, below which the hit rate plateaus at rho~0.83 across 30-call sessions. Our cost model predicts, and experiments confirm, that under realistic rho, query-aware compression beats naive caching at high compression ratios (r>=6). We propose Cache-Aware Prompt Compression (CAPC), pairing query-agnostic compression with explicit cache_control plus a tier-preserving ratio bound that prevents over-compression from pushing the cached prefix into the hot tier. CAPC is the cheapest strategy in 16/16 configurations on LongBench-v2, with mean savings of 49% over cache-only, 64% over query-aware compression, and 90% over vanilla, at quality within 0.05 of the uncompressed baseline. We validate CAPC on three production workloads: an enterprise tool-using assistant with a 94k-token schema prefix (51.7% cost reduction at r=3); a graphify knowledge-graph RAG pipeline across two codebases (9.3x vs cache-all on FastAPI, 2.4x on httpx); and the public tau-bench retail benchmark (50 tasks), where CAPC is the cheapest of four strategies with reward exactly equal to vanilla (both 36/50, p=1.00) while query-aware compression is the most expensive at +40.1% over vanilla -- the first production confirmation of the crossover model's negative-ROI prediction on a public benchmark.",
-        "arxiv_id": "2607.15516",
-        "PRIMARY_TOPIC_LABEL": "Efficiency, Compression, and Large-Scale Training",
-        "MATCHED_TOPIC_LABELS": [
-            "Efficiency, Compression, and Large-Scale Training"
-        ],
-        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
-        "HOTSPOT_PAPER_LABELS": [],
-        "HOTSPOT_PAPER_PRIMARY_KIND": null,
-        "HOTSPOT_PAPER_PRIMARY_LABEL": "",
-        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
-    },
-    "2607.15693": {
-        "ARXIVID": "2607.15693",
-        "COMMENT": "Trains interpretable recurrent sparse-coding dynamics with score matching and implicit differentiation as a minimal diffusion model.",
-        "RELEVANCE": 6,
-        "NOVELTY": 8,
-        "PRIMARY_TOPIC_ID": "architecture_training",
-        "MATCHED_TOPIC_IDS": [
-            "architecture_training"
-        ],
-        "TOPIC_MATCH_COMMENT": "The recurrent computational mechanism and its training procedure fit architecture research, although neuroscience interpretation is a major focus.",
-        "HOTSPOT_PAPER_TAGS": [],
-        "HOTSPOT_PAPER_COMMENT": "",
-        "SCORE": 14,
-        "authors": [
-            "Zeyu Yun",
-            "Alexander Belsten",
-            "Dasheng Bi",
-            "Zahra Kadkhodaie",
-            "Yubei Chen",
-            "Bruno A. Olshausen"
-        ],
-        "title": "Toward a mechanistic understanding of inference in visual cortex and diffusion models",
-        "abstract": "We describe a model of perceptual inference in primary visual cortex (V1) equivalent to a minimal diffusion model whose function can be readily understood from its parameters. The model is based on sparse coding with a non-factorial prior over latent variables in the form of an unconstrained, pairwise interaction matrix, extending standard sparse coding inference to a general recurrent dynamical system. We efficiently train these recurrent dynamics using a denoising score-matching objective and implicit differentiation. After training on natural images, the learned interaction matrix mirrors the structure of horizontal connections in superficial layers of V1 that link neurons of similar orientation tuning. This model exhibits exceptionally good denoising performance, restoring image features such as extended contours amid extreme visual ambiguity, nearly matching the behavior of standard, black-box diffusion architectures in generalization regime. Owing to the model's simplicity, the network's Jacobian can be decomposed directly in terms of the interaction matrix between latent variables, revealing mechanistically how the recurrent dynamics assign high probability over a continuous family of natural structural deformations. Intriguingly, within this circuit, a large fraction of latent variables learn to disconnect from visual input altogether, essentially forming a hierarchical representation that appears to enforce global consistency among image features. Together, the model and results bridge two distinct domains: for neuroscience, it generates concrete, testable hypotheses regarding functional connectivity in recurrent neural circuits during perceptual inference tasks; for machine learning, it elucidates the internal mechanisms learned by diffusion models that allow them to generate infinitely many novel images from a finite training set.",
-        "arxiv_id": "2607.15693",
-        "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
-        "MATCHED_TOPIC_LABELS": [
-            "Architecture and Training Dynamics"
-        ],
-        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
-        "HOTSPOT_PAPER_LABELS": [],
-        "HOTSPOT_PAPER_PRIMARY_KIND": null,
-        "HOTSPOT_PAPER_PRIMARY_LABEL": "",
-        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
-    },
-    "2607.16169": {
-        "ARXIVID": "2607.16169",
-        "COMMENT": "Uses learning-rate and update-RMS controls to show that Muon's apparent advantage comes from supporting a larger stable effective step.",
-        "RELEVANCE": 7,
-        "NOVELTY": 6,
-        "PRIMARY_TOPIC_ID": "training_systems",
-        "MATCHED_TOPIC_IDS": [
-            "training_systems",
-            "architecture_training"
-        ],
-        "TOPIC_MATCH_COMMENT": "The paper's core is a controlled optimizer-regime analysis, with secondary insight into optimization dynamics.",
-        "HOTSPOT_PAPER_TAGS": [],
-        "HOTSPOT_PAPER_COMMENT": "",
-        "SCORE": 13,
-        "authors": [
-            "Kai Ruan",
-            "Jinghao Lin",
-            "Zihe Huang",
-            "Ziqi Zhou",
-            "Qianshan Wei",
-            "Xuan Wang",
-            "Hao Sun"
-        ],
-        "title": "When Does Muon Help Agentic Reinforcement Learning?",
-        "abstract": "Muon is competitive with AdamW in large-scale pre-training, but its operating regime in reinforcement-learning post-training remains unclear. We map this regime on ALFWorld, a sparse-reward agentic benchmark, using three group-based objectives and Qwen2.5 models from 0.5B to 3B. Under a shared KL and clipping recipe, matched optimizer comparisons and AdamW rate controls trace the usable step-size range. AdamW responds non-monotonically to rate, whereas fan-in Muon remains stable at a more aggressive effective step: at $3 \\times 10^{-5}$ it improves late success over an AdamW $10^{-6}$ baseline after correction across rate-metric tests. Its normalized-AUC effect is directionally positive but less uniform; the heuristic-matched lower-rate effect is less consistent, and tuned AdamW nearly matches high-rate Muon at 3B GraphGPO. High-rate Muon applies $3.53 \\times$ AdamW's hidden-matrix update RMS; a full-budget RMS-matched control removes the late-success gain. Together, these results identify a recipe-level operating regime in which fan-in Muon supports a more aggressive stable effective step under shared KL and clipping: the margin is largest when optimization headroom remains and contracts near saturation, after AdamW tuning, or under magnitude matching. The scale-matched control ties this spectral effect to Muon's scale convention rather than establishing a universal optimizer ranking. Code is available at https://github.com/x66ccff/verl-muon.",
-        "arxiv_id": "2607.16169",
-        "PRIMARY_TOPIC_LABEL": "Large-Scale Training Systems and Efficiency",
-        "MATCHED_TOPIC_LABELS": [
-            "Large-Scale Training Systems and Efficiency",
-            "Architecture and Training Dynamics"
-        ],
-        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
-        "HOTSPOT_PAPER_LABELS": [],
-        "HOTSPOT_PAPER_PRIMARY_KIND": null,
-        "HOTSPOT_PAPER_PRIMARY_LABEL": "",
-        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
-    },
-    "2607.15778": {
-        "ARXIVID": "2607.15778",
-        "COMMENT": "Dynamically allocates fine- or coarse-grained visual computation using a learned modular scheduler.",
-        "RELEVANCE": 6,
-        "NOVELTY": 7,
-        "PRIMARY_TOPIC_ID": "architecture_training",
-        "MATCHED_TOPIC_IDS": [
-            "architecture_training",
-            "efficiency_scaling"
-        ],
-        "TOPIC_MATCH_COMMENT": "Adaptive computation and capacity allocation are the framework's principal architectural mechanisms.",
-        "HOTSPOT_PAPER_TAGS": [],
-        "HOTSPOT_PAPER_COMMENT": "",
-        "SCORE": 13,
-        "authors": [
-            "Wei Feng",
-            "Xin Wang",
-            "Yu-Wei Zhan",
-            "Yuwei Zhou",
-            "Wenwu Zhu"
-        ],
-        "title": "Modularized Dynamic-Granularity Video LLM for Multi-Event Long Video Understanding",
-        "abstract": "Video Large Language Models (Video LLMs) have made significant advancements in various video understanding tasks. However, long-video scenarios remain challenging due to the tension between limited visual token budgets and the need to capture multiple key events. Existing approaches typically process long videos in two stages, i.e., i) select keyframes and ii) perform detailed perception, which exhibit limitations: they lack a modular mechanism for adaptive capacity allocation and self-correction, resulting in unreliable modeling. To tackle these challenges, we propose MoD-VLLM, a novel Modularized Dynamic-Granularity Video LLM framework for multi-event long video understanding, which unifies temporal grounding and semantic understanding iteratively and self-reflectively. Specifically, we propose a Positive-Negative Video Segments Grounding module and a Modularized Dynamic-Granularity Reflection module, which form a closed loop to progressively localize the question-related video segments. The grounding module instructs a Video LLM to distinguish relevant from irrelevant video segments based on the video question. The reflection module employs a modularized scheduler that dynamically selects fine-grained encoding for relevant positive segments to capture detailed perception and coarse-grained encoding for negative segments to maintain global context. We further propose a dynamic-granularity reinforcement learning strategy, allowing MoD-VLLM to learn optimal grounding policies and dynamic granularity visual representation jointly. Moreover, we propose MEventBench, a challenging Multi-Event Long Video Benchmark for complex long video reasoning. Extensive experiments on several long video understanding benchmarks and our MEventBench demonstrate that MoD-VLLM significantly outperforms state-of-the-art baselines.",
-        "arxiv_id": "2607.15778",
-        "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
-        "MATCHED_TOPIC_LABELS": [
-            "Architecture and Training Dynamics",
-            "Efficiency, Compression, and Large-Scale Training"
-        ],
-        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
-        "HOTSPOT_PAPER_LABELS": [],
-        "HOTSPOT_PAPER_PRIMARY_KIND": null,
-        "HOTSPOT_PAPER_PRIMARY_LABEL": "",
-        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
-    },
-    "2607.16554": {
-        "ARXIVID": "2607.16554",
-        "COMMENT": "Derives a capacity-redundancy decomposition of multi-task interference and validates it with clustered LoRA.",
-        "RELEVANCE": 6,
-        "NOVELTY": 7,
-        "PRIMARY_TOPIC_ID": "architecture_training",
-        "MATCHED_TOPIC_IDS": [
-            "architecture_training",
-            "efficiency_scaling"
-        ],
-        "TOPIC_MATCH_COMMENT": "The main result explains how shared capacity and task redundancy govern training interference.",
-        "HOTSPOT_PAPER_TAGS": [],
-        "HOTSPOT_PAPER_COMMENT": "",
-        "SCORE": 13,
-        "authors": [
-            "Asif Khan"
-        ],
-        "title": "Capacity and Redundancy Trade-offs in Multi-Task Learning",
-        "abstract": "In multi-task learning (MTL) negative transfer is often considered as an optimization artifact, but it can also be viewed as a consequence of limited shared capacity and weak task redundancy. We investigate this effect through a Capacity--Redundancy (CR) identity that decomposes the sum of per-task predictive informations into joint predictive information that includes label redundancy defined via total correlation (TC), and a residual coupling term that quantifies interference left unresolved by the shared representation. Additionally, we show two key results: (i) a clustering-gap decomposition that gives a necessary and sufficient condition for clustered sharing to outperform global sharing, and (ii) a gradient--TC bridge in a Gaussian multi-task model that formally justifies gradient cosine similarity as a proxy for redundancy ordering. Empirically, we estimate the residual coupling $\u0394$ from validation residual correlations, showing that clustered LoRA substantially reduces $\\widehat\u0394$, outperforms size-matched random partitions, and results in statistically significant gains with multi-seed confidence intervals.",
-        "arxiv_id": "2607.16554",
-        "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
-        "MATCHED_TOPIC_LABELS": [
-            "Architecture and Training Dynamics",
-            "Efficiency, Compression, and Large-Scale Training"
-        ],
-        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
-        "HOTSPOT_PAPER_LABELS": [],
-        "HOTSPOT_PAPER_PRIMARY_KIND": null,
-        "HOTSPOT_PAPER_PRIMARY_LABEL": "",
-        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
-    },
-    "2607.15773": {
-        "ARXIVID": "2607.15773",
-        "COMMENT": "Introduces reaction dynamics that counteract diffusion-driven representation collapse in deep hypergraph networks.",
-        "RELEVANCE": 6,
-        "NOVELTY": 7,
-        "PRIMARY_TOPIC_ID": "architecture_training",
-        "MATCHED_TOPIC_IDS": [
-            "architecture_training"
-        ],
-        "TOPIC_MATCH_COMMENT": "Its core contribution is a new propagation mechanism backed by a mechanistic analysis of oversmoothing dynamics.",
-        "HOTSPOT_PAPER_TAGS": [],
-        "HOTSPOT_PAPER_COMMENT": "",
-        "SCORE": 13,
-        "authors": [
-            "Zhiheng Zhou",
-            "Mengyao Zhou",
-            "Yancheng Chen",
-            "Dengyi Zhao",
-            "Xingqin Qi",
-            "Guiying Yan"
-        ],
-        "title": "From Diffusion to Reaction-Diffusion: A Dynamical-Systems View of Oversmoothing in Hypergraph Neural Networks",
-        "abstract": "Higher-order couplings enhance the expressive power of hypergraph neural networks (HGNNs), but they also intensify representation collapse in deep propagation due to strong multi-way feature mixing. This work investigates hypergraph oversmoothing from a dynamical-systems perspective and develops a reaction--diffusion framework for depth-resistant hypergraph learning. By defining hypergraph gradient and divergence operators, we interpret message passing as an incidence-level diffusion process. The analysis of pure diffusion shows that its continuous semiflow exponentially contracts the null-mode-free component of node representations and drives the Dirichlet energy to zero, revealing hypergraph oversmoothing as an intrinsic transverse-energy dissipation phenomenon. Motivated by this analysis, we propose Hypergraph Neural Reaction--Diffusion (HNRD), which introduces a reaction mechanism acting on the transverse component to compensate diffusion-induced dissipation and stabilize discriminative variations. We establish global well-posedness of the proposed dynamics and prove that the null-mode-free Dirichlet energy remains bounded away from zero. A forward-Euler discretization provides a practical HNRD layer with a stability condition for deep propagation. Experiments on benchmark and synthetic heterophilic hypergraphs demonstrate that HNRD consistently improves over representative hypergraph baselines. Depth, robustness, and efficiency analyses further show that HNRD preserves stable performance and nonzero Dirichlet energy under deep propagation and perturbations. These results provide a principled dynamical framework for designing deep hypergraph architectures that maintain higher-order expressiveness without representation collapse.",
-        "arxiv_id": "2607.15773",
-        "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
-        "MATCHED_TOPIC_LABELS": [
-            "Architecture and Training Dynamics"
-        ],
-        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
-        "HOTSPOT_PAPER_LABELS": [],
-        "HOTSPOT_PAPER_PRIMARY_KIND": null,
-        "HOTSPOT_PAPER_PRIMARY_LABEL": "",
-        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
-    },
-    "2607.15621": {
-        "ARXIVID": "2607.15621",
-        "COMMENT": "Trains a fast action expert under randomized KV-cache staleness while a frozen vision-language backbone runs asynchronously.",
-        "RELEVANCE": 6,
-        "NOVELTY": 7,
-        "PRIMARY_TOPIC_ID": "architecture_training",
-        "MATCHED_TOPIC_IDS": [
-            "architecture_training",
-            "efficiency_scaling"
-        ],
-        "TOPIC_MATCH_COMMENT": "The fast-slow modular computation and staleness-aware training are architectural, though demonstrated specifically for driving.",
-        "HOTSPOT_PAPER_TAGS": [],
-        "HOTSPOT_PAPER_COMMENT": "",
-        "SCORE": 13,
-        "authors": [
-            "Yun Li",
-            "Jiachen Gong",
-            "Simon Thompson",
-            "Ehsan Javanmardi",
-            "Qunli Zhang",
-            "Zifan Zeng",
-            "Shiming Liu",
-            "Peng Wang",
-            "Zixuan Guo",
-            "Manabu Tsukada"
-        ],
-        "title": "Think at 5 Hz, Act at 20 Hz: Asynchronous Fast-Slow Vision-Language-Action Inference for Closed-Loop Driving",
-        "abstract": "Large language models bring instruction following and scene reasoning to end-to-end driving, but their inference latency collides with the control rate a vehicle requires. Existing closed-loop agents hide this gap by invoking the model on alternate simulation ticks and replaying the previous command in between, so half of all control outputs ignore the newest observations. We present a fast-slow architecture that removes this compromise. A frozen 7B vision-language backbone acts as the slow system, digesting navigation instructions and visual history at low frequency while exposing its per-layer key-value cache as a standing representation of the scene. A lightweight action expert acts as the fast system, attending to this cache and to the current camera frame at every simulation tick to regress waypoints in a single forward pass. Since the cache lags behind the world at deployment, we train the expert under randomized staleness, aligning training with asynchronous execution. On LangAuto-Short routes in CARLA, our system produces fresh control at every 50 ms simulation tick and lifts route completion from 37.0 to 94.0 over the frame-skipping baseline. A frame-skip ablation with the same expert separates the two factors at work: the expert raises the driving score on its own, while per-tick freshness raises completion from 82.1 to 94.0 and cuts red-light violations by a third. Trained on a single town, the expert transfers zero-shot to two unseen towns, holding 84-94% route completion where the baseline reaches 31-41%. It reduces open-loop waypoint error by nearly a factor of four compared to the backbone's own action head, at a per-tick model cost of 32 ms that is independent of history length on a single consumer GPU.",
-        "arxiv_id": "2607.15621",
-        "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
-        "MATCHED_TOPIC_LABELS": [
-            "Architecture and Training Dynamics",
-            "Efficiency, Compression, and Large-Scale Training"
-        ],
-        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
-        "HOTSPOT_PAPER_LABELS": [],
-        "HOTSPOT_PAPER_PRIMARY_KIND": null,
-        "HOTSPOT_PAPER_PRIMARY_LABEL": "",
-        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
-    },
-    "2607.16027": {
-        "ARXIVID": "2607.16027",
-        "COMMENT": "Studies competitive Hebbian learning as a constrained mechanism for allocating sparse representational capacity.",
-        "RELEVANCE": 6,
-        "NOVELTY": 6,
-        "PRIMARY_TOPIC_ID": "architecture_training",
-        "MATCHED_TOPIC_IDS": [
-            "architecture_training"
-        ],
-        "TOPIC_MATCH_COMMENT": "The work analyzes how an alternative learning rule shapes representation cost and training behavior.",
-        "HOTSPOT_PAPER_TAGS": [],
-        "HOTSPOT_PAPER_COMMENT": "",
-        "SCORE": 12,
-        "authors": [
-            "Patrick Inoue",
-            "Florian R\u00f6hrbein",
-            "Andreas Knoblauch"
-        ],
-        "title": "Constrained Hebbian Learning Supports Efficient Representational Allocation under Structural Constraints",
-        "abstract": "Introduction: Biological systems face anatomical and metabolic constraints, including costly synaptic maintenance and limited connectivity. These constraints favor neural codes that compress behaviorally relevant information into low-redundancy patterns. We test whether an excitatory competitive Hebbian rule can support synaptic resource allocation under such constraints and whether the resulting representations occupy a more favorable cost-performance regime than reference learning rules. Methods: Representational cost is quantified using mutual-information-based measures derived from the Variational Information Bottleneck. Experiments use fixed audiovisual embeddings from three audiovisual benchmarks (AVE, Kinetics-Sounds, VGGSound100) to isolate downstream associative plasticity. Hebbian learning is compared with Dense Difference Target Propagation (DDTP) and backpropagation (BP) under matched sparsity and architectural constraints. Results: Hebbian learning achieves lower task-information cost (CTI) than sparse BP and DDTP in the main compressed comparisons, while reaching CTI values comparable to shallow BP with nonnegative weights. Rather than uniformly improving classification performance, Hebbian learning shifts the trade-off between task-relevant information and representational cost, yielding lower CTI at comparable functional performance in several settings. Discussion: The results indicate a cost-performance trade-off rather than uniform accuracy gains. For a given level of task-relevant information, Hebbian representations retain less input information while preserving functional performance, although accuracy is slightly reduced on some datasets. These findings support interpreting Hebbian learning as a mechanism for synaptic resource allocation rather than as a general strategy for maximizing audiovisual classification accuracy.",
-        "arxiv_id": "2607.16027",
-        "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
-        "MATCHED_TOPIC_LABELS": [
-            "Architecture and Training Dynamics"
-        ],
-        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
-        "HOTSPOT_PAPER_LABELS": [],
-        "HOTSPOT_PAPER_PRIMARY_KIND": null,
-        "HOTSPOT_PAPER_PRIMARY_LABEL": "",
-        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
-    },
-    "2607.22694": {
-        "ARXIVID": "2607.22694",
-        "COMMENT": "Derives a closed-form logit correction that repairs repetitive generation attractors through a frozen output bias.",
-        "RELEVANCE": 6,
-        "NOVELTY": 6,
-        "PRIMARY_TOPIC_ID": "architecture_training",
-        "MATCHED_TOPIC_IDS": [
-            "architecture_training"
-        ],
-        "TOPIC_MATCH_COMMENT": "The work targets a language-model collapse dynamic with a mechanism-level correction.",
-        "HOTSPOT_PAPER_TAGS": [],
-        "HOTSPOT_PAPER_COMMENT": "",
-        "SCORE": 12,
-        "authors": [
-            "Wenjie Fan",
-            "Bin Ma",
-            "Dong Li"
-        ],
-        "title": "Bayesian Repetition Penalty: A Principled Adjacent-Conditional Framework for Reversing Attention Collapse in Autoregressive Language Models",
-        "abstract": "Attention collapse in autoregressive language models -- manifested as repetitive token loops where the model becomes trapped in self-reinforcing attractors -- is a persistent pathology that existing decoding-time heuristics fail to address at its root cause. We present a principled framework that penalises or compensates anomalous confidence arising from collapsed generation patterns, by comparing a token's observed frequency against its corpus prior through an adjacent-conditional probability construction. The resulting self-normalising penalty ratio $R=f(m,n,p)/f(np,n,p)$ requires no ad hoc standardisation and admits a closed-form logit offset with zero approximation error. The correction is isolated from the loss gradient and accumulated into a frozen output-layer bias via exponential moving average, enabling deployment as a repair mechanism for models that have already collapsed without requiring intrusive modifications to standard training pipelines. Experimental validation on a 1.5B-parameter model demonstrates that the frozen-bias mechanism can rescue a model already trapped in a collapsed attractor, reducing 2-gram repetition from 0.073 to near 0 while preserving generation quality.",
-        "arxiv_id": "2607.22694",
-        "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
-        "MATCHED_TOPIC_LABELS": [
-            "Architecture and Training Dynamics"
-        ],
-        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
-        "HOTSPOT_PAPER_LABELS": [],
-        "HOTSPOT_PAPER_PRIMARY_KIND": null,
-        "HOTSPOT_PAPER_PRIMARY_LABEL": "",
-        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
-    },
-    "2607.15819": {
-        "ARXIVID": "2607.15819",
-        "COMMENT": "Shows how linear self-attention and layer normalization can implement an approximate closed-form least-squares solver.",
-        "RELEVANCE": 6,
-        "NOVELTY": 6,
-        "PRIMARY_TOPIC_ID": "architecture_training",
-        "MATCHED_TOPIC_IDS": [
-            "architecture_training"
-        ],
-        "TOPIC_MATCH_COMMENT": "It isolates a concrete computational mechanism learned by a Transformer architecture.",
-        "HOTSPOT_PAPER_TAGS": [],
-        "HOTSPOT_PAPER_COMMENT": "",
-        "SCORE": 12,
-        "authors": [
-            "Katsuyuki Hagiwara"
-        ],
-        "title": "In-context learning of closed form solution to simple linear regression task using transformer with linear self-attention",
-        "abstract": "In-context learning is a remarkable property of transformers and has recently received a lot of interest. In many studies of in-context learning, it has been shown that transformers are capable of implementing solver for linear and non-linear regression problems, in which the most of them implement gradient descent algorithm. However, it is still unclear whether those implementations have actually been acquired through training. In this paper, we construct a transformer with linear self-attention, which in-context learns the least squares estimate in a simple regression task. The point here is that the closed form (analytical) solution is approximately obtained by using layer normalization rather than an approximate solution based on gradient descent algorithm. Then, we show an experimental example, in which our implementation is mainly used in the transformer trained with l1 regularization when the target output is the least squares estimate.",
-        "arxiv_id": "2607.15819",
-        "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
-        "MATCHED_TOPIC_LABELS": [
-            "Architecture and Training Dynamics"
-        ],
-        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
-        "HOTSPOT_PAPER_LABELS": [],
-        "HOTSPOT_PAPER_PRIMARY_KIND": null,
-        "HOTSPOT_PAPER_PRIMARY_LABEL": "",
-        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
-    },
-    "2607.15919": {
-        "ARXIVID": "2607.15919",
-        "COMMENT": "Shows that boundary-seeking data-free distillation creates conflicting gradients when decoder outputs share a low-dimensional bottleneck.",
-        "RELEVANCE": 6,
-        "NOVELTY": 6,
-        "PRIMARY_TOPIC_ID": "efficiency_scaling",
-        "MATCHED_TOPIC_IDS": [
-            "architecture_training",
-            "efficiency_scaling"
-        ],
-        "TOPIC_MATCH_COMMENT": "The main contribution identifies a structural failure mode of model distillation, with supporting optimization insight.",
-        "HOTSPOT_PAPER_TAGS": [],
-        "HOTSPOT_PAPER_COMMENT": "",
-        "SCORE": 12,
-        "authors": [
-            "Mohamed Amine Kina"
-        ],
-        "title": "On the Failure of Boundary-Seeking Distillation in Bottlenecked Generative Architectures",
-        "abstract": "Data-free knowledge distillation transfers the knowledge encoded in a teacher model to a student model without access to the original training data. Prior work such as Contrastive Abductive Knowledge Extraction (CAKE) achieves this for classifiers by synthesizing samples near the teacher's decision boundary. In this work, we investigate whether this boundary-seeking principle extends to autoencoder distillation through experiments on the MNIST dataset . To enable a direct comparison, we reformulate continuous reconstruction as a dense, per-feature classification task, allowing the decoder to output categorical logits. We show that boundary-seeking objectives are fundamentally ill-posed in bottlenecked generative architectures. CAKE operates on a single, instance-level objective, but a decoder acts as an array of tightly coupled, feature-level classifiers constrained by a shared low-dimensional bottleneck. Independently sampling contrastive targets for these coupled outputs violates the geometry of the learned latent manifold and produces severe gradient conflicts instead of informative boundary samples. Manifold-aware synthesis bypasses these conflicts entirely and establishes an effective baseline for data-free generative distillation.",
-        "arxiv_id": "2607.15919",
-        "PRIMARY_TOPIC_LABEL": "Efficiency, Compression, and Large-Scale Training",
-        "MATCHED_TOPIC_LABELS": [
-            "Architecture and Training Dynamics",
-            "Efficiency, Compression, and Large-Scale Training"
-        ],
-        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
-        "HOTSPOT_PAPER_LABELS": [],
-        "HOTSPOT_PAPER_PRIMARY_KIND": null,
-        "HOTSPOT_PAPER_PRIMARY_LABEL": "",
-        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
-    },
-    "2607.18306": {
-        "ARXIVID": "2607.18306",
-        "COMMENT": "Redistributes SAM's fixed perturbation radius across parameter blocks using accumulated squared-gradient energy.",
-        "RELEVANCE": 6,
-        "NOVELTY": 6,
-        "PRIMARY_TOPIC_ID": "architecture_training",
-        "MATCHED_TOPIC_IDS": [
-            "architecture_training"
-        ],
-        "TOPIC_MATCH_COMMENT": "The method directly modifies optimization dynamics, but lacks evidence from large-scale pretraining systems.",
-        "HOTSPOT_PAPER_TAGS": [],
-        "HOTSPOT_PAPER_COMMENT": "",
-        "SCORE": 12,
-        "authors": [
-            "Zhen Huang",
-            "Jiaxin Deng",
-            "Junbiao Pang"
-        ],
-        "title": "Gradient-Energy Guided Block-Wise Perturbations for Sharpness-Aware Minimization",
-        "abstract": "Sharpness-Aware Minimization (SAM) improves generalization by minimizing the worst-case loss in a local parameter neighborhood. Standard SAM implicitly allocates its global perturbation budget across parameter blocks according to instantaneous minibatch gradient norms. Such an allocation can be noisy and may not reflect the sensitivity that blocks accumulate throughout training. We propose Gradient-Energy Adaptive Radius SAM (GEAR-SAM), which maintains an exponential moving average (EMA) of squared block gradients as a lightweight, curvature-related sensitivity signal and allocates the fixed SAM budget through a closed-form constrained optimization. GEAR-SAM preserves the global SAM radius, requires no Hessian-vector products or explicit Fisher estimation, and adds only scalar state beyond SAM. Experiments on image classification, transfer learning, noisy-label learning, and partition studies demonstrate improved generalization and robustness across architectures and tasks. More broadly, GEAR-SAM provides a dynamic view of sharpness-aware optimization: a fixed perturbation budget should be redistributed as the sensitivity of functional network blocks evolves during training.",
-        "arxiv_id": "2607.18306",
-        "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
-        "MATCHED_TOPIC_LABELS": [
-            "Architecture and Training Dynamics"
-        ],
-        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
-        "HOTSPOT_PAPER_LABELS": [],
-        "HOTSPOT_PAPER_PRIMARY_KIND": null,
-        "HOTSPOT_PAPER_PRIMARY_LABEL": "",
-        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
-    }
+  "2607.16184": {
+    "ARXIVID": "2607.16184",
+    "COMMENT": "Runtime expert-weight precision trades off against KV-cache capacity under a shared GPU-memory budget.",
+    "RELEVANCE": 4,
+    "NOVELTY": 6,
+    "PRIMARY_TOPIC_ID": "efficiency_scaling",
+    "MATCHED_TOPIC_IDS": [
+      "efficiency_scaling"
+    ],
+    "TOPIC_MATCH_COMMENT": "Closest to compression and memory efficiency, but the contribution is dynamic quantization for MoE serving.",
+    "HOTSPOT_PAPER_TAGS": [],
+    "HOTSPOT_PAPER_COMMENT": "",
+    "SCORE": 10,
+    "authors": [
+      "Yuchen Yang",
+      "Yifan Zhao",
+      "Anisha Dasgupta",
+      "Sasa Misailovic"
+    ],
+    "title": "PagedWeight: Efficient MoE LLM Serving with Dynamic Quality-Aware Weight Quantization",
+    "abstract": "Mixture-of-Experts (MoE) is a popular class of large language models (LLMs), offering high efficiency and accuracy. However, in KV-cache-intensive serving scenarios, MoEs often exhibit a tension between the GPU memory requirements of the model weights and the growing KV cache. We propose PagedWeight, a novel management method for MoE LLM serving that dynamically quantizes MoE model's weights at runtime and balances expert-weight precision with the KV cache sizes. PagedWeight exposes and effectively navigates the complex tradeoff between the model's task accuracy, memory consumption, and throughput/latency. Across several memory-sensitive MoE serving scenarios, PagedWeight improves the quality-memory tradeoff over several existing quantization baselines. PagedWeight achieves FP16-equivalent accuracy with up to 72.0% GPU memory savings and 1.94$\\times$ throughput improvement, and improves quality over quantization methods by up to 39.3% at a similar memory budget with at most 4.1% throughput loss.",
+    "arxiv_id": "2607.16184",
+    "PRIMARY_TOPIC_LABEL": "Efficiency, Compression, and Large-Scale Training",
+    "MATCHED_TOPIC_LABELS": [
+      "Efficiency, Compression, and Large-Scale Training"
+    ],
+    "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+    "HOTSPOT_PAPER_LABELS": [],
+    "HOTSPOT_PAPER_PRIMARY_KIND": null,
+    "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+    "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default",
+    "EVIDENCE": 6,
+    "LOAD": 5,
+    "PROXIMITY": 3,
+    "READ_SCORE": 10.5
+  },
+  "2607.15655": {
+    "ARXIVID": "2607.15655",
+    "COMMENT": "Candidate-score variance controls lookahead depth and branching across diffusion decoding states.",
+    "RELEVANCE": 4,
+    "NOVELTY": 5,
+    "PRIMARY_TOPIC_ID": "efficiency_scaling",
+    "MATCHED_TOPIC_IDS": [
+      "efficiency_scaling"
+    ],
+    "TOPIC_MATCH_COMMENT": "Closest to decoding efficiency; adaptive lookahead changes inference-time search rather than language-model training.",
+    "HOTSPOT_PAPER_TAGS": [],
+    "HOTSPOT_PAPER_COMMENT": "",
+    "SCORE": 9,
+    "authors": [
+      "Yingqian Cui",
+      "Wei Deng",
+      "Lantao Mei",
+      "Hang Li",
+      "Charu C. Aggarwal",
+      "Hui Liu",
+      "Yue Xing"
+    ],
+    "title": "Adaptive Multi-Step Lookahead Decoding for Diffusion Language Models",
+    "abstract": "Masked diffusion language models (DLMs) enable parallel text generation by iteratively refining masked tokens, offering a promising alternative to autoregressive decoding. Recent lookahead-based decoding methods improve the accuracy--efficiency trade-off by exploring future decoding states before committing token updates. However, existing approaches mainly rely on shallow one-step lookahead, which optimizes immediate information gain but can be suboptimal for longer-horizon decoding trajectories. Meanwhile, we find that a naive extension for deeper lookahead is also ineffective, as fixed-depth rollout introduces additional computation and cannot adapt to heterogeneous intermediate decoding states. Thus, in this work, we propose AdaLook, an adaptive lookahead framework for DLM decoding. AdaLook dynamically determines whether to continue rollout based on candidate-score variance and further enables branch expansion when intermediate rollout states require additional exploration. This design avoids unnecessary deep rollout while allowing the decoder to re-trigger lookahead from informative intermediate states. Experiments on various benchmarks and models demonstrate that AdaLook achieves a better accuracy--decoding steps trade-off than existing one-step lookahead decoding methods.",
+    "arxiv_id": "2607.15655",
+    "PRIMARY_TOPIC_LABEL": "Efficiency, Compression, and Large-Scale Training",
+    "MATCHED_TOPIC_LABELS": [
+      "Efficiency, Compression, and Large-Scale Training"
+    ],
+    "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+    "HOTSPOT_PAPER_LABELS": [],
+    "HOTSPOT_PAPER_PRIMARY_KIND": null,
+    "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+    "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default",
+    "EVIDENCE": 5,
+    "LOAD": 4,
+    "PROXIMITY": 3,
+    "READ_SCORE": 10.0
+  },
+  "2607.16384": {
+    "ARXIVID": "2607.16384",
+    "COMMENT": "The local flatness exponent changes constant-step SGD's stationary concentration scale and limiting distribution.",
+    "RELEVANCE": 2,
+    "NOVELTY": 7,
+    "PRIMARY_TOPIC_ID": "architecture_training",
+    "MATCHED_TOPIC_IDS": [
+      "architecture_training"
+    ],
+    "TOPIC_MATCH_COMMENT": "Closest to optimizer dynamics, but the core subject is abstract stochastic-gradient asymptotics without a language-model training mechanism.",
+    "HOTSPOT_PAPER_TAGS": [],
+    "HOTSPOT_PAPER_COMMENT": "",
+    "SCORE": 9,
+    "authors": [
+      "Jingyi Zhang",
+      "Cheng Mao",
+      "Debankur Mukherjee"
+    ],
+    "title": "Scaling Limits of Constant-Stepsize SGD at Flat Minima",
+    "abstract": "For stochastic gradient descent (SGD) with a constant stepsize $α$, the invariant law of the iterates, centered at a minimizer, describes the behavior of the algorithm over long time horizons. In the strongly convex case, this invariant law has the familiar $\\sqrtα$ scaling and a Gaussian limit as $α\\downarrow 0$. We show that this behavior changes fundamentally for convex objectives $H$ with flat minima and (sub)quadratic tails. More specifically, we study SGD with Markovian noise generated by a contractive driving chain. For every sufficiently small constant stepsize $α$, we prove existence, uniqueness, and geometric convergence to an augmented invariant law in a Wasserstein distance induced by an $α$-dependent metric. When the minimizer $x_\\star$ has local flatness exponent $m\\ge2$, meaning that $\\nabla^2 H(x)\\asymp \\lVert x-x_\\star\\rVert^{m-2} I_d$ as $x\\to x_\\star$, we obtain a contraction bound with factor $1-cα^{m-1}$, where $c>0$ is a constant. This recovers the factor $1-cα$ in the quadratic case $m=2$. We then analyze the small-stepsize scaling limit. We show that the invariant law concentrates on the scale $α^{1/m}$ and that the rescaled iterates converge weakly to the stationary distribution of the stochastic differential equation $$ dY_t=-h_0(Y_t)\\,dt+Σ^{1/2}\\,dB_t , $$ where $h_0$ is the limiting drift at the minimizer and $Σ$ denotes the asymptotic covariance. This recovers the Gaussian limit when $m=2$ and gives generally non-Gaussian stationary limits in the flat case $m>2$. Finally, we give corresponding results for coordinate-separable objectives with unequal flatness exponents.",
+    "arxiv_id": "2607.16384",
+    "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+    "MATCHED_TOPIC_LABELS": [
+      "Architecture and Training Dynamics"
+    ],
+    "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+    "HOTSPOT_PAPER_LABELS": [],
+    "HOTSPOT_PAPER_PRIMARY_KIND": null,
+    "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+    "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default",
+    "EVIDENCE": 5,
+    "LOAD": 10,
+    "PROXIMITY": 2,
+    "READ_SCORE": 4.0
+  },
+  "2607.15623": {
+    "ARXIVID": "2607.15623",
+    "COMMENT": "Regularized retraining can recover a stable signal even under arbitrarily strong model-induced data feedback.",
+    "RELEVANCE": 5,
+    "NOVELTY": 8,
+    "PRIMARY_TOPIC_ID": "architecture_training",
+    "MATCHED_TOPIC_IDS": [
+      "architecture_training"
+    ],
+    "TOPIC_MATCH_COMMENT": "Closest to training dynamics through model-data feedback; language-model training is an extension of the general performative-prediction theory.",
+    "HOTSPOT_PAPER_TAGS": [],
+    "HOTSPOT_PAPER_COMMENT": "",
+    "SCORE": 13,
+    "authors": [
+      "Moritz Hardt"
+    ],
+    "title": "Retraining Seeks Stable Signals",
+    "abstract": "Predictive models deployed at scale influence future data, a phenomenon called performativity. And there is always one way to cope: Train the model on new data, deploy it again, and repeat. This process, called retraining or repeated risk minimization, creates a feedback loop between model and data that real-world learning systems can't avoid. Results on performative prediction shed light on this dynamic: If the model's influence on the data is small, retraining reaches a fixed point. What remains open is why fixed points should naturally exist, and what governs retraining when the model's influence is strong. In this work we develop a new perspective on retraining -- the stable signal principle -- that addresses these questions. We start from the assumption that the prediction target has at least some small model-independent component, a stable signal, such as the intrinsic quality of an item. We prove that when a nonzero stable signal exists, repeated risk minimization, suitably regularized, converges geometrically to the direction of this stable signal. This is true even if the model's influence on the target is arbitrarily large relative to the stable signal. Regularization emerges naturally as a force to control performativity, rather than to promote generalization, revealing a new facet of an old concept. We extend the analysis to a broad family of affine retraining operators under arbitrary model-induced feature changes, heterogeneous time-varying effects, and nonlinear responses. The stable signal perspective also applies to data feedback loops in language modeling, providing new explanations for the stability of language model training from model-generated data.",
+    "arxiv_id": "2607.15623",
+    "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+    "MATCHED_TOPIC_LABELS": [
+      "Architecture and Training Dynamics"
+    ],
+    "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+    "HOTSPOT_PAPER_LABELS": [],
+    "HOTSPOT_PAPER_PRIMARY_KIND": null,
+    "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+    "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default",
+    "EVIDENCE": 5,
+    "LOAD": 8,
+    "PROXIMITY": 4,
+    "READ_SCORE": 10.0
+  },
+  "2607.15525": {
+    "ARXIVID": "2607.15525",
+    "COMMENT": "Controlled feed-forward replacements find no consistent KAN advantage over strong MLP and SwiGLU baselines.",
+    "RELEVANCE": 8,
+    "NOVELTY": 6,
+    "PRIMARY_TOPIC_ID": "architecture_training",
+    "MATCHED_TOPIC_IDS": [
+      "architecture_training"
+    ],
+    "TOPIC_MATCH_COMMENT": "Directly tests feed-forward design choices in language models and identifies spline-basis capacity as the source of apparent compression benefits.",
+    "HOTSPOT_PAPER_TAGS": [],
+    "HOTSPOT_PAPER_COMMENT": "",
+    "SCORE": 14,
+    "authors": [
+      "Felippe Alves",
+      "Renato Vicente"
+    ],
+    "title": "Kolmogorov--Arnold Networks for Small Language Models",
+    "abstract": "Kolmogorov--Arnold Networks (KANs) replace fixed node activations with learned one-dimensional edge functions, offering an explicit interface for interpretation and a possible alternative to transformer feed-forward networks. We test these claims separately. In a six-layer, 10M-parameter B-spline KAN, we reconstruct all 884,736 feed-forward edges: 87.8\\% exceed (NLS>0.1) and 0.4\\% are inactive. Pruning the lowest-activity 20--25\\% causes negligible loss increase, although structured MLP neuron pruning tolerates comparable sparsity. The audit replicates on BabyLM, but grid-size sweeps show that near-total fPCA compression and high closed-form-fit coverage are properties of the low-capacity grid-2 basis, not universal KAN behavior. For replacement, we evaluate MLP, SwiGLU, grouped Chebyshev, and rational GR-KAN networks on BabyLM. The KAN-family and gated variants improve validation loss over the GELU MLP, but this ordering does not transfer to standardized benchmarks: across ten seeds and 59,875 BLiMP pairs, accuracies span 62.4--63.1\\%, EWoK remains at chance, and a (+0.7)-point GR-KAN effect on BLiMP reverses on the supplement. Larger tests are also cautionary: parameter-matched MLPEdge underperforms the MLP on Wikitext-103, and 286M-parameter GR-KAN remains below a SwiGLU ClimbMix baseline after stabilization. Thus, small-basis KANs provide a practical, corpus-transferable interface for auditing learned scalar transformations, but the tested replacements show no consistent benchmark, quality, or latency advantage over strong MLP baselines.",
+    "arxiv_id": "2607.15525",
+    "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+    "MATCHED_TOPIC_LABELS": [
+      "Architecture and Training Dynamics"
+    ],
+    "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+    "HOTSPOT_PAPER_LABELS": [],
+    "HOTSPOT_PAPER_PRIMARY_KIND": null,
+    "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+    "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default",
+    "EVIDENCE": 9,
+    "LOAD": 5,
+    "PROXIMITY": 9,
+    "READ_SCORE": 23.5
+  },
+  "2607.15893": {
+    "ARXIVID": "2607.15893",
+    "COMMENT": "Matched AR/DLM context controls attribute stronger diffusion-model induction to bidirectional access rather than a stronger one-sided circuit.",
+    "RELEVANCE": 9,
+    "NOVELTY": 9,
+    "PRIMARY_TOPIC_ID": "architecture_training",
+    "MATCHED_TOPIC_IDS": [
+      "architecture_training"
+    ],
+    "TOPIC_MATCH_COMMENT": "Causal circuit analysis explains how masked diffusion models implement induction and infer denoising progress without explicit timestep embeddings.",
+    "HOTSPOT_PAPER_TAGS": [
+      "new_frontier",
+      "daily_hot"
+    ],
+    "HOTSPOT_PAPER_COMMENT": "Broadly important today and potentially frontier-opening: Matched AR/DLM context controls attribute stronger diffusion-model induction to bidirectional access rather than a stronger one-sided circuit.",
+    "SCORE": 18,
+    "authors": [
+      "Andy Catruna",
+      "Emilian Radoi"
+    ],
+    "title": "Induction in Both Directions: A Mechanistic Analysis of In-Context Learning in Masked Diffusion Language Models",
+    "abstract": "While the internal mechanisms of autoregressive (AR) transformers have been studied extensively, much less is known about diffusion language models (DLMs), an emerging alternative that generates text by iterative denoising. In this work, we study how DLMs implement induction, a mechanism behind in-context learning in which the model finds a repeated context and copies the token that followed it. Our analysis compares attention-only AR models and absorbing-mask DLMs with matched architectures. We find that DLMs learn a bidirectional induction circuit, where previous-token and next-token heads write local context into the residual stream and later induction heads use it to find and copy the answer from the matching source position. The circuit is direction-symmetric, working whether the source appears in the past or in the future. When only left context is visible, matching what an AR model sees, the DLM does not outperform its AR counterpart in induction capabilities. However, we observe it has stronger induction when both sides of the masked token are visible, pointing to bidirectional context access rather than a stronger one-sided mechanism. Beyond induction, we provide causal evidence that DLMs compute the global fraction of masked tokens and use it as an implicit timestep, even though they are given no explicit timestep embedding.",
+    "arxiv_id": "2607.15893",
+    "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+    "MATCHED_TOPIC_LABELS": [
+      "Architecture and Training Dynamics"
+    ],
+    "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+    "HOTSPOT_PAPER_LABELS": [
+      "New Frontier Papers",
+      "Daily Hot Papers"
+    ],
+    "HOTSPOT_PAPER_PRIMARY_KIND": "new_frontier",
+    "HOTSPOT_PAPER_PRIMARY_LABEL": "New Frontier Papers",
+    "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "heuristic",
+    "EVIDENCE": 7,
+    "LOAD": 6,
+    "PROXIMITY": 9,
+    "READ_SCORE": 22.0
+  },
+  "2607.18302": {
+    "ARXIVID": "2607.18302",
+    "COMMENT": "A matched logit-bias control shows that an early-position activation offset propagates through model state.",
+    "RELEVANCE": 5,
+    "NOVELTY": 6,
+    "PRIMARY_TOPIC_ID": "architecture_training",
+    "MATCHED_TOPIC_IDS": [
+      "architecture_training"
+    ],
+    "TOPIC_MATCH_COMMENT": "Closest to activation and positional design, but the core contribution is parameter-efficient domain adaptation of frozen models.",
+    "HOTSPOT_PAPER_TAGS": [],
+    "HOTSPOT_PAPER_COMMENT": "",
+    "SCORE": 11,
+    "authors": [
+      "Ye Qiao"
+    ],
+    "title": "A Better Start for Language Models: Domain-Conditional Position Offsets",
+    "abstract": "Autoregressive language models are least accurate at the beginning of a sequence, where little context forces reliance on a generic pretraining prior. We show that this cold-start penalty is domain dependent and reduce it with a domain-conditional position offset: a single learned vector added to the embedding activation at the first sequence positions while all model weights remain frozen. The offset trains in minutes on roughly one hundred documents, switches between domains without added sequence state, and has no measurable latency overhead. Across eight Mamba, GPT-NeoX, and Llama models spanning 410M to 8B parameters, it reduces held-out in-domain perplexity by up to 27%; the effect persists at 70B, and one position captures most of the benefit. A matched, converged direct logit-bias correction reaches at most only 7.9% and leaves later-token loss unchanged, showing that the offset propagates through model state rather than merely recalibrating the output prior. A tuned LoRA reaches lower perplexity but uses two to three orders of magnitude more parameters and an active low-rank weight path, while soft prompts add sequence positions. With wrong-domain controls, offsets improve retrieval reranking and domain classification when decisions depend on early in-domain tokens, For the few-shot reasoning whose signal occurs later, the results maintains unchanged. Position-aware prefill application also help generation tasks, whereas naive application at every cached decoding step causes repetition. The offset is therefore not the strongest adapter, but a lightweight, hot switchable tool for short in-domain scoring and calibration.",
+    "arxiv_id": "2607.18302",
+    "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+    "MATCHED_TOPIC_LABELS": [
+      "Architecture and Training Dynamics"
+    ],
+    "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+    "HOTSPOT_PAPER_LABELS": [],
+    "HOTSPOT_PAPER_PRIMARY_KIND": null,
+    "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+    "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default",
+    "EVIDENCE": 9,
+    "LOAD": 3,
+    "PROXIMITY": 4,
+    "READ_SCORE": 16.5
+  },
+  "2607.15516": {
+    "ARXIVID": "2607.15516",
+    "COMMENT": "A cache-threshold-aware compression model identifies when shortening prompts increases API cost.",
+    "RELEVANCE": 3,
+    "NOVELTY": 5,
+    "PRIMARY_TOPIC_ID": "efficiency_scaling",
+    "MATCHED_TOPIC_IDS": [
+      "efficiency_scaling"
+    ],
+    "TOPIC_MATCH_COMMENT": "Closest to efficiency through prompt compression, but its result concerns API billing and prefix-cache behavior.",
+    "HOTSPOT_PAPER_TAGS": [],
+    "HOTSPOT_PAPER_COMMENT": "",
+    "SCORE": 8,
+    "authors": [
+      "Yan Song"
+    ],
+    "title": "Cache-Aware Prompt Compression:A Two-Tier Cost Model for LLM API Caching",
+    "abstract": "Production LLM deployments combine two cost-reduction primitives: prompt caching (a discounted rate for re-used token prefixes) and prompt compression (fewer tokens sent). The compression literature has standardized on query-aware methods that produce a different compressed prefix per query, mechanically invalidating the prefix-strict cache on every call. We characterize this cost empirically on Anthropic's Sonnet 4.6 API and find caching is far from the rho=1.0 ideal the literature assumes: Sonnet's cache has a two-tier architecture with a sharp threshold near 3,500 tokens, below which the hit rate plateaus at rho~0.83 across 30-call sessions. Our cost model predicts, and experiments confirm, that under realistic rho, query-aware compression beats naive caching at high compression ratios (r>=6). We propose Cache-Aware Prompt Compression (CAPC), pairing query-agnostic compression with explicit cache_control plus a tier-preserving ratio bound that prevents over-compression from pushing the cached prefix into the hot tier. CAPC is the cheapest strategy in 16/16 configurations on LongBench-v2, with mean savings of 49% over cache-only, 64% over query-aware compression, and 90% over vanilla, at quality within 0.05 of the uncompressed baseline. We validate CAPC on three production workloads: an enterprise tool-using assistant with a 94k-token schema prefix (51.7% cost reduction at r=3); a graphify knowledge-graph RAG pipeline across two codebases (9.3x vs cache-all on FastAPI, 2.4x on httpx); and the public tau-bench retail benchmark (50 tasks), where CAPC is the cheapest of four strategies with reward exactly equal to vanilla (both 36/50, p=1.00) while query-aware compression is the most expensive at +40.1% over vanilla -- the first production confirmation of the crossover model's negative-ROI prediction on a public benchmark.",
+    "arxiv_id": "2607.15516",
+    "PRIMARY_TOPIC_LABEL": "Efficiency, Compression, and Large-Scale Training",
+    "MATCHED_TOPIC_LABELS": [
+      "Efficiency, Compression, and Large-Scale Training"
+    ],
+    "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+    "HOTSPOT_PAPER_LABELS": [],
+    "HOTSPOT_PAPER_PRIMARY_KIND": null,
+    "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+    "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default",
+    "EVIDENCE": 8,
+    "LOAD": 4,
+    "PROXIMITY": 2,
+    "READ_SCORE": 11.0
+  },
+  "2607.15693": {
+    "ARXIVID": "2607.15693",
+    "COMMENT": "A learned interaction matrix makes recurrent diffusion dynamics directly analyzable through the network Jacobian.",
+    "RELEVANCE": 2,
+    "NOVELTY": 7,
+    "PRIMARY_TOPIC_ID": "architecture_training",
+    "MATCHED_TOPIC_IDS": [
+      "architecture_training"
+    ],
+    "TOPIC_MATCH_COMMENT": "Closest to recurrent and diffusion architecture analysis, but the trained model performs visual denoising and models cortical inference.",
+    "HOTSPOT_PAPER_TAGS": [],
+    "HOTSPOT_PAPER_COMMENT": "",
+    "SCORE": 9,
+    "authors": [
+      "Zeyu Yun",
+      "Alexander Belsten",
+      "Dasheng Bi",
+      "Zahra Kadkhodaie",
+      "Yubei Chen",
+      "Bruno A. Olshausen"
+    ],
+    "title": "Toward a mechanistic understanding of inference in visual cortex and diffusion models",
+    "abstract": "We describe a model of perceptual inference in primary visual cortex (V1) equivalent to a minimal diffusion model whose function can be readily understood from its parameters. The model is based on sparse coding with a non-factorial prior over latent variables in the form of an unconstrained, pairwise interaction matrix, extending standard sparse coding inference to a general recurrent dynamical system. We efficiently train these recurrent dynamics using a denoising score-matching objective and implicit differentiation. After training on natural images, the learned interaction matrix mirrors the structure of horizontal connections in superficial layers of V1 that link neurons of similar orientation tuning. This model exhibits exceptionally good denoising performance, restoring image features such as extended contours amid extreme visual ambiguity, nearly matching the behavior of standard, black-box diffusion architectures in generalization regime. Owing to the model's simplicity, the network's Jacobian can be decomposed directly in terms of the interaction matrix between latent variables, revealing mechanistically how the recurrent dynamics assign high probability over a continuous family of natural structural deformations. Intriguingly, within this circuit, a large fraction of latent variables learn to disconnect from visual input altogether, essentially forming a hierarchical representation that appears to enforce global consistency among image features. Together, the model and results bridge two distinct domains: for neuroscience, it generates concrete, testable hypotheses regarding functional connectivity in recurrent neural circuits during perceptual inference tasks; for machine learning, it elucidates the internal mechanisms learned by diffusion models that allow them to generate infinitely many novel images from a finite training set.",
+    "arxiv_id": "2607.15693",
+    "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+    "MATCHED_TOPIC_LABELS": [
+      "Architecture and Training Dynamics"
+    ],
+    "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+    "HOTSPOT_PAPER_LABELS": [],
+    "HOTSPOT_PAPER_PRIMARY_KIND": null,
+    "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+    "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default",
+    "EVIDENCE": 5,
+    "LOAD": 7,
+    "PROXIMITY": 1,
+    "READ_SCORE": 4.5
+  },
+  "2607.16169": {
+    "ARXIVID": "2607.16169",
+    "COMMENT": "Update-RMS matching tests whether Muon's gains originate from orthogonalization or its step-scale convention.",
+    "RELEVANCE": 5,
+    "NOVELTY": 8,
+    "PRIMARY_TOPIC_ID": "architecture_training",
+    "MATCHED_TOPIC_IDS": [
+      "architecture_training"
+    ],
+    "TOPIC_MATCH_COMMENT": "Controlled optimizer analysis connects to training dynamics, but the core remains agentic RL post-training without architectural destabilization.",
+    "HOTSPOT_PAPER_TAGS": [],
+    "HOTSPOT_PAPER_COMMENT": "",
+    "SCORE": 13,
+    "authors": [
+      "Kai Ruan",
+      "Jinghao Lin",
+      "Zihe Huang",
+      "Ziqi Zhou",
+      "Qianshan Wei",
+      "Xuan Wang",
+      "Hao Sun"
+    ],
+    "title": "When Does Muon Help Agentic Reinforcement Learning?",
+    "abstract": "Muon is competitive with AdamW in large-scale pre-training, but its operating regime in reinforcement-learning post-training remains unclear. We map this regime on ALFWorld, a sparse-reward agentic benchmark, using three group-based objectives and Qwen2.5 models from 0.5B to 3B. Under a shared KL and clipping recipe, matched optimizer comparisons and AdamW rate controls trace the usable step-size range. AdamW responds non-monotonically to rate, whereas fan-in Muon remains stable at a more aggressive effective step: at $3 \\times 10^{-5}$ it improves late success over an AdamW $10^{-6}$ baseline after correction across rate-metric tests. Its normalized-AUC effect is directionally positive but less uniform; the heuristic-matched lower-rate effect is less consistent, and tuned AdamW nearly matches high-rate Muon at 3B GraphGPO. High-rate Muon applies $3.53 \\times$ AdamW's hidden-matrix update RMS; a full-budget RMS-matched control removes the late-success gain. Together, these results identify a recipe-level operating regime in which fan-in Muon supports a more aggressive stable effective step under shared KL and clipping: the margin is largest when optimization headroom remains and contracts near saturation, after AdamW tuning, or under magnitude matching. The scale-matched control ties this spectral effect to Muon's scale convention rather than establishing a universal optimizer ranking. Code is available at https://github.com/x66ccff/verl-muon.",
+    "arxiv_id": "2607.16169",
+    "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+    "MATCHED_TOPIC_LABELS": [
+      "Architecture and Training Dynamics"
+    ],
+    "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+    "HOTSPOT_PAPER_LABELS": [],
+    "HOTSPOT_PAPER_PRIMARY_KIND": null,
+    "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+    "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default",
+    "EVIDENCE": 8,
+    "LOAD": 3,
+    "PROXIMITY": 4,
+    "READ_SCORE": 15.5
+  },
+  "2607.15778": {
+    "ARXIVID": "2607.15778",
+    "COMMENT": "A learned scheduler allocates fine-grained visual encoding to question-relevant video segments.",
+    "RELEVANCE": 3,
+    "NOVELTY": 6,
+    "PRIMARY_TOPIC_ID": "architecture_training",
+    "MATCHED_TOPIC_IDS": [
+      "architecture_training"
+    ],
+    "TOPIC_MATCH_COMMENT": "Closest to dynamic computation, with the architecture and training contribution centered on long-video understanding.",
+    "HOTSPOT_PAPER_TAGS": [],
+    "HOTSPOT_PAPER_COMMENT": "",
+    "SCORE": 9,
+    "authors": [
+      "Wei Feng",
+      "Xin Wang",
+      "Yu-Wei Zhan",
+      "Yuwei Zhou",
+      "Wenwu Zhu"
+    ],
+    "title": "Modularized Dynamic-Granularity Video LLM for Multi-Event Long Video Understanding",
+    "abstract": "Video Large Language Models (Video LLMs) have made significant advancements in various video understanding tasks. However, long-video scenarios remain challenging due to the tension between limited visual token budgets and the need to capture multiple key events. Existing approaches typically process long videos in two stages, i.e., i) select keyframes and ii) perform detailed perception, which exhibit limitations: they lack a modular mechanism for adaptive capacity allocation and self-correction, resulting in unreliable modeling. To tackle these challenges, we propose MoD-VLLM, a novel Modularized Dynamic-Granularity Video LLM framework for multi-event long video understanding, which unifies temporal grounding and semantic understanding iteratively and self-reflectively. Specifically, we propose a Positive-Negative Video Segments Grounding module and a Modularized Dynamic-Granularity Reflection module, which form a closed loop to progressively localize the question-related video segments. The grounding module instructs a Video LLM to distinguish relevant from irrelevant video segments based on the video question. The reflection module employs a modularized scheduler that dynamically selects fine-grained encoding for relevant positive segments to capture detailed perception and coarse-grained encoding for negative segments to maintain global context. We further propose a dynamic-granularity reinforcement learning strategy, allowing MoD-VLLM to learn optimal grounding policies and dynamic granularity visual representation jointly. Moreover, we propose MEventBench, a challenging Multi-Event Long Video Benchmark for complex long video reasoning. Extensive experiments on several long video understanding benchmarks and our MEventBench demonstrate that MoD-VLLM significantly outperforms state-of-the-art baselines.",
+    "arxiv_id": "2607.15778",
+    "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+    "MATCHED_TOPIC_LABELS": [
+      "Architecture and Training Dynamics"
+    ],
+    "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+    "HOTSPOT_PAPER_LABELS": [],
+    "HOTSPOT_PAPER_PRIMARY_KIND": null,
+    "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+    "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default",
+    "EVIDENCE": 5,
+    "LOAD": 5,
+    "PROXIMITY": 2,
+    "READ_SCORE": 7.5
+  },
+  "2607.16554": {
+    "ARXIVID": "2607.16554",
+    "COMMENT": "A capacity-redundancy decomposition states when clustered sharing outperforms a single shared representation.",
+    "RELEVANCE": 3,
+    "NOVELTY": 7,
+    "PRIMARY_TOPIC_ID": "architecture_training",
+    "MATCHED_TOPIC_IDS": [
+      "architecture_training"
+    ],
+    "TOPIC_MATCH_COMMENT": "Closest to shared-capacity and optimization dynamics, but the subject is general multi-task learning with clustered LoRA adaptation.",
+    "HOTSPOT_PAPER_TAGS": [],
+    "HOTSPOT_PAPER_COMMENT": "",
+    "SCORE": 10,
+    "authors": [
+      "Asif Khan"
+    ],
+    "title": "Capacity and Redundancy Trade-offs in Multi-Task Learning",
+    "abstract": "In multi-task learning (MTL) negative transfer is often considered as an optimization artifact, but it can also be viewed as a consequence of limited shared capacity and weak task redundancy. We investigate this effect through a Capacity--Redundancy (CR) identity that decomposes the sum of per-task predictive informations into joint predictive information that includes label redundancy defined via total correlation (TC), and a residual coupling term that quantifies interference left unresolved by the shared representation. Additionally, we show two key results: (i) a clustering-gap decomposition that gives a necessary and sufficient condition for clustered sharing to outperform global sharing, and (ii) a gradient--TC bridge in a Gaussian multi-task model that formally justifies gradient cosine similarity as a proxy for redundancy ordering. Empirically, we estimate the residual coupling $Δ$ from validation residual correlations, showing that clustered LoRA substantially reduces $\\widehatΔ$, outperforms size-matched random partitions, and results in statistically significant gains with multi-seed confidence intervals.",
+    "arxiv_id": "2607.16554",
+    "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+    "MATCHED_TOPIC_LABELS": [
+      "Architecture and Training Dynamics"
+    ],
+    "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+    "HOTSPOT_PAPER_LABELS": [],
+    "HOTSPOT_PAPER_PRIMARY_KIND": null,
+    "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+    "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default",
+    "EVIDENCE": 6,
+    "LOAD": 8,
+    "PROXIMITY": 3,
+    "READ_SCORE": 8.0
+  },
+  "2607.15773": {
+    "ARXIVID": "2607.15773",
+    "COMMENT": "A transverse reaction term prevents deep propagation from dissipating all discriminative representation energy.",
+    "RELEVANCE": 2,
+    "NOVELTY": 6,
+    "PRIMARY_TOPIC_ID": "architecture_training",
+    "MATCHED_TOPIC_IDS": [
+      "architecture_training"
+    ],
+    "TOPIC_MATCH_COMMENT": "Closest to depth stability, but the proposed architecture and evidence concern hypergraph neural networks.",
+    "HOTSPOT_PAPER_TAGS": [],
+    "HOTSPOT_PAPER_COMMENT": "",
+    "SCORE": 8,
+    "authors": [
+      "Zhiheng Zhou",
+      "Mengyao Zhou",
+      "Yancheng Chen",
+      "Dengyi Zhao",
+      "Xingqin Qi",
+      "Guiying Yan"
+    ],
+    "title": "From Diffusion to Reaction-Diffusion: A Dynamical-Systems View of Oversmoothing in Hypergraph Neural Networks",
+    "abstract": "Higher-order couplings enhance the expressive power of hypergraph neural networks (HGNNs), but they also intensify representation collapse in deep propagation due to strong multi-way feature mixing. This work investigates hypergraph oversmoothing from a dynamical-systems perspective and develops a reaction--diffusion framework for depth-resistant hypergraph learning. By defining hypergraph gradient and divergence operators, we interpret message passing as an incidence-level diffusion process. The analysis of pure diffusion shows that its continuous semiflow exponentially contracts the null-mode-free component of node representations and drives the Dirichlet energy to zero, revealing hypergraph oversmoothing as an intrinsic transverse-energy dissipation phenomenon. Motivated by this analysis, we propose Hypergraph Neural Reaction--Diffusion (HNRD), which introduces a reaction mechanism acting on the transverse component to compensate diffusion-induced dissipation and stabilize discriminative variations. We establish global well-posedness of the proposed dynamics and prove that the null-mode-free Dirichlet energy remains bounded away from zero. A forward-Euler discretization provides a practical HNRD layer with a stability condition for deep propagation. Experiments on benchmark and synthetic heterophilic hypergraphs demonstrate that HNRD consistently improves over representative hypergraph baselines. Depth, robustness, and efficiency analyses further show that HNRD preserves stable performance and nonzero Dirichlet energy under deep propagation and perturbations. These results provide a principled dynamical framework for designing deep hypergraph architectures that maintain higher-order expressiveness without representation collapse.",
+    "arxiv_id": "2607.15773",
+    "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+    "MATCHED_TOPIC_LABELS": [
+      "Architecture and Training Dynamics"
+    ],
+    "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+    "HOTSPOT_PAPER_LABELS": [],
+    "HOTSPOT_PAPER_PRIMARY_KIND": null,
+    "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+    "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default",
+    "EVIDENCE": 5,
+    "LOAD": 7,
+    "PROXIMITY": 1,
+    "READ_SCORE": 4.5
+  },
+  "2607.15621": {
+    "ARXIVID": "2607.15621",
+    "COMMENT": "Training an action expert with randomized cache staleness decouples control frequency from backbone inference frequency.",
+    "RELEVANCE": 2,
+    "NOVELTY": 7,
+    "PRIMARY_TOPIC_ID": "architecture_training",
+    "MATCHED_TOPIC_IDS": [
+      "architecture_training"
+    ],
+    "TOPIC_MATCH_COMMENT": "Closest to modular architecture design, but the trained component is a driving-action expert supporting asynchronous inference.",
+    "HOTSPOT_PAPER_TAGS": [],
+    "HOTSPOT_PAPER_COMMENT": "",
+    "SCORE": 9,
+    "authors": [
+      "Yun Li",
+      "Jiachen Gong",
+      "Simon Thompson",
+      "Ehsan Javanmardi",
+      "Qunli Zhang",
+      "Zifan Zeng",
+      "Shiming Liu",
+      "Peng Wang",
+      "Zixuan Guo",
+      "Manabu Tsukada"
+    ],
+    "title": "Think at 5 Hz, Act at 20 Hz: Asynchronous Fast-Slow Vision-Language-Action Inference for Closed-Loop Driving",
+    "abstract": "Large language models bring instruction following and scene reasoning to end-to-end driving, but their inference latency collides with the control rate a vehicle requires. Existing closed-loop agents hide this gap by invoking the model on alternate simulation ticks and replaying the previous command in between, so half of all control outputs ignore the newest observations. We present a fast-slow architecture that removes this compromise. A frozen 7B vision-language backbone acts as the slow system, digesting navigation instructions and visual history at low frequency while exposing its per-layer key-value cache as a standing representation of the scene. A lightweight action expert acts as the fast system, attending to this cache and to the current camera frame at every simulation tick to regress waypoints in a single forward pass. Since the cache lags behind the world at deployment, we train the expert under randomized staleness, aligning training with asynchronous execution. On LangAuto-Short routes in CARLA, our system produces fresh control at every 50 ms simulation tick and lifts route completion from 37.0 to 94.0 over the frame-skipping baseline. A frame-skip ablation with the same expert separates the two factors at work: the expert raises the driving score on its own, while per-tick freshness raises completion from 82.1 to 94.0 and cuts red-light violations by a third. Trained on a single town, the expert transfers zero-shot to two unseen towns, holding 84-94% route completion where the baseline reaches 31-41%. It reduces open-loop waypoint error by nearly a factor of four compared to the backbone's own action head, at a per-tick model cost of 32 ms that is independent of history length on a single consumer GPU.",
+    "arxiv_id": "2607.15621",
+    "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+    "MATCHED_TOPIC_LABELS": [
+      "Architecture and Training Dynamics"
+    ],
+    "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+    "HOTSPOT_PAPER_LABELS": [],
+    "HOTSPOT_PAPER_PRIMARY_KIND": null,
+    "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+    "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default",
+    "EVIDENCE": 8,
+    "LOAD": 5,
+    "PROXIMITY": 1,
+    "READ_SCORE": 8.5
+  },
+  "2607.16027": {
+    "ARXIVID": "2607.16027",
+    "COMMENT": "Tests constrained Hebbian updates against matched learning rules for lower representational cost at comparable task performance.",
+    "RELEVANCE": 2,
+    "NOVELTY": 5,
+    "PRIMARY_TOPIC_ID": "architecture_training",
+    "MATCHED_TOPIC_IDS": [
+      "architecture_training"
+    ],
+    "TOPIC_MATCH_COMMENT": "Learning-rule dynamics are the closest topic, but the trained systems perform audiovisual associative learning rather than language modeling.",
+    "HOTSPOT_PAPER_TAGS": [],
+    "HOTSPOT_PAPER_COMMENT": "",
+    "SCORE": 7,
+    "authors": [
+      "Patrick Inoue",
+      "Florian Röhrbein",
+      "Andreas Knoblauch"
+    ],
+    "title": "Constrained Hebbian Learning Supports Efficient Representational Allocation under Structural Constraints",
+    "abstract": "Introduction: Biological systems face anatomical and metabolic constraints, including costly synaptic maintenance and limited connectivity. These constraints favor neural codes that compress behaviorally relevant information into low-redundancy patterns. We test whether an excitatory competitive Hebbian rule can support synaptic resource allocation under such constraints and whether the resulting representations occupy a more favorable cost-performance regime than reference learning rules. Methods: Representational cost is quantified using mutual-information-based measures derived from the Variational Information Bottleneck. Experiments use fixed audiovisual embeddings from three audiovisual benchmarks (AVE, Kinetics-Sounds, VGGSound100) to isolate downstream associative plasticity. Hebbian learning is compared with Dense Difference Target Propagation (DDTP) and backpropagation (BP) under matched sparsity and architectural constraints. Results: Hebbian learning achieves lower task-information cost (CTI) than sparse BP and DDTP in the main compressed comparisons, while reaching CTI values comparable to shallow BP with nonnegative weights. Rather than uniformly improving classification performance, Hebbian learning shifts the trade-off between task-relevant information and representational cost, yielding lower CTI at comparable functional performance in several settings. Discussion: The results indicate a cost-performance trade-off rather than uniform accuracy gains. For a given level of task-relevant information, Hebbian representations retain less input information while preserving functional performance, although accuracy is slightly reduced on some datasets. These findings support interpreting Hebbian learning as a mechanism for synaptic resource allocation rather than as a general strategy for maximizing audiovisual classification accuracy.",
+    "arxiv_id": "2607.16027",
+    "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+    "MATCHED_TOPIC_LABELS": [
+      "Architecture and Training Dynamics"
+    ],
+    "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+    "HOTSPOT_PAPER_LABELS": [],
+    "HOTSPOT_PAPER_PRIMARY_KIND": null,
+    "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+    "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default",
+    "EVIDENCE": 8,
+    "LOAD": 6,
+    "PROXIMITY": 2,
+    "READ_SCORE": 9.0
+  },
+  "2607.22694": {
+    "ARXIVID": "2607.22694",
+    "COMMENT": "Uses a gradient-isolated output-bias correction to repair repetitive attractors in a collapsed autoregressive model.",
+    "RELEVANCE": 7,
+    "NOVELTY": 7,
+    "PRIMARY_TOPIC_ID": "architecture_training",
+    "MATCHED_TOPIC_IDS": [
+      "architecture_training"
+    ],
+    "TOPIC_MATCH_COMMENT": "The output-layer update targets model instability; the reported repetition reduction provides narrower evidence than the proposed attention-collapse explanation.",
+    "HOTSPOT_PAPER_TAGS": [],
+    "HOTSPOT_PAPER_COMMENT": "",
+    "SCORE": 14,
+    "authors": [
+      "Wenjie Fan",
+      "Bin Ma",
+      "Dong Li"
+    ],
+    "title": "Bayesian Repetition Penalty: A Principled Adjacent-Conditional Framework for Reversing Attention Collapse in Autoregressive Language Models",
+    "abstract": "Attention collapse in autoregressive language models -- manifested as repetitive token loops where the model becomes trapped in self-reinforcing attractors -- is a persistent pathology that existing decoding-time heuristics fail to address at its root cause. We present a principled framework that penalises or compensates anomalous confidence arising from collapsed generation patterns, by comparing a token's observed frequency against its corpus prior through an adjacent-conditional probability construction. The resulting self-normalising penalty ratio $R=f(m,n,p)/f(np,n,p)$ requires no ad hoc standardisation and admits a closed-form logit offset with zero approximation error. The correction is isolated from the loss gradient and accumulated into a frozen output-layer bias via exponential moving average, enabling deployment as a repair mechanism for models that have already collapsed without requiring intrusive modifications to standard training pipelines. Experimental validation on a 1.5B-parameter model demonstrates that the frozen-bias mechanism can rescue a model already trapped in a collapsed attractor, reducing 2-gram repetition from 0.073 to near 0 while preserving generation quality.",
+    "arxiv_id": "2607.22694",
+    "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+    "MATCHED_TOPIC_LABELS": [
+      "Architecture and Training Dynamics"
+    ],
+    "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+    "HOTSPOT_PAPER_LABELS": [],
+    "HOTSPOT_PAPER_PRIMARY_KIND": null,
+    "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+    "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default",
+    "EVIDENCE": 6,
+    "LOAD": 6,
+    "PROXIMITY": 7,
+    "READ_SCORE": 17.0
+  },
+  "2607.15819": {
+    "ARXIVID": "2607.15819",
+    "COMMENT": "Constructs a layer-normalization circuit that approximates closed-form least squares and examines whether training acquires it.",
+    "RELEVANCE": 4,
+    "NOVELTY": 7,
+    "PRIMARY_TOPIC_ID": "architecture_training",
+    "MATCHED_TOPIC_IDS": [
+      "architecture_training"
+    ],
+    "TOPIC_MATCH_COMMENT": "Attention and normalization mechanisms are the closest fit, but the contribution is confined to a simple regression transformer.",
+    "HOTSPOT_PAPER_TAGS": [],
+    "HOTSPOT_PAPER_COMMENT": "",
+    "SCORE": 11,
+    "authors": [
+      "Katsuyuki Hagiwara"
+    ],
+    "title": "In-context learning of closed form solution to simple linear regression task using transformer with linear self-attention",
+    "abstract": "In-context learning is a remarkable property of transformers and has recently received a lot of interest. In many studies of in-context learning, it has been shown that transformers are capable of implementing solver for linear and non-linear regression problems, in which the most of them implement gradient descent algorithm. However, it is still unclear whether those implementations have actually been acquired through training. In this paper, we construct a transformer with linear self-attention, which in-context learns the least squares estimate in a simple regression task. The point here is that the closed form (analytical) solution is approximately obtained by using layer normalization rather than an approximate solution based on gradient descent algorithm. Then, we show an experimental example, in which our implementation is mainly used in the transformer trained with l1 regularization when the target output is the least squares estimate.",
+    "arxiv_id": "2607.15819",
+    "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+    "MATCHED_TOPIC_LABELS": [
+      "Architecture and Training Dynamics"
+    ],
+    "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+    "HOTSPOT_PAPER_LABELS": [],
+    "HOTSPOT_PAPER_PRIMARY_KIND": null,
+    "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+    "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default",
+    "EVIDENCE": 4,
+    "LOAD": 8,
+    "PROXIMITY": 4,
+    "READ_SCORE": 8.0
+  },
+  "2607.15919": {
+    "ARXIVID": "2607.15919",
+    "COMMENT": "Attributes boundary-seeking distillation failure to conflicting feature targets coupled through a shared latent bottleneck.",
+    "RELEVANCE": 2,
+    "NOVELTY": 7,
+    "PRIMARY_TOPIC_ID": "efficiency_scaling",
+    "MATCHED_TOPIC_IDS": [
+      "efficiency_scaling"
+    ],
+    "TOPIC_MATCH_COMMENT": "Distillation makes compression the nearest topic; the core claim concerns generative autoencoders and is demonstrated on MNIST.",
+    "HOTSPOT_PAPER_TAGS": [],
+    "HOTSPOT_PAPER_COMMENT": "",
+    "SCORE": 9,
+    "authors": [
+      "Mohamed Amine Kina"
+    ],
+    "title": "On the Failure of Boundary-Seeking Distillation in Bottlenecked Generative Architectures",
+    "abstract": "Data-free knowledge distillation transfers the knowledge encoded in a teacher model to a student model without access to the original training data. Prior work such as Contrastive Abductive Knowledge Extraction (CAKE) achieves this for classifiers by synthesizing samples near the teacher's decision boundary. In this work, we investigate whether this boundary-seeking principle extends to autoencoder distillation through experiments on the MNIST dataset . To enable a direct comparison, we reformulate continuous reconstruction as a dense, per-feature classification task, allowing the decoder to output categorical logits. We show that boundary-seeking objectives are fundamentally ill-posed in bottlenecked generative architectures. CAKE operates on a single, instance-level objective, but a decoder acts as an array of tightly coupled, feature-level classifiers constrained by a shared low-dimensional bottleneck. Independently sampling contrastive targets for these coupled outputs violates the geometry of the learned latent manifold and produces severe gradient conflicts instead of informative boundary samples. Manifold-aware synthesis bypasses these conflicts entirely and establishes an effective baseline for data-free generative distillation.",
+    "arxiv_id": "2607.15919",
+    "PRIMARY_TOPIC_LABEL": "Efficiency, Compression, and Large-Scale Training",
+    "MATCHED_TOPIC_LABELS": [
+      "Efficiency, Compression, and Large-Scale Training"
+    ],
+    "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+    "HOTSPOT_PAPER_LABELS": [],
+    "HOTSPOT_PAPER_PRIMARY_KIND": null,
+    "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+    "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default",
+    "EVIDENCE": 4,
+    "LOAD": 6,
+    "PROXIMITY": 1,
+    "READ_SCORE": 4.0
+  },
+  "2607.18306": {
+    "ARXIVID": "2607.18306",
+    "COMMENT": "Redistributes a fixed SAM perturbation budget across blocks using accumulated gradient energy.",
+    "RELEVANCE": 3,
+    "NOVELTY": 6,
+    "PRIMARY_TOPIC_ID": "architecture_training",
+    "MATCHED_TOPIC_IDS": [
+      "architecture_training"
+    ],
+    "TOPIC_MATCH_COMMENT": "The contribution is an optimizer refinement, but its stated training settings are image classification and related vision tasks.",
+    "HOTSPOT_PAPER_TAGS": [],
+    "HOTSPOT_PAPER_COMMENT": "",
+    "SCORE": 9,
+    "authors": [
+      "Zhen Huang",
+      "Jiaxin Deng",
+      "Junbiao Pang"
+    ],
+    "title": "Gradient-Energy Guided Block-Wise Perturbations for Sharpness-Aware Minimization",
+    "abstract": "Sharpness-Aware Minimization (SAM) improves generalization by minimizing the worst-case loss in a local parameter neighborhood. Standard SAM implicitly allocates its global perturbation budget across parameter blocks according to instantaneous minibatch gradient norms. Such an allocation can be noisy and may not reflect the sensitivity that blocks accumulate throughout training. We propose Gradient-Energy Adaptive Radius SAM (GEAR-SAM), which maintains an exponential moving average (EMA) of squared block gradients as a lightweight, curvature-related sensitivity signal and allocates the fixed SAM budget through a closed-form constrained optimization. GEAR-SAM preserves the global SAM radius, requires no Hessian-vector products or explicit Fisher estimation, and adds only scalar state beyond SAM. Experiments on image classification, transfer learning, noisy-label learning, and partition studies demonstrate improved generalization and robustness across architectures and tasks. More broadly, GEAR-SAM provides a dynamic view of sharpness-aware optimization: a fixed perturbation budget should be redistributed as the sensitivity of functional network blocks evolves during training.",
+    "arxiv_id": "2607.18306",
+    "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+    "MATCHED_TOPIC_LABELS": [
+      "Architecture and Training Dynamics"
+    ],
+    "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+    "HOTSPOT_PAPER_LABELS": [],
+    "HOTSPOT_PAPER_PRIMARY_KIND": null,
+    "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+    "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default",
+    "EVIDENCE": 5,
+    "LOAD": 5,
+    "PROXIMITY": 3,
+    "READ_SCORE": 8.5
+  }
 }

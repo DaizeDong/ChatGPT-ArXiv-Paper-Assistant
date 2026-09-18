@@ -1,625 +1,697 @@
 {
-    "2607.06631": {
-        "ARXIVID": "2607.06631",
-        "COMMENT": "Jointly learns denoising-step budgets and step-specific structured sparsity during diffusion distillation.",
-        "RELEVANCE": 9,
-        "NOVELTY": 7,
-        "PRIMARY_TOPIC_ID": "efficiency_scaling",
-        "MATCHED_TOPIC_IDS": [
-            "architecture_training",
-            "efficiency_scaling"
-        ],
-        "TOPIC_MATCH_COMMENT": "Structured compression of a large diffusion model is central; timestep-dependent model structure also matches dynamic computation.",
-        "HOTSPOT_PAPER_TAGS": [],
-        "HOTSPOT_PAPER_COMMENT": "",
-        "SCORE": 16,
-        "authors": [
-            "Yu Cheng",
-            "Siyue Yao",
-            "Zhongang Qi",
-            "Shanyan Guan",
-            "Wei Li",
-            "Fajie Yuan"
-        ],
-        "title": "Dynamic-in-Few-Step: Unifying Dynamic Computation and Few-Step Distillation for Efficient Video Generation",
-        "abstract": "Video Diffusion Models (VDMs) have demonstrated superior generation quality but suffer from prohibitive computational costs. While recent few-step distillation techniques significantly accelerate inference, they typically enforce a static model architecture across all denoising stages, ignoring the varying computational demands inherent to different noise levels. In this work, we propose a novel post-training acceleration framework that exploits this redundancy by integrating dynamic structural sparsification directly into the distillation process. Unlike conventional post-hoc compression applied to a fixed diffusion pipeline, our approach jointly optimizes the denoising steps and structured model sparsity, transforming a pre-trained VDM into a compact, step-specific Mixture-of-Models (MoM). To address the training instability arising from this joint optimization, we introduce a Progressive Training Strategy coupled with an Output Rollout Mechanism, which ensures the coherent learning of structural decisions across timesteps. Furthermore, we develop a specialized inference engine to deploy the resulting MoM efficiently. Our method is orthogonal to existing acceleration techniques and highly effective: On Wan-14B, it removes 24% of the per-step FLOPs on top of 4-step distillation, adding a 1.2x wall-clock gain and reaching a 30x speedup over the 50-step teacher while preserving competitive generation quality.",
-        "arxiv_id": "2607.06631",
-        "PRIMARY_TOPIC_LABEL": "Efficiency, Compression, and Large-Scale Training",
-        "MATCHED_TOPIC_LABELS": [
-            "Architecture and Training Dynamics",
-            "Efficiency, Compression, and Large-Scale Training"
-        ],
-        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
-        "HOTSPOT_PAPER_LABELS": [],
-        "HOTSPOT_PAPER_PRIMARY_KIND": null,
-        "HOTSPOT_PAPER_PRIMARY_LABEL": "",
-        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
-    },
-    "2607.06519": {
-        "ARXIVID": "2607.06519",
-        "COMMENT": "Shares low-frequency KV components across depth while retaining sparse residuals and head-specific exact caches.",
-        "RELEVANCE": 9,
-        "NOVELTY": 7,
-        "PRIMARY_TOPIC_ID": "efficiency_scaling",
-        "MATCHED_TOPIC_IDS": [
-            "efficiency_scaling"
-        ],
-        "TOPIC_MATCH_COMMENT": "Adaptive cross-layer KV compression directly reduces long-context LLM memory and bandwidth requirements.",
-        "HOTSPOT_PAPER_TAGS": [],
-        "HOTSPOT_PAPER_COMMENT": "",
-        "SCORE": 16,
-        "authors": [
-            "Anna C\u00f3rdoba",
-            "Adam Puente Tercero",
-            "Nerea Angulo Hijo",
-            "Mar Linares Tercero",
-            "Julia Barrientos",
-            "Ainhoa Miranda",
-            "Jes\u00fas Olivera"
-        ],
-        "title": "FreqDepthKV: Frequency-Guided Depth Sharing for Robust KV Cache Compression in Long-Context LLM Inference",
-        "abstract": "Long-context LLM inference is increasingly limited by the memory and bandwidth cost of KV caches, yet aggressive compression can remove the layer-specific evidence needed for retrieval and multi-step reasoning. We introduce FreqDepthKV, an inference-time cache compression method that factorizes adjacent-layer KV states into shared low-frequency depth components and sparse high-frequency residuals. A lightweight online probe assigns attention heads to shared-depth, residual-depth, or exact cache modes according to their contribution to reconstruction-sensitive attention logits, allowing the compression policy to adapt to prompt structure without retraining. Across long-context question answering, needle retrieval, summarization, and code generation benchmarks, FreqDepthKV preserves task accuracy under substantially smaller cache budgets. With a 32k-token prefill window, FreqDepthKV reaches 58.3 Exact Match, 63.0 F1, 32.5 ROUGE-L, and 48.1 pass@1, closely matching full KV while outperforming prior compressed-cache methods. It also improves decoding throughput to 70.4 tokens/s, reduces TTFT to 2.06 seconds, and lowers peak KV memory to 6.2 GB, achieving a 3.9x effective compression ratio.",
-        "arxiv_id": "2607.06519",
-        "PRIMARY_TOPIC_LABEL": "Efficiency, Compression, and Large-Scale Training",
-        "MATCHED_TOPIC_LABELS": [
-            "Efficiency, Compression, and Large-Scale Training"
-        ],
-        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
-        "HOTSPOT_PAPER_LABELS": [],
-        "HOTSPOT_PAPER_PRIMARY_KIND": null,
-        "HOTSPOT_PAPER_PRIMARY_LABEL": "",
-        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
-    },
-    "2607.06523": {
-        "ARXIVID": "2607.06523",
-        "COMMENT": "Compresses KV caches using token-adaptive cross-layer low-rank factorization and online reconstruction-error control.",
-        "RELEVANCE": 9,
-        "NOVELTY": 7,
-        "PRIMARY_TOPIC_ID": "efficiency_scaling",
-        "MATCHED_TOPIC_IDS": [
-            "efficiency_scaling"
-        ],
-        "TOPIC_MATCH_COMMENT": "The core mechanism reduces long-context KV memory and decode traffic without retraining the base model.",
-        "HOTSPOT_PAPER_TAGS": [],
-        "HOTSPOT_PAPER_COMMENT": "",
-        "SCORE": 16,
-        "authors": [
-            "Anna Cordoba",
-            "Adam Puente Tercero",
-            "Nerea Angulo Hijo",
-            "Mar Linares Tercero",
-            "Julia Barrientos",
-            "Ainhoa Miranda",
-            "Jesus Olivera"
-        ],
-        "title": "DepthWeave-KV: Token-Adaptive Cross-Layer Residual Factorization for Long-Context KV Cache Compression",
-        "abstract": "Long-context language model inference is increasingly limited by the memory bandwidth and capacity required to store key-value caches, yet existing compression methods often apply uniform budgets across layers or tokens and degrade retrieval when lexical cues and semantic states require different preservation. We introduce DepthWeave-KV, a token-adaptive cache compression method that factorizes key and value states across neighboring transformer layers using shared low-rank channel bases while retaining lightweight token-specific residuals where attention behavior is sensitive. DepthWeave-KV combines cross-depth residual factorization with a token-conditional depth router that allocates higher reconstruction rank to instruction-bearing and retrieval-critical tokens, and uses calibration-free online error tracking from attention-output probes to adapt compression during generation without retraining the base model. A fused CUDA implementation jointly performs basis lookup, residual dequantization, and attention projection to reduce decode-time memory traffic. Across LongBench, Needle-in-a-Haystack, L-Eval, and long-form QA and summarization benchmarks, DepthWeave-KV achieves near-full-cache task quality with substantially lower memory use, improving average score and retrieval accuracy over prior compressed caches while reaching 8.3x KV memory reduction and 72.8 tokens per second at 64K context.",
-        "arxiv_id": "2607.06523",
-        "PRIMARY_TOPIC_LABEL": "Efficiency, Compression, and Large-Scale Training",
-        "MATCHED_TOPIC_LABELS": [
-            "Efficiency, Compression, and Large-Scale Training"
-        ],
-        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
-        "HOTSPOT_PAPER_LABELS": [],
-        "HOTSPOT_PAPER_PRIMARY_KIND": null,
-        "HOTSPOT_PAPER_PRIMARY_LABEL": "",
-        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
-    },
-    "2607.06546": {
-        "ARXIVID": "2607.06546",
-        "COMMENT": "Derives a limitation of linear attention and introduces graph-filtered queries and keys for spectrum-adaptive attention.",
-        "RELEVANCE": 8,
-        "NOVELTY": 8,
-        "PRIMARY_TOPIC_ID": "architecture_training",
-        "MATCHED_TOPIC_IDS": [
-            "architecture_training"
-        ],
-        "TOPIC_MATCH_COMMENT": "A new attention mechanism and its theoretical explanation are central, although the mechanism is specialized to graph denoising.",
-        "HOTSPOT_PAPER_TAGS": [],
-        "HOTSPOT_PAPER_COMMENT": "",
-        "SCORE": 16,
-        "authors": [
-            "Shervin Khalafi",
-            "Igor Krawczuk",
-            "Sergio Rozada",
-            "Charilaos Kanatsoulis",
-            "Antonio G Marques",
-            "Alejandro Ribeiro"
-        ],
-        "title": "Graph Convolutional Attention: A Spectral Perspective on Graph Denoising and Diffusion",
-        "abstract": "Denoising graphs is a fundamental problem in graph learning and the core operation of graph diffusion models. Attention-based architectures like graph transformers have recently shown promise in denoising graphs. However, our principled understanding of attention-based graph denoising remains limited, making it unclear whether standard attention is the right mechanism for this task. Here we show that, under a denoising objective, linear attention is suboptimal and can only learn an average spectral denoising filter over the training distribution. This creates a fundamental limitation as graphs often vary spectrally across the distribution. To overcome this limitation, we introduce Spectral Attention, which directly utilizes the input graph spectrum and provably outperforms linear attention by a margin governed by the spectral diversity of the distribution. We then derive Graph Convolutional Attention (GCA), a practical and permutation-equivariant realization of this idea that implements spectral denoising through graph-filtered queries and keys. For stochastic block models, GCA provably matches the idealized Spectral Attention mechanism. We further show that the softmax operation, that follows the attention, provides additional denoising by approximately projecting noisy eigenvectors onto the clean eigenspace. Empirically, replacing linear attention with GCA consistently improves graph denoising and diffusion on synthetic and real datasets, with gains strongly correlated with spectral diversity. In DiGress, GCA matches standard graph-transformer performance without computing expensive structural features, and when combined with the recently proposed PEARL positional encodings, avoids explicit eigendecomposition computations resulting in faster inference without degrading quality. The code can be found here: github.com/shervinkhalafi/graph_conv_att",
-        "arxiv_id": "2607.06546",
-        "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
-        "MATCHED_TOPIC_LABELS": [
-            "Architecture and Training Dynamics"
-        ],
-        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
-        "HOTSPOT_PAPER_LABELS": [],
-        "HOTSPOT_PAPER_PRIMARY_KIND": null,
-        "HOTSPOT_PAPER_PRIMARY_LABEL": "",
-        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
-    },
-    "2607.21624": {
-        "ARXIVID": "2607.21624",
-        "COMMENT": "Co-designs forward/backward tensor layouts and uses index remapping to eliminate training-time layout copies.",
-        "RELEVANCE": 8,
-        "NOVELTY": 7,
-        "PRIMARY_TOPIC_ID": "training_systems",
-        "MATCHED_TOPIC_IDS": [
-            "training_systems",
-            "efficiency_scaling"
-        ],
-        "TOPIC_MATCH_COMMENT": "The core is a training-execution improvement through tensor layouts and memory access, demonstrated on mobile GPUs.",
-        "HOTSPOT_PAPER_TAGS": [],
-        "HOTSPOT_PAPER_COMMENT": "",
-        "SCORE": 15,
-        "authors": [
-            "Kahou Tam",
-            "Wei Niu",
-            "Yu Bao",
-            "Xiaomin Ouyang",
-            "Chengzhong Xu",
-            "Li Li"
-        ],
-        "title": "FBLayout: Optimizing Memory Layout for Efficient LLM Finetuning on Mobile GPUs",
-        "abstract": "Transformer-based models have enabled unprecedented capabilities across language, vision, and multimodal tasks. On-device fine-tuning of transformer models offers a privacy-preserving path to personalized AI, yet remains inefficient on mobile GPUs due to severe memory constraints and frequent layout transformations in attention mechanism during training. Existing mobile training frameworks either use unified layouts for forward and backward passes -- leading to fragmented memory access and poor GPU utilization during backpropagation -- or rely on explicit layout conversions, which introduce significant transformation overhead. To overcome this, we propose FBLayout, a layout-aware framework that co-designs tensor organization with mobile GPU platforms. FBLayout introduces: (1) a unified R-Tile layout for multi-dimensional reductions across forward/backward passes; (2) tile-based index transformation to eliminate physical data movement; and (3) activation-guided layout selection to propagate efficient layouts globally. Evaluations on seven transformer models across different mobile phones (including ARM Mali and Qualcomm Adreno GPUs) show that FBLayout achieves 2.2-5.7x speedup over MNN, TFLite, and TVM, while significantly improving cache efficiency and reducing memory footprint, enabling practical on-device large model fine-tuning.",
-        "arxiv_id": "2607.21624",
-        "PRIMARY_TOPIC_LABEL": "Large-Scale Training Systems and Efficiency",
-        "MATCHED_TOPIC_LABELS": [
-            "Large-Scale Training Systems and Efficiency",
-            "Efficiency, Compression, and Large-Scale Training"
-        ],
-        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
-        "HOTSPOT_PAPER_LABELS": [],
-        "HOTSPOT_PAPER_PRIMARY_KIND": null,
-        "HOTSPOT_PAPER_PRIMARY_LABEL": "",
-        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
-    },
-    "2607.06114": {
-        "ARXIVID": "2607.06114",
-        "COMMENT": "Uses endpoint decodability to truncate diffusion sampling early without retraining, reducing neural evaluations.",
-        "RELEVANCE": 8,
-        "NOVELTY": 6,
-        "PRIMARY_TOPIC_ID": "efficiency_scaling",
-        "MATCHED_TOPIC_IDS": [
-            "efficiency_scaling"
-        ],
-        "TOPIC_MATCH_COMMENT": "Early endpoint decoding directly reduces the neural evaluations needed for diffusion inference.",
-        "HOTSPOT_PAPER_TAGS": [],
-        "HOTSPOT_PAPER_COMMENT": "",
-        "SCORE": 14,
-        "authors": [
-            "Xin Peng",
-            "Ang Gao"
-        ],
-        "title": "x-Prediction Is All You Need:Training-Free Accelerated Generation via Endpoint Decodability",
-        "abstract": "Diffusion and flow matching models generate high-quality samples, but their ODE samplers often need tens to hundreds of neural function evaluations (NFEs). This remains a practical challenge for released checkpoints, since many accelerators require additional design choices and training cost through retraining, distillation, or trajectory redesign. We investigate a different route based on $x$-prediction. During sampling, standard affine probability paths already expose $x_0$ information: an intermediate state and its path velocity determine a principled estimate of the clean sample. We formalize this property as \\textbf{endpoint decodability} and show that the decoder is the minimum-MSE estimator $\\mathbb{E}[x_0\\mid x_t]$ under the usual $\\ell_2$ objective. This yields \\textbf{Truncated Jump Sampling} (TJS): stop the ODE at an early-exit time $t^*$ and return the decoded $x_0$. TJS requires no retraining, distillation, or architecture change. Across SDXL, SD3.5M, Z-Image-Turbo, and three class-conditional benchmarks, it reduces NFEs by 20--70\\% with near-matched quality. The analysis also shows why endpoint prediction can work without straightening the trajectory, providing inference acceleration without trajectory redesign.",
-        "arxiv_id": "2607.06114",
-        "PRIMARY_TOPIC_LABEL": "Efficiency, Compression, and Large-Scale Training",
-        "MATCHED_TOPIC_LABELS": [
-            "Efficiency, Compression, and Large-Scale Training"
-        ],
-        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
-        "HOTSPOT_PAPER_LABELS": [],
-        "HOTSPOT_PAPER_PRIMARY_KIND": null,
-        "HOTSPOT_PAPER_PRIMARY_LABEL": "",
-        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
-    },
-    "2607.06634": {
-        "ARXIVID": "2607.06634",
-        "COMMENT": "Identifies when composing group operations in depth gives geometric-algebra layers an advantage over scalarization.",
-        "RELEVANCE": 7,
-        "NOVELTY": 7,
-        "PRIMARY_TOPIC_ID": "architecture_training",
-        "MATCHED_TOPIC_IDS": [
-            "architecture_training"
-        ],
-        "TOPIC_MATCH_COMMENT": "This analyzes an architectural mechanism and when depth helps, within a narrow class of equivariant networks.",
-        "HOTSPOT_PAPER_TAGS": [],
-        "HOTSPOT_PAPER_COMMENT": "",
-        "SCORE": 14,
-        "authors": [
-            "Fabien Polly"
-        ],
-        "title": "When Do Geometric Algebra Layers Beat Scalarization? A Controlled Study on SO(3)-Equivariant Vector Laws",
-        "abstract": "Compact networks built from Clifford algebra Cl(3,0) primitives are exactly SO(3)-equivariant and learn synthetic 3D vector laws from few samples. We ask whether the geometric algebra structure itself contributes anything beyond exact equivariance. We compare against a minimal scalarization baseline: invariant dot products fed to a small MLP that outputs coefficients on the equivariant basis {v_i, v_i x v_j}, which is also exactly equivariant. On single-stage laws (rotation by axis-angle, cross product, central force), scalarization matches or beats the Cl(3,0) network at a fraction of the training cost, so the geometric algebra adds nothing there. On compositional targets whose computation graph nests group operations (apply R2 R1 to a point; map a local force through an orientation, then take a torque), the Cl(3,0) network beats scalarization by an order of magnitude in the low-data regime, reaching with 100 samples what the baseline needs 3000 for, and the gap survives strengthening the baseline with the triple-product invariant and 17x more parameters, external Vector Neurons and e3nn baselines, and a multiplicative coefficient network. Ablations show the required network depth tracks the rotation chain length, and scalarization falls below the constant predictor on chains of four rotations. The advantage is not composition per se: on a rotation-free nested cross product, which flattens into polynomial invariant coefficients, scalarization wins by 24x. No tested model, equivariant or not, extrapolates invariant magnitudes: on radius and separation shifts every model is worse than a constant predictor once errors are normalized. We conclude that geometric algebra layers are not a general shortcut for low-data 3D learning, but become useful precisely when the target composes group elements in depth.",
-        "arxiv_id": "2607.06634",
-        "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
-        "MATCHED_TOPIC_LABELS": [
-            "Architecture and Training Dynamics"
-        ],
-        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
-        "HOTSPOT_PAPER_LABELS": [],
-        "HOTSPOT_PAPER_PRIMARY_KIND": null,
-        "HOTSPOT_PAPER_PRIMARY_LABEL": "",
-        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
-    },
-    "2607.06609": {
-        "ARXIVID": "2607.06609",
-        "COMMENT": "Learns low-NFE timestep and guidance schedules using score-derived energies and progressively improved preferences.",
-        "RELEVANCE": 7,
-        "NOVELTY": 7,
-        "PRIMARY_TOPIC_ID": "efficiency_scaling",
-        "MATCHED_TOPIC_IDS": [
-            "efficiency_scaling"
-        ],
-        "TOPIC_MATCH_COMMENT": "The core method improves diffusion sampler quality at a fixed evaluation budget, making inference efficiency its best fit.",
-        "HOTSPOT_PAPER_TAGS": [],
-        "HOTSPOT_PAPER_COMMENT": "",
-        "SCORE": 14,
-        "authors": [
-            "Jinkyu Kim",
-            "Jinyoung Choi",
-            "Bohyung Han"
-        ],
-        "title": "D2PO: Optimizing Diffusion Samplers via Dynamic Preference",
-        "abstract": "We propose D2PO (Dynamic Direct Preference Optimization), a principled framework for optimizing diffusion sampling policies with respect to timestep schedules and classifier-free guidance (CFG) weights. Our work is motivated by a fundamental limitation of existing student-teacher regression frameworks; low-NFE student samplers are trained to mimic high-NFEteachers, often sacrificing high-frequency texture fidelity while preserving coarse global structures, thereby misaligning the sampler with perceptual quality. D2PO addresses this challenge by reformulating sampler optimization as a preference-based alignment problem, leveraging the Direct Preference Optimization (DPO) framework. To make DPO applicable to diffusion samplers, we model the sampling policy as an energy-based model (EBM), transforming preference comparisons into tractable energy differences. We further introduce a novel energy formulation derived directly from the pretrained score network, enabling preference evaluation in perturbed spaces that jointly capture structural consistency and fine-grained details. Moreover, we introduce dynamic preferences, where the preferred samples used for alignment progressively improve as the sampling policies are learned. This self-improving mechanism replaces rigid static teacher supervision with an iterative, preference-guided refinement process, providing progressively stronger alignment signals. Extensive experiments demonstrate that D2PO aligns diffusion samplers with perceptual quality more faithfully, unlocking the full potential of high-quality teachers and consistently outperforming conventional regression-based schedulers under low-NFE constraints.",
-        "arxiv_id": "2607.06609",
-        "PRIMARY_TOPIC_LABEL": "Efficiency, Compression, and Large-Scale Training",
-        "MATCHED_TOPIC_LABELS": [
-            "Efficiency, Compression, and Large-Scale Training"
-        ],
-        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
-        "HOTSPOT_PAPER_LABELS": [],
-        "HOTSPOT_PAPER_PRIMARY_KIND": null,
-        "HOTSPOT_PAPER_PRIMARY_LABEL": "",
-        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
-    },
-    "2607.05866": {
-        "ARXIVID": "2607.05866",
-        "COMMENT": "Reconciles private gradient clipping and noise with curvature preconditioning through whitening and adaptive curvature clamping.",
-        "RELEVANCE": 7,
-        "NOVELTY": 7,
-        "PRIMARY_TOPIC_ID": "training_systems",
-        "MATCHED_TOPIC_IDS": [
-            "training_systems"
-        ],
-        "TOPIC_MATCH_COMMENT": "Curvature preconditioning is a direct optimizer contribution, with a narrower focus on differentially private training.",
-        "HOTSPOT_PAPER_TAGS": [],
-        "HOTSPOT_PAPER_COMMENT": "",
-        "SCORE": 14,
-        "authors": [
-            "Pan Li",
-            "Kai Chen",
-            "Shuai Chang",
-            "Shengzhi Zhang",
-            "Peizhuo Lv",
-            "Jinwen He"
-        ],
-        "title": "Differentially Private Natural Gradient Descent",
-        "abstract": "Under a fixed privacy budget, the utility of differentially private (DP) training is ultimately determined by its optimization efficiency. Standard first-order DP optimizers such as DP-SGD rely solely on local gradients and ignore the underlying loss curvature. This geometric blindness causes severe zigzagging in ill-conditioned landscapes, squandering precious privacy budgets on inefficient iterations. Practitioners are thus trapped in a bind: either stop training prematurely or inject massive per-step noise, both of which critically compromise final model utility. Natural Gradient Descent (NGD) resolves this by preconditioning gradients with curvature, aligning updates with the loss geometry and extracting more efficient signal from every noisy step, offering a principled pathway to break the privacy-utility bottleneck. Despite its theoretical appeal, directly integrating NGD with DP introduces fundamental challenges: curvature estimation itself consumes prohibitive privacy budgets, isotropic DP operations conflict with the anisotropic scaling of NGD, and the inverse curvature catastrophically amplify parameter updates in flat directions, causing training instability. We propose DP-NGD, a practical framework that systematically addresses these obstacles by decoupling curvature estimation from private data, reconciling isotropic DP constraints with anisotropic second-order optimization via a whitened-space mechanism, and dynamically clamping the curvature to stabilize training. Extensive experiments on standard benchmarks demonstrate that DP-NGD achieves state-of-the-art accuracy, breaking through the utility ceilings of first-order baselines while delivering up to a $10\\times$ convergence speedup under the same privacy budget.",
-        "arxiv_id": "2607.05866",
-        "PRIMARY_TOPIC_LABEL": "Large-Scale Training Systems and Efficiency",
-        "MATCHED_TOPIC_LABELS": [
-            "Large-Scale Training Systems and Efficiency"
-        ],
-        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
-        "HOTSPOT_PAPER_LABELS": [],
-        "HOTSPOT_PAPER_PRIMARY_KIND": null,
-        "HOTSPOT_PAPER_PRIMARY_LABEL": "",
-        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
-    },
-    "2607.06651": {
-        "ARXIVID": "2607.06651",
-        "COMMENT": "Allocates tensor-compression ranks from update spectral entropy under client-specific communication budgets.",
-        "RELEVANCE": 7,
-        "NOVELTY": 7,
-        "PRIMARY_TOPIC_ID": "efficiency_scaling",
-        "MATCHED_TOPIC_IDS": [
-            "training_systems",
-            "efficiency_scaling"
-        ],
-        "TOPIC_MATCH_COMMENT": "Adaptive compression of model updates is central and also reduces distributed-training communication, with evidence limited to edge federated learning.",
-        "HOTSPOT_PAPER_TAGS": [],
-        "HOTSPOT_PAPER_COMMENT": "",
-        "SCORE": 14,
-        "authors": [
-            "Quoc Bao Phan",
-            "Tuy Tan Nguyen"
-        ],
-        "title": "Entropy-Guided Tensor Compression for Multimodal Federated Learning on Edge Devices",
-        "abstract": "Federated learning (FL) over mobile and edge devices increasingly involves multimodal models in which clients differ in both sensing capability and computational capacity. Existing update compression schemes typically apply uniform policies across layers and devices, without accounting for modality-specific differences in spectral structure and compressibility. We propose MESH-FL, an entropy-guided matrix product state (MPS) update-compression framework for modality-heterogeneous FL on resource-constrained devices. MESH-FL estimates the spectral entropy of each layer-wise update via truncated singular value decomposition and allocates MPS compression ranks adaptively across layers, modalities, and devices under per-client payload budgets. We show that higher spectral entropy necessitates a higher reconstruction rank under the majorization order on singular-value energy distributions. Building on this result, we prove that the proposed entropy-guided allocation solves a convex surrogate rank-allocation problem, preserves monotonicity under the exact payload model, and achieves convergence with an explicit compression-dependent error term. Experiments on a 15-node heterogeneous Raspberry Pi~4/5 cluster with modality-heterogeneous clients show that MESH-FL achieves up to $56.8\\times$ compression while surpassing the uncompressed FedAvg baseline in final accuracy by up to 2.01%, and reduces total transmitted data to reach convergence by up to $66\\times$.",
-        "arxiv_id": "2607.06651",
-        "PRIMARY_TOPIC_LABEL": "Efficiency, Compression, and Large-Scale Training",
-        "MATCHED_TOPIC_LABELS": [
-            "Large-Scale Training Systems and Efficiency",
-            "Efficiency, Compression, and Large-Scale Training"
-        ],
-        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
-        "HOTSPOT_PAPER_LABELS": [],
-        "HOTSPOT_PAPER_PRIMARY_KIND": null,
-        "HOTSPOT_PAPER_PRIMARY_LABEL": "",
-        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
-    },
-    "2607.06565": {
-        "ARXIVID": "2607.06565",
-        "COMMENT": "A per-block router allocates sparse cross-modal anchor computation across geometric scales.",
-        "RELEVANCE": 7,
-        "NOVELTY": 7,
-        "PRIMARY_TOPIC_ID": "architecture_training",
-        "MATCHED_TOPIC_IDS": [
-            "architecture_training",
-            "efficiency_scaling"
-        ],
-        "TOPIC_MATCH_COMMENT": "Dynamic sparse computation is a central architectural contribution with substantial reported FLOP savings, though demonstrated within a 3D-specific model.",
-        "HOTSPOT_PAPER_TAGS": [],
-        "HOTSPOT_PAPER_COMMENT": "",
-        "SCORE": 14,
-        "authors": [
-            "Tianjiao Yu",
-            "Xinzhuo Li",
-            "Yifan Shen",
-            "Onkar Susladkar",
-            "Yuanzhe Liu",
-            "Xiaona Zhou",
-            "Ismini Lourentzou"
-        ],
-        "title": "ELSA3D: Elastic Semantic Anchoring for Unified 3D Understanding and Generation",
-        "abstract": "Unified 3D foundation models aspire to generate 3D assets and reason about them in language within a single backbone, but their text-3D interaction remains largely implicit. Existing methods concatenate text and 3D tokens into a flat sequence and rely on self-attention, collapsing coarse structural cues and fine geometric details into one undifferentiated representation. We introduce ELSA3D, a unified 3D model that addresses this with elastic semantic anchoring, structuring language and geometric reasoning jointly along matched abstraction scales. ELSA3D represents geometry with a scale-aware octree tokenizer and introduces Anchor Tokens, sparse cross-modal units that select semantic cues, route them to the most relevant 3D scale, retrieve scale-specific geometric evidence, and write the fused signal back into the unified representation, keeping interaction sparse yet precise. A lightweight per-block router makes both computation and reasoning elastic, choosing which text tokens instantiate anchors at which geometric scale so that cross-modal capacity concentrates where alignment is most needed. ELSA3D achieves state-of-the-art performance across image-to-3D generation, text-to-3D generation, and 3D captioning, outperforming the strongest unified baseline while roughly halving FLOPs and inference latency relative to the non-elastic version of the same model.",
-        "arxiv_id": "2607.06565",
-        "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
-        "MATCHED_TOPIC_LABELS": [
-            "Architecture and Training Dynamics",
-            "Efficiency, Compression, and Large-Scale Training"
-        ],
-        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
-        "HOTSPOT_PAPER_LABELS": [],
-        "HOTSPOT_PAPER_PRIMARY_KIND": null,
-        "HOTSPOT_PAPER_PRIMARY_LABEL": "",
-        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
-    },
-    "2607.06079": {
-        "ARXIVID": "2607.06079",
-        "COMMENT": "Restricts perturbations to input-dependent objective components, removing reservoir-size-dependent gradient-estimator variance growth.",
-        "RELEVANCE": 7,
-        "NOVELTY": 7,
-        "PRIMARY_TOPIC_ID": "architecture_training",
-        "MATCHED_TOPIC_IDS": [
-            "architecture_training",
-            "efficiency_scaling"
-        ],
-        "TOPIC_MATCH_COMMENT": "The objective decomposition changes recurrent-model learning dynamics and training scalability, with applicability demonstrated specifically for echo state networks.",
-        "HOTSPOT_PAPER_TAGS": [],
-        "HOTSPOT_PAPER_COMMENT": "",
-        "SCORE": 14,
-        "authors": [
-            "Taiki Yamada",
-            "Kantaro Fujiwara"
-        ],
-        "title": "Scalable Perturbation Learning for Online Self-Supervised Learning in Echo State Networks",
-        "abstract": "Intelligent systems should not only solve tasks but also adapt under real-world constraints. Autonomous adaptation via self-supervised learning, sequential adaptation via online learning, and memory-efficient implementation via perturbation-based learning are important requirements for such systems. However, these requirements are generally in tension for high-dimensional systems, because perturbation-based learning suffers from variance that grows with the dimension of the perturbed variables. In this study, we focus on echo state networks (ESNs), where this tension naturally arises in large reservoirs. We propose a perturbation-based learning rule for online self-supervised learning in ESNs. The proposed rule is derived from an orthogonal decomposition of the self-supervised learning cost, which separates an input-dependent component from a redundant component determined by the fixed ESN parameters. By perturbing only the input-dependent component, the effective perturbation dimension is reduced from the reservoir dimension to the input dimension. Thus, the proposed method preserves self-supervised adaptation, online learning, and scalar-feedback perturbation learning, while avoiding reservoir-size-dependent variance growth. This suggests a design principle for scalable and hardware-compatible learning: online learning should be restricted to the dynamically necessary low-dimensional component of the objective.",
-        "arxiv_id": "2607.06079",
-        "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
-        "MATCHED_TOPIC_LABELS": [
-            "Architecture and Training Dynamics",
-            "Efficiency, Compression, and Large-Scale Training"
-        ],
-        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
-        "HOTSPOT_PAPER_LABELS": [],
-        "HOTSPOT_PAPER_PRIMARY_KIND": null,
-        "HOTSPOT_PAPER_PRIMARY_LABEL": "",
-        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
-    },
-    "2607.06109": {
-        "ARXIVID": "2607.06109",
-        "COMMENT": "Remedies threat-agnostic expert routing with dual-scale gates and threat-guided routing diversification.",
-        "RELEVANCE": 7,
-        "NOVELTY": 6,
-        "PRIMARY_TOPIC_ID": "moe_training",
-        "MATCHED_TOPIC_IDS": [
-            "moe_training"
-        ],
-        "TOPIC_MATCH_COMMENT": "Explicit remedies for expert-routing collapse match MoE training, although designed for adversarial robustness.",
-        "HOTSPOT_PAPER_TAGS": [],
-        "HOTSPOT_PAPER_COMMENT": "",
-        "SCORE": 13,
-        "authors": [
-            "Woo Jae Kim",
-            "Kyle Min",
-            "Suhyeon Ha",
-            "Joonsung Jeon",
-            "Sung-eui Yoon"
-        ],
-        "title": "RoME: Robust Mixture of Low-Rank Experts against Multiple Adversarial Perturbations",
-        "abstract": "Multi-perturbation adversarial training (MAT) aims to achieve robustness against multiple $\\ell_p$ perturbations but suffers from robustness trade-offs between different threats. To address this, we employ a mixture of experts (MoE) to route different threats through distinct model pathways. However, naive application of MoE encounters two critical challenges: experts tend to overlook threat-specific features and redundantly capture features shared across threats, and gating networks suffer from threat-agnostic routing where they learn nearly identical routing patterns across threats, thus preventing the construction of threat-specific model pathways. To this end, we propose Robust Mixture of Low-Rank Experts (RoME), where each expert is a low-rank additive update to the shared backbone, allowing it to capture threat-common features while experts focus on threat-specific information. To address threat-agnostic routing, RoME introduces (i) dual-scale gating that exploits threat-discriminative signals from local and global level features, and (ii) threat-guided gating diversification that enforces diverse expert utilization across threats. Extensive experiments demonstrate that RoME outperforms existing state-of-the-art MAT in union robustness and natural accuracy and improves robustness against unseen threats. Codes are available at https://github.com/wkim97/RoME.",
-        "arxiv_id": "2607.06109",
-        "PRIMARY_TOPIC_LABEL": "MoE Training",
-        "MATCHED_TOPIC_LABELS": [
-            "MoE Training"
-        ],
-        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
-        "HOTSPOT_PAPER_LABELS": [],
-        "HOTSPOT_PAPER_PRIMARY_KIND": null,
-        "HOTSPOT_PAPER_PRIMARY_LABEL": "",
-        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
-    },
-    "2607.06151": {
-        "ARXIVID": "2607.06151",
-        "COMMENT": "Adds an extragradient prediction step to sharpness-aware minimization to reduce perturbation-radius sensitivity.",
-        "RELEVANCE": 7,
-        "NOVELTY": 6,
-        "PRIMARY_TOPIC_ID": "training_systems",
-        "MATCHED_TOPIC_IDS": [
-            "training_systems"
-        ],
-        "TOPIC_MATCH_COMMENT": "The optimizer update rule directly addresses training behavior, although large-scale pretraining evidence is unspecified.",
-        "HOTSPOT_PAPER_TAGS": [],
-        "HOTSPOT_PAPER_COMMENT": "",
-        "SCORE": 13,
-        "authors": [
-            "Yao Fu",
-            "Chunxia Zhang",
-            "Junmin Liu",
-            "Yihang Jin",
-            "Haishan Ye",
-            "Yuanao Yang"
-        ],
-        "title": "Leveraging Extragradient for Effective Sharpness-Aware Minimization in Deep Learning",
-        "abstract": "Generalization remains a pivotal challenge in deep learning, where traditional optimizers like Stochastic Gradient Descent (SGD) often converge to sharp minima, leading to overfitting and reduced performance on unseen data. Building on Sharpness-Aware Minimization (SAM), for seeking flat minima associated with improved generalization, we propose the Extragradient-Inspired Sharpness-Aware Minimization (EISAM), a novel optimizer that enhances generalization via the extragradient technique. EISAM uses a two-step update process: a prediction step investigating the geometry of the loss landscape and a perturbation step that refines updates with a base optimizer. This approach achieves better generalization performance than SAM. Crucially, EISAM reduces sensitivity to the perturbation radius, enhancing robustness, and simplifying the tuning across diverse settings. Extensive experiments on benchmark datasets demonstrate that EISAM consistently outperforms SGD, Adaptive Moment Estimation (Adam), and SAM in test accuracy and training efficiency across various architectures. Theoretical analysis further confirms that EISAM tightens the generalization bound by steering parameters toward flatter minima with reduced curvature. Accompanied by a thorough hyperparameter analysis, EISAM offers practical tuning guidance, establishing it as a robust, scalable, and broadly applicable optimization solution that advances both the theory and practice in deep learning.",
-        "arxiv_id": "2607.06151",
-        "PRIMARY_TOPIC_LABEL": "Large-Scale Training Systems and Efficiency",
-        "MATCHED_TOPIC_LABELS": [
-            "Large-Scale Training Systems and Efficiency"
-        ],
-        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
-        "HOTSPOT_PAPER_LABELS": [],
-        "HOTSPOT_PAPER_PRIMARY_KIND": null,
-        "HOTSPOT_PAPER_PRIMARY_LABEL": "",
-        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
-    },
-    "2607.06723": {
-        "ARXIVID": "2607.06723",
-        "COMMENT": "Derives effective optimizer curvature by variationally eliminating hidden states.",
-        "RELEVANCE": 6,
-        "NOVELTY": 7,
-        "PRIMARY_TOPIC_ID": "architecture_training",
-        "MATCHED_TOPIC_IDS": [
-            "architecture_training"
-        ],
-        "TOPIC_MATCH_COMMENT": "Optimizer geometry fits the analytical side of this topic, but large-model training implications remain unspecified.",
-        "HOTSPOT_PAPER_TAGS": [],
-        "HOTSPOT_PAPER_COMMENT": "",
-        "SCORE": 13,
-        "authors": [
-            "Zavier Li"
-        ],
-        "title": "Optimization Geometrodynamics: Variational Reduction and Interaction Curvature",
-        "abstract": "Adaptive optimizers carry hidden states that change how visible gradients become parameter motion. We develop optimization geometrodynamics as a variational theory of this hidden geometry. Infimal pushforward eliminates all hidden states realizing the same action and composes across optimizer hierarchies. Under smooth nondegeneracy, it yields hidden susceptibility and the Schur-complement curvature seen after relaxation. For affine pre-reduction perturbations, the induced interaction curvature is the negative-semidefinite operator $-G^*H^{-1}G$, whose mixed entries integrate to finite mechanism contrasts. Our main realization is the determinant-one affine-invariant SPD action map $P\\mapsto PA$. We prove a global analytic bundle with closed totally geodesic fibers and a unique analytic nearest-controller section. A strongly convex fiber theorem and an explicit logarithmic action residual give a globally linearly convergent solver from every feasible initializer, together with nonasymptotic value, controller-distance, and residual bounds and observable posterior stopping certificates. A conditional inexact result propagates supplied rigorous residual-error and radius majorants. The dense spectral kernel is confined to an active subspace of dimension $r\\le 2m$, yielding an explicit spectral-arithmetic operation bound and a strict dimensional reduction when $r<d$. For nested shape-normalized quadratic actions, canonical multi-secant projections satisfy an exact CAT(0) Pythagorean decrease and recover the determinant-one inverse Hessian shape at the sharp rank threshold $d-1$, provided the scalar gauge $c_H=(\\det H)^{1/d}$ is known. These results turn the action bundle into an exact iterative computation with posterior certificates and a finite-identification theory.",
-        "arxiv_id": "2607.06723",
-        "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
-        "MATCHED_TOPIC_LABELS": [
-            "Architecture and Training Dynamics"
-        ],
-        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
-        "HOTSPOT_PAPER_LABELS": [],
-        "HOTSPOT_PAPER_PRIMARY_KIND": null,
-        "HOTSPOT_PAPER_PRIMARY_LABEL": "",
-        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
-    },
-    "2607.06013": {
-        "ARXIVID": "2607.06013",
-        "COMMENT": "Derives how stability-constant annealing selects the implicit bias and convergence path of smoothed-sign descent.",
-        "RELEVANCE": 6,
-        "NOVELTY": 7,
-        "PRIMARY_TOPIC_ID": "architecture_training",
-        "MATCHED_TOPIC_IDS": [
-            "architecture_training"
-        ],
-        "TOPIC_MATCH_COMMENT": "Implicit bias directly concerns optimization dynamics, but the proved setting is full-batch separable linear classification with limited transfer established to large-model training.",
-        "HOTSPOT_PAPER_TAGS": [],
-        "HOTSPOT_PAPER_COMMENT": "",
-        "SCORE": 13,
-        "authors": [
-            "Xiangwu Wang",
-            "Chengwei Cao",
-            "Yicheng Song",
-            "Ran Bi",
-            "Peilin Yu"
-        ],
-        "title": "Stability Annealing Selects the Implicit Bias of Smoothed Sign Descent: A Rate-Indexed Barrier Path on Separable Data",
-        "abstract": "Adaptive gradient methods can favor max-margin separators that differ from gradient descent, yet a fixed positive numerical stability constant eventually changes the update geometry again. This paper studies the rate-controlled middle case for full-batch linear classification on separable data. For memoryless stability-annealed smoothed-sign descent with weighted exponential loss, we prove that the normalized iterates converge to the minimizer of a convex Burg-type barrier over a margin slice. The proof rewrites the dynamics exactly as entropic mirror ascent on a concave dual objective, controls the dual gap by a KL recursion, and yields an explicit S_t^{-1/2} normalized-iterate envelope. The static barrier geometry is fully characterized, including KKT conditions and both endpoint limits. Experiments validate the exact dual identities to floating-point error, illustrate the predicted path and rate diagram, and show an empirical fixed-epsilon crossover scaling in cumulative time. We further report robustness and boundary diagnostics for logistic tails, fixed-epsilon crossover, and adaptive-method variants, delineating the scope of the proved smoothed-sign theory.",
-        "arxiv_id": "2607.06013",
-        "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
-        "MATCHED_TOPIC_LABELS": [
-            "Architecture and Training Dynamics"
-        ],
-        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
-        "HOTSPOT_PAPER_LABELS": [],
-        "HOTSPOT_PAPER_PRIMARY_KIND": null,
-        "HOTSPOT_PAPER_PRIMARY_LABEL": "",
-        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
-    },
-    "2607.06621": {
-        "ARXIVID": "2607.06621",
-        "COMMENT": "Analyzes how positional encodings shape attention-score algebra and the formation time of constrained circuits.",
-        "RELEVANCE": 6,
-        "NOVELTY": 7,
-        "PRIMARY_TOPIC_ID": "architecture_training",
-        "MATCHED_TOPIC_IDS": [
-            "architecture_training"
-        ],
-        "TOPIC_MATCH_COMMENT": "Positional mechanisms connect directly to attention architecture, but the study primarily characterizes circuit fingerprints and feature formation.",
-        "HOTSPOT_PAPER_TAGS": [],
-        "HOTSPOT_PAPER_COMMENT": "",
-        "SCORE": 13,
-        "authors": [
-            "Li Hengyu"
-        ],
-        "title": "Fingerprint, Not Blueprint: How Positional Schemes Set the Default Spectral Algebra of Attention",
-        "abstract": "The pre-softmax score of an attention head is a bilinear form $score(i,j) = x_i^T M x_j$ in a learned operator $M = W_q^T W_k$. Because M is generally non-symmetric, hence non-normal, it has a complex eigenspectrum and non-orthogonal eigenvectors, the regime where non-Hermitian and random-matrix tools apply. We ask what this spectrum encodes, at three levels for previous-token and induction circuits. Statically, across seven pretrained models spanning three positional schemes, the strongest previous-token heads are spectrally rotational under RoPE and non-rotational, or content-like, where position enters outside QK (learned-absolute and ALiBi); the model-level separation is perfect at every top-k examined (exact permutation $p=0.029$), and zeroing the per-frequency RoPE phase $Im(M_t)$ eliminates induction on a pre-identified previous-token head in all three RoPE models. Dynamically, over public Pythia checkpoints every head originates at the random-matrix (Ginibre) null; the rotational signature emerges with the behavior, not before it, and the population-median suppression that yields the final profile follows circuit formation, so the profile is a consolidated fingerprint, not a precursor. Causally, and at toy scale, no spectral channel is necessary: constrained two-layer training reroutes around every ban with capability intact, albeit at a significant formation delay (four pre-registered contrasts, $q_BH <= 0.016$). The cost structure exposes each scheme's default: imposing symmetry slows learned-absolute models by a factor of 2.9, whereas a RoPE head with a fully symmetric static M still routes directionally via the phase channel, impossible under absolute positions. Within the settings examined, the positional scheme sets the default spectral algebra of an attention head's solution: a fingerprint sculpted after function, not a hard constraint upon it.",
-        "arxiv_id": "2607.06621",
-        "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
-        "MATCHED_TOPIC_LABELS": [
-            "Architecture and Training Dynamics"
-        ],
-        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
-        "HOTSPOT_PAPER_LABELS": [],
-        "HOTSPOT_PAPER_PRIMARY_KIND": null,
-        "HOTSPOT_PAPER_PRIMARY_LABEL": "",
-        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
-    },
-    "2607.05836": {
-        "ARXIVID": "2607.05836",
-        "COMMENT": "Bounds L-BFGS inverse-Hessian conditioning while preserving limited-memory update complexity.",
-        "RELEVANCE": 6,
-        "NOVELTY": 6,
-        "PRIMARY_TOPIC_ID": "training_systems",
-        "MATCHED_TOPIC_IDS": [
-            "training_systems"
-        ],
-        "TOPIC_MATCH_COMMENT": "Optimizer and preconditioner stability is the best fit, but evidence concerns generic optimization benchmarks rather than large-scale pretraining.",
-        "HOTSPOT_PAPER_TAGS": [],
-        "HOTSPOT_PAPER_COMMENT": "",
-        "SCORE": 12,
-        "authors": [
-            "Don Li"
-        ],
-        "title": "On the Condition Number Upper Bound of the L-BFGS Inverse Hessian Approximation Matrix with a Two-Sided Geometric Envelope Safeguarding Mechanism",
-        "abstract": "The limited-memory BFGS (L-BFGS) algorithm is a cornerstone of large-scale optimization due to its linear memory and computational costs. However, in ill-conditioned or non-convex landscapes, the implicit inverse Hessian approximation can suffer from an exploding condition number, leading to numerical instability and degraded convergence. To address this, we propose Two-Sided L-BFGS, a safeguarded variant that dynamically constrains the condition number of the inverse Hessian operator via a two-sided geometric envelope. Moreover, we show that Two-Sided L-BFGS preserves accumulated curvature information and maintains standard $O(mn)$ memory and per-iteration time complexities. We prove that this geometric envelope yields a uniform bound on the condition number of every inverse Hessian approximation generated by the algorithm. By tracking the algebraic evolution of the extreme eigenvalues through $m$ consecutive quasi-Newton updates starting from a scaled identity matrix, the resulting bound is expressed explicitly as a function of the memory depth, problem dimension, and envelope hyperparameters. Moreover, we show that Two-Sided L-BFGS preserves asymptotic global convergence in non-convex regimes under standard smoothness and strong Wolfe line-search assumptions, matching the theoretical guarantees of L-BFGS variants utilizing the Li-Fukushima cautious update rule. Numerical experiments on high-dimensional optimization problems demonstrate that the proposed method maintains well-conditioned inverse Hessian approximations and improves robustness and convergence behavior on ill-conditioned benchmarks.",
-        "arxiv_id": "2607.05836",
-        "PRIMARY_TOPIC_LABEL": "Large-Scale Training Systems and Efficiency",
-        "MATCHED_TOPIC_LABELS": [
-            "Large-Scale Training Systems and Efficiency"
-        ],
-        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
-        "HOTSPOT_PAPER_LABELS": [],
-        "HOTSPOT_PAPER_PRIMARY_KIND": null,
-        "HOTSPOT_PAPER_PRIMARY_LABEL": "",
-        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
-    },
-    "2607.06370": {
-        "ARXIVID": "2607.06370",
-        "COMMENT": "Retrieves cached intermediate actions to warm-start flow-based generation and reduce denoising steps.",
-        "RELEVANCE": 6,
-        "NOVELTY": 6,
-        "PRIMARY_TOPIC_ID": "efficiency_scaling",
-        "MATCHED_TOPIC_IDS": [
-            "efficiency_scaling"
-        ],
-        "TOPIC_MATCH_COMMENT": "Inference acceleration is central, but the mechanism is specialized to robotic action generation and has no demonstrated broader training connection.",
-        "HOTSPOT_PAPER_TAGS": [],
-        "HOTSPOT_PAPER_COMMENT": "",
-        "SCORE": 12,
-        "authors": [
-            "Ryuji Oi",
-            "Hikari Otsuka",
-            "Kosuke Matsushima",
-            "Yuki Ichikawa",
-            "Masato Motomura",
-            "Tatsuya Kaneko",
-            "Daichi Fujiki"
-        ],
-        "title": "ActionCache: Training-Free Acceleration for Vision-Language-Action Models with Action Caching and Refinement",
-        "abstract": "Vision-Language-Action (VLA) models have emerged as a promising approach for generalizable robotic manipulations. In particular, flow-matching-based VLA models have shown remarkable success due to their capability to generate precise and smooth action sequences and capture multimodal distributions. However, the iterative denoising process in the action head acts as a major computational bottleneck, posing a critical challenge for real-time deployment. To address this challenge, we propose ActionCache, a plug-and-play external cache that opportunistically reuses past intermediate actions to warm-start generations from the vicinity of target actions, drastically reducing the inference latency. Specifically, ActionCache stores the intermediate actions with compact multimodal keys, which enables retrieval from similar past contexts across different episodes or even different tasks. Experimental results in simulation and real-world environments demonstrate that ActionCache maintains high task success rates in a low-latency regime, achieving action head inference acceleration of up to $10.44\\times$ and $40.17\\times$ for representative flow-based VLA, $\u03c0_{0.5}$ and GR00T-N1.6, respectively.",
-        "arxiv_id": "2607.06370",
-        "PRIMARY_TOPIC_LABEL": "Efficiency, Compression, and Large-Scale Training",
-        "MATCHED_TOPIC_LABELS": [
-            "Efficiency, Compression, and Large-Scale Training"
-        ],
-        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
-        "HOTSPOT_PAPER_LABELS": [],
-        "HOTSPOT_PAPER_PRIMARY_KIND": null,
-        "HOTSPOT_PAPER_PRIMARY_LABEL": "",
-        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
-    }
+  "2607.06631": {
+    "ARXIVID": "2607.06631",
+    "COMMENT": "Jointly learns denoising-step reduction and step-specific structural sparsity through progressive distillation.",
+    "RELEVANCE": 2,
+    "NOVELTY": 7,
+    "PRIMARY_TOPIC_ID": "efficiency_scaling",
+    "MATCHED_TOPIC_IDS": [
+      "efficiency_scaling"
+    ],
+    "TOPIC_MATCH_COMMENT": "Closest to structural compression, but the trained model is a video generator and the contribution targets post-training acceleration.",
+    "HOTSPOT_PAPER_TAGS": [],
+    "HOTSPOT_PAPER_COMMENT": "",
+    "SCORE": 9,
+    "authors": [
+      "Yu Cheng",
+      "Siyue Yao",
+      "Zhongang Qi",
+      "Shanyan Guan",
+      "Wei Li",
+      "Fajie Yuan"
+    ],
+    "title": "Dynamic-in-Few-Step: Unifying Dynamic Computation and Few-Step Distillation for Efficient Video Generation",
+    "abstract": "Video Diffusion Models (VDMs) have demonstrated superior generation quality but suffer from prohibitive computational costs. While recent few-step distillation techniques significantly accelerate inference, they typically enforce a static model architecture across all denoising stages, ignoring the varying computational demands inherent to different noise levels. In this work, we propose a novel post-training acceleration framework that exploits this redundancy by integrating dynamic structural sparsification directly into the distillation process. Unlike conventional post-hoc compression applied to a fixed diffusion pipeline, our approach jointly optimizes the denoising steps and structured model sparsity, transforming a pre-trained VDM into a compact, step-specific Mixture-of-Models (MoM). To address the training instability arising from this joint optimization, we introduce a Progressive Training Strategy coupled with an Output Rollout Mechanism, which ensures the coherent learning of structural decisions across timesteps. Furthermore, we develop a specialized inference engine to deploy the resulting MoM efficiently. Our method is orthogonal to existing acceleration techniques and highly effective: On Wan-14B, it removes 24% of the per-step FLOPs on top of 4-step distillation, adding a 1.2x wall-clock gain and reaching a 30x speedup over the 50-step teacher while preserving competitive generation quality.",
+    "arxiv_id": "2607.06631",
+    "PRIMARY_TOPIC_LABEL": "Efficiency, Compression, and Large-Scale Training",
+    "MATCHED_TOPIC_LABELS": [
+      "Efficiency, Compression, and Large-Scale Training"
+    ],
+    "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+    "HOTSPOT_PAPER_LABELS": [],
+    "HOTSPOT_PAPER_PRIMARY_KIND": null,
+    "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+    "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default",
+    "EVIDENCE": 7,
+    "LOAD": 6,
+    "PROXIMITY": 1,
+    "READ_SCORE": 7.0
+  },
+  "2607.06519": {
+    "ARXIVID": "2607.06519",
+    "COMMENT": "Shares low-frequency KV components across depth while retaining sparse residuals selected by online sensitivity probes.",
+    "RELEVANCE": 3,
+    "NOVELTY": 5,
+    "PRIMARY_TOPIC_ID": "efficiency_scaling",
+    "MATCHED_TOPIC_IDS": [
+      "efficiency_scaling"
+    ],
+    "TOPIC_MATCH_COMMENT": "Closest to cache compression, but the core is long-context inference; model identity, hardware, and specific comparison methods are unstated.",
+    "HOTSPOT_PAPER_TAGS": [],
+    "HOTSPOT_PAPER_COMMENT": "",
+    "SCORE": 8,
+    "authors": [
+      "Anna Córdoba",
+      "Adam Puente Tercero",
+      "Nerea Angulo Hijo",
+      "Mar Linares Tercero",
+      "Julia Barrientos",
+      "Ainhoa Miranda",
+      "Jesús Olivera"
+    ],
+    "title": "FreqDepthKV: Frequency-Guided Depth Sharing for Robust KV Cache Compression in Long-Context LLM Inference",
+    "abstract": "Long-context LLM inference is increasingly limited by the memory and bandwidth cost of KV caches, yet aggressive compression can remove the layer-specific evidence needed for retrieval and multi-step reasoning. We introduce FreqDepthKV, an inference-time cache compression method that factorizes adjacent-layer KV states into shared low-frequency depth components and sparse high-frequency residuals. A lightweight online probe assigns attention heads to shared-depth, residual-depth, or exact cache modes according to their contribution to reconstruction-sensitive attention logits, allowing the compression policy to adapt to prompt structure without retraining. Across long-context question answering, needle retrieval, summarization, and code generation benchmarks, FreqDepthKV preserves task accuracy under substantially smaller cache budgets. With a 32k-token prefill window, FreqDepthKV reaches 58.3 Exact Match, 63.0 F1, 32.5 ROUGE-L, and 48.1 pass@1, closely matching full KV while outperforming prior compressed-cache methods. It also improves decoding throughput to 70.4 tokens/s, reduces TTFT to 2.06 seconds, and lowers peak KV memory to 6.2 GB, achieving a 3.9x effective compression ratio.",
+    "arxiv_id": "2607.06519",
+    "PRIMARY_TOPIC_LABEL": "Efficiency, Compression, and Large-Scale Training",
+    "MATCHED_TOPIC_LABELS": [
+      "Efficiency, Compression, and Large-Scale Training"
+    ],
+    "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+    "HOTSPOT_PAPER_LABELS": [],
+    "HOTSPOT_PAPER_PRIMARY_KIND": null,
+    "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+    "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default",
+    "EVIDENCE": 5,
+    "LOAD": 5,
+    "PROXIMITY": 3,
+    "READ_SCORE": 8.5
+  },
+  "2607.06523": {
+    "ARXIVID": "2607.06523",
+    "COMMENT": "Allocates cross-layer KV reconstruction rank by token sensitivity using shared low-rank bases and adaptive residuals.",
+    "RELEVANCE": 3,
+    "NOVELTY": 6,
+    "PRIMARY_TOPIC_ID": "efficiency_scaling",
+    "MATCHED_TOPIC_IDS": [
+      "efficiency_scaling"
+    ],
+    "TOPIC_MATCH_COMMENT": "Closest to cache compression, but the method targets long-context inference; named benchmarks do not resolve the missing model, hardware, and baseline details.",
+    "HOTSPOT_PAPER_TAGS": [],
+    "HOTSPOT_PAPER_COMMENT": "",
+    "SCORE": 9,
+    "authors": [
+      "Anna Cordoba",
+      "Adam Puente Tercero",
+      "Nerea Angulo Hijo",
+      "Mar Linares Tercero",
+      "Julia Barrientos",
+      "Ainhoa Miranda",
+      "Jesus Olivera"
+    ],
+    "title": "DepthWeave-KV: Token-Adaptive Cross-Layer Residual Factorization for Long-Context KV Cache Compression",
+    "abstract": "Long-context language model inference is increasingly limited by the memory bandwidth and capacity required to store key-value caches, yet existing compression methods often apply uniform budgets across layers or tokens and degrade retrieval when lexical cues and semantic states require different preservation. We introduce DepthWeave-KV, a token-adaptive cache compression method that factorizes key and value states across neighboring transformer layers using shared low-rank channel bases while retaining lightweight token-specific residuals where attention behavior is sensitive. DepthWeave-KV combines cross-depth residual factorization with a token-conditional depth router that allocates higher reconstruction rank to instruction-bearing and retrieval-critical tokens, and uses calibration-free online error tracking from attention-output probes to adapt compression during generation without retraining the base model. A fused CUDA implementation jointly performs basis lookup, residual dequantization, and attention projection to reduce decode-time memory traffic. Across LongBench, Needle-in-a-Haystack, L-Eval, and long-form QA and summarization benchmarks, DepthWeave-KV achieves near-full-cache task quality with substantially lower memory use, improving average score and retrieval accuracy over prior compressed caches while reaching 8.3x KV memory reduction and 72.8 tokens per second at 64K context.",
+    "arxiv_id": "2607.06523",
+    "PRIMARY_TOPIC_LABEL": "Efficiency, Compression, and Large-Scale Training",
+    "MATCHED_TOPIC_LABELS": [
+      "Efficiency, Compression, and Large-Scale Training"
+    ],
+    "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+    "HOTSPOT_PAPER_LABELS": [],
+    "HOTSPOT_PAPER_PRIMARY_KIND": null,
+    "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+    "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default",
+    "EVIDENCE": 5,
+    "LOAD": 5,
+    "PROXIMITY": 3,
+    "READ_SCORE": 8.5
+  },
+  "2607.06546": {
+    "ARXIVID": "2607.06546",
+    "COMMENT": "Graph-filtered queries and keys adapt attention's denoising filter to each input graph's spectrum.",
+    "RELEVANCE": 3,
+    "NOVELTY": 8,
+    "PRIMARY_TOPIC_ID": "architecture_training",
+    "MATCHED_TOPIC_IDS": [
+      "architecture_training"
+    ],
+    "TOPIC_MATCH_COMMENT": "Closest to attention-mechanism design, but the trained models perform graph denoising and generation.",
+    "HOTSPOT_PAPER_TAGS": [],
+    "HOTSPOT_PAPER_COMMENT": "",
+    "SCORE": 11,
+    "authors": [
+      "Shervin Khalafi",
+      "Igor Krawczuk",
+      "Sergio Rozada",
+      "Charilaos Kanatsoulis",
+      "Antonio G Marques",
+      "Alejandro Ribeiro"
+    ],
+    "title": "Graph Convolutional Attention: A Spectral Perspective on Graph Denoising and Diffusion",
+    "abstract": "Denoising graphs is a fundamental problem in graph learning and the core operation of graph diffusion models. Attention-based architectures like graph transformers have recently shown promise in denoising graphs. However, our principled understanding of attention-based graph denoising remains limited, making it unclear whether standard attention is the right mechanism for this task. Here we show that, under a denoising objective, linear attention is suboptimal and can only learn an average spectral denoising filter over the training distribution. This creates a fundamental limitation as graphs often vary spectrally across the distribution. To overcome this limitation, we introduce Spectral Attention, which directly utilizes the input graph spectrum and provably outperforms linear attention by a margin governed by the spectral diversity of the distribution. We then derive Graph Convolutional Attention (GCA), a practical and permutation-equivariant realization of this idea that implements spectral denoising through graph-filtered queries and keys. For stochastic block models, GCA provably matches the idealized Spectral Attention mechanism. We further show that the softmax operation, that follows the attention, provides additional denoising by approximately projecting noisy eigenvectors onto the clean eigenspace. Empirically, replacing linear attention with GCA consistently improves graph denoising and diffusion on synthetic and real datasets, with gains strongly correlated with spectral diversity. In DiGress, GCA matches standard graph-transformer performance without computing expensive structural features, and when combined with the recently proposed PEARL positional encodings, avoids explicit eigendecomposition computations resulting in faster inference without degrading quality. The code can be found here: github.com/shervinkhalafi/graph_conv_att",
+    "arxiv_id": "2607.06546",
+    "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+    "MATCHED_TOPIC_LABELS": [
+      "Architecture and Training Dynamics"
+    ],
+    "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+    "HOTSPOT_PAPER_LABELS": [],
+    "HOTSPOT_PAPER_PRIMARY_KIND": null,
+    "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+    "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default",
+    "EVIDENCE": 8,
+    "LOAD": 8,
+    "PROXIMITY": 2,
+    "READ_SCORE": 9.0
+  },
+  "2607.21624": {
+    "ARXIVID": "2607.21624",
+    "COMMENT": "Forward/backward tensor-layout co-design eliminates physical layout conversions during mobile fine-tuning.",
+    "RELEVANCE": 4,
+    "NOVELTY": 4,
+    "PRIMARY_TOPIC_ID": "training_systems",
+    "MATCHED_TOPIC_IDS": [
+      "training_systems"
+    ],
+    "TOPIC_MATCH_COMMENT": "Closest to training systems through memory organization; the contribution accelerates existing training computations.",
+    "HOTSPOT_PAPER_TAGS": [],
+    "HOTSPOT_PAPER_COMMENT": "",
+    "SCORE": 8,
+    "authors": [
+      "Kahou Tam",
+      "Wei Niu",
+      "Yu Bao",
+      "Xiaomin Ouyang",
+      "Chengzhong Xu",
+      "Li Li"
+    ],
+    "title": "FBLayout: Optimizing Memory Layout for Efficient LLM Finetuning on Mobile GPUs",
+    "abstract": "Transformer-based models have enabled unprecedented capabilities across language, vision, and multimodal tasks. On-device fine-tuning of transformer models offers a privacy-preserving path to personalized AI, yet remains inefficient on mobile GPUs due to severe memory constraints and frequent layout transformations in attention mechanism during training. Existing mobile training frameworks either use unified layouts for forward and backward passes -- leading to fragmented memory access and poor GPU utilization during backpropagation -- or rely on explicit layout conversions, which introduce significant transformation overhead. To overcome this, we propose FBLayout, a layout-aware framework that co-designs tensor organization with mobile GPU platforms. FBLayout introduces: (1) a unified R-Tile layout for multi-dimensional reductions across forward/backward passes; (2) tile-based index transformation to eliminate physical data movement; and (3) activation-guided layout selection to propagate efficient layouts globally. Evaluations on seven transformer models across different mobile phones (including ARM Mali and Qualcomm Adreno GPUs) show that FBLayout achieves 2.2-5.7x speedup over MNN, TFLite, and TVM, while significantly improving cache efficiency and reducing memory footprint, enabling practical on-device large model fine-tuning.",
+    "arxiv_id": "2607.21624",
+    "PRIMARY_TOPIC_LABEL": "Training Algorithms That Change What Is Possible",
+    "MATCHED_TOPIC_LABELS": [
+      "Training Algorithms That Change What Is Possible"
+    ],
+    "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+    "HOTSPOT_PAPER_LABELS": [],
+    "HOTSPOT_PAPER_PRIMARY_KIND": null,
+    "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+    "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default",
+    "EVIDENCE": 8,
+    "LOAD": 5,
+    "PROXIMITY": 3,
+    "READ_SCORE": 12.5
+  },
+  "2607.06114": {
+    "ARXIVID": "2607.06114",
+    "COMMENT": "Endpoint decoding permits early termination of an existing diffusion sampler without retraining.",
+    "RELEVANCE": 2,
+    "NOVELTY": 7,
+    "PRIMARY_TOPIC_ID": "efficiency_scaling",
+    "MATCHED_TOPIC_IDS": [
+      "efficiency_scaling"
+    ],
+    "TOPIC_MATCH_COMMENT": "Closest to generation efficiency, but the contribution accelerates inference in image generators.",
+    "HOTSPOT_PAPER_TAGS": [],
+    "HOTSPOT_PAPER_COMMENT": "",
+    "SCORE": 9,
+    "authors": [
+      "Xin Peng",
+      "Ang Gao"
+    ],
+    "title": "x-Prediction Is All You Need:Training-Free Accelerated Generation via Endpoint Decodability",
+    "abstract": "Diffusion and flow matching models generate high-quality samples, but their ODE samplers often need tens to hundreds of neural function evaluations (NFEs). This remains a practical challenge for released checkpoints, since many accelerators require additional design choices and training cost through retraining, distillation, or trajectory redesign. We investigate a different route based on $x$-prediction. During sampling, standard affine probability paths already expose $x_0$ information: an intermediate state and its path velocity determine a principled estimate of the clean sample. We formalize this property as \\textbf{endpoint decodability} and show that the decoder is the minimum-MSE estimator $\\mathbb{E}[x_0\\mid x_t]$ under the usual $\\ell_2$ objective. This yields \\textbf{Truncated Jump Sampling} (TJS): stop the ODE at an early-exit time $t^*$ and return the decoded $x_0$. TJS requires no retraining, distillation, or architecture change. Across SDXL, SD3.5M, Z-Image-Turbo, and three class-conditional benchmarks, it reduces NFEs by 20--70\\% with near-matched quality. The analysis also shows why endpoint prediction can work without straightening the trajectory, providing inference acceleration without trajectory redesign.",
+    "arxiv_id": "2607.06114",
+    "PRIMARY_TOPIC_LABEL": "Efficiency, Compression, and Large-Scale Training",
+    "MATCHED_TOPIC_LABELS": [
+      "Efficiency, Compression, and Large-Scale Training"
+    ],
+    "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+    "HOTSPOT_PAPER_LABELS": [],
+    "HOTSPOT_PAPER_PRIMARY_KIND": null,
+    "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+    "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default",
+    "EVIDENCE": 8,
+    "LOAD": 4,
+    "PROXIMITY": 1,
+    "READ_SCORE": 9.0
+  },
+  "2607.06634": {
+    "ARXIVID": "2607.06634",
+    "COMMENT": "Controlled scalarization comparisons isolate nested group operations as the source of geometric-algebra layers' advantage.",
+    "RELEVANCE": 2,
+    "NOVELTY": 7,
+    "PRIMARY_TOPIC_ID": "architecture_training",
+    "MATCHED_TOPIC_IDS": [
+      "architecture_training"
+    ],
+    "TOPIC_MATCH_COMMENT": "Closest to architectural mechanism analysis, but the subject is equivariant learning of synthetic 3D vector laws.",
+    "HOTSPOT_PAPER_TAGS": [],
+    "HOTSPOT_PAPER_COMMENT": "",
+    "SCORE": 9,
+    "authors": [
+      "Fabien Polly"
+    ],
+    "title": "When Do Geometric Algebra Layers Beat Scalarization? A Controlled Study on SO(3)-Equivariant Vector Laws",
+    "abstract": "Compact networks built from Clifford algebra Cl(3,0) primitives are exactly SO(3)-equivariant and learn synthetic 3D vector laws from few samples. We ask whether the geometric algebra structure itself contributes anything beyond exact equivariance. We compare against a minimal scalarization baseline: invariant dot products fed to a small MLP that outputs coefficients on the equivariant basis {v_i, v_i x v_j}, which is also exactly equivariant. On single-stage laws (rotation by axis-angle, cross product, central force), scalarization matches or beats the Cl(3,0) network at a fraction of the training cost, so the geometric algebra adds nothing there. On compositional targets whose computation graph nests group operations (apply R2 R1 to a point; map a local force through an orientation, then take a torque), the Cl(3,0) network beats scalarization by an order of magnitude in the low-data regime, reaching with 100 samples what the baseline needs 3000 for, and the gap survives strengthening the baseline with the triple-product invariant and 17x more parameters, external Vector Neurons and e3nn baselines, and a multiplicative coefficient network. Ablations show the required network depth tracks the rotation chain length, and scalarization falls below the constant predictor on chains of four rotations. The advantage is not composition per se: on a rotation-free nested cross product, which flattens into polynomial invariant coefficients, scalarization wins by 24x. No tested model, equivariant or not, extrapolates invariant magnitudes: on radius and separation shifts every model is worse than a constant predictor once errors are normalized. We conclude that geometric algebra layers are not a general shortcut for low-data 3D learning, but become useful precisely when the target composes group elements in depth.",
+    "arxiv_id": "2607.06634",
+    "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+    "MATCHED_TOPIC_LABELS": [
+      "Architecture and Training Dynamics"
+    ],
+    "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+    "HOTSPOT_PAPER_LABELS": [],
+    "HOTSPOT_PAPER_PRIMARY_KIND": null,
+    "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+    "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default",
+    "EVIDENCE": 9,
+    "LOAD": 7,
+    "PROXIMITY": 1,
+    "READ_SCORE": 8.5
+  },
+  "2607.06609": {
+    "ARXIVID": "2607.06609",
+    "COMMENT": "Dynamic preference optimization replaces fixed teacher-regression targets when learning diffusion sampling policies.",
+    "RELEVANCE": 2,
+    "NOVELTY": 7,
+    "PRIMARY_TOPIC_ID": "efficiency_scaling",
+    "MATCHED_TOPIC_IDS": [
+      "efficiency_scaling"
+    ],
+    "TOPIC_MATCH_COMMENT": "Closest to sampling efficiency; the method optimizes perceptual quality of diffusion samplers rather than language-model training.",
+    "HOTSPOT_PAPER_TAGS": [],
+    "HOTSPOT_PAPER_COMMENT": "",
+    "SCORE": 9,
+    "authors": [
+      "Jinkyu Kim",
+      "Jinyoung Choi",
+      "Bohyung Han"
+    ],
+    "title": "D2PO: Optimizing Diffusion Samplers via Dynamic Preference",
+    "abstract": "We propose D2PO (Dynamic Direct Preference Optimization), a principled framework for optimizing diffusion sampling policies with respect to timestep schedules and classifier-free guidance (CFG) weights. Our work is motivated by a fundamental limitation of existing student-teacher regression frameworks; low-NFE student samplers are trained to mimic high-NFEteachers, often sacrificing high-frequency texture fidelity while preserving coarse global structures, thereby misaligning the sampler with perceptual quality. D2PO addresses this challenge by reformulating sampler optimization as a preference-based alignment problem, leveraging the Direct Preference Optimization (DPO) framework. To make DPO applicable to diffusion samplers, we model the sampling policy as an energy-based model (EBM), transforming preference comparisons into tractable energy differences. We further introduce a novel energy formulation derived directly from the pretrained score network, enabling preference evaluation in perturbed spaces that jointly capture structural consistency and fine-grained details. Moreover, we introduce dynamic preferences, where the preferred samples used for alignment progressively improve as the sampling policies are learned. This self-improving mechanism replaces rigid static teacher supervision with an iterative, preference-guided refinement process, providing progressively stronger alignment signals. Extensive experiments demonstrate that D2PO aligns diffusion samplers with perceptual quality more faithfully, unlocking the full potential of high-quality teachers and consistently outperforming conventional regression-based schedulers under low-NFE constraints.",
+    "arxiv_id": "2607.06609",
+    "PRIMARY_TOPIC_LABEL": "Efficiency, Compression, and Large-Scale Training",
+    "MATCHED_TOPIC_LABELS": [
+      "Efficiency, Compression, and Large-Scale Training"
+    ],
+    "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+    "HOTSPOT_PAPER_LABELS": [],
+    "HOTSPOT_PAPER_PRIMARY_KIND": null,
+    "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+    "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default",
+    "EVIDENCE": 5,
+    "LOAD": 6,
+    "PROXIMITY": 1,
+    "READ_SCORE": 5.0
+  },
+  "2607.05866": {
+    "ARXIVID": "2607.05866",
+    "COMMENT": "Whitened-space updates reconcile isotropic privacy constraints with anisotropic natural-gradient preconditioning.",
+    "RELEVANCE": 3,
+    "NOVELTY": 7,
+    "PRIMARY_TOPIC_ID": "architecture_training",
+    "MATCHED_TOPIC_IDS": [
+      "architecture_training"
+    ],
+    "TOPIC_MATCH_COMMENT": "Closest to optimizer and preconditioner design, but no language-model training setting is established.",
+    "HOTSPOT_PAPER_TAGS": [],
+    "HOTSPOT_PAPER_COMMENT": "",
+    "SCORE": 10,
+    "authors": [
+      "Pan Li",
+      "Kai Chen",
+      "Shuai Chang",
+      "Shengzhi Zhang",
+      "Peizhuo Lv",
+      "Jinwen He"
+    ],
+    "title": "Differentially Private Natural Gradient Descent",
+    "abstract": "Under a fixed privacy budget, the utility of differentially private (DP) training is ultimately determined by its optimization efficiency. Standard first-order DP optimizers such as DP-SGD rely solely on local gradients and ignore the underlying loss curvature. This geometric blindness causes severe zigzagging in ill-conditioned landscapes, squandering precious privacy budgets on inefficient iterations. Practitioners are thus trapped in a bind: either stop training prematurely or inject massive per-step noise, both of which critically compromise final model utility. Natural Gradient Descent (NGD) resolves this by preconditioning gradients with curvature, aligning updates with the loss geometry and extracting more efficient signal from every noisy step, offering a principled pathway to break the privacy-utility bottleneck. Despite its theoretical appeal, directly integrating NGD with DP introduces fundamental challenges: curvature estimation itself consumes prohibitive privacy budgets, isotropic DP operations conflict with the anisotropic scaling of NGD, and the inverse curvature catastrophically amplify parameter updates in flat directions, causing training instability. We propose DP-NGD, a practical framework that systematically addresses these obstacles by decoupling curvature estimation from private data, reconciling isotropic DP constraints with anisotropic second-order optimization via a whitened-space mechanism, and dynamically clamping the curvature to stabilize training. Extensive experiments on standard benchmarks demonstrate that DP-NGD achieves state-of-the-art accuracy, breaking through the utility ceilings of first-order baselines while delivering up to a $10\\times$ convergence speedup under the same privacy budget.",
+    "arxiv_id": "2607.05866",
+    "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+    "MATCHED_TOPIC_LABELS": [
+      "Architecture and Training Dynamics"
+    ],
+    "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+    "HOTSPOT_PAPER_LABELS": [],
+    "HOTSPOT_PAPER_PRIMARY_KIND": null,
+    "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+    "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default",
+    "EVIDENCE": 5,
+    "LOAD": 7,
+    "PROXIMITY": 3,
+    "READ_SCORE": 7.5
+  },
+  "2607.06651": {
+    "ARXIVID": "2607.06651",
+    "COMMENT": "Spectral-entropy rank allocation controls compressed federated updates under fixed per-client payload budgets.",
+    "RELEVANCE": 3,
+    "NOVELTY": 7,
+    "PRIMARY_TOPIC_ID": "training_systems",
+    "MATCHED_TOPIC_IDS": [
+      "training_systems"
+    ],
+    "TOPIC_MATCH_COMMENT": "Closest to low-communication training algorithms, but the demonstrated setting is multimodal edge learning without an identified language model.",
+    "HOTSPOT_PAPER_TAGS": [],
+    "HOTSPOT_PAPER_COMMENT": "",
+    "SCORE": 10,
+    "authors": [
+      "Quoc Bao Phan",
+      "Tuy Tan Nguyen"
+    ],
+    "title": "Entropy-Guided Tensor Compression for Multimodal Federated Learning on Edge Devices",
+    "abstract": "Federated learning (FL) over mobile and edge devices increasingly involves multimodal models in which clients differ in both sensing capability and computational capacity. Existing update compression schemes typically apply uniform policies across layers and devices, without accounting for modality-specific differences in spectral structure and compressibility. We propose MESH-FL, an entropy-guided matrix product state (MPS) update-compression framework for modality-heterogeneous FL on resource-constrained devices. MESH-FL estimates the spectral entropy of each layer-wise update via truncated singular value decomposition and allocates MPS compression ranks adaptively across layers, modalities, and devices under per-client payload budgets. We show that higher spectral entropy necessitates a higher reconstruction rank under the majorization order on singular-value energy distributions. Building on this result, we prove that the proposed entropy-guided allocation solves a convex surrogate rank-allocation problem, preserves monotonicity under the exact payload model, and achieves convergence with an explicit compression-dependent error term. Experiments on a 15-node heterogeneous Raspberry Pi~4/5 cluster with modality-heterogeneous clients show that MESH-FL achieves up to $56.8\\times$ compression while surpassing the uncompressed FedAvg baseline in final accuracy by up to 2.01%, and reduces total transmitted data to reach convergence by up to $66\\times$.",
+    "arxiv_id": "2607.06651",
+    "PRIMARY_TOPIC_LABEL": "Training Algorithms That Change What Is Possible",
+    "MATCHED_TOPIC_LABELS": [
+      "Training Algorithms That Change What Is Possible"
+    ],
+    "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+    "HOTSPOT_PAPER_LABELS": [],
+    "HOTSPOT_PAPER_PRIMARY_KIND": null,
+    "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+    "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default",
+    "EVIDENCE": 7,
+    "LOAD": 7,
+    "PROXIMITY": 2,
+    "READ_SCORE": 8.5
+  },
+  "2607.06565": {
+    "ARXIVID": "2607.06565",
+    "COMMENT": "Sparse anchor tokens route cross-modal computation between matched text and octree abstraction scales.",
+    "RELEVANCE": 3,
+    "NOVELTY": 6,
+    "PRIMARY_TOPIC_ID": "architecture_training",
+    "MATCHED_TOPIC_IDS": [
+      "architecture_training"
+    ],
+    "TOPIC_MATCH_COMMENT": "Closest to modular architecture design, but the core contribution serves 3D understanding and asset generation.",
+    "HOTSPOT_PAPER_TAGS": [],
+    "HOTSPOT_PAPER_COMMENT": "",
+    "SCORE": 9,
+    "authors": [
+      "Tianjiao Yu",
+      "Xinzhuo Li",
+      "Yifan Shen",
+      "Onkar Susladkar",
+      "Yuanzhe Liu",
+      "Xiaona Zhou",
+      "Ismini Lourentzou"
+    ],
+    "title": "ELSA3D: Elastic Semantic Anchoring for Unified 3D Understanding and Generation",
+    "abstract": "Unified 3D foundation models aspire to generate 3D assets and reason about them in language within a single backbone, but their text-3D interaction remains largely implicit. Existing methods concatenate text and 3D tokens into a flat sequence and rely on self-attention, collapsing coarse structural cues and fine geometric details into one undifferentiated representation. We introduce ELSA3D, a unified 3D model that addresses this with elastic semantic anchoring, structuring language and geometric reasoning jointly along matched abstraction scales. ELSA3D represents geometry with a scale-aware octree tokenizer and introduces Anchor Tokens, sparse cross-modal units that select semantic cues, route them to the most relevant 3D scale, retrieve scale-specific geometric evidence, and write the fused signal back into the unified representation, keeping interaction sparse yet precise. A lightweight per-block router makes both computation and reasoning elastic, choosing which text tokens instantiate anchors at which geometric scale so that cross-modal capacity concentrates where alignment is most needed. ELSA3D achieves state-of-the-art performance across image-to-3D generation, text-to-3D generation, and 3D captioning, outperforming the strongest unified baseline while roughly halving FLOPs and inference latency relative to the non-elastic version of the same model.",
+    "arxiv_id": "2607.06565",
+    "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+    "MATCHED_TOPIC_LABELS": [
+      "Architecture and Training Dynamics"
+    ],
+    "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+    "HOTSPOT_PAPER_LABELS": [],
+    "HOTSPOT_PAPER_PRIMARY_KIND": null,
+    "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+    "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default",
+    "EVIDENCE": 5,
+    "LOAD": 5,
+    "PROXIMITY": 2,
+    "READ_SCORE": 7.5
+  },
+  "2607.06079": {
+    "ARXIVID": "2607.06079",
+    "COMMENT": "Restricting perturbations to the input-dependent objective component decouples perturbation dimension from reservoir size.",
+    "RELEVANCE": 2,
+    "NOVELTY": 8,
+    "PRIMARY_TOPIC_ID": "architecture_training",
+    "MATCHED_TOPIC_IDS": [
+      "architecture_training"
+    ],
+    "TOPIC_MATCH_COMMENT": "Closest to learning-rule design, but the subject is echo-state-network adaptation without a language-model training demonstration.",
+    "HOTSPOT_PAPER_TAGS": [],
+    "HOTSPOT_PAPER_COMMENT": "",
+    "SCORE": 10,
+    "authors": [
+      "Taiki Yamada",
+      "Kantaro Fujiwara"
+    ],
+    "title": "Scalable Perturbation Learning for Online Self-Supervised Learning in Echo State Networks",
+    "abstract": "Intelligent systems should not only solve tasks but also adapt under real-world constraints. Autonomous adaptation via self-supervised learning, sequential adaptation via online learning, and memory-efficient implementation via perturbation-based learning are important requirements for such systems. However, these requirements are generally in tension for high-dimensional systems, because perturbation-based learning suffers from variance that grows with the dimension of the perturbed variables. In this study, we focus on echo state networks (ESNs), where this tension naturally arises in large reservoirs. We propose a perturbation-based learning rule for online self-supervised learning in ESNs. The proposed rule is derived from an orthogonal decomposition of the self-supervised learning cost, which separates an input-dependent component from a redundant component determined by the fixed ESN parameters. By perturbing only the input-dependent component, the effective perturbation dimension is reduced from the reservoir dimension to the input dimension. Thus, the proposed method preserves self-supervised adaptation, online learning, and scalar-feedback perturbation learning, while avoiding reservoir-size-dependent variance growth. This suggests a design principle for scalable and hardware-compatible learning: online learning should be restricted to the dynamically necessary low-dimensional component of the objective.",
+    "arxiv_id": "2607.06079",
+    "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+    "MATCHED_TOPIC_LABELS": [
+      "Architecture and Training Dynamics"
+    ],
+    "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+    "HOTSPOT_PAPER_LABELS": [],
+    "HOTSPOT_PAPER_PRIMARY_KIND": null,
+    "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+    "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default",
+    "EVIDENCE": 5,
+    "LOAD": 7,
+    "PROXIMITY": 2,
+    "READ_SCORE": 5.5
+  },
+  "2607.06109": {
+    "ARXIVID": "2607.06109",
+    "COMMENT": "Threat-guided gating diversification encourages distinct expert pathways for different adversarial perturbations.",
+    "RELEVANCE": 3,
+    "NOVELTY": 6,
+    "PRIMARY_TOPIC_ID": "moe_training",
+    "MATCHED_TOPIC_IDS": [
+      "moe_training"
+    ],
+    "TOPIC_MATCH_COMMENT": "Routing and specialization make MoE the closest topic, but the contribution targets adversarial robustness without a stated language-model setting.",
+    "HOTSPOT_PAPER_TAGS": [],
+    "HOTSPOT_PAPER_COMMENT": "",
+    "SCORE": 9,
+    "authors": [
+      "Woo Jae Kim",
+      "Kyle Min",
+      "Suhyeon Ha",
+      "Joonsung Jeon",
+      "Sung-eui Yoon"
+    ],
+    "title": "RoME: Robust Mixture of Low-Rank Experts against Multiple Adversarial Perturbations",
+    "abstract": "Multi-perturbation adversarial training (MAT) aims to achieve robustness against multiple $\\ell_p$ perturbations but suffers from robustness trade-offs between different threats. To address this, we employ a mixture of experts (MoE) to route different threats through distinct model pathways. However, naive application of MoE encounters two critical challenges: experts tend to overlook threat-specific features and redundantly capture features shared across threats, and gating networks suffer from threat-agnostic routing where they learn nearly identical routing patterns across threats, thus preventing the construction of threat-specific model pathways. To this end, we propose Robust Mixture of Low-Rank Experts (RoME), where each expert is a low-rank additive update to the shared backbone, allowing it to capture threat-common features while experts focus on threat-specific information. To address threat-agnostic routing, RoME introduces (i) dual-scale gating that exploits threat-discriminative signals from local and global level features, and (ii) threat-guided gating diversification that enforces diverse expert utilization across threats. Extensive experiments demonstrate that RoME outperforms existing state-of-the-art MAT in union robustness and natural accuracy and improves robustness against unseen threats. Codes are available at https://github.com/wkim97/RoME.",
+    "arxiv_id": "2607.06109",
+    "PRIMARY_TOPIC_LABEL": "MoE Where It Changes the Design Space",
+    "MATCHED_TOPIC_LABELS": [
+      "MoE Where It Changes the Design Space"
+    ],
+    "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+    "HOTSPOT_PAPER_LABELS": [],
+    "HOTSPOT_PAPER_PRIMARY_KIND": null,
+    "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+    "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default",
+    "EVIDENCE": 5,
+    "LOAD": 5,
+    "PROXIMITY": 2,
+    "READ_SCORE": 7.5
+  },
+  "2607.06151": {
+    "ARXIVID": "2607.06151",
+    "COMMENT": "An extragradient prediction step reduces sharpness-aware minimization's sensitivity to its perturbation radius.",
+    "RELEVANCE": 3,
+    "NOVELTY": 5,
+    "PRIMARY_TOPIC_ID": "architecture_training",
+    "MATCHED_TOPIC_IDS": [
+      "architecture_training"
+    ],
+    "TOPIC_MATCH_COMMENT": "Closest to optimizer design, but the abstract does not establish applicability through language-model training experiments.",
+    "HOTSPOT_PAPER_TAGS": [],
+    "HOTSPOT_PAPER_COMMENT": "",
+    "SCORE": 8,
+    "authors": [
+      "Yao Fu",
+      "Chunxia Zhang",
+      "Junmin Liu",
+      "Yihang Jin",
+      "Haishan Ye",
+      "Yuanao Yang"
+    ],
+    "title": "Leveraging Extragradient for Effective Sharpness-Aware Minimization in Deep Learning",
+    "abstract": "Generalization remains a pivotal challenge in deep learning, where traditional optimizers like Stochastic Gradient Descent (SGD) often converge to sharp minima, leading to overfitting and reduced performance on unseen data. Building on Sharpness-Aware Minimization (SAM), for seeking flat minima associated with improved generalization, we propose the Extragradient-Inspired Sharpness-Aware Minimization (EISAM), a novel optimizer that enhances generalization via the extragradient technique. EISAM uses a two-step update process: a prediction step investigating the geometry of the loss landscape and a perturbation step that refines updates with a base optimizer. This approach achieves better generalization performance than SAM. Crucially, EISAM reduces sensitivity to the perturbation radius, enhancing robustness, and simplifying the tuning across diverse settings. Extensive experiments on benchmark datasets demonstrate that EISAM consistently outperforms SGD, Adaptive Moment Estimation (Adam), and SAM in test accuracy and training efficiency across various architectures. Theoretical analysis further confirms that EISAM tightens the generalization bound by steering parameters toward flatter minima with reduced curvature. Accompanied by a thorough hyperparameter analysis, EISAM offers practical tuning guidance, establishing it as a robust, scalable, and broadly applicable optimization solution that advances both the theory and practice in deep learning.",
+    "arxiv_id": "2607.06151",
+    "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+    "MATCHED_TOPIC_LABELS": [
+      "Architecture and Training Dynamics"
+    ],
+    "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+    "HOTSPOT_PAPER_LABELS": [],
+    "HOTSPOT_PAPER_PRIMARY_KIND": null,
+    "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+    "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default",
+    "EVIDENCE": 5,
+    "LOAD": 6,
+    "PROXIMITY": 3,
+    "READ_SCORE": 8.0
+  },
+  "2607.06723": {
+    "ARXIVID": "2607.06723",
+    "COMMENT": "Eliminating optimizer hidden states exposes effective update geometry through Schur-complement curvature.",
+    "RELEVANCE": 2,
+    "NOVELTY": 8,
+    "PRIMARY_TOPIC_ID": "architecture_training",
+    "MATCHED_TOPIC_IDS": [
+      "architecture_training"
+    ],
+    "TOPIC_MATCH_COMMENT": "Closest to optimizer geometry, but its core contribution is a variational mathematical framework without a language-model training setting.",
+    "HOTSPOT_PAPER_TAGS": [],
+    "HOTSPOT_PAPER_COMMENT": "",
+    "SCORE": 10,
+    "authors": [
+      "Zavier Li"
+    ],
+    "title": "Optimization Geometrodynamics: Variational Reduction and Interaction Curvature",
+    "abstract": "Adaptive optimizers carry hidden states that change how visible gradients become parameter motion. We develop optimization geometrodynamics as a variational theory of this hidden geometry. Infimal pushforward eliminates all hidden states realizing the same action and composes across optimizer hierarchies. Under smooth nondegeneracy, it yields hidden susceptibility and the Schur-complement curvature seen after relaxation. For affine pre-reduction perturbations, the induced interaction curvature is the negative-semidefinite operator $-G^*H^{-1}G$, whose mixed entries integrate to finite mechanism contrasts. Our main realization is the determinant-one affine-invariant SPD action map $P\\mapsto PA$. We prove a global analytic bundle with closed totally geodesic fibers and a unique analytic nearest-controller section. A strongly convex fiber theorem and an explicit logarithmic action residual give a globally linearly convergent solver from every feasible initializer, together with nonasymptotic value, controller-distance, and residual bounds and observable posterior stopping certificates. A conditional inexact result propagates supplied rigorous residual-error and radius majorants. The dense spectral kernel is confined to an active subspace of dimension $r\\le 2m$, yielding an explicit spectral-arithmetic operation bound and a strict dimensional reduction when $r<d$. For nested shape-normalized quadratic actions, canonical multi-secant projections satisfy an exact CAT(0) Pythagorean decrease and recover the determinant-one inverse Hessian shape at the sharp rank threshold $d-1$, provided the scalar gauge $c_H=(\\det H)^{1/d}$ is known. These results turn the action bundle into an exact iterative computation with posterior certificates and a finite-identification theory.",
+    "arxiv_id": "2607.06723",
+    "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+    "MATCHED_TOPIC_LABELS": [
+      "Architecture and Training Dynamics"
+    ],
+    "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+    "HOTSPOT_PAPER_LABELS": [],
+    "HOTSPOT_PAPER_PRIMARY_KIND": null,
+    "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+    "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default",
+    "EVIDENCE": 5,
+    "LOAD": 10,
+    "PROXIMITY": 2,
+    "READ_SCORE": 4.0
+  },
+  "2607.06013": {
+    "ARXIVID": "2607.06013",
+    "COMMENT": "Annealing the numerical stability constant selects a rate-dependent implicit bias for smoothed-sign updates.",
+    "RELEVANCE": 3,
+    "NOVELTY": 7,
+    "PRIMARY_TOPIC_ID": "architecture_training",
+    "MATCHED_TOPIC_IDS": [
+      "architecture_training"
+    ],
+    "TOPIC_MATCH_COMMENT": "Closest to optimizer dynamics; the proved result concerns full-batch linear classification on separable data.",
+    "HOTSPOT_PAPER_TAGS": [],
+    "HOTSPOT_PAPER_COMMENT": "",
+    "SCORE": 10,
+    "authors": [
+      "Xiangwu Wang",
+      "Chengwei Cao",
+      "Yicheng Song",
+      "Ran Bi",
+      "Peilin Yu"
+    ],
+    "title": "Stability Annealing Selects the Implicit Bias of Smoothed Sign Descent: A Rate-Indexed Barrier Path on Separable Data",
+    "abstract": "Adaptive gradient methods can favor max-margin separators that differ from gradient descent, yet a fixed positive numerical stability constant eventually changes the update geometry again. This paper studies the rate-controlled middle case for full-batch linear classification on separable data. For memoryless stability-annealed smoothed-sign descent with weighted exponential loss, we prove that the normalized iterates converge to the minimizer of a convex Burg-type barrier over a margin slice. The proof rewrites the dynamics exactly as entropic mirror ascent on a concave dual objective, controls the dual gap by a KL recursion, and yields an explicit S_t^{-1/2} normalized-iterate envelope. The static barrier geometry is fully characterized, including KKT conditions and both endpoint limits. Experiments validate the exact dual identities to floating-point error, illustrate the predicted path and rate diagram, and show an empirical fixed-epsilon crossover scaling in cumulative time. We further report robustness and boundary diagnostics for logistic tails, fixed-epsilon crossover, and adaptive-method variants, delineating the scope of the proved smoothed-sign theory.",
+    "arxiv_id": "2607.06013",
+    "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+    "MATCHED_TOPIC_LABELS": [
+      "Architecture and Training Dynamics"
+    ],
+    "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+    "HOTSPOT_PAPER_LABELS": [],
+    "HOTSPOT_PAPER_PRIMARY_KIND": null,
+    "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+    "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default",
+    "EVIDENCE": 5,
+    "LOAD": 9,
+    "PROXIMITY": 3,
+    "READ_SCORE": 6.5
+  },
+  "2607.06621": {
+    "ARXIVID": "2607.06621",
+    "COMMENT": "Constrained training preserves induction by rerouting around spectral bans, distinguishing positional defaults from necessary circuit structure.",
+    "RELEVANCE": 10,
+    "NOVELTY": 9,
+    "PRIMARY_TOPIC_ID": "architecture_training",
+    "MATCHED_TOPIC_IDS": [
+      "architecture_training"
+    ],
+    "TOPIC_MATCH_COMMENT": "Directly explains how positional schemes shape attention computation and circuit formation, combining pretrained-model analysis with controlled training interventions.",
+    "HOTSPOT_PAPER_TAGS": [
+      "new_frontier",
+      "daily_hot"
+    ],
+    "HOTSPOT_PAPER_COMMENT": "Broadly important today and potentially frontier-opening: Constrained training preserves induction by rerouting around spectral bans, distinguishing positional defaults from necessary circuit structure.",
+    "SCORE": 19,
+    "authors": [
+      "Li Hengyu"
+    ],
+    "title": "Fingerprint, Not Blueprint: How Positional Schemes Set the Default Spectral Algebra of Attention",
+    "abstract": "The pre-softmax score of an attention head is a bilinear form $score(i,j) = x_i^T M x_j$ in a learned operator $M = W_q^T W_k$. Because M is generally non-symmetric, hence non-normal, it has a complex eigenspectrum and non-orthogonal eigenvectors, the regime where non-Hermitian and random-matrix tools apply. We ask what this spectrum encodes, at three levels for previous-token and induction circuits. Statically, across seven pretrained models spanning three positional schemes, the strongest previous-token heads are spectrally rotational under RoPE and non-rotational, or content-like, where position enters outside QK (learned-absolute and ALiBi); the model-level separation is perfect at every top-k examined (exact permutation $p=0.029$), and zeroing the per-frequency RoPE phase $Im(M_t)$ eliminates induction on a pre-identified previous-token head in all three RoPE models. Dynamically, over public Pythia checkpoints every head originates at the random-matrix (Ginibre) null; the rotational signature emerges with the behavior, not before it, and the population-median suppression that yields the final profile follows circuit formation, so the profile is a consolidated fingerprint, not a precursor. Causally, and at toy scale, no spectral channel is necessary: constrained two-layer training reroutes around every ban with capability intact, albeit at a significant formation delay (four pre-registered contrasts, $q_BH <= 0.016$). The cost structure exposes each scheme's default: imposing symmetry slows learned-absolute models by a factor of 2.9, whereas a RoPE head with a fully symmetric static M still routes directionally via the phase channel, impossible under absolute positions. Within the settings examined, the positional scheme sets the default spectral algebra of an attention head's solution: a fingerprint sculpted after function, not a hard constraint upon it.",
+    "arxiv_id": "2607.06621",
+    "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+    "MATCHED_TOPIC_LABELS": [
+      "Architecture and Training Dynamics"
+    ],
+    "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+    "HOTSPOT_PAPER_LABELS": [
+      "New Frontier Papers",
+      "Daily Hot Papers"
+    ],
+    "HOTSPOT_PAPER_PRIMARY_KIND": "new_frontier",
+    "HOTSPOT_PAPER_PRIMARY_LABEL": "New Frontier Papers",
+    "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "heuristic",
+    "EVIDENCE": 8,
+    "LOAD": 7,
+    "PROXIMITY": 10,
+    "READ_SCORE": 24.5
+  },
+  "2607.05836": {
+    "ARXIVID": "2607.05836",
+    "COMMENT": "A two-sided geometric safeguard bounds L-BFGS conditioning while preserving its linear time and memory complexity.",
+    "RELEVANCE": 3,
+    "NOVELTY": 6,
+    "PRIMARY_TOPIC_ID": "architecture_training",
+    "MATCHED_TOPIC_IDS": [
+      "architecture_training"
+    ],
+    "TOPIC_MATCH_COMMENT": "Closest to preconditioner stability, but no language-model training regime is demonstrated.",
+    "HOTSPOT_PAPER_TAGS": [],
+    "HOTSPOT_PAPER_COMMENT": "",
+    "SCORE": 9,
+    "authors": [
+      "Don Li"
+    ],
+    "title": "On the Condition Number Upper Bound of the L-BFGS Inverse Hessian Approximation Matrix with a Two-Sided Geometric Envelope Safeguarding Mechanism",
+    "abstract": "The limited-memory BFGS (L-BFGS) algorithm is a cornerstone of large-scale optimization due to its linear memory and computational costs. However, in ill-conditioned or non-convex landscapes, the implicit inverse Hessian approximation can suffer from an exploding condition number, leading to numerical instability and degraded convergence. To address this, we propose Two-Sided L-BFGS, a safeguarded variant that dynamically constrains the condition number of the inverse Hessian operator via a two-sided geometric envelope. Moreover, we show that Two-Sided L-BFGS preserves accumulated curvature information and maintains standard $O(mn)$ memory and per-iteration time complexities. We prove that this geometric envelope yields a uniform bound on the condition number of every inverse Hessian approximation generated by the algorithm. By tracking the algebraic evolution of the extreme eigenvalues through $m$ consecutive quasi-Newton updates starting from a scaled identity matrix, the resulting bound is expressed explicitly as a function of the memory depth, problem dimension, and envelope hyperparameters. Moreover, we show that Two-Sided L-BFGS preserves asymptotic global convergence in non-convex regimes under standard smoothness and strong Wolfe line-search assumptions, matching the theoretical guarantees of L-BFGS variants utilizing the Li-Fukushima cautious update rule. Numerical experiments on high-dimensional optimization problems demonstrate that the proposed method maintains well-conditioned inverse Hessian approximations and improves robustness and convergence behavior on ill-conditioned benchmarks.",
+    "arxiv_id": "2607.05836",
+    "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+    "MATCHED_TOPIC_LABELS": [
+      "Architecture and Training Dynamics"
+    ],
+    "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+    "HOTSPOT_PAPER_LABELS": [],
+    "HOTSPOT_PAPER_PRIMARY_KIND": null,
+    "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+    "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default",
+    "EVIDENCE": 5,
+    "LOAD": 8,
+    "PROXIMITY": 3,
+    "READ_SCORE": 7.0
+  },
+  "2607.06370": {
+    "ARXIVID": "2607.06370",
+    "COMMENT": "Caches intermediate flow actions to warm-start subsequent generations.",
+    "RELEVANCE": 2,
+    "NOVELTY": 5,
+    "PRIMARY_TOPIC_ID": "efficiency_scaling",
+    "MATCHED_TOPIC_IDS": [
+      "efficiency_scaling"
+    ],
+    "TOPIC_MATCH_COMMENT": "Computation reuse is closest to efficiency_scaling; the contribution targets robotic-action inference.",
+    "HOTSPOT_PAPER_TAGS": [],
+    "HOTSPOT_PAPER_COMMENT": "",
+    "SCORE": 7,
+    "authors": [
+      "Ryuji Oi",
+      "Hikari Otsuka",
+      "Kosuke Matsushima",
+      "Yuki Ichikawa",
+      "Masato Motomura",
+      "Tatsuya Kaneko",
+      "Daichi Fujiki"
+    ],
+    "title": "ActionCache: Training-Free Acceleration for Vision-Language-Action Models with Action Caching and Refinement",
+    "abstract": "Vision-Language-Action (VLA) models have emerged as a promising approach for generalizable robotic manipulations. In particular, flow-matching-based VLA models have shown remarkable success due to their capability to generate precise and smooth action sequences and capture multimodal distributions. However, the iterative denoising process in the action head acts as a major computational bottleneck, posing a critical challenge for real-time deployment. To address this challenge, we propose ActionCache, a plug-and-play external cache that opportunistically reuses past intermediate actions to warm-start generations from the vicinity of target actions, drastically reducing the inference latency. Specifically, ActionCache stores the intermediate actions with compact multimodal keys, which enables retrieval from similar past contexts across different episodes or even different tasks. Experimental results in simulation and real-world environments demonstrate that ActionCache maintains high task success rates in a low-latency regime, achieving action head inference acceleration of up to $10.44\\times$ and $40.17\\times$ for representative flow-based VLA, $π_{0.5}$ and GR00T-N1.6, respectively.",
+    "arxiv_id": "2607.06370",
+    "PRIMARY_TOPIC_LABEL": "Efficiency, Compression, and Large-Scale Training",
+    "MATCHED_TOPIC_LABELS": [
+      "Efficiency, Compression, and Large-Scale Training"
+    ],
+    "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+    "HOTSPOT_PAPER_LABELS": [],
+    "HOTSPOT_PAPER_PRIMARY_KIND": null,
+    "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+    "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default",
+    "EVIDENCE": 7,
+    "LOAD": 4,
+    "PROXIMITY": 1,
+    "READ_SCORE": 8.0
+  }
 }

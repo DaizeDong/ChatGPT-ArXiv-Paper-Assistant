@@ -1,4 +1,6 @@
-<div style="display: flex; align-items: flex-start; justify-content: space-between; width: 100%;"><div style="width: 33.33%; text-align: left;"><a href="../07"><img src="../../../assets/nav/day/2026-01-09-prev.svg" alt="Previous Day 2026-01-07"></a></div><div style="width: 33.33%; text-align: center;"><a href=".."><img src="../../../assets/nav/day/2026-01-09-center.svg" alt="Monthly Overview 2026-01"></a></div><div style="width: 33.33%; text-align: right;"><a href="../12"><img src="../../../assets/nav/day/2026-01-09-next.svg" alt="Next Day 2026-01-12"></a></div></div>
+<div style="display: flex; align-items: flex-start; justify-content: space-between; width: 100%;"><div style="width: 33.33%; text-align: left;"><a href="../08"><img src="../../../assets/nav/day/2026-01-09-prev.svg" alt="Previous Day 2026-01-08"></a></div><div style="width: 33.33%; text-align: center;"><a href=".."><img src="../../../assets/nav/day/2026-01-09-center.svg" alt="Monthly Overview 2026-01"></a></div><div style="width: 33.33%; text-align: right;"><a href="../12"><img src="../../../assets/nav/day/2026-01-09-next.svg" alt="Next Day 2026-01-12"></a></div></div>
+
+<div align="center" class="site-jump-links"><a href="../../../hot/2026">Daily AI Hotspots</a></div>
 
 # Personalized Daily ArXiv Papers 2026-01-09
 

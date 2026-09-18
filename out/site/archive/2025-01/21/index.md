@@ -1,4 +1,6 @@
-<div style="display: flex; align-items: flex-start; justify-content: space-between; width: 100%;"><div style="width: 33.33%; text-align: left;"><a href="../17"><img src="../../../assets/nav/day/2025-01-21-prev.svg" alt="Previous Day 2025-01-17"></a></div><div style="width: 33.33%; text-align: center;"><a href=".."><img src="../../../assets/nav/day/2025-01-21-center.svg" alt="Monthly Overview 2025-01"></a></div><div style="width: 33.33%; text-align: right;"><a href="../22"><img src="../../../assets/nav/day/2025-01-21-next.svg" alt="Next Day 2025-01-22"></a></div></div>
+<div style="display: flex; align-items: flex-start; justify-content: space-between; width: 100%;"><div style="width: 33.33%; text-align: left;"><a href="../20"><img src="../../../assets/nav/day/2025-01-21-prev.svg" alt="Previous Day 2025-01-20"></a></div><div style="width: 33.33%; text-align: center;"><a href=".."><img src="../../../assets/nav/day/2025-01-21-center.svg" alt="Monthly Overview 2025-01"></a></div><div style="width: 33.33%; text-align: right;"><a href="../22"><img src="../../../assets/nav/day/2025-01-21-next.svg" alt="Next Day 2025-01-22"></a></div></div>
+
+<div align="center" class="site-jump-links"><a href="../../../hot/2026-09-14">Daily AI Hotspots</a></div>
 
 # Personalized Daily Arxiv Papers 01/21/2025
 Total cost: $1.026625

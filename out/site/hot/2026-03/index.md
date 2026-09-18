@@ -1,4 +1,4 @@
-<div style="display: flex; align-items: flex-start; justify-content: space-between; width: 100%;"><div style="width: 33.33%; text-align: left;"></div><div style="width: 33.33%; text-align: center;"><a href="../2026"><img src="../../assets/nav/hot/month/2026-03-center.svg" alt="Yearly Hotspots 2026"></a></div><div style="width: 33.33%; text-align: right;"></div></div>
+<div style="display: flex; align-items: flex-start; justify-content: space-between; width: 100%;"><div style="width: 33.33%; text-align: left;"></div><div style="width: 33.33%; text-align: center;"><a href="../2026"><img src="../../assets/nav/hot/month/2026-03-center.svg" alt="Yearly Hotspots 2026"></a></div><div style="width: 33.33%; text-align: right;"><a href="../2026-04"><img src="../../assets/nav/hot/month/2026-03-next.svg" alt="Next Hotspot Month 2026-04"></a></div></div>
 
 <div align="center" class="site-jump-links"><a href="../../archive/2026-03">Personalized Daily Arxiv Paper</a></div>
 
@@ -7,9 +7,9 @@
 <table class="archive-summary-table">
   <thead><tr><th>Metric</th><th>Value</th></tr></thead>
   <tbody>
-    <tr><td><strong>Report days</strong></td><td align="center">7</td></tr>
-    <tr><td><strong>Top topics</strong></td><td align="center">22</td></tr>
-    <tr><td><strong>Watchlist items</strong></td><td align="center">9</td></tr>
+    <tr><td><strong>Report days</strong></td><td align="center">13</td></tr>
+    <tr><td><strong>Top topics</strong></td><td align="center">60</td></tr>
+    <tr><td><strong>Watchlist items</strong></td><td align="center">3</td></tr>
   </tbody>
 </table>
 
@@ -21,18 +21,71 @@
     <tbody>
         <tr><td style="padding: 8px;">1</td><td style="padding: 8px;">2</td><td style="padding: 8px;">3</td><td style="padding: 8px;">4</td><td style="padding: 8px;">5</td><td style="padding: 8px;">6</td><td style="padding: 8px;">7</td></tr>
         <tr><td style="padding: 8px;">8</td><td style="padding: 8px;">9</td><td style="padding: 8px;">10</td><td style="padding: 8px;">11</td><td style="padding: 8px;">12</td><td style="padding: 8px;">13</td><td style="padding: 8px;">14</td></tr>
-        <tr><td style="padding: 8px;">15</td><td style="padding: 8px;">16</td><td style="padding: 8px;"><a href="../2026-03-17" style="text-decoration: none;"><strong>17</strong><br><span class="archive-day-meta">5 topics</span></a></td><td style="padding: 8px;"><a href="../2026-03-18" style="text-decoration: none;"><strong>18</strong><br><span class="archive-day-meta">3 topics</span></a></td><td style="padding: 8px;"><a href="../2026-03-19" style="text-decoration: none;"><strong>19</strong><br><span class="archive-day-meta">4 topics</span></a></td><td style="padding: 8px;"><a href="../2026-03-20" style="text-decoration: none;"><strong>20</strong><br><span class="archive-day-meta">3 topics</span></a></td><td style="padding: 8px;"><a href="../2026-03-21" style="text-decoration: none;"><strong>21</strong><br><span class="archive-day-meta">2 topics</span></a></td></tr>
-        <tr><td style="padding: 8px;"><a href="../2026-03-22" style="text-decoration: none;"><strong>22</strong><br><span class="archive-day-meta">4 topics</span></a></td><td style="padding: 8px;"><a href="../2026-03-23" style="text-decoration: none;"><strong>23</strong><br><span class="archive-day-meta">1 topics</span></a></td><td style="padding: 8px;">24</td><td style="padding: 8px;">25</td><td style="padding: 8px;">26</td><td style="padding: 8px;">27</td><td style="padding: 8px;">28</td></tr>
-        <tr><td style="padding: 8px;">29</td><td style="padding: 8px;">30</td><td style="padding: 8px;">31</td><td style="padding: 8px;"></td><td style="padding: 8px;"></td><td style="padding: 8px;"></td><td style="padding: 8px;"></td></tr>
+        <tr><td style="padding: 8px;">15</td><td style="padding: 8px;">16</td><td style="padding: 8px;">17</td><td style="padding: 8px;"><a href="../2026-03-18" style="text-decoration: none;"><strong>18</strong><br><span class="archive-day-meta">5 topics</span></a></td><td style="padding: 8px;">19</td><td style="padding: 8px;"><a href="../2026-03-20" style="text-decoration: none;"><strong>20</strong><br><span class="archive-day-meta">5 topics</span></a></td><td style="padding: 8px;"><a href="../2026-03-21" style="text-decoration: none;"><strong>21</strong><br><span class="archive-day-meta">5 topics</span></a></td></tr>
+        <tr><td style="padding: 8px;"><a href="../2026-03-22" style="text-decoration: none;"><strong>22</strong><br><span class="archive-day-meta">3 topics</span></a></td><td style="padding: 8px;"><a href="../2026-03-23" style="text-decoration: none;"><strong>23</strong><br><span class="archive-day-meta">5 topics</span></a></td><td style="padding: 8px;"><a href="../2026-03-24" style="text-decoration: none;"><strong>24</strong><br><span class="archive-day-meta">5 topics</span></a></td><td style="padding: 8px;"><a href="../2026-03-25" style="text-decoration: none;"><strong>25</strong><br><span class="archive-day-meta">5 topics</span></a></td><td style="padding: 8px;"><a href="../2026-03-26" style="text-decoration: none;"><strong>26</strong><br><span class="archive-day-meta">5 topics</span></a></td><td style="padding: 8px;"><a href="../2026-03-27" style="text-decoration: none;"><strong>27</strong><br><span class="archive-day-meta">5 topics</span></a></td><td style="padding: 8px;"><a href="../2026-03-28" style="text-decoration: none;"><strong>28</strong><br><span class="archive-day-meta">5 topics</span></a></td></tr>
+        <tr><td style="padding: 8px;"><a href="../2026-03-29" style="text-decoration: none;"><strong>29</strong><br><span class="archive-day-meta">2 topics</span></a></td><td style="padding: 8px;"><a href="../2026-03-30" style="text-decoration: none;"><strong>30</strong><br><span class="archive-day-meta">5 topics</span></a></td><td style="padding: 8px;"><a href="../2026-03-31" style="text-decoration: none;"><strong>31</strong><br><span class="archive-day-meta">5 topics</span></a></td><td style="padding: 8px;"></td><td style="padding: 8px;"></td><td style="padding: 8px;"></td><td style="padding: 8px;"></td></tr>
     </tbody>
 </table>
 
 ## Daily Briefs
 
-- [2026-03-23](../2026-03-23) · 1 top topics · Today’s strongest signal is narrow: OpenAI outlined the safety framework around Sora, its video generation system. The topic is technically meaningful because deployment constraints, provenance, and abuse prevention are central to frontier generative video, but the discussion appears to be driven mainly by OpenAI’s own publication rather than broad external uptake. As a result, this is better treated as an early watch item than a fully established hotspot.
-- [2026-03-22](../2026-03-22) · 4 top topics · Today's AI discussion centered on Grounding World Simulation Models in a Real-World Metropolis, OpenSeeker: Democratizing Frontier Search Agents by Fully Open-Sourcing Training Data, and PaddleOCR-VL: Boosting Multilingual Document Parsing via a 0.9B Ultra-Compact Vision-Language Model.
-- [2026-03-21](../2026-03-21) · 2 top topics · Today’s meaningful AI signals were narrow: Google pushed further into generative design tooling with Stitch, while a compact document-understanding model, SmolDocling, drew research attention for practical multimodal document conversion. Everything else looked early, noisy, or insufficiently confirmed.
-- [2026-03-20](../2026-03-20) · 3 top topics · Today's AI discussion centered on OpenAI to acquire Astral, MiroThinker: Pushing the Performance Boundaries of Open-Source Research Agents via Model, Context, and Interactive Scaling, and MetaClaw: Just Talk -- An Agent That Meta-Learns and Evolves in the Wild.
-- [2026-03-19](../2026-03-19) · 4 top topics · Today's AI discussion centered on MetaClaw: Just Talk -- An Agent That Meta-Learns and Evolves in the Wild, A Noise Sensitivity Exponent Controls Large Statistical-to-Computational Gaps in Single- and Multi-Index Models, and Cursor's new Composer 2 just beat Claude Opus at coding and it's 10x cheaper.
-- [2026-03-18](../2026-03-18) · 3 top topics · Today’s AI conversation centered on one clear industry move and two practitioner-relevant technical signals: OpenAI’s reported acquisition of Astral, a research-and-open-source push around self-improving agents via MetaClaw, and evidence that smaller Qwen3.5 variants are becoming more competitive on document-heavy workloads. The strongest story is strategic consolidation around the AI coding stack; the other two matter more as indicators of where agent research and efficient model deployment are heading.
-- [2026-03-17](../2026-03-17) · 5 top topics · Today's AI discussion centered on MetaClaw: Just Talk -- An Agent That Meta-Learns and Evolves in the Wild, 100x Cost & Latency Reduction: Performance Analysis of AI Query Approximation using Lightweight Proxy Models, and Mask Is What DLLM Needs: A Masked Data Training Paradigm for Diffusion LLMs.
+- [2026-03-31](../2026-03-31) · 5 top topics · • [Product Release] Introducing Runway Builders — This product release surfaced across 1 independent source(s).
+• [Product Release] How I contributed a new model to the Transformers library using Codex — This product release surfaced across 1 independent source(s).
+• [Product Release] Building Interactive AI Characters Responsibly — This product release surfaced across 1 independent source(s).
+• [Product Release] Cohere Labs Launches Tiny Aya, Making Multilingual AI Accessible — This product release surfaced across 1 independent source(s).
+• [Product Release] Enterprise AI: What is Enterprise Artificial Intelligence? — This product release surfaced across 1 independent source(s).
+- [2026-03-30](../2026-03-30) · 5 top topics · • [Product Release] Helping disaster response teams turn AI into action across Asia — This product release surfaced across 1 independent source(s).
+• [Research] A Compression Perspective on Simplicity Bias — This research paper surfaced across 1 independent source(s).
+• [Research] AcTTA: Rethinking Test-Time Adaptation via Dynamic Activation — This research paper surfaced across 1 independent source(s).
+• [Tooling] jxnxts/mcp-brasil — This tooling surfaced across 1 independent source(s).
+• [Tooling] sanbuphy/learn-coding-agent — This tooling surfaced across 1 independent source(s).
+- [2026-03-29](../2026-03-29) · 2 top topics · • [Tooling] arman-bd/guppylm — This tooling surfaced across 1 independent source(s).
+• [Industry Update] AI overly affirms users asking for personal advice — This other surfaced across 1 independent source(s).
+- [2026-03-28](../2026-03-28) · 5 top topics · • [Product Release] STADLER reshapes knowledge work at a 230-year-old company — This product release surfaced across 1 independent source(s).
+• [Research] Kirchhoff-Inspired Neural Networks for Evolving High-Order Perception — This research paper surfaced across 1 independent source(s).
+• [Research] Labeled Compression Schemes for Concept Classes of Finite Functions — This research paper surfaced across 1 independent source(s).
+• [Tooling] Arthur-Ficial/apfel — This tooling surfaced across 1 independent source(s).
+• [Tooling] larksuite/cli — This tooling surfaced across 1 independent source(s).
+- [2026-03-27](../2026-03-27) · 5 top topics · • [Product Release] Transform your headphones into a live personal translator on iOS. — This product release surfaced across 1 independent source(s).
+• [Product Release] Gemini 3.1 Flash Live: Making audio AI more natural and reliable — This product release surfaced across 2 independent source(s).
+• [Product Release] Watch James Manyika talk AI and creativity with LL COOL J. — This product release surfaced across 1 independent source(s).
+• [Research] AVO: Agentic Variation Operators for Autonomous Evolutionary Search — This research paper surfaced across 1 independent source(s).
+• [Research] Deep Neural Regression Collapse — This research paper surfaced across 1 independent source(s).
+- [2026-03-26](../2026-03-26) · 5 top topics · • [Product Release] Lyria 3 Pro: Create longer tracks in more — This product release surfaced across 2 independent source(s).
+• [Product Release] Protecting people from harmful manipulation — This product release surfaced across 1 independent source(s).
+• [Research] Why Does Self-Distillation (Sometimes) Degrade the Reasoning Capability of LLMs? — This research paper surfaced across 2 independent source(s).
+• [Tooling] Plan, divide, and conquer: How weak models excel at long context tasks — This tooling surfaced across 1 independent source(s).
+• [Research] A Theory of LLM Information Susceptibility — This research paper surfaced across 1 independent source(s).
+- [2026-03-25](../2026-03-25) · 5 top topics · • [Product Release] Vibe Coding XR: Accelerating AI + XR prototyping with XR Blocks and Gemini — This product release surfaced across 2 independent source(s).
+• [Product Release] Stride and prejudice: How a 32-bit overflow corrupted a CUDA kernel (and stayed hidden for weeks) — This product release surfaced across 1 independent source(s).
+• [Product Release] Helping developers build safer AI experiences for teens — This product release surfaced across 1 independent source(s).
+• [Product Release] Mapping the modern world: How S2Vec learns the language of our cities — This product release surfaced across 1 independent source(s).
+• [Product Release] TurboQuant: Redefining AI efficiency with extreme compression — This product release surfaced across 1 independent source(s).
+- [2026-03-24](../2026-03-24) · 5 top topics · • [Product Release] Powering product discovery in ChatGPT — This product release surfaced across 1 independent source(s).
+• [Product Release] Update on the OpenAI Foundation — This product release surfaced across 1 independent source(s).
+• [Research] mSFT: Addressing Dataset Mixtures Overfitting Heterogeneously in Multi-task SFT — This research paper surfaced across 2 independent source(s).
+• [Research] On the Direction of RLVR Updates for LLM Reasoning: Identification and Exploitation — This research paper surfaced across 2 independent source(s).
+• [Research] A Comparative Analysis of LLM Memorization at Statistical and Internal Levels: Cross-Model Commonalities and Model-Specific Signatures — This research paper surfaced across 1 independent source(s).
+- [2026-03-23](../2026-03-23) · 5 top topics · • [Product Release] Introducing Command R7B: Fast and efficient generative AI | Cohere Blog — This product release surfaced across 1 independent source(s).
+• [Product Release] Speaking of Voxtral — This product release surfaced across 1 independent source(s).
+• [Research] Creating with Sora Safely — This research paper surfaced across 1 independent source(s).
+• [Research] Adaptive Layerwise Perturbation: Unifying Off-Policy Corrections for LLM RL — This research paper surfaced across 1 independent source(s).
+• [Research] Any-Subgroup Equivariant Networks via Symmetry Breaking — This research paper surfaced across 1 independent source(s).
+- [2026-03-22](../2026-03-22) · 3 top topics · • [Industry Update] Claude Code and the Great Productivity Panic of 2026 — This other surfaced across 1 independent source(s).
+• [Industry Update] Show HN: I ran a language model on a PS2 — This other surfaced across 1 independent source(s).
+• [Industry Update] Why craft-lovers are losing their craft — This other surfaced across 1 independent source(s).
+- [2026-03-21](../2026-03-21) · 5 top topics · • [Research] D-Mem: A Dual-Process Memory System for LLM Agents — This research paper surfaced across 1 independent source(s).
+• [Research] DyMoE: Dynamic Expert Orchestration with Mixed-Precision Quantization for Efficient MoE Inference on Edge — This research paper surfaced across 1 independent source(s).
+• [Industry Update] Artificial Intelligence Made Simple — This other surfaced across 1 independent source(s).
+• [Industry Update] MIT and Hasso Plattner Institute establish collaborative hub for AI and creativity — This other surfaced across 1 independent source(s).
+• [Industry Update] What’s the right path for AI? — This other surfaced across 1 independent source(s).
+- [2026-03-20](../2026-03-20) · 5 top topics · • [Product Release] AWS and Cerebras Collaboration Sets a New Standard for AI Inference Speed and Performance in the Cloud > — This product release surfaced across 1 independent source(s).
+• [Product Release] Why the AI Race Shifted to Speed — This product release surfaced across 1 independent source(s).
+• [Product Release] Zhipu AI and Intel deepen AI PC partnership — This product release surfaced across 1 independent source(s).
+• [Product Release] How we monitor internal coding agents for misalignment — This product release surfaced across 1 independent source(s).
+• [Market Signal] OpenAI to acquire Astral — This acquisition surfaced across 1 independent source(s).
+- [2026-03-18](../2026-03-18) · 5 top topics · • [Product Release] "Hai Na Bai Chuan" program offers free Baichuan-M3-Plus API for healthcare service providers — This product release surfaced across 1 independent source(s).
+• [Product Release] ByteDance Seed 2027 Foundation Model Campus Recruitment Opens — This product release surfaced across 1 independent source(s).
+• [Product Release] Mind the gap: What separates demo agents from production systems — This product release surfaced across 1 independent source(s).
+• [Product Release] Equipping workers with insights about compensation — This product release surfaced across 1 independent source(s).
+• [Product Release] OpenAI Japan announces Japan Teen Safety Blueprint to put teen safety first — This product release surfaced across 1 independent source(s).

@@ -1,5 +1,7 @@
 <div style="display: flex; align-items: flex-start; justify-content: space-between; width: 100%;"><div style="width: 33.33%; text-align: left;"><a href="../16"><img src="../../../assets/nav/day/2025-05-19-prev.svg" alt="Previous Day 2025-05-16"></a></div><div style="width: 33.33%; text-align: center;"><a href=".."><img src="../../../assets/nav/day/2025-05-19-center.svg" alt="Monthly Overview 2025-05"></a></div><div style="width: 33.33%; text-align: right;"><a href="../20"><img src="../../../assets/nav/day/2025-05-19-next.svg" alt="Next Day 2025-05-20"></a></div></div>
 
+<div align="center" class="site-jump-links"><a href="../../../hot/2026-09-14">Daily AI Hotspots</a></div>
+
 > This is a remedial run for missed papers from 05/16/2025 to 05/18/2025.
 > 
 > Results generated on 05/26/2025.

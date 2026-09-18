@@ -1,228 +1,260 @@
 {
-    "2601.14603": {
-        "ARXIVID": "2601.14603",
-        "COMMENT": "Injects gradient-variance information into Muon before Newton-Schulz orthogonalization, keeping spectral normalization and one extra buffer, with 1.33x step-to-target on Llama-1.2B pretraining.",
-        "RELEVANCE": 9,
-        "NOVELTY": 6,
-        "PRIMARY_TOPIC_ID": "training_systems",
-        "MATCHED_TOPIC_IDS": [
-            "training_systems"
-        ],
-        "TOPIC_MATCH_COMMENT": "A pretraining optimizer modification measured in convergence speed under fixed compute budgets.",
-        "HOTSPOT_PAPER_TAGS": [],
-        "HOTSPOT_PAPER_COMMENT": "",
-        "SCORE": 15,
-        "authors": [
-            "Jingru Li",
-            "Yibo Fan",
-            "Huan Li"
-        ],
-        "title": "Variance-Adaptive Muon: Pre-Orthogonalization Variance Modulation for Efficient Language Model Pretraining",
-        "abstract": "Optimizer design plays a central role in efficient language model pretraining, directly affecting optimization dynamics, convergence speed, and compute cost under fixed training budgets. Muon has emerged as a strong optimizer by orthogonalizing momentum updates, yielding a matrix-valued analogue of sign-based normalization. However, unlike Adam-style methods, Muon does not explicitly incorporate gradient-variance information into its updates. Motivated by Adam's variance-adaptive interpretation, we propose Muon-NSR and Muon-VS, two variance-adaptive Muon variants for language model pretraining. Muon-NSR applies noise-to-signal ratio (NSR) modulation before Newton--Schulz orthogonalization, whereas Muon-VS uses variance scaling (VS) without introducing any additional hyperparameters beyond those of Muon. Both methods preserve Muon's spectral normalization structure while requiring only one additional variance buffer. Experiments on Llama-style and GPT-2 pretraining across model scales from 125M to 1.2B parameters show that our methods improve over well-tuned Muon baselines and remain competitive with representative adaptive Muon-family baselines. On Llama-1.2B, Muon-VS achieves a 1.33$\\times$ step-to-target speedup over a well-tuned Muon baseline, with Muon's final validation loss as the target. These results indicate that variance-adaptive modulation is a simple and effective mechanism for improving Muon-style optimizers in language model pretraining.",
-        "arxiv_id": "2601.14603",
-        "PRIMARY_TOPIC_LABEL": "Large-Scale Training Systems and Efficiency",
-        "MATCHED_TOPIC_LABELS": [
-            "Large-Scale Training Systems and Efficiency"
-        ],
-        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
-        "HOTSPOT_PAPER_LABELS": [],
-        "HOTSPOT_PAPER_PRIMARY_KIND": null,
-        "HOTSPOT_PAPER_PRIMARY_LABEL": "",
-        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
-    },
-    "2601.14792": {
-        "ARXIVID": "2601.14792",
-        "COMMENT": "Iso-parameter theory arguing sparse expert activation acts as a noise filter, giving MoE lower generalization error and faster convergence under feature noise.",
-        "RELEVANCE": 8,
-        "NOVELTY": 7,
-        "PRIMARY_TOPIC_ID": "moe_training",
-        "MATCHED_TOPIC_IDS": [
-            "moe_training",
-            "architecture_training"
-        ],
-        "TOPIC_MATCH_COMMENT": "Explains why sparse routing helps beyond parameter count, a mechanistic account of MoE training behavior.",
-        "HOTSPOT_PAPER_TAGS": [],
-        "HOTSPOT_PAPER_COMMENT": "",
-        "SCORE": 15,
-        "authors": [
-            "Dong Sun",
-            "Rahul Nittala",
-            "Rebekka Burkholz"
-        ],
-        "title": "Robustness of Mixtures of Experts to Feature Noise",
-        "abstract": "Despite their practical success, it remains unclear why Mixture of Experts (MoE) models can outperform dense networks beyond sheer parameter scaling. We study an iso-parameter regime where inputs exhibit latent modular structure but are corrupted by feature noise, a proxy for noisy internal activations. We show that sparse expert activation acts as a noise filter: compared to a dense estimator, MoEs achieve lower generalization error under feature noise, improved robustness to perturbations, and faster convergence speed. Empirical results on synthetic data and real-world language tasks corroborate the theoretical insights, demonstrating consistent robustness and efficiency gains from sparse modular computation.",
-        "arxiv_id": "2601.14792",
-        "PRIMARY_TOPIC_LABEL": "MoE Training",
-        "MATCHED_TOPIC_LABELS": [
-            "MoE Training",
-            "Architecture and Training Dynamics"
-        ],
-        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
-        "HOTSPOT_PAPER_LABELS": [],
-        "HOTSPOT_PAPER_PRIMARY_KIND": null,
-        "HOTSPOT_PAPER_PRIMARY_LABEL": "",
-        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
-    },
-    "2601.15540": {
-        "ARXIVID": "2601.15540",
-        "COMMENT": "Derives attention as gradient ascent on a signal-noise manifold and identifies RoPE's geometric frequency progression as inducing resonance and rank collapse, motivating an irrational-frequency variant.",
-        "RELEVANCE": 7,
-        "NOVELTY": 7,
-        "PRIMARY_TOPIC_ID": "architecture_training",
-        "MATCHED_TOPIC_IDS": [
-            "architecture_training"
-        ],
-        "TOPIC_MATCH_COMMENT": "The RoPE resonance and rank-collapse analysis is a mechanistic architectural claim with a concrete plug-in fix.",
-        "HOTSPOT_PAPER_TAGS": [],
-        "HOTSPOT_PAPER_COMMENT": "",
-        "SCORE": 14,
-        "authors": [
-            "Dongchen Huang"
-        ],
-        "title": "PRISM: Deriving a White-Box Transformer as a Signal-Noise Decomposition Operator via Maximum Coding Rate Reduction",
-        "abstract": "Deep learning models, particularly Transformers, are often criticized as \"black boxes\" and lack interpretability. We propose Prism, a white-box attention-based architecture derived from the principles of Maximizing Coding Rate Reduction ($\\text{MCR}^2$). By modeling the attention mechanism as a gradient ascent process on a distinct signal-noise manifold, we introduce a specific irrational frequency separation ($\u03c0$-RoPE) to enforce incoherence between signal (semantic) and noise (syntactic) subspaces. We show empirical evidence that these geometric inductive biases can induce unsupervised functional disentanglement alone. Prism spontaneously specializes its attention heads into spectrally distinct regimes: low-frequency heads capturing long-range causal dependencies (signal) and high-frequency heads handling local syntactic constraints and structural artifacts. To provide a theoretical grounding for these spectral phenomena, we draw an analogy between attention mechanism and a Hamiltonian dynamical system and identify that the standard geometric progression of Rotary Positional Embeddings (RoPE) induces dense resonance networks (Arnold Tongues), leading to feature rank collapse. Empirical validation on 124M-parameter models trained on OpenWebText demonstrates that Prism spontaneously isolates the Attention Sink pathology and maintains isentropic information flow across layers. Further, we suggest a physics-informed plug-and-play intervention KAM-RoPE for large language models (LLMs). Our results suggest that interpretability and performance can be unified through principled geometric construction, offering a theoretically grounded alternative to heuristic architectural modifications",
-        "arxiv_id": "2601.15540",
-        "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
-        "MATCHED_TOPIC_LABELS": [
-            "Architecture and Training Dynamics"
-        ],
-        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
-        "HOTSPOT_PAPER_LABELS": [],
-        "HOTSPOT_PAPER_PRIMARY_KIND": null,
-        "HOTSPOT_PAPER_PRIMARY_LABEL": "",
-        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
-    },
-    "2601.15482": {
-        "ARXIVID": "2601.15482",
-        "COMMENT": "Martingale-based path pruning and adaptive stopping aim to reduce the computation required for LLM decoding search.",
-        "RELEVANCE": 6,
-        "NOVELTY": 7,
-        "PRIMARY_TOPIC_ID": "efficiency_scaling",
-        "MATCHED_TOPIC_IDS": [
-            "efficiency_scaling"
-        ],
-        "TOPIC_MATCH_COMMENT": "Its methodological connection is reducing large-model inference computation through search control; the focus on reasoning-time decoding makes it peripheral to this training-centered feed.",
-        "HOTSPOT_PAPER_TAGS": [],
-        "HOTSPOT_PAPER_COMMENT": "",
-        "SCORE": 13,
-        "authors": [
-            "Huayu Li",
-            "ZhengXiao He",
-            "Siyuan Tian",
-            "Jinghao Wen",
-            "Ao Li"
-        ],
-        "title": "Martingale Foresight Sampling: A Principled Approach to Inference-Time LLM Decoding",
-        "abstract": "Standard autoregressive decoding in large language models (LLMs) is inherently short-sighted, often failing to find globally optimal reasoning paths due to its token-by-token generation process. While inference-time strategies like foresight sampling attempt to mitigate this by simulating future steps, they typically rely on ad-hoc heuristics for valuing paths and pruning the search space. This paper introduces Martingale Foresight Sampling (MFS), a principled framework that reformulates LLM decoding as a problem of identifying an optimal stochastic process. By modeling the quality of a reasoning path as a stochastic process, we leverage Martingale theory to design a theoretically-grounded algorithm. Our approach replaces heuristic mechanisms with principles from probability theory: step valuation is derived from the Doob Decomposition Theorem to measure a path's predictable advantage, path selection uses Optional Stopping Theory for principled pruning of suboptimal candidates, and an adaptive stopping rule based on the Martingale Convergence Theorem terminates exploration once a path's quality has provably converged. Experiments on six reasoning benchmarks demonstrate that MFS surpasses state-of-the-art methods in accuracy while significantly improving computational efficiency. Code will be released at https://github.com/miraclehetech/EACL2026-Martingale-Foresight-Sampling.",
-        "arxiv_id": "2601.15482",
-        "PRIMARY_TOPIC_LABEL": "Efficiency, Compression, and Large-Scale Training",
-        "MATCHED_TOPIC_LABELS": [
-            "Efficiency, Compression, and Large-Scale Training"
-        ],
-        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
-        "HOTSPOT_PAPER_LABELS": [],
-        "HOTSPOT_PAPER_PRIMARY_KIND": null,
-        "HOTSPOT_PAPER_PRIMARY_LABEL": "",
-        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
-    },
-    "2601.15013": {
-        "ARXIVID": "2601.15013",
-        "COMMENT": "Prefix-trie deduplication of position-wise MLP/LayerNorm compute across a batch; a new mechanism, but purely inference-side serving efficiency.",
-        "RELEVANCE": 6,
-        "NOVELTY": 6,
-        "PRIMARY_TOPIC_ID": "efficiency_scaling",
-        "MATCHED_TOPIC_IDS": [
-            "efficiency_scaling"
-        ],
-        "TOPIC_MATCH_COMMENT": "Materially changes the cost of running a transformer via a redundancy-elimination mechanism, not a tuned variant.",
-        "HOTSPOT_PAPER_TAGS": [],
-        "HOTSPOT_PAPER_COMMENT": "",
-        "SCORE": 12,
-        "authors": [
-            "Michael Feil",
-            "Julius Lipp"
-        ],
-        "title": "RadixMLP -- Intra-batch Deduplication for Causal Transformers",
-        "abstract": "Batch inference workloads for causal transformer models frequently process sequences that share common prefixes, such as system prompts, few-shot examples, or shared queries. Standard inference engines treat each sequence independently, redundantly recomputing identical MLP activations for every copy of the shared prefix. We introduce RadixMLP, a technique that exploits the position-wise nature of MLPs, LayerNorms, linear projections, and embeddings to eliminate this redundancy. RadixMLP dynamically maps batches to a prefix trie, gathering shared segments into a compressed representation for position-wise computation and scattering results back only at attention boundaries. RadixMLP is stateless and operates within a single forward pass. In end-to-end serving benchmarks on MS~MARCO v1.1 with Qwen3 models (0.6B to 8B parameters), RadixMLP achieves 1.44-1.59$\\times$ speedups in realistic reranking workloads, with up to $5\\times$ speedups on synthetic benchmarks with longer shared prefixes. Our code is available at https://github.com/michaelfeil/radix-mlp.",
-        "arxiv_id": "2601.15013",
-        "PRIMARY_TOPIC_LABEL": "Efficiency, Compression, and Large-Scale Training",
-        "MATCHED_TOPIC_LABELS": [
-            "Efficiency, Compression, and Large-Scale Training"
-        ],
-        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
-        "HOTSPOT_PAPER_LABELS": [],
-        "HOTSPOT_PAPER_PRIMARY_KIND": null,
-        "HOTSPOT_PAPER_PRIMARY_LABEL": "",
-        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
-    },
-    "2601.14549": {
-        "ARXIVID": "2601.14549",
-        "COMMENT": "Splits inlier weights into multi-level ReRAM and outliers into on-chip MRAM, making the quantization scheme noise-aware against device physics.",
-        "RELEVANCE": 6,
-        "NOVELTY": 6,
-        "PRIMARY_TOPIC_ID": "efficiency_scaling",
-        "MATCHED_TOPIC_IDS": [
-            "efficiency_scaling"
-        ],
-        "TOPIC_MATCH_COMMENT": "Outlier-aware quantization co-designed with a memory hierarchy is squarely compression and memory efficiency, albeit inference-only at edge scale.",
-        "HOTSPOT_PAPER_TAGS": [],
-        "HOTSPOT_PAPER_COMMENT": "",
-        "SCORE": 12,
-        "authors": [
-            "Nilesh Prasad Pandey",
-            "Jangseon Park",
-            "Onat Gungor",
-            "Flavio Ponzina",
-            "Tajana Rosing"
-        ],
-        "title": "QMC: Efficient SLM Edge Inference via Outlier-Aware Quantization and Emergent Memories Co-Design",
-        "abstract": "Deploying Small Language Models (SLMs) on edge platforms is critical for real-time, privacy-sensitive generative AI, yet constrained by memory, latency, and energy budgets. Quantization reduces model size and cost but suffers from device noise in emerging non-volatile memories, while conventional memory hierarchies further limit efficiency. SRAM provides fast access but has low density, DRAM must simultaneously accommodate static weights and dynamic KV caches, which creates bandwidth contention, and Flash, although dense, is primarily used for initialization and remains inactive during inference. These limitations highlight the need for hybrid memory organizations tailored to LLM inference. We propose Outlier-aware Quantization with Memory Co-design (QMC), a retraining-free quantization with a novel heterogeneous memory architecture. QMC identifies inlier and outlier weights in SLMs, storing inlier weights in compact multi-level Resistive-RAM (ReRAM) while preserving critical outliers in high-precision on-chip Magnetoresistive-RAM (MRAM), mitigating noise-induced degradation. On language modeling and reasoning benchmarks, QMC outperforms and matches state-of-the-art quantization methods using advanced algorithms and hybrid data formats, while achieving greater compression under both algorithm-only evaluation and realistic deployment settings. Specifically, compared against SoTA quantization methods on the latest edge AI platform, QMC reduces memory usage by 6.3x-7.3x, external data transfers by 7.6x, energy by 11.7x, and latency by 12.5x when compared to FP16, establishing QMC as a scalable, deployment-ready co-design for efficient on-device inference.",
-        "arxiv_id": "2601.14549",
-        "PRIMARY_TOPIC_LABEL": "Efficiency, Compression, and Large-Scale Training",
-        "MATCHED_TOPIC_LABELS": [
-            "Efficiency, Compression, and Large-Scale Training"
-        ],
-        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
-        "HOTSPOT_PAPER_LABELS": [],
-        "HOTSPOT_PAPER_PRIMARY_KIND": null,
-        "HOTSPOT_PAPER_PRIMARY_LABEL": "",
-        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
-    },
-    "2601.15498": {
-        "ARXIVID": "2601.15498",
-        "COMMENT": "Relaxes speculative-decoding rejection sampling when target logits show weak top-candidate margins, changing only the verification rule.",
-        "RELEVANCE": 6,
-        "NOVELTY": 6,
-        "PRIMARY_TOPIC_ID": "efficiency_scaling",
-        "MATCHED_TOPIC_IDS": [
-            "efficiency_scaling"
-        ],
-        "TOPIC_MATCH_COMMENT": "A new inference-cost mechanism inside speculative decoding, though it never touches training.",
-        "HOTSPOT_PAPER_TAGS": [],
-        "HOTSPOT_PAPER_COMMENT": "",
-        "SCORE": 12,
-        "authors": [
-            "Jingwei Song",
-            "Xinyu Wang",
-            "Hanbin Wang",
-            "Xiaoxuan Lei",
-            "Bill Shi",
-            "Shixin Han",
-            "Eric Yang",
-            "Xiao-Wen Chang",
-            "Lynn Ai"
-        ],
-        "title": "MARS: Unleashing the Power of Speculative Decoding via Margin-Aware Verification",
-        "abstract": "Speculative Decoding (SD) accelerates autoregressive large language model (LLM) inference by decoupling generation and verification. While recent methods improve draft quality by tightly coupling the drafter with the target model, the verification mechanism itself remains largely unchanged, relying on strict token-level rejection sampling. In practice, modern LLMs frequently operate in low-margin regimes where the target model exhibits weak preference among top candidates. In such cases, rejecting plausible runner-up tokens yields negligible information gain while incurring substantial rollback cost, leading to a fundamental inefficiency in verification. We propose Margin-Aware Speculative Verification, a training-free and domain-agnostic verification strategy that adapts to the target model's local decisiveness. Our method conditions verification on decision stability measured directly from the target logits and relaxes rejection only when strict verification provides minimal benefit. Importantly, the approach modifies only the verification rule and is fully compatible with existing target-coupled speculative decoding frameworks. Extensive experiments across model scales ranging from 8B to 235B demonstrate that our method delivers consistent and significant inference speedups over state-of-the-art baselines while preserving generation quality across diverse benchmarks. The code is available at https://github.com/5SSjw/MARS.",
-        "arxiv_id": "2601.15498",
-        "PRIMARY_TOPIC_LABEL": "Efficiency, Compression, and Large-Scale Training",
-        "MATCHED_TOPIC_LABELS": [
-            "Efficiency, Compression, and Large-Scale Training"
-        ],
-        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
-        "HOTSPOT_PAPER_LABELS": [],
-        "HOTSPOT_PAPER_PRIMARY_KIND": null,
-        "HOTSPOT_PAPER_PRIMARY_LABEL": "",
-        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
-    }
+  "2601.14603": {
+    "ARXIVID": "2601.14603",
+    "COMMENT": "Adds variance modulation before Muon's orthogonalization, with well-tuned pretraining comparisons from 125M to 1.2B parameters.",
+    "RELEVANCE": 9,
+    "NOVELTY": 6,
+    "PRIMARY_TOPIC_ID": "architecture_training",
+    "MATCHED_TOPIC_IDS": [
+      "architecture_training"
+    ],
+    "TOPIC_MATCH_COMMENT": "Directly changes language-model optimizer updates and tests their effect on pretraining convergence.",
+    "HOTSPOT_PAPER_TAGS": [],
+    "HOTSPOT_PAPER_COMMENT": "",
+    "SCORE": 15,
+    "authors": [
+      "Jingru Li",
+      "Yibo Fan",
+      "Huan Li"
+    ],
+    "title": "Variance-Adaptive Muon: Pre-Orthogonalization Variance Modulation for Efficient Language Model Pretraining",
+    "abstract": "Optimizer design plays a central role in efficient language model pretraining, directly affecting optimization dynamics, convergence speed, and compute cost under fixed training budgets. Muon has emerged as a strong optimizer by orthogonalizing momentum updates, yielding a matrix-valued analogue of sign-based normalization. However, unlike Adam-style methods, Muon does not explicitly incorporate gradient-variance information into its updates. Motivated by Adam's variance-adaptive interpretation, we propose Muon-NSR and Muon-VS, two variance-adaptive Muon variants for language model pretraining. Muon-NSR applies noise-to-signal ratio (NSR) modulation before Newton--Schulz orthogonalization, whereas Muon-VS uses variance scaling (VS) without introducing any additional hyperparameters beyond those of Muon. Both methods preserve Muon's spectral normalization structure while requiring only one additional variance buffer. Experiments on Llama-style and GPT-2 pretraining across model scales from 125M to 1.2B parameters show that our methods improve over well-tuned Muon baselines and remain competitive with representative adaptive Muon-family baselines. On Llama-1.2B, Muon-VS achieves a 1.33$\\times$ step-to-target speedup over a well-tuned Muon baseline, with Muon's final validation loss as the target. These results indicate that variance-adaptive modulation is a simple and effective mechanism for improving Muon-style optimizers in language model pretraining.",
+    "arxiv_id": "2601.14603",
+    "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+    "MATCHED_TOPIC_LABELS": [
+      "Architecture and Training Dynamics"
+    ],
+    "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+    "HOTSPOT_PAPER_LABELS": [],
+    "HOTSPOT_PAPER_PRIMARY_KIND": null,
+    "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+    "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default",
+    "EVIDENCE": 8,
+    "LOAD": 5,
+    "PROXIMITY": 9,
+    "READ_SCORE": 23.5
+  },
+  "2601.14792": {
+    "ARXIVID": "2601.14792",
+    "COMMENT": "Holds parameter count fixed to test whether sparse expert activation filters feature noise better than dense computation.",
+    "RELEVANCE": 9,
+    "NOVELTY": 9,
+    "PRIMARY_TOPIC_ID": "moe_training",
+    "MATCHED_TOPIC_IDS": [
+      "moe_training"
+    ],
+    "TOPIC_MATCH_COMMENT": "Tests a mechanism for MoE robustness beyond parameter scaling, with a dense comparison under explicit modularity and noise assumptions.",
+    "HOTSPOT_PAPER_TAGS": [
+      "new_frontier",
+      "daily_hot"
+    ],
+    "HOTSPOT_PAPER_COMMENT": "Broadly important today and potentially frontier-opening: Holds parameter count fixed to test whether sparse expert activation filters feature noise better than dense computation.",
+    "SCORE": 18,
+    "authors": [
+      "Dong Sun",
+      "Rahul Nittala",
+      "Rebekka Burkholz"
+    ],
+    "title": "Robustness of Mixtures of Experts to Feature Noise",
+    "abstract": "Despite their practical success, it remains unclear why Mixture of Experts (MoE) models can outperform dense networks beyond sheer parameter scaling. We study an iso-parameter regime where inputs exhibit latent modular structure but are corrupted by feature noise, a proxy for noisy internal activations. We show that sparse expert activation acts as a noise filter: compared to a dense estimator, MoEs achieve lower generalization error under feature noise, improved robustness to perturbations, and faster convergence speed. Empirical results on synthetic data and real-world language tasks corroborate the theoretical insights, demonstrating consistent robustness and efficiency gains from sparse modular computation.",
+    "arxiv_id": "2601.14792",
+    "PRIMARY_TOPIC_LABEL": "MoE Where It Changes the Design Space",
+    "MATCHED_TOPIC_LABELS": [
+      "MoE Where It Changes the Design Space"
+    ],
+    "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+    "HOTSPOT_PAPER_LABELS": [
+      "New Frontier Papers",
+      "Daily Hot Papers"
+    ],
+    "HOTSPOT_PAPER_PRIMARY_KIND": "new_frontier",
+    "HOTSPOT_PAPER_PRIMARY_LABEL": "New Frontier Papers",
+    "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "heuristic",
+    "EVIDENCE": 5,
+    "LOAD": 8,
+    "PROXIMITY": 8,
+    "READ_SCORE": 18.0
+  },
+  "2601.15540": {
+    "ARXIVID": "2601.15540",
+    "COMMENT": "Derives attention and rotary-frequency separation from a signal-noise coding-rate objective.",
+    "RELEVANCE": 8,
+    "NOVELTY": 7,
+    "PRIMARY_TOPIC_ID": "architecture_training",
+    "MATCHED_TOPIC_IDS": [
+      "architecture_training"
+    ],
+    "TOPIC_MATCH_COMMENT": "The concrete contribution changes attention geometry and positional frequencies to influence rank collapse and head specialization.",
+    "HOTSPOT_PAPER_TAGS": [],
+    "HOTSPOT_PAPER_COMMENT": "",
+    "SCORE": 15,
+    "authors": [
+      "Dongchen Huang"
+    ],
+    "title": "PRISM: Deriving a White-Box Transformer as a Signal-Noise Decomposition Operator via Maximum Coding Rate Reduction",
+    "abstract": "Deep learning models, particularly Transformers, are often criticized as \"black boxes\" and lack interpretability. We propose Prism, a white-box attention-based architecture derived from the principles of Maximizing Coding Rate Reduction ($\\text{MCR}^2$). By modeling the attention mechanism as a gradient ascent process on a distinct signal-noise manifold, we introduce a specific irrational frequency separation ($π$-RoPE) to enforce incoherence between signal (semantic) and noise (syntactic) subspaces. We show empirical evidence that these geometric inductive biases can induce unsupervised functional disentanglement alone. Prism spontaneously specializes its attention heads into spectrally distinct regimes: low-frequency heads capturing long-range causal dependencies (signal) and high-frequency heads handling local syntactic constraints and structural artifacts. To provide a theoretical grounding for these spectral phenomena, we draw an analogy between attention mechanism and a Hamiltonian dynamical system and identify that the standard geometric progression of Rotary Positional Embeddings (RoPE) induces dense resonance networks (Arnold Tongues), leading to feature rank collapse. Empirical validation on 124M-parameter models trained on OpenWebText demonstrates that Prism spontaneously isolates the Attention Sink pathology and maintains isentropic information flow across layers. Further, we suggest a physics-informed plug-and-play intervention KAM-RoPE for large language models (LLMs). Our results suggest that interpretability and performance can be unified through principled geometric construction, offering a theoretically grounded alternative to heuristic architectural modifications",
+    "arxiv_id": "2601.15540",
+    "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+    "MATCHED_TOPIC_LABELS": [
+      "Architecture and Training Dynamics"
+    ],
+    "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+    "HOTSPOT_PAPER_LABELS": [],
+    "HOTSPOT_PAPER_PRIMARY_KIND": null,
+    "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+    "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default",
+    "EVIDENCE": 4,
+    "LOAD": 8,
+    "PROXIMITY": 8,
+    "READ_SCORE": 16.0
+  },
+  "2601.15482": {
+    "ARXIVID": "2601.15482",
+    "COMMENT": "Derives foresight path valuation, pruning, and stopping rules from martingale theory.",
+    "RELEVANCE": 4,
+    "NOVELTY": 7,
+    "PRIMARY_TOPIC_ID": "architecture_training",
+    "MATCHED_TOPIC_IDS": [
+      "architecture_training"
+    ],
+    "TOPIC_MATCH_COMMENT": "Generation algorithms are the nearest connection; the method adds inference-time reasoning search to an existing autoregressive model.",
+    "HOTSPOT_PAPER_TAGS": [],
+    "HOTSPOT_PAPER_COMMENT": "",
+    "SCORE": 11,
+    "authors": [
+      "Huayu Li",
+      "ZhengXiao He",
+      "Siyuan Tian",
+      "Jinghao Wen",
+      "Ao Li"
+    ],
+    "title": "Martingale Foresight Sampling: A Principled Approach to Inference-Time LLM Decoding",
+    "abstract": "Standard autoregressive decoding in large language models (LLMs) is inherently short-sighted, often failing to find globally optimal reasoning paths due to its token-by-token generation process. While inference-time strategies like foresight sampling attempt to mitigate this by simulating future steps, they typically rely on ad-hoc heuristics for valuing paths and pruning the search space. This paper introduces Martingale Foresight Sampling (MFS), a principled framework that reformulates LLM decoding as a problem of identifying an optimal stochastic process. By modeling the quality of a reasoning path as a stochastic process, we leverage Martingale theory to design a theoretically-grounded algorithm. Our approach replaces heuristic mechanisms with principles from probability theory: step valuation is derived from the Doob Decomposition Theorem to measure a path's predictable advantage, path selection uses Optional Stopping Theory for principled pruning of suboptimal candidates, and an adaptive stopping rule based on the Martingale Convergence Theorem terminates exploration once a path's quality has provably converged. Experiments on six reasoning benchmarks demonstrate that MFS surpasses state-of-the-art methods in accuracy while significantly improving computational efficiency. Code will be released at https://github.com/miraclehetech/EACL2026-Martingale-Foresight-Sampling.",
+    "arxiv_id": "2601.15482",
+    "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+    "MATCHED_TOPIC_LABELS": [
+      "Architecture and Training Dynamics"
+    ],
+    "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+    "HOTSPOT_PAPER_LABELS": [],
+    "HOTSPOT_PAPER_PRIMARY_KIND": null,
+    "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+    "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default",
+    "EVIDENCE": 5,
+    "LOAD": 8,
+    "PROXIMITY": 3,
+    "READ_SCORE": 8.0
+  },
+  "2601.15013": {
+    "ARXIVID": "2601.15013",
+    "COMMENT": "Deduplicates shared-prefix MLP and normalization activations within a single forward pass.",
+    "RELEVANCE": 5,
+    "NOVELTY": 6,
+    "PRIMARY_TOPIC_ID": "efficiency_scaling",
+    "MATCHED_TOPIC_IDS": [
+      "efficiency_scaling"
+    ],
+    "TOPIC_MATCH_COMMENT": "Activation reuse is the nearest topic; the demonstrated gain is serving throughput from unchanged Transformer computations.",
+    "HOTSPOT_PAPER_TAGS": [],
+    "HOTSPOT_PAPER_COMMENT": "",
+    "SCORE": 11,
+    "authors": [
+      "Michael Feil",
+      "Julius Lipp"
+    ],
+    "title": "RadixMLP -- Intra-batch Deduplication for Causal Transformers",
+    "abstract": "Batch inference workloads for causal transformer models frequently process sequences that share common prefixes, such as system prompts, few-shot examples, or shared queries. Standard inference engines treat each sequence independently, redundantly recomputing identical MLP activations for every copy of the shared prefix. We introduce RadixMLP, a technique that exploits the position-wise nature of MLPs, LayerNorms, linear projections, and embeddings to eliminate this redundancy. RadixMLP dynamically maps batches to a prefix trie, gathering shared segments into a compressed representation for position-wise computation and scattering results back only at attention boundaries. RadixMLP is stateless and operates within a single forward pass. In end-to-end serving benchmarks on MS~MARCO v1.1 with Qwen3 models (0.6B to 8B parameters), RadixMLP achieves 1.44-1.59$\\times$ speedups in realistic reranking workloads, with up to $5\\times$ speedups on synthetic benchmarks with longer shared prefixes. Our code is available at https://github.com/michaelfeil/radix-mlp.",
+    "arxiv_id": "2601.15013",
+    "PRIMARY_TOPIC_LABEL": "Efficiency, Compression, and Large-Scale Training",
+    "MATCHED_TOPIC_LABELS": [
+      "Efficiency, Compression, and Large-Scale Training"
+    ],
+    "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+    "HOTSPOT_PAPER_LABELS": [],
+    "HOTSPOT_PAPER_PRIMARY_KIND": null,
+    "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+    "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default",
+    "EVIDENCE": 8,
+    "LOAD": 4,
+    "PROXIMITY": 3,
+    "READ_SCORE": 14.0
+  },
+  "2601.14549": {
+    "ARXIVID": "2601.14549",
+    "COMMENT": "Stores quantized inliers in ReRAM while preserving sensitive outliers in high-precision MRAM.",
+    "RELEVANCE": 4,
+    "NOVELTY": 5,
+    "PRIMARY_TOPIC_ID": "efficiency_scaling",
+    "MATCHED_TOPIC_IDS": [
+      "efficiency_scaling"
+    ],
+    "TOPIC_MATCH_COMMENT": "Quantization and memory placement are the nearest topic; the contribution targets retraining-free compression and edge inference hardware.",
+    "HOTSPOT_PAPER_TAGS": [],
+    "HOTSPOT_PAPER_COMMENT": "",
+    "SCORE": 9,
+    "authors": [
+      "Nilesh Prasad Pandey",
+      "Jangseon Park",
+      "Onat Gungor",
+      "Flavio Ponzina",
+      "Tajana Rosing"
+    ],
+    "title": "QMC: Efficient SLM Edge Inference via Outlier-Aware Quantization and Emergent Memories Co-Design",
+    "abstract": "Deploying Small Language Models (SLMs) on edge platforms is critical for real-time, privacy-sensitive generative AI, yet constrained by memory, latency, and energy budgets. Quantization reduces model size and cost but suffers from device noise in emerging non-volatile memories, while conventional memory hierarchies further limit efficiency. SRAM provides fast access but has low density, DRAM must simultaneously accommodate static weights and dynamic KV caches, which creates bandwidth contention, and Flash, although dense, is primarily used for initialization and remains inactive during inference. These limitations highlight the need for hybrid memory organizations tailored to LLM inference. We propose Outlier-aware Quantization with Memory Co-design (QMC), a retraining-free quantization with a novel heterogeneous memory architecture. QMC identifies inlier and outlier weights in SLMs, storing inlier weights in compact multi-level Resistive-RAM (ReRAM) while preserving critical outliers in high-precision on-chip Magnetoresistive-RAM (MRAM), mitigating noise-induced degradation. On language modeling and reasoning benchmarks, QMC outperforms and matches state-of-the-art quantization methods using advanced algorithms and hybrid data formats, while achieving greater compression under both algorithm-only evaluation and realistic deployment settings. Specifically, compared against SoTA quantization methods on the latest edge AI platform, QMC reduces memory usage by 6.3x-7.3x, external data transfers by 7.6x, energy by 11.7x, and latency by 12.5x when compared to FP16, establishing QMC as a scalable, deployment-ready co-design for efficient on-device inference.",
+    "arxiv_id": "2601.14549",
+    "PRIMARY_TOPIC_LABEL": "Efficiency, Compression, and Large-Scale Training",
+    "MATCHED_TOPIC_LABELS": [
+      "Efficiency, Compression, and Large-Scale Training"
+    ],
+    "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+    "HOTSPOT_PAPER_LABELS": [],
+    "HOTSPOT_PAPER_PRIMARY_KIND": null,
+    "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+    "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default",
+    "EVIDENCE": 6,
+    "LOAD": 5,
+    "PROXIMITY": 2,
+    "READ_SCORE": 9.5
+  },
+  "2601.15498": {
+    "ARXIVID": "2601.15498",
+    "COMMENT": "Relaxes speculative rejection when target-logit margins indicate near-tied token candidates.",
+    "RELEVANCE": 5,
+    "NOVELTY": 7,
+    "PRIMARY_TOPIC_ID": "efficiency_scaling",
+    "MATCHED_TOPIC_IDS": [
+      "efficiency_scaling"
+    ],
+    "TOPIC_MATCH_COMMENT": "Decoding efficiency is the nearest topic; the mechanism changes inference verification to increase throughput.",
+    "HOTSPOT_PAPER_TAGS": [],
+    "HOTSPOT_PAPER_COMMENT": "",
+    "SCORE": 12,
+    "authors": [
+      "Jingwei Song",
+      "Xinyu Wang",
+      "Hanbin Wang",
+      "Xiaoxuan Lei",
+      "Bill Shi",
+      "Shixin Han",
+      "Eric Yang",
+      "Xiao-Wen Chang",
+      "Lynn Ai"
+    ],
+    "title": "MARS: Unleashing the Power of Speculative Decoding via Margin-Aware Verification",
+    "abstract": "Speculative Decoding (SD) accelerates autoregressive large language model (LLM) inference by decoupling generation and verification. While recent methods improve draft quality by tightly coupling the drafter with the target model, the verification mechanism itself remains largely unchanged, relying on strict token-level rejection sampling. In practice, modern LLMs frequently operate in low-margin regimes where the target model exhibits weak preference among top candidates. In such cases, rejecting plausible runner-up tokens yields negligible information gain while incurring substantial rollback cost, leading to a fundamental inefficiency in verification. We propose Margin-Aware Speculative Verification, a training-free and domain-agnostic verification strategy that adapts to the target model's local decisiveness. Our method conditions verification on decision stability measured directly from the target logits and relaxes rejection only when strict verification provides minimal benefit. Importantly, the approach modifies only the verification rule and is fully compatible with existing target-coupled speculative decoding frameworks. Extensive experiments across model scales ranging from 8B to 235B demonstrate that our method delivers consistent and significant inference speedups over state-of-the-art baselines while preserving generation quality across diverse benchmarks. The code is available at https://github.com/5SSjw/MARS.",
+    "arxiv_id": "2601.15498",
+    "PRIMARY_TOPIC_LABEL": "Efficiency, Compression, and Large-Scale Training",
+    "MATCHED_TOPIC_LABELS": [
+      "Efficiency, Compression, and Large-Scale Training"
+    ],
+    "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+    "HOTSPOT_PAPER_LABELS": [],
+    "HOTSPOT_PAPER_PRIMARY_KIND": null,
+    "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+    "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default",
+    "EVIDENCE": 7,
+    "LOAD": 4,
+    "PROXIMITY": 3,
+    "READ_SCORE": 13.0
+  }
 }

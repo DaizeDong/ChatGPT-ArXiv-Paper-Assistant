@@ -1,986 +1,1098 @@
 {
-    "2609.07108": {
-        "ARXIVID": "2609.07108",
-        "COMMENT": "Extends context-parallel ring attention to support branch attention during large-scale, long-context draft co-training.",
-        "RELEVANCE": 9,
-        "NOVELTY": 8,
-        "PRIMARY_TOPIC_ID": "training_systems",
-        "MATCHED_TOPIC_IDS": [
-            "training_systems",
-            "efficiency_scaling"
-        ],
-        "TOPIC_MATCH_COMMENT": "New context-parallel attention and cross-stage feature transport directly address distributed training communication, memory use, and end-to-end cost.",
-        "HOTSPOT_PAPER_TAGS": [
-            "daily_hot"
-        ],
-        "HOTSPOT_PAPER_COMMENT": "Broadly important today: Extends context-parallel ring attention to support branch attention during large-scale, long-context draft co-training.",
-        "SCORE": 17,
-        "authors": [
-            "Zili Wang",
-            "Zhaopeng Qiu",
-            "Yuekai Zhang",
-            "Shuang Yu",
-            "Junjie Lai"
-        ],
-        "title": "Online Draft Co-Training for Speculative Decoding in Large-Scale, Long-Context RL Post-Training",
-        "abstract": "Speculative decoding accelerates rollout generation, which dominates the cost of reinforcement learning (RL) post-training. Online co-training can further increase the draft's accuracy, yielding greater speedups. However, scaling this approach to co-training on large models with long contexts poses two obstacles: (1) branch attention is unsupported by standard causal context-parallel (CP) implementations, and (2) target features span across pipeline-parallel (PP) stages. We address both with an end-to-end system for large-scale online draft co-training. For CP, we extend packed, load-balanced zigzag ring attention by merging rank-local branch attention with causal main-sequence attention. For PP, TapChannel transports intermediate target features across stages via a separate path, leaving the pipeline schedule unaffected. Experiments demonstrate that co-trained drafts closely track the policy baseline while delivering substantial rollout and end-to-end speedups across model scales up to 122B. Our CP design achieves strong scaling at 256K tokens with significant memory savings over prior work, and our PP transport incurs modest overhead. Code can be found at https://github.com/NVIDIA-NeMo/RL/issues/3698.",
-        "arxiv_id": "2609.07108",
-        "PRIMARY_TOPIC_LABEL": "Large-Scale Training Systems and Efficiency",
-        "MATCHED_TOPIC_LABELS": [
-            "Large-Scale Training Systems and Efficiency",
-            "Efficiency, Compression, and Large-Scale Training"
-        ],
-        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
-        "HOTSPOT_PAPER_LABELS": [
-            "Daily Hot Papers"
-        ],
-        "HOTSPOT_PAPER_PRIMARY_KIND": "daily_hot",
-        "HOTSPOT_PAPER_PRIMARY_LABEL": "Daily Hot Papers",
-        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "heuristic"
-    },
-    "2609.07017": {
-        "ARXIVID": "2609.07017",
-        "COMMENT": "Derives dynamical equivalence between norm-constrained and conventional optimizers through effective learning-rate schedules and optimizer state.",
-        "RELEVANCE": 9,
-        "NOVELTY": 8,
-        "PRIMARY_TOPIC_ID": "architecture_training",
-        "MATCHED_TOPIC_IDS": [
-            "architecture_training"
-        ],
-        "TOPIC_MATCH_COMMENT": "The core result explains optimizer training trajectories through parameter scale and update geometry, including constructive mappings between optimizer families.",
-        "HOTSPOT_PAPER_TAGS": [
-            "daily_hot"
-        ],
-        "HOTSPOT_PAPER_COMMENT": "Broadly important today: Derives dynamical equivalence between norm-constrained and conventional optimizers through effective learning-rate schedules and optimizer state.",
-        "SCORE": 17,
-        "authors": [
-            "Jinghui Yuan",
-            "Hongtao Zhang",
-            "Jade Zou",
-            "Tianyu Li",
-            "Wenjie Zhou",
-            "Tianyu He",
-            "Wei Chen"
-        ],
-        "title": "HyperTransfer: Understanding the Equivalence between Base Optimizer and Hyperball",
-        "abstract": "Hyperball optimizers constrain parameter norms and update only their directions, establishing a distinct paradigm for neural network optimization. Although this geometry appears fundamentally different from that of conventional Base Optimizers, which update both parameter norms and directions, we show that the two paradigms are dynamically equivalent for scale-invariant networks. Building on this equivalence, we propose HyperTransfer, which constructs a Hyperball optimizer that reproduces the dynamics of a target Base Optimizer using only its initialization and learning-rate schedule, without running the target optimizer itself. We further derive the inverse mapping and extend the framework to non-scale-invariant networks. Experiments show that both HyperTransfer and the inverse mapping produce loss trajectories nearly identical to those of their targets, suggesting that Hyperball dynamics are governed primarily by the induced effective learning-rate schedule and optimizer state.",
-        "arxiv_id": "2609.07017",
-        "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
-        "MATCHED_TOPIC_LABELS": [
-            "Architecture and Training Dynamics"
-        ],
-        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
-        "HOTSPOT_PAPER_LABELS": [
-            "Daily Hot Papers"
-        ],
-        "HOTSPOT_PAPER_PRIMARY_KIND": "daily_hot",
-        "HOTSPOT_PAPER_PRIMARY_LABEL": "Daily Hot Papers",
-        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "heuristic"
-    },
-    "2609.07264": {
-        "ARXIVID": "2609.07264",
-        "COMMENT": "Gauge-correct group penalties remove entire channels during training while retaining dense tensor execution.",
-        "RELEVANCE": 9,
-        "NOVELTY": 8,
-        "PRIMARY_TOPIC_ID": "efficiency_scaling",
-        "MATCHED_TOPIC_IDS": [
-            "architecture_training",
-            "efficiency_scaling"
-        ],
-        "TOPIC_MATCH_COMMENT": "Structured compression is primary; gauge-balance analysis supplies a training-stability mechanism and explains how progressive compaction reduces compute.",
-        "HOTSPOT_PAPER_TAGS": [
-            "daily_hot"
-        ],
-        "HOTSPOT_PAPER_COMMENT": "Broadly important today: Gauge-correct group penalties remove entire channels during training while retaining dense tensor execution.",
-        "SCORE": 17,
-        "authors": [
-            "Jed A. Duersch",
-            "Na\u00c3\u00afm Es-Sebbani",
-            "Nathana\u00c3\u00abl Haas",
-            "Zied Bouraoui"
-        ],
-        "title": "Dense Structural Compression of Transformers via Gauge-Correct Channel Removal",
-        "abstract": "Inference energy per token drives the cost and carbon footprint of deployed transformers. It is dominated by dense matrix products that incur fused multiply-accumulate (FMA) operations and memory traffic. To reduce these computations while retaining dense tensors for high GPU throughput, we develop a methodology from first principles to adapt structural complexity during training to maximize inference utility per unit compute. Channel penalties drive entire tensor slices to zero to enable physical removal while preserving density and the network function. The natural approach, penalizing the norm of operator components acting through each channel, is provably destabilized by gauge freedom. We resolve this pathology with GaugeLasso: additive symmetric group-lasso penalties that recover a monotone function of product-norms when the network converges to gauge balance. Our equilibrium analysis enables per-channel calibration to correctly suppress slices that under-perform in inference utility per unit compute. Under adaptive pressure, the network reorganizes into depth-dependent structural profiles that can be far smaller than the architecture required to learn the task. On polynomial long division over $\\mathbb{F}_{31}$, compute compresses from 148 to 255 times with perfect accuracy. On character-level language modeling, compressed models outperform the hand-designed baseline at equal FMA. On masked autoencoding, a compression trial exposes which axes were over-provisioned and which saturated, guiding a better second design. Compaction also accelerates training monotonically as the model progresses. Post-hoc pruning with the same utility ranking cannot reach these structures, showing that sustained pressure is central to discovery of efficient models. Retraining a discovered architecture recovers baseline quality on our statistical tasks, but fails on our exact algorithmic task.",
-        "arxiv_id": "2609.07264",
-        "PRIMARY_TOPIC_LABEL": "Efficiency, Compression, and Large-Scale Training",
-        "MATCHED_TOPIC_LABELS": [
-            "Architecture and Training Dynamics",
-            "Efficiency, Compression, and Large-Scale Training"
-        ],
-        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
-        "HOTSPOT_PAPER_LABELS": [
-            "Daily Hot Papers"
-        ],
-        "HOTSPOT_PAPER_PRIMARY_KIND": "daily_hot",
-        "HOTSPOT_PAPER_PRIMARY_LABEL": "Daily Hot Papers",
-        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "heuristic"
-    },
-    "2510.08999": {
-        "ARXIVID": "2510.08999",
-        "COMMENT": "Jointly learns sparse, low-bit weights using spike-and-slab priors, Gaussian mixtures, and tractable variational approximations.",
-        "RELEVANCE": 9,
-        "NOVELTY": 7,
-        "PRIMARY_TOPIC_ID": "efficiency_scaling",
-        "MATCHED_TOPIC_IDS": [
-            "efficiency_scaling"
-        ],
-        "TOPIC_MATCH_COMMENT": "Directly develops a unified pruning and quantization method, including compression experiments on Llama and Qwen models.",
-        "HOTSPOT_PAPER_TAGS": [],
-        "HOTSPOT_PAPER_COMMENT": "",
-        "SCORE": 16,
-        "authors": [
-            "Ziyi Wang",
-            "Nan Jiang",
-            "Guang Lin",
-            "Qifan Song"
-        ],
-        "title": "SQS: Bayesian DNN Compression through Sparse Quantized Sub-distributions",
-        "abstract": "Compressing large-scale neural networks is essential for deploying models on resource-constrained devices. Most existing methods adopt weight pruning or low-bit quantization individually, often resulting in suboptimal compression rates to preserve acceptable performance drops. We introduce a unified framework for simultaneous pruning and low-bit quantization via Bayesian variational learning (\\method), which achieves higher compression rates than prior baselines while maintaining comparable performance. The key idea is to employ a spike-and-slab prior to induce sparsity and model quantized weights using Gaussian Mixture Models (GMMs) to enable low-bit precision. Due to the intractability of the objective involving spike-and-slab priors with GMMs, we derive an efficient approximation that facilitates effective compression with minimal accuracy loss. In theory, we provide a consistent result for our proposed variational approach to a sparse and quantized deep neural network. Extensive experiments on compressing ResNet, BERT-base, Llama3.2, and Qwen2.5 models show that our method achieves higher compression rates than a line of existing methods with comparable performance drops. Project page: https://comeusr.github.io/SQS_Webpage.",
-        "arxiv_id": "2510.08999",
-        "PRIMARY_TOPIC_LABEL": "Efficiency, Compression, and Large-Scale Training",
-        "MATCHED_TOPIC_LABELS": [
-            "Efficiency, Compression, and Large-Scale Training"
-        ],
-        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
-        "HOTSPOT_PAPER_LABELS": [],
-        "HOTSPOT_PAPER_PRIMARY_KIND": null,
-        "HOTSPOT_PAPER_PRIMARY_LABEL": "",
-        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
-    },
-    "2509.25180": {
-        "ARXIVID": "2509.25180",
-        "COMMENT": "Embedding alignment adapts pretrained diffusion models to deeply compressed latents, substantially reducing generation compute with limited fine-tuning.",
-        "RELEVANCE": 9,
-        "NOVELTY": 7,
-        "PRIMARY_TOPIC_ID": "efficiency_scaling",
-        "MATCHED_TOPIC_IDS": [
-            "efficiency_scaling"
-        ],
-        "TOPIC_MATCH_COMMENT": "The core contribution is latent-space compression that reduces large diffusion models' computational cost while preserving pretrained capabilities.",
-        "HOTSPOT_PAPER_TAGS": [],
-        "HOTSPOT_PAPER_COMMENT": "",
-        "SCORE": 16,
-        "authors": [
-            "Wenkun He",
-            "Yuchao Gu",
-            "Junyu Chen",
-            "Dongyun Zou",
-            "Yujun Lin",
-            "Zhekai Zhang",
-            "Haocheng Xi",
-            "Muyang Li",
-            "Ligeng Zhu",
-            "Jincheng Yu",
-            "Junsong Chen",
-            "Enze Xie",
-            "Song Han",
-            "Han Cai"
-        ],
-        "title": "DC-Gen: Post-Training Diffusion Acceleration with Deeply Compressed Latent Space",
-        "abstract": "Existing text-to-image diffusion models excel at generating high-quality images, but face significant efficiency challenges when scaled to high resolutions, like 4K image generation. While previous research accelerates diffusion models in various aspects, it seldom handles the inherent redundancy within the latent space. To bridge this gap, this paper introduces DC-Gen, a general framework that accelerates text-to-image diffusion models by leveraging a deeply compressed latent space. Rather than a costly training-from-scratch approach, DC-Gen uses an efficient post-training pipeline to preserve the quality of the base model. A key challenge in this paradigm is the representation gap between the base model's latent space and a deeply compressed latent space, which can lead to instability during direct fine-tuning. To overcome this, DC-Gen first bridges the representation gap with a lightweight embedding alignment training. Once the latent embeddings are aligned, only a small amount of LoRA fine-tuning is needed to unlock the base model's inherent generation quality. We verify DC-Gen's effectiveness on SANA and FLUX.1-Krea. The resulting DC-Gen-SANA and DC-Gen-FLUX models achieve quality comparable to their base models but with a significant speedup. Specifically, DC-Gen-FLUX reduces the latency of 4K image generation by 53x on the NVIDIA H100 GPU. When combined with NVFP4 SVDQuant, DC-Gen-FLUX generates a 4K image in just 3.5 seconds on a single NVIDIA 5090 GPU, achieving a total latency reduction of 138x compared to the base FLUX.1-Krea model. Code: https://github.com/dc-ai-projects/DC-Gen.",
-        "arxiv_id": "2509.25180",
-        "PRIMARY_TOPIC_LABEL": "Efficiency, Compression, and Large-Scale Training",
-        "MATCHED_TOPIC_LABELS": [
-            "Efficiency, Compression, and Large-Scale Training"
-        ],
-        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
-        "HOTSPOT_PAPER_LABELS": [],
-        "HOTSPOT_PAPER_PRIMARY_KIND": null,
-        "HOTSPOT_PAPER_PRIMARY_LABEL": "",
-        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
-    },
-    "2609.07314": {
-        "ARXIVID": "2609.07314",
-        "COMMENT": "Replaces global positional indexing with content-derived unit addresses while preserving local RoPE.",
-        "RELEVANCE": 9,
-        "NOVELTY": 7,
-        "PRIMARY_TOPIC_ID": "architecture_training",
-        "MATCHED_TOPIC_IDS": [
-            "architecture_training"
-        ],
-        "TOPIC_MATCH_COMMENT": "The core contribution changes attention addressing to avoid context-length positional mismatch; theoretical invariances support the mechanism, although empirical validation remains small-scale.",
-        "HOTSPOT_PAPER_TAGS": [],
-        "HOTSPOT_PAPER_COMMENT": "",
-        "SCORE": 16,
-        "authors": [
-            "Mahesh Godavarti"
-        ],
-        "title": "Content-Based Addressing for Long Context",
-        "abstract": "Rotary position embedding (RoPE) uses each token's integer position to determine the rotation applied inside attention. This works well for local token order, but increasing context length creates a positional train-test mismatch: RoPE produces relative rotations at offsets not seen during training. Methods that rescale, interpolate, randomize, or bias positions specify how attention handles those offsets, but still derive positional information from a growing token counter. We instead divide a token stream into units, retain ordinary RoPE positions within each unit, and assign every completed unit an address computed from its content. Adding units then applies the same learned map to new content rather than extending a positional range or an identifier table. We prove that this construction preserves local RoPE exactly, leaves the attention comparison between two fixed tokens unchanged when other units are inserted or reordered, and does not create new relative rotations merely because more units are added. In a character-level Tiny Shakespeare diagnostic, a model trained on 256-character contexts has validation perplexity 4.04 at 256 characters and 3.82 at 4096, while continuous RoPE changes from 4.71 to 12.09. A second diagnostic shows that content-based addressing can retrieve and use information from multiple serialized facts. These are controlled shallow experiments, not scale benchmarks, but they support a direct prescription: use position to address locally and content to address across units.",
-        "arxiv_id": "2609.07314",
-        "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
-        "MATCHED_TOPIC_LABELS": [
-            "Architecture and Training Dynamics"
-        ],
-        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
-        "HOTSPOT_PAPER_LABELS": [],
-        "HOTSPOT_PAPER_PRIMARY_KIND": null,
-        "HOTSPOT_PAPER_PRIMARY_LABEL": "",
-        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
-    },
-    "2609.06974": {
-        "ARXIVID": "2609.06974",
-        "COMMENT": "Temporarily overparameterizes pruning recovery and anneals activations to enable exact merging into a compact model.",
-        "RELEVANCE": 9,
-        "NOVELTY": 7,
-        "PRIMARY_TOPIC_ID": "efficiency_scaling",
-        "MATCHED_TOPIC_IDS": [
-            "efficiency_scaling"
-        ],
-        "TOPIC_MATCH_COMMENT": "The core mechanism improves structured-pruning recovery while preserving the compact model's inference architecture and cost.",
-        "HOTSPOT_PAPER_TAGS": [],
-        "HOTSPOT_PAPER_COMMENT": "",
-        "SCORE": 16,
-        "authors": [
-            "Seungmin Oh",
-            "Donggeon Lee",
-            "Jongbin Ryu"
-        ],
-        "title": "Train Overcomplete, Deploy Compact: Scaling Recovery Capacity for Structured LLM Pruning",
-        "abstract": "Large language models achieve strong performance across diverse tasks, but deployment remains costly because of memory, latency, and energy demands. Structured pruning reduces these costs by removing architectural components, yet its recovery stage is often limited by a mismatch between the recovery module's representational capacity and the complexity of the removed knowledge. We call this bottleneck the capacity-knowledge asymmetry and propose OverRep, an Overcomplete Reparameterization framework for structured LLM pruning. Following the principle of \"train overcomplete, deploy compact\", OverRep temporarily overparameterizes the recovery module during training to absorb complex knowledge distilled from the original model. After recovery, the overcomplete re-parameterization is algebraically merged into a mathematically equivalent compact module, preserving the pruned model's inference-time architecture and computational cost. OverRep further introduces an annealed activation that enables nonlinear training dynamics while converging to a linear regime for exact algebraic merging. Across three backbone families, OverRep improves retained reasoning performance over strong recovery baselines by up to 5.5 and 8.4 points at 25% and 50% pruning, respectively, while keeping memory usage and TFLOPs comparable to existing recovery methods. Our code is available at https://github.com/mmai-laboratory/OverRep.",
-        "arxiv_id": "2609.06974",
-        "PRIMARY_TOPIC_LABEL": "Efficiency, Compression, and Large-Scale Training",
-        "MATCHED_TOPIC_LABELS": [
-            "Efficiency, Compression, and Large-Scale Training"
-        ],
-        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
-        "HOTSPOT_PAPER_LABELS": [],
-        "HOTSPOT_PAPER_PRIMARY_KIND": null,
-        "HOTSPOT_PAPER_PRIMARY_LABEL": "",
-        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
-    },
-    "2603.01875": {
-        "ARXIVID": "2603.01875",
-        "COMMENT": "Transfers teacher hidden states and reconstructs vocabulary logits on student workers to reduce distillation communication.",
-        "RELEVANCE": 9,
-        "NOVELTY": 7,
-        "PRIMARY_TOPIC_ID": "training_systems",
-        "MATCHED_TOPIC_IDS": [
-            "training_systems",
-            "efficiency_scaling"
-        ],
-        "TOPIC_MATCH_COMMENT": "Backend decoupling and hidden-state transfer constitute a concrete training-systems design, supported by throughput improvements and scaling experiments on up to 64 GPUs.",
-        "HOTSPOT_PAPER_TAGS": [],
-        "HOTSPOT_PAPER_COMMENT": "",
-        "SCORE": 16,
-        "authors": [
-            "Songming Zhang",
-            "Xue Zhang",
-            "Tong Zhang",
-            "Bojie Hu",
-            "Yufeng Chen",
-            "Jinan Xu"
-        ],
-        "title": "KDFlow: A User-Friendly and Efficient Knowledge Distillation Framework for Large Language Models",
-        "abstract": "Knowledge distillation (KD) is widely used to compress and post-train large language models (LLMs), yet many existing frameworks execute teacher inference with the same training-oriented backend as student optimization, leading to suboptimal efficiency. In this paper, we propose KDFlow, a novel framework for LLM distillation that features a decoupled architecture and employs SGLang for teacher inference. KDFlow combines SGLang for teacher inference with PyTorch FSDP2 for student optimization, allowing each model to run on a backend tailored to its workload. To enable efficient full-vocabulary distillation in this decoupled architecture, KDFlow transfers the teacher's final hidden states via Ray's object store and recomputes teacher logits on each student worker using a frozen copy of the teacher's output head. Furthermore, our framework supports both off-policy and on-policy distillation and incorporates cross-tokenizer algorithms through highly extensible and user-friendly APIs. Experiments show that KDFlow achieves a 1.44$\\times$ to 6.36$\\times$ speedup over MS-SWIFT in off-policy distillation and a 1.43$\\times$ to 1.75$\\times$ speedup over verl in on-policy distillation. KDFlow further scales to 64 GPUs, achieving 3.68$\\times$ and 2.52$\\times$ strong-scaling speedups in two representative model configurations. The code and documentation are publicly available.",
-        "arxiv_id": "2603.01875",
-        "PRIMARY_TOPIC_LABEL": "Large-Scale Training Systems and Efficiency",
-        "MATCHED_TOPIC_LABELS": [
-            "Large-Scale Training Systems and Efficiency",
-            "Efficiency, Compression, and Large-Scale Training"
-        ],
-        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
-        "HOTSPOT_PAPER_LABELS": [],
-        "HOTSPOT_PAPER_PRIMARY_KIND": null,
-        "HOTSPOT_PAPER_PRIMARY_LABEL": "",
-        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
-    },
-    "2609.07681": {
-        "ARXIVID": "2609.07681",
-        "COMMENT": "Derives Mamba state and embedding size requirements from its learned hashing mechanism, predicting recall capacity.",
-        "RELEVANCE": 8,
-        "NOVELTY": 8,
-        "PRIMARY_TOPIC_ID": "architecture_training",
-        "MATCHED_TOPIC_IDS": [
-            "architecture_training"
-        ],
-        "TOPIC_MATCH_COMMENT": "Analyzes a concrete state-space computational mechanism and produces predictive architectural sizing laws, with scope limited to associative recall.",
-        "HOTSPOT_PAPER_TAGS": [],
-        "HOTSPOT_PAPER_COMMENT": "",
-        "SCORE": 16,
-        "authors": [
-            "Yuval Koren",
-            "Assaf Ben-Kish",
-            "Raja Giryes",
-            "Lior Wolf",
-            "Itamar Zimerman"
-        ],
-        "title": "On the Recall Scaling Laws in Mamba: A Theoretical and Mechanistic Study via Hashing",
-        "abstract": "Associative Recall (AR) is the cognitive ability to learn and retrieve links between items in memory. In NLP, AR is used as a benchmark for evaluating the in-context memory capacity of architectures such as Mamba, and has been found to strongly correlate with language modeling performance. This paper explores AR from the perspective of mechanistic interpretability, aiming to reverse-engineer the exact internal algorithm used by Mamba to perform recall. Our key insight is that Mamba performs recall by implicitly learning linear hash functions, and we identify the low-level circuit that enables this behavior. Building on these findings and inspired by theoretical tools in similarity-preserving hashing, such as the Johnson-Lindenstrauss lemma, we develop a theoretical framework for analyzing AR, which we term Recall Scaling Laws. Given the vocabulary size and the number of facts in context, this framework allows us to (1) predict the embedding and state dimensions required for Mamba to achieve perfect recall, (2) predict recall success probability given the model dimensions, and (3) analyze multi-layer models and multi-head SSM patterns. Empirical results show that our theoretical findings are accurate and predictive, offering insights into how AR capacity scales with vocabulary, state, embedding size, and architecture.",
-        "arxiv_id": "2609.07681",
-        "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
-        "MATCHED_TOPIC_LABELS": [
-            "Architecture and Training Dynamics"
-        ],
-        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
-        "HOTSPOT_PAPER_LABELS": [],
-        "HOTSPOT_PAPER_PRIMARY_KIND": null,
-        "HOTSPOT_PAPER_PRIMARY_LABEL": "",
-        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
-    },
-    "2609.07868": {
-        "ARXIVID": "2609.07868",
-        "COMMENT": "Derives compute-optimal model dimension and training duration from explicit SGD risk dynamics.",
-        "RELEVANCE": 8,
-        "NOVELTY": 8,
-        "PRIMARY_TOPIC_ID": "architecture_training",
-        "MATCHED_TOPIC_IDS": [
-            "training_systems",
-            "architecture_training"
-        ],
-        "TOPIC_MATCH_COMMENT": "Sequential class learning and risk evolution directly address optimization dynamics; the resulting compute-allocation laws add a training-systems connection within an idealized model.",
-        "HOTSPOT_PAPER_TAGS": [],
-        "HOTSPOT_PAPER_COMMENT": "",
-        "SCORE": 16,
-        "authors": [
-            "Konstantinos Christopher Tsiolis",
-            "Denny Wu",
-            "Christos Thrampoulidis",
-            "Murat A. Erdogdu"
-        ],
-        "title": "SGD in Multiclass Logistic Regression: Sequential Learning and Scaling Laws",
-        "abstract": "We study the training dynamics of multiclass logistic regression on high-dimensional Gaussian mixture models with a large number of classes and establish precise scaling laws governing the cross-entropy risk under gradient-based optimization. We show that learning proceeds sequentially across classes, from most to least frequent. When the class priors follow a power law distribution, the risk dynamics decompose into three phases: an initial plateau until the first class is learned, a power-law decay regime during which sequential learning occurs, and a final convergence regime. We then analyze how model capacity interacts with optimization under a fixed compute budget. When the effective dimension is restricted via projection onto leading principal components, the risk decomposes into a capacity term (a power law in the retained dimension) and an optimization term (a power law in training time). Optimizing this tradeoff yields a compute-optimal scaling law for logistic regression, with explicit prescriptions for model size and training time as functions of compute. These results extend theoretical scaling laws from linear regression to multiclass classification, while connecting to empirical scaling laws observed in large-scale neural networks.",
-        "arxiv_id": "2609.07868",
-        "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
-        "MATCHED_TOPIC_LABELS": [
-            "Large-Scale Training Systems and Efficiency",
-            "Architecture and Training Dynamics"
-        ],
-        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
-        "HOTSPOT_PAPER_LABELS": [],
-        "HOTSPOT_PAPER_PRIMARY_KIND": null,
-        "HOTSPOT_PAPER_PRIMARY_LABEL": "",
-        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
-    },
-    "2605.21333": {
-        "ARXIVID": "2605.21333",
-        "COMMENT": "Couples spike-gated dynamics with a continuous residual stream and a recurrent/local-attention mixer.",
-        "RELEVANCE": 9,
-        "NOVELTY": 6,
-        "PRIMARY_TOPIC_ID": "architecture_training",
-        "MATCHED_TOPIC_IDS": [
-            "architecture_training"
-        ],
-        "TOPIC_MATCH_COMMENT": "The dual-path mechanism directly changes sequence computation in models trained from scratch. Reported encoder sparsity does not establish whole-model efficiency gains.",
-        "HOTSPOT_PAPER_TAGS": [],
-        "HOTSPOT_PAPER_COMMENT": "",
-        "SCORE": 15,
-        "authors": [
-            "Ting Liu"
-        ],
-        "title": "SymbolicLight V1: Spike-Gated Dual-Path Language Modeling at High Encoder Spike Sparsity",
-        "abstract": "Natively trained spiking language models must preserve information across time while operating through sparse binary activations, a combination that has produced a persistent quality gap relative to dense Transformers. We present SymbolicLight V1, a spike-gated dual-path language model that couples binary Leaky Integrate-and-Fire (LIF) dynamics with a continuous residual stream. Its Dual-Path SparseTCAM mixer combines a first-order exponential-decay state with windowed local attention on the continuous residual stream, followed by a context-conditioned decoding head. We train four 194M-parameter models from scratch on a 3B-token, 10-domain Chinese-English corpus. On a fixed token-weighted evaluation set the runs reach perplexity (PPL) 8.88-8.93 (mean 8.904, sample standard deviation 0.019). Separation of this set from the training streams has not been verified. Training-time encoder probes have a mean zero-spike fraction of 89.96%; this is not a whole-model sparsity measure. Code tokens are 43.7% of that set; the unweighted mean of the ten domain PPLs is 29.38. Under the same corpus, tokenizer, token budget, and hardware, the token-weighted mean is 7.7% above GPT-2 201M (PPL 8.27). Across five zero-shot benchmarks the two 200M-scale models show no clear accuracy separation. Under sampling with temperature 0.7 and top-k 50, SymbolicLight produces lower 4-gram repetition; an entropy-modulated rule reverses that ranking. On an RTX 2080 Ti, measured generation throughput is 22.8 versus 91.5 token/s; post-generation power readings give rough energy estimates of 2,848 versus 905 mJ/token, without power integration over generation.",
-        "arxiv_id": "2605.21333",
-        "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
-        "MATCHED_TOPIC_LABELS": [
-            "Architecture and Training Dynamics"
-        ],
-        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
-        "HOTSPOT_PAPER_LABELS": [],
-        "HOTSPOT_PAPER_PRIMARY_KIND": null,
-        "HOTSPOT_PAPER_PRIMARY_LABEL": "",
-        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
-    },
-    "2609.07954": {
-        "ARXIVID": "2609.07954",
-        "COMMENT": "Derives support-graph conditions controlling gradient contraction through sparse Sinkhorn layers.",
-        "RELEVANCE": 8,
-        "NOVELTY": 7,
-        "PRIMARY_TOPIC_ID": "architecture_training",
-        "MATCHED_TOPIC_IDS": [
-            "architecture_training"
-        ],
-        "TOPIC_MATCH_COMMENT": "Directly analyzes how a differentiable layer's support controls backpropagation, with guarantees specifically limited to fixed-support quotient gradients.",
-        "HOTSPOT_PAPER_TAGS": [],
-        "HOTSPOT_PAPER_COMMENT": "",
-        "SCORE": 15,
-        "authors": [
-            "Dylan Forde"
-        ],
-        "title": "Support Topology and Gradient Mixing in Sinkhorn Layers",
-        "abstract": "Sparse Sinkhorn layers use a fixed support graph to restrict transport between tokens. How does this graph control gradient propagation through the scaling iterations. We develop a fixed-support calculus showing that each row-column cycle induces a row-stochastic operator on column-potential perturbations modulo constants. Its transpose propagates zero-mass reverse-mode cotangents. The finite-cycle operator uses two distinct half-step transport plans; at a balanced fixed point it reduces to a two-step walk determined by a single plan. We derive the accompanying score and marginal source terms and use Dobrushin contraction and minorization to bound homogeneous and source-driven tail cotangents. Our main result characterizes when support and marginals guarantee one-step contraction uniformly over finite scores: every feasible face of the transportation polytope must have pairwise two-hop column overlap. Otherwise, suitable score directions make the contraction coefficient arbitrarily close to one. We extend this analysis to ordered support schedules and derive certificates for partition heat-bath layers, coordinate sweeps, forced shared mass, and register-augmented supports. These results provide mathematical criteria for support design in differentiable transport layers, with guarantees restricted to the fixed-support quotient-gradient component.",
-        "arxiv_id": "2609.07954",
-        "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
-        "MATCHED_TOPIC_LABELS": [
-            "Architecture and Training Dynamics"
-        ],
-        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
-        "HOTSPOT_PAPER_LABELS": [],
-        "HOTSPOT_PAPER_PRIMARY_KIND": null,
-        "HOTSPOT_PAPER_PRIMARY_LABEL": "",
-        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
-    },
-    "2609.07155": {
-        "ARXIVID": "2609.07155",
-        "COMMENT": "Introduces token-local Fisher-weighted SVD and FLOP-constrained rank allocation for compression without finetuning.",
-        "RELEVANCE": 8,
-        "NOVELTY": 7,
-        "PRIMARY_TOPIC_ID": "efficiency_scaling",
-        "MATCHED_TOPIC_IDS": [
-            "efficiency_scaling"
-        ],
-        "TOPIC_MATCH_COMMENT": "The core contribution is a loss-aware low-rank compression mechanism with improved accuracy-compute trade-offs, demonstrated on vision Transformers.",
-        "HOTSPOT_PAPER_TAGS": [],
-        "HOTSPOT_PAPER_COMMENT": "",
-        "SCORE": 15,
-        "authors": [
-            "Moritz Thoma",
-            "Maximilian Groezinger",
-            "Maximilian Forstenh\u00c3\u00a4usler",
-            "Emad Aghajanzadeh",
-            "Ryan Pegoud",
-            "Manoj Rohit Vemparala",
-            "Pierpaolo Mori",
-            "Alexander Frickenstein",
-            "Daniel Mueller-Gritschneder",
-            "Ulf Schlichtmann"
-        ],
-        "title": "Mind the Approximation: Fisher-Weighted SVD Compression for ViTs",
-        "abstract": "Model compression is key to mitigate deployment challenges of ever growing machine learning models. In this area of research, singular value decomposition (SVD)-based compression offers a compelling trade-off between computational efficiency and model accuracy. Fisher-weighted SVD in particular provides principled, loss-aware compression. However, we find that improving the fidelity of Fisher approximation used in the compression is poorly predictive of post-compression accuracy for Vision Transformers (ViTs). Motivated by this observation, we propose FACTS, a structured Fisher Approximation tailored to Compressing ViTs with Fisher-weighted SVD, which enforces token-local aggregation while preserving within-token activation-gradient dependence. Additionally, we introduce a fast Constrained Rank Search (CoRS), that optimizes layer-wise rank allocation while adhering to a fixed floating point operation (FLOP) constraint. Extensive experiments across ViTs and hybrid architectures demonstrate that FACTS consistently improves accuracy-efficiency trade-offs without requiring finetuning. Notably, it outperforms the strongest SVD baseline by up to +5.8 percentage points (p.p.) Top-1 on Swin-B, with further gains driven by our search method. Code is available at https://github.com/MoritzTho/FACTS.",
-        "arxiv_id": "2609.07155",
-        "PRIMARY_TOPIC_LABEL": "Efficiency, Compression, and Large-Scale Training",
-        "MATCHED_TOPIC_LABELS": [
-            "Efficiency, Compression, and Large-Scale Training"
-        ],
-        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
-        "HOTSPOT_PAPER_LABELS": [],
-        "HOTSPOT_PAPER_PRIMARY_KIND": null,
-        "HOTSPOT_PAPER_PRIMARY_LABEL": "",
-        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
-    },
-    "2605.08123": {
-        "ARXIVID": "2605.08123",
-        "COMMENT": "Blockwise backpropagation through a short Sinkhorn refinement tail achieves linear extra memory for fixed head dimension and band width.",
-        "RELEVANCE": 8,
-        "NOVELTY": 7,
-        "PRIMARY_TOPIC_ID": "efficiency_scaling",
-        "MATCHED_TOPIC_IDS": [
-            "architecture_training",
-            "efficiency_scaling"
-        ],
-        "TOPIC_MATCH_COMMENT": "The primary contribution is memory-efficient attention training, supported by a differentiated surrogate and analysis of its gradient bias.",
-        "HOTSPOT_PAPER_TAGS": [],
-        "HOTSPOT_PAPER_COMMENT": "",
-        "SCORE": 15,
-        "authors": [
-            "Dylan Forde"
-        ],
-        "title": "Block-Wise Differentiable Sinkhorn Attention: Tail-Refinement Gradients with a Gap-Aware Dustbin Bridge",
-        "abstract": "We study long-context balanced entropic optimal transport (OT) attention on TPU hardware through a stopped-base, fixed-depth tail-refinement surrogate. After a stopped $T$-step Sinkhorn solve, we unroll a short refinement tail and differentiate that surrogate exactly. For the reported $R=2$ TPU path, the backward pass contains four staircase plan factors. We prove an exact one-reference-tile schedule: the $R=2$ score cotangent is a single reference plan tile times an explicit modifier field built from vector cotangents and dual differences. This yields block-wise cost $O((T+R)LW)$, $O(Ld)$ input storage, and $O(L)$ additional HBM usage for fixed head dimension $d$ and band width $W$ on the balanced fixed-support path. We also formalize the current \\texttt{dustbin\\_block} path as the same unit-target surrogate on an augmented support, so the adjoint schedule lifts to the single-active-dustbin path used in our TPU runs; this bridge is algebraic and does not claim a general KL-unbalanced or arbitrary-capacity gap model. We provide a local surrogate-bias bound, an a posteriori bias certificate, and a projective contraction certificate for strictly positive active blocks. On synthetic masked problems, the optimized kernel matches exact autodiff of the same centered surrogate to within $10^{-5}$--$10^{-10}$. On TPU v6e-8, a four-configuration Pfam screen completes end-to-end, and a promoted balanced $R=2$ run sustains roughly $8.5$ examples per second through a three-hour budget, reaching step $1437$. Held-out Pfam test shards improve reconstruction from $5.57$ to $2.05$ and sparse CE from $5.53$ to $5.30$ relative to step $0$, with CE logged diagnostically rather than optimized directly; target-barycenter alignment metrics do not materially improve, and a deterministic diagonal reference remains stronger on those metrics.",
-        "arxiv_id": "2605.08123",
-        "PRIMARY_TOPIC_LABEL": "Efficiency, Compression, and Large-Scale Training",
-        "MATCHED_TOPIC_LABELS": [
-            "Architecture and Training Dynamics",
-            "Efficiency, Compression, and Large-Scale Training"
-        ],
-        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
-        "HOTSPOT_PAPER_LABELS": [],
-        "HOTSPOT_PAPER_PRIMARY_KIND": null,
-        "HOTSPOT_PAPER_PRIMARY_LABEL": "",
-        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
-    },
-    "2609.07821": {
-        "ARXIVID": "2609.07821",
-        "COMMENT": "Selected reasoning steps are compressed into supervised latent tokens, reducing sequence length and training computation.",
-        "RELEVANCE": 8,
-        "NOVELTY": 7,
-        "PRIMARY_TOPIC_ID": "efficiency_scaling",
-        "MATCHED_TOPIC_IDS": [
-            "architecture_training",
-            "efficiency_scaling"
-        ],
-        "TOPIC_MATCH_COMMENT": "Reasoning-sequence compression is central, implemented through an explicit/latent computational architecture with dedicated embedding and label supervision.",
-        "HOTSPOT_PAPER_TAGS": [],
-        "HOTSPOT_PAPER_COMMENT": "",
-        "SCORE": 15,
-        "authors": [
-            "Xiaoang Xu",
-            "Siyuan Liu",
-            "Shuo Wang",
-            "Junlan Feng",
-            "Fanyu Meng",
-            "Zhu Zhang",
-            "Jixun Wang",
-            "Xiaorong Wang",
-            "Zihan Zhou",
-            "Xin Li",
-            "Chaojun Xiao",
-            "Yiming Zhang",
-            "Huijia Wu",
-            "Liuyu Xiang",
-            "Peipei Li",
-            "Zhaofeng He"
-        ],
-        "title": "A*-Thought-V2: Efficient Latent Reasoning via Geometric Dynamics of LLM",
-        "abstract": "Chain-of-Thought (CoT) improves the reasoning ability of Large Language Models (LLMs) but incurs substantial computation and context costs. Existing methods either lose intermediate information through hard pruning or lack a principled criterion for continuous compression. We present A*-Thought-V2, a geometric dynamics of LLM guided framework that models CoT as a hidden-state trajectory and replaces hard deletion with an explicit-implicit interleaved latent architecture. After projecting question, step, and solution representations into a 3D PCA space, it measures alignment between each local transition and global question-to-solution direction. Aligned steps remain explicit text, whereas deviating steps are compressed into continuous latent tokens. Directional angles capture both local semantics and reasoning dynamics: small angles indicate direct execution and answer formation, while large angles more frequently involve checking, correction, and branch exploration; their temporal variation reveals exploration, convergence, and refinement stages. To train this architecture, we introduce stepwise embedding forcing, which pools each redundant step into a single latent embedding, and label forcing, which supervises that latent token with a soft multi-modal vocabulary distribution instead of a hard one-hot label. Experiments on Qwen3.5-9B and Qwen3.6-27B across six in-domain and out-of-domain benchmarks show that A*-Thought-V2 improves average accuracy by up to 2.6% while reducing response length by up to half, increasing Accuracy per Computation Unit by 2.29$\\times$, and reducing preprocessing and training time by 94.6% and up to 80.3%, respectively. Representation analyses suggest that latent states form a compact region distinct from textual states, while higher entropy at latent-token positions reflects broader soft targets that encourage richer step-level feature learning.",
-        "arxiv_id": "2609.07821",
-        "PRIMARY_TOPIC_LABEL": "Efficiency, Compression, and Large-Scale Training",
-        "MATCHED_TOPIC_LABELS": [
-            "Architecture and Training Dynamics",
-            "Efficiency, Compression, and Large-Scale Training"
-        ],
-        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
-        "HOTSPOT_PAPER_LABELS": [],
-        "HOTSPOT_PAPER_PRIMARY_KIND": null,
-        "HOTSPOT_PAPER_PRIMARY_LABEL": "",
-        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
-    },
-    "2608.19168": {
-        "ARXIVID": "2608.19168",
-        "COMMENT": "Measures how a single-example pretraining perturbation produces lasting weight displacement despite fading functional effects.",
-        "RELEVANCE": 8,
-        "NOVELTY": 7,
-        "PRIMARY_TOPIC_ID": "architecture_training",
-        "MATCHED_TOPIC_IDS": [
-            "architecture_training"
-        ],
-        "TOPIC_MATCH_COMMENT": "Controlled pretraining counterfactuals directly analyze trajectory sensitivity and loss-basin geometry, with evidence from 124M-parameter models.",
-        "HOTSPOT_PAPER_TAGS": [],
-        "HOTSPOT_PAPER_COMMENT": "",
-        "SCORE": 15,
-        "authors": [
-            "Zachary Speck",
-            "Asa Shepard"
-        ],
-        "title": "Learned, Then Lost: A Measured Single-Example Counterfactual in Pre-training",
-        "abstract": "A single training example's contribution to a finished model is normally estimated rather than measured, because measuring it takes two expensive full pre-training runs that differ in one row of one batch. We ran that counterfactual 24 times at a small scale. We trained 32 GPT-2 models at 124M parameters from scratch on OpenWebText, over four conditions and eight seeds. At step 200 of 9,536, at peak learning rate, we replaced one row of a 256-row batch with a fixed context injection carrying a 194-token passage. The three injected conditions are: 1. fluent prose with a corpus-attested subject, 2. fluent prose with a fabricated subject matched to it within 0.14% on full-batch gradient delta, and 3. random keyboard characters. The fourth condition is an uninjected twin. The passage is learned from one exposure and then decays. Fifty steps after injection, the arm that saw a passage predicts it better than the arm that did not by 0.039 and 0.044 nats of cross-entropy on the passage, at eight of eight seeds with p < 0.0001. At the final step we do not detect that difference for either passage, at p = 0.25 and p = 0.71, against minimum detectable effects of 0.025 and 0.079 nats, nor between the two passages, at p = 0.54. Every geometric measure we report is taken after that decay. Our pre-registered contrast on interpolation loss barrier is +0.0068 with p = 0.509, against a minimum detectable effect of 0.032 barrier units. Held-out cross-entropy is -0.00044 with p = 0.310. Per-layer centered kernel alignment does not detectably separate any condition at any layer. Weight displacement reaches 44.1% of the seed-to-seed Euclidean distance and is 92% settled by the midpoint of training, while the barrier reaches 3.0% of the seed-to-seed barrier. Those two figures sit roughly 15 times apart, and that is a lower bound. The injection relocates the model within its basin without moving it out.",
-        "arxiv_id": "2608.19168",
-        "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
-        "MATCHED_TOPIC_LABELS": [
-            "Architecture and Training Dynamics"
-        ],
-        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
-        "HOTSPOT_PAPER_LABELS": [],
-        "HOTSPOT_PAPER_PRIMARY_KIND": null,
-        "HOTSPOT_PAPER_PRIMARY_LABEL": "",
-        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
-    },
-    "2609.07755": {
-        "ARXIVID": "2609.07755",
-        "COMMENT": "Bounds weight-decay training dynamics to derive a sufficient condition for delayed generalization.",
-        "RELEVANCE": 8,
-        "NOVELTY": 7,
-        "PRIMARY_TOPIC_ID": "architecture_training",
-        "MATCHED_TOPIC_IDS": [
-            "architecture_training"
-        ],
-        "TOPIC_MATCH_COMMENT": "The core contribution explains generalization through optimization trajectories and layerwise dynamics, although its squared-loss setting limits direct applicability to large-scale pretraining.",
-        "HOTSPOT_PAPER_TAGS": [],
-        "HOTSPOT_PAPER_COMMENT": "",
-        "SCORE": 15,
-        "authors": [
-            "Yuqing Wang",
-            "Ioannis G. Kevrekidis",
-            "Mikhail Belkin"
-        ],
-        "title": "A Theoretical Analysis of Generalization Dynamics in Neural Networks under Gradient Descent with Weight Decay",
-        "abstract": "Understanding generalization remains a central challenge in machine learning because it requires jointly considering data, architecture, and training dynamics. In this paper, we develop a theoretical framework that characterizes how these factors jointly shape generalization performance throughout training. More precisely, we study a broad class of neural networks trained under the $\\ell^2$ loss by gradient descent (GD) with weight decay, and prove the convergence of GD to a neighbourhood of the global minimizers of the empirical loss. By partitioning the space based on the input data, we then decompose the population error into data error, optimization error, and prediction variation error, and bound them separately. In particular, for the prediction variation error, which measures the oscillations of the learned function, we propose (local) approximate homogeneity and derive explicit cellwise and layerwise bounds for its evolution along the training trajectory. These bounds yield two important implications: a necessary condition of improved generalization explains differences in layerwise generalization behavior; a sufficient condition describes delayed generalization and provides a theoretical characterization of grokking.",
-        "arxiv_id": "2609.07755",
-        "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
-        "MATCHED_TOPIC_LABELS": [
-            "Architecture and Training Dynamics"
-        ],
-        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
-        "HOTSPOT_PAPER_LABELS": [],
-        "HOTSPOT_PAPER_PRIMARY_KIND": null,
-        "HOTSPOT_PAPER_PRIMARY_LABEL": "",
-        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
-    },
-    "2507.20088": {
-        "ARXIVID": "2507.20088",
-        "COMMENT": "Defines differentiable implicit graph layers through stationary dynamics and derives their global formulation and exact training adjoints.",
-        "RELEVANCE": 7,
-        "NOVELTY": 8,
-        "PRIMARY_TOPIC_ID": "architecture_training",
-        "MATCHED_TOPIC_IDS": [
-            "architecture_training"
-        ],
-        "TOPIC_MATCH_COMMENT": "Trainable stationary layers constitute a foundational architectural mechanism, although their practical impact on large-model training remains unestablished.",
-        "HOTSPOT_PAPER_TAGS": [],
-        "HOTSPOT_PAPER_COMMENT": "",
-        "SCORE": 15,
-        "authors": [
-            "Dmitry Pasechnyuk-Vilensky",
-            "Martin Tak\u00c3\u00a1\u00c4\u008d"
-        ],
-        "title": "Learning Latent Graph Geometry via Fixed-Point Schr\u00c3\u00b6dinger-Type Activation: A Theoretical Study",
-        "abstract": "We study neural architectures in which each hidden layer is defined by the stationary state of a dissipative Schr\u00c3\u00b6dinger-type dynamics on a learned latent graph. On stable branches, the local stationary problem defines a differentiable implicit graph layer. To learn the graph itself, we optimize over the stratified moduli space of weighted graphs and equip each stratum with a non-degenerate K\u00c3\u00a4hler-Hessian metric that keeps natural-gradient descent and face crossing well posed. We then show that a multilayer stationary network is equivalent to an exact global stationary problem on a supra-graph, and that it admits a penalized global relaxation whose stationary states converge to the exact one as the penalty parameter tends to infinity. Reverse-mode differentiation is recovered as the adjoint of the exact global system, and the penalized adjoint converges to it in the same limit. Finally, under finite-dimensional strong-monotonicity and admissible-lift assumptions, the corresponding represented hypothesis classes coincide among resolvent feed-forward networks, graph-stationary networks, supra-graph stationary systems, and sheaf-based architectures with unitary connection. The resulting structural identifications yield complexity bounds controlled by sparse graph or supra-graph geometry rather than dense ambient connectivity.",
-        "arxiv_id": "2507.20088",
-        "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
-        "MATCHED_TOPIC_LABELS": [
-            "Architecture and Training Dynamics"
-        ],
-        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
-        "HOTSPOT_PAPER_LABELS": [],
-        "HOTSPOT_PAPER_PRIMARY_KIND": null,
-        "HOTSPOT_PAPER_PRIMARY_LABEL": "",
-        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
-    },
-    "2609.07814": {
-        "ARXIVID": "2609.07814",
-        "COMMENT": "Compact-support expert routing localizes the NTK and reduces gradient conflict across spatial regions.",
-        "RELEVANCE": 7,
-        "NOVELTY": 7,
-        "PRIMARY_TOPIC_ID": "moe_training",
-        "MATCHED_TOPIC_IDS": [
-            "moe_training",
-            "architecture_training"
-        ],
-        "TOPIC_MATCH_COMMENT": "Routing geometry and its effect on training dynamics are substantive MoE contributions, with applicability demonstrated in PDE coordinate networks.",
-        "HOTSPOT_PAPER_TAGS": [],
-        "HOTSPOT_PAPER_COMMENT": "",
-        "SCORE": 14,
-        "authors": [
-            "Hanwen Wang",
-            "Paris Perdikaris"
-        ],
-        "title": "Latent-MoE: Domain-Aware Mixture-of-Experts for PDEs with Multi-Regime Physics",
-        "abstract": "Physics-informed neural networks (PINNs) struggle on PDEs whose governing physics varies across the domain. We trace this to a structural property of standard coordinate networks: their neural tangent kernel (NTK) is translation-variant and lets training points of large coordinate magnitude disproportionately influence predictions elsewhere, producing long-range coupling and gradient conflict during training. We show analytically and empirically that mixture-of-experts (MoE) architectures with centered, compact-support routers yield a uniformly banded NTK whose kernel-regression weights decay exponentially with distance, localizing the learning. Building on this, we propose \\emph{Latent-MoE}, which interleaves domain-aware MoE blocks within a shared backbone. Unlike FB-PINNs or X-PINNs, which rigidly partition both the domain and the parameters so that the parameters on different subdomains are updated independently, Latent-MoE is designed to preserve the localization benefit of domain-aware routing while allowing capacity to flow across regions through the shared backbone. On standard homogeneous-physics benchmarks Latent-MoE is competitive with established baselines; on benchmarks with multi-stage time-variable physics, where global models and rigid domain decompositions both fall into spurious solutions, it improves over them by more than an order of magnitude, with markedly reduced gradient conflict during training.",
-        "arxiv_id": "2609.07814",
-        "PRIMARY_TOPIC_LABEL": "MoE Training",
-        "MATCHED_TOPIC_LABELS": [
-            "MoE Training",
-            "Architecture and Training Dynamics"
-        ],
-        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
-        "HOTSPOT_PAPER_LABELS": [],
-        "HOTSPOT_PAPER_PRIMARY_KIND": null,
-        "HOTSPOT_PAPER_PRIMARY_LABEL": "",
-        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
-    },
-    "2605.17232": {
-        "ARXIVID": "2605.17232",
-        "COMMENT": "Establishes vocabulary-independent convergence bounds that inform discrete-diffusion sampling step complexity.",
-        "RELEVANCE": 6,
-        "NOVELTY": 8,
-        "PRIMARY_TOPIC_ID": "efficiency_scaling",
-        "MATCHED_TOPIC_IDS": [
-            "efficiency_scaling"
-        ],
-        "TOPIC_MATCH_COMMENT": "Closest to efficiency through sampling complexity, but the contribution sharpens theoretical guarantees without establishing a cheaper training or sampling method.",
-        "HOTSPOT_PAPER_TAGS": [],
-        "HOTSPOT_PAPER_COMMENT": "",
-        "SCORE": 14,
-        "authors": [
-            "Kelvin Kan",
-            "Xingjian Li",
-            "Benjamin J. Zhang",
-            "Tuhin Sahai",
-            "Stanley Osher",
-            "Markos A. Katsoulakis"
-        ],
-        "title": "Vocabulary-size-independent Convergence of Discrete Diffusion Models: adjoint equations induce the right space",
-        "abstract": "Discrete diffusion has become a leading framework for generative modeling in various applications including language, vision, and biology. Existing convergence theory, however, exhibits fundamental limitations. KL-based analyses diverge under singular priors such as the masked distribution, while bounds in total variation (TV) depend on the vocabulary size $S$ and become vacuous for modern language tasks, where vocabularies contain hundreds of thousands of tokens. We develop a unified adjoint-equation-based framework that establishes vocabulary-size-independent convergence guarantees in any integral probability metric (IPM). To the best of our knowledge, our bounds are the first to be entirely free of $S$ and applicable to both masked and uniform priors. Importantly, our results can extend existing step complexity guarantees to any IPM. Also, our theory relies only on a single standard rate-matrix regularity assumption and applies to general priors. Five novel techniques drive our improvements: 1. working in the space of observables via adjoint equations rather than directly with probability measures; 2. a regularity analysis that yields bounds on any IPM; 3. a coupling argument that removes $S$-dependence under uniform transitions; and 4. score-marginal cancellation and 5. exit-routing techniques that remove $S$-dependence under masked transitions. Our framework thus sharply departs from prior analyses and avoids the shortcomings of pathspace-KL and existing TV-based approaches. Beyond convergence bounds, our framework provides a versatile toolkit for further theoretical study of discrete diffusion models, including principled choices of loss functions and vocabulary-size-independent step complexity.",
-        "arxiv_id": "2605.17232",
-        "PRIMARY_TOPIC_LABEL": "Efficiency, Compression, and Large-Scale Training",
-        "MATCHED_TOPIC_LABELS": [
-            "Efficiency, Compression, and Large-Scale Training"
-        ],
-        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
-        "HOTSPOT_PAPER_LABELS": [],
-        "HOTSPOT_PAPER_PRIMARY_KIND": null,
-        "HOTSPOT_PAPER_PRIMARY_LABEL": "",
-        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
-    },
-    "2609.06934": {
-        "ARXIVID": "2609.06934",
-        "COMMENT": "Analyzes update geometry relative to capability curvature and how persistent pretraining supervision changes robustness.",
-        "RELEVANCE": 6,
-        "NOVELTY": 8,
-        "PRIMARY_TOPIC_ID": "architecture_training",
-        "MATCHED_TOPIC_IDS": [
-            "architecture_training"
-        ],
-        "TOPIC_MATCH_COMMENT": "Fisher geometry and pretraining experiments connect to training dynamics, but the central contribution explains and improves safety alignment.",
-        "HOTSPOT_PAPER_TAGS": [
-            "daily_hot"
-        ],
-        "HOTSPOT_PAPER_COMMENT": "The proposed explanation of post-hoc safety fragility and reported robustness of continuous safety co-training across 410M\u20136.9B models have broad implications for LLM safety.",
-        "SCORE": 14,
-        "authors": [
-            "Srikanth Malla",
-            "Chiho Choi",
-            "Joon Hee Choi"
-        ],
-        "title": "The Geometry of Refusal: Why Post-Hoc Safety Is Fragile and Pretraining-Time Safety Persists",
-        "abstract": "Post-hoc safety training (RLHF, DPO) is the dominant way to align large language models, yet jailbreaks (Zou et al., 2023b), fine-tuning attacks (Qi et al., 2024), and activation-space probes (Arditi et al., 2024) keep recovering the behaviors it was meant to remove. We give this fragility one geometric explanation and trace it to when, during pretraining, safety can take hold. We measure the safety update $\u00ce\u0094= W_{\\text{safe}} - W_{\\text{base}}$ against the curvature of the model's capabilities (the empirical Fisher of a capability loss). Post-hoc safety consistently lands in a suppression regime: $\u00ce\u0094$ is nearly orthogonal to the capability directions, and its small in-subspace part concentrates on a few high-curvature ones. The update is thin but sharp, a refusal gate laid over intact capabilities rather than erasure of them. A kernel-immobility lemma explains why such an update can only mask a capability, not remove it, so a little benign fine-tuning restores it: 100 steps of benign fine-tuning collapse refusal on Qwen-2.5-7B and Llama-3-8B Instruct at preserved capability, a signature that replicates across five model families. Following the account into pretraining, a 267-checkpoint sweep of OLMo-2-1B (OLMo et al., 2025) shows the substrate that safety engages emerging in a sharp transition between roughly 6B and 60B pretraining tokens. We then use the account constructively: models trained from scratch with safety co-training spread continuously across pretraining reach 87 to 98% refusal whose post-attack level holds at 84 to 91% at every scale, an erosion of 2 to 14 pp against 35 to 38 pp for post-hoc installs, at capability matched or better than an LM-only baseline and holding from 410M to 6.9B, whereas a compute-matched windowed schedule installs no lasting refusal. Persistence of the safety signal across pretraining, not its timing, is what buys attack robustness.",
-        "arxiv_id": "2609.06934",
-        "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
-        "MATCHED_TOPIC_LABELS": [
-            "Architecture and Training Dynamics"
-        ],
-        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
-        "HOTSPOT_PAPER_LABELS": [
-            "Daily Hot Papers"
-        ],
-        "HOTSPOT_PAPER_PRIMARY_KIND": "daily_hot",
-        "HOTSPOT_PAPER_PRIMARY_LABEL": "Daily Hot Papers",
-        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "llm_exact"
-    },
-    "2609.07406": {
-        "ARXIVID": "2609.07406",
-        "COMMENT": "A spectral training regularizer counteracts rank collapse across continuous latent reasoning steps.",
-        "RELEVANCE": 7,
-        "NOVELTY": 6,
-        "PRIMARY_TOPIC_ID": "architecture_training",
-        "MATCHED_TOPIC_IDS": [
-            "architecture_training"
-        ],
-        "TOPIC_MATCH_COMMENT": "The paper diagnoses and intervenes on a failure of latent computation during training, providing a substantive mechanism within the narrower setting of implicit reasoning.",
-        "HOTSPOT_PAPER_TAGS": [],
-        "HOTSPOT_PAPER_COMMENT": "",
-        "SCORE": 13,
-        "authors": [
-            "Yuwen Hao",
-            "Menglin Yang"
-        ],
-        "title": "Think Wider: Mitigating Latent Rank Collapse in Implicit Chain-of-Thought Reasoning",
-        "abstract": "Chain-of-thought (CoT) reasoning improves the reasoning ability of large language models by introducing intermediate computation, but explicit rationales increase decoding length, latency, and context cost. Implicit CoT offers a more efficient alternative by moving intermediate reasoning into continuous latent states. However, latent reasoning can be unstable: successive latent states may become overly similar and collapse toward a shared dominant direction, reducing the diversity of the reasoning trajectory. In this work, we identify $\\textit{latent rank collapse}$ and propose $\\textbf{WIDER}$, a lightweight spectral regularizer for implicit CoT. During training, WIDER estimates the shared direction of each latent trajectory and penalizes projections onto this direction, encouraging latent states to span a broader representational subspace. The method is plug-and-play and leaves the backbone model, latent schedule, and inference-time decoding procedure unchanged. We further formulate this collapse as a geometric bottleneck in implicit reasoning, casting its mitigation as a training-time regularization problem rather than an inference-time decoding change. Extensive experiments show that WIDER improves matched implicit CoT baselines, while mechanistic analyses reveal higher effective rank, lower dominant-direction energy, and reduced redundancy among latent steps. These results highlight latent subspace utilization as an important factor for efficient continuous reasoning, providing a geometric perspective for analyzing and improving implicit CoT. Code is available at https://github.com/whitesweater/WIDER.",
-        "arxiv_id": "2609.07406",
-        "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
-        "MATCHED_TOPIC_LABELS": [
-            "Architecture and Training Dynamics"
-        ],
-        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
-        "HOTSPOT_PAPER_LABELS": [],
-        "HOTSPOT_PAPER_PRIMARY_KIND": null,
-        "HOTSPOT_PAPER_PRIMARY_LABEL": "",
-        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
-    },
-    "2609.07961": {
-        "ARXIVID": "2609.07961",
-        "COMMENT": "Introduces invertible attention within graph normalizing flows, enabling expressive relational modeling under invertibility constraints.",
-        "RELEVANCE": 7,
-        "NOVELTY": 6,
-        "PRIMARY_TOPIC_ID": "architecture_training",
-        "MATCHED_TOPIC_IDS": [
-            "architecture_training"
-        ],
-        "TOPIC_MATCH_COMMENT": "The proposed invertible attention mechanism fits architectural design, with its demonstrated scope confined to graph density modeling.",
-        "HOTSPOT_PAPER_TAGS": [],
-        "HOTSPOT_PAPER_COMMENT": "",
-        "SCORE": 13,
-        "authors": [
-            "Thanh-Dat Truong",
-            "Sarah Alharbi",
-            "Susan Gauch",
-            "Xinghui Zhao",
-            "Marios Savvides",
-            "Khoa Luu"
-        ],
-        "title": "$\u00ce\u00b1$-Graph: Attention-Infused Normalizing Flow Approach to Tractable Graph Modeling",
-        "abstract": "Graph modeling, a crucial task for representing complex relationships in graph-structured data, has achieved significant success in recent years. However, current graph modeling methods rely on traditional Graph Neural Networks and pre-training approaches to implicitly learn the underlying relational structure of graph data. Thus, these prior methods cannot capture the complex graph structure and correlations among inputs. In this paper, we introduce a novel Attention-based Normalizing Flow-based Approach\\footnote{Our implementation and models will be released publicly for research reproducibility.} (ANFA or $\u00ce\u00b1$) that provides an explicit, interpretable, and tractable Graph Modeling ($\u00ce\u00b1$-Graph). In particular, we propose a new Unconditional Graph Normalizing Flow with an Invertible Attention Mechanism to capture the complex relational structure of graph data. To further enhance the expressiveness of the model, we introduce Conditional Graph Normalizing Flow with Learnable Queries that enables efficient modeling of correlations in graph-structured data. We show that our Conditional Graph Normalizing Flows behave similarly to Unconditional Graph Normalizing Flows, enhancing expressiveness while maintaining training stability and efficiency. Our experimental results on three benchmarks will illustrate the effectiveness and the state-of-the-art (SoTA) performance of the proposed $\u00ce\u00b1$-Graph method.",
-        "arxiv_id": "2609.07961",
-        "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
-        "MATCHED_TOPIC_LABELS": [
-            "Architecture and Training Dynamics"
-        ],
-        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
-        "HOTSPOT_PAPER_LABELS": [],
-        "HOTSPOT_PAPER_PRIMARY_KIND": null,
-        "HOTSPOT_PAPER_PRIMARY_LABEL": "",
-        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
-    },
-    "2609.07666": {
-        "ARXIVID": "2609.07666",
-        "COMMENT": "A momentum-subspace trust-region optimizer enables forward-only fine-tuning while eliminating learning-rate search.",
-        "RELEVANCE": 7,
-        "NOVELTY": 6,
-        "PRIMARY_TOPIC_ID": "efficiency_scaling",
-        "MATCHED_TOPIC_IDS": [
-            "efficiency_scaling"
-        ],
-        "TOPIC_MATCH_COMMENT": "The core contribution is a memory-efficient optimization mechanism, although empirical evidence is limited to 125M-350M models on one fine-tuning task.",
-        "HOTSPOT_PAPER_TAGS": [],
-        "HOTSPOT_PAPER_COMMENT": "",
-        "SCORE": 13,
-        "authors": [
-            "Yuyang Wang",
-            "Haoyu Yao",
-            "Pengcheng Xie"
-        ],
-        "title": "MpSub: A Momentum $p$-Dimensional Subspace Trust-Region Method for Derivative-Free Fine-Tuning of Large Language Models",
-        "abstract": "Full-parameter fine-tuning of large language models has substantial memory costs because backpropagation stores activations and gradients. Zeroth-order optimization avoids this by estimating update directions from loss evaluations, but existing methods require tuning a sensitive learning rate for each model and task. We propose the momentum $p$-dimensional subspace trust-region method (MpSub). At each iteration, MpSub searches within a $p$-dimensional subspace: one direction preserves historical momentum from the most recent accepted step, while the remaining directions explore via fresh random sampling. The subspace gradient is estimated by central differences, a trial step is computed from a linear trust-region model, and the trust-region radius adapts according to the agreement between predicted and observed loss reduction, eliminating the learning rate. For LLM fine-tuning, evaluations within an iteration share a minibatch, and directions are regenerated in place from seeds, using forward passes alone. For smooth deterministic objectives under unorthogonalized Gaussian directions, we bound the finite-difference error, quantify gradient energy captured by the subspace, and prove that $\\lim_{k\\to\\infty} \\|\\nabla f(x_k)\\|_2 = 0$ almost surely under a safeguarded radius update. Under a matched budget of 8,400 training-objective forward passes, we fine-tune OPT-125M and OPT-350M on CommitmentBank. With the same preset parameters at both model sizes, MpSub attains mean test accuracies of 0.673 and 0.690 over three seeds, matching tuned MeZO (0.685) without any learning-rate search.",
-        "arxiv_id": "2609.07666",
-        "PRIMARY_TOPIC_LABEL": "Efficiency, Compression, and Large-Scale Training",
-        "MATCHED_TOPIC_LABELS": [
-            "Efficiency, Compression, and Large-Scale Training"
-        ],
-        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
-        "HOTSPOT_PAPER_LABELS": [],
-        "HOTSPOT_PAPER_PRIMARY_KIND": null,
-        "HOTSPOT_PAPER_PRIMARY_LABEL": "",
-        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
-    },
-    "2609.07222": {
-        "ARXIVID": "2609.07222",
-        "COMMENT": "Introduces wall-distance and local-geometry conditioning for expert routing across distinct flow regions.",
-        "RELEVANCE": 7,
-        "NOVELTY": 6,
-        "PRIMARY_TOPIC_ID": "moe_training",
-        "MATCHED_TOPIC_IDS": [
-            "moe_training",
-            "architecture_training"
-        ],
-        "TOPIC_MATCH_COMMENT": "Expert-router design is a core contribution alongside conditioned cross-attention, with transfer across two backbones; its relevance remains narrower because validation concerns flow surrogates.",
-        "HOTSPOT_PAPER_TAGS": [],
-        "HOTSPOT_PAPER_COMMENT": "",
-        "SCORE": 13,
-        "authors": [
-            "Sanghyeon Kim",
-            "Sunwoong Yang",
-            "Namwoo Kang"
-        ],
-        "title": "Distance-Aware Attention and Wall-Distance Expert Routing for Transformer-Based 3D Flow Prediction",
-        "abstract": "Transformer surrogates for 3D flow prediction compress an industrial mesh into a small set of tokens from which every prediction point reads. Two operations follow: the retrieval step in which a point gathers information from the compressed representation, and the feed-forward layer that transforms what it retrieved. In current backbones both are blind to where the point sits in the flow. We condition both on wall-related physical signals. Distance-aware cross-attention (DA-CA) reshapes each volume query by its wall distance before retrieval, so that a point deep in the boundary layer draws different geometric information than one in the outer flow. Surface-volume mixture-of-experts (SVMoE) replaces the shared feed-forward layer with a small set of experts, routed by wall distance for volume points and by local geometry for surface points. Neither mechanism is tied to one architecture, so we apply both unchanged to AB-UPT and Transolver-3. On DrivAerML with 50 training cases, DA-CA reduces the volume pressure error by 10.1%, and DA-CA and SVMoE together reduce it by 12.5%; DA-CA improves the near-wall region at some cost in the far region, which SVMoE recovers, and the volume experts settle into near-wall, transition, and free-stream bands without routing supervision. Retrained on 300 cases, the conditioning improves every field quantity, reducing volume pressure and velocity errors by 33.1% and 18.6% on AB-UPT and by 21.4% and 21.3% on Transolver-3. Under Leave-One-Body-Out evaluation on DrivAerNet++, it reduces the volume pressure error on unseen body types by up to 14.2%.",
-        "arxiv_id": "2609.07222",
-        "PRIMARY_TOPIC_LABEL": "MoE Training",
-        "MATCHED_TOPIC_LABELS": [
-            "MoE Training",
-            "Architecture and Training Dynamics"
-        ],
-        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
-        "HOTSPOT_PAPER_LABELS": [],
-        "HOTSPOT_PAPER_PRIMARY_KIND": null,
-        "HOTSPOT_PAPER_PRIMARY_LABEL": "",
-        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
-    },
-    "2609.07008": {
-        "ARXIVID": "2609.07008",
-        "COMMENT": "Offline/online attention factorization reuses document computations while preserving MLA's packed latent KV representation.",
-        "RELEVANCE": 7,
-        "NOVELTY": 6,
-        "PRIMARY_TOPIC_ID": "efficiency_scaling",
-        "MATCHED_TOPIC_IDS": [
-            "efficiency_scaling"
-        ],
-        "TOPIC_MATCH_COMMENT": "The substantive match is attention-cache and computation efficiency through MLA-specific adaptation of head-aware reuse.",
-        "HOTSPOT_PAPER_TAGS": [],
-        "HOTSPOT_PAPER_COMMENT": "",
-        "SCORE": 13,
-        "authors": [
-            "Yang Liu",
-            "Zhaokai Luo",
-            "Huayi Jin",
-            "Ruozhou He",
-            "Chenchen Hong",
-            "Mingxiao Ma",
-            "Biao Zhang",
-            "Zhiyong Wang",
-            "Boyu Wang",
-            "Guanjie Chen",
-            "Yifei Liu",
-            "Tao Xie",
-            "Junhao Hu"
-        ],
-        "title": "RedKnot-MLA: Multi-Head Offline-Online Reuse for DeepSeek-V4 Long-Context Serving",
-        "abstract": "Multi-head latent attention (MLA) exposes many logical query heads through one packed latent KV stream. This representation is memory efficient, but it removes the physical per-head cache boundary assumed by conventional head-wise reuse. We present our system, a DeepSeek-V4 realization of RedKnot's head-aware reuse principle. Each immutable document is processed offline at canonical position zero; certified Local-head contributions are retained as MLA-Off. At serving time, query-side RoPE relocation restores the document's request position, a small Global-head set and protected Local token rows are recomputed as MLA-Online, and the two paths are merged before a single shared output projection. The packed MLA latent is never split. DeepSeek-V4-Flash uses 37 reusable layers and a 56/8 Local/Global partition, giving a 75.29% analytic logical head-row ceiling; the Pro-0813 profile uses 55 layers and 112/16 heads, giving 78.89%. Frozen Flash operating points show hot-artifact TTFT speedups of 2.02-3.84x. At 256K, the archived three-dataset study reports an aggregate F1 change of +3.24 percentage points, an EM change of +4.16 points, and a 78.7-79.5% analytic major-operator arithmetic saving, while one dataset decreases by 2.81 F1 points. A separate author-reported 256K hot-artifact QPS measurement is approximately 2.0x; because its raw concurrency trace is not included in this bundle, we mark it as preliminary rather than archived evidence. We describe the factorization, position repair, token-row closure, sparse-MoE support, TP8 integration, and the measurement boundaries needed to interpret these results.",
-        "arxiv_id": "2609.07008",
-        "PRIMARY_TOPIC_LABEL": "Efficiency, Compression, and Large-Scale Training",
-        "MATCHED_TOPIC_LABELS": [
-            "Efficiency, Compression, and Large-Scale Training"
-        ],
-        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
-        "HOTSPOT_PAPER_LABELS": [],
-        "HOTSPOT_PAPER_PRIMARY_KIND": null,
-        "HOTSPOT_PAPER_PRIMARY_LABEL": "",
-        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
-    },
-    "2609.07876": {
-        "ARXIVID": "2609.07876",
-        "COMMENT": "Adjacent transformer layers selectively cancel residual-stream subspaces through an adaptive layer-correction mechanism.",
-        "RELEVANCE": 6,
-        "NOVELTY": 7,
-        "PRIMARY_TOPIC_ID": "architecture_training",
-        "MATCHED_TOPIC_IDS": [
-            "architecture_training"
-        ],
-        "TOPIC_MATCH_COMMENT": "Residual-layer interactions are closely related to architectural dynamics, but the core contribution explains feature interpretation and steering rather than training optimization or cost.",
-        "HOTSPOT_PAPER_TAGS": [
-            "daily_hot"
-        ],
-        "HOTSPOT_PAPER_COMMENT": "Correction observed in five of seven model families challenges widely used assumptions behind sparse-autoencoder interpretation and model steering.",
-        "SCORE": 13,
-        "authors": [
-            "Arjun Patrawala",
-            "Jiahai Feng",
-            "Erik Jones",
-            "Jacob Steinhardt"
-        ],
-        "title": "LLM Layers Immediately Correct Each Other",
-        "abstract": "Recent methods in language model interpretability employ techniques such as sparse autoencoders to decompose residual stream contributions into linear, semantically meaningful features. Such methods are commonly interpreted as identifying features that persist in the residual stream and that subsequent layers build upon. We challenge this view by identifying the Transformer Layer Correction Mechanism (TLCM), wherein adjacent transformer layers systematically counteract portions of each other's contributions. TLCM appears in 5 out of 7 major open-source model families and activates across nearly all tokens in diverse texts. We show that TLCM emerges during pretraining, operates most strongly on contextually dependent tokens, and adaptively calibrates its correction strength based on the preceding layer's output. Using the layer Jacobian, we further show that TLCM selectively corrects specific subspaces while reinforcing others, which we interpret through a ``propose-and-reject'' framework in which layers propose candidate features and subsequent layers selectively remove inappropriate ones. This dynamic suggests that the residual stream at any layer contains transient proposals alongside persistent features, helping explain why SAE feature descriptions often have low specificity, why effective model steering requires extreme feature amplification, and why transcoders hold a theoretical advantage over SAEs.",
-        "arxiv_id": "2609.07876",
-        "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
-        "MATCHED_TOPIC_LABELS": [
-            "Architecture and Training Dynamics"
-        ],
-        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
-        "HOTSPOT_PAPER_LABELS": [
-            "Daily Hot Papers"
-        ],
-        "HOTSPOT_PAPER_PRIMARY_KIND": "daily_hot",
-        "HOTSPOT_PAPER_PRIMARY_LABEL": "Daily Hot Papers",
-        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "llm_exact"
-    },
-    "2607.27077": {
-        "ARXIVID": "2607.27077",
-        "COMMENT": "Equilibrium-preserving tempering stabilizes maximum-likelihood optimization under poor MCMC mixing.",
-        "RELEVANCE": 6,
-        "NOVELTY": 7,
-        "PRIMARY_TOPIC_ID": "architecture_training",
-        "MATCHED_TOPIC_IDS": [
-            "architecture_training"
-        ],
-        "TOPIC_MATCH_COMMENT": "Closest to training dynamics through sampling-aware optimization; the RBM-focused contribution has an indirect connection to large-model training.",
-        "HOTSPOT_PAPER_TAGS": [],
-        "HOTSPOT_PAPER_COMMENT": "",
-        "SCORE": 13,
-        "authors": [
-            "Nicolas B\u00c3\u00a9reux",
-            "Aur\u00c3\u00a9lien Decelle",
-            "Cyril Furtlehner",
-            "Beatriz Seoane"
-        ],
-        "title": "Equilibrium Training of Energy-Based Models with Parallel Trajectory Tempering",
-        "abstract": "Energy-Based Models (EBMs) provide an interpretable framework for generative modeling of scientific data, but poor Markov Chain Monte Carlo mixing often limits their reliability. We introduce a training algorithm based on Parallel Trajectory Tempering (PTT), which exploits the continuity of the optimization path to maintain equilibrium sampling throughout learning. This enables stable and fast training on highly multimodal and data-scarce scientific datasets. Combined with reservoir sampling and adaptive optimization, PTT has a computational cost comparable to Persistent Contrastive Divergence, making it a practical replacement for standard training methods. It also provides direct estimates of thermalization times, equilibrium samples from trained models, and accurate log-likelihoods at essentially no additional cost. Experiments on Restricted Boltzmann Machines show that PTT consistently outperforms existing EBM training approaches. On discrete tabular data, it also surpasses state-of-the-art deep generative models, yielding higher-quality samples and greater robustness to overfitting and limited data. Our results make equilibrium maximum-likelihood training of EBMs practical and computationally efficient.",
-        "arxiv_id": "2607.27077",
-        "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
-        "MATCHED_TOPIC_LABELS": [
-            "Architecture and Training Dynamics"
-        ],
-        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
-        "HOTSPOT_PAPER_LABELS": [],
-        "HOTSPOT_PAPER_PRIMARY_KIND": null,
-        "HOTSPOT_PAPER_PRIMARY_LABEL": "",
-        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
-    },
-    "2609.06898": {
-        "ARXIVID": "2609.06898",
-        "COMMENT": "Dependency-aware vocabulary pruning reduces token counts under a fixed vocabulary budget.",
-        "RELEVANCE": 6,
-        "NOVELTY": 6,
-        "PRIMARY_TOPIC_ID": "efficiency_scaling",
-        "MATCHED_TOPIC_IDS": [
-            "efficiency_scaling"
-        ],
-        "TOPIC_MATCH_COMMENT": "Vocabulary compression can reduce token-processing costs, although the abstract establishes tokenizer-level gains without measuring large-model training savings.",
-        "HOTSPOT_PAPER_TAGS": [],
-        "HOTSPOT_PAPER_COMMENT": "",
-        "SCORE": 12,
-        "authors": [
-            "Kenny Shao"
-        ],
-        "title": "Dynamic-Programming-Guided Hierarchical BPE and Empirical Analysis of Vocabulary Pruning",
-        "abstract": "Byte Pair Encoding (BPE) constructs vocabularies through greedy pair merging, but the resulting merge order does not necessarily allocate a fixed model-visible vocabulary optimally for compression. We propose Dynamic-Programming-Guided Hierarchical BPE (DH-BPE), a vocabulary-construction method that combines token exposure under exact minimum-token segmentation with the hierarchical dependencies induced by BPE training. Starting from a modestly overshot BPE candidate vocabulary, DH-BPE uses dynamic programming to measure candidate utility and applies exposure-guided, dependency-aware pruning to select a fixed-size model-visible vocabulary. We compare DH-BPE against Standard BPE and recent vocabulary-optimization baselines, including Pruned BPE, MinGram, and MinGram-PP, in primary evaluations at 12K and 16K target vocabulary sizes, with an additional 18K evaluation against MinGram only. Across the primary 12K and 16K comparisons, DH-BPE consistently improves aggregate compression over Standard BPE, Pruned BPE, and MinGram under a shared exact minimum-token DP encoder. MinGram-PP achieves stronger aggregate compression in the primary comparisons, but DH-BPE outperforms it at overshoot factors f = 2.0 and f = 3.0 in cross-corpus evaluation; at 12K, MinGram-PP reverses this ordering only with the substantially larger candidate pools at f = 4.0 and f = 5.0. Qualitative analysis further shows that DH-BPE balances later, more complete BPE merges with reusable subword components, providing a practical approach to improving vocabulary allocation under a fixed model-visible vocabulary budget.",
-        "arxiv_id": "2609.06898",
-        "PRIMARY_TOPIC_LABEL": "Efficiency, Compression, and Large-Scale Training",
-        "MATCHED_TOPIC_LABELS": [
-            "Efficiency, Compression, and Large-Scale Training"
-        ],
-        "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
-        "HOTSPOT_PAPER_LABELS": [],
-        "HOTSPOT_PAPER_PRIMARY_KIND": null,
-        "HOTSPOT_PAPER_PRIMARY_LABEL": "",
-        "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default"
-    }
+  "2609.07108": {
+    "ARXIVID": "2609.07108",
+    "COMMENT": "Supports online draft updates across context and pipeline parallelism while preserving the pipeline schedule.",
+    "RELEVANCE": 4,
+    "NOVELTY": 4,
+    "PRIMARY_TOPIC_ID": "training_systems",
+    "MATCHED_TOPIC_IDS": [
+      "training_systems"
+    ],
+    "TOPIC_MATCH_COMMENT": "Training systems is the nearest category; the result is faster speculative rollout generation during RL post-training.",
+    "HOTSPOT_PAPER_TAGS": [],
+    "HOTSPOT_PAPER_COMMENT": "",
+    "SCORE": 8,
+    "authors": [
+      "Zili Wang",
+      "Zhaopeng Qiu",
+      "Yuekai Zhang",
+      "Shuang Yu",
+      "Junjie Lai"
+    ],
+    "title": "Online Draft Co-Training for Speculative Decoding in Large-Scale, Long-Context RL Post-Training",
+    "abstract": "Speculative decoding accelerates rollout generation, which dominates the cost of reinforcement learning (RL) post-training. Online co-training can further increase the draft's accuracy, yielding greater speedups. However, scaling this approach to co-training on large models with long contexts poses two obstacles: (1) branch attention is unsupported by standard causal context-parallel (CP) implementations, and (2) target features span across pipeline-parallel (PP) stages. We address both with an end-to-end system for large-scale online draft co-training. For CP, we extend packed, load-balanced zigzag ring attention by merging rank-local branch attention with causal main-sequence attention. For PP, TapChannel transports intermediate target features across stages via a separate path, leaving the pipeline schedule unaffected. Experiments demonstrate that co-trained drafts closely track the policy baseline while delivering substantial rollout and end-to-end speedups across model scales up to 122B. Our CP design achieves strong scaling at 256K tokens with significant memory savings over prior work, and our PP transport incurs modest overhead. Code can be found at https://github.com/NVIDIA-NeMo/RL/issues/3698.",
+    "arxiv_id": "2609.07108",
+    "PRIMARY_TOPIC_LABEL": "Training Algorithms That Change What Is Possible",
+    "MATCHED_TOPIC_LABELS": [
+      "Training Algorithms That Change What Is Possible"
+    ],
+    "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+    "HOTSPOT_PAPER_LABELS": [],
+    "HOTSPOT_PAPER_PRIMARY_KIND": null,
+    "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+    "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default",
+    "EVIDENCE": 8,
+    "LOAD": 6,
+    "PROXIMITY": 3,
+    "READ_SCORE": 12.0
+  },
+  "2609.07017": {
+    "ARXIVID": "2609.07017",
+    "COMMENT": "Reproduces base-optimizer dynamics with norm-constrained updates through a mapped learning-rate schedule.",
+    "RELEVANCE": 8,
+    "NOVELTY": 9,
+    "PRIMARY_TOPIC_ID": "architecture_training",
+    "MATCHED_TOPIC_IDS": [
+      "architecture_training"
+    ],
+    "TOPIC_MATCH_COMMENT": "The core is an optimizer-equivalence mechanism linking norm constraints to effective learning rates; the abstract leaves evaluated model families unspecified.",
+    "HOTSPOT_PAPER_TAGS": [
+      "new_frontier"
+    ],
+    "HOTSPOT_PAPER_COMMENT": "Potentially frontier-opening: Reproduces base-optimizer dynamics with norm-constrained updates through a mapped learning-rate schedule.",
+    "SCORE": 17,
+    "authors": [
+      "Jinghui Yuan",
+      "Hongtao Zhang",
+      "Jade Zou",
+      "Tianyu Li",
+      "Wenjie Zhou",
+      "Tianyu He",
+      "Wei Chen"
+    ],
+    "title": "HyperTransfer: Understanding the Equivalence between Base Optimizer and Hyperball",
+    "abstract": "Hyperball optimizers constrain parameter norms and update only their directions, establishing a distinct paradigm for neural network optimization. Although this geometry appears fundamentally different from that of conventional Base Optimizers, which update both parameter norms and directions, we show that the two paradigms are dynamically equivalent for scale-invariant networks. Building on this equivalence, we propose HyperTransfer, which constructs a Hyperball optimizer that reproduces the dynamics of a target Base Optimizer using only its initialization and learning-rate schedule, without running the target optimizer itself. We further derive the inverse mapping and extend the framework to non-scale-invariant networks. Experiments show that both HyperTransfer and the inverse mapping produce loss trajectories nearly identical to those of their targets, suggesting that Hyperball dynamics are governed primarily by the induced effective learning-rate schedule and optimizer state.",
+    "arxiv_id": "2609.07017",
+    "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+    "MATCHED_TOPIC_LABELS": [
+      "Architecture and Training Dynamics"
+    ],
+    "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+    "HOTSPOT_PAPER_LABELS": [
+      "New Frontier Papers"
+    ],
+    "HOTSPOT_PAPER_PRIMARY_KIND": "new_frontier",
+    "HOTSPOT_PAPER_PRIMARY_LABEL": "New Frontier Papers",
+    "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "heuristic",
+    "EVIDENCE": 5,
+    "LOAD": 8,
+    "PROXIMITY": 8,
+    "READ_SCORE": 17.0
+  },
+  "2609.07264": {
+    "ARXIVID": "2609.07264",
+    "COMMENT": "Corrects channel penalties for gauge freedom, enabling function-preserving removal of zeroed channels during training.",
+    "RELEVANCE": 8,
+    "NOVELTY": 8,
+    "PRIMARY_TOPIC_ID": "efficiency_scaling",
+    "MATCHED_TOPIC_IDS": [
+      "architecture_training",
+      "efficiency_scaling"
+    ],
+    "TOPIC_MATCH_COMMENT": "Training-time structural compression is primary; gauge-balance dynamics explain architectural reorganization, with small-scale character-level training evidence.",
+    "HOTSPOT_PAPER_TAGS": [],
+    "HOTSPOT_PAPER_COMMENT": "",
+    "SCORE": 16,
+    "authors": [
+      "Jed A. Duersch",
+      "NaÃ¯m Es-Sebbani",
+      "NathanaÃ«l Haas",
+      "Zied Bouraoui"
+    ],
+    "title": "Dense Structural Compression of Transformers via Gauge-Correct Channel Removal",
+    "abstract": "Inference energy per token drives the cost and carbon footprint of deployed transformers. It is dominated by dense matrix products that incur fused multiply-accumulate (FMA) operations and memory traffic. To reduce these computations while retaining dense tensors for high GPU throughput, we develop a methodology from first principles to adapt structural complexity during training to maximize inference utility per unit compute. Channel penalties drive entire tensor slices to zero to enable physical removal while preserving density and the network function. The natural approach, penalizing the norm of operator components acting through each channel, is provably destabilized by gauge freedom. We resolve this pathology with GaugeLasso: additive symmetric group-lasso penalties that recover a monotone function of product-norms when the network converges to gauge balance. Our equilibrium analysis enables per-channel calibration to correctly suppress slices that under-perform in inference utility per unit compute. Under adaptive pressure, the network reorganizes into depth-dependent structural profiles that can be far smaller than the architecture required to learn the task. On polynomial long division over $\\mathbb{F}_{31}$, compute compresses from 148 to 255 times with perfect accuracy. On character-level language modeling, compressed models outperform the hand-designed baseline at equal FMA. On masked autoencoding, a compression trial exposes which axes were over-provisioned and which saturated, guiding a better second design. Compaction also accelerates training monotonically as the model progresses. Post-hoc pruning with the same utility ranking cannot reach these structures, showing that sustained pressure is central to discovery of efficient models. Retraining a discovered architecture recovers baseline quality on our statistical tasks, but fails on our exact algorithmic task.",
+    "arxiv_id": "2609.07264",
+    "PRIMARY_TOPIC_LABEL": "Efficiency, Compression, and Large-Scale Training",
+    "MATCHED_TOPIC_LABELS": [
+      "Architecture and Training Dynamics",
+      "Efficiency, Compression, and Large-Scale Training"
+    ],
+    "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+    "HOTSPOT_PAPER_LABELS": [],
+    "HOTSPOT_PAPER_PRIMARY_KIND": null,
+    "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+    "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default",
+    "EVIDENCE": 6,
+    "LOAD": 8,
+    "PROXIMITY": 8,
+    "READ_SCORE": 18.0
+  },
+  "2510.08999": {
+    "ARXIVID": "2510.08999",
+    "COMMENT": "Jointly induces sparse and quantized weights using spike-and-slab priors and Gaussian-mixture weight distributions.",
+    "RELEVANCE": 3,
+    "NOVELTY": 6,
+    "PRIMARY_TOPIC_ID": "efficiency_scaling",
+    "MATCHED_TOPIC_IDS": [
+      "efficiency_scaling"
+    ],
+    "TOPIC_MATCH_COMMENT": "Closest to efficiency_scaling through weight compression, but Bayesian variational compression is the core subject.",
+    "HOTSPOT_PAPER_TAGS": [],
+    "HOTSPOT_PAPER_COMMENT": "",
+    "SCORE": 9,
+    "authors": [
+      "Ziyi Wang",
+      "Nan Jiang",
+      "Guang Lin",
+      "Qifan Song"
+    ],
+    "title": "SQS: Bayesian DNN Compression through Sparse Quantized Sub-distributions",
+    "abstract": "Compressing large-scale neural networks is essential for deploying models on resource-constrained devices. Most existing methods adopt weight pruning or low-bit quantization individually, often resulting in suboptimal compression rates to preserve acceptable performance drops. We introduce a unified framework for simultaneous pruning and low-bit quantization via Bayesian variational learning (\\method), which achieves higher compression rates than prior baselines while maintaining comparable performance. The key idea is to employ a spike-and-slab prior to induce sparsity and model quantized weights using Gaussian Mixture Models (GMMs) to enable low-bit precision. Due to the intractability of the objective involving spike-and-slab priors with GMMs, we derive an efficient approximation that facilitates effective compression with minimal accuracy loss. In theory, we provide a consistent result for our proposed variational approach to a sparse and quantized deep neural network. Extensive experiments on compressing ResNet, BERT-base, Llama3.2, and Qwen2.5 models show that our method achieves higher compression rates than a line of existing methods with comparable performance drops. Project page: https://comeusr.github.io/SQS_Webpage.",
+    "arxiv_id": "2510.08999",
+    "PRIMARY_TOPIC_LABEL": "Efficiency, Compression, and Large-Scale Training",
+    "MATCHED_TOPIC_LABELS": [
+      "Efficiency, Compression, and Large-Scale Training"
+    ],
+    "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+    "HOTSPOT_PAPER_LABELS": [],
+    "HOTSPOT_PAPER_PRIMARY_KIND": null,
+    "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+    "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default",
+    "EVIDENCE": 7,
+    "LOAD": 8,
+    "PROXIMITY": 3,
+    "READ_SCORE": 9.0
+  },
+  "2509.25180": {
+    "ARXIVID": "2509.25180",
+    "COMMENT": "Compresses diffusion latents through an alignment stage followed by limited fine-tuning.",
+    "RELEVANCE": 2,
+    "NOVELTY": 5,
+    "PRIMARY_TOPIC_ID": "efficiency_scaling",
+    "MATCHED_TOPIC_IDS": [
+      "efficiency_scaling"
+    ],
+    "TOPIC_MATCH_COMMENT": "Latent-space compression is the nearest category, but the trained systems are text-to-image generators.",
+    "HOTSPOT_PAPER_TAGS": [],
+    "HOTSPOT_PAPER_COMMENT": "",
+    "SCORE": 7,
+    "authors": [
+      "Wenkun He",
+      "Yuchao Gu",
+      "Junyu Chen",
+      "Dongyun Zou",
+      "Yujun Lin",
+      "Zhekai Zhang",
+      "Haocheng Xi",
+      "Muyang Li",
+      "Ligeng Zhu",
+      "Jincheng Yu",
+      "Junsong Chen",
+      "Enze Xie",
+      "Song Han",
+      "Han Cai"
+    ],
+    "title": "DC-Gen: Post-Training Diffusion Acceleration with Deeply Compressed Latent Space",
+    "abstract": "Existing text-to-image diffusion models excel at generating high-quality images, but face significant efficiency challenges when scaled to high resolutions, like 4K image generation. While previous research accelerates diffusion models in various aspects, it seldom handles the inherent redundancy within the latent space. To bridge this gap, this paper introduces DC-Gen, a general framework that accelerates text-to-image diffusion models by leveraging a deeply compressed latent space. Rather than a costly training-from-scratch approach, DC-Gen uses an efficient post-training pipeline to preserve the quality of the base model. A key challenge in this paradigm is the representation gap between the base model's latent space and a deeply compressed latent space, which can lead to instability during direct fine-tuning. To overcome this, DC-Gen first bridges the representation gap with a lightweight embedding alignment training. Once the latent embeddings are aligned, only a small amount of LoRA fine-tuning is needed to unlock the base model's inherent generation quality. We verify DC-Gen's effectiveness on SANA and FLUX.1-Krea. The resulting DC-Gen-SANA and DC-Gen-FLUX models achieve quality comparable to their base models but with a significant speedup. Specifically, DC-Gen-FLUX reduces the latency of 4K image generation by 53x on the NVIDIA H100 GPU. When combined with NVFP4 SVDQuant, DC-Gen-FLUX generates a 4K image in just 3.5 seconds on a single NVIDIA 5090 GPU, achieving a total latency reduction of 138x compared to the base FLUX.1-Krea model. Code: https://github.com/dc-ai-projects/DC-Gen.",
+    "arxiv_id": "2509.25180",
+    "PRIMARY_TOPIC_LABEL": "Efficiency, Compression, and Large-Scale Training",
+    "MATCHED_TOPIC_LABELS": [
+      "Efficiency, Compression, and Large-Scale Training"
+    ],
+    "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+    "HOTSPOT_PAPER_LABELS": [],
+    "HOTSPOT_PAPER_PRIMARY_KIND": null,
+    "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+    "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default",
+    "EVIDENCE": 7,
+    "LOAD": 5,
+    "PROXIMITY": 1,
+    "READ_SCORE": 7.5
+  },
+  "2609.07314": {
+    "ARXIVID": "2609.07314",
+    "COMMENT": "Replaces the global position counter with content-derived unit addresses while preserving local RoPE exactly.",
+    "RELEVANCE": 4,
+    "NOVELTY": 9,
+    "PRIMARY_TOPIC_ID": "architecture_training",
+    "MATCHED_TOPIC_IDS": [
+      "architecture_training"
+    ],
+    "TOPIC_MATCH_COMMENT": "The architectural connection is positional addressing, but long-context extrapolation is the core subject and an explicit exclusion.",
+    "HOTSPOT_PAPER_TAGS": [],
+    "HOTSPOT_PAPER_COMMENT": "",
+    "SCORE": 13,
+    "authors": [
+      "Mahesh Godavarti"
+    ],
+    "title": "Content-Based Addressing for Long Context",
+    "abstract": "Rotary position embedding (RoPE) uses each token's integer position to determine the rotation applied inside attention. This works well for local token order, but increasing context length creates a positional train-test mismatch: RoPE produces relative rotations at offsets not seen during training. Methods that rescale, interpolate, randomize, or bias positions specify how attention handles those offsets, but still derive positional information from a growing token counter. We instead divide a token stream into units, retain ordinary RoPE positions within each unit, and assign every completed unit an address computed from its content. Adding units then applies the same learned map to new content rather than extending a positional range or an identifier table. We prove that this construction preserves local RoPE exactly, leaves the attention comparison between two fixed tokens unchanged when other units are inserted or reordered, and does not create new relative rotations merely because more units are added. In a character-level Tiny Shakespeare diagnostic, a model trained on 256-character contexts has validation perplexity 4.04 at 256 characters and 3.82 at 4096, while continuous RoPE changes from 4.71 to 12.09. A second diagnostic shows that content-based addressing can retrieve and use information from multiple serialized facts. These are controlled shallow experiments, not scale benchmarks, but they support a direct prescription: use position to address locally and content to address across units.",
+    "arxiv_id": "2609.07314",
+    "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+    "MATCHED_TOPIC_LABELS": [
+      "Architecture and Training Dynamics"
+    ],
+    "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+    "HOTSPOT_PAPER_LABELS": [],
+    "HOTSPOT_PAPER_PRIMARY_KIND": null,
+    "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+    "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default",
+    "EVIDENCE": 5,
+    "LOAD": 6,
+    "PROXIMITY": 6,
+    "READ_SCORE": 12.0
+  },
+  "2609.06974": {
+    "ARXIVID": "2609.06974",
+    "COMMENT": "Expands pruning-recovery capacity, then algebraically merges the added parameters while holding the deployed architecture fixed.",
+    "RELEVANCE": 7,
+    "NOVELTY": 7,
+    "PRIMARY_TOPIC_ID": "efficiency_scaling",
+    "MATCHED_TOPIC_IDS": [
+      "efficiency_scaling"
+    ],
+    "TOPIC_MATCH_COMMENT": "The contribution changes recovery capacity for structured LLM pruning; its benefits depend on the additional recovery machinery.",
+    "HOTSPOT_PAPER_TAGS": [],
+    "HOTSPOT_PAPER_COMMENT": "",
+    "SCORE": 14,
+    "authors": [
+      "Seungmin Oh",
+      "Donggeon Lee",
+      "Jongbin Ryu"
+    ],
+    "title": "Train Overcomplete, Deploy Compact: Scaling Recovery Capacity for Structured LLM Pruning",
+    "abstract": "Large language models achieve strong performance across diverse tasks, but deployment remains costly because of memory, latency, and energy demands. Structured pruning reduces these costs by removing architectural components, yet its recovery stage is often limited by a mismatch between the recovery module's representational capacity and the complexity of the removed knowledge. We call this bottleneck the capacity-knowledge asymmetry and propose OverRep, an Overcomplete Reparameterization framework for structured LLM pruning. Following the principle of \"train overcomplete, deploy compact\", OverRep temporarily overparameterizes the recovery module during training to absorb complex knowledge distilled from the original model. After recovery, the overcomplete re-parameterization is algebraically merged into a mathematically equivalent compact module, preserving the pruned model's inference-time architecture and computational cost. OverRep further introduces an annealed activation that enables nonlinear training dynamics while converging to a linear regime for exact algebraic merging. Across three backbone families, OverRep improves retained reasoning performance over strong recovery baselines by up to 5.5 and 8.4 points at 25% and 50% pruning, respectively, while keeping memory usage and TFLOPs comparable to existing recovery methods. Our code is available at https://github.com/mmai-laboratory/OverRep.",
+    "arxiv_id": "2609.06974",
+    "PRIMARY_TOPIC_LABEL": "Efficiency, Compression, and Large-Scale Training",
+    "MATCHED_TOPIC_LABELS": [
+      "Efficiency, Compression, and Large-Scale Training"
+    ],
+    "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+    "HOTSPOT_PAPER_LABELS": [],
+    "HOTSPOT_PAPER_PRIMARY_KIND": null,
+    "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+    "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default",
+    "EVIDENCE": 7,
+    "LOAD": 5,
+    "PROXIMITY": 7,
+    "READ_SCORE": 18.5
+  },
+  "2603.01875": {
+    "ARXIVID": "2603.01875",
+    "COMMENT": "Separates teacher inference and student optimization backends while preserving full-vocabulary distillation through hidden-state transfer.",
+    "RELEVANCE": 3,
+    "NOVELTY": 4,
+    "PRIMARY_TOPIC_ID": "training_systems",
+    "MATCHED_TOPIC_IDS": [
+      "training_systems"
+    ],
+    "TOPIC_MATCH_COMMENT": "The nearest category is training systems, but the contribution is distillation throughput engineering without a new optimization invariant.",
+    "HOTSPOT_PAPER_TAGS": [],
+    "HOTSPOT_PAPER_COMMENT": "",
+    "SCORE": 7,
+    "authors": [
+      "Songming Zhang",
+      "Xue Zhang",
+      "Tong Zhang",
+      "Bojie Hu",
+      "Yufeng Chen",
+      "Jinan Xu"
+    ],
+    "title": "KDFlow: A User-Friendly and Efficient Knowledge Distillation Framework for Large Language Models",
+    "abstract": "Knowledge distillation (KD) is widely used to compress and post-train large language models (LLMs), yet many existing frameworks execute teacher inference with the same training-oriented backend as student optimization, leading to suboptimal efficiency. In this paper, we propose KDFlow, a novel framework for LLM distillation that features a decoupled architecture and employs SGLang for teacher inference. KDFlow combines SGLang for teacher inference with PyTorch FSDP2 for student optimization, allowing each model to run on a backend tailored to its workload. To enable efficient full-vocabulary distillation in this decoupled architecture, KDFlow transfers the teacher's final hidden states via Ray's object store and recomputes teacher logits on each student worker using a frozen copy of the teacher's output head. Furthermore, our framework supports both off-policy and on-policy distillation and incorporates cross-tokenizer algorithms through highly extensible and user-friendly APIs. Experiments show that KDFlow achieves a 1.44$\\times$ to 6.36$\\times$ speedup over MS-SWIFT in off-policy distillation and a 1.43$\\times$ to 1.75$\\times$ speedup over verl in on-policy distillation. KDFlow further scales to 64 GPUs, achieving 3.68$\\times$ and 2.52$\\times$ strong-scaling speedups in two representative model configurations. The code and documentation are publicly available.",
+    "arxiv_id": "2603.01875",
+    "PRIMARY_TOPIC_LABEL": "Training Algorithms That Change What Is Possible",
+    "MATCHED_TOPIC_LABELS": [
+      "Training Algorithms That Change What Is Possible"
+    ],
+    "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+    "HOTSPOT_PAPER_LABELS": [],
+    "HOTSPOT_PAPER_PRIMARY_KIND": null,
+    "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+    "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default",
+    "EVIDENCE": 8,
+    "LOAD": 4,
+    "PROXIMITY": 3,
+    "READ_SCORE": 12.0
+  },
+  "2609.07681": {
+    "ARXIVID": "2609.07681",
+    "COMMENT": "Identifies Mamba's learned hashing circuit and predicts recall success as vocabulary, state, and embedding dimensions vary.",
+    "RELEVANCE": 8,
+    "NOVELTY": 9,
+    "PRIMARY_TOPIC_ID": "architecture_training",
+    "MATCHED_TOPIC_IDS": [
+      "architecture_training"
+    ],
+    "TOPIC_MATCH_COMMENT": "Explaining the internal recall algorithm with falsifiable capacity predictions qualifies as architectural mechanism analysis.",
+    "HOTSPOT_PAPER_TAGS": [
+      "new_frontier"
+    ],
+    "HOTSPOT_PAPER_COMMENT": "Potentially frontier-opening: Identifies Mamba's learned hashing circuit and predicts recall success as vocabulary, state, and embedding dimensions vary.",
+    "SCORE": 17,
+    "authors": [
+      "Yuval Koren",
+      "Assaf Ben-Kish",
+      "Raja Giryes",
+      "Lior Wolf",
+      "Itamar Zimerman"
+    ],
+    "title": "On the Recall Scaling Laws in Mamba: A Theoretical and Mechanistic Study via Hashing",
+    "abstract": "Associative Recall (AR) is the cognitive ability to learn and retrieve links between items in memory. In NLP, AR is used as a benchmark for evaluating the in-context memory capacity of architectures such as Mamba, and has been found to strongly correlate with language modeling performance. This paper explores AR from the perspective of mechanistic interpretability, aiming to reverse-engineer the exact internal algorithm used by Mamba to perform recall. Our key insight is that Mamba performs recall by implicitly learning linear hash functions, and we identify the low-level circuit that enables this behavior. Building on these findings and inspired by theoretical tools in similarity-preserving hashing, such as the Johnson-Lindenstrauss lemma, we develop a theoretical framework for analyzing AR, which we term Recall Scaling Laws. Given the vocabulary size and the number of facts in context, this framework allows us to (1) predict the embedding and state dimensions required for Mamba to achieve perfect recall, (2) predict recall success probability given the model dimensions, and (3) analyze multi-layer models and multi-head SSM patterns. Empirical results show that our theoretical findings are accurate and predictive, offering insights into how AR capacity scales with vocabulary, state, embedding size, and architecture.",
+    "arxiv_id": "2609.07681",
+    "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+    "MATCHED_TOPIC_LABELS": [
+      "Architecture and Training Dynamics"
+    ],
+    "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+    "HOTSPOT_PAPER_LABELS": [
+      "New Frontier Papers"
+    ],
+    "HOTSPOT_PAPER_PRIMARY_KIND": "new_frontier",
+    "HOTSPOT_PAPER_PRIMARY_LABEL": "New Frontier Papers",
+    "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "heuristic",
+    "EVIDENCE": 5,
+    "LOAD": 8,
+    "PROXIMITY": 8,
+    "READ_SCORE": 17.0
+  },
+  "2609.07868": {
+    "ARXIVID": "2609.07868",
+    "COMMENT": "Derives sequential class-learning dynamics and their consequences for compute-optimal model dimension and training time.",
+    "RELEVANCE": 3,
+    "NOVELTY": 6,
+    "PRIMARY_TOPIC_ID": "architecture_training",
+    "MATCHED_TOPIC_IDS": [
+      "architecture_training"
+    ],
+    "TOPIC_MATCH_COMMENT": "Training dynamics is the nearest category, but the results concern logistic regression on Gaussian mixtures rather than language-model training.",
+    "HOTSPOT_PAPER_TAGS": [],
+    "HOTSPOT_PAPER_COMMENT": "",
+    "SCORE": 9,
+    "authors": [
+      "Konstantinos Christopher Tsiolis",
+      "Denny Wu",
+      "Christos Thrampoulidis",
+      "Murat A. Erdogdu"
+    ],
+    "title": "SGD in Multiclass Logistic Regression: Sequential Learning and Scaling Laws",
+    "abstract": "We study the training dynamics of multiclass logistic regression on high-dimensional Gaussian mixture models with a large number of classes and establish precise scaling laws governing the cross-entropy risk under gradient-based optimization. We show that learning proceeds sequentially across classes, from most to least frequent. When the class priors follow a power law distribution, the risk dynamics decompose into three phases: an initial plateau until the first class is learned, a power-law decay regime during which sequential learning occurs, and a final convergence regime. We then analyze how model capacity interacts with optimization under a fixed compute budget. When the effective dimension is restricted via projection onto leading principal components, the risk decomposes into a capacity term (a power law in the retained dimension) and an optimization term (a power law in training time). Optimizing this tradeoff yields a compute-optimal scaling law for logistic regression, with explicit prescriptions for model size and training time as functions of compute. These results extend theoretical scaling laws from linear regression to multiclass classification, while connecting to empirical scaling laws observed in large-scale neural networks.",
+    "arxiv_id": "2609.07868",
+    "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+    "MATCHED_TOPIC_LABELS": [
+      "Architecture and Training Dynamics"
+    ],
+    "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+    "HOTSPOT_PAPER_LABELS": [],
+    "HOTSPOT_PAPER_PRIMARY_KIND": null,
+    "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+    "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default",
+    "EVIDENCE": 5,
+    "LOAD": 9,
+    "PROXIMITY": 2,
+    "READ_SCORE": 5.5
+  },
+  "2605.21333": {
+    "ARXIVID": "2605.21333",
+    "COMMENT": "Couples binary LIF gates to a continuous residual stream with recurrent and local-attention mixing.",
+    "RELEVANCE": 4,
+    "NOVELTY": 6,
+    "PRIMARY_TOPIC_ID": "architecture_training",
+    "MATCHED_TOPIC_IDS": [
+      "architecture_training"
+    ],
+    "TOPIC_MATCH_COMMENT": "The contribution is a language-model layer design, but spiking neural networks are its core subject and an explicit exclusion.",
+    "HOTSPOT_PAPER_TAGS": [],
+    "HOTSPOT_PAPER_COMMENT": "",
+    "SCORE": 10,
+    "authors": [
+      "Ting Liu"
+    ],
+    "title": "SymbolicLight V1: Spike-Gated Dual-Path Language Modeling at High Encoder Spike Sparsity",
+    "abstract": "Natively trained spiking language models must preserve information across time while operating through sparse binary activations, a combination that has produced a persistent quality gap relative to dense Transformers. We present SymbolicLight V1, a spike-gated dual-path language model that couples binary Leaky Integrate-and-Fire (LIF) dynamics with a continuous residual stream. Its Dual-Path SparseTCAM mixer combines a first-order exponential-decay state with windowed local attention on the continuous residual stream, followed by a context-conditioned decoding head. We train four 194M-parameter models from scratch on a 3B-token, 10-domain Chinese-English corpus. On a fixed token-weighted evaluation set the runs reach perplexity (PPL) 8.88-8.93 (mean 8.904, sample standard deviation 0.019). Separation of this set from the training streams has not been verified. Training-time encoder probes have a mean zero-spike fraction of 89.96%; this is not a whole-model sparsity measure. Code tokens are 43.7% of that set; the unweighted mean of the ten domain PPLs is 29.38. Under the same corpus, tokenizer, token budget, and hardware, the token-weighted mean is 7.7% above GPT-2 201M (PPL 8.27). Across five zero-shot benchmarks the two 200M-scale models show no clear accuracy separation. Under sampling with temperature 0.7 and top-k 50, SymbolicLight produces lower 4-gram repetition; an entropy-modulated rule reverses that ranking. On an RTX 2080 Ti, measured generation throughput is 22.8 versus 91.5 token/s; post-generation power readings give rough energy estimates of 2,848 versus 905 mJ/token, without power integration over generation.",
+    "arxiv_id": "2605.21333",
+    "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+    "MATCHED_TOPIC_LABELS": [
+      "Architecture and Training Dynamics"
+    ],
+    "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+    "HOTSPOT_PAPER_LABELS": [],
+    "HOTSPOT_PAPER_PRIMARY_KIND": null,
+    "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+    "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default",
+    "EVIDENCE": 6,
+    "LOAD": 5,
+    "PROXIMITY": 5,
+    "READ_SCORE": 12.5
+  },
+  "2609.07954": {
+    "ARXIVID": "2609.07954",
+    "COMMENT": "Characterizes exactly when a transport support graph guarantees uniform contraction of gradient perturbations.",
+    "RELEVANCE": 3,
+    "NOVELTY": 8,
+    "PRIMARY_TOPIC_ID": "architecture_training",
+    "MATCHED_TOPIC_IDS": [
+      "architecture_training"
+    ],
+    "TOPIC_MATCH_COMMENT": "Gradient propagation through differentiable layers is the closest topic; the abstract establishes no language-model training setting.",
+    "HOTSPOT_PAPER_TAGS": [],
+    "HOTSPOT_PAPER_COMMENT": "",
+    "SCORE": 11,
+    "authors": [
+      "Dylan Forde"
+    ],
+    "title": "Support Topology and Gradient Mixing in Sinkhorn Layers",
+    "abstract": "Sparse Sinkhorn layers use a fixed support graph to restrict transport between tokens. How does this graph control gradient propagation through the scaling iterations. We develop a fixed-support calculus showing that each row-column cycle induces a row-stochastic operator on column-potential perturbations modulo constants. Its transpose propagates zero-mass reverse-mode cotangents. The finite-cycle operator uses two distinct half-step transport plans; at a balanced fixed point it reduces to a two-step walk determined by a single plan. We derive the accompanying score and marginal source terms and use Dobrushin contraction and minorization to bound homogeneous and source-driven tail cotangents. Our main result characterizes when support and marginals guarantee one-step contraction uniformly over finite scores: every feasible face of the transportation polytope must have pairwise two-hop column overlap. Otherwise, suitable score directions make the contraction coefficient arbitrarily close to one. We extend this analysis to ordered support schedules and derive certificates for partition heat-bath layers, coordinate sweeps, forced shared mass, and register-augmented supports. These results provide mathematical criteria for support design in differentiable transport layers, with guarantees restricted to the fixed-support quotient-gradient component.",
+    "arxiv_id": "2609.07954",
+    "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+    "MATCHED_TOPIC_LABELS": [
+      "Architecture and Training Dynamics"
+    ],
+    "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+    "HOTSPOT_PAPER_LABELS": [],
+    "HOTSPOT_PAPER_PRIMARY_KIND": null,
+    "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+    "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default",
+    "EVIDENCE": 5,
+    "LOAD": 10,
+    "PROXIMITY": 3,
+    "READ_SCORE": 6.0
+  },
+  "2609.07155": {
+    "ARXIVID": "2609.07155",
+    "COMMENT": "Preserves within-token activation-gradient dependence in Fisher-weighted low-rank compression.",
+    "RELEVANCE": 2,
+    "NOVELTY": 6,
+    "PRIMARY_TOPIC_ID": "efficiency_scaling",
+    "MATCHED_TOPIC_IDS": [
+      "efficiency_scaling"
+    ],
+    "TOPIC_MATCH_COMMENT": "Low-rank compression is the nearest category, but the method is developed and evaluated for vision models.",
+    "HOTSPOT_PAPER_TAGS": [],
+    "HOTSPOT_PAPER_COMMENT": "",
+    "SCORE": 8,
+    "authors": [
+      "Moritz Thoma",
+      "Maximilian Groezinger",
+      "Maximilian ForstenhÃ¤usler",
+      "Emad Aghajanzadeh",
+      "Ryan Pegoud",
+      "Manoj Rohit Vemparala",
+      "Pierpaolo Mori",
+      "Alexander Frickenstein",
+      "Daniel Mueller-Gritschneder",
+      "Ulf Schlichtmann"
+    ],
+    "title": "Mind the Approximation: Fisher-Weighted SVD Compression for ViTs",
+    "abstract": "Model compression is key to mitigate deployment challenges of ever growing machine learning models. In this area of research, singular value decomposition (SVD)-based compression offers a compelling trade-off between computational efficiency and model accuracy. Fisher-weighted SVD in particular provides principled, loss-aware compression. However, we find that improving the fidelity of Fisher approximation used in the compression is poorly predictive of post-compression accuracy for Vision Transformers (ViTs). Motivated by this observation, we propose FACTS, a structured Fisher Approximation tailored to Compressing ViTs with Fisher-weighted SVD, which enforces token-local aggregation while preserving within-token activation-gradient dependence. Additionally, we introduce a fast Constrained Rank Search (CoRS), that optimizes layer-wise rank allocation while adhering to a fixed floating point operation (FLOP) constraint. Extensive experiments across ViTs and hybrid architectures demonstrate that FACTS consistently improves accuracy-efficiency trade-offs without requiring finetuning. Notably, it outperforms the strongest SVD baseline by up to +5.8 percentage points (p.p.) Top-1 on Swin-B, with further gains driven by our search method. Code is available at https://github.com/MoritzTho/FACTS.",
+    "arxiv_id": "2609.07155",
+    "PRIMARY_TOPIC_LABEL": "Efficiency, Compression, and Large-Scale Training",
+    "MATCHED_TOPIC_LABELS": [
+      "Efficiency, Compression, and Large-Scale Training"
+    ],
+    "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+    "HOTSPOT_PAPER_LABELS": [],
+    "HOTSPOT_PAPER_PRIMARY_KIND": null,
+    "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+    "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default",
+    "EVIDENCE": 7,
+    "LOAD": 5,
+    "PROXIMITY": 1,
+    "READ_SCORE": 7.5
+  },
+  "2605.08123": {
+    "ARXIVID": "2605.08123",
+    "COMMENT": "Differentiates a fixed-depth Sinkhorn refinement using one reference tile and linear auxiliary memory.",
+    "RELEVANCE": 3,
+    "NOVELTY": 6,
+    "PRIMARY_TOPIC_ID": "training_systems",
+    "MATCHED_TOPIC_IDS": [
+      "training_systems"
+    ],
+    "TOPIC_MATCH_COMMENT": "The central result is a memory-efficient TPU backward-pass implementation, demonstrated on protein sequences outside the language-model scope.",
+    "HOTSPOT_PAPER_TAGS": [],
+    "HOTSPOT_PAPER_COMMENT": "",
+    "SCORE": 9,
+    "authors": [
+      "Dylan Forde"
+    ],
+    "title": "Block-Wise Differentiable Sinkhorn Attention: Tail-Refinement Gradients with a Gap-Aware Dustbin Bridge",
+    "abstract": "We study long-context balanced entropic optimal transport (OT) attention on TPU hardware through a stopped-base, fixed-depth tail-refinement surrogate. After a stopped $T$-step Sinkhorn solve, we unroll a short refinement tail and differentiate that surrogate exactly. For the reported $R=2$ TPU path, the backward pass contains four staircase plan factors. We prove an exact one-reference-tile schedule: the $R=2$ score cotangent is a single reference plan tile times an explicit modifier field built from vector cotangents and dual differences. This yields block-wise cost $O((T+R)LW)$, $O(Ld)$ input storage, and $O(L)$ additional HBM usage for fixed head dimension $d$ and band width $W$ on the balanced fixed-support path. We also formalize the current \\texttt{dustbin\\_block} path as the same unit-target surrogate on an augmented support, so the adjoint schedule lifts to the single-active-dustbin path used in our TPU runs; this bridge is algebraic and does not claim a general KL-unbalanced or arbitrary-capacity gap model. We provide a local surrogate-bias bound, an a posteriori bias certificate, and a projective contraction certificate for strictly positive active blocks. On synthetic masked problems, the optimized kernel matches exact autodiff of the same centered surrogate to within $10^{-5}$--$10^{-10}$. On TPU v6e-8, a four-configuration Pfam screen completes end-to-end, and a promoted balanced $R=2$ run sustains roughly $8.5$ examples per second through a three-hour budget, reaching step $1437$. Held-out Pfam test shards improve reconstruction from $5.57$ to $2.05$ and sparse CE from $5.53$ to $5.30$ relative to step $0$, with CE logged diagnostically rather than optimized directly; target-barycenter alignment metrics do not materially improve, and a deterministic diagonal reference remains stronger on those metrics.",
+    "arxiv_id": "2605.08123",
+    "PRIMARY_TOPIC_LABEL": "Training Algorithms That Change What Is Possible",
+    "MATCHED_TOPIC_LABELS": [
+      "Training Algorithms That Change What Is Possible"
+    ],
+    "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+    "HOTSPOT_PAPER_LABELS": [],
+    "HOTSPOT_PAPER_PRIMARY_KIND": null,
+    "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+    "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default",
+    "EVIDENCE": 6,
+    "LOAD": 9,
+    "PROXIMITY": 2,
+    "READ_SCORE": 6.5
+  },
+  "2609.07821": {
+    "ARXIVID": "2609.07821",
+    "COMMENT": "Compresses selected reasoning steps into latent tokens using trajectory alignment and soft vocabulary supervision.",
+    "RELEVANCE": 4,
+    "NOVELTY": 6,
+    "PRIMARY_TOPIC_ID": "architecture_training",
+    "MATCHED_TOPIC_IDS": [
+      "architecture_training"
+    ],
+    "TOPIC_MATCH_COMMENT": "Latent-token training supplies the architectural connection, but reasoning compression is the core subject and is excluded.",
+    "HOTSPOT_PAPER_TAGS": [],
+    "HOTSPOT_PAPER_COMMENT": "",
+    "SCORE": 10,
+    "authors": [
+      "Xiaoang Xu",
+      "Siyuan Liu",
+      "Shuo Wang",
+      "Junlan Feng",
+      "Fanyu Meng",
+      "Zhu Zhang",
+      "Jixun Wang",
+      "Xiaorong Wang",
+      "Zihan Zhou",
+      "Xin Li",
+      "Chaojun Xiao",
+      "Yiming Zhang",
+      "Huijia Wu",
+      "Liuyu Xiang",
+      "Peipei Li",
+      "Zhaofeng He"
+    ],
+    "title": "A*-Thought-V2: Efficient Latent Reasoning via Geometric Dynamics of LLM",
+    "abstract": "Chain-of-Thought (CoT) improves the reasoning ability of Large Language Models (LLMs) but incurs substantial computation and context costs. Existing methods either lose intermediate information through hard pruning or lack a principled criterion for continuous compression. We present A*-Thought-V2, a geometric dynamics of LLM guided framework that models CoT as a hidden-state trajectory and replaces hard deletion with an explicit-implicit interleaved latent architecture. After projecting question, step, and solution representations into a 3D PCA space, it measures alignment between each local transition and global question-to-solution direction. Aligned steps remain explicit text, whereas deviating steps are compressed into continuous latent tokens. Directional angles capture both local semantics and reasoning dynamics: small angles indicate direct execution and answer formation, while large angles more frequently involve checking, correction, and branch exploration; their temporal variation reveals exploration, convergence, and refinement stages. To train this architecture, we introduce stepwise embedding forcing, which pools each redundant step into a single latent embedding, and label forcing, which supervises that latent token with a soft multi-modal vocabulary distribution instead of a hard one-hot label. Experiments on Qwen3.5-9B and Qwen3.6-27B across six in-domain and out-of-domain benchmarks show that A*-Thought-V2 improves average accuracy by up to 2.6% while reducing response length by up to half, increasing Accuracy per Computation Unit by 2.29$\\times$, and reducing preprocessing and training time by 94.6% and up to 80.3%, respectively. Representation analyses suggest that latent states form a compact region distinct from textual states, while higher entropy at latent-token positions reflects broader soft targets that encourage richer step-level feature learning.",
+    "arxiv_id": "2609.07821",
+    "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+    "MATCHED_TOPIC_LABELS": [
+      "Architecture and Training Dynamics"
+    ],
+    "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+    "HOTSPOT_PAPER_LABELS": [],
+    "HOTSPOT_PAPER_PRIMARY_KIND": null,
+    "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+    "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default",
+    "EVIDENCE": 7,
+    "LOAD": 5,
+    "PROXIMITY": 3,
+    "READ_SCORE": 11.5
+  },
+  "2608.19168": {
+    "ARXIVID": "2608.19168",
+    "COMMENT": "A single-example pretraining counterfactual separates transient memorization from persistent weight displacement across matched seeds.",
+    "RELEVANCE": 9,
+    "NOVELTY": 9,
+    "PRIMARY_TOPIC_ID": "architecture_training",
+    "MATCHED_TOPIC_IDS": [
+      "architecture_training",
+      "efficiency_scaling"
+    ],
+    "TOPIC_MATCH_COMMENT": "Controlled pretraining perturbations test learning, forgetting, and loss-basin geometry; direct attribution to training data provides the secondary match.",
+    "HOTSPOT_PAPER_TAGS": [
+      "new_frontier",
+      "daily_hot"
+    ],
+    "HOTSPOT_PAPER_COMMENT": "Broadly important today and potentially frontier-opening: A single-example pretraining counterfactual separates transient memorization from persistent weight displacement across matched seeds.",
+    "SCORE": 18,
+    "authors": [
+      "Zachary Speck",
+      "Asa Shepard"
+    ],
+    "title": "Learned, Then Lost: A Measured Single-Example Counterfactual in Pre-training",
+    "abstract": "A single training example's contribution to a finished model is normally estimated rather than measured, because measuring it takes two expensive full pre-training runs that differ in one row of one batch. We ran that counterfactual 24 times at a small scale. We trained 32 GPT-2 models at 124M parameters from scratch on OpenWebText, over four conditions and eight seeds. At step 200 of 9,536, at peak learning rate, we replaced one row of a 256-row batch with a fixed context injection carrying a 194-token passage. The three injected conditions are: 1. fluent prose with a corpus-attested subject, 2. fluent prose with a fabricated subject matched to it within 0.14% on full-batch gradient delta, and 3. random keyboard characters. The fourth condition is an uninjected twin. The passage is learned from one exposure and then decays. Fifty steps after injection, the arm that saw a passage predicts it better than the arm that did not by 0.039 and 0.044 nats of cross-entropy on the passage, at eight of eight seeds with p < 0.0001. At the final step we do not detect that difference for either passage, at p = 0.25 and p = 0.71, against minimum detectable effects of 0.025 and 0.079 nats, nor between the two passages, at p = 0.54. Every geometric measure we report is taken after that decay. Our pre-registered contrast on interpolation loss barrier is +0.0068 with p = 0.509, against a minimum detectable effect of 0.032 barrier units. Held-out cross-entropy is -0.00044 with p = 0.310. Per-layer centered kernel alignment does not detectably separate any condition at any layer. Weight displacement reaches 44.1% of the seed-to-seed Euclidean distance and is 92% settled by the midpoint of training, while the barrier reaches 3.0% of the seed-to-seed barrier. Those two figures sit roughly 15 times apart, and that is a lower bound. The injection relocates the model within its basin without moving it out.",
+    "arxiv_id": "2608.19168",
+    "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+    "MATCHED_TOPIC_LABELS": [
+      "Architecture and Training Dynamics",
+      "Efficiency, Compression, and Large-Scale Training"
+    ],
+    "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+    "HOTSPOT_PAPER_LABELS": [
+      "New Frontier Papers",
+      "Daily Hot Papers"
+    ],
+    "HOTSPOT_PAPER_PRIMARY_KIND": "new_frontier",
+    "HOTSPOT_PAPER_PRIMARY_LABEL": "New Frontier Papers",
+    "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "heuristic",
+    "EVIDENCE": 8,
+    "LOAD": 6,
+    "PROXIMITY": 9,
+    "READ_SCORE": 23.0
+  },
+  "2609.07755": {
+    "ARXIVID": "2609.07755",
+    "COMMENT": "Bounds how layerwise function variation evolves under gradient descent with weight decay.",
+    "RELEVANCE": 3,
+    "NOVELTY": 6,
+    "PRIMARY_TOPIC_ID": "architecture_training",
+    "MATCHED_TOPIC_IDS": [
+      "architecture_training"
+    ],
+    "TOPIC_MATCH_COMMENT": "Optimization dynamics is the closest category, but the theory concerns general squared-loss networks without a language-model training demonstration.",
+    "HOTSPOT_PAPER_TAGS": [],
+    "HOTSPOT_PAPER_COMMENT": "",
+    "SCORE": 9,
+    "authors": [
+      "Yuqing Wang",
+      "Ioannis G. Kevrekidis",
+      "Mikhail Belkin"
+    ],
+    "title": "A Theoretical Analysis of Generalization Dynamics in Neural Networks under Gradient Descent with Weight Decay",
+    "abstract": "Understanding generalization remains a central challenge in machine learning because it requires jointly considering data, architecture, and training dynamics. In this paper, we develop a theoretical framework that characterizes how these factors jointly shape generalization performance throughout training. More precisely, we study a broad class of neural networks trained under the $\\ell^2$ loss by gradient descent (GD) with weight decay, and prove the convergence of GD to a neighbourhood of the global minimizers of the empirical loss. By partitioning the space based on the input data, we then decompose the population error into data error, optimization error, and prediction variation error, and bound them separately. In particular, for the prediction variation error, which measures the oscillations of the learned function, we propose (local) approximate homogeneity and derive explicit cellwise and layerwise bounds for its evolution along the training trajectory. These bounds yield two important implications: a necessary condition of improved generalization explains differences in layerwise generalization behavior; a sufficient condition describes delayed generalization and provides a theoretical characterization of grokking.",
+    "arxiv_id": "2609.07755",
+    "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+    "MATCHED_TOPIC_LABELS": [
+      "Architecture and Training Dynamics"
+    ],
+    "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+    "HOTSPOT_PAPER_LABELS": [],
+    "HOTSPOT_PAPER_PRIMARY_KIND": null,
+    "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+    "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default",
+    "EVIDENCE": 5,
+    "LOAD": 9,
+    "PROXIMITY": 3,
+    "READ_SCORE": 6.5
+  },
+  "2507.20088": {
+    "ARXIVID": "2507.20088",
+    "COMMENT": "Defines implicit graph layers through stationary dynamics and derives equivalent global systems for differentiation.",
+    "RELEVANCE": 2,
+    "NOVELTY": 7,
+    "PRIMARY_TOPIC_ID": "architecture_training",
+    "MATCHED_TOPIC_IDS": [
+      "architecture_training"
+    ],
+    "TOPIC_MATCH_COMMENT": "Implicit-layer theory is the nearest architectural category; the contribution concerns graph geometry and differential equations outside language-model training.",
+    "HOTSPOT_PAPER_TAGS": [],
+    "HOTSPOT_PAPER_COMMENT": "",
+    "SCORE": 9,
+    "authors": [
+      "Dmitry Pasechnyuk-Vilensky",
+      "Martin TakÃ¡Ä"
+    ],
+    "title": "Learning Latent Graph Geometry via Fixed-Point SchrÃ¶dinger-Type Activation: A Theoretical Study",
+    "abstract": "We study neural architectures in which each hidden layer is defined by the stationary state of a dissipative SchrÃ¶dinger-type dynamics on a learned latent graph. On stable branches, the local stationary problem defines a differentiable implicit graph layer. To learn the graph itself, we optimize over the stratified moduli space of weighted graphs and equip each stratum with a non-degenerate KÃ¤hler-Hessian metric that keeps natural-gradient descent and face crossing well posed. We then show that a multilayer stationary network is equivalent to an exact global stationary problem on a supra-graph, and that it admits a penalized global relaxation whose stationary states converge to the exact one as the penalty parameter tends to infinity. Reverse-mode differentiation is recovered as the adjoint of the exact global system, and the penalized adjoint converges to it in the same limit. Finally, under finite-dimensional strong-monotonicity and admissible-lift assumptions, the corresponding represented hypothesis classes coincide among resolvent feed-forward networks, graph-stationary networks, supra-graph stationary systems, and sheaf-based architectures with unitary connection. The resulting structural identifications yield complexity bounds controlled by sparse graph or supra-graph geometry rather than dense ambient connectivity.",
+    "arxiv_id": "2507.20088",
+    "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+    "MATCHED_TOPIC_LABELS": [
+      "Architecture and Training Dynamics"
+    ],
+    "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+    "HOTSPOT_PAPER_LABELS": [],
+    "HOTSPOT_PAPER_PRIMARY_KIND": null,
+    "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+    "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default",
+    "EVIDENCE": 5,
+    "LOAD": 10,
+    "PROXIMITY": 1,
+    "READ_SCORE": 3.0
+  },
+  "2609.07814": {
+    "ARXIVID": "2609.07814",
+    "COMMENT": "Compact-support routing localizes the neural tangent kernel while shared layers preserve capacity across regions.",
+    "RELEVANCE": 2,
+    "NOVELTY": 7,
+    "PRIMARY_TOPIC_ID": "moe_training",
+    "MATCHED_TOPIC_IDS": [
+      "moe_training"
+    ],
+    "TOPIC_MATCH_COMMENT": "Expert routing is structurally central, but the trained models are PDE surrogates, so the language-model scope excludes it.",
+    "HOTSPOT_PAPER_TAGS": [],
+    "HOTSPOT_PAPER_COMMENT": "",
+    "SCORE": 9,
+    "authors": [
+      "Hanwen Wang",
+      "Paris Perdikaris"
+    ],
+    "title": "Latent-MoE: Domain-Aware Mixture-of-Experts for PDEs with Multi-Regime Physics",
+    "abstract": "Physics-informed neural networks (PINNs) struggle on PDEs whose governing physics varies across the domain. We trace this to a structural property of standard coordinate networks: their neural tangent kernel (NTK) is translation-variant and lets training points of large coordinate magnitude disproportionately influence predictions elsewhere, producing long-range coupling and gradient conflict during training. We show analytically and empirically that mixture-of-experts (MoE) architectures with centered, compact-support routers yield a uniformly banded NTK whose kernel-regression weights decay exponentially with distance, localizing the learning. Building on this, we propose \\emph{Latent-MoE}, which interleaves domain-aware MoE blocks within a shared backbone. Unlike FB-PINNs or X-PINNs, which rigidly partition both the domain and the parameters so that the parameters on different subdomains are updated independently, Latent-MoE is designed to preserve the localization benefit of domain-aware routing while allowing capacity to flow across regions through the shared backbone. On standard homogeneous-physics benchmarks Latent-MoE is competitive with established baselines; on benchmarks with multi-stage time-variable physics, where global models and rigid domain decompositions both fall into spurious solutions, it improves over them by more than an order of magnitude, with markedly reduced gradient conflict during training.",
+    "arxiv_id": "2609.07814",
+    "PRIMARY_TOPIC_LABEL": "MoE Where It Changes the Design Space",
+    "MATCHED_TOPIC_LABELS": [
+      "MoE Where It Changes the Design Space"
+    ],
+    "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+    "HOTSPOT_PAPER_LABELS": [],
+    "HOTSPOT_PAPER_PRIMARY_KIND": null,
+    "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+    "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default",
+    "EVIDENCE": 7,
+    "LOAD": 7,
+    "PROXIMITY": 1,
+    "READ_SCORE": 6.5
+  },
+  "2605.17232": {
+    "ARXIVID": "2605.17232",
+    "COMMENT": "Removes vocabulary-size dependence from discrete-diffusion convergence guarantees for both masked and uniform priors.",
+    "RELEVANCE": 8,
+    "NOVELTY": 9,
+    "PRIMARY_TOPIC_ID": "architecture_training",
+    "MATCHED_TOPIC_IDS": [
+      "architecture_training"
+    ],
+    "TOPIC_MATCH_COMMENT": "The theory changes convergence guarantees for token diffusion, including masked priors used in language models; its contribution is primarily mathematical.",
+    "HOTSPOT_PAPER_TAGS": [
+      "new_frontier"
+    ],
+    "HOTSPOT_PAPER_COMMENT": "Potentially frontier-opening: Removes vocabulary-size dependence from discrete-diffusion convergence guarantees for both masked and uniform priors.",
+    "SCORE": 17,
+    "authors": [
+      "Kelvin Kan",
+      "Xingjian Li",
+      "Benjamin J. Zhang",
+      "Tuhin Sahai",
+      "Stanley Osher",
+      "Markos A. Katsoulakis"
+    ],
+    "title": "Vocabulary-size-independent Convergence of Discrete Diffusion Models: adjoint equations induce the right space",
+    "abstract": "Discrete diffusion has become a leading framework for generative modeling in various applications including language, vision, and biology. Existing convergence theory, however, exhibits fundamental limitations. KL-based analyses diverge under singular priors such as the masked distribution, while bounds in total variation (TV) depend on the vocabulary size $S$ and become vacuous for modern language tasks, where vocabularies contain hundreds of thousands of tokens. We develop a unified adjoint-equation-based framework that establishes vocabulary-size-independent convergence guarantees in any integral probability metric (IPM). To the best of our knowledge, our bounds are the first to be entirely free of $S$ and applicable to both masked and uniform priors. Importantly, our results can extend existing step complexity guarantees to any IPM. Also, our theory relies only on a single standard rate-matrix regularity assumption and applies to general priors. Five novel techniques drive our improvements: 1. working in the space of observables via adjoint equations rather than directly with probability measures; 2. a regularity analysis that yields bounds on any IPM; 3. a coupling argument that removes $S$-dependence under uniform transitions; and 4. score-marginal cancellation and 5. exit-routing techniques that remove $S$-dependence under masked transitions. Our framework thus sharply departs from prior analyses and avoids the shortcomings of pathspace-KL and existing TV-based approaches. Beyond convergence bounds, our framework provides a versatile toolkit for further theoretical study of discrete diffusion models, including principled choices of loss functions and vocabulary-size-independent step complexity.",
+    "arxiv_id": "2605.17232",
+    "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+    "MATCHED_TOPIC_LABELS": [
+      "Architecture and Training Dynamics"
+    ],
+    "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+    "HOTSPOT_PAPER_LABELS": [
+      "New Frontier Papers"
+    ],
+    "HOTSPOT_PAPER_PRIMARY_KIND": "new_frontier",
+    "HOTSPOT_PAPER_PRIMARY_LABEL": "New Frontier Papers",
+    "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "heuristic",
+    "EVIDENCE": 5,
+    "LOAD": 10,
+    "PROXIMITY": 7,
+    "READ_SCORE": 15.0
+  },
+  "2609.06934": {
+    "ARXIVID": "2609.06934",
+    "COMMENT": "Tests how continuous exposure to a safety objective during pretraining changes the persistence of learned refusal.",
+    "RELEVANCE": 4,
+    "NOVELTY": 8,
+    "PRIMARY_TOPIC_ID": "architecture_training",
+    "MATCHED_TOPIC_IDS": [
+      "architecture_training"
+    ],
+    "TOPIC_MATCH_COMMENT": "Pretraining geometry and scheduling provide the closest connection, but safety robustness remains the core subject and is explicitly excluded.",
+    "HOTSPOT_PAPER_TAGS": [
+      "daily_hot"
+    ],
+    "HOTSPOT_PAPER_COMMENT": "Challenges the durability of post-hoc refusal with multi-family evidence and controlled safety co-training experiments extending to 6.9B parameters.",
+    "SCORE": 12,
+    "authors": [
+      "Srikanth Malla",
+      "Chiho Choi",
+      "Joon Hee Choi"
+    ],
+    "title": "The Geometry of Refusal: Why Post-Hoc Safety Is Fragile and Pretraining-Time Safety Persists",
+    "abstract": "Post-hoc safety training (RLHF, DPO) is the dominant way to align large language models, yet jailbreaks (Zou et al., 2023b), fine-tuning attacks (Qi et al., 2024), and activation-space probes (Arditi et al., 2024) keep recovering the behaviors it was meant to remove. We give this fragility one geometric explanation and trace it to when, during pretraining, safety can take hold. We measure the safety update $Î= W_{\\text{safe}} - W_{\\text{base}}$ against the curvature of the model's capabilities (the empirical Fisher of a capability loss). Post-hoc safety consistently lands in a suppression regime: $Î$ is nearly orthogonal to the capability directions, and its small in-subspace part concentrates on a few high-curvature ones. The update is thin but sharp, a refusal gate laid over intact capabilities rather than erasure of them. A kernel-immobility lemma explains why such an update can only mask a capability, not remove it, so a little benign fine-tuning restores it: 100 steps of benign fine-tuning collapse refusal on Qwen-2.5-7B and Llama-3-8B Instruct at preserved capability, a signature that replicates across five model families. Following the account into pretraining, a 267-checkpoint sweep of OLMo-2-1B (OLMo et al., 2025) shows the substrate that safety engages emerging in a sharp transition between roughly 6B and 60B pretraining tokens. We then use the account constructively: models trained from scratch with safety co-training spread continuously across pretraining reach 87 to 98% refusal whose post-attack level holds at 84 to 91% at every scale, an erosion of 2 to 14 pp against 35 to 38 pp for post-hoc installs, at capability matched or better than an LM-only baseline and holding from 410M to 6.9B, whereas a compute-matched windowed schedule installs no lasting refusal. Persistence of the safety signal across pretraining, not its timing, is what buys attack robustness.",
+    "arxiv_id": "2609.06934",
+    "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+    "MATCHED_TOPIC_LABELS": [
+      "Architecture and Training Dynamics"
+    ],
+    "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+    "HOTSPOT_PAPER_LABELS": [
+      "Daily Hot Papers"
+    ],
+    "HOTSPOT_PAPER_PRIMARY_KIND": "daily_hot",
+    "HOTSPOT_PAPER_PRIMARY_LABEL": "Daily Hot Papers",
+    "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "llm_exact",
+    "EVIDENCE": 9,
+    "LOAD": 7,
+    "PROXIMITY": 3,
+    "READ_SCORE": 12.5
+  },
+  "2609.07406": {
+    "ARXIVID": "2609.07406",
+    "COMMENT": "A spectral training regularizer reduces rank collapse in continuous latent trajectories.",
+    "RELEVANCE": 4,
+    "NOVELTY": 6,
+    "PRIMARY_TOPIC_ID": "architecture_training",
+    "MATCHED_TOPIC_IDS": [
+      "architecture_training"
+    ],
+    "TOPIC_MATCH_COMMENT": "Latent-state regularization supplies the architectural connection; implicit chain-of-thought reasoning remains the excluded core subject.",
+    "HOTSPOT_PAPER_TAGS": [],
+    "HOTSPOT_PAPER_COMMENT": "",
+    "SCORE": 10,
+    "authors": [
+      "Yuwen Hao",
+      "Menglin Yang"
+    ],
+    "title": "Think Wider: Mitigating Latent Rank Collapse in Implicit Chain-of-Thought Reasoning",
+    "abstract": "Chain-of-thought (CoT) reasoning improves the reasoning ability of large language models by introducing intermediate computation, but explicit rationales increase decoding length, latency, and context cost. Implicit CoT offers a more efficient alternative by moving intermediate reasoning into continuous latent states. However, latent reasoning can be unstable: successive latent states may become overly similar and collapse toward a shared dominant direction, reducing the diversity of the reasoning trajectory. In this work, we identify $\\textit{latent rank collapse}$ and propose $\\textbf{WIDER}$, a lightweight spectral regularizer for implicit CoT. During training, WIDER estimates the shared direction of each latent trajectory and penalizes projections onto this direction, encouraging latent states to span a broader representational subspace. The method is plug-and-play and leaves the backbone model, latent schedule, and inference-time decoding procedure unchanged. We further formulate this collapse as a geometric bottleneck in implicit reasoning, casting its mitigation as a training-time regularization problem rather than an inference-time decoding change. Extensive experiments show that WIDER improves matched implicit CoT baselines, while mechanistic analyses reveal higher effective rank, lower dominant-direction energy, and reduced redundancy among latent steps. These results highlight latent subspace utilization as an important factor for efficient continuous reasoning, providing a geometric perspective for analyzing and improving implicit CoT. Code is available at https://github.com/whitesweater/WIDER.",
+    "arxiv_id": "2609.07406",
+    "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+    "MATCHED_TOPIC_LABELS": [
+      "Architecture and Training Dynamics"
+    ],
+    "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+    "HOTSPOT_PAPER_LABELS": [],
+    "HOTSPOT_PAPER_PRIMARY_KIND": null,
+    "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+    "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default",
+    "EVIDENCE": 5,
+    "LOAD": 5,
+    "PROXIMITY": 3,
+    "READ_SCORE": 9.5
+  },
+  "2609.07961": {
+    "ARXIVID": "2609.07961",
+    "COMMENT": "Introduces invertible attention and learnable queries into graph normalizing flows.",
+    "RELEVANCE": 2,
+    "NOVELTY": 5,
+    "PRIMARY_TOPIC_ID": "architecture_training",
+    "MATCHED_TOPIC_IDS": [
+      "architecture_training"
+    ],
+    "TOPIC_MATCH_COMMENT": "The nearest topic is architecture, but the proposed models perform graph density modeling outside language-model training.",
+    "HOTSPOT_PAPER_TAGS": [],
+    "HOTSPOT_PAPER_COMMENT": "",
+    "SCORE": 7,
+    "authors": [
+      "Thanh-Dat Truong",
+      "Sarah Alharbi",
+      "Susan Gauch",
+      "Xinghui Zhao",
+      "Marios Savvides",
+      "Khoa Luu"
+    ],
+    "title": "$Î±$-Graph: Attention-Infused Normalizing Flow Approach to Tractable Graph Modeling",
+    "abstract": "Graph modeling, a crucial task for representing complex relationships in graph-structured data, has achieved significant success in recent years. However, current graph modeling methods rely on traditional Graph Neural Networks and pre-training approaches to implicitly learn the underlying relational structure of graph data. Thus, these prior methods cannot capture the complex graph structure and correlations among inputs. In this paper, we introduce a novel Attention-based Normalizing Flow-based Approach\\footnote{Our implementation and models will be released publicly for research reproducibility.} (ANFA or $Î±$) that provides an explicit, interpretable, and tractable Graph Modeling ($Î±$-Graph). In particular, we propose a new Unconditional Graph Normalizing Flow with an Invertible Attention Mechanism to capture the complex relational structure of graph data. To further enhance the expressiveness of the model, we introduce Conditional Graph Normalizing Flow with Learnable Queries that enables efficient modeling of correlations in graph-structured data. We show that our Conditional Graph Normalizing Flows behave similarly to Unconditional Graph Normalizing Flows, enhancing expressiveness while maintaining training stability and efficiency. Our experimental results on three benchmarks will illustrate the effectiveness and the state-of-the-art (SoTA) performance of the proposed $Î±$-Graph method.",
+    "arxiv_id": "2609.07961",
+    "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+    "MATCHED_TOPIC_LABELS": [
+      "Architecture and Training Dynamics"
+    ],
+    "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+    "HOTSPOT_PAPER_LABELS": [],
+    "HOTSPOT_PAPER_PRIMARY_KIND": null,
+    "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+    "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default",
+    "EVIDENCE": 5,
+    "LOAD": 6,
+    "PROXIMITY": 1,
+    "READ_SCORE": 5.0
+  },
+  "2609.07666": {
+    "ARXIVID": "2609.07666",
+    "COMMENT": "Replaces learning-rate search with adaptive trust-region control in forward-only full-parameter optimization.",
+    "RELEVANCE": 7,
+    "NOVELTY": 6,
+    "PRIMARY_TOPIC_ID": "architecture_training",
+    "MATCHED_TOPIC_IDS": [
+      "architecture_training"
+    ],
+    "TOPIC_MATCH_COMMENT": "The optimizer is the core contribution, although its practical evidence is limited to two small models on one fine-tuning dataset.",
+    "HOTSPOT_PAPER_TAGS": [],
+    "HOTSPOT_PAPER_COMMENT": "",
+    "SCORE": 13,
+    "authors": [
+      "Yuyang Wang",
+      "Haoyu Yao",
+      "Pengcheng Xie"
+    ],
+    "title": "MpSub: A Momentum $p$-Dimensional Subspace Trust-Region Method for Derivative-Free Fine-Tuning of Large Language Models",
+    "abstract": "Full-parameter fine-tuning of large language models has substantial memory costs because backpropagation stores activations and gradients. Zeroth-order optimization avoids this by estimating update directions from loss evaluations, but existing methods require tuning a sensitive learning rate for each model and task. We propose the momentum $p$-dimensional subspace trust-region method (MpSub). At each iteration, MpSub searches within a $p$-dimensional subspace: one direction preserves historical momentum from the most recent accepted step, while the remaining directions explore via fresh random sampling. The subspace gradient is estimated by central differences, a trial step is computed from a linear trust-region model, and the trust-region radius adapts according to the agreement between predicted and observed loss reduction, eliminating the learning rate. For LLM fine-tuning, evaluations within an iteration share a minibatch, and directions are regenerated in place from seeds, using forward passes alone. For smooth deterministic objectives under unorthogonalized Gaussian directions, we bound the finite-difference error, quantify gradient energy captured by the subspace, and prove that $\\lim_{k\\to\\infty} \\|\\nabla f(x_k)\\|_2 = 0$ almost surely under a safeguarded radius update. Under a matched budget of 8,400 training-objective forward passes, we fine-tune OPT-125M and OPT-350M on CommitmentBank. With the same preset parameters at both model sizes, MpSub attains mean test accuracies of 0.673 and 0.690 over three seeds, matching tuned MeZO (0.685) without any learning-rate search.",
+    "arxiv_id": "2609.07666",
+    "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+    "MATCHED_TOPIC_LABELS": [
+      "Architecture and Training Dynamics"
+    ],
+    "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+    "HOTSPOT_PAPER_LABELS": [],
+    "HOTSPOT_PAPER_PRIMARY_KIND": null,
+    "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+    "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default",
+    "EVIDENCE": 4,
+    "LOAD": 7,
+    "PROXIMITY": 6,
+    "READ_SCORE": 13.5
+  },
+  "2609.07222": {
+    "ARXIVID": "2609.07222",
+    "COMMENT": "Conditions cross-attention on wall distance to change which geometric information each query retrieves.",
+    "RELEVANCE": 2,
+    "NOVELTY": 5,
+    "PRIMARY_TOPIC_ID": "architecture_training",
+    "MATCHED_TOPIC_IDS": [
+      "architecture_training"
+    ],
+    "TOPIC_MATCH_COMMENT": "Attention and expert conditioning are architectural interventions, but their subject is 3D flow prediction rather than language-model training.",
+    "HOTSPOT_PAPER_TAGS": [],
+    "HOTSPOT_PAPER_COMMENT": "",
+    "SCORE": 7,
+    "authors": [
+      "Sanghyeon Kim",
+      "Sunwoong Yang",
+      "Namwoo Kang"
+    ],
+    "title": "Distance-Aware Attention and Wall-Distance Expert Routing for Transformer-Based 3D Flow Prediction",
+    "abstract": "Transformer surrogates for 3D flow prediction compress an industrial mesh into a small set of tokens from which every prediction point reads. Two operations follow: the retrieval step in which a point gathers information from the compressed representation, and the feed-forward layer that transforms what it retrieved. In current backbones both are blind to where the point sits in the flow. We condition both on wall-related physical signals. Distance-aware cross-attention (DA-CA) reshapes each volume query by its wall distance before retrieval, so that a point deep in the boundary layer draws different geometric information than one in the outer flow. Surface-volume mixture-of-experts (SVMoE) replaces the shared feed-forward layer with a small set of experts, routed by wall distance for volume points and by local geometry for surface points. Neither mechanism is tied to one architecture, so we apply both unchanged to AB-UPT and Transolver-3. On DrivAerML with 50 training cases, DA-CA reduces the volume pressure error by 10.1%, and DA-CA and SVMoE together reduce it by 12.5%; DA-CA improves the near-wall region at some cost in the far region, which SVMoE recovers, and the volume experts settle into near-wall, transition, and free-stream bands without routing supervision. Retrained on 300 cases, the conditioning improves every field quantity, reducing volume pressure and velocity errors by 33.1% and 18.6% on AB-UPT and by 21.4% and 21.3% on Transolver-3. Under Leave-One-Body-Out evaluation on DrivAerNet++, it reduces the volume pressure error on unseen body types by up to 14.2%.",
+    "arxiv_id": "2609.07222",
+    "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+    "MATCHED_TOPIC_LABELS": [
+      "Architecture and Training Dynamics"
+    ],
+    "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+    "HOTSPOT_PAPER_LABELS": [],
+    "HOTSPOT_PAPER_PRIMARY_KIND": null,
+    "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+    "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default",
+    "EVIDENCE": 8,
+    "LOAD": 5,
+    "PROXIMITY": 1,
+    "READ_SCORE": 8.5
+  },
+  "2609.07008": {
+    "ARXIVID": "2609.07008",
+    "COMMENT": "Reuses offline local-head contributions while repairing RoPE positions within a packed MLA cache.",
+    "RELEVANCE": 3,
+    "NOVELTY": 4,
+    "PRIMARY_TOPIC_ID": "efficiency_scaling",
+    "MATCHED_TOPIC_IDS": [
+      "efficiency_scaling"
+    ],
+    "TOPIC_MATCH_COMMENT": "Cache reuse is the nearest efficiency category, but the contribution is long-context serving throughput and is excluded.",
+    "HOTSPOT_PAPER_TAGS": [],
+    "HOTSPOT_PAPER_COMMENT": "",
+    "SCORE": 7,
+    "authors": [
+      "Yang Liu",
+      "Zhaokai Luo",
+      "Huayi Jin",
+      "Ruozhou He",
+      "Chenchen Hong",
+      "Mingxiao Ma",
+      "Biao Zhang",
+      "Zhiyong Wang",
+      "Boyu Wang",
+      "Guanjie Chen",
+      "Yifei Liu",
+      "Tao Xie",
+      "Junhao Hu"
+    ],
+    "title": "RedKnot-MLA: Multi-Head Offline-Online Reuse for DeepSeek-V4 Long-Context Serving",
+    "abstract": "Multi-head latent attention (MLA) exposes many logical query heads through one packed latent KV stream. This representation is memory efficient, but it removes the physical per-head cache boundary assumed by conventional head-wise reuse. We present our system, a DeepSeek-V4 realization of RedKnot's head-aware reuse principle. Each immutable document is processed offline at canonical position zero; certified Local-head contributions are retained as MLA-Off. At serving time, query-side RoPE relocation restores the document's request position, a small Global-head set and protected Local token rows are recomputed as MLA-Online, and the two paths are merged before a single shared output projection. The packed MLA latent is never split. DeepSeek-V4-Flash uses 37 reusable layers and a 56/8 Local/Global partition, giving a 75.29% analytic logical head-row ceiling; the Pro-0813 profile uses 55 layers and 112/16 heads, giving 78.89%. Frozen Flash operating points show hot-artifact TTFT speedups of 2.02-3.84x. At 256K, the archived three-dataset study reports an aggregate F1 change of +3.24 percentage points, an EM change of +4.16 points, and a 78.7-79.5% analytic major-operator arithmetic saving, while one dataset decreases by 2.81 F1 points. A separate author-reported 256K hot-artifact QPS measurement is approximately 2.0x; because its raw concurrency trace is not included in this bundle, we mark it as preliminary rather than archived evidence. We describe the factorization, position repair, token-row closure, sparse-MoE support, TP8 integration, and the measurement boundaries needed to interpret these results.",
+    "arxiv_id": "2609.07008",
+    "PRIMARY_TOPIC_LABEL": "Efficiency, Compression, and Large-Scale Training",
+    "MATCHED_TOPIC_LABELS": [
+      "Efficiency, Compression, and Large-Scale Training"
+    ],
+    "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+    "HOTSPOT_PAPER_LABELS": [],
+    "HOTSPOT_PAPER_PRIMARY_KIND": null,
+    "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+    "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default",
+    "EVIDENCE": 7,
+    "LOAD": 6,
+    "PROXIMITY": 2,
+    "READ_SCORE": 9.0
+  },
+  "2609.07876": {
+    "ARXIVID": "2609.07876",
+    "COMMENT": "Shows adjacent layers selectively cancel and reinforce residual subspaces, with this correction mechanism emerging during pretraining.",
+    "RELEVANCE": 10,
+    "NOVELTY": 9,
+    "PRIMARY_TOPIC_ID": "architecture_training",
+    "MATCHED_TOPIC_IDS": [
+      "architecture_training"
+    ],
+    "TOPIC_MATCH_COMMENT": "Explains how transformer layers organize computation and how that organization develops during training, directly matching the reader's centre.",
+    "HOTSPOT_PAPER_TAGS": [
+      "new_frontier",
+      "daily_hot"
+    ],
+    "HOTSPOT_PAPER_COMMENT": "Broadly important today and potentially frontier-opening: Shows adjacent layers selectively cancel and reinforce residual subspaces, with this correction mechanism emerging during pretraining.",
+    "SCORE": 19,
+    "authors": [
+      "Arjun Patrawala",
+      "Jiahai Feng",
+      "Erik Jones",
+      "Jacob Steinhardt"
+    ],
+    "title": "LLM Layers Immediately Correct Each Other",
+    "abstract": "Recent methods in language model interpretability employ techniques such as sparse autoencoders to decompose residual stream contributions into linear, semantically meaningful features. Such methods are commonly interpreted as identifying features that persist in the residual stream and that subsequent layers build upon. We challenge this view by identifying the Transformer Layer Correction Mechanism (TLCM), wherein adjacent transformer layers systematically counteract portions of each other's contributions. TLCM appears in 5 out of 7 major open-source model families and activates across nearly all tokens in diverse texts. We show that TLCM emerges during pretraining, operates most strongly on contextually dependent tokens, and adaptively calibrates its correction strength based on the preceding layer's output. Using the layer Jacobian, we further show that TLCM selectively corrects specific subspaces while reinforcing others, which we interpret through a ``propose-and-reject'' framework in which layers propose candidate features and subsequent layers selectively remove inappropriate ones. This dynamic suggests that the residual stream at any layer contains transient proposals alongside persistent features, helping explain why SAE feature descriptions often have low specificity, why effective model steering requires extreme feature amplification, and why transcoders hold a theoretical advantage over SAEs.",
+    "arxiv_id": "2609.07876",
+    "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+    "MATCHED_TOPIC_LABELS": [
+      "Architecture and Training Dynamics"
+    ],
+    "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+    "HOTSPOT_PAPER_LABELS": [
+      "New Frontier Papers",
+      "Daily Hot Papers"
+    ],
+    "HOTSPOT_PAPER_PRIMARY_KIND": "new_frontier",
+    "HOTSPOT_PAPER_PRIMARY_LABEL": "New Frontier Papers",
+    "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "heuristic",
+    "EVIDENCE": 8,
+    "LOAD": 6,
+    "PROXIMITY": 10,
+    "READ_SCORE": 25.0
+  },
+  "2607.27077": {
+    "ARXIVID": "2607.27077",
+    "COMMENT": "Uses continuity along the optimization trajectory to maintain equilibrium sampling throughout energy-based-model training.",
+    "RELEVANCE": 2,
+    "NOVELTY": 7,
+    "PRIMARY_TOPIC_ID": "architecture_training",
+    "MATCHED_TOPIC_IDS": [
+      "architecture_training"
+    ],
+    "TOPIC_MATCH_COMMENT": "The closest category is training algorithms, but the demonstrated models are RBMs for scientific and tabular data outside the language-model scope.",
+    "HOTSPOT_PAPER_TAGS": [],
+    "HOTSPOT_PAPER_COMMENT": "",
+    "SCORE": 9,
+    "authors": [
+      "Nicolas BÃ©reux",
+      "AurÃ©lien Decelle",
+      "Cyril Furtlehner",
+      "Beatriz Seoane"
+    ],
+    "title": "Equilibrium Training of Energy-Based Models with Parallel Trajectory Tempering",
+    "abstract": "Energy-Based Models (EBMs) provide an interpretable framework for generative modeling of scientific data, but poor Markov Chain Monte Carlo mixing often limits their reliability. We introduce a training algorithm based on Parallel Trajectory Tempering (PTT), which exploits the continuity of the optimization path to maintain equilibrium sampling throughout learning. This enables stable and fast training on highly multimodal and data-scarce scientific datasets. Combined with reservoir sampling and adaptive optimization, PTT has a computational cost comparable to Persistent Contrastive Divergence, making it a practical replacement for standard training methods. It also provides direct estimates of thermalization times, equilibrium samples from trained models, and accurate log-likelihoods at essentially no additional cost. Experiments on Restricted Boltzmann Machines show that PTT consistently outperforms existing EBM training approaches. On discrete tabular data, it also surpasses state-of-the-art deep generative models, yielding higher-quality samples and greater robustness to overfitting and limited data. Our results make equilibrium maximum-likelihood training of EBMs practical and computationally efficient.",
+    "arxiv_id": "2607.27077",
+    "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+    "MATCHED_TOPIC_LABELS": [
+      "Architecture and Training Dynamics"
+    ],
+    "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+    "HOTSPOT_PAPER_LABELS": [],
+    "HOTSPOT_PAPER_PRIMARY_KIND": null,
+    "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+    "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default",
+    "EVIDENCE": 6,
+    "LOAD": 7,
+    "PROXIMITY": 1,
+    "READ_SCORE": 5.5
+  },
+  "2609.06898": {
+    "ARXIVID": "2609.06898",
+    "COMMENT": "Optimizes token allocation at fixed vocabulary size using exact-segmentation exposure and dependency-aware BPE pruning.",
+    "RELEVANCE": 7,
+    "NOVELTY": 6,
+    "PRIMARY_TOPIC_ID": "architecture_training",
+    "MATCHED_TOPIC_IDS": [
+      "architecture_training"
+    ],
+    "TOPIC_MATCH_COMMENT": "Tokenizer construction changes a model-building decision, although the demonstrated benefit concerns text compression and depends on the comparison regime.",
+    "HOTSPOT_PAPER_TAGS": [],
+    "HOTSPOT_PAPER_COMMENT": "",
+    "SCORE": 13,
+    "authors": [
+      "Kenny Shao"
+    ],
+    "title": "Dynamic-Programming-Guided Hierarchical BPE and Empirical Analysis of Vocabulary Pruning",
+    "abstract": "Byte Pair Encoding (BPE) constructs vocabularies through greedy pair merging, but the resulting merge order does not necessarily allocate a fixed model-visible vocabulary optimally for compression. We propose Dynamic-Programming-Guided Hierarchical BPE (DH-BPE), a vocabulary-construction method that combines token exposure under exact minimum-token segmentation with the hierarchical dependencies induced by BPE training. Starting from a modestly overshot BPE candidate vocabulary, DH-BPE uses dynamic programming to measure candidate utility and applies exposure-guided, dependency-aware pruning to select a fixed-size model-visible vocabulary. We compare DH-BPE against Standard BPE and recent vocabulary-optimization baselines, including Pruned BPE, MinGram, and MinGram-PP, in primary evaluations at 12K and 16K target vocabulary sizes, with an additional 18K evaluation against MinGram only. Across the primary 12K and 16K comparisons, DH-BPE consistently improves aggregate compression over Standard BPE, Pruned BPE, and MinGram under a shared exact minimum-token DP encoder. MinGram-PP achieves stronger aggregate compression in the primary comparisons, but DH-BPE outperforms it at overshoot factors f = 2.0 and f = 3.0 in cross-corpus evaluation; at 12K, MinGram-PP reverses this ordering only with the substantially larger candidate pools at f = 4.0 and f = 5.0. Qualitative analysis further shows that DH-BPE balances later, more complete BPE merges with reusable subword components, providing a practical approach to improving vocabulary allocation under a fixed model-visible vocabulary budget.",
+    "arxiv_id": "2609.06898",
+    "PRIMARY_TOPIC_LABEL": "Architecture and Training Dynamics",
+    "MATCHED_TOPIC_LABELS": [
+      "Architecture and Training Dynamics"
+    ],
+    "TOPIC_ASSIGNMENT_SOURCE": "llm_exact",
+    "HOTSPOT_PAPER_LABELS": [],
+    "HOTSPOT_PAPER_PRIMARY_KIND": null,
+    "HOTSPOT_PAPER_PRIMARY_LABEL": "",
+    "HOTSPOT_PAPER_ASSIGNMENT_SOURCE": "default",
+    "EVIDENCE": 8,
+    "LOAD": 5,
+    "PROXIMITY": 7,
+    "READ_SCORE": 19.5
+  }
 }

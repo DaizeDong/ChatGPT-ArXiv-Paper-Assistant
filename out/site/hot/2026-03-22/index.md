@@ -4,70 +4,65 @@
 
 # Daily AI Hotspots 2026-03-22
 
-Today's AI discussion centered on Grounding World Simulation Models in a Real-World Metropolis, OpenSeeker: Democratizing Frontier Search Agents by Fully Open-Sourcing Training Data, and PaddleOCR-VL: Boosting Multilingual Document Parsing via a 0.9B Ultra-Compact Vision-Language Model.
+• [Industry Update] Claude Code and the Great Productivity Panic of 2026 — This other surfaced across 1 independent source(s).
+• [Industry Update] Show HN: I ran a language model on a PS2 — This other surfaced across 1 independent source(s).
+• [Industry Update] Why craft-lovers are losing their craft — This other surfaced across 1 independent source(s).
+
+## Coverage Snapshot
+
+- Featured topics: 3
+- Category radar topics: 0
+- Long-tail signals: 0
+- Paper spotlight items: 0
+- Watchlist topics: 0
+- Active sources: 8/12
+- Raw items scanned: 3
+
+*Inactive sources: ainews, x_ainews_twitter, x_official, x_paperpulse*
 
 ## Source Stats
 
-- `ainews`: 0
-- `hf_papers`: 24
-- `local_papers`: 0
-- `official_blogs`: 0
-- `roundup_sites`: 28
+- `ainews`: 0 (inactive)
+- `analysis_feeds`: 5
+- `github_trend`: 15
+- `hf_papers`: 12
+- `hn_discussion`: 5
+- `local_papers`: 23
+- `official_blogs`: 57
+- `reddit`: 15
+- `roundup_sites`: 13
+- `x_ainews_twitter`: 0 (inactive)
+- `x_official`: 0 (inactive)
+- `x_paperpulse`: 0 (inactive)
 
-## Top Topics
+## Featured Topics
 
-### 1. Grounding World Simulation Models in a Real-World Metropolis
+### 1. Claude Code and the Great Productivity Panic of 2026
 
-- Category: `Tooling`
-- Scores: `quality=6` `heat=5` `importance=6` `final=5.74`
-- Why it matters: This topic stands out as a practical tooling or workflow update with strong builder interest.
+- Category: Industry Update
+- Sources: Hacker News
 
-Key takeaways:
-- This topic stands out as a practical tooling or workflow update with strong builder interest.
+This other surfaced across 1 independent source(s).
 
-Evidence:
-- [Grounding World Simulation Models in a Real-World Metropolis](https://huggingface.co/papers/2603.15583) (Hugging Face Trending Papers)
-- [GMaps now answers real-world questions](https://www.superhuman.ai/p/gmaps-now-answers-real-world-questions) (Superhuman AI)
+**Sources:**
+- [Claude Code and the Great Productivity Panic of 2026](https://www.bloomberg.com/news/articles/2026-02-26/ai-coding-agents-like-claude-code-are-fueling-a-productivity-panic-in-tech) (Hacker News [Corroboration])
 
-### 2. OpenSeeker: Democratizing Frontier Search Agents by Fully Open-Sourcing Training Data
+### 2. Show HN: I ran a language model on a PS2
 
-- Category: `Research`
-- Scores: `quality=6` `heat=6` `importance=6` `final=6.04`
-- Why it matters: This topic combines substantive research signal with visible attention across Hugging Face Trending Papers, Import AI.
+- Category: Industry Update
+- Sources: Hacker News
 
-Key takeaways:
-- This topic combines substantive research signal with visible attention across Hugging Face Trending Papers, Import AI.
+This other surfaced across 1 independent source(s).
 
-Evidence:
-- [OpenSeeker: Democratizing Frontier Search Agents by Fully Open-Sourcing Training Data](https://huggingface.co/papers/2603.15594) (Hugging Face Trending Papers)
-- [MiroThinker: Pushing the Performance Boundaries of Open-Source Research Agents via Model, Context, and Interactive Scaling](https://huggingface.co/papers/2511.11793) (Hugging Face Trending Papers)
-- [OASIS: Open Agent Social Interaction Simulations with One Million Agents](https://huggingface.co/papers/2411.11581) (Hugging Face Trending Papers)
-- [PostTrainBench: Can LLM Agents Automate LLM Post-Training? (arXiv)](https://arxiv.org/abs/2603.08640) (Import AI)
+**Sources:**
+- [Show HN: I ran a language model on a PS2](https://github.com/xaskasdf/ps2-llm) (Hacker News [Corroboration])
 
-### 3. PaddleOCR-VL: Boosting Multilingual Document Parsing via a 0.9B Ultra-Compact Vision-Language Model
+### 3. Why craft-lovers are losing their craft
 
-- Category: `Research`
-- Scores: `quality=6` `heat=4` `importance=5` `final=5.088`
-- Why it matters: This topic combines substantive research signal with visible attention across Hugging Face Trending Papers.
+- Category: Industry Update
+- Sources: Hacker News
 
-Key takeaways:
-- This topic combines substantive research signal with visible attention across Hugging Face Trending Papers.
+This other surfaced across 1 independent source(s).
 
-Evidence:
-- [PaddleOCR-VL: Boosting Multilingual Document Parsing via a 0.9B Ultra-Compact Vision-Language Model](https://huggingface.co/papers/2510.14528) (Hugging Face Trending Papers)
-- [MinerU2.5: A Decoupled Vision-Language Model for Efficient High-Resolution Document Parsing](https://huggingface.co/papers/2509.22186) (Hugging Face Trending Papers)
-- [SmolDocling: An ultra-compact vision-language model for end-to-end multi-modal document conversion](https://huggingface.co/papers/2503.11576) (Hugging Face Trending Papers)
-- [Efficient Memory Management for Large Language Model Serving with PagedAttention](https://huggingface.co/papers/2309.06180) (Hugging Face Trending Papers)
-
-### 4. Agent S2: A Compositional Generalist-Specialist Framework for Computer Use Agents
-
-- Category: `Tooling`
-- Scores: `quality=6` `heat=3` `importance=5` `final=4.788`
-- Why it matters: This topic stands out as a practical tooling or workflow update with strong builder interest.
-
-Key takeaways:
-- This topic stands out as a practical tooling or workflow update with strong builder interest.
-
-Evidence:
-- [Agent S2: A Compositional Generalist-Specialist Framework for Computer Use Agents](https://huggingface.co/papers/2504.00906) (Hugging Face Trending Papers)
-- [TradingAgents: Multi-Agents LLM Financial Trading Framework](https://huggingface.co/papers/2412.20138) (Hugging Face Trending Papers)
+**Sources:**
+- [Why craft-lovers are losing their craft](https://writings.hongminhee.org/2026/03/craft-alienation-llm) (Hacker News [Corroboration])

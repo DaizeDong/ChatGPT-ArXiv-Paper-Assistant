@@ -1,4 +1,6 @@
-<div style="display: flex; align-items: flex-start; justify-content: space-between; width: 100%;"><div style="width: 33.33%; text-align: left;"><a href="../26"><img src="../../../assets/nav/day/2025-11-27-prev.svg" alt="Previous Day 2025-11-26"></a></div><div style="width: 33.33%; text-align: center;"><a href=".."><img src="../../../assets/nav/day/2025-11-27-center.svg" alt="Monthly Overview 2025-11"></a></div><div style="width: 33.33%; text-align: right;"><a href="../../2025-12/01"><img src="../../../assets/nav/day/2025-11-27-next.svg" alt="Next Day 2025-12-01"></a></div></div>
+<div style="display: flex; align-items: flex-start; justify-content: space-between; width: 100%;"><div style="width: 33.33%; text-align: left;"><a href="../26"><img src="../../../assets/nav/day/2025-11-27-prev.svg" alt="Previous Day 2025-11-26"></a></div><div style="width: 33.33%; text-align: center;"><a href=".."><img src="../../../assets/nav/day/2025-11-27-center.svg" alt="Monthly Overview 2025-11"></a></div><div style="width: 33.33%; text-align: right;"><a href="../28"><img src="../../../assets/nav/day/2025-11-27-next.svg" alt="Next Day 2025-11-28"></a></div></div>
+
+<div align="center" class="site-jump-links"><a href="../../../hot/2026-09-14">Daily AI Hotspots</a></div>
 
 # Personalized Daily ArXiv Papers 2025-11-27
 

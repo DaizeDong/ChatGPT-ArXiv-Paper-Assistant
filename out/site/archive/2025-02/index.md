@@ -2,6 +2,8 @@
 
 # Personalized Monthly ArXiv Paper Summary 2025/02
 
+<div align="center" class="site-jump-links"><a href="../../hot/2026-09">Daily AI Hotspots</a></div>
+
 <div align="center"><a href="summary">Monthly Topic Summary</a></div>
 
 <table style="margin: 0 auto; border-collapse: collapse; text-align: center;">

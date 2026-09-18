@@ -2,6 +2,8 @@
 
 # Personalized Monthly ArXiv Paper Summary 2025/01
 
+<div align="center" class="site-jump-links"><a href="../../hot/2026-09">Daily AI Hotspots</a></div>
+
 <div align="center"><a href="summary">Monthly Topic Summary</a></div>
 
 <table style="margin: 0 auto; border-collapse: collapse; text-align: center;">
@@ -13,7 +15,7 @@
         <tr><td style="padding: 8px;"></td><td style="padding: 8px;"></td><td style="padding: 8px;"></td><td style="padding: 8px;">1</td><td style="padding: 8px;">2</td><td style="padding: 8px;">3</td><td style="padding: 8px;">4</td></tr>
         <tr><td style="padding: 8px;">5</td><td style="padding: 8px;">6</td><td style="padding: 8px;">7</td><td style="padding: 8px;">8</td><td style="padding: 8px;">9</td><td style="padding: 8px;">10</td><td style="padding: 8px;">11</td></tr>
         <tr><td style="padding: 8px;">12</td><td style="padding: 8px;">13</td><td style="padding: 8px;">14</td><td style="padding: 8px;">15</td><td style="padding: 8px;">16</td><td style="padding: 8px;"><a href="17" style="text-decoration: none;">17</a></td><td style="padding: 8px;">18</td></tr>
-        <tr><td style="padding: 8px;">19</td><td style="padding: 8px;">20</td><td style="padding: 8px;"><a href="21" style="text-decoration: none;">21</a></td><td style="padding: 8px;"><a href="22" style="text-decoration: none;">22</a></td><td style="padding: 8px;"><a href="23" style="text-decoration: none;">23</a></td><td style="padding: 8px;"><a href="24" style="text-decoration: none;">24</a></td><td style="padding: 8px;">25</td></tr>
+        <tr><td style="padding: 8px;">19</td><td style="padding: 8px;"><a href="20" style="text-decoration: none;">20</a></td><td style="padding: 8px;"><a href="21" style="text-decoration: none;">21</a></td><td style="padding: 8px;"><a href="22" style="text-decoration: none;">22</a></td><td style="padding: 8px;"><a href="23" style="text-decoration: none;">23</a></td><td style="padding: 8px;"><a href="24" style="text-decoration: none;">24</a></td><td style="padding: 8px;">25</td></tr>
         <tr><td style="padding: 8px;">26</td><td style="padding: 8px;"><a href="27" style="text-decoration: none;">27</a></td><td style="padding: 8px;"><a href="28" style="text-decoration: none;">28</a></td><td style="padding: 8px;"><a href="29" style="text-decoration: none;">29</a></td><td style="padding: 8px;"><a href="30" style="text-decoration: none;">30</a></td><td style="padding: 8px;"><a href="31" style="text-decoration: none;">31</a></td><td style="padding: 8px;"></td></tr>
     </tbody>
 </table>

@@ -1,5 +1,7 @@
 <div style="display: flex; align-items: flex-start; justify-content: space-between; width: 100%;"><div style="width: 33.33%; text-align: left;"><a href="../13"><img src="../../../assets/nav/day/2026-03-14-prev.svg" alt="Previous Day 2026-03-13"></a></div><div style="width: 33.33%; text-align: center;"><a href=".."><img src="../../../assets/nav/day/2026-03-14-center.svg" alt="Monthly Overview 2026-03"></a></div><div style="width: 33.33%; text-align: right;"><a href="../16"><img src="../../../assets/nav/day/2026-03-14-next.svg" alt="Next Day 2026-03-16"></a></div></div>
 
+<div align="center" class="site-jump-links"><a href="../../../hot/2026-03">Daily AI Hotspots</a></div>
+
 > This is a remedial run for missed papers from 03/13/2026 to 03/13/2026.
 > 
 > Results generated on 03/21/2026.

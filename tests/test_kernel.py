@@ -8,8 +8,8 @@ import unittest.mock
 from datetime import datetime, timezone
 from pathlib import Path
 
-from arxiv_assistant.hotspots import kernel
-from arxiv_assistant.utils.hotspot.hotspot_schema import HotspotItem
+from arxiv_assistant.hotspot import kernel
+from arxiv_assistant.hotspot.support.schema import HotspotItem
 
 
 class TestCheckpointIO(unittest.TestCase):
@@ -443,7 +443,7 @@ class TestSynthesizeVerifier(unittest.TestCase):
 class TestSynthesizeTransport(unittest.TestCase):
     """Item A: synthesize_bilingual wires claude -p (run_agent) into Stage 6.
 
-    Every test @patches arxiv_assistant.hotspots.synthesize.run_agent — NEVER
+    Every test @patches arxiv_assistant.hotspot.synthesize.run_agent — NEVER
     spawns a real claude -p subprocess. The kernel verifier (_synthesis_row_valid)
     is exercised end-to-end and is never bypassed.
     """
@@ -471,7 +471,7 @@ class TestSynthesizeTransport(unittest.TestCase):
     def test_valid_run_agent_dict_applies_bilingual_fields_through_verifier(self) -> None:
         """A valid run_agent dict whose evidence matches the topic flows through
         _synthesis_row_valid and the bilingual fields are applied end-to-end."""
-        from arxiv_assistant.hotspots import synthesize as synth
+        from arxiv_assistant.hotspot import synthesize as synth
         agent_out = {"topics": [{
             "TOPIC_ID": "t1",
             "headline_en": "Frontier lab ships agentic coding model",
@@ -498,7 +498,7 @@ class TestSynthesizeTransport(unittest.TestCase):
         """run_agent raising AgentError -> synthesize_bilingual returns
         {"topics": []} -> _stage_synthesize degrades all topics to heuristic
         (no crash, original title kept, takeaways filled)."""
-        from arxiv_assistant.hotspots import synthesize as synth
+        from arxiv_assistant.hotspot import synthesize as synth
         from arxiv_assistant.utils.agent_runner import AgentError
 
         # Unit-level contract: AgentError -> {"topics": []}
@@ -521,7 +521,7 @@ class TestSynthesizeTransport(unittest.TestCase):
     def test_placeholder_model_resolves_to_real_default(self) -> None:
         """An empty/placeholder model is resolved to the real default model id
         before being passed to run_agent."""
-        from arxiv_assistant.hotspots import synthesize as synth
+        from arxiv_assistant.hotspot import synthesize as synth
         agent_out = {"topics": []}
         for placeholder in ("", "claude-code-subagent"):
             with unittest.mock.patch.object(synth, "run_agent", return_value=agent_out) as ra:
@@ -534,13 +534,13 @@ class TestSynthesizeTransport(unittest.TestCase):
 
     def test_real_model_passed_through_unchanged(self) -> None:
         """A real (non-placeholder) model id is forwarded verbatim to run_agent."""
-        from arxiv_assistant.hotspots import synthesize as synth
+        from arxiv_assistant.hotspot import synthesize as synth
         with unittest.mock.patch.object(synth, "run_agent", return_value={"topics": []}) as ra:
             synth.synthesize_bilingual([self._topic()], model="pinned-model-v1", temperature=0)
         self.assertEqual(ra.call_args.kwargs["model"], "pinned-model-v1")
 
 
-from arxiv_assistant.utils.hotspot.hotspot_web_data import build_daily_hotspot_web_payload
+from arxiv_assistant.hotspot.support.web_data import build_daily_hotspot_web_payload
 
 
 class TestResurgenceWebData(unittest.TestCase):
@@ -590,7 +590,7 @@ class TestKernelCrossDayParity(unittest.TestCase):
 
     @staticmethod
     def _open_store(tmp_dir: str):
-        from arxiv_assistant.hotspots.store import StoryStore
+        from arxiv_assistant.hotspot.store import StoryStore
         from pathlib import Path
         db_path = Path(tmp_dir) / "hot" / "state" / "story_store.sqlite"
         return StoryStore(db_path)
@@ -606,8 +606,8 @@ class TestKernelCrossDayParity(unittest.TestCase):
         first_seen: str = "2026-04-10",
     ):
         """Build a Story with a pre-set centroid (bypasses mpnet embedding)."""
-        from arxiv_assistant.hotspots.enrich import EnrichedItem
-        from arxiv_assistant.hotspots.story import Story
+        from arxiv_assistant.hotspot.enrich import EnrichedItem
+        from arxiv_assistant.hotspot.story import Story
 
         item = HotspotItem(
             source_id="official_news",
@@ -653,7 +653,7 @@ class TestKernelCrossDayParity(unittest.TestCase):
         record_surface suppression path inside _stage_score.
         """
         from datetime import date as _date
-        from arxiv_assistant.hotspots.dedup import match_crossday, classify_cross_day
+        from arxiv_assistant.hotspot.dedup import match_crossday, classify_cross_day
 
         with tempfile.TemporaryDirectory() as tmp:
             store = self._open_store(tmp)
@@ -736,7 +736,7 @@ class TestKernelCrossDayParity(unittest.TestCase):
                 # Mock cluster_intraday (in dedup module) to bypass mpnet; the
                 # rest of the Stage-2 path (match_crossday, classify_cross_day,
                 # record_surface suppression) runs for real.
-                import arxiv_assistant.hotspots.dedup as _dedup_mod
+                import arxiv_assistant.hotspot.dedup as _dedup_mod
                 with unittest.mock.patch.object(
                     _dedup_mod, "cluster_intraday", return_value=[story_n1]
                 ):
@@ -937,7 +937,7 @@ class TestRenderFixes(unittest.TestCase):
 # Task 10: TestStrangler — generate_daily_hotspot_report delegates to kernel.run
 # ---------------------------------------------------------------------------
 
-from arxiv_assistant.hotspots import pipeline as hp
+from arxiv_assistant.hotspot import pipeline as hp
 
 
 class TestStrangler(unittest.TestCase):

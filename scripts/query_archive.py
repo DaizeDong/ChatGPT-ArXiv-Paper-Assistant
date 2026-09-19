@@ -16,7 +16,7 @@ if str(REPO_ROOT) not in sys.path:
 from arxiv_assistant.reader.retrieval import BM25Index, Document, ScoredDocument
 from arxiv_assistant.utils import llm_gateway
 from arxiv_assistant.utils.agent_runner import AgentError
-from arxiv_assistant.utils.hotspot.hotspot_config import load_repo_config, repo_root
+from arxiv_assistant.hotspot.support.config import load_repo_config, repo_root
 from arxiv_assistant.utils.llm_client import resolve_agent_model
 from arxiv_assistant.utils.console import force_utf8_stdio
 from arxiv_assistant.utils.local_env import load_local_env

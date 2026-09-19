@@ -19,9 +19,9 @@ import unittest
 from pathlib import Path
 from unittest.mock import patch
 
-from arxiv_assistant.hotspots.enrich import EnrichedItem
-from arxiv_assistant.hotspots.store import StoryStore
-from arxiv_assistant.utils.hotspot.hotspot_schema import HotspotItem
+from arxiv_assistant.hotspot.enrich import EnrichedItem
+from arxiv_assistant.hotspot.store import StoryStore
+from arxiv_assistant.hotspot.support.schema import HotspotItem
 
 
 # ---------------------------------------------------------------------------
@@ -69,7 +69,7 @@ class TestDedupHistory(unittest.TestCase):
                 if key in text:
                     return list(vec)
             return [0.0, 0.0, 1.0]
-        return patch("arxiv_assistant.hotspots.dedup.embed_text", side_effect=fake_embed)
+        return patch("arxiv_assistant.hotspot.dedup.embed_text", side_effect=fake_embed)
 
     def test_six_day_duplicate_yields_single_first_seen(self) -> None:
         """Same event re-featured on 6 consecutive days → ONE seed at the earliest date."""
@@ -155,7 +155,7 @@ class TestBackfillStoreIntegration(unittest.TestCase):
                 if key in text:
                     return list(vec)
             return [0.0, 0.0, 1.0]
-        return patch("arxiv_assistant.hotspots.dedup.embed_text", side_effect=fake_embed)
+        return patch("arxiv_assistant.hotspot.dedup.embed_text", side_effect=fake_embed)
 
     def test_three_day_dup_seeds_one_story_earliest_date(self) -> None:
         """3-day duplicate of the same event → Store has ONE story with first_seen on day 1.
@@ -185,7 +185,7 @@ class TestBackfillStoreIntegration(unittest.TestCase):
                     f"Expected 1 collapsed story, got {len(seeds)}: {[s['first_seen'] for s in seeds]}")
 
                 # Seed the store (mimics what main() does)
-                from arxiv_assistant.hotspots.story import Story
+                from arxiv_assistant.hotspot.story import Story
                 for seed in seeds:
                     story = Story(
                         story_id=_seed_id_for(seed["centroid"], seed["centroid_model_id"]),
@@ -226,7 +226,7 @@ class TestBackfillStoreIntegration(unittest.TestCase):
             self.assertEqual(len(seeds), 1)
             seed = seeds[0]
 
-            from arxiv_assistant.hotspots.story import Story
+            from arxiv_assistant.hotspot.story import Story
 
             def _make_shell(sid: str) -> Story:
                 return Story(

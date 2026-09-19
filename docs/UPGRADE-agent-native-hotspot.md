@@ -163,8 +163,8 @@ machinery; each source is assigned its best tool once:
 
 - **Direct scrapers (free, default):** arXiv/HF papers, lab-blog RSS, analysis feeds, roundups,
   GitHub trending, Hacker News, AINews, local papers.
-- **Browser subagent** (`apis/hotspot/browser_source_fetch.py`, playwright `claude -p`, zero-key):
-  the known-fail sources listed in `arxiv_assistant/utils/hotspot/source_routes.py`
+- **Browser subagent** (`hotspot/sources/browser_source_fetch.py`, playwright `claude -p`, zero-key):
+  the known-fail sources listed in `arxiv_assistant/hotspot/support/source_routes.py`
   (`SUBAGENT_ROUTES`) -- Reddit (bot-wall 403), the Cloudflare-walled xAI blog, and the
   Chinese-lab SPA blogs (Zhipu / ByteDance Seed / Baichuan / 01.AI / StepFun / jiqizhixin).
   Gated by `[HOTSPOT_SOURCES] use_subagent_routes` (default `false`; `true` in the agent-native
@@ -176,7 +176,7 @@ machinery; each source is assigned its best tool once:
   skill's curated `frontier-research` + `x-twitter` source matrix into the scout prompt at runtime
   (skill refresh auto-broadens the scout; falls back to a built-in venue list if the skill is absent).
 
-The `WebFetch` agent fetcher `apis/hotspot/agent_source_fetch.py` exists as a building block for
+The `WebFetch` agent fetcher `hotspot/sources/agent_source_fetch.py` exists as a building block for
 standard-but-brittle sources; plain `WebFetch` cannot bypass bot-walls/JS, so protected sources use
 the browser route.
 

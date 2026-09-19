@@ -6,7 +6,7 @@ from unittest import mock
 
 os.environ.setdefault("OPENAI_API_KEY", "test-key")
 
-from arxiv_assistant.apis.hotspot import hotspot_model_hubs as hubs
+from arxiv_assistant.hotspot.sources import model_hubs as hubs
 
 NOW = datetime(2026, 9, 16, tzinfo=UTC)
 

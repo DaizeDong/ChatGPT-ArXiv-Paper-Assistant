@@ -25,7 +25,7 @@ from arxiv_assistant.reader.delta import (
 from arxiv_assistant.reader.questions import ReaderQuestionError, load_questions
 from arxiv_assistant.renderers.weekly.render_weekly_digest import render_weekly_digest_md
 from arxiv_assistant.utils import llm_gateway
-from arxiv_assistant.utils.hotspot.hotspot_config import load_repo_config, repo_root
+from arxiv_assistant.hotspot.support.config import load_repo_config, repo_root
 from arxiv_assistant.utils.console import force_utf8_stdio
 from arxiv_assistant.utils.local_env import load_local_env
 

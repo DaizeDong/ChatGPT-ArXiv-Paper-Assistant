@@ -375,21 +375,21 @@ X 是最容易引入噪声的来源，系统对其采用比其他来源更严格
 
 | 文件 | 职责 |
 |------|------|
-| `arxiv_assistant/hotspots/pipeline.py` | 主 pipeline 流程 |
-| `arxiv_assistant/hotspots/enrich.py` | LLM 批量标注与启发式回退 |
-| `arxiv_assistant/hotspots/story.py` | Story 数据模型、Union-Find 合并、评分、选择 |
-| `arxiv_assistant/filters/filter_hotspots.py` | 工程讨论评分、摘要合成、辅助函数 |
-| `arxiv_assistant/utils/hotspot/hotspot_cluster.py` | 标题相似度、实体提取、来源权重 |
-| `arxiv_assistant/utils/hotspot/hotspot_web_data.py` | Web payload 构建、source section、新鲜度过滤 |
-| `arxiv_assistant/utils/hotspot/hotspot_sources.py` | 日期解析、URL 标准化、新鲜度判断 |
-| `arxiv_assistant/utils/hotspot/hotspot_schema.py` | HotspotItem 数据模型 |
-| `arxiv_assistant/apis/hotspot/hotspot_official_blogs.py` | 30 个官方博客适配器 |
-| `arxiv_assistant/apis/hotspot/hotspot_roundups.py` | Newsletter 爬虫 |
-| `arxiv_assistant/apis/hotspot/hotspot_hf_papers.py` | HF trending papers |
-| `arxiv_assistant/apis/hotspot/hotspot_github.py` | GitHub trending repos |
-| `arxiv_assistant/apis/hotspot/hotspot_reddit.py` | Reddit 抓取 |
-| `arxiv_assistant/apis/hotspot/hotspot_hn.py` | Hacker News 抓取 |
-| `arxiv_assistant/apis/hotspot/hotspot_x_official.py` | X 权威账号抓取 |
+| `arxiv_assistant/hotspot/pipeline.py` | 主 pipeline 流程 |
+| `arxiv_assistant/hotspot/enrich.py` | LLM 批量标注与启发式回退 |
+| `arxiv_assistant/hotspot/story.py` | Story 数据模型、Union-Find 合并、评分、选择 |
+| `arxiv_assistant/hotspot/filter.py` | 工程讨论评分、摘要合成、辅助函数 |
+| `arxiv_assistant/hotspot/support/cluster.py` | 标题相似度、实体提取、来源权重 |
+| `arxiv_assistant/hotspot/support/web_data.py` | Web payload 构建、source section、新鲜度过滤 |
+| `arxiv_assistant/hotspot/support/sources.py` | 日期解析、URL 标准化、新鲜度判断 |
+| `arxiv_assistant/hotspot/support/schema.py` | HotspotItem 数据模型 |
+| `arxiv_assistant/hotspot/sources/official_blogs.py` | 30 个官方博客适配器 |
+| `arxiv_assistant/hotspot/sources/roundups.py` | Newsletter 爬虫 |
+| `arxiv_assistant/hotspot/sources/hf_papers.py` | HF trending papers |
+| `arxiv_assistant/hotspot/sources/github.py` | GitHub trending repos |
+| `arxiv_assistant/hotspot/sources/reddit.py` | Reddit 抓取 |
+| `arxiv_assistant/hotspot/sources/hn.py` | Hacker News 抓取 |
+| `arxiv_assistant/hotspot/sources/x_official.py` | X 权威账号抓取 |
 
 ## 附录 B：运行命令
 

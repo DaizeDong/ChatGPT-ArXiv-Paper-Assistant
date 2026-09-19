@@ -9,7 +9,7 @@ if str(REPO_ROOT) not in sys.path:
     sys.path.insert(0, str(REPO_ROOT))
 
 from arxiv_assistant.utils.local_env import load_local_env
-from arxiv_assistant.utils.hotspot.x_authority_registry import refresh_x_authority_registry
+from arxiv_assistant.hotspot.support.x_authority_registry import refresh_x_authority_registry
 
 
 def parse_args() -> argparse.Namespace:

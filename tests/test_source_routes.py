@@ -4,7 +4,7 @@ import json
 import unittest
 from pathlib import Path
 
-from arxiv_assistant.utils.hotspot.source_routes import (
+from arxiv_assistant.hotspot.support.source_routes import (
     SUBAGENT_ROUTES,
     iter_subagent_sources,
     route_for,

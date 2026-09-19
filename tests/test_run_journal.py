@@ -5,7 +5,7 @@ import tempfile
 import unittest
 from pathlib import Path
 
-from arxiv_assistant.utils.hotspot.run_journal import RunJournal
+from arxiv_assistant.hotspot.support.run_journal import RunJournal
 
 
 class TestRunJournal(unittest.TestCase):
@@ -76,7 +76,7 @@ class TestRecordDroppedStaleCompetitor(unittest.TestCase):
         return obj
 
     def test_per_source_seen_dropped_ratio(self) -> None:
-        from arxiv_assistant.utils.hotspot.run_journal import record_dropped_stale_competitor
+        from arxiv_assistant.hotspot.support.run_journal import record_dropped_stale_competitor
 
         competitor_items = [
             self._item("reuse:ainews", "https://x.test/1"),
@@ -97,7 +97,7 @@ class TestRecordDroppedStaleCompetitor(unittest.TestCase):
         self.assertAlmostEqual(ps["drop_ratio"], 0.5)
 
     def test_multiple_sources_isolated(self) -> None:
-        from arxiv_assistant.utils.hotspot.run_journal import record_dropped_stale_competitor
+        from arxiv_assistant.hotspot.support.run_journal import record_dropped_stale_competitor
 
         competitor_items = [
             self._item("reuse:ainews", "https://a.test/1"),
@@ -119,7 +119,7 @@ class TestRecordDroppedStaleCompetitor(unittest.TestCase):
         self.assertAlmostEqual(rec["per_source"]["reuse:horizon"]["drop_ratio"], 0.0)
 
     def test_dropped_items_carry_provenance_gate_date_reason(self) -> None:
-        from arxiv_assistant.utils.hotspot.run_journal import record_dropped_stale_competitor
+        from arxiv_assistant.hotspot.support.run_journal import record_dropped_stale_competitor
 
         dropped = [self._item("reuse:ainews", "https://x.test/1", "2023-01-01")]
         rec = record_dropped_stale_competitor("2026-06-03", [], dropped, dropped)

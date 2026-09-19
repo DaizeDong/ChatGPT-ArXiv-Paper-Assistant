@@ -16,14 +16,14 @@ import unittest
 from datetime import datetime, timezone
 from unittest.mock import patch
 
-from arxiv_assistant.apis.hotspot import (
+from arxiv_assistant.hotspot.sources import (
     reuse_agents_radar,
     reuse_ainews,
     reuse_hf_daily,
     reuse_horizon,
     reuse_scholar_inbox,
 )
-from arxiv_assistant.utils.hotspot.hotspot_schema import HotspotItem
+from arxiv_assistant.hotspot.support.schema import HotspotItem
 
 # ---------------------------------------------------------------------------
 # Shared constants
@@ -154,7 +154,7 @@ class TestReuseHfDailyModule(unittest.TestCase):
         self.assertEqual(reuse_hf_daily.REUSE_NAME, "hf_daily")
 
 
-_HF_FETCH_PATCH = "arxiv_assistant.apis.hotspot.reuse_hf_daily.fetch_text"
+_HF_FETCH_PATCH = "arxiv_assistant.hotspot.sources.reuse_hf_daily.fetch_text"
 
 
 class TestReuseHfDailyFetch(unittest.TestCase):
@@ -283,7 +283,7 @@ class TestReuseHfDailyFetch(unittest.TestCase):
     def test_fallback_to_trending_url_on_date_fetch_failure(self) -> None:
         """On date-URL failure, trending URL is tried; on its success items are returned."""
         def selective_fail(url: str) -> str:
-            from arxiv_assistant.apis.hotspot.hotspot_hf_papers import HF_DATE_URL
+            from arxiv_assistant.hotspot.sources.hf_papers import HF_DATE_URL
             if url == HF_DATE_URL.format(date=_TARGET_DATE.strftime("%Y-%m-%d")):
                 raise ConnectionError("date URL failed")
             return _HF_HTML_ONE_HIGH  # trending URL succeeds
@@ -312,21 +312,21 @@ class TestReuseAinewsModule(unittest.TestCase):
 class TestReuseAinewsFetch(unittest.TestCase):
     """fetch_hotspot_items behaviour."""
 
-    @patch("arxiv_assistant.apis.hotspot.reuse_common.fetch_text", return_value=_AINEWS_RSS)
+    @patch("arxiv_assistant.hotspot.sources.reuse_common.fetch_text", return_value=_AINEWS_RSS)
     def test_returns_list_of_hotspot_items(self, _mock) -> None:
         items = reuse_ainews.fetch_hotspot_items(_TARGET_DATE, _FRESHNESS_HOURS)
         self.assertIsInstance(items, list)
         for item in items:
             self.assertIsInstance(item, HotspotItem)
 
-    @patch("arxiv_assistant.apis.hotspot.reuse_common.fetch_text", return_value=_AINEWS_RSS)
+    @patch("arxiv_assistant.hotspot.sources.reuse_common.fetch_text", return_value=_AINEWS_RSS)
     def test_provenance_is_reuse_ainews(self, _mock) -> None:
         items = reuse_ainews.fetch_hotspot_items(_TARGET_DATE, _FRESHNESS_HOURS)
         self.assertGreater(len(items), 0)
         for item in items:
             self.assertEqual(item.provenance, "reuse:ainews")
 
-    @patch("arxiv_assistant.apis.hotspot.reuse_common.fetch_text", return_value=_AINEWS_RSS)
+    @patch("arxiv_assistant.hotspot.sources.reuse_common.fetch_text", return_value=_AINEWS_RSS)
     def test_verified_first_date_is_none(self, _mock) -> None:
         """DateVerify is downstream; verified_first_date must stay None."""
         items = reuse_ainews.fetch_hotspot_items(_TARGET_DATE, _FRESHNESS_HOURS)
@@ -334,7 +334,7 @@ class TestReuseAinewsFetch(unittest.TestCase):
         for item in items:
             self.assertIsNone(item.verified_first_date)
 
-    @patch("arxiv_assistant.apis.hotspot.reuse_common.fetch_text", return_value=_AINEWS_RSS)
+    @patch("arxiv_assistant.hotspot.sources.reuse_common.fetch_text", return_value=_AINEWS_RSS)
     def test_fresh_items_returned_stale_filtered(self, _mock) -> None:
         """The 2020 item must be filtered by freshness; 2026 items returned."""
         items = reuse_ainews.fetch_hotspot_items(_TARGET_DATE, _FRESHNESS_HOURS)
@@ -346,25 +346,25 @@ class TestReuseAinewsFetch(unittest.TestCase):
             msg="Fresh 2026 AINews issues should be returned",
         )
 
-    @patch("arxiv_assistant.apis.hotspot.reuse_common.fetch_text", return_value=_AINEWS_RSS)
+    @patch("arxiv_assistant.hotspot.sources.reuse_common.fetch_text", return_value=_AINEWS_RSS)
     def test_source_id_is_reuse_ainews(self, _mock) -> None:
         items = reuse_ainews.fetch_hotspot_items(_TARGET_DATE, _FRESHNESS_HOURS)
         for item in items:
             self.assertEqual(item.source_id, "reuse_ainews")
 
-    @patch("arxiv_assistant.apis.hotspot.reuse_common.fetch_text", return_value=_AINEWS_RSS)
+    @patch("arxiv_assistant.hotspot.sources.reuse_common.fetch_text", return_value=_AINEWS_RSS)
     def test_source_type_is_reuse(self, _mock) -> None:
         items = reuse_ainews.fetch_hotspot_items(_TARGET_DATE, _FRESHNESS_HOURS)
         for item in items:
             self.assertEqual(item.source_type, "reuse")
 
-    @patch("arxiv_assistant.apis.hotspot.reuse_common.fetch_text", return_value=_AINEWS_RSS)
+    @patch("arxiv_assistant.hotspot.sources.reuse_common.fetch_text", return_value=_AINEWS_RSS)
     def test_source_role_is_community_signal(self, _mock) -> None:
         items = reuse_ainews.fetch_hotspot_items(_TARGET_DATE, _FRESHNESS_HOURS)
         for item in items:
             self.assertEqual(item.source_role, "community_signal")
 
-    @patch("arxiv_assistant.apis.hotspot.reuse_common.fetch_text", return_value=_AINEWS_RSS)
+    @patch("arxiv_assistant.hotspot.sources.reuse_common.fetch_text", return_value=_AINEWS_RSS)
     def test_freshness_window_widened_to_36h(self, _mock) -> None:
         """AINews publishes weekdays only; effective freshness is widened to max(hours, 36)."""
         # With freshness_hours=1 (too short), effective should become 36
@@ -375,19 +375,19 @@ class TestReuseAinewsFetch(unittest.TestCase):
         # Items exist because effective window is widened to 36h
         self.assertGreater(len(items), 0)
 
-    @patch("arxiv_assistant.apis.hotspot.reuse_common.fetch_text", return_value=_AINEWS_RSS)
+    @patch("arxiv_assistant.hotspot.sources.reuse_common.fetch_text", return_value=_AINEWS_RSS)
     def test_result_limit_honoured(self, _mock) -> None:
         items = reuse_ainews.fetch_hotspot_items(_TARGET_DATE, _FRESHNESS_HOURS, result_limit=1)
         self.assertLessEqual(len(items), 1)
 
-    @patch("arxiv_assistant.apis.hotspot.reuse_common.fetch_text",
+    @patch("arxiv_assistant.hotspot.sources.reuse_common.fetch_text",
            side_effect=Exception("network error"))
     def test_fetch_failure_returns_empty_list(self, _mock) -> None:
         """Fetch failure must degrade to [] without crashing (spec §E)."""
         items = reuse_ainews.fetch_hotspot_items(_TARGET_DATE, _FRESHNESS_HOURS)
         self.assertEqual(items, [])
 
-    @patch("arxiv_assistant.apis.hotspot.reuse_common.fetch_text", return_value="not valid xml <<<>>>")
+    @patch("arxiv_assistant.hotspot.sources.reuse_common.fetch_text", return_value="not valid xml <<<>>>")
     def test_malformed_feed_returns_empty_list(self, _mock) -> None:
         items = reuse_ainews.fetch_hotspot_items(_TARGET_DATE, _FRESHNESS_HOURS)
         self.assertEqual(items, [])
@@ -509,7 +509,7 @@ _SCHOLAR_INBOX_RSS = textwrap.dedent("""\
 """)
 
 # Patch target: harvest_rss_reuse calls fetch_text from reuse_common
-_REUSE_COMMON_FETCH_PATCH = "arxiv_assistant.apis.hotspot.reuse_common.fetch_text"
+_REUSE_COMMON_FETCH_PATCH = "arxiv_assistant.hotspot.sources.reuse_common.fetch_text"
 
 
 # ===========================================================================

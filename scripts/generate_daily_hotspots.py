@@ -8,11 +8,11 @@ REPO_ROOT = Path(__file__).resolve().parents[1]
 if str(REPO_ROOT) not in sys.path:
     sys.path.insert(0, str(REPO_ROOT))
 
-from arxiv_assistant.hotspots.pipeline import (
+from arxiv_assistant.hotspot.pipeline import (
     generate_daily_hotspot_report,
     parse_target_datetime,
 )
-from arxiv_assistant.utils.hotspot.hotspot_config import load_repo_config, repo_root
+from arxiv_assistant.hotspot.support.config import load_repo_config, repo_root
 from arxiv_assistant.utils.local_env import load_local_env
 
 load_local_env()

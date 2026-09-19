@@ -16,13 +16,13 @@ import argparse
 import hashlib
 from pathlib import Path
 
-from arxiv_assistant.hotspots.dedup import (
+from arxiv_assistant.hotspot.dedup import (
     EMBED_MODEL_ID,
     L1_SEMANTIC_THRESHOLD,
     _centroid,
     cluster_intraday,
 )
-from arxiv_assistant.hotspots.embed import cosine
+from arxiv_assistant.hotspot.embed import cosine
 
 
 def dedup_history(daily_enriched_by_date: dict[str, list]) -> list[dict]:
@@ -103,8 +103,8 @@ def main(argv=None) -> int:  # pragma: no cover - CLI glue
     history = _load_history(args.history_root)
     seeds = dedup_history(history)
 
-    from arxiv_assistant.hotspots.store import StoryStore  # Stage-0
-    from arxiv_assistant.hotspots.story import Story
+    from arxiv_assistant.hotspot.store import StoryStore  # Stage-0
+    from arxiv_assistant.hotspot.story import Story
 
     store = StoryStore(args.db)
     for seed in seeds:

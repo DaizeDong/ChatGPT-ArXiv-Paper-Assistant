@@ -8,20 +8,20 @@ from datetime import UTC, date as _date, datetime
 from pathlib import Path
 from unittest.mock import patch
 
-from arxiv_assistant.apis.hotspot.hotspot_ainews import _choose_best_anchor, _derive_segment_title
-from arxiv_assistant.apis.hotspot.hotspot_github import fetch_hotspot_items as fetch_github_hotspot_items
-from arxiv_assistant.apis.hotspot.hotspot_hn import fetch_hotspot_items as fetch_hn_hotspot_items
-from arxiv_assistant.apis.hotspot.hotspot_local_papers import _resolve_best_source_path, fetch_hotspot_items as fetch_local_hotspot_items
-from arxiv_assistant.apis.hotspot.hotspot_official_blogs import _extract_anthropic_rows
-from arxiv_assistant.filters.filter_hotspots import _cluster_signal_scores, _digest_prompt_payload
-from arxiv_assistant.hotspots.dedup import classify_cross_day, match_crossday
-from arxiv_assistant.hotspots.enrich import EnrichedItem
-from arxiv_assistant.hotspots.story import Story, score_stories, select_and_categorize
-from arxiv_assistant.hotspots.store import StoryStore
+from arxiv_assistant.hotspot.sources.ainews import _choose_best_anchor, _derive_segment_title
+from arxiv_assistant.hotspot.sources.github import fetch_hotspot_items as fetch_github_hotspot_items
+from arxiv_assistant.hotspot.sources.hn import fetch_hotspot_items as fetch_hn_hotspot_items
+from arxiv_assistant.hotspot.sources.local_papers import _resolve_best_source_path, fetch_hotspot_items as fetch_local_hotspot_items
+from arxiv_assistant.hotspot.sources.official_blogs import _extract_anthropic_rows
+from arxiv_assistant.hotspot.filter import _cluster_signal_scores, _digest_prompt_payload
+from arxiv_assistant.hotspot.dedup import classify_cross_day, match_crossday
+from arxiv_assistant.hotspot.enrich import EnrichedItem
+from arxiv_assistant.hotspot.story import Story, score_stories, select_and_categorize
+from arxiv_assistant.hotspot.store import StoryStore
 from arxiv_assistant.renderers.hotspot.render_hot_daily import render_hot_daily_md
-from arxiv_assistant.utils.hotspot.hotspot_cluster import build_hotspot_clusters
-from arxiv_assistant.utils.hotspot.hotspot_schema import HotspotCluster, HotspotItem
-from arxiv_assistant.hotspots.pipeline import _build_category_sections, _build_market_signal_items, _merge_display_candidates, _screening_queue, _trim_topics, detect_latest_local_output_date
+from arxiv_assistant.hotspot.support.cluster import build_hotspot_clusters
+from arxiv_assistant.hotspot.support.schema import HotspotCluster, HotspotItem
+from arxiv_assistant.hotspot.pipeline import _build_category_sections, _build_market_signal_items, _merge_display_candidates, _screening_queue, _trim_topics, detect_latest_local_output_date
 
 
 class TestHotspotPipeline(unittest.TestCase):
@@ -255,7 +255,7 @@ class TestHotspotPipeline(unittest.TestCase):
         self.assertGreaterEqual(signals["FINAL_SCORE"], 3.6)
         self.assertGreaterEqual(signals["IMPORTANCE"], 5)
 
-    @patch("arxiv_assistant.apis.hotspot_github.fetch_json")
+    @patch("arxiv_assistant.hotspot.sources.github.fetch_json")
     def test_github_adapter_builds_repo_items(self, mock_fetch_json) -> None:
         mock_fetch_json.return_value = {
             "items": [
@@ -288,7 +288,7 @@ class TestHotspotPipeline(unittest.TestCase):
         self.assertIn("agent framework", mock_fetch_json.call_args.kwargs["params"]["q"])
         self.assertIn("stars:>=20", mock_fetch_json.call_args.kwargs["params"]["q"])
 
-    @patch("arxiv_assistant.apis.hotspot_hn.fetch_json")
+    @patch("arxiv_assistant.hotspot.sources.hn.fetch_json")
     def test_hn_adapter_filters_to_ai_relevant_story(self, mock_fetch_json) -> None:
         # The production code uses the Algolia search API: one fetch_json call per query in
         # ai_queries (6 queries total), each returning {"hits": [{...story...}, ...]}.
@@ -1309,7 +1309,7 @@ class TestCrossDay_E2E_Suppression(unittest.TestCase):
     def test_record_surface_persists_entity_snapshot_fixing_t3_trap(self) -> None:
         """record_surface persists surfaced_entity_names so T3 does not fire on next run
         unless genuinely new entities appear."""
-        from arxiv_assistant.hotspots.novelty import resurface
+        from arxiv_assistant.hotspot.novelty import resurface
         with tempfile.TemporaryDirectory() as tmp:
             store = self._open_store(tmp)
             try:

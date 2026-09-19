@@ -5,7 +5,7 @@ import unittest
 from pathlib import Path
 
 from arxiv_assistant.utils.config_loader import load_repo_config
-from arxiv_assistant.utils.hotspot.hotspot_config import load_repo_config, load_reuse_config, repo_root
+from arxiv_assistant.hotspot.support.config import load_repo_config, load_reuse_config, repo_root
 
 
 class TestHotspotConfig(unittest.TestCase):

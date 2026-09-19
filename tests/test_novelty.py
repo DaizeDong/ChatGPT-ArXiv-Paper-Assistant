@@ -3,10 +3,10 @@ from __future__ import annotations
 import unittest
 from datetime import date
 
-from arxiv_assistant.hotspots import novelty
-from arxiv_assistant.hotspots.enrich import EnrichedItem
-from arxiv_assistant.hotspots.story import Story
-from arxiv_assistant.utils.hotspot.hotspot_schema import HotspotItem
+from arxiv_assistant.hotspot import novelty
+from arxiv_assistant.hotspot.enrich import EnrichedItem
+from arxiv_assistant.hotspot.story import Story
+from arxiv_assistant.hotspot.support.schema import HotspotItem
 
 
 # ---------------------------------------------------------------------------

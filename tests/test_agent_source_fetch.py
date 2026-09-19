@@ -3,7 +3,7 @@ from __future__ import annotations
 import unittest
 from datetime import UTC, datetime
 
-from arxiv_assistant.apis.hotspot import agent_source_fetch as mod
+from arxiv_assistant.hotspot.sources import agent_source_fetch as mod
 from arxiv_assistant.utils.agent_runner import AgentError
 
 

@@ -3,7 +3,7 @@ from __future__ import annotations
 import unittest
 from datetime import UTC, datetime
 
-from arxiv_assistant.apis.hotspot.browser_source_fetch import (
+from arxiv_assistant.hotspot.sources.browser_source_fetch import (
     PLAYWRIGHT_TOOLS,
     fetch_source_via_browser,
 )

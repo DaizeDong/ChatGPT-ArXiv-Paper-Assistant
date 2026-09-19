@@ -4,7 +4,7 @@ import unittest
 from datetime import UTC, datetime
 from unittest.mock import patch
 
-from arxiv_assistant.apis.hotspot import hotspot_agent_scout as scout
+from arxiv_assistant.hotspot.sources import agent_scout as scout
 from arxiv_assistant.utils.agent_runner import AgentError
 
 
@@ -191,7 +191,7 @@ class TestHotspotAgentScout(unittest.TestCase):
     # _default_url_alive: arXiv ids resolve WITHOUT a network call.
     # ---------------------------------------------------------------------
     def test_default_url_alive_arxiv_no_network(self) -> None:
-        with patch("arxiv_assistant.apis.hotspot.hotspot_agent_scout.requests.head") as mock_head:
+        with patch("arxiv_assistant.hotspot.sources.agent_scout.requests.head") as mock_head:
             self.assertTrue(scout._default_url_alive("https://arxiv.org/abs/2406.01234"))
             self.assertTrue(scout._default_url_alive("https://doi.org/10.1234/abcd"))
             mock_head.assert_not_called()
@@ -201,7 +201,7 @@ class TestHotspotAgentScout(unittest.TestCase):
             status_code = 200
 
         with patch(
-            "arxiv_assistant.apis.hotspot.hotspot_agent_scout.requests.head",
+            "arxiv_assistant.hotspot.sources.agent_scout.requests.head",
             return_value=_Resp(),
         ) as mock_head:
             self.assertTrue(scout._default_url_alive("https://blog.host.com/post"))
@@ -209,7 +209,7 @@ class TestHotspotAgentScout(unittest.TestCase):
 
     def test_default_url_alive_exception_is_dead(self) -> None:
         with patch(
-            "arxiv_assistant.apis.hotspot.hotspot_agent_scout.requests.head",
+            "arxiv_assistant.hotspot.sources.agent_scout.requests.head",
             side_effect=RuntimeError("network down"),
         ):
             self.assertFalse(scout._default_url_alive("https://blog.host.com/post"))

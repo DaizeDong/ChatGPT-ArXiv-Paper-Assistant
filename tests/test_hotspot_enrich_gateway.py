@@ -9,10 +9,10 @@ import unittest.mock
 from datetime import datetime, timezone
 from pathlib import Path
 
-from arxiv_assistant.hotspots import enrich as E
-from arxiv_assistant.hotspots import kernel
+from arxiv_assistant.hotspot import enrich as E
+from arxiv_assistant.hotspot import kernel
 from arxiv_assistant.utils.agent_runner import AgentError
-from arxiv_assistant.utils.hotspot.hotspot_schema import HotspotItem
+from arxiv_assistant.hotspot.support.schema import HotspotItem
 
 
 def _item(idx: int) -> HotspotItem:

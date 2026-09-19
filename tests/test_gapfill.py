@@ -7,7 +7,7 @@ from datetime import date, datetime, timezone
 from pathlib import Path
 from unittest.mock import MagicMock, patch
 
-from arxiv_assistant.utils.hotspot.hotspot_schema import HotspotItem
+from arxiv_assistant.hotspot.support.schema import HotspotItem
 
 
 def _item(url: str, *, provenance: str = "reuse:ainews", arxiv_id: str | None = None) -> HotspotItem:
@@ -38,7 +38,7 @@ class TestEligibleVsDropped(unittest.TestCase):
         self.as_of = date(2026, 6, 3)
 
     def test_stale_competitor_goes_to_dropped_not_eligible(self) -> None:
-        from arxiv_assistant.hotspots import gapfill
+        from arxiv_assistant.hotspot import gapfill
         comp = [_item("https://a.test/fresh"), _item("https://a.test/old")]
         with patch.object(gapfill.date_verify, "verify", side_effect=_fake_verify):
             eligible, dropped = gapfill.eligible_competitor_items(
@@ -50,7 +50,7 @@ class TestEligibleVsDropped(unittest.TestCase):
         self.assertEqual(dropped_urls, {"https://a.test/old"})
 
     def test_union_floor_passes_when_eligible_covered_despite_stale(self) -> None:
-        from arxiv_assistant.hotspots import gapfill
+        from arxiv_assistant.hotspot import gapfill
         comp = [_item("https://a.test/fresh"), _item("https://a.test/old")]
         with patch.object(gapfill.date_verify, "verify", side_effect=_fake_verify):
             eligible, _ = gapfill.eligible_competitor_items(comp, self.store, max_age_days=14, as_of=self.as_of)
@@ -62,7 +62,7 @@ class TestEligibleVsDropped(unittest.TestCase):
 
 class TestAssertUnionFloor(unittest.TestCase):
     def test_raises_when_eligible_item_missing(self) -> None:
-        from arxiv_assistant.hotspots import gapfill
+        from arxiv_assistant.hotspot import gapfill
         eligible = [_item("https://a.test/fresh"), _item("https://a.test/fresh2")]
         our = {"https://a.test/fresh"}  # missing fresh2
         with self.assertRaises(AssertionError) as ctx:
@@ -72,7 +72,7 @@ class TestAssertUnionFloor(unittest.TestCase):
 
 class TestGapfillDirectedFetch(unittest.TestCase):
     def test_gapfill_returns_only_missing_eligible(self) -> None:
-        from arxiv_assistant.hotspots import gapfill
+        from arxiv_assistant.hotspot import gapfill
         eligible = [_item("https://a.test/fresh"), _item("https://a.test/fresh2")]
         our = {"https://a.test/fresh"}
         new_items = gapfill.gapfill(our, eligible)
@@ -88,7 +88,7 @@ class TestDateVerifyHardAnchorNotMajorityVote(unittest.TestCase):
         self.as_of = date(2026, 6, 3)
 
     def test_shared_pollution_rejected_by_hard_anchor(self) -> None:
-        from arxiv_assistant.hotspots import gapfill
+        from arxiv_assistant.hotspot import gapfill
         # SAME old paper echoed by 3 independent competitor sources (shared pollution).
         comp = [
             _item("https://a.test/poison", provenance="reuse:ainews", arxiv_id="2303.00001"),
@@ -117,21 +117,21 @@ class TestSecondOrderPollutionAlert(unittest.TestCase):
         }
 
     def test_spike_triggers_alert(self) -> None:
-        from arxiv_assistant.hotspots import gapfill
+        from arxiv_assistant.hotspot import gapfill
         history = [self._run(0.05) for _ in range(14)]          # stable 5% baseline
         today = self._run(0.40)                                  # spike: 8x baseline AND >=30%
         alerts = gapfill.second_order_pollution_alerts(today, history, multiplier=2.0, abs_floor=0.30)
         self.assertEqual([a["source"] for a in alerts], ["reuse:ainews"])
 
     def test_stable_does_not_trigger(self) -> None:
-        from arxiv_assistant.hotspots import gapfill
+        from arxiv_assistant.hotspot import gapfill
         history = [self._run(0.20) for _ in range(14)]          # baseline 20%
         today = self._run(0.25)                                  # below 2x AND not a big jump
         alerts = gapfill.second_order_pollution_alerts(today, history, multiplier=2.0, abs_floor=0.30)
         self.assertEqual(alerts, [])
 
     def test_high_abs_but_below_2x_baseline_does_not_trigger(self) -> None:
-        from arxiv_assistant.hotspots import gapfill
+        from arxiv_assistant.hotspot import gapfill
         # Source legitimately curates many old items every day: 35% steady baseline.
         history = [self._run(0.35) for _ in range(14)]
         today = self._run(0.40)                                  # >=30% abs but only 1.14x baseline
@@ -139,7 +139,7 @@ class TestSecondOrderPollutionAlert(unittest.TestCase):
         self.assertEqual(alerts, [])
 
     def test_zero_baseline_uses_abs_floor_guard(self) -> None:
-        from arxiv_assistant.hotspots import gapfill
+        from arxiv_assistant.hotspot import gapfill
         history = [self._run(0.0) for _ in range(14)]            # never dropped before
         today = self._run(0.40)                                  # first big drop
         alerts = gapfill.second_order_pollution_alerts(today, history, multiplier=2.0, abs_floor=0.30)
@@ -154,7 +154,7 @@ class TestHarvestReuseLayer(unittest.TestCase):
 
     def test_dispatches_only_enabled_sources(self) -> None:
         """Only sources present in reuse_sources are harvested; others are skipped."""
-        from arxiv_assistant.hotspots import gapfill
+        from arxiv_assistant.hotspot import gapfill
 
         target = datetime(2026, 6, 2, 12, 0, 0, tzinfo=timezone.utc)
         hf_item = self._fresh_item("https://arxiv.org/abs/2406.00001", "reuse:hf_daily")
@@ -181,7 +181,7 @@ class TestHarvestReuseLayer(unittest.TestCase):
 
     def test_unknown_source_name_is_silently_skipped(self) -> None:
         """A source name not in REUSE_ADAPTERS registry is ignored without error."""
-        from arxiv_assistant.hotspots import gapfill
+        from arxiv_assistant.hotspot import gapfill
 
         target = datetime(2026, 6, 2, 12, 0, 0, tzinfo=timezone.utc)
         with patch("importlib.import_module", side_effect=Exception("should not be called")):
@@ -190,7 +190,7 @@ class TestHarvestReuseLayer(unittest.TestCase):
 
     def test_one_source_raising_does_not_kill_others(self) -> None:
         """Fault tolerance: one adapter raising must not prevent other adapters from harvesting."""
-        from arxiv_assistant.hotspots import gapfill
+        from arxiv_assistant.hotspot import gapfill
 
         target = datetime(2026, 6, 2, 12, 0, 0, tzinfo=timezone.utc)
         good_item = self._fresh_item("https://arxiv.org/abs/2406.99999", "reuse:ainews")
@@ -216,7 +216,7 @@ class TestHarvestReuseLayer(unittest.TestCase):
 
     def test_all_enabled_sources_are_harvested(self) -> None:
         """All sources listed in reuse_sources are dispatched (happy path)."""
-        from arxiv_assistant.hotspots import gapfill
+        from arxiv_assistant.hotspot import gapfill
 
         target = datetime(2026, 6, 2, 12, 0, 0, tzinfo=timezone.utc)
         call_log: list[str] = []
@@ -254,7 +254,7 @@ class TestRunGapfillFloor(unittest.TestCase):
         return {"verified_first_date": self._VERDICTS[item.canonical_url], "confidence": 0.9}
 
     def _run_seam(self, our_coverage, competitor_items, *, journal_path):
-        from arxiv_assistant.hotspots import gapfill
+        from arxiv_assistant.hotspot import gapfill
 
         store = MagicMock()
         with patch.object(gapfill.date_verify, "verify", side_effect=self._fake_verify):
@@ -315,7 +315,7 @@ class TestRunGapfillFloor(unittest.TestCase):
 
     def test_floor_holds_after_gapfill(self) -> None:
         """After gapfill補入, our_coverage ∪ new_items ⊇ eligible (floor satisfied)."""
-        from arxiv_assistant.hotspots import gapfill
+        from arxiv_assistant.hotspot import gapfill
 
         comp = [
             _item("https://a.test/fresh1", provenance="reuse:hf_daily"),
@@ -403,7 +403,7 @@ class TestInvariants(unittest.TestCase):
 
     def test_inv5_reuse_items_carry_reuse_provenance_and_pass_same_gate(self) -> None:
         # Reuse items inherit recall, not staleness: they go through the identical gate.
-        from arxiv_assistant.hotspots import gapfill
+        from arxiv_assistant.hotspot import gapfill
         store = MagicMock()
         comp = [_item("https://a.test/fresh", provenance="reuse:hf_daily")]
         with patch.object(gapfill.date_verify, "verify", side_effect=_fake_verify):
@@ -414,7 +414,7 @@ class TestInvariants(unittest.TestCase):
         self.assertEqual(len(eligible), 1)
 
     def test_inv2_subday_jitter_cannot_flip_gate(self) -> None:
-        from arxiv_assistant.hotspots import gapfill
+        from arxiv_assistant.hotspot import gapfill
         store = MagicMock()
         # Two verifies of the SAME url differing only by sub-day time -> same eligibility.
         def jitter_verify(item, _store):

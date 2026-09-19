@@ -6,18 +6,18 @@ from datetime import date
 from pathlib import Path
 from unittest.mock import patch
 
-from arxiv_assistant.hotspots.date_verify import (
+from arxiv_assistant.hotspot.date_verify import (
     _content_hash,
     _fetch_arxiv_v1_date,
     _fetch_crossref_date,
     poll_arxiv_versions,
     verify,
 )
-from arxiv_assistant.hotspots.story import _freshness_weight
+from arxiv_assistant.hotspot.story import _freshness_weight
 from arxiv_assistant.utils.agent_runner import AgentError
-from arxiv_assistant.utils.hotspot.gate_date import floor_to_utc_day, gate_date
-from arxiv_assistant.utils.hotspot.hotspot_schema import HotspotItem
-from arxiv_assistant.utils.hotspot.hotspot_sources import get_freshness_date
+from arxiv_assistant.hotspot.support.gate_date import floor_to_utc_day, gate_date
+from arxiv_assistant.hotspot.support.schema import HotspotItem
+from arxiv_assistant.hotspot.support.source_fetch import get_freshness_date
 
 FIXTURES = Path(__file__).parent / "fixtures" / "agent"
 
@@ -45,14 +45,14 @@ ARXIV_ATOM = """<?xml version="1.0" encoding="UTF-8"?>
 
 
 class TestFetchArxivV1Date(unittest.TestCase):
-    @patch("arxiv_assistant.hotspots.date_verify.fetch_text")
+    @patch("arxiv_assistant.hotspot.date_verify.fetch_text")
     def test_reads_v1_published_not_updated(self, mock_fetch) -> None:
         mock_fetch.return_value = _ARXIV_ATOM
         result = _fetch_arxiv_v1_date("2301.00001")
         # v1 submission date (published), NOT the v3 updated date.
         self.assertEqual(result, "2023-01-02T18:00:00Z")
 
-    @patch("arxiv_assistant.hotspots.date_verify.fetch_text")
+    @patch("arxiv_assistant.hotspot.date_verify.fetch_text")
     def test_strips_version_suffix_in_query(self, mock_fetch) -> None:
         mock_fetch.return_value = _ARXIV_ATOM
         _fetch_arxiv_v1_date("2301.00001v3")
@@ -60,12 +60,12 @@ class TestFetchArxivV1Date(unittest.TestCase):
         self.assertIn("id_list=2301.00001", called_url)
         self.assertNotIn("v3", called_url.split("id_list=")[-1])
 
-    @patch("arxiv_assistant.hotspots.date_verify.fetch_text")
+    @patch("arxiv_assistant.hotspot.date_verify.fetch_text")
     def test_no_entry_returns_none(self, mock_fetch) -> None:
         mock_fetch.return_value = '<feed xmlns="http://www.w3.org/2005/Atom"></feed>'
         self.assertIsNone(_fetch_arxiv_v1_date("9999.99999"))
 
-    @patch("arxiv_assistant.hotspots.date_verify.fetch_text", side_effect=RuntimeError("net"))
+    @patch("arxiv_assistant.hotspot.date_verify.fetch_text", side_effect=RuntimeError("net"))
     def test_network_error_returns_none(self, mock_fetch) -> None:
         self.assertIsNone(_fetch_arxiv_v1_date("2301.00001"))
 
@@ -81,17 +81,17 @@ _CROSSREF_JSON = {
 
 
 class TestFetchCrossrefDate(unittest.TestCase):
-    @patch("arxiv_assistant.hotspots.date_verify.fetch_json")
+    @patch("arxiv_assistant.hotspot.date_verify.fetch_json")
     def test_reads_created_date(self, mock_json) -> None:
         mock_json.return_value = _CROSSREF_JSON
         self.assertEqual(_fetch_crossref_date("10.1145/1234.5678"), "2024-06-09")
 
-    @patch("arxiv_assistant.hotspots.date_verify.fetch_json")
+    @patch("arxiv_assistant.hotspot.date_verify.fetch_json")
     def test_missing_created_returns_none(self, mock_json) -> None:
         mock_json.return_value = {"message": {}}
         self.assertIsNone(_fetch_crossref_date("10.1145/1234.5678"))
 
-    @patch("arxiv_assistant.hotspots.date_verify.fetch_json", side_effect=RuntimeError("net"))
+    @patch("arxiv_assistant.hotspot.date_verify.fetch_json", side_effect=RuntimeError("net"))
     def test_network_error_returns_none(self, mock_json) -> None:
         self.assertIsNone(_fetch_crossref_date("10.1145/1234.5678"))
 
@@ -133,7 +133,7 @@ def _hf_item(**kw) -> HotspotItem:
 
 
 class TestVerify(unittest.TestCase):
-    @patch("arxiv_assistant.hotspots.date_verify._fetch_arxiv_v1_date",
+    @patch("arxiv_assistant.hotspot.date_verify._fetch_arxiv_v1_date",
            return_value="2023-01-02T18:00:00Z")
     def test_arxiv_id_yields_v1_old_date(self, _m) -> None:
         store = _FakeStore()
@@ -143,14 +143,14 @@ class TestVerify(unittest.TestCase):
         self.assertGreaterEqual(verdict["confidence"], 0.9)
         self.assertTrue(any("arxiv" in e.lower() for e in verdict["evidence"]))
 
-    @patch("arxiv_assistant.hotspots.date_verify._fetch_arxiv_v1_date",
+    @patch("arxiv_assistant.hotspot.date_verify._fetch_arxiv_v1_date",
            return_value="2023-01-02T18:00:00Z")
     def test_cache_written_once_and_frozen(self, _m) -> None:
         store = _FakeStore()
         first = verify(_hf_item(), store)
         # Second call hits cache; even if the network would now return a different
         # date, the frozen verdict is returned unchanged (INV3 freeze).
-        with patch("arxiv_assistant.hotspots.date_verify._fetch_arxiv_v1_date",
+        with patch("arxiv_assistant.hotspot.date_verify._fetch_arxiv_v1_date",
                    return_value="2099-12-31T00:00:00Z"):
             second = verify(_hf_item(), store)
         self.assertEqual(first, second)
@@ -166,7 +166,7 @@ class TestVerify(unittest.TestCase):
         self.assertEqual(verdict["verified_first_date"], "2026-04-04T00:00:00Z")
         self.assertGreaterEqual(verdict["confidence"], 0.9)
 
-    @patch("arxiv_assistant.hotspots.date_verify._fetch_arxiv_v1_date", return_value=None)
+    @patch("arxiv_assistant.hotspot.date_verify._fetch_arxiv_v1_date", return_value=None)
     def test_no_anchor_conservative_low_confidence(self, _m) -> None:
         store = _FakeStore()
         item = _hf_item(metadata={}, published_at="2026-04-04T12:00:00Z")
@@ -179,8 +179,8 @@ class TestVerify(unittest.TestCase):
         item = _hf_item(metadata={"arxiv_id": "2301.00001v3"})
         self.assertEqual(_content_hash(item), "arxiv:2301.00001")
 
-    @patch("arxiv_assistant.hotspots.date_verify._fetch_arxiv_v1_date", return_value=None)
-    @patch("arxiv_assistant.hotspots.date_verify._fetch_crossref_date",
+    @patch("arxiv_assistant.hotspot.date_verify._fetch_arxiv_v1_date", return_value=None)
+    @patch("arxiv_assistant.hotspot.date_verify._fetch_crossref_date",
            return_value="2024-01-15")
     def test_doi_fallback_to_crossref(self, _cr, _ax) -> None:
         """When no arxiv_id but a DOI is present, Crossref date is used as anchor."""
@@ -202,7 +202,7 @@ class TestVerify(unittest.TestCase):
         self.assertGreaterEqual(verdict["confidence"], 0.9)
         self.assertTrue(any("crossref" in e.lower() for e in verdict["evidence"]))
 
-    @patch("arxiv_assistant.hotspots.date_verify._fetch_arxiv_v1_date",
+    @patch("arxiv_assistant.hotspot.date_verify._fetch_arxiv_v1_date",
            return_value="2023-01-02T18:00:00Z")
     def test_earliest_credible_date_wins_over_claimed(self, _m) -> None:
         """Earliest-credible-date-wins: arXiv v1 2023 must beat source-claimed 2026."""
@@ -242,7 +242,7 @@ class TestVerify(unittest.TestCase):
         )
         self.assertIn("url:", _content_hash(item))
 
-    @patch("arxiv_assistant.hotspots.date_verify._fetch_arxiv_v1_date",
+    @patch("arxiv_assistant.hotspot.date_verify._fetch_arxiv_v1_date",
            return_value="2023-01-02T18:00:00Z")
     def test_verify_signature_accepts_will_be_featured_kwarg(self, _m) -> None:
         """verify() must accept will_be_featured as a keyword arg (§2.5 contract)."""
@@ -251,7 +251,7 @@ class TestVerify(unittest.TestCase):
         verdict = verify(_hf_item(), store, will_be_featured=True)
         self.assertIn("verified_first_date", verdict)
 
-    @patch("arxiv_assistant.hotspots.date_verify._fetch_arxiv_v1_date",
+    @patch("arxiv_assistant.hotspot.date_verify._fetch_arxiv_v1_date",
            return_value="2023-01-02T18:00:00Z")
     def test_verdict_persisted_to_store(self, _m) -> None:
         """put_verdict must be called so the verdict freezes in the store."""
@@ -275,29 +275,29 @@ _VERSIONS_ATOM = """<?xml version="1.0" encoding="UTF-8"?>
 
 
 class TestPollArxivVersions(unittest.TestCase):
-    @patch("arxiv_assistant.hotspots.date_verify.fetch_text")
+    @patch("arxiv_assistant.hotspot.date_verify.fetch_text")
     def test_parses_version_counts(self, mock_fetch) -> None:
         mock_fetch.return_value = _VERSIONS_ATOM
         result = poll_arxiv_versions(["2301.00001", "2302.00002"])
         self.assertEqual(result, {"2301.00001": 3, "2302.00002": 1})
 
-    @patch("arxiv_assistant.hotspots.date_verify.fetch_text")
+    @patch("arxiv_assistant.hotspot.date_verify.fetch_text")
     def test_empty_input_no_fetch(self, mock_fetch) -> None:
         self.assertEqual(poll_arxiv_versions([]), {})
         mock_fetch.assert_not_called()
 
-    @patch("arxiv_assistant.hotspots.date_verify.fetch_text", side_effect=RuntimeError("net"))
+    @patch("arxiv_assistant.hotspot.date_verify.fetch_text", side_effect=RuntimeError("net"))
     def test_network_error_returns_empty(self, _m) -> None:
         self.assertEqual(poll_arxiv_versions(["2301.00001"]), {})
 
-    @patch("arxiv_assistant.hotspots.date_verify.fetch_text")
+    @patch("arxiv_assistant.hotspot.date_verify.fetch_text")
     def test_dedups_ids_in_query(self, mock_fetch) -> None:
         mock_fetch.return_value = _VERSIONS_ATOM
         poll_arxiv_versions(["2301.00001v2", "2301.00001"])  # same bare id twice
         called_url = mock_fetch.call_args[0][0]
         self.assertEqual(called_url.split("id_list=")[-1].split("&")[0], "2301.00001")
 
-    @patch("arxiv_assistant.hotspots.date_verify.fetch_text")
+    @patch("arxiv_assistant.hotspot.date_verify.fetch_text")
     def test_batching_splits_large_input(self, mock_fetch) -> None:
         """More than 100 ids must produce multiple fetch_text calls (<=100 per batch)."""
         mock_fetch.return_value = _VERSIONS_ATOM
@@ -305,7 +305,7 @@ class TestPollArxivVersions(unittest.TestCase):
         poll_arxiv_versions(ids)
         self.assertEqual(mock_fetch.call_count, 2)  # batch 1: 100, batch 2: 10
 
-    @patch("arxiv_assistant.hotspots.date_verify.fetch_text")
+    @patch("arxiv_assistant.hotspot.date_verify.fetch_text")
     def test_inv3_no_verdict_write(self, mock_fetch) -> None:
         """poll_arxiv_versions must NEVER touch date_verdicts or put_verdict (INV3).
 
@@ -372,7 +372,7 @@ class TestGetFreshnessDate(unittest.TestCase):
 
 class TestAntiPollutionReads(unittest.TestCase):
     def test_wayback_earliest_snapshot_parses_first_timestamp(self):
-        from arxiv_assistant.hotspots import date_verify
+        from arxiv_assistant.hotspot import date_verify
         # CDX returns rows [["timestamp"], ["20231114083012"], ["20240101000000"]]
         cdx_rows = [["timestamp"], ["20231114083012"], ["20240101000000"]]
         with patch.object(date_verify, "fetch_json", return_value=cdx_rows):
@@ -380,23 +380,23 @@ class TestAntiPollutionReads(unittest.TestCase):
         self.assertEqual(earliest, "2023-11-14T08:30:12Z")
 
     def test_wayback_earliest_snapshot_returns_none_on_empty(self):
-        from arxiv_assistant.hotspots import date_verify
+        from arxiv_assistant.hotspot import date_verify
         with patch.object(date_verify, "fetch_json", return_value=[["timestamp"]]):
             self.assertIsNone(date_verify._wayback_earliest_snapshot("https://example.com/x"))
 
     def test_wayback_earliest_snapshot_returns_none_on_network_error(self):
-        from arxiv_assistant.hotspots import date_verify
+        from arxiv_assistant.hotspot import date_verify
         with patch.object(date_verify, "fetch_json", side_effect=RuntimeError("boom")):
             self.assertIsNone(date_verify._wayback_earliest_snapshot("https://example.com/x"))
 
     def test_page_published_time_reads_meta_property(self):
-        from arxiv_assistant.hotspots import date_verify
+        from arxiv_assistant.hotspot import date_verify
         html = '<html><head><meta property="article:published_time" content="2023-11-14T08:30:00Z"></head></html>'
         with patch.object(date_verify, "fetch_text", return_value=html):
             self.assertEqual(date_verify._page_published_time("https://example.com/x"), "2023-11-14T08:30:00Z")
 
     def test_page_published_time_reads_jsonld_datepublished(self):
-        from arxiv_assistant.hotspots import date_verify
+        from arxiv_assistant.hotspot import date_verify
         html = (
             '<html><head><script type="application/ld+json">'
             '{"@type":"Article","datePublished":"2024-02-01T00:00:00Z"}'
@@ -407,7 +407,7 @@ class TestAntiPollutionReads(unittest.TestCase):
 
     def test_page_published_time_reversed_meta_attribute_order(self):
         """Fix 3: content attr before property attr must still be parsed."""
-        from arxiv_assistant.hotspots import date_verify
+        from arxiv_assistant.hotspot import date_verify
         # reversed order: content first, property second
         html = '<html><head><meta content="2025-03-15T10:00:00Z" property="article:published_time"></head></html>'
         with patch.object(date_verify, "fetch_text", return_value=html):
@@ -415,7 +415,7 @@ class TestAntiPollutionReads(unittest.TestCase):
 
     def test_page_published_time_jsonld_graph_wrapped(self):
         """Fix 3: @graph-wrapped JSON-LD must yield datePublished from nested objects."""
-        from arxiv_assistant.hotspots import date_verify
+        from arxiv_assistant.hotspot import date_verify
         html = (
             '<html><head><script type="application/ld+json">'
             '{"@context":"https://schema.org","@graph":[{"@type":"Article","datePublished":"2024-05-20T00:00:00Z"}]}'
@@ -427,7 +427,7 @@ class TestAntiPollutionReads(unittest.TestCase):
 
 class TestClampVerdict(unittest.TestCase):
     def test_clamp_picks_earliest_credible_and_floors_to_day(self):
-        from arxiv_assistant.hotspots.date_verify import _clamp_verdict
+        from arxiv_assistant.hotspot.date_verify import _clamp_verdict
         clamped = _clamp_verdict(
             claimed_iso="2026-06-02T09:00:00Z",
             agent_out={
@@ -445,7 +445,7 @@ class TestClampVerdict(unittest.TestCase):
         self.assertGreaterEqual(clamped["confidence"], 0.0)
 
     def test_clamp_ignores_agent_date_later_than_evidence(self):
-        from arxiv_assistant.hotspots.date_verify import _clamp_verdict
+        from arxiv_assistant.hotspot.date_verify import _clamp_verdict
         # agent hallucinates a LATER date than Wayback proves -> verifier overrides with the earlier
         clamped = _clamp_verdict(
             claimed_iso="2026-06-02T09:00:00Z",
@@ -462,7 +462,7 @@ class TestClampVerdict(unittest.TestCase):
         self.assertTrue(clamped["stale_date_pollution"])
 
     def test_clamp_falls_back_to_min_claimed_fetched_when_no_signals(self):
-        from arxiv_assistant.hotspots.date_verify import _clamp_verdict
+        from arxiv_assistant.hotspot.date_verify import _clamp_verdict
         clamped = _clamp_verdict(
             claimed_iso="2026-06-02T09:00:00Z",
             agent_out=None,            # agent failed / unparseable
@@ -481,7 +481,7 @@ class TestClampVerdictINV6AntiHallucination(unittest.TestCase):
     def test_clamp_rejects_hallucinated_future_agent_date_no_external_signal(self):
         """Agent claims 2099 with no Wayback/page signal: min picks the claimed date,
         confidence must be LOW (not the agent's high 0.95)."""
-        from arxiv_assistant.hotspots.date_verify import _clamp_verdict, _CONFIDENCE_LOW
+        from arxiv_assistant.hotspot.date_verify import _clamp_verdict, _CONFIDENCE_LOW
         claimed = "2023-11-14T00:00:00Z"
         clamped = _clamp_verdict(
             claimed_iso=claimed,
@@ -505,7 +505,7 @@ class TestClampVerdictINV6AntiHallucination(unittest.TestCase):
         The agent was OVERRIDDEN (its date > earliest), so confidence is capped to LOW even
         though Wayback is a real external signal — a wrong-direction agent must not lend trust
         (INV6 anti-hallucination)."""
-        from arxiv_assistant.hotspots.date_verify import _clamp_verdict, _CONFIDENCE_LOW
+        from arxiv_assistant.hotspot.date_verify import _clamp_verdict, _CONFIDENCE_LOW
         claimed = "2026-06-02T09:00:00Z"
         clamped = _clamp_verdict(
             claimed_iso=claimed,
@@ -601,7 +601,7 @@ def _news_item(url, claimed):
 
 class TestTier1Verify(unittest.TestCase):
     def test_tier1_replay_uses_earlier_wayback_date_and_flags_pollution(self):
-        from arxiv_assistant.hotspots import date_verify
+        from arxiv_assistant.hotspot import date_verify
         replay = _json.loads((FIXTURES / "dateverify_tier1_stale_pollution.json").read_text(encoding="utf-8"))
         store = _NewsStore()
         item = _news_item("https://example.com/blog/x", "2026-06-02T09:00:00Z")
@@ -614,7 +614,7 @@ class TestTier1Verify(unittest.TestCase):
         self.assertTrue(verdict.get("stale_date_pollution"))
 
     def test_verdict_frozen_once_and_stable_across_calls(self):
-        from arxiv_assistant.hotspots import date_verify
+        from arxiv_assistant.hotspot import date_verify
         replay = _json.loads((FIXTURES / "dateverify_tier1_stale_pollution.json").read_text(encoding="utf-8"))
         store = _NewsStore()
         item = _news_item("https://example.com/blog/x", "2026-06-02T09:00:00Z")
@@ -631,7 +631,7 @@ class TestTier1Verify(unittest.TestCase):
 
     def test_inv1_gate_never_uses_source_claimed_date(self):
         # INV1: the verdict that drives gates is the verified date, not item.published_at
-        from arxiv_assistant.hotspots import date_verify
+        from arxiv_assistant.hotspot import date_verify
         replay = _json.loads((FIXTURES / "dateverify_tier1_stale_pollution.json").read_text(encoding="utf-8"))
         store = _NewsStore()
         item = _news_item("https://example.com/blog/x", "2026-06-02T09:00:00Z")
@@ -643,7 +643,7 @@ class TestTier1Verify(unittest.TestCase):
 
     def test_inv2_subday_jitter_does_not_change_gate_day(self):
         # INV2: two agent runs differing only in sub-day H:M:S yield the same day verdict
-        from arxiv_assistant.hotspots import date_verify
+        from arxiv_assistant.hotspot import date_verify
         store_a, store_b = _NewsStore(), _NewsStore()
         item_a = _news_item("https://example.com/a", "2026-06-02T09:00:00Z")
         item_b = _news_item("https://example.com/b", "2026-06-02T09:00:00Z")
@@ -659,7 +659,7 @@ class TestTier1Verify(unittest.TestCase):
 
     def test_agent_error_degrades_to_conservative_fallback(self):
         # AgentError: _run_dateverify_subagent raises -> degrade to min(claimed,fetched)+LOW, no crash
-        from arxiv_assistant.hotspots import date_verify
+        from arxiv_assistant.hotspot import date_verify
         store = _NewsStore()
         item = _news_item("https://example.com/blog/err", "2026-06-02T09:00:00Z")
         with patch.object(date_verify, "_wayback_earliest_snapshot", return_value=None), \
@@ -673,7 +673,7 @@ class TestTier1Verify(unittest.TestCase):
 
     def test_inv6_agent_proposing_later_date_is_clamped_to_earlier_real(self):
         # INV6: agent proposes a date LATER than Wayback evidence; clamp must pick the earlier Wayback date
-        from arxiv_assistant.hotspots import date_verify
+        from arxiv_assistant.hotspot import date_verify
         store = _NewsStore()
         item = _news_item("https://example.com/blog/inv6", "2026-06-02T09:00:00Z")
         # agent proposes 2026 (same as claimed), but Wayback shows 2023
@@ -694,7 +694,7 @@ class TestTier1Verify(unittest.TestCase):
 
 class TestTier2DeepSearch(unittest.TestCase):
     def test_tier2_only_escalates_when_uncertain_and_featured(self):
-        from arxiv_assistant.hotspots import date_verify
+        from arxiv_assistant.hotspot import date_verify
         deep = _json.loads((FIXTURES / "dateverify_tier2_deep.json").read_text(encoding="utf-8"))
         store = _NewsStore()
         item = _news_item("https://example.com/blog/y", "2026-06-02T09:00:00Z")
@@ -709,7 +709,7 @@ class TestTier2DeepSearch(unittest.TestCase):
         self.assertTrue(verdict["stale_date_pollution"])
 
     def test_tier2_not_triggered_when_confident(self):
-        from arxiv_assistant.hotspots import date_verify
+        from arxiv_assistant.hotspot import date_verify
         store = _NewsStore()
         item = _news_item("https://example.com/blog/z", "2026-06-02T09:00:00Z")
         confident = {"verified_first_date": "2026-06-02T00:00:00Z", "confidence": 0.9, "evidence": [], "stale_date_pollution": False}
@@ -720,7 +720,7 @@ class TestTier2DeepSearch(unittest.TestCase):
         self.assertEqual(agent.call_count, 1)  # no escalation
 
     def test_tier2_not_triggered_when_not_featured(self):
-        from arxiv_assistant.hotspots import date_verify
+        from arxiv_assistant.hotspot import date_verify
         store = _NewsStore()
         item = _news_item("https://example.com/blog/q", "2026-06-02T09:00:00Z")
         low_conf = {"verified_first_date": "2026-06-02T00:00:00Z", "confidence": 0.4, "evidence": [], "stale_date_pollution": False}
@@ -732,7 +732,7 @@ class TestTier2DeepSearch(unittest.TestCase):
 
     def test_tier2_agent_error_keeps_tier1_result(self):
         """AgentError in Tier-2 must degrade silently to the Tier-1 result (no crash, INV3)."""
-        from arxiv_assistant.hotspots import date_verify
+        from arxiv_assistant.hotspot import date_verify
         store = _NewsStore()
         item = _news_item("https://example.com/blog/t2err", "2026-06-02T09:00:00Z")
         low_conf = {"verified_first_date": "2026-06-02T00:00:00Z", "confidence": 0.4, "evidence": ["tier1:evidence"], "stale_date_pollution": False}
@@ -749,7 +749,7 @@ class TestTier2DeepSearch(unittest.TestCase):
 
     def test_tier2_clamp_inv6_later_date_overridden(self):
         """INV6: Tier-2 agent proposes a date LATER than Tier-1; cross-tier min must pick the earlier."""
-        from arxiv_assistant.hotspots import date_verify
+        from arxiv_assistant.hotspot import date_verify
         store = _NewsStore()
         item = _news_item("https://example.com/blog/inv6t2", "2026-06-02T09:00:00Z")
         low_conf = {"verified_first_date": "2024-09-30T00:00:00Z", "confidence": 0.4, "evidence": [], "stale_date_pollution": True}
@@ -764,7 +764,7 @@ class TestTier2DeepSearch(unittest.TestCase):
 
     def test_tier2_write_once_freeze(self):
         """After Tier-2 escalation the verdict is frozen; a second call returns the cached result."""
-        from arxiv_assistant.hotspots import date_verify
+        from arxiv_assistant.hotspot import date_verify
         deep = _json.loads((FIXTURES / "dateverify_tier2_deep.json").read_text(encoding="utf-8"))
         store = _NewsStore()
         item = _news_item("https://example.com/blog/freeze2", "2026-06-02T09:00:00Z")
@@ -846,7 +846,7 @@ class TestStage3Invariants(unittest.TestCase):
         - poll_arxiv_versions called after → does not touch date_verdicts (store unchanged).
         - put_verdict is called by verify() on BOTH calls (store enforces write-once no-op).
         """
-        from arxiv_assistant.hotspots import date_verify
+        from arxiv_assistant.hotspot import date_verify
         store = _FakeStore()
         item = _news_item("https://e.com/z", "2026-06-02T09:00:00Z")
         confident = {"verified_first_date": "2026-06-02T00:00:00Z", "confidence": 0.9, "evidence": [], "stale_date_pollution": False}
@@ -872,7 +872,7 @@ class TestStage3Invariants(unittest.TestCase):
         earlier Wayback date (agent overridden) AND stale_date_pollution is True.
         """
         # A hostile agent emitting a LATER date than the proven Wayback day must be overridden.
-        from arxiv_assistant.hotspots import date_verify
+        from arxiv_assistant.hotspot import date_verify
         store = _FakeStore()
         item = _news_item("https://e.com/hostile", "2026-06-02T09:00:00Z")
         hostile = {"verified_first_date": "2026-06-02T00:00:00Z", "confidence": 1.0, "evidence": [], "stale_date_pollution": False}

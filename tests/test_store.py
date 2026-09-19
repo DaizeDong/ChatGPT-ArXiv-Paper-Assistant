@@ -6,10 +6,10 @@ import unittest
 from datetime import date as _date
 from pathlib import Path
 
-from arxiv_assistant.hotspots.enrich import EnrichedItem
-from arxiv_assistant.hotspots.store import StoryStore, _open_story_store
-from arxiv_assistant.hotspots.story import Story
-from arxiv_assistant.utils.hotspot.hotspot_schema import HotspotItem
+from arxiv_assistant.hotspot.enrich import EnrichedItem
+from arxiv_assistant.hotspot.store import StoryStore, _open_story_store
+from arxiv_assistant.hotspot.story import Story
+from arxiv_assistant.hotspot.support.schema import HotspotItem
 
 
 def _make_item(

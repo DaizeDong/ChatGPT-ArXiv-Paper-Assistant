@@ -48,7 +48,7 @@ class ConfigLoaderTests(unittest.TestCase):
         # read a relative path, one passed no encoding. Reading through any of
         # them must now give the same sections.
         from arxiv_assistant.environment import CONFIG
-        from arxiv_assistant.utils.hotspot.hotspot_config import load_repo_config as hotspot_loader
+        from arxiv_assistant.hotspot.support.config import load_repo_config as hotspot_loader
 
         expected = set(load_repo_config().sections())
         self.assertEqual(set(CONFIG.sections()), expected)

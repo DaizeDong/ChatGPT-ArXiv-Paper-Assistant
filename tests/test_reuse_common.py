@@ -5,13 +5,13 @@ import unittest
 from datetime import datetime, timezone
 from unittest.mock import patch
 
-from arxiv_assistant.apis.hotspot.reuse_common import (
+from arxiv_assistant.hotspot.sources.reuse_common import (
     REUSE_SOURCE_TIER_ANCHOR,
     build_reuse_item,
     harvest_rss_reuse,
     reuse_source_role,
 )
-from arxiv_assistant.utils.hotspot.hotspot_schema import HotspotItem
+from arxiv_assistant.hotspot.support.schema import HotspotItem
 
 # ---------------------------------------------------------------------------
 # Sample RSS feed for mocked fetch_text responses.
@@ -184,30 +184,30 @@ class TestBuildReuseItem(unittest.TestCase):
 # ---------------------------------------------------------------------------
 
 class TestHarvestRssReuse(unittest.TestCase):
-    @patch("arxiv_assistant.apis.hotspot.reuse_common.fetch_text", return_value=_SAMPLE_RSS)
+    @patch("arxiv_assistant.hotspot.sources.reuse_common.fetch_text", return_value=_SAMPLE_RSS)
     def test_returns_fresh_items_only(self, _mock_fetch) -> None:
         items = harvest_rss_reuse("ainews", "https://example.com/rss", _TARGET_DATE, _FRESHNESS_HOURS)
         # Only the two June 2026 items are within the 30h window; 2020 item is stale.
         self.assertEqual(len(items), 2)
 
-    @patch("arxiv_assistant.apis.hotspot.reuse_common.fetch_text", return_value=_SAMPLE_RSS)
+    @patch("arxiv_assistant.hotspot.sources.reuse_common.fetch_text", return_value=_SAMPLE_RSS)
     def test_items_have_correct_provenance(self, _mock_fetch) -> None:
         items = harvest_rss_reuse("ainews", "https://example.com/rss", _TARGET_DATE, _FRESHNESS_HOURS)
         for item in items:
             self.assertEqual(item.provenance, "reuse:ainews")
 
-    @patch("arxiv_assistant.apis.hotspot.reuse_common.fetch_text", return_value=_SAMPLE_RSS)
+    @patch("arxiv_assistant.hotspot.sources.reuse_common.fetch_text", return_value=_SAMPLE_RSS)
     def test_items_have_correct_source_role(self, _mock_fetch) -> None:
         items = harvest_rss_reuse("ainews", "https://example.com/rss", _TARGET_DATE, _FRESHNESS_HOURS)
         for item in items:
             self.assertEqual(item.source_role, "community_signal")
 
-    @patch("arxiv_assistant.apis.hotspot.reuse_common.fetch_text", return_value=_SAMPLE_RSS)
+    @patch("arxiv_assistant.hotspot.sources.reuse_common.fetch_text", return_value=_SAMPLE_RSS)
     def test_result_limit_is_honoured(self, _mock_fetch) -> None:
         items = harvest_rss_reuse("ainews", "https://example.com/rss", _TARGET_DATE, _FRESHNESS_HOURS, result_limit=1)
         self.assertEqual(len(items), 1)
 
-    @patch("arxiv_assistant.apis.hotspot.reuse_common.fetch_text", return_value=_SAMPLE_RSS)
+    @patch("arxiv_assistant.hotspot.sources.reuse_common.fetch_text", return_value=_SAMPLE_RSS)
     def test_deduplication_by_url(self, _mock_fetch) -> None:
         # Feed with duplicate URLs: only one item should be kept.
         duplicate_rss = textwrap.dedent("""\
@@ -228,21 +228,21 @@ class TestHarvestRssReuse(unittest.TestCase):
               </channel>
             </rss>
         """)
-        with patch("arxiv_assistant.apis.hotspot.reuse_common.fetch_text", return_value=duplicate_rss):
+        with patch("arxiv_assistant.hotspot.sources.reuse_common.fetch_text", return_value=duplicate_rss):
             items = harvest_rss_reuse("ainews", "https://example.com/rss", _TARGET_DATE, _FRESHNESS_HOURS)
         self.assertEqual(len(items), 1)
 
-    @patch("arxiv_assistant.apis.hotspot.reuse_common.fetch_text", side_effect=Exception("network error"))
+    @patch("arxiv_assistant.hotspot.sources.reuse_common.fetch_text", side_effect=Exception("network error"))
     def test_fetch_failure_returns_empty_list(self, _mock_fetch) -> None:
         items = harvest_rss_reuse("ainews", "https://example.com/rss", _TARGET_DATE, _FRESHNESS_HOURS)
         self.assertEqual(items, [])
 
-    @patch("arxiv_assistant.apis.hotspot.reuse_common.fetch_text", return_value=_EMPTY_BOZO_RSS)
+    @patch("arxiv_assistant.hotspot.sources.reuse_common.fetch_text", return_value=_EMPTY_BOZO_RSS)
     def test_bozo_feed_with_no_entries_returns_empty_list(self, _mock_fetch) -> None:
         items = harvest_rss_reuse("ainews", "https://example.com/rss", _TARGET_DATE, _FRESHNESS_HOURS)
         self.assertEqual(items, [])
 
-    @patch("arxiv_assistant.apis.hotspot.reuse_common.fetch_text", return_value=_SAMPLE_RSS)
+    @patch("arxiv_assistant.hotspot.sources.reuse_common.fetch_text", return_value=_SAMPLE_RSS)
     def test_custom_summary_of_callable_is_used(self, _mock_fetch) -> None:
         def custom_summary(entry):
             return f"CUSTOM:{entry.get('title', '')}"
@@ -254,7 +254,7 @@ class TestHarvestRssReuse(unittest.TestCase):
         for item in items:
             self.assertTrue(item.summary.startswith("CUSTOM:"))
 
-    @patch("arxiv_assistant.apis.hotspot.reuse_common.fetch_text", return_value=_SAMPLE_RSS)
+    @patch("arxiv_assistant.hotspot.sources.reuse_common.fetch_text", return_value=_SAMPLE_RSS)
     def test_titles_cleaned(self, _mock_fetch) -> None:
         items = harvest_rss_reuse("ainews", "https://example.com/rss", _TARGET_DATE, _FRESHNESS_HOURS)
         for item in items:
@@ -262,7 +262,7 @@ class TestHarvestRssReuse(unittest.TestCase):
             self.assertEqual(item.title, item.title.strip())
             self.assertNotIn("  ", item.title)
 
-    @patch("arxiv_assistant.apis.hotspot.reuse_common.fetch_text", return_value=_SAMPLE_RSS)
+    @patch("arxiv_assistant.hotspot.sources.reuse_common.fetch_text", return_value=_SAMPLE_RSS)
     def test_verified_first_date_not_set_here(self, _mock_fetch) -> None:
         # DateVerify is downstream; reuse_common never stamps verified_first_date.
         items = harvest_rss_reuse("ainews", "https://example.com/rss", _TARGET_DATE, _FRESHNESS_HOURS)

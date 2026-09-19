@@ -6,10 +6,10 @@ from datetime import UTC, date, datetime
 from pathlib import Path
 
 from arxiv_assistant.utils.config_loader import load_repo_config
-from arxiv_assistant.hotspots.pipeline import _apply_freshness_gates
-from arxiv_assistant.utils.hotspot.gate_date import gate_date
-from arxiv_assistant.utils.hotspot.hotspot_schema import HotspotItem
-from arxiv_assistant.utils.hotspot.hotspot_sources import get_freshness_date
+from arxiv_assistant.hotspot.pipeline import _apply_freshness_gates
+from arxiv_assistant.hotspot.support.gate_date import gate_date
+from arxiv_assistant.hotspot.support.schema import HotspotItem
+from arxiv_assistant.hotspot.support.source_fetch import get_freshness_date
 
 
 def _paper(arxiv_id: str, published_at: str, verified: str | None) -> HotspotItem:

@@ -4,12 +4,12 @@ import unittest
 from unittest.mock import MagicMock, patch
 
 from arxiv_assistant.apis.semantic_scholar import get_paper_citations
-from arxiv_assistant.hotspots.pipeline import (
+from arxiv_assistant.hotspot.pipeline import (
     _S2_BONUS_CAP,
     _build_paper_spotlight,
     _s2_significance_bonus,
 )
-from arxiv_assistant.utils.hotspot.hotspot_schema import HotspotItem
+from arxiv_assistant.hotspot.support.schema import HotspotItem
 
 
 def _paper(arxiv_id: str, kind: str = "daily_hot", daily_score: int = 5) -> HotspotItem:

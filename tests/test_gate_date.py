@@ -3,8 +3,8 @@ from __future__ import annotations
 import unittest
 from datetime import date
 
-from arxiv_assistant.utils.hotspot.gate_date import floor_to_utc_day, gate_date
-from arxiv_assistant.utils.hotspot.hotspot_schema import HotspotItem
+from arxiv_assistant.hotspot.support.gate_date import floor_to_utc_day, gate_date
+from arxiv_assistant.hotspot.support.schema import HotspotItem
 
 
 class TestFloorToUtcDay(unittest.TestCase):

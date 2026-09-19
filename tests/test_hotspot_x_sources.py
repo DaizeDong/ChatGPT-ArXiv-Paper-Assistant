@@ -11,9 +11,9 @@ from unittest.mock import patch
 import configparser
 
 from arxiv_assistant.utils.config_loader import load_repo_config
-from arxiv_assistant.apis.hotspot.hotspot_x_ainews import _extract_twitter_section_items
-from arxiv_assistant.utils.hotspot.x_authority_registry import build_x_authority_registry, load_x_authority_registry, refresh_x_authority_registry
-from arxiv_assistant.hotspots import pipeline as hp
+from arxiv_assistant.hotspot.sources.x_ainews import _extract_twitter_section_items
+from arxiv_assistant.hotspot.support.x_authority_registry import build_x_authority_registry, load_x_authority_registry, refresh_x_authority_registry
+from arxiv_assistant.hotspot import pipeline as hp
 
 
 class TestHotspotXSources(unittest.TestCase):
@@ -47,9 +47,9 @@ class TestHotspotXSources(unittest.TestCase):
         self.assertEqual(items[0].metadata["host"], "x.com")
         self.assertGreaterEqual(items[0].metadata["activity"], 80)
 
-    @patch("arxiv_assistant.utils.hotspot.x_authority_registry._get_bearer_token", return_value=None)
-    @patch("arxiv_assistant.utils.hotspot.x_authority_registry.fetch_json")
-    @patch("arxiv_assistant.utils.hotspot.x_authority_registry.fetch_text")
+    @patch("arxiv_assistant.hotspot.support.x_authority_registry._get_bearer_token", return_value=None)
+    @patch("arxiv_assistant.hotspot.support.x_authority_registry.fetch_json")
+    @patch("arxiv_assistant.hotspot.support.x_authority_registry.fetch_text")
     def test_x_authority_registry_merges_manual_and_external_seeds(self, mock_fetch_text, mock_fetch_json, _mock_token) -> None:
         mock_fetch_text.return_value = "[Demis](https://x.com/demishassabis) [OpenAI](https://x.com/OpenAI)"
         mock_fetch_json.return_value = {"authors": ["demishassabis", "JeffDean"]}
@@ -76,11 +76,11 @@ class TestHotspotXSources(unittest.TestCase):
         self.assertGreaterEqual(accounts["demishassabis"]["tier"], 2)
         self.assertEqual(accounts["openai"]["kind"], "official")
 
-    @patch("arxiv_assistant.utils.hotspot.x_authority_registry.fetch_json")
-    @patch("arxiv_assistant.utils.hotspot.x_authority_registry.fetch_text")
-    @patch("arxiv_assistant.utils.hotspot.x_authority_registry._fetch_x_following")
-    @patch("arxiv_assistant.utils.hotspot.x_authority_registry._fetch_x_user")
-    @patch("arxiv_assistant.utils.hotspot.x_authority_registry._get_bearer_token", return_value="token")
+    @patch("arxiv_assistant.hotspot.support.x_authority_registry.fetch_json")
+    @patch("arxiv_assistant.hotspot.support.x_authority_registry.fetch_text")
+    @patch("arxiv_assistant.hotspot.support.x_authority_registry._fetch_x_following")
+    @patch("arxiv_assistant.hotspot.support.x_authority_registry._fetch_x_user")
+    @patch("arxiv_assistant.hotspot.support.x_authority_registry._get_bearer_token", return_value="token")
     def test_x_authority_registry_expands_following_graph(
         self,
         _mock_token,
@@ -194,7 +194,7 @@ class TestHotspotXSources(unittest.TestCase):
         self.assertEqual(len(payload["accounts"]), 1)
         self.assertEqual(payload["accounts"][0]["handle"], "openai")
 
-    @patch("arxiv_assistant.utils.hotspot.x_authority_registry.build_x_authority_registry")
+    @patch("arxiv_assistant.hotspot.support.x_authority_registry.build_x_authority_registry")
     def test_refresh_x_authority_registry_is_stable_when_payload_is_equivalent(self, mock_build_registry) -> None:
         with tempfile.TemporaryDirectory() as tmp_dir:
             seed_path = Path(tmp_dir) / "x_seeds.json"
@@ -226,7 +226,7 @@ class TestHotspotXSources(unittest.TestCase):
         self.assertEqual(persisted["generated_at"], "2026-03-23T00:00:00+00:00")
         self.assertEqual(persisted["accounts"][0]["handle"], "openai")
 
-    @patch("arxiv_assistant.utils.hotspot.x_authority_registry.build_x_authority_registry")
+    @patch("arxiv_assistant.hotspot.support.x_authority_registry.build_x_authority_registry")
     def test_refresh_x_authority_registry_preserves_existing_snapshot_on_catastrophic_graph_failure(self, mock_build_registry) -> None:
         with tempfile.TemporaryDirectory() as tmp_dir:
             seed_path = Path(tmp_dir) / "x_seeds.json"
@@ -373,7 +373,7 @@ class TestSubagentRouteRegistration(unittest.TestCase):
     def _run(self, *, use_subagent_routes: bool):
         cfg = self._make_config(use_subagent_routes=use_subagent_routes)
         with tempfile.TemporaryDirectory() as tmp_dir, \
-                patch("arxiv_assistant.apis.hotspot.browser_source_fetch.fetch_source_via_browser",
+                patch("arxiv_assistant.hotspot.sources.browser_source_fetch.fetch_source_via_browser",
                       return_value=[]) as mock_browser, \
                 patch.object(hp, "fetch_reddit_items", return_value=[]) as mock_reddit:
             _items, source_stats, _usage = hp.fetch_source_payloads(

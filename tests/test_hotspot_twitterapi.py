@@ -30,7 +30,7 @@ class TestHotspotTwitterapiSource(unittest.TestCase):
     # -----------------------------------------------------------------------
 
     def test_returns_empty_when_no_twitterapi_key_configured(self) -> None:
-        from arxiv_assistant.apis.hotspot.hotspot_twitterapi import fetch_hotspot_items
+        from arxiv_assistant.hotspot.sources.twitterapi import fetch_hotspot_items
 
         with tempfile.TemporaryDirectory() as tmp_dir, patch.dict(os.environ, {}, clear=True):
             seed_path = self._seed_file(tmp_dir)
@@ -70,7 +70,7 @@ class TestHotspotTwitterapiSource(unittest.TestCase):
     }
 
     def test_map_twitterapi_tweet_normalizes_camelcase_and_timestamp(self) -> None:
-        from arxiv_assistant.apis.hotspot.hotspot_twitterapi import _map_twitterapi_tweet
+        from arxiv_assistant.hotspot.sources.twitterapi import _map_twitterapi_tweet
 
         mapped = _map_twitterapi_tweet(self._OPENAI_PAYLOAD["tweets"][0], handle="openai", user_id="1")
         self.assertEqual(mapped["id"], "2035012260008272007")
@@ -81,7 +81,7 @@ class TestHotspotTwitterapiSource(unittest.TestCase):
         self.assertTrue(mapped["author"]["verified"])
 
     def test_fetch_last_tweets_rest_returns_empty_on_429(self) -> None:
-        from arxiv_assistant.apis.hotspot import hotspot_twitterapi as mod
+        from arxiv_assistant.hotspot.sources import twitterapi as mod
 
         class _Resp:
             status_code = 429
@@ -104,7 +104,7 @@ class TestHotspotTwitterapiSource(unittest.TestCase):
         self.assertEqual(rows, [])
 
     def test_fetch_last_tweets_rest_filters_by_since_window(self) -> None:
-        from arxiv_assistant.apis.hotspot import hotspot_twitterapi as mod
+        from arxiv_assistant.hotspot.sources import twitterapi as mod
 
         payload = {
             "tweets": [
@@ -143,7 +143,7 @@ class TestHotspotTwitterapiSource(unittest.TestCase):
     # -----------------------------------------------------------------------
 
     def test_tweet_to_item_sets_provenance_and_canonical_fields(self) -> None:
-        from arxiv_assistant.apis.hotspot import hotspot_twitterapi as mod
+        from arxiv_assistant.hotspot.sources import twitterapi as mod
 
         row = mod._map_twitterapi_tweet(self._OPENAI_PAYLOAD["tweets"][0], handle="openai", user_id="1")
         authority = {"handle": "openai", "name": "OpenAI", "kind": "official", "tier": 3, "organization": "OpenAI"}
@@ -163,7 +163,7 @@ class TestHotspotTwitterapiSource(unittest.TestCase):
         self.assertGreater(item.metadata["activity"], 500)
 
     def test_tweet_to_item_drops_replies_and_retweets(self) -> None:
-        from arxiv_assistant.apis.hotspot import hotspot_twitterapi as mod
+        from arxiv_assistant.hotspot.sources import twitterapi as mod
 
         reply = {**self._OPENAI_PAYLOAD["tweets"][0], "in_reply_to_user_id": "42"}
         authority = {"handle": "openai", "name": "OpenAI", "kind": "official", "tier": 3}
@@ -176,7 +176,7 @@ class TestHotspotTwitterapiSource(unittest.TestCase):
         """Official 'We released GPT-5' tweets must NOT be killed by SELF_WORK_PATTERNS —
         the official-account exemption in is_newsworthy_x_text must pass them through.
         This is the X≈0 root-cause fix: channel (twitterapi.io) + filter-is-not-the-blocker."""
-        from arxiv_assistant.apis.hotspot import hotspot_twitterapi as mod
+        from arxiv_assistant.hotspot.sources import twitterapi as mod
 
         row = mod._map_twitterapi_tweet(self._OPENAI_PAYLOAD["tweets"][0], handle="openai", user_id="1")
         authority = {"handle": "openai", "name": "OpenAI", "kind": "official", "tier": 3}
@@ -220,14 +220,14 @@ class TestHotspotTwitterapiSource(unittest.TestCase):
         return {"tweets": []}
 
     def test_fetch_hotspot_items_official_release_survives_filter(self) -> None:
-        from arxiv_assistant.apis.hotspot import hotspot_twitterapi as mod
+        from arxiv_assistant.hotspot.sources import twitterapi as mod
 
         # target_date at noon so the 10:00Z tweet falls inside window [target-24h, target+6h].
         with tempfile.TemporaryDirectory() as tmp_dir, \
                 patch.dict(os.environ, {"TWITTERAPI_IO_KEY": "test-key"}, clear=True), \
                 patch.object(mod, "_twitterapi_get", side_effect=self._fake_twitterapi_get), \
-                patch("arxiv_assistant.utils.hotspot.x_authority_registry.fetch_text", return_value=""), \
-                patch("arxiv_assistant.utils.hotspot.x_authority_registry.fetch_json", return_value={}):
+                patch("arxiv_assistant.hotspot.support.x_authority_registry.fetch_text", return_value=""), \
+                patch("arxiv_assistant.hotspot.support.x_authority_registry.fetch_json", return_value={}):
             seed_path = self._seed_file(tmp_dir)
             items = mod.fetch_hotspot_items(
                 datetime(2026, 3, 21, 12, 0, tzinfo=UTC),
@@ -247,7 +247,7 @@ class TestHotspotTwitterapiSource(unittest.TestCase):
         self.assertEqual(official.source_role, "official_news")
 
     def test_fetch_hotspot_items_drops_out_of_window_tweets(self) -> None:
-        from arxiv_assistant.apis.hotspot import hotspot_twitterapi as mod
+        from arxiv_assistant.hotspot.sources import twitterapi as mod
 
         stale_payload = {
             "tweets": [
@@ -266,8 +266,8 @@ class TestHotspotTwitterapiSource(unittest.TestCase):
         with tempfile.TemporaryDirectory() as tmp_dir, \
                 patch.dict(os.environ, {"TWITTERAPI_IO_KEY": "test-key"}, clear=True), \
                 patch.object(mod, "_twitterapi_get", side_effect=_stale_get), \
-                patch("arxiv_assistant.utils.hotspot.x_authority_registry.fetch_text", return_value=""), \
-                patch("arxiv_assistant.utils.hotspot.x_authority_registry.fetch_json", return_value={}):
+                patch("arxiv_assistant.hotspot.support.x_authority_registry.fetch_text", return_value=""), \
+                patch("arxiv_assistant.hotspot.support.x_authority_registry.fetch_json", return_value={}):
             seed_path = self._seed_file(tmp_dir)
             items = mod.fetch_hotspot_items(
                 datetime(2026, 3, 21, 12, 0, tzinfo=UTC),
@@ -278,13 +278,13 @@ class TestHotspotTwitterapiSource(unittest.TestCase):
         self.assertEqual(items, [])
 
     def test_fetch_hotspot_items_empty_response_degrades_cleanly(self) -> None:
-        from arxiv_assistant.apis.hotspot import hotspot_twitterapi as mod
+        from arxiv_assistant.hotspot.sources import twitterapi as mod
 
         with tempfile.TemporaryDirectory() as tmp_dir, \
                 patch.dict(os.environ, {"TWITTERAPI_IO_KEY": "test-key"}, clear=True), \
                 patch.object(mod, "_twitterapi_get", return_value={"tweets": []}), \
-                patch("arxiv_assistant.utils.hotspot.x_authority_registry.fetch_text", return_value=""), \
-                patch("arxiv_assistant.utils.hotspot.x_authority_registry.fetch_json", return_value={}):
+                patch("arxiv_assistant.hotspot.support.x_authority_registry.fetch_text", return_value=""), \
+                patch("arxiv_assistant.hotspot.support.x_authority_registry.fetch_json", return_value={}):
             seed_path = self._seed_file(tmp_dir)
             items = mod.fetch_hotspot_items(
                 datetime(2026, 3, 21, 12, 0, tzinfo=UTC),
@@ -369,13 +369,13 @@ class TestHotspotTwitterapiSource(unittest.TestCase):
 
     def test_fetch_hotspot_items_multi_account_yields_items_from_each(self) -> None:
         """Multi-account iteration: items from 3 distinct official accounts all appear."""
-        from arxiv_assistant.apis.hotspot import hotspot_twitterapi as mod
+        from arxiv_assistant.hotspot.sources import twitterapi as mod
 
         with tempfile.TemporaryDirectory() as tmp_dir, \
                 patch.dict(os.environ, {"TWITTERAPI_IO_KEY": "test-key"}, clear=True), \
                 patch.object(mod, "_twitterapi_get", side_effect=self._fake_three_account_get), \
-                patch("arxiv_assistant.utils.hotspot.x_authority_registry.fetch_text", return_value=""), \
-                patch("arxiv_assistant.utils.hotspot.x_authority_registry.fetch_json", return_value={}):
+                patch("arxiv_assistant.hotspot.support.x_authority_registry.fetch_text", return_value=""), \
+                patch("arxiv_assistant.hotspot.support.x_authority_registry.fetch_json", return_value={}):
             seed_path = self._seed_file_three_accounts(tmp_dir)
             items = mod.fetch_hotspot_items(
                 datetime(2026, 3, 21, 12, 0, tzinfo=UTC),
@@ -393,7 +393,7 @@ class TestHotspotTwitterapiSource(unittest.TestCase):
 
     def test_fetch_hotspot_items_per_account_fault_tolerance(self) -> None:
         """One account raising an exception does not crash the run; other accounts still yield."""
-        from arxiv_assistant.apis.hotspot import hotspot_twitterapi as mod
+        from arxiv_assistant.hotspot.sources import twitterapi as mod
 
         call_count = {"n": 0}
 
@@ -410,8 +410,8 @@ class TestHotspotTwitterapiSource(unittest.TestCase):
         with tempfile.TemporaryDirectory() as tmp_dir, \
                 patch.dict(os.environ, {"TWITTERAPI_IO_KEY": "test-key"}, clear=True), \
                 patch.object(mod, "_twitterapi_get", side_effect=_fault_tolerant_get), \
-                patch("arxiv_assistant.utils.hotspot.x_authority_registry.fetch_text", return_value=""), \
-                patch("arxiv_assistant.utils.hotspot.x_authority_registry.fetch_json", return_value={}):
+                patch("arxiv_assistant.hotspot.support.x_authority_registry.fetch_text", return_value=""), \
+                patch("arxiv_assistant.hotspot.support.x_authority_registry.fetch_json", return_value={}):
             seed_path = self._seed_file_three_accounts(tmp_dir)
             items = mod.fetch_hotspot_items(
                 datetime(2026, 3, 21, 12, 0, tzinfo=UTC),
@@ -436,7 +436,7 @@ class TestHotspotTwitterapiSource(unittest.TestCase):
         tweet appears in multiple accounts' timelines (e.g. via quote-tweet or API quirk).
         The seen_urls dedup set in _collect_timelines must prevent the duplicate.
         """
-        from arxiv_assistant.apis.hotspot import hotspot_twitterapi as mod
+        from arxiv_assistant.hotspot.sources import twitterapi as mod
 
         # anthropicai's response also returns the OpenAI tweet (same id, same author userName=OpenAI)
         openai_tweet_via_anthropicai = {
@@ -456,8 +456,8 @@ class TestHotspotTwitterapiSource(unittest.TestCase):
         with tempfile.TemporaryDirectory() as tmp_dir, \
                 patch.dict(os.environ, {"TWITTERAPI_IO_KEY": "test-key"}, clear=True), \
                 patch.object(mod, "_twitterapi_get", side_effect=_dedup_get), \
-                patch("arxiv_assistant.utils.hotspot.x_authority_registry.fetch_text", return_value=""), \
-                patch("arxiv_assistant.utils.hotspot.x_authority_registry.fetch_json", return_value={}):
+                patch("arxiv_assistant.hotspot.support.x_authority_registry.fetch_text", return_value=""), \
+                patch("arxiv_assistant.hotspot.support.x_authority_registry.fetch_json", return_value={}):
             seed_path = Path(tmp_dir) / "x_seeds_dedup.json"
             seed_path.write_text(
                 json.dumps(
@@ -485,13 +485,13 @@ class TestHotspotTwitterapiSource(unittest.TestCase):
 
     def test_fetch_hotspot_items_result_limit_is_honored(self) -> None:
         """result_limit=1 must cap output at 1 item even when 3 accounts each have a tweet."""
-        from arxiv_assistant.apis.hotspot import hotspot_twitterapi as mod
+        from arxiv_assistant.hotspot.sources import twitterapi as mod
 
         with tempfile.TemporaryDirectory() as tmp_dir, \
                 patch.dict(os.environ, {"TWITTERAPI_IO_KEY": "test-key"}, clear=True), \
                 patch.object(mod, "_twitterapi_get", side_effect=self._fake_three_account_get), \
-                patch("arxiv_assistant.utils.hotspot.x_authority_registry.fetch_text", return_value=""), \
-                patch("arxiv_assistant.utils.hotspot.x_authority_registry.fetch_json", return_value={}):
+                patch("arxiv_assistant.hotspot.support.x_authority_registry.fetch_text", return_value=""), \
+                patch("arxiv_assistant.hotspot.support.x_authority_registry.fetch_json", return_value={}):
             seed_path = self._seed_file_three_accounts(tmp_dir)
             items = mod.fetch_hotspot_items(
                 datetime(2026, 3, 21, 12, 0, tzinfo=UTC),

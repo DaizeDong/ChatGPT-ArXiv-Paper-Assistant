@@ -8,8 +8,8 @@ from datetime import datetime, timezone
 from pathlib import Path
 from unittest.mock import patch
 
-from arxiv_assistant.hotspots import date_verify, kernel
-from arxiv_assistant.utils.hotspot.hotspot_schema import HotspotItem
+from arxiv_assistant.hotspot import date_verify, kernel
+from arxiv_assistant.hotspot.support.schema import HotspotItem
 
 FIXT = Path(__file__).resolve().parent / "fixtures" / "replay" / "raw_2026-05-20.json"
 

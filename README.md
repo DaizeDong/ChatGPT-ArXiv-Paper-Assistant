@@ -12,7 +12,7 @@ See the [changelog](CHANGELOG.md) and the [upgrade notes](docs/UPGRADE-agent-nat
 Two complementary pipelines:
 
 - **Personalized Daily Arxiv Paper** (`main.py`): fetch new arXiv papers, gate by author h-index, filter for relevance/novelty, render daily/monthly/yearly archives.
-- **Daily AI Hotspots** (`arxiv_assistant/hotspots/kernel.py`): gather many AI sources (papers, lab blogs, roundups/news, GitHub, Hacker News, X, Reddit), verify dates, cluster into persistent stories, de-duplicate across days, score, and produce a concise daily "what matters today" digest.
+- **Daily AI Hotspots** (`arxiv_assistant/hotspot/kernel.py`): gather many AI sources (papers, lab blogs, roundups/news, GitHub, Hacker News, X, Reddit), verify dates, cluster into persistent stories, de-duplicate across days, score, and produce a concise daily "what matters today" digest.
 
 Generated results are pushed to the `auto_update` branch; `main` stays code-only.
 
@@ -43,7 +43,7 @@ See [docs/UPGRADE-agent-native-hotspot.md](docs/UPGRADE-agent-native-hotspot.md)
 | Path | What lives there |
 |---|---|
 | `main.py` | The daily paper run: fetch, filter, render, publish. |
-| `arxiv_assistant/` | The package. `apis/` fetch sources, `filters/` score papers, `hotspots/` run the hotspot kernel, `reader/` hold the weekly delta model, `renderers/` write markdown and the site, `utils/` carry the LLM gateway, health and pricing. |
+| `arxiv_assistant/` | The package. `apis/` fetch papers, `filters/` score them, `hotspot/` is the whole hotspot subsystem (`sources/` fetch, `support/` shared pieces, the rest is its pipeline), `reader/` holds the weekly delta model, `renderers/` write markdown and the site, `utils/` carry the LLM gateway, config, health and pricing. |
 | `scripts/` | Everything you run by hand: backfills, the weekly digest, the archive query tool, the corpus harvest, pricing refresh, site build. |
 | `configs/` | `config.ini` (paper pipeline) and `hotspot.ini` (hotspot feed) are the live config, read together; `templates/` and `profiles/` ship both halves; `reader/questions/` is the hand-written reader model, `hotspot/` holds the source registries. |
 | `prompts/` | The paper and hotspot prompts. Closer to the behaviour of the filter than the code is. |
@@ -162,7 +162,7 @@ The same reasoning governs the **usage table** at the top of each digest. A keyl
 Sources are routed by reliability, mostly for free:
 
 - **Direct scrapers (free):** arXiv/HF papers, AI-lab blog RSS, analysis feeds, roundups, GitHub trending, Hacker News, AINews, local papers.
-- **Browser subagent (`apis/hotspot/browser_source_fetch.py`, playwright, zero-key):** the known-protected/JS sources -- Reddit, the Cloudflare-walled xAI blog, and the Chinese-lab SPA blogs -- listed in the static `arxiv_assistant/utils/hotspot/source_routes.py` table and activated by `[HOTSPOT_SOURCES] use_subagent_routes` (on in the agent-native profile). This handles JS rendering, cookie/consent banners, and bot-walls a plain scraper or `WebFetch` cannot.
+- **Browser subagent (`hotspot/sources/browser_source_fetch.py`, playwright, zero-key):** the known-protected/JS sources -- Reddit, the Cloudflare-walled xAI blog, and the Chinese-lab SPA blogs -- listed in the static `arxiv_assistant/hotspot/support/source_routes.py` table and activated by `[HOTSPOT_SOURCES] use_subagent_routes` (on in the agent-native profile). This handles JS rendering, cookie/consent banners, and bot-walls a plain scraper or `WebFetch` cannot.
 - **X:** `twitterapi.io` (`use_twitterapi`, metered) by default, or the zero-key **agent scout** (`use_agent_scout`) which web-searches across a curated venue matrix.
 - **market-intel reuse:** when present, `arxiv_assistant/utils/market_intel_bridge.py` injects the [market-intel](https://github.com/DaizeDong/market-intel) skill's curated `frontier-research` + `x-twitter` source matrix into the scout prompt at runtime, so refreshing that skill automatically broadens the scout.
 

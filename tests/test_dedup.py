@@ -5,9 +5,9 @@ import unittest
 from datetime import date
 from unittest.mock import patch
 
-from arxiv_assistant.hotspots import dedup, embed
-from arxiv_assistant.hotspots.enrich import EnrichedItem
-from arxiv_assistant.utils.hotspot.hotspot_schema import HotspotItem
+from arxiv_assistant.hotspot import dedup, embed
+from arxiv_assistant.hotspot.enrich import EnrichedItem
+from arxiv_assistant.hotspot.support.schema import HotspotItem
 
 
 class TestEmbed(unittest.TestCase):
@@ -41,7 +41,7 @@ class TestEmbed(unittest.TestCase):
             def encode(self, text):  # noqa: D401
                 return [float(len(text)), 1.0, 2.0]
 
-        import arxiv_assistant.hotspots.embed as embed_mod
+        import arxiv_assistant.hotspot.embed as embed_mod
         embed_mod._MODEL = None
         with patch.object(embed_mod, "_load_model", return_value=_StubModel()) as mock_loader:
             embed_mod.embed_text("hello")
@@ -132,7 +132,7 @@ class TestClusterIntraday(unittest.TestCase):
 
     def test_embed_dim_is_768(self) -> None:
         """mpnet-base-v2 produces 768-dimensional embeddings."""
-        import arxiv_assistant.hotspots.embed as embed_mod
+        import arxiv_assistant.hotspot.embed as embed_mod
         # Reset any stub left from other tests.
         embed_mod._MODEL = None
         vec = embed.embed_text("hello world")
@@ -167,7 +167,7 @@ class TestClusterIntraday(unittest.TestCase):
         )
 
         # (a) Verify L0 keeps them apart.
-        from arxiv_assistant.hotspots.story import group_into_stories as _l0
+        from arxiv_assistant.hotspot.story import group_into_stories as _l0
         l0_count = len(_l0([en, zh]))
         if l0_count != 2:
             self.fail(
@@ -249,7 +249,7 @@ class _FakeStore:
         return list(self._active)
 
     def match_or_create(self, cluster_centroid, cluster, cosine_threshold, window_days, as_of):
-        from arxiv_assistant.hotspots.embed import cosine
+        from arxiv_assistant.hotspot.embed import cosine
         best = None
         best_sim = -2.0
         for ex in self._active:
@@ -274,7 +274,7 @@ class _FakeStore:
 
 class TestMatchCrossday(unittest.TestCase):
     def _story(self, story_id, centroid, first_seen=None):
-        from arxiv_assistant.hotspots.story import Story
+        from arxiv_assistant.hotspot.story import Story
         s = Story(
             story_id=story_id,
             canonical_item=_enriched("seed", f"https://seed/{story_id}"),
@@ -340,7 +340,7 @@ class TestMatchCrossday(unittest.TestCase):
 
 class TestClassifyCrossDay(unittest.TestCase):
     def _story(self, story_id, status, *, last_surfaced=None):
-        from arxiv_assistant.hotspots.story import Story
+        from arxiv_assistant.hotspot.story import Story
         s = Story(
             story_id=story_id,
             canonical_item=_enriched("seed", f"https://seed/{story_id}"),

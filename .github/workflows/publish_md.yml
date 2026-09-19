@@ -34,7 +34,16 @@ permissions:
 
 concurrency:
   group: github-pages
-  cancel-in-progress: true
+  # This build takes about 67 minutes, almost all of it in the translation
+  # step. With cancel-in-progress: true, any later trigger killed the run in
+  # flight, and the triggers above include pushes to main touching
+  # arxiv_assistant/**, scripts/** or requirements.txt. Between 2026-09-15 and
+  # 2026-09-19 five consecutive builds died that way and the site went stale
+  # for four days: ordinary development on main was starving the publish.
+  # Queueing is the right shape here. GitHub keeps at most one run pending per
+  # group, so a burst of pushes cannot pile up -- the newest one waits and the
+  # rest are dropped, while the build already running is allowed to finish.
+  cancel-in-progress: false
 
 env:
   FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true

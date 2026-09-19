@@ -1,5 +1,52 @@
 # Changelog
 
+### 2026-09-19
+
+- **The hotspot subsystem is one package.** It was spread across `apis/hotspot`, `utils/hotspot`,
+  `hotspots` and a filter in `filters/`; it is now `arxiv_assistant/hotspot` with `sources/`,
+  `support/` and its pipeline at the root. `utils/` falls from 8017 lines to 1539 and `apis/`
+  from 4539 to 841, so both now hold what their names claim. Files inside the new subpackages
+  lost the `hotspot_` prefix their directory already carried.
+- **Configuration is split by subsystem.** `configs/config.ini` was 244 lines and 54% of them
+  belonged to the hotspot feed. It is now `config.ini` (paper pipeline) plus `hotspot.ini`, read
+  together; the template and the agent-native profile ship in the same two halves. A missing file
+  is now an error rather than a silent fall-back to caller defaults.
+- **One config loader.** There were three and they were not equivalent: one read a relative path
+  and returned an empty config whenever the process started outside the repository root, one
+  passed no encoding.
+- **The 3300-entry price table is data again**, at `arxiv_assistant/data/model_pricing.json`
+  rather than a 3309-line Python module.
+
+### 2026-09-18
+
+- **The paper feed is scored on five axes and ordered by four of them.** Relevance, Evidence,
+  Load and Proximity decide `READ_SCORE`; Novelty is still scored, for the archive and for the
+  hotspot spotlight cutoffs, but it no longer orders anything. Measured against 274 papers the
+  owner had tiered by hand, it carried no signal at all: papers scoring 8 or more on it were his
+  must-reads exactly as often as papers scoring 5 or less, both at the pool's base rate. Every
+  abstract claims novelty, so the axis was measuring the claiming. `relevance + proximity +
+  evidence - 0.5 * load` beats the old `relevance + novelty` in 92% of bootstrap resamples,
+  lifting precision@50 from 59% to 74%.
+- **Proximity is scored against `prompts/paper/active_lines.txt`**, a statement of where the
+  reader's work currently sits. It is the only part of the scoring prompt expected to change as
+  the work changes. Without it there is nothing to measure distance from, and distance turned out
+  to be what separates the middle tiers: over a single period the share of papers on the
+  then-active line fell 57%, 36%, 18% across them while the quality axes stayed flat.
+- **Seventeen subjects that he has never once kept are named in the topic prompt.** Each appears
+  13 to 52 times among papers he rejected and zero times in his 508-entry list. Naming them
+  removes 8.9% of the reject pile at a cost of zero listed papers, and because the topic prompt
+  also feeds title filtering they never reach abstract scoring.
+- **Releases are collected from the model hubs** (`configs/hotspot/model_hubs.json`,
+  `hotspot/sources/model_hubs.py`). The labs that matter most publish weights, not posts: over a
+  year, 34 of 93 frontier models discussed in this archive had no announcement collected
+  anywhere. Two filters keep it honest -- format variants of one release (GGUF, AWQ, NVFP4) would
+  report it four times, and an organisation re-uploading somebody else's model is not releasing
+  one. The old `deepseek_blog` source is disabled: it pointed at the API reference and was
+  re-reporting pages dated 2024 as fresh news.
+- **Re-scored pages say so.** The usage table describes the run that FETCHED a day, so a page
+  whose scores were recomputed later named one model above an ordering produced by another.
+- **`generate_monthly_summaries` can no longer exit clean having written nothing.**
+
 ### 2026-09-10
 
 - **Retired the OpenAI API key path.** Every model call in the repo now goes through a single gateway, `arxiv_assistant/utils/llm_gateway.py`, which prefers the keyless [`llmcall`](https://github.com/DaizeDong/llmcall) primitive (chain `codexg -> codex -> cc -> claude`, ) and falls back to this repo's own `claude -p` transport (`utils/agent_runner`) so a bare clone with only the `claude` CLI still works. `llmcall` is detected by a guarded import, not by an env var and not by a vendored copy, so `requirements.txt` gains nothing.

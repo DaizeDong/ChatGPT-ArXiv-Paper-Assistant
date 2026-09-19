@@ -11,8 +11,12 @@ from arxiv_assistant.hotspot.support.config import load_repo_config, load_reuse_
 class TestHotspotConfig(unittest.TestCase):
     def test_repo_root_points_to_repository_root(self) -> None:
         root = repo_root()
-        self.assertTrue((root / "configs" / "config.ini").exists())
-        self.assertEqual(root.name, "ChatGPT-ArXiv-Paper-Assistant")
+        # Identify the root by what a checkout contains, not by the folder
+        # it happens to sit in: the directory name is the cloner's choice,
+        # and pinning it made this fail on any clone with another name --
+        # including this repository's own, after it was renamed.
+        for marker in ("configs/config.ini", "configs/hotspot.ini", "main.py"):
+            self.assertTrue((root / marker).exists(), marker)
 
     def test_load_repo_config_reads_hotspot_sections(self) -> None:
         config = load_repo_config(Path("configs") / "config.ini")

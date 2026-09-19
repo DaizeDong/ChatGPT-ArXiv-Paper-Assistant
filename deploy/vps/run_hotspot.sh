@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-REPO="/opt/ChatGPT-ArXiv-Paper-Assistant"
+REPO="/opt/Daily-ArXiv-Assistant"
 cd "$REPO"
 
 TODAY="$(date -u +%F)"

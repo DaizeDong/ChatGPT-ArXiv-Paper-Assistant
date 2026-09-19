@@ -137,7 +137,7 @@ def render_static_site(site_root: str | Path, dist_root: str | Path, css_source:
             output_path.parent.mkdir(parents=True, exist_ok=True)
 
             markdown_text = source_path.read_text(encoding="utf-8")
-            fallback_title = posixpath.join("ChatGPT-ArXiv-Paper-Assistant", output_relative_path.as_posix())
+            fallback_title = posixpath.join("Daily-ArXiv-Assistant", output_relative_path.as_posix())
             title = _extract_title(markdown_text, fallback_title)
             css_href = posixpath.relpath("site.css", output_relative_path.parent.as_posix() or ".")
 

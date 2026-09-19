@@ -11,7 +11,7 @@ from arxiv_assistant.hotspot.support.schema import clean_text, normalize_url
 
 DEFAULT_TIMEOUT = 20
 DEFAULT_HEADERS = {
-    "User-Agent": "Mozilla/5.0 (compatible; AIHotspotBot/1.0; +https://github.com/DaizeDong/ChatGPT-ArXiv-Paper-Assistant)",
+    "User-Agent": "Mozilla/5.0 (compatible; AIHotspotBot/1.0; +https://github.com/DaizeDong/Daily-ArXiv-Assistant)",
 }
 
 

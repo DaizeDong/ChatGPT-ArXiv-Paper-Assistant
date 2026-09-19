@@ -1,4 +1,4 @@
-# ChatGPT-ArXiv-Paper-Assistant
+# Daily-ArXiv-Assistant
 
 ## Introduction
 
@@ -12,7 +12,7 @@ Hacker News, X and Reddit, and writes a short digest of what mattered that day.
 No model API key is needed. Every model call goes through one gateway that prefers the keyless
 [llmcall](https://github.com/DaizeDong/llmcall) chain and falls back to the local `claude` CLI.
 
-**Site:** [Daily papers and hotspots](https://daizedong.github.io/ChatGPT-ArXiv-Paper-Assistant/)
+**Site:** [Daily papers and hotspots](https://daizedong.github.io/Daily-ArXiv-Assistant/)
 
 **Upstream:** [GPT paper assistant](https://github.com/tatsu-lab/gpt_paper_assistant)
 

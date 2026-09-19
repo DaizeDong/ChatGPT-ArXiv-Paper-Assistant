@@ -18,6 +18,7 @@ from arxiv_assistant.apis.hotspot.hotspot_github import fetch_hotspot_items as f
 from arxiv_assistant.apis.hotspot.hotspot_hf_papers import fetch_hotspot_items as fetch_hf_items
 from arxiv_assistant.apis.hotspot.hotspot_hn import fetch_hotspot_items as fetch_hn_items
 from arxiv_assistant.apis.hotspot.hotspot_local_papers import fetch_hotspot_items as fetch_local_paper_items
+from arxiv_assistant.apis.hotspot.hotspot_model_hubs import fetch_hotspot_items as fetch_model_hub_items
 from arxiv_assistant.apis.hotspot.hotspot_official_blogs import fetch_hotspot_items as fetch_official_blog_items
 from arxiv_assistant.apis.hotspot.hotspot_reddit import fetch_hotspot_items as fetch_reddit_items
 from arxiv_assistant.apis.hotspot.hotspot_roundups import fetch_hotspot_items as fetch_roundup_items
@@ -184,6 +185,7 @@ SOURCE_USAGE_META = {
     "hf_papers": {"provider": "Hugging Face", "billing_model": "free"},
     "ainews": {"provider": "AINews RSS", "billing_model": "free"},
     "official_blogs": {"provider": "Official blogs", "billing_model": "free"},
+    "model_hubs": {"provider": "Hugging Face model index", "billing_model": "free"},
     "roundup_sites": {"provider": "Roundup sites", "billing_model": "free"},
     "analysis_feeds": {"provider": "Analysis RSS feeds", "billing_model": "free"},
     "reddit": {"provider": "Reddit JSON API", "billing_model": "free"},
@@ -1016,6 +1018,13 @@ def fetch_source_payloads(
             target_date, freshness_hours,
             registry_path=str(official_blogs_registry) if official_blogs_registry.exists() else None,
         )))
+    # Labs that ship weights instead of posts. Without this the feed misses the
+    # release entirely: measured over a year, 34 of 93 frontier models discussed
+    # in this archive had no announcement in it anywhere.
+    model_hubs_registry = REPO_ROOT / "configs" / "hotspot" / "model_hubs.json"
+    if hotspot_sources.getboolean("use_model_hubs", fallback=True) and model_hubs_registry.exists():
+        specs.append(("model_hubs", lambda: fetch_model_hub_items(
+            target_date, freshness_hours, registry_path=str(model_hubs_registry))))
     if hotspot_sources.getboolean("use_roundup_sites", fallback=True):
         specs.append(("roundup_sites", lambda: fetch_roundup_items(target_date, freshness_hours, registry_path)))
     analysis_feeds_registry = REPO_ROOT / "configs" / "hotspot" / "analysis_feeds.json"

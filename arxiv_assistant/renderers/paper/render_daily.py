@@ -27,6 +27,7 @@ def render_summary_table(
     calls_attempted: int = 0,
     calls_succeeded: int = 0,
     seconds: float = 0.0,
+    rescored_with: str = "",
 ) -> str:
     total_tokens = prompt_tokens + completion_tokens
     total_cost = prompt_cost + completion_cost
@@ -54,6 +55,16 @@ def render_summary_table(
             "\n<sub>Token counts are not reported for this run. "
             f"{calls_succeeded} of {calls_attempted} model calls succeeded, "
             f"{seconds:,.0f}s of model wall clock.</sub>"
+        )
+
+    # The table above describes the run that FETCHED this day. Scores can be
+    # recomputed later against different criteria, and when they are, the table
+    # and the ordering below it no longer come from the same place. Saying so is
+    # the difference between a record and a misleading one.
+    if rescored_with:
+        footnote += (
+            f"\n<sub>Papers on this page were re-scored with {rescored_with}; "
+            "the usage above is from the original run.</sub>"
         )
 
     return "\n".join(

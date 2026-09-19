@@ -547,9 +547,11 @@ def main() -> None:
     criteria_prompt = read_prompt("monthly.criteria")
     postfix_prompt = read_prompt("monthly.postfix")
 
+    considered = written = 0
     for month_key, papers in sorted(monthly_papers.items()):
         if not is_month_closed(month_key, now_time, args.include_open_months):
             continue
+        considered += 1
 
         source_hash = build_source_hash(papers)
         report_path = monthly_summary_report_path(monthly_root, month_key)
@@ -585,7 +587,25 @@ def main() -> None:
             prompt_cost=prompt_cost,
             completion_cost=completion_cost,
         )
-        print(f"Wrote monthly summary report: {report_path}")
+        # Count the ARTIFACT, not the fact that the call was reached. Counting
+        # iterations makes the gate below unable to fail for the reason it
+        # claims to exist: stubbing the writer left the count at 21.
+        if report_path.exists() and report_path.stat().st_size > 512:
+            written += 1
+            print(f"Wrote monthly summary report: {report_path}")
+        else:
+            print(f"NO REPORT WRITTEN for {month_key[0]}-{month_key[1]:02d}")
+
+    # A run that had months to do and wrote none is a failure, and it used to
+    # look exactly like success: exit 0, no output at all. Measured on the
+    # archive, `--mode openai` did this for all 21 months while leaving files
+    # from March untouched, and only their timestamps gave it away.
+    print(f"months considered {considered}, reports written {written}")
+    if considered and not written:
+        raise SystemExit(
+            f"{considered} month(s) were due and none were written. "
+            "Silence here is a failure, not a no-op."
+        )
 
 
 if __name__ == "__main__":

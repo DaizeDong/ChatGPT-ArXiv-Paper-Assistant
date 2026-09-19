@@ -13,6 +13,7 @@ if str(REPO_ROOT) not in sys.path:
 from arxiv_assistant.paper_daily_io import discover_daily_json, extract_paper_mapping, write_daily_json_outputs
 from arxiv_assistant.paper_topics import sort_paper_mapping_for_daily_display
 from arxiv_assistant.renderers.paper.render_daily import render_daily_md, render_summary_table
+from arxiv_assistant.utils.llm_gateway import public_model_label
 from arxiv_assistant.utils.prompt_loader import read_prompt
 
 
@@ -76,6 +77,17 @@ def rebuild_paper_markdown(output_root: str | Path, *, write_back_json: bool = T
                         total_arxiv_papers=int(usage_meta["total_arxiv_papers"]),
                         total_scanned_papers=int(usage_meta["total_scanned_papers"]),
                         total_relevant_papers=int(usage_meta["total_relevant_papers"]),
+                        # READ_SCORE exists only on papers judged by the current
+                        # criteria, so its presence IS the record that this day
+                        # was re-scored after the run the table describes.
+                        # The label goes through public_model_label so a re-score
+                        # discloses no more than the original run did: the chain
+                        # backend is named generically, never its routing.
+                        rescored_with=(
+                            public_model_label("llmcall")
+                            if any(p.get("READ_SCORE") is not None for p in paper_mapping.values())
+                            else ""
+                        ),
                     )
                 }
                 if usage_meta

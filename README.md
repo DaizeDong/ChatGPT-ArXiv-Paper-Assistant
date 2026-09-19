@@ -33,7 +33,7 @@ Generated results are pushed to the `auto_update` branch; `main` stays code-only
 | Mode | Config | Keys needed | What runs |
 |---|---|---|---|
 | **Default** | `configs/config.ini` | **no model key**: `llmcall` if installed, else the `claude` CLI (logged in). Optional: twitterapi.io (X), S2/Slack | `api_only` paper filtering (batched relevance/novelty scoring, now carried by the gateway); twitterapi X; direct scrapers |
-| **Zero-key agent-native** | `cp configs/profiles/agent-native.ini configs/config.ini` | **only the `claude` CLI (logged in) + a git push token** | `agent_only` paper filtering (per-paper `claude -p` verdicts); agent scout for X/breadth; subagent source routes (playwright) for reddit/CN-lab blogs; heuristic hotspot headlines |
+| **Zero-key agent-native** | `cp configs/profiles/agent-native{,.hotspot}.ini configs/` (both halves) | **only the `claude` CLI (logged in) + a git push token** | `agent_only` paper filtering (per-paper `claude -p` verdicts); agent scout for X/breadth; subagent source routes (playwright) for reddit/CN-lab blogs; heuristic hotspot headlines |
 | **Legacy OpenAI** (opt-in) | set `[LLM] backend = openai` and export `OPENAI_API_KEY` | OpenAI | the historical HTTP path. `auto` will never select this, by design: a dead key has to surface as an outage instead of quietly becoming the default again |
 
 See [docs/UPGRADE-agent-native-hotspot.md](docs/UPGRADE-agent-native-hotspot.md) for the full agent-native story and deployment notes.
@@ -45,7 +45,7 @@ See [docs/UPGRADE-agent-native-hotspot.md](docs/UPGRADE-agent-native-hotspot.md)
 | `main.py` | The daily paper run: fetch, filter, render, publish. |
 | `arxiv_assistant/` | The package. `apis/` fetch sources, `filters/` score papers, `hotspots/` run the hotspot kernel, `reader/` hold the weekly delta model, `renderers/` write markdown and the site, `utils/` carry the LLM gateway, health and pricing. |
 | `scripts/` | Everything you run by hand: backfills, the weekly digest, the archive query tool, the corpus harvest, pricing refresh, site build. |
-| `configs/` | `config.ini` is the live config; `templates/` is the annotated copy to start from, `profiles/` are whole-config presets, `reader/questions/` is the hand-written reader model, `hotspot/` holds the source registries. |
+| `configs/` | `config.ini` (paper pipeline) and `hotspot.ini` (hotspot feed) are the live config, read together; `templates/` and `profiles/` ship both halves; `reader/questions/` is the hand-written reader model, `hotspot/` holds the source registries. |
 | `prompts/` | The paper and hotspot prompts. Closer to the behaviour of the filter than the code is. |
 | `tests/` | One file per module, named after it. |
 | `web/`, `site.css` | The published site's templates and styling. |
@@ -59,7 +59,10 @@ See [docs/UPGRADE-agent-native-hotspot.md](docs/UPGRADE-agent-native-hotspot.md)
 
 1. Fork/copy this repo and [enable scheduled workflows](https://docs.github.com/en/actions/using-workflows/disabling-and-enabling-a-workflow).
 2. Edit the paper prompts under `prompts/paper/` (especially `prompts/paper/paper_topics.txt`) to match what you want to follow.
-3. Copy `configs/templates/config.template.ini` to `configs/config.ini` and set your arXiv categories (`arxiv_category`).
+3. Copy BOTH halves of the template: `configs/templates/config.template.ini` to `configs/config.ini` and
+   `configs/templates/hotspot.template.ini` to `configs/hotspot.ini`, then set your arXiv categories
+   (`arxiv_category`). The loader refuses to start on a partial copy rather than silently defaulting
+   the sections it did not find.
 4. **Register a self-hosted runner.** Every workflow here is `runs-on: self-hosted`, because the keyless backends are local programs: `llmcall` is not a PyPI dependency of this repo, and the repo-local fallback shells out to the `claude` CLI. A GitHub-hosted runner has neither and cannot be given either, so on `ubuntu-latest` the default `[LLM] backend = auto` resolves to the agent transport, finds no CLI, and every scoring call fails -- loudly, by design, but the digest for that day is empty.
 
    Register the runner on a machine where `llmcall` or the `claude` CLI is already logged in (Settings -> Actions -> Runners -> New self-hosted runner, or `gh api repos/OWNER/REPO/actions/runners/registration-token` for the token). Either OS works: every `run:` step declares `shell: bash`, because a Windows runner defaults `run:` to PowerShell and every script in these files is bash. A test enforces both properties.
@@ -80,7 +83,8 @@ See [docs/UPGRADE-agent-native-hotspot.md](docs/UPGRADE-agent-native-hotspot.md)
 For a no-API-key daily run through the local claude CLI:
 
 ```bash
-cp configs/profiles/agent-native.ini configs/config.ini   # agent_only papers + agent scout + subagent routes
+cp configs/profiles/agent-native.ini configs/config.ini            # papers: agent_only
+cp configs/profiles/agent-native.hotspot.ini configs/hotspot.ini   # hotspot: agent scout + subagent routes
 # install deploy/vps/ systemd unit + timer (headless `claude -p` cron); see deploy/vps/
 ```
 

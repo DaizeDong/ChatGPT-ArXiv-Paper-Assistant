@@ -28,7 +28,7 @@ it as dated: none of it is maintained.
 ## Where the rest of the explanation lives
 
 - **Config**: `configs/config.ini` is commented section by section, and
-  `configs/templates/config.template.ini` is the annotated copy to start from.
+  `configs/templates/config.template.ini` and `hotspot.template.ini` are the annotated copies to start from; copy both.
 - **Prompts**: `prompts/` holds the paper and hotspot prompts. They are the
   behaviour of the filter more than the code is.
 - **Reader model**: `configs/reader/questions/README.md` explains the five

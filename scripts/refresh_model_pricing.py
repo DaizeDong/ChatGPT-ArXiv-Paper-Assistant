@@ -8,7 +8,7 @@ if str(REPO_ROOT) not in sys.path:
 
 from arxiv_assistant.utils.pricing_loader import (
     DEFAULT_CACHE_PATH,
-    DEFAULT_FALLBACK_MODULE_PATH,
+    DEFAULT_FALLBACK_PATH,
     get_model_pricing,
     load_pricing_cache,
     refresh_model_pricing,
@@ -32,15 +32,15 @@ def parse_args():
         help="Path to the pricing cache JSON file.",
     )
     parser.add_argument(
-        "--write-fallback-py",
+        "--write-fallback",
         action="store_true",
-        help="Write the merged pricing table to the local fallback pricing.py module.",
+        help="Write the merged pricing table to the bundled snapshot (data/model_pricing.json).",
     )
     parser.add_argument(
         "--fallback-path",
         type=Path,
-        default=DEFAULT_FALLBACK_MODULE_PATH,
-        help="Path to the fallback pricing.py module.",
+        default=DEFAULT_FALLBACK_PATH,
+        help="Path to the bundled pricing snapshot.",
     )
     return parser.parse_args()
 
@@ -63,7 +63,7 @@ def main():
     print(f"Remote models normalized: {payload.get('remote_model_count')}")
     print(f"Models available to the app: {len(payload.get('pricing_table', {}))}")
 
-    if args.write_fallback_py:
+    if args.write_fallback:
         write_pricing_fallback_module(
             payload["pricing_table"],
             output_path=args.fallback_path,

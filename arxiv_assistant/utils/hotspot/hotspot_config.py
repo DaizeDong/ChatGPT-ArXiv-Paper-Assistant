@@ -1,4 +1,6 @@
 import configparser
+
+from arxiv_assistant.utils.config_loader import load_repo_config as _load_repo_config
 from dataclasses import dataclass
 from datetime import date
 from pathlib import Path
@@ -17,11 +19,9 @@ def repo_root() -> Path:
     return Path(__file__).resolve().parents[3]
 
 
-def load_repo_config(config_path: Path | None = None) -> configparser.ConfigParser:
-    path = config_path or (repo_root() / "configs" / "config.ini")
-    config = configparser.ConfigParser()
-    config.read(path, encoding="utf-8")
-    return config
+#: Re-exported so the hotspot modules keep their import path. The
+#: implementation is shared; there is no second loader any more.
+load_repo_config = _load_repo_config
 
 def build_hotspot_paths(output_root: Path, target_date: date) -> HotspotPaths:
     date_string = target_date.isoformat()

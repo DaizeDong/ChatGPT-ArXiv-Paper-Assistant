@@ -386,19 +386,23 @@ class DailyRenderersUntouched(unittest.TestCase):
 class ReaderConfigIsDeclaredEverywhere(unittest.TestCase):
     """All three ini files must carry [READER] and the weekly Slack key."""
 
+    #: Each configuration is a PAIR since the split: the paper half and the
+    #: hotspot half. Reading only the first half would let a key go missing
+    #: from one of them without any test noticing.
     INI_FILES = (
-        "configs/config.ini",
-        "configs/templates/config.template.ini",
-        "configs/profiles/agent-native.ini",
+        ("configs/config.ini", "configs/hotspot.ini"),
+        ("configs/templates/config.template.ini", "configs/templates/hotspot.template.ini"),
+        ("configs/profiles/agent-native.ini", "configs/profiles/agent-native.hotspot.ini"),
     )
 
     def test_reader_section_parses_in_every_config(self):
         import configparser
 
-        for rel in self.INI_FILES:
+        for pair in self.INI_FILES:
+            rel = pair[0]
             with self.subTest(config=rel):
                 parser = configparser.ConfigParser()
-                read = parser.read(REPO_ROOT / rel, encoding="utf-8")
+                read = parser.read([REPO_ROOT / r for r in pair], encoding="utf-8")
                 # ConfigParser.read() does not raise on a missing file; it just
                 # returns an empty list and every getter falls back. Check it.
                 self.assertTrue(read, f"{rel} was not read at all")
@@ -414,10 +418,11 @@ class ReaderConfigIsDeclaredEverywhere(unittest.TestCase):
     def test_daily_slack_stays_off_and_weekly_has_its_own_switch(self):
         import configparser
 
-        for rel in self.INI_FILES:
+        for pair in self.INI_FILES:
+            rel = pair[0]
             with self.subTest(config=rel):
                 parser = configparser.ConfigParser()
-                parser.read(REPO_ROOT / rel, encoding="utf-8")
+                parser.read([REPO_ROOT / r for r in pair], encoding="utf-8")
                 # main.py and scripts/remedy_missed_dates.py read push_to_slack.
                 # Flipping it for the weekly would restart the daily posts.
                 self.assertFalse(parser["OUTPUT"].getboolean("push_to_slack"))
@@ -438,10 +443,10 @@ class ReaderConfigIsDeclaredEverywhere(unittest.TestCase):
             ("LLM", "timeout_s"),
         ]
         parsers = {}
-        for rel in self.INI_FILES:
+        for pair in self.INI_FILES:
             parser = configparser.ConfigParser()
-            self.assertTrue(parser.read(REPO_ROOT / rel, encoding="utf-8"), rel)
-            parsers[rel] = parser
+            self.assertTrue(parser.read([REPO_ROOT / r for r in pair], encoding="utf-8"), pair[0])
+            parsers[pair[0]] = parser
 
         for section, key in keys:
             values = {rel: p[section].getint(key) for rel, p in parsers.items()}
@@ -455,10 +460,11 @@ class ReaderConfigIsDeclaredEverywhere(unittest.TestCase):
         """A cutoff above 10 silently selects nothing, forever, with no error."""
         import configparser
 
-        for rel in self.INI_FILES:
+        for pair in self.INI_FILES:
+            rel = pair[0]
             with self.subTest(config=rel):
                 parser = configparser.ConfigParser()
-                parser.read(REPO_ROOT / rel, encoding="utf-8")
+                parser.read([REPO_ROOT / r for r in pair], encoding="utf-8")
                 for key in ("relevance_cutoff", "novelty_cutoff"):
                     value = parser["FILTERING"].getint(key)
                     self.assertGreaterEqual(value, 1, f"{rel}:{key}")

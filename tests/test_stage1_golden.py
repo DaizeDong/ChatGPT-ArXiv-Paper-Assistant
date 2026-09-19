@@ -5,6 +5,7 @@ import unittest
 from datetime import UTC, date, datetime
 from pathlib import Path
 
+from arxiv_assistant.utils.config_loader import load_repo_config
 from arxiv_assistant.hotspots.pipeline import _apply_freshness_gates
 from arxiv_assistant.utils.hotspot.gate_date import gate_date
 from arxiv_assistant.utils.hotspot.hotspot_schema import HotspotItem
@@ -62,12 +63,11 @@ class TestStage1FreshnessGate(unittest.TestCase):
 
 class TestConfigMaxItemAge(unittest.TestCase):
     def test_config_has_max_item_age_days(self) -> None:
-        cfg = configparser.ConfigParser()
-        cfg.read(Path("configs/config.ini"), encoding="utf-8")
+        cfg = load_repo_config()
         self.assertEqual(cfg["HOTSPOTS"].getint("max_item_age_days", fallback=-1), 14)
 
     def test_template_documents_max_item_age_days(self) -> None:
-        text = Path("configs/templates/config.template.ini").read_text(encoding="utf-8")
+        text = Path("configs/templates/hotspot.template.ini").read_text(encoding="utf-8")
         self.assertIn("max_item_age_days", text)
 
 

@@ -1,17 +1,32 @@
 import copy
 import json
-import pprint
 from datetime import UTC, datetime, timedelta
 from pathlib import Path
 from typing import Any, Dict, Optional
 from urllib.request import urlopen
 
-from arxiv_assistant.utils.pricing import MODEL_PRICING as STATIC_MODEL_PRICING
-
 PRICING_SOURCE_URL = "https://raw.githubusercontent.com/BerriAI/litellm/main/model_prices_and_context_window.json"
 PRICING_COMMIT_URL = "https://api.github.com/repos/BerriAI/litellm/commits/main"
 DEFAULT_CACHE_PATH = Path(__file__).resolve().parents[2] / ".cache" / "model_pricing_cache.json"
-DEFAULT_FALLBACK_MODULE_PATH = Path(__file__).resolve().parent / "pricing.py"
+#: 3300 vendor prices fetched from LiteLLM. This is data, and it used to be a
+#: 3309-line Python module in this package -- the single largest file in the
+#: repository, sitting among modules that contain logic. Moving it to a data
+#: file makes `utils` readable again and lets the snapshot be diffed as the
+#: table it is.
+DEFAULT_FALLBACK_PATH = Path(__file__).resolve().parents[1] / "data" / "model_pricing.json"
+
+
+def _load_static_pricing() -> Dict[str, Dict[str, float]]:
+    """The bundled snapshot, used when the network copy is absent or stale."""
+    try:
+        payload = json.loads(DEFAULT_FALLBACK_PATH.read_text(encoding="utf-8"))
+    except (OSError, ValueError):
+        return {}
+    table = payload.get("pricing", payload)
+    return table if isinstance(table, dict) else {}
+
+
+STATIC_MODEL_PRICING = _load_static_pricing()
 DEFAULT_TIMEOUT_SECONDS = 30
 DEFAULT_MAX_AGE_HOURS = 24
 
@@ -189,20 +204,18 @@ def get_model_pricing(
 
 def write_pricing_fallback_module(
     pricing_table: Dict[str, Dict[str, float]],
-    output_path: Path = DEFAULT_FALLBACK_MODULE_PATH,
+    output_path: Path = DEFAULT_FALLBACK_PATH,
     fetched_at: Optional[str] = None,
     commit_sha: Optional[str] = None,
 ):
-    header_lines = [
-        "# Auto-generated fallback snapshot for model pricing.",
-        f"# Source: {PRICING_SOURCE_URL}",
-    ]
+    """Refresh the bundled snapshot. Keeps its old name; now writes JSON."""
+    meta = {"source": PRICING_SOURCE_URL}
     if fetched_at:
-        header_lines.append(f"# Fetched at: {fetched_at}")
+        meta["fetched_at"] = fetched_at
     if commit_sha:
-        header_lines.append(f"# LiteLLM main commit: {commit_sha}")
-    header_lines.append("")
-
-    rendered_table = pprint.pformat(pricing_table, sort_dicts=True, width=120)
-    output = "\n".join(header_lines) + "\nMODEL_PRICING = " + rendered_table + "\n"
-    output_path.write_text(output, encoding="utf-8")
+        meta["commit"] = commit_sha
+    payload = {"_meta": meta, "pricing": pricing_table}
+    output_path.write_text(
+        json.dumps(payload, ensure_ascii=False, indent=1, sort_keys=True) + "\n",
+        encoding="utf-8",
+    )

@@ -26,6 +26,7 @@ from arxiv_assistant.renderers.paper.monthly_summary import MONTH_TOPIC_ORDER
 from arxiv_assistant.renderers.site_paths import site_day_page_path
 from arxiv_assistant.utils.local_env import load_local_env
 from arxiv_assistant.utils.pricing_loader import get_model_pricing
+from arxiv_assistant.utils.config_loader import load_repo_config
 from arxiv_assistant.utils.prompt_loader import read_prompt
 
 load_local_env()
@@ -99,10 +100,9 @@ def parse_args() -> argparse.Namespace:
     return parser.parse_args()
 
 
-def load_config(config_path: Path) -> configparser.ConfigParser:
-    config = configparser.ConfigParser()
-    config.read(config_path)
-    return config
+#: Kept as a name for the call sites below; the loader is shared, and it
+#: reads with an explicit encoding, which this one did not.
+load_config = load_repo_config
 
 
 def _paper_sort_key(paper_entry: Dict) -> Tuple[int, int, int, int, Tuple[int, int, int], str]:

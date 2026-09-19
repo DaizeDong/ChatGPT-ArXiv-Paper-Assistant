@@ -1,6 +1,6 @@
-import configparser
 import os
 from datetime import UTC, datetime
+from arxiv_assistant.utils.config_loader import load_repo_config
 
 import feedparser
 
@@ -26,9 +26,10 @@ def parse_authors(lines):
     return authors, author_ids
 
 
-# load config.ini
-CONFIG = configparser.ConfigParser()
-CONFIG.read("configs/config.ini", encoding="utf-8")
+# Config comes from the shared loader: this module used to read a RELATIVE
+# path, which returned an EMPTY config whenever the process was started
+# from anywhere but the repository root.
+CONFIG = load_repo_config()
 
 # load authors.txt
 with open("configs/authors.txt", "r", encoding="utf-8") as fopen:

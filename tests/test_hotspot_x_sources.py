@@ -10,6 +10,7 @@ from unittest.mock import patch
 
 import configparser
 
+from arxiv_assistant.utils.config_loader import load_repo_config
 from arxiv_assistant.apis.hotspot.hotspot_x_ainews import _extract_twitter_section_items
 from arxiv_assistant.utils.hotspot.x_authority_registry import build_x_authority_registry, load_x_authority_registry, refresh_x_authority_registry
 from arxiv_assistant.hotspots import pipeline as hp
@@ -397,9 +398,11 @@ class TestSubagentRouteRegistration(unittest.TestCase):
 
     def test_config_flag_and_stepfun_url(self) -> None:
         root = Path(__file__).resolve().parents[1]
-        c = configparser.ConfigParser(); c.read(root / "configs" / "config.ini", encoding="utf-8")
+        c = load_repo_config()
         self.assertFalse(c.getboolean("HOTSPOT_SOURCES", "use_subagent_routes"))
-        p = configparser.ConfigParser(); p.read(root / "configs" / "profiles" / "agent-native.ini", encoding="utf-8")
+        p = configparser.ConfigParser()
+        p.read([root / "configs" / "profiles" / "agent-native.ini",
+                root / "configs" / "profiles" / "agent-native.hotspot.ini"], encoding="utf-8")
         self.assertTrue(p.getboolean("HOTSPOT_SOURCES", "use_subagent_routes"))
         blogs = json.loads((root / "configs" / "hotspot" / "official_blogs.json").read_text(encoding="utf-8"))
         stepfun = next(b for b in blogs if b.get("source_id") == "stepfun_blog")

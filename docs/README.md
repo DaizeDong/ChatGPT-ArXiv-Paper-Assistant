@@ -1,13 +1,14 @@
 # Documentation map
 
-Start with the [repository README](../README.md). It covers what the pipelines do,
-how to run them, and how to configure them. The files here are the longer pieces
-that do not belong in it.
+Start with the [repository README](../README.md). It says what the two pipelines are
+and how to start them. Everything longer lives here.
 
 ## Current
 
 | File | What it is |
 |---|---|
+| [SETUP.md](SETUP.md) | Run modes, quickstart, backfilling missed days, the weekly digest, how paper filtering works. |
+| [GUIDE_GITHUB_API.md](GUIDE_GITHUB_API.md) | A free OpenAI-compatible endpoint, for the legacy opt-in path. |
 | [DAILY_AI_HOTSPOTS.md](DAILY_AI_HOTSPOTS.md) | How the hotspot digest picks and ranks stories: sources, scoring, dedup, the verifier gates. |
 | [UPGRADE-agent-native-hotspot.md](UPGRADE-agent-native-hotspot.md) | Migrating an older checkout to the agent-native hotspot pipeline. |
 
